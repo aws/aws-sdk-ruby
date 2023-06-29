@@ -119,7 +119,9 @@ module Aws::SNS
     #
     # @return [self]
     def load
-      resp = @client.get_subscription_attributes(subscription_arn: @arn)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.get_subscription_attributes(subscription_arn: @arn)
+      end
       @data = resp.data
       self
     end
@@ -149,7 +151,9 @@ module Aws::SNS
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(subscription_arn: @arn)
-      resp = @client.unsubscribe(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.unsubscribe(options)
+      end
       resp.data
     end
 
@@ -216,7 +220,9 @@ module Aws::SNS
     # @return [EmptyStructure]
     def set_attributes(options = {})
       options = options.merge(subscription_arn: @arn)
-      resp = @client.set_subscription_attributes(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.set_subscription_attributes(options)
+      end
       resp.data
     end
 

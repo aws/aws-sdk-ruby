@@ -275,6 +275,11 @@ module Aws::MWAA
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -419,9 +424,9 @@ module Aws::MWAA
     # @option params [String] :airflow_version
     #   The Apache Airflow version for your environment. If no value is
     #   specified, it defaults to the latest version. Valid values: `1.10.12`,
-    #   `2.0.2`, `2.2.2`, and `2.4.3`. For more information, see [Apache
-    #   Airflow versions on Amazon Managed Workflows for Apache Airflow
-    #   (MWAA)][1].
+    #   `2.0.2`, `2.2.2`, `2.4.3`, and `2.5.1`. For more information, see
+    #   [Apache Airflow versions on Amazon Managed Workflows for Apache
+    #   Airflow (MWAA)][1].
     #
     #
     #
@@ -807,7 +812,7 @@ module Aws::MWAA
     #   resp.environment.source_bucket_arn #=> String
     #   resp.environment.startup_script_s3_object_version #=> String
     #   resp.environment.startup_script_s3_path #=> String
-    #   resp.environment.status #=> String, one of "CREATING", "CREATE_FAILED", "AVAILABLE", "UPDATING", "DELETING", "DELETED", "UNAVAILABLE", "UPDATE_FAILED"
+    #   resp.environment.status #=> String, one of "CREATING", "CREATE_FAILED", "AVAILABLE", "UPDATING", "DELETING", "DELETED", "UNAVAILABLE", "UPDATE_FAILED", "ROLLING_BACK", "CREATING_SNAPSHOT"
     #   resp.environment.tags #=> Hash
     #   resp.environment.tags["TagKey"] #=> String
     #   resp.environment.webserver_access_mode #=> String, one of "PRIVATE_ONLY", "PUBLIC_ONLY"
@@ -1028,9 +1033,21 @@ module Aws::MWAA
     #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html
     #
     # @option params [String] :airflow_version
-    #   The Apache Airflow version for your environment. If no value is
-    #   specified, defaults to the latest version. Valid values: `1.10.12`,
-    #   `2.0.2`, `2.2.2`, and `2.4.3`.
+    #   The Apache Airflow version for your environment. To upgrade your
+    #   environment, specify a newer version of Apache Airflow supported by
+    #   Amazon MWAA.
+    #
+    #   Before you upgrade an environment, make sure your requirements, DAGs,
+    #   plugins, and other resources used in your workflows are compatible
+    #   with the new Apache Airflow version. For more information about
+    #   updating your resources, see [Upgrading an Amazon MWAA
+    #   environment][1].
+    #
+    #   Valid values: `1.10.12`, `2.0.2`, `2.2.2`, `2.4.3`, and `2.5.1`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/upgrading-environment.html
     #
     # @option params [String] :dag_s3_path
     #   The relative path to the DAGs folder on your Amazon S3 bucket. For
@@ -1271,7 +1288,7 @@ module Aws::MWAA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mwaa'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

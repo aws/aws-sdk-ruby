@@ -279,7 +279,9 @@ module Aws::RDS
     #
     # @return [self]
     def load
-      resp = @client.describe_db_snapshots(db_snapshot_identifier: @snapshot_id)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_db_snapshots(db_snapshot_identifier: @snapshot_id)
+      end
       @data = resp.db_snapshots[0]
       self
     end
@@ -394,7 +396,9 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -423,7 +427,9 @@ module Aws::RDS
         db_instance_identifier: @instance_id,
         db_snapshot_identifier: @snapshot_id
       )
-      resp = @client.create_db_snapshot(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_db_snapshot(options)
+      end
       DBSnapshot.new(
         instance_id: resp.data.db_snapshot.db_instance_identifier,
         snapshot_id: resp.data.db_snapshot.db_snapshot_identifier,
@@ -596,7 +602,9 @@ module Aws::RDS
     # @return [DBSnapshot]
     def copy(options = {})
       options = options.merge(source_db_snapshot_identifier: @snapshot_id)
-      resp = @client.copy_db_snapshot(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.copy_db_snapshot(options)
+      end
       DBSnapshot.new(
         instance_id: resp.data.db_snapshot.db_instance_identifier,
         snapshot_id: resp.data.db_snapshot.db_snapshot_identifier,
@@ -612,7 +620,9 @@ module Aws::RDS
     # @return [DBSnapshot]
     def delete(options = {})
       options = options.merge(db_snapshot_identifier: @snapshot_id)
-      resp = @client.delete_db_snapshot(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_db_snapshot(options)
+      end
       DBSnapshot.new(
         instance_id: resp.data.db_snapshot.db_instance_identifier,
         snapshot_id: resp.data.db_snapshot.db_snapshot_identifier,
@@ -648,6 +658,10 @@ module Aws::RDS
     #     tde_credential_password: "String",
     #     vpc_security_group_ids: ["String"],
     #     domain: "String",
+    #     domain_fqdn: "String",
+    #     domain_ou: "String",
+    #     domain_auth_secret_arn: "String",
+    #     domain_dns_ips: ["String"],
     #     copy_tags_to_snapshot: false,
     #     domain_iam_role_name: "String",
     #     enable_iam_database_authentication: false,
@@ -865,6 +879,49 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
+    # @option options [String] :domain_fqdn
+    #   Specifies the fully qualified domain name of an Active Directory
+    #   domain.
+    #
+    #   Constraints:
+    #
+    #   * Cannot be greater than 64 characters.
+    #
+    #   ^
+    #
+    #   Example: `mymanagedADtest.mymanagedAD.mydomain`
+    # @option options [String] :domain_ou
+    #   The Active Directory organizational unit for your DB instance to join.
+    #
+    #   Constraints:
+    #
+    #   * Must be in the distinguished name format.
+    #
+    #   * Cannot be greater than 64 characters.
+    #
+    #   Example:
+    #   `OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain`
+    # @option options [String] :domain_auth_secret_arn
+    #   The ARN for the Secrets Manager secret that contains the credentials
+    #   for the user performing the domain join.
+    #
+    #   Constraints:
+    #
+    #   Example:
+    #   `arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456`
+    # @option options [Array<String>] :domain_dns_ips
+    #   The IPv4 DNS IP addresses of your primary and secondary Active
+    #   Directory domain controllers.
+    #
+    #   Constraints:
+    #
+    #   * Two IP addresses must be provided. If there isn't a secondary
+    #     domain controller, use the IP address of the primary domain
+    #     controller for both entries in the list.
+    #
+    #   ^
+    #
+    #   Example: `123.124.125.126,234.235.236.237`
     # @option options [Boolean] :copy_tags_to_snapshot
     #   A value that indicates whether to copy all tags from the restored DB
     #   instance to snapshots of the DB instance.
@@ -1067,7 +1124,9 @@ module Aws::RDS
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(db_snapshot_identifier: @snapshot_id)
-      resp = @client.restore_db_instance_from_db_snapshot(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.restore_db_instance_from_db_snapshot(options)
+      end
       DBInstance.new(
         id: resp.data.db_instance.db_instance_identifier,
         data: resp.data.db_instance,
@@ -1087,7 +1146,9 @@ module Aws::RDS
     # @return [EventSubscription]
     def subscribe_to(options = {})
       options = options.merge(source_identifier: @snapshot_id)
-      resp = @client.add_source_identifier_to_subscription(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.add_source_identifier_to_subscription(options)
+      end
       EventSubscription.new(
         name: resp.data.event_subscription.cust_subscription_id,
         data: resp.data.event_subscription,
@@ -1107,7 +1168,9 @@ module Aws::RDS
     # @return [EventSubscription]
     def unsubscribe_from(options = {})
       options = options.merge(source_identifier: @snapshot_id)
-      resp = @client.remove_source_identifier_from_subscription(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.remove_source_identifier_from_subscription(options)
+      end
       EventSubscription.new(
         name: resp.data.event_subscription.cust_subscription_id,
         data: resp.data.event_subscription,
@@ -1126,7 +1189,9 @@ module Aws::RDS
       batches = Enumerator.new do |y|
         batch = []
         options = options.merge(db_snapshot_identifier: @snapshot_id)
-        resp = @client.describe_db_snapshot_attributes(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_db_snapshot_attributes(options)
+        end
         resp.data.db_snapshot_attributes_result.db_snapshot_attributes.each do |d|
           batch << DBSnapshotAttribute.new(
             snapshot_id: @snapshot_id,
@@ -1191,7 +1256,9 @@ module Aws::RDS
           source_type: "db-snapshot",
           source_identifier: @snapshot_id
         )
-        resp = @client.describe_events(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_events(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.events.each do |e|

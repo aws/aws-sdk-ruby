@@ -275,6 +275,11 @@ module Aws::GuardDuty
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -854,19 +859,27 @@ module Aws::GuardDuty
     # prerequisite for managing the associated member accounts either by
     # invitation or through an organization.
     #
-    # When using `Create Members` as an organizations delegated
-    # administrator this action will enable GuardDuty in the added member
-    # accounts, with the exception of the organization delegated
-    # administrator account, which must enable GuardDuty prior to being
-    # added as a member.
+    # As a delegated administrator, using `CreateMembers` will enable
+    # GuardDuty in the added member accounts, with the exception of the
+    # organization delegated administrator account. A delegated
+    # administrator must enable GuardDuty prior to being added as a member.
     #
-    # If you are adding accounts by invitation, use this action after
-    # GuardDuty has bee enabled in potential member accounts and before
-    # using [InviteMembers][1].
+    # If you are adding accounts by invitation, before using
+    # [InviteMembers][1], use `CreateMembers` after GuardDuty has been
+    # enabled in potential member accounts.
+    #
+    # If you disassociate a member from a GuardDuty delegated administrator,
+    # the member account details obtained from this API, including the
+    # associated email addresses, will be retained. This is done so that the
+    # delegated administrator can invoke the [InviteMembers][1] API without
+    # the need to invoke the CreateMembers API again. To remove the details
+    # associated with a member account, the delegated administrator must
+    # invoke the [DeleteMembers][2] API.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html
+    # [2]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty account that you want
@@ -1535,9 +1548,24 @@ module Aws::GuardDuty
     # Disassociates the current GuardDuty member account from its
     # administrator account.
     #
+    # When you disassociate an invited member from a GuardDuty delegated
+    # administrator, the member account details obtained from the
+    # [CreateMembers][1] API, including the associated email addresses, are
+    # retained. This is done so that the delegated administrator can invoke
+    # the [InviteMembers][2] API without the need to invoke the
+    # CreateMembers API again. To remove the details associated with a
+    # member account, the delegated administrator must invoke the
+    # [DeleteMembers][3] API.
+    #
     # With `autoEnableOrganizationMembers` configuration for your
     # organization set to `ALL`, you'll receive an error if you attempt to
     # disable GuardDuty in a member account.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html
+    # [2]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html
+    # [3]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty member account.
@@ -1562,6 +1590,21 @@ module Aws::GuardDuty
     # Disassociates the current GuardDuty member account from its
     # administrator account.
     #
+    # When you disassociate an invited member from a GuardDuty delegated
+    # administrator, the member account details obtained from the
+    # [CreateMembers][1] API, including the associated email addresses, are
+    # retained. This is done so that the delegated administrator can invoke
+    # the [InviteMembers][2] API without the need to invoke the
+    # CreateMembers API again. To remove the details associated with a
+    # member account, the delegated administrator must invoke the
+    # [DeleteMembers][3] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html
+    # [2]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html
+    # [3]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html
+    #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty member account.
     #
@@ -1582,13 +1625,28 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Disassociates GuardDuty member accounts (to the current administrator
-    # account) specified by the account IDs.
+    # Disassociates GuardDuty member accounts (from the current
+    # administrator account) specified by the account IDs.
+    #
+    # When you disassociate an invited member from a GuardDuty delegated
+    # administrator, the member account details obtained from the
+    # [CreateMembers][1] API, including the associated email addresses, are
+    # retained. This is done so that the delegated administrator can invoke
+    # the [InviteMembers][2] API without the need to invoke the
+    # CreateMembers API again. To remove the details associated with a
+    # member account, the delegated administrator must invoke the
+    # [DeleteMembers][3] API.
     #
     # With `autoEnableOrganizationMembers` configuration for your
     # organization set to `ALL`, you'll receive an error if you attempt to
     # disassociate a member account before removing them from your Amazon
     # Web Services organization.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html
+    # [2]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html
+    # [3]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty account whose members
@@ -1970,6 +2028,8 @@ module Aws::GuardDuty
     #   resp.findings[0].resource.kubernetes_details.kubernetes_user_details.uid #=> String
     #   resp.findings[0].resource.kubernetes_details.kubernetes_user_details.groups #=> Array
     #   resp.findings[0].resource.kubernetes_details.kubernetes_user_details.groups[0] #=> String
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_user_details.session_name #=> Array
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_user_details.session_name[0] #=> String
     #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.name #=> String
     #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.type #=> String
     #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.uid #=> String
@@ -2794,11 +2854,38 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Invites other Amazon Web Services accounts (created as members of the
-    # current Amazon Web Services account by CreateMembers) to enable
-    # GuardDuty, and allow the current Amazon Web Services account to view
-    # and manage these accounts' findings on their behalf as the GuardDuty
-    # administrator account.
+    # Invites Amazon Web Services accounts to become members of an
+    # organization administered by the Amazon Web Services account that
+    # invokes this API. If you are using Amazon Web Services Organizations
+    # to manager your GuardDuty environment, this step is not needed. For
+    # more information, see [Managing accounts with Amazon Web Services
+    # Organizations][1].
+    #
+    # To invite Amazon Web Services accounts, the first step is to ensure
+    # that GuardDuty has been enabled in the potential member accounts. You
+    # can now invoke this API to add accounts by invitation. The invited
+    # accounts can either accept or decline the invitation from their
+    # GuardDuty accounts. Each invited Amazon Web Services account can
+    # choose to accept the invitation from only one Amazon Web Services
+    # account. For more information, see [Managing GuardDuty accounts by
+    # invitation][2].
+    #
+    # After the invite has been accepted and you choose to disassociate a
+    # member account (by using [DisassociateMembers][3]) from your account,
+    # the details of the member account obtained by invoking
+    # [CreateMembers][4], including the associated email addresses, will be
+    # retained. This is done so that you can invoke InviteMembers without
+    # the need to invoke [CreateMembers][4] again. To remove the details
+    # associated with a member account, you must also invoke
+    # [DeleteMembers][5].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_organizations.html
+    # [2]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_invitations.html
+    # [3]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DisassociateMembers.html
+    # [4]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html
+    # [5]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty account that you want
@@ -3453,9 +3540,9 @@ module Aws::GuardDuty
     end
 
     # Lists tags for a resource. Tagging is currently supported for
-    # detectors, finding filters, IP sets, and threat intel sets, with a
-    # limit of 50 tags per resource. When invoked, this operation returns
-    # all assigned tags for a given resource.
+    # detectors, finding filters, IP sets, threat intel sets, publishing
+    # destination, with a limit of 50 tags per resource. When invoked, this
+    # operation returns all assigned tags for a given resource.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) for the given GuardDuty resource.
@@ -4287,7 +4374,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

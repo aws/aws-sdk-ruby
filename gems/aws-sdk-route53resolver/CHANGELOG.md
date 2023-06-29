@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.43.0 (2023-06-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.42.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.41.0 (2023-05-11)
+------------------
+
+* Feature - Update FIPS endpoints for GovCloud (US) regions in SDK.
+
 1.40.0 (2023-03-08)
 ------------------
 

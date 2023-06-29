@@ -9,6 +9,7 @@
 
 
 module Aws::GameLift
+  # @api private
   module Endpoints
 
     class AcceptMatch

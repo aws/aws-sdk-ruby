@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.183.0 (2023-06-28)
+------------------
+
+* Feature - Amazon Relational Database Service (RDS) now supports joining a RDS for SQL Server instance to a self-managed Active Directory.
+
+1.182.0 (2023-06-23)
+------------------
+
+* Feature - Documentation improvements for create, describe, and modify DB clusters and DB instances.
+
+1.181.0 (2023-06-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.180.0 (2023-05-31)
+------------------
+
+* Feature - This release adds support for changing the engine for Oracle using the ModifyDbInstance API
+
+1.179.0 (2023-05-18)
+------------------
+
+* Feature - RDS documentation update for the EngineVersion parameter of ModifyDBSnapshot
+
+1.178.0 (2023-05-10)
+------------------
+
+* Feature - Amazon Relational Database Service (RDS) updates for the new Aurora I/O-Optimized storage type for Amazon Aurora DB clusters
+
 1.177.0 (2023-04-19)
 ------------------
 

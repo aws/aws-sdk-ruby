@@ -9,6 +9,7 @@
 
 
 module Aws::Transfer
+  # @api private
   module Endpoints
 
     class CreateAccess

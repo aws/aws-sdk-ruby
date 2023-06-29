@@ -9,6 +9,7 @@
 
 
 module Aws::Comprehend
+  # @api private
   module Endpoints
 
     class BatchDetectDominantLanguage

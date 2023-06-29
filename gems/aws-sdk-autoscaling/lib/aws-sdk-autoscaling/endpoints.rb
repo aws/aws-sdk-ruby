@@ -9,6 +9,7 @@
 
 
 module Aws::AutoScaling
+  # @api private
   module Endpoints
 
     class AttachInstances

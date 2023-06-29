@@ -9,6 +9,7 @@
 
 
 module Aws::DataSync
+  # @api private
   module Endpoints
 
     class AddStorageSystem

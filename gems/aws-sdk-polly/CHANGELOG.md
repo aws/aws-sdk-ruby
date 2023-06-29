@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.69.0 (2023-06-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.68.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.67.0 (2023-05-30)
+------------------
+
+* Feature - Amazon Polly adds 2 new voices - Sofie (da-DK) and Niamh (en-IE)
+
 1.66.0 (2023-02-10)
 ------------------
 

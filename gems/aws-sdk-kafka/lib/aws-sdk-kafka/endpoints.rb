@@ -9,6 +9,7 @@
 
 
 module Aws::Kafka
+  # @api private
   module Endpoints
 
     class BatchAssociateScramSecret

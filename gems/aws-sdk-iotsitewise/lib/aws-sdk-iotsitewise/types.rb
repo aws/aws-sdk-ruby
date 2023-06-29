@@ -1168,9 +1168,9 @@ module Aws::IoTSiteWise
     #   The maximum number of results to return for each paginated request.
     #   A result set is returned in the two cases, whichever occurs first.
     #
-    #   * The size of the result set is less than 1 MB.
+    #   * The size of the result set is equal to 1 MB.
     #
-    #   * The number of data points in the result set is less than the value
+    #   * The number of data points in the result set is equal to the value
     #     of `maxResults`. The maximum value of `maxResults` is 4000.
     #   @return [Integer]
     #
@@ -1488,10 +1488,10 @@ module Aws::IoTSiteWise
     #   The maximum number of results to return for each paginated request.
     #   A result set is returned in the two cases, whichever occurs first.
     #
-    #   * The size of the result set is less than 1 MB.
+    #   * The size of the result set is equal to 4 MB.
     #
-    #   * The number of data points in the result set is less than the value
-    #     of `maxResults`. The maximum value of `maxResults` is 4000.
+    #   * The number of data points in the result set is equal to the value
+    #     of `maxResults`. The maximum value of `maxResults` is 20000.
     #   @return [Integer]
     #
     class BatchGetAssetPropertyValueHistoryRequest < Struct.new(
@@ -4025,8 +4025,12 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to return for each paginated request.
+    #   A result set is returned in the two cases, whichever occurs first.
     #
-    #   Default: 100
+    #   * The size of the result set is equal to 1 MB.
+    #
+    #   * The number of data points in the result set is equal to the value
+    #     of `maxResults`. The maximum value of `maxResults` is 250.
     #   @return [Integer]
     #
     class GetAssetPropertyAggregatesRequest < Struct.new(
@@ -4107,8 +4111,12 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to return for each paginated request.
+    #   A result set is returned in the two cases, whichever occurs first.
     #
-    #   Default: 100
+    #   * The size of the result set is equal to 4 MB.
+    #
+    #   * The number of data points in the result set is equal to the value
+    #     of `maxResults`. The maximum value of `maxResults` is 20000.
     #   @return [Integer]
     #
     class GetAssetPropertyValueHistoryRequest < Struct.new(

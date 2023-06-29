@@ -116,7 +116,9 @@ module Aws::AutoScaling
     #
     # @return [self]
     def load
-      resp = @client.describe_scheduled_actions(scheduled_action_names: [@name])
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_scheduled_actions(scheduled_action_names: [@name])
+      end
       @data = resp.scheduled_update_group_actions[0]
       self
     end
@@ -231,7 +233,9 @@ module Aws::AutoScaling
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -247,7 +251,9 @@ module Aws::AutoScaling
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(scheduled_action_name: @name)
-      resp = @client.delete_scheduled_action(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_scheduled_action(options)
+      end
       resp.data
     end
 

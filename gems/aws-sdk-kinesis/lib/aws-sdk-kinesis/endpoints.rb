@@ -9,6 +9,7 @@
 
 
 module Aws::Kinesis
+  # @api private
   module Endpoints
 
     class AddTagsToStream

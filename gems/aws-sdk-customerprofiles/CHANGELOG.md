@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2023-06-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2023-06-07)
+------------------
+
+* Feature - This release introduces event stream related APIs.
+
+1.29.0 (2023-06-01)
+------------------
+
+* Feature - This release introduces calculated attribute related APIs.
+
+1.28.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.27.0 (2023-02-06)
 ------------------
 

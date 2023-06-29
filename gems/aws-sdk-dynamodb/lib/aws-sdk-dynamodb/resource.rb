@@ -160,7 +160,9 @@ module Aws::DynamoDB
     #   * `NONE` - No `ConsumedCapacity` details are included in the response.
     # @return [Types::BatchGetItemOutput]
     def batch_get_item(options = {})
-      resp = @client.batch_get_item(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.batch_get_item(options)
+      end
       resp.data
     end
 
@@ -241,7 +243,9 @@ module Aws::DynamoDB
     #   response. If set to `NONE` (the default), no statistics are returned.
     # @return [Types::BatchWriteItemOutput]
     def batch_write_item(options = {})
-      resp = @client.batch_write_item(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.batch_write_item(options)
+      end
       resp.data
     end
 
@@ -518,7 +522,9 @@ module Aws::DynamoDB
     #   disabled (false) on the table.
     # @return [Table]
     def create_table(options = {})
-      resp = @client.create_table(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_table(options)
+      end
       Table.new(
         name: resp.data.table_description.table_name,
         data: resp.data.table_description,
@@ -544,7 +550,9 @@ module Aws::DynamoDB
     # @return [Table::Collection]
     def tables(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.list_tables(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.list_tables(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.table_names.each do |t|

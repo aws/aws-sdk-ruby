@@ -97,6 +97,30 @@ module Aws::PrivateNetworks
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     #   @return [String]
     #
+    # @!attribute [rw] commitment_configuration
+    #   Determines the duration and renewal status of the commitment period
+    #   for all pending radio units.
+    #
+    #   If you include `commitmentConfiguration` in the
+    #   `ActivateNetworkSiteRequest` action, you must specify the following:
+    #
+    #   * The commitment period for the radio unit. You can choose a 60-day,
+    #     1-year, or 3-year period.
+    #
+    #   * Whether you want your commitment period to automatically renew for
+    #     one more year after your current commitment period expires.
+    #
+    #   For pricing, see [Amazon Web Services Private 5G Pricing][1].
+    #
+    #   If you do not include `commitmentConfiguration` in the
+    #   `ActivateNetworkSiteRequest` action, the commitment period is set to
+    #   60-days.
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/private5g/pricing
+    #   @return [Types::CommitmentConfiguration]
+    #
     # @!attribute [rw] network_site_arn
     #   The Amazon Resource Name (ARN) of the network site.
     #   @return [String]
@@ -109,6 +133,7 @@ module Aws::PrivateNetworks
     #
     class ActivateNetworkSiteRequest < Struct.new(
       :client_token,
+      :commitment_configuration,
       :network_site_arn,
       :shipping_address)
       SENSITIVE = []
@@ -141,12 +166,16 @@ module Aws::PrivateNetworks
     #   The country for this address.
     #   @return [String]
     #
+    # @!attribute [rw] email_address
+    #   The recipient's email address.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The recipient's name for this address.
     #   @return [String]
     #
     # @!attribute [rw] phone_number
-    #   The phone number for this address.
+    #   The recipient's phone number.
     #   @return [String]
     #
     # @!attribute [rw] postal_code
@@ -175,6 +204,7 @@ module Aws::PrivateNetworks
       :city,
       :company,
       :country,
+      :email_address,
       :name,
       :phone_number,
       :postal_code,
@@ -182,7 +212,84 @@ module Aws::PrivateNetworks
       :street1,
       :street2,
       :street3)
-      SENSITIVE = [:city, :company, :country, :name, :phone_number, :postal_code, :state_or_province, :street1, :street2, :street3]
+      SENSITIVE = [:city, :company, :country, :email_address, :name, :phone_number, :postal_code, :state_or_province, :street1, :street2, :street3]
+      include Aws::Structure
+    end
+
+    # Determines the duration and renewal status of the commitment period
+    # for a radio unit.
+    #
+    # For pricing, see [Amazon Web Services Private 5G Pricing][1].
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/private5g/pricing
+    #
+    # @!attribute [rw] automatic_renewal
+    #   Determines whether the commitment period for a radio unit is set to
+    #   automatically renew for an additional 1 year after your current
+    #   commitment period expires.
+    #
+    #   Set to `True`, if you want your commitment period to automatically
+    #   renew. Set to `False` if you do not want your commitment to
+    #   automatically renew.
+    #
+    #   You can do the following:
+    #
+    #   * Set a 1-year commitment to automatically renew for an additional 1
+    #     year. The hourly rate for the additional year will continue to be
+    #     the same as your existing 1-year rate.
+    #
+    #   * Set a 3-year commitment to automatically renew for an additional 1
+    #     year. The hourly rate for the additional year will continue to be
+    #     the same as your existing 3-year rate.
+    #
+    #   * Turn off a previously-enabled automatic renewal on a 1-year or
+    #     3-year commitment.
+    #
+    #   You cannot use the automatic-renewal option for a 60-day commitment.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] commitment_length
+    #   The duration of the commitment period for the radio unit. You can
+    #   choose a 60-day, 1-year, or 3-year period.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/privatenetworks-2021-12-03/CommitmentConfiguration AWS API Documentation
+    #
+    class CommitmentConfiguration < Struct.new(
+      :automatic_renewal,
+      :commitment_length)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Shows the duration, the date and time that the contract started and
+    # ends, and the renewal status of the commitment period for the radio
+    # unit.
+    #
+    # @!attribute [rw] commitment_configuration
+    #   The duration and renewal status of the commitment period for the
+    #   radio unit.
+    #   @return [Types::CommitmentConfiguration]
+    #
+    # @!attribute [rw] expires_on
+    #   The date and time that the commitment period ends. If you do not
+    #   cancel or renew the commitment before the expiration date, you will
+    #   be billed at the 60-day-commitment rate.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_at
+    #   The date and time that the commitment period started.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/privatenetworks-2021-12-03/CommitmentInformation AWS API Documentation
+    #
+    class CommitmentInformation < Struct.new(
+      :commitment_configuration,
+      :expires_on,
+      :start_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1056,6 +1163,12 @@ module Aws::PrivateNetworks
     #   The attributes of the network resource.
     #   @return [Array<Types::NameValuePair>]
     #
+    # @!attribute [rw] commitment_information
+    #   Information about the commitment period for the radio unit. Shows
+    #   the duration, the date and time that the contract started and ends,
+    #   and the renewal status of the commitment period.
+    #   @return [Types::CommitmentInformation]
+    #
     # @!attribute [rw] created_at
     #   The creation time of the network resource.
     #   @return [Time]
@@ -1123,6 +1236,7 @@ module Aws::PrivateNetworks
     #
     class NetworkResource < Struct.new(
       :attributes,
+      :commitment_information,
       :created_at,
       :description,
       :health,
@@ -1255,6 +1369,10 @@ module Aws::PrivateNetworks
     #   The Amazon Resource Name (ARN) of the order.
     #   @return [String]
     #
+    # @!attribute [rw] ordered_resources
+    #   A list of the network resources placed in the order.
+    #   @return [Array<Types::OrderedResourceDefinition>]
+    #
     # @!attribute [rw] shipping_address
     #   The shipping address of the order.
     #   @return [Types::Address]
@@ -1271,8 +1389,35 @@ module Aws::PrivateNetworks
       :network_arn,
       :network_site_arn,
       :order_arn,
+      :ordered_resources,
       :shipping_address,
       :tracking_information)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of the network resources in the order.
+    #
+    # @!attribute [rw] commitment_configuration
+    #   The duration and renewal status of the commitment period for each
+    #   radio unit in the order. Does not show details if the resource type
+    #   is DEVICE\_IDENTIFIER.
+    #   @return [Types::CommitmentConfiguration]
+    #
+    # @!attribute [rw] count
+    #   The number of network resources in the order.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] type
+    #   The type of network resource in the order.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/privatenetworks-2021-12-03/OrderedResourceDefinition AWS API Documentation
+    #
+    class OrderedResourceDefinition < Struct.new(
+      :commitment_configuration,
+      :count,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1403,6 +1548,37 @@ module Aws::PrivateNetworks
       include Aws::Structure
     end
 
+    # @!attribute [rw] commitment_configuration
+    #   Use this action to extend and automatically renew the commitment
+    #   period for the radio unit. You can do the following:
+    #
+    #   * Change a 60-day commitment to a 1-year or 3-year commitment. The
+    #     change is immediate and the hourly rate decreases to the rate for
+    #     the new commitment period.
+    #
+    #   * Change a 1-year commitment to a 3-year commitment. The change is
+    #     immediate and the hourly rate decreases to the rate for the 3-year
+    #     commitment period.
+    #
+    #   * Set a 1-year commitment to automatically renew for an additional 1
+    #     year. The hourly rate for the additional year will continue to be
+    #     the same as your existing 1-year rate.
+    #
+    #   * Set a 3-year commitment to automatically renew for an additional 1
+    #     year. The hourly rate for the additional year will continue to be
+    #     the same as your existing 3-year rate.
+    #
+    #   * Turn off a previously-enabled automatic renewal on a 1-year or
+    #     3-year commitment. You cannot use the automatic-renewal option for
+    #     a 60-day commitment.
+    #
+    #   For pricing, see [Amazon Web Services Private 5G Pricing][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/private5g/pricing
+    #   @return [Types::CommitmentConfiguration]
+    #
     # @!attribute [rw] network_resource_arn
     #   The Amazon Resource Name (ARN) of the network resource.
     #   @return [String]
@@ -1425,14 +1601,23 @@ module Aws::PrivateNetworks
     #     We provide a shipping label that you can use for the return
     #     process and we ship a replacement radio unit to you.
     #
-    #   * `RETURN` - Submits a request to replace a radio unit that you no
+    #   * `RETURN` - Submits a request to return a radio unit that you no
     #     longer need. We provide a shipping label that you can use for the
     #     return process.
+    #
+    #   * `COMMITMENT` - Submits a request to change or renew the commitment
+    #     period. If you choose this value, then you must set [
+    #     `commitmentConfiguration` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/private-networks/latest/APIReference/API_StartNetworkResourceUpdate.html#privatenetworks-StartNetworkResourceUpdate-request-commitmentConfiguration
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/privatenetworks-2021-12-03/StartNetworkResourceUpdateRequest AWS API Documentation
     #
     class StartNetworkResourceUpdateRequest < Struct.new(
+      :commitment_configuration,
       :network_resource_arn,
       :return_reason,
       :shipping_address,

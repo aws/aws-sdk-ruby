@@ -9,6 +9,7 @@
 
 
 module Aws::LocationService
+  # @api private
   module Endpoints
 
     class AssociateTrackerConsumer

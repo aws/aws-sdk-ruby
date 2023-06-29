@@ -9,6 +9,7 @@
 
 
 module Aws::SageMakerMetrics
+  # @api private
   module Endpoints
 
     class BatchPutMetrics

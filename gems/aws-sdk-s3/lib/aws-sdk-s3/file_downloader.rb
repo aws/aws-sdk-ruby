@@ -32,21 +32,23 @@ module Aws
         }
         @params[:version_id] = options[:version_id] if options[:version_id]
 
-        case @mode
-        when 'auto' then multipart_download
-        when 'single_request' then single_request
-        when 'get_range'
-          if @chunk_size
-            resp = @client.head_object(@params)
-            multithreaded_get_by_ranges(construct_chunks(resp.content_length))
+        Aws::Plugins::UserAgent.feature('s3-transfer') do
+          case @mode
+          when 'auto' then multipart_download
+          when 'single_request' then single_request
+          when 'get_range'
+            if @chunk_size
+              resp = @client.head_object(@params)
+              multithreaded_get_by_ranges(construct_chunks(resp.content_length))
+            else
+              msg = 'In :get_range mode, :chunk_size must be provided'
+              raise ArgumentError, msg
+            end
           else
-            msg = 'In :get_range mode, :chunk_size must be provided'
+            msg = "Invalid mode #{@mode} provided, "\
+                  'mode should be :single_request, :get_range or :auto'
             raise ArgumentError, msg
           end
-        else
-          msg = "Invalid mode #{@mode} provided, "\
-                'mode should be :single_request, :get_range or :auto'
-          raise ArgumentError, msg
         end
       end
 
@@ -56,15 +58,19 @@ module Aws
         resp = @client.head_object(@params.merge(part_number: 1))
         count = resp.parts_count
         if count.nil? || count <= 1
-          resp.content_length < MIN_CHUNK_SIZE ?
-            single_request :
+          if resp.content_length <= MIN_CHUNK_SIZE
+            single_request
+          else
             multithreaded_get_by_ranges(construct_chunks(resp.content_length))
+          end
         else
           # partNumber is an option
           resp = @client.head_object(@params)
-          resp.content_length < MIN_CHUNK_SIZE ?
-            single_request :
+          if resp.content_length <= MIN_CHUNK_SIZE
+            single_request
+          else
             compute_mode(resp.content_length, count)
+          end
         end
       end
 
@@ -82,10 +88,11 @@ module Aws
         offset = 0
         default_chunk_size = compute_chunk(file_size)
         chunks = []
-        while offset <= file_size
+        while offset < file_size
           progress = offset + default_chunk_size
-          chunks << "bytes=#{offset}-#{progress < file_size ? progress : file_size}"
-          offset = progress + 1
+          progress = file_size if progress > file_size
+          chunks << "bytes=#{offset}-#{progress - 1}"
+          offset = progress
         end
         chunks
       end
@@ -94,12 +101,9 @@ module Aws
         if @chunk_size && @chunk_size > file_size
           raise ArgumentError, ":chunk_size shouldn't exceed total file size."
         else
-          chunk_size = @chunk_size || [
-            (file_size.to_f / MAX_PARTS).ceil,
-            MIN_CHUNK_SIZE
+          @chunk_size || [
+            (file_size.to_f / MAX_PARTS).ceil, MIN_CHUNK_SIZE
           ].max.to_i
-          chunk_size -= 1 if file_size % chunk_size == 1
-          chunk_size
         end
       end
 

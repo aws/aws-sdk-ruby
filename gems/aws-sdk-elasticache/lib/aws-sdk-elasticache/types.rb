@@ -545,7 +545,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://aws.amazon.com/ec2/nitro/
+    #   [1]: http://aws.amazon.com/ec2/nitro/
     #   @return [String]
     #
     # @!attribute [rw] ip_discovery
@@ -556,7 +556,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://aws.amazon.com/ec2/nitro/
+    #   [1]: http://aws.amazon.com/ec2/nitro/
     #   @return [String]
     #
     # @!attribute [rw] transit_encryption_mode
@@ -652,7 +652,7 @@ module Aws::ElastiCache
     #
     #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
     #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
-    #   `redis5.0` \| `redis6.x`
+    #   `redis5.0` \| `redis6.x` \| `redis7`
     #   @return [String]
     #
     # @!attribute [rw] cache_engine_description
@@ -1006,7 +1006,7 @@ module Aws::ElastiCache
     #
     #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
     #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
-    #   `redis5.0` \| `redis6.x` \|
+    #   `redis5.0` \| `redis6.x` \| `redis7`
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1281,7 +1281,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://aws.amazon.com/ec2/nitro/
+    #   [1]: http://aws.amazon.com/ec2/nitro/
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheSubnetGroup AWS API Documentation
@@ -1916,9 +1916,6 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] transit_encryption_enabled
     #   A flag that enables in-transit encryption when set to true.
-    #
-    #   Only available when creating a cache cluster in an Amazon VPC using
-    #   Memcached version 1.6.12 or later.
     #   @return [Boolean]
     #
     # @!attribute [rw] network_type
@@ -1929,7 +1926,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://aws.amazon.com/ec2/nitro/
+    #   [1]: http://aws.amazon.com/ec2/nitro/
     #   @return [String]
     #
     # @!attribute [rw] ip_discovery
@@ -1940,7 +1937,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://aws.amazon.com/ec2/nitro/
+    #   [1]: http://aws.amazon.com/ec2/nitro/
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheClusterMessage AWS API Documentation
@@ -2004,7 +2001,7 @@ module Aws::ElastiCache
     #
     #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
     #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
-    #   `redis5.0` \| `redis6.x`
+    #   `redis5.0` \| `redis6.x` \| `redis7`
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2686,7 +2683,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://aws.amazon.com/ec2/nitro/
+    #   [1]: http://aws.amazon.com/ec2/nitro/
     #   @return [String]
     #
     # @!attribute [rw] ip_discovery
@@ -2697,7 +2694,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://aws.amazon.com/ec2/nitro/
+    #   [1]: http://aws.amazon.com/ec2/nitro/
     #   @return [String]
     #
     # @!attribute [rw] transit_encryption_mode
@@ -2713,8 +2710,20 @@ module Aws::ElastiCache
     #
     #   Setting `TransitEncryptionMode` to `required` is a two-step process
     #   that requires you to first set the `TransitEncryptionMode` to
-    #   `preferred` first, after that you can set `TransitEncryptionMode` to
+    #   `preferred`, after that you can set `TransitEncryptionMode` to
     #   `required`.
+    #
+    #   This process will not trigger the replacement of the replication
+    #   group.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_mode
+    #   Enabled or Disabled. To modify cluster mode from Disabled to
+    #   Enabled, you must first set the cluster mode to Compatible.
+    #   Compatible mode allows your Redis clients to connect using both
+    #   cluster mode enabled and cluster mode disabled. After you migrate
+    #   all Redis clients to use cluster mode enabled, you can then complete
+    #   cluster mode configuration and set the cluster mode to Enabled.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroupMessage AWS API Documentation
@@ -2756,7 +2765,8 @@ module Aws::ElastiCache
       :data_tiering_enabled,
       :network_type,
       :ip_discovery,
-      :transit_encryption_mode)
+      :transit_encryption_mode,
+      :cluster_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4513,7 +4523,7 @@ module Aws::ElastiCache
     #
     #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
     #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
-    #   `redis5.0` \| `redis6.0` \| `redis6.x`
+    #   `redis5.0` \| `redis6.0` \| `redis6.x` \| `redis7`
     #   @return [String]
     #
     # @!attribute [rw] marker
@@ -5561,7 +5571,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://aws.amazon.com/ec2/nitro/
+    #   [1]: http://aws.amazon.com/ec2/nitro/
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheClusterMessage AWS API Documentation
@@ -5979,7 +5989,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://aws.amazon.com/ec2/nitro/
+    #   [1]: http://aws.amazon.com/ec2/nitro/
     #   @return [String]
     #
     # @!attribute [rw] transit_encryption_enabled
@@ -6001,8 +6011,17 @@ module Aws::ElastiCache
     #
     #   Setting `TransitEncryptionMode` to `required` is a two-step process
     #   that requires you to first set the `TransitEncryptionMode` to
-    #   `preferred` first, after that you can set `TransitEncryptionMode` to
+    #   `preferred`, after that you can set `TransitEncryptionMode` to
     #   `required`.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_mode
+    #   Enabled or Disabled. To modify cluster mode from Disabled to
+    #   Enabled, you must first set the cluster mode to Compatible.
+    #   Compatible mode allows your Redis clients to connect using both
+    #   cluster mode enabled and cluster mode disabled. After you migrate
+    #   all Redis clients to use cluster mode enabled, you can then complete
+    #   cluster mode configuration and set the cluster mode to Enabled.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupMessage AWS API Documentation
@@ -6035,7 +6054,8 @@ module Aws::ElastiCache
       :log_delivery_configurations,
       :ip_discovery,
       :transit_encryption_enabled,
-      :transit_encryption_mode)
+      :transit_encryption_mode,
+      :cluster_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7092,10 +7112,10 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
-    #    If you are running Redis engine version 6.0 or later, set this
+    #   If you are running Redis engine version 6.0 or later, set this
     #   parameter to yes if you want to opt-in to the next auto minor
     #   version upgrade campaign. This parameter is disabled for previous
-    #   versions. 
+    #   versions.
     #   @return [Boolean]
     #
     # @!attribute [rw] network_type
@@ -7106,7 +7126,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://aws.amazon.com/ec2/nitro/
+    #   [1]: http://aws.amazon.com/ec2/nitro/
     #   @return [String]
     #
     # @!attribute [rw] ip_discovery
@@ -7117,12 +7137,21 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://aws.amazon.com/ec2/nitro/
+    #   [1]: http://aws.amazon.com/ec2/nitro/
     #   @return [String]
     #
     # @!attribute [rw] transit_encryption_mode
     #   A setting that allows you to migrate your clients to use in-transit
     #   encryption, with no downtime.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_mode
+    #   Enabled or Disabled. To modify cluster mode from Disabled to
+    #   Enabled, you must first set the cluster mode to Compatible.
+    #   Compatible mode allows your Redis clients to connect using both
+    #   cluster mode enabled and cluster mode disabled. After you migrate
+    #   all Redis clients to use cluster mode enabled, you can then complete
+    #   cluster mode configuration and set the cluster mode to Enabled.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroup AWS API Documentation
@@ -7157,7 +7186,8 @@ module Aws::ElastiCache
       :auto_minor_version_upgrade,
       :network_type,
       :ip_discovery,
-      :transit_encryption_mode)
+      :transit_encryption_mode,
+      :cluster_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7245,6 +7275,15 @@ module Aws::ElastiCache
     #   encryption, with no downtime.
     #   @return [String]
     #
+    # @!attribute [rw] cluster_mode
+    #   Enabled or Disabled. To modify cluster mode from Disabled to
+    #   Enabled, you must first set the cluster mode to Compatible.
+    #   Compatible mode allows your Redis clients to connect using both
+    #   cluster mode enabled and cluster mode disabled. After you migrate
+    #   all Redis clients to use cluster mode enabled, you can then complete
+    #   cluster mode configuration and set the cluster mode to Enabled.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroupPendingModifiedValues AWS API Documentation
     #
     class ReplicationGroupPendingModifiedValues < Struct.new(
@@ -7255,7 +7294,8 @@ module Aws::ElastiCache
       :user_groups,
       :log_delivery_configurations,
       :transit_encryption_enabled,
-      :transit_encryption_mode)
+      :transit_encryption_mode,
+      :cluster_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8326,7 +8366,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://aws.amazon.com/ec2/nitro/
+    #   [1]: http://aws.amazon.com/ec2/nitro/
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/Subnet AWS API Documentation

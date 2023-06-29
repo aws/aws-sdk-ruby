@@ -275,6 +275,11 @@ module Aws::ACMPCA
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -468,19 +473,23 @@ module Aws::ACMPCA
     #
     #   Default: FIPS\_140\_2\_LEVEL\_3\_OR\_HIGHER
     #
-    #   *Note:* `FIPS_140_2_LEVEL_3_OR_HIGHER` is not supported in the
-    #   following Regions:
-    #
-    #   * ap-northeast-3
-    #
-    #   * ap-southeast-3
-    #
-    #   When creating a CA in these Regions, you must provide
+    #   <note markdown="1"> Some Amazon Web Services Regions do not support the default. When
+    #   creating a CA in these Regions, you must provide
     #   `FIPS_140_2_LEVEL_2_OR_HIGHER` as the argument for
     #   `KeyStorageSecurityStandard`. Failure to do this results in an
     #   `InvalidArgsException` with the message, "A certificate authority
     #   cannot be created in this region with the specified security
     #   standard."
+    #
+    #    For information about security standard support in various Regions,
+    #   see [Storage and security compliance of Amazon Web Services Private CA
+    #   private keys][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/userguide/data-protection.html#private-keys
     #
     # @option params [Array<Types::Tag>] :tags
     #   Key-value pairs that will be attached to the new private CA. You can
@@ -1624,7 +1633,7 @@ module Aws::ACMPCA
     #   parameter used to sign a CSR in the `CreateCertificateAuthority`
     #   action.
     #
-    #   <note markdown="1"> The specified signing algorithm family (RSA or ECDSA) much match the
+    #   <note markdown="1"> The specified signing algorithm family (RSA or ECDSA) must match the
     #   algorithm family of the CA's secret key.
     #
     #    </note>
@@ -1692,7 +1701,7 @@ module Aws::ACMPCA
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_Validity.html
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_Validity.html
     #   [2]: https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.5
     #
     # @option params [String] :idempotency_token
@@ -2562,7 +2571,7 @@ module Aws::ACMPCA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acmpca'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -74,6 +74,7 @@ module Aws::MediaTailor
     DescribeSourceLocationResponse = Shapes::StructureShape.new(name: 'DescribeSourceLocationResponse')
     DescribeVodSourceRequest = Shapes::StructureShape.new(name: 'DescribeVodSourceRequest')
     DescribeVodSourceResponse = Shapes::StructureShape.new(name: 'DescribeVodSourceResponse')
+    FillPolicy = Shapes::StringShape.new(name: 'FillPolicy')
     GetChannelPolicyRequest = Shapes::StructureShape.new(name: 'GetChannelPolicyRequest')
     GetChannelPolicyResponse = Shapes::StructureShape.new(name: 'GetChannelPolicyResponse')
     GetChannelScheduleRequest = Shapes::StructureShape.new(name: 'GetChannelScheduleRequest')
@@ -213,6 +214,7 @@ module Aws::MediaTailor
     AvailMatchingCriteria.add_member(:operator, Shapes::ShapeRef.new(shape: Operator, required: true, location_name: "Operator"))
     AvailMatchingCriteria.struct_class = Types::AvailMatchingCriteria
 
+    AvailSuppression.add_member(:fill_policy, Shapes::ShapeRef.new(shape: FillPolicy, location_name: "FillPolicy"))
     AvailSuppression.add_member(:mode, Shapes::ShapeRef.new(shape: Mode, location_name: "Mode"))
     AvailSuppression.add_member(:value, Shapes::ShapeRef.new(shape: __string, location_name: "Value"))
     AvailSuppression.struct_class = Types::AvailSuppression

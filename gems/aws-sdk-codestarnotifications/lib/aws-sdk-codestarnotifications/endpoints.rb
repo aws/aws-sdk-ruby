@@ -9,6 +9,7 @@
 
 
 module Aws::CodeStarNotifications
+  # @api private
   module Endpoints
 
     class CreateNotificationRule

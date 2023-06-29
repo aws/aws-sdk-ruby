@@ -23,6 +23,8 @@ module Aws::CloudFormation
     AccountLimitList = Shapes::ListShape.new(name: 'AccountLimitList')
     AccountList = Shapes::ListShape.new(name: 'AccountList')
     AccountsUrl = Shapes::StringShape.new(name: 'AccountsUrl')
+    ActivateOrganizationsAccessInput = Shapes::StructureShape.new(name: 'ActivateOrganizationsAccessInput')
+    ActivateOrganizationsAccessOutput = Shapes::StructureShape.new(name: 'ActivateOrganizationsAccessOutput')
     ActivateTypeInput = Shapes::StructureShape.new(name: 'ActivateTypeInput')
     ActivateTypeOutput = Shapes::StructureShape.new(name: 'ActivateTypeOutput')
     AllowedValue = Shapes::StringShape.new(name: 'AllowedValue')
@@ -81,6 +83,8 @@ module Aws::CloudFormation
     CreateStackSetOutput = Shapes::StructureShape.new(name: 'CreateStackSetOutput')
     CreatedButModifiedException = Shapes::StructureShape.new(name: 'CreatedButModifiedException')
     CreationTime = Shapes::TimestampShape.new(name: 'CreationTime')
+    DeactivateOrganizationsAccessInput = Shapes::StructureShape.new(name: 'DeactivateOrganizationsAccessInput')
+    DeactivateOrganizationsAccessOutput = Shapes::StructureShape.new(name: 'DeactivateOrganizationsAccessOutput')
     DeactivateTypeInput = Shapes::StructureShape.new(name: 'DeactivateTypeInput')
     DeactivateTypeOutput = Shapes::StructureShape.new(name: 'DeactivateTypeOutput')
     DeleteChangeSetInput = Shapes::StructureShape.new(name: 'DeleteChangeSetInput')
@@ -101,6 +105,8 @@ module Aws::CloudFormation
     DescribeChangeSetHooksOutput = Shapes::StructureShape.new(name: 'DescribeChangeSetHooksOutput')
     DescribeChangeSetInput = Shapes::StructureShape.new(name: 'DescribeChangeSetInput')
     DescribeChangeSetOutput = Shapes::StructureShape.new(name: 'DescribeChangeSetOutput')
+    DescribeOrganizationsAccessInput = Shapes::StructureShape.new(name: 'DescribeOrganizationsAccessInput')
+    DescribeOrganizationsAccessOutput = Shapes::StructureShape.new(name: 'DescribeOrganizationsAccessOutput')
     DescribePublisherInput = Shapes::StructureShape.new(name: 'DescribePublisherInput')
     DescribePublisherOutput = Shapes::StructureShape.new(name: 'DescribePublisherOutput')
     DescribeStackDriftDetectionStatusInput = Shapes::StructureShape.new(name: 'DescribeStackDriftDetectionStatusInput')
@@ -234,6 +240,7 @@ module Aws::CloudFormation
     NotificationARN = Shapes::StringShape.new(name: 'NotificationARN')
     NotificationARNs = Shapes::ListShape.new(name: 'NotificationARNs')
     OnFailure = Shapes::StringShape.new(name: 'OnFailure')
+    OnStackFailure = Shapes::StringShape.new(name: 'OnStackFailure')
     OperationIdAlreadyExistsException = Shapes::StructureShape.new(name: 'OperationIdAlreadyExistsException')
     OperationInProgressException = Shapes::StructureShape.new(name: 'OperationInProgressException')
     OperationNotFoundException = Shapes::StructureShape.new(name: 'OperationNotFoundException')
@@ -244,6 +251,7 @@ module Aws::CloudFormation
     OperationStatus = Shapes::StringShape.new(name: 'OperationStatus')
     OperationStatusCheckFailedException = Shapes::StructureShape.new(name: 'OperationStatusCheckFailedException')
     OptionalSecureUrl = Shapes::StringShape.new(name: 'OptionalSecureUrl')
+    OrganizationStatus = Shapes::StringShape.new(name: 'OrganizationStatus')
     OrganizationalUnitId = Shapes::StringShape.new(name: 'OrganizationalUnitId')
     OrganizationalUnitIdList = Shapes::ListShape.new(name: 'OrganizationalUnitIdList')
     Output = Shapes::StructureShape.new(name: 'Output')
@@ -491,6 +499,10 @@ module Aws::CloudFormation
 
     AccountList.member = Shapes::ShapeRef.new(shape: Account)
 
+    ActivateOrganizationsAccessInput.struct_class = Types::ActivateOrganizationsAccessInput
+
+    ActivateOrganizationsAccessOutput.struct_class = Types::ActivateOrganizationsAccessOutput
+
     ActivateTypeInput.add_member(:type, Shapes::ShapeRef.new(shape: ThirdPartyType, location_name: "Type"))
     ActivateTypeInput.add_member(:public_type_arn, Shapes::ShapeRef.new(shape: ThirdPartyTypeArn, location_name: "PublicTypeArn"))
     ActivateTypeInput.add_member(:publisher_id, Shapes::ShapeRef.new(shape: PublisherId, location_name: "PublisherId"))
@@ -607,6 +619,7 @@ module Aws::CloudFormation
     CreateChangeSetInput.add_member(:change_set_type, Shapes::ShapeRef.new(shape: ChangeSetType, location_name: "ChangeSetType"))
     CreateChangeSetInput.add_member(:resources_to_import, Shapes::ShapeRef.new(shape: ResourcesToImport, location_name: "ResourcesToImport"))
     CreateChangeSetInput.add_member(:include_nested_stacks, Shapes::ShapeRef.new(shape: IncludeNestedStacks, location_name: "IncludeNestedStacks"))
+    CreateChangeSetInput.add_member(:on_stack_failure, Shapes::ShapeRef.new(shape: OnStackFailure, location_name: "OnStackFailure"))
     CreateChangeSetInput.struct_class = Types::CreateChangeSetInput
 
     CreateChangeSetOutput.add_member(:id, Shapes::ShapeRef.new(shape: ChangeSetId, location_name: "Id"))
@@ -669,6 +682,10 @@ module Aws::CloudFormation
     CreateStackSetOutput.struct_class = Types::CreateStackSetOutput
 
     CreatedButModifiedException.struct_class = Types::CreatedButModifiedException
+
+    DeactivateOrganizationsAccessInput.struct_class = Types::DeactivateOrganizationsAccessInput
+
+    DeactivateOrganizationsAccessOutput.struct_class = Types::DeactivateOrganizationsAccessOutput
 
     DeactivateTypeInput.add_member(:type_name, Shapes::ShapeRef.new(shape: TypeName, location_name: "TypeName"))
     DeactivateTypeInput.add_member(:type, Shapes::ShapeRef.new(shape: ThirdPartyType, location_name: "Type"))
@@ -768,7 +785,14 @@ module Aws::CloudFormation
     DescribeChangeSetOutput.add_member(:include_nested_stacks, Shapes::ShapeRef.new(shape: IncludeNestedStacks, location_name: "IncludeNestedStacks"))
     DescribeChangeSetOutput.add_member(:parent_change_set_id, Shapes::ShapeRef.new(shape: ChangeSetId, location_name: "ParentChangeSetId"))
     DescribeChangeSetOutput.add_member(:root_change_set_id, Shapes::ShapeRef.new(shape: ChangeSetId, location_name: "RootChangeSetId"))
+    DescribeChangeSetOutput.add_member(:on_stack_failure, Shapes::ShapeRef.new(shape: OnStackFailure, location_name: "OnStackFailure"))
     DescribeChangeSetOutput.struct_class = Types::DescribeChangeSetOutput
+
+    DescribeOrganizationsAccessInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
+    DescribeOrganizationsAccessInput.struct_class = Types::DescribeOrganizationsAccessInput
+
+    DescribeOrganizationsAccessOutput.add_member(:status, Shapes::ShapeRef.new(shape: OrganizationStatus, location_name: "Status"))
+    DescribeOrganizationsAccessOutput.struct_class = Types::DescribeOrganizationsAccessOutput
 
     DescribePublisherInput.add_member(:publisher_id, Shapes::ShapeRef.new(shape: PublisherId, location_name: "PublisherId"))
     DescribePublisherInput.struct_class = Types::DescribePublisherInput
@@ -1822,6 +1846,16 @@ module Aws::CloudFormation
         "xmlNamespace" => "http://cloudformation.amazonaws.com/doc/2010-05-15/",
       }
 
+      api.add_operation(:activate_organizations_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ActivateOrganizationsAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ActivateOrganizationsAccessInput)
+        o.output = Shapes::ShapeRef.new(shape: ActivateOrganizationsAccessOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotFoundException)
+      end)
+
       api.add_operation(:activate_type, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ActivateType"
         o.http_method = "POST"
@@ -1906,6 +1940,16 @@ module Aws::CloudFormation
         o.errors << Shapes::ShapeRef.new(shape: NameAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: CreatedButModifiedException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:deactivate_organizations_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeactivateOrganizationsAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeactivateOrganizationsAccessInput)
+        o.output = Shapes::ShapeRef.new(shape: DeactivateOrganizationsAccessOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotFoundException)
       end)
 
       api.add_operation(:deactivate_type, Seahorse::Model::Operation.new.tap do |o|
@@ -1998,6 +2042,16 @@ module Aws::CloudFormation
         o.input = Shapes::ShapeRef.new(shape: DescribeChangeSetHooksInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeChangeSetHooksOutput)
         o.errors << Shapes::ShapeRef.new(shape: ChangeSetNotFoundException)
+      end)
+
+      api.add_operation(:describe_organizations_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeOrganizationsAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeOrganizationsAccessInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeOrganizationsAccessOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotFoundException)
       end)
 
       api.add_operation(:describe_publisher, Seahorse::Model::Operation.new.tap do |o|

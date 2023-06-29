@@ -9,6 +9,7 @@
 
 
 module Aws::SsmSap
+  # @api private
   module Endpoints
 
     class DeleteResourcePermission

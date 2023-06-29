@@ -110,6 +110,8 @@ module Aws::AuditManager
             Aws::AuditManager::Endpoints::GetEvidence.build(context)
           when :get_evidence_by_evidence_folder
             Aws::AuditManager::Endpoints::GetEvidenceByEvidenceFolder.build(context)
+          when :get_evidence_file_upload_url
+            Aws::AuditManager::Endpoints::GetEvidenceFileUploadUrl.build(context)
           when :get_evidence_folder
             Aws::AuditManager::Endpoints::GetEvidenceFolder.build(context)
           when :get_evidence_folders_by_assessment

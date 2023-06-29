@@ -9,6 +9,7 @@
 
 
 module Aws::IoTEvents
+  # @api private
   module Endpoints
 
     class CreateAlarmModel

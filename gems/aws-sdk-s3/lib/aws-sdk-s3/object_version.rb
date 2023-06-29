@@ -105,6 +105,20 @@ module Aws::S3
       data[:owner]
     end
 
+    # Specifies the restoration status of an object. Objects in certain
+    # storage classes must be restored before they can be retrieved. For
+    # more information about these storage classes and how to work with
+    # archived objects, see [ Working with archived objects][1] in the
+    # *Amazon S3 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/archived-objects.html
+    # @return [Types::RestoreStatus]
+    def restore_status
+      data[:restore_status]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -229,7 +243,9 @@ module Aws::S3
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -273,7 +289,9 @@ module Aws::S3
         key: @object_key,
         version_id: @id
       )
-      resp = @client.delete_object(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_object(options)
+      end
       resp.data
     end
 
@@ -378,7 +396,9 @@ module Aws::S3
         key: @object_key,
         version_id: @id
       )
-      resp = @client.get_object(options, &block)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.get_object(options, &block)
+      end
       resp.data
     end
 
@@ -462,7 +482,9 @@ module Aws::S3
         key: @object_key,
         version_id: @id
       )
-      resp = @client.head_object(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.head_object(options)
+      end
       resp.data
     end
 
@@ -591,7 +613,9 @@ module Aws::S3
               version_id: item.id
             }
           end
-          batch[0].client.delete_objects(params)
+          Aws::Plugins::UserAgent.feature('resource') do
+            batch[0].client.delete_objects(params)
+          end
         end
         nil
       end

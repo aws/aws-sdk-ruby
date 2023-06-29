@@ -78,6 +78,8 @@ module Aws::Athena
             Aws::Athena::Endpoints::CreatePresignedNotebookUrl.build(context)
           when :create_work_group
             Aws::Athena::Endpoints::CreateWorkGroup.build(context)
+          when :delete_capacity_reservation
+            Aws::Athena::Endpoints::DeleteCapacityReservation.build(context)
           when :delete_data_catalog
             Aws::Athena::Endpoints::DeleteDataCatalog.build(context)
           when :delete_named_query

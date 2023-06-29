@@ -9,6 +9,7 @@
 
 
 module Aws::DevOpsGuru
+  # @api private
   module Endpoints
 
     class AddNotificationChannel

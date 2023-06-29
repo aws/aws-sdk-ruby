@@ -9,6 +9,7 @@
 
 
 module Aws::ApiGatewayManagementApi
+  # @api private
   module Endpoints
 
     class DeleteConnection

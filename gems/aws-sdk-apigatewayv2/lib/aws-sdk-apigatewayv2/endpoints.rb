@@ -9,6 +9,7 @@
 
 
 module Aws::ApiGatewayV2
+  # @api private
   module Endpoints
 
     class CreateApi

@@ -9,6 +9,7 @@
 
 
 module Aws::TranscribeStreamingService
+  # @api private
   module Endpoints
 
     class StartCallAnalyticsStreamTranscription

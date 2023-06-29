@@ -9,6 +9,7 @@
 
 
 module Aws::Snowball
+  # @api private
   module Endpoints
 
     class CancelCluster

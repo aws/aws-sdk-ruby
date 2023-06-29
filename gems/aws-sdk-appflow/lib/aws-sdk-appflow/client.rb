@@ -275,6 +275,11 @@ module Aws::Appflow
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -575,6 +580,7 @@ module Aws::Appflow
     #             auth_code_url: "AuthCodeUrl", # required
     #             o_auth_scopes: ["OAuthScope"], # required
     #           },
+    #           disable_sso: false,
     #         },
     #         custom_connector: {
     #           profile_properties: {
@@ -915,6 +921,10 @@ module Aws::Appflow
     #           entity_name: "EntityName", # required
     #           custom_properties: {
     #             "CustomPropertyKey" => "CustomPropertyValue",
+    #           },
+    #           data_transfer_api: {
+    #             name: "DataTransferApiTypeName",
+    #             type: "SYNC", # accepts SYNC, ASYNC, AUTOMATIC
     #           },
     #         },
     #         pardot: {
@@ -1291,6 +1301,11 @@ module Aws::Appflow
     #   resp.connector_configuration.logo_url #=> String
     #   resp.connector_configuration.registered_at #=> Time
     #   resp.connector_configuration.registered_by #=> String
+    #   resp.connector_configuration.supported_data_transfer_types #=> Array
+    #   resp.connector_configuration.supported_data_transfer_types[0] #=> String, one of "RECORD", "FILE"
+    #   resp.connector_configuration.supported_data_transfer_apis #=> Array
+    #   resp.connector_configuration.supported_data_transfer_apis[0].name #=> String
+    #   resp.connector_configuration.supported_data_transfer_apis[0].type #=> String, one of "SYNC", "ASYNC", "AUTOMATIC"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/DescribeConnector AWS API Documentation
     #
@@ -1465,6 +1480,7 @@ module Aws::Appflow
     #   resp.connector_profile_details[0].connector_profile_properties.sapo_data.o_auth_properties.auth_code_url #=> String
     #   resp.connector_profile_details[0].connector_profile_properties.sapo_data.o_auth_properties.o_auth_scopes #=> Array
     #   resp.connector_profile_details[0].connector_profile_properties.sapo_data.o_auth_properties.o_auth_scopes[0] #=> String
+    #   resp.connector_profile_details[0].connector_profile_properties.sapo_data.disable_sso #=> Boolean
     #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.profile_properties #=> Hash
     #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.profile_properties["ProfilePropertyKey"] #=> String
     #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.o_auth_2_properties.token_url #=> String
@@ -1613,6 +1629,11 @@ module Aws::Appflow
     #   resp.connector_configurations["ConnectorType"].logo_url #=> String
     #   resp.connector_configurations["ConnectorType"].registered_at #=> Time
     #   resp.connector_configurations["ConnectorType"].registered_by #=> String
+    #   resp.connector_configurations["ConnectorType"].supported_data_transfer_types #=> Array
+    #   resp.connector_configurations["ConnectorType"].supported_data_transfer_types[0] #=> String, one of "RECORD", "FILE"
+    #   resp.connector_configurations["ConnectorType"].supported_data_transfer_apis #=> Array
+    #   resp.connector_configurations["ConnectorType"].supported_data_transfer_apis[0].name #=> String
+    #   resp.connector_configurations["ConnectorType"].supported_data_transfer_apis[0].type #=> String, one of "SYNC", "ASYNC", "AUTOMATIC"
     #   resp.connectors #=> Array
     #   resp.connectors[0].connector_description #=> String
     #   resp.connectors[0].connector_name #=> String
@@ -1626,6 +1647,8 @@ module Aws::Appflow
     #   resp.connectors[0].connector_provisioning_type #=> String, one of "LAMBDA"
     #   resp.connectors[0].connector_modes #=> Array
     #   resp.connectors[0].connector_modes[0] #=> String
+    #   resp.connectors[0].supported_data_transfer_types #=> Array
+    #   resp.connectors[0].supported_data_transfer_types[0] #=> String, one of "RECORD", "FILE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/DescribeConnectors AWS API Documentation
@@ -1709,6 +1732,8 @@ module Aws::Appflow
     #   resp.source_flow_config.source_connector_properties.custom_connector.entity_name #=> String
     #   resp.source_flow_config.source_connector_properties.custom_connector.custom_properties #=> Hash
     #   resp.source_flow_config.source_connector_properties.custom_connector.custom_properties["CustomPropertyKey"] #=> String
+    #   resp.source_flow_config.source_connector_properties.custom_connector.data_transfer_api.name #=> String
+    #   resp.source_flow_config.source_connector_properties.custom_connector.data_transfer_api.type #=> String, one of "SYNC", "ASYNC", "AUTOMATIC"
     #   resp.source_flow_config.source_connector_properties.pardot.object #=> String
     #   resp.source_flow_config.incremental_pull_config.datetime_type_field_name #=> String
     #   resp.destination_flow_config_list #=> Array
@@ -2029,6 +2054,8 @@ module Aws::Appflow
     #   resp.connectors[0].connector_provisioning_type #=> String, one of "LAMBDA"
     #   resp.connectors[0].connector_modes #=> Array
     #   resp.connectors[0].connector_modes[0] #=> String
+    #   resp.connectors[0].supported_data_transfer_types #=> Array
+    #   resp.connectors[0].supported_data_transfer_types[0] #=> String, one of "RECORD", "FILE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ListConnectors AWS API Documentation
@@ -2191,6 +2218,96 @@ module Aws::Appflow
     # @param [Hash] params ({})
     def register_connector(params = {}, options = {})
       req = build_request(:register_connector, params)
+      req.send_request(options)
+    end
+
+    # Resets metadata about your connector entities that Amazon AppFlow
+    # stored in its cache. Use this action when you want Amazon AppFlow to
+    # return the latest information about the data that you have in a source
+    # application.
+    #
+    # Amazon AppFlow returns metadata about your entities when you use the
+    # ListConnectorEntities or DescribeConnectorEntities actions. Following
+    # these actions, Amazon AppFlow caches the metadata to reduce the number
+    # of API requests that it must send to the source application. Amazon
+    # AppFlow automatically resets the cache once every hour, but you can
+    # use this action when you want to get the latest metadata right away.
+    #
+    # @option params [String] :connector_profile_name
+    #   The name of the connector profile that you want to reset cached
+    #   metadata for.
+    #
+    #   You can omit this parameter if you're resetting the cache for any of
+    #   the following connectors: Amazon Connect, Amazon EventBridge, Amazon
+    #   Lookout for Metrics, Amazon S3, or Upsolver. If you're resetting the
+    #   cache for any other connector, you must include this parameter in your
+    #   request.
+    #
+    # @option params [String] :connector_type
+    #   The type of connector to reset cached metadata for.
+    #
+    #   You must include this parameter in your request if you're resetting
+    #   the cache for any of the following connectors: Amazon Connect, Amazon
+    #   EventBridge, Amazon Lookout for Metrics, Amazon S3, or Upsolver. If
+    #   you're resetting the cache for any other connector, you can omit this
+    #   parameter from your request.
+    #
+    # @option params [String] :connector_entity_name
+    #   Use this parameter if you want to reset cached metadata about the
+    #   details for an individual entity.
+    #
+    #   If you don't include this parameter in your request, Amazon AppFlow
+    #   only resets cached metadata about entity names, not entity details.
+    #
+    # @option params [String] :entities_path
+    #   Use this parameter only if you’re resetting the cached metadata about
+    #   a nested entity. Only some connectors support nested entities. A
+    #   nested entity is one that has another entity as a parent. To use this
+    #   parameter, specify the name of the parent entity.
+    #
+    #   To look up the parent-child relationship of entities, you can send a
+    #   ListConnectorEntities request that omits the entitiesPath parameter.
+    #   Amazon AppFlow will return a list of top-level entities. For each one,
+    #   it indicates whether the entity has nested entities. Then, in a
+    #   subsequent ListConnectorEntities request, you can specify a parent
+    #   entity name for the entitiesPath parameter. Amazon AppFlow will return
+    #   a list of the child entities for that parent.
+    #
+    # @option params [String] :api_version
+    #   The API version that you specified in the connector profile that
+    #   you’re resetting cached metadata for. You must use this parameter only
+    #   if the connector supports multiple API versions or if the connector
+    #   type is CustomConnector.
+    #
+    #   To look up how many versions a connector supports, use the
+    #   DescribeConnectors action. In the response, find the value that Amazon
+    #   AppFlow returns for the connectorVersion parameter.
+    #
+    #   To look up the connector type, use the DescribeConnectorProfiles
+    #   action. In the response, find the value that Amazon AppFlow returns
+    #   for the connectorType parameter.
+    #
+    #   To look up the API version that you specified in a connector profile,
+    #   use the DescribeConnectorProfiles action.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reset_connector_metadata_cache({
+    #     connector_profile_name: "ConnectorProfileName",
+    #     connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector, Pardot
+    #     connector_entity_name: "EntityName",
+    #     entities_path: "EntitiesPath",
+    #     api_version: "ApiVersion",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ResetConnectorMetadataCache AWS API Documentation
+    #
+    # @overload reset_connector_metadata_cache(params = {})
+    # @param [Hash] params ({})
+    def reset_connector_metadata_cache(params = {}, options = {})
+      req = build_request(:reset_connector_metadata_cache, params)
       req.send_request(options)
     end
 
@@ -2487,6 +2604,7 @@ module Aws::Appflow
     #             auth_code_url: "AuthCodeUrl", # required
     #             o_auth_scopes: ["OAuthScope"], # required
     #           },
+    #           disable_sso: false,
     #         },
     #         custom_connector: {
     #           profile_properties: {
@@ -2881,6 +2999,10 @@ module Aws::Appflow
     #           custom_properties: {
     #             "CustomPropertyKey" => "CustomPropertyValue",
     #           },
+    #           data_transfer_api: {
+    #             name: "DataTransferApiTypeName",
+    #             type: "SYNC", # accepts SYNC, ASYNC, AUTOMATIC
+    #           },
     #         },
     #         pardot: {
     #           object: "Object", # required
@@ -3095,7 +3217,7 @@ module Aws::Appflow
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

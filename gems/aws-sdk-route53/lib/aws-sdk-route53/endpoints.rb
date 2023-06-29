@@ -9,6 +9,7 @@
 
 
 module Aws::Route53
+  # @api private
   module Endpoints
 
     class ActivateKeySigningKey

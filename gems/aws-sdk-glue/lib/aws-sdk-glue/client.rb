@@ -275,6 +275,11 @@ module Aws::Glue
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -912,6 +917,8 @@ module Aws::Glue
     #   resp.results[0].rule_results[0].description #=> String
     #   resp.results[0].rule_results[0].evaluation_message #=> String
     #   resp.results[0].rule_results[0].result #=> String, one of "PASS", "FAIL", "ERROR"
+    #   resp.results[0].rule_results[0].evaluated_metrics #=> Hash
+    #   resp.results[0].rule_results[0].evaluated_metrics["NameString"] #=> Float
     #   resp.results_not_found #=> Array
     #   resp.results_not_found[0] #=> String
     #
@@ -958,7 +965,7 @@ module Aws::Glue
     #   resp.dev_endpoints[0].zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.dev_endpoints[0].public_address #=> String
     #   resp.dev_endpoints[0].status #=> String
-    #   resp.dev_endpoints[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.dev_endpoints[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
     #   resp.dev_endpoints[0].glue_version #=> String
     #   resp.dev_endpoints[0].number_of_workers #=> Integer
     #   resp.dev_endpoints[0].number_of_nodes #=> Integer
@@ -1022,6 +1029,7 @@ module Aws::Glue
     #   resp.jobs[0].command.name #=> String
     #   resp.jobs[0].command.script_location #=> String
     #   resp.jobs[0].command.python_version #=> String
+    #   resp.jobs[0].command.runtime #=> String
     #   resp.jobs[0].default_arguments #=> Hash
     #   resp.jobs[0].default_arguments["GenericString"] #=> String
     #   resp.jobs[0].non_overridable_arguments #=> Hash
@@ -1032,7 +1040,7 @@ module Aws::Glue
     #   resp.jobs[0].allocated_capacity #=> Integer
     #   resp.jobs[0].timeout #=> Integer
     #   resp.jobs[0].max_capacity #=> Float
-    #   resp.jobs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.jobs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
     #   resp.jobs[0].number_of_workers #=> Integer
     #   resp.jobs[0].security_configuration #=> String
     #   resp.jobs[0].notification_property.notify_delay_after #=> Integer
@@ -1339,7 +1347,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.stream_name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.classification #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.delimiter #=> String
-    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest", "timestamp"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_fetch_time_in_ms #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_fetch_records_per_shard #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_record_per_read #=> Integer
@@ -1355,6 +1363,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.role_session_name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.add_record_timestamp #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.emit_consumer_lag_metrics #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.starting_timestamp #=> Time
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.data_preview_options.polling_time #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.data_preview_options.record_polling_limit #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.name #=> String
@@ -1376,6 +1385,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.include_headers #=> Boolean
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.add_record_timestamp #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.emit_consumer_lag_metrics #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.starting_timestamp #=> Time
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.window_size #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.detect_schema #=> Boolean
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.data_preview_options.polling_time #=> Integer
@@ -1389,7 +1399,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.stream_name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.classification #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.delimiter #=> String
-    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest", "timestamp"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_fetch_time_in_ms #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_fetch_records_per_shard #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_record_per_read #=> Integer
@@ -1405,6 +1415,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.role_session_name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.add_record_timestamp #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.emit_consumer_lag_metrics #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.starting_timestamp #=> Time
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.data_preview_options.polling_time #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.data_preview_options.record_polling_limit #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.name #=> String
@@ -1430,6 +1441,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.include_headers #=> Boolean
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.add_record_timestamp #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.emit_consumer_lag_metrics #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.starting_timestamp #=> Time
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.data_preview_options.polling_time #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.data_preview_options.record_polling_limit #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_null_fields.name #=> String
@@ -1543,6 +1555,10 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.function_name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.path #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.version #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.output_schemas[0].columns[0].type #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.inputs #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.inputs[0] #=> String
@@ -1675,6 +1691,115 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.schema_change_policy.table #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.schema_change_policy.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.access_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.source_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.connection.value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.connection.label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.connection.description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.schema.value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.schema.label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.schema.description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.table.value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.table.label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.table.description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.catalog_database.value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.catalog_database.label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.catalog_database.description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.catalog_table.value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.catalog_table.label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.catalog_table.description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.catalog_redshift_schema #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.catalog_redshift_table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.temp_dir #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.iam_role.value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.iam_role.label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.iam_role.description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.advanced_options #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.advanced_options[0].key #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.advanced_options[0].value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.sample_query #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.pre_action #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.post_action #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.action #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.table_prefix #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.upsert #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.merge_action #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.merge_when_matched #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.merge_when_not_matched #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.merge_clause #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.crawler_connection #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.table_schema #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.table_schema[0].value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.table_schema[0].label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.table_schema[0].description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.staging_table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.selected_columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.selected_columns[0].value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.selected_columns[0].label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.selected_columns[0].description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.access_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.source_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.connection.value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.connection.label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.connection.description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.schema.value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.schema.label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.schema.description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.table.value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.table.label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.table.description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.catalog_database.value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.catalog_database.label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.catalog_database.description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.catalog_table.value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.catalog_table.label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.catalog_table.description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.catalog_redshift_schema #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.catalog_redshift_table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.temp_dir #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.iam_role.value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.iam_role.label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.iam_role.description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.advanced_options #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.advanced_options[0].key #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.advanced_options[0].value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.sample_query #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.pre_action #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.post_action #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.action #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.table_prefix #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.upsert #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.merge_action #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.merge_when_matched #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.merge_when_not_matched #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.merge_clause #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.crawler_connection #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.table_schema #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.table_schema[0].value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.table_schema[0].label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.table_schema[0].description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.staging_table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.selected_columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.selected_columns[0].value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.selected_columns[0].label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.selected_columns[0].description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_data_sources #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_data_sources["NodeName"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.ruleset #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.publishing_options.evaluation_context #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.publishing_options.results_s3_prefix #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.publishing_options.cloud_watch_metrics_enabled #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.publishing_options.results_publishing_enabled #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_options["AdditionalOptionKeys"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.stop_job_on_failure_options.stop_job_on_failure_timing #=> String, one of "Immediate", "AfterDataLoad"
     #   resp.jobs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
     #   resp.jobs[0].source_control_details.repository #=> String
@@ -1952,7 +2077,7 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
@@ -2020,7 +2145,7 @@ module Aws::Glue
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
@@ -2697,6 +2822,9 @@ module Aws::Glue
     #
     #   If no context words are passed only a regular expression is checked.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A list of tags applied to the custom entity type.
+    #
     # @return [Types::CreateCustomEntityTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCustomEntityTypeResponse#name #name} => String
@@ -2707,6 +2835,9 @@ module Aws::Glue
     #     name: "NameString", # required
     #     regex_string: "NameString", # required
     #     context_words: ["NameString"],
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2765,6 +2896,7 @@ module Aws::Glue
     #     target_table: {
     #       table_name: "NameString", # required
     #       database_name: "NameString", # required
+    #       catalog_id: "NameString",
     #     },
     #     client_token: "HashString",
     #   })
@@ -2818,6 +2950,7 @@ module Aws::Glue
     #       target_database: {
     #         catalog_id: "CatalogIdString",
     #         database_name: "NameString",
+    #         region: "NameString",
     #       },
     #       federated_database: {
     #         identifier: "FederationIdentifier",
@@ -2990,7 +3123,7 @@ module Aws::Glue
     #     public_key: "GenericString",
     #     public_keys: ["GenericString"],
     #     number_of_nodes: 1,
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X, G.4X, G.8X, Z.2X
     #     glue_version: "GlueVersionString",
     #     number_of_workers: 1,
     #     extra_python_libs_s3_path: "GenericString",
@@ -3015,7 +3148,7 @@ module Aws::Glue
     #   resp.yarn_endpoint_address #=> String
     #   resp.zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.number_of_nodes #=> Integer
-    #   resp.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
     #   resp.glue_version #=> String
     #   resp.number_of_workers #=> Integer
     #   resp.availability_zone #=> String
@@ -3061,7 +3194,8 @@ module Aws::Glue
     #   The `JobCommand` that runs this job.
     #
     # @option params [Hash<String,String>] :default_arguments
-    #   The default arguments for this job.
+    #   The default arguments for every run of this job, specified as
+    #   name-value pairs.
     #
     #   You can specify arguments here that your own job-execution script
     #   consumes, as well as arguments that Glue itself consumes.
@@ -3075,17 +3209,23 @@ module Aws::Glue
     #   arguments, see the [Calling Glue APIs in Python][1] topic in the
     #   developer guide.
     #
-    #   For information about the key-value pairs that Glue consumes to set up
-    #   your job, see the [Special Parameters Used by Glue][2] topic in the
+    #   For information about the arguments you can provide to this field when
+    #   configuring Spark jobs, see the [Special Parameters Used by Glue][2]
+    #   topic in the developer guide.
+    #
+    #   For information about the arguments you can provide to this field when
+    #   configuring Ray jobs, see [Using job parameters in Ray jobs][3] in the
     #   developer guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
     #   [2]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
+    #   [3]: https://docs.aws.amazon.com/glue/latest/dg/author-job-ray-job-parameters.html
     #
     # @option params [Hash<String,String>] :non_overridable_arguments
-    #   Non-overridable arguments for this job, specified as name-value pairs.
+    #   Arguments for this job that are not overridden when providing job
+    #   arguments in a job run, specified as name-value pairs.
     #
     # @option params [Types::ConnectionsList] :connections
     #   The connections used for this job.
@@ -3116,12 +3256,17 @@ module Aws::Glue
     #   the number of Glue data processing units (DPUs) that can be allocated
     #   when this job runs. A DPU is a relative measure of processing power
     #   that consists of 4 vCPUs of compute capacity and 16 GB of memory. For
-    #   more information, see the [Glue pricing page][1].
+    #   more information, see the [ Glue pricing page][1].
     #
-    #   Do not set `Max Capacity` if using `WorkerType` and `NumberOfWorkers`.
+    #   For Glue version 2.0+ jobs, you cannot specify a `Maximum capacity`.
+    #   Instead, you should specify a `Worker type` and the `Number of
+    #   workers`.
+    #
+    #   Do not set `MaxCapacity` if using `WorkerType` and `NumberOfWorkers`.
     #
     #   The value that can be allocated for `MaxCapacity` depends on whether
-    #   you are running a Python shell job or an Apache Spark ETL job:
+    #   you are running a Python shell job, an Apache Spark ETL job, or an
+    #   Apache Spark streaming ETL job:
     #
     #   * When you specify a Python shell job
     #     (`JobCommand.Name`="pythonshell"), you can allocate either 0.0625
@@ -3129,13 +3274,9 @@ module Aws::Glue
     #
     #   * When you specify an Apache Spark ETL job
     #     (`JobCommand.Name`="glueetl") or Apache Spark streaming ETL job
-    #     (`JobCommand.Name`="gluestreaming"), you can allocate a minimum of
-    #     2 DPUs. The default is 10 DPUs. This job type cannot have a
+    #     (`JobCommand.Name`="gluestreaming"), you can allocate from 2 to
+    #     100 DPUs. The default is 10 DPUs. This job type cannot have a
     #     fractional DPU allocation.
-    #
-    #   For Glue version 2.0 jobs, you cannot instead specify a `Maximum
-    #   capacity`. Instead, you should specify a `Worker type` and the `Number
-    #   of workers`.
     #
     #
     #
@@ -3158,9 +3299,13 @@ module Aws::Glue
     #   Specifies configuration properties of a job notification.
     #
     # @option params [String] :glue_version
-    #   Glue version determines the versions of Apache Spark and Python that
-    #   Glue supports. The Python version indicates the version supported for
-    #   jobs of type Spark.
+    #   In Spark jobs, `GlueVersion` determines the versions of Apache Spark
+    #   and Python that Glue available in a job. The Python version indicates
+    #   the version supported for jobs of type Spark.
+    #
+    #   Ray jobs should set `GlueVersion` to `4.0` or greater. However, the
+    #   versions of Ray, Python and additional libraries available in your Ray
+    #   job are determined by the `Runtime` parameter of the Job command.
     #
     #   For more information about the available Glue versions and
     #   corresponding Spark and Python versions, see [Glue version][1] in the
@@ -3179,7 +3324,8 @@ module Aws::Glue
     #
     # @option params [String] :worker_type
     #   The type of predefined worker that is allocated when a job runs.
-    #   Accepts a value of Standard, G.1X, G.2X, or G.025X.
+    #   Accepts a value of Standard, G.1X, G.2X, or G.025X for Spark jobs.
+    #   Accepts the value Z.2X for Ray jobs.
     #
     #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
     #     of memory and a 50GB disk, and 2 executors per worker.
@@ -3196,6 +3342,10 @@ module Aws::Glue
     #     4 GB of memory, 64 GB disk), and provides 1 executor per worker. We
     #     recommend this worker type for low volume streaming jobs. This
     #     worker type is only available for Glue version 3.0 streaming jobs.
+    #
+    #   * For the `Z.2X` worker type, each worker maps to 2 M-DPU (8vCPU, 64
+    #     GB of m emory, 128 GB disk), and provides up to 8 Ray workers based
+    #     on the autoscaler.
     #
     # @option params [Hash<String,Types::CodeGenConfigurationNode>] :code_gen_configuration_nodes
     #   The representation of a directed acyclic graph on which both the Glue
@@ -3220,965 +3370,6 @@ module Aws::Glue
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateJobResponse#name #name} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.create_job({
-    #     name: "NameString", # required
-    #     description: "DescriptionString",
-    #     log_uri: "UriString",
-    #     role: "RoleString", # required
-    #     execution_property: {
-    #       max_concurrent_runs: 1,
-    #     },
-    #     command: { # required
-    #       name: "GenericString",
-    #       script_location: "ScriptLocationString",
-    #       python_version: "PythonVersionString",
-    #     },
-    #     default_arguments: {
-    #       "GenericString" => "GenericString",
-    #     },
-    #     non_overridable_arguments: {
-    #       "GenericString" => "GenericString",
-    #     },
-    #     connections: {
-    #       connections: ["GenericString"],
-    #     },
-    #     max_retries: 1,
-    #     allocated_capacity: 1,
-    #     timeout: 1,
-    #     max_capacity: 1.0,
-    #     security_configuration: "NameString",
-    #     tags: {
-    #       "TagKey" => "TagValue",
-    #     },
-    #     notification_property: {
-    #       notify_delay_after: 1,
-    #     },
-    #     glue_version: "GlueVersionString",
-    #     number_of_workers: 1,
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
-    #     code_gen_configuration_nodes: {
-    #       "NodeId" => {
-    #         athena_connector_source: {
-    #           name: "NodeName", # required
-    #           connection_name: "EnclosedInStringProperty", # required
-    #           connector_name: "EnclosedInStringProperty", # required
-    #           connection_type: "EnclosedInStringProperty", # required
-    #           connection_table: "EnclosedInStringPropertyWithQuote",
-    #           schema_name: "EnclosedInStringProperty", # required
-    #           output_schemas: [
-    #             {
-    #               columns: [
-    #                 {
-    #                   name: "GlueStudioColumnNameString", # required
-    #                   type: "ColumnTypeString",
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         jdbc_connector_source: {
-    #           name: "NodeName", # required
-    #           connection_name: "EnclosedInStringProperty", # required
-    #           connector_name: "EnclosedInStringProperty", # required
-    #           connection_type: "EnclosedInStringProperty", # required
-    #           additional_options: {
-    #             filter_predicate: "EnclosedInStringProperty",
-    #             partition_column: "EnclosedInStringProperty",
-    #             lower_bound: 1,
-    #             upper_bound: 1,
-    #             num_partitions: 1,
-    #             job_bookmark_keys: ["EnclosedInStringProperty"],
-    #             job_bookmark_keys_sort_order: "EnclosedInStringProperty",
-    #             data_type_mapping: {
-    #               "ARRAY" => "DATE", # accepts DATE, STRING, TIMESTAMP, INT, FLOAT, LONG, BIGDECIMAL, BYTE, SHORT, DOUBLE
-    #             },
-    #           },
-    #           connection_table: "EnclosedInStringPropertyWithQuote",
-    #           query: "SqlQuery",
-    #           output_schemas: [
-    #             {
-    #               columns: [
-    #                 {
-    #                   name: "GlueStudioColumnNameString", # required
-    #                   type: "ColumnTypeString",
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         spark_connector_source: {
-    #           name: "NodeName", # required
-    #           connection_name: "EnclosedInStringProperty", # required
-    #           connector_name: "EnclosedInStringProperty", # required
-    #           connection_type: "EnclosedInStringProperty", # required
-    #           additional_options: {
-    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
-    #           },
-    #           output_schemas: [
-    #             {
-    #               columns: [
-    #                 {
-    #                   name: "GlueStudioColumnNameString", # required
-    #                   type: "ColumnTypeString",
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         catalog_source: {
-    #           name: "NodeName", # required
-    #           database: "EnclosedInStringProperty", # required
-    #           table: "EnclosedInStringProperty", # required
-    #         },
-    #         redshift_source: {
-    #           name: "NodeName", # required
-    #           database: "EnclosedInStringProperty", # required
-    #           table: "EnclosedInStringProperty", # required
-    #           redshift_tmp_dir: "EnclosedInStringProperty",
-    #           tmp_dir_iam_role: "EnclosedInStringProperty",
-    #         },
-    #         s3_catalog_source: {
-    #           name: "NodeName", # required
-    #           database: "EnclosedInStringProperty", # required
-    #           table: "EnclosedInStringProperty", # required
-    #           partition_predicate: "EnclosedInStringProperty",
-    #           additional_options: {
-    #             bounded_size: 1,
-    #             bounded_files: 1,
-    #           },
-    #         },
-    #         s3_csv_source: {
-    #           name: "NodeName", # required
-    #           paths: ["EnclosedInStringProperty"], # required
-    #           compression_type: "gzip", # accepts gzip, bzip2
-    #           exclusions: ["EnclosedInStringProperty"],
-    #           group_size: "EnclosedInStringProperty",
-    #           group_files: "EnclosedInStringProperty",
-    #           recurse: false,
-    #           max_band: 1,
-    #           max_files_in_band: 1,
-    #           additional_options: {
-    #             bounded_size: 1,
-    #             bounded_files: 1,
-    #             enable_sample_path: false,
-    #             sample_path: "EnclosedInStringProperty",
-    #           },
-    #           separator: "comma", # required, accepts comma, ctrla, pipe, semicolon, tab
-    #           escaper: "EnclosedInStringPropertyWithQuote",
-    #           quote_char: "quote", # required, accepts quote, quillemet, single_quote, disabled
-    #           multiline: false,
-    #           with_header: false,
-    #           write_header: false,
-    #           skip_first: false,
-    #           optimize_performance: false,
-    #           output_schemas: [
-    #             {
-    #               columns: [
-    #                 {
-    #                   name: "GlueStudioColumnNameString", # required
-    #                   type: "ColumnTypeString",
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         s3_json_source: {
-    #           name: "NodeName", # required
-    #           paths: ["EnclosedInStringProperty"], # required
-    #           compression_type: "gzip", # accepts gzip, bzip2
-    #           exclusions: ["EnclosedInStringProperty"],
-    #           group_size: "EnclosedInStringProperty",
-    #           group_files: "EnclosedInStringProperty",
-    #           recurse: false,
-    #           max_band: 1,
-    #           max_files_in_band: 1,
-    #           additional_options: {
-    #             bounded_size: 1,
-    #             bounded_files: 1,
-    #             enable_sample_path: false,
-    #             sample_path: "EnclosedInStringProperty",
-    #           },
-    #           json_path: "EnclosedInStringProperty",
-    #           multiline: false,
-    #           output_schemas: [
-    #             {
-    #               columns: [
-    #                 {
-    #                   name: "GlueStudioColumnNameString", # required
-    #                   type: "ColumnTypeString",
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         s3_parquet_source: {
-    #           name: "NodeName", # required
-    #           paths: ["EnclosedInStringProperty"], # required
-    #           compression_type: "snappy", # accepts snappy, lzo, gzip, uncompressed, none
-    #           exclusions: ["EnclosedInStringProperty"],
-    #           group_size: "EnclosedInStringProperty",
-    #           group_files: "EnclosedInStringProperty",
-    #           recurse: false,
-    #           max_band: 1,
-    #           max_files_in_band: 1,
-    #           additional_options: {
-    #             bounded_size: 1,
-    #             bounded_files: 1,
-    #             enable_sample_path: false,
-    #             sample_path: "EnclosedInStringProperty",
-    #           },
-    #           output_schemas: [
-    #             {
-    #               columns: [
-    #                 {
-    #                   name: "GlueStudioColumnNameString", # required
-    #                   type: "ColumnTypeString",
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         relational_catalog_source: {
-    #           name: "NodeName", # required
-    #           database: "EnclosedInStringProperty", # required
-    #           table: "EnclosedInStringProperty", # required
-    #         },
-    #         dynamo_db_catalog_source: {
-    #           name: "NodeName", # required
-    #           database: "EnclosedInStringProperty", # required
-    #           table: "EnclosedInStringProperty", # required
-    #         },
-    #         jdbc_connector_target: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           connection_name: "EnclosedInStringProperty", # required
-    #           connection_table: "EnclosedInStringPropertyWithQuote", # required
-    #           connector_name: "EnclosedInStringProperty", # required
-    #           connection_type: "EnclosedInStringProperty", # required
-    #           additional_options: {
-    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
-    #           },
-    #           output_schemas: [
-    #             {
-    #               columns: [
-    #                 {
-    #                   name: "GlueStudioColumnNameString", # required
-    #                   type: "ColumnTypeString",
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         spark_connector_target: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           connection_name: "EnclosedInStringProperty", # required
-    #           connector_name: "EnclosedInStringProperty", # required
-    #           connection_type: "EnclosedInStringProperty", # required
-    #           additional_options: {
-    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
-    #           },
-    #           output_schemas: [
-    #             {
-    #               columns: [
-    #                 {
-    #                   name: "GlueStudioColumnNameString", # required
-    #                   type: "ColumnTypeString",
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         catalog_target: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           database: "EnclosedInStringProperty", # required
-    #           table: "EnclosedInStringProperty", # required
-    #         },
-    #         redshift_target: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           database: "EnclosedInStringProperty", # required
-    #           table: "EnclosedInStringProperty", # required
-    #           redshift_tmp_dir: "EnclosedInStringProperty",
-    #           tmp_dir_iam_role: "EnclosedInStringProperty",
-    #           upsert_redshift_options: {
-    #             table_location: "EnclosedInStringProperty",
-    #             connection_name: "EnclosedInStringProperty",
-    #             upsert_keys: ["EnclosedInStringProperty"],
-    #           },
-    #         },
-    #         s3_catalog_target: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           partition_keys: [
-    #             ["EnclosedInStringProperty"],
-    #           ],
-    #           table: "EnclosedInStringProperty", # required
-    #           database: "EnclosedInStringProperty", # required
-    #           schema_change_policy: {
-    #             enable_update_catalog: false,
-    #             update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
-    #           },
-    #         },
-    #         s3_glue_parquet_target: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           partition_keys: [
-    #             ["EnclosedInStringProperty"],
-    #           ],
-    #           path: "EnclosedInStringProperty", # required
-    #           compression: "snappy", # accepts snappy, lzo, gzip, uncompressed, none
-    #           schema_change_policy: {
-    #             enable_update_catalog: false,
-    #             update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
-    #             table: "EnclosedInStringProperty",
-    #             database: "EnclosedInStringProperty",
-    #           },
-    #         },
-    #         s3_direct_target: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           partition_keys: [
-    #             ["EnclosedInStringProperty"],
-    #           ],
-    #           path: "EnclosedInStringProperty", # required
-    #           compression: "EnclosedInStringProperty",
-    #           format: "json", # required, accepts json, csv, avro, orc, parquet, hudi, delta
-    #           schema_change_policy: {
-    #             enable_update_catalog: false,
-    #             update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
-    #             table: "EnclosedInStringProperty",
-    #             database: "EnclosedInStringProperty",
-    #           },
-    #         },
-    #         apply_mapping: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           mapping: [ # required
-    #             {
-    #               to_key: "EnclosedInStringProperty",
-    #               from_path: ["EnclosedInStringProperty"],
-    #               from_type: "EnclosedInStringProperty",
-    #               to_type: "EnclosedInStringProperty",
-    #               dropped: false,
-    #               children: {
-    #                 # recursive Mappings
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         select_fields: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           paths: [ # required
-    #             ["EnclosedInStringProperty"],
-    #           ],
-    #         },
-    #         drop_fields: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           paths: [ # required
-    #             ["EnclosedInStringProperty"],
-    #           ],
-    #         },
-    #         rename_field: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           source_path: ["EnclosedInStringProperty"], # required
-    #           target_path: ["EnclosedInStringProperty"], # required
-    #         },
-    #         spigot: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           path: "EnclosedInStringProperty", # required
-    #           topk: 1,
-    #           prob: 1.0,
-    #         },
-    #         join: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           join_type: "equijoin", # required, accepts equijoin, left, right, outer, leftsemi, leftanti
-    #           columns: [ # required
-    #             {
-    #               from: "EnclosedInStringProperty", # required
-    #               keys: [ # required
-    #                 ["EnclosedInStringProperty"],
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         split_fields: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           paths: [ # required
-    #             ["EnclosedInStringProperty"],
-    #           ],
-    #         },
-    #         select_from_collection: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           index: 1, # required
-    #         },
-    #         fill_missing_values: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           imputed_path: "EnclosedInStringProperty", # required
-    #           filled_path: "EnclosedInStringProperty",
-    #         },
-    #         filter: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           logical_operator: "AND", # required, accepts AND, OR
-    #           filters: [ # required
-    #             {
-    #               operation: "EQ", # required, accepts EQ, LT, GT, LTE, GTE, REGEX, ISNULL
-    #               negated: false,
-    #               values: [ # required
-    #                 {
-    #                   type: "COLUMNEXTRACTED", # required, accepts COLUMNEXTRACTED, CONSTANT
-    #                   value: ["EnclosedInStringProperty"], # required
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         custom_code: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           code: "ExtendedString", # required
-    #           class_name: "EnclosedInStringProperty", # required
-    #           output_schemas: [
-    #             {
-    #               columns: [
-    #                 {
-    #                   name: "GlueStudioColumnNameString", # required
-    #                   type: "ColumnTypeString",
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         spark_sql: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           sql_query: "SqlQuery", # required
-    #           sql_aliases: [ # required
-    #             {
-    #               from: "NodeId", # required
-    #               alias: "EnclosedInStringPropertyWithQuote", # required
-    #             },
-    #           ],
-    #           output_schemas: [
-    #             {
-    #               columns: [
-    #                 {
-    #                   name: "GlueStudioColumnNameString", # required
-    #                   type: "ColumnTypeString",
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         direct_kinesis_source: {
-    #           name: "NodeName", # required
-    #           window_size: 1,
-    #           detect_schema: false,
-    #           streaming_options: {
-    #             endpoint_url: "EnclosedInStringProperty",
-    #             stream_name: "EnclosedInStringProperty",
-    #             classification: "EnclosedInStringProperty",
-    #             delimiter: "EnclosedInStringProperty",
-    #             starting_position: "latest", # accepts latest, trim_horizon, earliest
-    #             max_fetch_time_in_ms: 1,
-    #             max_fetch_records_per_shard: 1,
-    #             max_record_per_read: 1,
-    #             add_idle_time_between_reads: false,
-    #             idle_time_between_reads_in_ms: 1,
-    #             describe_shard_interval: 1,
-    #             num_retries: 1,
-    #             retry_interval_ms: 1,
-    #             max_retry_interval_ms: 1,
-    #             avoid_empty_batches: false,
-    #             stream_arn: "EnclosedInStringProperty",
-    #             role_arn: "EnclosedInStringProperty",
-    #             role_session_name: "EnclosedInStringProperty",
-    #             add_record_timestamp: "EnclosedInStringProperty",
-    #             emit_consumer_lag_metrics: "EnclosedInStringProperty",
-    #           },
-    #           data_preview_options: {
-    #             polling_time: 1,
-    #             record_polling_limit: 1,
-    #           },
-    #         },
-    #         direct_kafka_source: {
-    #           name: "NodeName", # required
-    #           streaming_options: {
-    #             bootstrap_servers: "EnclosedInStringProperty",
-    #             security_protocol: "EnclosedInStringProperty",
-    #             connection_name: "EnclosedInStringProperty",
-    #             topic_name: "EnclosedInStringProperty",
-    #             assign: "EnclosedInStringProperty",
-    #             subscribe_pattern: "EnclosedInStringProperty",
-    #             classification: "EnclosedInStringProperty",
-    #             delimiter: "EnclosedInStringProperty",
-    #             starting_offsets: "EnclosedInStringProperty",
-    #             ending_offsets: "EnclosedInStringProperty",
-    #             poll_timeout_ms: 1,
-    #             num_retries: 1,
-    #             retry_interval_ms: 1,
-    #             max_offsets_per_trigger: 1,
-    #             min_partitions: 1,
-    #             include_headers: false,
-    #             add_record_timestamp: "EnclosedInStringProperty",
-    #             emit_consumer_lag_metrics: "EnclosedInStringProperty",
-    #           },
-    #           window_size: 1,
-    #           detect_schema: false,
-    #           data_preview_options: {
-    #             polling_time: 1,
-    #             record_polling_limit: 1,
-    #           },
-    #         },
-    #         catalog_kinesis_source: {
-    #           name: "NodeName", # required
-    #           window_size: 1,
-    #           detect_schema: false,
-    #           table: "EnclosedInStringProperty", # required
-    #           database: "EnclosedInStringProperty", # required
-    #           streaming_options: {
-    #             endpoint_url: "EnclosedInStringProperty",
-    #             stream_name: "EnclosedInStringProperty",
-    #             classification: "EnclosedInStringProperty",
-    #             delimiter: "EnclosedInStringProperty",
-    #             starting_position: "latest", # accepts latest, trim_horizon, earliest
-    #             max_fetch_time_in_ms: 1,
-    #             max_fetch_records_per_shard: 1,
-    #             max_record_per_read: 1,
-    #             add_idle_time_between_reads: false,
-    #             idle_time_between_reads_in_ms: 1,
-    #             describe_shard_interval: 1,
-    #             num_retries: 1,
-    #             retry_interval_ms: 1,
-    #             max_retry_interval_ms: 1,
-    #             avoid_empty_batches: false,
-    #             stream_arn: "EnclosedInStringProperty",
-    #             role_arn: "EnclosedInStringProperty",
-    #             role_session_name: "EnclosedInStringProperty",
-    #             add_record_timestamp: "EnclosedInStringProperty",
-    #             emit_consumer_lag_metrics: "EnclosedInStringProperty",
-    #           },
-    #           data_preview_options: {
-    #             polling_time: 1,
-    #             record_polling_limit: 1,
-    #           },
-    #         },
-    #         catalog_kafka_source: {
-    #           name: "NodeName", # required
-    #           window_size: 1,
-    #           detect_schema: false,
-    #           table: "EnclosedInStringProperty", # required
-    #           database: "EnclosedInStringProperty", # required
-    #           streaming_options: {
-    #             bootstrap_servers: "EnclosedInStringProperty",
-    #             security_protocol: "EnclosedInStringProperty",
-    #             connection_name: "EnclosedInStringProperty",
-    #             topic_name: "EnclosedInStringProperty",
-    #             assign: "EnclosedInStringProperty",
-    #             subscribe_pattern: "EnclosedInStringProperty",
-    #             classification: "EnclosedInStringProperty",
-    #             delimiter: "EnclosedInStringProperty",
-    #             starting_offsets: "EnclosedInStringProperty",
-    #             ending_offsets: "EnclosedInStringProperty",
-    #             poll_timeout_ms: 1,
-    #             num_retries: 1,
-    #             retry_interval_ms: 1,
-    #             max_offsets_per_trigger: 1,
-    #             min_partitions: 1,
-    #             include_headers: false,
-    #             add_record_timestamp: "EnclosedInStringProperty",
-    #             emit_consumer_lag_metrics: "EnclosedInStringProperty",
-    #           },
-    #           data_preview_options: {
-    #             polling_time: 1,
-    #             record_polling_limit: 1,
-    #           },
-    #         },
-    #         drop_null_fields: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           null_check_box_list: {
-    #             is_empty: false,
-    #             is_null_string: false,
-    #             is_neg_one: false,
-    #           },
-    #           null_text_list: [
-    #             {
-    #               value: "EnclosedInStringProperty", # required
-    #               datatype: { # required
-    #                 id: "GenericLimitedString", # required
-    #                 label: "GenericLimitedString", # required
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         merge: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           source: "NodeId", # required
-    #           primary_keys: [ # required
-    #             ["EnclosedInStringProperty"],
-    #           ],
-    #         },
-    #         union: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           union_type: "ALL", # required, accepts ALL, DISTINCT
-    #         },
-    #         pii_detection: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           pii_type: "RowAudit", # required, accepts RowAudit, RowMasking, ColumnAudit, ColumnMasking
-    #           entity_types_to_detect: ["EnclosedInStringProperty"], # required
-    #           output_column_name: "EnclosedInStringProperty",
-    #           sample_fraction: 1.0,
-    #           threshold_fraction: 1.0,
-    #           mask_value: "MaskValue",
-    #         },
-    #         aggregate: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           groups: [ # required
-    #             ["EnclosedInStringProperty"],
-    #           ],
-    #           aggs: [ # required
-    #             {
-    #               column: ["EnclosedInStringProperty"], # required
-    #               agg_func: "avg", # required, accepts avg, countDistinct, count, first, last, kurtosis, max, min, skewness, stddev_samp, stddev_pop, sum, sumDistinct, var_samp, var_pop
-    #             },
-    #           ],
-    #         },
-    #         drop_duplicates: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           columns: [
-    #             ["GenericLimitedString"],
-    #           ],
-    #         },
-    #         governed_catalog_target: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           partition_keys: [
-    #             ["EnclosedInStringProperty"],
-    #           ],
-    #           table: "EnclosedInStringProperty", # required
-    #           database: "EnclosedInStringProperty", # required
-    #           schema_change_policy: {
-    #             enable_update_catalog: false,
-    #             update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
-    #           },
-    #         },
-    #         governed_catalog_source: {
-    #           name: "NodeName", # required
-    #           database: "EnclosedInStringProperty", # required
-    #           table: "EnclosedInStringProperty", # required
-    #           partition_predicate: "EnclosedInStringProperty",
-    #           additional_options: {
-    #             bounded_size: 1,
-    #             bounded_files: 1,
-    #           },
-    #         },
-    #         microsoft_sql_server_catalog_source: {
-    #           name: "NodeName", # required
-    #           database: "EnclosedInStringProperty", # required
-    #           table: "EnclosedInStringProperty", # required
-    #         },
-    #         my_sql_catalog_source: {
-    #           name: "NodeName", # required
-    #           database: "EnclosedInStringProperty", # required
-    #           table: "EnclosedInStringProperty", # required
-    #         },
-    #         oracle_sql_catalog_source: {
-    #           name: "NodeName", # required
-    #           database: "EnclosedInStringProperty", # required
-    #           table: "EnclosedInStringProperty", # required
-    #         },
-    #         postgre_sql_catalog_source: {
-    #           name: "NodeName", # required
-    #           database: "EnclosedInStringProperty", # required
-    #           table: "EnclosedInStringProperty", # required
-    #         },
-    #         microsoft_sql_server_catalog_target: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           database: "EnclosedInStringProperty", # required
-    #           table: "EnclosedInStringProperty", # required
-    #         },
-    #         my_sql_catalog_target: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           database: "EnclosedInStringProperty", # required
-    #           table: "EnclosedInStringProperty", # required
-    #         },
-    #         oracle_sql_catalog_target: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           database: "EnclosedInStringProperty", # required
-    #           table: "EnclosedInStringProperty", # required
-    #         },
-    #         postgre_sql_catalog_target: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           database: "EnclosedInStringProperty", # required
-    #           table: "EnclosedInStringProperty", # required
-    #         },
-    #         dynamic_transform: {
-    #           name: "EnclosedInStringProperty", # required
-    #           transform_name: "EnclosedInStringProperty", # required
-    #           inputs: ["NodeId"], # required
-    #           parameters: [
-    #             {
-    #               name: "EnclosedInStringProperty", # required
-    #               type: "str", # required, accepts str, int, float, complex, bool, list, null
-    #               validation_rule: "EnclosedInStringProperty",
-    #               validation_message: "EnclosedInStringProperty",
-    #               value: ["EnclosedInStringProperty"],
-    #               list_type: "str", # accepts str, int, float, complex, bool, list, null
-    #               is_optional: false,
-    #             },
-    #           ],
-    #           function_name: "EnclosedInStringProperty", # required
-    #           path: "EnclosedInStringProperty", # required
-    #           version: "EnclosedInStringProperty",
-    #         },
-    #         evaluate_data_quality: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           ruleset: "DQDLString", # required
-    #           output: "PrimaryInput", # accepts PrimaryInput, EvaluationResults
-    #           publishing_options: {
-    #             evaluation_context: "GenericLimitedString",
-    #             results_s3_prefix: "EnclosedInStringProperty",
-    #             cloud_watch_metrics_enabled: false,
-    #             results_publishing_enabled: false,
-    #           },
-    #           stop_job_on_failure_options: {
-    #             stop_job_on_failure_timing: "Immediate", # accepts Immediate, AfterDataLoad
-    #           },
-    #         },
-    #         s3_catalog_hudi_source: {
-    #           name: "NodeName", # required
-    #           database: "EnclosedInStringProperty", # required
-    #           table: "EnclosedInStringProperty", # required
-    #           additional_hudi_options: {
-    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
-    #           },
-    #           output_schemas: [
-    #             {
-    #               columns: [
-    #                 {
-    #                   name: "GlueStudioColumnNameString", # required
-    #                   type: "ColumnTypeString",
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         catalog_hudi_source: {
-    #           name: "NodeName", # required
-    #           database: "EnclosedInStringProperty", # required
-    #           table: "EnclosedInStringProperty", # required
-    #           additional_hudi_options: {
-    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
-    #           },
-    #           output_schemas: [
-    #             {
-    #               columns: [
-    #                 {
-    #                   name: "GlueStudioColumnNameString", # required
-    #                   type: "ColumnTypeString",
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         s3_hudi_source: {
-    #           name: "NodeName", # required
-    #           paths: ["EnclosedInStringProperty"], # required
-    #           additional_hudi_options: {
-    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
-    #           },
-    #           additional_options: {
-    #             bounded_size: 1,
-    #             bounded_files: 1,
-    #             enable_sample_path: false,
-    #             sample_path: "EnclosedInStringProperty",
-    #           },
-    #           output_schemas: [
-    #             {
-    #               columns: [
-    #                 {
-    #                   name: "GlueStudioColumnNameString", # required
-    #                   type: "ColumnTypeString",
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         s3_hudi_catalog_target: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           partition_keys: [
-    #             ["EnclosedInStringProperty"],
-    #           ],
-    #           table: "EnclosedInStringProperty", # required
-    #           database: "EnclosedInStringProperty", # required
-    #           additional_options: { # required
-    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
-    #           },
-    #           schema_change_policy: {
-    #             enable_update_catalog: false,
-    #             update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
-    #           },
-    #         },
-    #         s3_hudi_direct_target: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           path: "EnclosedInStringProperty", # required
-    #           compression: "gzip", # required, accepts gzip, lzo, uncompressed, snappy
-    #           partition_keys: [
-    #             ["EnclosedInStringProperty"],
-    #           ],
-    #           format: "json", # required, accepts json, csv, avro, orc, parquet, hudi, delta
-    #           additional_options: { # required
-    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
-    #           },
-    #           schema_change_policy: {
-    #             enable_update_catalog: false,
-    #             update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
-    #             table: "EnclosedInStringProperty",
-    #             database: "EnclosedInStringProperty",
-    #           },
-    #         },
-    #         direct_jdbc_source: {
-    #           name: "NodeName", # required
-    #           database: "EnclosedInStringProperty", # required
-    #           table: "EnclosedInStringProperty", # required
-    #           connection_name: "EnclosedInStringProperty", # required
-    #           connection_type: "sqlserver", # required, accepts sqlserver, mysql, oracle, postgresql, redshift
-    #           redshift_tmp_dir: "EnclosedInStringProperty",
-    #         },
-    #         s3_catalog_delta_source: {
-    #           name: "NodeName", # required
-    #           database: "EnclosedInStringProperty", # required
-    #           table: "EnclosedInStringProperty", # required
-    #           additional_delta_options: {
-    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
-    #           },
-    #           output_schemas: [
-    #             {
-    #               columns: [
-    #                 {
-    #                   name: "GlueStudioColumnNameString", # required
-    #                   type: "ColumnTypeString",
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         catalog_delta_source: {
-    #           name: "NodeName", # required
-    #           database: "EnclosedInStringProperty", # required
-    #           table: "EnclosedInStringProperty", # required
-    #           additional_delta_options: {
-    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
-    #           },
-    #           output_schemas: [
-    #             {
-    #               columns: [
-    #                 {
-    #                   name: "GlueStudioColumnNameString", # required
-    #                   type: "ColumnTypeString",
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         s3_delta_source: {
-    #           name: "NodeName", # required
-    #           paths: ["EnclosedInStringProperty"], # required
-    #           additional_delta_options: {
-    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
-    #           },
-    #           additional_options: {
-    #             bounded_size: 1,
-    #             bounded_files: 1,
-    #             enable_sample_path: false,
-    #             sample_path: "EnclosedInStringProperty",
-    #           },
-    #           output_schemas: [
-    #             {
-    #               columns: [
-    #                 {
-    #                   name: "GlueStudioColumnNameString", # required
-    #                   type: "ColumnTypeString",
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         s3_delta_catalog_target: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           partition_keys: [
-    #             ["EnclosedInStringProperty"],
-    #           ],
-    #           table: "EnclosedInStringProperty", # required
-    #           database: "EnclosedInStringProperty", # required
-    #           additional_options: {
-    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
-    #           },
-    #           schema_change_policy: {
-    #             enable_update_catalog: false,
-    #             update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
-    #           },
-    #         },
-    #         s3_delta_direct_target: {
-    #           name: "NodeName", # required
-    #           inputs: ["NodeId"], # required
-    #           partition_keys: [
-    #             ["EnclosedInStringProperty"],
-    #           ],
-    #           path: "EnclosedInStringProperty", # required
-    #           compression: "uncompressed", # required, accepts uncompressed, snappy
-    #           format: "json", # required, accepts json, csv, avro, orc, parquet, hudi, delta
-    #           additional_options: {
-    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
-    #           },
-    #           schema_change_policy: {
-    #             enable_update_catalog: false,
-    #             update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
-    #             table: "EnclosedInStringProperty",
-    #             database: "EnclosedInStringProperty",
-    #           },
-    #         },
-    #       },
-    #     },
-    #     execution_class: "FLEX", # accepts FLEX, STANDARD
-    #     source_control_details: {
-    #       provider: "GITHUB", # accepts GITHUB, AWS_CODE_COMMIT
-    #       repository: "Generic512CharString",
-    #       owner: "Generic512CharString",
-    #       branch: "Generic512CharString",
-    #       folder: "Generic512CharString",
-    #       last_commit_id: "Generic512CharString",
-    #       auth_strategy: "PERSONAL_ACCESS_TOKEN", # accepts PERSONAL_ACCESS_TOKEN, AWS_SECRETS_MANAGER
-    #       auth_token: "Generic512CharString",
-    #     },
-    #   })
     #
     # @example Response structure
     #
@@ -4376,7 +3567,7 @@ module Aws::Glue
     #     role: "RoleString", # required
     #     glue_version: "GlueVersionString",
     #     max_capacity: 1.0,
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X, G.4X, G.8X, Z.2X
     #     number_of_workers: 1,
     #     timeout: 1,
     #     max_retries: 1,
@@ -4950,7 +4141,7 @@ module Aws::Glue
     #     },
     #     max_capacity: 1.0,
     #     number_of_workers: 1,
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X, G.4X, G.8X, Z.2X
     #     security_configuration: "NameString",
     #     glue_version: "GlueVersionString",
     #     tags: {
@@ -5094,6 +4285,7 @@ module Aws::Glue
     #         catalog_id: "CatalogIdString",
     #         database_name: "NameString",
     #         name: "NameString",
+    #         region: "NameString",
     #       },
     #     },
     #     partition_indexes: [
@@ -7100,6 +6292,8 @@ module Aws::Glue
     #   resp.rule_results[0].description #=> String
     #   resp.rule_results[0].evaluation_message #=> String
     #   resp.rule_results[0].result #=> String, one of "PASS", "FAIL", "ERROR"
+    #   resp.rule_results[0].evaluated_metrics #=> Hash
+    #   resp.rule_results[0].evaluated_metrics["NameString"] #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityResult AWS API Documentation
     #
@@ -7195,6 +6389,7 @@ module Aws::Glue
     #   resp.ruleset #=> String
     #   resp.target_table.table_name #=> String
     #   resp.target_table.database_name #=> String
+    #   resp.target_table.catalog_id #=> String
     #   resp.created_on #=> Time
     #   resp.last_modified_on #=> Time
     #   resp.recommendation_run_id #=> String
@@ -7230,6 +6425,7 @@ module Aws::Glue
     #   * {Types::GetDataQualityRulesetEvaluationRunResponse#execution_time #execution_time} => Integer
     #   * {Types::GetDataQualityRulesetEvaluationRunResponse#ruleset_names #ruleset_names} => Array&lt;String&gt;
     #   * {Types::GetDataQualityRulesetEvaluationRunResponse#result_ids #result_ids} => Array&lt;String&gt;
+    #   * {Types::GetDataQualityRulesetEvaluationRunResponse#additional_data_sources #additional_data_sources} => Hash&lt;String,Types::DataSource&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -7261,6 +6457,13 @@ module Aws::Glue
     #   resp.ruleset_names[0] #=> String
     #   resp.result_ids #=> Array
     #   resp.result_ids[0] #=> String
+    #   resp.additional_data_sources #=> Hash
+    #   resp.additional_data_sources["NameString"].glue_table.database_name #=> String
+    #   resp.additional_data_sources["NameString"].glue_table.table_name #=> String
+    #   resp.additional_data_sources["NameString"].glue_table.catalog_id #=> String
+    #   resp.additional_data_sources["NameString"].glue_table.connection_name #=> String
+    #   resp.additional_data_sources["NameString"].glue_table.additional_options #=> Hash
+    #   resp.additional_data_sources["NameString"].glue_table.additional_options["NameString"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityRulesetEvaluationRun AWS API Documentation
     #
@@ -7306,6 +6509,7 @@ module Aws::Glue
     #   resp.database.create_table_default_permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
     #   resp.database.target_database.catalog_id #=> String
     #   resp.database.target_database.database_name #=> String
+    #   resp.database.target_database.region #=> String
     #   resp.database.catalog_id #=> String
     #   resp.database.federated_database.identifier #=> String
     #   resp.database.federated_database.connection_name #=> String
@@ -7376,6 +6580,7 @@ module Aws::Glue
     #   resp.database_list[0].create_table_default_permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
     #   resp.database_list[0].target_database.catalog_id #=> String
     #   resp.database_list[0].target_database.database_name #=> String
+    #   resp.database_list[0].target_database.region #=> String
     #   resp.database_list[0].catalog_id #=> String
     #   resp.database_list[0].federated_database.identifier #=> String
     #   resp.database_list[0].federated_database.connection_name #=> String
@@ -7464,7 +6669,7 @@ module Aws::Glue
     #   resp.dev_endpoint.zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.dev_endpoint.public_address #=> String
     #   resp.dev_endpoint.status #=> String
-    #   resp.dev_endpoint.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.dev_endpoint.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
     #   resp.dev_endpoint.glue_version #=> String
     #   resp.dev_endpoint.number_of_workers #=> Integer
     #   resp.dev_endpoint.number_of_nodes #=> Integer
@@ -7535,7 +6740,7 @@ module Aws::Glue
     #   resp.dev_endpoints[0].zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.dev_endpoints[0].public_address #=> String
     #   resp.dev_endpoints[0].status #=> String
-    #   resp.dev_endpoints[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.dev_endpoints[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
     #   resp.dev_endpoints[0].glue_version #=> String
     #   resp.dev_endpoints[0].number_of_workers #=> Integer
     #   resp.dev_endpoints[0].number_of_nodes #=> Integer
@@ -7591,6 +6796,7 @@ module Aws::Glue
     #   resp.job.command.name #=> String
     #   resp.job.command.script_location #=> String
     #   resp.job.command.python_version #=> String
+    #   resp.job.command.runtime #=> String
     #   resp.job.default_arguments #=> Hash
     #   resp.job.default_arguments["GenericString"] #=> String
     #   resp.job.non_overridable_arguments #=> Hash
@@ -7601,7 +6807,7 @@ module Aws::Glue
     #   resp.job.allocated_capacity #=> Integer
     #   resp.job.timeout #=> Integer
     #   resp.job.max_capacity #=> Float
-    #   resp.job.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.job.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
     #   resp.job.number_of_workers #=> Integer
     #   resp.job.security_configuration #=> String
     #   resp.job.notification_property.notify_delay_after #=> Integer
@@ -7908,7 +7114,7 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.stream_name #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.classification #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.delimiter #=> String
-    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest", "timestamp"
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_fetch_time_in_ms #=> Integer
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_fetch_records_per_shard #=> Integer
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_record_per_read #=> Integer
@@ -7924,6 +7130,7 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.role_session_name #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.add_record_timestamp #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.emit_consumer_lag_metrics #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.starting_timestamp #=> Time
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.data_preview_options.polling_time #=> Integer
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.data_preview_options.record_polling_limit #=> Integer
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.name #=> String
@@ -7945,6 +7152,7 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.include_headers #=> Boolean
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.add_record_timestamp #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.emit_consumer_lag_metrics #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.starting_timestamp #=> Time
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.window_size #=> Integer
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.detect_schema #=> Boolean
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.data_preview_options.polling_time #=> Integer
@@ -7958,7 +7166,7 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.stream_name #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.classification #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.delimiter #=> String
-    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest", "timestamp"
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_fetch_time_in_ms #=> Integer
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_fetch_records_per_shard #=> Integer
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_record_per_read #=> Integer
@@ -7974,6 +7182,7 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.role_session_name #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.add_record_timestamp #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.emit_consumer_lag_metrics #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.starting_timestamp #=> Time
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.data_preview_options.polling_time #=> Integer
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.data_preview_options.record_polling_limit #=> Integer
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.name #=> String
@@ -7999,6 +7208,7 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.include_headers #=> Boolean
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.add_record_timestamp #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.emit_consumer_lag_metrics #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.starting_timestamp #=> Time
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.data_preview_options.polling_time #=> Integer
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.data_preview_options.record_polling_limit #=> Integer
     #   resp.job.code_gen_configuration_nodes["NodeId"].drop_null_fields.name #=> String
@@ -8112,6 +7322,10 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].dynamic_transform.function_name #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].dynamic_transform.path #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].dynamic_transform.version #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].dynamic_transform.output_schemas #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].dynamic_transform.output_schemas[0].columns #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].dynamic_transform.output_schemas[0].columns[0].name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].dynamic_transform.output_schemas[0].columns[0].type #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality.name #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality.inputs #=> Array
     #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality.inputs[0] #=> String
@@ -8244,6 +7458,115 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.schema_change_policy.table #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.schema_change_policy.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.access_type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.source_type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.connection.value #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.connection.label #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.connection.description #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.schema.value #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.schema.label #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.schema.description #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.table.value #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.table.label #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.table.description #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.catalog_database.value #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.catalog_database.label #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.catalog_database.description #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.catalog_table.value #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.catalog_table.label #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.catalog_table.description #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.catalog_redshift_schema #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.catalog_redshift_table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.temp_dir #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.iam_role.value #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.iam_role.label #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.iam_role.description #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.advanced_options #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.advanced_options[0].key #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.advanced_options[0].value #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.sample_query #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.pre_action #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.post_action #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.action #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.table_prefix #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.upsert #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.merge_action #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.merge_when_matched #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.merge_when_not_matched #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.merge_clause #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.crawler_connection #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.table_schema #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.table_schema[0].value #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.table_schema[0].label #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.table_schema[0].description #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.staging_table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.selected_columns #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.selected_columns[0].value #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.selected_columns[0].label #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.selected_columns[0].description #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.access_type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.source_type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.connection.value #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.connection.label #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.connection.description #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.schema.value #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.schema.label #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.schema.description #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.table.value #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.table.label #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.table.description #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.catalog_database.value #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.catalog_database.label #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.catalog_database.description #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.catalog_table.value #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.catalog_table.label #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.catalog_table.description #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.catalog_redshift_schema #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.catalog_redshift_table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.temp_dir #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.iam_role.value #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.iam_role.label #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.iam_role.description #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.advanced_options #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.advanced_options[0].key #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.advanced_options[0].value #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.sample_query #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.pre_action #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.post_action #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.action #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.table_prefix #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.upsert #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.merge_action #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.merge_when_matched #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.merge_when_not_matched #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.merge_clause #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.crawler_connection #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.table_schema #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.table_schema[0].value #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.table_schema[0].label #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.table_schema[0].description #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.staging_table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.selected_columns #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.selected_columns[0].value #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.selected_columns[0].label #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.selected_columns[0].description #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_data_sources #=> Hash
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_data_sources["NodeName"] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.ruleset #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.publishing_options.evaluation_context #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.publishing_options.results_s3_prefix #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.publishing_options.cloud_watch_metrics_enabled #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.publishing_options.results_publishing_enabled #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_options #=> Hash
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_options["AdditionalOptionKeys"] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.stop_job_on_failure_options.stop_job_on_failure_timing #=> String, one of "Immediate", "AfterDataLoad"
     #   resp.job.execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.job.source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
     #   resp.job.source_control_details.repository #=> String
@@ -8359,7 +7682,7 @@ module Aws::Glue
     #   resp.job_run.execution_time #=> Integer
     #   resp.job_run.timeout #=> Integer
     #   resp.job_run.max_capacity #=> Float
-    #   resp.job_run.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.job_run.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
     #   resp.job_run.number_of_workers #=> Integer
     #   resp.job_run.security_configuration #=> String
     #   resp.job_run.log_group_name #=> String
@@ -8425,7 +7748,7 @@ module Aws::Glue
     #   resp.job_runs[0].execution_time #=> Integer
     #   resp.job_runs[0].timeout #=> Integer
     #   resp.job_runs[0].max_capacity #=> Float
-    #   resp.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
     #   resp.job_runs[0].number_of_workers #=> Integer
     #   resp.job_runs[0].security_configuration #=> String
     #   resp.job_runs[0].log_group_name #=> String
@@ -8479,6 +7802,7 @@ module Aws::Glue
     #   resp.jobs[0].command.name #=> String
     #   resp.jobs[0].command.script_location #=> String
     #   resp.jobs[0].command.python_version #=> String
+    #   resp.jobs[0].command.runtime #=> String
     #   resp.jobs[0].default_arguments #=> Hash
     #   resp.jobs[0].default_arguments["GenericString"] #=> String
     #   resp.jobs[0].non_overridable_arguments #=> Hash
@@ -8489,7 +7813,7 @@ module Aws::Glue
     #   resp.jobs[0].allocated_capacity #=> Integer
     #   resp.jobs[0].timeout #=> Integer
     #   resp.jobs[0].max_capacity #=> Float
-    #   resp.jobs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.jobs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
     #   resp.jobs[0].number_of_workers #=> Integer
     #   resp.jobs[0].security_configuration #=> String
     #   resp.jobs[0].notification_property.notify_delay_after #=> Integer
@@ -8796,7 +8120,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.stream_name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.classification #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.delimiter #=> String
-    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest", "timestamp"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_fetch_time_in_ms #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_fetch_records_per_shard #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_record_per_read #=> Integer
@@ -8812,6 +8136,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.role_session_name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.add_record_timestamp #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.emit_consumer_lag_metrics #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.starting_timestamp #=> Time
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.data_preview_options.polling_time #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.data_preview_options.record_polling_limit #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.name #=> String
@@ -8833,6 +8158,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.include_headers #=> Boolean
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.add_record_timestamp #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.emit_consumer_lag_metrics #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.starting_timestamp #=> Time
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.window_size #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.detect_schema #=> Boolean
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.data_preview_options.polling_time #=> Integer
@@ -8846,7 +8172,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.stream_name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.classification #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.delimiter #=> String
-    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest", "timestamp"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_fetch_time_in_ms #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_fetch_records_per_shard #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_record_per_read #=> Integer
@@ -8862,6 +8188,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.role_session_name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.add_record_timestamp #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.emit_consumer_lag_metrics #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.starting_timestamp #=> Time
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.data_preview_options.polling_time #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.data_preview_options.record_polling_limit #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.name #=> String
@@ -8887,6 +8214,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.include_headers #=> Boolean
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.add_record_timestamp #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.emit_consumer_lag_metrics #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.starting_timestamp #=> Time
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.data_preview_options.polling_time #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.data_preview_options.record_polling_limit #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_null_fields.name #=> String
@@ -9000,6 +8328,10 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.function_name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.path #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.version #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.output_schemas[0].columns[0].type #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.inputs #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality.inputs[0] #=> String
@@ -9132,6 +8464,115 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.schema_change_policy.table #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.schema_change_policy.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.access_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.source_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.connection.value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.connection.label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.connection.description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.schema.value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.schema.label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.schema.description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.table.value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.table.label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.table.description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.catalog_database.value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.catalog_database.label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.catalog_database.description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.catalog_table.value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.catalog_table.label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.catalog_table.description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.catalog_redshift_schema #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.catalog_redshift_table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.temp_dir #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.iam_role.value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.iam_role.label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.iam_role.description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.advanced_options #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.advanced_options[0].key #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.advanced_options[0].value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.sample_query #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.pre_action #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.post_action #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.action #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.table_prefix #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.upsert #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.merge_action #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.merge_when_matched #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.merge_when_not_matched #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.merge_clause #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.crawler_connection #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.table_schema #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.table_schema[0].value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.table_schema[0].label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.table_schema[0].description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.staging_table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.selected_columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.selected_columns[0].value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.selected_columns[0].label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_source.data.selected_columns[0].description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.access_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.source_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.connection.value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.connection.label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.connection.description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.schema.value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.schema.label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.schema.description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.table.value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.table.label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.table.description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.catalog_database.value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.catalog_database.label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.catalog_database.description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.catalog_table.value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.catalog_table.label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.catalog_table.description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.catalog_redshift_schema #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.catalog_redshift_table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.temp_dir #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.iam_role.value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.iam_role.label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.iam_role.description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.advanced_options #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.advanced_options[0].key #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.advanced_options[0].value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.sample_query #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.pre_action #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.post_action #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.action #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.table_prefix #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.upsert #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.merge_action #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.merge_when_matched #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.merge_when_not_matched #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.merge_clause #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.crawler_connection #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.table_schema #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.table_schema[0].value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.table_schema[0].label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.table_schema[0].description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.staging_table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.selected_columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.selected_columns[0].value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.selected_columns[0].label #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.selected_columns[0].description #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_data_sources #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_data_sources["NodeName"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.ruleset #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.publishing_options.evaluation_context #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.publishing_options.results_s3_prefix #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.publishing_options.cloud_watch_metrics_enabled #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.publishing_options.results_publishing_enabled #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_options["AdditionalOptionKeys"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.stop_job_on_failure_options.stop_job_on_failure_timing #=> String, one of "Immediate", "AfterDataLoad"
     #   resp.jobs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
     #   resp.jobs[0].source_control_details.repository #=> String
@@ -9373,7 +8814,7 @@ module Aws::Glue
     #   resp.role #=> String
     #   resp.glue_version #=> String
     #   resp.max_capacity #=> Float
-    #   resp.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
     #   resp.number_of_workers #=> Integer
     #   resp.timeout #=> Integer
     #   resp.max_retries #=> Integer
@@ -9483,7 +8924,7 @@ module Aws::Glue
     #   resp.transforms[0].role #=> String
     #   resp.transforms[0].glue_version #=> String
     #   resp.transforms[0].max_capacity #=> Float
-    #   resp.transforms[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.transforms[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
     #   resp.transforms[0].number_of_workers #=> Integer
     #   resp.transforms[0].timeout #=> Integer
     #   resp.transforms[0].max_retries #=> Integer
@@ -10683,6 +10124,7 @@ module Aws::Glue
     #   resp.table.target_table.catalog_id #=> String
     #   resp.table.target_table.database_name #=> String
     #   resp.table.target_table.name #=> String
+    #   resp.table.target_table.region #=> String
     #   resp.table.catalog_id #=> String
     #   resp.table.version_id #=> String
     #   resp.table.federated_table.identifier #=> String
@@ -10792,6 +10234,7 @@ module Aws::Glue
     #   resp.table_version.table.target_table.catalog_id #=> String
     #   resp.table_version.table.target_table.database_name #=> String
     #   resp.table_version.table.target_table.name #=> String
+    #   resp.table_version.table.target_table.region #=> String
     #   resp.table_version.table.catalog_id #=> String
     #   resp.table_version.table.version_id #=> String
     #   resp.table_version.table.federated_table.identifier #=> String
@@ -10910,6 +10353,7 @@ module Aws::Glue
     #   resp.table_versions[0].table.target_table.catalog_id #=> String
     #   resp.table_versions[0].table.target_table.database_name #=> String
     #   resp.table_versions[0].table.target_table.name #=> String
+    #   resp.table_versions[0].table.target_table.region #=> String
     #   resp.table_versions[0].table.catalog_id #=> String
     #   resp.table_versions[0].table.version_id #=> String
     #   resp.table_versions[0].table.federated_table.identifier #=> String
@@ -11039,6 +10483,7 @@ module Aws::Glue
     #   resp.table_list[0].target_table.catalog_id #=> String
     #   resp.table_list[0].target_table.database_name #=> String
     #   resp.table_list[0].target_table.name #=> String
+    #   resp.table_list[0].target_table.region #=> String
     #   resp.table_list[0].catalog_id #=> String
     #   resp.table_list[0].version_id #=> String
     #   resp.table_list[0].federated_table.identifier #=> String
@@ -11625,6 +11070,7 @@ module Aws::Glue
     #   resp.table.target_table.catalog_id #=> String
     #   resp.table.target_table.database_name #=> String
     #   resp.table.target_table.name #=> String
+    #   resp.table.target_table.region #=> String
     #   resp.table.catalog_id #=> String
     #   resp.table.version_id #=> String
     #   resp.table.federated_table.identifier #=> String
@@ -11849,7 +11295,7 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
@@ -11917,7 +11363,7 @@ module Aws::Glue
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
@@ -12038,7 +11484,7 @@ module Aws::Glue
     #   resp.run.graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.run.graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.run.graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
     #   resp.run.graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.run.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.run.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
@@ -12199,7 +11645,7 @@ module Aws::Glue
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
@@ -12431,6 +11877,9 @@ module Aws::Glue
     # @option params [Integer] :max_results
     #   The maximum number of results to return.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A list of key-value pair tags.
+    #
     # @return [Types::ListCustomEntityTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListCustomEntityTypesResponse#custom_entity_types #custom_entity_types} => Array&lt;Types::CustomEntityType&gt;
@@ -12443,6 +11892,9 @@ module Aws::Glue
     #   resp = client.list_custom_entity_types({
     #     next_token: "PaginationToken",
     #     max_results: 1,
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -12693,6 +12145,7 @@ module Aws::Glue
     #       target_table: {
     #         table_name: "NameString", # required
     #         database_name: "NameString", # required
+    #         catalog_id: "NameString",
     #       },
     #     },
     #     tags: {
@@ -12709,6 +12162,7 @@ module Aws::Glue
     #   resp.rulesets[0].last_modified_on #=> Time
     #   resp.rulesets[0].target_table.table_name #=> String
     #   resp.rulesets[0].target_table.database_name #=> String
+    #   resp.rulesets[0].target_table.catalog_id #=> String
     #   resp.rulesets[0].recommendation_run_id #=> String
     #   resp.rulesets[0].rule_count #=> Integer
     #   resp.next_token #=> String
@@ -13958,6 +13412,7 @@ module Aws::Glue
     #   resp.table_list[0].target_table.catalog_id #=> String
     #   resp.table_list[0].target_table.database_name #=> String
     #   resp.table_list[0].target_table.name #=> String
+    #   resp.table_list[0].target_table.region #=> String
     #   resp.table_list[0].catalog_id #=> String
     #   resp.table_list[0].version_id #=> String
     #   resp.table_list[0].federated_table.identifier #=> String
@@ -14157,6 +13612,10 @@ module Aws::Glue
     # @option params [required, Array<String>] :ruleset_names
     #   A list of ruleset names.
     #
+    # @option params [Hash<String,Types::DataSource>] :additional_data_sources
+    #   A map of reference strings to additional data sources you can specify
+    #   for an evaluation run.
+    #
     # @return [Types::StartDataQualityRulesetEvaluationRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartDataQualityRulesetEvaluationRunResponse#run_id #run_id} => String
@@ -14184,6 +13643,19 @@ module Aws::Glue
     #       results_s3_prefix: "UriString",
     #     },
     #     ruleset_names: ["NameString"], # required
+    #     additional_data_sources: {
+    #       "NameString" => {
+    #         glue_table: { # required
+    #           database_name: "NameString", # required
+    #           table_name: "NameString", # required
+    #           catalog_id: "NameString",
+    #           connection_name: "NameString",
+    #           additional_options: {
+    #             "NameString" => "DescriptionString",
+    #           },
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -14315,7 +13787,7 @@ module Aws::Glue
     #   The ID of a previous `JobRun` to retry.
     #
     # @option params [Hash<String,String>] :arguments
-    #   The job arguments specifically for this run. For this job run, they
+    #   The job arguments associated with this run. For this job run, they
     #   replace the default arguments set in the job definition itself.
     #
     #   You can specify arguments here that your own job-execution script
@@ -14330,14 +13802,19 @@ module Aws::Glue
     #   arguments, see the [Calling Glue APIs in Python][1] topic in the
     #   developer guide.
     #
-    #   For information about the key-value pairs that Glue consumes to set up
-    #   your job, see the [Special Parameters Used by Glue][2] topic in the
+    #   For information about the arguments you can provide to this field when
+    #   configuring Spark jobs, see the [Special Parameters Used by Glue][2]
+    #   topic in the developer guide.
+    #
+    #   For information about the arguments you can provide to this field when
+    #   configuring Ray jobs, see [Using job parameters in Ray jobs][3] in the
     #   developer guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
     #   [2]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
+    #   [3]: https://docs.aws.amazon.com/glue/latest/dg/author-job-ray-job-parameters.html
     #
     # @option params [Integer] :allocated_capacity
     #   This field is deprecated. Use `MaxCapacity` instead.
@@ -14361,24 +13838,31 @@ module Aws::Glue
     #   jobs is 2,880 minutes (48 hours).
     #
     # @option params [Float] :max_capacity
-    #   The number of Glue data processing units (DPUs) that can be allocated
+    #   For Glue version 1.0 or earlier jobs, using the standard worker type,
+    #   the number of Glue data processing units (DPUs) that can be allocated
     #   when this job runs. A DPU is a relative measure of processing power
     #   that consists of 4 vCPUs of compute capacity and 16 GB of memory. For
-    #   more information, see the [Glue pricing page][1].
+    #   more information, see the [ Glue pricing page][1].
     #
-    #   Do not set `Max Capacity` if using `WorkerType` and `NumberOfWorkers`.
+    #   For Glue version 2.0+ jobs, you cannot specify a `Maximum capacity`.
+    #   Instead, you should specify a `Worker type` and the `Number of
+    #   workers`.
+    #
+    #   Do not set `MaxCapacity` if using `WorkerType` and `NumberOfWorkers`.
     #
     #   The value that can be allocated for `MaxCapacity` depends on whether
-    #   you are running a Python shell job, or an Apache Spark ETL job:
+    #   you are running a Python shell job, an Apache Spark ETL job, or an
+    #   Apache Spark streaming ETL job:
     #
     #   * When you specify a Python shell job
     #     (`JobCommand.Name`="pythonshell"), you can allocate either 0.0625
     #     or 1 DPU. The default is 0.0625 DPU.
     #
     #   * When you specify an Apache Spark ETL job
-    #     (`JobCommand.Name`="glueetl"), you can allocate a minimum of 2
-    #     DPUs. The default is 10 DPUs. This job type cannot have a fractional
-    #     DPU allocation.
+    #     (`JobCommand.Name`="glueetl") or Apache Spark streaming ETL job
+    #     (`JobCommand.Name`="gluestreaming"), you can allocate from 2 to
+    #     100 DPUs. The default is 10 DPUs. This job type cannot have a
+    #     fractional DPU allocation.
     #
     #
     #
@@ -14393,21 +13877,28 @@ module Aws::Glue
     #
     # @option params [String] :worker_type
     #   The type of predefined worker that is allocated when a job runs.
-    #   Accepts a value of Standard, G.1X, G.2X, or G.025X.
+    #   Accepts a value of Standard, G.1X, G.2X, or G.025X for Spark jobs.
+    #   Accepts the value Z.2X for Ray jobs.
     #
     #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
     #     of memory and a 50GB disk, and 2 executors per worker.
     #
-    #   * For the `G.1X` worker type, each worker provides 4 vCPU, 16 GB of
-    #     memory and a 64GB disk, and 1 executor per worker.
+    #   * For the `G.1X` worker type, each worker maps to 1 DPU (4 vCPU, 16 GB
+    #     of memory, 64 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive jobs.
     #
-    #   * For the `G.2X` worker type, each worker provides 8 vCPU, 32 GB of
-    #     memory and a 128GB disk, and 1 executor per worker.
+    #   * For the `G.2X` worker type, each worker maps to 2 DPU (8 vCPU, 32 GB
+    #     of memory, 128 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive jobs.
     #
     #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2 vCPU,
     #     4 GB of memory, 64 GB disk), and provides 1 executor per worker. We
     #     recommend this worker type for low volume streaming jobs. This
     #     worker type is only available for Glue version 3.0 streaming jobs.
+    #
+    #   * For the `Z.2X` worker type, each worker maps to 2 DPU (8vCPU, 64 GB
+    #     of m emory, 128 GB disk), and provides up to 8 Ray workers (one per
+    #     vCPU) based on the autoscaler.
     #
     # @option params [Integer] :number_of_workers
     #   The number of workers of a defined `workerType` that are allocated
@@ -14444,7 +13935,7 @@ module Aws::Glue
     #     notification_property: {
     #       notify_delay_after: 1,
     #     },
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X, G.4X, G.8X, Z.2X
     #     number_of_workers: 1,
     #     execution_class: "FLEX", # accepts FLEX, STANDARD
     #   })
@@ -15490,6 +14981,7 @@ module Aws::Glue
     #       target_database: {
     #         catalog_id: "CatalogIdString",
     #         database_name: "NameString",
+    #         region: "NameString",
     #       },
     #       federated_database: {
     #         identifier: "FederationIdentifier",
@@ -15589,964 +15081,6 @@ module Aws::Glue
     # @return [Types::UpdateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateJobResponse#job_name #job_name} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.update_job({
-    #     job_name: "NameString", # required
-    #     job_update: { # required
-    #       description: "DescriptionString",
-    #       log_uri: "UriString",
-    #       role: "RoleString",
-    #       execution_property: {
-    #         max_concurrent_runs: 1,
-    #       },
-    #       command: {
-    #         name: "GenericString",
-    #         script_location: "ScriptLocationString",
-    #         python_version: "PythonVersionString",
-    #       },
-    #       default_arguments: {
-    #         "GenericString" => "GenericString",
-    #       },
-    #       non_overridable_arguments: {
-    #         "GenericString" => "GenericString",
-    #       },
-    #       connections: {
-    #         connections: ["GenericString"],
-    #       },
-    #       max_retries: 1,
-    #       allocated_capacity: 1,
-    #       timeout: 1,
-    #       max_capacity: 1.0,
-    #       worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
-    #       number_of_workers: 1,
-    #       security_configuration: "NameString",
-    #       notification_property: {
-    #         notify_delay_after: 1,
-    #       },
-    #       glue_version: "GlueVersionString",
-    #       code_gen_configuration_nodes: {
-    #         "NodeId" => {
-    #           athena_connector_source: {
-    #             name: "NodeName", # required
-    #             connection_name: "EnclosedInStringProperty", # required
-    #             connector_name: "EnclosedInStringProperty", # required
-    #             connection_type: "EnclosedInStringProperty", # required
-    #             connection_table: "EnclosedInStringPropertyWithQuote",
-    #             schema_name: "EnclosedInStringProperty", # required
-    #             output_schemas: [
-    #               {
-    #                 columns: [
-    #                   {
-    #                     name: "GlueStudioColumnNameString", # required
-    #                     type: "ColumnTypeString",
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           jdbc_connector_source: {
-    #             name: "NodeName", # required
-    #             connection_name: "EnclosedInStringProperty", # required
-    #             connector_name: "EnclosedInStringProperty", # required
-    #             connection_type: "EnclosedInStringProperty", # required
-    #             additional_options: {
-    #               filter_predicate: "EnclosedInStringProperty",
-    #               partition_column: "EnclosedInStringProperty",
-    #               lower_bound: 1,
-    #               upper_bound: 1,
-    #               num_partitions: 1,
-    #               job_bookmark_keys: ["EnclosedInStringProperty"],
-    #               job_bookmark_keys_sort_order: "EnclosedInStringProperty",
-    #               data_type_mapping: {
-    #                 "ARRAY" => "DATE", # accepts DATE, STRING, TIMESTAMP, INT, FLOAT, LONG, BIGDECIMAL, BYTE, SHORT, DOUBLE
-    #               },
-    #             },
-    #             connection_table: "EnclosedInStringPropertyWithQuote",
-    #             query: "SqlQuery",
-    #             output_schemas: [
-    #               {
-    #                 columns: [
-    #                   {
-    #                     name: "GlueStudioColumnNameString", # required
-    #                     type: "ColumnTypeString",
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           spark_connector_source: {
-    #             name: "NodeName", # required
-    #             connection_name: "EnclosedInStringProperty", # required
-    #             connector_name: "EnclosedInStringProperty", # required
-    #             connection_type: "EnclosedInStringProperty", # required
-    #             additional_options: {
-    #               "EnclosedInStringProperty" => "EnclosedInStringProperty",
-    #             },
-    #             output_schemas: [
-    #               {
-    #                 columns: [
-    #                   {
-    #                     name: "GlueStudioColumnNameString", # required
-    #                     type: "ColumnTypeString",
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           catalog_source: {
-    #             name: "NodeName", # required
-    #             database: "EnclosedInStringProperty", # required
-    #             table: "EnclosedInStringProperty", # required
-    #           },
-    #           redshift_source: {
-    #             name: "NodeName", # required
-    #             database: "EnclosedInStringProperty", # required
-    #             table: "EnclosedInStringProperty", # required
-    #             redshift_tmp_dir: "EnclosedInStringProperty",
-    #             tmp_dir_iam_role: "EnclosedInStringProperty",
-    #           },
-    #           s3_catalog_source: {
-    #             name: "NodeName", # required
-    #             database: "EnclosedInStringProperty", # required
-    #             table: "EnclosedInStringProperty", # required
-    #             partition_predicate: "EnclosedInStringProperty",
-    #             additional_options: {
-    #               bounded_size: 1,
-    #               bounded_files: 1,
-    #             },
-    #           },
-    #           s3_csv_source: {
-    #             name: "NodeName", # required
-    #             paths: ["EnclosedInStringProperty"], # required
-    #             compression_type: "gzip", # accepts gzip, bzip2
-    #             exclusions: ["EnclosedInStringProperty"],
-    #             group_size: "EnclosedInStringProperty",
-    #             group_files: "EnclosedInStringProperty",
-    #             recurse: false,
-    #             max_band: 1,
-    #             max_files_in_band: 1,
-    #             additional_options: {
-    #               bounded_size: 1,
-    #               bounded_files: 1,
-    #               enable_sample_path: false,
-    #               sample_path: "EnclosedInStringProperty",
-    #             },
-    #             separator: "comma", # required, accepts comma, ctrla, pipe, semicolon, tab
-    #             escaper: "EnclosedInStringPropertyWithQuote",
-    #             quote_char: "quote", # required, accepts quote, quillemet, single_quote, disabled
-    #             multiline: false,
-    #             with_header: false,
-    #             write_header: false,
-    #             skip_first: false,
-    #             optimize_performance: false,
-    #             output_schemas: [
-    #               {
-    #                 columns: [
-    #                   {
-    #                     name: "GlueStudioColumnNameString", # required
-    #                     type: "ColumnTypeString",
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           s3_json_source: {
-    #             name: "NodeName", # required
-    #             paths: ["EnclosedInStringProperty"], # required
-    #             compression_type: "gzip", # accepts gzip, bzip2
-    #             exclusions: ["EnclosedInStringProperty"],
-    #             group_size: "EnclosedInStringProperty",
-    #             group_files: "EnclosedInStringProperty",
-    #             recurse: false,
-    #             max_band: 1,
-    #             max_files_in_band: 1,
-    #             additional_options: {
-    #               bounded_size: 1,
-    #               bounded_files: 1,
-    #               enable_sample_path: false,
-    #               sample_path: "EnclosedInStringProperty",
-    #             },
-    #             json_path: "EnclosedInStringProperty",
-    #             multiline: false,
-    #             output_schemas: [
-    #               {
-    #                 columns: [
-    #                   {
-    #                     name: "GlueStudioColumnNameString", # required
-    #                     type: "ColumnTypeString",
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           s3_parquet_source: {
-    #             name: "NodeName", # required
-    #             paths: ["EnclosedInStringProperty"], # required
-    #             compression_type: "snappy", # accepts snappy, lzo, gzip, uncompressed, none
-    #             exclusions: ["EnclosedInStringProperty"],
-    #             group_size: "EnclosedInStringProperty",
-    #             group_files: "EnclosedInStringProperty",
-    #             recurse: false,
-    #             max_band: 1,
-    #             max_files_in_band: 1,
-    #             additional_options: {
-    #               bounded_size: 1,
-    #               bounded_files: 1,
-    #               enable_sample_path: false,
-    #               sample_path: "EnclosedInStringProperty",
-    #             },
-    #             output_schemas: [
-    #               {
-    #                 columns: [
-    #                   {
-    #                     name: "GlueStudioColumnNameString", # required
-    #                     type: "ColumnTypeString",
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           relational_catalog_source: {
-    #             name: "NodeName", # required
-    #             database: "EnclosedInStringProperty", # required
-    #             table: "EnclosedInStringProperty", # required
-    #           },
-    #           dynamo_db_catalog_source: {
-    #             name: "NodeName", # required
-    #             database: "EnclosedInStringProperty", # required
-    #             table: "EnclosedInStringProperty", # required
-    #           },
-    #           jdbc_connector_target: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             connection_name: "EnclosedInStringProperty", # required
-    #             connection_table: "EnclosedInStringPropertyWithQuote", # required
-    #             connector_name: "EnclosedInStringProperty", # required
-    #             connection_type: "EnclosedInStringProperty", # required
-    #             additional_options: {
-    #               "EnclosedInStringProperty" => "EnclosedInStringProperty",
-    #             },
-    #             output_schemas: [
-    #               {
-    #                 columns: [
-    #                   {
-    #                     name: "GlueStudioColumnNameString", # required
-    #                     type: "ColumnTypeString",
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           spark_connector_target: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             connection_name: "EnclosedInStringProperty", # required
-    #             connector_name: "EnclosedInStringProperty", # required
-    #             connection_type: "EnclosedInStringProperty", # required
-    #             additional_options: {
-    #               "EnclosedInStringProperty" => "EnclosedInStringProperty",
-    #             },
-    #             output_schemas: [
-    #               {
-    #                 columns: [
-    #                   {
-    #                     name: "GlueStudioColumnNameString", # required
-    #                     type: "ColumnTypeString",
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           catalog_target: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             database: "EnclosedInStringProperty", # required
-    #             table: "EnclosedInStringProperty", # required
-    #           },
-    #           redshift_target: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             database: "EnclosedInStringProperty", # required
-    #             table: "EnclosedInStringProperty", # required
-    #             redshift_tmp_dir: "EnclosedInStringProperty",
-    #             tmp_dir_iam_role: "EnclosedInStringProperty",
-    #             upsert_redshift_options: {
-    #               table_location: "EnclosedInStringProperty",
-    #               connection_name: "EnclosedInStringProperty",
-    #               upsert_keys: ["EnclosedInStringProperty"],
-    #             },
-    #           },
-    #           s3_catalog_target: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             partition_keys: [
-    #               ["EnclosedInStringProperty"],
-    #             ],
-    #             table: "EnclosedInStringProperty", # required
-    #             database: "EnclosedInStringProperty", # required
-    #             schema_change_policy: {
-    #               enable_update_catalog: false,
-    #               update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
-    #             },
-    #           },
-    #           s3_glue_parquet_target: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             partition_keys: [
-    #               ["EnclosedInStringProperty"],
-    #             ],
-    #             path: "EnclosedInStringProperty", # required
-    #             compression: "snappy", # accepts snappy, lzo, gzip, uncompressed, none
-    #             schema_change_policy: {
-    #               enable_update_catalog: false,
-    #               update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
-    #               table: "EnclosedInStringProperty",
-    #               database: "EnclosedInStringProperty",
-    #             },
-    #           },
-    #           s3_direct_target: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             partition_keys: [
-    #               ["EnclosedInStringProperty"],
-    #             ],
-    #             path: "EnclosedInStringProperty", # required
-    #             compression: "EnclosedInStringProperty",
-    #             format: "json", # required, accepts json, csv, avro, orc, parquet, hudi, delta
-    #             schema_change_policy: {
-    #               enable_update_catalog: false,
-    #               update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
-    #               table: "EnclosedInStringProperty",
-    #               database: "EnclosedInStringProperty",
-    #             },
-    #           },
-    #           apply_mapping: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             mapping: [ # required
-    #               {
-    #                 to_key: "EnclosedInStringProperty",
-    #                 from_path: ["EnclosedInStringProperty"],
-    #                 from_type: "EnclosedInStringProperty",
-    #                 to_type: "EnclosedInStringProperty",
-    #                 dropped: false,
-    #                 children: {
-    #                   # recursive Mappings
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #           select_fields: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             paths: [ # required
-    #               ["EnclosedInStringProperty"],
-    #             ],
-    #           },
-    #           drop_fields: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             paths: [ # required
-    #               ["EnclosedInStringProperty"],
-    #             ],
-    #           },
-    #           rename_field: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             source_path: ["EnclosedInStringProperty"], # required
-    #             target_path: ["EnclosedInStringProperty"], # required
-    #           },
-    #           spigot: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             path: "EnclosedInStringProperty", # required
-    #             topk: 1,
-    #             prob: 1.0,
-    #           },
-    #           join: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             join_type: "equijoin", # required, accepts equijoin, left, right, outer, leftsemi, leftanti
-    #             columns: [ # required
-    #               {
-    #                 from: "EnclosedInStringProperty", # required
-    #                 keys: [ # required
-    #                   ["EnclosedInStringProperty"],
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           split_fields: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             paths: [ # required
-    #               ["EnclosedInStringProperty"],
-    #             ],
-    #           },
-    #           select_from_collection: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             index: 1, # required
-    #           },
-    #           fill_missing_values: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             imputed_path: "EnclosedInStringProperty", # required
-    #             filled_path: "EnclosedInStringProperty",
-    #           },
-    #           filter: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             logical_operator: "AND", # required, accepts AND, OR
-    #             filters: [ # required
-    #               {
-    #                 operation: "EQ", # required, accepts EQ, LT, GT, LTE, GTE, REGEX, ISNULL
-    #                 negated: false,
-    #                 values: [ # required
-    #                   {
-    #                     type: "COLUMNEXTRACTED", # required, accepts COLUMNEXTRACTED, CONSTANT
-    #                     value: ["EnclosedInStringProperty"], # required
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           custom_code: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             code: "ExtendedString", # required
-    #             class_name: "EnclosedInStringProperty", # required
-    #             output_schemas: [
-    #               {
-    #                 columns: [
-    #                   {
-    #                     name: "GlueStudioColumnNameString", # required
-    #                     type: "ColumnTypeString",
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           spark_sql: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             sql_query: "SqlQuery", # required
-    #             sql_aliases: [ # required
-    #               {
-    #                 from: "NodeId", # required
-    #                 alias: "EnclosedInStringPropertyWithQuote", # required
-    #               },
-    #             ],
-    #             output_schemas: [
-    #               {
-    #                 columns: [
-    #                   {
-    #                     name: "GlueStudioColumnNameString", # required
-    #                     type: "ColumnTypeString",
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           direct_kinesis_source: {
-    #             name: "NodeName", # required
-    #             window_size: 1,
-    #             detect_schema: false,
-    #             streaming_options: {
-    #               endpoint_url: "EnclosedInStringProperty",
-    #               stream_name: "EnclosedInStringProperty",
-    #               classification: "EnclosedInStringProperty",
-    #               delimiter: "EnclosedInStringProperty",
-    #               starting_position: "latest", # accepts latest, trim_horizon, earliest
-    #               max_fetch_time_in_ms: 1,
-    #               max_fetch_records_per_shard: 1,
-    #               max_record_per_read: 1,
-    #               add_idle_time_between_reads: false,
-    #               idle_time_between_reads_in_ms: 1,
-    #               describe_shard_interval: 1,
-    #               num_retries: 1,
-    #               retry_interval_ms: 1,
-    #               max_retry_interval_ms: 1,
-    #               avoid_empty_batches: false,
-    #               stream_arn: "EnclosedInStringProperty",
-    #               role_arn: "EnclosedInStringProperty",
-    #               role_session_name: "EnclosedInStringProperty",
-    #               add_record_timestamp: "EnclosedInStringProperty",
-    #               emit_consumer_lag_metrics: "EnclosedInStringProperty",
-    #             },
-    #             data_preview_options: {
-    #               polling_time: 1,
-    #               record_polling_limit: 1,
-    #             },
-    #           },
-    #           direct_kafka_source: {
-    #             name: "NodeName", # required
-    #             streaming_options: {
-    #               bootstrap_servers: "EnclosedInStringProperty",
-    #               security_protocol: "EnclosedInStringProperty",
-    #               connection_name: "EnclosedInStringProperty",
-    #               topic_name: "EnclosedInStringProperty",
-    #               assign: "EnclosedInStringProperty",
-    #               subscribe_pattern: "EnclosedInStringProperty",
-    #               classification: "EnclosedInStringProperty",
-    #               delimiter: "EnclosedInStringProperty",
-    #               starting_offsets: "EnclosedInStringProperty",
-    #               ending_offsets: "EnclosedInStringProperty",
-    #               poll_timeout_ms: 1,
-    #               num_retries: 1,
-    #               retry_interval_ms: 1,
-    #               max_offsets_per_trigger: 1,
-    #               min_partitions: 1,
-    #               include_headers: false,
-    #               add_record_timestamp: "EnclosedInStringProperty",
-    #               emit_consumer_lag_metrics: "EnclosedInStringProperty",
-    #             },
-    #             window_size: 1,
-    #             detect_schema: false,
-    #             data_preview_options: {
-    #               polling_time: 1,
-    #               record_polling_limit: 1,
-    #             },
-    #           },
-    #           catalog_kinesis_source: {
-    #             name: "NodeName", # required
-    #             window_size: 1,
-    #             detect_schema: false,
-    #             table: "EnclosedInStringProperty", # required
-    #             database: "EnclosedInStringProperty", # required
-    #             streaming_options: {
-    #               endpoint_url: "EnclosedInStringProperty",
-    #               stream_name: "EnclosedInStringProperty",
-    #               classification: "EnclosedInStringProperty",
-    #               delimiter: "EnclosedInStringProperty",
-    #               starting_position: "latest", # accepts latest, trim_horizon, earliest
-    #               max_fetch_time_in_ms: 1,
-    #               max_fetch_records_per_shard: 1,
-    #               max_record_per_read: 1,
-    #               add_idle_time_between_reads: false,
-    #               idle_time_between_reads_in_ms: 1,
-    #               describe_shard_interval: 1,
-    #               num_retries: 1,
-    #               retry_interval_ms: 1,
-    #               max_retry_interval_ms: 1,
-    #               avoid_empty_batches: false,
-    #               stream_arn: "EnclosedInStringProperty",
-    #               role_arn: "EnclosedInStringProperty",
-    #               role_session_name: "EnclosedInStringProperty",
-    #               add_record_timestamp: "EnclosedInStringProperty",
-    #               emit_consumer_lag_metrics: "EnclosedInStringProperty",
-    #             },
-    #             data_preview_options: {
-    #               polling_time: 1,
-    #               record_polling_limit: 1,
-    #             },
-    #           },
-    #           catalog_kafka_source: {
-    #             name: "NodeName", # required
-    #             window_size: 1,
-    #             detect_schema: false,
-    #             table: "EnclosedInStringProperty", # required
-    #             database: "EnclosedInStringProperty", # required
-    #             streaming_options: {
-    #               bootstrap_servers: "EnclosedInStringProperty",
-    #               security_protocol: "EnclosedInStringProperty",
-    #               connection_name: "EnclosedInStringProperty",
-    #               topic_name: "EnclosedInStringProperty",
-    #               assign: "EnclosedInStringProperty",
-    #               subscribe_pattern: "EnclosedInStringProperty",
-    #               classification: "EnclosedInStringProperty",
-    #               delimiter: "EnclosedInStringProperty",
-    #               starting_offsets: "EnclosedInStringProperty",
-    #               ending_offsets: "EnclosedInStringProperty",
-    #               poll_timeout_ms: 1,
-    #               num_retries: 1,
-    #               retry_interval_ms: 1,
-    #               max_offsets_per_trigger: 1,
-    #               min_partitions: 1,
-    #               include_headers: false,
-    #               add_record_timestamp: "EnclosedInStringProperty",
-    #               emit_consumer_lag_metrics: "EnclosedInStringProperty",
-    #             },
-    #             data_preview_options: {
-    #               polling_time: 1,
-    #               record_polling_limit: 1,
-    #             },
-    #           },
-    #           drop_null_fields: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             null_check_box_list: {
-    #               is_empty: false,
-    #               is_null_string: false,
-    #               is_neg_one: false,
-    #             },
-    #             null_text_list: [
-    #               {
-    #                 value: "EnclosedInStringProperty", # required
-    #                 datatype: { # required
-    #                   id: "GenericLimitedString", # required
-    #                   label: "GenericLimitedString", # required
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #           merge: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             source: "NodeId", # required
-    #             primary_keys: [ # required
-    #               ["EnclosedInStringProperty"],
-    #             ],
-    #           },
-    #           union: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             union_type: "ALL", # required, accepts ALL, DISTINCT
-    #           },
-    #           pii_detection: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             pii_type: "RowAudit", # required, accepts RowAudit, RowMasking, ColumnAudit, ColumnMasking
-    #             entity_types_to_detect: ["EnclosedInStringProperty"], # required
-    #             output_column_name: "EnclosedInStringProperty",
-    #             sample_fraction: 1.0,
-    #             threshold_fraction: 1.0,
-    #             mask_value: "MaskValue",
-    #           },
-    #           aggregate: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             groups: [ # required
-    #               ["EnclosedInStringProperty"],
-    #             ],
-    #             aggs: [ # required
-    #               {
-    #                 column: ["EnclosedInStringProperty"], # required
-    #                 agg_func: "avg", # required, accepts avg, countDistinct, count, first, last, kurtosis, max, min, skewness, stddev_samp, stddev_pop, sum, sumDistinct, var_samp, var_pop
-    #               },
-    #             ],
-    #           },
-    #           drop_duplicates: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             columns: [
-    #               ["GenericLimitedString"],
-    #             ],
-    #           },
-    #           governed_catalog_target: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             partition_keys: [
-    #               ["EnclosedInStringProperty"],
-    #             ],
-    #             table: "EnclosedInStringProperty", # required
-    #             database: "EnclosedInStringProperty", # required
-    #             schema_change_policy: {
-    #               enable_update_catalog: false,
-    #               update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
-    #             },
-    #           },
-    #           governed_catalog_source: {
-    #             name: "NodeName", # required
-    #             database: "EnclosedInStringProperty", # required
-    #             table: "EnclosedInStringProperty", # required
-    #             partition_predicate: "EnclosedInStringProperty",
-    #             additional_options: {
-    #               bounded_size: 1,
-    #               bounded_files: 1,
-    #             },
-    #           },
-    #           microsoft_sql_server_catalog_source: {
-    #             name: "NodeName", # required
-    #             database: "EnclosedInStringProperty", # required
-    #             table: "EnclosedInStringProperty", # required
-    #           },
-    #           my_sql_catalog_source: {
-    #             name: "NodeName", # required
-    #             database: "EnclosedInStringProperty", # required
-    #             table: "EnclosedInStringProperty", # required
-    #           },
-    #           oracle_sql_catalog_source: {
-    #             name: "NodeName", # required
-    #             database: "EnclosedInStringProperty", # required
-    #             table: "EnclosedInStringProperty", # required
-    #           },
-    #           postgre_sql_catalog_source: {
-    #             name: "NodeName", # required
-    #             database: "EnclosedInStringProperty", # required
-    #             table: "EnclosedInStringProperty", # required
-    #           },
-    #           microsoft_sql_server_catalog_target: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             database: "EnclosedInStringProperty", # required
-    #             table: "EnclosedInStringProperty", # required
-    #           },
-    #           my_sql_catalog_target: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             database: "EnclosedInStringProperty", # required
-    #             table: "EnclosedInStringProperty", # required
-    #           },
-    #           oracle_sql_catalog_target: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             database: "EnclosedInStringProperty", # required
-    #             table: "EnclosedInStringProperty", # required
-    #           },
-    #           postgre_sql_catalog_target: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             database: "EnclosedInStringProperty", # required
-    #             table: "EnclosedInStringProperty", # required
-    #           },
-    #           dynamic_transform: {
-    #             name: "EnclosedInStringProperty", # required
-    #             transform_name: "EnclosedInStringProperty", # required
-    #             inputs: ["NodeId"], # required
-    #             parameters: [
-    #               {
-    #                 name: "EnclosedInStringProperty", # required
-    #                 type: "str", # required, accepts str, int, float, complex, bool, list, null
-    #                 validation_rule: "EnclosedInStringProperty",
-    #                 validation_message: "EnclosedInStringProperty",
-    #                 value: ["EnclosedInStringProperty"],
-    #                 list_type: "str", # accepts str, int, float, complex, bool, list, null
-    #                 is_optional: false,
-    #               },
-    #             ],
-    #             function_name: "EnclosedInStringProperty", # required
-    #             path: "EnclosedInStringProperty", # required
-    #             version: "EnclosedInStringProperty",
-    #           },
-    #           evaluate_data_quality: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             ruleset: "DQDLString", # required
-    #             output: "PrimaryInput", # accepts PrimaryInput, EvaluationResults
-    #             publishing_options: {
-    #               evaluation_context: "GenericLimitedString",
-    #               results_s3_prefix: "EnclosedInStringProperty",
-    #               cloud_watch_metrics_enabled: false,
-    #               results_publishing_enabled: false,
-    #             },
-    #             stop_job_on_failure_options: {
-    #               stop_job_on_failure_timing: "Immediate", # accepts Immediate, AfterDataLoad
-    #             },
-    #           },
-    #           s3_catalog_hudi_source: {
-    #             name: "NodeName", # required
-    #             database: "EnclosedInStringProperty", # required
-    #             table: "EnclosedInStringProperty", # required
-    #             additional_hudi_options: {
-    #               "EnclosedInStringProperty" => "EnclosedInStringProperty",
-    #             },
-    #             output_schemas: [
-    #               {
-    #                 columns: [
-    #                   {
-    #                     name: "GlueStudioColumnNameString", # required
-    #                     type: "ColumnTypeString",
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           catalog_hudi_source: {
-    #             name: "NodeName", # required
-    #             database: "EnclosedInStringProperty", # required
-    #             table: "EnclosedInStringProperty", # required
-    #             additional_hudi_options: {
-    #               "EnclosedInStringProperty" => "EnclosedInStringProperty",
-    #             },
-    #             output_schemas: [
-    #               {
-    #                 columns: [
-    #                   {
-    #                     name: "GlueStudioColumnNameString", # required
-    #                     type: "ColumnTypeString",
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           s3_hudi_source: {
-    #             name: "NodeName", # required
-    #             paths: ["EnclosedInStringProperty"], # required
-    #             additional_hudi_options: {
-    #               "EnclosedInStringProperty" => "EnclosedInStringProperty",
-    #             },
-    #             additional_options: {
-    #               bounded_size: 1,
-    #               bounded_files: 1,
-    #               enable_sample_path: false,
-    #               sample_path: "EnclosedInStringProperty",
-    #             },
-    #             output_schemas: [
-    #               {
-    #                 columns: [
-    #                   {
-    #                     name: "GlueStudioColumnNameString", # required
-    #                     type: "ColumnTypeString",
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           s3_hudi_catalog_target: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             partition_keys: [
-    #               ["EnclosedInStringProperty"],
-    #             ],
-    #             table: "EnclosedInStringProperty", # required
-    #             database: "EnclosedInStringProperty", # required
-    #             additional_options: { # required
-    #               "EnclosedInStringProperty" => "EnclosedInStringProperty",
-    #             },
-    #             schema_change_policy: {
-    #               enable_update_catalog: false,
-    #               update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
-    #             },
-    #           },
-    #           s3_hudi_direct_target: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             path: "EnclosedInStringProperty", # required
-    #             compression: "gzip", # required, accepts gzip, lzo, uncompressed, snappy
-    #             partition_keys: [
-    #               ["EnclosedInStringProperty"],
-    #             ],
-    #             format: "json", # required, accepts json, csv, avro, orc, parquet, hudi, delta
-    #             additional_options: { # required
-    #               "EnclosedInStringProperty" => "EnclosedInStringProperty",
-    #             },
-    #             schema_change_policy: {
-    #               enable_update_catalog: false,
-    #               update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
-    #               table: "EnclosedInStringProperty",
-    #               database: "EnclosedInStringProperty",
-    #             },
-    #           },
-    #           direct_jdbc_source: {
-    #             name: "NodeName", # required
-    #             database: "EnclosedInStringProperty", # required
-    #             table: "EnclosedInStringProperty", # required
-    #             connection_name: "EnclosedInStringProperty", # required
-    #             connection_type: "sqlserver", # required, accepts sqlserver, mysql, oracle, postgresql, redshift
-    #             redshift_tmp_dir: "EnclosedInStringProperty",
-    #           },
-    #           s3_catalog_delta_source: {
-    #             name: "NodeName", # required
-    #             database: "EnclosedInStringProperty", # required
-    #             table: "EnclosedInStringProperty", # required
-    #             additional_delta_options: {
-    #               "EnclosedInStringProperty" => "EnclosedInStringProperty",
-    #             },
-    #             output_schemas: [
-    #               {
-    #                 columns: [
-    #                   {
-    #                     name: "GlueStudioColumnNameString", # required
-    #                     type: "ColumnTypeString",
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           catalog_delta_source: {
-    #             name: "NodeName", # required
-    #             database: "EnclosedInStringProperty", # required
-    #             table: "EnclosedInStringProperty", # required
-    #             additional_delta_options: {
-    #               "EnclosedInStringProperty" => "EnclosedInStringProperty",
-    #             },
-    #             output_schemas: [
-    #               {
-    #                 columns: [
-    #                   {
-    #                     name: "GlueStudioColumnNameString", # required
-    #                     type: "ColumnTypeString",
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           s3_delta_source: {
-    #             name: "NodeName", # required
-    #             paths: ["EnclosedInStringProperty"], # required
-    #             additional_delta_options: {
-    #               "EnclosedInStringProperty" => "EnclosedInStringProperty",
-    #             },
-    #             additional_options: {
-    #               bounded_size: 1,
-    #               bounded_files: 1,
-    #               enable_sample_path: false,
-    #               sample_path: "EnclosedInStringProperty",
-    #             },
-    #             output_schemas: [
-    #               {
-    #                 columns: [
-    #                   {
-    #                     name: "GlueStudioColumnNameString", # required
-    #                     type: "ColumnTypeString",
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #           },
-    #           s3_delta_catalog_target: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             partition_keys: [
-    #               ["EnclosedInStringProperty"],
-    #             ],
-    #             table: "EnclosedInStringProperty", # required
-    #             database: "EnclosedInStringProperty", # required
-    #             additional_options: {
-    #               "EnclosedInStringProperty" => "EnclosedInStringProperty",
-    #             },
-    #             schema_change_policy: {
-    #               enable_update_catalog: false,
-    #               update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
-    #             },
-    #           },
-    #           s3_delta_direct_target: {
-    #             name: "NodeName", # required
-    #             inputs: ["NodeId"], # required
-    #             partition_keys: [
-    #               ["EnclosedInStringProperty"],
-    #             ],
-    #             path: "EnclosedInStringProperty", # required
-    #             compression: "uncompressed", # required, accepts uncompressed, snappy
-    #             format: "json", # required, accepts json, csv, avro, orc, parquet, hudi, delta
-    #             additional_options: {
-    #               "EnclosedInStringProperty" => "EnclosedInStringProperty",
-    #             },
-    #             schema_change_policy: {
-    #               enable_update_catalog: false,
-    #               update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
-    #               table: "EnclosedInStringProperty",
-    #               database: "EnclosedInStringProperty",
-    #             },
-    #           },
-    #         },
-    #       },
-    #       execution_class: "FLEX", # accepts FLEX, STANDARD
-    #       source_control_details: {
-    #         provider: "GITHUB", # accepts GITHUB, AWS_CODE_COMMIT
-    #         repository: "Generic512CharString",
-    #         owner: "Generic512CharString",
-    #         branch: "Generic512CharString",
-    #         folder: "Generic512CharString",
-    #         last_commit_id: "Generic512CharString",
-    #         auth_strategy: "PERSONAL_ACCESS_TOKEN", # accepts PERSONAL_ACCESS_TOKEN, AWS_SECRETS_MANAGER
-    #         auth_token: "Generic512CharString",
-    #       },
-    #     },
-    #   })
     #
     # @example Response structure
     #
@@ -16728,7 +15262,7 @@ module Aws::Glue
     #     role: "RoleString",
     #     glue_version: "GlueVersionString",
     #     max_capacity: 1.0,
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X, G.4X, G.8X, Z.2X
     #     number_of_workers: 1,
     #     timeout: 1,
     #     max_retries: 1,
@@ -17143,6 +15677,7 @@ module Aws::Glue
     #         catalog_id: "CatalogIdString",
     #         database_name: "NameString",
     #         name: "NameString",
+    #         region: "NameString",
     #       },
     #     },
     #     skip_archive: false,
@@ -17357,7 +15892,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.134.0'
+      context[:gem_version] = '1.144.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -9,6 +9,7 @@
 
 
 module Aws::PinpointSMSVoice
+  # @api private
   module Endpoints
 
     class CreateConfigurationSet

@@ -9,6 +9,7 @@
 
 
 module Aws::SES
+  # @api private
   module Endpoints
 
     class CloneReceiptRuleSet

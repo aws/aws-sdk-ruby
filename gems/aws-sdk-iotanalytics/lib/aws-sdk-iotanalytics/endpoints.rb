@@ -9,6 +9,7 @@
 
 
 module Aws::IoTAnalytics
+  # @api private
   module Endpoints
 
     class BatchPutMessage

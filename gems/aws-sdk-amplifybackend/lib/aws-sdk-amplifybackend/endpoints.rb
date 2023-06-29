@@ -9,6 +9,7 @@
 
 
 module Aws::AmplifyBackend
+  # @api private
   module Endpoints
 
     class CloneBackend

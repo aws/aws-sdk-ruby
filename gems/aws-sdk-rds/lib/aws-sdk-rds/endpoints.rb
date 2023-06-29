@@ -9,6 +9,7 @@
 
 
 module Aws::RDS
+  # @api private
   module Endpoints
 
     class AddRoleToDBCluster

@@ -18,6 +18,11 @@ module Aws
       end
 
       describe '#format' do
+        it 'provides a :region replacement' do
+          response.context.config.region = 'us-peccy-1'
+          expect(format(':region')).to eq('us-peccy-1')
+        end
+
         it 'provides a :client_class replacement' do
           response.context.client = String.new
           expect(format(':client_class')).to eq('String')

@@ -1,6 +1,76 @@
 Unreleased Changes
 ------------------
 
+1.191.0 (2023-06-28)
+------------------
+
+* Feature - This release adds support for Model Cards Model Registry integration.
+
+1.190.0 (2023-06-27)
+------------------
+
+* Feature - Introducing TTL for online store records in feature groups.
+
+1.189.0 (2023-06-21)
+------------------
+
+* Feature - This release provides support in SageMaker for output files in training jobs to be uploaded without compression and enable customer to deploy uncompressed model from S3 to real-time inference Endpoints. In addition, ml.trn1n.32xlarge is added to supported instance type list in training job.
+
+1.188.0 (2023-06-19)
+------------------
+
+* Feature - Amazon Sagemaker Autopilot releases CreateAutoMLJobV2 and DescribeAutoMLJobV2 for Autopilot customers with ImageClassification, TextClassification and Tabular problem type config support.
+
+1.187.0 (2023-06-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.186.0 (2023-06-12)
+------------------
+
+* Feature - Sagemaker Neo now supports compilation for inferentia2 (ML_INF2) and Trainium1 (ML_TRN1) as available targets. With these devices, you can run your workloads at highest performance with lowest cost. inferentia2 (ML_INF2) is available in CMH and Trainium1 (ML_TRN1) is available in IAD currently
+
+1.185.0 (2023-06-02)
+------------------
+
+* Feature - This release adds Selective Execution feature that allows SageMaker Pipelines users to run selected steps in a pipeline.
+
+1.184.0 (2023-06-01)
+------------------
+
+* Feature - Amazon Sagemaker Autopilot adds support for Parquet file input to NLP text classification jobs.
+
+1.183.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.182.0 (2023-05-26)
+------------------
+
+* Feature - Added ml.p4d and ml.inf1 as supported instance type families for SageMaker Notebook Instances.
+
+1.181.0 (2023-05-25)
+------------------
+
+* Feature - Amazon SageMaker Automatic Model Tuning now supports enabling Autotune for tuning jobs which can choose tuning job configurations.
+
+1.180.0 (2023-05-24)
+------------------
+
+* Feature - SageMaker now provides an instantaneous deployment recommendation through the DescribeModel API
+
+1.179.0 (2023-05-23)
+------------------
+
+* Feature - Added ModelNameEquals, ModelPackageVersionArnEquals in request and ModelName, SamplePayloadUrl, ModelPackageVersionArn in response of ListInferenceRecommendationsJobs API. Added Invocation timestamps in response of DescribeInferenceRecommendationsJob API & ListInferenceRecommendationsJobSteps API.
+
+1.178.0 (2023-05-09)
+------------------
+
+* Feature - This release includes support for (1) Provisioned Concurrency for Amazon SageMaker Serverless Inference and (2) UpdateEndpointWeightsAndCapacities API for Serverless endpoints.
+
 1.177.0 (2023-05-04)
 ------------------
 

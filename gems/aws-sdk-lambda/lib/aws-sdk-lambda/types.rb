@@ -751,14 +751,15 @@ module Aws::Lambda
     #
     # @!attribute [rw] starting_position
     #   The position in a stream from which to start reading. Required for
-    #   Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources.
-    #   `AT_TIMESTAMP` is supported only for Amazon Kinesis streams and
-    #   Amazon DocumentDB.
+    #   Amazon Kinesis and Amazon DynamoDB Stream event sources.
+    #   `AT_TIMESTAMP` is supported only for Amazon Kinesis streams, Amazon
+    #   DocumentDB, Amazon MSK, and self-managed Apache Kafka.
     #   @return [String]
     #
     # @!attribute [rw] starting_position_timestamp
     #   With `StartingPosition` set to `AT_TIMESTAMP`, the time from which
-    #   to start reading.
+    #   to start reading. `StartingPositionTimestamp` cannot be in the
+    #   future.
     #   @return [Time]
     #
     # @!attribute [rw] destination_config
@@ -979,8 +980,12 @@ module Aws::Lambda
     # @!attribute [rw] kms_key_arn
     #   The ARN of the Key Management Service (KMS) customer managed key
     #   that's used to encrypt your function's [environment variables][1].
-    #   When [Lambda SnapStart][2] is activated, this key is also used to
-    #   encrypt your function's snapshot. If you don't provide a customer
+    #   When [Lambda SnapStart][2] is activated, Lambda also uses this key
+    #   is to encrypt your function's snapshot. If you deploy your function
+    #   using a container image, Lambda also uses this key to encrypt your
+    #   function when it's deployed. Note that this is not the same key
+    #   that's used to protect your container image in the Amazon Elastic
+    #   Container Registry (Amazon ECR). If you don't provide a customer
     #   managed key, Lambda uses a default service key.
     #
     #
@@ -1777,14 +1782,15 @@ module Aws::Lambda
     #
     # @!attribute [rw] starting_position
     #   The position in a stream from which to start reading. Required for
-    #   Amazon Kinesis, Amazon DynamoDB, and Amazon MSK stream sources.
-    #   `AT_TIMESTAMP` is supported only for Amazon Kinesis streams and
-    #   Amazon DocumentDB.
+    #   Amazon Kinesis and Amazon DynamoDB Stream event sources.
+    #   `AT_TIMESTAMP` is supported only for Amazon Kinesis streams, Amazon
+    #   DocumentDB, Amazon MSK, and self-managed Apache Kafka.
     #   @return [String]
     #
     # @!attribute [rw] starting_position_timestamp
     #   With `StartingPosition` set to `AT_TIMESTAMP`, the time from which
-    #   to start reading.
+    #   to start reading. `StartingPositionTimestamp` cannot be in the
+    #   future.
     #   @return [Time]
     #
     # @!attribute [rw] batch_size
@@ -1892,7 +1898,9 @@ module Aws::Lambda
     #   to infinite. When the value is set to infinite, Lambda never
     #   discards old records.
     #
-    #   <note markdown="1"> The minimum value that can be set is 60 seconds.
+    #   <note markdown="1"> The minimum valid value for maximum record age is 60s. Although
+    #   values less than 60 and greater than -1 fall within the parameter's
+    #   absolute range, they are not allowed
     #
     #    </note>
     #   @return [Integer]
@@ -2988,6 +2996,13 @@ module Aws::Lambda
     #
     # @!attribute [rw] compatible_runtimes
     #   The layer's compatible runtimes.
+    #
+    #   The following list includes deprecated runtimes. For more
+    #   information, see [Runtime deprecation policy][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
     #   @return [Array<String>]
     #
     # @!attribute [rw] license_info
@@ -3886,6 +3901,13 @@ module Aws::Lambda
     #
     # @!attribute [rw] compatible_runtimes
     #   The layer's compatible runtimes.
+    #
+    #   The following list includes deprecated runtimes. For more
+    #   information, see [Runtime deprecation policy][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
     #   @return [Array<String>]
     #
     # @!attribute [rw] license_info
@@ -4314,6 +4336,13 @@ module Aws::Lambda
 
     # @!attribute [rw] compatible_runtime
     #   A runtime identifier. For example, `go1.x`.
+    #
+    #   The following list includes deprecated runtimes. For more
+    #   information, see [Runtime deprecation policy][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
     #   @return [String]
     #
     # @!attribute [rw] layer_name
@@ -4368,6 +4397,13 @@ module Aws::Lambda
 
     # @!attribute [rw] compatible_runtime
     #   A runtime identifier. For example, `go1.x`.
+    #
+    #   The following list includes deprecated runtimes. For more
+    #   information, see [Runtime deprecation policy][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
     #   @return [String]
     #
     # @!attribute [rw] marker
@@ -4704,9 +4740,13 @@ module Aws::Lambda
     #   A list of compatible [function runtimes][1]. Used for filtering with
     #   ListLayers and ListLayerVersions.
     #
+    #   The following list includes deprecated runtimes. For more
+    #   information, see [Runtime deprecation policy][2].
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
     #   @return [Array<String>]
     #
     # @!attribute [rw] license_info
@@ -4776,6 +4816,13 @@ module Aws::Lambda
     #
     # @!attribute [rw] compatible_runtimes
     #   The layer's compatible runtimes.
+    #
+    #   The following list includes deprecated runtimes. For more
+    #   information, see [Runtime deprecation policy][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
     #   @return [Array<String>]
     #
     # @!attribute [rw] license_info
@@ -5178,6 +5225,27 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # Lambda has detected your function being invoked in a recursive loop
+    # with other Amazon Web Services resources and stopped your function's
+    # invocation.
+    #
+    # @!attribute [rw] type
+    #   The exception type.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The exception message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RecursiveInvocationException AWS API Documentation
+    #
+    class RecursiveInvocationException < Struct.new(
+      :type,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] layer_name
     #   The name or Amazon Resource Name (ARN) of the layer.
     #   @return [String]
@@ -5461,13 +5529,9 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # The function's Lambda SnapStart setting. Set `ApplyOn` to
+    # The function's [Lambda SnapStart][1] setting. Set `ApplyOn` to
     # `PublishedVersions` to create a snapshot of the initialized execution
     # environment when you publish a function version.
-    #
-    # SnapStart is supported with the `java11` runtime. For more
-    # information, see [Improving startup performance with Lambda
-    # SnapStart][1].
     #
     #
     #
@@ -6214,8 +6278,12 @@ module Aws::Lambda
     # @!attribute [rw] kms_key_arn
     #   The ARN of the Key Management Service (KMS) customer managed key
     #   that's used to encrypt your function's [environment variables][1].
-    #   When [Lambda SnapStart][2] is activated, this key is also used to
-    #   encrypt your function's snapshot. If you don't provide a customer
+    #   When [Lambda SnapStart][2] is activated, Lambda also uses this key
+    #   is to encrypt your function's snapshot. If you deploy your function
+    #   using a container image, Lambda also uses this key to encrypt your
+    #   function when it's deployed. Note that this is not the same key
+    #   that's used to protect your container image in the Amazon Elastic
+    #   Container Registry (Amazon ECR). If you don't provide a customer
     #   managed key, Lambda uses a default service key.
     #
     #

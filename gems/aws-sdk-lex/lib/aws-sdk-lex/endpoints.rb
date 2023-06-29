@@ -9,6 +9,7 @@
 
 
 module Aws::Lex
+  # @api private
   module Endpoints
 
     class DeleteSession

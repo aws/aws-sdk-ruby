@@ -275,6 +275,11 @@ module Aws::Health
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -452,10 +457,9 @@ module Aws::Health
     # Returns a list of entities that have been affected by the specified
     # events, based on the specified filter criteria. Entities can refer to
     # individual customer resources, groups of customer resources, or any
-    # other construct, depending on the Amazon Web Services service. Events
-    # that have impact beyond that of the affected entities, or where the
-    # extent of impact is unknown, include at least one entity indicating
-    # this.
+    # other construct, depending on the Amazon Web Service. Events that have
+    # impact beyond that of the affected entities, or where the extent of
+    # impact is unknown, include at least one entity indicating this.
     #
     # At least one event ARN is required.
     #
@@ -551,7 +555,7 @@ module Aws::Health
     # events for one or more accounts in your organization in Organizations,
     # based on the filter criteria. Entities can refer to individual
     # customer resources, groups of customer resources, or any other
-    # construct, depending on the Amazon Web Services service.
+    # construct, depending on the Amazon Web Service.
     #
     # At least one event Amazon Resource Name (ARN) and account ID are
     # required.
@@ -952,8 +956,8 @@ module Aws::Health
 
     # Returns the event types that meet the specified filter criteria. You
     # can use this API operation to find information about the Health event,
-    # such as the category, Amazon Web Services service, and event code. The
-    # metadata for each event appears in the [EventType][1] object.
+    # such as the category, Amazon Web Service, and event code. The metadata
+    # for each event appears in the [EventType][1] object.
     #
     # If you don't specify a filter criteria, the API operation returns all
     # event types, in no particular order.
@@ -984,6 +988,11 @@ module Aws::Health
     # @option params [Integer] :max_results
     #   The maximum number of items to return in one batch, between 10 and
     #   100, inclusive.
+    #
+    #   <note markdown="1"> If you don't specify the `maxResults` parameter, this operation
+    #   returns a maximum of 30 items by default.
+    #
+    #    </note>
     #
     # @return [Types::DescribeEventTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1263,8 +1272,7 @@ module Aws::Health
 
     # This operation provides status information on enabling or disabling
     # Health to work with your organization. To call this operation, you
-    # must sign in as an IAM user, assume an IAM role, or sign in as the
-    # root user (not recommended) in the organization's management account.
+    # must use the organization's management account.
     #
     # @return [Types::DescribeHealthServiceStatusForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1284,11 +1292,9 @@ module Aws::Health
     end
 
     # Disables Health from working with Organizations. To call this
-    # operation, you must sign in as an Identity and Access Management (IAM)
-    # user, assume an IAM role, or sign in as the root user (not
-    # recommended) in the organization's management account. For more
-    # information, see [Aggregating Health events][1] in the *Health User
-    # Guide*.
+    # operation, you must sign in to the organization's management account.
+    # For more information, see [Aggregating Health events][1] in the
+    # *Health User Guide*.
     #
     # This operation doesn't remove the service-linked role from the
     # management account in your organization. You must use the IAM console,
@@ -1379,7 +1385,7 @@ module Aws::Health
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-health'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

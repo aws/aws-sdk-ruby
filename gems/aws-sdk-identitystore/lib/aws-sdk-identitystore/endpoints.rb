@@ -9,6 +9,7 @@
 
 
 module Aws::IdentityStore
+  # @api private
   module Endpoints
 
     class CreateGroup

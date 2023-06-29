@@ -9,6 +9,7 @@
 
 
 module Aws::Textract
+  # @api private
   module Endpoints
 
     class AnalyzeDocument

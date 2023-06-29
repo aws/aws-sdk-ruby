@@ -9,6 +9,7 @@
 
 
 module Aws::Polly
+  # @api private
   module Endpoints
 
     class DeleteLexicon

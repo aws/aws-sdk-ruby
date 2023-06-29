@@ -9,6 +9,7 @@
 
 
 module Aws::ControlTower
+  # @api private
   module Endpoints
 
     class DisableControl

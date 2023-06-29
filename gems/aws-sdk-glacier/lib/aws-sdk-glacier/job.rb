@@ -230,11 +230,13 @@ module Aws::Glacier
     #
     # @return [self]
     def load
-      resp = @client.describe_job(
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_job(
         account_id: @account_id,
         vault_name: @vault_name,
         job_id: @id
       )
+      end
       @data = resp.data
       self
     end
@@ -349,7 +351,9 @@ module Aws::Glacier
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -399,7 +403,9 @@ module Aws::Glacier
         vault_name: @vault_name,
         job_id: @id
       )
-      resp = @client.get_job_output(options, &block)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.get_job_output(options, &block)
+      end
       resp.data
     end
 

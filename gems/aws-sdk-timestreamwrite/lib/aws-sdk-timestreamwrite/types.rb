@@ -302,6 +302,10 @@ module Aws::TimestreamWrite
     #   writes.
     #   @return [Types::MagneticStoreWriteProperties]
     #
+    # @!attribute [rw] schema
+    #   The schema of the table.
+    #   @return [Types::Schema]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/CreateTableRequest AWS API Documentation
     #
     class CreateTableRequest < Struct.new(
@@ -309,7 +313,8 @@ module Aws::TimestreamWrite
       :table_name,
       :retention_properties,
       :tags,
-      :magnetic_store_write_properties)
+      :magnetic_store_write_properties,
+      :schema)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -948,7 +953,12 @@ module Aws::TimestreamWrite
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value for the MeasureValue.
+    #   The value for the MeasureValue. For information, see [Data
+    #   types][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/writes.html#writes.data-types
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -1027,6 +1037,37 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
+    # An attribute used in partitioning data in a table. A dimension key
+    # partitions data using the values of the dimension specified by the
+    # dimension-name as partition key, while a measure key partitions data
+    # using measure names (values of the 'measure\_name' column).
+    #
+    # @!attribute [rw] type
+    #   The type of the partition key. Options are DIMENSION (dimension key)
+    #   and MEASURE (measure key).
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the attribute used for a dimension key.
+    #   @return [String]
+    #
+    # @!attribute [rw] enforcement_in_record
+    #   The level of enforcement for the specification of a dimension key in
+    #   ingested records. Options are REQUIRED (dimension key must be
+    #   specified) and OPTIONAL (dimension key does not have to be
+    #   specified).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/PartitionKey AWS API Documentation
+    #
+    class PartitionKey < Struct.new(
+      :type,
+      :name,
+      :enforcement_in_record)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a time-series data point being written into Timestream.
     # Each record contains an array of dimensions. Dimensions represent the
     # metadata attributes of a time-series data point, such as the instance
@@ -1062,7 +1103,12 @@ module Aws::TimestreamWrite
     #
     # @!attribute [rw] measure_value_type
     #   Contains the data type of the measure value for the time-series data
-    #   point. Default type is `DOUBLE`.
+    #   point. Default type is `DOUBLE`. For more information, see [Data
+    #   types][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/writes.html#writes.data-types
     #   @return [String]
     #
     # @!attribute [rw] time
@@ -1370,6 +1416,25 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
+    # A Schema specifies the expected data model of the table.
+    #
+    # @!attribute [rw] composite_partition_key
+    #   A non-empty list of partition keys defining the attributes used to
+    #   partition the table data. The order of the list determines the
+    #   partition hierarchy. The name and type of each partition key as well
+    #   as the partition key order cannot be changed after the table is
+    #   created. However, the enforcement level of each partition key can be
+    #   changed.
+    #   @return [Array<Types::PartitionKey>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/Schema AWS API Documentation
+    #
+    class Schema < Struct.new(
+      :composite_partition_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The instance quota of resource exceeded for this account.
     #
     # @!attribute [rw] message
@@ -1424,6 +1489,10 @@ module Aws::TimestreamWrite
     #   writes.
     #   @return [Types::MagneticStoreWriteProperties]
     #
+    # @!attribute [rw] schema
+    #   The schema of the table.
+    #   @return [Types::Schema]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/Table AWS API Documentation
     #
     class Table < Struct.new(
@@ -1434,7 +1503,8 @@ module Aws::TimestreamWrite
       :retention_properties,
       :creation_time,
       :last_updated_time,
-      :magnetic_store_write_properties)
+      :magnetic_store_write_properties,
+      :schema)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1582,13 +1652,18 @@ module Aws::TimestreamWrite
     #   writes.
     #   @return [Types::MagneticStoreWriteProperties]
     #
+    # @!attribute [rw] schema
+    #   The schema of the table.
+    #   @return [Types::Schema]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/UpdateTableRequest AWS API Documentation
     #
     class UpdateTableRequest < Struct.new(
       :database_name,
       :table_name,
       :retention_properties,
-      :magnetic_store_write_properties)
+      :magnetic_store_write_properties,
+      :schema)
       SENSITIVE = []
       include Aws::Structure
     end

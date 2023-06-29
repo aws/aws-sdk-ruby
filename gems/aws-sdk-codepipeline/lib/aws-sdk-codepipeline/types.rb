@@ -10,10 +10,11 @@
 module Aws::CodePipeline
   module Types
 
-    # Represents an AWS session credentials object. These credentials are
-    # temporary credentials that are issued by AWS Secure Token Service
-    # (STS). They can be used to access input and output artifacts in the S3
-    # bucket used to store artifact for the pipeline in AWS CodePipeline.
+    # Represents an Amazon Web Services session credentials object. These
+    # credentials are temporary credentials that are issued by Amazon Web
+    # Services Secure Token Service (STS). They can be used to access input
+    # and output artifacts in the S3 bucket used to store artifact for the
+    # pipeline in CodePipeline.
     #
     # @!attribute [rw] access_key_id
     #   The access key for the session.
@@ -45,10 +46,10 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] nonce
-    #   A system-generated random number that AWS CodePipeline uses to
-    #   ensure that the job is being worked on by only one job worker. Get
-    #   this number from the response of the PollForJobs request that
-    #   returned this job.
+    #   A system-generated random number that CodePipeline uses to ensure
+    #   that the job is being worked on by only one job worker. Get this
+    #   number from the response of the PollForJobs request that returned
+    #   this job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/AcknowledgeJobInput AWS API Documentation
@@ -81,9 +82,9 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] nonce
-    #   A system-generated random number that AWS CodePipeline uses to
-    #   ensure that the job is being worked on by only one job worker. Get
-    #   this number from the response to a GetThirdPartyJobDetails request.
+    #   A system-generated random number that CodePipeline uses to ensure
+    #   that the job is being worked on by only one job worker. Get this
+    #   number from the response to a GetThirdPartyJobDetails request.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -230,11 +231,11 @@ module Aws::CodePipeline
     #   The action's configuration. These are key-value pairs that specify
     #   input values for an action. For more information, see [Action
     #   Structure Requirements in CodePipeline][1]. For the list of
-    #   configuration properties for the AWS CloudFormation action type in
+    #   configuration properties for the CloudFormation action type in
     #   CodePipeline, see [Configuration Properties Reference][2] in the
-    #   *AWS CloudFormation User Guide*. For template snippets with
-    #   examples, see [Using Parameter Override Functions with CodePipeline
-    #   Pipelines][3] in the *AWS CloudFormation User Guide*.
+    #   *CloudFormation User Guide*. For template snippets with examples,
+    #   see [Using Parameter Override Functions with CodePipeline
+    #   Pipelines][3] in the *CloudFormation User Guide*.
     #
     #   The values can be represented in either JSON or YAML format. For
     #   example, the JSON configuration item format is as follows:
@@ -266,7 +267,8 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The action declaration's AWS Region, such as us-east-1.
+    #   The action declaration's Amazon Web Services Region, such as
+    #   us-east-1.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -332,8 +334,8 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] external_execution_url
-    #   The URL of a resource external to AWS that is used when running the
-    #   action (for example, an external repository URL).
+    #   The URL of a resource external to Amazon Web Services that is used
+    #   when running the action (for example, an external repository URL).
     #   @return [String]
     #
     # @!attribute [rw] percent_complete
@@ -341,7 +343,8 @@ module Aws::CodePipeline
     #   @return [Integer]
     #
     # @!attribute [rw] error_details
-    #   The details of an error returned by a URL external to AWS.
+    #   The details of an error returned by a URL external to Amazon Web
+    #   Services.
     #   @return [Types::ErrorDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionExecution AWS API Documentation
@@ -459,7 +462,7 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The AWS Region for the action, such as us-east-1.
+    #   The Amazon Web Services Region for the action, such as us-east-1.
     #   @return [String]
     #
     # @!attribute [rw] input_artifacts
@@ -750,8 +753,8 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] policy_statements_template
     #   The policy statement that specifies the permissions in the
-    #   CodePipeline customer’s account that are needed to successfully run
-    #   an action.
+    #   CodePipeline customer account that are needed to successfully run an
+    #   action.
     #
     #   To grant permission to another account, specify the account ID as
     #   the Principal, a domain-style identifier defined by the service, for
@@ -815,8 +818,8 @@ module Aws::CodePipeline
     # @!attribute [rw] provider
     #   The provider of the service being called by the action. Valid
     #   providers are determined by the action category. For example, an
-    #   action in the Deploy category type might have a provider of AWS
-    #   CodeDeploy, which would be specified as CodeDeploy. For more
+    #   action in the Deploy category type might have a provider of
+    #   CodeDeploy, which would be specified as `CodeDeploy`. For more
     #   information, see [Valid Action Types and Providers in
     #   CodePipeline][1].
     #
@@ -893,8 +896,8 @@ module Aws::CodePipeline
     # Details identifying the users with permissions to use the action type.
     #
     # @!attribute [rw] allowed_accounts
-    #   A list of AWS account IDs with access to use the action type in
-    #   their pipelines.
+    #   A list of Amazon Web Services account IDs with access to use the
+    #   action type in their pipelines.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionTypePermissions AWS API Documentation
@@ -959,24 +962,24 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] entity_url_template
-    #   The URL returned to the AWS CodePipeline console that provides a
-    #   deep link to the resources of the external system, such as the
-    #   configuration page for an AWS CodeDeploy deployment group. This link
-    #   is provided as part of the action display in the pipeline.
+    #   The URL returned to the CodePipeline console that provides a deep
+    #   link to the resources of the external system, such as the
+    #   configuration page for a CodeDeploy deployment group. This link is
+    #   provided as part of the action display in the pipeline.
     #   @return [String]
     #
     # @!attribute [rw] execution_url_template
-    #   The URL returned to the AWS CodePipeline console that contains a
-    #   link to the top-level landing page for the external system, such as
-    #   the console page for AWS CodeDeploy. This link is shown on the
-    #   pipeline view page in the AWS CodePipeline console and provides a
-    #   link to the execution entity of the external action.
+    #   The URL returned to the CodePipeline console that contains a link to
+    #   the top-level landing page for the external system, such as the
+    #   console page for CodeDeploy. This link is shown on the pipeline view
+    #   page in the CodePipeline console and provides a link to the
+    #   execution entity of the external action.
     #   @return [String]
     #
     # @!attribute [rw] revision_url_template
-    #   The URL returned to the AWS CodePipeline console that contains a
-    #   link to the page where customers can update or change the
-    #   configuration of the external action.
+    #   The URL returned to the CodePipeline console that contains a link to
+    #   the page where customers can update or change the configuration of
+    #   the external action.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionTypeSettings AWS API Documentation
@@ -1055,8 +1058,11 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents information about an artifact that is worked on by actions
-    # in the pipeline.
+    # Artifacts are the files that are worked on by actions in the pipeline.
+    # See the action configuration for each action for details about
+    # artifact parameters. For example, the S3 source action artifact is a
+    # file name (or file path), and the files are generally provided as a
+    # ZIP file. Example artifact name: SampleApp\_Windows.zip
     #
     # @!attribute [rw] name
     #   The artifact's name.
@@ -1157,7 +1163,7 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] revision_summary
     #   Summary information about the most recent revision of the artifact.
-    #   For GitHub and AWS CodeCommit repositories, the commit message. For
+    #   For GitHub and CodeCommit repositories, the commit message. For
     #   Amazon S3 buckets or actions, the user-provided content of a
     #   `codepipeline-artifact-revision-summary` key specified in the object
     #   metadata.
@@ -1170,7 +1176,7 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] revision_url
     #   The commit ID for the artifact revision. For artifacts stored in
-    #   GitHub or AWS CodeCommit repositories, the commit ID is linked to a
+    #   GitHub or CodeCommit repositories, the commit ID is linked to a
     #   commit details page.
     #   @return [String]
     #
@@ -1203,14 +1209,15 @@ module Aws::CodePipeline
     #   The S3 bucket used for storing the artifacts for a pipeline. You can
     #   specify the name of an S3 bucket but not a folder in the bucket. A
     #   folder to contain the pipeline artifacts is created for you based on
-    #   the name of the pipeline. You can use any S3 bucket in the same AWS
-    #   Region as the pipeline to store your pipeline artifacts.
+    #   the name of the pipeline. You can use any S3 bucket in the same
+    #   Amazon Web Services Region as the pipeline to store your pipeline
+    #   artifacts.
     #   @return [String]
     #
     # @!attribute [rw] encryption_key
     #   The encryption key used to encrypt the data in the artifact store,
-    #   such as an AWS Key Management Service (AWS KMS) key. If this is
-    #   undefined, the default key for Amazon S3 is used.
+    #   such as an Amazon Web Services Key Management Service key. If this
+    #   is undefined, the default key for Amazon S3 is used.
     #   @return [Types::EncryptionKey]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ArtifactStore AWS API Documentation
@@ -1277,7 +1284,7 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] provider
-    #   The provider of the service used in the custom action, such as AWS
+    #   The provider of the service used in the custom action, such as
     #   CodeDeploy.
     #   @return [String]
     #
@@ -1432,7 +1439,7 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] provider
-    #   The provider of the service used in the custom action, such as AWS
+    #   The provider of the service used in the custom action, such as
     #   CodeDeploy.
     #   @return [String]
     #
@@ -1580,23 +1587,26 @@ module Aws::CodePipeline
     end
 
     # Represents information about the key used to encrypt data in the
-    # artifact store, such as an AWS Key Management Service (AWS KMS) key.
+    # artifact store, such as an Amazon Web Services Key Management Service
+    # (Key Management Service) key.
     #
     # @!attribute [rw] id
-    #   The ID used to identify the key. For an AWS KMS key, you can use the
-    #   key ID, the key ARN, or the alias ARN.
+    #   The ID used to identify the key. For an Amazon Web Services KMS key,
+    #   you can use the key ID, the key ARN, or the alias ARN.
     #
-    #   <note markdown="1"> Aliases are recognized only in the account that created the customer
-    #   master key (CMK). For cross-account actions, you can only use the
-    #   key ID or key ARN to identify the key.
+    #   <note markdown="1"> Aliases are recognized only in the account that created the KMS key.
+    #   For cross-account actions, you can only use the key ID or key ARN to
+    #   identify the key. Cross-account actions involve using the role from
+    #   the other account (AccountB), so specifying the key ID will use the
+    #   key from the other account (AccountB).
     #
     #    </note>
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of encryption key, such as an AWS Key Management Service
-    #   (AWS KMS) key. When creating or updating a pipeline, the value must
-    #   be set to 'KMS'.
+    #   The type of encryption key, such as an Amazon Web Services KMS key.
+    #   When creating or updating a pipeline, the value must be set to
+    #   'KMS'.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/EncryptionKey AWS API Documentation
@@ -1608,7 +1618,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # Represents information about an error in AWS CodePipeline.
+    # Represents information about an error in CodePipeline.
     #
     # @!attribute [rw] code
     #   The system ID or number code of the error.
@@ -1636,7 +1646,7 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] external_execution_id
     #   The system-generated unique ID of this action used to identify this
-    #   job worker in any external systems, such as AWS CodeDeploy.
+    #   job worker in any external systems, such as CodeDeploy.
     #   @return [String]
     #
     # @!attribute [rw] percent_complete
@@ -1850,7 +1860,7 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] name
     #   The name of the pipeline for which you want to get information.
-    #   Pipeline names must be unique under an AWS user account.
+    #   Pipeline names must be unique in an Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -1985,6 +1995,13 @@ module Aws::CodePipeline
     # @!attribute [rw] name
     #   The name of the artifact to be worked on (for example, "My App").
     #
+    #   Artifacts are the files that are worked on by actions in the
+    #   pipeline. See the action configuration for each action for details
+    #   about artifact parameters. For example, the S3 source action input
+    #   artifact is a file name (or file path), and the files are generally
+    #   provided as a ZIP file. Example artifact name:
+    #   SampleApp\_Windows.zip
+    #
     #   The input artifact of an action must exactly match the output
     #   artifact declared in a preceding action, but the input artifact does
     #   not have to be the next action in strict sequence from the action
@@ -2111,13 +2128,14 @@ module Aws::CodePipeline
     #   @return [Types::JobData]
     #
     # @!attribute [rw] nonce
-    #   A system-generated random number that AWS CodePipeline uses to
-    #   ensure that the job is being worked on by only one job worker. Use
-    #   this number in an AcknowledgeJob request.
+    #   A system-generated random number that CodePipeline uses to ensure
+    #   that the job is being worked on by only one job worker. Use this
+    #   number in an AcknowledgeJob request.
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The ID of the AWS account to use when performing the job.
+    #   The ID of the Amazon Web Services account to use when performing the
+    #   job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/Job AWS API Documentation
@@ -2159,21 +2177,21 @@ module Aws::CodePipeline
     #   @return [Array<Types::Artifact>]
     #
     # @!attribute [rw] artifact_credentials
-    #   Represents an AWS session credentials object. These credentials are
-    #   temporary credentials that are issued by AWS Secure Token Service
-    #   (STS). They can be used to access input and output artifacts in the
-    #   S3 bucket used to store artifacts for the pipeline in AWS
-    #   CodePipeline.
+    #   Represents an Amazon Web Services session credentials object. These
+    #   credentials are temporary credentials that are issued by Amazon Web
+    #   Services Secure Token Service (STS). They can be used to access
+    #   input and output artifacts in the S3 bucket used to store artifacts
+    #   for the pipeline in CodePipeline.
     #   @return [Types::AWSSessionCredentials]
     #
     # @!attribute [rw] continuation_token
-    #   A system-generated token, such as a AWS CodeDeploy deployment ID,
-    #   required by a job to continue the job asynchronously.
+    #   A system-generated token, such as a deployment ID, required by a job
+    #   to continue the job asynchronously.
     #   @return [String]
     #
     # @!attribute [rw] encryption_key
     #   Represents information about the key used to encrypt data in the
-    #   artifact store, such as an AWS Key Management Service (AWS KMS) key.
+    #   artifact store, such as an KMS key.
     #   @return [Types::EncryptionKey]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/JobData AWS API Documentation
@@ -2203,7 +2221,7 @@ module Aws::CodePipeline
     #   @return [Types::JobData]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID associated with the job.
+    #   The Amazon Web Services account ID associated with the job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/JobDetails AWS API Documentation
@@ -2259,8 +2277,8 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # The number of pipelines associated with the AWS account has exceeded
-    # the limit allowed for the account.
+    # The number of pipelines associated with the Amazon Web Services
+    # account has exceeded the limit allowed for the account.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/LimitExceededException AWS API Documentation
     #
@@ -2608,7 +2626,7 @@ module Aws::CodePipeline
     end
 
     # The stage has failed in a later run of the pipeline and the
-    # pipelineExecutionId associated with the request is out of date.
+    # `pipelineExecutionId` associated with the request is out of date.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/NotLatestPipelineExecutionException AWS API Documentation
     #
@@ -2700,7 +2718,7 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) for AWS CodePipeline to use to either
+    #   The Amazon Resource Name (ARN) for CodePipeline to use to either
     #   perform actions with no `actionRoleArn`, or to use to assume roles
     #   for actions with an `actionRoleArn`.
     #   @return [String]
@@ -2717,9 +2735,9 @@ module Aws::CodePipeline
     #   @return [Types::ArtifactStore]
     #
     # @!attribute [rw] artifact_stores
-    #   A mapping of `artifactStore` objects and their corresponding AWS
-    #   Regions. There must be an artifact store for the pipeline Region and
-    #   for each cross-region action in the pipeline.
+    #   A mapping of `artifactStore` objects and their corresponding Amazon
+    #   Web Services Regions. There must be an artifact store for the
+    #   pipeline Region and for each cross-region action in the pipeline.
     #
     #   <note markdown="1"> You must include either `artifactStore` or `artifactStores` in your
     #   pipeline, but you cannot use both. If you create a cross-region
@@ -2928,12 +2946,27 @@ module Aws::CodePipeline
     #   format.
     #   @return [Time]
     #
+    # @!attribute [rw] polling_disabled_at
+    #   The date and time that polling for source changes (periodic checks)
+    #   was stopped for the pipeline, in timestamp format. You can migrate
+    #   (update) a polling pipeline to use event-based change detection. For
+    #   example, for a pipeline with a CodeCommit source, we recommend you
+    #   migrate (update) your pipeline to use CloudWatch Events. To learn
+    #   more, see [Migrate polling pipelines to use event-based change
+    #   detection][1] in the CodePipeline User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codepipeline/latest/userguide/update-change-detection.html
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineMetadata AWS API Documentation
     #
     class PipelineMetadata < Struct.new(
       :pipeline_arn,
       :created,
-      :updated)
+      :updated,
+      :polling_disabled_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3197,12 +3230,12 @@ module Aws::CodePipeline
     #   @return [Types::CurrentRevision]
     #
     # @!attribute [rw] continuation_token
-    #   A token generated by a job worker, such as an AWS CodeDeploy
-    #   deployment ID, that a successful job provides to identify a custom
-    #   action in progress. Future jobs use this token to identify the
-    #   running instance of the action. It can be reused to return more
-    #   information about the progress of the custom action. When the action
-    #   is complete, no continuation token should be supplied.
+    #   A token generated by a job worker, such as a CodeDeploy deployment
+    #   ID, that a successful job provides to identify a custom action in
+    #   progress. Future jobs use this token to identify the running
+    #   instance of the action. It can be reused to return more information
+    #   about the progress of the custom action. When the action is
+    #   complete, no continuation token should be supplied.
     #   @return [String]
     #
     # @!attribute [rw] execution_details
@@ -3274,12 +3307,12 @@ module Aws::CodePipeline
     #   @return [Types::CurrentRevision]
     #
     # @!attribute [rw] continuation_token
-    #   A token generated by a job worker, such as an AWS CodeDeploy
-    #   deployment ID, that a successful job provides to identify a partner
-    #   action in progress. Future jobs use this token to identify the
-    #   running instance of the action. It can be reused to return more
-    #   information about the progress of the partner action. When the
-    #   action is complete, no continuation token should be supplied.
+    #   A token generated by a job worker, such as a CodeDeploy deployment
+    #   ID, that a successful job provides to identify a partner action in
+    #   progress. Future jobs use this token to identify the running
+    #   instance of the action. It can be reused to return more information
+    #   about the progress of the partner action. When the action is
+    #   complete, no continuation token should be supplied.
     #   @return [String]
     #
     # @!attribute [rw] execution_details
@@ -3469,7 +3502,7 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] revision_summary
     #   Summary information about the most recent revision of the artifact.
-    #   For GitHub and AWS CodeCommit repositories, the commit message. For
+    #   For GitHub and CodeCommit repositories, the commit message. For
     #   Amazon S3 buckets or actions, the user-provided content of a
     #   `codepipeline-artifact-revision-summary` key specified in the object
     #   metadata.
@@ -3477,7 +3510,7 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] revision_url
     #   The commit ID for the artifact revision. For artifacts stored in
-    #   GitHub or AWS CodeCommit repositories, the commit ID is linked to a
+    #   GitHub or CodeCommit repositories, the commit ID is linked to a
     #   commit details page.
     #   @return [String]
     #
@@ -3746,7 +3779,7 @@ module Aws::CodePipeline
     #
     class TagResourceOutput < Aws::EmptyStructure; end
 
-    # A response to a `PollForThirdPartyJobs` request returned by AWS
+    # A response to a `PollForThirdPartyJobs` request returned by
     # CodePipeline when there is a job to be worked on by a partner action.
     #
     # @!attribute [rw] client_id
@@ -3756,7 +3789,7 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] job_id
-    #   The identifier used to identify the job in AWS CodePipeline.
+    #   The identifier used to identify the job in CodePipeline.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ThirdPartyJob AWS API Documentation
@@ -3802,22 +3835,23 @@ module Aws::CodePipeline
     #   @return [Array<Types::Artifact>]
     #
     # @!attribute [rw] artifact_credentials
-    #   Represents an AWS session credentials object. These credentials are
-    #   temporary credentials that are issued by AWS Secure Token Service
-    #   (STS). They can be used to access input and output artifacts in the
-    #   S3 bucket used to store artifact for the pipeline in AWS
-    #   CodePipeline.
+    #   Represents an Amazon Web Services session credentials object. These
+    #   credentials are temporary credentials that are issued by Amazon Web
+    #   Services Secure Token Service (STS). They can be used to access
+    #   input and output artifacts in the S3 bucket used to store artifact
+    #   for the pipeline in CodePipeline.
     #   @return [Types::AWSSessionCredentials]
     #
     # @!attribute [rw] continuation_token
-    #   A system-generated token, such as a AWS CodeDeploy deployment ID,
-    #   that a job requires to continue the job asynchronously.
+    #   A system-generated token, such as a CodeDeploy deployment ID, that a
+    #   job requires to continue the job asynchronously.
     #   @return [String]
     #
     # @!attribute [rw] encryption_key
     #   The encryption key used to encrypt and decrypt data in the artifact
-    #   store for the pipeline, such as an AWS Key Management Service (AWS
-    #   KMS) key. This is optional and might not be present.
+    #   store for the pipeline, such as an Amazon Web Services Key
+    #   Management Service (Amazon Web Services KMS) key. This is optional
+    #   and might not be present.
     #   @return [Types::EncryptionKey]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ThirdPartyJobData AWS API Documentation
@@ -3839,7 +3873,7 @@ module Aws::CodePipeline
     # request.
     #
     # @!attribute [rw] id
-    #   The identifier used to identify the job details in AWS CodePipeline.
+    #   The identifier used to identify the job details in CodePipeline.
     #   @return [String]
     #
     # @!attribute [rw] data
@@ -3847,9 +3881,9 @@ module Aws::CodePipeline
     #   @return [Types::ThirdPartyJobData]
     #
     # @!attribute [rw] nonce
-    #   A system-generated random number that AWS CodePipeline uses to
-    #   ensure that the job is being worked on by only one job worker. Use
-    #   this number in an AcknowledgeThirdPartyJob request.
+    #   A system-generated random number that CodePipeline uses to ensure
+    #   that the job is being worked on by only one job worker. Use this
+    #   number in an AcknowledgeThirdPartyJob request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ThirdPartyJobDetails AWS API Documentation
@@ -4082,8 +4116,8 @@ module Aws::CodePipeline
     #   configuration key with curly brackets. For example, if the value
     #   supplied here is "refs/heads/\\\{Branch\\}" and the target action
     #   has an action configuration property called "Branch" with a value
-    #   of "master", the `MatchEquals` value is evaluated as
-    #   "refs/heads/master". For a list of action configuration properties
+    #   of "main", the `MatchEquals` value is evaluated as
+    #   "refs/heads/main". For a list of action configuration properties
     #   for built-in action types, see [Pipeline Structure Reference Action
     #   Requirements][1].
     #

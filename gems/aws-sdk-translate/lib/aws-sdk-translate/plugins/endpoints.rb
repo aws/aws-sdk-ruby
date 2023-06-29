@@ -86,6 +86,8 @@ module Aws::Translate
             Aws::Translate::Endpoints::StopTextTranslationJob.build(context)
           when :tag_resource
             Aws::Translate::Endpoints::TagResource.build(context)
+          when :translate_document
+            Aws::Translate::Endpoints::TranslateDocument.build(context)
           when :translate_text
             Aws::Translate::Endpoints::TranslateText.build(context)
           when :untag_resource

@@ -234,6 +234,8 @@ module Aws::IoTSiteWise
     GatewaySummary = Shapes::StructureShape.new(name: 'GatewaySummary')
     GetAssetPropertyAggregatesRequest = Shapes::StructureShape.new(name: 'GetAssetPropertyAggregatesRequest')
     GetAssetPropertyAggregatesResponse = Shapes::StructureShape.new(name: 'GetAssetPropertyAggregatesResponse')
+    GetAssetPropertyValueAggregatesMaxResults = Shapes::IntegerShape.new(name: 'GetAssetPropertyValueAggregatesMaxResults')
+    GetAssetPropertyValueHistoryMaxResults = Shapes::IntegerShape.new(name: 'GetAssetPropertyValueHistoryMaxResults')
     GetAssetPropertyValueHistoryRequest = Shapes::StructureShape.new(name: 'GetAssetPropertyValueHistoryRequest')
     GetAssetPropertyValueHistoryResponse = Shapes::StructureShape.new(name: 'GetAssetPropertyValueHistoryResponse')
     GetAssetPropertyValueRequest = Shapes::StructureShape.new(name: 'GetAssetPropertyValueRequest')
@@ -1239,7 +1241,7 @@ module Aws::IoTSiteWise
     GetAssetPropertyAggregatesRequest.add_member(:end_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location: "querystring", location_name: "endDate"))
     GetAssetPropertyAggregatesRequest.add_member(:time_ordering, Shapes::ShapeRef.new(shape: TimeOrdering, location: "querystring", location_name: "timeOrdering"))
     GetAssetPropertyAggregatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
-    GetAssetPropertyAggregatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    GetAssetPropertyAggregatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetAssetPropertyValueAggregatesMaxResults, location: "querystring", location_name: "maxResults"))
     GetAssetPropertyAggregatesRequest.struct_class = Types::GetAssetPropertyAggregatesRequest
 
     GetAssetPropertyAggregatesResponse.add_member(:aggregated_values, Shapes::ShapeRef.new(shape: AggregatedValues, required: true, location_name: "aggregatedValues"))
@@ -1254,7 +1256,7 @@ module Aws::IoTSiteWise
     GetAssetPropertyValueHistoryRequest.add_member(:qualities, Shapes::ShapeRef.new(shape: Qualities, location: "querystring", location_name: "qualities"))
     GetAssetPropertyValueHistoryRequest.add_member(:time_ordering, Shapes::ShapeRef.new(shape: TimeOrdering, location: "querystring", location_name: "timeOrdering"))
     GetAssetPropertyValueHistoryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
-    GetAssetPropertyValueHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    GetAssetPropertyValueHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetAssetPropertyValueHistoryMaxResults, location: "querystring", location_name: "maxResults"))
     GetAssetPropertyValueHistoryRequest.struct_class = Types::GetAssetPropertyValueHistoryRequest
 
     GetAssetPropertyValueHistoryResponse.add_member(:asset_property_value_history, Shapes::ShapeRef.new(shape: AssetPropertyValueHistory, required: true, location_name: "assetPropertyValueHistory"))

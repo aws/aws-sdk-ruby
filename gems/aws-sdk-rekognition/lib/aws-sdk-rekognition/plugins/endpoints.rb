@@ -56,6 +56,8 @@ module Aws::Rekognition
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :associate_faces
+            Aws::Rekognition::Endpoints::AssociateFaces.build(context)
           when :compare_faces
             Aws::Rekognition::Endpoints::CompareFaces.build(context)
           when :copy_project_version
@@ -72,6 +74,8 @@ module Aws::Rekognition
             Aws::Rekognition::Endpoints::CreateProjectVersion.build(context)
           when :create_stream_processor
             Aws::Rekognition::Endpoints::CreateStreamProcessor.build(context)
+          when :create_user
+            Aws::Rekognition::Endpoints::CreateUser.build(context)
           when :delete_collection
             Aws::Rekognition::Endpoints::DeleteCollection.build(context)
           when :delete_dataset
@@ -86,6 +90,8 @@ module Aws::Rekognition
             Aws::Rekognition::Endpoints::DeleteProjectVersion.build(context)
           when :delete_stream_processor
             Aws::Rekognition::Endpoints::DeleteStreamProcessor.build(context)
+          when :delete_user
+            Aws::Rekognition::Endpoints::DeleteUser.build(context)
           when :describe_collection
             Aws::Rekognition::Endpoints::DescribeCollection.build(context)
           when :describe_dataset
@@ -108,6 +114,8 @@ module Aws::Rekognition
             Aws::Rekognition::Endpoints::DetectProtectiveEquipment.build(context)
           when :detect_text
             Aws::Rekognition::Endpoints::DetectText.build(context)
+          when :disassociate_faces
+            Aws::Rekognition::Endpoints::DisassociateFaces.build(context)
           when :distribute_dataset_entries
             Aws::Rekognition::Endpoints::DistributeDatasetEntries.build(context)
           when :get_celebrity_info
@@ -146,6 +154,8 @@ module Aws::Rekognition
             Aws::Rekognition::Endpoints::ListStreamProcessors.build(context)
           when :list_tags_for_resource
             Aws::Rekognition::Endpoints::ListTagsForResource.build(context)
+          when :list_users
+            Aws::Rekognition::Endpoints::ListUsers.build(context)
           when :put_project_policy
             Aws::Rekognition::Endpoints::PutProjectPolicy.build(context)
           when :recognize_celebrities
@@ -154,6 +164,10 @@ module Aws::Rekognition
             Aws::Rekognition::Endpoints::SearchFaces.build(context)
           when :search_faces_by_image
             Aws::Rekognition::Endpoints::SearchFacesByImage.build(context)
+          when :search_users
+            Aws::Rekognition::Endpoints::SearchUsers.build(context)
+          when :search_users_by_image
+            Aws::Rekognition::Endpoints::SearchUsersByImage.build(context)
           when :start_celebrity_recognition
             Aws::Rekognition::Endpoints::StartCelebrityRecognition.build(context)
           when :start_content_moderation

@@ -30,6 +30,7 @@ module Aws::States
   # * {ActivityDoesNotExist}
   # * {ActivityLimitExceeded}
   # * {ActivityWorkerLimitExceeded}
+  # * {ConflictException}
   # * {ExecutionAlreadyExists}
   # * {ExecutionDoesNotExist}
   # * {ExecutionLimitExceeded}
@@ -43,6 +44,7 @@ module Aws::States
   # * {InvalidTracingConfiguration}
   # * {MissingRequiredParameter}
   # * {ResourceNotFound}
+  # * {ServiceQuotaExceededException}
   # * {StateMachineAlreadyExists}
   # * {StateMachineDeleting}
   # * {StateMachineDoesNotExist}
@@ -94,6 +96,21 @@ module Aws::States
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::States::Types::ActivityWorkerLimitExceeded] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::States::Types::ConflictException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -301,6 +318,21 @@ module Aws::States
       # @return [String]
       def resource_name
         @data[:resource_name]
+      end
+    end
+
+    class ServiceQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::States::Types::ServiceQuotaExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

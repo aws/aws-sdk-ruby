@@ -9,6 +9,7 @@
 
 
 module Aws::Glacier
+  # @api private
   module Endpoints
 
     class AbortMultipartUpload

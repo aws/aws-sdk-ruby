@@ -9,6 +9,7 @@
 
 
 module Aws::S3
+  # @api private
   module Endpoints
 
     class AbortMultipartUpload

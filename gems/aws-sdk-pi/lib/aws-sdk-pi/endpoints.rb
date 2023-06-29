@@ -9,6 +9,7 @@
 
 
 module Aws::PI
+  # @api private
   module Endpoints
 
     class DescribeDimensionKeys

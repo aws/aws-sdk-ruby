@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.63.0 (2023-06-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.62.0 (2023-06-13)
+------------------
+
+* Feature - This feature allows users to view dashboards for CloudTrail Lake event data stores.
+
+1.61.0 (2023-06-02)
+------------------
+
+* Feature - This feature allows users to start and stop event ingestion on a CloudTrail Lake event data store.
+
+1.60.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.59.0 (2023-05-18)
+------------------
+
+* Feature - Add ConflictException to PutEventSelectors, add (Channel/EDS)ARNInvalidException to Tag APIs. These exceptions provide customers with more specific error messages instead of internal errors.
+
 1.58.0 (2023-02-15)
 ------------------
 

@@ -9,6 +9,7 @@
 
 
 module Aws::DocDBElastic
+  # @api private
   module Endpoints
 
     class CreateCluster

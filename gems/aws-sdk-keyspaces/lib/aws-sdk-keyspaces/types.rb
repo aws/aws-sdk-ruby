@@ -249,11 +249,25 @@ module Aws::Keyspaces
     #   [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] replication_specification
+    #   The replication specification of the keyspace includes:
+    #
+    #   * `replicationStrategy` - the required value is `SINGLE_REGION` or
+    #     `MULTI_REGION`.
+    #
+    #   * `regionList` - if the `replicationStrategy` is `MULTI_REGION`, the
+    #     `regionList` requires the current Region and at least one
+    #     additional Amazon Web Services Region where the keyspace is going
+    #     to be replicated in. The maximum number of supported replication
+    #     Regions including the current Region is six.
+    #   @return [Types::ReplicationSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/CreateKeyspaceRequest AWS API Documentation
     #
     class CreateKeyspaceRequest < Struct.new(
       :keyspace_name,
-      :tags)
+      :tags,
+      :replication_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -577,14 +591,26 @@ module Aws::Keyspaces
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the keyspace.
+    #   Returns the ARN of the keyspace.
     #   @return [String]
+    #
+    # @!attribute [rw] replication_strategy
+    #   Returns the replication strategy of the keyspace. The options are
+    #   `SINGLE_REGION` or `MULTI_REGION`.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_regions
+    #   If the `replicationStrategy` of the keyspace is `MULTI_REGION`, a
+    #   list of replication Regions is returned.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/GetKeyspaceResponse AWS API Documentation
     #
     class GetKeyspaceResponse < Struct.new(
       :keyspace_name,
-      :resource_arn)
+      :resource_arn,
+      :replication_strategy,
+      :replication_regions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -708,11 +734,24 @@ module Aws::Keyspaces
     #   Resource Name (ARN).
     #   @return [String]
     #
+    # @!attribute [rw] replication_strategy
+    #   This property specifies if a keyspace is a single Region keyspace or
+    #   a multi-Region keyspace. The available values are `SINGLE_REGION` or
+    #   `MULTI_REGION`.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_regions
+    #   If the `replicationStrategy` of the keyspace is `MULTI_REGION`, a
+    #   list of replication Regions is returned.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/KeyspaceSummary AWS API Documentation
     #
     class KeyspaceSummary < Struct.new(
       :keyspace_name,
-      :resource_arn)
+      :resource_arn,
+      :replication_strategy,
+      :replication_regions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -905,6 +944,33 @@ module Aws::Keyspaces
     class PointInTimeRecoverySummary < Struct.new(
       :status,
       :earliest_restorable_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The replication specification of the keyspace includes:
+    #
+    # * `regionList` - up to six Amazon Web Services Regions where the
+    #   keyspace is replicated in.
+    #
+    # * `replicationStrategy` - the required value is `SINGLE_REGION` or
+    #   `MULTI_REGION`.
+    #
+    # @!attribute [rw] replication_strategy
+    #   The `replicationStrategy` of a keyspace, the required value is
+    #   `SINGLE_REGION` or `MULTI_REGION`.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_list
+    #   The `regionList` can contain up to six Amazon Web Services Regions
+    #   where the keyspace is replicated in.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/ReplicationSpecification AWS API Documentation
+    #
+    class ReplicationSpecification < Struct.new(
+      :replication_strategy,
+      :region_list)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -275,6 +275,11 @@ module Aws::IoTWireless
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -765,21 +770,25 @@ module Aws::IoTWireless
     #   you can use to manage a resource.
     #
     # @option params [Integer] :redundancy_percent
-    #   The percentage of added redundant fragments. For example, if firmware
-    #   file is 100 bytes and fragment size is 10 bytes, with
-    #   `RedundancyPercent` set to 50(%), the final number of encoded
-    #   fragments is (100 / 10) + (100 / 10 * 50%) = 15.
+    #   The percentage of the added fragments that are redundant. For example,
+    #   if the size of the firmware image file is 100 bytes and the fragment
+    #   size is 10 bytes, with `RedundancyPercent` set to 50(%), the final
+    #   number of encoded fragments is (100 / 10) + (100 / 10 * 50%) = 15.
     #
     # @option params [Integer] :fragment_size_bytes
-    #   The size of each fragment in bytes. Currently only supported in fuota
-    #   tasks with multicast groups.
+    #   The size of each fragment in bytes. This parameter is supported only
+    #   for FUOTA tasks with multicast groups.
     #
     # @option params [Integer] :fragment_interval_ms
-    #   The interval of sending fragments in milliseconds. Currently the
-    #   interval will be rounded to the nearest second. Note that this
-    #   interval only controls the timing when the cloud sends the fragments
-    #   down. The actual delay of receiving fragments at device side depends
-    #   on the device's class and the communication delay with the cloud.
+    #   The interval for sending fragments in milliseconds, rounded to the
+    #   nearest second.
+    #
+    #   <note markdown="1"> This interval only determines the timing for when the Cloud sends down
+    #   the fragments to yor device. There can be a delay for when your device
+    #   will receive these fragments. This delay depends on the device's
+    #   class and the communication delay with the cloud.
+    #
+    #    </note>
     #
     # @return [Types::CreateFuotaTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -913,6 +922,11 @@ module Aws::IoTWireless
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Array<String>] :multicast_groups
+    #   Multicast Group resources to add to the network analyzer
+    #   configruation. Provide the `MulticastGroupId` of the resource to add
+    #   in the input array.
+    #
     # @return [Types::CreateNetworkAnalyzerConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateNetworkAnalyzerConfigurationResponse#arn #arn} => String
@@ -925,6 +939,7 @@ module Aws::IoTWireless
     #     trace_content: {
     #       wireless_device_frame_info: "ENABLED", # accepts ENABLED, DISABLED
     #       log_level: "INFO", # accepts INFO, ERROR, DISABLED
+    #       multicast_frame_info: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     wireless_devices: ["WirelessDeviceId"],
     #     wireless_gateways: ["WirelessGatewayId"],
@@ -936,6 +951,7 @@ module Aws::IoTWireless
     #       },
     #     ],
     #     client_request_token: "ClientRequestToken",
+    #     multicast_groups: ["MulticastGroupId"],
     #   })
     #
     # @example Response structure
@@ -2035,6 +2051,7 @@ module Aws::IoTWireless
     #   * {Types::GetNetworkAnalyzerConfigurationResponse#description #description} => String
     #   * {Types::GetNetworkAnalyzerConfigurationResponse#arn #arn} => String
     #   * {Types::GetNetworkAnalyzerConfigurationResponse#name #name} => String
+    #   * {Types::GetNetworkAnalyzerConfigurationResponse#multicast_groups #multicast_groups} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2046,6 +2063,7 @@ module Aws::IoTWireless
     #
     #   resp.trace_content.wireless_device_frame_info #=> String, one of "ENABLED", "DISABLED"
     #   resp.trace_content.log_level #=> String, one of "INFO", "ERROR", "DISABLED"
+    #   resp.trace_content.multicast_frame_info #=> String, one of "ENABLED", "DISABLED"
     #   resp.wireless_devices #=> Array
     #   resp.wireless_devices[0] #=> String
     #   resp.wireless_gateways #=> Array
@@ -2053,6 +2071,8 @@ module Aws::IoTWireless
     #   resp.description #=> String
     #   resp.arn #=> String
     #   resp.name #=> String
+    #   resp.multicast_groups #=> Array
+    #   resp.multicast_groups[0] #=> String
     #
     # @overload get_network_analyzer_configuration(params = {})
     # @param [Hash] params ({})
@@ -4444,21 +4464,25 @@ module Aws::IoTWireless
     #   The firmware update role that is to be used with a FUOTA task.
     #
     # @option params [Integer] :redundancy_percent
-    #   The percentage of added redundant fragments. For example, if firmware
-    #   file is 100 bytes and fragment size is 10 bytes, with
-    #   `RedundancyPercent` set to 50(%), the final number of encoded
-    #   fragments is (100 / 10) + (100 / 10 * 50%) = 15.
+    #   The percentage of the added fragments that are redundant. For example,
+    #   if the size of the firmware image file is 100 bytes and the fragment
+    #   size is 10 bytes, with `RedundancyPercent` set to 50(%), the final
+    #   number of encoded fragments is (100 / 10) + (100 / 10 * 50%) = 15.
     #
     # @option params [Integer] :fragment_size_bytes
-    #   The size of each fragment in bytes. Currently only supported in fuota
-    #   tasks with multicast groups.
+    #   The size of each fragment in bytes. This parameter is supported only
+    #   for FUOTA tasks with multicast groups.
     #
     # @option params [Integer] :fragment_interval_ms
-    #   The interval of sending fragments in milliseconds. Currently the
-    #   interval will be rounded to the nearest second. Note that this
-    #   interval only controls the timing when the cloud sends the fragments
-    #   down. The actual delay of receiving fragments at device side depends
-    #   on the device's class and the communication delay with the cloud.
+    #   The interval for sending fragments in milliseconds, rounded to the
+    #   nearest second.
+    #
+    #   <note markdown="1"> This interval only determines the timing for when the Cloud sends down
+    #   the fragments to yor device. There can be a delay for when your device
+    #   will receive these fragments. This delay depends on the device's
+    #   class and the communication delay with the cloud.
+    #
+    #    </note>
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4606,6 +4630,16 @@ module Aws::IoTWireless
     # @option params [String] :description
     #   The description of the new resource.
     #
+    # @option params [Array<String>] :multicast_groups_to_add
+    #   Multicast group resources to add to the network analyzer
+    #   configuration. Provide the `MulticastGroupId` of the resource to add
+    #   in the input array.
+    #
+    # @option params [Array<String>] :multicast_groups_to_remove
+    #   Multicast group resources to remove from the network analyzer
+    #   configuration. Provide the `MulticastGroupId` of the resource to
+    #   remove in the input array.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -4615,12 +4649,15 @@ module Aws::IoTWireless
     #     trace_content: {
     #       wireless_device_frame_info: "ENABLED", # accepts ENABLED, DISABLED
     #       log_level: "INFO", # accepts INFO, ERROR, DISABLED
+    #       multicast_frame_info: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     wireless_devices_to_add: ["WirelessDeviceId"],
     #     wireless_devices_to_remove: ["WirelessDeviceId"],
     #     wireless_gateways_to_add: ["WirelessGatewayId"],
     #     wireless_gateways_to_remove: ["WirelessGatewayId"],
     #     description: "Description",
+    #     multicast_groups_to_add: ["MulticastGroupId"],
+    #     multicast_groups_to_remove: ["MulticastGroupId"],
     #   })
     #
     # @overload update_network_analyzer_configuration(params = {})
@@ -4961,7 +4998,7 @@ module Aws::IoTWireless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

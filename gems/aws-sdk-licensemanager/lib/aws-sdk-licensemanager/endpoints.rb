@@ -9,6 +9,7 @@
 
 
 module Aws::LicenseManager
+  # @api private
   module Endpoints
 
     class AcceptGrant

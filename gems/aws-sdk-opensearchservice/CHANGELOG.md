@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2023-06-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2023-06-12)
+------------------
+
+* Feature - This release adds support for SkipUnavailable connection property for cross cluster search
+
+1.21.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2023-05-11)
+------------------
+
+* Feature - This release fixes DescribePackages API error with null filter value parameter.
+
 1.19.0 (2023-05-04)
 ------------------
 

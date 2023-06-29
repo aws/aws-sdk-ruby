@@ -9,6 +9,7 @@
 
 
 module Aws::TimestreamWrite
+  # @api private
   module Endpoints
 
     class CreateBatchLoadTask

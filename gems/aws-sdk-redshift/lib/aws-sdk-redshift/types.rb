@@ -163,6 +163,32 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # Contains information about the custom domain name association.
+    #
+    # @!attribute [rw] custom_domain_certificate_arn
+    #   The Amazon Resource Name (ARN) for the certificate associated with
+    #   the custom domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_domain_certificate_expiry_date
+    #   The expiration date for the certificate.
+    #   @return [Time]
+    #
+    # @!attribute [rw] certificate_associations
+    #   A list of all associated clusters and domain names tied to a
+    #   specific certificate.
+    #   @return [Array<Types::CertificateAssociation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Association AWS API Documentation
+    #
+    class Association < Struct.new(
+      :custom_domain_certificate_arn,
+      :custom_domain_certificate_expiry_date,
+      :certificate_associations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an attribute value.
     #
     # @!attribute [rw] attribute_value
@@ -336,9 +362,9 @@ module Aws::Redshift
     #
     # @!attribute [rw] snapshot_cluster_identifier
     #   The identifier of the cluster the snapshot was created from. This
-    #   parameter is required if your IAM user or role has a policy
-    #   containing a snapshot resource element that specifies anything other
-    #   than * for the cluster name.
+    #   parameter is required if your IAM user has a policy containing a
+    #   snapshot resource element that specifies anything other than * for
+    #   the cluster name.
     #   @return [String]
     #
     # @!attribute [rw] account_with_restore_access
@@ -495,6 +521,26 @@ module Aws::Redshift
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CancelResizeMessage AWS API Documentation
     #
     class CancelResizeMessage < Struct.new(
+      :cluster_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A cluster ID and custom domain name tied to a specific certificate.
+    # These are typically returned in a list.
+    #
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name for the certificate association.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The cluster identifier for the certificate association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CertificateAssociation AWS API Documentation
+    #
+    class CertificateAssociation < Struct.new(
+      :custom_domain_name,
       :cluster_identifier)
       SENSITIVE = []
       include Aws::Structure
@@ -828,6 +874,20 @@ module Aws::Redshift
     #   in-progress and requested.
     #   @return [Types::ReservedNodeExchangeStatus]
     #
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name associated with the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_domain_certificate_arn
+    #   The certificate Amazon Resource Name (ARN) for the custom domain
+    #   name.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_domain_certificate_expiry_date
+    #   The expiration date for the certificate associated with the custom
+    #   domain name.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -882,7 +942,10 @@ module Aws::Redshift
       :total_storage_capacity_in_mega_bytes,
       :aqua_configuration,
       :default_iam_role_arn,
-      :reserved_node_exchange_status)
+      :reserved_node_exchange_status,
+      :custom_domain_name,
+      :custom_domain_certificate_arn,
+      :custom_domain_certificate_expiry_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1662,9 +1725,9 @@ module Aws::Redshift
     #
     # @!attribute [rw] source_snapshot_cluster_identifier
     #   The identifier of the cluster the source snapshot was created from.
-    #   This parameter is required if your IAM user or role has a policy
-    #   containing a snapshot resource element that specifies anything other
-    #   than * for the cluster name.
+    #   This parameter is required if your IAM user has a policy containing
+    #   a snapshot resource element that specifies anything other than *
+    #   for the cluster name.
     #
     #   Constraints:
     #
@@ -1841,8 +1904,8 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] master_username
-    #   The user name associated with the admin user for the cluster that is
-    #   being created.
+    #   The user name associated with the admin user account for the cluster
+    #   that is being created.
     #
     #   Constraints:
     #
@@ -1866,8 +1929,8 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] master_user_password
-    #   The password associated with the admin user for the cluster that is
-    #   being created.
+    #   The password associated with the admin user account for the cluster
+    #   that is being created.
     #
     #   Constraints:
     #
@@ -2425,6 +2488,58 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name for a custom domain association.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_domain_certificate_arn
+    #   The certificate Amazon Resource Name (ARN) for the custom domain
+    #   name association.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The cluster identifier that the custom domain is associated with.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateCustomDomainAssociationMessage AWS API Documentation
+    #
+    class CreateCustomDomainAssociationMessage < Struct.new(
+      :custom_domain_name,
+      :custom_domain_certificate_arn,
+      :cluster_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name for the association result.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_domain_certificate_arn
+    #   The Amazon Resource Name (ARN) for the certificate associated with
+    #   the custom domain name.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The identifier of the cluster that the custom domain is associated
+    #   with.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_domain_cert_expiry_time
+    #   The expiration time for the certificate for the custom domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateCustomDomainAssociationResult AWS API Documentation
+    #
+    class CreateCustomDomainAssociationResult < Struct.new(
+      :custom_domain_name,
+      :custom_domain_certificate_arn,
+      :cluster_identifier,
+      :custom_domain_cert_expiry_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] cluster_identifier
     #   The cluster identifier of the cluster to access.
     #   @return [String]
@@ -2893,6 +3008,36 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # An error occurred when an attempt was made to change the custom domain
+    # association.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CustomCnameAssociationFault AWS API Documentation
+    #
+    class CustomCnameAssociationFault < Aws::EmptyStructure; end
+
+    # An error occurred. The custom domain name couldn't be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CustomDomainAssociationNotFoundFault AWS API Documentation
+    #
+    class CustomDomainAssociationNotFoundFault < Aws::EmptyStructure; end
+
+    # @!attribute [rw] marker
+    #   The marker for the custom domain association.
+    #   @return [String]
+    #
+    # @!attribute [rw] associations
+    #   The associations for the custom domain.
+    #   @return [Array<Types::Association>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CustomDomainAssociationsMessage AWS API Documentation
+    #
+    class CustomDomainAssociationsMessage < Struct.new(
+      :marker,
+      :associations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] total_backup_size_in_mega_bytes
     #   The total amount of storage currently used for snapshots.
     #   @return [Float]
@@ -3242,9 +3387,9 @@ module Aws::Redshift
     #
     # @!attribute [rw] snapshot_cluster_identifier
     #   The unique identifier of the cluster the snapshot was created from.
-    #   This parameter is required if your IAM user or role has a policy
-    #   containing a snapshot resource element that specifies anything other
-    #   than * for the cluster name.
+    #   This parameter is required if your IAM user has a policy containing
+    #   a snapshot resource element that specifies anything other than *
+    #   for the cluster name.
     #
     #   Constraints: Must be the name of valid cluster.
     #   @return [String]
@@ -3278,6 +3423,19 @@ module Aws::Redshift
     #
     class DeleteClusterSubnetGroupMessage < Struct.new(
       :cluster_subnet_group_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_identifier
+    #   The identifier of the cluster to delete a custom domain association
+    #   for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCustomDomainAssociationMessage AWS API Documentation
+    #
+    class DeleteCustomDomainAssociationMessage < Struct.new(
+      :cluster_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3728,7 +3886,7 @@ module Aws::Redshift
     #
     #   Default: `100`
     #
-    #   Constraints: minimum 20, maximum 500.
+    #   Constraints: minimum 20, maximum 100.
     #   @return [Integer]
     #
     # @!attribute [rw] marker
@@ -4012,6 +4170,34 @@ module Aws::Redshift
       :marker,
       :tag_keys,
       :tag_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name for the custom domain association.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_domain_certificate_arn
+    #   The certificate Amazon Resource Name (ARN) for the custom domain
+    #   association.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum records setting for the associated custom domain.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   The marker for the custom domain association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeCustomDomainAssociationsMessage AWS API Documentation
+    #
+    class DescribeCustomDomainAssociationsMessage < Struct.new(
+      :custom_domain_name,
+      :custom_domain_certificate_arn,
+      :max_records,
+      :marker)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6197,6 +6383,10 @@ module Aws::Redshift
     #   [1]: http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name for the cluster credentials.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetClusterCredentialsMessage AWS API Documentation
     #
     class GetClusterCredentialsMessage < Struct.new(
@@ -6205,7 +6395,8 @@ module Aws::Redshift
       :cluster_identifier,
       :duration_seconds,
       :auto_create,
-      :db_groups)
+      :db_groups,
+      :custom_domain_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6228,12 +6419,17 @@ module Aws::Redshift
     #   Range: 900-3600. Default: 900.
     #   @return [Integer]
     #
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name for the IAM message cluster credentials.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetClusterCredentialsWithIAMMessage AWS API Documentation
     #
     class GetClusterCredentialsWithIAMMessage < Struct.new(
       :db_name,
       :cluster_identifier,
-      :duration_seconds)
+      :duration_seconds,
+      :custom_domain_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7169,8 +7365,8 @@ module Aws::Redshift
     #   operation response.
     #
     #   <note markdown="1"> Operations never return the password, so this operation provides a
-    #   way to regain access to the admin user for a cluster if the password
-    #   is lost.
+    #   way to regain access to the admin user account for a cluster if the
+    #   password is lost.
     #
     #    </note>
     #
@@ -7547,6 +7743,61 @@ module Aws::Redshift
     #
     class ModifyClusterSubnetGroupResult < Struct.new(
       :cluster_subnet_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name for a changed custom domain association.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_domain_certificate_arn
+    #   The certificate Amazon Resource Name (ARN) for the changed custom
+    #   domain association.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The identifier of the cluster to change a custom domain association
+    #   for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyCustomDomainAssociationMessage AWS API Documentation
+    #
+    class ModifyCustomDomainAssociationMessage < Struct.new(
+      :custom_domain_name,
+      :custom_domain_certificate_arn,
+      :cluster_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name associated with the result for the changed
+    #   custom domain association.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_domain_certificate_arn
+    #   The certificate Amazon Resource Name (ARN) associated with the
+    #   result for the changed custom domain association.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The identifier of the cluster associated with the result for the
+    #   changed custom domain association.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_domain_cert_expiry_time
+    #   The certificate expiration time associated with the result for the
+    #   changed custom domain association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyCustomDomainAssociationResult AWS API Documentation
+    #
+    class ModifyCustomDomainAssociationResult < Struct.new(
+      :custom_domain_name,
+      :custom_domain_certificate_arn,
+      :cluster_identifier,
+      :custom_domain_cert_expiry_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8954,9 +9205,9 @@ module Aws::Redshift
     #
     # @!attribute [rw] snapshot_cluster_identifier
     #   The name of the cluster the source snapshot was created from. This
-    #   parameter is required if your IAM user or role has a policy
-    #   containing a snapshot resource element that specifies anything other
-    #   than * for the cluster name.
+    #   parameter is required if your IAM user has a policy containing a
+    #   snapshot resource element that specifies anything other than * for
+    #   the cluster name.
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -9538,9 +9789,9 @@ module Aws::Redshift
     #
     # @!attribute [rw] snapshot_cluster_identifier
     #   The identifier of the cluster the snapshot was created from. This
-    #   parameter is required if your IAM user or role has a policy
-    #   containing a snapshot resource element that specifies anything other
-    #   than * for the cluster name.
+    #   parameter is required if your IAM user has a policy containing a
+    #   snapshot resource element that specifies anything other than * for
+    #   the cluster name.
     #   @return [String]
     #
     # @!attribute [rw] account_with_restore_access

@@ -9,6 +9,7 @@
 
 
 module Aws::SecurityLake
+  # @api private
   module Endpoints
 
     class CreateAwsLogSource
@@ -39,7 +40,7 @@ module Aws::SecurityLake
       end
     end
 
-    class CreateDatalake
+    class CreateDataLake
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -53,7 +54,7 @@ module Aws::SecurityLake
       end
     end
 
-    class CreateDatalakeAutoEnable
+    class CreateDataLakeExceptionSubscription
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -67,21 +68,7 @@ module Aws::SecurityLake
       end
     end
 
-    class CreateDatalakeDelegatedAdmin
-      def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
-        Aws::SecurityLake::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
-        )
-      end
-    end
-
-    class CreateDatalakeExceptionsSubscription
+    class CreateDataLakeOrganizationConfiguration
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -109,7 +96,7 @@ module Aws::SecurityLake
       end
     end
 
-    class CreateSubscriptionNotificationConfiguration
+    class CreateSubscriberNotification
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -151,7 +138,7 @@ module Aws::SecurityLake
       end
     end
 
-    class DeleteDatalake
+    class DeleteDataLake
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -165,7 +152,7 @@ module Aws::SecurityLake
       end
     end
 
-    class DeleteDatalakeAutoEnable
+    class DeleteDataLakeExceptionSubscription
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -179,21 +166,7 @@ module Aws::SecurityLake
       end
     end
 
-    class DeleteDatalakeDelegatedAdmin
-      def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
-        Aws::SecurityLake::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
-        )
-      end
-    end
-
-    class DeleteDatalakeExceptionsSubscription
+    class DeleteDataLakeOrganizationConfiguration
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -221,7 +194,7 @@ module Aws::SecurityLake
       end
     end
 
-    class DeleteSubscriptionNotificationConfiguration
+    class DeleteSubscriberNotification
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -235,7 +208,7 @@ module Aws::SecurityLake
       end
     end
 
-    class GetDatalake
+    class DeregisterDataLakeDelegatedAdministrator
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -249,7 +222,7 @@ module Aws::SecurityLake
       end
     end
 
-    class GetDatalakeAutoEnable
+    class GetDataLakeExceptionSubscription
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -263,7 +236,7 @@ module Aws::SecurityLake
       end
     end
 
-    class GetDatalakeExceptionsExpiry
+    class GetDataLakeOrganizationConfiguration
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -277,21 +250,7 @@ module Aws::SecurityLake
       end
     end
 
-    class GetDatalakeExceptionsSubscription
-      def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
-        Aws::SecurityLake::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
-        )
-      end
-    end
-
-    class GetDatalakeStatus
+    class GetDataLakeSources
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -319,7 +278,21 @@ module Aws::SecurityLake
       end
     end
 
-    class ListDatalakeExceptions
+    class ListDataLakeExceptions
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::SecurityLake::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListDataLakes
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -361,7 +334,7 @@ module Aws::SecurityLake
       end
     end
 
-    class UpdateDatalake
+    class RegisterDataLakeDelegatedAdministrator
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -375,7 +348,7 @@ module Aws::SecurityLake
       end
     end
 
-    class UpdateDatalakeExceptionsExpiry
+    class UpdateDataLake
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -389,7 +362,7 @@ module Aws::SecurityLake
       end
     end
 
-    class UpdateDatalakeExceptionsSubscription
+    class UpdateDataLakeExceptionSubscription
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -417,7 +390,7 @@ module Aws::SecurityLake
       end
     end
 
-    class UpdateSubscriptionNotificationConfiguration
+    class UpdateSubscriberNotification
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

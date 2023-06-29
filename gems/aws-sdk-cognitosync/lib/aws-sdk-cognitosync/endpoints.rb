@@ -9,6 +9,7 @@
 
 
 module Aws::CognitoSync
+  # @api private
   module Endpoints
 
     class BulkPublish

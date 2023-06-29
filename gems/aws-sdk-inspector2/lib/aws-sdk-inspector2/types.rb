@@ -384,6 +384,41 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # The Amazon Web Services Threat Intel Group (ATIG) details for a
+    # specific vulnerability.
+    #
+    # @!attribute [rw] first_seen
+    #   The date and time this vulnerability was first observed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_seen
+    #   The date and time this vulnerability was last observed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] targets
+    #   The commercial sectors this vulnerability targets.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ttps
+    #   The [MITRE ATT&amp;CK][1] tactics, techniques, and procedures (TTPs)
+    #   associated with vulnerability.
+    #
+    #
+    #
+    #   [1]: https://attack.mitre.org/
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AtigData AWS API Documentation
+    #
+    class AtigData < Struct.new(
+      :first_seen,
+      :last_seen,
+      :targets,
+      :ttps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents which scan types are automatically enabled for new members
     # of your Amazon Inspector organization.
     #
@@ -402,12 +437,18 @@ module Aws::Inspector2
     #   enabled for new members of your Amazon Inspector organization.
     #   @return [Boolean]
     #
+    # @!attribute [rw] lambda_code
+    #   Represents whether AWS Lambda code scans are automatically enabled
+    #   for new members of your Amazon Inspector organization.      </p>
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AutoEnable AWS API Documentation
     #
     class AutoEnable < Struct.new(
       :ec2,
       :ecr,
-      :lambda)
+      :lambda,
+      :lambda_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -727,6 +768,38 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # @!attribute [rw] finding_arns
+    #   An array of finding ARNs for the findings you want to retrieve code
+    #   snippets from.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/BatchGetCodeSnippetRequest AWS API Documentation
+    #
+    class BatchGetCodeSnippetRequest < Struct.new(
+      :finding_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] code_snippet_results
+    #   The retrieved code snippets associated with the provided finding
+    #   ARNs.
+    #   @return [Array<Types::CodeSnippetResult>]
+    #
+    # @!attribute [rw] errors
+    #   Any errors Amazon Inspector encountered while trying to retrieve the
+    #   requested code snippets.
+    #   @return [Array<Types::CodeSnippetError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/BatchGetCodeSnippetResponse AWS API Documentation
+    #
+    class BatchGetCodeSnippetResponse < Struct.new(
+      :code_snippet_results,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] account_ids
     #   The account IDs to get free trial status for.
     #   @return [Array<String>]
@@ -850,6 +923,246 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # @!attribute [rw] report_id
+    #   The report ID of the SBOM export to cancel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CancelSbomExportRequest AWS API Documentation
+    #
+    class CancelSbomExportRequest < Struct.new(
+      :report_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] report_id
+    #   The report ID of the canceled SBOM export.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CancelSbomExportResponse AWS API Documentation
+    #
+    class CancelSbomExportResponse < Struct.new(
+      :report_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Cybersecurity and Infrastructure Security Agency (CISA) details
+    # for a specific vulnerability.
+    #
+    # @!attribute [rw] action
+    #   The remediation action recommended by CISA for this vulnerability.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_added
+    #   The date and time CISA added this vulnerability to their catalogue.
+    #   @return [Time]
+    #
+    # @!attribute [rw] date_due
+    #   The date and time CISA expects a fix to have been provided
+    #   vulnerability.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CisaData AWS API Documentation
+    #
+    class CisaData < Struct.new(
+      :action,
+      :date_added,
+      :date_due)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information on where a code vulnerability is located in your
+    # Lambda function.
+    #
+    # @!attribute [rw] end_line
+    #   The line number of the last line of code that a vulnerability was
+    #   found in.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] file_name
+    #   The name of the file the code vulnerability was found in.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_path
+    #   The file path to the code that a vulnerability was found in.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_line
+    #   The line number of the first line of code that a vulnerability was
+    #   found in.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CodeFilePath AWS API Documentation
+    #
+    class CodeFilePath < Struct.new(
+      :end_line,
+      :file_name,
+      :file_path,
+      :start_line)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information on the lines of code associated with a code
+    # snippet.
+    #
+    # @!attribute [rw] content
+    #   The content of a line of code
+    #   @return [String]
+    #
+    # @!attribute [rw] line_number
+    #   The line number that a section of code is located at.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CodeLine AWS API Documentation
+    #
+    class CodeLine < Struct.new(
+      :content,
+      :line_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about any errors encountered while trying to
+    # retrieve a code snippet.
+    #
+    # @!attribute [rw] error_code
+    #   The error code for the error that prevented a code snippet from
+    #   being retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message received when Amazon Inspector failed to retrieve
+    #   a code snippet.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_arn
+    #   The ARN of the finding that a code snippet couldn't be retrieved
+    #   for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CodeSnippetError AWS API Documentation
+    #
+    class CodeSnippetError < Struct.new(
+      :error_code,
+      :error_message,
+      :finding_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information on a code snippet retrieved by Amazon Inspector
+    # from a code vulnerability finding.
+    #
+    # @!attribute [rw] code_snippet
+    #   Contains information on the retrieved code snippet.
+    #   @return [Array<Types::CodeLine>]
+    #
+    # @!attribute [rw] end_line
+    #   The line number of the last line of a code snippet.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] finding_arn
+    #   The ARN of a finding that the code snippet is associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_line
+    #   The line number of the first line of a code snippet.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] suggested_fixes
+    #   Details of a suggested code fix.
+    #   @return [Array<Types::SuggestedFix>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CodeSnippetResult AWS API Documentation
+    #
+    class CodeSnippetResult < Struct.new(
+      :code_snippet,
+      :end_line,
+      :finding_arn,
+      :start_line,
+      :suggested_fixes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information on the code vulnerability identified in your
+    # Lambda function.
+    #
+    # @!attribute [rw] cwes
+    #   The Common Weakness Enumeration (CWE) item associated with the
+    #   detected vulnerability.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] detector_id
+    #   The ID for the Amazon CodeGuru detector associated with the finding.
+    #   For more information on detectors see [Amazon CodeGuru Detector
+    #   Library][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/detector-library
+    #   @return [String]
+    #
+    # @!attribute [rw] detector_name
+    #   The name of the detector used to identify the code vulnerability.
+    #   For more information on detectors see [CodeGuru Detector
+    #   Library][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/detector-library
+    #   @return [String]
+    #
+    # @!attribute [rw] detector_tags
+    #   The detector tag associated with the vulnerability. Detector tags
+    #   group related vulnerabilities by common themes or tactics. For a
+    #   list of available tags by programming language, see [Java tags][1],
+    #   or [Python tags][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/detector-library/java/tags/
+    #   [2]: https://docs.aws.amazon.com/codeguru/detector-library/python/tags/
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] file_path
+    #   Contains information on where the code vulnerability is located in
+    #   your code.
+    #   @return [Types::CodeFilePath]
+    #
+    # @!attribute [rw] reference_urls
+    #   A URL containing supporting documentation about the code
+    #   vulnerability detected.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] rule_id
+    #   The identifier for a rule that was used to detect the code
+    #   vulnerability.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_lambda_layer_arn
+    #   The Amazon Resource Name (ARN) of the Lambda layer that the code
+    #   vulnerability was detected in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CodeVulnerabilityDetails AWS API Documentation
+    #
+    class CodeVulnerabilityDetails < Struct.new(
+      :cwes,
+      :detector_id,
+      :detector_name,
+      :detector_tags,
+      :file_path,
+      :reference_urls,
+      :rule_id,
+      :source_lambda_layer_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A conflict occurred.
     #
     # @!attribute [rw] message
@@ -893,6 +1206,27 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # Contains details of a coverage date filter.
+    #
+    # @!attribute [rw] end_inclusive
+    #   A timestamp representing the end of the time period to filter
+    #   results by.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_inclusive
+    #   A timestamp representing the start of the time period to filter
+    #   results by.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CoverageDateFilter AWS API Documentation
+    #
+    class CoverageDateFilter < Struct.new(
+      :end_inclusive,
+      :start_inclusive)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure that identifies filter criteria for
     # `GetCoverageStatistics`.
     #
@@ -928,6 +1262,12 @@ module Aws::Inspector2
     #   tag.
     #   @return [Array<Types::CoverageMapFilter>]
     #
+    # @!attribute [rw] last_scanned_at
+    #   Filters Amazon Web Services resources based on whether Amazon
+    #   Inspector has checked them for vulnerabilities within the specified
+    #   time range.
+    #   @return [Array<Types::CoverageDateFilter>]
+    #
     # @!attribute [rw] resource_id
     #   An array of Amazon Web Services resource IDs to return coverage
     #   statistics for.
@@ -935,8 +1275,8 @@ module Aws::Inspector2
     #
     # @!attribute [rw] resource_type
     #   An array of Amazon Web Services resource types to return coverage
-    #   statistics for. The values can be `AWS_EC2_INSTANCE` or
-    #   `AWS_ECR_REPOSITORY`.
+    #   statistics for. The values can be `AWS_EC2_INSTANCE`,
+    #   `AWS_LAMBDA_FUNCTION` or `AWS_ECR_REPOSITORY`.
     #   @return [Array<Types::CoverageStringFilter>]
     #
     # @!attribute [rw] scan_status_code
@@ -962,6 +1302,7 @@ module Aws::Inspector2
       :lambda_function_name,
       :lambda_function_runtime,
       :lambda_function_tags,
+      :last_scanned_at,
       :resource_id,
       :resource_type,
       :scan_status_code,
@@ -1021,6 +1362,10 @@ module Aws::Inspector2
     #   The Amazon Web Services account ID of the covered resource.
     #   @return [String]
     #
+    # @!attribute [rw] last_scanned_at
+    #   The date and time the resource was last checked for vulnerabilities.
+    #   @return [Time]
+    #
     # @!attribute [rw] resource_id
     #   The ID of the covered resource.
     #   @return [String]
@@ -1045,6 +1390,7 @@ module Aws::Inspector2
     #
     class CoveredResource < Struct.new(
       :account_id,
+      :last_scanned_at,
       :resource_id,
       :resource_metadata,
       :resource_type,
@@ -1136,6 +1482,82 @@ module Aws::Inspector2
     #
     class CreateFindingsReportResponse < Struct.new(
       :report_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] report_format
+    #   The output format for the software bill of materials (SBOM) report.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_filter_criteria
+    #   The resource filter criteria for the software bill of materials
+    #   (SBOM) report.
+    #   @return [Types::ResourceFilterCriteria]
+    #
+    # @!attribute [rw] s3_destination
+    #   Contains details of the Amazon S3 bucket and KMS key used to export
+    #   findings.
+    #   @return [Types::Destination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CreateSbomExportRequest AWS API Documentation
+    #
+    class CreateSbomExportRequest < Struct.new(
+      :report_format,
+      :resource_filter_criteria,
+      :s3_destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] report_id
+    #   The report ID for the software bill of materials (SBOM) report.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CreateSbomExportResponse AWS API Documentation
+    #
+    class CreateSbomExportResponse < Struct.new(
+      :report_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Common Vulnerability Scoring System (CVSS) version 2 details for
+    # the vulnerability.
+    #
+    # @!attribute [rw] base_score
+    #   The CVSS v2 base score for the vulnerability.
+    #   @return [Float]
+    #
+    # @!attribute [rw] scoring_vector
+    #   The scoring vector associated with the CVSS v2 score.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/Cvss2 AWS API Documentation
+    #
+    class Cvss2 < Struct.new(
+      :base_score,
+      :scoring_vector)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Common Vulnerability Scoring System (CVSS) version 3 details for
+    # the vulnerability.
+    #
+    # @!attribute [rw] base_score
+    #   The CVSS v3 base score for the vulnerability.
+    #   @return [Float]
+    #
+    # @!attribute [rw] scoring_vector
+    #   The scoring vector associated with the CVSS v3 score.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/Cvss3 AWS API Documentation
+    #
+    class Cvss3 < Struct.new(
+      :base_score,
+      :scoring_vector)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1743,6 +2165,54 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # Details about the Exploit Prediction Scoring System (EPSS) score.
+    #
+    # @!attribute [rw] score
+    #   The Exploit Prediction Scoring System (EPSS) score.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/Epss AWS API Documentation
+    #
+    class Epss < Struct.new(
+      :score)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the Exploit Prediction Scoring System (EPSS) score for a
+    # finding.
+    #
+    # @!attribute [rw] score
+    #   The EPSS score.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/EpssDetails AWS API Documentation
+    #
+    class EpssDetails < Struct.new(
+      :score)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information on when this exploit was observed.
+    #
+    # @!attribute [rw] first_seen
+    #   The date an time when the exploit was first seen.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_seen
+    #   The date an time when the exploit was last seen.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ExploitObserved AWS API Documentation
+    #
+    class ExploitObserved < Struct.new(
+      :first_seen,
+      :last_seen)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of an exploit available for a finding discovered in your
     # environment.
     #
@@ -1894,6 +2364,28 @@ module Aws::Inspector2
     #   findings.
     #   @return [Array<Types::StringFilter>]
     #
+    # @!attribute [rw] code_vulnerability_detector_name
+    #   The name of the detector used to identify a code vulnerability in a
+    #   Lambda function used to filter findings.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] code_vulnerability_detector_tags
+    #   The detector type tag associated with the vulnerability used to
+    #   filter findings. Detector tags group related vulnerabilities by
+    #   common themes or tactics. For a list of available tags by
+    #   programming language, see [Java tags][1], or [Python tags][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeguru/detector-library/java/tags/
+    #   [2]: https://docs.aws.amazon.com/codeguru/detector-library/python/tags/
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] code_vulnerability_file_path
+    #   The file path to the file in a Lambda function that contains a code
+    #   vulnerability used to filter findings.
+    #   @return [Array<Types::StringFilter>]
+    #
     # @!attribute [rw] component_id
     #   Details of the component IDs used to filter findings.
     #   @return [Array<Types::StringFilter>]
@@ -1942,6 +2434,10 @@ module Aws::Inspector2
     # @!attribute [rw] ecr_image_tags
     #   The tags attached to the Amazon ECR container image.
     #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] epss_score
+    #   The EPSS score used to filter findings.
+    #   @return [Array<Types::NumberFilter>]
     #
     # @!attribute [rw] exploit_available
     #   Filters the list of AWS Lambda findings by the availability of
@@ -2070,6 +2566,9 @@ module Aws::Inspector2
     #
     class FilterCriteria < Struct.new(
       :aws_account_id,
+      :code_vulnerability_detector_name,
+      :code_vulnerability_detector_tags,
+      :code_vulnerability_file_path,
       :component_id,
       :component_type,
       :ec2_instance_image_id,
@@ -2081,6 +2580,7 @@ module Aws::Inspector2
       :ecr_image_registry,
       :ecr_image_repository_name,
       :ecr_image_tags,
+      :epss_score,
       :exploit_available,
       :finding_arn,
       :finding_status,
@@ -2117,9 +2617,18 @@ module Aws::Inspector2
     #   The Amazon Web Services account ID associated with the finding.
     #   @return [String]
     #
+    # @!attribute [rw] code_vulnerability_details
+    #   Details about the code vulnerability identified in a Lambda function
+    #   used to filter findings.
+    #   @return [Types::CodeVulnerabilityDetails]
+    #
     # @!attribute [rw] description
     #   The description of the finding.
     #   @return [String]
+    #
+    # @!attribute [rw] epss
+    #   The finding's EPSS score.
+    #   @return [Types::EpssDetails]
     #
     # @!attribute [rw] exploit_available
     #   If a finding discovered in your environment has an exploit
@@ -2201,7 +2710,9 @@ module Aws::Inspector2
     #
     class Finding < Struct.new(
       :aws_account_id,
+      :code_vulnerability_details,
       :description,
+      :epss,
       :exploit_available,
       :exploitability_details,
       :finding_arn,
@@ -2425,6 +2936,35 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_type
+    #   The resource type the key encrypts.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_type
+    #   The scan type the key encrypts.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetEncryptionKeyRequest AWS API Documentation
+    #
+    class GetEncryptionKeyRequest < Struct.new(
+      :resource_type,
+      :scan_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] kms_key_id
+    #   A kms key ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetEncryptionKeyResponse AWS API Documentation
+    #
+    class GetEncryptionKeyResponse < Struct.new(
+      :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] report_id
     #   The ID of the report to retrieve the status of.
     #   @return [String]
@@ -2495,6 +3035,62 @@ module Aws::Inspector2
     #
     class GetMemberResponse < Struct.new(
       :member)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] report_id
+    #   The report ID of the SBOM export to get details for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetSbomExportRequest AWS API Documentation
+    #
+    class GetSbomExportRequest < Struct.new(
+      :report_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] error_code
+    #   An error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   An error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_criteria
+    #   Contains details about the resource filter criteria used for the
+    #   software bill of materials (SBOM) report.
+    #   @return [Types::ResourceFilterCriteria]
+    #
+    # @!attribute [rw] format
+    #   The format of the software bill of materials (SBOM) report.
+    #   @return [String]
+    #
+    # @!attribute [rw] report_id
+    #   The report ID of the software bill of materials (SBOM) report.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_destination
+    #   Contains details of the Amazon S3 bucket and KMS key used to export
+    #   findings.
+    #   @return [Types::Destination]
+    #
+    # @!attribute [rw] status
+    #   The status of the software bill of materials (SBOM) report.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetSbomExportResponse AWS API Documentation
+    #
+    class GetSbomExportResponse < Struct.new(
+      :error_code,
+      :error_message,
+      :filter_criteria,
+      :format,
+      :report_id,
+      :s3_destination,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3775,6 +4371,27 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_type
+    #   The resource type the key encrypts.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_type
+    #   The scan type the key encrypts.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResetEncryptionKeyRequest AWS API Documentation
+    #
+    class ResetEncryptionKeyRequest < Struct.new(
+      :resource_type,
+      :scan_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResetEncryptionKeyResponse AWS API Documentation
+    #
+    class ResetEncryptionKeyResponse < Aws::EmptyStructure; end
+
     # Details about the resource involved in a finding.
     #
     # @!attribute [rw] details
@@ -3838,6 +4455,80 @@ module Aws::Inspector2
       :aws_ec2_instance,
       :aws_ecr_container_image,
       :aws_lambda_function)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The resource filter criteria for a Software bill of materials (SBOM)
+    # report.
+    #
+    # @!attribute [rw] account_id
+    #   The account IDs used as resource filter criteria.
+    #   @return [Array<Types::ResourceStringFilter>]
+    #
+    # @!attribute [rw] ec2_instance_tags
+    #   The EC2 instance tags used as resource filter criteria.
+    #   @return [Array<Types::ResourceMapFilter>]
+    #
+    # @!attribute [rw] ecr_image_tags
+    #   The ECR image tags used as resource filter criteria.
+    #   @return [Array<Types::ResourceStringFilter>]
+    #
+    # @!attribute [rw] ecr_repository_name
+    #   The ECR repository names used as resource filter criteria.
+    #   @return [Array<Types::ResourceStringFilter>]
+    #
+    # @!attribute [rw] lambda_function_name
+    #   The AWS Lambda function name used as resource filter criteria.
+    #   @return [Array<Types::ResourceStringFilter>]
+    #
+    # @!attribute [rw] lambda_function_tags
+    #   The AWS Lambda function tags used as resource filter criteria.
+    #   @return [Array<Types::ResourceMapFilter>]
+    #
+    # @!attribute [rw] resource_id
+    #   The resource IDs used as resource filter criteria.
+    #   @return [Array<Types::ResourceStringFilter>]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource types used as resource filter criteria.
+    #   @return [Array<Types::ResourceStringFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResourceFilterCriteria AWS API Documentation
+    #
+    class ResourceFilterCriteria < Struct.new(
+      :account_id,
+      :ec2_instance_tags,
+      :ecr_image_tags,
+      :ecr_repository_name,
+      :lambda_function_name,
+      :lambda_function_tags,
+      :resource_id,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A resource map filter for a software bill of material report.
+    #
+    # @!attribute [rw] comparison
+    #   The filter's comparison.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The filter's key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The filter's value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResourceMapFilter AWS API Documentation
+    #
+    class ResourceMapFilter < Struct.new(
+      :comparison,
+      :key,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3906,12 +4597,18 @@ module Aws::Inspector2
     #   account.
     #   @return [Types::State]
     #
+    # @!attribute [rw] lambda_code
+    #   An object that described the state of Amazon Inspector scans for an
+    #   account.
+    #   @return [Types::State]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResourceState AWS API Documentation
     #
     class ResourceState < Struct.new(
       :ec2,
       :ecr,
-      :lambda)
+      :lambda,
+      :lambda_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3931,12 +4628,37 @@ module Aws::Inspector2
     #   The status of Amazon Inspector scanning for AWS Lambda function.
     #   @return [String]
     #
+    # @!attribute [rw] lambda_code
+    #   The status of Amazon Inspector scanning for custom application code
+    #   for Amazon Web Services Lambda functions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResourceStatus AWS API Documentation
     #
     class ResourceStatus < Struct.new(
       :ec2,
       :ecr,
-      :lambda)
+      :lambda,
+      :lambda_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A resource string filter for a software bill of materials report.
+    #
+    # @!attribute [rw] comparison
+    #   The filter's comparison.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The filter's value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResourceStringFilter AWS API Documentation
+    #
+    class ResourceStringFilter < Struct.new(
+      :comparison,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3956,6 +4678,60 @@ module Aws::Inspector2
     class ScanStatus < Struct.new(
       :reason,
       :status_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details on the criteria used to define the filter for a vulnerability
+    # search.
+    #
+    # @!attribute [rw] vulnerability_ids
+    #   The IDs for specific vulnerabilities.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/SearchVulnerabilitiesFilterCriteria AWS API Documentation
+    #
+    class SearchVulnerabilitiesFilterCriteria < Struct.new(
+      :vulnerability_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filter_criteria
+    #   The criteria used to filter the results of a vulnerability search.
+    #   @return [Types::SearchVulnerabilitiesFilterCriteria]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request to a list action. For subsequent calls, use the `NextToken`
+    #   value returned from the previous request to continue listing results
+    #   after the first page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/SearchVulnerabilitiesRequest AWS API Documentation
+    #
+    class SearchVulnerabilitiesRequest < Struct.new(
+      :filter_criteria,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The pagination parameter to be used on the next list operation to
+    #   retrieve more items.
+    #   @return [String]
+    #
+    # @!attribute [rw] vulnerabilities
+    #   Details about the listed vulnerability.
+    #   @return [Array<Types::Vulnerability>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/SearchVulnerabilitiesResponse AWS API Documentation
+    #
+    class SearchVulnerabilitiesResponse < Struct.new(
+      :next_token,
+      :vulnerabilities)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4093,6 +4869,25 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # A suggested fix for a vulnerability in your Lambda function code.
+    #
+    # @!attribute [rw] code
+    #   The fix's code.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The fix's description.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/SuggestedFix AWS API Documentation
+    #
+    class SuggestedFix < Struct.new(
+      :code,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to apply a tag to.
     #   @return [String]
@@ -4134,6 +4929,10 @@ module Aws::Inspector2
 
     # The details that define an aggregation based on finding title.
     #
+    # @!attribute [rw] finding_type
+    #   The type of finding to aggregate on.
+    #   @return [String]
+    #
     # @!attribute [rw] resource_type
     #   The resource type to aggregate on.
     #   @return [String]
@@ -4157,6 +4956,7 @@ module Aws::Inspector2
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/TitleAggregation AWS API Documentation
     #
     class TitleAggregation < Struct.new(
+      :finding_type,
       :resource_type,
       :sort_by,
       :sort_order,
@@ -4290,6 +5090,32 @@ module Aws::Inspector2
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] kms_key_id
+    #   A KMS key ID for the encryption key.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type for the encryption key.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_type
+    #   The scan type for the encryption key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateEncryptionKeyRequest AWS API Documentation
+    #
+    class UpdateEncryptionKeyRequest < Struct.new(
+      :kms_key_id,
+      :resource_type,
+      :scan_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateEncryptionKeyResponse AWS API Documentation
+    #
+    class UpdateEncryptionKeyResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] action
     #   Specifies the action that is to be applied to the findings that
@@ -4472,6 +5298,108 @@ module Aws::Inspector2
     class ValidationExceptionField < Struct.new(
       :message,
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about a specific vulnerability Amazon Inspector can
+    # detect.
+    #
+    # @!attribute [rw] atig_data
+    #   An object that contains information about the Amazon Web Services
+    #   Threat Intel Group (ATIG) details for the vulnerability.
+    #   @return [Types::AtigData]
+    #
+    # @!attribute [rw] cisa_data
+    #   An object that contains the Cybersecurity and Infrastructure
+    #   Security Agency (CISA) details for the vulnerability.
+    #   @return [Types::CisaData]
+    #
+    # @!attribute [rw] cvss2
+    #   An object that contains the Common Vulnerability Scoring System
+    #   (CVSS) Version 2 details for the vulnerability.
+    #   @return [Types::Cvss2]
+    #
+    # @!attribute [rw] cvss3
+    #   An object that contains the Common Vulnerability Scoring System
+    #   (CVSS) Version 3 details for the vulnerability.
+    #   @return [Types::Cvss3]
+    #
+    # @!attribute [rw] cwes
+    #   The Common Weakness Enumeration (CWE) associated with the
+    #   vulnerability.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] description
+    #   A description of the vulnerability.
+    #   @return [String]
+    #
+    # @!attribute [rw] detection_platforms
+    #   Platforms that the vulnerability can be detected on.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] epss
+    #   An object that contains the Exploit Prediction Scoring System (EPSS)
+    #   score for a vulnerability.
+    #   @return [Types::Epss]
+    #
+    # @!attribute [rw] exploit_observed
+    #   An object that contains details on when the exploit was observed.
+    #   @return [Types::ExploitObserved]
+    #
+    # @!attribute [rw] id
+    #   The ID for the specific vulnerability.
+    #   @return [String]
+    #
+    # @!attribute [rw] reference_urls
+    #   Links to various resources with more information on this
+    #   vulnerability.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] related_vulnerabilities
+    #   A list of related vulnerabilities.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] source
+    #   The source of the vulnerability information.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_url
+    #   A link to the official source material for this vulnerability.
+    #   @return [String]
+    #
+    # @!attribute [rw] vendor_created_at
+    #   The date and time when the vendor created this vulnerability.
+    #   @return [Time]
+    #
+    # @!attribute [rw] vendor_severity
+    #   The severity assigned by the vendor.
+    #   @return [String]
+    #
+    # @!attribute [rw] vendor_updated_at
+    #   The date and time when the vendor last updated this vulnerability.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/Vulnerability AWS API Documentation
+    #
+    class Vulnerability < Struct.new(
+      :atig_data,
+      :cisa_data,
+      :cvss2,
+      :cvss3,
+      :cwes,
+      :description,
+      :detection_platforms,
+      :epss,
+      :exploit_observed,
+      :id,
+      :reference_urls,
+      :related_vulnerabilities,
+      :source,
+      :source_url,
+      :vendor_created_at,
+      :vendor_severity,
+      :vendor_updated_at)
       SENSITIVE = []
       include Aws::Structure
     end

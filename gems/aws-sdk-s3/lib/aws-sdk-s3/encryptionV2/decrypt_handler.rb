@@ -173,6 +173,7 @@ module Aws
           auth_tag = context.client.get_object(
             bucket: context.params[:bucket],
             key: context.params[:key],
+            version_id: context.params[:version_id],
             range: "bytes=-#{auth_tag_length}"
           ).body.read
 

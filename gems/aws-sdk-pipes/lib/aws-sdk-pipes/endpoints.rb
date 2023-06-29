@@ -9,6 +9,7 @@
 
 
 module Aws::Pipes
+  # @api private
   module Endpoints
 
     class CreatePipe

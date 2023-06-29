@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2023-06-15)
+------------------
+
+* Feature - Amazon Location Service adds categories to places, including filtering on those categories in searches. Also, you can now add metadata properties to your geofences.
+
+1.32.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2023-05-30)
+------------------
+
+* Feature - This release adds API support for political views for the maps service APIs: CreateMap, UpdateMap, DescribeMap.
+
 1.30.0 (2023-03-07)
 ------------------
 

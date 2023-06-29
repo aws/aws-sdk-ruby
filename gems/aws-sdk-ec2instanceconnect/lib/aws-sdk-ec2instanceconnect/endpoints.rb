@@ -9,6 +9,7 @@
 
 
 module Aws::EC2InstanceConnect
+  # @api private
   module Endpoints
 
     class SendSSHPublicKey

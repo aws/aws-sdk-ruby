@@ -52,6 +52,6 @@ require_relative 'aws-sdk-sagemakergeospatial/customizations'
 # @!group service
 module Aws::SageMakerGeospatial
 
-  GEM_VERSION = '1.2.0'
+  GEM_VERSION = '1.6.0'
 
 end

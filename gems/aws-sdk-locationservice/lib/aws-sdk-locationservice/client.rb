@@ -275,6 +275,11 @@ module Aws::LocationService
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -642,6 +647,9 @@ module Aws::LocationService
     #     entries: [ # required
     #       {
     #         geofence_id: "Id", # required
+    #         geofence_properties: {
+    #           "PropertyMapKeyString" => "PropertyMapValueString",
+    #         },
     #         geometry: { # required
     #           circle: {
     #             center: [1.0], # required
@@ -678,9 +686,9 @@ module Aws::LocationService
     end
 
     # Uploads position update data for one or more devices to a tracker
-    # resource. Amazon Location uses the data when it reports the last known
-    # device position and position history. Amazon Location retains location
-    # data for 30 days.
+    # resource (up to 10 devices per batch). Amazon Location uses the data
+    # when it reports the last known device position and position history.
+    # Amazon Location retains location data for 30 days.
     #
     # <note markdown="1"> Position updates are handled based on the `PositionFiltering` property
     # of the tracker. When `PositionFiltering` is set to `TimeBased`,
@@ -710,7 +718,8 @@ module Aws::LocationService
     #   The name of the tracker resource to update.
     #
     # @option params [required, Array<Types::DevicePositionUpdate>] :updates
-    #   Contains the position update details for each device.
+    #   Contains the position update details for each device, up to 10
+    #   devices.
     #
     # @return [Types::BatchUpdateDevicePositionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1530,6 +1539,7 @@ module Aws::LocationService
     #
     #   resp = client.create_map({
     #     configuration: { # required
+    #       political_view: "CountryCode3",
     #       style: "MapStyle", # required
     #     },
     #     description: "ResourceDescription",
@@ -2239,6 +2249,7 @@ module Aws::LocationService
     #
     # @example Response structure
     #
+    #   resp.configuration.political_view #=> String
     #   resp.configuration.style #=> String
     #   resp.create_time #=> Time
     #   resp.data_source #=> String
@@ -2593,6 +2604,7 @@ module Aws::LocationService
     #
     #   * {Types::GetGeofenceResponse#create_time #create_time} => Time
     #   * {Types::GetGeofenceResponse#geofence_id #geofence_id} => String
+    #   * {Types::GetGeofenceResponse#geofence_properties #geofence_properties} => Hash&lt;String,String&gt;
     #   * {Types::GetGeofenceResponse#geometry #geometry} => Types::GeofenceGeometry
     #   * {Types::GetGeofenceResponse#status #status} => String
     #   * {Types::GetGeofenceResponse#update_time #update_time} => Time
@@ -2608,6 +2620,8 @@ module Aws::LocationService
     #
     #   resp.create_time #=> Time
     #   resp.geofence_id #=> String
+    #   resp.geofence_properties #=> Hash
+    #   resp.geofence_properties["PropertyMapKeyString"] #=> String
     #   resp.geometry.circle.center #=> Array
     #   resp.geometry.circle.center[0] #=> Float
     #   resp.geometry.circle.radius #=> Float
@@ -2675,7 +2689,14 @@ module Aws::LocationService
     #     Sans Bold` \| `Amazon Ember Medium,Noto Sans Medium` \| `Amazon
     #     Ember Regular Italic,Noto Sans Italic` \| `Amazon Ember Condensed RC
     #     Regular,Noto Sans Regular` \| `Amazon Ember Condensed RC Bold,Noto
-    #     Sans Bold`
+    #     Sans Bold` \| `Amazon Ember Regular,Noto Sans Regular,Noto Sans
+    #     Arabic Regular` \| `Amazon Ember Condensed RC Bold,Noto Sans
+    #     Bold,Noto Sans Arabic Condensed Bold` \| `Amazon Ember Bold,Noto
+    #     Sans Bold,Noto Sans Arabic Bold` \| `Amazon Ember Regular
+    #     Italic,Noto Sans Italic,Noto Sans Arabic Regular` \| `Amazon Ember
+    #     Condensed RC Regular,Noto Sans Regular,Noto Sans Arabic Condensed
+    #     Regular` \| `Amazon Ember Medium,Noto Sans Medium,Noto Sans Arabic
+    #     Medium`
     #
     #   ^
     #
@@ -2960,6 +2981,8 @@ module Aws::LocationService
     # @example Response structure
     #
     #   resp.place.address_number #=> String
+    #   resp.place.categories #=> Array
+    #   resp.place.categories[0] #=> String
     #   resp.place.country #=> String
     #   resp.place.geometry.point #=> Array
     #   resp.place.geometry.point[0] #=> Float
@@ -2971,6 +2994,8 @@ module Aws::LocationService
     #   resp.place.region #=> String
     #   resp.place.street #=> String
     #   resp.place.sub_region #=> String
+    #   resp.place.supplemental_categories #=> Array
+    #   resp.place.supplemental_categories[0] #=> String
     #   resp.place.time_zone.name #=> String
     #   resp.place.time_zone.offset #=> Integer
     #   resp.place.unit_number #=> String
@@ -3122,6 +3147,8 @@ module Aws::LocationService
     #   resp.data.entries #=> Array
     #   resp.data.entries[0].create_time #=> Time
     #   resp.data.entries[0].geofence_id #=> String
+    #   resp.data.entries[0].geofence_properties #=> Hash
+    #   resp.data.entries[0].geofence_properties["PropertyMapKeyString"] #=> String
     #   resp.data.entries[0].geometry.circle.center #=> Array
     #   resp.data.entries[0].geometry.circle.center[0] #=> Float
     #   resp.data.entries[0].geometry.circle.radius #=> Float
@@ -3495,6 +3522,10 @@ module Aws::LocationService
     # @option params [required, String] :geofence_id
     #   An identifier for the geofence. For example, `ExampleGeofence-1`.
     #
+    # @option params [Hash<String,String>] :geofence_properties
+    #   Specifies additional user-defined properties to store with the
+    #   Geofence. An array of key-value pairs.
+    #
     # @option params [required, Types::GeofenceGeometry] :geometry
     #   Contains the details to specify the position of the geofence. Can be
     #   either a polygon or a circle. Including both will return a validation
@@ -3519,6 +3550,9 @@ module Aws::LocationService
     #   resp = client.put_geofence({
     #     collection_name: "ResourceName", # required
     #     geofence_id: "Id", # required
+    #     geofence_properties: {
+    #       "PropertyMapKeyString" => "PropertyMapValueString",
+    #     },
     #     geometry: { # required
     #       circle: {
     #         center: [1.0], # required
@@ -3613,6 +3647,8 @@ module Aws::LocationService
     #   resp.results #=> Array
     #   resp.results[0].distance #=> Float
     #   resp.results[0].place.address_number #=> String
+    #   resp.results[0].place.categories #=> Array
+    #   resp.results[0].place.categories[0] #=> String
     #   resp.results[0].place.country #=> String
     #   resp.results[0].place.geometry.point #=> Array
     #   resp.results[0].place.geometry.point[0] #=> Float
@@ -3624,6 +3660,8 @@ module Aws::LocationService
     #   resp.results[0].place.region #=> String
     #   resp.results[0].place.street #=> String
     #   resp.results[0].place.sub_region #=> String
+    #   resp.results[0].place.supplemental_categories #=> Array
+    #   resp.results[0].place.supplemental_categories[0] #=> String
     #   resp.results[0].place.time_zone.name #=> String
     #   resp.results[0].place.time_zone.offset #=> Integer
     #   resp.results[0].place.unit_number #=> String
@@ -3696,6 +3734,19 @@ module Aws::LocationService
     #
     #    </note>
     #
+    # @option params [Array<String>] :filter_categories
+    #   A list of one or more Amazon Location categories to filter the
+    #   returned places. If you include more than one category, the results
+    #   will include results that match *any* of the categories listed.
+    #
+    #   For more information about using categories, including a list of
+    #   Amazon Location categories, see [Categories and filtering][1], in the
+    #   *Amazon Location Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html
+    #
     # @option params [Array<String>] :filter_countries
     #   An optional parameter that limits the search results by returning only
     #   suggestions within the provided list of countries.
@@ -3754,6 +3805,7 @@ module Aws::LocationService
     #   resp = client.search_place_index_for_suggestions({
     #     bias_position: [1.0],
     #     filter_b_box: [1.0],
+    #     filter_categories: ["PlaceCategory"],
     #     filter_countries: ["CountryCode"],
     #     index_name: "ResourceName", # required
     #     language: "LanguageTag",
@@ -3764,13 +3816,19 @@ module Aws::LocationService
     # @example Response structure
     #
     #   resp.results #=> Array
+    #   resp.results[0].categories #=> Array
+    #   resp.results[0].categories[0] #=> String
     #   resp.results[0].place_id #=> String
+    #   resp.results[0].supplemental_categories #=> Array
+    #   resp.results[0].supplemental_categories[0] #=> String
     #   resp.results[0].text #=> String
     #   resp.summary.bias_position #=> Array
     #   resp.summary.bias_position[0] #=> Float
     #   resp.summary.data_source #=> String
     #   resp.summary.filter_b_box #=> Array
     #   resp.summary.filter_b_box[0] #=> Float
+    #   resp.summary.filter_categories #=> Array
+    #   resp.summary.filter_categories[0] #=> String
     #   resp.summary.filter_countries #=> Array
     #   resp.summary.filter_countries[0] #=> String
     #   resp.summary.language #=> String
@@ -3838,6 +3896,19 @@ module Aws::LocationService
     #
     #    </note>
     #
+    # @option params [Array<String>] :filter_categories
+    #   A list of one or more Amazon Location categories to filter the
+    #   returned places. If you include more than one category, the results
+    #   will include results that match *any* of the categories listed.
+    #
+    #   For more information about using categories, including a list of
+    #   Amazon Location categories, see [Categories and filtering][1], in the
+    #   *Amazon Location Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html
+    #
     # @option params [Array<String>] :filter_countries
     #   An optional parameter that limits the search results by returning only
     #   places that are in a specified list of countries.
@@ -3897,6 +3968,7 @@ module Aws::LocationService
     #   resp = client.search_place_index_for_text({
     #     bias_position: [1.0],
     #     filter_b_box: [1.0],
+    #     filter_categories: ["PlaceCategory"],
     #     filter_countries: ["CountryCode"],
     #     index_name: "ResourceName", # required
     #     language: "LanguageTag",
@@ -3909,6 +3981,8 @@ module Aws::LocationService
     #   resp.results #=> Array
     #   resp.results[0].distance #=> Float
     #   resp.results[0].place.address_number #=> String
+    #   resp.results[0].place.categories #=> Array
+    #   resp.results[0].place.categories[0] #=> String
     #   resp.results[0].place.country #=> String
     #   resp.results[0].place.geometry.point #=> Array
     #   resp.results[0].place.geometry.point[0] #=> Float
@@ -3920,6 +3994,8 @@ module Aws::LocationService
     #   resp.results[0].place.region #=> String
     #   resp.results[0].place.street #=> String
     #   resp.results[0].place.sub_region #=> String
+    #   resp.results[0].place.supplemental_categories #=> Array
+    #   resp.results[0].place.supplemental_categories[0] #=> String
     #   resp.results[0].place.time_zone.name #=> String
     #   resp.results[0].place.time_zone.offset #=> Integer
     #   resp.results[0].place.unit_number #=> String
@@ -3931,6 +4007,8 @@ module Aws::LocationService
     #   resp.summary.data_source #=> String
     #   resp.summary.filter_b_box #=> Array
     #   resp.summary.filter_b_box[0] #=> Float
+    #   resp.summary.filter_categories #=> Array
+    #   resp.summary.filter_categories[0] #=> String
     #   resp.summary.filter_countries #=> Array
     #   resp.summary.filter_countries[0] #=> String
     #   resp.summary.language #=> String
@@ -4173,6 +4251,10 @@ module Aws::LocationService
 
     # Updates the specified properties of a given map resource.
     #
+    # @option params [Types::MapConfigurationUpdate] :configuration_update
+    #   Updates the parts of the map configuration that can be updated,
+    #   including the political view.
+    #
     # @option params [String] :description
     #   Updates the description for the map resource.
     #
@@ -4192,6 +4274,9 @@ module Aws::LocationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_map({
+    #     configuration_update: {
+    #       political_view: "CountryCode3OrEmpty",
+    #     },
     #     description: "ResourceDescription",
     #     map_name: "ResourceName", # required
     #     pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
@@ -4388,7 +4473,7 @@ module Aws::LocationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-locationservice'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

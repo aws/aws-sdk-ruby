@@ -249,6 +249,7 @@ module Aws::Transfer
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SessionId = Shapes::StringShape.new(name: 'SessionId')
     SetStatOption = Shapes::StringShape.new(name: 'SetStatOption')
+    SftpAuthenticationMethods = Shapes::StringShape.new(name: 'SftpAuthenticationMethods')
     SigningAlg = Shapes::StringShape.new(name: 'SigningAlg')
     SourceFileLocation = Shapes::StringShape.new(name: 'SourceFileLocation')
     SourceIp = Shapes::StringShape.new(name: 'SourceIp')
@@ -264,6 +265,7 @@ module Aws::Transfer
     StatusCode = Shapes::IntegerShape.new(name: 'StatusCode')
     StepResultOutputsJson = Shapes::StringShape.new(name: 'StepResultOutputsJson')
     StopServerRequest = Shapes::StructureShape.new(name: 'StopServerRequest')
+    StructuredLogDestinations = Shapes::ListShape.new(name: 'StructuredLogDestinations')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
     Tag = Shapes::StructureShape.new(name: 'Tag')
@@ -400,6 +402,7 @@ module Aws::Transfer
     CreateServerRequest.add_member(:security_policy_name, Shapes::ShapeRef.new(shape: SecurityPolicyName, location_name: "SecurityPolicyName"))
     CreateServerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateServerRequest.add_member(:workflow_details, Shapes::ShapeRef.new(shape: WorkflowDetails, location_name: "WorkflowDetails"))
+    CreateServerRequest.add_member(:structured_log_destinations, Shapes::ShapeRef.new(shape: StructuredLogDestinations, location_name: "StructuredLogDestinations"))
     CreateServerRequest.struct_class = Types::CreateServerRequest
 
     CreateServerResponse.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
@@ -657,6 +660,7 @@ module Aws::Transfer
     DescribedServer.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     DescribedServer.add_member(:user_count, Shapes::ShapeRef.new(shape: UserCount, location_name: "UserCount"))
     DescribedServer.add_member(:workflow_details, Shapes::ShapeRef.new(shape: WorkflowDetails, location_name: "WorkflowDetails"))
+    DescribedServer.add_member(:structured_log_destinations, Shapes::ShapeRef.new(shape: StructuredLogDestinations, location_name: "StructuredLogDestinations"))
     DescribedServer.struct_class = Types::DescribedServer
 
     DescribedUser.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
@@ -721,6 +725,7 @@ module Aws::Transfer
     IdentityProviderDetails.add_member(:invocation_role, Shapes::ShapeRef.new(shape: Role, location_name: "InvocationRole"))
     IdentityProviderDetails.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
     IdentityProviderDetails.add_member(:function, Shapes::ShapeRef.new(shape: Function, location_name: "Function"))
+    IdentityProviderDetails.add_member(:sftp_authentication_methods, Shapes::ShapeRef.new(shape: SftpAuthenticationMethods, location_name: "SftpAuthenticationMethods"))
     IdentityProviderDetails.struct_class = Types::IdentityProviderDetails
 
     ImportCertificateRequest.add_member(:usage, Shapes::ShapeRef.new(shape: CertificateUsageType, required: true, location_name: "Usage"))
@@ -1059,6 +1064,8 @@ module Aws::Transfer
     StopServerRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
     StopServerRequest.struct_class = Types::StopServerRequest
 
+    StructuredLogDestinations.member = Shapes::ShapeRef.new(shape: Arn)
+
     SubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
@@ -1173,6 +1180,7 @@ module Aws::Transfer
     UpdateServerRequest.add_member(:security_policy_name, Shapes::ShapeRef.new(shape: SecurityPolicyName, location_name: "SecurityPolicyName"))
     UpdateServerRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
     UpdateServerRequest.add_member(:workflow_details, Shapes::ShapeRef.new(shape: WorkflowDetails, location_name: "WorkflowDetails"))
+    UpdateServerRequest.add_member(:structured_log_destinations, Shapes::ShapeRef.new(shape: StructuredLogDestinations, location_name: "StructuredLogDestinations"))
     UpdateServerRequest.struct_class = Types::UpdateServerRequest
 
     UpdateServerResponse.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))

@@ -9,6 +9,7 @@
 
 
 module Aws::WorkMail
+  # @api private
   module Endpoints
 
     class AssociateDelegateToResource

@@ -9,6 +9,7 @@
 
 
 module Aws::IAM
+  # @api private
   module Endpoints
 
     class AddClientIDToOpenIDConnectProvider
@@ -880,6 +881,20 @@ module Aws::IAM
     end
 
     class GetLoginProfile
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::IAM::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class GetMFADevice
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

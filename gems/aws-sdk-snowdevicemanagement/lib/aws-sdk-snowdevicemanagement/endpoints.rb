@@ -9,6 +9,7 @@
 
 
 module Aws::SnowDeviceManagement
+  # @api private
   module Endpoints
 
     class CancelTask

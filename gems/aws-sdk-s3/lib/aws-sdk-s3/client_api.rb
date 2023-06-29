@@ -296,6 +296,7 @@ module Aws::S3
     IsEnabled = Shapes::BooleanShape.new(name: 'IsEnabled')
     IsLatest = Shapes::BooleanShape.new(name: 'IsLatest')
     IsPublic = Shapes::BooleanShape.new(name: 'IsPublic')
+    IsRestoreInProgress = Shapes::BooleanShape.new(name: 'IsRestoreInProgress')
     IsTruncated = Shapes::BooleanShape.new(name: 'IsTruncated')
     JSONInput = Shapes::StructureShape.new(name: 'JSONInput')
     JSONOutput = Shapes::StructureShape.new(name: 'JSONOutput')
@@ -409,6 +410,8 @@ module Aws::S3
     ObjectVersionId = Shapes::StringShape.new(name: 'ObjectVersionId')
     ObjectVersionList = Shapes::ListShape.new(name: 'ObjectVersionList', flattened: true)
     ObjectVersionStorageClass = Shapes::StringShape.new(name: 'ObjectVersionStorageClass')
+    OptionalObjectAttributes = Shapes::StringShape.new(name: 'OptionalObjectAttributes')
+    OptionalObjectAttributesList = Shapes::ListShape.new(name: 'OptionalObjectAttributesList')
     OutputLocation = Shapes::StructureShape.new(name: 'OutputLocation')
     OutputSerialization = Shapes::StructureShape.new(name: 'OutputSerialization')
     Owner = Shapes::StructureShape.new(name: 'Owner')
@@ -507,11 +510,13 @@ module Aws::S3
     ResponseContentType = Shapes::StringShape.new(name: 'ResponseContentType')
     ResponseExpires = Shapes::TimestampShape.new(name: 'ResponseExpires', timestampFormat: "rfc822")
     Restore = Shapes::StringShape.new(name: 'Restore')
+    RestoreExpiryDate = Shapes::TimestampShape.new(name: 'RestoreExpiryDate')
     RestoreObjectOutput = Shapes::StructureShape.new(name: 'RestoreObjectOutput')
     RestoreObjectRequest = Shapes::StructureShape.new(name: 'RestoreObjectRequest')
     RestoreOutputPath = Shapes::StringShape.new(name: 'RestoreOutputPath')
     RestoreRequest = Shapes::StructureShape.new(name: 'RestoreRequest')
     RestoreRequestType = Shapes::StringShape.new(name: 'RestoreRequestType')
+    RestoreStatus = Shapes::StructureShape.new(name: 'RestoreStatus')
     Role = Shapes::StringShape.new(name: 'Role')
     RoutingRule = Shapes::StructureShape.new(name: 'RoutingRule')
     RoutingRules = Shapes::ListShape.new(name: 'RoutingRules')
@@ -1074,10 +1079,12 @@ module Aws::S3
     FilterRuleList.member = Shapes::ShapeRef.new(shape: FilterRule)
 
     GetBucketAccelerateConfigurationOutput.add_member(:status, Shapes::ShapeRef.new(shape: BucketAccelerateStatus, location_name: "Status"))
+    GetBucketAccelerateConfigurationOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
     GetBucketAccelerateConfigurationOutput.struct_class = Types::GetBucketAccelerateConfigurationOutput
 
     GetBucketAccelerateConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
     GetBucketAccelerateConfigurationRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
+    GetBucketAccelerateConfigurationRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
     GetBucketAccelerateConfigurationRequest.struct_class = Types::GetBucketAccelerateConfigurationRequest
 
     GetBucketAclOutput.add_member(:owner, Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
@@ -1664,6 +1671,7 @@ module Aws::S3
     ListMultipartUploadsOutput.add_member(:uploads, Shapes::ShapeRef.new(shape: MultipartUploadList, location_name: "Upload"))
     ListMultipartUploadsOutput.add_member(:common_prefixes, Shapes::ShapeRef.new(shape: CommonPrefixList, location_name: "CommonPrefixes"))
     ListMultipartUploadsOutput.add_member(:encoding_type, Shapes::ShapeRef.new(shape: EncodingType, location_name: "EncodingType"))
+    ListMultipartUploadsOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
     ListMultipartUploadsOutput.struct_class = Types::ListMultipartUploadsOutput
 
     ListMultipartUploadsRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
@@ -1674,6 +1682,7 @@ module Aws::S3
     ListMultipartUploadsRequest.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location: "querystring", location_name: "prefix"))
     ListMultipartUploadsRequest.add_member(:upload_id_marker, Shapes::ShapeRef.new(shape: UploadIdMarker, location: "querystring", location_name: "upload-id-marker"))
     ListMultipartUploadsRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
+    ListMultipartUploadsRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
     ListMultipartUploadsRequest.struct_class = Types::ListMultipartUploadsRequest
 
     ListObjectVersionsOutput.add_member(:is_truncated, Shapes::ShapeRef.new(shape: IsTruncated, location_name: "IsTruncated"))
@@ -1689,6 +1698,7 @@ module Aws::S3
     ListObjectVersionsOutput.add_member(:max_keys, Shapes::ShapeRef.new(shape: MaxKeys, location_name: "MaxKeys"))
     ListObjectVersionsOutput.add_member(:common_prefixes, Shapes::ShapeRef.new(shape: CommonPrefixList, location_name: "CommonPrefixes"))
     ListObjectVersionsOutput.add_member(:encoding_type, Shapes::ShapeRef.new(shape: EncodingType, location_name: "EncodingType"))
+    ListObjectVersionsOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
     ListObjectVersionsOutput.struct_class = Types::ListObjectVersionsOutput
 
     ListObjectVersionsRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
@@ -1699,6 +1709,8 @@ module Aws::S3
     ListObjectVersionsRequest.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location: "querystring", location_name: "prefix"))
     ListObjectVersionsRequest.add_member(:version_id_marker, Shapes::ShapeRef.new(shape: VersionIdMarker, location: "querystring", location_name: "version-id-marker"))
     ListObjectVersionsRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
+    ListObjectVersionsRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
+    ListObjectVersionsRequest.add_member(:optional_object_attributes, Shapes::ShapeRef.new(shape: OptionalObjectAttributesList, location: "header", location_name: "x-amz-optional-object-attributes"))
     ListObjectVersionsRequest.struct_class = Types::ListObjectVersionsRequest
 
     ListObjectsOutput.add_member(:is_truncated, Shapes::ShapeRef.new(shape: IsTruncated, location_name: "IsTruncated"))
@@ -1711,6 +1723,7 @@ module Aws::S3
     ListObjectsOutput.add_member(:max_keys, Shapes::ShapeRef.new(shape: MaxKeys, location_name: "MaxKeys"))
     ListObjectsOutput.add_member(:common_prefixes, Shapes::ShapeRef.new(shape: CommonPrefixList, location_name: "CommonPrefixes"))
     ListObjectsOutput.add_member(:encoding_type, Shapes::ShapeRef.new(shape: EncodingType, location_name: "EncodingType"))
+    ListObjectsOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
     ListObjectsOutput.struct_class = Types::ListObjectsOutput
 
     ListObjectsRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
@@ -1721,6 +1734,7 @@ module Aws::S3
     ListObjectsRequest.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location: "querystring", location_name: "prefix"))
     ListObjectsRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
     ListObjectsRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
+    ListObjectsRequest.add_member(:optional_object_attributes, Shapes::ShapeRef.new(shape: OptionalObjectAttributesList, location: "header", location_name: "x-amz-optional-object-attributes"))
     ListObjectsRequest.struct_class = Types::ListObjectsRequest
 
     ListObjectsV2Output.add_member(:is_truncated, Shapes::ShapeRef.new(shape: IsTruncated, location_name: "IsTruncated"))
@@ -1735,6 +1749,7 @@ module Aws::S3
     ListObjectsV2Output.add_member(:continuation_token, Shapes::ShapeRef.new(shape: Token, location_name: "ContinuationToken"))
     ListObjectsV2Output.add_member(:next_continuation_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextContinuationToken"))
     ListObjectsV2Output.add_member(:start_after, Shapes::ShapeRef.new(shape: StartAfter, location_name: "StartAfter"))
+    ListObjectsV2Output.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
     ListObjectsV2Output.struct_class = Types::ListObjectsV2Output
 
     ListObjectsV2Request.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam"=>{"name"=>"Bucket"}}))
@@ -1747,6 +1762,7 @@ module Aws::S3
     ListObjectsV2Request.add_member(:start_after, Shapes::ShapeRef.new(shape: StartAfter, location: "querystring", location_name: "start-after"))
     ListObjectsV2Request.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
     ListObjectsV2Request.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
+    ListObjectsV2Request.add_member(:optional_object_attributes, Shapes::ShapeRef.new(shape: OptionalObjectAttributesList, location: "header", location_name: "x-amz-optional-object-attributes"))
     ListObjectsV2Request.struct_class = Types::ListObjectsV2Request
 
     ListPartsOutput.add_member(:abort_date, Shapes::ShapeRef.new(shape: AbortDate, location: "header", location_name: "x-amz-abort-date"))
@@ -1860,6 +1876,7 @@ module Aws::S3
     Object.add_member(:size, Shapes::ShapeRef.new(shape: Size, location_name: "Size"))
     Object.add_member(:storage_class, Shapes::ShapeRef.new(shape: ObjectStorageClass, location_name: "StorageClass"))
     Object.add_member(:owner, Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
+    Object.add_member(:restore_status, Shapes::ShapeRef.new(shape: RestoreStatus, location_name: "RestoreStatus"))
     Object.struct_class = Types::Object
 
     ObjectAlreadyInActiveTierError.struct_class = Types::ObjectAlreadyInActiveTierError
@@ -1907,9 +1924,12 @@ module Aws::S3
     ObjectVersion.add_member(:is_latest, Shapes::ShapeRef.new(shape: IsLatest, location_name: "IsLatest"))
     ObjectVersion.add_member(:last_modified, Shapes::ShapeRef.new(shape: LastModified, location_name: "LastModified"))
     ObjectVersion.add_member(:owner, Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
+    ObjectVersion.add_member(:restore_status, Shapes::ShapeRef.new(shape: RestoreStatus, location_name: "RestoreStatus"))
     ObjectVersion.struct_class = Types::ObjectVersion
 
     ObjectVersionList.member = Shapes::ShapeRef.new(shape: ObjectVersion)
+
+    OptionalObjectAttributesList.member = Shapes::ShapeRef.new(shape: OptionalObjectAttributes)
 
     OutputLocation.add_member(:s3, Shapes::ShapeRef.new(shape: S3Location, location_name: "S3"))
     OutputLocation.struct_class = Types::OutputLocation
@@ -2383,6 +2403,10 @@ module Aws::S3
     RestoreRequest.add_member(:select_parameters, Shapes::ShapeRef.new(shape: SelectParameters, location_name: "SelectParameters"))
     RestoreRequest.add_member(:output_location, Shapes::ShapeRef.new(shape: OutputLocation, location_name: "OutputLocation"))
     RestoreRequest.struct_class = Types::RestoreRequest
+
+    RestoreStatus.add_member(:is_restore_in_progress, Shapes::ShapeRef.new(shape: IsRestoreInProgress, location_name: "IsRestoreInProgress"))
+    RestoreStatus.add_member(:restore_expiry_date, Shapes::ShapeRef.new(shape: RestoreExpiryDate, location_name: "RestoreExpiryDate"))
+    RestoreStatus.struct_class = Types::RestoreStatus
 
     RoutingRule.add_member(:condition, Shapes::ShapeRef.new(shape: Condition, location_name: "Condition"))
     RoutingRule.add_member(:redirect, Shapes::ShapeRef.new(shape: Redirect, required: true, location_name: "Redirect"))

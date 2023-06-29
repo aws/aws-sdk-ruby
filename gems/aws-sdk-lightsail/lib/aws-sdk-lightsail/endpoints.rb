@@ -9,6 +9,7 @@
 
 
 module Aws::Lightsail
+  # @api private
   module Endpoints
 
     class AllocateStaticIp

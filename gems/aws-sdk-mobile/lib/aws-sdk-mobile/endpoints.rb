@@ -9,6 +9,7 @@
 
 
 module Aws::Mobile
+  # @api private
   module Endpoints
 
     class CreateProject

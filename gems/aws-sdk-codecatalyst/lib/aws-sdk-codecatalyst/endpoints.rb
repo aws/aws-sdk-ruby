@@ -9,6 +9,7 @@
 
 
 module Aws::CodeCatalyst
+  # @api private
   module Endpoints
 
     class CreateAccessToken
@@ -168,6 +169,19 @@ module Aws::CodeCatalyst
     end
 
     class ListAccessTokens
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CodeCatalyst::EndpointParameters.new(
+          use_fips: context.config.use_fips_endpoint,
+          region: context.config.region,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListDevEnvironmentSessions
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

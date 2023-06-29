@@ -9,6 +9,7 @@
 
 
 module Aws::MarketplaceMetering
+  # @api private
   module Endpoints
 
     class BatchMeterUsage

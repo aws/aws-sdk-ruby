@@ -9,6 +9,7 @@
 
 
 module Aws::IoTDataPlane
+  # @api private
   module Endpoints
 
     class DeleteThingShadow

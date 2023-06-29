@@ -9,6 +9,7 @@
 
 
 module Aws::AppStream
+  # @api private
   module Endpoints
 
     class AssociateApplicationFleet

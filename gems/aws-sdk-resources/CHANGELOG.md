@@ -1,6 +1,30 @@
 Unreleased Changes
 ------------------
 
+3.167.0 (2023-06-27)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-appfabric` gem.
+
+3.166.0 (2023-06-13)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-verifiedpermissions` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-codegurusecurity` gem.
+
+3.165.0 (2023-06-08)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-paymentcryptographydata` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-paymentcryptography` gem.
+
+3.164.0 (2023-05-19)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-mediapackagev2` gem.
+
 3.163.0 (2023-04-26)
 ------------------
 

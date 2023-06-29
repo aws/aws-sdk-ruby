@@ -17,11 +17,13 @@ module Aws
         #   envelope and encryption cipher.
         def encryption_cipher
           encryption_context = { "kms_cmk_id" => @kms_key_id }
-          key_data = @kms_client.generate_data_key(
-            key_id: @kms_key_id,
-            encryption_context: encryption_context,
-            key_spec: 'AES_256',
-          )
+          key_data = Aws::Plugins::UserAgent.feature('S3CryptoV1n') do
+            @kms_client.generate_data_key(
+              key_id: @kms_key_id,
+              encryption_context: encryption_context,
+              key_spec: 'AES_256'
+            )
+          end
           cipher = Utils.aes_encryption_cipher(:CBC)
           cipher.key = key_data.plaintext
           envelope = {
@@ -58,10 +60,12 @@ module Aws
                 "#{envelope['x-amz-wrap-alg']}"
           end
 
-          key = @kms_client.decrypt(
-            ciphertext_blob: decode64(envelope['x-amz-key-v2']),
-            encryption_context: encryption_context
-          ).plaintext
+          key = Aws::Plugins::UserAgent.feature('S3CryptoV1n') do
+            @kms_client.decrypt(
+              ciphertext_blob: decode64(envelope['x-amz-key-v2']),
+              encryption_context: encryption_context
+            ).plaintext
+          end
 
           iv = decode64(envelope['x-amz-iv'])
           block_mode =

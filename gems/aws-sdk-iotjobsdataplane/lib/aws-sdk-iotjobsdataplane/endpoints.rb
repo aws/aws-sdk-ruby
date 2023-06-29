@@ -9,6 +9,7 @@
 
 
 module Aws::IoTJobsDataPlane
+  # @api private
   module Endpoints
 
     class DescribeJobExecution

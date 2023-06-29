@@ -32,7 +32,7 @@ require_relative 'aws-sdk-drs/customizations'
 # structure.
 #
 #     drs = Aws::Drs::Client.new
-#     resp = drs.create_extended_source_server(params)
+#     resp = drs.associate_source_network_stack(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-drs/customizations'
 # @!group service
 module Aws::Drs
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.17.0'
 
 end

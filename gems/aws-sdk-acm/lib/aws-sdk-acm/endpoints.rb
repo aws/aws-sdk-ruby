@@ -9,6 +9,7 @@
 
 
 module Aws::ACM
+  # @api private
   module Endpoints
 
     class AddTagsToCertificate

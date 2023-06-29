@@ -9,6 +9,7 @@
 
 
 module Aws::MigrationHubRefactorSpaces
+  # @api private
   module Endpoints
 
     class CreateApplication

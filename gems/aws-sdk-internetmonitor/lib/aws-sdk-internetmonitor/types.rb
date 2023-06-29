@@ -190,6 +190,15 @@ module Aws::InternetMonitor
     #   that you want to monitor with this monitor.
     #   @return [Integer]
     #
+    # @!attribute [rw] health_events_config
+    #   Defines the health event threshold percentages, for performance
+    #   score and availability score. Internet Monitor creates a health
+    #   event when there's an internet issue that affects your application
+    #   end users where a health score percentage is at or below a set
+    #   threshold. If you don't set a health event threshold, the default
+    #   calue is 95%.
+    #   @return [Types::HealthEventsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/CreateMonitorInput AWS API Documentation
     #
     class CreateMonitorInput < Struct.new(
@@ -199,7 +208,8 @@ module Aws::InternetMonitor
       :tags,
       :max_city_networks_to_monitor,
       :internet_measurements_log_delivery,
-      :traffic_percentage_to_monitor)
+      :traffic_percentage_to_monitor,
+      :health_events_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -297,6 +307,11 @@ module Aws::InternetMonitor
     #   The type of impairment of a specific health event.
     #   @return [String]
     #
+    # @!attribute [rw] health_score_threshold
+    #   The threshold percentage for health events when Amazon CloudWatch
+    #   Internet Monitor creates a health event.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/GetHealthEventOutput AWS API Documentation
     #
     class GetHealthEventOutput < Struct.new(
@@ -309,7 +324,8 @@ module Aws::InternetMonitor
       :impacted_locations,
       :status,
       :percent_of_total_traffic_impacted,
-      :impact_type)
+      :impact_type,
+      :health_score_threshold)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -391,6 +407,14 @@ module Aws::InternetMonitor
     #   that you want to monitor with this monitor.
     #   @return [Integer]
     #
+    # @!attribute [rw] health_events_config
+    #   The list of health event thresholds. A health event threshold
+    #   percentage, for performance and availability, determines the level
+    #   of impact at which Amazon CloudWatch Internet Monitor creates a
+    #   health event when there's an internet issue that affects your
+    #   application end users.
+    #   @return [Types::HealthEventsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/GetMonitorOutput AWS API Documentation
     #
     class GetMonitorOutput < Struct.new(
@@ -405,7 +429,8 @@ module Aws::InternetMonitor
       :tags,
       :max_city_networks_to_monitor,
       :internet_measurements_log_delivery,
-      :traffic_percentage_to_monitor)
+      :traffic_percentage_to_monitor,
+      :health_events_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -456,6 +481,12 @@ module Aws::InternetMonitor
     #   The type of impairment for a health event.
     #   @return [String]
     #
+    # @!attribute [rw] health_score_threshold
+    #   The value of the threshold percentage for performance or
+    #   availability that was configured when Amazon CloudWatch Internet
+    #   Monitor created the health event.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/HealthEvent AWS API Documentation
     #
     class HealthEvent < Struct.new(
@@ -468,7 +499,32 @@ module Aws::InternetMonitor
       :impacted_locations,
       :status,
       :percent_of_total_traffic_impacted,
-      :impact_type)
+      :impact_type,
+      :health_score_threshold)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A complex type for the configuration. Defines the health event
+    # threshold percentages, for performance score and availability score.
+    # Amazon CloudWatch Internet Monitor creates a health event when
+    # there's an internet issue that affects your application end users
+    # where a health score percentage is at or below a set threshold. If you
+    # don't set a health event threshold, the default value is 95%.
+    #
+    # @!attribute [rw] availability_score_threshold
+    #   The health event threshold percentage set for availability scores.
+    #   @return [Float]
+    #
+    # @!attribute [rw] performance_score_threshold
+    #   The health event threshold percentage set for performance scores.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/HealthEventsConfig AWS API Documentation
+    #
+    class HealthEventsConfig < Struct.new(
+      :availability_score_threshold,
+      :performance_score_threshold)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1206,6 +1262,13 @@ module Aws::InternetMonitor
     #   that you want to monitor with this monitor.
     #   @return [Integer]
     #
+    # @!attribute [rw] health_events_config
+    #   The list of health event thresholds. A health event threshold
+    #   percentage, for performance and availability, determines when
+    #   Internet Monitor creates a health event when there's an internet
+    #   issue that affects your application end users.
+    #   @return [Types::HealthEventsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/UpdateMonitorInput AWS API Documentation
     #
     class UpdateMonitorInput < Struct.new(
@@ -1216,7 +1279,8 @@ module Aws::InternetMonitor
       :client_token,
       :max_city_networks_to_monitor,
       :internet_measurements_log_delivery,
-      :traffic_percentage_to_monitor)
+      :traffic_percentage_to_monitor,
+      :health_events_config)
       SENSITIVE = []
       include Aws::Structure
     end

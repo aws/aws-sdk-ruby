@@ -68,7 +68,9 @@ module Aws::EC2
     #
     # @return [self]
     def load
-      resp = @client.describe_dhcp_options(dhcp_options_ids: [@id])
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_dhcp_options(dhcp_options_ids: [@id])
+      end
       @data = resp.dhcp_options[0]
       self
     end
@@ -183,7 +185,9 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -205,7 +209,9 @@ module Aws::EC2
     # @return [EmptyStructure]
     def associate_with_vpc(options = {})
       options = options.merge(dhcp_options_id: @id)
-      resp = @client.associate_dhcp_options(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.associate_dhcp_options(options)
+      end
       resp.data
     end
 
@@ -234,7 +240,9 @@ module Aws::EC2
     def create_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = @client.create_tags(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_tags(options)
+      end
       options[:tags].each do |t|
         batch << Tag.new(
           resource_id: @id,
@@ -279,7 +287,9 @@ module Aws::EC2
     def delete_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = @client.delete_tags(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_tags(options)
+      end
       options[:tags].each do |t|
         batch << Tag.new(
           resource_id: @id,
@@ -305,7 +315,9 @@ module Aws::EC2
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(dhcp_options_id: @id)
-      resp = @client.delete_dhcp_options(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_dhcp_options(options)
+      end
       resp.data
     end
 

@@ -275,6 +275,11 @@ module Aws::ChimeSDKMessaging
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -475,9 +480,9 @@ module Aws::ChimeSDKMessaging
       req.send_request(options)
     end
 
-    # Calls back Chime SDK Messaging with a processing response message.
-    # This should be invoked from the processor Lambda. This is a developer
-    # API.
+    # Calls back Amazon Chime SDK messaging with a processing response
+    # message. This should be invoked from the processor Lambda. This is a
+    # developer API.
     #
     # You can return one of the following processing responses:
     #
@@ -723,7 +728,7 @@ module Aws::ChimeSDKMessaging
     # 3.  The Standard message type
     #
     # <note markdown="1"> Channel flows don't process Control or System messages. For more
-    # information about the message types provided by Chime SDK Messaging,
+    # information about the message types provided by Chime SDK messaging,
     # refer to [Message types][1] in the *Amazon Chime developer guide*.
     #
     #  </note>
@@ -1588,7 +1593,7 @@ module Aws::ChimeSDKMessaging
 
     # Gets the membership preferences of an `AppInstanceUser` or
     # `AppInstanceBot` for the specified channel. A user or a bot must be a
-    # member of the channel and own the membership to be able to retrieve
+    # member of the channel and own the membership in order to retrieve
     # membership preferences. Users or bots in the `AppInstanceAdmin` and
     # channel moderator roles can't retrieve preferences for other users or
     # bots. Banned users or bots can't retrieve membership preferences for
@@ -1701,6 +1706,8 @@ module Aws::ChimeSDKMessaging
     #   resp.channel_message.message_attributes["MessageAttributeName"].string_values[0] #=> String
     #   resp.channel_message.sub_channel_id #=> String
     #   resp.channel_message.content_type #=> String
+    #   resp.channel_message.target #=> Array
+    #   resp.channel_message.target[0].member_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/GetChannelMessage AWS API Documentation
     #
@@ -1733,7 +1740,7 @@ module Aws::ChimeSDKMessaging
     #
     # DENIED
     #
-    # : Messasge denied by the processor
+    # : Message denied by the processor
     #
     # <note markdown="1"> * This API does not return statuses for denied messages, because we
     #   don't store them once the processor denies them.
@@ -2030,7 +2037,7 @@ module Aws::ChimeSDKMessaging
       req.send_request(options)
     end
 
-    # Lists all channels that anr `AppInstanceUser` or `AppInstanceBot` is a
+    # Lists all channels that an `AppInstanceUser` or `AppInstanceBot` is a
     # part of. Only an `AppInstanceAdmin` can call the API with a user ARN
     # that is not their own.
     #
@@ -2182,6 +2189,8 @@ module Aws::ChimeSDKMessaging
     #   resp.channel_messages[0].message_attributes["MessageAttributeName"].string_values #=> Array
     #   resp.channel_messages[0].message_attributes["MessageAttributeName"].string_values[0] #=> String
     #   resp.channel_messages[0].content_type #=> String
+    #   resp.channel_messages[0].target #=> Array
+    #   resp.channel_messages[0].target[0].member_arn #=> String
     #   resp.sub_channel_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ListChannelMessages AWS API Documentation
@@ -2566,12 +2575,12 @@ module Aws::ChimeSDKMessaging
     end
 
     # Sets the membership preferences of an `AppInstanceUser` or
-    # `AppIntanceBot` for the specified channel. The user or bot must be a
+    # `AppInstanceBot` for the specified channel. The user or bot must be a
     # member of the channel. Only the user or bot who owns the membership
     # can set preferences. Users or bots in the `AppInstanceAdmin` and
-    # channel moderator roles can't set preferences for other users or
-    # users. Banned users or bots can't set membership preferences for the
-    # channel from which they are banned.
+    # channel moderator roles can't set preferences for other users. Banned
+    # users or bots can't set membership preferences for the channel from
+    # which they are banned.
     #
     # <note markdown="1"> The x-amz-chime-bearer request header is mandatory. Use the ARN of an
     # `AppInstanceUser` or `AppInstanceBot` that makes the API call as the
@@ -2797,8 +2806,11 @@ module Aws::ChimeSDKMessaging
     # the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
     # the value in the header.
     #
-    #  Also, `STANDARD` messages can contain 4KB of data and the 1KB of
-    # metadata. `CONTROL` messages can contain 30 bytes of data and no
+    #  Also, `STANDARD` messages can be up to 4KB in size and contain
+    # metadata. Metadata is arbitrary, and you can use it in a variety of
+    # ways, such as containing a link to an attachment.
+    #
+    #  `CONTROL` messages are limited to 30 bytes and do not contain
     # metadata.
     #
     #  </note>
@@ -2807,10 +2819,17 @@ module Aws::ChimeSDKMessaging
     #   The ARN of the channel.
     #
     # @option params [required, String] :content
-    #   The content of the message.
+    #   The content of the channel message.
     #
     # @option params [required, String] :type
     #   The type of message, `STANDARD` or `CONTROL`.
+    #
+    #   `STANDARD` messages can be up to 4KB in size and contain metadata.
+    #   Metadata is arbitrary, and you can use it in a variety of ways, such
+    #   as containing a link to an attachment.
+    #
+    #   `CONTROL` messages are limited to 30 bytes and do not contain
+    #   metadata.
     #
     # @option params [required, String] :persistence
     #   Boolean that controls whether the message is persisted on the back
@@ -2842,6 +2861,13 @@ module Aws::ChimeSDKMessaging
     # @option params [String] :content_type
     #   The content type of the channel message.
     #
+    # @option params [Array<Types::Target>] :target
+    #   The target of a message. Must be a member of the channel, such as
+    #   another user, a bot, or the sender. Only the target and the sender can
+    #   view targeted messages. Only users who can see targeted messages can
+    #   take actions on them. However, administrators can delete targeted
+    #   messages that they can’t see.
+    #
     # @return [Types::SendChannelMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SendChannelMessageResponse#channel_arn #channel_arn} => String
@@ -2871,6 +2897,11 @@ module Aws::ChimeSDKMessaging
     #     },
     #     sub_channel_id: "SubChannelId",
     #     content_type: "ContentType",
+    #     target: [
+    #       {
+    #         member_arn: "ChimeArn",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -3065,7 +3096,7 @@ module Aws::ChimeSDKMessaging
     #   The ID string of the message being updated.
     #
     # @option params [required, String] :content
-    #   The content of the message being updated.
+    #   The content of the channel message.
     #
     # @option params [String] :metadata
     #   The metadata of the message being updated.
@@ -3173,7 +3204,7 @@ module Aws::ChimeSDKMessaging
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmessaging'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

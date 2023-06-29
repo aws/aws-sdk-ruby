@@ -9,6 +9,7 @@
 
 
 module Aws::ServiceQuotas
+  # @api private
   module Endpoints
 
     class AssociateServiceQuotaTemplate

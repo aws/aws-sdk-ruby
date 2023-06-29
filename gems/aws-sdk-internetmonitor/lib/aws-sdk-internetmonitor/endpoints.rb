@@ -9,6 +9,7 @@
 
 
 module Aws::InternetMonitor
+  # @api private
   module Endpoints
 
     class CreateMonitor

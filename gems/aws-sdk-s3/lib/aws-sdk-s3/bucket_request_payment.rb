@@ -54,7 +54,9 @@ module Aws::S3
     #
     # @return [self]
     def load
-      resp = @client.get_bucket_request_payment(bucket: @bucket_name)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.get_bucket_request_payment(bucket: @bucket_name)
+      end
       @data = resp.data
       self
     end
@@ -169,7 +171,9 @@ module Aws::S3
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -221,7 +225,9 @@ module Aws::S3
     # @return [EmptyStructure]
     def put(options = {})
       options = options.merge(bucket: @bucket_name)
-      resp = @client.put_bucket_request_payment(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.put_bucket_request_payment(options)
+      end
       resp.data
     end
 

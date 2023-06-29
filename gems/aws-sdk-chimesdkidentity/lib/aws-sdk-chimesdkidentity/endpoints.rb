@@ -9,6 +9,7 @@
 
 
 module Aws::ChimeSDKIdentity
+  # @api private
   module Endpoints
 
     class CreateAppInstance

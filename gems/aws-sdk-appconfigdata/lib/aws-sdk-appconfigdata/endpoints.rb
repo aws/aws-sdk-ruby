@@ -9,6 +9,7 @@
 
 
 module Aws::AppConfigData
+  # @api private
   module Endpoints
 
     class GetLatestConfiguration

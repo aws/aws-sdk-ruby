@@ -9,6 +9,7 @@
 
 
 module Aws::S3Control
+  # @api private
   module Endpoints
 
     class CreateAccessPoint

@@ -9,6 +9,7 @@
 
 
 module Aws::MediaPackageVod
+  # @api private
   module Endpoints
 
     class ConfigureLogs

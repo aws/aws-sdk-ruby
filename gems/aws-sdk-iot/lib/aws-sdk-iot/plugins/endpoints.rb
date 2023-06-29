@@ -116,6 +116,10 @@ module Aws::IoT
             Aws::IoT::Endpoints::CreateMitigationAction.build(context)
           when :create_ota_update
             Aws::IoT::Endpoints::CreateOTAUpdate.build(context)
+          when :create_package
+            Aws::IoT::Endpoints::CreatePackage.build(context)
+          when :create_package_version
+            Aws::IoT::Endpoints::CreatePackageVersion.build(context)
           when :create_policy
             Aws::IoT::Endpoints::CreatePolicy.build(context)
           when :create_policy_version
@@ -176,6 +180,10 @@ module Aws::IoT
             Aws::IoT::Endpoints::DeleteMitigationAction.build(context)
           when :delete_ota_update
             Aws::IoT::Endpoints::DeleteOTAUpdate.build(context)
+          when :delete_package
+            Aws::IoT::Endpoints::DeletePackage.build(context)
+          when :delete_package_version
+            Aws::IoT::Endpoints::DeletePackageVersion.build(context)
           when :delete_policy
             Aws::IoT::Endpoints::DeletePolicy.build(context)
           when :delete_policy_version
@@ -302,6 +310,12 @@ module Aws::IoT
             Aws::IoT::Endpoints::GetLoggingOptions.build(context)
           when :get_ota_update
             Aws::IoT::Endpoints::GetOTAUpdate.build(context)
+          when :get_package
+            Aws::IoT::Endpoints::GetPackage.build(context)
+          when :get_package_configuration
+            Aws::IoT::Endpoints::GetPackageConfiguration.build(context)
+          when :get_package_version
+            Aws::IoT::Endpoints::GetPackageVersion.build(context)
           when :get_percentiles
             Aws::IoT::Endpoints::GetPercentiles.build(context)
           when :get_policy
@@ -374,6 +388,10 @@ module Aws::IoT
             Aws::IoT::Endpoints::ListOTAUpdates.build(context)
           when :list_outgoing_certificates
             Aws::IoT::Endpoints::ListOutgoingCertificates.build(context)
+          when :list_package_versions
+            Aws::IoT::Endpoints::ListPackageVersions.build(context)
+          when :list_packages
+            Aws::IoT::Endpoints::ListPackages.build(context)
           when :list_policies
             Aws::IoT::Endpoints::ListPolicies.build(context)
           when :list_policy_principals
@@ -512,6 +530,12 @@ module Aws::IoT
             Aws::IoT::Endpoints::UpdateJob.build(context)
           when :update_mitigation_action
             Aws::IoT::Endpoints::UpdateMitigationAction.build(context)
+          when :update_package
+            Aws::IoT::Endpoints::UpdatePackage.build(context)
+          when :update_package_configuration
+            Aws::IoT::Endpoints::UpdatePackageConfiguration.build(context)
+          when :update_package_version
+            Aws::IoT::Endpoints::UpdatePackageVersion.build(context)
           when :update_provisioning_template
             Aws::IoT::Endpoints::UpdateProvisioningTemplate.build(context)
           when :update_role_alias

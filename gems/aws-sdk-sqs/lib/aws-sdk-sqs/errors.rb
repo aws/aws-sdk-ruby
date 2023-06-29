@@ -30,20 +30,10 @@ module Aws::SQS
   # * {BatchEntryIdsNotDistinct}
   # * {BatchRequestTooLong}
   # * {EmptyBatchRequest}
-  # * {InvalidAddress}
   # * {InvalidAttributeName}
-  # * {InvalidAttributeValue}
   # * {InvalidBatchEntryId}
   # * {InvalidIdFormat}
   # * {InvalidMessageContents}
-  # * {InvalidSecurity}
-  # * {KmsAccessDenied}
-  # * {KmsDisabled}
-  # * {KmsInvalidKeyUsage}
-  # * {KmsInvalidState}
-  # * {KmsNotFound}
-  # * {KmsOptInRequired}
-  # * {KmsThrottled}
   # * {MessageNotInflight}
   # * {OverLimit}
   # * {PurgeQueueInProgress}
@@ -51,7 +41,7 @@ module Aws::SQS
   # * {QueueDoesNotExist}
   # * {QueueNameExists}
   # * {ReceiptHandleIsInvalid}
-  # * {RequestThrottled}
+  # * {ResourceNotFoundException}
   # * {TooManyEntriesInBatchRequest}
   # * {UnsupportedOperation}
   #
@@ -69,11 +59,6 @@ module Aws::SQS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
     end
 
     class BatchRequestTooLong < ServiceError
@@ -83,11 +68,6 @@ module Aws::SQS
       # @param [Aws::SQS::Types::BatchRequestTooLong] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
       end
     end
 
@@ -99,26 +79,6 @@ module Aws::SQS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-    end
-
-    class InvalidAddress < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::SQS::Types::InvalidAddress] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
     end
 
     class InvalidAttributeName < ServiceError
@@ -129,26 +89,6 @@ module Aws::SQS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-    end
-
-    class InvalidAttributeValue < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::SQS::Types::InvalidAttributeValue] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
     end
 
     class InvalidBatchEntryId < ServiceError
@@ -158,11 +98,6 @@ module Aws::SQS
       # @param [Aws::SQS::Types::InvalidBatchEntryId] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
       end
     end
 
@@ -184,131 +119,6 @@ module Aws::SQS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-    end
-
-    class InvalidSecurity < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::SQS::Types::InvalidSecurity] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-    end
-
-    class KmsAccessDenied < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::SQS::Types::KmsAccessDenied] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-    end
-
-    class KmsDisabled < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::SQS::Types::KmsDisabled] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-    end
-
-    class KmsInvalidKeyUsage < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::SQS::Types::KmsInvalidKeyUsage] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-    end
-
-    class KmsInvalidState < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::SQS::Types::KmsInvalidState] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-    end
-
-    class KmsNotFound < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::SQS::Types::KmsNotFound] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-    end
-
-    class KmsOptInRequired < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::SQS::Types::KmsOptInRequired] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-    end
-
-    class KmsThrottled < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::SQS::Types::KmsThrottled] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
     end
 
     class MessageNotInflight < ServiceError
@@ -329,11 +139,6 @@ module Aws::SQS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
     end
 
     class PurgeQueueInProgress < ServiceError
@@ -343,11 +148,6 @@ module Aws::SQS
       # @param [Aws::SQS::Types::PurgeQueueInProgress] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
       end
     end
 
@@ -359,11 +159,6 @@ module Aws::SQS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
     end
 
     class QueueDoesNotExist < ServiceError
@@ -373,11 +168,6 @@ module Aws::SQS
       # @param [Aws::SQS::Types::QueueDoesNotExist] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
       end
     end
 
@@ -389,11 +179,6 @@ module Aws::SQS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
     end
 
     class ReceiptHandleIsInvalid < ServiceError
@@ -404,25 +189,15 @@ module Aws::SQS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
     end
 
-    class RequestThrottled < ServiceError
+    class ResourceNotFoundException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
-      # @param [Aws::SQS::Types::RequestThrottled] data
+      # @param [Aws::SQS::Types::ResourceNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
       end
     end
 
@@ -434,11 +209,6 @@ module Aws::SQS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
     end
 
     class UnsupportedOperation < ServiceError
@@ -448,11 +218,6 @@ module Aws::SQS
       # @param [Aws::SQS::Types::UnsupportedOperation] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
       end
     end
 

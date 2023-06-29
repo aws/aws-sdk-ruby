@@ -9,6 +9,7 @@
 
 
 module Aws::AccessAnalyzer
+  # @api private
   module Endpoints
 
     class ApplyArchiveRule

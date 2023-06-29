@@ -9,6 +9,7 @@
 
 
 module Aws::SagemakerEdgeManager
+  # @api private
   module Endpoints
 
     class GetDeployments

@@ -1,6 +1,120 @@
 Unreleased Changes
 ------------------
 
+1.782.0 (2023-06-27)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::AppFabric`.
+
+1.781.0 (2023-06-20)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.780.0 (2023-06-15)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.779.0 (2023-06-13)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::VerifiedPermissions`.
+
+* Feature - Added support for enumerating regions for `Aws::CodeGuruSecurity`.
+
+1.778.0 (2023-06-12)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.777.0 (2023-06-08)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::PaymentCryptographyData`.
+
+* Feature - Added support for enumerating regions for `Aws::PaymentCryptography`.
+
+1.776.0 (2023-06-06)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.775.0 (2023-06-05)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.774.0 (2023-06-02)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.773.0 (2023-06-01)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.772.0 (2023-05-30)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.771.0 (2023-05-26)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.770.0 (2023-05-25)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.769.0 (2023-05-24)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.768.0 (2023-05-23)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.767.0 (2023-05-19)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::MediaPackageV2`.
+
+1.766.0 (2023-05-18)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.765.0 (2023-05-16)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.764.0 (2023-05-15)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.763.0 (2023-05-11)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.762.0 (2023-05-09)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.761.0 (2023-05-08)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.760.0 (2023-05-04)
 ------------------
 

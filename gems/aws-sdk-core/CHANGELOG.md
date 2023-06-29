@@ -1,7 +1,49 @@
 Unreleased Changes
 ------------------
 
-* Issue - Fix signing for S3/S3 Control and `aws-crt` gem.
+* Issue - Fix signing for S3/S3 Control and `aws-crt` gem for certain object keys.
+
+3.176.0 (2023-06-28)
+------------------
+
+* Feature - Add :expiration accessor to `CredentialProvider` and do not refresh credentials when checking expiration.
+
+3.175.0 (2023-06-15)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+3.174.0 (2023-05-31)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - Improve User-Agent metrics tracking.
+
+3.173.1 (2023-05-24)
+------------------
+
+* Issue - Updated `checksum_algorithm` plugin to use IO.copy_stream for JRuby.
+
+3.173.0 (2023-05-18)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+3.172.0 (2023-05-08)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Add :region option to `Aws::Log::Formatter`.
 
 3.171.1 (2023-05-04)
 ------------------

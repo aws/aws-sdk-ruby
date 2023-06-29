@@ -275,6 +275,11 @@ module Aws::ServiceCatalog
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -486,17 +491,70 @@ module Aws::ServiceCatalog
     #   The portfolio identifier.
     #
     # @option params [required, String] :principal_arn
-    #   The ARN of the principal (user, role, or group). This field allows an
-    #   ARN with no `accountID` if `PrincipalType` is `IAM_PATTERN`.
+    #   The ARN of the principal (user, role, or group). If the
+    #   `PrincipalType` is `IAM`, the supported value is a fully defined [IAM
+    #   Amazon Resource Name (ARN)][1]. If the `PrincipalType` is
+    #   `IAM_PATTERN`, the supported value is an `IAM` ARN *without an
+    #   AccountID* in the following format:
     #
-    #   You can associate multiple `IAM` patterns even if the account has no
-    #   principal with that name. This is useful in Principal Name Sharing if
-    #   you want to share a principal without creating it in the account that
-    #   owns the portfolio.
+    #   *arn:partition:iam:::resource-type/resource-id*
+    #
+    #   The ARN resource-id can be either:
+    #
+    #   * A fully formed resource-id. For example,
+    #     *arn:aws:iam:::role/resource-name* or
+    #     *arn:aws:iam:::role/resource-path/resource-name*
+    #
+    #   * A wildcard ARN. The wildcard ARN accepts `IAM_PATTERN` values with a
+    #     "*" or "?" in the resource-id segment of the ARN. For example
+    #     *arn:partition:service:::resource-type/resource-path/resource-name*.
+    #     The new symbols are exclusive to the **resource-path** and
+    #     **resource-name** and cannot replace the **resource-type** or other
+    #     ARN values.
+    #
+    #     The ARN path and principal name allow unlimited wildcard characters.
+    #
+    #   Examples of an **acceptable** wildcard ARN:
+    #
+    #   * arn:aws:iam:::role/ResourceName\_*
+    #
+    #   * arn:aws:iam:::role/*/ResourceName\_?
+    #
+    #   Examples of an **unacceptable** wildcard ARN:
+    #
+    #   * arn:aws:iam:::*/ResourceName
+    #
+    #   ^
+    #
+    #   You can associate multiple `IAM_PATTERN`s even if the account has no
+    #   principal with that name.
+    #
+    #   The "?" wildcard character matches zero or one of any character.
+    #   This is similar to ".?" in regular regex context. The "*"
+    #   wildcard character matches any number of any characters. This is
+    #   similar to ".*" in regular regex context.
+    #
+    #   In the IAM Principal ARN format
+    #   (*arn:partition:iam:::resource-type/resource-path/resource-name*),
+    #   valid resource-type values include **user/**, **group/**, or
+    #   **role/**. The "?" and "*" characters are allowed only after the
+    #   resource-type in the resource-id segment. You can use special
+    #   characters anywhere within the resource-id.
+    #
+    #   The "*" character also matches the "/" character, allowing paths
+    #   to be formed *within* the resource-id. For example,
+    #   *arn:aws:iam:::role/*****/ResourceName\_?* matches both
+    #   *arn:aws:iam:::role/pathA/pathB/ResourceName\_1* and
+    #   *arn:aws:iam:::role/pathA/ResourceName\_1*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
     #
     # @option params [required, String] :principal_type
     #   The principal type. The supported value is `IAM` if you use a fully
-    #   defined ARN, or `IAM_PATTERN` if you use an ARN with no `accountID`.
+    #   defined Amazon Resource Name (ARN), or `IAM_PATTERN` if you use an ARN
+    #   with no `accountID`, with or without wildcard characters.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2549,11 +2607,16 @@ module Aws::ServiceCatalog
     # @option params [Boolean] :verbose
     #   Indicates whether a verbose level of detail is enabled.
     #
+    # @option params [Boolean] :include_provisioning_artifact_parameters
+    #   Indicates if the API call response does or does not include additional
+    #   details about the provisioning parameters.
+    #
     # @return [Types::DescribeProvisioningArtifactOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeProvisioningArtifactOutput#provisioning_artifact_detail #provisioning_artifact_detail} => Types::ProvisioningArtifactDetail
     #   * {Types::DescribeProvisioningArtifactOutput#info #info} => Hash&lt;String,String&gt;
     #   * {Types::DescribeProvisioningArtifactOutput#status #status} => String
+    #   * {Types::DescribeProvisioningArtifactOutput#provisioning_artifact_parameters #provisioning_artifact_parameters} => Array&lt;Types::ProvisioningArtifactParameter&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2564,6 +2627,7 @@ module Aws::ServiceCatalog
     #     provisioning_artifact_name: "ProvisioningArtifactName",
     #     product_name: "ProductViewName",
     #     verbose: false,
+    #     include_provisioning_artifact_parameters: false,
     #   })
     #
     # @example Response structure
@@ -2579,6 +2643,20 @@ module Aws::ServiceCatalog
     #   resp.info #=> Hash
     #   resp.info["ProvisioningArtifactInfoKey"] #=> String
     #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
+    #   resp.provisioning_artifact_parameters #=> Array
+    #   resp.provisioning_artifact_parameters[0].parameter_key #=> String
+    #   resp.provisioning_artifact_parameters[0].default_value #=> String
+    #   resp.provisioning_artifact_parameters[0].parameter_type #=> String
+    #   resp.provisioning_artifact_parameters[0].is_no_echo #=> Boolean
+    #   resp.provisioning_artifact_parameters[0].description #=> String
+    #   resp.provisioning_artifact_parameters[0].parameter_constraints.allowed_values #=> Array
+    #   resp.provisioning_artifact_parameters[0].parameter_constraints.allowed_values[0] #=> String
+    #   resp.provisioning_artifact_parameters[0].parameter_constraints.allowed_pattern #=> String
+    #   resp.provisioning_artifact_parameters[0].parameter_constraints.constraint_description #=> String
+    #   resp.provisioning_artifact_parameters[0].parameter_constraints.max_length #=> String
+    #   resp.provisioning_artifact_parameters[0].parameter_constraints.min_length #=> String
+    #   resp.provisioning_artifact_parameters[0].parameter_constraints.max_value #=> String
+    #   resp.provisioning_artifact_parameters[0].parameter_constraints.min_value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningArtifact AWS API Documentation
     #
@@ -2974,6 +3052,23 @@ module Aws::ServiceCatalog
     # will no longer be able to provision products in this portfolio using a
     # role matching the name of the associated principal.
     #
+    # For more information, review [associate-principal-with-portfolio][1]
+    # in the Amazon Web Services CLI Command Reference.
+    #
+    # <note markdown="1"> If you disassociate a principal from a portfolio, with PrincipalType
+    # as `IAM`, the same principal will still have access to the portfolio
+    # if it matches one of the associated principals of type `IAM_PATTERN`.
+    # To fully remove access for a principal, verify all the associated
+    # Principals of type `IAM_PATTERN`, and then ensure you disassociate any
+    # `IAM_PATTERN` principals that match the principal whose access you are
+    # removing.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cli/latest/reference/servicecatalog/associate-principal-with-portfolio.html#options
+    #
     # @option params [String] :accept_language
     #   The language code.
     #
@@ -2986,11 +3081,13 @@ module Aws::ServiceCatalog
     #
     # @option params [required, String] :principal_arn
     #   The ARN of the principal (user, role, or group). This field allows an
-    #   ARN with no `accountID` if `PrincipalType` is `IAM_PATTERN`.
+    #   ARN with no `accountID` with or without wildcard characters if
+    #   `PrincipalType` is `IAM_PATTERN`.
     #
     # @option params [String] :principal_type
     #   The supported value is `IAM` if you use a fully defined ARN, or
-    #   `IAM_PATTERN` if you use no `accountID`.
+    #   `IAM_PATTERN` if you specify an `IAM` ARN with no AccountId, with or
+    #   without wildcard characters.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6138,7 +6235,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

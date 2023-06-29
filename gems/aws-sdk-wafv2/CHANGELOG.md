@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.63.0 (2023-06-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.62.0 (2023-06-13)
+------------------
+
+* Feature - You can now detect and block fraudulent account creation attempts with the new AWS WAF Fraud Control account creation fraud prevention (ACFP) managed rule group AWSManagedRulesACFPRuleSet.
+
+1.61.0 (2023-06-02)
+------------------
+
+* Feature - Added APIs to describe managed products. The APIs retrieve information about rule groups that are managed by AWS and by AWS Marketplace sellers.
+
+1.60.0 (2023-06-01)
+------------------
+
+* Feature - Corrected the information for the header order FieldToMatch setting
+
+1.59.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.58.0 (2023-05-30)
+------------------
+
+* Feature - This SDK release provides customers the ability to use Header Order as a field to match.
+
+1.57.0 (2023-05-16)
+------------------
+
+* Feature - My AWS Service (placeholder) - You can now rate limit web requests based on aggregation keys other than IP addresses, and you can aggregate using combinations of keys. You can also rate limit all requests that match a scope-down statement, without further aggregation.
+
 1.56.0 (2023-04-28)
 ------------------
 

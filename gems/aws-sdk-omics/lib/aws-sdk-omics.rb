@@ -33,7 +33,7 @@ require_relative 'aws-sdk-omics/customizations'
 # structure.
 #
 #     omics = Aws::Omics::Client.new
-#     resp = omics.batch_delete_read_set(params)
+#     resp = omics.abort_multipart_read_set_upload(params)
 #
 # See {Client} for more information.
 #
@@ -53,6 +53,6 @@ require_relative 'aws-sdk-omics/customizations'
 # @!group service
 module Aws::Omics
 
-  GEM_VERSION = '1.3.0'
+  GEM_VERSION = '1.7.0'
 
 end

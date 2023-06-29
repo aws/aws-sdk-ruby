@@ -62,7 +62,9 @@ module Aws
       def send_request(options)
         req = options[:client].build_request(@operation_name, options[:params])
         req.handlers.remove(RAISE_HANDLER)
-        req.send_request
+        Aws::Plugins::UserAgent.feature('waiter') do
+          req.send_request
+        end
       end
 
       def acceptor_matches?(acceptor, response)

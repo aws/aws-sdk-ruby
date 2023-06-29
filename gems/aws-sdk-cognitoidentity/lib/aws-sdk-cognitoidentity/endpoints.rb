@@ -9,6 +9,7 @@
 
 
 module Aws::CognitoIdentity
+  # @api private
   module Endpoints
 
     class CreateIdentityPool

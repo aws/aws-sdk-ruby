@@ -9,6 +9,7 @@
 
 
 module Aws::ManagedGrafana
+  # @api private
   module Endpoints
 
     class AssociateLicense

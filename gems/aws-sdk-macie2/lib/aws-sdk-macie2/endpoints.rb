@@ -9,6 +9,7 @@
 
 
 module Aws::Macie2
+  # @api private
   module Endpoints
 
     class AcceptInvitation

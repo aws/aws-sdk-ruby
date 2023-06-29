@@ -9,6 +9,7 @@
 
 
 module Aws::CostandUsageReportService
+  # @api private
   module Endpoints
 
     class DeleteReportDefinition

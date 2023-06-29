@@ -9,6 +9,7 @@
 
 
 module Aws::ConnectWisdomService
+  # @api private
   module Endpoints
 
     class CreateAssistant

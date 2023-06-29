@@ -9,6 +9,7 @@
 
 
 module Aws::MWAA
+  # @api private
   module Endpoints
 
     class CreateCliToken

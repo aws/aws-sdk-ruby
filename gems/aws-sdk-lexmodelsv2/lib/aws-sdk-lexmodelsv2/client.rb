@@ -275,6 +275,11 @@ module Aws::LexModelsV2
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -1116,8 +1121,11 @@ module Aws::LexModelsV2
     #         bot_version: "BotVersion", # required
     #         locale_id: "LocaleId", # required
     #       },
+    #       test_set_export_specification: {
+    #         test_set_id: "Id", # required
+    #       },
     #     },
-    #     file_format: "LexJson", # required, accepts LexJson, TSV
+    #     file_format: "LexJson", # required, accepts LexJson, TSV, CSV
     #     file_password: "ImportExportFilePassword",
     #   })
     #
@@ -1132,7 +1140,8 @@ module Aws::LexModelsV2
     #   resp.resource_specification.custom_vocabulary_export_specification.bot_id #=> String
     #   resp.resource_specification.custom_vocabulary_export_specification.bot_version #=> String
     #   resp.resource_specification.custom_vocabulary_export_specification.locale_id #=> String
-    #   resp.file_format #=> String, one of "LexJson", "TSV"
+    #   resp.resource_specification.test_set_export_specification.test_set_id #=> String
+    #   resp.file_format #=> String, one of "LexJson", "TSV", "CSV"
     #   resp.export_status #=> String, one of "InProgress", "Completed", "Failed", "Deleting"
     #   resp.creation_date_time #=> Time
     #
@@ -1268,7 +1277,7 @@ module Aws::LexModelsV2
     #   The identifier of the bot associated with this intent.
     #
     # @option params [required, String] :bot_version
-    #   The identifier of the version of the bot associated with this intent.
+    #   The version of the bot associated with this intent.
     #
     # @option params [required, String] :locale_id
     #   The identifier of the language and locale where this intent is used.
@@ -1382,9 +1391,10 @@ module Aws::LexModelsV2
     #   resource.
     #
     # @option params [required, Array<Types::Principal>] :principal
-    #   An IAM principal, such as an IAM users, IAM roles, or AWS services
-    #   that is allowed or denied access to a resource. For more information,
-    #   see [AWS JSON policy elements: Principal][1].
+    #   An IAM principal, such as an IAM user, IAM role, or Amazon Web
+    #   Services services that is allowed or denied access to a resource. For
+    #   more information, see [Amazon Web Services JSON policy elements:
+    #   Principal][1].
     #
     #
     #
@@ -1510,7 +1520,7 @@ module Aws::LexModelsV2
     #
     # @option params [Types::MultipleValuesSetting] :multiple_values_setting
     #   Indicates whether the slot returns multiple values in one response.
-    #   Multi-value slots are only available in the en-US locale. If you set
+    #   Multi-value slots are only available in the `en-US` locale. If you set
     #   this value to `true` in any other locale, Amazon Lex throws a
     #   `ValidationException`.
     #
@@ -2287,7 +2297,7 @@ module Aws::LexModelsV2
     #
     # @option params [required, String] :slot_type_name
     #   The name for the slot. A slot type name must be unique within the
-    #   account.
+    #   intent.
     #
     # @option params [String] :description
     #   A description of the slot type. Use the description to help identify
@@ -2304,15 +2314,15 @@ module Aws::LexModelsV2
     #   the list of possible values. The field can be set to one of the
     #   following values:
     #
-    #   * `OriginalValue` - Returns the value entered by the user, if the user
-    #     value is similar to the slot value.
+    #   * `ORIGINAL_VALUE` - Returns the value entered by the user, if the
+    #     user value is similar to the slot value.
     #
-    #   * `TopResolution` - If there is a resolution list for the slot, return
-    #     the first value in the resolution list. If there is no resolution
-    #     list, return null.
+    #   * `TOP_RESOLUTION` - If there is a resolution list for the slot,
+    #     return the first value in the resolution list. If there is no
+    #     resolution list, return null.
     #
     #   If you don't specify the `valueSelectionSetting` parameter, the
-    #   default is `OriginalValue`.
+    #   default is `ORIGINAL_VALUE`.
     #
     # @option params [String] :parent_slot_type_signature
     #   The built-in slot type used as a parent of this slot type. When you
@@ -2437,6 +2447,53 @@ module Aws::LexModelsV2
     # @param [Hash] params ({})
     def create_slot_type(params = {}, options = {})
       req = build_request(:create_slot_type, params)
+      req.send_request(options)
+    end
+
+    # Create a report that describes the differences between the bot and the
+    # test set.
+    #
+    # @option params [required, String] :test_set_id
+    #   The test set Id for the test set discrepancy report.
+    #
+    # @option params [required, Types::TestSetDiscrepancyReportResourceTarget] :target
+    #   The target bot for the test set discrepancy report.
+    #
+    # @return [Types::CreateTestSetDiscrepancyReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTestSetDiscrepancyReportResponse#test_set_discrepancy_report_id #test_set_discrepancy_report_id} => String
+    #   * {Types::CreateTestSetDiscrepancyReportResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::CreateTestSetDiscrepancyReportResponse#test_set_id #test_set_id} => String
+    #   * {Types::CreateTestSetDiscrepancyReportResponse#target #target} => Types::TestSetDiscrepancyReportResourceTarget
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_test_set_discrepancy_report({
+    #     test_set_id: "Id", # required
+    #     target: { # required
+    #       bot_alias_target: {
+    #         bot_id: "Id", # required
+    #         bot_alias_id: "BotAliasId", # required
+    #         locale_id: "LocaleId", # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_set_discrepancy_report_id #=> String
+    #   resp.creation_date_time #=> Time
+    #   resp.test_set_id #=> String
+    #   resp.target.bot_alias_target.bot_id #=> String
+    #   resp.target.bot_alias_target.bot_alias_id #=> String
+    #   resp.target.bot_alias_target.locale_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateTestSetDiscrepancyReport AWS API Documentation
+    #
+    # @overload create_test_set_discrepancy_report(params = {})
+    # @param [Hash] params ({})
+    def create_test_set_discrepancy_report(params = {}, options = {})
+      req = build_request(:create_test_set_discrepancy_report, params)
       req.send_request(options)
     end
 
@@ -2985,6 +3042,28 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # The action to delete the selected test set.
+    #
+    # @option params [required, String] :test_set_id
+    #   The test set Id of the test set to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_test_set({
+    #     test_set_id: "Id", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteTestSet AWS API Documentation
+    #
+    # @overload delete_test_set(params = {})
+    # @param [Hash] params ({})
+    def delete_test_set(params = {}, options = {})
+      req = build_request(:delete_test_set, params)
+      req.send_request(options)
+    end
+
     # Deletes stored utterances.
     #
     # Amazon Lex stores the utterances that users send to your bot.
@@ -3188,7 +3267,7 @@ module Aws::LexModelsV2
     #   The identifier of the bot associated with the locale.
     #
     # @option params [required, String] :bot_version
-    #   The identifier of the version of the bot associated with the locale.
+    #   The version of the bot associated with the locale.
     #
     # @option params [required, String] :locale_id
     #   The unique identifier of the locale to describe. The string must match
@@ -3499,7 +3578,8 @@ module Aws::LexModelsV2
     #   resp.resource_specification.custom_vocabulary_export_specification.bot_id #=> String
     #   resp.resource_specification.custom_vocabulary_export_specification.bot_version #=> String
     #   resp.resource_specification.custom_vocabulary_export_specification.locale_id #=> String
-    #   resp.file_format #=> String, one of "LexJson", "TSV"
+    #   resp.resource_specification.test_set_export_specification.test_set_id #=> String
+    #   resp.file_format #=> String, one of "LexJson", "TSV", "CSV"
     #   resp.export_status #=> String, one of "InProgress", "Completed", "Failed", "Deleting"
     #   resp.failure_reasons #=> Array
     #   resp.failure_reasons[0] #=> String
@@ -3564,6 +3644,17 @@ module Aws::LexModelsV2
     #   resp.resource_specification.custom_vocabulary_import_specification.bot_id #=> String
     #   resp.resource_specification.custom_vocabulary_import_specification.bot_version #=> String
     #   resp.resource_specification.custom_vocabulary_import_specification.locale_id #=> String
+    #   resp.resource_specification.test_set_import_resource_specification.test_set_name #=> String
+    #   resp.resource_specification.test_set_import_resource_specification.description #=> String
+    #   resp.resource_specification.test_set_import_resource_specification.role_arn #=> String
+    #   resp.resource_specification.test_set_import_resource_specification.storage_location.s3_bucket_name #=> String
+    #   resp.resource_specification.test_set_import_resource_specification.storage_location.s3_path #=> String
+    #   resp.resource_specification.test_set_import_resource_specification.storage_location.kms_key_arn #=> String
+    #   resp.resource_specification.test_set_import_resource_specification.import_input_location.s3_bucket_name #=> String
+    #   resp.resource_specification.test_set_import_resource_specification.import_input_location.s3_path #=> String
+    #   resp.resource_specification.test_set_import_resource_specification.modality #=> String, one of "Text", "Audio"
+    #   resp.resource_specification.test_set_import_resource_specification.test_set_tags #=> Hash
+    #   resp.resource_specification.test_set_import_resource_specification.test_set_tags["TagKey"] #=> String
     #   resp.imported_resource_id #=> String
     #   resp.imported_resource_name #=> String
     #   resp.merge_strategy #=> String, one of "Overwrite", "FailOnConflict", "Append"
@@ -4552,6 +4643,243 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # Gets metadata information about the test execution.
+    #
+    # @option params [required, String] :test_execution_id
+    #   The execution Id of the test set execution.
+    #
+    # @return [Types::DescribeTestExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTestExecutionResponse#test_execution_id #test_execution_id} => String
+    #   * {Types::DescribeTestExecutionResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::DescribeTestExecutionResponse#last_updated_date_time #last_updated_date_time} => Time
+    #   * {Types::DescribeTestExecutionResponse#test_execution_status #test_execution_status} => String
+    #   * {Types::DescribeTestExecutionResponse#test_set_id #test_set_id} => String
+    #   * {Types::DescribeTestExecutionResponse#test_set_name #test_set_name} => String
+    #   * {Types::DescribeTestExecutionResponse#target #target} => Types::TestExecutionTarget
+    #   * {Types::DescribeTestExecutionResponse#api_mode #api_mode} => String
+    #   * {Types::DescribeTestExecutionResponse#test_execution_modality #test_execution_modality} => String
+    #   * {Types::DescribeTestExecutionResponse#failure_reasons #failure_reasons} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_test_execution({
+    #     test_execution_id: "Id", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_execution_id #=> String
+    #   resp.creation_date_time #=> Time
+    #   resp.last_updated_date_time #=> Time
+    #   resp.test_execution_status #=> String, one of "Pending", "Waiting", "InProgress", "Completed", "Failed", "Stopping", "Stopped"
+    #   resp.test_set_id #=> String
+    #   resp.test_set_name #=> String
+    #   resp.target.bot_alias_target.bot_id #=> String
+    #   resp.target.bot_alias_target.bot_alias_id #=> String
+    #   resp.target.bot_alias_target.locale_id #=> String
+    #   resp.api_mode #=> String, one of "Streaming", "NonStreaming"
+    #   resp.test_execution_modality #=> String, one of "Text", "Audio"
+    #   resp.failure_reasons #=> Array
+    #   resp.failure_reasons[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeTestExecution AWS API Documentation
+    #
+    # @overload describe_test_execution(params = {})
+    # @param [Hash] params ({})
+    def describe_test_execution(params = {}, options = {})
+      req = build_request(:describe_test_execution, params)
+      req.send_request(options)
+    end
+
+    # Gets metadata information about the test set.
+    #
+    # @option params [required, String] :test_set_id
+    #   The test set Id for the test set request.
+    #
+    # @return [Types::DescribeTestSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTestSetResponse#test_set_id #test_set_id} => String
+    #   * {Types::DescribeTestSetResponse#test_set_name #test_set_name} => String
+    #   * {Types::DescribeTestSetResponse#description #description} => String
+    #   * {Types::DescribeTestSetResponse#modality #modality} => String
+    #   * {Types::DescribeTestSetResponse#status #status} => String
+    #   * {Types::DescribeTestSetResponse#role_arn #role_arn} => String
+    #   * {Types::DescribeTestSetResponse#num_turns #num_turns} => Integer
+    #   * {Types::DescribeTestSetResponse#storage_location #storage_location} => Types::TestSetStorageLocation
+    #   * {Types::DescribeTestSetResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::DescribeTestSetResponse#last_updated_date_time #last_updated_date_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_test_set({
+    #     test_set_id: "Id", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_set_id #=> String
+    #   resp.test_set_name #=> String
+    #   resp.description #=> String
+    #   resp.modality #=> String, one of "Text", "Audio"
+    #   resp.status #=> String, one of "Importing", "PendingAnnotation", "Deleting", "ValidationError", "Ready"
+    #   resp.role_arn #=> String
+    #   resp.num_turns #=> Integer
+    #   resp.storage_location.s3_bucket_name #=> String
+    #   resp.storage_location.s3_path #=> String
+    #   resp.storage_location.kms_key_arn #=> String
+    #   resp.creation_date_time #=> Time
+    #   resp.last_updated_date_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeTestSet AWS API Documentation
+    #
+    # @overload describe_test_set(params = {})
+    # @param [Hash] params ({})
+    def describe_test_set(params = {}, options = {})
+      req = build_request(:describe_test_set, params)
+      req.send_request(options)
+    end
+
+    # Gets metadata information about the test set discrepancy report.
+    #
+    # @option params [required, String] :test_set_discrepancy_report_id
+    #   The unique identifier of the test set discrepancy report.
+    #
+    # @return [Types::DescribeTestSetDiscrepancyReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTestSetDiscrepancyReportResponse#test_set_discrepancy_report_id #test_set_discrepancy_report_id} => String
+    #   * {Types::DescribeTestSetDiscrepancyReportResponse#test_set_id #test_set_id} => String
+    #   * {Types::DescribeTestSetDiscrepancyReportResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::DescribeTestSetDiscrepancyReportResponse#target #target} => Types::TestSetDiscrepancyReportResourceTarget
+    #   * {Types::DescribeTestSetDiscrepancyReportResponse#test_set_discrepancy_report_status #test_set_discrepancy_report_status} => String
+    #   * {Types::DescribeTestSetDiscrepancyReportResponse#last_updated_data_time #last_updated_data_time} => Time
+    #   * {Types::DescribeTestSetDiscrepancyReportResponse#test_set_discrepancy_top_errors #test_set_discrepancy_top_errors} => Types::TestSetDiscrepancyErrors
+    #   * {Types::DescribeTestSetDiscrepancyReportResponse#test_set_discrepancy_raw_output_url #test_set_discrepancy_raw_output_url} => String
+    #   * {Types::DescribeTestSetDiscrepancyReportResponse#failure_reasons #failure_reasons} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_test_set_discrepancy_report({
+    #     test_set_discrepancy_report_id: "Id", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_set_discrepancy_report_id #=> String
+    #   resp.test_set_id #=> String
+    #   resp.creation_date_time #=> Time
+    #   resp.target.bot_alias_target.bot_id #=> String
+    #   resp.target.bot_alias_target.bot_alias_id #=> String
+    #   resp.target.bot_alias_target.locale_id #=> String
+    #   resp.test_set_discrepancy_report_status #=> String, one of "InProgress", "Completed", "Failed"
+    #   resp.last_updated_data_time #=> Time
+    #   resp.test_set_discrepancy_top_errors.intent_discrepancies #=> Array
+    #   resp.test_set_discrepancy_top_errors.intent_discrepancies[0].intent_name #=> String
+    #   resp.test_set_discrepancy_top_errors.intent_discrepancies[0].error_message #=> String
+    #   resp.test_set_discrepancy_top_errors.slot_discrepancies #=> Array
+    #   resp.test_set_discrepancy_top_errors.slot_discrepancies[0].intent_name #=> String
+    #   resp.test_set_discrepancy_top_errors.slot_discrepancies[0].slot_name #=> String
+    #   resp.test_set_discrepancy_top_errors.slot_discrepancies[0].error_message #=> String
+    #   resp.test_set_discrepancy_raw_output_url #=> String
+    #   resp.failure_reasons #=> Array
+    #   resp.failure_reasons[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeTestSetDiscrepancyReport AWS API Documentation
+    #
+    # @overload describe_test_set_discrepancy_report(params = {})
+    # @param [Hash] params ({})
+    def describe_test_set_discrepancy_report(params = {}, options = {})
+      req = build_request(:describe_test_set_discrepancy_report, params)
+      req.send_request(options)
+    end
+
+    # Gets metadata information about the test set generation.
+    #
+    # @option params [required, String] :test_set_generation_id
+    #   The unique identifier of the test set generation.
+    #
+    # @return [Types::DescribeTestSetGenerationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTestSetGenerationResponse#test_set_generation_id #test_set_generation_id} => String
+    #   * {Types::DescribeTestSetGenerationResponse#test_set_generation_status #test_set_generation_status} => String
+    #   * {Types::DescribeTestSetGenerationResponse#failure_reasons #failure_reasons} => Array&lt;String&gt;
+    #   * {Types::DescribeTestSetGenerationResponse#test_set_id #test_set_id} => String
+    #   * {Types::DescribeTestSetGenerationResponse#test_set_name #test_set_name} => String
+    #   * {Types::DescribeTestSetGenerationResponse#description #description} => String
+    #   * {Types::DescribeTestSetGenerationResponse#storage_location #storage_location} => Types::TestSetStorageLocation
+    #   * {Types::DescribeTestSetGenerationResponse#generation_data_source #generation_data_source} => Types::TestSetGenerationDataSource
+    #   * {Types::DescribeTestSetGenerationResponse#role_arn #role_arn} => String
+    #   * {Types::DescribeTestSetGenerationResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::DescribeTestSetGenerationResponse#last_updated_date_time #last_updated_date_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_test_set_generation({
+    #     test_set_generation_id: "Id", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_set_generation_id #=> String
+    #   resp.test_set_generation_status #=> String, one of "Generating", "Ready", "Failed", "Pending"
+    #   resp.failure_reasons #=> Array
+    #   resp.failure_reasons[0] #=> String
+    #   resp.test_set_id #=> String
+    #   resp.test_set_name #=> String
+    #   resp.description #=> String
+    #   resp.storage_location.s3_bucket_name #=> String
+    #   resp.storage_location.s3_path #=> String
+    #   resp.storage_location.kms_key_arn #=> String
+    #   resp.generation_data_source.conversation_logs_data_source.bot_id #=> String
+    #   resp.generation_data_source.conversation_logs_data_source.bot_alias_id #=> String
+    #   resp.generation_data_source.conversation_logs_data_source.locale_id #=> String
+    #   resp.generation_data_source.conversation_logs_data_source.filter.start_time #=> Time
+    #   resp.generation_data_source.conversation_logs_data_source.filter.end_time #=> Time
+    #   resp.generation_data_source.conversation_logs_data_source.filter.input_mode #=> String, one of "Speech", "Text"
+    #   resp.role_arn #=> String
+    #   resp.creation_date_time #=> Time
+    #   resp.last_updated_date_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeTestSetGeneration AWS API Documentation
+    #
+    # @overload describe_test_set_generation(params = {})
+    # @param [Hash] params ({})
+    def describe_test_set_generation(params = {}, options = {})
+      req = build_request(:describe_test_set_generation, params)
+      req.send_request(options)
+    end
+
+    # The pre-signed Amazon S3 URL to download the test execution result
+    # artifacts.
+    #
+    # @option params [required, String] :test_execution_id
+    #   The unique identifier of the completed test execution.
+    #
+    # @return [Types::GetTestExecutionArtifactsUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTestExecutionArtifactsUrlResponse#test_execution_id #test_execution_id} => String
+    #   * {Types::GetTestExecutionArtifactsUrlResponse#download_artifacts_url #download_artifacts_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_test_execution_artifacts_url({
+    #     test_execution_id: "Id", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_execution_id #=> String
+    #   resp.download_artifacts_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/GetTestExecutionArtifactsUrl AWS API Documentation
+    #
+    # @overload get_test_execution_artifacts_url(params = {})
+    # @param [Hash] params ({})
+    def get_test_execution_artifacts_url(params = {}, options = {})
+      req = build_request(:get_test_execution_artifacts_url, params)
+      req.send_request(options)
+    end
+
     # Provides a list of utterances that users have sent to the bot.
     #
     # Utterances are aggregated by the text of the utterance. For example,
@@ -5316,7 +5644,8 @@ module Aws::LexModelsV2
     #   resp.export_summaries[0].resource_specification.custom_vocabulary_export_specification.bot_id #=> String
     #   resp.export_summaries[0].resource_specification.custom_vocabulary_export_specification.bot_version #=> String
     #   resp.export_summaries[0].resource_specification.custom_vocabulary_export_specification.locale_id #=> String
-    #   resp.export_summaries[0].file_format #=> String, one of "LexJson", "TSV"
+    #   resp.export_summaries[0].resource_specification.test_set_export_specification.test_set_id #=> String
+    #   resp.export_summaries[0].file_format #=> String, one of "LexJson", "TSV", "CSV"
     #   resp.export_summaries[0].export_status #=> String, one of "InProgress", "Completed", "Failed", "Deleting"
     #   resp.export_summaries[0].creation_date_time #=> Time
     #   resp.export_summaries[0].last_updated_date_time #=> Time
@@ -5414,7 +5743,7 @@ module Aws::LexModelsV2
     #   resp.import_summaries[0].merge_strategy #=> String, one of "Overwrite", "FailOnConflict", "Append"
     #   resp.import_summaries[0].creation_date_time #=> Time
     #   resp.import_summaries[0].last_updated_date_time #=> Time
-    #   resp.import_summaries[0].imported_resource_type #=> String, one of "Bot", "BotLocale", "CustomVocabulary"
+    #   resp.import_summaries[0].imported_resource_type #=> String, one of "Bot", "BotLocale", "CustomVocabulary", "TestSet"
     #   resp.next_token #=> String
     #   resp.locale_id #=> String
     #
@@ -5856,6 +6185,333 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # Gets a list of test execution result items.
+    #
+    # @option params [required, String] :test_execution_id
+    #   The unique identifier of the test execution to list the result items.
+    #
+    # @option params [required, Types::TestExecutionResultFilterBy] :result_filter_by
+    #   The filter for the list of results from the test set execution.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of test execution result items to return in each
+    #   page. If there are fewer results than the max page size, only the
+    #   actual number of results are returned.
+    #
+    # @option params [String] :next_token
+    #   If the response from the `ListTestExecutionResultItems` operation
+    #   contains more results than specified in the `maxResults` parameter, a
+    #   token is returned in the response. Use that token in the `nextToken`
+    #   parameter to return the next page of results.
+    #
+    # @return [Types::ListTestExecutionResultItemsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTestExecutionResultItemsResponse#test_execution_results #test_execution_results} => Types::TestExecutionResultItems
+    #   * {Types::ListTestExecutionResultItemsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_test_execution_result_items({
+    #     test_execution_id: "Id", # required
+    #     result_filter_by: { # required
+    #       result_type_filter: "OverallTestResults", # required, accepts OverallTestResults, ConversationLevelTestResults, IntentClassificationTestResults, SlotResolutionTestResults, UtteranceLevelResults
+    #       conversation_level_test_results_filter_by: {
+    #         end_to_end_result: "Matched", # accepts Matched, Mismatched, ExecutionError
+    #       },
+    #     },
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_execution_results.overall_test_results.items #=> Array
+    #   resp.test_execution_results.overall_test_results.items[0].multi_turn_conversation #=> Boolean
+    #   resp.test_execution_results.overall_test_results.items[0].total_result_count #=> Integer
+    #   resp.test_execution_results.overall_test_results.items[0].speech_transcription_result_counts #=> Hash
+    #   resp.test_execution_results.overall_test_results.items[0].speech_transcription_result_counts["TestResultMatchStatus"] #=> Integer
+    #   resp.test_execution_results.overall_test_results.items[0].end_to_end_result_counts #=> Hash
+    #   resp.test_execution_results.overall_test_results.items[0].end_to_end_result_counts["TestResultMatchStatus"] #=> Integer
+    #   resp.test_execution_results.conversation_level_test_results.items #=> Array
+    #   resp.test_execution_results.conversation_level_test_results.items[0].conversation_id #=> String
+    #   resp.test_execution_results.conversation_level_test_results.items[0].end_to_end_result #=> String, one of "Matched", "Mismatched", "ExecutionError"
+    #   resp.test_execution_results.conversation_level_test_results.items[0].speech_transcription_result #=> String, one of "Matched", "Mismatched", "ExecutionError"
+    #   resp.test_execution_results.conversation_level_test_results.items[0].intent_classification_results #=> Array
+    #   resp.test_execution_results.conversation_level_test_results.items[0].intent_classification_results[0].intent_name #=> String
+    #   resp.test_execution_results.conversation_level_test_results.items[0].intent_classification_results[0].match_result #=> String, one of "Matched", "Mismatched", "ExecutionError"
+    #   resp.test_execution_results.conversation_level_test_results.items[0].slot_resolution_results #=> Array
+    #   resp.test_execution_results.conversation_level_test_results.items[0].slot_resolution_results[0].intent_name #=> String
+    #   resp.test_execution_results.conversation_level_test_results.items[0].slot_resolution_results[0].slot_name #=> String
+    #   resp.test_execution_results.conversation_level_test_results.items[0].slot_resolution_results[0].match_result #=> String, one of "Matched", "Mismatched", "ExecutionError"
+    #   resp.test_execution_results.intent_classification_test_results.items #=> Array
+    #   resp.test_execution_results.intent_classification_test_results.items[0].intent_name #=> String
+    #   resp.test_execution_results.intent_classification_test_results.items[0].multi_turn_conversation #=> Boolean
+    #   resp.test_execution_results.intent_classification_test_results.items[0].result_counts.total_result_count #=> Integer
+    #   resp.test_execution_results.intent_classification_test_results.items[0].result_counts.speech_transcription_result_counts #=> Hash
+    #   resp.test_execution_results.intent_classification_test_results.items[0].result_counts.speech_transcription_result_counts["TestResultMatchStatus"] #=> Integer
+    #   resp.test_execution_results.intent_classification_test_results.items[0].result_counts.intent_match_result_counts #=> Hash
+    #   resp.test_execution_results.intent_classification_test_results.items[0].result_counts.intent_match_result_counts["TestResultMatchStatus"] #=> Integer
+    #   resp.test_execution_results.intent_level_slot_resolution_test_results.items #=> Array
+    #   resp.test_execution_results.intent_level_slot_resolution_test_results.items[0].intent_name #=> String
+    #   resp.test_execution_results.intent_level_slot_resolution_test_results.items[0].multi_turn_conversation #=> Boolean
+    #   resp.test_execution_results.intent_level_slot_resolution_test_results.items[0].slot_resolution_results #=> Array
+    #   resp.test_execution_results.intent_level_slot_resolution_test_results.items[0].slot_resolution_results[0].slot_name #=> String
+    #   resp.test_execution_results.intent_level_slot_resolution_test_results.items[0].slot_resolution_results[0].result_counts.total_result_count #=> Integer
+    #   resp.test_execution_results.intent_level_slot_resolution_test_results.items[0].slot_resolution_results[0].result_counts.speech_transcription_result_counts #=> Hash
+    #   resp.test_execution_results.intent_level_slot_resolution_test_results.items[0].slot_resolution_results[0].result_counts.speech_transcription_result_counts["TestResultMatchStatus"] #=> Integer
+    #   resp.test_execution_results.intent_level_slot_resolution_test_results.items[0].slot_resolution_results[0].result_counts.slot_match_result_counts #=> Hash
+    #   resp.test_execution_results.intent_level_slot_resolution_test_results.items[0].slot_resolution_results[0].result_counts.slot_match_result_counts["TestResultMatchStatus"] #=> Integer
+    #   resp.test_execution_results.utterance_level_test_results.items #=> Array
+    #   resp.test_execution_results.utterance_level_test_results.items[0].record_number #=> Integer
+    #   resp.test_execution_results.utterance_level_test_results.items[0].conversation_id #=> String
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.agent.expected_agent_prompt #=> String
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.agent.actual_agent_prompt #=> String
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.agent.error_details.error_code #=> String
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.agent.error_details.error_message #=> String
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.agent.actual_elicited_slot #=> String
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.agent.actual_intent #=> String
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.input.utterance_input.text_input #=> String
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.input.utterance_input.audio_input.audio_file_s3_location #=> String
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.input.request_attributes #=> Hash
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.input.request_attributes["NonEmptyString"] #=> String
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.input.session_state.session_attributes #=> Hash
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.input.session_state.session_attributes["NonEmptyString"] #=> String
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.input.session_state.active_contexts #=> Array
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.input.session_state.active_contexts[0].name #=> String
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.input.session_state.runtime_hints.slot_hints #=> Hash
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.input.session_state.runtime_hints.slot_hints["Name"] #=> Hash
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.input.session_state.runtime_hints.slot_hints["Name"]["Name"].runtime_hint_values #=> Array
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.input.session_state.runtime_hints.slot_hints["Name"]["Name"].runtime_hint_values[0].phrase #=> String
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.input.session_state.runtime_hints.slot_hints["Name"]["Name"].sub_slot_hints #=> Types::SlotHintsSlotMap
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.expected_output.intent.name #=> String
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.expected_output.intent.slots #=> Hash
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.expected_output.intent.slots["Name"].value #=> String
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.expected_output.intent.slots["Name"].values #=> Array
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.expected_output.intent.slots["Name"].values[0] #=> Types::UserTurnSlotOutput
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.expected_output.intent.slots["Name"].sub_slots #=> Types::UserTurnSlotOutputMap
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.expected_output.active_contexts #=> Array
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.expected_output.active_contexts[0].name #=> String
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.expected_output.transcript #=> String
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.actual_output.intent.name #=> String
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.actual_output.intent.slots #=> Hash
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.actual_output.intent.slots["Name"].value #=> String
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.actual_output.intent.slots["Name"].values #=> Array
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.actual_output.intent.slots["Name"].values[0] #=> Types::UserTurnSlotOutput
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.actual_output.intent.slots["Name"].sub_slots #=> Types::UserTurnSlotOutputMap
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.actual_output.active_contexts #=> Array
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.actual_output.active_contexts[0].name #=> String
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.actual_output.transcript #=> String
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.error_details.error_code #=> String
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.error_details.error_message #=> String
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.end_to_end_result #=> String, one of "Matched", "Mismatched", "ExecutionError"
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.intent_match_result #=> String, one of "Matched", "Mismatched", "ExecutionError"
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.slot_match_result #=> String, one of "Matched", "Mismatched", "ExecutionError"
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.speech_transcription_result #=> String, one of "Matched", "Mismatched", "ExecutionError"
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.conversation_level_result.end_to_end_result #=> String, one of "Matched", "Mismatched", "ExecutionError"
+    #   resp.test_execution_results.utterance_level_test_results.items[0].turn_result.user.conversation_level_result.speech_transcription_result #=> String, one of "Matched", "Mismatched", "ExecutionError"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListTestExecutionResultItems AWS API Documentation
+    #
+    # @overload list_test_execution_result_items(params = {})
+    # @param [Hash] params ({})
+    def list_test_execution_result_items(params = {}, options = {})
+      req = build_request(:list_test_execution_result_items, params)
+      req.send_request(options)
+    end
+
+    # The list of test set executions.
+    #
+    # @option params [Types::TestExecutionSortBy] :sort_by
+    #   The sort order of the test set executions.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of test executions to return in each page. If there
+    #   are fewer results than the max page size, only the actual number of
+    #   results are returned.
+    #
+    # @option params [String] :next_token
+    #   If the response from the ListTestExecutions operation contains more
+    #   results than specified in the maxResults parameter, a token is
+    #   returned in the response. Use that token in the nextToken parameter to
+    #   return the next page of results.
+    #
+    # @return [Types::ListTestExecutionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTestExecutionsResponse#test_executions #test_executions} => Array&lt;Types::TestExecutionSummary&gt;
+    #   * {Types::ListTestExecutionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_test_executions({
+    #     sort_by: {
+    #       attribute: "TestSetName", # required, accepts TestSetName, CreationDateTime
+    #       order: "Ascending", # required, accepts Ascending, Descending
+    #     },
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_executions #=> Array
+    #   resp.test_executions[0].test_execution_id #=> String
+    #   resp.test_executions[0].creation_date_time #=> Time
+    #   resp.test_executions[0].last_updated_date_time #=> Time
+    #   resp.test_executions[0].test_execution_status #=> String, one of "Pending", "Waiting", "InProgress", "Completed", "Failed", "Stopping", "Stopped"
+    #   resp.test_executions[0].test_set_id #=> String
+    #   resp.test_executions[0].test_set_name #=> String
+    #   resp.test_executions[0].target.bot_alias_target.bot_id #=> String
+    #   resp.test_executions[0].target.bot_alias_target.bot_alias_id #=> String
+    #   resp.test_executions[0].target.bot_alias_target.locale_id #=> String
+    #   resp.test_executions[0].api_mode #=> String, one of "Streaming", "NonStreaming"
+    #   resp.test_executions[0].test_execution_modality #=> String, one of "Text", "Audio"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListTestExecutions AWS API Documentation
+    #
+    # @overload list_test_executions(params = {})
+    # @param [Hash] params ({})
+    def list_test_executions(params = {}, options = {})
+      req = build_request(:list_test_executions, params)
+      req.send_request(options)
+    end
+
+    # The list of test set records.
+    #
+    # @option params [required, String] :test_set_id
+    #   The identifier of the test set to list its test set records.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of test set records to return in each page. If
+    #   there are fewer records than the max page size, only the actual number
+    #   of records are returned.
+    #
+    # @option params [String] :next_token
+    #   If the response from the ListTestSetRecords operation contains more
+    #   results than specified in the maxResults parameter, a token is
+    #   returned in the response. Use that token in the nextToken parameter to
+    #   return the next page of results.
+    #
+    # @return [Types::ListTestSetRecordsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTestSetRecordsResponse#test_set_records #test_set_records} => Array&lt;Types::TestSetTurnRecord&gt;
+    #   * {Types::ListTestSetRecordsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_test_set_records({
+    #     test_set_id: "Id", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_set_records #=> Array
+    #   resp.test_set_records[0].record_number #=> Integer
+    #   resp.test_set_records[0].conversation_id #=> String
+    #   resp.test_set_records[0].turn_number #=> Integer
+    #   resp.test_set_records[0].turn_specification.agent_turn.agent_prompt #=> String
+    #   resp.test_set_records[0].turn_specification.user_turn.input.utterance_input.text_input #=> String
+    #   resp.test_set_records[0].turn_specification.user_turn.input.utterance_input.audio_input.audio_file_s3_location #=> String
+    #   resp.test_set_records[0].turn_specification.user_turn.input.request_attributes #=> Hash
+    #   resp.test_set_records[0].turn_specification.user_turn.input.request_attributes["NonEmptyString"] #=> String
+    #   resp.test_set_records[0].turn_specification.user_turn.input.session_state.session_attributes #=> Hash
+    #   resp.test_set_records[0].turn_specification.user_turn.input.session_state.session_attributes["NonEmptyString"] #=> String
+    #   resp.test_set_records[0].turn_specification.user_turn.input.session_state.active_contexts #=> Array
+    #   resp.test_set_records[0].turn_specification.user_turn.input.session_state.active_contexts[0].name #=> String
+    #   resp.test_set_records[0].turn_specification.user_turn.input.session_state.runtime_hints.slot_hints #=> Hash
+    #   resp.test_set_records[0].turn_specification.user_turn.input.session_state.runtime_hints.slot_hints["Name"] #=> Hash
+    #   resp.test_set_records[0].turn_specification.user_turn.input.session_state.runtime_hints.slot_hints["Name"]["Name"].runtime_hint_values #=> Array
+    #   resp.test_set_records[0].turn_specification.user_turn.input.session_state.runtime_hints.slot_hints["Name"]["Name"].runtime_hint_values[0].phrase #=> String
+    #   resp.test_set_records[0].turn_specification.user_turn.input.session_state.runtime_hints.slot_hints["Name"]["Name"].sub_slot_hints #=> Types::SlotHintsSlotMap
+    #   resp.test_set_records[0].turn_specification.user_turn.expected.intent.name #=> String
+    #   resp.test_set_records[0].turn_specification.user_turn.expected.intent.slots #=> Hash
+    #   resp.test_set_records[0].turn_specification.user_turn.expected.intent.slots["Name"].value #=> String
+    #   resp.test_set_records[0].turn_specification.user_turn.expected.intent.slots["Name"].values #=> Array
+    #   resp.test_set_records[0].turn_specification.user_turn.expected.intent.slots["Name"].values[0] #=> Types::UserTurnSlotOutput
+    #   resp.test_set_records[0].turn_specification.user_turn.expected.intent.slots["Name"].sub_slots #=> Types::UserTurnSlotOutputMap
+    #   resp.test_set_records[0].turn_specification.user_turn.expected.active_contexts #=> Array
+    #   resp.test_set_records[0].turn_specification.user_turn.expected.active_contexts[0].name #=> String
+    #   resp.test_set_records[0].turn_specification.user_turn.expected.transcript #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListTestSetRecords AWS API Documentation
+    #
+    # @overload list_test_set_records(params = {})
+    # @param [Hash] params ({})
+    def list_test_set_records(params = {}, options = {})
+      req = build_request(:list_test_set_records, params)
+      req.send_request(options)
+    end
+
+    # The list of the test sets
+    #
+    # @option params [Types::TestSetSortBy] :sort_by
+    #   The sort order for the list of test sets.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of test sets to return in each page. If there are
+    #   fewer results than the max page size, only the actual number of
+    #   results are returned.
+    #
+    # @option params [String] :next_token
+    #   If the response from the ListTestSets operation contains more results
+    #   than specified in the maxResults parameter, a token is returned in the
+    #   response. Use that token in the nextToken parameter to return the next
+    #   page of results.
+    #
+    # @return [Types::ListTestSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTestSetsResponse#test_sets #test_sets} => Array&lt;Types::TestSetSummary&gt;
+    #   * {Types::ListTestSetsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_test_sets({
+    #     sort_by: {
+    #       attribute: "TestSetName", # required, accepts TestSetName, LastUpdatedDateTime
+    #       order: "Ascending", # required, accepts Ascending, Descending
+    #     },
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_sets #=> Array
+    #   resp.test_sets[0].test_set_id #=> String
+    #   resp.test_sets[0].test_set_name #=> String
+    #   resp.test_sets[0].description #=> String
+    #   resp.test_sets[0].modality #=> String, one of "Text", "Audio"
+    #   resp.test_sets[0].status #=> String, one of "Importing", "PendingAnnotation", "Deleting", "ValidationError", "Ready"
+    #   resp.test_sets[0].role_arn #=> String
+    #   resp.test_sets[0].num_turns #=> Integer
+    #   resp.test_sets[0].storage_location.s3_bucket_name #=> String
+    #   resp.test_sets[0].storage_location.s3_path #=> String
+    #   resp.test_sets[0].storage_location.kms_key_arn #=> String
+    #   resp.test_sets[0].creation_date_time #=> Time
+    #   resp.test_sets[0].last_updated_date_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListTestSets AWS API Documentation
+    #
+    # @overload list_test_sets(params = {})
+    # @param [Hash] params ({})
+    def list_test_sets(params = {}, options = {})
+      req = build_request(:list_test_sets, params)
+      req.send_request(options)
+    end
+
     # Search for associated transcripts that meet the specified criteria.
     #
     # @option params [required, String] :bot_id
@@ -6109,6 +6765,24 @@ module Aws::LexModelsV2
     #         bot_version: "DraftBotVersion", # required
     #         locale_id: "LocaleId", # required
     #       },
+    #       test_set_import_resource_specification: {
+    #         test_set_name: "Name", # required
+    #         description: "Description",
+    #         role_arn: "RoleArn", # required
+    #         storage_location: { # required
+    #           s3_bucket_name: "S3BucketName", # required
+    #           s3_path: "S3ObjectPath", # required
+    #           kms_key_arn: "KmsKeyArn",
+    #         },
+    #         import_input_location: { # required
+    #           s3_bucket_name: "S3BucketName", # required
+    #           s3_path: "S3ObjectPath", # required
+    #         },
+    #         modality: "Text", # required, accepts Text, Audio
+    #         test_set_tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       },
     #     },
     #     merge_strategy: "Overwrite", # required, accepts Overwrite, FailOnConflict, Append
     #     file_password: "ImportExportFilePassword",
@@ -6134,6 +6808,17 @@ module Aws::LexModelsV2
     #   resp.resource_specification.custom_vocabulary_import_specification.bot_id #=> String
     #   resp.resource_specification.custom_vocabulary_import_specification.bot_version #=> String
     #   resp.resource_specification.custom_vocabulary_import_specification.locale_id #=> String
+    #   resp.resource_specification.test_set_import_resource_specification.test_set_name #=> String
+    #   resp.resource_specification.test_set_import_resource_specification.description #=> String
+    #   resp.resource_specification.test_set_import_resource_specification.role_arn #=> String
+    #   resp.resource_specification.test_set_import_resource_specification.storage_location.s3_bucket_name #=> String
+    #   resp.resource_specification.test_set_import_resource_specification.storage_location.s3_path #=> String
+    #   resp.resource_specification.test_set_import_resource_specification.storage_location.kms_key_arn #=> String
+    #   resp.resource_specification.test_set_import_resource_specification.import_input_location.s3_bucket_name #=> String
+    #   resp.resource_specification.test_set_import_resource_specification.import_input_location.s3_path #=> String
+    #   resp.resource_specification.test_set_import_resource_specification.modality #=> String, one of "Text", "Audio"
+    #   resp.resource_specification.test_set_import_resource_specification.test_set_tags #=> Hash
+    #   resp.resource_specification.test_set_import_resource_specification.test_set_tags["TagKey"] #=> String
     #   resp.merge_strategy #=> String, one of "Overwrite", "FailOnConflict", "Append"
     #   resp.import_status #=> String, one of "InProgress", "Completed", "Failed", "Deleting"
     #   resp.creation_date_time #=> Time
@@ -6144,6 +6829,160 @@ module Aws::LexModelsV2
     # @param [Hash] params ({})
     def start_import(params = {}, options = {})
       req = build_request(:start_import, params)
+      req.send_request(options)
+    end
+
+    # The action to start test set execution.
+    #
+    # @option params [required, String] :test_set_id
+    #   The test set Id for the test set execution.
+    #
+    # @option params [required, Types::TestExecutionTarget] :target
+    #   The target bot for the test set execution.
+    #
+    # @option params [required, String] :api_mode
+    #   Indicates whether we use streaming or non-streaming APIs for the test
+    #   set execution. For streaming, StartConversation Runtime API is used.
+    #   Whereas, for non-streaming, RecognizeUtterance and RecognizeText
+    #   Amazon Lex Runtime API are used.
+    #
+    # @option params [String] :test_execution_modality
+    #   Indicates whether audio or text is used.
+    #
+    # @return [Types::StartTestExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartTestExecutionResponse#test_execution_id #test_execution_id} => String
+    #   * {Types::StartTestExecutionResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::StartTestExecutionResponse#test_set_id #test_set_id} => String
+    #   * {Types::StartTestExecutionResponse#target #target} => Types::TestExecutionTarget
+    #   * {Types::StartTestExecutionResponse#api_mode #api_mode} => String
+    #   * {Types::StartTestExecutionResponse#test_execution_modality #test_execution_modality} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_test_execution({
+    #     test_set_id: "Id", # required
+    #     target: { # required
+    #       bot_alias_target: {
+    #         bot_id: "Id", # required
+    #         bot_alias_id: "BotAliasId", # required
+    #         locale_id: "LocaleId", # required
+    #       },
+    #     },
+    #     api_mode: "Streaming", # required, accepts Streaming, NonStreaming
+    #     test_execution_modality: "Text", # accepts Text, Audio
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_execution_id #=> String
+    #   resp.creation_date_time #=> Time
+    #   resp.test_set_id #=> String
+    #   resp.target.bot_alias_target.bot_id #=> String
+    #   resp.target.bot_alias_target.bot_alias_id #=> String
+    #   resp.target.bot_alias_target.locale_id #=> String
+    #   resp.api_mode #=> String, one of "Streaming", "NonStreaming"
+    #   resp.test_execution_modality #=> String, one of "Text", "Audio"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/StartTestExecution AWS API Documentation
+    #
+    # @overload start_test_execution(params = {})
+    # @param [Hash] params ({})
+    def start_test_execution(params = {}, options = {})
+      req = build_request(:start_test_execution, params)
+      req.send_request(options)
+    end
+
+    # The action to start the generation of test set.
+    #
+    # @option params [required, String] :test_set_name
+    #   The test set name for the test set generation request.
+    #
+    # @option params [String] :description
+    #   The test set description for the test set generation request.
+    #
+    # @option params [required, Types::TestSetStorageLocation] :storage_location
+    #   The Amazon S3 storage location for the test set generation.
+    #
+    # @option params [required, Types::TestSetGenerationDataSource] :generation_data_source
+    #   The data source for the test set generation.
+    #
+    # @option params [required, String] :role_arn
+    #   The roleARN used for any operation in the test set to access resources
+    #   in the Amazon Web Services account.
+    #
+    # @option params [Hash<String,String>] :test_set_tags
+    #   A list of tags to add to the test set. You can only add tags when you
+    #   import/generate a new test set. You can't use the `UpdateTestSet`
+    #   operation to update tags. To update tags, use the `TagResource`
+    #   operation.
+    #
+    # @return [Types::StartTestSetGenerationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartTestSetGenerationResponse#test_set_generation_id #test_set_generation_id} => String
+    #   * {Types::StartTestSetGenerationResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::StartTestSetGenerationResponse#test_set_generation_status #test_set_generation_status} => String
+    #   * {Types::StartTestSetGenerationResponse#test_set_name #test_set_name} => String
+    #   * {Types::StartTestSetGenerationResponse#description #description} => String
+    #   * {Types::StartTestSetGenerationResponse#storage_location #storage_location} => Types::TestSetStorageLocation
+    #   * {Types::StartTestSetGenerationResponse#generation_data_source #generation_data_source} => Types::TestSetGenerationDataSource
+    #   * {Types::StartTestSetGenerationResponse#role_arn #role_arn} => String
+    #   * {Types::StartTestSetGenerationResponse#test_set_tags #test_set_tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_test_set_generation({
+    #     test_set_name: "Name", # required
+    #     description: "Description",
+    #     storage_location: { # required
+    #       s3_bucket_name: "S3BucketName", # required
+    #       s3_path: "S3ObjectPath", # required
+    #       kms_key_arn: "KmsKeyArn",
+    #     },
+    #     generation_data_source: { # required
+    #       conversation_logs_data_source: {
+    #         bot_id: "Id", # required
+    #         bot_alias_id: "BotAliasId", # required
+    #         locale_id: "LocaleId", # required
+    #         filter: { # required
+    #           start_time: Time.now, # required
+    #           end_time: Time.now, # required
+    #           input_mode: "Speech", # required, accepts Speech, Text
+    #         },
+    #       },
+    #     },
+    #     role_arn: "RoleArn", # required
+    #     test_set_tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_set_generation_id #=> String
+    #   resp.creation_date_time #=> Time
+    #   resp.test_set_generation_status #=> String, one of "Generating", "Ready", "Failed", "Pending"
+    #   resp.test_set_name #=> String
+    #   resp.description #=> String
+    #   resp.storage_location.s3_bucket_name #=> String
+    #   resp.storage_location.s3_path #=> String
+    #   resp.storage_location.kms_key_arn #=> String
+    #   resp.generation_data_source.conversation_logs_data_source.bot_id #=> String
+    #   resp.generation_data_source.conversation_logs_data_source.bot_alias_id #=> String
+    #   resp.generation_data_source.conversation_logs_data_source.locale_id #=> String
+    #   resp.generation_data_source.conversation_logs_data_source.filter.start_time #=> Time
+    #   resp.generation_data_source.conversation_logs_data_source.filter.end_time #=> Time
+    #   resp.generation_data_source.conversation_logs_data_source.filter.input_mode #=> String, one of "Speech", "Text"
+    #   resp.role_arn #=> String
+    #   resp.test_set_tags #=> Hash
+    #   resp.test_set_tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/StartTestSetGeneration AWS API Documentation
+    #
+    # @overload start_test_set_generation(params = {})
+    # @param [Hash] params ({})
+    def start_test_set_generation(params = {}, options = {})
+      req = build_request(:start_test_set_generation, params)
       req.send_request(options)
     end
 
@@ -6705,7 +7544,8 @@ module Aws::LexModelsV2
     #   resp.resource_specification.custom_vocabulary_export_specification.bot_id #=> String
     #   resp.resource_specification.custom_vocabulary_export_specification.bot_version #=> String
     #   resp.resource_specification.custom_vocabulary_export_specification.locale_id #=> String
-    #   resp.file_format #=> String, one of "LexJson", "TSV"
+    #   resp.resource_specification.test_set_export_specification.test_set_id #=> String
+    #   resp.file_format #=> String, one of "LexJson", "TSV", "CSV"
     #   resp.export_status #=> String, one of "InProgress", "Completed", "Failed", "Deleting"
     #   resp.creation_date_time #=> Time
     #   resp.last_updated_date_time #=> Time
@@ -6784,6 +7624,8 @@ module Aws::LexModelsV2
     #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
     # @option params [Types::InitialResponseSetting] :initial_response_setting
+    #   Configuration settings for a response sent to the user before Amazon
+    #   Lex starts eliciting slots.
     #
     # @return [Types::UpdateIntentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7831,6 +8673,62 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # The action to update the test set.
+    #
+    # @option params [required, String] :test_set_id
+    #   The test set Id for which update test operation to be performed.
+    #
+    # @option params [required, String] :test_set_name
+    #   The new test set name.
+    #
+    # @option params [String] :description
+    #   The new test set description.
+    #
+    # @return [Types::UpdateTestSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateTestSetResponse#test_set_id #test_set_id} => String
+    #   * {Types::UpdateTestSetResponse#test_set_name #test_set_name} => String
+    #   * {Types::UpdateTestSetResponse#description #description} => String
+    #   * {Types::UpdateTestSetResponse#modality #modality} => String
+    #   * {Types::UpdateTestSetResponse#status #status} => String
+    #   * {Types::UpdateTestSetResponse#role_arn #role_arn} => String
+    #   * {Types::UpdateTestSetResponse#num_turns #num_turns} => Integer
+    #   * {Types::UpdateTestSetResponse#storage_location #storage_location} => Types::TestSetStorageLocation
+    #   * {Types::UpdateTestSetResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::UpdateTestSetResponse#last_updated_date_time #last_updated_date_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_test_set({
+    #     test_set_id: "Id", # required
+    #     test_set_name: "Name", # required
+    #     description: "Description",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_set_id #=> String
+    #   resp.test_set_name #=> String
+    #   resp.description #=> String
+    #   resp.modality #=> String, one of "Text", "Audio"
+    #   resp.status #=> String, one of "Importing", "PendingAnnotation", "Deleting", "ValidationError", "Ready"
+    #   resp.role_arn #=> String
+    #   resp.num_turns #=> Integer
+    #   resp.storage_location.s3_bucket_name #=> String
+    #   resp.storage_location.s3_path #=> String
+    #   resp.storage_location.kms_key_arn #=> String
+    #   resp.creation_date_time #=> Time
+    #   resp.last_updated_date_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateTestSet AWS API Documentation
+    #
+    # @overload update_test_set(params = {})
+    # @param [Hash] params ({})
+    def update_test_set(params = {}, options = {})
+      req = build_request(:update_test_set, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -7844,7 +8742,7 @@ module Aws::LexModelsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

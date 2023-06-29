@@ -9,6 +9,7 @@
 
 
 module Aws::MainframeModernization
+  # @api private
   module Endpoints
 
     class CancelBatchJobExecution

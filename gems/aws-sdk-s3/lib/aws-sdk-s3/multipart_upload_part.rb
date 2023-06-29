@@ -256,7 +256,9 @@ module Aws::S3
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -395,7 +397,9 @@ module Aws::S3
         upload_id: @multipart_upload_id,
         part_number: @part_number
       )
-      resp = @client.upload_part_copy(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.upload_part_copy(options)
+      end
       resp.data
     end
 
@@ -521,7 +525,9 @@ module Aws::S3
         upload_id: @multipart_upload_id,
         part_number: @part_number
       )
-      resp = @client.upload_part(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.upload_part(options)
+      end
       resp.data
     end
 

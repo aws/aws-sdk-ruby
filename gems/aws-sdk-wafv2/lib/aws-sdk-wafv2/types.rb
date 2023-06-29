@@ -51,6 +51,72 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # Details for your use of the account creation fraud prevention managed
+    # rule group, `AWSManagedRulesACFPRuleSet`. This configuration is used
+    # in `ManagedRuleGroupConfig`.
+    #
+    # @!attribute [rw] creation_path
+    #   The path of the account creation endpoint for your application. This
+    #   is the page on your website that accepts the completed registration
+    #   form for a new user. This page must accept `POST` requests.
+    #
+    #   For example, for the URL `https://example.com/web/signup`, you would
+    #   provide the path `/web/signup`.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_page_path
+    #   The path of the account registration endpoint for your application.
+    #   This is the page on your website that presents the registration form
+    #   to new users.
+    #
+    #   <note markdown="1"> This page must accept `GET` text/html requests.
+    #
+    #    </note>
+    #
+    #   For example, for the URL `https://example.com/web/register`, you
+    #   would provide the path `/web/register`.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_inspection
+    #   The criteria for inspecting account creation requests, used by the
+    #   ACFP rule group to validate and track account creation attempts.
+    #   @return [Types::RequestInspectionACFP]
+    #
+    # @!attribute [rw] response_inspection
+    #   The criteria for inspecting responses to account creation requests,
+    #   used by the ACFP rule group to track account creation success rates.
+    #
+    #   <note markdown="1"> Response inspection is available only in web ACLs that protect
+    #   Amazon CloudFront distributions.
+    #
+    #    </note>
+    #
+    #   The ACFP rule group evaluates the responses that your protected
+    #   resources send back to client account creation attempts, keeping
+    #   count of successful and failed attempts from each IP address and
+    #   client session. Using this information, the rule group labels and
+    #   mitigates requests from client sessions and IP addresses that have
+    #   had too many successful account creation attempts in a short amount
+    #   of time.
+    #   @return [Types::ResponseInspection]
+    #
+    # @!attribute [rw] enable_regex_in_path
+    #   Allow the use of regular expressions in the registration page path
+    #   and the account creation path.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/AWSManagedRulesACFPRuleSet AWS API Documentation
+    #
+    class AWSManagedRulesACFPRuleSet < Struct.new(
+      :creation_path,
+      :registration_page_path,
+      :request_inspection,
+      :response_inspection,
+      :enable_regex_in_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details for your use of the account takeover prevention managed rule
     # group, `AWSManagedRulesATPRuleSet`. This configuration is used in
     # `ManagedRuleGroupConfig`.
@@ -73,25 +139,30 @@ module Aws::WAFV2
     #   The criteria for inspecting responses to login requests, used by the
     #   ATP rule group to track login failure rates.
     #
-    #   The ATP rule group evaluates the responses that your protected
-    #   resources send back to client login attempts, keeping count of
-    #   successful and failed attempts from each IP address and client
-    #   session. Using this information, the rule group labels and mitigates
-    #   requests from client sessions and IP addresses that submit too many
-    #   failed login attempts in a short amount of time.
-    #
     #   <note markdown="1"> Response inspection is available only in web ACLs that protect
     #   Amazon CloudFront distributions.
     #
     #    </note>
+    #
+    #   The ATP rule group evaluates the responses that your protected
+    #   resources send back to client login attempts, keeping count of
+    #   successful and failed attempts for each IP address and client
+    #   session. Using this information, the rule group labels and mitigates
+    #   requests from client sessions and IP addresses that have had too
+    #   many failed login attempts in a short amount of time.
     #   @return [Types::ResponseInspection]
+    #
+    # @!attribute [rw] enable_regex_in_path
+    #   Allow the use of regular expressions in the login page path.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/AWSManagedRulesATPRuleSet AWS API Documentation
     #
     class AWSManagedRulesATPRuleSet < Struct.new(
       :login_path,
       :request_inspection,
-      :response_inspection)
+      :response_inspection,
+      :enable_regex_in_path)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -141,12 +212,55 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # The name of a field in the request payload that contains part or all
+    # of your customer's primary physical address.
+    #
+    # This data type is used in the `RequestInspectionACFP` data type.
+    #
+    # @!attribute [rw] identifier
+    #   The name of a single primary address field.
+    #
+    #   How you specify the address fields depends on the request inspection
+    #   payload type.
+    #
+    #   * For JSON payloads, specify the field identifiers in JSON pointer
+    #     syntax. For information about the JSON Pointer syntax, see the
+    #     Internet Engineering Task Force (IETF) documentation [JavaScript
+    #     Object Notation (JSON) Pointer][1].
+    #
+    #     For example, for the JSON payload `\{ "form": \{
+    #     "primaryaddressline1": "THE_ADDRESS1", "primaryaddressline2":
+    #     "THE_ADDRESS2", "primaryaddressline3": "THE_ADDRESS3" \} \}`, the
+    #     address field idenfiers are `/form/primaryaddressline1`,
+    #     `/form/primaryaddressline2`, and `/form/primaryaddressline3`.
+    #
+    #   * For form encoded payload types, use the HTML form names.
+    #
+    #     For example, for an HTML form with input elements named
+    #     `primaryaddressline1`, `primaryaddressline2`, and
+    #     `primaryaddressline3`, the address fields identifiers are
+    #     `primaryaddressline1`, `primaryaddressline2`, and
+    #     `primaryaddressline3`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6901
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/AddressField AWS API Documentation
+    #
+    class AddressField < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Inspect all of the elements that WAF has parsed and extracted from the
     # web request component that you've identified in your FieldToMatch
     # specifications.
     #
-    # This is used only in the FieldToMatch specification for some web
-    # request component types.
+    # This is used in the FieldToMatch specification for some web request
+    # component types.
     #
     # JSON specification: `"All": \{\}`
     #
@@ -158,8 +272,8 @@ module Aws::WAFV2
 
     # Inspect all query arguments of the web request.
     #
-    # This is used only in the FieldToMatch specification for some web
-    # request component types.
+    # This is used in the FieldToMatch specification for some web request
+    # component types.
     #
     # JSON specification: `"AllQueryArguments": \{\}`
     #
@@ -348,8 +462,8 @@ module Aws::WAFV2
     #
     #   The options for oversize handling are the following:
     #
-    #   * `CONTINUE` - Inspect the body normally, according to the rule
-    #     inspection criteria.
+    #   * `CONTINUE` - Inspect the available body contents normally,
+    #     according to the rule inspection criteria.
     #
     #   * `MATCH` - Treat the web request as matching the rule statement.
     #     WAF applies the rule action to the request.
@@ -393,6 +507,11 @@ module Aws::WAFV2
     #   * `UriPath`: The value that you want WAF to search for in the URI
     #     path, for example, `/images/daily-ad.jpg`.
     #
+    #   * `HeaderOrder`: The comma-separated list of header names to match
+    #     for. WAF creates a string that contains the ordered list of header
+    #     names, from the headers in the web request, and then matches
+    #     against that string.
+    #
     #   If `SearchString` includes alphabetic characters A-Z and a-z, note
     #   that the value is case sensitive.
     #
@@ -419,11 +538,14 @@ module Aws::WAFV2
     #
     # @!attribute [rw] text_transformations
     #   Text transformations eliminate some of the unusual formatting that
-    #   attackers use in web requests in an effort to bypass detection. If
-    #   you specify one or more transformations in a rule statement, WAF
-    #   performs all transformations on the content of the request component
-    #   identified by `FieldToMatch`, starting from the lowest priority
-    #   setting, before inspecting the content for a match.
+    #   attackers use in web requests in an effort to bypass detection. Text
+    #   transformations are used in rule match statements, to transform the
+    #   `FieldToMatch` request component before inspecting it, and they're
+    #   used in rate-based rule statements, to transform request components
+    #   before using them as custom aggregation keys. If you specify one or
+    #   more transformations to apply, WAF performs all transformations on
+    #   the specified content, starting from the lowest priority setting,
+    #   and then uses the component contents.
     #   @return [Array<Types::TextTransformation>]
     #
     # @!attribute [rw] positional_constraint
@@ -809,16 +931,16 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] oversize_handling
-    #   What WAF should do if the cookies of the request are larger than WAF
-    #   can inspect. WAF does not support inspecting the entire contents of
-    #   request cookies when they exceed 8 KB (8192 bytes) or 200 total
-    #   cookies. The underlying host service forwards a maximum of 200
-    #   cookies and at most 8 KB of cookie contents to WAF.
+    #   What WAF should do if the cookies of the request are more numerous
+    #   or larger than WAF can inspect. WAF does not support inspecting the
+    #   entire contents of request cookies when they exceed 8 KB (8192
+    #   bytes) or 200 total cookies. The underlying host service forwards a
+    #   maximum of 200 cookies and at most 8 KB of cookie contents to WAF.
     #
     #   The options for oversize handling are the following:
     #
-    #   * `CONTINUE` - Inspect the cookies normally, according to the rule
-    #     inspection criteria.
+    #   * `CONTINUE` - Inspect the available cookies normally, according to
+    #     the rule inspection criteria.
     #
     #   * `MATCH` - Treat the web request as matching the rule statement.
     #     WAF applies the rule action to the request.
@@ -1810,9 +1932,89 @@ module Aws::WAFV2
     #
     class DeleteWebACLResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] scope
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, an Amazon Cognito user pool, an App Runner
+    #   service, or an Amazon Web Services Verified Access instance.
+    #
+    #   To work with CloudFront, you must also specify the Region US East
+    #   (N. Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DescribeAllManagedProductsRequest AWS API Documentation
+    #
+    class DescribeAllManagedProductsRequest < Struct.new(
+      :scope)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] managed_products
+    #   High-level information for the Amazon Web Services Managed Rules
+    #   rule groups and Amazon Web Services Marketplace managed rule groups.
+    #   @return [Array<Types::ManagedProductDescriptor>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DescribeAllManagedProductsResponse AWS API Documentation
+    #
+    class DescribeAllManagedProductsResponse < Struct.new(
+      :managed_products)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] vendor_name
     #   The name of the managed rule group vendor. You use this, along with
-    #   the rule group name, to identify the rule group.
+    #   the rule group name, to identify a rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, an Amazon Cognito user pool, an App Runner
+    #   service, or an Amazon Web Services Verified Access instance.
+    #
+    #   To work with CloudFront, you must also specify the Region US East
+    #   (N. Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DescribeManagedProductsByVendorRequest AWS API Documentation
+    #
+    class DescribeManagedProductsByVendorRequest < Struct.new(
+      :vendor_name,
+      :scope)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] managed_products
+    #   High-level information for the managed rule groups owned by the
+    #   specified vendor.
+    #   @return [Array<Types::ManagedProductDescriptor>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DescribeManagedProductsByVendorResponse AWS API Documentation
+    #
+    class DescribeManagedProductsByVendorResponse < Struct.new(
+      :managed_products)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vendor_name
+    #   The name of the managed rule group vendor. You use this, along with
+    #   the rule group name, to identify a rule group.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1859,11 +2061,12 @@ module Aws::WAFV2
     #
     # @!attribute [rw] sns_topic_arn
     #   The Amazon resource name (ARN) of the Amazon Simple Notification
-    #   Service SNS topic that's used to record changes to the managed rule
-    #   group. You can subscribe to the SNS topic to receive notifications
-    #   when the managed rule group is modified, such as for new versions
-    #   and for version expiration. For more information, see the [Amazon
-    #   Simple Notification Service Developer Guide][1].
+    #   Service SNS topic that's used to provide notification of changes to
+    #   the managed rule group. You can subscribe to the SNS topic to
+    #   receive notifications when the managed rule group is modified, such
+    #   as for new versions and for version expiration. For more
+    #   information, see the [Amazon Simple Notification Service Developer
+    #   Guide][1].
     #
     #
     #
@@ -1976,6 +2179,43 @@ module Aws::WAFV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DisassociateWebACLResponse AWS API Documentation
     #
     class DisassociateWebACLResponse < Aws::EmptyStructure; end
+
+    # The name of the field in the request payload that contains your
+    # customer's email.
+    #
+    # This data type is used in the `RequestInspectionACFP` data type.
+    #
+    # @!attribute [rw] identifier
+    #   The name of the email field.
+    #
+    #   How you specify this depends on the request inspection payload type.
+    #
+    #   * For JSON payloads, specify the field name in JSON pointer syntax.
+    #     For information about the JSON Pointer syntax, see the Internet
+    #     Engineering Task Force (IETF) documentation [JavaScript Object
+    #     Notation (JSON) Pointer][1].
+    #
+    #     For example, for the JSON payload `\{ "form": \{ "email":
+    #     "THE_EMAIL" \} \}`, the email field specification is
+    #     `/form/email`.
+    #
+    #   * For form encoded payload types, use the HTML form names.
+    #
+    #     For example, for an HTML form with the input element named
+    #     `email1`, the email field specification is `email1`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6901
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/EmailField AWS API Documentation
+    #
+    class EmailField < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Specifies a single rule in a rule group whose action you want to
     # override to `Count`.
@@ -2110,6 +2350,15 @@ module Aws::WAFV2
     #   underlying host service.
     #   @return [Types::Cookies]
     #
+    # @!attribute [rw] header_order
+    #   Inspect a string containing the list of the request's header names,
+    #   ordered as they appear in the web request that WAF receives for
+    #   inspection. WAF generates the string and then uses that as the field
+    #   to match component in its inspection. WAF separates the header names
+    #   in the string using colons and no added spaces, for example
+    #   `host:user-agent:accept:authorization:referer`.
+    #   @return [Types::HeaderOrder]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/FieldToMatch AWS API Documentation
     #
     class FieldToMatch < Struct.new(
@@ -2122,7 +2371,8 @@ module Aws::WAFV2
       :method,
       :json_body,
       :headers,
-      :cookies)
+      :cookies,
+      :header_order)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3037,10 +3287,12 @@ module Aws::WAFV2
     #   The URL to use in SDK integrations with Amazon Web Services managed
     #   rule groups. For example, you can use the integration SDKs with the
     #   account takeover prevention managed rule group
-    #   `AWSManagedRulesATPRuleSet`. This is only populated if you are using
-    #   a rule group in your web ACL that integrates with your applications
-    #   in this way. For more information, see [WAF client application
-    #   integration][1] in the *WAF Developer Guide*.
+    #   `AWSManagedRulesATPRuleSet` and the account creation fraud
+    #   prevention managed rule group `AWSManagedRulesACFPRuleSet`. This is
+    #   only populated if you are using a rule group in your web ACL that
+    #   integrates with your applications in this way. For more information,
+    #   see [WAF client application integration][1] in the *WAF Developer
+    #   Guide*.
     #
     #
     #
@@ -3170,6 +3422,40 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # Inspect a string containing the list of the request's header names,
+    # ordered as they appear in the web request that WAF receives for
+    # inspection. WAF generates the string and then uses that as the field
+    # to match component in its inspection. WAF separates the header names
+    # in the string using colons and no added spaces, for example
+    # `host:user-agent:accept:authorization:referer`.
+    #
+    # @!attribute [rw] oversize_handling
+    #   What WAF should do if the headers of the request are more numerous
+    #   or larger than WAF can inspect. WAF does not support inspecting the
+    #   entire contents of request headers when they exceed 8 KB (8192
+    #   bytes) or 200 total headers. The underlying host service forwards a
+    #   maximum of 200 headers and at most 8 KB of header contents to WAF.
+    #
+    #   The options for oversize handling are the following:
+    #
+    #   * `CONTINUE` - Inspect the available headers normally, according to
+    #     the rule inspection criteria.
+    #
+    #   * `MATCH` - Treat the web request as matching the rule statement.
+    #     WAF applies the rule action to the request.
+    #
+    #   * `NO_MATCH` - Treat the web request as not matching the rule
+    #     statement.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/HeaderOrder AWS API Documentation
+    #
+    class HeaderOrder < Struct.new(
+      :oversize_handling)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Inspect all headers in the web request. You can specify the parts of
     # the headers to inspect and you can narrow the set of headers to
     # inspect by including or excluding specific keys.
@@ -3200,16 +3486,16 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] oversize_handling
-    #   What WAF should do if the headers of the request are larger than WAF
-    #   can inspect. WAF does not support inspecting the entire contents of
-    #   request headers when they exceed 8 KB (8192 bytes) or 200 total
-    #   headers. The underlying host service forwards a maximum of 200
-    #   headers and at most 8 KB of header contents to WAF.
+    #   What WAF should do if the headers of the request are more numerous
+    #   or larger than WAF can inspect. WAF does not support inspecting the
+    #   entire contents of request headers when they exceed 8 KB (8192
+    #   bytes) or 200 total headers. The underlying host service forwards a
+    #   maximum of 200 headers and at most 8 KB of header contents to WAF.
     #
     #   The options for oversize handling are the following:
     #
-    #   * `CONTINUE` - Inspect the headers normally, according to the rule
-    #     inspection criteria.
+    #   * `CONTINUE` - Inspect the available headers normally, according to
+    #     the rule inspection criteria.
     #
     #   * `MATCH` - Treat the web request as matching the rule statement.
     #     WAF applies the rule action to the request.
@@ -3570,8 +3856,8 @@ module Aws::WAFV2
     #
     #   The options for oversize handling are the following:
     #
-    #   * `CONTINUE` - Inspect the body normally, according to the rule
-    #     inspection criteria.
+    #   * `CONTINUE` - Inspect the available body contents normally,
+    #     according to the rule inspection criteria.
     #
     #   * `MATCH` - Treat the web request as matching the rule statement.
     #     WAF applies the rule action to the request.
@@ -3810,7 +4096,7 @@ module Aws::WAFV2
 
     # @!attribute [rw] vendor_name
     #   The name of the managed rule group vendor. You use this, along with
-    #   the rule group name, to identify the rule group.
+    #   the rule group name, to identify a rule group.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -4532,12 +4818,18 @@ module Aws::WAFV2
     #   @return [Array<String>]
     #
     # @!attribute [rw] redacted_fields
-    #   The parts of the request that you want to keep out of the logs. For
-    #   example, if you redact the `SingleHeader` field, the `HEADER` field
-    #   in the logs will be `REDACTED`.
+    #   The parts of the request that you want to keep out of the logs.
+    #
+    #   For example, if you redact the `SingleHeader` field, the `HEADER`
+    #   field in the logs will be `REDACTED` for all rules that use the
+    #   `SingleHeader` `FieldToMatch` setting.
+    #
+    #   Redaction applies only to the component that's specified in the
+    #   rule's `FieldToMatch` setting, so the `SingleHeader` redaction
+    #   doesn't apply to rules that use the `Headers` `FieldToMatch`.
     #
     #   <note markdown="1"> You can specify only the following fields for redaction: `UriPath`,
-    #   `QueryString`, `SingleHeader`, `Method`, and `JsonBody`.
+    #   `QueryString`, `SingleHeader`, and `Method`.
     #
     #    </note>
     #   @return [Array<Types::FieldToMatch>]
@@ -4591,17 +4883,101 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # The properties of a managed product, such as an Amazon Web Services
+    # Managed Rules rule group or an Amazon Web Services Marketplace managed
+    # rule group.
+    #
+    # @!attribute [rw] vendor_name
+    #   The name of the managed rule group vendor. You use this, along with
+    #   the rule group name, to identify a rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] managed_rule_set_name
+    #   The name of the managed rule group. For example,
+    #   `AWSManagedRulesAnonymousIpList` or `AWSManagedRulesATPRuleSet`.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_id
+    #   A unique identifier for the rule group. This ID is returned in the
+    #   responses to create and list commands. You provide it to operations
+    #   like update and delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_link
+    #   For Amazon Web Services Marketplace managed rule groups only, the
+    #   link to the rule group product page.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_title
+    #   The display name for the managed rule group. For example, `Anonymous
+    #   IP list` or `Account takeover prevention`.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_description
+    #   A short description of the managed rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] sns_topic_arn
+    #   The Amazon resource name (ARN) of the Amazon Simple Notification
+    #   Service SNS topic that's used to provide notification of changes to
+    #   the managed rule group. You can subscribe to the SNS topic to
+    #   receive notifications when the managed rule group is modified, such
+    #   as for new versions and for version expiration. For more
+    #   information, see the [Amazon Simple Notification Service Developer
+    #   Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/welcome.html
+    #   @return [String]
+    #
+    # @!attribute [rw] is_versioning_supported
+    #   Indicates whether the rule group is versioned.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] is_advanced_managed_rule_set
+    #   Indicates whether the rule group provides an advanced set of
+    #   protections, such as the the Amazon Web Services Managed Rules rule
+    #   groups that are used for WAF intelligent threat mitigation.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ManagedProductDescriptor AWS API Documentation
+    #
+    class ManagedProductDescriptor < Struct.new(
+      :vendor_name,
+      :managed_rule_set_name,
+      :product_id,
+      :product_link,
+      :product_title,
+      :product_description,
+      :sns_topic_arn,
+      :is_versioning_supported,
+      :is_advanced_managed_rule_set)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Additional information that's used by a managed rule group. Many
     # managed rule groups don't require this.
     #
-    # Use the `AWSManagedRulesATPRuleSet` configuration object for the
-    # account takeover prevention managed rule group, to provide information
-    # such as the sign-in page of your application and the type of content
-    # to accept or reject from the client.
+    # The rule groups used for intelligent threat mitigation require
+    # additional configuration:
     #
-    # Use the `AWSManagedRulesBotControlRuleSet` configuration object to
-    # configure the protection level that you want the Bot Control rule
-    # group to use.
+    # * Use the `AWSManagedRulesACFPRuleSet` configuration object to
+    #   configure the account creation fraud prevention managed rule group.
+    #   The configuration includes the registration and sign-up pages of
+    #   your application and the locations in the account creation request
+    #   payload of data, such as the user email and phone number fields.
+    #
+    # * Use the `AWSManagedRulesATPRuleSet` configuration object to
+    #   configure the account takeover prevention managed rule group. The
+    #   configuration includes the sign-in page of your application and the
+    #   locations in the login request payload of data such as the username
+    #   and password.
+    #
+    # * Use the `AWSManagedRulesBotControlRuleSet` configuration object to
+    #   configure the protection level that you want the Bot Control rule
+    #   group to use.
     #
     # For example specifications, see the examples section of CreateWebACL.
     #
@@ -4613,22 +4989,25 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] payload_type
-    #   <note markdown="1"> Instead of this setting, provide your configuration under
-    #   `AWSManagedRulesATPRuleSet` `RequestInspection`.
+    #   <note markdown="1"> Instead of this setting, provide your configuration under the
+    #   request inspection configuration for `AWSManagedRulesATPRuleSet` or
+    #   `AWSManagedRulesACFPRuleSet`.
     #
     #    </note>
     #   @return [String]
     #
     # @!attribute [rw] username_field
-    #   <note markdown="1"> Instead of this setting, provide your configuration under
-    #   `AWSManagedRulesATPRuleSet` `RequestInspection`.
+    #   <note markdown="1"> Instead of this setting, provide your configuration under the
+    #   request inspection configuration for `AWSManagedRulesATPRuleSet` or
+    #   `AWSManagedRulesACFPRuleSet`.
     #
     #    </note>
     #   @return [Types::UsernameField]
     #
     # @!attribute [rw] password_field
-    #   <note markdown="1"> Instead of this setting, provide your configuration under
-    #   `AWSManagedRulesATPRuleSet` `RequestInspection`.
+    #   <note markdown="1"> Instead of this setting, provide your configuration under the
+    #   request inspection configuration for `AWSManagedRulesATPRuleSet` or
+    #   `AWSManagedRulesACFPRuleSet`.
     #
     #    </note>
     #   @return [Types::PasswordField]
@@ -4668,6 +5047,25 @@ module Aws::WAFV2
     #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-atp.html
     #   @return [Types::AWSManagedRulesATPRuleSet]
     #
+    # @!attribute [rw] aws_managed_rules_acfp_rule_set
+    #   Additional configuration for using the account creation fraud
+    #   prevention (ACFP) managed rule group, `AWSManagedRulesACFPRuleSet`.
+    #   Use this to provide account creation request information to the rule
+    #   group. For web ACLs that protect CloudFront distributions, use this
+    #   to also provide the information about how your distribution responds
+    #   to account creation requests.
+    #
+    #   For information about using the ACFP managed rule group, see [WAF
+    #   Fraud Control account creation fraud prevention (ACFP) rule
+    #   group][1] and [WAF Fraud Control account creation fraud prevention
+    #   (ACFP)][2] in the *WAF Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-acfp.html
+    #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-acfp.html
+    #   @return [Types::AWSManagedRulesACFPRuleSet]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ManagedRuleGroupConfig AWS API Documentation
     #
     class ManagedRuleGroupConfig < Struct.new(
@@ -4676,7 +5074,8 @@ module Aws::WAFV2
       :username_field,
       :password_field,
       :aws_managed_rules_bot_control_rule_set,
-      :aws_managed_rules_atp_rule_set)
+      :aws_managed_rules_atp_rule_set,
+      :aws_managed_rules_acfp_rule_set)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4691,9 +5090,11 @@ module Aws::WAFV2
     # a top-level statement within a rule.
     #
     # <note markdown="1"> You are charged additional fees when you use the WAF Bot Control
-    # managed rule group `AWSManagedRulesBotControlRuleSet` or the WAF Fraud
+    # managed rule group `AWSManagedRulesBotControlRuleSet`, the WAF Fraud
     # Control account takeover prevention (ATP) managed rule group
-    # `AWSManagedRulesATPRuleSet`. For more information, see [WAF
+    # `AWSManagedRulesATPRuleSet`, or the WAF Fraud Control account creation
+    # fraud prevention (ACFP) managed rule group
+    # `AWSManagedRulesACFPRuleSet`. For more information, see [WAF
     # Pricing][1].
     #
     #  </note>
@@ -4704,7 +5105,7 @@ module Aws::WAFV2
     #
     # @!attribute [rw] vendor_name
     #   The name of the managed rule group vendor. You use this, along with
-    #   the rule group name, to identify the rule group.
+    #   the rule group name, to identify a rule group.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -4742,14 +5143,25 @@ module Aws::WAFV2
     #   Additional information that's used by a managed rule group. Many
     #   managed rule groups don't require this.
     #
-    #   Use the `AWSManagedRulesATPRuleSet` configuration object for the
-    #   account takeover prevention managed rule group, to provide
-    #   information such as the sign-in page of your application and the
-    #   type of content to accept or reject from the client.
+    #   The rule groups used for intelligent threat mitigation require
+    #   additional configuration:
     #
-    #   Use the `AWSManagedRulesBotControlRuleSet` configuration object to
-    #   configure the protection level that you want the Bot Control rule
-    #   group to use.
+    #   * Use the `AWSManagedRulesACFPRuleSet` configuration object to
+    #     configure the account creation fraud prevention managed rule
+    #     group. The configuration includes the registration and sign-up
+    #     pages of your application and the locations in the account
+    #     creation request payload of data, such as the user email and phone
+    #     number fields.
+    #
+    #   * Use the `AWSManagedRulesATPRuleSet` configuration object to
+    #     configure the account takeover prevention managed rule group. The
+    #     configuration includes the sign-in page of your application and
+    #     the locations in the login request payload of data such as the
+    #     username and password.
+    #
+    #   * Use the `AWSManagedRulesBotControlRuleSet` configuration object to
+    #     configure the protection level that you want the Bot Control rule
+    #     group to use.
     #   @return [Array<Types::ManagedRuleGroupConfig>]
     #
     # @!attribute [rw] rule_action_overrides
@@ -4782,14 +5194,14 @@ module Aws::WAFV2
     # ListAvailableManagedRuleGroups. This provides information like the
     # name and vendor name, that you provide when you add a
     # ManagedRuleGroupStatement to a web ACL. Managed rule groups include
-    # Amazon Web Services Managed Rules rule groups, which are free of
-    # charge to WAF customers, and Amazon Web Services Marketplace managed
-    # rule groups, which you can subscribe to through Amazon Web Services
-    # Marketplace.
+    # Amazon Web Services Managed Rules rule groups and Amazon Web Services
+    # Marketplace managed rule groups. To use any Amazon Web Services
+    # Marketplace managed rule group, first subscribe to the rule group
+    # through Amazon Web Services Marketplace.
     #
     # @!attribute [rw] vendor_name
     #   The name of the managed rule group vendor. You use this, along with
-    #   the rule group name, to identify the rule group.
+    #   the rule group name, to identify a rule group.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -5077,8 +5489,8 @@ module Aws::WAFV2
     # Inspect the HTTP method of the web request. The method indicates the
     # type of operation that the request is asking the origin to perform.
     #
-    # This is used only in the FieldToMatch specification for some web
-    # request component types.
+    # This is used in the FieldToMatch specification for some web request
+    # component types.
     #
     # JSON specification: `"Method": \{\}`
     #
@@ -5217,17 +5629,81 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # Details about your login page password field for request inspection,
-    # used in the `AWSManagedRulesATPRuleSet` `RequestInspection`
-    # configuration.
+    # The name of the field in the request payload that contains your
+    # customer's password.
+    #
+    # This data type is used in the `RequestInspection` and
+    # `RequestInspectionACFP` data types.
     #
     # @!attribute [rw] identifier
-    #   The name of the password field. For example `/form/password`.
+    #   The name of the password field.
+    #
+    #   How you specify this depends on the request inspection payload type.
+    #
+    #   * For JSON payloads, specify the field name in JSON pointer syntax.
+    #     For information about the JSON Pointer syntax, see the Internet
+    #     Engineering Task Force (IETF) documentation [JavaScript Object
+    #     Notation (JSON) Pointer][1].
+    #
+    #     For example, for the JSON payload `\{ "form": \{ "password":
+    #     "THE_PASSWORD" \} \}`, the password field specification is
+    #     `/form/password`.
+    #
+    #   * For form encoded payload types, use the HTML form names.
+    #
+    #     For example, for an HTML form with the input element named
+    #     `password1`, the password field specification is `password1`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6901
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/PasswordField AWS API Documentation
     #
     class PasswordField < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The name of a field in the request payload that contains part or all
+    # of your customer's primary phone number.
+    #
+    # This data type is used in the `RequestInspectionACFP` data type.
+    #
+    # @!attribute [rw] identifier
+    #   The name of a single primary phone number field.
+    #
+    #   How you specify the phone number fields depends on the request
+    #   inspection payload type.
+    #
+    #   * For JSON payloads, specify the field identifiers in JSON pointer
+    #     syntax. For information about the JSON Pointer syntax, see the
+    #     Internet Engineering Task Force (IETF) documentation [JavaScript
+    #     Object Notation (JSON) Pointer][1].
+    #
+    #     For example, for the JSON payload `\{ "form": \{
+    #     "primaryphoneline1": "THE_PHONE1", "primaryphoneline2":
+    #     "THE_PHONE2", "primaryphoneline3": "THE_PHONE3" \} \}`, the phone
+    #     number field identifiers are `/form/primaryphoneline1`,
+    #     `/form/primaryphoneline2`, and `/form/primaryphoneline3`.
+    #
+    #   * For form encoded payload types, use the HTML form names.
+    #
+    #     For example, for an HTML form with input elements named
+    #     `primaryphoneline1`, `primaryphoneline2`, and `primaryphoneline3`,
+    #     the phone number field identifiers are `primaryphoneline1`,
+    #     `primaryphoneline2`, and `primaryphoneline3`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6901
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/PhoneNumberField AWS API Documentation
+    #
+    class PhoneNumberField < Struct.new(
       :identifier)
       SENSITIVE = []
       include Aws::Structure
@@ -5387,8 +5863,8 @@ module Aws::WAFV2
     # Inspect the query string of the web request. This is the part of a URL
     # that appears after a `?` character, if any.
     #
-    # This is used only in the FieldToMatch specification for some web
-    # request component types.
+    # This is used in the FieldToMatch specification for some web request
+    # component types.
     #
     # JSON specification: `"QueryString": \{\}`
     #
@@ -5398,11 +5874,86 @@ module Aws::WAFV2
     #
     class QueryString < Aws::EmptyStructure; end
 
-    # A rate-based rule tracks the rate of requests for each originating IP
-    # address, and triggers the rule action when the rate exceeds a limit
-    # that you specify on the number of requests in any 5-minute time span.
-    # You can use this to put a temporary block on requests from an IP
-    # address that is sending excessive requests.
+    # A rate-based rule counts incoming requests and rate limits requests
+    # when they are coming at too fast a rate. The rule categorizes requests
+    # according to your aggregation criteria, collects them into aggregation
+    # instances, and counts and rate limits the requests for each instance.
+    #
+    # You can specify individual aggregation keys, like IP address or HTTP
+    # method. You can also specify aggregation key combinations, like IP
+    # address and HTTP method, or HTTP method, query argument, and cookie.
+    #
+    # Each unique set of values for the aggregation keys that you specify is
+    # a separate aggregation instance, with the value from each key
+    # contributing to the aggregation instance definition.
+    #
+    # For example, assume the rule evaluates web requests with the following
+    # IP address and HTTP method values:
+    #
+    # * IP address 10.1.1.1, HTTP method POST
+    #
+    # * IP address 10.1.1.1, HTTP method GET
+    #
+    # * IP address 127.0.0.0, HTTP method POST
+    #
+    # * IP address 10.1.1.1, HTTP method GET
+    #
+    # The rule would create different aggregation instances according to
+    # your aggregation criteria, for example:
+    #
+    # * If the aggregation criteria is just the IP address, then each
+    #   individual address is an aggregation instance, and WAF counts
+    #   requests separately for each. The aggregation instances and request
+    #   counts for our example would be the following:
+    #
+    #   * IP address 10.1.1.1: count 3
+    #
+    #   * IP address 127.0.0.0: count 1
+    #
+    # * If the aggregation criteria is HTTP method, then each individual
+    #   HTTP method is an aggregation instance. The aggregation instances
+    #   and request counts for our example would be the following:
+    #
+    #   * HTTP method POST: count 2
+    #
+    #   * HTTP method GET: count 2
+    #
+    # * If the aggregation criteria is IP address and HTTP method, then each
+    #   IP address and each HTTP method would contribute to the combined
+    #   aggregation instance. The aggregation instances and request counts
+    #   for our example would be the following:
+    #
+    #   * IP address 10.1.1.1, HTTP method POST: count 1
+    #
+    #   * IP address 10.1.1.1, HTTP method GET: count 2
+    #
+    #   * IP address 127.0.0.0, HTTP method POST: count 1
+    #
+    # For any n-tuple of aggregation keys, each unique combination of values
+    # for the keys defines a separate aggregation instance, which WAF counts
+    # and rate-limits individually.
+    #
+    # You can optionally nest another statement inside the rate-based
+    # statement, to narrow the scope of the rule so that it only counts and
+    # rate limits requests that match the nested statement. You can use this
+    # nested scope-down statement in conjunction with your aggregation key
+    # specifications or you can just count and rate limit all requests that
+    # match the scope-down statement, without additional aggregation. When
+    # you choose to just manage all requests that match a scope-down
+    # statement, the aggregation instance is singular for the rule.
+    #
+    # You cannot nest a `RateBasedStatement` inside another statement, for
+    # example inside a `NotStatement` or `OrStatement`. You can define a
+    # `RateBasedStatement` inside a web ACL and inside a rule group.
+    #
+    # For additional information about the options, see [Rate limiting web
+    # requests using rate-based rules][1] in the *WAF Developer Guide*.
+    #
+    # If you only aggregate on the individual IP address or forwarded IP
+    # address, you can retrieve the list of IP addresses that WAF is
+    # currently rate limiting for a rule through the API call
+    # `GetRateBasedStatementManagedKeys`. This option is not available for
+    # other aggregation configurations.
     #
     # WAF tracks and manages web requests separately for each instance of a
     # rate-based rule that you use. For example, if you provide the same
@@ -5413,58 +5964,80 @@ module Aws::WAFV2
     # multiple places, each use creates a separate instance of the
     # rate-based rule that gets its own tracking and management by WAF.
     #
-    # When the rule action triggers, WAF blocks additional requests from the
-    # IP address until the request rate falls below the limit.
     #
-    # You can optionally nest another statement inside the rate-based
-    # statement, to narrow the scope of the rule so that it only counts
-    # requests that match the nested statement. For example, based on recent
-    # requests that you have seen from an attacker, you might create a
-    # rate-based rule with a nested AND rule statement that contains the
-    # following nested statements:
     #
-    # * An IP match statement with an IP set that specifies the address
-    #   192.0.2.44.
-    #
-    # * A string match statement that searches in the User-Agent header for
-    #   the string BadBot.
-    #
-    # In this rate-based rule, you also define a rate limit. For this
-    # example, the rate limit is 1,000. Requests that meet the criteria of
-    # both of the nested statements are counted. If the count exceeds 1,000
-    # requests per five minutes, the rule action triggers. Requests that do
-    # not meet the criteria of both of the nested statements are not counted
-    # towards the rate limit and are not affected by this rule.
-    #
-    # You cannot nest a `RateBasedStatement` inside another statement, for
-    # example inside a `NotStatement` or `OrStatement`. You can define a
-    # `RateBasedStatement` inside a web ACL and inside a rule group.
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-rate-based-rules.html
     #
     # @!attribute [rw] limit
-    #   The limit on requests per 5-minute period for a single originating
-    #   IP address. If the statement includes a `ScopeDownStatement`, this
-    #   limit is applied only to the requests that match the statement.
+    #   The limit on requests per 5-minute period for a single aggregation
+    #   instance for the rate-based rule. If the rate-based statement
+    #   includes a `ScopeDownStatement`, this limit is applied only to the
+    #   requests that match the statement.
+    #
+    #   Examples:
+    #
+    #   * If you aggregate on just the IP address, this is the limit on
+    #     requests from any single IP address.
+    #
+    #   * If you aggregate on the HTTP method and the query argument name
+    #     "city", then this is the limit on requests for any single
+    #     method, city pair.
     #   @return [Integer]
     #
     # @!attribute [rw] aggregate_key_type
-    #   Setting that indicates how to aggregate the request counts. The
-    #   options are the following:
+    #   Setting that indicates how to aggregate the request counts.
     #
-    #   * IP - Aggregate the request counts on the IP address from the web
+    #   <note markdown="1"> Web requests that are missing any of the components specified in the
+    #   aggregation keys are omitted from the rate-based rule evaluation and
+    #   handling.
+    #
+    #    </note>
+    #
+    #   * `CONSTANT` - Count and limit the requests that match the
+    #     rate-based rule's scope-down statement. With this option, the
+    #     counted requests aren't further aggregated. The scope-down
+    #     statement is the only specification used. When the count of all
+    #     requests that satisfy the scope-down statement goes over the
+    #     limit, WAF applies the rule action to all requests that satisfy
+    #     the scope-down statement.
+    #
+    #     With this option, you must configure the `ScopeDownStatement`
+    #     property.
+    #
+    #   * `CUSTOM_KEYS` - Aggregate the request counts using one or more web
+    #     request components as the aggregate keys.
+    #
+    #     With this option, you must specify the aggregate keys in the
+    #     `CustomKeys` property.
+    #
+    #     To aggregate on only the IP address or only the forwarded IP
+    #     address, don't use custom keys. Instead, set the aggregate key
+    #     type to `IP` or `FORWARDED_IP`.
+    #
+    #   * `FORWARDED_IP` - Aggregate the request counts on the first IP
+    #     address in an HTTP header.
+    #
+    #     With this option, you must specify the header to use in the
+    #     `ForwardedIPConfig` property.
+    #
+    #     To aggregate on a combination of the forwarded IP address with
+    #     other aggregate keys, use `CUSTOM_KEYS`.
+    #
+    #   * `IP` - Aggregate the request counts on the IP address from the web
     #     request origin.
     #
-    #   * FORWARDED\_IP - Aggregate the request counts on the first IP
-    #     address in an HTTP header. If you use this, configure the
-    #     `ForwardedIPConfig`, to specify the header to use.
+    #     To aggregate on a combination of the IP address with other
+    #     aggregate keys, use `CUSTOM_KEYS`.
     #   @return [String]
     #
     # @!attribute [rw] scope_down_statement
     #   An optional nested statement that narrows the scope of the web
-    #   requests that are evaluated by the rate-based statement. Requests
-    #   are only tracked by the rate-based statement if they match the
-    #   scope-down statement. You can use any nestable Statement in the
-    #   scope-down statement, and you can nest statements at any level, the
-    #   same as you can for a rule statement.
+    #   requests that are evaluated and managed by the rate-based statement.
+    #   When you use a scope-down statement, the rate-based rule only tracks
+    #   and rate limits requests that match the scope-down statement. You
+    #   can use any nestable Statement in the scope-down statement, and you
+    #   can nest statements at any level, the same as you can for a rule
+    #   statement.
     #   @return [Types::Statement]
     #
     # @!attribute [rw] forwarded_ip_config
@@ -5478,8 +6051,13 @@ module Aws::WAFV2
     #
     #    </note>
     #
-    #   This is required if `AggregateKeyType` is set to `FORWARDED_IP`.
+    #   This is required if you specify a forwarded IP in the rule's
+    #   aggregate key settings.
     #   @return [Types::ForwardedIPConfig]
+    #
+    # @!attribute [rw] custom_keys
+    #   Specifies the aggregate keys to use in a rate-base rule.
+    #   @return [Array<Types::RateBasedStatementCustomKey>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateBasedStatement AWS API Documentation
     #
@@ -5487,13 +6065,129 @@ module Aws::WAFV2
       :limit,
       :aggregate_key_type,
       :scope_down_statement,
-      :forwarded_ip_config)
+      :forwarded_ip_config,
+      :custom_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a single custom aggregate key for a rate-base rule.
+    #
+    # <note markdown="1"> Web requests that are missing any of the components specified in the
+    # aggregation keys are omitted from the rate-based rule evaluation and
+    # handling.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] header
+    #   Use the value of a header in the request as an aggregate key. Each
+    #   distinct value in the header contributes to the aggregation
+    #   instance. If you use a single header as your custom key, then each
+    #   value fully defines an aggregation instance.
+    #   @return [Types::RateLimitHeader]
+    #
+    # @!attribute [rw] cookie
+    #   Use the value of a cookie in the request as an aggregate key. Each
+    #   distinct value in the cookie contributes to the aggregation
+    #   instance. If you use a single cookie as your custom key, then each
+    #   value fully defines an aggregation instance.
+    #   @return [Types::RateLimitCookie]
+    #
+    # @!attribute [rw] query_argument
+    #   Use the specified query argument as an aggregate key. Each distinct
+    #   value for the named query argument contributes to the aggregation
+    #   instance. If you use a single query argument as your custom key,
+    #   then each value fully defines an aggregation instance.
+    #   @return [Types::RateLimitQueryArgument]
+    #
+    # @!attribute [rw] query_string
+    #   Use the request's query string as an aggregate key. Each distinct
+    #   string contributes to the aggregation instance. If you use just the
+    #   query string as your custom key, then each string fully defines an
+    #   aggregation instance.
+    #   @return [Types::RateLimitQueryString]
+    #
+    # @!attribute [rw] http_method
+    #   Use the request's HTTP method as an aggregate key. Each distinct
+    #   HTTP method contributes to the aggregation instance. If you use just
+    #   the HTTP method as your custom key, then each method fully defines
+    #   an aggregation instance.
+    #   @return [Types::RateLimitHTTPMethod]
+    #
+    # @!attribute [rw] forwarded_ip
+    #   Use the first IP address in an HTTP header as an aggregate key. Each
+    #   distinct forwarded IP address contributes to the aggregation
+    #   instance.
+    #
+    #   When you specify an IP or forwarded IP in the custom key settings,
+    #   you must also specify at least one other key to use. You can
+    #   aggregate on only the forwarded IP address by specifying
+    #   `FORWARDED_IP` in your rate-based statement's `AggregateKeyType`.
+    #
+    #   With this option, you must specify the header to use in the
+    #   rate-based rule's `ForwardedIPConfig` property.
+    #   @return [Types::RateLimitForwardedIP]
+    #
+    # @!attribute [rw] ip
+    #   Use the request's originating IP address as an aggregate key. Each
+    #   distinct IP address contributes to the aggregation instance.
+    #
+    #   When you specify an IP or forwarded IP in the custom key settings,
+    #   you must also specify at least one other key to use. You can
+    #   aggregate on only the IP address by specifying `IP` in your
+    #   rate-based statement's `AggregateKeyType`.
+    #   @return [Types::RateLimitIP]
+    #
+    # @!attribute [rw] label_namespace
+    #   Use the specified label namespace as an aggregate key. Each distinct
+    #   fully qualified label name that has the specified label namespace
+    #   contributes to the aggregation instance. If you use just one label
+    #   namespace as your custom key, then each label name fully defines an
+    #   aggregation instance.
+    #
+    #   This uses only labels that have been added to the request by rules
+    #   that are evaluated before this rate-based rule in the web ACL.
+    #
+    #   For information about label namespaces and names, see [Label syntax
+    #   and naming requirements][1] in the *WAF Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-label-requirements.html
+    #   @return [Types::RateLimitLabelNamespace]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateBasedStatementCustomKey AWS API Documentation
+    #
+    class RateBasedStatementCustomKey < Struct.new(
+      :header,
+      :cookie,
+      :query_argument,
+      :query_string,
+      :http_method,
+      :forwarded_ip,
+      :ip,
+      :label_namespace)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # The set of IP addresses that are currently blocked for a
-    # RateBasedStatement.
+    # RateBasedStatement. This is only available for rate-based rules that
+    # aggregate on just the IP address, with the `AggregateKeyType` set to
+    # `IP` or `FORWARDED_IP`.
+    #
+    # A rate-based rule applies its rule action to requests from IP
+    # addresses that are in the rule's managed keys list and that match the
+    # rule's scope-down statement. When a rule has no scope-down statement,
+    # it applies the action to all requests from the IP addresses that are
+    # in the list. The rule applies its rule action to rate limit the
+    # matching requests. The action is usually Block but it can be any valid
+    # rule action except for Allow.
+    #
+    # The maximum number of IP addresses that can be rate limited by a
+    # single rate-based rule instance is 10,000. If more than 10,000
+    # addresses exceed the rate limit, WAF limits those with the highest
+    # rates.
     #
     # @!attribute [rw] ip_address_version
     #   The version of the IP addresses, either `IPV4` or `IPV6`.
@@ -5508,6 +6202,208 @@ module Aws::WAFV2
     class RateBasedStatementManagedKeysIPSet < Struct.new(
       :ip_address_version,
       :addresses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a cookie as an aggregate key for a rate-based rule. Each
+    # distinct value in the cookie contributes to the aggregation instance.
+    # If you use a single cookie as your custom key, then each value fully
+    # defines an aggregation instance.
+    #
+    # @!attribute [rw] name
+    #   The name of the cookie to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] text_transformations
+    #   Text transformations eliminate some of the unusual formatting that
+    #   attackers use in web requests in an effort to bypass detection. Text
+    #   transformations are used in rule match statements, to transform the
+    #   `FieldToMatch` request component before inspecting it, and they're
+    #   used in rate-based rule statements, to transform request components
+    #   before using them as custom aggregation keys. If you specify one or
+    #   more transformations to apply, WAF performs all transformations on
+    #   the specified content, starting from the lowest priority setting,
+    #   and then uses the component contents.
+    #   @return [Array<Types::TextTransformation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateLimitCookie AWS API Documentation
+    #
+    class RateLimitCookie < Struct.new(
+      :name,
+      :text_transformations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the first IP address in an HTTP header as an aggregate key
+    # for a rate-based rule. Each distinct forwarded IP address contributes
+    # to the aggregation instance.
+    #
+    # This setting is used only in the `RateBasedStatementCustomKey`
+    # specification of a rate-based rule statement. When you specify an IP
+    # or forwarded IP in the custom key settings, you must also specify at
+    # least one other key to use. You can aggregate on only the forwarded IP
+    # address by specifying `FORWARDED_IP` in your rate-based statement's
+    # `AggregateKeyType`.
+    #
+    # This data type supports using the forwarded IP address in the web
+    # request aggregation for a rate-based rule, in
+    # `RateBasedStatementCustomKey`. The JSON specification for using the
+    # forwarded IP address doesn't explicitly use this data type.
+    #
+    # JSON specification: `"ForwardedIP": \{\}`
+    #
+    # When you use this specification, you must also configure the forwarded
+    # IP address in the rate-based statement's `ForwardedIPConfig`.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateLimitForwardedIP AWS API Documentation
+    #
+    class RateLimitForwardedIP < Aws::EmptyStructure; end
+
+    # Specifies the request's HTTP method as an aggregate key for a
+    # rate-based rule. Each distinct HTTP method contributes to the
+    # aggregation instance. If you use just the HTTP method as your custom
+    # key, then each method fully defines an aggregation instance.
+    #
+    # JSON specification: `"RateLimitHTTPMethod": \{\}`
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateLimitHTTPMethod AWS API Documentation
+    #
+    class RateLimitHTTPMethod < Aws::EmptyStructure; end
+
+    # Specifies a header as an aggregate key for a rate-based rule. Each
+    # distinct value in the header contributes to the aggregation instance.
+    # If you use a single header as your custom key, then each value fully
+    # defines an aggregation instance.
+    #
+    # @!attribute [rw] name
+    #   The name of the header to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] text_transformations
+    #   Text transformations eliminate some of the unusual formatting that
+    #   attackers use in web requests in an effort to bypass detection. Text
+    #   transformations are used in rule match statements, to transform the
+    #   `FieldToMatch` request component before inspecting it, and they're
+    #   used in rate-based rule statements, to transform request components
+    #   before using them as custom aggregation keys. If you specify one or
+    #   more transformations to apply, WAF performs all transformations on
+    #   the specified content, starting from the lowest priority setting,
+    #   and then uses the component contents.
+    #   @return [Array<Types::TextTransformation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateLimitHeader AWS API Documentation
+    #
+    class RateLimitHeader < Struct.new(
+      :name,
+      :text_transformations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the IP address in the web request as an aggregate key for a
+    # rate-based rule. Each distinct IP address contributes to the
+    # aggregation instance.
+    #
+    # This setting is used only in the `RateBasedStatementCustomKey`
+    # specification of a rate-based rule statement. To use this in the
+    # custom key settings, you must specify at least one other key to use,
+    # along with the IP address. To aggregate on only the IP address, in
+    # your rate-based statement's `AggregateKeyType`, specify `IP`.
+    #
+    # JSON specification: `"RateLimitIP": \{\}`
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateLimitIP AWS API Documentation
+    #
+    class RateLimitIP < Aws::EmptyStructure; end
+
+    # Specifies a label namespace to use as an aggregate key for a
+    # rate-based rule. Each distinct fully qualified label name that has the
+    # specified label namespace contributes to the aggregation instance. If
+    # you use just one label namespace as your custom key, then each label
+    # name fully defines an aggregation instance.
+    #
+    # This uses only labels that have been added to the request by rules
+    # that are evaluated before this rate-based rule in the web ACL.
+    #
+    # For information about label namespaces and names, see [Label syntax
+    # and naming requirements][1] in the *WAF Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-label-requirements.html
+    #
+    # @!attribute [rw] namespace
+    #   The namespace to use for aggregation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateLimitLabelNamespace AWS API Documentation
+    #
+    class RateLimitLabelNamespace < Struct.new(
+      :namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a query argument in the request as an aggregate key for a
+    # rate-based rule. Each distinct value for the named query argument
+    # contributes to the aggregation instance. If you use a single query
+    # argument as your custom key, then each value fully defines an
+    # aggregation instance.
+    #
+    # @!attribute [rw] name
+    #   The name of the query argument to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] text_transformations
+    #   Text transformations eliminate some of the unusual formatting that
+    #   attackers use in web requests in an effort to bypass detection. Text
+    #   transformations are used in rule match statements, to transform the
+    #   `FieldToMatch` request component before inspecting it, and they're
+    #   used in rate-based rule statements, to transform request components
+    #   before using them as custom aggregation keys. If you specify one or
+    #   more transformations to apply, WAF performs all transformations on
+    #   the specified content, starting from the lowest priority setting,
+    #   and then uses the component contents.
+    #   @return [Array<Types::TextTransformation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateLimitQueryArgument AWS API Documentation
+    #
+    class RateLimitQueryArgument < Struct.new(
+      :name,
+      :text_transformations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the request's query string as an aggregate key for a
+    # rate-based rule. Each distinct string contributes to the aggregation
+    # instance. If you use just the query string as your custom key, then
+    # each string fully defines an aggregation instance.
+    #
+    # @!attribute [rw] text_transformations
+    #   Text transformations eliminate some of the unusual formatting that
+    #   attackers use in web requests in an effort to bypass detection. Text
+    #   transformations are used in rule match statements, to transform the
+    #   `FieldToMatch` request component before inspecting it, and they're
+    #   used in rate-based rule statements, to transform request components
+    #   before using them as custom aggregation keys. If you specify one or
+    #   more transformations to apply, WAF performs all transformations on
+    #   the specified content, starting from the lowest priority setting,
+    #   and then uses the component contents.
+    #   @return [Array<Types::TextTransformation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateLimitQueryString AWS API Documentation
+    #
+    class RateLimitQueryString < Struct.new(
+      :text_transformations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5539,11 +6435,14 @@ module Aws::WAFV2
     #
     # @!attribute [rw] text_transformations
     #   Text transformations eliminate some of the unusual formatting that
-    #   attackers use in web requests in an effort to bypass detection. If
-    #   you specify one or more transformations in a rule statement, WAF
-    #   performs all transformations on the content of the request component
-    #   identified by `FieldToMatch`, starting from the lowest priority
-    #   setting, before inspecting the content for a match.
+    #   attackers use in web requests in an effort to bypass detection. Text
+    #   transformations are used in rule match statements, to transform the
+    #   `FieldToMatch` request component before inspecting it, and they're
+    #   used in rate-based rule statements, to transform request components
+    #   before using them as custom aggregation keys. If you specify one or
+    #   more transformations to apply, WAF performs all transformations on
+    #   the specified content, starting from the lowest priority setting,
+    #   and then uses the component contents.
     #   @return [Array<Types::TextTransformation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RegexMatchStatement AWS API Documentation
@@ -5620,11 +6519,14 @@ module Aws::WAFV2
     #
     # @!attribute [rw] text_transformations
     #   Text transformations eliminate some of the unusual formatting that
-    #   attackers use in web requests in an effort to bypass detection. If
-    #   you specify one or more transformations in a rule statement, WAF
-    #   performs all transformations on the content of the request component
-    #   identified by `FieldToMatch`, starting from the lowest priority
-    #   setting, before inspecting the content for a match.
+    #   attackers use in web requests in an effort to bypass detection. Text
+    #   transformations are used in rule match statements, to transform the
+    #   `FieldToMatch` request component before inspecting it, and they're
+    #   used in rate-based rule statements, to transform request components
+    #   before using them as custom aggregation keys. If you specify one or
+    #   more transformations to apply, WAF performs all transformations on
+    #   the specified content, starting from the lowest priority setting,
+    #   and then uses the component contents.
     #   @return [Array<Types::TextTransformation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RegexPatternSetReferenceStatement AWS API Documentation
@@ -5755,25 +6657,24 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] username_field
-    #   Details about your login page username field.
+    #   The name of the field in the request payload that contains your
+    #   customer's username.
     #
-    #   How you specify this depends on the payload type.
+    #   How you specify this depends on the request inspection payload type.
     #
     #   * For JSON payloads, specify the field name in JSON pointer syntax.
     #     For information about the JSON Pointer syntax, see the Internet
     #     Engineering Task Force (IETF) documentation [JavaScript Object
     #     Notation (JSON) Pointer][1].
     #
-    #     For example, for the JSON payload `\{ "login": \{ "username":
-    #     "THE_USERNAME", "password": "THE_PASSWORD" \} \}`, the username
-    #     field specification is `/login/username` and the password field
-    #     specification is `/login/password`.
+    #     For example, for the JSON payload `\{ "form": \{ "username":
+    #     "THE_USERNAME" \} \}`, the username field specification is
+    #     `/form/username`.
     #
     #   * For form encoded payload types, use the HTML form names.
     #
-    #     For example, for an HTML form with input elements named
-    #     `username1` and `password1`, the username field specification is
-    #     `username1` and the password field specification is `password1`.
+    #     For example, for an HTML form with the input element named
+    #     `username1`, the username field specification is `username1`
     #
     #
     #
@@ -5781,25 +6682,24 @@ module Aws::WAFV2
     #   @return [Types::UsernameField]
     #
     # @!attribute [rw] password_field
-    #   Details about your login page password field.
+    #   The name of the field in the request payload that contains your
+    #   customer's password.
     #
-    #   How you specify this depends on the payload type.
+    #   How you specify this depends on the request inspection payload type.
     #
     #   * For JSON payloads, specify the field name in JSON pointer syntax.
     #     For information about the JSON Pointer syntax, see the Internet
     #     Engineering Task Force (IETF) documentation [JavaScript Object
     #     Notation (JSON) Pointer][1].
     #
-    #     For example, for the JSON payload `\{ "login": \{ "username":
-    #     "THE_USERNAME", "password": "THE_PASSWORD" \} \}`, the username
-    #     field specification is `/login/username` and the password field
-    #     specification is `/login/password`.
+    #     For example, for the JSON payload `\{ "form": \{ "password":
+    #     "THE_PASSWORD" \} \}`, the password field specification is
+    #     `/form/password`.
     #
     #   * For form encoded payload types, use the HTML form names.
     #
-    #     For example, for an HTML form with input elements named
-    #     `username1` and `password1`, the username field specification is
-    #     `username1` and the password field specification is `password1`.
+    #     For example, for an HTML form with the input element named
+    #     `password1`, the password field specification is `password1`.
     #
     #
     #
@@ -5816,45 +6716,223 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # The criteria for inspecting responses to login requests, used by the
-    # ATP rule group to track login failure rates.
+    # The criteria for inspecting account creation requests, used by the
+    # ACFP rule group to validate and track account creation attempts.
     #
-    # The ATP rule group evaluates the responses that your protected
-    # resources send back to client login attempts, keeping count of
-    # successful and failed attempts from each IP address and client
-    # session. Using this information, the rule group labels and mitigates
-    # requests from client sessions and IP addresses that submit too many
-    # failed login attempts in a short amount of time.
+    # This is part of the `AWSManagedRulesACFPRuleSet` configuration in
+    # `ManagedRuleGroupConfig`.
+    #
+    # In these settings, you specify how your application accepts account
+    # creation attempts by providing the request payload type and the names
+    # of the fields within the request body where the username, password,
+    # email, and primary address and phone number fields are provided.
+    #
+    # @!attribute [rw] payload_type
+    #   The payload type for your account creation endpoint, either JSON or
+    #   form encoded.
+    #   @return [String]
+    #
+    # @!attribute [rw] username_field
+    #   The name of the field in the request payload that contains your
+    #   customer's username.
+    #
+    #   How you specify this depends on the request inspection payload type.
+    #
+    #   * For JSON payloads, specify the field name in JSON pointer syntax.
+    #     For information about the JSON Pointer syntax, see the Internet
+    #     Engineering Task Force (IETF) documentation [JavaScript Object
+    #     Notation (JSON) Pointer][1].
+    #
+    #     For example, for the JSON payload `\{ "form": \{ "username":
+    #     "THE_USERNAME" \} \}`, the username field specification is
+    #     `/form/username`.
+    #
+    #   * For form encoded payload types, use the HTML form names.
+    #
+    #     For example, for an HTML form with the input element named
+    #     `username1`, the username field specification is `username1`
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6901
+    #   @return [Types::UsernameField]
+    #
+    # @!attribute [rw] password_field
+    #   The name of the field in the request payload that contains your
+    #   customer's password.
+    #
+    #   How you specify this depends on the request inspection payload type.
+    #
+    #   * For JSON payloads, specify the field name in JSON pointer syntax.
+    #     For information about the JSON Pointer syntax, see the Internet
+    #     Engineering Task Force (IETF) documentation [JavaScript Object
+    #     Notation (JSON) Pointer][1].
+    #
+    #     For example, for the JSON payload `\{ "form": \{ "password":
+    #     "THE_PASSWORD" \} \}`, the password field specification is
+    #     `/form/password`.
+    #
+    #   * For form encoded payload types, use the HTML form names.
+    #
+    #     For example, for an HTML form with the input element named
+    #     `password1`, the password field specification is `password1`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6901
+    #   @return [Types::PasswordField]
+    #
+    # @!attribute [rw] email_field
+    #   The name of the field in the request payload that contains your
+    #   customer's email.
+    #
+    #   How you specify this depends on the request inspection payload type.
+    #
+    #   * For JSON payloads, specify the field name in JSON pointer syntax.
+    #     For information about the JSON Pointer syntax, see the Internet
+    #     Engineering Task Force (IETF) documentation [JavaScript Object
+    #     Notation (JSON) Pointer][1].
+    #
+    #     For example, for the JSON payload `\{ "form": \{ "email":
+    #     "THE_EMAIL" \} \}`, the email field specification is
+    #     `/form/email`.
+    #
+    #   * For form encoded payload types, use the HTML form names.
+    #
+    #     For example, for an HTML form with the input element named
+    #     `email1`, the email field specification is `email1`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6901
+    #   @return [Types::EmailField]
+    #
+    # @!attribute [rw] phone_number_fields
+    #   The names of the fields in the request payload that contain your
+    #   customer's primary phone number.
+    #
+    #   Order the phone number fields in the array exactly as they are
+    #   ordered in the request payload.
+    #
+    #   How you specify the phone number fields depends on the request
+    #   inspection payload type.
+    #
+    #   * For JSON payloads, specify the field identifiers in JSON pointer
+    #     syntax. For information about the JSON Pointer syntax, see the
+    #     Internet Engineering Task Force (IETF) documentation [JavaScript
+    #     Object Notation (JSON) Pointer][1].
+    #
+    #     For example, for the JSON payload `\{ "form": \{
+    #     "primaryphoneline1": "THE_PHONE1", "primaryphoneline2":
+    #     "THE_PHONE2", "primaryphoneline3": "THE_PHONE3" \} \}`, the phone
+    #     number field identifiers are `/form/primaryphoneline1`,
+    #     `/form/primaryphoneline2`, and `/form/primaryphoneline3`.
+    #
+    #   * For form encoded payload types, use the HTML form names.
+    #
+    #     For example, for an HTML form with input elements named
+    #     `primaryphoneline1`, `primaryphoneline2`, and `primaryphoneline3`,
+    #     the phone number field identifiers are `primaryphoneline1`,
+    #     `primaryphoneline2`, and `primaryphoneline3`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6901
+    #   @return [Array<Types::PhoneNumberField>]
+    #
+    # @!attribute [rw] address_fields
+    #   The names of the fields in the request payload that contain your
+    #   customer's primary physical address.
+    #
+    #   Order the address fields in the array exactly as they are ordered in
+    #   the request payload.
+    #
+    #   How you specify the address fields depends on the request inspection
+    #   payload type.
+    #
+    #   * For JSON payloads, specify the field identifiers in JSON pointer
+    #     syntax. For information about the JSON Pointer syntax, see the
+    #     Internet Engineering Task Force (IETF) documentation [JavaScript
+    #     Object Notation (JSON) Pointer][1].
+    #
+    #     For example, for the JSON payload `\{ "form": \{
+    #     "primaryaddressline1": "THE_ADDRESS1", "primaryaddressline2":
+    #     "THE_ADDRESS2", "primaryaddressline3": "THE_ADDRESS3" \} \}`, the
+    #     address field idenfiers are `/form/primaryaddressline1`,
+    #     `/form/primaryaddressline2`, and `/form/primaryaddressline3`.
+    #
+    #   * For form encoded payload types, use the HTML form names.
+    #
+    #     For example, for an HTML form with input elements named
+    #     `primaryaddressline1`, `primaryaddressline2`, and
+    #     `primaryaddressline3`, the address fields identifiers are
+    #     `primaryaddressline1`, `primaryaddressline2`, and
+    #     `primaryaddressline3`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6901
+    #   @return [Array<Types::AddressField>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RequestInspectionACFP AWS API Documentation
+    #
+    class RequestInspectionACFP < Struct.new(
+      :payload_type,
+      :username_field,
+      :password_field,
+      :email_field,
+      :phone_number_fields,
+      :address_fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The criteria for inspecting responses to login requests and account
+    # creation requests, used by the ATP and ACFP rule groups to track login
+    # and account creation success and failure rates.
     #
     # <note markdown="1"> Response inspection is available only in web ACLs that protect Amazon
     # CloudFront distributions.
     #
     #  </note>
     #
-    # This is part of the `AWSManagedRulesATPRuleSet` configuration in
+    # The rule groups evaluates the responses that your protected resources
+    # send back to client login and account creation attempts, keeping count
+    # of successful and failed attempts from each IP address and client
+    # session. Using this information, the rule group labels and mitigates
+    # requests from client sessions and IP addresses with too much
+    # suspicious activity in a short amount of time.
+    #
+    # This is part of the `AWSManagedRulesATPRuleSet` and
+    # `AWSManagedRulesACFPRuleSet` configurations in
     # `ManagedRuleGroupConfig`.
     #
-    # Enable login response inspection by configuring exactly one component
-    # of the response to inspect. You can't configure more than one. If you
-    # don't configure any of the response inspection options, response
-    # inspection is disabled.
+    # Enable response inspection by configuring exactly one component of the
+    # response to inspect, for example, `Header` or `StatusCode`. You can't
+    # configure more than one component for inspection. If you don't
+    # configure any of the response inspection options, response inspection
+    # is disabled.
     #
     # @!attribute [rw] status_code
-    #   Configures inspection of the response status code.
+    #   Configures inspection of the response status code for success and
+    #   failure indicators.
     #   @return [Types::ResponseInspectionStatusCode]
     #
     # @!attribute [rw] header
-    #   Configures inspection of the response header.
+    #   Configures inspection of the response header for success and failure
+    #   indicators.
     #   @return [Types::ResponseInspectionHeader]
     #
     # @!attribute [rw] body_contains
-    #   Configures inspection of the response body. WAF can inspect the
-    #   first 65,536 bytes (64 KB) of the response body.
+    #   Configures inspection of the response body for success and failure
+    #   indicators. WAF can inspect the first 65,536 bytes (64 KB) of the
+    #   response body.
     #   @return [Types::ResponseInspectionBodyContains]
     #
     # @!attribute [rw] json
-    #   Configures inspection of the response JSON. WAF can inspect the
-    #   first 65,536 bytes (64 KB) of the response JSON.
+    #   Configures inspection of the response JSON for success and failure
+    #   indicators. WAF can inspect the first 65,536 bytes (64 KB) of the
+    #   response JSON.
     #   @return [Types::ResponseInspectionJson]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ResponseInspection AWS API Documentation
@@ -5870,7 +6948,8 @@ module Aws::WAFV2
 
     # Configures inspection of the response body. WAF can inspect the first
     # 65,536 bytes (64 KB) of the response body. This is part of the
-    # `ResponseInspection` configuration for `AWSManagedRulesATPRuleSet`.
+    # `ResponseInspection` configuration for `AWSManagedRulesATPRuleSet` and
+    # `AWSManagedRulesACFPRuleSet`.
     #
     # <note markdown="1"> Response inspection is available only in web ACLs that protect Amazon
     # CloudFront distributions.
@@ -5879,21 +6958,23 @@ module Aws::WAFV2
     #
     # @!attribute [rw] success_strings
     #   Strings in the body of the response that indicate a successful login
-    #   attempt. To be counted as a successful login, the string can be
-    #   anywhere in the body and must be an exact match, including case.
-    #   Each string must be unique among the success and failure strings.
+    #   or account creation attempt. To be counted as a success, the string
+    #   can be anywhere in the body and must be an exact match, including
+    #   case. Each string must be unique among the success and failure
+    #   strings.
     #
-    #   JSON example: `"SuccessStrings": [ "Login successful", "Welcome to
-    #   our site!" ]`
+    #   JSON examples: `"SuccessStrings": [ "Login successful" ]` and
+    #   `"SuccessStrings": [ "Account creation successful", "Welcome to our
+    #   site!" ]`
     #   @return [Array<String>]
     #
     # @!attribute [rw] failure_strings
-    #   Strings in the body of the response that indicate a failed login
-    #   attempt. To be counted as a failed login, the string can be anywhere
-    #   in the body and must be an exact match, including case. Each string
-    #   must be unique among the success and failure strings.
+    #   Strings in the body of the response that indicate a failed login or
+    #   account creation attempt. To be counted as a failure, the string can
+    #   be anywhere in the body and must be an exact match, including case.
+    #   Each string must be unique among the success and failure strings.
     #
-    #   JSON example: `"FailureStrings": [ "Login failed" ]`
+    #   JSON example: `"FailureStrings": [ "Request failed" ]`
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ResponseInspectionBodyContains AWS API Documentation
@@ -5906,7 +6987,8 @@ module Aws::WAFV2
     end
 
     # Configures inspection of the response header. This is part of the
-    # `ResponseInspection` configuration for `AWSManagedRulesATPRuleSet`.
+    # `ResponseInspection` configuration for `AWSManagedRulesATPRuleSet` and
+    # `AWSManagedRulesACFPRuleSet`.
     #
     # <note markdown="1"> Response inspection is available only in web ACLs that protect Amazon
     # CloudFront distributions.
@@ -5917,26 +6999,28 @@ module Aws::WAFV2
     #   The name of the header to match against. The name must be an exact
     #   match, including case.
     #
-    #   JSON example: `"Name": [ "LoginResult" ]`
+    #   JSON example: `"Name": [ "RequestResult" ]`
     #   @return [String]
     #
     # @!attribute [rw] success_values
     #   Values in the response header with the specified name that indicate
-    #   a successful login attempt. To be counted as a successful login, the
-    #   value must be an exact match, including case. Each value must be
-    #   unique among the success and failure values.
+    #   a successful login or account creation attempt. To be counted as a
+    #   success, the value must be an exact match, including case. Each
+    #   value must be unique among the success and failure values.
     #
-    #   JSON example: `"SuccessValues": [ "LoginPassed", "Successful login"
-    #   ]`
+    #   JSON examples: `"SuccessValues": [ "LoginPassed", "Successful login"
+    #   ]` and `"SuccessValues": [ "AccountCreated", "Successful account
+    #   creation" ]`
     #   @return [Array<String>]
     #
     # @!attribute [rw] failure_values
     #   Values in the response header with the specified name that indicate
-    #   a failed login attempt. To be counted as a failed login, the value
-    #   must be an exact match, including case. Each value must be unique
-    #   among the success and failure values.
+    #   a failed login or account creation attempt. To be counted as a
+    #   failure, the value must be an exact match, including case. Each
+    #   value must be unique among the success and failure values.
     #
-    #   JSON example: `"FailureValues": [ "LoginFailed", "Failed login" ]`
+    #   JSON examples: `"FailureValues": [ "LoginFailed", "Failed login" ]`
+    #   and `"FailureValues": [ "AccountCreationFailed" ]`
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ResponseInspectionHeader AWS API Documentation
@@ -5951,7 +7035,8 @@ module Aws::WAFV2
 
     # Configures inspection of the response JSON. WAF can inspect the first
     # 65,536 bytes (64 KB) of the response JSON. This is part of the
-    # `ResponseInspection` configuration for `AWSManagedRulesATPRuleSet`.
+    # `ResponseInspection` configuration for `AWSManagedRulesATPRuleSet` and
+    # `AWSManagedRulesACFPRuleSet`.
     #
     # <note markdown="1"> Response inspection is available only in web ACLs that protect Amazon
     # CloudFront distributions.
@@ -5962,23 +7047,25 @@ module Aws::WAFV2
     #   The identifier for the value to match against in the JSON. The
     #   identifier must be an exact match, including case.
     #
-    #   JSON example: `"Identifier": [ "/login/success" ]`
+    #   JSON examples: `"Identifier": [ "/login/success" ]` and
+    #   `"Identifier": [ "/sign-up/success" ]`
     #   @return [String]
     #
     # @!attribute [rw] success_values
     #   Values for the specified identifier in the response JSON that
-    #   indicate a successful login attempt. To be counted as a successful
-    #   login, the value must be an exact match, including case. Each value
-    #   must be unique among the success and failure values.
+    #   indicate a successful login or account creation attempt. To be
+    #   counted as a success, the value must be an exact match, including
+    #   case. Each value must be unique among the success and failure
+    #   values.
     #
     #   JSON example: `"SuccessValues": [ "True", "Succeeded" ]`
     #   @return [Array<String>]
     #
     # @!attribute [rw] failure_values
     #   Values for the specified identifier in the response JSON that
-    #   indicate a failed login attempt. To be counted as a failed login,
-    #   the value must be an exact match, including case. Each value must be
-    #   unique among the success and failure values.
+    #   indicate a failed login or account creation attempt. To be counted
+    #   as a failure, the value must be an exact match, including case. Each
+    #   value must be unique among the success and failure values.
     #
     #   JSON example: `"FailureValues": [ "False", "Failed" ]`
     #   @return [Array<String>]
@@ -5994,7 +7081,8 @@ module Aws::WAFV2
     end
 
     # Configures inspection of the response status code. This is part of the
-    # `ResponseInspection` configuration for `AWSManagedRulesATPRuleSet`.
+    # `ResponseInspection` configuration for `AWSManagedRulesATPRuleSet` and
+    # `AWSManagedRulesACFPRuleSet`.
     #
     # <note markdown="1"> Response inspection is available only in web ACLs that protect Amazon
     # CloudFront distributions.
@@ -6002,19 +7090,19 @@ module Aws::WAFV2
     #  </note>
     #
     # @!attribute [rw] success_codes
-    #   Status codes in the response that indicate a successful login
-    #   attempt. To be counted as a successful login, the response status
-    #   code must match one of these. Each code must be unique among the
-    #   success and failure status codes.
+    #   Status codes in the response that indicate a successful login or
+    #   account creation attempt. To be counted as a success, the response
+    #   status code must match one of these. Each code must be unique among
+    #   the success and failure status codes.
     #
     #   JSON example: `"SuccessCodes": [ 200, 201 ]`
     #   @return [Array<Integer>]
     #
     # @!attribute [rw] failure_codes
-    #   Status codes in the response that indicate a failed login attempt.
-    #   To be counted as a failed login, the response status code must match
-    #   one of these. Each code must be unique among the success and failure
-    #   status codes.
+    #   Status codes in the response that indicate a failed login or account
+    #   creation attempt. To be counted as a failure, the response status
+    #   code must match one of these. Each code must be unique among the
+    #   success and failure status codes.
     #
     #   JSON example: `"FailureCodes": [ 400, 404 ]`
     #   @return [Array<Integer>]
@@ -6622,11 +7710,14 @@ module Aws::WAFV2
     #
     # @!attribute [rw] text_transformations
     #   Text transformations eliminate some of the unusual formatting that
-    #   attackers use in web requests in an effort to bypass detection. If
-    #   you specify one or more transformations in a rule statement, WAF
-    #   performs all transformations on the content of the request component
-    #   identified by `FieldToMatch`, starting from the lowest priority
-    #   setting, before inspecting the content for a match.
+    #   attackers use in web requests in an effort to bypass detection. Text
+    #   transformations are used in rule match statements, to transform the
+    #   `FieldToMatch` request component before inspecting it, and they're
+    #   used in rate-based rule statements, to transform request components
+    #   before using them as custom aggregation keys. If you specify one or
+    #   more transformations to apply, WAF performs all transformations on
+    #   the specified content, starting from the lowest priority setting,
+    #   and then uses the component contents.
     #   @return [Array<Types::TextTransformation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/SizeConstraintStatement AWS API Documentation
@@ -6650,11 +7741,14 @@ module Aws::WAFV2
     #
     # @!attribute [rw] text_transformations
     #   Text transformations eliminate some of the unusual formatting that
-    #   attackers use in web requests in an effort to bypass detection. If
-    #   you specify one or more transformations in a rule statement, WAF
-    #   performs all transformations on the content of the request component
-    #   identified by `FieldToMatch`, starting from the lowest priority
-    #   setting, before inspecting the content for a match.
+    #   attackers use in web requests in an effort to bypass detection. Text
+    #   transformations are used in rule match statements, to transform the
+    #   `FieldToMatch` request component before inspecting it, and they're
+    #   used in rate-based rule statements, to transform request components
+    #   before using them as custom aggregation keys. If you specify one or
+    #   more transformations to apply, WAF performs all transformations on
+    #   the specified content, starting from the lowest priority setting,
+    #   and then uses the component contents.
     #   @return [Array<Types::TextTransformation>]
     #
     # @!attribute [rw] sensitivity_level
@@ -6814,11 +7908,88 @@ module Aws::WAFV2
     #   @return [Types::RegexPatternSetReferenceStatement]
     #
     # @!attribute [rw] rate_based_statement
-    #   A rate-based rule tracks the rate of requests for each originating
-    #   IP address, and triggers the rule action when the rate exceeds a
-    #   limit that you specify on the number of requests in any 5-minute
-    #   time span. You can use this to put a temporary block on requests
-    #   from an IP address that is sending excessive requests.
+    #   A rate-based rule counts incoming requests and rate limits requests
+    #   when they are coming at too fast a rate. The rule categorizes
+    #   requests according to your aggregation criteria, collects them into
+    #   aggregation instances, and counts and rate limits the requests for
+    #   each instance.
+    #
+    #   You can specify individual aggregation keys, like IP address or HTTP
+    #   method. You can also specify aggregation key combinations, like IP
+    #   address and HTTP method, or HTTP method, query argument, and cookie.
+    #
+    #   Each unique set of values for the aggregation keys that you specify
+    #   is a separate aggregation instance, with the value from each key
+    #   contributing to the aggregation instance definition.
+    #
+    #   For example, assume the rule evaluates web requests with the
+    #   following IP address and HTTP method values:
+    #
+    #   * IP address 10.1.1.1, HTTP method POST
+    #
+    #   * IP address 10.1.1.1, HTTP method GET
+    #
+    #   * IP address 127.0.0.0, HTTP method POST
+    #
+    #   * IP address 10.1.1.1, HTTP method GET
+    #
+    #   The rule would create different aggregation instances according to
+    #   your aggregation criteria, for example:
+    #
+    #   * If the aggregation criteria is just the IP address, then each
+    #     individual address is an aggregation instance, and WAF counts
+    #     requests separately for each. The aggregation instances and
+    #     request counts for our example would be the following:
+    #
+    #     * IP address 10.1.1.1: count 3
+    #
+    #     * IP address 127.0.0.0: count 1
+    #
+    #   * If the aggregation criteria is HTTP method, then each individual
+    #     HTTP method is an aggregation instance. The aggregation instances
+    #     and request counts for our example would be the following:
+    #
+    #     * HTTP method POST: count 2
+    #
+    #     * HTTP method GET: count 2
+    #
+    #   * If the aggregation criteria is IP address and HTTP method, then
+    #     each IP address and each HTTP method would contribute to the
+    #     combined aggregation instance. The aggregation instances and
+    #     request counts for our example would be the following:
+    #
+    #     * IP address 10.1.1.1, HTTP method POST: count 1
+    #
+    #     * IP address 10.1.1.1, HTTP method GET: count 2
+    #
+    #     * IP address 127.0.0.0, HTTP method POST: count 1
+    #
+    #   For any n-tuple of aggregation keys, each unique combination of
+    #   values for the keys defines a separate aggregation instance, which
+    #   WAF counts and rate-limits individually.
+    #
+    #   You can optionally nest another statement inside the rate-based
+    #   statement, to narrow the scope of the rule so that it only counts
+    #   and rate limits requests that match the nested statement. You can
+    #   use this nested scope-down statement in conjunction with your
+    #   aggregation key specifications or you can just count and rate limit
+    #   all requests that match the scope-down statement, without additional
+    #   aggregation. When you choose to just manage all requests that match
+    #   a scope-down statement, the aggregation instance is singular for the
+    #   rule.
+    #
+    #   You cannot nest a `RateBasedStatement` inside another statement, for
+    #   example inside a `NotStatement` or `OrStatement`. You can define a
+    #   `RateBasedStatement` inside a web ACL and inside a rule group.
+    #
+    #   For additional information about the options, see [Rate limiting web
+    #   requests using rate-based rules][1] in the *WAF Developer Guide*.
+    #
+    #   If you only aggregate on the individual IP address or forwarded IP
+    #   address, you can retrieve the list of IP addresses that WAF is
+    #   currently rate limiting for a rule through the API call
+    #   `GetRateBasedStatementManagedKeys`. This option is not available for
+    #   other aggregation configurations.
     #
     #   WAF tracks and manages web requests separately for each instance of
     #   a rate-based rule that you use. For example, if you provide the same
@@ -6829,33 +8000,9 @@ module Aws::WAFV2
     #   multiple places, each use creates a separate instance of the
     #   rate-based rule that gets its own tracking and management by WAF.
     #
-    #   When the rule action triggers, WAF blocks additional requests from
-    #   the IP address until the request rate falls below the limit.
     #
-    #   You can optionally nest another statement inside the rate-based
-    #   statement, to narrow the scope of the rule so that it only counts
-    #   requests that match the nested statement. For example, based on
-    #   recent requests that you have seen from an attacker, you might
-    #   create a rate-based rule with a nested AND rule statement that
-    #   contains the following nested statements:
     #
-    #   * An IP match statement with an IP set that specifies the address
-    #     192.0.2.44.
-    #
-    #   * A string match statement that searches in the User-Agent header
-    #     for the string BadBot.
-    #
-    #   In this rate-based rule, you also define a rate limit. For this
-    #   example, the rate limit is 1,000. Requests that meet the criteria of
-    #   both of the nested statements are counted. If the count exceeds
-    #   1,000 requests per five minutes, the rule action triggers. Requests
-    #   that do not meet the criteria of both of the nested statements are
-    #   not counted towards the rate limit and are not affected by this
-    #   rule.
-    #
-    #   You cannot nest a `RateBasedStatement` inside another statement, for
-    #   example inside a `NotStatement` or `OrStatement`. You can define a
-    #   `RateBasedStatement` inside a web ACL and inside a rule group.
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-rate-based-rules.html
     #   @return [Types::RateBasedStatement]
     #
     # @!attribute [rw] and_statement
@@ -6886,9 +8033,11 @@ module Aws::WAFV2
     #   as a top-level statement within a rule.
     #
     #   <note markdown="1"> You are charged additional fees when you use the WAF Bot Control
-    #   managed rule group `AWSManagedRulesBotControlRuleSet` or the WAF
-    #   Fraud Control account takeover prevention (ATP) managed rule group
-    #   `AWSManagedRulesATPRuleSet`. For more information, see [WAF
+    #   managed rule group `AWSManagedRulesBotControlRuleSet`, the WAF Fraud
+    #   Control account takeover prevention (ATP) managed rule group
+    #   `AWSManagedRulesATPRuleSet`, or the WAF Fraud Control account
+    #   creation fraud prevention (ACFP) managed rule group
+    #   `AWSManagedRulesACFPRuleSet`. For more information, see [WAF
     #   Pricing][1].
     #
     #    </note>
@@ -7030,11 +8179,10 @@ module Aws::WAFV2
     # attackers use in web requests in an effort to bypass detection.
     #
     # @!attribute [rw] priority
-    #   Sets the relative processing order for multiple transformations that
-    #   are defined for a rule statement. WAF processes all transformations,
-    #   from lowest priority to highest, before inspecting the transformed
-    #   content. The priorities don't need to be consecutive, but they must
-    #   all be different.
+    #   Sets the relative processing order for multiple transformations. WAF
+    #   processes all transformations, from lowest priority to highest,
+    #   before inspecting the transformed content. The priorities don't
+    #   need to be consecutive, but they must all be different.
     #   @return [Integer]
     #
     # @!attribute [rw] type
@@ -7797,8 +8945,8 @@ module Aws::WAFV2
     # part of the web request that identifies a resource. For example,
     # `/images/daily-ad.jpg`.
     #
-    # This is used only in the FieldToMatch specification for some web
-    # request component types.
+    # This is used in the FieldToMatch specification for some web request
+    # component types.
     #
     # JSON specification: `"UriPath": \{\}`
     #
@@ -7808,12 +8956,34 @@ module Aws::WAFV2
     #
     class UriPath < Aws::EmptyStructure; end
 
-    # Details about your login page username field for request inspection,
-    # used in the `AWSManagedRulesATPRuleSet` `RequestInspection`
-    # configuration.
+    # The name of the field in the request payload that contains your
+    # customer's username.
+    #
+    # This data type is used in the `RequestInspection` and
+    # `RequestInspectionACFP` data types.
     #
     # @!attribute [rw] identifier
-    #   The name of the username field. For example `/form/username`.
+    #   The name of the username field.
+    #
+    #   How you specify this depends on the request inspection payload type.
+    #
+    #   * For JSON payloads, specify the field name in JSON pointer syntax.
+    #     For information about the JSON Pointer syntax, see the Internet
+    #     Engineering Task Force (IETF) documentation [JavaScript Object
+    #     Notation (JSON) Pointer][1].
+    #
+    #     For example, for the JSON payload `\{ "form": \{ "username":
+    #     "THE_USERNAME" \} \}`, the username field specification is
+    #     `/form/username`.
+    #
+    #   * For form encoded payload types, use the HTML form names.
+    #
+    #     For example, for an HTML form with the input element named
+    #     `username1`, the username field specification is `username1`
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6901
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/UsernameField AWS API Documentation
@@ -7861,19 +9031,26 @@ module Aws::WAFV2
     # collection.
     #
     # @!attribute [rw] sampled_requests_enabled
-    #   A boolean indicating whether WAF should store a sampling of the web
-    #   requests that match the rules. You can view the sampled requests
-    #   through the WAF console.
+    #   Indicates whether WAF should store a sampling of the web requests
+    #   that match the rules. You can view the sampled requests through the
+    #   WAF console.
     #   @return [Boolean]
     #
     # @!attribute [rw] cloud_watch_metrics_enabled
-    #   A boolean indicating whether the associated resource sends metrics
-    #   to Amazon CloudWatch. For the list of available metrics, see [WAF
-    #   Metrics][1] in the *WAF Developer Guide*.
+    #   Indicates whether the associated resource sends metrics to Amazon
+    #   CloudWatch. For the list of available metrics, see [WAF Metrics][1]
+    #   in the *WAF Developer Guide*.
+    #
+    #   For web ACLs, the metrics are for web requests that have the web ACL
+    #   default action applied. WAF applies the default action to web
+    #   requests that pass the inspection of all rules in the web ACL
+    #   without being either allowed or blocked. For more information, see
+    #   [The web ACL default action][2] in the *WAF Developer Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#waf-metrics
+    #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-default-action.html
     #   @return [Boolean]
     #
     # @!attribute [rw] metric_name
@@ -8231,6 +9408,22 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # The rule that you've named doesn't aggregate solely on the IP
+    # address or solely on the forwarded IP address. This call is only
+    # available for rate-based rules with an `AggregateKeyType` setting of
+    # `IP` or `FORWARDED_IP`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/WAFUnsupportedAggregateKeyTypeException AWS API Documentation
+    #
+    class WAFUnsupportedAggregateKeyTypeException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A web ACL defines a collection of rules to use to inspect and control
     # web requests. Each rule has an action defined (allow, block, or count)
     # for requests that match the statement of the rule. In the web ACL, you
@@ -8493,11 +9686,14 @@ module Aws::WAFV2
     #
     # @!attribute [rw] text_transformations
     #   Text transformations eliminate some of the unusual formatting that
-    #   attackers use in web requests in an effort to bypass detection. If
-    #   you specify one or more transformations in a rule statement, WAF
-    #   performs all transformations on the content of the request component
-    #   identified by `FieldToMatch`, starting from the lowest priority
-    #   setting, before inspecting the content for a match.
+    #   attackers use in web requests in an effort to bypass detection. Text
+    #   transformations are used in rule match statements, to transform the
+    #   `FieldToMatch` request component before inspecting it, and they're
+    #   used in rate-based rule statements, to transform request components
+    #   before using them as custom aggregation keys. If you specify one or
+    #   more transformations to apply, WAF performs all transformations on
+    #   the specified content, starting from the lowest priority setting,
+    #   and then uses the component contents.
     #   @return [Array<Types::TextTransformation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/XssMatchStatement AWS API Documentation

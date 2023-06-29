@@ -9,6 +9,7 @@
 
 
 module Aws::MediaLive
+  # @api private
   module Endpoints
 
     class AcceptInputDeviceTransfer

@@ -9,6 +9,7 @@
 
 
 module Aws::MarketplaceCommerceAnalytics
+  # @api private
   module Endpoints
 
     class GenerateDataSet

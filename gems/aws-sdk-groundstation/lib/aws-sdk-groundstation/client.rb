@@ -275,6 +275,11 @@ module Aws::GroundStation
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -1231,7 +1236,7 @@ module Aws::GroundStation
       req.send_request(options)
     end
 
-    # Returns the number of minutes used by account.
+    # Returns the number of reserved minutes used by account.
     #
     # @option params [required, Integer] :month
     #   The month being requested, with a value of 1-12.
@@ -2209,7 +2214,7 @@ module Aws::GroundStation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-groundstation'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

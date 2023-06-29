@@ -9,6 +9,7 @@
 
 
 module Aws::IoTFleetHub
+  # @api private
   module Endpoints
 
     class CreateApplication

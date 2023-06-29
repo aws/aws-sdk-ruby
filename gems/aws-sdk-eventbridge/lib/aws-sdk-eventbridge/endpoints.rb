@@ -9,6 +9,7 @@
 
 
 module Aws::EventBridge
+  # @api private
   module Endpoints
 
     class ActivateEventSource

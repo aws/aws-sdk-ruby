@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.71.0 (2023-06-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.70.0 (2023-06-08)
+------------------
+
+* Feature - You can now define custom spark properties at start of the session for use cases like cluster encryption, table formats, and general Spark tuning.
+
+1.69.0 (2023-06-02)
+------------------
+
+* Feature - This release introduces the DeleteCapacityReservation API and the ability to manage capacity reservations using CloudFormation
+
+1.68.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.67.0 (2023-05-18)
+------------------
+
+* Feature - Removing SparkProperties from EngineConfiguration object for StartSession API call
+
+1.66.0 (2023-05-15)
+------------------
+
+* Feature - You can now define custom spark properties at start of the session for use cases like cluster encryption, table formats, and general Spark tuning.
+
 1.65.0 (2023-04-28)
 ------------------
 

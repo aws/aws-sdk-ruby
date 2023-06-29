@@ -275,6 +275,11 @@ module Aws::WellArchitected
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -410,6 +415,33 @@ module Aws::WellArchitected
       req.send_request(options)
     end
 
+    # Associate a profile with a workload.
+    #
+    # @option params [required, String] :workload_id
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
+    #
+    # @option params [required, Array<String>] :profile_arns
+    #   The list of profile ARNs to associate with the workload.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_profiles({
+    #     workload_id: "WorkloadId", # required
+    #     profile_arns: ["ProfileArn"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/AssociateProfiles AWS API Documentation
+    #
+    # @overload associate_profiles(params = {})
+    # @param [Hash] params ({})
+    def associate_profiles(params = {}, options = {})
+      req = build_request(:associate_profiles, params)
+      req.send_request(options)
+    end
+
     # Create a lens share.
     #
     # The owner of a lens can share it with other Amazon Web Services
@@ -457,7 +489,8 @@ module Aws::WellArchitected
     #
     # @option params [required, String] :shared_with
     #   The Amazon Web Services account ID, IAM role, organization ID, or
-    #   organizational unit (OU) ID with which the workload is shared.
+    #   organizational unit (OU) ID with which the workload, lens, or profile
+    #   is shared.
     #
     # @option params [required, String] :client_request_token
     #   A unique case-sensitive string used to ensure that this request is
@@ -631,6 +664,127 @@ module Aws::WellArchitected
       req.send_request(options)
     end
 
+    # Create a profile.
+    #
+    # @option params [required, String] :profile_name
+    #   Name of the profile.
+    #
+    # @option params [required, String] :profile_description
+    #   The profile description.
+    #
+    # @option params [required, Array<Types::ProfileQuestionUpdate>] :profile_questions
+    #   The profile questions.
+    #
+    # @option params [required, String] :client_request_token
+    #   A unique case-sensitive string used to ensure that this request is
+    #   idempotent (executes only once).
+    #
+    #   You should not reuse the same token for other requests. If you retry a
+    #   request with the same client request token and the same parameters
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
+    #
+    #   This token is listed as required, however, if you do not specify it,
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags assigned to the profile.
+    #
+    # @return [Types::CreateProfileOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateProfileOutput#profile_arn #profile_arn} => String
+    #   * {Types::CreateProfileOutput#profile_version #profile_version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_profile({
+    #     profile_name: "ProfileName", # required
+    #     profile_description: "ProfileDescription", # required
+    #     profile_questions: [ # required
+    #       {
+    #         question_id: "QuestionId",
+    #         selected_choice_ids: ["ChoiceId"],
+    #       },
+    #     ],
+    #     client_request_token: "ClientRequestToken", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile_arn #=> String
+    #   resp.profile_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateProfile AWS API Documentation
+    #
+    # @overload create_profile(params = {})
+    # @param [Hash] params ({})
+    def create_profile(params = {}, options = {})
+      req = build_request(:create_profile, params)
+      req.send_request(options)
+    end
+
+    # Create a profile share.
+    #
+    # @option params [required, String] :profile_arn
+    #   The profile ARN.
+    #
+    # @option params [required, String] :shared_with
+    #   The Amazon Web Services account ID, IAM role, organization ID, or
+    #   organizational unit (OU) ID with which the workload, lens, or profile
+    #   is shared.
+    #
+    # @option params [required, String] :client_request_token
+    #   A unique case-sensitive string used to ensure that this request is
+    #   idempotent (executes only once).
+    #
+    #   You should not reuse the same token for other requests. If you retry a
+    #   request with the same client request token and the same parameters
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
+    #
+    #   This token is listed as required, however, if you do not specify it,
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateProfileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateProfileShareOutput#share_id #share_id} => String
+    #   * {Types::CreateProfileShareOutput#profile_arn #profile_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_profile_share({
+    #     profile_arn: "ProfileArn", # required
+    #     shared_with: "SharedWith", # required
+    #     client_request_token: "ClientRequestToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.share_id #=> String
+    #   resp.profile_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateProfileShare AWS API Documentation
+    #
+    # @overload create_profile_share(params = {})
+    # @param [Hash] params ({})
+    def create_profile_share(params = {}, options = {})
+      req = build_request(:create_profile_share, params)
+      req.send_request(options)
+    end
+
     # Create a new workload.
     #
     # The owner of a workload can share the workload with other Amazon Web
@@ -785,6 +939,9 @@ module Aws::WellArchitected
     # @option params [Array<String>] :applications
     #   List of AppRegistry application ARNs associated to the workload.
     #
+    # @option params [Array<String>] :profile_arns
+    #   The list of profile ARNs associated with the workload.
+    #
     # @return [Types::CreateWorkloadOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWorkloadOutput#workload_id #workload_id} => String
@@ -815,6 +972,7 @@ module Aws::WellArchitected
     #       workload_resource_definition: ["WORKLOAD_METADATA"], # accepts WORKLOAD_METADATA, APP_REGISTRY
     #     },
     #     applications: ["ApplicationArn"],
+    #     profile_arns: ["ProfileArn"],
     #   })
     #
     # @example Response structure
@@ -854,10 +1012,11 @@ module Aws::WellArchitected
     #
     # @option params [required, String] :shared_with
     #   The Amazon Web Services account ID, IAM role, organization ID, or
-    #   organizational unit (OU) ID with which the workload is shared.
+    #   organizational unit (OU) ID with which the workload, lens, or profile
+    #   is shared.
     #
     # @option params [required, String] :permission_type
-    #   Permission granted on a workload share.
+    #   Permission granted on a share request.
     #
     # @option params [required, String] :client_request_token
     #   A unique case-sensitive string used to ensure that this request is
@@ -994,7 +1153,7 @@ module Aws::WellArchitected
     #  </note>
     #
     # @option params [required, String] :share_id
-    #   The ID associated with the workload share.
+    #   The ID associated with the share.
     #
     # @option params [required, String] :lens_alias
     #   The alias of the lens.
@@ -1046,6 +1205,101 @@ module Aws::WellArchitected
       req.send_request(options)
     end
 
+    # Delete a profile.
+    #
+    # <note markdown="1"> **Disclaimer**
+    #
+    #  By sharing your profile with other Amazon Web Services accounts, you
+    # acknowledge that Amazon Web Services will make your profile available
+    # to those other accounts. Those other accounts may continue to access
+    # and use your shared profile even if you delete the profile from your
+    # own Amazon Web Services account or terminate your Amazon Web Services
+    # account.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :profile_arn
+    #   The profile ARN.
+    #
+    # @option params [required, String] :client_request_token
+    #   A unique case-sensitive string used to ensure that this request is
+    #   idempotent (executes only once).
+    #
+    #   You should not reuse the same token for other requests. If you retry a
+    #   request with the same client request token and the same parameters
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
+    #
+    #   This token is listed as required, however, if you do not specify it,
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_profile({
+    #     profile_arn: "ProfileArn", # required
+    #     client_request_token: "ClientRequestToken", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DeleteProfile AWS API Documentation
+    #
+    # @overload delete_profile(params = {})
+    # @param [Hash] params ({})
+    def delete_profile(params = {}, options = {})
+      req = build_request(:delete_profile, params)
+      req.send_request(options)
+    end
+
+    # Delete a profile share.
+    #
+    # @option params [required, String] :share_id
+    #   The ID associated with the share.
+    #
+    # @option params [required, String] :profile_arn
+    #   The profile ARN.
+    #
+    # @option params [required, String] :client_request_token
+    #   A unique case-sensitive string used to ensure that this request is
+    #   idempotent (executes only once).
+    #
+    #   You should not reuse the same token for other requests. If you retry a
+    #   request with the same client request token and the same parameters
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
+    #
+    #   This token is listed as required, however, if you do not specify it,
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_profile_share({
+    #     share_id: "ShareId", # required
+    #     profile_arn: "ProfileArn", # required
+    #     client_request_token: "ClientRequestToken", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DeleteProfileShare AWS API Documentation
+    #
+    # @overload delete_profile_share(params = {})
+    # @param [Hash] params ({})
+    def delete_profile_share(params = {}, options = {})
+      req = build_request(:delete_profile_share, params)
+      req.send_request(options)
+    end
+
     # Delete an existing workload.
     #
     # @option params [required, String] :workload_id
@@ -1090,7 +1344,7 @@ module Aws::WellArchitected
     # Delete a workload share.
     #
     # @option params [required, String] :share_id
-    #   The ID associated with the workload share.
+    #   The ID associated with the share.
     #
     # @option params [required, String] :workload_id
     #   The ID assigned to the workload. This ID is unique within an Amazon
@@ -1167,6 +1421,33 @@ module Aws::WellArchitected
     # @param [Hash] params ({})
     def disassociate_lenses(params = {}, options = {})
       req = build_request(:disassociate_lenses, params)
+      req.send_request(options)
+    end
+
+    # Disassociate a profile from a workload.
+    #
+    # @option params [required, String] :workload_id
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
+    #
+    # @option params [required, Array<String>] :profile_arns
+    #   The list of profile ARNs to disassociate from the workload.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_profiles({
+    #     workload_id: "WorkloadId", # required
+    #     profile_arns: ["ProfileArn"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DisassociateProfiles AWS API Documentation
+    #
+    # @overload disassociate_profiles(params = {})
+    # @param [Hash] params ({})
+    def disassociate_profiles(params = {}, options = {})
+      req = build_request(:disassociate_profiles, params)
       req.send_request(options)
     end
 
@@ -1505,11 +1786,18 @@ module Aws::WellArchitected
     #   resp.lens_review.pillar_review_summaries[0].notes #=> String
     #   resp.lens_review.pillar_review_summaries[0].risk_counts #=> Hash
     #   resp.lens_review.pillar_review_summaries[0].risk_counts["Risk"] #=> Integer
+    #   resp.lens_review.pillar_review_summaries[0].prioritized_risk_counts #=> Hash
+    #   resp.lens_review.pillar_review_summaries[0].prioritized_risk_counts["Risk"] #=> Integer
     #   resp.lens_review.updated_at #=> Time
     #   resp.lens_review.notes #=> String
     #   resp.lens_review.risk_counts #=> Hash
     #   resp.lens_review.risk_counts["Risk"] #=> Integer
     #   resp.lens_review.next_token #=> String
+    #   resp.lens_review.profiles #=> Array
+    #   resp.lens_review.profiles[0].profile_arn #=> String
+    #   resp.lens_review.profiles[0].profile_version #=> String
+    #   resp.lens_review.prioritized_risk_counts #=> Hash
+    #   resp.lens_review.prioritized_risk_counts["Risk"] #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetLensReview AWS API Documentation
     #
@@ -1704,6 +1992,11 @@ module Aws::WellArchitected
     #   resp.milestone.workload.discovery_config.workload_resource_definition[0] #=> String, one of "WORKLOAD_METADATA", "APP_REGISTRY"
     #   resp.milestone.workload.applications #=> Array
     #   resp.milestone.workload.applications[0] #=> String
+    #   resp.milestone.workload.profiles #=> Array
+    #   resp.milestone.workload.profiles[0].profile_arn #=> String
+    #   resp.milestone.workload.profiles[0].profile_version #=> String
+    #   resp.milestone.workload.prioritized_risk_counts #=> Hash
+    #   resp.milestone.workload.prioritized_risk_counts["Risk"] #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetMilestone AWS API Documentation
     #
@@ -1711,6 +2004,90 @@ module Aws::WellArchitected
     # @param [Hash] params ({})
     def get_milestone(params = {}, options = {})
       req = build_request(:get_milestone, params)
+      req.send_request(options)
+    end
+
+    # Get profile information.
+    #
+    # @option params [required, String] :profile_arn
+    #   The profile ARN.
+    #
+    # @option params [String] :profile_version
+    #   The profile version.
+    #
+    # @return [Types::GetProfileOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetProfileOutput#profile #profile} => Types::Profile
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_profile({
+    #     profile_arn: "ProfileArn", # required
+    #     profile_version: "ProfileVersion",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile.profile_arn #=> String
+    #   resp.profile.profile_version #=> String
+    #   resp.profile.profile_name #=> String
+    #   resp.profile.profile_description #=> String
+    #   resp.profile.profile_questions #=> Array
+    #   resp.profile.profile_questions[0].question_id #=> String
+    #   resp.profile.profile_questions[0].question_title #=> String
+    #   resp.profile.profile_questions[0].question_description #=> String
+    #   resp.profile.profile_questions[0].question_choices #=> Array
+    #   resp.profile.profile_questions[0].question_choices[0].choice_id #=> String
+    #   resp.profile.profile_questions[0].question_choices[0].choice_title #=> String
+    #   resp.profile.profile_questions[0].question_choices[0].choice_description #=> String
+    #   resp.profile.profile_questions[0].selected_choice_ids #=> Array
+    #   resp.profile.profile_questions[0].selected_choice_ids[0] #=> String
+    #   resp.profile.profile_questions[0].min_selected_choices #=> Integer
+    #   resp.profile.profile_questions[0].max_selected_choices #=> Integer
+    #   resp.profile.owner #=> String
+    #   resp.profile.created_at #=> Time
+    #   resp.profile.updated_at #=> Time
+    #   resp.profile.share_invitation_id #=> String
+    #   resp.profile.tags #=> Hash
+    #   resp.profile.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetProfile AWS API Documentation
+    #
+    # @overload get_profile(params = {})
+    # @param [Hash] params ({})
+    def get_profile(params = {}, options = {})
+      req = build_request(:get_profile, params)
+      req.send_request(options)
+    end
+
+    # Get profile template.
+    #
+    # @return [Types::GetProfileTemplateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetProfileTemplateOutput#profile_template #profile_template} => Types::ProfileTemplate
+    #
+    # @example Response structure
+    #
+    #   resp.profile_template.template_name #=> String
+    #   resp.profile_template.template_questions #=> Array
+    #   resp.profile_template.template_questions[0].question_id #=> String
+    #   resp.profile_template.template_questions[0].question_title #=> String
+    #   resp.profile_template.template_questions[0].question_description #=> String
+    #   resp.profile_template.template_questions[0].question_choices #=> Array
+    #   resp.profile_template.template_questions[0].question_choices[0].choice_id #=> String
+    #   resp.profile_template.template_questions[0].question_choices[0].choice_title #=> String
+    #   resp.profile_template.template_questions[0].question_choices[0].choice_description #=> String
+    #   resp.profile_template.template_questions[0].min_selected_choices #=> Integer
+    #   resp.profile_template.template_questions[0].max_selected_choices #=> Integer
+    #   resp.profile_template.created_at #=> Time
+    #   resp.profile_template.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetProfileTemplate AWS API Documentation
+    #
+    # @overload get_profile_template(params = {})
+    # @param [Hash] params ({})
+    def get_profile_template(params = {}, options = {})
+      req = build_request(:get_profile_template, params)
       req.send_request(options)
     end
 
@@ -1767,6 +2144,11 @@ module Aws::WellArchitected
     #   resp.workload.discovery_config.workload_resource_definition[0] #=> String, one of "WORKLOAD_METADATA", "APP_REGISTRY"
     #   resp.workload.applications #=> Array
     #   resp.workload.applications[0] #=> String
+    #   resp.workload.profiles #=> Array
+    #   resp.workload.profiles[0].profile_arn #=> String
+    #   resp.workload.profiles[0].profile_version #=> String
+    #   resp.workload.prioritized_risk_counts #=> Hash
+    #   resp.workload.prioritized_risk_counts["Risk"] #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetWorkload AWS API Documentation
     #
@@ -1910,6 +2292,9 @@ module Aws::WellArchitected
     # @option params [Integer] :max_results
     #   The maximum number of results to return for this request.
     #
+    # @option params [String] :question_priority
+    #   The priority of the question.
+    #
     # @return [Types::ListAnswersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListAnswersOutput#workload_id #workload_id} => String
@@ -1930,6 +2315,7 @@ module Aws::WellArchitected
     #     milestone_number: 1,
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     question_priority: "PRIORITIZED", # accepts PRIORITIZED, NONE
     #   })
     #
     # @example Response structure
@@ -1964,6 +2350,7 @@ module Aws::WellArchitected
     #   resp.answer_summaries[0].is_applicable #=> Boolean
     #   resp.answer_summaries[0].risk #=> String, one of "UNANSWERED", "HIGH", "MEDIUM", "NONE", "NOT_APPLICABLE"
     #   resp.answer_summaries[0].reason #=> String, one of "OUT_OF_SCOPE", "BUSINESS_PRIORITIES", "ARCHITECTURE_CONSTRAINTS", "OTHER", "NONE"
+    #   resp.answer_summaries[0].question_type #=> String, one of "PRIORITIZED", "NON_PRIORITIZED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAnswers AWS API Documentation
@@ -2156,6 +2543,9 @@ module Aws::WellArchitected
     # @option params [Integer] :max_results
     #   The maximum number of results to return for this request.
     #
+    # @option params [String] :question_priority
+    #   The priority of the question.
+    #
     # @return [Types::ListLensReviewImprovementsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListLensReviewImprovementsOutput#workload_id #workload_id} => String
@@ -2176,6 +2566,7 @@ module Aws::WellArchitected
     #     milestone_number: 1,
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     question_priority: "PRIORITIZED", # accepts PRIORITIZED, NONE
     #   })
     #
     # @example Response structure
@@ -2253,6 +2644,11 @@ module Aws::WellArchitected
     #   resp.lens_review_summaries[0].updated_at #=> Time
     #   resp.lens_review_summaries[0].risk_counts #=> Hash
     #   resp.lens_review_summaries[0].risk_counts["Risk"] #=> Integer
+    #   resp.lens_review_summaries[0].profiles #=> Array
+    #   resp.lens_review_summaries[0].profiles[0].profile_arn #=> String
+    #   resp.lens_review_summaries[0].profiles[0].profile_version #=> String
+    #   resp.lens_review_summaries[0].prioritized_risk_counts #=> Hash
+    #   resp.lens_review_summaries[0].prioritized_risk_counts["Risk"] #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListLensReviews AWS API Documentation
@@ -2291,7 +2687,7 @@ module Aws::WellArchitected
     #   The maximum number of results to return for this request.
     #
     # @option params [String] :status
-    #   The status of a workload share.
+    #   The status of the share request.
     #
     # @return [Types::ListLensSharesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2431,6 +2827,11 @@ module Aws::WellArchitected
     #   resp.milestone_summaries[0].workload_summary.risk_counts #=> Hash
     #   resp.milestone_summaries[0].workload_summary.risk_counts["Risk"] #=> Integer
     #   resp.milestone_summaries[0].workload_summary.improvement_status #=> String, one of "NOT_APPLICABLE", "NOT_STARTED", "IN_PROGRESS", "COMPLETE", "RISK_ACKNOWLEDGED"
+    #   resp.milestone_summaries[0].workload_summary.profiles #=> Array
+    #   resp.milestone_summaries[0].workload_summary.profiles[0].profile_arn #=> String
+    #   resp.milestone_summaries[0].workload_summary.profiles[0].profile_version #=> String
+    #   resp.milestone_summaries[0].workload_summary.prioritized_risk_counts #=> Hash
+    #   resp.milestone_summaries[0].workload_summary.prioritized_risk_counts["Risk"] #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListMilestones AWS API Documentation
@@ -2490,6 +2891,158 @@ module Aws::WellArchitected
       req.send_request(options)
     end
 
+    # List profile notifications.
+    #
+    # @option params [String] :workload_id
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for this request.
+    #
+    # @return [Types::ListProfileNotificationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProfileNotificationsOutput#notification_summaries #notification_summaries} => Array&lt;Types::ProfileNotificationSummary&gt;
+    #   * {Types::ListProfileNotificationsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_profile_notifications({
+    #     workload_id: "WorkloadId",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.notification_summaries #=> Array
+    #   resp.notification_summaries[0].current_profile_version #=> String
+    #   resp.notification_summaries[0].latest_profile_version #=> String
+    #   resp.notification_summaries[0].type #=> String, one of "PROFILE_ANSWERS_UPDATED", "PROFILE_DELETED"
+    #   resp.notification_summaries[0].profile_arn #=> String
+    #   resp.notification_summaries[0].profile_name #=> String
+    #   resp.notification_summaries[0].workload_id #=> String
+    #   resp.notification_summaries[0].workload_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListProfileNotifications AWS API Documentation
+    #
+    # @overload list_profile_notifications(params = {})
+    # @param [Hash] params ({})
+    def list_profile_notifications(params = {}, options = {})
+      req = build_request(:list_profile_notifications, params)
+      req.send_request(options)
+    end
+
+    # List profile shares.
+    #
+    # @option params [required, String] :profile_arn
+    #   The profile ARN.
+    #
+    # @option params [String] :shared_with_prefix
+    #   The Amazon Web Services account ID, IAM role, organization ID, or
+    #   organizational unit (OU) ID with which the profile is shared.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for this request.
+    #
+    # @option params [String] :status
+    #   The status of the share request.
+    #
+    # @return [Types::ListProfileSharesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProfileSharesOutput#profile_share_summaries #profile_share_summaries} => Array&lt;Types::ProfileShareSummary&gt;
+    #   * {Types::ListProfileSharesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_profile_shares({
+    #     profile_arn: "ProfileArn", # required
+    #     shared_with_prefix: "SharedWithPrefix",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     status: "ACCEPTED", # accepts ACCEPTED, REJECTED, PENDING, REVOKED, EXPIRED, ASSOCIATING, ASSOCIATED, FAILED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile_share_summaries #=> Array
+    #   resp.profile_share_summaries[0].share_id #=> String
+    #   resp.profile_share_summaries[0].shared_with #=> String
+    #   resp.profile_share_summaries[0].status #=> String, one of "ACCEPTED", "REJECTED", "PENDING", "REVOKED", "EXPIRED", "ASSOCIATING", "ASSOCIATED", "FAILED"
+    #   resp.profile_share_summaries[0].status_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListProfileShares AWS API Documentation
+    #
+    # @overload list_profile_shares(params = {})
+    # @param [Hash] params ({})
+    def list_profile_shares(params = {}, options = {})
+      req = build_request(:list_profile_shares, params)
+      req.send_request(options)
+    end
+
+    # List profiles.
+    #
+    # @option params [String] :profile_name_prefix
+    #   Prefix for profile name.
+    #
+    # @option params [String] :profile_owner_type
+    #   Profile owner type.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for this request.
+    #
+    # @return [Types::ListProfilesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProfilesOutput#profile_summaries #profile_summaries} => Array&lt;Types::ProfileSummary&gt;
+    #   * {Types::ListProfilesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_profiles({
+    #     profile_name_prefix: "ProfileNamePrefix",
+    #     profile_owner_type: "SELF", # accepts SELF, SHARED
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile_summaries #=> Array
+    #   resp.profile_summaries[0].profile_arn #=> String
+    #   resp.profile_summaries[0].profile_version #=> String
+    #   resp.profile_summaries[0].profile_name #=> String
+    #   resp.profile_summaries[0].profile_description #=> String
+    #   resp.profile_summaries[0].owner #=> String
+    #   resp.profile_summaries[0].created_at #=> Time
+    #   resp.profile_summaries[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListProfiles AWS API Documentation
+    #
+    # @overload list_profiles(params = {})
+    # @param [Hash] params ({})
+    def list_profiles(params = {}, options = {})
+      req = build_request(:list_profiles, params)
+      req.send_request(options)
+    end
+
     # List the workload invitations.
     #
     # @option params [String] :workload_name_prefix
@@ -2509,6 +3062,9 @@ module Aws::WellArchitected
     # @option params [Integer] :max_results
     #   The maximum number of results to return for this request.
     #
+    # @option params [String] :profile_name_prefix
+    #   Profile name prefix.
+    #
     # @return [Types::ListShareInvitationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListShareInvitationsOutput#share_invitation_summaries #share_invitation_summaries} => Array&lt;Types::ShareInvitationSummary&gt;
@@ -2521,9 +3077,10 @@ module Aws::WellArchitected
     #   resp = client.list_share_invitations({
     #     workload_name_prefix: "WorkloadNamePrefix",
     #     lens_name_prefix: "LensNamePrefix",
-    #     share_resource_type: "WORKLOAD", # accepts WORKLOAD, LENS
+    #     share_resource_type: "WORKLOAD", # accepts WORKLOAD, LENS, PROFILE
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     profile_name_prefix: "ProfileNamePrefix",
     #   })
     #
     # @example Response structure
@@ -2533,11 +3090,13 @@ module Aws::WellArchitected
     #   resp.share_invitation_summaries[0].shared_by #=> String
     #   resp.share_invitation_summaries[0].shared_with #=> String
     #   resp.share_invitation_summaries[0].permission_type #=> String, one of "READONLY", "CONTRIBUTOR"
-    #   resp.share_invitation_summaries[0].share_resource_type #=> String, one of "WORKLOAD", "LENS"
+    #   resp.share_invitation_summaries[0].share_resource_type #=> String, one of "WORKLOAD", "LENS", "PROFILE"
     #   resp.share_invitation_summaries[0].workload_name #=> String
     #   resp.share_invitation_summaries[0].workload_id #=> String
     #   resp.share_invitation_summaries[0].lens_name #=> String
     #   resp.share_invitation_summaries[0].lens_arn #=> String
+    #   resp.share_invitation_summaries[0].profile_name #=> String
+    #   resp.share_invitation_summaries[0].profile_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListShareInvitations AWS API Documentation
@@ -2551,8 +3110,8 @@ module Aws::WellArchitected
 
     # List the tags for a resource.
     #
-    # <note markdown="1"> The WorkloadArn parameter can be either a workload ARN or a custom
-    # lens ARN.
+    # <note markdown="1"> The WorkloadArn parameter can be a workload ARN, a custom lens ARN, or
+    # a profile ARN.
     #
     #  </note>
     #
@@ -2600,7 +3159,7 @@ module Aws::WellArchitected
     #   The maximum number of results to return for this request.
     #
     # @option params [String] :status
-    #   The status of a workload share.
+    #   The status of the share request.
     #
     # @return [Types::ListWorkloadSharesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2680,6 +3239,11 @@ module Aws::WellArchitected
     #   resp.workload_summaries[0].risk_counts #=> Hash
     #   resp.workload_summaries[0].risk_counts["Risk"] #=> Integer
     #   resp.workload_summaries[0].improvement_status #=> String, one of "NOT_APPLICABLE", "NOT_STARTED", "IN_PROGRESS", "COMPLETE", "RISK_ACKNOWLEDGED"
+    #   resp.workload_summaries[0].profiles #=> Array
+    #   resp.workload_summaries[0].profiles[0].profile_arn #=> String
+    #   resp.workload_summaries[0].profiles[0].profile_version #=> String
+    #   resp.workload_summaries[0].prioritized_risk_counts #=> Hash
+    #   resp.workload_summaries[0].prioritized_risk_counts["Risk"] #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListWorkloads AWS API Documentation
@@ -2693,8 +3257,8 @@ module Aws::WellArchitected
 
     # Adds one or more tags to the specified resource.
     #
-    # <note markdown="1"> The WorkloadArn parameter can be either a workload ARN or a custom
-    # lens ARN.
+    # <note markdown="1"> The WorkloadArn parameter can be a workload ARN, a custom lens ARN, or
+    # a profile ARN.
     #
     #  </note>
     #
@@ -2726,8 +3290,8 @@ module Aws::WellArchitected
 
     # Deletes specified tags from a resource.
     #
-    # <note markdown="1"> The WorkloadArn parameter can be either a workload ARN or a custom
-    # lens ARN.
+    # <note markdown="1"> The WorkloadArn parameter can be a workload ARN, a custom lens ARN, or
+    # a profile ARN.
     #
     #  </note>
     #
@@ -2957,11 +3521,18 @@ module Aws::WellArchitected
     #   resp.lens_review.pillar_review_summaries[0].notes #=> String
     #   resp.lens_review.pillar_review_summaries[0].risk_counts #=> Hash
     #   resp.lens_review.pillar_review_summaries[0].risk_counts["Risk"] #=> Integer
+    #   resp.lens_review.pillar_review_summaries[0].prioritized_risk_counts #=> Hash
+    #   resp.lens_review.pillar_review_summaries[0].prioritized_risk_counts["Risk"] #=> Integer
     #   resp.lens_review.updated_at #=> Time
     #   resp.lens_review.notes #=> String
     #   resp.lens_review.risk_counts #=> Hash
     #   resp.lens_review.risk_counts["Risk"] #=> Integer
     #   resp.lens_review.next_token #=> String
+    #   resp.lens_review.profiles #=> Array
+    #   resp.lens_review.profiles[0].profile_arn #=> String
+    #   resp.lens_review.profiles[0].profile_version #=> String
+    #   resp.lens_review.prioritized_risk_counts #=> Hash
+    #   resp.lens_review.prioritized_risk_counts["Risk"] #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateLensReview AWS API Documentation
     #
@@ -2969,6 +3540,68 @@ module Aws::WellArchitected
     # @param [Hash] params ({})
     def update_lens_review(params = {}, options = {})
       req = build_request(:update_lens_review, params)
+      req.send_request(options)
+    end
+
+    # Update a profile.
+    #
+    # @option params [required, String] :profile_arn
+    #   The profile ARN.
+    #
+    # @option params [String] :profile_description
+    #   The profile description.
+    #
+    # @option params [Array<Types::ProfileQuestionUpdate>] :profile_questions
+    #   Profile questions.
+    #
+    # @return [Types::UpdateProfileOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateProfileOutput#profile #profile} => Types::Profile
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_profile({
+    #     profile_arn: "ProfileArn", # required
+    #     profile_description: "ProfileDescription",
+    #     profile_questions: [
+    #       {
+    #         question_id: "QuestionId",
+    #         selected_choice_ids: ["ChoiceId"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile.profile_arn #=> String
+    #   resp.profile.profile_version #=> String
+    #   resp.profile.profile_name #=> String
+    #   resp.profile.profile_description #=> String
+    #   resp.profile.profile_questions #=> Array
+    #   resp.profile.profile_questions[0].question_id #=> String
+    #   resp.profile.profile_questions[0].question_title #=> String
+    #   resp.profile.profile_questions[0].question_description #=> String
+    #   resp.profile.profile_questions[0].question_choices #=> Array
+    #   resp.profile.profile_questions[0].question_choices[0].choice_id #=> String
+    #   resp.profile.profile_questions[0].question_choices[0].choice_title #=> String
+    #   resp.profile.profile_questions[0].question_choices[0].choice_description #=> String
+    #   resp.profile.profile_questions[0].selected_choice_ids #=> Array
+    #   resp.profile.profile_questions[0].selected_choice_ids[0] #=> String
+    #   resp.profile.profile_questions[0].min_selected_choices #=> Integer
+    #   resp.profile.profile_questions[0].max_selected_choices #=> Integer
+    #   resp.profile.owner #=> String
+    #   resp.profile.created_at #=> Time
+    #   resp.profile.updated_at #=> Time
+    #   resp.profile.share_invitation_id #=> String
+    #   resp.profile.tags #=> Hash
+    #   resp.profile.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateProfile AWS API Documentation
+    #
+    # @overload update_profile(params = {})
+    # @param [Hash] params ({})
+    def update_profile(params = {}, options = {})
+      req = build_request(:update_profile, params)
       req.send_request(options)
     end
 
@@ -2999,10 +3632,11 @@ module Aws::WellArchitected
     # @example Response structure
     #
     #   resp.share_invitation.share_invitation_id #=> String
-    #   resp.share_invitation.share_resource_type #=> String, one of "WORKLOAD", "LENS"
+    #   resp.share_invitation.share_resource_type #=> String, one of "WORKLOAD", "LENS", "PROFILE"
     #   resp.share_invitation.workload_id #=> String
     #   resp.share_invitation.lens_alias #=> String
     #   resp.share_invitation.lens_arn #=> String
+    #   resp.share_invitation.profile_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateShareInvitation AWS API Documentation
     #
@@ -3206,6 +3840,11 @@ module Aws::WellArchitected
     #   resp.workload.discovery_config.workload_resource_definition[0] #=> String, one of "WORKLOAD_METADATA", "APP_REGISTRY"
     #   resp.workload.applications #=> Array
     #   resp.workload.applications[0] #=> String
+    #   resp.workload.profiles #=> Array
+    #   resp.workload.profiles[0].profile_arn #=> String
+    #   resp.workload.profiles[0].profile_version #=> String
+    #   resp.workload.prioritized_risk_counts #=> Hash
+    #   resp.workload.prioritized_risk_counts["Risk"] #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateWorkload AWS API Documentation
     #
@@ -3219,14 +3858,14 @@ module Aws::WellArchitected
     # Update a workload share.
     #
     # @option params [required, String] :share_id
-    #   The ID associated with the workload share.
+    #   The ID associated with the share.
     #
     # @option params [required, String] :workload_id
     #   The ID assigned to the workload. This ID is unique within an Amazon
     #   Web Services Region.
     #
     # @option params [required, String] :permission_type
-    #   Permission granted on a workload share.
+    #   Permission granted on a share request.
     #
     # @return [Types::UpdateWorkloadShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3320,6 +3959,57 @@ module Aws::WellArchitected
       req.send_request(options)
     end
 
+    # Upgrade a profile.
+    #
+    # @option params [required, String] :workload_id
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
+    #
+    # @option params [required, String] :profile_arn
+    #   The profile ARN.
+    #
+    # @option params [String] :milestone_name
+    #   The name of the milestone in a workload.
+    #
+    #   Milestone names must be unique within a workload.
+    #
+    # @option params [String] :client_request_token
+    #   A unique case-sensitive string used to ensure that this request is
+    #   idempotent (executes only once).
+    #
+    #   You should not reuse the same token for other requests. If you retry a
+    #   request with the same client request token and the same parameters
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
+    #
+    #   This token is listed as required, however, if you do not specify it,
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.upgrade_profile_version({
+    #     workload_id: "WorkloadId", # required
+    #     profile_arn: "ProfileArn", # required
+    #     milestone_name: "MilestoneName",
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpgradeProfileVersion AWS API Documentation
+    #
+    # @overload upgrade_profile_version(params = {})
+    # @param [Hash] params ({})
+    def upgrade_profile_version(params = {}, options = {})
+      req = build_request(:upgrade_profile_version, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -3333,7 +4023,7 @@ module Aws::WellArchitected
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wellarchitected'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

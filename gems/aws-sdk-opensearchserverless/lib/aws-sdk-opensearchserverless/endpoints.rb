@@ -9,6 +9,7 @@
 
 
 module Aws::OpenSearchServerless
+  # @api private
   module Endpoints
 
     class BatchGetCollection

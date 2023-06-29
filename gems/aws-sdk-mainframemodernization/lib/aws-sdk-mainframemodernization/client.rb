@@ -275,6 +275,11 @@ module Aws::MainframeModernization
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -424,6 +429,10 @@ module Aws::MainframeModernization
     # @option params [required, String] :name
     #   The unique identifier of the application.
     #
+    # @option params [String] :role_arn
+    #   The Amazon Resource Name (ARN) of the role associated with the
+    #   application.
+    #
     # @option params [Hash<String,String>] :tags
     #   A list of tags to apply to the application.
     #
@@ -445,6 +454,7 @@ module Aws::MainframeModernization
     #     engine_type: "microfocus", # required, accepts microfocus, bluage
     #     kms_key_id: "String",
     #     name: "EntityName", # required
+    #     role_arn: "Arn",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -503,6 +513,15 @@ module Aws::MainframeModernization
     #               gdg: {
     #                 limit: 1,
     #                 roll_disposition: "String",
+    #               },
+    #               po: {
+    #                 encoding: "String",
+    #                 format: "String", # required
+    #                 member_file_extensions: ["String20"], # required
+    #               },
+    #               ps: {
+    #                 encoding: "String",
+    #                 format: "String", # required
     #               },
     #               vsam: {
     #                 alternate_keys: [
@@ -812,6 +831,7 @@ module Aws::MainframeModernization
     #   * {Types::GetApplicationResponse#load_balancer_dns_name #load_balancer_dns_name} => String
     #   * {Types::GetApplicationResponse#log_groups #log_groups} => Array&lt;Types::LogGroupSummary&gt;
     #   * {Types::GetApplicationResponse#name #name} => String
+    #   * {Types::GetApplicationResponse#role_arn #role_arn} => String
     #   * {Types::GetApplicationResponse#status #status} => String
     #   * {Types::GetApplicationResponse#status_reason #status_reason} => String
     #   * {Types::GetApplicationResponse#tags #tags} => Hash&lt;String,String&gt;
@@ -849,6 +869,7 @@ module Aws::MainframeModernization
     #   resp.log_groups[0].log_group_name #=> String
     #   resp.log_groups[0].log_type #=> String
     #   resp.name #=> String
+    #   resp.role_arn #=> String
     #   resp.status #=> String, one of "Creating", "Created", "Available", "Ready", "Starting", "Running", "Stopping", "Stopped", "Failed", "Deleting", "Deleting From Environment"
     #   resp.status_reason #=> String
     #   resp.tags #=> Hash
@@ -1000,6 +1021,10 @@ module Aws::MainframeModernization
     #   resp.data_set_name #=> String
     #   resp.data_set_org.gdg.limit #=> Integer
     #   resp.data_set_org.gdg.roll_disposition #=> String
+    #   resp.data_set_org.po.encoding #=> String
+    #   resp.data_set_org.po.format #=> String
+    #   resp.data_set_org.ps.encoding #=> String
+    #   resp.data_set_org.ps.format #=> String
     #   resp.data_set_org.vsam.alternate_keys #=> Array
     #   resp.data_set_org.vsam.alternate_keys[0].allow_duplicates #=> Boolean
     #   resp.data_set_org.vsam.alternate_keys[0].length #=> Integer
@@ -1285,6 +1310,7 @@ module Aws::MainframeModernization
     #   resp.applications[0].environment_id #=> String
     #   resp.applications[0].last_start_time #=> Time
     #   resp.applications[0].name #=> String
+    #   resp.applications[0].role_arn #=> String
     #   resp.applications[0].status #=> String, one of "Creating", "Created", "Available", "Ready", "Starting", "Running", "Stopping", "Stopped", "Failed", "Deleting", "Deleting From Environment"
     #   resp.applications[0].version_status #=> String, one of "Creating", "Available", "Failed"
     #   resp.next_token #=> String
@@ -1987,7 +2013,7 @@ module Aws::MainframeModernization
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mainframemodernization'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

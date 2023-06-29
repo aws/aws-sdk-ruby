@@ -9,6 +9,7 @@
 
 
 module Aws::LexModelBuildingService
+  # @api private
   module Endpoints
 
     class CreateBotVersion

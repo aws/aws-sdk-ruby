@@ -9,6 +9,7 @@
 
 
 module Aws::CodeCommit
+  # @api private
   module Endpoints
 
     class AssociateApprovalRuleTemplateWithRepository

@@ -124,6 +124,8 @@ module Aws::EMR
             Aws::EMR::Endpoints::ListStudioSessionMappings.build(context)
           when :list_studios
             Aws::EMR::Endpoints::ListStudios.build(context)
+          when :list_supported_instance_types
+            Aws::EMR::Endpoints::ListSupportedInstanceTypes.build(context)
           when :modify_cluster
             Aws::EMR::Endpoints::ModifyCluster.build(context)
           when :modify_instance_fleet

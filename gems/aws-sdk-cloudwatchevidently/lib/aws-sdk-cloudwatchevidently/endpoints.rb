@@ -9,6 +9,7 @@
 
 
 module Aws::CloudWatchEvidently
+  # @api private
   module Endpoints
 
     class BatchEvaluateFeature

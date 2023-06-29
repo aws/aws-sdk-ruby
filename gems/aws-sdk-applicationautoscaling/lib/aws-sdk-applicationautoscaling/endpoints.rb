@@ -9,6 +9,7 @@
 
 
 module Aws::ApplicationAutoScaling
+  # @api private
   module Endpoints
 
     class DeleteScalingPolicy

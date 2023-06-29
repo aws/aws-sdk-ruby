@@ -197,7 +197,8 @@ module Aws
       :s3_use_arn_region,
       :s3_us_east_1_regional_endpoint,
       :s3_disable_multiregion_access_points,
-      :defaults_mode
+      :defaults_mode,
+      :sdk_ua_app_id
     )
 
     private

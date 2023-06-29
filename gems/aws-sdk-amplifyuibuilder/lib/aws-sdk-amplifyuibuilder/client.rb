@@ -275,6 +275,11 @@ module Aws::AmplifyUIBuilder
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -1869,7 +1874,7 @@ module Aws::AmplifyUIBuilder
       req.send_request(options)
     end
 
-    # Creates a new form for an Amplify app.
+    # Creates a new form for an Amplify.
     #
     # @option params [required, String] :app_id
     #   The unique ID of the Amplify app to associate with the form.
@@ -3139,6 +3144,104 @@ module Aws::AmplifyUIBuilder
       req.send_request(options)
     end
 
+    # Returns an existing code generation job.
+    #
+    # @option params [required, String] :app_id
+    #   The unique ID of the Amplify app associated with the code generation
+    #   job.
+    #
+    # @option params [required, String] :environment_name
+    #   The name of the backend environment that is a part of the Amplify app
+    #   associated with the code generation job.
+    #
+    # @option params [required, String] :id
+    #   The unique ID of the code generation job.
+    #
+    # @return [Types::GetCodegenJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCodegenJobResponse#job #job} => Types::CodegenJob
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_codegen_job({
+    #     app_id: "AppId", # required
+    #     environment_name: "String", # required
+    #     id: "Uuid", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job.id #=> String
+    #   resp.job.app_id #=> String
+    #   resp.job.environment_name #=> String
+    #   resp.job.render_config.react.module #=> String, one of "es2020", "esnext"
+    #   resp.job.render_config.react.target #=> String, one of "es2015", "es2020"
+    #   resp.job.render_config.react.script #=> String, one of "jsx", "tsx", "js"
+    #   resp.job.render_config.react.render_type_declarations #=> Boolean
+    #   resp.job.render_config.react.inline_source_map #=> Boolean
+    #   resp.job.generic_data_schema.data_source_type #=> String, one of "DataStore"
+    #   resp.job.generic_data_schema.models #=> Hash
+    #   resp.job.generic_data_schema.models["String"].fields #=> Hash
+    #   resp.job.generic_data_schema.models["String"].fields["String"].data_type #=> String, one of "ID", "String", "Int", "Float", "AWSDate", "AWSTime", "AWSDateTime", "AWSTimestamp", "AWSEmail", "AWSURL", "AWSIPAddress", "Boolean", "AWSJSON", "AWSPhone", "Enum", "Model", "NonModel"
+    #   resp.job.generic_data_schema.models["String"].fields["String"].data_type_value #=> String
+    #   resp.job.generic_data_schema.models["String"].fields["String"].required #=> Boolean
+    #   resp.job.generic_data_schema.models["String"].fields["String"].read_only #=> Boolean
+    #   resp.job.generic_data_schema.models["String"].fields["String"].is_array #=> Boolean
+    #   resp.job.generic_data_schema.models["String"].fields["String"].relationship.type #=> String, one of "HAS_MANY", "HAS_ONE", "BELONGS_TO"
+    #   resp.job.generic_data_schema.models["String"].fields["String"].relationship.related_model_name #=> String
+    #   resp.job.generic_data_schema.models["String"].fields["String"].relationship.related_model_fields #=> Array
+    #   resp.job.generic_data_schema.models["String"].fields["String"].relationship.related_model_fields[0] #=> String
+    #   resp.job.generic_data_schema.models["String"].fields["String"].relationship.can_unlink_associated_model #=> Boolean
+    #   resp.job.generic_data_schema.models["String"].fields["String"].relationship.related_join_field_name #=> String
+    #   resp.job.generic_data_schema.models["String"].fields["String"].relationship.related_join_table_name #=> String
+    #   resp.job.generic_data_schema.models["String"].fields["String"].relationship.belongs_to_field_on_related_model #=> String
+    #   resp.job.generic_data_schema.models["String"].fields["String"].relationship.associated_fields #=> Array
+    #   resp.job.generic_data_schema.models["String"].fields["String"].relationship.associated_fields[0] #=> String
+    #   resp.job.generic_data_schema.models["String"].fields["String"].relationship.is_has_many_index #=> Boolean
+    #   resp.job.generic_data_schema.models["String"].is_join_table #=> Boolean
+    #   resp.job.generic_data_schema.models["String"].primary_keys #=> Array
+    #   resp.job.generic_data_schema.models["String"].primary_keys[0] #=> String
+    #   resp.job.generic_data_schema.enums #=> Hash
+    #   resp.job.generic_data_schema.enums["String"].values #=> Array
+    #   resp.job.generic_data_schema.enums["String"].values[0] #=> String
+    #   resp.job.generic_data_schema.non_models #=> Hash
+    #   resp.job.generic_data_schema.non_models["String"].fields #=> Hash
+    #   resp.job.generic_data_schema.non_models["String"].fields["String"].data_type #=> String, one of "ID", "String", "Int", "Float", "AWSDate", "AWSTime", "AWSDateTime", "AWSTimestamp", "AWSEmail", "AWSURL", "AWSIPAddress", "Boolean", "AWSJSON", "AWSPhone", "Enum", "Model", "NonModel"
+    #   resp.job.generic_data_schema.non_models["String"].fields["String"].data_type_value #=> String
+    #   resp.job.generic_data_schema.non_models["String"].fields["String"].required #=> Boolean
+    #   resp.job.generic_data_schema.non_models["String"].fields["String"].read_only #=> Boolean
+    #   resp.job.generic_data_schema.non_models["String"].fields["String"].is_array #=> Boolean
+    #   resp.job.generic_data_schema.non_models["String"].fields["String"].relationship.type #=> String, one of "HAS_MANY", "HAS_ONE", "BELONGS_TO"
+    #   resp.job.generic_data_schema.non_models["String"].fields["String"].relationship.related_model_name #=> String
+    #   resp.job.generic_data_schema.non_models["String"].fields["String"].relationship.related_model_fields #=> Array
+    #   resp.job.generic_data_schema.non_models["String"].fields["String"].relationship.related_model_fields[0] #=> String
+    #   resp.job.generic_data_schema.non_models["String"].fields["String"].relationship.can_unlink_associated_model #=> Boolean
+    #   resp.job.generic_data_schema.non_models["String"].fields["String"].relationship.related_join_field_name #=> String
+    #   resp.job.generic_data_schema.non_models["String"].fields["String"].relationship.related_join_table_name #=> String
+    #   resp.job.generic_data_schema.non_models["String"].fields["String"].relationship.belongs_to_field_on_related_model #=> String
+    #   resp.job.generic_data_schema.non_models["String"].fields["String"].relationship.associated_fields #=> Array
+    #   resp.job.generic_data_schema.non_models["String"].fields["String"].relationship.associated_fields[0] #=> String
+    #   resp.job.generic_data_schema.non_models["String"].fields["String"].relationship.is_has_many_index #=> Boolean
+    #   resp.job.auto_generate_forms #=> Boolean
+    #   resp.job.features.is_relationship_supported #=> Boolean
+    #   resp.job.features.is_non_model_supported #=> Boolean
+    #   resp.job.status #=> String, one of "in_progress", "failed", "succeeded"
+    #   resp.job.status_message #=> String
+    #   resp.job.asset.download_url #=> String
+    #   resp.job.tags #=> Hash
+    #   resp.job.tags["TagKey"] #=> String
+    #   resp.job.created_at #=> Time
+    #   resp.job.modified_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/GetCodegenJob AWS API Documentation
+    #
+    # @overload get_codegen_job(params = {})
+    # @param [Hash] params ({})
+    def get_codegen_job(params = {}, options = {})
+      req = build_request(:get_codegen_job, params)
+      req.send_request(options)
+    end
+
     # Returns an existing component for an Amplify app.
     #
     # @option params [required, String] :app_id
@@ -3924,6 +4027,56 @@ module Aws::AmplifyUIBuilder
       req.send_request(options)
     end
 
+    # Retrieves a list of code generation jobs for a specified Amplify app
+    # and backend environment.
+    #
+    # @option params [required, String] :app_id
+    #   The unique ID for the Amplify app.
+    #
+    # @option params [required, String] :environment_name
+    #   The name of the backend environment that is a part of the Amplify app.
+    #
+    # @option params [String] :next_token
+    #   The token to request the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of jobs to retrieve.
+    #
+    # @return [Types::ListCodegenJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCodegenJobsResponse#entities #entities} => Array&lt;Types::CodegenJobSummary&gt;
+    #   * {Types::ListCodegenJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_codegen_jobs({
+    #     app_id: "AppId", # required
+    #     environment_name: "String", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entities #=> Array
+    #   resp.entities[0].app_id #=> String
+    #   resp.entities[0].environment_name #=> String
+    #   resp.entities[0].id #=> String
+    #   resp.entities[0].created_at #=> Time
+    #   resp.entities[0].modified_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ListCodegenJobs AWS API Documentation
+    #
+    # @overload list_codegen_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_codegen_jobs(params = {}, options = {})
+      req = build_request(:list_codegen_jobs, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of components for a specified Amplify app and backend
     # environment.
     #
@@ -4146,6 +4299,187 @@ module Aws::AmplifyUIBuilder
     # @param [Hash] params ({})
     def refresh_token(params = {}, options = {})
       req = build_request(:refresh_token, params)
+      req.send_request(options)
+    end
+
+    # Starts a code generation job for for a specified Amplify app and
+    # backend environment.
+    #
+    # @option params [required, String] :app_id
+    #   The unique ID for the Amplify app.
+    #
+    # @option params [required, String] :environment_name
+    #   The name of the backend environment that is a part of the Amplify app.
+    #
+    # @option params [String] :client_token
+    #   The idempotency token used to ensure that the code generation job
+    #   request completes only once.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Types::StartCodegenJobData] :codegen_job_to_create
+    #   The code generation job resource configuration.
+    #
+    # @return [Types::StartCodegenJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartCodegenJobResponse#entity #entity} => Types::CodegenJob
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_codegen_job({
+    #     app_id: "AppId", # required
+    #     environment_name: "String", # required
+    #     client_token: "String",
+    #     codegen_job_to_create: { # required
+    #       render_config: { # required
+    #         react: {
+    #           module: "es2020", # accepts es2020, esnext
+    #           target: "es2015", # accepts es2015, es2020
+    #           script: "jsx", # accepts jsx, tsx, js
+    #           render_type_declarations: false,
+    #           inline_source_map: false,
+    #         },
+    #       },
+    #       generic_data_schema: {
+    #         data_source_type: "DataStore", # required, accepts DataStore
+    #         models: { # required
+    #           "String" => {
+    #             fields: { # required
+    #               "String" => {
+    #                 data_type: "ID", # required, accepts ID, String, Int, Float, AWSDate, AWSTime, AWSDateTime, AWSTimestamp, AWSEmail, AWSURL, AWSIPAddress, Boolean, AWSJSON, AWSPhone, Enum, Model, NonModel
+    #                 data_type_value: "String", # required
+    #                 required: false, # required
+    #                 read_only: false, # required
+    #                 is_array: false, # required
+    #                 relationship: {
+    #                   type: "HAS_MANY", # required, accepts HAS_MANY, HAS_ONE, BELONGS_TO
+    #                   related_model_name: "String", # required
+    #                   related_model_fields: ["String"],
+    #                   can_unlink_associated_model: false,
+    #                   related_join_field_name: "String",
+    #                   related_join_table_name: "String",
+    #                   belongs_to_field_on_related_model: "String",
+    #                   associated_fields: ["String"],
+    #                   is_has_many_index: false,
+    #                 },
+    #               },
+    #             },
+    #             is_join_table: false,
+    #             primary_keys: ["String"], # required
+    #           },
+    #         },
+    #         enums: { # required
+    #           "String" => {
+    #             values: ["String"], # required
+    #           },
+    #         },
+    #         non_models: { # required
+    #           "String" => {
+    #             fields: { # required
+    #               "String" => {
+    #                 data_type: "ID", # required, accepts ID, String, Int, Float, AWSDate, AWSTime, AWSDateTime, AWSTimestamp, AWSEmail, AWSURL, AWSIPAddress, Boolean, AWSJSON, AWSPhone, Enum, Model, NonModel
+    #                 data_type_value: "String", # required
+    #                 required: false, # required
+    #                 read_only: false, # required
+    #                 is_array: false, # required
+    #                 relationship: {
+    #                   type: "HAS_MANY", # required, accepts HAS_MANY, HAS_ONE, BELONGS_TO
+    #                   related_model_name: "String", # required
+    #                   related_model_fields: ["String"],
+    #                   can_unlink_associated_model: false,
+    #                   related_join_field_name: "String",
+    #                   related_join_table_name: "String",
+    #                   belongs_to_field_on_related_model: "String",
+    #                   associated_fields: ["String"],
+    #                   is_has_many_index: false,
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         },
+    #       },
+    #       auto_generate_forms: false,
+    #       features: {
+    #         is_relationship_supported: false,
+    #         is_non_model_supported: false,
+    #       },
+    #       tags: {
+    #         "TagKey" => "TagValue",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entity.id #=> String
+    #   resp.entity.app_id #=> String
+    #   resp.entity.environment_name #=> String
+    #   resp.entity.render_config.react.module #=> String, one of "es2020", "esnext"
+    #   resp.entity.render_config.react.target #=> String, one of "es2015", "es2020"
+    #   resp.entity.render_config.react.script #=> String, one of "jsx", "tsx", "js"
+    #   resp.entity.render_config.react.render_type_declarations #=> Boolean
+    #   resp.entity.render_config.react.inline_source_map #=> Boolean
+    #   resp.entity.generic_data_schema.data_source_type #=> String, one of "DataStore"
+    #   resp.entity.generic_data_schema.models #=> Hash
+    #   resp.entity.generic_data_schema.models["String"].fields #=> Hash
+    #   resp.entity.generic_data_schema.models["String"].fields["String"].data_type #=> String, one of "ID", "String", "Int", "Float", "AWSDate", "AWSTime", "AWSDateTime", "AWSTimestamp", "AWSEmail", "AWSURL", "AWSIPAddress", "Boolean", "AWSJSON", "AWSPhone", "Enum", "Model", "NonModel"
+    #   resp.entity.generic_data_schema.models["String"].fields["String"].data_type_value #=> String
+    #   resp.entity.generic_data_schema.models["String"].fields["String"].required #=> Boolean
+    #   resp.entity.generic_data_schema.models["String"].fields["String"].read_only #=> Boolean
+    #   resp.entity.generic_data_schema.models["String"].fields["String"].is_array #=> Boolean
+    #   resp.entity.generic_data_schema.models["String"].fields["String"].relationship.type #=> String, one of "HAS_MANY", "HAS_ONE", "BELONGS_TO"
+    #   resp.entity.generic_data_schema.models["String"].fields["String"].relationship.related_model_name #=> String
+    #   resp.entity.generic_data_schema.models["String"].fields["String"].relationship.related_model_fields #=> Array
+    #   resp.entity.generic_data_schema.models["String"].fields["String"].relationship.related_model_fields[0] #=> String
+    #   resp.entity.generic_data_schema.models["String"].fields["String"].relationship.can_unlink_associated_model #=> Boolean
+    #   resp.entity.generic_data_schema.models["String"].fields["String"].relationship.related_join_field_name #=> String
+    #   resp.entity.generic_data_schema.models["String"].fields["String"].relationship.related_join_table_name #=> String
+    #   resp.entity.generic_data_schema.models["String"].fields["String"].relationship.belongs_to_field_on_related_model #=> String
+    #   resp.entity.generic_data_schema.models["String"].fields["String"].relationship.associated_fields #=> Array
+    #   resp.entity.generic_data_schema.models["String"].fields["String"].relationship.associated_fields[0] #=> String
+    #   resp.entity.generic_data_schema.models["String"].fields["String"].relationship.is_has_many_index #=> Boolean
+    #   resp.entity.generic_data_schema.models["String"].is_join_table #=> Boolean
+    #   resp.entity.generic_data_schema.models["String"].primary_keys #=> Array
+    #   resp.entity.generic_data_schema.models["String"].primary_keys[0] #=> String
+    #   resp.entity.generic_data_schema.enums #=> Hash
+    #   resp.entity.generic_data_schema.enums["String"].values #=> Array
+    #   resp.entity.generic_data_schema.enums["String"].values[0] #=> String
+    #   resp.entity.generic_data_schema.non_models #=> Hash
+    #   resp.entity.generic_data_schema.non_models["String"].fields #=> Hash
+    #   resp.entity.generic_data_schema.non_models["String"].fields["String"].data_type #=> String, one of "ID", "String", "Int", "Float", "AWSDate", "AWSTime", "AWSDateTime", "AWSTimestamp", "AWSEmail", "AWSURL", "AWSIPAddress", "Boolean", "AWSJSON", "AWSPhone", "Enum", "Model", "NonModel"
+    #   resp.entity.generic_data_schema.non_models["String"].fields["String"].data_type_value #=> String
+    #   resp.entity.generic_data_schema.non_models["String"].fields["String"].required #=> Boolean
+    #   resp.entity.generic_data_schema.non_models["String"].fields["String"].read_only #=> Boolean
+    #   resp.entity.generic_data_schema.non_models["String"].fields["String"].is_array #=> Boolean
+    #   resp.entity.generic_data_schema.non_models["String"].fields["String"].relationship.type #=> String, one of "HAS_MANY", "HAS_ONE", "BELONGS_TO"
+    #   resp.entity.generic_data_schema.non_models["String"].fields["String"].relationship.related_model_name #=> String
+    #   resp.entity.generic_data_schema.non_models["String"].fields["String"].relationship.related_model_fields #=> Array
+    #   resp.entity.generic_data_schema.non_models["String"].fields["String"].relationship.related_model_fields[0] #=> String
+    #   resp.entity.generic_data_schema.non_models["String"].fields["String"].relationship.can_unlink_associated_model #=> Boolean
+    #   resp.entity.generic_data_schema.non_models["String"].fields["String"].relationship.related_join_field_name #=> String
+    #   resp.entity.generic_data_schema.non_models["String"].fields["String"].relationship.related_join_table_name #=> String
+    #   resp.entity.generic_data_schema.non_models["String"].fields["String"].relationship.belongs_to_field_on_related_model #=> String
+    #   resp.entity.generic_data_schema.non_models["String"].fields["String"].relationship.associated_fields #=> Array
+    #   resp.entity.generic_data_schema.non_models["String"].fields["String"].relationship.associated_fields[0] #=> String
+    #   resp.entity.generic_data_schema.non_models["String"].fields["String"].relationship.is_has_many_index #=> Boolean
+    #   resp.entity.auto_generate_forms #=> Boolean
+    #   resp.entity.features.is_relationship_supported #=> Boolean
+    #   resp.entity.features.is_non_model_supported #=> Boolean
+    #   resp.entity.status #=> String, one of "in_progress", "failed", "succeeded"
+    #   resp.entity.status_message #=> String
+    #   resp.entity.asset.download_url #=> String
+    #   resp.entity.tags #=> Hash
+    #   resp.entity.tags["TagKey"] #=> String
+    #   resp.entity.created_at #=> Time
+    #   resp.entity.modified_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/StartCodegenJob AWS API Documentation
+    #
+    # @overload start_codegen_job(params = {})
+    # @param [Hash] params ({})
+    def start_codegen_job(params = {}, options = {})
+      req = build_request(:start_codegen_job, params)
       req.send_request(options)
     end
 
@@ -6036,7 +6370,7 @@ module Aws::AmplifyUIBuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplifyuibuilder'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

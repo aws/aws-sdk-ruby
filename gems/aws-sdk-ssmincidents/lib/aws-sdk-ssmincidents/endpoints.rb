@@ -9,6 +9,7 @@
 
 
 module Aws::SSMIncidents
+  # @api private
   module Endpoints
 
     class CreateReplicationSet

@@ -56,6 +56,8 @@ module Aws::Omics
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :abort_multipart_read_set_upload
+            Aws::Omics::Endpoints::AbortMultipartReadSetUpload.build(context)
           when :batch_delete_read_set
             Aws::Omics::Endpoints::BatchDeleteReadSet.build(context)
           when :cancel_annotation_import_job
@@ -64,8 +66,12 @@ module Aws::Omics
             Aws::Omics::Endpoints::CancelRun.build(context)
           when :cancel_variant_import_job
             Aws::Omics::Endpoints::CancelVariantImportJob.build(context)
+          when :complete_multipart_read_set_upload
+            Aws::Omics::Endpoints::CompleteMultipartReadSetUpload.build(context)
           when :create_annotation_store
             Aws::Omics::Endpoints::CreateAnnotationStore.build(context)
+          when :create_multipart_read_set_upload
+            Aws::Omics::Endpoints::CreateMultipartReadSetUpload.build(context)
           when :create_reference_store
             Aws::Omics::Endpoints::CreateReferenceStore.build(context)
           when :create_run_group
@@ -132,12 +138,16 @@ module Aws::Omics
             Aws::Omics::Endpoints::ListAnnotationImportJobs.build(context)
           when :list_annotation_stores
             Aws::Omics::Endpoints::ListAnnotationStores.build(context)
+          when :list_multipart_read_set_uploads
+            Aws::Omics::Endpoints::ListMultipartReadSetUploads.build(context)
           when :list_read_set_activation_jobs
             Aws::Omics::Endpoints::ListReadSetActivationJobs.build(context)
           when :list_read_set_export_jobs
             Aws::Omics::Endpoints::ListReadSetExportJobs.build(context)
           when :list_read_set_import_jobs
             Aws::Omics::Endpoints::ListReadSetImportJobs.build(context)
+          when :list_read_set_upload_parts
+            Aws::Omics::Endpoints::ListReadSetUploadParts.build(context)
           when :list_read_sets
             Aws::Omics::Endpoints::ListReadSets.build(context)
           when :list_reference_import_jobs
@@ -188,6 +198,8 @@ module Aws::Omics
             Aws::Omics::Endpoints::UpdateVariantStore.build(context)
           when :update_workflow
             Aws::Omics::Endpoints::UpdateWorkflow.build(context)
+          when :upload_read_set_part
+            Aws::Omics::Endpoints::UploadReadSetPart.build(context)
           end
         end
       end

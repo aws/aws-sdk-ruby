@@ -117,7 +117,9 @@ module Aws::CloudWatch
     # @return [Alarm::Collection]
     def alarms(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.describe_alarms(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_alarms(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.metric_alarms.each do |m|
@@ -215,7 +217,9 @@ module Aws::CloudWatch
     # @return [CompositeAlarm::Collection]
     def composite_alarms(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.describe_alarms(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_alarms(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.composite_alarms.each do |c|
@@ -289,7 +293,9 @@ module Aws::CloudWatch
     # @return [Metric::Collection]
     def metrics(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.list_metrics(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.list_metrics(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.metrics.each do |m|

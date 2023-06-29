@@ -210,7 +210,9 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -226,7 +228,9 @@ module Aws::RDS
         resource_identifier: @target_arn,
         opt_in_type: "immediate"
       )
-      resp = @client.apply_pending_maintenance_action(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.apply_pending_maintenance_action(options)
+      end
       ResourcePendingMaintenanceActionList.new(
         arn: resp.data.resource_pending_maintenance_actions.resource_identifier,
         data: resp.data.resource_pending_maintenance_actions,
@@ -245,7 +249,9 @@ module Aws::RDS
         resource_identifier: @target_arn,
         opt_in_type: "undo-opt-in"
       )
-      resp = @client.apply_pending_maintenance_action(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.apply_pending_maintenance_action(options)
+      end
       ResourcePendingMaintenanceActionList.new(
         arn: resp.data.resource_pending_maintenance_actions.resource_identifier,
         data: resp.data.resource_pending_maintenance_actions,
@@ -264,7 +270,9 @@ module Aws::RDS
         resource_identifier: @target_arn,
         opt_in_type: "next-maintenance"
       )
-      resp = @client.apply_pending_maintenance_action(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.apply_pending_maintenance_action(options)
+      end
       ResourcePendingMaintenanceActionList.new(
         arn: resp.data.resource_pending_maintenance_actions.resource_identifier,
         data: resp.data.resource_pending_maintenance_actions,

@@ -9,6 +9,7 @@
 
 
 module Aws::ApplicationCostProfiler
+  # @api private
   module Endpoints
 
     class DeleteReportDefinition

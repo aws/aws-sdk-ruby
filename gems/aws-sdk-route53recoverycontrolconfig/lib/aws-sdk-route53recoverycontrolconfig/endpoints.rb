@@ -9,6 +9,7 @@
 
 
 module Aws::Route53RecoveryControlConfig
+  # @api private
   module Endpoints
 
     class CreateCluster

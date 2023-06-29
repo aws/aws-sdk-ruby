@@ -301,7 +301,7 @@ module Aws::ChimeSDKIdentity
       :last_updated_timestamp,
       :allow_messages,
       :endpoint_state)
-      SENSITIVE = [:app_instance_user_arn, :endpoint_id, :name]
+      SENSITIVE = [:name]
       include Aws::Structure
     end
 
@@ -344,7 +344,7 @@ module Aws::ChimeSDKIdentity
       :type,
       :allow_messages,
       :endpoint_state)
-      SENSITIVE = [:app_instance_user_arn, :endpoint_id, :name]
+      SENSITIVE = [:name]
       include Aws::Structure
     end
 
@@ -692,7 +692,7 @@ module Aws::ChimeSDKIdentity
     class DeregisterAppInstanceUserEndpointRequest < Struct.new(
       :app_instance_user_arn,
       :endpoint_id)
-      SENSITIVE = [:app_instance_user_arn, :endpoint_id]
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -789,7 +789,7 @@ module Aws::ChimeSDKIdentity
     class DescribeAppInstanceUserEndpointRequest < Struct.new(
       :app_instance_user_arn,
       :endpoint_id)
-      SENSITIVE = [:app_instance_user_arn, :endpoint_id]
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -975,12 +975,54 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
+    # Specifies the type of message that triggers a bot.
+    #
+    # @!attribute [rw] standard_messages
+    #   Sets standard messages as the bot trigger. For standard messages:
+    #
+    #   * `ALL`: The bot processes all standard messages.
+    #
+    #   * `AUTO`: The bot responds to ALL messages when the channel has one
+    #     other non-hidden member, and responds to MENTIONS when the channel
+    #     has more than one other non-hidden member.
+    #
+    #   * `MENTIONS`: The bot processes all standard messages that have a
+    #     message attribute with `CHIME.mentions` and a value of the bot
+    #     ARN.
+    #
+    #   * `NONE`: The bot processes no standard messages.
+    #   @return [String]
+    #
+    # @!attribute [rw] targeted_messages
+    #   Sets targeted messages as the bot trigger. For targeted messages:
+    #
+    #   * `ALL`: The bot processes all `TargetedMessages` sent to it. The
+    #     bot then responds with a targeted message back to the sender.
+    #
+    #   * `NONE`: The bot processes no targeted messages.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/InvokedBy AWS API Documentation
+    #
+    class InvokedBy < Struct.new(
+      :standard_messages,
+      :targeted_messages)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for an Amazon Lex V2 bot.
     #
     # @!attribute [rw] responds_to
+    #   **Deprecated**. Use `InvokedBy` instead.
+    #
     #   Determines whether the Amazon Lex V2 bot responds to all standard
     #   messages. Control messages are not supported.
     #   @return [String]
+    #
+    # @!attribute [rw] invoked_by
+    #   Specifies the type of message that triggers a bot.
+    #   @return [Types::InvokedBy]
     #
     # @!attribute [rw] lex_bot_alias_arn
     #   The ARN of the Amazon Lex V2 bot's alias. The ARN uses this format:
@@ -1007,6 +1049,7 @@ module Aws::ChimeSDKIdentity
     #
     class LexConfiguration < Struct.new(
       :responds_to,
+      :invoked_by,
       :lex_bot_alias_arn,
       :locale_id,
       :welcome_intent)
@@ -1411,7 +1454,7 @@ module Aws::ChimeSDKIdentity
     class RegisterAppInstanceUserEndpointResponse < Struct.new(
       :app_instance_user_arn,
       :endpoint_id)
-      SENSITIVE = [:app_instance_user_arn, :endpoint_id]
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1565,12 +1608,17 @@ module Aws::ChimeSDKIdentity
     #   The metadata of the `AppInstanceBot`.
     #   @return [String]
     #
+    # @!attribute [rw] configuration
+    #   The configuration for the bot update.
+    #   @return [Types::Configuration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/UpdateAppInstanceBotRequest AWS API Documentation
     #
     class UpdateAppInstanceBotRequest < Struct.new(
       :app_instance_bot_arn,
       :name,
-      :metadata)
+      :metadata,
+      :configuration)
       SENSITIVE = [:name, :metadata]
       include Aws::Structure
     end
@@ -1647,7 +1695,7 @@ module Aws::ChimeSDKIdentity
       :endpoint_id,
       :name,
       :allow_messages)
-      SENSITIVE = [:app_instance_user_arn, :endpoint_id, :name]
+      SENSITIVE = [:name]
       include Aws::Structure
     end
 
@@ -1664,7 +1712,7 @@ module Aws::ChimeSDKIdentity
     class UpdateAppInstanceUserEndpointResponse < Struct.new(
       :app_instance_user_arn,
       :endpoint_id)
-      SENSITIVE = [:app_instance_user_arn, :endpoint_id]
+      SENSITIVE = []
       include Aws::Structure
     end
 

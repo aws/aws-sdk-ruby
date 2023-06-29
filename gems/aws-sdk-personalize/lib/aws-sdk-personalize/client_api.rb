@@ -42,6 +42,8 @@ module Aws::Personalize
     CategoricalHyperParameterRanges = Shapes::ListShape.new(name: 'CategoricalHyperParameterRanges')
     CategoricalValue = Shapes::StringShape.new(name: 'CategoricalValue')
     CategoricalValues = Shapes::ListShape.new(name: 'CategoricalValues')
+    ColumnName = Shapes::StringShape.new(name: 'ColumnName')
+    ColumnNamesList = Shapes::ListShape.new(name: 'ColumnNamesList')
     ContinuousHyperParameterRange = Shapes::StructureShape.new(name: 'ContinuousHyperParameterRange')
     ContinuousHyperParameterRanges = Shapes::ListShape.new(name: 'ContinuousHyperParameterRanges')
     ContinuousMaxValue = Shapes::FloatShape.new(name: 'ContinuousMaxValue')
@@ -151,6 +153,7 @@ module Aws::Personalize
     EventTrackers = Shapes::ListShape.new(name: 'EventTrackers')
     EventType = Shapes::StringShape.new(name: 'EventType')
     EventValueThreshold = Shapes::StringShape.new(name: 'EventValueThreshold')
+    ExcludedDatasetColumns = Shapes::MapShape.new(name: 'ExcludedDatasetColumns')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     FeatureTransformation = Shapes::StructureShape.new(name: 'FeatureTransformation')
     FeatureTransformationParameters = Shapes::MapShape.new(name: 'FeatureTransformationParameters')
@@ -276,6 +279,7 @@ module Aws::Personalize
     TooManyTagKeysException = Shapes::StructureShape.new(name: 'TooManyTagKeysException')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     TrackingId = Shapes::StringShape.new(name: 'TrackingId')
+    TrainingDataConfig = Shapes::StructureShape.new(name: 'TrainingDataConfig')
     TrainingHours = Shapes::FloatShape.new(name: 'TrainingHours')
     TrainingInputMode = Shapes::StringShape.new(name: 'TrainingInputMode')
     TrainingMode = Shapes::StringShape.new(name: 'TrainingMode')
@@ -423,6 +427,8 @@ module Aws::Personalize
     CategoricalHyperParameterRanges.member = Shapes::ShapeRef.new(shape: CategoricalHyperParameterRange)
 
     CategoricalValues.member = Shapes::ShapeRef.new(shape: CategoricalValue)
+
+    ColumnNamesList.member = Shapes::ShapeRef.new(shape: ColumnName)
 
     ContinuousHyperParameterRange.add_member(:name, Shapes::ShapeRef.new(shape: ParameterName, location_name: "name"))
     ContinuousHyperParameterRange.add_member(:min_value, Shapes::ShapeRef.new(shape: ContinuousMinValue, location_name: "minValue"))
@@ -864,6 +870,9 @@ module Aws::Personalize
 
     EventTrackers.member = Shapes::ShapeRef.new(shape: EventTrackerSummary)
 
+    ExcludedDatasetColumns.key = Shapes::ShapeRef.new(shape: DatasetType)
+    ExcludedDatasetColumns.value = Shapes::ShapeRef.new(shape: ColumnNamesList)
+
     FeatureTransformation.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     FeatureTransformation.add_member(:feature_transformation_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "featureTransformationArn"))
     FeatureTransformation.add_member(:default_parameters, Shapes::ShapeRef.new(shape: FeaturizationParameters, location_name: "defaultParameters"))
@@ -1169,6 +1178,7 @@ module Aws::Personalize
 
     RecommenderConfig.add_member(:item_exploration_config, Shapes::ShapeRef.new(shape: HyperParameters, location_name: "itemExplorationConfig"))
     RecommenderConfig.add_member(:min_recommendation_requests_per_second, Shapes::ShapeRef.new(shape: TransactionsPerSecond, location_name: "minRecommendationRequestsPerSecond"))
+    RecommenderConfig.add_member(:training_data_config, Shapes::ShapeRef.new(shape: TrainingDataConfig, location_name: "trainingDataConfig"))
     RecommenderConfig.struct_class = Types::RecommenderConfig
 
     RecommenderSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
@@ -1229,6 +1239,7 @@ module Aws::Personalize
     SolutionConfig.add_member(:feature_transformation_parameters, Shapes::ShapeRef.new(shape: FeatureTransformationParameters, location_name: "featureTransformationParameters"))
     SolutionConfig.add_member(:auto_ml_config, Shapes::ShapeRef.new(shape: AutoMLConfig, location_name: "autoMLConfig"))
     SolutionConfig.add_member(:optimization_objective, Shapes::ShapeRef.new(shape: OptimizationObjective, location_name: "optimizationObjective"))
+    SolutionConfig.add_member(:training_data_config, Shapes::ShapeRef.new(shape: TrainingDataConfig, location_name: "trainingDataConfig"))
     SolutionConfig.struct_class = Types::SolutionConfig
 
     SolutionSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
@@ -1302,6 +1313,9 @@ module Aws::Personalize
 
     TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     TooManyTagsException.struct_class = Types::TooManyTagsException
+
+    TrainingDataConfig.add_member(:excluded_dataset_columns, Shapes::ShapeRef.new(shape: ExcludedDatasetColumns, location_name: "excludedDatasetColumns"))
+    TrainingDataConfig.struct_class = Types::TrainingDataConfig
 
     TunedHPOParams.add_member(:algorithm_hyper_parameters, Shapes::ShapeRef.new(shape: HyperParameters, location_name: "algorithmHyperParameters"))
     TunedHPOParams.struct_class = Types::TunedHPOParams

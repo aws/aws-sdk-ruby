@@ -1599,7 +1599,7 @@ module Aws::Lightsail
     # Describes the full details of an Amazon Lightsail SSL/TLS certificate.
     #
     # <note markdown="1"> To get a summary of a certificate, use the `GetCertificates` action
-    # and ommit `includeCertificateDetails` from your request. The response
+    # and omit `includeCertificateDetails` from your request. The response
     # will include only the certificate Amazon Resource Name (ARN),
     # certificate name, domain name, and tags.
     #
@@ -6862,12 +6862,22 @@ module Aws::Lightsail
     #   Amazon Web Services Region where the request is made.
     #   @return [String]
     #
+    # @!attribute [rw] page_token
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial `GetCertificates` request.
+    #   If your results are paginated, the response will return a next page
+    #   token that you can specify as the page token in a subsequent
+    #   request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetCertificatesRequest AWS API Documentation
     #
     class GetCertificatesRequest < Struct.new(
       :certificate_statuses,
       :include_certificate_details,
-      :certificate_name)
+      :certificate_name,
+      :page_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6876,10 +6886,18 @@ module Aws::Lightsail
     #   An object that describes certificates.
     #   @return [Array<Types::CertificateSummary>]
     #
+    # @!attribute [rw] next_page_token
+    #   If `NextPageToken` is returned there are more results available. The
+    #   value of `NextPageToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetCertificatesResult AWS API Documentation
     #
     class GetCertificatesResult < Struct.new(
-      :certificates)
+      :certificates,
+      :next_page_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7292,7 +7310,7 @@ module Aws::Lightsail
     #
     #   * Specified in the Unix time format.
     #
-    #     For example, if you wish to use a start time of October 1, 2018,
+    #     For example, if you want to use a start time of October 1, 2018,
     #     at 8 PM UTC, specify `1538424000` as the start time.
     #
     #   You can convert a human-friendly time to Unix time format using a
@@ -7312,7 +7330,7 @@ module Aws::Lightsail
     #
     #   * Specified in the Unix time format.
     #
-    #     For example, if you wish to use an end time of October 1, 2018, at
+    #     For example, if you want to use an end time of October 1, 2018, at
     #     9 PM UTC, specify `1538427600` as the end time.
     #
     #   You can convert a human-friendly time to Unix time format using a

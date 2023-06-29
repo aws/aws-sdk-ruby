@@ -9,9 +9,24 @@
 
 
 module Aws::SQS
+  # @api private
   module Endpoints
 
     class AddPermission
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::SQS::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class CancelMessageMoveTask
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -151,6 +166,20 @@ module Aws::SQS
       end
     end
 
+    class ListMessageMoveTasks
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::SQS::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ListQueueTags
       def self.build(context)
         unless context.config.regional_endpoint
@@ -250,6 +279,20 @@ module Aws::SQS
     end
 
     class SetQueueAttributes
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::SQS::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class StartMessageMoveTask
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

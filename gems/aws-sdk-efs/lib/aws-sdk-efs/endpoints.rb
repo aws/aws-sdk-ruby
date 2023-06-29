@@ -9,6 +9,7 @@
 
 
 module Aws::EFS
+  # @api private
   module Endpoints
 
     class CreateAccessPoint

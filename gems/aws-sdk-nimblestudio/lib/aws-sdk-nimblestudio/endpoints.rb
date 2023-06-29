@@ -9,6 +9,7 @@
 
 
 module Aws::NimbleStudio
+  # @api private
   module Endpoints
 
     class AcceptEulas

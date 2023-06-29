@@ -275,6 +275,11 @@ module Aws::MigrationHubRefactorSpaces
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -730,6 +735,7 @@ module Aws::MigrationHubRefactorSpaces
     #     },
     #     uri_path_route: {
     #       activation_state: "ACTIVE", # required, accepts ACTIVE, INACTIVE
+    #       append_source_path: false,
     #       include_child_paths: false,
     #       methods: ["DELETE"], # accepts DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT
     #       source_path: "UriPath", # required
@@ -751,6 +757,7 @@ module Aws::MigrationHubRefactorSpaces
     #   resp.tags #=> Hash
     #   resp.tags["TagMapKeyString"] #=> String
     #   resp.uri_path_route.activation_state #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.uri_path_route.append_source_path #=> Boolean
     #   resp.uri_path_route.include_child_paths #=> Boolean
     #   resp.uri_path_route.methods #=> Array
     #   resp.uri_path_route.methods[0] #=> String, one of "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"
@@ -1264,6 +1271,7 @@ module Aws::MigrationHubRefactorSpaces
     #
     # @return [Types::GetRouteResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetRouteResponse#append_source_path #append_source_path} => Boolean
     #   * {Types::GetRouteResponse#application_id #application_id} => String
     #   * {Types::GetRouteResponse#arn #arn} => String
     #   * {Types::GetRouteResponse#created_by_account_id #created_by_account_id} => String
@@ -1292,6 +1300,7 @@ module Aws::MigrationHubRefactorSpaces
     #
     # @example Response structure
     #
+    #   resp.append_source_path #=> Boolean
     #   resp.application_id #=> String
     #   resp.arn #=> String
     #   resp.created_by_account_id #=> String
@@ -1620,6 +1629,7 @@ module Aws::MigrationHubRefactorSpaces
     #
     #   resp.next_token #=> String
     #   resp.route_summary_list #=> Array
+    #   resp.route_summary_list[0].append_source_path #=> Boolean
     #   resp.route_summary_list[0].application_id #=> String
     #   resp.route_summary_list[0].arn #=> String
     #   resp.route_summary_list[0].created_by_account_id #=> String
@@ -1922,7 +1932,7 @@ module Aws::MigrationHubRefactorSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-migrationhubrefactorspaces'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

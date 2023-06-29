@@ -9,6 +9,7 @@
 
 
 module Aws::SMS
+  # @api private
   module Endpoints
 
     class CreateApp

@@ -43,10 +43,25 @@ module Aws::RolesAnywhere
     ListTrustAnchorsResponse = Shapes::StructureShape.new(name: 'ListTrustAnchorsResponse')
     ManagedPolicyList = Shapes::ListShape.new(name: 'ManagedPolicyList')
     ManagedPolicyListMemberString = Shapes::StringShape.new(name: 'ManagedPolicyListMemberString')
+    NotificationChannel = Shapes::StringShape.new(name: 'NotificationChannel')
+    NotificationEvent = Shapes::StringShape.new(name: 'NotificationEvent')
+    NotificationSetting = Shapes::StructureShape.new(name: 'NotificationSetting')
+    NotificationSettingDetail = Shapes::StructureShape.new(name: 'NotificationSettingDetail')
+    NotificationSettingDetailConfiguredByString = Shapes::StringShape.new(name: 'NotificationSettingDetailConfiguredByString')
+    NotificationSettingDetailThresholdInteger = Shapes::IntegerShape.new(name: 'NotificationSettingDetailThresholdInteger')
+    NotificationSettingDetails = Shapes::ListShape.new(name: 'NotificationSettingDetails')
+    NotificationSettingKey = Shapes::StructureShape.new(name: 'NotificationSettingKey')
+    NotificationSettingKeys = Shapes::ListShape.new(name: 'NotificationSettingKeys')
+    NotificationSettingThresholdInteger = Shapes::IntegerShape.new(name: 'NotificationSettingThresholdInteger')
+    NotificationSettings = Shapes::ListShape.new(name: 'NotificationSettings')
     ProfileArn = Shapes::StringShape.new(name: 'ProfileArn')
     ProfileDetail = Shapes::StructureShape.new(name: 'ProfileDetail')
     ProfileDetailResponse = Shapes::StructureShape.new(name: 'ProfileDetailResponse')
     ProfileDetails = Shapes::ListShape.new(name: 'ProfileDetails')
+    PutNotificationSettingsRequest = Shapes::StructureShape.new(name: 'PutNotificationSettingsRequest')
+    PutNotificationSettingsResponse = Shapes::StructureShape.new(name: 'PutNotificationSettingsResponse')
+    ResetNotificationSettingsRequest = Shapes::StructureShape.new(name: 'ResetNotificationSettingsRequest')
+    ResetNotificationSettingsResponse = Shapes::StructureShape.new(name: 'ResetNotificationSettingsResponse')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
@@ -57,6 +72,7 @@ module Aws::RolesAnywhere
     ScalarTrustAnchorRequest = Shapes::StructureShape.new(name: 'ScalarTrustAnchorRequest')
     Source = Shapes::StructureShape.new(name: 'Source')
     SourceData = Shapes::UnionShape.new(name: 'SourceData')
+    SourceDataX509CertificateDataString = Shapes::StringShape.new(name: 'SourceDataX509CertificateDataString')
     String = Shapes::StringShape.new(name: 'String')
     SubjectDetail = Shapes::StructureShape.new(name: 'SubjectDetail')
     SubjectDetailResponse = Shapes::StructureShape.new(name: 'SubjectDetailResponse')
@@ -102,6 +118,7 @@ module Aws::RolesAnywhere
 
     CreateTrustAnchorRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
     CreateTrustAnchorRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
+    CreateTrustAnchorRequest.add_member(:notification_settings, Shapes::ShapeRef.new(shape: NotificationSettings, location_name: "notificationSettings"))
     CreateTrustAnchorRequest.add_member(:source, Shapes::ShapeRef.new(shape: Source, required: true, location_name: "source"))
     CreateTrustAnchorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateTrustAnchorRequest.struct_class = Types::CreateTrustAnchorRequest
@@ -176,6 +193,29 @@ module Aws::RolesAnywhere
 
     ManagedPolicyList.member = Shapes::ShapeRef.new(shape: ManagedPolicyListMemberString)
 
+    NotificationSetting.add_member(:channel, Shapes::ShapeRef.new(shape: NotificationChannel, location_name: "channel"))
+    NotificationSetting.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
+    NotificationSetting.add_member(:event, Shapes::ShapeRef.new(shape: NotificationEvent, required: true, location_name: "event"))
+    NotificationSetting.add_member(:threshold, Shapes::ShapeRef.new(shape: NotificationSettingThresholdInteger, location_name: "threshold"))
+    NotificationSetting.struct_class = Types::NotificationSetting
+
+    NotificationSettingDetail.add_member(:channel, Shapes::ShapeRef.new(shape: NotificationChannel, location_name: "channel"))
+    NotificationSettingDetail.add_member(:configured_by, Shapes::ShapeRef.new(shape: NotificationSettingDetailConfiguredByString, location_name: "configuredBy"))
+    NotificationSettingDetail.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
+    NotificationSettingDetail.add_member(:event, Shapes::ShapeRef.new(shape: NotificationEvent, required: true, location_name: "event"))
+    NotificationSettingDetail.add_member(:threshold, Shapes::ShapeRef.new(shape: NotificationSettingDetailThresholdInteger, location_name: "threshold"))
+    NotificationSettingDetail.struct_class = Types::NotificationSettingDetail
+
+    NotificationSettingDetails.member = Shapes::ShapeRef.new(shape: NotificationSettingDetail)
+
+    NotificationSettingKey.add_member(:channel, Shapes::ShapeRef.new(shape: NotificationChannel, location_name: "channel"))
+    NotificationSettingKey.add_member(:event, Shapes::ShapeRef.new(shape: NotificationEvent, required: true, location_name: "event"))
+    NotificationSettingKey.struct_class = Types::NotificationSettingKey
+
+    NotificationSettingKeys.member = Shapes::ShapeRef.new(shape: NotificationSettingKey)
+
+    NotificationSettings.member = Shapes::ShapeRef.new(shape: NotificationSetting)
+
     ProfileDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     ProfileDetail.add_member(:created_by, Shapes::ShapeRef.new(shape: String, location_name: "createdBy"))
     ProfileDetail.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "durationSeconds"))
@@ -194,6 +234,20 @@ module Aws::RolesAnywhere
     ProfileDetailResponse.struct_class = Types::ProfileDetailResponse
 
     ProfileDetails.member = Shapes::ShapeRef.new(shape: ProfileDetail)
+
+    PutNotificationSettingsRequest.add_member(:notification_settings, Shapes::ShapeRef.new(shape: NotificationSettings, required: true, location_name: "notificationSettings"))
+    PutNotificationSettingsRequest.add_member(:trust_anchor_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "trustAnchorId"))
+    PutNotificationSettingsRequest.struct_class = Types::PutNotificationSettingsRequest
+
+    PutNotificationSettingsResponse.add_member(:trust_anchor, Shapes::ShapeRef.new(shape: TrustAnchorDetail, required: true, location_name: "trustAnchor"))
+    PutNotificationSettingsResponse.struct_class = Types::PutNotificationSettingsResponse
+
+    ResetNotificationSettingsRequest.add_member(:notification_setting_keys, Shapes::ShapeRef.new(shape: NotificationSettingKeys, required: true, location_name: "notificationSettingKeys"))
+    ResetNotificationSettingsRequest.add_member(:trust_anchor_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "trustAnchorId"))
+    ResetNotificationSettingsRequest.struct_class = Types::ResetNotificationSettingsRequest
+
+    ResetNotificationSettingsResponse.add_member(:trust_anchor, Shapes::ShapeRef.new(shape: TrustAnchorDetail, required: true, location_name: "trustAnchor"))
+    ResetNotificationSettingsResponse.struct_class = Types::ResetNotificationSettingsResponse
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -217,7 +271,7 @@ module Aws::RolesAnywhere
     Source.struct_class = Types::Source
 
     SourceData.add_member(:acm_pca_arn, Shapes::ShapeRef.new(shape: String, location_name: "acmPcaArn"))
-    SourceData.add_member(:x509_certificate_data, Shapes::ShapeRef.new(shape: String, location_name: "x509CertificateData"))
+    SourceData.add_member(:x509_certificate_data, Shapes::ShapeRef.new(shape: SourceDataX509CertificateDataString, location_name: "x509CertificateData"))
     SourceData.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     SourceData.add_member_subclass(:acm_pca_arn, Types::SourceData::AcmPcaArn)
     SourceData.add_member_subclass(:x509_certificate_data, Types::SourceData::X509CertificateData)
@@ -269,6 +323,7 @@ module Aws::RolesAnywhere
     TrustAnchorDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     TrustAnchorDetail.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
     TrustAnchorDetail.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    TrustAnchorDetail.add_member(:notification_settings, Shapes::ShapeRef.new(shape: NotificationSettingDetails, location_name: "notificationSettings"))
     TrustAnchorDetail.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
     TrustAnchorDetail.add_member(:trust_anchor_arn, Shapes::ShapeRef.new(shape: String, location_name: "trustAnchorArn"))
     TrustAnchorDetail.add_member(:trust_anchor_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "trustAnchorId"))
@@ -554,6 +609,28 @@ module Aws::RolesAnywhere
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:put_notification_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutNotificationSettings"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/put-notifications-settings"
+        o.input = Shapes::ShapeRef.new(shape: PutNotificationSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutNotificationSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:reset_notification_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ResetNotificationSettings"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/reset-notifications-settings"
+        o.input = Shapes::ShapeRef.new(shape: ResetNotificationSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ResetNotificationSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

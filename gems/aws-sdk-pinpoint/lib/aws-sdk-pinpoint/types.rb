@@ -4348,9 +4348,25 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A string-to-string map of key-value pairs that defines the tags to
-    #   associate with the message template. Each tag consists of a required
-    #   tag key and an associated tag value.
+    #   <note markdown="1">As of **22-05-2023** tags has been deprecated for update operations.
+    #   After this date any value in tags is not processed and an error code
+    #   is not returned. To manage tags we recommend using either [Tags][1]
+    #   in the *API Reference for Amazon Pinpoint*,
+    #   [resourcegroupstaggingapi][2] commands in the *AWS Command Line
+    #   Interface Documentation* or [resourcegroupstaggingapi][3] in the
+    #   *AWS SDK*.
+    #
+    #   </note>
+    #
+    #   (Deprecated) A string-to-string map of key-value pairs that defines
+    #   the tags to associate with the message template. Each tag consists
+    #   of a required tag key and an associated tag value.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/apireference/tags-resource-arn.html
+    #   [2]: https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/index.html
+    #   [3]: https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/resourcegroupstaggingapi/package-summary.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] template_description
@@ -7955,9 +7971,25 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A string-to-string map of key-value pairs that defines the tags to
-    #   associate with the message template. Each tag consists of a required
-    #   tag key and an associated tag value.
+    #   <note markdown="1">As of **22-05-2023** tags has been deprecated for update operations.
+    #   After this date any value in tags is not processed and an error code
+    #   is not returned. To manage tags we recommend using either [Tags][1]
+    #   in the *API Reference for Amazon Pinpoint*,
+    #   [resourcegroupstaggingapi][2] commands in the *AWS Command Line
+    #   Interface Documentation* or [resourcegroupstaggingapi][3] in the
+    #   *AWS SDK*.
+    #
+    #   </note>
+    #
+    #   (Deprecated) A string-to-string map of key-value pairs that defines
+    #   the tags to associate with the message template. Each tag consists
+    #   of a required tag key and an associated tag value.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/apireference/tags-resource-arn.html
+    #   [2]: https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/index.html
+    #   [3]: https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/resourcegroupstaggingapi/package-summary.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] template_description
@@ -8518,6 +8550,28 @@ module Aws::Pinpoint
     #   configured first and SendingSchedule should be set to true.
     #   @return [Types::ClosedDays]
     #
+    # @!attribute [rw] timezone_estimation_methods
+    #   An array of time zone estimation methods, if any, to use for
+    #   determining an [Endpoints][1] time zone if the Endpoint does not
+    #   have a value for the Demographic.Timezone attribute.
+    #
+    #   * PHONE\_NUMBER - A time zone is determined based on the
+    #     Endpoint.Address and Endpoint.Location.Country.
+    #
+    #   * POSTAL\_CODE - A time zone is determined based on the
+    #     Endpoint.Location.PostalCode and Endpoint.Location.Country.
+    #
+    #     <note markdown="1">POSTAL\_CODE detection is only supported in the United States,
+    #     United Kingdom, Australia, New Zealand, Canada, France, Italy,
+    #     Spain, Germany and in regions where Amazon Pinpoint is available.
+    #
+    #     </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-endpoints-endpoint-id.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyResponse AWS API Documentation
     #
     class JourneyResponse < Struct.new(
@@ -8541,7 +8595,8 @@ module Aws::Pinpoint
       :journey_channel_settings,
       :sending_schedule,
       :open_hours,
-      :closed_days)
+      :closed_days,
+      :timezone_estimation_methods)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9851,9 +9906,25 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A string-to-string map of key-value pairs that defines the tags to
-    #   associate with the message template. Each tag consists of a required
-    #   tag key and an associated tag value.
+    #   <note markdown="1">As of **22-05-2023** tags has been deprecated for update operations.
+    #   After this date any value in tags is not processed and an error code
+    #   is not returned. To manage tags we recommend using either [Tags][1]
+    #   in the *API Reference for Amazon Pinpoint*,
+    #   [resourcegroupstaggingapi][2] commands in the *AWS Command Line
+    #   Interface Documentation* or [resourcegroupstaggingapi][3] in the
+    #   *AWS SDK*.
+    #
+    #   </note>
+    #
+    #   (Deprecated) A string-to-string map of key-value pairs that defines
+    #   the tags to associate with the message template. Each tag consists
+    #   of a required tag key and an associated tag value.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/apireference/tags-resource-arn.html
+    #   [2]: https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/index.html
+    #   [3]: https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/resourcegroupstaggingapi/package-summary.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] template_description
@@ -10621,9 +10692,25 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A string-to-string map of key-value pairs that defines the tags to
-    #   associate with the message template. Each tag consists of a required
-    #   tag key and an associated tag value.
+    #   <note markdown="1">As of **22-05-2023** tags has been deprecated for update operations.
+    #   After this date any value in tags is not processed and an error code
+    #   is not returned. To manage tags we recommend using either [Tags][1]
+    #   in the *API Reference for Amazon Pinpoint*,
+    #   [resourcegroupstaggingapi][2] commands in the *AWS Command Line
+    #   Interface Documentation* or [resourcegroupstaggingapi][3] in the
+    #   *AWS SDK*.
+    #
+    #   </note>
+    #
+    #   (Deprecated) A string-to-string map of key-value pairs that defines
+    #   the tags to associate with the message template. Each tag consists
+    #   of a required tag key and an associated tag value.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/apireference/tags-resource-arn.html
+    #   [2]: https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/index.html
+    #   [3]: https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/resourcegroupstaggingapi/package-summary.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] template_description
@@ -13153,9 +13240,25 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A string-to-string map of key-value pairs that defines the tags to
-    #   associate with the message template. Each tag consists of a required
-    #   tag key and an associated tag value.
+    #   <note markdown="1">As of **22-05-2023** tags has been deprecated for update operations.
+    #   After this date any value in tags is not processed and an error code
+    #   is not returned. To manage tags we recommend using either [Tags][1]
+    #   in the *API Reference for Amazon Pinpoint*,
+    #   [resourcegroupstaggingapi][2] commands in the *AWS Command Line
+    #   Interface Documentation* or [resourcegroupstaggingapi][3] in the
+    #   *AWS SDK*.
+    #
+    #   </note>
+    #
+    #   (Deprecated) A string-to-string map of key-value pairs that defines
+    #   the tags to associate with the message template. Each tag consists
+    #   of a required tag key and an associated tag value.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/apireference/tags-resource-arn.html
+    #   [2]: https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/index.html
+    #   [3]: https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/resourcegroupstaggingapi/package-summary.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] template_description
@@ -13463,9 +13566,25 @@ module Aws::Pinpoint
     #   @return [Integer]
     #
     # @!attribute [rw] tags
-    #   A string-to-string map of key-value pairs that defines the tags to
-    #   associate with the campaign. Each tag consists of a required tag key
-    #   and an associated tag value.
+    #   <note markdown="1">As of **22-05-2023** tags has been deprecated for update operations.
+    #   After this date any value in tags is not processed and an error code
+    #   is not returned. To manage tags we recommend using either [Tags][1]
+    #   in the *API Reference for Amazon Pinpoint*,
+    #   [resourcegroupstaggingapi][2] commands in the *AWS Command Line
+    #   Interface Documentation* or [resourcegroupstaggingapi][3] in the
+    #   *AWS SDK*.
+    #
+    #   </note>
+    #
+    #   (Deprecated) A string-to-string map of key-value pairs that defines
+    #   the tags to associate with the campaign. Each tag consists of a
+    #   required tag key and an associated tag value.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/apireference/tags-resource-arn.html
+    #   [2]: https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/index.html
+    #   [3]: https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/resourcegroupstaggingapi/package-summary.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] template_configuration
@@ -13668,6 +13787,28 @@ module Aws::Pinpoint
     #   be configured first and SendingSchedule should be set to true.
     #   @return [Types::ClosedDays]
     #
+    # @!attribute [rw] timezone_estimation_methods
+    #   An array of time zone estimation methods, if any, to use for
+    #   determining an [Endpoints][1] time zone if the Endpoint does not
+    #   have a value for the Demographic.Timezone attribute.
+    #
+    #   * PHONE\_NUMBER - A time zone is determined based on the
+    #     Endpoint.Address and Endpoint.Location.Country.
+    #
+    #   * POSTAL\_CODE - A time zone is determined based on the
+    #     Endpoint.Location.PostalCode and Endpoint.Location.Country.
+    #
+    #     <note markdown="1">POSTAL\_CODE detection is only supported in the United States,
+    #     United Kingdom, Australia, New Zealand, Canada, France, Italy,
+    #     Spain, Germany and in regions where Amazon Pinpoint is available.
+    #
+    #     </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-endpoints-endpoint-id.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteJourneyRequest AWS API Documentation
     #
     class WriteJourneyRequest < Struct.new(
@@ -13688,7 +13829,8 @@ module Aws::Pinpoint
       :journey_channel_settings,
       :sending_schedule,
       :open_hours,
-      :closed_days)
+      :closed_days,
+      :timezone_estimation_methods)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13713,9 +13855,25 @@ module Aws::Pinpoint
     #   @return [Types::SegmentGroupList]
     #
     # @!attribute [rw] tags
-    #   A string-to-string map of key-value pairs that defines the tags to
-    #   associate with the segment. Each tag consists of a required tag key
-    #   and an associated tag value.
+    #   <note markdown="1">As of **22-05-2023** tags has been deprecated for update operations.
+    #   After this date any value in tags is not processed and an error code
+    #   is not returned. To manage tags we recommend using either [Tags][1]
+    #   in the *API Reference for Amazon Pinpoint*,
+    #   [resourcegroupstaggingapi][2] commands in the *AWS Command Line
+    #   Interface Documentation* or [resourcegroupstaggingapi][3] in the
+    #   *AWS SDK*.
+    #
+    #   </note>
+    #
+    #   (Deprecated) A string-to-string map of key-value pairs that defines
+    #   the tags to associate with the segment. Each tag consists of a
+    #   required tag key and an associated tag value.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/apireference/tags-resource-arn.html
+    #   [2]: https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/index.html
+    #   [3]: https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/resourcegroupstaggingapi/package-summary.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteSegmentRequest AWS API Documentation

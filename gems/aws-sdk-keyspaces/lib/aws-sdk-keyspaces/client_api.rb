@@ -59,6 +59,8 @@ module Aws::Keyspaces
     PointInTimeRecovery = Shapes::StructureShape.new(name: 'PointInTimeRecovery')
     PointInTimeRecoveryStatus = Shapes::StringShape.new(name: 'PointInTimeRecoveryStatus')
     PointInTimeRecoverySummary = Shapes::StructureShape.new(name: 'PointInTimeRecoverySummary')
+    RegionList = Shapes::ListShape.new(name: 'RegionList')
+    ReplicationSpecification = Shapes::StructureShape.new(name: 'ReplicationSpecification')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RestoreTableRequest = Shapes::StructureShape.new(name: 'RestoreTableRequest')
     RestoreTableResponse = Shapes::StructureShape.new(name: 'RestoreTableResponse')
@@ -88,6 +90,8 @@ module Aws::Keyspaces
     UpdateTableResponse = Shapes::StructureShape.new(name: 'UpdateTableResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     kmsKeyARN = Shapes::StringShape.new(name: 'kmsKeyARN')
+    region = Shapes::StringShape.new(name: 'region')
+    rs = Shapes::StringShape.new(name: 'rs')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -126,6 +130,7 @@ module Aws::Keyspaces
 
     CreateKeyspaceRequest.add_member(:keyspace_name, Shapes::ShapeRef.new(shape: KeyspaceName, required: true, location_name: "keyspaceName"))
     CreateKeyspaceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateKeyspaceRequest.add_member(:replication_specification, Shapes::ShapeRef.new(shape: ReplicationSpecification, location_name: "replicationSpecification"))
     CreateKeyspaceRequest.struct_class = Types::CreateKeyspaceRequest
 
     CreateKeyspaceResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "resourceArn"))
@@ -167,6 +172,8 @@ module Aws::Keyspaces
 
     GetKeyspaceResponse.add_member(:keyspace_name, Shapes::ShapeRef.new(shape: KeyspaceName, required: true, location_name: "keyspaceName"))
     GetKeyspaceResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "resourceArn"))
+    GetKeyspaceResponse.add_member(:replication_strategy, Shapes::ShapeRef.new(shape: rs, required: true, location_name: "replicationStrategy"))
+    GetKeyspaceResponse.add_member(:replication_regions, Shapes::ShapeRef.new(shape: RegionList, location_name: "replicationRegions"))
     GetKeyspaceResponse.struct_class = Types::GetKeyspaceResponse
 
     GetTableRequest.add_member(:keyspace_name, Shapes::ShapeRef.new(shape: KeyspaceName, required: true, location_name: "keyspaceName"))
@@ -193,6 +200,8 @@ module Aws::Keyspaces
 
     KeyspaceSummary.add_member(:keyspace_name, Shapes::ShapeRef.new(shape: KeyspaceName, required: true, location_name: "keyspaceName"))
     KeyspaceSummary.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "resourceArn"))
+    KeyspaceSummary.add_member(:replication_strategy, Shapes::ShapeRef.new(shape: rs, required: true, location_name: "replicationStrategy"))
+    KeyspaceSummary.add_member(:replication_regions, Shapes::ShapeRef.new(shape: RegionList, location_name: "replicationRegions"))
     KeyspaceSummary.struct_class = Types::KeyspaceSummary
 
     KeyspaceSummaryList.member = Shapes::ShapeRef.new(shape: KeyspaceSummary)
@@ -234,6 +243,12 @@ module Aws::Keyspaces
     PointInTimeRecoverySummary.add_member(:status, Shapes::ShapeRef.new(shape: PointInTimeRecoveryStatus, required: true, location_name: "status"))
     PointInTimeRecoverySummary.add_member(:earliest_restorable_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "earliestRestorableTimestamp"))
     PointInTimeRecoverySummary.struct_class = Types::PointInTimeRecoverySummary
+
+    RegionList.member = Shapes::ShapeRef.new(shape: region)
+
+    ReplicationSpecification.add_member(:replication_strategy, Shapes::ShapeRef.new(shape: rs, required: true, location_name: "replicationStrategy"))
+    ReplicationSpecification.add_member(:region_list, Shapes::ShapeRef.new(shape: RegionList, location_name: "regionList"))
+    ReplicationSpecification.struct_class = Types::ReplicationSpecification
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceNotFoundException.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "resourceArn"))

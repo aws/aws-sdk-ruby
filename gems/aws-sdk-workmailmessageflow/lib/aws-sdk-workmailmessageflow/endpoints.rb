@@ -9,6 +9,7 @@
 
 
 module Aws::WorkMailMessageFlow
+  # @api private
   module Endpoints
 
     class GetRawMessageContent

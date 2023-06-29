@@ -9,6 +9,7 @@
 
 
 module Aws::IoTRoboRunner
+  # @api private
   module Endpoints
 
     class CreateDestination

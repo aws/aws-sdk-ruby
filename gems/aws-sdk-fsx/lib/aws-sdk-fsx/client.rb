@@ -275,6 +275,11 @@ module Aws::FSx
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -813,6 +818,7 @@ module Aws::FSx
     #   resp.backup.file_system.ontap_configuration.route_table_ids[0] #=> String
     #   resp.backup.file_system.ontap_configuration.throughput_capacity #=> Integer
     #   resp.backup.file_system.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backup.file_system.ontap_configuration.fsx_admin_password #=> String
     #   resp.backup.file_system.file_system_type_version #=> String
     #   resp.backup.file_system.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -941,6 +947,7 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids[0] #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.fsx_admin_password #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -1299,6 +1306,7 @@ module Aws::FSx
     #   resp.backup.file_system.ontap_configuration.route_table_ids[0] #=> String
     #   resp.backup.file_system.ontap_configuration.throughput_capacity #=> Integer
     #   resp.backup.file_system.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backup.file_system.ontap_configuration.fsx_admin_password #=> String
     #   resp.backup.file_system.file_system_type_version #=> String
     #   resp.backup.file_system.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -1427,6 +1435,7 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids[0] #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.fsx_admin_password #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -1487,8 +1496,8 @@ module Aws::FSx
     # data repository association is a link between a directory on the file
     # system and an Amazon S3 bucket or prefix. You can have a maximum of 8
     # data repository associations on a file system. Data repository
-    # associations are supported for all file systems except for `Scratch_1`
-    # deployment type.
+    # associations are supported on all FSx for Lustre 2.12 and newer file
+    # systems, excluding `scratch_1` deployment type.
     #
     # Each data repository association must have a unique Amazon FSx file
     # system directory and a unique S3 bucket or prefix associated with it.
@@ -2513,6 +2522,7 @@ module Aws::FSx
     #   resp.file_system.ontap_configuration.route_table_ids[0] #=> String
     #   resp.file_system.ontap_configuration.throughput_capacity #=> Integer
     #   resp.file_system.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_system.ontap_configuration.fsx_admin_password #=> String
     #   resp.file_system.file_system_type_version #=> String
     #   resp.file_system.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -3010,6 +3020,7 @@ module Aws::FSx
     #   resp.file_system.ontap_configuration.route_table_ids[0] #=> String
     #   resp.file_system.ontap_configuration.throughput_capacity #=> Integer
     #   resp.file_system.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_system.ontap_configuration.fsx_admin_password #=> String
     #   resp.file_system.file_system_type_version #=> String
     #   resp.file_system.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -3197,6 +3208,7 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids[0] #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.fsx_admin_password #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -3590,6 +3602,7 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids[0] #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.fsx_admin_password #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -3815,6 +3828,7 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids[0] #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.fsx_admin_password #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -3937,8 +3951,8 @@ module Aws::FSx
     # system from the Amazon S3 bucket. When deleting a data repository
     # association, you have the option of deleting the data in the file
     # system that corresponds to the data repository association. Data
-    # repository associations are supported for all file systems except for
-    # `Scratch_1` deployment type.
+    # repository associations are supported on all FSx for Lustre 2.12 and
+    # newer file systems, excluding `scratch_1` deployment type.
     #
     # @option params [required, String] :association_id
     #   The ID of the data repository association that you want to delete.
@@ -4600,6 +4614,7 @@ module Aws::FSx
     #   resp.backups[0].file_system.ontap_configuration.route_table_ids[0] #=> String
     #   resp.backups[0].file_system.ontap_configuration.throughput_capacity #=> Integer
     #   resp.backups[0].file_system.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backups[0].file_system.ontap_configuration.fsx_admin_password #=> String
     #   resp.backups[0].file_system.file_system_type_version #=> String
     #   resp.backups[0].file_system.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backups[0].file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -4728,6 +4743,7 @@ module Aws::FSx
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids[0] #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity #=> Integer
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.fsx_admin_password #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -4789,8 +4805,8 @@ module Aws::FSx
     # File Cache data repository associations, if one or more
     # `AssociationIds` values are provided in the request, or if filters are
     # used in the request. Data repository associations are supported on
-    # Amazon File Cache resources and all Amazon FSx for Lustre file systems
-    # excluding `Scratch_1` deployment types.
+    # Amazon File Cache resources and all FSx for Lustre 2.12 and newer file
+    # systems, excluding `scratch_1` deployment type.
     #
     # You can use filters to narrow the response to include just data
     # repository associations for specific file systems (use the
@@ -5393,6 +5409,7 @@ module Aws::FSx
     #   resp.file_systems[0].ontap_configuration.route_table_ids[0] #=> String
     #   resp.file_systems[0].ontap_configuration.throughput_capacity #=> Integer
     #   resp.file_systems[0].ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_systems[0].ontap_configuration.fsx_admin_password #=> String
     #   resp.file_systems[0].file_system_type_version #=> String
     #   resp.file_systems[0].open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_systems[0].open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -5581,6 +5598,7 @@ module Aws::FSx
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids[0] #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity #=> Integer
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.fsx_admin_password #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.file_system_type_version #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -5892,6 +5910,7 @@ module Aws::FSx
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids[0] #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity #=> Integer
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.fsx_admin_password #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.file_system_type_version #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -6268,6 +6287,7 @@ module Aws::FSx
     #   resp.file_system.ontap_configuration.route_table_ids[0] #=> String
     #   resp.file_system.ontap_configuration.throughput_capacity #=> Integer
     #   resp.file_system.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_system.ontap_configuration.fsx_admin_password #=> String
     #   resp.file_system.file_system_type_version #=> String
     #   resp.file_system.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -6426,6 +6446,7 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids[0] #=> String
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity #=> Integer
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.fsx_admin_password #=> String
     #   resp.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -6595,8 +6616,8 @@ module Aws::FSx
 
     # Updates the configuration of an existing data repository association
     # on an Amazon FSx for Lustre file system. Data repository associations
-    # are supported for all file systems except for `Scratch_1` deployment
-    # type.
+    # are supported on all FSx for Lustre 2.12 and newer file systems,
+    # excluding `scratch_1` deployment type.
     #
     # @option params [required, String] :association_id
     #   The ID of the data repository association that you are updating.
@@ -6884,7 +6905,7 @@ module Aws::FSx
     #   least 10 percent greater than the current storage capacity value. To
     #   increase storage capacity, the file system must have at least 16 MBps
     #   of throughput capacity. For more information, see [Managing storage
-    #   capacity][3] in the *Amazon FSx for Windows File Server User Guide*.
+    #   capacity][3] in the *Amazon FSxfor Windows File Server User Guide*.
     #
     #   For ONTAP file systems, the storage capacity target value must be at
     #   least 10 percent greater than the current storage capacity value. For
@@ -6911,7 +6932,7 @@ module Aws::FSx
     #   system.
     #
     # @option params [Types::UpdateFileSystemOpenZFSConfiguration] :open_zfs_configuration
-    #   The configuration updates for an Amazon FSx for OpenZFS file system.
+    #   The configuration updates for an FSx for OpenZFS file system.
     #
     # @return [Types::UpdateFileSystemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6976,6 +6997,9 @@ module Aws::FSx
     #         user_name: "DirectoryUserName",
     #         password: "DirectoryPassword",
     #         dns_ips: ["IpAddress"],
+    #         domain_name: "ActiveDirectoryFullyQualifiedName",
+    #         organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
+    #         file_system_administrators_group: "FileSystemAdministratorsGroupName",
     #       },
     #       audit_log_configuration: {
     #         file_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
@@ -7172,6 +7196,7 @@ module Aws::FSx
     #   resp.file_system.ontap_configuration.route_table_ids[0] #=> String
     #   resp.file_system.ontap_configuration.throughput_capacity #=> Integer
     #   resp.file_system.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_system.ontap_configuration.fsx_admin_password #=> String
     #   resp.file_system.file_system_type_version #=> String
     #   resp.file_system.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -7321,6 +7346,7 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids[0] #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.fsx_admin_password #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -7391,11 +7417,11 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Updates an Amazon FSx for ONTAP storage virtual machine (SVM).
+    # Updates an FSx for ONTAP storage virtual machine (SVM).
     #
     # @option params [Types::UpdateSvmActiveDirectoryConfiguration] :active_directory_configuration
-    #   Updates the Microsoft Active Directory (AD) configuration for an SVM
-    #   that is joined to an AD.
+    #   Specifies updates to an SVM's Microsoft Active Directory (AD)
+    #   configuration.
     #
     # @option params [String] :client_request_token
     #   (Optional) An idempotency token for resource creation, in a string of
@@ -7411,7 +7437,7 @@ module Aws::FSx
     #   `svm-0123456789abcdef0`.
     #
     # @option params [String] :svm_admin_password
-    #   Enter a new SvmAdminPassword if you are updating it.
+    #   Specifies a new SvmAdminPassword.
     #
     # @return [Types::UpdateStorageVirtualMachineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7425,7 +7451,11 @@ module Aws::FSx
     #         user_name: "DirectoryUserName",
     #         password: "DirectoryPassword",
     #         dns_ips: ["IpAddress"],
+    #         domain_name: "ActiveDirectoryFullyQualifiedName",
+    #         organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
+    #         file_system_administrators_group: "FileSystemAdministratorsGroupName",
     #       },
+    #       net_bios_name: "NetBiosAlias",
     #     },
     #     client_request_token: "ClientRequestToken",
     #     storage_virtual_machine_id: "StorageVirtualMachineId", # required
@@ -7664,6 +7694,7 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids[0] #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.fsx_admin_password #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
@@ -7733,7 +7764,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

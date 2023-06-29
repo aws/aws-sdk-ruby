@@ -357,6 +357,7 @@ module Aws::Pinpoint
     ListOfTreatmentResource = Shapes::ListShape.new(name: 'ListOfTreatmentResource')
     ListOfWriteTreatmentResource = Shapes::ListShape.new(name: 'ListOfWriteTreatmentResource')
     ListOf__EndpointTypesElement = Shapes::ListShape.new(name: 'ListOf__EndpointTypesElement')
+    ListOf__TimezoneEstimationMethodsElement = Shapes::ListShape.new(name: 'ListOf__TimezoneEstimationMethodsElement')
     ListOf__string = Shapes::ListShape.new(name: 'ListOf__string')
     ListRecommenderConfigurationsResponse = Shapes::StructureShape.new(name: 'ListRecommenderConfigurationsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -543,6 +544,7 @@ module Aws::Pinpoint
     WriteSegmentRequest = Shapes::StructureShape.new(name: 'WriteSegmentRequest')
     WriteTreatmentResource = Shapes::StructureShape.new(name: 'WriteTreatmentResource')
     __EndpointTypesElement = Shapes::StringShape.new(name: '__EndpointTypesElement')
+    __TimezoneEstimationMethodsElement = Shapes::StringShape.new(name: '__TimezoneEstimationMethodsElement')
     __blob = Shapes::BlobShape.new(name: '__blob')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
@@ -2295,6 +2297,7 @@ module Aws::Pinpoint
     JourneyResponse.add_member(:sending_schedule, Shapes::ShapeRef.new(shape: __boolean, location_name: "SendingSchedule"))
     JourneyResponse.add_member(:open_hours, Shapes::ShapeRef.new(shape: OpenHours, location_name: "OpenHours"))
     JourneyResponse.add_member(:closed_days, Shapes::ShapeRef.new(shape: ClosedDays, location_name: "ClosedDays"))
+    JourneyResponse.add_member(:timezone_estimation_methods, Shapes::ShapeRef.new(shape: ListOf__TimezoneEstimationMethodsElement, location_name: "TimezoneEstimationMethods"))
     JourneyResponse.struct_class = Types::JourneyResponse
 
     JourneyRunExecutionActivityMetricsResponse.add_member(:activity_type, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ActivityType"))
@@ -2407,6 +2410,8 @@ module Aws::Pinpoint
     ListOfWriteTreatmentResource.member = Shapes::ShapeRef.new(shape: WriteTreatmentResource)
 
     ListOf__EndpointTypesElement.member = Shapes::ShapeRef.new(shape: __EndpointTypesElement)
+
+    ListOf__TimezoneEstimationMethodsElement.member = Shapes::ShapeRef.new(shape: __TimezoneEstimationMethodsElement)
 
     ListOf__string.member = Shapes::ShapeRef.new(shape: __string)
 
@@ -3448,6 +3453,7 @@ module Aws::Pinpoint
     WriteJourneyRequest.add_member(:sending_schedule, Shapes::ShapeRef.new(shape: __boolean, location_name: "SendingSchedule"))
     WriteJourneyRequest.add_member(:open_hours, Shapes::ShapeRef.new(shape: OpenHours, location_name: "OpenHours"))
     WriteJourneyRequest.add_member(:closed_days, Shapes::ShapeRef.new(shape: ClosedDays, location_name: "ClosedDays"))
+    WriteJourneyRequest.add_member(:timezone_estimation_methods, Shapes::ShapeRef.new(shape: ListOf__TimezoneEstimationMethodsElement, location_name: "TimezoneEstimationMethods"))
     WriteJourneyRequest.struct_class = Types::WriteJourneyRequest
 
     WriteSegmentRequest.add_member(:dimensions, Shapes::ShapeRef.new(shape: SegmentDimensions, location_name: "Dimensions"))

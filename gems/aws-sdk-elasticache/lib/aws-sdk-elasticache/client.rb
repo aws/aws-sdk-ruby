@@ -275,6 +275,11 @@ module Aws::ElastiCache
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -687,6 +692,7 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_group.pending_modified_values.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.pending_modified_values.transit_encryption_mode #=> String, one of "preferred", "required"
+    #   resp.replication_group.pending_modified_values.cluster_mode #=> String, one of "enabled", "disabled", "compatible"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -738,6 +744,7 @@ module Aws::ElastiCache
     #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
     #   resp.replication_group.transit_encryption_mode #=> String, one of "preferred", "required"
+    #   resp.replication_group.cluster_mode #=> String, one of "enabled", "disabled", "compatible"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CompleteMigration AWS API Documentation
     #
@@ -1336,9 +1343,6 @@ module Aws::ElastiCache
     # @option params [Boolean] :transit_encryption_enabled
     #   A flag that enables in-transit encryption when set to true.
     #
-    #   Only available when creating a cache cluster in an Amazon VPC using
-    #   Memcached version 1.6.12 or later.
-    #
     # @option params [String] :network_type
     #   Must be either `ipv4` \| `ipv6` \| `dual_stack`. IPv6 is supported for
     #   workloads using Redis engine version 6.2 onward or Memcached engine
@@ -1346,7 +1350,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://aws.amazon.com/ec2/nitro/
+    #   [1]: http://aws.amazon.com/ec2/nitro/
     #
     # @option params [String] :ip_discovery
     #   The network type you choose when modifying a cluster, either `ipv4` \|
@@ -1356,7 +1360,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://aws.amazon.com/ec2/nitro/
+    #   [1]: http://aws.amazon.com/ec2/nitro/
     #
     # @return [Types::CreateCacheClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1617,7 +1621,7 @@ module Aws::ElastiCache
     #
     #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
     #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0`
-    #   \| `redis6.x`
+    #   \| `redis6.x` \| `redis7`
     #
     # @option params [required, String] :description
     #   A user-specified description for the cache parameter group.
@@ -2447,7 +2451,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://aws.amazon.com/ec2/nitro/
+    #   [1]: http://aws.amazon.com/ec2/nitro/
     #
     # @option params [String] :ip_discovery
     #   The network type you choose when creating a replication group, either
@@ -2457,7 +2461,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://aws.amazon.com/ec2/nitro/
+    #   [1]: http://aws.amazon.com/ec2/nitro/
     #
     # @option params [String] :transit_encryption_mode
     #   A setting that allows you to migrate your clients to use in-transit
@@ -2471,8 +2475,19 @@ module Aws::ElastiCache
     #
     #   Setting `TransitEncryptionMode` to `required` is a two-step process
     #   that requires you to first set the `TransitEncryptionMode` to
-    #   `preferred` first, after that you can set `TransitEncryptionMode` to
+    #   `preferred`, after that you can set `TransitEncryptionMode` to
     #   `required`.
+    #
+    #   This process will not trigger the replacement of the replication
+    #   group.
+    #
+    # @option params [String] :cluster_mode
+    #   Enabled or Disabled. To modify cluster mode from Disabled to Enabled,
+    #   you must first set the cluster mode to Compatible. Compatible mode
+    #   allows your Redis clients to connect using both cluster mode enabled
+    #   and cluster mode disabled. After you migrate all Redis clients to use
+    #   cluster mode enabled, you can then complete cluster mode configuration
+    #   and set the cluster mode to Enabled.
     #
     # @return [Types::CreateReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2639,6 +2654,7 @@ module Aws::ElastiCache
     #     network_type: "ipv4", # accepts ipv4, ipv6, dual_stack
     #     ip_discovery: "ipv4", # accepts ipv4, ipv6
     #     transit_encryption_mode: "preferred", # accepts preferred, required
+    #     cluster_mode: "enabled", # accepts enabled, disabled, compatible
     #   })
     #
     # @example Response structure
@@ -2664,6 +2680,7 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_group.pending_modified_values.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.pending_modified_values.transit_encryption_mode #=> String, one of "preferred", "required"
+    #   resp.replication_group.pending_modified_values.cluster_mode #=> String, one of "enabled", "disabled", "compatible"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -2715,6 +2732,7 @@ module Aws::ElastiCache
     #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
     #   resp.replication_group.transit_encryption_mode #=> String, one of "preferred", "required"
+    #   resp.replication_group.cluster_mode #=> String, one of "enabled", "disabled", "compatible"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroup AWS API Documentation
     #
@@ -3270,6 +3288,7 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_group.pending_modified_values.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.pending_modified_values.transit_encryption_mode #=> String, one of "preferred", "required"
+    #   resp.replication_group.pending_modified_values.cluster_mode #=> String, one of "enabled", "disabled", "compatible"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -3321,6 +3340,7 @@ module Aws::ElastiCache
     #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
     #   resp.replication_group.transit_encryption_mode #=> String, one of "preferred", "required"
+    #   resp.replication_group.cluster_mode #=> String, one of "enabled", "disabled", "compatible"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DecreaseReplicaCount AWS API Documentation
     #
@@ -3770,6 +3790,7 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_group.pending_modified_values.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.pending_modified_values.transit_encryption_mode #=> String, one of "preferred", "required"
+    #   resp.replication_group.pending_modified_values.cluster_mode #=> String, one of "enabled", "disabled", "compatible"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -3821,6 +3842,7 @@ module Aws::ElastiCache
     #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
     #   resp.replication_group.transit_encryption_mode #=> String, one of "preferred", "required"
+    #   resp.replication_group.cluster_mode #=> String, one of "enabled", "disabled", "compatible"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteReplicationGroup AWS API Documentation
     #
@@ -6400,6 +6422,7 @@ module Aws::ElastiCache
     #   resp.replication_groups[0].pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_groups[0].pending_modified_values.transit_encryption_enabled #=> Boolean
     #   resp.replication_groups[0].pending_modified_values.transit_encryption_mode #=> String, one of "preferred", "required"
+    #   resp.replication_groups[0].pending_modified_values.cluster_mode #=> String, one of "enabled", "disabled", "compatible"
     #   resp.replication_groups[0].member_clusters #=> Array
     #   resp.replication_groups[0].member_clusters[0] #=> String
     #   resp.replication_groups[0].node_groups #=> Array
@@ -6451,6 +6474,7 @@ module Aws::ElastiCache
     #   resp.replication_groups[0].network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.replication_groups[0].ip_discovery #=> String, one of "ipv4", "ipv6"
     #   resp.replication_groups[0].transit_encryption_mode #=> String, one of "preferred", "required"
+    #   resp.replication_groups[0].cluster_mode #=> String, one of "enabled", "disabled", "compatible"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -7925,6 +7949,7 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_group.pending_modified_values.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.pending_modified_values.transit_encryption_mode #=> String, one of "preferred", "required"
+    #   resp.replication_group.pending_modified_values.cluster_mode #=> String, one of "enabled", "disabled", "compatible"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -7976,6 +8001,7 @@ module Aws::ElastiCache
     #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
     #   resp.replication_group.transit_encryption_mode #=> String, one of "preferred", "required"
+    #   resp.replication_group.cluster_mode #=> String, one of "enabled", "disabled", "compatible"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/IncreaseReplicaCount AWS API Documentation
     #
@@ -8473,7 +8499,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://aws.amazon.com/ec2/nitro/
+    #   [1]: http://aws.amazon.com/ec2/nitro/
     #
     # @return [Types::ModifyCacheClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9118,7 +9144,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://aws.amazon.com/ec2/nitro/
+    #   [1]: http://aws.amazon.com/ec2/nitro/
     #
     # @option params [Boolean] :transit_encryption_enabled
     #   A flag that enables in-transit encryption when set to true. If you are
@@ -9138,8 +9164,16 @@ module Aws::ElastiCache
     #
     #   Setting `TransitEncryptionMode` to `required` is a two-step process
     #   that requires you to first set the `TransitEncryptionMode` to
-    #   `preferred` first, after that you can set `TransitEncryptionMode` to
+    #   `preferred`, after that you can set `TransitEncryptionMode` to
     #   `required`.
+    #
+    # @option params [String] :cluster_mode
+    #   Enabled or Disabled. To modify cluster mode from Disabled to Enabled,
+    #   you must first set the cluster mode to Compatible. Compatible mode
+    #   allows your Redis clients to connect using both cluster mode enabled
+    #   and cluster mode disabled. After you migrate all Redis clients to use
+    #   cluster mode enabled, you can then complete cluster mode configuration
+    #   and set the cluster mode to Enabled.
     #
     # @return [Types::ModifyReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9262,6 +9296,7 @@ module Aws::ElastiCache
     #     ip_discovery: "ipv4", # accepts ipv4, ipv6
     #     transit_encryption_enabled: false,
     #     transit_encryption_mode: "preferred", # accepts preferred, required
+    #     cluster_mode: "enabled", # accepts enabled, disabled, compatible
     #   })
     #
     # @example Response structure
@@ -9287,6 +9322,7 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_group.pending_modified_values.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.pending_modified_values.transit_encryption_mode #=> String, one of "preferred", "required"
+    #   resp.replication_group.pending_modified_values.cluster_mode #=> String, one of "enabled", "disabled", "compatible"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -9338,6 +9374,7 @@ module Aws::ElastiCache
     #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
     #   resp.replication_group.transit_encryption_mode #=> String, one of "preferred", "required"
+    #   resp.replication_group.cluster_mode #=> String, one of "enabled", "disabled", "compatible"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroup AWS API Documentation
     #
@@ -9437,6 +9474,7 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_group.pending_modified_values.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.pending_modified_values.transit_encryption_mode #=> String, one of "preferred", "required"
+    #   resp.replication_group.pending_modified_values.cluster_mode #=> String, one of "enabled", "disabled", "compatible"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -9488,6 +9526,7 @@ module Aws::ElastiCache
     #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
     #   resp.replication_group.transit_encryption_mode #=> String, one of "preferred", "required"
+    #   resp.replication_group.cluster_mode #=> String, one of "enabled", "disabled", "compatible"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupShardConfiguration AWS API Documentation
     #
@@ -10204,6 +10243,7 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_group.pending_modified_values.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.pending_modified_values.transit_encryption_mode #=> String, one of "preferred", "required"
+    #   resp.replication_group.pending_modified_values.cluster_mode #=> String, one of "enabled", "disabled", "compatible"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -10255,6 +10295,7 @@ module Aws::ElastiCache
     #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
     #   resp.replication_group.transit_encryption_mode #=> String, one of "preferred", "required"
+    #   resp.replication_group.cluster_mode #=> String, one of "enabled", "disabled", "compatible"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/StartMigration AWS API Documentation
     #
@@ -10368,6 +10409,7 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.replication_group.pending_modified_values.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.pending_modified_values.transit_encryption_mode #=> String, one of "preferred", "required"
+    #   resp.replication_group.pending_modified_values.cluster_mode #=> String, one of "enabled", "disabled", "compatible"
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -10419,6 +10461,7 @@ module Aws::ElastiCache
     #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
     #   resp.replication_group.transit_encryption_mode #=> String, one of "preferred", "required"
+    #   resp.replication_group.cluster_mode #=> String, one of "enabled", "disabled", "compatible"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TestFailover AWS API Documentation
     #
@@ -10442,7 +10485,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.84.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

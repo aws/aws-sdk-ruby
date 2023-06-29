@@ -9,6 +9,7 @@
 
 
 module Aws::AppIntegrationsService
+  # @api private
   module Endpoints
 
     class CreateDataIntegration

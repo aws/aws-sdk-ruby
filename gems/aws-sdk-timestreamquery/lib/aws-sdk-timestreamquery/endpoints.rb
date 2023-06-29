@@ -9,6 +9,7 @@
 
 
 module Aws::TimestreamQuery
+  # @api private
   module Endpoints
 
     class CancelQuery

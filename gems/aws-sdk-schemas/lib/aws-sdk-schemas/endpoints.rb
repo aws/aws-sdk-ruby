@@ -9,6 +9,7 @@
 
 
 module Aws::Schemas
+  # @api private
   module Endpoints
 
     class CreateDiscoverer

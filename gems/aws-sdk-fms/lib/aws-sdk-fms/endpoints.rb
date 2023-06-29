@@ -9,6 +9,7 @@
 
 
 module Aws::FMS
+  # @api private
   module Endpoints
 
     class AssociateAdminAccount

@@ -9,6 +9,7 @@
 
 
 module Aws::Honeycode
+  # @api private
   module Endpoints
 
     class BatchCreateTableRows

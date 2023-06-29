@@ -79,7 +79,9 @@ module Aws::OpsWorks
     #
     # @return [self]
     def load
-      resp = @client.describe_stack_summary(stack_id: @stack_id)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_stack_summary(stack_id: @stack_id)
+      end
       @data = resp.stack_summary
       self
     end
@@ -194,7 +196,9 @@ module Aws::OpsWorks
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Associations

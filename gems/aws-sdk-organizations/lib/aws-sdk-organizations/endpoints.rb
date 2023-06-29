@@ -9,6 +9,7 @@
 
 
 module Aws::Organizations
+  # @api private
   module Endpoints
 
     class AcceptHandshake

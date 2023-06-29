@@ -1,6 +1,43 @@
 Unreleased Changes
 ------------------
 
+1.127.0 (2023-06-28)
+------------------
+
+* Feature - The S3 LISTObjects, ListObjectsV2 and ListObjectVersions API now supports a new optional header x-amz-optional-object-attributes. If header contains RestoreStatus as the value, then S3 will include Glacier restore status i.e. isRestoreInProgress and RestoreExpiryDate in List response.
+
+* Feature - Select minimum expiration time for presigned urls between the expiration time option and the credential expiration time.
+
+1.126.0 (2023-06-16)
+------------------
+
+* Feature - This release adds SDK support for request-payer request header and request-charged response header in the "GetBucketAccelerateConfiguration", "ListMultipartUploads", "ListObjects", "ListObjectsV2" and "ListObjectVersions" S3 APIs.
+
+1.125.0 (2023-06-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.124.0 (2023-06-13)
+------------------
+
+* Feature - Integrate double encryption feature to SDKs.
+
+1.123.2 (2023-06-12)
+------------------
+
+* Issue - Fix issue when decrypting noncurrent versions of objects when using client side encryption (#2866). 
+
+1.123.1 (2023-06-02)
+------------------
+
+* Issue - Fix multipart `download_file` so that it does not download bytes out of range (#2859).
+
+1.123.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.122.0 (2023-05-04)
 ------------------
 

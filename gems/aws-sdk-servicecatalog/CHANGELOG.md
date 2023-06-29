@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.82.0 (2023-06-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.81.0 (2023-06-08)
+------------------
+
+* Feature - New parameter added in ServiceCatalog DescribeProvisioningArtifact api - IncludeProvisioningArtifactParameters. This parameter can be used to return information about the parameters used to provision the product
+
+1.80.0 (2023-05-31)
+------------------
+
+* Feature - Documentation updates for ServiceCatalog.
+
 1.79.0 (2023-04-07)
 ------------------
 

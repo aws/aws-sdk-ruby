@@ -275,6 +275,11 @@ module Aws::IAM
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -548,18 +553,19 @@ module Aws::IAM
     # Attaches the specified managed policy to the specified IAM group.
     #
     # You use this operation to attach a managed policy to a group. To embed
-    # an inline policy in a group, use PutGroupPolicy.
+    # an inline policy in a group, use [ `PutGroupPolicy` ][1].
     #
     # As a best practice, you can validate your IAM policies. To learn more,
-    # see [Validating IAM policies][1] in the *IAM User Guide*.
+    # see [Validating IAM policies][2] in the *IAM User Guide*.
     #
     # For more information about policies, see [Managed policies and inline
-    # policies][2] in the *IAM User Guide*.
+    # policies][3] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_policy-validator.html
-    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_PutGroupPolicy.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_policy-validator.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :group_name
     #   The name (friendly name, not ARN) of the group to attach the policy
@@ -617,24 +623,27 @@ module Aws::IAM
     # of the role's permission (access) policy.
     #
     # <note markdown="1"> You cannot use a managed policy as the role's trust policy. The
-    # role's trust policy is created at the same time as the role, using
-    # CreateRole. You can update a role's trust policy using
-    # UpdateAssumeRolePolicy.
+    # role's trust policy is created at the same time as the role, using [
+    # `CreateRole` ][1]. You can update a role's trust policy using [
+    # `UpdateAssumerolePolicy` ][2].
     #
     #  </note>
     #
     # Use this operation to attach a *managed* policy to a role. To embed an
-    # inline policy in a role, use PutRolePolicy. For more information about
-    # policies, see [Managed policies and inline policies][1] in the *IAM
-    # User Guide*.
+    # inline policy in a role, use [ `PutRolePolicy` ][3]. For more
+    # information about policies, see [Managed policies and inline
+    # policies][4] in the *IAM User Guide*.
     #
     # As a best practice, you can validate your IAM policies. To learn more,
-    # see [Validating IAM policies][2] in the *IAM User Guide*.
+    # see [Validating IAM policies][5] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
-    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_policy-validator.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateAssumeRolePolicy.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_PutRolePolicy.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_policy-validator.html
     #
     # @option params [required, String] :role_name
     #   The name (friendly name, not ARN) of the role to attach the policy to.
@@ -689,18 +698,19 @@ module Aws::IAM
     # Attaches the specified managed policy to the specified user.
     #
     # You use this operation to attach a *managed* policy to a user. To
-    # embed an inline policy in a user, use PutUserPolicy.
+    # embed an inline policy in a user, use [ `PutUserPolicy` ][1].
     #
     # As a best practice, you can validate your IAM policies. To learn more,
-    # see [Validating IAM policies][1] in the *IAM User Guide*.
+    # see [Validating IAM policies][2] in the *IAM User Guide*.
     #
     # For more information about policies, see [Managed policies and inline
-    # policies][2] in the *IAM User Guide*.
+    # policies][3] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_policy-validator.html
-    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_PutUserPolicy.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_policy-validator.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :user_name
     #   The name (friendly name, not ARN) of the IAM user to attach the policy
@@ -901,12 +911,13 @@ module Aws::IAM
     end
 
     # Creates an alias for your Amazon Web Services account. For information
-    # about using an Amazon Web Services account alias, see [Using an alias
-    # for your Amazon Web Services account ID][1] in the *IAM User Guide*.
+    # about using an Amazon Web Services account alias, see [Creating,
+    # deleting, and listing an Amazon Web Services account alias][1] in the
+    # *Amazon Web Services Sign-In User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html
+    # [1]: https://docs.aws.amazon.com/signin/latest/userguide/CreateAccountAlias.html
     #
     # @option params [required, String] :account_alias
     #   The account alias to create.
@@ -2536,12 +2547,12 @@ module Aws::IAM
 
     # Deletes the specified Amazon Web Services account alias. For
     # information about using an Amazon Web Services account alias, see
-    # [Using an alias for your Amazon Web Services account ID][1] in the
-    # *IAM User Guide*.
+    # [Creating, deleting, and listing an Amazon Web Services account
+    # alias][1] in the *Amazon Web Services Sign-In User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html
+    # [1]: https://docs.aws.amazon.com/signin/latest/userguide/CreateAccountAlias.html
     #
     # @option params [required, String] :account_alias
     #   The name of the account alias to delete.
@@ -5027,6 +5038,50 @@ module Aws::IAM
       req.send_request(options)
     end
 
+    # Retrieves information about an MFA device for a specified user.
+    #
+    # @option params [required, String] :serial_number
+    #   Serial number that uniquely identifies the MFA device. For this API,
+    #   we only accept FIDO security key [ARNs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #
+    # @option params [String] :user_name
+    #   The friendly name identifying the user.
+    #
+    # @return [Types::GetMFADeviceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMFADeviceResponse#user_name #user_name} => String
+    #   * {Types::GetMFADeviceResponse#serial_number #serial_number} => String
+    #   * {Types::GetMFADeviceResponse#enable_date #enable_date} => Time
+    #   * {Types::GetMFADeviceResponse#certifications #certifications} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_mfa_device({
+    #     serial_number: "serialNumberType", # required
+    #     user_name: "userNameType",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_name #=> String
+    #   resp.serial_number #=> String
+    #   resp.enable_date #=> Time
+    #   resp.certifications #=> Hash
+    #   resp.certifications["CertificationKeyType"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetMFADevice AWS API Documentation
+    #
+    # @overload get_mfa_device(params = {})
+    # @param [Hash] params ({})
+    def get_mfa_device(params = {}, options = {})
+      req = build_request(:get_mfa_device, params)
+      req.send_request(options)
+    end
+
     # Returns information about the specified OpenID Connect (OIDC) provider
     # resource object in IAM.
     #
@@ -6354,12 +6409,13 @@ module Aws::IAM
 
     # Lists the account alias associated with the Amazon Web Services
     # account (Note: you can have only one). For information about using an
-    # Amazon Web Services account alias, see [Using an alias for your Amazon
-    # Web Services account ID][1] in the *IAM User Guide*.
+    # Amazon Web Services account alias, see [Creating, deleting, and
+    # listing an Amazon Web Services account alias][1] in the *Amazon Web
+    # Services Sign-In User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html
+    # [1]: https://docs.aws.amazon.com/signin/latest/userguide/CreateAccountAlias.html
     #
     # @option params [String] :marker
     #   Use this parameter only when paginating results and only after you
@@ -7184,6 +7240,8 @@ module Aws::IAM
     #   * {Types::ListInstanceProfileTagsResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListInstanceProfileTagsResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_instance_profile_tags({
@@ -7460,6 +7518,8 @@ module Aws::IAM
     #   * {Types::ListMFADeviceTagsResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListMFADeviceTagsResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_mfa_device_tags({
@@ -7605,6 +7665,8 @@ module Aws::IAM
     #   * {Types::ListOpenIDConnectProviderTagsResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::ListOpenIDConnectProviderTagsResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListOpenIDConnectProviderTagsResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -7992,6 +8054,8 @@ module Aws::IAM
     #   * {Types::ListPolicyTagsResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListPolicyTagsResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_policy_tags({
@@ -8211,6 +8275,8 @@ module Aws::IAM
     #   * {Types::ListRoleTagsResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListRoleTagsResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list the tags attached to an IAM role
     #
@@ -8265,9 +8331,17 @@ module Aws::IAM
     # roles, see [Working with roles][1].
     #
     # <note markdown="1"> IAM resource-listing operations return a subset of the available
-    # attributes for the resource. For example, this operation does not
-    # return tags, even though they are an attribute of the returned object.
-    # To view all of the information for a role, see GetRole.
+    # attributes for the resource. This operation does not return the
+    # following attributes, even though they are an attribute of the
+    # returned object:
+    #
+    #  * PermissionsBoundary
+    #
+    # * RoleLastUsed
+    #
+    # * Tags
+    #
+    #  To view all of the information for a role, see GetRole.
     #
     #  </note>
     #
@@ -8406,6 +8480,8 @@ module Aws::IAM
     #   * {Types::ListSAMLProviderTagsResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::ListSAMLProviderTagsResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListSAMLProviderTagsResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -8600,6 +8676,8 @@ module Aws::IAM
     #   * {Types::ListServerCertificateTagsResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::ListServerCertificateTagsResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListServerCertificateTagsResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -9062,9 +9140,15 @@ module Aws::IAM
     # list.
     #
     # <note markdown="1"> IAM resource-listing operations return a subset of the available
-    # attributes for the resource. For example, this operation does not
-    # return tags, even though they are an attribute of the returned object.
-    # To view all of the information for a user, see GetUser.
+    # attributes for the resource. This operation does not return the
+    # following attributes, even though they are an attribute of the
+    # returned object:
+    #
+    #  * PermissionsBoundary
+    #
+    # * Tags
+    #
+    #  To view all of the information for a user, see GetUser.
     #
     #  </note>
     #
@@ -9288,26 +9372,29 @@ module Aws::IAM
     # specified IAM group.
     #
     # A user can also have managed policies attached to it. To attach a
-    # managed policy to a group, use AttachGroupPolicy. To create a new
-    # managed policy, use CreatePolicy. For information about policies, see
-    # [Managed policies and inline policies][1] in the *IAM User Guide*.
+    # managed policy to a group, use [ `AttachGroupPolicy` ][1]. To create a
+    # new managed policy, use [ `CreatePolicy` ][2]. For information about
+    # policies, see [Managed policies and inline policies][3] in the *IAM
+    # User Guide*.
     #
     # For information about the maximum number of inline policies that you
-    # can embed in a group, see [IAM and STS quotas][2] in the *IAM User
+    # can embed in a group, see [IAM and STS quotas][4] in the *IAM User
     # Guide*.
     #
     # <note markdown="1"> Because policy documents can be large, you should use POST rather than
     # GET when calling `PutGroupPolicy`. For general information about using
-    # the Query API with IAM, see [Making query requests][3] in the *IAM
+    # the Query API with IAM, see [Making query requests][5] in the *IAM
     # User Guide*.
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
-    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html
-    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_AttachGroupPolicy.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html
+    # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html
     #
     # @option params [required, String] :group_name
     #   The name of the group to associate the policy with.
@@ -9451,33 +9538,38 @@ module Aws::IAM
     #
     # When you embed an inline policy in a role, the inline policy is used
     # as part of the role's access (permissions) policy. The role's trust
-    # policy is created at the same time as the role, using CreateRole. You
-    # can update a role's trust policy using UpdateAssumeRolePolicy. For
-    # more information about IAM roles, see [Using roles to delegate
-    # permissions and federate identities][1].
+    # policy is created at the same time as the role, using [ `CreateRole`
+    # ][1]. You can update a role's trust policy using [
+    # `UpdateAssumerolePolicy` ][2]. For more information about IAM roles,
+    # see [Using roles to delegate permissions and federate identities][3].
     #
     # A role can also have a managed policy attached to it. To attach a
-    # managed policy to a role, use AttachRolePolicy. To create a new
-    # managed policy, use CreatePolicy. For information about policies, see
-    # [Managed policies and inline policies][2] in the *IAM User Guide*.
+    # managed policy to a role, use [ `AttachRolePolicy` ][4]. To create a
+    # new managed policy, use [ `CreatePolicy` ][5]. For information about
+    # policies, see [Managed policies and inline policies][6] in the *IAM
+    # User Guide*.
     #
     # For information about the maximum number of inline policies that you
-    # can embed with a role, see [IAM and STS quotas][3] in the *IAM User
+    # can embed with a role, see [IAM and STS quotas][7] in the *IAM User
     # Guide*.
     #
     # <note markdown="1"> Because policy documents can be large, you should use POST rather than
     # GET when calling `PutRolePolicy`. For general information about using
-    # the Query API with IAM, see [Making query requests][4] in the *IAM
+    # the Query API with IAM, see [Making query requests][8] in the *IAM
     # User Guide*.
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html
-    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
-    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html
-    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateAssumeRolePolicy.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_AttachRolePolicy.html
+    # [5]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html
+    # [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html
+    # [8]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html
     #
     # @option params [required, String] :role_name
     #   The name of the role to associate the policy with.
@@ -9618,26 +9710,29 @@ module Aws::IAM
     # specified IAM user.
     #
     # An IAM user can also have a managed policy attached to it. To attach a
-    # managed policy to a user, use AttachUserPolicy. To create a new
-    # managed policy, use CreatePolicy. For information about policies, see
-    # [Managed policies and inline policies][1] in the *IAM User Guide*.
+    # managed policy to a user, use [ `AttachUserPolicy` ][1]. To create a
+    # new managed policy, use [ `CreatePolicy` ][2]. For information about
+    # policies, see [Managed policies and inline policies][3] in the *IAM
+    # User Guide*.
     #
     # For information about the maximum number of inline policies that you
-    # can embed in a user, see [IAM and STS quotas][2] in the *IAM User
+    # can embed in a user, see [IAM and STS quotas][4] in the *IAM User
     # Guide*.
     #
     # <note markdown="1"> Because policy documents can be large, you should use POST rather than
     # GET when calling `PutUserPolicy`. For general information about using
-    # the Query API with IAM, see [Making query requests][3] in the *IAM
+    # the Query API with IAM, see [Making query requests][5] in the *IAM
     # User Guide*.
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
-    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html
-    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_AttachUserPolicy.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html
+    # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html
     #
     # @option params [required, String] :user_name
     #   The name of the user to associate the policy with.
@@ -13348,7 +13443,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

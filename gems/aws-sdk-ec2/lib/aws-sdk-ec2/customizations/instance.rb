@@ -18,7 +18,9 @@ module Aws
       private
 
       def encrypted_password
-        bytes = client.get_password_data(instance_id: id).password_data
+        bytes = Aws::Plugins::UserAgent.feature('resource') do
+          client.get_password_data(instance_id: id).password_data
+        end
         if bytes == ''
           raise 'password not available yet'
         else

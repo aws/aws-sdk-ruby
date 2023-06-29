@@ -9,6 +9,7 @@
 
 
 module Aws::MigrationHubConfig
+  # @api private
   module Endpoints
 
     class CreateHomeRegionControl

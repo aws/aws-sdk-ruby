@@ -249,6 +249,21 @@
         {"shape":"ConnectorAuthenticationException"}
       ]
     },
+    "ResetConnectorMetadataCache":{
+      "name":"ResetConnectorMetadataCache",
+      "http":{
+        "method":"POST",
+        "requestUri":"/reset-connector-metadata-cache"
+      },
+      "input":{"shape":"ResetConnectorMetadataCacheRequest"},
+      "output":{"shape":"ResetConnectorMetadataCacheResponse"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ConflictException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
     "StartFlow":{
       "name":"StartFlow",
       "http":{
@@ -684,7 +699,9 @@
         "connectorProvisioningConfig":{"shape":"ConnectorProvisioningConfig"},
         "logoURL":{"shape":"LogoURL"},
         "registeredAt":{"shape":"Date"},
-        "registeredBy":{"shape":"RegisteredBy"}
+        "registeredBy":{"shape":"RegisteredBy"},
+        "supportedDataTransferTypes":{"shape":"SupportedDataTransferTypeList"},
+        "supportedDataTransferApis":{"shape":"SupportedDataTransferApis"}
       }
     },
     "ConnectorConfigurationsMap":{
@@ -710,7 +727,8 @@
         "registeredAt":{"shape":"Date"},
         "registeredBy":{"shape":"RegisteredBy"},
         "connectorProvisioningType":{"shape":"ConnectorProvisioningType"},
-        "connectorModes":{"shape":"ConnectorModeList"}
+        "connectorModes":{"shape":"ConnectorModeList"},
+        "supportedDataTransferTypes":{"shape":"SupportedDataTransferTypeList"}
       }
     },
     "ConnectorEntity":{
@@ -1166,7 +1184,8 @@
       "required":["entityName"],
       "members":{
         "entityName":{"shape":"EntityName"},
-        "customProperties":{"shape":"CustomProperties"}
+        "customProperties":{"shape":"CustomProperties"},
+        "dataTransferApi":{"shape":"DataTransferApi"}
       }
     },
     "CustomProperties":{
@@ -1211,6 +1230,26 @@
         "Incremental",
         "Complete"
       ]
+    },
+    "DataTransferApi":{
+      "type":"structure",
+      "members":{
+        "Name":{"shape":"DataTransferApiTypeName"},
+        "Type":{"shape":"DataTransferApiType"}
+      }
+    },
+    "DataTransferApiType":{
+      "type":"string",
+      "enum":[
+        "SYNC",
+        "ASYNC",
+        "AUTOMATIC"
+      ]
+    },
+    "DataTransferApiTypeName":{
+      "type":"string",
+      "max":64,
+      "pattern":"[\\w/-]+"
     },
     "DatabaseName":{
       "type":"string",
@@ -2560,6 +2599,21 @@
         "status":{"shape":"ExecutionStatus"}
       }
     },
+    "ResetConnectorMetadataCacheRequest":{
+      "type":"structure",
+      "members":{
+        "connectorProfileName":{"shape":"ConnectorProfileName"},
+        "connectorType":{"shape":"ConnectorType"},
+        "connectorEntityName":{"shape":"EntityName"},
+        "entitiesPath":{"shape":"EntitiesPath"},
+        "apiVersion":{"shape":"ApiVersion"}
+      }
+    },
+    "ResetConnectorMetadataCacheResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "ResourceNotFoundException":{
       "type":"structure",
       "members":{
@@ -2694,7 +2748,8 @@
         "clientNumber":{"shape":"ClientNumber"},
         "logonLanguage":{"shape":"LogonLanguage"},
         "privateLinkServiceName":{"shape":"PrivateLinkServiceName"},
-        "oAuthProperties":{"shape":"OAuthProperties"}
+        "oAuthProperties":{"shape":"OAuthProperties"},
+        "disableSSO":{"shape":"Boolean"}
       }
     },
     "SAPODataDestinationProperties":{
@@ -3173,6 +3228,21 @@
     "SupportedApiVersionList":{
       "type":"list",
       "member":{"shape":"SupportedApiVersion"}
+    },
+    "SupportedDataTransferApis":{
+      "type":"list",
+      "member":{"shape":"DataTransferApi"}
+    },
+    "SupportedDataTransferType":{
+      "type":"string",
+      "enum":[
+        "RECORD",
+        "FILE"
+      ]
+    },
+    "SupportedDataTransferTypeList":{
+      "type":"list",
+      "member":{"shape":"SupportedDataTransferType"}
     },
     "SupportedFieldTypeDetails":{
       "type":"structure",

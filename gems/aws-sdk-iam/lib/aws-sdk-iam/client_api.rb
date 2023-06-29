@@ -31,6 +31,9 @@ module Aws::IAM
     AttachedPermissionsBoundary = Shapes::StructureShape.new(name: 'AttachedPermissionsBoundary')
     AttachedPolicy = Shapes::StructureShape.new(name: 'AttachedPolicy')
     BootstrapDatum = Shapes::BlobShape.new(name: 'BootstrapDatum')
+    CertificationKeyType = Shapes::StringShape.new(name: 'CertificationKeyType')
+    CertificationMapType = Shapes::MapShape.new(name: 'CertificationMapType')
+    CertificationValueType = Shapes::StringShape.new(name: 'CertificationValueType')
     ChangePasswordRequest = Shapes::StructureShape.new(name: 'ChangePasswordRequest')
     ColumnNumber = Shapes::IntegerShape.new(name: 'ColumnNumber')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
@@ -139,6 +142,8 @@ module Aws::IAM
     GetInstanceProfileResponse = Shapes::StructureShape.new(name: 'GetInstanceProfileResponse')
     GetLoginProfileRequest = Shapes::StructureShape.new(name: 'GetLoginProfileRequest')
     GetLoginProfileResponse = Shapes::StructureShape.new(name: 'GetLoginProfileResponse')
+    GetMFADeviceRequest = Shapes::StructureShape.new(name: 'GetMFADeviceRequest')
+    GetMFADeviceResponse = Shapes::StructureShape.new(name: 'GetMFADeviceResponse')
     GetOpenIDConnectProviderRequest = Shapes::StructureShape.new(name: 'GetOpenIDConnectProviderRequest')
     GetOpenIDConnectProviderResponse = Shapes::StructureShape.new(name: 'GetOpenIDConnectProviderResponse')
     GetOrganizationsAccessReportRequest = Shapes::StructureShape.new(name: 'GetOrganizationsAccessReportRequest')
@@ -568,6 +573,9 @@ module Aws::IAM
     AttachedPolicy.add_member(:policy_arn, Shapes::ShapeRef.new(shape: arnType, location_name: "PolicyArn"))
     AttachedPolicy.struct_class = Types::AttachedPolicy
 
+    CertificationMapType.key = Shapes::ShapeRef.new(shape: CertificationKeyType)
+    CertificationMapType.value = Shapes::ShapeRef.new(shape: CertificationValueType)
+
     ChangePasswordRequest.add_member(:old_password, Shapes::ShapeRef.new(shape: passwordType, required: true, location_name: "OldPassword"))
     ChangePasswordRequest.add_member(:new_password, Shapes::ShapeRef.new(shape: passwordType, required: true, location_name: "NewPassword"))
     ChangePasswordRequest.struct_class = Types::ChangePasswordRequest
@@ -947,6 +955,16 @@ module Aws::IAM
 
     GetLoginProfileResponse.add_member(:login_profile, Shapes::ShapeRef.new(shape: LoginProfile, required: true, location_name: "LoginProfile"))
     GetLoginProfileResponse.struct_class = Types::GetLoginProfileResponse
+
+    GetMFADeviceRequest.add_member(:serial_number, Shapes::ShapeRef.new(shape: serialNumberType, required: true, location_name: "SerialNumber"))
+    GetMFADeviceRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, location_name: "UserName"))
+    GetMFADeviceRequest.struct_class = Types::GetMFADeviceRequest
+
+    GetMFADeviceResponse.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, location_name: "UserName"))
+    GetMFADeviceResponse.add_member(:serial_number, Shapes::ShapeRef.new(shape: serialNumberType, required: true, location_name: "SerialNumber"))
+    GetMFADeviceResponse.add_member(:enable_date, Shapes::ShapeRef.new(shape: dateType, location_name: "EnableDate"))
+    GetMFADeviceResponse.add_member(:certifications, Shapes::ShapeRef.new(shape: CertificationMapType, location_name: "Certifications"))
+    GetMFADeviceResponse.struct_class = Types::GetMFADeviceResponse
 
     GetOpenIDConnectProviderRequest.add_member(:open_id_connect_provider_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "OpenIDConnectProviderArn"))
     GetOpenIDConnectProviderRequest.struct_class = Types::GetOpenIDConnectProviderRequest
@@ -2217,6 +2235,7 @@ module Aws::IAM
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateAccountAliasRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: EntityAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
@@ -2387,6 +2406,7 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:delete_access_key, Seahorse::Model::Operation.new.tap do |o|
@@ -2406,6 +2426,7 @@ module Aws::IAM
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteAccountAliasRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
@@ -2604,6 +2625,7 @@ module Aws::IAM
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
@@ -2651,6 +2673,7 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: DeleteConflictException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:detach_group_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -2702,6 +2725,7 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:generate_credential_report, Seahorse::Model::Operation.new.tap do |o|
@@ -2851,6 +2875,16 @@ module Aws::IAM
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetLoginProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: GetLoginProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:get_mfa_device, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMFADevice"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetMFADeviceRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMFADeviceResponse)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
@@ -3162,6 +3196,13 @@ module Aws::IAM
         o.output = Shapes::ShapeRef.new(shape: ListInstanceProfileTagsResponse)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o[:pager] = Aws::Pager.new(
+          more_results: "is_truncated",
+          limit_key: "max_items",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_instance_profiles, Seahorse::Model::Operation.new.tap do |o|
@@ -3206,6 +3247,13 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o[:pager] = Aws::Pager.new(
+          more_results: "is_truncated",
+          limit_key: "max_items",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_mfa_devices, Seahorse::Model::Operation.new.tap do |o|
@@ -3234,6 +3282,13 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o[:pager] = Aws::Pager.new(
+          more_results: "is_truncated",
+          limit_key: "max_items",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_open_id_connect_providers, Seahorse::Model::Operation.new.tap do |o|
@@ -3280,6 +3335,13 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o[:pager] = Aws::Pager.new(
+          more_results: "is_truncated",
+          limit_key: "max_items",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_policy_versions, Seahorse::Model::Operation.new.tap do |o|
@@ -3325,6 +3387,13 @@ module Aws::IAM
         o.output = Shapes::ShapeRef.new(shape: ListRoleTagsResponse)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o[:pager] = Aws::Pager.new(
+          more_results: "is_truncated",
+          limit_key: "max_items",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_roles, Seahorse::Model::Operation.new.tap do |o|
@@ -3352,6 +3421,13 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o[:pager] = Aws::Pager.new(
+          more_results: "is_truncated",
+          limit_key: "max_items",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_saml_providers, Seahorse::Model::Operation.new.tap do |o|
@@ -3387,6 +3463,13 @@ module Aws::IAM
         o.output = Shapes::ShapeRef.new(shape: ListServerCertificateTagsResponse)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o[:pager] = Aws::Pager.new(
+          more_results: "is_truncated",
+          limit_key: "max_items",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_server_certificates, Seahorse::Model::Operation.new.tap do |o|
@@ -3612,6 +3695,7 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:set_default_policy_version, Seahorse::Model::Operation.new.tap do |o|
@@ -4069,6 +4153,7 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: InvalidCertificateException)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateCertificateException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
     end

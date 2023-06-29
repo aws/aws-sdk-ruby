@@ -9,6 +9,7 @@
 
 
 module Aws::SimSpaceWeaver
+  # @api private
   module Endpoints
 
     class CreateSnapshot

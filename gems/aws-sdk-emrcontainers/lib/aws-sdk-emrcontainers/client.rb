@@ -275,6 +275,11 @@ module Aws::EMRContainers
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -581,6 +586,10 @@ module Aws::EMRContainers
     #         s3_monitoring_configuration: {
     #           log_uri: "UriString", # required
     #         },
+    #         container_log_rotation_configuration: {
+    #           rotation_size: "RotationSize", # required
+    #           max_files_to_keep: 1, # required
+    #         },
     #       },
     #     },
     #     client_token: "ClientToken", # required
@@ -807,6 +816,8 @@ module Aws::EMRContainers
     #   resp.job_run.configuration_overrides.monitoring_configuration.cloud_watch_monitoring_configuration.log_group_name #=> String
     #   resp.job_run.configuration_overrides.monitoring_configuration.cloud_watch_monitoring_configuration.log_stream_name_prefix #=> String
     #   resp.job_run.configuration_overrides.monitoring_configuration.s3_monitoring_configuration.log_uri #=> String
+    #   resp.job_run.configuration_overrides.monitoring_configuration.container_log_rotation_configuration.rotation_size #=> String
+    #   resp.job_run.configuration_overrides.monitoring_configuration.container_log_rotation_configuration.max_files_to_keep #=> Integer
     #   resp.job_run.job_driver.spark_submit_job_driver.entry_point #=> String
     #   resp.job_run.job_driver.spark_submit_job_driver.entry_point_arguments #=> Array
     #   resp.job_run.job_driver.spark_submit_job_driver.entry_point_arguments[0] #=> String
@@ -938,6 +949,8 @@ module Aws::EMRContainers
     #   resp.endpoint.configuration_overrides.monitoring_configuration.cloud_watch_monitoring_configuration.log_group_name #=> String
     #   resp.endpoint.configuration_overrides.monitoring_configuration.cloud_watch_monitoring_configuration.log_stream_name_prefix #=> String
     #   resp.endpoint.configuration_overrides.monitoring_configuration.s3_monitoring_configuration.log_uri #=> String
+    #   resp.endpoint.configuration_overrides.monitoring_configuration.container_log_rotation_configuration.rotation_size #=> String
+    #   resp.endpoint.configuration_overrides.monitoring_configuration.container_log_rotation_configuration.max_files_to_keep #=> Integer
     #   resp.endpoint.server_url #=> String
     #   resp.endpoint.created_at #=> Time
     #   resp.endpoint.security_group #=> String
@@ -1126,6 +1139,8 @@ module Aws::EMRContainers
     #   resp.job_runs[0].configuration_overrides.monitoring_configuration.cloud_watch_monitoring_configuration.log_group_name #=> String
     #   resp.job_runs[0].configuration_overrides.monitoring_configuration.cloud_watch_monitoring_configuration.log_stream_name_prefix #=> String
     #   resp.job_runs[0].configuration_overrides.monitoring_configuration.s3_monitoring_configuration.log_uri #=> String
+    #   resp.job_runs[0].configuration_overrides.monitoring_configuration.container_log_rotation_configuration.rotation_size #=> String
+    #   resp.job_runs[0].configuration_overrides.monitoring_configuration.container_log_rotation_configuration.max_files_to_keep #=> Integer
     #   resp.job_runs[0].job_driver.spark_submit_job_driver.entry_point #=> String
     #   resp.job_runs[0].job_driver.spark_submit_job_driver.entry_point_arguments #=> Array
     #   resp.job_runs[0].job_driver.spark_submit_job_driver.entry_point_arguments[0] #=> String
@@ -1299,6 +1314,8 @@ module Aws::EMRContainers
     #   resp.endpoints[0].configuration_overrides.monitoring_configuration.cloud_watch_monitoring_configuration.log_group_name #=> String
     #   resp.endpoints[0].configuration_overrides.monitoring_configuration.cloud_watch_monitoring_configuration.log_stream_name_prefix #=> String
     #   resp.endpoints[0].configuration_overrides.monitoring_configuration.s3_monitoring_configuration.log_uri #=> String
+    #   resp.endpoints[0].configuration_overrides.monitoring_configuration.container_log_rotation_configuration.rotation_size #=> String
+    #   resp.endpoints[0].configuration_overrides.monitoring_configuration.container_log_rotation_configuration.max_files_to_keep #=> Integer
     #   resp.endpoints[0].server_url #=> String
     #   resp.endpoints[0].created_at #=> Time
     #   resp.endpoints[0].security_group #=> String
@@ -1508,6 +1525,10 @@ module Aws::EMRContainers
     #         s3_monitoring_configuration: {
     #           log_uri: "UriString", # required
     #         },
+    #         container_log_rotation_configuration: {
+    #           rotation_size: "RotationSize", # required
+    #           max_files_to_keep: 1, # required
+    #         },
     #       },
     #     },
     #     tags: {
@@ -1615,7 +1636,7 @@ module Aws::EMRContainers
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emrcontainers'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

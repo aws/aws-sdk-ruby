@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.88.0 (2023-06-21)
+------------------
+
+* Feature - Documentation updates for DynamoDB
+
+1.87.0 (2023-06-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.86.0 (2023-06-12)
+------------------
+
+* Feature - Documentation updates for DynamoDB
+
+1.85.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.84.0 (2023-04-17)
 ------------------
 

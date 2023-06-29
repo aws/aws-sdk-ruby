@@ -128,7 +128,8 @@ module Aws::SSM
     #   `/aws/ssm/MyGroup/appmanager`.
     #
     #   For the `Document` and `Parameter` values, use the name of the
-    #   resource.
+    #   resource. If you're tagging a shared document, you must use the
+    #   full ARN of the document.
     #
     #   `ManagedInstance`: `mi-012345abcde`
     #
@@ -3562,7 +3563,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-manually-create-OpsItems.html
     #   @return [Hash<String,Types::OpsItemDataValue>]
     #
     # @!attribute [rw] notifications
@@ -3597,10 +3598,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Optional metadata that you assign to a resource. You can restrict
-    #   access to OpsItems by using an inline IAM policy that specifies
-    #   tags. For more information, see [Getting started with OpsCenter][1]
-    #   in the *Amazon Web Services Systems Manager User Guide*.
+    #   Optional metadata that you assign to a resource.
     #
     #   Tags use a key-value pair. For example:
     #
@@ -3610,10 +3608,6 @@ module Aws::SSM
     #   both the `ssm:CreateOpsItems` operation and the
     #   `ssm:AddTagsToResource` operation. To add tags to an existing
     #   OpsItem, use the AddTagsToResource operation.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html#OpsCenter-getting-started-user-permissions
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] category
@@ -3649,13 +3643,13 @@ module Aws::SSM
     # @!attribute [rw] account_id
     #   The target Amazon Web Services account where you want to create an
     #   OpsItem. To make this call, your account must be configured to work
-    #   with OpsItems across accounts. For more information, see [Setting up
-    #   OpsCenter to work with OpsItems across accounts][1] in the *Amazon
-    #   Web Services Systems Manager User Guide*.
+    #   with OpsItems across accounts. For more information, see [Set up
+    #   OpsCenter][1] in the *Amazon Web Services Systems Manager User
+    #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-OpsCenter-multiple-accounts.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-setup.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateOpsItemRequest AWS API Documentation
@@ -5085,14 +5079,15 @@ module Aws::SSM
     # @!attribute [rw] filters
     #   One or more filters. Use a filter to return a more specific list of
     #   managed nodes. You can filter based on tags applied to your managed
-    #   nodes. Use this `Filters` data type instead of
-    #   `InstanceInformationFilterList`, which is deprecated.
+    #   nodes. Tag filters can't be combined with other filter types. Use
+    #   this `Filters` data type instead of `InstanceInformationFilterList`,
+    #   which is deprecated.
     #   @return [Array<Types::InstanceInformationStringFilter>]
     #
     # @!attribute [rw] max_results
     #   The maximum number of items to return for this call. The call also
     #   returns a token that you can specify in a subsequent call to get the
-    #   next set of results.
+    #   next set of results. The default value is 10 items.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -5824,6 +5819,10 @@ module Aws::SSM
     #     Operations: Contains
     #
     #   * Key: AutomationId
+    #
+    #     Operations: Equals
+    #
+    #   * Key: AccountId
     #
     #     Operations: Equals
     #
@@ -9242,7 +9241,7 @@ module Aws::SSM
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html
-    #   [2]: https://docs.aws.amazon.com/cli/latest/ec2/describe-instances.html
+    #   [2]: https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html
     #   @return [String]
     #
     # @!attribute [rw] registration_date
@@ -9274,7 +9273,7 @@ module Aws::SSM
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-linux.html
     #   [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-win.html
     #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html
-    #   [4]: https://docs.aws.amazon.com/cli/latest/ec2/describe-instances.html
+    #   [4]: https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html
     #   @return [String]
     #
     # @!attribute [rw] ip_address
@@ -12801,7 +12800,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-manually-create-OpsItems.html
     #   @return [Hash<String,Types::OpsItemDataValue>]
     #
     # @!attribute [rw] category
@@ -13053,13 +13052,7 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # The request caused OpsItems to exceed one or more quotas. For
-    # information about OpsItem quotas, see [What are the resource limits
-    # for OpsCenter?][1].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-learn-more.html#OpsCenter-learn-more-limits
+    # The request caused OpsItems to exceed one or more quotas.
     #
     # @!attribute [rw] resource_types
     #   @return [Array<String>]
@@ -18852,7 +18845,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-manually-create-OpsItems.html
     #   @return [Hash<String,Types::OpsItemDataValue>]
     #
     # @!attribute [rw] operational_data_to_delete
@@ -18883,7 +18876,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems.html#OpsCenter-working-with-OpsItems-editing-details
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems-editing-details.html
     #   @return [String]
     #
     # @!attribute [rw] ops_item_id

@@ -9,6 +9,7 @@
 
 
 module Aws::ConnectCases
+  # @api private
   module Endpoints
 
     class BatchGetField

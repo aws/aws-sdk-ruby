@@ -275,6 +275,11 @@ module Aws::Keyspaces
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -406,6 +411,18 @@ module Aws::Keyspaces
     #
     #   [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html
     #
+    # @option params [Types::ReplicationSpecification] :replication_specification
+    #   The replication specification of the keyspace includes:
+    #
+    #   * `replicationStrategy` - the required value is `SINGLE_REGION` or
+    #     `MULTI_REGION`.
+    #
+    #   * `regionList` - if the `replicationStrategy` is `MULTI_REGION`, the
+    #     `regionList` requires the current Region and at least one additional
+    #     Amazon Web Services Region where the keyspace is going to be
+    #     replicated in. The maximum number of supported replication Regions
+    #     including the current Region is six.
+    #
     # @return [Types::CreateKeyspaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateKeyspaceResponse#resource_arn #resource_arn} => String
@@ -420,6 +437,10 @@ module Aws::Keyspaces
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     replication_specification: {
+    #       replication_strategy: "SINGLE_REGION", # required, accepts SINGLE_REGION, MULTI_REGION
+    #       region_list: ["region"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -745,6 +766,8 @@ module Aws::Keyspaces
     #
     #   * {Types::GetKeyspaceResponse#keyspace_name #keyspace_name} => String
     #   * {Types::GetKeyspaceResponse#resource_arn #resource_arn} => String
+    #   * {Types::GetKeyspaceResponse#replication_strategy #replication_strategy} => String
+    #   * {Types::GetKeyspaceResponse#replication_regions #replication_regions} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -756,6 +779,9 @@ module Aws::Keyspaces
     #
     #   resp.keyspace_name #=> String
     #   resp.resource_arn #=> String
+    #   resp.replication_strategy #=> String, one of "SINGLE_REGION", "MULTI_REGION"
+    #   resp.replication_regions #=> Array
+    #   resp.replication_regions[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/GetKeyspace AWS API Documentation
     #
@@ -874,6 +900,9 @@ module Aws::Keyspaces
     #   resp.keyspaces #=> Array
     #   resp.keyspaces[0].keyspace_name #=> String
     #   resp.keyspaces[0].resource_arn #=> String
+    #   resp.keyspaces[0].replication_strategy #=> String, one of "SINGLE_REGION", "MULTI_REGION"
+    #   resp.keyspaces[0].replication_regions #=> Array
+    #   resp.keyspaces[0].replication_regions[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/ListKeyspaces AWS API Documentation
     #
@@ -1166,7 +1195,7 @@ module Aws::Keyspaces
     #
     #
     # [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html
-    # [2]: https://docs.aws.amazon.com/keyspaces/latest/devguide/security_iam_id-based-policy-examples-tags
+    # [2]: https://docs.aws.amazon.com/keyspaces/latest/devguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-tags
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the Amazon Keyspaces resource to
@@ -1410,7 +1439,7 @@ module Aws::Keyspaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-keyspaces'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

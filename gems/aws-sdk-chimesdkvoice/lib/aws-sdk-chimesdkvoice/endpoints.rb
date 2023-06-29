@@ -9,6 +9,7 @@
 
 
 module Aws::ChimeSDKVoice
+  # @api private
   module Endpoints
 
     class AssociatePhoneNumbersWithVoiceConnector

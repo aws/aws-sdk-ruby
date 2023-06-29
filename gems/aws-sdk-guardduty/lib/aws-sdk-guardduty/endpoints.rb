@@ -9,6 +9,7 @@
 
 
 module Aws::GuardDuty
+  # @api private
   module Endpoints
 
     class AcceptAdministratorInvitation

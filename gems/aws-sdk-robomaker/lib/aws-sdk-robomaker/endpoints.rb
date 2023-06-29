@@ -9,6 +9,7 @@
 
 
 module Aws::RoboMaker
+  # @api private
   module Endpoints
 
     class BatchDeleteWorlds

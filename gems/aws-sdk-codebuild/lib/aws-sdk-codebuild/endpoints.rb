@@ -9,6 +9,7 @@
 
 
 module Aws::CodeBuild
+  # @api private
   module Endpoints
 
     class BatchDeleteBuilds

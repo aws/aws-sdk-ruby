@@ -9,6 +9,7 @@
 
 
 module Aws::CloudDirectory
+  # @api private
   module Endpoints
 
     class AddFacetToObject

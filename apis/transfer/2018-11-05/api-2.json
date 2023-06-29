@@ -1188,7 +1188,8 @@
         "ProtocolDetails":{"shape":"ProtocolDetails"},
         "SecurityPolicyName":{"shape":"SecurityPolicyName"},
         "Tags":{"shape":"Tags"},
-        "WorkflowDetails":{"shape":"WorkflowDetails"}
+        "WorkflowDetails":{"shape":"WorkflowDetails"},
+        "StructuredLogDestinations":{"shape":"StructuredLogDestinations"}
       }
     },
     "CreateServerResponse":{
@@ -1705,7 +1706,8 @@
         "State":{"shape":"State"},
         "Tags":{"shape":"Tags"},
         "UserCount":{"shape":"UserCount"},
-        "WorkflowDetails":{"shape":"WorkflowDetails"}
+        "WorkflowDetails":{"shape":"WorkflowDetails"},
+        "StructuredLogDestinations":{"shape":"StructuredLogDestinations"}
       }
     },
     "DescribedUser":{
@@ -1951,7 +1953,8 @@
         "Url":{"shape":"Url"},
         "InvocationRole":{"shape":"Role"},
         "DirectoryId":{"shape":"DirectoryId"},
-        "Function":{"shape":"Function"}
+        "Function":{"shape":"Function"},
+        "SftpAuthenticationMethods":{"shape":"SftpAuthenticationMethods"}
       }
     },
     "IdentityProviderType":{
@@ -2777,6 +2780,15 @@
         "ENABLE_NO_OP"
       ]
     },
+    "SftpAuthenticationMethods":{
+      "type":"string",
+      "enum":[
+        "PASSWORD",
+        "PUBLIC_KEY",
+        "PUBLIC_KEY_OR_PASSWORD",
+        "PUBLIC_KEY_AND_PASSWORD"
+      ]
+    },
     "SigningAlg":{
       "type":"string",
       "enum":[
@@ -2873,6 +2885,12 @@
       "members":{
         "ServerId":{"shape":"ServerId"}
       }
+    },
+    "StructuredLogDestinations":{
+      "type":"list",
+      "member":{"shape":"Arn"},
+      "max":1,
+      "min":0
     },
     "SubnetId":{"type":"string"},
     "SubnetIds":{
@@ -3130,7 +3148,8 @@
         "Protocols":{"shape":"Protocols"},
         "SecurityPolicyName":{"shape":"SecurityPolicyName"},
         "ServerId":{"shape":"ServerId"},
-        "WorkflowDetails":{"shape":"WorkflowDetails"}
+        "WorkflowDetails":{"shape":"WorkflowDetails"},
+        "StructuredLogDestinations":{"shape":"StructuredLogDestinations"}
       }
     },
     "UpdateServerResponse":{

@@ -1071,13 +1071,21 @@ module Aws::OpenSearchService
     # The connection properties of an outbound connection.
     #
     # @!attribute [rw] endpoint
-    #   The endpoint of the remote domain.
+    #   The Endpoint attribute cannot be modified.
+    #
+    #   The endpoint of the remote domain. Applicable for VPC\_ENDPOINT
+    #   connection mode.
     #   @return [String]
+    #
+    # @!attribute [rw] cross_cluster_search
+    #   The connection properties for cross cluster search.
+    #   @return [Types::CrossClusterSearchConnectionProperties]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ConnectionProperties AWS API Documentation
     #
     class ConnectionProperties < Struct.new(
-      :endpoint)
+      :endpoint,
+      :cross_cluster_search)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1274,13 +1282,18 @@ module Aws::OpenSearchService
     #   The connection mode.
     #   @return [String]
     #
+    # @!attribute [rw] connection_properties
+    #   The `ConnectionProperties` for the outbound connection.
+    #   @return [Types::ConnectionProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateOutboundConnectionRequest AWS API Documentation
     #
     class CreateOutboundConnectionRequest < Struct.new(
       :local_domain_info,
       :remote_domain_info,
       :connection_alias,
-      :connection_mode)
+      :connection_mode,
+      :connection_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1406,6 +1419,20 @@ module Aws::OpenSearchService
     #
     class CreateVpcEndpointResponse < Struct.new(
       :vpc_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Cross cluster search specific connection properties.
+    #
+    # @!attribute [rw] skip_unavailable
+    #   Status of SkipUnavailable param for outbound connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CrossClusterSearchConnectionProperties AWS API Documentation
+    #
+    class CrossClusterSearchConnectionProperties < Struct.new(
+      :skip_unavailable)
       SENSITIVE = []
       include Aws::Structure
     end

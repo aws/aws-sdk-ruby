@@ -9,6 +9,7 @@
 
 
 module Aws::OSIS
+  # @api private
   module Endpoints
 
     class CreatePipeline

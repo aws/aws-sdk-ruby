@@ -9,6 +9,7 @@
 
 
 module Aws::BackupStorage
+  # @api private
   module Endpoints
 
     class DeleteObject

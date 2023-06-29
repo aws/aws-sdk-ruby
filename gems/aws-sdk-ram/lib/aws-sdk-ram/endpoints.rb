@@ -9,6 +9,7 @@
 
 
 module Aws::RAM
+  # @api private
   module Endpoints
 
     class AcceptResourceShareInvitation

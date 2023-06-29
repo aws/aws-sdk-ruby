@@ -35,7 +35,7 @@ module Aws::IAM
     end
 
     # The base32 seed defined as specified in [RFC3548][1]. The
-    # `Base32StringSeed` is base64-encoded.
+    # `Base32StringSeed` is base32-encoded.
     #
     #
     #
@@ -198,7 +198,9 @@ module Aws::IAM
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -210,7 +212,9 @@ module Aws::IAM
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(serial_number: @serial_number)
-      resp = @client.delete_virtual_mfa_device(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_virtual_mfa_device(options)
+      end
       resp.data
     end
 

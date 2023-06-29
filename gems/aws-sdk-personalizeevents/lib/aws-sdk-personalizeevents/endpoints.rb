@@ -9,6 +9,7 @@
 
 
 module Aws::PersonalizeEvents
+  # @api private
   module Endpoints
 
     class PutEvents

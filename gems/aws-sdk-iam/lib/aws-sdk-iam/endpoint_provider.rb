@@ -25,85 +25,25 @@ module Aws::IAM
       end
       if Aws::Endpoints::Matchers.set?(region)
         if (partition_result = Aws::Endpoints::Matchers.aws_partition(region))
-          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws")
-            if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS")) && Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
-                return Aws::Endpoints::Endpoint.new(url: "https://iam-fips.#{region}.api.aws", headers: {}, properties: {})
-              end
-              raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
-            end
-            if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
-                return Aws::Endpoints::Endpoint.new(url: "https://iam-fips.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"iam", "signingRegion"=>"us-east-1"}]})
-              end
-              raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
-            end
-            if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
-                return Aws::Endpoints::Endpoint.new(url: "https://iam.#{region}.api.aws", headers: {}, properties: {})
-              end
-              raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
-            end
+          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws") && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false)
             return Aws::Endpoints::Endpoint.new(url: "https://iam.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"iam", "signingRegion"=>"us-east-1"}]})
           end
-          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-cn")
-            if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS")) && Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
-                return Aws::Endpoints::Endpoint.new(url: "https://iam-fips.#{region}.api.amazonwebservices.com.cn", headers: {}, properties: {})
-              end
-              raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
-            end
-            if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
-                return Aws::Endpoints::Endpoint.new(url: "https://iam-fips.#{region}.amazonaws.com.cn", headers: {}, properties: {})
-              end
-              raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
-            end
-            if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
-                return Aws::Endpoints::Endpoint.new(url: "https://iam.#{region}.api.amazonwebservices.com.cn", headers: {}, properties: {})
-              end
-              raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
-            end
+          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws") && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false)
+            return Aws::Endpoints::Endpoint.new(url: "https://iam-fips.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"iam", "signingRegion"=>"us-east-1"}]})
+          end
+          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-cn") && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false)
             return Aws::Endpoints::Endpoint.new(url: "https://iam.cn-north-1.amazonaws.com.cn", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"iam", "signingRegion"=>"cn-north-1"}]})
           end
-          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-us-gov")
-            if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS")) && Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
-                return Aws::Endpoints::Endpoint.new(url: "https://iam-fips.#{region}.api.aws", headers: {}, properties: {})
-              end
-              raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
-            end
-            if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
-                return Aws::Endpoints::Endpoint.new(url: "https://iam.us-gov.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"iam", "signingRegion"=>"us-gov-west-1"}]})
-              end
-              raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
-            end
-            if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
-                return Aws::Endpoints::Endpoint.new(url: "https://iam.#{region}.api.aws", headers: {}, properties: {})
-              end
-              raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
-            end
+          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-us-gov") && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false)
             return Aws::Endpoints::Endpoint.new(url: "https://iam.us-gov.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"iam", "signingRegion"=>"us-gov-west-1"}]})
           end
-          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-iso")
-            if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
-                return Aws::Endpoints::Endpoint.new(url: "https://iam-fips.#{region}.c2s.ic.gov", headers: {}, properties: {})
-              end
-              raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
-            end
+          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-us-gov") && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false)
+            return Aws::Endpoints::Endpoint.new(url: "https://iam.us-gov.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"iam", "signingRegion"=>"us-gov-west-1"}]})
+          end
+          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-iso") && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false)
             return Aws::Endpoints::Endpoint.new(url: "https://iam.us-iso-east-1.c2s.ic.gov", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"iam", "signingRegion"=>"us-iso-east-1"}]})
           end
-          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-iso-b")
-            if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
-                return Aws::Endpoints::Endpoint.new(url: "https://iam-fips.#{region}.sc2s.sgov.gov", headers: {}, properties: {})
-              end
-              raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
-            end
+          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-iso-b") && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false)
             return Aws::Endpoints::Endpoint.new(url: "https://iam.us-isob-east-1.sc2s.sgov.gov", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"iam", "signingRegion"=>"us-isob-east-1"}]})
           end
           if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
@@ -114,12 +54,6 @@ module Aws::IAM
           end
           if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
             if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
-              if Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                return Aws::Endpoints::Endpoint.new(url: "https://iam-fips.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"iam", "signingRegion"=>"us-east-1"}]})
-              end
-              if Aws::Endpoints::Matchers.string_equals?(region, "aws-us-gov-global")
-                return Aws::Endpoints::Endpoint.new(url: "https://iam.us-gov.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"iam", "signingRegion"=>"us-gov-west-1"}]})
-              end
               return Aws::Endpoints::Endpoint.new(url: "https://iam-fips.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
@@ -129,21 +63,6 @@ module Aws::IAM
               return Aws::Endpoints::Endpoint.new(url: "https://iam.#{region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
-          end
-          if Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-            return Aws::Endpoints::Endpoint.new(url: "https://iam.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"iam", "signingRegion"=>"us-east-1"}]})
-          end
-          if Aws::Endpoints::Matchers.string_equals?(region, "aws-cn-global")
-            return Aws::Endpoints::Endpoint.new(url: "https://iam.cn-north-1.amazonaws.com.cn", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"iam", "signingRegion"=>"cn-north-1"}]})
-          end
-          if Aws::Endpoints::Matchers.string_equals?(region, "aws-us-gov-global")
-            return Aws::Endpoints::Endpoint.new(url: "https://iam.us-gov.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"iam", "signingRegion"=>"us-gov-west-1"}]})
-          end
-          if Aws::Endpoints::Matchers.string_equals?(region, "aws-iso-global")
-            return Aws::Endpoints::Endpoint.new(url: "https://iam.us-iso-east-1.c2s.ic.gov", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"iam", "signingRegion"=>"us-iso-east-1"}]})
-          end
-          if Aws::Endpoints::Matchers.string_equals?(region, "aws-iso-b-global")
-            return Aws::Endpoints::Endpoint.new(url: "https://iam.us-isob-east-1.sc2s.sgov.gov", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"iam", "signingRegion"=>"us-isob-east-1"}]})
           end
           return Aws::Endpoints::Endpoint.new(url: "https://iam.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
         end

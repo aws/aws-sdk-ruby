@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2023-06-27)
+------------------
+
+* Feature - IVS customers can now revoke the viewer session associated with an auth token, to prevent and stop playback using that token.
+
+1.32.0 (2023-06-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2023-06-01)
+------------------
+
+* Feature - API Update for IVS Advanced Channel type
+
+1.30.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.29.0 (2023-03-30)
 ------------------
 

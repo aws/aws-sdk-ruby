@@ -9,6 +9,7 @@
 
 
 module Aws::Route53RecoveryCluster
+  # @api private
   module Endpoints
 
     class GetRoutingControlState

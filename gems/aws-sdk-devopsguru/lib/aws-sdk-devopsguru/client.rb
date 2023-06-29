@@ -275,6 +275,11 @@ module Aws::DevOpsGuru
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -373,17 +378,11 @@ module Aws::DevOpsGuru
     # insight is generated.
     #
     # If you use an Amazon SNS topic in another account, you must attach a
-    # policy to it that grants DevOps Guru permission to it notifications.
-    # DevOps Guru adds the required policy on your behalf to send
-    # notifications using Amazon SNS in your account. DevOps Guru only
+    # policy to it that grants DevOps Guru permission to send it
+    # notifications. DevOps Guru adds the required policy on your behalf to
+    # send notifications using Amazon SNS in your account. DevOps Guru only
     # supports standard SNS topics. For more information, see [Permissions
-    # for cross account Amazon SNS topics][1].
-    #
-    # If you use an Amazon SNS topic in another account, you must attach a
-    # policy to it that grants DevOps Guru permission to it notifications.
-    # DevOps Guru adds the required policy on your behalf to send
-    # notifications using Amazon SNS in your account. For more information,
-    # see Permissions for cross account Amazon SNS topics.
+    # for Amazon SNS topics][1].
     #
     # If you use an Amazon SNS topic that is encrypted by an Amazon Web
     # Services Key Management Service customer-managed key (CMK), then you
@@ -1057,6 +1056,9 @@ module Aws::DevOpsGuru
     #
     #   resp.service_integration.ops_center.opt_in_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.service_integration.logs_anomaly_detection.opt_in_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.service_integration.kms_server_side_encryption.kms_key_id #=> String
+    #   resp.service_integration.kms_server_side_encryption.opt_in_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.service_integration.kms_server_side_encryption.type #=> String, one of "CUSTOMER_MANAGED_KEY", "AWS_OWNED_KMS_KEY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeServiceIntegration AWS API Documentation
     #
@@ -2309,6 +2311,11 @@ module Aws::DevOpsGuru
     #       logs_anomaly_detection: {
     #         opt_in_status: "ENABLED", # accepts ENABLED, DISABLED
     #       },
+    #       kms_server_side_encryption: {
+    #         kms_key_id: "KMSKeyId",
+    #         opt_in_status: "ENABLED", # accepts ENABLED, DISABLED
+    #         type: "CUSTOMER_MANAGED_KEY", # accepts CUSTOMER_MANAGED_KEY, AWS_OWNED_KMS_KEY
+    #       },
     #     },
     #   })
     #
@@ -2334,7 +2341,7 @@ module Aws::DevOpsGuru
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devopsguru'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

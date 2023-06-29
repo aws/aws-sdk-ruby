@@ -9,6 +9,7 @@
 
 
 module Aws::CloudWatchEvents
+  # @api private
   module Endpoints
 
     class ActivateEventSource

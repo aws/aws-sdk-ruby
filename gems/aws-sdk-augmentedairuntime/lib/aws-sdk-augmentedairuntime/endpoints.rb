@@ -9,6 +9,7 @@
 
 
 module Aws::AugmentedAIRuntime
+  # @api private
   module Endpoints
 
     class DeleteHumanLoop

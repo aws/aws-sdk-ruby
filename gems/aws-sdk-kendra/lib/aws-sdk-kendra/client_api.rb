@@ -96,6 +96,7 @@ module Aws::Kendra
     ConfluenceSpaceToIndexFieldMapping = Shapes::StructureShape.new(name: 'ConfluenceSpaceToIndexFieldMapping')
     ConfluenceVersion = Shapes::StringShape.new(name: 'ConfluenceVersion')
     ConnectionConfiguration = Shapes::StructureShape.new(name: 'ConnectionConfiguration')
+    Content = Shapes::StringShape.new(name: 'Content')
     ContentSourceConfiguration = Shapes::StructureShape.new(name: 'ContentSourceConfiguration')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
     Correction = Shapes::StructureShape.new(name: 'Correction')
@@ -208,6 +209,7 @@ module Aws::Kendra
     DocumentRelevanceOverrideConfigurationList = Shapes::ListShape.new(name: 'DocumentRelevanceOverrideConfigurationList')
     DocumentStatus = Shapes::StringShape.new(name: 'DocumentStatus')
     DocumentStatusList = Shapes::ListShape.new(name: 'DocumentStatusList')
+    DocumentTitle = Shapes::StringShape.new(name: 'DocumentTitle')
     DocumentsMetadataConfiguration = Shapes::StructureShape.new(name: 'DocumentsMetadataConfiguration')
     Domain = Shapes::StringShape.new(name: 'Domain')
     Duration = Shapes::StringShape.new(name: 'Duration')
@@ -438,6 +440,10 @@ module Aws::Kendra
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceUnavailableException = Shapes::StructureShape.new(name: 'ResourceUnavailableException')
     ResultId = Shapes::StringShape.new(name: 'ResultId')
+    RetrieveRequest = Shapes::StructureShape.new(name: 'RetrieveRequest')
+    RetrieveResult = Shapes::StructureShape.new(name: 'RetrieveResult')
+    RetrieveResultItem = Shapes::StructureShape.new(name: 'RetrieveResultItem')
+    RetrieveResultItemList = Shapes::ListShape.new(name: 'RetrieveResultItemList')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
     S3DataSourceConfiguration = Shapes::StructureShape.new(name: 'S3DataSourceConfiguration')
@@ -1004,7 +1010,7 @@ module Aws::Kendra
     DataSourceConfiguration.add_member(:quip_configuration, Shapes::ShapeRef.new(shape: QuipConfiguration, location_name: "QuipConfiguration"))
     DataSourceConfiguration.add_member(:jira_configuration, Shapes::ShapeRef.new(shape: JiraConfiguration, location_name: "JiraConfiguration"))
     DataSourceConfiguration.add_member(:git_hub_configuration, Shapes::ShapeRef.new(shape: GitHubConfiguration, location_name: "GitHubConfiguration"))
-    DataSourceConfiguration.add_member(:alfresco_configuration, Shapes::ShapeRef.new(shape: AlfrescoConfiguration, location_name: "AlfrescoConfiguration"))
+    DataSourceConfiguration.add_member(:alfresco_configuration, Shapes::ShapeRef.new(shape: AlfrescoConfiguration, deprecated: true, location_name: "AlfrescoConfiguration", metadata: {"deprecatedMessage"=>"Deprecated AlfrescoConfiguration in favor of TemplateConfiguration"}))
     DataSourceConfiguration.add_member(:template_configuration, Shapes::ShapeRef.new(shape: TemplateConfiguration, location_name: "TemplateConfiguration"))
     DataSourceConfiguration.struct_class = Types::DataSourceConfiguration
 
@@ -1966,6 +1972,30 @@ module Aws::Kendra
 
     ResourceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceUnavailableException.struct_class = Types::ResourceUnavailableException
+
+    RetrieveRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    RetrieveRequest.add_member(:query_text, Shapes::ShapeRef.new(shape: QueryText, required: true, location_name: "QueryText"))
+    RetrieveRequest.add_member(:attribute_filter, Shapes::ShapeRef.new(shape: AttributeFilter, location_name: "AttributeFilter"))
+    RetrieveRequest.add_member(:requested_document_attributes, Shapes::ShapeRef.new(shape: DocumentAttributeKeyList, location_name: "RequestedDocumentAttributes"))
+    RetrieveRequest.add_member(:document_relevance_override_configurations, Shapes::ShapeRef.new(shape: DocumentRelevanceOverrideConfigurationList, location_name: "DocumentRelevanceOverrideConfigurations"))
+    RetrieveRequest.add_member(:page_number, Shapes::ShapeRef.new(shape: Integer, location_name: "PageNumber"))
+    RetrieveRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: Integer, location_name: "PageSize"))
+    RetrieveRequest.add_member(:user_context, Shapes::ShapeRef.new(shape: UserContext, location_name: "UserContext"))
+    RetrieveRequest.struct_class = Types::RetrieveRequest
+
+    RetrieveResult.add_member(:query_id, Shapes::ShapeRef.new(shape: QueryId, location_name: "QueryId"))
+    RetrieveResult.add_member(:result_items, Shapes::ShapeRef.new(shape: RetrieveResultItemList, location_name: "ResultItems"))
+    RetrieveResult.struct_class = Types::RetrieveResult
+
+    RetrieveResultItem.add_member(:id, Shapes::ShapeRef.new(shape: ResultId, location_name: "Id"))
+    RetrieveResultItem.add_member(:document_id, Shapes::ShapeRef.new(shape: DocumentId, location_name: "DocumentId"))
+    RetrieveResultItem.add_member(:document_title, Shapes::ShapeRef.new(shape: DocumentTitle, location_name: "DocumentTitle"))
+    RetrieveResultItem.add_member(:content, Shapes::ShapeRef.new(shape: Content, location_name: "Content"))
+    RetrieveResultItem.add_member(:document_uri, Shapes::ShapeRef.new(shape: Url, location_name: "DocumentURI"))
+    RetrieveResultItem.add_member(:document_attributes, Shapes::ShapeRef.new(shape: DocumentAttributeList, location_name: "DocumentAttributes"))
+    RetrieveResultItem.struct_class = Types::RetrieveResultItem
+
+    RetrieveResultItemList.member = Shapes::ShapeRef.new(shape: RetrieveResultItem)
 
     S3DataSourceConfiguration.add_member(:bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, required: true, location_name: "BucketName"))
     S3DataSourceConfiguration.add_member(:inclusion_prefixes, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "InclusionPrefixes"))
@@ -3198,6 +3228,21 @@ module Aws::Kendra
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: QueryRequest)
         o.output = Shapes::ShapeRef.new(shape: QueryResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:retrieve, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "Retrieve"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RetrieveRequest)
+        o.output = Shapes::ShapeRef.new(shape: RetrieveResult)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

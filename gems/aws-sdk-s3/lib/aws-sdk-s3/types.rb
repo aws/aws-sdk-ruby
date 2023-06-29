@@ -65,7 +65,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -718,7 +718,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -806,7 +806,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, `aws:kms`).
+    #   in Amazon S3 (for example, `AES256`, `aws:kms`).
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -815,14 +815,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetric encryption
-    #   customer managed key that was used for the object.
+    #   If present, specifies the ID of the Key Management Service (KMS)
+    #   symmetric encryption customer managed key that was used for the
+    #   object.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
     #   Indicates whether the multipart upload uses an S3 Bucket Key for
-    #   server-side encryption with Amazon Web Services KMS (SSE-KMS).
+    #   server-side encryption with Key Management Service (KMS) keys
+    #   (SSE-KMS).
     #   @return [Boolean]
     #
     # @!attribute [rw] request_charged
@@ -870,7 +871,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1172,7 +1173,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, `aws:kms`).
+    #   in Amazon S3 (for example, `AES256`, `aws:kms`, `aws:kms:dsse`).
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
@@ -1189,9 +1190,9 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetric encryption
-    #   customer managed key that was used for the object.
+    #   If present, specifies the ID of the Key Management Service (KMS)
+    #   symmetric encryption customer managed key that was used for the
+    #   object.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
@@ -1203,7 +1204,8 @@ module Aws::S3
     #
     # @!attribute [rw] bucket_key_enabled
     #   Indicates whether the copied object uses an S3 Bucket Key for
-    #   server-side encryption with Amazon Web Services KMS (SSE-KMS).
+    #   server-side encryption with Key Management Service (KMS) keys
+    #   (SSE-KMS).
     #   @return [Boolean]
     #
     # @!attribute [rw] request_charged
@@ -1254,7 +1256,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1410,7 +1412,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, `aws:kms`).
+    #   in Amazon S3 (for example, `AES256`, `aws:kms`, `aws:kms:dsse`).
     #   @return [String]
     #
     # @!attribute [rw] storage_class
@@ -1455,13 +1457,12 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   Specifies the Amazon Web Services KMS key ID to use for object
-    #   encryption. All GET and PUT requests for an object protected by
-    #   Amazon Web Services KMS will fail if not made via SSL or using
-    #   SigV4. For information about configuring using any of the officially
-    #   supported Amazon Web Services SDKs and Amazon Web Services CLI, see
-    #   [Specifying the Signature Version in Request Authentication][1] in
-    #   the *Amazon S3 User Guide*.
+    #   Specifies the KMS key ID to use for object encryption. All GET and
+    #   PUT requests for an object protected by KMS will fail if they're
+    #   not made via SSL or using SigV4. For information about configuring
+    #   any of the officially supported Amazon Web Services SDKs and Amazon
+    #   Web Services CLI, see [Specifying the Signature Version in Request
+    #   Authentication][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1477,9 +1478,9 @@ module Aws::S3
     #
     # @!attribute [rw] bucket_key_enabled
     #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
-    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
-    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket
-    #   Key for object encryption with SSE-KMS.
+    #   encryption with server-side encryption using Key Management Service
+    #   (KMS) keys (SSE-KMS). Setting this header to `true` causes Amazon S3
+    #   to use an S3 Bucket Key for object encryption with SSE-KMS.
     #
     #   Specifying this header with a COPY action doesn’t affect
     #   bucket-level settings for S3 Bucket Key.
@@ -1894,7 +1895,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1912,7 +1913,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, `aws:kms`).
+    #   in Amazon S3 (for example, `AES256`, `aws:kms`).
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
@@ -1929,9 +1930,9 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetric encryption
-    #   customer managed key that was used for the object.
+    #   If present, specifies the ID of the Key Management Service (KMS)
+    #   symmetric encryption customer managed key that was used for the
+    #   object.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
@@ -1943,7 +1944,8 @@ module Aws::S3
     #
     # @!attribute [rw] bucket_key_enabled
     #   Indicates whether the multipart upload uses an S3 Bucket Key for
-    #   server-side encryption with Amazon Web Services KMS (SSE-KMS).
+    #   server-side encryption with Key Management Service (KMS) keys
+    #   (SSE-KMS).
     #   @return [Boolean]
     #
     # @!attribute [rw] request_charged
@@ -2000,7 +2002,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2069,7 +2071,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, `aws:kms`).
+    #   in Amazon S3 (for example, `AES256`, `aws:kms`).
     #   @return [String]
     #
     # @!attribute [rw] storage_class
@@ -2114,11 +2116,11 @@ module Aws::S3
     # @!attribute [rw] ssekms_key_id
     #   Specifies the ID of the symmetric encryption customer managed key to
     #   use for object encryption. All GET and PUT requests for an object
-    #   protected by Amazon Web Services KMS will fail if not made via SSL
-    #   or using SigV4. For information about configuring using any of the
-    #   officially supported Amazon Web Services SDKs and Amazon Web
-    #   Services CLI, see [Specifying the Signature Version in Request
-    #   Authentication][1] in the *Amazon S3 User Guide*.
+    #   protected by KMS will fail if they're not made via SSL or using
+    #   SigV4. For information about configuring any of the officially
+    #   supported Amazon Web Services SDKs and Amazon Web Services CLI, see
+    #   [Specifying the Signature Version in Request Authentication][1] in
+    #   the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2134,9 +2136,9 @@ module Aws::S3
     #
     # @!attribute [rw] bucket_key_enabled
     #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
-    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
-    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket
-    #   Key for object encryption with SSE-KMS.
+    #   encryption with server-side encryption using Key Management Service
+    #   (KMS) keys (SSE-KMS). Setting this header to `true` causes Amazon S3
+    #   to use an S3 Bucket Key for object encryption with SSE-KMS.
     #
     #   Specifying this header with an object action doesn’t affect
     #   bucket-level settings for S3 Bucket Key.
@@ -2266,7 +2268,7 @@ module Aws::S3
     # Container for the objects to delete.
     #
     # @!attribute [rw] objects
-    #   The objects to delete.
+    #   The object to delete.
     #   @return [Array<Types::ObjectIdentifier>]
     #
     # @!attribute [rw] quiet
@@ -2669,7 +2671,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2762,7 +2764,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2840,7 +2842,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -3061,8 +3063,8 @@ module Aws::S3
     #   the ID of the symmetric encryption customer managed key to use for
     #   encryption of job results. Amazon S3 only supports symmetric
     #   encryption KMS keys. For more information, see [Asymmetric keys in
-    #   Amazon Web Services KMS][1] in the *Amazon Web Services Key
-    #   Management Service Developer Guide*.
+    #   KMS][1] in the *Amazon Web Services Key Management Service Developer
+    #   Guide*.
     #
     #
     #
@@ -4040,10 +4042,16 @@ module Aws::S3
     #   The accelerate configuration of the bucket.
     #   @return [String]
     #
+    # @!attribute [rw] request_charged
+    #   If present, indicates that the requester was successfully charged
+    #   for the request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAccelerateConfigurationOutput AWS API Documentation
     #
     class GetBucketAccelerateConfigurationOutput < Struct.new(
-      :status)
+      :status,
+      :request_charged)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4059,11 +4067,24 @@ module Aws::S3
     #   `403 Forbidden` (access denied).
     #   @return [String]
     #
+    # @!attribute [rw] request_payer
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAccelerateConfigurationRequest AWS API Documentation
     #
     class GetBucketAccelerateConfigurationRequest < Struct.new(
       :bucket,
-      :expected_bucket_owner)
+      :expected_bucket_owner,
+      :request_payer)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5025,7 +5046,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5088,9 +5109,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] object_attributes
-    #   An XML header that specifies the fields at the root level that you
-    #   want returned in the response. Fields that you do not specify are
-    #   not returned.
+    #   Specifies the fields at the root level that you want returned in the
+    #   response. Fields that you do not specify are not returned.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectAttributesRequest AWS API Documentation
@@ -5370,7 +5390,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, `aws:kms`).
+    #   in Amazon S3 (for example, `AES256`, `aws:kms`, `aws:kms:dsse`).
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -5391,14 +5411,14 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetric encryption
-    #   customer managed key that was used for the object.
+    #   If present, specifies the ID of the Key Management Service (KMS)
+    #   symmetric encryption customer managed key that was used for the
+    #   object.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
     #   Indicates whether the object uses an S3 Bucket Key for server-side
-    #   encryption with Amazon Web Services KMS (SSE-KMS).
+    #   encryption with Key Management Service (KMS) keys (SSE-KMS).
     #   @return [Boolean]
     #
     # @!attribute [rw] storage_class
@@ -5507,7 +5527,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5766,7 +5786,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -6024,7 +6044,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][3] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][3] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -6208,7 +6228,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, `aws:kms`).
+    #   in Amazon S3 (for example, `AES256`, `aws:kms`, `aws:kms:dsse`).
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -6229,14 +6249,14 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetric encryption
-    #   customer managed key that was used for the object.
+    #   If present, specifies the ID of the Key Management Service (KMS)
+    #   symmetric encryption customer managed key that was used for the
+    #   object.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
     #   Indicates whether the object uses an S3 Bucket Key for server-side
-    #   encryption with Amazon Web Services KMS (SSE-KMS).
+    #   encryption with Key Management Service (KMS) keys (SSE-KMS).
     #   @return [Boolean]
     #
     # @!attribute [rw] storage_class
@@ -6397,7 +6417,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -7221,8 +7241,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] continuation_token
-    #   The ContinuationToken that represents a placeholder from where this
-    #   request should begin.
+    #   The `ContinuationToken` that represents a placeholder from where
+    #   this request should begin.
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
@@ -7334,9 +7354,9 @@ module Aws::S3
     #
     # @!attribute [rw] continuation_token
     #   The marker used to continue an inventory configuration listing that
-    #   has been truncated. Use the NextContinuationToken from a previously
-    #   truncated list response to continue the listing. The continuation
-    #   token is an opaque value that Amazon S3 understands.
+    #   has been truncated. Use the `NextContinuationToken` from a
+    #   previously truncated list response to continue the listing. The
+    #   continuation token is an opaque value that Amazon S3 understands.
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
@@ -7397,7 +7417,7 @@ module Aws::S3
     #
     # @!attribute [rw] continuation_token
     #   The marker that is used to continue a metrics configuration listing
-    #   that has been truncated. Use the NextContinuationToken from a
+    #   that has been truncated. Use the `NextContinuationToken` from a
     #   previously truncated list response to continue the listing. The
     #   continuation token is an opaque value that Amazon S3 understands.
     #   @return [String]
@@ -7500,11 +7520,16 @@ module Aws::S3
     #   Encoding type used by Amazon S3 to encode object keys in the
     #   response.
     #
-    #   If you specify `encoding-type` request parameter, Amazon S3 includes
-    #   this element in the response, and returns encoded key name values in
-    #   the following response elements:
+    #   If you specify the `encoding-type` request parameter, Amazon S3
+    #   includes this element in the response, and returns encoded key name
+    #   values in the following response elements:
     #
     #   `Delimiter`, `KeyMarker`, `Prefix`, `NextKeyMarker`, `Key`.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_charged
+    #   If present, indicates that the requester was successfully charged
+    #   for the request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListMultipartUploadsOutput AWS API Documentation
@@ -7521,7 +7546,8 @@ module Aws::S3
       :is_truncated,
       :uploads,
       :common_prefixes,
-      :encoding_type)
+      :encoding_type,
+      :request_charged)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7545,7 +7571,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -7567,15 +7593,15 @@ module Aws::S3
     #
     # @!attribute [rw] encoding_type
     #   Requests Amazon S3 to encode the object keys in the response and
-    #   specifies the encoding method to use. An object key may contain any
-    #   Unicode character; however, XML 1.0 parser cannot parse some
+    #   specifies the encoding method to use. An object key can contain any
+    #   Unicode character; however, the XML 1.0 parser cannot parse some
     #   characters, such as characters with an ASCII value from 0 to 10. For
     #   characters that are not supported in XML 1.0, you can add this
     #   parameter to request that Amazon S3 encode the keys in the response.
     #   @return [String]
     #
     # @!attribute [rw] key_marker
-    #   Together with upload-id-marker, this parameter specifies the
+    #   Together with `upload-id-marker`, this parameter specifies the
     #   multipart upload after which listing should begin.
     #
     #   If `upload-id-marker` is not specified, only the keys
@@ -7597,8 +7623,8 @@ module Aws::S3
     # @!attribute [rw] prefix
     #   Lists in-progress uploads only for those keys that begin with the
     #   specified prefix. You can use prefixes to separate a bucket into
-    #   different grouping of keys. (You can think of using prefix to make
-    #   groups in the same way you'd use a folder in a file system.)
+    #   different grouping of keys. (You can think of using `prefix` to make
+    #   groups in the same way that you'd use a folder in a file system.)
     #   @return [String]
     #
     # @!attribute [rw] upload_id_marker
@@ -7616,6 +7642,18 @@ module Aws::S3
     #   `403 Forbidden` (access denied).
     #   @return [String]
     #
+    # @!attribute [rw] request_payer
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListMultipartUploadsRequest AWS API Documentation
     #
     class ListMultipartUploadsRequest < Struct.new(
@@ -7626,7 +7664,8 @@ module Aws::S3
       :max_uploads,
       :prefix,
       :upload_id_marker,
-      :expected_bucket_owner)
+      :expected_bucket_owner,
+      :request_payer)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7634,9 +7673,9 @@ module Aws::S3
     # @!attribute [rw] is_truncated
     #   A flag that indicates whether Amazon S3 returned all of the results
     #   that satisfied the search criteria. If your results were truncated,
-    #   you can make a follow-up paginated request using the NextKeyMarker
-    #   and NextVersionIdMarker response parameters as a starting place in
-    #   another request to return the rest of the results.
+    #   you can make a follow-up paginated request by using the
+    #   `NextKeyMarker` and `NextVersionIdMarker` response parameters as a
+    #   starting place in another request to return the rest of the results.
     #   @return [Boolean]
     #
     # @!attribute [rw] key_marker
@@ -7658,7 +7697,7 @@ module Aws::S3
     #   When the number of responses exceeds the value of `MaxKeys`,
     #   `NextVersionIdMarker` specifies the first object version not
     #   returned that satisfies the search criteria. Use this value for the
-    #   version-id-marker request parameter in a subsequent request.
+    #   `version-id-marker` request parameter in a subsequent request.
     #   @return [String]
     #
     # @!attribute [rw] versions
@@ -7683,7 +7722,7 @@ module Aws::S3
     #   that you specify to group keys. All keys that contain the same
     #   string between the prefix and the first occurrence of the delimiter
     #   are grouped under a single result element in `CommonPrefixes`. These
-    #   groups are counted as one result against the max-keys limitation.
+    #   groups are counted as one result against the `max-keys` limitation.
     #   These keys are not returned elsewhere in the response.
     #   @return [String]
     #
@@ -7700,11 +7739,16 @@ module Aws::S3
     #   Encoding type used by Amazon S3 to encode object key names in the
     #   XML response.
     #
-    #   If you specify encoding-type request parameter, Amazon S3 includes
-    #   this element in the response, and returns encoded key name values in
-    #   the following response elements:
+    #   If you specify the `encoding-type` request parameter, Amazon S3
+    #   includes this element in the response, and returns encoded key name
+    #   values in the following response elements:
     #
     #   `KeyMarker, NextKeyMarker, Prefix, Key`, and `Delimiter`.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_charged
+    #   If present, indicates that the requester was successfully charged
+    #   for the request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectVersionsOutput AWS API Documentation
@@ -7722,7 +7766,8 @@ module Aws::S3
       :delimiter,
       :max_keys,
       :common_prefixes,
-      :encoding_type)
+      :encoding_type,
+      :request_charged)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7735,15 +7780,15 @@ module Aws::S3
     #   A delimiter is a character that you specify to group keys. All keys
     #   that contain the same string between the `prefix` and the first
     #   occurrence of the delimiter are grouped under a single result
-    #   element in CommonPrefixes. These groups are counted as one result
-    #   against the max-keys limitation. These keys are not returned
+    #   element in `CommonPrefixes`. These groups are counted as one result
+    #   against the `max-keys` limitation. These keys are not returned
     #   elsewhere in the response.
     #   @return [String]
     #
     # @!attribute [rw] encoding_type
     #   Requests Amazon S3 to encode the object keys in the response and
-    #   specifies the encoding method to use. An object key may contain any
-    #   Unicode character; however, XML 1.0 parser cannot parse some
+    #   specifies the encoding method to use. An object key can contain any
+    #   Unicode character; however, the XML 1.0 parser cannot parse some
     #   characters, such as characters with an ASCII value from 0 to 10. For
     #   characters that are not supported in XML 1.0, you can add this
     #   parameter to request that Amazon S3 encode the keys in the response.
@@ -7754,22 +7799,22 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] max_keys
-    #   Sets the maximum number of keys returned in the response. By default
-    #   the action returns up to 1,000 key names. The response might contain
-    #   fewer keys but will never contain more. If additional keys satisfy
-    #   the search criteria, but were not returned because max-keys was
-    #   exceeded, the response contains
-    #   &lt;isTruncated&gt;true&lt;/isTruncated&gt;. To return the
-    #   additional keys, see key-marker and version-id-marker.
+    #   Sets the maximum number of keys returned in the response. By
+    #   default, the action returns up to 1,000 key names. The response
+    #   might contain fewer keys but will never contain more. If additional
+    #   keys satisfy the search criteria, but were not returned because
+    #   `max-keys` was exceeded, the response contains
+    #   `<isTruncated>true</isTruncated>`. To return the additional keys,
+    #   see `key-marker` and `version-id-marker`.
     #   @return [Integer]
     #
     # @!attribute [rw] prefix
     #   Use this parameter to select only those keys that begin with the
     #   specified prefix. You can use prefixes to separate a bucket into
-    #   different groupings of keys. (You can think of using prefix to make
-    #   groups in the same way you'd use a folder in a file system.) You
-    #   can use prefix with delimiter to roll up numerous objects into a
-    #   single result under CommonPrefixes.
+    #   different groupings of keys. (You can think of using `prefix` to
+    #   make groups in the same way that you'd use a folder in a file
+    #   system.) You can use `prefix` with `delimiter` to roll up numerous
+    #   objects into a single result under `CommonPrefixes`.
     #   @return [String]
     #
     # @!attribute [rw] version_id_marker
@@ -7782,6 +7827,23 @@ module Aws::S3
     #   `403 Forbidden` (access denied).
     #   @return [String]
     #
+    # @!attribute [rw] request_payer
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   @return [String]
+    #
+    # @!attribute [rw] optional_object_attributes
+    #   Specifies the optional fields that you want returned in the
+    #   response. Fields that you do not specify are not returned.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectVersionsRequest AWS API Documentation
     #
     class ListObjectVersionsRequest < Struct.new(
@@ -7792,7 +7854,9 @@ module Aws::S3
       :max_keys,
       :prefix,
       :version_id_marker,
-      :expected_bucket_owner)
+      :expected_bucket_owner,
+      :request_payer,
+      :optional_object_attributes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7808,14 +7872,18 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] next_marker
-    #   When response is truncated (the IsTruncated element value in the
-    #   response is true), you can use the key name in this field as marker
-    #   in the subsequent request to get next set of objects. Amazon S3
-    #   lists objects in alphabetical order Note: This element is returned
-    #   only if you have delimiter request parameter specified. If response
-    #   does not include the NextMarker and it is truncated, you can use the
-    #   value of the last Key in the response as the marker in the
-    #   subsequent request to get the next set of object keys.
+    #   When the response is truncated (the `IsTruncated` element value in
+    #   the response is `true`), you can use the key name in this field as
+    #   the `marker` parameter in the subsequent request to get the next set
+    #   of objects. Amazon S3 lists objects in alphabetical order.
+    #
+    #   <note markdown="1"> This element is returned only if you have the `delimiter` request
+    #   parameter specified. If the response does not include the
+    #   `NextMarker` element and it is truncated, you can use the value of
+    #   the last `Key` element in the response as the `marker` parameter in
+    #   the subsequent request to get the next set of object keys.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] contents
@@ -7846,24 +7914,30 @@ module Aws::S3
     #   All of the keys (up to 1,000) rolled up in a common prefix count as
     #   a single return when calculating the number of returns.
     #
-    #   A response can contain CommonPrefixes only if you specify a
+    #   A response can contain `CommonPrefixes` only if you specify a
     #   delimiter.
     #
-    #   CommonPrefixes contains all (if there are any) keys between Prefix
-    #   and the next occurrence of the string specified by the delimiter.
+    #   `CommonPrefixes` contains all (if there are any) keys between
+    #   `Prefix` and the next occurrence of the string specified by the
+    #   delimiter.
     #
-    #   CommonPrefixes lists keys that act like subdirectories in the
-    #   directory specified by Prefix.
+    #   `CommonPrefixes` lists keys that act like subdirectories in the
+    #   directory specified by `Prefix`.
     #
-    #   For example, if the prefix is notes/ and the delimiter is a slash
-    #   (/) as in notes/summer/july, the common prefix is notes/summer/. All
-    #   of the keys that roll up into a common prefix count as a single
-    #   return when calculating the number of returns.
+    #   For example, if the prefix is `notes/` and the delimiter is a slash
+    #   (`/`), as in `notes/summer/july`, the common prefix is
+    #   `notes/summer/`. All of the keys that roll up into a common prefix
+    #   count as a single return when calculating the number of returns.
     #   @return [Array<Types::CommonPrefix>]
     #
     # @!attribute [rw] encoding_type
     #   Encoding type used by Amazon S3 to encode object keys in the
     #   response.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_charged
+    #   If present, indicates that the requester was successfully charged
+    #   for the request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectsOutput AWS API Documentation
@@ -7878,7 +7952,8 @@ module Aws::S3
       :delimiter,
       :max_keys,
       :common_prefixes,
-      :encoding_type)
+      :encoding_type,
+      :request_charged)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7902,7 +7977,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -7911,13 +7986,13 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] delimiter
-    #   A delimiter is a character you use to group keys.
+    #   A delimiter is a character that you use to group keys.
     #   @return [String]
     #
     # @!attribute [rw] encoding_type
     #   Requests Amazon S3 to encode the object keys in the response and
-    #   specifies the encoding method to use. An object key may contain any
-    #   Unicode character; however, XML 1.0 parser cannot parse some
+    #   specifies the encoding method to use. An object key can contain any
+    #   Unicode character; however, the XML 1.0 parser cannot parse some
     #   characters, such as characters with an ASCII value from 0 to 10. For
     #   characters that are not supported in XML 1.0, you can add this
     #   parameter to request that Amazon S3 encode the keys in the response.
@@ -7930,9 +8005,9 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] max_keys
-    #   Sets the maximum number of keys returned in the response. By default
-    #   the action returns up to 1,000 key names. The response might contain
-    #   fewer keys but will never contain more.
+    #   Sets the maximum number of keys returned in the response. By
+    #   default, the action returns up to 1,000 key names. The response
+    #   might contain fewer keys but will never contain more.
     #   @return [Integer]
     #
     # @!attribute [rw] prefix
@@ -7951,6 +8026,11 @@ module Aws::S3
     #   `403 Forbidden` (access denied).
     #   @return [String]
     #
+    # @!attribute [rw] optional_object_attributes
+    #   Specifies the optional fields that you want returned in the
+    #   response. Fields that you do not specify are not returned.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectsRequest AWS API Documentation
     #
     class ListObjectsRequest < Struct.new(
@@ -7961,15 +8041,17 @@ module Aws::S3
       :max_keys,
       :prefix,
       :request_payer,
-      :expected_bucket_owner)
+      :expected_bucket_owner,
+      :optional_object_attributes)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] is_truncated
-    #   Set to false if all of the results were returned. Set to true if
+    #   Set to `false` if all of the results were returned. Set to `true` if
     #   more keys are available to return. If the number of results exceeds
-    #   that specified by MaxKeys, all of the results might not be returned.
+    #   that specified by `MaxKeys`, all of the results might not be
+    #   returned.
     #   @return [Boolean]
     #
     # @!attribute [rw] contents
@@ -7995,7 +8077,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -8008,17 +8090,17 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] delimiter
-    #   Causes keys that contain the same string between the prefix and the
-    #   first occurrence of the delimiter to be rolled up into a single
-    #   result element in the CommonPrefixes collection. These rolled-up
+    #   Causes keys that contain the same string between the `prefix` and
+    #   the first occurrence of the delimiter to be rolled up into a single
+    #   result element in the `CommonPrefixes` collection. These rolled-up
     #   keys are not returned elsewhere in the response. Each rolled-up
     #   result counts as only one return against the `MaxKeys` value.
     #   @return [String]
     #
     # @!attribute [rw] max_keys
-    #   Sets the maximum number of keys returned in the response. By default
-    #   the action returns up to 1,000 key names. The response might contain
-    #   fewer keys but will never contain more.
+    #   Sets the maximum number of keys returned in the response. By
+    #   default, the action returns up to 1,000 key names. The response
+    #   might contain fewer keys but will never contain more.
     #   @return [Integer]
     #
     # @!attribute [rw] common_prefixes
@@ -8045,7 +8127,7 @@ module Aws::S3
     #   Encoding type used by Amazon S3 to encode object key names in the
     #   XML response.
     #
-    #   If you specify the encoding-type request parameter, Amazon S3
+    #   If you specify the `encoding-type` request parameter, Amazon S3
     #   includes this element in the response, and returns encoded key name
     #   values in the following response elements:
     #
@@ -8053,13 +8135,14 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] key_count
-    #   KeyCount is the number of keys returned with this request. KeyCount
-    #   will always be less than or equal to the `MaxKeys` field. Say you
-    #   ask for 50 keys, your result will include 50 keys or fewer.
+    #   `KeyCount` is the number of keys returned with this request.
+    #   `KeyCount` will always be less than or equal to the `MaxKeys` field.
+    #   For example, if you ask for 50 keys, your result will include 50
+    #   keys or fewer.
     #   @return [Integer]
     #
     # @!attribute [rw] continuation_token
-    #   If ContinuationToken was sent with the request, it is included in
+    #   If `ContinuationToken` was sent with the request, it is included in
     #   the response.
     #   @return [String]
     #
@@ -8076,6 +8159,11 @@ module Aws::S3
     #   response.
     #   @return [String]
     #
+    # @!attribute [rw] request_charged
+    #   If present, indicates that the requester was successfully charged
+    #   for the request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectsV2Output AWS API Documentation
     #
     class ListObjectsV2Output < Struct.new(
@@ -8090,7 +8178,8 @@ module Aws::S3
       :key_count,
       :continuation_token,
       :next_continuation_token,
-      :start_after)
+      :start_after,
+      :request_charged)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8114,7 +8203,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -8123,7 +8212,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] delimiter
-    #   A delimiter is a character you use to group keys.
+    #   A delimiter is a character that you use to group keys.
     #   @return [String]
     #
     # @!attribute [rw] encoding_type
@@ -8132,9 +8221,9 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] max_keys
-    #   Sets the maximum number of keys returned in the response. By default
-    #   the action returns up to 1,000 key names. The response might contain
-    #   fewer keys but will never contain more.
+    #   Sets the maximum number of keys returned in the response. By
+    #   default, the action returns up to 1,000 key names. The response
+    #   might contain fewer keys but will never contain more.
     #   @return [Integer]
     #
     # @!attribute [rw] prefix
@@ -8142,15 +8231,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] continuation_token
-    #   ContinuationToken indicates Amazon S3 that the list is being
-    #   continued on this bucket with a token. ContinuationToken is
+    #   `ContinuationToken` indicates to Amazon S3 that the list is being
+    #   continued on this bucket with a token. `ContinuationToken` is
     #   obfuscated and is not a real key.
     #   @return [String]
     #
     # @!attribute [rw] fetch_owner
-    #   The owner field is not present in listV2 by default, if you want to
-    #   return owner field with each key in the result then set the fetch
-    #   owner field to true.
+    #   The owner field is not present in `ListObjectsV2` by default. If you
+    #   want to return the owner field with each key in the result, then set
+    #   the `FetchOwner` field to `true`.
     #   @return [Boolean]
     #
     # @!attribute [rw] start_after
@@ -8171,6 +8260,11 @@ module Aws::S3
     #   `403 Forbidden` (access denied).
     #   @return [String]
     #
+    # @!attribute [rw] optional_object_attributes
+    #   Specifies the optional fields that you want returned in the
+    #   response. Fields that you do not specify are not returned.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectsV2Request AWS API Documentation
     #
     class ListObjectsV2Request < Struct.new(
@@ -8183,7 +8277,8 @@ module Aws::S3
       :fetch_owner,
       :start_after,
       :request_payer,
-      :expected_bucket_owner)
+      :expected_bucket_owner,
+      :optional_object_attributes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8234,7 +8329,7 @@ module Aws::S3
     #
     # @!attribute [rw] next_part_number_marker
     #   When a list is truncated, this element specifies the last part in
-    #   the list, as well as the value to use for the part-number-marker
+    #   the list, as well as the value to use for the `part-number-marker`
     #   request parameter in a subsequent request.
     #   @return [Integer]
     #
@@ -8323,7 +8418,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -8467,11 +8562,11 @@ module Aws::S3
     # A metadata key-value pair to store with an object.
     #
     # @!attribute [rw] name
-    #   Name of the Object.
+    #   Name of the object.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   Value of the Object.
+    #   Value of the object.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/MetadataEntry AWS API Documentation
@@ -8886,6 +8981,18 @@ module Aws::S3
     #   The owner of the object
     #   @return [Types::Owner]
     #
+    # @!attribute [rw] restore_status
+    #   Specifies the restoration status of an object. Objects in certain
+    #   storage classes must be restored before they can be retrieved. For
+    #   more information about these storage classes and how to work with
+    #   archived objects, see [ Working with archived objects][1] in the
+    #   *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/archived-objects.html
+    #   @return [Types::RestoreStatus]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Object AWS API Documentation
     #
     class Object < Struct.new(
@@ -8895,7 +9002,8 @@ module Aws::S3
       :checksum_algorithm,
       :size,
       :storage_class,
-      :owner)
+      :owner,
+      :restore_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9130,6 +9238,18 @@ module Aws::S3
     #   Specifies the owner of the object.
     #   @return [Types::Owner]
     #
+    # @!attribute [rw] restore_status
+    #   Specifies the restoration status of an object. Objects in certain
+    #   storage classes must be restored before they can be retrieved. For
+    #   more information about these storage classes and how to work with
+    #   archived objects, see [ Working with archived objects][1] in the
+    #   *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/archived-objects.html
+    #   @return [Types::RestoreStatus]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ObjectVersion AWS API Documentation
     #
     class ObjectVersion < Struct.new(
@@ -9141,7 +9261,8 @@ module Aws::S3
       :version_id,
       :is_latest,
       :last_modified,
-      :owner)
+      :owner,
+      :restore_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10597,7 +10718,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -10904,7 +11025,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, `aws:kms`).
+    #   in Amazon S3 (for example, `AES256`, `aws:kms`, `aws:kms:dsse`).
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -10925,10 +11046,10 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If `x-amz-server-side-encryption` is has a valid value of `aws:kms`,
-    #   this header specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetric encryption
-    #   customer managed key that was used for the object.
+    #   If `x-amz-server-side-encryption` has a valid value of `aws:kms` or
+    #   `aws:kms:dsse`, this header specifies the ID of the Key Management
+    #   Service (KMS) symmetric encryption customer managed key that was
+    #   used for the object.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
@@ -10942,7 +11063,8 @@ module Aws::S3
     #
     # @!attribute [rw] bucket_key_enabled
     #   Indicates whether the uploaded object uses an S3 Bucket Key for
-    #   server-side encryption with Amazon Web Services KMS (SSE-KMS).
+    #   server-side encryption with Key Management Service (KMS) keys
+    #   (SSE-KMS).
     #   @return [Boolean]
     #
     # @!attribute [rw] request_charged
@@ -11005,7 +11127,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -11194,7 +11316,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, `aws:kms`).
+    #   in Amazon S3 (for example, `AES256`, `aws:kms`, `aws:kms:dsse`).
     #   @return [String]
     #
     # @!attribute [rw] storage_class
@@ -11258,15 +11380,16 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If `x-amz-server-side-encryption` has a valid value of `aws:kms`,
-    #   this header specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetric encryption
-    #   customer managed key that was used for the object. If you specify
-    #   `x-amz-server-side-encryption:aws:kms`, but do not provide`
+    #   If `x-amz-server-side-encryption` has a valid value of `aws:kms` or
+    #   `aws:kms:dsse`, this header specifies the ID of the Key Management
+    #   Service (KMS) symmetric encryption customer managed key that was
+    #   used for the object. If you specify
+    #   `x-amz-server-side-encryption:aws:kms` or
+    #   `x-amz-server-side-encryption:aws:kms:dsse`, but do not provide`
     #   x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3 uses the
-    #   Amazon Web Services managed key to protect the data. If the KMS key
-    #   does not exist in the same account issuing the command, you must use
-    #   the full ARN and not just the ID.
+    #   Amazon Web Services managed key (`aws/s3`) to protect the data. If
+    #   the KMS key does not exist in the same account that's issuing the
+    #   command, you must use the full ARN and not just the ID.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
@@ -11280,9 +11403,9 @@ module Aws::S3
     #
     # @!attribute [rw] bucket_key_enabled
     #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
-    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
-    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket
-    #   Key for object encryption with SSE-KMS.
+    #   encryption with server-side encryption using Key Management Service
+    #   (KMS) keys (SSE-KMS). Setting this header to `true` causes Amazon S3
+    #   to use an S3 Bucket Key for object encryption with SSE-KMS.
     #
     #   Specifying this header with a PUT action doesn’t affect bucket-level
     #   settings for S3 Bucket Key.
@@ -11513,7 +11636,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -12181,7 +12304,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -12295,6 +12418,49 @@ module Aws::S3
       :description,
       :select_parameters,
       :output_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the restoration status of an object. Objects in certain
+    # storage classes must be restored before they can be retrieved. For
+    # more information about these storage classes and how to work with
+    # archived objects, see [ Working with archived objects][1] in the
+    # *Amazon S3 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/archived-objects.html
+    #
+    # @!attribute [rw] is_restore_in_progress
+    #   Specifies whether the object is currently being restored. If the
+    #   object restoration is in progress, the header returns the value
+    #   `TRUE`. For example:
+    #
+    #   `x-amz-optional-object-attributes: IsRestoreInProgress="true"`
+    #
+    #   If the object restoration has completed, the header returns the
+    #   value `FALSE`. For example:
+    #
+    #   `x-amz-optional-object-attributes: IsRestoreInProgress="false",
+    #   RestoreExpiryDate="2012-12-21T00:00:00.000Z"`
+    #
+    #   If the object hasn't been restored, there is no header response.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] restore_expiry_date
+    #   Indicates when the restored copy will expire. This value is
+    #   populated only if the object has already been restored. For example:
+    #
+    #   `x-amz-optional-object-attributes: IsRestoreInProgress="false",
+    #   RestoreExpiryDate="2012-12-21T00:00:00.000Z"`
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RestoreStatus AWS API Documentation
+    #
+    class RestoreStatus < Struct.new(
+      :is_restore_in_progress,
+      :restore_expiry_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12495,9 +12661,9 @@ module Aws::S3
     # Specifies the use of SSE-KMS to encrypt delivered inventory reports.
     #
     # @!attribute [rw] key_id
-    #   Specifies the ID of the Amazon Web Services Key Management Service
-    #   (Amazon Web Services KMS) symmetric encryption customer managed key
-    #   to use for encrypting inventory reports.
+    #   Specifies the ID of the Key Management Service (KMS) symmetric
+    #   encryption customer managed key to use for encrypting inventory
+    #   reports.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SSEKMS AWS API Documentation
@@ -13171,7 +13337,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, `aws:kms`).
+    #   in Amazon S3 (for example, `AES256`, `aws:kms`).
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
@@ -13188,14 +13354,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetric encryption
-    #   customer managed key that was used for the object.
+    #   If present, specifies the ID of the Key Management Service (KMS)
+    #   symmetric encryption customer managed key that was used for the
+    #   object.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
     #   Indicates whether the multipart upload uses an S3 Bucket Key for
-    #   server-side encryption with Amazon Web Services KMS (SSE-KMS).
+    #   server-side encryption with Key Management Service (KMS) keys
+    #   (SSE-KMS).
     #   @return [Boolean]
     #
     # @!attribute [rw] request_charged
@@ -13237,7 +13404,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -13424,7 +13591,7 @@ module Aws::S3
 
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, `aws:kms`).
+    #   in Amazon S3 (for example, `AES256`, `aws:kms`).
     #   @return [String]
     #
     # @!attribute [rw] etag
@@ -13497,14 +13664,14 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetric encryption
-    #   customer managed key was used for the object.
+    #   If present, specifies the ID of the Key Management Service (KMS)
+    #   symmetric encryption customer managed key was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
     #   Indicates whether the multipart upload uses an S3 Bucket Key for
-    #   server-side encryption with Amazon Web Services KMS (SSE-KMS).
+    #   server-side encryption with Key Management Service (KMS) keys
+    #   (SSE-KMS).
     #   @return [Boolean]
     #
     # @!attribute [rw] request_charged
@@ -13553,7 +13720,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #

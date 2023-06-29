@@ -52,6 +52,6 @@ require_relative 'aws-sdk-vpclattice/customizations'
 # @!group service
 module Aws::VPCLattice
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.4.0'
 
 end

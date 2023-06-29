@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2023-05-08)
+------------------
+
+* Feature - Documentation updates for AWS Security Token Service.
+
 1.9.0 (2023-01-25)
 ------------------
 

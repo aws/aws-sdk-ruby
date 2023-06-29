@@ -144,7 +144,9 @@ module Aws::EC2
     #
     # @return [self]
     def load
-      resp = @client.describe_volumes(volume_ids: [@id])
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_volumes(volume_ids: [@id])
+      end
       @data = resp.volumes[0]
       self
     end
@@ -259,7 +261,9 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -284,7 +288,9 @@ module Aws::EC2
     # @return [Types::VolumeAttachment]
     def attach_to_instance(options = {})
       options = options.merge(volume_id: @id)
-      resp = @client.attach_volume(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.attach_volume(options)
+      end
       resp.data
     end
 
@@ -295,7 +301,7 @@ module Aws::EC2
     #     outpost_arn: "String",
     #     tag_specifications: [
     #       {
-    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association
+    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint
     #         tags: [
     #           {
     #             key: "String",
@@ -340,7 +346,9 @@ module Aws::EC2
     # @return [Snapshot]
     def create_snapshot(options = {})
       options = options.merge(volume_id: @id)
-      resp = @client.create_snapshot(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_snapshot(options)
+      end
       Snapshot.new(
         id: resp.data.snapshot_id,
         data: resp.data,
@@ -373,7 +381,9 @@ module Aws::EC2
     def create_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = @client.create_tags(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_tags(options)
+      end
       options[:tags].each do |t|
         batch << Tag.new(
           resource_id: @id,
@@ -418,7 +428,9 @@ module Aws::EC2
     def delete_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = @client.delete_tags(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_tags(options)
+      end
       options[:tags].each do |t|
         batch << Tag.new(
           resource_id: @id,
@@ -444,7 +456,9 @@ module Aws::EC2
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(volume_id: @id)
-      resp = @client.delete_volume(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_volume(options)
+      end
       resp.data
     end
 
@@ -465,7 +479,9 @@ module Aws::EC2
     # @return [Types::DescribeVolumeAttributeResult]
     def describe_attribute(options = {})
       options = options.merge(volume_id: @id)
-      resp = @client.describe_volume_attribute(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_volume_attribute(options)
+      end
       resp.data
     end
 
@@ -540,7 +556,9 @@ module Aws::EC2
     # @return [Types::DescribeVolumeStatusResult]
     def describe_status(options = {})
       options = Aws::Util.deep_merge(options, volume_ids: [@id])
-      resp = @client.describe_volume_status(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_volume_status(options)
+      end
       resp.data
     end
 
@@ -575,7 +593,9 @@ module Aws::EC2
     # @return [Types::VolumeAttachment]
     def detach_from_instance(options = {})
       options = options.merge(volume_id: @id)
-      resp = @client.detach_volume(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.detach_volume(options)
+      end
       resp.data
     end
 
@@ -593,7 +613,9 @@ module Aws::EC2
     # @return [EmptyStructure]
     def enable_io(options = {})
       options = options.merge(volume_id: @id)
-      resp = @client.enable_volume_io(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.enable_volume_io(options)
+      end
       resp.data
     end
 
@@ -617,7 +639,9 @@ module Aws::EC2
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(volume_id: @id)
-      resp = @client.modify_volume_attribute(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.modify_volume_attribute(options)
+      end
       resp.data
     end
 
@@ -704,7 +728,9 @@ module Aws::EC2
           name: "volume-id",
           values: [@id]
         }])
-        resp = @client.describe_snapshots(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_snapshots(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.snapshots.each do |s|

@@ -9,7 +9,22 @@
 
 
 module Aws::CloudFormation
+  # @api private
   module Endpoints
+
+    class ActivateOrganizationsAccess
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CloudFormation::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
 
     class ActivateType
       def self.build(context)
@@ -110,6 +125,20 @@ module Aws::CloudFormation
     end
 
     class CreateStackSet
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CloudFormation::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DeactivateOrganizationsAccess
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -236,6 +265,20 @@ module Aws::CloudFormation
     end
 
     class DescribeChangeSetHooks
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CloudFormation::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DescribeOrganizationsAccess
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

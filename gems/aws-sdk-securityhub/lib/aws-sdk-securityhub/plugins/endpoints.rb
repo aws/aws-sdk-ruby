@@ -60,22 +60,30 @@ module Aws::SecurityHub
             Aws::SecurityHub::Endpoints::AcceptAdministratorInvitation.build(context)
           when :accept_invitation
             Aws::SecurityHub::Endpoints::AcceptInvitation.build(context)
+          when :batch_delete_automation_rules
+            Aws::SecurityHub::Endpoints::BatchDeleteAutomationRules.build(context)
           when :batch_disable_standards
             Aws::SecurityHub::Endpoints::BatchDisableStandards.build(context)
           when :batch_enable_standards
             Aws::SecurityHub::Endpoints::BatchEnableStandards.build(context)
+          when :batch_get_automation_rules
+            Aws::SecurityHub::Endpoints::BatchGetAutomationRules.build(context)
           when :batch_get_security_controls
             Aws::SecurityHub::Endpoints::BatchGetSecurityControls.build(context)
           when :batch_get_standards_control_associations
             Aws::SecurityHub::Endpoints::BatchGetStandardsControlAssociations.build(context)
           when :batch_import_findings
             Aws::SecurityHub::Endpoints::BatchImportFindings.build(context)
+          when :batch_update_automation_rules
+            Aws::SecurityHub::Endpoints::BatchUpdateAutomationRules.build(context)
           when :batch_update_findings
             Aws::SecurityHub::Endpoints::BatchUpdateFindings.build(context)
           when :batch_update_standards_control_associations
             Aws::SecurityHub::Endpoints::BatchUpdateStandardsControlAssociations.build(context)
           when :create_action_target
             Aws::SecurityHub::Endpoints::CreateActionTarget.build(context)
+          when :create_automation_rule
+            Aws::SecurityHub::Endpoints::CreateAutomationRule.build(context)
           when :create_finding_aggregator
             Aws::SecurityHub::Endpoints::CreateFindingAggregator.build(context)
           when :create_insight
@@ -146,6 +154,8 @@ module Aws::SecurityHub
             Aws::SecurityHub::Endpoints::GetMembers.build(context)
           when :invite_members
             Aws::SecurityHub::Endpoints::InviteMembers.build(context)
+          when :list_automation_rules
+            Aws::SecurityHub::Endpoints::ListAutomationRules.build(context)
           when :list_enabled_products_for_import
             Aws::SecurityHub::Endpoints::ListEnabledProductsForImport.build(context)
           when :list_finding_aggregators

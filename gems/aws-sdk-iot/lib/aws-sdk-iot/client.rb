@@ -275,6 +275,11 @@ module Aws::IoT
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -1205,7 +1210,7 @@ module Aws::IoT
     # action.
     #
     # <note markdown="1"> The CSR must include a public key that is either an RSA key with a
-    # length of at least 2048 bits or an ECC key from NIST P-25 or NIST
+    # length of at least 2048 bits or an ECC key from NIST P-256 or NIST
     # P-384 curves. For supported certificates, consult [ Certificate
     # signing algorithms supported by IoT][2].
     #
@@ -1721,7 +1726,7 @@ module Aws::IoT
     #   `document`.
     #
     #   For example, `--document-source
-    #   https://s3.region-code.amazonaws.com/example-firmware/device-firmware.1.0`.
+    #   https://s3.region-code.amazonaws.com/example-firmware/device-firmware.1.0`
     #
     #   For more information, see [Methods for accessing a bucket][1].
     #
@@ -1804,6 +1809,13 @@ module Aws::IoT
     #   and time in addition to specifying the end behavior for each job
     #   execution.
     #
+    # @option params [Array<String>] :destination_package_versions
+    #   The package version Amazon Resource Names (ARNs) that are installed on
+    #   the device when the job successfully completes.
+    #
+    #   **Note:**The following Length Constraints relates to a single string.
+    #   Up to five strings are allowed.
+    #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateJobResponse#job_arn #job_arn} => String
@@ -1877,6 +1889,7 @@ module Aws::IoT
     #         },
     #       ],
     #     },
+    #     destination_package_versions: ["PackageVersionArn"],
     #   })
     #
     # @example Response structure
@@ -1956,6 +1969,13 @@ module Aws::IoT
     #   Allows you to configure an optional maintenance window for the rollout
     #   of a job document to all devices in the target group for a job.
     #
+    # @option params [Array<String>] :destination_package_versions
+    #   The package version Amazon Resource Names (ARNs) that are installed on
+    #   the device when the job successfully completes.
+    #
+    #   **Note:**The following Length Constraints relates to a single string.
+    #   Up to five strings are allowed.
+    #
     # @return [Types::CreateJobTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateJobTemplateResponse#job_template_arn #job_template_arn} => String
@@ -2017,6 +2037,7 @@ module Aws::IoT
     #         duration_in_minutes: 1, # required
     #       },
     #     ],
+    #     destination_package_versions: ["PackageVersionArn"],
     #   })
     #
     # @example Response structure
@@ -2333,6 +2354,144 @@ module Aws::IoT
     # @param [Hash] params ({})
     def create_ota_update(params = {}, options = {})
       req = build_request(:create_ota_update, params)
+      req.send_request(options)
+    end
+
+    # Creates an IoT software package that can be deployed to your fleet.
+    #
+    # Requires permission to access the [CreatePackage][1] and
+    # [GetIndexingConfiguration][1] actions.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
+    # @option params [required, String] :package_name
+    #   The name of the new package.
+    #
+    # @option params [String] :description
+    #   A summary of the package being created. This can be used to outline
+    #   the package's contents or purpose.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Metadata that can be used to manage the package.
+    #
+    # @option params [String] :client_token
+    #   A unique case-sensitive identifier that you can provide to ensure the
+    #   idempotency of the request. Don't reuse this client token if a new
+    #   idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreatePackageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePackageResponse#package_name #package_name} => String
+    #   * {Types::CreatePackageResponse#package_arn #package_arn} => String
+    #   * {Types::CreatePackageResponse#description #description} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_package({
+    #     package_name: "PackageName", # required
+    #     description: "ResourceDescription",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.package_name #=> String
+    #   resp.package_arn #=> String
+    #   resp.description #=> String
+    #
+    # @overload create_package(params = {})
+    # @param [Hash] params ({})
+    def create_package(params = {}, options = {})
+      req = build_request(:create_package, params)
+      req.send_request(options)
+    end
+
+    # Creates a new version for an existing IoT software package.
+    #
+    # Requires permission to access the [CreatePackageVersion][1] and
+    # [GetIndexingConfiguration][1] actions.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
+    # @option params [required, String] :package_name
+    #   The name of the associated package.
+    #
+    # @option params [required, String] :version_name
+    #   The name of the new package version.
+    #
+    # @option params [String] :description
+    #   A summary of the package version being created. This can be used to
+    #   outline the package's contents or purpose.
+    #
+    # @option params [Hash<String,String>] :attributes
+    #   Metadata that can be used to define a package version’s configuration.
+    #   For example, the S3 file location, configuration options that are
+    #   being sent to the device or fleet.
+    #
+    #   The combined size of all the attributes on a package version is
+    #   limited to 3KB.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Metadata that can be used to manage the package version.
+    #
+    # @option params [String] :client_token
+    #   A unique case-sensitive identifier that you can provide to ensure the
+    #   idempotency of the request. Don't reuse this client token if a new
+    #   idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreatePackageVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePackageVersionResponse#package_version_arn #package_version_arn} => String
+    #   * {Types::CreatePackageVersionResponse#package_name #package_name} => String
+    #   * {Types::CreatePackageVersionResponse#version_name #version_name} => String
+    #   * {Types::CreatePackageVersionResponse#description #description} => String
+    #   * {Types::CreatePackageVersionResponse#attributes #attributes} => Hash&lt;String,String&gt;
+    #   * {Types::CreatePackageVersionResponse#status #status} => String
+    #   * {Types::CreatePackageVersionResponse#error_reason #error_reason} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_package_version({
+    #     package_name: "PackageName", # required
+    #     version_name: "VersionName", # required
+    #     description: "ResourceDescription",
+    #     attributes: {
+    #       "ResourceAttributeKey" => "ResourceAttributeValue",
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.package_version_arn #=> String
+    #   resp.package_name #=> String
+    #   resp.version_name #=> String
+    #   resp.description #=> String
+    #   resp.attributes #=> Hash
+    #   resp.attributes["ResourceAttributeKey"] #=> String
+    #   resp.status #=> String, one of "DRAFT", "PUBLISHED", "DEPRECATED"
+    #   resp.error_reason #=> String
+    #
+    # @overload create_package_version(params = {})
+    # @param [Hash] params ({})
+    def create_package_version(params = {}, options = {})
+      req = build_request(:create_package_version, params)
       req.send_request(options)
     end
 
@@ -4250,6 +4409,81 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Deletes a specific version from a software package.
+    #
+    # **Note:** All package versions must be deleted before deleting the
+    # software package.
+    #
+    # Requires permission to access the [DeletePackageVersion][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
+    # @option params [required, String] :package_name
+    #   The name of the target package.
+    #
+    # @option params [String] :client_token
+    #   A unique case-sensitive identifier that you can provide to ensure the
+    #   idempotency of the request. Don't reuse this client token if a new
+    #   idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_package({
+    #     package_name: "PackageName", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @overload delete_package(params = {})
+    # @param [Hash] params ({})
+    def delete_package(params = {}, options = {})
+      req = build_request(:delete_package, params)
+      req.send_request(options)
+    end
+
+    # Deletes a specific version from a software package.
+    #
+    # **Note:** If a package version is designated as default, you must
+    # remove the designation from the package using the UpdatePackage
+    # action.
+    #
+    # @option params [required, String] :package_name
+    #   The name of the associated package.
+    #
+    # @option params [required, String] :version_name
+    #   The name of the target package version.
+    #
+    # @option params [String] :client_token
+    #   A unique case-sensitive identifier that you can provide to ensure the
+    #   idempotency of the request. Don't reuse this client token if a new
+    #   idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_package_version({
+    #     package_name: "PackageName", # required
+    #     version_name: "VersionName", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @overload delete_package_version(params = {})
+    # @param [Hash] params ({})
+    def delete_package_version(params = {}, options = {})
+      req = build_request(:delete_package_version, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified policy.
     #
     # A policy cannot be deleted if it has non-default versions or it is
@@ -5701,6 +5935,8 @@ module Aws::IoT
     #   resp.job.scheduling_config.maintenance_windows[0].duration_in_minutes #=> Integer
     #   resp.job.scheduled_job_rollouts #=> Array
     #   resp.job.scheduled_job_rollouts[0].start_time #=> String
+    #   resp.job.destination_package_versions #=> Array
+    #   resp.job.destination_package_versions[0] #=> String
     #
     # @overload describe_job(params = {})
     # @param [Hash] params ({})
@@ -5780,6 +6016,7 @@ module Aws::IoT
     #   * {Types::DescribeJobTemplateResponse#timeout_config #timeout_config} => Types::TimeoutConfig
     #   * {Types::DescribeJobTemplateResponse#job_executions_retry_config #job_executions_retry_config} => Types::JobExecutionsRetryConfig
     #   * {Types::DescribeJobTemplateResponse#maintenance_windows #maintenance_windows} => Array&lt;Types::MaintenanceWindow&gt;
+    #   * {Types::DescribeJobTemplateResponse#destination_package_versions #destination_package_versions} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -5814,6 +6051,8 @@ module Aws::IoT
     #   resp.maintenance_windows #=> Array
     #   resp.maintenance_windows[0].start_time #=> String
     #   resp.maintenance_windows[0].duration_in_minutes #=> Integer
+    #   resp.destination_package_versions #=> Array
+    #   resp.destination_package_versions[0] #=> String
     #
     # @overload describe_job_template(params = {})
     # @param [Hash] params ({})
@@ -7005,6 +7244,126 @@ module Aws::IoT
     # @param [Hash] params ({})
     def get_ota_update(params = {}, options = {})
       req = build_request(:get_ota_update, params)
+      req.send_request(options)
+    end
+
+    # Gets information about the specified software package.
+    #
+    # Requires permission to access the [GetPackage][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
+    # @option params [required, String] :package_name
+    #   The name of the target package.
+    #
+    # @return [Types::GetPackageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPackageResponse#package_name #package_name} => String
+    #   * {Types::GetPackageResponse#package_arn #package_arn} => String
+    #   * {Types::GetPackageResponse#description #description} => String
+    #   * {Types::GetPackageResponse#default_version_name #default_version_name} => String
+    #   * {Types::GetPackageResponse#creation_date #creation_date} => Time
+    #   * {Types::GetPackageResponse#last_modified_date #last_modified_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_package({
+    #     package_name: "PackageName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.package_name #=> String
+    #   resp.package_arn #=> String
+    #   resp.description #=> String
+    #   resp.default_version_name #=> String
+    #   resp.creation_date #=> Time
+    #   resp.last_modified_date #=> Time
+    #
+    # @overload get_package(params = {})
+    # @param [Hash] params ({})
+    def get_package(params = {}, options = {})
+      req = build_request(:get_package, params)
+      req.send_request(options)
+    end
+
+    # Gets information about the specified software package's
+    # configuration.
+    #
+    # Requires permission to access the [GetPackageConfiguration][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
+    # @return [Types::GetPackageConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPackageConfigurationResponse#version_update_by_jobs_config #version_update_by_jobs_config} => Types::VersionUpdateByJobsConfig
+    #
+    # @example Response structure
+    #
+    #   resp.version_update_by_jobs_config.enabled #=> Boolean
+    #   resp.version_update_by_jobs_config.role_arn #=> String
+    #
+    # @overload get_package_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_package_configuration(params = {}, options = {})
+      req = build_request(:get_package_configuration, params)
+      req.send_request(options)
+    end
+
+    # Gets information about the specified package version.
+    #
+    # Requires permission to access the [GetPackageVersion][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
+    # @option params [required, String] :package_name
+    #   The name of the associated package.
+    #
+    # @option params [required, String] :version_name
+    #   The name of the target package version.
+    #
+    # @return [Types::GetPackageVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPackageVersionResponse#package_version_arn #package_version_arn} => String
+    #   * {Types::GetPackageVersionResponse#package_name #package_name} => String
+    #   * {Types::GetPackageVersionResponse#version_name #version_name} => String
+    #   * {Types::GetPackageVersionResponse#description #description} => String
+    #   * {Types::GetPackageVersionResponse#attributes #attributes} => Hash&lt;String,String&gt;
+    #   * {Types::GetPackageVersionResponse#status #status} => String
+    #   * {Types::GetPackageVersionResponse#error_reason #error_reason} => String
+    #   * {Types::GetPackageVersionResponse#creation_date #creation_date} => Time
+    #   * {Types::GetPackageVersionResponse#last_modified_date #last_modified_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_package_version({
+    #     package_name: "PackageName", # required
+    #     version_name: "VersionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.package_version_arn #=> String
+    #   resp.package_name #=> String
+    #   resp.version_name #=> String
+    #   resp.description #=> String
+    #   resp.attributes #=> Hash
+    #   resp.attributes["ResourceAttributeKey"] #=> String
+    #   resp.status #=> String, one of "DRAFT", "PUBLISHED", "DEPRECATED"
+    #   resp.error_reason #=> String
+    #   resp.creation_date #=> Time
+    #   resp.last_modified_date #=> Time
+    #
+    # @overload get_package_version(params = {})
+    # @param [Hash] params ({})
+    def get_package_version(params = {}, options = {})
+      req = build_request(:get_package_version, params)
       req.send_request(options)
     end
 
@@ -9347,6 +9706,108 @@ module Aws::IoT
     # @param [Hash] params ({})
     def list_outgoing_certificates(params = {}, options = {})
       req = build_request(:list_outgoing_certificates, params)
+      req.send_request(options)
+    end
+
+    # Lists the software package versions associated to the account.
+    #
+    # Requires permission to access the [ListPackageVersions][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
+    # @option params [required, String] :package_name
+    #   The name of the target package.
+    #
+    # @option params [String] :status
+    #   The status of the package version. For more information, see [Package
+    #   version lifecycle][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @return [Types::ListPackageVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPackageVersionsResponse#package_version_summaries #package_version_summaries} => Array&lt;Types::PackageVersionSummary&gt;
+    #   * {Types::ListPackageVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_package_versions({
+    #     package_name: "PackageName", # required
+    #     status: "DRAFT", # accepts DRAFT, PUBLISHED, DEPRECATED
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.package_version_summaries #=> Array
+    #   resp.package_version_summaries[0].package_name #=> String
+    #   resp.package_version_summaries[0].version_name #=> String
+    #   resp.package_version_summaries[0].status #=> String, one of "DRAFT", "PUBLISHED", "DEPRECATED"
+    #   resp.package_version_summaries[0].creation_date #=> Time
+    #   resp.package_version_summaries[0].last_modified_date #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload list_package_versions(params = {})
+    # @param [Hash] params ({})
+    def list_package_versions(params = {}, options = {})
+      req = build_request(:list_package_versions, params)
+      req.send_request(options)
+    end
+
+    # Lists the software packages associated to the account.
+    #
+    # Requires permission to access the [ListPackages][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results returned at one time.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @return [Types::ListPackagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPackagesResponse#package_summaries #package_summaries} => Array&lt;Types::PackageSummary&gt;
+    #   * {Types::ListPackagesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_packages({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.package_summaries #=> Array
+    #   resp.package_summaries[0].package_name #=> String
+    #   resp.package_summaries[0].default_version_name #=> String
+    #   resp.package_summaries[0].creation_date #=> Time
+    #   resp.package_summaries[0].last_modified_date #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload list_packages(params = {})
+    # @param [Hash] params ({})
+    def list_packages(params = {}, options = {})
+      req = build_request(:list_packages, params)
       req.send_request(options)
     end
 
@@ -13410,6 +13871,170 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Updates the supported fields for a specific package.
+    #
+    # Requires permission to access the [UpdatePackage][1] and
+    # [GetIndexingConfiguration][1] actions.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
+    # @option params [required, String] :package_name
+    #   The name of the target package.
+    #
+    # @option params [String] :description
+    #   The package description.
+    #
+    # @option params [String] :default_version_name
+    #   The name of the default package version.
+    #
+    #   **Note:** You cannot name a `defaultVersion` and set
+    #   `unsetDefaultVersion` equal to `true` at the same time.
+    #
+    # @option params [Boolean] :unset_default_version
+    #   Indicates whether you want to remove the named default package version
+    #   from the software package. Set as `true` to remove the default package
+    #   version.
+    #
+    #   **Note:** You cannot name a `defaultVersion` and set
+    #   `unsetDefaultVersion` equal to `true` at the same time.
+    #
+    # @option params [String] :client_token
+    #   A unique case-sensitive identifier that you can provide to ensure the
+    #   idempotency of the request. Don't reuse this client token if a new
+    #   idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_package({
+    #     package_name: "PackageName", # required
+    #     description: "ResourceDescription",
+    #     default_version_name: "VersionName",
+    #     unset_default_version: false,
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @overload update_package(params = {})
+    # @param [Hash] params ({})
+    def update_package(params = {}, options = {})
+      req = build_request(:update_package, params)
+      req.send_request(options)
+    end
+
+    # Updates the package configuration.
+    #
+    # Requires permission to access the [UpdatePackageConfiguration][1] and
+    # [iam:PassRole][2] actions.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html
+    #
+    # @option params [Types::VersionUpdateByJobsConfig] :version_update_by_jobs_config
+    #   Configuration to manage job's package version reporting. This updates
+    #   the thing's reserved named shadow that the job targets.
+    #
+    # @option params [String] :client_token
+    #   A unique case-sensitive identifier that you can provide to ensure the
+    #   idempotency of the request. Don't reuse this client token if a new
+    #   idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_package_configuration({
+    #     version_update_by_jobs_config: {
+    #       enabled: false,
+    #       role_arn: "RoleArn",
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @overload update_package_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_package_configuration(params = {}, options = {})
+      req = build_request(:update_package_configuration, params)
+      req.send_request(options)
+    end
+
+    # Updates the supported fields for a specific package version.
+    #
+    # Requires permission to access the [UpdatePackageVersion][1] and
+    # [GetIndexingConfiguration][1] actions.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
+    # @option params [required, String] :package_name
+    #   The name of the associated software package.
+    #
+    # @option params [required, String] :version_name
+    #   The name of the target package version.
+    #
+    # @option params [String] :description
+    #   The package version description.
+    #
+    # @option params [Hash<String,String>] :attributes
+    #   Metadata that can be used to define a package version’s configuration.
+    #   For example, the S3 file location, configuration options that are
+    #   being sent to the device or fleet.
+    #
+    #   **Note:** Attributes can be updated only when the package version is
+    #   in a draft state.
+    #
+    #   The combined size of all the attributes on a package version is
+    #   limited to 3KB.
+    #
+    # @option params [String] :action
+    #   The status that the package version should be assigned. For more
+    #   information, see [Package version lifecycle][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
+    #
+    # @option params [String] :client_token
+    #   A unique case-sensitive identifier that you can provide to ensure the
+    #   idempotency of the request. Don't reuse this client token if a new
+    #   idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_package_version({
+    #     package_name: "PackageName", # required
+    #     version_name: "VersionName", # required
+    #     description: "ResourceDescription",
+    #     attributes: {
+    #       "ResourceAttributeKey" => "ResourceAttributeValue",
+    #     },
+    #     action: "PUBLISH", # accepts PUBLISH, DEPRECATE
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @overload update_package_version(params = {})
+    # @param [Hash] params ({})
+    def update_package_version(params = {}, options = {})
+      req = build_request(:update_package_version, params)
+      req.send_request(options)
+    end
+
     # Updates a provisioning template.
     #
     # Requires permission to access the [UpdateProvisioningTemplate][1]
@@ -14105,7 +14730,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.108.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

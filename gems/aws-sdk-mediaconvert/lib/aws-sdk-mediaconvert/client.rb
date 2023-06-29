@@ -275,6 +275,11 @@ module Aws::MediaConvert
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -893,6 +898,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.progressive_write_hls_manifest #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
@@ -1195,7 +1201,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_scheme_id_uri #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
-    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.xavc_profile_settings.max_anc_data_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].extension #=> String
@@ -1286,6 +1292,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.unregistered_sei_timecode #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.alternate_transfer_function_sei #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.bandwidth_reduction_filter.sharpening #=> String, one of "LOW", "MEDIUM", "HIGH", "OFF"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.bandwidth_reduction_filter.strength #=> String, one of "LOW", "MEDIUM", "HIGH", "AUTO", "OFF"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
@@ -1919,7 +1927,7 @@ module Aws::MediaConvert
     #         },
     #         mxf_settings: {
     #           afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
-    #           profile: "D_10", # accepts D_10, XDCAM, OP1A, XAVC
+    #           profile: "D_10", # accepts D_10, XDCAM, OP1A, XAVC, XDCAM_RDD9
     #           xavc_profile_settings: {
     #             duration_mode: "ALLOW_ANY_DURATION", # accepts ALLOW_ANY_DURATION, DROP_FRAMES_FOR_COMPLIANCE
     #             max_anc_data_size: 1,
@@ -2023,6 +2031,10 @@ module Aws::MediaConvert
     #           h265_settings: {
     #             adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX, AUTO
     #             alternate_transfer_function_sei: "DISABLED", # accepts DISABLED, ENABLED
+    #             bandwidth_reduction_filter: {
+    #               sharpening: "LOW", # accepts LOW, MEDIUM, HIGH, OFF
+    #               strength: "LOW", # accepts LOW, MEDIUM, HIGH, AUTO, OFF
+    #             },
     #             bitrate: 1,
     #             codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_2, LEVEL_2_1, LEVEL_3, LEVEL_3_1, LEVEL_4, LEVEL_4_1, LEVEL_5, LEVEL_5_1, LEVEL_5_2, LEVEL_6, LEVEL_6_1, LEVEL_6_2
     #             codec_profile: "MAIN_MAIN", # accepts MAIN_MAIN, MAIN_HIGH, MAIN10_MAIN, MAIN10_HIGH, MAIN_422_8BIT_MAIN, MAIN_422_8BIT_HIGH, MAIN_422_10BIT_MAIN, MAIN_422_10BIT_HIGH
@@ -2609,7 +2621,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mpd_settings.timed_metadata_scheme_id_uri #=> String
     #   resp.preset.settings.container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.preset.settings.container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
-    #   resp.preset.settings.container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC"
+    #   resp.preset.settings.container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"
     #   resp.preset.settings.container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
     #   resp.preset.settings.container_settings.mxf_settings.xavc_profile_settings.max_anc_data_size #=> Integer
     #   resp.preset.settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
@@ -2690,6 +2702,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.unregistered_sei_timecode #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX", "AUTO"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.alternate_transfer_function_sei #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.bandwidth_reduction_filter.sharpening #=> String, one of "LOW", "MEDIUM", "HIGH", "OFF"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.bandwidth_reduction_filter.strength #=> String, one of "LOW", "MEDIUM", "HIGH", "AUTO", "OFF"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
@@ -3534,6 +3548,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.progressive_write_hls_manifest #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
@@ -3836,7 +3851,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_scheme_id_uri #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
-    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.xavc_profile_settings.max_anc_data_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].extension #=> String
@@ -3927,6 +3942,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.unregistered_sei_timecode #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.alternate_transfer_function_sei #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.bandwidth_reduction_filter.sharpening #=> String, one of "LOW", "MEDIUM", "HIGH", "OFF"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.bandwidth_reduction_filter.strength #=> String, one of "LOW", "MEDIUM", "HIGH", "AUTO", "OFF"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
@@ -4496,7 +4513,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mpd_settings.timed_metadata_scheme_id_uri #=> String
     #   resp.preset.settings.container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.preset.settings.container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
-    #   resp.preset.settings.container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC"
+    #   resp.preset.settings.container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"
     #   resp.preset.settings.container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
     #   resp.preset.settings.container_settings.mxf_settings.xavc_profile_settings.max_anc_data_size #=> Integer
     #   resp.preset.settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
@@ -4577,6 +4594,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.unregistered_sei_timecode #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX", "AUTO"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.alternate_transfer_function_sei #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.bandwidth_reduction_filter.sharpening #=> String, one of "LOW", "MEDIUM", "HIGH", "OFF"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.bandwidth_reduction_filter.strength #=> String, one of "LOW", "MEDIUM", "HIGH", "AUTO", "OFF"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
@@ -5239,6 +5258,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.progressive_write_hls_manifest #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
@@ -5541,7 +5561,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_scheme_id_uri #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mxf_settings.xavc_profile_settings.max_anc_data_size #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].extension #=> String
@@ -5632,6 +5652,8 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.unregistered_sei_timecode #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX", "AUTO"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.alternate_transfer_function_sei #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.bandwidth_reduction_filter.sharpening #=> String, one of "LOW", "MEDIUM", "HIGH", "OFF"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.bandwidth_reduction_filter.strength #=> String, one of "LOW", "MEDIUM", "HIGH", "AUTO", "OFF"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.bitrate #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
@@ -6264,7 +6286,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.mpd_settings.timed_metadata_scheme_id_uri #=> String
     #   resp.presets[0].settings.container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.presets[0].settings.container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
-    #   resp.presets[0].settings.container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC"
+    #   resp.presets[0].settings.container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"
     #   resp.presets[0].settings.container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
     #   resp.presets[0].settings.container_settings.mxf_settings.xavc_profile_settings.max_anc_data_size #=> Integer
     #   resp.presets[0].settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
@@ -6345,6 +6367,8 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.unregistered_sei_timecode #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX", "AUTO"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.alternate_transfer_function_sei #=> String, one of "DISABLED", "ENABLED"
+    #   resp.presets[0].settings.video_description.codec_settings.h265_settings.bandwidth_reduction_filter.sharpening #=> String, one of "LOW", "MEDIUM", "HIGH", "OFF"
+    #   resp.presets[0].settings.video_description.codec_settings.h265_settings.bandwidth_reduction_filter.strength #=> String, one of "LOW", "MEDIUM", "HIGH", "AUTO", "OFF"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.bitrate #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
@@ -7163,6 +7187,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.progressive_write_hls_manifest #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
@@ -7465,7 +7490,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_scheme_id_uri #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
-    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.xavc_profile_settings.max_anc_data_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].extension #=> String
@@ -7556,6 +7581,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.unregistered_sei_timecode #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.alternate_transfer_function_sei #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.bandwidth_reduction_filter.sharpening #=> String, one of "LOW", "MEDIUM", "HIGH", "OFF"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.bandwidth_reduction_filter.strength #=> String, one of "LOW", "MEDIUM", "HIGH", "AUTO", "OFF"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
@@ -8183,7 +8210,7 @@ module Aws::MediaConvert
     #         },
     #         mxf_settings: {
     #           afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
-    #           profile: "D_10", # accepts D_10, XDCAM, OP1A, XAVC
+    #           profile: "D_10", # accepts D_10, XDCAM, OP1A, XAVC, XDCAM_RDD9
     #           xavc_profile_settings: {
     #             duration_mode: "ALLOW_ANY_DURATION", # accepts ALLOW_ANY_DURATION, DROP_FRAMES_FOR_COMPLIANCE
     #             max_anc_data_size: 1,
@@ -8287,6 +8314,10 @@ module Aws::MediaConvert
     #           h265_settings: {
     #             adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX, AUTO
     #             alternate_transfer_function_sei: "DISABLED", # accepts DISABLED, ENABLED
+    #             bandwidth_reduction_filter: {
+    #               sharpening: "LOW", # accepts LOW, MEDIUM, HIGH, OFF
+    #               strength: "LOW", # accepts LOW, MEDIUM, HIGH, AUTO, OFF
+    #             },
     #             bitrate: 1,
     #             codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_2, LEVEL_2_1, LEVEL_3, LEVEL_3_1, LEVEL_4, LEVEL_4_1, LEVEL_5, LEVEL_5_1, LEVEL_5_2, LEVEL_6, LEVEL_6_1, LEVEL_6_2
     #             codec_profile: "MAIN_MAIN", # accepts MAIN_MAIN, MAIN_HIGH, MAIN10_MAIN, MAIN10_HIGH, MAIN_422_8BIT_MAIN, MAIN_422_8BIT_HIGH, MAIN_422_10BIT_MAIN, MAIN_422_10BIT_HIGH
@@ -8870,7 +8901,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mpd_settings.timed_metadata_scheme_id_uri #=> String
     #   resp.preset.settings.container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.preset.settings.container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
-    #   resp.preset.settings.container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC"
+    #   resp.preset.settings.container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"
     #   resp.preset.settings.container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
     #   resp.preset.settings.container_settings.mxf_settings.xavc_profile_settings.max_anc_data_size #=> Integer
     #   resp.preset.settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
@@ -8951,6 +8982,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.unregistered_sei_timecode #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX", "AUTO"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.alternate_transfer_function_sei #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.bandwidth_reduction_filter.sharpening #=> String, one of "LOW", "MEDIUM", "HIGH", "OFF"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.bandwidth_reduction_filter.strength #=> String, one of "LOW", "MEDIUM", "HIGH", "AUTO", "OFF"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.codec_level #=> String, one of "AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.codec_profile #=> String, one of "MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"
@@ -9276,7 +9309,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.110.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -598,6 +598,7 @@ module Aws::RDS
     StopDBInstanceMessage = Shapes::StructureShape.new(name: 'StopDBInstanceMessage')
     StopDBInstanceResult = Shapes::StructureShape.new(name: 'StopDBInstanceResult')
     StorageQuotaExceededFault = Shapes::StructureShape.new(name: 'StorageQuotaExceededFault')
+    StorageTypeNotAvailableFault = Shapes::StructureShape.new(name: 'StorageTypeNotAvailableFault')
     StorageTypeNotSupportedFault = Shapes::StructureShape.new(name: 'StorageTypeNotSupportedFault')
     String = Shapes::StringShape.new(name: 'String')
     String255 = Shapes::StringShape.new(name: 'String255')
@@ -797,6 +798,7 @@ module Aws::RDS
     ClusterPendingModifiedValues.add_member(:backup_retention_period, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "BackupRetentionPeriod"))
     ClusterPendingModifiedValues.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "AllocatedStorage"))
     ClusterPendingModifiedValues.add_member(:iops, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Iops"))
+    ClusterPendingModifiedValues.add_member(:storage_type, Shapes::ShapeRef.new(shape: String, location_name: "StorageType"))
     ClusterPendingModifiedValues.struct_class = Types::ClusterPendingModifiedValues
 
     ConnectionPoolConfiguration.add_member(:max_connections_percent, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxConnectionsPercent"))
@@ -1004,6 +1006,10 @@ module Aws::RDS
     CreateDBInstanceMessage.add_member(:storage_encrypted, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "StorageEncrypted"))
     CreateDBInstanceMessage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     CreateDBInstanceMessage.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
+    CreateDBInstanceMessage.add_member(:domain_fqdn, Shapes::ShapeRef.new(shape: String, location_name: "DomainFqdn"))
+    CreateDBInstanceMessage.add_member(:domain_ou, Shapes::ShapeRef.new(shape: String, location_name: "DomainOu"))
+    CreateDBInstanceMessage.add_member(:domain_auth_secret_arn, Shapes::ShapeRef.new(shape: String, location_name: "DomainAuthSecretArn"))
+    CreateDBInstanceMessage.add_member(:domain_dns_ips, Shapes::ShapeRef.new(shape: StringList, location_name: "DomainDnsIps"))
     CreateDBInstanceMessage.add_member(:copy_tags_to_snapshot, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CopyTagsToSnapshot"))
     CreateDBInstanceMessage.add_member(:monitoring_interval, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MonitoringInterval"))
     CreateDBInstanceMessage.add_member(:monitoring_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "MonitoringRoleArn"))
@@ -1058,6 +1064,10 @@ module Aws::RDS
     CreateDBInstanceReadReplicaMessage.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
     CreateDBInstanceReadReplicaMessage.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
     CreateDBInstanceReadReplicaMessage.add_member(:domain_iam_role_name, Shapes::ShapeRef.new(shape: String, location_name: "DomainIAMRoleName"))
+    CreateDBInstanceReadReplicaMessage.add_member(:domain_fqdn, Shapes::ShapeRef.new(shape: String, location_name: "DomainFqdn"))
+    CreateDBInstanceReadReplicaMessage.add_member(:domain_ou, Shapes::ShapeRef.new(shape: String, location_name: "DomainOu"))
+    CreateDBInstanceReadReplicaMessage.add_member(:domain_auth_secret_arn, Shapes::ShapeRef.new(shape: String, location_name: "DomainAuthSecretArn"))
+    CreateDBInstanceReadReplicaMessage.add_member(:domain_dns_ips, Shapes::ShapeRef.new(shape: StringList, location_name: "DomainDnsIps"))
     CreateDBInstanceReadReplicaMessage.add_member(:replica_mode, Shapes::ShapeRef.new(shape: ReplicaMode, location_name: "ReplicaMode"))
     CreateDBInstanceReadReplicaMessage.add_member(:max_allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxAllocatedStorage"))
     CreateDBInstanceReadReplicaMessage.add_member(:custom_iam_instance_profile, Shapes::ShapeRef.new(shape: String, location_name: "CustomIamInstanceProfile"))
@@ -1252,6 +1262,7 @@ module Aws::RDS
     DBCluster.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
     DBCluster.add_member(:db_system_id, Shapes::ShapeRef.new(shape: String, location_name: "DBSystemId"))
     DBCluster.add_member(:master_user_secret, Shapes::ShapeRef.new(shape: MasterUserSecret, location_name: "MasterUserSecret"))
+    DBCluster.add_member(:io_optimized_next_allowed_modification_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "IOOptimizedNextAllowedModificationTime"))
     DBCluster.struct_class = Types::DBCluster
 
     DBClusterAlreadyExistsFault.struct_class = Types::DBClusterAlreadyExistsFault
@@ -1384,6 +1395,7 @@ module Aws::RDS
     DBClusterSnapshot.add_member(:iam_database_authentication_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "IAMDatabaseAuthenticationEnabled"))
     DBClusterSnapshot.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     DBClusterSnapshot.add_member(:db_system_id, Shapes::ShapeRef.new(shape: String, location_name: "DBSystemId"))
+    DBClusterSnapshot.add_member(:storage_type, Shapes::ShapeRef.new(shape: String, location_name: "StorageType"))
     DBClusterSnapshot.struct_class = Types::DBClusterSnapshot
 
     DBClusterSnapshotAlreadyExistsFault.struct_class = Types::DBClusterSnapshotAlreadyExistsFault
@@ -2245,6 +2257,9 @@ module Aws::RDS
     DomainMembership.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     DomainMembership.add_member(:fqdn, Shapes::ShapeRef.new(shape: String, location_name: "FQDN"))
     DomainMembership.add_member(:iam_role_name, Shapes::ShapeRef.new(shape: String, location_name: "IAMRoleName"))
+    DomainMembership.add_member(:ou, Shapes::ShapeRef.new(shape: String, location_name: "OU"))
+    DomainMembership.add_member(:auth_secret_arn, Shapes::ShapeRef.new(shape: String, location_name: "AuthSecretArn"))
+    DomainMembership.add_member(:dns_ips, Shapes::ShapeRef.new(shape: StringList, location_name: "DnsIps"))
     DomainMembership.struct_class = Types::DomainMembership
 
     DomainMembershipList.member = Shapes::ShapeRef.new(shape: DomainMembership, location_name: "DomainMembership")
@@ -2639,12 +2654,17 @@ module Aws::RDS
     ModifyDBInstanceMessage.add_member(:tde_credential_password, Shapes::ShapeRef.new(shape: String, location_name: "TdeCredentialPassword"))
     ModifyDBInstanceMessage.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CACertificateIdentifier"))
     ModifyDBInstanceMessage.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
+    ModifyDBInstanceMessage.add_member(:domain_fqdn, Shapes::ShapeRef.new(shape: String, location_name: "DomainFqdn"))
+    ModifyDBInstanceMessage.add_member(:domain_ou, Shapes::ShapeRef.new(shape: String, location_name: "DomainOu"))
+    ModifyDBInstanceMessage.add_member(:domain_auth_secret_arn, Shapes::ShapeRef.new(shape: String, location_name: "DomainAuthSecretArn"))
+    ModifyDBInstanceMessage.add_member(:domain_dns_ips, Shapes::ShapeRef.new(shape: StringList, location_name: "DomainDnsIps"))
     ModifyDBInstanceMessage.add_member(:copy_tags_to_snapshot, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CopyTagsToSnapshot"))
     ModifyDBInstanceMessage.add_member(:monitoring_interval, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MonitoringInterval"))
     ModifyDBInstanceMessage.add_member(:db_port_number, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "DBPortNumber"))
     ModifyDBInstanceMessage.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "PubliclyAccessible"))
     ModifyDBInstanceMessage.add_member(:monitoring_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "MonitoringRoleArn"))
     ModifyDBInstanceMessage.add_member(:domain_iam_role_name, Shapes::ShapeRef.new(shape: String, location_name: "DomainIAMRoleName"))
+    ModifyDBInstanceMessage.add_member(:disable_domain, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DisableDomain"))
     ModifyDBInstanceMessage.add_member(:promotion_tier, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "PromotionTier"))
     ModifyDBInstanceMessage.add_member(:enable_iam_database_authentication, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableIAMDatabaseAuthentication"))
     ModifyDBInstanceMessage.add_member(:enable_performance_insights, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnablePerformanceInsights"))
@@ -2666,6 +2686,7 @@ module Aws::RDS
     ModifyDBInstanceMessage.add_member(:manage_master_user_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ManageMasterUserPassword"))
     ModifyDBInstanceMessage.add_member(:rotate_master_user_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "RotateMasterUserPassword"))
     ModifyDBInstanceMessage.add_member(:master_user_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterUserSecretKmsKeyId"))
+    ModifyDBInstanceMessage.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     ModifyDBInstanceMessage.struct_class = Types::ModifyDBInstanceMessage
 
     ModifyDBInstanceResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -2979,6 +3000,7 @@ module Aws::RDS
     PendingModifiedValues.add_member(:automation_mode, Shapes::ShapeRef.new(shape: AutomationMode, location_name: "AutomationMode"))
     PendingModifiedValues.add_member(:resume_full_automation_mode_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ResumeFullAutomationModeTime"))
     PendingModifiedValues.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
+    PendingModifiedValues.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     PendingModifiedValues.struct_class = Types::PendingModifiedValues
 
     PointInTimeRestoreNotEnabledFault.struct_class = Types::PointInTimeRestoreNotEnabledFault
@@ -3186,6 +3208,7 @@ module Aws::RDS
     RestoreDBClusterFromS3Message.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
     RestoreDBClusterFromS3Message.add_member(:manage_master_user_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ManageMasterUserPassword"))
     RestoreDBClusterFromS3Message.add_member(:master_user_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterUserSecretKmsKeyId"))
+    RestoreDBClusterFromS3Message.add_member(:storage_type, Shapes::ShapeRef.new(shape: String, location_name: "StorageType"))
     RestoreDBClusterFromS3Message.struct_class = Types::RestoreDBClusterFromS3Message
 
     RestoreDBClusterFromS3Result.add_member(:db_cluster, Shapes::ShapeRef.new(shape: DBCluster, location_name: "DBCluster"))
@@ -3276,6 +3299,10 @@ module Aws::RDS
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:tde_credential_password, Shapes::ShapeRef.new(shape: String, location_name: "TdeCredentialPassword"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:vpc_security_group_ids, Shapes::ShapeRef.new(shape: VpcSecurityGroupIdList, location_name: "VpcSecurityGroupIds"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
+    RestoreDBInstanceFromDBSnapshotMessage.add_member(:domain_fqdn, Shapes::ShapeRef.new(shape: String, location_name: "DomainFqdn"))
+    RestoreDBInstanceFromDBSnapshotMessage.add_member(:domain_ou, Shapes::ShapeRef.new(shape: String, location_name: "DomainOu"))
+    RestoreDBInstanceFromDBSnapshotMessage.add_member(:domain_auth_secret_arn, Shapes::ShapeRef.new(shape: String, location_name: "DomainAuthSecretArn"))
+    RestoreDBInstanceFromDBSnapshotMessage.add_member(:domain_dns_ips, Shapes::ShapeRef.new(shape: StringList, location_name: "DomainDnsIps"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:copy_tags_to_snapshot, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CopyTagsToSnapshot"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:domain_iam_role_name, Shapes::ShapeRef.new(shape: String, location_name: "DomainIAMRoleName"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:enable_iam_database_authentication, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableIAMDatabaseAuthentication"))
@@ -3373,6 +3400,10 @@ module Aws::RDS
     RestoreDBInstanceToPointInTimeMessage.add_member(:vpc_security_group_ids, Shapes::ShapeRef.new(shape: VpcSecurityGroupIdList, location_name: "VpcSecurityGroupIds"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:domain_iam_role_name, Shapes::ShapeRef.new(shape: String, location_name: "DomainIAMRoleName"))
+    RestoreDBInstanceToPointInTimeMessage.add_member(:domain_fqdn, Shapes::ShapeRef.new(shape: String, location_name: "DomainFqdn"))
+    RestoreDBInstanceToPointInTimeMessage.add_member(:domain_ou, Shapes::ShapeRef.new(shape: String, location_name: "DomainOu"))
+    RestoreDBInstanceToPointInTimeMessage.add_member(:domain_auth_secret_arn, Shapes::ShapeRef.new(shape: String, location_name: "DomainAuthSecretArn"))
+    RestoreDBInstanceToPointInTimeMessage.add_member(:domain_dns_ips, Shapes::ShapeRef.new(shape: StringList, location_name: "DomainDnsIps"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:enable_iam_database_authentication, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableIAMDatabaseAuthentication"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:enable_cloudwatch_logs_exports, Shapes::ShapeRef.new(shape: LogTypeList, location_name: "EnableCloudwatchLogsExports"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:processor_features, Shapes::ShapeRef.new(shape: ProcessorFeatureList, location_name: "ProcessorFeatures"))
@@ -3536,6 +3567,8 @@ module Aws::RDS
     StopDBInstanceResult.struct_class = Types::StopDBInstanceResult
 
     StorageQuotaExceededFault.struct_class = Types::StorageQuotaExceededFault
+
+    StorageTypeNotAvailableFault.struct_class = Types::StorageTypeNotAvailableFault
 
     StorageTypeNotSupportedFault.struct_class = Types::StorageTypeNotSupportedFault
 
@@ -4944,6 +4977,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBClusterAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotAvailableFault)
       end)
 
       api.add_operation(:modify_db_cluster_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -5287,6 +5321,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientStorageClusterCapacityFault)
+        o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
       end)
 
       api.add_operation(:restore_db_cluster_from_snapshot, Seahorse::Model::Operation.new.tap do |o|

@@ -3158,13 +3158,18 @@ module Aws::ChimeSDKVoice
     #   for different speaker search tasks.
     #   @return [String]
     #
+    # @!attribute [rw] call_leg
+    #   Specifies which call leg to stream for speaker search.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/StartSpeakerSearchTaskRequest AWS API Documentation
     #
     class StartSpeakerSearchTaskRequest < Struct.new(
       :voice_connector_id,
       :transaction_id,
       :voice_profile_domain_id,
-      :client_request_token)
+      :client_request_token,
+      :call_leg)
       SENSITIVE = []
       include Aws::Structure
     end

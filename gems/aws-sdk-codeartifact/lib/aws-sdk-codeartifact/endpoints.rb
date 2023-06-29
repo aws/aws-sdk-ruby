@@ -9,6 +9,7 @@
 
 
 module Aws::CodeArtifact
+  # @api private
   module Endpoints
 
     class AssociateExternalConnection

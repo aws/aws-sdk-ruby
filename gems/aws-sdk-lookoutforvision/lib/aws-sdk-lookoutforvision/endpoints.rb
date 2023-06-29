@@ -9,6 +9,7 @@
 
 
 module Aws::LookoutforVision
+  # @api private
   module Endpoints
 
     class CreateDataset

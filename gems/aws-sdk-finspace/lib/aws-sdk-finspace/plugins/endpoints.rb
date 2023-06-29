@@ -58,12 +58,54 @@ module Aws::Finspace
           case context.operation_name
           when :create_environment
             Aws::Finspace::Endpoints::CreateEnvironment.build(context)
+          when :create_kx_changeset
+            Aws::Finspace::Endpoints::CreateKxChangeset.build(context)
+          when :create_kx_cluster
+            Aws::Finspace::Endpoints::CreateKxCluster.build(context)
+          when :create_kx_database
+            Aws::Finspace::Endpoints::CreateKxDatabase.build(context)
+          when :create_kx_environment
+            Aws::Finspace::Endpoints::CreateKxEnvironment.build(context)
+          when :create_kx_user
+            Aws::Finspace::Endpoints::CreateKxUser.build(context)
           when :delete_environment
             Aws::Finspace::Endpoints::DeleteEnvironment.build(context)
+          when :delete_kx_cluster
+            Aws::Finspace::Endpoints::DeleteKxCluster.build(context)
+          when :delete_kx_database
+            Aws::Finspace::Endpoints::DeleteKxDatabase.build(context)
+          when :delete_kx_environment
+            Aws::Finspace::Endpoints::DeleteKxEnvironment.build(context)
+          when :delete_kx_user
+            Aws::Finspace::Endpoints::DeleteKxUser.build(context)
           when :get_environment
             Aws::Finspace::Endpoints::GetEnvironment.build(context)
+          when :get_kx_changeset
+            Aws::Finspace::Endpoints::GetKxChangeset.build(context)
+          when :get_kx_cluster
+            Aws::Finspace::Endpoints::GetKxCluster.build(context)
+          when :get_kx_connection_string
+            Aws::Finspace::Endpoints::GetKxConnectionString.build(context)
+          when :get_kx_database
+            Aws::Finspace::Endpoints::GetKxDatabase.build(context)
+          when :get_kx_environment
+            Aws::Finspace::Endpoints::GetKxEnvironment.build(context)
+          when :get_kx_user
+            Aws::Finspace::Endpoints::GetKxUser.build(context)
           when :list_environments
             Aws::Finspace::Endpoints::ListEnvironments.build(context)
+          when :list_kx_changesets
+            Aws::Finspace::Endpoints::ListKxChangesets.build(context)
+          when :list_kx_cluster_nodes
+            Aws::Finspace::Endpoints::ListKxClusterNodes.build(context)
+          when :list_kx_clusters
+            Aws::Finspace::Endpoints::ListKxClusters.build(context)
+          when :list_kx_databases
+            Aws::Finspace::Endpoints::ListKxDatabases.build(context)
+          when :list_kx_environments
+            Aws::Finspace::Endpoints::ListKxEnvironments.build(context)
+          when :list_kx_users
+            Aws::Finspace::Endpoints::ListKxUsers.build(context)
           when :list_tags_for_resource
             Aws::Finspace::Endpoints::ListTagsForResource.build(context)
           when :tag_resource
@@ -72,6 +114,16 @@ module Aws::Finspace
             Aws::Finspace::Endpoints::UntagResource.build(context)
           when :update_environment
             Aws::Finspace::Endpoints::UpdateEnvironment.build(context)
+          when :update_kx_cluster_databases
+            Aws::Finspace::Endpoints::UpdateKxClusterDatabases.build(context)
+          when :update_kx_database
+            Aws::Finspace::Endpoints::UpdateKxDatabase.build(context)
+          when :update_kx_environment
+            Aws::Finspace::Endpoints::UpdateKxEnvironment.build(context)
+          when :update_kx_environment_network
+            Aws::Finspace::Endpoints::UpdateKxEnvironmentNetwork.build(context)
+          when :update_kx_user
+            Aws::Finspace::Endpoints::UpdateKxUser.build(context)
           end
         end
       end

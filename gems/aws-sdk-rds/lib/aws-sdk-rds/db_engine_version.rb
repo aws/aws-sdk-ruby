@@ -291,10 +291,12 @@ module Aws::RDS
     #
     # @return [self]
     def load
-      resp = @client.describe_db_engine_versions(
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_db_engine_versions(
         engine: @engine_name,
         engine_version: @version
       )
+      end
       @data = resp.db_engine_versions[0]
       self
     end
@@ -409,7 +411,9 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Associations
@@ -442,7 +446,9 @@ module Aws::RDS
           engine_name: @engine,
           major_engine_version: @version
         )
-        resp = @client.describe_option_group_options(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_option_group_options(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.option_group_options.each do |o|
@@ -482,7 +488,9 @@ module Aws::RDS
           engine_name: @engine,
           major_engine_version: @version
         )
-        resp = @client.describe_option_groups(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_option_groups(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.option_groups_list.each do |o|

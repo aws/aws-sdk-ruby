@@ -1762,8 +1762,9 @@ module Aws::SageMaker
     # @!attribute [rw] inference_container_definitions
     #   The mapping of all supported processing unit (CPU, GPU, etc...) to
     #   inference container definitions for the candidate. This field is
-    #   populated for the V2 API only (for example, for jobs created by
-    #   calling `CreateAutoMLJobV2`).
+    #   populated for the AutoML jobs V2 (for example, for jobs created by
+    #   calling `CreateAutoMLJobV2`) related to image or text classification
+    #   problem types only.
     #   @return [Hash<String,Array<Types::AutoMLContainerDefinition>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLCandidate AWS API Documentation
@@ -2035,12 +2036,9 @@ module Aws::SageMaker
     # This structure specifies how to split the data into train and
     # validation datasets.
     #
-    # If you are using the V1 API (for example `CreateAutoMLJob`) or the V2
-    # API for Natural Language Processing problems (for example
-    # `CreateAutoMLJobV2` with a `TextClassificationJobConfig` problem
-    # type), the validation and training datasets must contain the same
-    # headers. Also, for V1 API jobs, the validation dataset must be less
-    # than 2 GB in size.
+    # The validation and training datasets must contain the same headers.
+    # For jobs created by calling `CreateAutoMLJob`, the validation dataset
+    # must be less than 2 GB in size.
     #
     # @!attribute [rw] validation_fraction
     #   The validation fraction (optional) is a float that specifies the
@@ -2077,14 +2075,12 @@ module Aws::SageMaker
     end
 
     # A channel is a named input source that training algorithms can
-    # consume. This channel is used for the non tabular training data of an
-    # AutoML job using the V2 API. For tabular training data, see [
-    # AutoMLChannel][1]. For more information, see [ Channel][2].
+    # consume. This channel is used for AutoML jobs V2 (jobs created by
+    # calling [CreateAutoMLJobV2][1]).
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLChannel.html
-    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Channel.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html
     #
     # @!attribute [rw] channel_type
     #   The type of channel. Defines whether the data are used for training
@@ -2096,20 +2092,27 @@ module Aws::SageMaker
     #   The content type of the data from the input source. The following
     #   are the allowed content types for different problems:
     #
-    #   * ImageClassification: `image/png`, `image/jpeg`, `image/*`
+    #   * For Tabular problem types: `text/csv;header=present` or
+    #     `x-application/vnd.amazon+parquet`. The default value is
+    #     `text/csv;header=present`.
     #
-    #   * TextClassification: `text/csv;header=present`
+    #   * For ImageClassification: `image/png`, `image/jpeg`, or `image/*`.
+    #     The default value is `image/*`.
+    #
+    #   * For TextClassification: `text/csv;header=present` or
+    #     `x-application/vnd.amazon+parquet`. The default value is
+    #     `text/csv;header=present`.
     #   @return [String]
     #
     # @!attribute [rw] compression_type
-    #   The allowed compression types depend on the input format. We allow
-    #   the compression type `Gzip` for `S3Prefix` inputs only. For all
-    #   other inputs, the compression type should be `None`. If no
-    #   compression type is provided, we default to `None`.
+    #   The allowed compression types depend on the input format and problem
+    #   type. We allow the compression type `Gzip` for `S3Prefix` inputs on
+    #   tabular data only. For all other inputs, the compression type should
+    #   be `None`. If no compression type is provided, we default to `None`.
     #   @return [String]
     #
     # @!attribute [rw] data_source
-    #   The data source for an AutoML channel.
+    #   The data source for an AutoML channel (Required).
     #   @return [Types::AutoMLDataSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLJobChannel AWS API Documentation
@@ -2129,7 +2132,7 @@ module Aws::SageMaker
     # @!attribute [rw] max_candidates
     #   The maximum number of times a training job is allowed to run.
     #
-    #   For V2 jobs (jobs created by calling `CreateAutoMLJobV2`), the
+    #   For job V2s (jobs created by calling `CreateAutoMLJobV2`), the
     #   supported value is 1.
     #   @return [Integer]
     #
@@ -2139,7 +2142,7 @@ module Aws::SageMaker
     #   tuning job. For more information, see the [StoppingCondition][1]
     #   used by the [CreateHyperParameterTuningJob][2] action.
     #
-    #   For V2 jobs (jobs created by calling `CreateAutoMLJobV2`), this
+    #   For job V2s (jobs created by calling `CreateAutoMLJobV2`), this
     #   field controls the runtime of the job candidate.
     #
     #
@@ -2218,7 +2221,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-suppprt
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLJobConfig AWS API Documentation
@@ -2234,8 +2237,6 @@ module Aws::SageMaker
     end
 
     # Specifies a metric to minimize or maximize as the objective of a job.
-    # V2 API jobs (for example jobs created by calling `CreateAutoMLJobV2`),
-    # support `Accuracy` only.
     #
     # @!attribute [rw] metric_name
     #   The name of the objective metric used to measure the predictive
@@ -2250,11 +2251,15 @@ module Aws::SageMaker
     #   If you do not specify a metric explicitly, the default behavior is
     #   to automatically use:
     #
-    #   * `MSE`: for regression.
+    #   * For tabular problem types:
     #
-    #   * `F1`: for binary classification
+    #     * Regression: `MSE`.
     #
-    #   * `Accuracy`: for multiclass classification.
+    #     * Binary classification: `F1`.
+    #
+    #     * Multiclass classification: `Accuracy`.
+    #
+    #   * For image or text classification problem types: `Accuracy`
     #
     #
     #
@@ -2372,28 +2377,34 @@ module Aws::SageMaker
     end
 
     # A collection of settings specific to the problem type used to
-    # configure an AutoML job using the V2 API. There must be one and only
-    # one config of the following type.
+    # configure an AutoML job V2. There must be one and only one config of
+    # the following type.
     #
     # @note AutoMLProblemTypeConfig is a union - when making an API calls you must set exactly one of the members.
     #
     # @note AutoMLProblemTypeConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AutoMLProblemTypeConfig corresponding to the set member.
     #
     # @!attribute [rw] image_classification_job_config
-    #   Settings used to configure an AutoML job using the V2 API for the
-    #   image classification problem type.
+    #   Settings used to configure an AutoML job V2 for the image
+    #   classification problem type.
     #   @return [Types::ImageClassificationJobConfig]
     #
     # @!attribute [rw] text_classification_job_config
-    #   Settings used to configure an AutoML job using the V2 API for the
-    #   text classification problem type.
+    #   Settings used to configure an AutoML job V2 for the text
+    #   classification problem type.
     #   @return [Types::TextClassificationJobConfig]
+    #
+    # @!attribute [rw] tabular_job_config
+    #   Settings used to configure an AutoML job V2 for a tabular problem
+    #   type (regression, classification).
+    #   @return [Types::TabularJobConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLProblemTypeConfig AWS API Documentation
     #
     class AutoMLProblemTypeConfig < Struct.new(
       :image_classification_job_config,
       :text_classification_job_config,
+      :tabular_job_config,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -2401,7 +2412,56 @@ module Aws::SageMaker
 
       class ImageClassificationJobConfig < AutoMLProblemTypeConfig; end
       class TextClassificationJobConfig < AutoMLProblemTypeConfig; end
+      class TabularJobConfig < AutoMLProblemTypeConfig; end
       class Unknown < AutoMLProblemTypeConfig; end
+    end
+
+    # The resolved attributes specific to the problem type of an AutoML job
+    # V2.
+    #
+    # @note AutoMLProblemTypeResolvedAttributes is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AutoMLProblemTypeResolvedAttributes corresponding to the set member.
+    #
+    # @!attribute [rw] tabular_resolved_attributes
+    #   Defines the resolved attributes for the `TABULAR` problem type.
+    #   @return [Types::TabularResolvedAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLProblemTypeResolvedAttributes AWS API Documentation
+    #
+    class AutoMLProblemTypeResolvedAttributes < Struct.new(
+      :tabular_resolved_attributes,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class TabularResolvedAttributes < AutoMLProblemTypeResolvedAttributes; end
+      class Unknown < AutoMLProblemTypeResolvedAttributes; end
+    end
+
+    # The resolved attributes used to configure an AutoML job V2.
+    #
+    # @!attribute [rw] auto_ml_job_objective
+    #   Specifies a metric to minimize or maximize as the objective of a
+    #   job.
+    #   @return [Types::AutoMLJobObjective]
+    #
+    # @!attribute [rw] completion_criteria
+    #   How long a job is allowed to run, or how many candidates a job is
+    #   allowed to generate.
+    #   @return [Types::AutoMLJobCompletionCriteria]
+    #
+    # @!attribute [rw] auto_ml_problem_type_resolved_attributes
+    #   Defines the resolved attributes specific to a problem type.
+    #   @return [Types::AutoMLProblemTypeResolvedAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLResolvedAttributes AWS API Documentation
+    #
+    class AutoMLResolvedAttributes < Struct.new(
+      :auto_ml_job_objective,
+      :completion_criteria,
+      :auto_ml_problem_type_resolved_attributes)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # Describes the Amazon S3 data source.
@@ -2494,6 +2554,28 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The name and an example value of the hyperparameter that you want to
+    # use in Autotune. If Automatic model tuning (AMT) determines that your
+    # hyperparameter is eligible for Autotune, an optimal hyperparameter
+    # range is selected for you.
+    #
+    # @!attribute [rw] name
+    #   The name of the hyperparameter to optimize using Autotune.
+    #   @return [String]
+    #
+    # @!attribute [rw] value_hint
+    #   An example value of the hyperparameter to optimize using Autotune.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoParameter AWS API Documentation
+    #
+    class AutoParameter < Struct.new(
+      :name,
+      :value_hint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Automatic rollback configuration for handling endpoint deployment
     # failures and recovery.
     #
@@ -2507,6 +2589,51 @@ module Aws::SageMaker
     #
     class AutoRollbackConfig < Struct.new(
       :alarms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A flag to indicate if you want to use Autotune to automatically find
+    # optimal values for the following fields:
+    #
+    # * [ParameterRanges][1]: The names and ranges of parameters that a
+    #   hyperparameter tuning job can optimize.
+    #
+    # * [ResourceLimits][2]: The maximum resources that can be used for a
+    #   training job. These resources include the maximum number of training
+    #   jobs, the maximum runtime of a tuning job, and the maximum number of
+    #   training jobs to run at the same time.
+    #
+    # * [TrainingJobEarlyStoppingType][3]: A flag that specifies whether or
+    #   not to use early stopping for training jobs launched by a
+    #   hyperparameter tuning job.
+    #
+    # * [RetryStrategy][4]: The number of times to retry a training job.
+    #
+    # * [Strategy][5]: Specifies how hyperparameter tuning chooses the
+    #   combinations of hyperparameter values to use for the training jobs
+    #   that it launches.
+    #
+    # * [ConvergenceDetected][6]: A flag to indicate that Automatic model
+    #   tuning (AMT) has detected model convergence.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html#sagemaker-Type-HyperParameterTuningJobConfig-ParameterRanges
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ResourceLimits.html
+    # [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html#sagemaker-Type-HyperParameterTuningJobConfig-TrainingJobEarlyStoppingType
+    # [4]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-RetryStrategy
+    # [5]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html
+    # [6]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ConvergenceDetected.html
+    #
+    # @!attribute [rw] mode
+    #   Set `Mode` to `Enabled` if you want to use Autotune.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Autotune AWS API Documentation
+    #
+    class Autotune < Struct.new(
+      :mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2865,6 +2992,50 @@ module Aws::SageMaker
     class CandidateArtifactLocations < Struct.new(
       :explainability,
       :model_insights)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Stores the configuration information for how model candidates are
+    # generated using an AutoML job V2.
+    #
+    # @!attribute [rw] algorithms_config
+    #   Stores the configuration information for the selection of algorithms
+    #   used to train model candidates on tabular data.
+    #
+    #   The list of available algorithms to choose from depends on the
+    #   training mode set in [ `TabularJobConfig.Mode` ][1].
+    #
+    #   * `AlgorithmsConfig` should not be set in `AUTO` training mode.
+    #
+    #   * When `AlgorithmsConfig` is provided, one `AutoMLAlgorithms`
+    #     attribute must be set and one only.
+    #
+    #     If the list of algorithms provided as values for
+    #     `AutoMLAlgorithms` is empty, `CandidateGenerationConfig` uses the
+    #     full set of algorithms for the given training mode.
+    #
+    #   * When `AlgorithmsConfig` is not provided,
+    #     `CandidateGenerationConfig` uses the full set of algorithms for
+    #     the given training mode.
+    #
+    #   For the list of all algorithms per problem type and training mode,
+    #   see [ AutoMLAlgorithmConfig][2].
+    #
+    #   For more information on each algorithm, see the [Algorithm
+    #   support][3] section in Autopilot developer guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TabularJobConfig.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support
+    #   @return [Array<Types::AutoMLAlgorithmConfig>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CandidateGenerationConfig AWS API Documentation
+    #
+    class CandidateGenerationConfig < Struct.new(
+      :algorithms_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3928,6 +4099,16 @@ module Aws::SageMaker
     #   Specifies additional configuration for multi-model endpoints.
     #   @return [Types::MultiModelConfig]
     #
+    # @!attribute [rw] model_data_source
+    #   Specifies the location of ML model data to deploy.
+    #
+    #   <note markdown="1"> Currently you cannot use `ModelDataSource` in conjunction with
+    #   SageMaker batch transform, SageMaker serverless endpoints, SageMaker
+    #   multi-model endpoints, and SageMaker Marketplace.
+    #
+    #    </note>
+    #   @return [Types::ModelDataSource]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ContainerDefinition AWS API Documentation
     #
     class ContainerDefinition < Struct.new(
@@ -3939,7 +4120,8 @@ module Aws::SageMaker
       :environment,
       :model_package_name,
       :inference_specification_name,
-      :multi_model_config)
+      :multi_model_config,
+      :model_data_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4455,15 +4637,13 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] auto_ml_job_objective
-    #   Defines the objective metric used to measure the predictive quality
-    #   of an AutoML job. You provide an [AutoMLJobObjective$MetricName][1]
-    #   and Autopilot infers whether to minimize or maximize it. For
-    #   [CreateAutoMLJobV2][2], only `Accuracy` is supported.
+    #   Specifies a metric to minimize or maximize as the objective of a
+    #   job. If not specified, the default objective metric depends on the
+    #   problem type. See [AutoMLJobObjective][1] for the default values.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html
-    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html
     #   @return [Types::AutoMLJobObjective]
     #
     # @!attribute [rw] auto_ml_job_config
@@ -4533,14 +4713,16 @@ module Aws::SageMaker
     #
     # @!attribute [rw] auto_ml_job_input_data_config
     #   An array of channel objects describing the input data and their
-    #   location. Each channel is a named input source. Similar to
-    #   [InputDataConfig][1] supported by `CreateAutoMLJob`. The supported
-    #   formats depend on the problem type:
+    #   location. Each channel is a named input source. Similar to the
+    #   [InputDataConfig][1] attribute in the `CreateAutoMLJob` input
+    #   parameters. The supported formats depend on the problem type:
     #
-    #   * ImageClassification: S3Prefix, `ManifestFile`,
-    #     `AugmentedManifestFile`
+    #   * For Tabular problem types: `S3Prefix`, `ManifestFile`.
     #
-    #   * TextClassification: S3Prefix
+    #   * For ImageClassification: `S3Prefix`, `ManifestFile`,
+    #     `AugmentedManifestFile`.
+    #
+    #   * For TextClassification: `S3Prefix`.
     #
     #
     #
@@ -4579,11 +4761,20 @@ module Aws::SageMaker
     #
     # @!attribute [rw] auto_ml_job_objective
     #   Specifies a metric to minimize or maximize as the objective of a
-    #   job. For [CreateAutoMLJobV2][1], only `Accuracy` is supported.
+    #   job. If not specified, the default objective metric depends on the
+    #   problem type. For the list of default values per problem type, see
+    #   [AutoMLJobObjective][1].
+    #
+    #   <note markdown="1"> For tabular problem types, you must either provide both the
+    #   `AutoMLJobObjective` and indicate the type of supervised learning
+    #   problem in `AutoMLProblemTypeConfig`
+    #   (`TabularJobConfig.ProblemType`), or none at all.
+    #
+    #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html
     #   @return [Types::AutoMLJobObjective]
     #
     # @!attribute [rw] model_deploy_config
@@ -4595,12 +4786,9 @@ module Aws::SageMaker
     #   This structure specifies how to split the data into train and
     #   validation datasets.
     #
-    #   If you are using the V1 API (for example `CreateAutoMLJob`) or the
-    #   V2 API for Natural Language Processing problems (for example
-    #   `CreateAutoMLJobV2` with a `TextClassificationJobConfig` problem
-    #   type), the validation and training datasets must contain the same
-    #   headers. Also, for V1 API jobs, the validation dataset must be less
-    #   than 2 GB in size.
+    #   The validation and training datasets must contain the same headers.
+    #   For jobs created by calling `CreateAutoMLJob`, the validation
+    #   dataset must be less than 2 GB in size.
     #   @return [Types::AutoMLDataSplitConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAutoMLJobV2Request AWS API Documentation
@@ -5022,7 +5210,8 @@ module Aws::SageMaker
     #   inter-app communication in `VPCOnly` mode. Required when
     #   `CreateDomain.AppNetworkAccessType` is `VPCOnly` and
     #   `DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn`
-    #   is provided.
+    #   is provided. If setting up the domain for use with RStudio, this
+    #   value must be set to `Service`.
     #   @return [String]
     #
     # @!attribute [rw] domain_settings
@@ -5789,6 +5978,41 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] autotune
+    #   Configures SageMaker Automatic model tuning (AMT) to automatically
+    #   find optimal parameters for the following fields:
+    #
+    #   * [ParameterRanges][1]: The names and ranges of parameters that a
+    #     hyperparameter tuning job can optimize.
+    #
+    #   * [ResourceLimits][2]: The maximum resources that can be used for a
+    #     training job. These resources include the maximum number of
+    #     training jobs, the maximum runtime of a tuning job, and the
+    #     maximum number of training jobs to run at the same time.
+    #
+    #   * [TrainingJobEarlyStoppingType][3]: A flag that specifies whether
+    #     or not to use early stopping for training jobs launched by a
+    #     hyperparameter tuning job.
+    #
+    #   * [RetryStrategy][4]: The number of times to retry a training job.
+    #
+    #   * [Strategy][5]: Specifies how hyperparameter tuning chooses the
+    #     combinations of hyperparameter values to use for the training jobs
+    #     that it launches.
+    #
+    #   * [ConvergenceDetected][6]: A flag to indicate that Automatic model
+    #     tuning (AMT) has detected model convergence.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html#sagemaker-Type-HyperParameterTuningJobConfig-ParameterRanges
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ResourceLimits.html
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html#sagemaker-Type-HyperParameterTuningJobConfig-TrainingJobEarlyStoppingType
+    #   [4]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-RetryStrategy
+    #   [5]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html
+    #   [6]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ConvergenceDetected.html
+    #   @return [Types::Autotune]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateHyperParameterTuningJobRequest AWS API Documentation
     #
     class CreateHyperParameterTuningJobRequest < Struct.new(
@@ -5797,7 +6021,8 @@ module Aws::SageMaker
       :training_job_definition,
       :training_job_definitions,
       :warm_start_config,
-      :tags)
+      :tags,
+      :autotune)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7341,7 +7566,11 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] pipeline_definition
-    #   The JSON pipeline definition of the pipeline.
+    #   The [JSON pipeline definition][1] of the pipeline.
+    #
+    #
+    #
+    #   [1]: https://aws-sagemaker-mlops.github.io/sagemaker-model-building-pipeline-definition-JSON-schema/
     #   @return [String]
     #
     # @!attribute [rw] pipeline_definition_s3_location
@@ -7804,6 +8033,9 @@ module Aws::SageMaker
     #   streams. For example, if you specify an EFS location, input data
     #   files are available as input streams. They do not need to be
     #   downloaded.
+    #
+    #   Your input must be in the same Amazon Web Services region as your
+    #   training job.
     #   @return [Array<Types::Channel>]
     #
     # @!attribute [rw] output_data_config
@@ -9936,6 +10168,40 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A set of recommended deployment configurations for the model. To get
+    # more advanced recommendations, see
+    # [CreateInferenceRecommendationsJob][1] to create an inference
+    # recommendation job.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html
+    #
+    # @!attribute [rw] recommendation_status
+    #   Status of the deployment recommendation. The status `NOT_APPLICABLE`
+    #   means that SageMaker is unable to provide a default recommendation
+    #   for the model using the information provided. If the deployment
+    #   status is `IN_PROGRESS`, retry your API call after a few seconds to
+    #   get a `COMPLETED` deployment recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] real_time_inference_recommendations
+    #   A list of [RealTimeInferenceRecommendation][1] items.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_RealTimeInferenceRecommendation.html
+    #   @return [Array<Types::RealTimeInferenceRecommendation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeploymentRecommendation AWS API Documentation
+    #
+    class DeploymentRecommendation < Struct.new(
+      :recommendation_status,
+      :real_time_inference_recommendations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a stage in an edge deployment plan.
     #
     # @!attribute [rw] stage_name
@@ -10492,8 +10758,7 @@ module Aws::SageMaker
     # @!attribute [rw] resolved_attributes
     #   Contains `ProblemType`, `AutoMLJobObjective`, and
     #   `CompletionCriteria`. If you do not provide these values, they are
-    #   auto-inferred. If you do provide them, the values used are the ones
-    #   you provide.
+    #   inferred.
     #   @return [Types::ResolvedAttributes]
     #
     # @!attribute [rw] model_deploy_config
@@ -10534,7 +10799,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] auto_ml_job_name
-    #   Requests information about an AutoML V2 job using its unique name.
+    #   Requests information about an AutoML job V2 using its unique name.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAutoMLJobV2Request AWS API Documentation
@@ -10546,11 +10811,11 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] auto_ml_job_name
-    #   Returns the name of the AutoML V2 job.
+    #   Returns the name of the AutoML job V2.
     #   @return [String]
     #
     # @!attribute [rw] auto_ml_job_arn
-    #   Returns the Amazon Resource Name (ARN) of the AutoML V2 job.
+    #   Returns the Amazon Resource Name (ARN) of the AutoML job V2.
     #   @return [String]
     #
     # @!attribute [rw] auto_ml_job_input_data_config
@@ -10574,15 +10839,15 @@ module Aws::SageMaker
     #
     # @!attribute [rw] auto_ml_problem_type_config
     #   Returns the configuration settings of the problem type set for the
-    #   AutoML V2 job.
+    #   AutoML job V2.
     #   @return [Types::AutoMLProblemTypeConfig]
     #
     # @!attribute [rw] creation_time
-    #   Returns the creation time of the AutoML V2 job.
+    #   Returns the creation time of the AutoML job V2.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   Returns the end time of the AutoML V2 job.
+    #   Returns the end time of the AutoML job V2.
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_time
@@ -10590,13 +10855,13 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] failure_reason
-    #   Returns the reason for the failure of the AutoML V2 job, when
+    #   Returns the reason for the failure of the AutoML job V2, when
     #   applicable.
     #   @return [String]
     #
     # @!attribute [rw] partial_failure_reasons
-    #   Returns a list of reasons for partial failures within an AutoML V2
-    #   job.
+    #   Returns a list of reasons for partial failures within an AutoML job
+    #   V2.
     #   @return [Array<Types::AutoMLPartialFailureReason>]
     #
     # @!attribute [rw] best_candidate
@@ -10605,11 +10870,11 @@ module Aws::SageMaker
     #   @return [Types::AutoMLCandidate]
     #
     # @!attribute [rw] auto_ml_job_status
-    #   Returns the status of the AutoML V2 job.
+    #   Returns the status of the AutoML job V2.
     #   @return [String]
     #
     # @!attribute [rw] auto_ml_job_secondary_status
-    #   Returns the secondary status of the AutoML V2 job.
+    #   Returns the secondary status of the AutoML job V2.
     #   @return [String]
     #
     # @!attribute [rw] model_deploy_config
@@ -10630,6 +10895,19 @@ module Aws::SageMaker
     #   Returns the security configuration for traffic encryption or Amazon
     #   VPC settings.
     #   @return [Types::AutoMLSecurityConfig]
+    #
+    # @!attribute [rw] auto_ml_job_artifacts
+    #   The artifacts that are generated during an AutoML job.
+    #   @return [Types::AutoMLJobArtifacts]
+    #
+    # @!attribute [rw] resolved_attributes
+    #   Returns the resolved attributes used by the AutoML job V2.
+    #   @return [Types::AutoMLResolvedAttributes]
+    #
+    # @!attribute [rw] auto_ml_problem_type_config_name
+    #   Returns the name of the problem type configuration set for the
+    #   AutoML job V2.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAutoMLJobV2Response AWS API Documentation
     #
@@ -10652,7 +10930,10 @@ module Aws::SageMaker
       :model_deploy_config,
       :model_deploy_result,
       :data_split_config,
-      :security_config)
+      :security_config,
+      :auto_ml_job_artifacts,
+      :resolved_attributes,
+      :auto_ml_problem_type_config_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12285,7 +12566,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] hyper_parameter_tuning_job_name
-    #   The name of the tuning job.
+    #   The name of the hyperparameter tuning job.
     #   @return [String]
     #
     # @!attribute [rw] hyper_parameter_tuning_job_arn
@@ -12403,6 +12684,11 @@ module Aws::SageMaker
     #   The total resources consumed by your hyperparameter tuning job.
     #   @return [Types::HyperParameterTuningJobConsumedResources]
     #
+    # @!attribute [rw] autotune
+    #   A flag to indicate if autotune is enabled for the hyperparameter
+    #   tuning job.
+    #   @return [Types::Autotune]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHyperParameterTuningJobResponse AWS API Documentation
     #
     class DescribeHyperParameterTuningJobResponse < Struct.new(
@@ -12422,7 +12708,8 @@ module Aws::SageMaker
       :warm_start_config,
       :failure_reason,
       :tuning_job_completion_details,
-      :consumed_resources)
+      :consumed_resources,
+      :autotune)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13511,6 +13798,10 @@ module Aws::SageMaker
     #   from the model container.
     #   @return [Boolean]
     #
+    # @!attribute [rw] deployment_recommendation
+    #   A set of recommended deployment configurations for the model.
+    #   @return [Types::DeploymentRecommendation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelOutput AWS API Documentation
     #
     class DescribeModelOutput < Struct.new(
@@ -13522,7 +13813,8 @@ module Aws::SageMaker
       :vpc_config,
       :creation_time,
       :model_arn,
-      :enable_network_isolation)
+      :enable_network_isolation,
+      :deployment_recommendation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14248,6 +14540,10 @@ module Aws::SageMaker
     #   The parallelism configuration applied to the pipeline.
     #   @return [Types::ParallelismConfiguration]
     #
+    # @!attribute [rw] selective_execution_config
+    #   The selective execution configuration applied to the pipeline run.
+    #   @return [Types::SelectiveExecutionConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineExecutionResponse AWS API Documentation
     #
     class DescribePipelineExecutionResponse < Struct.new(
@@ -14262,13 +14558,14 @@ module Aws::SageMaker
       :last_modified_time,
       :created_by,
       :last_modified_by,
-      :parallelism_configuration)
+      :parallelism_configuration,
+      :selective_execution_config)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] pipeline_name
-    #   The name of the pipeline to describe.
+    #   The name or Amazon Resource Name (ARN) of the pipeline to describe.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineRequest AWS API Documentation
@@ -15618,12 +15915,18 @@ module Aws::SageMaker
     #   The variant's capacity.
     #   @return [Integer]
     #
+    # @!attribute [rw] serverless_update_config
+    #   Specifies the serverless update concurrency configuration for an
+    #   endpoint variant.
+    #   @return [Types::ProductionVariantServerlessUpdateConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DesiredWeightAndCapacity AWS API Documentation
     #
     class DesiredWeightAndCapacity < Struct.new(
       :variant_name,
       :desired_weight,
-      :desired_instance_count)
+      :desired_instance_count,
+      :serverless_update_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15973,7 +16276,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] r_studio_server_pro_domain_settings_for_update
     #   A collection of `RStudioServerPro` Domain-level app settings to
-    #   update.
+    #   update. A single `RStudioServerPro` application is created for a
+    #   domain.
     #   @return [Types::RStudioServerProDomainSettingsForUpdate]
     #
     # @!attribute [rw] execution_role_identity_config
@@ -19811,12 +20115,12 @@ module Aws::SageMaker
     # @!attribute [rw] instance_count
     #   The number of instances of the type specified by `InstanceType`.
     #   Choose an instance count larger than 1 for distributed training
-    #   algorithms. See [SageMaker distributed training jobs][1] for more
-    #   information.
+    #   algorithms. See [Step 2: Launch a SageMaker Distributed Training Job
+    #   Using the SageMaker Python SDK][1] for more information.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/data-parallel-use-api.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/data-parallel-use-api.html
     #   @return [Integer]
     #
     # @!attribute [rw] volume_size_in_gb
@@ -20328,7 +20632,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/notebooks-available-instance-types.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebooks-available-instance-types.html
     #   @return [String]
     #
     # @!attribute [rw] instance_count
@@ -20566,7 +20870,7 @@ module Aws::SageMaker
     end
 
     # Stores the configuration information for the image classification
-    # problem of an AutoML job using the V2 API.
+    # problem of an AutoML job V2.
     #
     # @!attribute [rw] completion_criteria
     #   How long a job is allowed to run, or how many candidates a job is
@@ -20914,13 +21218,23 @@ module Aws::SageMaker
     #   The recommendation ID which uniquely identifies each recommendation.
     #   @return [String]
     #
+    # @!attribute [rw] invocation_end_time
+    #   A timestamp that shows when the benchmark completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] invocation_start_time
+    #   A timestamp that shows when the benchmark started.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceRecommendation AWS API Documentation
     #
     class InferenceRecommendation < Struct.new(
       :metrics,
       :endpoint_configuration,
       :model_configuration,
-      :recommendation_id)
+      :recommendation_id,
+      :invocation_end_time,
+      :invocation_start_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20968,6 +21282,20 @@ module Aws::SageMaker
     #   If the job fails, provides information why the job failed.
     #   @return [String]
     #
+    # @!attribute [rw] model_name
+    #   The name of the created model.
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_payload_url
+    #   The Amazon Simple Storage Service (Amazon S3) path where the sample
+    #   payload is stored. This path must point to a single gzip compressed
+    #   tar archive (.tar.gz suffix).
+    #   @return [String]
+    #
+    # @!attribute [rw] model_package_version_arn
+    #   The Amazon Resource Name (ARN) of a versioned model package.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceRecommendationsJob AWS API Documentation
     #
     class InferenceRecommendationsJob < Struct.new(
@@ -20980,7 +21308,10 @@ module Aws::SageMaker
       :completion_time,
       :role_arn,
       :last_modified_time,
-      :failure_reason)
+      :failure_reason,
+      :model_name,
+      :sample_payload_url,
+      :model_package_version_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22310,8 +22641,11 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] max_results
-    #   The maximum number of AppImageConfigs to return in the response. The
-    #   default value is 10.
+    #   The total number of items to return in the response. If the total
+    #   number of items available is more than the value specified, a
+    #   `NextToken` is provided in the response. To resume pagination,
+    #   provide the `NextToken` value in the as part of a subsequent call.
+    #   The default value is 10.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -22394,7 +22728,11 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Returns a list up to a specified limit.
+    #   The total number of items to return in the response. If the total
+    #   number of items available is more than the value specified, a
+    #   `NextToken` is provided in the response. To resume pagination,
+    #   provide the `NextToken` value in the as part of a subsequent call.
+    #   The default value is 10.
     #   @return [Integer]
     #
     # @!attribute [rw] sort_order
@@ -23208,7 +23546,11 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Returns a list up to a specified limit.
+    #   The total number of items to return in the response. If the total
+    #   number of items available is more than the value specified, a
+    #   `NextToken` is provided in the response. To resume pagination,
+    #   provide the `NextToken` value in the as part of a subsequent call.
+    #   The default value is 10.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListDomainsRequest AWS API Documentation
@@ -24468,6 +24810,15 @@ module Aws::SageMaker
     #   The maximum number of recommendations to return in the response.
     #   @return [Integer]
     #
+    # @!attribute [rw] model_name_equals
+    #   A filter that returns only jobs that were created for this model.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_package_version_arn_equals
+    #   A filter that returns only jobs that were created for this versioned
+    #   model package.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListInferenceRecommendationsJobsRequest AWS API Documentation
     #
     class ListInferenceRecommendationsJobsRequest < Struct.new(
@@ -24480,7 +24831,9 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       :next_token,
-      :max_results)
+      :max_results,
+      :model_name_equals,
+      :model_package_version_arn_equals)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26017,7 +26370,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] pipeline_name
-    #   The name of the pipeline.
+    #   The name or Amazon Resource Name (ARN) of the pipeline.
     #   @return [String]
     #
     # @!attribute [rw] created_after
@@ -26353,7 +26706,11 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Returns a list up to a specified limit.
+    #   The total number of items to return in the response. If the total
+    #   number of items available is more than the value specified, a
+    #   `NextToken` is provided in the response. To resume pagination,
+    #   provide the `NextToken` value in the as part of a subsequent call.
+    #   The default value is 10.
     #   @return [Integer]
     #
     # @!attribute [rw] sort_order
@@ -26455,8 +26812,11 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] max_results
-    #   The maximum number of Studio Lifecycle Configurations to return in
-    #   the response. The default value is 10.
+    #   The total number of items to return in the response. If the total
+    #   number of items available is more than the value specified, a
+    #   `NextToken` is provided in the response. To resume pagination,
+    #   provide the `NextToken` value in the as part of a subsequent call.
+    #   The default value is 10.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -26523,7 +26883,8 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] next_token
-    #   A token for getting the next set of actions, if there are any.
+    #   If the previous response was truncated, you will receive this token.
+    #   Use it in your next request to receive the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] studio_lifecycle_configs
@@ -27029,7 +27390,11 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Returns a list up to a specified limit.
+    #   The total number of items to return in the response. If the total
+    #   number of items available is more than the value specified, a
+    #   `NextToken` is provided in the response. To resume pagination,
+    #   provide the `NextToken` value in the as part of a subsequent call.
+    #   The default value is 10.
     #   @return [Integer]
     #
     # @!attribute [rw] sort_order
@@ -27428,6 +27793,10 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] deployment_recommendation
+    #   A set of recommended deployment configurations for the model.
+    #   @return [Types::DeploymentRecommendation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Model AWS API Documentation
     #
     class Model < Struct.new(
@@ -27440,7 +27809,8 @@ module Aws::SageMaker
       :creation_time,
       :model_arn,
       :enable_network_isolation,
-      :tags)
+      :tags,
+      :deployment_recommendation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27616,6 +27986,12 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards-risk-rating.html
     #   @return [String]
     #
+    # @!attribute [rw] model_package_group_name
+    #   The model package group that contains the model package. Only
+    #   relevant for model cards created for model packages in the Amazon
+    #   SageMaker Model Registry.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelCard AWS API Documentation
     #
     class ModelCard < Struct.new(
@@ -27631,7 +28007,8 @@ module Aws::SageMaker
       :last_modified_by,
       :tags,
       :model_id,
-      :risk_rating)
+      :risk_rating,
+      :model_package_group_name)
       SENSITIVE = [:content]
       include Aws::Structure
     end
@@ -28117,6 +28494,21 @@ module Aws::SageMaker
     class ModelDataQuality < Struct.new(
       :statistics,
       :constraints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the location of ML model data to deploy. If specified, you
+    # must specify one and only one of the available data sources.
+    #
+    # @!attribute [rw] s3_data_source
+    #   Specifies the S3 location of ML model data to deploy.
+    #   @return [Types::S3ModelDataSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelDataSource AWS API Documentation
+    #
+    class ModelDataSource < Struct.new(
+      :s3_data_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30515,11 +30907,44 @@ module Aws::SageMaker
     #   The default value is `False`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] ttl_duration
+    #   Time to live duration, where the record is hard deleted after the
+    #   expiration time is reached; `ExpiresAt` = `EventTime` +
+    #   `TtlDuration`. For information on HardDelete, see the
+    #   [DeleteRecord][1] API in the Amazon SageMaker API Reference guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html
+    #   @return [Types::TtlDuration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OnlineStoreConfig AWS API Documentation
     #
     class OnlineStoreConfig < Struct.new(
       :security_config,
-      :enable_online_store)
+      :enable_online_store,
+      :ttl_duration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Updates the feature group online store configuration.
+    #
+    # @!attribute [rw] ttl_duration
+    #   Time to live duration, where the record is hard deleted after the
+    #   expiration time is reached; `ExpiresAt` = `EventTime` +
+    #   `TtlDuration`. For information on HardDelete, see the
+    #   [DeleteRecord][1] API in the Amazon SageMaker API Reference guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html
+    #   @return [Types::TtlDuration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OnlineStoreConfigUpdate AWS API Documentation
+    #
+    class OnlineStoreConfigUpdate < Struct.new(
+      :ttl_duration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30594,6 +31019,11 @@ module Aws::SageMaker
     #   Alternatively, you can specify OS, architecture, and accelerator
     #   using [TargetPlatform][1] fields. It can be used instead of
     #   `TargetPlatform`.
+    #
+    #   <note markdown="1"> Currently `ml_trn1` is available only in US East (N. Virginia)
+    #   Region, and `ml_inf2` is available only in US East (Ohio) Region.
+    #
+    #    </note>
     #
     #
     #
@@ -30836,11 +31266,18 @@ module Aws::SageMaker
     #   artifacts. For example, `s3://bucket-name/key-name-prefix`.
     #   @return [String]
     #
+    # @!attribute [rw] compression_type
+    #   The model output compression type. Select `None` to output an
+    #   uncompressed model, recommended for large model outputs. Defaults to
+    #   gzip.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OutputDataConfig AWS API Documentation
     #
     class OutputDataConfig < Struct.new(
       :kms_key_id,
-      :s3_output_path)
+      :s3_output_path,
+      :compression_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30973,12 +31410,18 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CategoricalParameterRange.html
     #   @return [Array<Types::CategoricalParameterRange>]
     #
+    # @!attribute [rw] auto_parameters
+    #   A list containing hyperparameter names and example values to be used
+    #   by Autotune to determine optimal ranges for your tuning job.
+    #   @return [Array<Types::AutoParameter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ParameterRanges AWS API Documentation
     #
     class ParameterRanges < Struct.new(
       :integer_parameter_ranges,
       :continuous_parameter_ranges,
-      :categorical_parameter_ranges)
+      :categorical_parameter_ranges,
+      :auto_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31343,6 +31786,10 @@ module Aws::SageMaker
     #   Contains a list of pipeline parameters. This list can be empty.
     #   @return [Array<Types::Parameter>]
     #
+    # @!attribute [rw] selective_execution_config
+    #   The selective execution configuration applied to the pipeline run.
+    #   @return [Types::SelectiveExecutionConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineExecution AWS API Documentation
     #
     class PipelineExecution < Struct.new(
@@ -31358,7 +31805,8 @@ module Aws::SageMaker
       :created_by,
       :last_modified_by,
       :parallelism_configuration,
-      :pipeline_parameters)
+      :pipeline_parameters,
+      :selective_execution_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31412,6 +31860,11 @@ module Aws::SageMaker
     #   Metadata to run the pipeline step.
     #   @return [Types::PipelineExecutionStepMetadata]
     #
+    # @!attribute [rw] selective_execution_result
+    #   The ARN from an execution of the current pipeline from which results
+    #   are reused for this step.
+    #   @return [Types::SelectiveExecutionResult]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineExecutionStep AWS API Documentation
     #
     class PipelineExecutionStep < Struct.new(
@@ -31424,7 +31877,8 @@ module Aws::SageMaker
       :cache_hit_result,
       :attempt_count,
       :failure_reason,
-      :metadata)
+      :metadata,
+      :selective_execution_result)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -32378,11 +32832,40 @@ module Aws::SageMaker
     #   endpoint can process.
     #   @return [Integer]
     #
+    # @!attribute [rw] provisioned_concurrency
+    #   The amount of provisioned concurrency to allocate for the serverless
+    #   endpoint. Should be less than or equal to `MaxConcurrency`.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariantServerlessConfig AWS API Documentation
     #
     class ProductionVariantServerlessConfig < Struct.new(
       :memory_size_in_mb,
-      :max_concurrency)
+      :max_concurrency,
+      :provisioned_concurrency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the serverless update concurrency configuration for an
+    # endpoint variant.
+    #
+    # @!attribute [rw] max_concurrency
+    #   The updated maximum number of concurrent invocations your serverless
+    #   endpoint can process.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] provisioned_concurrency
+    #   The updated amount of provisioned concurrency to allocate for the
+    #   serverless endpoint. Should be less than or equal to
+    #   `MaxConcurrency`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariantServerlessUpdateConfig AWS API Documentation
+    #
+    class ProductionVariantServerlessUpdateConfig < Struct.new(
+      :max_concurrency,
+      :provisioned_concurrency)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33340,9 +33823,7 @@ module Aws::SageMaker
     end
 
     # A collection of settings that configure user interaction with the
-    # `RStudioServerPro` app. `RStudioServerProAppSettings` cannot be
-    # updated. The `RStudioServerPro` app must be deleted and a new one
-    # created to make any changes.
+    # `RStudioServerPro` app.
     #
     # @!attribute [rw] access_status
     #   Indicates whether the current user has access to the
@@ -33444,6 +33925,31 @@ module Aws::SageMaker
     class RealTimeInferenceConfig < Struct.new(
       :instance_type,
       :instance_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The recommended configuration to use for Real-Time Inference.
+    #
+    # @!attribute [rw] recommendation_id
+    #   The recommendation ID which uniquely identifies each recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The recommended instance type for Real-Time Inference.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment
+    #   The recommended environment variables to set in the model container
+    #   for Real-Time Inference.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RealTimeInferenceRecommendation AWS API Documentation
+    #
+    class RealTimeInferenceRecommendation < Struct.new(
+      :recommendation_id,
+      :instance_type,
+      :environment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33574,6 +34080,14 @@ module Aws::SageMaker
     #   Recommender job.
     #   @return [Types::InferenceMetrics]
     #
+    # @!attribute [rw] invocation_end_time
+    #   A timestamp that shows when the benchmark completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] invocation_start_time
+    #   A timestamp that shows when the benchmark started.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobInferenceBenchmark AWS API Documentation
     #
     class RecommendationJobInferenceBenchmark < Struct.new(
@@ -33581,7 +34095,9 @@ module Aws::SageMaker
       :endpoint_configuration,
       :model_configuration,
       :failure_reason,
-      :endpoint_metrics)
+      :endpoint_metrics,
+      :invocation_end_time,
+      :invocation_start_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34090,8 +34606,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] auto_ml_job_objective
     #   Specifies a metric to minimize or maximize as the objective of a
-    #   job. V2 API jobs (for example jobs created by calling
-    #   `CreateAutoMLJobV2`), support `Accuracy` only.
+    #   job.
     #   @return [Types::AutoMLJobObjective]
     #
     # @!attribute [rw] problem_type
@@ -34446,6 +34961,9 @@ module Aws::SageMaker
 
     # Describes the S3 data source.
     #
+    # Your input bucket must be in the same Amazon Web Services region as
+    # your training job.
+    #
     # @!attribute [rw] s3_data_type
     #   If you choose `S3Prefix`, `S3Uri` identifies a key name prefix.
     #   SageMaker uses all objects that match the specified key name prefix
@@ -34508,6 +35026,9 @@ module Aws::SageMaker
     #     the channel for this data source. The object that each `S3Uri`
     #     points to must be readable by the IAM role that SageMaker uses to
     #     perform tasks on your behalf.
+    #
+    #   Your input bucket must be located in same Amazon Web Services region
+    #   as your training job.
     #   @return [String]
     #
     # @!attribute [rw] s3_data_distribution_type
@@ -34553,6 +35074,101 @@ module Aws::SageMaker
       :s3_data_distribution_type,
       :attribute_names,
       :instance_group_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the S3 location of ML model data to deploy.
+    #
+    # @!attribute [rw] s3_uri
+    #   Specifies the S3 path of ML model data to deploy.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_data_type
+    #   Specifies the type of ML model data to deploy.
+    #
+    #   If you choose `S3Prefix`, `S3Uri` identifies a key name prefix.
+    #   SageMaker uses all objects that match the specified key name prefix
+    #   as part of the ML model data to deploy. A valid key name prefix
+    #   identified by `S3Uri` always ends with a forward slash (/).
+    #
+    #   If you choose `S3Object`, `S3Uri` identifies an object that is the
+    #   ML model data to deploy.
+    #   @return [String]
+    #
+    # @!attribute [rw] compression_type
+    #   Specifies how the ML model data is prepared.
+    #
+    #   If you choose `Gzip` and choose `S3Object` as the value of
+    #   `S3DataType`, `S3Uri` identifies an object that is a gzip-compressed
+    #   TAR archive. SageMaker will attempt to decompress and untar the
+    #   object during model deployment.
+    #
+    #   If you choose `None` and chooose `S3Object` as the value of
+    #   `S3DataType`, `S3Uri` identifies an object that represents an
+    #   uncompressed ML model to deploy.
+    #
+    #   If you choose None and choose `S3Prefix` as the value of
+    #   `S3DataType`, `S3Uri` identifies a key name prefix, under which all
+    #   objects represents the uncompressed ML model to deploy.
+    #
+    #   If you choose None, then SageMaker will follow rules below when
+    #   creating model data files under /opt/ml/model directory for use by
+    #   your inference code:
+    #
+    #   * If you choose `S3Object` as the value of `S3DataType`, then
+    #     SageMaker will split the key of the S3 object referenced by
+    #     `S3Uri` by slash (/), and use the last part as the filename of the
+    #     file holding the content of the S3 object.
+    #
+    #   * If you choose `S3Prefix` as the value of `S3DataType`, then for
+    #     each S3 object under the key name pefix referenced by `S3Uri`,
+    #     SageMaker will trim its key by the prefix, and use the remainder
+    #     as the path (relative to `/opt/ml/model`) of the file holding the
+    #     content of the S3 object. SageMaker will split the remainder by
+    #     slash (/), using intermediate parts as directory names and the
+    #     last part as filename of the file holding the content of the S3
+    #     object.
+    #
+    #   * Do not use any of the following as file names or directory names:
+    #
+    #     * An empty or blank string
+    #
+    #     * A string which contains null bytes
+    #
+    #     * A string longer than 255 bytes
+    #
+    #     * A single dot (`.`)
+    #
+    #     * A double dot (`..`)
+    #
+    #   * Ambiguous file names will result in model deployment failure. For
+    #     example, if your uncompressed ML model consists of two S3 objects
+    #     `s3://mybucket/model/weights` and
+    #     `s3://mybucket/model/weights/part1` and you specify
+    #     `s3://mybucket/model/` as the value of `S3Uri` and `S3Prefix` as
+    #     the value of `S3DataType`, then it will result in name clash
+    #     between `/opt/ml/model/weights` (a regular file) and
+    #     `/opt/ml/model/weights/` (a directory).
+    #
+    #   * Do not organize the model artifacts in [S3 console using
+    #     folders][1]. When you create a folder in S3 console, S3 creates a
+    #     0-byte object with a key set to the folder name you provide. They
+    #     key of the 0-byte object ends with a slash (/) which violates
+    #     SageMaker restrictions on model artifact file names, leading to
+    #     model deployment failure.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/S3ModelDataSource AWS API Documentation
+    #
+    class S3ModelDataSource < Struct.new(
+      :s3_uri,
+      :s3_data_type,
+      :compression_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34988,6 +35604,57 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A step selected to run in selective execution mode.
+    #
+    # @!attribute [rw] step_name
+    #   The name of the pipeline step.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SelectedStep AWS API Documentation
+    #
+    class SelectedStep < Struct.new(
+      :step_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The selective execution configuration applied to the pipeline run.
+    #
+    # @!attribute [rw] source_pipeline_execution_arn
+    #   The ARN from a reference execution of the current pipeline. Used to
+    #   copy input collaterals needed for the selected steps to run. The
+    #   execution status of the pipeline can be either `Failed` or
+    #   `Success`.
+    #   @return [String]
+    #
+    # @!attribute [rw] selected_steps
+    #   A list of pipeline steps to run. All step(s) in all path(s) between
+    #   two selected steps should be included.
+    #   @return [Array<Types::SelectedStep>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SelectiveExecutionConfig AWS API Documentation
+    #
+    class SelectiveExecutionConfig < Struct.new(
+      :source_pipeline_execution_arn,
+      :selected_steps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The ARN from an execution of the current pipeline.
+    #
+    # @!attribute [rw] source_pipeline_execution_arn
+    #   The ARN from an execution of the current pipeline.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SelectiveExecutionResult AWS API Documentation
+    #
+    class SelectiveExecutionResult < Struct.new(
+      :source_pipeline_execution_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] callback_token
     #   The pipeline generated token from the Amazon SQS queue.
     #   @return [String]
@@ -35294,7 +35961,7 @@ module Aws::SageMaker
     #   compressed tar archive (`.tar.gz` suffix).
     #
     #   <note markdown="1"> The model artifacts must be in an S3 bucket that is in the same
-    #   region as the algorithm.
+    #   Amazon Web Services region as the algorithm.
     #
     #    </note>
     #   @return [String]
@@ -35481,7 +36148,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] pipeline_name
-    #   The name of the pipeline.
+    #   The name or Amazon Resource Name (ARN) of the pipeline.
     #   @return [String]
     #
     # @!attribute [rw] pipeline_execution_display_name
@@ -35510,6 +36177,10 @@ module Aws::SageMaker
     #   configuration of the parent pipeline for this specific run.
     #   @return [Types::ParallelismConfiguration]
     #
+    # @!attribute [rw] selective_execution_config
+    #   The selective execution configuration applied to the pipeline run.
+    #   @return [Types::SelectiveExecutionConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartPipelineExecutionRequest AWS API Documentation
     #
     class StartPipelineExecutionRequest < Struct.new(
@@ -35518,7 +36189,8 @@ module Aws::SageMaker
       :pipeline_parameters,
       :pipeline_execution_description,
       :client_request_token,
-      :parallelism_configuration)
+      :parallelism_configuration,
+      :selective_execution_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35933,6 +36605,168 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The collection of settings used by an AutoML job V2 for the `TABULAR`
+    # problem type.
+    #
+    # @!attribute [rw] candidate_generation_config
+    #   The configuration information of how model candidates are generated.
+    #   @return [Types::CandidateGenerationConfig]
+    #
+    # @!attribute [rw] completion_criteria
+    #   How long a job is allowed to run, or how many candidates a job is
+    #   allowed to generate.
+    #   @return [Types::AutoMLJobCompletionCriteria]
+    #
+    # @!attribute [rw] feature_specification_s3_uri
+    #   A URL to the Amazon S3 data source containing selected features from
+    #   the input data source to run an Autopilot job V2. You can input
+    #   `FeatureAttributeNames` (optional) in JSON format as shown below:
+    #
+    #   `\{ "FeatureAttributeNames":["col1", "col2", ...] \}`.
+    #
+    #   You can also specify the data type of the feature (optional) in the
+    #   format shown below:
+    #
+    #   `\{ "FeatureDataTypes":\{"col1":"numeric", "col2":"categorical" ...
+    #   \} \}`
+    #
+    #   <note markdown="1"> These column keys may not include the target column.
+    #
+    #    </note>
+    #
+    #   In ensembling mode, Autopilot only supports the following data
+    #   types: `numeric`, `categorical`, `text`, and `datetime`. In HPO
+    #   mode, Autopilot can support `numeric`, `categorical`, `text`,
+    #   `datetime`, and `sequence`.
+    #
+    #   If only `FeatureDataTypes` is provided, the column keys (`col1`,
+    #   `col2`,..) should be a subset of the column names in the input data.
+    #
+    #   If both `FeatureDataTypes` and `FeatureAttributeNames` are provided,
+    #   then the column keys should be a subset of the column names provided
+    #   in `FeatureAttributeNames`.
+    #
+    #   The key name `FeatureAttributeNames` is fixed. The values listed in
+    #   `["col1", "col2", ...]` are case sensitive and should be a list of
+    #   strings containing unique values that are a subset of the column
+    #   names in the input data. The list of columns provided must not
+    #   include the target column.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The method that Autopilot uses to train the data. You can either
+    #   specify the mode manually or let Autopilot choose for you based on
+    #   the dataset size by selecting `AUTO`. In `AUTO` mode, Autopilot
+    #   chooses `ENSEMBLING` for datasets smaller than 100 MB, and
+    #   `HYPERPARAMETER_TUNING` for larger ones.
+    #
+    #   The `ENSEMBLING` mode uses a multi-stack ensemble model to predict
+    #   classification and regression tasks directly from your dataset. This
+    #   machine learning mode combines several base models to produce an
+    #   optimal predictive model. It then uses a stacking ensemble method to
+    #   combine predictions from contributing members. A multi-stack
+    #   ensemble model can provide better performance over a single model by
+    #   combining the predictive capabilities of multiple models. See
+    #   [Autopilot algorithm support][1] for a list of algorithms supported
+    #   by `ENSEMBLING` mode.
+    #
+    #   The `HYPERPARAMETER_TUNING` (HPO) mode uses the best hyperparameters
+    #   to train the best version of a model. HPO automatically selects an
+    #   algorithm for the type of problem you want to solve. Then HPO finds
+    #   the best hyperparameters according to your objective metric. See
+    #   [Autopilot algorithm support][1] for a list of algorithms supported
+    #   by `HYPERPARAMETER_TUNING` mode.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support
+    #   @return [String]
+    #
+    # @!attribute [rw] generate_candidate_definitions_only
+    #   Generates possible candidates without training the models. A model
+    #   candidate is a combination of data preprocessors, algorithms, and
+    #   algorithm parameter settings.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] problem_type
+    #   The type of supervised learning problem available for the model
+    #   candidates of the AutoML job V2. For more information, see [ Amazon
+    #   SageMaker Autopilot problem types][1].
+    #
+    #   <note markdown="1"> You must either specify the type of supervised learning problem in
+    #   `ProblemType` and provide the [AutoMLJobObjective][2] metric, or
+    #   none at all.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-problem-types
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html#sagemaker-CreateAutoMLJobV2-request-AutoMLJobObjective
+    #   @return [String]
+    #
+    # @!attribute [rw] target_attribute_name
+    #   The name of the target variable in supervised learning, usually
+    #   represented by 'y'.
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_weight_attribute_name
+    #   If specified, this column name indicates which column of the dataset
+    #   should be treated as sample weights for use by the objective metric
+    #   during the training, evaluation, and the selection of the best
+    #   model. This column is not considered as a predictive feature. For
+    #   more information on Autopilot metrics, see [Metrics and
+    #   validation][1].
+    #
+    #   Sample weights should be numeric, non-negative, with larger values
+    #   indicating which rows are more important than others. Data points
+    #   that have invalid or no weight value are excluded.
+    #
+    #   Support for sample weights is available in [Ensembling][2] mode
+    #   only.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TabularJobConfig AWS API Documentation
+    #
+    class TabularJobConfig < Struct.new(
+      :candidate_generation_config,
+      :completion_criteria,
+      :feature_specification_s3_uri,
+      :mode,
+      :generate_candidate_definitions_only,
+      :problem_type,
+      :target_attribute_name,
+      :sample_weight_attribute_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The resolved attributes specific to the `TABULAR` problem type.
+    #
+    # @!attribute [rw] problem_type
+    #   The type of supervised learning problem available for the model
+    #   candidates of the AutoML job V2 (Binary Classification, Multiclass
+    #   Classification, Regression). For more information, see [ Amazon
+    #   SageMaker Autopilot problem types][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-problem-types
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TabularResolvedAttributes AWS API Documentation
+    #
+    class TabularResolvedAttributes < Struct.new(
+      :problem_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A tag object that consists of a key and an optional value, used to
     # manage metadata for SageMaker Amazon Web Services resources.
     #
@@ -36058,7 +36892,7 @@ module Aws::SageMaker
     end
 
     # Stores the configuration information for the text classification
-    # problem of an AutoML job using the V2 API.
+    # problem of an AutoML job V2.
     #
     # @!attribute [rw] completion_criteria
     #   How long a job is allowed to run, or how many candidates a job is
@@ -36067,12 +36901,13 @@ module Aws::SageMaker
     #
     # @!attribute [rw] content_column
     #   The name of the column used to provide the sentences to be
-    #   classified. It should not be the same as the target column.
+    #   classified. It should not be the same as the target column
+    #   (Required).
     #   @return [String]
     #
     # @!attribute [rw] target_label_column
     #   The name of the column used to provide the class labels. It should
-    #   not be same as the content column.
+    #   not be same as the content column (Required).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TextClassificationJobConfig AWS API Documentation
@@ -36332,6 +37167,9 @@ module Aws::SageMaker
     # @!attribute [rw] input_data_config
     #   An array of `Channel` objects that describes each data input
     #   channel.
+    #
+    #   Your input must be in the same Amazon Web Services region as your
+    #   training job.
     #   @return [Array<Types::Channel>]
     #
     # @!attribute [rw] output_data_config
@@ -38008,6 +38846,32 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Time to live duration, where the record is hard deleted after the
+    # expiration time is reached; `ExpiresAt` = `EventTime` + `TtlDuration`.
+    # For information on HardDelete, see the [DeleteRecord][1] API in the
+    # Amazon SageMaker API Reference guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html
+    #
+    # @!attribute [rw] unit
+    #   `TtlDuration` time unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   `TtlDuration` time value.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TtlDuration AWS API Documentation
+    #
+    class TtlDuration < Struct.new(
+      :unit,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The job completion criteria.
     #
     # @!attribute [rw] target_objective_metric_value
@@ -38459,7 +39323,8 @@ module Aws::SageMaker
     #   inter-app communication in `VPCOnly` mode. Required when
     #   `CreateDomain.AppNetworkAccessType` is `VPCOnly` and
     #   `DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn`
-    #   is provided.
+    #   is provided. If setting up the domain for use with RStudio, this
+    #   value must be set to `Service`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateDomainRequest AWS API Documentation
@@ -38634,11 +39499,16 @@ module Aws::SageMaker
     #   request for Feature Store to update the feature group.
     #   @return [Array<Types::FeatureDefinition>]
     #
+    # @!attribute [rw] online_store_config
+    #   Updates the feature group online store configuration.
+    #   @return [Types::OnlineStoreConfigUpdate]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateFeatureGroupRequest AWS API Documentation
     #
     class UpdateFeatureGroupRequest < Struct.new(
       :feature_group_name,
-      :feature_additions)
+      :feature_additions,
+      :online_store_config)
       SENSITIVE = []
       include Aws::Structure
     end

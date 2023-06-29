@@ -275,6 +275,11 @@ module Aws::SESV2
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -1571,7 +1576,7 @@ module Aws::SESV2
     #   The name of the contact list to which the contact belongs.
     #
     # @option params [required, String] :email_address
-    #   The contact's email addres.
+    #   The contact's email address.
     #
     # @return [Types::GetContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3373,6 +3378,55 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Used to convert a dedicated IP pool to a different scaling mode.
+    #
+    # <note markdown="1"> `MANAGED` pools cannot be converted to `STANDARD` scaling mode.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :pool_name
+    #   The name of the dedicated IP pool.
+    #
+    # @option params [required, String] :scaling_mode
+    #   The scaling mode to apply to the dedicated IP pool.
+    #
+    #   <note markdown="1"> Changing the scaling mode from `MANAGED` to `STANDARD` is not
+    #   supported.
+    #
+    #    </note>
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Used to convert a dedicated IP pool to a different scaling mode.
+    #
+    #   # This example converts a dedicated IP pool from STANDARD to MANAGED.
+    #
+    #   resp = client.put_dedicated_ip_pool_scaling_attributes({
+    #     pool_name: "sample-ses-pool", 
+    #     scaling_mode: "MANAGED", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_dedicated_ip_pool_scaling_attributes({
+    #     pool_name: "PoolName", # required
+    #     scaling_mode: "STANDARD", # required, accepts STANDARD, MANAGED
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutDedicatedIpPoolScalingAttributes AWS API Documentation
+    #
+    # @overload put_dedicated_ip_pool_scaling_attributes(params = {})
+    # @param [Hash] params ({})
+    def put_dedicated_ip_pool_scaling_attributes(params = {}, options = {})
+      req = build_request(:put_dedicated_ip_pool_scaling_attributes, params)
+      req.send_request(options)
+    end
+
     # @option params [required, String] :ip
     #   The dedicated IP address that you want to update the warm-up
     #   attributes for.
@@ -4237,7 +4291,7 @@ module Aws::SESV2
     #   The name of the contact list.
     #
     # @option params [required, String] :email_address
-    #   The contact's email addres.
+    #   The contact's email address.
     #
     # @option params [Array<Types::TopicPreference>] :topic_preferences
     #   The contact's preference for being opted-in to or opted-out of a
@@ -4487,7 +4541,7 @@ module Aws::SESV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

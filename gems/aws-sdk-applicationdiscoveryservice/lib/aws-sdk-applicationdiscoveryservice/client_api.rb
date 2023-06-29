@@ -88,13 +88,18 @@ module Aws::ApplicationDiscoveryService
     DescribeTagsResponse = Shapes::StructureShape.new(name: 'DescribeTagsResponse')
     DisassociateConfigurationItemsFromApplicationRequest = Shapes::StructureShape.new(name: 'DisassociateConfigurationItemsFromApplicationRequest')
     DisassociateConfigurationItemsFromApplicationResponse = Shapes::StructureShape.new(name: 'DisassociateConfigurationItemsFromApplicationResponse')
+    EC2InstanceType = Shapes::StringShape.new(name: 'EC2InstanceType')
+    Ec2RecommendationsExportPreferences = Shapes::StructureShape.new(name: 'Ec2RecommendationsExportPreferences')
+    ExcludedInstanceTypes = Shapes::ListShape.new(name: 'ExcludedInstanceTypes')
     ExportConfigurationsResponse = Shapes::StructureShape.new(name: 'ExportConfigurationsResponse')
     ExportDataFormat = Shapes::StringShape.new(name: 'ExportDataFormat')
     ExportDataFormats = Shapes::ListShape.new(name: 'ExportDataFormats')
+    ExportEnabled = Shapes::BooleanShape.new(name: 'ExportEnabled')
     ExportFilter = Shapes::StructureShape.new(name: 'ExportFilter')
     ExportFilters = Shapes::ListShape.new(name: 'ExportFilters')
     ExportIds = Shapes::ListShape.new(name: 'ExportIds')
     ExportInfo = Shapes::StructureShape.new(name: 'ExportInfo')
+    ExportPreferences = Shapes::UnionShape.new(name: 'ExportPreferences')
     ExportRequestTime = Shapes::TimestampShape.new(name: 'ExportRequestTime')
     ExportStatus = Shapes::StringShape.new(name: 'ExportStatus')
     ExportStatusMessage = Shapes::StringShape.new(name: 'ExportStatusMessage')
@@ -129,10 +134,13 @@ module Aws::ApplicationDiscoveryService
     NeighborConnectionDetail = Shapes::StructureShape.new(name: 'NeighborConnectionDetail')
     NeighborDetailsList = Shapes::ListShape.new(name: 'NeighborDetailsList')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    OfferingClass = Shapes::StringShape.new(name: 'OfferingClass')
     OperationNotPermittedException = Shapes::StructureShape.new(name: 'OperationNotPermittedException')
     OrderByElement = Shapes::StructureShape.new(name: 'OrderByElement')
     OrderByElementFieldName = Shapes::StringShape.new(name: 'OrderByElementFieldName')
     OrderByList = Shapes::ListShape.new(name: 'OrderByList')
+    PurchasingOption = Shapes::StringShape.new(name: 'PurchasingOption')
+    ReservedInstanceOptions = Shapes::StructureShape.new(name: 'ReservedInstanceOptions')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
@@ -159,10 +167,16 @@ module Aws::ApplicationDiscoveryService
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagSet = Shapes::ListShape.new(name: 'TagSet')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    Tenancy = Shapes::StringShape.new(name: 'Tenancy')
+    TermLength = Shapes::StringShape.new(name: 'TermLength')
     TimeStamp = Shapes::TimestampShape.new(name: 'TimeStamp')
     ToDeleteIdentifierList = Shapes::ListShape.new(name: 'ToDeleteIdentifierList')
     UpdateApplicationRequest = Shapes::StructureShape.new(name: 'UpdateApplicationRequest')
     UpdateApplicationResponse = Shapes::StructureShape.new(name: 'UpdateApplicationResponse')
+    UsageMetricBasis = Shapes::StructureShape.new(name: 'UsageMetricBasis')
+    UsageMetricBasisName = Shapes::StringShape.new(name: 'UsageMetricBasisName')
+    UsageMetricPercentageAdjust = Shapes::FloatShape.new(name: 'UsageMetricPercentageAdjust')
+    UserPreferredRegion = Shapes::StringShape.new(name: 'UserPreferredRegion')
     orderString = Shapes::StringShape.new(name: 'orderString')
 
     AgentConfigurationStatus.add_member(:agent_id, Shapes::ShapeRef.new(shape: String, location_name: "agentId"))
@@ -386,6 +400,17 @@ module Aws::ApplicationDiscoveryService
 
     DisassociateConfigurationItemsFromApplicationResponse.struct_class = Types::DisassociateConfigurationItemsFromApplicationResponse
 
+    Ec2RecommendationsExportPreferences.add_member(:enabled, Shapes::ShapeRef.new(shape: ExportEnabled, location_name: "enabled"))
+    Ec2RecommendationsExportPreferences.add_member(:cpu_performance_metric_basis, Shapes::ShapeRef.new(shape: UsageMetricBasis, location_name: "cpuPerformanceMetricBasis"))
+    Ec2RecommendationsExportPreferences.add_member(:ram_performance_metric_basis, Shapes::ShapeRef.new(shape: UsageMetricBasis, location_name: "ramPerformanceMetricBasis"))
+    Ec2RecommendationsExportPreferences.add_member(:tenancy, Shapes::ShapeRef.new(shape: Tenancy, location_name: "tenancy"))
+    Ec2RecommendationsExportPreferences.add_member(:excluded_instance_types, Shapes::ShapeRef.new(shape: ExcludedInstanceTypes, location_name: "excludedInstanceTypes"))
+    Ec2RecommendationsExportPreferences.add_member(:preferred_region, Shapes::ShapeRef.new(shape: UserPreferredRegion, location_name: "preferredRegion"))
+    Ec2RecommendationsExportPreferences.add_member(:reserved_instance_options, Shapes::ShapeRef.new(shape: ReservedInstanceOptions, location_name: "reservedInstanceOptions"))
+    Ec2RecommendationsExportPreferences.struct_class = Types::Ec2RecommendationsExportPreferences
+
+    ExcludedInstanceTypes.member = Shapes::ShapeRef.new(shape: EC2InstanceType)
+
     ExportConfigurationsResponse.add_member(:export_id, Shapes::ShapeRef.new(shape: ConfigurationsExportId, location_name: "exportId"))
     ExportConfigurationsResponse.struct_class = Types::ExportConfigurationsResponse
 
@@ -409,6 +434,12 @@ module Aws::ApplicationDiscoveryService
     ExportInfo.add_member(:requested_start_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "requestedStartTime"))
     ExportInfo.add_member(:requested_end_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "requestedEndTime"))
     ExportInfo.struct_class = Types::ExportInfo
+
+    ExportPreferences.add_member(:ec2_recommendations_preferences, Shapes::ShapeRef.new(shape: Ec2RecommendationsExportPreferences, location_name: "ec2RecommendationsPreferences"))
+    ExportPreferences.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ExportPreferences.add_member_subclass(:ec2_recommendations_preferences, Types::ExportPreferences::Ec2RecommendationsPreferences)
+    ExportPreferences.add_member_subclass(:unknown, Types::ExportPreferences::Unknown)
+    ExportPreferences.struct_class = Types::ExportPreferences
 
     ExportsInfo.member = Shapes::ShapeRef.new(shape: ExportInfo)
 
@@ -506,6 +537,11 @@ module Aws::ApplicationDiscoveryService
 
     OrderByList.member = Shapes::ShapeRef.new(shape: OrderByElement)
 
+    ReservedInstanceOptions.add_member(:purchasing_option, Shapes::ShapeRef.new(shape: PurchasingOption, required: true, location_name: "purchasingOption"))
+    ReservedInstanceOptions.add_member(:offering_class, Shapes::ShapeRef.new(shape: OfferingClass, required: true, location_name: "offeringClass"))
+    ReservedInstanceOptions.add_member(:term_length, Shapes::ShapeRef.new(shape: TermLength, required: true, location_name: "termLength"))
+    ReservedInstanceOptions.struct_class = Types::ReservedInstanceOptions
+
     ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
     ResourceInUseException.struct_class = Types::ResourceInUseException
 
@@ -537,6 +573,7 @@ module Aws::ApplicationDiscoveryService
     StartExportTaskRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ExportFilters, location_name: "filters"))
     StartExportTaskRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "startTime"))
     StartExportTaskRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "endTime"))
+    StartExportTaskRequest.add_member(:preferences, Shapes::ShapeRef.new(shape: ExportPreferences, location_name: "preferences"))
     StartExportTaskRequest.struct_class = Types::StartExportTaskRequest
 
     StartExportTaskResponse.add_member(:export_id, Shapes::ShapeRef.new(shape: ConfigurationsExportId, location_name: "exportId"))
@@ -583,6 +620,10 @@ module Aws::ApplicationDiscoveryService
     UpdateApplicationRequest.struct_class = Types::UpdateApplicationRequest
 
     UpdateApplicationResponse.struct_class = Types::UpdateApplicationResponse
+
+    UsageMetricBasis.add_member(:name, Shapes::ShapeRef.new(shape: UsageMetricBasisName, location_name: "name"))
+    UsageMetricBasis.add_member(:percentage_adjust, Shapes::ShapeRef.new(shape: UsageMetricPercentageAdjust, location_name: "percentageAdjust"))
+    UsageMetricBasis.struct_class = Types::UsageMetricBasis
 
 
     # @api private

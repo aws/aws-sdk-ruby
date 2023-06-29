@@ -98,6 +98,10 @@ module Aws::RolesAnywhere
             Aws::RolesAnywhere::Endpoints::ListTagsForResource.build(context)
           when :list_trust_anchors
             Aws::RolesAnywhere::Endpoints::ListTrustAnchors.build(context)
+          when :put_notification_settings
+            Aws::RolesAnywhere::Endpoints::PutNotificationSettings.build(context)
+          when :reset_notification_settings
+            Aws::RolesAnywhere::Endpoints::ResetNotificationSettings.build(context)
           when :tag_resource
             Aws::RolesAnywhere::Endpoints::TagResource.build(context)
           when :untag_resource

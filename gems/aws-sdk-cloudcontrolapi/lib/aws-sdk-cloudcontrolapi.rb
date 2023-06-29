@@ -53,6 +53,6 @@ require_relative 'aws-sdk-cloudcontrolapi/customizations'
 # @!group service
 module Aws::CloudControlApi
 
-  GEM_VERSION = '1.10.0'
+  GEM_VERSION = '1.13.0'
 
 end

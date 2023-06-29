@@ -9,6 +9,7 @@
 
 
 module Aws::OpenSearchService
+  # @api private
   module Endpoints
 
     class AcceptInboundConnection

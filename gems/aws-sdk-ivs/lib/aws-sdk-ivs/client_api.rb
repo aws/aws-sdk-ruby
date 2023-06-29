@@ -21,6 +21,12 @@ module Aws::IVS
     BatchGetChannelResponse = Shapes::StructureShape.new(name: 'BatchGetChannelResponse')
     BatchGetStreamKeyRequest = Shapes::StructureShape.new(name: 'BatchGetStreamKeyRequest')
     BatchGetStreamKeyResponse = Shapes::StructureShape.new(name: 'BatchGetStreamKeyResponse')
+    BatchStartViewerSessionRevocationError = Shapes::StructureShape.new(name: 'BatchStartViewerSessionRevocationError')
+    BatchStartViewerSessionRevocationErrors = Shapes::ListShape.new(name: 'BatchStartViewerSessionRevocationErrors')
+    BatchStartViewerSessionRevocationRequest = Shapes::StructureShape.new(name: 'BatchStartViewerSessionRevocationRequest')
+    BatchStartViewerSessionRevocationResponse = Shapes::StructureShape.new(name: 'BatchStartViewerSessionRevocationResponse')
+    BatchStartViewerSessionRevocationViewerSession = Shapes::StructureShape.new(name: 'BatchStartViewerSessionRevocationViewerSession')
+    BatchStartViewerSessionRevocationViewerSessionList = Shapes::ListShape.new(name: 'BatchStartViewerSessionRevocationViewerSessionList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     Channel = Shapes::StructureShape.new(name: 'Channel')
     ChannelArn = Shapes::StringShape.new(name: 'ChannelArn')
@@ -109,6 +115,8 @@ module Aws::IVS
     S3DestinationBucketName = Shapes::StringShape.new(name: 'S3DestinationBucketName')
     S3DestinationConfiguration = Shapes::StructureShape.new(name: 'S3DestinationConfiguration')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    StartViewerSessionRevocationRequest = Shapes::StructureShape.new(name: 'StartViewerSessionRevocationRequest')
+    StartViewerSessionRevocationResponse = Shapes::StructureShape.new(name: 'StartViewerSessionRevocationResponse')
     StopStreamRequest = Shapes::StructureShape.new(name: 'StopStreamRequest')
     StopStreamResponse = Shapes::StructureShape.new(name: 'StopStreamResponse')
     Stream = Shapes::StructureShape.new(name: 'Stream')
@@ -145,12 +153,15 @@ module Aws::IVS
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     ThumbnailConfiguration = Shapes::StructureShape.new(name: 'ThumbnailConfiguration')
     Time = Shapes::TimestampShape.new(name: 'Time', timestampFormat: "iso8601")
+    TranscodePreset = Shapes::StringShape.new(name: 'TranscodePreset')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateChannelRequest = Shapes::StructureShape.new(name: 'UpdateChannelRequest')
     UpdateChannelResponse = Shapes::StructureShape.new(name: 'UpdateChannelResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     VideoConfiguration = Shapes::StructureShape.new(name: 'VideoConfiguration')
+    ViewerId = Shapes::StringShape.new(name: 'ViewerId')
+    ViewerSessionVersion = Shapes::IntegerShape.new(name: 'ViewerSessionVersion')
     errorCode = Shapes::StringShape.new(name: 'errorCode')
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
 
@@ -184,6 +195,27 @@ module Aws::IVS
     BatchGetStreamKeyResponse.add_member(:stream_keys, Shapes::ShapeRef.new(shape: StreamKeys, location_name: "streamKeys"))
     BatchGetStreamKeyResponse.struct_class = Types::BatchGetStreamKeyResponse
 
+    BatchStartViewerSessionRevocationError.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, required: true, location_name: "channelArn"))
+    BatchStartViewerSessionRevocationError.add_member(:code, Shapes::ShapeRef.new(shape: errorCode, location_name: "code"))
+    BatchStartViewerSessionRevocationError.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    BatchStartViewerSessionRevocationError.add_member(:viewer_id, Shapes::ShapeRef.new(shape: ViewerId, required: true, location_name: "viewerId"))
+    BatchStartViewerSessionRevocationError.struct_class = Types::BatchStartViewerSessionRevocationError
+
+    BatchStartViewerSessionRevocationErrors.member = Shapes::ShapeRef.new(shape: BatchStartViewerSessionRevocationError)
+
+    BatchStartViewerSessionRevocationRequest.add_member(:viewer_sessions, Shapes::ShapeRef.new(shape: BatchStartViewerSessionRevocationViewerSessionList, required: true, location_name: "viewerSessions"))
+    BatchStartViewerSessionRevocationRequest.struct_class = Types::BatchStartViewerSessionRevocationRequest
+
+    BatchStartViewerSessionRevocationResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchStartViewerSessionRevocationErrors, location_name: "errors"))
+    BatchStartViewerSessionRevocationResponse.struct_class = Types::BatchStartViewerSessionRevocationResponse
+
+    BatchStartViewerSessionRevocationViewerSession.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, required: true, location_name: "channelArn"))
+    BatchStartViewerSessionRevocationViewerSession.add_member(:viewer_id, Shapes::ShapeRef.new(shape: ViewerId, required: true, location_name: "viewerId"))
+    BatchStartViewerSessionRevocationViewerSession.add_member(:viewer_session_versions_less_than_or_equal_to, Shapes::ShapeRef.new(shape: ViewerSessionVersion, location_name: "viewerSessionVersionsLessThanOrEqualTo"))
+    BatchStartViewerSessionRevocationViewerSession.struct_class = Types::BatchStartViewerSessionRevocationViewerSession
+
+    BatchStartViewerSessionRevocationViewerSessionList.member = Shapes::ShapeRef.new(shape: BatchStartViewerSessionRevocationViewerSession)
+
     Channel.add_member(:arn, Shapes::ShapeRef.new(shape: ChannelArn, location_name: "arn"))
     Channel.add_member(:authorized, Shapes::ShapeRef.new(shape: IsAuthorized, location_name: "authorized"))
     Channel.add_member(:ingest_endpoint, Shapes::ShapeRef.new(shape: IngestEndpoint, location_name: "ingestEndpoint"))
@@ -191,6 +223,7 @@ module Aws::IVS
     Channel.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
     Channel.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
     Channel.add_member(:playback_url, Shapes::ShapeRef.new(shape: PlaybackURL, location_name: "playbackUrl"))
+    Channel.add_member(:preset, Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
     Channel.add_member(:recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
     Channel.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     Channel.add_member(:type, Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
@@ -208,8 +241,10 @@ module Aws::IVS
     ChannelSummary.add_member(:insecure_ingest, Shapes::ShapeRef.new(shape: InsecureIngest, location_name: "insecureIngest"))
     ChannelSummary.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
     ChannelSummary.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
+    ChannelSummary.add_member(:preset, Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
     ChannelSummary.add_member(:recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
     ChannelSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    ChannelSummary.add_member(:type, Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
     ChannelSummary.struct_class = Types::ChannelSummary
 
     Channels.member = Shapes::ShapeRef.new(shape: Channel)
@@ -221,6 +256,7 @@ module Aws::IVS
     CreateChannelRequest.add_member(:insecure_ingest, Shapes::ShapeRef.new(shape: Boolean, location_name: "insecureIngest"))
     CreateChannelRequest.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
     CreateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
+    CreateChannelRequest.add_member(:preset, Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
     CreateChannelRequest.add_member(:recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
     CreateChannelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateChannelRequest.add_member(:type, Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
@@ -422,6 +458,13 @@ module Aws::IVS
     ServiceQuotaExceededException.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
+    StartViewerSessionRevocationRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, required: true, location_name: "channelArn"))
+    StartViewerSessionRevocationRequest.add_member(:viewer_id, Shapes::ShapeRef.new(shape: ViewerId, required: true, location_name: "viewerId"))
+    StartViewerSessionRevocationRequest.add_member(:viewer_session_versions_less_than_or_equal_to, Shapes::ShapeRef.new(shape: ViewerSessionVersion, location_name: "viewerSessionVersionsLessThanOrEqualTo"))
+    StartViewerSessionRevocationRequest.struct_class = Types::StartViewerSessionRevocationRequest
+
+    StartViewerSessionRevocationResponse.struct_class = Types::StartViewerSessionRevocationResponse
+
     StopStreamRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, required: true, location_name: "channelArn"))
     StopStreamRequest.struct_class = Types::StopStreamRequest
 
@@ -522,6 +565,7 @@ module Aws::IVS
     UpdateChannelRequest.add_member(:insecure_ingest, Shapes::ShapeRef.new(shape: Boolean, location_name: "insecureIngest"))
     UpdateChannelRequest.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
     UpdateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
+    UpdateChannelRequest.add_member(:preset, Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
     UpdateChannelRequest.add_member(:recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
     UpdateChannelRequest.add_member(:type, Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
     UpdateChannelRequest.struct_class = Types::UpdateChannelRequest
@@ -575,6 +619,15 @@ module Aws::IVS
         o.http_request_uri = "/BatchGetStreamKey"
         o.input = Shapes::ShapeRef.new(shape: BatchGetStreamKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: BatchGetStreamKeyResponse)
+      end)
+
+      api.add_operation(:batch_start_viewer_session_revocation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchStartViewerSessionRevocation"
+        o.http_method = "POST"
+        o.http_request_uri = "/BatchStartViewerSessionRevocation"
+        o.input = Shapes::ShapeRef.new(shape: BatchStartViewerSessionRevocationRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchStartViewerSessionRevocationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:create_channel, Seahorse::Model::Operation.new.tap do |o|
@@ -869,6 +922,18 @@ module Aws::IVS
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ChannelNotBroadcasting)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:start_viewer_session_revocation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartViewerSessionRevocation"
+        o.http_method = "POST"
+        o.http_request_uri = "/StartViewerSessionRevocation"
+        o.input = Shapes::ShapeRef.new(shape: StartViewerSessionRevocationRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartViewerSessionRevocationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 

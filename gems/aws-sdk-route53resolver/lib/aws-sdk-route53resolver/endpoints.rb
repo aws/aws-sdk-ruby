@@ -9,6 +9,7 @@
 
 
 module Aws::Route53Resolver
+  # @api private
   module Endpoints
 
     class AssociateFirewallRuleGroup

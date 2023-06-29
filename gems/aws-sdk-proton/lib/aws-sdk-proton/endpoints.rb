@@ -9,6 +9,7 @@
 
 
 module Aws::Proton
+  # @api private
   module Endpoints
 
     class AcceptEnvironmentAccountConnection

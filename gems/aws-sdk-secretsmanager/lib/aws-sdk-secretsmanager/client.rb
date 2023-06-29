@@ -275,6 +275,11 @@ module Aws::SecretsManager
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -908,6 +913,9 @@ module Aws::SecretsManager
     #   is permanently deleted. If you delete a secret and then immediately
     #   create a secret with the same name, use appropriate back off and retry
     #   logic.
+    #
+    #   If you forcibly delete an already deleted or nonexistent secret, the
+    #   operation does not return `ResourceNotFoundException`.
     #
     #   Use this parameter with caution. This parameter causes the operation
     #   to skip the normal recovery window before the permanent deletion that
@@ -3080,7 +3088,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

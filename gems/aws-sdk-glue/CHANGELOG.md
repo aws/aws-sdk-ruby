@@ -1,6 +1,56 @@
 Unreleased Changes
 ------------------
 
+1.144.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.143.0 (2023-06-26)
+------------------
+
+* Feature - Timestamp Starting Position For Kinesis and Kafka Data Sources in a Glue Streaming Job
+
+1.142.0 (2023-06-19)
+------------------
+
+* Feature - This release adds support for creating cross region table/database resource links
+
+1.141.0 (2023-06-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.140.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.139.0 (2023-05-30)
+------------------
+
+* Feature - Added Runtime parameter to allow selection of Ray Runtime
+
+1.138.0 (2023-05-25)
+------------------
+
+* Feature - Added ability to create data quality rulesets for shared, cross-account Glue Data Catalog tables. Added support for dataset comparison rules through a new parameter called AdditionalDataSources. Enhanced the data quality results with a map containing profiled metric values.
+
+1.137.0 (2023-05-16)
+------------------
+
+* Feature - Add Support for Tags for Custom Entity Types
+
+1.136.0 (2023-05-09)
+------------------
+
+* Feature - This release adds AmazonRedshift Source and Target nodes in addition to DynamicTransform OutputSchemas
+
+1.135.0 (2023-05-08)
+------------------
+
+* Feature - Support large worker types G.4x and G.8x for Glue Spark.
+
 1.134.0 (2023-04-03)
 ------------------
 

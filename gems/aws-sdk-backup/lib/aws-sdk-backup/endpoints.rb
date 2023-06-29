@@ -9,6 +9,7 @@
 
 
 module Aws::Backup
+  # @api private
   module Endpoints
 
     class CancelLegalHold

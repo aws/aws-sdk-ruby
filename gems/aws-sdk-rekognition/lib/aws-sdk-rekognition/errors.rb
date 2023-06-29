@@ -28,6 +28,7 @@ module Aws::Rekognition
   #
   # ## Error Classes
   # * {AccessDeniedException}
+  # * {ConflictException}
   # * {HumanLoopQuotaExceededException}
   # * {IdempotentParameterMismatchException}
   # * {ImageTooLargeException}
@@ -60,6 +61,16 @@ module Aws::Rekognition
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Rekognition::Types::AccessDeniedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Rekognition::Types::ConflictException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

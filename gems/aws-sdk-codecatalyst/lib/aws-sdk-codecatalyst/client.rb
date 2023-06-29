@@ -275,6 +275,11 @@ module Aws::CodeCatalyst
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -992,6 +997,64 @@ module Aws::CodeCatalyst
       req.send_request(options)
     end
 
+    # Retrieves a list of active sessions for a Dev Environment in a
+    # project.
+    #
+    # @option params [required, String] :space_name
+    #   The name of the space.
+    #
+    # @option params [required, String] :project_name
+    #   The name of the project in the space.
+    #
+    # @option params [required, String] :dev_environment_id
+    #   The system-generated unique ID of the Dev Environment.
+    #
+    # @option params [String] :next_token
+    #   A token returned from a call to this API to indicate the next batch of
+    #   results to return, if any.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to show in a single call to this API. If
+    #   the number of results is larger than the number you specified, the
+    #   response will include a `NextToken` element, which you can use to
+    #   obtain additional results.
+    #
+    # @return [Types::ListDevEnvironmentSessionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDevEnvironmentSessionsResponse#items #items} => Array&lt;Types::DevEnvironmentSessionSummary&gt;
+    #   * {Types::ListDevEnvironmentSessionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_dev_environment_sessions({
+    #     space_name: "NameString", # required
+    #     project_name: "NameString", # required
+    #     dev_environment_id: "Uuid", # required
+    #     next_token: "ListDevEnvironmentSessionsRequestNextTokenString",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].space_name #=> String
+    #   resp.items[0].project_name #=> String
+    #   resp.items[0].dev_environment_id #=> String
+    #   resp.items[0].started_time #=> Time
+    #   resp.items[0].id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/ListDevEnvironmentSessions AWS API Documentation
+    #
+    # @overload list_dev_environment_sessions(params = {})
+    # @param [Hash] params ({})
+    def list_dev_environment_sessions(params = {}, options = {})
+      req = build_request(:list_dev_environment_sessions, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of Dev Environments in a project.
     #
     # @option params [required, String] :space_name
@@ -1701,7 +1764,7 @@ module Aws::CodeCatalyst
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codecatalyst'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

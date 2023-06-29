@@ -9,6 +9,7 @@
 
 
 module Aws::ConfigService
+  # @api private
   module Endpoints
 
     class BatchGetAggregateResourceConfig

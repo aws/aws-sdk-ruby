@@ -24,28 +24,39 @@ module Aws::States
     ActivitySucceededEventDetails = Shapes::StructureShape.new(name: 'ActivitySucceededEventDetails')
     ActivityTimedOutEventDetails = Shapes::StructureShape.new(name: 'ActivityTimedOutEventDetails')
     ActivityWorkerLimitExceeded = Shapes::StructureShape.new(name: 'ActivityWorkerLimitExceeded')
+    AliasDescription = Shapes::StringShape.new(name: 'AliasDescription')
     Arn = Shapes::StringShape.new(name: 'Arn')
     BilledDuration = Shapes::IntegerShape.new(name: 'BilledDuration')
     BilledMemoryUsed = Shapes::IntegerShape.new(name: 'BilledMemoryUsed')
     BillingDetails = Shapes::StructureShape.new(name: 'BillingDetails')
+    CharacterRestrictedName = Shapes::StringShape.new(name: 'CharacterRestrictedName')
     CloudWatchEventsExecutionDataDetails = Shapes::StructureShape.new(name: 'CloudWatchEventsExecutionDataDetails')
     CloudWatchLogsLogGroup = Shapes::StructureShape.new(name: 'CloudWatchLogsLogGroup')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectorParameters = Shapes::StringShape.new(name: 'ConnectorParameters')
     CreateActivityInput = Shapes::StructureShape.new(name: 'CreateActivityInput')
     CreateActivityOutput = Shapes::StructureShape.new(name: 'CreateActivityOutput')
+    CreateStateMachineAliasInput = Shapes::StructureShape.new(name: 'CreateStateMachineAliasInput')
+    CreateStateMachineAliasOutput = Shapes::StructureShape.new(name: 'CreateStateMachineAliasOutput')
     CreateStateMachineInput = Shapes::StructureShape.new(name: 'CreateStateMachineInput')
     CreateStateMachineOutput = Shapes::StructureShape.new(name: 'CreateStateMachineOutput')
     Definition = Shapes::StringShape.new(name: 'Definition')
     DeleteActivityInput = Shapes::StructureShape.new(name: 'DeleteActivityInput')
     DeleteActivityOutput = Shapes::StructureShape.new(name: 'DeleteActivityOutput')
+    DeleteStateMachineAliasInput = Shapes::StructureShape.new(name: 'DeleteStateMachineAliasInput')
+    DeleteStateMachineAliasOutput = Shapes::StructureShape.new(name: 'DeleteStateMachineAliasOutput')
     DeleteStateMachineInput = Shapes::StructureShape.new(name: 'DeleteStateMachineInput')
     DeleteStateMachineOutput = Shapes::StructureShape.new(name: 'DeleteStateMachineOutput')
+    DeleteStateMachineVersionInput = Shapes::StructureShape.new(name: 'DeleteStateMachineVersionInput')
+    DeleteStateMachineVersionOutput = Shapes::StructureShape.new(name: 'DeleteStateMachineVersionOutput')
     DescribeActivityInput = Shapes::StructureShape.new(name: 'DescribeActivityInput')
     DescribeActivityOutput = Shapes::StructureShape.new(name: 'DescribeActivityOutput')
     DescribeExecutionInput = Shapes::StructureShape.new(name: 'DescribeExecutionInput')
     DescribeExecutionOutput = Shapes::StructureShape.new(name: 'DescribeExecutionOutput')
     DescribeMapRunInput = Shapes::StructureShape.new(name: 'DescribeMapRunInput')
     DescribeMapRunOutput = Shapes::StructureShape.new(name: 'DescribeMapRunOutput')
+    DescribeStateMachineAliasInput = Shapes::StructureShape.new(name: 'DescribeStateMachineAliasInput')
+    DescribeStateMachineAliasOutput = Shapes::StructureShape.new(name: 'DescribeStateMachineAliasOutput')
     DescribeStateMachineForExecutionInput = Shapes::StructureShape.new(name: 'DescribeStateMachineForExecutionInput')
     DescribeStateMachineForExecutionOutput = Shapes::StructureShape.new(name: 'DescribeStateMachineForExecutionOutput')
     DescribeStateMachineInput = Shapes::StructureShape.new(name: 'DescribeStateMachineInput')
@@ -96,6 +107,10 @@ module Aws::States
     ListExecutionsPageToken = Shapes::StringShape.new(name: 'ListExecutionsPageToken')
     ListMapRunsInput = Shapes::StructureShape.new(name: 'ListMapRunsInput')
     ListMapRunsOutput = Shapes::StructureShape.new(name: 'ListMapRunsOutput')
+    ListStateMachineAliasesInput = Shapes::StructureShape.new(name: 'ListStateMachineAliasesInput')
+    ListStateMachineAliasesOutput = Shapes::StructureShape.new(name: 'ListStateMachineAliasesOutput')
+    ListStateMachineVersionsInput = Shapes::StructureShape.new(name: 'ListStateMachineVersionsInput')
+    ListStateMachineVersionsOutput = Shapes::StructureShape.new(name: 'ListStateMachineVersionsOutput')
     ListStateMachinesInput = Shapes::StructureShape.new(name: 'ListStateMachinesInput')
     ListStateMachinesOutput = Shapes::StructureShape.new(name: 'ListStateMachinesOutput')
     ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
@@ -120,8 +135,14 @@ module Aws::States
     Name = Shapes::StringShape.new(name: 'Name')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     PageToken = Shapes::StringShape.new(name: 'PageToken')
+    Publish = Shapes::BooleanShape.new(name: 'Publish')
+    PublishStateMachineVersionInput = Shapes::StructureShape.new(name: 'PublishStateMachineVersionInput')
+    PublishStateMachineVersionOutput = Shapes::StructureShape.new(name: 'PublishStateMachineVersionOutput')
     ResourceNotFound = Shapes::StructureShape.new(name: 'ResourceNotFound')
     ReverseOrder = Shapes::BooleanShape.new(name: 'ReverseOrder')
+    RevisionId = Shapes::StringShape.new(name: 'RevisionId')
+    RoutingConfigurationList = Shapes::ListShape.new(name: 'RoutingConfigurationList')
+    RoutingConfigurationListItem = Shapes::StructureShape.new(name: 'RoutingConfigurationListItem')
     SendTaskFailureInput = Shapes::StructureShape.new(name: 'SendTaskFailureInput')
     SendTaskFailureOutput = Shapes::StructureShape.new(name: 'SendTaskFailureOutput')
     SendTaskHeartbeatInput = Shapes::StructureShape.new(name: 'SendTaskHeartbeatInput')
@@ -132,12 +153,15 @@ module Aws::States
     SensitiveData = Shapes::StringShape.new(name: 'SensitiveData')
     SensitiveDataJobInput = Shapes::StringShape.new(name: 'SensitiveDataJobInput')
     SensitiveError = Shapes::StringShape.new(name: 'SensitiveError')
+    ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     StartExecutionInput = Shapes::StructureShape.new(name: 'StartExecutionInput')
     StartExecutionOutput = Shapes::StructureShape.new(name: 'StartExecutionOutput')
     StartSyncExecutionInput = Shapes::StructureShape.new(name: 'StartSyncExecutionInput')
     StartSyncExecutionOutput = Shapes::StructureShape.new(name: 'StartSyncExecutionOutput')
     StateEnteredEventDetails = Shapes::StructureShape.new(name: 'StateEnteredEventDetails')
     StateExitedEventDetails = Shapes::StructureShape.new(name: 'StateExitedEventDetails')
+    StateMachineAliasList = Shapes::ListShape.new(name: 'StateMachineAliasList')
+    StateMachineAliasListItem = Shapes::StructureShape.new(name: 'StateMachineAliasListItem')
     StateMachineAlreadyExists = Shapes::StructureShape.new(name: 'StateMachineAlreadyExists')
     StateMachineDeleting = Shapes::StructureShape.new(name: 'StateMachineDeleting')
     StateMachineDoesNotExist = Shapes::StructureShape.new(name: 'StateMachineDoesNotExist')
@@ -147,6 +171,8 @@ module Aws::States
     StateMachineStatus = Shapes::StringShape.new(name: 'StateMachineStatus')
     StateMachineType = Shapes::StringShape.new(name: 'StateMachineType')
     StateMachineTypeNotSupported = Shapes::StructureShape.new(name: 'StateMachineTypeNotSupported')
+    StateMachineVersionList = Shapes::ListShape.new(name: 'StateMachineVersionList')
+    StateMachineVersionListItem = Shapes::StructureShape.new(name: 'StateMachineVersionListItem')
     StopExecutionInput = Shapes::StructureShape.new(name: 'StopExecutionInput')
     StopExecutionOutput = Shapes::StructureShape.new(name: 'StopExecutionOutput')
     SyncExecutionStatus = Shapes::StringShape.new(name: 'SyncExecutionStatus')
@@ -182,10 +208,14 @@ module Aws::States
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     UpdateMapRunInput = Shapes::StructureShape.new(name: 'UpdateMapRunInput')
     UpdateMapRunOutput = Shapes::StructureShape.new(name: 'UpdateMapRunOutput')
+    UpdateStateMachineAliasInput = Shapes::StructureShape.new(name: 'UpdateStateMachineAliasInput')
+    UpdateStateMachineAliasOutput = Shapes::StructureShape.new(name: 'UpdateStateMachineAliasOutput')
     UpdateStateMachineInput = Shapes::StructureShape.new(name: 'UpdateStateMachineInput')
     UpdateStateMachineOutput = Shapes::StructureShape.new(name: 'UpdateStateMachineOutput')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
+    VersionDescription = Shapes::StringShape.new(name: 'VersionDescription')
+    VersionWeight = Shapes::IntegerShape.new(name: 'VersionWeight')
     includedDetails = Shapes::BooleanShape.new(name: 'includedDetails')
     truncated = Shapes::BooleanShape.new(name: 'truncated')
 
@@ -241,6 +271,9 @@ module Aws::States
     CloudWatchLogsLogGroup.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "logGroupArn"))
     CloudWatchLogsLogGroup.struct_class = Types::CloudWatchLogsLogGroup
 
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ConflictException.struct_class = Types::ConflictException
+
     CreateActivityInput.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateActivityInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateActivityInput.struct_class = Types::CreateActivityInput
@@ -249,6 +282,15 @@ module Aws::States
     CreateActivityOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDate"))
     CreateActivityOutput.struct_class = Types::CreateActivityOutput
 
+    CreateStateMachineAliasInput.add_member(:description, Shapes::ShapeRef.new(shape: AliasDescription, location_name: "description"))
+    CreateStateMachineAliasInput.add_member(:name, Shapes::ShapeRef.new(shape: CharacterRestrictedName, required: true, location_name: "name"))
+    CreateStateMachineAliasInput.add_member(:routing_configuration, Shapes::ShapeRef.new(shape: RoutingConfigurationList, required: true, location_name: "routingConfiguration"))
+    CreateStateMachineAliasInput.struct_class = Types::CreateStateMachineAliasInput
+
+    CreateStateMachineAliasOutput.add_member(:state_machine_alias_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineAliasArn"))
+    CreateStateMachineAliasOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDate"))
+    CreateStateMachineAliasOutput.struct_class = Types::CreateStateMachineAliasOutput
+
     CreateStateMachineInput.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateStateMachineInput.add_member(:definition, Shapes::ShapeRef.new(shape: Definition, required: true, location_name: "definition"))
     CreateStateMachineInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "roleArn"))
@@ -256,10 +298,13 @@ module Aws::States
     CreateStateMachineInput.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "loggingConfiguration"))
     CreateStateMachineInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateStateMachineInput.add_member(:tracing_configuration, Shapes::ShapeRef.new(shape: TracingConfiguration, location_name: "tracingConfiguration"))
+    CreateStateMachineInput.add_member(:publish, Shapes::ShapeRef.new(shape: Publish, location_name: "publish"))
+    CreateStateMachineInput.add_member(:version_description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "versionDescription"))
     CreateStateMachineInput.struct_class = Types::CreateStateMachineInput
 
     CreateStateMachineOutput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
     CreateStateMachineOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDate"))
+    CreateStateMachineOutput.add_member(:state_machine_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "stateMachineVersionArn"))
     CreateStateMachineOutput.struct_class = Types::CreateStateMachineOutput
 
     DeleteActivityInput.add_member(:activity_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "activityArn"))
@@ -267,10 +312,20 @@ module Aws::States
 
     DeleteActivityOutput.struct_class = Types::DeleteActivityOutput
 
+    DeleteStateMachineAliasInput.add_member(:state_machine_alias_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineAliasArn"))
+    DeleteStateMachineAliasInput.struct_class = Types::DeleteStateMachineAliasInput
+
+    DeleteStateMachineAliasOutput.struct_class = Types::DeleteStateMachineAliasOutput
+
     DeleteStateMachineInput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
     DeleteStateMachineInput.struct_class = Types::DeleteStateMachineInput
 
     DeleteStateMachineOutput.struct_class = Types::DeleteStateMachineOutput
+
+    DeleteStateMachineVersionInput.add_member(:state_machine_version_arn, Shapes::ShapeRef.new(shape: LongArn, required: true, location_name: "stateMachineVersionArn"))
+    DeleteStateMachineVersionInput.struct_class = Types::DeleteStateMachineVersionInput
+
+    DeleteStateMachineVersionOutput.struct_class = Types::DeleteStateMachineVersionOutput
 
     DescribeActivityInput.add_member(:activity_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "activityArn"))
     DescribeActivityInput.struct_class = Types::DescribeActivityInput
@@ -297,6 +352,8 @@ module Aws::States
     DescribeExecutionOutput.add_member(:map_run_arn, Shapes::ShapeRef.new(shape: LongArn, location_name: "mapRunArn"))
     DescribeExecutionOutput.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
     DescribeExecutionOutput.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
+    DescribeExecutionOutput.add_member(:state_machine_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "stateMachineVersionArn"))
+    DescribeExecutionOutput.add_member(:state_machine_alias_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "stateMachineAliasArn"))
     DescribeExecutionOutput.struct_class = Types::DescribeExecutionOutput
 
     DescribeMapRunInput.add_member(:map_run_arn, Shapes::ShapeRef.new(shape: LongArn, required: true, location_name: "mapRunArn"))
@@ -314,6 +371,17 @@ module Aws::States
     DescribeMapRunOutput.add_member(:execution_counts, Shapes::ShapeRef.new(shape: MapRunExecutionCounts, required: true, location_name: "executionCounts"))
     DescribeMapRunOutput.struct_class = Types::DescribeMapRunOutput
 
+    DescribeStateMachineAliasInput.add_member(:state_machine_alias_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineAliasArn"))
+    DescribeStateMachineAliasInput.struct_class = Types::DescribeStateMachineAliasInput
+
+    DescribeStateMachineAliasOutput.add_member(:state_machine_alias_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "stateMachineAliasArn"))
+    DescribeStateMachineAliasOutput.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    DescribeStateMachineAliasOutput.add_member(:description, Shapes::ShapeRef.new(shape: AliasDescription, location_name: "description"))
+    DescribeStateMachineAliasOutput.add_member(:routing_configuration, Shapes::ShapeRef.new(shape: RoutingConfigurationList, location_name: "routingConfiguration"))
+    DescribeStateMachineAliasOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDate"))
+    DescribeStateMachineAliasOutput.add_member(:update_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updateDate"))
+    DescribeStateMachineAliasOutput.struct_class = Types::DescribeStateMachineAliasOutput
+
     DescribeStateMachineForExecutionInput.add_member(:execution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "executionArn"))
     DescribeStateMachineForExecutionInput.struct_class = Types::DescribeStateMachineForExecutionInput
 
@@ -326,6 +394,7 @@ module Aws::States
     DescribeStateMachineForExecutionOutput.add_member(:tracing_configuration, Shapes::ShapeRef.new(shape: TracingConfiguration, location_name: "tracingConfiguration"))
     DescribeStateMachineForExecutionOutput.add_member(:map_run_arn, Shapes::ShapeRef.new(shape: LongArn, location_name: "mapRunArn"))
     DescribeStateMachineForExecutionOutput.add_member(:label, Shapes::ShapeRef.new(shape: MapRunLabel, location_name: "label"))
+    DescribeStateMachineForExecutionOutput.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId"))
     DescribeStateMachineForExecutionOutput.struct_class = Types::DescribeStateMachineForExecutionOutput
 
     DescribeStateMachineInput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
@@ -341,6 +410,8 @@ module Aws::States
     DescribeStateMachineOutput.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "loggingConfiguration"))
     DescribeStateMachineOutput.add_member(:tracing_configuration, Shapes::ShapeRef.new(shape: TracingConfiguration, location_name: "tracingConfiguration"))
     DescribeStateMachineOutput.add_member(:label, Shapes::ShapeRef.new(shape: MapRunLabel, location_name: "label"))
+    DescribeStateMachineOutput.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId"))
+    DescribeStateMachineOutput.add_member(:description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "description"))
     DescribeStateMachineOutput.struct_class = Types::DescribeStateMachineOutput
 
     ExecutionAbortedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
@@ -370,11 +441,15 @@ module Aws::States
     ExecutionListItem.add_member(:stop_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "stopDate"))
     ExecutionListItem.add_member(:map_run_arn, Shapes::ShapeRef.new(shape: LongArn, location_name: "mapRunArn"))
     ExecutionListItem.add_member(:item_count, Shapes::ShapeRef.new(shape: UnsignedInteger, location_name: "itemCount", metadata: {"box"=>true}))
+    ExecutionListItem.add_member(:state_machine_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "stateMachineVersionArn"))
+    ExecutionListItem.add_member(:state_machine_alias_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "stateMachineAliasArn"))
     ExecutionListItem.struct_class = Types::ExecutionListItem
 
     ExecutionStartedEventDetails.add_member(:input, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "input"))
     ExecutionStartedEventDetails.add_member(:input_details, Shapes::ShapeRef.new(shape: HistoryEventExecutionDataDetails, location_name: "inputDetails"))
     ExecutionStartedEventDetails.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "roleArn"))
+    ExecutionStartedEventDetails.add_member(:state_machine_alias_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "stateMachineAliasArn"))
+    ExecutionStartedEventDetails.add_member(:state_machine_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "stateMachineVersionArn"))
     ExecutionStartedEventDetails.struct_class = Types::ExecutionStartedEventDetails
 
     ExecutionSucceededEventDetails.add_member(:output, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "output"))
@@ -528,6 +603,24 @@ module Aws::States
     ListMapRunsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
     ListMapRunsOutput.struct_class = Types::ListMapRunsOutput
 
+    ListStateMachineAliasesInput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
+    ListStateMachineAliasesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    ListStateMachineAliasesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "maxResults"))
+    ListStateMachineAliasesInput.struct_class = Types::ListStateMachineAliasesInput
+
+    ListStateMachineAliasesOutput.add_member(:state_machine_aliases, Shapes::ShapeRef.new(shape: StateMachineAliasList, required: true, location_name: "stateMachineAliases"))
+    ListStateMachineAliasesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    ListStateMachineAliasesOutput.struct_class = Types::ListStateMachineAliasesOutput
+
+    ListStateMachineVersionsInput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
+    ListStateMachineVersionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    ListStateMachineVersionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "maxResults"))
+    ListStateMachineVersionsInput.struct_class = Types::ListStateMachineVersionsInput
+
+    ListStateMachineVersionsOutput.add_member(:state_machine_versions, Shapes::ShapeRef.new(shape: StateMachineVersionList, required: true, location_name: "stateMachineVersions"))
+    ListStateMachineVersionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    ListStateMachineVersionsOutput.struct_class = Types::ListStateMachineVersionsOutput
+
     ListStateMachinesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "maxResults"))
     ListStateMachinesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
     ListStateMachinesInput.struct_class = Types::ListStateMachinesInput
@@ -598,9 +691,24 @@ module Aws::States
     MissingRequiredParameter.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     MissingRequiredParameter.struct_class = Types::MissingRequiredParameter
 
+    PublishStateMachineVersionInput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
+    PublishStateMachineVersionInput.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId"))
+    PublishStateMachineVersionInput.add_member(:description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "description"))
+    PublishStateMachineVersionInput.struct_class = Types::PublishStateMachineVersionInput
+
+    PublishStateMachineVersionOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDate"))
+    PublishStateMachineVersionOutput.add_member(:state_machine_version_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineVersionArn"))
+    PublishStateMachineVersionOutput.struct_class = Types::PublishStateMachineVersionOutput
+
     ResourceNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ResourceNotFound.add_member(:resource_name, Shapes::ShapeRef.new(shape: Arn, location_name: "resourceName"))
     ResourceNotFound.struct_class = Types::ResourceNotFound
+
+    RoutingConfigurationList.member = Shapes::ShapeRef.new(shape: RoutingConfigurationListItem)
+
+    RoutingConfigurationListItem.add_member(:state_machine_version_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineVersionArn"))
+    RoutingConfigurationListItem.add_member(:weight, Shapes::ShapeRef.new(shape: VersionWeight, required: true, location_name: "weight"))
+    RoutingConfigurationListItem.struct_class = Types::RoutingConfigurationListItem
 
     SendTaskFailureInput.add_member(:task_token, Shapes::ShapeRef.new(shape: TaskToken, required: true, location_name: "taskToken"))
     SendTaskFailureInput.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
@@ -619,6 +727,9 @@ module Aws::States
     SendTaskSuccessInput.struct_class = Types::SendTaskSuccessInput
 
     SendTaskSuccessOutput.struct_class = Types::SendTaskSuccessOutput
+
+    ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     StartExecutionInput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
     StartExecutionInput.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
@@ -662,6 +773,12 @@ module Aws::States
     StateExitedEventDetails.add_member(:output_details, Shapes::ShapeRef.new(shape: HistoryEventExecutionDataDetails, location_name: "outputDetails"))
     StateExitedEventDetails.struct_class = Types::StateExitedEventDetails
 
+    StateMachineAliasList.member = Shapes::ShapeRef.new(shape: StateMachineAliasListItem)
+
+    StateMachineAliasListItem.add_member(:state_machine_alias_arn, Shapes::ShapeRef.new(shape: LongArn, required: true, location_name: "stateMachineAliasArn"))
+    StateMachineAliasListItem.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDate"))
+    StateMachineAliasListItem.struct_class = Types::StateMachineAliasListItem
+
     StateMachineAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     StateMachineAlreadyExists.struct_class = Types::StateMachineAlreadyExists
 
@@ -684,6 +801,12 @@ module Aws::States
 
     StateMachineTypeNotSupported.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     StateMachineTypeNotSupported.struct_class = Types::StateMachineTypeNotSupported
+
+    StateMachineVersionList.member = Shapes::ShapeRef.new(shape: StateMachineVersionListItem)
+
+    StateMachineVersionListItem.add_member(:state_machine_version_arn, Shapes::ShapeRef.new(shape: LongArn, required: true, location_name: "stateMachineVersionArn"))
+    StateMachineVersionListItem.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDate"))
+    StateMachineVersionListItem.struct_class = Types::StateMachineVersionListItem
 
     StopExecutionInput.add_member(:execution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "executionArn"))
     StopExecutionInput.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
@@ -786,14 +909,26 @@ module Aws::States
 
     UpdateMapRunOutput.struct_class = Types::UpdateMapRunOutput
 
+    UpdateStateMachineAliasInput.add_member(:state_machine_alias_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineAliasArn"))
+    UpdateStateMachineAliasInput.add_member(:description, Shapes::ShapeRef.new(shape: AliasDescription, location_name: "description"))
+    UpdateStateMachineAliasInput.add_member(:routing_configuration, Shapes::ShapeRef.new(shape: RoutingConfigurationList, location_name: "routingConfiguration"))
+    UpdateStateMachineAliasInput.struct_class = Types::UpdateStateMachineAliasInput
+
+    UpdateStateMachineAliasOutput.add_member(:update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDate"))
+    UpdateStateMachineAliasOutput.struct_class = Types::UpdateStateMachineAliasOutput
+
     UpdateStateMachineInput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
     UpdateStateMachineInput.add_member(:definition, Shapes::ShapeRef.new(shape: Definition, location_name: "definition"))
     UpdateStateMachineInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "roleArn"))
     UpdateStateMachineInput.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "loggingConfiguration"))
     UpdateStateMachineInput.add_member(:tracing_configuration, Shapes::ShapeRef.new(shape: TracingConfiguration, location_name: "tracingConfiguration"))
+    UpdateStateMachineInput.add_member(:publish, Shapes::ShapeRef.new(shape: Publish, location_name: "publish"))
+    UpdateStateMachineInput.add_member(:version_description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "versionDescription"))
     UpdateStateMachineInput.struct_class = Types::UpdateStateMachineInput
 
     UpdateStateMachineOutput.add_member(:update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDate"))
+    UpdateStateMachineOutput.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId"))
+    UpdateStateMachineOutput.add_member(:state_machine_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "stateMachineVersionArn"))
     UpdateStateMachineOutput.struct_class = Types::UpdateStateMachineOutput
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
@@ -846,6 +981,23 @@ module Aws::States
         o.errors << Shapes::ShapeRef.new(shape: StateMachineLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineTypeNotSupported)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTags)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:create_state_machine_alias, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateStateMachineAlias"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateStateMachineAliasInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateStateMachineAliasOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidName)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: StateMachineDeleting)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:delete_activity, Seahorse::Model::Operation.new.tap do |o|
@@ -865,6 +1017,29 @@ module Aws::States
         o.output = Shapes::ShapeRef.new(shape: DeleteStateMachineOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:delete_state_machine_alias, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteStateMachineAlias"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteStateMachineAliasInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteStateMachineAliasOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_state_machine_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteStateMachineVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteStateMachineVersionInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteStateMachineVersionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:describe_activity, Seahorse::Model::Operation.new.tap do |o|
@@ -905,6 +1080,17 @@ module Aws::States
         o.output = Shapes::ShapeRef.new(shape: DescribeStateMachineOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineDoesNotExist)
+      end)
+
+      api.add_operation(:describe_state_machine_alias, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeStateMachineAlias"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeStateMachineAliasInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeStateMachineAliasOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
       api.add_operation(:describe_state_machine_for_execution, Seahorse::Model::Operation.new.tap do |o|
@@ -997,6 +1183,30 @@ module Aws::States
         )
       end)
 
+      api.add_operation(:list_state_machine_aliases, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListStateMachineAliases"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListStateMachineAliasesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListStateMachineAliasesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidToken)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: StateMachineDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: StateMachineDeleting)
+      end)
+
+      api.add_operation(:list_state_machine_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListStateMachineVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListStateMachineVersionsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListStateMachineVersionsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidToken)
+      end)
+
       api.add_operation(:list_state_machines, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListStateMachines"
         o.http_method = "POST"
@@ -1020,6 +1230,20 @@ module Aws::States
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:publish_state_machine_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PublishStateMachineVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PublishStateMachineVersionInput)
+        o.output = Shapes::ShapeRef.new(shape: PublishStateMachineVersionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: StateMachineDeleting)
+        o.errors << Shapes::ShapeRef.new(shape: StateMachineDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
       end)
 
       api.add_operation(:send_task_failure, Seahorse::Model::Operation.new.tap do |o|
@@ -1145,7 +1369,21 @@ module Aws::States
         o.errors << Shapes::ShapeRef.new(shape: MissingRequiredParameter)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineDeleting)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_state_machine_alias, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateStateMachineAlias"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateStateMachineAliasInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateStateMachineAliasOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
     end
 

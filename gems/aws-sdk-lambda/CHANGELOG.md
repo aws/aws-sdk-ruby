@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2023-06-28)
+------------------
+
+* Feature - Surface ResourceConflictException in DeleteEventSourceMapping
+
+1.100.0 (2023-06-20)
+------------------
+
+* Feature - This release adds RecursiveInvocationException to the Invoke API and InvokeWithResponseStream API.
+
+1.99.0 (2023-06-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.98.0 (2023-06-05)
+------------------
+
+* Feature - Add Ruby 3.2 (ruby3.2) Runtime support to AWS Lambda.
+
+1.97.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.96.0 (2023-04-27)
 ------------------
 

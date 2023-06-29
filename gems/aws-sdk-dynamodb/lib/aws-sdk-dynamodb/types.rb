@@ -4888,6 +4888,12 @@ module Aws::DynamoDB
     #
     # There is a soft account quota of 2,500 tables.
     #
+    # GetRecords was called with a value of more than 1000 for the limit
+    # request parameter.
+    #
+    # More than 2 processes are reading from the same streams shard at the
+    # same time. Exceeding this limit may result in request throttling.
+    #
     # @!attribute [rw] message
     #   Too many operations for a given subscriber.
     #   @return [String]
@@ -5533,7 +5539,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughput.html
     #   @return [Integer]
     #
     # @!attribute [rw] write_capacity_units
@@ -5547,7 +5553,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughput.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ProvisionedThroughput AWS API Documentation

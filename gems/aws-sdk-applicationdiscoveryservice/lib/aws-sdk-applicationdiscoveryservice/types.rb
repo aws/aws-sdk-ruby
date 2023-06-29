@@ -10,20 +10,19 @@
 module Aws::ApplicationDiscoveryService
   module Types
 
-    # Information about agents or connectors that were instructed to start
-    # collecting data. Information includes the agent/connector ID, a
-    # description of the operation, and whether the agent/connector
-    # configuration was updated.
+    # Information about agents that were instructed to start collecting
+    # data. Information includes the agent ID, a description of the
+    # operation, and whether the agent configuration was updated.
     #
     # @!attribute [rw] agent_id
-    #   The agent/connector ID.
+    #   The agent ID.
     #   @return [String]
     #
     # @!attribute [rw] operation_succeeded
     #   Information about the status of the `StartDataCollection` and
     #   `StopDataCollection` operations. The system has recorded the data
-    #   collection operation. The agent/connector receives this command the
-    #   next time it polls for a new command.
+    #   collection operation. The agent receives this command the next time
+    #   it polls for a new command.
     #   @return [Boolean]
     #
     # @!attribute [rw] description
@@ -38,23 +37,22 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # Information about agents or connectors associated with the user’s
-    # Amazon Web Services account. Information includes agent or connector
-    # IDs, IP addresses, media access control (MAC) addresses, agent or
-    # connector health, hostname where the agent or connector resides, and
-    # agent version for each agent.
+    # Information about agents associated with the user’s Amazon Web
+    # Services account. Information includes agent IDs, IP addresses, media
+    # access control (MAC) addresses, agent or collector status, hostname
+    # where the agent resides, and agent version for each agent.
     #
     # @!attribute [rw] agent_id
-    #   The agent or connector ID.
+    #   The agent or collector ID.
     #   @return [String]
     #
     # @!attribute [rw] host_name
-    #   The name of the host where the agent or connector resides. The host
+    #   The name of the host where the agent or collector resides. The host
     #   can be a server or virtual machine.
     #   @return [String]
     #
     # @!attribute [rw] agent_network_info_list
-    #   Network details about the host where the agent or connector resides.
+    #   Network details about the host where the agent or collector resides.
     #   @return [Array<Types::AgentNetworkInfo>]
     #
     # @!attribute [rw] connector_id
@@ -62,19 +60,19 @@ module Aws::ApplicationDiscoveryService
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The agent or connector version.
+    #   The agent or collector version.
     #   @return [String]
     #
     # @!attribute [rw] health
-    #   The health of the agent or connector.
+    #   The health of the agent.
     #   @return [String]
     #
     # @!attribute [rw] last_health_ping_time
-    #   Time since agent or connector health was reported.
+    #   Time since agent health was reported.
     #   @return [String]
     #
     # @!attribute [rw] collection_status
-    #   Status of the collection process for an agent or connector.
+    #   Status of the collection process for an agent.
     #   @return [String]
     #
     # @!attribute [rw] agent_type
@@ -100,14 +98,14 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # Network details about the host where the agent/connector resides.
+    # Network details about the host where the agent/collector resides.
     #
     # @!attribute [rw] ip_address
-    #   The IP address for the host where the agent/connector resides.
+    #   The IP address for the host where the agent/collector resides.
     #   @return [String]
     #
     # @!attribute [rw] mac_address
-    #   The MAC address for the host where the agent/connector resides.
+    #   The MAC address for the host where the agent/collector resides.
     #   @return [String]
     #
     class AgentNetworkInfo < Struct.new(
@@ -136,8 +134,8 @@ module Aws::ApplicationDiscoveryService
 
     class AssociateConfigurationItemsToApplicationResponse < Aws::EmptyStructure; end
 
-    # The Amazon Web Services user account does not have permission to
-    # perform the action. Check the IAM policy associated with this account.
+    # The user does not have permission to perform the action. Check the IAM
+    # policy associated with this user.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -285,16 +283,16 @@ module Aws::ApplicationDiscoveryService
     #     Kinesis Data Streams Developer Guide.
     #
     #   * FIREHOSE\_ROLE\_MISSING - The Data Exploration feature is in an
-    #     error state because your IAM User is missing the
-    #     AWSApplicationDiscoveryServiceFirehose role. Turn on Data
+    #     error state because your user is missing the Amazon Web
+    #     ServicesApplicationDiscoveryServiceFirehose role. Turn on Data
     #     Exploration in Amazon Athena and try again. For more information,
-    #     see [Step 3: Provide Application Discovery Service Access to
-    #     Non-Administrator Users by Attaching Policies][3] in the
+    #     see [Creating the Amazon Web
+    #     ServicesApplicationDiscoveryServiceFirehose Role][3] in the
     #     Application Discovery Service User Guide.
     #
     #   * FIREHOSE\_STREAM\_DOES\_NOT\_EXIST - The Data Exploration feature
-    #     is in an error state because your IAM User is missing one or more
-    #     of the Kinesis data delivery streams.
+    #     is in an error state because your user is missing one or more of
+    #     the Kinesis data delivery streams.
     #
     #   * INTERNAL\_FAILURE - The Data Exploration feature is in an error
     #     state because of an internal failure. Try again later. If this
@@ -346,7 +344,7 @@ module Aws::ApplicationDiscoveryService
     #
     #   [1]: http://docs.aws.amazon.com/application-discovery/latest/userguide/setting-up.html
     #   [2]: http://docs.aws.amazon.com/streams/latest/dev/service-sizes-and-limits.html
-    #   [3]: http://docs.aws.amazon.com/application-discovery/latest/userguide/setting-up.html#setting-up-user-policy
+    #   [3]: https://docs.aws.amazon.com/application-discovery/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-create-firehose-role
     #   [4]: http://docs.aws.amazon.com/lake-formation/latest/dg/upgrade-glue-lake-formation.html
     #   [5]: https://docs.aws.amazon.com/lake-formation/latest/dg/getting-started-setup.html#setup-change-cat-settings
     #   [6]: https://docs.aws.amazon.com/lake-formation/latest/dg/granting-database-permissions.html
@@ -484,25 +482,34 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
+    # The inventory data for installed Agentless Collector collectors.
+    #
     # @!attribute [rw] active_agentless_collectors
+    #   The number of active Agentless Collector collectors.
     #   @return [Integer]
     #
     # @!attribute [rw] healthy_agentless_collectors
+    #   The number of healthy Agentless Collector collectors.
     #   @return [Integer]
     #
     # @!attribute [rw] deny_listed_agentless_collectors
+    #   The number of deny-listed Agentless Collector collectors.
     #   @return [Integer]
     #
     # @!attribute [rw] shutdown_agentless_collectors
+    #   The number of Agentless Collector collectors with `SHUTDOWN` status.
     #   @return [Integer]
     #
     # @!attribute [rw] unhealthy_agentless_collectors
+    #   The number of unhealthy Agentless Collector collectors.
     #   @return [Integer]
     #
     # @!attribute [rw] total_agentless_collectors
+    #   The total number of Agentless Collector collectors.
     #   @return [Integer]
     #
     # @!attribute [rw] unknown_agentless_collectors
+    #   The number of unknown Agentless Collector collectors.
     #   @return [Integer]
     #
     class CustomerAgentlessCollectorInfo < Struct.new(
@@ -635,10 +642,9 @@ module Aws::ApplicationDiscoveryService
     class DeleteTagsResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] agent_ids
-    #   The agent or the Connector IDs for which you want information. If
+    #   The agent or the collector IDs for which you want information. If
     #   you specify no IDs, the system returns information about all
-    #   agents/Connectors associated with your Amazon Web Services user
-    #   account.
+    #   agents/collectors associated with your user.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
@@ -649,7 +655,7 @@ module Aws::ApplicationDiscoveryService
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The total number of agents/Connectors to return in a single page of
+    #   The total number of agents/collectors to return in a single page of
     #   output. The maximum value is 100.
     #   @return [Integer]
     #
@@ -671,12 +677,12 @@ module Aws::ApplicationDiscoveryService
     end
 
     # @!attribute [rw] agents_info
-    #   Lists agents or the Connector by ID or lists all agents/Connectors
-    #   associated with your user account if you did not specify an
-    #   agent/Connector ID. The output includes agent/Connector IDs, IP
-    #   addresses, media access control (MAC) addresses, agent/Connector
-    #   health, host name where the agent/Connector resides, and the version
-    #   number of each agent/Connector.
+    #   Lists agents or the collector by ID or lists all agents/collectors
+    #   associated with your user, if you did not specify an agent/collector
+    #   ID. The output includes agent/collector IDs, IP addresses, media
+    #   access control (MAC) addresses, agent/collector health, host name
+    #   where the agent/collector resides, and the version number of each
+    #   agent/collector.
     #   @return [Array<Types::AgentInfo>]
     #
     # @!attribute [rw] next_token
@@ -943,6 +949,65 @@ module Aws::ApplicationDiscoveryService
 
     class DisassociateConfigurationItemsFromApplicationResponse < Aws::EmptyStructure; end
 
+    # Indicates that the exported data must include EC2 instance type
+    # matches for on-premises servers that are discovered through Amazon Web
+    # Services Application Discovery Service.
+    #
+    # @!attribute [rw] enabled
+    #   If set to true, the export [preferences][1] is set to
+    #   `Ec2RecommendationsExportPreferences`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/application-discovery/latest/APIReference/API_StartExportTask.html#API_StartExportTask_RequestSyntax
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cpu_performance_metric_basis
+    #   The recommended EC2 instance type that matches the CPU usage metric
+    #   of server performance data.
+    #   @return [Types::UsageMetricBasis]
+    #
+    # @!attribute [rw] ram_performance_metric_basis
+    #   The recommended EC2 instance type that matches the Memory usage
+    #   metric of server performance data.
+    #   @return [Types::UsageMetricBasis]
+    #
+    # @!attribute [rw] tenancy
+    #   The target tenancy to use for your recommended EC2 instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] excluded_instance_types
+    #   An array of instance types to exclude from recommendations.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] preferred_region
+    #   The target Amazon Web Services Region for the recommendations. You
+    #   can use any of the Region codes available for the chosen service, as
+    #   listed in [Amazon Web Services service endpoints][1] in the *Amazon
+    #   Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html
+    #   @return [String]
+    #
+    # @!attribute [rw] reserved_instance_options
+    #   The contract type for a reserved instance. If blank, we assume an
+    #   On-Demand instance is preferred.
+    #   @return [Types::ReservedInstanceOptions]
+    #
+    class Ec2RecommendationsExportPreferences < Struct.new(
+      :enabled,
+      :cpu_performance_metric_basis,
+      :ram_performance_metric_basis,
+      :tenancy,
+      :excluded_instance_types,
+      :preferred_region,
+      :reserved_instance_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] export_id
     #   A unique identifier that you can use to query the export status.
     #   @return [String]
@@ -1041,6 +1106,32 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
+    # Indicates the type of data that is being exported. Only one
+    # `ExportPreferences` can be enabled for a [StartExportTask][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/application-discovery/latest/APIReference/API_StartExportTask.html
+    #
+    # @note ExportPreferences is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] ec2_recommendations_preferences
+    #   If enabled, exported data includes EC2 instance type matches for
+    #   on-premises servers discovered through Amazon Web Services
+    #   Application Discovery Service.
+    #   @return [Types::Ec2RecommendationsExportPreferences]
+    #
+    class ExportPreferences < Struct.new(
+      :ec2_recommendations_preferences,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Ec2RecommendationsPreferences < ExportPreferences; end
+      class Unknown < ExportPreferences; end
+    end
+
     # A filter that can use conditional operators.
     #
     # For more information about filters, see [Querying Discovered
@@ -1114,6 +1205,7 @@ module Aws::ApplicationDiscoveryService
     #   @return [Types::CustomerMeCollectorInfo]
     #
     # @!attribute [rw] agentless_collector_summary
+    #   Details about Agentless Collector collectors, including status.
     #   @return [Types::CustomerAgentlessCollectorInfo]
     #
     class GetDiscoverySummaryResponse < Struct.new(
@@ -1129,7 +1221,7 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # The home region is not set. Set the home region to continue.
+    # The home Region is not set. Set the home Region to continue.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1490,6 +1582,29 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
+    # Used to provide Reserved Instance preferences for the recommendation.
+    #
+    # @!attribute [rw] purchasing_option
+    #   The payment plan to use for your Reserved Instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_class
+    #   The flexibility to change the instance types needed for your
+    #   Reserved Instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] term_length
+    #   The preferred duration of the Reserved Instance term.
+    #   @return [String]
+    #
+    class ReservedInstanceOptions < Struct.new(
+      :purchasing_option,
+      :offering_class,
+      :term_length)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This issue occurs when the same `clientRequestToken` is used with the
     # `StartImportTask` action, but with different parameters. For example,
     # you use the same request token but have two different import URLs, you
@@ -1570,15 +1685,14 @@ module Aws::ApplicationDiscoveryService
     end
 
     # @!attribute [rw] agent_ids
-    #   The IDs of the agents or connectors from which to start collecting
-    #   data. If you send a request to an agent/connector ID that you do not
-    #   have permission to contact, according to your Amazon Web Services
-    #   account, the service does not throw an exception. Instead, it
-    #   returns the error in the *Description* field. If you send a request
-    #   to multiple agents/connectors and you do not have permission to
-    #   contact some of those agents/connectors, the system does not throw
-    #   an exception. Instead, the system shows `Failed` in the
-    #   *Description* field.
+    #   The IDs of the agents from which to start collecting data. If you
+    #   send a request to an agent ID that you do not have permission to
+    #   contact, according to your Amazon Web Services account, the service
+    #   does not throw an exception. Instead, it returns the error in the
+    #   *Description* field. If you send a request to multiple agents and
+    #   you do not have permission to contact some of those agents, the
+    #   system does not throw an exception. Instead, the system shows
+    #   `Failed` in the *Description* field.
     #   @return [Array<String>]
     #
     class StartDataCollectionByAgentIdsRequest < Struct.new(
@@ -1588,10 +1702,10 @@ module Aws::ApplicationDiscoveryService
     end
 
     # @!attribute [rw] agents_configuration_status
-    #   Information about agents or the connector that were instructed to
-    #   start collecting data. Information includes the agent/connector ID,
-    #   a description of the operation performed, and whether the
-    #   agent/connector configuration was updated.
+    #   Information about agents that were instructed to start collecting
+    #   data. Information includes the agent ID, a description of the
+    #   operation performed, and whether the agent configuration was
+    #   updated.
     #   @return [Array<Types::AgentConfigurationStatus>]
     #
     class StartDataCollectionByAgentIdsResponse < Struct.new(
@@ -1610,8 +1724,9 @@ module Aws::ApplicationDiscoveryService
     #   Application Discovery Agent for which data is exported. The
     #   `agentId` can be found in the results of the `DescribeAgents` API or
     #   CLI. If no filter is present, `startTime` and `endTime` are ignored
-    #   and exported data includes both Agentless Discovery Connector data
-    #   and summary data from Application Discovery agents.
+    #   and exported data includes both Amazon Web Services Application
+    #   Discovery Service Agentless Collector collectors data and summary
+    #   data from Application Discovery Agent agents.
     #   @return [Array<Types::ExportFilter>]
     #
     # @!attribute [rw] start_time
@@ -1627,11 +1742,21 @@ module Aws::ApplicationDiscoveryService
     #   exported data includes the most recent data collected by the agent.
     #   @return [Time]
     #
+    # @!attribute [rw] preferences
+    #   Indicates the type of data that needs to be exported. Only one
+    #   [ExportPreferences][1] can be enabled at any time.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/application-discovery/latest/APIReference/API_ExportPreferences.html
+    #   @return [Types::ExportPreferences]
+    #
     class StartExportTaskRequest < Struct.new(
       :export_data_format,
       :filters,
       :start_time,
-      :end_time)
+      :end_time,
+      :preferences)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1722,8 +1847,7 @@ module Aws::ApplicationDiscoveryService
     end
 
     # @!attribute [rw] agent_ids
-    #   The IDs of the agents or connectors from which to stop collecting
-    #   data.
+    #   The IDs of the agents from which to stop collecting data.
     #   @return [Array<String>]
     #
     class StopDataCollectionByAgentIdsRequest < Struct.new(
@@ -1733,10 +1857,10 @@ module Aws::ApplicationDiscoveryService
     end
 
     # @!attribute [rw] agents_configuration_status
-    #   Information about the agents or connector that were instructed to
-    #   stop collecting data. Information includes the agent/connector ID, a
-    #   description of the operation performed, and whether the
-    #   agent/connector configuration was updated.
+    #   Information about the agents that were instructed to stop collecting
+    #   data. Information includes the agent ID, a description of the
+    #   operation performed, and whether the agent configuration was
+    #   updated.
     #   @return [Array<Types::AgentConfigurationStatus>]
     #
     class StopDataCollectionByAgentIdsResponse < Struct.new(
@@ -1803,6 +1927,25 @@ module Aws::ApplicationDiscoveryService
     end
 
     class UpdateApplicationResponse < Aws::EmptyStructure; end
+
+    # Specifies the performance metrics to use for the server that is used
+    # for recommendations.
+    #
+    # @!attribute [rw] name
+    #   A utilization metric that is used by the recommendations.
+    #   @return [String]
+    #
+    # @!attribute [rw] percentage_adjust
+    #   Specifies the percentage of the specified utilization metric that is
+    #   used by the recommendations.
+    #   @return [Float]
+    #
+    class UsageMetricBasis < Struct.new(
+      :name,
+      :percentage_adjust)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
   end
 end

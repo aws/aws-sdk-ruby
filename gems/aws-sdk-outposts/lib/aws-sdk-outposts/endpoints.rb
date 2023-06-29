@@ -9,6 +9,7 @@
 
 
 module Aws::Outposts
+  # @api private
   module Endpoints
 
     class CancelOrder

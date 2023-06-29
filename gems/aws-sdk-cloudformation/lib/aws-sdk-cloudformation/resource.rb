@@ -317,7 +317,9 @@ module Aws::CloudFormation
     #   [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
     # @return [Stack]
     def create_stack(options = {})
-      @client.create_stack(options)
+      Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_stack(options)
+      end
       Stack.new(
         name: options[:stack_name],
         client: @client
@@ -351,6 +353,21 @@ module Aws::CloudFormation
     #   })
     # @param [Hash] options ({})
     # @option options [String] :stack_name
+    #   <note markdown="1"> If you don't pass a parameter to `StackName`, the API returns a
+    #   response that describes all resources in the account. This requires
+    #   `ListStacks` and `DescribeStacks` permissions.
+    #
+    #    The IAM policy below can be added to IAM policies when you want to
+    #   limit resource-level permissions and avoid returning a response when
+    #   no parameter is sent in the request:
+    #
+    #    \\\{ "Version": "2012-10-17", "Statement": \[\\\{ "Effect":
+    #   "Deny", "Action": "cloudformation:DescribeStacks",
+    #   "NotResource": "arn:aws:cloudformation:*:*:stack/*/*" \\}\]
+    #   \\}
+    #
+    #    </note>
+    #
     #   The name or the unique stack ID that's associated with the stack,
     #   which aren't always interchangeable:
     #
@@ -363,7 +380,9 @@ module Aws::CloudFormation
     # @return [Stack::Collection]
     def stacks(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.describe_stacks(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_stacks(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.stacks.each do |s|

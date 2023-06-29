@@ -275,6 +275,11 @@ module Aws::FraudDetector
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -447,7 +452,7 @@ module Aws::FraudDetector
     #
     #   resp.variables #=> Array
     #   resp.variables[0].name #=> String
-    #   resp.variables[0].data_type #=> String, one of "STRING", "INTEGER", "FLOAT", "BOOLEAN"
+    #   resp.variables[0].data_type #=> String, one of "STRING", "INTEGER", "FLOAT", "BOOLEAN", "DATETIME"
     #   resp.variables[0].data_source #=> String, one of "EVENT", "MODEL_SCORE", "EXTERNAL_MODEL_SCORE"
     #   resp.variables[0].default_value #=> String
     #   resp.variables[0].description #=> String
@@ -980,7 +985,7 @@ module Aws::FraudDetector
     #   The name of the variable.
     #
     # @option params [required, String] :data_type
-    #   The data type.
+    #   The data type of the variable.
     #
     # @option params [required, String] :data_source
     #   The source of the data.
@@ -1016,7 +1021,7 @@ module Aws::FraudDetector
     #
     #   resp = client.create_variable({
     #     name: "string", # required
-    #     data_type: "STRING", # required, accepts STRING, INTEGER, FLOAT, BOOLEAN
+    #     data_type: "STRING", # required, accepts STRING, INTEGER, FLOAT, BOOLEAN, DATETIME
     #     data_source: "EVENT", # required, accepts EVENT, MODEL_SCORE, EXTERNAL_MODEL_SCORE
     #     default_value: "string", # required
     #     description: "string",
@@ -1174,7 +1179,9 @@ module Aws::FraudDetector
     #
     # When you delete an event, Amazon Fraud Detector permanently deletes
     # that event and the event data is no longer stored in Amazon Fraud
-    # Detector.
+    # Detector. If `deleteAuditHistory` is `True`, event data is available
+    # through search for up to 30 seconds after the delete operation is
+    # completed.
     #
     # @option params [required, String] :event_id
     #   The ID of the event to delete.
@@ -1184,7 +1191,7 @@ module Aws::FraudDetector
     #
     # @option params [Boolean] :delete_audit_history
     #   Specifies whether or not to delete any predictions associated with the
-    #   event.
+    #   event. If set to `True`,
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2316,6 +2323,7 @@ module Aws::FraudDetector
     #   resp.event_types[0].last_updated_time #=> String
     #   resp.event_types[0].created_time #=> String
     #   resp.event_types[0].arn #=> String
+    #   resp.event_types[0].event_orchestration.event_bridge_enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetEventTypes AWS API Documentation
@@ -2823,7 +2831,7 @@ module Aws::FraudDetector
     #
     #   resp.variables #=> Array
     #   resp.variables[0].name #=> String
-    #   resp.variables[0].data_type #=> String, one of "STRING", "INTEGER", "FLOAT", "BOOLEAN"
+    #   resp.variables[0].data_type #=> String, one of "STRING", "INTEGER", "FLOAT", "BOOLEAN", "DATETIME"
     #   resp.variables[0].data_source #=> String, one of "EVENT", "MODEL_SCORE", "EXTERNAL_MODEL_SCORE"
     #   resp.variables[0].default_value #=> String
     #   resp.variables[0].description #=> String
@@ -3079,10 +3087,15 @@ module Aws::FraudDetector
     #   merchant, account.
     #
     # @option params [String] :event_ingestion
-    #   Specifies if ingenstion is enabled or disabled.
+    #   Specifies if ingestion is enabled or disabled.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A collection of key and value pairs.
+    #
+    # @option params [Types::EventOrchestration] :event_orchestration
+    #   Enables or disables event orchestration. If enabled, you can send
+    #   event predictions to select AWS services for downstream processing of
+    #   the events.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3101,6 +3114,9 @@ module Aws::FraudDetector
     #         value: "tagValue", # required
     #       },
     #     ],
+    #     event_orchestration: {
+    #       event_bridge_enabled: false, # required
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/PutEventType AWS API Documentation
@@ -3216,6 +3232,7 @@ module Aws::FraudDetector
     #   The label description.
     #
     # @option params [Array<Types::Tag>] :tags
+    #   A collection of key and value pairs.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3910,7 +3927,7 @@ module Aws::FraudDetector
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-frauddetector'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

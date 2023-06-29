@@ -52,6 +52,6 @@ require_relative 'aws-sdk-privatenetworks/customizations'
 # @!group service
 module Aws::PrivateNetworks
 
-  GEM_VERSION = '1.4.0'
+  GEM_VERSION = '1.8.0'
 
 end

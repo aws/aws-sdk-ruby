@@ -9,6 +9,7 @@
 
 
 module Aws::ResilienceHub
+  # @api private
   module Endpoints
 
     class AddDraftAppVersionResourceMappings

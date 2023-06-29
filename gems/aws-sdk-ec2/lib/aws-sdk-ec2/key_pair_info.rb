@@ -116,7 +116,9 @@ module Aws::EC2
     #
     # @return [self]
     def load
-      resp = @client.describe_key_pairs(key_names: [@name])
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_key_pairs(key_names: [@name])
+      end
       @data = resp.key_pairs[0]
       self
     end
@@ -231,7 +233,9 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -253,7 +257,9 @@ module Aws::EC2
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(key_name: @name)
-      resp = @client.delete_key_pair(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_key_pair(options)
+      end
       resp.data
     end
 

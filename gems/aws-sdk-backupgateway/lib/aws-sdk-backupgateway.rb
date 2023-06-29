@@ -52,6 +52,6 @@ require_relative 'aws-sdk-backupgateway/customizations'
 # @!group service
 module Aws::BackupGateway
 
-  GEM_VERSION = '1.8.0'
+  GEM_VERSION = '1.11.0'
 
 end

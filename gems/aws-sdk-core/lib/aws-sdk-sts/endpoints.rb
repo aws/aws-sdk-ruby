@@ -9,6 +9,7 @@
 
 
 module Aws::STS
+  # @api private
   module Endpoints
 
     class AssumeRole

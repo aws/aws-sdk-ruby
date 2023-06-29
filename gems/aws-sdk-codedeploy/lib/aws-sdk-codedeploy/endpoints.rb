@@ -9,6 +9,7 @@
 
 
 module Aws::CodeDeploy
+  # @api private
   module Endpoints
 
     class AddTagsToOnPremisesInstances

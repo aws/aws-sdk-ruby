@@ -9,6 +9,7 @@
 
 
 module Aws::EBS
+  # @api private
   module Endpoints
 
     class CompleteSnapshot

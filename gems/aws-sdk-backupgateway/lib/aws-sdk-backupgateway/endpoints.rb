@@ -9,6 +9,7 @@
 
 
 module Aws::BackupGateway
+  # @api private
   module Endpoints
 
     class AssociateGatewayToServer

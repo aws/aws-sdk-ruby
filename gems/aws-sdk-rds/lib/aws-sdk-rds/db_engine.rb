@@ -156,7 +156,9 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Associations
@@ -182,7 +184,9 @@ module Aws::RDS
     def option_group_options(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(engine_name: @name)
-        resp = @client.describe_option_group_options(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_option_group_options(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.option_group_options.each do |o|
@@ -224,7 +228,9 @@ module Aws::RDS
     def option_groups(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(engine_name: @name)
-        resp = @client.describe_option_groups(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_option_groups(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.option_groups_list.each do |o|
@@ -350,7 +356,9 @@ module Aws::RDS
     def versions(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(engine: @name)
-        resp = @client.describe_db_engine_versions(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_db_engine_versions(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.db_engine_versions.each do |d|

@@ -9,6 +9,7 @@
 
 
 module Aws::ElasticsearchService
+  # @api private
   module Endpoints
 
     class AcceptInboundCrossClusterSearchConnection

@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.83.0 (2023-06-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.82.0 (2023-06-06)
+------------------
+
+* Feature - QuickSight support for pivot table field collapse state, radar chart range scale and multiple scope options in conditional formatting.
+
+1.81.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.80.0 (2023-05-22)
+------------------
+
+* Feature - Add support for Asset Bundle, Geospatial Heatmaps.
+
 1.79.0 (2023-05-04)
 ------------------
 

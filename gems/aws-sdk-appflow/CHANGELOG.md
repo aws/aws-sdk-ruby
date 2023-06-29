@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.45.0 (2023-06-27)
+------------------
+
+* Feature - This release adds support to bypass SSO with the SAPOData connector when connecting to an SAP instance.
+
+1.44.0 (2023-06-20)
+------------------
+
+* Feature - This release adds new API to reset connector metadata cache
+
+1.43.0 (2023-06-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.42.0 (2023-06-01)
+------------------
+
+* Feature - Added ability to select DataTransferApiType for DescribeConnector and CreateFlow requests when using Async supported connectors. Added supportedDataTransferType to DescribeConnector/DescribeConnectors/ListConnector response.
+
+1.41.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.40.0 (2023-05-02)
 ------------------
 

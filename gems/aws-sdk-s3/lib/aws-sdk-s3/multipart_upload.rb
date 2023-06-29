@@ -217,7 +217,9 @@ module Aws::S3
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -250,7 +252,9 @@ module Aws::S3
         key: @object_key,
         upload_id: @id
       )
-      resp = @client.abort_multipart_upload(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.abort_multipart_upload(options)
+      end
       resp.data
     end
 
@@ -370,7 +374,9 @@ module Aws::S3
         key: @object_key,
         upload_id: @id
       )
-      @client.complete_multipart_upload(options)
+      Aws::Plugins::UserAgent.feature('resource') do
+        @client.complete_multipart_upload(options)
+      end
       Object.new(
         bucket_name: @bucket_name,
         key: @object_key,
@@ -460,7 +466,9 @@ module Aws::S3
           key: @object_key,
           upload_id: @id
         )
-        resp = @client.list_parts(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.list_parts(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.parts.each do |p|

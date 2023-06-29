@@ -391,6 +391,23 @@ module Aws::Appflow
     #   Information about who registered the connector.
     #   @return [String]
     #
+    # @!attribute [rw] supported_data_transfer_types
+    #   The data transfer types that the connector supports.
+    #
+    #   RECORD
+    #
+    #   : Structured records.
+    #
+    #   FILE
+    #
+    #   : Files or binary data.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] supported_data_transfer_apis
+    #   The APIs of the connector application that Amazon AppFlow can use to
+    #   transfer your data.
+    #   @return [Array<Types::DataTransferApi>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ConnectorConfiguration AWS API Documentation
     #
     class ConnectorConfiguration < Struct.new(
@@ -419,7 +436,9 @@ module Aws::Appflow
       :connector_provisioning_config,
       :logo_url,
       :registered_at,
-      :registered_by)
+      :registered_by,
+      :supported_data_transfer_types,
+      :supported_data_transfer_apis)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -470,6 +489,18 @@ module Aws::Appflow
     #   The connection mode that the connector supports.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] supported_data_transfer_types
+    #   The data transfer types that the connector supports.
+    #
+    #   RECORD
+    #
+    #   : Structured records.
+    #
+    #   FILE
+    #
+    #   : Files or binary data.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ConnectorDetail AWS API Documentation
     #
     class ConnectorDetail < Struct.new(
@@ -483,7 +514,8 @@ module Aws::Appflow
       :registered_at,
       :registered_by,
       :connector_provisioning_type,
-      :connector_modes)
+      :connector_modes,
+      :supported_data_transfer_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1547,11 +1579,17 @@ module Aws::Appflow
     #   source.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] data_transfer_api
+    #   The API of the connector application that Amazon AppFlow uses to
+    #   transfer your data.
+    #   @return [Types::DataTransferApi]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/CustomConnectorSourceProperties AWS API Documentation
     #
     class CustomConnectorSourceProperties < Struct.new(
       :entity_name,
-      :custom_properties)
+      :custom_properties,
+      :data_transfer_api)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1582,6 +1620,43 @@ module Aws::Appflow
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/CustomerProfilesMetadata AWS API Documentation
     #
     class CustomerProfilesMetadata < Aws::EmptyStructure; end
+
+    # The API of the connector application that Amazon AppFlow uses to
+    # transfer your data.
+    #
+    # @!attribute [rw] name
+    #   The name of the connector application API.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   You can specify one of the following types:
+    #
+    #   AUTOMATIC
+    #
+    #   : The default. Optimizes a flow for datasets that fluctuate in size
+    #     from small to large. For each flow run, Amazon AppFlow chooses to
+    #     use the SYNC or ASYNC API type based on the amount of data that
+    #     the run transfers.
+    #
+    #   SYNC
+    #
+    #   : A synchronous API. This type of API optimizes a flow for small to
+    #     medium-sized datasets.
+    #
+    #   ASYNC
+    #
+    #   : An asynchronous API. This type of API optimizes a flow for large
+    #     datasets.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/DataTransferApi AWS API Documentation
+    #
+    class DataTransferApi < Struct.new(
+      :name,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The connector-specific credentials required by Datadog.
     #
@@ -3822,6 +3897,84 @@ module Aws::Appflow
       include Aws::Structure
     end
 
+    # @!attribute [rw] connector_profile_name
+    #   The name of the connector profile that you want to reset cached
+    #   metadata for.
+    #
+    #   You can omit this parameter if you're resetting the cache for any
+    #   of the following connectors: Amazon Connect, Amazon EventBridge,
+    #   Amazon Lookout for Metrics, Amazon S3, or Upsolver. If you're
+    #   resetting the cache for any other connector, you must include this
+    #   parameter in your request.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_type
+    #   The type of connector to reset cached metadata for.
+    #
+    #   You must include this parameter in your request if you're resetting
+    #   the cache for any of the following connectors: Amazon Connect,
+    #   Amazon EventBridge, Amazon Lookout for Metrics, Amazon S3, or
+    #   Upsolver. If you're resetting the cache for any other connector,
+    #   you can omit this parameter from your request.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_entity_name
+    #   Use this parameter if you want to reset cached metadata about the
+    #   details for an individual entity.
+    #
+    #   If you don't include this parameter in your request, Amazon AppFlow
+    #   only resets cached metadata about entity names, not entity details.
+    #   @return [String]
+    #
+    # @!attribute [rw] entities_path
+    #   Use this parameter only if you’re resetting the cached metadata
+    #   about a nested entity. Only some connectors support nested entities.
+    #   A nested entity is one that has another entity as a parent. To use
+    #   this parameter, specify the name of the parent entity.
+    #
+    #   To look up the parent-child relationship of entities, you can send a
+    #   ListConnectorEntities request that omits the entitiesPath parameter.
+    #   Amazon AppFlow will return a list of top-level entities. For each
+    #   one, it indicates whether the entity has nested entities. Then, in a
+    #   subsequent ListConnectorEntities request, you can specify a parent
+    #   entity name for the entitiesPath parameter. Amazon AppFlow will
+    #   return a list of the child entities for that parent.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_version
+    #   The API version that you specified in the connector profile that
+    #   you’re resetting cached metadata for. You must use this parameter
+    #   only if the connector supports multiple API versions or if the
+    #   connector type is CustomConnector.
+    #
+    #   To look up how many versions a connector supports, use the
+    #   DescribeConnectors action. In the response, find the value that
+    #   Amazon AppFlow returns for the connectorVersion parameter.
+    #
+    #   To look up the connector type, use the DescribeConnectorProfiles
+    #   action. In the response, find the value that Amazon AppFlow returns
+    #   for the connectorType parameter.
+    #
+    #   To look up the API version that you specified in a connector
+    #   profile, use the DescribeConnectorProfiles action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ResetConnectorMetadataCacheRequest AWS API Documentation
+    #
+    class ResetConnectorMetadataCacheRequest < Struct.new(
+      :connector_profile_name,
+      :connector_type,
+      :connector_entity_name,
+      :entities_path,
+      :api_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ResetConnectorMetadataCacheResponse AWS API Documentation
+    #
+    class ResetConnectorMetadataCacheResponse < Aws::EmptyStructure; end
+
     # The resource specified in the request (such as the source or
     # destination connector profile) is not found.
     #
@@ -4009,6 +4162,20 @@ module Aws::Appflow
     #   authentication.
     #   @return [Types::OAuthProperties]
     #
+    # @!attribute [rw] disable_sso
+    #   If you set this parameter to `true`, Amazon AppFlow bypasses the
+    #   single sign-on (SSO) settings in your SAP account when it accesses
+    #   your SAP OData instance.
+    #
+    #   Whether you need this option depends on the types of credentials
+    #   that you applied to your SAP OData connection profile. If your
+    #   profile uses basic authentication credentials, SAP SSO can prevent
+    #   Amazon AppFlow from connecting to your account with your username
+    #   and password. In this case, bypassing SSO makes it possible for
+    #   Amazon AppFlow to connect successfully. However, if your profile
+    #   uses OAuth credentials, this parameter has no affect.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/SAPODataConnectorProfileProperties AWS API Documentation
     #
     class SAPODataConnectorProfileProperties < Struct.new(
@@ -4018,7 +4185,8 @@ module Aws::Appflow
       :client_number,
       :logon_language,
       :private_link_service_name,
-      :o_auth_properties)
+      :o_auth_properties,
+      :disable_sso)
       SENSITIVE = []
       include Aws::Structure
     end

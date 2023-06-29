@@ -84,6 +84,10 @@ module Aws::TimestreamWrite
     MultiMeasureMappings = Shapes::StructureShape.new(name: 'MultiMeasureMappings')
     PageLimit = Shapes::IntegerShape.new(name: 'PageLimit')
     PaginationLimit = Shapes::IntegerShape.new(name: 'PaginationLimit')
+    PartitionKey = Shapes::StructureShape.new(name: 'PartitionKey')
+    PartitionKeyEnforcementLevel = Shapes::StringShape.new(name: 'PartitionKeyEnforcementLevel')
+    PartitionKeyList = Shapes::ListShape.new(name: 'PartitionKeyList')
+    PartitionKeyType = Shapes::StringShape.new(name: 'PartitionKeyType')
     Record = Shapes::StructureShape.new(name: 'Record')
     RecordIndex = Shapes::IntegerShape.new(name: 'RecordIndex')
     RecordVersion = Shapes::IntegerShape.new(name: 'RecordVersion')
@@ -106,6 +110,7 @@ module Aws::TimestreamWrite
     S3ObjectKey = Shapes::StringShape.new(name: 'S3ObjectKey')
     S3ObjectKeyPrefix = Shapes::StringShape.new(name: 'S3ObjectKeyPrefix')
     ScalarMeasureValueType = Shapes::StringShape.new(name: 'ScalarMeasureValueType')
+    Schema = Shapes::StructureShape.new(name: 'Schema')
     SchemaName = Shapes::StringShape.new(name: 'SchemaName')
     SchemaValue = Shapes::StringShape.new(name: 'SchemaValue')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
@@ -200,6 +205,7 @@ module Aws::TimestreamWrite
     CreateTableRequest.add_member(:retention_properties, Shapes::ShapeRef.new(shape: RetentionProperties, location_name: "RetentionProperties"))
     CreateTableRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateTableRequest.add_member(:magnetic_store_write_properties, Shapes::ShapeRef.new(shape: MagneticStoreWriteProperties, location_name: "MagneticStoreWriteProperties"))
+    CreateTableRequest.add_member(:schema, Shapes::ShapeRef.new(shape: Schema, location_name: "Schema"))
     CreateTableRequest.struct_class = Types::CreateTableRequest
 
     CreateTableResponse.add_member(:table, Shapes::ShapeRef.new(shape: Table, location_name: "Table"))
@@ -369,6 +375,13 @@ module Aws::TimestreamWrite
     MultiMeasureMappings.add_member(:multi_measure_attribute_mappings, Shapes::ShapeRef.new(shape: MultiMeasureAttributeMappingList, required: true, location_name: "MultiMeasureAttributeMappings"))
     MultiMeasureMappings.struct_class = Types::MultiMeasureMappings
 
+    PartitionKey.add_member(:type, Shapes::ShapeRef.new(shape: PartitionKeyType, required: true, location_name: "Type"))
+    PartitionKey.add_member(:name, Shapes::ShapeRef.new(shape: SchemaName, location_name: "Name"))
+    PartitionKey.add_member(:enforcement_in_record, Shapes::ShapeRef.new(shape: PartitionKeyEnforcementLevel, location_name: "EnforcementInRecord"))
+    PartitionKey.struct_class = Types::PartitionKey
+
+    PartitionKeyList.member = Shapes::ShapeRef.new(shape: PartitionKey)
+
     Record.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
     Record.add_member(:measure_name, Shapes::ShapeRef.new(shape: SchemaName, location_name: "MeasureName"))
     Record.add_member(:measure_value, Shapes::ShapeRef.new(shape: StringValue2048, location_name: "MeasureValue"))
@@ -424,6 +437,9 @@ module Aws::TimestreamWrite
     S3Configuration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: StringValue2048, location_name: "KmsKeyId"))
     S3Configuration.struct_class = Types::S3Configuration
 
+    Schema.add_member(:composite_partition_key, Shapes::ShapeRef.new(shape: PartitionKeyList, location_name: "CompositePartitionKey"))
+    Schema.struct_class = Types::Schema
+
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
@@ -435,6 +451,7 @@ module Aws::TimestreamWrite
     Table.add_member(:creation_time, Shapes::ShapeRef.new(shape: Date, location_name: "CreationTime"))
     Table.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdatedTime"))
     Table.add_member(:magnetic_store_write_properties, Shapes::ShapeRef.new(shape: MagneticStoreWriteProperties, location_name: "MagneticStoreWriteProperties"))
+    Table.add_member(:schema, Shapes::ShapeRef.new(shape: Schema, location_name: "Schema"))
     Table.struct_class = Types::Table
 
     TableList.member = Shapes::ShapeRef.new(shape: Table)
@@ -473,6 +490,7 @@ module Aws::TimestreamWrite
     UpdateTableRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "TableName"))
     UpdateTableRequest.add_member(:retention_properties, Shapes::ShapeRef.new(shape: RetentionProperties, location_name: "RetentionProperties"))
     UpdateTableRequest.add_member(:magnetic_store_write_properties, Shapes::ShapeRef.new(shape: MagneticStoreWriteProperties, location_name: "MagneticStoreWriteProperties"))
+    UpdateTableRequest.add_member(:schema, Shapes::ShapeRef.new(shape: Schema, location_name: "Schema"))
     UpdateTableRequest.struct_class = Types::UpdateTableRequest
 
     UpdateTableResponse.add_member(:table, Shapes::ShapeRef.new(shape: Table, location_name: "Table"))

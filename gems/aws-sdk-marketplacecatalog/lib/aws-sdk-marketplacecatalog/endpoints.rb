@@ -9,6 +9,7 @@
 
 
 module Aws::MarketplaceCatalog
+  # @api private
   module Endpoints
 
     class CancelChangeSet

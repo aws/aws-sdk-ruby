@@ -50,6 +50,7 @@ The SDK searches the following locations for credentials:
     * Assume Role Web Identity Credentials (`web_identity_token_file`, `role_arn`, `source_profile`)
     * Assume Role Credentials (`role_arn`, `source_profile`)
     * Process Credentials (`credential_process`)
+    * SSO Credentials (`sso_session`, `sso_account_id`, `sso_role_name`, `sso_region`)
   * Unless `ENV['AWS_SDK_CONFIG_OPT_OUT']` is set, the shared configuration ini file at `~/.aws/config` will also be parsed for credentials.
 * From an instance profile when running on EC2 or from the ECS credential provider when running in an ECS container with that feature enabled.
 
@@ -375,6 +376,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Elemental MediaLive                               | Aws::MediaLive                           | aws-sdk-medialive                           | 2017-10-14  |
 | AWS Elemental MediaPackage                            | Aws::MediaPackage                        | aws-sdk-mediapackage                        | 2017-10-12  |
 | AWS Elemental MediaPackage VOD                        | Aws::MediaPackageVod                     | aws-sdk-mediapackagevod                     | 2018-11-07  |
+| AWS Elemental MediaPackage v2                         | Aws::MediaPackageV2                      | aws-sdk-mediapackagev2                      | 2022-12-25  |
 | AWS Elemental MediaStore                              | Aws::MediaStore                          | aws-sdk-mediastore                          | 2017-09-01  |
 | AWS Elemental MediaStore Data Plane                   | Aws::MediaStoreData                      | aws-sdk-mediastoredata                      | 2017-09-01  |
 | AWS Fault Injection Simulator                         | Aws::FIS                                 | aws-sdk-fis                                 | 2020-12-01  |
@@ -505,6 +507,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon CodeCatalyst                                   | Aws::CodeCatalyst                        | aws-sdk-codecatalyst                        | 2022-09-28  |
 | Amazon CodeGuru Profiler                              | Aws::CodeGuruProfiler                    | aws-sdk-codeguruprofiler                    | 2019-07-18  |
 | Amazon CodeGuru Reviewer                              | Aws::CodeGuruReviewer                    | aws-sdk-codegurureviewer                    | 2019-09-19  |
+| Amazon CodeGuru Security                              | Aws::CodeGuruSecurity                    | aws-sdk-codegurusecurity                    | 2018-05-10  |
 | Amazon Cognito Identity                               | Aws::CognitoIdentity                     | aws-sdk-cognitoidentity                     | 2014-06-30  |
 | Amazon Cognito Identity Provider                      | Aws::CognitoIdentityProvider             | aws-sdk-cognitoidentityprovider             | 2016-04-18  |
 | Amazon Cognito Sync                                   | Aws::CognitoSync                         | aws-sdk-cognitosync                         | 2014-06-30  |
@@ -626,6 +629,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Transcribe Streaming Service                   | Aws::TranscribeStreamingService          | aws-sdk-transcribestreamingservice          | 2017-10-26  |
 | Amazon Translate                                      | Aws::Translate                           | aws-sdk-translate                           | 2017-07-01  |
 | Amazon VPC Lattice                                    | Aws::VPCLattice                          | aws-sdk-vpclattice                          | 2022-11-30  |
+| Amazon Verified Permissions                           | Aws::VerifiedPermissions                 | aws-sdk-verifiedpermissions                 | 2021-12-01  |
 | Amazon Voice ID                                       | Aws::VoiceID                             | aws-sdk-voiceid                             | 2021-09-27  |
 | Amazon WorkDocs                                       | Aws::WorkDocs                            | aws-sdk-workdocs                            | 2016-05-01  |
 | Amazon WorkLink                                       | Aws::WorkLink                            | aws-sdk-worklink                            | 2018-09-25  |
@@ -640,6 +644,7 @@ RubyGems.org page under "LINKS" section.
 | AmazonMWAA                                            | Aws::MWAA                                | aws-sdk-mwaa                                | 2020-07-01  |
 | AmazonNimbleStudio                                    | Aws::NimbleStudio                        | aws-sdk-nimblestudio                        | 2020-08-01  |
 | AmplifyBackend                                        | Aws::AmplifyBackend                      | aws-sdk-amplifybackend                      | 2020-08-11  |
+| AppFabric                                             | Aws::AppFabric                           | aws-sdk-appfabric                           | 2023-05-19  |
 | Application Auto Scaling                              | Aws::ApplicationAutoScaling              | aws-sdk-applicationautoscaling              | 2016-02-06  |
 | Application Migration Service                         | Aws::Mgn                                 | aws-sdk-mgn                                 | 2020-02-26  |
 | Auto Scaling                                          | Aws::AutoScaling                         | aws-sdk-autoscaling                         | 2011-01-01  |
@@ -662,6 +667,8 @@ RubyGems.org page under "LINKS" section.
 | Managed Streaming for Kafka Connect                   | Aws::KafkaConnect                        | aws-sdk-kafkaconnect                        | 2021-09-14  |
 | Migration Hub Strategy Recommendations                | Aws::MigrationHubStrategyRecommendations | aws-sdk-migrationhubstrategyrecommendations | 2020-02-19  |
 | OpenSearch Service Serverless                         | Aws::OpenSearchServerless                | aws-sdk-opensearchserverless                | 2021-11-01  |
+| Payment Cryptography Control Plane                    | Aws::PaymentCryptography                 | aws-sdk-paymentcryptography                 | 2021-09-14  |
+| Payment Cryptography Data Plane                       | Aws::PaymentCryptographyData             | aws-sdk-paymentcryptographydata             | 2022-02-03  |
 | Redshift Data API Service                             | Aws::RedshiftDataAPIService              | aws-sdk-redshiftdataapiservice              | 2019-12-20  |
 | Redshift Serverless                                   | Aws::RedshiftServerless                  | aws-sdk-redshiftserverless                  | 2021-04-21  |
 | Route53 Recovery Cluster                              | Aws::Route53RecoveryCluster              | aws-sdk-route53recoverycluster              | 2019-12-02  |

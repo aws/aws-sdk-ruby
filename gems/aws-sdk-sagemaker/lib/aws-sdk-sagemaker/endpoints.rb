@@ -9,6 +9,7 @@
 
 
 module Aws::SageMaker
+  # @api private
   module Endpoints
 
     class AddAssociation

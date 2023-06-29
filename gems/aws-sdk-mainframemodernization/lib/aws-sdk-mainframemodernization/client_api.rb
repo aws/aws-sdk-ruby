@@ -134,8 +134,12 @@ module Aws::MainframeModernization
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     PendingMaintenance = Shapes::StructureShape.new(name: 'PendingMaintenance')
+    PoAttributes = Shapes::StructureShape.new(name: 'PoAttributes')
+    PoDetailAttributes = Shapes::StructureShape.new(name: 'PoDetailAttributes')
     PortList = Shapes::ListShape.new(name: 'PortList')
     PrimaryKey = Shapes::StructureShape.new(name: 'PrimaryKey')
+    PsAttributes = Shapes::StructureShape.new(name: 'PsAttributes')
+    PsDetailAttributes = Shapes::StructureShape.new(name: 'PsDetailAttributes')
     RecordLength = Shapes::StructureShape.new(name: 'RecordLength')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ScriptBatchJobDefinition = Shapes::StructureShape.new(name: 'ScriptBatchJobDefinition')
@@ -154,6 +158,7 @@ module Aws::MainframeModernization
     String20 = Shapes::StringShape.new(name: 'String20')
     String200 = Shapes::StringShape.new(name: 'String200')
     String2000 = Shapes::StringShape.new(name: 'String2000')
+    String20List = Shapes::ListShape.new(name: 'String20List')
     String50 = Shapes::StringShape.new(name: 'String50')
     String50List = Shapes::ListShape.new(name: 'String50List')
     StringFree65000 = Shapes::StringShape.new(name: 'StringFree65000')
@@ -200,6 +205,7 @@ module Aws::MainframeModernization
     ApplicationSummary.add_member(:environment_id, Shapes::ShapeRef.new(shape: Identifier, location_name: "environmentId"))
     ApplicationSummary.add_member(:last_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastStartTime"))
     ApplicationSummary.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "name"))
+    ApplicationSummary.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "roleArn"))
     ApplicationSummary.add_member(:status, Shapes::ShapeRef.new(shape: ApplicationLifecycle, required: true, location_name: "status"))
     ApplicationSummary.add_member(:version_status, Shapes::ShapeRef.new(shape: ApplicationVersionLifecycle, location_name: "versionStatus"))
     ApplicationSummary.struct_class = Types::ApplicationSummary
@@ -268,6 +274,7 @@ module Aws::MainframeModernization
     CreateApplicationRequest.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, required: true, location_name: "engineType"))
     CreateApplicationRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
     CreateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "name"))
+    CreateApplicationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "roleArn"))
     CreateApplicationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
 
@@ -358,17 +365,25 @@ module Aws::MainframeModernization
     DataSetsSummaryList.member = Shapes::ShapeRef.new(shape: DataSetSummary)
 
     DatasetDetailOrgAttributes.add_member(:gdg, Shapes::ShapeRef.new(shape: GdgDetailAttributes, location_name: "gdg"))
+    DatasetDetailOrgAttributes.add_member(:po, Shapes::ShapeRef.new(shape: PoDetailAttributes, location_name: "po"))
+    DatasetDetailOrgAttributes.add_member(:ps, Shapes::ShapeRef.new(shape: PsDetailAttributes, location_name: "ps"))
     DatasetDetailOrgAttributes.add_member(:vsam, Shapes::ShapeRef.new(shape: VsamDetailAttributes, location_name: "vsam"))
     DatasetDetailOrgAttributes.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     DatasetDetailOrgAttributes.add_member_subclass(:gdg, Types::DatasetDetailOrgAttributes::Gdg)
+    DatasetDetailOrgAttributes.add_member_subclass(:po, Types::DatasetDetailOrgAttributes::Po)
+    DatasetDetailOrgAttributes.add_member_subclass(:ps, Types::DatasetDetailOrgAttributes::Ps)
     DatasetDetailOrgAttributes.add_member_subclass(:vsam, Types::DatasetDetailOrgAttributes::Vsam)
     DatasetDetailOrgAttributes.add_member_subclass(:unknown, Types::DatasetDetailOrgAttributes::Unknown)
     DatasetDetailOrgAttributes.struct_class = Types::DatasetDetailOrgAttributes
 
     DatasetOrgAttributes.add_member(:gdg, Shapes::ShapeRef.new(shape: GdgAttributes, location_name: "gdg"))
+    DatasetOrgAttributes.add_member(:po, Shapes::ShapeRef.new(shape: PoAttributes, location_name: "po"))
+    DatasetOrgAttributes.add_member(:ps, Shapes::ShapeRef.new(shape: PsAttributes, location_name: "ps"))
     DatasetOrgAttributes.add_member(:vsam, Shapes::ShapeRef.new(shape: VsamAttributes, location_name: "vsam"))
     DatasetOrgAttributes.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     DatasetOrgAttributes.add_member_subclass(:gdg, Types::DatasetOrgAttributes::Gdg)
+    DatasetOrgAttributes.add_member_subclass(:po, Types::DatasetOrgAttributes::Po)
+    DatasetOrgAttributes.add_member_subclass(:ps, Types::DatasetOrgAttributes::Ps)
     DatasetOrgAttributes.add_member_subclass(:vsam, Types::DatasetOrgAttributes::Vsam)
     DatasetOrgAttributes.add_member_subclass(:unknown, Types::DatasetOrgAttributes::Unknown)
     DatasetOrgAttributes.struct_class = Types::DatasetOrgAttributes
@@ -481,6 +496,7 @@ module Aws::MainframeModernization
     GetApplicationResponse.add_member(:load_balancer_dns_name, Shapes::ShapeRef.new(shape: String100, location_name: "loadBalancerDnsName"))
     GetApplicationResponse.add_member(:log_groups, Shapes::ShapeRef.new(shape: LogGroupSummaries, location_name: "logGroups"))
     GetApplicationResponse.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "name"))
+    GetApplicationResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "roleArn"))
     GetApplicationResponse.add_member(:status, Shapes::ShapeRef.new(shape: ApplicationLifecycle, required: true, location_name: "status"))
     GetApplicationResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     GetApplicationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -700,12 +716,29 @@ module Aws::MainframeModernization
     PendingMaintenance.add_member(:schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "schedule"))
     PendingMaintenance.struct_class = Types::PendingMaintenance
 
+    PoAttributes.add_member(:encoding, Shapes::ShapeRef.new(shape: String, location_name: "encoding"))
+    PoAttributes.add_member(:format, Shapes::ShapeRef.new(shape: String, required: true, location_name: "format"))
+    PoAttributes.add_member(:member_file_extensions, Shapes::ShapeRef.new(shape: String20List, required: true, location_name: "memberFileExtensions"))
+    PoAttributes.struct_class = Types::PoAttributes
+
+    PoDetailAttributes.add_member(:encoding, Shapes::ShapeRef.new(shape: String, required: true, location_name: "encoding"))
+    PoDetailAttributes.add_member(:format, Shapes::ShapeRef.new(shape: String, required: true, location_name: "format"))
+    PoDetailAttributes.struct_class = Types::PoDetailAttributes
+
     PortList.member = Shapes::ShapeRef.new(shape: Integer)
 
     PrimaryKey.add_member(:length, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "length"))
     PrimaryKey.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     PrimaryKey.add_member(:offset, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "offset"))
     PrimaryKey.struct_class = Types::PrimaryKey
+
+    PsAttributes.add_member(:encoding, Shapes::ShapeRef.new(shape: String, location_name: "encoding"))
+    PsAttributes.add_member(:format, Shapes::ShapeRef.new(shape: String, required: true, location_name: "format"))
+    PsAttributes.struct_class = Types::PsAttributes
+
+    PsDetailAttributes.add_member(:encoding, Shapes::ShapeRef.new(shape: String, required: true, location_name: "encoding"))
+    PsDetailAttributes.add_member(:format, Shapes::ShapeRef.new(shape: String, required: true, location_name: "format"))
+    PsDetailAttributes.struct_class = Types::PsDetailAttributes
 
     RecordLength.add_member(:max, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "max"))
     RecordLength.add_member(:min, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "min"))
@@ -757,6 +790,8 @@ module Aws::MainframeModernization
     StorageConfiguration.struct_class = Types::StorageConfiguration
 
     StorageConfigurationList.member = Shapes::ShapeRef.new(shape: StorageConfiguration)
+
+    String20List.member = Shapes::ShapeRef.new(shape: String20)
 
     String50List.member = Shapes::ShapeRef.new(shape: String50)
 

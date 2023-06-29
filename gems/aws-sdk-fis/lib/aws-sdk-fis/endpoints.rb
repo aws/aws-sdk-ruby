@@ -9,6 +9,7 @@
 
 
 module Aws::FIS
+  # @api private
   module Endpoints
 
     class CreateExperimentTemplate

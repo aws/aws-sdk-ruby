@@ -9,6 +9,7 @@
 
 
 module Aws::ElasticTranscoder
+  # @api private
   module Endpoints
 
     class CancelJob

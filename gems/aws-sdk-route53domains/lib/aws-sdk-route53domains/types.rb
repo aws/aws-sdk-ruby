@@ -1305,22 +1305,6 @@ module Aws::Route53Domains
     #
     #       * `TOWNSHIP`
     #
-    #   .fr
-    #   : * `BIRTH_CITY`
-    #
-    #     * `BIRTH_COUNTRY`
-    #
-    #     * `BIRTH_DATE_IN_YYYY_MM_DD`
-    #
-    #     * `BIRTH_DEPARTMENT`: Specify the INSEE code that corresponds with
-    #       the department where the contact was born. If the contact was
-    #       born somewhere other than France or its overseas departments,
-    #       specify `99`. For more information, including a list of
-    #       departments and the corresponding INSEE numbers, see the
-    #       Wikipedia entry [Departments of France][1].
-    #
-    #     * `BRAND_NUMBER`
-    #
     #   .it
     #   : * `IT_NATIONALITY`
     #
@@ -1399,10 +1383,6 @@ module Aws::Route53Domains
     #     * `UK_COMPANY_NUMBER`
     #
     #   In addition, many TLDs require a `VAT_NUMBER`.
-    #
-    #
-    #
-    #   [1]: https://en.wikipedia.org/wiki/Departments_of_France
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -2722,13 +2702,11 @@ module Aws::Route53Domains
     # @!attribute [rw] privacy_protect_admin_contact
     #   Whether you want to conceal contact information from WHOIS queries.
     #   If you specify `true`, WHOIS ("who is") queries return contact
-    #   information either for Amazon Registrar (for .com, .net, and .org
-    #   domains) or for our registrar associate, Gandi (for all other TLDs).
-    #   If you specify `false`, WHOIS queries return the information that
-    #   you entered for the admin contact.
+    #   information for the registrar, the phrase "REDACTED FOR PRIVACY",
+    #   or "On behalf of &lt;domain name&gt; owner.".
     #
-    #   <note markdown="1"> You must specify the same privacy setting for the administrative,
-    #   registrant, and technical contacts.
+    #   <note markdown="1"> While some domains may allow different privacy settings per contact,
+    #   we recommend specifying the same privacy setting for all contacts.
     #
     #    </note>
     #
@@ -2971,7 +2949,8 @@ module Aws::Route53Domains
     #   @return [Types::ContactDetail]
     #
     # @!attribute [rw] consent
-    #   Customer's consent for the owner change request.
+    #   Customer's consent for the owner change request. Required if the
+    #   domain is not free (consent price is more than $0.00).
     #   @return [Types::Consent]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainContactRequest AWS API Documentation

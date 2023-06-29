@@ -64,6 +64,15 @@ module Aws::IoTFleetWise
     #   A specified value for the actuator.
     #   @return [String]
     #
+    # @!attribute [rw] deprecation_message
+    #   The deprecation message for the node or the branch that was moved or
+    #   deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] comment
+    #   A comment in addition to the description.
+    #   @return [String]
+    #
     class Actuator < Struct.new(
       :fully_qualified_name,
       :data_type,
@@ -72,7 +81,9 @@ module Aws::IoTFleetWise
       :allowed_values,
       :min,
       :max,
-      :assigned_value)
+      :assigned_value,
+      :deprecation_message,
+      :comment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -134,6 +145,15 @@ module Aws::IoTFleetWise
     #   The default value of the attribute.
     #   @return [String]
     #
+    # @!attribute [rw] deprecation_message
+    #   The deprecation message for the node or the branch that was moved or
+    #   deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] comment
+    #   A comment in addition to the description.
+    #   @return [String]
+    #
     class Attribute < Struct.new(
       :fully_qualified_name,
       :data_type,
@@ -143,7 +163,9 @@ module Aws::IoTFleetWise
       :min,
       :max,
       :assigned_value,
-      :default_value)
+      :default_value,
+      :deprecation_message,
+      :comment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -219,9 +241,20 @@ module Aws::IoTFleetWise
     #   A brief description of the branch.
     #   @return [String]
     #
+    # @!attribute [rw] deprecation_message
+    #   The deprecation message for the node or the branch that was moved or
+    #   deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] comment
+    #   A comment in addition to the description.
+    #   @return [String]
+    #
     class Branch < Struct.new(
       :fully_qualified_name,
-      :description)
+      :description,
+      :deprecation_message,
+      :comment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -352,11 +385,19 @@ module Aws::IoTFleetWise
     #   @return [Boolean]
     #
     # @!attribute [rw] start_bit
-    #   Indicates the beginning of the CAN message.
+    #   Indicates the beginning of the CAN signal. This should always be the
+    #   least significant bit (LSB).
+    #
+    #   This value might be different from the value in a DBC file. For
+    #   little endian signals, `startBit` is the same value as in the DBC
+    #   file. For big endian signals in a DBC file, the start bit is the
+    #   most significant bit (MSB). You will have to calculate the LSB
+    #   instead and pass it as the `startBit`.
     #   @return [Integer]
     #
     # @!attribute [rw] offset
-    #   Indicates where data appears in the CAN message.
+    #   The offset used to calculate the signal value. Combined with factor,
+    #   the calculation is `value = raw_value * factor + offset`.
     #   @return [Float]
     #
     # @!attribute [rw] factor
@@ -520,7 +561,7 @@ module Aws::IoTFleetWise
     #
     # @!attribute [rw] expiry_time
     #   (Optional) The time the campaign expires, in seconds since epoch
-    #   (January 1, 1970 at midnight UTC time). Vehicle data won't be
+    #   (January 1, 1970 at midnight UTC time). Vehicle data isn't
     #   collected after the campaign expires.
     #
     #   Default: 253402214400 (December 31, 9999, 00:00:00 UTC)
@@ -597,6 +638,19 @@ module Aws::IoTFleetWise
     #   Metadata that can be used to manage the campaign.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] data_destination_configs
+    #   The destination where the campaign sends data. You can choose to
+    #   send data to be stored in Amazon S3 or Amazon Timestream.
+    #
+    #   Amazon S3 optimizes the cost of data storage and provides additional
+    #   mechanisms to use vehicle data, such as data lakes, centralized data
+    #   storage, data processing pipelines, and analytics.
+    #
+    #   You can use Amazon Timestream to access and analyze time series
+    #   data, and Timestream to query vehicle data so that you can identify
+    #   trends and patterns.
+    #   @return [Array<Types::DataDestinationConfig>]
+    #
     class CreateCampaignRequest < Struct.new(
       :name,
       :description,
@@ -612,7 +666,8 @@ module Aws::IoTFleetWise
       :signals_to_collect,
       :collection_scheme,
       :data_extra_dimensions,
-      :tags)
+      :tags,
+      :data_destination_configs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -846,6 +901,9 @@ module Aws::IoTFleetWise
     # @!attribute [rw] attributes
     #   Static information about a vehicle in a key-value pair. For example:
     #   `"engineType"` : `"1.3 L R2"`
+    #
+    #   A campaign must include the keys (attribute names) in
+    #   `dataExtraDimensions` for them to display in Amazon Timestream.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] association_behavior
@@ -952,6 +1010,36 @@ module Aws::IoTFleetWise
       :thing_arn)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The destination where the Amazon Web Services IoT FleetWise campaign
+    # sends data. You can send data to be stored in Amazon S3 or Amazon
+    # Timestream.
+    #
+    # @note DataDestinationConfig is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note DataDestinationConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DataDestinationConfig corresponding to the set member.
+    #
+    # @!attribute [rw] s3_config
+    #   The Amazon S3 bucket where the Amazon Web Services IoT FleetWise
+    #   campaign sends data.
+    #   @return [Types::S3Config]
+    #
+    # @!attribute [rw] timestream_config
+    #   The Amazon Timestream table where the campaign sends data.
+    #   @return [Types::TimestreamConfig]
+    #
+    class DataDestinationConfig < Struct.new(
+      :s3_config,
+      :timestream_config,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class S3Config < DataDestinationConfig; end
+      class TimestreamConfig < DataDestinationConfig; end
+      class Unknown < DataDestinationConfig; end
     end
 
     # Information about a created decoder manifest. You can use the API
@@ -1240,9 +1328,13 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
-    # Vehicle Signal Specification (VSS) is a precise language used to
+    # [Vehicle Signal Specification (VSS)][1] is a precise language used to
     # describe and model signals in vehicle networks. The JSON file collects
     # signal specificiations in a VSS format.
+    #
+    #
+    #
+    # [1]: https://www.w3.org/auto/wg/wiki/Vehicle_Signal_Specification_(VSS)/Vehicle_Data_Spec
     #
     # @note FormattedVss is a union - when making an API calls you must set exactly one of the members.
     #
@@ -1357,6 +1449,19 @@ module Aws::IoTFleetWise
     #   The last time the campaign was modified.
     #   @return [Time]
     #
+    # @!attribute [rw] data_destination_configs
+    #   The destination where the campaign sends data. You can choose to
+    #   send data to be stored in Amazon S3 or Amazon Timestream.
+    #
+    #   Amazon S3 optimizes the cost of data storage and provides additional
+    #   mechanisms to use vehicle data, such as data lakes, centralized data
+    #   storage, data processing pipelines, and analytics.
+    #
+    #   You can use Amazon Timestream to access and analyze time series
+    #   data, and Timestream to query vehicle data so that you can identify
+    #   trends and patterns.
+    #   @return [Array<Types::DataDestinationConfig>]
+    #
     class GetCampaignResponse < Struct.new(
       :name,
       :arn,
@@ -1375,7 +1480,8 @@ module Aws::IoTFleetWise
       :collection_scheme,
       :data_extra_dimensions,
       :creation_time,
-      :last_modification_time)
+      :last_modification_time,
+      :data_destination_configs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2783,7 +2889,8 @@ module Aws::IoTFleetWise
     #   @return [Float]
     #
     # @!attribute [rw] offset
-    #   Indicates where data appears in the message.
+    #   The offset used to calculate the signal value. Combined with
+    #   scaling, the calculation is `value = raw_value * scaling + offset`.
     #   @return [Float]
     #
     # @!attribute [rw] start_byte
@@ -2902,6 +3009,65 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
+    # The Amazon S3 bucket where the Amazon Web Services IoT FleetWise
+    # campaign sends data. Amazon S3 is an object storage service that
+    # stores data as objects within buckets. For more information, see
+    # [Creating, configuring, and working with Amazon S3 buckets][1] in the
+    # *Amazon Simple Storage Service User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html
+    #
+    # @!attribute [rw] bucket_arn
+    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_format
+    #   Specify the format that files are saved in the Amazon S3 bucket. You
+    #   can save files in an Apache Parquet or JSON format.
+    #
+    #   * Parquet - Store data in a columnar storage file format. Parquet is
+    #     optimal for fast data retrieval and can reduce costs. This option
+    #     is selected by default.
+    #
+    #   * JSON - Store data in a standard text-based JSON file format.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_compression_format
+    #   By default, stored data is compressed as a .gzip file. Compressed
+    #   files have a reduced file size, which can optimize the cost of data
+    #   storage.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   (Optional) Enter an S3 bucket prefix. The prefix is the string of
+    #   characters after the bucket name and before the object name. You can
+    #   use the prefix to organize data stored in Amazon S3 buckets. For
+    #   more information, see [Organizing objects using prefixes][1] in the
+    #   *Amazon Simple Storage Service User Guide*.
+    #
+    #   By default, Amazon Web Services IoT FleetWise sets the prefix
+    #   `processed-data/year=YY/month=MM/date=DD/hour=HH/` (in UTC) to data
+    #   it delivers to Amazon S3. You can enter a prefix to append it to
+    #   this default prefix. For example, if you enter the prefix
+    #   `vehicles`, the prefix will be
+    #   `vehicles/processed-data/year=YY/month=MM/date=DD/hour=HH/`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html
+    #   @return [String]
+    #
+    class S3Config < Struct.new(
+      :bucket_arn,
+      :data_format,
+      :storage_compression_format,
+      :prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An input component that reports the environmental condition of a
     # vehicle.
     #
@@ -2939,6 +3105,15 @@ module Aws::IoTFleetWise
     #   The specified possible maximum value of the sensor.
     #   @return [Float]
     #
+    # @!attribute [rw] deprecation_message
+    #   The deprecation message for the node or the branch that was moved or
+    #   deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] comment
+    #   A comment in addition to the description.
+    #   @return [String]
+    #
     class Sensor < Struct.new(
       :fully_qualified_name,
       :data_type,
@@ -2946,7 +3121,9 @@ module Aws::IoTFleetWise
       :unit,
       :allowed_values,
       :min,
-      :max)
+      :max,
+      :deprecation_message,
+      :comment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3125,6 +3302,33 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
+    # The Amazon Timestream table where the Amazon Web Services IoT
+    # FleetWise campaign sends data. Timestream stores and organizes data to
+    # optimize query processing time and to reduce storage costs. For more
+    # information, see [Data modeling][1] in the *Amazon Timestream
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/data-modeling.html
+    #
+    # @!attribute [rw] timestream_table_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Timestream table.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The Amazon Resource Name (ARN) of the task execution role that
+    #   grants Amazon Web Services IoT FleetWise permission to deliver data
+    #   to the Amazon Timestream table.
+    #   @return [String]
+    #
+    class TimestreamConfig < Struct.new(
+      :timestream_table_arn,
+      :execution_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the registered Amazon Timestream resources or
     # errors, if any.
     #
@@ -3221,9 +3425,13 @@ module Aws::IoTFleetWise
     #   * `APPROVE` - To approve delivering a data collection scheme to
     #     vehicles.
     #
-    #   * `SUSPEND` - To suspend collecting signal data.
+    #   * `SUSPEND` - To suspend collecting signal data. The campaign is
+    #     deleted from vehicles and all vehicles in the suspended campaign
+    #     will stop sending data.
     #
-    #   * `RESUME` - To resume collecting signal data.
+    #   * `RESUME` - To reactivate the `SUSPEND` campaign. The campaign is
+    #     redeployed to all vehicles and the vehicles will resume sending
+    #     data.
     #
     #   * `UPDATE` - To update a campaign.
     #   @return [String]

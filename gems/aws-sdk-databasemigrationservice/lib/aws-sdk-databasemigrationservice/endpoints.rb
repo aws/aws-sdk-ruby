@@ -9,6 +9,7 @@
 
 
 module Aws::DatabaseMigrationService
+  # @api private
   module Endpoints
 
     class AddTagsToResource

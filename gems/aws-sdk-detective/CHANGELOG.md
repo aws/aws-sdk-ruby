@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.35.0 (2023-06-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2023-05-16)
+------------------
+
+* Feature - Added and updated API operations in Detective to support the integration of ASFF Security Hub findings.
+
 1.32.0 (2023-01-18)
 ------------------
 

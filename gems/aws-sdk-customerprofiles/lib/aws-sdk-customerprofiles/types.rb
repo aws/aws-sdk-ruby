@@ -291,6 +291,44 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # Mathematical expression and a list of attribute items specified in
+    # that expression.
+    #
+    # @!attribute [rw] attributes
+    #   A list of attribute items specified in the mathematical expression.
+    #   @return [Array<Types::AttributeItem>]
+    #
+    # @!attribute [rw] expression
+    #   Mathematical expression that is performed on attribute items
+    #   provided in the attribute list. Each element in the expression
+    #   should follow the structure of
+    #   \\"\\\{ObjectTypeName.AttributeName\\}\\".
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/AttributeDetails AWS API Documentation
+    #
+    class AttributeDetails < Struct.new(
+      :attributes,
+      :expression)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of a single attribute item specified in the mathematical
+    # expression.
+    #
+    # @!attribute [rw] name
+    #   The name of an attribute defined in a profile object type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/AttributeItem AWS API Documentation
+    #
+    class AttributeItem < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration settings for how to perform the auto-merging of
     # profiles.
     #
@@ -359,6 +397,32 @@ module Aws::CustomerProfiles
     class Batch < Struct.new(
       :start_time,
       :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The conditions including range, object count, and threshold for the
+    # calculated attribute.
+    #
+    # @!attribute [rw] range
+    #   The relative time period over which data is included in the
+    #   aggregation.
+    #   @return [Types::Range]
+    #
+    # @!attribute [rw] object_count
+    #   The number of profile objects used for the calculated attribute.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] threshold
+    #   The threshold for the calculated attribute.
+    #   @return [Types::Threshold]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/Conditions AWS API Documentation
+    #
+    class Conditions < Struct.new(
+      :range,
+      :object_count,
+      :threshold)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -439,6 +503,113 @@ module Aws::CustomerProfiles
     #
     class Consolidation < Struct.new(
       :matching_attributes_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] calculated_attribute_name
+    #   The unique name of the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_details
+    #   Mathematical expression and a list of attribute items specified in
+    #   that expression.
+    #   @return [Types::AttributeDetails]
+    #
+    # @!attribute [rw] conditions
+    #   The conditions including range, object count, and threshold for the
+    #   calculated attribute.
+    #   @return [Types::Conditions]
+    #
+    # @!attribute [rw] statistic
+    #   The aggregation operation to perform for the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateCalculatedAttributeDefinitionRequest AWS API Documentation
+    #
+    class CreateCalculatedAttributeDefinitionRequest < Struct.new(
+      :domain_name,
+      :calculated_attribute_name,
+      :display_name,
+      :description,
+      :attribute_details,
+      :conditions,
+      :statistic,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] calculated_attribute_name
+    #   The unique name of the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_details
+    #   Mathematical expression and a list of attribute items specified in
+    #   that expression.
+    #   @return [Types::AttributeDetails]
+    #
+    # @!attribute [rw] conditions
+    #   The conditions including range, object count, and threshold for the
+    #   calculated attribute.
+    #   @return [Types::Conditions]
+    #
+    # @!attribute [rw] statistic
+    #   The aggregation operation to perform for the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the calculated attribute definition was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp of when the calculated attribute definition was most
+    #   recently edited.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateCalculatedAttributeDefinitionResponse AWS API Documentation
+    #
+    class CreateCalculatedAttributeDefinitionResponse < Struct.new(
+      :calculated_attribute_name,
+      :display_name,
+      :description,
+      :attribute_details,
+      :conditions,
+      :statistic,
+      :created_at,
+      :last_updated_at,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -561,6 +732,53 @@ module Aws::CustomerProfiles
       :matching,
       :created_at,
       :last_updated_at,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] uri
+    #   The StreamARN of the destination to deliver profile events to. For
+    #   example, arn:aws:kinesis:region:account-id:stream/stream-name
+    #   @return [String]
+    #
+    # @!attribute [rw] event_stream_name
+    #   The name of the event stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateEventStreamRequest AWS API Documentation
+    #
+    class CreateEventStreamRequest < Struct.new(
+      :domain_name,
+      :uri,
+      :event_stream_name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_stream_arn
+    #   A unique identifier for the event stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateEventStreamResponse AWS API Documentation
+    #
+    class CreateEventStreamResponse < Struct.new(
+      :event_stream_arn,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -770,6 +988,27 @@ module Aws::CustomerProfiles
     #   The unique name of the domain.
     #   @return [String]
     #
+    # @!attribute [rw] calculated_attribute_name
+    #   The unique name of the calculated attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteCalculatedAttributeDefinitionRequest AWS API Documentation
+    #
+    class DeleteCalculatedAttributeDefinitionRequest < Struct.new(
+      :domain_name,
+      :calculated_attribute_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteCalculatedAttributeDefinitionResponse AWS API Documentation
+    #
+    class DeleteCalculatedAttributeDefinitionResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteDomainRequest AWS API Documentation
     #
     class DeleteDomainRequest < Struct.new(
@@ -789,6 +1028,27 @@ module Aws::CustomerProfiles
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_stream_name
+    #   The name of the event stream
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteEventStreamRequest AWS API Documentation
+    #
+    class DeleteEventStreamRequest < Struct.new(
+      :domain_name,
+      :event_stream_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteEventStreamResponse AWS API Documentation
+    #
+    class DeleteEventStreamResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] domain_name
     #   The unique name of the domain.
@@ -977,6 +1237,32 @@ module Aws::CustomerProfiles
     #
     class DeleteWorkflowResponse < Aws::EmptyStructure; end
 
+    # Summary information about the Kinesis data stream
+    #
+    # @!attribute [rw] uri
+    #   The StreamARN of the destination to deliver profile events to. For
+    #   example, arn:aws:kinesis:region:account-id:stream/stream-name.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of enabling the Kinesis stream as a destination for
+    #   export.
+    #   @return [String]
+    #
+    # @!attribute [rw] unhealthy_since
+    #   The timestamp when the status last changed to `UNHEALHY`.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DestinationSummary AWS API Documentation
+    #
+    class DestinationSummary < Struct.new(
+      :uri,
+      :status,
+      :unhealthy_since)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Usage-specific statistics about the domain.
     #
     # @!attribute [rw] profile_count
@@ -1005,6 +1291,83 @@ module Aws::CustomerProfiles
       :metering_profile_count,
       :object_count,
       :total_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of the destination being used for the EventStream.
+    #
+    # @!attribute [rw] uri
+    #   The StreamARN of the destination to deliver profile events to. For
+    #   example, arn:aws:kinesis:region:account-id:stream/stream-name.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of enabling the Kinesis stream as a destination for
+    #   export.
+    #   @return [String]
+    #
+    # @!attribute [rw] unhealthy_since
+    #   The timestamp when the status last changed to `UNHEALHY`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] message
+    #   The human-readable string that corresponds to the error or success
+    #   while enabling the streaming destination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/EventStreamDestinationDetails AWS API Documentation
+    #
+    class EventStreamDestinationDetails < Struct.new(
+      :uri,
+      :status,
+      :unhealthy_since,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An instance of EventStream in a list of EventStreams.
+    #
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_stream_name
+    #   The name of the event stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_stream_arn
+    #   A unique identifier for the event stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The operational state of destination stream for export.
+    #   @return [String]
+    #
+    # @!attribute [rw] stopped_since
+    #   The timestamp when the `State` changed to `STOPPED`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] destination_summary
+    #   Summary information about the Kinesis data stream.
+    #   @return [Types::DestinationSummary]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/EventStreamSummary AWS API Documentation
+    #
+    class EventStreamSummary < Struct.new(
+      :domain_name,
+      :event_stream_name,
+      :event_stream_arn,
+      :state,
+      :stopped_since,
+      :destination_summary,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1299,6 +1662,130 @@ module Aws::CustomerProfiles
     #   The unique name of the domain.
     #   @return [String]
     #
+    # @!attribute [rw] calculated_attribute_name
+    #   The unique name of the calculated attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetCalculatedAttributeDefinitionRequest AWS API Documentation
+    #
+    class GetCalculatedAttributeDefinitionRequest < Struct.new(
+      :domain_name,
+      :calculated_attribute_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] calculated_attribute_name
+    #   The unique name of the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the calculated attribute definition was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp of when the calculated attribute definition was most
+    #   recently edited.
+    #   @return [Time]
+    #
+    # @!attribute [rw] statistic
+    #   The aggregation operation to perform for the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] conditions
+    #   The conditions including range, object count, and threshold for the
+    #   calculated attribute.
+    #   @return [Types::Conditions]
+    #
+    # @!attribute [rw] attribute_details
+    #   Mathematical expression and a list of attribute items specified in
+    #   that expression.
+    #   @return [Types::AttributeDetails]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetCalculatedAttributeDefinitionResponse AWS API Documentation
+    #
+    class GetCalculatedAttributeDefinitionResponse < Struct.new(
+      :calculated_attribute_name,
+      :display_name,
+      :description,
+      :created_at,
+      :last_updated_at,
+      :statistic,
+      :conditions,
+      :attribute_details,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_id
+    #   The unique identifier of a customer profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] calculated_attribute_name
+    #   The unique name of the calculated attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetCalculatedAttributeForProfileRequest AWS API Documentation
+    #
+    class GetCalculatedAttributeForProfileRequest < Struct.new(
+      :domain_name,
+      :profile_id,
+      :calculated_attribute_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] calculated_attribute_name
+    #   The unique name of the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_data_partial
+    #   Indicates whether the calculated attribute’s value is based on
+    #   partial data. If data is partial, it is set to true.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the calculated attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetCalculatedAttributeForProfileResponse AWS API Documentation
+    #
+    class GetCalculatedAttributeForProfileResponse < Struct.new(
+      :calculated_attribute_name,
+      :display_name,
+      :is_data_partial,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetDomainRequest AWS API Documentation
     #
     class GetDomainRequest < Struct.new(
@@ -1372,6 +1859,66 @@ module Aws::CustomerProfiles
       :matching,
       :created_at,
       :last_updated_at,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_stream_name
+    #   The name of the event stream provided during create operations.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetEventStreamRequest AWS API Documentation
+    #
+    class GetEventStreamRequest < Struct.new(
+      :domain_name,
+      :event_stream_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_stream_arn
+    #   A unique identifier for the event stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the export was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The operational state of destination stream for export.
+    #   @return [String]
+    #
+    # @!attribute [rw] stopped_since
+    #   The timestamp when the `State` changed to `STOPPED`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] destination_details
+    #   Details regarding the Kinesis stream.
+    #   @return [Types::EventStreamDestinationDetails]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetEventStreamResponse AWS API Documentation
+    #
+    class GetEventStreamResponse < Struct.new(
+      :domain_name,
+      :event_stream_arn,
+      :created_at,
+      :state,
+      :stopped_since,
+      :destination_details,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2095,6 +2642,165 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # The details of a single calculated attribute definition.
+    #
+    # @!attribute [rw] calculated_attribute_name
+    #   The unique name of the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The threshold for the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The threshold for the calculated attribute.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp of when the calculated attribute definition was most
+    #   recently edited.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListCalculatedAttributeDefinitionItem AWS API Documentation
+    #
+    class ListCalculatedAttributeDefinitionItem < Struct.new(
+      :calculated_attribute_name,
+      :display_name,
+      :description,
+      :created_at,
+      :last_updated_at,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from the previous call to
+    #   ListCalculatedAttributeDefinitions.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of calculated attribute definitions returned per
+    #   page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListCalculatedAttributeDefinitionsRequest AWS API Documentation
+    #
+    class ListCalculatedAttributeDefinitionsRequest < Struct.new(
+      :domain_name,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The list of calculated attribute definitions.
+    #   @return [Array<Types::ListCalculatedAttributeDefinitionItem>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from the previous call to
+    #   ListCalculatedAttributeDefinitions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListCalculatedAttributeDefinitionsResponse AWS API Documentation
+    #
+    class ListCalculatedAttributeDefinitionsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of a single calculated attribute for a profile.
+    #
+    # @!attribute [rw] calculated_attribute_name
+    #   The unique name of the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_data_partial
+    #   Indicates whether the calculated attribute’s value is based on
+    #   partial data. If data is partial, it is set to true.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the calculated attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListCalculatedAttributeForProfileItem AWS API Documentation
+    #
+    class ListCalculatedAttributeForProfileItem < Struct.new(
+      :calculated_attribute_name,
+      :display_name,
+      :is_data_partial,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The pagination token from the previous call to
+    #   ListCalculatedAttributesForProfile.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of calculated attributes returned per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_id
+    #   The unique identifier of a customer profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListCalculatedAttributesForProfileRequest AWS API Documentation
+    #
+    class ListCalculatedAttributesForProfileRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :domain_name,
+      :profile_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The list of calculated attributes.
+    #   @return [Array<Types::ListCalculatedAttributeForProfileItem>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from the previous call to
+    #   ListCalculatedAttributesForProfile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListCalculatedAttributesForProfileResponse AWS API Documentation
+    #
+    class ListCalculatedAttributesForProfileResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object in a list that represents a domain.
     #
     # @!attribute [rw] domain_name
@@ -2153,6 +2859,45 @@ module Aws::CustomerProfiles
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListDomainsResponse AWS API Documentation
     #
     class ListDomainsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects returned per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListEventStreamsRequest AWS API Documentation
+    #
+    class ListEventStreamsRequest < Struct.new(
+      :domain_name,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   Contains summary information about an EventStream.
+    #   @return [Array<Types::EventStreamSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListEventStreamsResponse AWS API Documentation
+    #
+    class ListEventStreamsResponse < Struct.new(
       :items,
       :next_token)
       SENSITIVE = []
@@ -2490,8 +3235,7 @@ module Aws::CustomerProfiles
     #
     # @!attribute [rw] object_filter
     #   Applies a filter to the response to include profile objects with the
-    #   specified index values. This filter is only supported for
-    #   ObjectTypeName \_asset, \_case and \_order.
+    #   specified index values.
     #   @return [Types::ObjectFilter]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListProfileObjectsRequest AWS API Documentation
@@ -2803,16 +3547,15 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
-    # The filter applied to ListProfileObjects response to include profile
-    # objects with the specified index values. This filter is only supported
-    # for ObjectTypeName \_asset, \_case and \_order.
+    # The filter applied to `ListProfileObjects` response to include profile
+    # objects with the specified index values.
     #
     # @!attribute [rw] key_name
-    #   A searchable identifier of a standard profile object. The predefined
-    #   keys you can use to search for \_asset include: \_assetId,
-    #   \_assetName, \_serialNumber. The predefined keys you can use to
-    #   search for \_case include: \_caseId. The predefined keys you can use
-    #   to search for \_order include: \_orderId.
+    #   A searchable identifier of a profile object. The predefined keys you
+    #   can use to search for `_asset` include: `_assetId`, `_assetName`,
+    #   and `_serialNumber`. The predefined keys you can use to search for
+    #   `_case` include: `_caseId`. The predefined keys you can use to
+    #   search for `_order` include: `_orderId`.
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -3346,6 +4089,26 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # The relative time period over which data is included in the
+    # aggregation.
+    #
+    # @!attribute [rw] value
+    #   The amount of time of the specified unit.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unit
+    #   The unit of time.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/Range AWS API Documentation
+    #
+    class Range < Struct.new(
+      :value,
+      :unit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The requested resource does not exist, or access was denied.
     #
     # @!attribute [rw] message
@@ -3738,6 +4501,25 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # The threshold for the calculated attribute.
+    #
+    # @!attribute [rw] value
+    #   The value of the threshold.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   The operator of the threshold.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/Threshold AWS API Documentation
+    #
+    class Threshold < Struct.new(
+      :value,
+      :operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You exceeded the maximum number of requests.
     #
     # @!attribute [rw] message
@@ -3867,6 +4649,96 @@ module Aws::CustomerProfiles
       :province,
       :country,
       :postal_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] calculated_attribute_name
+    #   The unique name of the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] conditions
+    #   The conditions including range, object count, and threshold for the
+    #   calculated attribute.
+    #   @return [Types::Conditions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/UpdateCalculatedAttributeDefinitionRequest AWS API Documentation
+    #
+    class UpdateCalculatedAttributeDefinitionRequest < Struct.new(
+      :domain_name,
+      :calculated_attribute_name,
+      :display_name,
+      :description,
+      :conditions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] calculated_attribute_name
+    #   The unique name of the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the calculated attribute definition was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp of when the calculated attribute definition was most
+    #   recently edited.
+    #   @return [Time]
+    #
+    # @!attribute [rw] statistic
+    #   The aggregation operation to perform for the calculated attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] conditions
+    #   The conditions including range, object count, and threshold for the
+    #   calculated attribute.
+    #   @return [Types::Conditions]
+    #
+    # @!attribute [rw] attribute_details
+    #   The mathematical expression and a list of attribute items specified
+    #   in that expression.
+    #   @return [Types::AttributeDetails]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/UpdateCalculatedAttributeDefinitionResponse AWS API Documentation
+    #
+    class UpdateCalculatedAttributeDefinitionResponse < Struct.new(
+      :calculated_attribute_name,
+      :display_name,
+      :description,
+      :created_at,
+      :last_updated_at,
+      :statistic,
+      :conditions,
+      :attribute_details,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end

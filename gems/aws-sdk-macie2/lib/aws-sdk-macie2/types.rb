@@ -1145,7 +1145,7 @@ module Aws::Macie2
 
     # Specifies the scope, schedule, and other settings for a classification
     # job. You can't change any settings for a classification job after you
-    # create it. This helps ensure that you have an immutable history of
+    # create it. This helps to ensure that you have an immutable history of
     # sensitive data findings and discovery results for data privacy and
     # protection audits or investigations.
     #
@@ -1243,7 +1243,7 @@ module Aws::Macie2
 
     # Specifies the detection criteria and other settings for a custom data
     # identifier. You can't change a custom data identifier after you
-    # create it. This helps ensure that you have an immutable history of
+    # create it. This helps to ensure that you have an immutable history of
     # sensitive data findings and discovery results for data privacy and
     # protection audits or investigations.
     #
@@ -5944,7 +5944,7 @@ module Aws::Macie2
 
     # Specifies a severity level for findings that a custom data identifier
     # produces. A severity level determines which severity is assigned to
-    # the findings, based on the number of occurrences of text that matches
+    # the findings, based on the number of occurrences of text that match
     # the custom data identifier's detection criteria.
     #
     # @!attribute [rw] occurrences_threshold

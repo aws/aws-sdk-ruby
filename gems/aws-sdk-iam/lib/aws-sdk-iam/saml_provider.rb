@@ -79,7 +79,9 @@ module Aws::IAM
     #
     # @return [self]
     def load
-      resp = @client.get_saml_provider(saml_provider_arn: @arn)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.get_saml_provider(saml_provider_arn: @arn)
+      end
       @data = resp.data
       self
     end
@@ -194,7 +196,9 @@ module Aws::IAM
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -206,7 +210,9 @@ module Aws::IAM
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(saml_provider_arn: @arn)
-      resp = @client.delete_saml_provider(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_saml_provider(options)
+      end
       resp.data
     end
 
@@ -226,7 +232,9 @@ module Aws::IAM
     # @return [Types::UpdateSAMLProviderResponse]
     def update(options = {})
       options = options.merge(saml_provider_arn: @arn)
-      resp = @client.update_saml_provider(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.update_saml_provider(options)
+      end
       resp.data
     end
 

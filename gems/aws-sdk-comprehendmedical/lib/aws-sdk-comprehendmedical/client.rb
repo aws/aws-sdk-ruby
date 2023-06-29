@@ -275,6 +275,11 @@ module Aws::ComprehendMedical
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -651,7 +656,7 @@ module Aws::ComprehendMedical
     #   resp.entities[0].attributes[0].type #=> String, one of "NAME", "DX_NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "PHONE_OR_FAX", "EMAIL", "IDENTIFIER", "ID", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME", "AMOUNT", "GENDER", "RACE_ETHNICITY", "ALLERGIES", "TOBACCO_USE", "ALCOHOL_CONSUMPTION", "REC_DRUG_USE"
     #   resp.entities[0].attributes[0].score #=> Float
     #   resp.entities[0].attributes[0].relationship_score #=> Float
-    #   resp.entities[0].attributes[0].relationship_type #=> String, one of "EVERY", "WITH_DOSAGE", "ADMINISTERED_VIA", "FOR", "NEGATIVE", "OVERLAP", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "STRENGTH", "RATE", "ACUITY", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "DIRECTION", "SYSTEM_ORGAN_SITE", "AMOUNT"
+    #   resp.entities[0].attributes[0].relationship_type #=> String, one of "EVERY", "WITH_DOSAGE", "ADMINISTERED_VIA", "FOR", "NEGATIVE", "OVERLAP", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "STRENGTH", "RATE", "ACUITY", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "DIRECTION", "SYSTEM_ORGAN_SITE", "AMOUNT", "USAGE", "QUALITY"
     #   resp.entities[0].attributes[0].id #=> Integer
     #   resp.entities[0].attributes[0].begin_offset #=> Integer
     #   resp.entities[0].attributes[0].end_offset #=> Integer
@@ -665,7 +670,7 @@ module Aws::ComprehendMedical
     #   resp.unmapped_attributes[0].attribute.type #=> String, one of "NAME", "DX_NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "PHONE_OR_FAX", "EMAIL", "IDENTIFIER", "ID", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME", "AMOUNT", "GENDER", "RACE_ETHNICITY", "ALLERGIES", "TOBACCO_USE", "ALCOHOL_CONSUMPTION", "REC_DRUG_USE"
     #   resp.unmapped_attributes[0].attribute.score #=> Float
     #   resp.unmapped_attributes[0].attribute.relationship_score #=> Float
-    #   resp.unmapped_attributes[0].attribute.relationship_type #=> String, one of "EVERY", "WITH_DOSAGE", "ADMINISTERED_VIA", "FOR", "NEGATIVE", "OVERLAP", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "STRENGTH", "RATE", "ACUITY", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "DIRECTION", "SYSTEM_ORGAN_SITE", "AMOUNT"
+    #   resp.unmapped_attributes[0].attribute.relationship_type #=> String, one of "EVERY", "WITH_DOSAGE", "ADMINISTERED_VIA", "FOR", "NEGATIVE", "OVERLAP", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "STRENGTH", "RATE", "ACUITY", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "DIRECTION", "SYSTEM_ORGAN_SITE", "AMOUNT", "USAGE", "QUALITY"
     #   resp.unmapped_attributes[0].attribute.id #=> Integer
     #   resp.unmapped_attributes[0].attribute.begin_offset #=> Integer
     #   resp.unmapped_attributes[0].attribute.end_offset #=> Integer
@@ -735,7 +740,7 @@ module Aws::ComprehendMedical
     #   resp.entities[0].attributes[0].type #=> String, one of "NAME", "DX_NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "PHONE_OR_FAX", "EMAIL", "IDENTIFIER", "ID", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME", "AMOUNT", "GENDER", "RACE_ETHNICITY", "ALLERGIES", "TOBACCO_USE", "ALCOHOL_CONSUMPTION", "REC_DRUG_USE"
     #   resp.entities[0].attributes[0].score #=> Float
     #   resp.entities[0].attributes[0].relationship_score #=> Float
-    #   resp.entities[0].attributes[0].relationship_type #=> String, one of "EVERY", "WITH_DOSAGE", "ADMINISTERED_VIA", "FOR", "NEGATIVE", "OVERLAP", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "STRENGTH", "RATE", "ACUITY", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "DIRECTION", "SYSTEM_ORGAN_SITE", "AMOUNT"
+    #   resp.entities[0].attributes[0].relationship_type #=> String, one of "EVERY", "WITH_DOSAGE", "ADMINISTERED_VIA", "FOR", "NEGATIVE", "OVERLAP", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "STRENGTH", "RATE", "ACUITY", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "DIRECTION", "SYSTEM_ORGAN_SITE", "AMOUNT", "USAGE", "QUALITY"
     #   resp.entities[0].attributes[0].id #=> Integer
     #   resp.entities[0].attributes[0].begin_offset #=> Integer
     #   resp.entities[0].attributes[0].end_offset #=> Integer
@@ -749,7 +754,7 @@ module Aws::ComprehendMedical
     #   resp.unmapped_attributes[0].attribute.type #=> String, one of "NAME", "DX_NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "PHONE_OR_FAX", "EMAIL", "IDENTIFIER", "ID", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME", "AMOUNT", "GENDER", "RACE_ETHNICITY", "ALLERGIES", "TOBACCO_USE", "ALCOHOL_CONSUMPTION", "REC_DRUG_USE"
     #   resp.unmapped_attributes[0].attribute.score #=> Float
     #   resp.unmapped_attributes[0].attribute.relationship_score #=> Float
-    #   resp.unmapped_attributes[0].attribute.relationship_type #=> String, one of "EVERY", "WITH_DOSAGE", "ADMINISTERED_VIA", "FOR", "NEGATIVE", "OVERLAP", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "STRENGTH", "RATE", "ACUITY", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "DIRECTION", "SYSTEM_ORGAN_SITE", "AMOUNT"
+    #   resp.unmapped_attributes[0].attribute.relationship_type #=> String, one of "EVERY", "WITH_DOSAGE", "ADMINISTERED_VIA", "FOR", "NEGATIVE", "OVERLAP", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "STRENGTH", "RATE", "ACUITY", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "DIRECTION", "SYSTEM_ORGAN_SITE", "AMOUNT", "USAGE", "QUALITY"
     #   resp.unmapped_attributes[0].attribute.id #=> Integer
     #   resp.unmapped_attributes[0].attribute.begin_offset #=> Integer
     #   resp.unmapped_attributes[0].attribute.end_offset #=> Integer
@@ -809,7 +814,7 @@ module Aws::ComprehendMedical
     #   resp.entities[0].attributes[0].type #=> String, one of "NAME", "DX_NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "PHONE_OR_FAX", "EMAIL", "IDENTIFIER", "ID", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME", "AMOUNT", "GENDER", "RACE_ETHNICITY", "ALLERGIES", "TOBACCO_USE", "ALCOHOL_CONSUMPTION", "REC_DRUG_USE"
     #   resp.entities[0].attributes[0].score #=> Float
     #   resp.entities[0].attributes[0].relationship_score #=> Float
-    #   resp.entities[0].attributes[0].relationship_type #=> String, one of "EVERY", "WITH_DOSAGE", "ADMINISTERED_VIA", "FOR", "NEGATIVE", "OVERLAP", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "STRENGTH", "RATE", "ACUITY", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "DIRECTION", "SYSTEM_ORGAN_SITE", "AMOUNT"
+    #   resp.entities[0].attributes[0].relationship_type #=> String, one of "EVERY", "WITH_DOSAGE", "ADMINISTERED_VIA", "FOR", "NEGATIVE", "OVERLAP", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "STRENGTH", "RATE", "ACUITY", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "DIRECTION", "SYSTEM_ORGAN_SITE", "AMOUNT", "USAGE", "QUALITY"
     #   resp.entities[0].attributes[0].id #=> Integer
     #   resp.entities[0].attributes[0].begin_offset #=> Integer
     #   resp.entities[0].attributes[0].end_offset #=> Integer
@@ -874,7 +879,7 @@ module Aws::ComprehendMedical
     #   resp.entities[0].attributes[0].traits[0].name #=> String, one of "NEGATION", "DIAGNOSIS", "SIGN", "SYMPTOM", "PERTAINS_TO_FAMILY", "HYPOTHETICAL", "LOW_CONFIDENCE"
     #   resp.entities[0].attributes[0].traits[0].score #=> Float
     #   resp.entities[0].attributes[0].category #=> String, one of "DX_NAME", "TIME_EXPRESSION"
-    #   resp.entities[0].attributes[0].relationship_type #=> String, one of "OVERLAP", "SYSTEM_ORGAN_SITE"
+    #   resp.entities[0].attributes[0].relationship_type #=> String, one of "OVERLAP", "SYSTEM_ORGAN_SITE", "QUALITY"
     #   resp.entities[0].traits #=> Array
     #   resp.entities[0].traits[0].name #=> String, one of "NEGATION", "DIAGNOSIS", "SIGN", "SYMPTOM", "PERTAINS_TO_FAMILY", "HYPOTHETICAL", "LOW_CONFIDENCE"
     #   resp.entities[0].traits[0].score #=> Float
@@ -934,10 +939,10 @@ module Aws::ComprehendMedical
     #   resp.entities[0].attributes[0].end_offset #=> Integer
     #   resp.entities[0].attributes[0].text #=> String
     #   resp.entities[0].attributes[0].traits #=> Array
-    #   resp.entities[0].attributes[0].traits[0].name #=> String, one of "NEGATION"
+    #   resp.entities[0].attributes[0].traits[0].name #=> String, one of "NEGATION", "PAST_HISTORY"
     #   resp.entities[0].attributes[0].traits[0].score #=> Float
     #   resp.entities[0].traits #=> Array
-    #   resp.entities[0].traits[0].name #=> String, one of "NEGATION"
+    #   resp.entities[0].traits[0].name #=> String, one of "NEGATION", "PAST_HISTORY"
     #   resp.entities[0].traits[0].score #=> Float
     #   resp.entities[0].rx_norm_concepts #=> Array
     #   resp.entities[0].rx_norm_concepts[0].description #=> String
@@ -992,7 +997,7 @@ module Aws::ComprehendMedical
     #   resp.entities[0].attributes[0].type #=> String, one of "ACUITY", "QUALITY", "DIRECTION", "SYSTEM_ORGAN_SITE", "TEST_VALUE", "TEST_UNIT"
     #   resp.entities[0].attributes[0].score #=> Float
     #   resp.entities[0].attributes[0].relationship_score #=> Float
-    #   resp.entities[0].attributes[0].relationship_type #=> String, one of "ACUITY", "QUALITY", "TEST_VALUE", "TEST_UNITS", "DIRECTION", "SYSTEM_ORGAN_SITE"
+    #   resp.entities[0].attributes[0].relationship_type #=> String, one of "ACUITY", "QUALITY", "TEST_VALUE", "TEST_UNITS", "DIRECTION", "SYSTEM_ORGAN_SITE", "TEST_UNIT"
     #   resp.entities[0].attributes[0].id #=> Integer
     #   resp.entities[0].attributes[0].begin_offset #=> Integer
     #   resp.entities[0].attributes[0].end_offset #=> Integer
@@ -1851,7 +1856,7 @@ module Aws::ComprehendMedical
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehendmedical'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

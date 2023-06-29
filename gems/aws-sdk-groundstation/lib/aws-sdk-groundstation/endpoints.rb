@@ -9,6 +9,7 @@
 
 
 module Aws::GroundStation
+  # @api private
   module Endpoints
 
     class CancelContact

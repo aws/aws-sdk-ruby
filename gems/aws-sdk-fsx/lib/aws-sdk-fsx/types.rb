@@ -446,7 +446,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] progress_percent
-    #   The current percent of progress of an asynchronous task.
+    #   Displays the current percent of progress of an asynchronous task.
     #   @return [Integer]
     #
     # @!attribute [rw] creation_time
@@ -1672,7 +1672,7 @@ module Aws::FSx
     # @!attribute [rw] automatic_backup_retention_days
     #   The number of days to retain automatic backups. Setting this
     #   property to `0` disables automatic backups. You can retain automatic
-    #   backups for a maximum of 90 days. The default is `0`.
+    #   backups for a maximum of 90 days. The default is `30`.
     #   @return [Integer]
     #
     # @!attribute [rw] daily_automatic_backup_start_time
@@ -1780,7 +1780,7 @@ module Aws::FSx
     # @!attribute [rw] automatic_backup_retention_days
     #   The number of days to retain automatic backups. Setting this
     #   property to `0` disables automatic backups. You can retain automatic
-    #   backups for a maximum of 90 days. The default is `0`.
+    #   backups for a maximum of 90 days. The default is `30`.
     #   @return [Integer]
     #
     # @!attribute [rw] copy_tags_to_backups
@@ -1817,9 +1817,9 @@ module Aws::FSx
     #   following:
     #
     #   * `SINGLE_AZ_1`- (Default) Creates file systems with throughput
-    #     capacities of 64 - 4,096 MB/s. `Single_AZ_1` is available in all
+    #     capacities of 64 - 4,096 MBps. `Single_AZ_1` is available in all
     #     Amazon Web Services Regions where Amazon FSx for OpenZFS is
-    #     available, except US West (Oregon).
+    #     available.
     #
     #   * `SINGLE_AZ_2`- Creates file systems with throughput capacities of
     #     160 - 10,240 MB/s using an NVMe L2ARC cache. `Single_AZ_2` is
@@ -1838,14 +1838,14 @@ module Aws::FSx
     #
     # @!attribute [rw] throughput_capacity
     #   Specifies the throughput of an Amazon FSx for OpenZFS file system,
-    #   measured in megabytes per second (MB/s). Valid values depend on the
+    #   measured in megabytes per second (MBps). Valid values depend on the
     #   DeploymentType you choose, as follows:
     #
     #   * For `SINGLE_AZ_1`, valid values are 64, 128, 256, 512, 1024, 2048,
-    #     3072, or 4096 MB/s.
+    #     3072, or 4096 MBps.
     #
     #   * For `SINGLE_AZ_2`, valid values are 160, 320, 640, 1280, 2560,
-    #     3840, 5120, 7680, or 10240 MB/s.
+    #     3840, 5120, 7680, or 10240 MBps.
     #
     #   You pay for additional throughput capacity that you provision.
     #   @return [Integer]
@@ -1869,11 +1869,12 @@ module Aws::FSx
     #
     # @!attribute [rw] disk_iops_configuration
     #   The SSD IOPS (input/output operations per second) configuration for
-    #   an Amazon FSx for NetApp ONTAP or Amazon FSx for OpenZFS file
-    #   system. The default is 3 IOPS per GB of storage capacity, but you
-    #   can provision additional IOPS per GB of storage. The configuration
-    #   consists of the total number of provisioned SSD IOPS and how the
-    #   amount was provisioned (by the customer or by the system).
+    #   an Amazon FSx for NetApp ONTAP or FSx for OpenZFS file system. By
+    #   default, Amazon FSx automatically provisions 3 IOPS per GB of
+    #   storage capacity. You can provision additional IOPS per GB of
+    #   storage. The configuration consists of the total number of
+    #   provisioned SSD IOPS and how it is was provisioned, or the mode (by
+    #   the customer or by Amazon FSx).
     #   @return [Types::DiskIopsConfiguration]
     #
     # @!attribute [rw] root_volume_configuration
@@ -2127,11 +2128,11 @@ module Aws::FSx
     #
     # @!attribute [rw] self_managed_active_directory_configuration
     #   The configuration that Amazon FSx uses to join a FSx for Windows
-    #   File Server file system or an ONTAP storage virtual machine (SVM) to
-    #   a self-managed (including on-premises) Microsoft Active Directory
-    #   (AD) directory. For more information, see [ Using Amazon FSx with
-    #   your self-managed Microsoft Active Directory][1] or [Managing
-    #   SVMs][2].
+    #   File Server file system or an FSx for ONTAP storage virtual machine
+    #   (SVM) to a self-managed (including on-premises) Microsoft Active
+    #   Directory (AD) directory. For more information, see [ Using Amazon
+    #   FSx for Windows with your self-managed Microsoft Active
+    #   Directory][1] or [Managing FSx for ONTAP SVMs][2].
     #
     #
     #
@@ -2192,10 +2193,9 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] automatic_backup_retention_days
-    #   The number of days to retain automatic backups. The default is to
-    #   retain backups for 7 days. Setting this value to 0 disables the
-    #   creation of automatic backups. The maximum retention period for
-    #   backups is 90 days.
+    #   The number of days to retain automatic backups. Setting this
+    #   property to `0` disables automatic backups. You can retain automatic
+    #   backups for a maximum of 90 days. The default is `30`.
     #   @return [Integer]
     #
     # @!attribute [rw] copy_tags_to_backups
@@ -2725,11 +2725,11 @@ module Aws::FSx
     #
     # @!attribute [rw] self_managed_active_directory_configuration
     #   The configuration that Amazon FSx uses to join a FSx for Windows
-    #   File Server file system or an ONTAP storage virtual machine (SVM) to
-    #   a self-managed (including on-premises) Microsoft Active Directory
-    #   (AD) directory. For more information, see [ Using Amazon FSx with
-    #   your self-managed Microsoft Active Directory][1] or [Managing
-    #   SVMs][2].
+    #   File Server file system or an FSx for ONTAP storage virtual machine
+    #   (SVM) to a self-managed (including on-premises) Microsoft Active
+    #   Directory (AD) directory. For more information, see [ Using Amazon
+    #   FSx for Windows with your self-managed Microsoft Active
+    #   Directory][1] or [Managing FSx for ONTAP SVMs][2].
     #
     #
     #
@@ -2869,8 +2869,8 @@ module Aws::FSx
     # * `DescribeDataRepositoryAssociations`
     #
     # Data repository associations are supported on Amazon File Cache
-    # resources and all Amazon FSx for Lustre file systems excluding
-    # `Scratch_1` deployment types.
+    # resources and all FSx for Lustre 2.12 and newer file systems,
+    # excluding `scratch_1` deployment type.
     #
     # @!attribute [rw] association_id
     #   The system-generated, unique ID of the data repository association.
@@ -4603,16 +4603,17 @@ module Aws::FSx
     end
 
     # The SSD IOPS (input/output operations per second) configuration for an
-    # Amazon FSx for NetApp ONTAP or Amazon FSx for OpenZFS file system. The
-    # default is 3 IOPS per GB of storage capacity, but you can provision
-    # additional IOPS per GB of storage. The configuration consists of the
-    # total number of provisioned SSD IOPS and how the amount was
-    # provisioned (by the customer or by the system).
+    # Amazon FSx for NetApp ONTAP or FSx for OpenZFS file system. By
+    # default, Amazon FSx automatically provisions 3 IOPS per GB of storage
+    # capacity. You can provision additional IOPS per GB of storage. The
+    # configuration consists of the total number of provisioned SSD IOPS and
+    # how it is was provisioned, or the mode (by the customer or by Amazon
+    # FSx).
     #
     # @!attribute [rw] mode
-    #   Specifies whether the number of IOPS for the file system is using
-    #   the system default (`AUTOMATIC`) or was provisioned by the customer
-    #   (`USER_PROVISIONED`).
+    #   Specifies whether the file system is using the `AUTOMATIC` setting
+    #   of SSD IOPS of 3 IOPS per GB of storage capacity, , or if it using a
+    #   `USER_PROVISIONED` value.
     #   @return [String]
     #
     # @!attribute [rw] iops
@@ -5305,8 +5306,8 @@ module Aws::FSx
     # and `Intercluster` endpoints.
     #
     # @!attribute [rw] dns_name
-    #   The Domain Name Service (DNS) name for the file system. You can
-    #   mount your file system using its DNS name.
+    #   The file system's DNS name. You can mount your file system using
+    #   its DNS name.
     #   @return [String]
     #
     # @!attribute [rw] ip_addresses
@@ -5721,7 +5722,7 @@ module Aws::FSx
     # @!attribute [rw] automatic_backup_retention_days
     #   The number of days to retain automatic backups. Setting this
     #   property to `0` disables automatic backups. You can retain automatic
-    #   backups for a maximum of 90 days. The default is `0`.
+    #   backups for a maximum of 90 days. The default is `30`.
     #   @return [Integer]
     #
     # @!attribute [rw] copy_tags_to_backups
@@ -6036,7 +6037,7 @@ module Aws::FSx
     # @!attribute [rw] automatic_backup_retention_days
     #   The number of days to retain automatic backups. Setting this
     #   property to `0` disables automatic backups. You can retain automatic
-    #   backups for a maximum of 90 days. The default is `0`.
+    #   backups for a maximum of 90 days. The default is `30`.
     #   @return [Integer]
     #
     # @!attribute [rw] daily_automatic_backup_start_time
@@ -6123,6 +6124,12 @@ module Aws::FSx
     #   [1]: https://en.wikipedia.org/wiki/ISO_week_date
     #   @return [String]
     #
+    # @!attribute [rw] fsx_admin_password
+    #   You can use the `fsxadmin` user account to access the NetApp ONTAP
+    #   CLI and REST API. The password value is always redacted in the
+    #   response.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OntapFileSystemConfiguration AWS API Documentation
     #
     class OntapFileSystemConfiguration < Struct.new(
@@ -6135,8 +6142,9 @@ module Aws::FSx
       :preferred_subnet_id,
       :route_table_ids,
       :throughput_capacity,
-      :weekly_maintenance_start_time)
-      SENSITIVE = []
+      :weekly_maintenance_start_time,
+      :fsx_admin_password)
+      SENSITIVE = [:fsx_admin_password]
       include Aws::Structure
     end
 
@@ -6392,7 +6400,7 @@ module Aws::FSx
     # @!attribute [rw] automatic_backup_retention_days
     #   The number of days to retain automatic backups. Setting this
     #   property to `0` disables automatic backups. You can retain automatic
-    #   backups for a maximum of 90 days. The default is `0`.
+    #   backups for a maximum of 90 days. The default is `30`.
     #   @return [Integer]
     #
     # @!attribute [rw] copy_tags_to_backups
@@ -6451,11 +6459,12 @@ module Aws::FSx
     #
     # @!attribute [rw] disk_iops_configuration
     #   The SSD IOPS (input/output operations per second) configuration for
-    #   an Amazon FSx for NetApp ONTAP or Amazon FSx for OpenZFS file
-    #   system. The default is 3 IOPS per GB of storage capacity, but you
-    #   can provision additional IOPS per GB of storage. The configuration
-    #   consists of the total number of provisioned SSD IOPS and how the
-    #   amount was provisioned (by the customer or by the system).
+    #   an Amazon FSx for NetApp ONTAP or FSx for OpenZFS file system. By
+    #   default, Amazon FSx automatically provisions 3 IOPS per GB of
+    #   storage capacity. You can provision additional IOPS per GB of
+    #   storage. The configuration consists of the total number of
+    #   provisioned SSD IOPS and how it is was provisioned, or the mode (by
+    #   the customer or by Amazon FSx).
     #   @return [Types::DiskIopsConfiguration]
     #
     # @!attribute [rw] root_volume_id
@@ -6892,10 +6901,11 @@ module Aws::FSx
     end
 
     # The configuration that Amazon FSx uses to join a FSx for Windows File
-    # Server file system or an ONTAP storage virtual machine (SVM) to a
-    # self-managed (including on-premises) Microsoft Active Directory (AD)
-    # directory. For more information, see [ Using Amazon FSx with your
-    # self-managed Microsoft Active Directory][1] or [Managing SVMs][2].
+    # Server file system or an FSx for ONTAP storage virtual machine (SVM)
+    # to a self-managed (including on-premises) Microsoft Active Directory
+    # (AD) directory. For more information, see [ Using Amazon FSx for
+    # Windows with your self-managed Microsoft Active Directory][1] or
+    # [Managing FSx for ONTAP SVMs][2].
     #
     #
     #
@@ -6965,33 +6975,56 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # The configuration that Amazon FSx uses to join the Windows File Server
-    # instance to a self-managed Microsoft Active Directory (AD) directory.
+    # Specifies changes you are making to the self-managed Microsoft Active
+    # Directory (AD) configuration to which an FSx for Windows File Server
+    # file system or an FSx for ONTAP SVM is joined.
     #
     # @!attribute [rw] user_name
-    #   The user name for the service account on your self-managed AD domain
-    #   that Amazon FSx will use to join to your AD domain. This account
-    #   must have the permission to join computers to the domain in the
-    #   organizational unit provided in
+    #   Specifies the updated user name for the service account on your
+    #   self-managed AD domain. Amazon FSx uses this account to join to your
+    #   self-managed AD domain.
+    #
+    #   This account must have the permissions required to join computers to
+    #   the domain in the organizational unit provided in
     #   `OrganizationalUnitDistinguishedName`.
     #   @return [String]
     #
     # @!attribute [rw] password
-    #   The password for the service account on your self-managed AD domain
-    #   that Amazon FSx will use to join to your AD domain.
+    #   Specifies the updated password for the service account on your
+    #   self-managed AD domain. Amazon FSx uses this account to join to your
+    #   self-managed AD domain.
     #   @return [String]
     #
     # @!attribute [rw] dns_ips
-    #   A list of up to three IP addresses of DNS servers or domain
-    #   controllers in the self-managed AD directory.
+    #   A list of up to three DNS server or domain controller IP addresses
+    #   in your self-managed AD domain.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] domain_name
+    #   Specifies an updated fully qualified domain name of your
+    #   self-managed AD configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_unit_distinguished_name
+    #   Specifies an updated fully qualified distinguished name of the
+    #   organization unit within your self-managed AD.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_administrators_group
+    #   Specifies the updated name of the self-managed AD domain group whose
+    #   members are granted administrative privileges for the Amazon FSx
+    #   resource.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SelfManagedActiveDirectoryConfigurationUpdates AWS API Documentation
     #
     class SelfManagedActiveDirectoryConfigurationUpdates < Struct.new(
       :user_name,
       :password,
-      :dns_ips)
+      :dns_ips,
+      :domain_name,
+      :organizational_unit_distinguished_name,
+      :file_system_administrators_group)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -7282,14 +7315,14 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # Describes the configuration of the Microsoft Active Directory (AD)
-    # directory to which the Amazon FSx for ONTAP storage virtual machine
-    # (SVM) is joined. Pleae note, account credentials are not returned in
-    # the response payload.
+    # Describes the Microsoft Active Directory (AD) directory configuration
+    # to which the FSx for ONTAP storage virtual machine (SVM) is joined.
+    # Note that account credentials are not returned in the response
+    # payload.
     #
     # @!attribute [rw] net_bios_name
-    #   The NetBIOS name of the Active Directory computer object that is
-    #   joined to your SVM.
+    #   The NetBIOS name of the AD computer object to which the SVM is
+    #   joined.
     #   @return [String]
     #
     # @!attribute [rw] self_managed_active_directory_configuration
@@ -7313,8 +7346,8 @@ module Aws::FSx
     # `Iscsi`, `Management`, `Nfs`, and `Smb` endpoints.
     #
     # @!attribute [rw] dns_name
-    #   The Domain Name Service (DNS) name for the file system. You can
-    #   mount your file system using its DNS name.
+    #   The file system's DNS name. You can mount your file system using
+    #   its DNS name.
     #   @return [String]
     #
     # @!attribute [rw] ip_addresses
@@ -7749,7 +7782,7 @@ module Aws::FSx
     # @!attribute [rw] automatic_backup_retention_days
     #   The number of days to retain automatic backups. Setting this
     #   property to `0` disables automatic backups. You can retain automatic
-    #   backups for a maximum of 90 days. The default is `0`.
+    #   backups for a maximum of 90 days. The default is `30`.
     #   @return [Integer]
     #
     # @!attribute [rw] daily_automatic_backup_start_time
@@ -7759,7 +7792,14 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] fsx_admin_password
-    #   The ONTAP administrative password for the `fsxadmin` user.
+    #   Update the password for the `fsxadmin` user by entering a new
+    #   password. You use the `fsxadmin` user to access the NetApp ONTAP CLI
+    #   and REST API to manage your file system resources. For more
+    #   information, see [Managing resources using NetApp Applicaton][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-resources-ontap-apps.html
     #   @return [String]
     #
     # @!attribute [rw] weekly_maintenance_start_time
@@ -7780,18 +7820,30 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] disk_iops_configuration
-    #   The SSD IOPS (input/output operations per second) configuration for
+    #   The SSD IOPS (input output operations per second) configuration for
     #   an Amazon FSx for NetApp ONTAP file system. The default is 3 IOPS
     #   per GB of storage capacity, but you can provision additional IOPS
     #   per GB of storage. The configuration consists of an IOPS mode
     #   (`AUTOMATIC` or `USER_PROVISIONED`), and in the case of
     #   `USER_PROVISIONED` IOPS, the total number of SSD IOPS provisioned.
+    #   For more information, see [Updating SSD storage capacity and
+    #   IOPS][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/increase-primary-storage.html
     #   @return [Types::DiskIopsConfiguration]
     #
     # @!attribute [rw] throughput_capacity
-    #   Specifies the throughput of an FSx for NetApp ONTAP file system,
-    #   measured in megabytes per second (MBps). Valid values are 128, 256,
-    #   512, 1024, 2048, and 4096 MBps.
+    #   Enter a new value to change the amount of throughput capacity for
+    #   the file system. Throughput capacity is measured in megabytes per
+    #   second (MBps). Valid values are 128, 256, 512, 1024, 2048, and 4096
+    #   MBps. For more information, see [Managing throughput capacity][1] in
+    #   the FSx for ONTAP User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-throughput-capacity.html
     #   @return [Integer]
     #
     # @!attribute [rw] add_route_table_ids
@@ -7827,7 +7879,7 @@ module Aws::FSx
     # @!attribute [rw] automatic_backup_retention_days
     #   The number of days to retain automatic backups. Setting this
     #   property to `0` disables automatic backups. You can retain automatic
-    #   backups for a maximum of 90 days. The default is `0`.
+    #   backups for a maximum of 90 days. The default is `30`.
     #   @return [Integer]
     #
     # @!attribute [rw] copy_tags_to_backups
@@ -7888,11 +7940,12 @@ module Aws::FSx
     #
     # @!attribute [rw] disk_iops_configuration
     #   The SSD IOPS (input/output operations per second) configuration for
-    #   an Amazon FSx for NetApp ONTAP or Amazon FSx for OpenZFS file
-    #   system. The default is 3 IOPS per GB of storage capacity, but you
-    #   can provision additional IOPS per GB of storage. The configuration
-    #   consists of the total number of provisioned SSD IOPS and how the
-    #   amount was provisioned (by the customer or by the system).
+    #   an Amazon FSx for NetApp ONTAP or FSx for OpenZFS file system. By
+    #   default, Amazon FSx automatically provisions 3 IOPS per GB of
+    #   storage capacity. You can provision additional IOPS per GB of
+    #   storage. The configuration consists of the total number of
+    #   provisioned SSD IOPS and how it is was provisioned, or the mode (by
+    #   the customer or by Amazon FSx).
     #   @return [Types::DiskIopsConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemOpenZFSConfiguration AWS API Documentation
@@ -7964,7 +8017,7 @@ module Aws::FSx
     #   at least 10 percent greater than the current storage capacity value.
     #   To increase storage capacity, the file system must have at least 16
     #   MBps of throughput capacity. For more information, see [Managing
-    #   storage capacity][3] in the *Amazon FSx for Windows File Server User
+    #   storage capacity][3] in the *Amazon FSxfor Windows File Server User
     #   Guide*.
     #
     #   For ONTAP file systems, the storage capacity target value must be at
@@ -7996,7 +8049,7 @@ module Aws::FSx
     #   @return [Types::UpdateFileSystemOntapConfiguration]
     #
     # @!attribute [rw] open_zfs_configuration
-    #   The configuration updates for an Amazon FSx for OpenZFS file system.
+    #   The configuration updates for an FSx for OpenZFS file system.
     #   @return [Types::UpdateFileSystemOpenZFSConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemRequest AWS API Documentation
@@ -8043,9 +8096,9 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] automatic_backup_retention_days
-    #   The number of days to retain automatic daily backups. Setting this
-    #   to zero (0) disables automatic daily backups. You can retain
-    #   automatic daily backups for a maximum of 90 days. For more
+    #   The number of days to retain automatic backups. Setting this
+    #   property to `0` disables automatic backups. You can retain automatic
+    #   backups for a maximum of 90 days. The default is `30`. For more
     #   information, see [Working with Automatic Daily Backups][1].
     #
     #
@@ -8293,8 +8346,8 @@ module Aws::FSx
     end
 
     # @!attribute [rw] active_directory_configuration
-    #   Updates the Microsoft Active Directory (AD) configuration for an SVM
-    #   that is joined to an AD.
+    #   Specifies updates to an SVM's Microsoft Active Directory (AD)
+    #   configuration.
     #   @return [Types::UpdateSvmActiveDirectoryConfiguration]
     #
     # @!attribute [rw] client_request_token
@@ -8313,7 +8366,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] svm_admin_password
-    #   Enter a new SvmAdminPassword if you are updating it.
+    #   Specifies a new SvmAdminPassword.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateStorageVirtualMachineRequest AWS API Documentation
@@ -8340,20 +8393,26 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # Updates the Microsoft Active Directory (AD) configuration of an SVM
-    # joined to an AD. Please note, account credentials are not returned in
-    # the response payload.
+    # Specifies updates to an FSx for ONTAP storage virtual machine's (SVM)
+    # Microsoft Active Directory (AD) configuration. Note that account
+    # credentials are not returned in the response payload.
     #
     # @!attribute [rw] self_managed_active_directory_configuration
-    #   The configuration that Amazon FSx uses to join the Windows File
-    #   Server instance to a self-managed Microsoft Active Directory (AD)
-    #   directory.
+    #   Specifies changes you are making to the self-managed Microsoft
+    #   Active Directory (AD) configuration to which an FSx for Windows File
+    #   Server file system or an FSx for ONTAP SVM is joined.
     #   @return [Types::SelfManagedActiveDirectoryConfigurationUpdates]
+    #
+    # @!attribute [rw] net_bios_name
+    #   Specifies an updated NetBIOS name of the AD computer object
+    #   `NetBiosName` to which an SVM is joined.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateSvmActiveDirectoryConfiguration AWS API Documentation
     #
     class UpdateSvmActiveDirectoryConfiguration < Struct.new(
-      :self_managed_active_directory_configuration)
+      :self_managed_active_directory_configuration,
+      :net_bios_name)
       SENSITIVE = []
       include Aws::Structure
     end

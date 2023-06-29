@@ -190,7 +190,9 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -209,7 +211,9 @@ module Aws::EC2
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(association_id: @id)
-      resp = @client.disassociate_route_table(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.disassociate_route_table(options)
+      end
       resp.data
     end
 
@@ -230,7 +234,9 @@ module Aws::EC2
     # @return [RouteTableAssociation]
     def replace_subnet(options = {})
       options = options.merge(association_id: @id)
-      resp = @client.replace_route_table_association(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.replace_route_table_association(options)
+      end
       RouteTableAssociation.new(
         id: resp.data.new_association_id,
         client: @client

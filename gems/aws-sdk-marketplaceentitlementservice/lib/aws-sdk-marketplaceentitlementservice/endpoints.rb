@@ -9,6 +9,7 @@
 
 
 module Aws::MarketplaceEntitlementService
+  # @api private
   module Endpoints
 
     class GetEntitlements

@@ -133,6 +133,91 @@ module Aws::IVS
       include Aws::Structure
     end
 
+    # Error for a request in the batch for
+    # BatchStartViewerSessionRevocation. Each error is related to a specific
+    # channel-ARN and viewer-ID pair.
+    #
+    # @!attribute [rw] channel_arn
+    #   Channel ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   Error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Error message, determined by the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] viewer_id
+    #   The ID of the viewer session to revoke.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/BatchStartViewerSessionRevocationError AWS API Documentation
+    #
+    class BatchStartViewerSessionRevocationError < Struct.new(
+      :channel_arn,
+      :code,
+      :message,
+      :viewer_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] viewer_sessions
+    #   Array of viewer sessions, one per channel-ARN and viewer-ID pair.
+    #   @return [Array<Types::BatchStartViewerSessionRevocationViewerSession>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/BatchStartViewerSessionRevocationRequest AWS API Documentation
+    #
+    class BatchStartViewerSessionRevocationRequest < Struct.new(
+      :viewer_sessions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] errors
+    #   Each error object is related to a specific `channelArn` and
+    #   `viewerId` pair in the request.
+    #   @return [Array<Types::BatchStartViewerSessionRevocationError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/BatchStartViewerSessionRevocationResponse AWS API Documentation
+    #
+    class BatchStartViewerSessionRevocationResponse < Struct.new(
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A viewer session to revoke in the call to
+    # BatchStartViewerSessionRevocation.
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel associated with the viewer session to revoke.
+    #   @return [String]
+    #
+    # @!attribute [rw] viewer_id
+    #   The ID of the viewer associated with the viewer session to revoke.
+    #   Do not use this field for personally identifying, confidential, or
+    #   sensitive information.
+    #   @return [String]
+    #
+    # @!attribute [rw] viewer_session_versions_less_than_or_equal_to
+    #   An optional filter on which versions of the viewer session to
+    #   revoke. All versions less than or equal to the specified version
+    #   will be revoked. Default: 0.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/BatchStartViewerSessionRevocationViewerSession AWS API Documentation
+    #
+    class BatchStartViewerSessionRevocationViewerSession < Struct.new(
+      :channel_arn,
+      :viewer_id,
+      :viewer_session_versions_less_than_or_equal_to)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Object specifying a channel.
     #
     # @!attribute [rw] arn
@@ -168,6 +253,14 @@ module Aws::IVS
     #   Channel playback URL.
     #   @return [String]
     #
+    # @!attribute [rw] preset
+    #   Optional transcode preset for the channel. This is selectable only
+    #   for `ADVANCED_HD` and `ADVANCED_SD` channel types. For those channel
+    #   types, the default `preset` is `HIGHER_BANDWIDTH_DELIVERY`. For
+    #   other channel types (`BASIC` and `STANDARD`), `preset` is the empty
+    #   string (`""`).
+    #   @return [String]
+    #
     # @!attribute [rw] recording_configuration_arn
     #   Recording-configuration ARN. A value other than an empty string
     #   indicates that recording is enabled. Default: "" (empty string,
@@ -188,9 +281,20 @@ module Aws::IVS
     #
     # @!attribute [rw] type
     #   Channel type, which determines the allowable resolution and bitrate.
-    #   *If you exceed the allowable resolution or bitrate, the stream
-    #   probably will disconnect immediately.* Default: `STANDARD`. Valid
-    #   values:
+    #   *If you exceed the allowable input resolution or bitrate, the stream
+    #   probably will disconnect immediately.* Some types generate multiple
+    #   qualities (renditions) from the original input; this automatically
+    #   gives viewers the best experience for their devices and network
+    #   conditions. Some types provide transcoded video; transcoding allows
+    #   higher playback quality across a range of download speeds. Default:
+    #   `STANDARD`. Valid values:
+    #
+    #   * `BASIC`: Video is transmuxed: Amazon IVS delivers the original
+    #     input quality to viewers. The viewer’s video-quality choice is
+    #     limited to the original input. Input resolution can be up to 1080p
+    #     and bitrate can be up to 1.5 Mbps for 480p and up to 3.5 Mbps for
+    #     resolutions between 480p and 1080p. Original audio is passed
+    #     through.
     #
     #   * `STANDARD`: Video is transcoded: multiple qualities are generated
     #     from the original input, to automatically give viewers the best
@@ -198,13 +302,36 @@ module Aws::IVS
     #     allows higher playback quality across a range of download speeds.
     #     Resolution can be up to 1080p and bitrate can be up to 8.5 Mbps.
     #     Audio is transcoded only for renditions 360p and below; above
-    #     that, audio is passed through. This is the default.
+    #     that, audio is passed through. This is the default when you create
+    #     a channel.
     #
-    #   * `BASIC`: Video is transmuxed: Amazon IVS delivers the original
-    #     input to viewers. The viewer’s video-quality choice is limited to
-    #     the original input. Resolution can be up to 1080p and bitrate can
-    #     be up to 1.5 Mbps for 480p and up to 3.5 Mbps for resolutions
-    #     between 480p and 1080p.
+    #   * `ADVANCED_SD`: Video is transcoded; multiple qualities are
+    #     generated from the original input, to automatically give viewers
+    #     the best experience for their devices and network conditions.
+    #     Input resolution can be up to 1080p and bitrate can be up to 8.5
+    #     Mbps; output is capped at SD quality (480p). You can select an
+    #     optional transcode preset (see below). Audio for all renditions is
+    #     transcoded, and an audio-only rendition is available.
+    #
+    #   * `ADVANCED_HD`: Video is transcoded; multiple qualities are
+    #     generated from the original input, to automatically give viewers
+    #     the best experience for their devices and network conditions.
+    #     Input resolution can be up to 1080p and bitrate can be up to 8.5
+    #     Mbps; output is capped at HD quality (720p). You can select an
+    #     optional transcode preset (see below). Audio for all renditions is
+    #     transcoded, and an audio-only rendition is available.
+    #
+    #   Optional *transcode presets* (available for the `ADVANCED` types)
+    #   allow you to trade off available download bandwidth and video
+    #   quality, to optimize the viewing experience. There are two presets:
+    #
+    #   * *Constrained bandwidth delivery* uses a lower bitrate for each
+    #     quality level. Use it if you have low download bandwidth and/or
+    #     simple video content (e.g., talking heads)
+    #
+    #   * *Higher bandwidth delivery* uses a higher bitrate for each quality
+    #     level. Use it if you have high download bandwidth and/or complex
+    #     video content (e.g., flashes and quick scene changes).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/Channel AWS API Documentation
@@ -217,6 +344,7 @@ module Aws::IVS
       :latency_mode,
       :name,
       :playback_url,
+      :preset,
       :recording_configuration_arn,
       :tags,
       :type)
@@ -262,6 +390,14 @@ module Aws::IVS
     #   Channel name.
     #   @return [String]
     #
+    # @!attribute [rw] preset
+    #   Optional transcode preset for the channel. This is selectable only
+    #   for `ADVANCED_HD` and `ADVANCED_SD` channel types. For those channel
+    #   types, the default `preset` is `HIGHER_BANDWIDTH_DELIVERY`. For
+    #   other channel types (`BASIC` and `STANDARD`), `preset` is the empty
+    #   string (`""`).
+    #   @return [String]
+    #
     # @!attribute [rw] recording_configuration_arn
     #   Recording-configuration ARN. A value other than an empty string
     #   indicates that recording is enabled. Default: "" (empty string,
@@ -280,6 +416,61 @@ module Aws::IVS
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] type
+    #   Channel type, which determines the allowable resolution and bitrate.
+    #   *If you exceed the allowable input resolution or bitrate, the stream
+    #   probably will disconnect immediately.* Some types generate multiple
+    #   qualities (renditions) from the original input; this automatically
+    #   gives viewers the best experience for their devices and network
+    #   conditions. Some types provide transcoded video; transcoding allows
+    #   higher playback quality across a range of download speeds. Default:
+    #   `STANDARD`. Valid values:
+    #
+    #   * `BASIC`: Video is transmuxed: Amazon IVS delivers the original
+    #     input quality to viewers. The viewer’s video-quality choice is
+    #     limited to the original input. Input resolution can be up to 1080p
+    #     and bitrate can be up to 1.5 Mbps for 480p and up to 3.5 Mbps for
+    #     resolutions between 480p and 1080p. Original audio is passed
+    #     through.
+    #
+    #   * `STANDARD`: Video is transcoded: multiple qualities are generated
+    #     from the original input, to automatically give viewers the best
+    #     experience for their devices and network conditions. Transcoding
+    #     allows higher playback quality across a range of download speeds.
+    #     Resolution can be up to 1080p and bitrate can be up to 8.5 Mbps.
+    #     Audio is transcoded only for renditions 360p and below; above
+    #     that, audio is passed through. This is the default when you create
+    #     a channel.
+    #
+    #   * `ADVANCED_SD`: Video is transcoded; multiple qualities are
+    #     generated from the original input, to automatically give viewers
+    #     the best experience for their devices and network conditions.
+    #     Input resolution can be up to 1080p and bitrate can be up to 8.5
+    #     Mbps; output is capped at SD quality (480p). You can select an
+    #     optional transcode preset (see below). Audio for all renditions is
+    #     transcoded, and an audio-only rendition is available.
+    #
+    #   * `ADVANCED_HD`: Video is transcoded; multiple qualities are
+    #     generated from the original input, to automatically give viewers
+    #     the best experience for their devices and network conditions.
+    #     Input resolution can be up to 1080p and bitrate can be up to 8.5
+    #     Mbps; output is capped at HD quality (720p). You can select an
+    #     optional transcode preset (see below). Audio for all renditions is
+    #     transcoded, and an audio-only rendition is available.
+    #
+    #   Optional *transcode presets* (available for the `ADVANCED` types)
+    #   allow you to trade off available download bandwidth and video
+    #   quality, to optimize the viewing experience. There are two presets:
+    #
+    #   * *Constrained bandwidth delivery* uses a lower bitrate for each
+    #     quality level. Use it if you have low download bandwidth and/or
+    #     simple video content (e.g., talking heads)
+    #
+    #   * *Higher bandwidth delivery* uses a higher bitrate for each quality
+    #     level. Use it if you have high download bandwidth and/or complex
+    #     video content (e.g., flashes and quick scene changes).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ChannelSummary AWS API Documentation
     #
     class ChannelSummary < Struct.new(
@@ -288,8 +479,10 @@ module Aws::IVS
       :insecure_ingest,
       :latency_mode,
       :name,
+      :preset,
       :recording_configuration_arn,
-      :tags)
+      :tags,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -326,6 +519,14 @@ module Aws::IVS
     #   Channel name.
     #   @return [String]
     #
+    # @!attribute [rw] preset
+    #   Optional transcode preset for the channel. This is selectable only
+    #   for `ADVANCED_HD` and `ADVANCED_SD` channel types. For those channel
+    #   types, the default `preset` is `HIGHER_BANDWIDTH_DELIVERY`. For
+    #   other channel types (`BASIC` and `STANDARD`), `preset` is the empty
+    #   string (`""`).
+    #   @return [String]
+    #
     # @!attribute [rw] recording_configuration_arn
     #   Recording-configuration ARN. Default: "" (empty string, recording
     #   is disabled).
@@ -345,9 +546,20 @@ module Aws::IVS
     #
     # @!attribute [rw] type
     #   Channel type, which determines the allowable resolution and bitrate.
-    #   *If you exceed the allowable resolution or bitrate, the stream
-    #   probably will disconnect immediately.* Default: `STANDARD`. Valid
-    #   values:
+    #   *If you exceed the allowable input resolution or bitrate, the stream
+    #   probably will disconnect immediately.* Some types generate multiple
+    #   qualities (renditions) from the original input; this automatically
+    #   gives viewers the best experience for their devices and network
+    #   conditions. Some types provide transcoded video; transcoding allows
+    #   higher playback quality across a range of download speeds. Default:
+    #   `STANDARD`. Valid values:
+    #
+    #   * `BASIC`: Video is transmuxed: Amazon IVS delivers the original
+    #     input quality to viewers. The viewer’s video-quality choice is
+    #     limited to the original input. Input resolution can be up to 1080p
+    #     and bitrate can be up to 1.5 Mbps for 480p and up to 3.5 Mbps for
+    #     resolutions between 480p and 1080p. Original audio is passed
+    #     through.
     #
     #   * `STANDARD`: Video is transcoded: multiple qualities are generated
     #     from the original input, to automatically give viewers the best
@@ -355,13 +567,36 @@ module Aws::IVS
     #     allows higher playback quality across a range of download speeds.
     #     Resolution can be up to 1080p and bitrate can be up to 8.5 Mbps.
     #     Audio is transcoded only for renditions 360p and below; above
-    #     that, audio is passed through. This is the default.
+    #     that, audio is passed through. This is the default when you create
+    #     a channel.
     #
-    #   * `BASIC`: Video is transmuxed: Amazon IVS delivers the original
-    #     input to viewers. The viewer’s video-quality choice is limited to
-    #     the original input. Resolution can be up to 1080p and bitrate can
-    #     be up to 1.5 Mbps for 480p and up to 3.5 Mbps for resolutions
-    #     between 480p and 1080p.
+    #   * `ADVANCED_SD`: Video is transcoded; multiple qualities are
+    #     generated from the original input, to automatically give viewers
+    #     the best experience for their devices and network conditions.
+    #     Input resolution can be up to 1080p and bitrate can be up to 8.5
+    #     Mbps; output is capped at SD quality (480p). You can select an
+    #     optional transcode preset (see below). Audio for all renditions is
+    #     transcoded, and an audio-only rendition is available.
+    #
+    #   * `ADVANCED_HD`: Video is transcoded; multiple qualities are
+    #     generated from the original input, to automatically give viewers
+    #     the best experience for their devices and network conditions.
+    #     Input resolution can be up to 1080p and bitrate can be up to 8.5
+    #     Mbps; output is capped at HD quality (720p). You can select an
+    #     optional transcode preset (see below). Audio for all renditions is
+    #     transcoded, and an audio-only rendition is available.
+    #
+    #   Optional *transcode presets* (available for the `ADVANCED` types)
+    #   allow you to trade off available download bandwidth and video
+    #   quality, to optimize the viewing experience. There are two presets:
+    #
+    #   * *Constrained bandwidth delivery* uses a lower bitrate for each
+    #     quality level. Use it if you have low download bandwidth and/or
+    #     simple video content (e.g., talking heads)
+    #
+    #   * *Higher bandwidth delivery* uses a higher bitrate for each quality
+    #     level. Use it if you have high download bandwidth and/or complex
+    #     video content (e.g., flashes and quick scene changes).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateChannelRequest AWS API Documentation
@@ -371,6 +606,7 @@ module Aws::IVS
       :insecure_ingest,
       :latency_mode,
       :name,
+      :preset,
       :recording_configuration_arn,
       :tags,
       :type)
@@ -1300,6 +1536,36 @@ module Aws::IVS
     end
 
     # @!attribute [rw] channel_arn
+    #   The ARN of the channel associated with the viewer session to revoke.
+    #   @return [String]
+    #
+    # @!attribute [rw] viewer_id
+    #   The ID of the viewer associated with the viewer session to revoke.
+    #   Do not use this field for personally identifying, confidential, or
+    #   sensitive information.
+    #   @return [String]
+    #
+    # @!attribute [rw] viewer_session_versions_less_than_or_equal_to
+    #   An optional filter on which versions of the viewer session to
+    #   revoke. All versions less than or equal to the specified version
+    #   will be revoked. Default: 0.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/StartViewerSessionRevocationRequest AWS API Documentation
+    #
+    class StartViewerSessionRevocationRequest < Struct.new(
+      :channel_arn,
+      :viewer_id,
+      :viewer_session_versions_less_than_or_equal_to)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/StartViewerSessionRevocationResponse AWS API Documentation
+    #
+    class StartViewerSessionRevocationResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] channel_arn
     #   ARN of the channel for which the stream is to be stopped.
     #   @return [String]
     #
@@ -1759,6 +2025,14 @@ module Aws::IVS
     #   Channel name.
     #   @return [String]
     #
+    # @!attribute [rw] preset
+    #   Optional transcode preset for the channel. This is selectable only
+    #   for `ADVANCED_HD` and `ADVANCED_SD` channel types. For those channel
+    #   types, the default `preset` is `HIGHER_BANDWIDTH_DELIVERY`. For
+    #   other channel types (`BASIC` and `STANDARD`), `preset` is the empty
+    #   string (`""`).
+    #   @return [String]
+    #
     # @!attribute [rw] recording_configuration_arn
     #   Recording-configuration ARN. If this is set to an empty string,
     #   recording is disabled. A value other than an empty string indicates
@@ -1767,8 +2041,20 @@ module Aws::IVS
     #
     # @!attribute [rw] type
     #   Channel type, which determines the allowable resolution and bitrate.
-    #   *If you exceed the allowable resolution or bitrate, the stream
-    #   probably will disconnect immediately*. Valid values:
+    #   *If you exceed the allowable input resolution or bitrate, the stream
+    #   probably will disconnect immediately.* Some types generate multiple
+    #   qualities (renditions) from the original input; this automatically
+    #   gives viewers the best experience for their devices and network
+    #   conditions. Some types provide transcoded video; transcoding allows
+    #   higher playback quality across a range of download speeds. Default:
+    #   `STANDARD`. Valid values:
+    #
+    #   * `BASIC`: Video is transmuxed: Amazon IVS delivers the original
+    #     input quality to viewers. The viewer’s video-quality choice is
+    #     limited to the original input. Input resolution can be up to 1080p
+    #     and bitrate can be up to 1.5 Mbps for 480p and up to 3.5 Mbps for
+    #     resolutions between 480p and 1080p. Original audio is passed
+    #     through.
     #
     #   * `STANDARD`: Video is transcoded: multiple qualities are generated
     #     from the original input, to automatically give viewers the best
@@ -1776,13 +2062,36 @@ module Aws::IVS
     #     allows higher playback quality across a range of download speeds.
     #     Resolution can be up to 1080p and bitrate can be up to 8.5 Mbps.
     #     Audio is transcoded only for renditions 360p and below; above
-    #     that, audio is passed through. This is the default.
+    #     that, audio is passed through. This is the default when you create
+    #     a channel.
     #
-    #   * `BASIC`: Video is transmuxed: Amazon IVS delivers the original
-    #     input to viewers. The viewer’s video-quality choice is limited to
-    #     the original input. Resolution can be up to 1080p and bitrate can
-    #     be up to 1.5 Mbps for 480p and up to 3.5 Mbps for resolutions
-    #     between 480p and 1080p.
+    #   * `ADVANCED_SD`: Video is transcoded; multiple qualities are
+    #     generated from the original input, to automatically give viewers
+    #     the best experience for their devices and network conditions.
+    #     Input resolution can be up to 1080p and bitrate can be up to 8.5
+    #     Mbps; output is capped at SD quality (480p). You can select an
+    #     optional transcode preset (see below). Audio for all renditions is
+    #     transcoded, and an audio-only rendition is available.
+    #
+    #   * `ADVANCED_HD`: Video is transcoded; multiple qualities are
+    #     generated from the original input, to automatically give viewers
+    #     the best experience for their devices and network conditions.
+    #     Input resolution can be up to 1080p and bitrate can be up to 8.5
+    #     Mbps; output is capped at HD quality (720p). You can select an
+    #     optional transcode preset (see below). Audio for all renditions is
+    #     transcoded, and an audio-only rendition is available.
+    #
+    #   Optional *transcode presets* (available for the `ADVANCED` types)
+    #   allow you to trade off available download bandwidth and video
+    #   quality, to optimize the viewing experience. There are two presets:
+    #
+    #   * *Constrained bandwidth delivery* uses a lower bitrate for each
+    #     quality level. Use it if you have low download bandwidth and/or
+    #     simple video content (e.g., talking heads)
+    #
+    #   * *Higher bandwidth delivery* uses a higher bitrate for each quality
+    #     level. Use it if you have high download bandwidth and/or complex
+    #     video content (e.g., flashes and quick scene changes).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/UpdateChannelRequest AWS API Documentation
@@ -1793,6 +2102,7 @@ module Aws::IVS
       :insecure_ingest,
       :latency_mode,
       :name,
+      :preset,
       :recording_configuration_arn,
       :type)
       SENSITIVE = []

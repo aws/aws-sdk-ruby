@@ -30,6 +30,7 @@ module Aws::Omics
   # * {AccessDeniedException}
   # * {ConflictException}
   # * {InternalServerException}
+  # * {NotSupportedOperationException}
   # * {RangeNotSatisfiableException}
   # * {RequestTimeoutException}
   # * {ResourceNotFoundException}
@@ -89,6 +90,21 @@ module Aws::Omics
 
       def retryable?
         true
+      end
+    end
+
+    class NotSupportedOperationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Omics::Types::NotSupportedOperationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

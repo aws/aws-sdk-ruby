@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.53.0 (2023-06-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.52.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.51.0 (2023-05-22)
+------------------
+
+* Feature - Added support for tags on restore.
+
+1.50.0 (2023-05-19)
+------------------
+
+* Feature - Add  ResourceArn, ResourceType, and BackupVaultName to ListRecoveryPointsByLegalHold API response.
+
 1.49.0 (2023-02-08)
 ------------------
 

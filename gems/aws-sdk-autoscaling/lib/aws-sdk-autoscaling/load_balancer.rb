@@ -190,7 +190,9 @@ module Aws::AutoScaling
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -205,7 +207,9 @@ module Aws::AutoScaling
         auto_scaling_group_name: @group_name,
         load_balancer_names: [@name]
       )
-      resp = @client.attach_load_balancers(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.attach_load_balancers(options)
+      end
       resp.data
     end
 
@@ -219,7 +223,9 @@ module Aws::AutoScaling
         auto_scaling_group_name: @group_name,
         load_balancer_names: [@name]
       )
-      resp = @client.detach_load_balancers(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.detach_load_balancers(options)
+      end
       resp.data
     end
 
@@ -281,7 +287,9 @@ module Aws::AutoScaling
           batch.each do |item|
             params[:load_balancer_names] << item.name
           end
-          batch[0].client.attach_load_balancers(params)
+          Aws::Plugins::UserAgent.feature('resource') do
+            batch[0].client.attach_load_balancers(params)
+          end
         end
         nil
       end
@@ -296,7 +304,9 @@ module Aws::AutoScaling
           batch.each do |item|
             params[:load_balancer_names] << item.name
           end
-          batch[0].client.detach_load_balancers(params)
+          Aws::Plugins::UserAgent.feature('resource') do
+            batch[0].client.detach_load_balancers(params)
+          end
         end
         nil
       end

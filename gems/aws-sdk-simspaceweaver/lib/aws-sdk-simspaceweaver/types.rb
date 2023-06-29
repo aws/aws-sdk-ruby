@@ -65,6 +65,9 @@ module Aws::SimSpaceWeaver
     # @!attribute [rw] destination
     #   The Amazon S3 bucket and optional folder (object key prefix) where
     #   SimSpace Weaver creates the snapshot file.
+    #
+    #   The Amazon S3 bucket must be in the same Amazon Web Services Region
+    #   as the simulation.
     #   @return [Types::S3Destination]
     #
     # @!attribute [rw] simulation
@@ -989,6 +992,9 @@ module Aws::SimSpaceWeaver
     #
     #   Provide a `SnapshotS3Location` to start your simulation from a
     #   snapshot.
+    #
+    #   The Amazon S3 bucket must be in the same Amazon Web Services Region
+    #   as the simulation.
     #
     #   If you provide a `SnapshotS3Location` then you can't provide a
     #   `SchemaS3Location`.

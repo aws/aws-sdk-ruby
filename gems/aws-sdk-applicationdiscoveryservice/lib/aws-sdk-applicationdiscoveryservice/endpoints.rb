@@ -9,6 +9,7 @@
 
 
 module Aws::ApplicationDiscoveryService
+  # @api private
   module Endpoints
 
     class AssociateConfigurationItemsToApplication

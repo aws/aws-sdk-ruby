@@ -275,6 +275,11 @@ module Aws::HealthLake
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -404,6 +409,10 @@ module Aws::HealthLake
     # @option params [Array<Types::Tag>] :tags
     #   Resource tags that are applied to a Data Store when it is created.
     #
+    # @option params [Types::IdentityProviderConfiguration] :identity_provider_configuration
+    #   The configuration of the identity provider that you want to use for
+    #   your Data Store.
+    #
     # @return [Types::CreateFHIRDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFHIRDatastoreResponse#datastore_id #datastore_id} => String
@@ -432,6 +441,12 @@ module Aws::HealthLake
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     identity_provider_configuration: {
+    #       authorization_strategy: "SMART_ON_FHIR_V1", # required, accepts SMART_ON_FHIR_V1, AWS_AUTH
+    #       fine_grained_authorization_enabled: false,
+    #       metadata: "ConfigurationMetadata",
+    #       idp_lambda_arn: "LambdaArn",
+    #     },
     #   })
     #
     # @example Response structure
@@ -452,7 +467,7 @@ module Aws::HealthLake
 
     # Deletes a Data Store.
     #
-    # @option params [String] :datastore_id
+    # @option params [required, String] :datastore_id
     #   The AWS-generated ID for the Data Store to be deleted.
     #
     # @return [Types::DeleteFHIRDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -465,7 +480,7 @@ module Aws::HealthLake
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_fhir_datastore({
-    #     datastore_id: "DatastoreId",
+    #     datastore_id: "DatastoreId", # required
     #   })
     #
     # @example Response structure
@@ -488,9 +503,8 @@ module Aws::HealthLake
     # Data Store ID, Data Store ARN, Data Store name, Data Store status,
     # created at, Data Store type version, and Data Store endpoint.
     #
-    # @option params [String] :datastore_id
-    #   The AWS-generated Data Store id. This is part of the
-    #   ‘CreateFHIRDatastore’ output.
+    # @option params [required, String] :datastore_id
+    #   The AWS-generated Data Store ID.
     #
     # @return [Types::DescribeFHIRDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -499,7 +513,7 @@ module Aws::HealthLake
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_fhir_datastore({
-    #     datastore_id: "DatastoreId",
+    #     datastore_id: "DatastoreId", # required
     #   })
     #
     # @example Response structure
@@ -514,6 +528,10 @@ module Aws::HealthLake
     #   resp.datastore_properties.sse_configuration.kms_encryption_config.cmk_type #=> String, one of "CUSTOMER_MANAGED_KMS_KEY", "AWS_OWNED_KMS_KEY"
     #   resp.datastore_properties.sse_configuration.kms_encryption_config.kms_key_id #=> String
     #   resp.datastore_properties.preload_data_config.preload_data_type #=> String, one of "SYNTHEA"
+    #   resp.datastore_properties.identity_provider_configuration.authorization_strategy #=> String, one of "SMART_ON_FHIR_V1", "AWS_AUTH"
+    #   resp.datastore_properties.identity_provider_configuration.fine_grained_authorization_enabled #=> Boolean
+    #   resp.datastore_properties.identity_provider_configuration.metadata #=> String
+    #   resp.datastore_properties.identity_provider_configuration.idp_lambda_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DescribeFHIRDatastore AWS API Documentation
     #
@@ -549,7 +567,7 @@ module Aws::HealthLake
     #
     #   resp.export_job_properties.job_id #=> String
     #   resp.export_job_properties.job_name #=> String
-    #   resp.export_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED"
+    #   resp.export_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED", "CANCEL_SUBMITTED", "CANCEL_IN_PROGRESS", "CANCEL_COMPLETED", "CANCEL_FAILED"
     #   resp.export_job_properties.submit_time #=> Time
     #   resp.export_job_properties.end_time #=> Time
     #   resp.export_job_properties.datastore_id #=> String
@@ -591,7 +609,7 @@ module Aws::HealthLake
     #
     #   resp.import_job_properties.job_id #=> String
     #   resp.import_job_properties.job_name #=> String
-    #   resp.import_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED"
+    #   resp.import_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED", "CANCEL_SUBMITTED", "CANCEL_IN_PROGRESS", "CANCEL_COMPLETED", "CANCEL_FAILED"
     #   resp.import_job_properties.submit_time #=> Time
     #   resp.import_job_properties.end_time #=> Time
     #   resp.import_job_properties.datastore_id #=> String
@@ -656,6 +674,10 @@ module Aws::HealthLake
     #   resp.datastore_properties_list[0].sse_configuration.kms_encryption_config.cmk_type #=> String, one of "CUSTOMER_MANAGED_KMS_KEY", "AWS_OWNED_KMS_KEY"
     #   resp.datastore_properties_list[0].sse_configuration.kms_encryption_config.kms_key_id #=> String
     #   resp.datastore_properties_list[0].preload_data_config.preload_data_type #=> String, one of "SYNTHEA"
+    #   resp.datastore_properties_list[0].identity_provider_configuration.authorization_strategy #=> String, one of "SMART_ON_FHIR_V1", "AWS_AUTH"
+    #   resp.datastore_properties_list[0].identity_provider_configuration.fine_grained_authorization_enabled #=> Boolean
+    #   resp.datastore_properties_list[0].identity_provider_configuration.metadata #=> String
+    #   resp.datastore_properties_list[0].identity_provider_configuration.idp_lambda_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ListFHIRDatastores AWS API Documentation
@@ -712,7 +734,7 @@ module Aws::HealthLake
     #     next_token: "NextToken",
     #     max_results: 1,
     #     job_name: "JobName",
-    #     job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED_WITH_ERRORS, COMPLETED, FAILED
+    #     job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED_WITH_ERRORS, COMPLETED, FAILED, CANCEL_SUBMITTED, CANCEL_IN_PROGRESS, CANCEL_COMPLETED, CANCEL_FAILED
     #     submitted_before: Time.now,
     #     submitted_after: Time.now,
     #   })
@@ -722,7 +744,7 @@ module Aws::HealthLake
     #   resp.export_job_properties_list #=> Array
     #   resp.export_job_properties_list[0].job_id #=> String
     #   resp.export_job_properties_list[0].job_name #=> String
-    #   resp.export_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED"
+    #   resp.export_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED", "CANCEL_SUBMITTED", "CANCEL_IN_PROGRESS", "CANCEL_COMPLETED", "CANCEL_FAILED"
     #   resp.export_job_properties_list[0].submit_time #=> Time
     #   resp.export_job_properties_list[0].end_time #=> Time
     #   resp.export_job_properties_list[0].datastore_id #=> String
@@ -786,7 +808,7 @@ module Aws::HealthLake
     #     next_token: "NextToken",
     #     max_results: 1,
     #     job_name: "JobName",
-    #     job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED_WITH_ERRORS, COMPLETED, FAILED
+    #     job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED_WITH_ERRORS, COMPLETED, FAILED, CANCEL_SUBMITTED, CANCEL_IN_PROGRESS, CANCEL_COMPLETED, CANCEL_FAILED
     #     submitted_before: Time.now,
     #     submitted_after: Time.now,
     #   })
@@ -796,7 +818,7 @@ module Aws::HealthLake
     #   resp.import_job_properties_list #=> Array
     #   resp.import_job_properties_list[0].job_id #=> String
     #   resp.import_job_properties_list[0].job_name #=> String
-    #   resp.import_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED"
+    #   resp.import_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED", "CANCEL_SUBMITTED", "CANCEL_IN_PROGRESS", "CANCEL_COMPLETED", "CANCEL_FAILED"
     #   resp.import_job_properties_list[0].submit_time #=> Time
     #   resp.import_job_properties_list[0].end_time #=> Time
     #   resp.import_job_properties_list[0].datastore_id #=> String
@@ -893,7 +915,7 @@ module Aws::HealthLake
     # @example Response structure
     #
     #   resp.job_id #=> String
-    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED"
+    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED", "CANCEL_SUBMITTED", "CANCEL_IN_PROGRESS", "CANCEL_COMPLETED", "CANCEL_FAILED"
     #   resp.datastore_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/StartFHIRExportJob AWS API Documentation
@@ -958,7 +980,7 @@ module Aws::HealthLake
     # @example Response structure
     #
     #   resp.job_id #=> String
-    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED"
+    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED_WITH_ERRORS", "COMPLETED", "FAILED", "CANCEL_SUBMITTED", "CANCEL_IN_PROGRESS", "CANCEL_COMPLETED", "CANCEL_FAILED"
     #   resp.datastore_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/StartFHIRImportJob AWS API Documentation
@@ -970,7 +992,7 @@ module Aws::HealthLake
       req.send_request(options)
     end
 
-    # Adds a user specifed key and value tag to a Data Store.
+    # Adds a user specified key and value tag to a Data Store.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name(ARN)that gives Amazon HealthLake access to
@@ -1043,7 +1065,7 @@ module Aws::HealthLake
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-healthlake'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

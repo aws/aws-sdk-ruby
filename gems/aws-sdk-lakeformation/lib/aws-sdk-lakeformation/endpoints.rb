@@ -9,6 +9,7 @@
 
 
 module Aws::LakeFormation
+  # @api private
   module Endpoints
 
     class AddLFTagsToResource

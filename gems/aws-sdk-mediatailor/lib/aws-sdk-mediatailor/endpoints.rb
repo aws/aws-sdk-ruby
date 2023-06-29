@@ -9,6 +9,7 @@
 
 
 module Aws::MediaTailor
+  # @api private
   module Endpoints
 
     class ConfigureLogsForChannel

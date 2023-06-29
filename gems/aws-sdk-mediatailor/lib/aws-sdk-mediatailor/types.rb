@@ -210,12 +210,21 @@ module Aws::MediaTailor
     #
     # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html
     #
+    # @!attribute [rw] fill_policy
+    #   Defines the policy to apply to the avail suppression mode.
+    #   `BEHIND_LIVE_EDGE` will always use the full avail suppression
+    #   policy. `AFTER_LIVE_EDGE` mode can be used to invoke partial ad
+    #   break fills when a session starts mid-break.
+    #   @return [String]
+    #
     # @!attribute [rw] mode
     #   Sets the ad suppression mode. By default, ad suppression is off and
     #   all ad breaks are filled with ads or slate. When Mode is set to
     #   `BEHIND_LIVE_EDGE`, ad suppression is active and MediaTailor won't
     #   fill ad breaks on or behind the ad suppression Value time in the
-    #   manifest lookback window.
+    #   manifest lookback window. When Mode is set to `AFTER_LIVE_EDGE`, ad
+    #   suppression is active and MediaTailor won't fill ad breaks that are
+    #   within the live edge plus the avail suppression value.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -233,6 +242,7 @@ module Aws::MediaTailor
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/AvailSuppression AWS API Documentation
     #
     class AvailSuppression < Struct.new(
+      :fill_policy,
       :mode,
       :value)
       SENSITIVE = []

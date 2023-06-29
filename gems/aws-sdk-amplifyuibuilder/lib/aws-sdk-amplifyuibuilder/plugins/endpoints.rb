@@ -76,6 +76,8 @@ module Aws::AmplifyUIBuilder
             Aws::AmplifyUIBuilder::Endpoints::ExportForms.build(context)
           when :export_themes
             Aws::AmplifyUIBuilder::Endpoints::ExportThemes.build(context)
+          when :get_codegen_job
+            Aws::AmplifyUIBuilder::Endpoints::GetCodegenJob.build(context)
           when :get_component
             Aws::AmplifyUIBuilder::Endpoints::GetComponent.build(context)
           when :get_form
@@ -84,6 +86,8 @@ module Aws::AmplifyUIBuilder
             Aws::AmplifyUIBuilder::Endpoints::GetMetadata.build(context)
           when :get_theme
             Aws::AmplifyUIBuilder::Endpoints::GetTheme.build(context)
+          when :list_codegen_jobs
+            Aws::AmplifyUIBuilder::Endpoints::ListCodegenJobs.build(context)
           when :list_components
             Aws::AmplifyUIBuilder::Endpoints::ListComponents.build(context)
           when :list_forms
@@ -94,6 +98,8 @@ module Aws::AmplifyUIBuilder
             Aws::AmplifyUIBuilder::Endpoints::PutMetadataFlag.build(context)
           when :refresh_token
             Aws::AmplifyUIBuilder::Endpoints::RefreshToken.build(context)
+          when :start_codegen_job
+            Aws::AmplifyUIBuilder::Endpoints::StartCodegenJob.build(context)
           when :update_component
             Aws::AmplifyUIBuilder::Endpoints::UpdateComponent.build(context)
           when :update_form

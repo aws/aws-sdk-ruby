@@ -53,6 +53,6 @@ require_relative 'aws-sdk-iotfleetwise/customizations'
 # @!group service
 module Aws::IoTFleetWise
 
-  GEM_VERSION = '1.7.0'
+  GEM_VERSION = '1.11.0'
 
 end

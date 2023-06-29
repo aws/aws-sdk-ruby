@@ -9,6 +9,7 @@
 
 
 module Aws::Inspector
+  # @api private
   module Endpoints
 
     class AddAttributesToFindings

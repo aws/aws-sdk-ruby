@@ -9,6 +9,7 @@
 
 
 module Aws::KinesisAnalytics
+  # @api private
   module Endpoints
 
     class AddApplicationCloudWatchLoggingOption

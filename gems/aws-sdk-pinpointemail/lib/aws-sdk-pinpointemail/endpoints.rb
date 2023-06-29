@@ -9,6 +9,7 @@
 
 
 module Aws::PinpointEmail
+  # @api private
   module Endpoints
 
     class CreateConfigurationSet

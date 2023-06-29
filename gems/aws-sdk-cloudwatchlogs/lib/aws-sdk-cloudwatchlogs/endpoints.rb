@@ -9,6 +9,7 @@
 
 
 module Aws::CloudWatchLogs
+  # @api private
   module Endpoints
 
     class AssociateKmsKey
@@ -68,6 +69,20 @@ module Aws::CloudWatchLogs
     end
 
     class CreateLogStream
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CloudWatchLogs::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DeleteAccountPolicy
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -194,6 +209,20 @@ module Aws::CloudWatchLogs
     end
 
     class DeleteSubscriptionFilter
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CloudWatchLogs::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DescribeAccountPolicies
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -446,6 +475,20 @@ module Aws::CloudWatchLogs
     end
 
     class ListTagsLogGroup
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CloudWatchLogs::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class PutAccountPolicy
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

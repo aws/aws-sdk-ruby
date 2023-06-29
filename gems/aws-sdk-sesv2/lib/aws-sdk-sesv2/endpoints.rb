@@ -9,6 +9,7 @@
 
 
 module Aws::SESV2
+  # @api private
   module Endpoints
 
     class BatchGetMetricData
@@ -922,6 +923,20 @@ module Aws::SESV2
     end
 
     class PutDedicatedIpInPool
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::SESV2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class PutDedicatedIpPoolScalingAttributes
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.16.0 (2023-06-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.15.0 (2023-06-05)
+------------------
+
+* Feature - Releasing new Managed kdb Insights APIs
+
+1.14.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.13.0 (2023-01-18)
 ------------------
 

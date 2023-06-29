@@ -88,6 +88,25 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # An access denied exception object.
+    #
+    # @!attribute [rw] message
+    #   The error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The error type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the access keys.
     #
     # @!attribute [rw] access_key_id
@@ -2139,7 +2158,7 @@ module Aws::GuardDuty
     # finding.
     #
     # @!attribute [rw] domain
-    #   The domain information for the API request.
+    #   The domain information for the DNS query.
     #   @return [String]
     #
     # @!attribute [rw] protocol
@@ -3653,12 +3672,18 @@ module Aws::GuardDuty
     #   The groups that include the user who called the Kubernetes API.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] session_name
+    #   Entity that assumes the IAM role when Kubernetes RBAC permissions
+    #   are assigned to that role.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesUserDetails AWS API Documentation
     #
     class KubernetesUserDetails < Struct.new(
       :username,
       :uid,
-      :groups)
+      :groups,
+      :session_name)
       SENSITIVE = []
       include Aws::Structure
     end

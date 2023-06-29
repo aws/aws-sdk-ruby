@@ -275,6 +275,11 @@ module Aws::MQ
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -403,14 +408,14 @@ module Aws::MQ
     #
     # * ec2:DescribeVpcs
     #
-    # For more information, see [Create an IAM User and Get Your AWS
-    # Credentials][1] and [Never Modify or Delete the Amazon MQ Elastic
-    # Network Interface][2] in the *Amazon MQ Developer Guide*.
+    # For more information, see [Create an IAM User and Get Your Amazon Web
+    # Services Credentials][1] and [Never Modify or Delete the Amazon MQ
+    # Elastic Network Interface][2] in the *Amazon MQ Developer Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/amazon-mq-setting-up.html#create-iam-user
-    # [2]: https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/connecting-to-amazon-mq.html#never-modify-delete-elastic-network-interface
+    # [2]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/connecting-to-amazon-mq.html#never-modify-delete-elastic-network-interface
     #
     # @option params [String] :authentication_strategy
     #   Optional. The authentication strategy used to secure the broker. The
@@ -423,8 +428,6 @@ module Aws::MQ
     # @option params [Types::ConfigurationId] :configuration
     #   A list of information about the configuration.
     #
-    #   Does not apply to RabbitMQ brokers.
-    #
     # @option params [String] :creator_request_id
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -433,8 +436,6 @@ module Aws::MQ
     #   The broker's deployment mode.
     #
     # @option params [Types::EncryptionOptions] :encryption_options
-    #   Does not apply to RabbitMQ brokers.
-    #
     #   Encryption options for the broker.
     #
     # @option params [required, String] :engine_type
@@ -472,6 +473,11 @@ module Aws::MQ
     # @option params [Hash<String,String>] :tags
     #
     # @option params [required, Array<Types::User>] :users
+    #
+    # @option params [String] :data_replication_mode
+    #   Specifies whether a broker is a part of a data replication pair.
+    #
+    # @option params [String] :data_replication_primary_broker_arn
     #
     # @return [Types::CreateBrokerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -532,8 +538,11 @@ module Aws::MQ
     #         groups: ["__string"],
     #         password: "__string", # required
     #         username: "__string", # required
+    #         replication_user: false,
     #       },
     #     ],
+    #     data_replication_mode: "NONE", # accepts NONE, CRDR
+    #     data_replication_primary_broker_arn: "__string",
     #   })
     #
     # @example Response structure
@@ -636,6 +645,12 @@ module Aws::MQ
 
     # Creates an ActiveMQ user.
     #
+    # Do not add personally identifiable information (PII) or other
+    # confidential or sensitive information in broker usernames. Broker
+    # usernames are accessible to other Amazon Web Services services,
+    # including CloudWatch Logs. Broker usernames are not intended to be
+    # used for private or sensitive data.
+    #
     # @option params [required, String] :broker_id
     #
     # @option params [Boolean] :console_access
@@ -645,6 +660,8 @@ module Aws::MQ
     # @option params [required, String] :password
     #
     # @option params [required, String] :username
+    #
+    # @option params [Boolean] :replication_user
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -656,6 +673,7 @@ module Aws::MQ
     #     groups: ["__string"],
     #     password: "__string", # required
     #     username: "__string", # required
+    #     replication_user: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateUser AWS API Documentation
@@ -777,6 +795,10 @@ module Aws::MQ
     #   * {Types::DescribeBrokerResponse#subnet_ids #subnet_ids} => Array&lt;String&gt;
     #   * {Types::DescribeBrokerResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DescribeBrokerResponse#users #users} => Array&lt;Types::UserSummary&gt;
+    #   * {Types::DescribeBrokerResponse#data_replication_metadata #data_replication_metadata} => Types::DataReplicationMetadataOutput
+    #   * {Types::DescribeBrokerResponse#data_replication_mode #data_replication_mode} => String
+    #   * {Types::DescribeBrokerResponse#pending_data_replication_metadata #pending_data_replication_metadata} => Types::DataReplicationMetadataOutput
+    #   * {Types::DescribeBrokerResponse#pending_data_replication_mode #pending_data_replication_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -799,7 +821,7 @@ module Aws::MQ
     #   resp.broker_instances[0].endpoints[0] #=> String
     #   resp.broker_instances[0].ip_address #=> String
     #   resp.broker_name #=> String
-    #   resp.broker_state #=> String, one of "CREATION_IN_PROGRESS", "CREATION_FAILED", "DELETION_IN_PROGRESS", "RUNNING", "REBOOT_IN_PROGRESS", "CRITICAL_ACTION_REQUIRED"
+    #   resp.broker_state #=> String, one of "CREATION_IN_PROGRESS", "CREATION_FAILED", "DELETION_IN_PROGRESS", "RUNNING", "REBOOT_IN_PROGRESS", "CRITICAL_ACTION_REQUIRED", "REPLICA"
     #   resp.configurations.current.id #=> String
     #   resp.configurations.current.revision #=> Integer
     #   resp.configurations.history #=> Array
@@ -861,6 +883,14 @@ module Aws::MQ
     #   resp.users #=> Array
     #   resp.users[0].pending_change #=> String, one of "CREATE", "UPDATE", "DELETE"
     #   resp.users[0].username #=> String
+    #   resp.data_replication_metadata.data_replication_counterpart.broker_id #=> String
+    #   resp.data_replication_metadata.data_replication_counterpart.region #=> String
+    #   resp.data_replication_metadata.data_replication_role #=> String
+    #   resp.data_replication_mode #=> String, one of "NONE", "CRDR"
+    #   resp.pending_data_replication_metadata.data_replication_counterpart.broker_id #=> String
+    #   resp.pending_data_replication_metadata.data_replication_counterpart.region #=> String
+    #   resp.pending_data_replication_metadata.data_replication_role #=> String
+    #   resp.pending_data_replication_mode #=> String, one of "NONE", "CRDR"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBroker AWS API Documentation
     #
@@ -1061,6 +1091,7 @@ module Aws::MQ
     #   * {Types::DescribeUserResponse#groups #groups} => Array&lt;String&gt;
     #   * {Types::DescribeUserResponse#pending #pending} => Types::UserPendingChanges
     #   * {Types::DescribeUserResponse#username #username} => String
+    #   * {Types::DescribeUserResponse#replication_user #replication_user} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -1080,6 +1111,7 @@ module Aws::MQ
     #   resp.pending.groups[0] #=> String
     #   resp.pending.pending_change #=> String, one of "CREATE", "UPDATE", "DELETE"
     #   resp.username #=> String
+    #   resp.replication_user #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeUser AWS API Documentation
     #
@@ -1116,7 +1148,7 @@ module Aws::MQ
     #   resp.broker_summaries[0].broker_arn #=> String
     #   resp.broker_summaries[0].broker_id #=> String
     #   resp.broker_summaries[0].broker_name #=> String
-    #   resp.broker_summaries[0].broker_state #=> String, one of "CREATION_IN_PROGRESS", "CREATION_FAILED", "DELETION_IN_PROGRESS", "RUNNING", "REBOOT_IN_PROGRESS", "CRITICAL_ACTION_REQUIRED"
+    #   resp.broker_summaries[0].broker_state #=> String, one of "CREATION_IN_PROGRESS", "CREATION_FAILED", "DELETION_IN_PROGRESS", "RUNNING", "REBOOT_IN_PROGRESS", "CRITICAL_ACTION_REQUIRED", "REPLICA"
     #   resp.broker_summaries[0].created #=> Time
     #   resp.broker_summaries[0].deployment_mode #=> String, one of "SINGLE_INSTANCE", "ACTIVE_STANDBY_MULTI_AZ", "CLUSTER_MULTI_AZ"
     #   resp.broker_summaries[0].engine_type #=> String, one of "ACTIVEMQ", "RABBITMQ"
@@ -1290,6 +1322,37 @@ module Aws::MQ
       req.send_request(options)
     end
 
+    # Promotes a data replication replica broker to the primary broker role.
+    #
+    # @option params [required, String] :broker_id
+    #
+    # @option params [required, String] :mode
+    #   The Promote mode requested.
+    #
+    # @return [Types::PromoteResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PromoteResponse#broker_id #broker_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.promote({
+    #     broker_id: "__string", # required
+    #     mode: "SWITCHOVER", # required, accepts SWITCHOVER, FAILOVER
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.broker_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/Promote AWS API Documentation
+    #
+    # @overload promote(params = {})
+    # @param [Hash] params ({})
+    def promote(params = {}, options = {})
+      req = build_request(:promote, params)
+      req.send_request(options)
+    end
+
     # Reboots a broker. Note: This API is asynchronous.
     #
     # @option params [required, String] :broker_id
@@ -1324,8 +1387,6 @@ module Aws::MQ
     # @option params [Types::ConfigurationId] :configuration
     #   A list of information about the configuration.
     #
-    #   Does not apply to RabbitMQ brokers.
-    #
     # @option params [String] :engine_version
     #
     # @option params [String] :host_instance_type
@@ -1346,6 +1407,9 @@ module Aws::MQ
     #
     # @option params [Array<String>] :security_groups
     #
+    # @option params [String] :data_replication_mode
+    #   Specifies whether a broker is a part of a data replication pair.
+    #
     # @return [Types::UpdateBrokerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateBrokerResponse#authentication_strategy #authentication_strategy} => String
@@ -1358,6 +1422,10 @@ module Aws::MQ
     #   * {Types::UpdateBrokerResponse#logs #logs} => Types::Logs
     #   * {Types::UpdateBrokerResponse#maintenance_window_start_time #maintenance_window_start_time} => Types::WeeklyStartTime
     #   * {Types::UpdateBrokerResponse#security_groups #security_groups} => Array&lt;String&gt;
+    #   * {Types::UpdateBrokerResponse#data_replication_metadata #data_replication_metadata} => Types::DataReplicationMetadataOutput
+    #   * {Types::UpdateBrokerResponse#data_replication_mode #data_replication_mode} => String
+    #   * {Types::UpdateBrokerResponse#pending_data_replication_metadata #pending_data_replication_metadata} => Types::DataReplicationMetadataOutput
+    #   * {Types::UpdateBrokerResponse#pending_data_replication_mode #pending_data_replication_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1394,6 +1462,7 @@ module Aws::MQ
     #       time_zone: "__string",
     #     },
     #     security_groups: ["__string"],
+    #     data_replication_mode: "NONE", # accepts NONE, CRDR
     #   })
     #
     # @example Response structure
@@ -1423,6 +1492,14 @@ module Aws::MQ
     #   resp.maintenance_window_start_time.time_zone #=> String
     #   resp.security_groups #=> Array
     #   resp.security_groups[0] #=> String
+    #   resp.data_replication_metadata.data_replication_counterpart.broker_id #=> String
+    #   resp.data_replication_metadata.data_replication_counterpart.region #=> String
+    #   resp.data_replication_metadata.data_replication_role #=> String
+    #   resp.data_replication_mode #=> String, one of "NONE", "CRDR"
+    #   resp.pending_data_replication_metadata.data_replication_counterpart.broker_id #=> String
+    #   resp.pending_data_replication_metadata.data_replication_counterpart.region #=> String
+    #   resp.pending_data_replication_metadata.data_replication_role #=> String
+    #   resp.pending_data_replication_mode #=> String, one of "NONE", "CRDR"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBroker AWS API Documentation
     #
@@ -1493,6 +1570,8 @@ module Aws::MQ
     #
     # @option params [required, String] :username
     #
+    # @option params [Boolean] :replication_user
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1503,6 +1582,7 @@ module Aws::MQ
     #     groups: ["__string"],
     #     password: "__string",
     #     username: "__string", # required
+    #     replication_user: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateUser AWS API Documentation
@@ -1527,7 +1607,7 @@ module Aws::MQ
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mq'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

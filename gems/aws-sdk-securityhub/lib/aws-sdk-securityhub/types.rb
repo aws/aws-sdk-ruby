@@ -391,6 +391,555 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # One or more actions to update finding fields if a finding matches the
+    # defined criteria of the rule.
+    #
+    # @!attribute [rw] type
+    #   Specifies that the rule action should update the `Types` finding
+    #   field. The `Types` finding field provides one or more finding types
+    #   in the format of namespace/category/classifier that classify a
+    #   finding. For more information, see [Types taxonomy for ASFF][1] in
+    #   the *Security Hub User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format-type-taxonomy.html
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_fields_update
+    #   Specifies that the automation rule action is an update to a finding
+    #   field.
+    #   @return [Types::AutomationRulesFindingFieldsUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AutomationRulesAction AWS API Documentation
+    #
+    class AutomationRulesAction < Struct.new(
+      :type,
+      :finding_fields_update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the configuration of an automation rule.
+    #
+    # @!attribute [rw] rule_arn
+    #   The Amazon Resource Name (ARN) of a rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_status
+    #   Whether the rule is active after it is created. If this parameter is
+    #   equal to `>ENABLED`, Security Hub will apply the rule to findings
+    #   and finding updates after the rule is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_order
+    #   An integer ranging from 1 to 1000 that represents the order in which
+    #   the rule action is applied to findings. Security Hub applies rules
+    #   with lower values for this parameter first.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rule_name
+    #   The name of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_terminal
+    #   Specifies whether a rule is the last to be applied with respect to a
+    #   finding that matches the rule criteria. This is useful when a
+    #   finding matches the criteria for multiple rules, and each rule has
+    #   different actions. If the value of this field is set to `true` for a
+    #   rule, Security Hub applies the rule action to a finding that matches
+    #   the rule criteria and won't evaluate other rules for the finding. 
+    #   The default value of this field is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] criteria
+    #   A set of [Amazon Web Services Security Finding Format][1] finding
+    #   field attributes and corresponding expected values that Security Hub
+    #   uses to filter findings. If a finding matches the conditions
+    #   specified in this parameter, Security Hub applies the rule action to
+    #   the finding.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html
+    #   @return [Types::AutomationRulesFindingFilters]
+    #
+    # @!attribute [rw] actions
+    #   One or more actions to update finding fields if a finding matches
+    #   the defined criteria of the rule.
+    #   @return [Array<Types::AutomationRulesAction>]
+    #
+    # @!attribute [rw] created_at
+    #   A timestamp that indicates when the rule was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   A timestamp that indicates when the rule was most recently updated.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The principal that created a rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AutomationRulesConfig AWS API Documentation
+    #
+    class AutomationRulesConfig < Struct.new(
+      :rule_arn,
+      :rule_status,
+      :rule_order,
+      :rule_name,
+      :description,
+      :is_terminal,
+      :criteria,
+      :actions,
+      :created_at,
+      :updated_at,
+      :created_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies the finding fields that the automation rule action will
+    # update when a finding matches the defined criteria.
+    #
+    # @!attribute [rw] note
+    #   The updated note.
+    #   @return [Types::NoteUpdate]
+    #
+    # @!attribute [rw] severity
+    #   Updates to the severity information for a finding.
+    #   @return [Types::SeverityUpdate]
+    #
+    # @!attribute [rw] verification_state
+    #   The rule action will update the `VerificationState` field of a
+    #   finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] confidence
+    #   The rule action will update the `Confidence` field of a finding.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] criticality
+    #   The rule action will update the `Criticality` field of a finding.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] types
+    #   The rule action will update the `Types` field of a finding.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] user_defined_fields
+    #   The rule action will update the `UserDefinedFields` field of a
+    #   finding.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] workflow
+    #   Used to update information about the investigation into the finding.
+    #   @return [Types::WorkflowUpdate]
+    #
+    # @!attribute [rw] related_findings
+    #   A list of findings that are related to a finding.
+    #   @return [Array<Types::RelatedFinding>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AutomationRulesFindingFieldsUpdate AWS API Documentation
+    #
+    class AutomationRulesFindingFieldsUpdate < Struct.new(
+      :note,
+      :severity,
+      :verification_state,
+      :confidence,
+      :criticality,
+      :types,
+      :user_defined_fields,
+      :workflow,
+      :related_findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The criteria that determine which findings a rule applies to.
+    #
+    # @!attribute [rw] product_arn
+    #   The Amazon Resource Name (ARN) for a third-party product that
+    #   generated a finding in Security Hub.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID in which a finding was generated.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] id
+    #   The product-specific identifier for a finding.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] generator_id
+    #   The identifier for the solution-specific component that generated a
+    #   finding.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] type
+    #   One or more finding types in the format of
+    #   namespace/category/classifier that classify a finding. For a list of
+    #   namespaces, classifiers, and categories, see [Types taxonomy for
+    #   ASFF][1] in the *Security Hub User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format-type-taxonomy.html
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] first_observed_at
+    #   A timestamp that indicates when the potential security issue
+    #   captured by a finding was first observed by the security findings
+    #   product.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [Array<Types::DateFilter>]
+    #
+    # @!attribute [rw] last_observed_at
+    #   A timestamp that indicates when the potential security issue
+    #   captured by a finding was most recently observed by the security
+    #   findings product.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [Array<Types::DateFilter>]
+    #
+    # @!attribute [rw] created_at
+    #   A timestamp that indicates when this finding record was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [Array<Types::DateFilter>]
+    #
+    # @!attribute [rw] updated_at
+    #   A timestamp that indicates when the finding record was most recently
+    #   updated.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [Array<Types::DateFilter>]
+    #
+    # @!attribute [rw] confidence
+    #   The likelihood that a finding accurately identifies the behavior or
+    #   issue that it was intended to identify. `Confidence` is scored on a
+    #   0–100 basis using a ratio scale. A value of `0` means 0 percent
+    #   confidence, and a value of `100` means 100 percent confidence. For
+    #   example, a data exfiltration detection based on a statistical
+    #   deviation of network traffic has low confidence because an actual
+    #   exfiltration hasn't been verified. For more information, see
+    #   [Confidence][1] in the *Security Hub User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/asff-top-level-attributes.html#asff-confidence
+    #   @return [Array<Types::NumberFilter>]
+    #
+    # @!attribute [rw] criticality
+    #   The level of importance that is assigned to the resources that are
+    #   associated with a finding. `Criticality` is scored on a 0–100 basis,
+    #   using a ratio scale that supports only full integers. A score of `0`
+    #   means that the underlying resources have no criticality, and a score
+    #   of `100` is reserved for the most critical resources. For more
+    #   information, see [Criticality][1] in the *Security Hub User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/asff-top-level-attributes.html#asff-criticality
+    #   @return [Array<Types::NumberFilter>]
+    #
+    # @!attribute [rw] title
+    #   A finding's title.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] description
+    #   A finding's description.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] source_url
+    #   Provides a URL that links to a page about the current finding in the
+    #   finding product.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] product_name
+    #   Provides the name of the product that generated the finding. For
+    #   control-based findings, the product name is Security Hub.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] company_name
+    #   The name of the company for the product that generated the finding.
+    #   For control-based findings, the company is Amazon Web Services.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] severity_label
+    #   The severity value of the finding.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource that the finding pertains to.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] resource_id
+    #   The identifier for the given resource type. For Amazon Web Services
+    #   resources that are identified by Amazon Resource Names (ARNs), this
+    #   is the ARN. For Amazon Web Services resources that lack ARNs, this
+    #   is the identifier as defined by the Amazon Web Service that created
+    #   the resource. For non-Amazon Web Services resources, this is a
+    #   unique identifier that is associated with the resource.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] resource_partition
+    #   The partition in which the resource that the finding pertains to is
+    #   located. A partition is a group of Amazon Web Services Regions. Each
+    #   Amazon Web Services account is scoped to one partition.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] resource_region
+    #   The Amazon Web Services Region where the resource that a finding
+    #   pertains to is located.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] resource_tags
+    #   A list of Amazon Web Services tags associated with a resource at the
+    #   time the finding was processed.
+    #   @return [Array<Types::MapFilter>]
+    #
+    # @!attribute [rw] resource_details_other
+    #   Custom fields and values about the resource that a finding pertains
+    #   to.
+    #   @return [Array<Types::MapFilter>]
+    #
+    # @!attribute [rw] compliance_status
+    #   The result of a security check. This field is only used for findings
+    #   generated from controls.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] compliance_security_control_id
+    #   The security control ID for which a finding was generated. Security
+    #   control IDs are the same across standards.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] compliance_associated_standards_id
+    #   The unique identifier of a standard in which a control is enabled.
+    #   This field consists of the resource portion of the Amazon Resource
+    #   Name (ARN) returned for a standard in the [DescribeStandards][1] API
+    #   response.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] verification_state
+    #   Provides the veracity of a finding.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] workflow_status
+    #   Provides information about the status of the investigation into a
+    #   finding.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] record_state
+    #   Provides the current state of a finding.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] related_findings_product_arn
+    #   The ARN for the product that generated a related finding.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] related_findings_id
+    #   The product-generated identifier for a related finding.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] note_text
+    #   The text of a user-defined note that's added to a finding.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] note_updated_at
+    #   The timestamp of when the note was updated. Uses the date-time
+    #   format specified in [RFC 3339 section 5.6, Internet Date/Time
+    #   Format][1]. The value cannot contain spaces. For example,
+    #   `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   @return [Array<Types::DateFilter>]
+    #
+    # @!attribute [rw] note_updated_by
+    #   The principal that created a note.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] user_defined_fields
+    #   A list of user-defined name and value string pairs added to a
+    #   finding.
+    #   @return [Array<Types::MapFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AutomationRulesFindingFilters AWS API Documentation
+    #
+    class AutomationRulesFindingFilters < Struct.new(
+      :product_arn,
+      :aws_account_id,
+      :id,
+      :generator_id,
+      :type,
+      :first_observed_at,
+      :last_observed_at,
+      :created_at,
+      :updated_at,
+      :confidence,
+      :criticality,
+      :title,
+      :description,
+      :source_url,
+      :product_name,
+      :company_name,
+      :severity_label,
+      :resource_type,
+      :resource_id,
+      :resource_partition,
+      :resource_region,
+      :resource_tags,
+      :resource_details_other,
+      :compliance_status,
+      :compliance_security_control_id,
+      :compliance_associated_standards_id,
+      :verification_state,
+      :workflow_status,
+      :record_state,
+      :related_findings_product_arn,
+      :related_findings_id,
+      :note_text,
+      :note_updated_at,
+      :note_updated_by,
+      :user_defined_fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Metadata for automation rules in the calling account. The response
+    # includes rules with a `RuleStatus` of `ENABLED` and `DISABLED`.
+    #
+    # @!attribute [rw] rule_arn
+    #   The Amazon Resource Name (ARN) for the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_status
+    #   Whether the rule is active after it is created. If this parameter is
+    #   equal to `ENABLED`, Security Hub will apply the rule to findings and
+    #   finding updates after the rule is created. To change the value of
+    #   this parameter after creating a rule, use
+    #   `BatchUpdateAutomationRules`.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_order
+    #   An integer ranging from 1 to 1000 that represents the order in which
+    #   the rule action is applied to findings. Security Hub applies rules
+    #   with lower values for this parameter first.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rule_name
+    #   The name of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_terminal
+    #   Specifies whether a rule is the last to be applied with respect to a
+    #   finding that matches the rule criteria. This is useful when a
+    #   finding matches the criteria for multiple rules, and each rule has
+    #   different actions. If the value of this field is set to `true` for a
+    #   rule, Security Hub applies the rule action to a finding that matches
+    #   the rule criteria and won't evaluate other rules for the finding. 
+    #   The default value of this field is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] created_at
+    #   A timestamp that indicates when the rule was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   A timestamp that indicates when the rule was most recently updated.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The principal that created a rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AutomationRulesMetadata AWS API Documentation
+    #
+    class AutomationRulesMetadata < Struct.new(
+      :rule_arn,
+      :rule_status,
+      :rule_order,
+      :rule_name,
+      :description,
+      :is_terminal,
+      :created_at,
+      :updated_at,
+      :created_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an Availability Zone.
     #
     # @!attribute [rw] zone_name
@@ -407,6 +956,319 @@ module Aws::SecurityHub
     class AvailabilityZone < Struct.new(
       :zone_name,
       :subnet_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about an Amazon MQ message broker. A message broker
+    # allows software applications and components to communicate using
+    # various programming languages, operating systems, and formal messaging
+    # protocols.
+    #
+    # @!attribute [rw] authentication_strategy
+    #   The authentication strategy used to secure the broker. The default
+    #   is `SIMPLE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_minor_version_upgrade
+    #   Whether automatically upgrade new minor versions for brokers, as new
+    #   versions are released and supported by Amazon MQ. Automatic upgrades
+    #   occur during the scheduled maintenance window of the broker or after
+    #   a manual broker reboot.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] broker_arn
+    #   The Amazon Resource Name (ARN) of the broker.
+    #   @return [String]
+    #
+    # @!attribute [rw] broker_name
+    #   The broker's name.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_mode
+    #   The broker's deployment mode.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_options
+    #   Encryption options for the broker. Doesn’t apply to RabbitMQ
+    #   brokers.
+    #   @return [Types::AwsAmazonMqBrokerEncryptionOptionsDetails]
+    #
+    # @!attribute [rw] engine_type
+    #   The type of broker engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   The version of the broker engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_instance_type
+    #   The broker's instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] broker_id
+    #   The unique ID that Amazon MQ generates for the broker.
+    #   @return [String]
+    #
+    # @!attribute [rw] ldap_server_metadata
+    #   The metadata of the Lightweight Directory Access Protocol (LDAP)
+    #   server used to authenticate and authorize connections to the broker.
+    #   This is an optional failover server.
+    #   @return [Types::AwsAmazonMqBrokerLdapServerMetadataDetails]
+    #
+    # @!attribute [rw] logs
+    #   Turns on Amazon CloudWatch logging for brokers.
+    #   @return [Types::AwsAmazonMqBrokerLogsDetails]
+    #
+    # @!attribute [rw] maintenance_window_start_time
+    #   The scheduled time period (UTC) during which Amazon MQ begins to
+    #   apply pending updates or patches to the broker.
+    #   @return [Types::AwsAmazonMqBrokerMaintenanceWindowStartTimeDetails]
+    #
+    # @!attribute [rw] publicly_accessible
+    #   Permits connections from applications outside of the VPC that hosts
+    #   the broker's subnets.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] security_groups
+    #   The list of rules (one minimum, 125 maximum) that authorize
+    #   connections to brokers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] storage_type
+    #   The broker's storage type.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   The list of groups that define which subnets and IP ranges the
+    #   broker can use from different Availability Zones.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] users
+    #   The list of all broker usernames for the specified broker. Doesn't
+    #   apply to RabbitMQ brokers.
+    #   @return [Array<Types::AwsAmazonMqBrokerUsersDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAmazonMqBrokerDetails AWS API Documentation
+    #
+    class AwsAmazonMqBrokerDetails < Struct.new(
+      :authentication_strategy,
+      :auto_minor_version_upgrade,
+      :broker_arn,
+      :broker_name,
+      :deployment_mode,
+      :encryption_options,
+      :engine_type,
+      :engine_version,
+      :host_instance_type,
+      :broker_id,
+      :ldap_server_metadata,
+      :logs,
+      :maintenance_window_start_time,
+      :publicly_accessible,
+      :security_groups,
+      :storage_type,
+      :subnet_ids,
+      :users)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about broker encryption options.
+    #
+    # @!attribute [rw] kms_key_id
+    #   The KMS key that’s used to encrypt your data at rest. If not
+    #   provided, Amazon MQ will use a default KMS key to encrypt your data.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_aws_owned_key
+    #   Specifies that an KMS key should be used for at-rest encryption. Set
+    #   to `true` by default if no value is provided (for example, for
+    #   RabbitMQ brokers).
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAmazonMqBrokerEncryptionOptionsDetails AWS API Documentation
+    #
+    class AwsAmazonMqBrokerEncryptionOptionsDetails < Struct.new(
+      :kms_key_id,
+      :use_aws_owned_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata of the Lightweight Directory Access Protocol (LDAP)
+    # server used to authenticate and authorize connections to the broker.
+    # This is an optional failover server.
+    #
+    # @!attribute [rw] hosts
+    #   Specifies the location of the LDAP server, such as Amazon Web
+    #   Services Directory Service for Microsoft Active Directory.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] role_base
+    #   The distinguished name of the node in the directory information tree
+    #   (DIT) to search for roles or groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_name
+    #   The group name attribute in a role entry whose value is the name of
+    #   that role.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_search_matching
+    #   The LDAP search filter used to find roles within the `roleBase`.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_search_subtree
+    #   The directory search scope for the role. If set to `true`, the scope
+    #   is to search the entire subtree.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] service_account_username
+    #   A username for the service account, which is an account in your LDAP
+    #   server that has access to initiate a connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_base
+    #   Selects a particular subtree of the directory information tree (DIT)
+    #   to search for user entries.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_role_name
+    #   The name of the LDAP attribute in the user's directory entry for
+    #   the user's group membership.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_search_matching
+    #   The LDAP search filter used to find users within the `userBase`.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_search_subtree
+    #   The directory search scope for the user. If set to true, the scope
+    #   is to search the entire subtree.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAmazonMqBrokerLdapServerMetadataDetails AWS API Documentation
+    #
+    class AwsAmazonMqBrokerLdapServerMetadataDetails < Struct.new(
+      :hosts,
+      :role_base,
+      :role_name,
+      :role_search_matching,
+      :role_search_subtree,
+      :service_account_username,
+      :user_base,
+      :user_role_name,
+      :user_search_matching,
+      :user_search_subtree)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about logs to be activated for the specified
+    # broker.
+    #
+    # @!attribute [rw] audit
+    #   Activates audit logging. Every user management action made using JMX
+    #   or the ActiveMQ Web Console is logged. Doesn't apply to RabbitMQ
+    #   brokers.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] general
+    #   Activates general logging.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] audit_log_group
+    #   The location of the CloudWatch Logs log group where audit logs are
+    #   sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] general_log_group
+    #   The location of the CloudWatch Logs log group where general logs are
+    #   sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] pending
+    #   The list of information about logs that are to be turned on for the
+    #   specified broker.
+    #   @return [Types::AwsAmazonMqBrokerLogsPendingDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAmazonMqBrokerLogsDetails AWS API Documentation
+    #
+    class AwsAmazonMqBrokerLogsDetails < Struct.new(
+      :audit,
+      :general,
+      :audit_log_group,
+      :general_log_group,
+      :pending)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about logs to be activated for the specified
+    # broker.
+    #
+    # @!attribute [rw] audit
+    #   Activates audit logging. Every user management action made using JMX
+    #   or the ActiveMQ Web Console is logged. Doesn't apply to RabbitMQ
+    #   brokers.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] general
+    #   Activates general logging.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAmazonMqBrokerLogsPendingDetails AWS API Documentation
+    #
+    class AwsAmazonMqBrokerLogsPendingDetails < Struct.new(
+      :audit,
+      :general)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The scheduled time period (UTC) during which Amazon MQ begins to apply
+    # pending updates or patches to the broker.
+    #
+    # @!attribute [rw] day_of_week
+    #   The day of the week on which the maintenance window falls.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_of_day
+    #   The time, in 24-hour format, on which the maintenance window falls.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_zone
+    #   The time zone in either the Country/City format or the UTC offset
+    #   format. UTC is the default format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAmazonMqBrokerMaintenanceWindowStartTimeDetails AWS API Documentation
+    #
+    class AwsAmazonMqBrokerMaintenanceWindowStartTimeDetails < Struct.new(
+      :day_of_week,
+      :time_of_day,
+      :time_zone)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the broker usernames for the specified broker.
+    # Doesn't apply to RabbitMQ brokers.
+    #
+    # @!attribute [rw] pending_change
+    #   The type of change pending for the broker user.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   The username of the broker user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAmazonMqBrokerUsersDetails AWS API Documentation
+    #
+    class AwsAmazonMqBrokerUsersDetails < Struct.new(
+      :pending_change,
+      :username)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1094,6 +1956,240 @@ module Aws::SecurityHub
       :auto_deploy,
       :last_deployment_status_message,
       :api_gateway_managed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of additional authentication providers for the GraphqlApi API.
+    #
+    # @!attribute [rw] authentication_type
+    #   The type of security configuration for your GraphQL API: API key,
+    #   Identity and Access Management (IAM), OpenID Connect (OIDC), Amazon
+    #   Cognito user pools, or Lambda.
+    #   @return [String]
+    #
+    # @!attribute [rw] lambda_authorizer_config
+    #   The configuration for Lambda function authorization.
+    #   @return [Types::AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails]
+    #
+    # @!attribute [rw] open_id_connect_config
+    #   The OpenID Connect configuration.
+    #   @return [Types::AwsAppSyncGraphQlApiOpenIdConnectConfigDetails]
+    #
+    # @!attribute [rw] user_pool_config
+    #   The Amazon Cognito user pools configuration.
+    #   @return [Types::AwsAppSyncGraphQlApiUserPoolConfigDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails AWS API Documentation
+    #
+    class AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails < Struct.new(
+      :authentication_type,
+      :lambda_authorizer_config,
+      :open_id_connect_config,
+      :user_pool_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about an AppSync Graph QL API, which lets you query
+    # multiple databases, microservices, and APIs from a single GraphQL
+    # endpoint.
+    #
+    # @!attribute [rw] api_id
+    #   The unique identifier for the API.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the API.
+    #   @return [String]
+    #
+    # @!attribute [rw] open_id_connect_config
+    #   Specifies the authorization configuration for using an OpenID
+    #   Connect compliant service with an AppSync GraphQL API endpoint.
+    #   @return [Types::AwsAppSyncGraphQlApiOpenIdConnectConfigDetails]
+    #
+    # @!attribute [rw] name
+    #   The API name.
+    #   @return [String]
+    #
+    # @!attribute [rw] lambda_authorizer_config
+    #   Specifies the configuration for Lambda function authorization.
+    #   @return [Types::AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails]
+    #
+    # @!attribute [rw] xray_enabled
+    #   Indicates whether to use X-Ray tracing for the GraphQL API.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the API.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_pool_config
+    #   The Amazon Cognito user pools configuration.
+    #   @return [Types::AwsAppSyncGraphQlApiUserPoolConfigDetails]
+    #
+    # @!attribute [rw] authentication_type
+    #   The type of security configuration for your GraphQL API: API key,
+    #   Identity and Access Management (IAM), OpenID Connect (OIDC), Amazon
+    #   Cognito user pools, or Lambda.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_config
+    #   The Amazon CloudWatch Logs configuration.
+    #   @return [Types::AwsAppSyncGraphQlApiLogConfigDetails]
+    #
+    # @!attribute [rw] additional_authentication_providers
+    #   A list of additional authentication providers for the GraphQL API.
+    #   @return [Array<Types::AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails>]
+    #
+    # @!attribute [rw] waf_web_acl_arn
+    #   The Amazon Resource Name (ARN) of the WAF web access control list
+    #   (web ACL) associated with this GraphQL API, if one exists.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAppSyncGraphQlApiDetails AWS API Documentation
+    #
+    class AwsAppSyncGraphQlApiDetails < Struct.new(
+      :api_id,
+      :id,
+      :open_id_connect_config,
+      :name,
+      :lambda_authorizer_config,
+      :xray_enabled,
+      :arn,
+      :user_pool_config,
+      :authentication_type,
+      :log_config,
+      :additional_authentication_providers,
+      :waf_web_acl_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the authorization configuration for using an Lambda function
+    # with your AppSync GraphQL API endpoint.
+    #
+    # @!attribute [rw] authorizer_result_ttl_in_seconds
+    #   The number of seconds a response should be cached for. The default
+    #   is 5 minutes (300 seconds).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] authorizer_uri
+    #   The Amazon Resource Name (ARN) of the Lambda function to be called
+    #   for authorization. This can be a standard Lambda ARN, a version ARN
+    #   (.../v3), or an alias ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_validation_expression
+    #   A regular expression for validation of tokens before the Lambda
+    #   function is called.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails AWS API Documentation
+    #
+    class AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails < Struct.new(
+      :authorizer_result_ttl_in_seconds,
+      :authorizer_uri,
+      :identity_validation_expression)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the logging configuration when writing GraphQL operations
+    # and tracing to Amazon CloudWatch for an AppSync GraphQL API.
+    #
+    # @!attribute [rw] cloud_watch_logs_role_arn
+    #   The Amazon Resource Name (ARN) of the service role that AppSync
+    #   assumes to publish to CloudWatch Logs in your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] exclude_verbose_content
+    #   Set to `TRUE` to exclude sections that contain information such as
+    #   headers, context, and evaluated mapping templates, regardless of
+    #   logging level.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] field_log_level
+    #   The field logging level.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAppSyncGraphQlApiLogConfigDetails AWS API Documentation
+    #
+    class AwsAppSyncGraphQlApiLogConfigDetails < Struct.new(
+      :cloud_watch_logs_role_arn,
+      :exclude_verbose_content,
+      :field_log_level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the authorization configuration for using an OpenID Connect
+    # compliant service with your AppSync GraphQL API endpoint.
+    #
+    # @!attribute [rw] auth_tt_l
+    #   The number of milliseconds that a token is valid after being
+    #   authenticated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_id
+    #   The client identifier of the relying party at the OpenID identity
+    #   provider. This identifier is typically obtained when the relying
+    #   party is registered with the OpenID identity provider. You can
+    #   specify a regular expression so that AppSync can validate against
+    #   multiple client identifiers at a time.
+    #   @return [String]
+    #
+    # @!attribute [rw] iat_tt_l
+    #   The number of milliseconds that a token is valid after it's issued
+    #   to a user.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] issuer
+    #   The issuer for the OIDC configuration. The issuer returned by
+    #   discovery must exactly match the value of `iss` in the ID token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAppSyncGraphQlApiOpenIdConnectConfigDetails AWS API Documentation
+    #
+    class AwsAppSyncGraphQlApiOpenIdConnectConfigDetails < Struct.new(
+      :auth_tt_l,
+      :client_id,
+      :iat_tt_l,
+      :issuer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the authorization configuration for using Amazon Cognito
+    # user pools with your AppSync GraphQL API endpoint.
+    #
+    # @!attribute [rw] app_id_client_regex
+    #   A regular expression for validating the incoming Amazon Cognito user
+    #   pools app client ID. If this value isn't set, no filtering is
+    #   applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_region
+    #   The Amazon Web Services Region in which the user pool was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_action
+    #   The action that you want your GraphQL API to take when a request
+    #   that uses Amazon Cognito user pools authentication doesn't match
+    #   the Amazon Cognito user pools configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_pool_id
+    #   The user pool ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAppSyncGraphQlApiUserPoolConfigDetails AWS API Documentation
+    #
+    class AwsAppSyncGraphQlApiUserPoolConfigDetails < Struct.new(
+      :app_id_client_regex,
+      :aws_region,
+      :default_action,
+      :user_pool_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10729,6 +11825,290 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # A schema defines the structure of events that are sent to Amazon
+    # EventBridge. Schema registries are containers for schemas. They
+    # collect and organize schemas so that your schemas are in logical
+    # groups.
+    #
+    # @!attribute [rw] description
+    #   A description of the registry to be created.
+    #   @return [String]
+    #
+    # @!attribute [rw] registry_arn
+    #   The Amazon Resource Name (ARN) of the registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] registry_name
+    #   The name of the schema registry.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEventSchemasRegistryDetails AWS API Documentation
+    #
+    class AwsEventSchemasRegistryDetails < Struct.new(
+      :description,
+      :registry_arn,
+      :registry_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information on the status of CloudTrail as a
+    # data source for the detector.
+    #
+    # @!attribute [rw] status
+    #   Specifies whether CloudTrail is activated as a data source for the
+    #   detector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsGuardDutyDetectorDataSourcesCloudTrailDetails AWS API Documentation
+    #
+    class AwsGuardDutyDetectorDataSourcesCloudTrailDetails < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes which data sources are activated for the detector.
+    #
+    # @!attribute [rw] cloud_trail
+    #   An object that contains information on the status of CloudTrail as a
+    #   data source for the detector.
+    #   @return [Types::AwsGuardDutyDetectorDataSourcesCloudTrailDetails]
+    #
+    # @!attribute [rw] dns_logs
+    #   An object that contains information on the status of DNS logs as a
+    #   data source for the detector.
+    #   @return [Types::AwsGuardDutyDetectorDataSourcesDnsLogsDetails]
+    #
+    # @!attribute [rw] flow_logs
+    #   An object that contains information on the status of VPC Flow Logs
+    #   as a data source for the detector.
+    #   @return [Types::AwsGuardDutyDetectorDataSourcesFlowLogsDetails]
+    #
+    # @!attribute [rw] kubernetes
+    #   An object that contains information on the status of Kubernetes data
+    #   sources for the detector.
+    #   @return [Types::AwsGuardDutyDetectorDataSourcesKubernetesDetails]
+    #
+    # @!attribute [rw] malware_protection
+    #   An object that contains information on the status of Malware
+    #   Protection as a data source for the detector.
+    #   @return [Types::AwsGuardDutyDetectorDataSourcesMalwareProtectionDetails]
+    #
+    # @!attribute [rw] s3_logs
+    #   An object that contains information on the status of S3 Data event
+    #   logs as a data source for the detector.
+    #   @return [Types::AwsGuardDutyDetectorDataSourcesS3LogsDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsGuardDutyDetectorDataSourcesDetails AWS API Documentation
+    #
+    class AwsGuardDutyDetectorDataSourcesDetails < Struct.new(
+      :cloud_trail,
+      :dns_logs,
+      :flow_logs,
+      :kubernetes,
+      :malware_protection,
+      :s3_logs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information on the status of DNS logs as a
+    # data source for the detector.
+    #
+    # @!attribute [rw] status
+    #   Describes whether DNS logs is enabled as a data source for the
+    #   detector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsGuardDutyDetectorDataSourcesDnsLogsDetails AWS API Documentation
+    #
+    class AwsGuardDutyDetectorDataSourcesDnsLogsDetails < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information on the status of VPC Flow Logs as
+    # a data source for the detector.
+    #
+    # @!attribute [rw] status
+    #   Describes whether VPC Flow Logs are activated as a data source for
+    #   the detector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsGuardDutyDetectorDataSourcesFlowLogsDetails AWS API Documentation
+    #
+    class AwsGuardDutyDetectorDataSourcesFlowLogsDetails < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information on the status of Kubernetes audit
+    # logs as a data source for the detector.
+    #
+    # @!attribute [rw] status
+    #   Describes whether Kubernetes audit logs are activated as a data
+    #   source for the detector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails AWS API Documentation
+    #
+    class AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information on the status of Kubernetes data
+    # sources for the detector.
+    #
+    # @!attribute [rw] audit_logs
+    #   Describes whether Kubernetes audit logs are activated as a data
+    #   source for the detector.
+    #   @return [Types::AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsGuardDutyDetectorDataSourcesKubernetesDetails AWS API Documentation
+    #
+    class AwsGuardDutyDetectorDataSourcesKubernetesDetails < Struct.new(
+      :audit_logs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information on the status of Malware
+    # Protection as a data source for the detector.
+    #
+    # @!attribute [rw] scan_ec2_instance_with_findings
+    #   Describes the configuration of Malware Protection for EC2 instances
+    #   with findings.
+    #   @return [Types::AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsDetails]
+    #
+    # @!attribute [rw] service_role
+    #   The GuardDuty Malware Protection service role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsGuardDutyDetectorDataSourcesMalwareProtectionDetails AWS API Documentation
+    #
+    class AwsGuardDutyDetectorDataSourcesMalwareProtectionDetails < Struct.new(
+      :scan_ec2_instance_with_findings,
+      :service_role)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration of Malware Protection for EC2 instances
+    # with findings.
+    #
+    # @!attribute [rw] ebs_volumes
+    #   Describes the configuration of scanning EBS volumes (Malware
+    #   Protection) as a data source.
+    #   @return [Types::AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsEbsVolumesDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsDetails AWS API Documentation
+    #
+    class AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsDetails < Struct.new(
+      :ebs_volumes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration of scanning EBS volumes (Malware
+    # Protection) as a data source.
+    #
+    # @!attribute [rw] reason
+    #   Specifies the reason why scanning EBS volumes (Malware Protection)
+    #   isn’t activated as a data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Describes whether scanning EBS volumes is activated as a data source
+    #   for the detector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsEbsVolumesDetails AWS API Documentation
+    #
+    class AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsEbsVolumesDetails < Struct.new(
+      :reason,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information on the status of S3 data event
+    # logs as a data source for the detector.
+    #
+    # @!attribute [rw] status
+    #   A value that describes whether S3 data event logs are automatically
+    #   enabled for new members of an organization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsGuardDutyDetectorDataSourcesS3LogsDetails AWS API Documentation
+    #
+    class AwsGuardDutyDetectorDataSourcesS3LogsDetails < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about an Amazon GuardDuty detector. A detector is an
+    # object that represents the GuardDuty service. A detector is required
+    # for GuardDuty to become operational.
+    #
+    # @!attribute [rw] data_sources
+    #   Describes which data sources are activated for the detector.
+    #   @return [Types::AwsGuardDutyDetectorDataSourcesDetails]
+    #
+    # @!attribute [rw] features
+    #   Describes which features are activated for the detector.
+    #   @return [Array<Types::AwsGuardDutyDetectorFeaturesDetails>]
+    #
+    # @!attribute [rw] finding_publishing_frequency
+    #   The publishing frequency of the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_role
+    #   The GuardDuty service role.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The activation status of the detector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsGuardDutyDetectorDetails AWS API Documentation
+    #
+    class AwsGuardDutyDetectorDetails < Struct.new(
+      :data_sources,
+      :features,
+      :finding_publishing_frequency,
+      :service_role,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes which features are activated for the detector.
+    #
+    # @!attribute [rw] name
+    #   Indicates the name of the feature that is activated for the
+    #   detector.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Indicates the status of the feature that is activated for the
+    #   detector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsGuardDutyDetectorFeaturesDetails AWS API Documentation
+    #
+    class AwsGuardDutyDetectorFeaturesDetails < Struct.new(
+      :name,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # IAM access key details related to a finding.
     #
     # @!attribute [rw] user_name
@@ -17250,6 +18630,142 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provides details about an Step Functions state machine, which is a
+    # workflow consisting of a series of event- driven steps.
+    #
+    # @!attribute [rw] label
+    #   A user-defined or an auto-generated string that identifies a `Map`
+    #   state. This parameter is present only if the `stateMachineArn`
+    #   specified in input is a qualified state machine ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] logging_configuration
+    #   Used to set CloudWatch Logs options.
+    #   @return [Types::AwsStepFunctionStateMachineLoggingConfigurationDetails]
+    #
+    # @!attribute [rw] name
+    #   The name of the state machine.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role used when creating
+    #   this state machine.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_machine_arn
+    #   The ARN that identifies the state machine.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the state machine.
+    #   @return [String]
+    #
+    # @!attribute [rw] tracing_configuration
+    #   Specifies whether X-Ray tracing is enabled.
+    #   @return [Types::AwsStepFunctionStateMachineTracingConfigurationDetails]
+    #
+    # @!attribute [rw] type
+    #   The type of the state machine (STANDARD or EXPRESS).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsStepFunctionStateMachineDetails AWS API Documentation
+    #
+    class AwsStepFunctionStateMachineDetails < Struct.new(
+      :label,
+      :logging_configuration,
+      :name,
+      :role_arn,
+      :state_machine_arn,
+      :status,
+      :tracing_configuration,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object describing a CloudWatch log group. For more information, see
+    # [ Amazon Web Services::Logs::LogGroup][1] in the *CloudFormation User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html
+    #
+    # @!attribute [rw] log_group_arn
+    #   The ARN (ends with `:*`) of the CloudWatch Logs log group to which
+    #   you want your logs emitted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails AWS API Documentation
+    #
+    class AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails < Struct.new(
+      :log_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An array of objects that describes where your execution history events
+    # will be logged.
+    #
+    # @!attribute [rw] cloud_watch_logs_log_group
+    #   An object describing a CloudWatch Logs log group. For more
+    #   information, see [ Amazon Web Services::Logs::LogGroup][1] in the
+    #   *CloudFormation User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html
+    #   @return [Types::AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails AWS API Documentation
+    #
+    class AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails < Struct.new(
+      :cloud_watch_logs_log_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The `LoggingConfiguration` data type is used to set CloudWatch Logs
+    # options.
+    #
+    # @!attribute [rw] destinations
+    #   An array of objects that describes where your execution history
+    #   events will be logged.
+    #   @return [Array<Types::AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails>]
+    #
+    # @!attribute [rw] include_execution_data
+    #   Determines whether execution data is included in your log. When set
+    #   to false, data is excluded.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] level
+    #   Defines which category of execution history events are logged.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsStepFunctionStateMachineLoggingConfigurationDetails AWS API Documentation
+    #
+    class AwsStepFunctionStateMachineLoggingConfigurationDetails < Struct.new(
+      :destinations,
+      :include_execution_data,
+      :level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies whether X-Ray tracing is enabled.
+    #
+    # @!attribute [rw] enabled
+    #   When set to true, X-Ray tracing is enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsStepFunctionStateMachineTracingConfigurationDetails AWS API Documentation
+    #
+    class AwsStepFunctionStateMachineTracingConfigurationDetails < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about a rate-based rule for global resources. A rate-based
     # rule provides settings to indicate when to allow, block, or count a
     # request. Rate-based rules include the number of requests that arrive
@@ -18392,6 +19908,38 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] automation_rules_arns
+    #   A list of Amazon Resource Names (ARNs) for the rules that are to be
+    #   deleted.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchDeleteAutomationRulesRequest AWS API Documentation
+    #
+    class BatchDeleteAutomationRulesRequest < Struct.new(
+      :automation_rules_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] processed_automation_rules
+    #   A list of properly processed rule ARNs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] unprocessed_automation_rules
+    #   A list of objects containing `RuleArn`, `ErrorCode`, and
+    #   `ErrorMessage`. This parameter tells you which automation rules the
+    #   request didn't delete and why.
+    #   @return [Array<Types::UnprocessedAutomationRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchDeleteAutomationRulesResponse AWS API Documentation
+    #
+    class BatchDeleteAutomationRulesResponse < Struct.new(
+      :processed_automation_rules,
+      :unprocessed_automation_rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] standards_subscription_arns
     #   The ARNs of the standards subscriptions to disable.
     #   @return [Array<String>]
@@ -18436,6 +19984,37 @@ module Aws::SecurityHub
     #
     class BatchEnableStandardsResponse < Struct.new(
       :standards_subscriptions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] automation_rules_arns
+    #   A list of rule ARNs to get details for.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchGetAutomationRulesRequest AWS API Documentation
+    #
+    class BatchGetAutomationRulesRequest < Struct.new(
+      :automation_rules_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rules
+    #   A list of rule details for the provided rule ARNs.
+    #   @return [Array<Types::AutomationRulesConfig>]
+    #
+    # @!attribute [rw] unprocessed_automation_rules
+    #   A list of objects containing `RuleArn`, `ErrorCode`, and
+    #   `ErrorMessage`. This parameter tells you which automation rules the
+    #   request didn't retrieve and why.
+    #   @return [Array<Types::UnprocessedAutomationRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchGetAutomationRulesResponse AWS API Documentation
+    #
+    class BatchGetAutomationRulesResponse < Struct.new(
+      :rules,
+      :unprocessed_automation_rules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18551,6 +20130,38 @@ module Aws::SecurityHub
       :failed_count,
       :success_count,
       :failed_findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update_automation_rules_request_items
+    #   An array of ARNs for the rules that are to be updated. Optionally,
+    #   you can also include `RuleStatus` and `RuleOrder`.
+    #   @return [Array<Types::UpdateAutomationRulesRequestItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchUpdateAutomationRulesRequest AWS API Documentation
+    #
+    class BatchUpdateAutomationRulesRequest < Struct.new(
+      :update_automation_rules_request_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] processed_automation_rules
+    #   A list of properly processed rule ARNs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] unprocessed_automation_rules
+    #   A list of objects containing `RuleArn`, `ErrorCode`, and
+    #   `ErrorMessage`. This parameter tells you which automation rules the
+    #   request didn't update and why.
+    #   @return [Array<Types::UnprocessedAutomationRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchUpdateAutomationRulesResponse AWS API Documentation
+    #
+    class BatchUpdateAutomationRulesResponse < Struct.new(
+      :processed_automation_rules,
+      :unprocessed_automation_rules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19084,6 +20695,82 @@ module Aws::SecurityHub
     #
     class CreateActionTargetResponse < Struct.new(
       :action_target_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   User-defined tags that help you label the purpose of a rule.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] rule_status
+    #   Whether the rule is active after it is created. If this parameter is
+    #   equal to `Enabled`, Security Hub will apply the rule to findings and
+    #   finding updates after the rule is created. To change the value of
+    #   this parameter after creating a rule, use
+    #   `BatchUpdateAutomationRules`.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_order
+    #   An integer ranging from 1 to 1000 that represents the order in which
+    #   the rule action is applied to findings. Security Hub applies rules
+    #   with lower values for this parameter first.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rule_name
+    #   The name of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_terminal
+    #   Specifies whether a rule is the last to be applied with respect to a
+    #   finding that matches the rule criteria. This is useful when a
+    #   finding matches the criteria for multiple rules, and each rule has
+    #   different actions. If the value of this field is set to `true` for a
+    #   rule, Security Hub applies the rule action to a finding that matches
+    #   the rule criteria and won't evaluate other rules for the finding.
+    #   The default value of this field is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] criteria
+    #   A set of ASFF finding field attributes and corresponding expected
+    #   values that Security Hub uses to filter findings. If a finding
+    #   matches the conditions specified in this parameter, Security Hub
+    #   applies the rule action to the finding.
+    #   @return [Types::AutomationRulesFindingFilters]
+    #
+    # @!attribute [rw] actions
+    #   One or more actions to update finding fields if a finding matches
+    #   the conditions specified in `Criteria`.
+    #   @return [Array<Types::AutomationRulesAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateAutomationRuleRequest AWS API Documentation
+    #
+    class CreateAutomationRuleRequest < Struct.new(
+      :tags,
+      :rule_status,
+      :rule_order,
+      :rule_name,
+      :description,
+      :is_terminal,
+      :criteria,
+      :actions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule_arn
+    #   The Amazon Resource Name (ARN) of the automation rule that you
+    #   created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateAutomationRuleResponse AWS API Documentation
+    #
+    class CreateAutomationRuleResponse < Struct.new(
+      :rule_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20075,12 +21762,13 @@ module Aws::SecurityHub
     #   @return [Types::AwsSecurityFindingIdentifier]
     #
     # @!attribute [rw] update_time
-    #   An ISO 8601-formatted timestamp that indicates when the security
-    #   findings provider last updated the finding record. A correctly
-    #   formatted example is `2020-05-21T20:16:34.724Z`. The value cannot
-    #   contain spaces, and date and time should be separated by `T`. For
-    #   more information, see [RFC 3339 section 5.6, Internet Date/Time
-    #   Format][1].
+    #   An ISO 8601-formatted timestamp that indicates when Security Hub
+    #   processed the updated finding record.
+    #
+    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
+    #   value cannot contain spaces, and date and time should be separated
+    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
+    #   Date/Time Format][1].
     #
     #
     #
@@ -21140,6 +22828,45 @@ module Aws::SecurityHub
     class LimitExceededException < Struct.new(
       :message,
       :code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token to specify where to start paginating the response. This is
+    #   the `NextToken` from a previously truncated response. On your first
+    #   call to the `ListAutomationRules` API, set the value of this
+    #   parameter to `NULL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of rules to return in the response. This
+    #   currently ranges from 1 to 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListAutomationRulesRequest AWS API Documentation
+    #
+    class ListAutomationRulesRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] automation_rules_metadata
+    #   Metadata for rules in the calling account. The response includes
+    #   rules with a `RuleStatus` of `ENABLED` and `DISABLED`.
+    #   @return [Array<Types::AutomationRulesMetadata>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token for the response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListAutomationRulesResponse AWS API Documentation
+    #
+    class ListAutomationRulesResponse < Struct.new(
+      :automation_rules_metadata,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22885,6 +24612,37 @@ module Aws::SecurityHub
     #   traffic from your subnet or gateway.
     #   @return [Types::AwsEc2RouteTableDetails]
     #
+    # @!attribute [rw] aws_amazon_mq_broker
+    #   Provides details about AppSync message broker. A message broker
+    #   allows software applications and components to communicate using
+    #   various programming languages, operating systems, and formal
+    #   messaging protocols.
+    #   @return [Types::AwsAmazonMqBrokerDetails]
+    #
+    # @!attribute [rw] aws_app_sync_graph_ql_api
+    #   Provides details about an AppSync Graph QL API, which lets you query
+    #   multiple databases, microservices, and APIs from a single GraphQL
+    #   endpoint.
+    #   @return [Types::AwsAppSyncGraphQlApiDetails]
+    #
+    # @!attribute [rw] aws_event_schemas_registry
+    #   A schema defines the structure of events that are sent to Amazon
+    #   EventBridge. Schema registries are containers for schemas. They
+    #   collect and organize schemas so that your schemas are in logical
+    #   groups.
+    #   @return [Types::AwsEventSchemasRegistryDetails]
+    #
+    # @!attribute [rw] aws_guard_duty_detector
+    #   Provides details about an Amazon GuardDuty detector. A detector is
+    #   an object that represents the GuardDuty service. A detector is
+    #   required for GuardDuty to become operational.
+    #   @return [Types::AwsGuardDutyDetectorDetails]
+    #
+    # @!attribute [rw] aws_step_function_state_machine
+    #   Provides details about an Step Functions state machine, which is a
+    #   workflow consisting of a series of event-driven steps.
+    #   @return [Types::AwsStepFunctionStateMachineDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceDetails AWS API Documentation
     #
     class ResourceDetails < Struct.new(
@@ -22971,7 +24729,12 @@ module Aws::SecurityHub
       :aws_sage_maker_notebook_instance,
       :aws_wafv_2_web_acl,
       :aws_wafv_2_rule_group,
-      :aws_ec2_route_table)
+      :aws_ec2_route_table,
+      :aws_amazon_mq_broker,
+      :aws_app_sync_graph_ql_api,
+      :aws_event_schemas_registry,
+      :aws_guard_duty_detector,
+      :aws_step_function_state_machine)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24621,6 +26384,33 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # A list of objects containing `RuleArn`, `ErrorCode`, and
+    # `ErrorMessage`. This parameter tells you which automation rules the
+    # request didn't process and why.
+    #
+    # @!attribute [rw] rule_arn
+    #   The Amazon Resource Name (ARN) for the unprocessed automation rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code associated with the unprocessed automation rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] error_message
+    #   An error message describing why a request didn't process a specific
+    #   rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UnprocessedAutomationRule AWS API Documentation
+    #
+    class UnprocessedAutomationRule < Struct.new(
+      :rule_arn,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides details about a security control for which a response
     # couldn't be returned.
     #
@@ -24773,6 +26563,71 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateActionTargetResponse AWS API Documentation
     #
     class UpdateActionTargetResponse < Aws::EmptyStructure; end
+
+    # Specifies the parameters to update in an existing automation rule.
+    #
+    # @!attribute [rw] rule_arn
+    #   The Amazon Resource Name (ARN) for the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_status
+    #   Whether the rule is active after it is created. If this parameter is
+    #   equal to `ENABLED`, Security Hub will apply the rule to findings and
+    #   finding updates after the rule is created. To change the value of
+    #   this parameter after creating a rule, use
+    #   `BatchUpdateAutomationRules`.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_order
+    #   An integer ranging from 1 to 1000 that represents the order in which
+    #   the rule action is applied to findings. Security Hub applies rules
+    #   with lower values for this parameter first.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   A description of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_name
+    #   The name of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_terminal
+    #   Specifies whether a rule is the last to be applied with respect to a
+    #   finding that matches the rule criteria. This is useful when a
+    #   finding matches the criteria for multiple rules, and each rule has
+    #   different actions. If the value of this field is set to `true` for a
+    #   rule, Security Hub applies the rule action to a finding that matches
+    #   the rule criteria and won't evaluate other rules for the finding. 
+    #   The default value of this field is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] criteria
+    #   A set of ASFF finding field attributes and corresponding expected
+    #   values that Security Hub uses to filter findings. If a finding
+    #   matches the conditions specified in this parameter, Security Hub
+    #   applies the rule action to the finding.
+    #   @return [Types::AutomationRulesFindingFilters]
+    #
+    # @!attribute [rw] actions
+    #   One or more actions to update finding fields if a finding matches
+    #   the conditions specified in `Criteria`.
+    #   @return [Array<Types::AutomationRulesAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateAutomationRulesRequestItem AWS API Documentation
+    #
+    class UpdateAutomationRulesRequestItem < Struct.new(
+      :rule_arn,
+      :rule_status,
+      :rule_order,
+      :description,
+      :rule_name,
+      :is_terminal,
+      :criteria,
+      :actions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] finding_aggregator_arn
     #   The ARN of the finding aggregator. To obtain the ARN, use

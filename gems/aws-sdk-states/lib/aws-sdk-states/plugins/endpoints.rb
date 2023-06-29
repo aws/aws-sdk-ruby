@@ -60,10 +60,16 @@ module Aws::States
             Aws::States::Endpoints::CreateActivity.build(context)
           when :create_state_machine
             Aws::States::Endpoints::CreateStateMachine.build(context)
+          when :create_state_machine_alias
+            Aws::States::Endpoints::CreateStateMachineAlias.build(context)
           when :delete_activity
             Aws::States::Endpoints::DeleteActivity.build(context)
           when :delete_state_machine
             Aws::States::Endpoints::DeleteStateMachine.build(context)
+          when :delete_state_machine_alias
+            Aws::States::Endpoints::DeleteStateMachineAlias.build(context)
+          when :delete_state_machine_version
+            Aws::States::Endpoints::DeleteStateMachineVersion.build(context)
           when :describe_activity
             Aws::States::Endpoints::DescribeActivity.build(context)
           when :describe_execution
@@ -72,6 +78,8 @@ module Aws::States
             Aws::States::Endpoints::DescribeMapRun.build(context)
           when :describe_state_machine
             Aws::States::Endpoints::DescribeStateMachine.build(context)
+          when :describe_state_machine_alias
+            Aws::States::Endpoints::DescribeStateMachineAlias.build(context)
           when :describe_state_machine_for_execution
             Aws::States::Endpoints::DescribeStateMachineForExecution.build(context)
           when :get_activity_task
@@ -84,10 +92,16 @@ module Aws::States
             Aws::States::Endpoints::ListExecutions.build(context)
           when :list_map_runs
             Aws::States::Endpoints::ListMapRuns.build(context)
+          when :list_state_machine_aliases
+            Aws::States::Endpoints::ListStateMachineAliases.build(context)
+          when :list_state_machine_versions
+            Aws::States::Endpoints::ListStateMachineVersions.build(context)
           when :list_state_machines
             Aws::States::Endpoints::ListStateMachines.build(context)
           when :list_tags_for_resource
             Aws::States::Endpoints::ListTagsForResource.build(context)
+          when :publish_state_machine_version
+            Aws::States::Endpoints::PublishStateMachineVersion.build(context)
           when :send_task_failure
             Aws::States::Endpoints::SendTaskFailure.build(context)
           when :send_task_heartbeat
@@ -108,6 +122,8 @@ module Aws::States
             Aws::States::Endpoints::UpdateMapRun.build(context)
           when :update_state_machine
             Aws::States::Endpoints::UpdateStateMachine.build(context)
+          when :update_state_machine_alias
+            Aws::States::Endpoints::UpdateStateMachineAlias.build(context)
           end
         end
       end

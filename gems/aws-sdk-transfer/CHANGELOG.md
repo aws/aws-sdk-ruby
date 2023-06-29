@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.71.0 (2023-06-21)
+------------------
+
+* Feature - This release adds a new parameter StructuredLogDestinations to CreateServer, UpdateServer APIs.
+
+1.70.0 (2023-06-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.69.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.68.0 (2023-05-15)
+------------------
+
+* Feature - This release introduces the ability to require both password and SSH key when users authenticate to your Transfer Family servers that use the SFTP protocol.
+
 1.67.0 (2023-02-07)
 ------------------
 

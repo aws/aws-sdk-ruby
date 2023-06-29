@@ -9,6 +9,7 @@
 
 
 module Aws::GreengrassV2
+  # @api private
   module Endpoints
 
     class AssociateServiceRoleToAccount

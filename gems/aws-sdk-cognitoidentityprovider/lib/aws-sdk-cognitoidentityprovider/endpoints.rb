@@ -9,6 +9,7 @@
 
 
 module Aws::CognitoIdentityProvider
+  # @api private
   module Endpoints
 
     class AddCustomAttributes

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.42.0 (2023-06-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.41.0 (2023-06-05)
+------------------
+
+* Feature - Added new variable types, new DateTime data type, and new rules engine functions for interacting and working with DateTime data types.
+
+1.40.0 (2023-05-31)
+------------------
+
+* Feature - This release enables publishing event predictions from Amazon Fraud Detector (AFD) to Amazon EventBridge. For example, after getting predictions from AFD, Amazon EventBridge rules can be configured to trigger notification through an SNS topic, send a message with SES, or trigger Lambda workflows.
+
 1.39.0 (2023-02-15)
 ------------------
 

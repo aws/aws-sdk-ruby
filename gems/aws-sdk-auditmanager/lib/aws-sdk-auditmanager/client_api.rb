@@ -122,6 +122,7 @@ module Aws::AuditManager
     CreateDelegationRequest = Shapes::StructureShape.new(name: 'CreateDelegationRequest')
     CreateDelegationRequests = Shapes::ListShape.new(name: 'CreateDelegationRequests')
     CreatedBy = Shapes::StringShape.new(name: 'CreatedBy')
+    DefaultExportDestination = Shapes::StructureShape.new(name: 'DefaultExportDestination')
     Delegation = Shapes::StructureShape.new(name: 'Delegation')
     DelegationComment = Shapes::StringShape.new(name: 'DelegationComment')
     DelegationIds = Shapes::ListShape.new(name: 'DelegationIds')
@@ -162,6 +163,7 @@ module Aws::AuditManager
     EvidenceInsights = Shapes::StructureShape.new(name: 'EvidenceInsights')
     EvidenceList = Shapes::ListShape.new(name: 'EvidenceList')
     EvidenceSources = Shapes::ListShape.new(name: 'EvidenceSources')
+    ExportDestinationType = Shapes::StringShape.new(name: 'ExportDestinationType')
     Filename = Shapes::StringShape.new(name: 'Filename')
     Framework = Shapes::StructureShape.new(name: 'Framework')
     FrameworkDescription = Shapes::StringShape.new(name: 'FrameworkDescription')
@@ -186,6 +188,8 @@ module Aws::AuditManager
     GetDelegationsResponse = Shapes::StructureShape.new(name: 'GetDelegationsResponse')
     GetEvidenceByEvidenceFolderRequest = Shapes::StructureShape.new(name: 'GetEvidenceByEvidenceFolderRequest')
     GetEvidenceByEvidenceFolderResponse = Shapes::StructureShape.new(name: 'GetEvidenceByEvidenceFolderResponse')
+    GetEvidenceFileUploadUrlRequest = Shapes::StructureShape.new(name: 'GetEvidenceFileUploadUrlRequest')
+    GetEvidenceFileUploadUrlResponse = Shapes::StructureShape.new(name: 'GetEvidenceFileUploadUrlResponse')
     GetEvidenceFolderRequest = Shapes::StructureShape.new(name: 'GetEvidenceFolderRequest')
     GetEvidenceFolderResponse = Shapes::StructureShape.new(name: 'GetEvidenceFolderResponse')
     GetEvidenceFoldersByAssessmentControlRequest = Shapes::StructureShape.new(name: 'GetEvidenceFoldersByAssessmentControlRequest')
@@ -242,6 +246,8 @@ module Aws::AuditManager
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ManualEvidence = Shapes::StructureShape.new(name: 'ManualEvidence')
     ManualEvidenceList = Shapes::ListShape.new(name: 'ManualEvidenceList')
+    ManualEvidenceLocalFileName = Shapes::StringShape.new(name: 'ManualEvidenceLocalFileName')
+    ManualEvidenceTextResponse = Shapes::StringShape.new(name: 'ManualEvidenceTextResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     Notification = Shapes::StructureShape.new(name: 'Notification')
@@ -724,6 +730,10 @@ module Aws::AuditManager
 
     CreateDelegationRequests.member = Shapes::ShapeRef.new(shape: CreateDelegationRequest)
 
+    DefaultExportDestination.add_member(:destination_type, Shapes::ShapeRef.new(shape: ExportDestinationType, location_name: "destinationType"))
+    DefaultExportDestination.add_member(:destination, Shapes::ShapeRef.new(shape: S3Url, location_name: "destination"))
+    DefaultExportDestination.struct_class = Types::DefaultExportDestination
+
     Delegation.add_member(:id, Shapes::ShapeRef.new(shape: UUID, location_name: "id"))
     Delegation.add_member(:assessment_name, Shapes::ShapeRef.new(shape: AssessmentName, location_name: "assessmentName"))
     Delegation.add_member(:assessment_id, Shapes::ShapeRef.new(shape: UUID, location_name: "assessmentId"))
@@ -920,6 +930,13 @@ module Aws::AuditManager
     GetEvidenceByEvidenceFolderResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "nextToken"))
     GetEvidenceByEvidenceFolderResponse.struct_class = Types::GetEvidenceByEvidenceFolderResponse
 
+    GetEvidenceFileUploadUrlRequest.add_member(:file_name, Shapes::ShapeRef.new(shape: ManualEvidenceLocalFileName, required: true, location: "querystring", location_name: "fileName"))
+    GetEvidenceFileUploadUrlRequest.struct_class = Types::GetEvidenceFileUploadUrlRequest
+
+    GetEvidenceFileUploadUrlResponse.add_member(:evidence_file_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "evidenceFileName"))
+    GetEvidenceFileUploadUrlResponse.add_member(:upload_url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "uploadUrl"))
+    GetEvidenceFileUploadUrlResponse.struct_class = Types::GetEvidenceFileUploadUrlResponse
+
     GetEvidenceFolderRequest.add_member(:assessment_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "assessmentId"))
     GetEvidenceFolderRequest.add_member(:control_set_id, Shapes::ShapeRef.new(shape: ControlSetId, required: true, location: "uri", location_name: "controlSetId"))
     GetEvidenceFolderRequest.add_member(:evidence_folder_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "evidenceFolderId"))
@@ -1113,6 +1130,8 @@ module Aws::AuditManager
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     ManualEvidence.add_member(:s3_resource_path, Shapes::ShapeRef.new(shape: S3Url, location_name: "s3ResourcePath"))
+    ManualEvidence.add_member(:text_response, Shapes::ShapeRef.new(shape: ManualEvidenceTextResponse, location_name: "textResponse"))
+    ManualEvidence.add_member(:evidence_file_name, Shapes::ShapeRef.new(shape: ManualEvidenceLocalFileName, location_name: "evidenceFileName"))
     ManualEvidence.struct_class = Types::ManualEvidence
 
     ManualEvidenceList.member = Shapes::ShapeRef.new(shape: ManualEvidence)
@@ -1183,6 +1202,7 @@ module Aws::AuditManager
     Settings.add_member(:kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "kmsKey"))
     Settings.add_member(:evidence_finder_enablement, Shapes::ShapeRef.new(shape: EvidenceFinderEnablement, location_name: "evidenceFinderEnablement"))
     Settings.add_member(:deregistration_policy, Shapes::ShapeRef.new(shape: DeregistrationPolicy, location_name: "deregistrationPolicy"))
+    Settings.add_member(:default_export_destination, Shapes::ShapeRef.new(shape: DefaultExportDestination, location_name: "defaultExportDestination"))
     Settings.struct_class = Types::Settings
 
     SourceKeyword.add_member(:keyword_input_type, Shapes::ShapeRef.new(shape: KeywordInputType, location_name: "keywordInputType"))
@@ -1302,6 +1322,7 @@ module Aws::AuditManager
     UpdateSettingsRequest.add_member(:kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "kmsKey"))
     UpdateSettingsRequest.add_member(:evidence_finder_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "evidenceFinderEnabled"))
     UpdateSettingsRequest.add_member(:deregistration_policy, Shapes::ShapeRef.new(shape: DeregistrationPolicy, location_name: "deregistrationPolicy"))
+    UpdateSettingsRequest.add_member(:default_export_destination, Shapes::ShapeRef.new(shape: DefaultExportDestination, location_name: "defaultExportDestination"))
     UpdateSettingsRequest.struct_class = Types::UpdateSettingsRequest
 
     UpdateSettingsResponse.add_member(:settings, Shapes::ShapeRef.new(shape: Settings, location_name: "settings"))
@@ -1418,6 +1439,7 @@ module Aws::AuditManager
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_assessment, Seahorse::Model::Operation.new.tap do |o|
@@ -1687,6 +1709,18 @@ module Aws::AuditManager
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_evidence_file_upload_url, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEvidenceFileUploadUrl"
+        o.http_method = "GET"
+        o.http_request_uri = "/evidenceFileUploadUrl"
+        o.input = Shapes::ShapeRef.new(shape: GetEvidenceFileUploadUrlRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetEvidenceFileUploadUrlResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_evidence_folder, Seahorse::Model::Operation.new.tap do |o|

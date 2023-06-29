@@ -9,6 +9,7 @@
 
 
 module Aws::Neptune
+  # @api private
   module Endpoints
 
     class AddRoleToDBCluster

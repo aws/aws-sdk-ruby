@@ -275,6 +275,11 @@ module Aws::SimSpaceWeaver
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -405,6 +410,9 @@ module Aws::SimSpaceWeaver
     # @option params [required, Types::S3Destination] :destination
     #   The Amazon S3 bucket and optional folder (object key prefix) where
     #   SimSpace Weaver creates the snapshot file.
+    #
+    #   The Amazon S3 bucket must be in the same Amazon Web Services Region as
+    #   the simulation.
     #
     # @option params [required, String] :simulation
     #   The name of the simulation.
@@ -898,6 +906,9 @@ module Aws::SimSpaceWeaver
     #   Provide a `SnapshotS3Location` to start your simulation from a
     #   snapshot.
     #
+    #   The Amazon S3 bucket must be in the same Amazon Web Services Region as
+    #   the simulation.
+    #
     #   If you provide a `SnapshotS3Location` then you can't provide a
     #   `SchemaS3Location`.
     #
@@ -1126,7 +1137,7 @@ module Aws::SimSpaceWeaver
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-simspaceweaver'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.387.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.386.0 (2023-06-20)
+------------------
+
+* Feature - Adds support for targeting Dedicated Host allocations by assetIds in AWS Outposts
+
+1.385.0 (2023-06-19)
+------------------
+
+* Feature - API changes to AWS Verified Access to include data from trust providers in logs
+
+1.384.0 (2023-06-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.383.0 (2023-06-13)
+------------------
+
+* Feature - This release introduces a new feature, EC2 Instance Connect Endpoint, that enables you to connect to a resource over TCP, without requiring the resource to have a public IPv4 address.
+
+1.382.0 (2023-06-05)
+------------------
+
+* Feature - Making InstanceTagAttribute as the required parameter for the DeregisterInstanceEventNotificationAttributes and RegisterInstanceEventNotificationAttributes APIs.
+
+1.381.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.380.0 (2023-05-18)
+------------------
+
+* Feature - Add support for i4g.large, i4g.xlarge, i4g.2xlarge, i4g.4xlarge, i4g.8xlarge and i4g.16xlarge instances powered by AWS Graviton2 processors that deliver up to 15% better compute performance than our other storage-optimized instances.
+
+1.379.0 (2023-05-05)
+------------------
+
+* Feature - This release adds support the inf2 and trn1n instances. inf2 instances are purpose built for deep learning inference while trn1n instances are powered by AWS Trainium accelerators and they build on the capabilities of Trainium-powered trn1 instances.
+
 1.378.0 (2023-05-03)
 ------------------
 

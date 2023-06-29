@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.8.0 (2023-06-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.7.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.6.0 (2023-05-30)
+------------------
+
+* Feature - Added optional CallLeg field to StartSpeakerSearchTask API request
+
 1.5.0 (2023-04-13)
 ------------------
 

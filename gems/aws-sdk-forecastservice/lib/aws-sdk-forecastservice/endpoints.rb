@@ -9,6 +9,7 @@
 
 
 module Aws::ForecastService
+  # @api private
   module Endpoints
 
     class CreateAutoPredictor

@@ -24,6 +24,8 @@
       "errors":[
         {"shape":"ResourceNotFoundException"},
         {"shape":"CloudTrailARNInvalidException"},
+        {"shape":"EventDataStoreARNInvalidException"},
+        {"shape":"ChannelARNInvalidException"},
         {"shape":"ResourceTypeNotSupportedException"},
         {"shape":"TagsLimitExceededException"},
         {"shape":"InvalidTrailNameException"},
@@ -567,6 +569,8 @@
       "errors":[
         {"shape":"ResourceNotFoundException"},
         {"shape":"CloudTrailARNInvalidException"},
+        {"shape":"EventDataStoreARNInvalidException"},
+        {"shape":"ChannelARNInvalidException"},
         {"shape":"ResourceTypeNotSupportedException"},
         {"shape":"InvalidTrailNameException"},
         {"shape":"InactiveEventDataStoreException"},
@@ -625,6 +629,7 @@
         {"shape":"CloudTrailARNInvalidException"},
         {"shape":"InvalidHomeRegionException"},
         {"shape":"InvalidEventSelectorsException"},
+        {"shape":"ConflictException"},
         {"shape":"UnsupportedOperationException"},
         {"shape":"OperationNotPermittedException"},
         {"shape":"NotOrganizationMasterAccountException"},
@@ -712,6 +717,8 @@
       "errors":[
         {"shape":"ResourceNotFoundException"},
         {"shape":"CloudTrailARNInvalidException"},
+        {"shape":"EventDataStoreARNInvalidException"},
+        {"shape":"ChannelARNInvalidException"},
         {"shape":"ResourceTypeNotSupportedException"},
         {"shape":"InvalidTrailNameException"},
         {"shape":"InvalidTagParameterException"},
@@ -747,6 +754,27 @@
         {"shape":"NotOrganizationMasterAccountException"},
         {"shape":"NoManagementAccountSLRExistsException"},
         {"shape":"OrganizationNotInAllFeaturesModeException"}
+      ]
+    },
+    "StartEventDataStoreIngestion":{
+      "name":"StartEventDataStoreIngestion",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StartEventDataStoreIngestionRequest"},
+      "output":{"shape":"StartEventDataStoreIngestionResponse"},
+      "errors":[
+        {"shape":"EventDataStoreARNInvalidException"},
+        {"shape":"EventDataStoreNotFoundException"},
+        {"shape":"InvalidEventDataStoreStatusException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"InvalidEventDataStoreCategoryException"},
+        {"shape":"OperationNotPermittedException"},
+        {"shape":"UnsupportedOperationException"},
+        {"shape":"NotOrganizationMasterAccountException"},
+        {"shape":"NoManagementAccountSLRExistsException"},
+        {"shape":"InsufficientDependencyServiceAccessPermissionException"}
       ]
     },
     "StartImport":{
@@ -822,6 +850,27 @@
       ],
       "idempotent":true
     },
+    "StopEventDataStoreIngestion":{
+      "name":"StopEventDataStoreIngestion",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StopEventDataStoreIngestionRequest"},
+      "output":{"shape":"StopEventDataStoreIngestionResponse"},
+      "errors":[
+        {"shape":"EventDataStoreARNInvalidException"},
+        {"shape":"EventDataStoreNotFoundException"},
+        {"shape":"InvalidEventDataStoreStatusException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"InvalidEventDataStoreCategoryException"},
+        {"shape":"OperationNotPermittedException"},
+        {"shape":"UnsupportedOperationException"},
+        {"shape":"NotOrganizationMasterAccountException"},
+        {"shape":"NoManagementAccountSLRExistsException"},
+        {"shape":"InsufficientDependencyServiceAccessPermissionException"}
+      ]
+    },
     "StopImport":{
       "name":"StopImport",
       "http":{
@@ -890,6 +939,7 @@
       "input":{"shape":"UpdateEventDataStoreRequest"},
       "output":{"shape":"UpdateEventDataStoreResponse"},
       "errors":[
+        {"shape":"EventDataStoreAlreadyExistsException"},
         {"shape":"EventDataStoreARNInvalidException"},
         {"shape":"EventDataStoreNotFoundException"},
         {"shape":"InvalidEventSelectorsException"},
@@ -1182,7 +1232,8 @@
         "RetentionPeriod":{"shape":"RetentionPeriod"},
         "TerminationProtectionEnabled":{"shape":"TerminationProtectionEnabled"},
         "TagsList":{"shape":"TagsList"},
-        "KmsKeyId":{"shape":"EventDataStoreKmsKeyId"}
+        "KmsKeyId":{"shape":"EventDataStoreKmsKeyId"},
+        "StartIngestion":{"shape":"Boolean"}
       }
     },
     "CreateEventDataStoreResponse":{
@@ -1347,14 +1398,14 @@
     },
     "DescribeQueryRequest":{
       "type":"structure",
-      "required":["QueryId"],
       "members":{
         "EventDataStore":{
           "shape":"EventDataStoreArn",
           "deprecated":true,
           "deprecatedMessage":"EventDataStore is no longer required by DescribeQueryRequest"
         },
-        "QueryId":{"shape":"UUID"}
+        "QueryId":{"shape":"UUID"},
+        "QueryAlias":{"shape":"QueryAlias"}
       }
     },
     "DescribeQueryResponse":{
@@ -1530,7 +1581,10 @@
       "enum":[
         "CREATED",
         "ENABLED",
-        "PENDING_DELETION"
+        "PENDING_DELETION",
+        "STARTING_INGESTION",
+        "STOPPING_INGESTION",
+        "STOPPED_INGESTION"
       ]
     },
     "EventDataStoreTerminationProtectedException":{
@@ -2414,11 +2468,29 @@
         "CreationTime":{"shape":"Date"}
       }
     },
+    "QueryAlias":{
+      "type":"string",
+      "max":256,
+      "min":1,
+      "pattern":"^[a-zA-Z][a-zA-Z0-9._\\-]*$"
+    },
     "QueryIdNotFoundException":{
       "type":"structure",
       "members":{
       },
       "exception":true
+    },
+    "QueryParameter":{
+      "type":"string",
+      "max":1024,
+      "min":1,
+      "pattern":".*"
+    },
+    "QueryParameters":{
+      "type":"list",
+      "member":{"shape":"QueryParameter"},
+      "max":10,
+      "min":1
     },
     "QueryResultColumn":{
       "type":"map",
@@ -2645,6 +2717,18 @@
         "AdvancedEventSelectors":{"shape":"AdvancedEventSelectors"}
       }
     },
+    "StartEventDataStoreIngestionRequest":{
+      "type":"structure",
+      "required":["EventDataStore"],
+      "members":{
+        "EventDataStore":{"shape":"EventDataStoreArn"}
+      }
+    },
+    "StartEventDataStoreIngestionResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "StartImportRequest":{
       "type":"structure",
       "members":{
@@ -2682,16 +2766,29 @@
     },
     "StartQueryRequest":{
       "type":"structure",
-      "required":["QueryStatement"],
       "members":{
         "QueryStatement":{"shape":"QueryStatement"},
-        "DeliveryS3Uri":{"shape":"DeliveryS3Uri"}
+        "DeliveryS3Uri":{"shape":"DeliveryS3Uri"},
+        "QueryAlias":{"shape":"QueryAlias"},
+        "QueryParameters":{"shape":"QueryParameters"}
       }
     },
     "StartQueryResponse":{
       "type":"structure",
       "members":{
         "QueryId":{"shape":"UUID"}
+      }
+    },
+    "StopEventDataStoreIngestionRequest":{
+      "type":"structure",
+      "required":["EventDataStore"],
+      "members":{
+        "EventDataStore":{"shape":"EventDataStoreArn"}
+      }
+    },
+    "StopEventDataStoreIngestionResponse":{
+      "type":"structure",
+      "members":{
       }
     },
     "StopImportRequest":{

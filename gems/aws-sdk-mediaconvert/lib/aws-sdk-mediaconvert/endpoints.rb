@@ -9,6 +9,7 @@
 
 
 module Aws::MediaConvert
+  # @api private
   module Endpoints
 
     class AssociateCertificate

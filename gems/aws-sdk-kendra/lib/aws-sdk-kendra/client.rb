@@ -275,6 +275,11 @@ module Aws::Kendra
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -1952,6 +1957,8 @@ module Aws::Kendra
     #   The format of the FAQ input file. You can choose between a basic CSV
     #   format, a CSV format that includes customs attributes in a header, and
     #   a JSON format that includes custom attributes.
+    #
+    #   The default format is CSV.
     #
     #   The format must match the format of the file stored in the S3 bucket
     #   identified in the `S3Path` parameter.
@@ -5031,31 +5038,33 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Searches an active index. Use this API to search your documents using
-    # query. The `Query` API enables to do faceted search and to filter
-    # results based on document attributes.
+    # Searches an index given an input query.
     #
-    # It also enables you to provide user context that Amazon Kendra uses to
-    # enforce document access control in the search results.
+    # You can configure boosting or relevance tuning at the query level to
+    # override boosting at the index level, filter based on document
+    # fields/attributes and faceted search, and filter based on the user or
+    # their group access to documents. You can also include certain fields
+    # in the response that might provide useful additional information.
     #
-    # Amazon Kendra searches your index for text content and question and
-    # answer (FAQ) content. By default the response contains three types of
-    # results.
+    # A query response contains three types of results.
     #
-    # * Relevant passages
+    # * Relevant suggested answers. The answers can be either a text excerpt
+    #   or table excerpt. The answer can be highlighted in the excerpt.
     #
-    # * Matching FAQs
+    # * Matching FAQs or questions-answer from your FAQ file.
     #
-    # * Relevant documents
+    # * Relevant documents. This result type includes an excerpt of the
+    #   document with the document title. The searched terms can be
+    #   highlighted in the excerpt.
     #
     # You can specify that the query return only one type of result using
-    # the `QueryResultTypeFilter` parameter.
-    #
-    # Each query returns the 100 most relevant results.
+    # the `QueryResultTypeFilter` parameter. Each query returns the 100 most
+    # relevant results. If you filter result type to only question-answers,
+    # a maximum of four results are returned. If you filter result type to
+    # only answers, a maximum of three results are returned.
     #
     # @option params [required, String] :index_id
-    #   The identifier of the index to search. The identifier is returned in
-    #   the response from the `CreateIndex` API.
+    #   The identifier of the index for the search.
     #
     # @option params [String] :query_text
     #   The input query text for the search. Amazon Kendra truncates queries
@@ -5064,44 +5073,39 @@ module Aws::Kendra
     #   queries.
     #
     # @option params [Types::AttributeFilter] :attribute_filter
-    #   Enables filtered searches based on document attributes. You can only
+    #   Filters search results by document fields/attributes. You can only
     #   provide one attribute filter; however, the `AndAllFilters`,
     #   `NotFilter`, and `OrAllFilters` parameters contain a list of other
     #   filters.
     #
-    #   The `AttributeFilter` parameter enables you to create a set of
+    #   The `AttributeFilter` parameter means you can create a set of
     #   filtering rules that a document must satisfy to be included in the
     #   query results.
     #
     # @option params [Array<Types::Facet>] :facets
-    #   An array of documents attributes. Amazon Kendra returns a count for
-    #   each attribute key specified. This helps your users narrow their
-    #   search.
+    #   An array of documents fields/attributes for faceted search. Amazon
+    #   Kendra returns a count for each field key specified. This helps your
+    #   users narrow their search.
     #
     # @option params [Array<String>] :requested_document_attributes
-    #   An array of document attributes to include in the response. You can
-    #   limit the response to include certain document attributes. By default
+    #   An array of document fields/attributes to include in the response. You
+    #   can limit the response to include certain document fields. By default,
     #   all document attributes are included in the response.
     #
     # @option params [String] :query_result_type_filter
-    #   Sets the type of query. Only results for the specified query type are
-    #   returned.
+    #   Sets the type of query result or response. Only results for the
+    #   specified type are returned.
     #
     # @option params [Array<Types::DocumentRelevanceConfiguration>] :document_relevance_override_configurations
-    #   Overrides relevance tuning configurations of fields or attributes set
-    #   at the index level.
+    #   Overrides relevance tuning configurations of fields/attributes set at
+    #   the index level.
     #
     #   If you use this API to override the relevance tuning configured at the
     #   index level, but there is no relevance tuning configured at the index
     #   level, then Amazon Kendra does not apply any relevance tuning.
     #
-    #   If there is relevance tuning configured at the index level, but you do
-    #   not use this API to override any relevance tuning in the index, then
-    #   Amazon Kendra uses the relevance tuning that is configured at the
-    #   index level.
-    #
     #   If there is relevance tuning configured for fields at the index level,
-    #   but you use this API to override only some of these fields, then for
+    #   and you use this API to override only some of these fields, then for
     #   the fields you did not override, the importance is set to 1.
     #
     # @option params [Integer] :page_number
@@ -5386,6 +5390,230 @@ module Aws::Kendra
     # @param [Hash] params ({})
     def query(params = {}, options = {})
       req = build_request(:query, params)
+      req.send_request(options)
+    end
+
+    # Retrieves relevant passages or text excerpts given an input query.
+    #
+    # This API is similar to the [Query][1] API. However, by default, the
+    # `Query` API only returns excerpt passages of up to 100 token words.
+    # With the `Retrieve` API, you can retrieve longer passages of up to 200
+    # token words and up to 100 semantically relevant passages. This
+    # doesn't include question-answer or FAQ type responses from your
+    # index. The passages are text excerpts that can be semantically
+    # extracted from multiple documents and multiple parts of the same
+    # document. If in extreme cases your documents produce no relevant
+    # passages using the `Retrieve` API, you can alternatively use the
+    # `Query` API.
+    #
+    # You can also do the following:
+    #
+    # * Override boosting at the index level
+    #
+    # * Filter based on document fields or attributes
+    #
+    # * Filter based on the user or their group access to documents
+    #
+    # You can also include certain fields in the response that might provide
+    # useful additional information.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_Query.html
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index to retrieve relevant passages for the
+    #   search.
+    #
+    # @option params [required, String] :query_text
+    #   The input query text to retrieve relevant passages for the search.
+    #   Amazon Kendra truncates queries at 30 token words, which excludes
+    #   punctuation and stop words. Truncation still applies if you use
+    #   Boolean or more advanced, complex queries.
+    #
+    # @option params [Types::AttributeFilter] :attribute_filter
+    #   Filters search results by document fields/attributes. You can only
+    #   provide one attribute filter; however, the `AndAllFilters`,
+    #   `NotFilter`, and `OrAllFilters` parameters contain a list of other
+    #   filters.
+    #
+    #   The `AttributeFilter` parameter means you can create a set of
+    #   filtering rules that a document must satisfy to be included in the
+    #   query results.
+    #
+    # @option params [Array<String>] :requested_document_attributes
+    #   A list of document fields/attributes to include in the response. You
+    #   can limit the response to include certain document fields. By default,
+    #   all document fields are included in the response.
+    #
+    # @option params [Array<Types::DocumentRelevanceConfiguration>] :document_relevance_override_configurations
+    #   Overrides relevance tuning configurations of fields/attributes set at
+    #   the index level.
+    #
+    #   If you use this API to override the relevance tuning configured at the
+    #   index level, but there is no relevance tuning configured at the index
+    #   level, then Amazon Kendra does not apply any relevance tuning.
+    #
+    #   If there is relevance tuning configured for fields at the index level,
+    #   and you use this API to override only some of these fields, then for
+    #   the fields you did not override, the importance is set to 1.
+    #
+    # @option params [Integer] :page_number
+    #   Retrieved relevant passages are returned in pages the size of the
+    #   `PageSize` parameter. By default, Amazon Kendra returns the first page
+    #   of results. Use this parameter to get result pages after the first
+    #   one.
+    #
+    # @option params [Integer] :page_size
+    #   Sets the number of retrieved relevant passages that are returned in
+    #   each page of results. The default page size is 10. The maximum number
+    #   of results returned is 100. If you ask for more than 100 results, only
+    #   100 are returned.
+    #
+    # @option params [Types::UserContext] :user_context
+    #   The user context token or user and group information.
+    #
+    # @return [Types::RetrieveResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RetrieveResult#query_id #query_id} => String
+    #   * {Types::RetrieveResult#result_items #result_items} => Array&lt;Types::RetrieveResultItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.retrieve({
+    #     index_id: "IndexId", # required
+    #     query_text: "QueryText", # required
+    #     attribute_filter: {
+    #       and_all_filters: [
+    #         {
+    #           # recursive AttributeFilter
+    #         },
+    #       ],
+    #       or_all_filters: [
+    #         {
+    #           # recursive AttributeFilter
+    #         },
+    #       ],
+    #       not_filter: {
+    #         # recursive AttributeFilter
+    #       },
+    #       equals_to: {
+    #         key: "DocumentAttributeKey", # required
+    #         value: { # required
+    #           string_value: "DocumentAttributeStringValue",
+    #           string_list_value: ["String"],
+    #           long_value: 1,
+    #           date_value: Time.now,
+    #         },
+    #       },
+    #       contains_all: {
+    #         key: "DocumentAttributeKey", # required
+    #         value: { # required
+    #           string_value: "DocumentAttributeStringValue",
+    #           string_list_value: ["String"],
+    #           long_value: 1,
+    #           date_value: Time.now,
+    #         },
+    #       },
+    #       contains_any: {
+    #         key: "DocumentAttributeKey", # required
+    #         value: { # required
+    #           string_value: "DocumentAttributeStringValue",
+    #           string_list_value: ["String"],
+    #           long_value: 1,
+    #           date_value: Time.now,
+    #         },
+    #       },
+    #       greater_than: {
+    #         key: "DocumentAttributeKey", # required
+    #         value: { # required
+    #           string_value: "DocumentAttributeStringValue",
+    #           string_list_value: ["String"],
+    #           long_value: 1,
+    #           date_value: Time.now,
+    #         },
+    #       },
+    #       greater_than_or_equals: {
+    #         key: "DocumentAttributeKey", # required
+    #         value: { # required
+    #           string_value: "DocumentAttributeStringValue",
+    #           string_list_value: ["String"],
+    #           long_value: 1,
+    #           date_value: Time.now,
+    #         },
+    #       },
+    #       less_than: {
+    #         key: "DocumentAttributeKey", # required
+    #         value: { # required
+    #           string_value: "DocumentAttributeStringValue",
+    #           string_list_value: ["String"],
+    #           long_value: 1,
+    #           date_value: Time.now,
+    #         },
+    #       },
+    #       less_than_or_equals: {
+    #         key: "DocumentAttributeKey", # required
+    #         value: { # required
+    #           string_value: "DocumentAttributeStringValue",
+    #           string_list_value: ["String"],
+    #           long_value: 1,
+    #           date_value: Time.now,
+    #         },
+    #       },
+    #     },
+    #     requested_document_attributes: ["DocumentAttributeKey"],
+    #     document_relevance_override_configurations: [
+    #       {
+    #         name: "DocumentMetadataConfigurationName", # required
+    #         relevance: { # required
+    #           freshness: false,
+    #           importance: 1,
+    #           duration: "Duration",
+    #           rank_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #           value_importance_map: {
+    #             "ValueImportanceMapKey" => 1,
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     page_number: 1,
+    #     page_size: 1,
+    #     user_context: {
+    #       token: "Token",
+    #       user_id: "PrincipalName",
+    #       groups: ["PrincipalName"],
+    #       data_source_groups: [
+    #         {
+    #           group_id: "PrincipalName", # required
+    #           data_source_id: "DataSourceId", # required
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.query_id #=> String
+    #   resp.result_items #=> Array
+    #   resp.result_items[0].id #=> String
+    #   resp.result_items[0].document_id #=> String
+    #   resp.result_items[0].document_title #=> String
+    #   resp.result_items[0].content #=> String
+    #   resp.result_items[0].document_uri #=> String
+    #   resp.result_items[0].document_attributes #=> Array
+    #   resp.result_items[0].document_attributes[0].key #=> String
+    #   resp.result_items[0].document_attributes[0].value.string_value #=> String
+    #   resp.result_items[0].document_attributes[0].value.string_list_value #=> Array
+    #   resp.result_items[0].document_attributes[0].value.string_list_value[0] #=> String
+    #   resp.result_items[0].document_attributes[0].value.long_value #=> Integer
+    #   resp.result_items[0].document_attributes[0].value.date_value #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/Retrieve AWS API Documentation
+    #
+    # @overload retrieve(params = {})
+    # @param [Hash] params ({})
+    def retrieve(params = {}, options = {})
+      req = build_request(:retrieve, params)
       req.send_request(options)
     end
 
@@ -6935,7 +7163,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

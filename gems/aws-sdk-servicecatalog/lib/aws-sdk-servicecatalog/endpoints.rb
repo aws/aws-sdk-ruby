@@ -9,6 +9,7 @@
 
 
 module Aws::ServiceCatalog
+  # @api private
   module Endpoints
 
     class AcceptPortfolioShare

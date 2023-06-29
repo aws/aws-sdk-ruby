@@ -9,6 +9,7 @@
 
 
 module Aws::Signer
+  # @api private
   module Endpoints
 
     class AddProfilePermission
@@ -40,6 +41,20 @@ module Aws::Signer
     end
 
     class DescribeSigningJob
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Signer::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class GetRevocationStatus
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -194,6 +209,20 @@ module Aws::Signer
     end
 
     class RevokeSigningProfile
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Signer::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class SignPayload
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

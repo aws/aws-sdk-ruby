@@ -31,7 +31,7 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/sign.rb'
-require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
+require 'aws-sdk-core/plugins/protocols/query.rb'
 require 'aws-sdk-sqs/plugins/queue_urls.rb'
 require 'aws-sdk-sqs/plugins/md5s.rb'
 
@@ -82,7 +82,7 @@ module Aws::SQS
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::Sign)
-    add_plugin(Aws::Plugins::Protocols::JsonRpc)
+    add_plugin(Aws::Plugins::Protocols::Query)
     add_plugin(Aws::SQS::Plugins::QueueUrls)
     add_plugin(Aws::SQS::Plugins::Md5s)
     add_plugin(Aws::SQS::Plugins::Endpoints)
@@ -279,19 +279,14 @@ module Aws::SQS
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
-    #
-    #   @option options [Boolean] :simple_json (false)
-    #     Disables request parameter conversion, validation, and formatting.
-    #     Also disable response data type conversions. This option is useful
-    #     when you want to ensure the highest level of performance by
-    #     avoiding overhead of walking request parameters and response data
-    #     structures.
-    #
-    #     When `:simple_json` is enabled, the request parameters hash must
-    #     be formatted exactly as the DynamoDB API expects.
     #
     #   @option options [Boolean] :stub_responses (false)
     #     Causes the client to return stubbed responses. By default
@@ -487,6 +482,43 @@ module Aws::SQS
       req.send_request(options)
     end
 
+    # Cancels a specified message movement task.
+    #
+    # <note markdown="1"> * A message movement can only be cancelled when the current status is
+    #   RUNNING.
+    #
+    # * Cancelling a message movement task does not revert the messages that
+    #   have already been moved. It can only stop the messages that have not
+    #   been moved yet.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :task_handle
+    #   An identifier associated with a message movement task.
+    #
+    # @return [Types::CancelMessageMoveTaskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelMessageMoveTaskResult#approximate_number_of_messages_moved #approximate_number_of_messages_moved} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_message_move_task({
+    #     task_handle: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.approximate_number_of_messages_moved #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/CancelMessageMoveTask AWS API Documentation
+    #
+    # @overload cancel_message_move_task(params = {})
+    # @param [Hash] params ({})
+    def cancel_message_move_task(params = {}, options = {})
+      req = build_request(:cancel_message_move_task, params)
+      req.send_request(options)
+    end
+
     # Changes the visibility timeout of a specified message in a queue to a
     # new value. The default visibility timeout for a message is 30 seconds.
     # The minimum is 0 seconds. The maximum is 12 hours. For more
@@ -559,7 +591,7 @@ module Aws::SQS
     #   Queue URLs and names are case-sensitive.
     #
     # @option params [required, String] :receipt_handle
-    #   The receipt handle associated with the message whose visibility
+    #   The receipt handle associated with the message, whose visibility
     #   timeout is changed. This parameter is returned by the ` ReceiveMessage
     #   ` action.
     #
@@ -603,7 +635,7 @@ module Aws::SQS
     #   Queue URLs and names are case-sensitive.
     #
     # @option params [required, Array<Types::ChangeMessageVisibilityBatchRequestEntry>] :entries
-    #   A list of receipt handles of the messages for which the visibility
+    #   Lists the receipt handles of the messages for which the visibility
     #   timeout must be changed.
     #
     # @return [Types::ChangeMessageVisibilityBatchResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1038,7 +1070,7 @@ module Aws::SQS
     #   Queue URLs and names are case-sensitive.
     #
     # @option params [required, Array<Types::DeleteMessageBatchRequestEntry>] :entries
-    #   A list of receipt handles for the messages to be deleted.
+    #   Lists the receipt handles for the messages to be deleted.
     #
     # @return [Types::DeleteMessageBatchResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1466,6 +1498,50 @@ module Aws::SQS
     # @param [Hash] params ({})
     def list_dead_letter_source_queues(params = {}, options = {})
       req = build_request(:list_dead_letter_source_queues, params)
+      req.send_request(options)
+    end
+
+    # Gets the most recent message movement tasks (up to 10) under a
+    # specific source queue.
+    #
+    # @option params [required, String] :source_arn
+    #   The ARN of the queue whose message movement tasks are to be listed.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to include in the response. The default
+    #   is 1, which provides the most recent message movement task. The upper
+    #   limit is 10.
+    #
+    # @return [Types::ListMessageMoveTasksResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMessageMoveTasksResult#results #results} => Array&lt;Types::ListMessageMoveTasksResultEntry&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_message_move_tasks({
+    #     source_arn: "String", # required
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results #=> Array
+    #   resp.results[0].task_handle #=> String
+    #   resp.results[0].status #=> String
+    #   resp.results[0].source_arn #=> String
+    #   resp.results[0].destination_arn #=> String
+    #   resp.results[0].max_number_of_messages_per_second #=> Integer
+    #   resp.results[0].approximate_number_of_messages_moved #=> Integer
+    #   resp.results[0].approximate_number_of_messages_to_move #=> Integer
+    #   resp.results[0].failure_reason #=> String
+    #   resp.results[0].started_timestamp #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListMessageMoveTasks AWS API Documentation
+    #
+    # @overload list_message_move_tasks(params = {})
+    # @param [Hash] params ({})
+    def list_message_move_tasks(params = {}, options = {})
+      req = build_request(:list_message_move_tasks, params)
       req.send_request(options)
     end
 
@@ -2485,6 +2561,65 @@ module Aws::SQS
       req.send_request(options)
     end
 
+    # Starts an asynchronous task to move messages from a specified source
+    # queue to a specified destination queue.
+    #
+    # <note markdown="1"> * This action is currently limited to supporting message redrive from
+    #   dead-letter queues (DLQs) only. In this context, the source queue is
+    #   the dead-letter queue (DLQ), while the destination queue can be the
+    #   original source queue (from which the messages were driven to the
+    #   dead-letter-queue), or a custom destination queue.
+    #
+    # * Currently, only standard queues are supported.
+    #
+    # * Only one active message movement task is supported per queue at any
+    #   given time.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :source_arn
+    #   The ARN of the queue that contains the messages to be moved to another
+    #   queue. Currently, only dead-letter queue (DLQ) ARNs are accepted.
+    #
+    # @option params [String] :destination_arn
+    #   The ARN of the queue that receives the moved messages. You can use
+    #   this field to specify the destination queue where you would like to
+    #   redrive messages. If this field is left blank, the messages will be
+    #   redriven back to their respective original source queues.
+    #
+    # @option params [Integer] :max_number_of_messages_per_second
+    #   The number of messages to be moved per second (the message movement
+    #   rate). You can use this field to define a fixed message movement rate.
+    #   The maximum value for messages per second is 500. If this field is
+    #   left blank, the system will optimize the rate based on the queue
+    #   message backlog size, which may vary throughout the duration of the
+    #   message movement task.
+    #
+    # @return [Types::StartMessageMoveTaskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartMessageMoveTaskResult#task_handle #task_handle} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_message_move_task({
+    #     source_arn: "String", # required
+    #     destination_arn: "String",
+    #     max_number_of_messages_per_second: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_handle #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/StartMessageMoveTask AWS API Documentation
+    #
+    # @overload start_message_move_task(params = {})
+    # @param [Hash] params ({})
+    def start_message_move_task(params = {}, options = {})
+      req = build_request(:start_message_move_task, params)
+      req.send_request(options)
+    end
+
     # Add cost allocation tags to the specified Amazon SQS queue. For an
     # overview, see [Tagging Your Amazon SQS Queues][1] in the *Amazon SQS
     # Developer Guide*.
@@ -2594,7 +2729,7 @@ module Aws::SQS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sqs'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -275,6 +275,11 @@ module Aws::Athena
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -546,7 +551,11 @@ module Aws::Athena
       req.send_request(options)
     end
 
-    # Cancels the capacity reservation with the specified name.
+    # Cancels the capacity reservation with the specified name. Cancelled
+    # reservations remain in your account and will be deleted 45 days after
+    # cancellation. During the 45 days, you cannot re-purpose or reuse a
+    # reservation that has been cancelled, but you can refer to its tags and
+    # view it for historical reference.
     #
     # @option params [required, String] :name
     #   The name of the capacity reservation to cancel.
@@ -962,6 +971,33 @@ module Aws::Athena
     # @param [Hash] params ({})
     def create_work_group(params = {}, options = {})
       req = build_request(:create_work_group, params)
+      req.send_request(options)
+    end
+
+    # Deletes a cancelled capacity reservation. A reservation must be
+    # cancelled before it can be deleted. A deleted reservation is
+    # immediately removed from your account and can no longer be referenced,
+    # including by its ARN. A deleted reservation cannot be called by
+    # `GetCapacityReservation`, and deleted reservations do not appear in
+    # the output of `ListCapacityReservations`.
+    #
+    # @option params [required, String] :name
+    #   The name of the capacity reservation to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_capacity_reservation({
+    #     name: "CapacityReservationName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeleteCapacityReservation AWS API Documentation
+    #
+    # @overload delete_capacity_reservation(params = {})
+    # @param [Hash] params ({})
+    def delete_capacity_reservation(params = {}, options = {})
+      req = build_request(:delete_capacity_reservation, params)
       req.send_request(options)
     end
 
@@ -1716,6 +1752,8 @@ module Aws::Athena
     #   resp.engine_configuration.default_executor_dpu_size #=> Integer
     #   resp.engine_configuration.additional_configs #=> Hash
     #   resp.engine_configuration.additional_configs["KeyString"] #=> String
+    #   resp.engine_configuration.spark_properties #=> Hash
+    #   resp.engine_configuration.spark_properties["KeyString"] #=> String
     #   resp.notebook_version #=> String
     #   resp.session_configuration.execution_role #=> String
     #   resp.session_configuration.working_directory #=> String
@@ -3033,6 +3071,9 @@ module Aws::Athena
     #       additional_configs: {
     #         "KeyString" => "ParametersMapValue",
     #       },
+    #       spark_properties: {
+    #         "KeyString" => "ParametersMapValue",
+    #       },
     #     },
     #     notebook_version: "NameString",
     #     session_idle_timeout_in_minutes: 1,
@@ -3557,7 +3598,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

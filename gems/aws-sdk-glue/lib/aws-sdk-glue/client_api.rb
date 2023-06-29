@@ -17,6 +17,7 @@ module Aws::Glue
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     Action = Shapes::StructureShape.new(name: 'Action')
     ActionList = Shapes::ListShape.new(name: 'ActionList')
+    AdditionalOptionKeys = Shapes::StringShape.new(name: 'AdditionalOptionKeys')
     AdditionalOptions = Shapes::MapShape.new(name: 'AdditionalOptions')
     AdditionalPlanOptionsMap = Shapes::MapShape.new(name: 'AdditionalPlanOptionsMap')
     AggFunction = Shapes::StringShape.new(name: 'AggFunction')
@@ -24,6 +25,11 @@ module Aws::Glue
     AggregateOperation = Shapes::StructureShape.new(name: 'AggregateOperation')
     AggregateOperations = Shapes::ListShape.new(name: 'AggregateOperations')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
+    AmazonRedshiftAdvancedOption = Shapes::StructureShape.new(name: 'AmazonRedshiftAdvancedOption')
+    AmazonRedshiftAdvancedOptions = Shapes::ListShape.new(name: 'AmazonRedshiftAdvancedOptions')
+    AmazonRedshiftNodeData = Shapes::StructureShape.new(name: 'AmazonRedshiftNodeData')
+    AmazonRedshiftSource = Shapes::StructureShape.new(name: 'AmazonRedshiftSource')
+    AmazonRedshiftTarget = Shapes::StructureShape.new(name: 'AmazonRedshiftTarget')
     ApplyMapping = Shapes::StructureShape.new(name: 'ApplyMapping')
     AthenaConnectorSource = Shapes::StructureShape.new(name: 'AthenaConnectorSource')
     AttemptCount = Shapes::IntegerShape.new(name: 'AttemptCount')
@@ -270,6 +276,8 @@ module Aws::Glue
     CustomEntityTypeNames = Shapes::ListShape.new(name: 'CustomEntityTypeNames')
     CustomEntityTypes = Shapes::ListShape.new(name: 'CustomEntityTypes')
     CustomPatterns = Shapes::StringShape.new(name: 'CustomPatterns')
+    DQAdditionalOptions = Shapes::MapShape.new(name: 'DQAdditionalOptions')
+    DQDLAliases = Shapes::MapShape.new(name: 'DQDLAliases')
     DQDLString = Shapes::StringShape.new(name: 'DQDLString')
     DQResultsPublishingOptions = Shapes::StructureShape.new(name: 'DQResultsPublishingOptions')
     DQStopJobOnFailureOptions = Shapes::StructureShape.new(name: 'DQStopJobOnFailureOptions')
@@ -304,6 +312,7 @@ module Aws::Glue
     DataQualityRulesetString = Shapes::StringShape.new(name: 'DataQualityRulesetString')
     DataQualityTargetTable = Shapes::StructureShape.new(name: 'DataQualityTargetTable')
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
+    DataSourceMap = Shapes::MapShape.new(name: 'DataSourceMap')
     Database = Shapes::StructureShape.new(name: 'Database')
     DatabaseIdentifier = Shapes::StructureShape.new(name: 'DatabaseIdentifier')
     DatabaseInput = Shapes::StructureShape.new(name: 'DatabaseInput')
@@ -407,6 +416,8 @@ module Aws::Glue
     ErrorMessageString = Shapes::StringShape.new(name: 'ErrorMessageString')
     ErrorString = Shapes::StringShape.new(name: 'ErrorString')
     EvaluateDataQuality = Shapes::StructureShape.new(name: 'EvaluateDataQuality')
+    EvaluateDataQualityMultiFrame = Shapes::StructureShape.new(name: 'EvaluateDataQualityMultiFrame')
+    EvaluatedMetricsMap = Shapes::MapShape.new(name: 'EvaluatedMetricsMap')
     EvaluationMetrics = Shapes::StructureShape.new(name: 'EvaluationMetrics')
     EventBatchingCondition = Shapes::StructureShape.new(name: 'EventBatchingCondition')
     EventQueueArn = Shapes::StringShape.new(name: 'EventQueueArn')
@@ -614,6 +625,7 @@ module Aws::Glue
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
     InvalidStateException = Shapes::StructureShape.new(name: 'InvalidStateException')
     IsVersionValid = Shapes::BooleanShape.new(name: 'IsVersionValid')
+    Iso8601DateTime = Shapes::TimestampShape.new(name: 'Iso8601DateTime', timestampFormat: "iso8601")
     JDBCConnectionType = Shapes::StringShape.new(name: 'JDBCConnectionType')
     JDBCConnectorOptions = Shapes::StructureShape.new(name: 'JDBCConnectorOptions')
     JDBCConnectorSource = Shapes::StructureShape.new(name: 'JDBCConnectorSource')
@@ -762,6 +774,8 @@ module Aws::Glue
     NullableInteger = Shapes::IntegerShape.new(name: 'NullableInteger')
     OneInput = Shapes::ListShape.new(name: 'OneInput')
     OperationTimeoutException = Shapes::StructureShape.new(name: 'OperationTimeoutException')
+    Option = Shapes::StructureShape.new(name: 'Option')
+    OptionList = Shapes::ListShape.new(name: 'OptionList')
     OracleSQLCatalogSource = Shapes::StructureShape.new(name: 'OracleSQLCatalogSource')
     OracleSQLCatalogTarget = Shapes::StructureShape.new(name: 'OracleSQLCatalogTarget')
     OrchestrationArgumentsMap = Shapes::MapShape.new(name: 'OrchestrationArgumentsMap')
@@ -868,6 +882,7 @@ module Aws::Glue
     RunId = Shapes::StringShape.new(name: 'RunId')
     RunStatementRequest = Shapes::StructureShape.new(name: 'RunStatementRequest')
     RunStatementResponse = Shapes::StructureShape.new(name: 'RunStatementResponse')
+    RuntimeNameString = Shapes::StringShape.new(name: 'RuntimeNameString')
     S3CatalogDeltaSource = Shapes::StructureShape.new(name: 'S3CatalogDeltaSource')
     S3CatalogHudiSource = Shapes::StructureShape.new(name: 'S3CatalogHudiSource')
     S3CatalogSource = Shapes::StructureShape.new(name: 'S3CatalogSource')
@@ -1167,6 +1182,49 @@ module Aws::Glue
 
     AlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     AlreadyExistsException.struct_class = Types::AlreadyExistsException
+
+    AmazonRedshiftAdvancedOption.add_member(:key, Shapes::ShapeRef.new(shape: GenericString, location_name: "Key"))
+    AmazonRedshiftAdvancedOption.add_member(:value, Shapes::ShapeRef.new(shape: GenericString, location_name: "Value"))
+    AmazonRedshiftAdvancedOption.struct_class = Types::AmazonRedshiftAdvancedOption
+
+    AmazonRedshiftAdvancedOptions.member = Shapes::ShapeRef.new(shape: AmazonRedshiftAdvancedOption)
+
+    AmazonRedshiftNodeData.add_member(:access_type, Shapes::ShapeRef.new(shape: GenericLimitedString, location_name: "AccessType"))
+    AmazonRedshiftNodeData.add_member(:source_type, Shapes::ShapeRef.new(shape: GenericLimitedString, location_name: "SourceType"))
+    AmazonRedshiftNodeData.add_member(:connection, Shapes::ShapeRef.new(shape: Option, location_name: "Connection"))
+    AmazonRedshiftNodeData.add_member(:schema, Shapes::ShapeRef.new(shape: Option, location_name: "Schema"))
+    AmazonRedshiftNodeData.add_member(:table, Shapes::ShapeRef.new(shape: Option, location_name: "Table"))
+    AmazonRedshiftNodeData.add_member(:catalog_database, Shapes::ShapeRef.new(shape: Option, location_name: "CatalogDatabase"))
+    AmazonRedshiftNodeData.add_member(:catalog_table, Shapes::ShapeRef.new(shape: Option, location_name: "CatalogTable"))
+    AmazonRedshiftNodeData.add_member(:catalog_redshift_schema, Shapes::ShapeRef.new(shape: GenericString, location_name: "CatalogRedshiftSchema"))
+    AmazonRedshiftNodeData.add_member(:catalog_redshift_table, Shapes::ShapeRef.new(shape: GenericString, location_name: "CatalogRedshiftTable"))
+    AmazonRedshiftNodeData.add_member(:temp_dir, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "TempDir"))
+    AmazonRedshiftNodeData.add_member(:iam_role, Shapes::ShapeRef.new(shape: Option, location_name: "IamRole"))
+    AmazonRedshiftNodeData.add_member(:advanced_options, Shapes::ShapeRef.new(shape: AmazonRedshiftAdvancedOptions, location_name: "AdvancedOptions"))
+    AmazonRedshiftNodeData.add_member(:sample_query, Shapes::ShapeRef.new(shape: GenericString, location_name: "SampleQuery"))
+    AmazonRedshiftNodeData.add_member(:pre_action, Shapes::ShapeRef.new(shape: GenericString, location_name: "PreAction"))
+    AmazonRedshiftNodeData.add_member(:post_action, Shapes::ShapeRef.new(shape: GenericString, location_name: "PostAction"))
+    AmazonRedshiftNodeData.add_member(:action, Shapes::ShapeRef.new(shape: GenericString, location_name: "Action"))
+    AmazonRedshiftNodeData.add_member(:table_prefix, Shapes::ShapeRef.new(shape: GenericLimitedString, location_name: "TablePrefix"))
+    AmazonRedshiftNodeData.add_member(:upsert, Shapes::ShapeRef.new(shape: BooleanValue, location_name: "Upsert"))
+    AmazonRedshiftNodeData.add_member(:merge_action, Shapes::ShapeRef.new(shape: GenericLimitedString, location_name: "MergeAction"))
+    AmazonRedshiftNodeData.add_member(:merge_when_matched, Shapes::ShapeRef.new(shape: GenericLimitedString, location_name: "MergeWhenMatched"))
+    AmazonRedshiftNodeData.add_member(:merge_when_not_matched, Shapes::ShapeRef.new(shape: GenericLimitedString, location_name: "MergeWhenNotMatched"))
+    AmazonRedshiftNodeData.add_member(:merge_clause, Shapes::ShapeRef.new(shape: GenericString, location_name: "MergeClause"))
+    AmazonRedshiftNodeData.add_member(:crawler_connection, Shapes::ShapeRef.new(shape: GenericString, location_name: "CrawlerConnection"))
+    AmazonRedshiftNodeData.add_member(:table_schema, Shapes::ShapeRef.new(shape: OptionList, location_name: "TableSchema"))
+    AmazonRedshiftNodeData.add_member(:staging_table, Shapes::ShapeRef.new(shape: GenericString, location_name: "StagingTable"))
+    AmazonRedshiftNodeData.add_member(:selected_columns, Shapes::ShapeRef.new(shape: OptionList, location_name: "SelectedColumns"))
+    AmazonRedshiftNodeData.struct_class = Types::AmazonRedshiftNodeData
+
+    AmazonRedshiftSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, location_name: "Name"))
+    AmazonRedshiftSource.add_member(:data, Shapes::ShapeRef.new(shape: AmazonRedshiftNodeData, location_name: "Data"))
+    AmazonRedshiftSource.struct_class = Types::AmazonRedshiftSource
+
+    AmazonRedshiftTarget.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, location_name: "Name"))
+    AmazonRedshiftTarget.add_member(:data, Shapes::ShapeRef.new(shape: AmazonRedshiftNodeData, location_name: "Data"))
+    AmazonRedshiftTarget.add_member(:inputs, Shapes::ShapeRef.new(shape: OneInput, location_name: "Inputs"))
+    AmazonRedshiftTarget.struct_class = Types::AmazonRedshiftTarget
 
     ApplyMapping.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
     ApplyMapping.add_member(:inputs, Shapes::ShapeRef.new(shape: OneInput, required: true, location_name: "Inputs"))
@@ -1590,6 +1648,9 @@ module Aws::Glue
     CodeGenConfigurationNode.add_member(:s3_delta_source, Shapes::ShapeRef.new(shape: S3DeltaSource, location_name: "S3DeltaSource"))
     CodeGenConfigurationNode.add_member(:s3_delta_catalog_target, Shapes::ShapeRef.new(shape: S3DeltaCatalogTarget, location_name: "S3DeltaCatalogTarget"))
     CodeGenConfigurationNode.add_member(:s3_delta_direct_target, Shapes::ShapeRef.new(shape: S3DeltaDirectTarget, location_name: "S3DeltaDirectTarget"))
+    CodeGenConfigurationNode.add_member(:amazon_redshift_source, Shapes::ShapeRef.new(shape: AmazonRedshiftSource, location_name: "AmazonRedshiftSource"))
+    CodeGenConfigurationNode.add_member(:amazon_redshift_target, Shapes::ShapeRef.new(shape: AmazonRedshiftTarget, location_name: "AmazonRedshiftTarget"))
+    CodeGenConfigurationNode.add_member(:evaluate_data_quality_multi_frame, Shapes::ShapeRef.new(shape: EvaluateDataQualityMultiFrame, location_name: "EvaluateDataQualityMultiFrame"))
     CodeGenConfigurationNode.struct_class = Types::CodeGenConfigurationNode
 
     CodeGenConfigurationNodes.key = Shapes::ShapeRef.new(shape: NodeId)
@@ -1871,6 +1932,7 @@ module Aws::Glue
     CreateCustomEntityTypeRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     CreateCustomEntityTypeRequest.add_member(:regex_string, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "RegexString"))
     CreateCustomEntityTypeRequest.add_member(:context_words, Shapes::ShapeRef.new(shape: ContextWords, location_name: "ContextWords"))
+    CreateCustomEntityTypeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
     CreateCustomEntityTypeRequest.struct_class = Types::CreateCustomEntityTypeRequest
 
     CreateCustomEntityTypeResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
@@ -2156,6 +2218,12 @@ module Aws::Glue
 
     CustomEntityTypes.member = Shapes::ShapeRef.new(shape: CustomEntityType)
 
+    DQAdditionalOptions.key = Shapes::ShapeRef.new(shape: AdditionalOptionKeys)
+    DQAdditionalOptions.value = Shapes::ShapeRef.new(shape: GenericString)
+
+    DQDLAliases.key = Shapes::ShapeRef.new(shape: NodeName)
+    DQDLAliases.value = Shapes::ShapeRef.new(shape: EnclosedInStringProperty)
+
     DQResultsPublishingOptions.add_member(:evaluation_context, Shapes::ShapeRef.new(shape: GenericLimitedString, location_name: "EvaluationContext"))
     DQResultsPublishingOptions.add_member(:results_s3_prefix, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "ResultsS3Prefix"))
     DQResultsPublishingOptions.add_member(:cloud_watch_metrics_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "CloudWatchMetricsEnabled"))
@@ -2232,6 +2300,7 @@ module Aws::Glue
     DataQualityRuleResult.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     DataQualityRuleResult.add_member(:evaluation_message, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "EvaluationMessage"))
     DataQualityRuleResult.add_member(:result, Shapes::ShapeRef.new(shape: DataQualityRuleResultStatus, location_name: "Result"))
+    DataQualityRuleResult.add_member(:evaluated_metrics, Shapes::ShapeRef.new(shape: EvaluatedMetricsMap, location_name: "EvaluatedMetrics"))
     DataQualityRuleResult.struct_class = Types::DataQualityRuleResult
 
     DataQualityRuleResults.member = Shapes::ShapeRef.new(shape: DataQualityRuleResult)
@@ -2271,10 +2340,14 @@ module Aws::Glue
 
     DataQualityTargetTable.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
     DataQualityTargetTable.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    DataQualityTargetTable.add_member(:catalog_id, Shapes::ShapeRef.new(shape: NameString, location_name: "CatalogId"))
     DataQualityTargetTable.struct_class = Types::DataQualityTargetTable
 
     DataSource.add_member(:glue_table, Shapes::ShapeRef.new(shape: GlueTable, required: true, location_name: "GlueTable"))
     DataSource.struct_class = Types::DataSource
+
+    DataSourceMap.key = Shapes::ShapeRef.new(shape: NameString)
+    DataSourceMap.value = Shapes::ShapeRef.new(shape: DataSource)
 
     Database.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     Database.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
@@ -2289,6 +2362,7 @@ module Aws::Glue
 
     DatabaseIdentifier.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     DatabaseIdentifier.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, location_name: "DatabaseName"))
+    DatabaseIdentifier.add_member(:region, Shapes::ShapeRef.new(shape: NameString, location_name: "Region"))
     DatabaseIdentifier.struct_class = Types::DatabaseIdentifier
 
     DatabaseInput.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
@@ -2591,6 +2665,7 @@ module Aws::Glue
     DynamicTransform.add_member(:function_name, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "FunctionName"))
     DynamicTransform.add_member(:path, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Path"))
     DynamicTransform.add_member(:version, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "Version"))
+    DynamicTransform.add_member(:output_schemas, Shapes::ShapeRef.new(shape: GlueSchemas, location_name: "OutputSchemas"))
     DynamicTransform.struct_class = Types::DynamicTransform
 
     DynamoDBCatalogSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
@@ -2648,6 +2723,18 @@ module Aws::Glue
     EvaluateDataQuality.add_member(:publishing_options, Shapes::ShapeRef.new(shape: DQResultsPublishingOptions, location_name: "PublishingOptions"))
     EvaluateDataQuality.add_member(:stop_job_on_failure_options, Shapes::ShapeRef.new(shape: DQStopJobOnFailureOptions, location_name: "StopJobOnFailureOptions"))
     EvaluateDataQuality.struct_class = Types::EvaluateDataQuality
+
+    EvaluateDataQualityMultiFrame.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
+    EvaluateDataQualityMultiFrame.add_member(:inputs, Shapes::ShapeRef.new(shape: ManyInputs, required: true, location_name: "Inputs"))
+    EvaluateDataQualityMultiFrame.add_member(:additional_data_sources, Shapes::ShapeRef.new(shape: DQDLAliases, location_name: "AdditionalDataSources"))
+    EvaluateDataQualityMultiFrame.add_member(:ruleset, Shapes::ShapeRef.new(shape: DQDLString, required: true, location_name: "Ruleset"))
+    EvaluateDataQualityMultiFrame.add_member(:publishing_options, Shapes::ShapeRef.new(shape: DQResultsPublishingOptions, location_name: "PublishingOptions"))
+    EvaluateDataQualityMultiFrame.add_member(:additional_options, Shapes::ShapeRef.new(shape: DQAdditionalOptions, location_name: "AdditionalOptions"))
+    EvaluateDataQualityMultiFrame.add_member(:stop_job_on_failure_options, Shapes::ShapeRef.new(shape: DQStopJobOnFailureOptions, location_name: "StopJobOnFailureOptions"))
+    EvaluateDataQualityMultiFrame.struct_class = Types::EvaluateDataQualityMultiFrame
+
+    EvaluatedMetricsMap.key = Shapes::ShapeRef.new(shape: NameString)
+    EvaluatedMetricsMap.value = Shapes::ShapeRef.new(shape: NullableDouble)
 
     EvaluationMetrics.add_member(:transform_type, Shapes::ShapeRef.new(shape: TransformType, required: true, location_name: "TransformType"))
     EvaluationMetrics.add_member(:find_matches_metrics, Shapes::ShapeRef.new(shape: FindMatchesMetrics, location_name: "FindMatchesMetrics"))
@@ -2908,6 +2995,7 @@ module Aws::Glue
     GetDataQualityRulesetEvaluationRunResponse.add_member(:execution_time, Shapes::ShapeRef.new(shape: ExecutionTime, location_name: "ExecutionTime"))
     GetDataQualityRulesetEvaluationRunResponse.add_member(:ruleset_names, Shapes::ShapeRef.new(shape: RulesetNames, location_name: "RulesetNames"))
     GetDataQualityRulesetEvaluationRunResponse.add_member(:result_ids, Shapes::ShapeRef.new(shape: DataQualityResultIdList, location_name: "ResultIds"))
+    GetDataQualityRulesetEvaluationRunResponse.add_member(:additional_data_sources, Shapes::ShapeRef.new(shape: DataSourceMap, location_name: "AdditionalDataSources"))
     GetDataQualityRulesetEvaluationRunResponse.struct_class = Types::GetDataQualityRulesetEvaluationRunResponse
 
     GetDataQualityRulesetRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
@@ -3554,6 +3642,7 @@ module Aws::Glue
     JobCommand.add_member(:name, Shapes::ShapeRef.new(shape: GenericString, location_name: "Name"))
     JobCommand.add_member(:script_location, Shapes::ShapeRef.new(shape: ScriptLocationString, location_name: "ScriptLocation"))
     JobCommand.add_member(:python_version, Shapes::ShapeRef.new(shape: PythonVersionString, location_name: "PythonVersion"))
+    JobCommand.add_member(:runtime, Shapes::ShapeRef.new(shape: RuntimeNameString, location_name: "Runtime"))
     JobCommand.struct_class = Types::JobCommand
 
     JobList.member = Shapes::ShapeRef.new(shape: Job)
@@ -3650,6 +3739,7 @@ module Aws::Glue
     KafkaStreamingSourceOptions.add_member(:include_headers, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "IncludeHeaders"))
     KafkaStreamingSourceOptions.add_member(:add_record_timestamp, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "AddRecordTimestamp"))
     KafkaStreamingSourceOptions.add_member(:emit_consumer_lag_metrics, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "EmitConsumerLagMetrics"))
+    KafkaStreamingSourceOptions.add_member(:starting_timestamp, Shapes::ShapeRef.new(shape: Iso8601DateTime, location_name: "StartingTimestamp"))
     KafkaStreamingSourceOptions.struct_class = Types::KafkaStreamingSourceOptions
 
     KeyList.member = Shapes::ShapeRef.new(shape: NameString)
@@ -3680,6 +3770,7 @@ module Aws::Glue
     KinesisStreamingSourceOptions.add_member(:role_session_name, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "RoleSessionName"))
     KinesisStreamingSourceOptions.add_member(:add_record_timestamp, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "AddRecordTimestamp"))
     KinesisStreamingSourceOptions.add_member(:emit_consumer_lag_metrics, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "EmitConsumerLagMetrics"))
+    KinesisStreamingSourceOptions.add_member(:starting_timestamp, Shapes::ShapeRef.new(shape: Iso8601DateTime, location_name: "StartingTimestamp"))
     KinesisStreamingSourceOptions.struct_class = Types::KinesisStreamingSourceOptions
 
     LabelingSetGenerationTaskRunProperties.add_member(:output_s3_path, Shapes::ShapeRef.new(shape: UriString, location_name: "OutputS3Path"))
@@ -3741,6 +3832,7 @@ module Aws::Glue
 
     ListCustomEntityTypesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListCustomEntityTypesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    ListCustomEntityTypesRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
     ListCustomEntityTypesRequest.struct_class = Types::ListCustomEntityTypesRequest
 
     ListCustomEntityTypesResponse.add_member(:custom_entity_types, Shapes::ShapeRef.new(shape: CustomEntityTypes, location_name: "CustomEntityTypes"))
@@ -4032,6 +4124,13 @@ module Aws::Glue
 
     OperationTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     OperationTimeoutException.struct_class = Types::OperationTimeoutException
+
+    Option.add_member(:value, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "Value"))
+    Option.add_member(:label, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "Label"))
+    Option.add_member(:description, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "Description"))
+    Option.struct_class = Types::Option
+
+    OptionList.member = Shapes::ShapeRef.new(shape: Option)
 
     OracleSQLCatalogSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
     OracleSQLCatalogSource.add_member(:database, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Database"))
@@ -4725,6 +4824,7 @@ module Aws::Glue
     StartDataQualityRulesetEvaluationRunRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: HashString, location_name: "ClientToken"))
     StartDataQualityRulesetEvaluationRunRequest.add_member(:additional_run_options, Shapes::ShapeRef.new(shape: DataQualityEvaluationRunAdditionalRunOptions, location_name: "AdditionalRunOptions"))
     StartDataQualityRulesetEvaluationRunRequest.add_member(:ruleset_names, Shapes::ShapeRef.new(shape: RulesetNames, required: true, location_name: "RulesetNames"))
+    StartDataQualityRulesetEvaluationRunRequest.add_member(:additional_data_sources, Shapes::ShapeRef.new(shape: DataSourceMap, location_name: "AdditionalDataSources"))
     StartDataQualityRulesetEvaluationRunRequest.struct_class = Types::StartDataQualityRulesetEvaluationRunRequest
 
     StartDataQualityRulesetEvaluationRunResponse.add_member(:run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "RunId"))
@@ -4902,6 +5002,7 @@ module Aws::Glue
     TableIdentifier.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     TableIdentifier.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, location_name: "DatabaseName"))
     TableIdentifier.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    TableIdentifier.add_member(:region, Shapes::ShapeRef.new(shape: NameString, location_name: "Region"))
     TableIdentifier.struct_class = Types::TableIdentifier
 
     TableInput.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))

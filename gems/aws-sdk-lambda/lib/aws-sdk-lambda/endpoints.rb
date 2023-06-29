@@ -9,6 +9,7 @@
 
 
 module Aws::Lambda
+  # @api private
   module Endpoints
 
     class AddLayerVersionPermission

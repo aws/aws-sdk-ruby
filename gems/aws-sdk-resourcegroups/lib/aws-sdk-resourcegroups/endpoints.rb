@@ -9,6 +9,7 @@
 
 
 module Aws::ResourceGroups
+  # @api private
   module Endpoints
 
     class CreateGroup

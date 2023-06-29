@@ -9,6 +9,7 @@
 
 
 module Aws::WorkLink
+  # @api private
   module Endpoints
 
     class AssociateDomain

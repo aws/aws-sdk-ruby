@@ -9,6 +9,7 @@
 
 
 module Aws::ConnectContactLens
+  # @api private
   module Endpoints
 
     class ListRealtimeContactAnalysisSegments

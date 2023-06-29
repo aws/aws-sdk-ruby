@@ -443,7 +443,9 @@ module Aws::EC2
     #
     # @return [self]
     def load
-      resp = @client.describe_instances(instance_ids: [@id])
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_instances(instance_ids: [@id])
+      end
       @data = resp.reservations[0].instances[0]
       self
     end
@@ -488,7 +490,9 @@ module Aws::EC2
       options, params = separate_params_and_options(options)
       waiter = Waiters::InstanceExists.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      resp = waiter.wait(params.merge(instance_ids: [@id]))
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        waiter.wait(params.merge(instance_ids: [@id]))
+      end
       Instance.new({
         id: @id,
         data: resp.data.reservations[0].instances[0],
@@ -506,7 +510,9 @@ module Aws::EC2
       options, params = separate_params_and_options(options)
       waiter = Waiters::InstanceRunning.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      resp = waiter.wait(params.merge(instance_ids: [@id]))
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        waiter.wait(params.merge(instance_ids: [@id]))
+      end
       Instance.new({
         id: @id,
         data: resp.data.reservations[0].instances[0],
@@ -524,7 +530,9 @@ module Aws::EC2
       options, params = separate_params_and_options(options)
       waiter = Waiters::InstanceStopped.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      resp = waiter.wait(params.merge(instance_ids: [@id]))
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        waiter.wait(params.merge(instance_ids: [@id]))
+      end
       Instance.new({
         id: @id,
         data: resp.data.reservations[0].instances[0],
@@ -542,7 +550,9 @@ module Aws::EC2
       options, params = separate_params_and_options(options)
       waiter = Waiters::InstanceTerminated.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      resp = waiter.wait(params.merge(instance_ids: [@id]))
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        waiter.wait(params.merge(instance_ids: [@id]))
+      end
       Instance.new({
         id: @id,
         data: resp.data.reservations[0].instances[0],
@@ -644,7 +654,9 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -670,7 +682,9 @@ module Aws::EC2
     # @return [Types::AttachClassicLinkVpcResult]
     def attach_classic_link_vpc(options = {})
       options = options.merge(instance_id: @id)
-      resp = @client.attach_classic_link_vpc(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.attach_classic_link_vpc(options)
+      end
       resp.data
     end
 
@@ -695,7 +709,9 @@ module Aws::EC2
     # @return [Types::VolumeAttachment]
     def attach_volume(options = {})
       options = options.merge(instance_id: @id)
-      resp = @client.attach_volume(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.attach_volume(options)
+      end
       resp.data
     end
 
@@ -718,7 +734,9 @@ module Aws::EC2
     # @return [Types::GetConsoleOutputResult]
     def console_output(options = {})
       options = options.merge(instance_id: @id)
-      resp = @client.get_console_output(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.get_console_output(options)
+      end
       resp.data
     end
 
@@ -749,7 +767,7 @@ module Aws::EC2
     #     no_reboot: false,
     #     tag_specifications: [
     #       {
-    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association
+    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint
     #         tags: [
     #           {
     #             key: "String",
@@ -813,7 +831,9 @@ module Aws::EC2
     # @return [Image]
     def create_image(options = {})
       options = options.merge(instance_id: @id)
-      resp = @client.create_image(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_image(options)
+      end
       Image.new(
         id: resp.data.image_id,
         client: @client
@@ -845,7 +865,9 @@ module Aws::EC2
     def create_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = @client.create_tags(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_tags(options)
+      end
       options[:tags].each do |t|
         batch << Tag.new(
           resource_id: @id,
@@ -890,7 +912,9 @@ module Aws::EC2
     def delete_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = @client.delete_tags(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_tags(options)
+      end
       options[:tags].each do |t|
         batch << Tag.new(
           resource_id: @id,
@@ -921,7 +945,9 @@ module Aws::EC2
     # @return [Types::InstanceAttribute]
     def describe_attribute(options = {})
       options = options.merge(instance_id: @id)
-      resp = @client.describe_instance_attribute(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_instance_attribute(options)
+      end
       resp.data
     end
 
@@ -942,7 +968,9 @@ module Aws::EC2
     # @return [Types::DetachClassicLinkVpcResult]
     def detach_classic_link_vpc(options = {})
       options = options.merge(instance_id: @id)
-      resp = @client.detach_classic_link_vpc(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.detach_classic_link_vpc(options)
+      end
       resp.data
     end
 
@@ -976,7 +1004,9 @@ module Aws::EC2
     # @return [Types::VolumeAttachment]
     def detach_volume(options = {})
       options = options.merge(instance_id: @id)
-      resp = @client.detach_volume(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.detach_volume(options)
+      end
       resp.data
     end
 
@@ -1136,7 +1166,9 @@ module Aws::EC2
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(instance_id: @id)
-      resp = @client.modify_instance_attribute(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.modify_instance_attribute(options)
+      end
       resp.data
     end
 
@@ -1154,7 +1186,9 @@ module Aws::EC2
     # @return [Types::MonitorInstancesResult]
     def monitor(options = {})
       options = Aws::Util.deep_merge(options, instance_ids: [@id])
-      resp = @client.monitor_instances(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.monitor_instances(options)
+      end
       resp.data
     end
 
@@ -1172,7 +1206,9 @@ module Aws::EC2
     # @return [Types::GetPasswordDataResult]
     def password_data(options = {})
       options = options.merge(instance_id: @id)
-      resp = @client.get_password_data(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.get_password_data(options)
+      end
       resp.data
     end
 
@@ -1190,7 +1226,9 @@ module Aws::EC2
     # @return [EmptyStructure]
     def reboot(options = {})
       options = Aws::Util.deep_merge(options, instance_ids: [@id])
-      resp = @client.reboot_instances(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.reboot_instances(options)
+      end
       resp.data
     end
 
@@ -1248,7 +1286,9 @@ module Aws::EC2
     # @return [EmptyStructure]
     def report_status(options = {})
       options = Aws::Util.deep_merge(options, instances: [@id])
-      resp = @client.report_instance_status(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.report_instance_status(options)
+      end
       resp.data
     end
 
@@ -1272,7 +1312,9 @@ module Aws::EC2
     # @return [EmptyStructure]
     def reset_attribute(options = {})
       options = options.merge(instance_id: @id)
-      resp = @client.reset_instance_attribute(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.reset_instance_attribute(options)
+      end
       resp.data
     end
 
@@ -1293,7 +1335,9 @@ module Aws::EC2
         instance_id: @id,
         attribute: "kernel"
       )
-      resp = @client.reset_instance_attribute(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.reset_instance_attribute(options)
+      end
       resp.data
     end
 
@@ -1314,7 +1358,9 @@ module Aws::EC2
         instance_id: @id,
         attribute: "ramdisk"
       )
-      resp = @client.reset_instance_attribute(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.reset_instance_attribute(options)
+      end
       resp.data
     end
 
@@ -1335,7 +1381,9 @@ module Aws::EC2
         instance_id: @id,
         attribute: "sourceDestCheck"
       )
-      resp = @client.reset_instance_attribute(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.reset_instance_attribute(options)
+      end
       resp.data
     end
 
@@ -1356,7 +1404,9 @@ module Aws::EC2
     # @return [Types::StartInstancesResult]
     def start(options = {})
       options = Aws::Util.deep_merge(options, instance_ids: [@id])
-      resp = @client.start_instances(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.start_instances(options)
+      end
       resp.data
     end
 
@@ -1394,7 +1444,9 @@ module Aws::EC2
     # @return [Types::StopInstancesResult]
     def stop(options = {})
       options = Aws::Util.deep_merge(options, instance_ids: [@id])
-      resp = @client.stop_instances(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.stop_instances(options)
+      end
       resp.data
     end
 
@@ -1412,7 +1464,9 @@ module Aws::EC2
     # @return [Types::TerminateInstancesResult]
     def terminate(options = {})
       options = Aws::Util.deep_merge(options, instance_ids: [@id])
-      resp = @client.terminate_instances(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.terminate_instances(options)
+      end
       resp.data
     end
 
@@ -1430,7 +1484,9 @@ module Aws::EC2
     # @return [Types::UnmonitorInstancesResult]
     def unmonitor(options = {})
       options = Aws::Util.deep_merge(options, instance_ids: [@id])
-      resp = @client.unmonitor_instances(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.unmonitor_instances(options)
+      end
       resp.data
     end
 
@@ -1590,7 +1646,9 @@ module Aws::EC2
           name: "attachment.instance-id",
           values: [@id]
         }])
-        resp = @client.describe_volumes(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_volumes(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.volumes.each do |v|
@@ -1635,12 +1693,9 @@ module Aws::EC2
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters. Filter names and values are case-sensitive.
     #
-    #   * `allocation-id` - \[EC2-VPC\] The allocation ID for the address.
+    #   * `allocation-id` - The allocation ID for the address.
     #
-    #   * `association-id` - \[EC2-VPC\] The association ID for the address.
-    #
-    #   * `domain` - Indicates whether the address is for use in EC2-Classic
-    #     (`standard`) or in a VPC (`vpc`).
+    #   * `association-id` - The association ID for the address.
     #
     #   * `instance-id` - The ID of the instance the address is associated
     #     with, if any.
@@ -1649,14 +1704,14 @@ module Aws::EC2
     #     Zones, or Wavelength Zones from where Amazon Web Services advertises
     #     IP addresses.
     #
-    #   * `network-interface-id` - \[EC2-VPC\] The ID of the network interface
-    #     that the address is associated with, if any.
+    #   * `network-interface-id` - The ID of the network interface that the
+    #     address is associated with, if any.
     #
     #   * `network-interface-owner-id` - The Amazon Web Services account ID of
     #     the owner.
     #
-    #   * `private-ip-address` - \[EC2-VPC\] The private IP address associated
-    #     with the Elastic IP address.
+    #   * `private-ip-address` - The private IP address associated with the
+    #     Elastic IP address.
     #
     #   * `public-ip` - The Elastic IP address, or the carrier IP address.
     #
@@ -1674,7 +1729,7 @@ module Aws::EC2
     #
     #   Default: Describes all your Elastic IP addresses.
     # @option options [Array<String>] :allocation_ids
-    #   \[EC2-VPC\] Information about the allocation IDs.
+    #   Information about the allocation IDs.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -1688,7 +1743,9 @@ module Aws::EC2
           name: "instance-id",
           values: [@id]
         }])
-        resp = @client.describe_addresses(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_addresses(options)
+        end
         resp.data.addresses.each do |a|
           batch << VpcAddress.new(
             allocation_id: a.allocation_id,
@@ -1781,7 +1838,9 @@ module Aws::EC2
           batch.each do |item|
             params[:resources] << item.id
           end
-          batch[0].client.create_tags(params)
+          Aws::Plugins::UserAgent.feature('resource') do
+            batch[0].client.create_tags(params)
+          end
         end
         nil
       end
@@ -1823,7 +1882,9 @@ module Aws::EC2
           batch.each do |item|
             params[:resources] << item.id
           end
-          batch[0].client.delete_tags(params)
+          Aws::Plugins::UserAgent.feature('resource') do
+            batch[0].client.delete_tags(params)
+          end
         end
         nil
       end
@@ -1847,7 +1908,9 @@ module Aws::EC2
           batch.each do |item|
             params[:instance_ids] << item.id
           end
-          batch[0].client.monitor_instances(params)
+          Aws::Plugins::UserAgent.feature('resource') do
+            batch[0].client.monitor_instances(params)
+          end
         end
         nil
       end
@@ -1871,7 +1934,9 @@ module Aws::EC2
           batch.each do |item|
             params[:instance_ids] << item.id
           end
-          batch[0].client.reboot_instances(params)
+          Aws::Plugins::UserAgent.feature('resource') do
+            batch[0].client.reboot_instances(params)
+          end
         end
         nil
       end
@@ -1898,7 +1963,9 @@ module Aws::EC2
           batch.each do |item|
             params[:instance_ids] << item.id
           end
-          batch[0].client.start_instances(params)
+          Aws::Plugins::UserAgent.feature('resource') do
+            batch[0].client.start_instances(params)
+          end
         end
         nil
       end
@@ -1942,7 +2009,9 @@ module Aws::EC2
           batch.each do |item|
             params[:instance_ids] << item.id
           end
-          batch[0].client.stop_instances(params)
+          Aws::Plugins::UserAgent.feature('resource') do
+            batch[0].client.stop_instances(params)
+          end
         end
         nil
       end
@@ -1966,7 +2035,9 @@ module Aws::EC2
           batch.each do |item|
             params[:instance_ids] << item.id
           end
-          batch[0].client.terminate_instances(params)
+          Aws::Plugins::UserAgent.feature('resource') do
+            batch[0].client.terminate_instances(params)
+          end
         end
         nil
       end
@@ -1990,7 +2061,9 @@ module Aws::EC2
           batch.each do |item|
             params[:instance_ids] << item.id
           end
-          batch[0].client.unmonitor_instances(params)
+          Aws::Plugins::UserAgent.feature('resource') do
+            batch[0].client.unmonitor_instances(params)
+          end
         end
         nil
       end

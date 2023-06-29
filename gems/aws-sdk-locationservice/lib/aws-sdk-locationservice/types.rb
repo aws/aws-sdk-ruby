@@ -447,6 +447,11 @@ module Aws::LocationService
     #   collection.
     #   @return [String]
     #
+    # @!attribute [rw] geofence_properties
+    #   Specifies additional user-defined properties to store with the
+    #   Geofence. An array of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] geometry
     #   Contains the details of the position of the geofence. Can be either
     #   a polygon or a circle. Including both will return a validation
@@ -465,8 +470,9 @@ module Aws::LocationService
     #
     class BatchPutGeofenceRequestEntry < Struct.new(
       :geofence_id,
+      :geofence_properties,
       :geometry)
-      SENSITIVE = []
+      SENSITIVE = [:geofence_properties]
       include Aws::Structure
     end
 
@@ -560,7 +566,8 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] updates
-    #   Contains the position update details for each device.
+    #   Contains the position update details for each device, up to 10
+    #   devices.
     #   @return [Array<Types::DevicePositionUpdate>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/BatchUpdateDevicePositionRequest AWS API Documentation
@@ -3004,6 +3011,11 @@ module Aws::LocationService
     #   The geofence identifier.
     #   @return [String]
     #
+    # @!attribute [rw] geofence_properties
+    #   Contains additional user-defined properties stored with the
+    #   geofence. An array of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] geometry
     #   Contains the geofence geometry details describing a polygon or a
     #   circle.
@@ -3038,10 +3050,11 @@ module Aws::LocationService
     class GetGeofenceResponse < Struct.new(
       :create_time,
       :geofence_id,
+      :geofence_properties,
       :geometry,
       :status,
       :update_time)
-      SENSITIVE = []
+      SENSITIVE = [:geofence_properties]
       include Aws::Structure
     end
 
@@ -3091,7 +3104,14 @@ module Aws::LocationService
     #     Bold,Noto Sans Bold` \| `Amazon Ember Medium,Noto Sans Medium` \|
     #     `Amazon Ember Regular Italic,Noto Sans Italic` \| `Amazon Ember
     #     Condensed RC Regular,Noto Sans Regular` \| `Amazon Ember Condensed
-    #     RC Bold,Noto Sans Bold`
+    #     RC Bold,Noto Sans Bold` \| `Amazon Ember Regular,Noto Sans
+    #     Regular,Noto Sans Arabic Regular` \| `Amazon Ember Condensed RC
+    #     Bold,Noto Sans Bold,Noto Sans Arabic Condensed Bold` \| `Amazon
+    #     Ember Bold,Noto Sans Bold,Noto Sans Arabic Bold` \| `Amazon Ember
+    #     Regular Italic,Noto Sans Italic,Noto Sans Arabic Regular` \|
+    #     `Amazon Ember Condensed RC Regular,Noto Sans Regular,Noto Sans
+    #     Arabic Condensed Regular` \| `Amazon Ember Medium,Noto Sans
+    #     Medium,Noto Sans Arabic Medium`
     #
     #   ^
     #
@@ -3711,6 +3731,11 @@ module Aws::LocationService
     #   The geofence identifier.
     #   @return [String]
     #
+    # @!attribute [rw] geofence_properties
+    #   Contains additional user-defined properties stored with the
+    #   geofence. An array of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] geometry
     #   Contains the geofence geometry details describing a polygon or a
     #   circle.
@@ -3745,10 +3770,11 @@ module Aws::LocationService
     class ListGeofenceResponseEntry < Struct.new(
       :create_time,
       :geofence_id,
+      :geofence_properties,
       :geometry,
       :status,
       :update_time)
-      SENSITIVE = []
+      SENSITIVE = [:geofence_properties]
       include Aws::Structure
     end
 
@@ -4401,6 +4427,23 @@ module Aws::LocationService
 
     # Specifies the map tile style selected from an available provider.
     #
+    # @!attribute [rw] political_view
+    #   Specifies the political view for the style. Leave unset to not use a
+    #   political view, or, for styles that support specific political
+    #   views, you can choose a view, such as `IND` for the Indian view.
+    #
+    #   Default is unset.
+    #
+    #   <note markdown="1"> Not all map resources or styles support political view styles. See
+    #   [Political views][1] for more information.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#political-views
+    #   @return [String]
+    #
     # @!attribute [rw] style
     #   Specifies the map style selected from an available data provider.
     #
@@ -4424,15 +4467,15 @@ module Aws::LocationService
     #   * `VectorEsriTopographic` – The Esri Light map style, which provides
     #     a detailed vector basemap with a classic Esri map style.
     #
-    #   * `VectorEsriStreets` – The Esri World Streets map style, which
-    #     provides a detailed vector basemap for the world symbolized with a
-    #     classic Esri street map style. The vector tile layer is similar in
-    #     content and style to the World Street Map raster map.
+    #   * `VectorEsriStreets` – The Esri Street Map style, which provides a
+    #     detailed vector basemap for the world symbolized with a classic
+    #     Esri street map style. The vector tile layer is similar in content
+    #     and style to the World Street Map raster map.
     #
-    #   * `VectorEsriNavigation` – The Esri World Navigation map style,
-    #     which provides a detailed basemap for the world symbolized with a
-    #     custom navigation map style that's designed for use during the
-    #     day in mobile devices.
+    #   * `VectorEsriNavigation` – The Esri Navigation map style, which
+    #     provides a detailed basemap for the world symbolized with a custom
+    #     navigation map style that's designed for use during the day in
+    #     mobile devices.
     #
     #   Valid [HERE Technologies map styles][2]:
     #
@@ -4522,7 +4565,34 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/MapConfiguration AWS API Documentation
     #
     class MapConfiguration < Struct.new(
+      :political_view,
       :style)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the political view for the style.
+    #
+    # @!attribute [rw] political_view
+    #   Specifies the political view for the style. Set to an empty string
+    #   to not use a political view, or, for styles that support specific
+    #   political views, you can choose a view, such as `IND` for the Indian
+    #   view.
+    #
+    #   <note markdown="1"> Not all map resources or styles support political view styles. See
+    #   [Political views][1] for more information.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#political-views
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/MapConfigurationUpdate AWS API Documentation
+    #
+    class MapConfigurationUpdate < Struct.new(
+      :political_view)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4536,6 +4606,18 @@ module Aws::LocationService
     # @!attribute [rw] address_number
     #   The numerical portion of an address, such as a building number.
     #   @return [String]
+    #
+    # @!attribute [rw] categories
+    #   The Amazon Location categories that describe this Place.
+    #
+    #   For more information about using categories, including a list of
+    #   Amazon Location categories, see [Categories and filtering][1], in
+    #   the *Amazon Location Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html
+    #   @return [Array<String>]
     #
     # @!attribute [rw] country
     #   A country/region specified using [ISO 3166][1] 3-digit
@@ -4597,17 +4679,22 @@ module Aws::LocationService
     #   `Metro Vancouver`.
     #   @return [String]
     #
+    # @!attribute [rw] supplemental_categories
+    #   Categories from the data provider that describe the Place that are
+    #   not mapped to any Amazon Location categories.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] time_zone
     #   The time zone in which the `Place` is located. Returned only when
-    #   using HERE as the selected partner.
+    #   using HERE or Grab as the selected partner.
     #   @return [Types::TimeZone]
     #
     # @!attribute [rw] unit_number
     #   For addresses with multiple units, the unit identifier. Can include
     #   numbers and letters, for example `3B` or `Unit 123`.
     #
-    #   <note markdown="1"> Returned only for a place index that uses Esri as a data provider.
-    #   Is not returned for `SearchPlaceIndexForPosition`.
+    #   <note markdown="1"> Returned only for a place index that uses Esri or Grab as a data
+    #   provider. Is not returned for `SearchPlaceIndexForPosition`.
     #
     #    </note>
     #   @return [String]
@@ -4615,12 +4702,17 @@ module Aws::LocationService
     # @!attribute [rw] unit_type
     #   For addresses with a `UnitNumber`, the type of unit. For example,
     #   `Apartment`.
+    #
+    #   <note markdown="1"> Returned only for a place index that uses Esri as a data provider.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/Place AWS API Documentation
     #
     class Place < Struct.new(
       :address_number,
+      :categories,
       :country,
       :geometry,
       :interpolated,
@@ -4631,6 +4723,7 @@ module Aws::LocationService
       :region,
       :street,
       :sub_region,
+      :supplemental_categories,
       :time_zone,
       :unit_number,
       :unit_type)
@@ -4684,6 +4777,11 @@ module Aws::LocationService
     #   An identifier for the geofence. For example, `ExampleGeofence-1`.
     #   @return [String]
     #
+    # @!attribute [rw] geofence_properties
+    #   Specifies additional user-defined properties to store with the
+    #   Geofence. An array of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] geometry
     #   Contains the details to specify the position of the geofence. Can be
     #   either a polygon or a circle. Including both will return a
@@ -4703,8 +4801,9 @@ module Aws::LocationService
     class PutGeofenceRequest < Struct.new(
       :collection_name,
       :geofence_id,
+      :geofence_properties,
       :geometry)
-      SENSITIVE = []
+      SENSITIVE = [:geofence_properties]
       include Aws::Structure
     end
 
@@ -4877,9 +4976,25 @@ module Aws::LocationService
     # Contains a place suggestion resulting from a place suggestion query
     # that is run on a place index resource.
     #
+    # @!attribute [rw] categories
+    #   The Amazon Location categories that describe the Place.
+    #
+    #   For more information about using categories, including a list of
+    #   Amazon Location categories, see [Categories and filtering][1], in
+    #   the *Amazon Location Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] place_id
-    #   The unique identifier of the place. You can use this with the
-    #   `GetPlace` operation to find the place again later.
+    #   The unique identifier of the Place. You can use this with the
+    #   `GetPlace` operation to find the place again later, or to get full
+    #   information for the Place.
+    #
+    #   The `GetPlace` request must use the same `PlaceIndex` resource as
+    #   the `SearchPlaceIndexForSuggestions` that generated the Place ID.
     #
     #   <note markdown="1"> For `SearchPlaceIndexForSuggestions` operations, the `PlaceId` is
     #   returned by place indexes that use Esri, Grab, or HERE as data
@@ -4887,6 +5002,11 @@ module Aws::LocationService
     #
     #    </note>
     #   @return [String]
+    #
+    # @!attribute [rw] supplemental_categories
+    #   Categories from the data provider that describe the Place that are
+    #   not mapped to any Amazon Location categories.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] text
     #   The text of the place suggestion, typically formatted as an address
@@ -4896,7 +5016,9 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchForSuggestionsResult AWS API Documentation
     #
     class SearchForSuggestionsResult < Struct.new(
+      :categories,
       :place_id,
+      :supplemental_categories,
       :text)
       SENSITIVE = []
       include Aws::Structure
@@ -5119,6 +5241,20 @@ module Aws::LocationService
     #    </note>
     #   @return [Array<Float>]
     #
+    # @!attribute [rw] filter_categories
+    #   A list of one or more Amazon Location categories to filter the
+    #   returned places. If you include more than one category, the results
+    #   will include results that match *any* of the categories listed.
+    #
+    #   For more information about using categories, including a list of
+    #   Amazon Location categories, see [Categories and filtering][1], in
+    #   the *Amazon Location Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] filter_countries
     #   An optional parameter that limits the search results by returning
     #   only suggestions within the provided list of countries.
@@ -5178,6 +5314,7 @@ module Aws::LocationService
     class SearchPlaceIndexForSuggestionsRequest < Struct.new(
       :bias_position,
       :filter_b_box,
+      :filter_categories,
       :filter_countries,
       :index_name,
       :language,
@@ -5245,6 +5382,10 @@ module Aws::LocationService
     #   the request.
     #   @return [Array<Float>]
     #
+    # @!attribute [rw] filter_categories
+    #   The optional category filter specified in the request.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] filter_countries
     #   Contains the optional country filter specified in the request.
     #   @return [Array<String>]
@@ -5273,6 +5414,7 @@ module Aws::LocationService
       :bias_position,
       :data_source,
       :filter_b_box,
+      :filter_categories,
       :filter_countries,
       :language,
       :max_results,
@@ -5319,6 +5461,20 @@ module Aws::LocationService
     #
     #    </note>
     #   @return [Array<Float>]
+    #
+    # @!attribute [rw] filter_categories
+    #   A list of one or more Amazon Location categories to filter the
+    #   returned places. If you include more than one category, the results
+    #   will include results that match *any* of the categories listed.
+    #
+    #   For more information about using categories, including a list of
+    #   Amazon Location categories, see [Categories and filtering][1], in
+    #   the *Amazon Location Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html
+    #   @return [Array<String>]
     #
     # @!attribute [rw] filter_countries
     #   An optional parameter that limits the search results by returning
@@ -5379,6 +5535,7 @@ module Aws::LocationService
     class SearchPlaceIndexForTextRequest < Struct.new(
       :bias_position,
       :filter_b_box,
+      :filter_categories,
       :filter_countries,
       :index_name,
       :language,
@@ -5450,6 +5607,10 @@ module Aws::LocationService
     #   the request.
     #   @return [Array<Float>]
     #
+    # @!attribute [rw] filter_categories
+    #   The optional category filter specified in the request.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] filter_countries
     #   Contains the optional country filter specified in the request.
     #   @return [Array<String>]
@@ -5487,6 +5648,7 @@ module Aws::LocationService
       :bias_position,
       :data_source,
       :filter_b_box,
+      :filter_categories,
       :filter_countries,
       :language,
       :max_results,
@@ -5907,6 +6069,11 @@ module Aws::LocationService
       include Aws::Structure
     end
 
+    # @!attribute [rw] configuration_update
+    #   Updates the parts of the map configuration that can be updated,
+    #   including the political view.
+    #   @return [Types::MapConfigurationUpdate]
+    #
     # @!attribute [rw] description
     #   Updates the description for the map resource.
     #   @return [String]
@@ -5923,6 +6090,7 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateMapRequest AWS API Documentation
     #
     class UpdateMapRequest < Struct.new(
+      :configuration_update,
       :description,
       :map_name,
       :pricing_plan)

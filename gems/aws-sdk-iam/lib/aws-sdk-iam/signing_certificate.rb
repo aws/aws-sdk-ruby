@@ -186,7 +186,9 @@ module Aws::IAM
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -202,7 +204,9 @@ module Aws::IAM
         certificate_id: @id,
         status: "Active"
       )
-      resp = @client.update_signing_certificate(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.update_signing_certificate(options)
+      end
       resp.data
     end
 
@@ -217,7 +221,9 @@ module Aws::IAM
         certificate_id: @id,
         status: "Inactive"
       )
-      resp = @client.update_signing_certificate(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.update_signing_certificate(options)
+      end
       resp.data
     end
 
@@ -231,7 +237,9 @@ module Aws::IAM
         user_name: @user_name,
         certificate_id: @id
       )
-      resp = @client.delete_signing_certificate(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_signing_certificate(options)
+      end
       resp.data
     end
 

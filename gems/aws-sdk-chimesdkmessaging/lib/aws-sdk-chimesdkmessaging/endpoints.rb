@@ -9,6 +9,7 @@
 
 
 module Aws::ChimeSDKMessaging
+  # @api private
   module Endpoints
 
     class AssociateChannelFlow

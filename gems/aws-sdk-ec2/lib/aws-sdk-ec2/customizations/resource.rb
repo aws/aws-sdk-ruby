@@ -5,7 +5,9 @@ module Aws
     class Resource
 
       def create_tags(options)
-        resp = @client.create_tags(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.create_tags(options)
+        end
         tags = []
         options[:resources].each do |resource_id|
           options[:tags].each do |tag|

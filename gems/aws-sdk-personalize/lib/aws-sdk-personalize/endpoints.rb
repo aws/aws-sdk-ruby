@@ -9,6 +9,7 @@
 
 
 module Aws::Personalize
+  # @api private
   module Endpoints
 
     class CreateBatchInferenceJob

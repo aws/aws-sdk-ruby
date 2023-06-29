@@ -275,6 +275,11 @@ module Aws::IoTFleetWise
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -557,8 +562,8 @@ module Aws::IoTFleetWise
     #
     # @option params [Time,DateTime,Date,Integer,String] :expiry_time
     #   (Optional) The time the campaign expires, in seconds since epoch
-    #   (January 1, 1970 at midnight UTC time). Vehicle data won't be
-    #   collected after the campaign expires.
+    #   (January 1, 1970 at midnight UTC time). Vehicle data isn't collected
+    #   after the campaign expires.
     #
     #   Default: 253402214400 (December 31, 9999, 00:00:00 UTC)
     #
@@ -622,6 +627,18 @@ module Aws::IoTFleetWise
     # @option params [Array<Types::Tag>] :tags
     #   Metadata that can be used to manage the campaign.
     #
+    # @option params [Array<Types::DataDestinationConfig>] :data_destination_configs
+    #   The destination where the campaign sends data. You can choose to send
+    #   data to be stored in Amazon S3 or Amazon Timestream.
+    #
+    #   Amazon S3 optimizes the cost of data storage and provides additional
+    #   mechanisms to use vehicle data, such as data lakes, centralized data
+    #   storage, data processing pipelines, and analytics.
+    #
+    #   You can use Amazon Timestream to access and analyze time series data,
+    #   and Timestream to query vehicle data so that you can identify trends
+    #   and patterns.
+    #
     # @return [Types::CreateCampaignResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCampaignResponse#name #name} => String
@@ -664,6 +681,20 @@ module Aws::IoTFleetWise
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     data_destination_configs: [
+    #       {
+    #         s3_config: {
+    #           bucket_arn: "S3BucketArn", # required
+    #           data_format: "JSON", # accepts JSON, PARQUET
+    #           storage_compression_format: "NONE", # accepts NONE, GZIP
+    #           prefix: "Prefix",
+    #         },
+    #         timestream_config: {
+    #           timestream_table_arn: "TimestreamTableArn", # required
+    #           execution_role_arn: "IAMRoleArn", # required
+    #         },
     #       },
     #     ],
     #   })
@@ -933,6 +964,8 @@ module Aws::IoTFleetWise
     #         branch: {
     #           fully_qualified_name: "string", # required
     #           description: "description",
+    #           deprecation_message: "message",
+    #           comment: "message",
     #         },
     #         sensor: {
     #           fully_qualified_name: "string", # required
@@ -942,6 +975,8 @@ module Aws::IoTFleetWise
     #           allowed_values: ["string"],
     #           min: 1.0,
     #           max: 1.0,
+    #           deprecation_message: "message",
+    #           comment: "message",
     #         },
     #         actuator: {
     #           fully_qualified_name: "string", # required
@@ -952,6 +987,8 @@ module Aws::IoTFleetWise
     #           min: 1.0,
     #           max: 1.0,
     #           assigned_value: "string",
+    #           deprecation_message: "message",
+    #           comment: "message",
     #         },
     #         attribute: {
     #           fully_qualified_name: "string", # required
@@ -963,6 +1000,8 @@ module Aws::IoTFleetWise
     #           max: 1.0,
     #           assigned_value: "string",
     #           default_value: "string",
+    #           deprecation_message: "message",
+    #           comment: "message",
     #         },
     #       },
     #     ],
@@ -990,7 +1029,7 @@ module Aws::IoTFleetWise
     # manifest). Vehicles created from the same vehicle model consist of the
     # same signals inherited from the vehicle model.
     #
-    # <note markdown="1"> If you have an existing Amazon Web Services IoT Thing, you can use
+    # <note markdown="1"> If you have an existing Amazon Web Services IoT thing, you can use
     # Amazon Web Services IoT FleetWise to create a vehicle and collect data
     # from your thing.
     #
@@ -1015,6 +1054,9 @@ module Aws::IoTFleetWise
     # @option params [Hash<String,String>] :attributes
     #   Static information about a vehicle in a key-value pair. For example:
     #   `"engineType"` : `"1.3 L R2"`
+    #
+    #   A campaign must include the keys (attribute names) in
+    #   `dataExtraDimensions` for them to display in Amazon Timestream.
     #
     # @option params [String] :association_behavior
     #   An option to create a new Amazon Web Services IoT thing when creating
@@ -1321,6 +1363,7 @@ module Aws::IoTFleetWise
     #   * {Types::GetCampaignResponse#data_extra_dimensions #data_extra_dimensions} => Array&lt;String&gt;
     #   * {Types::GetCampaignResponse#creation_time #creation_time} => Time
     #   * {Types::GetCampaignResponse#last_modification_time #last_modification_time} => Time
+    #   * {Types::GetCampaignResponse#data_destination_configs #data_destination_configs} => Array&lt;Types::DataDestinationConfig&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1356,6 +1399,13 @@ module Aws::IoTFleetWise
     #   resp.data_extra_dimensions[0] #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modification_time #=> Time
+    #   resp.data_destination_configs #=> Array
+    #   resp.data_destination_configs[0].s3_config.bucket_arn #=> String
+    #   resp.data_destination_configs[0].s3_config.data_format #=> String, one of "JSON", "PARQUET"
+    #   resp.data_destination_configs[0].s3_config.storage_compression_format #=> String, one of "NONE", "GZIP"
+    #   resp.data_destination_configs[0].s3_config.prefix #=> String
+    #   resp.data_destination_configs[0].timestream_config.timestream_table_arn #=> String
+    #   resp.data_destination_configs[0].timestream_config.execution_role_arn #=> String
     #
     # @overload get_campaign(params = {})
     # @param [Hash] params ({})
@@ -2155,6 +2205,8 @@ module Aws::IoTFleetWise
     #   resp.nodes #=> Array
     #   resp.nodes[0].branch.fully_qualified_name #=> String
     #   resp.nodes[0].branch.description #=> String
+    #   resp.nodes[0].branch.deprecation_message #=> String
+    #   resp.nodes[0].branch.comment #=> String
     #   resp.nodes[0].sensor.fully_qualified_name #=> String
     #   resp.nodes[0].sensor.data_type #=> String, one of "INT8", "UINT8", "INT16", "UINT16", "INT32", "UINT32", "INT64", "UINT64", "BOOLEAN", "FLOAT", "DOUBLE", "STRING", "UNIX_TIMESTAMP", "INT8_ARRAY", "UINT8_ARRAY", "INT16_ARRAY", "UINT16_ARRAY", "INT32_ARRAY", "UINT32_ARRAY", "INT64_ARRAY", "UINT64_ARRAY", "BOOLEAN_ARRAY", "FLOAT_ARRAY", "DOUBLE_ARRAY", "STRING_ARRAY", "UNIX_TIMESTAMP_ARRAY", "UNKNOWN"
     #   resp.nodes[0].sensor.description #=> String
@@ -2163,6 +2215,8 @@ module Aws::IoTFleetWise
     #   resp.nodes[0].sensor.allowed_values[0] #=> String
     #   resp.nodes[0].sensor.min #=> Float
     #   resp.nodes[0].sensor.max #=> Float
+    #   resp.nodes[0].sensor.deprecation_message #=> String
+    #   resp.nodes[0].sensor.comment #=> String
     #   resp.nodes[0].actuator.fully_qualified_name #=> String
     #   resp.nodes[0].actuator.data_type #=> String, one of "INT8", "UINT8", "INT16", "UINT16", "INT32", "UINT32", "INT64", "UINT64", "BOOLEAN", "FLOAT", "DOUBLE", "STRING", "UNIX_TIMESTAMP", "INT8_ARRAY", "UINT8_ARRAY", "INT16_ARRAY", "UINT16_ARRAY", "INT32_ARRAY", "UINT32_ARRAY", "INT64_ARRAY", "UINT64_ARRAY", "BOOLEAN_ARRAY", "FLOAT_ARRAY", "DOUBLE_ARRAY", "STRING_ARRAY", "UNIX_TIMESTAMP_ARRAY", "UNKNOWN"
     #   resp.nodes[0].actuator.description #=> String
@@ -2172,6 +2226,8 @@ module Aws::IoTFleetWise
     #   resp.nodes[0].actuator.min #=> Float
     #   resp.nodes[0].actuator.max #=> Float
     #   resp.nodes[0].actuator.assigned_value #=> String
+    #   resp.nodes[0].actuator.deprecation_message #=> String
+    #   resp.nodes[0].actuator.comment #=> String
     #   resp.nodes[0].attribute.fully_qualified_name #=> String
     #   resp.nodes[0].attribute.data_type #=> String, one of "INT8", "UINT8", "INT16", "UINT16", "INT32", "UINT32", "INT64", "UINT64", "BOOLEAN", "FLOAT", "DOUBLE", "STRING", "UNIX_TIMESTAMP", "INT8_ARRAY", "UINT8_ARRAY", "INT16_ARRAY", "UINT16_ARRAY", "INT32_ARRAY", "UINT32_ARRAY", "INT64_ARRAY", "UINT64_ARRAY", "BOOLEAN_ARRAY", "FLOAT_ARRAY", "DOUBLE_ARRAY", "STRING_ARRAY", "UNIX_TIMESTAMP_ARRAY", "UNKNOWN"
     #   resp.nodes[0].attribute.description #=> String
@@ -2182,6 +2238,8 @@ module Aws::IoTFleetWise
     #   resp.nodes[0].attribute.max #=> Float
     #   resp.nodes[0].attribute.assigned_value #=> String
     #   resp.nodes[0].attribute.default_value #=> String
+    #   resp.nodes[0].attribute.deprecation_message #=> String
+    #   resp.nodes[0].attribute.comment #=> String
     #   resp.next_token #=> String
     #
     # @overload list_model_manifest_nodes(params = {})
@@ -2291,6 +2349,8 @@ module Aws::IoTFleetWise
     #   resp.nodes #=> Array
     #   resp.nodes[0].branch.fully_qualified_name #=> String
     #   resp.nodes[0].branch.description #=> String
+    #   resp.nodes[0].branch.deprecation_message #=> String
+    #   resp.nodes[0].branch.comment #=> String
     #   resp.nodes[0].sensor.fully_qualified_name #=> String
     #   resp.nodes[0].sensor.data_type #=> String, one of "INT8", "UINT8", "INT16", "UINT16", "INT32", "UINT32", "INT64", "UINT64", "BOOLEAN", "FLOAT", "DOUBLE", "STRING", "UNIX_TIMESTAMP", "INT8_ARRAY", "UINT8_ARRAY", "INT16_ARRAY", "UINT16_ARRAY", "INT32_ARRAY", "UINT32_ARRAY", "INT64_ARRAY", "UINT64_ARRAY", "BOOLEAN_ARRAY", "FLOAT_ARRAY", "DOUBLE_ARRAY", "STRING_ARRAY", "UNIX_TIMESTAMP_ARRAY", "UNKNOWN"
     #   resp.nodes[0].sensor.description #=> String
@@ -2299,6 +2359,8 @@ module Aws::IoTFleetWise
     #   resp.nodes[0].sensor.allowed_values[0] #=> String
     #   resp.nodes[0].sensor.min #=> Float
     #   resp.nodes[0].sensor.max #=> Float
+    #   resp.nodes[0].sensor.deprecation_message #=> String
+    #   resp.nodes[0].sensor.comment #=> String
     #   resp.nodes[0].actuator.fully_qualified_name #=> String
     #   resp.nodes[0].actuator.data_type #=> String, one of "INT8", "UINT8", "INT16", "UINT16", "INT32", "UINT32", "INT64", "UINT64", "BOOLEAN", "FLOAT", "DOUBLE", "STRING", "UNIX_TIMESTAMP", "INT8_ARRAY", "UINT8_ARRAY", "INT16_ARRAY", "UINT16_ARRAY", "INT32_ARRAY", "UINT32_ARRAY", "INT64_ARRAY", "UINT64_ARRAY", "BOOLEAN_ARRAY", "FLOAT_ARRAY", "DOUBLE_ARRAY", "STRING_ARRAY", "UNIX_TIMESTAMP_ARRAY", "UNKNOWN"
     #   resp.nodes[0].actuator.description #=> String
@@ -2308,6 +2370,8 @@ module Aws::IoTFleetWise
     #   resp.nodes[0].actuator.min #=> Float
     #   resp.nodes[0].actuator.max #=> Float
     #   resp.nodes[0].actuator.assigned_value #=> String
+    #   resp.nodes[0].actuator.deprecation_message #=> String
+    #   resp.nodes[0].actuator.comment #=> String
     #   resp.nodes[0].attribute.fully_qualified_name #=> String
     #   resp.nodes[0].attribute.data_type #=> String, one of "INT8", "UINT8", "INT16", "UINT16", "INT32", "UINT32", "INT64", "UINT64", "BOOLEAN", "FLOAT", "DOUBLE", "STRING", "UNIX_TIMESTAMP", "INT8_ARRAY", "UINT8_ARRAY", "INT16_ARRAY", "UINT16_ARRAY", "INT32_ARRAY", "UINT32_ARRAY", "INT64_ARRAY", "UINT64_ARRAY", "BOOLEAN_ARRAY", "FLOAT_ARRAY", "DOUBLE_ARRAY", "STRING_ARRAY", "UNIX_TIMESTAMP_ARRAY", "UNKNOWN"
     #   resp.nodes[0].attribute.description #=> String
@@ -2318,6 +2382,8 @@ module Aws::IoTFleetWise
     #   resp.nodes[0].attribute.max #=> Float
     #   resp.nodes[0].attribute.assigned_value #=> String
     #   resp.nodes[0].attribute.default_value #=> String
+    #   resp.nodes[0].attribute.deprecation_message #=> String
+    #   resp.nodes[0].attribute.comment #=> String
     #   resp.next_token #=> String
     #
     # @overload list_signal_catalog_nodes(params = {})
@@ -2538,29 +2604,33 @@ module Aws::IoTFleetWise
       req.send_request(options)
     end
 
-    # Registers your Amazon Web Services account, IAM, and Amazon Timestream
-    # resources so Amazon Web Services IoT FleetWise can transfer your
-    # vehicle data to the Amazon Web Services Cloud. For more information,
-    # including step-by-step procedures, see [Setting up Amazon Web Services
-    # IoT FleetWise][1].
+    # This API operation contains deprecated parameters. Register your
+    # account again without the Timestream resources parameter so that
+    # Amazon Web Services IoT FleetWise can remove the Timestream metadata
+    # stored. You should then pass the data destination into the
+    # [CreateCampaign][1] API operation.
     #
-    # <note markdown="1"> An Amazon Web Services account is **not** the same thing as a "user
-    # account". An [Amazon Web Services user][2] is an identity that you
-    # create using Identity and Access Management (IAM) and takes the form
-    # of either an [IAM user][3] or an [IAM role, both with credentials][4].
-    # A single Amazon Web Services account can, and typically does, contain
-    # many users and roles.
+    #  You must delete any existing campaigns that include an empty data
+    # destination before you register your account again. For more
+    # information, see the [DeleteCampaign][2] API operation.
     #
-    #  </note>
+    #  If you want to delete the Timestream inline policy from the
+    # service-linked role, such as to mitigate an overly permissive policy,
+    # you must first delete any existing campaigns. Then delete the
+    # service-linked role and register your account again to enable
+    # CloudWatch metrics. For more information, see
+    # [DeleteServiceLinkedRole][3] in the *Identity and Access Management
+    # API Reference*.
+    #
+    #      <p>Registers your Amazon Web Services account, IAM, and Amazon Timestream resources so Amazon Web Services IoT FleetWise can transfer your vehicle data to the Amazon Web Services Cloud. For more information, including step-by-step procedures, see <a href="https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/setting-up.html">Setting up Amazon Web Services IoT FleetWise</a>. </p> <note> <p>An Amazon Web Services account is <b>not</b> the same thing as a "user." An <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_identity-management.html#intro-identity-users">Amazon Web Services user</a> is an identity that you create using Identity and Access Management (IAM) and takes the form of either an <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html">IAM user</a> or an <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM role, both with credentials</a>. A single Amazon Web Services account can, and typically does, contain many users and roles.</p> </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/setting-up.html
-    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_identity-management.html#intro-identity-users
-    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html
-    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
+    # [1]: https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_CreateCampaign.html
+    # [2]: https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_DeleteCampaign.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteServiceLinkedRole.html
     #
-    # @option params [required, Types::TimestreamResources] :timestream_resources
+    # @option params [Types::TimestreamResources] :timestream_resources
     #   The registered Amazon Timestream resources that Amazon Web Services
     #   IoT FleetWise edge agent software can transfer your vehicle data to.
     #
@@ -2579,7 +2649,7 @@ module Aws::IoTFleetWise
     # @example Request syntax with placeholder values
     #
     #   resp = client.register_account({
-    #     timestream_resources: { # required
+    #     timestream_resources: {
     #       timestream_database_name: "TimestreamDatabaseName", # required
     #       timestream_table_name: "TimestreamTableName", # required
     #     },
@@ -2678,9 +2748,13 @@ module Aws::IoTFleetWise
     #   * `APPROVE` - To approve delivering a data collection scheme to
     #     vehicles.
     #
-    #   * `SUSPEND` - To suspend collecting signal data.
+    #   * `SUSPEND` - To suspend collecting signal data. The campaign is
+    #     deleted from vehicles and all vehicles in the suspended campaign
+    #     will stop sending data.
     #
-    #   * `RESUME` - To resume collecting signal data.
+    #   * `RESUME` - To reactivate the `SUSPEND` campaign. The campaign is
+    #     redeployed to all vehicles and the vehicles will resume sending
+    #     data.
     #
     #   * `UPDATE` - To update a campaign.
     #
@@ -2992,6 +3066,8 @@ module Aws::IoTFleetWise
     #         branch: {
     #           fully_qualified_name: "string", # required
     #           description: "description",
+    #           deprecation_message: "message",
+    #           comment: "message",
     #         },
     #         sensor: {
     #           fully_qualified_name: "string", # required
@@ -3001,6 +3077,8 @@ module Aws::IoTFleetWise
     #           allowed_values: ["string"],
     #           min: 1.0,
     #           max: 1.0,
+    #           deprecation_message: "message",
+    #           comment: "message",
     #         },
     #         actuator: {
     #           fully_qualified_name: "string", # required
@@ -3011,6 +3089,8 @@ module Aws::IoTFleetWise
     #           min: 1.0,
     #           max: 1.0,
     #           assigned_value: "string",
+    #           deprecation_message: "message",
+    #           comment: "message",
     #         },
     #         attribute: {
     #           fully_qualified_name: "string", # required
@@ -3022,6 +3102,8 @@ module Aws::IoTFleetWise
     #           max: 1.0,
     #           assigned_value: "string",
     #           default_value: "string",
+    #           deprecation_message: "message",
+    #           comment: "message",
     #         },
     #       },
     #     ],
@@ -3030,6 +3112,8 @@ module Aws::IoTFleetWise
     #         branch: {
     #           fully_qualified_name: "string", # required
     #           description: "description",
+    #           deprecation_message: "message",
+    #           comment: "message",
     #         },
     #         sensor: {
     #           fully_qualified_name: "string", # required
@@ -3039,6 +3123,8 @@ module Aws::IoTFleetWise
     #           allowed_values: ["string"],
     #           min: 1.0,
     #           max: 1.0,
+    #           deprecation_message: "message",
+    #           comment: "message",
     #         },
     #         actuator: {
     #           fully_qualified_name: "string", # required
@@ -3049,6 +3135,8 @@ module Aws::IoTFleetWise
     #           min: 1.0,
     #           max: 1.0,
     #           assigned_value: "string",
+    #           deprecation_message: "message",
+    #           comment: "message",
     #         },
     #         attribute: {
     #           fully_qualified_name: "string", # required
@@ -3060,6 +3148,8 @@ module Aws::IoTFleetWise
     #           max: 1.0,
     #           assigned_value: "string",
     #           default_value: "string",
+    #           deprecation_message: "message",
+    #           comment: "message",
     #         },
     #       },
     #     ],
@@ -3145,7 +3235,7 @@ module Aws::IoTFleetWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotfleetwise'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

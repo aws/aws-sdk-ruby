@@ -95,10 +95,17 @@ module Aws::SageMakerFeatureStoreRuntime
     #   to be retrieved in batch.
     #   @return [Array<Types::BatchGetRecordIdentifier>]
     #
+    # @!attribute [rw] expiration_time_response
+    #   Parameter to request `ExpiresAt` in response. If `Enabled`,
+    #   `BatchGetRecord` will return the value of `ExpiresAt`, if it is not
+    #   null. If `Disabled` and null, `BatchGetRecord` will return null.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/BatchGetRecordRequest AWS API Documentation
     #
     class BatchGetRecordRequest < Struct.new(
-      :identifiers)
+      :identifiers,
+      :expiration_time_response)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -141,12 +148,17 @@ module Aws::SageMakerFeatureStoreRuntime
     #   The `Record` retrieved.
     #   @return [Array<Types::FeatureValue>]
     #
+    # @!attribute [rw] expires_at
+    #   The `ExpiresAt` ISO string of the requested record.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/BatchGetRecordResultDetail AWS API Documentation
     #
     class BatchGetRecordResultDetail < Struct.new(
       :feature_group_name,
       :record_identifier_value_as_string,
-      :record)
+      :record,
+      :expires_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -224,12 +236,19 @@ module Aws::SageMakerFeatureStoreRuntime
     #   latest value for all the Features are returned.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] expiration_time_response
+    #   Parameter to request `ExpiresAt` in response. If `Enabled`,
+    #   `BatchGetRecord` will return the value of `ExpiresAt`, if it is not
+    #   null. If `Disabled` and null, `BatchGetRecord` will return null.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/GetRecordRequest AWS API Documentation
     #
     class GetRecordRequest < Struct.new(
       :feature_group_name,
       :record_identifier_value_as_string,
-      :feature_names)
+      :feature_names,
+      :expiration_time_response)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -238,10 +257,15 @@ module Aws::SageMakerFeatureStoreRuntime
     #   The record you requested. A list of `FeatureValues`.
     #   @return [Array<Types::FeatureValue>]
     #
+    # @!attribute [rw] expires_at
+    #   The `ExpiresAt` ISO string of the requested record.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/GetRecordResponse AWS API Documentation
     #
     class GetRecordResponse < Struct.new(
-      :record)
+      :record,
+      :expires_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -283,12 +307,24 @@ module Aws::SageMakerFeatureStoreRuntime
     #   using for the `FeatureGroup`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ttl_duration
+    #   Time to live duration, where the record is hard deleted after the
+    #   expiration time is reached; `ExpiresAt` = `EventTime` +
+    #   `TtlDuration`. For information on HardDelete, see the
+    #   [DeleteRecord][1] API in the Amazon SageMaker API Reference guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html
+    #   @return [Types::TtlDuration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/PutRecordRequest AWS API Documentation
     #
     class PutRecordRequest < Struct.new(
       :feature_group_name,
       :record,
-      :target_stores)
+      :target_stores,
+      :ttl_duration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -315,6 +351,32 @@ module Aws::SageMakerFeatureStoreRuntime
     #
     class ServiceUnavailable < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Time to live duration, where the record is hard deleted after the
+    # expiration time is reached; `ExpiresAt` = `EventTime` + `TtlDuration`.
+    # For information on HardDelete, see the [DeleteRecord][1] API in the
+    # Amazon SageMaker API Reference guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html
+    #
+    # @!attribute [rw] unit
+    #   `TtlDuration` time unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   `TtlDuration` time value.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/TtlDuration AWS API Documentation
+    #
+    class TtlDuration < Struct.new(
+      :unit,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -52,7 +52,10 @@ module Aws::IoTFleetWise
     CreateVehicleRequestItem = Shapes::StructureShape.new(name: 'CreateVehicleRequestItem')
     CreateVehicleResponse = Shapes::StructureShape.new(name: 'CreateVehicleResponse')
     CreateVehicleResponseItem = Shapes::StructureShape.new(name: 'CreateVehicleResponseItem')
+    DataDestinationConfig = Shapes::UnionShape.new(name: 'DataDestinationConfig')
+    DataDestinationConfigs = Shapes::ListShape.new(name: 'DataDestinationConfigs')
     DataExtraDimensionNodePathList = Shapes::ListShape.new(name: 'DataExtraDimensionNodePathList')
+    DataFormat = Shapes::StringShape.new(name: 'DataFormat')
     DecoderManifestSummary = Shapes::StructureShape.new(name: 'DecoderManifestSummary')
     DecoderManifestValidationException = Shapes::StructureShape.new(name: 'DecoderManifestValidationException')
     DeleteCampaignRequest = Shapes::StructureShape.new(name: 'DeleteCampaignRequest')
@@ -161,6 +164,7 @@ module Aws::IoTFleetWise
     ObdInterfaceName = Shapes::StringShape.new(name: 'ObdInterfaceName')
     ObdSignal = Shapes::StructureShape.new(name: 'ObdSignal')
     ObdStandard = Shapes::StringShape.new(name: 'ObdStandard')
+    Prefix = Shapes::StringShape.new(name: 'Prefix')
     ProtocolName = Shapes::StringShape.new(name: 'ProtocolName')
     ProtocolVersion = Shapes::StringShape.new(name: 'ProtocolVersion')
     PutLoggingOptionsRequest = Shapes::StructureShape.new(name: 'PutLoggingOptionsRequest')
@@ -170,6 +174,8 @@ module Aws::IoTFleetWise
     RegistrationStatus = Shapes::StringShape.new(name: 'RegistrationStatus')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RetryAfterSeconds = Shapes::IntegerShape.new(name: 'RetryAfterSeconds')
+    S3BucketArn = Shapes::StringShape.new(name: 'S3BucketArn')
+    S3Config = Shapes::StructureShape.new(name: 'S3Config')
     Sensor = Shapes::StructureShape.new(name: 'Sensor')
     SignalCatalogSummary = Shapes::StructureShape.new(name: 'SignalCatalogSummary')
     SignalDecoder = Shapes::StructureShape.new(name: 'SignalDecoder')
@@ -179,6 +185,7 @@ module Aws::IoTFleetWise
     SignalInformation = Shapes::StructureShape.new(name: 'SignalInformation')
     SignalInformationList = Shapes::ListShape.new(name: 'SignalInformationList')
     SpoolingMode = Shapes::StringShape.new(name: 'SpoolingMode')
+    StorageCompressionFormat = Shapes::StringShape.new(name: 'StorageCompressionFormat')
     String = Shapes::StringShape.new(name: 'String')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -189,9 +196,11 @@ module Aws::IoTFleetWise
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimeBasedCollectionScheme = Shapes::StructureShape.new(name: 'TimeBasedCollectionScheme')
+    TimestreamConfig = Shapes::StructureShape.new(name: 'TimestreamConfig')
     TimestreamDatabaseName = Shapes::StringShape.new(name: 'TimestreamDatabaseName')
     TimestreamRegistrationResponse = Shapes::StructureShape.new(name: 'TimestreamRegistrationResponse')
     TimestreamResources = Shapes::StructureShape.new(name: 'TimestreamResources')
+    TimestreamTableArn = Shapes::StringShape.new(name: 'TimestreamTableArn')
     TimestreamTableName = Shapes::StringShape.new(name: 'TimestreamTableName')
     TriggerMode = Shapes::StringShape.new(name: 'TriggerMode')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -247,6 +256,7 @@ module Aws::IoTFleetWise
     listVehiclesMaxResults = Shapes::IntegerShape.new(name: 'listVehiclesMaxResults')
     maxResults = Shapes::IntegerShape.new(name: 'maxResults')
     maxSampleCount = Shapes::IntegerShape.new(name: 'maxSampleCount')
+    message = Shapes::StringShape.new(name: 'message')
     modelManifestSummaries = Shapes::ListShape.new(name: 'modelManifestSummaries')
     nextToken = Shapes::StringShape.new(name: 'nextToken')
     nonNegativeInteger = Shapes::IntegerShape.new(name: 'nonNegativeInteger')
@@ -278,6 +288,8 @@ module Aws::IoTFleetWise
     Actuator.add_member(:min, Shapes::ShapeRef.new(shape: double, location_name: "min"))
     Actuator.add_member(:max, Shapes::ShapeRef.new(shape: double, location_name: "max"))
     Actuator.add_member(:assigned_value, Shapes::ShapeRef.new(shape: string, deprecated: true, location_name: "assignedValue", metadata: {"deprecatedMessage"=>"assignedValue is no longer in use"}))
+    Actuator.add_member(:deprecation_message, Shapes::ShapeRef.new(shape: message, location_name: "deprecationMessage"))
+    Actuator.add_member(:comment, Shapes::ShapeRef.new(shape: message, location_name: "comment"))
     Actuator.struct_class = Types::Actuator
 
     AssociateVehicleFleetRequest.add_member(:vehicle_name, Shapes::ShapeRef.new(shape: vehicleName, required: true, location_name: "vehicleName"))
@@ -295,6 +307,8 @@ module Aws::IoTFleetWise
     Attribute.add_member(:max, Shapes::ShapeRef.new(shape: double, location_name: "max"))
     Attribute.add_member(:assigned_value, Shapes::ShapeRef.new(shape: string, deprecated: true, location_name: "assignedValue", metadata: {"deprecatedMessage"=>"assignedValue is no longer in use"}))
     Attribute.add_member(:default_value, Shapes::ShapeRef.new(shape: string, location_name: "defaultValue"))
+    Attribute.add_member(:deprecation_message, Shapes::ShapeRef.new(shape: message, location_name: "deprecationMessage"))
+    Attribute.add_member(:comment, Shapes::ShapeRef.new(shape: message, location_name: "comment"))
     Attribute.struct_class = Types::Attribute
 
     BatchCreateVehicleRequest.add_member(:vehicles, Shapes::ShapeRef.new(shape: createVehicleRequestItems, required: true, location_name: "vehicles"))
@@ -313,6 +327,8 @@ module Aws::IoTFleetWise
 
     Branch.add_member(:fully_qualified_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "fullyQualifiedName"))
     Branch.add_member(:description, Shapes::ShapeRef.new(shape: description, location_name: "description"))
+    Branch.add_member(:deprecation_message, Shapes::ShapeRef.new(shape: message, location_name: "deprecationMessage"))
+    Branch.add_member(:comment, Shapes::ShapeRef.new(shape: message, location_name: "comment"))
     Branch.struct_class = Types::Branch
 
     CampaignSummary.add_member(:arn, Shapes::ShapeRef.new(shape: arn, location_name: "arn"))
@@ -383,6 +399,7 @@ module Aws::IoTFleetWise
     CreateCampaignRequest.add_member(:collection_scheme, Shapes::ShapeRef.new(shape: CollectionScheme, required: true, location_name: "collectionScheme"))
     CreateCampaignRequest.add_member(:data_extra_dimensions, Shapes::ShapeRef.new(shape: DataExtraDimensionNodePathList, location_name: "dataExtraDimensions"))
     CreateCampaignRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateCampaignRequest.add_member(:data_destination_configs, Shapes::ShapeRef.new(shape: DataDestinationConfigs, location_name: "dataDestinationConfigs"))
     CreateCampaignRequest.struct_class = Types::CreateCampaignRequest
 
     CreateCampaignResponse.add_member(:name, Shapes::ShapeRef.new(shape: campaignName, location_name: "name"))
@@ -462,6 +479,16 @@ module Aws::IoTFleetWise
     CreateVehicleResponseItem.add_member(:arn, Shapes::ShapeRef.new(shape: arn, location_name: "arn"))
     CreateVehicleResponseItem.add_member(:thing_arn, Shapes::ShapeRef.new(shape: arn, location_name: "thingArn"))
     CreateVehicleResponseItem.struct_class = Types::CreateVehicleResponseItem
+
+    DataDestinationConfig.add_member(:s3_config, Shapes::ShapeRef.new(shape: S3Config, location_name: "s3Config"))
+    DataDestinationConfig.add_member(:timestream_config, Shapes::ShapeRef.new(shape: TimestreamConfig, location_name: "timestreamConfig"))
+    DataDestinationConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    DataDestinationConfig.add_member_subclass(:s3_config, Types::DataDestinationConfig::S3Config)
+    DataDestinationConfig.add_member_subclass(:timestream_config, Types::DataDestinationConfig::TimestreamConfig)
+    DataDestinationConfig.add_member_subclass(:unknown, Types::DataDestinationConfig::Unknown)
+    DataDestinationConfig.struct_class = Types::DataDestinationConfig
+
+    DataDestinationConfigs.member = Shapes::ShapeRef.new(shape: DataDestinationConfig)
 
     DataExtraDimensionNodePathList.member = Shapes::ShapeRef.new(shape: NodePath)
 
@@ -564,6 +591,7 @@ module Aws::IoTFleetWise
     GetCampaignResponse.add_member(:data_extra_dimensions, Shapes::ShapeRef.new(shape: DataExtraDimensionNodePathList, location_name: "dataExtraDimensions"))
     GetCampaignResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "creationTime"))
     GetCampaignResponse.add_member(:last_modification_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "lastModificationTime"))
+    GetCampaignResponse.add_member(:data_destination_configs, Shapes::ShapeRef.new(shape: DataDestinationConfigs, location_name: "dataDestinationConfigs"))
     GetCampaignResponse.struct_class = Types::GetCampaignResponse
 
     GetDecoderManifestRequest.add_member(:name, Shapes::ShapeRef.new(shape: resourceName, required: true, location_name: "name"))
@@ -610,7 +638,7 @@ module Aws::IoTFleetWise
 
     GetRegisterAccountStatusResponse.add_member(:customer_account_id, Shapes::ShapeRef.new(shape: customerAccountId, required: true, location_name: "customerAccountId"))
     GetRegisterAccountStatusResponse.add_member(:account_status, Shapes::ShapeRef.new(shape: RegistrationStatus, required: true, location_name: "accountStatus"))
-    GetRegisterAccountStatusResponse.add_member(:timestream_registration_response, Shapes::ShapeRef.new(shape: TimestreamRegistrationResponse, required: true, location_name: "timestreamRegistrationResponse"))
+    GetRegisterAccountStatusResponse.add_member(:timestream_registration_response, Shapes::ShapeRef.new(shape: TimestreamRegistrationResponse, location_name: "timestreamRegistrationResponse"))
     GetRegisterAccountStatusResponse.add_member(:iam_registration_response, Shapes::ShapeRef.new(shape: IamRegistrationResponse, required: true, location_name: "iamRegistrationResponse"))
     GetRegisterAccountStatusResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "creationTime"))
     GetRegisterAccountStatusResponse.add_member(:last_modification_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "lastModificationTime"))
@@ -902,12 +930,12 @@ module Aws::IoTFleetWise
 
     PutLoggingOptionsResponse.struct_class = Types::PutLoggingOptionsResponse
 
-    RegisterAccountRequest.add_member(:timestream_resources, Shapes::ShapeRef.new(shape: TimestreamResources, required: true, location_name: "timestreamResources"))
+    RegisterAccountRequest.add_member(:timestream_resources, Shapes::ShapeRef.new(shape: TimestreamResources, deprecated: true, location_name: "timestreamResources", metadata: {"deprecatedMessage"=>"Amazon Timestream metadata is now passed in the CreateCampaign API."}))
     RegisterAccountRequest.add_member(:iam_resources, Shapes::ShapeRef.new(shape: IamResources, deprecated: true, location_name: "iamResources", metadata: {"deprecatedMessage"=>"iamResources is no longer used or needed as input"}))
     RegisterAccountRequest.struct_class = Types::RegisterAccountRequest
 
     RegisterAccountResponse.add_member(:register_account_status, Shapes::ShapeRef.new(shape: RegistrationStatus, required: true, location_name: "registerAccountStatus"))
-    RegisterAccountResponse.add_member(:timestream_resources, Shapes::ShapeRef.new(shape: TimestreamResources, required: true, location_name: "timestreamResources"))
+    RegisterAccountResponse.add_member(:timestream_resources, Shapes::ShapeRef.new(shape: TimestreamResources, location_name: "timestreamResources"))
     RegisterAccountResponse.add_member(:iam_resources, Shapes::ShapeRef.new(shape: IamResources, required: true, location_name: "iamResources"))
     RegisterAccountResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "creationTime"))
     RegisterAccountResponse.add_member(:last_modification_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "lastModificationTime"))
@@ -918,6 +946,12 @@ module Aws::IoTFleetWise
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: string, required: true, location_name: "resourceType"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    S3Config.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, required: true, location_name: "bucketArn"))
+    S3Config.add_member(:data_format, Shapes::ShapeRef.new(shape: DataFormat, location_name: "dataFormat"))
+    S3Config.add_member(:storage_compression_format, Shapes::ShapeRef.new(shape: StorageCompressionFormat, location_name: "storageCompressionFormat"))
+    S3Config.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "prefix"))
+    S3Config.struct_class = Types::S3Config
+
     Sensor.add_member(:fully_qualified_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "fullyQualifiedName"))
     Sensor.add_member(:data_type, Shapes::ShapeRef.new(shape: NodeDataType, required: true, location_name: "dataType"))
     Sensor.add_member(:description, Shapes::ShapeRef.new(shape: description, location_name: "description"))
@@ -925,6 +959,8 @@ module Aws::IoTFleetWise
     Sensor.add_member(:allowed_values, Shapes::ShapeRef.new(shape: listOfStrings, location_name: "allowedValues"))
     Sensor.add_member(:min, Shapes::ShapeRef.new(shape: double, location_name: "min"))
     Sensor.add_member(:max, Shapes::ShapeRef.new(shape: double, location_name: "max"))
+    Sensor.add_member(:deprecation_message, Shapes::ShapeRef.new(shape: message, location_name: "deprecationMessage"))
+    Sensor.add_member(:comment, Shapes::ShapeRef.new(shape: message, location_name: "comment"))
     Sensor.struct_class = Types::Sensor
 
     SignalCatalogSummary.add_member(:name, Shapes::ShapeRef.new(shape: string, location_name: "name"))
@@ -971,6 +1007,10 @@ module Aws::IoTFleetWise
 
     TimeBasedCollectionScheme.add_member(:period_ms, Shapes::ShapeRef.new(shape: collectionPeriodMs, required: true, location_name: "periodMs"))
     TimeBasedCollectionScheme.struct_class = Types::TimeBasedCollectionScheme
+
+    TimestreamConfig.add_member(:timestream_table_arn, Shapes::ShapeRef.new(shape: TimestreamTableArn, required: true, location_name: "timestreamTableArn"))
+    TimestreamConfig.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "executionRoleArn"))
+    TimestreamConfig.struct_class = Types::TimestreamConfig
 
     TimestreamRegistrationResponse.add_member(:timestream_database_name, Shapes::ShapeRef.new(shape: TimestreamDatabaseName, required: true, location_name: "timestreamDatabaseName"))
     TimestreamRegistrationResponse.add_member(:timestream_table_name, Shapes::ShapeRef.new(shape: TimestreamTableName, required: true, location_name: "timestreamTableName"))

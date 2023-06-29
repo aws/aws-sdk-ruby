@@ -9,6 +9,7 @@
 
 
 module Aws::ManagedBlockchain
+  # @api private
   module Endpoints
 
     class CreateAccessor

@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.62.0 (2023-06-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.61.0 (2023-06-07)
+------------------
+
+* Feature - This update corrects the jumbo frames mtu values from 9100 to 8500 for transit virtual interfaces.
+
+1.60.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.59.0 (2023-05-16)
+------------------
+
+* Feature - This release includes an update to the mtu value for CreateTransitVirtualInterface from 9001 mtu to 8500 mtu.
+
 1.58.0 (2023-04-28)
 ------------------
 

@@ -9,6 +9,7 @@
 
 
 module Aws::ConnectParticipant
+  # @api private
   module Endpoints
 
     class CompleteAttachmentUpload

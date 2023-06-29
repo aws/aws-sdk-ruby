@@ -1,6 +1,61 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.115.0 (2023-06-26)
+------------------
+
+* Feature - This release provides a way to search for existing tags within an instance. Before tagging a resource, ensure consistency by searching for pre-existing key:value pairs.
+
+1.114.0 (2023-06-16)
+------------------
+
+* Feature - Updates the *InstanceStorageConfig APIs to support a new ResourceType: SCREEN_RECORDINGS to enable screen recording and specify the storage configurations for publishing the recordings. Also updates DescribeInstance and ListInstances APIs to include InstanceAccessUrl attribute in the API response.
+
+1.113.0 (2023-06-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.112.0 (2023-06-09)
+------------------
+
+* Feature - This release adds search APIs for Prompts, Quick Connects and Hours of Operations, which can be used to search for those resources within a Connect Instance.
+
+1.111.0 (2023-06-06)
+------------------
+
+* Feature - GetMetricDataV2 API is now available in AWS GovCloud(US) region.
+
+1.110.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.109.0 (2023-05-26)
+------------------
+
+* Feature - Documentation update for a new Initiation Method value in DescribeContact API
+
+1.108.0 (2023-05-24)
+------------------
+
+* Feature - Amazon Connect Evaluation Capabilities: validation improvements
+
+1.107.0 (2023-05-18)
+------------------
+
+* Feature - You can programmatically create and manage prompts using APIs, for example, to extract prompts stored within Amazon Connect and add them to your Amazon S3 bucket. AWS CloudTrail, AWS CloudFormation and tagging are supported.
+
+1.106.0 (2023-05-11)
+------------------
+
+* Feature - This release updates GetMetricDataV2 API, to support metric data up-to last 35 days
+
 1.105.0 (2023-05-04)
 ------------------
 

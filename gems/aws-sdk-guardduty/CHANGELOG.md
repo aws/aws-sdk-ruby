@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.73.0 (2023-06-26)
+------------------
+
+* Feature - Add support for user.extra.sessionName in Kubernetes Audit Logs Findings.
+
+1.72.0 (2023-06-15)
+------------------
+
+* Feature - Updated descriptions for some APIs.
+
+1.71.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.70.0 (2023-05-08)
+------------------
+
+* Feature - Add AccessDeniedException 403 Error message code to support 3 Tagging related APIs
+
 1.69.0 (2023-04-27)
 ------------------
 

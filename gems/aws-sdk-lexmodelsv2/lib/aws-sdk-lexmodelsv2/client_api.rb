@@ -13,7 +13,12 @@ module Aws::LexModelsV2
 
     include Seahorse::Model
 
+    ActiveContext = Shapes::StructureShape.new(name: 'ActiveContext')
+    ActiveContextList = Shapes::ListShape.new(name: 'ActiveContextList')
+    ActiveContextName = Shapes::StringShape.new(name: 'ActiveContextName')
     AdvancedRecognitionSetting = Shapes::StructureShape.new(name: 'AdvancedRecognitionSetting')
+    AgentTurnResult = Shapes::StructureShape.new(name: 'AgentTurnResult')
+    AgentTurnSpecification = Shapes::StructureShape.new(name: 'AgentTurnSpecification')
     AggregatedUtterancesFilter = Shapes::StructureShape.new(name: 'AggregatedUtterancesFilter')
     AggregatedUtterancesFilterName = Shapes::StringShape.new(name: 'AggregatedUtterancesFilterName')
     AggregatedUtterancesFilterOperator = Shapes::StringShape.new(name: 'AggregatedUtterancesFilterOperator')
@@ -32,6 +37,7 @@ module Aws::LexModelsV2
     AttachmentTitle = Shapes::StringShape.new(name: 'AttachmentTitle')
     AttachmentUrl = Shapes::StringShape.new(name: 'AttachmentUrl')
     AudioAndDTMFInputSpecification = Shapes::StructureShape.new(name: 'AudioAndDTMFInputSpecification')
+    AudioFileS3Location = Shapes::StringShape.new(name: 'AudioFileS3Location')
     AudioLogDestination = Shapes::StructureShape.new(name: 'AudioLogDestination')
     AudioLogSetting = Shapes::StructureShape.new(name: 'AudioLogSetting')
     AudioLogSettingsList = Shapes::ListShape.new(name: 'AudioLogSettingsList')
@@ -53,6 +59,7 @@ module Aws::LexModelsV2
     BotAliasStatus = Shapes::StringShape.new(name: 'BotAliasStatus')
     BotAliasSummary = Shapes::StructureShape.new(name: 'BotAliasSummary')
     BotAliasSummaryList = Shapes::ListShape.new(name: 'BotAliasSummaryList')
+    BotAliasTestExecutionTarget = Shapes::StructureShape.new(name: 'BotAliasTestExecutionTarget')
     BotExportSpecification = Shapes::StructureShape.new(name: 'BotExportSpecification')
     BotFilter = Shapes::StructureShape.new(name: 'BotFilter')
     BotFilterName = Shapes::StringShape.new(name: 'BotFilterName')
@@ -130,7 +137,19 @@ module Aws::LexModelsV2
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContextTimeToLiveInSeconds = Shapes::IntegerShape.new(name: 'ContextTimeToLiveInSeconds')
     ContextTurnsToLive = Shapes::IntegerShape.new(name: 'ContextTurnsToLive')
+    ConversationLevelIntentClassificationResultItem = Shapes::StructureShape.new(name: 'ConversationLevelIntentClassificationResultItem')
+    ConversationLevelIntentClassificationResults = Shapes::ListShape.new(name: 'ConversationLevelIntentClassificationResults')
+    ConversationLevelResultDetail = Shapes::StructureShape.new(name: 'ConversationLevelResultDetail')
+    ConversationLevelSlotResolutionResultItem = Shapes::StructureShape.new(name: 'ConversationLevelSlotResolutionResultItem')
+    ConversationLevelSlotResolutionResults = Shapes::ListShape.new(name: 'ConversationLevelSlotResolutionResults')
+    ConversationLevelTestResultItem = Shapes::StructureShape.new(name: 'ConversationLevelTestResultItem')
+    ConversationLevelTestResultItemList = Shapes::ListShape.new(name: 'ConversationLevelTestResultItemList')
+    ConversationLevelTestResults = Shapes::StructureShape.new(name: 'ConversationLevelTestResults')
+    ConversationLevelTestResultsFilterBy = Shapes::StructureShape.new(name: 'ConversationLevelTestResultsFilterBy')
     ConversationLogSettings = Shapes::StructureShape.new(name: 'ConversationLogSettings')
+    ConversationLogsDataSource = Shapes::StructureShape.new(name: 'ConversationLogsDataSource')
+    ConversationLogsDataSourceFilterBy = Shapes::StructureShape.new(name: 'ConversationLogsDataSourceFilterBy')
+    ConversationLogsInputModeFilter = Shapes::StringShape.new(name: 'ConversationLogsInputModeFilter')
     Count = Shapes::IntegerShape.new(name: 'Count')
     CreateBotAliasRequest = Shapes::StructureShape.new(name: 'CreateBotAliasRequest')
     CreateBotAliasResponse = Shapes::StructureShape.new(name: 'CreateBotAliasResponse')
@@ -153,6 +172,8 @@ module Aws::LexModelsV2
     CreateSlotResponse = Shapes::StructureShape.new(name: 'CreateSlotResponse')
     CreateSlotTypeRequest = Shapes::StructureShape.new(name: 'CreateSlotTypeRequest')
     CreateSlotTypeResponse = Shapes::StructureShape.new(name: 'CreateSlotTypeResponse')
+    CreateTestSetDiscrepancyReportRequest = Shapes::StructureShape.new(name: 'CreateTestSetDiscrepancyReportRequest')
+    CreateTestSetDiscrepancyReportResponse = Shapes::StructureShape.new(name: 'CreateTestSetDiscrepancyReportResponse')
     CreateUploadUrlRequest = Shapes::StructureShape.new(name: 'CreateUploadUrlRequest')
     CreateUploadUrlResponse = Shapes::StructureShape.new(name: 'CreateUploadUrlResponse')
     CustomPayload = Shapes::StructureShape.new(name: 'CustomPayload')
@@ -190,6 +211,7 @@ module Aws::LexModelsV2
     DeleteResourcePolicyStatementResponse = Shapes::StructureShape.new(name: 'DeleteResourcePolicyStatementResponse')
     DeleteSlotRequest = Shapes::StructureShape.new(name: 'DeleteSlotRequest')
     DeleteSlotTypeRequest = Shapes::StructureShape.new(name: 'DeleteSlotTypeRequest')
+    DeleteTestSetRequest = Shapes::StructureShape.new(name: 'DeleteTestSetRequest')
     DeleteUtterancesRequest = Shapes::StructureShape.new(name: 'DeleteUtterancesRequest')
     DeleteUtterancesResponse = Shapes::StructureShape.new(name: 'DeleteUtterancesResponse')
     DescribeBotAliasRequest = Shapes::StructureShape.new(name: 'DescribeBotAliasRequest')
@@ -216,6 +238,14 @@ module Aws::LexModelsV2
     DescribeSlotResponse = Shapes::StructureShape.new(name: 'DescribeSlotResponse')
     DescribeSlotTypeRequest = Shapes::StructureShape.new(name: 'DescribeSlotTypeRequest')
     DescribeSlotTypeResponse = Shapes::StructureShape.new(name: 'DescribeSlotTypeResponse')
+    DescribeTestExecutionRequest = Shapes::StructureShape.new(name: 'DescribeTestExecutionRequest')
+    DescribeTestExecutionResponse = Shapes::StructureShape.new(name: 'DescribeTestExecutionResponse')
+    DescribeTestSetDiscrepancyReportRequest = Shapes::StructureShape.new(name: 'DescribeTestSetDiscrepancyReportRequest')
+    DescribeTestSetDiscrepancyReportResponse = Shapes::StructureShape.new(name: 'DescribeTestSetDiscrepancyReportResponse')
+    DescribeTestSetGenerationRequest = Shapes::StructureShape.new(name: 'DescribeTestSetGenerationRequest')
+    DescribeTestSetGenerationResponse = Shapes::StructureShape.new(name: 'DescribeTestSetGenerationResponse')
+    DescribeTestSetRequest = Shapes::StructureShape.new(name: 'DescribeTestSetRequest')
+    DescribeTestSetResponse = Shapes::StructureShape.new(name: 'DescribeTestSetResponse')
     Description = Shapes::StringShape.new(name: 'Description')
     DialogAction = Shapes::StructureShape.new(name: 'DialogAction')
     DialogActionType = Shapes::StringShape.new(name: 'DialogActionType')
@@ -229,6 +259,7 @@ module Aws::LexModelsV2
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
+    ExecutionErrorDetails = Shapes::StructureShape.new(name: 'ExecutionErrorDetails')
     ExportFilter = Shapes::StructureShape.new(name: 'ExportFilter')
     ExportFilterName = Shapes::StringShape.new(name: 'ExportFilterName')
     ExportFilterOperator = Shapes::StringShape.new(name: 'ExportFilterOperator')
@@ -254,6 +285,8 @@ module Aws::LexModelsV2
     FulfillmentUpdateResponseFrequency = Shapes::IntegerShape.new(name: 'FulfillmentUpdateResponseFrequency')
     FulfillmentUpdateResponseSpecification = Shapes::StructureShape.new(name: 'FulfillmentUpdateResponseSpecification')
     FulfillmentUpdatesSpecification = Shapes::StructureShape.new(name: 'FulfillmentUpdatesSpecification')
+    GetTestExecutionArtifactsUrlRequest = Shapes::StructureShape.new(name: 'GetTestExecutionArtifactsUrlRequest')
+    GetTestExecutionArtifactsUrlResponse = Shapes::StructureShape.new(name: 'GetTestExecutionArtifactsUrlResponse')
     GrammarSlotTypeSetting = Shapes::StructureShape.new(name: 'GrammarSlotTypeSetting')
     GrammarSlotTypeSource = Shapes::StructureShape.new(name: 'GrammarSlotTypeSource')
     HitCount = Shapes::IntegerShape.new(name: 'HitCount')
@@ -276,12 +309,20 @@ module Aws::LexModelsV2
     InitialResponseSetting = Shapes::StructureShape.new(name: 'InitialResponseSetting')
     InputContext = Shapes::StructureShape.new(name: 'InputContext')
     InputContextsList = Shapes::ListShape.new(name: 'InputContextsList')
+    InputSessionStateSpecification = Shapes::StructureShape.new(name: 'InputSessionStateSpecification')
+    IntentClassificationTestResultItem = Shapes::StructureShape.new(name: 'IntentClassificationTestResultItem')
+    IntentClassificationTestResultItemCounts = Shapes::StructureShape.new(name: 'IntentClassificationTestResultItemCounts')
+    IntentClassificationTestResultItemList = Shapes::ListShape.new(name: 'IntentClassificationTestResultItemList')
+    IntentClassificationTestResults = Shapes::StructureShape.new(name: 'IntentClassificationTestResults')
     IntentClosingSetting = Shapes::StructureShape.new(name: 'IntentClosingSetting')
     IntentConfirmationSetting = Shapes::StructureShape.new(name: 'IntentConfirmationSetting')
     IntentFilter = Shapes::StructureShape.new(name: 'IntentFilter')
     IntentFilterName = Shapes::StringShape.new(name: 'IntentFilterName')
     IntentFilterOperator = Shapes::StringShape.new(name: 'IntentFilterOperator')
     IntentFilters = Shapes::ListShape.new(name: 'IntentFilters')
+    IntentLevelSlotResolutionTestResultItem = Shapes::StructureShape.new(name: 'IntentLevelSlotResolutionTestResultItem')
+    IntentLevelSlotResolutionTestResultItemList = Shapes::ListShape.new(name: 'IntentLevelSlotResolutionTestResultItemList')
+    IntentLevelSlotResolutionTestResults = Shapes::StructureShape.new(name: 'IntentLevelSlotResolutionTestResults')
     IntentOverride = Shapes::StructureShape.new(name: 'IntentOverride')
     IntentSignature = Shapes::StringShape.new(name: 'IntentSignature')
     IntentSortAttribute = Shapes::StringShape.new(name: 'IntentSortAttribute')
@@ -329,6 +370,14 @@ module Aws::LexModelsV2
     ListSlotsResponse = Shapes::StructureShape.new(name: 'ListSlotsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListTestExecutionResultItemsRequest = Shapes::StructureShape.new(name: 'ListTestExecutionResultItemsRequest')
+    ListTestExecutionResultItemsResponse = Shapes::StructureShape.new(name: 'ListTestExecutionResultItemsResponse')
+    ListTestExecutionsRequest = Shapes::StructureShape.new(name: 'ListTestExecutionsRequest')
+    ListTestExecutionsResponse = Shapes::StructureShape.new(name: 'ListTestExecutionsResponse')
+    ListTestSetRecordsRequest = Shapes::StructureShape.new(name: 'ListTestSetRecordsRequest')
+    ListTestSetRecordsResponse = Shapes::StructureShape.new(name: 'ListTestSetRecordsResponse')
+    ListTestSetsRequest = Shapes::StructureShape.new(name: 'ListTestSetsRequest')
+    ListTestSetsResponse = Shapes::StructureShape.new(name: 'ListTestSetsResponse')
     LocaleId = Shapes::StringShape.new(name: 'LocaleId')
     LocaleName = Shapes::StringShape.new(name: 'LocaleName')
     LogPrefix = Shapes::StringShape.new(name: 'LogPrefix')
@@ -356,6 +405,9 @@ module Aws::LexModelsV2
     OperationList = Shapes::ListShape.new(name: 'OperationList')
     OutputContext = Shapes::StructureShape.new(name: 'OutputContext')
     OutputContextsList = Shapes::ListShape.new(name: 'OutputContextsList')
+    OverallTestResultItem = Shapes::StructureShape.new(name: 'OverallTestResultItem')
+    OverallTestResultItemList = Shapes::ListShape.new(name: 'OverallTestResultItemList')
+    OverallTestResults = Shapes::StructureShape.new(name: 'OverallTestResults')
     ParentBotNetwork = Shapes::StructureShape.new(name: 'ParentBotNetwork')
     ParentBotNetworks = Shapes::ListShape.new(name: 'ParentBotNetworks')
     PathFormat = Shapes::StructureShape.new(name: 'PathFormat')
@@ -381,6 +433,7 @@ module Aws::LexModelsV2
     RecommendedActions = Shapes::ListShape.new(name: 'RecommendedActions')
     RecommendedIntentSummary = Shapes::StructureShape.new(name: 'RecommendedIntentSummary')
     RecommendedIntentSummaryList = Shapes::ListShape.new(name: 'RecommendedIntentSummaryList')
+    RecordNumber = Shapes::IntegerShape.new(name: 'RecordNumber')
     RegexPattern = Shapes::StringShape.new(name: 'RegexPattern')
     RelativeAggregationDuration = Shapes::StructureShape.new(name: 'RelativeAggregationDuration')
     ResourceCount = Shapes::IntegerShape.new(name: 'ResourceCount')
@@ -389,6 +442,11 @@ module Aws::LexModelsV2
     RetryAfterSeconds = Shapes::IntegerShape.new(name: 'RetryAfterSeconds')
     RevisionId = Shapes::StringShape.new(name: 'RevisionId')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    RuntimeHintDetails = Shapes::StructureShape.new(name: 'RuntimeHintDetails')
+    RuntimeHintPhrase = Shapes::StringShape.new(name: 'RuntimeHintPhrase')
+    RuntimeHintValue = Shapes::StructureShape.new(name: 'RuntimeHintValue')
+    RuntimeHintValuesList = Shapes::ListShape.new(name: 'RuntimeHintValuesList')
+    RuntimeHints = Shapes::StructureShape.new(name: 'RuntimeHints')
     S3BucketArn = Shapes::StringShape.new(name: 'S3BucketArn')
     S3BucketLogDestination = Shapes::StructureShape.new(name: 'S3BucketLogDestination')
     S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
@@ -419,8 +477,13 @@ module Aws::LexModelsV2
     SlotFilterName = Shapes::StringShape.new(name: 'SlotFilterName')
     SlotFilterOperator = Shapes::StringShape.new(name: 'SlotFilterOperator')
     SlotFilters = Shapes::ListShape.new(name: 'SlotFilters')
+    SlotHintsIntentMap = Shapes::MapShape.new(name: 'SlotHintsIntentMap')
+    SlotHintsSlotMap = Shapes::MapShape.new(name: 'SlotHintsSlotMap')
     SlotPrioritiesList = Shapes::ListShape.new(name: 'SlotPrioritiesList')
     SlotPriority = Shapes::StructureShape.new(name: 'SlotPriority')
+    SlotResolutionTestResultItem = Shapes::StructureShape.new(name: 'SlotResolutionTestResultItem')
+    SlotResolutionTestResultItemCounts = Shapes::StructureShape.new(name: 'SlotResolutionTestResultItemCounts')
+    SlotResolutionTestResultItems = Shapes::ListShape.new(name: 'SlotResolutionTestResultItems')
     SlotShape = Shapes::StringShape.new(name: 'SlotShape')
     SlotSortAttribute = Shapes::StringShape.new(name: 'SlotSortAttribute')
     SlotSortBy = Shapes::StructureShape.new(name: 'SlotSortBy')
@@ -453,6 +516,10 @@ module Aws::LexModelsV2
     StartBotRecommendationResponse = Shapes::StructureShape.new(name: 'StartBotRecommendationResponse')
     StartImportRequest = Shapes::StructureShape.new(name: 'StartImportRequest')
     StartImportResponse = Shapes::StructureShape.new(name: 'StartImportResponse')
+    StartTestExecutionRequest = Shapes::StructureShape.new(name: 'StartTestExecutionRequest')
+    StartTestExecutionResponse = Shapes::StructureShape.new(name: 'StartTestExecutionResponse')
+    StartTestSetGenerationRequest = Shapes::StructureShape.new(name: 'StartTestSetGenerationRequest')
+    StartTestSetGenerationResponse = Shapes::StructureShape.new(name: 'StartTestSetGenerationResponse')
     StillWaitingResponseFrequency = Shapes::IntegerShape.new(name: 'StillWaitingResponseFrequency')
     StillWaitingResponseSpecification = Shapes::StructureShape.new(name: 'StillWaitingResponseSpecification')
     StillWaitingResponseTimeout = Shapes::IntegerShape.new(name: 'StillWaitingResponseTimeout')
@@ -473,6 +540,46 @@ module Aws::LexModelsV2
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TestExecutionApiMode = Shapes::StringShape.new(name: 'TestExecutionApiMode')
+    TestExecutionModality = Shapes::StringShape.new(name: 'TestExecutionModality')
+    TestExecutionResultFilterBy = Shapes::StructureShape.new(name: 'TestExecutionResultFilterBy')
+    TestExecutionResultItems = Shapes::StructureShape.new(name: 'TestExecutionResultItems')
+    TestExecutionSortAttribute = Shapes::StringShape.new(name: 'TestExecutionSortAttribute')
+    TestExecutionSortBy = Shapes::StructureShape.new(name: 'TestExecutionSortBy')
+    TestExecutionStatus = Shapes::StringShape.new(name: 'TestExecutionStatus')
+    TestExecutionSummary = Shapes::StructureShape.new(name: 'TestExecutionSummary')
+    TestExecutionSummaryList = Shapes::ListShape.new(name: 'TestExecutionSummaryList')
+    TestExecutionTarget = Shapes::StructureShape.new(name: 'TestExecutionTarget')
+    TestResultMatchStatus = Shapes::StringShape.new(name: 'TestResultMatchStatus')
+    TestResultMatchStatusCountMap = Shapes::MapShape.new(name: 'TestResultMatchStatusCountMap')
+    TestResultSlotName = Shapes::StringShape.new(name: 'TestResultSlotName')
+    TestResultTypeFilter = Shapes::StringShape.new(name: 'TestResultTypeFilter')
+    TestSetAgentPrompt = Shapes::StringShape.new(name: 'TestSetAgentPrompt')
+    TestSetConversationId = Shapes::StringShape.new(name: 'TestSetConversationId')
+    TestSetDiscrepancyErrors = Shapes::StructureShape.new(name: 'TestSetDiscrepancyErrors')
+    TestSetDiscrepancyReportBotAliasTarget = Shapes::StructureShape.new(name: 'TestSetDiscrepancyReportBotAliasTarget')
+    TestSetDiscrepancyReportResourceTarget = Shapes::StructureShape.new(name: 'TestSetDiscrepancyReportResourceTarget')
+    TestSetDiscrepancyReportStatus = Shapes::StringShape.new(name: 'TestSetDiscrepancyReportStatus')
+    TestSetExportSpecification = Shapes::StructureShape.new(name: 'TestSetExportSpecification')
+    TestSetGenerationDataSource = Shapes::StructureShape.new(name: 'TestSetGenerationDataSource')
+    TestSetGenerationStatus = Shapes::StringShape.new(name: 'TestSetGenerationStatus')
+    TestSetImportInputLocation = Shapes::StructureShape.new(name: 'TestSetImportInputLocation')
+    TestSetImportResourceSpecification = Shapes::StructureShape.new(name: 'TestSetImportResourceSpecification')
+    TestSetIntentDiscrepancyItem = Shapes::StructureShape.new(name: 'TestSetIntentDiscrepancyItem')
+    TestSetIntentDiscrepancyList = Shapes::ListShape.new(name: 'TestSetIntentDiscrepancyList')
+    TestSetModality = Shapes::StringShape.new(name: 'TestSetModality')
+    TestSetSlotDiscrepancyItem = Shapes::StructureShape.new(name: 'TestSetSlotDiscrepancyItem')
+    TestSetSlotDiscrepancyList = Shapes::ListShape.new(name: 'TestSetSlotDiscrepancyList')
+    TestSetSortAttribute = Shapes::StringShape.new(name: 'TestSetSortAttribute')
+    TestSetSortBy = Shapes::StructureShape.new(name: 'TestSetSortBy')
+    TestSetStatus = Shapes::StringShape.new(name: 'TestSetStatus')
+    TestSetStorageLocation = Shapes::StructureShape.new(name: 'TestSetStorageLocation')
+    TestSetSummary = Shapes::StructureShape.new(name: 'TestSetSummary')
+    TestSetSummaryList = Shapes::ListShape.new(name: 'TestSetSummaryList')
+    TestSetTurnRecord = Shapes::StructureShape.new(name: 'TestSetTurnRecord')
+    TestSetTurnRecordList = Shapes::ListShape.new(name: 'TestSetTurnRecordList')
+    TestSetTurnResult = Shapes::StructureShape.new(name: 'TestSetTurnResult')
+    TestSetUtteranceText = Shapes::StringShape.new(name: 'TestSetUtteranceText')
     TextInputSpecification = Shapes::StructureShape.new(name: 'TextInputSpecification')
     TextLogDestination = Shapes::StructureShape.new(name: 'TextLogDestination')
     TextLogSetting = Shapes::StructureShape.new(name: 'TextLogSetting')
@@ -486,6 +593,8 @@ module Aws::LexModelsV2
     TranscriptFilter = Shapes::StructureShape.new(name: 'TranscriptFilter')
     TranscriptFormat = Shapes::StringShape.new(name: 'TranscriptFormat')
     TranscriptSourceSetting = Shapes::StructureShape.new(name: 'TranscriptSourceSetting')
+    TurnNumber = Shapes::IntegerShape.new(name: 'TurnNumber')
+    TurnSpecification = Shapes::StructureShape.new(name: 'TurnSpecification')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateBotAliasRequest = Shapes::StructureShape.new(name: 'UpdateBotAliasRequest')
@@ -507,8 +616,23 @@ module Aws::LexModelsV2
     UpdateSlotResponse = Shapes::StructureShape.new(name: 'UpdateSlotResponse')
     UpdateSlotTypeRequest = Shapes::StructureShape.new(name: 'UpdateSlotTypeRequest')
     UpdateSlotTypeResponse = Shapes::StructureShape.new(name: 'UpdateSlotTypeResponse')
+    UpdateTestSetRequest = Shapes::StructureShape.new(name: 'UpdateTestSetRequest')
+    UpdateTestSetResponse = Shapes::StructureShape.new(name: 'UpdateTestSetResponse')
+    UserTurnInputSpecification = Shapes::StructureShape.new(name: 'UserTurnInputSpecification')
+    UserTurnIntentOutput = Shapes::StructureShape.new(name: 'UserTurnIntentOutput')
+    UserTurnOutputSpecification = Shapes::StructureShape.new(name: 'UserTurnOutputSpecification')
+    UserTurnResult = Shapes::StructureShape.new(name: 'UserTurnResult')
+    UserTurnSlotOutput = Shapes::StructureShape.new(name: 'UserTurnSlotOutput')
+    UserTurnSlotOutputList = Shapes::ListShape.new(name: 'UserTurnSlotOutputList')
+    UserTurnSlotOutputMap = Shapes::MapShape.new(name: 'UserTurnSlotOutputMap')
+    UserTurnSpecification = Shapes::StructureShape.new(name: 'UserTurnSpecification')
     Utterance = Shapes::StringShape.new(name: 'Utterance')
     UtteranceAggregationDuration = Shapes::StructureShape.new(name: 'UtteranceAggregationDuration')
+    UtteranceAudioInputSpecification = Shapes::StructureShape.new(name: 'UtteranceAudioInputSpecification')
+    UtteranceInputSpecification = Shapes::StructureShape.new(name: 'UtteranceInputSpecification')
+    UtteranceLevelTestResultItem = Shapes::StructureShape.new(name: 'UtteranceLevelTestResultItem')
+    UtteranceLevelTestResultItemList = Shapes::ListShape.new(name: 'UtteranceLevelTestResultItemList')
+    UtteranceLevelTestResults = Shapes::StructureShape.new(name: 'UtteranceLevelTestResults')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     Value = Shapes::StringShape.new(name: 'Value')
     VoiceEngine = Shapes::StringShape.new(name: 'VoiceEngine')
@@ -517,8 +641,23 @@ module Aws::LexModelsV2
     WaitAndContinueSpecification = Shapes::StructureShape.new(name: 'WaitAndContinueSpecification')
     Weight = Shapes::IntegerShape.new(name: 'Weight')
 
+    ActiveContext.add_member(:name, Shapes::ShapeRef.new(shape: ActiveContextName, required: true, location_name: "name"))
+    ActiveContext.struct_class = Types::ActiveContext
+
+    ActiveContextList.member = Shapes::ShapeRef.new(shape: ActiveContext)
+
     AdvancedRecognitionSetting.add_member(:audio_recognition_strategy, Shapes::ShapeRef.new(shape: AudioRecognitionStrategy, location_name: "audioRecognitionStrategy"))
     AdvancedRecognitionSetting.struct_class = Types::AdvancedRecognitionSetting
+
+    AgentTurnResult.add_member(:expected_agent_prompt, Shapes::ShapeRef.new(shape: TestSetAgentPrompt, required: true, location_name: "expectedAgentPrompt"))
+    AgentTurnResult.add_member(:actual_agent_prompt, Shapes::ShapeRef.new(shape: TestSetAgentPrompt, location_name: "actualAgentPrompt"))
+    AgentTurnResult.add_member(:error_details, Shapes::ShapeRef.new(shape: ExecutionErrorDetails, location_name: "errorDetails"))
+    AgentTurnResult.add_member(:actual_elicited_slot, Shapes::ShapeRef.new(shape: TestResultSlotName, location_name: "actualElicitedSlot"))
+    AgentTurnResult.add_member(:actual_intent, Shapes::ShapeRef.new(shape: Name, location_name: "actualIntent"))
+    AgentTurnResult.struct_class = Types::AgentTurnResult
+
+    AgentTurnSpecification.add_member(:agent_prompt, Shapes::ShapeRef.new(shape: TestSetAgentPrompt, required: true, location_name: "agentPrompt"))
+    AgentTurnSpecification.struct_class = Types::AgentTurnSpecification
 
     AggregatedUtterancesFilter.add_member(:name, Shapes::ShapeRef.new(shape: AggregatedUtterancesFilterName, required: true, location_name: "name"))
     AggregatedUtterancesFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, required: true, location_name: "values"))
@@ -637,6 +776,11 @@ module Aws::LexModelsV2
     BotAliasSummary.struct_class = Types::BotAliasSummary
 
     BotAliasSummaryList.member = Shapes::ShapeRef.new(shape: BotAliasSummary)
+
+    BotAliasTestExecutionTarget.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "botId"))
+    BotAliasTestExecutionTarget.add_member(:bot_alias_id, Shapes::ShapeRef.new(shape: BotAliasId, required: true, location_name: "botAliasId"))
+    BotAliasTestExecutionTarget.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location_name: "localeId"))
+    BotAliasTestExecutionTarget.struct_class = Types::BotAliasTestExecutionTarget
 
     BotExportSpecification.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "botId"))
     BotExportSpecification.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, required: true, location_name: "botVersion"))
@@ -829,9 +973,52 @@ module Aws::LexModelsV2
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
 
+    ConversationLevelIntentClassificationResultItem.add_member(:intent_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "intentName"))
+    ConversationLevelIntentClassificationResultItem.add_member(:match_result, Shapes::ShapeRef.new(shape: TestResultMatchStatus, required: true, location_name: "matchResult"))
+    ConversationLevelIntentClassificationResultItem.struct_class = Types::ConversationLevelIntentClassificationResultItem
+
+    ConversationLevelIntentClassificationResults.member = Shapes::ShapeRef.new(shape: ConversationLevelIntentClassificationResultItem)
+
+    ConversationLevelResultDetail.add_member(:end_to_end_result, Shapes::ShapeRef.new(shape: TestResultMatchStatus, required: true, location_name: "endToEndResult"))
+    ConversationLevelResultDetail.add_member(:speech_transcription_result, Shapes::ShapeRef.new(shape: TestResultMatchStatus, location_name: "speechTranscriptionResult"))
+    ConversationLevelResultDetail.struct_class = Types::ConversationLevelResultDetail
+
+    ConversationLevelSlotResolutionResultItem.add_member(:intent_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "intentName"))
+    ConversationLevelSlotResolutionResultItem.add_member(:slot_name, Shapes::ShapeRef.new(shape: TestResultSlotName, required: true, location_name: "slotName"))
+    ConversationLevelSlotResolutionResultItem.add_member(:match_result, Shapes::ShapeRef.new(shape: TestResultMatchStatus, required: true, location_name: "matchResult"))
+    ConversationLevelSlotResolutionResultItem.struct_class = Types::ConversationLevelSlotResolutionResultItem
+
+    ConversationLevelSlotResolutionResults.member = Shapes::ShapeRef.new(shape: ConversationLevelSlotResolutionResultItem)
+
+    ConversationLevelTestResultItem.add_member(:conversation_id, Shapes::ShapeRef.new(shape: TestSetConversationId, required: true, location_name: "conversationId"))
+    ConversationLevelTestResultItem.add_member(:end_to_end_result, Shapes::ShapeRef.new(shape: TestResultMatchStatus, required: true, location_name: "endToEndResult"))
+    ConversationLevelTestResultItem.add_member(:speech_transcription_result, Shapes::ShapeRef.new(shape: TestResultMatchStatus, location_name: "speechTranscriptionResult"))
+    ConversationLevelTestResultItem.add_member(:intent_classification_results, Shapes::ShapeRef.new(shape: ConversationLevelIntentClassificationResults, required: true, location_name: "intentClassificationResults"))
+    ConversationLevelTestResultItem.add_member(:slot_resolution_results, Shapes::ShapeRef.new(shape: ConversationLevelSlotResolutionResults, required: true, location_name: "slotResolutionResults"))
+    ConversationLevelTestResultItem.struct_class = Types::ConversationLevelTestResultItem
+
+    ConversationLevelTestResultItemList.member = Shapes::ShapeRef.new(shape: ConversationLevelTestResultItem)
+
+    ConversationLevelTestResults.add_member(:items, Shapes::ShapeRef.new(shape: ConversationLevelTestResultItemList, required: true, location_name: "items"))
+    ConversationLevelTestResults.struct_class = Types::ConversationLevelTestResults
+
+    ConversationLevelTestResultsFilterBy.add_member(:end_to_end_result, Shapes::ShapeRef.new(shape: TestResultMatchStatus, location_name: "endToEndResult"))
+    ConversationLevelTestResultsFilterBy.struct_class = Types::ConversationLevelTestResultsFilterBy
+
     ConversationLogSettings.add_member(:text_log_settings, Shapes::ShapeRef.new(shape: TextLogSettingsList, location_name: "textLogSettings"))
     ConversationLogSettings.add_member(:audio_log_settings, Shapes::ShapeRef.new(shape: AudioLogSettingsList, location_name: "audioLogSettings"))
     ConversationLogSettings.struct_class = Types::ConversationLogSettings
+
+    ConversationLogsDataSource.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "botId"))
+    ConversationLogsDataSource.add_member(:bot_alias_id, Shapes::ShapeRef.new(shape: BotAliasId, required: true, location_name: "botAliasId"))
+    ConversationLogsDataSource.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location_name: "localeId"))
+    ConversationLogsDataSource.add_member(:filter, Shapes::ShapeRef.new(shape: ConversationLogsDataSourceFilterBy, required: true, location_name: "filter"))
+    ConversationLogsDataSource.struct_class = Types::ConversationLogsDataSource
+
+    ConversationLogsDataSourceFilterBy.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startTime"))
+    ConversationLogsDataSourceFilterBy.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endTime"))
+    ConversationLogsDataSourceFilterBy.add_member(:input_mode, Shapes::ShapeRef.new(shape: ConversationLogsInputModeFilter, required: true, location_name: "inputMode"))
+    ConversationLogsDataSourceFilterBy.struct_class = Types::ConversationLogsDataSourceFilterBy
 
     CreateBotAliasRequest.add_member(:bot_alias_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "botAliasName"))
     CreateBotAliasRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
@@ -1038,6 +1225,16 @@ module Aws::LexModelsV2
     CreateSlotTypeResponse.add_member(:composite_slot_type_setting, Shapes::ShapeRef.new(shape: CompositeSlotTypeSetting, location_name: "compositeSlotTypeSetting"))
     CreateSlotTypeResponse.struct_class = Types::CreateSlotTypeResponse
 
+    CreateTestSetDiscrepancyReportRequest.add_member(:test_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "testSetId"))
+    CreateTestSetDiscrepancyReportRequest.add_member(:target, Shapes::ShapeRef.new(shape: TestSetDiscrepancyReportResourceTarget, required: true, location_name: "target"))
+    CreateTestSetDiscrepancyReportRequest.struct_class = Types::CreateTestSetDiscrepancyReportRequest
+
+    CreateTestSetDiscrepancyReportResponse.add_member(:test_set_discrepancy_report_id, Shapes::ShapeRef.new(shape: Id, location_name: "testSetDiscrepancyReportId"))
+    CreateTestSetDiscrepancyReportResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    CreateTestSetDiscrepancyReportResponse.add_member(:test_set_id, Shapes::ShapeRef.new(shape: Id, location_name: "testSetId"))
+    CreateTestSetDiscrepancyReportResponse.add_member(:target, Shapes::ShapeRef.new(shape: TestSetDiscrepancyReportResourceTarget, location_name: "target"))
+    CreateTestSetDiscrepancyReportResponse.struct_class = Types::CreateTestSetDiscrepancyReportResponse
+
     CreateUploadUrlRequest.struct_class = Types::CreateUploadUrlRequest
 
     CreateUploadUrlResponse.add_member(:import_id, Shapes::ShapeRef.new(shape: Id, location_name: "importId"))
@@ -1187,6 +1384,9 @@ module Aws::LexModelsV2
     DeleteSlotTypeRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location: "uri", location_name: "localeId"))
     DeleteSlotTypeRequest.add_member(:skip_resource_in_use_check, Shapes::ShapeRef.new(shape: SkipResourceInUseCheck, location: "querystring", location_name: "skipResourceInUseCheck"))
     DeleteSlotTypeRequest.struct_class = Types::DeleteSlotTypeRequest
+
+    DeleteTestSetRequest.add_member(:test_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "testSetId"))
+    DeleteTestSetRequest.struct_class = Types::DeleteTestSetRequest
 
     DeleteUtterancesRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
     DeleteUtterancesRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, location: "querystring", location_name: "localeId"))
@@ -1411,6 +1611,66 @@ module Aws::LexModelsV2
     DescribeSlotTypeResponse.add_member(:composite_slot_type_setting, Shapes::ShapeRef.new(shape: CompositeSlotTypeSetting, location_name: "compositeSlotTypeSetting"))
     DescribeSlotTypeResponse.struct_class = Types::DescribeSlotTypeResponse
 
+    DescribeTestExecutionRequest.add_member(:test_execution_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "testExecutionId"))
+    DescribeTestExecutionRequest.struct_class = Types::DescribeTestExecutionRequest
+
+    DescribeTestExecutionResponse.add_member(:test_execution_id, Shapes::ShapeRef.new(shape: Id, location_name: "testExecutionId"))
+    DescribeTestExecutionResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    DescribeTestExecutionResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
+    DescribeTestExecutionResponse.add_member(:test_execution_status, Shapes::ShapeRef.new(shape: TestExecutionStatus, location_name: "testExecutionStatus"))
+    DescribeTestExecutionResponse.add_member(:test_set_id, Shapes::ShapeRef.new(shape: Id, location_name: "testSetId"))
+    DescribeTestExecutionResponse.add_member(:test_set_name, Shapes::ShapeRef.new(shape: Name, location_name: "testSetName"))
+    DescribeTestExecutionResponse.add_member(:target, Shapes::ShapeRef.new(shape: TestExecutionTarget, location_name: "target"))
+    DescribeTestExecutionResponse.add_member(:api_mode, Shapes::ShapeRef.new(shape: TestExecutionApiMode, location_name: "apiMode"))
+    DescribeTestExecutionResponse.add_member(:test_execution_modality, Shapes::ShapeRef.new(shape: TestExecutionModality, location_name: "testExecutionModality"))
+    DescribeTestExecutionResponse.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
+    DescribeTestExecutionResponse.struct_class = Types::DescribeTestExecutionResponse
+
+    DescribeTestSetDiscrepancyReportRequest.add_member(:test_set_discrepancy_report_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "testSetDiscrepancyReportId"))
+    DescribeTestSetDiscrepancyReportRequest.struct_class = Types::DescribeTestSetDiscrepancyReportRequest
+
+    DescribeTestSetDiscrepancyReportResponse.add_member(:test_set_discrepancy_report_id, Shapes::ShapeRef.new(shape: Id, location_name: "testSetDiscrepancyReportId"))
+    DescribeTestSetDiscrepancyReportResponse.add_member(:test_set_id, Shapes::ShapeRef.new(shape: Id, location_name: "testSetId"))
+    DescribeTestSetDiscrepancyReportResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    DescribeTestSetDiscrepancyReportResponse.add_member(:target, Shapes::ShapeRef.new(shape: TestSetDiscrepancyReportResourceTarget, location_name: "target"))
+    DescribeTestSetDiscrepancyReportResponse.add_member(:test_set_discrepancy_report_status, Shapes::ShapeRef.new(shape: TestSetDiscrepancyReportStatus, location_name: "testSetDiscrepancyReportStatus"))
+    DescribeTestSetDiscrepancyReportResponse.add_member(:last_updated_data_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDataTime"))
+    DescribeTestSetDiscrepancyReportResponse.add_member(:test_set_discrepancy_top_errors, Shapes::ShapeRef.new(shape: TestSetDiscrepancyErrors, location_name: "testSetDiscrepancyTopErrors"))
+    DescribeTestSetDiscrepancyReportResponse.add_member(:test_set_discrepancy_raw_output_url, Shapes::ShapeRef.new(shape: PresignedS3Url, location_name: "testSetDiscrepancyRawOutputUrl"))
+    DescribeTestSetDiscrepancyReportResponse.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
+    DescribeTestSetDiscrepancyReportResponse.struct_class = Types::DescribeTestSetDiscrepancyReportResponse
+
+    DescribeTestSetGenerationRequest.add_member(:test_set_generation_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "testSetGenerationId"))
+    DescribeTestSetGenerationRequest.struct_class = Types::DescribeTestSetGenerationRequest
+
+    DescribeTestSetGenerationResponse.add_member(:test_set_generation_id, Shapes::ShapeRef.new(shape: Id, location_name: "testSetGenerationId"))
+    DescribeTestSetGenerationResponse.add_member(:test_set_generation_status, Shapes::ShapeRef.new(shape: TestSetGenerationStatus, location_name: "testSetGenerationStatus"))
+    DescribeTestSetGenerationResponse.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
+    DescribeTestSetGenerationResponse.add_member(:test_set_id, Shapes::ShapeRef.new(shape: Id, location_name: "testSetId"))
+    DescribeTestSetGenerationResponse.add_member(:test_set_name, Shapes::ShapeRef.new(shape: Name, location_name: "testSetName"))
+    DescribeTestSetGenerationResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    DescribeTestSetGenerationResponse.add_member(:storage_location, Shapes::ShapeRef.new(shape: TestSetStorageLocation, location_name: "storageLocation"))
+    DescribeTestSetGenerationResponse.add_member(:generation_data_source, Shapes::ShapeRef.new(shape: TestSetGenerationDataSource, location_name: "generationDataSource"))
+    DescribeTestSetGenerationResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    DescribeTestSetGenerationResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    DescribeTestSetGenerationResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
+    DescribeTestSetGenerationResponse.struct_class = Types::DescribeTestSetGenerationResponse
+
+    DescribeTestSetRequest.add_member(:test_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "testSetId"))
+    DescribeTestSetRequest.struct_class = Types::DescribeTestSetRequest
+
+    DescribeTestSetResponse.add_member(:test_set_id, Shapes::ShapeRef.new(shape: Id, location_name: "testSetId"))
+    DescribeTestSetResponse.add_member(:test_set_name, Shapes::ShapeRef.new(shape: Name, location_name: "testSetName"))
+    DescribeTestSetResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    DescribeTestSetResponse.add_member(:modality, Shapes::ShapeRef.new(shape: TestSetModality, location_name: "modality"))
+    DescribeTestSetResponse.add_member(:status, Shapes::ShapeRef.new(shape: TestSetStatus, location_name: "status"))
+    DescribeTestSetResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    DescribeTestSetResponse.add_member(:num_turns, Shapes::ShapeRef.new(shape: Count, location_name: "numTurns"))
+    DescribeTestSetResponse.add_member(:storage_location, Shapes::ShapeRef.new(shape: TestSetStorageLocation, location_name: "storageLocation"))
+    DescribeTestSetResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    DescribeTestSetResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
+    DescribeTestSetResponse.struct_class = Types::DescribeTestSetResponse
+
     DialogAction.add_member(:type, Shapes::ShapeRef.new(shape: DialogActionType, required: true, location_name: "type"))
     DialogAction.add_member(:slot_to_elicit, Shapes::ShapeRef.new(shape: Name, location_name: "slotToElicit"))
     DialogAction.add_member(:suppress_next_message, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "suppressNextMessage"))
@@ -1439,6 +1699,10 @@ module Aws::LexModelsV2
     EncryptionSetting.add_member(:associated_transcripts_password, Shapes::ShapeRef.new(shape: FilePassword, location_name: "associatedTranscriptsPassword"))
     EncryptionSetting.struct_class = Types::EncryptionSetting
 
+    ExecutionErrorDetails.add_member(:error_code, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "errorCode"))
+    ExecutionErrorDetails.add_member(:error_message, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "errorMessage"))
+    ExecutionErrorDetails.struct_class = Types::ExecutionErrorDetails
+
     ExportFilter.add_member(:name, Shapes::ShapeRef.new(shape: ExportFilterName, required: true, location_name: "name"))
     ExportFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, required: true, location_name: "values"))
     ExportFilter.add_member(:operator, Shapes::ShapeRef.new(shape: ExportFilterOperator, required: true, location_name: "operator"))
@@ -1449,6 +1713,7 @@ module Aws::LexModelsV2
     ExportResourceSpecification.add_member(:bot_export_specification, Shapes::ShapeRef.new(shape: BotExportSpecification, location_name: "botExportSpecification"))
     ExportResourceSpecification.add_member(:bot_locale_export_specification, Shapes::ShapeRef.new(shape: BotLocaleExportSpecification, location_name: "botLocaleExportSpecification"))
     ExportResourceSpecification.add_member(:custom_vocabulary_export_specification, Shapes::ShapeRef.new(shape: CustomVocabularyExportSpecification, location_name: "customVocabularyExportSpecification"))
+    ExportResourceSpecification.add_member(:test_set_export_specification, Shapes::ShapeRef.new(shape: TestSetExportSpecification, location_name: "testSetExportSpecification"))
     ExportResourceSpecification.struct_class = Types::ExportResourceSpecification
 
     ExportSortBy.add_member(:attribute, Shapes::ShapeRef.new(shape: ExportSortAttribute, required: true, location_name: "attribute"))
@@ -1501,6 +1766,13 @@ module Aws::LexModelsV2
     FulfillmentUpdatesSpecification.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: FulfillmentTimeout, location_name: "timeoutInSeconds"))
     FulfillmentUpdatesSpecification.struct_class = Types::FulfillmentUpdatesSpecification
 
+    GetTestExecutionArtifactsUrlRequest.add_member(:test_execution_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "testExecutionId"))
+    GetTestExecutionArtifactsUrlRequest.struct_class = Types::GetTestExecutionArtifactsUrlRequest
+
+    GetTestExecutionArtifactsUrlResponse.add_member(:test_execution_id, Shapes::ShapeRef.new(shape: Id, location_name: "testExecutionId"))
+    GetTestExecutionArtifactsUrlResponse.add_member(:download_artifacts_url, Shapes::ShapeRef.new(shape: PresignedS3Url, location_name: "downloadArtifactsUrl"))
+    GetTestExecutionArtifactsUrlResponse.struct_class = Types::GetTestExecutionArtifactsUrlResponse
+
     GrammarSlotTypeSetting.add_member(:source, Shapes::ShapeRef.new(shape: GrammarSlotTypeSource, location_name: "source"))
     GrammarSlotTypeSetting.struct_class = Types::GrammarSlotTypeSetting
 
@@ -1525,6 +1797,7 @@ module Aws::LexModelsV2
     ImportResourceSpecification.add_member(:bot_import_specification, Shapes::ShapeRef.new(shape: BotImportSpecification, location_name: "botImportSpecification"))
     ImportResourceSpecification.add_member(:bot_locale_import_specification, Shapes::ShapeRef.new(shape: BotLocaleImportSpecification, location_name: "botLocaleImportSpecification"))
     ImportResourceSpecification.add_member(:custom_vocabulary_import_specification, Shapes::ShapeRef.new(shape: CustomVocabularyImportSpecification, location_name: "customVocabularyImportSpecification"))
+    ImportResourceSpecification.add_member(:test_set_import_resource_specification, Shapes::ShapeRef.new(shape: TestSetImportResourceSpecification, location_name: "testSetImportResourceSpecification"))
     ImportResourceSpecification.struct_class = Types::ImportResourceSpecification
 
     ImportSortBy.add_member(:attribute, Shapes::ShapeRef.new(shape: ImportSortAttribute, required: true, location_name: "attribute"))
@@ -1554,6 +1827,26 @@ module Aws::LexModelsV2
 
     InputContextsList.member = Shapes::ShapeRef.new(shape: InputContext)
 
+    InputSessionStateSpecification.add_member(:session_attributes, Shapes::ShapeRef.new(shape: StringMap, location_name: "sessionAttributes"))
+    InputSessionStateSpecification.add_member(:active_contexts, Shapes::ShapeRef.new(shape: ActiveContextList, location_name: "activeContexts"))
+    InputSessionStateSpecification.add_member(:runtime_hints, Shapes::ShapeRef.new(shape: RuntimeHints, location_name: "runtimeHints"))
+    InputSessionStateSpecification.struct_class = Types::InputSessionStateSpecification
+
+    IntentClassificationTestResultItem.add_member(:intent_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "intentName"))
+    IntentClassificationTestResultItem.add_member(:multi_turn_conversation, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "multiTurnConversation"))
+    IntentClassificationTestResultItem.add_member(:result_counts, Shapes::ShapeRef.new(shape: IntentClassificationTestResultItemCounts, required: true, location_name: "resultCounts"))
+    IntentClassificationTestResultItem.struct_class = Types::IntentClassificationTestResultItem
+
+    IntentClassificationTestResultItemCounts.add_member(:total_result_count, Shapes::ShapeRef.new(shape: Count, required: true, location_name: "totalResultCount"))
+    IntentClassificationTestResultItemCounts.add_member(:speech_transcription_result_counts, Shapes::ShapeRef.new(shape: TestResultMatchStatusCountMap, location_name: "speechTranscriptionResultCounts"))
+    IntentClassificationTestResultItemCounts.add_member(:intent_match_result_counts, Shapes::ShapeRef.new(shape: TestResultMatchStatusCountMap, required: true, location_name: "intentMatchResultCounts"))
+    IntentClassificationTestResultItemCounts.struct_class = Types::IntentClassificationTestResultItemCounts
+
+    IntentClassificationTestResultItemList.member = Shapes::ShapeRef.new(shape: IntentClassificationTestResultItem)
+
+    IntentClassificationTestResults.add_member(:items, Shapes::ShapeRef.new(shape: IntentClassificationTestResultItemList, required: true, location_name: "items"))
+    IntentClassificationTestResults.struct_class = Types::IntentClassificationTestResults
+
     IntentClosingSetting.add_member(:closing_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "closingResponse"))
     IntentClosingSetting.add_member(:active, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "active"))
     IntentClosingSetting.add_member(:next_step, Shapes::ShapeRef.new(shape: DialogState, location_name: "nextStep"))
@@ -1581,6 +1874,16 @@ module Aws::LexModelsV2
     IntentFilter.struct_class = Types::IntentFilter
 
     IntentFilters.member = Shapes::ShapeRef.new(shape: IntentFilter)
+
+    IntentLevelSlotResolutionTestResultItem.add_member(:intent_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "intentName"))
+    IntentLevelSlotResolutionTestResultItem.add_member(:multi_turn_conversation, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "multiTurnConversation"))
+    IntentLevelSlotResolutionTestResultItem.add_member(:slot_resolution_results, Shapes::ShapeRef.new(shape: SlotResolutionTestResultItems, required: true, location_name: "slotResolutionResults"))
+    IntentLevelSlotResolutionTestResultItem.struct_class = Types::IntentLevelSlotResolutionTestResultItem
+
+    IntentLevelSlotResolutionTestResultItemList.member = Shapes::ShapeRef.new(shape: IntentLevelSlotResolutionTestResultItem)
+
+    IntentLevelSlotResolutionTestResults.add_member(:items, Shapes::ShapeRef.new(shape: IntentLevelSlotResolutionTestResultItemList, required: true, location_name: "items"))
+    IntentLevelSlotResolutionTestResults.struct_class = Types::IntentLevelSlotResolutionTestResults
 
     IntentOverride.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     IntentOverride.add_member(:slots, Shapes::ShapeRef.new(shape: SlotValueOverrideMap, location_name: "slots"))
@@ -1841,6 +2144,43 @@ module Aws::LexModelsV2
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    ListTestExecutionResultItemsRequest.add_member(:test_execution_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "testExecutionId"))
+    ListTestExecutionResultItemsRequest.add_member(:result_filter_by, Shapes::ShapeRef.new(shape: TestExecutionResultFilterBy, required: true, location_name: "resultFilterBy"))
+    ListTestExecutionResultItemsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListTestExecutionResultItemsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListTestExecutionResultItemsRequest.struct_class = Types::ListTestExecutionResultItemsRequest
+
+    ListTestExecutionResultItemsResponse.add_member(:test_execution_results, Shapes::ShapeRef.new(shape: TestExecutionResultItems, location_name: "testExecutionResults"))
+    ListTestExecutionResultItemsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListTestExecutionResultItemsResponse.struct_class = Types::ListTestExecutionResultItemsResponse
+
+    ListTestExecutionsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: TestExecutionSortBy, location_name: "sortBy"))
+    ListTestExecutionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListTestExecutionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListTestExecutionsRequest.struct_class = Types::ListTestExecutionsRequest
+
+    ListTestExecutionsResponse.add_member(:test_executions, Shapes::ShapeRef.new(shape: TestExecutionSummaryList, location_name: "testExecutions"))
+    ListTestExecutionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListTestExecutionsResponse.struct_class = Types::ListTestExecutionsResponse
+
+    ListTestSetRecordsRequest.add_member(:test_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "testSetId"))
+    ListTestSetRecordsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListTestSetRecordsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListTestSetRecordsRequest.struct_class = Types::ListTestSetRecordsRequest
+
+    ListTestSetRecordsResponse.add_member(:test_set_records, Shapes::ShapeRef.new(shape: TestSetTurnRecordList, location_name: "testSetRecords"))
+    ListTestSetRecordsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListTestSetRecordsResponse.struct_class = Types::ListTestSetRecordsResponse
+
+    ListTestSetsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: TestSetSortBy, location_name: "sortBy"))
+    ListTestSetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListTestSetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListTestSetsRequest.struct_class = Types::ListTestSetsRequest
+
+    ListTestSetsResponse.add_member(:test_sets, Shapes::ShapeRef.new(shape: TestSetSummaryList, location_name: "testSets"))
+    ListTestSetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListTestSetsResponse.struct_class = Types::ListTestSetsResponse
+
     Message.add_member(:plain_text_message, Shapes::ShapeRef.new(shape: PlainTextMessage, location_name: "plainTextMessage"))
     Message.add_member(:custom_payload, Shapes::ShapeRef.new(shape: CustomPayload, location_name: "customPayload"))
     Message.add_member(:ssml_message, Shapes::ShapeRef.new(shape: SSMLMessage, location_name: "ssmlMessage"))
@@ -1876,6 +2216,17 @@ module Aws::LexModelsV2
     OutputContext.struct_class = Types::OutputContext
 
     OutputContextsList.member = Shapes::ShapeRef.new(shape: OutputContext)
+
+    OverallTestResultItem.add_member(:multi_turn_conversation, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "multiTurnConversation"))
+    OverallTestResultItem.add_member(:total_result_count, Shapes::ShapeRef.new(shape: Count, required: true, location_name: "totalResultCount"))
+    OverallTestResultItem.add_member(:speech_transcription_result_counts, Shapes::ShapeRef.new(shape: TestResultMatchStatusCountMap, location_name: "speechTranscriptionResultCounts"))
+    OverallTestResultItem.add_member(:end_to_end_result_counts, Shapes::ShapeRef.new(shape: TestResultMatchStatusCountMap, required: true, location_name: "endToEndResultCounts"))
+    OverallTestResultItem.struct_class = Types::OverallTestResultItem
+
+    OverallTestResultItemList.member = Shapes::ShapeRef.new(shape: OverallTestResultItem)
+
+    OverallTestResults.add_member(:items, Shapes::ShapeRef.new(shape: OverallTestResultItemList, required: true, location_name: "items"))
+    OverallTestResults.struct_class = Types::OverallTestResults
 
     ParentBotNetwork.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "botId"))
     ParentBotNetwork.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, required: true, location_name: "botVersion"))
@@ -1956,6 +2307,18 @@ module Aws::LexModelsV2
     ResponseSpecification.add_member(:allow_interrupt, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "allowInterrupt"))
     ResponseSpecification.struct_class = Types::ResponseSpecification
 
+    RuntimeHintDetails.add_member(:runtime_hint_values, Shapes::ShapeRef.new(shape: RuntimeHintValuesList, location_name: "runtimeHintValues"))
+    RuntimeHintDetails.add_member(:sub_slot_hints, Shapes::ShapeRef.new(shape: SlotHintsSlotMap, location_name: "subSlotHints"))
+    RuntimeHintDetails.struct_class = Types::RuntimeHintDetails
+
+    RuntimeHintValue.add_member(:phrase, Shapes::ShapeRef.new(shape: RuntimeHintPhrase, required: true, location_name: "phrase"))
+    RuntimeHintValue.struct_class = Types::RuntimeHintValue
+
+    RuntimeHintValuesList.member = Shapes::ShapeRef.new(shape: RuntimeHintValue)
+
+    RuntimeHints.add_member(:slot_hints, Shapes::ShapeRef.new(shape: SlotHintsIntentMap, location_name: "slotHints"))
+    RuntimeHints.struct_class = Types::RuntimeHints
+
     S3BucketLogDestination.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     S3BucketLogDestination.add_member(:s3_bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, required: true, location_name: "s3BucketArn"))
     S3BucketLogDestination.add_member(:log_prefix, Shapes::ShapeRef.new(shape: LogPrefix, required: true, location_name: "logPrefix"))
@@ -2029,11 +2392,28 @@ module Aws::LexModelsV2
 
     SlotFilters.member = Shapes::ShapeRef.new(shape: SlotFilter)
 
+    SlotHintsIntentMap.key = Shapes::ShapeRef.new(shape: Name)
+    SlotHintsIntentMap.value = Shapes::ShapeRef.new(shape: SlotHintsSlotMap)
+
+    SlotHintsSlotMap.key = Shapes::ShapeRef.new(shape: Name)
+    SlotHintsSlotMap.value = Shapes::ShapeRef.new(shape: RuntimeHintDetails)
+
     SlotPrioritiesList.member = Shapes::ShapeRef.new(shape: SlotPriority)
 
     SlotPriority.add_member(:priority, Shapes::ShapeRef.new(shape: PriorityValue, required: true, location_name: "priority"))
     SlotPriority.add_member(:slot_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "slotId"))
     SlotPriority.struct_class = Types::SlotPriority
+
+    SlotResolutionTestResultItem.add_member(:slot_name, Shapes::ShapeRef.new(shape: TestResultSlotName, required: true, location_name: "slotName"))
+    SlotResolutionTestResultItem.add_member(:result_counts, Shapes::ShapeRef.new(shape: SlotResolutionTestResultItemCounts, required: true, location_name: "resultCounts"))
+    SlotResolutionTestResultItem.struct_class = Types::SlotResolutionTestResultItem
+
+    SlotResolutionTestResultItemCounts.add_member(:total_result_count, Shapes::ShapeRef.new(shape: Count, required: true, location_name: "totalResultCount"))
+    SlotResolutionTestResultItemCounts.add_member(:speech_transcription_result_counts, Shapes::ShapeRef.new(shape: TestResultMatchStatusCountMap, location_name: "speechTranscriptionResultCounts"))
+    SlotResolutionTestResultItemCounts.add_member(:slot_match_result_counts, Shapes::ShapeRef.new(shape: TestResultMatchStatusCountMap, required: true, location_name: "slotMatchResultCounts"))
+    SlotResolutionTestResultItemCounts.struct_class = Types::SlotResolutionTestResultItemCounts
+
+    SlotResolutionTestResultItems.member = Shapes::ShapeRef.new(shape: SlotResolutionTestResultItem)
 
     SlotSortBy.add_member(:attribute, Shapes::ShapeRef.new(shape: SlotSortAttribute, required: true, location_name: "attribute"))
     SlotSortBy.add_member(:order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "order"))
@@ -2143,6 +2523,39 @@ module Aws::LexModelsV2
     StartImportResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     StartImportResponse.struct_class = Types::StartImportResponse
 
+    StartTestExecutionRequest.add_member(:test_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "testSetId"))
+    StartTestExecutionRequest.add_member(:target, Shapes::ShapeRef.new(shape: TestExecutionTarget, required: true, location_name: "target"))
+    StartTestExecutionRequest.add_member(:api_mode, Shapes::ShapeRef.new(shape: TestExecutionApiMode, required: true, location_name: "apiMode"))
+    StartTestExecutionRequest.add_member(:test_execution_modality, Shapes::ShapeRef.new(shape: TestExecutionModality, location_name: "testExecutionModality"))
+    StartTestExecutionRequest.struct_class = Types::StartTestExecutionRequest
+
+    StartTestExecutionResponse.add_member(:test_execution_id, Shapes::ShapeRef.new(shape: Id, location_name: "testExecutionId"))
+    StartTestExecutionResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    StartTestExecutionResponse.add_member(:test_set_id, Shapes::ShapeRef.new(shape: Id, location_name: "testSetId"))
+    StartTestExecutionResponse.add_member(:target, Shapes::ShapeRef.new(shape: TestExecutionTarget, location_name: "target"))
+    StartTestExecutionResponse.add_member(:api_mode, Shapes::ShapeRef.new(shape: TestExecutionApiMode, location_name: "apiMode"))
+    StartTestExecutionResponse.add_member(:test_execution_modality, Shapes::ShapeRef.new(shape: TestExecutionModality, location_name: "testExecutionModality"))
+    StartTestExecutionResponse.struct_class = Types::StartTestExecutionResponse
+
+    StartTestSetGenerationRequest.add_member(:test_set_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "testSetName"))
+    StartTestSetGenerationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    StartTestSetGenerationRequest.add_member(:storage_location, Shapes::ShapeRef.new(shape: TestSetStorageLocation, required: true, location_name: "storageLocation"))
+    StartTestSetGenerationRequest.add_member(:generation_data_source, Shapes::ShapeRef.new(shape: TestSetGenerationDataSource, required: true, location_name: "generationDataSource"))
+    StartTestSetGenerationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    StartTestSetGenerationRequest.add_member(:test_set_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "testSetTags"))
+    StartTestSetGenerationRequest.struct_class = Types::StartTestSetGenerationRequest
+
+    StartTestSetGenerationResponse.add_member(:test_set_generation_id, Shapes::ShapeRef.new(shape: Id, location_name: "testSetGenerationId"))
+    StartTestSetGenerationResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    StartTestSetGenerationResponse.add_member(:test_set_generation_status, Shapes::ShapeRef.new(shape: TestSetGenerationStatus, location_name: "testSetGenerationStatus"))
+    StartTestSetGenerationResponse.add_member(:test_set_name, Shapes::ShapeRef.new(shape: Name, location_name: "testSetName"))
+    StartTestSetGenerationResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    StartTestSetGenerationResponse.add_member(:storage_location, Shapes::ShapeRef.new(shape: TestSetStorageLocation, location_name: "storageLocation"))
+    StartTestSetGenerationResponse.add_member(:generation_data_source, Shapes::ShapeRef.new(shape: TestSetGenerationDataSource, location_name: "generationDataSource"))
+    StartTestSetGenerationResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    StartTestSetGenerationResponse.add_member(:test_set_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "testSetTags"))
+    StartTestSetGenerationResponse.struct_class = Types::StartTestSetGenerationResponse
+
     StillWaitingResponseSpecification.add_member(:message_groups, Shapes::ShapeRef.new(shape: MessageGroupsList, required: true, location_name: "messageGroups"))
     StillWaitingResponseSpecification.add_member(:frequency_in_seconds, Shapes::ShapeRef.new(shape: StillWaitingResponseFrequency, required: true, location_name: "frequencyInSeconds"))
     StillWaitingResponseSpecification.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: StillWaitingResponseTimeout, required: true, location_name: "timeoutInSeconds"))
@@ -2197,6 +2610,119 @@ module Aws::LexModelsV2
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
+    TestExecutionResultFilterBy.add_member(:result_type_filter, Shapes::ShapeRef.new(shape: TestResultTypeFilter, required: true, location_name: "resultTypeFilter"))
+    TestExecutionResultFilterBy.add_member(:conversation_level_test_results_filter_by, Shapes::ShapeRef.new(shape: ConversationLevelTestResultsFilterBy, location_name: "conversationLevelTestResultsFilterBy"))
+    TestExecutionResultFilterBy.struct_class = Types::TestExecutionResultFilterBy
+
+    TestExecutionResultItems.add_member(:overall_test_results, Shapes::ShapeRef.new(shape: OverallTestResults, location_name: "overallTestResults"))
+    TestExecutionResultItems.add_member(:conversation_level_test_results, Shapes::ShapeRef.new(shape: ConversationLevelTestResults, location_name: "conversationLevelTestResults"))
+    TestExecutionResultItems.add_member(:intent_classification_test_results, Shapes::ShapeRef.new(shape: IntentClassificationTestResults, location_name: "intentClassificationTestResults"))
+    TestExecutionResultItems.add_member(:intent_level_slot_resolution_test_results, Shapes::ShapeRef.new(shape: IntentLevelSlotResolutionTestResults, location_name: "intentLevelSlotResolutionTestResults"))
+    TestExecutionResultItems.add_member(:utterance_level_test_results, Shapes::ShapeRef.new(shape: UtteranceLevelTestResults, location_name: "utteranceLevelTestResults"))
+    TestExecutionResultItems.struct_class = Types::TestExecutionResultItems
+
+    TestExecutionSortBy.add_member(:attribute, Shapes::ShapeRef.new(shape: TestExecutionSortAttribute, required: true, location_name: "attribute"))
+    TestExecutionSortBy.add_member(:order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "order"))
+    TestExecutionSortBy.struct_class = Types::TestExecutionSortBy
+
+    TestExecutionSummary.add_member(:test_execution_id, Shapes::ShapeRef.new(shape: Id, location_name: "testExecutionId"))
+    TestExecutionSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    TestExecutionSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
+    TestExecutionSummary.add_member(:test_execution_status, Shapes::ShapeRef.new(shape: TestExecutionStatus, location_name: "testExecutionStatus"))
+    TestExecutionSummary.add_member(:test_set_id, Shapes::ShapeRef.new(shape: Id, location_name: "testSetId"))
+    TestExecutionSummary.add_member(:test_set_name, Shapes::ShapeRef.new(shape: Name, location_name: "testSetName"))
+    TestExecutionSummary.add_member(:target, Shapes::ShapeRef.new(shape: TestExecutionTarget, location_name: "target"))
+    TestExecutionSummary.add_member(:api_mode, Shapes::ShapeRef.new(shape: TestExecutionApiMode, location_name: "apiMode"))
+    TestExecutionSummary.add_member(:test_execution_modality, Shapes::ShapeRef.new(shape: TestExecutionModality, location_name: "testExecutionModality"))
+    TestExecutionSummary.struct_class = Types::TestExecutionSummary
+
+    TestExecutionSummaryList.member = Shapes::ShapeRef.new(shape: TestExecutionSummary)
+
+    TestExecutionTarget.add_member(:bot_alias_target, Shapes::ShapeRef.new(shape: BotAliasTestExecutionTarget, location_name: "botAliasTarget"))
+    TestExecutionTarget.struct_class = Types::TestExecutionTarget
+
+    TestResultMatchStatusCountMap.key = Shapes::ShapeRef.new(shape: TestResultMatchStatus)
+    TestResultMatchStatusCountMap.value = Shapes::ShapeRef.new(shape: Count)
+
+    TestSetDiscrepancyErrors.add_member(:intent_discrepancies, Shapes::ShapeRef.new(shape: TestSetIntentDiscrepancyList, required: true, location_name: "intentDiscrepancies"))
+    TestSetDiscrepancyErrors.add_member(:slot_discrepancies, Shapes::ShapeRef.new(shape: TestSetSlotDiscrepancyList, required: true, location_name: "slotDiscrepancies"))
+    TestSetDiscrepancyErrors.struct_class = Types::TestSetDiscrepancyErrors
+
+    TestSetDiscrepancyReportBotAliasTarget.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "botId"))
+    TestSetDiscrepancyReportBotAliasTarget.add_member(:bot_alias_id, Shapes::ShapeRef.new(shape: BotAliasId, required: true, location_name: "botAliasId"))
+    TestSetDiscrepancyReportBotAliasTarget.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location_name: "localeId"))
+    TestSetDiscrepancyReportBotAliasTarget.struct_class = Types::TestSetDiscrepancyReportBotAliasTarget
+
+    TestSetDiscrepancyReportResourceTarget.add_member(:bot_alias_target, Shapes::ShapeRef.new(shape: TestSetDiscrepancyReportBotAliasTarget, location_name: "botAliasTarget"))
+    TestSetDiscrepancyReportResourceTarget.struct_class = Types::TestSetDiscrepancyReportResourceTarget
+
+    TestSetExportSpecification.add_member(:test_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "testSetId"))
+    TestSetExportSpecification.struct_class = Types::TestSetExportSpecification
+
+    TestSetGenerationDataSource.add_member(:conversation_logs_data_source, Shapes::ShapeRef.new(shape: ConversationLogsDataSource, location_name: "conversationLogsDataSource"))
+    TestSetGenerationDataSource.struct_class = Types::TestSetGenerationDataSource
+
+    TestSetImportInputLocation.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, required: true, location_name: "s3BucketName"))
+    TestSetImportInputLocation.add_member(:s3_path, Shapes::ShapeRef.new(shape: S3ObjectPath, required: true, location_name: "s3Path"))
+    TestSetImportInputLocation.struct_class = Types::TestSetImportInputLocation
+
+    TestSetImportResourceSpecification.add_member(:test_set_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "testSetName"))
+    TestSetImportResourceSpecification.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    TestSetImportResourceSpecification.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    TestSetImportResourceSpecification.add_member(:storage_location, Shapes::ShapeRef.new(shape: TestSetStorageLocation, required: true, location_name: "storageLocation"))
+    TestSetImportResourceSpecification.add_member(:import_input_location, Shapes::ShapeRef.new(shape: TestSetImportInputLocation, required: true, location_name: "importInputLocation"))
+    TestSetImportResourceSpecification.add_member(:modality, Shapes::ShapeRef.new(shape: TestSetModality, required: true, location_name: "modality"))
+    TestSetImportResourceSpecification.add_member(:test_set_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "testSetTags"))
+    TestSetImportResourceSpecification.struct_class = Types::TestSetImportResourceSpecification
+
+    TestSetIntentDiscrepancyItem.add_member(:intent_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "intentName"))
+    TestSetIntentDiscrepancyItem.add_member(:error_message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "errorMessage"))
+    TestSetIntentDiscrepancyItem.struct_class = Types::TestSetIntentDiscrepancyItem
+
+    TestSetIntentDiscrepancyList.member = Shapes::ShapeRef.new(shape: TestSetIntentDiscrepancyItem)
+
+    TestSetSlotDiscrepancyItem.add_member(:intent_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "intentName"))
+    TestSetSlotDiscrepancyItem.add_member(:slot_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "slotName"))
+    TestSetSlotDiscrepancyItem.add_member(:error_message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "errorMessage"))
+    TestSetSlotDiscrepancyItem.struct_class = Types::TestSetSlotDiscrepancyItem
+
+    TestSetSlotDiscrepancyList.member = Shapes::ShapeRef.new(shape: TestSetSlotDiscrepancyItem)
+
+    TestSetSortBy.add_member(:attribute, Shapes::ShapeRef.new(shape: TestSetSortAttribute, required: true, location_name: "attribute"))
+    TestSetSortBy.add_member(:order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "order"))
+    TestSetSortBy.struct_class = Types::TestSetSortBy
+
+    TestSetStorageLocation.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, required: true, location_name: "s3BucketName"))
+    TestSetStorageLocation.add_member(:s3_path, Shapes::ShapeRef.new(shape: S3ObjectPath, required: true, location_name: "s3Path"))
+    TestSetStorageLocation.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    TestSetStorageLocation.struct_class = Types::TestSetStorageLocation
+
+    TestSetSummary.add_member(:test_set_id, Shapes::ShapeRef.new(shape: Id, location_name: "testSetId"))
+    TestSetSummary.add_member(:test_set_name, Shapes::ShapeRef.new(shape: Name, location_name: "testSetName"))
+    TestSetSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    TestSetSummary.add_member(:modality, Shapes::ShapeRef.new(shape: TestSetModality, location_name: "modality"))
+    TestSetSummary.add_member(:status, Shapes::ShapeRef.new(shape: TestSetStatus, location_name: "status"))
+    TestSetSummary.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    TestSetSummary.add_member(:num_turns, Shapes::ShapeRef.new(shape: Count, location_name: "numTurns"))
+    TestSetSummary.add_member(:storage_location, Shapes::ShapeRef.new(shape: TestSetStorageLocation, location_name: "storageLocation"))
+    TestSetSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    TestSetSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
+    TestSetSummary.struct_class = Types::TestSetSummary
+
+    TestSetSummaryList.member = Shapes::ShapeRef.new(shape: TestSetSummary)
+
+    TestSetTurnRecord.add_member(:record_number, Shapes::ShapeRef.new(shape: RecordNumber, required: true, location_name: "recordNumber"))
+    TestSetTurnRecord.add_member(:conversation_id, Shapes::ShapeRef.new(shape: TestSetConversationId, location_name: "conversationId"))
+    TestSetTurnRecord.add_member(:turn_number, Shapes::ShapeRef.new(shape: TurnNumber, location_name: "turnNumber"))
+    TestSetTurnRecord.add_member(:turn_specification, Shapes::ShapeRef.new(shape: TurnSpecification, required: true, location_name: "turnSpecification"))
+    TestSetTurnRecord.struct_class = Types::TestSetTurnRecord
+
+    TestSetTurnRecordList.member = Shapes::ShapeRef.new(shape: TestSetTurnRecord)
+
+    TestSetTurnResult.add_member(:agent, Shapes::ShapeRef.new(shape: AgentTurnResult, location_name: "agent"))
+    TestSetTurnResult.add_member(:user, Shapes::ShapeRef.new(shape: UserTurnResult, location_name: "user"))
+    TestSetTurnResult.struct_class = Types::TestSetTurnResult
+
     TextInputSpecification.add_member(:start_timeout_ms, Shapes::ShapeRef.new(shape: TimeInMilliSeconds, required: true, location_name: "startTimeoutMs"))
     TextInputSpecification.struct_class = Types::TextInputSpecification
 
@@ -2218,6 +2744,10 @@ module Aws::LexModelsV2
 
     TranscriptSourceSetting.add_member(:s3_bucket_transcript_source, Shapes::ShapeRef.new(shape: S3BucketTranscriptSource, location_name: "s3BucketTranscriptSource"))
     TranscriptSourceSetting.struct_class = Types::TranscriptSourceSetting
+
+    TurnSpecification.add_member(:agent_turn, Shapes::ShapeRef.new(shape: AgentTurnSpecification, location_name: "agentTurn"))
+    TurnSpecification.add_member(:user_turn, Shapes::ShapeRef.new(shape: UserTurnSpecification, location_name: "userTurn"))
+    TurnSpecification.struct_class = Types::TurnSpecification
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "uri", location_name: "resourceARN"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
@@ -2432,8 +2962,81 @@ module Aws::LexModelsV2
     UpdateSlotTypeResponse.add_member(:composite_slot_type_setting, Shapes::ShapeRef.new(shape: CompositeSlotTypeSetting, location_name: "compositeSlotTypeSetting"))
     UpdateSlotTypeResponse.struct_class = Types::UpdateSlotTypeResponse
 
+    UpdateTestSetRequest.add_member(:test_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "testSetId"))
+    UpdateTestSetRequest.add_member(:test_set_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "testSetName"))
+    UpdateTestSetRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateTestSetRequest.struct_class = Types::UpdateTestSetRequest
+
+    UpdateTestSetResponse.add_member(:test_set_id, Shapes::ShapeRef.new(shape: Id, location_name: "testSetId"))
+    UpdateTestSetResponse.add_member(:test_set_name, Shapes::ShapeRef.new(shape: Name, location_name: "testSetName"))
+    UpdateTestSetResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateTestSetResponse.add_member(:modality, Shapes::ShapeRef.new(shape: TestSetModality, location_name: "modality"))
+    UpdateTestSetResponse.add_member(:status, Shapes::ShapeRef.new(shape: TestSetStatus, location_name: "status"))
+    UpdateTestSetResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    UpdateTestSetResponse.add_member(:num_turns, Shapes::ShapeRef.new(shape: Count, location_name: "numTurns"))
+    UpdateTestSetResponse.add_member(:storage_location, Shapes::ShapeRef.new(shape: TestSetStorageLocation, location_name: "storageLocation"))
+    UpdateTestSetResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    UpdateTestSetResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
+    UpdateTestSetResponse.struct_class = Types::UpdateTestSetResponse
+
+    UserTurnInputSpecification.add_member(:utterance_input, Shapes::ShapeRef.new(shape: UtteranceInputSpecification, required: true, location_name: "utteranceInput"))
+    UserTurnInputSpecification.add_member(:request_attributes, Shapes::ShapeRef.new(shape: StringMap, location_name: "requestAttributes"))
+    UserTurnInputSpecification.add_member(:session_state, Shapes::ShapeRef.new(shape: InputSessionStateSpecification, location_name: "sessionState"))
+    UserTurnInputSpecification.struct_class = Types::UserTurnInputSpecification
+
+    UserTurnIntentOutput.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    UserTurnIntentOutput.add_member(:slots, Shapes::ShapeRef.new(shape: UserTurnSlotOutputMap, location_name: "slots"))
+    UserTurnIntentOutput.struct_class = Types::UserTurnIntentOutput
+
+    UserTurnOutputSpecification.add_member(:intent, Shapes::ShapeRef.new(shape: UserTurnIntentOutput, required: true, location_name: "intent"))
+    UserTurnOutputSpecification.add_member(:active_contexts, Shapes::ShapeRef.new(shape: ActiveContextList, location_name: "activeContexts"))
+    UserTurnOutputSpecification.add_member(:transcript, Shapes::ShapeRef.new(shape: TestSetUtteranceText, location_name: "transcript"))
+    UserTurnOutputSpecification.struct_class = Types::UserTurnOutputSpecification
+
+    UserTurnResult.add_member(:input, Shapes::ShapeRef.new(shape: UserTurnInputSpecification, required: true, location_name: "input"))
+    UserTurnResult.add_member(:expected_output, Shapes::ShapeRef.new(shape: UserTurnOutputSpecification, required: true, location_name: "expectedOutput"))
+    UserTurnResult.add_member(:actual_output, Shapes::ShapeRef.new(shape: UserTurnOutputSpecification, location_name: "actualOutput"))
+    UserTurnResult.add_member(:error_details, Shapes::ShapeRef.new(shape: ExecutionErrorDetails, location_name: "errorDetails"))
+    UserTurnResult.add_member(:end_to_end_result, Shapes::ShapeRef.new(shape: TestResultMatchStatus, location_name: "endToEndResult"))
+    UserTurnResult.add_member(:intent_match_result, Shapes::ShapeRef.new(shape: TestResultMatchStatus, location_name: "intentMatchResult"))
+    UserTurnResult.add_member(:slot_match_result, Shapes::ShapeRef.new(shape: TestResultMatchStatus, location_name: "slotMatchResult"))
+    UserTurnResult.add_member(:speech_transcription_result, Shapes::ShapeRef.new(shape: TestResultMatchStatus, location_name: "speechTranscriptionResult"))
+    UserTurnResult.add_member(:conversation_level_result, Shapes::ShapeRef.new(shape: ConversationLevelResultDetail, location_name: "conversationLevelResult"))
+    UserTurnResult.struct_class = Types::UserTurnResult
+
+    UserTurnSlotOutput.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "value"))
+    UserTurnSlotOutput.add_member(:values, Shapes::ShapeRef.new(shape: UserTurnSlotOutputList, location_name: "values"))
+    UserTurnSlotOutput.add_member(:sub_slots, Shapes::ShapeRef.new(shape: UserTurnSlotOutputMap, location_name: "subSlots"))
+    UserTurnSlotOutput.struct_class = Types::UserTurnSlotOutput
+
+    UserTurnSlotOutputList.member = Shapes::ShapeRef.new(shape: UserTurnSlotOutput)
+
+    UserTurnSlotOutputMap.key = Shapes::ShapeRef.new(shape: Name)
+    UserTurnSlotOutputMap.value = Shapes::ShapeRef.new(shape: UserTurnSlotOutput)
+
+    UserTurnSpecification.add_member(:input, Shapes::ShapeRef.new(shape: UserTurnInputSpecification, required: true, location_name: "input"))
+    UserTurnSpecification.add_member(:expected, Shapes::ShapeRef.new(shape: UserTurnOutputSpecification, required: true, location_name: "expected"))
+    UserTurnSpecification.struct_class = Types::UserTurnSpecification
+
     UtteranceAggregationDuration.add_member(:relative_aggregation_duration, Shapes::ShapeRef.new(shape: RelativeAggregationDuration, required: true, location_name: "relativeAggregationDuration"))
     UtteranceAggregationDuration.struct_class = Types::UtteranceAggregationDuration
+
+    UtteranceAudioInputSpecification.add_member(:audio_file_s3_location, Shapes::ShapeRef.new(shape: AudioFileS3Location, required: true, location_name: "audioFileS3Location"))
+    UtteranceAudioInputSpecification.struct_class = Types::UtteranceAudioInputSpecification
+
+    UtteranceInputSpecification.add_member(:text_input, Shapes::ShapeRef.new(shape: TestSetUtteranceText, location_name: "textInput"))
+    UtteranceInputSpecification.add_member(:audio_input, Shapes::ShapeRef.new(shape: UtteranceAudioInputSpecification, location_name: "audioInput"))
+    UtteranceInputSpecification.struct_class = Types::UtteranceInputSpecification
+
+    UtteranceLevelTestResultItem.add_member(:record_number, Shapes::ShapeRef.new(shape: RecordNumber, required: true, location_name: "recordNumber"))
+    UtteranceLevelTestResultItem.add_member(:conversation_id, Shapes::ShapeRef.new(shape: TestSetConversationId, location_name: "conversationId"))
+    UtteranceLevelTestResultItem.add_member(:turn_result, Shapes::ShapeRef.new(shape: TestSetTurnResult, required: true, location_name: "turnResult"))
+    UtteranceLevelTestResultItem.struct_class = Types::UtteranceLevelTestResultItem
+
+    UtteranceLevelTestResultItemList.member = Shapes::ShapeRef.new(shape: UtteranceLevelTestResultItem)
+
+    UtteranceLevelTestResults.add_member(:items, Shapes::ShapeRef.new(shape: UtteranceLevelTestResultItemList, required: true, location_name: "items"))
+    UtteranceLevelTestResults.struct_class = Types::UtteranceLevelTestResults
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
@@ -2661,6 +3264,20 @@ module Aws::LexModelsV2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:create_test_set_discrepancy_report, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTestSetDiscrepancyReport"
+        o.http_method = "POST"
+        o.http_request_uri = "/testsets/{testSetId}/testsetdiscrepancy"
+        o.input = Shapes::ShapeRef.new(shape: CreateTestSetDiscrepancyReportRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateTestSetDiscrepancyReportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:create_upload_url, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateUploadUrl"
         o.http_method = "POST"
@@ -2836,6 +3453,20 @@ module Aws::LexModelsV2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:delete_test_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTestSet"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/testsets/{testSetId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTestSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:delete_utterances, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteUtterances"
         o.http_method = "DELETE"
@@ -2991,6 +3622,71 @@ module Aws::LexModelsV2
         o.http_request_uri = "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/slottypes/{slotTypeId}/"
         o.input = Shapes::ShapeRef.new(shape: DescribeSlotTypeRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeSlotTypeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:describe_test_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTestExecution"
+        o.http_method = "GET"
+        o.http_request_uri = "/testexecutions/{testExecutionId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeTestExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeTestExecutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:describe_test_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTestSet"
+        o.http_method = "GET"
+        o.http_request_uri = "/testsets/{testSetId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeTestSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeTestSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:describe_test_set_discrepancy_report, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTestSetDiscrepancyReport"
+        o.http_method = "GET"
+        o.http_request_uri = "/testsetdiscrepancy/{testSetDiscrepancyReportId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeTestSetDiscrepancyReportRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeTestSetDiscrepancyReportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:describe_test_set_generation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTestSetGeneration"
+        o.http_method = "GET"
+        o.http_request_uri = "/testsetgenerations/{testSetGenerationId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeTestSetGenerationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeTestSetGenerationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_test_execution_artifacts_url, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTestExecutionArtifactsUrl"
+        o.http_method = "GET"
+        o.http_request_uri = "/testexecutions/{testExecutionId}/artifacturl"
+        o.input = Shapes::ShapeRef.new(shape: GetTestExecutionArtifactsUrlRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTestExecutionArtifactsUrlResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -3280,6 +3976,80 @@ module Aws::LexModelsV2
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:list_test_execution_result_items, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTestExecutionResultItems"
+        o.http_method = "POST"
+        o.http_request_uri = "/testexecutions/{testExecutionId}/results"
+        o.input = Shapes::ShapeRef.new(shape: ListTestExecutionResultItemsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTestExecutionResultItemsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_test_executions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTestExecutions"
+        o.http_method = "POST"
+        o.http_request_uri = "/testexecutions"
+        o.input = Shapes::ShapeRef.new(shape: ListTestExecutionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTestExecutionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_test_set_records, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTestSetRecords"
+        o.http_method = "POST"
+        o.http_request_uri = "/testsets/{testSetId}/records"
+        o.input = Shapes::ShapeRef.new(shape: ListTestSetRecordsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTestSetRecordsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_test_sets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTestSets"
+        o.http_method = "POST"
+        o.http_request_uri = "/testsets"
+        o.input = Shapes::ShapeRef.new(shape: ListTestSetsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTestSetsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:search_associated_transcripts, Seahorse::Model::Operation.new.tap do |o|
         o.name = "SearchAssociatedTranscripts"
         o.http_method = "POST"
@@ -3320,6 +4090,34 @@ module Aws::LexModelsV2
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:start_test_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartTestExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/testsets/{testSetId}/testexecutions"
+        o.input = Shapes::ShapeRef.new(shape: StartTestExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartTestExecutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:start_test_set_generation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartTestSetGeneration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/testsetgenerations"
+        o.input = Shapes::ShapeRef.new(shape: StartTestSetGenerationRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartTestSetGenerationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -3483,6 +4281,20 @@ module Aws::LexModelsV2
         o.http_request_uri = "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/slottypes/{slotTypeId}/"
         o.input = Shapes::ShapeRef.new(shape: UpdateSlotTypeRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateSlotTypeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_test_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateTestSet"
+        o.http_method = "PUT"
+        o.http_request_uri = "/testsets/{testSetId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateTestSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateTestSetResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

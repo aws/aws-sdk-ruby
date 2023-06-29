@@ -327,6 +327,8 @@ module Aws::SESV2
     PutConfigurationSetVdmOptionsResponse = Shapes::StructureShape.new(name: 'PutConfigurationSetVdmOptionsResponse')
     PutDedicatedIpInPoolRequest = Shapes::StructureShape.new(name: 'PutDedicatedIpInPoolRequest')
     PutDedicatedIpInPoolResponse = Shapes::StructureShape.new(name: 'PutDedicatedIpInPoolResponse')
+    PutDedicatedIpPoolScalingAttributesRequest = Shapes::StructureShape.new(name: 'PutDedicatedIpPoolScalingAttributesRequest')
+    PutDedicatedIpPoolScalingAttributesResponse = Shapes::StructureShape.new(name: 'PutDedicatedIpPoolScalingAttributesResponse')
     PutDedicatedIpWarmupAttributesRequest = Shapes::StructureShape.new(name: 'PutDedicatedIpWarmupAttributesRequest')
     PutDedicatedIpWarmupAttributesResponse = Shapes::StructureShape.new(name: 'PutDedicatedIpWarmupAttributesResponse')
     PutDeliverabilityDashboardOptionRequest = Shapes::StructureShape.new(name: 'PutDeliverabilityDashboardOptionRequest')
@@ -1324,6 +1326,12 @@ module Aws::SESV2
     PutDedicatedIpInPoolRequest.struct_class = Types::PutDedicatedIpInPoolRequest
 
     PutDedicatedIpInPoolResponse.struct_class = Types::PutDedicatedIpInPoolResponse
+
+    PutDedicatedIpPoolScalingAttributesRequest.add_member(:pool_name, Shapes::ShapeRef.new(shape: PoolName, required: true, location: "uri", location_name: "PoolName"))
+    PutDedicatedIpPoolScalingAttributesRequest.add_member(:scaling_mode, Shapes::ShapeRef.new(shape: ScalingMode, required: true, location_name: "ScalingMode"))
+    PutDedicatedIpPoolScalingAttributesRequest.struct_class = Types::PutDedicatedIpPoolScalingAttributesRequest
+
+    PutDedicatedIpPoolScalingAttributesResponse.struct_class = Types::PutDedicatedIpPoolScalingAttributesResponse
 
     PutDedicatedIpWarmupAttributesRequest.add_member(:ip, Shapes::ShapeRef.new(shape: Ip, required: true, location: "uri", location_name: "IP"))
     PutDedicatedIpWarmupAttributesRequest.add_member(:warmup_percentage, Shapes::ShapeRef.new(shape: Percentage100Wrapper, required: true, location_name: "WarmupPercentage"))
@@ -2436,6 +2444,18 @@ module Aws::SESV2
         o.input = Shapes::ShapeRef.new(shape: PutDedicatedIpInPoolRequest)
         o.output = Shapes::ShapeRef.new(shape: PutDedicatedIpInPoolResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:put_dedicated_ip_pool_scaling_attributes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutDedicatedIpPoolScalingAttributes"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v2/email/dedicated-ip-pools/{PoolName}/scaling"
+        o.input = Shapes::ShapeRef.new(shape: PutDedicatedIpPoolScalingAttributesRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutDedicatedIpPoolScalingAttributesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)

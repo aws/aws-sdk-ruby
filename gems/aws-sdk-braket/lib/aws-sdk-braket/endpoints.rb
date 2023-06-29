@@ -9,6 +9,7 @@
 
 
 module Aws::Braket
+  # @api private
   module Endpoints
 
     class CancelJob

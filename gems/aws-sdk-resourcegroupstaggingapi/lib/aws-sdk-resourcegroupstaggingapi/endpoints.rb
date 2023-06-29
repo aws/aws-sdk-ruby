@@ -9,6 +9,7 @@
 
 
 module Aws::ResourceGroupsTaggingAPI
+  # @api private
   module Endpoints
 
     class DescribeReportCreation

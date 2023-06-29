@@ -275,6 +275,11 @@ module Aws::Rekognition
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -377,6 +382,139 @@ module Aws::Rekognition
     end
 
     # @!group API Operations
+
+    # Associates one or more faces with an existing UserID. Takes an array
+    # of `FaceIds`. Each `FaceId` that are present in the `FaceIds` list is
+    # associated with the provided UserID. The maximum number of total
+    # `FaceIds` per UserID is 100.
+    #
+    # The `UserMatchThreshold` parameter specifies the minimum user match
+    # confidence required for the face to be associated with a UserID that
+    # has at least one `FaceID` already associated. This ensures that the
+    # `FaceIds` are associated with the right UserID. The value ranges from
+    # 0-100 and default value is 75.
+    #
+    # If successful, an array of `AssociatedFace` objects containing the
+    # associated `FaceIds` is returned. If a given face is already
+    # associated with the given `UserID`, it will be ignored and will not be
+    # returned in the response. If a given face is already associated to a
+    # different `UserID`, isn't found in the collection, doesn’t meet the
+    # `UserMatchThreshold`, or there are already 100 faces associated with
+    # the `UserID`, it will be returned as part of an array of
+    # `UnsuccessfulFaceAssociations.`
+    #
+    # The `UserStatus` reflects the status of an operation which updates a
+    # UserID representation with a list of given faces. The `UserStatus` can
+    # be:
+    #
+    # * ACTIVE - All associations or disassociations of FaceID(s) for a
+    #   UserID are complete.
+    #
+    # * CREATED - A UserID has been created, but has no FaceID(s) associated
+    #   with it.
+    #
+    # * UPDATING - A UserID is being updated and there are current
+    #   associations or disassociations of FaceID(s) taking place.
+    #
+    # @option params [required, String] :collection_id
+    #   The ID of an existing collection containing the UserID.
+    #
+    # @option params [required, String] :user_id
+    #   The ID for the existing UserID.
+    #
+    # @option params [required, Array<String>] :face_ids
+    #   An array of FaceIDs to associate with the UserID.
+    #
+    # @option params [Float] :user_match_threshold
+    #   An optional value specifying the minimum confidence in the UserID
+    #   match to return. The default value is 75.
+    #
+    # @option params [String] :client_request_token
+    #   Idempotent token used to identify the request to `AssociateFaces`. If
+    #   you use the same token with multiple `AssociateFaces` requests, the
+    #   same response is returned. Use ClientRequestToken to prevent the same
+    #   request from being processed more than once.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::AssociateFacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateFacesResponse#associated_faces #associated_faces} => Array&lt;Types::AssociatedFace&gt;
+    #   * {Types::AssociateFacesResponse#unsuccessful_face_associations #unsuccessful_face_associations} => Array&lt;Types::UnsuccessfulFaceAssociation&gt;
+    #   * {Types::AssociateFacesResponse#user_status #user_status} => String
+    #
+    #
+    # @example Example: AssociateFaces
+    #
+    #   # This operation associates one or more faces with an existing UserID.
+    #
+    #   resp = client.associate_faces({
+    #     client_request_token: "550e8400-e29b-41d4-a716-446655440002", 
+    #     collection_id: "MyCollection", 
+    #     face_ids: [
+    #       "f5817d37-94f6-4335-bfee-6cf79a3d806e", 
+    #       "851cb847-dccc-4fea-9309-9f4805967855", 
+    #       "35ebbb41-7f67-4263-908d-dd0ecba05ab9", 
+    #     ], 
+    #     user_id: "DemoUser", 
+    #     user_match_threshold: 70, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     associated_faces: [
+    #       {
+    #         face_id: "35ebbb41-7f67-4263-908d-dd0ecba05ab9", 
+    #       }, 
+    #     ], 
+    #     unsuccessful_face_associations: [
+    #       {
+    #         confidence: 0.9375374913215637, 
+    #         face_id: "f5817d37-94f6-4335-bfee-6cf79a3d806e", 
+    #         reasons: [
+    #           "LOW_MATCH_CONFIDENCE", 
+    #         ], 
+    #       }, 
+    #       {
+    #         face_id: "851cb847-dccc-4fea-9309-9f4805967855", 
+    #         reasons: [
+    #           "ASSOCIATED_TO_A_DIFFERENT_USER", 
+    #         ], 
+    #         user_id: "demoUser2", 
+    #       }, 
+    #     ], 
+    #     user_status: "UPDATING", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_faces({
+    #     collection_id: "CollectionId", # required
+    #     user_id: "UserId", # required
+    #     face_ids: ["FaceId"], # required
+    #     user_match_threshold: 1.0,
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.associated_faces #=> Array
+    #   resp.associated_faces[0].face_id #=> String
+    #   resp.unsuccessful_face_associations #=> Array
+    #   resp.unsuccessful_face_associations[0].face_id #=> String
+    #   resp.unsuccessful_face_associations[0].user_id #=> String
+    #   resp.unsuccessful_face_associations[0].confidence #=> Float
+    #   resp.unsuccessful_face_associations[0].reasons #=> Array
+    #   resp.unsuccessful_face_associations[0].reasons[0] #=> String, one of "FACE_NOT_FOUND", "ASSOCIATED_TO_A_DIFFERENT_USER", "LOW_MATCH_CONFIDENCE"
+    #   resp.user_status #=> String, one of "ACTIVE", "UPDATING", "CREATING", "CREATED"
+    #
+    # @overload associate_faces(params = {})
+    # @param [Hash] params ({})
+    def associate_faces(params = {}, options = {})
+      req = build_request(:associate_faces, params)
+      req.send_request(options)
+    end
 
     # Compares a face in the *source* input image with each of the 100
     # largest faces detected in the *target* input image.
@@ -1319,6 +1457,62 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Creates a new User within a collection specified by `CollectionId`.
+    # Takes `UserId` as a parameter, which is a user provided ID which
+    # should be unique within the collection. The provided `UserId` will
+    # alias the system generated UUID to make the `UserId` more user
+    # friendly.
+    #
+    # Uses a `ClientToken`, an idempotency token that ensures a call to
+    # `CreateUser` completes only once. If the value is not supplied, the
+    # AWS SDK generates an idempotency token for the requests. This prevents
+    # retries after a network error results from making multiple
+    # `CreateUser` calls.
+    #
+    # @option params [required, String] :collection_id
+    #   The ID of an existing collection to which the new UserID needs to be
+    #   created.
+    #
+    # @option params [required, String] :user_id
+    #   ID for the UserID to be created. This ID needs to be unique within the
+    #   collection.
+    #
+    # @option params [String] :client_request_token
+    #   Idempotent token used to identify the request to `CreateUser`. If you
+    #   use the same token with multiple `CreateUser` requests, the same
+    #   response is returned. Use ClientRequestToken to prevent the same
+    #   request from being processed more than once.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: CreateUser
+    #
+    #   # Creates a new User within a collection specified by CollectionId.
+    #
+    #   resp = client.create_user({
+    #     collection_id: "MyCollection", 
+    #     user_id: "DemoUser", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_user({
+    #     collection_id: "CollectionId", # required
+    #     user_id: "UserId", # required
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @overload create_user(params = {})
+    # @param [Hash] params ({})
+    def create_user(params = {}, options = {})
+      req = build_request(:create_user, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified collection. Note that this operation removes all
     # faces in the collection. For an example, see [Deleting a
     # collection][1].
@@ -1415,6 +1609,7 @@ module Aws::Rekognition
     # @return [Types::DeleteFacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteFacesResponse#deleted_faces #deleted_faces} => Array&lt;String&gt;
+    #   * {Types::DeleteFacesResponse#unsuccessful_face_deletions #unsuccessful_face_deletions} => Array&lt;Types::UnsuccessfulFaceDeletion&gt;
     #
     #
     # @example Example: To delete a face
@@ -1446,6 +1641,11 @@ module Aws::Rekognition
     #
     #   resp.deleted_faces #=> Array
     #   resp.deleted_faces[0] #=> String
+    #   resp.unsuccessful_face_deletions #=> Array
+    #   resp.unsuccessful_face_deletions[0].face_id #=> String
+    #   resp.unsuccessful_face_deletions[0].user_id #=> String
+    #   resp.unsuccessful_face_deletions[0].reasons #=> Array
+    #   resp.unsuccessful_face_deletions[0].reasons[0] #=> String, one of "ASSOCIATED_TO_AN_EXISTING_USER", "FACE_NOT_FOUND"
     #
     # @overload delete_faces(params = {})
     # @param [Hash] params ({})
@@ -1601,6 +1801,57 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Deletes the specified UserID within the collection. Faces that are
+    # associated with the UserID are disassociated from the UserID before
+    # deleting the specified UserID. If the specified `Collection` or
+    # `UserID` is already deleted or not found, a
+    # `ResourceNotFoundException` will be thrown. If the action is
+    # successful with a 200 response, an empty HTTP body is returned.
+    #
+    # @option params [required, String] :collection_id
+    #   The ID of an existing collection from which the UserID needs to be
+    #   deleted.
+    #
+    # @option params [required, String] :user_id
+    #   ID for the UserID to be deleted.
+    #
+    # @option params [String] :client_request_token
+    #   Idempotent token used to identify the request to `DeleteUser`. If you
+    #   use the same token with multiple `DeleteUser `requests, the same
+    #   response is returned. Use ClientRequestToken to prevent the same
+    #   request from being processed more than once.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: DeleteUser
+    #
+    #   # Deletes the specified UserID within the collection.
+    #
+    #   resp = client.delete_user({
+    #     client_request_token: "550e8400-e29b-41d4-a716-446655440001", 
+    #     collection_id: "MyCollection", 
+    #     user_id: "DemoUser", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_user({
+    #     collection_id: "CollectionId", # required
+    #     user_id: "UserId", # required
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @overload delete_user(params = {})
+    # @param [Hash] params ({})
+    def delete_user(params = {}, options = {})
+      req = build_request(:delete_user, params)
+      req.send_request(options)
+    end
+
     # Describes the specified collection. You can use `DescribeCollection`
     # to get information, such as the number of faces indexed into a
     # collection and the version of the model used by the collection for
@@ -1618,6 +1869,7 @@ module Aws::Rekognition
     #   * {Types::DescribeCollectionResponse#face_model_version #face_model_version} => String
     #   * {Types::DescribeCollectionResponse#collection_arn #collection_arn} => String
     #   * {Types::DescribeCollectionResponse#creation_timestamp #creation_timestamp} => Time
+    #   * {Types::DescribeCollectionResponse#user_count #user_count} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -1631,6 +1883,7 @@ module Aws::Rekognition
     #   resp.face_model_version #=> String
     #   resp.collection_arn #=> String
     #   resp.creation_timestamp #=> Time
+    #   resp.user_count #=> Integer
     #
     # @overload describe_collection(params = {})
     # @param [Hash] params ({})
@@ -2181,7 +2434,7 @@ module Aws::Rekognition
     #         version: "S3ObjectVersion",
     #       },
     #     },
-    #     attributes: ["DEFAULT"], # accepts DEFAULT, ALL, AGE_RANGE, BEARD, EMOTIONS, EYEGLASSES, EYES_OPEN, GENDER, MOUTH_OPEN, MUSTACHE, FACE_OCCLUDED, SMILE, SUNGLASSES
+    #     attributes: ["DEFAULT"], # accepts DEFAULT, ALL, AGE_RANGE, BEARD, EMOTIONS, EYE_DIRECTION, EYEGLASSES, EYES_OPEN, GENDER, MOUTH_OPEN, MUSTACHE, FACE_OCCLUDED, SMILE, SUNGLASSES
     #   })
     #
     # @example Response structure
@@ -2224,6 +2477,9 @@ module Aws::Rekognition
     #   resp.face_details[0].confidence #=> Float
     #   resp.face_details[0].face_occluded.value #=> Boolean
     #   resp.face_details[0].face_occluded.confidence #=> Float
+    #   resp.face_details[0].eye_direction.yaw #=> Float
+    #   resp.face_details[0].eye_direction.pitch #=> Float
+    #   resp.face_details[0].eye_direction.confidence #=> Float
     #   resp.orientation_correction #=> String, one of "ROTATE_0", "ROTATE_90", "ROTATE_180", "ROTATE_270"
     #
     # @overload detect_faces(params = {})
@@ -2837,6 +3093,102 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Removes the association between a `Face` supplied in an array of
+    # `FaceIds` and the User. If the User is not present already, then a
+    # `ResourceNotFound` exception is thrown. If successful, an array of
+    # faces that are disassociated from the User is returned. If a given
+    # face is already disassociated from the given UserID, it will be
+    # ignored and not be returned in the response. If a given face is
+    # already associated with a different User or not found in the
+    # collection it will be returned as part of
+    # `UnsuccessfulDisassociations`. You can remove 1 - 100 face IDs from a
+    # user at one time.
+    #
+    # @option params [required, String] :collection_id
+    #   The ID of an existing collection containing the UserID.
+    #
+    # @option params [required, String] :user_id
+    #   ID for the existing UserID.
+    #
+    # @option params [String] :client_request_token
+    #   Idempotent token used to identify the request to `DisassociateFaces`.
+    #   If you use the same token with multiple `DisassociateFaces` requests,
+    #   the same response is returned. Use ClientRequestToken to prevent the
+    #   same request from being processed more than once.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Array<String>] :face_ids
+    #   An array of face IDs to disassociate from the UserID.
+    #
+    # @return [Types::DisassociateFacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateFacesResponse#disassociated_faces #disassociated_faces} => Array&lt;Types::DisassociatedFace&gt;
+    #   * {Types::DisassociateFacesResponse#unsuccessful_face_disassociations #unsuccessful_face_disassociations} => Array&lt;Types::UnsuccessfulFaceDisassociation&gt;
+    #   * {Types::DisassociateFacesResponse#user_status #user_status} => String
+    #
+    #
+    # @example Example: DisassociateFaces
+    #
+    #   # Removes the association between a Face supplied in an array of FaceIds and the User.
+    #
+    #   resp = client.disassociate_faces({
+    #     client_request_token: "550e8400-e29b-41d4-a716-446655440003", 
+    #     collection_id: "MyCollection", 
+    #     face_ids: [
+    #       "f5817d37-94f6-4335-bfee-6cf79a3d806e", 
+    #       "c92265d4-5f9c-43af-a58e-12be0ce02bc3", 
+    #     ], 
+    #     user_id: "DemoUser", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     disassociated_faces: [
+    #       {
+    #         face_id: "c92265d4-5f9c-43af-a58e-12be0ce02bc3", 
+    #       }, 
+    #     ], 
+    #     unsuccessful_face_disassociations: [
+    #       {
+    #         face_id: "f5817d37-94f6-4335-bfee-6cf79a3d806e", 
+    #         reasons: [
+    #           "ASSOCIATED_TO_A_DIFFERENT_USER", 
+    #         ], 
+    #         user_id: "demoUser1", 
+    #       }, 
+    #     ], 
+    #     user_status: "UPDATING", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_faces({
+    #     collection_id: "CollectionId", # required
+    #     user_id: "UserId", # required
+    #     client_request_token: "ClientRequestToken",
+    #     face_ids: ["FaceId"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.disassociated_faces #=> Array
+    #   resp.disassociated_faces[0].face_id #=> String
+    #   resp.unsuccessful_face_disassociations #=> Array
+    #   resp.unsuccessful_face_disassociations[0].face_id #=> String
+    #   resp.unsuccessful_face_disassociations[0].user_id #=> String
+    #   resp.unsuccessful_face_disassociations[0].reasons #=> Array
+    #   resp.unsuccessful_face_disassociations[0].reasons[0] #=> String, one of "FACE_NOT_FOUND", "ASSOCIATED_TO_A_DIFFERENT_USER"
+    #   resp.user_status #=> String, one of "ACTIVE", "UPDATING", "CREATING", "CREATED"
+    #
+    # @overload disassociate_faces(params = {})
+    # @param [Hash] params ({})
+    def disassociate_faces(params = {}, options = {})
+      req = build_request(:disassociate_faces, params)
+      req.send_request(options)
+    end
+
     # Distributes the entries (images) in a training dataset across the
     # training dataset and the test dataset for a project.
     # `DistributeDatasetEntries` moves 20% of the training dataset images to
@@ -3081,6 +3433,9 @@ module Aws::Rekognition
     #   resp.celebrities[0].celebrity.face.confidence #=> Float
     #   resp.celebrities[0].celebrity.face.face_occluded.value #=> Boolean
     #   resp.celebrities[0].celebrity.face.face_occluded.confidence #=> Float
+    #   resp.celebrities[0].celebrity.face.eye_direction.yaw #=> Float
+    #   resp.celebrities[0].celebrity.face.eye_direction.pitch #=> Float
+    #   resp.celebrities[0].celebrity.face.eye_direction.confidence #=> Float
     #   resp.celebrities[0].celebrity.known_gender.type #=> String, one of "Male", "Female", "Nonbinary", "Unlisted"
     #   resp.job_id #=> String
     #   resp.video.s3_object.bucket #=> String
@@ -3341,6 +3696,9 @@ module Aws::Rekognition
     #   resp.faces[0].face.confidence #=> Float
     #   resp.faces[0].face.face_occluded.value #=> Boolean
     #   resp.faces[0].face.face_occluded.confidence #=> Float
+    #   resp.faces[0].face.eye_direction.yaw #=> Float
+    #   resp.faces[0].face.eye_direction.pitch #=> Float
+    #   resp.faces[0].face.eye_direction.confidence #=> Float
     #   resp.job_id #=> String
     #   resp.video.s3_object.bucket #=> String
     #   resp.video.s3_object.name #=> String
@@ -3546,6 +3904,9 @@ module Aws::Rekognition
     #   resp.persons[0].person.face.confidence #=> Float
     #   resp.persons[0].person.face.face_occluded.value #=> Boolean
     #   resp.persons[0].person.face.face_occluded.confidence #=> Float
+    #   resp.persons[0].person.face.eye_direction.yaw #=> Float
+    #   resp.persons[0].person.face.eye_direction.pitch #=> Float
+    #   resp.persons[0].person.face.eye_direction.confidence #=> Float
     #   resp.persons[0].face_matches #=> Array
     #   resp.persons[0].face_matches[0].similarity #=> Float
     #   resp.persons[0].face_matches[0].face.face_id #=> String
@@ -3557,6 +3918,7 @@ module Aws::Rekognition
     #   resp.persons[0].face_matches[0].face.external_image_id #=> String
     #   resp.persons[0].face_matches[0].face.confidence #=> Float
     #   resp.persons[0].face_matches[0].face.index_faces_model_version #=> String
+    #   resp.persons[0].face_matches[0].face.user_id #=> String
     #   resp.job_id #=> String
     #   resp.video.s3_object.bucket #=> String
     #   resp.video.s3_object.name #=> String
@@ -3895,6 +4257,9 @@ module Aws::Rekognition
     #   resp.persons[0].person.face.confidence #=> Float
     #   resp.persons[0].person.face.face_occluded.value #=> Boolean
     #   resp.persons[0].person.face.face_occluded.confidence #=> Float
+    #   resp.persons[0].person.face.eye_direction.yaw #=> Float
+    #   resp.persons[0].person.face.eye_direction.pitch #=> Float
+    #   resp.persons[0].person.face.eye_direction.confidence #=> Float
     #   resp.job_id #=> String
     #   resp.video.s3_object.bucket #=> String
     #   resp.video.s3_object.name #=> String
@@ -4471,7 +4836,7 @@ module Aws::Rekognition
     #       },
     #     },
     #     external_image_id: "ExternalImageId",
-    #     detection_attributes: ["DEFAULT"], # accepts DEFAULT, ALL, AGE_RANGE, BEARD, EMOTIONS, EYEGLASSES, EYES_OPEN, GENDER, MOUTH_OPEN, MUSTACHE, FACE_OCCLUDED, SMILE, SUNGLASSES
+    #     detection_attributes: ["DEFAULT"], # accepts DEFAULT, ALL, AGE_RANGE, BEARD, EMOTIONS, EYE_DIRECTION, EYEGLASSES, EYES_OPEN, GENDER, MOUTH_OPEN, MUSTACHE, FACE_OCCLUDED, SMILE, SUNGLASSES
     #     max_faces: 1,
     #     quality_filter: "NONE", # accepts NONE, AUTO, LOW, MEDIUM, HIGH
     #   })
@@ -4488,6 +4853,7 @@ module Aws::Rekognition
     #   resp.face_records[0].face.external_image_id #=> String
     #   resp.face_records[0].face.confidence #=> Float
     #   resp.face_records[0].face.index_faces_model_version #=> String
+    #   resp.face_records[0].face.user_id #=> String
     #   resp.face_records[0].face_detail.bounding_box.width #=> Float
     #   resp.face_records[0].face_detail.bounding_box.height #=> Float
     #   resp.face_records[0].face_detail.bounding_box.left #=> Float
@@ -4525,6 +4891,9 @@ module Aws::Rekognition
     #   resp.face_records[0].face_detail.confidence #=> Float
     #   resp.face_records[0].face_detail.face_occluded.value #=> Boolean
     #   resp.face_records[0].face_detail.face_occluded.confidence #=> Float
+    #   resp.face_records[0].face_detail.eye_direction.yaw #=> Float
+    #   resp.face_records[0].face_detail.eye_direction.pitch #=> Float
+    #   resp.face_records[0].face_detail.eye_direction.confidence #=> Float
     #   resp.orientation_correction #=> String, one of "ROTATE_0", "ROTATE_90", "ROTATE_180", "ROTATE_270"
     #   resp.face_model_version #=> String
     #   resp.unindexed_faces #=> Array
@@ -4567,6 +4936,9 @@ module Aws::Rekognition
     #   resp.unindexed_faces[0].face_detail.confidence #=> Float
     #   resp.unindexed_faces[0].face_detail.face_occluded.value #=> Boolean
     #   resp.unindexed_faces[0].face_detail.face_occluded.confidence #=> Float
+    #   resp.unindexed_faces[0].face_detail.eye_direction.yaw #=> Float
+    #   resp.unindexed_faces[0].face_detail.eye_direction.pitch #=> Float
+    #   resp.unindexed_faces[0].face_detail.eye_direction.confidence #=> Float
     #
     # @overload index_faces(params = {})
     # @param [Hash] params ({})
@@ -4806,6 +5178,12 @@ module Aws::Rekognition
     # @option params [Integer] :max_results
     #   Maximum number of faces to return.
     #
+    # @option params [String] :user_id
+    #   An array of user IDs to match when listing faces in a collection.
+    #
+    # @option params [Array<String>] :face_ids
+    #   An array of face IDs to match when listing faces in a collection.
+    #
     # @return [Types::ListFacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListFacesResponse#faces #faces} => Array&lt;Types::Face&gt;
@@ -4826,127 +5204,44 @@ module Aws::Rekognition
     #
     #   resp.to_h outputs the following:
     #   {
+    #     face_model_version: "6.0", 
     #     faces: [
     #       {
     #         bounding_box: {
-    #           height: 0.18000000715255737, 
-    #           left: 0.5555559992790222, 
-    #           top: 0.336667001247406, 
-    #           width: 0.23999999463558197, 
+    #           height: 0.056759100407361984, 
+    #           left: 0.3453829884529114, 
+    #           top: 0.36568498611450195, 
+    #           width: 0.03177810087800026, 
     #         }, 
-    #         confidence: 100, 
-    #         face_id: "1c62e8b5-69a7-5b7d-b3cd-db4338a8a7e7", 
-    #         image_id: "147fdf82-7a71-52cf-819b-e786c7b9746e", 
+    #         confidence: 99.76940155029297, 
+    #         face_id: "c92265d4-5f9c-43af-a58e-12be0ce02bc3", 
+    #         image_id: "56a0ca74-1c83-39dd-b363-051a64168a65", 
+    #         index_faces_model_version: "6.0", 
+    #         user_id: "demoUser2", 
     #       }, 
     #       {
     #         bounding_box: {
-    #           height: 0.16555599868297577, 
-    #           left: 0.30963000655174255, 
-    #           top: 0.7066670060157776, 
-    #           width: 0.22074100375175476, 
+    #           height: 0.06347999721765518, 
+    #           left: 0.5160620212554932, 
+    #           top: 0.6080359816551208, 
+    #           width: 0.03254450112581253, 
     #         }, 
-    #         confidence: 100, 
-    #         face_id: "29a75abe-397b-5101-ba4f-706783b2246c", 
-    #         image_id: "147fdf82-7a71-52cf-819b-e786c7b9746e", 
+    #         confidence: 99.94369506835938, 
+    #         face_id: "851cb847-dccc-4fea-9309-9f4805967855", 
+    #         image_id: "a8aed589-ceec-35f7-9c04-82e0b546b024", 
+    #         index_faces_model_version: "6.0", 
     #       }, 
     #       {
     #         bounding_box: {
-    #           height: 0.3234420120716095, 
-    #           left: 0.3233329951763153, 
-    #           top: 0.5, 
-    #           width: 0.24222199618816376, 
+    #           height: 0.05266290158033371, 
+    #           left: 0.6513839960098267, 
+    #           top: 0.4218429923057556, 
+    #           width: 0.03094629943370819, 
     #         }, 
-    #         confidence: 99.99829864501953, 
-    #         face_id: "38271d79-7bc2-5efb-b752-398a8d575b85", 
-    #         image_id: "d5631190-d039-54e4-b267-abd22c8647c5", 
-    #       }, 
-    #       {
-    #         bounding_box: {
-    #           height: 0.03555560111999512, 
-    #           left: 0.37388700246810913, 
-    #           top: 0.2477779984474182, 
-    #           width: 0.04747769981622696, 
-    #         }, 
-    #         confidence: 99.99210357666016, 
-    #         face_id: "3b01bef0-c883-5654-ba42-d5ad28b720b3", 
-    #         image_id: "812d9f04-86f9-54fc-9275-8d0dcbcb6784", 
-    #       }, 
-    #       {
-    #         bounding_box: {
-    #           height: 0.05333330109715462, 
-    #           left: 0.2937690019607544, 
-    #           top: 0.35666701197624207, 
-    #           width: 0.07121659815311432, 
-    #         }, 
-    #         confidence: 99.99919891357422, 
-    #         face_id: "4839a608-49d0-566c-8301-509d71b534d1", 
-    #         image_id: "812d9f04-86f9-54fc-9275-8d0dcbcb6784", 
-    #       }, 
-    #       {
-    #         bounding_box: {
-    #           height: 0.3249259889125824, 
-    #           left: 0.5155559778213501, 
-    #           top: 0.1513350009918213, 
-    #           width: 0.24333299696445465, 
-    #         }, 
-    #         confidence: 99.99949645996094, 
-    #         face_id: "70008e50-75e4-55d0-8e80-363fb73b3a14", 
-    #         image_id: "d5631190-d039-54e4-b267-abd22c8647c5", 
-    #       }, 
-    #       {
-    #         bounding_box: {
-    #           height: 0.03777780011296272, 
-    #           left: 0.7002969980239868, 
-    #           top: 0.18777799606323242, 
-    #           width: 0.05044509842991829, 
-    #         }, 
-    #         confidence: 99.92639923095703, 
-    #         face_id: "7f5f88ed-d684-5a88-b0df-01e4a521552b", 
-    #         image_id: "812d9f04-86f9-54fc-9275-8d0dcbcb6784", 
-    #       }, 
-    #       {
-    #         bounding_box: {
-    #           height: 0.05555560067296028, 
-    #           left: 0.13946600258350372, 
-    #           top: 0.46333301067352295, 
-    #           width: 0.07270029932260513, 
-    #         }, 
-    #         confidence: 99.99469757080078, 
-    #         face_id: "895b4e2c-81de-5902-a4bd-d1792bda00b2", 
-    #         image_id: "812d9f04-86f9-54fc-9275-8d0dcbcb6784", 
-    #       }, 
-    #       {
-    #         bounding_box: {
-    #           height: 0.3259260058403015, 
-    #           left: 0.5144439935684204, 
-    #           top: 0.15111100673675537, 
-    #           width: 0.24444399774074554, 
-    #         }, 
-    #         confidence: 99.99949645996094, 
-    #         face_id: "8be04dba-4e58-520d-850e-9eae4af70eb2", 
-    #         image_id: "465f4e93-763e-51d0-b030-b9667a2d94b1", 
-    #       }, 
-    #       {
-    #         bounding_box: {
-    #           height: 0.18888899683952332, 
-    #           left: 0.3783380091190338, 
-    #           top: 0.2355560064315796, 
-    #           width: 0.25222599506378174, 
-    #         }, 
-    #         confidence: 99.9999008178711, 
-    #         face_id: "908544ad-edc3-59df-8faf-6a87cc256cf5", 
-    #         image_id: "3c731605-d772-541a-a5e7-0375dbc68a07", 
-    #       }, 
-    #       {
-    #         bounding_box: {
-    #           height: 0.33481499552726746, 
-    #           left: 0.31888899207115173, 
-    #           top: 0.49333301186561584, 
-    #           width: 0.25, 
-    #         }, 
-    #         confidence: 99.99909973144531, 
-    #         face_id: "ff43d742-0c13-5d16-a3e8-03d3f58e980b", 
-    #         image_id: "465f4e93-763e-51d0-b030-b9667a2d94b1", 
+    #         confidence: 99.82969665527344, 
+    #         face_id: "c0eb3b65-24a0-41e1-b23a-1908b1aaeac1", 
+    #         image_id: "56a0ca74-1c83-39dd-b363-051a64168a65", 
+    #         index_faces_model_version: "6.0", 
     #       }, 
     #     ], 
     #   }
@@ -4957,6 +5252,8 @@ module Aws::Rekognition
     #     collection_id: "CollectionId", # required
     #     next_token: "PaginationToken",
     #     max_results: 1,
+    #     user_id: "UserId",
+    #     face_ids: ["FaceId"],
     #   })
     #
     # @example Response structure
@@ -4971,6 +5268,7 @@ module Aws::Rekognition
     #   resp.faces[0].external_image_id #=> String
     #   resp.faces[0].confidence #=> Float
     #   resp.faces[0].index_faces_model_version #=> String
+    #   resp.faces[0].user_id #=> String
     #   resp.next_token #=> String
     #   resp.face_model_version #=> String
     #
@@ -5133,6 +5431,75 @@ module Aws::Rekognition
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Returns metadata of the User such as `UserID` in the specified
+    # collection. Anonymous User (to reserve faces without any identity) is
+    # not returned as part of this request. The results are sorted by system
+    # generated primary key ID. If the response is truncated, `NextToken` is
+    # returned in the response that can be used in the subsequent request to
+    # retrieve the next set of identities.
+    #
+    # @option params [required, String] :collection_id
+    #   The ID of an existing collection.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of UsersID to return.
+    #
+    # @option params [String] :next_token
+    #   Pagingation token to receive the next set of UsersID.
+    #
+    # @return [Types::ListUsersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListUsersResponse#users #users} => Array&lt;Types::User&gt;
+    #   * {Types::ListUsersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: ListUsers
+    #
+    #   # Returns metadata of the User such as UserID in the specified collection.
+    #
+    #   resp = client.list_users({
+    #     collection_id: "MyCollection", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "MGYZLAHX1T5a....", 
+    #     users: [
+    #       {
+    #         user_id: "demoUser4", 
+    #         user_status: "CREATED", 
+    #       }, 
+    #       {
+    #         user_id: "demoUser2", 
+    #         user_status: "CREATED", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_users({
+    #     collection_id: "CollectionId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.users #=> Array
+    #   resp.users[0].user_id #=> String
+    #   resp.users[0].user_status #=> String, one of "ACTIVE", "UPDATING", "CREATING", "CREATED"
+    #   resp.next_token #=> String
+    #
+    # @overload list_users(params = {})
+    # @param [Hash] params ({})
+    def list_users(params = {}, options = {})
+      req = build_request(:list_users, params)
       req.send_request(options)
     end
 
@@ -5475,6 +5842,7 @@ module Aws::Rekognition
     #   resp.face_matches[0].face.external_image_id #=> String
     #   resp.face_matches[0].face.confidence #=> Float
     #   resp.face_matches[0].face.index_faces_model_version #=> String
+    #   resp.face_matches[0].face.user_id #=> String
     #   resp.face_model_version #=> String
     #
     # @overload search_faces(params = {})
@@ -5658,12 +6026,352 @@ module Aws::Rekognition
     #   resp.face_matches[0].face.external_image_id #=> String
     #   resp.face_matches[0].face.confidence #=> Float
     #   resp.face_matches[0].face.index_faces_model_version #=> String
+    #   resp.face_matches[0].face.user_id #=> String
     #   resp.face_model_version #=> String
     #
     # @overload search_faces_by_image(params = {})
     # @param [Hash] params ({})
     def search_faces_by_image(params = {}, options = {})
       req = build_request(:search_faces_by_image, params)
+      req.send_request(options)
+    end
+
+    # Searches for UserIDs within a collection based on a `FaceId` or
+    # `UserId`. This API can be used to find the closest UserID (with a
+    # highest similarity) to associate a face. The request must be provided
+    # with either `FaceId` or `UserId`. The operation returns an array of
+    # UserID that match the `FaceId` or `UserId`, ordered by similarity
+    # score with the highest similarity first.
+    #
+    # @option params [required, String] :collection_id
+    #   The ID of an existing collection containing the UserID, used with a
+    #   UserId or FaceId. If a FaceId is provided, UserId isn’t required to be
+    #   present in the Collection.
+    #
+    # @option params [String] :user_id
+    #   ID for the existing User.
+    #
+    # @option params [String] :face_id
+    #   ID for the existing face.
+    #
+    # @option params [Float] :user_match_threshold
+    #   Optional value that specifies the minimum confidence in the matched
+    #   UserID to return. Default value of 80.
+    #
+    # @option params [Integer] :max_users
+    #   Maximum number of identities to return.
+    #
+    # @return [Types::SearchUsersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchUsersResponse#user_matches #user_matches} => Array&lt;Types::UserMatch&gt;
+    #   * {Types::SearchUsersResponse#face_model_version #face_model_version} => String
+    #   * {Types::SearchUsersResponse#searched_face #searched_face} => Types::SearchedFace
+    #   * {Types::SearchUsersResponse#searched_user #searched_user} => Types::SearchedUser
+    #
+    #
+    # @example Example: SearchUsers
+    #
+    #   # Searches for UserIDs within a collection based on a FaceId or UserId.
+    #
+    #   resp = client.search_users({
+    #     collection_id: "MyCollection", 
+    #     max_users: 2, 
+    #     user_id: "DemoUser", 
+    #     user_match_threshold: 70, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     face_model_version: "6", 
+    #     searched_user: {
+    #       user_id: "DemoUser", 
+    #     }, 
+    #     user_matches: [
+    #       {
+    #         similarity: 99.88186645507812, 
+    #         user: {
+    #           user_id: "demoUser1", 
+    #           user_status: "ACTIVE", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_users({
+    #     collection_id: "CollectionId", # required
+    #     user_id: "UserId",
+    #     face_id: "FaceId",
+    #     user_match_threshold: 1.0,
+    #     max_users: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_matches #=> Array
+    #   resp.user_matches[0].similarity #=> Float
+    #   resp.user_matches[0].user.user_id #=> String
+    #   resp.user_matches[0].user.user_status #=> String, one of "ACTIVE", "UPDATING", "CREATING", "CREATED"
+    #   resp.face_model_version #=> String
+    #   resp.searched_face.face_id #=> String
+    #   resp.searched_user.user_id #=> String
+    #
+    # @overload search_users(params = {})
+    # @param [Hash] params ({})
+    def search_users(params = {}, options = {})
+      req = build_request(:search_users, params)
+      req.send_request(options)
+    end
+
+    # Searches for UserIDs using a supplied image. It first detects the
+    # largest face in the image, and then searches a specified collection
+    # for matching UserIDs.
+    #
+    # The operation returns an array of UserIDs that match the face in the
+    # supplied image, ordered by similarity score with the highest
+    # similarity first. It also returns a bounding box for the face found in
+    # the input image.
+    #
+    # Information about faces detected in the supplied image, but not used
+    # for the search, is returned in an array of `UnsearchedFace` objects.
+    # If no valid face is detected in the image, the response will contain
+    # an empty `UserMatches` list and no `SearchedFace` object.
+    #
+    # @option params [required, String] :collection_id
+    #   The ID of an existing collection containing the UserID.
+    #
+    # @option params [required, Types::Image] :image
+    #   Provides the input image either as bytes or an S3 object.
+    #
+    #   You pass image bytes to an Amazon Rekognition API operation by using
+    #   the `Bytes` property. For example, you would use the `Bytes` property
+    #   to pass an image loaded from a local file system. Image bytes passed
+    #   by using the `Bytes` property must be base64-encoded. Your code may
+    #   not need to encode image bytes if you are using an AWS SDK to call
+    #   Amazon Rekognition API operations.
+    #
+    #   For more information, see Analyzing an Image Loaded from a Local File
+    #   System in the Amazon Rekognition Developer Guide.
+    #
+    #   You pass images stored in an S3 bucket to an Amazon Rekognition API
+    #   operation by using the `S3Object` property. Images stored in an S3
+    #   bucket do not need to be base64-encoded.
+    #
+    #   The region for the S3 bucket containing the S3 object must match the
+    #   region you use for Amazon Rekognition operations.
+    #
+    #   If you use the AWS CLI to call Amazon Rekognition operations, passing
+    #   image bytes using the Bytes property is not supported. You must first
+    #   upload the image to an Amazon S3 bucket and then call the operation
+    #   using the S3Object property.
+    #
+    #   For Amazon Rekognition to process an S3 object, the user must have
+    #   permission to access the S3 object. For more information, see How
+    #   Amazon Rekognition works with IAM in the Amazon Rekognition Developer
+    #   Guide.
+    #
+    # @option params [Float] :user_match_threshold
+    #   Specifies the minimum confidence in the UserID match to return.
+    #   Default value is 80.
+    #
+    # @option params [Integer] :max_users
+    #   Maximum number of UserIDs to return.
+    #
+    # @option params [String] :quality_filter
+    #   A filter that specifies a quality bar for how much filtering is done
+    #   to identify faces. Filtered faces aren't searched for in the
+    #   collection. The default value is NONE.
+    #
+    # @return [Types::SearchUsersByImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchUsersByImageResponse#user_matches #user_matches} => Array&lt;Types::UserMatch&gt;
+    #   * {Types::SearchUsersByImageResponse#face_model_version #face_model_version} => String
+    #   * {Types::SearchUsersByImageResponse#searched_face #searched_face} => Types::SearchedFaceDetails
+    #   * {Types::SearchUsersByImageResponse#unsearched_faces #unsearched_faces} => Array&lt;Types::UnsearchedFace&gt;
+    #
+    #
+    # @example Example: SearchUsersByImage
+    #
+    #   # Searches for UserIDs using a supplied image.
+    #
+    #   resp = client.search_users_by_image({
+    #     collection_id: "MyCollection", 
+    #     image: {
+    #       s3_object: {
+    #         bucket: "bucket", 
+    #         name: "input.jpg", 
+    #       }, 
+    #     }, 
+    #     max_users: 2, 
+    #     quality_filter: "MEDIUM", 
+    #     user_match_threshold: 70, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     face_model_version: "6", 
+    #     searched_face: {
+    #       face_detail: {
+    #         bounding_box: {
+    #           height: 0.07510016113519669, 
+    #           left: 0.3598678708076477, 
+    #           top: 0.5391526818275452, 
+    #           width: 0.03692837432026863, 
+    #         }, 
+    #       }, 
+    #     }, 
+    #     unsearched_faces: [
+    #       {
+    #         face_details: {
+    #           bounding_box: {
+    #             height: 0.0682177022099495, 
+    #             left: 0.6102562546730042, 
+    #             top: 0.5593535900115967, 
+    #             width: 0.031677018851041794, 
+    #           }, 
+    #         }, 
+    #         reasons: [
+    #           "FACE_NOT_LARGEST", 
+    #         ], 
+    #       }, 
+    #       {
+    #         face_details: {
+    #           bounding_box: {
+    #             height: 0.06347997486591339, 
+    #             left: 0.516062319278717, 
+    #             top: 0.6080358028411865, 
+    #             width: 0.03254449740052223, 
+    #           }, 
+    #         }, 
+    #         reasons: [
+    #           "FACE_NOT_LARGEST", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     user_matches: [
+    #       {
+    #         similarity: 99.88186645507812, 
+    #         user: {
+    #           user_id: "demoUser1", 
+    #           user_status: "ACTIVE", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_users_by_image({
+    #     collection_id: "CollectionId", # required
+    #     image: { # required
+    #       bytes: "data",
+    #       s3_object: {
+    #         bucket: "S3Bucket",
+    #         name: "S3ObjectName",
+    #         version: "S3ObjectVersion",
+    #       },
+    #     },
+    #     user_match_threshold: 1.0,
+    #     max_users: 1,
+    #     quality_filter: "NONE", # accepts NONE, AUTO, LOW, MEDIUM, HIGH
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_matches #=> Array
+    #   resp.user_matches[0].similarity #=> Float
+    #   resp.user_matches[0].user.user_id #=> String
+    #   resp.user_matches[0].user.user_status #=> String, one of "ACTIVE", "UPDATING", "CREATING", "CREATED"
+    #   resp.face_model_version #=> String
+    #   resp.searched_face.face_detail.bounding_box.width #=> Float
+    #   resp.searched_face.face_detail.bounding_box.height #=> Float
+    #   resp.searched_face.face_detail.bounding_box.left #=> Float
+    #   resp.searched_face.face_detail.bounding_box.top #=> Float
+    #   resp.searched_face.face_detail.age_range.low #=> Integer
+    #   resp.searched_face.face_detail.age_range.high #=> Integer
+    #   resp.searched_face.face_detail.smile.value #=> Boolean
+    #   resp.searched_face.face_detail.smile.confidence #=> Float
+    #   resp.searched_face.face_detail.eyeglasses.value #=> Boolean
+    #   resp.searched_face.face_detail.eyeglasses.confidence #=> Float
+    #   resp.searched_face.face_detail.sunglasses.value #=> Boolean
+    #   resp.searched_face.face_detail.sunglasses.confidence #=> Float
+    #   resp.searched_face.face_detail.gender.value #=> String, one of "Male", "Female"
+    #   resp.searched_face.face_detail.gender.confidence #=> Float
+    #   resp.searched_face.face_detail.beard.value #=> Boolean
+    #   resp.searched_face.face_detail.beard.confidence #=> Float
+    #   resp.searched_face.face_detail.mustache.value #=> Boolean
+    #   resp.searched_face.face_detail.mustache.confidence #=> Float
+    #   resp.searched_face.face_detail.eyes_open.value #=> Boolean
+    #   resp.searched_face.face_detail.eyes_open.confidence #=> Float
+    #   resp.searched_face.face_detail.mouth_open.value #=> Boolean
+    #   resp.searched_face.face_detail.mouth_open.confidence #=> Float
+    #   resp.searched_face.face_detail.emotions #=> Array
+    #   resp.searched_face.face_detail.emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN", "FEAR"
+    #   resp.searched_face.face_detail.emotions[0].confidence #=> Float
+    #   resp.searched_face.face_detail.landmarks #=> Array
+    #   resp.searched_face.face_detail.landmarks[0].type #=> String, one of "eyeLeft", "eyeRight", "nose", "mouthLeft", "mouthRight", "leftEyeBrowLeft", "leftEyeBrowRight", "leftEyeBrowUp", "rightEyeBrowLeft", "rightEyeBrowRight", "rightEyeBrowUp", "leftEyeLeft", "leftEyeRight", "leftEyeUp", "leftEyeDown", "rightEyeLeft", "rightEyeRight", "rightEyeUp", "rightEyeDown", "noseLeft", "noseRight", "mouthUp", "mouthDown", "leftPupil", "rightPupil", "upperJawlineLeft", "midJawlineLeft", "chinBottom", "midJawlineRight", "upperJawlineRight"
+    #   resp.searched_face.face_detail.landmarks[0].x #=> Float
+    #   resp.searched_face.face_detail.landmarks[0].y #=> Float
+    #   resp.searched_face.face_detail.pose.roll #=> Float
+    #   resp.searched_face.face_detail.pose.yaw #=> Float
+    #   resp.searched_face.face_detail.pose.pitch #=> Float
+    #   resp.searched_face.face_detail.quality.brightness #=> Float
+    #   resp.searched_face.face_detail.quality.sharpness #=> Float
+    #   resp.searched_face.face_detail.confidence #=> Float
+    #   resp.searched_face.face_detail.face_occluded.value #=> Boolean
+    #   resp.searched_face.face_detail.face_occluded.confidence #=> Float
+    #   resp.searched_face.face_detail.eye_direction.yaw #=> Float
+    #   resp.searched_face.face_detail.eye_direction.pitch #=> Float
+    #   resp.searched_face.face_detail.eye_direction.confidence #=> Float
+    #   resp.unsearched_faces #=> Array
+    #   resp.unsearched_faces[0].face_details.bounding_box.width #=> Float
+    #   resp.unsearched_faces[0].face_details.bounding_box.height #=> Float
+    #   resp.unsearched_faces[0].face_details.bounding_box.left #=> Float
+    #   resp.unsearched_faces[0].face_details.bounding_box.top #=> Float
+    #   resp.unsearched_faces[0].face_details.age_range.low #=> Integer
+    #   resp.unsearched_faces[0].face_details.age_range.high #=> Integer
+    #   resp.unsearched_faces[0].face_details.smile.value #=> Boolean
+    #   resp.unsearched_faces[0].face_details.smile.confidence #=> Float
+    #   resp.unsearched_faces[0].face_details.eyeglasses.value #=> Boolean
+    #   resp.unsearched_faces[0].face_details.eyeglasses.confidence #=> Float
+    #   resp.unsearched_faces[0].face_details.sunglasses.value #=> Boolean
+    #   resp.unsearched_faces[0].face_details.sunglasses.confidence #=> Float
+    #   resp.unsearched_faces[0].face_details.gender.value #=> String, one of "Male", "Female"
+    #   resp.unsearched_faces[0].face_details.gender.confidence #=> Float
+    #   resp.unsearched_faces[0].face_details.beard.value #=> Boolean
+    #   resp.unsearched_faces[0].face_details.beard.confidence #=> Float
+    #   resp.unsearched_faces[0].face_details.mustache.value #=> Boolean
+    #   resp.unsearched_faces[0].face_details.mustache.confidence #=> Float
+    #   resp.unsearched_faces[0].face_details.eyes_open.value #=> Boolean
+    #   resp.unsearched_faces[0].face_details.eyes_open.confidence #=> Float
+    #   resp.unsearched_faces[0].face_details.mouth_open.value #=> Boolean
+    #   resp.unsearched_faces[0].face_details.mouth_open.confidence #=> Float
+    #   resp.unsearched_faces[0].face_details.emotions #=> Array
+    #   resp.unsearched_faces[0].face_details.emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN", "FEAR"
+    #   resp.unsearched_faces[0].face_details.emotions[0].confidence #=> Float
+    #   resp.unsearched_faces[0].face_details.landmarks #=> Array
+    #   resp.unsearched_faces[0].face_details.landmarks[0].type #=> String, one of "eyeLeft", "eyeRight", "nose", "mouthLeft", "mouthRight", "leftEyeBrowLeft", "leftEyeBrowRight", "leftEyeBrowUp", "rightEyeBrowLeft", "rightEyeBrowRight", "rightEyeBrowUp", "leftEyeLeft", "leftEyeRight", "leftEyeUp", "leftEyeDown", "rightEyeLeft", "rightEyeRight", "rightEyeUp", "rightEyeDown", "noseLeft", "noseRight", "mouthUp", "mouthDown", "leftPupil", "rightPupil", "upperJawlineLeft", "midJawlineLeft", "chinBottom", "midJawlineRight", "upperJawlineRight"
+    #   resp.unsearched_faces[0].face_details.landmarks[0].x #=> Float
+    #   resp.unsearched_faces[0].face_details.landmarks[0].y #=> Float
+    #   resp.unsearched_faces[0].face_details.pose.roll #=> Float
+    #   resp.unsearched_faces[0].face_details.pose.yaw #=> Float
+    #   resp.unsearched_faces[0].face_details.pose.pitch #=> Float
+    #   resp.unsearched_faces[0].face_details.quality.brightness #=> Float
+    #   resp.unsearched_faces[0].face_details.quality.sharpness #=> Float
+    #   resp.unsearched_faces[0].face_details.confidence #=> Float
+    #   resp.unsearched_faces[0].face_details.face_occluded.value #=> Boolean
+    #   resp.unsearched_faces[0].face_details.face_occluded.confidence #=> Float
+    #   resp.unsearched_faces[0].face_details.eye_direction.yaw #=> Float
+    #   resp.unsearched_faces[0].face_details.eye_direction.pitch #=> Float
+    #   resp.unsearched_faces[0].face_details.eye_direction.confidence #=> Float
+    #   resp.unsearched_faces[0].reasons #=> Array
+    #   resp.unsearched_faces[0].reasons[0] #=> String, one of "FACE_NOT_LARGEST", "EXCEEDS_MAX_FACES", "EXTREME_POSE", "LOW_BRIGHTNESS", "LOW_SHARPNESS", "LOW_CONFIDENCE", "SMALL_BOUNDING_BOX", "LOW_FACE_QUALITY"
+    #
+    # @overload search_users_by_image(params = {})
+    # @param [Hash] params ({})
+    def search_users_by_image(params = {}, options = {})
+      req = build_request(:search_users_by_image, params)
       req.send_request(options)
     end
 
@@ -6782,7 +7490,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

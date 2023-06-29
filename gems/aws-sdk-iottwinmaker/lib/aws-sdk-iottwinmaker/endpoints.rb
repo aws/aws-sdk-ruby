@@ -9,6 +9,7 @@
 
 
 module Aws::IoTTwinMaker
+  # @api private
   module Endpoints
 
     class BatchPutPropertyValues

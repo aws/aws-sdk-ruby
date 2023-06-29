@@ -275,6 +275,11 @@ module Aws::CloudTrail
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -386,7 +391,7 @@ module Aws::CloudTrail
     # specified key and a value of null. You can tag a trail or event data
     # store that applies to all Amazon Web Services Regions only from the
     # Region in which the trail or event data store was created (also known
-    # as its home region).
+    # as its home Region).
     #
     # @option params [required, String] :resource_id
     #   Specifies the ARN of the trail, event data store, or channel to which
@@ -396,7 +401,7 @@ module Aws::CloudTrail
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
     #   The format of an event data store ARN is:
-    #   `arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE`
     #
     #   The format of a channel ARN is:
     #   `arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890`
@@ -575,7 +580,7 @@ module Aws::CloudTrail
     #
     # @option params [Boolean] :multi_region_enabled
     #   Specifies whether the event data store includes events from all
-    #   regions, or only from the region in which the event data store is
+    #   Regions, or only from the Region in which the event data store is
     #   created.
     #
     # @option params [Boolean] :organization_enabled
@@ -626,6 +631,10 @@ module Aws::CloudTrail
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html
     #
+    # @option params [Boolean] :start_ingestion
+    #   Specifies whether the event data store should start ingesting live
+    #   events. The default is true.
+    #
     # @return [Types::CreateEventDataStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEventDataStoreResponse#event_data_store_arn #event_data_store_arn} => String
@@ -672,13 +681,14 @@ module Aws::CloudTrail
     #       },
     #     ],
     #     kms_key_id: "EventDataStoreKmsKeyId",
+    #     start_ingestion: false,
     #   })
     #
     # @example Response structure
     #
     #   resp.event_data_store_arn #=> String
     #   resp.name #=> String
-    #   resp.status #=> String, one of "CREATED", "ENABLED", "PENDING_DELETION"
+    #   resp.status #=> String, one of "CREATED", "ENABLED", "PENDING_DELETION", "STARTING_INGESTION", "STOPPING_INGESTION", "STOPPED_INGESTION"
     #   resp.advanced_event_selectors #=> Array
     #   resp.advanced_event_selectors[0].name #=> String
     #   resp.advanced_event_selectors[0].field_selectors #=> Array
@@ -761,10 +771,10 @@ module Aws::CloudTrail
     #   such as IAM to the log files.
     #
     # @option params [Boolean] :is_multi_region_trail
-    #   Specifies whether the trail is created in the current region or in all
-    #   regions. The default is false, which creates a trail only in the
-    #   region where you are signed in. As a best practice, consider creating
-    #   trails that log events in all regions.
+    #   Specifies whether the trail is created in the current Region or in all
+    #   Regions. The default is false, which creates a trail only in the
+    #   Region where you are signed in. As a best practice, consider creating
+    #   trails that log events in all Regions.
     #
     # @option params [Boolean] :enable_log_file_validation
     #   Specifies whether log file integrity validation is enabled. The
@@ -975,10 +985,10 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Deletes a trail. This operation must be called from the region in
+    # Deletes a trail. This operation must be called from the Region in
     # which the trail was created. `DeleteTrail` cannot be called on the
-    # shadow trails (replicated trails in other regions) of a trail that is
-    # enabled in all regions.
+    # shadow trails (replicated trails in other Regions) of a trail that is
+    # enabled in all Regions.
     #
     # @option params [required, String] :name
     #   Specifies the name or the CloudTrail ARN of the trail to be deleted.
@@ -1029,15 +1039,22 @@ module Aws::CloudTrail
 
     # Returns metadata about a query, including query run time in
     # milliseconds, number of events scanned and matched, and query status.
-    # You must specify an ARN for `EventDataStore`, and a value for
-    # `QueryID`.
+    # If the query results were delivered to an S3 bucket, the response also
+    # provides the S3 URI and the delivery status.
+    #
+    # You must specify either a `QueryID` or a `QueryAlias`. Specifying the
+    # `QueryAlias` parameter returns information about the last query run
+    # for the alias.
     #
     # @option params [String] :event_data_store
     #   The ARN (or the ID suffix of the ARN) of an event data store on which
     #   the specified query was run.
     #
-    # @option params [required, String] :query_id
+    # @option params [String] :query_id
     #   The query ID.
+    #
+    # @option params [String] :query_alias
+    #   The alias that identifies a query template.
     #
     # @return [Types::DescribeQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1053,7 +1070,8 @@ module Aws::CloudTrail
     #
     #   resp = client.describe_query({
     #     event_data_store: "EventDataStoreArn",
-    #     query_id: "UUID", # required
+    #     query_id: "UUID",
+    #     query_alias: "QueryAlias",
     #   })
     #
     # @example Response structure
@@ -1080,7 +1098,7 @@ module Aws::CloudTrail
     end
 
     # Retrieves settings for one or more trails associated with the current
-    # region for your account.
+    # Region for your account.
     #
     # @option params [Array<String>] :trail_name_list
     #   Specifies a list of trail names, trail ARNs, or both, of the trails to
@@ -1089,29 +1107,29 @@ module Aws::CloudTrail
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
     #   If an empty list is specified, information for the trail in the
-    #   current region is returned.
+    #   current Region is returned.
     #
     #   * If an empty list is specified and `IncludeShadowTrails` is false,
-    #     then information for all trails in the current region is returned.
+    #     then information for all trails in the current Region is returned.
     #
     #   * If an empty list is specified and IncludeShadowTrails is null or
-    #     true, then information for all trails in the current region and any
-    #     associated shadow trails in other regions is returned.
+    #     true, then information for all trails in the current Region and any
+    #     associated shadow trails in other Regions is returned.
     #
     #   <note markdown="1"> If one or more trail names are specified, information is returned only
     #   if the names match the names of trails belonging only to the current
-    #   region and current account. To return information about a trail in
-    #   another region, you must specify its trail ARN.
+    #   Region and current account. To return information about a trail in
+    #   another Region, you must specify its trail ARN.
     #
     #    </note>
     #
     # @option params [Boolean] :include_shadow_trails
     #   Specifies whether to include shadow trails in the response. A shadow
-    #   trail is the replication in a region of a trail that was created in a
-    #   different region, or in the case of an organization trail, the
+    #   trail is the replication in a Region of a trail that was created in a
+    #   different Region, or in the case of an organization trail, the
     #   replication of an organization trail in member accounts. If you do not
     #   include shadow trails, organization trails in a member account and
-    #   region replication trails will not be returned. The default is true.
+    #   Region replication trails will not be returned. The default is true.
     #
     # @return [Types::DescribeTrailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1244,7 +1262,7 @@ module Aws::CloudTrail
     #
     #   resp.event_data_store_arn #=> String
     #   resp.name #=> String
-    #   resp.status #=> String, one of "CREATED", "ENABLED", "PENDING_DELETION"
+    #   resp.status #=> String, one of "CREATED", "ENABLED", "PENDING_DELETION", "STARTING_INGESTION", "STOPPING_INGESTION", "STOPPED_INGESTION"
     #   resp.advanced_event_selectors #=> Array
     #   resp.advanced_event_selectors[0].name #=> String
     #   resp.advanced_event_selectors[0].field_selectors #=> Array
@@ -1294,9 +1312,9 @@ module Aws::CloudTrail
     # For more information about logging management and data events, see the
     # following topics in the *CloudTrail User Guide*:
     #
-    # * [Logging management events for trails ][1]
+    # * [Logging management events][1]
     #
-    # * [Logging data events for trails ][2]
+    # * [Logging data events][2]
     #
     #
     #
@@ -1485,8 +1503,7 @@ module Aws::CloudTrail
     end
 
     # Gets event data results of a query. You must specify the `QueryID`
-    # value returned by the `StartQuery` operation, and an ARN for
-    # `EventDataStore`.
+    # value returned by the `StartQuery` operation.
     #
     # @option params [String] :event_data_store
     #   The ARN (or ID suffix of the ARN) of the event data store against
@@ -1622,14 +1639,14 @@ module Aws::CloudTrail
     # Returns a JSON-formatted list of information about the specified
     # trail. Fields include information on delivery errors, Amazon SNS and
     # Amazon S3 errors, and start and stop logging times for each trail.
-    # This operation returns trail status from a single region. To return
-    # trail status from all regions, you must call the operation on each
-    # region.
+    # This operation returns trail status from a single Region. To return
+    # trail status from all Regions, you must call the operation on each
+    # Region.
     #
     # @option params [required, String] :name
     #   Specifies the name or the CloudTrail ARN of the trail for which you
     #   are requesting status. To get the status of a shadow trail (a
-    #   replication of the trail in another region), you must specify its ARN.
+    #   replication of the trail in another Region), you must specify its ARN.
     #   The following is the format of a trail ARN.
     #
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
@@ -1732,7 +1749,7 @@ module Aws::CloudTrail
     end
 
     # Returns information about all event data stores in the account, in the
-    # current region.
+    # current Region.
     #
     # @option params [String] :next_token
     #   A token you can use to get the next page of event data store results.
@@ -1760,7 +1777,7 @@ module Aws::CloudTrail
     #   resp.event_data_stores[0].event_data_store_arn #=> String
     #   resp.event_data_stores[0].name #=> String
     #   resp.event_data_stores[0].termination_protection_enabled #=> Boolean
-    #   resp.event_data_stores[0].status #=> String, one of "CREATED", "ENABLED", "PENDING_DELETION"
+    #   resp.event_data_stores[0].status #=> String, one of "CREATED", "ENABLED", "PENDING_DELETION", "STARTING_INGESTION", "STOPPING_INGESTION", "STOPPED_INGESTION"
     #   resp.event_data_stores[0].advanced_event_selectors #=> Array
     #   resp.event_data_stores[0].advanced_event_selectors[0].name #=> String
     #   resp.event_data_stores[0].advanced_event_selectors[0].field_selectors #=> Array
@@ -1894,10 +1911,10 @@ module Aws::CloudTrail
     # to validate digest files that were signed with its corresponding
     # private key.
     #
-    # <note markdown="1"> CloudTrail uses different private and public key pairs per region.
-    # Each digest file is signed with a private key unique to its region.
-    # When you validate a digest file from a specific region, you must look
-    # in the same region for its corresponding public key.
+    # <note markdown="1"> CloudTrail uses different private and public key pairs per Region.
+    # Each digest file is signed with a private key unique to its Region.
+    # When you validate a digest file from a specific Region, you must look
+    # in the same Region for its corresponding public key.
     #
     #  </note>
     #
@@ -2012,12 +2029,21 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Lists the tags for the trail, event data store, or channel in the
-    # current region.
+    # Lists the tags for the specified trails, event data stores, or
+    # channels in the current Region.
     #
     # @option params [required, Array<String>] :resource_id_list
     #   Specifies a list of trail, event data store, or channel ARNs whose
     #   tags will be listed. The list has a limit of 20 ARNs.
+    #
+    #   Example trail ARN format:
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
+    #
+    #   Example event data store ARN format:
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE`
+    #
+    #   Example channel ARN format:
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890`
     #
     # @option params [String] :next_token
     #   Reserved for future use.
@@ -2095,7 +2121,7 @@ module Aws::CloudTrail
 
     # Looks up [management events][1] or [CloudTrail Insights events][2]
     # that are captured by CloudTrail. You can look up events that occurred
-    # in a region within the last 90 days. Lookup supports the following
+    # in a Region within the last 90 days. Lookup supports the following
     # attributes for management events:
     #
     # * Amazon Web Services access key
@@ -2127,7 +2153,7 @@ module Aws::CloudTrail
     # you can use to get the next page of results.
     #
     # The rate of lookup requests is limited to two per second, per account,
-    # per region. If this limit is exceeded, a throttling error occurs.
+    # per Region. If this limit is exceeded, a throttling error occurs.
     #
     #
     #
@@ -2215,9 +2241,14 @@ module Aws::CloudTrail
 
     # Configures an event selector or advanced event selectors for your
     # trail. Use event selectors or advanced event selectors to specify
-    # management and data event settings for your trail. By default, trails
-    # created without specific event selectors are configured to log all
-    # read and write management events, and no data events.
+    # management and data event settings for your trail. If you want your
+    # trail to log Insights events, be sure the event selector enables
+    # logging of the Insights event types you want configured for your
+    # trail. For more information about logging Insights events, see
+    # [Logging Insights events for trails][1] in the *CloudTrail User
+    # Guide*. By default, trails created without specific event selectors
+    # are configured to log all read and write management events, and no
+    # data events.
     #
     # When an event occurs in your account, CloudTrail evaluates the event
     # selectors or advanced event selectors in all trails. For each trail,
@@ -2242,28 +2273,29 @@ module Aws::CloudTrail
     # 5.  The `GetConsoleOutput` is a read-only event that doesn't match
     #     your event selector. The trail doesn't log the event.
     #
-    # The `PutEventSelectors` operation must be called from the region in
+    # The `PutEventSelectors` operation must be called from the Region in
     # which the trail was created; otherwise, an
     # `InvalidHomeRegionException` exception is thrown.
     #
     # You can configure up to five event selectors for each trail. For more
-    # information, see [Logging management events for trails ][1], [Logging
-    # data events for trails ][2], and [Quotas in CloudTrail][3] in the
-    # *CloudTrail User Guide*.
+    # information, see [Logging management events][2], [Logging data
+    # events][3], and [Quotas in CloudTrail][4] in the *CloudTrail User
+    # Guide*.
     #
     # You can add advanced event selectors, and conditions for your advanced
     # event selectors, up to a maximum of 500 values for all conditions and
     # selectors on a trail. You can use either `AdvancedEventSelectors` or
     # `EventSelectors`, but not both. If you apply `AdvancedEventSelectors`
     # to a trail, any existing `EventSelectors` are overwritten. For more
-    # information about advanced event selectors, see [Logging data events
-    # for trails][2] in the *CloudTrail User Guide*.
+    # information about advanced event selectors, see [Logging data
+    # events][3] in the *CloudTrail User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html
-    # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html
-    # [3]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html
+    # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html
+    # [3]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html
+    # [4]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html
     #
     # @option params [required, String] :trail_name
     #   Specifies the name of the trail or trail ARN. If you specify a trail
@@ -2299,8 +2331,8 @@ module Aws::CloudTrail
     #   selectors on a trail. You can use either `AdvancedEventSelectors` or
     #   `EventSelectors`, but not both. If you apply `AdvancedEventSelectors`
     #   to a trail, any existing `EventSelectors` are overwritten. For more
-    #   information about advanced event selectors, see [Logging data events
-    #   for trails][1] in the *CloudTrail User Guide*.
+    #   information about advanced event selectors, see [Logging data
+    #   events][1] in the *CloudTrail User Guide*.
     #
     #
     #
@@ -2391,6 +2423,12 @@ module Aws::CloudTrail
     # an empty list of insight types. The valid Insights event types in this
     # release are `ApiErrorRateInsight` and `ApiCallRateInsight`.
     #
+    # To log CloudTrail Insights events on API call volume, the trail must
+    # log `write` management events. To log CloudTrail Insights events on
+    # API error rate, the trail must log `read` or `write` management
+    # events. You can call `GetEventSelectors` on a trail to check whether
+    # the trail logs management events.
+    #
     # @option params [required, String] :trail_name
     #   The name of the CloudTrail trail for which you want to change or add
     #   Insights selectors.
@@ -2398,7 +2436,15 @@ module Aws::CloudTrail
     # @option params [required, Array<Types::InsightSelector>] :insight_selectors
     #   A JSON string that contains the insight types you want to log on a
     #   trail. `ApiCallRateInsight` and `ApiErrorRateInsight` are valid
-    #   insight types.
+    #   Insight types.
+    #
+    #   The `ApiCallRateInsight` Insights type analyzes write-only management
+    #   API calls that are aggregated per minute against a baseline API call
+    #   volume.
+    #
+    #   The `ApiErrorRateInsight` Insights type analyzes management API calls
+    #   that result in error codes. The error is shown if the API call is
+    #   unsuccessful.
     #
     # @return [Types::PutInsightSelectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2520,7 +2566,7 @@ module Aws::CloudTrail
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
     #   Example event data store ARN format:
-    #   `arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE`
     #
     #   Example channel ARN format:
     #   `arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890`
@@ -2585,7 +2631,7 @@ module Aws::CloudTrail
     #
     #   resp.event_data_store_arn #=> String
     #   resp.name #=> String
-    #   resp.status #=> String, one of "CREATED", "ENABLED", "PENDING_DELETION"
+    #   resp.status #=> String, one of "CREATED", "ENABLED", "PENDING_DELETION", "STARTING_INGESTION", "STOPPING_INGESTION", "STOPPED_INGESTION"
     #   resp.advanced_event_selectors #=> Array
     #   resp.advanced_event_selectors[0].name #=> String
     #   resp.advanced_event_selectors[0].field_selectors #=> Array
@@ -2616,6 +2662,32 @@ module Aws::CloudTrail
     # @param [Hash] params ({})
     def restore_event_data_store(params = {}, options = {})
       req = build_request(:restore_event_data_store, params)
+      req.send_request(options)
+    end
+
+    # Starts the ingestion of live events on an event data store specified
+    # as either an ARN or the ID portion of the ARN. To start ingestion, the
+    # event data store `Status` must be `STOPPED_INGESTION` and the
+    # `eventCategory` must be `Management`, `Data`, or `ConfigurationItem`.
+    #
+    # @option params [required, String] :event_data_store
+    #   The ARN (or ID suffix of the ARN) of the event data store for which
+    #   you want to start ingestion.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_event_data_store_ingestion({
+    #     event_data_store: "EventDataStoreArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StartEventDataStoreIngestion AWS API Documentation
+    #
+    # @overload start_event_data_store_ingestion(params = {})
+    # @param [Hash] params ({})
+    def start_event_data_store_ingestion(params = {}, options = {})
+      req = build_request(:start_event_data_store_ingestion, params)
       req.send_request(options)
     end
 
@@ -2726,11 +2798,11 @@ module Aws::CloudTrail
     end
 
     # Starts the recording of Amazon Web Services API calls and log file
-    # delivery for a trail. For a trail that is enabled in all regions, this
-    # operation must be called from the region in which the trail was
+    # delivery for a trail. For a trail that is enabled in all Regions, this
+    # operation must be called from the Region in which the trail was
     # created. This operation cannot be called on the shadow trails
-    # (replicated trails in other regions) of a trail that is enabled in all
-    # regions.
+    # (replicated trails in other Regions) of a trail that is enabled in all
+    # Regions.
     #
     # @option params [required, String] :name
     #   Specifies the name or the CloudTrail ARN of the trail for which
@@ -2756,16 +2828,27 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Starts a CloudTrail Lake query. The required `QueryStatement`
-    # parameter provides your SQL query, enclosed in single quotation marks.
-    # Use the optional `DeliveryS3Uri` parameter to deliver the query
-    # results to an S3 bucket.
+    # Starts a CloudTrail Lake query. Use the `QueryStatement` parameter to
+    # provide your SQL query, enclosed in single quotation marks. Use the
+    # optional `DeliveryS3Uri` parameter to deliver the query results to an
+    # S3 bucket.
     #
-    # @option params [required, String] :query_statement
+    # `StartQuery` requires you specify either the `QueryStatement`
+    # parameter, or a `QueryAlias` and any `QueryParameters`. In the current
+    # release, the `QueryAlias` and `QueryParameters` parameters are used
+    # only for the queries that populate the CloudTrail Lake dashboards.
+    #
+    # @option params [String] :query_statement
     #   The SQL code of your query.
     #
     # @option params [String] :delivery_s3_uri
     #   The URI for the S3 bucket where CloudTrail delivers the query results.
+    #
+    # @option params [String] :query_alias
+    #   The alias that identifies a query template.
+    #
+    # @option params [Array<String>] :query_parameters
+    #   The query parameters for the specified `QueryAlias`.
     #
     # @return [Types::StartQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2774,8 +2857,10 @@ module Aws::CloudTrail
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_query({
-    #     query_statement: "QueryStatement", # required
+    #     query_statement: "QueryStatement",
     #     delivery_s3_uri: "DeliveryS3Uri",
+    #     query_alias: "QueryAlias",
+    #     query_parameters: ["QueryParameter"],
     #   })
     #
     # @example Response structure
@@ -2788,6 +2873,32 @@ module Aws::CloudTrail
     # @param [Hash] params ({})
     def start_query(params = {}, options = {})
       req = build_request(:start_query, params)
+      req.send_request(options)
+    end
+
+    # Stops the ingestion of live events on an event data store specified as
+    # either an ARN or the ID portion of the ARN. To stop ingestion, the
+    # event data store `Status` must be `ENABLED` and the `eventCategory`
+    # must be `Management`, `Data`, or `ConfigurationItem`.
+    #
+    # @option params [required, String] :event_data_store
+    #   The ARN (or ID suffix of the ARN) of the event data store for which
+    #   you want to stop ingestion.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_event_data_store_ingestion({
+    #     event_data_store: "EventDataStoreArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StopEventDataStoreIngestion AWS API Documentation
+    #
+    # @overload stop_event_data_store_ingestion(params = {})
+    # @param [Hash] params ({})
+    def stop_event_data_store_ingestion(params = {}, options = {})
+      req = build_request(:stop_event_data_store_ingestion, params)
       req.send_request(options)
     end
 
@@ -2846,11 +2957,11 @@ module Aws::CloudTrail
     # delivery for the specified trail. Under most circumstances, there is
     # no need to use this action. You can update a trail without stopping it
     # first. This action is the only way to stop recording. For a trail
-    # enabled in all regions, this operation must be called from the region
+    # enabled in all Regions, this operation must be called from the Region
     # in which the trail was created, or an `InvalidHomeRegionException`
     # will occur. This operation cannot be called on the shadow trails
-    # (replicated trails in other regions) of a trail enabled in all
-    # regions.
+    # (replicated trails in other Regions) of a trail enabled in all
+    # Regions.
     #
     # @option params [required, String] :name
     #   Specifies the name or the CloudTrail ARN of the trail for which
@@ -2936,11 +3047,15 @@ module Aws::CloudTrail
     # For event data stores for CloudTrail events, `AdvancedEventSelectors`
     # includes or excludes management and data events in your event data
     # store. For more information about `AdvancedEventSelectors`, see
-    # PutEventSelectorsRequest$AdvancedEventSelectors.
+    # [AdvancedEventSelectors][1].
     #
     # For event data stores for Config configuration items, Audit Manager
     # evidence, or non-Amazon Web Services events, `AdvancedEventSelectors`
     # includes events of that type in your event data store.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html
     #
     # @option params [required, String] :event_data_store
     #   The ARN (or the ID suffix of the ARN) of the event data store that you
@@ -2956,7 +3071,7 @@ module Aws::CloudTrail
     #
     # @option params [Boolean] :multi_region_enabled
     #   Specifies whether an event data store collects events from all
-    #   regions, or only from the region in which it was created.
+    #   Regions, or only from the Region in which it was created.
     #
     # @option params [Boolean] :organization_enabled
     #   Specifies whether an event data store collects events logged for an
@@ -3047,7 +3162,7 @@ module Aws::CloudTrail
     #
     #   resp.event_data_store_arn #=> String
     #   resp.name #=> String
-    #   resp.status #=> String, one of "CREATED", "ENABLED", "PENDING_DELETION"
+    #   resp.status #=> String, one of "CREATED", "ENABLED", "PENDING_DELETION", "STARTING_INGESTION", "STOPPING_INGESTION", "STOPPED_INGESTION"
     #   resp.advanced_event_selectors #=> Array
     #   resp.advanced_event_selectors[0].name #=> String
     #   resp.advanced_event_selectors[0].field_selectors #=> Array
@@ -3086,7 +3201,7 @@ module Aws::CloudTrail
     # the CloudTrail service. Use this action to designate an existing
     # bucket for log delivery. If the existing bucket has previously been a
     # target for CloudTrail log files, an IAM policy exists for the bucket.
-    # `UpdateTrail` must be called from the region in which the trail was
+    # `UpdateTrail` must be called from the Region in which the trail was
     # created; otherwise, an `InvalidHomeRegionException` is thrown.
     #
     # @option params [required, String] :name
@@ -3136,14 +3251,14 @@ module Aws::CloudTrail
     #   such as IAM to the log files.
     #
     # @option params [Boolean] :is_multi_region_trail
-    #   Specifies whether the trail applies only to the current region or to
-    #   all regions. The default is false. If the trail exists only in the
-    #   current region and this value is set to true, shadow trails
-    #   (replications of the trail) will be created in the other regions. If
-    #   the trail exists in all regions and this value is set to false, the
-    #   trail will remain in the region where it was created, and its shadow
-    #   trails in other regions will be deleted. As a best practice, consider
-    #   using trails that log events in all regions.
+    #   Specifies whether the trail applies only to the current Region or to
+    #   all Regions. The default is false. If the trail exists only in the
+    #   current Region and this value is set to true, shadow trails
+    #   (replications of the trail) will be created in the other Regions. If
+    #   the trail exists in all Regions and this value is set to false, the
+    #   trail will remain in the Region where it was created, and its shadow
+    #   trails in other Regions will be deleted. As a best practice, consider
+    #   using trails that log events in all Regions.
     #
     # @option params [Boolean] :enable_log_file_validation
     #   Specifies whether log file validation is enabled. The default is
@@ -3281,7 +3396,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

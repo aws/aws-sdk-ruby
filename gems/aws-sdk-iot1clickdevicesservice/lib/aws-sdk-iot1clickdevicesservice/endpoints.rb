@@ -9,6 +9,7 @@
 
 
 module Aws::IoT1ClickDevicesService
+  # @api private
   module Endpoints
 
     class ClaimDevicesByClaimCode

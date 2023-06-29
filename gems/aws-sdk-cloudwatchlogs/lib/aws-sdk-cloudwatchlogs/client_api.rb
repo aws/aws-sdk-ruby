@@ -16,6 +16,9 @@ module Aws::CloudWatchLogs
     AccessPolicy = Shapes::StringShape.new(name: 'AccessPolicy')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountIds = Shapes::ListShape.new(name: 'AccountIds')
+    AccountPolicies = Shapes::ListShape.new(name: 'AccountPolicies')
+    AccountPolicy = Shapes::StructureShape.new(name: 'AccountPolicy')
+    AccountPolicyDocument = Shapes::StringShape.new(name: 'AccountPolicyDocument')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssociateKmsKeyRequest = Shapes::StructureShape.new(name: 'AssociateKmsKeyRequest')
@@ -29,6 +32,7 @@ module Aws::CloudWatchLogs
     DataProtectionStatus = Shapes::StringShape.new(name: 'DataProtectionStatus')
     Days = Shapes::IntegerShape.new(name: 'Days')
     DefaultValue = Shapes::FloatShape.new(name: 'DefaultValue')
+    DeleteAccountPolicyRequest = Shapes::StructureShape.new(name: 'DeleteAccountPolicyRequest')
     DeleteDataProtectionPolicyRequest = Shapes::StructureShape.new(name: 'DeleteDataProtectionPolicyRequest')
     DeleteDestinationRequest = Shapes::StructureShape.new(name: 'DeleteDestinationRequest')
     DeleteLogGroupRequest = Shapes::StructureShape.new(name: 'DeleteLogGroupRequest')
@@ -40,6 +44,8 @@ module Aws::CloudWatchLogs
     DeleteRetentionPolicyRequest = Shapes::StructureShape.new(name: 'DeleteRetentionPolicyRequest')
     DeleteSubscriptionFilterRequest = Shapes::StructureShape.new(name: 'DeleteSubscriptionFilterRequest')
     Descending = Shapes::BooleanShape.new(name: 'Descending')
+    DescribeAccountPoliciesRequest = Shapes::StructureShape.new(name: 'DescribeAccountPoliciesRequest')
+    DescribeAccountPoliciesResponse = Shapes::StructureShape.new(name: 'DescribeAccountPoliciesResponse')
     DescribeDestinationsRequest = Shapes::StructureShape.new(name: 'DescribeDestinationsRequest')
     DescribeDestinationsResponse = Shapes::StructureShape.new(name: 'DescribeDestinationsResponse')
     DescribeExportTasksRequest = Shapes::StructureShape.new(name: 'DescribeExportTasksRequest')
@@ -104,6 +110,8 @@ module Aws::CloudWatchLogs
     GetQueryResultsRequest = Shapes::StructureShape.new(name: 'GetQueryResultsRequest')
     GetQueryResultsResponse = Shapes::StructureShape.new(name: 'GetQueryResultsResponse')
     IncludeLinkedAccounts = Shapes::BooleanShape.new(name: 'IncludeLinkedAccounts')
+    InheritedProperties = Shapes::ListShape.new(name: 'InheritedProperties')
+    InheritedProperty = Shapes::StringShape.new(name: 'InheritedProperty')
     InputLogEvent = Shapes::StructureShape.new(name: 'InputLogEvent')
     InputLogEvents = Shapes::ListShape.new(name: 'InputLogEvents')
     InputLogStreamNames = Shapes::ListShape.new(name: 'InputLogStreamNames')
@@ -152,6 +160,9 @@ module Aws::CloudWatchLogs
     Percentage = Shapes::IntegerShape.new(name: 'Percentage')
     PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
     PolicyName = Shapes::StringShape.new(name: 'PolicyName')
+    PolicyType = Shapes::StringShape.new(name: 'PolicyType')
+    PutAccountPolicyRequest = Shapes::StructureShape.new(name: 'PutAccountPolicyRequest')
+    PutAccountPolicyResponse = Shapes::StructureShape.new(name: 'PutAccountPolicyResponse')
     PutDataProtectionPolicyRequest = Shapes::StructureShape.new(name: 'PutDataProtectionPolicyRequest')
     PutDataProtectionPolicyResponse = Shapes::StructureShape.new(name: 'PutDataProtectionPolicyResponse')
     PutDestinationPolicyRequest = Shapes::StructureShape.new(name: 'PutDestinationPolicyRequest')
@@ -189,6 +200,7 @@ module Aws::CloudWatchLogs
     ResultField = Shapes::StructureShape.new(name: 'ResultField')
     ResultRows = Shapes::ListShape.new(name: 'ResultRows')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    Scope = Shapes::StringShape.new(name: 'Scope')
     SearchedLogStream = Shapes::StructureShape.new(name: 'SearchedLogStream')
     SearchedLogStreams = Shapes::ListShape.new(name: 'SearchedLogStreams')
     SequenceToken = Shapes::StringShape.new(name: 'SequenceToken')
@@ -226,6 +238,16 @@ module Aws::CloudWatchLogs
 
     AccountIds.member = Shapes::ShapeRef.new(shape: AccountId)
 
+    AccountPolicies.member = Shapes::ShapeRef.new(shape: AccountPolicy)
+
+    AccountPolicy.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, location_name: "policyName"))
+    AccountPolicy.add_member(:policy_document, Shapes::ShapeRef.new(shape: AccountPolicyDocument, location_name: "policyDocument"))
+    AccountPolicy.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedTime"))
+    AccountPolicy.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, location_name: "policyType"))
+    AccountPolicy.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "scope"))
+    AccountPolicy.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    AccountPolicy.struct_class = Types::AccountPolicy
+
     AssociateKmsKeyRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
     AssociateKmsKeyRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, required: true, location_name: "kmsKeyId"))
     AssociateKmsKeyRequest.struct_class = Types::AssociateKmsKeyRequest
@@ -256,6 +278,10 @@ module Aws::CloudWatchLogs
 
     DataAlreadyAcceptedException.add_member(:expected_sequence_token, Shapes::ShapeRef.new(shape: SequenceToken, location_name: "expectedSequenceToken"))
     DataAlreadyAcceptedException.struct_class = Types::DataAlreadyAcceptedException
+
+    DeleteAccountPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "policyName"))
+    DeleteAccountPolicyRequest.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, required: true, location_name: "policyType"))
+    DeleteAccountPolicyRequest.struct_class = Types::DeleteAccountPolicyRequest
 
     DeleteDataProtectionPolicyRequest.add_member(:log_group_identifier, Shapes::ShapeRef.new(shape: LogGroupIdentifier, required: true, location_name: "logGroupIdentifier"))
     DeleteDataProtectionPolicyRequest.struct_class = Types::DeleteDataProtectionPolicyRequest
@@ -289,6 +315,14 @@ module Aws::CloudWatchLogs
     DeleteSubscriptionFilterRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
     DeleteSubscriptionFilterRequest.add_member(:filter_name, Shapes::ShapeRef.new(shape: FilterName, required: true, location_name: "filterName"))
     DeleteSubscriptionFilterRequest.struct_class = Types::DeleteSubscriptionFilterRequest
+
+    DescribeAccountPoliciesRequest.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, required: true, location_name: "policyType"))
+    DescribeAccountPoliciesRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, location_name: "policyName"))
+    DescribeAccountPoliciesRequest.add_member(:account_identifiers, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIdentifiers"))
+    DescribeAccountPoliciesRequest.struct_class = Types::DescribeAccountPoliciesRequest
+
+    DescribeAccountPoliciesResponse.add_member(:account_policies, Shapes::ShapeRef.new(shape: AccountPolicies, location_name: "accountPolicies"))
+    DescribeAccountPoliciesResponse.struct_class = Types::DescribeAccountPoliciesResponse
 
     DescribeDestinationsRequest.add_member(:destination_name_prefix, Shapes::ShapeRef.new(shape: DestinationName, location_name: "DestinationNamePrefix"))
     DescribeDestinationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -497,6 +531,8 @@ module Aws::CloudWatchLogs
     GetQueryResultsResponse.add_member(:status, Shapes::ShapeRef.new(shape: QueryStatus, location_name: "status"))
     GetQueryResultsResponse.struct_class = Types::GetQueryResultsResponse
 
+    InheritedProperties.member = Shapes::ShapeRef.new(shape: InheritedProperty)
+
     InputLogEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "timestamp"))
     InputLogEvent.add_member(:message, Shapes::ShapeRef.new(shape: EventMessage, required: true, location_name: "message"))
     InputLogEvent.struct_class = Types::InputLogEvent
@@ -534,6 +570,7 @@ module Aws::CloudWatchLogs
     LogGroup.add_member(:stored_bytes, Shapes::ShapeRef.new(shape: StoredBytes, location_name: "storedBytes"))
     LogGroup.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     LogGroup.add_member(:data_protection_status, Shapes::ShapeRef.new(shape: DataProtectionStatus, location_name: "dataProtectionStatus"))
+    LogGroup.add_member(:inherited_properties, Shapes::ShapeRef.new(shape: InheritedProperties, location_name: "inheritedProperties"))
     LogGroup.struct_class = Types::LogGroup
 
     LogGroupField.add_member(:name, Shapes::ShapeRef.new(shape: Field, location_name: "name"))
@@ -600,6 +637,15 @@ module Aws::CloudWatchLogs
     OutputLogEvent.struct_class = Types::OutputLogEvent
 
     OutputLogEvents.member = Shapes::ShapeRef.new(shape: OutputLogEvent)
+
+    PutAccountPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "policyName"))
+    PutAccountPolicyRequest.add_member(:policy_document, Shapes::ShapeRef.new(shape: AccountPolicyDocument, required: true, location_name: "policyDocument"))
+    PutAccountPolicyRequest.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, required: true, location_name: "policyType"))
+    PutAccountPolicyRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "scope"))
+    PutAccountPolicyRequest.struct_class = Types::PutAccountPolicyRequest
+
+    PutAccountPolicyResponse.add_member(:account_policy, Shapes::ShapeRef.new(shape: AccountPolicy, location_name: "accountPolicy"))
+    PutAccountPolicyResponse.struct_class = Types::PutAccountPolicyResponse
 
     PutDataProtectionPolicyRequest.add_member(:log_group_identifier, Shapes::ShapeRef.new(shape: LogGroupIdentifier, required: true, location_name: "logGroupIdentifier"))
     PutDataProtectionPolicyRequest.add_member(:policy_document, Shapes::ShapeRef.new(shape: DataProtectionPolicyDocument, required: true, location_name: "policyDocument"))
@@ -879,6 +925,18 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:delete_account_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAccountPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAccountPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationAbortedException)
+      end)
+
       api.add_operation(:delete_data_protection_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDataProtectionPolicy"
         o.http_method = "POST"
@@ -982,6 +1040,18 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationAbortedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:describe_account_policies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAccountPolicies"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAccountPoliciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAccountPoliciesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationAbortedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
@@ -1222,6 +1292,18 @@ module Aws::CloudWatchLogs
         o.output = Shapes::ShapeRef.new(shape: ListTagsLogGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:put_account_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAccountPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutAccountPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutAccountPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationAbortedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:put_data_protection_policy, Seahorse::Model::Operation.new.tap do |o|

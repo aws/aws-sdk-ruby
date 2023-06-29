@@ -9,6 +9,7 @@
 
 
 module Aws::SSMContacts
+  # @api private
   module Endpoints
 
     class AcceptPage

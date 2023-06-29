@@ -172,6 +172,7 @@ module Aws::SWF
     SignalExternalWorkflowExecutionInitiatedEventAttributes = Shapes::StructureShape.new(name: 'SignalExternalWorkflowExecutionInitiatedEventAttributes')
     SignalName = Shapes::StringShape.new(name: 'SignalName')
     SignalWorkflowExecutionInput = Shapes::StructureShape.new(name: 'SignalWorkflowExecutionInput')
+    StartAtPreviousStartedEvent = Shapes::BooleanShape.new(name: 'StartAtPreviousStartedEvent')
     StartChildWorkflowExecutionDecisionAttributes = Shapes::StructureShape.new(name: 'StartChildWorkflowExecutionDecisionAttributes')
     StartChildWorkflowExecutionFailedCause = Shapes::StringShape.new(name: 'StartChildWorkflowExecutionFailedCause')
     StartChildWorkflowExecutionFailedEventAttributes = Shapes::StructureShape.new(name: 'StartChildWorkflowExecutionFailedEventAttributes')
@@ -723,6 +724,7 @@ module Aws::SWF
     PollForDecisionTaskInput.add_member(:next_page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextPageToken"))
     PollForDecisionTaskInput.add_member(:maximum_page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "maximumPageSize"))
     PollForDecisionTaskInput.add_member(:reverse_order, Shapes::ShapeRef.new(shape: ReverseOrder, location_name: "reverseOrder"))
+    PollForDecisionTaskInput.add_member(:start_at_previous_started_event, Shapes::ShapeRef.new(shape: StartAtPreviousStartedEvent, location_name: "startAtPreviousStartedEvent"))
     PollForDecisionTaskInput.struct_class = Types::PollForDecisionTaskInput
 
     RecordActivityTaskHeartbeatInput.add_member(:task_token, Shapes::ShapeRef.new(shape: TaskToken, required: true, location_name: "taskToken"))

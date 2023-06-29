@@ -9,6 +9,7 @@
 
 
 module Aws::StorageGateway
+  # @api private
   module Endpoints
 
     class ActivateGateway

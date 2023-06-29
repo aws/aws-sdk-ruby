@@ -18,6 +18,7 @@ module Aws::GuardDuty
     AcceptInvitationRequest = Shapes::StructureShape.new(name: 'AcceptInvitationRequest')
     AcceptInvitationResponse = Shapes::StructureShape.new(name: 'AcceptInvitationResponse')
     AccessControlList = Shapes::StructureShape.new(name: 'AccessControlList')
+    AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccessKeyDetails = Shapes::StructureShape.new(name: 'AccessKeyDetails')
     AccountDetail = Shapes::StructureShape.new(name: 'AccountDetail')
     AccountDetails = Shapes::ListShape.new(name: 'AccountDetails')
@@ -381,6 +382,7 @@ module Aws::GuardDuty
     SecurityGroups = Shapes::ListShape.new(name: 'SecurityGroups')
     Service = Shapes::StructureShape.new(name: 'Service')
     ServiceAdditionalInfo = Shapes::StructureShape.new(name: 'ServiceAdditionalInfo')
+    SessionNameList = Shapes::ListShape.new(name: 'SessionNameList')
     SortCriteria = Shapes::StructureShape.new(name: 'SortCriteria')
     SourceIps = Shapes::ListShape.new(name: 'SourceIps')
     Sources = Shapes::ListShape.new(name: 'Sources')
@@ -474,6 +476,10 @@ module Aws::GuardDuty
     AccessControlList.add_member(:allows_public_read_access, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowsPublicReadAccess"))
     AccessControlList.add_member(:allows_public_write_access, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowsPublicWriteAccess"))
     AccessControlList.struct_class = Types::AccessControlList
+
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    AccessDeniedException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "__type"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
 
     AccessKeyDetails.add_member(:access_key_id, Shapes::ShapeRef.new(shape: String, location_name: "accessKeyId"))
     AccessKeyDetails.add_member(:principal_id, Shapes::ShapeRef.new(shape: String, location_name: "principalId"))
@@ -1255,6 +1261,7 @@ module Aws::GuardDuty
     KubernetesUserDetails.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "username"))
     KubernetesUserDetails.add_member(:uid, Shapes::ShapeRef.new(shape: String, location_name: "uid"))
     KubernetesUserDetails.add_member(:groups, Shapes::ShapeRef.new(shape: Groups, location_name: "groups"))
+    KubernetesUserDetails.add_member(:session_name, Shapes::ShapeRef.new(shape: SessionNameList, location_name: "sessionName"))
     KubernetesUserDetails.struct_class = Types::KubernetesUserDetails
 
     KubernetesWorkloadDetails.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
@@ -1816,6 +1823,8 @@ module Aws::GuardDuty
     ServiceAdditionalInfo.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
     ServiceAdditionalInfo.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
     ServiceAdditionalInfo.struct_class = Types::ServiceAdditionalInfo
+
+    SessionNameList.member = Shapes::ShapeRef.new(shape: String)
 
     SortCriteria.add_member(:attribute_name, Shapes::ShapeRef.new(shape: String, location_name: "attributeName"))
     SortCriteria.add_member(:order_by, Shapes::ShapeRef.new(shape: OrderBy, location_name: "orderBy"))
@@ -2667,6 +2676,7 @@ module Aws::GuardDuty
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
@@ -2724,6 +2734,7 @@ module Aws::GuardDuty
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
@@ -2744,6 +2755,7 @@ module Aws::GuardDuty
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 

@@ -9,6 +9,7 @@
 
 
 module Aws::CloudControlApi
+  # @api private
   module Endpoints
 
     class CancelResourceRequest

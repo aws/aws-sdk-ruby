@@ -9,6 +9,7 @@
 
 
 module Aws::AppConfig
+  # @api private
   module Endpoints
 
     class CreateApplication

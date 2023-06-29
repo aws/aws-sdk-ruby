@@ -275,6 +275,11 @@ module Aws::Connect
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -574,7 +579,7 @@ module Aws::Connect
     #
     #   resp = client.associate_instance_storage_config({
     #     instance_id: "InstanceId", # required
-    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS
+    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS, SCREEN_RECORDINGS
     #     storage_config: { # required
     #       association_id: "AssociationId",
     #       storage_type: "S3", # required, accepts S3, KINESIS_VIDEO_STREAM, KINESIS_STREAM, KINESIS_FIREHOSE
@@ -873,6 +878,24 @@ module Aws::Connect
     # phone numbers that you can claim. Call the [DescribePhoneNumber][4]
     # API to verify the status of a previous [ClaimPhoneNumber][5]
     # operation.
+    #
+    # If you plan to claim and release numbers frequently during a 30 day
+    # period, contact us for a service quota exception. Otherwise, it is
+    # possible you will be blocked from claiming and releasing any more
+    # numbers until 30 days past the oldest number released has expired.
+    #
+    # By default you can claim and release up to 200% of your maximum number
+    # of active phone numbers during any 30 day period. If you claim and
+    # release phone numbers using the UI or API during a rolling 30 day
+    # cycle that exceeds 200% of your phone number service level quota, you
+    # will be blocked from claiming any more numbers until 30 days past the
+    # oldest number released has expired.
+    #
+    # For example, if you already have 99 claimed numbers and a service
+    # level quota of 99 phone numbers, and in any 30 day period you release
+    # 99, claim 99, and then release 99, you will have exceeded the 200%
+    # limit. At that point you are blocked from claiming any more numbers
+    # until you open an Amazon Web Services support ticket.
     #
     #
     #
@@ -1199,7 +1222,7 @@ module Aws::Connect
     #           title: "EvaluationFormSectionTitle", # required
     #           ref_id: "ReferenceId", # required
     #           instructions: "EvaluationFormQuestionInstructions",
-    #           items: {
+    #           items: { # required
     #             # recursive EvaluationFormItemsList
     #           },
     #           weight: 1.0,
@@ -1556,6 +1579,67 @@ module Aws::Connect
     # @param [Hash] params ({})
     def create_participant(params = {}, options = {})
       req = build_request(:create_participant, params)
+      req.send_request(options)
+    end
+
+    # Creates a prompt. For more information about prompts, such as
+    # supported file types and maximum length, see [Create prompts][1] in
+    # the *Amazon Connect Administrator's Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/prompts.html
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :name
+    #   The name of the prompt.
+    #
+    # @option params [String] :description
+    #   The description of the prompt.
+    #
+    # @option params [required, String] :s3_uri
+    #   The URI for the S3 bucket where the prompt is stored.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
+    #
+    # @return [Types::CreatePromptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePromptResponse#prompt_arn #prompt_arn} => String
+    #   * {Types::CreatePromptResponse#prompt_id #prompt_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_prompt({
+    #     instance_id: "InstanceId", # required
+    #     name: "CommonNameLength127", # required
+    #     description: "PromptDescription",
+    #     s3_uri: "S3Uri", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.prompt_arn #=> String
+    #   resp.prompt_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreatePrompt AWS API Documentation
+    #
+    # @overload create_prompt(params = {})
+    # @param [Hash] params ({})
+    def create_prompt(params = {}, options = {})
+      req = build_request(:create_prompt, params)
       req.send_request(options)
     end
 
@@ -2780,6 +2864,37 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Deletes a prompt.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :prompt_id
+    #   A unique identifier for the prompt.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_prompt({
+    #     instance_id: "InstanceId", # required
+    #     prompt_id: "PromptId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeletePrompt AWS API Documentation
+    #
+    # @overload delete_prompt(params = {})
+    # @param [Hash] params ({})
+    def delete_prompt(params = {}, options = {})
+      req = build_request(:delete_prompt, params)
+      req.send_request(options)
+    end
+
     # Deletes a quick connect.
     #
     # @option params [required, String] :instance_id
@@ -3174,7 +3289,7 @@ module Aws::Connect
     #   resp.contact.id #=> String
     #   resp.contact.initial_contact_id #=> String
     #   resp.contact.previous_contact_id #=> String
-    #   resp.contact.initiation_method #=> String, one of "INBOUND", "OUTBOUND", "TRANSFER", "QUEUE_TRANSFER", "CALLBACK", "API", "DISCONNECT", "MONITOR"
+    #   resp.contact.initiation_method #=> String, one of "INBOUND", "OUTBOUND", "TRANSFER", "QUEUE_TRANSFER", "CALLBACK", "API", "DISCONNECT", "MONITOR", "EXTERNAL_OUTBOUND"
     #   resp.contact.name #=> String
     #   resp.contact.description #=> String
     #   resp.contact.channel #=> String, one of "VOICE", "CHAT", "TASK"
@@ -3574,6 +3689,7 @@ module Aws::Connect
     #   resp.instance.status_reason.message #=> String
     #   resp.instance.inbound_calls_enabled #=> Boolean
     #   resp.instance.outbound_calls_enabled #=> Boolean
+    #   resp.instance.instance_access_url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeInstance AWS API Documentation
     #
@@ -3655,7 +3771,7 @@ module Aws::Connect
     #   resp = client.describe_instance_storage_config({
     #     instance_id: "InstanceId", # required
     #     association_id: "AssociationId", # required
-    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS
+    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS, SCREEN_RECORDINGS
     #   })
     #
     # @example Response structure
@@ -3728,6 +3844,48 @@ module Aws::Connect
     # @param [Hash] params ({})
     def describe_phone_number(params = {}, options = {})
       req = build_request(:describe_phone_number, params)
+      req.send_request(options)
+    end
+
+    # Describes the prompt.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :prompt_id
+    #   A unique identifier for the prompt.
+    #
+    # @return [Types::DescribePromptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePromptResponse#prompt #prompt} => Types::Prompt
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_prompt({
+    #     instance_id: "InstanceId", # required
+    #     prompt_id: "PromptId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.prompt.prompt_arn #=> String
+    #   resp.prompt.prompt_id #=> String
+    #   resp.prompt.name #=> String
+    #   resp.prompt.description #=> String
+    #   resp.prompt.tags #=> Hash
+    #   resp.prompt.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribePrompt AWS API Documentation
+    #
+    # @overload describe_prompt(params = {})
+    # @param [Hash] params ({})
+    def describe_prompt(params = {}, options = {})
+      req = build_request(:describe_prompt, params)
       req.send_request(options)
     end
 
@@ -4352,7 +4510,7 @@ module Aws::Connect
     #   resp = client.disassociate_instance_storage_config({
     #     instance_id: "InstanceId", # required
     #     association_id: "AssociationId", # required
-    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS
+    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS, SCREEN_RECORDINGS
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateInstanceStorageConfig AWS API Documentation
@@ -5010,7 +5168,7 @@ module Aws::Connect
     #   resp.user_data_list[0].contacts #=> Array
     #   resp.user_data_list[0].contacts[0].contact_id #=> String
     #   resp.user_data_list[0].contacts[0].channel #=> String, one of "VOICE", "CHAT", "TASK"
-    #   resp.user_data_list[0].contacts[0].initiation_method #=> String, one of "INBOUND", "OUTBOUND", "TRANSFER", "QUEUE_TRANSFER", "CALLBACK", "API", "DISCONNECT", "MONITOR"
+    #   resp.user_data_list[0].contacts[0].initiation_method #=> String, one of "INBOUND", "OUTBOUND", "TRANSFER", "QUEUE_TRANSFER", "CALLBACK", "API", "DISCONNECT", "MONITOR", "EXTERNAL_OUTBOUND"
     #   resp.user_data_list[0].contacts[0].agent_contact_state #=> String, one of "INCOMING", "PENDING", "CONNECTING", "CONNECTED", "CONNECTED_ONHOLD", "MISSED", "ERROR", "ENDED", "REJECTED"
     #   resp.user_data_list[0].contacts[0].state_start_timestamp #=> Time
     #   resp.user_data_list[0].contacts[0].connected_to_agent_timestamp #=> Time
@@ -5381,15 +5539,12 @@ module Aws::Connect
     # previous version of this API. It has new metrics, offers filtering at
     # a metric level, and offers the ability to filter and group data by
     # channels, queues, routing profiles, agents, and agent hierarchy
-    # levels. It can retrieve historical data for the last 14 days, in
+    # levels. It can retrieve historical data for the last 35 days, in
     # 24-hour intervals.
     #
     # For a description of the historical metrics that are supported by
     # `GetMetricDataV2` and `GetMetricData`, see [Historical metrics
     # definitions][2] in the *Amazon Connect Administrator's Guide*.
-    #
-    # This API is not available in the Amazon Web Services GovCloud (US)
-    # Regions.
     #
     #
     #
@@ -5405,8 +5560,8 @@ module Aws::Connect
     #   reporting interval for the retrieval of historical metrics data. The
     #   time must be before the end time timestamp. The time range between the
     #   start and end time must be less than 24 hours. The start time cannot
-    #   be earlier than 14 days before the time of the request. Historical
-    #   metrics are available for 14 days.
+    #   be earlier than 35 days before the time of the request. Historical
+    #   metrics are available for 35 days.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   The timestamp, in UNIX Epoch time format, at which to end the
@@ -5764,6 +5919,43 @@ module Aws::Connect
     # @param [Hash] params ({})
     def get_metric_data_v2(params = {}, options = {})
       req = build_request(:get_metric_data_v2, params)
+      req.send_request(options)
+    end
+
+    # Gets the prompt file.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :prompt_id
+    #   A unique identifier for the prompt.
+    #
+    # @return [Types::GetPromptFileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPromptFileResponse#prompt_presigned_url #prompt_presigned_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_prompt_file({
+    #     instance_id: "InstanceId", # required
+    #     prompt_id: "PromptId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.prompt_presigned_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetPromptFile AWS API Documentation
+    #
+    # @overload get_prompt_file(params = {})
+    # @param [Hash] params ({})
+    def get_prompt_file(params = {}, options = {})
+      req = build_request(:get_prompt_file, params)
       req.send_request(options)
     end
 
@@ -6637,7 +6829,7 @@ module Aws::Connect
     #
     #   resp = client.list_instance_storage_configs({
     #     instance_id: "InstanceId", # required
-    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS
+    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS, SCREEN_RECORDINGS
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -6710,6 +6902,7 @@ module Aws::Connect
     #   resp.instance_summary_list[0].instance_status #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "CREATION_FAILED"
     #   resp.instance_summary_list[0].inbound_calls_enabled #=> Boolean
     #   resp.instance_summary_list[0].outbound_calls_enabled #=> Boolean
+    #   resp.instance_summary_list[0].instance_access_url #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListInstances AWS API Documentation
@@ -8080,6 +8273,24 @@ module Aws::Connect
     # until the period has ended. If you accidentally release a phone
     # number, contact Amazon Web Services Support.
     #
+    # If you plan to claim and release numbers frequently during a 30 day
+    # period, contact us for a service quota exception. Otherwise, it is
+    # possible you will be blocked from claiming and releasing any more
+    # numbers until 30 days past the oldest number released has expired.
+    #
+    # By default you can claim and release up to 200% of your maximum number
+    # of active phone numbers during any 30 day period. If you claim and
+    # release phone numbers using the UI or API during a rolling 30 day
+    # cycle that exceeds 200% of your phone number service level quota, you
+    # will be blocked from claiming any more numbers until 30 days past the
+    # oldest number released has expired.
+    #
+    # For example, if you already have 99 claimed numbers and a service
+    # level quota of 99 phone numbers, and in any 30 day period you release
+    # 99, claim 99, and then release 99, you will have exceeded the 200%
+    # limit. At that point you are blocked from claiming any more numbers
+    # until you open an Amazon Web Services support ticket.
+    #
     # @option params [required, String] :phone_number_id
     #   A unique identifier for the phone number.
     #
@@ -8184,9 +8395,10 @@ module Aws::Connect
     end
 
     # When a contact is being recorded, and the recording has been suspended
-    # using SuspendContactRecording, this API resumes recording the call.
+    # using SuspendContactRecording, this API resumes recording the call or
+    # screen.
     #
-    # Only voice recordings are supported at this time.
+    # Voice and screen recordings are supported.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -8282,6 +8494,215 @@ module Aws::Connect
     # @param [Hash] params ({})
     def search_available_phone_numbers(params = {}, options = {})
       req = build_request(:search_available_phone_numbers, params)
+      req.send_request(options)
+    end
+
+    # Searches the hours of operation in an Amazon Connect instance, with
+    # optional filtering.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [Types::HoursOfOperationSearchFilter] :search_filter
+    #   Filters to be applied to search results.
+    #
+    # @option params [Types::HoursOfOperationSearchCriteria] :search_criteria
+    #   The search criteria to be used to return hours of operations.
+    #
+    # @return [Types::SearchHoursOfOperationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchHoursOfOperationsResponse#hours_of_operations #hours_of_operations} => Array&lt;Types::HoursOfOperation&gt;
+    #   * {Types::SearchHoursOfOperationsResponse#next_token #next_token} => String
+    #   * {Types::SearchHoursOfOperationsResponse#approximate_total_count #approximate_total_count} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_hours_of_operations({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken2500",
+    #     max_results: 1,
+    #     search_filter: {
+    #       tag_filter: {
+    #         or_conditions: [
+    #           [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #         ],
+    #         and_conditions: [
+    #           {
+    #             tag_key: "String",
+    #             tag_value: "String",
+    #           },
+    #         ],
+    #         tag_condition: {
+    #           tag_key: "String",
+    #           tag_value: "String",
+    #         },
+    #       },
+    #     },
+    #     search_criteria: {
+    #       or_conditions: [
+    #         {
+    #           # recursive HoursOfOperationSearchCriteria
+    #         },
+    #       ],
+    #       and_conditions: [
+    #         {
+    #           # recursive HoursOfOperationSearchCriteria
+    #         },
+    #       ],
+    #       string_condition: {
+    #         field_name: "String",
+    #         value: "String",
+    #         comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hours_of_operations #=> Array
+    #   resp.hours_of_operations[0].hours_of_operation_id #=> String
+    #   resp.hours_of_operations[0].hours_of_operation_arn #=> String
+    #   resp.hours_of_operations[0].name #=> String
+    #   resp.hours_of_operations[0].description #=> String
+    #   resp.hours_of_operations[0].time_zone #=> String
+    #   resp.hours_of_operations[0].config #=> Array
+    #   resp.hours_of_operations[0].config[0].day #=> String, one of "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"
+    #   resp.hours_of_operations[0].config[0].start_time.hours #=> Integer
+    #   resp.hours_of_operations[0].config[0].start_time.minutes #=> Integer
+    #   resp.hours_of_operations[0].config[0].end_time.hours #=> Integer
+    #   resp.hours_of_operations[0].config[0].end_time.minutes #=> Integer
+    #   resp.hours_of_operations[0].tags #=> Hash
+    #   resp.hours_of_operations[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #   resp.approximate_total_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchHoursOfOperations AWS API Documentation
+    #
+    # @overload search_hours_of_operations(params = {})
+    # @param [Hash] params ({})
+    def search_hours_of_operations(params = {}, options = {})
+      req = build_request(:search_hours_of_operations, params)
+      req.send_request(options)
+    end
+
+    # Searches prompts in an Amazon Connect instance, with optional
+    # filtering.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [Types::PromptSearchFilter] :search_filter
+    #   Filters to be applied to search results.
+    #
+    # @option params [Types::PromptSearchCriteria] :search_criteria
+    #   The search criteria to be used to return prompts.
+    #
+    # @return [Types::SearchPromptsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchPromptsResponse#prompts #prompts} => Array&lt;Types::Prompt&gt;
+    #   * {Types::SearchPromptsResponse#next_token #next_token} => String
+    #   * {Types::SearchPromptsResponse#approximate_total_count #approximate_total_count} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_prompts({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken2500",
+    #     max_results: 1,
+    #     search_filter: {
+    #       tag_filter: {
+    #         or_conditions: [
+    #           [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #         ],
+    #         and_conditions: [
+    #           {
+    #             tag_key: "String",
+    #             tag_value: "String",
+    #           },
+    #         ],
+    #         tag_condition: {
+    #           tag_key: "String",
+    #           tag_value: "String",
+    #         },
+    #       },
+    #     },
+    #     search_criteria: {
+    #       or_conditions: [
+    #         {
+    #           # recursive PromptSearchCriteria
+    #         },
+    #       ],
+    #       and_conditions: [
+    #         {
+    #           # recursive PromptSearchCriteria
+    #         },
+    #       ],
+    #       string_condition: {
+    #         field_name: "String",
+    #         value: "String",
+    #         comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.prompts #=> Array
+    #   resp.prompts[0].prompt_arn #=> String
+    #   resp.prompts[0].prompt_id #=> String
+    #   resp.prompts[0].name #=> String
+    #   resp.prompts[0].description #=> String
+    #   resp.prompts[0].tags #=> Hash
+    #   resp.prompts[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #   resp.approximate_total_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchPrompts AWS API Documentation
+    #
+    # @overload search_prompts(params = {})
+    # @param [Hash] params ({})
+    def search_prompts(params = {}, options = {})
+      req = build_request(:search_prompts, params)
       req.send_request(options)
     end
 
@@ -8400,6 +8821,176 @@ module Aws::Connect
     # @param [Hash] params ({})
     def search_queues(params = {}, options = {})
       req = build_request(:search_queues, params)
+      req.send_request(options)
+    end
+
+    # Searches quick connects in an Amazon Connect instance, with optional
+    # filtering.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [Types::QuickConnectSearchFilter] :search_filter
+    #   Filters to be applied to search results.
+    #
+    # @option params [Types::QuickConnectSearchCriteria] :search_criteria
+    #   The search criteria to be used to return quick connects.
+    #
+    # @return [Types::SearchQuickConnectsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchQuickConnectsResponse#quick_connects #quick_connects} => Array&lt;Types::QuickConnect&gt;
+    #   * {Types::SearchQuickConnectsResponse#next_token #next_token} => String
+    #   * {Types::SearchQuickConnectsResponse#approximate_total_count #approximate_total_count} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_quick_connects({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken2500",
+    #     max_results: 1,
+    #     search_filter: {
+    #       tag_filter: {
+    #         or_conditions: [
+    #           [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #         ],
+    #         and_conditions: [
+    #           {
+    #             tag_key: "String",
+    #             tag_value: "String",
+    #           },
+    #         ],
+    #         tag_condition: {
+    #           tag_key: "String",
+    #           tag_value: "String",
+    #         },
+    #       },
+    #     },
+    #     search_criteria: {
+    #       or_conditions: [
+    #         {
+    #           # recursive QuickConnectSearchCriteria
+    #         },
+    #       ],
+    #       and_conditions: [
+    #         {
+    #           # recursive QuickConnectSearchCriteria
+    #         },
+    #       ],
+    #       string_condition: {
+    #         field_name: "String",
+    #         value: "String",
+    #         comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.quick_connects #=> Array
+    #   resp.quick_connects[0].quick_connect_arn #=> String
+    #   resp.quick_connects[0].quick_connect_id #=> String
+    #   resp.quick_connects[0].name #=> String
+    #   resp.quick_connects[0].description #=> String
+    #   resp.quick_connects[0].quick_connect_config.quick_connect_type #=> String, one of "USER", "QUEUE", "PHONE_NUMBER"
+    #   resp.quick_connects[0].quick_connect_config.user_config.user_id #=> String
+    #   resp.quick_connects[0].quick_connect_config.user_config.contact_flow_id #=> String
+    #   resp.quick_connects[0].quick_connect_config.queue_config.queue_id #=> String
+    #   resp.quick_connects[0].quick_connect_config.queue_config.contact_flow_id #=> String
+    #   resp.quick_connects[0].quick_connect_config.phone_config.phone_number #=> String
+    #   resp.quick_connects[0].tags #=> Hash
+    #   resp.quick_connects[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #   resp.approximate_total_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchQuickConnects AWS API Documentation
+    #
+    # @overload search_quick_connects(params = {})
+    # @param [Hash] params ({})
+    def search_quick_connects(params = {}, options = {})
+      req = build_request(:search_quick_connects, params)
+      req.send_request(options)
+    end
+
+    # Searches tags used in an Amazon Connect instance using optional search
+    # criteria.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the Amazon Resource Name (ARN) of the instance.
+    #
+    # @option params [Array<String>] :resource_types
+    #   The list of resource types to be used to search tags from. If not
+    #   provided or if any empty list is provided, this API will search from
+    #   all supported resource types.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [Types::ResourceTagsSearchCriteria] :search_criteria
+    #   The search criteria to be used to return tags.
+    #
+    # @return [Types::SearchResourceTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchResourceTagsResponse#tags #tags} => Array&lt;Types::TagSet&gt;
+    #   * {Types::SearchResourceTagsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_resource_tags({
+    #     instance_id: "InstanceIdOrArn", # required
+    #     resource_types: ["String"],
+    #     next_token: "NextToken2500",
+    #     max_results: 1,
+    #     search_criteria: {
+    #       tag_search_condition: {
+    #         tag_key: "TagKeyString",
+    #         tag_value: "TagValueString",
+    #         tag_key_comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #         tag_value_comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchResourceTags AWS API Documentation
+    #
+    # @overload search_resource_tags(params = {})
+    # @param [Hash] params ({})
+    def search_resource_tags(params = {}, options = {})
+      req = build_request(:search_resource_tags, params)
       req.send_request(options)
     end
 
@@ -9646,15 +10237,15 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # When a contact is being recorded, this API suspends recording the
-    # call. For example, you might suspend the call recording while
-    # collecting sensitive information, such as a credit card number. Then
-    # use ResumeContactRecording to restart recording.
+    # When a contact is being recorded, this API suspends recording the call
+    # or screen. For example, you might suspend the call or screen recording
+    # while collecting sensitive information, such as a credit card number.
+    # Then use ResumeContactRecording to restart recording.
     #
     # The period of time that the recording is suspended is filled with
     # silence in the final recording.
     #
-    # Only voice recordings are supported at this time.
+    # Voice and screen recordings are supported.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -10396,7 +10987,7 @@ module Aws::Connect
     #           title: "EvaluationFormSectionTitle", # required
     #           ref_id: "ReferenceId", # required
     #           instructions: "EvaluationFormQuestionInstructions",
-    #           items: {
+    #           items: { # required
     #             # recursive EvaluationFormItemsList
     #           },
     #           weight: 1.0,
@@ -10612,7 +11203,7 @@ module Aws::Connect
     #   resp = client.update_instance_storage_config({
     #     instance_id: "InstanceId", # required
     #     association_id: "AssociationId", # required
-    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS
+    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS, SCREEN_RECORDINGS
     #     storage_config: { # required
     #       association_id: "AssociationId",
     #       storage_type: "S3", # required, accepts S3, KINESIS_VIDEO_STREAM, KINESIS_STREAM, KINESIS_FIREHOSE
@@ -10720,7 +11311,13 @@ module Aws::Connect
     # instance or traffic distribution group in the same Amazon Web Services
     # Region.
     #
-    # You can call [DescribePhoneNumber][1] API to verify the status of a
+    # After using this API, you must verify that the phone number is
+    # attached to the correct flow in the target instance or traffic
+    # distribution group. You need to do this because the API switches only
+    # the phone number to a new instance or traffic distribution group. It
+    # doesn't migrate the flow configuration of the phone number, too.
+    #
+    #  You can call [DescribePhoneNumber][1] API to verify the status of a
     # previous [UpdatePhoneNumber][2] operation.
     #
     #
@@ -10772,6 +11369,57 @@ module Aws::Connect
     # @param [Hash] params ({})
     def update_phone_number(params = {}, options = {})
       req = build_request(:update_phone_number, params)
+      req.send_request(options)
+    end
+
+    # Updates a prompt.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :prompt_id
+    #   A unique identifier for the prompt.
+    #
+    # @option params [String] :name
+    #   The name of the prompt.
+    #
+    # @option params [String] :description
+    #   A description of the prompt.
+    #
+    # @option params [String] :s3_uri
+    #   The URI for the S3 bucket where the prompt is stored.
+    #
+    # @return [Types::UpdatePromptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePromptResponse#prompt_arn #prompt_arn} => String
+    #   * {Types::UpdatePromptResponse#prompt_id #prompt_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_prompt({
+    #     instance_id: "InstanceId", # required
+    #     prompt_id: "PromptId", # required
+    #     name: "CommonNameLength127",
+    #     description: "PromptDescription",
+    #     s3_uri: "S3Uri",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.prompt_arn #=> String
+    #   resp.prompt_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdatePrompt AWS API Documentation
+    #
+    # @overload update_prompt(params = {})
+    # @param [Hash] params ({})
+    def update_prompt(params = {}, options = {})
+      req = build_request(:update_prompt, params)
       req.send_request(options)
     end
 
@@ -11883,7 +12531,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.116.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

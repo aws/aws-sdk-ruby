@@ -9,6 +9,7 @@
 
 
 module Aws::CloudHSMV2
+  # @api private
   module Endpoints
 
     class CopyBackupToRegion

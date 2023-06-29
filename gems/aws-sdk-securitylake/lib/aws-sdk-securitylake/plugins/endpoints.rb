@@ -60,62 +60,58 @@ module Aws::SecurityLake
             Aws::SecurityLake::Endpoints::CreateAwsLogSource.build(context)
           when :create_custom_log_source
             Aws::SecurityLake::Endpoints::CreateCustomLogSource.build(context)
-          when :create_datalake
-            Aws::SecurityLake::Endpoints::CreateDatalake.build(context)
-          when :create_datalake_auto_enable
-            Aws::SecurityLake::Endpoints::CreateDatalakeAutoEnable.build(context)
-          when :create_datalake_delegated_admin
-            Aws::SecurityLake::Endpoints::CreateDatalakeDelegatedAdmin.build(context)
-          when :create_datalake_exceptions_subscription
-            Aws::SecurityLake::Endpoints::CreateDatalakeExceptionsSubscription.build(context)
+          when :create_data_lake
+            Aws::SecurityLake::Endpoints::CreateDataLake.build(context)
+          when :create_data_lake_exception_subscription
+            Aws::SecurityLake::Endpoints::CreateDataLakeExceptionSubscription.build(context)
+          when :create_data_lake_organization_configuration
+            Aws::SecurityLake::Endpoints::CreateDataLakeOrganizationConfiguration.build(context)
           when :create_subscriber
             Aws::SecurityLake::Endpoints::CreateSubscriber.build(context)
-          when :create_subscription_notification_configuration
-            Aws::SecurityLake::Endpoints::CreateSubscriptionNotificationConfiguration.build(context)
+          when :create_subscriber_notification
+            Aws::SecurityLake::Endpoints::CreateSubscriberNotification.build(context)
           when :delete_aws_log_source
             Aws::SecurityLake::Endpoints::DeleteAwsLogSource.build(context)
           when :delete_custom_log_source
             Aws::SecurityLake::Endpoints::DeleteCustomLogSource.build(context)
-          when :delete_datalake
-            Aws::SecurityLake::Endpoints::DeleteDatalake.build(context)
-          when :delete_datalake_auto_enable
-            Aws::SecurityLake::Endpoints::DeleteDatalakeAutoEnable.build(context)
-          when :delete_datalake_delegated_admin
-            Aws::SecurityLake::Endpoints::DeleteDatalakeDelegatedAdmin.build(context)
-          when :delete_datalake_exceptions_subscription
-            Aws::SecurityLake::Endpoints::DeleteDatalakeExceptionsSubscription.build(context)
+          when :delete_data_lake
+            Aws::SecurityLake::Endpoints::DeleteDataLake.build(context)
+          when :delete_data_lake_exception_subscription
+            Aws::SecurityLake::Endpoints::DeleteDataLakeExceptionSubscription.build(context)
+          when :delete_data_lake_organization_configuration
+            Aws::SecurityLake::Endpoints::DeleteDataLakeOrganizationConfiguration.build(context)
           when :delete_subscriber
             Aws::SecurityLake::Endpoints::DeleteSubscriber.build(context)
-          when :delete_subscription_notification_configuration
-            Aws::SecurityLake::Endpoints::DeleteSubscriptionNotificationConfiguration.build(context)
-          when :get_datalake
-            Aws::SecurityLake::Endpoints::GetDatalake.build(context)
-          when :get_datalake_auto_enable
-            Aws::SecurityLake::Endpoints::GetDatalakeAutoEnable.build(context)
-          when :get_datalake_exceptions_expiry
-            Aws::SecurityLake::Endpoints::GetDatalakeExceptionsExpiry.build(context)
-          when :get_datalake_exceptions_subscription
-            Aws::SecurityLake::Endpoints::GetDatalakeExceptionsSubscription.build(context)
-          when :get_datalake_status
-            Aws::SecurityLake::Endpoints::GetDatalakeStatus.build(context)
+          when :delete_subscriber_notification
+            Aws::SecurityLake::Endpoints::DeleteSubscriberNotification.build(context)
+          when :deregister_data_lake_delegated_administrator
+            Aws::SecurityLake::Endpoints::DeregisterDataLakeDelegatedAdministrator.build(context)
+          when :get_data_lake_exception_subscription
+            Aws::SecurityLake::Endpoints::GetDataLakeExceptionSubscription.build(context)
+          when :get_data_lake_organization_configuration
+            Aws::SecurityLake::Endpoints::GetDataLakeOrganizationConfiguration.build(context)
+          when :get_data_lake_sources
+            Aws::SecurityLake::Endpoints::GetDataLakeSources.build(context)
           when :get_subscriber
             Aws::SecurityLake::Endpoints::GetSubscriber.build(context)
-          when :list_datalake_exceptions
-            Aws::SecurityLake::Endpoints::ListDatalakeExceptions.build(context)
+          when :list_data_lake_exceptions
+            Aws::SecurityLake::Endpoints::ListDataLakeExceptions.build(context)
+          when :list_data_lakes
+            Aws::SecurityLake::Endpoints::ListDataLakes.build(context)
           when :list_log_sources
             Aws::SecurityLake::Endpoints::ListLogSources.build(context)
           when :list_subscribers
             Aws::SecurityLake::Endpoints::ListSubscribers.build(context)
-          when :update_datalake
-            Aws::SecurityLake::Endpoints::UpdateDatalake.build(context)
-          when :update_datalake_exceptions_expiry
-            Aws::SecurityLake::Endpoints::UpdateDatalakeExceptionsExpiry.build(context)
-          when :update_datalake_exceptions_subscription
-            Aws::SecurityLake::Endpoints::UpdateDatalakeExceptionsSubscription.build(context)
+          when :register_data_lake_delegated_administrator
+            Aws::SecurityLake::Endpoints::RegisterDataLakeDelegatedAdministrator.build(context)
+          when :update_data_lake
+            Aws::SecurityLake::Endpoints::UpdateDataLake.build(context)
+          when :update_data_lake_exception_subscription
+            Aws::SecurityLake::Endpoints::UpdateDataLakeExceptionSubscription.build(context)
           when :update_subscriber
             Aws::SecurityLake::Endpoints::UpdateSubscriber.build(context)
-          when :update_subscription_notification_configuration
-            Aws::SecurityLake::Endpoints::UpdateSubscriptionNotificationConfiguration.build(context)
+          when :update_subscriber_notification
+            Aws::SecurityLake::Endpoints::UpdateSubscriberNotification.build(context)
           end
         end
       end

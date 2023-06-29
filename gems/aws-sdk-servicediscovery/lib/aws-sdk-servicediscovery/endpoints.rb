@@ -9,6 +9,7 @@
 
 
 module Aws::ServiceDiscovery
+  # @api private
   module Endpoints
 
     class CreateHttpNamespace

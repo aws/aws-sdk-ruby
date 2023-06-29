@@ -9,6 +9,7 @@
 
 
 module Aws::KinesisVideoArchivedMedia
+  # @api private
   module Endpoints
 
     class GetClip

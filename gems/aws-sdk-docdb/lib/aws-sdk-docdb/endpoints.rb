@@ -9,6 +9,7 @@
 
 
 module Aws::DocDB
+  # @api private
   module Endpoints
 
     class AddSourceIdentifierToSubscription
