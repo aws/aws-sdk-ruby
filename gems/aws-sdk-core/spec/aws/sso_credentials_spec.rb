@@ -22,7 +22,7 @@ module Aws
         access_key_id: 'akid',
         secret_access_key: 'secret',
         session_token: 'session',
-        expiration: expiration.to_i
+        expiration: expiration.to_i * 1000
         }
       }
     end
