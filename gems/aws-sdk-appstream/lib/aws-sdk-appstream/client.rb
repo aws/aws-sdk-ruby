@@ -383,6 +383,40 @@ module Aws::AppStream
 
     # @!group API Operations
 
+    # Associates the specified app block builder with the specified app
+    # block.
+    #
+    # @option params [required, String] :app_block_arn
+    #   The ARN of the app block.
+    #
+    # @option params [required, String] :app_block_builder_name
+    #   The name of the app block builder.
+    #
+    # @return [Types::AssociateAppBlockBuilderAppBlockResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateAppBlockBuilderAppBlockResult#app_block_builder_app_block_association #app_block_builder_app_block_association} => Types::AppBlockBuilderAppBlockAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_app_block_builder_app_block({
+    #     app_block_arn: "Arn", # required
+    #     app_block_builder_name: "Name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_block_builder_app_block_association.app_block_arn #=> String
+    #   resp.app_block_builder_app_block_association.app_block_builder_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AssociateAppBlockBuilderAppBlock AWS API Documentation
+    #
+    # @overload associate_app_block_builder_app_block(params = {})
+    # @param [Hash] params ({})
+    def associate_app_block_builder_app_block(params = {}, options = {})
+      req = build_request(:associate_app_block_builder_app_block, params)
+      req.send_request(options)
+    end
+
     # Associates the specified application with the specified fleet. This is
     # only supported for Elastic fleets.
     #
@@ -626,11 +660,19 @@ module Aws::AppStream
     # @option params [required, Types::S3Location] :source_s3_location
     #   The source S3 location of the app block.
     #
-    # @option params [required, Types::ScriptDetails] :setup_script_details
-    #   The setup script details of the app block.
+    # @option params [Types::ScriptDetails] :setup_script_details
+    #   The setup script details of the app block. This must be provided for
+    #   the `CUSTOM` PackagingType.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags assigned to the app block.
+    #
+    # @option params [Types::ScriptDetails] :post_setup_script_details
+    #   The post setup script details of the app block. This can only be
+    #   provided for the `APPSTREAM2` PackagingType.
+    #
+    # @option params [String] :packaging_type
+    #   The packaging type of the app block.
     #
     # @return [Types::CreateAppBlockResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -644,12 +686,12 @@ module Aws::AppStream
     #     display_name: "DisplayName",
     #     source_s3_location: { # required
     #       s3_bucket: "S3Bucket", # required
-    #       s3_key: "S3Key", # required
+    #       s3_key: "S3Key",
     #     },
-    #     setup_script_details: { # required
+    #     setup_script_details: {
     #       script_s3_location: { # required
     #         s3_bucket: "S3Bucket", # required
-    #         s3_key: "S3Key", # required
+    #         s3_key: "S3Key",
     #       },
     #       executable_path: "String", # required
     #       executable_parameters: "String",
@@ -658,6 +700,16 @@ module Aws::AppStream
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     post_setup_script_details: {
+    #       script_s3_location: { # required
+    #         s3_bucket: "S3Bucket", # required
+    #         s3_key: "S3Key",
+    #       },
+    #       executable_path: "String", # required
+    #       executable_parameters: "String",
+    #       timeout_in_seconds: 1, # required
+    #     },
+    #     packaging_type: "CUSTOM", # accepts CUSTOM, APPSTREAM2
     #   })
     #
     # @example Response structure
@@ -674,6 +726,16 @@ module Aws::AppStream
     #   resp.app_block.setup_script_details.executable_parameters #=> String
     #   resp.app_block.setup_script_details.timeout_in_seconds #=> Integer
     #   resp.app_block.created_time #=> Time
+    #   resp.app_block.post_setup_script_details.script_s3_location.s3_bucket #=> String
+    #   resp.app_block.post_setup_script_details.script_s3_location.s3_key #=> String
+    #   resp.app_block.post_setup_script_details.executable_path #=> String
+    #   resp.app_block.post_setup_script_details.executable_parameters #=> String
+    #   resp.app_block.post_setup_script_details.timeout_in_seconds #=> Integer
+    #   resp.app_block.packaging_type #=> String, one of "CUSTOM", "APPSTREAM2"
+    #   resp.app_block.state #=> String, one of "INACTIVE", "ACTIVE"
+    #   resp.app_block.app_block_errors #=> Array
+    #   resp.app_block.app_block_errors[0].error_code #=> String
+    #   resp.app_block.app_block_errors[0].error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateAppBlock AWS API Documentation
     #
@@ -681,6 +743,185 @@ module Aws::AppStream
     # @param [Hash] params ({})
     def create_app_block(params = {}, options = {})
       req = build_request(:create_app_block, params)
+      req.send_request(options)
+    end
+
+    # Creates an app block builder.
+    #
+    # @option params [required, String] :name
+    #   The unique name for the app block builder.
+    #
+    # @option params [String] :description
+    #   The description of the app block builder.
+    #
+    # @option params [String] :display_name
+    #   The display name of the app block builder.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to associate with the app block builder. A tag is a key-value
+    #   pair, and the value is optional. For example, Environment=Test. If you
+    #   do not specify a value, Environment=.
+    #
+    #   If you do not specify a value, the value is set to an empty string.
+    #
+    #   Generally allowed characters are: letters, numbers, and spaces
+    #   representable in UTF-8, and the following special characters:
+    #
+    #   \_ . : / = + \\ - @
+    #
+    #   For more information, see [Tagging Your Resources][1] in the *Amazon
+    #   AppStream 2.0 Administration Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
+    #
+    # @option params [required, String] :platform
+    #   The platform of the app block builder.
+    #
+    #   `WINDOWS_SERVER_2019` is the only valid value.
+    #
+    # @option params [required, String] :instance_type
+    #   The instance type to use when launching the app block builder. The
+    #   following instance types are available:
+    #
+    #   * stream.standard.small
+    #
+    #   * stream.standard.medium
+    #
+    #   * stream.standard.large
+    #
+    #   * stream.standard.xlarge
+    #
+    #   * stream.standard.2xlarge
+    #
+    # @option params [required, Types::VpcConfig] :vpc_config
+    #   The VPC configuration for the app block builder.
+    #
+    #   App block builders require that you specify at least two subnets in
+    #   different availability zones.
+    #
+    # @option params [Boolean] :enable_default_internet_access
+    #   Enables or disables default internet access for the app block builder.
+    #
+    # @option params [String] :iam_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role to apply to the app
+    #   block builder. To assume a role, the app block builder calls the AWS
+    #   Security Token Service (STS) `AssumeRole` API operation and passes the
+    #   ARN of the role to use. The operation creates a new session with
+    #   temporary credentials. AppStream 2.0 retrieves the temporary
+    #   credentials and creates the **appstream\_machine\_role** credential
+    #   profile on the instance.
+    #
+    #   For more information, see [Using an IAM Role to Grant Permissions to
+    #   Applications and Scripts Running on AppStream 2.0 Streaming
+    #   Instances][1] in the *Amazon AppStream 2.0 Administration Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html
+    #
+    # @option params [Array<Types::AccessEndpoint>] :access_endpoints
+    #   The list of interface VPC endpoint (interface endpoint) objects.
+    #   Administrators can connect to the app block builder only through the
+    #   specified endpoints.
+    #
+    # @return [Types::CreateAppBlockBuilderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAppBlockBuilderResult#app_block_builder #app_block_builder} => Types::AppBlockBuilder
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_app_block_builder({
+    #     name: "Name", # required
+    #     description: "Description",
+    #     display_name: "DisplayName",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     platform: "WINDOWS_SERVER_2019", # required, accepts WINDOWS_SERVER_2019
+    #     instance_type: "String", # required
+    #     vpc_config: { # required
+    #       subnet_ids: ["String"],
+    #       security_group_ids: ["String"],
+    #     },
+    #     enable_default_internet_access: false,
+    #     iam_role_arn: "Arn",
+    #     access_endpoints: [
+    #       {
+    #         endpoint_type: "STREAMING", # required, accepts STREAMING
+    #         vpce_id: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_block_builder.arn #=> String
+    #   resp.app_block_builder.name #=> String
+    #   resp.app_block_builder.display_name #=> String
+    #   resp.app_block_builder.description #=> String
+    #   resp.app_block_builder.platform #=> String, one of "WINDOWS_SERVER_2019"
+    #   resp.app_block_builder.instance_type #=> String
+    #   resp.app_block_builder.enable_default_internet_access #=> Boolean
+    #   resp.app_block_builder.iam_role_arn #=> String
+    #   resp.app_block_builder.vpc_config.subnet_ids #=> Array
+    #   resp.app_block_builder.vpc_config.subnet_ids[0] #=> String
+    #   resp.app_block_builder.vpc_config.security_group_ids #=> Array
+    #   resp.app_block_builder.vpc_config.security_group_ids[0] #=> String
+    #   resp.app_block_builder.state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED"
+    #   resp.app_block_builder.created_time #=> Time
+    #   resp.app_block_builder.app_block_builder_errors #=> Array
+    #   resp.app_block_builder.app_block_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.app_block_builder.app_block_builder_errors[0].error_message #=> String
+    #   resp.app_block_builder.app_block_builder_errors[0].error_timestamp #=> Time
+    #   resp.app_block_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR"
+    #   resp.app_block_builder.state_change_reason.message #=> String
+    #   resp.app_block_builder.access_endpoints #=> Array
+    #   resp.app_block_builder.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
+    #   resp.app_block_builder.access_endpoints[0].vpce_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateAppBlockBuilder AWS API Documentation
+    #
+    # @overload create_app_block_builder(params = {})
+    # @param [Hash] params ({})
+    def create_app_block_builder(params = {}, options = {})
+      req = build_request(:create_app_block_builder, params)
+      req.send_request(options)
+    end
+
+    # Creates a URL to start a create app block builder streaming session.
+    #
+    # @option params [required, String] :app_block_builder_name
+    #   The name of the app block builder.
+    #
+    # @option params [Integer] :validity
+    #   The time that the streaming URL will be valid, in seconds. Specify a
+    #   value between 1 and 604800 seconds. The default is 3600 seconds.
+    #
+    # @return [Types::CreateAppBlockBuilderStreamingURLResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAppBlockBuilderStreamingURLResult#streaming_url #streaming_url} => String
+    #   * {Types::CreateAppBlockBuilderStreamingURLResult#expires #expires} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_app_block_builder_streaming_url({
+    #     app_block_builder_name: "Name", # required
+    #     validity: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.streaming_url #=> String
+    #   resp.expires #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateAppBlockBuilderStreamingURL AWS API Documentation
+    #
+    # @overload create_app_block_builder_streaming_url(params = {})
+    # @param [Hash] params ({})
+    def create_app_block_builder_streaming_url(params = {}, options = {})
+      req = build_request(:create_app_block_builder_streaming_url, params)
       req.send_request(options)
     end
 
@@ -744,7 +985,7 @@ module Aws::AppStream
     #     description: "Description",
     #     icon_s3_location: { # required
     #       s3_bucket: "S3Bucket", # required
-    #       s3_key: "S3Key", # required
+    #       s3_key: "S3Key",
     #     },
     #     launch_path: "String", # required
     #     working_directory: "String",
@@ -1170,7 +1411,7 @@ module Aws::AppStream
     #
     #   resp = client.create_fleet({
     #     name: "Name", # required
-    #     image_name: "String",
+    #     image_name: "Name",
     #     image_arn: "Arn",
     #     instance_type: "String", # required
     #     fleet_type: "ALWAYS_ON", # accepts ALWAYS_ON, ON_DEMAND, ELASTIC
@@ -1201,7 +1442,7 @@ module Aws::AppStream
     #     usb_device_filter_strings: ["UsbDeviceFilterString"],
     #     session_script_s3_location: {
     #       s3_bucket: "S3Bucket", # required
-    #       s3_key: "S3Key", # required
+    #       s3_key: "S3Key",
     #     },
     #   })
     #
@@ -1945,6 +2186,31 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Deletes an app block builder.
+    #
+    # An app block builder can only be deleted when it has no association
+    # with an app block.
+    #
+    # @option params [required, String] :name
+    #   The name of the app block builder.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_app_block_builder({
+    #     name: "Name", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteAppBlockBuilder AWS API Documentation
+    #
+    # @overload delete_app_block_builder(params = {})
+    # @param [Hash] params ({})
+    def delete_app_block_builder(params = {}, options = {})
+      req = build_request(:delete_app_block_builder, params)
+      req.send_request(options)
+    end
+
     # Deletes an application.
     #
     # @option params [required, String] :name
@@ -2262,6 +2528,118 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Retrieves a list that describes one or more app block builder
+    # associations.
+    #
+    # @option params [String] :app_block_arn
+    #   The ARN of the app block.
+    #
+    # @option params [String] :app_block_builder_name
+    #   The name of the app block builder.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of each page of results.
+    #
+    # @option params [String] :next_token
+    #   The pagination token used to retrieve the next page of results for
+    #   this operation.
+    #
+    # @return [Types::DescribeAppBlockBuilderAppBlockAssociationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAppBlockBuilderAppBlockAssociationsResult#app_block_builder_app_block_associations #app_block_builder_app_block_associations} => Array&lt;Types::AppBlockBuilderAppBlockAssociation&gt;
+    #   * {Types::DescribeAppBlockBuilderAppBlockAssociationsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_app_block_builder_app_block_associations({
+    #     app_block_arn: "Arn",
+    #     app_block_builder_name: "Name",
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_block_builder_app_block_associations #=> Array
+    #   resp.app_block_builder_app_block_associations[0].app_block_arn #=> String
+    #   resp.app_block_builder_app_block_associations[0].app_block_builder_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeAppBlockBuilderAppBlockAssociations AWS API Documentation
+    #
+    # @overload describe_app_block_builder_app_block_associations(params = {})
+    # @param [Hash] params ({})
+    def describe_app_block_builder_app_block_associations(params = {}, options = {})
+      req = build_request(:describe_app_block_builder_app_block_associations, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list that describes one or more app block builders.
+    #
+    # @option params [Array<String>] :names
+    #   The names of the app block builders.
+    #
+    # @option params [String] :next_token
+    #   The pagination token used to retrieve the next page of results for
+    #   this operation.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of each page of results. The maximum value is 25.
+    #
+    # @return [Types::DescribeAppBlockBuildersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAppBlockBuildersResult#app_block_builders #app_block_builders} => Array&lt;Types::AppBlockBuilder&gt;
+    #   * {Types::DescribeAppBlockBuildersResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_app_block_builders({
+    #     names: ["String"],
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_block_builders #=> Array
+    #   resp.app_block_builders[0].arn #=> String
+    #   resp.app_block_builders[0].name #=> String
+    #   resp.app_block_builders[0].display_name #=> String
+    #   resp.app_block_builders[0].description #=> String
+    #   resp.app_block_builders[0].platform #=> String, one of "WINDOWS_SERVER_2019"
+    #   resp.app_block_builders[0].instance_type #=> String
+    #   resp.app_block_builders[0].enable_default_internet_access #=> Boolean
+    #   resp.app_block_builders[0].iam_role_arn #=> String
+    #   resp.app_block_builders[0].vpc_config.subnet_ids #=> Array
+    #   resp.app_block_builders[0].vpc_config.subnet_ids[0] #=> String
+    #   resp.app_block_builders[0].vpc_config.security_group_ids #=> Array
+    #   resp.app_block_builders[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.app_block_builders[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED"
+    #   resp.app_block_builders[0].created_time #=> Time
+    #   resp.app_block_builders[0].app_block_builder_errors #=> Array
+    #   resp.app_block_builders[0].app_block_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.app_block_builders[0].app_block_builder_errors[0].error_message #=> String
+    #   resp.app_block_builders[0].app_block_builder_errors[0].error_timestamp #=> Time
+    #   resp.app_block_builders[0].state_change_reason.code #=> String, one of "INTERNAL_ERROR"
+    #   resp.app_block_builders[0].state_change_reason.message #=> String
+    #   resp.app_block_builders[0].access_endpoints #=> Array
+    #   resp.app_block_builders[0].access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
+    #   resp.app_block_builders[0].access_endpoints[0].vpce_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeAppBlockBuilders AWS API Documentation
+    #
+    # @overload describe_app_block_builders(params = {})
+    # @param [Hash] params ({})
+    def describe_app_block_builders(params = {}, options = {})
+      req = build_request(:describe_app_block_builders, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list that describes one or more app blocks.
     #
     # @option params [Array<String>] :arns
@@ -2302,6 +2680,16 @@ module Aws::AppStream
     #   resp.app_blocks[0].setup_script_details.executable_parameters #=> String
     #   resp.app_blocks[0].setup_script_details.timeout_in_seconds #=> Integer
     #   resp.app_blocks[0].created_time #=> Time
+    #   resp.app_blocks[0].post_setup_script_details.script_s3_location.s3_bucket #=> String
+    #   resp.app_blocks[0].post_setup_script_details.script_s3_location.s3_key #=> String
+    #   resp.app_blocks[0].post_setup_script_details.executable_path #=> String
+    #   resp.app_blocks[0].post_setup_script_details.executable_parameters #=> String
+    #   resp.app_blocks[0].post_setup_script_details.timeout_in_seconds #=> Integer
+    #   resp.app_blocks[0].packaging_type #=> String, one of "CUSTOM", "APPSTREAM2"
+    #   resp.app_blocks[0].state #=> String, one of "INACTIVE", "ACTIVE"
+    #   resp.app_blocks[0].app_block_errors #=> Array
+    #   resp.app_blocks[0].app_block_errors[0].error_code #=> String
+    #   resp.app_blocks[0].app_block_errors[0].error_message #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeAppBlocks AWS API Documentation
@@ -3136,6 +3524,33 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Disassociates a specified app block builder from a specified app
+    # block.
+    #
+    # @option params [required, String] :app_block_arn
+    #   The ARN of the app block.
+    #
+    # @option params [required, String] :app_block_builder_name
+    #   The name of the app block builder.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_app_block_builder_app_block({
+    #     app_block_arn: "Arn", # required
+    #     app_block_builder_name: "Name", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisassociateAppBlockBuilderAppBlock AWS API Documentation
+    #
+    # @overload disassociate_app_block_builder_app_block(params = {})
+    # @param [Hash] params ({})
+    def disassociate_app_block_builder_app_block(params = {}, options = {})
+      req = build_request(:disassociate_app_block_builder_app_block, params)
+      req.send_request(options)
+    end
+
     # Disassociates the specified application from the fleet.
     #
     # @option params [required, String] :fleet_name
@@ -3430,6 +3845,63 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Starts an app block builder.
+    #
+    # An app block builder can only be started when it's associated with an
+    # app block.
+    #
+    # Starting an app block builder starts a new instance, which is
+    # equivalent to an elastic fleet instance with application builder
+    # assistance functionality.
+    #
+    # @option params [required, String] :name
+    #   The name of the app block builder.
+    #
+    # @return [Types::StartAppBlockBuilderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartAppBlockBuilderResult#app_block_builder #app_block_builder} => Types::AppBlockBuilder
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_app_block_builder({
+    #     name: "Name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_block_builder.arn #=> String
+    #   resp.app_block_builder.name #=> String
+    #   resp.app_block_builder.display_name #=> String
+    #   resp.app_block_builder.description #=> String
+    #   resp.app_block_builder.platform #=> String, one of "WINDOWS_SERVER_2019"
+    #   resp.app_block_builder.instance_type #=> String
+    #   resp.app_block_builder.enable_default_internet_access #=> Boolean
+    #   resp.app_block_builder.iam_role_arn #=> String
+    #   resp.app_block_builder.vpc_config.subnet_ids #=> Array
+    #   resp.app_block_builder.vpc_config.subnet_ids[0] #=> String
+    #   resp.app_block_builder.vpc_config.security_group_ids #=> Array
+    #   resp.app_block_builder.vpc_config.security_group_ids[0] #=> String
+    #   resp.app_block_builder.state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED"
+    #   resp.app_block_builder.created_time #=> Time
+    #   resp.app_block_builder.app_block_builder_errors #=> Array
+    #   resp.app_block_builder.app_block_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.app_block_builder.app_block_builder_errors[0].error_message #=> String
+    #   resp.app_block_builder.app_block_builder_errors[0].error_timestamp #=> Time
+    #   resp.app_block_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR"
+    #   resp.app_block_builder.state_change_reason.message #=> String
+    #   resp.app_block_builder.access_endpoints #=> Array
+    #   resp.app_block_builder.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
+    #   resp.app_block_builder.access_endpoints[0].vpce_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartAppBlockBuilder AWS API Documentation
+    #
+    # @overload start_app_block_builder(params = {})
+    # @param [Hash] params ({})
+    def start_app_block_builder(params = {}, options = {})
+      req = build_request(:start_app_block_builder, params)
+      req.send_request(options)
+    end
+
     # Starts the specified fleet.
     #
     # @option params [required, String] :name
@@ -3511,6 +3983,59 @@ module Aws::AppStream
     # @param [Hash] params ({})
     def start_image_builder(params = {}, options = {})
       req = build_request(:start_image_builder, params)
+      req.send_request(options)
+    end
+
+    # Stops an app block builder.
+    #
+    # Stopping an app block builder terminates the instance, and the
+    # instance state is not persisted.
+    #
+    # @option params [required, String] :name
+    #   The name of the app block builder.
+    #
+    # @return [Types::StopAppBlockBuilderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopAppBlockBuilderResult#app_block_builder #app_block_builder} => Types::AppBlockBuilder
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_app_block_builder({
+    #     name: "Name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_block_builder.arn #=> String
+    #   resp.app_block_builder.name #=> String
+    #   resp.app_block_builder.display_name #=> String
+    #   resp.app_block_builder.description #=> String
+    #   resp.app_block_builder.platform #=> String, one of "WINDOWS_SERVER_2019"
+    #   resp.app_block_builder.instance_type #=> String
+    #   resp.app_block_builder.enable_default_internet_access #=> Boolean
+    #   resp.app_block_builder.iam_role_arn #=> String
+    #   resp.app_block_builder.vpc_config.subnet_ids #=> Array
+    #   resp.app_block_builder.vpc_config.subnet_ids[0] #=> String
+    #   resp.app_block_builder.vpc_config.security_group_ids #=> Array
+    #   resp.app_block_builder.vpc_config.security_group_ids[0] #=> String
+    #   resp.app_block_builder.state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED"
+    #   resp.app_block_builder.created_time #=> Time
+    #   resp.app_block_builder.app_block_builder_errors #=> Array
+    #   resp.app_block_builder.app_block_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.app_block_builder.app_block_builder_errors[0].error_message #=> String
+    #   resp.app_block_builder.app_block_builder_errors[0].error_timestamp #=> Time
+    #   resp.app_block_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR"
+    #   resp.app_block_builder.state_change_reason.message #=> String
+    #   resp.app_block_builder.access_endpoints #=> Array
+    #   resp.app_block_builder.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
+    #   resp.app_block_builder.access_endpoints[0].vpce_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopAppBlockBuilder AWS API Documentation
+    #
+    # @overload stop_app_block_builder(params = {})
+    # @param [Hash] params ({})
+    def stop_app_block_builder(params = {}, options = {})
+      req = build_request(:stop_app_block_builder, params)
       req.send_request(options)
     end
 
@@ -3680,6 +4205,138 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Updates an app block builder.
+    #
+    # If the app block builder is in the `STARTING` or `STOPPING` state, you
+    # can't update it. If the app block builder is in the `RUNNING` state,
+    # you can only update the DisplayName and Description. If the app block
+    # builder is in the `STOPPED` state, you can update any attribute except
+    # the Name.
+    #
+    # @option params [required, String] :name
+    #   The unique name for the app block builder.
+    #
+    # @option params [String] :description
+    #   The description of the app block builder.
+    #
+    # @option params [String] :display_name
+    #   The display name of the app block builder.
+    #
+    # @option params [String] :platform
+    #   The platform of the app block builder.
+    #
+    #   `WINDOWS_SERVER_2019` is the only valid value.
+    #
+    # @option params [String] :instance_type
+    #   The instance type to use when launching the app block builder. The
+    #   following instance types are available:
+    #
+    #   * stream.standard.small
+    #
+    #   * stream.standard.medium
+    #
+    #   * stream.standard.large
+    #
+    #   * stream.standard.xlarge
+    #
+    #   * stream.standard.2xlarge
+    #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   The VPC configuration for the app block builder.
+    #
+    #   App block builders require that you specify at least two subnets in
+    #   different availability zones.
+    #
+    # @option params [Boolean] :enable_default_internet_access
+    #   Enables or disables default internet access for the app block builder.
+    #
+    # @option params [String] :iam_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role to apply to the app
+    #   block builder. To assume a role, the app block builder calls the AWS
+    #   Security Token Service (STS) `AssumeRole` API operation and passes the
+    #   ARN of the role to use. The operation creates a new session with
+    #   temporary credentials. AppStream 2.0 retrieves the temporary
+    #   credentials and creates the **appstream\_machine\_role** credential
+    #   profile on the instance.
+    #
+    #   For more information, see [Using an IAM Role to Grant Permissions to
+    #   Applications and Scripts Running on AppStream 2.0 Streaming
+    #   Instances][1] in the *Amazon AppStream 2.0 Administration Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html
+    #
+    # @option params [Array<Types::AccessEndpoint>] :access_endpoints
+    #   The list of interface VPC endpoint (interface endpoint) objects.
+    #   Administrators can connect to the app block builder only through the
+    #   specified endpoints.
+    #
+    # @option params [Array<String>] :attributes_to_delete
+    #   The attributes to delete from the app block builder.
+    #
+    # @return [Types::UpdateAppBlockBuilderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAppBlockBuilderResult#app_block_builder #app_block_builder} => Types::AppBlockBuilder
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_app_block_builder({
+    #     name: "Name", # required
+    #     description: "Description",
+    #     display_name: "DisplayName",
+    #     platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, AMAZON_LINUX2
+    #     instance_type: "String",
+    #     vpc_config: {
+    #       subnet_ids: ["String"],
+    #       security_group_ids: ["String"],
+    #     },
+    #     enable_default_internet_access: false,
+    #     iam_role_arn: "Arn",
+    #     access_endpoints: [
+    #       {
+    #         endpoint_type: "STREAMING", # required, accepts STREAMING
+    #         vpce_id: "String",
+    #       },
+    #     ],
+    #     attributes_to_delete: ["IAM_ROLE_ARN"], # accepts IAM_ROLE_ARN, ACCESS_ENDPOINTS, VPC_CONFIGURATION_SECURITY_GROUP_IDS
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_block_builder.arn #=> String
+    #   resp.app_block_builder.name #=> String
+    #   resp.app_block_builder.display_name #=> String
+    #   resp.app_block_builder.description #=> String
+    #   resp.app_block_builder.platform #=> String, one of "WINDOWS_SERVER_2019"
+    #   resp.app_block_builder.instance_type #=> String
+    #   resp.app_block_builder.enable_default_internet_access #=> Boolean
+    #   resp.app_block_builder.iam_role_arn #=> String
+    #   resp.app_block_builder.vpc_config.subnet_ids #=> Array
+    #   resp.app_block_builder.vpc_config.subnet_ids[0] #=> String
+    #   resp.app_block_builder.vpc_config.security_group_ids #=> Array
+    #   resp.app_block_builder.vpc_config.security_group_ids[0] #=> String
+    #   resp.app_block_builder.state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED"
+    #   resp.app_block_builder.created_time #=> Time
+    #   resp.app_block_builder.app_block_builder_errors #=> Array
+    #   resp.app_block_builder.app_block_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.app_block_builder.app_block_builder_errors[0].error_message #=> String
+    #   resp.app_block_builder.app_block_builder_errors[0].error_timestamp #=> Time
+    #   resp.app_block_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR"
+    #   resp.app_block_builder.state_change_reason.message #=> String
+    #   resp.app_block_builder.access_endpoints #=> Array
+    #   resp.app_block_builder.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
+    #   resp.app_block_builder.access_endpoints[0].vpce_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateAppBlockBuilder AWS API Documentation
+    #
+    # @overload update_app_block_builder(params = {})
+    # @param [Hash] params ({})
+    def update_app_block_builder(params = {}, options = {})
+      req = build_request(:update_app_block_builder, params)
+      req.send_request(options)
+    end
+
     # Updates the specified application.
     #
     # @option params [required, String] :name
@@ -3723,7 +4380,7 @@ module Aws::AppStream
     #     description: "Description",
     #     icon_s3_location: {
     #       s3_bucket: "S3Bucket", # required
-    #       s3_key: "S3Key", # required
+    #       s3_key: "S3Key",
     #     },
     #     launch_path: "String",
     #     working_directory: "String",
@@ -4020,7 +4677,7 @@ module Aws::AppStream
     #   open documents before being disconnected. After this time elapses, the
     #   instance is terminated and replaced by a new instance.
     #
-    #   Specify a value between 600 and 360000.
+    #   Specify a value between 600 and 432000.
     #
     # @option params [Integer] :disconnect_timeout_in_seconds
     #   The amount of time that a streaming session remains active after users
@@ -4156,7 +4813,7 @@ module Aws::AppStream
     #     usb_device_filter_strings: ["UsbDeviceFilterString"],
     #     session_script_s3_location: {
     #       s3_bucket: "S3Bucket", # required
-    #       s3_key: "S3Key", # required
+    #       s3_key: "S3Key",
     #     },
     #   })
     #
@@ -4389,7 +5046,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

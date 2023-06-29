@@ -2086,20 +2086,29 @@ module Aws::SageMaker
     #   The type of channel. Defines whether the data are used for training
     #   or validation. The default value is `training`. Channels for
     #   `training` and `validation` must share the same `ContentType`
+    #
+    #   <note markdown="1"> The type of channel defaults to `training` for the time-series
+    #   forecasting problem type.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] content_type
     #   The content type of the data from the input source. The following
     #   are the allowed content types for different problems:
     #
-    #   * For Tabular problem types: `text/csv;header=present` or
+    #   * For tabular problem types: `text/csv;header=present` or
     #     `x-application/vnd.amazon+parquet`. The default value is
     #     `text/csv;header=present`.
     #
-    #   * For ImageClassification: `image/png`, `image/jpeg`, or `image/*`.
+    #   * For image classification: `image/png`, `image/jpeg`, or `image/*`.
     #     The default value is `image/*`.
     #
-    #   * For TextClassification: `text/csv;header=present` or
+    #   * For text classification: `text/csv;header=present` or
+    #     `x-application/vnd.amazon+parquet`. The default value is
+    #     `text/csv;header=present`.
+    #
+    #   * For time-series forecasting: `text/csv;header=present` or
     #     `x-application/vnd.amazon+parquet`. The default value is
     #     `text/csv;header=present`.
     #   @return [String]
@@ -2132,8 +2141,9 @@ module Aws::SageMaker
     # @!attribute [rw] max_candidates
     #   The maximum number of times a training job is allowed to run.
     #
-    #   For job V2s (jobs created by calling `CreateAutoMLJobV2`), the
-    #   supported value is 1.
+    #   For text and image classification, as well as time-series
+    #   forecasting problem types, the supported value is 1. For tabular
+    #   problem types, the maximum value is 750.
     #   @return [Integer]
     #
     # @!attribute [rw] max_runtime_per_training_job_in_seconds
@@ -2260,6 +2270,9 @@ module Aws::SageMaker
     #     * Multiclass classification: `Accuracy`.
     #
     #   * For image or text classification problem types: `Accuracy`
+    #
+    #   * For time-series forecasting problem types:
+    #     `AverageWeightedQuantileLoss`
     #
     #
     #
@@ -2399,12 +2412,18 @@ module Aws::SageMaker
     #   type (regression, classification).
     #   @return [Types::TabularJobConfig]
     #
+    # @!attribute [rw] time_series_forecasting_job_config
+    #   Settings used to configure an AutoML job V2 for a time-series
+    #   forecasting problem type.
+    #   @return [Types::TimeSeriesForecastingJobConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLProblemTypeConfig AWS API Documentation
     #
     class AutoMLProblemTypeConfig < Struct.new(
       :image_classification_job_config,
       :text_classification_job_config,
       :tabular_job_config,
+      :time_series_forecasting_job_config,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -2413,6 +2432,7 @@ module Aws::SageMaker
       class ImageClassificationJobConfig < AutoMLProblemTypeConfig; end
       class TextClassificationJobConfig < AutoMLProblemTypeConfig; end
       class TabularJobConfig < AutoMLProblemTypeConfig; end
+      class TimeSeriesForecastingJobConfig < AutoMLProblemTypeConfig; end
       class Unknown < AutoMLProblemTypeConfig; end
     end
 
@@ -2987,11 +3007,18 @@ module Aws::SageMaker
     #   the AutoML candidate.
     #   @return [String]
     #
+    # @!attribute [rw] backtest_results
+    #   The Amazon S3 prefix to the accuracy metrics and the inference
+    #   results observed over the testing window. Available only for the
+    #   time-series forecasting problem type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CandidateArtifactLocations AWS API Documentation
     #
     class CandidateArtifactLocations < Struct.new(
       :explainability,
-      :model_insights)
+      :model_insights,
+      :backtest_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4717,12 +4744,14 @@ module Aws::SageMaker
     #   [InputDataConfig][1] attribute in the `CreateAutoMLJob` input
     #   parameters. The supported formats depend on the problem type:
     #
-    #   * For Tabular problem types: `S3Prefix`, `ManifestFile`.
+    #   * For tabular problem types: `S3Prefix`, `ManifestFile`.
     #
-    #   * For ImageClassification: `S3Prefix`, `ManifestFile`,
+    #   * For image classification: `S3Prefix`, `ManifestFile`,
     #     `AugmentedManifestFile`.
     #
-    #   * For TextClassification: `S3Prefix`.
+    #   * For text classification: `S3Prefix`.
+    #
+    #   * For time-series forecasting: `S3Prefix`.
     #
     #
     #
@@ -4789,6 +4818,12 @@ module Aws::SageMaker
     #   The validation and training datasets must contain the same headers.
     #   For jobs created by calling `CreateAutoMLJob`, the validation
     #   dataset must be less than 2 GB in size.
+    #
+    #   <note markdown="1"> This attribute must not be set for the time-series forecasting
+    #   problem type, as Autopilot automatically splits the input dataset
+    #   into training and validation sets.
+    #
+    #    </note>
     #   @return [Types::AutoMLDataSplitConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAutoMLJobV2Request AWS API Documentation
@@ -36920,6 +36955,157 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The collection of components that defines the time-series.
+    #
+    # @!attribute [rw] target_attribute_name
+    #   The name of the column representing the target variable that you
+    #   want to predict for each item in your dataset. The data type of the
+    #   target variable must be numerical.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp_attribute_name
+    #   The name of the column indicating a point in time at which the
+    #   target value of a given item is recorded.
+    #   @return [String]
+    #
+    # @!attribute [rw] item_identifier_attribute_name
+    #   The name of the column that represents the set of item identifiers
+    #   for which you want to predict the target value.
+    #   @return [String]
+    #
+    # @!attribute [rw] grouping_attribute_names
+    #   A set of columns names that can be grouped with the item identifier
+    #   column to create a composite key for which a target value is
+    #   predicted.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TimeSeriesConfig AWS API Documentation
+    #
+    class TimeSeriesConfig < Struct.new(
+      :target_attribute_name,
+      :timestamp_attribute_name,
+      :item_identifier_attribute_name,
+      :grouping_attribute_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The collection of settings used by an AutoML job V2 for the
+    # time-series forecasting problem type.
+    #
+    # <note markdown="1"> The `TimeSeriesForecastingJobConfig` problem type is only available in
+    # private beta. Contact Amazon Web Services Support or your account
+    # manager to learn more about access privileges.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] feature_specification_s3_uri
+    #   A URL to the Amazon S3 data source containing additional selected
+    #   features that complement the target, itemID, timestamp, and grouped
+    #   columns set in `TimeSeriesConfig`. When not provided, the AutoML job
+    #   V2 includes all the columns from the original dataset that are not
+    #   already declared in `TimeSeriesConfig`. If provided, the AutoML job
+    #   V2 only considers these additional columns as a complement to the
+    #   ones declared in `TimeSeriesConfig`.
+    #
+    #   You can input `FeatureAttributeNames` (optional) in JSON format as
+    #   shown below:
+    #
+    #   `\{ "FeatureAttributeNames":["col1", "col2", ...] \}`.
+    #
+    #   You can also specify the data type of the feature (optional) in the
+    #   format shown below:
+    #
+    #   `\{ "FeatureDataTypes":\{"col1":"numeric", "col2":"categorical" ...
+    #   \} \}`
+    #
+    #   Autopilot supports the following data types: `numeric`,
+    #   `categorical`, `text`, and `datetime`.
+    #
+    #   <note markdown="1"> These column keys must not include any column set in
+    #   `TimeSeriesConfig`.
+    #
+    #    </note>
+    #
+    #   When not provided, the AutoML job V2 includes all the columns from
+    #   the original dataset that are not already declared in
+    #   `TimeSeriesConfig`. If provided, the AutoML job V2 only considers
+    #   these additional columns as a complement to the ones declared in
+    #   `TimeSeriesConfig`.
+    #
+    #   Autopilot supports the following data types: `numeric`,
+    #   `categorical`, `text`, and `datetime`.
+    #   @return [String]
+    #
+    # @!attribute [rw] completion_criteria
+    #   How long a job is allowed to run, or how many candidates a job is
+    #   allowed to generate.
+    #   @return [Types::AutoMLJobCompletionCriteria]
+    #
+    # @!attribute [rw] forecast_frequency
+    #   The frequency of predictions in a forecast.
+    #
+    #   Valid intervals are an integer followed by Y (Year), M (Month), W
+    #   (Week), D (Day), H (Hour), and min (Minute). For example, `1D`
+    #   indicates every day and `15min` indicates every 15 minutes. The
+    #   value of a frequency must not overlap with the next larger
+    #   frequency. For example, you must use a frequency of `1H` instead of
+    #   `60min`.
+    #
+    #   The valid values for each frequency are the following:
+    #
+    #   * Minute - 1-59
+    #
+    #   * Hour - 1-23
+    #
+    #   * Day - 1-6
+    #
+    #   * Week - 1-4
+    #
+    #   * Month - 1-11
+    #
+    #   * Year - 1
+    #   @return [String]
+    #
+    # @!attribute [rw] forecast_horizon
+    #   The number of time-steps that the model predicts. The forecast
+    #   horizon is also called the prediction length. The maximum forecast
+    #   horizon is the lesser of 500 time-steps or 1/4 of the time-steps in
+    #   the dataset.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] forecast_quantiles
+    #   The quantiles used to train the model for forecasts at a specified
+    #   quantile. You can specify quantiles from `0.01` (p1) to `0.99`
+    #   (p99), by increments of 0.01 or higher. Up to five forecast
+    #   quantiles can be specified. When `ForecastQuantiles` is not
+    #   provided, the AutoML job uses the quantiles p10, p50, and p90 as
+    #   default.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] transformations
+    #   The transformations modifying specific attributes of the
+    #   time-series, such as filling strategies for missing values.
+    #   @return [Types::TimeSeriesTransformations]
+    #
+    # @!attribute [rw] time_series_config
+    #   The collection of components that defines the time-series.
+    #   @return [Types::TimeSeriesConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TimeSeriesForecastingJobConfig AWS API Documentation
+    #
+    class TimeSeriesForecastingJobConfig < Struct.new(
+      :feature_specification_s3_uri,
+      :completion_criteria,
+      :forecast_frequency,
+      :forecast_horizon,
+      :forecast_quantiles,
+      :transformations,
+      :time_series_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Time series forecast settings for the SageMaker Canvas application.
     #
     # @!attribute [rw] status
@@ -36948,6 +37134,56 @@ module Aws::SageMaker
     class TimeSeriesForecastingSettings < Struct.new(
       :status,
       :amazon_forecast_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Transformations allowed on the dataset. Supported transformations are
+    # `Filling` and `Aggregation`. `Filling` specifies how to add values to
+    # missing values in the dataset. `Aggregation` defines how to aggregate
+    # data that does not align with forecast frequency.
+    #
+    # @!attribute [rw] filling
+    #   A key value pair defining the filling method for a column, where the
+    #   key is the column name and the value is an object which defines the
+    #   filling logic. You can specify multiple filling methods for a single
+    #   column.
+    #
+    #   The supported filling methods and their corresponding options are:
+    #
+    #   * `frontfill`: `none` (Supported only for target column)
+    #
+    #   * `middlefill`: `zero`, `value`, `median`, `mean`, `min`, `max`
+    #
+    #   * `backfill`: `zero`, `value`, `median`, `mean`, `min`, `max`
+    #
+    #   * `futurefill`: `zero`, `value`, `median`, `mean`, `min`, `max`
+    #
+    #   To set a filling method to a specific value, set the fill parameter
+    #   to the chosen filling method value (for example `"backfill" :
+    #   "value"`), and define the filling value in an additional parameter
+    #   prefixed with "\_value". For example, to set `backfill` to a value
+    #   of `2`, you must include two parameters: `"backfill": "value"` and
+    #   `"backfill_value":"2"`.
+    #   @return [Hash<String,Hash<String,String>>]
+    #
+    # @!attribute [rw] aggregation
+    #   A key value pair defining the aggregation method for a column, where
+    #   the key is the column name and the value is the aggregation method.
+    #
+    #   The supported aggregation methods are `sum` (default), `avg`,
+    #   `first`, `min`, `max`.
+    #
+    #   <note markdown="1"> Aggregation is only supported for the target column.
+    #
+    #    </note>
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TimeSeriesTransformations AWS API Documentation
+    #
+    class TimeSeriesTransformations < Struct.new(
+      :filling,
+      :aggregation)
       SENSITIVE = []
       include Aws::Structure
     end

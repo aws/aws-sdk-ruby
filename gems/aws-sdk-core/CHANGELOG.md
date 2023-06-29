@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.176.1 (2023-06-29)
+------------------
+
 * Issue - Fix signing for S3/S3 Control and `aws-crt` gem for certain object keys (#2849).
 
 * Issue - Ensure `SSOCredentials` `#expiration` is a `Time` (#2874)

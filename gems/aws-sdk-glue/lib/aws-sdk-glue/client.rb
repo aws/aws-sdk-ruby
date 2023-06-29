@@ -804,6 +804,13 @@ module Aws::Glue
     #   resp.crawlers[0].targets.delta_targets[0].connection_name #=> String
     #   resp.crawlers[0].targets.delta_targets[0].write_manifest #=> Boolean
     #   resp.crawlers[0].targets.delta_targets[0].create_native_delta_table #=> Boolean
+    #   resp.crawlers[0].targets.iceberg_targets #=> Array
+    #   resp.crawlers[0].targets.iceberg_targets[0].paths #=> Array
+    #   resp.crawlers[0].targets.iceberg_targets[0].paths[0] #=> String
+    #   resp.crawlers[0].targets.iceberg_targets[0].connection_name #=> String
+    #   resp.crawlers[0].targets.iceberg_targets[0].exclusions #=> Array
+    #   resp.crawlers[0].targets.iceberg_targets[0].exclusions[0] #=> String
+    #   resp.crawlers[0].targets.iceberg_targets[0].maximum_traversal_depth #=> Integer
     #   resp.crawlers[0].database_name #=> String
     #   resp.crawlers[0].description #=> String
     #   resp.crawlers[0].classifiers #=> Array
@@ -2763,6 +2770,14 @@ module Aws::Glue
     #           connection_name: "ConnectionName",
     #           write_manifest: false,
     #           create_native_delta_table: false,
+    #         },
+    #       ],
+    #       iceberg_targets: [
+    #         {
+    #           paths: ["Path"],
+    #           connection_name: "ConnectionName",
+    #           exclusions: ["Path"],
+    #           maximum_traversal_depth: 1,
     #         },
     #       ],
     #     },
@@ -5995,6 +6010,13 @@ module Aws::Glue
     #   resp.crawler.targets.delta_targets[0].connection_name #=> String
     #   resp.crawler.targets.delta_targets[0].write_manifest #=> Boolean
     #   resp.crawler.targets.delta_targets[0].create_native_delta_table #=> Boolean
+    #   resp.crawler.targets.iceberg_targets #=> Array
+    #   resp.crawler.targets.iceberg_targets[0].paths #=> Array
+    #   resp.crawler.targets.iceberg_targets[0].paths[0] #=> String
+    #   resp.crawler.targets.iceberg_targets[0].connection_name #=> String
+    #   resp.crawler.targets.iceberg_targets[0].exclusions #=> Array
+    #   resp.crawler.targets.iceberg_targets[0].exclusions[0] #=> String
+    #   resp.crawler.targets.iceberg_targets[0].maximum_traversal_depth #=> Integer
     #   resp.crawler.database_name #=> String
     #   resp.crawler.description #=> String
     #   resp.crawler.classifiers #=> Array
@@ -6142,6 +6164,13 @@ module Aws::Glue
     #   resp.crawlers[0].targets.delta_targets[0].connection_name #=> String
     #   resp.crawlers[0].targets.delta_targets[0].write_manifest #=> Boolean
     #   resp.crawlers[0].targets.delta_targets[0].create_native_delta_table #=> Boolean
+    #   resp.crawlers[0].targets.iceberg_targets #=> Array
+    #   resp.crawlers[0].targets.iceberg_targets[0].paths #=> Array
+    #   resp.crawlers[0].targets.iceberg_targets[0].paths[0] #=> String
+    #   resp.crawlers[0].targets.iceberg_targets[0].connection_name #=> String
+    #   resp.crawlers[0].targets.iceberg_targets[0].exclusions #=> Array
+    #   resp.crawlers[0].targets.iceberg_targets[0].exclusions[0] #=> String
+    #   resp.crawlers[0].targets.iceberg_targets[0].maximum_traversal_depth #=> Integer
     #   resp.crawlers[0].database_name #=> String
     #   resp.crawlers[0].description #=> String
     #   resp.crawlers[0].classifiers #=> Array
@@ -14836,6 +14865,14 @@ module Aws::Glue
     #           create_native_delta_table: false,
     #         },
     #       ],
+    #       iceberg_targets: [
+    #         {
+    #           paths: ["Path"],
+    #           connection_name: "ConnectionName",
+    #           exclusions: ["Path"],
+    #           maximum_traversal_depth: 1,
+    #         },
+    #       ],
     #     },
     #     schedule: "CronExpression",
     #     classifiers: ["NameString"],
@@ -15892,7 +15929,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.144.0'
+      context[:gem_version] = '1.145.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

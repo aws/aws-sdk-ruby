@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.192.0 (2023-06-29)
+------------------
+
+* Feature - Adding support for timeseries forecasting in the CreateAutoMLJobV2 API.
+
 1.191.0 (2023-06-28)
 ------------------
 

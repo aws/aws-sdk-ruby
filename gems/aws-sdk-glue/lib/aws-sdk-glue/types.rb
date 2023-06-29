@@ -3454,6 +3454,10 @@ module Aws::Glue
     #   Specifies Delta data store targets.
     #   @return [Array<Types::DeltaTarget>]
     #
+    # @!attribute [rw] iceberg_targets
+    #   Specifies Apache Iceberg data store targets.
+    #   @return [Array<Types::IcebergTarget>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CrawlerTargets AWS API Documentation
     #
     class CrawlerTargets < Struct.new(
@@ -3462,7 +3466,8 @@ module Aws::Glue
       :mongo_db_targets,
       :dynamo_db_targets,
       :catalog_targets,
-      :delta_targets)
+      :delta_targets,
+      :iceberg_targets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11793,6 +11798,44 @@ module Aws::Glue
       :version,
       :grok_pattern,
       :custom_patterns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies an Apache Iceberg data source where Iceberg tables are
+    # stored in Amazon S3.
+    #
+    # @!attribute [rw] paths
+    #   One or more Amazon S3 paths that contains Iceberg metadata folders
+    #   as `s3://bucket/prefix`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] connection_name
+    #   The name of the connection to use to connect to the Iceberg target.
+    #   @return [String]
+    #
+    # @!attribute [rw] exclusions
+    #   A list of glob patterns used to exclude from the crawl. For more
+    #   information, see [Catalog Tables with a Crawler][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] maximum_traversal_depth
+    #   The maximum depth of Amazon S3 paths that the crawler can traverse
+    #   to discover the Iceberg metadata folder in your Amazon S3 path. Used
+    #   to limit the crawler run time.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IcebergTarget AWS API Documentation
+    #
+    class IcebergTarget < Struct.new(
+      :paths,
+      :connection_name,
+      :exclusions,
+      :maximum_traversal_depth)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.145.0 (2023-06-29)
+------------------
+
+* Feature - This release adds support for AWS Glue Crawler with Iceberg Tables, allowing Crawlers to discover Iceberg Tables in S3 and register them in Glue Data Catalog for query engines to query against.
+
 1.144.0 (2023-06-28)
 ------------------
 

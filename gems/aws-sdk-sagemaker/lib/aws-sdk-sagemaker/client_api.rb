@@ -29,6 +29,8 @@ module Aws::SageMaker
     AdditionalInferenceSpecifications = Shapes::ListShape.new(name: 'AdditionalInferenceSpecifications')
     AgentVersion = Shapes::StructureShape.new(name: 'AgentVersion')
     AgentVersions = Shapes::ListShape.new(name: 'AgentVersions')
+    AggregationTransformationValue = Shapes::StringShape.new(name: 'AggregationTransformationValue')
+    AggregationTransformations = Shapes::MapShape.new(name: 'AggregationTransformations')
     Alarm = Shapes::StructureShape.new(name: 'Alarm')
     AlarmList = Shapes::ListShape.new(name: 'AlarmList')
     AlarmName = Shapes::StringShape.new(name: 'AlarmName')
@@ -152,6 +154,7 @@ module Aws::SageMaker
     Autotune = Shapes::StructureShape.new(name: 'Autotune')
     AutotuneMode = Shapes::StringShape.new(name: 'AutotuneMode')
     AwsManagedHumanLoopRequestSource = Shapes::StringShape.new(name: 'AwsManagedHumanLoopRequestSource')
+    BacktestResultsLocation = Shapes::StringShape.new(name: 'BacktestResultsLocation')
     BatchDataCaptureConfig = Shapes::StructureShape.new(name: 'BatchDataCaptureConfig')
     BatchDescribeModelPackageError = Shapes::StructureShape.new(name: 'BatchDescribeModelPackageError')
     BatchDescribeModelPackageErrorMap = Shapes::MapShape.new(name: 'BatchDescribeModelPackageErrorMap')
@@ -781,6 +784,10 @@ module Aws::SageMaker
     FileSystemDataSource = Shapes::StructureShape.new(name: 'FileSystemDataSource')
     FileSystemId = Shapes::StringShape.new(name: 'FileSystemId')
     FileSystemType = Shapes::StringShape.new(name: 'FileSystemType')
+    FillingTransformationMap = Shapes::MapShape.new(name: 'FillingTransformationMap')
+    FillingTransformationValue = Shapes::StringShape.new(name: 'FillingTransformationValue')
+    FillingTransformations = Shapes::MapShape.new(name: 'FillingTransformations')
+    FillingType = Shapes::StringShape.new(name: 'FillingType')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterValue = Shapes::StringShape.new(name: 'FilterValue')
@@ -801,6 +808,10 @@ module Aws::SageMaker
     FlowDefinitionTaskKeywords = Shapes::ListShape.new(name: 'FlowDefinitionTaskKeywords')
     FlowDefinitionTaskTimeLimitInSeconds = Shapes::IntegerShape.new(name: 'FlowDefinitionTaskTimeLimitInSeconds')
     FlowDefinitionTaskTitle = Shapes::StringShape.new(name: 'FlowDefinitionTaskTitle')
+    ForecastFrequency = Shapes::StringShape.new(name: 'ForecastFrequency')
+    ForecastHorizon = Shapes::IntegerShape.new(name: 'ForecastHorizon')
+    ForecastQuantile = Shapes::StringShape.new(name: 'ForecastQuantile')
+    ForecastQuantiles = Shapes::ListShape.new(name: 'ForecastQuantiles')
     Framework = Shapes::StringShape.new(name: 'Framework')
     FrameworkVersion = Shapes::StringShape.new(name: 'FrameworkVersion')
     GenerateCandidateDefinitionsOnly = Shapes::BooleanShape.new(name: 'GenerateCandidateDefinitionsOnly')
@@ -818,6 +829,8 @@ module Aws::SageMaker
     GitConfigForUpdate = Shapes::StructureShape.new(name: 'GitConfigForUpdate')
     GitConfigUrl = Shapes::StringShape.new(name: 'GitConfigUrl')
     Group = Shapes::StringShape.new(name: 'Group')
+    GroupingAttributeName = Shapes::StringShape.new(name: 'GroupingAttributeName')
+    GroupingAttributeNames = Shapes::ListShape.new(name: 'GroupingAttributeNames')
     Groups = Shapes::ListShape.new(name: 'Groups')
     HookParameters = Shapes::MapShape.new(name: 'HookParameters')
     Horovod = Shapes::BooleanShape.new(name: 'Horovod')
@@ -972,6 +985,7 @@ module Aws::SageMaker
     InvocationsMaxRetries = Shapes::IntegerShape.new(name: 'InvocationsMaxRetries')
     InvocationsTimeoutInSeconds = Shapes::IntegerShape.new(name: 'InvocationsTimeoutInSeconds')
     IotRoleAlias = Shapes::StringShape.new(name: 'IotRoleAlias')
+    ItemIdentifierAttributeName = Shapes::StringShape.new(name: 'ItemIdentifierAttributeName')
     JobDurationInSeconds = Shapes::IntegerShape.new(name: 'JobDurationInSeconds')
     JobReferenceCode = Shapes::StringShape.new(name: 'JobReferenceCode')
     JobReferenceCodeContains = Shapes::StringShape.new(name: 'JobReferenceCodeContains')
@@ -1829,8 +1843,12 @@ module Aws::SageMaker
     TerminationWaitInSeconds = Shapes::IntegerShape.new(name: 'TerminationWaitInSeconds')
     TextClassificationJobConfig = Shapes::StructureShape.new(name: 'TextClassificationJobConfig')
     ThingName = Shapes::StringShape.new(name: 'ThingName')
+    TimeSeriesConfig = Shapes::StructureShape.new(name: 'TimeSeriesConfig')
+    TimeSeriesForecastingJobConfig = Shapes::StructureShape.new(name: 'TimeSeriesForecastingJobConfig')
     TimeSeriesForecastingSettings = Shapes::StructureShape.new(name: 'TimeSeriesForecastingSettings')
+    TimeSeriesTransformations = Shapes::StructureShape.new(name: 'TimeSeriesTransformations')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TimestampAttributeName = Shapes::StringShape.new(name: 'TimestampAttributeName')
     TrafficDurationInSeconds = Shapes::IntegerShape.new(name: 'TrafficDurationInSeconds')
     TrafficPattern = Shapes::StructureShape.new(name: 'TrafficPattern')
     TrafficRoutingConfig = Shapes::StructureShape.new(name: 'TrafficRoutingConfig')
@@ -1884,6 +1902,7 @@ module Aws::SageMaker
     TransformOutput = Shapes::StructureShape.new(name: 'TransformOutput')
     TransformResources = Shapes::StructureShape.new(name: 'TransformResources')
     TransformS3DataSource = Shapes::StructureShape.new(name: 'TransformS3DataSource')
+    TransformationAttributeName = Shapes::StringShape.new(name: 'TransformationAttributeName')
     Trial = Shapes::StructureShape.new(name: 'Trial')
     TrialArn = Shapes::StringShape.new(name: 'TrialArn')
     TrialComponent = Shapes::StructureShape.new(name: 'TrialComponent')
@@ -2083,6 +2102,9 @@ module Aws::SageMaker
     AgentVersion.struct_class = Types::AgentVersion
 
     AgentVersions.member = Shapes::ShapeRef.new(shape: AgentVersion)
+
+    AggregationTransformations.key = Shapes::ShapeRef.new(shape: TransformationAttributeName)
+    AggregationTransformations.value = Shapes::ShapeRef.new(shape: AggregationTransformationValue)
 
     Alarm.add_member(:alarm_name, Shapes::ShapeRef.new(shape: AlarmName, location_name: "AlarmName"))
     Alarm.struct_class = Types::Alarm
@@ -2344,10 +2366,12 @@ module Aws::SageMaker
     AutoMLProblemTypeConfig.add_member(:image_classification_job_config, Shapes::ShapeRef.new(shape: ImageClassificationJobConfig, location_name: "ImageClassificationJobConfig"))
     AutoMLProblemTypeConfig.add_member(:text_classification_job_config, Shapes::ShapeRef.new(shape: TextClassificationJobConfig, location_name: "TextClassificationJobConfig"))
     AutoMLProblemTypeConfig.add_member(:tabular_job_config, Shapes::ShapeRef.new(shape: TabularJobConfig, location_name: "TabularJobConfig"))
+    AutoMLProblemTypeConfig.add_member(:time_series_forecasting_job_config, Shapes::ShapeRef.new(shape: TimeSeriesForecastingJobConfig, location_name: "TimeSeriesForecastingJobConfig"))
     AutoMLProblemTypeConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     AutoMLProblemTypeConfig.add_member_subclass(:image_classification_job_config, Types::AutoMLProblemTypeConfig::ImageClassificationJobConfig)
     AutoMLProblemTypeConfig.add_member_subclass(:text_classification_job_config, Types::AutoMLProblemTypeConfig::TextClassificationJobConfig)
     AutoMLProblemTypeConfig.add_member_subclass(:tabular_job_config, Types::AutoMLProblemTypeConfig::TabularJobConfig)
+    AutoMLProblemTypeConfig.add_member_subclass(:time_series_forecasting_job_config, Types::AutoMLProblemTypeConfig::TimeSeriesForecastingJobConfig)
     AutoMLProblemTypeConfig.add_member_subclass(:unknown, Types::AutoMLProblemTypeConfig::Unknown)
     AutoMLProblemTypeConfig.struct_class = Types::AutoMLProblemTypeConfig
 
@@ -2448,6 +2472,7 @@ module Aws::SageMaker
 
     CandidateArtifactLocations.add_member(:explainability, Shapes::ShapeRef.new(shape: ExplainabilityLocation, required: true, location_name: "Explainability"))
     CandidateArtifactLocations.add_member(:model_insights, Shapes::ShapeRef.new(shape: ModelInsightsLocation, location_name: "ModelInsights"))
+    CandidateArtifactLocations.add_member(:backtest_results, Shapes::ShapeRef.new(shape: BacktestResultsLocation, location_name: "BacktestResults"))
     CandidateArtifactLocations.struct_class = Types::CandidateArtifactLocations
 
     CandidateGenerationConfig.add_member(:algorithms_config, Shapes::ShapeRef.new(shape: AutoMLAlgorithmsConfig, location_name: "AlgorithmsConfig"))
@@ -5102,6 +5127,12 @@ module Aws::SageMaker
     FileSystemDataSource.add_member(:directory_path, Shapes::ShapeRef.new(shape: DirectoryPath, required: true, location_name: "DirectoryPath"))
     FileSystemDataSource.struct_class = Types::FileSystemDataSource
 
+    FillingTransformationMap.key = Shapes::ShapeRef.new(shape: FillingType)
+    FillingTransformationMap.value = Shapes::ShapeRef.new(shape: FillingTransformationValue)
+
+    FillingTransformations.key = Shapes::ShapeRef.new(shape: TransformationAttributeName)
+    FillingTransformations.value = Shapes::ShapeRef.new(shape: FillingTransformationMap)
+
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: ResourcePropertyName, required: true, location_name: "Name"))
     Filter.add_member(:operator, Shapes::ShapeRef.new(shape: Operator, location_name: "Operator"))
     Filter.add_member(:value, Shapes::ShapeRef.new(shape: FilterValue, location_name: "Value"))
@@ -5136,6 +5167,8 @@ module Aws::SageMaker
     FlowDefinitionSummary.struct_class = Types::FlowDefinitionSummary
 
     FlowDefinitionTaskKeywords.member = Shapes::ShapeRef.new(shape: FlowDefinitionTaskKeyword)
+
+    ForecastQuantiles.member = Shapes::ShapeRef.new(shape: ForecastQuantile)
 
     GetDeviceFleetReportRequest.add_member(:device_fleet_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "DeviceFleetName"))
     GetDeviceFleetReportRequest.struct_class = Types::GetDeviceFleetReportRequest
@@ -5182,6 +5215,8 @@ module Aws::SageMaker
 
     GitConfigForUpdate.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
     GitConfigForUpdate.struct_class = Types::GitConfigForUpdate
+
+    GroupingAttributeNames.member = Shapes::ShapeRef.new(shape: GroupingAttributeName)
 
     Groups.member = Shapes::ShapeRef.new(shape: Group)
 
@@ -8290,9 +8325,28 @@ module Aws::SageMaker
     TextClassificationJobConfig.add_member(:target_label_column, Shapes::ShapeRef.new(shape: TargetLabelColumn, location_name: "TargetLabelColumn"))
     TextClassificationJobConfig.struct_class = Types::TextClassificationJobConfig
 
+    TimeSeriesConfig.add_member(:target_attribute_name, Shapes::ShapeRef.new(shape: TargetAttributeName, required: true, location_name: "TargetAttributeName"))
+    TimeSeriesConfig.add_member(:timestamp_attribute_name, Shapes::ShapeRef.new(shape: TimestampAttributeName, required: true, location_name: "TimestampAttributeName"))
+    TimeSeriesConfig.add_member(:item_identifier_attribute_name, Shapes::ShapeRef.new(shape: ItemIdentifierAttributeName, required: true, location_name: "ItemIdentifierAttributeName"))
+    TimeSeriesConfig.add_member(:grouping_attribute_names, Shapes::ShapeRef.new(shape: GroupingAttributeNames, location_name: "GroupingAttributeNames"))
+    TimeSeriesConfig.struct_class = Types::TimeSeriesConfig
+
+    TimeSeriesForecastingJobConfig.add_member(:feature_specification_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "FeatureSpecificationS3Uri"))
+    TimeSeriesForecastingJobConfig.add_member(:completion_criteria, Shapes::ShapeRef.new(shape: AutoMLJobCompletionCriteria, location_name: "CompletionCriteria"))
+    TimeSeriesForecastingJobConfig.add_member(:forecast_frequency, Shapes::ShapeRef.new(shape: ForecastFrequency, required: true, location_name: "ForecastFrequency"))
+    TimeSeriesForecastingJobConfig.add_member(:forecast_horizon, Shapes::ShapeRef.new(shape: ForecastHorizon, required: true, location_name: "ForecastHorizon"))
+    TimeSeriesForecastingJobConfig.add_member(:forecast_quantiles, Shapes::ShapeRef.new(shape: ForecastQuantiles, location_name: "ForecastQuantiles"))
+    TimeSeriesForecastingJobConfig.add_member(:transformations, Shapes::ShapeRef.new(shape: TimeSeriesTransformations, location_name: "Transformations"))
+    TimeSeriesForecastingJobConfig.add_member(:time_series_config, Shapes::ShapeRef.new(shape: TimeSeriesConfig, required: true, location_name: "TimeSeriesConfig"))
+    TimeSeriesForecastingJobConfig.struct_class = Types::TimeSeriesForecastingJobConfig
+
     TimeSeriesForecastingSettings.add_member(:status, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "Status"))
     TimeSeriesForecastingSettings.add_member(:amazon_forecast_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "AmazonForecastRoleArn"))
     TimeSeriesForecastingSettings.struct_class = Types::TimeSeriesForecastingSettings
+
+    TimeSeriesTransformations.add_member(:filling, Shapes::ShapeRef.new(shape: FillingTransformations, location_name: "Filling"))
+    TimeSeriesTransformations.add_member(:aggregation, Shapes::ShapeRef.new(shape: AggregationTransformations, location_name: "Aggregation"))
+    TimeSeriesTransformations.struct_class = Types::TimeSeriesTransformations
 
     TrafficPattern.add_member(:traffic_type, Shapes::ShapeRef.new(shape: TrafficType, location_name: "TrafficType"))
     TrafficPattern.add_member(:phases, Shapes::ShapeRef.new(shape: Phases, location_name: "Phases"))

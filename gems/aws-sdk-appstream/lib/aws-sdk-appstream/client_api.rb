@@ -20,6 +20,17 @@ module Aws::AppStream
     AccountPassword = Shapes::StringShape.new(name: 'AccountPassword')
     Action = Shapes::StringShape.new(name: 'Action')
     AppBlock = Shapes::StructureShape.new(name: 'AppBlock')
+    AppBlockBuilder = Shapes::StructureShape.new(name: 'AppBlockBuilder')
+    AppBlockBuilderAppBlockAssociation = Shapes::StructureShape.new(name: 'AppBlockBuilderAppBlockAssociation')
+    AppBlockBuilderAppBlockAssociationsList = Shapes::ListShape.new(name: 'AppBlockBuilderAppBlockAssociationsList')
+    AppBlockBuilderAttribute = Shapes::StringShape.new(name: 'AppBlockBuilderAttribute')
+    AppBlockBuilderAttributes = Shapes::ListShape.new(name: 'AppBlockBuilderAttributes')
+    AppBlockBuilderList = Shapes::ListShape.new(name: 'AppBlockBuilderList')
+    AppBlockBuilderPlatformType = Shapes::StringShape.new(name: 'AppBlockBuilderPlatformType')
+    AppBlockBuilderState = Shapes::StringShape.new(name: 'AppBlockBuilderState')
+    AppBlockBuilderStateChangeReason = Shapes::StructureShape.new(name: 'AppBlockBuilderStateChangeReason')
+    AppBlockBuilderStateChangeReasonCode = Shapes::StringShape.new(name: 'AppBlockBuilderStateChangeReasonCode')
+    AppBlockState = Shapes::StringShape.new(name: 'AppBlockState')
     AppBlocks = Shapes::ListShape.new(name: 'AppBlocks')
     AppVisibility = Shapes::StringShape.new(name: 'AppVisibility')
     Application = Shapes::StructureShape.new(name: 'Application')
@@ -33,6 +44,8 @@ module Aws::AppStream
     AppstreamAgentVersion = Shapes::StringShape.new(name: 'AppstreamAgentVersion')
     Arn = Shapes::StringShape.new(name: 'Arn')
     ArnList = Shapes::ListShape.new(name: 'ArnList')
+    AssociateAppBlockBuilderAppBlockRequest = Shapes::StructureShape.new(name: 'AssociateAppBlockBuilderAppBlockRequest')
+    AssociateAppBlockBuilderAppBlockResult = Shapes::StructureShape.new(name: 'AssociateAppBlockBuilderAppBlockResult')
     AssociateApplicationFleetRequest = Shapes::StructureShape.new(name: 'AssociateApplicationFleetRequest')
     AssociateApplicationFleetResult = Shapes::StructureShape.new(name: 'AssociateApplicationFleetResult')
     AssociateApplicationToEntitlementRequest = Shapes::StructureShape.new(name: 'AssociateApplicationToEntitlementRequest')
@@ -55,6 +68,10 @@ module Aws::AppStream
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     CopyImageRequest = Shapes::StructureShape.new(name: 'CopyImageRequest')
     CopyImageResponse = Shapes::StructureShape.new(name: 'CopyImageResponse')
+    CreateAppBlockBuilderRequest = Shapes::StructureShape.new(name: 'CreateAppBlockBuilderRequest')
+    CreateAppBlockBuilderResult = Shapes::StructureShape.new(name: 'CreateAppBlockBuilderResult')
+    CreateAppBlockBuilderStreamingURLRequest = Shapes::StructureShape.new(name: 'CreateAppBlockBuilderStreamingURLRequest')
+    CreateAppBlockBuilderStreamingURLResult = Shapes::StructureShape.new(name: 'CreateAppBlockBuilderStreamingURLResult')
     CreateAppBlockRequest = Shapes::StructureShape.new(name: 'CreateAppBlockRequest')
     CreateAppBlockResult = Shapes::StructureShape.new(name: 'CreateAppBlockResult')
     CreateApplicationRequest = Shapes::StructureShape.new(name: 'CreateApplicationRequest')
@@ -79,6 +96,8 @@ module Aws::AppStream
     CreateUsageReportSubscriptionResult = Shapes::StructureShape.new(name: 'CreateUsageReportSubscriptionResult')
     CreateUserRequest = Shapes::StructureShape.new(name: 'CreateUserRequest')
     CreateUserResult = Shapes::StructureShape.new(name: 'CreateUserResult')
+    DeleteAppBlockBuilderRequest = Shapes::StructureShape.new(name: 'DeleteAppBlockBuilderRequest')
+    DeleteAppBlockBuilderResult = Shapes::StructureShape.new(name: 'DeleteAppBlockBuilderResult')
     DeleteAppBlockRequest = Shapes::StructureShape.new(name: 'DeleteAppBlockRequest')
     DeleteAppBlockResult = Shapes::StructureShape.new(name: 'DeleteAppBlockResult')
     DeleteApplicationRequest = Shapes::StructureShape.new(name: 'DeleteApplicationRequest')
@@ -101,6 +120,10 @@ module Aws::AppStream
     DeleteUsageReportSubscriptionResult = Shapes::StructureShape.new(name: 'DeleteUsageReportSubscriptionResult')
     DeleteUserRequest = Shapes::StructureShape.new(name: 'DeleteUserRequest')
     DeleteUserResult = Shapes::StructureShape.new(name: 'DeleteUserResult')
+    DescribeAppBlockBuilderAppBlockAssociationsRequest = Shapes::StructureShape.new(name: 'DescribeAppBlockBuilderAppBlockAssociationsRequest')
+    DescribeAppBlockBuilderAppBlockAssociationsResult = Shapes::StructureShape.new(name: 'DescribeAppBlockBuilderAppBlockAssociationsResult')
+    DescribeAppBlockBuildersRequest = Shapes::StructureShape.new(name: 'DescribeAppBlockBuildersRequest')
+    DescribeAppBlockBuildersResult = Shapes::StructureShape.new(name: 'DescribeAppBlockBuildersResult')
     DescribeAppBlocksRequest = Shapes::StructureShape.new(name: 'DescribeAppBlocksRequest')
     DescribeAppBlocksResult = Shapes::StructureShape.new(name: 'DescribeAppBlocksResult')
     DescribeApplicationFleetAssociationsRequest = Shapes::StructureShape.new(name: 'DescribeApplicationFleetAssociationsRequest')
@@ -137,6 +160,8 @@ module Aws::AppStream
     DirectoryNameList = Shapes::ListShape.new(name: 'DirectoryNameList')
     DisableUserRequest = Shapes::StructureShape.new(name: 'DisableUserRequest')
     DisableUserResult = Shapes::StructureShape.new(name: 'DisableUserResult')
+    DisassociateAppBlockBuilderAppBlockRequest = Shapes::StructureShape.new(name: 'DisassociateAppBlockBuilderAppBlockRequest')
+    DisassociateAppBlockBuilderAppBlockResult = Shapes::StructureShape.new(name: 'DisassociateAppBlockBuilderAppBlockResult')
     DisassociateApplicationFleetRequest = Shapes::StructureShape.new(name: 'DisassociateApplicationFleetRequest')
     DisassociateApplicationFleetResult = Shapes::StructureShape.new(name: 'DisassociateApplicationFleetResult')
     DisassociateApplicationFromEntitlementRequest = Shapes::StructureShape.new(name: 'DisassociateApplicationFromEntitlementRequest')
@@ -159,6 +184,8 @@ module Aws::AppStream
     EntitlementAttributeList = Shapes::ListShape.new(name: 'EntitlementAttributeList')
     EntitlementList = Shapes::ListShape.new(name: 'EntitlementList')
     EntitlementNotFoundException = Shapes::StructureShape.new(name: 'EntitlementNotFoundException')
+    ErrorDetails = Shapes::StructureShape.new(name: 'ErrorDetails')
+    ErrorDetailsList = Shapes::ListShape.new(name: 'ErrorDetailsList')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExpireSessionRequest = Shapes::StructureShape.new(name: 'ExpireSessionRequest')
     ExpireSessionResult = Shapes::StructureShape.new(name: 'ExpireSessionResult')
@@ -208,6 +235,7 @@ module Aws::AppStream
     OperationNotPermittedException = Shapes::StructureShape.new(name: 'OperationNotPermittedException')
     OrganizationalUnitDistinguishedName = Shapes::StringShape.new(name: 'OrganizationalUnitDistinguishedName')
     OrganizationalUnitDistinguishedNamesList = Shapes::ListShape.new(name: 'OrganizationalUnitDistinguishedNamesList')
+    PackagingType = Shapes::StringShape.new(name: 'PackagingType')
     Permission = Shapes::StringShape.new(name: 'Permission')
     PlatformType = Shapes::StringShape.new(name: 'PlatformType')
     Platforms = Shapes::ListShape.new(name: 'Platforms')
@@ -242,10 +270,14 @@ module Aws::AppStream
     StackErrorCode = Shapes::StringShape.new(name: 'StackErrorCode')
     StackErrors = Shapes::ListShape.new(name: 'StackErrors')
     StackList = Shapes::ListShape.new(name: 'StackList')
+    StartAppBlockBuilderRequest = Shapes::StructureShape.new(name: 'StartAppBlockBuilderRequest')
+    StartAppBlockBuilderResult = Shapes::StructureShape.new(name: 'StartAppBlockBuilderResult')
     StartFleetRequest = Shapes::StructureShape.new(name: 'StartFleetRequest')
     StartFleetResult = Shapes::StructureShape.new(name: 'StartFleetResult')
     StartImageBuilderRequest = Shapes::StructureShape.new(name: 'StartImageBuilderRequest')
     StartImageBuilderResult = Shapes::StructureShape.new(name: 'StartImageBuilderResult')
+    StopAppBlockBuilderRequest = Shapes::StructureShape.new(name: 'StopAppBlockBuilderRequest')
+    StopAppBlockBuilderResult = Shapes::StructureShape.new(name: 'StopAppBlockBuilderResult')
     StopFleetRequest = Shapes::StructureShape.new(name: 'StopFleetRequest')
     StopFleetResult = Shapes::StructureShape.new(name: 'StopFleetResult')
     StopImageBuilderRequest = Shapes::StructureShape.new(name: 'StopImageBuilderRequest')
@@ -268,6 +300,8 @@ module Aws::AppStream
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateAppBlockBuilderRequest = Shapes::StructureShape.new(name: 'UpdateAppBlockBuilderRequest')
+    UpdateAppBlockBuilderResult = Shapes::StructureShape.new(name: 'UpdateAppBlockBuilderResult')
     UpdateApplicationRequest = Shapes::StructureShape.new(name: 'UpdateApplicationRequest')
     UpdateApplicationResult = Shapes::StructureShape.new(name: 'UpdateApplicationResult')
     UpdateDirectoryConfigRequest = Shapes::StructureShape.new(name: 'UpdateDirectoryConfigRequest')
@@ -312,9 +346,43 @@ module Aws::AppStream
     AppBlock.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     AppBlock.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "DisplayName"))
     AppBlock.add_member(:source_s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "SourceS3Location"))
-    AppBlock.add_member(:setup_script_details, Shapes::ShapeRef.new(shape: ScriptDetails, required: true, location_name: "SetupScriptDetails"))
+    AppBlock.add_member(:setup_script_details, Shapes::ShapeRef.new(shape: ScriptDetails, location_name: "SetupScriptDetails"))
     AppBlock.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    AppBlock.add_member(:post_setup_script_details, Shapes::ShapeRef.new(shape: ScriptDetails, location_name: "PostSetupScriptDetails"))
+    AppBlock.add_member(:packaging_type, Shapes::ShapeRef.new(shape: PackagingType, location_name: "PackagingType"))
+    AppBlock.add_member(:state, Shapes::ShapeRef.new(shape: AppBlockState, location_name: "State"))
+    AppBlock.add_member(:app_block_errors, Shapes::ShapeRef.new(shape: ErrorDetailsList, location_name: "AppBlockErrors"))
     AppBlock.struct_class = Types::AppBlock
+
+    AppBlockBuilder.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    AppBlockBuilder.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
+    AppBlockBuilder.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "DisplayName"))
+    AppBlockBuilder.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    AppBlockBuilder.add_member(:platform, Shapes::ShapeRef.new(shape: AppBlockBuilderPlatformType, required: true, location_name: "Platform"))
+    AppBlockBuilder.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceType"))
+    AppBlockBuilder.add_member(:enable_default_internet_access, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableDefaultInternetAccess"))
+    AppBlockBuilder.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "IamRoleArn"))
+    AppBlockBuilder.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, required: true, location_name: "VpcConfig"))
+    AppBlockBuilder.add_member(:state, Shapes::ShapeRef.new(shape: AppBlockBuilderState, required: true, location_name: "State"))
+    AppBlockBuilder.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    AppBlockBuilder.add_member(:app_block_builder_errors, Shapes::ShapeRef.new(shape: ResourceErrors, location_name: "AppBlockBuilderErrors"))
+    AppBlockBuilder.add_member(:state_change_reason, Shapes::ShapeRef.new(shape: AppBlockBuilderStateChangeReason, location_name: "StateChangeReason"))
+    AppBlockBuilder.add_member(:access_endpoints, Shapes::ShapeRef.new(shape: AccessEndpointList, location_name: "AccessEndpoints"))
+    AppBlockBuilder.struct_class = Types::AppBlockBuilder
+
+    AppBlockBuilderAppBlockAssociation.add_member(:app_block_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AppBlockArn"))
+    AppBlockBuilderAppBlockAssociation.add_member(:app_block_builder_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "AppBlockBuilderName"))
+    AppBlockBuilderAppBlockAssociation.struct_class = Types::AppBlockBuilderAppBlockAssociation
+
+    AppBlockBuilderAppBlockAssociationsList.member = Shapes::ShapeRef.new(shape: AppBlockBuilderAppBlockAssociation)
+
+    AppBlockBuilderAttributes.member = Shapes::ShapeRef.new(shape: AppBlockBuilderAttribute)
+
+    AppBlockBuilderList.member = Shapes::ShapeRef.new(shape: AppBlockBuilder)
+
+    AppBlockBuilderStateChangeReason.add_member(:code, Shapes::ShapeRef.new(shape: AppBlockBuilderStateChangeReasonCode, location_name: "Code"))
+    AppBlockBuilderStateChangeReason.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    AppBlockBuilderStateChangeReason.struct_class = Types::AppBlockBuilderStateChangeReason
 
     AppBlocks.member = Shapes::ShapeRef.new(shape: AppBlock)
 
@@ -355,6 +423,13 @@ module Aws::AppStream
     Applications.member = Shapes::ShapeRef.new(shape: Application)
 
     ArnList.member = Shapes::ShapeRef.new(shape: Arn)
+
+    AssociateAppBlockBuilderAppBlockRequest.add_member(:app_block_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AppBlockArn"))
+    AssociateAppBlockBuilderAppBlockRequest.add_member(:app_block_builder_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "AppBlockBuilderName"))
+    AssociateAppBlockBuilderAppBlockRequest.struct_class = Types::AssociateAppBlockBuilderAppBlockRequest
+
+    AssociateAppBlockBuilderAppBlockResult.add_member(:app_block_builder_app_block_association, Shapes::ShapeRef.new(shape: AppBlockBuilderAppBlockAssociation, location_name: "AppBlockBuilderAppBlockAssociation"))
+    AssociateAppBlockBuilderAppBlockResult.struct_class = Types::AssociateAppBlockBuilderAppBlockResult
 
     AssociateApplicationFleetRequest.add_member(:fleet_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "FleetName"))
     AssociateApplicationFleetRequest.add_member(:application_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ApplicationArn"))
@@ -415,12 +490,37 @@ module Aws::AppStream
     CopyImageResponse.add_member(:destination_image_name, Shapes::ShapeRef.new(shape: Name, location_name: "DestinationImageName"))
     CopyImageResponse.struct_class = Types::CopyImageResponse
 
+    CreateAppBlockBuilderRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
+    CreateAppBlockBuilderRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateAppBlockBuilderRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
+    CreateAppBlockBuilderRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateAppBlockBuilderRequest.add_member(:platform, Shapes::ShapeRef.new(shape: AppBlockBuilderPlatformType, required: true, location_name: "Platform"))
+    CreateAppBlockBuilderRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceType"))
+    CreateAppBlockBuilderRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, required: true, location_name: "VpcConfig"))
+    CreateAppBlockBuilderRequest.add_member(:enable_default_internet_access, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableDefaultInternetAccess"))
+    CreateAppBlockBuilderRequest.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "IamRoleArn"))
+    CreateAppBlockBuilderRequest.add_member(:access_endpoints, Shapes::ShapeRef.new(shape: AccessEndpointList, location_name: "AccessEndpoints"))
+    CreateAppBlockBuilderRequest.struct_class = Types::CreateAppBlockBuilderRequest
+
+    CreateAppBlockBuilderResult.add_member(:app_block_builder, Shapes::ShapeRef.new(shape: AppBlockBuilder, location_name: "AppBlockBuilder"))
+    CreateAppBlockBuilderResult.struct_class = Types::CreateAppBlockBuilderResult
+
+    CreateAppBlockBuilderStreamingURLRequest.add_member(:app_block_builder_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "AppBlockBuilderName"))
+    CreateAppBlockBuilderStreamingURLRequest.add_member(:validity, Shapes::ShapeRef.new(shape: Long, location_name: "Validity"))
+    CreateAppBlockBuilderStreamingURLRequest.struct_class = Types::CreateAppBlockBuilderStreamingURLRequest
+
+    CreateAppBlockBuilderStreamingURLResult.add_member(:streaming_url, Shapes::ShapeRef.new(shape: String, location_name: "StreamingURL"))
+    CreateAppBlockBuilderStreamingURLResult.add_member(:expires, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Expires"))
+    CreateAppBlockBuilderStreamingURLResult.struct_class = Types::CreateAppBlockBuilderStreamingURLResult
+
     CreateAppBlockRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
     CreateAppBlockRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateAppBlockRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
     CreateAppBlockRequest.add_member(:source_s3_location, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "SourceS3Location"))
-    CreateAppBlockRequest.add_member(:setup_script_details, Shapes::ShapeRef.new(shape: ScriptDetails, required: true, location_name: "SetupScriptDetails"))
+    CreateAppBlockRequest.add_member(:setup_script_details, Shapes::ShapeRef.new(shape: ScriptDetails, location_name: "SetupScriptDetails"))
     CreateAppBlockRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateAppBlockRequest.add_member(:post_setup_script_details, Shapes::ShapeRef.new(shape: ScriptDetails, location_name: "PostSetupScriptDetails"))
+    CreateAppBlockRequest.add_member(:packaging_type, Shapes::ShapeRef.new(shape: PackagingType, location_name: "PackagingType"))
     CreateAppBlockRequest.struct_class = Types::CreateAppBlockRequest
 
     CreateAppBlockResult.add_member(:app_block, Shapes::ShapeRef.new(shape: AppBlock, location_name: "AppBlock"))
@@ -462,7 +562,7 @@ module Aws::AppStream
     CreateEntitlementResult.struct_class = Types::CreateEntitlementResult
 
     CreateFleetRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
-    CreateFleetRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: String, location_name: "ImageName"))
+    CreateFleetRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: Name, location_name: "ImageName"))
     CreateFleetRequest.add_member(:image_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ImageArn"))
     CreateFleetRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceType"))
     CreateFleetRequest.add_member(:fleet_type, Shapes::ShapeRef.new(shape: FleetType, location_name: "FleetType"))
@@ -569,6 +669,11 @@ module Aws::AppStream
 
     CreateUserResult.struct_class = Types::CreateUserResult
 
+    DeleteAppBlockBuilderRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
+    DeleteAppBlockBuilderRequest.struct_class = Types::DeleteAppBlockBuilderRequest
+
+    DeleteAppBlockBuilderResult.struct_class = Types::DeleteAppBlockBuilderResult
+
     DeleteAppBlockRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
     DeleteAppBlockRequest.struct_class = Types::DeleteAppBlockRequest
 
@@ -627,6 +732,25 @@ module Aws::AppStream
     DeleteUserRequest.struct_class = Types::DeleteUserRequest
 
     DeleteUserResult.struct_class = Types::DeleteUserResult
+
+    DescribeAppBlockBuilderAppBlockAssociationsRequest.add_member(:app_block_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AppBlockArn"))
+    DescribeAppBlockBuilderAppBlockAssociationsRequest.add_member(:app_block_builder_name, Shapes::ShapeRef.new(shape: Name, location_name: "AppBlockBuilderName"))
+    DescribeAppBlockBuilderAppBlockAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    DescribeAppBlockBuilderAppBlockAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeAppBlockBuilderAppBlockAssociationsRequest.struct_class = Types::DescribeAppBlockBuilderAppBlockAssociationsRequest
+
+    DescribeAppBlockBuilderAppBlockAssociationsResult.add_member(:app_block_builder_app_block_associations, Shapes::ShapeRef.new(shape: AppBlockBuilderAppBlockAssociationsList, location_name: "AppBlockBuilderAppBlockAssociations"))
+    DescribeAppBlockBuilderAppBlockAssociationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeAppBlockBuilderAppBlockAssociationsResult.struct_class = Types::DescribeAppBlockBuilderAppBlockAssociationsResult
+
+    DescribeAppBlockBuildersRequest.add_member(:names, Shapes::ShapeRef.new(shape: StringList, location_name: "Names"))
+    DescribeAppBlockBuildersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeAppBlockBuildersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    DescribeAppBlockBuildersRequest.struct_class = Types::DescribeAppBlockBuildersRequest
+
+    DescribeAppBlockBuildersResult.add_member(:app_block_builders, Shapes::ShapeRef.new(shape: AppBlockBuilderList, location_name: "AppBlockBuilders"))
+    DescribeAppBlockBuildersResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeAppBlockBuildersResult.struct_class = Types::DescribeAppBlockBuildersResult
 
     DescribeAppBlocksRequest.add_member(:arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "Arns"))
     DescribeAppBlocksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -779,6 +903,12 @@ module Aws::AppStream
 
     DisableUserResult.struct_class = Types::DisableUserResult
 
+    DisassociateAppBlockBuilderAppBlockRequest.add_member(:app_block_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AppBlockArn"))
+    DisassociateAppBlockBuilderAppBlockRequest.add_member(:app_block_builder_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "AppBlockBuilderName"))
+    DisassociateAppBlockBuilderAppBlockRequest.struct_class = Types::DisassociateAppBlockBuilderAppBlockRequest
+
+    DisassociateAppBlockBuilderAppBlockResult.struct_class = Types::DisassociateAppBlockBuilderAppBlockResult
+
     DisassociateApplicationFleetRequest.add_member(:fleet_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "FleetName"))
     DisassociateApplicationFleetRequest.add_member(:application_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ApplicationArn"))
     DisassociateApplicationFleetRequest.struct_class = Types::DisassociateApplicationFleetRequest
@@ -839,6 +969,12 @@ module Aws::AppStream
 
     EntitlementNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     EntitlementNotFoundException.struct_class = Types::EntitlementNotFoundException
+
+    ErrorDetails.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
+    ErrorDetails.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    ErrorDetails.struct_class = Types::ErrorDetails
+
+    ErrorDetailsList.member = Shapes::ShapeRef.new(shape: ErrorDetails)
 
     ExpireSessionRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SessionId"))
     ExpireSessionRequest.struct_class = Types::ExpireSessionRequest
@@ -1026,7 +1162,7 @@ module Aws::AppStream
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     S3Location.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, required: true, location_name: "S3Bucket"))
-    S3Location.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3Key, required: true, location_name: "S3Key"))
+    S3Location.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3Key, location_name: "S3Key"))
     S3Location.struct_class = Types::S3Location
 
     ScriptDetails.add_member(:script_s3_location, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "ScriptS3Location"))
@@ -1087,6 +1223,12 @@ module Aws::AppStream
 
     StackList.member = Shapes::ShapeRef.new(shape: Stack)
 
+    StartAppBlockBuilderRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
+    StartAppBlockBuilderRequest.struct_class = Types::StartAppBlockBuilderRequest
+
+    StartAppBlockBuilderResult.add_member(:app_block_builder, Shapes::ShapeRef.new(shape: AppBlockBuilder, location_name: "AppBlockBuilder"))
+    StartAppBlockBuilderResult.struct_class = Types::StartAppBlockBuilderResult
+
     StartFleetRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     StartFleetRequest.struct_class = Types::StartFleetRequest
 
@@ -1098,6 +1240,12 @@ module Aws::AppStream
 
     StartImageBuilderResult.add_member(:image_builder, Shapes::ShapeRef.new(shape: ImageBuilder, location_name: "ImageBuilder"))
     StartImageBuilderResult.struct_class = Types::StartImageBuilderResult
+
+    StopAppBlockBuilderRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
+    StopAppBlockBuilderRequest.struct_class = Types::StopAppBlockBuilderRequest
+
+    StopAppBlockBuilderResult.add_member(:app_block_builder, Shapes::ShapeRef.new(shape: AppBlockBuilder, location_name: "AppBlockBuilder"))
+    StopAppBlockBuilderResult.struct_class = Types::StopAppBlockBuilderResult
 
     StopFleetRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     StopFleetRequest.struct_class = Types::StopFleetRequest
@@ -1140,6 +1288,21 @@ module Aws::AppStream
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateAppBlockBuilderRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
+    UpdateAppBlockBuilderRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    UpdateAppBlockBuilderRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
+    UpdateAppBlockBuilderRequest.add_member(:platform, Shapes::ShapeRef.new(shape: PlatformType, location_name: "Platform"))
+    UpdateAppBlockBuilderRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "InstanceType"))
+    UpdateAppBlockBuilderRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    UpdateAppBlockBuilderRequest.add_member(:enable_default_internet_access, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableDefaultInternetAccess"))
+    UpdateAppBlockBuilderRequest.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "IamRoleArn"))
+    UpdateAppBlockBuilderRequest.add_member(:access_endpoints, Shapes::ShapeRef.new(shape: AccessEndpointList, location_name: "AccessEndpoints"))
+    UpdateAppBlockBuilderRequest.add_member(:attributes_to_delete, Shapes::ShapeRef.new(shape: AppBlockBuilderAttributes, location_name: "AttributesToDelete"))
+    UpdateAppBlockBuilderRequest.struct_class = Types::UpdateAppBlockBuilderRequest
+
+    UpdateAppBlockBuilderResult.add_member(:app_block_builder, Shapes::ShapeRef.new(shape: AppBlockBuilder, location_name: "AppBlockBuilder"))
+    UpdateAppBlockBuilderResult.struct_class = Types::UpdateAppBlockBuilderResult
 
     UpdateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
     UpdateApplicationRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
@@ -1291,6 +1454,19 @@ module Aws::AppStream
         "uid" => "appstream-2016-12-01",
       }
 
+      api.add_operation(:associate_app_block_builder_app_block, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateAppBlockBuilderAppBlock"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateAppBlockBuilderAppBlockRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateAppBlockBuilderAppBlockResult)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+      end)
+
       api.add_operation(:associate_application_fleet, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AssociateApplicationFleet"
         o.http_method = "POST"
@@ -1375,6 +1551,34 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+      end)
+
+      api.add_operation(:create_app_block_builder, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAppBlockBuilder"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateAppBlockBuilderRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAppBlockBuilderResult)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRoleException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotAvailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+      end)
+
+      api.add_operation(:create_app_block_builder_streaming_url, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAppBlockBuilderStreamingURL"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateAppBlockBuilderStreamingURLRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAppBlockBuilderStreamingURLResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
       end)
 
       api.add_operation(:create_application, Seahorse::Model::Operation.new.tap do |o|
@@ -1541,6 +1745,18 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:delete_app_block_builder, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAppBlockBuilder"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAppBlockBuilderRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAppBlockBuilderResult)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:delete_application, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteApplication"
         o.http_method = "POST"
@@ -1649,6 +1865,38 @@ module Aws::AppStream
         o.input = Shapes::ShapeRef.new(shape: DeleteUserRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteUserResult)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:describe_app_block_builder_app_block_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAppBlockBuilderAppBlockAssociations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAppBlockBuilderAppBlockAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAppBlockBuilderAppBlockAssociationsResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_app_block_builders, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAppBlockBuilders"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAppBlockBuildersRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAppBlockBuildersResult)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_app_blocks, Seahorse::Model::Operation.new.tap do |o|
@@ -1808,6 +2056,18 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:disassociate_app_block_builder_app_block, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateAppBlockBuilderAppBlock"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateAppBlockBuilderAppBlockRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateAppBlockBuilderAppBlockResult)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:disassociate_application_fleet, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateApplicationFleet"
         o.http_method = "POST"
@@ -1897,6 +2157,21 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:start_app_block_builder, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartAppBlockBuilder"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartAppBlockBuilderRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartAppBlockBuilderResult)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotAvailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:start_fleet, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartFleet"
         o.http_method = "POST"
@@ -1924,6 +2199,17 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
         o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
+      end)
+
+      api.add_operation(:stop_app_block_builder, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopAppBlockBuilder"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopAppBlockBuilderRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopAppBlockBuilderResult)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:stop_fleet, Seahorse::Model::Operation.new.tap do |o|
@@ -1964,6 +2250,24 @@ module Aws::AppStream
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_app_block_builder, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAppBlockBuilder"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAppBlockBuilderRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAppBlockBuilderResult)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRoleException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotAvailableException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 

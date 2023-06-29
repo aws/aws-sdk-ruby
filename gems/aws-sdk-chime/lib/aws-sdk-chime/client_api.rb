@@ -2834,6 +2834,7 @@ module Aws::Chime
         o.name = "AssociatePhoneNumbersWithVoiceConnector"
         o.http_method = "POST"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}?operation=associate-phone-numbers"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: AssociatePhoneNumbersWithVoiceConnectorRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociatePhoneNumbersWithVoiceConnectorResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -2850,6 +2851,7 @@ module Aws::Chime
         o.name = "AssociatePhoneNumbersWithVoiceConnectorGroup"
         o.http_method = "POST"
         o.http_request_uri = "/voice-connector-groups/{voiceConnectorGroupId}?operation=associate-phone-numbers"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: AssociatePhoneNumbersWithVoiceConnectorGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociatePhoneNumbersWithVoiceConnectorGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -2881,6 +2883,7 @@ module Aws::Chime
         o.name = "BatchCreateAttendee"
         o.http_method = "POST"
         o.http_request_uri = "/meetings/{meetingId}/attendees?operation=batch-create"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: BatchCreateAttendeeRequest)
         o.output = Shapes::ShapeRef.new(shape: BatchCreateAttendeeResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -2897,6 +2900,7 @@ module Aws::Chime
         o.name = "BatchCreateChannelMembership"
         o.http_method = "POST"
         o.http_request_uri = "/channels/{channelArn}/memberships?operation=batch-create"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -3019,6 +3023,7 @@ module Aws::Chime
         o.name = "CreateAppInstance"
         o.http_method = "POST"
         o.http_request_uri = "/app-instances"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "identity-",
         }
@@ -3038,6 +3043,7 @@ module Aws::Chime
         o.name = "CreateAppInstanceAdmin"
         o.http_method = "POST"
         o.http_request_uri = "/app-instances/{appInstanceArn}/admins"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "identity-",
         }
@@ -3057,6 +3063,7 @@ module Aws::Chime
         o.name = "CreateAppInstanceUser"
         o.http_method = "POST"
         o.http_request_uri = "/app-instance-users"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "identity-",
         }
@@ -3076,6 +3083,7 @@ module Aws::Chime
         o.name = "CreateAttendee"
         o.http_method = "POST"
         o.http_request_uri = "/meetings/{meetingId}/attendees"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateAttendeeRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateAttendeeResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -3108,6 +3116,7 @@ module Aws::Chime
         o.name = "CreateChannel"
         o.http_method = "POST"
         o.http_request_uri = "/channels"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -3127,6 +3136,7 @@ module Aws::Chime
         o.name = "CreateChannelBan"
         o.http_method = "POST"
         o.http_request_uri = "/channels/{channelArn}/bans"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -3146,6 +3156,7 @@ module Aws::Chime
         o.name = "CreateChannelMembership"
         o.http_method = "POST"
         o.http_request_uri = "/channels/{channelArn}/memberships"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -3165,6 +3176,7 @@ module Aws::Chime
         o.name = "CreateChannelModerator"
         o.http_method = "POST"
         o.http_request_uri = "/channels/{channelArn}/moderators"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -3184,6 +3196,7 @@ module Aws::Chime
         o.name = "CreateMediaCapturePipeline"
         o.http_method = "POST"
         o.http_request_uri = "/media-capture-pipelines"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateMediaCapturePipelineRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateMediaCapturePipelineResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
@@ -3199,6 +3212,7 @@ module Aws::Chime
         o.name = "CreateMeeting"
         o.http_method = "POST"
         o.http_request_uri = "/meetings"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateMeetingRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateMeetingResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -3230,6 +3244,7 @@ module Aws::Chime
         o.name = "CreateMeetingWithAttendees"
         o.http_method = "POST"
         o.http_request_uri = "/meetings?operation=create-attendees"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateMeetingWithAttendeesRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateMeetingWithAttendeesResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -3261,6 +3276,7 @@ module Aws::Chime
         o.name = "CreateProxySession"
         o.http_method = "POST"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/proxy-sessions"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateProxySessionRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateProxySessionResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -3309,6 +3325,7 @@ module Aws::Chime
         o.name = "CreateSipMediaApplication"
         o.http_method = "POST"
         o.http_request_uri = "/sip-media-applications"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateSipMediaApplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateSipMediaApplicationResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -3326,6 +3343,7 @@ module Aws::Chime
         o.name = "CreateSipMediaApplicationCall"
         o.http_method = "POST"
         o.http_request_uri = "/sip-media-applications/{sipMediaApplicationId}/calls"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateSipMediaApplicationCallRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateSipMediaApplicationCallResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -3342,6 +3360,7 @@ module Aws::Chime
         o.name = "CreateSipRule"
         o.http_method = "POST"
         o.http_request_uri = "/sip-rules"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateSipRuleRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateSipRuleResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -3375,6 +3394,7 @@ module Aws::Chime
         o.name = "CreateVoiceConnector"
         o.http_method = "POST"
         o.http_request_uri = "/voice-connectors"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateVoiceConnectorRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateVoiceConnectorResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -3391,6 +3411,7 @@ module Aws::Chime
         o.name = "CreateVoiceConnectorGroup"
         o.http_method = "POST"
         o.http_request_uri = "/voice-connector-groups"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateVoiceConnectorGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateVoiceConnectorGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -3423,6 +3444,7 @@ module Aws::Chime
         o.name = "DeleteAppInstance"
         o.http_method = "DELETE"
         o.http_request_uri = "/app-instances/{appInstanceArn}"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "identity-",
         }
@@ -3440,6 +3462,7 @@ module Aws::Chime
         o.name = "DeleteAppInstanceAdmin"
         o.http_method = "DELETE"
         o.http_request_uri = "/app-instances/{appInstanceArn}/admins/{appInstanceAdminArn}"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "identity-",
         }
@@ -3458,6 +3481,7 @@ module Aws::Chime
         o.name = "DeleteAppInstanceStreamingConfigurations"
         o.http_method = "DELETE"
         o.http_request_uri = "/app-instances/{appInstanceArn}/streaming-configurations"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteAppInstanceStreamingConfigurationsRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -3473,6 +3497,7 @@ module Aws::Chime
         o.name = "DeleteAppInstanceUser"
         o.http_method = "DELETE"
         o.http_request_uri = "/app-instance-users/{appInstanceUserArn}"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "identity-",
         }
@@ -3490,6 +3515,7 @@ module Aws::Chime
         o.name = "DeleteAttendee"
         o.http_method = "DELETE"
         o.http_request_uri = "/meetings/{meetingId}/attendees/{attendeeId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteAttendeeRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -3505,6 +3531,7 @@ module Aws::Chime
         o.name = "DeleteChannel"
         o.http_method = "DELETE"
         o.http_request_uri = "/channels/{channelArn}"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -3522,6 +3549,7 @@ module Aws::Chime
         o.name = "DeleteChannelBan"
         o.http_method = "DELETE"
         o.http_request_uri = "/channels/{channelArn}/bans/{memberArn}"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -3539,6 +3567,7 @@ module Aws::Chime
         o.name = "DeleteChannelMembership"
         o.http_method = "DELETE"
         o.http_request_uri = "/channels/{channelArn}/memberships/{memberArn}"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -3557,6 +3586,7 @@ module Aws::Chime
         o.name = "DeleteChannelMessage"
         o.http_method = "DELETE"
         o.http_request_uri = "/channels/{channelArn}/messages/{messageId}"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -3574,6 +3604,7 @@ module Aws::Chime
         o.name = "DeleteChannelModerator"
         o.http_method = "DELETE"
         o.http_request_uri = "/channels/{channelArn}/moderators/{channelModeratorArn}"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -3605,6 +3636,7 @@ module Aws::Chime
         o.name = "DeleteMediaCapturePipeline"
         o.http_method = "DELETE"
         o.http_request_uri = "/media-capture-pipelines/{mediaPipelineId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteMediaCapturePipelineRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
@@ -3620,6 +3652,7 @@ module Aws::Chime
         o.name = "DeleteMeeting"
         o.http_method = "DELETE"
         o.http_request_uri = "/meetings/{meetingId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteMeetingRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -3650,6 +3683,7 @@ module Aws::Chime
         o.name = "DeleteProxySession"
         o.http_method = "DELETE"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/proxy-sessions/{proxySessionId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteProxySessionRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -3695,6 +3729,7 @@ module Aws::Chime
         o.name = "DeleteSipMediaApplication"
         o.http_method = "DELETE"
         o.http_request_uri = "/sip-media-applications/{sipMediaApplicationId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteSipMediaApplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -3711,6 +3746,7 @@ module Aws::Chime
         o.name = "DeleteSipRule"
         o.http_method = "DELETE"
         o.http_request_uri = "/sip-rules/{sipRuleId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteSipRuleRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -3727,6 +3763,7 @@ module Aws::Chime
         o.name = "DeleteVoiceConnector"
         o.http_method = "DELETE"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteVoiceConnectorRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -3743,6 +3780,7 @@ module Aws::Chime
         o.name = "DeleteVoiceConnectorEmergencyCallingConfiguration"
         o.http_method = "DELETE"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/emergency-calling-configuration"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteVoiceConnectorEmergencyCallingConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -3758,6 +3796,7 @@ module Aws::Chime
         o.name = "DeleteVoiceConnectorGroup"
         o.http_method = "DELETE"
         o.http_request_uri = "/voice-connector-groups/{voiceConnectorGroupId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteVoiceConnectorGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -3774,6 +3813,7 @@ module Aws::Chime
         o.name = "DeleteVoiceConnectorOrigination"
         o.http_method = "DELETE"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/origination"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteVoiceConnectorOriginationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -3789,6 +3829,7 @@ module Aws::Chime
         o.name = "DeleteVoiceConnectorProxy"
         o.http_method = "DELETE"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/programmable-numbers/proxy"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteVoiceConnectorProxyRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -3804,6 +3845,7 @@ module Aws::Chime
         o.name = "DeleteVoiceConnectorStreamingConfiguration"
         o.http_method = "DELETE"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/streaming-configuration"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteVoiceConnectorStreamingConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -3819,6 +3861,7 @@ module Aws::Chime
         o.name = "DeleteVoiceConnectorTermination"
         o.http_method = "DELETE"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/termination"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteVoiceConnectorTerminationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -3834,6 +3877,7 @@ module Aws::Chime
         o.name = "DeleteVoiceConnectorTerminationCredentials"
         o.http_method = "POST"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/termination/credentials?operation=delete"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteVoiceConnectorTerminationCredentialsRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -3849,6 +3893,7 @@ module Aws::Chime
         o.name = "DescribeAppInstance"
         o.http_method = "GET"
         o.http_request_uri = "/app-instances/{appInstanceArn}"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "identity-",
         }
@@ -3866,6 +3911,7 @@ module Aws::Chime
         o.name = "DescribeAppInstanceAdmin"
         o.http_method = "GET"
         o.http_request_uri = "/app-instances/{appInstanceArn}/admins/{appInstanceAdminArn}"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "identity-",
         }
@@ -3883,6 +3929,7 @@ module Aws::Chime
         o.name = "DescribeAppInstanceUser"
         o.http_method = "GET"
         o.http_request_uri = "/app-instance-users/{appInstanceUserArn}"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "identity-",
         }
@@ -3900,6 +3947,7 @@ module Aws::Chime
         o.name = "DescribeChannel"
         o.http_method = "GET"
         o.http_request_uri = "/channels/{channelArn}"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -3917,6 +3965,7 @@ module Aws::Chime
         o.name = "DescribeChannelBan"
         o.http_method = "GET"
         o.http_request_uri = "/channels/{channelArn}/bans/{memberArn}"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -3935,6 +3984,7 @@ module Aws::Chime
         o.name = "DescribeChannelMembership"
         o.http_method = "GET"
         o.http_request_uri = "/channels/{channelArn}/memberships/{memberArn}"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -3953,6 +4003,7 @@ module Aws::Chime
         o.name = "DescribeChannelMembershipForAppInstanceUser"
         o.http_method = "GET"
         o.http_request_uri = "/channels/{channelArn}?scope=app-instance-user-membership"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -3970,6 +4021,7 @@ module Aws::Chime
         o.name = "DescribeChannelModeratedByAppInstanceUser"
         o.http_method = "GET"
         o.http_request_uri = "/channels/{channelArn}?scope=app-instance-user-moderated-channel"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -3987,6 +4039,7 @@ module Aws::Chime
         o.name = "DescribeChannelModerator"
         o.http_method = "GET"
         o.http_request_uri = "/channels/{channelArn}/moderators/{channelModeratorArn}"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -4020,6 +4073,7 @@ module Aws::Chime
         o.name = "DisassociatePhoneNumbersFromVoiceConnector"
         o.http_method = "POST"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}?operation=disassociate-phone-numbers"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DisassociatePhoneNumbersFromVoiceConnectorRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociatePhoneNumbersFromVoiceConnectorResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -4035,6 +4089,7 @@ module Aws::Chime
         o.name = "DisassociatePhoneNumbersFromVoiceConnectorGroup"
         o.http_method = "POST"
         o.http_request_uri = "/voice-connector-groups/{voiceConnectorGroupId}?operation=disassociate-phone-numbers"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DisassociatePhoneNumbersFromVoiceConnectorGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociatePhoneNumbersFromVoiceConnectorGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -4095,6 +4150,7 @@ module Aws::Chime
         o.name = "GetAppInstanceRetentionSettings"
         o.http_method = "GET"
         o.http_request_uri = "/app-instances/{appInstanceArn}/retention-settings"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "identity-",
         }
@@ -4113,6 +4169,7 @@ module Aws::Chime
         o.name = "GetAppInstanceStreamingConfigurations"
         o.http_method = "GET"
         o.http_request_uri = "/app-instances/{appInstanceArn}/streaming-configurations"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetAppInstanceStreamingConfigurationsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAppInstanceStreamingConfigurationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -4128,6 +4185,7 @@ module Aws::Chime
         o.name = "GetAttendee"
         o.http_method = "GET"
         o.http_request_uri = "/meetings/{meetingId}/attendees/{attendeeId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetAttendeeRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAttendeeResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -4158,6 +4216,7 @@ module Aws::Chime
         o.name = "GetChannelMessage"
         o.http_method = "GET"
         o.http_request_uri = "/channels/{channelArn}/messages/{messageId}"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -4205,6 +4264,7 @@ module Aws::Chime
         o.name = "GetMediaCapturePipeline"
         o.http_method = "GET"
         o.http_request_uri = "/media-capture-pipelines/{mediaPipelineId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetMediaCapturePipelineRequest)
         o.output = Shapes::ShapeRef.new(shape: GetMediaCapturePipelineResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -4220,6 +4280,7 @@ module Aws::Chime
         o.name = "GetMeeting"
         o.http_method = "GET"
         o.http_request_uri = "/meetings/{meetingId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetMeetingRequest)
         o.output = Shapes::ShapeRef.new(shape: GetMeetingResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -4235,6 +4296,7 @@ module Aws::Chime
         o.name = "GetMessagingSessionEndpoint"
         o.http_method = "GET"
         o.http_request_uri = "/endpoints/messaging-session"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -4295,6 +4357,7 @@ module Aws::Chime
         o.name = "GetProxySession"
         o.http_method = "GET"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/proxy-sessions/{proxySessionId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetProxySessionRequest)
         o.output = Shapes::ShapeRef.new(shape: GetProxySessionResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -4340,6 +4403,7 @@ module Aws::Chime
         o.name = "GetSipMediaApplication"
         o.http_method = "GET"
         o.http_request_uri = "/sip-media-applications/{sipMediaApplicationId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetSipMediaApplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetSipMediaApplicationResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -4355,6 +4419,7 @@ module Aws::Chime
         o.name = "GetSipMediaApplicationLoggingConfiguration"
         o.http_method = "GET"
         o.http_request_uri = "/sip-media-applications/{sipMediaApplicationId}/logging-configuration"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetSipMediaApplicationLoggingConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetSipMediaApplicationLoggingConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -4370,6 +4435,7 @@ module Aws::Chime
         o.name = "GetSipRule"
         o.http_method = "GET"
         o.http_request_uri = "/sip-rules/{sipRuleId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetSipRuleRequest)
         o.output = Shapes::ShapeRef.new(shape: GetSipRuleResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -4415,6 +4481,7 @@ module Aws::Chime
         o.name = "GetVoiceConnector"
         o.http_method = "GET"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetVoiceConnectorRequest)
         o.output = Shapes::ShapeRef.new(shape: GetVoiceConnectorResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -4430,6 +4497,7 @@ module Aws::Chime
         o.name = "GetVoiceConnectorEmergencyCallingConfiguration"
         o.http_method = "GET"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/emergency-calling-configuration"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetVoiceConnectorEmergencyCallingConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetVoiceConnectorEmergencyCallingConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -4445,6 +4513,7 @@ module Aws::Chime
         o.name = "GetVoiceConnectorGroup"
         o.http_method = "GET"
         o.http_request_uri = "/voice-connector-groups/{voiceConnectorGroupId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetVoiceConnectorGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: GetVoiceConnectorGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -4460,6 +4529,7 @@ module Aws::Chime
         o.name = "GetVoiceConnectorLoggingConfiguration"
         o.http_method = "GET"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/logging-configuration"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetVoiceConnectorLoggingConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetVoiceConnectorLoggingConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -4475,6 +4545,7 @@ module Aws::Chime
         o.name = "GetVoiceConnectorOrigination"
         o.http_method = "GET"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/origination"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetVoiceConnectorOriginationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetVoiceConnectorOriginationResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -4490,6 +4561,7 @@ module Aws::Chime
         o.name = "GetVoiceConnectorProxy"
         o.http_method = "GET"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/programmable-numbers/proxy"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetVoiceConnectorProxyRequest)
         o.output = Shapes::ShapeRef.new(shape: GetVoiceConnectorProxyResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -4505,6 +4577,7 @@ module Aws::Chime
         o.name = "GetVoiceConnectorStreamingConfiguration"
         o.http_method = "GET"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/streaming-configuration"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetVoiceConnectorStreamingConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetVoiceConnectorStreamingConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -4520,6 +4593,7 @@ module Aws::Chime
         o.name = "GetVoiceConnectorTermination"
         o.http_method = "GET"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/termination"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetVoiceConnectorTerminationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetVoiceConnectorTerminationResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -4535,6 +4609,7 @@ module Aws::Chime
         o.name = "GetVoiceConnectorTerminationHealth"
         o.http_method = "GET"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/termination/health"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetVoiceConnectorTerminationHealthRequest)
         o.output = Shapes::ShapeRef.new(shape: GetVoiceConnectorTerminationHealthResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -4586,6 +4661,7 @@ module Aws::Chime
         o.name = "ListAppInstanceAdmins"
         o.http_method = "GET"
         o.http_request_uri = "/app-instances/{appInstanceArn}/admins"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "identity-",
         }
@@ -4609,6 +4685,7 @@ module Aws::Chime
         o.name = "ListAppInstanceUsers"
         o.http_method = "GET"
         o.http_request_uri = "/app-instance-users"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "identity-",
         }
@@ -4632,6 +4709,7 @@ module Aws::Chime
         o.name = "ListAppInstances"
         o.http_method = "GET"
         o.http_request_uri = "/app-instances"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "identity-",
         }
@@ -4655,6 +4733,7 @@ module Aws::Chime
         o.name = "ListAttendeeTags"
         o.http_method = "GET"
         o.http_request_uri = "/meetings/{meetingId}/attendees/{attendeeId}/tags"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListAttendeeTagsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAttendeeTagsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -4670,6 +4749,7 @@ module Aws::Chime
         o.name = "ListAttendees"
         o.http_method = "GET"
         o.http_request_uri = "/meetings/{meetingId}/attendees"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListAttendeesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAttendeesResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -4712,6 +4792,7 @@ module Aws::Chime
         o.name = "ListChannelBans"
         o.http_method = "GET"
         o.http_request_uri = "/channels/{channelArn}/bans"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -4735,6 +4816,7 @@ module Aws::Chime
         o.name = "ListChannelMemberships"
         o.http_method = "GET"
         o.http_request_uri = "/channels/{channelArn}/memberships"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -4758,6 +4840,7 @@ module Aws::Chime
         o.name = "ListChannelMembershipsForAppInstanceUser"
         o.http_method = "GET"
         o.http_request_uri = "/channels?scope=app-instance-user-memberships"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -4781,6 +4864,7 @@ module Aws::Chime
         o.name = "ListChannelMessages"
         o.http_method = "GET"
         o.http_request_uri = "/channels/{channelArn}/messages"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -4804,6 +4888,7 @@ module Aws::Chime
         o.name = "ListChannelModerators"
         o.http_method = "GET"
         o.http_request_uri = "/channels/{channelArn}/moderators"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -4827,6 +4912,7 @@ module Aws::Chime
         o.name = "ListChannels"
         o.http_method = "GET"
         o.http_request_uri = "/channels"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -4850,6 +4936,7 @@ module Aws::Chime
         o.name = "ListChannelsModeratedByAppInstanceUser"
         o.http_method = "GET"
         o.http_request_uri = "/channels?scope=app-instance-user-moderated-channels"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -4873,6 +4960,7 @@ module Aws::Chime
         o.name = "ListMediaCapturePipelines"
         o.http_method = "GET"
         o.http_request_uri = "/media-capture-pipelines"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListMediaCapturePipelinesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListMediaCapturePipelinesResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -4893,6 +4981,7 @@ module Aws::Chime
         o.name = "ListMeetingTags"
         o.http_method = "GET"
         o.http_request_uri = "/meetings/{meetingId}/tags"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListMeetingTagsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListMeetingTagsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -4908,6 +4997,7 @@ module Aws::Chime
         o.name = "ListMeetings"
         o.http_method = "GET"
         o.http_request_uri = "/meetings"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListMeetingsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListMeetingsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -4969,6 +5059,7 @@ module Aws::Chime
         o.name = "ListProxySessions"
         o.http_method = "GET"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/proxy-sessions"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListProxySessionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListProxySessionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -5032,6 +5123,7 @@ module Aws::Chime
         o.name = "ListSipMediaApplications"
         o.http_method = "GET"
         o.http_request_uri = "/sip-media-applications"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListSipMediaApplicationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListSipMediaApplicationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -5052,6 +5144,7 @@ module Aws::Chime
         o.name = "ListSipRules"
         o.http_method = "GET"
         o.http_request_uri = "/sip-rules"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListSipRulesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListSipRulesResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -5087,6 +5180,7 @@ module Aws::Chime
         o.name = "ListTagsForResource"
         o.http_method = "GET"
         o.http_request_uri = "/tags"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -5122,6 +5216,7 @@ module Aws::Chime
         o.name = "ListVoiceConnectorGroups"
         o.http_method = "GET"
         o.http_request_uri = "/voice-connector-groups"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListVoiceConnectorGroupsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListVoiceConnectorGroupsResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -5142,6 +5237,7 @@ module Aws::Chime
         o.name = "ListVoiceConnectorTerminationCredentials"
         o.http_method = "GET"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/termination/credentials"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListVoiceConnectorTerminationCredentialsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListVoiceConnectorTerminationCredentialsResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -5157,6 +5253,7 @@ module Aws::Chime
         o.name = "ListVoiceConnectors"
         o.http_method = "GET"
         o.http_request_uri = "/voice-connectors"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListVoiceConnectorsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListVoiceConnectorsResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -5192,6 +5289,7 @@ module Aws::Chime
         o.name = "PutAppInstanceRetentionSettings"
         o.http_method = "PUT"
         o.http_request_uri = "/app-instances/{appInstanceArn}/retention-settings"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "identity-",
         }
@@ -5211,6 +5309,7 @@ module Aws::Chime
         o.name = "PutAppInstanceStreamingConfigurations"
         o.http_method = "PUT"
         o.http_request_uri = "/app-instances/{appInstanceArn}/streaming-configurations"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: PutAppInstanceStreamingConfigurationsRequest)
         o.output = Shapes::ShapeRef.new(shape: PutAppInstanceStreamingConfigurationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -5257,6 +5356,7 @@ module Aws::Chime
         o.name = "PutSipMediaApplicationLoggingConfiguration"
         o.http_method = "PUT"
         o.http_request_uri = "/sip-media-applications/{sipMediaApplicationId}/logging-configuration"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: PutSipMediaApplicationLoggingConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: PutSipMediaApplicationLoggingConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -5272,6 +5372,7 @@ module Aws::Chime
         o.name = "PutVoiceConnectorEmergencyCallingConfiguration"
         o.http_method = "PUT"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/emergency-calling-configuration"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: PutVoiceConnectorEmergencyCallingConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: PutVoiceConnectorEmergencyCallingConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -5287,6 +5388,7 @@ module Aws::Chime
         o.name = "PutVoiceConnectorLoggingConfiguration"
         o.http_method = "PUT"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/logging-configuration"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: PutVoiceConnectorLoggingConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: PutVoiceConnectorLoggingConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -5302,6 +5404,7 @@ module Aws::Chime
         o.name = "PutVoiceConnectorOrigination"
         o.http_method = "PUT"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/origination"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: PutVoiceConnectorOriginationRequest)
         o.output = Shapes::ShapeRef.new(shape: PutVoiceConnectorOriginationResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -5317,6 +5420,7 @@ module Aws::Chime
         o.name = "PutVoiceConnectorProxy"
         o.http_method = "PUT"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/programmable-numbers/proxy"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: PutVoiceConnectorProxyRequest)
         o.output = Shapes::ShapeRef.new(shape: PutVoiceConnectorProxyResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -5333,6 +5437,7 @@ module Aws::Chime
         o.name = "PutVoiceConnectorStreamingConfiguration"
         o.http_method = "PUT"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/streaming-configuration"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: PutVoiceConnectorStreamingConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: PutVoiceConnectorStreamingConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -5348,6 +5453,7 @@ module Aws::Chime
         o.name = "PutVoiceConnectorTermination"
         o.http_method = "PUT"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/termination"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: PutVoiceConnectorTerminationRequest)
         o.output = Shapes::ShapeRef.new(shape: PutVoiceConnectorTerminationResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -5364,6 +5470,7 @@ module Aws::Chime
         o.name = "PutVoiceConnectorTerminationCredentials"
         o.http_method = "POST"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/termination/credentials?operation=put"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: PutVoiceConnectorTerminationCredentialsRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -5379,6 +5486,7 @@ module Aws::Chime
         o.name = "RedactChannelMessage"
         o.http_method = "POST"
         o.http_request_uri = "/channels/{channelArn}/messages/{messageId}?operation=redact"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -5493,6 +5601,7 @@ module Aws::Chime
         o.name = "SendChannelMessage"
         o.http_method = "POST"
         o.http_request_uri = "/channels/{channelArn}/messages"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -5511,6 +5620,7 @@ module Aws::Chime
         o.name = "StartMeetingTranscription"
         o.http_method = "POST"
         o.http_request_uri = "/meetings/{meetingId}/transcription?operation=start"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: StartMeetingTranscriptionRequest)
         o.output = Shapes::ShapeRef.new(shape: StartMeetingTranscriptionResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -5528,6 +5638,7 @@ module Aws::Chime
         o.name = "StopMeetingTranscription"
         o.http_method = "POST"
         o.http_request_uri = "/meetings/{meetingId}/transcription?operation=stop"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: StopMeetingTranscriptionRequest)
         o.output = Shapes::ShapeRef.new(shape: StopMeetingTranscriptionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
@@ -5544,6 +5655,7 @@ module Aws::Chime
         o.name = "TagAttendee"
         o.http_method = "POST"
         o.http_request_uri = "/meetings/{meetingId}/attendees/{attendeeId}/tags?operation=add"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: TagAttendeeRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -5560,6 +5672,7 @@ module Aws::Chime
         o.name = "TagMeeting"
         o.http_method = "POST"
         o.http_request_uri = "/meetings/{meetingId}/tags?operation=add"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: TagMeetingRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -5576,6 +5689,7 @@ module Aws::Chime
         o.name = "TagResource"
         o.http_method = "POST"
         o.http_request_uri = "/tags?operation=tag-resource"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -5590,6 +5704,7 @@ module Aws::Chime
         o.name = "UntagAttendee"
         o.http_method = "POST"
         o.http_request_uri = "/meetings/{meetingId}/attendees/{attendeeId}/tags?operation=delete"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UntagAttendeeRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -5605,6 +5720,7 @@ module Aws::Chime
         o.name = "UntagMeeting"
         o.http_method = "POST"
         o.http_request_uri = "/meetings/{meetingId}/tags?operation=delete"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UntagMeetingRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -5620,6 +5736,7 @@ module Aws::Chime
         o.name = "UntagResource"
         o.http_method = "POST"
         o.http_request_uri = "/tags?operation=untag-resource"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -5665,6 +5782,7 @@ module Aws::Chime
         o.name = "UpdateAppInstance"
         o.http_method = "PUT"
         o.http_request_uri = "/app-instances/{appInstanceArn}"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "identity-",
         }
@@ -5683,6 +5801,7 @@ module Aws::Chime
         o.name = "UpdateAppInstanceUser"
         o.http_method = "PUT"
         o.http_request_uri = "/app-instance-users/{appInstanceUserArn}"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "identity-",
         }
@@ -5716,6 +5835,7 @@ module Aws::Chime
         o.name = "UpdateChannel"
         o.http_method = "PUT"
         o.http_request_uri = "/channels/{channelArn}"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -5734,6 +5854,7 @@ module Aws::Chime
         o.name = "UpdateChannelMessage"
         o.http_method = "PUT"
         o.http_request_uri = "/channels/{channelArn}/messages/{messageId}"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -5752,6 +5873,7 @@ module Aws::Chime
         o.name = "UpdateChannelReadMarker"
         o.http_method = "PUT"
         o.http_request_uri = "/channels/{channelArn}/readMarker"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "messaging-",
         }
@@ -5814,6 +5936,7 @@ module Aws::Chime
         o.name = "UpdateProxySession"
         o.http_method = "POST"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}/proxy-sessions/{proxySessionId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateProxySessionRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateProxySessionResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -5859,6 +5982,7 @@ module Aws::Chime
         o.name = "UpdateSipMediaApplication"
         o.http_method = "PUT"
         o.http_request_uri = "/sip-media-applications/{sipMediaApplicationId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateSipMediaApplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateSipMediaApplicationResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -5875,6 +5999,7 @@ module Aws::Chime
         o.name = "UpdateSipMediaApplicationCall"
         o.http_method = "POST"
         o.http_request_uri = "/sip-media-applications/{sipMediaApplicationId}/calls/{transactionId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateSipMediaApplicationCallRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateSipMediaApplicationCallResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -5891,6 +6016,7 @@ module Aws::Chime
         o.name = "UpdateSipRule"
         o.http_method = "PUT"
         o.http_request_uri = "/sip-rules/{sipRuleId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateSipRuleRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateSipRuleResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -5938,6 +6064,7 @@ module Aws::Chime
         o.name = "UpdateVoiceConnector"
         o.http_method = "PUT"
         o.http_request_uri = "/voice-connectors/{voiceConnectorId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateVoiceConnectorRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateVoiceConnectorResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -5953,6 +6080,7 @@ module Aws::Chime
         o.name = "UpdateVoiceConnectorGroup"
         o.http_method = "PUT"
         o.http_request_uri = "/voice-connector-groups/{voiceConnectorGroupId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateVoiceConnectorGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateVoiceConnectorGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -5969,6 +6097,7 @@ module Aws::Chime
         o.name = "ValidateE911Address"
         o.http_method = "POST"
         o.http_request_uri = "/emergency-calling/address"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ValidateE911AddressRequest)
         o.output = Shapes::ShapeRef.new(shape: ValidateE911AddressResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)

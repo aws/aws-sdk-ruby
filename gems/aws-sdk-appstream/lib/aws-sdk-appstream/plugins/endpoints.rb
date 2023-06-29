@@ -56,6 +56,8 @@ module Aws::AppStream
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :associate_app_block_builder_app_block
+            Aws::AppStream::Endpoints::AssociateAppBlockBuilderAppBlock.build(context)
           when :associate_application_fleet
             Aws::AppStream::Endpoints::AssociateApplicationFleet.build(context)
           when :associate_application_to_entitlement
@@ -70,6 +72,10 @@ module Aws::AppStream
             Aws::AppStream::Endpoints::CopyImage.build(context)
           when :create_app_block
             Aws::AppStream::Endpoints::CreateAppBlock.build(context)
+          when :create_app_block_builder
+            Aws::AppStream::Endpoints::CreateAppBlockBuilder.build(context)
+          when :create_app_block_builder_streaming_url
+            Aws::AppStream::Endpoints::CreateAppBlockBuilderStreamingURL.build(context)
           when :create_application
             Aws::AppStream::Endpoints::CreateApplication.build(context)
           when :create_directory_config
@@ -94,6 +100,8 @@ module Aws::AppStream
             Aws::AppStream::Endpoints::CreateUser.build(context)
           when :delete_app_block
             Aws::AppStream::Endpoints::DeleteAppBlock.build(context)
+          when :delete_app_block_builder
+            Aws::AppStream::Endpoints::DeleteAppBlockBuilder.build(context)
           when :delete_application
             Aws::AppStream::Endpoints::DeleteApplication.build(context)
           when :delete_directory_config
@@ -114,6 +122,10 @@ module Aws::AppStream
             Aws::AppStream::Endpoints::DeleteUsageReportSubscription.build(context)
           when :delete_user
             Aws::AppStream::Endpoints::DeleteUser.build(context)
+          when :describe_app_block_builder_app_block_associations
+            Aws::AppStream::Endpoints::DescribeAppBlockBuilderAppBlockAssociations.build(context)
+          when :describe_app_block_builders
+            Aws::AppStream::Endpoints::DescribeAppBlockBuilders.build(context)
           when :describe_app_blocks
             Aws::AppStream::Endpoints::DescribeAppBlocks.build(context)
           when :describe_application_fleet_associations
@@ -144,6 +156,8 @@ module Aws::AppStream
             Aws::AppStream::Endpoints::DescribeUsers.build(context)
           when :disable_user
             Aws::AppStream::Endpoints::DisableUser.build(context)
+          when :disassociate_app_block_builder_app_block
+            Aws::AppStream::Endpoints::DisassociateAppBlockBuilderAppBlock.build(context)
           when :disassociate_application_fleet
             Aws::AppStream::Endpoints::DisassociateApplicationFleet.build(context)
           when :disassociate_application_from_entitlement
@@ -162,10 +176,14 @@ module Aws::AppStream
             Aws::AppStream::Endpoints::ListEntitledApplications.build(context)
           when :list_tags_for_resource
             Aws::AppStream::Endpoints::ListTagsForResource.build(context)
+          when :start_app_block_builder
+            Aws::AppStream::Endpoints::StartAppBlockBuilder.build(context)
           when :start_fleet
             Aws::AppStream::Endpoints::StartFleet.build(context)
           when :start_image_builder
             Aws::AppStream::Endpoints::StartImageBuilder.build(context)
+          when :stop_app_block_builder
+            Aws::AppStream::Endpoints::StopAppBlockBuilder.build(context)
           when :stop_fleet
             Aws::AppStream::Endpoints::StopFleet.build(context)
           when :stop_image_builder
@@ -174,6 +192,8 @@ module Aws::AppStream
             Aws::AppStream::Endpoints::TagResource.build(context)
           when :untag_resource
             Aws::AppStream::Endpoints::UntagResource.build(context)
+          when :update_app_block_builder
+            Aws::AppStream::Endpoints::UpdateAppBlockBuilder.build(context)
           when :update_application
             Aws::AppStream::Endpoints::UpdateApplication.build(context)
           when :update_directory_config

@@ -916,11 +916,17 @@ module Aws::DynamoDB
     #   The error message associated with the PartiQL batch response.
     #   @return [String]
     #
+    # @!attribute [rw] item
+    #   The item which caused the condition check to fail. This will be set
+    #   if ReturnValuesOnConditionCheckFailure is specified as `ALL_OLD`.
+    #   @return [Hash<String,Types::AttributeValue>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchStatementError AWS API Documentation
     #
     class BatchStatementError < Struct.new(
       :code,
-      :message)
+      :message,
+      :item)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -940,12 +946,22 @@ module Aws::DynamoDB
     #   The read consistency of the PartiQL batch request.
     #   @return [Boolean]
     #
+    # @!attribute [rw] return_values_on_condition_check_failure
+    #   An optional parameter that returns the item attributes for a PartiQL
+    #   batch request operation that failed a condition check.
+    #
+    #   There is no additional cost associated with requesting a return
+    #   value aside from the small network and processing overhead of
+    #   receiving a larger response. No read capacity units are consumed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchStatementRequest AWS API Documentation
     #
     class BatchStatementRequest < Struct.new(
       :statement,
       :parameters,
-      :consistent_read)
+      :consistent_read,
+      :return_values_on_condition_check_failure)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1515,10 +1531,15 @@ module Aws::DynamoDB
     #   The conditional request failed.
     #   @return [String]
     #
+    # @!attribute [rw] item
+    #   Item which caused the `ConditionalCheckFailedException`.
+    #   @return [Hash<String,Types::AttributeValue>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ConditionalCheckFailedException AWS API Documentation
     #
     class ConditionalCheckFailedException < Struct.new(
-      :message)
+      :message,
+      :item)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2348,6 +2369,15 @@ module Aws::DynamoDB
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     #   @return [Hash<String,Types::AttributeValue>]
     #
+    # @!attribute [rw] return_values_on_condition_check_failure
+    #   An optional parameter that returns the item attributes for a
+    #   `DeleteItem` operation that failed a condition check.
+    #
+    #   There is no additional cost associated with requesting a return
+    #   value aside from the small network and processing overhead of
+    #   receiving a larger response. No read capacity units are consumed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteItemInput AWS API Documentation
     #
     class DeleteItemInput < Struct.new(
@@ -2360,7 +2390,8 @@ module Aws::DynamoDB
       :return_item_collection_metrics,
       :condition_expression,
       :expression_attribute_names,
-      :expression_attribute_values)
+      :expression_attribute_values,
+      :return_values_on_condition_check_failure)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2973,6 +3004,15 @@ module Aws::DynamoDB
     #   the operation.
     #   @return [Integer]
     #
+    # @!attribute [rw] return_values_on_condition_check_failure
+    #   An optional parameter that returns the item attributes for an
+    #   `ExecuteStatement` operation that failed a condition check.
+    #
+    #   There is no additional cost associated with requesting a return
+    #   value aside from the small network and processing overhead of
+    #   receiving a larger response. No read capacity units are consumed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExecuteStatementInput AWS API Documentation
     #
     class ExecuteStatementInput < Struct.new(
@@ -2981,7 +3021,8 @@ module Aws::DynamoDB
       :consistent_read,
       :next_token,
       :return_consumed_capacity,
-      :limit)
+      :limit,
+      :return_values_on_condition_check_failure)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5412,11 +5453,21 @@ module Aws::DynamoDB
     #   The parameter values.
     #   @return [Array<Types::AttributeValue>]
     #
+    # @!attribute [rw] return_values_on_condition_check_failure
+    #   An optional parameter that returns the item attributes for a PartiQL
+    #   `ParameterizedStatement` operation that failed a condition check.
+    #
+    #   There is no additional cost associated with requesting a return
+    #   value aside from the small network and processing overhead of
+    #   receiving a larger response. No read capacity units are consumed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ParameterizedStatement AWS API Documentation
     #
     class ParameterizedStatement < Struct.new(
       :statement,
-      :parameters)
+      :parameters,
+      :return_values_on_condition_check_failure)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5915,6 +5966,15 @@ module Aws::DynamoDB
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     #   @return [Hash<String,Types::AttributeValue>]
     #
+    # @!attribute [rw] return_values_on_condition_check_failure
+    #   An optional parameter that returns the item attributes for a
+    #   `PutItem` operation that failed a condition check.
+    #
+    #   There is no additional cost associated with requesting a return
+    #   value aside from the small network and processing overhead of
+    #   receiving a larger response. No read capacity units are consumed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PutItemInput AWS API Documentation
     #
     class PutItemInput < Struct.new(
@@ -5927,7 +5987,8 @@ module Aws::DynamoDB
       :conditional_operator,
       :condition_expression,
       :expression_attribute_names,
-      :expression_attribute_values)
+      :expression_attribute_values,
+      :return_values_on_condition_check_failure)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9539,6 +9600,15 @@ module Aws::DynamoDB
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     #   @return [Hash<String,Types::AttributeValue>]
     #
+    # @!attribute [rw] return_values_on_condition_check_failure
+    #   An optional parameter that returns the item attributes for an
+    #   `UpdateItem` operation that failed a condition check.
+    #
+    #   There is no additional cost associated with requesting a return
+    #   value aside from the small network and processing overhead of
+    #   receiving a larger response. No read capacity units are consumed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateItemInput AWS API Documentation
     #
     class UpdateItemInput < Struct.new(
@@ -9553,7 +9623,8 @@ module Aws::DynamoDB
       :update_expression,
       :condition_expression,
       :expression_attribute_names,
-      :expression_attribute_values)
+      :expression_attribute_values,
+      :return_values_on_condition_check_failure)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -121,7 +121,7 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
-    # Enables query structure and specified queries that product aggregate
+    # Enables query structure and specified queries that produce aggregate
     # statistics.
     #
     # @!attribute [rw] aggregate_columns
@@ -136,8 +136,13 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] join_required
     #   Control that requires member who runs query to do a join with their
-    #   configured table and/or other configured table in query
+    #   configured table and/or other configured table in query.
     #   @return [String]
+    #
+    # @!attribute [rw] allowed_join_operators
+    #   Which logical operators (if any) are to be used in an INNER JOIN
+    #   match condition. Default is `AND`.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] dimension_columns
     #   The columns that query runners are allowed to select, group by, or
@@ -161,6 +166,7 @@ module Aws::CleanRooms
       :aggregate_columns,
       :join_columns,
       :join_required,
+      :allowed_join_operators,
       :dimension_columns,
       :scalar_functions,
       :output_constraints)
@@ -172,7 +178,12 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] join_columns
     #   Columns that can be used to join a configured table with the table
-    #   of the member who can query and another members' configured tables.
+    #   of the member who can query and other members' configured tables.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_join_operators
+    #   Which logical operators (if any) are to be used in an INNER JOIN
+    #   match condition. Default is `AND`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] list_columns
@@ -183,6 +194,7 @@ module Aws::CleanRooms
     #
     class AnalysisRuleList < Struct.new(
       :join_columns,
+      :allowed_join_operators,
       :list_columns)
       SENSITIVE = []
       include Aws::Structure
@@ -324,7 +336,7 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] creator_account_id
     #   The identifier used to reference members of the collaboration.
-    #   Currently only supports AWS account ID.
+    #   Currently only supports Amazon Web Services account ID.
     #   @return [String]
     #
     # @!attribute [rw] creator_display_name
@@ -397,7 +409,7 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] creator_account_id
     #   The identifier used to reference members of the collaboration.
-    #   Currently only supports AWS Account ID.
+    #   Currently only supports Amazon Web Services account ID.
     #   @return [String]
     #
     # @!attribute [rw] creator_display_name
@@ -441,8 +453,8 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
-    # A column within a schema relation, derived from the underlying AWS
-    # Glue table.
+    # A column within a schema relation, derived from the underlying Glue
+    # table.
     #
     # @!attribute [rw] name
     #   The name of the column.
@@ -480,7 +492,7 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] table_reference
-    #   The AWS Glue table that this configured table represents.
+    #   The Glue table that this configured table represents.
     #   @return [Types::TableReference]
     #
     # @!attribute [rw] create_time
@@ -503,8 +515,8 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] allowed_columns
-    #   The columns within the underlying AWS Glue table that can be
-    #   utilized within collaborations.
+    #   The columns within the underlying Glue table that can be utilized
+    #   within collaborations.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ConfiguredTable AWS API Documentation
@@ -989,7 +1001,7 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] table_reference
-    #   A reference to the AWS Glue table being configured.
+    #   A reference to the Glue table being configured.
     #   @return [Types::TableReference]
     #
     # @!attribute [rw] allowed_columns
@@ -1458,14 +1470,14 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
-    # A reference to a table within an AWS Glue data catalog.
+    # A reference to a table within an Glue data catalog.
     #
     # @!attribute [rw] table_name
-    #   The name of the AWS Glue table.
+    #   The name of the Glue table.
     #   @return [String]
     #
     # @!attribute [rw] database_name
-    #   The name of the database the AWS Glue table belongs to.
+    #   The name of the database the Glue table belongs to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GlueTableReference AWS API Documentation
@@ -1818,7 +1830,7 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] account_id
     #   The identifier used to reference members of the collaboration.
-    #   Currently only supports AWS Account ID.
+    #   Currently only supports Amazon Web Services account ID.
     #   @return [String]
     #
     # @!attribute [rw] member_abilities
@@ -1843,7 +1855,7 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] account_id
     #   The identifier used to reference members of the collaboration.
-    #   Currently only supports AWS Account ID.
+    #   Currently only supports Amazon Web Services account ID.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1910,7 +1922,7 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] collaboration_creator_account_id
     #   The identifier used to reference members of the collaboration.
-    #   Currently only supports AWS account ID.
+    #   Currently only supports Amazon Web Services account ID.
     #   @return [String]
     #
     # @!attribute [rw] collaboration_creator_display_name
@@ -1981,8 +1993,9 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] collaboration_creator_account_id
-    #   The identifier of the AWS principal that created the collaboration.
-    #   Currently only supports AWS account ID.
+    #   The identifier of the Amazon Web Services principal that created the
+    #   collaboration. Currently only supports Amazon Web Services account
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] collaboration_creator_display_name
@@ -2028,7 +2041,7 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
-    # The parameters for an AWS Clean Rooms protected query.
+    # The parameters for an Clean Rooms protected query.
     #
     # @!attribute [rw] id
     #   The identifier for a protected query instance.
@@ -2329,7 +2342,8 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] creator_account_id
-    #   The unique account ID for the AWS account that owns the schema.
+    #   The unique account ID for the Amazon Web Services account that owns
+    #   the schema.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2392,7 +2406,8 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] creator_account_id
-    #   The unique account ID for the AWS account that owns the schema.
+    #   The unique account ID for the Amazon Web Services account that owns
+    #   the schema.
     #   @return [String]
     #
     # @!attribute [rw] create_time
@@ -2501,15 +2516,15 @@ module Aws::CleanRooms
     end
 
     # A pointer to the dataset that underlies this table. Currently, this
-    # can only be an AWS Glue table.
+    # can only be an Glue table.
     #
     # @note TableReference is a union - when making an API calls you must set exactly one of the members.
     #
     # @note TableReference is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of TableReference corresponding to the set member.
     #
     # @!attribute [rw] glue
-    #   If present, a reference to the AWS Glue table referred to by this
-    #   table reference.
+    #   If present, a reference to the Glue table referred to by this table
+    #   reference.
     #   @return [Types::GlueTableReference]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/TableReference AWS API Documentation
