@@ -39,7 +39,11 @@ module Aws
           auth_scheme = { 'name' => 'sigv4' }
           merge_signing_defaults(auth_scheme, context.config)
         when 's3', 's3v4'
-          auth_scheme = { 'name' => 'sigv4', 'disableDoubleEncoding' => true }
+          auth_scheme = {
+            'name' => 'sigv4',
+            'disableDoubleEncoding' => true,
+            'disableNormalizePath' => true
+          }
           merge_signing_defaults(auth_scheme, context.config)
         when 'bearer'
           { 'name' => 'bearer' }

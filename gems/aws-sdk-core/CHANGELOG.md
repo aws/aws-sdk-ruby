@@ -1,12 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix signing for S3/S3 Control and `aws-crt` gem for certain object keys (#2849).
+
 * Issue - Ensure `SSOCredentials` `#expiration` is a `Time` (#2874)
 
 3.176.0 (2023-06-28)
 ------------------
 
-* Feature - Add :expiration accessor to `CredentialProvider` and do not refresh credentials when checking expiration.
+* Feature - Add :expiration accessor to `CredentialProvider` and do not refresh credentials when checking expiration (#2872).
 
 3.175.0 (2023-06-15)
 ------------------
