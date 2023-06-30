@@ -441,7 +441,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    #   [1]: https://wikipedia.org/wiki/Universally_unique_Id
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
     # @option params [required, String] :policy_store_id
     #   Specifies the ID of the policy store in which you want to store this
@@ -541,7 +541,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    #   [1]: https://wikipedia.org/wiki/Universally_unique_Id
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
     # @option params [required, String] :policy_store_id
     #   Specifies the `PolicyStoreId` of the policy store you want to store
@@ -640,7 +640,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    #   [1]: https://wikipedia.org/wiki/Universally_unique_Id
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
     # @option params [required, Types::ValidationSettings] :validation_settings
     #   Specifies the validation setting for this policy store.
@@ -719,7 +719,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    #   [1]: https://wikipedia.org/wiki/Universally_unique_Id
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
     # @option params [required, String] :policy_store_id
     #   The ID of the policy store in which to create the policy template.
@@ -1936,7 +1936,7 @@ module Aws::VerifiedPermissions
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-verifiedpermissions'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

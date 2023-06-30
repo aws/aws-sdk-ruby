@@ -582,6 +582,12 @@ module Aws::Transfer
     #   the parent directory of the files that you intend to send with
     #   `StartFileTransfer`.
     #
+    #   If you are using Basic authentication for your AS2 connector, the
+    #   access role requires the `secretsmanager:GetSecretValue` permission
+    #   for the secret. If the secret is encrypted using a customer-managed
+    #   key instead of the Amazon Web Services managed key in Secrets Manager,
+    #   then the role also needs the `kms:Decrypt` permission for that key.
+    #
     # @option params [String] :status
     #   The status of the agreement. The agreement can be either `ACTIVE` or
     #   `INACTIVE`.
@@ -653,6 +659,12 @@ module Aws::Transfer
     #   the parent directory of the files that you intend to send with
     #   `StartFileTransfer`.
     #
+    #   If you are using Basic authentication for your AS2 connector, the
+    #   access role requires the `secretsmanager:GetSecretValue` permission
+    #   for the secret. If the secret is encrypted using a customer-managed
+    #   key instead of the Amazon Web Services managed key in Secrets Manager,
+    #   then the role also needs the `kms:Decrypt` permission for that key.
+    #
     # @option params [String] :logging_role
     #   The Amazon Resource Name (ARN) of the Identity and Access Management
     #   (IAM) role that allows a connector to turn on CloudWatch logging for
@@ -680,6 +692,7 @@ module Aws::Transfer
     #       signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE
     #       mdn_signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE, DEFAULT
     #       mdn_response: "SYNC", # accepts SYNC, NONE
+    #       basic_auth_secret_id: "As2ConnectorSecretId",
     #     },
     #     access_role: "Role", # required
     #     logging_role: "Role",
@@ -1945,6 +1958,7 @@ module Aws::Transfer
     #   resp.connector.as_2_config.signing_algorithm #=> String, one of "SHA256", "SHA384", "SHA512", "SHA1", "NONE"
     #   resp.connector.as_2_config.mdn_signing_algorithm #=> String, one of "SHA256", "SHA384", "SHA512", "SHA1", "NONE", "DEFAULT"
     #   resp.connector.as_2_config.mdn_response #=> String, one of "SYNC", "NONE"
+    #   resp.connector.as_2_config.basic_auth_secret_id #=> String
     #   resp.connector.access_role #=> String
     #   resp.connector.logging_role #=> String
     #   resp.connector.tags #=> Array
@@ -3688,6 +3702,12 @@ module Aws::Transfer
     #   the parent directory of the files that you intend to send with
     #   `StartFileTransfer`.
     #
+    #   If you are using Basic authentication for your AS2 connector, the
+    #   access role requires the `secretsmanager:GetSecretValue` permission
+    #   for the secret. If the secret is encrypted using a customer-managed
+    #   key instead of the Amazon Web Services managed key in Secrets Manager,
+    #   then the role also needs the `kms:Decrypt` permission for that key.
+    #
     # @return [Types::UpdateAgreementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAgreementResponse#agreement_id #agreement_id} => String
@@ -3785,6 +3805,12 @@ module Aws::Transfer
     #   the parent directory of the files that you intend to send with
     #   `StartFileTransfer`.
     #
+    #   If you are using Basic authentication for your AS2 connector, the
+    #   access role requires the `secretsmanager:GetSecretValue` permission
+    #   for the secret. If the secret is encrypted using a customer-managed
+    #   key instead of the Amazon Web Services managed key in Secrets Manager,
+    #   then the role also needs the `kms:Decrypt` permission for that key.
+    #
     # @option params [String] :logging_role
     #   The Amazon Resource Name (ARN) of the Identity and Access Management
     #   (IAM) role that allows a connector to turn on CloudWatch logging for
@@ -3809,6 +3835,7 @@ module Aws::Transfer
     #       signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE
     #       mdn_signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE, DEFAULT
     #       mdn_response: "SYNC", # accepts SYNC, NONE
+    #       basic_auth_secret_id: "As2ConnectorSecretId",
     #     },
     #     access_role: "Role",
     #     logging_role: "Role",
@@ -4379,7 +4406,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

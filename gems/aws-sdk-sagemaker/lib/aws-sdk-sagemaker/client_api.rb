@@ -1668,6 +1668,7 @@ module Aws::SageMaker
     RetryPipelineExecutionResponse = Shapes::StructureShape.new(name: 'RetryPipelineExecutionResponse')
     RetryStrategy = Shapes::StructureShape.new(name: 'RetryStrategy')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    RollingUpdatePolicy = Shapes::StructureShape.new(name: 'RollingUpdatePolicy')
     RootAccess = Shapes::StringShape.new(name: 'RootAccess')
     RuleConfigurationName = Shapes::StringShape.new(name: 'RuleConfigurationName')
     RuleEvaluationStatus = Shapes::StringShape.new(name: 'RuleEvaluationStatus')
@@ -3666,8 +3667,9 @@ module Aws::SageMaker
 
     DeployedImages.member = Shapes::ShapeRef.new(shape: DeployedImage)
 
-    DeploymentConfig.add_member(:blue_green_update_policy, Shapes::ShapeRef.new(shape: BlueGreenUpdatePolicy, required: true, location_name: "BlueGreenUpdatePolicy"))
+    DeploymentConfig.add_member(:blue_green_update_policy, Shapes::ShapeRef.new(shape: BlueGreenUpdatePolicy, location_name: "BlueGreenUpdatePolicy"))
     DeploymentConfig.add_member(:auto_rollback_configuration, Shapes::ShapeRef.new(shape: AutoRollbackConfig, location_name: "AutoRollbackConfiguration"))
+    DeploymentConfig.add_member(:rolling_update_policy, Shapes::ShapeRef.new(shape: RollingUpdatePolicy, location_name: "RollingUpdatePolicy"))
     DeploymentConfig.struct_class = Types::DeploymentConfig
 
     DeploymentRecommendation.add_member(:recommendation_status, Shapes::ShapeRef.new(shape: RecommendationStatus, required: true, location_name: "RecommendationStatus"))
@@ -8016,6 +8018,12 @@ module Aws::SageMaker
 
     RetryStrategy.add_member(:maximum_retry_attempts, Shapes::ShapeRef.new(shape: MaximumRetryAttempts, required: true, location_name: "MaximumRetryAttempts"))
     RetryStrategy.struct_class = Types::RetryStrategy
+
+    RollingUpdatePolicy.add_member(:maximum_batch_size, Shapes::ShapeRef.new(shape: CapacitySize, required: true, location_name: "MaximumBatchSize"))
+    RollingUpdatePolicy.add_member(:wait_interval_in_seconds, Shapes::ShapeRef.new(shape: WaitIntervalInSeconds, required: true, location_name: "WaitIntervalInSeconds"))
+    RollingUpdatePolicy.add_member(:maximum_execution_timeout_in_seconds, Shapes::ShapeRef.new(shape: MaximumExecutionTimeoutInSeconds, location_name: "MaximumExecutionTimeoutInSeconds"))
+    RollingUpdatePolicy.add_member(:rollback_maximum_batch_size, Shapes::ShapeRef.new(shape: CapacitySize, location_name: "RollbackMaximumBatchSize"))
+    RollingUpdatePolicy.struct_class = Types::RollingUpdatePolicy
 
     RuleParameters.key = Shapes::ShapeRef.new(shape: ConfigKey)
     RuleParameters.value = Shapes::ShapeRef.new(shape: ConfigValue)

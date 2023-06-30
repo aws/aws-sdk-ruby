@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2023-06-30)
+------------------
+
+* Feature - This release corrects several broken links in the documentation.
+
 1.4.0 (2023-06-28)
 ------------------
 

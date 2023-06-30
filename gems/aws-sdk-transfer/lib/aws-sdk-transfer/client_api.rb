@@ -20,6 +20,7 @@ module Aws::Transfer
     AgreementStatusType = Shapes::StringShape.new(name: 'AgreementStatusType')
     Arn = Shapes::StringShape.new(name: 'Arn')
     As2ConnectorConfig = Shapes::StructureShape.new(name: 'As2ConnectorConfig')
+    As2ConnectorSecretId = Shapes::StringShape.new(name: 'As2ConnectorSecretId')
     As2Id = Shapes::StringShape.new(name: 'As2Id')
     As2Transport = Shapes::StringShape.new(name: 'As2Transport')
     As2Transports = Shapes::ListShape.new(name: 'As2Transports')
@@ -326,6 +327,7 @@ module Aws::Transfer
     As2ConnectorConfig.add_member(:signing_algorithm, Shapes::ShapeRef.new(shape: SigningAlg, location_name: "SigningAlgorithm"))
     As2ConnectorConfig.add_member(:mdn_signing_algorithm, Shapes::ShapeRef.new(shape: MdnSigningAlg, location_name: "MdnSigningAlgorithm"))
     As2ConnectorConfig.add_member(:mdn_response, Shapes::ShapeRef.new(shape: MdnResponse, location_name: "MdnResponse"))
+    As2ConnectorConfig.add_member(:basic_auth_secret_id, Shapes::ShapeRef.new(shape: As2ConnectorSecretId, location_name: "BasicAuthSecretId"))
     As2ConnectorConfig.struct_class = Types::As2ConnectorConfig
 
     As2Transports.member = Shapes::ShapeRef.new(shape: As2Transport)

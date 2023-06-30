@@ -322,7 +322,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    #   [1]: https://wikipedia.org/wiki/Universally_unique_Id
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #   @return [String]
     #
     # @!attribute [rw] policy_store_id
@@ -407,7 +407,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    #   [1]: https://wikipedia.org/wiki/Universally_unique_Id
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #   @return [String]
     #
     # @!attribute [rw] policy_store_id
@@ -498,7 +498,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    #   [1]: https://wikipedia.org/wiki/Universally_unique_Id
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #   @return [String]
     #
     # @!attribute [rw] validation_settings
@@ -574,7 +574,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    #   [1]: https://wikipedia.org/wiki/Universally_unique_Id
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #   @return [String]
     #
     # @!attribute [rw] policy_store_id
@@ -890,8 +890,8 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/amazon-verified-permissions/latest/APIReference/API_IsAuthorized.html
-    # [2]: https://docs.aws.amazon.com/amazon-verified-permissions/latest/APIReference/API_IsAuthorizedWithToken.html
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html
     #
     # @!attribute [rw] error_description
     #   The error description.

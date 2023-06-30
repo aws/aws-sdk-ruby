@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2023-06-30)
+------------------
+
+* Feature - AWS SDK service model  generation tool version upgrade.
+
 1.20.0 (2023-06-28)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2023-06-30)
+------------------
+
+* Feature - Corrects the HTTP response code in the generated docs for PutMetadata and DeleteRecordingConfiguration APIs.
+
 1.34.0 (2023-06-28)
 ------------------
 

@@ -3106,7 +3106,15 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Specifies the endpoint capacity to activate for production.
+    # Specifies the type and size of the endpoint capacity to activate for a
+    # blue/green deployment, a rolling deployment, or a rollback strategy.
+    # You can specify your batches as either instance count or the overall
+    # percentage or your fleet.
+    #
+    # For a rollback strategy, if you don't specify the fields in this
+    # object, or if you set the `Value` to 100%, then SageMaker uses a
+    # blue/green rollback strategy and rolls all traffic back to the blue
+    # fleet.
     #
     # @!attribute [rw] type
     #   Specifies the endpoint capacity type.
@@ -10194,11 +10202,17 @@ module Aws::SageMaker
     #   failures and recovery.
     #   @return [Types::AutoRollbackConfig]
     #
+    # @!attribute [rw] rolling_update_policy
+    #   Specifies a rolling deployment strategy for updating a SageMaker
+    #   endpoint.
+    #   @return [Types::RollingUpdatePolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeploymentConfig AWS API Documentation
     #
     class DeploymentConfig < Struct.new(
       :blue_green_update_policy,
-      :auto_rollback_configuration)
+      :auto_rollback_configuration,
+      :rolling_update_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34990,6 +35004,46 @@ module Aws::SageMaker
     #
     class RetryStrategy < Struct.new(
       :maximum_retry_attempts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a rolling deployment strategy for updating a SageMaker
+    # endpoint.
+    #
+    # @!attribute [rw] maximum_batch_size
+    #   Batch size for each rolling step to provision capacity and turn on
+    #   traffic on the new endpoint fleet, and terminate capacity on the old
+    #   endpoint fleet. Value must be between 5% to 50% of the variant's
+    #   total instance count.
+    #   @return [Types::CapacitySize]
+    #
+    # @!attribute [rw] wait_interval_in_seconds
+    #   The length of the baking period, during which SageMaker monitors
+    #   alarms for each batch on the new fleet.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_execution_timeout_in_seconds
+    #   The time limit for the total deployment. Exceeding this limit causes
+    #   a timeout.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rollback_maximum_batch_size
+    #   Batch size for rollback to the old endpoint fleet. Each rolling step
+    #   to provision capacity and turn on traffic on the old endpoint fleet,
+    #   and terminate capacity on the new endpoint fleet. If this field is
+    #   absent, the default value will be set to 100% of total capacity
+    #   which means to bring up the whole capacity of the old fleet at once
+    #   during rollback.
+    #   @return [Types::CapacitySize]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RollingUpdatePolicy AWS API Documentation
+    #
+    class RollingUpdatePolicy < Struct.new(
+      :maximum_batch_size,
+      :wait_interval_in_seconds,
+      :maximum_execution_timeout_in_seconds,
+      :rollback_maximum_batch_size)
       SENSITIVE = []
       include Aws::Structure
     end

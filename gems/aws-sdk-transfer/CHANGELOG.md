@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2023-06-30)
+------------------
+
+* Feature - Add outbound Basic authentication support to AS2 connectors
+
 1.72.0 (2023-06-28)
 ------------------
 

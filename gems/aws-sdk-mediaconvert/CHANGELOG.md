@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2023-06-30)
+------------------
+
+* Feature - This release includes improved color handling of overlays and general updates to user documentation.
+
 1.110.0 (2023-06-28)
 ------------------
 

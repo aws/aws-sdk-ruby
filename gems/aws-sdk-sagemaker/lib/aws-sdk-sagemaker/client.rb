@@ -2719,7 +2719,7 @@ module Aws::SageMaker
     #     endpoint_name: "EndpointName", # required
     #     endpoint_config_name: "EndpointConfigName", # required
     #     deployment_config: {
-    #       blue_green_update_policy: { # required
+    #       blue_green_update_policy: {
     #         traffic_routing_configuration: { # required
     #           type: "ALL_AT_ONCE", # required, accepts ALL_AT_ONCE, CANARY, LINEAR
     #           wait_interval_in_seconds: 1, # required
@@ -2741,6 +2741,18 @@ module Aws::SageMaker
     #             alarm_name: "AlarmName",
     #           },
     #         ],
+    #       },
+    #       rolling_update_policy: {
+    #         maximum_batch_size: { # required
+    #           type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
+    #           value: 1, # required
+    #         },
+    #         wait_interval_in_seconds: 1, # required
+    #         maximum_execution_timeout_in_seconds: 1,
+    #         rollback_maximum_batch_size: {
+    #           type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
+    #           value: 1, # required
+    #         },
     #       },
     #     },
     #     tags: [
@@ -11078,7 +11090,7 @@ module Aws::SageMaker
     #   resp.data_capture_config.current_sampling_percentage #=> Integer
     #   resp.data_capture_config.destination_s3_uri #=> String
     #   resp.data_capture_config.kms_key_id #=> String
-    #   resp.endpoint_status #=> String, one of "OutOfService", "Creating", "Updating", "SystemUpdating", "RollingBack", "InService", "Deleting", "Failed"
+    #   resp.endpoint_status #=> String, one of "OutOfService", "Creating", "Updating", "SystemUpdating", "RollingBack", "InService", "Deleting", "Failed", "UpdateRollbackFailed"
     #   resp.failure_reason #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
@@ -11092,6 +11104,12 @@ module Aws::SageMaker
     #   resp.last_deployment_config.blue_green_update_policy.maximum_execution_timeout_in_seconds #=> Integer
     #   resp.last_deployment_config.auto_rollback_configuration.alarms #=> Array
     #   resp.last_deployment_config.auto_rollback_configuration.alarms[0].alarm_name #=> String
+    #   resp.last_deployment_config.rolling_update_policy.maximum_batch_size.type #=> String, one of "INSTANCE_COUNT", "CAPACITY_PERCENT"
+    #   resp.last_deployment_config.rolling_update_policy.maximum_batch_size.value #=> Integer
+    #   resp.last_deployment_config.rolling_update_policy.wait_interval_in_seconds #=> Integer
+    #   resp.last_deployment_config.rolling_update_policy.maximum_execution_timeout_in_seconds #=> Integer
+    #   resp.last_deployment_config.rolling_update_policy.rollback_maximum_batch_size.type #=> String, one of "INSTANCE_COUNT", "CAPACITY_PERCENT"
+    #   resp.last_deployment_config.rolling_update_policy.rollback_maximum_batch_size.value #=> Integer
     #   resp.async_inference_config.client_config.max_concurrent_invocations_per_instance #=> Integer
     #   resp.async_inference_config.output_config.kms_key_id #=> String
     #   resp.async_inference_config.output_config.s3_output_path #=> String
@@ -12190,7 +12208,7 @@ module Aws::SageMaker
     #   resp.role_arn #=> String
     #   resp.endpoint_metadata.endpoint_name #=> String
     #   resp.endpoint_metadata.endpoint_config_name #=> String
-    #   resp.endpoint_metadata.endpoint_status #=> String, one of "OutOfService", "Creating", "Updating", "SystemUpdating", "RollingBack", "InService", "Deleting", "Failed"
+    #   resp.endpoint_metadata.endpoint_status #=> String, one of "OutOfService", "Creating", "Updating", "SystemUpdating", "RollingBack", "InService", "Deleting", "Failed", "UpdateRollbackFailed"
     #   resp.endpoint_metadata.failure_reason #=> String
     #   resp.model_variants #=> Array
     #   resp.model_variants[0].model_name #=> String
@@ -16402,7 +16420,7 @@ module Aws::SageMaker
     #     creation_time_after: Time.now,
     #     last_modified_time_before: Time.now,
     #     last_modified_time_after: Time.now,
-    #     status_equals: "OutOfService", # accepts OutOfService, Creating, Updating, SystemUpdating, RollingBack, InService, Deleting, Failed
+    #     status_equals: "OutOfService", # accepts OutOfService, Creating, Updating, SystemUpdating, RollingBack, InService, Deleting, Failed, UpdateRollbackFailed
     #   })
     #
     # @example Response structure
@@ -16412,7 +16430,7 @@ module Aws::SageMaker
     #   resp.endpoints[0].endpoint_arn #=> String
     #   resp.endpoints[0].creation_time #=> Time
     #   resp.endpoints[0].last_modified_time #=> Time
-    #   resp.endpoints[0].endpoint_status #=> String, one of "OutOfService", "Creating", "Updating", "SystemUpdating", "RollingBack", "InService", "Deleting", "Failed"
+    #   resp.endpoints[0].endpoint_status #=> String, one of "OutOfService", "Creating", "Updating", "SystemUpdating", "RollingBack", "InService", "Deleting", "Failed", "UpdateRollbackFailed"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpoints AWS API Documentation
@@ -21994,7 +22012,7 @@ module Aws::SageMaker
     #       },
     #     ],
     #     deployment_config: {
-    #       blue_green_update_policy: { # required
+    #       blue_green_update_policy: {
     #         traffic_routing_configuration: { # required
     #           type: "ALL_AT_ONCE", # required, accepts ALL_AT_ONCE, CANARY, LINEAR
     #           wait_interval_in_seconds: 1, # required
@@ -22016,6 +22034,18 @@ module Aws::SageMaker
     #             alarm_name: "AlarmName",
     #           },
     #         ],
+    #       },
+    #       rolling_update_policy: {
+    #         maximum_batch_size: { # required
+    #           type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
+    #           value: 1, # required
+    #         },
+    #         wait_interval_in_seconds: 1, # required
+    #         maximum_execution_timeout_in_seconds: 1,
+    #         rollback_maximum_batch_size: {
+    #           type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
+    #           value: 1, # required
+    #         },
     #       },
     #     },
     #     retain_deployment_config: false,
@@ -23818,7 +23848,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.192.0'
+      context[:gem_version] = '1.193.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

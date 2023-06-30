@@ -2499,6 +2499,8 @@ module Aws::ECS
     #   resp.task_definitions[0].container_definitions[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
     #   resp.task_definitions[0].container_definitions[0].firelens_configuration.options #=> Hash
     #   resp.task_definitions[0].container_definitions[0].firelens_configuration.options["String"] #=> String
+    #   resp.task_definitions[0].container_definitions[0].credential_specs #=> Array
+    #   resp.task_definitions[0].container_definitions[0].credential_specs[0] #=> String
     #   resp.task_definitions[0].family #=> String
     #   resp.task_definitions[0].task_role_arn #=> String
     #   resp.task_definitions[0].execution_role_arn #=> String
@@ -2952,6 +2954,8 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
     #   resp.task_definition.container_definitions[0].firelens_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].firelens_configuration.options["String"] #=> String
+    #   resp.task_definition.container_definitions[0].credential_specs #=> Array
+    #   resp.task_definition.container_definitions[0].credential_specs[0] #=> String
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -3868,6 +3872,8 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
     #   resp.task_definition.container_definitions[0].firelens_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].firelens_configuration.options["String"] #=> String
+    #   resp.task_definition.container_definitions[0].credential_specs #=> Array
+    #   resp.task_definition.container_definitions[0].credential_specs[0] #=> String
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -6610,6 +6616,7 @@ module Aws::ECS
     #             "String" => "String",
     #           },
     #         },
+    #         credential_specs: ["String"],
     #       },
     #     ],
     #     volumes: [
@@ -6798,6 +6805,8 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
     #   resp.task_definition.container_definitions[0].firelens_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].firelens_configuration.options["String"] #=> String
+    #   resp.task_definition.container_definitions[0].credential_specs #=> Array
+    #   resp.task_definition.container_definitions[0].credential_specs[0] #=> String
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -9722,7 +9731,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.123.0'
+      context[:gem_version] = '1.124.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.193.0 (2023-06-30)
+------------------
+
+* Feature - This release adds support for rolling deployment in SageMaker Inference.
+
 1.192.0 (2023-06-29)
 ------------------
 
