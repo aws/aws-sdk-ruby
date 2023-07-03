@@ -2415,6 +2415,12 @@ module Aws::SageMaker
     # @!attribute [rw] time_series_forecasting_job_config
     #   Settings used to configure an AutoML job V2 for a time-series
     #   forecasting problem type.
+    #
+    #   <note markdown="1"> The `TimeSeriesForecastingJobConfig` problem type is only available
+    #   in private beta. Contact Amazon Web Services Support or your account
+    #   manager to learn more about access privileges.
+    #
+    #    </note>
     #   @return [Types::TimeSeriesForecastingJobConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLProblemTypeConfig AWS API Documentation
@@ -17129,12 +17135,17 @@ module Aws::SageMaker
     #   The parameter you want to benchmark against.
     #   @return [Types::EnvironmentParameterRanges]
     #
+    # @!attribute [rw] serverless_config
+    #   Specifies the serverless configuration for an endpoint variant.
+    #   @return [Types::ProductionVariantServerlessConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EndpointInputConfiguration AWS API Documentation
     #
     class EndpointInputConfiguration < Struct.new(
       :instance_type,
       :inference_specification_name,
-      :environment_parameter_ranges)
+      :environment_parameter_ranges,
+      :serverless_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17196,13 +17207,18 @@ module Aws::SageMaker
     #   The number of instances recommended to launch initially.
     #   @return [Integer]
     #
+    # @!attribute [rw] serverless_config
+    #   Specifies the serverless configuration for an endpoint variant.
+    #   @return [Types::ProductionVariantServerlessConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EndpointOutputConfiguration AWS API Documentation
     #
     class EndpointOutputConfiguration < Struct.new(
       :endpoint_name,
       :variant_name,
       :instance_type,
-      :initial_instance_count)
+      :initial_instance_count,
+      :serverless_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -32884,6 +32900,17 @@ module Aws::SageMaker
     # @!attribute [rw] provisioned_concurrency
     #   The amount of provisioned concurrency to allocate for the serverless
     #   endpoint. Should be less than or equal to `MaxConcurrency`.
+    #
+    #   <note markdown="1"> This field is not supported for serverless endpoint recommendations
+    #   for Inference Recommender jobs. For more information about creating
+    #   an Inference Recommender job, see
+    #   [CreateInferenceRecommendationsJobs][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariantServerlessConfig AWS API Documentation
@@ -34088,6 +34115,14 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_InputConfig.html#sagemaker-Type-InputConfig-DataInputConfig
     #   @return [String]
     #
+    # @!attribute [rw] supported_endpoint_type
+    #   The endpoint type to receive recommendations for. By default this is
+    #   null, and the results of the inference recommendation job return a
+    #   combined list of both real-time and serverless benchmarks. By
+    #   specifying a value for this field, you can receive a longer list of
+    #   benchmarks for the desired endpoint type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobContainerConfig AWS API Documentation
     #
     class RecommendationJobContainerConfig < Struct.new(
@@ -34098,7 +34133,8 @@ module Aws::SageMaker
       :payload_config,
       :nearest_model_name,
       :supported_instance_types,
-      :data_input_config)
+      :data_input_config,
+      :supported_endpoint_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34422,6 +34458,14 @@ module Aws::SageMaker
     #   `NaN` indicates that the value is not available.
     #   @return [Float]
     #
+    # @!attribute [rw] model_setup_time
+    #   The time it takes to launch new compute resources for a serverless
+    #   endpoint. The time can vary depending on the model size, how long it
+    #   takes to download the model, and the start-up time of the container.
+    #
+    #   `NaN` indicates that the value is not available.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationMetrics AWS API Documentation
     #
     class RecommendationMetrics < Struct.new(
@@ -34430,7 +34474,8 @@ module Aws::SageMaker
       :max_invocations,
       :model_latency,
       :cpu_utilization,
-      :memory_utilization)
+      :memory_utilization,
+      :model_setup_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35012,10 +35057,15 @@ module Aws::SageMaker
     # endpoint.
     #
     # @!attribute [rw] maximum_batch_size
-    #   Batch size for each rolling step to provision capacity and turn on
-    #   traffic on the new endpoint fleet, and terminate capacity on the old
-    #   endpoint fleet. Value must be between 5% to 50% of the variant's
-    #   total instance count.
+    #   Specifies the type and size of the endpoint capacity to activate for
+    #   a blue/green deployment, a rolling deployment, or a rollback
+    #   strategy. You can specify your batches as either instance count or
+    #   the overall percentage or your fleet.
+    #
+    #   For a rollback strategy, if you don't specify the fields in this
+    #   object, or if you set the `Value` to 100%, then SageMaker uses a
+    #   blue/green rollback strategy and rolls all traffic back to the blue
+    #   fleet.
     #   @return [Types::CapacitySize]
     #
     # @!attribute [rw] wait_interval_in_seconds
@@ -35029,12 +35079,15 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] rollback_maximum_batch_size
-    #   Batch size for rollback to the old endpoint fleet. Each rolling step
-    #   to provision capacity and turn on traffic on the old endpoint fleet,
-    #   and terminate capacity on the new endpoint fleet. If this field is
-    #   absent, the default value will be set to 100% of total capacity
-    #   which means to bring up the whole capacity of the old fleet at once
-    #   during rollback.
+    #   Specifies the type and size of the endpoint capacity to activate for
+    #   a blue/green deployment, a rolling deployment, or a rollback
+    #   strategy. You can specify your batches as either instance count or
+    #   the overall percentage or your fleet.
+    #
+    #   For a rollback strategy, if you don't specify the fields in this
+    #   object, or if you set the `Value` to 100%, then SageMaker uses a
+    #   blue/green rollback strategy and rolls all traffic back to the blue
+    #   fleet.
     #   @return [Types::CapacitySize]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RollingUpdatePolicy AWS API Documentation

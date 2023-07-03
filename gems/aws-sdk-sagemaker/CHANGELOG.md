@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.194.0 (2023-07-03)
+------------------
+
+* Feature - SageMaker Inference Recommender now accepts new fields SupportedEndpointType and ServerlessConfiguration to support serverless endpoints.
+
 1.193.0 (2023-06-30)
 ------------------
 
