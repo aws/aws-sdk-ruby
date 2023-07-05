@@ -1,3 +1,5 @@
+// Source: https://github.com/lsegal/yard/blob/main/templates/default/fulldoc/html/js/full_list.js
+// Some modifications were made for accessibility and jquery upgrades.
 (function() {
 
 var $clicked = $(null);
