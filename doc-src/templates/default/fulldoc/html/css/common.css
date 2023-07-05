@@ -11,3 +11,9 @@ li.collapsed a.toggle {
 
 /* Make all links bolder. 400 is normal, 700 is bold  */
 a { font-weight: 550; }
+
+@media (max-width: 320px) {
+  body { height: 100%; overflow: hidden; overflow-wrap: break-word; }
+  #main { height: 100%; overflow: auto; }
+  #search { display: none; }
+}

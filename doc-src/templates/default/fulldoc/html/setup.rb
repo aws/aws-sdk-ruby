@@ -40,7 +40,8 @@ def class_list_children(children, tree, options = {})
     is_parent = grand_children.any? {|o| o.is_a?(CodeObjects::NamespaceObject) }
     out << "<li id='object_#{child.path}' class='#{tree.classes.join(' ')}'>"
     out << "<div class='item' style='padding-left:#{tree.indent}'>"
-    out << "<a class='toggle'></a> " if is_parent
+    accessible_props = "aria-label='#{name} child nodes' aria-expanded='false' aria-controls='object_#{child.path}'"
+    out << "<a tabindex='0' class='toggle' #{accessible_props}></a> " if is_parent
     out << linkify(child, name)
     out << " &lt; #{child.superclass.name}" if child.is_a?(CodeObjects::ClassObject) && child.superclass
     if child.group == 'service'
@@ -56,7 +57,8 @@ def class_list_children(children, tree, options = {})
     out << "</div>"
     if is_parent
       tree.nest do
-        out << "<ul>#{class_list_children(grand_children, tree, options)}</ul>"
+        labeled_by = "aria-labelledby='object_#{child.path}'"
+        out << "<div #{labeled_by}><ul>#{class_list_children(grand_children, tree, options)}</ul></div>"
       end
     end
     out << "</li>"
