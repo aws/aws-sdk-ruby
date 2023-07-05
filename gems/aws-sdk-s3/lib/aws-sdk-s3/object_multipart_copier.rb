@@ -78,10 +78,15 @@ module Aws
       end
 
       def copy_part(part)
+        result = @client.upload_part_copy(part).copy_part_result
         {
-          etag: @client.upload_part_copy(part).copy_part_result.etag,
+          etag: result.etag,
+          checksum_crc32: result.checksum_crc32,
+          checksum_crc32c: result.checksum_crc32c,
+          checksum_sha1: result.checksum_sha1,
+          checksum_sha256: result.checksum_sha256,
           part_number: part[:part_number],
-        }
+        }.compact
       end
 
       def complete_upload(parts, options)
