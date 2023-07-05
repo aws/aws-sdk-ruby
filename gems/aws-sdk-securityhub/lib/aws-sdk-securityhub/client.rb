@@ -1981,9 +1981,14 @@ module Aws::SecurityHub
     #
     # @option params [String] :rule_status
     #   Whether the rule is active after it is created. If this parameter is
-    #   equal to `Enabled`, Security Hub will apply the rule to findings and
-    #   finding updates after the rule is created. To change the value of this
-    #   parameter after creating a rule, use `BatchUpdateAutomationRules`.
+    #   equal to `ENABLED`, Security Hub starts applying the rule to findings
+    #   and finding updates after the rule is created. To change the value of
+    #   this parameter after creating a rule, use [
+    #   `BatchUpdateAutomationRules` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateAutomationRules.html
     #
     # @option params [required, Integer] :rule_order
     #   An integer ranging from 1 to 1000 that represents the order in which
@@ -2002,14 +2007,14 @@ module Aws::SecurityHub
     #   matches the criteria for multiple rules, and each rule has different
     #   actions. If the value of this field is set to `true` for a rule,
     #   Security Hub applies the rule action to a finding that matches the
-    #   rule criteria and won't evaluate other rules for the finding. The
+    #   rule criteria and doesn't evaluate other rules for the finding. The
     #   default value of this field is `false`.
     #
     # @option params [required, Types::AutomationRulesFindingFilters] :criteria
     #   A set of ASFF finding field attributes and corresponding expected
-    #   values that Security Hub uses to filter findings. If a finding matches
-    #   the conditions specified in this parameter, Security Hub applies the
-    #   rule action to the finding.
+    #   values that Security Hub uses to filter findings. If a rule is enabled
+    #   and a finding matches the conditions specified in this parameter,
+    #   Security Hub applies the rule action to the finding.
     #
     # @option params [required, Array<Types::AutomationRulesAction>] :actions
     #   One or more actions to update finding fields if a finding matches the
@@ -8683,7 +8688,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

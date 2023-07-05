@@ -39,6 +39,7 @@ module Aws::KMS
   # * {CustomKeyStoreNotFoundException}
   # * {DependencyTimeoutException}
   # * {DisabledException}
+  # * {DryRunOperationException}
   # * {ExpiredImportTokenException}
   # * {IncorrectKeyException}
   # * {IncorrectKeyMaterialException}
@@ -250,6 +251,21 @@ module Aws::KMS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::KMS::Types::DisabledException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class DryRunOperationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::KMS::Types::DryRunOperationException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

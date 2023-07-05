@@ -703,6 +703,18 @@ module Aws::KMS
     #   the same grant ID can be used interchangeably.
     #   @return [String]
     #
+    # @!attribute [rw] dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateGrantRequest AWS API Documentation
     #
     class CreateGrantRequest < Struct.new(
@@ -712,7 +724,8 @@ module Aws::KMS
       :operations,
       :constraints,
       :grant_tokens,
-      :name)
+      :name,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1588,6 +1601,18 @@ module Aws::KMS
     #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html
     #   @return [Types::RecipientInfo]
     #
+    # @!attribute [rw] dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DecryptRequest AWS API Documentation
     #
     class DecryptRequest < Struct.new(
@@ -1596,7 +1621,8 @@ module Aws::KMS
       :grant_tokens,
       :key_id,
       :encryption_algorithm,
-      :recipient)
+      :recipient,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1944,6 +1970,19 @@ module Aws::KMS
     #
     class DisconnectCustomKeyStoreResponse < Aws::EmptyStructure; end
 
+    # The request was rejected because the DryRun parameter was specified.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DryRunOperationException AWS API Documentation
+    #
+    class DryRunOperationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] key_id
     #   Identifies the KMS key to enable.
     #
@@ -2089,6 +2128,18 @@ module Aws::KMS
     #   The SM2PKE algorithm is only available in China Regions.
     #   @return [String]
     #
+    # @!attribute [rw] dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EncryptRequest AWS API Documentation
     #
     class EncryptRequest < Struct.new(
@@ -2096,7 +2147,8 @@ module Aws::KMS
       :plaintext,
       :encryption_context,
       :grant_tokens,
-      :encryption_algorithm)
+      :encryption_algorithm,
+      :dry_run)
       SENSITIVE = [:plaintext]
       include Aws::Structure
     end
@@ -2252,6 +2304,18 @@ module Aws::KMS
     #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html
     #   @return [Types::RecipientInfo]
     #
+    # @!attribute [rw] dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyPairRequest AWS API Documentation
     #
     class GenerateDataKeyPairRequest < Struct.new(
@@ -2259,7 +2323,8 @@ module Aws::KMS
       :key_id,
       :key_pair_spec,
       :grant_tokens,
-      :recipient)
+      :recipient,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2403,13 +2468,26 @@ module Aws::KMS
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
     #   @return [Array<String>]
     #
+    # @!attribute [rw] dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyPairWithoutPlaintextRequest AWS API Documentation
     #
     class GenerateDataKeyPairWithoutPlaintextRequest < Struct.new(
       :encryption_context,
       :key_id,
       :key_pair_spec,
-      :grant_tokens)
+      :grant_tokens,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2564,6 +2642,18 @@ module Aws::KMS
     #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html
     #   @return [Types::RecipientInfo]
     #
+    # @!attribute [rw] dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyRequest AWS API Documentation
     #
     class GenerateDataKeyRequest < Struct.new(
@@ -2572,7 +2662,8 @@ module Aws::KMS
       :number_of_bytes,
       :key_spec,
       :grant_tokens,
-      :recipient)
+      :recipient,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2707,6 +2798,18 @@ module Aws::KMS
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
     #   @return [Array<String>]
     #
+    # @!attribute [rw] dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyWithoutPlaintextRequest AWS API Documentation
     #
     class GenerateDataKeyWithoutPlaintextRequest < Struct.new(
@@ -2714,7 +2817,8 @@ module Aws::KMS
       :encryption_context,
       :key_spec,
       :number_of_bytes,
-      :grant_tokens)
+      :grant_tokens,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2786,13 +2890,26 @@ module Aws::KMS
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
     #   @return [Array<String>]
     #
+    # @!attribute [rw] dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateMacRequest AWS API Documentation
     #
     class GenerateMacRequest < Struct.new(
       :message,
       :key_id,
       :mac_algorithm,
-      :grant_tokens)
+      :grant_tokens,
+      :dry_run)
       SENSITIVE = [:message]
       include Aws::Structure
     end
@@ -4765,6 +4882,18 @@ module Aws::KMS
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
     #   @return [Array<String>]
     #
+    # @!attribute [rw] dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ReEncryptRequest AWS API Documentation
     #
     class ReEncryptRequest < Struct.new(
@@ -4775,7 +4904,8 @@ module Aws::KMS
       :destination_encryption_context,
       :source_encryption_algorithm,
       :destination_encryption_algorithm,
-      :grant_tokens)
+      :grant_tokens,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5117,12 +5247,25 @@ module Aws::KMS
     #   ^
     #   @return [String]
     #
+    # @!attribute [rw] dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RetireGrantRequest AWS API Documentation
     #
     class RetireGrantRequest < Struct.new(
       :grant_token,
       :key_id,
-      :grant_id)
+      :grant_id,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5152,11 +5295,24 @@ module Aws::KMS
     #   CreateGrant, ListGrants, or ListRetirableGrants.
     #   @return [String]
     #
+    # @!attribute [rw] dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RevokeGrantRequest AWS API Documentation
     #
     class RevokeGrantRequest < Struct.new(
       :key_id,
-      :grant_id)
+      :grant_id,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5193,7 +5349,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-pending-deletion-window
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-kms-schedule-key-deletion-pending-window-in-days
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ScheduleKeyDeletionRequest AWS API Documentation
@@ -5355,6 +5511,18 @@ module Aws::KMS
     #   algorithms for compatibility with existing applications.
     #   @return [String]
     #
+    # @!attribute [rw] dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/SignRequest AWS API Documentation
     #
     class SignRequest < Struct.new(
@@ -5362,7 +5530,8 @@ module Aws::KMS
       :message,
       :message_type,
       :grant_tokens,
-      :signing_algorithm)
+      :signing_algorithm,
+      :dry_run)
       SENSITIVE = [:message]
       include Aws::Structure
     end
@@ -5859,6 +6028,18 @@ module Aws::KMS
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
     #   @return [Array<String>]
     #
+    # @!attribute [rw] dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/VerifyMacRequest AWS API Documentation
     #
     class VerifyMacRequest < Struct.new(
@@ -5866,7 +6047,8 @@ module Aws::KMS
       :key_id,
       :mac_algorithm,
       :mac,
-      :grant_tokens)
+      :grant_tokens,
+      :dry_run)
       SENSITIVE = [:message]
       include Aws::Structure
     end
@@ -6003,6 +6185,18 @@ module Aws::KMS
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
     #   @return [Array<String>]
     #
+    # @!attribute [rw] dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/VerifyRequest AWS API Documentation
     #
     class VerifyRequest < Struct.new(
@@ -6011,7 +6205,8 @@ module Aws::KMS
       :message_type,
       :signature,
       :signing_algorithm,
-      :grant_tokens)
+      :grant_tokens,
+      :dry_run)
       SENSITIVE = [:message]
       include Aws::Structure
     end

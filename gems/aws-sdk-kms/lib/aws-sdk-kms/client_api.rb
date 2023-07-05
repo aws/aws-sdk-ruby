@@ -72,6 +72,7 @@ module Aws::KMS
     DisabledException = Shapes::StructureShape.new(name: 'DisabledException')
     DisconnectCustomKeyStoreRequest = Shapes::StructureShape.new(name: 'DisconnectCustomKeyStoreRequest')
     DisconnectCustomKeyStoreResponse = Shapes::StructureShape.new(name: 'DisconnectCustomKeyStoreResponse')
+    DryRunOperationException = Shapes::StructureShape.new(name: 'DryRunOperationException')
     EnableKeyRequest = Shapes::StructureShape.new(name: 'EnableKeyRequest')
     EnableKeyRotationRequest = Shapes::StructureShape.new(name: 'EnableKeyRotationRequest')
     EncryptRequest = Shapes::StructureShape.new(name: 'EncryptRequest')
@@ -296,6 +297,7 @@ module Aws::KMS
     CreateGrantRequest.add_member(:constraints, Shapes::ShapeRef.new(shape: GrantConstraints, location_name: "Constraints"))
     CreateGrantRequest.add_member(:grant_tokens, Shapes::ShapeRef.new(shape: GrantTokenList, location_name: "GrantTokens"))
     CreateGrantRequest.add_member(:name, Shapes::ShapeRef.new(shape: GrantNameType, location_name: "Name"))
+    CreateGrantRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "DryRun"))
     CreateGrantRequest.struct_class = Types::CreateGrantRequest
 
     CreateGrantResponse.add_member(:grant_token, Shapes::ShapeRef.new(shape: GrantTokenType, location_name: "GrantToken"))
@@ -349,6 +351,7 @@ module Aws::KMS
     DecryptRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
     DecryptRequest.add_member(:encryption_algorithm, Shapes::ShapeRef.new(shape: EncryptionAlgorithmSpec, location_name: "EncryptionAlgorithm"))
     DecryptRequest.add_member(:recipient, Shapes::ShapeRef.new(shape: RecipientInfo, location_name: "Recipient"))
+    DecryptRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "DryRun"))
     DecryptRequest.struct_class = Types::DecryptRequest
 
     DecryptResponse.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
@@ -403,6 +406,9 @@ module Aws::KMS
 
     DisconnectCustomKeyStoreResponse.struct_class = Types::DisconnectCustomKeyStoreResponse
 
+    DryRunOperationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    DryRunOperationException.struct_class = Types::DryRunOperationException
+
     EnableKeyRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     EnableKeyRequest.struct_class = Types::EnableKeyRequest
 
@@ -414,6 +420,7 @@ module Aws::KMS
     EncryptRequest.add_member(:encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextType, location_name: "EncryptionContext"))
     EncryptRequest.add_member(:grant_tokens, Shapes::ShapeRef.new(shape: GrantTokenList, location_name: "GrantTokens"))
     EncryptRequest.add_member(:encryption_algorithm, Shapes::ShapeRef.new(shape: EncryptionAlgorithmSpec, location_name: "EncryptionAlgorithm"))
+    EncryptRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "DryRun"))
     EncryptRequest.struct_class = Types::EncryptRequest
 
     EncryptResponse.add_member(:ciphertext_blob, Shapes::ShapeRef.new(shape: CiphertextType, location_name: "CiphertextBlob"))
@@ -434,6 +441,7 @@ module Aws::KMS
     GenerateDataKeyPairRequest.add_member(:key_pair_spec, Shapes::ShapeRef.new(shape: DataKeyPairSpec, required: true, location_name: "KeyPairSpec"))
     GenerateDataKeyPairRequest.add_member(:grant_tokens, Shapes::ShapeRef.new(shape: GrantTokenList, location_name: "GrantTokens"))
     GenerateDataKeyPairRequest.add_member(:recipient, Shapes::ShapeRef.new(shape: RecipientInfo, location_name: "Recipient"))
+    GenerateDataKeyPairRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "DryRun"))
     GenerateDataKeyPairRequest.struct_class = Types::GenerateDataKeyPairRequest
 
     GenerateDataKeyPairResponse.add_member(:private_key_ciphertext_blob, Shapes::ShapeRef.new(shape: CiphertextType, location_name: "PrivateKeyCiphertextBlob"))
@@ -448,6 +456,7 @@ module Aws::KMS
     GenerateDataKeyPairWithoutPlaintextRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     GenerateDataKeyPairWithoutPlaintextRequest.add_member(:key_pair_spec, Shapes::ShapeRef.new(shape: DataKeyPairSpec, required: true, location_name: "KeyPairSpec"))
     GenerateDataKeyPairWithoutPlaintextRequest.add_member(:grant_tokens, Shapes::ShapeRef.new(shape: GrantTokenList, location_name: "GrantTokens"))
+    GenerateDataKeyPairWithoutPlaintextRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "DryRun"))
     GenerateDataKeyPairWithoutPlaintextRequest.struct_class = Types::GenerateDataKeyPairWithoutPlaintextRequest
 
     GenerateDataKeyPairWithoutPlaintextResponse.add_member(:private_key_ciphertext_blob, Shapes::ShapeRef.new(shape: CiphertextType, location_name: "PrivateKeyCiphertextBlob"))
@@ -462,6 +471,7 @@ module Aws::KMS
     GenerateDataKeyRequest.add_member(:key_spec, Shapes::ShapeRef.new(shape: DataKeySpec, location_name: "KeySpec"))
     GenerateDataKeyRequest.add_member(:grant_tokens, Shapes::ShapeRef.new(shape: GrantTokenList, location_name: "GrantTokens"))
     GenerateDataKeyRequest.add_member(:recipient, Shapes::ShapeRef.new(shape: RecipientInfo, location_name: "Recipient"))
+    GenerateDataKeyRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "DryRun"))
     GenerateDataKeyRequest.struct_class = Types::GenerateDataKeyRequest
 
     GenerateDataKeyResponse.add_member(:ciphertext_blob, Shapes::ShapeRef.new(shape: CiphertextType, location_name: "CiphertextBlob"))
@@ -475,6 +485,7 @@ module Aws::KMS
     GenerateDataKeyWithoutPlaintextRequest.add_member(:key_spec, Shapes::ShapeRef.new(shape: DataKeySpec, location_name: "KeySpec"))
     GenerateDataKeyWithoutPlaintextRequest.add_member(:number_of_bytes, Shapes::ShapeRef.new(shape: NumberOfBytesType, location_name: "NumberOfBytes"))
     GenerateDataKeyWithoutPlaintextRequest.add_member(:grant_tokens, Shapes::ShapeRef.new(shape: GrantTokenList, location_name: "GrantTokens"))
+    GenerateDataKeyWithoutPlaintextRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "DryRun"))
     GenerateDataKeyWithoutPlaintextRequest.struct_class = Types::GenerateDataKeyWithoutPlaintextRequest
 
     GenerateDataKeyWithoutPlaintextResponse.add_member(:ciphertext_blob, Shapes::ShapeRef.new(shape: CiphertextType, location_name: "CiphertextBlob"))
@@ -485,6 +496,7 @@ module Aws::KMS
     GenerateMacRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     GenerateMacRequest.add_member(:mac_algorithm, Shapes::ShapeRef.new(shape: MacAlgorithmSpec, required: true, location_name: "MacAlgorithm"))
     GenerateMacRequest.add_member(:grant_tokens, Shapes::ShapeRef.new(shape: GrantTokenList, location_name: "GrantTokens"))
+    GenerateMacRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "DryRun"))
     GenerateMacRequest.struct_class = Types::GenerateMacRequest
 
     GenerateMacResponse.add_member(:mac, Shapes::ShapeRef.new(shape: CiphertextType, location_name: "Mac"))
@@ -742,6 +754,7 @@ module Aws::KMS
     ReEncryptRequest.add_member(:source_encryption_algorithm, Shapes::ShapeRef.new(shape: EncryptionAlgorithmSpec, location_name: "SourceEncryptionAlgorithm"))
     ReEncryptRequest.add_member(:destination_encryption_algorithm, Shapes::ShapeRef.new(shape: EncryptionAlgorithmSpec, location_name: "DestinationEncryptionAlgorithm"))
     ReEncryptRequest.add_member(:grant_tokens, Shapes::ShapeRef.new(shape: GrantTokenList, location_name: "GrantTokens"))
+    ReEncryptRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "DryRun"))
     ReEncryptRequest.struct_class = Types::ReEncryptRequest
 
     ReEncryptResponse.add_member(:ciphertext_blob, Shapes::ShapeRef.new(shape: CiphertextType, location_name: "CiphertextBlob"))
@@ -771,10 +784,12 @@ module Aws::KMS
     RetireGrantRequest.add_member(:grant_token, Shapes::ShapeRef.new(shape: GrantTokenType, location_name: "GrantToken"))
     RetireGrantRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
     RetireGrantRequest.add_member(:grant_id, Shapes::ShapeRef.new(shape: GrantIdType, location_name: "GrantId"))
+    RetireGrantRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "DryRun"))
     RetireGrantRequest.struct_class = Types::RetireGrantRequest
 
     RevokeGrantRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     RevokeGrantRequest.add_member(:grant_id, Shapes::ShapeRef.new(shape: GrantIdType, required: true, location_name: "GrantId"))
+    RevokeGrantRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "DryRun"))
     RevokeGrantRequest.struct_class = Types::RevokeGrantRequest
 
     ScheduleKeyDeletionRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
@@ -792,6 +807,7 @@ module Aws::KMS
     SignRequest.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
     SignRequest.add_member(:grant_tokens, Shapes::ShapeRef.new(shape: GrantTokenList, location_name: "GrantTokens"))
     SignRequest.add_member(:signing_algorithm, Shapes::ShapeRef.new(shape: SigningAlgorithmSpec, required: true, location_name: "SigningAlgorithm"))
+    SignRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "DryRun"))
     SignRequest.struct_class = Types::SignRequest
 
     SignResponse.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
@@ -853,6 +869,7 @@ module Aws::KMS
     VerifyMacRequest.add_member(:mac_algorithm, Shapes::ShapeRef.new(shape: MacAlgorithmSpec, required: true, location_name: "MacAlgorithm"))
     VerifyMacRequest.add_member(:mac, Shapes::ShapeRef.new(shape: CiphertextType, required: true, location_name: "Mac"))
     VerifyMacRequest.add_member(:grant_tokens, Shapes::ShapeRef.new(shape: GrantTokenList, location_name: "GrantTokens"))
+    VerifyMacRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "DryRun"))
     VerifyMacRequest.struct_class = Types::VerifyMacRequest
 
     VerifyMacResponse.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
@@ -866,6 +883,7 @@ module Aws::KMS
     VerifyRequest.add_member(:signature, Shapes::ShapeRef.new(shape: CiphertextType, required: true, location_name: "Signature"))
     VerifyRequest.add_member(:signing_algorithm, Shapes::ShapeRef.new(shape: SigningAlgorithmSpec, required: true, location_name: "SigningAlgorithm"))
     VerifyRequest.add_member(:grant_tokens, Shapes::ShapeRef.new(shape: GrantTokenList, location_name: "GrantTokens"))
+    VerifyRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "DryRun"))
     VerifyRequest.struct_class = Types::VerifyRequest
 
     VerifyResponse.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
@@ -1022,6 +1040,7 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: InvalidGrantTokenException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:create_key, Seahorse::Model::Operation.new.tap do |o|
@@ -1061,6 +1080,7 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: InvalidGrantTokenException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:delete_alias, Seahorse::Model::Operation.new.tap do |o|
@@ -1212,6 +1232,7 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: InvalidGrantTokenException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:generate_data_key, Seahorse::Model::Operation.new.tap do |o|
@@ -1228,6 +1249,7 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: InvalidGrantTokenException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:generate_data_key_pair, Seahorse::Model::Operation.new.tap do |o|
@@ -1245,6 +1267,7 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:generate_data_key_pair_without_plaintext, Seahorse::Model::Operation.new.tap do |o|
@@ -1262,6 +1285,7 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:generate_data_key_without_plaintext, Seahorse::Model::Operation.new.tap do |o|
@@ -1278,6 +1302,7 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: InvalidGrantTokenException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:generate_mac, Seahorse::Model::Operation.new.tap do |o|
@@ -1293,6 +1318,7 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: InvalidGrantTokenException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:generate_random, Seahorse::Model::Operation.new.tap do |o|
@@ -1530,6 +1556,7 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: InvalidGrantTokenException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:replicate_key, Seahorse::Model::Operation.new.tap do |o|
@@ -1563,6 +1590,7 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: DependencyTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:revoke_grant, Seahorse::Model::Operation.new.tap do |o|
@@ -1577,6 +1605,7 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: InvalidGrantIdException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:schedule_key_deletion, Seahorse::Model::Operation.new.tap do |o|
@@ -1606,6 +1635,7 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: InvalidGrantTokenException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1715,6 +1745,7 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidSignatureException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:verify_mac, Seahorse::Model::Operation.new.tap do |o|
@@ -1731,6 +1762,7 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidMacException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2023-07-05)
+------------------
+
+* Feature - Update to Amazon Comprehend Medical documentation.
+
 1.43.0 (2023-06-28)
 ------------------
 

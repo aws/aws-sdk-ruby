@@ -488,6 +488,20 @@ module Aws::Mgn
       end
     end
 
+    class ListManagedAccounts
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Mgn::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ListSourceServerActions
       def self.build(context)
         unless context.config.regional_endpoint
@@ -558,6 +572,20 @@ module Aws::Mgn
       end
     end
 
+    class PauseReplication
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Mgn::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class PutSourceServerAction
       def self.build(context)
         unless context.config.regional_endpoint
@@ -601,6 +629,20 @@ module Aws::Mgn
     end
 
     class RemoveTemplateAction
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Mgn::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ResumeReplication
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -685,6 +727,20 @@ module Aws::Mgn
     end
 
     class StartTest
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Mgn::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class StopReplication
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

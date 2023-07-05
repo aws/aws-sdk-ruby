@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.117.0 (2023-07-05)
+------------------
+
+* Feature - GetMetricDataV2 API: Channels filters do not count towards overall limitation of 100 filter values.
+
 1.116.0 (2023-06-28)
 ------------------
 

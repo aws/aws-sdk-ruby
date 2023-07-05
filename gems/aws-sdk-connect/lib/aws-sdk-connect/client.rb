@@ -1660,9 +1660,16 @@ module Aws::Connect
     # full phone number ARN. If a UUID is provided in this scenario, you
     # will receive a `ResourceNotFoundException`.
     #
+    #  Only use the phone number ARN format that doesn't contain `instance`
+    # in the path, for example,
+    # `arn:aws:connect:us-east-1:1234567890:phone-number/uuid`. This is the
+    # same ARN format that is returned when you call the
+    # [ListPhoneNumbersV2][2] API.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_OutboundCallerConfig
+    # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -5601,10 +5608,11 @@ module Aws::Connect
     #     `AGENT_HIERARCHY_LEVEL_FOUR` \| `AGENT_HIERARCHY_LEVEL_FIVE`
     #
     #   * **Filter values**: A maximum of 100 filter values are supported in a
-    #     single request. For example, a `GetMetricDataV2` request can filter
-    #     by 50 queues, 35 agents, and 15 routing profiles for a total of 100
-    #     filter values. `VOICE`, `CHAT`, and `TASK` are valid `filterValue`
-    #     for the `CHANNEL` filter key.
+    #     single request. VOICE, CHAT, and TASK are valid `filterValue` for
+    #     the CHANNEL filter key. They do not count towards limitation of 100
+    #     filter values. For example, a GetMetricDataV2 request can filter by
+    #     50 queues, 35 agents, and 15 routing profiles for a total of 100
+    #     filter values, along with 3 channel filters.
     #
     #
     #
@@ -8706,9 +8714,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Searches queues in an Amazon Connect instance, with optional
     # filtering.
     #
@@ -8994,9 +8999,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Searches routing profiles in an Amazon Connect instance, with optional
     # filtering.
     #
@@ -9113,9 +9115,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Searches security profiles in an Amazon Connect instance, with
     # optional filtering.
     #
@@ -11562,9 +11561,16 @@ module Aws::Connect
     # full phone number ARN. If a UUID is provided in this scenario, you
     # will receive a `ResourceNotFoundException`.
     #
+    #  Only use the phone number ARN format that doesn't contain `instance`
+    # in the path, for example,
+    # `arn:aws:connect:us-east-1:1234567890:phone-number/uuid`. This is the
+    # same ARN format that is returned when you call the
+    # [ListPhoneNumbersV2][2] API.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_OutboundCallerConfig
+    # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -12531,7 +12537,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.116.0'
+      context[:gem_version] = '1.117.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

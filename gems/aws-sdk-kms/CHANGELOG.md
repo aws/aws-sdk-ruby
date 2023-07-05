@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2023-07-05)
+------------------
+
+* Feature - Added Dry Run Feature to cryptographic and cross-account mutating KMS APIs (14 in all). This feature allows users to test their permissions and parameters before making the actual API call.
+
 1.68.0 (2023-06-28)
 ------------------
 

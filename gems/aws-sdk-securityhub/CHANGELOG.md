@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2023-07-05)
+------------------
+
+* Feature - Documentation updates for AWS Security Hub
+
 1.86.0 (2023-06-28)
 ------------------
 

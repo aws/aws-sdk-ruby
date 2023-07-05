@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2023-07-05)
+------------------
+
+* Feature - This release introduces the Global view feature and new Replication state APIs.
+
 1.21.0 (2023-06-28)
 ------------------
 

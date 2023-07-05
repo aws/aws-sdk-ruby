@@ -387,9 +387,9 @@ module Aws::ComprehendMedical
     # Use this operation to get the status of a detection job.
     #
     # @option params [required, String] :job_id
-    #   The identifier that Comprehend Medical; generated for the job. The
-    #   `StartEntitiesDetectionV2Job` operation returns this identifier in its
-    #   response.
+    #   The identifier that Amazon Comprehend Medical generated for the job.
+    #   The `StartEntitiesDetectionV2Job` operation returns this identifier in
+    #   its response.
     #
     # @return [Types::DescribeEntitiesDetectionV2JobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -480,8 +480,8 @@ module Aws::ComprehendMedical
     # detection job.
     #
     # @option params [required, String] :job_id
-    #   The identifier that Comprehend Medical; generated for the job. The
-    #   `StartPHIDetectionJob` operation returns this identifier in its
+    #   The identifier that Amazon Comprehend Medical generated for the job.
+    #   The `StartPHIDetectionJob` operation returns this identifier in its
     #   response.
     #
     # @return [Types::DescribePHIDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -619,12 +619,11 @@ module Aws::ComprehendMedical
     #
     # Inspects the clinical text for a variety of medical entities and
     # returns specific information about them such as entity category,
-    # location, and confidence score on that information .
+    # location, and confidence score on that information.
     #
     # @option params [required, String] :text
     #   A UTF-8 text string containing the clinical content being examined for
-    #   entities. Each string must contain fewer than 20,000 bytes of
-    #   characters.
+    #   entities.
     #
     # @return [Types::DetectEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -707,8 +706,7 @@ module Aws::ComprehendMedical
     #
     # @option params [required, String] :text
     #   A UTF-8 string containing the clinical content being examined for
-    #   entities. Each string must contain fewer than 20,000 bytes of
-    #   characters.
+    #   entities.
     #
     # @return [Types::DetectEntitiesV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -782,8 +780,7 @@ module Aws::ComprehendMedical
     #
     # @option params [required, String] :text
     #   A UTF-8 text string containing the clinical content being examined for
-    #   PHI entities. Each string must contain fewer than 20,000 bytes of
-    #   characters.
+    #   PHI entities.
     #
     # @return [Types::DetectPHIResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -842,8 +839,7 @@ module Aws::ComprehendMedical
     # entities in English language texts.
     #
     # @option params [required, String] :text
-    #   The input text used for analysis. The input for InferICD10CM is a
-    #   string from 1 to 10000 characters.
+    #   The input text used for analysis.
     #
     # @return [Types::InferICD10CMResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -905,8 +901,7 @@ module Aws::ComprehendMedical
     # detects medical entities in English language texts.
     #
     # @option params [required, String] :text
-    #   The input text used for analysis. The input for InferRxNorm is a
-    #   string from 1 to 10000 characters.
+    #   The input text used for analysis.
     #
     # @return [Types::InferRxNormResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -965,8 +960,7 @@ module Aws::ComprehendMedical
     # Terms (SNOMED-CT) ontology
     #
     # @option params [required, String] :text
-    #   The input text to be analyzed using InferSNOMEDCT. The text should be
-    #   a string with 1 to 10000 characters.
+    #   The input text to be analyzed using InferSNOMEDCT.
     #
     # @return [Types::InferSNOMEDCTResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1156,8 +1150,8 @@ module Aws::ComprehendMedical
       req.send_request(options)
     end
 
-    # Gets a list of protected health information (PHI) detection jobs that
-    # you have submitted.
+    # Gets a list of protected health information (PHI) detection jobs you
+    # have submitted.
     #
     # @option params [Types::ComprehendMedicalAsyncJobFilter] :filter
     #   Filters the jobs that are returned. You can filter jobs based on their
@@ -1354,9 +1348,9 @@ module Aws::ComprehendMedical
     #
     # @option params [required, String] :data_access_role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Comprehend Medical; read access to
-    #   your input data. For more information, see [ Role-Based Permissions
-    #   Required for Asynchronous Operations][1].
+    #   Management (IAM) role that grants Amazon Comprehend Medical read
+    #   access to your input data. For more information, see [Role-Based
+    #   Permissions Required for Asynchronous Operations][1].
     #
     #
     #
@@ -1367,7 +1361,7 @@ module Aws::ComprehendMedical
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the request. If you don't set the client
-    #   request token, Comprehend Medical; generates one for you.
+    #   request token, Amazon Comprehend Medical generates one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1378,7 +1372,8 @@ module Aws::ComprehendMedical
     #
     # @option params [required, String] :language_code
     #   The language of the input documents. All documents must be in the same
-    #   language. Comprehend Medical; processes files in US English (en).
+    #   language. Amazon Comprehend Medical processes files in US English
+    #   (en).
     #
     # @return [Types::StartEntitiesDetectionV2JobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1427,9 +1422,9 @@ module Aws::ComprehendMedical
     #
     # @option params [required, String] :data_access_role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Comprehend Medical; read access to
-    #   your input data. For more information, see [ Role-Based Permissions
-    #   Required for Asynchronous Operations][1].
+    #   Management (IAM) role that grants Amazon Comprehend Medical read
+    #   access to your input data. For more information, see [ Role-Based
+    #   Permissions Required for Asynchronous Operations][1].
     #
     #
     #
@@ -1440,7 +1435,7 @@ module Aws::ComprehendMedical
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the request. If you don't set the client
-    #   request token, Comprehend Medical; generates one.
+    #   request token, Amazon Comprehend Medical generates one.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1500,9 +1495,9 @@ module Aws::ComprehendMedical
     #
     # @option params [required, String] :data_access_role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Comprehend Medical; read access to
-    #   your input data. For more information, see [ Role-Based Permissions
-    #   Required for Asynchronous Operations][1].
+    #   Management (IAM) role that grants Amazon Comprehend Medical read
+    #   access to your input data. For more information, see [ Role-Based
+    #   Permissions Required for Asynchronous Operations][1].
     #
     #
     #
@@ -1513,7 +1508,7 @@ module Aws::ComprehendMedical
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the request. If you don't set the client
-    #   request token, Comprehend Medical; generates one.
+    #   request token, Amazon Comprehend Medical generates one.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1573,9 +1568,9 @@ module Aws::ComprehendMedical
     #
     # @option params [required, String] :data_access_role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Comprehend Medical; read access to
-    #   your input data. For more information, see [ Role-Based Permissions
-    #   Required for Asynchronous Operations][1].
+    #   Management (IAM) role that grants Amazon Comprehend Medical read
+    #   access to your input data. For more information, see [ Role-Based
+    #   Permissions Required for Asynchronous Operations][1].
     #
     #
     #
@@ -1586,7 +1581,7 @@ module Aws::ComprehendMedical
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the request. If you don't set the client
-    #   request token, Comprehend Medical; generates one.
+    #   request token, Amazon Comprehend Medical generates one.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1856,7 +1851,7 @@ module Aws::ComprehendMedical
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehendmedical'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
