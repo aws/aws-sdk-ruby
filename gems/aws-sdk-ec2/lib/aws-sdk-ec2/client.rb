@@ -28,6 +28,7 @@ require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
+require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/sign.rb'
@@ -79,6 +80,7 @@ module Aws::EC2
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::Sign)
@@ -194,6 +196,10 @@ module Aws::EC2
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
     #
+    #   @option options [Boolean] :disable_request_compression (false)
+    #     When set to 'true' the request body will not be compressed
+    #     for supported operations.
+    #
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
@@ -233,6 +239,11 @@ module Aws::EC2
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #
+    #   @option options [Integer] :request_min_compression_size_bytes (10240)
+    #     The minimum size in bytes that triggers compression for request
+    #     bodies. The value must be non-negative integer value between 0
+    #     and 10485780 bytes inclusive.
     #
     #   @option options [Proc] :retry_backoff
     #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
@@ -24477,6 +24488,7 @@ module Aws::EC2
     #   resp.instance_types[0].auto_recovery_supported #=> Boolean
     #   resp.instance_types[0].supported_boot_modes #=> Array
     #   resp.instance_types[0].supported_boot_modes[0] #=> String, one of "legacy-bios", "uefi"
+    #   resp.instance_types[0].nitro_enclaves_support #=> String, one of "unsupported", "supported"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceTypes AWS API Documentation
@@ -53811,16 +53823,18 @@ module Aws::EC2
     #   platform, Availability Zone).
     #
     # @option params [Types::HibernationOptionsRequest] :hibernation_options
-    #   Indicates whether an instance is enabled for hibernation. For more
-    #   information, see [Hibernate your instance][1] in the *Amazon EC2 User
-    #   Guide*.
+    #   Indicates whether an instance is enabled for hibernation. This
+    #   parameter is valid only if the instance meets the [hibernation
+    #   prerequisites][1]. For more information, see [Hibernate your
+    #   instance][2] in the *Amazon EC2 User Guide*.
     #
     #   You can't enable hibernation and Amazon Web Services Nitro Enclaves
     #   on the same instance.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/hibernating-prerequisites.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
     #
     # @option params [Array<Types::LicenseConfigurationRequest>] :license_specifications
     #   The license configurations.
@@ -53835,9 +53849,9 @@ module Aws::EC2
     #
     # @option params [Types::EnclaveOptionsRequest] :enclave_options
     #   Indicates whether the instance is enabled for Amazon Web Services
-    #   Nitro Enclaves. For more information, see [ What is Amazon Web
-    #   Services Nitro Enclaves?][1] in the *Amazon Web Services Nitro
-    #   Enclaves User Guide*.
+    #   Nitro Enclaves. For more information, see [What is Amazon Web Services
+    #   Nitro Enclaves?][1] in the *Amazon Web Services Nitro Enclaves User
+    #   Guide*.
     #
     #   You can't enable Amazon Web Services Nitro Enclaves and hibernation
     #   on the same instance.
@@ -55893,8 +55907,8 @@ module Aws::EC2
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#enabling-hibernation
-    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/enabling-hibernation.html
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/hibernating-prerequisites.html
     # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
     # [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-interruptions.html#hibernate-spot-instances
     # [6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html
@@ -56019,7 +56033,7 @@ module Aws::EC2
     #
     #   resp = client.terminate_client_vpn_connections({
     #     client_vpn_endpoint_id: "ClientVpnEndpointId", # required
-    #     connection_id: "VpnConnectionId",
+    #     connection_id: "String",
     #     username: "String",
     #     dry_run: false,
     #   })
@@ -56691,7 +56705,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.387.0'
+      context[:gem_version] = '1.388.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

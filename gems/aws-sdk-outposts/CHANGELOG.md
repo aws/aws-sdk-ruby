@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2023-07-06)
+------------------
+
+* Feature - Added paginator support to several APIs. Added the ISOLATED enum value to AssetState.
+
 1.45.0 (2023-06-28)
 ------------------
 

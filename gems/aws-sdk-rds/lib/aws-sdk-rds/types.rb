@@ -3049,14 +3049,6 @@ module Aws::RDS
     #   engine.
     #
     #   Amazon Aurora MySQL
-    #   Amazon Aurora PostgreSQL
-    #   Amazon RDS Custom for Oracle
-    #   Amazon RDS Custom for SQL Server
-    #   RDS for MariaDB
-    #   RDS for MySQL
-    #   RDS for Oracle
-    #   RDS for PostgreSQL
-    #   RDS for SQL Server
     #
     #   : The name of the database to create when the primary DB instance of
     #     the Aurora MySQL DB cluster is created. If you don't specify a
@@ -3067,6 +3059,8 @@ module Aws::RDS
     #     * Must contain 1 to 64 alphanumeric characters.
     #
     #     * Can't be a word reserved by the database engine.
+    #
+    #   Amazon Aurora PostgreSQL
     #
     #   : The name of the database to create when the primary DB instance of
     #     the Aurora PostgreSQL DB cluster is created.
@@ -3082,6 +3076,8 @@ module Aws::RDS
     #
     #     * Can't be a word reserved by the database engine.
     #
+    #   Amazon RDS Custom for Oracle
+    #
     #   : The Oracle System ID (SID) of the created RDS Custom DB instance.
     #
     #     Default: `ORCL`
@@ -3094,20 +3090,11 @@ module Aws::RDS
     #
     #     * Can't be a word reserved by the database engine.
     #
+    #   Amazon RDS Custom for SQL Server
+    #
     #   : Not applicable. Must be null.
     #
-    #   : The name of the database to create when the DB instance is
-    #     created. If you don't specify a value, Amazon RDS doesn't create
-    #     a database in the DB instance.
-    #
-    #     Constraints:
-    #
-    #     * Must contain 1 to 64 letters or numbers.
-    #
-    #     * Must begin with a letter. Subsequent characters can be letters,
-    #       underscores, or digits (0-9).
-    #
-    #     * Can't be a word reserved by the database engine.
+    #   RDS for MariaDB
     #
     #   : The name of the database to create when the DB instance is
     #     created. If you don't specify a value, Amazon RDS doesn't create
@@ -3121,6 +3108,23 @@ module Aws::RDS
     #       underscores, or digits (0-9).
     #
     #     * Can't be a word reserved by the database engine.
+    #
+    #   RDS for MySQL
+    #
+    #   : The name of the database to create when the DB instance is
+    #     created. If you don't specify a value, Amazon RDS doesn't create
+    #     a database in the DB instance.
+    #
+    #     Constraints:
+    #
+    #     * Must contain 1 to 64 letters or numbers.
+    #
+    #     * Must begin with a letter. Subsequent characters can be letters,
+    #       underscores, or digits (0-9).
+    #
+    #     * Can't be a word reserved by the database engine.
+    #
+    #   RDS for Oracle
     #
     #   : The Oracle System ID (SID) of the created DB instance.
     #
@@ -3132,6 +3136,8 @@ module Aws::RDS
     #
     #     * Can't be a word reserved by the database engine, such as the
     #       string `NULL`.
+    #
+    #   RDS for PostgreSQL
     #
     #   : The name of the database to create when the DB instance is
     #     created.
@@ -3146,6 +3152,8 @@ module Aws::RDS
     #       underscores, or digits (0-9).
     #
     #     * Can't be a word reserved by the database engine.
+    #
+    #   RDS for SQL Server
     #
     #   : Not applicable. Must be null.
     #   @return [String]
@@ -3175,11 +3183,6 @@ module Aws::RDS
     #   you use in an Aurora cluster volume.
     #
     #   Amazon RDS Custom
-    #   RDS for MariaDB
-    #   RDS for MySQL
-    #   RDS for Oracle
-    #   RDS for PostgreSQL
-    #   RDS for SQL Server
     #
     #   : Constraints to the amount of storage for each storage type are the
     #     following:
@@ -3192,16 +3195,7 @@ module Aws::RDS
     #       65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL
     #       Server.
     #
-    #   : Constraints to the amount of storage for each storage type are the
-    #     following:
-    #
-    #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer
-    #       from 20 to 65536.
-    #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #       65536.
-    #
-    #     * Magnetic storage (standard): Must be an integer from 5 to 3072.
+    #   RDS for MariaDB
     #
     #   : Constraints to the amount of storage for each storage type are the
     #     following:
@@ -3213,6 +3207,21 @@ module Aws::RDS
     #       65536.
     #
     #     * Magnetic storage (standard): Must be an integer from 5 to 3072.
+    #
+    #   RDS for MySQL
+    #
+    #   : Constraints to the amount of storage for each storage type are the
+    #     following:
+    #
+    #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer
+    #       from 20 to 65536.
+    #
+    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
+    #       65536.
+    #
+    #     * Magnetic storage (standard): Must be an integer from 5 to 3072.
+    #
+    #   RDS for Oracle
     #
     #   : Constraints to the amount of storage for each storage type are the
     #     following:
@@ -3225,6 +3234,8 @@ module Aws::RDS
     #
     #     * Magnetic storage (standard): Must be an integer from 10 to 3072.
     #
+    #   RDS for PostgreSQL
+    #
     #   : Constraints to the amount of storage for each storage type are the
     #     following:
     #
@@ -3235,6 +3246,8 @@ module Aws::RDS
     #       65536.
     #
     #     * Magnetic storage (standard): Must be an integer from 5 to 3072.
+    #
+    #   RDS for SQL Server
     #
     #   : Constraints to the amount of storage for each storage type are the
     #     following:
@@ -3572,12 +3585,6 @@ module Aws::RDS
     #   Services Region.
     #
     #   Amazon RDS Custom for Oracle
-    #   Amazon RDS Custom for SQL Server
-    #   RDS for MariaDB
-    #   RDS for Microsoft SQL Server
-    #   RDS for MySQL
-    #   RDS for Oracle
-    #   RDS for PostgreSQL
     #
     #   : A custom engine version (CEV) that you have previously created.
     #     This setting is required for RDS Custom for Oracle. The CEV name
@@ -3585,20 +3592,32 @@ module Aws::RDS
     #     name is `19.my_cev1`. For more information, see [ Creating an RDS
     #     Custom for Oracle DB instance][1] in the *Amazon RDS User Guide*.
     #
+    #   Amazon RDS Custom for SQL Server
+    #
     #   : See [RDS Custom for SQL Server general requirements][2] in the
     #     *Amazon RDS User Guide*.
+    #
+    #   RDS for MariaDB
     #
     #   : For information, see [MariaDB on Amazon RDS versions][3] in the
     #     *Amazon RDS User Guide*.
     #
+    #   RDS for Microsoft SQL Server
+    #
     #   : For information, see [Microsoft SQL Server versions on Amazon
     #     RDS][4] in the *Amazon RDS User Guide*.
+    #
+    #   RDS for MySQL
     #
     #   : For information, see [MySQL on Amazon RDS versions][5] in the
     #     *Amazon RDS User Guide*.
     #
+    #   RDS for Oracle
+    #
     #   : For information, see [Oracle Database Engine release notes][6] in
     #     the *Amazon RDS User Guide*.
+    #
+    #   RDS for PostgreSQL
     #
     #   : For information, see [Amazon RDS for PostgreSQL versions and
     #     extensions][7] in the *Amazon RDS User Guide*.
@@ -3830,12 +3849,12 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] domain_fqdn
-    #   Specifies the fully qualified domain name of an Active Directory
+    #   The fully qualified domain name (FQDN) of an Active Directory
     #   domain.
     #
     #   Constraints:
     #
-    #   * Cannot be greater than 64 characters.
+    #   * Can't be longer than 64 characters.
     #
     #   ^
     #
@@ -3850,15 +3869,15 @@ module Aws::RDS
     #
     #   * Must be in the distinguished name format.
     #
-    #   * Cannot be greater than 64 characters.
+    #   * Can't be longer than 64 characters.
     #
     #   Example:
     #   `OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain`
     #   @return [String]
     #
     # @!attribute [rw] domain_auth_secret_arn
-    #   The ARN for the Secrets Manager secret that contains the credentials
-    #   for the user performing the domain join.
+    #   The ARN for the Secrets Manager secret with the credentials for the
+    #   user joining the domain.
     #
     #   Example:
     #   `arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456`
@@ -3880,7 +3899,7 @@ module Aws::RDS
     #   @return [Array<String>]
     #
     # @!attribute [rw] copy_tags_to_snapshot
-    #   Spcifies whether to copy tags from the DB instance to snapshots of
+    #   Specifies whether to copy tags from the DB instance to snapshots of
     #   the DB instance. By default, tags are not copied.
     #
     #   This setting doesn't apply to Amazon Aurora DB instances. Copying
@@ -4808,12 +4827,12 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] domain_fqdn
-    #   Specifies the fully qualified domain name of an Active Directory
+    #   The fully qualified domain name (FQDN) of an Active Directory
     #   domain.
     #
     #   Constraints:
     #
-    #   * Cannot be greater than 64 characters.
+    #   * Can't be longer than 64 characters.
     #
     #   ^
     #
@@ -4828,15 +4847,15 @@ module Aws::RDS
     #
     #   * Must be in the distinguished name format.
     #
-    #   * Cannot be greater than 64 characters.
+    #   * Can't be longer than 64 characters.
     #
     #   Example:
     #   `OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain`
     #   @return [String]
     #
     # @!attribute [rw] domain_auth_secret_arn
-    #   The ARN for the Secrets Manager secret that contains the credentials
-    #   for the user performing the domain join.
+    #   The ARN for the Secrets Manager secret with the credentials for the
+    #   user joining the domain.
     #
     #   Example:
     #   `arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456`
@@ -5636,37 +5655,84 @@ module Aws::RDS
     end
 
     # @!attribute [rw] global_cluster_identifier
-    #   The cluster identifier of the new global database cluster. This
+    #   The cluster identifier for this global database cluster. This
     #   parameter is stored as a lowercase string.
     #   @return [String]
     #
     # @!attribute [rw] source_db_cluster_identifier
     #   The Amazon Resource Name (ARN) to use as the primary cluster of the
-    #   global database. This parameter is optional.
+    #   global database.
+    #
+    #   If you provide a value for this parameter, don't specify values for
+    #   the following settings because Amazon Aurora uses the values from
+    #   the specified source DB cluster:
+    #
+    #   * `DatabaseName`
+    #
+    #   * `Engine`
+    #
+    #   * `EngineVersion`
+    #
+    #   * `StorageEncrypted`
     #   @return [String]
     #
     # @!attribute [rw] engine
-    #   The name of the database engine to be used for this DB cluster.
+    #   The database engine to use for this global database cluster.
+    #
+    #   Valid Values: `aurora-mysql | aurora-postgresql`
+    #
+    #   Constraints:
+    #
+    #   * Can't be specified if `SourceDBClusterIdentifier` is specified.
+    #     In this case, Amazon Aurora uses the engine of the source DB
+    #     cluster.
+    #
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   The engine version of the Aurora global database.
+    #   The engine version to use for this global database cluster.
+    #
+    #   Constraints:
+    #
+    #   * Can't be specified if `SourceDBClusterIdentifier` is specified.
+    #     In this case, Amazon Aurora uses the engine version of the source
+    #     DB cluster.
+    #
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] deletion_protection
-    #   The deletion protection setting for the new global database. The
-    #   global database can't be deleted when deletion protection is
-    #   enabled.
+    #   Specifies whether to enable deletion protection for the new global
+    #   database cluster. The global database can't be deleted when
+    #   deletion protection is enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] database_name
     #   The name for your database of up to 64 alphanumeric characters. If
-    #   you do not provide a name, Amazon Aurora will not create a database
-    #   in the global database cluster you are creating.
+    #   you don't specify a name, Amazon Aurora doesn't create a database
+    #   in the global database cluster.
+    #
+    #   Constraints:
+    #
+    #   * Can't be specified if `SourceDBClusterIdentifier` is specified.
+    #     In this case, Amazon Aurora uses the database name from the source
+    #     DB cluster.
+    #
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] storage_encrypted
-    #   The storage encryption setting for the new global database cluster.
+    #   Specifies whether to enable storage encryption for the new global
+    #   database cluster.
+    #
+    #   Constraints:
+    #
+    #   * Can't be specified if `SourceDBClusterIdentifier` is specified.
+    #     In this case, Amazon Aurora uses the setting from the source DB
+    #     cluster.
+    #
+    #   ^
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateGlobalClusterMessage AWS API Documentation
@@ -12818,8 +12884,8 @@ module Aws::RDS
     #
     # @!attribute [rw] status
     #   The status of the Active Directory Domain membership for the DB
-    #   instance or cluster. Values include joined, pending-join, failed,
-    #   and so on.
+    #   instance or cluster. Values include `joined`, `pending-join`,
+    #   `failed`, and so on.
     #   @return [String]
     #
     # @!attribute [rw] fqdn
@@ -12828,22 +12894,22 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] iam_role_name
-    #   The name of the IAM role to be used when making API calls to the
-    #   Directory Service.
+    #   The name of the IAM role used when making API calls to the Directory
+    #   Service.
     #   @return [String]
     #
     # @!attribute [rw] ou
-    #   The Active Directory organizational unit for your DB instance to
-    #   join.
+    #   The Active Directory organizational unit for the DB instance or
+    #   cluster.
     #   @return [String]
     #
     # @!attribute [rw] auth_secret_arn
-    #   The ARN for the Secrets Manager secret that contains the credentials
-    #   for the user performing the domain join.
+    #   The ARN for the Secrets Manager secret with the credentials for the
+    #   user that's a member of the domain.
     #   @return [String]
     #
     # @!attribute [rw] dns_ips
-    #   The IPv4 DNS IP addresses of your primary and secondary Active
+    #   The IPv4 DNS IP addresses of the primary and secondary Active
     #   Directory domain controllers.
     #   @return [Array<String>]
     #
@@ -15821,12 +15887,12 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] domain_fqdn
-    #   Specifies the fully qualified domain name of an Active Directory
+    #   The fully qualified domain name (FQDN) of an Active Directory
     #   domain.
     #
     #   Constraints:
     #
-    #   * Cannot be greater than 64 characters.
+    #   * Can't be longer than 64 characters.
     #
     #   ^
     #
@@ -15841,15 +15907,15 @@ module Aws::RDS
     #
     #   * Must be in the distinguished name format.
     #
-    #   * Cannot be greater than 64 characters.
+    #   * Can't be longer than 64 characters.
     #
     #   Example:
     #   `OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain`
     #   @return [String]
     #
     # @!attribute [rw] domain_auth_secret_arn
-    #   The ARN for the Secrets Manager secret that contains the credentials
-    #   for the user performing the domain join.
+    #   The ARN for the Secrets Manager secret with the credentials for the
+    #   user joining the domain.
     #
     #   Example:
     #   `arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456`
@@ -15979,8 +16045,8 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] disable_domain
-    #   Boolean. If present, removes the instance from the Active Directory
-    #   domain.
+    #   Specifies whether to remove the DB instance from the Active
+    #   Directory domain.
     #   @return [Boolean]
     #
     # @!attribute [rw] promotion_tier
@@ -20838,12 +20904,12 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] domain_fqdn
-    #   Specifies the fully qualified domain name of an Active Directory
+    #   The fully qualified domain name (FQDN) of an Active Directory
     #   domain.
     #
     #   Constraints:
     #
-    #   * Cannot be greater than 64 characters.
+    #   * Can't be longer than 64 characters.
     #
     #   ^
     #
@@ -20858,15 +20924,15 @@ module Aws::RDS
     #
     #   * Must be in the distinguished name format.
     #
-    #   * Cannot be greater than 64 characters.
+    #   * Can't be longer than 64 characters.
     #
     #   Example:
     #   `OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain`
     #   @return [String]
     #
     # @!attribute [rw] domain_auth_secret_arn
-    #   The ARN for the Secrets Manager secret that contains the credentials
-    #   for the user performing the domain join.
+    #   The ARN for the Secrets Manager secret with the credentials for the
+    #   user joining the domain.
     #
     #   Constraints:
     #
@@ -20909,10 +20975,10 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] domain_iam_role_name
-    #   Specify the name of the IAM role to be used when making API calls to
-    #   the Directory Service.
+    #   The name of the IAM role to use when making API calls to the
+    #   Directory Service.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #   @return [String]
     #
     # @!attribute [rw] enable_iam_database_authentication
@@ -22069,19 +22135,19 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] domain_iam_role_name
-    #   Specify the name of the IAM role to be used when making API calls to
-    #   the Directory Service.
+    #   The name of the IAM role to use when making API calls to the
+    #   Directory Service.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #   @return [String]
     #
     # @!attribute [rw] domain_fqdn
-    #   Specifies the fully qualified domain name of an Active Directory
+    #   The fully qualified domain name (FQDN) of an Active Directory
     #   domain.
     #
     #   Constraints:
     #
-    #   * Cannot be greater than 64 characters.
+    #   * Can't be longer than 64 characters.
     #
     #   ^
     #
@@ -22096,19 +22162,19 @@ module Aws::RDS
     #
     #   * Must be in the distinguished name format.
     #
-    #   * Cannot be greater than 64 characters.
+    #   * Can't be longer than 64 characters.
     #
     #   Example:
     #   `OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain`
     #   @return [String]
     #
     # @!attribute [rw] domain_auth_secret_arn
-    #   The ARN for the Secrets Manager secret that contains the credentials
-    #   for the user performing the domain join.
+    #   The ARN for the Secrets Manager secret with the credentials for the
+    #   user joining the domain.
     #
     #   Constraints:
     #
-    #   * Cannot be greater than 64 characters.
+    #   * Can't be longer than 64 characters.
     #
     #   ^
     #
