@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.184.0 (2023-07-06)
+------------------
+
+* Feature - Updates Amazon RDS documentation for creating DB instances and creating Aurora global clusters.
+
 1.183.0 (2023-06-28)
 ------------------
 

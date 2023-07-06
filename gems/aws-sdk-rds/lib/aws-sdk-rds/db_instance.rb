@@ -974,14 +974,6 @@ module Aws::RDS
     #   engine.
     #
     #   Amazon Aurora MySQL
-    #   Amazon Aurora PostgreSQL
-    #   Amazon RDS Custom for Oracle
-    #   Amazon RDS Custom for SQL Server
-    #   RDS for MariaDB
-    #   RDS for MySQL
-    #   RDS for Oracle
-    #   RDS for PostgreSQL
-    #   RDS for SQL Server
     #
     #   : The name of the database to create when the primary DB instance of
     #     the Aurora MySQL DB cluster is created. If you don't specify a
@@ -992,6 +984,8 @@ module Aws::RDS
     #     * Must contain 1 to 64 alphanumeric characters.
     #
     #     * Can't be a word reserved by the database engine.
+    #
+    #   Amazon Aurora PostgreSQL
     #
     #   : The name of the database to create when the primary DB instance of
     #     the Aurora PostgreSQL DB cluster is created.
@@ -1007,6 +1001,8 @@ module Aws::RDS
     #
     #     * Can't be a word reserved by the database engine.
     #
+    #   Amazon RDS Custom for Oracle
+    #
     #   : The Oracle System ID (SID) of the created RDS Custom DB instance.
     #
     #     Default: `ORCL`
@@ -1019,20 +1015,11 @@ module Aws::RDS
     #
     #     * Can't be a word reserved by the database engine.
     #
+    #   Amazon RDS Custom for SQL Server
+    #
     #   : Not applicable. Must be null.
     #
-    #   : The name of the database to create when the DB instance is created.
-    #     If you don't specify a value, Amazon RDS doesn't create a database
-    #     in the DB instance.
-    #
-    #     Constraints:
-    #
-    #     * Must contain 1 to 64 letters or numbers.
-    #
-    #     * Must begin with a letter. Subsequent characters can be letters,
-    #       underscores, or digits (0-9).
-    #
-    #     * Can't be a word reserved by the database engine.
+    #   RDS for MariaDB
     #
     #   : The name of the database to create when the DB instance is created.
     #     If you don't specify a value, Amazon RDS doesn't create a database
@@ -1046,6 +1033,23 @@ module Aws::RDS
     #       underscores, or digits (0-9).
     #
     #     * Can't be a word reserved by the database engine.
+    #
+    #   RDS for MySQL
+    #
+    #   : The name of the database to create when the DB instance is created.
+    #     If you don't specify a value, Amazon RDS doesn't create a database
+    #     in the DB instance.
+    #
+    #     Constraints:
+    #
+    #     * Must contain 1 to 64 letters or numbers.
+    #
+    #     * Must begin with a letter. Subsequent characters can be letters,
+    #       underscores, or digits (0-9).
+    #
+    #     * Can't be a word reserved by the database engine.
+    #
+    #   RDS for Oracle
     #
     #   : The Oracle System ID (SID) of the created DB instance.
     #
@@ -1057,6 +1061,8 @@ module Aws::RDS
     #
     #     * Can't be a word reserved by the database engine, such as the
     #       string `NULL`.
+    #
+    #   RDS for PostgreSQL
     #
     #   : The name of the database to create when the DB instance is created.
     #
@@ -1071,6 +1077,8 @@ module Aws::RDS
     #
     #     * Can't be a word reserved by the database engine.
     #
+    #   RDS for SQL Server
+    #
     #   : Not applicable. Must be null.
     # @option options [Integer] :allocated_storage
     #   The amount of storage in gibibytes (GiB) to allocate for the DB
@@ -1082,11 +1090,6 @@ module Aws::RDS
     #   use in an Aurora cluster volume.
     #
     #   Amazon RDS Custom
-    #   RDS for MariaDB
-    #   RDS for MySQL
-    #   RDS for Oracle
-    #   RDS for PostgreSQL
-    #   RDS for SQL Server
     #
     #   : Constraints to the amount of storage for each storage type are the
     #     following:
@@ -1099,16 +1102,7 @@ module Aws::RDS
     #       65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL
     #       Server.
     #
-    #   : Constraints to the amount of storage for each storage type are the
-    #     following:
-    #
-    #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer from
-    #       20 to 65536.
-    #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #       65536.
-    #
-    #     * Magnetic storage (standard): Must be an integer from 5 to 3072.
+    #   RDS for MariaDB
     #
     #   : Constraints to the amount of storage for each storage type are the
     #     following:
@@ -1120,6 +1114,21 @@ module Aws::RDS
     #       65536.
     #
     #     * Magnetic storage (standard): Must be an integer from 5 to 3072.
+    #
+    #   RDS for MySQL
+    #
+    #   : Constraints to the amount of storage for each storage type are the
+    #     following:
+    #
+    #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer from
+    #       20 to 65536.
+    #
+    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
+    #       65536.
+    #
+    #     * Magnetic storage (standard): Must be an integer from 5 to 3072.
+    #
+    #   RDS for Oracle
     #
     #   : Constraints to the amount of storage for each storage type are the
     #     following:
@@ -1132,6 +1141,8 @@ module Aws::RDS
     #
     #     * Magnetic storage (standard): Must be an integer from 10 to 3072.
     #
+    #   RDS for PostgreSQL
+    #
     #   : Constraints to the amount of storage for each storage type are the
     #     following:
     #
@@ -1142,6 +1153,8 @@ module Aws::RDS
     #       65536.
     #
     #     * Magnetic storage (standard): Must be an integer from 5 to 3072.
+    #
+    #   RDS for SQL Server
     #
     #   : Constraints to the amount of storage for each storage type are the
     #     following:
@@ -1445,12 +1458,6 @@ module Aws::RDS
     #   Region.
     #
     #   Amazon RDS Custom for Oracle
-    #   Amazon RDS Custom for SQL Server
-    #   RDS for MariaDB
-    #   RDS for Microsoft SQL Server
-    #   RDS for MySQL
-    #   RDS for Oracle
-    #   RDS for PostgreSQL
     #
     #   : A custom engine version (CEV) that you have previously created. This
     #     setting is required for RDS Custom for Oracle. The CEV name has the
@@ -1458,20 +1465,32 @@ module Aws::RDS
     #     `19.my_cev1`. For more information, see [ Creating an RDS Custom for
     #     Oracle DB instance][1] in the *Amazon RDS User Guide*.
     #
+    #   Amazon RDS Custom for SQL Server
+    #
     #   : See [RDS Custom for SQL Server general requirements][2] in the
     #     *Amazon RDS User Guide*.
+    #
+    #   RDS for MariaDB
     #
     #   : For information, see [MariaDB on Amazon RDS versions][3] in the
     #     *Amazon RDS User Guide*.
     #
+    #   RDS for Microsoft SQL Server
+    #
     #   : For information, see [Microsoft SQL Server versions on Amazon
     #     RDS][4] in the *Amazon RDS User Guide*.
+    #
+    #   RDS for MySQL
     #
     #   : For information, see [MySQL on Amazon RDS versions][5] in the
     #     *Amazon RDS User Guide*.
     #
+    #   RDS for Oracle
+    #
     #   : For information, see [Oracle Database Engine release notes][6] in
     #     the *Amazon RDS User Guide*.
+    #
+    #   RDS for PostgreSQL
     #
     #   : For information, see [Amazon RDS for PostgreSQL versions and
     #     extensions][7] in the *Amazon RDS User Guide*.
@@ -1670,12 +1689,11 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
     # @option options [String] :domain_fqdn
-    #   Specifies the fully qualified domain name of an Active Directory
-    #   domain.
+    #   The fully qualified domain name (FQDN) of an Active Directory domain.
     #
     #   Constraints:
     #
-    #   * Cannot be greater than 64 characters.
+    #   * Can't be longer than 64 characters.
     #
     #   ^
     #
@@ -1687,13 +1705,13 @@ module Aws::RDS
     #
     #   * Must be in the distinguished name format.
     #
-    #   * Cannot be greater than 64 characters.
+    #   * Can't be longer than 64 characters.
     #
     #   Example:
     #   `OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain`
     # @option options [String] :domain_auth_secret_arn
-    #   The ARN for the Secrets Manager secret that contains the credentials
-    #   for the user performing the domain join.
+    #   The ARN for the Secrets Manager secret with the credentials for the
+    #   user joining the domain.
     #
     #   Example:
     #   `arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456`
@@ -1711,8 +1729,8 @@ module Aws::RDS
     #
     #   Example: `123.124.125.126,234.235.236.237`
     # @option options [Boolean] :copy_tags_to_snapshot
-    #   Spcifies whether to copy tags from the DB instance to snapshots of the
-    #   DB instance. By default, tags are not copied.
+    #   Specifies whether to copy tags from the DB instance to snapshots of
+    #   the DB instance. By default, tags are not copied.
     #
     #   This setting doesn't apply to Amazon Aurora DB instances. Copying
     #   tags to snapshots is managed by the DB cluster. Setting this value for
@@ -2490,12 +2508,11 @@ module Aws::RDS
     #
     #   This setting doesn't apply to RDS Custom.
     # @option options [String] :domain_fqdn
-    #   Specifies the fully qualified domain name of an Active Directory
-    #   domain.
+    #   The fully qualified domain name (FQDN) of an Active Directory domain.
     #
     #   Constraints:
     #
-    #   * Cannot be greater than 64 characters.
+    #   * Can't be longer than 64 characters.
     #
     #   ^
     #
@@ -2507,13 +2524,13 @@ module Aws::RDS
     #
     #   * Must be in the distinguished name format.
     #
-    #   * Cannot be greater than 64 characters.
+    #   * Can't be longer than 64 characters.
     #
     #   Example:
     #   `OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain`
     # @option options [String] :domain_auth_secret_arn
-    #   The ARN for the Secrets Manager secret that contains the credentials
-    #   for the user performing the domain join.
+    #   The ARN for the Secrets Manager secret with the credentials for the
+    #   user joining the domain.
     #
     #   Example:
     #   `arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456`
@@ -3327,12 +3344,11 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
     # @option options [String] :domain_fqdn
-    #   Specifies the fully qualified domain name of an Active Directory
-    #   domain.
+    #   The fully qualified domain name (FQDN) of an Active Directory domain.
     #
     #   Constraints:
     #
-    #   * Cannot be greater than 64 characters.
+    #   * Can't be longer than 64 characters.
     #
     #   ^
     #
@@ -3344,13 +3360,13 @@ module Aws::RDS
     #
     #   * Must be in the distinguished name format.
     #
-    #   * Cannot be greater than 64 characters.
+    #   * Can't be longer than 64 characters.
     #
     #   Example:
     #   `OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain`
     # @option options [String] :domain_auth_secret_arn
-    #   The ARN for the Secrets Manager secret that contains the credentials
-    #   for the user performing the domain join.
+    #   The ARN for the Secrets Manager secret with the credentials for the
+    #   user joining the domain.
     #
     #   Example:
     #   `arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456`
@@ -3463,7 +3479,7 @@ module Aws::RDS
     #
     #   This setting doesn't apply to RDS Custom DB instances.
     # @option options [Boolean] :disable_domain
-    #   Boolean. If present, removes the instance from the Active Directory
+    #   Specifies whether to remove the DB instance from the Active Directory
     #   domain.
     # @option options [Integer] :promotion_tier
     #   The order of priority in which an Aurora Replica is promoted to the
@@ -4164,17 +4180,16 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
     # @option options [String] :domain_iam_role_name
-    #   Specify the name of the IAM role to be used when making API calls to
-    #   the Directory Service.
+    #   The name of the IAM role to use when making API calls to the Directory
+    #   Service.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     # @option options [String] :domain_fqdn
-    #   Specifies the fully qualified domain name of an Active Directory
-    #   domain.
+    #   The fully qualified domain name (FQDN) of an Active Directory domain.
     #
     #   Constraints:
     #
-    #   * Cannot be greater than 64 characters.
+    #   * Can't be longer than 64 characters.
     #
     #   ^
     #
@@ -4186,17 +4201,17 @@ module Aws::RDS
     #
     #   * Must be in the distinguished name format.
     #
-    #   * Cannot be greater than 64 characters.
+    #   * Can't be longer than 64 characters.
     #
     #   Example:
     #   `OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain`
     # @option options [String] :domain_auth_secret_arn
-    #   The ARN for the Secrets Manager secret that contains the credentials
-    #   for the user performing the domain join.
+    #   The ARN for the Secrets Manager secret with the credentials for the
+    #   user joining the domain.
     #
     #   Constraints:
     #
-    #   * Cannot be greater than 64 characters.
+    #   * Can't be longer than 64 characters.
     #
     #   ^
     #

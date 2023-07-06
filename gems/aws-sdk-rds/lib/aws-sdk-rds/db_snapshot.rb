@@ -880,12 +880,11 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
     # @option options [String] :domain_fqdn
-    #   Specifies the fully qualified domain name of an Active Directory
-    #   domain.
+    #   The fully qualified domain name (FQDN) of an Active Directory domain.
     #
     #   Constraints:
     #
-    #   * Cannot be greater than 64 characters.
+    #   * Can't be longer than 64 characters.
     #
     #   ^
     #
@@ -897,13 +896,13 @@ module Aws::RDS
     #
     #   * Must be in the distinguished name format.
     #
-    #   * Cannot be greater than 64 characters.
+    #   * Can't be longer than 64 characters.
     #
     #   Example:
     #   `OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain`
     # @option options [String] :domain_auth_secret_arn
-    #   The ARN for the Secrets Manager secret that contains the credentials
-    #   for the user performing the domain join.
+    #   The ARN for the Secrets Manager secret with the credentials for the
+    #   user joining the domain.
     #
     #   Constraints:
     #
@@ -940,10 +939,10 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.CopyTags
     # @option options [String] :domain_iam_role_name
-    #   Specify the name of the IAM role to be used when making API calls to
-    #   the Directory Service.
+    #   The name of the IAM role to use when making API calls to the Directory
+    #   Service.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     # @option options [Boolean] :enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of Amazon Web
     #   Services Identity and Access Management (IAM) accounts to database

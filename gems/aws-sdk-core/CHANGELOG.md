@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+3.177.0 (2023-07-06)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - Add support for Request Compression.
+
 3.176.1 (2023-06-29)
 ------------------
 
