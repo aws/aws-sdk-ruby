@@ -56,13 +56,6 @@ variables and the shared configuration file.
         resolve_ignore_configured_endpoint_urls(cfg)
       end
 
-      # NOTE: with Endpoints 2.0, some of this logic is deprecated
-      # but because new old service gems may depend on new core versions
-      # we must preserve that behavior.
-      # Additional behavior controls the setting of the custom SDK::Endpoint
-      # parameter.
-      # When the `regional_endpoint` config is set to true - this indicates to
-      # Endpoints2.0 that a custom endpoint has NOT been configured by the user.
       option(:endpoint, doc_type: String, docstring: <<-DOCS) do |cfg|
 The client endpoint is normally constructed from the `:region`
 option. You should only configure an `:endpoint` when connecting
@@ -108,6 +101,13 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
           Aws::Util.str_2_bool(value&.downcase) || false
         end
 
+        # NOTE: with Endpoints 2.0, some of this logic is deprecated
+        # but because new old service gems may depend on new core versions
+        # we must preserve that behavior.
+        # Additional behavior controls the setting of the custom SDK::Endpoint
+        # parameter.
+        # When the `regional_endpoint` config is set to true - this indicates to
+        # Endpoints2.0 that a custom endpoint has NOT been configured by the user.
         def resolve_endpoint(cfg)
           endpoint = resolve_custom_config_endpoint(cfg)
           endpoint_prefix = cfg.api.metadata['endpointPrefix']
@@ -135,28 +135,28 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
         def env_service_endpoint(cfg)
           service_id = cfg.api.metadata['serviceId'] || cfg.api.metadata['endpointPrefix']
           env_service_id = service_id.gsub(" ", "_").upcase
-          if (endpoint = ENV["AWS_ENDPOINT_URL_#{env_service_id}"])
-            cfg.logger&.debug(
-              "Endpoint configured from ENV['AWS_ENDPOINT_URL_#{env_service_id}']: #{endpoint}\n")
-            return endpoint
-          end
+          return unless endpoint = ENV["AWS_ENDPOINT_URL_#{env_service_id}"]
+
+          cfg.logger&.debug(
+            "Endpoint configured from ENV['AWS_ENDPOINT_URL_#{env_service_id}']: #{endpoint}\n")
+          endpoint
         end
 
         def env_global_endpoint(cfg)
-          if (endpoint = ENV['AWS_ENDPOINT_URL'])
-            cfg.logger&.debug(
-              "Endpoint configured from ENV['AWS_ENDPOINT_URL']: #{endpoint}\n")
-            return endpoint
-          end
+          return unless endpoint = ENV['AWS_ENDPOINT_URL']
+
+          cfg.logger&.debug(
+            "Endpoint configured from ENV['AWS_ENDPOINT_URL']: #{endpoint}\n")
+          endpoint
         end
 
         def shared_config_endpoint(cfg)
           service_id = cfg.api.metadata['serviceId'] || cfg.api.metadata['endpointPrefix']
-          if (endpoint = Aws.shared_config.configured_endpoint(profile: cfg.profile, service_id: service_id))
-            cfg.logger&.debug(
-              "Endpoint configured from shared config(profile: #{cfg.profile}): #{endpoint}\n")
-            return endpoint
-          end
+          return unless endpoint = Aws.shared_config.configured_endpoint(profile: cfg.profile, service_id: service_id)
+
+          cfg.logger&.debug(
+            "Endpoint configured from shared config(profile: #{cfg.profile}): #{endpoint}\n")
+          endpoint
         end
 
         # check region is a valid RFC host label
