@@ -564,18 +564,16 @@ module Aws::EC2
     #   Capacity Reservation that has matching attributes (instance type,
     #   platform, Availability Zone).
     # @option options [Types::HibernationOptionsRequest] :hibernation_options
-    #   Indicates whether an instance is enabled for hibernation. This
-    #   parameter is valid only if the instance meets the [hibernation
-    #   prerequisites][1]. For more information, see [Hibernate your
-    #   instance][2] in the *Amazon EC2 User Guide*.
+    #   Indicates whether an instance is enabled for hibernation. For more
+    #   information, see [Hibernate your instance][1] in the *Amazon EC2 User
+    #   Guide*.
     #
     #   You can't enable hibernation and Amazon Web Services Nitro Enclaves
     #   on the same instance.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/hibernating-prerequisites.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
     # @option options [Array<Types::LicenseConfigurationRequest>] :license_specifications
     #   The license configurations.
     # @option options [Types::InstanceMetadataOptionsRequest] :metadata_options
@@ -587,9 +585,9 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
     # @option options [Types::EnclaveOptionsRequest] :enclave_options
     #   Indicates whether the instance is enabled for Amazon Web Services
-    #   Nitro Enclaves. For more information, see [What is Amazon Web Services
-    #   Nitro Enclaves?][1] in the *Amazon Web Services Nitro Enclaves User
-    #   Guide*.
+    #   Nitro Enclaves. For more information, see [ What is Amazon Web
+    #   Services Nitro Enclaves?][1] in the *Amazon Web Services Nitro
+    #   Enclaves User Guide*.
     #
     #   You can't enable Amazon Web Services Nitro Enclaves and hibernation
     #   on the same instance.

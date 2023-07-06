@@ -1458,7 +1458,7 @@ module Aws::QuickSight
     end
 
     # The source of the asset bundle zip file that contains the data that
-    # you want to import. The file must be in `QUICKSIGHT_JSON` format.
+    # you want to import.
     #
     # @!attribute [rw] body
     #   The bytes of the base64 encoded asset bundle import zip file. This
@@ -2845,20 +2845,6 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # The color configurations for a column.
-    #
-    # @!attribute [rw] custom_colors
-    #   A list of up to 50 custom colors.
-    #   @return [Array<Types::CustomColor>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ColorsConfiguration AWS API Documentation
-    #
-    class ColorsConfiguration < Struct.new(
-      :custom_colors)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # The general configuration of a column.
     #
     # @!attribute [rw] column
@@ -2873,17 +2859,12 @@ module Aws::QuickSight
     #   The role of the column.
     #   @return [String]
     #
-    # @!attribute [rw] colors_configuration
-    #   The color configurations of the column.
-    #   @return [Types::ColorsConfiguration]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ColumnConfiguration AWS API Documentation
     #
     class ColumnConfiguration < Struct.new(
       :column,
       :format_configuration,
-      :role,
-      :colors_configuration)
+      :role)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5681,31 +5662,6 @@ module Aws::QuickSight
       :url_template,
       :url_target)
       SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Determines the color that's applied to a particular data value in a
-    # column.
-    #
-    # @!attribute [rw] field_value
-    #   The data value that the color is applied to.
-    #   @return [String]
-    #
-    # @!attribute [rw] color
-    #   The color that is applied to the data value.
-    #   @return [String]
-    #
-    # @!attribute [rw] special_value
-    #   The value of a special data value.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CustomColor AWS API Documentation
-    #
-    class CustomColor < Struct.new(
-      :field_value,
-      :color,
-      :special_value)
-      SENSITIVE = [:field_value]
       include Aws::Structure
     end
 
@@ -9760,10 +9716,7 @@ module Aws::QuickSight
     #   @return [Boolean]
     #
     # @!attribute [rw] export_format
-    #   The format of the exported asset bundle. A `QUICKSIGHT_JSON`
-    #   formatted file can be used to make a `StartAssetBundleImportJob` API
-    #   call. A `CLOUDFORMATION_JSON` formatted file can be used in the
-    #   CloudFormation console and with the CloudFormation APIs.
+    #   The format of the export.
     #   @return [String]
     #
     # @!attribute [rw] cloud_formation_override_property_configuration
@@ -23875,29 +23828,6 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # Configures the properties of a chart's axes that are used by small
-    # multiples panels.
-    #
-    # @!attribute [rw] scale
-    #   Determines whether scale of the axes are shared or independent. The
-    #   default value is `SHARED`.
-    #   @return [String]
-    #
-    # @!attribute [rw] placement
-    #   Defines the placement of the axis. By default, axes are rendered
-    #   `OUTSIDE` of the panels. Axes with `INDEPENDENT` scale are rendered
-    #   `INSIDE` the panels.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SmallMultiplesAxisProperties AWS API Documentation
-    #
-    class SmallMultiplesAxisProperties < Struct.new(
-      :scale,
-      :placement)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Options that determine the layout and display options of a chart's
     # small multiples.
     #
@@ -23921,22 +23851,12 @@ module Aws::QuickSight
     #   Configures the display options for each small multiples panel.
     #   @return [Types::PanelConfiguration]
     #
-    # @!attribute [rw] x_axis
-    #   The properties of a small multiples X axis.
-    #   @return [Types::SmallMultiplesAxisProperties]
-    #
-    # @!attribute [rw] y_axis
-    #   The properties of a small multiples Y axis.
-    #   @return [Types::SmallMultiplesAxisProperties]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SmallMultiplesOptions AWS API Documentation
     #
     class SmallMultiplesOptions < Struct.new(
       :max_visible_rows,
       :max_visible_columns,
-      :panel_configuration,
-      :x_axis,
-      :y_axis)
+      :panel_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24158,7 +24078,7 @@ module Aws::QuickSight
     #
     # @!attribute [rw] asset_bundle_import_source
     #   The source of the asset bundle zip file that contains the data that
-    #   you want to import. The file must be in `QUICKSIGHT_JSON` format.
+    #   you want to import.
     #   @return [Types::AssetBundleImportSource]
     #
     # @!attribute [rw] override_parameters

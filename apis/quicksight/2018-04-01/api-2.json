@@ -2898,7 +2898,8 @@
       "type":"structure",
       "required":[
         "Column",
-        "SortDirection"
+        "SortDirection",
+        "AggregationFunction"
       ],
       "members":{
         "Column":{"shape":"ColumnIdentifier"},
@@ -4362,20 +4363,13 @@
       "max":3,
       "min":2
     },
-    "ColorsConfiguration":{
-      "type":"structure",
-      "members":{
-        "CustomColors":{"shape":"CustomColorsList"}
-      }
-    },
     "ColumnConfiguration":{
       "type":"structure",
       "required":["Column"],
       "members":{
         "Column":{"shape":"ColumnIdentifier"},
         "FormatConfiguration":{"shape":"FormatConfiguration"},
-        "Role":{"shape":"ColumnRole"},
-        "ColorsConfiguration":{"shape":"ColorsConfiguration"}
+        "Role":{"shape":"ColumnRole"}
       }
     },
     "ColumnConfigurationList":{
@@ -5712,20 +5706,6 @@
         "URLTemplate":{"shape":"URLOperationTemplate"},
         "URLTarget":{"shape":"URLTargetConfiguration"}
       }
-    },
-    "CustomColor":{
-      "type":"structure",
-      "required":["Color"],
-      "members":{
-        "FieldValue":{"shape":"FieldValue"},
-        "Color":{"shape":"HexColor"},
-        "SpecialValue":{"shape":"SpecialValue"}
-      }
-    },
-    "CustomColorsList":{
-      "type":"list",
-      "member":{"shape":"CustomColor"},
-      "max":50
     },
     "CustomContentConfiguration":{
       "type":"structure",
@@ -15772,27 +15752,6 @@
         "TitleOptions":{"shape":"LabelOptions"}
       }
     },
-    "SmallMultiplesAxisPlacement":{
-      "type":"string",
-      "enum":[
-        "OUTSIDE",
-        "INSIDE"
-      ]
-    },
-    "SmallMultiplesAxisProperties":{
-      "type":"structure",
-      "members":{
-        "Scale":{"shape":"SmallMultiplesAxisScale"},
-        "Placement":{"shape":"SmallMultiplesAxisPlacement"}
-      }
-    },
-    "SmallMultiplesAxisScale":{
-      "type":"string",
-      "enum":[
-        "SHARED",
-        "INDEPENDENT"
-      ]
-    },
     "SmallMultiplesDimensionFieldList":{
       "type":"list",
       "member":{"shape":"DimensionField"},
@@ -15803,9 +15762,7 @@
       "members":{
         "MaxVisibleRows":{"shape":"VisiblePanelRows"},
         "MaxVisibleColumns":{"shape":"VisiblePanelColumns"},
-        "PanelConfiguration":{"shape":"PanelConfiguration"},
-        "XAxis":{"shape":"SmallMultiplesAxisProperties"},
-        "YAxis":{"shape":"SmallMultiplesAxisProperties"}
+        "PanelConfiguration":{"shape":"PanelConfiguration"}
       }
     },
     "SnowflakeParameters":{
@@ -15847,14 +15804,6 @@
         "Host":{"shape":"Host"},
         "Port":{"shape":"Port"}
       }
-    },
-    "SpecialValue":{
-      "type":"string",
-      "enum":[
-        "EMPTY",
-        "NULL",
-        "OTHER"
-      ]
     },
     "SqlEndpointPath":{
       "type":"string",

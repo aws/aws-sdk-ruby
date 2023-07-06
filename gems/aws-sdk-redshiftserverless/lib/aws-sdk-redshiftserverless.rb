@@ -52,6 +52,6 @@ require_relative 'aws-sdk-redshiftserverless/customizations'
 # @!group service
 module Aws::RedshiftServerless
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.10.0'
 
 end

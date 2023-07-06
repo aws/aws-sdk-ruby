@@ -52,6 +52,6 @@ require_relative 'aws-sdk-amplifybackend/customizations'
 # @!group service
 module Aws::AmplifyBackend
 
-  GEM_VERSION = '1.24.0'
+  GEM_VERSION = '1.23.0'
 
 end

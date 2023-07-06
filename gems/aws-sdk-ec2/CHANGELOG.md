@@ -1,11 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.388.0 (2023-07-06)
-------------------
-
-* Feature - Add Nitro Enclaves support on DescribeInstanceTypes
-
 1.387.0 (2023-06-28)
 ------------------
 

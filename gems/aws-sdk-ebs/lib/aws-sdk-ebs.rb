@@ -52,6 +52,6 @@ require_relative 'aws-sdk-ebs/customizations'
 # @!group service
 module Aws::EBS
 
-  GEM_VERSION = '1.32.0'
+  GEM_VERSION = '1.31.0'
 
 end

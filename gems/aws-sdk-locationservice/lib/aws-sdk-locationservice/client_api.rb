@@ -463,7 +463,6 @@ module Aws::LocationService
     CalculateRouteMatrixRequest.add_member(:departure_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DepartureTime"))
     CalculateRouteMatrixRequest.add_member(:destination_positions, Shapes::ShapeRef.new(shape: CalculateRouteMatrixRequestDestinationPositionsList, required: true, location_name: "DestinationPositions"))
     CalculateRouteMatrixRequest.add_member(:distance_unit, Shapes::ShapeRef.new(shape: DistanceUnit, location_name: "DistanceUnit"))
-    CalculateRouteMatrixRequest.add_member(:key, Shapes::ShapeRef.new(shape: ApiKey, location: "querystring", location_name: "key"))
     CalculateRouteMatrixRequest.add_member(:travel_mode, Shapes::ShapeRef.new(shape: TravelMode, location_name: "TravelMode"))
     CalculateRouteMatrixRequest.add_member(:truck_mode_options, Shapes::ShapeRef.new(shape: CalculateRouteTruckModeOptions, location_name: "TruckModeOptions"))
     CalculateRouteMatrixRequest.struct_class = Types::CalculateRouteMatrixRequest
@@ -496,7 +495,6 @@ module Aws::LocationService
     CalculateRouteRequest.add_member(:destination_position, Shapes::ShapeRef.new(shape: Position, required: true, location_name: "DestinationPosition"))
     CalculateRouteRequest.add_member(:distance_unit, Shapes::ShapeRef.new(shape: DistanceUnit, location_name: "DistanceUnit"))
     CalculateRouteRequest.add_member(:include_leg_geometry, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeLegGeometry"))
-    CalculateRouteRequest.add_member(:key, Shapes::ShapeRef.new(shape: ApiKey, location: "querystring", location_name: "key"))
     CalculateRouteRequest.add_member(:travel_mode, Shapes::ShapeRef.new(shape: TravelMode, location_name: "TravelMode"))
     CalculateRouteRequest.add_member(:truck_mode_options, Shapes::ShapeRef.new(shape: CalculateRouteTruckModeOptions, location_name: "TruckModeOptions"))
     CalculateRouteRequest.add_member(:waypoint_positions, Shapes::ShapeRef.new(shape: CalculateRouteRequestWaypointPositionsList, location_name: "WaypointPositions"))
@@ -595,7 +593,6 @@ module Aws::LocationService
     CreateRouteCalculatorResponse.struct_class = Types::CreateRouteCalculatorResponse
 
     CreateTrackerRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
-    CreateTrackerRequest.add_member(:event_bridge_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "EventBridgeEnabled"))
     CreateTrackerRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     CreateTrackerRequest.add_member(:position_filtering, Shapes::ShapeRef.new(shape: PositionFiltering, location_name: "PositionFiltering"))
     CreateTrackerRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. If included, the only allowed value is RequestBasedUsage."}))
@@ -716,7 +713,6 @@ module Aws::LocationService
 
     DescribeTrackerResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreateTime"))
     DescribeTrackerResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, required: true, location_name: "Description"))
-    DescribeTrackerResponse.add_member(:event_bridge_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "EventBridgeEnabled"))
     DescribeTrackerResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     DescribeTrackerResponse.add_member(:position_filtering, Shapes::ShapeRef.new(shape: PositionFiltering, location_name: "PositionFiltering"))
     DescribeTrackerResponse.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. Always returns RequestBasedUsage."}))
@@ -843,7 +839,6 @@ module Aws::LocationService
     GetMapTileResponse[:payload_member] = GetMapTileResponse.member(:blob)
 
     GetPlaceRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "IndexName"))
-    GetPlaceRequest.add_member(:key, Shapes::ShapeRef.new(shape: ApiKey, location: "querystring", location_name: "key"))
     GetPlaceRequest.add_member(:language, Shapes::ShapeRef.new(shape: LanguageTag, location: "querystring", location_name: "language"))
     GetPlaceRequest.add_member(:place_id, Shapes::ShapeRef.new(shape: PlaceId, required: true, location: "uri", location_name: "PlaceId"))
     GetPlaceRequest.struct_class = Types::GetPlaceRequest
@@ -1125,7 +1120,6 @@ module Aws::LocationService
     SearchForTextResultList.member = Shapes::ShapeRef.new(shape: SearchForTextResult)
 
     SearchPlaceIndexForPositionRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "IndexName"))
-    SearchPlaceIndexForPositionRequest.add_member(:key, Shapes::ShapeRef.new(shape: ApiKey, location: "querystring", location_name: "key"))
     SearchPlaceIndexForPositionRequest.add_member(:language, Shapes::ShapeRef.new(shape: LanguageTag, location_name: "Language"))
     SearchPlaceIndexForPositionRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PlaceIndexSearchResultLimit, location_name: "MaxResults"))
     SearchPlaceIndexForPositionRequest.add_member(:position, Shapes::ShapeRef.new(shape: Position, required: true, location_name: "Position"))
@@ -1146,7 +1140,6 @@ module Aws::LocationService
     SearchPlaceIndexForSuggestionsRequest.add_member(:filter_categories, Shapes::ShapeRef.new(shape: FilterPlaceCategoryList, location_name: "FilterCategories"))
     SearchPlaceIndexForSuggestionsRequest.add_member(:filter_countries, Shapes::ShapeRef.new(shape: CountryCodeList, location_name: "FilterCountries"))
     SearchPlaceIndexForSuggestionsRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "IndexName"))
-    SearchPlaceIndexForSuggestionsRequest.add_member(:key, Shapes::ShapeRef.new(shape: ApiKey, location: "querystring", location_name: "key"))
     SearchPlaceIndexForSuggestionsRequest.add_member(:language, Shapes::ShapeRef.new(shape: LanguageTag, location_name: "Language"))
     SearchPlaceIndexForSuggestionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: SearchPlaceIndexForSuggestionsRequestMaxResultsInteger, location_name: "MaxResults"))
     SearchPlaceIndexForSuggestionsRequest.add_member(:text, Shapes::ShapeRef.new(shape: SearchPlaceIndexForSuggestionsRequestTextString, required: true, location_name: "Text"))
@@ -1171,7 +1164,6 @@ module Aws::LocationService
     SearchPlaceIndexForTextRequest.add_member(:filter_categories, Shapes::ShapeRef.new(shape: FilterPlaceCategoryList, location_name: "FilterCategories"))
     SearchPlaceIndexForTextRequest.add_member(:filter_countries, Shapes::ShapeRef.new(shape: CountryCodeList, location_name: "FilterCountries"))
     SearchPlaceIndexForTextRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "IndexName"))
-    SearchPlaceIndexForTextRequest.add_member(:key, Shapes::ShapeRef.new(shape: ApiKey, location: "querystring", location_name: "key"))
     SearchPlaceIndexForTextRequest.add_member(:language, Shapes::ShapeRef.new(shape: LanguageTag, location_name: "Language"))
     SearchPlaceIndexForTextRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PlaceIndexSearchResultLimit, location_name: "MaxResults"))
     SearchPlaceIndexForTextRequest.add_member(:text, Shapes::ShapeRef.new(shape: SearchPlaceIndexForTextRequestTextString, required: true, location_name: "Text"))
@@ -1295,7 +1287,6 @@ module Aws::LocationService
     UpdateRouteCalculatorResponse.struct_class = Types::UpdateRouteCalculatorResponse
 
     UpdateTrackerRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
-    UpdateTrackerRequest.add_member(:event_bridge_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "EventBridgeEnabled"))
     UpdateTrackerRequest.add_member(:position_filtering, Shapes::ShapeRef.new(shape: PositionFiltering, location_name: "PositionFiltering"))
     UpdateTrackerRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. If included, the only allowed value is RequestBasedUsage."}))
     UpdateTrackerRequest.add_member(:pricing_plan_data_source, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "PricingPlanDataSource", metadata: {"deprecatedMessage"=>"Deprecated. No longer allowed."}))

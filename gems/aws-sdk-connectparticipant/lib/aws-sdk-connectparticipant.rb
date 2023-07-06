@@ -52,6 +52,6 @@ require_relative 'aws-sdk-connectparticipant/customizations'
 # @!group service
 module Aws::ConnectParticipant
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.32.0'
 
 end

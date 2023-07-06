@@ -28,7 +28,6 @@ require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
-require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/sign.rb'
@@ -78,7 +77,6 @@ module Aws::QuickSight
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
-    add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::Sign)
@@ -192,10 +190,6 @@ module Aws::QuickSight
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
     #
-    #   @option options [Boolean] :disable_request_compression (false)
-    #     When set to 'true' the request body will not be compressed
-    #     for supported operations.
-    #
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
@@ -235,11 +229,6 @@ module Aws::QuickSight
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
-    #
-    #   @option options [Integer] :request_min_compression_size_bytes (10240)
-    #     The minimum size in bytes that triggers compression for request
-    #     bodies. The value must be non-negative integer value between 0
-    #     and 10485780 bytes inclusive.
     #
     #   @option options [Proc] :retry_backoff
     #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
@@ -9093,7 +9082,7 @@ module Aws::QuickSight
     # completed, a download URL that contains the exported assets is
     # returned. The URL is valid for 5 minutes and can be refreshed with a
     # `DescribeAssetBundleExportJob` API call. Each Amazon QuickSight
-    # account can run up to 5 export jobs concurrently.
+    # account can run up to 10 export jobs concurrently.
     #
     # The API caller must have the necessary permissions in their IAM role
     # to access each resource before the resources can be exported.
@@ -9233,7 +9222,7 @@ module Aws::QuickSight
     # naming prefix and specified configuration overrides. The assets that
     # are contained in the bundle file that you provide are used to create
     # or update a new or existing asset in your Amazon QuickSight account.
-    # Each Amazon QuickSight account can run up to 5 import jobs
+    # Each Amazon QuickSight account can run up to 10 import jobs
     # concurrently.
     #
     # The API caller must have the necessary `"create"`, `"describe"`, and
@@ -9250,7 +9239,7 @@ module Aws::QuickSight
     #
     # @option params [required, Types::AssetBundleImportSource] :asset_bundle_import_source
     #   The source of the asset bundle zip file that contains the data that
-    #   you want to import. The file must be in `QUICKSIGHT_JSON` format.
+    #   you want to import.
     #
     # @option params [Types::AssetBundleImportJobOverrideParameters] :override_parameters
     #   Optional overrides to be applied to the resource configuration before
@@ -12160,7 +12149,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

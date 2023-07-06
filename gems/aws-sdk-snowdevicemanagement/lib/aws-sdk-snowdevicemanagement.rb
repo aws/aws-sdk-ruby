@@ -52,6 +52,6 @@ require_relative 'aws-sdk-snowdevicemanagement/customizations'
 # @!group service
 module Aws::SnowDeviceManagement
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.12.0'
 
 end

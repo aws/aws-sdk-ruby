@@ -52,6 +52,6 @@ require_relative 'aws-sdk-codestar/customizations'
 # @!group service
 module Aws::CodeStar
 
-  GEM_VERSION = '1.44.0'
+  GEM_VERSION = '1.43.0'
 
 end

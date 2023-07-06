@@ -1,11 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.35.0 (2023-07-06)
-------------------
-
-* Feature - This release adds support for authenticating with Amazon Location Service's Places & Routes APIs with an API Key. Also, with this release developers can publish tracked device position updates to Amazon EventBridge.
-
 1.34.0 (2023-06-28)
 ------------------
 

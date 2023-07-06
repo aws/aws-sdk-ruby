@@ -27389,10 +27389,6 @@
         "SupportedBootModes":{
           "shape":"BootModeTypeList",
           "locationName":"supportedBootModes"
-        },
-        "NitroEnclavesSupport":{
-          "shape":"NitroEnclavesSupport",
-          "locationName":"nitroEnclavesSupport"
         }
       }
     },
@@ -33520,13 +33516,6 @@
       }
     },
     "NextToken":{"type":"string"},
-    "NitroEnclavesSupport":{
-      "type":"string",
-      "enum":[
-        "unsupported",
-        "supported"
-      ]
-    },
     "OccurrenceDayRequestSet":{
       "type":"list",
       "member":{
@@ -34238,7 +34227,7 @@
     },
     "PlacementGroupArn":{
       "type":"string",
-      "pattern":"^arn:aws([a-z-]+)?:ec2:[a-z\\d-]+:\\d{12}:placement-group/^.{1,255}$"
+      "pattern":"^arn:aws([a-z-]+)?:ec2:[a-z\\d-]+:\\d{12}:placement-group/([^\\s].+[^\\s]){1,255}$"
     },
     "PlacementGroupId":{"type":"string"},
     "PlacementGroupIdStringList":{
@@ -40633,7 +40622,7 @@
       "required":["ClientVpnEndpointId"],
       "members":{
         "ClientVpnEndpointId":{"shape":"ClientVpnEndpointId"},
-        "ConnectionId":{"shape":"String"},
+        "ConnectionId":{"shape":"VpnConnectionId"},
         "Username":{"shape":"String"},
         "DryRun":{"shape":"Boolean"}
       }

@@ -28,7 +28,6 @@ require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
-require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/sign.rb'
@@ -78,7 +77,6 @@ module Aws::LocationService
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
-    add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::Sign)
@@ -192,10 +190,6 @@ module Aws::LocationService
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
     #
-    #   @option options [Boolean] :disable_request_compression (false)
-    #     When set to 'true' the request body will not be compressed
-    #     for supported operations.
-    #
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
@@ -235,11 +229,6 @@ module Aws::LocationService
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
-    #
-    #   @option options [Integer] :request_min_compression_size_bytes (10240)
-    #     The minimum size in bytes that triggers compression for request
-    #     bodies. The value must be non-negative integer value between 0
-    #     and 10485780 bytes inclusive.
     #
     #   @option options [Proc] :retry_backoff
     #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
@@ -901,13 +890,6 @@ module Aws::LocationService
     #
     #   Valid Values: `false` \| `true`
     #
-    # @option params [String] :key
-    #   The optional [API key][1] to authorize the request.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
-    #
     # @option params [String] :travel_mode
     #   Specifies the mode of transport when calculating a route. Used in
     #   estimating the speed of travel and road compatibility. You can choose
@@ -993,7 +975,6 @@ module Aws::LocationService
     #     destination_position: [1.0], # required
     #     distance_unit: "Kilometers", # accepts Kilometers, Miles
     #     include_leg_geometry: false,
-    #     key: "ApiKey",
     #     travel_mode: "Car", # accepts Car, Truck, Walking, Bicycle, Motorcycle
     #     truck_mode_options: {
     #       avoid_ferries: false,
@@ -1191,13 +1172,6 @@ module Aws::LocationService
     #
     #   Default Value: `Kilometers`
     #
-    # @option params [String] :key
-    #   The optional [API key][1] to authorize the request.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
-    #
     # @option params [String] :travel_mode
     #   Specifies the mode of transport when calculating a route. Used in
     #   estimating the speed of travel and road compatibility.
@@ -1256,7 +1230,6 @@ module Aws::LocationService
     #       [1.0],
     #     ],
     #     distance_unit: "Kilometers", # accepts Kilometers, Miles
-    #     key: "ApiKey",
     #     travel_mode: "Car", # accepts Car, Truck, Walking, Bicycle, Motorcycle
     #     truck_mode_options: {
     #       avoid_ferries: false,
@@ -1391,12 +1364,12 @@ module Aws::LocationService
     end
 
     # Creates an API key resource in your Amazon Web Services account, which
-    # lets you grant actions for Amazon Location resources to the API key
-    # bearer.
+    # lets you grant `geo:GetMap*` actions for Amazon Location Map resources
+    # to the API key bearer.
     #
-    # <note markdown="1"> For more information, see [Using API keys][1].
-    #
-    #  </note>
+    # The API keys feature is in preview. We may add, change, or remove
+    # features before announcing general availability. For more information,
+    # see [Using API keys][1].
     #
     #
     #
@@ -1874,16 +1847,6 @@ module Aws::LocationService
     # @option params [String] :description
     #   An optional description for the tracker resource.
     #
-    # @option params [Boolean] :event_bridge_enabled
-    #   Whether to enable position `UPDATE` events from this tracker to be
-    #   sent to EventBridge.
-    #
-    #   <note markdown="1"> You do not need enable this feature to get `ENTER` and `EXIT` events
-    #   for geofences with this tracker. Those events are always sent to
-    #   EventBridge.
-    #
-    #    </note>
-    #
     # @option params [String] :kms_key_id
     #   A key identifier for an [Amazon Web Services KMS customer managed
     #   key][1]. Enter a key ID, key ARN, alias name, or alias ARN.
@@ -1974,7 +1937,6 @@ module Aws::LocationService
     #
     #   resp = client.create_tracker({
     #     description: "ResourceDescription",
-    #     event_bridge_enabled: false,
     #     kms_key_id: "KmsKeyId",
     #     position_filtering: "TimeBased", # accepts TimeBased, DistanceBased, AccuracyBased
     #     pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
@@ -2206,6 +2168,14 @@ module Aws::LocationService
 
     # Retrieves the API key resource details.
     #
+    # The API keys feature is in preview. We may add, change, or remove
+    # features before announcing general availability. For more information,
+    # see [Using API keys][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #
     # @option params [required, String] :key_name
     #   The name of the API key resource.
     #
@@ -2397,7 +2367,6 @@ module Aws::LocationService
     #
     #   * {Types::DescribeTrackerResponse#create_time #create_time} => Time
     #   * {Types::DescribeTrackerResponse#description #description} => String
-    #   * {Types::DescribeTrackerResponse#event_bridge_enabled #event_bridge_enabled} => Boolean
     #   * {Types::DescribeTrackerResponse#kms_key_id #kms_key_id} => String
     #   * {Types::DescribeTrackerResponse#position_filtering #position_filtering} => String
     #   * {Types::DescribeTrackerResponse#pricing_plan #pricing_plan} => String
@@ -2417,7 +2386,6 @@ module Aws::LocationService
     #
     #   resp.create_time #=> Time
     #   resp.description #=> String
-    #   resp.event_bridge_enabled #=> Boolean
     #   resp.kms_key_id #=> String
     #   resp.position_filtering #=> String, one of "TimeBased", "DistanceBased", "AccuracyBased"
     #   resp.pricing_plan #=> String, one of "RequestBasedUsage", "MobileAssetTracking", "MobileAssetManagement"
@@ -2971,13 +2939,6 @@ module Aws::LocationService
     #   The name of the place index resource that you want to use for the
     #   search.
     #
-    # @option params [String] :key
-    #   The optional [API key][1] to authorize the request.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
-    #
     # @option params [String] :language
     #   The preferred language used to return results. The value must be a
     #   valid [BCP 47][1] language tag, for example, `en` for English.
@@ -3013,7 +2974,6 @@ module Aws::LocationService
     #
     #   resp = client.get_place({
     #     index_name: "ResourceName", # required
-    #     key: "ApiKey",
     #     language: "LanguageTag",
     #     place_id: "PlaceId", # required
     #   })
@@ -3210,6 +3170,14 @@ module Aws::LocationService
     end
 
     # Lists API key resources in your Amazon Web Services account.
+    #
+    # The API keys feature is in preview. We may add, change, or remove
+    # features before announcing general availability. For more information,
+    # see [Using API keys][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
     #
     # @option params [Types::ApiKeyFilter] :filter
     #   Optionally filter the list to only `Active` or `Expired` API keys.
@@ -3555,11 +3523,8 @@ module Aws::LocationService
     #   An identifier for the geofence. For example, `ExampleGeofence-1`.
     #
     # @option params [Hash<String,String>] :geofence_properties
-    #   Associates one of more properties with the geofence. A property is a
-    #   key-value pair stored with the geofence and added to any geofence
-    #   event triggered with that geofence.
-    #
-    #   Format: `"key" : "value"`
+    #   Specifies additional user-defined properties to store with the
+    #   Geofence. An array of key-value pairs.
     #
     # @option params [required, Types::GeofenceGeometry] :geometry
     #   Contains the details to specify the position of the geofence. Can be
@@ -3623,13 +3588,6 @@ module Aws::LocationService
     # @option params [required, String] :index_name
     #   The name of the place index resource you want to use for the search.
     #
-    # @option params [String] :key
-    #   The optional [API key][1] to authorize the request.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
-    #
     # @option params [String] :language
     #   The preferred language used to return results. The value must be a
     #   valid [BCP 47][1] language tag, for example, `en` for English.
@@ -3679,7 +3637,6 @@ module Aws::LocationService
     #
     #   resp = client.search_place_index_for_position({
     #     index_name: "ResourceName", # required
-    #     key: "ApiKey",
     #     language: "LanguageTag",
     #     max_results: 1,
     #     position: [1.0], # required
@@ -3806,13 +3763,6 @@ module Aws::LocationService
     # @option params [required, String] :index_name
     #   The name of the place index resource you want to use for the search.
     #
-    # @option params [String] :key
-    #   The optional [API key][1] to authorize the request.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
-    #
     # @option params [String] :language
     #   The preferred language used to return results. The value must be a
     #   valid [BCP 47][1] language tag, for example, `en` for English.
@@ -3858,7 +3808,6 @@ module Aws::LocationService
     #     filter_categories: ["PlaceCategory"],
     #     filter_countries: ["CountryCode"],
     #     index_name: "ResourceName", # required
-    #     key: "ApiKey",
     #     language: "LanguageTag",
     #     max_results: 1,
     #     text: "SearchPlaceIndexForSuggestionsRequestTextString", # required
@@ -3976,13 +3925,6 @@ module Aws::LocationService
     # @option params [required, String] :index_name
     #   The name of the place index resource you want to use for the search.
     #
-    # @option params [String] :key
-    #   The optional [API key][1] to authorize the request.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
-    #
     # @option params [String] :language
     #   The preferred language used to return results. The value must be a
     #   valid [BCP 47][1] language tag, for example, `en` for English.
@@ -4029,7 +3971,6 @@ module Aws::LocationService
     #     filter_categories: ["PlaceCategory"],
     #     filter_countries: ["CountryCode"],
     #     index_name: "ResourceName", # required
-    #     key: "ApiKey",
     #     language: "LanguageTag",
     #     max_results: 1,
     #     text: "SearchPlaceIndexForTextRequestTextString", # required
@@ -4231,6 +4172,14 @@ module Aws::LocationService
     end
 
     # Updates the specified properties of a given API key resource.
+    #
+    # The API keys feature is in preview. We may add, change, or remove
+    # features before announcing general availability. For more information,
+    # see [Using API keys][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
     #
     # @option params [String] :description
     #   Updates the description for the API key resource.
@@ -4442,16 +4391,6 @@ module Aws::LocationService
     # @option params [String] :description
     #   Updates the description for the tracker resource.
     #
-    # @option params [Boolean] :event_bridge_enabled
-    #   Whether to enable position `UPDATE` events from this tracker to be
-    #   sent to EventBridge.
-    #
-    #   <note markdown="1"> You do not need enable this feature to get `ENTER` and `EXIT` events
-    #   for geofences with this tracker. Those events are always sent to
-    #   EventBridge.
-    #
-    #    </note>
-    #
     # @option params [String] :position_filtering
     #   Updates the position filtering for the tracker resource.
     #
@@ -4500,7 +4439,6 @@ module Aws::LocationService
     #
     #   resp = client.update_tracker({
     #     description: "ResourceDescription",
-    #     event_bridge_enabled: false,
     #     position_filtering: "TimeBased", # accepts TimeBased, DistanceBased, AccuracyBased
     #     pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
     #     pricing_plan_data_source: "String",
@@ -4535,7 +4473,7 @@ module Aws::LocationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-locationservice'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -52,6 +52,6 @@ require_relative 'aws-sdk-dax/customizations'
 # @!group service
 module Aws::DAX
 
-  GEM_VERSION = '1.45.0'
+  GEM_VERSION = '1.44.0'
 
 end

@@ -3,38 +3,32 @@
     "GetOutpostInstanceTypes": {
       "input_token": "NextToken",
       "output_token": "NextToken",
-      "limit_key": "MaxResults",
-      "result_key": "InstanceTypes"
+      "limit_key": "MaxResults"
     },
     "ListAssets": {
       "input_token": "NextToken",
       "output_token": "NextToken",
-      "limit_key": "MaxResults",
-      "result_key": "Assets"
+      "limit_key": "MaxResults"
     },
     "ListCatalogItems": {
       "input_token": "NextToken",
       "output_token": "NextToken",
-      "limit_key": "MaxResults",
-      "result_key": "CatalogItems"
+      "limit_key": "MaxResults"
     },
     "ListOrders": {
       "input_token": "NextToken",
       "output_token": "NextToken",
-      "limit_key": "MaxResults",
-      "result_key": "Orders"
+      "limit_key": "MaxResults"
     },
     "ListOutposts": {
       "input_token": "NextToken",
       "output_token": "NextToken",
-      "limit_key": "MaxResults",
-      "result_key": "Outposts"
+      "limit_key": "MaxResults"
     },
     "ListSites": {
       "input_token": "NextToken",
       "output_token": "NextToken",
-      "limit_key": "MaxResults",
-      "result_key": "Sites"
+      "limit_key": "MaxResults"
     }
   }
 }
