@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Allow Object multipart copy API to work when requiring a checksum algorithm.
+* Feature - Allow Object multipart copy API to optionally copy parts as they exist on the source object if it has parts, instead of generating new part ranges, when specifying `use_source_parts: true`.
+
 1.127.0 (2023-06-28)
 ------------------
 
@@ -26,7 +29,7 @@ Unreleased Changes
 1.123.2 (2023-06-12)
 ------------------
 
-* Issue - Fix issue when decrypting noncurrent versions of objects when using client side encryption (#2866). 
+* Issue - Fix issue when decrypting noncurrent versions of objects when using client side encryption (#2866).
 
 1.123.1 (2023-06-02)
 ------------------
