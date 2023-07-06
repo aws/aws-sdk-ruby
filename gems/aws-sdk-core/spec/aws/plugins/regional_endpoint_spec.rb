@@ -94,10 +94,10 @@ module Aws
           expect(client.config.regional_endpoint).to be_truthy
         end
 
-        context 'ENV[AWS_IGNORE_CONFIGURED_ENDPOINT_URLS] set' do
+        context 'ENV["AWS_IGNORE_CONFIGURED_ENDPOINT_URLS"] set' do
           before { ENV['AWS_IGNORE_CONFIGURED_ENDPOINT_URLS'] = 'True' }
 
-          it 'ignores ENV[AWS_ENDPOINT_URL]' do
+          it 'ignores ENV["AWS_ENDPOINT_URL"]' do
             ENV['AWS_ENDPOINT_URL'] = 'custom-env-url'
             expect(client_class.new(region: region).config.endpoint.to_s)
               .not_to eq('custom-env-url')
@@ -121,7 +121,7 @@ module Aws
               .to receive(:ignore_configured_endpoint_urls).and_return('true')
           end
 
-          it 'ignores ENV[AWS_ENDPOINT_URL]' do
+          it 'ignores ENV["AWS_ENDPOINT_URL"]' do
             ENV['AWS_ENDPOINT_URL'] = 'custom-env-url'
             expect(client_class.new(region: region).config.endpoint.to_s)
               .not_to eq('custom-env-url')
@@ -147,7 +147,7 @@ module Aws
             }
           end
 
-          it 'ignores ENV[AWS_ENDPOINT_URL]' do
+          it 'ignores ENV["AWS_ENDPOINT_URL"]' do
             ENV['AWS_ENDPOINT_URL'] = 'custom-env-url'
             expect(client_class.new(cfg).config.endpoint.to_s)
               .not_to eq('custom-env-url')
@@ -158,7 +158,7 @@ module Aws
             client_class.new(cfg)
           end
 
-          it 'ignores ENV[AWS_ENDPOINT_URL] even when Shared config ignore_configured_endpoint_urls set' do
+          it 'ignores ENV["AWS_ENDPOINT_URL"] even when Shared config ignore_configured_endpoint_urls set' do
             allow_any_instance_of(Aws::SharedConfig)
               .to receive(:ignore_configured_endpoint_urls).and_return('true')
             ENV['AWS_ENDPOINT_URL'] = 'custom-env-url'
@@ -169,22 +169,22 @@ module Aws
 
         it 'uses configured_endpoint from shared config' do
           allow(Aws.shared_config).to receive(:configured_endpoint)
-                                        .and_return('https://shared-config')
+            .and_return('https://shared-config')
           expect(client_class.new(region: region).config.endpoint.to_s)
             .to eq('https://shared-config')
         end
 
-        it 'uses ENV[AWS_ENDPOINT_URL] over shared config' do
+        it 'uses ENV["AWS_ENDPOINT_URL"] over shared config' do
           allow(Aws.shared_config).to receive(:configured_endpoint)
-                                        .and_return('https://shared-config')
+            .and_return('https://shared-config')
           ENV['AWS_ENDPOINT_URL'] = 'https://global-env'
           expect(client_class.new(region: region).config.endpoint.to_s)
             .to eq('https://global-env')
         end
 
-        it 'uses service specific ENV over ENV[AWS_ENDPOINT_URL]' do
+        it 'uses service specific ENV over ENV["AWS_ENDPOINT_URL"]' do
           allow(Aws.shared_config).to receive(:configured_endpoint)
-                                        .and_return('https://shared-config')
+            .and_return('https://shared-config')
           ENV['AWS_ENDPOINT_URL'] = 'https://global-env'
           ENV['AWS_ENDPOINT_URL_SVC'] = 'https://service-env'
           expect(client_class.new(region: region).config.endpoint.to_s)
@@ -193,7 +193,7 @@ module Aws
 
         it 'uses client configured endpoint over all other configuration' do
           allow(Aws.shared_config).to receive(:configured_endpoint)
-                                        .and_return('https://shared-config')
+            .and_return('https://shared-config')
           ENV['AWS_ENDPOINT_URL'] = 'https://global-env'
           ENV['AWS_ENDPOINT_URL_SVC'] = 'https://service-env'
           expect(client_class.new(

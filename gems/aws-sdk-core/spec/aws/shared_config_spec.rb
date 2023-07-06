@@ -357,16 +357,17 @@ module Aws
           config_enabled: true,
         )
       end
+
       it 'resolves configured_endpoint from global urls' do
         expect(config.configured_endpoint(profile: 'global_endpoint_url'))
-          .to eq('https://play.min.io:9000')
+          .to eq('https://example.com:9000')
       end
 
       it 'resolves service specific endpoints over global urls' do
         expect(config.configured_endpoint(
           profile: 'service_specific_and_global_endpoint_url',
           service_id: 's3'))
-          .to eq('https://play.min.io:9000')
+          .to eq('https://example.com:9000')
 
         expect(config.configured_endpoint(
           profile: 'service_specific_and_global_endpoint_url',

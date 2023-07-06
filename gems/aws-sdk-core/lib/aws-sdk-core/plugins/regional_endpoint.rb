@@ -47,10 +47,14 @@ is set to `true`.
       # Legacy endpoints must continue to be generated at client time.
       option(:regional_endpoint, false)
 
-      option(:ignore_configured_endpoint_urls, default: nil, doc_type: 'Boolean', docstring: <<-DOCS)
+      option(:ignore_configured_endpoint_urls,
+        doc_type: 'Boolean',
+        docstring: <<-DOCS) do |cfg|
 Setting to true disables use of endpoint URLs provided via environment 
 variables and the shared configuration file.
-DOCS
+        DOCS
+        resolve_ignore_configured_endpoint_urls(cfg)
+      end
 
       # NOTE: with Endpoints 2.0, some of this logic is deprecated
       # but because new old service gems may depend on new core versions
@@ -64,48 +68,7 @@ The client endpoint is normally constructed from the `:region`
 option. You should only configure an `:endpoint` when connecting
 to test or custom endpoints. This should be a valid HTTP(S) URI.
         DOCS
-
-        config_endpoint = resolve_custom_config_endpoint(cfg)
-
-        endpoint_prefix = cfg.api.metadata['endpointPrefix']
-        if cfg.region && endpoint_prefix
-          if cfg.respond_to?(:sts_regional_endpoints)
-            sts_regional = cfg.sts_regional_endpoints
-          end
-
-          # check region is a valid RFC host label
-          unless Seahorse::Util.host_label?(cfg.region)
-            raise Errors::InvalidRegionError
-          end
-
-          # handle deprecated pseudo-regions
-          region = cfg.region
-          new_region = region.gsub('fips-', '').gsub('-fips', '')
-          if region != new_region
-            warn("Legacy region #{region} was transformed to #{new_region}."\
-                 '`use_fips_endpoint` config was set to true.')
-            cfg.override_config(:use_fips_endpoint, true)
-            cfg.override_config(:region, new_region)
-          end
-
-          unless config_endpoint
-            # set regional_endpoint flag - this indicates to Endpoints 2.0 that a custom endpoint has NOT been configured by the user
-            cfg.override_config(:regional_endpoint, true)
-
-            # set a default endpoint in config
-            config_endpoint = Aws::Partitions::EndpointProvider.resolve(
-              cfg.region,
-              endpoint_prefix,
-              sts_regional,
-              {
-                dualstack: cfg.use_dualstack_endpoint,
-                fips: cfg.use_fips_endpoint
-              }
-            )
-          end
-        end
-
-        config_endpoint
+        resolve_endpoint(cfg)
       end
 
       def after_initialize(client)
@@ -139,30 +102,96 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
           Aws::Util.str_2_bool(value) || false
         end
 
+        def resolve_ignore_configured_endpoint_urls(cfg)
+          value = ENV['AWS_IGNORE_CONFIGURED_ENDPOINT_URLS']
+          value ||= Aws.shared_config.ignore_configured_endpoint_urls(profile: cfg.profile)
+          Aws::Util.str_2_bool(value&.downcase) || false
+        end
+
+        def resolve_endpoint(cfg)
+          endpoint = resolve_custom_config_endpoint(cfg)
+          endpoint_prefix = cfg.api.metadata['endpointPrefix']
+
+          return endpoint unless endpoint.nil? && cfg.region && endpoint_prefix
+
+          validate_region!(cfg.region)
+          handle_legacy_pseudo_regions(cfg)
+
+          # set regional_endpoint flag - this indicates to Endpoints 2.0
+          # that a custom endpoint has NOT been configured by the user
+          cfg.override_config(:regional_endpoint, true)
+
+          resolve_legacy_endpoint(cfg)
+        end
+
         # get a custom configured endpoint from ENV or configuration
         def resolve_custom_config_endpoint(cfg)
-          config_endpoint = nil
-          ignore_configured_endpoints = cfg.ignore_configured_endpoint_urls
-          if ignore_configured_endpoints.nil?
-            ignore_configured_endpoints = ENV['AWS_IGNORE_CONFIGURED_ENDPOINT_URLS']
-            ignore_configured_endpoints ||= Aws.shared_config.ignore_configured_endpoint_urls(profile: cfg.profile)
-            ignore_configured_endpoints = Aws::Util.str_2_bool(ignore_configured_endpoints&.downcase) || false
+          return if cfg.ignore_configured_endpoint_urls
+
+
+          env_service_endpoint(cfg) || env_global_endpoint(cfg) || shared_config_endpoint(cfg)
+        end
+
+        def env_service_endpoint(cfg)
+          service_id = cfg.api.metadata['serviceId'] || cfg.api.metadata['endpointPrefix']
+          env_service_id = service_id.gsub(" ", "_").upcase
+          if (endpoint = ENV["AWS_ENDPOINT_URL_#{env_service_id}"])
+            cfg.logger&.debug(
+              "Endpoint configured from ENV['AWS_ENDPOINT_URL_#{env_service_id}']: #{endpoint}\n")
+            return endpoint
           end
-          unless ignore_configured_endpoints
-            service_id = cfg.api.metadata['serviceId'] || cfg.api.metadata['endpointPrefix']
-            env_service_id = service_id.gsub(" ", "_").upcase
-            if (config_endpoint = ENV["AWS_ENDPOINT_URL_#{env_service_id}"])
-              cfg.logger&.debug(
-                "Endpoint configured from ENV['AWS_ENDPOINT_URL_#{env_service_id}']: #{config_endpoint}\n")
-            elsif (config_endpoint = ENV['AWS_ENDPOINT_URL'])
-              cfg.logger&.debug(
-                "Endpoint configured from ENV['AWS_ENDPOINT_URL']: #{config_endpoint}\n")
-            elsif (config_endpoint = Aws.shared_config.configured_endpoint(profile: cfg.profile, service_id: service_id))
-              cfg.logger&.debug(
-                "Endpoint configured from shared config(profile: #{cfg.profile}): #{config_endpoint}\n")
-            end
+        end
+
+        def env_global_endpoint(cfg)
+          if (endpoint = ENV['AWS_ENDPOINT_URL'])
+            cfg.logger&.debug(
+              "Endpoint configured from ENV['AWS_ENDPOINT_URL']: #{endpoint}\n")
+            return endpoint
           end
-          return config_endpoint
+        end
+
+        def shared_config_endpoint(cfg)
+          service_id = cfg.api.metadata['serviceId'] || cfg.api.metadata['endpointPrefix']
+          if (endpoint = Aws.shared_config.configured_endpoint(profile: cfg.profile, service_id: service_id))
+            cfg.logger&.debug(
+              "Endpoint configured from shared config(profile: #{cfg.profile}): #{endpoint}\n")
+            return endpoint
+          end
+        end
+
+        # check region is a valid RFC host label
+        def validate_region!(region)
+          unless Seahorse::Util.host_label?(region)
+            raise Errors::InvalidRegionError
+          end
+        end
+
+        def handle_legacy_pseudo_regions(cfg)
+          region = cfg.region
+          new_region = region.gsub('fips-', '').gsub('-fips', '')
+          if region != new_region
+            warn("Legacy region #{region} was transformed to #{new_region}."\
+                 '`use_fips_endpoint` config was set to true.')
+            cfg.override_config(:use_fips_endpoint, true)
+            cfg.override_config(:region, new_region)
+          end
+        end
+        # set a default endpoint in config using legacy (endpoints.json) resolver
+        def resolve_legacy_endpoint(cfg)
+          endpoint_prefix = cfg.api.metadata['endpointPrefix']
+          if cfg.respond_to?(:sts_regional_endpoints)
+            sts_regional = cfg.sts_regional_endpoints
+          end
+
+          Aws::Partitions::EndpointProvider.resolve(
+            cfg.region,
+            endpoint_prefix,
+            sts_regional,
+            {
+              dualstack: cfg.use_dualstack_endpoint,
+              fips: cfg.use_fips_endpoint
+            }
+          )
         end
       end
     end
