@@ -120,9 +120,9 @@ module Aws
         parts
       end
 
-      def byte_range(offset, default_part_size, size)
-        if offset + default_part_size < size
-          "bytes=#{offset}-#{offset + default_part_size - 1}"
+      def byte_range(offset, part_size, size)
+        if offset + part_size < size
+          "bytes=#{offset}-#{offset + part_size - 1}"
         else
           "bytes=#{offset}-#{size - 1}"
         end
