@@ -51,6 +51,13 @@ module {{module_name}}
           {{/http_checksum}}
         }
         {{/http_checksum}}
+        {{#request_compression}}
+        o.request_compression = {
+          {{#request_compression}}
+          {{{key}}} => {{{value}}},
+          {{/request_compression}}
+        }
+        {{/request_compression}}
         {{#deprecated}}
         o.deprecated = true
         {{/deprecated}}

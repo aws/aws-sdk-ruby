@@ -204,12 +204,18 @@ module AwsSdkCodeGenerator
             if operation.key?('httpChecksum')
               operation['httpChecksum']['requestAlgorithmMember'] = underscore(operation['httpChecksum']['requestAlgorithmMember']) if operation['httpChecksum']['requestAlgorithmMember']
               operation['httpChecksum']['requestValidationModeMember'] = underscore(operation['httpChecksum']['requestValidationModeMember']) if operation['httpChecksum']['requestValidationModeMember']
-
               o.http_checksum = operation['httpChecksum'].inject([]) do |a, (k, v)|
                 a << { key: k.inspect, value: v.inspect }
                 a
               end
             end
+
+            if operation.key?('requestCompression')
+              o.request_compression = operation['requestCompression'].each_with_object([]) do | (k,v) , arr|
+                arr << { key: k.inspect, value: v.inspect }
+              end
+            end
+
             %w(input output).each do |key|
               if operation[key]
                 o.shape_references << "o.#{key} = #{operation_ref(operation[key])}"
@@ -550,6 +556,9 @@ module AwsSdkCodeGenerator
 
         # @return [Hash]
         attr_accessor :http_checksum
+
+        # @return [Hash]
+        attr_accessor :request_compression
 
         # @return [Array<String>]
         attr_accessor :shape_references

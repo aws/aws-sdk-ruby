@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add support for Request Compression.
+
 3.176.1 (2023-06-29)
 ------------------
 
