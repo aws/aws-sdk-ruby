@@ -123,11 +123,15 @@ module Aws
       end
 
       def calculate_part_size(part_number, default_part_size, options)
-        if @use_source_parts && source_metadata(options.merge({ part_number: 1 }))[:parts_count]
+        if @use_source_parts && source_has_parts(options)
           source_metadata(options.merge({ part_number: part_number }))[:content_length]
         else
           default_part_size
         end
+      end
+
+      def source_has_parts(options)
+        @source_has_parts ||= source_metadata(options.merge({ part_number: 1 }))[:parts_count]
       end
 
       def source_metadata(options)
