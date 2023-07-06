@@ -53,6 +53,6 @@ require_relative 'aws-sdk-signer/customizations'
 # @!group service
 module Aws::Signer
 
-  GEM_VERSION = '1.44.0'
+  GEM_VERSION = '1.45.0'
 
 end

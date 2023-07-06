@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2023-07-06)
+------------------
+
+* Feature - This release includes below three changes: small multiples axes improvement, field based coloring, removed required trait from Aggregation function for TopBottomFilter.
+
 1.84.0 (2023-06-28)
 ------------------
 

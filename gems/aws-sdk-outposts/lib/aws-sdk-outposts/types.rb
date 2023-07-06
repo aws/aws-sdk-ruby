@@ -775,7 +775,7 @@ module Aws::Outposts
     #   @return [String]
     #
     # @!attribute [rw] previous_order_id
-    #   The ID of the previous order.
+    #   The ID of the previous order item.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/LineItem AWS API Documentation
@@ -1155,7 +1155,7 @@ module Aws::Outposts
     #   @return [String]
     #
     # @!attribute [rw] order_type
-    #   The type of order.
+    #   Type of order.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/Order AWS API Documentation
