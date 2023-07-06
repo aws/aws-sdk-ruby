@@ -34764,12 +34764,12 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/hibernating-prerequisites.html
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
     #
     # @!attribute [rw] configured
-    #   If this parameter is set to `true`, your instance is enabled for
-    #   hibernation; otherwise, it is not enabled for hibernation.
+    #   If `true`, your instance is enabled for hibernation; otherwise, it
+    #   is not enabled for hibernation.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HibernationOptions AWS API Documentation
@@ -34787,12 +34787,11 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/hibernating-prerequisites.html
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
     #
     # @!attribute [rw] configured
-    #   If you set this parameter to `true`, your instance is enabled for
-    #   hibernation.
+    #   Set to `true` to enable your instance for hibernation.
     #
     #   Default: `false`
     #   @return [Boolean]
@@ -39455,6 +39454,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] nitro_enclaves_support
+    #   Indicates whether Nitro Enclaves is supported.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceTypeInfo AWS API Documentation
     #
     class InstanceTypeInfo < Struct.new(
@@ -39481,7 +39484,8 @@ module Aws::EC2
       :burstable_performance_supported,
       :dedicated_hosts_supported,
       :auto_recovery_supported,
-      :supported_boot_modes)
+      :supported_boot_modes,
+      :nitro_enclaves_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -55598,16 +55602,18 @@ module Aws::EC2
     #   @return [Types::CapacityReservationSpecification]
     #
     # @!attribute [rw] hibernation_options
-    #   Indicates whether an instance is enabled for hibernation. For more
-    #   information, see [Hibernate your instance][1] in the *Amazon EC2
-    #   User Guide*.
+    #   Indicates whether an instance is enabled for hibernation. This
+    #   parameter is valid only if the instance meets the [hibernation
+    #   prerequisites][1]. For more information, see [Hibernate your
+    #   instance][2] in the *Amazon EC2 User Guide*.
     #
     #   You can't enable hibernation and Amazon Web Services Nitro Enclaves
     #   on the same instance.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/hibernating-prerequisites.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
     #   @return [Types::HibernationOptionsRequest]
     #
     # @!attribute [rw] license_specifications
@@ -55625,7 +55631,7 @@ module Aws::EC2
     #
     # @!attribute [rw] enclave_options
     #   Indicates whether the instance is enabled for Amazon Web Services
-    #   Nitro Enclaves. For more information, see [ What is Amazon Web
+    #   Nitro Enclaves. For more information, see [What is Amazon Web
     #   Services Nitro Enclaves?][1] in the *Amazon Web Services Nitro
     #   Enclaves User Guide*.
     #
