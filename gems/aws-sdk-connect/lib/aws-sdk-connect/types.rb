@@ -6031,10 +6031,11 @@ module Aws::Connect
     #     `AGENT_HIERARCHY_LEVEL_FOUR` \| `AGENT_HIERARCHY_LEVEL_FIVE`
     #
     #   * **Filter values**: A maximum of 100 filter values are supported in
-    #     a single request. For example, a `GetMetricDataV2` request can
+    #     a single request. VOICE, CHAT, and TASK are valid `filterValue`
+    #     for the CHANNEL filter key. They do not count towards limitation
+    #     of 100 filter values. For example, a GetMetricDataV2 request can
     #     filter by 50 queues, 35 agents, and 15 routing profiles for a
-    #     total of 100 filter values. `VOICE`, `CHAT`, and `TASK` are valid
-    #     `filterValue` for the `CHANNEL` filter key.
+    #     total of 100 filter values, along with 3 channel filters.
     #
     #
     #
@@ -9320,6 +9321,20 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Maximum number (1000) of tags have been returned with current request.
+    # Consider changing request parameters to get more tags.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/MaximumResultReturnedException AWS API Documentation
+    #
+    class MaximumResultReturnedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about which channels are supported, and how many
     # contacts an agent can have on a channel simultaneously.
     #
@@ -10734,6 +10749,20 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The search criteria to be used to search tags.
+    #
+    # @!attribute [rw] tag_search_condition
+    #   The search criteria to be used to return tags.
+    #   @return [Types::TagSearchCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ResourceTagsSearchCriteria AWS API Documentation
+    #
+    class ResourceTagsSearchCriteria < Struct.new(
+      :tag_search_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
@@ -11557,6 +11586,61 @@ module Aws::Connect
       :quick_connects,
       :next_token,
       :approximate_total_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_types
+    #   The list of resource types to be used to search tags from. If not
+    #   provided or if any empty list is provided, this API will search from
+    #   all supported resource types.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] search_criteria
+    #   The search criteria to be used to return tags.
+    #   @return [Types::ResourceTagsSearchCriteria]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchResourceTagsRequest AWS API Documentation
+    #
+    class SearchResourceTagsRequest < Struct.new(
+      :instance_id,
+      :resource_types,
+      :next_token,
+      :max_results,
+      :search_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   A list of tags used in the Amazon Connect instance.
+    #   @return [Array<Types::TagSet>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchResourceTagsResponse AWS API Documentation
+    #
+    class SearchResourceTagsResponse < Struct.new(
+      :tags,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12909,6 +12993,56 @@ module Aws::Connect
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The search criteria to be used to return tags.
+    #
+    # @!attribute [rw] tag_key
+    #   The tag key used in the tag search condition.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_value
+    #   The tag value used in the tag search condition.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_key_comparison_type
+    #   The type of comparison to be made when evaluating the tag key in tag
+    #   search condition.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_value_comparison_type
+    #   The type of comparison to be made when evaluating the tag value in
+    #   tag search condition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TagSearchCondition AWS API Documentation
+    #
+    class TagSearchCondition < Struct.new(
+      :tag_key,
+      :tag_value,
+      :tag_key_comparison_type,
+      :tag_value_comparison_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A tag set contains tag key and tag value.
+    #
+    # @!attribute [rw] key
+    #   The tag key in the tagSet.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The tag value in the tagSet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TagSet AWS API Documentation
+    #
+    class TagSet < Struct.new(
+      :key,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end

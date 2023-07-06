@@ -443,6 +443,9 @@ module Aws::Inspector2
     #   resp.accounts[0].resource_state.lambda.error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED"
     #   resp.accounts[0].resource_state.lambda.error_message #=> String
     #   resp.accounts[0].resource_state.lambda.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
+    #   resp.accounts[0].resource_state.lambda_code.error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED"
+    #   resp.accounts[0].resource_state.lambda_code.error_message #=> String
+    #   resp.accounts[0].resource_state.lambda_code.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.accounts[0].state.error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED"
     #   resp.accounts[0].state.error_message #=> String
     #   resp.accounts[0].state.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
@@ -453,6 +456,7 @@ module Aws::Inspector2
     #   resp.failed_accounts[0].resource_status.ec2 #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.ecr #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.lambda #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
+    #   resp.failed_accounts[0].resource_status.lambda_code #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/BatchGetAccountStatus AWS API Documentation
@@ -461,6 +465,50 @@ module Aws::Inspector2
     # @param [Hash] params ({})
     def batch_get_account_status(params = {}, options = {})
       req = build_request(:batch_get_account_status, params)
+      req.send_request(options)
+    end
+
+    # Retrieves code snippets from findings that Amazon Inspector detected
+    # code vulnerabilities in.
+    #
+    # @option params [required, Array<String>] :finding_arns
+    #   An array of finding ARNs for the findings you want to retrieve code
+    #   snippets from.
+    #
+    # @return [Types::BatchGetCodeSnippetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetCodeSnippetResponse#code_snippet_results #code_snippet_results} => Array&lt;Types::CodeSnippetResult&gt;
+    #   * {Types::BatchGetCodeSnippetResponse#errors #errors} => Array&lt;Types::CodeSnippetError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_code_snippet({
+    #     finding_arns: ["FindingArn"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.code_snippet_results #=> Array
+    #   resp.code_snippet_results[0].code_snippet #=> Array
+    #   resp.code_snippet_results[0].code_snippet[0].content #=> String
+    #   resp.code_snippet_results[0].code_snippet[0].line_number #=> Integer
+    #   resp.code_snippet_results[0].end_line #=> Integer
+    #   resp.code_snippet_results[0].finding_arn #=> String
+    #   resp.code_snippet_results[0].start_line #=> Integer
+    #   resp.code_snippet_results[0].suggested_fixes #=> Array
+    #   resp.code_snippet_results[0].suggested_fixes[0].code #=> String
+    #   resp.code_snippet_results[0].suggested_fixes[0].description #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].error_code #=> String, one of "INTERNAL_ERROR", "ACCESS_DENIED", "CODE_SNIPPET_NOT_FOUND", "INVALID_INPUT"
+    #   resp.errors[0].error_message #=> String
+    #   resp.errors[0].finding_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/BatchGetCodeSnippet AWS API Documentation
+    #
+    # @overload batch_get_code_snippet(params = {})
+    # @param [Hash] params ({})
+    def batch_get_code_snippet(params = {}, options = {})
+      req = build_request(:batch_get_code_snippet, params)
       req.send_request(options)
     end
 
@@ -488,7 +536,7 @@ module Aws::Inspector2
     #   resp.accounts[0].free_trial_info[0].end #=> Time
     #   resp.accounts[0].free_trial_info[0].start #=> Time
     #   resp.accounts[0].free_trial_info[0].status #=> String, one of "ACTIVE", "INACTIVE"
-    #   resp.accounts[0].free_trial_info[0].type #=> String, one of "EC2", "ECR", "LAMBDA"
+    #   resp.accounts[0].free_trial_info[0].type #=> String, one of "EC2", "ECR", "LAMBDA", "LAMBDA_CODE"
     #   resp.failed_accounts #=> Array
     #   resp.failed_accounts[0].account_id #=> String
     #   resp.failed_accounts[0].code #=> String, one of "ACCESS_DENIED", "INTERNAL_ERROR"
@@ -617,6 +665,34 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
+    # Cancels a software bill of materials (SBOM) report.
+    #
+    # @option params [required, String] :report_id
+    #   The report ID of the SBOM export to cancel.
+    #
+    # @return [Types::CancelSbomExportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelSbomExportResponse#report_id #report_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_sbom_export({
+    #     report_id: "ReportId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.report_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CancelSbomExport AWS API Documentation
+    #
+    # @overload cancel_sbom_export(params = {})
+    # @param [Hash] params ({})
+    def cancel_sbom_export(params = {}, options = {})
+      req = build_request(:cancel_sbom_export, params)
+      req.send_request(options)
+    end
+
     # Creates a filter resource using specified filter criteria.
     #
     # @option params [required, String] :action
@@ -651,6 +727,24 @@ module Aws::Inspector2
     #     description: "FilterDescription",
     #     filter_criteria: { # required
     #       aws_account_id: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       code_vulnerability_detector_name: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       code_vulnerability_detector_tags: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       code_vulnerability_file_path: [
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #           value: "StringInput", # required
@@ -720,6 +814,12 @@ module Aws::Inspector2
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       epss_score: [
+    #         {
+    #           lower_inclusive: 1.0,
+    #           upper_inclusive: 1.0,
     #         },
     #       ],
     #       exploit_available: [
@@ -953,6 +1053,24 @@ module Aws::Inspector2
     #           value: "StringInput", # required
     #         },
     #       ],
+    #       code_vulnerability_detector_name: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       code_vulnerability_detector_tags: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       code_vulnerability_file_path: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
     #       component_id: [
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
@@ -1017,6 +1135,12 @@ module Aws::Inspector2
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       epss_score: [
+    #         {
+    #           lower_inclusive: 1.0,
+    #           upper_inclusive: 1.0,
     #         },
     #       ],
     #       exploit_available: [
@@ -1224,6 +1348,99 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
+    # Creates a software bill of materials (SBOM) report.
+    #
+    # @option params [required, String] :report_format
+    #   The output format for the software bill of materials (SBOM) report.
+    #
+    # @option params [Types::ResourceFilterCriteria] :resource_filter_criteria
+    #   The resource filter criteria for the software bill of materials (SBOM)
+    #   report.
+    #
+    # @option params [required, Types::Destination] :s3_destination
+    #   Contains details of the Amazon S3 bucket and KMS key used to export
+    #   findings.
+    #
+    # @return [Types::CreateSbomExportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSbomExportResponse#report_id #report_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_sbom_export({
+    #     report_format: "CYCLONEDX_1_4", # required, accepts CYCLONEDX_1_4, SPDX_2_3
+    #     resource_filter_criteria: {
+    #       account_id: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "ResourceStringInput", # required
+    #         },
+    #       ],
+    #       ec2_instance_tags: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS
+    #           key: "NonEmptyString", # required
+    #           value: "NonEmptyString",
+    #         },
+    #       ],
+    #       ecr_image_tags: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "ResourceStringInput", # required
+    #         },
+    #       ],
+    #       ecr_repository_name: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "ResourceStringInput", # required
+    #         },
+    #       ],
+    #       lambda_function_name: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "ResourceStringInput", # required
+    #         },
+    #       ],
+    #       lambda_function_tags: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS
+    #           key: "NonEmptyString", # required
+    #           value: "NonEmptyString",
+    #         },
+    #       ],
+    #       resource_id: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "ResourceStringInput", # required
+    #         },
+    #       ],
+    #       resource_type: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "ResourceStringInput", # required
+    #         },
+    #       ],
+    #     },
+    #     s3_destination: { # required
+    #       bucket_name: "String", # required
+    #       key_prefix: "String",
+    #       kms_key_arn: "String", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.report_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CreateSbomExport AWS API Documentation
+    #
+    # @overload create_sbom_export(params = {})
+    # @param [Hash] params ({})
+    def create_sbom_export(params = {}, options = {})
+      req = build_request(:create_sbom_export, params)
+      req.send_request(options)
+    end
+
     # Deletes a filter resource.
     #
     # @option params [required, String] :arn
@@ -1265,6 +1482,7 @@ module Aws::Inspector2
     #   resp.auto_enable.ec2 #=> Boolean
     #   resp.auto_enable.ecr #=> Boolean
     #   resp.auto_enable.lambda #=> Boolean
+    #   resp.auto_enable.lambda_code #=> Boolean
     #   resp.max_account_limit_reached #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/DescribeOrganizationConfiguration AWS API Documentation
@@ -1296,7 +1514,7 @@ module Aws::Inspector2
     #
     #   resp = client.disable({
     #     account_ids: ["AccountId"],
-    #     resource_types: ["EC2"], # accepts EC2, ECR, LAMBDA
+    #     resource_types: ["EC2"], # accepts EC2, ECR, LAMBDA, LAMBDA_CODE
     #   })
     #
     # @example Response structure
@@ -1306,6 +1524,7 @@ module Aws::Inspector2
     #   resp.accounts[0].resource_status.ec2 #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.accounts[0].resource_status.ecr #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.accounts[0].resource_status.lambda #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
+    #   resp.accounts[0].resource_status.lambda_code #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.accounts[0].status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts #=> Array
     #   resp.failed_accounts[0].account_id #=> String
@@ -1314,6 +1533,7 @@ module Aws::Inspector2
     #   resp.failed_accounts[0].resource_status.ec2 #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.ecr #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.lambda #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
+    #   resp.failed_accounts[0].resource_status.lambda_code #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/Disable AWS API Documentation
@@ -1410,7 +1630,7 @@ module Aws::Inspector2
     #   resp = client.enable({
     #     account_ids: ["AccountId"],
     #     client_token: "ClientToken",
-    #     resource_types: ["EC2"], # required, accepts EC2, ECR, LAMBDA
+    #     resource_types: ["EC2"], # required, accepts EC2, ECR, LAMBDA, LAMBDA_CODE
     #   })
     #
     # @example Response structure
@@ -1420,6 +1640,7 @@ module Aws::Inspector2
     #   resp.accounts[0].resource_status.ec2 #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.accounts[0].resource_status.ecr #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.accounts[0].resource_status.lambda #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
+    #   resp.accounts[0].resource_status.lambda_code #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.accounts[0].status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts #=> Array
     #   resp.failed_accounts[0].account_id #=> String
@@ -1428,6 +1649,7 @@ module Aws::Inspector2
     #   resp.failed_accounts[0].resource_status.ec2 #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.ecr #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.lambda #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
+    #   resp.failed_accounts[0].resource_status.lambda_code #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/Enable AWS API Documentation
@@ -1546,6 +1768,38 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
+    # Gets an encryption key.
+    #
+    # @option params [required, String] :resource_type
+    #   The resource type the key encrypts.
+    #
+    # @option params [required, String] :scan_type
+    #   The scan type the key encrypts.
+    #
+    # @return [Types::GetEncryptionKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEncryptionKeyResponse#kms_key_id #kms_key_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_encryption_key({
+    #     resource_type: "AWS_EC2_INSTANCE", # required, accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_ECR_REPOSITORY, AWS_LAMBDA_FUNCTION
+    #     scan_type: "NETWORK", # required, accepts NETWORK, PACKAGE, CODE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.kms_key_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetEncryptionKey AWS API Documentation
+    #
+    # @overload get_encryption_key(params = {})
+    # @param [Hash] params ({})
+    def get_encryption_key(params = {}, options = {})
+      req = build_request(:get_encryption_key, params)
+      req.send_request(options)
+    end
+
     # Gets the status of a findings report.
     #
     # @option params [String] :report_id
@@ -1576,6 +1830,15 @@ module Aws::Inspector2
     #   resp.filter_criteria.aws_account_id #=> Array
     #   resp.filter_criteria.aws_account_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filter_criteria.aws_account_id[0].value #=> String
+    #   resp.filter_criteria.code_vulnerability_detector_name #=> Array
+    #   resp.filter_criteria.code_vulnerability_detector_name[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filter_criteria.code_vulnerability_detector_name[0].value #=> String
+    #   resp.filter_criteria.code_vulnerability_detector_tags #=> Array
+    #   resp.filter_criteria.code_vulnerability_detector_tags[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filter_criteria.code_vulnerability_detector_tags[0].value #=> String
+    #   resp.filter_criteria.code_vulnerability_file_path #=> Array
+    #   resp.filter_criteria.code_vulnerability_file_path[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filter_criteria.code_vulnerability_file_path[0].value #=> String
     #   resp.filter_criteria.component_id #=> Array
     #   resp.filter_criteria.component_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filter_criteria.component_id[0].value #=> String
@@ -1609,6 +1872,9 @@ module Aws::Inspector2
     #   resp.filter_criteria.ecr_image_tags #=> Array
     #   resp.filter_criteria.ecr_image_tags[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filter_criteria.ecr_image_tags[0].value #=> String
+    #   resp.filter_criteria.epss_score #=> Array
+    #   resp.filter_criteria.epss_score[0].lower_inclusive #=> Float
+    #   resp.filter_criteria.epss_score[0].upper_inclusive #=> Float
     #   resp.filter_criteria.exploit_available #=> Array
     #   resp.filter_criteria.exploit_available[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filter_criteria.exploit_available[0].value #=> String
@@ -1741,6 +2007,73 @@ module Aws::Inspector2
     # @param [Hash] params ({})
     def get_member(params = {}, options = {})
       req = build_request(:get_member, params)
+      req.send_request(options)
+    end
+
+    # Gets details of a software bill of materials (SBOM) report.
+    #
+    # @option params [required, String] :report_id
+    #   The report ID of the SBOM export to get details for.
+    #
+    # @return [Types::GetSbomExportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSbomExportResponse#error_code #error_code} => String
+    #   * {Types::GetSbomExportResponse#error_message #error_message} => String
+    #   * {Types::GetSbomExportResponse#filter_criteria #filter_criteria} => Types::ResourceFilterCriteria
+    #   * {Types::GetSbomExportResponse#format #format} => String
+    #   * {Types::GetSbomExportResponse#report_id #report_id} => String
+    #   * {Types::GetSbomExportResponse#s3_destination #s3_destination} => Types::Destination
+    #   * {Types::GetSbomExportResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_sbom_export({
+    #     report_id: "ReportId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.error_code #=> String, one of "INTERNAL_ERROR", "INVALID_PERMISSIONS", "NO_FINDINGS_FOUND", "BUCKET_NOT_FOUND", "INCOMPATIBLE_BUCKET_REGION", "MALFORMED_KMS_KEY"
+    #   resp.error_message #=> String
+    #   resp.filter_criteria.account_id #=> Array
+    #   resp.filter_criteria.account_id[0].comparison #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.filter_criteria.account_id[0].value #=> String
+    #   resp.filter_criteria.ec2_instance_tags #=> Array
+    #   resp.filter_criteria.ec2_instance_tags[0].comparison #=> String, one of "EQUALS"
+    #   resp.filter_criteria.ec2_instance_tags[0].key #=> String
+    #   resp.filter_criteria.ec2_instance_tags[0].value #=> String
+    #   resp.filter_criteria.ecr_image_tags #=> Array
+    #   resp.filter_criteria.ecr_image_tags[0].comparison #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.filter_criteria.ecr_image_tags[0].value #=> String
+    #   resp.filter_criteria.ecr_repository_name #=> Array
+    #   resp.filter_criteria.ecr_repository_name[0].comparison #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.filter_criteria.ecr_repository_name[0].value #=> String
+    #   resp.filter_criteria.lambda_function_name #=> Array
+    #   resp.filter_criteria.lambda_function_name[0].comparison #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.filter_criteria.lambda_function_name[0].value #=> String
+    #   resp.filter_criteria.lambda_function_tags #=> Array
+    #   resp.filter_criteria.lambda_function_tags[0].comparison #=> String, one of "EQUALS"
+    #   resp.filter_criteria.lambda_function_tags[0].key #=> String
+    #   resp.filter_criteria.lambda_function_tags[0].value #=> String
+    #   resp.filter_criteria.resource_id #=> Array
+    #   resp.filter_criteria.resource_id[0].comparison #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.filter_criteria.resource_id[0].value #=> String
+    #   resp.filter_criteria.resource_type #=> Array
+    #   resp.filter_criteria.resource_type[0].comparison #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.filter_criteria.resource_type[0].value #=> String
+    #   resp.format #=> String, one of "CYCLONEDX_1_4", "SPDX_2_3"
+    #   resp.report_id #=> String
+    #   resp.s3_destination.bucket_name #=> String
+    #   resp.s3_destination.key_prefix #=> String
+    #   resp.s3_destination.kms_key_arn #=> String
+    #   resp.status #=> String, one of "SUCCEEDED", "IN_PROGRESS", "CANCELLED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetSbomExport AWS API Documentation
+    #
+    # @overload get_sbom_export(params = {})
+    # @param [Hash] params ({})
+    def get_sbom_export(params = {}, options = {})
+      req = build_request(:get_sbom_export, params)
       req.send_request(options)
     end
 
@@ -1921,11 +2254,11 @@ module Aws::Inspector2
     #   resp.covered_resources[0].resource_metadata.lambda_function.function_tags["MapKey"] #=> String
     #   resp.covered_resources[0].resource_metadata.lambda_function.layers #=> Array
     #   resp.covered_resources[0].resource_metadata.lambda_function.layers[0] #=> String
-    #   resp.covered_resources[0].resource_metadata.lambda_function.runtime #=> String, one of "NODEJS", "NODEJS_12_X", "NODEJS_14_X", "NODEJS_16_X", "JAVA_8", "JAVA_8_AL2", "JAVA_11", "PYTHON_3_7", "PYTHON_3_8", "PYTHON_3_9", "UNSUPPORTED", "NODEJS_18_X", "GO_1_X"
+    #   resp.covered_resources[0].resource_metadata.lambda_function.runtime #=> String, one of "NODEJS", "NODEJS_12_X", "NODEJS_14_X", "NODEJS_16_X", "JAVA_8", "JAVA_8_AL2", "JAVA_11", "PYTHON_3_7", "PYTHON_3_8", "PYTHON_3_9", "UNSUPPORTED", "NODEJS_18_X", "GO_1_X", "JAVA_17", "PYTHON_3_10"
     #   resp.covered_resources[0].resource_type #=> String, one of "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER_IMAGE", "AWS_ECR_REPOSITORY", "AWS_LAMBDA_FUNCTION"
     #   resp.covered_resources[0].scan_status.reason #=> String, one of "PENDING_INITIAL_SCAN", "ACCESS_DENIED", "INTERNAL_ERROR", "UNMANAGED_EC2_INSTANCE", "UNSUPPORTED_OS", "SCAN_ELIGIBILITY_EXPIRED", "RESOURCE_TERMINATED", "SUCCESSFUL", "NO_RESOURCES_FOUND", "IMAGE_SIZE_EXCEEDED", "SCAN_FREQUENCY_MANUAL", "SCAN_FREQUENCY_SCAN_ON_PUSH", "EC2_INSTANCE_STOPPED", "PENDING_DISABLE", "NO_INVENTORY", "STALE_INVENTORY", "EXCLUDED_BY_TAG", "UNSUPPORTED_RUNTIME", "UNSUPPORTED_MEDIA_TYPE", "UNSUPPORTED_CONFIG_FILE", "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED", "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED", "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED", "DEEP_INSPECTION_NO_INVENTORY"
     #   resp.covered_resources[0].scan_status.status_code #=> String, one of "ACTIVE", "INACTIVE"
-    #   resp.covered_resources[0].scan_type #=> String, one of "NETWORK", "PACKAGE"
+    #   resp.covered_resources[0].scan_type #=> String, one of "NETWORK", "PACKAGE", "CODE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCoverage AWS API Documentation
@@ -2153,6 +2486,15 @@ module Aws::Inspector2
     #   resp.filters[0].criteria.aws_account_id #=> Array
     #   resp.filters[0].criteria.aws_account_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filters[0].criteria.aws_account_id[0].value #=> String
+    #   resp.filters[0].criteria.code_vulnerability_detector_name #=> Array
+    #   resp.filters[0].criteria.code_vulnerability_detector_name[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filters[0].criteria.code_vulnerability_detector_name[0].value #=> String
+    #   resp.filters[0].criteria.code_vulnerability_detector_tags #=> Array
+    #   resp.filters[0].criteria.code_vulnerability_detector_tags[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filters[0].criteria.code_vulnerability_detector_tags[0].value #=> String
+    #   resp.filters[0].criteria.code_vulnerability_file_path #=> Array
+    #   resp.filters[0].criteria.code_vulnerability_file_path[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filters[0].criteria.code_vulnerability_file_path[0].value #=> String
     #   resp.filters[0].criteria.component_id #=> Array
     #   resp.filters[0].criteria.component_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filters[0].criteria.component_id[0].value #=> String
@@ -2186,6 +2528,9 @@ module Aws::Inspector2
     #   resp.filters[0].criteria.ecr_image_tags #=> Array
     #   resp.filters[0].criteria.ecr_image_tags[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filters[0].criteria.ecr_image_tags[0].value #=> String
+    #   resp.filters[0].criteria.epss_score #=> Array
+    #   resp.filters[0].criteria.epss_score[0].lower_inclusive #=> Float
+    #   resp.filters[0].criteria.epss_score[0].upper_inclusive #=> Float
     #   resp.filters[0].criteria.exploit_available #=> Array
     #   resp.filters[0].criteria.exploit_available[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filters[0].criteria.exploit_available[0].value #=> String
@@ -2338,7 +2683,7 @@ module Aws::Inspector2
     #     ],
     #     aggregation_request: {
     #       account_aggregation: {
-    #         finding_type: "NETWORK_REACHABILITY", # accepts NETWORK_REACHABILITY, PACKAGE_VULNERABILITY
+    #         finding_type: "NETWORK_REACHABILITY", # accepts NETWORK_REACHABILITY, PACKAGE_VULNERABILITY, CODE_VULNERABILITY
     #         resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_LAMBDA_FUNCTION
     #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
     #         sort_order: "ASC", # accepts ASC, DESC
@@ -2417,7 +2762,7 @@ module Aws::Inspector2
     #         sort_order: "ASC", # accepts ASC, DESC
     #       },
     #       finding_type_aggregation: {
-    #         finding_type: "NETWORK_REACHABILITY", # accepts NETWORK_REACHABILITY, PACKAGE_VULNERABILITY
+    #         finding_type: "NETWORK_REACHABILITY", # accepts NETWORK_REACHABILITY, PACKAGE_VULNERABILITY, CODE_VULNERABILITY
     #         resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_LAMBDA_FUNCTION
     #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
     #         sort_order: "ASC", # accepts ASC, DESC
@@ -2516,6 +2861,7 @@ module Aws::Inspector2
     #         sort_order: "ASC", # accepts ASC, DESC
     #       },
     #       title_aggregation: {
+    #         finding_type: "NETWORK_REACHABILITY", # accepts NETWORK_REACHABILITY, PACKAGE_VULNERABILITY, CODE_VULNERABILITY
     #         resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_LAMBDA_FUNCTION
     #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
     #         sort_order: "ASC", # accepts ASC, DESC
@@ -2674,6 +3020,24 @@ module Aws::Inspector2
     #           value: "StringInput", # required
     #         },
     #       ],
+    #       code_vulnerability_detector_name: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       code_vulnerability_detector_tags: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       code_vulnerability_file_path: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
     #       component_id: [
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
@@ -2738,6 +3102,12 @@ module Aws::Inspector2
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       epss_score: [
+    #         {
+    #           lower_inclusive: 1.0,
+    #           upper_inclusive: 1.0,
     #         },
     #       ],
     #       exploit_available: [
@@ -2927,7 +3297,7 @@ module Aws::Inspector2
     #     max_results: 1,
     #     next_token: "NextToken",
     #     sort_criteria: {
-    #       field: "AWS_ACCOUNT_ID", # required, accepts AWS_ACCOUNT_ID, FINDING_TYPE, SEVERITY, FIRST_OBSERVED_AT, LAST_OBSERVED_AT, FINDING_STATUS, RESOURCE_TYPE, ECR_IMAGE_PUSHED_AT, ECR_IMAGE_REPOSITORY_NAME, ECR_IMAGE_REGISTRY, NETWORK_PROTOCOL, COMPONENT_TYPE, VULNERABILITY_ID, VULNERABILITY_SOURCE, INSPECTOR_SCORE, VENDOR_SEVERITY
+    #       field: "AWS_ACCOUNT_ID", # required, accepts AWS_ACCOUNT_ID, FINDING_TYPE, SEVERITY, FIRST_OBSERVED_AT, LAST_OBSERVED_AT, FINDING_STATUS, RESOURCE_TYPE, ECR_IMAGE_PUSHED_AT, ECR_IMAGE_REPOSITORY_NAME, ECR_IMAGE_REGISTRY, NETWORK_PROTOCOL, COMPONENT_TYPE, VULNERABILITY_ID, VULNERABILITY_SOURCE, INSPECTOR_SCORE, VENDOR_SEVERITY, EPSS_SCORE
     #       sort_order: "ASC", # required, accepts ASC, DESC
     #     },
     #   })
@@ -2936,7 +3306,22 @@ module Aws::Inspector2
     #
     #   resp.findings #=> Array
     #   resp.findings[0].aws_account_id #=> String
+    #   resp.findings[0].code_vulnerability_details.cwes #=> Array
+    #   resp.findings[0].code_vulnerability_details.cwes[0] #=> String
+    #   resp.findings[0].code_vulnerability_details.detector_id #=> String
+    #   resp.findings[0].code_vulnerability_details.detector_name #=> String
+    #   resp.findings[0].code_vulnerability_details.detector_tags #=> Array
+    #   resp.findings[0].code_vulnerability_details.detector_tags[0] #=> String
+    #   resp.findings[0].code_vulnerability_details.file_path.end_line #=> Integer
+    #   resp.findings[0].code_vulnerability_details.file_path.file_name #=> String
+    #   resp.findings[0].code_vulnerability_details.file_path.file_path #=> String
+    #   resp.findings[0].code_vulnerability_details.file_path.start_line #=> Integer
+    #   resp.findings[0].code_vulnerability_details.reference_urls #=> Array
+    #   resp.findings[0].code_vulnerability_details.reference_urls[0] #=> String
+    #   resp.findings[0].code_vulnerability_details.rule_id #=> String
+    #   resp.findings[0].code_vulnerability_details.source_lambda_layer_arn #=> String
     #   resp.findings[0].description #=> String
+    #   resp.findings[0].epss.score #=> Float
     #   resp.findings[0].exploit_available #=> String, one of "YES", "NO"
     #   resp.findings[0].exploitability_details.last_known_exploit_at #=> Time
     #   resp.findings[0].finding_arn #=> String
@@ -3018,7 +3403,7 @@ module Aws::Inspector2
     #   resp.findings[0].resources[0].details.aws_lambda_function.layers #=> Array
     #   resp.findings[0].resources[0].details.aws_lambda_function.layers[0] #=> String
     #   resp.findings[0].resources[0].details.aws_lambda_function.package_type #=> String, one of "IMAGE", "ZIP"
-    #   resp.findings[0].resources[0].details.aws_lambda_function.runtime #=> String, one of "NODEJS", "NODEJS_12_X", "NODEJS_14_X", "NODEJS_16_X", "JAVA_8", "JAVA_8_AL2", "JAVA_11", "PYTHON_3_7", "PYTHON_3_8", "PYTHON_3_9", "UNSUPPORTED", "NODEJS_18_X", "GO_1_X"
+    #   resp.findings[0].resources[0].details.aws_lambda_function.runtime #=> String, one of "NODEJS", "NODEJS_12_X", "NODEJS_14_X", "NODEJS_16_X", "JAVA_8", "JAVA_8_AL2", "JAVA_11", "PYTHON_3_7", "PYTHON_3_8", "PYTHON_3_9", "UNSUPPORTED", "NODEJS_18_X", "GO_1_X", "JAVA_17", "PYTHON_3_10"
     #   resp.findings[0].resources[0].details.aws_lambda_function.version #=> String
     #   resp.findings[0].resources[0].details.aws_lambda_function.vpc_config.security_group_ids #=> Array
     #   resp.findings[0].resources[0].details.aws_lambda_function.vpc_config.security_group_ids[0] #=> String
@@ -3034,7 +3419,7 @@ module Aws::Inspector2
     #   resp.findings[0].severity #=> String, one of "INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL", "UNTRIAGED"
     #   resp.findings[0].status #=> String, one of "ACTIVE", "SUPPRESSED", "CLOSED"
     #   resp.findings[0].title #=> String
-    #   resp.findings[0].type #=> String, one of "NETWORK_REACHABILITY", "PACKAGE_VULNERABILITY"
+    #   resp.findings[0].type #=> String, one of "NETWORK_REACHABILITY", "PACKAGE_VULNERABILITY", "CODE_VULNERABILITY"
     #   resp.findings[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
@@ -3165,7 +3550,7 @@ module Aws::Inspector2
     #   resp.totals[0].usage[0].currency #=> String, one of "USD"
     #   resp.totals[0].usage[0].estimated_monthly_cost #=> Float
     #   resp.totals[0].usage[0].total #=> Float
-    #   resp.totals[0].usage[0].type #=> String, one of "EC2_INSTANCE_HOURS", "ECR_INITIAL_SCAN", "ECR_RESCAN", "LAMBDA_FUNCTION_HOURS"
+    #   resp.totals[0].usage[0].type #=> String, one of "EC2_INSTANCE_HOURS", "ECR_INITIAL_SCAN", "ECR_RESCAN", "LAMBDA_FUNCTION_HOURS", "LAMBDA_FUNCTION_CODE_HOURS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListUsageTotals AWS API Documentation
     #
@@ -3173,6 +3558,33 @@ module Aws::Inspector2
     # @param [Hash] params ({})
     def list_usage_totals(params = {}, options = {})
       req = build_request(:list_usage_totals, params)
+      req.send_request(options)
+    end
+
+    # Resets an encryption key. After the key is reset your resources will
+    # be encrypted by an Amazon Web Services owned key.
+    #
+    # @option params [required, String] :resource_type
+    #   The resource type the key encrypts.
+    #
+    # @option params [required, String] :scan_type
+    #   The scan type the key encrypts.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reset_encryption_key({
+    #     resource_type: "AWS_EC2_INSTANCE", # required, accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_ECR_REPOSITORY, AWS_LAMBDA_FUNCTION
+    #     scan_type: "NETWORK", # required, accepts NETWORK, PACKAGE, CODE
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResetEncryptionKey AWS API Documentation
+    #
+    # @overload reset_encryption_key(params = {})
+    # @param [Hash] params ({})
+    def reset_encryption_key(params = {}, options = {})
+      req = build_request(:reset_encryption_key, params)
       req.send_request(options)
     end
 
@@ -3381,6 +3793,37 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
+    # Updates an encryption key. A `ResourceNotFoundException` means that an
+    # AWS owned key is being used for encryption.
+    #
+    # @option params [required, String] :kms_key_id
+    #   A KMS key ID for the encryption key.
+    #
+    # @option params [required, String] :resource_type
+    #   The resource type for the encryption key.
+    #
+    # @option params [required, String] :scan_type
+    #   The scan type for the encryption key.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_encryption_key({
+    #     kms_key_id: "KmsKeyArn", # required
+    #     resource_type: "AWS_EC2_INSTANCE", # required, accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_ECR_REPOSITORY, AWS_LAMBDA_FUNCTION
+    #     scan_type: "NETWORK", # required, accepts NETWORK, PACKAGE, CODE
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateEncryptionKey AWS API Documentation
+    #
+    # @overload update_encryption_key(params = {})
+    # @param [Hash] params ({})
+    def update_encryption_key(params = {}, options = {})
+      req = build_request(:update_encryption_key, params)
+      req.send_request(options)
+    end
+
     # Specifies the action that is to be applied to the findings that match
     # the filter.
     #
@@ -3415,6 +3858,24 @@ module Aws::Inspector2
     #     filter_arn: "FilterArn", # required
     #     filter_criteria: {
     #       aws_account_id: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       code_vulnerability_detector_name: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       code_vulnerability_detector_tags: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       code_vulnerability_file_path: [
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #           value: "StringInput", # required
@@ -3484,6 +3945,12 @@ module Aws::Inspector2
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       epss_score: [
+    #         {
+    #           lower_inclusive: 1.0,
+    #           upper_inclusive: 1.0,
     #         },
     #       ],
     #       exploit_available: [
@@ -3729,6 +4196,7 @@ module Aws::Inspector2
     #       ec2: false, # required
     #       ecr: false, # required
     #       lambda: false,
+    #       lambda_code: false,
     #     },
     #   })
     #
@@ -3737,6 +4205,7 @@ module Aws::Inspector2
     #   resp.auto_enable.ec2 #=> Boolean
     #   resp.auto_enable.ecr #=> Boolean
     #   resp.auto_enable.lambda #=> Boolean
+    #   resp.auto_enable.lambda_code #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateOrganizationConfiguration AWS API Documentation
     #
@@ -3760,7 +4229,7 @@ module Aws::Inspector2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-inspector2'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

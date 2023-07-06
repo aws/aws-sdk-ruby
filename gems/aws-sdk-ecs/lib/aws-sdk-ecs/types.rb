@@ -1837,6 +1837,30 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html
     #   @return [Types::FirelensConfiguration]
     #
+    # @!attribute [rw] credential_specs
+    #   A list of ARNs in SSM or Amazon S3 to a credential spec
+    #   (`credspec`code&gt;) file that configures a container for Active
+    #   Directory authentication. This parameter is only used with
+    #   domainless authentication.
+    #
+    #   The format for each ARN is `credentialspecdomainless:MyARN`. Replace
+    #   `MyARN` with the ARN in SSM or Amazon S3.
+    #
+    #   The `credspec` must provide a ARN in Secrets Manager for a secret
+    #   containing the username, password, and the domain to connect to. For
+    #   better security, the instance isn't joined to the domain for
+    #   domainless authentication. Other applications on the instance can't
+    #   use the domainless credentials. You can use this parameter to run
+    #   tasks on the same instance, even it the tasks need to join different
+    #   domains. For more information, see [Using gMSAs for Windows
+    #   Containers][1] and [Using gMSAs for Linux Containers][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows-gmsa.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/linux-gmsa.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerDefinition AWS API Documentation
     #
     class ContainerDefinition < Struct.new(
@@ -1878,7 +1902,8 @@ module Aws::ECS
       :health_check,
       :system_controls,
       :resource_requirements,
-      :firelens_configuration)
+      :firelens_configuration,
+      :credential_specs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2828,6 +2853,9 @@ module Aws::ECS
     #   ECS resources][1] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
+    #   When you use Amazon ECS managed tags, you need to set the
+    #   `propagateTags` request parameter.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
@@ -2839,6 +2867,8 @@ module Aws::ECS
     #   Tags can only be propagated to the task during task creation. To add
     #   tags to a task after task creation, use the [TagResource][1] API
     #   action.
+    #
+    #   The default is `NONE`.
     #
     #
     #
@@ -4945,6 +4975,9 @@ module Aws::ECS
     # task with the DescribeTasks API operation or when viewing the task
     # details in the console.
     #
+    # The health check is designed to make sure that your containers survive
+    # agent restarts, upgrades, or temporary unavailability.
+    #
     # The following describes the possible `healthStatus` values for a
     # container:
     #
@@ -4976,6 +5009,13 @@ module Aws::ECS
     # will be stopped and the service scheduler will replace it.
     #
     # The following are notes about container health check support:
+    #
+    # * When the Amazon ECS agent cannot connect to the Amazon ECS service,
+    #   the service reports the container as `UNHEALTHY`.
+    #
+    # * The health check statuses are the "last heard from" response from
+    #   the Amazon ECS agent. There are no assumptions made about the status
+    #   of the container health checks.
     #
     # * Container health checks require version 1.17.0 or greater of the
     #   Amazon ECS container agent. For more information, see [Updating the

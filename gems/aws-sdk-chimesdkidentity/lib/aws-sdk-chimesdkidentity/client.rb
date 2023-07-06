@@ -515,7 +515,11 @@ module Aws::ChimeSDKIdentity
     #     ],
     #     configuration: { # required
     #       lex: { # required
-    #         responds_to: "STANDARD_MESSAGES", # required, accepts STANDARD_MESSAGES
+    #         responds_to: "STANDARD_MESSAGES", # accepts STANDARD_MESSAGES
+    #         invoked_by: {
+    #           standard_messages: "AUTO", # required, accepts AUTO, ALL, MENTIONS, NONE
+    #           targeted_messages: "ALL", # required, accepts ALL, NONE
+    #         },
     #         lex_bot_alias_arn: "LexBotAliasArn", # required
     #         locale_id: "String", # required
     #         welcome_intent: "LexIntentName",
@@ -708,8 +712,8 @@ module Aws::ChimeSDKIdentity
     # @example Request syntax with placeholder values
     #
     #   resp = client.deregister_app_instance_user_endpoint({
-    #     app_instance_user_arn: "SensitiveChimeArn", # required
-    #     endpoint_id: "SensitiveString64", # required
+    #     app_instance_user_arn: "ChimeArn", # required
+    #     endpoint_id: "String64", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/DeregisterAppInstanceUserEndpoint AWS API Documentation
@@ -808,6 +812,8 @@ module Aws::ChimeSDKIdentity
     #   resp.app_instance_bot.app_instance_bot_arn #=> String
     #   resp.app_instance_bot.name #=> String
     #   resp.app_instance_bot.configuration.lex.responds_to #=> String, one of "STANDARD_MESSAGES"
+    #   resp.app_instance_bot.configuration.lex.invoked_by.standard_messages #=> String, one of "AUTO", "ALL", "MENTIONS", "NONE"
+    #   resp.app_instance_bot.configuration.lex.invoked_by.targeted_messages #=> String, one of "ALL", "NONE"
     #   resp.app_instance_bot.configuration.lex.lex_bot_alias_arn #=> String
     #   resp.app_instance_bot.configuration.lex.locale_id #=> String
     #   resp.app_instance_bot.configuration.lex.welcome_intent #=> String
@@ -873,8 +879,8 @@ module Aws::ChimeSDKIdentity
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_app_instance_user_endpoint({
-    #     app_instance_user_arn: "SensitiveString1600", # required
-    #     endpoint_id: "SensitiveString64", # required
+    #     app_instance_user_arn: "String1600", # required
+    #     endpoint_id: "String64", # required
     #   })
     #
     # @example Response structure
@@ -1457,6 +1463,9 @@ module Aws::ChimeSDKIdentity
     # @option params [required, String] :metadata
     #   The metadata of the `AppInstanceBot`.
     #
+    # @option params [Types::Configuration] :configuration
+    #   The configuration for the bot update.
+    #
     # @return [Types::UpdateAppInstanceBotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAppInstanceBotResponse#app_instance_bot_arn #app_instance_bot_arn} => String
@@ -1467,6 +1476,18 @@ module Aws::ChimeSDKIdentity
     #     app_instance_bot_arn: "ChimeArn", # required
     #     name: "ResourceName", # required
     #     metadata: "Metadata", # required
+    #     configuration: {
+    #       lex: { # required
+    #         responds_to: "STANDARD_MESSAGES", # accepts STANDARD_MESSAGES
+    #         invoked_by: {
+    #           standard_messages: "AUTO", # required, accepts AUTO, ALL, MENTIONS, NONE
+    #           targeted_messages: "ALL", # required, accepts ALL, NONE
+    #         },
+    #         lex_bot_alias_arn: "LexBotAliasArn", # required
+    #         locale_id: "String", # required
+    #         welcome_intent: "LexIntentName",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1544,8 +1565,8 @@ module Aws::ChimeSDKIdentity
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_app_instance_user_endpoint({
-    #     app_instance_user_arn: "SensitiveChimeArn", # required
-    #     endpoint_id: "SensitiveString64", # required
+    #     app_instance_user_arn: "ChimeArn", # required
+    #     endpoint_id: "String64", # required
     #     name: "SensitiveString1600",
     #     allow_messages: "ALL", # accepts ALL, NONE
     #   })
@@ -1577,7 +1598,7 @@ module Aws::ChimeSDKIdentity
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkidentity'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2023-07-05)
+------------------
+
+* Feature - This release introduces the Global view feature and new Replication state APIs.
+
+1.21.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.20.0 (2023-06-15)
 ------------------
 

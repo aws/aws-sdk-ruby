@@ -132,6 +132,9 @@ module Aws::DevOpsGuru
     InsightTimeRange = Shapes::StructureShape.new(name: 'InsightTimeRange')
     InsightType = Shapes::StringShape.new(name: 'InsightType')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    KMSKeyId = Shapes::StringShape.new(name: 'KMSKeyId')
+    KMSServerSideEncryptionIntegration = Shapes::StructureShape.new(name: 'KMSServerSideEncryptionIntegration')
+    KMSServerSideEncryptionIntegrationConfig = Shapes::StructureShape.new(name: 'KMSServerSideEncryptionIntegrationConfig')
     ListAnomaliesForInsightFilters = Shapes::StructureShape.new(name: 'ListAnomaliesForInsightFilters')
     ListAnomaliesForInsightMaxResults = Shapes::IntegerShape.new(name: 'ListAnomaliesForInsightMaxResults')
     ListAnomaliesForInsightRequest = Shapes::StructureShape.new(name: 'ListAnomaliesForInsightRequest')
@@ -293,6 +296,7 @@ module Aws::DevOpsGuru
     SearchOrganizationInsightsMaxResults = Shapes::IntegerShape.new(name: 'SearchOrganizationInsightsMaxResults')
     SearchOrganizationInsightsRequest = Shapes::StructureShape.new(name: 'SearchOrganizationInsightsRequest')
     SearchOrganizationInsightsResponse = Shapes::StructureShape.new(name: 'SearchOrganizationInsightsResponse')
+    ServerSideEncryptionType = Shapes::StringShape.new(name: 'ServerSideEncryptionType')
     ServiceCollection = Shapes::StructureShape.new(name: 'ServiceCollection')
     ServiceHealth = Shapes::StructureShape.new(name: 'ServiceHealth')
     ServiceHealths = Shapes::ListShape.new(name: 'ServiceHealths')
@@ -627,6 +631,16 @@ module Aws::DevOpsGuru
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageString, required: true, location_name: "Message"))
     InternalServerException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: RetryAfterSeconds, location: "header", location_name: "Retry-After"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    KMSServerSideEncryptionIntegration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KMSKeyId, location_name: "KMSKeyId"))
+    KMSServerSideEncryptionIntegration.add_member(:opt_in_status, Shapes::ShapeRef.new(shape: OptInStatus, location_name: "OptInStatus"))
+    KMSServerSideEncryptionIntegration.add_member(:type, Shapes::ShapeRef.new(shape: ServerSideEncryptionType, location_name: "Type"))
+    KMSServerSideEncryptionIntegration.struct_class = Types::KMSServerSideEncryptionIntegration
+
+    KMSServerSideEncryptionIntegrationConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KMSKeyId, location_name: "KMSKeyId"))
+    KMSServerSideEncryptionIntegrationConfig.add_member(:opt_in_status, Shapes::ShapeRef.new(shape: OptInStatus, location_name: "OptInStatus"))
+    KMSServerSideEncryptionIntegrationConfig.add_member(:type, Shapes::ShapeRef.new(shape: ServerSideEncryptionType, location_name: "Type"))
+    KMSServerSideEncryptionIntegrationConfig.struct_class = Types::KMSServerSideEncryptionIntegrationConfig
 
     ListAnomaliesForInsightFilters.add_member(:service_collection, Shapes::ShapeRef.new(shape: ServiceCollection, location_name: "ServiceCollection"))
     ListAnomaliesForInsightFilters.struct_class = Types::ListAnomaliesForInsightFilters
@@ -1114,6 +1128,7 @@ module Aws::DevOpsGuru
 
     ServiceIntegrationConfig.add_member(:ops_center, Shapes::ShapeRef.new(shape: OpsCenterIntegration, location_name: "OpsCenter"))
     ServiceIntegrationConfig.add_member(:logs_anomaly_detection, Shapes::ShapeRef.new(shape: LogsAnomalyDetectionIntegration, location_name: "LogsAnomalyDetection"))
+    ServiceIntegrationConfig.add_member(:kms_server_side_encryption, Shapes::ShapeRef.new(shape: KMSServerSideEncryptionIntegration, location_name: "KMSServerSideEncryption"))
     ServiceIntegrationConfig.struct_class = Types::ServiceIntegrationConfig
 
     ServiceNames.member = Shapes::ShapeRef.new(shape: ServiceName)
@@ -1205,6 +1220,7 @@ module Aws::DevOpsGuru
 
     UpdateServiceIntegrationConfig.add_member(:ops_center, Shapes::ShapeRef.new(shape: OpsCenterIntegrationConfig, location_name: "OpsCenter"))
     UpdateServiceIntegrationConfig.add_member(:logs_anomaly_detection, Shapes::ShapeRef.new(shape: LogsAnomalyDetectionIntegrationConfig, location_name: "LogsAnomalyDetection"))
+    UpdateServiceIntegrationConfig.add_member(:kms_server_side_encryption, Shapes::ShapeRef.new(shape: KMSServerSideEncryptionIntegrationConfig, location_name: "KMSServerSideEncryption"))
     UpdateServiceIntegrationConfig.struct_class = Types::UpdateServiceIntegrationConfig
 
     UpdateServiceIntegrationRequest.add_member(:service_integration, Shapes::ShapeRef.new(shape: UpdateServiceIntegrationConfig, required: true, location_name: "ServiceIntegration"))

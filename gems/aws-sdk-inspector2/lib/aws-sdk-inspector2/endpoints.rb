@@ -40,6 +40,20 @@ module Aws::Inspector2
       end
     end
 
+    class BatchGetCodeSnippet
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Inspector2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class BatchGetFreeTrialInfo
       def self.build(context)
         unless context.config.regional_endpoint
@@ -96,6 +110,20 @@ module Aws::Inspector2
       end
     end
 
+    class CancelSbomExport
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Inspector2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CreateFilter
       def self.build(context)
         unless context.config.regional_endpoint
@@ -111,6 +139,20 @@ module Aws::Inspector2
     end
 
     class CreateFindingsReport
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Inspector2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class CreateSbomExport
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -264,6 +306,20 @@ module Aws::Inspector2
       end
     end
 
+    class GetEncryptionKey
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Inspector2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class GetFindingsReportStatus
       def self.build(context)
         unless context.config.regional_endpoint
@@ -279,6 +335,20 @@ module Aws::Inspector2
     end
 
     class GetMember
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Inspector2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class GetSbomExport
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -432,6 +502,20 @@ module Aws::Inspector2
       end
     end
 
+    class ResetEncryptionKey
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Inspector2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class SearchVulnerabilities
       def self.build(context)
         unless context.config.regional_endpoint
@@ -489,6 +573,20 @@ module Aws::Inspector2
     end
 
     class UpdateEc2DeepInspectionConfiguration
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Inspector2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UpdateEncryptionKey
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

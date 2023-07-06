@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2023-06-29)
+------------------
+
+* Feature - The Amazon Chime SDK APIs in the Chime namespace are no longer supported.  Customers should use APIs in the dedicated Amazon Chime SDK namespaces: ChimeSDKIdentity, ChimeSDKMediaPipelines, ChimeSDKMeetings, ChimeSDKMessaging, and ChimeSDKVoice.
+
+1.74.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.73.0 (2023-06-15)
 ------------------
 

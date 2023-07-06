@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.387.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.386.0 (2023-06-20)
+------------------
+
+* Feature - Adds support for targeting Dedicated Host allocations by assetIds in AWS Outposts
+
+1.385.0 (2023-06-19)
+------------------
+
+* Feature - API changes to AWS Verified Access to include data from trust providers in logs
+
 1.384.0 (2023-06-15)
 ------------------
 

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.117.0 (2023-07-05)
+------------------
+
+* Feature - GetMetricDataV2 API: Channels filters do not count towards overall limitation of 100 filter values.
+
+1.116.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.115.0 (2023-06-26)
+------------------
+
+* Feature - This release provides a way to search for existing tags within an instance. Before tagging a resource, ensure consistency by searching for pre-existing key:value pairs.
+
 1.114.0 (2023-06-16)
 ------------------
 

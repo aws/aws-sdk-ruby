@@ -1904,7 +1904,7 @@ module Aws::Budgets
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-budgets'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2023-06-30)
+------------------
+
+* Feature - This release includes improved color handling of overlays and general updates to user documentation.
+
+1.110.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.109.0 (2023-06-21)
+------------------
+
+* Feature - This release introduces the bandwidth reduction filter for the HEVC encoder, increases the limits of outputs per job, and updates support for the Nagra SDK to version 1.14.7.
+
 1.108.0 (2023-06-15)
 ------------------
 

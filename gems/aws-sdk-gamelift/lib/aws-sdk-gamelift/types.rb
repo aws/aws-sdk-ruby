@@ -1481,9 +1481,10 @@ module Aws::GameLift
     # @!attribute [rw] additional_player_count
     #   The number of player slots in a match to keep open for future
     #   players. For example, if the configuration's rule set specifies a
-    #   match for a single 12-person team, and the additional player count
-    #   is set to 2, only 10 players are selected for the match. This
-    #   parameter is not used if `FlexMatchMode` is set to `STANDALONE`.
+    #   match for a single 10-person team, and the additional player count
+    #   is set to 2, 10 players will be selected for the match and 2 more
+    #   player slots will be open for future players. This parameter is not
+    #   used if `FlexMatchMode` is set to `STANDALONE`.
     #   @return [Integer]
     #
     # @!attribute [rw] custom_event_data
@@ -6452,9 +6453,10 @@ module Aws::GameLift
     # @!attribute [rw] additional_player_count
     #   The number of player slots in a match to keep open for future
     #   players. For example, if the configuration's rule set specifies a
-    #   match for a single 12-person team, and the additional player count
-    #   is set to 2, only 10 players are selected for the match. This
-    #   parameter is not used when `FlexMatchMode` is set to `STANDALONE`.
+    #   match for a single 10-person team, and the additional player count
+    #   is set to 2, 10 players will be selected for the match and 2 more
+    #   player slots will be open for future players. This parameter is not
+    #   used when `FlexMatchMode` is set to `STANDALONE`.
     #   @return [Integer]
     #
     # @!attribute [rw] custom_event_data
@@ -9251,9 +9253,10 @@ module Aws::GameLift
     # @!attribute [rw] additional_player_count
     #   The number of player slots in a match to keep open for future
     #   players. For example, if the configuration's rule set specifies a
-    #   match for a single 12-person team, and the additional player count
-    #   is set to 2, only 10 players are selected for the match. This
-    #   parameter is not used if `FlexMatchMode` is set to `STANDALONE`.
+    #   match for a single 10-person team, and the additional player count
+    #   is set to 2, 10 players will be selected for the match and 2 more
+    #   player slots will be open for future players. This parameter is not
+    #   used if `FlexMatchMode` is set to `STANDALONE`.
     #   @return [Integer]
     #
     # @!attribute [rw] custom_event_data

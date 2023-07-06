@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2023-07-05)
+------------------
+
+* Feature - Added Dry Run Feature to cryptographic and cross-account mutating KMS APIs (14 in all). This feature allows users to test their permissions and parameters before making the actual API call.
+
+1.68.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.67.0 (2023-06-15)
 ------------------
 

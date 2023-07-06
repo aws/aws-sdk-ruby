@@ -3454,6 +3454,10 @@ module Aws::Glue
     #   Specifies Delta data store targets.
     #   @return [Array<Types::DeltaTarget>]
     #
+    # @!attribute [rw] iceberg_targets
+    #   Specifies Apache Iceberg data store targets.
+    #   @return [Array<Types::IcebergTarget>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CrawlerTargets AWS API Documentation
     #
     class CrawlerTargets < Struct.new(
@@ -3462,7 +3466,8 @@ module Aws::Glue
       :mongo_db_targets,
       :dynamo_db_targets,
       :catalog_targets,
-      :delta_targets)
+      :delta_targets,
+      :iceberg_targets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6142,11 +6147,16 @@ module Aws::Glue
     #   The name of the catalog database.
     #   @return [String]
     #
+    # @!attribute [rw] region
+    #   Region of the target database.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DatabaseIdentifier AWS API Documentation
     #
     class DatabaseIdentifier < Struct.new(
       :catalog_id,
-      :database_name)
+      :database_name,
+      :region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11792,6 +11802,44 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies an Apache Iceberg data source where Iceberg tables are
+    # stored in Amazon S3.
+    #
+    # @!attribute [rw] paths
+    #   One or more Amazon S3 paths that contains Iceberg metadata folders
+    #   as `s3://bucket/prefix`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] connection_name
+    #   The name of the connection to use to connect to the Iceberg target.
+    #   @return [String]
+    #
+    # @!attribute [rw] exclusions
+    #   A list of glob patterns used to exclude from the crawl. For more
+    #   information, see [Catalog Tables with a Crawler][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] maximum_traversal_depth
+    #   The maximum depth of Amazon S3 paths that the crawler can traverse
+    #   to discover the Iceberg metadata folder in your Amazon S3 path. Used
+    #   to limit the crawler run time.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IcebergTarget AWS API Documentation
+    #
+    class IcebergTarget < Struct.new(
+      :paths,
+      :connection_name,
+      :exclusions,
+      :maximum_traversal_depth)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The same unique identifier was associated with two different records.
     #
     # @!attribute [rw] message
@@ -13250,6 +13298,16 @@ module Aws::Glue
     #   4.0 or later.
     #   @return [String]
     #
+    # @!attribute [rw] starting_timestamp
+    #   The timestamp of the record in the Kafka topic to start reading data
+    #   from. The possible values are a timestamp string in UTC format of
+    #   the pattern `yyyy-mm-ddTHH:MM:SSZ` (where Z represents a UTC
+    #   timezone offset with a +/-. For example:
+    #   "2023-04-04T08:00:00+08:00").
+    #
+    #   Only one of `StartingTimestamp` or `StartingOffsets` must be set.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/KafkaStreamingSourceOptions AWS API Documentation
     #
     class KafkaStreamingSourceOptions < Struct.new(
@@ -13270,7 +13328,8 @@ module Aws::Glue
       :min_partitions,
       :include_headers,
       :add_record_timestamp,
-      :emit_consumer_lag_metrics)
+      :emit_consumer_lag_metrics,
+      :starting_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13314,8 +13373,15 @@ module Aws::Glue
     #
     # @!attribute [rw] starting_position
     #   The starting position in the Kinesis data stream to read data from.
-    #   The possible values are `"latest"`, `"trim_horizon"`, or
-    #   `"earliest"`. The default value is `"latest"`.
+    #   The possible values are `"latest"`, `"trim_horizon"`, `"earliest"`,
+    #   or a timestamp string in UTC format in the pattern
+    #   `yyyy-mm-ddTHH:MM:SSZ` (where `Z` represents a UTC timezone offset
+    #   with a +/-. For example: "2023-04-04T08:00:00-04:00"). The default
+    #   value is `"latest"`.
+    #
+    #   Note: Using a value that is a timestamp string in UTC format for
+    #   "startingPosition" is supported only for Glue version 4.0 or
+    #   later.
     #   @return [String]
     #
     # @!attribute [rw] max_fetch_time_in_ms
@@ -13408,6 +13474,14 @@ module Aws::Glue
     #   4.0 or later.
     #   @return [String]
     #
+    # @!attribute [rw] starting_timestamp
+    #   The timestamp of the record in the Kinesis data stream to start
+    #   reading data from. The possible values are a timestamp string in UTC
+    #   format of the pattern `yyyy-mm-ddTHH:MM:SSZ` (where Z represents a
+    #   UTC timezone offset with a +/-. For example:
+    #   "2023-04-04T08:00:00+08:00").
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/KinesisStreamingSourceOptions AWS API Documentation
     #
     class KinesisStreamingSourceOptions < Struct.new(
@@ -13430,7 +13504,8 @@ module Aws::Glue
       :role_arn,
       :role_session_name,
       :add_record_timestamp,
-      :emit_consumer_lag_metrics)
+      :emit_consumer_lag_metrics,
+      :starting_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19274,12 +19349,17 @@ module Aws::Glue
     #   The name of the target table.
     #   @return [String]
     #
+    # @!attribute [rw] region
+    #   Region of the target table.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TableIdentifier AWS API Documentation
     #
     class TableIdentifier < Struct.new(
       :catalog_id,
       :database_name,
-      :name)
+      :name,
+      :region)
       SENSITIVE = []
       include Aws::Structure
     end

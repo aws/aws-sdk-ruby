@@ -88,6 +88,8 @@ module Aws::Appflow
             Aws::Appflow::Endpoints::ListTagsForResource.build(context)
           when :register_connector
             Aws::Appflow::Endpoints::RegisterConnector.build(context)
+          when :reset_connector_metadata_cache
+            Aws::Appflow::Endpoints::ResetConnectorMetadataCache.build(context)
           when :start_flow
             Aws::Appflow::Endpoints::StartFlow.build(context)
           when :stop_flow

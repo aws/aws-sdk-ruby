@@ -396,10 +396,9 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] type
     #   Specifies that the rule action should update the `Types` finding
-    #   field. The `Types` finding field provides one or more finding types
-    #   in the format of namespace/category/classifier that classify a
-    #   finding. For more information, see [Types taxonomy for ASFF][1] in
-    #   the *Security Hub User Guide*.
+    #   field. The `Types` finding field classifies findings in the format
+    #   of namespace/category/classifier. For more information, see [Types
+    #   taxonomy for ASFF][1] in the *Security Hub User Guide*.
     #
     #
     #
@@ -428,8 +427,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] rule_status
     #   Whether the rule is active after it is created. If this parameter is
-    #   equal to `>ENABLED`, Security Hub will apply the rule to findings
-    #   and finding updates after the rule is created.
+    #   equal to `ENABLED`, Security Hub starts applying the rule to
+    #   findings and finding updates after the rule is created.
     #   @return [String]
     #
     # @!attribute [rw] rule_order
@@ -452,16 +451,16 @@ module Aws::SecurityHub
     #   finding matches the criteria for multiple rules, and each rule has
     #   different actions. If the value of this field is set to `true` for a
     #   rule, Security Hub applies the rule action to a finding that matches
-    #   the rule criteria and won't evaluate other rules for the finding. 
-    #   The default value of this field is `false`.
+    #   the rule criteria and doesn't evaluate other rules for the
+    #   finding.  The default value of this field is `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] criteria
     #   A set of [Amazon Web Services Security Finding Format][1] finding
     #   field attributes and corresponding expected values that Security Hub
-    #   uses to filter findings. If a finding matches the conditions
-    #   specified in this parameter, Security Hub applies the rule action to
-    #   the finding.
+    #   uses to filter findings. If a rule is enabled and a finding matches
+    #   the conditions specified in this parameter, Security Hub applies the
+    #   rule action to the finding.
     #
     #
     #
@@ -519,8 +518,8 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Identifies the finding fields that the automation rule action will
-    # update when a finding matches the defined criteria.
+    # Identifies the finding fields that the automation rule action updates
+    # when a finding matches the defined criteria.
     #
     # @!attribute [rw] note
     #   The updated note.
@@ -531,25 +530,23 @@ module Aws::SecurityHub
     #   @return [Types::SeverityUpdate]
     #
     # @!attribute [rw] verification_state
-    #   The rule action will update the `VerificationState` field of a
-    #   finding.
+    #   The rule action updates the `VerificationState` field of a finding.
     #   @return [String]
     #
     # @!attribute [rw] confidence
-    #   The rule action will update the `Confidence` field of a finding.
+    #   The rule action updates the `Confidence` field of a finding.
     #   @return [Integer]
     #
     # @!attribute [rw] criticality
-    #   The rule action will update the `Criticality` field of a finding.
+    #   The rule action updates the `Criticality` field of a finding.
     #   @return [Integer]
     #
     # @!attribute [rw] types
-    #   The rule action will update the `Types` field of a finding.
+    #   The rule action updates the `Types` field of a finding.
     #   @return [Array<String>]
     #
     # @!attribute [rw] user_defined_fields
-    #   The rule action will update the `UserDefinedFields` field of a
-    #   finding.
+    #   The rule action updates the `UserDefinedFields` field of a finding.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] workflow
@@ -557,7 +554,7 @@ module Aws::SecurityHub
     #   @return [Types::WorkflowUpdate]
     #
     # @!attribute [rw] related_findings
-    #   A list of findings that are related to a finding.
+    #   The rule action updates the `RelatedFindings` field of a finding.
     #   @return [Array<Types::RelatedFinding>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AutomationRulesFindingFieldsUpdate AWS API Documentation
@@ -866,10 +863,14 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] rule_status
     #   Whether the rule is active after it is created. If this parameter is
-    #   equal to `ENABLED`, Security Hub will apply the rule to findings and
-    #   finding updates after the rule is created. To change the value of
-    #   this parameter after creating a rule, use
-    #   `BatchUpdateAutomationRules`.
+    #   equal to `ENABLED`, Security Hub starts applying the rule to
+    #   findings and finding updates after the rule is created. To change
+    #   the value of this parameter after creating a rule, use [
+    #   `BatchUpdateAutomationRules` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateAutomationRules.html
     #   @return [String]
     #
     # @!attribute [rw] rule_order
@@ -892,8 +893,8 @@ module Aws::SecurityHub
     #   finding matches the criteria for multiple rules, and each rule has
     #   different actions. If the value of this field is set to `true` for a
     #   rule, Security Hub applies the rule action to a finding that matches
-    #   the rule criteria and won't evaluate other rules for the finding. 
-    #   The default value of this field is `false`.
+    #   the rule criteria and doesn't evaluate other rules for the
+    #   finding.  The default value of this field is `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] created_at
@@ -20705,10 +20706,14 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] rule_status
     #   Whether the rule is active after it is created. If this parameter is
-    #   equal to `Enabled`, Security Hub will apply the rule to findings and
-    #   finding updates after the rule is created. To change the value of
-    #   this parameter after creating a rule, use
-    #   `BatchUpdateAutomationRules`.
+    #   equal to `ENABLED`, Security Hub starts applying the rule to
+    #   findings and finding updates after the rule is created. To change
+    #   the value of this parameter after creating a rule, use [
+    #   `BatchUpdateAutomationRules` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateAutomationRules.html
     #   @return [String]
     #
     # @!attribute [rw] rule_order
@@ -20731,15 +20736,15 @@ module Aws::SecurityHub
     #   finding matches the criteria for multiple rules, and each rule has
     #   different actions. If the value of this field is set to `true` for a
     #   rule, Security Hub applies the rule action to a finding that matches
-    #   the rule criteria and won't evaluate other rules for the finding.
+    #   the rule criteria and doesn't evaluate other rules for the finding.
     #   The default value of this field is `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] criteria
     #   A set of ASFF finding field attributes and corresponding expected
-    #   values that Security Hub uses to filter findings. If a finding
-    #   matches the conditions specified in this parameter, Security Hub
-    #   applies the rule action to the finding.
+    #   values that Security Hub uses to filter findings. If a rule is
+    #   enabled and a finding matches the conditions specified in this
+    #   parameter, Security Hub applies the rule action to the finding.
     #   @return [Types::AutomationRulesFindingFilters]
     #
     # @!attribute [rw] actions
@@ -25349,14 +25354,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] security_control_status
-    #   The status of a security control based on the compliance status of
-    #   its findings. For more information about how control status is
-    #   determined, see [Determining the overall status of a control from
-    #   its findings][1] in the *Security Hub User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/controls-overall-status.html
+    #   The enablement status of a security control in a specific standard.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SecurityControl AWS API Documentation
@@ -26572,10 +26570,14 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] rule_status
     #   Whether the rule is active after it is created. If this parameter is
-    #   equal to `ENABLED`, Security Hub will apply the rule to findings and
-    #   finding updates after the rule is created. To change the value of
-    #   this parameter after creating a rule, use
-    #   `BatchUpdateAutomationRules`.
+    #   equal to `ENABLED`, Security Hub starts applying the rule to
+    #   findings and finding updates after the rule is created. To change
+    #   the value of this parameter after creating a rule, use [
+    #   `BatchUpdateAutomationRules` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateAutomationRules.html
     #   @return [String]
     #
     # @!attribute [rw] rule_order
@@ -26598,15 +26600,15 @@ module Aws::SecurityHub
     #   finding matches the criteria for multiple rules, and each rule has
     #   different actions. If the value of this field is set to `true` for a
     #   rule, Security Hub applies the rule action to a finding that matches
-    #   the rule criteria and won't evaluate other rules for the finding. 
-    #   The default value of this field is `false`.
+    #   the rule criteria and doesn't evaluate other rules for the
+    #   finding.  The default value of this field is `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] criteria
     #   A set of ASFF finding field attributes and corresponding expected
-    #   values that Security Hub uses to filter findings. If a finding
-    #   matches the conditions specified in this parameter, Security Hub
-    #   applies the rule action to the finding.
+    #   values that Security Hub uses to filter findings. If a rule is
+    #   enabled and a finding matches the conditions specified in this
+    #   parameter, Security Hub applies the rule action to the finding.
     #   @return [Types::AutomationRulesFindingFilters]
     #
     # @!attribute [rw] actions

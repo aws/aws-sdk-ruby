@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.124.0 (2023-06-30)
+------------------
+
+* Feature - Added new field  "credentialspecs" to the ecs task definition to support gMSA of windows/linux in both domainless and domain-joined mode
+
+1.123.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.122.0 (2023-06-19)
+------------------
+
+* Feature - Documentation only update to address various tickets.
+
 1.121.0 (2023-06-15)
 ------------------
 

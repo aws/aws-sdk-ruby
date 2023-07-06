@@ -108,6 +108,11 @@ module Aws::DynamoDB
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def item
+        @data[:item]
+      end
     end
 
     class ContinuousBackupsUnavailableException < ServiceError

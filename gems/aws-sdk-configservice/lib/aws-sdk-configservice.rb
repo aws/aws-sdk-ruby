@@ -52,6 +52,6 @@ require_relative 'aws-sdk-configservice/customizations'
 # @!group service
 module Aws::ConfigService
 
-  GEM_VERSION = '1.92.0'
+  GEM_VERSION = '1.94.0'
 
 end

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.75.0 (2023-06-26)
+------------------
+
+* Feature - Added time zone estimation support for journeys
+
 1.74.0 (2023-06-15)
 ------------------
 

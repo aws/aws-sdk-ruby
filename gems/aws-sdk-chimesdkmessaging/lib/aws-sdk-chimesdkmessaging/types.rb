@@ -553,7 +553,15 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The message content.
+    #   The content of the channel message. For Amazon Lex V2 bot responses,
+    #   this field holds a list of messages originating from the bot. For
+    #   more information, refer to [Processing responses from an
+    #   AppInstanceBot][1] in the *Amazon Chime SDK Messaging Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -593,8 +601,15 @@ module Aws::ChimeSDKMessaging
     #   @return [Types::ChannelMessageStatusStructure]
     #
     # @!attribute [rw] message_attributes
-    #   The attributes for the message, used for message filtering along
-    #   with a `FilterRule` defined in the `PushNotificationPreferences`.
+    #   The attributes for the channel message. For Amazon Lex V2 bot
+    #   responses, the attributes are mapped to specific fields from the
+    #   bot. For more information, refer to [Processing responses from an
+    #   AppInstanceBot][1] in the *Amazon Chime SDK Messaging Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html
     #   @return [Hash<String,Types::MessageAttributeValue>]
     #
     # @!attribute [rw] sub_channel_id
@@ -602,8 +617,24 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     #
     # @!attribute [rw] content_type
-    #   The content type of the channel message.
+    #   The content type of the channel message. For Amazon Lex V2 bot
+    #   responses, the content type is `application/amz-chime-lex-msgs` for
+    #   success responses and `application/amz-chime-lex-error` for failure
+    #   responses. For more information, refer to [Processing responses from
+    #   an AppInstanceBot][1] in the *Amazon Chime SDK Messaging Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html
     #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The target of a message, a sender, a user, or a bot. Only the target
+    #   and the sender can view targeted messages. Only users who can see
+    #   targeted messages can take actions on them. However, administrators
+    #   can delete targeted messages that they can’t see.
+    #   @return [Array<Types::Target>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ChannelMessage AWS API Documentation
     #
@@ -622,7 +653,8 @@ module Aws::ChimeSDKMessaging
       :status,
       :message_attributes,
       :sub_channel_id,
-      :content_type)
+      :content_type,
+      :target)
       SENSITIVE = [:content, :metadata, :content_type]
       include Aws::Structure
     end
@@ -634,7 +666,15 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The message content.
+    #   The message content. For Amazon Lex V2 bot responses, this field
+    #   holds a list of messages originating from the bot. For more
+    #   information, refer to [Processing responses from an
+    #   AppInstanceBot][1] in the *Amazon Chime SDK Messaging Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -646,8 +686,15 @@ module Aws::ChimeSDKMessaging
     #   @return [Types::PushNotificationConfiguration]
     #
     # @!attribute [rw] message_attributes
-    #   The attributes for the message, used for message filtering along
-    #   with a `FilterRule` defined in the `PushNotificationPreferences`.
+    #   The attributes for the channel message. For Amazon Lex V2 bot
+    #   responses, the attributes are mapped to specific fields from the
+    #   bot. For more information, refer to [Processing responses from an
+    #   AppInstanceBot][1] in the *Amazon Chime SDK Messaging Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html
     #   @return [Hash<String,Types::MessageAttributeValue>]
     #
     # @!attribute [rw] sub_channel_id
@@ -655,7 +702,16 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     #
     # @!attribute [rw] content_type
-    #   The content type of the call-back message.
+    #   The content type of the call-back message. For Amazon Lex V2 bot
+    #   responses, the content type is `application/amz-chime-lex-msgs` for
+    #   success responses and `application/amz-chime-lex-error` for failure
+    #   responses. For more information, refer to [Processing responses from
+    #   an AppInstanceBot][1] in the *Amazon Chime SDK Messaging Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ChannelMessageCallback AWS API Documentation
@@ -679,7 +735,7 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     #
     # @!attribute [rw] detail
-    #   Contains more details about the messasge status.
+    #   Contains more details about the message status.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ChannelMessageStatusStructure AWS API Documentation
@@ -698,7 +754,15 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The content of the message.
+    #   The content of the channel message. For Amazon Lex V2 bot responses,
+    #   this field holds a list of messages originating from the bot. For
+    #   more information, refer to [Processing responses from an
+    #   AppInstanceBot][1] in the *Amazon Chime SDK Messaging Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -736,12 +800,37 @@ module Aws::ChimeSDKMessaging
     #   @return [Types::ChannelMessageStatusStructure]
     #
     # @!attribute [rw] message_attributes
-    #   The message attribues listed in a the summary of a channel message.
+    #   The attributes for the channel message. For Amazon Lex V2 bot
+    #   responses, the attributes are mapped to specific fields from the
+    #   bot. For more information, refer to [Processing responses from an
+    #   AppInstanceBot][1] in the *Amazon Chime SDK Messaging Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html
     #   @return [Hash<String,Types::MessageAttributeValue>]
     #
     # @!attribute [rw] content_type
-    #   The content type of the channel messsage listed in the summary.
+    #   The content type of the channel message listed in the summary. For
+    #   Amazon Lex V2 bot responses, the content type is
+    #   `application/amz-chime-lex-msgs` for success responses and
+    #   `application/amz-chime-lex-error` for failure responses. For more
+    #   information, refer to [Processing responses from an
+    #   AppInstanceBot][1] in the *Amazon Chime SDK Messaging Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html
     #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The target of a message, a sender, a user, or a bot. Only the target
+    #   and the sender can view targeted messages. Only users who can see
+    #   targeted messages can take actions on them. However, administrators
+    #   can delete targeted messages that they can’t see.
+    #   @return [Array<Types::Target>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ChannelMessageSummary AWS API Documentation
     #
@@ -757,7 +846,8 @@ module Aws::ChimeSDKMessaging
       :redacted,
       :status,
       :message_attributes,
-      :content_type)
+      :content_type,
+      :target)
       SENSITIVE = [:content, :metadata, :content_type]
       include Aws::Structure
     end
@@ -842,7 +932,8 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     #
     # @!attribute [rw] last_message_timestamp
-    #   The time at which the last persistent message in a channel was sent.
+    #   The time at which the last persistent message visible to the caller
+    #   in a channel was sent.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ChannelSummary AWS API Documentation
@@ -2851,11 +2942,18 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The content of the message.
+    #   The content of the channel message.
     #   @return [String]
     #
     # @!attribute [rw] type
     #   The type of message, `STANDARD` or `CONTROL`.
+    #
+    #   `STANDARD` messages can be up to 4KB in size and contain metadata.
+    #   Metadata is arbitrary, and you can use it in a variety of ways, such
+    #   as containing a link to an attachment.
+    #
+    #   `CONTROL` messages are limited to 30 bytes and do not contain
+    #   metadata.
     #   @return [String]
     #
     # @!attribute [rw] persistence
@@ -2896,6 +2994,14 @@ module Aws::ChimeSDKMessaging
     #   The content type of the channel message.
     #   @return [String]
     #
+    # @!attribute [rw] target
+    #   The target of a message. Must be a member of the channel, such as
+    #   another user, a bot, or the sender. Only the target and the sender
+    #   can view targeted messages. Only users who can see targeted messages
+    #   can take actions on them. However, administrators can delete
+    #   targeted messages that they can’t see.
+    #   @return [Array<Types::Target>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/SendChannelMessageRequest AWS API Documentation
     #
     class SendChannelMessageRequest < Struct.new(
@@ -2909,7 +3015,8 @@ module Aws::ChimeSDKMessaging
       :push_notification,
       :message_attributes,
       :sub_channel_id,
-      :content_type)
+      :content_type,
+      :target)
       SENSITIVE = [:content, :metadata, :client_request_token, :content_type]
       include Aws::Structure
     end
@@ -3049,6 +3156,23 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
+    # The target of a message, a sender, a user, or a bot. Only the target
+    # and the sender can view targeted messages. Only users who can see
+    # targeted messages can take actions on them. However, administrators
+    # can delete targeted messages that they can’t see.
+    #
+    # @!attribute [rw] member_arn
+    #   The ARN of the target channel member.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/Target AWS API Documentation
+    #
+    class Target < Struct.new(
+      :member_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The client exceeded its request rate limit.
     #
     # @!attribute [rw] code
@@ -3143,7 +3267,7 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The content of the message being updated.
+    #   The content of the channel message.
     #   @return [String]
     #
     # @!attribute [rw] metadata

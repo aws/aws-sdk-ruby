@@ -8550,6 +8550,28 @@ module Aws::Pinpoint
     #   configured first and SendingSchedule should be set to true.
     #   @return [Types::ClosedDays]
     #
+    # @!attribute [rw] timezone_estimation_methods
+    #   An array of time zone estimation methods, if any, to use for
+    #   determining an [Endpoints][1] time zone if the Endpoint does not
+    #   have a value for the Demographic.Timezone attribute.
+    #
+    #   * PHONE\_NUMBER - A time zone is determined based on the
+    #     Endpoint.Address and Endpoint.Location.Country.
+    #
+    #   * POSTAL\_CODE - A time zone is determined based on the
+    #     Endpoint.Location.PostalCode and Endpoint.Location.Country.
+    #
+    #     <note markdown="1">POSTAL\_CODE detection is only supported in the United States,
+    #     United Kingdom, Australia, New Zealand, Canada, France, Italy,
+    #     Spain, Germany and in regions where Amazon Pinpoint is available.
+    #
+    #     </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-endpoints-endpoint-id.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyResponse AWS API Documentation
     #
     class JourneyResponse < Struct.new(
@@ -8573,7 +8595,8 @@ module Aws::Pinpoint
       :journey_channel_settings,
       :sending_schedule,
       :open_hours,
-      :closed_days)
+      :closed_days,
+      :timezone_estimation_methods)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13764,6 +13787,28 @@ module Aws::Pinpoint
     #   be configured first and SendingSchedule should be set to true.
     #   @return [Types::ClosedDays]
     #
+    # @!attribute [rw] timezone_estimation_methods
+    #   An array of time zone estimation methods, if any, to use for
+    #   determining an [Endpoints][1] time zone if the Endpoint does not
+    #   have a value for the Demographic.Timezone attribute.
+    #
+    #   * PHONE\_NUMBER - A time zone is determined based on the
+    #     Endpoint.Address and Endpoint.Location.Country.
+    #
+    #   * POSTAL\_CODE - A time zone is determined based on the
+    #     Endpoint.Location.PostalCode and Endpoint.Location.Country.
+    #
+    #     <note markdown="1">POSTAL\_CODE detection is only supported in the United States,
+    #     United Kingdom, Australia, New Zealand, Canada, France, Italy,
+    #     Spain, Germany and in regions where Amazon Pinpoint is available.
+    #
+    #     </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-endpoints-endpoint-id.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteJourneyRequest AWS API Documentation
     #
     class WriteJourneyRequest < Struct.new(
@@ -13784,7 +13829,8 @@ module Aws::Pinpoint
       :journey_channel_settings,
       :sending_schedule,
       :open_hours,
-      :closed_days)
+      :closed_days,
+      :timezone_estimation_methods)
       SENSITIVE = []
       include Aws::Structure
     end

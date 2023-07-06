@@ -133,6 +133,91 @@ module Aws::IVS
       include Aws::Structure
     end
 
+    # Error for a request in the batch for
+    # BatchStartViewerSessionRevocation. Each error is related to a specific
+    # channel-ARN and viewer-ID pair.
+    #
+    # @!attribute [rw] channel_arn
+    #   Channel ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   Error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Error message, determined by the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] viewer_id
+    #   The ID of the viewer session to revoke.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/BatchStartViewerSessionRevocationError AWS API Documentation
+    #
+    class BatchStartViewerSessionRevocationError < Struct.new(
+      :channel_arn,
+      :code,
+      :message,
+      :viewer_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] viewer_sessions
+    #   Array of viewer sessions, one per channel-ARN and viewer-ID pair.
+    #   @return [Array<Types::BatchStartViewerSessionRevocationViewerSession>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/BatchStartViewerSessionRevocationRequest AWS API Documentation
+    #
+    class BatchStartViewerSessionRevocationRequest < Struct.new(
+      :viewer_sessions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] errors
+    #   Each error object is related to a specific `channelArn` and
+    #   `viewerId` pair in the request.
+    #   @return [Array<Types::BatchStartViewerSessionRevocationError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/BatchStartViewerSessionRevocationResponse AWS API Documentation
+    #
+    class BatchStartViewerSessionRevocationResponse < Struct.new(
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A viewer session to revoke in the call to
+    # BatchStartViewerSessionRevocation.
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel associated with the viewer session to revoke.
+    #   @return [String]
+    #
+    # @!attribute [rw] viewer_id
+    #   The ID of the viewer associated with the viewer session to revoke.
+    #   Do not use this field for personally identifying, confidential, or
+    #   sensitive information.
+    #   @return [String]
+    #
+    # @!attribute [rw] viewer_session_versions_less_than_or_equal_to
+    #   An optional filter on which versions of the viewer session to
+    #   revoke. All versions less than or equal to the specified version
+    #   will be revoked. Default: 0.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/BatchStartViewerSessionRevocationViewerSession AWS API Documentation
+    #
+    class BatchStartViewerSessionRevocationViewerSession < Struct.new(
+      :channel_arn,
+      :viewer_id,
+      :viewer_session_versions_less_than_or_equal_to)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Object specifying a channel.
     #
     # @!attribute [rw] arn
@@ -1449,6 +1534,36 @@ module Aws::IVS
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel associated with the viewer session to revoke.
+    #   @return [String]
+    #
+    # @!attribute [rw] viewer_id
+    #   The ID of the viewer associated with the viewer session to revoke.
+    #   Do not use this field for personally identifying, confidential, or
+    #   sensitive information.
+    #   @return [String]
+    #
+    # @!attribute [rw] viewer_session_versions_less_than_or_equal_to
+    #   An optional filter on which versions of the viewer session to
+    #   revoke. All versions less than or equal to the specified version
+    #   will be revoked. Default: 0.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/StartViewerSessionRevocationRequest AWS API Documentation
+    #
+    class StartViewerSessionRevocationRequest < Struct.new(
+      :channel_arn,
+      :viewer_id,
+      :viewer_session_versions_less_than_or_equal_to)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/StartViewerSessionRevocationResponse AWS API Documentation
+    #
+    class StartViewerSessionRevocationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] channel_arn
     #   ARN of the channel for which the stream is to be stopped.

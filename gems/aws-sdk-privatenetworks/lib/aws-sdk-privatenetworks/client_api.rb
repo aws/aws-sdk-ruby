@@ -24,7 +24,11 @@ module Aws::PrivateNetworks
     Address = Shapes::StructureShape.new(name: 'Address')
     AddressContent = Shapes::StringShape.new(name: 'AddressContent')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    CommitmentConfiguration = Shapes::StructureShape.new(name: 'CommitmentConfiguration')
+    CommitmentInformation = Shapes::StructureShape.new(name: 'CommitmentInformation')
+    CommitmentLength = Shapes::StringShape.new(name: 'CommitmentLength')
     ConfigureAccessPointRequest = Shapes::StructureShape.new(name: 'ConfigureAccessPointRequest')
     ConfigureAccessPointRequestCpiSecretKeyString = Shapes::StringShape.new(name: 'ConfigureAccessPointRequestCpiSecretKeyString')
     ConfigureAccessPointRequestCpiUserIdString = Shapes::StringShape.new(name: 'ConfigureAccessPointRequestCpiUserIdString')
@@ -115,6 +119,9 @@ module Aws::PrivateNetworks
     OrderFilterValues = Shapes::ListShape.new(name: 'OrderFilterValues')
     OrderFilters = Shapes::MapShape.new(name: 'OrderFilters')
     OrderList = Shapes::ListShape.new(name: 'OrderList')
+    OrderedResourceDefinition = Shapes::StructureShape.new(name: 'OrderedResourceDefinition')
+    OrderedResourceDefinitionCountInteger = Shapes::IntegerShape.new(name: 'OrderedResourceDefinitionCountInteger')
+    OrderedResourceDefinitions = Shapes::ListShape.new(name: 'OrderedResourceDefinitions')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PingResponse = Shapes::StructureShape.new(name: 'PingResponse')
     Position = Shapes::StructureShape.new(name: 'Position')
@@ -164,6 +171,7 @@ module Aws::PrivateNetworks
     ActivateDeviceIdentifierResponse.struct_class = Types::ActivateDeviceIdentifierResponse
 
     ActivateNetworkSiteRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
+    ActivateNetworkSiteRequest.add_member(:commitment_configuration, Shapes::ShapeRef.new(shape: CommitmentConfiguration, location_name: "commitmentConfiguration"))
     ActivateNetworkSiteRequest.add_member(:network_site_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "networkSiteArn"))
     ActivateNetworkSiteRequest.add_member(:shipping_address, Shapes::ShapeRef.new(shape: Address, required: true, location_name: "shippingAddress"))
     ActivateNetworkSiteRequest.struct_class = Types::ActivateNetworkSiteRequest
@@ -174,6 +182,7 @@ module Aws::PrivateNetworks
     Address.add_member(:city, Shapes::ShapeRef.new(shape: AddressContent, required: true, location_name: "city"))
     Address.add_member(:company, Shapes::ShapeRef.new(shape: AddressContent, location_name: "company"))
     Address.add_member(:country, Shapes::ShapeRef.new(shape: AddressContent, required: true, location_name: "country"))
+    Address.add_member(:email_address, Shapes::ShapeRef.new(shape: AddressContent, location_name: "emailAddress"))
     Address.add_member(:name, Shapes::ShapeRef.new(shape: AddressContent, required: true, location_name: "name"))
     Address.add_member(:phone_number, Shapes::ShapeRef.new(shape: AddressContent, location_name: "phoneNumber"))
     Address.add_member(:postal_code, Shapes::ShapeRef.new(shape: AddressContent, required: true, location_name: "postalCode"))
@@ -182,6 +191,15 @@ module Aws::PrivateNetworks
     Address.add_member(:street2, Shapes::ShapeRef.new(shape: AddressContent, location_name: "street2"))
     Address.add_member(:street3, Shapes::ShapeRef.new(shape: AddressContent, location_name: "street3"))
     Address.struct_class = Types::Address
+
+    CommitmentConfiguration.add_member(:automatic_renewal, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "automaticRenewal"))
+    CommitmentConfiguration.add_member(:commitment_length, Shapes::ShapeRef.new(shape: CommitmentLength, required: true, location_name: "commitmentLength"))
+    CommitmentConfiguration.struct_class = Types::CommitmentConfiguration
+
+    CommitmentInformation.add_member(:commitment_configuration, Shapes::ShapeRef.new(shape: CommitmentConfiguration, required: true, location_name: "commitmentConfiguration"))
+    CommitmentInformation.add_member(:expires_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expiresOn"))
+    CommitmentInformation.add_member(:start_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startAt"))
+    CommitmentInformation.struct_class = Types::CommitmentInformation
 
     ConfigureAccessPointRequest.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "accessPointArn"))
     ConfigureAccessPointRequest.add_member(:cpi_secret_key, Shapes::ShapeRef.new(shape: ConfigureAccessPointRequestCpiSecretKeyString, location_name: "cpiSecretKey"))
@@ -376,6 +394,7 @@ module Aws::PrivateNetworks
     NetworkList.member = Shapes::ShapeRef.new(shape: Network)
 
     NetworkResource.add_member(:attributes, Shapes::ShapeRef.new(shape: NameValuePairs, location_name: "attributes"))
+    NetworkResource.add_member(:commitment_information, Shapes::ShapeRef.new(shape: CommitmentInformation, location_name: "commitmentInformation"))
     NetworkResource.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     NetworkResource.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     NetworkResource.add_member(:health, Shapes::ShapeRef.new(shape: HealthStatus, location_name: "health"))
@@ -434,6 +453,7 @@ module Aws::PrivateNetworks
     Order.add_member(:network_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "networkArn"))
     Order.add_member(:network_site_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "networkSiteArn"))
     Order.add_member(:order_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "orderArn"))
+    Order.add_member(:ordered_resources, Shapes::ShapeRef.new(shape: OrderedResourceDefinitions, location_name: "orderedResources"))
     Order.add_member(:shipping_address, Shapes::ShapeRef.new(shape: Address, location_name: "shippingAddress"))
     Order.add_member(:tracking_information, Shapes::ShapeRef.new(shape: TrackingInformationList, location_name: "trackingInformation"))
     Order.struct_class = Types::Order
@@ -444,6 +464,13 @@ module Aws::PrivateNetworks
     OrderFilters.value = Shapes::ShapeRef.new(shape: OrderFilterValues)
 
     OrderList.member = Shapes::ShapeRef.new(shape: Order)
+
+    OrderedResourceDefinition.add_member(:commitment_configuration, Shapes::ShapeRef.new(shape: CommitmentConfiguration, location_name: "commitmentConfiguration"))
+    OrderedResourceDefinition.add_member(:count, Shapes::ShapeRef.new(shape: OrderedResourceDefinitionCountInteger, required: true, location_name: "count"))
+    OrderedResourceDefinition.add_member(:type, Shapes::ShapeRef.new(shape: NetworkResourceDefinitionType, required: true, location_name: "type"))
+    OrderedResourceDefinition.struct_class = Types::OrderedResourceDefinition
+
+    OrderedResourceDefinitions.member = Shapes::ShapeRef.new(shape: OrderedResourceDefinition)
 
     PingResponse.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
     PingResponse.struct_class = Types::PingResponse
@@ -470,6 +497,7 @@ module Aws::PrivateNetworks
     SitePlan.add_member(:resource_definitions, Shapes::ShapeRef.new(shape: NetworkResourceDefinitions, location_name: "resourceDefinitions"))
     SitePlan.struct_class = Types::SitePlan
 
+    StartNetworkResourceUpdateRequest.add_member(:commitment_configuration, Shapes::ShapeRef.new(shape: CommitmentConfiguration, location_name: "commitmentConfiguration"))
     StartNetworkResourceUpdateRequest.add_member(:network_resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "networkResourceArn"))
     StartNetworkResourceUpdateRequest.add_member(:return_reason, Shapes::ShapeRef.new(shape: StartNetworkResourceUpdateRequestReturnReasonString, location_name: "returnReason"))
     StartNetworkResourceUpdateRequest.add_member(:shipping_address, Shapes::ShapeRef.new(shape: Address, location_name: "shippingAddress"))

@@ -240,6 +240,7 @@ module Aws::CloudFormation
     NotificationARN = Shapes::StringShape.new(name: 'NotificationARN')
     NotificationARNs = Shapes::ListShape.new(name: 'NotificationARNs')
     OnFailure = Shapes::StringShape.new(name: 'OnFailure')
+    OnStackFailure = Shapes::StringShape.new(name: 'OnStackFailure')
     OperationIdAlreadyExistsException = Shapes::StructureShape.new(name: 'OperationIdAlreadyExistsException')
     OperationInProgressException = Shapes::StructureShape.new(name: 'OperationInProgressException')
     OperationNotFoundException = Shapes::StructureShape.new(name: 'OperationNotFoundException')
@@ -618,6 +619,7 @@ module Aws::CloudFormation
     CreateChangeSetInput.add_member(:change_set_type, Shapes::ShapeRef.new(shape: ChangeSetType, location_name: "ChangeSetType"))
     CreateChangeSetInput.add_member(:resources_to_import, Shapes::ShapeRef.new(shape: ResourcesToImport, location_name: "ResourcesToImport"))
     CreateChangeSetInput.add_member(:include_nested_stacks, Shapes::ShapeRef.new(shape: IncludeNestedStacks, location_name: "IncludeNestedStacks"))
+    CreateChangeSetInput.add_member(:on_stack_failure, Shapes::ShapeRef.new(shape: OnStackFailure, location_name: "OnStackFailure"))
     CreateChangeSetInput.struct_class = Types::CreateChangeSetInput
 
     CreateChangeSetOutput.add_member(:id, Shapes::ShapeRef.new(shape: ChangeSetId, location_name: "Id"))
@@ -783,6 +785,7 @@ module Aws::CloudFormation
     DescribeChangeSetOutput.add_member(:include_nested_stacks, Shapes::ShapeRef.new(shape: IncludeNestedStacks, location_name: "IncludeNestedStacks"))
     DescribeChangeSetOutput.add_member(:parent_change_set_id, Shapes::ShapeRef.new(shape: ChangeSetId, location_name: "ParentChangeSetId"))
     DescribeChangeSetOutput.add_member(:root_change_set_id, Shapes::ShapeRef.new(shape: ChangeSetId, location_name: "RootChangeSetId"))
+    DescribeChangeSetOutput.add_member(:on_stack_failure, Shapes::ShapeRef.new(shape: OnStackFailure, location_name: "OnStackFailure"))
     DescribeChangeSetOutput.struct_class = Types::DescribeChangeSetOutput
 
     DescribeOrganizationsAccessInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))

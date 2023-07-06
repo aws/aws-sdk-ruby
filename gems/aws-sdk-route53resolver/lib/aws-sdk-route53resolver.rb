@@ -52,6 +52,6 @@ require_relative 'aws-sdk-route53resolver/customizations'
 # @!group service
 module Aws::Route53Resolver
 
-  GEM_VERSION = '1.43.0'
+  GEM_VERSION = '1.44.0'
 
 end

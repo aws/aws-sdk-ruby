@@ -60,6 +60,8 @@ module Aws::IVS
             Aws::IVS::Endpoints::BatchGetChannel.build(context)
           when :batch_get_stream_key
             Aws::IVS::Endpoints::BatchGetStreamKey.build(context)
+          when :batch_start_viewer_session_revocation
+            Aws::IVS::Endpoints::BatchStartViewerSessionRevocation.build(context)
           when :create_channel
             Aws::IVS::Endpoints::CreateChannel.build(context)
           when :create_recording_configuration
@@ -104,6 +106,8 @@ module Aws::IVS
             Aws::IVS::Endpoints::ListTagsForResource.build(context)
           when :put_metadata
             Aws::IVS::Endpoints::PutMetadata.build(context)
+          when :start_viewer_session_revocation
+            Aws::IVS::Endpoints::StartViewerSessionRevocation.build(context)
           when :stop_stream
             Aws::IVS::Endpoints::StopStream.build(context)
           when :tag_resource

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2023-06-29)
+------------------
+
+* Feature - This release adds ReturnValuesOnConditionCheckFailure parameter to PutItem, UpdateItem, DeleteItem, ExecuteStatement, BatchExecuteStatement and ExecuteTransaction APIs. When set to ALL_OLD,  API returns a copy of the item as it was when a conditional write failed
+
+1.89.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.88.0 (2023-06-21)
+------------------
+
+* Feature - Documentation updates for DynamoDB
+
 1.87.0 (2023-06-15)
 ------------------
 

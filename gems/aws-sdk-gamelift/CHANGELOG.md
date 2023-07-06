@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2023-06-29)
+------------------
+
+* Feature - Amazon GameLift now supports game builds that use the Amazon Linux 2023 (AL2023) operating system.
+
+1.66.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.65.0 (2023-06-15)
 ------------------
 

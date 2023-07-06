@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.69.0 (2023-06-23)
+------------------
+
+* Feature - Update to Amazon FSx documentation.
+
 1.68.0 (2023-06-15)
 ------------------
 

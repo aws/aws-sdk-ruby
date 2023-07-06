@@ -582,6 +582,12 @@ module Aws::Transfer
     #   the parent directory of the files that you intend to send with
     #   `StartFileTransfer`.
     #
+    #   If you are using Basic authentication for your AS2 connector, the
+    #   access role requires the `secretsmanager:GetSecretValue` permission
+    #   for the secret. If the secret is encrypted using a customer-managed
+    #   key instead of the Amazon Web Services managed key in Secrets Manager,
+    #   then the role also needs the `kms:Decrypt` permission for that key.
+    #
     # @option params [String] :status
     #   The status of the agreement. The agreement can be either `ACTIVE` or
     #   `INACTIVE`.
@@ -653,6 +659,12 @@ module Aws::Transfer
     #   the parent directory of the files that you intend to send with
     #   `StartFileTransfer`.
     #
+    #   If you are using Basic authentication for your AS2 connector, the
+    #   access role requires the `secretsmanager:GetSecretValue` permission
+    #   for the secret. If the secret is encrypted using a customer-managed
+    #   key instead of the Amazon Web Services managed key in Secrets Manager,
+    #   then the role also needs the `kms:Decrypt` permission for that key.
+    #
     # @option params [String] :logging_role
     #   The Amazon Resource Name (ARN) of the Identity and Access Management
     #   (IAM) role that allows a connector to turn on CloudWatch logging for
@@ -680,6 +692,7 @@ module Aws::Transfer
     #       signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE
     #       mdn_signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE, DEFAULT
     #       mdn_response: "SYNC", # accepts SYNC, NONE
+    #       basic_auth_secret_id: "As2ConnectorSecretId",
     #     },
     #     access_role: "Role", # required
     #     logging_role: "Role",
@@ -1026,6 +1039,25 @@ module Aws::Transfer
     #   upload occurs when the server session disconnects while the file is
     #   still being uploaded.
     #
+    # @option params [Array<String>] :structured_log_destinations
+    #   Specifies the log groups to which your server logs are sent.
+    #
+    #   To specify a log group, you must provide the ARN for an existing log
+    #   group. In this case, the format of the log group is as follows:
+    #
+    #   `arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*`
+    #
+    #   For example,
+    #   `arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*`
+    #
+    #   If you have previously specified a log group for a server, you can
+    #   clear it, and in effect turn off structured logging, by providing an
+    #   empty value for this parameter in an `update-server` call. For
+    #   example:
+    #
+    #   `update-server --server-id s-1234567890abcdef0
+    #   --structured-log-destinations`
+    #
     # @return [Types::CreateServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateServerResponse#server_id #server_id} => String
@@ -1083,6 +1115,7 @@ module Aws::Transfer
     #         },
     #       ],
     #     },
+    #     structured_log_destinations: ["Arn"],
     #   })
     #
     # @example Response structure
@@ -1925,6 +1958,7 @@ module Aws::Transfer
     #   resp.connector.as_2_config.signing_algorithm #=> String, one of "SHA256", "SHA384", "SHA512", "SHA1", "NONE"
     #   resp.connector.as_2_config.mdn_signing_algorithm #=> String, one of "SHA256", "SHA384", "SHA512", "SHA1", "NONE", "DEFAULT"
     #   resp.connector.as_2_config.mdn_response #=> String, one of "SYNC", "NONE"
+    #   resp.connector.as_2_config.basic_auth_secret_id #=> String
     #   resp.connector.access_role #=> String
     #   resp.connector.logging_role #=> String
     #   resp.connector.tags #=> Array
@@ -2198,6 +2232,8 @@ module Aws::Transfer
     #   resp.server.workflow_details.on_partial_upload #=> Array
     #   resp.server.workflow_details.on_partial_upload[0].workflow_id #=> String
     #   resp.server.workflow_details.on_partial_upload[0].execution_role #=> String
+    #   resp.server.structured_log_destinations #=> Array
+    #   resp.server.structured_log_destinations[0] #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3666,6 +3702,12 @@ module Aws::Transfer
     #   the parent directory of the files that you intend to send with
     #   `StartFileTransfer`.
     #
+    #   If you are using Basic authentication for your AS2 connector, the
+    #   access role requires the `secretsmanager:GetSecretValue` permission
+    #   for the secret. If the secret is encrypted using a customer-managed
+    #   key instead of the Amazon Web Services managed key in Secrets Manager,
+    #   then the role also needs the `kms:Decrypt` permission for that key.
+    #
     # @return [Types::UpdateAgreementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAgreementResponse#agreement_id #agreement_id} => String
@@ -3763,6 +3805,12 @@ module Aws::Transfer
     #   the parent directory of the files that you intend to send with
     #   `StartFileTransfer`.
     #
+    #   If you are using Basic authentication for your AS2 connector, the
+    #   access role requires the `secretsmanager:GetSecretValue` permission
+    #   for the secret. If the secret is encrypted using a customer-managed
+    #   key instead of the Amazon Web Services managed key in Secrets Manager,
+    #   then the role also needs the `kms:Decrypt` permission for that key.
+    #
     # @option params [String] :logging_role
     #   The Amazon Resource Name (ARN) of the Identity and Access Management
     #   (IAM) role that allows a connector to turn on CloudWatch logging for
@@ -3787,6 +3835,7 @@ module Aws::Transfer
     #       signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE
     #       mdn_signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE, DEFAULT
     #       mdn_response: "SYNC", # accepts SYNC, NONE
+    #       basic_auth_secret_id: "As2ConnectorSecretId",
     #     },
     #     access_role: "Role",
     #     logging_role: "Role",
@@ -4114,6 +4163,25 @@ module Aws::Transfer
     #   `aws transfer update-server --server-id s-01234567890abcdef
     #   --workflow-details '\{"OnUpload":[]\}'`
     #
+    # @option params [Array<String>] :structured_log_destinations
+    #   Specifies the log groups to which your server logs are sent.
+    #
+    #   To specify a log group, you must provide the ARN for an existing log
+    #   group. In this case, the format of the log group is as follows:
+    #
+    #   `arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*`
+    #
+    #   For example,
+    #   `arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*`
+    #
+    #   If you have previously specified a log group for a server, you can
+    #   clear it, and in effect turn off structured logging, by providing an
+    #   empty value for this parameter in an `update-server` call. For
+    #   example:
+    #
+    #   `update-server --server-id s-1234567890abcdef0
+    #   --structured-log-destinations`
+    #
     # @return [Types::UpdateServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateServerResponse#server_id #server_id} => String
@@ -4164,6 +4232,7 @@ module Aws::Transfer
     #         },
     #       ],
     #     },
+    #     structured_log_destinations: ["Arn"],
     #   })
     #
     # @example Response structure
@@ -4337,7 +4406,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

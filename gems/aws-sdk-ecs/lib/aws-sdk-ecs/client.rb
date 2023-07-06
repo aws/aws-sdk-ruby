@@ -1164,6 +1164,9 @@ module Aws::ECS
     #   resources][1] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
+    #   When you use Amazon ECS managed tags, you need to set the
+    #   `propagateTags` request parameter.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
@@ -1173,6 +1176,8 @@ module Aws::ECS
     #   the task. If no value is specified, the tags aren't propagated. Tags
     #   can only be propagated to the task during task creation. To add tags
     #   to a task after task creation, use the [TagResource][1] API action.
+    #
+    #   The default is `NONE`.
     #
     #
     #
@@ -2356,6 +2361,14 @@ module Aws::ECS
     # A task definition revision will stay in `DELETE_IN_PROGRESS` status
     # until all the associated tasks and services have been terminated.
     #
+    # When you delete all `INACTIVE` task definition revisions, the task
+    # definition name is not displayed in the console and not returned in
+    # the API. If a task definition revisions are in the
+    # `DELETE_IN_PROGRESS` state, the task definition name is displayed in
+    # the console and returned in the API. The task definition name is
+    # retained by Amazon ECS and the revision is incremented the next time
+    # you create a task definition with that name.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeregisterTaskDefinition.html
@@ -2486,6 +2499,8 @@ module Aws::ECS
     #   resp.task_definitions[0].container_definitions[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
     #   resp.task_definitions[0].container_definitions[0].firelens_configuration.options #=> Hash
     #   resp.task_definitions[0].container_definitions[0].firelens_configuration.options["String"] #=> String
+    #   resp.task_definitions[0].container_definitions[0].credential_specs #=> Array
+    #   resp.task_definitions[0].container_definitions[0].credential_specs[0] #=> String
     #   resp.task_definitions[0].family #=> String
     #   resp.task_definitions[0].task_role_arn #=> String
     #   resp.task_definitions[0].execution_role_arn #=> String
@@ -2939,6 +2954,8 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
     #   resp.task_definition.container_definitions[0].firelens_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].firelens_configuration.options["String"] #=> String
+    #   resp.task_definition.container_definitions[0].credential_specs #=> Array
+    #   resp.task_definition.container_definitions[0].credential_specs[0] #=> String
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -3855,6 +3872,8 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
     #   resp.task_definition.container_definitions[0].firelens_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].firelens_configuration.options["String"] #=> String
+    #   resp.task_definition.container_definitions[0].credential_specs #=> Array
+    #   resp.task_definition.container_definitions[0].credential_specs[0] #=> String
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -6597,6 +6616,7 @@ module Aws::ECS
     #             "String" => "String",
     #           },
     #         },
+    #         credential_specs: ["String"],
     #       },
     #     ],
     #     volumes: [
@@ -6785,6 +6805,8 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
     #   resp.task_definition.container_definitions[0].firelens_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].firelens_configuration.options["String"] #=> String
+    #   resp.task_definition.container_definitions[0].credential_specs #=> Array
+    #   resp.task_definition.container_definitions[0].credential_specs[0] #=> String
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -9709,7 +9731,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.121.0'
+      context[:gem_version] = '1.124.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

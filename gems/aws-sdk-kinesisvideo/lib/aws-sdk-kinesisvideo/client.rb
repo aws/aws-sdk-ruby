@@ -479,7 +479,7 @@ module Aws::KinesisVideo
     #   Video Streams to use to encrypt stream data.
     #
     #   If no key ID is specified, the default, Kinesis Video-managed key
-    #   (`aws/kinesisvideo`) is used.
+    #   (`Amazon Web Services/kinesisvideo`) is used.
     #
     #   For more information, see [DescribeKey][1].
     #
@@ -532,6 +532,45 @@ module Aws::KinesisVideo
     # @param [Hash] params ({})
     def create_stream(params = {}, options = {})
       req = build_request(:create_stream, params)
+      req.send_request(options)
+    end
+
+    # An asynchronous API that deletes a stream’s existing edge
+    # configuration, as well as the corresponding media from the Edge Agent.
+    #
+    # When you invoke this API, the sync status is set to `DELETING`. A
+    # deletion process starts, in which active edge jobs are stopped and all
+    # media is deleted from the edge device. The time to delete varies,
+    # depending on the total amount of stored media. If the deletion process
+    # fails, the sync status changes to `DELETE_FAILED`. You will need to
+    # re-try the deletion.
+    #
+    # When the deletion process has completed successfully, the edge
+    # configuration is no longer accessible.
+    #
+    # @option params [String] :stream_name
+    #   The name of the stream from which to delete the edge configuration.
+    #   Specify either the `StreamName` or the `StreamARN`.
+    #
+    # @option params [String] :stream_arn
+    #   The Amazon Resource Name (ARN) of the stream. Specify either the
+    #   `StreamName` or the `StreamARN`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_edge_configuration({
+    #     stream_name: "StreamName",
+    #     stream_arn: "ResourceARN",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DeleteEdgeConfiguration AWS API Documentation
+    #
+    # @overload delete_edge_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_edge_configuration(params = {}, options = {})
+      req = build_request(:delete_edge_configuration, params)
       req.send_request(options)
     end
 
@@ -614,8 +653,10 @@ module Aws::KinesisVideo
     end
 
     # Describes a stream’s edge configuration that was set using the
-    # `StartEdgeConfigurationUpdate` API. Use this API to get the status of
-    # the configuration if the configuration is in sync with the Edge Agent.
+    # `StartEdgeConfigurationUpdate` API and the latest status of the edge
+    # agent's recorder and uploader jobs. Use this API to get the status of
+    # the configuration to determine if the configuration is in sync with
+    # the Edge Agent. Use this API to evaluate the health of the Edge Agent.
     #
     # @option params [String] :stream_name
     #   The name of the stream whose edge configuration you want to update.
@@ -634,6 +675,7 @@ module Aws::KinesisVideo
     #   * {Types::DescribeEdgeConfigurationOutput#sync_status #sync_status} => String
     #   * {Types::DescribeEdgeConfigurationOutput#failed_status_details #failed_status_details} => String
     #   * {Types::DescribeEdgeConfigurationOutput#edge_config #edge_config} => Types::EdgeConfig
+    #   * {Types::DescribeEdgeConfigurationOutput#edge_agent_status #edge_agent_status} => Types::EdgeAgentStatus
     #
     # @example Request syntax with placeholder values
     #
@@ -648,7 +690,7 @@ module Aws::KinesisVideo
     #   resp.stream_arn #=> String
     #   resp.creation_time #=> Time
     #   resp.last_updated_time #=> Time
-    #   resp.sync_status #=> String, one of "SYNCING", "ACKNOWLEDGED", "IN_SYNC", "SYNC_FAILED", "DELETING", "DELETE_FAILED"
+    #   resp.sync_status #=> String, one of "SYNCING", "ACKNOWLEDGED", "IN_SYNC", "SYNC_FAILED", "DELETING", "DELETE_FAILED", "DELETING_ACKNOWLEDGED"
     #   resp.failed_status_details #=> String
     #   resp.edge_config.hub_device_arn #=> String
     #   resp.edge_config.recorder_config.media_source_config.media_uri_secret_arn #=> String
@@ -661,6 +703,14 @@ module Aws::KinesisVideo
     #   resp.edge_config.deletion_config.local_size_config.max_local_media_size_in_mb #=> Integer
     #   resp.edge_config.deletion_config.local_size_config.strategy_on_full_size #=> String, one of "DELETE_OLDEST_MEDIA", "DENY_NEW_MEDIA"
     #   resp.edge_config.deletion_config.delete_after_upload #=> Boolean
+    #   resp.edge_agent_status.last_recorder_status.job_status_details #=> String
+    #   resp.edge_agent_status.last_recorder_status.last_collected_time #=> Time
+    #   resp.edge_agent_status.last_recorder_status.last_updated_time #=> Time
+    #   resp.edge_agent_status.last_recorder_status.recorder_status #=> String, one of "SUCCESS", "USER_ERROR", "SYSTEM_ERROR"
+    #   resp.edge_agent_status.last_uploader_status.job_status_details #=> String
+    #   resp.edge_agent_status.last_uploader_status.last_collected_time #=> Time
+    #   resp.edge_agent_status.last_uploader_status.last_updated_time #=> Time
+    #   resp.edge_agent_status.last_uploader_status.uploader_status #=> String, one of "SUCCESS", "USER_ERROR", "SYSTEM_ERROR"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DescribeEdgeConfiguration AWS API Documentation
     #
@@ -717,9 +767,6 @@ module Aws::KinesisVideo
       req.send_request(options)
     end
 
-    # Returns the most current information about the stream. Either
-    # streamName or streamARN should be provided in the input.
-    #
     # Returns the most current information about the stream. The
     # `streamName` or `streamARN` should be provided in the input.
     #
@@ -1023,6 +1070,70 @@ module Aws::KinesisVideo
       req.send_request(options)
     end
 
+    # Returns an array of edge configurations associated with the specified
+    # Edge Agent.
+    #
+    # In the request, you must specify the Edge Agent `HubDeviceArn`.
+    #
+    # @option params [required, String] :hub_device_arn
+    #   The "Internet of Things (IoT) Thing" Arn of the edge agent.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of edge configurations to return in the response.
+    #   The default is 5.
+    #
+    # @option params [String] :next_token
+    #   If you specify this parameter, when the result of a
+    #   `ListEdgeAgentConfigurations` operation is truncated, the call returns
+    #   the `NextToken` in the response. To get another batch of edge
+    #   configurations, provide this token in your next request.
+    #
+    # @return [Types::ListEdgeAgentConfigurationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEdgeAgentConfigurationsOutput#edge_configs #edge_configs} => Array&lt;Types::ListEdgeAgentConfigurationsEdgeConfig&gt;
+    #   * {Types::ListEdgeAgentConfigurationsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_edge_agent_configurations({
+    #     hub_device_arn: "HubDeviceArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.edge_configs #=> Array
+    #   resp.edge_configs[0].stream_name #=> String
+    #   resp.edge_configs[0].stream_arn #=> String
+    #   resp.edge_configs[0].creation_time #=> Time
+    #   resp.edge_configs[0].last_updated_time #=> Time
+    #   resp.edge_configs[0].sync_status #=> String, one of "SYNCING", "ACKNOWLEDGED", "IN_SYNC", "SYNC_FAILED", "DELETING", "DELETE_FAILED", "DELETING_ACKNOWLEDGED"
+    #   resp.edge_configs[0].failed_status_details #=> String
+    #   resp.edge_configs[0].edge_config.hub_device_arn #=> String
+    #   resp.edge_configs[0].edge_config.recorder_config.media_source_config.media_uri_secret_arn #=> String
+    #   resp.edge_configs[0].edge_config.recorder_config.media_source_config.media_uri_type #=> String, one of "RTSP_URI", "FILE_URI"
+    #   resp.edge_configs[0].edge_config.recorder_config.schedule_config.schedule_expression #=> String
+    #   resp.edge_configs[0].edge_config.recorder_config.schedule_config.duration_in_seconds #=> Integer
+    #   resp.edge_configs[0].edge_config.uploader_config.schedule_config.schedule_expression #=> String
+    #   resp.edge_configs[0].edge_config.uploader_config.schedule_config.duration_in_seconds #=> Integer
+    #   resp.edge_configs[0].edge_config.deletion_config.edge_retention_in_hours #=> Integer
+    #   resp.edge_configs[0].edge_config.deletion_config.local_size_config.max_local_media_size_in_mb #=> Integer
+    #   resp.edge_configs[0].edge_config.deletion_config.local_size_config.strategy_on_full_size #=> String, one of "DELETE_OLDEST_MEDIA", "DENY_NEW_MEDIA"
+    #   resp.edge_configs[0].edge_config.deletion_config.delete_after_upload #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ListEdgeAgentConfigurations AWS API Documentation
+    #
+    # @overload list_edge_agent_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_edge_agent_configurations(params = {}, options = {})
+      req = build_request(:list_edge_agent_configurations, params)
+      req.send_request(options)
+    end
+
     # Returns an array of `ChannelInfo` objects. Each object describes a
     # signaling channel. To retrieve only those channels that satisfy a
     # specific condition, you can specify a `ChannelNameCondition`.
@@ -1302,7 +1413,7 @@ module Aws::KinesisVideo
     #   resp.stream_arn #=> String
     #   resp.creation_time #=> Time
     #   resp.last_updated_time #=> Time
-    #   resp.sync_status #=> String, one of "SYNCING", "ACKNOWLEDGED", "IN_SYNC", "SYNC_FAILED", "DELETING", "DELETE_FAILED"
+    #   resp.sync_status #=> String, one of "SYNCING", "ACKNOWLEDGED", "IN_SYNC", "SYNC_FAILED", "DELETING", "DELETE_FAILED", "DELETING_ACKNOWLEDGED"
     #   resp.failed_status_details #=> String
     #   resp.edge_config.hub_device_arn #=> String
     #   resp.edge_config.recorder_config.media_source_config.media_uri_secret_arn #=> String
@@ -1801,7 +1912,7 @@ module Aws::KinesisVideo
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisvideo'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

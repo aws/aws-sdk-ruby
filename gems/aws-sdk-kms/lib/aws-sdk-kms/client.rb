@@ -1319,6 +1319,17 @@ module Aws::KMS
     #   when a duplicate `GrantId` is returned. All grant tokens for the same
     #   grant ID can be used interchangeably.
     #
+    # @option params [Boolean] :dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #
     # @return [Types::CreateGrantResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGrantResponse#grant_token #grant_token} => String
@@ -1361,6 +1372,7 @@ module Aws::KMS
     #     },
     #     grant_tokens: ["GrantTokenType"],
     #     name: "GrantNameType",
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -2469,6 +2481,17 @@ module Aws::KMS
     #   [2]: https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk
     #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html
     #
+    # @option params [Boolean] :dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #
     # @return [Types::DecryptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DecryptResponse#key_id #key_id} => String
@@ -2548,6 +2571,7 @@ module Aws::KMS
     #       key_encryption_algorithm: "RSAES_OAEP_SHA_256", # accepts RSAES_OAEP_SHA_256
     #       attestation_document: "data",
     #     },
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -4029,6 +4053,17 @@ module Aws::KMS
     #
     #   The SM2PKE algorithm is only available in China Regions.
     #
+    # @option params [Boolean] :dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #
     # @return [Types::EncryptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EncryptResponse#ciphertext_blob #ciphertext_blob} => String
@@ -4080,6 +4115,7 @@ module Aws::KMS
     #     },
     #     grant_tokens: ["GrantTokenType"],
     #     encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256, SM2PKE
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -4314,6 +4350,17 @@ module Aws::KMS
     #   [2]: https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk
     #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html
     #
+    # @option params [Boolean] :dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #
     # @return [Types::GenerateDataKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GenerateDataKeyResponse#ciphertext_blob #ciphertext_blob} => String
@@ -4378,6 +4425,7 @@ module Aws::KMS
     #       key_encryption_algorithm: "RSAES_OAEP_SHA_256", # accepts RSAES_OAEP_SHA_256
     #       attestation_document: "data",
     #     },
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -4593,6 +4641,17 @@ module Aws::KMS
     #   [2]: https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk
     #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html
     #
+    # @option params [Boolean] :dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #
     # @return [Types::GenerateDataKeyPairResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GenerateDataKeyPairResponse#private_key_ciphertext_blob #private_key_ciphertext_blob} => String
@@ -4662,6 +4721,7 @@ module Aws::KMS
     #       key_encryption_algorithm: "RSAES_OAEP_SHA_256", # accepts RSAES_OAEP_SHA_256
     #       attestation_document: "data",
     #     },
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -4821,6 +4881,17 @@ module Aws::KMS
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
     #
+    # @option params [Boolean] :dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #
     # @return [Types::GenerateDataKeyPairWithoutPlaintextResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GenerateDataKeyPairWithoutPlaintextResponse#private_key_ciphertext_blob #private_key_ciphertext_blob} => String
@@ -4856,6 +4927,7 @@ module Aws::KMS
     #     key_id: "KeyIdType", # required
     #     key_pair_spec: "RSA_2048", # required, accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SM2
     #     grant_tokens: ["GrantTokenType"],
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -5025,6 +5097,17 @@ module Aws::KMS
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
     #
+    # @option params [Boolean] :dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #
     # @return [Types::GenerateDataKeyWithoutPlaintextResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GenerateDataKeyWithoutPlaintextResponse#ciphertext_blob #ciphertext_blob} => String
@@ -5057,6 +5140,7 @@ module Aws::KMS
     #     key_spec: "AES_256", # accepts AES_256, AES_128
     #     number_of_bytes: 1,
     #     grant_tokens: ["GrantTokenType"],
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -5154,6 +5238,17 @@ module Aws::KMS
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
     #
+    # @option params [Boolean] :dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #
     # @return [Types::GenerateMacResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GenerateMacResponse#mac #mac} => String
@@ -5186,6 +5281,7 @@ module Aws::KMS
     #     key_id: "KeyIdType", # required
     #     mac_algorithm: "HMAC_SHA_224", # required, accepts HMAC_SHA_224, HMAC_SHA_256, HMAC_SHA_384, HMAC_SHA_512
     #     grant_tokens: ["GrantTokenType"],
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -7406,6 +7502,17 @@ module Aws::KMS
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
     #
+    # @option params [Boolean] :dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #
     # @return [Types::ReEncryptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ReEncryptResponse#ciphertext_blob #ciphertext_blob} => String
@@ -7446,6 +7553,7 @@ module Aws::KMS
     #     source_encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256, SM2PKE
     #     destination_encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256, SM2PKE
     #     grant_tokens: ["GrantTokenType"],
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -7929,6 +8037,17 @@ module Aws::KMS
     #
     #   ^
     #
+    # @option params [Boolean] :dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -7947,6 +8066,7 @@ module Aws::KMS
     #     grant_token: "GrantTokenType",
     #     key_id: "KeyIdType",
     #     grant_id: "GrantIdType",
+    #     dry_run: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RetireGrant AWS API Documentation
@@ -8019,6 +8139,17 @@ module Aws::KMS
     #   Identifies the grant to revoke. To get the grant ID, use CreateGrant,
     #   ListGrants, or ListRetirableGrants.
     #
+    # @option params [Boolean] :dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -8036,6 +8167,7 @@ module Aws::KMS
     #   resp = client.revoke_grant({
     #     key_id: "KeyIdType", # required
     #     grant_id: "GrantIdType", # required
+    #     dry_run: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RevokeGrant AWS API Documentation
@@ -8063,9 +8195,9 @@ module Aws::KMS
     # under the KMS key is unrecoverable. (The only exception is a
     # [multi-Region replica
     # key](kms/latest/developerguide/multi-region-keys-delete.html), or an
-    # asymmetric or HMAC KMS key with imported key material\[BUGBUG-link to
-    # importing-keys-managing.html#import-delete-key.) To prevent the use of
-    # a KMS key without deleting it, use DisableKey.
+    # [asymmetric or HMAC KMS key with imported key
+    # material](kms/latest/developerguide/importing-keys-managing.html#import-delete-key).)
+    # To prevent the use of a KMS key without deleting it, use DisableKey.
     #
     # You can schedule the deletion of a multi-Region primary key and its
     # replica keys at any time. However, KMS will not delete a multi-Region
@@ -8149,7 +8281,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-pending-deletion-window
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-kms-schedule-key-deletion-pending-window-in-days
     #
     # @return [Types::ScheduleKeyDeletionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8358,6 +8490,17 @@ module Aws::KMS
     #   RSASSA-PSS algorithms are preferred. We include RSASSA-PKCS1-v1\_5
     #   algorithms for compatibility with existing applications.
     #
+    # @option params [Boolean] :dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #
     # @return [Types::SignResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SignResponse#key_id #key_id} => String
@@ -8412,6 +8555,7 @@ module Aws::KMS
     #     message_type: "RAW", # accepts RAW, DIGEST
     #     grant_tokens: ["GrantTokenType"],
     #     signing_algorithm: "RSASSA_PSS_SHA_256", # required, accepts RSASSA_PSS_SHA_256, RSASSA_PSS_SHA_384, RSASSA_PSS_SHA_512, RSASSA_PKCS1_V1_5_SHA_256, RSASSA_PKCS1_V1_5_SHA_384, RSASSA_PKCS1_V1_5_SHA_512, ECDSA_SHA_256, ECDSA_SHA_384, ECDSA_SHA_512, SM2DSA
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -9494,6 +9638,17 @@ module Aws::KMS
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
     #
+    # @option params [Boolean] :dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #
     # @return [Types::VerifyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::VerifyResponse#key_id #key_id} => String
@@ -9551,6 +9706,7 @@ module Aws::KMS
     #     signature: "data", # required
     #     signing_algorithm: "RSASSA_PSS_SHA_256", # required, accepts RSASSA_PSS_SHA_256, RSASSA_PSS_SHA_384, RSASSA_PSS_SHA_512, RSASSA_PKCS1_V1_5_SHA_256, RSASSA_PKCS1_V1_5_SHA_384, RSASSA_PKCS1_V1_5_SHA_512, ECDSA_SHA_256, ECDSA_SHA_384, ECDSA_SHA_512, SM2DSA
     #     grant_tokens: ["GrantTokenType"],
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -9641,6 +9797,17 @@ module Aws::KMS
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
     #
+    # @option params [Boolean] :dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #
     # @return [Types::VerifyMacResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::VerifyMacResponse#key_id #key_id} => String
@@ -9675,6 +9842,7 @@ module Aws::KMS
     #     mac_algorithm: "HMAC_SHA_224", # required, accepts HMAC_SHA_224, HMAC_SHA_256, HMAC_SHA_384, HMAC_SHA_512
     #     mac: "data", # required
     #     grant_tokens: ["GrantTokenType"],
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -9705,7 +9873,7 @@ module Aws::KMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

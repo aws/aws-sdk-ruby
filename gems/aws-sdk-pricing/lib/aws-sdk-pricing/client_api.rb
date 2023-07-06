@@ -43,7 +43,6 @@ module Aws::Pricing
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     PriceList = Shapes::StructureShape.new(name: 'PriceList')
     PriceListArn = Shapes::StringShape.new(name: 'PriceListArn')
-    PriceListJsonItem = Shapes::StringShape.new(name: 'PriceListJsonItem')
     PriceListJsonItems = Shapes::ListShape.new(name: 'PriceListJsonItems')
     PriceLists = Shapes::ListShape.new(name: 'PriceLists')
     RegionCode = Shapes::StringShape.new(name: 'RegionCode')
@@ -51,6 +50,7 @@ module Aws::Pricing
     ServiceCode = Shapes::StringShape.new(name: 'ServiceCode')
     ServiceList = Shapes::ListShape.new(name: 'ServiceList')
     String = Shapes::StringShape.new(name: 'String')
+    SynthesizedJsonPriceListJsonItem = Shapes::StringShape.new(name: 'SynthesizedJsonPriceListJsonItem')
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
@@ -66,7 +66,7 @@ module Aws::Pricing
     DescribeServicesRequest.add_member(:service_code, Shapes::ShapeRef.new(shape: String, location_name: "ServiceCode"))
     DescribeServicesRequest.add_member(:format_version, Shapes::ShapeRef.new(shape: String, location_name: "FormatVersion"))
     DescribeServicesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    DescribeServicesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "MaxResults", metadata: {"box"=>true}))
+    DescribeServicesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "MaxResults"))
     DescribeServicesRequest.struct_class = Types::DescribeServicesRequest
 
     DescribeServicesResponse.add_member(:services, Shapes::ShapeRef.new(shape: ServiceList, location_name: "Services"))
@@ -89,7 +89,7 @@ module Aws::Pricing
     GetAttributeValuesRequest.add_member(:service_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceCode"))
     GetAttributeValuesRequest.add_member(:attribute_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AttributeName"))
     GetAttributeValuesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    GetAttributeValuesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetAttributeValuesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "MaxResults"))
     GetAttributeValuesRequest.struct_class = Types::GetAttributeValuesRequest
 
     GetAttributeValuesResponse.add_member(:attribute_values, Shapes::ShapeRef.new(shape: AttributeValueList, location_name: "AttributeValues"))
@@ -107,7 +107,7 @@ module Aws::Pricing
     GetProductsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
     GetProductsRequest.add_member(:format_version, Shapes::ShapeRef.new(shape: String, location_name: "FormatVersion"))
     GetProductsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    GetProductsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetProductsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "MaxResults"))
     GetProductsRequest.struct_class = Types::GetProductsRequest
 
     GetProductsResponse.add_member(:format_version, Shapes::ShapeRef.new(shape: String, location_name: "FormatVersion"))
@@ -145,7 +145,7 @@ module Aws::Pricing
     PriceList.add_member(:file_formats, Shapes::ShapeRef.new(shape: FileFormats, location_name: "FileFormats"))
     PriceList.struct_class = Types::PriceList
 
-    PriceListJsonItems.member = Shapes::ShapeRef.new(shape: PriceListJsonItem, metadata: {"jsonvalue"=>true})
+    PriceListJsonItems.member = Shapes::ShapeRef.new(shape: SynthesizedJsonPriceListJsonItem, metadata: {"jsonvalue"=>true})
 
     PriceLists.member = Shapes::ShapeRef.new(shape: PriceList)
 
@@ -181,10 +181,10 @@ module Aws::Pricing
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeServicesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeServicesResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -200,10 +200,10 @@ module Aws::Pricing
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetAttributeValuesRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAttributeValuesResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -219,10 +219,10 @@ module Aws::Pricing
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetPriceListFileUrlRequest)
         o.output = Shapes::ShapeRef.new(shape: GetPriceListFileUrlResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
       api.add_operation(:get_products, Seahorse::Model::Operation.new.tap do |o|
@@ -231,10 +231,10 @@ module Aws::Pricing
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetProductsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetProductsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -250,12 +250,12 @@ module Aws::Pricing
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListPriceListsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListPriceListsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

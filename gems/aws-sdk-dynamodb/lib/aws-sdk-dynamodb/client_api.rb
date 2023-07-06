@@ -592,11 +592,13 @@ module Aws::DynamoDB
 
     BatchStatementError.add_member(:code, Shapes::ShapeRef.new(shape: BatchStatementErrorCodeEnum, location_name: "Code"))
     BatchStatementError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    BatchStatementError.add_member(:item, Shapes::ShapeRef.new(shape: AttributeMap, location_name: "Item"))
     BatchStatementError.struct_class = Types::BatchStatementError
 
     BatchStatementRequest.add_member(:statement, Shapes::ShapeRef.new(shape: PartiQLStatement, required: true, location_name: "Statement"))
     BatchStatementRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: PreparedStatementParameters, location_name: "Parameters"))
     BatchStatementRequest.add_member(:consistent_read, Shapes::ShapeRef.new(shape: ConsistentRead, location_name: "ConsistentRead"))
+    BatchStatementRequest.add_member(:return_values_on_condition_check_failure, Shapes::ShapeRef.new(shape: ReturnValuesOnConditionCheckFailure, location_name: "ReturnValuesOnConditionCheckFailure"))
     BatchStatementRequest.struct_class = Types::BatchStatementRequest
 
     BatchStatementResponse.add_member(:error, Shapes::ShapeRef.new(shape: BatchStatementError, location_name: "Error"))
@@ -648,6 +650,7 @@ module Aws::DynamoDB
     ConditionCheck.struct_class = Types::ConditionCheck
 
     ConditionalCheckFailedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ConditionalCheckFailedException.add_member(:item, Shapes::ShapeRef.new(shape: AttributeMap, location_name: "Item"))
     ConditionalCheckFailedException.struct_class = Types::ConditionalCheckFailedException
 
     ConsumedCapacity.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "TableName"))
@@ -757,6 +760,7 @@ module Aws::DynamoDB
     DeleteItemInput.add_member(:condition_expression, Shapes::ShapeRef.new(shape: ConditionExpression, location_name: "ConditionExpression"))
     DeleteItemInput.add_member(:expression_attribute_names, Shapes::ShapeRef.new(shape: ExpressionAttributeNameMap, location_name: "ExpressionAttributeNames"))
     DeleteItemInput.add_member(:expression_attribute_values, Shapes::ShapeRef.new(shape: ExpressionAttributeValueMap, location_name: "ExpressionAttributeValues"))
+    DeleteItemInput.add_member(:return_values_on_condition_check_failure, Shapes::ShapeRef.new(shape: ReturnValuesOnConditionCheckFailure, location_name: "ReturnValuesOnConditionCheckFailure"))
     DeleteItemInput.struct_class = Types::DeleteItemInput
 
     DeleteItemOutput.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributeMap, location_name: "Attributes"))
@@ -881,6 +885,7 @@ module Aws::DynamoDB
     ExecuteStatementInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PartiQLNextToken, location_name: "NextToken"))
     ExecuteStatementInput.add_member(:return_consumed_capacity, Shapes::ShapeRef.new(shape: ReturnConsumedCapacity, location_name: "ReturnConsumedCapacity"))
     ExecuteStatementInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveIntegerObject, location_name: "Limit"))
+    ExecuteStatementInput.add_member(:return_values_on_condition_check_failure, Shapes::ShapeRef.new(shape: ReturnValuesOnConditionCheckFailure, location_name: "ReturnValuesOnConditionCheckFailure"))
     ExecuteStatementInput.struct_class = Types::ExecuteStatementInput
 
     ExecuteStatementOutput.add_member(:items, Shapes::ShapeRef.new(shape: ItemList, location_name: "Items"))
@@ -1285,6 +1290,7 @@ module Aws::DynamoDB
 
     ParameterizedStatement.add_member(:statement, Shapes::ShapeRef.new(shape: PartiQLStatement, required: true, location_name: "Statement"))
     ParameterizedStatement.add_member(:parameters, Shapes::ShapeRef.new(shape: PreparedStatementParameters, location_name: "Parameters"))
+    ParameterizedStatement.add_member(:return_values_on_condition_check_failure, Shapes::ShapeRef.new(shape: ReturnValuesOnConditionCheckFailure, location_name: "ReturnValuesOnConditionCheckFailure"))
     ParameterizedStatement.struct_class = Types::ParameterizedStatement
 
     ParameterizedStatements.member = Shapes::ShapeRef.new(shape: ParameterizedStatement)
@@ -1345,6 +1351,7 @@ module Aws::DynamoDB
     PutItemInput.add_member(:condition_expression, Shapes::ShapeRef.new(shape: ConditionExpression, location_name: "ConditionExpression"))
     PutItemInput.add_member(:expression_attribute_names, Shapes::ShapeRef.new(shape: ExpressionAttributeNameMap, location_name: "ExpressionAttributeNames"))
     PutItemInput.add_member(:expression_attribute_values, Shapes::ShapeRef.new(shape: ExpressionAttributeValueMap, location_name: "ExpressionAttributeValues"))
+    PutItemInput.add_member(:return_values_on_condition_check_failure, Shapes::ShapeRef.new(shape: ReturnValuesOnConditionCheckFailure, location_name: "ReturnValuesOnConditionCheckFailure"))
     PutItemInput.struct_class = Types::PutItemInput
 
     PutItemInputAttributeMap.key = Shapes::ShapeRef.new(shape: AttributeName)
@@ -1792,6 +1799,7 @@ module Aws::DynamoDB
     UpdateItemInput.add_member(:condition_expression, Shapes::ShapeRef.new(shape: ConditionExpression, location_name: "ConditionExpression"))
     UpdateItemInput.add_member(:expression_attribute_names, Shapes::ShapeRef.new(shape: ExpressionAttributeNameMap, location_name: "ExpressionAttributeNames"))
     UpdateItemInput.add_member(:expression_attribute_values, Shapes::ShapeRef.new(shape: ExpressionAttributeValueMap, location_name: "ExpressionAttributeValues"))
+    UpdateItemInput.add_member(:return_values_on_condition_check_failure, Shapes::ShapeRef.new(shape: ReturnValuesOnConditionCheckFailure, location_name: "ReturnValuesOnConditionCheckFailure"))
     UpdateItemInput.struct_class = Types::UpdateItemInput
 
     UpdateItemOutput.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributeMap, location_name: "Attributes"))

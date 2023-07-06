@@ -90,6 +90,8 @@ module Aws::Redshift
             Aws::Redshift::Endpoints::CreateClusterSnapshot.build(context)
           when :create_cluster_subnet_group
             Aws::Redshift::Endpoints::CreateClusterSubnetGroup.build(context)
+          when :create_custom_domain_association
+            Aws::Redshift::Endpoints::CreateCustomDomainAssociation.build(context)
           when :create_endpoint_access
             Aws::Redshift::Endpoints::CreateEndpointAccess.build(context)
           when :create_event_subscription
@@ -122,6 +124,8 @@ module Aws::Redshift
             Aws::Redshift::Endpoints::DeleteClusterSnapshot.build(context)
           when :delete_cluster_subnet_group
             Aws::Redshift::Endpoints::DeleteClusterSubnetGroup.build(context)
+          when :delete_custom_domain_association
+            Aws::Redshift::Endpoints::DeleteCustomDomainAssociation.build(context)
           when :delete_endpoint_access
             Aws::Redshift::Endpoints::DeleteEndpointAccess.build(context)
           when :delete_event_subscription
@@ -164,6 +168,8 @@ module Aws::Redshift
             Aws::Redshift::Endpoints::DescribeClusterVersions.build(context)
           when :describe_clusters
             Aws::Redshift::Endpoints::DescribeClusters.build(context)
+          when :describe_custom_domain_associations
+            Aws::Redshift::Endpoints::DescribeCustomDomainAssociations.build(context)
           when :describe_data_shares
             Aws::Redshift::Endpoints::DescribeDataShares.build(context)
           when :describe_data_shares_for_consumer
@@ -254,6 +260,8 @@ module Aws::Redshift
             Aws::Redshift::Endpoints::ModifyClusterSnapshotSchedule.build(context)
           when :modify_cluster_subnet_group
             Aws::Redshift::Endpoints::ModifyClusterSubnetGroup.build(context)
+          when :modify_custom_domain_association
+            Aws::Redshift::Endpoints::ModifyCustomDomainAssociation.build(context)
           when :modify_endpoint_access
             Aws::Redshift::Endpoints::ModifyEndpointAccess.build(context)
           when :modify_event_subscription

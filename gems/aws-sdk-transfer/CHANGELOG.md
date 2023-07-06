@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2023-06-30)
+------------------
+
+* Feature - Add outbound Basic authentication support to AS2 connectors
+
+1.72.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.71.0 (2023-06-21)
+------------------
+
+* Feature - This release adds a new parameter StructuredLogDestinations to CreateServer, UpdateServer APIs.
+
 1.70.0 (2023-06-15)
 ------------------
 

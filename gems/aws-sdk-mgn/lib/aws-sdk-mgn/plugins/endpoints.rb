@@ -124,6 +124,8 @@ module Aws::Mgn
             Aws::Mgn::Endpoints::ListImportErrors.build(context)
           when :list_imports
             Aws::Mgn::Endpoints::ListImports.build(context)
+          when :list_managed_accounts
+            Aws::Mgn::Endpoints::ListManagedAccounts.build(context)
           when :list_source_server_actions
             Aws::Mgn::Endpoints::ListSourceServerActions.build(context)
           when :list_tags_for_resource
@@ -134,6 +136,8 @@ module Aws::Mgn
             Aws::Mgn::Endpoints::ListWaves.build(context)
           when :mark_as_archived
             Aws::Mgn::Endpoints::MarkAsArchived.build(context)
+          when :pause_replication
+            Aws::Mgn::Endpoints::PauseReplication.build(context)
           when :put_source_server_action
             Aws::Mgn::Endpoints::PutSourceServerAction.build(context)
           when :put_template_action
@@ -142,6 +146,8 @@ module Aws::Mgn
             Aws::Mgn::Endpoints::RemoveSourceServerAction.build(context)
           when :remove_template_action
             Aws::Mgn::Endpoints::RemoveTemplateAction.build(context)
+          when :resume_replication
+            Aws::Mgn::Endpoints::ResumeReplication.build(context)
           when :retry_data_replication
             Aws::Mgn::Endpoints::RetryDataReplication.build(context)
           when :start_cutover
@@ -154,6 +160,8 @@ module Aws::Mgn
             Aws::Mgn::Endpoints::StartReplication.build(context)
           when :start_test
             Aws::Mgn::Endpoints::StartTest.build(context)
+          when :stop_replication
+            Aws::Mgn::Endpoints::StopReplication.build(context)
           when :tag_resource
             Aws::Mgn::Endpoints::TagResource.build(context)
           when :terminate_target_instances

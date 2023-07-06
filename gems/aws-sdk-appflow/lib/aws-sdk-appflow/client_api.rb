@@ -296,6 +296,8 @@ module Aws::Appflow
     RegisterConnectorResponse = Shapes::StructureShape.new(name: 'RegisterConnectorResponse')
     RegisteredBy = Shapes::StringShape.new(name: 'RegisteredBy')
     RegistrationOutput = Shapes::StructureShape.new(name: 'RegistrationOutput')
+    ResetConnectorMetadataCacheRequest = Shapes::StructureShape.new(name: 'ResetConnectorMetadataCacheRequest')
+    ResetConnectorMetadataCacheResponse = Shapes::StructureShape.new(name: 'ResetConnectorMetadataCacheResponse')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     S3ConnectorOperator = Shapes::StringShape.new(name: 'S3ConnectorOperator')
@@ -1218,6 +1220,15 @@ module Aws::Appflow
     RegistrationOutput.add_member(:status, Shapes::ShapeRef.new(shape: ExecutionStatus, location_name: "status"))
     RegistrationOutput.struct_class = Types::RegistrationOutput
 
+    ResetConnectorMetadataCacheRequest.add_member(:connector_profile_name, Shapes::ShapeRef.new(shape: ConnectorProfileName, location_name: "connectorProfileName"))
+    ResetConnectorMetadataCacheRequest.add_member(:connector_type, Shapes::ShapeRef.new(shape: ConnectorType, location_name: "connectorType"))
+    ResetConnectorMetadataCacheRequest.add_member(:connector_entity_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "connectorEntityName"))
+    ResetConnectorMetadataCacheRequest.add_member(:entities_path, Shapes::ShapeRef.new(shape: EntitiesPath, location_name: "entitiesPath"))
+    ResetConnectorMetadataCacheRequest.add_member(:api_version, Shapes::ShapeRef.new(shape: ApiVersion, location_name: "apiVersion"))
+    ResetConnectorMetadataCacheRequest.struct_class = Types::ResetConnectorMetadataCacheRequest
+
+    ResetConnectorMetadataCacheResponse.struct_class = Types::ResetConnectorMetadataCacheResponse
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
@@ -1253,6 +1264,7 @@ module Aws::Appflow
     SAPODataConnectorProfileProperties.add_member(:logon_language, Shapes::ShapeRef.new(shape: LogonLanguage, location_name: "logonLanguage"))
     SAPODataConnectorProfileProperties.add_member(:private_link_service_name, Shapes::ShapeRef.new(shape: PrivateLinkServiceName, location_name: "privateLinkServiceName"))
     SAPODataConnectorProfileProperties.add_member(:o_auth_properties, Shapes::ShapeRef.new(shape: OAuthProperties, location_name: "oAuthProperties"))
+    SAPODataConnectorProfileProperties.add_member(:disable_sso, Shapes::ShapeRef.new(shape: Boolean, location_name: "disableSSO"))
     SAPODataConnectorProfileProperties.struct_class = Types::SAPODataConnectorProfileProperties
 
     SAPODataDestinationProperties.add_member(:object_path, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "objectPath"))
@@ -1825,6 +1837,18 @@ module Aws::Appflow
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConnectorServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConnectorAuthenticationException)
+      end)
+
+      api.add_operation(:reset_connector_metadata_cache, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ResetConnectorMetadataCache"
+        o.http_method = "POST"
+        o.http_request_uri = "/reset-connector-metadata-cache"
+        o.input = Shapes::ShapeRef.new(shape: ResetConnectorMetadataCacheRequest)
+        o.output = Shapes::ShapeRef.new(shape: ResetConnectorMetadataCacheResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:start_flow, Seahorse::Model::Operation.new.tap do |o|

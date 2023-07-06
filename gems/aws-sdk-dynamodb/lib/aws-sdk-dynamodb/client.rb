@@ -455,6 +455,7 @@ module Aws::DynamoDB
     #         statement: "PartiQLStatement", # required
     #         parameters: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #         consistent_read: false,
+    #         return_values_on_condition_check_failure: "ALL_OLD", # accepts ALL_OLD, NONE
     #       },
     #     ],
     #     return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
@@ -465,6 +466,8 @@ module Aws::DynamoDB
     #   resp.responses #=> Array
     #   resp.responses[0].error.code #=> String, one of "ConditionalCheckFailed", "ItemCollectionSizeLimitExceeded", "RequestLimitExceeded", "ValidationError", "ProvisionedThroughputExceeded", "TransactionConflict", "ThrottlingError", "InternalServerError", "ResourceNotFound", "AccessDenied", "DuplicateItem"
     #   resp.responses[0].error.message #=> String
+    #   resp.responses[0].error.item #=> Hash
+    #   resp.responses[0].error.item["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.responses[0].table_name #=> String
     #   resp.responses[0].item #=> Hash
     #   resp.responses[0].item["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
@@ -1943,6 +1946,14 @@ module Aws::DynamoDB
     #
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     #
+    # @option params [String] :return_values_on_condition_check_failure
+    #   An optional parameter that returns the item attributes for a
+    #   `DeleteItem` operation that failed a condition check.
+    #
+    #   There is no additional cost associated with requesting a return value
+    #   aside from the small network and processing overhead of receiving a
+    #   larger response. No read capacity units are consumed.
+    #
     # @return [Types::DeleteItemOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteItemOutput#attributes #attributes} => Hash&lt;String,Types::AttributeValue&gt;
@@ -1996,6 +2007,7 @@ module Aws::DynamoDB
     #     expression_attribute_values: {
     #       "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     },
+    #     return_values_on_condition_check_failure: "ALL_OLD", # accepts ALL_OLD, NONE
     #   })
     #
     # @example Response structure
@@ -2357,10 +2369,8 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
-    # Returns the regional endpoint information. This action must be
-    # included in your VPC endpoint policies, or access to the
-    # DescribeEndpoints API will be denied. For more information on policy
-    # permissions, please see [Internetwork traffic privacy][1].
+    # Returns the regional endpoint information. For more information on
+    # policy permissions, please see [Internetwork traffic privacy][1].
     #
     #
     #
@@ -3234,6 +3244,14 @@ module Aws::DynamoDB
     #   `LastEvaluatedKey` to apply in a subsequent operation to continue the
     #   operation.
     #
+    # @option params [String] :return_values_on_condition_check_failure
+    #   An optional parameter that returns the item attributes for an
+    #   `ExecuteStatement` operation that failed a condition check.
+    #
+    #   There is no additional cost associated with requesting a return value
+    #   aside from the small network and processing overhead of receiving a
+    #   larger response. No read capacity units are consumed.
+    #
     # @return [Types::ExecuteStatementOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ExecuteStatementOutput#items #items} => Array&lt;Hash&lt;String,Types::AttributeValue&gt;&gt;
@@ -3250,6 +3268,7 @@ module Aws::DynamoDB
     #     next_token: "PartiQLNextToken",
     #     return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
     #     limit: 1,
+    #     return_values_on_condition_check_failure: "ALL_OLD", # accepts ALL_OLD, NONE
     #   })
     #
     # @example Response structure
@@ -3332,6 +3351,7 @@ module Aws::DynamoDB
     #       {
     #         statement: "PartiQLStatement", # required
     #         parameters: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #         return_values_on_condition_check_failure: "ALL_OLD", # accepts ALL_OLD, NONE
     #       },
     #     ],
     #     client_request_token: "ClientRequestToken",
@@ -4456,6 +4476,14 @@ module Aws::DynamoDB
     #
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     #
+    # @option params [String] :return_values_on_condition_check_failure
+    #   An optional parameter that returns the item attributes for a `PutItem`
+    #   operation that failed a condition check.
+    #
+    #   There is no additional cost associated with requesting a return value
+    #   aside from the small network and processing overhead of receiving a
+    #   larger response. No read capacity units are consumed.
+    #
     # @return [Types::PutItemOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutItemOutput#attributes #attributes} => Hash&lt;String,Types::AttributeValue&gt;
@@ -4511,6 +4539,7 @@ module Aws::DynamoDB
     #     expression_attribute_values: {
     #       "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     },
+    #     return_values_on_condition_check_failure: "ALL_OLD", # accepts ALL_OLD, NONE
     #   })
     #
     # @example Response structure
@@ -7032,6 +7061,14 @@ module Aws::DynamoDB
     #
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     #
+    # @option params [String] :return_values_on_condition_check_failure
+    #   An optional parameter that returns the item attributes for an
+    #   `UpdateItem` operation that failed a condition check.
+    #
+    #   There is no additional cost associated with requesting a return value
+    #   aside from the small network and processing overhead of receiving a
+    #   larger response. No read capacity units are consumed.
+    #
     # @return [Types::UpdateItemOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateItemOutput#attributes #attributes} => Hash&lt;String,Types::AttributeValue&gt;
@@ -7105,6 +7142,7 @@ module Aws::DynamoDB
     #     expression_attribute_values: {
     #       "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     },
+    #     return_values_on_condition_check_failure: "ALL_OLD", # accepts ALL_OLD, NONE
     #   })
     #
     # @example Response structure
@@ -7753,7 +7791,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

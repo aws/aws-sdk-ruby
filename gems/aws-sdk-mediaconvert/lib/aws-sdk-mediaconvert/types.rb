@@ -1869,28 +1869,27 @@ module Aws::MediaConvert
     end
 
     # Use captions selectors to specify the captions data from your input
-    # that you use in your outputs. You can use up to 20 captions selectors
+    # that you use in your outputs. You can use up to 100 captions selectors
     # per input.
     #
     # @!attribute [rw] custom_language_code
     #   The specific language to extract from source, using the ISO 639-2 or
     #   ISO 639-3 three-letter language code. If input is SCTE-27, complete
     #   this field and/or PID to select the caption language to extract. If
-    #   input is DVB-Sub and output is Burn-in or SMPTE-TT, complete this
-    #   field and/or PID to select the caption language to extract. If input
-    #   is DVB-Sub that is being passed through, omit this field (and PID
-    #   field); there is no way to extract a specific language with
-    #   pass-through captions.
+    #   input is DVB-Sub and output is Burn-in, complete this field and/or
+    #   PID to select the caption language to extract. If input is DVB-Sub
+    #   that is being passed through, omit this field (and PID field); there
+    #   is no way to extract a specific language with pass-through captions.
     #   @return [String]
     #
     # @!attribute [rw] language_code
     #   The specific language to extract from source. If input is SCTE-27,
     #   complete this field and/or PID to select the caption language to
-    #   extract. If input is DVB-Sub and output is Burn-in or SMPTE-TT,
-    #   complete this field and/or PID to select the caption language to
-    #   extract. If input is DVB-Sub that is being passed through, omit this
-    #   field (and PID field); there is no way to extract a specific
-    #   language with pass-through captions.
+    #   extract. If input is DVB-Sub and output is Burn-in, complete this
+    #   field and/or PID to select the caption language to extract. If input
+    #   is DVB-Sub that is being passed through, omit this field (and PID
+    #   field); there is no way to extract a specific language with
+    #   pass-through captions.
     #   @return [String]
     #
     # @!attribute [rw] source_settings
@@ -4227,9 +4226,9 @@ module Aws::MediaConvert
     # DVB Sub Source Settings
     #
     # @!attribute [rw] pid
-    #   When using DVB-Sub with Burn-In or SMPTE-TT, use this PID for the
-    #   source content. Unused for DVB-Sub passthrough. All DVB-Sub content
-    #   is passed through, regardless of selectors.
+    #   When using DVB-Sub with Burn-in, use this PID for the source
+    #   content. Unused for DVB-Sub passthrough. All DVB-Sub content is
+    #   passed through, regardless of selectors.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DvbSubSourceSettings AWS API Documentation
@@ -5842,6 +5841,18 @@ module Aws::MediaConvert
     #   Hybrid Log Gamma (HLG) Electro-Optical Transfer Function (EOTF).
     #   @return [String]
     #
+    # @!attribute [rw] bandwidth_reduction_filter
+    #   The Bandwidth reduction filter increases the video quality of your
+    #   output relative to its bitrate. Use to lower the bitrate of your
+    #   constant quality QVBR output, with little or no perceptual decrease
+    #   in quality. Or, use to increase the video quality of outputs with
+    #   other rate control modes relative to the bitrate that you specify.
+    #   Bandwidth reduction increases further when your input is low quality
+    #   or noisy. Outputs that use this feature incur pro-tier pricing. When
+    #   you include Bandwidth reduction filter, you cannot include the Noise
+    #   reducer preprocessor.
+    #   @return [Types::BandwidthReductionFilter]
+    #
     # @!attribute [rw] bitrate
     #   Specify the average bitrate in bits per second. Required for VBR and
     #   CBR. For MS Smooth outputs, bitrates must be unique when rounded
@@ -6245,6 +6256,7 @@ module Aws::MediaConvert
     class H265Settings < Struct.new(
       :adaptive_quantization,
       :alternate_transfer_function_sei,
+      :bandwidth_reduction_filter,
       :bitrate,
       :codec_level,
       :codec_profile,
@@ -6698,6 +6710,21 @@ module Aws::MediaConvert
     #   Period of insertion of EXT-X-PROGRAM-DATE-TIME entry, in seconds.
     #   @return [Integer]
     #
+    # @!attribute [rw] progressive_write_hls_manifest
+    #   Specify whether MediaConvert generates HLS manifests while your job
+    #   is running or when your job is complete. To generate HLS manifests
+    #   while your job is running: Choose Enabled. Use if you want to play
+    #   back your content as soon as it's available. MediaConvert writes
+    #   the parent and child manifests after the first three media segments
+    #   are written to your destination S3 bucket. It then writes new
+    #   updated manifests after each additional segment is written. The
+    #   parent manifest includes the latest BANDWIDTH and AVERAGE-BANDWIDTH
+    #   attributes, and child manifests include the latest available media
+    #   segment. When your job completes, the final child playlists include
+    #   an EXT-X-ENDLIST tag. To generate HLS manifests only when your job
+    #   completes: Choose Disabled.
+    #   @return [String]
+    #
     # @!attribute [rw] segment_control
     #   When set to SINGLE\_FILE, emits program as a single media resource
     #   (.ts) file, uses #EXT-X-BYTERANGE tags to index segment for
@@ -6795,6 +6822,7 @@ module Aws::MediaConvert
       :output_selection,
       :program_date_time,
       :program_date_time_period,
+      :progressive_write_hls_manifest,
       :segment_control,
       :segment_length,
       :segment_length_control,
@@ -7154,7 +7182,7 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] caption_selectors
     #   Use captions selectors to specify the captions data from your input
-    #   that you use in your outputs. You can use up to 20 captions
+    #   that you use in your outputs. You can use up to 100 captions
     #   selectors per input.
     #   @return [Hash<String,Types::CaptionSelector>]
     #
@@ -7484,7 +7512,7 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] caption_selectors
     #   Use captions selectors to specify the captions data from your input
-    #   that you use in your outputs. You can use up to 20 captions
+    #   that you use in your outputs. You can use up to 100 captions
     #   selectors per input.
     #   @return [Hash<String,Types::CaptionSelector>]
     #
@@ -10217,10 +10245,10 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] profile
-    #   Specify the MXF profile, also called shim, for this output. When you
-    #   choose Auto, MediaConvert chooses a profile based on the video codec
-    #   and resolution. For a list of codecs supported with each MXF
-    #   profile, see
+    #   Specify the MXF profile, also called shim, for this output. To
+    #   automatically select a profile according to your output video codec
+    #   and resolution, leave blank. For a list of codecs supported with
+    #   each MXF profile, see
     #   https://docs.aws.amazon.com/mediaconvert/latest/ug/codecs-supported-with-each-mxf-profile.html.
     #   For more information about the automatic selection behavior, see
     #   https://docs.aws.amazon.com/mediaconvert/latest/ug/default-automatic-selection-of-mxf-profiles.html.
@@ -12734,7 +12762,7 @@ module Aws::MediaConvert
     #   @return [Types::DolbyVision]
     #
     # @!attribute [rw] hdr_10_plus
-    #   Enable HDR10+ analyis and metadata injection. Compatible with HEVC
+    #   Enable HDR10+ analysis and metadata injection. Compatible with HEVC
     #   only.
     #   @return [Types::Hdr10Plus]
     #

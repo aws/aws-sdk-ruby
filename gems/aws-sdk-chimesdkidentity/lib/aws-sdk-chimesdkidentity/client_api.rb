@@ -72,6 +72,7 @@ module Aws::ChimeSDKIdentity
     GetAppInstanceRetentionSettingsRequest = Shapes::StructureShape.new(name: 'GetAppInstanceRetentionSettingsRequest')
     GetAppInstanceRetentionSettingsResponse = Shapes::StructureShape.new(name: 'GetAppInstanceRetentionSettingsResponse')
     Identity = Shapes::StructureShape.new(name: 'Identity')
+    InvokedBy = Shapes::StructureShape.new(name: 'InvokedBy')
     LexBotAliasArn = Shapes::StringShape.new(name: 'LexBotAliasArn')
     LexConfiguration = Shapes::StructureShape.new(name: 'LexConfiguration')
     LexIntentName = Shapes::StringShape.new(name: 'LexIntentName')
@@ -105,16 +106,19 @@ module Aws::ChimeSDKIdentity
     RetentionDays = Shapes::IntegerShape.new(name: 'RetentionDays')
     SensitiveChimeArn = Shapes::StringShape.new(name: 'SensitiveChimeArn')
     SensitiveString1600 = Shapes::StringShape.new(name: 'SensitiveString1600')
-    SensitiveString64 = Shapes::StringShape.new(name: 'SensitiveString64')
     ServiceFailureException = Shapes::StructureShape.new(name: 'ServiceFailureException')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
+    StandardMessages = Shapes::StringShape.new(name: 'StandardMessages')
     String = Shapes::StringShape.new(name: 'String')
+    String1600 = Shapes::StringShape.new(name: 'String1600')
+    String64 = Shapes::StringShape.new(name: 'String64')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TargetedMessages = Shapes::StringShape.new(name: 'TargetedMessages')
     ThrottledClientException = Shapes::StructureShape.new(name: 'ThrottledClientException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UnauthorizedClientException = Shapes::StructureShape.new(name: 'UnauthorizedClientException')
@@ -180,8 +184,8 @@ module Aws::ChimeSDKIdentity
     AppInstanceUser.add_member(:expiration_settings, Shapes::ShapeRef.new(shape: ExpirationSettings, location_name: "ExpirationSettings"))
     AppInstanceUser.struct_class = Types::AppInstanceUser
 
-    AppInstanceUserEndpoint.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: SensitiveChimeArn, location_name: "AppInstanceUserArn"))
-    AppInstanceUserEndpoint.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: SensitiveString64, location_name: "EndpointId"))
+    AppInstanceUserEndpoint.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceUserArn"))
+    AppInstanceUserEndpoint.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: String64, location_name: "EndpointId"))
     AppInstanceUserEndpoint.add_member(:name, Shapes::ShapeRef.new(shape: SensitiveString1600, location_name: "Name"))
     AppInstanceUserEndpoint.add_member(:type, Shapes::ShapeRef.new(shape: AppInstanceUserEndpointType, location_name: "Type"))
     AppInstanceUserEndpoint.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ResourceArn"))
@@ -192,8 +196,8 @@ module Aws::ChimeSDKIdentity
     AppInstanceUserEndpoint.add_member(:endpoint_state, Shapes::ShapeRef.new(shape: EndpointState, location_name: "EndpointState"))
     AppInstanceUserEndpoint.struct_class = Types::AppInstanceUserEndpoint
 
-    AppInstanceUserEndpointSummary.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: SensitiveChimeArn, location_name: "AppInstanceUserArn"))
-    AppInstanceUserEndpointSummary.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: SensitiveString64, location_name: "EndpointId"))
+    AppInstanceUserEndpointSummary.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceUserArn"))
+    AppInstanceUserEndpointSummary.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: String64, location_name: "EndpointId"))
     AppInstanceUserEndpointSummary.add_member(:name, Shapes::ShapeRef.new(shape: SensitiveString1600, location_name: "Name"))
     AppInstanceUserEndpointSummary.add_member(:type, Shapes::ShapeRef.new(shape: AppInstanceUserEndpointType, location_name: "Type"))
     AppInstanceUserEndpointSummary.add_member(:allow_messages, Shapes::ShapeRef.new(shape: AllowMessages, location_name: "AllowMessages"))
@@ -276,8 +280,8 @@ module Aws::ChimeSDKIdentity
     DeleteAppInstanceUserRequest.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceUserArn"))
     DeleteAppInstanceUserRequest.struct_class = Types::DeleteAppInstanceUserRequest
 
-    DeregisterAppInstanceUserEndpointRequest.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: SensitiveChimeArn, required: true, location: "uri", location_name: "appInstanceUserArn"))
-    DeregisterAppInstanceUserEndpointRequest.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: SensitiveString64, required: true, location: "uri", location_name: "endpointId"))
+    DeregisterAppInstanceUserEndpointRequest.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceUserArn"))
+    DeregisterAppInstanceUserEndpointRequest.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: String64, required: true, location: "uri", location_name: "endpointId"))
     DeregisterAppInstanceUserEndpointRequest.struct_class = Types::DeregisterAppInstanceUserEndpointRequest
 
     DescribeAppInstanceAdminRequest.add_member(:app_instance_admin_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceAdminArn"))
@@ -299,8 +303,8 @@ module Aws::ChimeSDKIdentity
     DescribeAppInstanceResponse.add_member(:app_instance, Shapes::ShapeRef.new(shape: AppInstance, location_name: "AppInstance"))
     DescribeAppInstanceResponse.struct_class = Types::DescribeAppInstanceResponse
 
-    DescribeAppInstanceUserEndpointRequest.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: SensitiveString1600, required: true, location: "uri", location_name: "appInstanceUserArn"))
-    DescribeAppInstanceUserEndpointRequest.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: SensitiveString64, required: true, location: "uri", location_name: "endpointId"))
+    DescribeAppInstanceUserEndpointRequest.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: String1600, required: true, location: "uri", location_name: "appInstanceUserArn"))
+    DescribeAppInstanceUserEndpointRequest.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: String64, required: true, location: "uri", location_name: "endpointId"))
     DescribeAppInstanceUserEndpointRequest.struct_class = Types::DescribeAppInstanceUserEndpointRequest
 
     DescribeAppInstanceUserEndpointResponse.add_member(:app_instance_user_endpoint, Shapes::ShapeRef.new(shape: AppInstanceUserEndpoint, location_name: "AppInstanceUserEndpoint"))
@@ -339,7 +343,12 @@ module Aws::ChimeSDKIdentity
     Identity.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
     Identity.struct_class = Types::Identity
 
-    LexConfiguration.add_member(:responds_to, Shapes::ShapeRef.new(shape: RespondsTo, required: true, location_name: "RespondsTo"))
+    InvokedBy.add_member(:standard_messages, Shapes::ShapeRef.new(shape: StandardMessages, required: true, location_name: "StandardMessages"))
+    InvokedBy.add_member(:targeted_messages, Shapes::ShapeRef.new(shape: TargetedMessages, required: true, location_name: "TargetedMessages"))
+    InvokedBy.struct_class = Types::InvokedBy
+
+    LexConfiguration.add_member(:responds_to, Shapes::ShapeRef.new(shape: RespondsTo, location_name: "RespondsTo"))
+    LexConfiguration.add_member(:invoked_by, Shapes::ShapeRef.new(shape: InvokedBy, location_name: "InvokedBy"))
     LexConfiguration.add_member(:lex_bot_alias_arn, Shapes::ShapeRef.new(shape: LexBotAliasArn, required: true, location_name: "LexBotAliasArn"))
     LexConfiguration.add_member(:locale_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "LocaleId"))
     LexConfiguration.add_member(:welcome_intent, Shapes::ShapeRef.new(shape: LexIntentName, location_name: "WelcomeIntent"))
@@ -427,8 +436,8 @@ module Aws::ChimeSDKIdentity
     RegisterAppInstanceUserEndpointRequest.add_member(:allow_messages, Shapes::ShapeRef.new(shape: AllowMessages, location_name: "AllowMessages"))
     RegisterAppInstanceUserEndpointRequest.struct_class = Types::RegisterAppInstanceUserEndpointRequest
 
-    RegisterAppInstanceUserEndpointResponse.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: SensitiveChimeArn, location_name: "AppInstanceUserArn"))
-    RegisterAppInstanceUserEndpointResponse.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: SensitiveString64, location_name: "EndpointId"))
+    RegisterAppInstanceUserEndpointResponse.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceUserArn"))
+    RegisterAppInstanceUserEndpointResponse.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: String64, location_name: "EndpointId"))
     RegisterAppInstanceUserEndpointResponse.struct_class = Types::RegisterAppInstanceUserEndpointResponse
 
     ResourceLimitExceededException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
@@ -470,6 +479,7 @@ module Aws::ChimeSDKIdentity
     UpdateAppInstanceBotRequest.add_member(:app_instance_bot_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceBotArn"))
     UpdateAppInstanceBotRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
     UpdateAppInstanceBotRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, required: true, location_name: "Metadata"))
+    UpdateAppInstanceBotRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: Configuration, location_name: "Configuration"))
     UpdateAppInstanceBotRequest.struct_class = Types::UpdateAppInstanceBotRequest
 
     UpdateAppInstanceBotResponse.add_member(:app_instance_bot_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceBotArn"))
@@ -483,14 +493,14 @@ module Aws::ChimeSDKIdentity
     UpdateAppInstanceResponse.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn"))
     UpdateAppInstanceResponse.struct_class = Types::UpdateAppInstanceResponse
 
-    UpdateAppInstanceUserEndpointRequest.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: SensitiveChimeArn, required: true, location: "uri", location_name: "appInstanceUserArn"))
-    UpdateAppInstanceUserEndpointRequest.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: SensitiveString64, required: true, location: "uri", location_name: "endpointId"))
+    UpdateAppInstanceUserEndpointRequest.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceUserArn"))
+    UpdateAppInstanceUserEndpointRequest.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: String64, required: true, location: "uri", location_name: "endpointId"))
     UpdateAppInstanceUserEndpointRequest.add_member(:name, Shapes::ShapeRef.new(shape: SensitiveString1600, location_name: "Name"))
     UpdateAppInstanceUserEndpointRequest.add_member(:allow_messages, Shapes::ShapeRef.new(shape: AllowMessages, location_name: "AllowMessages"))
     UpdateAppInstanceUserEndpointRequest.struct_class = Types::UpdateAppInstanceUserEndpointRequest
 
-    UpdateAppInstanceUserEndpointResponse.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: SensitiveChimeArn, location_name: "AppInstanceUserArn"))
-    UpdateAppInstanceUserEndpointResponse.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: SensitiveString64, location_name: "EndpointId"))
+    UpdateAppInstanceUserEndpointResponse.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceUserArn"))
+    UpdateAppInstanceUserEndpointResponse.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: String64, location_name: "EndpointId"))
     UpdateAppInstanceUserEndpointResponse.struct_class = Types::UpdateAppInstanceUserEndpointResponse
 
     UpdateAppInstanceUserRequest.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceUserArn"))

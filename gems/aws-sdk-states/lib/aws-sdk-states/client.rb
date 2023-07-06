@@ -484,6 +484,9 @@ module Aws::States
     # JSON-based, structured language. For more information, see [Amazon
     # States Language][1] in the Step Functions User Guide.
     #
+    # If you set the `publish` parameter of this API action to `true`, it
+    # publishes version `1` as the first revision of the state machine.
+    #
     # <note markdown="1"> This operation is eventually consistent. The results are best effort
     # and may not reflect very recent updates and changes.
     #
@@ -492,11 +495,13 @@ module Aws::States
     # <note markdown="1"> `CreateStateMachine` is an idempotent API. Subsequent requests won’t
     # create a duplicate resource if it was already created.
     # `CreateStateMachine`'s idempotency check is based on the state
-    # machine `name`, `definition`, `type`, `LoggingConfiguration` and
-    # `TracingConfiguration`. If a following request has a different
-    # `roleArn` or `tags`, Step Functions will ignore these differences and
-    # treat it as an idempotent request of the previous. In this case,
-    # `roleArn` and `tags` will not be updated, even if they are different.
+    # machine `name`, `definition`, `type`, `LoggingConfiguration`, and
+    # `TracingConfiguration`. The check is also based on the `publish` and
+    # `versionDescription` parameters. If a following request has a
+    # different `roleArn` or `tags`, Step Functions will ignore these
+    # differences and treat it as an idempotent request of the previous. In
+    # this case, `roleArn` and `tags` will not be updated, even if they are
+    # different.
     #
     #  </note>
     #
@@ -570,10 +575,21 @@ module Aws::States
     # @option params [Types::TracingConfiguration] :tracing_configuration
     #   Selects whether X-Ray tracing is enabled.
     #
+    # @option params [Boolean] :publish
+    #   Set to `true` to publish the first version of the state machine during
+    #   creation. The default is `false`.
+    #
+    # @option params [String] :version_description
+    #   Sets description about the state machine version. You can only set the
+    #   description if the `publish` parameter is set to `true`. Otherwise, if
+    #   you set `versionDescription`, but `publish` to `false`, this API
+    #   action throws `ValidationException`.
+    #
     # @return [Types::CreateStateMachineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStateMachineOutput#state_machine_arn #state_machine_arn} => String
     #   * {Types::CreateStateMachineOutput#creation_date #creation_date} => Time
+    #   * {Types::CreateStateMachineOutput#state_machine_version_arn #state_machine_version_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -602,12 +618,15 @@ module Aws::States
     #     tracing_configuration: {
     #       enabled: false,
     #     },
+    #     publish: false,
+    #     version_description: "VersionDescription",
     #   })
     #
     # @example Response structure
     #
     #   resp.state_machine_arn #=> String
     #   resp.creation_date #=> Time
+    #   resp.state_machine_version_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateStateMachine AWS API Documentation
     #
@@ -615,6 +634,94 @@ module Aws::States
     # @param [Hash] params ({})
     def create_state_machine(params = {}, options = {})
       req = build_request(:create_state_machine, params)
+      req.send_request(options)
+    end
+
+    # Creates an [alias][1] for a state machine that points to one or two
+    # [versions][2] of the same state machine. You can set your application
+    # to call StartExecution with an alias and update the version the alias
+    # uses without changing the client's code.
+    #
+    # You can also map an alias to split StartExecution requests between two
+    # versions of a state machine. To do this, add a second `RoutingConfig`
+    # object in the `routingConfiguration` parameter. You must also specify
+    # the percentage of execution run requests each version should receive
+    # in both `RoutingConfig` objects. Step Functions randomly chooses which
+    # version runs a given execution based on the percentage you specify.
+    #
+    # To create an alias that points to a single version, specify a single
+    # `RoutingConfig` object with a `weight` set to 100.
+    #
+    # You can create up to 100 aliases for each state machine. You must
+    # delete unused aliases using the DeleteStateMachineAlias API action.
+    #
+    # `CreateStateMachineAlias` is an idempotent API. Step Functions bases
+    # the idempotency check on the `stateMachineArn`, `description`, `name`,
+    # and `routingConfiguration` parameters. Requests that contain the same
+    # values for these parameters return a successful idempotent response
+    # without creating a duplicate resource.
+    #
+    # **Related operations:**
+    #
+    # * DescribeStateMachineAlias
+    #
+    # * ListStateMachineAliases
+    #
+    # * UpdateStateMachineAlias
+    #
+    # * DeleteStateMachineAlias
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html
+    # [2]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html
+    #
+    # @option params [String] :description
+    #   A description for the state machine alias.
+    #
+    # @option params [required, String] :name
+    #   The name of the state machine alias.
+    #
+    #   To avoid conflict with version ARNs, don't use an integer in the name
+    #   of the alias.
+    #
+    # @option params [required, Array<Types::RoutingConfigurationListItem>] :routing_configuration
+    #   The routing configuration of a state machine alias. The routing
+    #   configuration shifts execution traffic between two state machine
+    #   versions. `routingConfiguration` contains an array of `RoutingConfig`
+    #   objects that specify up to two state machine versions. Step Functions
+    #   then randomly choses which version to run an execution with based on
+    #   the weight assigned to each `RoutingConfig`.
+    #
+    # @return [Types::CreateStateMachineAliasOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateStateMachineAliasOutput#state_machine_alias_arn #state_machine_alias_arn} => String
+    #   * {Types::CreateStateMachineAliasOutput#creation_date #creation_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_state_machine_alias({
+    #     description: "AliasDescription",
+    #     name: "CharacterRestrictedName", # required
+    #     routing_configuration: [ # required
+    #       {
+    #         state_machine_version_arn: "Arn", # required
+    #         weight: 1, # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.state_machine_alias_arn #=> String
+    #   resp.creation_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateStateMachineAlias AWS API Documentation
+    #
+    # @overload create_state_machine_alias(params = {})
+    # @param [Hash] params ({})
+    def create_state_machine_alias(params = {}, options = {})
+      req = build_request(:create_state_machine_alias, params)
       req.send_request(options)
     end
 
@@ -644,21 +751,42 @@ module Aws::States
     # the state machine's status to `DELETING` and begins the deletion
     # process.
     #
-    # If the given state machine Amazon Resource Name (ARN) is a qualified
-    # state machine ARN, it will fail with ValidationException.
+    # A qualified state machine ARN can either refer to a *Distributed Map
+    # state* defined within a state machine, a version ARN, or an alias ARN.
     #
-    # A qualified state machine ARN refers to a *Distributed Map state*
-    # defined within a state machine. For example, the qualified state
-    # machine ARN
-    # `arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel`
-    # refers to a *Distributed Map state* with a label `mapStateLabel` in
-    # the state machine named `stateMachineName`.
+    # The following are some examples of qualified and unqualified state
+    # machine ARNs:
     #
-    # <note markdown="1"> For `EXPRESS` state machines, the deletion will happen eventually
-    # (usually less than a minute). Running executions may emit logs after
+    # * The following qualified state machine ARN refers to a *Distributed
+    #   Map state* with a label `mapStateLabel` in a state machine named
+    #   `myStateMachine`.
+    #
+    #   `arn:partition:states:region:account-id:stateMachine:myStateMachine/mapStateLabel`
+    #
+    #   <note markdown="1"> If you provide a qualified state machine ARN that refers to a
+    #   *Distributed Map state*, the request fails with
+    #   `ValidationException`.
+    #
+    #    </note>
+    #
+    # * The following unqualified state machine ARN refers to a state
+    #   machine named `myStateMachine`.
+    #
+    #   `arn:partition:states:region:account-id:stateMachine:myStateMachine`
+    #
+    # This API action also deletes all [versions][1] and [aliases][2]
+    # associated with a state machine.
+    #
+    # <note markdown="1"> For `EXPRESS` state machines, the deletion happens eventually (usually
+    # in less than a minute). Running executions may emit logs after
     # `DeleteStateMachine` API is called.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html
+    # [2]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html
     #
     # @option params [required, String] :state_machine_arn
     #   The Amazon Resource Name (ARN) of the state machine to delete.
@@ -677,6 +805,92 @@ module Aws::States
     # @param [Hash] params ({})
     def delete_state_machine(params = {}, options = {})
       req = build_request(:delete_state_machine, params)
+      req.send_request(options)
+    end
+
+    # Deletes a state machine [alias][1].
+    #
+    # After you delete a state machine alias, you can't use it to start
+    # executions. When you delete a state machine alias, Step Functions
+    # doesn't delete the state machine versions that alias references.
+    #
+    # **Related operations:**
+    #
+    # * CreateStateMachineAlias
+    #
+    # * DescribeStateMachineAlias
+    #
+    # * ListStateMachineAliases
+    #
+    # * UpdateStateMachineAlias
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html
+    #
+    # @option params [required, String] :state_machine_alias_arn
+    #   The Amazon Resource Name (ARN) of the state machine alias to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_state_machine_alias({
+    #     state_machine_alias_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DeleteStateMachineAlias AWS API Documentation
+    #
+    # @overload delete_state_machine_alias(params = {})
+    # @param [Hash] params ({})
+    def delete_state_machine_alias(params = {}, options = {})
+      req = build_request(:delete_state_machine_alias, params)
+      req.send_request(options)
+    end
+
+    # Deletes a state machine [version][1]. After you delete a version, you
+    # can't call StartExecution using that version's ARN or use the
+    # version with a state machine [alias][2].
+    #
+    # <note markdown="1"> Deleting a state machine version won't terminate its in-progress
+    # executions.
+    #
+    #  </note>
+    #
+    # <note markdown="1"> You can't delete a state machine version currently referenced by one
+    # or more aliases. Before you delete a version, you must either delete
+    # the aliases or update them to point to another state machine version.
+    #
+    #  </note>
+    #
+    # **Related operations:**
+    #
+    # * PublishStateMachineVersion
+    #
+    # * ListStateMachineVersions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html
+    # [2]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html
+    #
+    # @option params [required, String] :state_machine_version_arn
+    #   The Amazon Resource Name (ARN) of the state machine version to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_state_machine_version({
+    #     state_machine_version_arn: "LongArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DeleteStateMachineVersion AWS API Documentation
+    #
+    # @overload delete_state_machine_version(params = {})
+    # @param [Hash] params ({})
+    def delete_state_machine_version(params = {}, options = {})
+      req = build_request(:delete_state_machine_version, params)
       req.send_request(options)
     end
 
@@ -717,18 +931,22 @@ module Aws::States
       req.send_request(options)
     end
 
-    # Provides all information about a state machine execution, such as the
+    # Provides information about a state machine execution, such as the
     # state machine associated with the execution, the execution input and
     # output, and relevant execution metadata. Use this API action to return
-    # the Map Run ARN if the execution was dispatched by a Map Run.
+    # the Map Run Amazon Resource Name (ARN) if the execution was dispatched
+    # by a Map Run.
+    #
+    # If you specify a version or alias ARN when you call the StartExecution
+    # API action, `DescribeExecution` returns that ARN.
     #
     # <note markdown="1"> This operation is eventually consistent. The results are best effort
     # and may not reflect very recent updates and changes.
     #
     #  </note>
     #
-    # This API action is not supported by `EXPRESS` state machine executions
-    # unless they were dispatched by a Map Run.
+    # Executions of an `EXPRESS` state machinearen't supported by
+    # `DescribeExecution` unless a Map Run dispatched them.
     #
     # @option params [required, String] :execution_arn
     #   The Amazon Resource Name (ARN) of the execution to describe.
@@ -749,6 +967,8 @@ module Aws::States
     #   * {Types::DescribeExecutionOutput#map_run_arn #map_run_arn} => String
     #   * {Types::DescribeExecutionOutput#error #error} => String
     #   * {Types::DescribeExecutionOutput#cause #cause} => String
+    #   * {Types::DescribeExecutionOutput#state_machine_version_arn #state_machine_version_arn} => String
+    #   * {Types::DescribeExecutionOutput#state_machine_alias_arn #state_machine_alias_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -772,6 +992,8 @@ module Aws::States
     #   resp.map_run_arn #=> String
     #   resp.error #=> String
     #   resp.cause #=> String
+    #   resp.state_machine_version_arn #=> String
+    #   resp.state_machine_alias_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeExecution AWS API Documentation
     #
@@ -849,16 +1071,44 @@ module Aws::States
     end
 
     # Provides information about a state machine's definition, its IAM role
-    # Amazon Resource Name (ARN), and configuration. If the state machine
-    # ARN is a qualified state machine ARN, the response returned includes
-    # the `Map` state's label.
+    # Amazon Resource Name (ARN), and configuration.
     #
-    # A qualified state machine ARN refers to a *Distributed Map state*
-    # defined within a state machine. For example, the qualified state
-    # machine ARN
-    # `arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel`
-    # refers to a *Distributed Map state* with a label `mapStateLabel` in
-    # the state machine named `stateMachineName`.
+    # A qualified state machine ARN can either refer to a *Distributed Map
+    # state* defined within a state machine, a version ARN, or an alias ARN.
+    #
+    # The following are some examples of qualified and unqualified state
+    # machine ARNs:
+    #
+    # * The following qualified state machine ARN refers to a *Distributed
+    #   Map state* with a label `mapStateLabel` in a state machine named
+    #   `myStateMachine`.
+    #
+    #   `arn:partition:states:region:account-id:stateMachine:myStateMachine/mapStateLabel`
+    #
+    #   <note markdown="1"> If you provide a qualified state machine ARN that refers to a
+    #   *Distributed Map state*, the request fails with
+    #   `ValidationException`.
+    #
+    #    </note>
+    #
+    # * The following qualified state machine ARN refers to an alias named
+    #   `PROD`.
+    #
+    #   `arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine:PROD>`
+    #
+    #   <note markdown="1"> If you provide a qualified state machine ARN that refers to a
+    #   version ARN or an alias ARN, the request starts execution for that
+    #   version or alias.
+    #
+    #    </note>
+    #
+    # * The following unqualified state machine ARN refers to a state
+    #   machine named `myStateMachine`.
+    #
+    #   `arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine>`
+    #
+    # This API action returns the details for a state machine version if the
+    # `stateMachineArn` you specify is a state machine version ARN.
     #
     # <note markdown="1"> This operation is eventually consistent. The results are best effort
     # and may not reflect very recent updates and changes.
@@ -866,7 +1116,13 @@ module Aws::States
     #  </note>
     #
     # @option params [required, String] :state_machine_arn
-    #   The Amazon Resource Name (ARN) of the state machine to describe.
+    #   The Amazon Resource Name (ARN) of the state machine for which you want
+    #   the information.
+    #
+    #   If you specify a state machine version ARN, this API returns details
+    #   about that version. The version ARN is a combination of state machine
+    #   ARN and the version number separated by a colon (:). For example,
+    #   `stateMachineARN:1`.
     #
     # @return [Types::DescribeStateMachineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -880,6 +1136,8 @@ module Aws::States
     #   * {Types::DescribeStateMachineOutput#logging_configuration #logging_configuration} => Types::LoggingConfiguration
     #   * {Types::DescribeStateMachineOutput#tracing_configuration #tracing_configuration} => Types::TracingConfiguration
     #   * {Types::DescribeStateMachineOutput#label #label} => String
+    #   * {Types::DescribeStateMachineOutput#revision_id #revision_id} => String
+    #   * {Types::DescribeStateMachineOutput#description #description} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -902,6 +1160,8 @@ module Aws::States
     #   resp.logging_configuration.destinations[0].cloud_watch_logs_log_group.log_group_arn #=> String
     #   resp.tracing_configuration.enabled #=> Boolean
     #   resp.label #=> String
+    #   resp.revision_id #=> String
+    #   resp.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachine AWS API Documentation
     #
@@ -912,11 +1172,65 @@ module Aws::States
       req.send_request(options)
     end
 
+    # Returns details about a state machine [alias][1].
+    #
+    # **Related operations:**
+    #
+    # * CreateStateMachineAlias
+    #
+    # * ListStateMachineAliases
+    #
+    # * UpdateStateMachineAlias
+    #
+    # * DeleteStateMachineAlias
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html
+    #
+    # @option params [required, String] :state_machine_alias_arn
+    #   The Amazon Resource Name (ARN) of the state machine alias.
+    #
+    # @return [Types::DescribeStateMachineAliasOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeStateMachineAliasOutput#state_machine_alias_arn #state_machine_alias_arn} => String
+    #   * {Types::DescribeStateMachineAliasOutput#name #name} => String
+    #   * {Types::DescribeStateMachineAliasOutput#description #description} => String
+    #   * {Types::DescribeStateMachineAliasOutput#routing_configuration #routing_configuration} => Array&lt;Types::RoutingConfigurationListItem&gt;
+    #   * {Types::DescribeStateMachineAliasOutput#creation_date #creation_date} => Time
+    #   * {Types::DescribeStateMachineAliasOutput#update_date #update_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_state_machine_alias({
+    #     state_machine_alias_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.state_machine_alias_arn #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.routing_configuration #=> Array
+    #   resp.routing_configuration[0].state_machine_version_arn #=> String
+    #   resp.routing_configuration[0].weight #=> Integer
+    #   resp.creation_date #=> Time
+    #   resp.update_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineAlias AWS API Documentation
+    #
+    # @overload describe_state_machine_alias(params = {})
+    # @param [Hash] params ({})
+    def describe_state_machine_alias(params = {}, options = {})
+      req = build_request(:describe_state_machine_alias, params)
+      req.send_request(options)
+    end
+
     # Provides information about a state machine's definition, its
-    # execution role ARN, and configuration. If an execution was dispatched
-    # by a Map Run, the Map Run is returned in the response. Additionally,
-    # the state machine returned will be the state machine associated with
-    # the Map Run.
+    # execution role ARN, and configuration. If a Map Run dispatched the
+    # execution, this action returns the Map Run Amazon Resource Name (ARN)
+    # in the response. The state machine returned is the state machine
+    # associated with the Map Run.
     #
     # <note markdown="1"> This operation is eventually consistent. The results are best effort
     # and may not reflect very recent updates and changes.
@@ -940,6 +1254,7 @@ module Aws::States
     #   * {Types::DescribeStateMachineForExecutionOutput#tracing_configuration #tracing_configuration} => Types::TracingConfiguration
     #   * {Types::DescribeStateMachineForExecutionOutput#map_run_arn #map_run_arn} => String
     #   * {Types::DescribeStateMachineForExecutionOutput#label #label} => String
+    #   * {Types::DescribeStateMachineForExecutionOutput#revision_id #revision_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -961,6 +1276,7 @@ module Aws::States
     #   resp.tracing_configuration.enabled #=> Boolean
     #   resp.map_run_arn #=> String
     #   resp.label #=> String
+    #   resp.revision_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineForExecution AWS API Documentation
     #
@@ -1147,6 +1463,8 @@ module Aws::States
     #   resp.events[0].execution_started_event_details.input #=> String
     #   resp.events[0].execution_started_event_details.input_details.truncated #=> Boolean
     #   resp.events[0].execution_started_event_details.role_arn #=> String
+    #   resp.events[0].execution_started_event_details.state_machine_alias_arn #=> String
+    #   resp.events[0].execution_started_event_details.state_machine_version_arn #=> String
     #   resp.events[0].execution_succeeded_event_details.output #=> String
     #   resp.events[0].execution_succeeded_event_details.output_details.truncated #=> Boolean
     #   resp.events[0].execution_aborted_event_details.error #=> String
@@ -1263,6 +1581,10 @@ module Aws::States
     # Amazon Resource Name (ARN), or those related to a Map Run by
     # specifying a Map Run ARN.
     #
+    # You can also provide a state machine [alias][1] ARN or [version][2]
+    # ARN to list the executions associated with a specific alias or
+    # version.
+    #
     # Results are sorted by time, with the most recent execution first.
     #
     # If `nextToken` is returned, there are more results available. The
@@ -1279,12 +1601,26 @@ module Aws::States
     #
     # This API action is not supported by `EXPRESS` state machines.
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html
+    # [2]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html
+    #
     # @option params [String] :state_machine_arn
     #   The Amazon Resource Name (ARN) of the state machine whose executions
     #   is listed.
     #
     #   You can specify either a `mapRunArn` or a `stateMachineArn`, but not
     #   both.
+    #
+    #   You can also return a list of executions associated with a specific
+    #   [alias][1] or [version][2], by specifying an alias ARN or a version
+    #   ARN in the `stateMachineArn` parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html
+    #   [2]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html
     #
     # @option params [String] :status_filter
     #   If specified, only list the executions whose current execution status
@@ -1348,6 +1684,8 @@ module Aws::States
     #   resp.executions[0].stop_date #=> Time
     #   resp.executions[0].map_run_arn #=> String
     #   resp.executions[0].item_count #=> Integer
+    #   resp.executions[0].state_machine_version_arn #=> String
+    #   resp.executions[0].state_machine_alias_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListExecutions AWS API Documentation
@@ -1414,6 +1752,157 @@ module Aws::States
     # @param [Hash] params ({})
     def list_map_runs(params = {}, options = {})
       req = build_request(:list_map_runs, params)
+      req.send_request(options)
+    end
+
+    # Lists [aliases][1] for a specified state machine ARN. Results are
+    # sorted by time, with the most recently created aliases listed first.
+    #
+    # To list aliases that reference a state machine [version][2], you can
+    # specify the version ARN in the `stateMachineArn` parameter.
+    #
+    # If `nextToken` is returned, there are more results available. The
+    # value of `nextToken` is a unique pagination token for each page. Make
+    # the call again using the returned token to retrieve the next page.
+    # Keep all other arguments unchanged. Each pagination token expires
+    # after 24 hours. Using an expired pagination token will return an *HTTP
+    # 400 InvalidToken* error.
+    #
+    # **Related operations:**
+    #
+    # * CreateStateMachineAlias
+    #
+    # * DescribeStateMachineAlias
+    #
+    # * UpdateStateMachineAlias
+    #
+    # * DeleteStateMachineAlias
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html
+    # [2]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html
+    #
+    # @option params [required, String] :state_machine_arn
+    #   The Amazon Resource Name (ARN) of the state machine for which you want
+    #   to list aliases.
+    #
+    #   If you specify a state machine version ARN, this API returns a list of
+    #   aliases for that version.
+    #
+    # @option params [String] :next_token
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #   Keep all other arguments unchanged. Each pagination token expires
+    #   after 24 hours. Using an expired pagination token will return an *HTTP
+    #   400 InvalidToken* error.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results that are returned per call. You can use
+    #   `nextToken` to obtain further pages of results. The default is 100 and
+    #   the maximum allowed page size is 1000. A value of 0 uses the default.
+    #
+    #   This is only an upper limit. The actual number of results returned per
+    #   call might be fewer than the specified maximum.
+    #
+    # @return [Types::ListStateMachineAliasesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListStateMachineAliasesOutput#state_machine_aliases #state_machine_aliases} => Array&lt;Types::StateMachineAliasListItem&gt;
+    #   * {Types::ListStateMachineAliasesOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_state_machine_aliases({
+    #     state_machine_arn: "Arn", # required
+    #     next_token: "PageToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.state_machine_aliases #=> Array
+    #   resp.state_machine_aliases[0].state_machine_alias_arn #=> String
+    #   resp.state_machine_aliases[0].creation_date #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListStateMachineAliases AWS API Documentation
+    #
+    # @overload list_state_machine_aliases(params = {})
+    # @param [Hash] params ({})
+    def list_state_machine_aliases(params = {}, options = {})
+      req = build_request(:list_state_machine_aliases, params)
+      req.send_request(options)
+    end
+
+    # Lists [versions][1] for the specified state machine Amazon Resource
+    # Name (ARN).
+    #
+    # The results are sorted in descending order of the version creation
+    # time.
+    #
+    # If `nextToken` is returned, there are more results available. The
+    # value of `nextToken` is a unique pagination token for each page. Make
+    # the call again using the returned token to retrieve the next page.
+    # Keep all other arguments unchanged. Each pagination token expires
+    # after 24 hours. Using an expired pagination token will return an *HTTP
+    # 400 InvalidToken* error.
+    #
+    # **Related operations:**
+    #
+    # * PublishStateMachineVersion
+    #
+    # * DeleteStateMachineVersion
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html
+    #
+    # @option params [required, String] :state_machine_arn
+    #   The Amazon Resource Name (ARN) of the state machine.
+    #
+    # @option params [String] :next_token
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #   Keep all other arguments unchanged. Each pagination token expires
+    #   after 24 hours. Using an expired pagination token will return an *HTTP
+    #   400 InvalidToken* error.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results that are returned per call. You can use
+    #   `nextToken` to obtain further pages of results. The default is 100 and
+    #   the maximum allowed page size is 1000. A value of 0 uses the default.
+    #
+    #   This is only an upper limit. The actual number of results returned per
+    #   call might be fewer than the specified maximum.
+    #
+    # @return [Types::ListStateMachineVersionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListStateMachineVersionsOutput#state_machine_versions #state_machine_versions} => Array&lt;Types::StateMachineVersionListItem&gt;
+    #   * {Types::ListStateMachineVersionsOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_state_machine_versions({
+    #     state_machine_arn: "Arn", # required
+    #     next_token: "PageToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.state_machine_versions #=> Array
+    #   resp.state_machine_versions[0].state_machine_version_arn #=> String
+    #   resp.state_machine_versions[0].creation_date #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListStateMachineVersions AWS API Documentation
+    #
+    # @overload list_state_machine_versions(params = {})
+    # @param [Hash] params ({})
+    def list_state_machine_versions(params = {}, options = {})
+      req = build_request(:list_state_machine_versions, params)
       req.send_request(options)
     end
 
@@ -1510,6 +1999,84 @@ module Aws::States
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Creates a [version][1] from the current revision of a state machine.
+    # Use versions to create immutable snapshots of your state machine. You
+    # can start executions from versions either directly or with an alias.
+    # To create an alias, use CreateStateMachineAlias.
+    #
+    # You can publish up to 1000 versions for each state machine. You must
+    # manually delete unused versions using the DeleteStateMachineVersion
+    # API action.
+    #
+    # `PublishStateMachineVersion` is an idempotent API. It doesn't create
+    # a duplicate state machine version if it already exists for the current
+    # revision. Step Functions bases `PublishStateMachineVersion`'s
+    # idempotency check on the `stateMachineArn`, `name`, and `revisionId`
+    # parameters. Requests with the same parameters return a successful
+    # idempotent response. If you don't specify a `revisionId`, Step
+    # Functions checks for a previously published version of the state
+    # machine's current revision.
+    #
+    # **Related operations:**
+    #
+    # * DeleteStateMachineVersion
+    #
+    # * ListStateMachineVersions
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html
+    #
+    # @option params [required, String] :state_machine_arn
+    #   The Amazon Resource Name (ARN) of the state machine.
+    #
+    # @option params [String] :revision_id
+    #   Only publish the state machine version if the current state machine's
+    #   revision ID matches the specified ID.
+    #
+    #   Use this option to avoid publishing a version if the state machine
+    #   changed since you last updated it. If the specified revision ID
+    #   doesn't match the state machine's current revision ID, the API
+    #   returns `ConflictException`.
+    #
+    #   <note markdown="1"> To specify an initial revision ID for a state machine with no revision
+    #   ID assigned, specify the string `INITIAL` for the `revisionId`
+    #   parameter. For example, you can specify a `revisionID` of `INITIAL`
+    #   when you create a state machine using the CreateStateMachine API
+    #   action.
+    #
+    #    </note>
+    #
+    # @option params [String] :description
+    #   An optional description of the state machine version.
+    #
+    # @return [Types::PublishStateMachineVersionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PublishStateMachineVersionOutput#creation_date #creation_date} => Time
+    #   * {Types::PublishStateMachineVersionOutput#state_machine_version_arn #state_machine_version_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.publish_state_machine_version({
+    #     state_machine_arn: "Arn", # required
+    #     revision_id: "RevisionId",
+    #     description: "VersionDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.creation_date #=> Time
+    #   resp.state_machine_version_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/PublishStateMachineVersion AWS API Documentation
+    #
+    # @overload publish_state_machine_version(params = {})
+    # @param [Hash] params ({})
+    def publish_state_machine_version(params = {}, options = {})
+      req = build_request(:publish_state_machine_version, params)
       req.send_request(options)
     end
 
@@ -1645,36 +2212,107 @@ module Aws::States
       req.send_request(options)
     end
 
-    # Starts a state machine execution. If the given state machine Amazon
-    # Resource Name (ARN) is a qualified state machine ARN, it will fail
-    # with ValidationException.
+    # Starts a state machine execution.
     #
-    # A qualified state machine ARN refers to a *Distributed Map state*
-    # defined within a state machine. For example, the qualified state
-    # machine ARN
-    # `arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel`
-    # refers to a *Distributed Map state* with a label `mapStateLabel` in
-    # the state machine named `stateMachineName`.
+    # A qualified state machine ARN can either refer to a *Distributed Map
+    # state* defined within a state machine, a version ARN, or an alias ARN.
+    #
+    # The following are some examples of qualified and unqualified state
+    # machine ARNs:
+    #
+    # * The following qualified state machine ARN refers to a *Distributed
+    #   Map state* with a label `mapStateLabel` in a state machine named
+    #   `myStateMachine`.
+    #
+    #   `arn:partition:states:region:account-id:stateMachine:myStateMachine/mapStateLabel`
+    #
+    #   <note markdown="1"> If you provide a qualified state machine ARN that refers to a
+    #   *Distributed Map state*, the request fails with
+    #   `ValidationException`.
+    #
+    #    </note>
+    #
+    # * The following qualified state machine ARN refers to an alias named
+    #   `PROD`.
+    #
+    #   `arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine:PROD>`
+    #
+    #   <note markdown="1"> If you provide a qualified state machine ARN that refers to a
+    #   version ARN or an alias ARN, the request starts execution for that
+    #   version or alias.
+    #
+    #    </note>
+    #
+    # * The following unqualified state machine ARN refers to a state
+    #   machine named `myStateMachine`.
+    #
+    #   `arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine>`
+    #
+    # If you start an execution with an unqualified state machine ARN, Step
+    # Functions uses the latest revision of the state machine for the
+    # execution.
+    #
+    # To start executions of a state machine [version][1], call
+    # `StartExecution` and provide the version ARN or the ARN of an
+    # [alias][2] that points to the version.
     #
     # <note markdown="1"> `StartExecution` is idempotent for `STANDARD` workflows. For a
-    # `STANDARD` workflow, if `StartExecution` is called with the same name
-    # and input as a running execution, the call will succeed and return the
+    # `STANDARD` workflow, if you call `StartExecution` with the same name
+    # and input as a running execution, the call succeeds and return the
     # same response as the original request. If the execution is closed or
-    # if the input is different, it will return a `400
-    # ExecutionAlreadyExists` error. Names can be reused after 90 days.
+    # if the input is different, it returns a `400 ExecutionAlreadyExists`
+    # error. You can reuse names after 90 days.
     #
-    #  `StartExecution` is not idempotent for `EXPRESS` workflows.
+    #  `StartExecution` isn't idempotent for `EXPRESS` workflows.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html
+    # [2]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html
     #
     # @option params [required, String] :state_machine_arn
     #   The Amazon Resource Name (ARN) of the state machine to execute.
     #
+    #   The `stateMachineArn` parameter accepts one of the following inputs:
+    #
+    #   * **An unqualified state machine ARN** – Refers to a state machine ARN
+    #     that isn't qualified with a version or alias ARN. The following is
+    #     an example of an unqualified state machine ARN.
+    #
+    #     `arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine>`
+    #
+    #     Step Functions doesn't associate state machine executions that you
+    #     start with an unqualified ARN with a version. This is true even if
+    #     that version uses the same revision that the execution used.
+    #
+    #   * **A state machine version ARN** – Refers to a version ARN, which is
+    #     a combination of state machine ARN and the version number separated
+    #     by a colon (:). The following is an example of the ARN for version
+    #     10.
+    #
+    #     `arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine>:10`
+    #
+    #     Step Functions doesn't associate executions that you start with a
+    #     version ARN with any aliases that point to that version.
+    #
+    #   * **A state machine alias ARN** – Refers to an alias ARN, which is a
+    #     combination of state machine ARN and the alias name separated by a
+    #     colon (:). The following is an example of the ARN for an alias named
+    #     `PROD`.
+    #
+    #     `arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine:PROD>`
+    #
+    #     Step Functions associates executions that you start with an alias
+    #     ARN with that alias and the state machine version used for that
+    #     execution.
+    #
     # @option params [String] :name
-    #   The name of the execution. This name must be unique for your Amazon
-    #   Web Services account, region, and state machine for 90 days. For more
-    #   information, see [ Limits Related to State Machine Executions][1] in
-    #   the *Step Functions Developer Guide*.
+    #   Optional name of the execution. This name must be unique for your
+    #   Amazon Web Services account, Region, and state machine for 90 days.
+    #   For more information, see [ Limits Related to State Machine
+    #   Executions][1] in the *Step Functions Developer Guide*.
     #
     #   A name must *not* contain:
     #
@@ -1987,9 +2625,6 @@ module Aws::States
     # least one of `definition` or `roleArn` or you will receive a
     # `MissingRequiredParameter` error.
     #
-    # If the given state machine Amazon Resource Name (ARN) is a qualified
-    # state machine ARN, it will fail with ValidationException.
-    #
     # A qualified state machine ARN refers to a *Distributed Map state*
     # defined within a state machine. For example, the qualified state
     # machine ARN
@@ -1997,12 +2632,59 @@ module Aws::States
     # refers to a *Distributed Map state* with a label `mapStateLabel` in
     # the state machine named `stateMachineName`.
     #
-    # <note markdown="1"> All `StartExecution` calls within a few seconds will use the updated
-    # `definition` and `roleArn`. Executions started immediately after
-    # calling `UpdateStateMachine` may use the previous state machine
+    # A qualified state machine ARN can either refer to a *Distributed Map
+    # state* defined within a state machine, a version ARN, or an alias ARN.
+    #
+    # The following are some examples of qualified and unqualified state
+    # machine ARNs:
+    #
+    # * The following qualified state machine ARN refers to a *Distributed
+    #   Map state* with a label `mapStateLabel` in a state machine named
+    #   `myStateMachine`.
+    #
+    #   `arn:partition:states:region:account-id:stateMachine:myStateMachine/mapStateLabel`
+    #
+    #   <note markdown="1"> If you provide a qualified state machine ARN that refers to a
+    #   *Distributed Map state*, the request fails with
+    #   `ValidationException`.
+    #
+    #    </note>
+    #
+    # * The following qualified state machine ARN refers to an alias named
+    #   `PROD`.
+    #
+    #   `arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine:PROD>`
+    #
+    #   <note markdown="1"> If you provide a qualified state machine ARN that refers to a
+    #   version ARN or an alias ARN, the request starts execution for that
+    #   version or alias.
+    #
+    #    </note>
+    #
+    # * The following unqualified state machine ARN refers to a state
+    #   machine named `myStateMachine`.
+    #
+    #   `arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine>`
+    #
+    # After you update your state machine, you can set the `publish`
+    # parameter to `true` in the same action to publish a new [version][1].
+    # This way, you can opt-in to strict versioning of your state machine.
+    #
+    # <note markdown="1"> Step Functions assigns monotonically increasing integers for state
+    # machine versions, starting at version number 1.
+    #
+    #  </note>
+    #
+    # <note markdown="1"> All `StartExecution` calls within a few seconds use the updated
+    # `definition` and `roleArn`. Executions started immediately after you
+    # call `UpdateStateMachine` may use the previous state machine
     # `definition` and `roleArn`.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html
     #
     # @option params [required, String] :state_machine_arn
     #   The Amazon Resource Name (ARN) of the state machine.
@@ -2019,15 +2701,28 @@ module Aws::States
     #   The Amazon Resource Name (ARN) of the IAM role of the state machine.
     #
     # @option params [Types::LoggingConfiguration] :logging_configuration
-    #   The `LoggingConfiguration` data type is used to set CloudWatch Logs
+    #   Use the `LoggingConfiguration` data type to set CloudWatch Logs
     #   options.
     #
     # @option params [Types::TracingConfiguration] :tracing_configuration
     #   Selects whether X-Ray tracing is enabled.
     #
+    # @option params [Boolean] :publish
+    #   Specifies whether the state machine version is published. The default
+    #   is `false`. To publish a version after updating the state machine, set
+    #   `publish` to `true`.
+    #
+    # @option params [String] :version_description
+    #   An optional description of the state machine version to publish.
+    #
+    #   You can only specify the `versionDescription` parameter if you've set
+    #   `publish` to `true`.
+    #
     # @return [Types::UpdateStateMachineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateStateMachineOutput#update_date #update_date} => Time
+    #   * {Types::UpdateStateMachineOutput#revision_id #revision_id} => String
+    #   * {Types::UpdateStateMachineOutput#state_machine_version_arn #state_machine_version_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2049,11 +2744,15 @@ module Aws::States
     #     tracing_configuration: {
     #       enabled: false,
     #     },
+    #     publish: false,
+    #     version_description: "VersionDescription",
     #   })
     #
     # @example Response structure
     #
     #   resp.update_date #=> Time
+    #   resp.revision_id #=> String
+    #   resp.state_machine_version_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/UpdateStateMachine AWS API Documentation
     #
@@ -2061,6 +2760,82 @@ module Aws::States
     # @param [Hash] params ({})
     def update_state_machine(params = {}, options = {})
       req = build_request(:update_state_machine, params)
+      req.send_request(options)
+    end
+
+    # Updates the configuration of an existing state machine [alias][1] by
+    # modifying its `description` or `routingConfiguration`.
+    #
+    # You must specify at least one of the `description` or
+    # `routingConfiguration` parameters to update a state machine alias.
+    #
+    # <note markdown="1"> `UpdateStateMachineAlias` is an idempotent API. Step Functions bases
+    # the idempotency check on the `stateMachineAliasArn`, `description`,
+    # and `routingConfiguration` parameters. Requests with the same
+    # parameters return an idempotent response.
+    #
+    #  </note>
+    #
+    # <note markdown="1"> This operation is eventually consistent. All StartExecution requests
+    # made within a few seconds use the latest alias configuration.
+    # Executions started immediately after calling `UpdateStateMachineAlias`
+    # may use the previous routing configuration.
+    #
+    #  </note>
+    #
+    # **Related operations:**
+    #
+    # * CreateStateMachineAlias
+    #
+    # * DescribeStateMachineAlias
+    #
+    # * ListStateMachineAliases
+    #
+    # * DeleteStateMachineAlias
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html
+    #
+    # @option params [required, String] :state_machine_alias_arn
+    #   The Amazon Resource Name (ARN) of the state machine alias.
+    #
+    # @option params [String] :description
+    #   A description of the state machine alias.
+    #
+    # @option params [Array<Types::RoutingConfigurationListItem>] :routing_configuration
+    #   The routing configuration of the state machine alias.
+    #
+    #   An array of `RoutingConfig` objects that specifies up to two state
+    #   machine versions that the alias starts executions for.
+    #
+    # @return [Types::UpdateStateMachineAliasOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateStateMachineAliasOutput#update_date #update_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_state_machine_alias({
+    #     state_machine_alias_arn: "Arn", # required
+    #     description: "AliasDescription",
+    #     routing_configuration: [
+    #       {
+    #         state_machine_version_arn: "Arn", # required
+    #         weight: 1, # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/UpdateStateMachineAlias AWS API Documentation
+    #
+    # @overload update_state_machine_alias(params = {})
+    # @param [Hash] params ({})
+    def update_state_machine_alias(params = {}, options = {})
+      req = build_request(:update_state_machine_alias, params)
       req.send_request(options)
     end
 
@@ -2077,7 +2852,7 @@ module Aws::States
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-states'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

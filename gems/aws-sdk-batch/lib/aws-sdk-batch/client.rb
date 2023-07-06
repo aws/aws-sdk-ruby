@@ -378,6 +378,16 @@ module Aws::Batch
     # until it reaches the head of the job queue. Then the job status is
     # updated to `FAILED`.
     #
+    # <note markdown="1"> A `PENDING` job is canceled after all dependency jobs are completed.
+    # Therefore, it may take longer than expected to cancel a job in
+    # `PENDING` status.
+    #
+    #  When you try to cancel an array parent job in `PENDING`, Batch
+    # attempts to cancel all child jobs. The array parent job is canceled
+    # when all child jobs are completed.
+    #
+    #  </note>
+    #
     # Jobs that progressed to the `STARTING` or `RUNNING` state aren't
     # canceled. However, the API operation still succeeds, even if no job is
     # canceled. These jobs must be terminated with the TerminateJob
@@ -490,7 +500,10 @@ module Aws::Batch
     #   `BEST_FIT_PROGRESSIVE` or `SPOT_CAPACITY_OPTIMIZED`.
     #
     # * Set the update to latest image version
-    #   (`updateToLatestImageVersion`) parameter to `true`.
+    #   (`updateToLatestImageVersion`) parameter to `true`. The
+    #   `updateToLatestImageVersion` parameter is used when you update a
+    #   compute environment. This parameter is ignored when you create a
+    #   compute environment.
     #
     # * Don't specify an AMI ID in `imageId`, `imageIdOverride` (in [
     #   `ec2Configuration` ][5]), or in the launch template
@@ -1500,6 +1513,8 @@ module Aws::Batch
     #   resp.job_definitions[0].container_properties.network_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_definitions[0].container_properties.fargate_platform_configuration.platform_version #=> String
     #   resp.job_definitions[0].container_properties.ephemeral_storage.size_in_gi_b #=> Integer
+    #   resp.job_definitions[0].container_properties.runtime_platform.operating_system_family #=> String
+    #   resp.job_definitions[0].container_properties.runtime_platform.cpu_architecture #=> String
     #   resp.job_definitions[0].timeout.attempt_duration_seconds #=> Integer
     #   resp.job_definitions[0].node_properties.num_nodes #=> Integer
     #   resp.job_definitions[0].node_properties.main_node #=> Integer
@@ -1565,6 +1580,8 @@ module Aws::Batch
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.network_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.fargate_platform_configuration.platform_version #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.ephemeral_storage.size_in_gi_b #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.runtime_platform.operating_system_family #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.runtime_platform.cpu_architecture #=> String
     #   resp.job_definitions[0].tags #=> Hash
     #   resp.job_definitions[0].tags["TagKey"] #=> String
     #   resp.job_definitions[0].propagate_tags #=> Boolean
@@ -1891,6 +1908,8 @@ module Aws::Batch
     #   resp.jobs[0].container.network_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].container.fargate_platform_configuration.platform_version #=> String
     #   resp.jobs[0].container.ephemeral_storage.size_in_gi_b #=> Integer
+    #   resp.jobs[0].container.runtime_platform.operating_system_family #=> String
+    #   resp.jobs[0].container.runtime_platform.cpu_architecture #=> String
     #   resp.jobs[0].node_details.node_index #=> Integer
     #   resp.jobs[0].node_details.is_main_node #=> Boolean
     #   resp.jobs[0].node_properties.num_nodes #=> Integer
@@ -1957,6 +1976,8 @@ module Aws::Batch
     #   resp.jobs[0].node_properties.node_range_properties[0].container.network_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].node_properties.node_range_properties[0].container.fargate_platform_configuration.platform_version #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].container.ephemeral_storage.size_in_gi_b #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.runtime_platform.operating_system_family #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.runtime_platform.cpu_architecture #=> String
     #   resp.jobs[0].array_properties.status_summary #=> Hash
     #   resp.jobs[0].array_properties.status_summary["String"] #=> Integer
     #   resp.jobs[0].array_properties.size #=> Integer
@@ -2685,6 +2706,10 @@ module Aws::Batch
     #       ephemeral_storage: {
     #         size_in_gi_b: 1, # required
     #       },
+    #       runtime_platform: {
+    #         operating_system_family: "String",
+    #         cpu_architecture: "String",
+    #       },
     #     },
     #     node_properties: {
     #       num_nodes: 1, # required
@@ -2793,6 +2818,10 @@ module Aws::Batch
     #             },
     #             ephemeral_storage: {
     #               size_in_gi_b: 1, # required
+    #             },
+    #             runtime_platform: {
+    #               operating_system_family: "String",
+    #               cpu_architecture: "String",
     #             },
     #           },
     #         },
@@ -2927,10 +2956,12 @@ module Aws::Batch
     #   name or the Amazon Resource Name (ARN) of the queue.
     #
     # @option params [String] :share_identifier
-    #   The share identifier for the job. If the job queue doesn't have a
-    #   scheduling policy, then this parameter must not be specified. If the
-    #   job queue has a scheduling policy, then this parameter must be
-    #   specified.
+    #   The share identifier for the job. Don't specify this parameter if the
+    #   job queue doesn't have a scheduling policy. If the job queue has a
+    #   scheduling policy, then this parameter must be specified.
+    #
+    #   This string is limited to 255 alphanumeric characters, and can be
+    #   followed by an asterisk (*).
     #
     # @option params [Integer] :scheduling_priority_override
     #   The scheduling priority for the job. This only affects jobs in job
@@ -3663,7 +3694,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

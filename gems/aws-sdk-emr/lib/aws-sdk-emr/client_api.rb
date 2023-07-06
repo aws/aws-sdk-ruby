@@ -109,6 +109,7 @@ module Aws::EMR
     ExecutionEngineConfig = Shapes::StructureShape.new(name: 'ExecutionEngineConfig')
     ExecutionEngineType = Shapes::StringShape.new(name: 'ExecutionEngineType')
     FailureDetails = Shapes::StructureShape.new(name: 'FailureDetails')
+    Float = Shapes::FloatShape.new(name: 'Float')
     GetAutoTerminationPolicyInput = Shapes::StructureShape.new(name: 'GetAutoTerminationPolicyInput')
     GetAutoTerminationPolicyOutput = Shapes::StructureShape.new(name: 'GetAutoTerminationPolicyOutput')
     GetBlockPublicAccessConfigurationInput = Shapes::StructureShape.new(name: 'GetBlockPublicAccessConfigurationInput')
@@ -207,6 +208,8 @@ module Aws::EMR
     ListStudioSessionMappingsOutput = Shapes::StructureShape.new(name: 'ListStudioSessionMappingsOutput')
     ListStudiosInput = Shapes::StructureShape.new(name: 'ListStudiosInput')
     ListStudiosOutput = Shapes::StructureShape.new(name: 'ListStudiosOutput')
+    ListSupportedInstanceTypesInput = Shapes::StructureShape.new(name: 'ListSupportedInstanceTypesInput')
+    ListSupportedInstanceTypesOutput = Shapes::StructureShape.new(name: 'ListSupportedInstanceTypesOutput')
     Long = Shapes::IntegerShape.new(name: 'Long')
     ManagedScalingPolicy = Shapes::StructureShape.new(name: 'ManagedScalingPolicy')
     Marker = Shapes::StringShape.new(name: 'Marker')
@@ -319,6 +322,8 @@ module Aws::EMR
     StudioSummary = Shapes::StructureShape.new(name: 'StudioSummary')
     StudioSummaryList = Shapes::ListShape.new(name: 'StudioSummaryList')
     SubnetIdList = Shapes::ListShape.new(name: 'SubnetIdList')
+    SupportedInstanceType = Shapes::StructureShape.new(name: 'SupportedInstanceType')
+    SupportedInstanceTypesList = Shapes::ListShape.new(name: 'SupportedInstanceTypesList')
     SupportedProductConfig = Shapes::StructureShape.new(name: 'SupportedProductConfig')
     SupportedProductsList = Shapes::ListShape.new(name: 'SupportedProductsList')
     Tag = Shapes::StructureShape.new(name: 'Tag')
@@ -1122,6 +1127,14 @@ module Aws::EMR
     ListStudiosOutput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
     ListStudiosOutput.struct_class = Types::ListStudiosOutput
 
+    ListSupportedInstanceTypesInput.add_member(:release_label, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReleaseLabel"))
+    ListSupportedInstanceTypesInput.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    ListSupportedInstanceTypesInput.struct_class = Types::ListSupportedInstanceTypesInput
+
+    ListSupportedInstanceTypesOutput.add_member(:supported_instance_types, Shapes::ShapeRef.new(shape: SupportedInstanceTypesList, location_name: "SupportedInstanceTypes"))
+    ListSupportedInstanceTypesOutput.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    ListSupportedInstanceTypesOutput.struct_class = Types::ListSupportedInstanceTypesOutput
+
     ManagedScalingPolicy.add_member(:compute_limits, Shapes::ShapeRef.new(shape: ComputeLimits, location_name: "ComputeLimits"))
     ManagedScalingPolicy.struct_class = Types::ManagedScalingPolicy
 
@@ -1511,6 +1524,21 @@ module Aws::EMR
     StudioSummaryList.member = Shapes::ShapeRef.new(shape: StudioSummary)
 
     SubnetIdList.member = Shapes::ShapeRef.new(shape: String)
+
+    SupportedInstanceType.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    SupportedInstanceType.add_member(:memory_gb, Shapes::ShapeRef.new(shape: Float, location_name: "MemoryGB"))
+    SupportedInstanceType.add_member(:storage_gb, Shapes::ShapeRef.new(shape: Integer, location_name: "StorageGB"))
+    SupportedInstanceType.add_member(:vcpu, Shapes::ShapeRef.new(shape: Integer, location_name: "VCPU"))
+    SupportedInstanceType.add_member(:is_64_bits_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "Is64BitsOnly"))
+    SupportedInstanceType.add_member(:instance_family_id, Shapes::ShapeRef.new(shape: String, location_name: "InstanceFamilyId"))
+    SupportedInstanceType.add_member(:ebs_optimized_available, Shapes::ShapeRef.new(shape: Boolean, location_name: "EbsOptimizedAvailable"))
+    SupportedInstanceType.add_member(:ebs_optimized_by_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "EbsOptimizedByDefault"))
+    SupportedInstanceType.add_member(:number_of_disks, Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfDisks"))
+    SupportedInstanceType.add_member(:ebs_storage_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "EbsStorageOnly"))
+    SupportedInstanceType.add_member(:architecture, Shapes::ShapeRef.new(shape: String, location_name: "Architecture"))
+    SupportedInstanceType.struct_class = Types::SupportedInstanceType
+
+    SupportedInstanceTypesList.member = Shapes::ShapeRef.new(shape: SupportedInstanceType)
 
     SupportedProductConfig.add_member(:name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "Name"))
     SupportedProductConfig.add_member(:args, Shapes::ShapeRef.new(shape: XmlStringList, location_name: "Args"))
@@ -1955,6 +1983,21 @@ module Aws::EMR
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListStudiosInput)
         o.output = Shapes::ShapeRef.new(shape: ListStudiosOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
+      api.add_operation(:list_supported_instance_types, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSupportedInstanceTypes"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListSupportedInstanceTypesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListSupportedInstanceTypesOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o[:pager] = Aws::Pager.new(

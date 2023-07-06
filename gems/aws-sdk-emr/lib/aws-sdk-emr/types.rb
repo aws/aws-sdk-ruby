@@ -4315,6 +4315,53 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # @!attribute [rw] release_label
+    #   The Amazon EMR release label determines the [versions of open-source
+    #   application packages][1] that Amazon EMR has installed on the
+    #   cluster. Release labels are in the format `emr-x.x.x`, where x.x.x
+    #   is an Amazon EMR release number such as `emr-6.10.0`. For more
+    #   information about Amazon EMR releases and their included application
+    #   versions and features, see the <i> <a
+    #   href="https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-components.html">Amazon
+    #   EMR Release Guide</a> </i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-app-versions-6.x.html
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   The pagination token that marks the next set of results to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListSupportedInstanceTypesInput AWS API Documentation
+    #
+    class ListSupportedInstanceTypesInput < Struct.new(
+      :release_label,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] supported_instance_types
+    #   The list of instance types that the release specified in
+    #   `ListSupportedInstanceTypesInput$ReleaseLabel` supports, filtered by
+    #   Amazon Web Services Region.
+    #   @return [Array<Types::SupportedInstanceType>]
+    #
+    # @!attribute [rw] marker
+    #   The pagination token that marks the next set of results to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListSupportedInstanceTypesOutput AWS API Documentation
+    #
+    class ListSupportedInstanceTypesOutput < Struct.new(
+      :supported_instance_types,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Managed scaling policy for an Amazon EMR cluster. The policy specifies
     # the limits for resources that can be added or terminated from a
     # cluster. The policy only applies to the core and task nodes. The
@@ -5939,21 +5986,10 @@ module Aws::EMR
     #   @return [Integer]
     #
     # @!attribute [rw] allocation_strategy
-    #   Specifies one of the following strategies to launch Spot Instance
-    #   fleets: `price-capacity-optimized`, `capacity-optimized`,
-    #   `lowest-price`, or `diversified`. For more information on the
-    #   provisioning strategies, see [Allocation strategies for Spot
-    #   Instances][1] in the *Amazon EC2 User Guide for Linux Instances*.
-    #
-    #   <note markdown="1"> When you launch a Spot Instance fleet with the old console, it
-    #   automatically launches with the `capacity-optimized` strategy. You
-    #   can't change the allocation strategy from the old console.
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-allocation-strategy.html
+    #   Specifies the strategy to use in launching Spot Instance fleets.
+    #   Currently, the only option is capacity-optimized (the default),
+    #   which launches instances from Spot Instance pools with optimal
+    #   capacity for the number of instances that are launching.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SpotProvisioningSpecification AWS API Documentation
@@ -6523,6 +6559,86 @@ module Aws::EMR
       :url,
       :auth_mode,
       :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An instance type that the specified Amazon EMR release supports.
+    #
+    # @!attribute [rw] type
+    #   The [Amazon EC2 instance type][1], for example `m5.xlarge`, of the
+    #   `SupportedInstanceType`.
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/ec2/instance-types/
+    #   @return [String]
+    #
+    # @!attribute [rw] memory_gb
+    #   The amount of memory that is available to Amazon EMR from the
+    #   `SupportedInstanceType`. The kernel and hypervisor software consume
+    #   some memory, so this value might be lower than the overall memory
+    #   for the instance type.
+    #   @return [Float]
+    #
+    # @!attribute [rw] storage_gb
+    #   `StorageGB` represents the storage capacity of the
+    #   `SupportedInstanceType`. This value is `0` for Amazon EBS-only
+    #   instance types.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] vcpu
+    #   The number of vCPUs available for the `SupportedInstanceType`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] is_64_bits_only
+    #   Indicates whether the `SupportedInstanceType` only supports 64-bit
+    #   architecture.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] instance_family_id
+    #   The Amazon EC2 family and generation for the
+    #   `SupportedInstanceType`.
+    #   @return [String]
+    #
+    # @!attribute [rw] ebs_optimized_available
+    #   Indicates whether the `SupportedInstanceType` supports Amazon EBS
+    #   optimization.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ebs_optimized_by_default
+    #   Indicates whether the `SupportedInstanceType` uses Amazon EBS
+    #   optimization by default.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] number_of_disks
+    #   Number of disks for the `SupportedInstanceType`. This value is `0`
+    #   for Amazon EBS-only instance types.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ebs_storage_only
+    #   Indicates whether the `SupportedInstanceType` only supports Amazon
+    #   EBS.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] architecture
+    #   The CPU architecture, for example `X86_64` or `AARCH64`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SupportedInstanceType AWS API Documentation
+    #
+    class SupportedInstanceType < Struct.new(
+      :type,
+      :memory_gb,
+      :storage_gb,
+      :vcpu,
+      :is_64_bits_only,
+      :instance_family_id,
+      :ebs_optimized_available,
+      :ebs_optimized_by_default,
+      :number_of_disks,
+      :ebs_storage_only,
+      :architecture)
       SENSITIVE = []
       include Aws::Structure
     end

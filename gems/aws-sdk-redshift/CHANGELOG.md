@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.94.0 (2023-06-20)
+------------------
+
+* Feature - Added support for custom domain names for Redshift Provisioned clusters. This feature enables customers to create a custom domain name and use ACM to generate fully secure connections to it.
+
 1.93.0 (2023-06-15)
 ------------------
 

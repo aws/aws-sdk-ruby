@@ -380,6 +380,11 @@ module Aws::SageMakerFeatureStoreRuntime
     #   `RecordIdentifier` value, and Feature name that have been requested to
     #   be retrieved in batch.
     #
+    # @option params [String] :expiration_time_response
+    #   Parameter to request `ExpiresAt` in response. If `Enabled`,
+    #   `BatchGetRecord` will return the value of `ExpiresAt`, if it is not
+    #   null. If `Disabled` and null, `BatchGetRecord` will return null.
+    #
     # @return [Types::BatchGetRecordResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::BatchGetRecordResponse#records #records} => Array&lt;Types::BatchGetRecordResultDetail&gt;
@@ -396,6 +401,7 @@ module Aws::SageMakerFeatureStoreRuntime
     #         feature_names: ["FeatureName"],
     #       },
     #     ],
+    #     expiration_time_response: "Enabled", # accepts Enabled, Disabled
     #   })
     #
     # @example Response structure
@@ -406,6 +412,7 @@ module Aws::SageMakerFeatureStoreRuntime
     #   resp.records[0].record #=> Array
     #   resp.records[0].record[0].feature_name #=> String
     #   resp.records[0].record[0].value_as_string #=> String
+    #   resp.records[0].expires_at #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].feature_group_name #=> String
     #   resp.errors[0].record_identifier_value_as_string #=> String
@@ -428,10 +435,10 @@ module Aws::SageMakerFeatureStoreRuntime
     end
 
     # Deletes a `Record` from a `FeatureGroup` in the `OnlineStore`. Feature
-    # Store supports both `SOFT_DELETE` and `HARD_DELETE`. For `SOFT_DELETE`
+    # Store supports both `SoftDelete` and `HardDelete`. For `SoftDelete`
     # (default), feature columns are set to `null` and the record is no
-    # longer retrievable by `GetRecord` or `BatchGetRecord`. For`
-    # HARD_DELETE`, the complete `Record` is removed from the `OnlineStore`.
+    # longer retrievable by `GetRecord` or `BatchGetRecord`. For
+    # `HardDelete`, the complete `Record` is removed from the `OnlineStore`.
     # In both cases, Feature Store appends the deleted record marker to the
     # `OfflineStore` with feature values set to `null`, `is_deleted` value
     # set to `True`, and `EventTime` set to the delete input `EventTime`.
@@ -440,11 +447,11 @@ module Aws::SageMakerFeatureStoreRuntime
     # later than the `EventTime` of the existing record in the `OnlineStore`
     # for that `RecordIdentifer`. If it is not, the deletion does not occur:
     #
-    # * For `SOFT_DELETE`, the existing (undeleted) record remains in the
+    # * For `SoftDelete`, the existing (undeleted) record remains in the
     #   `OnlineStore`, though the delete record marker is still written to
     #   the `OfflineStore`.
     #
-    # * `HARD_DELETE` returns `EventTime`: `400 ValidationException` to
+    # * `HardDelete` returns `EventTime`: `400 ValidationException` to
     #   indicate that the delete operation failed. No delete record marker
     #   is written to the `OfflineStore`.
     #
@@ -506,9 +513,15 @@ module Aws::SageMakerFeatureStoreRuntime
     #   List of names of Features to be retrieved. If not specified, the
     #   latest value for all the Features are returned.
     #
+    # @option params [String] :expiration_time_response
+    #   Parameter to request `ExpiresAt` in response. If `Enabled`,
+    #   `BatchGetRecord` will return the value of `ExpiresAt`, if it is not
+    #   null. If `Disabled` and null, `BatchGetRecord` will return null.
+    #
     # @return [Types::GetRecordResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRecordResponse#record #record} => Array&lt;Types::FeatureValue&gt;
+    #   * {Types::GetRecordResponse#expires_at #expires_at} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -516,6 +529,7 @@ module Aws::SageMakerFeatureStoreRuntime
     #     feature_group_name: "FeatureGroupName", # required
     #     record_identifier_value_as_string: "ValueAsString", # required
     #     feature_names: ["FeatureName"],
+    #     expiration_time_response: "Enabled", # accepts Enabled, Disabled
     #   })
     #
     # @example Response structure
@@ -523,6 +537,7 @@ module Aws::SageMakerFeatureStoreRuntime
     #   resp.record #=> Array
     #   resp.record[0].feature_name #=> String
     #   resp.record[0].value_as_string #=> String
+    #   resp.expires_at #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/GetRecord AWS API Documentation
     #
@@ -558,6 +573,16 @@ module Aws::SageMakerFeatureStoreRuntime
     #   Feature Store adds the record to all of the stores that you're using
     #   for the `FeatureGroup`.
     #
+    # @option params [Types::TtlDuration] :ttl_duration
+    #   Time to live duration, where the record is hard deleted after the
+    #   expiration time is reached; `ExpiresAt` = `EventTime` + `TtlDuration`.
+    #   For information on HardDelete, see the [DeleteRecord][1] API in the
+    #   Amazon SageMaker API Reference guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -571,6 +596,10 @@ module Aws::SageMakerFeatureStoreRuntime
     #       },
     #     ],
     #     target_stores: ["OnlineStore"], # accepts OnlineStore, OfflineStore
+    #     ttl_duration: {
+    #       unit: "Seconds", # required, accepts Seconds, Minutes, Hours, Days, Weeks
+    #       value: 1, # required
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/PutRecord AWS API Documentation
@@ -595,7 +624,7 @@ module Aws::SageMakerFeatureStoreRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemakerfeaturestoreruntime'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

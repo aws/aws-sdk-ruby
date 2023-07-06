@@ -50,6 +50,9 @@ module Aws::Inspector2
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BatchGetAccountStatusRequest = Shapes::StructureShape.new(name: 'BatchGetAccountStatusRequest')
     BatchGetAccountStatusResponse = Shapes::StructureShape.new(name: 'BatchGetAccountStatusResponse')
+    BatchGetCodeSnippetRequest = Shapes::StructureShape.new(name: 'BatchGetCodeSnippetRequest')
+    BatchGetCodeSnippetRequestFindingArnsList = Shapes::ListShape.new(name: 'BatchGetCodeSnippetRequestFindingArnsList')
+    BatchGetCodeSnippetResponse = Shapes::StructureShape.new(name: 'BatchGetCodeSnippetResponse')
     BatchGetFreeTrialInfoRequest = Shapes::StructureShape.new(name: 'BatchGetFreeTrialInfoRequest')
     BatchGetFreeTrialInfoRequestAccountIdsList = Shapes::ListShape.new(name: 'BatchGetFreeTrialInfoRequestAccountIdsList')
     BatchGetFreeTrialInfoResponse = Shapes::StructureShape.new(name: 'BatchGetFreeTrialInfoResponse')
@@ -60,11 +63,23 @@ module Aws::Inspector2
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelFindingsReportRequest = Shapes::StructureShape.new(name: 'CancelFindingsReportRequest')
     CancelFindingsReportResponse = Shapes::StructureShape.new(name: 'CancelFindingsReportResponse')
+    CancelSbomExportRequest = Shapes::StructureShape.new(name: 'CancelSbomExportRequest')
+    CancelSbomExportResponse = Shapes::StructureShape.new(name: 'CancelSbomExportResponse')
     CisaAction = Shapes::StringShape.new(name: 'CisaAction')
     CisaData = Shapes::StructureShape.new(name: 'CisaData')
     CisaDateAdded = Shapes::TimestampShape.new(name: 'CisaDateAdded')
     CisaDateDue = Shapes::TimestampShape.new(name: 'CisaDateDue')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    CodeFilePath = Shapes::StructureShape.new(name: 'CodeFilePath')
+    CodeLine = Shapes::StructureShape.new(name: 'CodeLine')
+    CodeLineContentString = Shapes::StringShape.new(name: 'CodeLineContentString')
+    CodeLineList = Shapes::ListShape.new(name: 'CodeLineList')
+    CodeSnippetError = Shapes::StructureShape.new(name: 'CodeSnippetError')
+    CodeSnippetErrorCode = Shapes::StringShape.new(name: 'CodeSnippetErrorCode')
+    CodeSnippetErrorList = Shapes::ListShape.new(name: 'CodeSnippetErrorList')
+    CodeSnippetResult = Shapes::StructureShape.new(name: 'CodeSnippetResult')
+    CodeSnippetResultList = Shapes::ListShape.new(name: 'CodeSnippetResultList')
+    CodeVulnerabilityDetails = Shapes::StructureShape.new(name: 'CodeVulnerabilityDetails')
     Component = Shapes::StringShape.new(name: 'Component')
     ComponentType = Shapes::StringShape.new(name: 'ComponentType')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -87,6 +102,8 @@ module Aws::Inspector2
     CreateFilterResponse = Shapes::StructureShape.new(name: 'CreateFilterResponse')
     CreateFindingsReportRequest = Shapes::StructureShape.new(name: 'CreateFindingsReportRequest')
     CreateFindingsReportResponse = Shapes::StructureShape.new(name: 'CreateFindingsReportResponse')
+    CreateSbomExportRequest = Shapes::StructureShape.new(name: 'CreateSbomExportRequest')
+    CreateSbomExportResponse = Shapes::StructureShape.new(name: 'CreateSbomExportResponse')
     Currency = Shapes::StringShape.new(name: 'Currency')
     Cvss2 = Shapes::StructureShape.new(name: 'Cvss2')
     Cvss2BaseScore = Shapes::FloatShape.new(name: 'Cvss2BaseScore')
@@ -100,6 +117,7 @@ module Aws::Inspector2
     CvssScoreDetails = Shapes::StructureShape.new(name: 'CvssScoreDetails')
     CvssScoreList = Shapes::ListShape.new(name: 'CvssScoreList')
     Cwe = Shapes::StringShape.new(name: 'Cwe')
+    CweList = Shapes::ListShape.new(name: 'CweList')
     Cwes = Shapes::ListShape.new(name: 'Cwes')
     DateFilter = Shapes::StructureShape.new(name: 'DateFilter')
     DateFilterList = Shapes::ListShape.new(name: 'DateFilterList')
@@ -114,6 +132,7 @@ module Aws::Inspector2
     DescribeOrganizationConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeOrganizationConfigurationResponse')
     Destination = Shapes::StructureShape.new(name: 'Destination')
     DetectionPlatforms = Shapes::ListShape.new(name: 'DetectionPlatforms')
+    DetectorTagList = Shapes::ListShape.new(name: 'DetectorTagList')
     DisableDelegatedAdminAccountRequest = Shapes::StructureShape.new(name: 'DisableDelegatedAdminAccountRequest')
     DisableDelegatedAdminAccountResponse = Shapes::StructureShape.new(name: 'DisableDelegatedAdminAccountResponse')
     DisableRequest = Shapes::StructureShape.new(name: 'DisableRequest')
@@ -142,7 +161,9 @@ module Aws::Inspector2
     EnableResourceTypeList = Shapes::ListShape.new(name: 'EnableResourceTypeList')
     EnableResponse = Shapes::StructureShape.new(name: 'EnableResponse')
     Epss = Shapes::StructureShape.new(name: 'Epss')
+    EpssDetails = Shapes::StructureShape.new(name: 'EpssDetails')
     EpssScore = Shapes::FloatShape.new(name: 'EpssScore')
+    EpssScoreValue = Shapes::FloatShape.new(name: 'EpssScoreValue')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExecutionRoleArn = Shapes::StringShape.new(name: 'ExecutionRoleArn')
@@ -192,10 +213,14 @@ module Aws::Inspector2
     GetDelegatedAdminAccountResponse = Shapes::StructureShape.new(name: 'GetDelegatedAdminAccountResponse')
     GetEc2DeepInspectionConfigurationRequest = Shapes::StructureShape.new(name: 'GetEc2DeepInspectionConfigurationRequest')
     GetEc2DeepInspectionConfigurationResponse = Shapes::StructureShape.new(name: 'GetEc2DeepInspectionConfigurationResponse')
+    GetEncryptionKeyRequest = Shapes::StructureShape.new(name: 'GetEncryptionKeyRequest')
+    GetEncryptionKeyResponse = Shapes::StructureShape.new(name: 'GetEncryptionKeyResponse')
     GetFindingsReportStatusRequest = Shapes::StructureShape.new(name: 'GetFindingsReportStatusRequest')
     GetFindingsReportStatusResponse = Shapes::StructureShape.new(name: 'GetFindingsReportStatusResponse')
     GetMemberRequest = Shapes::StructureShape.new(name: 'GetMemberRequest')
     GetMemberResponse = Shapes::StructureShape.new(name: 'GetMemberResponse')
+    GetSbomExportRequest = Shapes::StructureShape.new(name: 'GetSbomExportRequest')
+    GetSbomExportResponse = Shapes::StructureShape.new(name: 'GetSbomExportResponse')
     GroupKey = Shapes::StringShape.new(name: 'GroupKey')
     ImageHash = Shapes::StringShape.new(name: 'ImageHash')
     ImageLayerAggregation = Shapes::StructureShape.new(name: 'ImageLayerAggregation')
@@ -209,6 +234,7 @@ module Aws::Inspector2
     IpV4AddressList = Shapes::ListShape.new(name: 'IpV4AddressList')
     IpV6Address = Shapes::StringShape.new(name: 'IpV6Address')
     IpV6AddressList = Shapes::ListShape.new(name: 'IpV6AddressList')
+    KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     LambdaFunctionAggregation = Shapes::StructureShape.new(name: 'LambdaFunctionAggregation')
     LambdaFunctionAggregationResponse = Shapes::StructureShape.new(name: 'LambdaFunctionAggregationResponse')
     LambdaFunctionMetadata = Shapes::StructureShape.new(name: 'LambdaFunctionMetadata')
@@ -297,6 +323,7 @@ module Aws::Inspector2
     PortRangeFilter = Shapes::StructureShape.new(name: 'PortRangeFilter')
     PortRangeFilterList = Shapes::ListShape.new(name: 'PortRangeFilterList')
     Recommendation = Shapes::StructureShape.new(name: 'Recommendation')
+    ReferenceUrls = Shapes::ListShape.new(name: 'ReferenceUrls')
     RelatedVulnerabilities = Shapes::ListShape.new(name: 'RelatedVulnerabilities')
     RelatedVulnerability = Shapes::StringShape.new(name: 'RelatedVulnerability')
     RelationshipStatus = Shapes::StringShape.new(name: 'RelationshipStatus')
@@ -307,17 +334,28 @@ module Aws::Inspector2
     RepositoryAggregation = Shapes::StructureShape.new(name: 'RepositoryAggregation')
     RepositoryAggregationResponse = Shapes::StructureShape.new(name: 'RepositoryAggregationResponse')
     RepositorySortBy = Shapes::StringShape.new(name: 'RepositorySortBy')
+    ResetEncryptionKeyRequest = Shapes::StructureShape.new(name: 'ResetEncryptionKeyRequest')
+    ResetEncryptionKeyResponse = Shapes::StructureShape.new(name: 'ResetEncryptionKeyResponse')
     Resource = Shapes::StructureShape.new(name: 'Resource')
     ResourceDetails = Shapes::StructureShape.new(name: 'ResourceDetails')
+    ResourceFilterCriteria = Shapes::StructureShape.new(name: 'ResourceFilterCriteria')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceList = Shapes::ListShape.new(name: 'ResourceList')
+    ResourceMapComparison = Shapes::StringShape.new(name: 'ResourceMapComparison')
+    ResourceMapFilter = Shapes::StructureShape.new(name: 'ResourceMapFilter')
+    ResourceMapFilterList = Shapes::ListShape.new(name: 'ResourceMapFilterList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceScanMetadata = Shapes::StructureShape.new(name: 'ResourceScanMetadata')
     ResourceScanType = Shapes::StringShape.new(name: 'ResourceScanType')
     ResourceState = Shapes::StructureShape.new(name: 'ResourceState')
     ResourceStatus = Shapes::StructureShape.new(name: 'ResourceStatus')
+    ResourceStringComparison = Shapes::StringShape.new(name: 'ResourceStringComparison')
+    ResourceStringFilter = Shapes::StructureShape.new(name: 'ResourceStringFilter')
+    ResourceStringFilterList = Shapes::ListShape.new(name: 'ResourceStringFilterList')
+    ResourceStringInput = Shapes::StringShape.new(name: 'ResourceStringInput')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     Runtime = Shapes::StringShape.new(name: 'Runtime')
+    SbomReportFormat = Shapes::StringShape.new(name: 'SbomReportFormat')
     ScanStatus = Shapes::StructureShape.new(name: 'ScanStatus')
     ScanStatusCode = Shapes::StringShape.new(name: 'ScanStatusCode')
     ScanStatusReason = Shapes::StringShape.new(name: 'ScanStatusReason')
@@ -347,6 +385,10 @@ module Aws::Inspector2
     StringList = Shapes::ListShape.new(name: 'StringList')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIdList = Shapes::ListShape.new(name: 'SubnetIdList')
+    SuggestedFix = Shapes::StructureShape.new(name: 'SuggestedFix')
+    SuggestedFixCodeString = Shapes::StringShape.new(name: 'SuggestedFixCodeString')
+    SuggestedFixDescriptionString = Shapes::StringShape.new(name: 'SuggestedFixDescriptionString')
+    SuggestedFixes = Shapes::ListShape.new(name: 'SuggestedFixes')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagList = Shapes::ListShape.new(name: 'TagList')
@@ -368,6 +410,8 @@ module Aws::Inspector2
     UpdateConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateConfigurationResponse')
     UpdateEc2DeepInspectionConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateEc2DeepInspectionConfigurationRequest')
     UpdateEc2DeepInspectionConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateEc2DeepInspectionConfigurationResponse')
+    UpdateEncryptionKeyRequest = Shapes::StructureShape.new(name: 'UpdateEncryptionKeyRequest')
+    UpdateEncryptionKeyResponse = Shapes::StructureShape.new(name: 'UpdateEncryptionKeyResponse')
     UpdateFilterRequest = Shapes::StructureShape.new(name: 'UpdateFilterRequest')
     UpdateFilterResponse = Shapes::StructureShape.new(name: 'UpdateFilterResponse')
     UpdateOrgEc2DeepInspectionConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateOrgEc2DeepInspectionConfigurationRequest')
@@ -517,6 +561,7 @@ module Aws::Inspector2
     AutoEnable.add_member(:ec2, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ec2"))
     AutoEnable.add_member(:ecr, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ecr"))
     AutoEnable.add_member(:lambda, Shapes::ShapeRef.new(shape: Boolean, location_name: "lambda"))
+    AutoEnable.add_member(:lambda_code, Shapes::ShapeRef.new(shape: Boolean, location_name: "lambdaCode"))
     AutoEnable.struct_class = Types::AutoEnable
 
     AwsEc2InstanceDetails.add_member(:iam_instance_profile_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "iamInstanceProfileArn"))
@@ -581,6 +626,15 @@ module Aws::Inspector2
     BatchGetAccountStatusResponse.add_member(:failed_accounts, Shapes::ShapeRef.new(shape: FailedAccountList, location_name: "failedAccounts"))
     BatchGetAccountStatusResponse.struct_class = Types::BatchGetAccountStatusResponse
 
+    BatchGetCodeSnippetRequest.add_member(:finding_arns, Shapes::ShapeRef.new(shape: BatchGetCodeSnippetRequestFindingArnsList, required: true, location_name: "findingArns"))
+    BatchGetCodeSnippetRequest.struct_class = Types::BatchGetCodeSnippetRequest
+
+    BatchGetCodeSnippetRequestFindingArnsList.member = Shapes::ShapeRef.new(shape: FindingArn)
+
+    BatchGetCodeSnippetResponse.add_member(:code_snippet_results, Shapes::ShapeRef.new(shape: CodeSnippetResultList, location_name: "codeSnippetResults"))
+    BatchGetCodeSnippetResponse.add_member(:errors, Shapes::ShapeRef.new(shape: CodeSnippetErrorList, location_name: "errors"))
+    BatchGetCodeSnippetResponse.struct_class = Types::BatchGetCodeSnippetResponse
+
     BatchGetFreeTrialInfoRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: BatchGetFreeTrialInfoRequestAccountIdsList, required: true, location_name: "accountIds"))
     BatchGetFreeTrialInfoRequest.struct_class = Types::BatchGetFreeTrialInfoRequest
 
@@ -610,10 +664,54 @@ module Aws::Inspector2
     CancelFindingsReportResponse.add_member(:report_id, Shapes::ShapeRef.new(shape: ReportId, required: true, location_name: "reportId"))
     CancelFindingsReportResponse.struct_class = Types::CancelFindingsReportResponse
 
+    CancelSbomExportRequest.add_member(:report_id, Shapes::ShapeRef.new(shape: ReportId, required: true, location_name: "reportId"))
+    CancelSbomExportRequest.struct_class = Types::CancelSbomExportRequest
+
+    CancelSbomExportResponse.add_member(:report_id, Shapes::ShapeRef.new(shape: ReportId, location_name: "reportId"))
+    CancelSbomExportResponse.struct_class = Types::CancelSbomExportResponse
+
     CisaData.add_member(:action, Shapes::ShapeRef.new(shape: CisaAction, location_name: "action"))
     CisaData.add_member(:date_added, Shapes::ShapeRef.new(shape: CisaDateAdded, location_name: "dateAdded"))
     CisaData.add_member(:date_due, Shapes::ShapeRef.new(shape: CisaDateDue, location_name: "dateDue"))
     CisaData.struct_class = Types::CisaData
+
+    CodeFilePath.add_member(:end_line, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "endLine"))
+    CodeFilePath.add_member(:file_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "fileName"))
+    CodeFilePath.add_member(:file_path, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "filePath"))
+    CodeFilePath.add_member(:start_line, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "startLine"))
+    CodeFilePath.struct_class = Types::CodeFilePath
+
+    CodeLine.add_member(:content, Shapes::ShapeRef.new(shape: CodeLineContentString, required: true, location_name: "content"))
+    CodeLine.add_member(:line_number, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "lineNumber"))
+    CodeLine.struct_class = Types::CodeLine
+
+    CodeLineList.member = Shapes::ShapeRef.new(shape: CodeLine)
+
+    CodeSnippetError.add_member(:error_code, Shapes::ShapeRef.new(shape: CodeSnippetErrorCode, required: true, location_name: "errorCode"))
+    CodeSnippetError.add_member(:error_message, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "errorMessage"))
+    CodeSnippetError.add_member(:finding_arn, Shapes::ShapeRef.new(shape: FindingArn, required: true, location_name: "findingArn"))
+    CodeSnippetError.struct_class = Types::CodeSnippetError
+
+    CodeSnippetErrorList.member = Shapes::ShapeRef.new(shape: CodeSnippetError)
+
+    CodeSnippetResult.add_member(:code_snippet, Shapes::ShapeRef.new(shape: CodeLineList, location_name: "codeSnippet"))
+    CodeSnippetResult.add_member(:end_line, Shapes::ShapeRef.new(shape: Integer, location_name: "endLine"))
+    CodeSnippetResult.add_member(:finding_arn, Shapes::ShapeRef.new(shape: FindingArn, location_name: "findingArn"))
+    CodeSnippetResult.add_member(:start_line, Shapes::ShapeRef.new(shape: Integer, location_name: "startLine"))
+    CodeSnippetResult.add_member(:suggested_fixes, Shapes::ShapeRef.new(shape: SuggestedFixes, location_name: "suggestedFixes"))
+    CodeSnippetResult.struct_class = Types::CodeSnippetResult
+
+    CodeSnippetResultList.member = Shapes::ShapeRef.new(shape: CodeSnippetResult)
+
+    CodeVulnerabilityDetails.add_member(:cwes, Shapes::ShapeRef.new(shape: CweList, required: true, location_name: "cwes"))
+    CodeVulnerabilityDetails.add_member(:detector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "detectorId"))
+    CodeVulnerabilityDetails.add_member(:detector_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "detectorName"))
+    CodeVulnerabilityDetails.add_member(:detector_tags, Shapes::ShapeRef.new(shape: DetectorTagList, location_name: "detectorTags"))
+    CodeVulnerabilityDetails.add_member(:file_path, Shapes::ShapeRef.new(shape: CodeFilePath, required: true, location_name: "filePath"))
+    CodeVulnerabilityDetails.add_member(:reference_urls, Shapes::ShapeRef.new(shape: ReferenceUrls, location_name: "referenceUrls"))
+    CodeVulnerabilityDetails.add_member(:rule_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ruleId"))
+    CodeVulnerabilityDetails.add_member(:source_lambda_layer_arn, Shapes::ShapeRef.new(shape: LambdaLayerArn, location_name: "sourceLambdaLayerArn"))
+    CodeVulnerabilityDetails.struct_class = Types::CodeVulnerabilityDetails
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
@@ -690,6 +788,14 @@ module Aws::Inspector2
     CreateFindingsReportResponse.add_member(:report_id, Shapes::ShapeRef.new(shape: ReportId, location_name: "reportId"))
     CreateFindingsReportResponse.struct_class = Types::CreateFindingsReportResponse
 
+    CreateSbomExportRequest.add_member(:report_format, Shapes::ShapeRef.new(shape: SbomReportFormat, required: true, location_name: "reportFormat"))
+    CreateSbomExportRequest.add_member(:resource_filter_criteria, Shapes::ShapeRef.new(shape: ResourceFilterCriteria, location_name: "resourceFilterCriteria"))
+    CreateSbomExportRequest.add_member(:s3_destination, Shapes::ShapeRef.new(shape: Destination, required: true, location_name: "s3Destination"))
+    CreateSbomExportRequest.struct_class = Types::CreateSbomExportRequest
+
+    CreateSbomExportResponse.add_member(:report_id, Shapes::ShapeRef.new(shape: ReportId, location_name: "reportId"))
+    CreateSbomExportResponse.struct_class = Types::CreateSbomExportResponse
+
     Cvss2.add_member(:base_score, Shapes::ShapeRef.new(shape: Cvss2BaseScore, location_name: "baseScore"))
     Cvss2.add_member(:scoring_vector, Shapes::ShapeRef.new(shape: Cvss2ScoringVector, location_name: "scoringVector"))
     Cvss2.struct_class = Types::Cvss2
@@ -719,6 +825,8 @@ module Aws::Inspector2
     CvssScoreDetails.struct_class = Types::CvssScoreDetails
 
     CvssScoreList.member = Shapes::ShapeRef.new(shape: CvssScore)
+
+    CweList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
     Cwes.member = Shapes::ShapeRef.new(shape: Cwe)
 
@@ -756,6 +864,8 @@ module Aws::Inspector2
     Destination.struct_class = Types::Destination
 
     DetectionPlatforms.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
+    DetectorTagList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
     DisableDelegatedAdminAccountRequest.add_member(:delegated_admin_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "delegatedAdminAccountId"))
     DisableDelegatedAdminAccountRequest.struct_class = Types::DisableDelegatedAdminAccountRequest
@@ -840,6 +950,9 @@ module Aws::Inspector2
     Epss.add_member(:score, Shapes::ShapeRef.new(shape: EpssScore, location_name: "score"))
     Epss.struct_class = Types::Epss
 
+    EpssDetails.add_member(:score, Shapes::ShapeRef.new(shape: EpssScoreValue, location_name: "score"))
+    EpssDetails.struct_class = Types::EpssDetails
+
     ExploitObserved.add_member(:first_seen, Shapes::ShapeRef.new(shape: FirstSeen, location_name: "firstSeen"))
     ExploitObserved.add_member(:last_seen, Shapes::ShapeRef.new(shape: LastSeen, location_name: "lastSeen"))
     ExploitObserved.struct_class = Types::ExploitObserved
@@ -878,6 +991,9 @@ module Aws::Inspector2
     FilterArnList.member = Shapes::ShapeRef.new(shape: FilterArn)
 
     FilterCriteria.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "awsAccountId"))
+    FilterCriteria.add_member(:code_vulnerability_detector_name, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "codeVulnerabilityDetectorName"))
+    FilterCriteria.add_member(:code_vulnerability_detector_tags, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "codeVulnerabilityDetectorTags"))
+    FilterCriteria.add_member(:code_vulnerability_file_path, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "codeVulnerabilityFilePath"))
     FilterCriteria.add_member(:component_id, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "componentId"))
     FilterCriteria.add_member(:component_type, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "componentType"))
     FilterCriteria.add_member(:ec2_instance_image_id, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "ec2InstanceImageId"))
@@ -889,6 +1005,7 @@ module Aws::Inspector2
     FilterCriteria.add_member(:ecr_image_registry, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "ecrImageRegistry"))
     FilterCriteria.add_member(:ecr_image_repository_name, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "ecrImageRepositoryName"))
     FilterCriteria.add_member(:ecr_image_tags, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "ecrImageTags"))
+    FilterCriteria.add_member(:epss_score, Shapes::ShapeRef.new(shape: NumberFilterList, location_name: "epssScore"))
     FilterCriteria.add_member(:exploit_available, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "exploitAvailable"))
     FilterCriteria.add_member(:finding_arn, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "findingArn"))
     FilterCriteria.add_member(:finding_status, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "findingStatus"))
@@ -920,7 +1037,9 @@ module Aws::Inspector2
     FilterList.member = Shapes::ShapeRef.new(shape: Filter)
 
     Finding.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "awsAccountId"))
+    Finding.add_member(:code_vulnerability_details, Shapes::ShapeRef.new(shape: CodeVulnerabilityDetails, location_name: "codeVulnerabilityDetails"))
     Finding.add_member(:description, Shapes::ShapeRef.new(shape: FindingDescription, required: true, location_name: "description"))
+    Finding.add_member(:epss, Shapes::ShapeRef.new(shape: EpssDetails, location_name: "epss"))
     Finding.add_member(:exploit_available, Shapes::ShapeRef.new(shape: ExploitAvailable, location_name: "exploitAvailable"))
     Finding.add_member(:exploitability_details, Shapes::ShapeRef.new(shape: ExploitabilityDetails, location_name: "exploitabilityDetails"))
     Finding.add_member(:finding_arn, Shapes::ShapeRef.new(shape: FindingArn, required: true, location_name: "findingArn"))
@@ -991,6 +1110,13 @@ module Aws::Inspector2
     GetEc2DeepInspectionConfigurationResponse.add_member(:status, Shapes::ShapeRef.new(shape: Ec2DeepInspectionStatus, location_name: "status"))
     GetEc2DeepInspectionConfigurationResponse.struct_class = Types::GetEc2DeepInspectionConfigurationResponse
 
+    GetEncryptionKeyRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location: "querystring", location_name: "resourceType"))
+    GetEncryptionKeyRequest.add_member(:scan_type, Shapes::ShapeRef.new(shape: ScanType, required: true, location: "querystring", location_name: "scanType"))
+    GetEncryptionKeyRequest.struct_class = Types::GetEncryptionKeyRequest
+
+    GetEncryptionKeyResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyArn, required: true, location_name: "kmsKeyId"))
+    GetEncryptionKeyResponse.struct_class = Types::GetEncryptionKeyResponse
+
     GetFindingsReportStatusRequest.add_member(:report_id, Shapes::ShapeRef.new(shape: ReportId, location_name: "reportId"))
     GetFindingsReportStatusRequest.struct_class = Types::GetFindingsReportStatusRequest
 
@@ -1007,6 +1133,18 @@ module Aws::Inspector2
 
     GetMemberResponse.add_member(:member, Shapes::ShapeRef.new(shape: Member, location_name: "member"))
     GetMemberResponse.struct_class = Types::GetMemberResponse
+
+    GetSbomExportRequest.add_member(:report_id, Shapes::ShapeRef.new(shape: ReportId, required: true, location_name: "reportId"))
+    GetSbomExportRequest.struct_class = Types::GetSbomExportRequest
+
+    GetSbomExportResponse.add_member(:error_code, Shapes::ShapeRef.new(shape: ReportingErrorCode, location_name: "errorCode"))
+    GetSbomExportResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "errorMessage"))
+    GetSbomExportResponse.add_member(:filter_criteria, Shapes::ShapeRef.new(shape: ResourceFilterCriteria, location_name: "filterCriteria"))
+    GetSbomExportResponse.add_member(:format, Shapes::ShapeRef.new(shape: SbomReportFormat, location_name: "format"))
+    GetSbomExportResponse.add_member(:report_id, Shapes::ShapeRef.new(shape: ReportId, location_name: "reportId"))
+    GetSbomExportResponse.add_member(:s3_destination, Shapes::ShapeRef.new(shape: Destination, location_name: "s3Destination"))
+    GetSbomExportResponse.add_member(:status, Shapes::ShapeRef.new(shape: ExternalReportStatus, location_name: "status"))
+    GetSbomExportResponse.struct_class = Types::GetSbomExportResponse
 
     ImageLayerAggregation.add_member(:layer_hashes, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "layerHashes"))
     ImageLayerAggregation.add_member(:repositories, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "repositories"))
@@ -1272,6 +1410,8 @@ module Aws::Inspector2
     Recommendation.add_member(:text, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "text"))
     Recommendation.struct_class = Types::Recommendation
 
+    ReferenceUrls.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
     RelatedVulnerabilities.member = Shapes::ShapeRef.new(shape: RelatedVulnerability)
 
     Remediation.add_member(:recommendation, Shapes::ShapeRef.new(shape: Recommendation, location_name: "recommendation"))
@@ -1288,6 +1428,12 @@ module Aws::Inspector2
     RepositoryAggregationResponse.add_member(:severity_counts, Shapes::ShapeRef.new(shape: SeverityCounts, location_name: "severityCounts"))
     RepositoryAggregationResponse.struct_class = Types::RepositoryAggregationResponse
 
+    ResetEncryptionKeyRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
+    ResetEncryptionKeyRequest.add_member(:scan_type, Shapes::ShapeRef.new(shape: ScanType, required: true, location_name: "scanType"))
+    ResetEncryptionKeyRequest.struct_class = Types::ResetEncryptionKeyRequest
+
+    ResetEncryptionKeyResponse.struct_class = Types::ResetEncryptionKeyResponse
+
     Resource.add_member(:details, Shapes::ShapeRef.new(shape: ResourceDetails, location_name: "details"))
     Resource.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "id"))
     Resource.add_member(:partition, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "partition"))
@@ -1301,7 +1447,24 @@ module Aws::Inspector2
     ResourceDetails.add_member(:aws_lambda_function, Shapes::ShapeRef.new(shape: AwsLambdaFunctionDetails, location_name: "awsLambdaFunction"))
     ResourceDetails.struct_class = Types::ResourceDetails
 
+    ResourceFilterCriteria.add_member(:account_id, Shapes::ShapeRef.new(shape: ResourceStringFilterList, location_name: "accountId"))
+    ResourceFilterCriteria.add_member(:ec2_instance_tags, Shapes::ShapeRef.new(shape: ResourceMapFilterList, location_name: "ec2InstanceTags"))
+    ResourceFilterCriteria.add_member(:ecr_image_tags, Shapes::ShapeRef.new(shape: ResourceStringFilterList, location_name: "ecrImageTags"))
+    ResourceFilterCriteria.add_member(:ecr_repository_name, Shapes::ShapeRef.new(shape: ResourceStringFilterList, location_name: "ecrRepositoryName"))
+    ResourceFilterCriteria.add_member(:lambda_function_name, Shapes::ShapeRef.new(shape: ResourceStringFilterList, location_name: "lambdaFunctionName"))
+    ResourceFilterCriteria.add_member(:lambda_function_tags, Shapes::ShapeRef.new(shape: ResourceMapFilterList, location_name: "lambdaFunctionTags"))
+    ResourceFilterCriteria.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceStringFilterList, location_name: "resourceId"))
+    ResourceFilterCriteria.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceStringFilterList, location_name: "resourceType"))
+    ResourceFilterCriteria.struct_class = Types::ResourceFilterCriteria
+
     ResourceList.member = Shapes::ShapeRef.new(shape: Resource)
+
+    ResourceMapFilter.add_member(:comparison, Shapes::ShapeRef.new(shape: ResourceMapComparison, required: true, location_name: "comparison"))
+    ResourceMapFilter.add_member(:key, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "key"))
+    ResourceMapFilter.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "value"))
+    ResourceMapFilter.struct_class = Types::ResourceMapFilter
+
+    ResourceMapFilterList.member = Shapes::ShapeRef.new(shape: ResourceMapFilter)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -1315,12 +1478,20 @@ module Aws::Inspector2
     ResourceState.add_member(:ec2, Shapes::ShapeRef.new(shape: State, required: true, location_name: "ec2"))
     ResourceState.add_member(:ecr, Shapes::ShapeRef.new(shape: State, required: true, location_name: "ecr"))
     ResourceState.add_member(:lambda, Shapes::ShapeRef.new(shape: State, location_name: "lambda"))
+    ResourceState.add_member(:lambda_code, Shapes::ShapeRef.new(shape: State, location_name: "lambdaCode"))
     ResourceState.struct_class = Types::ResourceState
 
     ResourceStatus.add_member(:ec2, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "ec2"))
     ResourceStatus.add_member(:ecr, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "ecr"))
     ResourceStatus.add_member(:lambda, Shapes::ShapeRef.new(shape: Status, location_name: "lambda"))
+    ResourceStatus.add_member(:lambda_code, Shapes::ShapeRef.new(shape: Status, location_name: "lambdaCode"))
     ResourceStatus.struct_class = Types::ResourceStatus
+
+    ResourceStringFilter.add_member(:comparison, Shapes::ShapeRef.new(shape: ResourceStringComparison, required: true, location_name: "comparison"))
+    ResourceStringFilter.add_member(:value, Shapes::ShapeRef.new(shape: ResourceStringInput, required: true, location_name: "value"))
+    ResourceStringFilter.struct_class = Types::ResourceStringFilter
+
+    ResourceStringFilterList.member = Shapes::ShapeRef.new(shape: ResourceStringFilter)
 
     ScanStatus.add_member(:reason, Shapes::ShapeRef.new(shape: ScanStatusReason, required: true, location_name: "reason"))
     ScanStatus.add_member(:status_code, Shapes::ShapeRef.new(shape: ScanStatusCode, required: true, location_name: "statusCode"))
@@ -1374,6 +1545,12 @@ module Aws::Inspector2
 
     SubnetIdList.member = Shapes::ShapeRef.new(shape: SubnetId)
 
+    SuggestedFix.add_member(:code, Shapes::ShapeRef.new(shape: SuggestedFixCodeString, location_name: "code"))
+    SuggestedFix.add_member(:description, Shapes::ShapeRef.new(shape: SuggestedFixDescriptionString, location_name: "description"))
+    SuggestedFix.struct_class = Types::SuggestedFix
+
+    SuggestedFixes.member = Shapes::ShapeRef.new(shape: SuggestedFix)
+
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
     TagList.member = Shapes::ShapeRef.new(shape: String)
@@ -1393,6 +1570,7 @@ module Aws::Inspector2
     ThrottlingException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
+    TitleAggregation.add_member(:finding_type, Shapes::ShapeRef.new(shape: AggregationFindingType, location_name: "findingType"))
     TitleAggregation.add_member(:resource_type, Shapes::ShapeRef.new(shape: AggregationResourceType, location_name: "resourceType"))
     TitleAggregation.add_member(:sort_by, Shapes::ShapeRef.new(shape: TitleSortBy, location_name: "sortBy"))
     TitleAggregation.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "sortOrder"))
@@ -1428,6 +1606,13 @@ module Aws::Inspector2
     UpdateEc2DeepInspectionConfigurationResponse.add_member(:package_paths, Shapes::ShapeRef.new(shape: PathList, location_name: "packagePaths"))
     UpdateEc2DeepInspectionConfigurationResponse.add_member(:status, Shapes::ShapeRef.new(shape: Ec2DeepInspectionStatus, location_name: "status"))
     UpdateEc2DeepInspectionConfigurationResponse.struct_class = Types::UpdateEc2DeepInspectionConfigurationResponse
+
+    UpdateEncryptionKeyRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyArn, required: true, location_name: "kmsKeyId"))
+    UpdateEncryptionKeyRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
+    UpdateEncryptionKeyRequest.add_member(:scan_type, Shapes::ShapeRef.new(shape: ScanType, required: true, location_name: "scanType"))
+    UpdateEncryptionKeyRequest.struct_class = Types::UpdateEncryptionKeyRequest
+
+    UpdateEncryptionKeyResponse.struct_class = Types::UpdateEncryptionKeyResponse
 
     UpdateFilterRequest.add_member(:action, Shapes::ShapeRef.new(shape: FilterAction, location_name: "action"))
     UpdateFilterRequest.add_member(:description, Shapes::ShapeRef.new(shape: FilterDescription, location_name: "description"))
@@ -1564,6 +1749,18 @@ module Aws::Inspector2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:batch_get_code_snippet, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetCodeSnippet"
+        o.http_method = "POST"
+        o.http_request_uri = "/codesnippet/batchget"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetCodeSnippetRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetCodeSnippetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:batch_get_free_trial_info, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchGetFreeTrialInfo"
         o.http_method = "POST"
@@ -1613,6 +1810,19 @@ module Aws::Inspector2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:cancel_sbom_export, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelSbomExport"
+        o.http_method = "POST"
+        o.http_request_uri = "/sbomexport/cancel"
+        o.input = Shapes::ShapeRef.new(shape: CancelSbomExportRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelSbomExportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:create_filter, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateFilter"
         o.http_method = "POST"
@@ -1637,6 +1847,19 @@ module Aws::Inspector2
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:create_sbom_export, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSbomExport"
+        o.http_method = "POST"
+        o.http_request_uri = "/sbomexport/create"
+        o.input = Shapes::ShapeRef.new(shape: CreateSbomExportRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSbomExportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -1767,6 +1990,19 @@ module Aws::Inspector2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:get_encryption_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEncryptionKey"
+        o.http_method = "GET"
+        o.http_request_uri = "/encryptionkey/get"
+        o.input = Shapes::ShapeRef.new(shape: GetEncryptionKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetEncryptionKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_findings_report_status, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetFindingsReportStatus"
         o.http_method = "POST"
@@ -1786,6 +2022,19 @@ module Aws::Inspector2
         o.http_request_uri = "/members/get"
         o.input = Shapes::ShapeRef.new(shape: GetMemberRequest)
         o.output = Shapes::ShapeRef.new(shape: GetMemberResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_sbom_export, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSbomExport"
+        o.http_method = "POST"
+        o.http_request_uri = "/sbomexport/get"
+        o.input = Shapes::ShapeRef.new(shape: GetSbomExportRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSbomExportResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1962,6 +2211,19 @@ module Aws::Inspector2
         )
       end)
 
+      api.add_operation(:reset_encryption_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ResetEncryptionKey"
+        o.http_method = "PUT"
+        o.http_request_uri = "/encryptionkey/reset"
+        o.input = Shapes::ShapeRef.new(shape: ResetEncryptionKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: ResetEncryptionKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:search_vulnerabilities, Seahorse::Model::Operation.new.tap do |o|
         o.name = "SearchVulnerabilities"
         o.http_method = "POST"
@@ -2025,6 +2287,19 @@ module Aws::Inspector2
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_encryption_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateEncryptionKey"
+        o.http_method = "PUT"
+        o.http_request_uri = "/encryptionkey/update"
+        o.input = Shapes::ShapeRef.new(shape: UpdateEncryptionKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateEncryptionKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 

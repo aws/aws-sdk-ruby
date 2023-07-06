@@ -456,6 +456,45 @@ module Aws::IVS
       req.send_request(options)
     end
 
+    # Performs StartViewerSessionRevocation on multiple channel ARN and
+    # viewer ID pairs simultaneously.
+    #
+    # @option params [required, Array<Types::BatchStartViewerSessionRevocationViewerSession>] :viewer_sessions
+    #   Array of viewer sessions, one per channel-ARN and viewer-ID pair.
+    #
+    # @return [Types::BatchStartViewerSessionRevocationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchStartViewerSessionRevocationResponse#errors #errors} => Array&lt;Types::BatchStartViewerSessionRevocationError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_start_viewer_session_revocation({
+    #     viewer_sessions: [ # required
+    #       {
+    #         channel_arn: "ChannelArn", # required
+    #         viewer_id: "ViewerId", # required
+    #         viewer_session_versions_less_than_or_equal_to: 1,
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].channel_arn #=> String
+    #   resp.errors[0].code #=> String
+    #   resp.errors[0].message #=> String
+    #   resp.errors[0].viewer_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/BatchStartViewerSessionRevocation AWS API Documentation
+    #
+    # @overload batch_start_viewer_session_revocation(params = {})
+    # @param [Hash] params ({})
+    def batch_start_viewer_session_revocation(params = {}, options = {})
+      req = build_request(:batch_start_viewer_session_revocation, params)
+      req.send_request(options)
+    end
+
     # Creates a new channel and an associated stream key to start streaming.
     #
     # @option params [Boolean] :authorized
@@ -1526,6 +1565,48 @@ module Aws::IVS
       req.send_request(options)
     end
 
+    # Starts the process of revoking the viewer session associated with a
+    # specified channel ARN and viewer ID. Optionally, you can provide a
+    # version to revoke viewer sessions less than and including that
+    # version. For instructions on associating a viewer ID with a viewer
+    # session, see [Setting Up Private Channels][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel associated with the viewer session to revoke.
+    #
+    # @option params [required, String] :viewer_id
+    #   The ID of the viewer associated with the viewer session to revoke. Do
+    #   not use this field for personally identifying, confidential, or
+    #   sensitive information.
+    #
+    # @option params [Integer] :viewer_session_versions_less_than_or_equal_to
+    #   An optional filter on which versions of the viewer session to revoke.
+    #   All versions less than or equal to the specified version will be
+    #   revoked. Default: 0.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_viewer_session_revocation({
+    #     channel_arn: "ChannelArn", # required
+    #     viewer_id: "ViewerId", # required
+    #     viewer_session_versions_less_than_or_equal_to: 1,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/StartViewerSessionRevocation AWS API Documentation
+    #
+    # @overload start_viewer_session_revocation(params = {})
+    # @param [Hash] params ({})
+    def start_viewer_session_revocation(params = {}, options = {})
+      req = build_request(:start_viewer_session_revocation, params)
+      req.send_request(options)
+    end
+
     # Disconnects the incoming RTMPS stream for the specified channel. Can
     # be used in conjunction with DeleteStreamKey to prevent further
     # streaming to a channel.
@@ -1770,7 +1851,7 @@ module Aws::IVS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivs'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

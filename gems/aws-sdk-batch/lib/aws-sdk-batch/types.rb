@@ -459,7 +459,7 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] minv_cpus
-    #   The minimum number of Amazon EC2 vCPUs that an environment should
+    #   The minimum number of vCPUs that a compute environment should
     #   maintain (even if the compute environment is `DISABLED`).
     #
     #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
@@ -469,8 +469,7 @@ module Aws::Batch
     #   @return [Integer]
     #
     # @!attribute [rw] maxv_cpus
-    #   The maximum number of Amazon EC2 vCPUs that a compute environment
-    #   can reach.
+    #   The maximum number of vCPUs that a compute environment can support.
     #
     #   <note markdown="1"> With both `BEST_FIT_PROGRESSIVE` and `SPOT_CAPACITY_OPTIMIZED`
     #   allocation strategies using On-Demand or Spot Instances, and the
@@ -484,9 +483,9 @@ module Aws::Batch
     #   @return [Integer]
     #
     # @!attribute [rw] desiredv_cpus
-    #   The desired number of Amazon EC2 vCPUS in the compute environment.
-    #   Batch modifies this value between the minimum and maximum values
-    #   based on job queue demand.
+    #   The desired number of vCPUS in the compute environment. Batch
+    #   modifies this value between the minimum and maximum values based on
+    #   job queue demand.
     #
     #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources. Don't specify it.
@@ -763,8 +762,8 @@ module Aws::Batch
     # [1]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
     #
     # @!attribute [rw] minv_cpus
-    #   The minimum number of Amazon EC2 vCPUs that an environment should
-    #   maintain (even if the compute environment is `DISABLED`).
+    #   The minimum number of vCPUs that an environment should maintain
+    #   (even if the compute environment is `DISABLED`).
     #
     #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources. Don't specify it.
@@ -788,9 +787,9 @@ module Aws::Batch
     #   @return [Integer]
     #
     # @!attribute [rw] desiredv_cpus
-    #   The desired number of Amazon EC2 vCPUS in the compute environment.
-    #   Batch modifies this value between the minimum and maximum values
-    #   based on job queue demand.
+    #   The desired number of vCPUS in the compute environment. Batch
+    #   modifies this value between the minimum and maximum values based on
+    #   job queue demand.
     #
     #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources. Don't specify it.
@@ -1485,6 +1484,11 @@ module Aws::Batch
     #   available, beyond the default amount, for tasks hosted on Fargate.
     #   @return [Types::EphemeralStorage]
     #
+    # @!attribute [rw] runtime_platform
+    #   An object that represents the compute environment architecture for
+    #   Batch jobs on Fargate.
+    #   @return [Types::RuntimePlatform]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerDetail AWS API Documentation
     #
     class ContainerDetail < Struct.new(
@@ -1514,12 +1518,20 @@ module Aws::Batch
       :secrets,
       :network_configuration,
       :fargate_platform_configuration,
-      :ephemeral_storage)
+      :ephemeral_storage,
+      :runtime_platform)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # The overrides that should be sent to a container.
+    #
+    # For information about using Batch overrides when you connect event
+    # sources to targets, see [BatchContainerOverrides][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eventbridge/latest/pipes-reference/API_BatchContainerOverrides.html
     #
     # @!attribute [rw] vcpus
     #   This parameter is deprecated, use `resourceRequirements` to override
@@ -1562,6 +1574,10 @@ module Aws::Batch
     # @!attribute [rw] command
     #   The command to send to the container that overrides the default
     #   command from the Docker image or the job definition.
+    #
+    #   <note markdown="1"> This parameter can't contain an empty string.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] instance_type
@@ -1907,6 +1923,11 @@ module Aws::Batch
     #   available, beyond the default amount, for tasks hosted on Fargate.
     #   @return [Types::EphemeralStorage]
     #
+    # @!attribute [rw] runtime_platform
+    #   An object that represents the compute environment architecture for
+    #   Batch jobs on Fargate.
+    #   @return [Types::RuntimePlatform]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerProperties AWS API Documentation
     #
     class ContainerProperties < Struct.new(
@@ -1930,7 +1951,8 @@ module Aws::Batch
       :secrets,
       :network_configuration,
       :fargate_platform_configuration,
-      :ephemeral_storage)
+      :ephemeral_storage,
+      :runtime_platform)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5871,6 +5893,56 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # An object that represents the compute environment architecture for
+    # Batch jobs on Fargate.
+    #
+    # @!attribute [rw] operating_system_family
+    #   The operating system for the compute environment. Valid values are:
+    #   `LINUX` (default), `WINDOWS_SERVER_2019_CORE`,
+    #   `WINDOWS_SERVER_2019_FULL`, `WINDOWS_SERVER_2022_CORE`, and
+    #   `WINDOWS_SERVER_2022_FULL`.
+    #
+    #   <note markdown="1"> The following parameters can’t be set for Windows containers:
+    #   `linuxParameters`, `privileged`, `user`, `ulimits`,
+    #   `readonlyRootFilesystem`, and `efsVolumeConfiguration`.
+    #
+    #    </note>
+    #
+    #   <note markdown="1"> The Batch Scheduler checks before registering a task definition with
+    #   Fargate. If the job requires a Windows container and the first
+    #   compute environment is `LINUX`, the compute environment is skipped
+    #   and the next is checked until a Windows-based compute environment is
+    #   found.
+    #
+    #    </note>
+    #
+    #   <note markdown="1"> Fargate Spot is not supported for Windows-based containers on
+    #   Fargate. A job queue will be blocked if a Fargate Windows job is
+    #   submitted to a job queue with only Fargate Spot compute
+    #   environments. However, you can attach both `FARGATE` and
+    #   `FARGATE_SPOT` compute environments to the same job queue.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] cpu_architecture
+    #   The vCPU architecture. The default value is `X86_64`. Valid values
+    #   are `X86_64` and ` ARM64`.
+    #
+    #   <note markdown="1"> This parameter must be set to `X86_64` for Windows containers.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/RuntimePlatform AWS API Documentation
+    #
+    class RuntimePlatform < Struct.new(
+      :operating_system_family,
+      :cpu_architecture)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that represents a scheduling policy.
     #
     # @!attribute [rw] name
@@ -6036,10 +6108,12 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] share_identifier
-    #   The share identifier for the job. If the job queue doesn't have a
-    #   scheduling policy, then this parameter must not be specified. If the
-    #   job queue has a scheduling policy, then this parameter must be
-    #   specified.
+    #   The share identifier for the job. Don't specify this parameter if
+    #   the job queue doesn't have a scheduling policy. If the job queue
+    #   has a scheduling policy, then this parameter must be specified.
+    #
+    #   This string is limited to 255 alphanumeric characters, and can be
+    #   followed by an asterisk (*).
     #   @return [String]
     #
     # @!attribute [rw] scheduling_priority_override

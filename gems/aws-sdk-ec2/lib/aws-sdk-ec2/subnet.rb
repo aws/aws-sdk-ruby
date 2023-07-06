@@ -505,11 +505,18 @@ module Aws::EC2
     #   The instance type. For more information, see [Instance types][1] in
     #   the *Amazon EC2 User Guide*.
     #
+    #   When you change your EBS-backed instance type, instance restart or
+    #   replacement behavior depends on the instance type compatibility
+    #   between the old and new types. An instance that's backed by an
+    #   instance store volume is always replaced. For more information, see
+    #   [Change the instance type][2] in the *Amazon EC2 User Guide*.
+    #
     #   Default: `m1.small`
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-resize.html
     # @option options [Integer] :ipv_6_address_count
     #   The number of IPv6 addresses to associate with the primary network
     #   interface. Amazon EC2 chooses the IPv6 addresses from the range of

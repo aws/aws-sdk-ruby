@@ -559,6 +559,7 @@ module Aws::ECS
     ContainerDefinition.add_member(:system_controls, Shapes::ShapeRef.new(shape: SystemControls, location_name: "systemControls"))
     ContainerDefinition.add_member(:resource_requirements, Shapes::ShapeRef.new(shape: ResourceRequirements, location_name: "resourceRequirements"))
     ContainerDefinition.add_member(:firelens_configuration, Shapes::ShapeRef.new(shape: FirelensConfiguration, location_name: "firelensConfiguration"))
+    ContainerDefinition.add_member(:credential_specs, Shapes::ShapeRef.new(shape: StringList, location_name: "credentialSpecs"))
     ContainerDefinition.struct_class = Types::ContainerDefinition
 
     ContainerDefinitions.member = Shapes::ShapeRef.new(shape: ContainerDefinition)

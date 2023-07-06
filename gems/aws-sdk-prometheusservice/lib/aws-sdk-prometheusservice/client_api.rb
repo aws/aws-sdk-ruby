@@ -100,10 +100,10 @@ module Aws::PrometheusService
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
-    AlertManagerDefinitionDescription.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
-    AlertManagerDefinitionDescription.add_member(:data, Shapes::ShapeRef.new(shape: AlertManagerDefinitionData, required: true, location_name: "data"))
-    AlertManagerDefinitionDescription.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "modifiedAt"))
     AlertManagerDefinitionDescription.add_member(:status, Shapes::ShapeRef.new(shape: AlertManagerDefinitionStatus, required: true, location_name: "status"))
+    AlertManagerDefinitionDescription.add_member(:data, Shapes::ShapeRef.new(shape: AlertManagerDefinitionData, required: true, location_name: "data"))
+    AlertManagerDefinitionDescription.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    AlertManagerDefinitionDescription.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "modifiedAt"))
     AlertManagerDefinitionDescription.struct_class = Types::AlertManagerDefinitionDescription
 
     AlertManagerDefinitionStatus.add_member(:status_code, Shapes::ShapeRef.new(shape: AlertManagerDefinitionStatusCode, required: true, location_name: "statusCode"))
@@ -115,31 +115,31 @@ module Aws::PrometheusService
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateAlertManagerDefinitionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
-    CreateAlertManagerDefinitionRequest.add_member(:data, Shapes::ShapeRef.new(shape: AlertManagerDefinitionData, required: true, location_name: "data"))
     CreateAlertManagerDefinitionRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    CreateAlertManagerDefinitionRequest.add_member(:data, Shapes::ShapeRef.new(shape: AlertManagerDefinitionData, required: true, location_name: "data"))
+    CreateAlertManagerDefinitionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateAlertManagerDefinitionRequest.struct_class = Types::CreateAlertManagerDefinitionRequest
 
     CreateAlertManagerDefinitionResponse.add_member(:status, Shapes::ShapeRef.new(shape: AlertManagerDefinitionStatus, required: true, location_name: "status"))
     CreateAlertManagerDefinitionResponse.struct_class = Types::CreateAlertManagerDefinitionResponse
 
-    CreateLoggingConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
-    CreateLoggingConfigurationRequest.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, required: true, location_name: "logGroupArn"))
     CreateLoggingConfigurationRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    CreateLoggingConfigurationRequest.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, required: true, location_name: "logGroupArn"))
+    CreateLoggingConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateLoggingConfigurationRequest.struct_class = Types::CreateLoggingConfigurationRequest
 
     CreateLoggingConfigurationResponse.add_member(:status, Shapes::ShapeRef.new(shape: LoggingConfigurationStatus, required: true, location_name: "status"))
     CreateLoggingConfigurationResponse.struct_class = Types::CreateLoggingConfigurationResponse
 
-    CreateRuleGroupsNamespaceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
-    CreateRuleGroupsNamespaceRequest.add_member(:data, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceData, required: true, location_name: "data"))
-    CreateRuleGroupsNamespaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceName, required: true, location_name: "name"))
-    CreateRuleGroupsNamespaceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateRuleGroupsNamespaceRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    CreateRuleGroupsNamespaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceName, required: true, location_name: "name"))
+    CreateRuleGroupsNamespaceRequest.add_member(:data, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceData, required: true, location_name: "data"))
+    CreateRuleGroupsNamespaceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateRuleGroupsNamespaceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateRuleGroupsNamespaceRequest.struct_class = Types::CreateRuleGroupsNamespaceRequest
 
-    CreateRuleGroupsNamespaceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceArn, required: true, location_name: "arn"))
     CreateRuleGroupsNamespaceResponse.add_member(:name, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceName, required: true, location_name: "name"))
+    CreateRuleGroupsNamespaceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceArn, required: true, location_name: "arn"))
     CreateRuleGroupsNamespaceResponse.add_member(:status, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceStatus, required: true, location_name: "status"))
     CreateRuleGroupsNamespaceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateRuleGroupsNamespaceResponse.struct_class = Types::CreateRuleGroupsNamespaceResponse
@@ -149,27 +149,27 @@ module Aws::PrometheusService
     CreateWorkspaceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateWorkspaceRequest.struct_class = Types::CreateWorkspaceRequest
 
+    CreateWorkspaceResponse.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "workspaceId"))
     CreateWorkspaceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: WorkspaceArn, required: true, location_name: "arn"))
     CreateWorkspaceResponse.add_member(:status, Shapes::ShapeRef.new(shape: WorkspaceStatus, required: true, location_name: "status"))
     CreateWorkspaceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateWorkspaceResponse.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "workspaceId"))
     CreateWorkspaceResponse.struct_class = Types::CreateWorkspaceResponse
 
-    DeleteAlertManagerDefinitionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     DeleteAlertManagerDefinitionRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    DeleteAlertManagerDefinitionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     DeleteAlertManagerDefinitionRequest.struct_class = Types::DeleteAlertManagerDefinitionRequest
 
-    DeleteLoggingConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     DeleteLoggingConfigurationRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    DeleteLoggingConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     DeleteLoggingConfigurationRequest.struct_class = Types::DeleteLoggingConfigurationRequest
 
-    DeleteRuleGroupsNamespaceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
-    DeleteRuleGroupsNamespaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceName, required: true, location: "uri", location_name: "name"))
     DeleteRuleGroupsNamespaceRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    DeleteRuleGroupsNamespaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceName, required: true, location: "uri", location_name: "name"))
+    DeleteRuleGroupsNamespaceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     DeleteRuleGroupsNamespaceRequest.struct_class = Types::DeleteRuleGroupsNamespaceRequest
 
-    DeleteWorkspaceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     DeleteWorkspaceRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    DeleteWorkspaceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     DeleteWorkspaceRequest.struct_class = Types::DeleteWorkspaceRequest
 
     DescribeAlertManagerDefinitionRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
@@ -184,8 +184,8 @@ module Aws::PrometheusService
     DescribeLoggingConfigurationResponse.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfigurationMetadata, required: true, location_name: "loggingConfiguration"))
     DescribeLoggingConfigurationResponse.struct_class = Types::DescribeLoggingConfigurationResponse
 
-    DescribeRuleGroupsNamespaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceName, required: true, location: "uri", location_name: "name"))
     DescribeRuleGroupsNamespaceRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    DescribeRuleGroupsNamespaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceName, required: true, location: "uri", location_name: "name"))
     DescribeRuleGroupsNamespaceRequest.struct_class = Types::DescribeRuleGroupsNamespaceRequest
 
     DescribeRuleGroupsNamespaceResponse.add_member(:rule_groups_namespace, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceDescription, required: true, location_name: "ruleGroupsNamespace"))
@@ -201,14 +201,14 @@ module Aws::PrometheusService
     InternalServerException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
     InternalServerException.struct_class = Types::InternalServerException
 
-    ListRuleGroupsNamespacesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListRuleGroupsNamespacesRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListRuleGroupsNamespacesRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
     ListRuleGroupsNamespacesRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceName, location: "querystring", location_name: "name"))
     ListRuleGroupsNamespacesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
-    ListRuleGroupsNamespacesRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    ListRuleGroupsNamespacesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListRuleGroupsNamespacesRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListRuleGroupsNamespacesRequest.struct_class = Types::ListRuleGroupsNamespacesRequest
 
-    ListRuleGroupsNamespacesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListRuleGroupsNamespacesResponse.add_member(:rule_groups_namespaces, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceSummaryList, required: true, location_name: "ruleGroupsNamespaces"))
+    ListRuleGroupsNamespacesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListRuleGroupsNamespacesResponse.struct_class = Types::ListRuleGroupsNamespacesResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resourceArn"))
@@ -217,42 +217,42 @@ module Aws::PrometheusService
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    ListWorkspacesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
     ListWorkspacesRequest.add_member(:alias, Shapes::ShapeRef.new(shape: WorkspaceAlias, location: "querystring", location_name: "alias"))
     ListWorkspacesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListWorkspacesRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
-    ListWorkspacesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
     ListWorkspacesRequest.struct_class = Types::ListWorkspacesRequest
 
-    ListWorkspacesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListWorkspacesResponse.add_member(:workspaces, Shapes::ShapeRef.new(shape: WorkspaceSummaryList, required: true, location_name: "workspaces"))
+    ListWorkspacesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListWorkspacesResponse.struct_class = Types::ListWorkspacesResponse
 
-    LoggingConfigurationMetadata.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
-    LoggingConfigurationMetadata.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, required: true, location_name: "logGroupArn"))
-    LoggingConfigurationMetadata.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "modifiedAt"))
     LoggingConfigurationMetadata.add_member(:status, Shapes::ShapeRef.new(shape: LoggingConfigurationStatus, required: true, location_name: "status"))
     LoggingConfigurationMetadata.add_member(:workspace, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "workspace"))
+    LoggingConfigurationMetadata.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, required: true, location_name: "logGroupArn"))
+    LoggingConfigurationMetadata.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    LoggingConfigurationMetadata.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "modifiedAt"))
     LoggingConfigurationMetadata.struct_class = Types::LoggingConfigurationMetadata
 
     LoggingConfigurationStatus.add_member(:status_code, Shapes::ShapeRef.new(shape: LoggingConfigurationStatusCode, required: true, location_name: "statusCode"))
     LoggingConfigurationStatus.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     LoggingConfigurationStatus.struct_class = Types::LoggingConfigurationStatus
 
-    PutAlertManagerDefinitionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
-    PutAlertManagerDefinitionRequest.add_member(:data, Shapes::ShapeRef.new(shape: AlertManagerDefinitionData, required: true, location_name: "data"))
     PutAlertManagerDefinitionRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    PutAlertManagerDefinitionRequest.add_member(:data, Shapes::ShapeRef.new(shape: AlertManagerDefinitionData, required: true, location_name: "data"))
+    PutAlertManagerDefinitionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     PutAlertManagerDefinitionRequest.struct_class = Types::PutAlertManagerDefinitionRequest
 
     PutAlertManagerDefinitionResponse.add_member(:status, Shapes::ShapeRef.new(shape: AlertManagerDefinitionStatus, required: true, location_name: "status"))
     PutAlertManagerDefinitionResponse.struct_class = Types::PutAlertManagerDefinitionResponse
 
-    PutRuleGroupsNamespaceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
-    PutRuleGroupsNamespaceRequest.add_member(:data, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceData, required: true, location_name: "data"))
-    PutRuleGroupsNamespaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceName, required: true, location: "uri", location_name: "name"))
     PutRuleGroupsNamespaceRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    PutRuleGroupsNamespaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceName, required: true, location: "uri", location_name: "name"))
+    PutRuleGroupsNamespaceRequest.add_member(:data, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceData, required: true, location_name: "data"))
+    PutRuleGroupsNamespaceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     PutRuleGroupsNamespaceRequest.struct_class = Types::PutRuleGroupsNamespaceRequest
 
-    PutRuleGroupsNamespaceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceArn, required: true, location_name: "arn"))
     PutRuleGroupsNamespaceResponse.add_member(:name, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceName, required: true, location_name: "name"))
+    PutRuleGroupsNamespaceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceArn, required: true, location_name: "arn"))
     PutRuleGroupsNamespaceResponse.add_member(:status, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceStatus, required: true, location_name: "status"))
     PutRuleGroupsNamespaceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     PutRuleGroupsNamespaceResponse.struct_class = Types::PutRuleGroupsNamespaceResponse
@@ -263,11 +263,11 @@ module Aws::PrometheusService
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     RuleGroupsNamespaceDescription.add_member(:arn, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceArn, required: true, location_name: "arn"))
-    RuleGroupsNamespaceDescription.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
-    RuleGroupsNamespaceDescription.add_member(:data, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceData, required: true, location_name: "data"))
-    RuleGroupsNamespaceDescription.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "modifiedAt"))
     RuleGroupsNamespaceDescription.add_member(:name, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceName, required: true, location_name: "name"))
     RuleGroupsNamespaceDescription.add_member(:status, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceStatus, required: true, location_name: "status"))
+    RuleGroupsNamespaceDescription.add_member(:data, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceData, required: true, location_name: "data"))
+    RuleGroupsNamespaceDescription.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    RuleGroupsNamespaceDescription.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "modifiedAt"))
     RuleGroupsNamespaceDescription.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     RuleGroupsNamespaceDescription.struct_class = Types::RuleGroupsNamespaceDescription
 
@@ -276,20 +276,20 @@ module Aws::PrometheusService
     RuleGroupsNamespaceStatus.struct_class = Types::RuleGroupsNamespaceStatus
 
     RuleGroupsNamespaceSummary.add_member(:arn, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceArn, required: true, location_name: "arn"))
-    RuleGroupsNamespaceSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
-    RuleGroupsNamespaceSummary.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "modifiedAt"))
     RuleGroupsNamespaceSummary.add_member(:name, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceName, required: true, location_name: "name"))
     RuleGroupsNamespaceSummary.add_member(:status, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceStatus, required: true, location_name: "status"))
+    RuleGroupsNamespaceSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    RuleGroupsNamespaceSummary.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "modifiedAt"))
     RuleGroupsNamespaceSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     RuleGroupsNamespaceSummary.struct_class = Types::RuleGroupsNamespaceSummary
 
     RuleGroupsNamespaceSummaryList.member = Shapes::ShapeRef.new(shape: RuleGroupsNamespaceSummary)
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
-    ServiceQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "quotaCode"))
     ServiceQuotaExceededException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
     ServiceQuotaExceededException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
     ServiceQuotaExceededException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceCode"))
+    ServiceQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "quotaCode"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     TagKeys.member = Shapes::ShapeRef.new(shape: TagKey)
@@ -304,9 +304,9 @@ module Aws::PrometheusService
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ThrottlingException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, location_name: "serviceCode"))
     ThrottlingException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, location_name: "quotaCode"))
     ThrottlingException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
-    ThrottlingException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, location_name: "serviceCode"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resourceArn"))
@@ -315,48 +315,48 @@ module Aws::PrometheusService
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
-    UpdateLoggingConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
-    UpdateLoggingConfigurationRequest.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, required: true, location_name: "logGroupArn"))
     UpdateLoggingConfigurationRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    UpdateLoggingConfigurationRequest.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, required: true, location_name: "logGroupArn"))
+    UpdateLoggingConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateLoggingConfigurationRequest.struct_class = Types::UpdateLoggingConfigurationRequest
 
     UpdateLoggingConfigurationResponse.add_member(:status, Shapes::ShapeRef.new(shape: LoggingConfigurationStatus, required: true, location_name: "status"))
     UpdateLoggingConfigurationResponse.struct_class = Types::UpdateLoggingConfigurationResponse
 
+    UpdateWorkspaceAliasRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
     UpdateWorkspaceAliasRequest.add_member(:alias, Shapes::ShapeRef.new(shape: WorkspaceAlias, location_name: "alias"))
     UpdateWorkspaceAliasRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
-    UpdateWorkspaceAliasRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
     UpdateWorkspaceAliasRequest.struct_class = Types::UpdateWorkspaceAliasRequest
 
-    ValidationException.add_member(:field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, required: true, location_name: "reason"))
+    ValidationException.add_member(:field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
     ValidationException.struct_class = Types::ValidationException
 
-    ValidationExceptionField.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationExceptionField.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    ValidationExceptionField.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationExceptionField.struct_class = Types::ValidationExceptionField
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
 
+    WorkspaceDescription.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "workspaceId"))
     WorkspaceDescription.add_member(:alias, Shapes::ShapeRef.new(shape: WorkspaceAlias, location_name: "alias"))
     WorkspaceDescription.add_member(:arn, Shapes::ShapeRef.new(shape: WorkspaceArn, required: true, location_name: "arn"))
-    WorkspaceDescription.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
-    WorkspaceDescription.add_member(:prometheus_endpoint, Shapes::ShapeRef.new(shape: Uri, location_name: "prometheusEndpoint"))
     WorkspaceDescription.add_member(:status, Shapes::ShapeRef.new(shape: WorkspaceStatus, required: true, location_name: "status"))
+    WorkspaceDescription.add_member(:prometheus_endpoint, Shapes::ShapeRef.new(shape: Uri, location_name: "prometheusEndpoint"))
+    WorkspaceDescription.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     WorkspaceDescription.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    WorkspaceDescription.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "workspaceId"))
     WorkspaceDescription.struct_class = Types::WorkspaceDescription
 
     WorkspaceStatus.add_member(:status_code, Shapes::ShapeRef.new(shape: WorkspaceStatusCode, required: true, location_name: "statusCode"))
     WorkspaceStatus.struct_class = Types::WorkspaceStatus
 
+    WorkspaceSummary.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "workspaceId"))
     WorkspaceSummary.add_member(:alias, Shapes::ShapeRef.new(shape: WorkspaceAlias, location_name: "alias"))
     WorkspaceSummary.add_member(:arn, Shapes::ShapeRef.new(shape: WorkspaceArn, required: true, location_name: "arn"))
-    WorkspaceSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     WorkspaceSummary.add_member(:status, Shapes::ShapeRef.new(shape: WorkspaceStatus, required: true, location_name: "status"))
+    WorkspaceSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     WorkspaceSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    WorkspaceSummary.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "workspaceId"))
     WorkspaceSummary.struct_class = Types::WorkspaceSummary
 
     WorkspaceSummaryList.member = Shapes::ShapeRef.new(shape: WorkspaceSummary)

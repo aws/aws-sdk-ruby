@@ -644,6 +644,7 @@ RubyGems.org page under "LINKS" section.
 | AmazonMWAA                                            | Aws::MWAA                                | aws-sdk-mwaa                                | 2020-07-01  |
 | AmazonNimbleStudio                                    | Aws::NimbleStudio                        | aws-sdk-nimblestudio                        | 2020-08-01  |
 | AmplifyBackend                                        | Aws::AmplifyBackend                      | aws-sdk-amplifybackend                      | 2020-08-11  |
+| AppFabric                                             | Aws::AppFabric                           | aws-sdk-appfabric                           | 2023-05-19  |
 | Application Auto Scaling                              | Aws::ApplicationAutoScaling              | aws-sdk-applicationautoscaling              | 2016-02-06  |
 | Application Migration Service                         | Aws::Mgn                                 | aws-sdk-mgn                                 | 2020-02-26  |
 | Auto Scaling                                          | Aws::AutoScaling                         | aws-sdk-autoscaling                         | 2011-01-01  |

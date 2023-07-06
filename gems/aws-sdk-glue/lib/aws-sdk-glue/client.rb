@@ -804,6 +804,13 @@ module Aws::Glue
     #   resp.crawlers[0].targets.delta_targets[0].connection_name #=> String
     #   resp.crawlers[0].targets.delta_targets[0].write_manifest #=> Boolean
     #   resp.crawlers[0].targets.delta_targets[0].create_native_delta_table #=> Boolean
+    #   resp.crawlers[0].targets.iceberg_targets #=> Array
+    #   resp.crawlers[0].targets.iceberg_targets[0].paths #=> Array
+    #   resp.crawlers[0].targets.iceberg_targets[0].paths[0] #=> String
+    #   resp.crawlers[0].targets.iceberg_targets[0].connection_name #=> String
+    #   resp.crawlers[0].targets.iceberg_targets[0].exclusions #=> Array
+    #   resp.crawlers[0].targets.iceberg_targets[0].exclusions[0] #=> String
+    #   resp.crawlers[0].targets.iceberg_targets[0].maximum_traversal_depth #=> Integer
     #   resp.crawlers[0].database_name #=> String
     #   resp.crawlers[0].description #=> String
     #   resp.crawlers[0].classifiers #=> Array
@@ -1347,7 +1354,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.stream_name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.classification #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.delimiter #=> String
-    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest", "timestamp"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_fetch_time_in_ms #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_fetch_records_per_shard #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_record_per_read #=> Integer
@@ -1363,6 +1370,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.role_session_name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.add_record_timestamp #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.emit_consumer_lag_metrics #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.starting_timestamp #=> Time
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.data_preview_options.polling_time #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.data_preview_options.record_polling_limit #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.name #=> String
@@ -1384,6 +1392,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.include_headers #=> Boolean
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.add_record_timestamp #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.emit_consumer_lag_metrics #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.starting_timestamp #=> Time
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.window_size #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.detect_schema #=> Boolean
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.data_preview_options.polling_time #=> Integer
@@ -1397,7 +1406,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.stream_name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.classification #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.delimiter #=> String
-    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest", "timestamp"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_fetch_time_in_ms #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_fetch_records_per_shard #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_record_per_read #=> Integer
@@ -1413,6 +1422,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.role_session_name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.add_record_timestamp #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.emit_consumer_lag_metrics #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.starting_timestamp #=> Time
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.data_preview_options.polling_time #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.data_preview_options.record_polling_limit #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.name #=> String
@@ -1438,6 +1448,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.include_headers #=> Boolean
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.add_record_timestamp #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.emit_consumer_lag_metrics #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.starting_timestamp #=> Time
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.data_preview_options.polling_time #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.data_preview_options.record_polling_limit #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_null_fields.name #=> String
@@ -2761,6 +2772,14 @@ module Aws::Glue
     #           create_native_delta_table: false,
     #         },
     #       ],
+    #       iceberg_targets: [
+    #         {
+    #           paths: ["Path"],
+    #           connection_name: "ConnectionName",
+    #           exclusions: ["Path"],
+    #           maximum_traversal_depth: 1,
+    #         },
+    #       ],
     #     },
     #     schedule: "CronExpression",
     #     classifiers: ["NameString"],
@@ -2946,6 +2965,7 @@ module Aws::Glue
     #       target_database: {
     #         catalog_id: "CatalogIdString",
     #         database_name: "NameString",
+    #         region: "NameString",
     #       },
     #       federated_database: {
     #         identifier: "FederationIdentifier",
@@ -4280,6 +4300,7 @@ module Aws::Glue
     #         catalog_id: "CatalogIdString",
     #         database_name: "NameString",
     #         name: "NameString",
+    #         region: "NameString",
     #       },
     #     },
     #     partition_indexes: [
@@ -5989,6 +6010,13 @@ module Aws::Glue
     #   resp.crawler.targets.delta_targets[0].connection_name #=> String
     #   resp.crawler.targets.delta_targets[0].write_manifest #=> Boolean
     #   resp.crawler.targets.delta_targets[0].create_native_delta_table #=> Boolean
+    #   resp.crawler.targets.iceberg_targets #=> Array
+    #   resp.crawler.targets.iceberg_targets[0].paths #=> Array
+    #   resp.crawler.targets.iceberg_targets[0].paths[0] #=> String
+    #   resp.crawler.targets.iceberg_targets[0].connection_name #=> String
+    #   resp.crawler.targets.iceberg_targets[0].exclusions #=> Array
+    #   resp.crawler.targets.iceberg_targets[0].exclusions[0] #=> String
+    #   resp.crawler.targets.iceberg_targets[0].maximum_traversal_depth #=> Integer
     #   resp.crawler.database_name #=> String
     #   resp.crawler.description #=> String
     #   resp.crawler.classifiers #=> Array
@@ -6136,6 +6164,13 @@ module Aws::Glue
     #   resp.crawlers[0].targets.delta_targets[0].connection_name #=> String
     #   resp.crawlers[0].targets.delta_targets[0].write_manifest #=> Boolean
     #   resp.crawlers[0].targets.delta_targets[0].create_native_delta_table #=> Boolean
+    #   resp.crawlers[0].targets.iceberg_targets #=> Array
+    #   resp.crawlers[0].targets.iceberg_targets[0].paths #=> Array
+    #   resp.crawlers[0].targets.iceberg_targets[0].paths[0] #=> String
+    #   resp.crawlers[0].targets.iceberg_targets[0].connection_name #=> String
+    #   resp.crawlers[0].targets.iceberg_targets[0].exclusions #=> Array
+    #   resp.crawlers[0].targets.iceberg_targets[0].exclusions[0] #=> String
+    #   resp.crawlers[0].targets.iceberg_targets[0].maximum_traversal_depth #=> Integer
     #   resp.crawlers[0].database_name #=> String
     #   resp.crawlers[0].description #=> String
     #   resp.crawlers[0].classifiers #=> Array
@@ -6503,6 +6538,7 @@ module Aws::Glue
     #   resp.database.create_table_default_permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
     #   resp.database.target_database.catalog_id #=> String
     #   resp.database.target_database.database_name #=> String
+    #   resp.database.target_database.region #=> String
     #   resp.database.catalog_id #=> String
     #   resp.database.federated_database.identifier #=> String
     #   resp.database.federated_database.connection_name #=> String
@@ -6573,6 +6609,7 @@ module Aws::Glue
     #   resp.database_list[0].create_table_default_permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
     #   resp.database_list[0].target_database.catalog_id #=> String
     #   resp.database_list[0].target_database.database_name #=> String
+    #   resp.database_list[0].target_database.region #=> String
     #   resp.database_list[0].catalog_id #=> String
     #   resp.database_list[0].federated_database.identifier #=> String
     #   resp.database_list[0].federated_database.connection_name #=> String
@@ -7106,7 +7143,7 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.stream_name #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.classification #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.delimiter #=> String
-    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest", "timestamp"
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_fetch_time_in_ms #=> Integer
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_fetch_records_per_shard #=> Integer
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_record_per_read #=> Integer
@@ -7122,6 +7159,7 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.role_session_name #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.add_record_timestamp #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.emit_consumer_lag_metrics #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.starting_timestamp #=> Time
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.data_preview_options.polling_time #=> Integer
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kinesis_source.data_preview_options.record_polling_limit #=> Integer
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.name #=> String
@@ -7143,6 +7181,7 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.include_headers #=> Boolean
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.add_record_timestamp #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.emit_consumer_lag_metrics #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.starting_timestamp #=> Time
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.window_size #=> Integer
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.detect_schema #=> Boolean
     #   resp.job.code_gen_configuration_nodes["NodeId"].direct_kafka_source.data_preview_options.polling_time #=> Integer
@@ -7156,7 +7195,7 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.stream_name #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.classification #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.delimiter #=> String
-    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest", "timestamp"
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_fetch_time_in_ms #=> Integer
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_fetch_records_per_shard #=> Integer
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_record_per_read #=> Integer
@@ -7172,6 +7211,7 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.role_session_name #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.add_record_timestamp #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.emit_consumer_lag_metrics #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.starting_timestamp #=> Time
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.data_preview_options.polling_time #=> Integer
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.data_preview_options.record_polling_limit #=> Integer
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.name #=> String
@@ -7197,6 +7237,7 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.include_headers #=> Boolean
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.add_record_timestamp #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.emit_consumer_lag_metrics #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.starting_timestamp #=> Time
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.data_preview_options.polling_time #=> Integer
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_kafka_source.data_preview_options.record_polling_limit #=> Integer
     #   resp.job.code_gen_configuration_nodes["NodeId"].drop_null_fields.name #=> String
@@ -8108,7 +8149,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.stream_name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.classification #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.delimiter #=> String
-    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest", "timestamp"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_fetch_time_in_ms #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_fetch_records_per_shard #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.max_record_per_read #=> Integer
@@ -8124,6 +8165,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.role_session_name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.add_record_timestamp #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.emit_consumer_lag_metrics #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.streaming_options.starting_timestamp #=> Time
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.data_preview_options.polling_time #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kinesis_source.data_preview_options.record_polling_limit #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.name #=> String
@@ -8145,6 +8187,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.include_headers #=> Boolean
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.add_record_timestamp #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.emit_consumer_lag_metrics #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.streaming_options.starting_timestamp #=> Time
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.window_size #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.detect_schema #=> Boolean
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].direct_kafka_source.data_preview_options.polling_time #=> Integer
@@ -8158,7 +8201,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.stream_name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.classification #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.delimiter #=> String
-    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.starting_position #=> String, one of "latest", "trim_horizon", "earliest", "timestamp"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_fetch_time_in_ms #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_fetch_records_per_shard #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.max_record_per_read #=> Integer
@@ -8174,6 +8217,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.role_session_name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.add_record_timestamp #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.emit_consumer_lag_metrics #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.streaming_options.starting_timestamp #=> Time
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.data_preview_options.polling_time #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kinesis_source.data_preview_options.record_polling_limit #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.name #=> String
@@ -8199,6 +8243,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.include_headers #=> Boolean
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.add_record_timestamp #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.emit_consumer_lag_metrics #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.streaming_options.starting_timestamp #=> Time
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.data_preview_options.polling_time #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_kafka_source.data_preview_options.record_polling_limit #=> Integer
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].drop_null_fields.name #=> String
@@ -10108,6 +10153,7 @@ module Aws::Glue
     #   resp.table.target_table.catalog_id #=> String
     #   resp.table.target_table.database_name #=> String
     #   resp.table.target_table.name #=> String
+    #   resp.table.target_table.region #=> String
     #   resp.table.catalog_id #=> String
     #   resp.table.version_id #=> String
     #   resp.table.federated_table.identifier #=> String
@@ -10217,6 +10263,7 @@ module Aws::Glue
     #   resp.table_version.table.target_table.catalog_id #=> String
     #   resp.table_version.table.target_table.database_name #=> String
     #   resp.table_version.table.target_table.name #=> String
+    #   resp.table_version.table.target_table.region #=> String
     #   resp.table_version.table.catalog_id #=> String
     #   resp.table_version.table.version_id #=> String
     #   resp.table_version.table.federated_table.identifier #=> String
@@ -10335,6 +10382,7 @@ module Aws::Glue
     #   resp.table_versions[0].table.target_table.catalog_id #=> String
     #   resp.table_versions[0].table.target_table.database_name #=> String
     #   resp.table_versions[0].table.target_table.name #=> String
+    #   resp.table_versions[0].table.target_table.region #=> String
     #   resp.table_versions[0].table.catalog_id #=> String
     #   resp.table_versions[0].table.version_id #=> String
     #   resp.table_versions[0].table.federated_table.identifier #=> String
@@ -10464,6 +10512,7 @@ module Aws::Glue
     #   resp.table_list[0].target_table.catalog_id #=> String
     #   resp.table_list[0].target_table.database_name #=> String
     #   resp.table_list[0].target_table.name #=> String
+    #   resp.table_list[0].target_table.region #=> String
     #   resp.table_list[0].catalog_id #=> String
     #   resp.table_list[0].version_id #=> String
     #   resp.table_list[0].federated_table.identifier #=> String
@@ -11050,6 +11099,7 @@ module Aws::Glue
     #   resp.table.target_table.catalog_id #=> String
     #   resp.table.target_table.database_name #=> String
     #   resp.table.target_table.name #=> String
+    #   resp.table.target_table.region #=> String
     #   resp.table.catalog_id #=> String
     #   resp.table.version_id #=> String
     #   resp.table.federated_table.identifier #=> String
@@ -13391,6 +13441,7 @@ module Aws::Glue
     #   resp.table_list[0].target_table.catalog_id #=> String
     #   resp.table_list[0].target_table.database_name #=> String
     #   resp.table_list[0].target_table.name #=> String
+    #   resp.table_list[0].target_table.region #=> String
     #   resp.table_list[0].catalog_id #=> String
     #   resp.table_list[0].version_id #=> String
     #   resp.table_list[0].federated_table.identifier #=> String
@@ -14814,6 +14865,14 @@ module Aws::Glue
     #           create_native_delta_table: false,
     #         },
     #       ],
+    #       iceberg_targets: [
+    #         {
+    #           paths: ["Path"],
+    #           connection_name: "ConnectionName",
+    #           exclusions: ["Path"],
+    #           maximum_traversal_depth: 1,
+    #         },
+    #       ],
     #     },
     #     schedule: "CronExpression",
     #     classifiers: ["NameString"],
@@ -14959,6 +15018,7 @@ module Aws::Glue
     #       target_database: {
     #         catalog_id: "CatalogIdString",
     #         database_name: "NameString",
+    #         region: "NameString",
     #       },
     #       federated_database: {
     #         identifier: "FederationIdentifier",
@@ -15654,6 +15714,7 @@ module Aws::Glue
     #         catalog_id: "CatalogIdString",
     #         database_name: "NameString",
     #         name: "NameString",
+    #         region: "NameString",
     #       },
     #     },
     #     skip_archive: false,
@@ -15868,7 +15929,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.141.0'
+      context[:gem_version] = '1.145.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

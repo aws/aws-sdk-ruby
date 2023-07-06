@@ -32,6 +32,7 @@ module Aws::InternetMonitor
     HealthEventList = Shapes::ListShape.new(name: 'HealthEventList')
     HealthEventName = Shapes::StringShape.new(name: 'HealthEventName')
     HealthEventStatus = Shapes::StringShape.new(name: 'HealthEventStatus')
+    HealthEventsConfig = Shapes::StructureShape.new(name: 'HealthEventsConfig')
     ImpactedLocation = Shapes::StructureShape.new(name: 'ImpactedLocation')
     ImpactedLocationsList = Shapes::ListShape.new(name: 'ImpactedLocationsList')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
@@ -58,6 +59,7 @@ module Aws::InternetMonitor
     NetworkImpairment = Shapes::StructureShape.new(name: 'NetworkImpairment')
     NetworkList = Shapes::ListShape.new(name: 'NetworkList')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    Percentage = Shapes::FloatShape.new(name: 'Percentage')
     PerformanceMeasurement = Shapes::StructureShape.new(name: 'PerformanceMeasurement')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -104,6 +106,7 @@ module Aws::InternetMonitor
     CreateMonitorInput.add_member(:max_city_networks_to_monitor, Shapes::ShapeRef.new(shape: MaxCityNetworksToMonitor, location_name: "MaxCityNetworksToMonitor"))
     CreateMonitorInput.add_member(:internet_measurements_log_delivery, Shapes::ShapeRef.new(shape: InternetMeasurementsLogDelivery, location_name: "InternetMeasurementsLogDelivery"))
     CreateMonitorInput.add_member(:traffic_percentage_to_monitor, Shapes::ShapeRef.new(shape: TrafficPercentageToMonitor, location_name: "TrafficPercentageToMonitor"))
+    CreateMonitorInput.add_member(:health_events_config, Shapes::ShapeRef.new(shape: HealthEventsConfig, location_name: "HealthEventsConfig"))
     CreateMonitorInput.struct_class = Types::CreateMonitorInput
 
     CreateMonitorOutput.add_member(:arn, Shapes::ShapeRef.new(shape: MonitorArn, required: true, location_name: "Arn"))
@@ -129,6 +132,7 @@ module Aws::InternetMonitor
     GetHealthEventOutput.add_member(:status, Shapes::ShapeRef.new(shape: HealthEventStatus, required: true, location_name: "Status"))
     GetHealthEventOutput.add_member(:percent_of_total_traffic_impacted, Shapes::ShapeRef.new(shape: Double, location_name: "PercentOfTotalTrafficImpacted"))
     GetHealthEventOutput.add_member(:impact_type, Shapes::ShapeRef.new(shape: HealthEventImpactType, required: true, location_name: "ImpactType"))
+    GetHealthEventOutput.add_member(:health_score_threshold, Shapes::ShapeRef.new(shape: Percentage, location_name: "HealthScoreThreshold"))
     GetHealthEventOutput.struct_class = Types::GetHealthEventOutput
 
     GetMonitorInput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "MonitorName"))
@@ -146,6 +150,7 @@ module Aws::InternetMonitor
     GetMonitorOutput.add_member(:max_city_networks_to_monitor, Shapes::ShapeRef.new(shape: MaxCityNetworksToMonitor, location_name: "MaxCityNetworksToMonitor"))
     GetMonitorOutput.add_member(:internet_measurements_log_delivery, Shapes::ShapeRef.new(shape: InternetMeasurementsLogDelivery, location_name: "InternetMeasurementsLogDelivery"))
     GetMonitorOutput.add_member(:traffic_percentage_to_monitor, Shapes::ShapeRef.new(shape: TrafficPercentageToMonitor, location_name: "TrafficPercentageToMonitor"))
+    GetMonitorOutput.add_member(:health_events_config, Shapes::ShapeRef.new(shape: HealthEventsConfig, location_name: "HealthEventsConfig"))
     GetMonitorOutput.struct_class = Types::GetMonitorOutput
 
     HealthEvent.add_member(:event_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "EventArn"))
@@ -158,9 +163,14 @@ module Aws::InternetMonitor
     HealthEvent.add_member(:status, Shapes::ShapeRef.new(shape: HealthEventStatus, required: true, location_name: "Status"))
     HealthEvent.add_member(:percent_of_total_traffic_impacted, Shapes::ShapeRef.new(shape: Double, location_name: "PercentOfTotalTrafficImpacted"))
     HealthEvent.add_member(:impact_type, Shapes::ShapeRef.new(shape: HealthEventImpactType, required: true, location_name: "ImpactType"))
+    HealthEvent.add_member(:health_score_threshold, Shapes::ShapeRef.new(shape: Percentage, location_name: "HealthScoreThreshold"))
     HealthEvent.struct_class = Types::HealthEvent
 
     HealthEventList.member = Shapes::ShapeRef.new(shape: HealthEvent)
+
+    HealthEventsConfig.add_member(:availability_score_threshold, Shapes::ShapeRef.new(shape: Percentage, location_name: "AvailabilityScoreThreshold"))
+    HealthEventsConfig.add_member(:performance_score_threshold, Shapes::ShapeRef.new(shape: Percentage, location_name: "PerformanceScoreThreshold"))
+    HealthEventsConfig.struct_class = Types::HealthEventsConfig
 
     ImpactedLocation.add_member(:as_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ASName"))
     ImpactedLocation.add_member(:as_number, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "ASNumber"))
@@ -297,6 +307,7 @@ module Aws::InternetMonitor
     UpdateMonitorInput.add_member(:max_city_networks_to_monitor, Shapes::ShapeRef.new(shape: MaxCityNetworksToMonitor, location_name: "MaxCityNetworksToMonitor"))
     UpdateMonitorInput.add_member(:internet_measurements_log_delivery, Shapes::ShapeRef.new(shape: InternetMeasurementsLogDelivery, location_name: "InternetMeasurementsLogDelivery"))
     UpdateMonitorInput.add_member(:traffic_percentage_to_monitor, Shapes::ShapeRef.new(shape: TrafficPercentageToMonitor, location_name: "TrafficPercentageToMonitor"))
+    UpdateMonitorInput.add_member(:health_events_config, Shapes::ShapeRef.new(shape: HealthEventsConfig, location_name: "HealthEventsConfig"))
     UpdateMonitorInput.struct_class = Types::UpdateMonitorInput
 
     UpdateMonitorOutput.add_member(:monitor_arn, Shapes::ShapeRef.new(shape: MonitorArn, required: true, location_name: "MonitorArn"))

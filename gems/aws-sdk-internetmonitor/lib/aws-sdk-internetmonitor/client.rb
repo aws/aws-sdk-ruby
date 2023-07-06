@@ -448,6 +448,13 @@ module Aws::InternetMonitor
     #   The percentage of the internet-facing traffic for your application
     #   that you want to monitor with this monitor.
     #
+    # @option params [Types::HealthEventsConfig] :health_events_config
+    #   Defines the health event threshold percentages, for performance score
+    #   and availability score. Internet Monitor creates a health event when
+    #   there's an internet issue that affects your application end users
+    #   where a health score percentage is at or below a set threshold. If you
+    #   don't set a health event threshold, the default calue is 95%.
+    #
     # @return [Types::CreateMonitorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMonitorOutput#arn #arn} => String
@@ -471,6 +478,10 @@ module Aws::InternetMonitor
     #       },
     #     },
     #     traffic_percentage_to_monitor: 1,
+    #     health_events_config: {
+    #       availability_score_threshold: 1.0,
+    #       performance_score_threshold: 1.0,
+    #     },
     #   })
     #
     # @example Response structure
@@ -541,6 +552,7 @@ module Aws::InternetMonitor
     #   * {Types::GetHealthEventOutput#status #status} => String
     #   * {Types::GetHealthEventOutput#percent_of_total_traffic_impacted #percent_of_total_traffic_impacted} => Float
     #   * {Types::GetHealthEventOutput#impact_type #impact_type} => String
+    #   * {Types::GetHealthEventOutput#health_score_threshold #health_score_threshold} => Float
     #
     # @example Request syntax with placeholder values
     #
@@ -589,6 +601,7 @@ module Aws::InternetMonitor
     #   resp.status #=> String, one of "ACTIVE", "RESOLVED"
     #   resp.percent_of_total_traffic_impacted #=> Float
     #   resp.impact_type #=> String, one of "AVAILABILITY", "PERFORMANCE"
+    #   resp.health_score_threshold #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/GetHealthEvent AWS API Documentation
     #
@@ -621,6 +634,7 @@ module Aws::InternetMonitor
     #   * {Types::GetMonitorOutput#max_city_networks_to_monitor #max_city_networks_to_monitor} => Integer
     #   * {Types::GetMonitorOutput#internet_measurements_log_delivery #internet_measurements_log_delivery} => Types::InternetMeasurementsLogDelivery
     #   * {Types::GetMonitorOutput#traffic_percentage_to_monitor #traffic_percentage_to_monitor} => Integer
+    #   * {Types::GetMonitorOutput#health_events_config #health_events_config} => Types::HealthEventsConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -646,6 +660,8 @@ module Aws::InternetMonitor
     #   resp.internet_measurements_log_delivery.s3_config.bucket_prefix #=> String
     #   resp.internet_measurements_log_delivery.s3_config.log_delivery_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.traffic_percentage_to_monitor #=> Integer
+    #   resp.health_events_config.availability_score_threshold #=> Float
+    #   resp.health_events_config.performance_score_threshold #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/GetMonitor AWS API Documentation
     #
@@ -746,6 +762,7 @@ module Aws::InternetMonitor
     #   resp.health_events[0].status #=> String, one of "ACTIVE", "RESOLVED"
     #   resp.health_events[0].percent_of_total_traffic_impacted #=> Float
     #   resp.health_events[0].impact_type #=> String, one of "AVAILABILITY", "PERFORMANCE"
+    #   resp.health_events[0].health_score_threshold #=> Float
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/ListHealthEvents AWS API Documentation
@@ -966,6 +983,12 @@ module Aws::InternetMonitor
     #   The percentage of the internet-facing traffic for your application
     #   that you want to monitor with this monitor.
     #
+    # @option params [Types::HealthEventsConfig] :health_events_config
+    #   The list of health event thresholds. A health event threshold
+    #   percentage, for performance and availability, determines when Internet
+    #   Monitor creates a health event when there's an internet issue that
+    #   affects your application end users.
+    #
     # @return [Types::UpdateMonitorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateMonitorOutput#monitor_arn #monitor_arn} => String
@@ -988,6 +1011,10 @@ module Aws::InternetMonitor
     #       },
     #     },
     #     traffic_percentage_to_monitor: 1,
+    #     health_events_config: {
+    #       availability_score_threshold: 1.0,
+    #       performance_score_threshold: 1.0,
+    #     },
     #   })
     #
     # @example Response structure
@@ -1017,7 +1044,7 @@ module Aws::InternetMonitor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-internetmonitor'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

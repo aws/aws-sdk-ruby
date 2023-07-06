@@ -1890,6 +1890,7 @@ module Aws::Pinpoint
     #           },
     #         ],
     #       },
+    #       timezone_estimation_methods: ["PHONE_NUMBER"], # accepts PHONE_NUMBER, POSTAL_CODE
     #     },
     #   })
     #
@@ -2117,6 +2118,8 @@ module Aws::Pinpoint
     #   resp.journey_response.closed_days.custom[0].name #=> String
     #   resp.journey_response.closed_days.custom[0].start_date_time #=> String
     #   resp.journey_response.closed_days.custom[0].end_date_time #=> String
+    #   resp.journey_response.timezone_estimation_methods #=> Array
+    #   resp.journey_response.timezone_estimation_methods[0] #=> String, one of "PHONE_NUMBER", "POSTAL_CODE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateJourney AWS API Documentation
     #
@@ -3721,6 +3724,8 @@ module Aws::Pinpoint
     #   resp.journey_response.closed_days.custom[0].name #=> String
     #   resp.journey_response.closed_days.custom[0].start_date_time #=> String
     #   resp.journey_response.closed_days.custom[0].end_date_time #=> String
+    #   resp.journey_response.timezone_estimation_methods #=> Array
+    #   resp.journey_response.timezone_estimation_methods[0] #=> String, one of "PHONE_NUMBER", "POSTAL_CODE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteJourney AWS API Documentation
     #
@@ -6873,6 +6878,8 @@ module Aws::Pinpoint
     #   resp.journey_response.closed_days.custom[0].name #=> String
     #   resp.journey_response.closed_days.custom[0].start_date_time #=> String
     #   resp.journey_response.closed_days.custom[0].end_date_time #=> String
+    #   resp.journey_response.timezone_estimation_methods #=> Array
+    #   resp.journey_response.timezone_estimation_methods[0] #=> String, one of "PHONE_NUMBER", "POSTAL_CODE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetJourney AWS API Documentation
     #
@@ -8536,6 +8543,8 @@ module Aws::Pinpoint
     #   resp.journeys_response.item[0].closed_days.custom[0].name #=> String
     #   resp.journeys_response.item[0].closed_days.custom[0].start_date_time #=> String
     #   resp.journeys_response.item[0].closed_days.custom[0].end_date_time #=> String
+    #   resp.journeys_response.item[0].timezone_estimation_methods #=> Array
+    #   resp.journeys_response.item[0].timezone_estimation_methods[0] #=> String, one of "PHONE_NUMBER", "POSTAL_CODE"
     #   resp.journeys_response.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ListJourneys AWS API Documentation
@@ -11505,6 +11514,7 @@ module Aws::Pinpoint
     #           },
     #         ],
     #       },
+    #       timezone_estimation_methods: ["PHONE_NUMBER"], # accepts PHONE_NUMBER, POSTAL_CODE
     #     },
     #   })
     #
@@ -11732,6 +11742,8 @@ module Aws::Pinpoint
     #   resp.journey_response.closed_days.custom[0].name #=> String
     #   resp.journey_response.closed_days.custom[0].start_date_time #=> String
     #   resp.journey_response.closed_days.custom[0].end_date_time #=> String
+    #   resp.journey_response.timezone_estimation_methods #=> Array
+    #   resp.journey_response.timezone_estimation_methods[0] #=> String, one of "PHONE_NUMBER", "POSTAL_CODE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateJourney AWS API Documentation
     #
@@ -11989,6 +12001,8 @@ module Aws::Pinpoint
     #   resp.journey_response.closed_days.custom[0].name #=> String
     #   resp.journey_response.closed_days.custom[0].start_date_time #=> String
     #   resp.journey_response.closed_days.custom[0].end_date_time #=> String
+    #   resp.journey_response.timezone_estimation_methods #=> Array
+    #   resp.journey_response.timezone_estimation_methods[0] #=> String, one of "PHONE_NUMBER", "POSTAL_CODE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateJourneyState AWS API Documentation
     #
@@ -12717,7 +12731,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

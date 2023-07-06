@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.167.0 (2023-06-27)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-appfabric` gem.
+
 3.166.0 (2023-06-13)
 ------------------
 

@@ -2494,6 +2494,65 @@ module Aws::EMR
       req.send_request(options)
     end
 
+    # A list of the instance types that Amazon EMR supports. You can filter
+    # the list by Amazon Web Services Region and Amazon EMR release.
+    #
+    # @option params [required, String] :release_label
+    #   The Amazon EMR release label determines the [versions of open-source
+    #   application packages][1] that Amazon EMR has installed on the cluster.
+    #   Release labels are in the format `emr-x.x.x`, where x.x.x is an Amazon
+    #   EMR release number such as `emr-6.10.0`. For more information about
+    #   Amazon EMR releases and their included application versions and
+    #   features, see the <i> <a
+    #   href="https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-components.html">Amazon
+    #   EMR Release Guide</a> </i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-app-versions-6.x.html
+    #
+    # @option params [String] :marker
+    #   The pagination token that marks the next set of results to retrieve.
+    #
+    # @return [Types::ListSupportedInstanceTypesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSupportedInstanceTypesOutput#supported_instance_types #supported_instance_types} => Array&lt;Types::SupportedInstanceType&gt;
+    #   * {Types::ListSupportedInstanceTypesOutput#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_supported_instance_types({
+    #     release_label: "String", # required
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.supported_instance_types #=> Array
+    #   resp.supported_instance_types[0].type #=> String
+    #   resp.supported_instance_types[0].memory_gb #=> Float
+    #   resp.supported_instance_types[0].storage_gb #=> Integer
+    #   resp.supported_instance_types[0].vcpu #=> Integer
+    #   resp.supported_instance_types[0].is_64_bits_only #=> Boolean
+    #   resp.supported_instance_types[0].instance_family_id #=> String
+    #   resp.supported_instance_types[0].ebs_optimized_available #=> Boolean
+    #   resp.supported_instance_types[0].ebs_optimized_by_default #=> Boolean
+    #   resp.supported_instance_types[0].number_of_disks #=> Integer
+    #   resp.supported_instance_types[0].ebs_storage_only #=> Boolean
+    #   resp.supported_instance_types[0].architecture #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListSupportedInstanceTypes AWS API Documentation
+    #
+    # @overload list_supported_instance_types(params = {})
+    # @param [Hash] params ({})
+    def list_supported_instance_types(params = {}, options = {})
+      req = build_request(:list_supported_instance_types, params)
+      req.send_request(options)
+    end
+
     # Modifies the number of steps that can be executed concurrently for the
     # cluster specified using ClusterID.
     #
@@ -3931,7 +3990,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

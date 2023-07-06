@@ -110,6 +110,8 @@ module Aws::EC2
     ArchitectureTypeSet = Shapes::ListShape.new(name: 'ArchitectureTypeSet')
     ArchitectureValues = Shapes::StringShape.new(name: 'ArchitectureValues')
     ArnList = Shapes::ListShape.new(name: 'ArnList')
+    AssetId = Shapes::StringShape.new(name: 'AssetId')
+    AssetIdList = Shapes::ListShape.new(name: 'AssetIdList')
     AssignIpv6AddressesRequest = Shapes::StructureShape.new(name: 'AssignIpv6AddressesRequest')
     AssignIpv6AddressesResult = Shapes::StructureShape.new(name: 'AssignIpv6AddressesResult')
     AssignPrivateIpAddressesRequest = Shapes::StructureShape.new(name: 'AssignPrivateIpAddressesRequest')
@@ -185,6 +187,7 @@ module Aws::EC2
     AutoPlacement = Shapes::StringShape.new(name: 'AutoPlacement')
     AutoRecoveryFlag = Shapes::BooleanShape.new(name: 'AutoRecoveryFlag')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
+    AvailabilityZoneId = Shapes::StringShape.new(name: 'AvailabilityZoneId')
     AvailabilityZoneList = Shapes::ListShape.new(name: 'AvailabilityZoneList')
     AvailabilityZoneMessage = Shapes::StructureShape.new(name: 'AvailabilityZoneMessage')
     AvailabilityZoneMessageList = Shapes::ListShape.new(name: 'AvailabilityZoneMessageList')
@@ -3017,6 +3020,8 @@ module Aws::EC2
     WithdrawByoipCidrResult = Shapes::StructureShape.new(name: 'WithdrawByoipCidrResult')
     ZoneIdStringList = Shapes::ListShape.new(name: 'ZoneIdStringList')
     ZoneNameStringList = Shapes::ListShape.new(name: 'ZoneNameStringList')
+    customerGatewayConfiguration = Shapes::StringShape.new(name: 'customerGatewayConfiguration')
+    preSharedKey = Shapes::StringShape.new(name: 'preSharedKey')
     scope = Shapes::StringShape.new(name: 'scope')
     snapshotTierStatusSet = Shapes::ListShape.new(name: 'snapshotTierStatusSet')
     totalFpgaMemory = Shapes::IntegerShape.new(name: 'totalFpgaMemory')
@@ -3239,11 +3244,12 @@ module Aws::EC2
     AllocateHostsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
     AllocateHostsRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
     AllocateHostsRequest.add_member(:instance_family, Shapes::ShapeRef.new(shape: String, location_name: "InstanceFamily"))
-    AllocateHostsRequest.add_member(:quantity, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "quantity"))
+    AllocateHostsRequest.add_member(:quantity, Shapes::ShapeRef.new(shape: Integer, location_name: "quantity"))
     AllocateHostsRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     AllocateHostsRequest.add_member(:host_recovery, Shapes::ShapeRef.new(shape: HostRecovery, location_name: "HostRecovery"))
     AllocateHostsRequest.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "OutpostArn"))
     AllocateHostsRequest.add_member(:host_maintenance, Shapes::ShapeRef.new(shape: HostMaintenance, location_name: "HostMaintenance"))
+    AllocateHostsRequest.add_member(:asset_ids, Shapes::ShapeRef.new(shape: AssetIdList, location_name: "AssetId"))
     AllocateHostsRequest.struct_class = Types::AllocateHostsRequest
 
     AllocateHostsResult.add_member(:host_ids, Shapes::ShapeRef.new(shape: ResponseHostIdList, location_name: "hostIdSet"))
@@ -3353,6 +3359,8 @@ module Aws::EC2
     ArchitectureTypeSet.member = Shapes::ShapeRef.new(shape: ArchitectureType, location_name: "item")
 
     ArnList.member = Shapes::ShapeRef.new(shape: ResourceArn, location_name: "item")
+
+    AssetIdList.member = Shapes::ShapeRef.new(shape: AssetId)
 
     AssignIpv6AddressesRequest.add_member(:ipv_6_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "ipv6AddressCount"))
     AssignIpv6AddressesRequest.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: Ipv6AddressList, location_name: "ipv6Addresses"))
@@ -4284,8 +4292,8 @@ module Aws::EC2
     CreateCapacityReservationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
     CreateCapacityReservationRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceType"))
     CreateCapacityReservationRequest.add_member(:instance_platform, Shapes::ShapeRef.new(shape: CapacityReservationInstancePlatform, required: true, location_name: "InstancePlatform"))
-    CreateCapacityReservationRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
-    CreateCapacityReservationRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZoneId"))
+    CreateCapacityReservationRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneName, location_name: "AvailabilityZone"))
+    CreateCapacityReservationRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
     CreateCapacityReservationRequest.add_member(:tenancy, Shapes::ShapeRef.new(shape: CapacityReservationTenancy, location_name: "Tenancy"))
     CreateCapacityReservationRequest.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "InstanceCount"))
     CreateCapacityReservationRequest.add_member(:ebs_optimized, Shapes::ShapeRef.new(shape: Boolean, location_name: "EbsOptimized"))
@@ -9066,6 +9074,7 @@ module Aws::EC2
     Host.add_member(:member_of_service_linked_resource_group, Shapes::ShapeRef.new(shape: Boolean, location_name: "memberOfServiceLinkedResourceGroup"))
     Host.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "outpostArn"))
     Host.add_member(:host_maintenance, Shapes::ShapeRef.new(shape: HostMaintenance, location_name: "hostMaintenance"))
+    Host.add_member(:asset_id, Shapes::ShapeRef.new(shape: AssetId, location_name: "assetId"))
     Host.struct_class = Types::Host
 
     HostInstance.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
@@ -11422,7 +11431,7 @@ module Aws::EC2
 
     ModifyVpnTunnelOptionsSpecification.add_member(:tunnel_inside_cidr, Shapes::ShapeRef.new(shape: String, location_name: "TunnelInsideCidr"))
     ModifyVpnTunnelOptionsSpecification.add_member(:tunnel_inside_ipv_6_cidr, Shapes::ShapeRef.new(shape: String, location_name: "TunnelInsideIpv6Cidr"))
-    ModifyVpnTunnelOptionsSpecification.add_member(:pre_shared_key, Shapes::ShapeRef.new(shape: String, location_name: "PreSharedKey"))
+    ModifyVpnTunnelOptionsSpecification.add_member(:pre_shared_key, Shapes::ShapeRef.new(shape: preSharedKey, location_name: "PreSharedKey"))
     ModifyVpnTunnelOptionsSpecification.add_member(:phase_1_lifetime_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "Phase1LifetimeSeconds"))
     ModifyVpnTunnelOptionsSpecification.add_member(:phase_2_lifetime_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "Phase2LifetimeSeconds"))
     ModifyVpnTunnelOptionsSpecification.add_member(:rekey_margin_time_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "RekeyMarginTimeSeconds"))
@@ -14281,7 +14290,7 @@ module Aws::EC2
     TunnelOption.add_member(:outside_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "outsideIpAddress"))
     TunnelOption.add_member(:tunnel_inside_cidr, Shapes::ShapeRef.new(shape: String, location_name: "tunnelInsideCidr"))
     TunnelOption.add_member(:tunnel_inside_ipv_6_cidr, Shapes::ShapeRef.new(shape: String, location_name: "tunnelInsideIpv6Cidr"))
-    TunnelOption.add_member(:pre_shared_key, Shapes::ShapeRef.new(shape: String, location_name: "preSharedKey"))
+    TunnelOption.add_member(:pre_shared_key, Shapes::ShapeRef.new(shape: preSharedKey, location_name: "preSharedKey"))
     TunnelOption.add_member(:phase_1_lifetime_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "phase1LifetimeSeconds"))
     TunnelOption.add_member(:phase_2_lifetime_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "phase2LifetimeSeconds"))
     TunnelOption.add_member(:rekey_margin_time_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "rekeyMarginTimeSeconds"))
@@ -14530,6 +14539,8 @@ module Aws::EC2
     VerifiedAccessLogOptions.add_member(:s3, Shapes::ShapeRef.new(shape: VerifiedAccessLogS3DestinationOptions, location_name: "S3"))
     VerifiedAccessLogOptions.add_member(:cloud_watch_logs, Shapes::ShapeRef.new(shape: VerifiedAccessLogCloudWatchLogsDestinationOptions, location_name: "CloudWatchLogs"))
     VerifiedAccessLogOptions.add_member(:kinesis_data_firehose, Shapes::ShapeRef.new(shape: VerifiedAccessLogKinesisDataFirehoseDestinationOptions, location_name: "KinesisDataFirehose"))
+    VerifiedAccessLogOptions.add_member(:log_version, Shapes::ShapeRef.new(shape: String, location_name: "LogVersion"))
+    VerifiedAccessLogOptions.add_member(:include_trust_context, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeTrustContext"))
     VerifiedAccessLogOptions.struct_class = Types::VerifiedAccessLogOptions
 
     VerifiedAccessLogS3Destination.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
@@ -14548,6 +14559,8 @@ module Aws::EC2
     VerifiedAccessLogs.add_member(:s3, Shapes::ShapeRef.new(shape: VerifiedAccessLogS3Destination, location_name: "s3"))
     VerifiedAccessLogs.add_member(:cloud_watch_logs, Shapes::ShapeRef.new(shape: VerifiedAccessLogCloudWatchLogsDestination, location_name: "cloudWatchLogs"))
     VerifiedAccessLogs.add_member(:kinesis_data_firehose, Shapes::ShapeRef.new(shape: VerifiedAccessLogKinesisDataFirehoseDestination, location_name: "kinesisDataFirehose"))
+    VerifiedAccessLogs.add_member(:log_version, Shapes::ShapeRef.new(shape: String, location_name: "logVersion"))
+    VerifiedAccessLogs.add_member(:include_trust_context, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeTrustContext"))
     VerifiedAccessLogs.struct_class = Types::VerifiedAccessLogs
 
     VerifiedAccessTrustProvider.add_member(:verified_access_trust_provider_id, Shapes::ShapeRef.new(shape: String, location_name: "verifiedAccessTrustProviderId"))
@@ -14821,7 +14834,7 @@ module Aws::EC2
     VpcPeeringConnectionVpcInfo.add_member(:region, Shapes::ShapeRef.new(shape: String, location_name: "region"))
     VpcPeeringConnectionVpcInfo.struct_class = Types::VpcPeeringConnectionVpcInfo
 
-    VpnConnection.add_member(:customer_gateway_configuration, Shapes::ShapeRef.new(shape: String, location_name: "customerGatewayConfiguration"))
+    VpnConnection.add_member(:customer_gateway_configuration, Shapes::ShapeRef.new(shape: customerGatewayConfiguration, location_name: "customerGatewayConfiguration"))
     VpnConnection.add_member(:customer_gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "customerGatewayId"))
     VpnConnection.add_member(:category, Shapes::ShapeRef.new(shape: String, location_name: "category"))
     VpnConnection.add_member(:state, Shapes::ShapeRef.new(shape: VpnState, location_name: "state"))
@@ -14902,7 +14915,7 @@ module Aws::EC2
 
     VpnTunnelOptionsSpecification.add_member(:tunnel_inside_cidr, Shapes::ShapeRef.new(shape: String, location_name: "TunnelInsideCidr"))
     VpnTunnelOptionsSpecification.add_member(:tunnel_inside_ipv_6_cidr, Shapes::ShapeRef.new(shape: String, location_name: "TunnelInsideIpv6Cidr"))
-    VpnTunnelOptionsSpecification.add_member(:pre_shared_key, Shapes::ShapeRef.new(shape: String, location_name: "PreSharedKey"))
+    VpnTunnelOptionsSpecification.add_member(:pre_shared_key, Shapes::ShapeRef.new(shape: preSharedKey, location_name: "PreSharedKey"))
     VpnTunnelOptionsSpecification.add_member(:phase_1_lifetime_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "Phase1LifetimeSeconds"))
     VpnTunnelOptionsSpecification.add_member(:phase_2_lifetime_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "Phase2LifetimeSeconds"))
     VpnTunnelOptionsSpecification.add_member(:rekey_margin_time_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "RekeyMarginTimeSeconds"))

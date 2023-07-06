@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2023-06-30)
+------------------
+
+* Feature - Corrects the HTTP response code in the generated docs for PutMetadata and DeleteRecordingConfiguration APIs.
+
+1.34.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2023-06-27)
+------------------
+
+* Feature - IVS customers can now revoke the viewer session associated with an auth token, to prevent and stop playback using that token.
+
 1.32.0 (2023-06-15)
 ------------------
 

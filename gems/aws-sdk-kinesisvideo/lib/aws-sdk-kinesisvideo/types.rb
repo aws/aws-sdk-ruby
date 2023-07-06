@@ -217,7 +217,7 @@ module Aws::KinesisVideo
     #   Video Streams to use to encrypt stream data.
     #
     #   If no key ID is specified, the default, Kinesis Video-managed key
-    #   (`aws/kinesisvideo`) is used.
+    #   (`Amazon Web Services/kinesisvideo`) is used.
     #
     #   For more information, see [DescribeKey][1].
     #
@@ -270,6 +270,29 @@ module Aws::KinesisVideo
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] stream_name
+    #   The name of the stream from which to delete the edge configuration.
+    #   Specify either the `StreamName` or the `StreamARN`.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_arn
+    #   The Amazon Resource Name (ARN) of the stream. Specify either the
+    #   `StreamName` or the `StreamARN`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DeleteEdgeConfigurationInput AWS API Documentation
+    #
+    class DeleteEdgeConfigurationInput < Struct.new(
+      :stream_name,
+      :stream_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DeleteEdgeConfigurationOutput AWS API Documentation
+    #
+    class DeleteEdgeConfigurationOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] channel_arn
     #   The Amazon Resource Name (ARN) of the signaling channel that you
@@ -349,7 +372,7 @@ module Aws::KinesisVideo
     #
     #   Since the default value is set to `true`, configure the uploader
     #   schedule such that the media files are not being deleted before they
-    #   are initially uploaded to AWS cloud.
+    #   are initially uploaded to the Amazon Web Services cloud.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DeletionConfig AWS API Documentation
@@ -414,6 +437,12 @@ module Aws::KinesisVideo
     #   component will run on an IoT Hub Device setup at your premise.
     #   @return [Types::EdgeConfig]
     #
+    # @!attribute [rw] edge_agent_status
+    #   An object that contains the latest status details for an edge
+    #   agent's recorder and uploader jobs. Use this information to
+    #   determine the current health of an edge agent.
+    #   @return [Types::EdgeAgentStatus]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DescribeEdgeConfigurationOutput AWS API Documentation
     #
     class DescribeEdgeConfigurationOutput < Struct.new(
@@ -423,7 +452,8 @@ module Aws::KinesisVideo
       :last_updated_time,
       :sync_status,
       :failed_status_details,
-      :edge_config)
+      :edge_config,
+      :edge_agent_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -647,6 +677,27 @@ module Aws::KinesisVideo
       include Aws::Structure
     end
 
+    # An object that contains the latest status details for an edge agent's
+    # recorder and uploader jobs. Use this information to determine the
+    # current health of an edge agent.
+    #
+    # @!attribute [rw] last_recorder_status
+    #   The latest status of a stream’s edge recording job.
+    #   @return [Types::LastRecorderStatus]
+    #
+    # @!attribute [rw] last_uploader_status
+    #   The latest status of a stream’s edge to cloud uploader job.
+    #   @return [Types::LastUploaderStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/EdgeAgentStatus AWS API Documentation
+    #
+    class EdgeAgentStatus < Struct.new(
+      :last_recorder_status,
+      :last_uploader_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A description of the stream's edge configuration that will be used to
     # sync with the Edge Agent IoT Greengrass component. The Edge Agent
     # component will run on an IoT Hub Device setup at your premise.
@@ -841,9 +892,9 @@ module Aws::KinesisVideo
     #   @return [String]
     #
     # @!attribute [rw] destination_region
-    #   The AWS Region of the S3 bucket where images will be delivered. This
-    #   `DestinationRegion` must match the Region where the stream is
-    #   located.
+    #   The Amazon Web Services Region of the S3 bucket where images will be
+    #   delivered. This `DestinationRegion` must match the Region where the
+    #   stream is located.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ImageGenerationDestinationConfig AWS API Documentation
@@ -890,6 +941,157 @@ module Aws::KinesisVideo
     #
     class InvalidResourceFormatException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The latest status of a stream's edge recording job.
+    #
+    # @!attribute [rw] job_status_details
+    #   A description of a recorder job’s latest status.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_collected_time
+    #   The timestamp at which the recorder job was last executed and media
+    #   stored to local disk.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The timestamp at which the recorder status was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] recorder_status
+    #   The status of the latest recorder job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/LastRecorderStatus AWS API Documentation
+    #
+    class LastRecorderStatus < Struct.new(
+      :job_status_details,
+      :last_collected_time,
+      :last_updated_time,
+      :recorder_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The latest status of a stream’s edge to cloud uploader job.
+    #
+    # @!attribute [rw] job_status_details
+    #   A description of an uploader job’s latest status.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_collected_time
+    #   The timestamp at which the uploader job was last executed and media
+    #   collected to the cloud.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The timestamp at which the uploader status was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] uploader_status
+    #   The status of the latest uploader job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/LastUploaderStatus AWS API Documentation
+    #
+    class LastUploaderStatus < Struct.new(
+      :job_status_details,
+      :last_collected_time,
+      :last_updated_time,
+      :uploader_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A description of a single stream's edge configuration.
+    #
+    # @!attribute [rw] stream_name
+    #   The name of the stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_arn
+    #   The Amazon Resource Name (ARN) of the stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp when the stream first created the edge config.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The timestamp when the stream last updated the edge config.
+    #   @return [Time]
+    #
+    # @!attribute [rw] sync_status
+    #   The current sync status of the stream's edge configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] failed_status_details
+    #   A description of the generated failure status.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_config
+    #   A description of the stream's edge configuration that will be used
+    #   to sync with the Edge Agent IoT Greengrass component. The Edge Agent
+    #   component will run on an IoT Hub Device setup at your premise.
+    #   @return [Types::EdgeConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ListEdgeAgentConfigurationsEdgeConfig AWS API Documentation
+    #
+    class ListEdgeAgentConfigurationsEdgeConfig < Struct.new(
+      :stream_name,
+      :stream_arn,
+      :creation_time,
+      :last_updated_time,
+      :sync_status,
+      :failed_status_details,
+      :edge_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hub_device_arn
+    #   The "Internet of Things (IoT) Thing" Arn of the edge agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of edge configurations to return in the response.
+    #   The default is 5.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If you specify this parameter, when the result of a
+    #   `ListEdgeAgentConfigurations` operation is truncated, the call
+    #   returns the `NextToken` in the response. To get another batch of
+    #   edge configurations, provide this token in your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ListEdgeAgentConfigurationsInput AWS API Documentation
+    #
+    class ListEdgeAgentConfigurationsInput < Struct.new(
+      :hub_device_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] edge_configs
+    #   A description of a single stream's edge configuration.
+    #   @return [Array<Types::ListEdgeAgentConfigurationsEdgeConfig>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, the call returns this element with a
+    #   given token. To get the next batch of edge configurations, use this
+    #   token in your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ListEdgeAgentConfigurationsOutput AWS API Documentation
+    #
+    class ListEdgeAgentConfigurationsOutput < Struct.new(
+      :edge_configs,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1124,8 +1326,8 @@ module Aws::KinesisVideo
     # that are streamed to the camera.
     #
     # @!attribute [rw] media_uri_secret_arn
-    #   The AWS Secrets Manager ARN for the username and password of the
-    #   camera, or a local media file location.
+    #   The Amazon Web Services Secrets Manager ARN for the username and
+    #   password of the camera, or a local media file location.
     #   @return [String]
     #
     # @!attribute [rw] media_uri_type
@@ -1260,6 +1462,8 @@ module Aws::KinesisVideo
     # An object that describes the endpoint of the signaling channel
     # returned by the `GetSignalingChannelEndpoint` API.
     #
+    # The media server endpoint will correspond to the `WEBRTC` Protocol.
+    #
     # @!attribute [rw] protocol
     #   The protocol of the signaling channel returned by the
     #   `GetSignalingChannelEndpoint` API.
@@ -1323,8 +1527,11 @@ module Aws::KinesisVideo
     # consists of the `ScheduleExpression` and the `DurationInMinutes`
     # attributes.
     #
-    # If the `ScheduleExpression` is not provided, then the Edge Agent will
-    # always be set to recording mode.
+    # If the `ScheduleConfig` is not provided in the `RecorderConfig`, then
+    # the Edge Agent will always be set to recording mode.
+    #
+    # If the `ScheduleConfig` is not provided in the `UploaderConfig`, then
+    # the Edge Agent will upload at regular intervals (every 1 hour).
     #
     # @!attribute [rw] schedule_expression
     #   The Quartz cron expression that takes care of scheduling jobs to
@@ -1919,17 +2126,17 @@ module Aws::KinesisVideo
     class UpdateStreamOutput < Aws::EmptyStructure; end
 
     # The configuration that consists of the `ScheduleExpression` and the
-    # `DurationInMinutesdetails`, that specify the scheduling to record from
+    # `DurationInMinutes` details that specify the scheduling to record from
     # a camera, or local media file, onto the Edge Agent. If the
-    # `ScheduleExpression` is not provided, then the Edge Agent will always
-    # be in upload mode.
+    # `ScheduleConfig` is not provided in the `UploaderConfig`, then the
+    # Edge Agent will upload at regular intervals (every 1 hour).
     #
     # @!attribute [rw] schedule_config
     #   The configuration that consists of the `ScheduleExpression` and the
-    #   `DurationInMinutes`details that specify the scheduling to record
+    #   `DurationInMinutes` details that specify the scheduling to record
     #   from a camera, or local media file, onto the Edge Agent. If the
-    #   `ScheduleExpression` is not provided, then the Edge Agent will
-    #   always be in recording mode.
+    #   `ScheduleConfig` is not provided in this `UploaderConfig`, then the
+    #   Edge Agent will upload at regular intervals (every 1 hour).
     #   @return [Types::ScheduleConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UploaderConfig AWS API Documentation

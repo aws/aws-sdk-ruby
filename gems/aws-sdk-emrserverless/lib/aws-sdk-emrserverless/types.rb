@@ -10,8 +10,8 @@
 module Aws::EMRServerless
   module Types
 
-    # Information about an application. EMR Serverless uses applications to
-    # run jobs.
+    # Information about an application. Amazon EMR Serverless uses
+    # applications to run jobs.
     #
     # @!attribute [rw] application_id
     #   The ID of the application.
@@ -26,7 +26,7 @@ module Aws::EMRServerless
     #   @return [String]
     #
     # @!attribute [rw] release_label
-    #   The EMR release associated with the application.
+    #   The Amazon EMR release associated with the application.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -131,7 +131,7 @@ module Aws::EMRServerless
     #   @return [String]
     #
     # @!attribute [rw] release_label
-    #   The EMR release associated with the application.
+    #   The Amazon EMR release associated with the application.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -316,7 +316,7 @@ module Aws::EMRServerless
     #   @return [String]
     #
     # @!attribute [rw] release_label
-    #   The EMR release associated with the application.
+    #   The Amazon EMR release associated with the application.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -644,8 +644,8 @@ module Aws::EMRServerless
     end
 
     # Information about a job run. A job run is a unit of work, such as a
-    # Spark JAR, Hive query, or SparkSQL query, that you submit to an EMR
-    # Serverless application.
+    # Spark JAR, Hive query, or SparkSQL query, that you submit to an Amazon
+    # EMR Serverless application.
     #
     # @!attribute [rw] application_id
     #   The ID of the application the job is running on.
@@ -688,8 +688,8 @@ module Aws::EMRServerless
     #   @return [String]
     #
     # @!attribute [rw] release_label
-    #   The EMR release associated with the application your job is running
-    #   on.
+    #   The Amazon EMR release associated with the application your job is
+    #   running on.
     #   @return [String]
     #
     # @!attribute [rw] configuration_overrides
@@ -728,11 +728,11 @@ module Aws::EMRServerless
     #   @return [Integer]
     #
     # @!attribute [rw] billed_resource_utilization
-    #   The aggregate vCPU, memory, and storage that AWS has billed for the
-    #   job run. The billed resources include a 1-minute minimum usage for
-    #   workers, plus additional storage over 20 GB per worker. Note that
-    #   billed resources do not include usage for idle pre-initialized
-    #   workers.
+    #   The aggregate vCPU, memory, and storage that Amazon Web Services has
+    #   billed for the job run. The billed resources include a 1-minute
+    #   minimum usage for workers, plus additional storage over 20 GB per
+    #   worker. Note that billed resources do not include usage for idle
+    #   pre-initialized workers.
     #   @return [Types::ResourceUtilization]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/JobRun AWS API Documentation
@@ -804,8 +804,8 @@ module Aws::EMRServerless
     #   @return [String]
     #
     # @!attribute [rw] release_label
-    #   The EMR release associated with the application your job is running
-    #   on.
+    #   The Amazon EMR release associated with the application your job is
+    #   running on.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -1380,6 +1380,11 @@ module Aws::EMRServerless
     #   `imageConfiguration` for all worker types.
     #   @return [Hash<String,Types::WorkerTypeSpecificationInput>]
     #
+    # @!attribute [rw] release_label
+    #   The Amazon EMR release label for the application. You can change the
+    #   release label to use a different release of Amazon EMR.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/UpdateApplicationRequest AWS API Documentation
     #
     class UpdateApplicationRequest < Struct.new(
@@ -1392,7 +1397,8 @@ module Aws::EMRServerless
       :network_configuration,
       :architecture,
       :image_configuration,
-      :worker_type_specifications)
+      :worker_type_specifications,
+      :release_label)
       SENSITIVE = []
       include Aws::Structure
     end

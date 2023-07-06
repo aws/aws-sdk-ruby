@@ -60,6 +60,8 @@ module Aws::Inspector2
             Aws::Inspector2::Endpoints::AssociateMember.build(context)
           when :batch_get_account_status
             Aws::Inspector2::Endpoints::BatchGetAccountStatus.build(context)
+          when :batch_get_code_snippet
+            Aws::Inspector2::Endpoints::BatchGetCodeSnippet.build(context)
           when :batch_get_free_trial_info
             Aws::Inspector2::Endpoints::BatchGetFreeTrialInfo.build(context)
           when :batch_get_member_ec2_deep_inspection_status
@@ -68,10 +70,14 @@ module Aws::Inspector2
             Aws::Inspector2::Endpoints::BatchUpdateMemberEc2DeepInspectionStatus.build(context)
           when :cancel_findings_report
             Aws::Inspector2::Endpoints::CancelFindingsReport.build(context)
+          when :cancel_sbom_export
+            Aws::Inspector2::Endpoints::CancelSbomExport.build(context)
           when :create_filter
             Aws::Inspector2::Endpoints::CreateFilter.build(context)
           when :create_findings_report
             Aws::Inspector2::Endpoints::CreateFindingsReport.build(context)
+          when :create_sbom_export
+            Aws::Inspector2::Endpoints::CreateSbomExport.build(context)
           when :delete_filter
             Aws::Inspector2::Endpoints::DeleteFilter.build(context)
           when :describe_organization_configuration
@@ -92,10 +98,14 @@ module Aws::Inspector2
             Aws::Inspector2::Endpoints::GetDelegatedAdminAccount.build(context)
           when :get_ec2_deep_inspection_configuration
             Aws::Inspector2::Endpoints::GetEc2DeepInspectionConfiguration.build(context)
+          when :get_encryption_key
+            Aws::Inspector2::Endpoints::GetEncryptionKey.build(context)
           when :get_findings_report_status
             Aws::Inspector2::Endpoints::GetFindingsReportStatus.build(context)
           when :get_member
             Aws::Inspector2::Endpoints::GetMember.build(context)
+          when :get_sbom_export
+            Aws::Inspector2::Endpoints::GetSbomExport.build(context)
           when :list_account_permissions
             Aws::Inspector2::Endpoints::ListAccountPermissions.build(context)
           when :list_coverage
@@ -116,6 +126,8 @@ module Aws::Inspector2
             Aws::Inspector2::Endpoints::ListTagsForResource.build(context)
           when :list_usage_totals
             Aws::Inspector2::Endpoints::ListUsageTotals.build(context)
+          when :reset_encryption_key
+            Aws::Inspector2::Endpoints::ResetEncryptionKey.build(context)
           when :search_vulnerabilities
             Aws::Inspector2::Endpoints::SearchVulnerabilities.build(context)
           when :tag_resource
@@ -126,6 +138,8 @@ module Aws::Inspector2
             Aws::Inspector2::Endpoints::UpdateConfiguration.build(context)
           when :update_ec2_deep_inspection_configuration
             Aws::Inspector2::Endpoints::UpdateEc2DeepInspectionConfiguration.build(context)
+          when :update_encryption_key
+            Aws::Inspector2::Endpoints::UpdateEncryptionKey.build(context)
           when :update_filter
             Aws::Inspector2::Endpoints::UpdateFilter.build(context)
           when :update_org_ec2_deep_inspection_configuration

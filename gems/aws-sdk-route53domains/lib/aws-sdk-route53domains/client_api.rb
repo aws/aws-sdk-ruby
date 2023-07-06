@@ -104,6 +104,7 @@ module Aws::Route53Domains
     ListOperationsRequest = Shapes::StructureShape.new(name: 'ListOperationsRequest')
     ListOperationsResponse = Shapes::StructureShape.new(name: 'ListOperationsResponse')
     ListOperationsSortAttributeName = Shapes::StringShape.new(name: 'ListOperationsSortAttributeName')
+    ListPricesPageMaxItems = Shapes::IntegerShape.new(name: 'ListPricesPageMaxItems')
     ListPricesRequest = Shapes::StructureShape.new(name: 'ListPricesRequest')
     ListPricesResponse = Shapes::StructureShape.new(name: 'ListPricesResponse')
     ListTagsForDomainRequest = Shapes::StructureShape.new(name: 'ListTagsForDomainRequest')
@@ -431,7 +432,7 @@ module Aws::Route53Domains
 
     ListPricesRequest.add_member(:tld, Shapes::ShapeRef.new(shape: TldName, location_name: "Tld"))
     ListPricesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: PageMarker, location_name: "Marker"))
-    ListPricesRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: PageMaxItems, location_name: "MaxItems"))
+    ListPricesRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: ListPricesPageMaxItems, location_name: "MaxItems"))
     ListPricesRequest.struct_class = Types::ListPricesRequest
 
     ListPricesResponse.add_member(:prices, Shapes::ShapeRef.new(shape: DomainPriceList, location_name: "Prices"))

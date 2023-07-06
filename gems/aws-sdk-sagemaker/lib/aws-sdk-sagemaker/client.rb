@@ -807,7 +807,7 @@ module Aws::SageMaker
     #           default_value: "HyperParameterValue",
     #         },
     #       ],
-    #       supported_training_instance_types: ["ml.m4.xlarge"], # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
+    #       supported_training_instance_types: ["ml.m4.xlarge"], # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge
     #       supports_distributed_training: false,
     #       metric_definitions: [
     #         {
@@ -896,15 +896,16 @@ module Aws::SageMaker
     #             output_data_config: { # required
     #               kms_key_id: "KmsKeyId",
     #               s3_output_path: "S3Uri", # required
+    #               compression_type: "GZIP", # accepts GZIP, NONE
     #             },
     #             resource_config: { # required
-    #               instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
+    #               instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge
     #               instance_count: 1,
     #               volume_size_in_gb: 1, # required
     #               volume_kms_key_id: "KmsKeyId",
     #               instance_groups: [
     #                 {
-    #                   instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
+    #                   instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge
     #                   instance_count: 1, # required
     #                   instance_group_name: "InstanceGroupName", # required
     #                 },
@@ -1184,18 +1185,32 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Creates an Autopilot job.
+    # Creates an Autopilot job also referred to as Autopilot experiment or
+    # AutoML job.
     #
-    # Find the best-performing model after you run an Autopilot job by
-    # calling [DescribeAutoMLJob][1].
+    # <note markdown="1"> We recommend using the new versions [CreateAutoMLJobV2][1] and
+    # [DescribeAutoMLJobV2][2], which offer backward compatibility.
     #
-    # For information about how to use Autopilot, see [Automate Model
-    # Development with Amazon SageMaker Autopilot][2].
+    #  `CreateAutoMLJobV2` can manage tabular problem types identical to
+    # those of its previous version `CreateAutoMLJob`, as well as
+    # non-tabular problem types such as image or text classification.
+    #
+    #  Find guidelines about how to migrate a `CreateAutoMLJob` to
+    # `CreateAutoMLJobV2` in [Migrate a CreateAutoMLJob to
+    # CreateAutoMLJobV2][3].
+    #
+    #  </note>
+    #
+    # You can find the best-performing model after you run an AutoML job by
+    # calling [DescribeAutoMLJobV2][2] (recommended) or
+    # [DescribeAutoMLJob][4].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html
-    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html
+    # [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment-api.html#autopilot-create-experiment-api-migrate-v1-v2
+    # [4]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html
     #
     # @option params [required, String] :auto_ml_job_name
     #   Identifies an Autopilot job. The name must be unique to your account
@@ -1229,15 +1244,13 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-problem-types
     #
     # @option params [Types::AutoMLJobObjective] :auto_ml_job_objective
-    #   Defines the objective metric used to measure the predictive quality of
-    #   an AutoML job. You provide an [AutoMLJobObjective$MetricName][1] and
-    #   Autopilot infers whether to minimize or maximize it. For
-    #   [CreateAutoMLJobV2][2], only `Accuracy` is supported.
+    #   Specifies a metric to minimize or maximize as the objective of a job.
+    #   If not specified, the default objective metric depends on the problem
+    #   type. See [AutoMLJobObjective][1] for the default values.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html
-    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html
     #
     # @option params [Types::AutoMLJobConfig] :auto_ml_job_config
     #   A collection of settings used to configure an AutoML job.
@@ -1294,7 +1307,7 @@ module Aws::SageMaker
     #     },
     #     problem_type: "BinaryClassification", # accepts BinaryClassification, MulticlassClassification, Regression
     #     auto_ml_job_objective: {
-    #       metric_name: "Accuracy", # required, accepts Accuracy, MSE, F1, F1macro, AUC, RMSE, MAE, R2, BalancedAccuracy, Precision, PrecisionMacro, Recall, RecallMacro
+    #       metric_name: "Accuracy", # required, accepts Accuracy, MSE, F1, F1macro, AUC, RMSE, MAE, R2, BalancedAccuracy, Precision, PrecisionMacro, Recall, RecallMacro, MAPE, MASE, WAPE, AverageWeightedQuantileLoss
     #     },
     #     auto_ml_job_config: {
     #       completion_criteria: {
@@ -1350,24 +1363,37 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Creates an Amazon SageMaker AutoML job that uses non-tabular data such
-    # as images or text for Computer Vision or Natural Language Processing
-    # problems.
+    # Creates an Autopilot job also referred to as Autopilot experiment or
+    # AutoML job V2.
     #
-    # Find the resulting model after you run an AutoML job V2 by calling
-    # [DescribeAutoMLJobV2][1].
+    # <note markdown="1"> [CreateAutoMLJobV2][1] and [DescribeAutoMLJobV2][2] are new versions
+    # of [CreateAutoMLJob][3] and [DescribeAutoMLJob][4] which offer
+    # backward compatibility.
     #
-    # To create an `AutoMLJob` using tabular data, see [CreateAutoMLJob][2].
+    #  `CreateAutoMLJobV2` can manage tabular problem types identical to
+    # those of its previous version `CreateAutoMLJob`, as well as
+    # non-tabular problem types such as image or text classification.
     #
-    # <note markdown="1"> This API action is callable through SageMaker Canvas only. Calling it
-    # directly from the CLI or an SDK results in an error.
+    #  Find guidelines about how to migrate a `CreateAutoMLJob` to
+    # `CreateAutoMLJobV2` in [Migrate a CreateAutoMLJob to
+    # CreateAutoMLJobV2][5].
     #
     #  </note>
     #
+    # For the list of available problem types supported by
+    # `CreateAutoMLJobV2`, see [AutoMLProblemTypeConfig][6].
+    #
+    # You can find the best-performing model after you run an AutoML job V2
+    # by calling [DescribeAutoMLJobV2][2].
     #
     #
-    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html
-    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html
+    # [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html
+    # [4]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html
+    # [5]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment-api.html#autopilot-create-experiment-api-migrate-v1-v2
+    # [6]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLProblemTypeConfig.html
     #
     # @option params [required, String] :auto_ml_job_name
     #   Identifies an Autopilot job. The name must be unique to your account
@@ -1375,14 +1401,18 @@ module Aws::SageMaker
     #
     # @option params [required, Array<Types::AutoMLJobChannel>] :auto_ml_job_input_data_config
     #   An array of channel objects describing the input data and their
-    #   location. Each channel is a named input source. Similar to
-    #   [InputDataConfig][1] supported by `CreateAutoMLJob`. The supported
-    #   formats depend on the problem type:
+    #   location. Each channel is a named input source. Similar to the
+    #   [InputDataConfig][1] attribute in the `CreateAutoMLJob` input
+    #   parameters. The supported formats depend on the problem type:
     #
-    #   * ImageClassification: S3Prefix, `ManifestFile`,
-    #     `AugmentedManifestFile`
+    #   * For tabular problem types: `S3Prefix`, `ManifestFile`.
     #
-    #   * TextClassification: S3Prefix
+    #   * For image classification: `S3Prefix`, `ManifestFile`,
+    #     `AugmentedManifestFile`.
+    #
+    #   * For text classification: `S3Prefix`.
+    #
+    #   * For time-series forecasting: `S3Prefix`.
     #
     #
     #
@@ -1415,11 +1445,20 @@ module Aws::SageMaker
     #
     # @option params [Types::AutoMLJobObjective] :auto_ml_job_objective
     #   Specifies a metric to minimize or maximize as the objective of a job.
-    #   For [CreateAutoMLJobV2][1], only `Accuracy` is supported.
+    #   If not specified, the default objective metric depends on the problem
+    #   type. For the list of default values per problem type, see
+    #   [AutoMLJobObjective][1].
+    #
+    #   <note markdown="1"> For tabular problem types, you must either provide both the
+    #   `AutoMLJobObjective` and indicate the type of supervised learning
+    #   problem in `AutoMLProblemTypeConfig` (`TabularJobConfig.ProblemType`),
+    #   or none at all.
+    #
+    #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html
     #
     # @option params [Types::ModelDeployConfig] :model_deploy_config
     #   Specifies how to generate the endpoint name for an automatic one-click
@@ -1429,12 +1468,15 @@ module Aws::SageMaker
     #   This structure specifies how to split the data into train and
     #   validation datasets.
     #
-    #   If you are using the V1 API (for example `CreateAutoMLJob`) or the V2
-    #   API for Natural Language Processing problems (for example
-    #   `CreateAutoMLJobV2` with a `TextClassificationJobConfig` problem
-    #   type), the validation and training datasets must contain the same
-    #   headers. Also, for V1 API jobs, the validation dataset must be less
-    #   than 2 GB in size.
+    #   The validation and training datasets must contain the same headers.
+    #   For jobs created by calling `CreateAutoMLJob`, the validation dataset
+    #   must be less than 2 GB in size.
+    #
+    #   <note markdown="1"> This attribute must not be set for the time-series forecasting problem
+    #   type, as Autopilot automatically splits the input dataset into
+    #   training and validation sets.
+    #
+    #    </note>
     #
     # @return [Types::CreateAutoMLJobV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1478,6 +1520,53 @@ module Aws::SageMaker
     #         content_column: "ContentColumn",
     #         target_label_column: "TargetLabelColumn",
     #       },
+    #       tabular_job_config: {
+    #         candidate_generation_config: {
+    #           algorithms_config: [
+    #             {
+    #               auto_ml_algorithms: ["xgboost"], # required, accepts xgboost, linear-learner, mlp, lightgbm, catboost, randomforest, extra-trees, nn-torch, fastai
+    #             },
+    #           ],
+    #         },
+    #         completion_criteria: {
+    #           max_candidates: 1,
+    #           max_runtime_per_training_job_in_seconds: 1,
+    #           max_auto_ml_job_runtime_in_seconds: 1,
+    #         },
+    #         feature_specification_s3_uri: "S3Uri",
+    #         mode: "AUTO", # accepts AUTO, ENSEMBLING, HYPERPARAMETER_TUNING
+    #         generate_candidate_definitions_only: false,
+    #         problem_type: "BinaryClassification", # accepts BinaryClassification, MulticlassClassification, Regression
+    #         target_attribute_name: "TargetAttributeName", # required
+    #         sample_weight_attribute_name: "SampleWeightAttributeName",
+    #       },
+    #       time_series_forecasting_job_config: {
+    #         feature_specification_s3_uri: "S3Uri",
+    #         completion_criteria: {
+    #           max_candidates: 1,
+    #           max_runtime_per_training_job_in_seconds: 1,
+    #           max_auto_ml_job_runtime_in_seconds: 1,
+    #         },
+    #         forecast_frequency: "ForecastFrequency", # required
+    #         forecast_horizon: 1, # required
+    #         forecast_quantiles: ["ForecastQuantile"],
+    #         transformations: {
+    #           filling: {
+    #             "TransformationAttributeName" => {
+    #               "frontfill" => "FillingTransformationValue",
+    #             },
+    #           },
+    #           aggregation: {
+    #             "TransformationAttributeName" => "sum", # accepts sum, avg, first, min, max
+    #           },
+    #         },
+    #         time_series_config: { # required
+    #           target_attribute_name: "TargetAttributeName", # required
+    #           timestamp_attribute_name: "TimestampAttributeName", # required
+    #           item_identifier_attribute_name: "ItemIdentifierAttributeName", # required
+    #           grouping_attribute_names: ["GroupingAttributeName"],
+    #         },
+    #       },
     #     },
     #     role_arn: "RoleArn", # required
     #     tags: [
@@ -1495,7 +1584,7 @@ module Aws::SageMaker
     #       },
     #     },
     #     auto_ml_job_objective: {
-    #       metric_name: "Accuracy", # required, accepts Accuracy, MSE, F1, F1macro, AUC, RMSE, MAE, R2, BalancedAccuracy, Precision, PrecisionMacro, Recall, RecallMacro
+    #       metric_name: "Accuracy", # required, accepts Accuracy, MSE, F1, F1macro, AUC, RMSE, MAE, R2, BalancedAccuracy, Precision, PrecisionMacro, Recall, RecallMacro, MAPE, MASE, WAPE, AverageWeightedQuantileLoss
     #     },
     #     model_deploy_config: {
     #       auto_generate_endpoint_name: false,
@@ -2630,7 +2719,7 @@ module Aws::SageMaker
     #     endpoint_name: "EndpointName", # required
     #     endpoint_config_name: "EndpointConfigName", # required
     #     deployment_config: {
-    #       blue_green_update_policy: { # required
+    #       blue_green_update_policy: {
     #         traffic_routing_configuration: { # required
     #           type: "ALL_AT_ONCE", # required, accepts ALL_AT_ONCE, CANARY, LINEAR
     #           wait_interval_in_seconds: 1, # required
@@ -2652,6 +2741,18 @@ module Aws::SageMaker
     #             alarm_name: "AlarmName",
     #           },
     #         ],
+    #       },
+    #       rolling_update_policy: {
+    #         maximum_batch_size: { # required
+    #           type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
+    #           value: 1, # required
+    #         },
+    #         wait_interval_in_seconds: 1, # required
+    #         maximum_execution_timeout_in_seconds: 1,
+    #         rollback_maximum_batch_size: {
+    #           type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
+    #           value: 1, # required
+    #         },
     #       },
     #     },
     #     tags: [
@@ -3186,6 +3287,10 @@ module Aws::SageMaker
     #         kms_key_id: "KmsKeyId",
     #       },
     #       enable_online_store: false,
+    #       ttl_duration: {
+    #         unit: "Seconds", # accepts Seconds, Minutes, Hours, Days, Weeks
+    #         value: 1,
+    #       },
     #     },
     #     offline_store_config: {
     #       s3_storage_config: { # required
@@ -3701,15 +3806,16 @@ module Aws::SageMaker
     #       output_data_config: { # required
     #         kms_key_id: "KmsKeyId",
     #         s3_output_path: "S3Uri", # required
+    #         compression_type: "GZIP", # accepts GZIP, NONE
     #       },
     #       resource_config: {
-    #         instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
+    #         instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge
     #         instance_count: 1,
     #         volume_size_in_gb: 1, # required
     #         volume_kms_key_id: "KmsKeyId",
     #         instance_groups: [
     #           {
-    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
+    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge
     #             instance_count: 1, # required
     #             instance_group_name: "InstanceGroupName", # required
     #           },
@@ -3731,14 +3837,14 @@ module Aws::SageMaker
     #         maximum_retry_attempts: 1, # required
     #       },
     #       hyper_parameter_tuning_resource_config: {
-    #         instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
+    #         instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge
     #         instance_count: 1,
     #         volume_size_in_gb: 1,
     #         volume_kms_key_id: "KmsKeyId",
     #         allocation_strategy: "Prioritized", # accepts Prioritized
     #         instance_configs: [
     #           {
-    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
+    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge
     #             instance_count: 1, # required
     #             volume_size_in_gb: 1, # required
     #           },
@@ -3834,15 +3940,16 @@ module Aws::SageMaker
     #         output_data_config: { # required
     #           kms_key_id: "KmsKeyId",
     #           s3_output_path: "S3Uri", # required
+    #           compression_type: "GZIP", # accepts GZIP, NONE
     #         },
     #         resource_config: {
-    #           instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
+    #           instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge
     #           instance_count: 1,
     #           volume_size_in_gb: 1, # required
     #           volume_kms_key_id: "KmsKeyId",
     #           instance_groups: [
     #             {
-    #               instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
+    #               instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge
     #               instance_count: 1, # required
     #               instance_group_name: "InstanceGroupName", # required
     #             },
@@ -3864,14 +3971,14 @@ module Aws::SageMaker
     #           maximum_retry_attempts: 1, # required
     #         },
     #         hyper_parameter_tuning_resource_config: {
-    #           instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
+    #           instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge
     #           instance_count: 1,
     #           volume_size_in_gb: 1,
     #           volume_kms_key_id: "KmsKeyId",
     #           allocation_strategy: "Prioritized", # accepts Prioritized
     #           instance_configs: [
     #             {
-    #               instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
+    #               instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge
     #               instance_count: 1, # required
     #               volume_size_in_gb: 1, # required
     #             },
@@ -4352,7 +4459,7 @@ module Aws::SageMaker
     #       },
     #       endpoint_configurations: [
     #         {
-    #           instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.p4d.24xlarge, ml.c7g.large, ml.c7g.xlarge, ml.c7g.2xlarge, ml.c7g.4xlarge, ml.c7g.8xlarge, ml.c7g.12xlarge, ml.c7g.16xlarge, ml.m6g.large, ml.m6g.xlarge, ml.m6g.2xlarge, ml.m6g.4xlarge, ml.m6g.8xlarge, ml.m6g.12xlarge, ml.m6g.16xlarge, ml.m6gd.large, ml.m6gd.xlarge, ml.m6gd.2xlarge, ml.m6gd.4xlarge, ml.m6gd.8xlarge, ml.m6gd.12xlarge, ml.m6gd.16xlarge, ml.c6g.large, ml.c6g.xlarge, ml.c6g.2xlarge, ml.c6g.4xlarge, ml.c6g.8xlarge, ml.c6g.12xlarge, ml.c6g.16xlarge, ml.c6gd.large, ml.c6gd.xlarge, ml.c6gd.2xlarge, ml.c6gd.4xlarge, ml.c6gd.8xlarge, ml.c6gd.12xlarge, ml.c6gd.16xlarge, ml.c6gn.large, ml.c6gn.xlarge, ml.c6gn.2xlarge, ml.c6gn.4xlarge, ml.c6gn.8xlarge, ml.c6gn.12xlarge, ml.c6gn.16xlarge, ml.r6g.large, ml.r6g.xlarge, ml.r6g.2xlarge, ml.r6g.4xlarge, ml.r6g.8xlarge, ml.r6g.12xlarge, ml.r6g.16xlarge, ml.r6gd.large, ml.r6gd.xlarge, ml.r6gd.2xlarge, ml.r6gd.4xlarge, ml.r6gd.8xlarge, ml.r6gd.12xlarge, ml.r6gd.16xlarge, ml.p4de.24xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.inf2.xlarge, ml.inf2.8xlarge, ml.inf2.24xlarge, ml.inf2.48xlarge
+    #           instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.p4d.24xlarge, ml.c7g.large, ml.c7g.xlarge, ml.c7g.2xlarge, ml.c7g.4xlarge, ml.c7g.8xlarge, ml.c7g.12xlarge, ml.c7g.16xlarge, ml.m6g.large, ml.m6g.xlarge, ml.m6g.2xlarge, ml.m6g.4xlarge, ml.m6g.8xlarge, ml.m6g.12xlarge, ml.m6g.16xlarge, ml.m6gd.large, ml.m6gd.xlarge, ml.m6gd.2xlarge, ml.m6gd.4xlarge, ml.m6gd.8xlarge, ml.m6gd.12xlarge, ml.m6gd.16xlarge, ml.c6g.large, ml.c6g.xlarge, ml.c6g.2xlarge, ml.c6g.4xlarge, ml.c6g.8xlarge, ml.c6g.12xlarge, ml.c6g.16xlarge, ml.c6gd.large, ml.c6gd.xlarge, ml.c6gd.2xlarge, ml.c6gd.4xlarge, ml.c6gd.8xlarge, ml.c6gd.12xlarge, ml.c6gd.16xlarge, ml.c6gn.large, ml.c6gn.xlarge, ml.c6gn.2xlarge, ml.c6gn.4xlarge, ml.c6gn.8xlarge, ml.c6gn.12xlarge, ml.c6gn.16xlarge, ml.r6g.large, ml.r6g.xlarge, ml.r6g.2xlarge, ml.r6g.4xlarge, ml.r6g.8xlarge, ml.r6g.12xlarge, ml.r6g.16xlarge, ml.r6gd.large, ml.r6gd.xlarge, ml.r6gd.2xlarge, ml.r6gd.4xlarge, ml.r6gd.8xlarge, ml.r6gd.12xlarge, ml.r6gd.16xlarge, ml.p4de.24xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.inf2.xlarge, ml.inf2.8xlarge, ml.inf2.24xlarge, ml.inf2.48xlarge
     #           inference_specification_name: "InferenceSpecificationName",
     #           environment_parameter_ranges: {
     #             categorical_parameter_ranges: [
@@ -4361,6 +4468,11 @@ module Aws::SageMaker
     #                 value: ["String128"], # required
     #               },
     #             ],
+    #           },
+    #           serverless_config: {
+    #             memory_size_in_mb: 1, # required
+    #             max_concurrency: 1, # required
+    #             provisioned_concurrency: 1,
     #           },
     #         },
     #       ],
@@ -4377,6 +4489,7 @@ module Aws::SageMaker
     #         nearest_model_name: "String",
     #         supported_instance_types: ["String"],
     #         data_input_config: "RecommendationJobDataInputConfig",
+    #         supported_endpoint_type: "RealTime", # accepts RealTime, Serverless
     #       },
     #       endpoints: [
     #         {
@@ -4854,6 +4967,13 @@ module Aws::SageMaker
     #       multi_model_config: {
     #         model_cache_setting: "Enabled", # accepts Enabled, Disabled
     #       },
+    #       model_data_source: {
+    #         s3_data_source: { # required
+    #           s3_uri: "S3ModelUri", # required
+    #           s3_data_type: "S3Prefix", # required, accepts S3Prefix, S3Object
+    #           compression_type: "None", # required, accepts None, Gzip
+    #         },
+    #       },
     #     },
     #     containers: [
     #       {
@@ -4874,6 +4994,13 @@ module Aws::SageMaker
     #         inference_specification_name: "InferenceSpecificationName",
     #         multi_model_config: {
     #           model_cache_setting: "Enabled", # accepts Enabled, Disabled
+    #         },
+    #         model_data_source: {
+    #           s3_data_source: { # required
+    #             s3_uri: "S3ModelUri", # required
+    #             s3_data_type: "S3Prefix", # required, accepts S3Prefix, S3Object
+    #             compression_type: "None", # required, accepts None, Gzip
+    #           },
     #         },
     #       },
     #     ],
@@ -6385,7 +6512,11 @@ module Aws::SageMaker
     #   The display name of the pipeline.
     #
     # @option params [String] :pipeline_definition
-    #   The JSON pipeline definition of the pipeline.
+    #   The [JSON pipeline definition][1] of the pipeline.
+    #
+    #
+    #
+    #   [1]: https://aws-sagemaker-mlops.github.io/sagemaker-model-building-pipeline-definition-JSON-schema/
     #
     # @option params [Types::PipelineDefinitionS3Location] :pipeline_definition_s3_location
     #   The location of the pipeline definition stored in Amazon S3. If
@@ -7313,15 +7444,16 @@ module Aws::SageMaker
     #     output_data_config: { # required
     #       kms_key_id: "KmsKeyId",
     #       s3_output_path: "S3Uri", # required
+    #       compression_type: "GZIP", # accepts GZIP, NONE
     #     },
     #     resource_config: { # required
-    #       instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
+    #       instance_type: "ml.m4.xlarge", # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge
     #       instance_count: 1,
     #       volume_size_in_gb: 1, # required
     #       volume_kms_key_id: "KmsKeyId",
     #       instance_groups: [
     #         {
-    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge
+    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.p4d.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.16xlarge, ml.g5.12xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge
     #           instance_count: 1, # required
     #           instance_group_name: "InstanceGroupName", # required
     #         },
@@ -9661,7 +9793,7 @@ module Aws::SageMaker
     #   resp.training_specification.supported_hyper_parameters[0].is_required #=> Boolean
     #   resp.training_specification.supported_hyper_parameters[0].default_value #=> String
     #   resp.training_specification.supported_training_instance_types #=> Array
-    #   resp.training_specification.supported_training_instance_types[0] #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge"
+    #   resp.training_specification.supported_training_instance_types[0] #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge"
     #   resp.training_specification.supports_distributed_training #=> Boolean
     #   resp.training_specification.metric_definitions #=> Array
     #   resp.training_specification.metric_definitions[0].name #=> String
@@ -9725,12 +9857,13 @@ module Aws::SageMaker
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].shuffle_config.seed #=> Integer
     #   resp.validation_specification.validation_profiles[0].training_job_definition.output_data_config.kms_key_id #=> String
     #   resp.validation_specification.validation_profiles[0].training_job_definition.output_data_config.s3_output_path #=> String
-    #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge"
+    #   resp.validation_specification.validation_profiles[0].training_job_definition.output_data_config.compression_type #=> String, one of "GZIP", "NONE"
+    #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge"
     #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.instance_count #=> Integer
     #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.volume_size_in_gb #=> Integer
     #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.volume_kms_key_id #=> String
     #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.instance_groups #=> Array
-    #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.instance_groups[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge"
+    #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.instance_groups[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge"
     #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.instance_groups[0].instance_count #=> Integer
     #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.instance_groups[0].instance_group_name #=> String
     #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.keep_alive_period_in_seconds #=> Integer
@@ -9950,7 +10083,18 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Returns information about an Amazon SageMaker AutoML job.
+    # Returns information about an AutoML job created by calling
+    # [CreateAutoMLJob][1].
+    #
+    # <note markdown="1"> AutoML jobs created by calling [CreateAutoMLJobV2][2] cannot be
+    # described by `DescribeAutoMLJob`.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html
     #
     # @option params [required, String] :auto_ml_job_name
     #   Requests information about an AutoML job using its unique name.
@@ -10000,7 +10144,7 @@ module Aws::SageMaker
     #   resp.output_data_config.kms_key_id #=> String
     #   resp.output_data_config.s3_output_path #=> String
     #   resp.role_arn #=> String
-    #   resp.auto_ml_job_objective.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro"
+    #   resp.auto_ml_job_objective.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "MAPE", "MASE", "WAPE", "AverageWeightedQuantileLoss"
     #   resp.problem_type #=> String, one of "BinaryClassification", "MulticlassClassification", "Regression"
     #   resp.auto_ml_job_config.completion_criteria.max_candidates #=> Integer
     #   resp.auto_ml_job_config.completion_criteria.max_runtime_per_training_job_in_seconds #=> Integer
@@ -10025,9 +10169,9 @@ module Aws::SageMaker
     #   resp.partial_failure_reasons[0].partial_failure_message #=> String
     #   resp.best_candidate.candidate_name #=> String
     #   resp.best_candidate.final_auto_ml_job_objective_metric.type #=> String, one of "Maximize", "Minimize"
-    #   resp.best_candidate.final_auto_ml_job_objective_metric.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro"
+    #   resp.best_candidate.final_auto_ml_job_objective_metric.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "MAPE", "MASE", "WAPE", "AverageWeightedQuantileLoss"
     #   resp.best_candidate.final_auto_ml_job_objective_metric.value #=> Float
-    #   resp.best_candidate.final_auto_ml_job_objective_metric.standard_metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro"
+    #   resp.best_candidate.final_auto_ml_job_objective_metric.standard_metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "MAPE", "MASE", "WAPE", "AverageWeightedQuantileLoss"
     #   resp.best_candidate.objective_status #=> String, one of "Succeeded", "Pending", "Failed"
     #   resp.best_candidate.candidate_steps #=> Array
     #   resp.best_candidate.candidate_steps[0].candidate_step_type #=> String, one of "AWS::SageMaker::TrainingJob", "AWS::SageMaker::TransformJob", "AWS::SageMaker::ProcessingJob"
@@ -10045,11 +10189,12 @@ module Aws::SageMaker
     #   resp.best_candidate.failure_reason #=> String
     #   resp.best_candidate.candidate_properties.candidate_artifact_locations.explainability #=> String
     #   resp.best_candidate.candidate_properties.candidate_artifact_locations.model_insights #=> String
+    #   resp.best_candidate.candidate_properties.candidate_artifact_locations.backtest_results #=> String
     #   resp.best_candidate.candidate_properties.candidate_metrics #=> Array
-    #   resp.best_candidate.candidate_properties.candidate_metrics[0].metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro"
+    #   resp.best_candidate.candidate_properties.candidate_metrics[0].metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "MAPE", "MASE", "WAPE", "AverageWeightedQuantileLoss"
     #   resp.best_candidate.candidate_properties.candidate_metrics[0].value #=> Float
     #   resp.best_candidate.candidate_properties.candidate_metrics[0].set #=> String, one of "Train", "Validation", "Test"
-    #   resp.best_candidate.candidate_properties.candidate_metrics[0].standard_metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "LogLoss", "InferenceLatency"
+    #   resp.best_candidate.candidate_properties.candidate_metrics[0].standard_metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "LogLoss", "InferenceLatency", "MAPE", "MASE", "WAPE", "AverageWeightedQuantileLoss"
     #   resp.best_candidate.inference_container_definitions #=> Hash
     #   resp.best_candidate.inference_container_definitions["AutoMLProcessingUnit"] #=> Array
     #   resp.best_candidate.inference_container_definitions["AutoMLProcessingUnit"][0].image #=> String
@@ -10057,11 +10202,11 @@ module Aws::SageMaker
     #   resp.best_candidate.inference_container_definitions["AutoMLProcessingUnit"][0].environment #=> Hash
     #   resp.best_candidate.inference_container_definitions["AutoMLProcessingUnit"][0].environment["EnvironmentKey"] #=> String
     #   resp.auto_ml_job_status #=> String, one of "Completed", "InProgress", "Failed", "Stopped", "Stopping"
-    #   resp.auto_ml_job_secondary_status #=> String, one of "Starting", "AnalyzingData", "FeatureEngineering", "ModelTuning", "MaxCandidatesReached", "Failed", "Stopped", "MaxAutoMLJobRuntimeReached", "Stopping", "CandidateDefinitionsGenerated", "GeneratingExplainabilityReport", "Completed", "ExplainabilityError", "DeployingModel", "ModelDeploymentError", "GeneratingModelInsightsReport", "ModelInsightsError", "TrainingModels"
+    #   resp.auto_ml_job_secondary_status #=> String, one of "Starting", "AnalyzingData", "FeatureEngineering", "ModelTuning", "MaxCandidatesReached", "Failed", "Stopped", "MaxAutoMLJobRuntimeReached", "Stopping", "CandidateDefinitionsGenerated", "GeneratingExplainabilityReport", "Completed", "ExplainabilityError", "DeployingModel", "ModelDeploymentError", "GeneratingModelInsightsReport", "ModelInsightsError", "TrainingModels", "PreTraining"
     #   resp.generate_candidate_definitions_only #=> Boolean
     #   resp.auto_ml_job_artifacts.candidate_definition_notebook_location #=> String
     #   resp.auto_ml_job_artifacts.data_exploration_notebook_location #=> String
-    #   resp.resolved_attributes.auto_ml_job_objective.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro"
+    #   resp.resolved_attributes.auto_ml_job_objective.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "MAPE", "MASE", "WAPE", "AverageWeightedQuantileLoss"
     #   resp.resolved_attributes.problem_type #=> String, one of "BinaryClassification", "MulticlassClassification", "Regression"
     #   resp.resolved_attributes.completion_criteria.max_candidates #=> Integer
     #   resp.resolved_attributes.completion_criteria.max_runtime_per_training_job_in_seconds #=> Integer
@@ -10079,15 +10224,16 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Returns information about an Amazon SageMaker AutoML V2 job.
+    # Returns information about an AutoML job created by calling
+    # [CreateAutoMLJobV2][1] or [CreateAutoMLJob][2].
     #
-    # <note markdown="1"> This API action is callable through SageMaker Canvas only. Calling it
-    # directly from the CLI or an SDK results in an error.
     #
-    #  </note>
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html
     #
     # @option params [required, String] :auto_ml_job_name
-    #   Requests information about an AutoML V2 job using its unique name.
+    #   Requests information about an AutoML job V2 using its unique name.
     #
     # @return [Types::DescribeAutoMLJobV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10110,6 +10256,9 @@ module Aws::SageMaker
     #   * {Types::DescribeAutoMLJobV2Response#model_deploy_result #model_deploy_result} => Types::ModelDeployResult
     #   * {Types::DescribeAutoMLJobV2Response#data_split_config #data_split_config} => Types::AutoMLDataSplitConfig
     #   * {Types::DescribeAutoMLJobV2Response#security_config #security_config} => Types::AutoMLSecurityConfig
+    #   * {Types::DescribeAutoMLJobV2Response#auto_ml_job_artifacts #auto_ml_job_artifacts} => Types::AutoMLJobArtifacts
+    #   * {Types::DescribeAutoMLJobV2Response#resolved_attributes #resolved_attributes} => Types::AutoMLResolvedAttributes
+    #   * {Types::DescribeAutoMLJobV2Response#auto_ml_problem_type_config_name #auto_ml_problem_type_config_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -10130,7 +10279,7 @@ module Aws::SageMaker
     #   resp.output_data_config.kms_key_id #=> String
     #   resp.output_data_config.s3_output_path #=> String
     #   resp.role_arn #=> String
-    #   resp.auto_ml_job_objective.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro"
+    #   resp.auto_ml_job_objective.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "MAPE", "MASE", "WAPE", "AverageWeightedQuantileLoss"
     #   resp.auto_ml_problem_type_config.image_classification_job_config.completion_criteria.max_candidates #=> Integer
     #   resp.auto_ml_problem_type_config.image_classification_job_config.completion_criteria.max_runtime_per_training_job_in_seconds #=> Integer
     #   resp.auto_ml_problem_type_config.image_classification_job_config.completion_criteria.max_auto_ml_job_runtime_in_seconds #=> Integer
@@ -10139,6 +10288,36 @@ module Aws::SageMaker
     #   resp.auto_ml_problem_type_config.text_classification_job_config.completion_criteria.max_auto_ml_job_runtime_in_seconds #=> Integer
     #   resp.auto_ml_problem_type_config.text_classification_job_config.content_column #=> String
     #   resp.auto_ml_problem_type_config.text_classification_job_config.target_label_column #=> String
+    #   resp.auto_ml_problem_type_config.tabular_job_config.candidate_generation_config.algorithms_config #=> Array
+    #   resp.auto_ml_problem_type_config.tabular_job_config.candidate_generation_config.algorithms_config[0].auto_ml_algorithms #=> Array
+    #   resp.auto_ml_problem_type_config.tabular_job_config.candidate_generation_config.algorithms_config[0].auto_ml_algorithms[0] #=> String, one of "xgboost", "linear-learner", "mlp", "lightgbm", "catboost", "randomforest", "extra-trees", "nn-torch", "fastai"
+    #   resp.auto_ml_problem_type_config.tabular_job_config.completion_criteria.max_candidates #=> Integer
+    #   resp.auto_ml_problem_type_config.tabular_job_config.completion_criteria.max_runtime_per_training_job_in_seconds #=> Integer
+    #   resp.auto_ml_problem_type_config.tabular_job_config.completion_criteria.max_auto_ml_job_runtime_in_seconds #=> Integer
+    #   resp.auto_ml_problem_type_config.tabular_job_config.feature_specification_s3_uri #=> String
+    #   resp.auto_ml_problem_type_config.tabular_job_config.mode #=> String, one of "AUTO", "ENSEMBLING", "HYPERPARAMETER_TUNING"
+    #   resp.auto_ml_problem_type_config.tabular_job_config.generate_candidate_definitions_only #=> Boolean
+    #   resp.auto_ml_problem_type_config.tabular_job_config.problem_type #=> String, one of "BinaryClassification", "MulticlassClassification", "Regression"
+    #   resp.auto_ml_problem_type_config.tabular_job_config.target_attribute_name #=> String
+    #   resp.auto_ml_problem_type_config.tabular_job_config.sample_weight_attribute_name #=> String
+    #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.feature_specification_s3_uri #=> String
+    #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.completion_criteria.max_candidates #=> Integer
+    #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.completion_criteria.max_runtime_per_training_job_in_seconds #=> Integer
+    #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.completion_criteria.max_auto_ml_job_runtime_in_seconds #=> Integer
+    #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.forecast_frequency #=> String
+    #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.forecast_horizon #=> Integer
+    #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.forecast_quantiles #=> Array
+    #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.forecast_quantiles[0] #=> String
+    #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.transformations.filling #=> Hash
+    #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.transformations.filling["TransformationAttributeName"] #=> Hash
+    #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.transformations.filling["TransformationAttributeName"]["FillingType"] #=> String
+    #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.transformations.aggregation #=> Hash
+    #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.transformations.aggregation["TransformationAttributeName"] #=> String, one of "sum", "avg", "first", "min", "max"
+    #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.time_series_config.target_attribute_name #=> String
+    #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.time_series_config.timestamp_attribute_name #=> String
+    #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.time_series_config.item_identifier_attribute_name #=> String
+    #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.time_series_config.grouping_attribute_names #=> Array
+    #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.time_series_config.grouping_attribute_names[0] #=> String
     #   resp.creation_time #=> Time
     #   resp.end_time #=> Time
     #   resp.last_modified_time #=> Time
@@ -10147,9 +10326,9 @@ module Aws::SageMaker
     #   resp.partial_failure_reasons[0].partial_failure_message #=> String
     #   resp.best_candidate.candidate_name #=> String
     #   resp.best_candidate.final_auto_ml_job_objective_metric.type #=> String, one of "Maximize", "Minimize"
-    #   resp.best_candidate.final_auto_ml_job_objective_metric.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro"
+    #   resp.best_candidate.final_auto_ml_job_objective_metric.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "MAPE", "MASE", "WAPE", "AverageWeightedQuantileLoss"
     #   resp.best_candidate.final_auto_ml_job_objective_metric.value #=> Float
-    #   resp.best_candidate.final_auto_ml_job_objective_metric.standard_metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro"
+    #   resp.best_candidate.final_auto_ml_job_objective_metric.standard_metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "MAPE", "MASE", "WAPE", "AverageWeightedQuantileLoss"
     #   resp.best_candidate.objective_status #=> String, one of "Succeeded", "Pending", "Failed"
     #   resp.best_candidate.candidate_steps #=> Array
     #   resp.best_candidate.candidate_steps[0].candidate_step_type #=> String, one of "AWS::SageMaker::TrainingJob", "AWS::SageMaker::TransformJob", "AWS::SageMaker::ProcessingJob"
@@ -10167,11 +10346,12 @@ module Aws::SageMaker
     #   resp.best_candidate.failure_reason #=> String
     #   resp.best_candidate.candidate_properties.candidate_artifact_locations.explainability #=> String
     #   resp.best_candidate.candidate_properties.candidate_artifact_locations.model_insights #=> String
+    #   resp.best_candidate.candidate_properties.candidate_artifact_locations.backtest_results #=> String
     #   resp.best_candidate.candidate_properties.candidate_metrics #=> Array
-    #   resp.best_candidate.candidate_properties.candidate_metrics[0].metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro"
+    #   resp.best_candidate.candidate_properties.candidate_metrics[0].metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "MAPE", "MASE", "WAPE", "AverageWeightedQuantileLoss"
     #   resp.best_candidate.candidate_properties.candidate_metrics[0].value #=> Float
     #   resp.best_candidate.candidate_properties.candidate_metrics[0].set #=> String, one of "Train", "Validation", "Test"
-    #   resp.best_candidate.candidate_properties.candidate_metrics[0].standard_metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "LogLoss", "InferenceLatency"
+    #   resp.best_candidate.candidate_properties.candidate_metrics[0].standard_metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "LogLoss", "InferenceLatency", "MAPE", "MASE", "WAPE", "AverageWeightedQuantileLoss"
     #   resp.best_candidate.inference_container_definitions #=> Hash
     #   resp.best_candidate.inference_container_definitions["AutoMLProcessingUnit"] #=> Array
     #   resp.best_candidate.inference_container_definitions["AutoMLProcessingUnit"][0].image #=> String
@@ -10179,7 +10359,7 @@ module Aws::SageMaker
     #   resp.best_candidate.inference_container_definitions["AutoMLProcessingUnit"][0].environment #=> Hash
     #   resp.best_candidate.inference_container_definitions["AutoMLProcessingUnit"][0].environment["EnvironmentKey"] #=> String
     #   resp.auto_ml_job_status #=> String, one of "Completed", "InProgress", "Failed", "Stopped", "Stopping"
-    #   resp.auto_ml_job_secondary_status #=> String, one of "Starting", "AnalyzingData", "FeatureEngineering", "ModelTuning", "MaxCandidatesReached", "Failed", "Stopped", "MaxAutoMLJobRuntimeReached", "Stopping", "CandidateDefinitionsGenerated", "GeneratingExplainabilityReport", "Completed", "ExplainabilityError", "DeployingModel", "ModelDeploymentError", "GeneratingModelInsightsReport", "ModelInsightsError", "TrainingModels"
+    #   resp.auto_ml_job_secondary_status #=> String, one of "Starting", "AnalyzingData", "FeatureEngineering", "ModelTuning", "MaxCandidatesReached", "Failed", "Stopped", "MaxAutoMLJobRuntimeReached", "Stopping", "CandidateDefinitionsGenerated", "GeneratingExplainabilityReport", "Completed", "ExplainabilityError", "DeployingModel", "ModelDeploymentError", "GeneratingModelInsightsReport", "ModelInsightsError", "TrainingModels", "PreTraining"
     #   resp.model_deploy_config.auto_generate_endpoint_name #=> Boolean
     #   resp.model_deploy_config.endpoint_name #=> String
     #   resp.model_deploy_result.endpoint_name #=> String
@@ -10190,6 +10370,14 @@ module Aws::SageMaker
     #   resp.security_config.vpc_config.security_group_ids[0] #=> String
     #   resp.security_config.vpc_config.subnets #=> Array
     #   resp.security_config.vpc_config.subnets[0] #=> String
+    #   resp.auto_ml_job_artifacts.candidate_definition_notebook_location #=> String
+    #   resp.auto_ml_job_artifacts.data_exploration_notebook_location #=> String
+    #   resp.resolved_attributes.auto_ml_job_objective.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "MAPE", "MASE", "WAPE", "AverageWeightedQuantileLoss"
+    #   resp.resolved_attributes.completion_criteria.max_candidates #=> Integer
+    #   resp.resolved_attributes.completion_criteria.max_runtime_per_training_job_in_seconds #=> Integer
+    #   resp.resolved_attributes.completion_criteria.max_auto_ml_job_runtime_in_seconds #=> Integer
+    #   resp.resolved_attributes.auto_ml_problem_type_resolved_attributes.tabular_resolved_attributes.problem_type #=> String, one of "BinaryClassification", "MulticlassClassification", "Regression"
+    #   resp.auto_ml_problem_type_config_name #=> String, one of "ImageClassification", "TextClassification", "Tabular", "TimeSeriesForecasting"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAutoMLJobV2 AWS API Documentation
     #
@@ -10908,7 +11096,7 @@ module Aws::SageMaker
     #   resp.data_capture_config.current_sampling_percentage #=> Integer
     #   resp.data_capture_config.destination_s3_uri #=> String
     #   resp.data_capture_config.kms_key_id #=> String
-    #   resp.endpoint_status #=> String, one of "OutOfService", "Creating", "Updating", "SystemUpdating", "RollingBack", "InService", "Deleting", "Failed"
+    #   resp.endpoint_status #=> String, one of "OutOfService", "Creating", "Updating", "SystemUpdating", "RollingBack", "InService", "Deleting", "Failed", "UpdateRollbackFailed"
     #   resp.failure_reason #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
@@ -10922,6 +11110,12 @@ module Aws::SageMaker
     #   resp.last_deployment_config.blue_green_update_policy.maximum_execution_timeout_in_seconds #=> Integer
     #   resp.last_deployment_config.auto_rollback_configuration.alarms #=> Array
     #   resp.last_deployment_config.auto_rollback_configuration.alarms[0].alarm_name #=> String
+    #   resp.last_deployment_config.rolling_update_policy.maximum_batch_size.type #=> String, one of "INSTANCE_COUNT", "CAPACITY_PERCENT"
+    #   resp.last_deployment_config.rolling_update_policy.maximum_batch_size.value #=> Integer
+    #   resp.last_deployment_config.rolling_update_policy.wait_interval_in_seconds #=> Integer
+    #   resp.last_deployment_config.rolling_update_policy.maximum_execution_timeout_in_seconds #=> Integer
+    #   resp.last_deployment_config.rolling_update_policy.rollback_maximum_batch_size.type #=> String, one of "INSTANCE_COUNT", "CAPACITY_PERCENT"
+    #   resp.last_deployment_config.rolling_update_policy.rollback_maximum_batch_size.value #=> Integer
     #   resp.async_inference_config.client_config.max_concurrent_invocations_per_instance #=> Integer
     #   resp.async_inference_config.output_config.kms_key_id #=> String
     #   resp.async_inference_config.output_config.s3_output_path #=> String
@@ -11254,6 +11448,8 @@ module Aws::SageMaker
     #   resp.last_modified_time #=> Time
     #   resp.online_store_config.security_config.kms_key_id #=> String
     #   resp.online_store_config.enable_online_store #=> Boolean
+    #   resp.online_store_config.ttl_duration.unit #=> String, one of "Seconds", "Minutes", "Hours", "Days", "Weeks"
+    #   resp.online_store_config.ttl_duration.value #=> Integer
     #   resp.offline_store_config.s3_storage_config.s3_uri #=> String
     #   resp.offline_store_config.s3_storage_config.kms_key_id #=> String
     #   resp.offline_store_config.s3_storage_config.resolved_output_s3_uri #=> String
@@ -11676,12 +11872,13 @@ module Aws::SageMaker
     #   resp.training_job_definition.vpc_config.subnets[0] #=> String
     #   resp.training_job_definition.output_data_config.kms_key_id #=> String
     #   resp.training_job_definition.output_data_config.s3_output_path #=> String
-    #   resp.training_job_definition.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge"
+    #   resp.training_job_definition.output_data_config.compression_type #=> String, one of "GZIP", "NONE"
+    #   resp.training_job_definition.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge"
     #   resp.training_job_definition.resource_config.instance_count #=> Integer
     #   resp.training_job_definition.resource_config.volume_size_in_gb #=> Integer
     #   resp.training_job_definition.resource_config.volume_kms_key_id #=> String
     #   resp.training_job_definition.resource_config.instance_groups #=> Array
-    #   resp.training_job_definition.resource_config.instance_groups[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge"
+    #   resp.training_job_definition.resource_config.instance_groups[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge"
     #   resp.training_job_definition.resource_config.instance_groups[0].instance_count #=> Integer
     #   resp.training_job_definition.resource_config.instance_groups[0].instance_group_name #=> String
     #   resp.training_job_definition.resource_config.keep_alive_period_in_seconds #=> Integer
@@ -11693,13 +11890,13 @@ module Aws::SageMaker
     #   resp.training_job_definition.checkpoint_config.s3_uri #=> String
     #   resp.training_job_definition.checkpoint_config.local_path #=> String
     #   resp.training_job_definition.retry_strategy.maximum_retry_attempts #=> Integer
-    #   resp.training_job_definition.hyper_parameter_tuning_resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge"
+    #   resp.training_job_definition.hyper_parameter_tuning_resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge"
     #   resp.training_job_definition.hyper_parameter_tuning_resource_config.instance_count #=> Integer
     #   resp.training_job_definition.hyper_parameter_tuning_resource_config.volume_size_in_gb #=> Integer
     #   resp.training_job_definition.hyper_parameter_tuning_resource_config.volume_kms_key_id #=> String
     #   resp.training_job_definition.hyper_parameter_tuning_resource_config.allocation_strategy #=> String, one of "Prioritized"
     #   resp.training_job_definition.hyper_parameter_tuning_resource_config.instance_configs #=> Array
-    #   resp.training_job_definition.hyper_parameter_tuning_resource_config.instance_configs[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge"
+    #   resp.training_job_definition.hyper_parameter_tuning_resource_config.instance_configs[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge"
     #   resp.training_job_definition.hyper_parameter_tuning_resource_config.instance_configs[0].instance_count #=> Integer
     #   resp.training_job_definition.hyper_parameter_tuning_resource_config.instance_configs[0].volume_size_in_gb #=> Integer
     #   resp.training_job_definition.environment #=> Hash
@@ -11758,12 +11955,13 @@ module Aws::SageMaker
     #   resp.training_job_definitions[0].vpc_config.subnets[0] #=> String
     #   resp.training_job_definitions[0].output_data_config.kms_key_id #=> String
     #   resp.training_job_definitions[0].output_data_config.s3_output_path #=> String
-    #   resp.training_job_definitions[0].resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge"
+    #   resp.training_job_definitions[0].output_data_config.compression_type #=> String, one of "GZIP", "NONE"
+    #   resp.training_job_definitions[0].resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge"
     #   resp.training_job_definitions[0].resource_config.instance_count #=> Integer
     #   resp.training_job_definitions[0].resource_config.volume_size_in_gb #=> Integer
     #   resp.training_job_definitions[0].resource_config.volume_kms_key_id #=> String
     #   resp.training_job_definitions[0].resource_config.instance_groups #=> Array
-    #   resp.training_job_definitions[0].resource_config.instance_groups[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge"
+    #   resp.training_job_definitions[0].resource_config.instance_groups[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge"
     #   resp.training_job_definitions[0].resource_config.instance_groups[0].instance_count #=> Integer
     #   resp.training_job_definitions[0].resource_config.instance_groups[0].instance_group_name #=> String
     #   resp.training_job_definitions[0].resource_config.keep_alive_period_in_seconds #=> Integer
@@ -11775,13 +11973,13 @@ module Aws::SageMaker
     #   resp.training_job_definitions[0].checkpoint_config.s3_uri #=> String
     #   resp.training_job_definitions[0].checkpoint_config.local_path #=> String
     #   resp.training_job_definitions[0].retry_strategy.maximum_retry_attempts #=> Integer
-    #   resp.training_job_definitions[0].hyper_parameter_tuning_resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge"
+    #   resp.training_job_definitions[0].hyper_parameter_tuning_resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge"
     #   resp.training_job_definitions[0].hyper_parameter_tuning_resource_config.instance_count #=> Integer
     #   resp.training_job_definitions[0].hyper_parameter_tuning_resource_config.volume_size_in_gb #=> Integer
     #   resp.training_job_definitions[0].hyper_parameter_tuning_resource_config.volume_kms_key_id #=> String
     #   resp.training_job_definitions[0].hyper_parameter_tuning_resource_config.allocation_strategy #=> String, one of "Prioritized"
     #   resp.training_job_definitions[0].hyper_parameter_tuning_resource_config.instance_configs #=> Array
-    #   resp.training_job_definitions[0].hyper_parameter_tuning_resource_config.instance_configs[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge"
+    #   resp.training_job_definitions[0].hyper_parameter_tuning_resource_config.instance_configs[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge"
     #   resp.training_job_definitions[0].hyper_parameter_tuning_resource_config.instance_configs[0].instance_count #=> Integer
     #   resp.training_job_definitions[0].hyper_parameter_tuning_resource_config.instance_configs[0].volume_size_in_gb #=> Integer
     #   resp.training_job_definitions[0].environment #=> Hash
@@ -12016,7 +12214,7 @@ module Aws::SageMaker
     #   resp.role_arn #=> String
     #   resp.endpoint_metadata.endpoint_name #=> String
     #   resp.endpoint_metadata.endpoint_config_name #=> String
-    #   resp.endpoint_metadata.endpoint_status #=> String, one of "OutOfService", "Creating", "Updating", "SystemUpdating", "RollingBack", "InService", "Deleting", "Failed"
+    #   resp.endpoint_metadata.endpoint_status #=> String, one of "OutOfService", "Creating", "Updating", "SystemUpdating", "RollingBack", "InService", "Deleting", "Failed", "UpdateRollbackFailed"
     #   resp.endpoint_metadata.failure_reason #=> String
     #   resp.model_variants #=> Array
     #   resp.model_variants[0].model_name #=> String
@@ -12104,6 +12302,9 @@ module Aws::SageMaker
     #   resp.input_config.endpoint_configurations[0].environment_parameter_ranges.categorical_parameter_ranges[0].name #=> String
     #   resp.input_config.endpoint_configurations[0].environment_parameter_ranges.categorical_parameter_ranges[0].value #=> Array
     #   resp.input_config.endpoint_configurations[0].environment_parameter_ranges.categorical_parameter_ranges[0].value[0] #=> String
+    #   resp.input_config.endpoint_configurations[0].serverless_config.memory_size_in_mb #=> Integer
+    #   resp.input_config.endpoint_configurations[0].serverless_config.max_concurrency #=> Integer
+    #   resp.input_config.endpoint_configurations[0].serverless_config.provisioned_concurrency #=> Integer
     #   resp.input_config.volume_kms_key_id #=> String
     #   resp.input_config.container_config.domain #=> String
     #   resp.input_config.container_config.task #=> String
@@ -12116,6 +12317,7 @@ module Aws::SageMaker
     #   resp.input_config.container_config.supported_instance_types #=> Array
     #   resp.input_config.container_config.supported_instance_types[0] #=> String
     #   resp.input_config.container_config.data_input_config #=> String
+    #   resp.input_config.container_config.supported_endpoint_type #=> String, one of "RealTime", "Serverless"
     #   resp.input_config.endpoints #=> Array
     #   resp.input_config.endpoints[0].endpoint_name #=> String
     #   resp.input_config.vpc_config.security_group_ids #=> Array
@@ -12134,10 +12336,14 @@ module Aws::SageMaker
     #   resp.inference_recommendations[0].metrics.model_latency #=> Integer
     #   resp.inference_recommendations[0].metrics.cpu_utilization #=> Float
     #   resp.inference_recommendations[0].metrics.memory_utilization #=> Float
+    #   resp.inference_recommendations[0].metrics.model_setup_time #=> Integer
     #   resp.inference_recommendations[0].endpoint_configuration.endpoint_name #=> String
     #   resp.inference_recommendations[0].endpoint_configuration.variant_name #=> String
     #   resp.inference_recommendations[0].endpoint_configuration.instance_type #=> String, one of "ml.t2.medium", "ml.t2.large", "ml.t2.xlarge", "ml.t2.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.12xlarge", "ml.m5d.24xlarge", "ml.c4.large", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5d.large", "ml.c5d.xlarge", "ml.c5d.2xlarge", "ml.c5d.4xlarge", "ml.c5d.9xlarge", "ml.c5d.18xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.12xlarge", "ml.r5.24xlarge", "ml.r5d.large", "ml.r5d.xlarge", "ml.r5d.2xlarge", "ml.r5d.4xlarge", "ml.r5d.12xlarge", "ml.r5d.24xlarge", "ml.inf1.xlarge", "ml.inf1.2xlarge", "ml.inf1.6xlarge", "ml.inf1.24xlarge", "ml.c6i.large", "ml.c6i.xlarge", "ml.c6i.2xlarge", "ml.c6i.4xlarge", "ml.c6i.8xlarge", "ml.c6i.12xlarge", "ml.c6i.16xlarge", "ml.c6i.24xlarge", "ml.c6i.32xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.12xlarge", "ml.g5.16xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.p4d.24xlarge", "ml.c7g.large", "ml.c7g.xlarge", "ml.c7g.2xlarge", "ml.c7g.4xlarge", "ml.c7g.8xlarge", "ml.c7g.12xlarge", "ml.c7g.16xlarge", "ml.m6g.large", "ml.m6g.xlarge", "ml.m6g.2xlarge", "ml.m6g.4xlarge", "ml.m6g.8xlarge", "ml.m6g.12xlarge", "ml.m6g.16xlarge", "ml.m6gd.large", "ml.m6gd.xlarge", "ml.m6gd.2xlarge", "ml.m6gd.4xlarge", "ml.m6gd.8xlarge", "ml.m6gd.12xlarge", "ml.m6gd.16xlarge", "ml.c6g.large", "ml.c6g.xlarge", "ml.c6g.2xlarge", "ml.c6g.4xlarge", "ml.c6g.8xlarge", "ml.c6g.12xlarge", "ml.c6g.16xlarge", "ml.c6gd.large", "ml.c6gd.xlarge", "ml.c6gd.2xlarge", "ml.c6gd.4xlarge", "ml.c6gd.8xlarge", "ml.c6gd.12xlarge", "ml.c6gd.16xlarge", "ml.c6gn.large", "ml.c6gn.xlarge", "ml.c6gn.2xlarge", "ml.c6gn.4xlarge", "ml.c6gn.8xlarge", "ml.c6gn.12xlarge", "ml.c6gn.16xlarge", "ml.r6g.large", "ml.r6g.xlarge", "ml.r6g.2xlarge", "ml.r6g.4xlarge", "ml.r6g.8xlarge", "ml.r6g.12xlarge", "ml.r6g.16xlarge", "ml.r6gd.large", "ml.r6gd.xlarge", "ml.r6gd.2xlarge", "ml.r6gd.4xlarge", "ml.r6gd.8xlarge", "ml.r6gd.12xlarge", "ml.r6gd.16xlarge", "ml.p4de.24xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.inf2.xlarge", "ml.inf2.8xlarge", "ml.inf2.24xlarge", "ml.inf2.48xlarge"
     #   resp.inference_recommendations[0].endpoint_configuration.initial_instance_count #=> Integer
+    #   resp.inference_recommendations[0].endpoint_configuration.serverless_config.memory_size_in_mb #=> Integer
+    #   resp.inference_recommendations[0].endpoint_configuration.serverless_config.max_concurrency #=> Integer
+    #   resp.inference_recommendations[0].endpoint_configuration.serverless_config.provisioned_concurrency #=> Integer
     #   resp.inference_recommendations[0].model_configuration.inference_specification_name #=> String
     #   resp.inference_recommendations[0].model_configuration.environment_parameters #=> Array
     #   resp.inference_recommendations[0].model_configuration.environment_parameters[0].key #=> String
@@ -12353,6 +12559,9 @@ module Aws::SageMaker
     #   resp.primary_container.model_package_name #=> String
     #   resp.primary_container.inference_specification_name #=> String
     #   resp.primary_container.multi_model_config.model_cache_setting #=> String, one of "Enabled", "Disabled"
+    #   resp.primary_container.model_data_source.s3_data_source.s3_uri #=> String
+    #   resp.primary_container.model_data_source.s3_data_source.s3_data_type #=> String, one of "S3Prefix", "S3Object"
+    #   resp.primary_container.model_data_source.s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.containers #=> Array
     #   resp.containers[0].container_hostname #=> String
     #   resp.containers[0].image #=> String
@@ -12365,6 +12574,9 @@ module Aws::SageMaker
     #   resp.containers[0].model_package_name #=> String
     #   resp.containers[0].inference_specification_name #=> String
     #   resp.containers[0].multi_model_config.model_cache_setting #=> String, one of "Enabled", "Disabled"
+    #   resp.containers[0].model_data_source.s3_data_source.s3_uri #=> String
+    #   resp.containers[0].model_data_source.s3_data_source.s3_data_type #=> String, one of "S3Prefix", "S3Object"
+    #   resp.containers[0].model_data_source.s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.inference_execution_config.mode #=> String, one of "Serial", "Direct"
     #   resp.execution_role_arn #=> String
     #   resp.vpc_config.security_group_ids #=> Array
@@ -13857,12 +14069,13 @@ module Aws::SageMaker
     #   resp.input_data_config[0].shuffle_config.seed #=> Integer
     #   resp.output_data_config.kms_key_id #=> String
     #   resp.output_data_config.s3_output_path #=> String
-    #   resp.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge"
+    #   resp.output_data_config.compression_type #=> String, one of "GZIP", "NONE"
+    #   resp.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge"
     #   resp.resource_config.instance_count #=> Integer
     #   resp.resource_config.volume_size_in_gb #=> Integer
     #   resp.resource_config.volume_kms_key_id #=> String
     #   resp.resource_config.instance_groups #=> Array
-    #   resp.resource_config.instance_groups[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge"
+    #   resp.resource_config.instance_groups[0].instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge"
     #   resp.resource_config.instance_groups[0].instance_count #=> Integer
     #   resp.resource_config.instance_groups[0].instance_group_name #=> String
     #   resp.resource_config.keep_alive_period_in_seconds #=> Integer
@@ -15328,7 +15541,7 @@ module Aws::SageMaker
     #   resp.auto_ml_job_summaries[0].auto_ml_job_name #=> String
     #   resp.auto_ml_job_summaries[0].auto_ml_job_arn #=> String
     #   resp.auto_ml_job_summaries[0].auto_ml_job_status #=> String, one of "Completed", "InProgress", "Failed", "Stopped", "Stopping"
-    #   resp.auto_ml_job_summaries[0].auto_ml_job_secondary_status #=> String, one of "Starting", "AnalyzingData", "FeatureEngineering", "ModelTuning", "MaxCandidatesReached", "Failed", "Stopped", "MaxAutoMLJobRuntimeReached", "Stopping", "CandidateDefinitionsGenerated", "GeneratingExplainabilityReport", "Completed", "ExplainabilityError", "DeployingModel", "ModelDeploymentError", "GeneratingModelInsightsReport", "ModelInsightsError", "TrainingModels"
+    #   resp.auto_ml_job_summaries[0].auto_ml_job_secondary_status #=> String, one of "Starting", "AnalyzingData", "FeatureEngineering", "ModelTuning", "MaxCandidatesReached", "Failed", "Stopped", "MaxAutoMLJobRuntimeReached", "Stopping", "CandidateDefinitionsGenerated", "GeneratingExplainabilityReport", "Completed", "ExplainabilityError", "DeployingModel", "ModelDeploymentError", "GeneratingModelInsightsReport", "ModelInsightsError", "TrainingModels", "PreTraining"
     #   resp.auto_ml_job_summaries[0].creation_time #=> Time
     #   resp.auto_ml_job_summaries[0].end_time #=> Time
     #   resp.auto_ml_job_summaries[0].last_modified_time #=> Time
@@ -15395,9 +15608,9 @@ module Aws::SageMaker
     #   resp.candidates #=> Array
     #   resp.candidates[0].candidate_name #=> String
     #   resp.candidates[0].final_auto_ml_job_objective_metric.type #=> String, one of "Maximize", "Minimize"
-    #   resp.candidates[0].final_auto_ml_job_objective_metric.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro"
+    #   resp.candidates[0].final_auto_ml_job_objective_metric.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "MAPE", "MASE", "WAPE", "AverageWeightedQuantileLoss"
     #   resp.candidates[0].final_auto_ml_job_objective_metric.value #=> Float
-    #   resp.candidates[0].final_auto_ml_job_objective_metric.standard_metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro"
+    #   resp.candidates[0].final_auto_ml_job_objective_metric.standard_metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "MAPE", "MASE", "WAPE", "AverageWeightedQuantileLoss"
     #   resp.candidates[0].objective_status #=> String, one of "Succeeded", "Pending", "Failed"
     #   resp.candidates[0].candidate_steps #=> Array
     #   resp.candidates[0].candidate_steps[0].candidate_step_type #=> String, one of "AWS::SageMaker::TrainingJob", "AWS::SageMaker::TransformJob", "AWS::SageMaker::ProcessingJob"
@@ -15415,11 +15628,12 @@ module Aws::SageMaker
     #   resp.candidates[0].failure_reason #=> String
     #   resp.candidates[0].candidate_properties.candidate_artifact_locations.explainability #=> String
     #   resp.candidates[0].candidate_properties.candidate_artifact_locations.model_insights #=> String
+    #   resp.candidates[0].candidate_properties.candidate_artifact_locations.backtest_results #=> String
     #   resp.candidates[0].candidate_properties.candidate_metrics #=> Array
-    #   resp.candidates[0].candidate_properties.candidate_metrics[0].metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro"
+    #   resp.candidates[0].candidate_properties.candidate_metrics[0].metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "MAPE", "MASE", "WAPE", "AverageWeightedQuantileLoss"
     #   resp.candidates[0].candidate_properties.candidate_metrics[0].value #=> Float
     #   resp.candidates[0].candidate_properties.candidate_metrics[0].set #=> String, one of "Train", "Validation", "Test"
-    #   resp.candidates[0].candidate_properties.candidate_metrics[0].standard_metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "LogLoss", "InferenceLatency"
+    #   resp.candidates[0].candidate_properties.candidate_metrics[0].standard_metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro", "LogLoss", "InferenceLatency", "MAPE", "MASE", "WAPE", "AverageWeightedQuantileLoss"
     #   resp.candidates[0].inference_container_definitions #=> Hash
     #   resp.candidates[0].inference_container_definitions["AutoMLProcessingUnit"] #=> Array
     #   resp.candidates[0].inference_container_definitions["AutoMLProcessingUnit"][0].image #=> String
@@ -16220,7 +16434,7 @@ module Aws::SageMaker
     #     creation_time_after: Time.now,
     #     last_modified_time_before: Time.now,
     #     last_modified_time_after: Time.now,
-    #     status_equals: "OutOfService", # accepts OutOfService, Creating, Updating, SystemUpdating, RollingBack, InService, Deleting, Failed
+    #     status_equals: "OutOfService", # accepts OutOfService, Creating, Updating, SystemUpdating, RollingBack, InService, Deleting, Failed, UpdateRollbackFailed
     #   })
     #
     # @example Response structure
@@ -16230,7 +16444,7 @@ module Aws::SageMaker
     #   resp.endpoints[0].endpoint_arn #=> String
     #   resp.endpoints[0].creation_time #=> Time
     #   resp.endpoints[0].last_modified_time #=> Time
-    #   resp.endpoints[0].endpoint_status #=> String, one of "OutOfService", "Creating", "Updating", "SystemUpdating", "RollingBack", "InService", "Deleting", "Failed"
+    #   resp.endpoints[0].endpoint_status #=> String, one of "OutOfService", "Creating", "Updating", "SystemUpdating", "RollingBack", "InService", "Deleting", "Failed", "UpdateRollbackFailed"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpoints AWS API Documentation
@@ -17160,10 +17374,14 @@ module Aws::SageMaker
     #   resp.steps[0].inference_benchmark.metrics.model_latency #=> Integer
     #   resp.steps[0].inference_benchmark.metrics.cpu_utilization #=> Float
     #   resp.steps[0].inference_benchmark.metrics.memory_utilization #=> Float
+    #   resp.steps[0].inference_benchmark.metrics.model_setup_time #=> Integer
     #   resp.steps[0].inference_benchmark.endpoint_configuration.endpoint_name #=> String
     #   resp.steps[0].inference_benchmark.endpoint_configuration.variant_name #=> String
     #   resp.steps[0].inference_benchmark.endpoint_configuration.instance_type #=> String, one of "ml.t2.medium", "ml.t2.large", "ml.t2.xlarge", "ml.t2.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.12xlarge", "ml.m5d.24xlarge", "ml.c4.large", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5d.large", "ml.c5d.xlarge", "ml.c5d.2xlarge", "ml.c5d.4xlarge", "ml.c5d.9xlarge", "ml.c5d.18xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.12xlarge", "ml.r5.24xlarge", "ml.r5d.large", "ml.r5d.xlarge", "ml.r5d.2xlarge", "ml.r5d.4xlarge", "ml.r5d.12xlarge", "ml.r5d.24xlarge", "ml.inf1.xlarge", "ml.inf1.2xlarge", "ml.inf1.6xlarge", "ml.inf1.24xlarge", "ml.c6i.large", "ml.c6i.xlarge", "ml.c6i.2xlarge", "ml.c6i.4xlarge", "ml.c6i.8xlarge", "ml.c6i.12xlarge", "ml.c6i.16xlarge", "ml.c6i.24xlarge", "ml.c6i.32xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.12xlarge", "ml.g5.16xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.p4d.24xlarge", "ml.c7g.large", "ml.c7g.xlarge", "ml.c7g.2xlarge", "ml.c7g.4xlarge", "ml.c7g.8xlarge", "ml.c7g.12xlarge", "ml.c7g.16xlarge", "ml.m6g.large", "ml.m6g.xlarge", "ml.m6g.2xlarge", "ml.m6g.4xlarge", "ml.m6g.8xlarge", "ml.m6g.12xlarge", "ml.m6g.16xlarge", "ml.m6gd.large", "ml.m6gd.xlarge", "ml.m6gd.2xlarge", "ml.m6gd.4xlarge", "ml.m6gd.8xlarge", "ml.m6gd.12xlarge", "ml.m6gd.16xlarge", "ml.c6g.large", "ml.c6g.xlarge", "ml.c6g.2xlarge", "ml.c6g.4xlarge", "ml.c6g.8xlarge", "ml.c6g.12xlarge", "ml.c6g.16xlarge", "ml.c6gd.large", "ml.c6gd.xlarge", "ml.c6gd.2xlarge", "ml.c6gd.4xlarge", "ml.c6gd.8xlarge", "ml.c6gd.12xlarge", "ml.c6gd.16xlarge", "ml.c6gn.large", "ml.c6gn.xlarge", "ml.c6gn.2xlarge", "ml.c6gn.4xlarge", "ml.c6gn.8xlarge", "ml.c6gn.12xlarge", "ml.c6gn.16xlarge", "ml.r6g.large", "ml.r6g.xlarge", "ml.r6g.2xlarge", "ml.r6g.4xlarge", "ml.r6g.8xlarge", "ml.r6g.12xlarge", "ml.r6g.16xlarge", "ml.r6gd.large", "ml.r6gd.xlarge", "ml.r6gd.2xlarge", "ml.r6gd.4xlarge", "ml.r6gd.8xlarge", "ml.r6gd.12xlarge", "ml.r6gd.16xlarge", "ml.p4de.24xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.inf2.xlarge", "ml.inf2.8xlarge", "ml.inf2.24xlarge", "ml.inf2.48xlarge"
     #   resp.steps[0].inference_benchmark.endpoint_configuration.initial_instance_count #=> Integer
+    #   resp.steps[0].inference_benchmark.endpoint_configuration.serverless_config.memory_size_in_mb #=> Integer
+    #   resp.steps[0].inference_benchmark.endpoint_configuration.serverless_config.max_concurrency #=> Integer
+    #   resp.steps[0].inference_benchmark.endpoint_configuration.serverless_config.provisioned_concurrency #=> Integer
     #   resp.steps[0].inference_benchmark.model_configuration.inference_specification_name #=> String
     #   resp.steps[0].inference_benchmark.model_configuration.environment_parameters #=> Array
     #   resp.steps[0].inference_benchmark.model_configuration.environment_parameters[0].key #=> String
@@ -21812,7 +22030,7 @@ module Aws::SageMaker
     #       },
     #     ],
     #     deployment_config: {
-    #       blue_green_update_policy: { # required
+    #       blue_green_update_policy: {
     #         traffic_routing_configuration: { # required
     #           type: "ALL_AT_ONCE", # required, accepts ALL_AT_ONCE, CANARY, LINEAR
     #           wait_interval_in_seconds: 1, # required
@@ -21834,6 +22052,18 @@ module Aws::SageMaker
     #             alarm_name: "AlarmName",
     #           },
     #         ],
+    #       },
+    #       rolling_update_policy: {
+    #         maximum_batch_size: { # required
+    #           type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
+    #           value: 1, # required
+    #         },
+    #         wait_interval_in_seconds: 1, # required
+    #         maximum_execution_timeout_in_seconds: 1,
+    #         rollback_maximum_batch_size: {
+    #           type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
+    #           value: 1, # required
+    #         },
     #       },
     #     },
     #     retain_deployment_config: false,
@@ -21953,6 +22183,9 @@ module Aws::SageMaker
     #   request. It takes some time after you've made a valid request for
     #   Feature Store to update the feature group.
     #
+    # @option params [Types::OnlineStoreConfigUpdate] :online_store_config
+    #   Updates the feature group online store configuration.
+    #
     # @return [Types::UpdateFeatureGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFeatureGroupResponse#feature_group_arn #feature_group_arn} => String
@@ -21967,6 +22200,12 @@ module Aws::SageMaker
     #         feature_type: "Integral", # accepts Integral, Fractional, String
     #       },
     #     ],
+    #     online_store_config: {
+    #       ttl_duration: {
+    #         unit: "Seconds", # accepts Seconds, Minutes, Hours, Days, Weeks
+    #         value: 1,
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -23627,7 +23866,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.187.0'
+      context[:gem_version] = '1.194.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -52,6 +52,6 @@ require_relative 'aws-sdk-devopsguru/customizations'
 # @!group service
 module Aws::DevOpsGuru
 
-  GEM_VERSION = '1.32.0'
+  GEM_VERSION = '1.34.0'
 
 end

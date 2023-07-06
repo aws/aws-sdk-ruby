@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2023-06-22)
+------------------
+
+* Feature - ChannelMessages can be made visible to sender and intended recipient rather than all channel members with the target attribute. For example, a user can send messages to a bot and receive messages back in a group channel without other members seeing them.
+
 1.20.0 (2023-06-15)
 ------------------
 

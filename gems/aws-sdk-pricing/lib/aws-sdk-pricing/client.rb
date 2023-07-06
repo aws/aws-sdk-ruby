@@ -417,35 +417,6 @@ module Aws::Pricing
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
-    #
-    # @example Example: To retrieve a list of services and service codes
-    #
-    #   # Retrieves the service for the given Service Code.
-    #
-    #   resp = client.describe_services({
-    #     format_version: "aws_v1", 
-    #     max_results: 1, 
-    #     service_code: "AmazonEC2", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     format_version: "aws_v1", 
-    #     next_token: "abcdefg123", 
-    #     services: [
-    #       {
-    #         attribute_names: [
-    #           "volumeType", 
-    #           "maxIopsvolume", 
-    #           "instanceCapacity10xlarge", 
-    #           "locationType", 
-    #           "operation", 
-    #         ], 
-    #         service_code: "AmazonEC2", 
-    #       }, 
-    #     ], 
-    #   }
-    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_services({
@@ -505,30 +476,6 @@ module Aws::Pricing
     #   * {Types::GetAttributeValuesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
-    #
-    #
-    # @example Example: To retrieve a list of attribute values
-    #
-    #   # This operation returns a list of values available for the given attribute.
-    #
-    #   resp = client.get_attribute_values({
-    #     attribute_name: "volumeType", 
-    #     max_results: 2, 
-    #     service_code: "AmazonEC2", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     attribute_values: [
-    #       {
-    #         value: "Throughput Optimized HDD", 
-    #       }, 
-    #       {
-    #         value: "Provisioned IOPS", 
-    #       }, 
-    #     ], 
-    #     next_token: "GpgauEXAMPLEezucl5LV0w==:7GzYJ0nw0DBTJ2J66EoTIIynE6O1uXwQtTRqioJzQadBnDVgHPzI1en4BUQnPCLpzeBk9RQQAWaFieA4+DapFAGLgk+Z/9/cTw9GldnPOHN98+FdmJP7wKU3QQpQ8MQr5KOeBkIsAqvAQYdL0DkL7tHwPtE5iCEByAmg9gcC/yBU1vAOsf7R3VaNN4M5jMDv3woSWqASSIlBVB6tgW78YL22KhssoItM/jWW+aP6Jqtq4mldxp/ct6DWAl+xLFwHU/CbketimPPXyqHF3/UXDw==", 
-    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -781,7 +728,7 @@ module Aws::Pricing
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pricing'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

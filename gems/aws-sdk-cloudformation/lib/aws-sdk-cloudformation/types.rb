@@ -928,6 +928,35 @@ module Aws::CloudFormation
     #   include nested sets in a change set, specify `True`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] on_stack_failure
+    #   Determines what action will be taken if stack creation fails. If
+    #   this parameter is specified, the `DisableRollback` parameter to the
+    #   [ExecuteChangeSet][1] API operation must not be specified. This must
+    #   be one of these values:
+    #
+    #   * `DELETE` - Deletes the change set if the stack creation fails.
+    #     This is only valid when the `ChangeSetType` parameter is set to
+    #     `CREATE`. If the deletion of the stack fails, the status of the
+    #     stack is `DELETE_FAILED`.
+    #
+    #   * `DO_NOTHING` - if the stack creation fails, do nothing. This is
+    #     equivalent to specifying `true` for the `DisableRollback`
+    #     parameter to the [ExecuteChangeSet][1] API operation.
+    #
+    #   * `ROLLBACK` - if the stack creation fails, roll back the stack.
+    #     This is equivalent to specifying `false` for the `DisableRollback`
+    #     parameter to the [ExecuteChangeSet][1] API operation.
+    #
+    #   For nested stacks, when the `OnStackFailure` parameter is set to
+    #   `DELETE` for the change set for the parent stack, any failure in a
+    #   child stack will cause the parent stack creation to fail and all
+    #   stacks to be deleted.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSetInput AWS API Documentation
     #
     class CreateChangeSetInput < Struct.new(
@@ -947,7 +976,8 @@ module Aws::CloudFormation
       :description,
       :change_set_type,
       :resources_to_import,
-      :include_nested_stacks)
+      :include_nested_stacks,
+      :on_stack_failure)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2337,6 +2367,30 @@ module Aws::CloudFormation
     #   nested change set hierarchy.
     #   @return [String]
     #
+    # @!attribute [rw] on_stack_failure
+    #   Determines what action will be taken if stack creation fails. When
+    #   this parameter is specified, the `DisableRollback` parameter to the
+    #   [ExecuteChangeSet][1] API operation must not be specified. This must
+    #   be one of these values:
+    #
+    #   * `DELETE` - Deletes the change set if the stack creation fails.
+    #     This is only valid when the `ChangeSetType` parameter is set to
+    #     `CREATE`. If the deletion of the stack fails, the status of the
+    #     stack is `DELETE_FAILED`.
+    #
+    #   * `DO_NOTHING` - if the stack creation fails, do nothing. This is
+    #     equivalent to specifying `true` for the `DisableRollback`
+    #     parameter to the [ExecuteChangeSet][1] API operation.
+    #
+    #   * `ROLLBACK` - if the stack creation fails, roll back the stack.
+    #     This is equivalent to specifying `false` for the `DisableRollback`
+    #     parameter to the [ExecuteChangeSet][1] API operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeChangeSetOutput AWS API Documentation
     #
     class DescribeChangeSetOutput < Struct.new(
@@ -2358,7 +2412,8 @@ module Aws::CloudFormation
       :next_token,
       :include_nested_stacks,
       :parent_change_set_id,
-      :root_change_set_id)
+      :root_change_set_id,
+      :on_stack_failure)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3672,9 +3727,23 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] disable_rollback
     #   Preserves the state of previously provisioned resources when an
-    #   operation fails.
+    #   operation fails. This parameter can't be specified when the
+    #   `OnStackFailure` parameter to the [CreateChangeSet][1] API operation
+    #   was specified.
+    #
+    #   * `True` - if the stack creation fails, do nothing. This is
+    #     equivalent to specifying `DO_NOTHING` for the `OnStackFailure`
+    #     parameter to the [CreateChangeSet][1] API operation.
+    #
+    #   * `False` - if the stack creation fails, roll back the stack. This
+    #     is equivalent to specifying `ROLLBACK` for the `OnStackFailure`
+    #     parameter to the [CreateChangeSet][1] API operation.
     #
     #   Default: `True`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateChangeSet.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ExecuteChangeSetInput AWS API Documentation

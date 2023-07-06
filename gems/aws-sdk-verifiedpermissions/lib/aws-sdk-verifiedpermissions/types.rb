@@ -71,11 +71,13 @@ module Aws::VerifiedPermissions
     # @note AttributeValue is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] boolean
-    #   An attribute value of
-    #   [Boolean](docs.cedarpolicy.comcedar-syntax-datatypes.html#datatype-boolean)
-    #   type.
+    #   An attribute value of [Boolean][1] type.
     #
     #   Example: `\{"boolean": true\}`
+    #
+    #
+    #
+    #   [1]: https://docs.cedarpolicy.com/syntax-datatypes.html#boolean
     #   @return [Boolean]
     #
     # @!attribute [rw] entity_identifier
@@ -90,35 +92,43 @@ module Aws::VerifiedPermissions
     #   @return [Types::EntityIdentifier]
     #
     # @!attribute [rw] long
-    #   An attribute value of
-    #   [Long](docs.cedarpolicy.comcedar-syntax-datatypes.html#datatype-long)
-    #   type.
+    #   An attribute value of [Long][1] type.
     #
     #   Example: `\{"long": 0\}`
+    #
+    #
+    #
+    #   [1]: https://docs.cedarpolicy.com/syntax-datatypes.html#long
     #   @return [Integer]
     #
     # @!attribute [rw] string
-    #   An attribute value of
-    #   [String](docs.cedarpolicy.comcedar-syntax-datatypes.html#datatype-string)
-    #   type.
+    #   An attribute value of [String][1] type.
     #
     #   Example: `\{"string": "abc"\}`
+    #
+    #
+    #
+    #   [1]: https://docs.cedarpolicy.com/syntax-datatypes.html#string
     #   @return [String]
     #
     # @!attribute [rw] set
-    #   An attribute value of
-    #   [Set](docs.cedarpolicy.comcedar-syntax-datatypes.html#datatype-set)
-    #   type.
+    #   An attribute value of [Set][1] type.
     #
     #   Example: `\{"set": [ \{\} ] \}`
+    #
+    #
+    #
+    #   [1]: https://docs.cedarpolicy.com/syntax-datatypes.html#set
     #   @return [Array<Types::AttributeValue>]
     #
     # @!attribute [rw] record
-    #   An attribute value of
-    #   [Record](docs.cedarpolicy.comcedar-syntax-datatypes.html#datatype-record)
-    #   type.
+    #   An attribute value of [Record][1] type.
     #
     #   Example: `\{"record": \{ "keyName": \{\} \} \}`
+    #
+    #
+    #
+    #   [1]: https://docs.cedarpolicy.com/syntax-datatypes.html#record
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/AttributeValue AWS API Documentation
@@ -152,7 +162,7 @@ module Aws::VerifiedPermissions
     # [Configuration][1] structure that is used as a parameter to the
     # [Configuration][1].
     #
-    # Example:`"CognitoUserPoolConfiguration":\{"UserPoolArn":"cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
+    # Example:`"CognitoUserPoolConfiguration":\{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
     # ["a1b2c3d4e5f6g7h8i9j0kalbmc"]\}`
     #
     #
@@ -164,7 +174,7 @@ module Aws::VerifiedPermissions
     #   that contains the identities to be authorized.
     #
     #   Example: `"UserPoolArn":
-    #   "cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5"`
+    #   "arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5"`
     #
     #
     #
@@ -213,7 +223,7 @@ module Aws::VerifiedPermissions
     #   Amazon Cognito user pool and one or more application client IDs.
     #
     #   Example:
-    #   `"configuration":\{"cognitoUserPoolConfiguration":\{"userPoolArn":"cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
+    #   `"configuration":\{"cognitoUserPoolConfiguration":\{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
     #   ["a1b2c3d4e5f6g7h8i9j0kalbmc"]\}\}`
     #
     #
@@ -312,7 +322,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    #   [1]: https://wikipedia.org/wiki/Universally_unique_Id
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #   @return [String]
     #
     # @!attribute [rw] policy_store_id
@@ -397,7 +407,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    #   [1]: https://wikipedia.org/wiki/Universally_unique_Id
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #   @return [String]
     #
     # @!attribute [rw] policy_store_id
@@ -488,7 +498,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    #   [1]: https://wikipedia.org/wiki/Universally_unique_Id
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #   @return [String]
     #
     # @!attribute [rw] validation_settings
@@ -564,7 +574,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    #   [1]: https://wikipedia.org/wiki/Universally_unique_Id
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #   @return [String]
     #
     # @!attribute [rw] policy_store_id
@@ -880,8 +890,8 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/amazon-verified-permissions/latest/APIReference/API_IsAuthorized.html
-    # [2]: https://docs.aws.amazon.com/amazon-verified-permissions/latest/APIReference/API_IsAuthorizedWithToken.html
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html
     #
     # @!attribute [rw] error_description
     #   The error description.
@@ -1375,8 +1385,15 @@ module Aws::VerifiedPermissions
     #   @return [Types::ContextDefinition]
     #
     # @!attribute [rw] entities
-    #   Specifies the list of entities and their associated attributes that
-    #   Verified Permissions can examine when evaluating the policies.
+    #   Specifies the list of resources and principals and their associated
+    #   attributes that Verified Permissions can examine when evaluating the
+    #   policies.
+    #
+    #   <note markdown="1"> You can include only principal and resource entities in this
+    #   parameter; you can't include actions. You must specify actions in
+    #   the schema.
+    #
+    #    </note>
     #   @return [Types::EntitiesDefinition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/IsAuthorizedInput AWS API Documentation
@@ -1460,8 +1477,15 @@ module Aws::VerifiedPermissions
     #   @return [Types::ContextDefinition]
     #
     # @!attribute [rw] entities
-    #   Specifies the list of entities and their associated attributes that
-    #   Verified Permissions can examine when evaluating the policies.
+    #   Specifies the list of resources and principals and their associated
+    #   attributes that Verified Permissions can examine when evaluating the
+    #   policies.
+    #
+    #   <note markdown="1"> You can include only principal and resource entities in this
+    #   parameter; you can't include actions. You must specify actions in
+    #   the schema.
+    #
+    #    </note>
     #   @return [Types::EntitiesDefinition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/IsAuthorizedWithTokenInput AWS API Documentation
@@ -2842,8 +2866,7 @@ module Aws::VerifiedPermissions
     #   The policy attempts to access a record or entity attribute that
     #   isn't specified in the schema. Test for the existence of the
     #   attribute first before attempting to access its value. For more
-    #   information, see the [has (presence of attribute test)
-    #   operator](docs.cedarpolicy.comsyntax-operators.html#has-presence-of-attribute-test)
+    #   information, see the [has (presence of attribute test) operator][1]
     #   in the *Cedar Policy Language Guide*.
     #
     # * **UnsafeOptionalAttributeAccess**
@@ -2852,8 +2875,7 @@ module Aws::VerifiedPermissions
     #   optional and isn't guaranteed to be present. Test for the existence
     #   of the attribute first before attempting to access its value. For
     #   more information, see the [has (presence of attribute test)
-    #   operator](docs.cedarpolicy.comsyntax-operators.html#has-presence-of-attribute-test)
-    #   in the *Cedar Policy Language Guide*.
+    #   operator][1] in the *Cedar Policy Language Guide*.
     #
     # * **ImpossiblePolicy**
     #
@@ -2871,6 +2893,10 @@ module Aws::VerifiedPermissions
     #   Cedar couldn't parse the argument passed to an extension type. For
     #   example, a string that is to be parsed as an IPv4 address can
     #   contain only digits and the period character.
+    #
+    #
+    #
+    # [1]: https://docs.cedarpolicy.com/syntax-operators.html#has-presence-of-attribute-test
     #
     # @!attribute [rw] message
     #   @return [String]

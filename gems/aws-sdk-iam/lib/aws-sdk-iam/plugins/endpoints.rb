@@ -182,6 +182,8 @@ module Aws::IAM
             Aws::IAM::Endpoints::GetInstanceProfile.build(context)
           when :get_login_profile
             Aws::IAM::Endpoints::GetLoginProfile.build(context)
+          when :get_mfa_device
+            Aws::IAM::Endpoints::GetMFADevice.build(context)
           when :get_open_id_connect_provider
             Aws::IAM::Endpoints::GetOpenIDConnectProvider.build(context)
           when :get_organizations_access_report

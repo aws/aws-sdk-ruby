@@ -610,6 +610,8 @@ module Aws::Glue
     GrokPattern = Shapes::StringShape.new(name: 'GrokPattern')
     HashString = Shapes::StringShape.new(name: 'HashString')
     HudiTargetCompressionType = Shapes::StringShape.new(name: 'HudiTargetCompressionType')
+    IcebergTarget = Shapes::StructureShape.new(name: 'IcebergTarget')
+    IcebergTargetList = Shapes::ListShape.new(name: 'IcebergTargetList')
     IdString = Shapes::StringShape.new(name: 'IdString')
     IdempotentParameterMismatchException = Shapes::StructureShape.new(name: 'IdempotentParameterMismatchException')
     IllegalBlueprintStateException = Shapes::StructureShape.new(name: 'IllegalBlueprintStateException')
@@ -625,6 +627,7 @@ module Aws::Glue
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
     InvalidStateException = Shapes::StructureShape.new(name: 'InvalidStateException')
     IsVersionValid = Shapes::BooleanShape.new(name: 'IsVersionValid')
+    Iso8601DateTime = Shapes::TimestampShape.new(name: 'Iso8601DateTime', timestampFormat: "iso8601")
     JDBCConnectionType = Shapes::StringShape.new(name: 'JDBCConnectionType')
     JDBCConnectorOptions = Shapes::StructureShape.new(name: 'JDBCConnectorOptions')
     JDBCConnectorSource = Shapes::StructureShape.new(name: 'JDBCConnectorSource')
@@ -1865,6 +1868,7 @@ module Aws::Glue
     CrawlerTargets.add_member(:dynamo_db_targets, Shapes::ShapeRef.new(shape: DynamoDBTargetList, location_name: "DynamoDBTargets"))
     CrawlerTargets.add_member(:catalog_targets, Shapes::ShapeRef.new(shape: CatalogTargetList, location_name: "CatalogTargets"))
     CrawlerTargets.add_member(:delta_targets, Shapes::ShapeRef.new(shape: DeltaTargetList, location_name: "DeltaTargets"))
+    CrawlerTargets.add_member(:iceberg_targets, Shapes::ShapeRef.new(shape: IcebergTargetList, location_name: "IcebergTargets"))
     CrawlerTargets.struct_class = Types::CrawlerTargets
 
     CrawlsFilter.add_member(:field_name, Shapes::ShapeRef.new(shape: FieldName, location_name: "FieldName"))
@@ -2361,6 +2365,7 @@ module Aws::Glue
 
     DatabaseIdentifier.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     DatabaseIdentifier.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, location_name: "DatabaseName"))
+    DatabaseIdentifier.add_member(:region, Shapes::ShapeRef.new(shape: NameString, location_name: "Region"))
     DatabaseIdentifier.struct_class = Types::DatabaseIdentifier
 
     DatabaseInput.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
@@ -3527,6 +3532,14 @@ module Aws::Glue
     GrokClassifier.add_member(:custom_patterns, Shapes::ShapeRef.new(shape: CustomPatterns, location_name: "CustomPatterns"))
     GrokClassifier.struct_class = Types::GrokClassifier
 
+    IcebergTarget.add_member(:paths, Shapes::ShapeRef.new(shape: PathList, location_name: "Paths"))
+    IcebergTarget.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, location_name: "ConnectionName"))
+    IcebergTarget.add_member(:exclusions, Shapes::ShapeRef.new(shape: PathList, location_name: "Exclusions"))
+    IcebergTarget.add_member(:maximum_traversal_depth, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "MaximumTraversalDepth"))
+    IcebergTarget.struct_class = Types::IcebergTarget
+
+    IcebergTargetList.member = Shapes::ShapeRef.new(shape: IcebergTarget)
+
     IdempotentParameterMismatchException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     IdempotentParameterMismatchException.struct_class = Types::IdempotentParameterMismatchException
 
@@ -3737,6 +3750,7 @@ module Aws::Glue
     KafkaStreamingSourceOptions.add_member(:include_headers, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "IncludeHeaders"))
     KafkaStreamingSourceOptions.add_member(:add_record_timestamp, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "AddRecordTimestamp"))
     KafkaStreamingSourceOptions.add_member(:emit_consumer_lag_metrics, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "EmitConsumerLagMetrics"))
+    KafkaStreamingSourceOptions.add_member(:starting_timestamp, Shapes::ShapeRef.new(shape: Iso8601DateTime, location_name: "StartingTimestamp"))
     KafkaStreamingSourceOptions.struct_class = Types::KafkaStreamingSourceOptions
 
     KeyList.member = Shapes::ShapeRef.new(shape: NameString)
@@ -3767,6 +3781,7 @@ module Aws::Glue
     KinesisStreamingSourceOptions.add_member(:role_session_name, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "RoleSessionName"))
     KinesisStreamingSourceOptions.add_member(:add_record_timestamp, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "AddRecordTimestamp"))
     KinesisStreamingSourceOptions.add_member(:emit_consumer_lag_metrics, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "EmitConsumerLagMetrics"))
+    KinesisStreamingSourceOptions.add_member(:starting_timestamp, Shapes::ShapeRef.new(shape: Iso8601DateTime, location_name: "StartingTimestamp"))
     KinesisStreamingSourceOptions.struct_class = Types::KinesisStreamingSourceOptions
 
     LabelingSetGenerationTaskRunProperties.add_member(:output_s3_path, Shapes::ShapeRef.new(shape: UriString, location_name: "OutputS3Path"))
@@ -4998,6 +5013,7 @@ module Aws::Glue
     TableIdentifier.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     TableIdentifier.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, location_name: "DatabaseName"))
     TableIdentifier.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    TableIdentifier.add_member(:region, Shapes::ShapeRef.new(shape: NameString, location_name: "Region"))
     TableIdentifier.struct_class = Types::TableIdentifier
 
     TableInput.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))

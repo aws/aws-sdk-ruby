@@ -3396,6 +3396,66 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @!attribute [rw] serial_number
+    #   Serial number that uniquely identifies the MFA device. For this API,
+    #   we only accept FIDO security key [ARNs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] user_name
+    #   The friendly name identifying the user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetMFADeviceRequest AWS API Documentation
+    #
+    class GetMFADeviceRequest < Struct.new(
+      :serial_number,
+      :user_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_name
+    #   The friendly name identifying the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] serial_number
+    #   Serial number that uniquely identifies the MFA device. For this API,
+    #   we only accept FIDO security key [ARNs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_date
+    #   The date that a specified user's MFA device was first enabled.
+    #   @return [Time]
+    #
+    # @!attribute [rw] certifications
+    #   The certifications of a specified user's MFA device. We currently
+    #   provide FIPS-140-2, FIPS-140-3, and FIDO certification levels
+    #   obtained from [ FIDO Alliance Metadata Service (MDS)][1].
+    #
+    #
+    #
+    #   [1]: https://fidoalliance.org/metadata/
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetMFADeviceResponse AWS API Documentation
+    #
+    class GetMFADeviceResponse < Struct.new(
+      :user_name,
+      :serial_number,
+      :enable_date,
+      :certifications)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] open_id_connect_provider_arn
     #   The Amazon Resource Name (ARN) of the OIDC provider resource object
     #   in IAM to get information for. You can get a list of OIDC provider

@@ -113,9 +113,12 @@ module Aws::CleanRooms
     GetSchemaAnalysisRuleOutput = Shapes::StructureShape.new(name: 'GetSchemaAnalysisRuleOutput')
     GetSchemaInput = Shapes::StructureShape.new(name: 'GetSchemaInput')
     GetSchemaOutput = Shapes::StructureShape.new(name: 'GetSchemaOutput')
-    GlueResourceName = Shapes::StringShape.new(name: 'GlueResourceName')
+    GlueDatabaseName = Shapes::StringShape.new(name: 'GlueDatabaseName')
+    GlueTableName = Shapes::StringShape.new(name: 'GlueTableName')
     GlueTableReference = Shapes::StructureShape.new(name: 'GlueTableReference')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    JoinOperator = Shapes::StringShape.new(name: 'JoinOperator')
+    JoinOperatorsList = Shapes::ListShape.new(name: 'JoinOperatorsList')
     JoinRequiredOption = Shapes::StringShape.new(name: 'JoinRequiredOption')
     KeyPrefix = Shapes::StringShape.new(name: 'KeyPrefix')
     ListCollaborationsInput = Shapes::StructureShape.new(name: 'ListCollaborationsInput')
@@ -246,6 +249,7 @@ module Aws::CleanRooms
     AnalysisRuleAggregation.add_member(:aggregate_columns, Shapes::ShapeRef.new(shape: AnalysisRuleAggregationAggregateColumnsList, required: true, location_name: "aggregateColumns"))
     AnalysisRuleAggregation.add_member(:join_columns, Shapes::ShapeRef.new(shape: AnalysisRuleColumnList, required: true, location_name: "joinColumns"))
     AnalysisRuleAggregation.add_member(:join_required, Shapes::ShapeRef.new(shape: JoinRequiredOption, location_name: "joinRequired"))
+    AnalysisRuleAggregation.add_member(:allowed_join_operators, Shapes::ShapeRef.new(shape: JoinOperatorsList, location_name: "allowedJoinOperators"))
     AnalysisRuleAggregation.add_member(:dimension_columns, Shapes::ShapeRef.new(shape: AnalysisRuleColumnList, required: true, location_name: "dimensionColumns"))
     AnalysisRuleAggregation.add_member(:scalar_functions, Shapes::ShapeRef.new(shape: ScalarFunctionsList, required: true, location_name: "scalarFunctions"))
     AnalysisRuleAggregation.add_member(:output_constraints, Shapes::ShapeRef.new(shape: AggregationConstraints, required: true, location_name: "outputConstraints"))
@@ -256,6 +260,7 @@ module Aws::CleanRooms
     AnalysisRuleColumnList.member = Shapes::ShapeRef.new(shape: AnalysisRuleColumnName)
 
     AnalysisRuleList.add_member(:join_columns, Shapes::ShapeRef.new(shape: AnalysisRuleListJoinColumnsList, required: true, location_name: "joinColumns"))
+    AnalysisRuleList.add_member(:allowed_join_operators, Shapes::ShapeRef.new(shape: JoinOperatorsList, location_name: "allowedJoinOperators"))
     AnalysisRuleList.add_member(:list_columns, Shapes::ShapeRef.new(shape: AnalysisRuleColumnList, required: true, location_name: "listColumns"))
     AnalysisRuleList.struct_class = Types::AnalysisRuleList
 
@@ -549,12 +554,14 @@ module Aws::CleanRooms
     GetSchemaOutput.add_member(:schema, Shapes::ShapeRef.new(shape: Schema, required: true, location_name: "schema"))
     GetSchemaOutput.struct_class = Types::GetSchemaOutput
 
-    GlueTableReference.add_member(:table_name, Shapes::ShapeRef.new(shape: GlueResourceName, required: true, location_name: "tableName"))
-    GlueTableReference.add_member(:database_name, Shapes::ShapeRef.new(shape: GlueResourceName, required: true, location_name: "databaseName"))
+    GlueTableReference.add_member(:table_name, Shapes::ShapeRef.new(shape: GlueTableName, required: true, location_name: "tableName"))
+    GlueTableReference.add_member(:database_name, Shapes::ShapeRef.new(shape: GlueDatabaseName, required: true, location_name: "databaseName"))
     GlueTableReference.struct_class = Types::GlueTableReference
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    JoinOperatorsList.member = Shapes::ShapeRef.new(shape: JoinOperator)
 
     ListCollaborationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
     ListCollaborationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -718,7 +725,7 @@ module Aws::CleanRooms
     ProtectedQueryS3OutputConfiguration.add_member(:key_prefix, Shapes::ShapeRef.new(shape: KeyPrefix, location_name: "keyPrefix"))
     ProtectedQueryS3OutputConfiguration.struct_class = Types::ProtectedQueryS3OutputConfiguration
 
-    ProtectedQuerySQLParameters.add_member(:query_string, Shapes::ShapeRef.new(shape: ProtectedQuerySQLParametersQueryStringString, required: true, location_name: "queryString"))
+    ProtectedQuerySQLParameters.add_member(:query_string, Shapes::ShapeRef.new(shape: ProtectedQuerySQLParametersQueryStringString, location_name: "queryString"))
     ProtectedQuerySQLParameters.struct_class = Types::ProtectedQuerySQLParameters
 
     ProtectedQueryStatistics.add_member(:total_duration_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "totalDurationInMillis"))

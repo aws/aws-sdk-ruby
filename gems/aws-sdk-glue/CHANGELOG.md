@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.145.0 (2023-06-29)
+------------------
+
+* Feature - This release adds support for AWS Glue Crawler with Iceberg Tables, allowing Crawlers to discover Iceberg Tables in S3 and register them in Glue Data Catalog for query engines to query against.
+
+1.144.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.143.0 (2023-06-26)
+------------------
+
+* Feature - Timestamp Starting Position For Kinesis and Kafka Data Sources in a Glue Streaming Job
+
+1.142.0 (2023-06-19)
+------------------
+
+* Feature - This release adds support for creating cross region table/database resource links
+
 1.141.0 (2023-06-15)
 ------------------
 

@@ -113,6 +113,10 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] application_id
     #   Application ID.
     #   @return [String]
@@ -120,11 +124,16 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ArchiveApplicationRequest AWS API Documentation
     #
     class ArchiveApplicationRequest < Struct.new(
+      :account_id,
       :application_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] wave_id
     #   Wave ID.
     #   @return [String]
@@ -132,11 +141,16 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ArchiveWaveRequest AWS API Documentation
     #
     class ArchiveWaveRequest < Struct.new(
+      :account_id,
       :wave_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] application_i_ds
     #   Application IDs list.
     #   @return [Array<String>]
@@ -148,6 +162,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/AssociateApplicationsRequest AWS API Documentation
     #
     class AssociateApplicationsRequest < Struct.new(
+      :account_id,
       :application_i_ds,
       :wave_id)
       SENSITIVE = []
@@ -158,6 +173,10 @@ module Aws::Mgn
     #
     class AssociateApplicationsResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] account_id
+    #   Account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] application_id
     #   Application ID.
     #   @return [String]
@@ -169,6 +188,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/AssociateSourceServersRequest AWS API Documentation
     #
     class AssociateSourceServersRequest < Struct.new(
+      :account_id,
       :application_id,
       :source_server_i_ds)
       SENSITIVE = []
@@ -198,6 +218,10 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   The request to change the source server migration account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] life_cycle
     #   The request to change the source server migration lifecycle state.
     #   @return [Types::ChangeServerLifeCycleStateSourceServerLifecycle]
@@ -210,6 +234,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ChangeServerLifeCycleStateRequest AWS API Documentation
     #
     class ChangeServerLifeCycleStateRequest < Struct.new(
+      :account_id,
       :life_cycle,
       :source_server_id)
       SENSITIVE = []
@@ -263,6 +288,10 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   Application description.
     #   @return [String]
@@ -278,6 +307,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CreateApplicationRequest AWS API Documentation
     #
     class CreateApplicationRequest < Struct.new(
+      :account_id,
       :description,
       :name,
       :tags)
@@ -428,6 +458,11 @@ module Aws::Mgn
     #   Settings template creation.
     #   @return [Boolean]
     #
+    # @!attribute [rw] use_fips_endpoint
+    #   Request to use Fips Endpoint during Replication Settings template
+    #   creation.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CreateReplicationConfigurationTemplateRequest AWS API Documentation
     #
     class CreateReplicationConfigurationTemplateRequest < Struct.new(
@@ -443,11 +478,16 @@ module Aws::Mgn
       :staging_area_subnet_id,
       :staging_area_tags,
       :tags,
-      :use_dedicated_replication_server)
+      :use_dedicated_replication_server,
+      :use_fips_endpoint)
       SENSITIVE = [:staging_area_tags, :tags]
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   Wave description.
     #   @return [String]
@@ -463,6 +503,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CreateWaveRequest AWS API Documentation
     #
     class CreateWaveRequest < Struct.new(
+      :account_id,
       :description,
       :name,
       :tags)
@@ -610,6 +651,10 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] application_id
     #   Application ID.
     #   @return [String]
@@ -617,6 +662,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteApplicationRequest AWS API Documentation
     #
     class DeleteApplicationRequest < Struct.new(
+      :account_id,
       :application_id)
       SENSITIVE = []
       include Aws::Structure
@@ -626,6 +672,10 @@ module Aws::Mgn
     #
     class DeleteApplicationResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] account_id
+    #   Request to delete Job from service by Account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] job_id
     #   Request to delete Job from service by Job ID.
     #   @return [String]
@@ -633,6 +683,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteJobRequest AWS API Documentation
     #
     class DeleteJobRequest < Struct.new(
+      :account_id,
       :job_id)
       SENSITIVE = []
       include Aws::Structure
@@ -675,6 +726,10 @@ module Aws::Mgn
     #
     class DeleteReplicationConfigurationTemplateResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] account_id
+    #   Request to delete Source Server from service by Account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] source_server_id
     #   Request to delete Source Server from service by Server ID.
     #   @return [String]
@@ -682,6 +737,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteSourceServerRequest AWS API Documentation
     #
     class DeleteSourceServerRequest < Struct.new(
+      :account_id,
       :source_server_id)
       SENSITIVE = []
       include Aws::Structure
@@ -703,6 +759,10 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] wave_id
     #   Wave ID.
     #   @return [String]
@@ -710,6 +770,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteWaveRequest AWS API Documentation
     #
     class DeleteWaveRequest < Struct.new(
+      :account_id,
       :wave_id)
       SENSITIVE = []
       include Aws::Structure
@@ -719,6 +780,10 @@ module Aws::Mgn
     #
     class DeleteWaveResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] account_id
+    #   Request to describe Job log Account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] job_id
     #   Request to describe Job log job ID.
     #   @return [String]
@@ -734,6 +799,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeJobLogItemsRequest AWS API Documentation
     #
     class DescribeJobLogItemsRequest < Struct.new(
+      :account_id,
       :job_id,
       :max_results,
       :next_token)
@@ -758,6 +824,10 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Request to describe job log items by Account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] filters
     #   Request to describe Job log filters.
     #   @return [Types::DescribeJobsRequestFilters]
@@ -773,6 +843,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeJobsRequest AWS API Documentation
     #
     class DescribeJobsRequest < Struct.new(
+      :account_id,
       :filters,
       :max_results,
       :next_token)
@@ -907,6 +978,10 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Request to filter Source Servers list by Accoun ID.
+    #   @return [String]
+    #
     # @!attribute [rw] filters
     #   Request to filter Source Servers list.
     #   @return [Types::DescribeSourceServersRequestFilters]
@@ -922,6 +997,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeSourceServersRequest AWS API Documentation
     #
     class DescribeSourceServersRequest < Struct.new(
+      :account_id,
       :filters,
       :max_results,
       :next_token)
@@ -1014,6 +1090,10 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] application_i_ds
     #   Application IDs list.
     #   @return [Array<String>]
@@ -1025,6 +1105,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DisassociateApplicationsRequest AWS API Documentation
     #
     class DisassociateApplicationsRequest < Struct.new(
+      :account_id,
       :application_i_ds,
       :wave_id)
       SENSITIVE = []
@@ -1035,6 +1116,10 @@ module Aws::Mgn
     #
     class DisassociateApplicationsResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] account_id
+    #   Account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] application_id
     #   Application ID.
     #   @return [String]
@@ -1046,6 +1131,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DisassociateSourceServersRequest AWS API Documentation
     #
     class DisassociateSourceServersRequest < Struct.new(
+      :account_id,
       :application_id,
       :source_server_i_ds)
       SENSITIVE = []
@@ -1056,6 +1142,10 @@ module Aws::Mgn
     #
     class DisassociateSourceServersResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] account_id
+    #   Request to disconnect Source Server from service by Account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] source_server_id
     #   Request to disconnect Source Server from service by Server ID.
     #   @return [String]
@@ -1063,6 +1153,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DisconnectFromServiceRequest AWS API Documentation
     #
     class DisconnectFromServiceRequest < Struct.new(
+      :account_id,
       :source_server_id)
       SENSITIVE = []
       include Aws::Structure
@@ -1227,6 +1318,10 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Request to finalize Cutover by Source Account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] source_server_id
     #   Request to finalize Cutover by Source Server ID.
     #   @return [String]
@@ -1234,11 +1329,16 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/FinalizeCutoverRequest AWS API Documentation
     #
     class FinalizeCutoverRequest < Struct.new(
+      :account_id,
       :source_server_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Request to get Launch Configuration information by Account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] source_server_id
     #   Request to get Launch Configuration information by Source Server ID.
     #   @return [String]
@@ -1246,11 +1346,16 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/GetLaunchConfigurationRequest AWS API Documentation
     #
     class GetLaunchConfigurationRequest < Struct.new(
+      :account_id,
       :source_server_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Request to get Replication Configuration by Account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] source_server_id
     #   Request to get Replication Configuration by Source Server ID.
     #   @return [String]
@@ -1258,6 +1363,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/GetReplicationConfigurationRequest AWS API Documentation
     #
     class GetReplicationConfigurationRequest < Struct.new(
+      :account_id,
       :source_server_id)
       SENSITIVE = []
       include Aws::Structure
@@ -1299,6 +1405,10 @@ module Aws::Mgn
 
     # Import error data.
     #
+    # @!attribute [rw] account_id
+    #   Import error data source account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] application_id
     #   Import error data application ID.
     #   @return [String]
@@ -1326,6 +1436,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ImportErrorData AWS API Documentation
     #
     class ImportErrorData < Struct.new(
+      :account_id,
       :application_id,
       :ec2_launch_template_id,
       :raw_error,
@@ -2065,6 +2176,10 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Applications list Account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] filters
     #   Applications list filters.
     #   @return [Types::ListApplicationsRequestFilters]
@@ -2080,6 +2195,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListApplicationsRequest AWS API Documentation
     #
     class ListApplicationsRequest < Struct.new(
+      :account_id,
       :filters,
       :max_results,
       :next_token)
@@ -2328,6 +2444,49 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # List managed accounts request.
+    #
+    # @!attribute [rw] max_results
+    #   List managed accounts request max results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   List managed accounts request next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListManagedAccountsRequest AWS API Documentation
+    #
+    class ListManagedAccountsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # List managed accounts response.
+    #
+    # @!attribute [rw] items
+    #   List managed accounts response items.
+    #   @return [Array<Types::ManagedAccount>]
+    #
+    # @!attribute [rw] next_token
+    #   List managed accounts response next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListManagedAccountsResponse AWS API Documentation
+    #
+    class ListManagedAccountsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   Account ID to return when listing source server post migration
+    #   custom actions.
+    #   @return [String]
+    #
     # @!attribute [rw] filters
     #   Filters to apply when listing source server post migration custom
     #   actions.
@@ -2350,6 +2509,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListSourceServerActionsRequest AWS API Documentation
     #
     class ListSourceServerActionsRequest < Struct.new(
+      :account_id,
       :filters,
       :max_results,
       :next_token,
@@ -2448,6 +2608,10 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Request account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] filters
     #   Waves list filters.
     #   @return [Types::ListWavesRequestFilters]
@@ -2463,6 +2627,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListWavesRequest AWS API Documentation
     #
     class ListWavesRequest < Struct.new(
+      :account_id,
       :filters,
       :max_results,
       :next_token)
@@ -2506,6 +2671,24 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # Managed account.
+    #
+    # @!attribute [rw] account_id
+    #   Managed account, account ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ManagedAccount AWS API Documentation
+    #
+    class ManagedAccount < Struct.new(
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   Mark as archived by Account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] source_server_id
     #   Mark as archived by Source Server ID.
     #   @return [String]
@@ -2513,6 +2696,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/MarkAsArchivedRequest AWS API Documentation
     #
     class MarkAsArchivedRequest < Struct.new(
+      :account_id,
       :source_server_id)
       SENSITIVE = []
       include Aws::Structure
@@ -2585,6 +2769,23 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Pause Replication Request account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_server_id
+    #   Pause Replication Request source server ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/PauseReplicationRequest AWS API Documentation
+    #
+    class PauseReplicationRequest < Struct.new(
+      :account_id,
+      :source_server_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Post Launch Actions to executed on the Test or Cutover instance.
     #
     # @!attribute [rw] cloud_watch_log_group_name
@@ -2641,6 +2842,10 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Source server post migration custom account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] action_id
     #   Source server post migration custom action ID.
     #   @return [String]
@@ -2696,6 +2901,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/PutSourceServerActionRequest AWS API Documentation
     #
     class PutSourceServerActionRequest < Struct.new(
+      :account_id,
       :action_id,
       :action_name,
       :active,
@@ -2791,6 +2997,10 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Source server post migration account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] action_id
     #   Source server post migration custom action ID to remove.
     #   @return [String]
@@ -2802,6 +3012,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/RemoveSourceServerActionRequest AWS API Documentation
     #
     class RemoveSourceServerActionRequest < Struct.new(
+      :account_id,
       :action_id,
       :source_server_id)
       SENSITIVE = []
@@ -2895,6 +3106,10 @@ module Aws::Mgn
     #   Replication Configuration use Dedicated Replication Server.
     #   @return [Boolean]
     #
+    # @!attribute [rw] use_fips_endpoint
+    #   Replication Configuration use Fips Endpoint.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ReplicationConfiguration AWS API Documentation
     #
     class ReplicationConfiguration < Struct.new(
@@ -2912,7 +3127,8 @@ module Aws::Mgn
       :source_server_id,
       :staging_area_subnet_id,
       :staging_area_tags,
-      :use_dedicated_replication_server)
+      :use_dedicated_replication_server,
+      :use_fips_endpoint)
       SENSITIVE = [:staging_area_tags]
       include Aws::Structure
     end
@@ -3013,6 +3229,10 @@ module Aws::Mgn
     #   Replication Configuration template use Dedicated Replication Server.
     #   @return [Boolean]
     #
+    # @!attribute [rw] use_fips_endpoint
+    #   Replication Configuration template use Fips Endpoint.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ReplicationConfigurationTemplate AWS API Documentation
     #
     class ReplicationConfigurationTemplate < Struct.new(
@@ -3030,7 +3250,8 @@ module Aws::Mgn
       :staging_area_subnet_id,
       :staging_area_tags,
       :tags,
-      :use_dedicated_replication_server)
+      :use_dedicated_replication_server,
+      :use_fips_endpoint)
       SENSITIVE = [:staging_area_tags, :tags]
       include Aws::Structure
     end
@@ -3062,6 +3283,27 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Resume Replication Request account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_server_id
+    #   Resume Replication Request source server ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ResumeReplicationRequest AWS API Documentation
+    #
+    class ResumeReplicationRequest < Struct.new(
+      :account_id,
+      :source_server_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   Retry data replication for Account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] source_server_id
     #   Retry data replication for Source Server ID.
     #   @return [String]
@@ -3069,6 +3311,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/RetryDataReplicationRequest AWS API Documentation
     #
     class RetryDataReplicationRequest < Struct.new(
+      :account_id,
       :source_server_id)
       SENSITIVE = []
       include Aws::Structure
@@ -3424,6 +3667,10 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Start Cutover by Account IDs
+    #   @return [String]
+    #
     # @!attribute [rw] source_server_i_ds
     #   Start Cutover by Source Server IDs.
     #   @return [Array<String>]
@@ -3435,6 +3682,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartCutoverRequest AWS API Documentation
     #
     class StartCutoverRequest < Struct.new(
+      :account_id,
       :source_server_i_ds,
       :tags)
       SENSITIVE = [:tags]
@@ -3527,6 +3775,10 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Account ID on which to start replication.
+    #   @return [String]
+    #
     # @!attribute [rw] source_server_id
     #   ID of source server on which to start replication.
     #   @return [String]
@@ -3534,11 +3786,16 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartReplicationRequest AWS API Documentation
     #
     class StartReplicationRequest < Struct.new(
+      :account_id,
       :source_server_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Start Test for Account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] source_server_i_ds
     #   Start Test for Source Server IDs.
     #   @return [Array<String>]
@@ -3550,6 +3807,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartTestRequest AWS API Documentation
     #
     class StartTestRequest < Struct.new(
+      :account_id,
       :source_server_i_ds,
       :tags)
       SENSITIVE = [:tags]
@@ -3564,6 +3822,23 @@ module Aws::Mgn
     #
     class StartTestResponse < Struct.new(
       :job)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   Stop Replication Request account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_server_id
+    #   Stop Replication Request source server ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StopReplicationRequest AWS API Documentation
+    #
+    class StopReplicationRequest < Struct.new(
+      :account_id,
+      :source_server_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3672,6 +3947,10 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Terminate Target instance by Account ID
+    #   @return [String]
+    #
     # @!attribute [rw] source_server_i_ds
     #   Terminate Target instance by Source Server IDs.
     #   @return [Array<String>]
@@ -3683,6 +3962,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/TerminateTargetInstancesRequest AWS API Documentation
     #
     class TerminateTargetInstancesRequest < Struct.new(
+      :account_id,
       :source_server_i_ds,
       :tags)
       SENSITIVE = [:tags]
@@ -3729,6 +4009,10 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] application_id
     #   Application ID.
     #   @return [String]
@@ -3736,11 +4020,16 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UnarchiveApplicationRequest AWS API Documentation
     #
     class UnarchiveApplicationRequest < Struct.new(
+      :account_id,
       :application_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] wave_id
     #   Wave ID.
     #   @return [String]
@@ -3748,6 +4037,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UnarchiveWaveRequest AWS API Documentation
     #
     class UnarchiveWaveRequest < Struct.new(
+      :account_id,
       :wave_id)
       SENSITIVE = []
       include Aws::Structure
@@ -3787,6 +4077,10 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] application_id
     #   Application ID.
     #   @return [String]
@@ -3802,6 +4096,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateApplicationRequest AWS API Documentation
     #
     class UpdateApplicationRequest < Struct.new(
+      :account_id,
       :application_id,
       :description,
       :name)
@@ -3809,6 +4104,10 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Update Launch configuration Account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] boot_mode
     #   Update Launch configuration boot mode request.
     #   @return [String]
@@ -3856,6 +4155,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateLaunchConfigurationRequest AWS API Documentation
     #
     class UpdateLaunchConfigurationRequest < Struct.new(
+      :account_id,
       :boot_mode,
       :copy_private_ip,
       :copy_tags,
@@ -3948,6 +4248,10 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Update replication configuration Account ID request.
+    #   @return [String]
+    #
     # @!attribute [rw] associate_default_security_group
     #   Update replication configuration associate default Application
     #   Migration Service Security group request.
@@ -4013,9 +4317,14 @@ module Aws::Mgn
     #   request.
     #   @return [Boolean]
     #
+    # @!attribute [rw] use_fips_endpoint
+    #   Update replication configuration use Fips Endpoint.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateReplicationConfigurationRequest AWS API Documentation
     #
     class UpdateReplicationConfigurationRequest < Struct.new(
+      :account_id,
       :associate_default_security_group,
       :bandwidth_throttling,
       :create_public_ip,
@@ -4030,7 +4339,8 @@ module Aws::Mgn
       :source_server_id,
       :staging_area_subnet_id,
       :staging_area_tags,
-      :use_dedicated_replication_server)
+      :use_dedicated_replication_server,
+      :use_fips_endpoint)
       SENSITIVE = [:staging_area_tags]
       include Aws::Structure
     end
@@ -4100,6 +4410,10 @@ module Aws::Mgn
     #   Server request.
     #   @return [Boolean]
     #
+    # @!attribute [rw] use_fips_endpoint
+    #   Update replication configuration template use Fips Endpoint request.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateReplicationConfigurationTemplateRequest AWS API Documentation
     #
     class UpdateReplicationConfigurationTemplateRequest < Struct.new(
@@ -4116,11 +4430,16 @@ module Aws::Mgn
       :replication_servers_security_groups_i_ds,
       :staging_area_subnet_id,
       :staging_area_tags,
-      :use_dedicated_replication_server)
+      :use_dedicated_replication_server,
+      :use_fips_endpoint)
       SENSITIVE = [:staging_area_tags]
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Account ID on which to update replication type.
+    #   @return [String]
+    #
     # @!attribute [rw] replication_type
     #   Replication type to which to update source server.
     #   @return [String]
@@ -4132,12 +4451,17 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateSourceServerReplicationTypeRequest AWS API Documentation
     #
     class UpdateSourceServerReplicationTypeRequest < Struct.new(
+      :account_id,
       :replication_type,
       :source_server_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   Account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   Wave description.
     #   @return [String]
@@ -4153,6 +4477,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateWaveRequest AWS API Documentation
     #
     class UpdateWaveRequest < Struct.new(
+      :account_id,
       :description,
       :name,
       :wave_id)

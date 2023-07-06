@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.127.0 (2023-06-28)
+------------------
+
+* Feature - The S3 LISTObjects, ListObjectsV2 and ListObjectVersions API now supports a new optional header x-amz-optional-object-attributes. If header contains RestoreStatus as the value, then S3 will include Glacier restore status i.e. isRestoreInProgress and RestoreExpiryDate in List response.
+
+* Feature - Select minimum expiration time for presigned urls between the expiration time option and the credential expiration time.
+
 1.126.0 (2023-06-16)
 ------------------
 

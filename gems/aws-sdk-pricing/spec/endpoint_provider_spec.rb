@@ -20,7 +20,7 @@ module Aws::Pricing
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>false, :region=>"ap-south-1"})
+        params = EndpointParameters.new(**{:region=>"ap-south-1", :use_fips=>false, :use_dual_stack=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -34,7 +34,7 @@ module Aws::Pricing
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>false, :region=>"us-east-1"})
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -48,7 +48,7 @@ module Aws::Pricing
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>true, :use_dual_stack=>true, :region=>"us-east-1"})
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>true, :use_dual_stack=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -62,7 +62,7 @@ module Aws::Pricing
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>true, :use_dual_stack=>false, :region=>"us-east-1"})
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>true, :use_dual_stack=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -76,7 +76,7 @@ module Aws::Pricing
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>true, :region=>"us-east-1"})
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -90,7 +90,7 @@ module Aws::Pricing
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>true, :use_dual_stack=>true, :region=>"cn-north-1"})
+        params = EndpointParameters.new(**{:region=>"cn-north-1", :use_fips=>true, :use_dual_stack=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -104,7 +104,7 @@ module Aws::Pricing
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>true, :use_dual_stack=>false, :region=>"cn-north-1"})
+        params = EndpointParameters.new(**{:region=>"cn-north-1", :use_fips=>true, :use_dual_stack=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -118,7 +118,7 @@ module Aws::Pricing
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>true, :region=>"cn-north-1"})
+        params = EndpointParameters.new(**{:region=>"cn-north-1", :use_fips=>false, :use_dual_stack=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -132,7 +132,7 @@ module Aws::Pricing
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>false, :region=>"cn-north-1"})
+        params = EndpointParameters.new(**{:region=>"cn-north-1", :use_fips=>false, :use_dual_stack=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -146,7 +146,7 @@ module Aws::Pricing
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>true, :use_dual_stack=>true, :region=>"us-gov-east-1"})
+        params = EndpointParameters.new(**{:region=>"us-gov-east-1", :use_fips=>true, :use_dual_stack=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -160,7 +160,7 @@ module Aws::Pricing
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>true, :use_dual_stack=>false, :region=>"us-gov-east-1"})
+        params = EndpointParameters.new(**{:region=>"us-gov-east-1", :use_fips=>true, :use_dual_stack=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -174,7 +174,7 @@ module Aws::Pricing
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>true, :region=>"us-gov-east-1"})
+        params = EndpointParameters.new(**{:region=>"us-gov-east-1", :use_fips=>false, :use_dual_stack=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -188,11 +188,24 @@ module Aws::Pricing
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>false, :region=>"us-gov-east-1"})
+        params = EndpointParameters.new(**{:region=>"us-gov-east-1", :use_fips=>false, :use_dual_stack=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-iso-east-1 with FIPS enabled and DualStack enabled' do
+      let(:expected) do
+        {"error"=>"FIPS and DualStack are enabled, but this partition does not support one or both"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-iso-east-1", :use_fips=>true, :use_dual_stack=>true})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
@@ -202,11 +215,24 @@ module Aws::Pricing
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>true, :use_dual_stack=>false, :region=>"us-iso-east-1"})
+        params = EndpointParameters.new(**{:region=>"us-iso-east-1", :use_fips=>true, :use_dual_stack=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-iso-east-1 with FIPS disabled and DualStack enabled' do
+      let(:expected) do
+        {"error"=>"DualStack is enabled but this partition does not support DualStack"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-iso-east-1", :use_fips=>false, :use_dual_stack=>true})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
@@ -216,11 +242,24 @@ module Aws::Pricing
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>false, :region=>"us-iso-east-1"})
+        params = EndpointParameters.new(**{:region=>"us-iso-east-1", :use_fips=>false, :use_dual_stack=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-isob-east-1 with FIPS enabled and DualStack enabled' do
+      let(:expected) do
+        {"error"=>"FIPS and DualStack are enabled, but this partition does not support one or both"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-isob-east-1", :use_fips=>true, :use_dual_stack=>true})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
@@ -230,11 +269,24 @@ module Aws::Pricing
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>true, :use_dual_stack=>false, :region=>"us-isob-east-1"})
+        params = EndpointParameters.new(**{:region=>"us-isob-east-1", :use_fips=>true, :use_dual_stack=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-isob-east-1 with FIPS disabled and DualStack enabled' do
+      let(:expected) do
+        {"error"=>"DualStack is enabled but this partition does not support DualStack"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-isob-east-1", :use_fips=>false, :use_dual_stack=>true})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
@@ -244,7 +296,7 @@ module Aws::Pricing
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>false, :region=>"us-isob-east-1"})
+        params = EndpointParameters.new(**{:region=>"us-isob-east-1", :use_fips=>false, :use_dual_stack=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -258,7 +310,7 @@ module Aws::Pricing
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>false, :region=>"us-east-1", :endpoint=>"https://example.com"})
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :endpoint=>"https://example.com"})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -286,7 +338,7 @@ module Aws::Pricing
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>true, :use_dual_stack=>false, :region=>"us-east-1", :endpoint=>"https://example.com"})
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>true, :use_dual_stack=>false, :endpoint=>"https://example.com"})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -299,7 +351,20 @@ module Aws::Pricing
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:use_fips=>false, :use_dual_stack=>true, :region=>"us-east-1", :endpoint=>"https://example.com"})
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>true, :endpoint=>"https://example.com"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'Missing region' do
+      let(:expected) do
+        {"error"=>"Invalid Configuration: Missing Region"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])

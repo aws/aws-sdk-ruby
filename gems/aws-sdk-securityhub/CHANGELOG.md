@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2023-07-05)
+------------------
+
+* Feature - Documentation updates for AWS Security Hub
+
+1.86.0 (2023-06-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.85.0 (2023-06-15)
 ------------------
 

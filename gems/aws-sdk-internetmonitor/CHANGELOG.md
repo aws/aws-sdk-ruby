@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2023-06-28)
+------------------
+
+* Feature - This release adds a new feature for Amazon CloudWatch Internet Monitor that enables customers to set custom thresholds, for performance and availability drops, for triggering when to create a health event.
+
 1.4.0 (2023-06-15)
 ------------------
 

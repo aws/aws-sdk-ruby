@@ -79,6 +79,42 @@ module Aws::Transfer
     #   * `NONE`: Specifies that no MDN response is required.
     #   @return [String]
     #
+    # @!attribute [rw] basic_auth_secret_id
+    #   Provides Basic authentication support to the AS2 Connectors API. To
+    #   use Basic authentication, you must provide the name or Amazon
+    #   Resource Name (ARN) of a secret in Secrets Manager.
+    #
+    #   The default value for this parameter is `null`, which indicates that
+    #   Basic authentication is not enabled for the connector.
+    #
+    #   If the connector should use Basic authentication, the secret needs
+    #   to be in the following format:
+    #
+    #   `\{ "Username": "user-name", "Password": "user-password" \}`
+    #
+    #   Replace `user-name` and `user-password` with the credentials for the
+    #   actual user that is being authenticated.
+    #
+    #   Note the following:
+    #
+    #   * You are storing these credentials in Secrets Manager, *not passing
+    #     them directly* into this API.
+    #
+    #   * If you are using the API, SDKs, or CloudFormation to configure
+    #     your connector, then you must create the secret before you can
+    #     enable Basic authentication. However, if you are using the Amazon
+    #     Web Services management console, you can have the system create
+    #     the secret for you.
+    #
+    #   If you have previously enabled Basic authentication for a connector,
+    #   you can disable it by using the `UpdateConnector` API call. For
+    #   example, if you are using the CLI, you can run the following command
+    #   to remove Basic authentication:
+    #
+    #   `update-connector --connector-id my-connector-id --as2-config
+    #   'BasicAuthSecretId=""'`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/As2ConnectorConfig AWS API Documentation
     #
     class As2ConnectorConfig < Struct.new(
@@ -89,7 +125,8 @@ module Aws::Transfer
       :encryption_algorithm,
       :signing_algorithm,
       :mdn_signing_algorithm,
-      :mdn_response)
+      :mdn_response,
+      :basic_auth_secret_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -360,6 +397,13 @@ module Aws::Transfer
     #   `StartFileTransfer` request. Additionally, you need to provide read
     #   and write access to the parent directory of the files that you
     #   intend to send with `StartFileTransfer`.
+    #
+    #   If you are using Basic authentication for your AS2 connector, the
+    #   access role requires the `secretsmanager:GetSecretValue` permission
+    #   for the secret. If the secret is encrypted using a customer-managed
+    #   key instead of the Amazon Web Services managed key in Secrets
+    #   Manager, then the role also needs the `kms:Decrypt` permission for
+    #   that key.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -421,6 +465,13 @@ module Aws::Transfer
     #   `StartFileTransfer` request. Additionally, you need to provide read
     #   and write access to the parent directory of the files that you
     #   intend to send with `StartFileTransfer`.
+    #
+    #   If you are using Basic authentication for your AS2 connector, the
+    #   access role requires the `secretsmanager:GetSecretValue` permission
+    #   for the secret. If the secret is encrypted using a customer-managed
+    #   key instead of the Amazon Web Services managed key in Secrets
+    #   Manager, then the role also needs the `kms:Decrypt` permission for
+    #   that key.
     #   @return [String]
     #
     # @!attribute [rw] logging_role
@@ -789,6 +840,26 @@ module Aws::Transfer
     #   file is still being uploaded.
     #   @return [Types::WorkflowDetails]
     #
+    # @!attribute [rw] structured_log_destinations
+    #   Specifies the log groups to which your server logs are sent.
+    #
+    #   To specify a log group, you must provide the ARN for an existing log
+    #   group. In this case, the format of the log group is as follows:
+    #
+    #   `arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*`
+    #
+    #   For example,
+    #   `arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*`
+    #
+    #   If you have previously specified a log group for a server, you can
+    #   clear it, and in effect turn off structured logging, by providing an
+    #   empty value for this parameter in an `update-server` call. For
+    #   example:
+    #
+    #   `update-server --server-id s-1234567890abcdef0
+    #   --structured-log-destinations`
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateServerRequest AWS API Documentation
     #
     class CreateServerRequest < Struct.new(
@@ -806,7 +877,8 @@ module Aws::Transfer
       :protocol_details,
       :security_policy_name,
       :tags,
-      :workflow_details)
+      :workflow_details,
+      :structured_log_destinations)
       SENSITIVE = [:host_key]
       include Aws::Structure
     end
@@ -1849,6 +1921,13 @@ module Aws::Transfer
     #   `StartFileTransfer` request. Additionally, you need to provide read
     #   and write access to the parent directory of the files that you
     #   intend to send with `StartFileTransfer`.
+    #
+    #   If you are using Basic authentication for your AS2 connector, the
+    #   access role requires the `secretsmanager:GetSecretValue` permission
+    #   for the secret. If the secret is encrypted using a customer-managed
+    #   key instead of the Amazon Web Services managed key in Secrets
+    #   Manager, then the role also needs the `kms:Decrypt` permission for
+    #   that key.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1991,6 +2070,13 @@ module Aws::Transfer
     #   `StartFileTransfer` request. Additionally, you need to provide read
     #   and write access to the parent directory of the files that you
     #   intend to send with `StartFileTransfer`.
+    #
+    #   If you are using Basic authentication for your AS2 connector, the
+    #   access role requires the `secretsmanager:GetSecretValue` permission
+    #   for the secret. If the secret is encrypted using a customer-managed
+    #   key instead of the Amazon Web Services managed key in Secrets
+    #   Manager, then the role also needs the `kms:Decrypt` permission for
+    #   that key.
     #   @return [String]
     #
     # @!attribute [rw] logging_role
@@ -2440,6 +2526,26 @@ module Aws::Transfer
     #   file is still being uploaded.
     #   @return [Types::WorkflowDetails]
     #
+    # @!attribute [rw] structured_log_destinations
+    #   Specifies the log groups to which your server logs are sent.
+    #
+    #   To specify a log group, you must provide the ARN for an existing log
+    #   group. In this case, the format of the log group is as follows:
+    #
+    #   `arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*`
+    #
+    #   For example,
+    #   `arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*`
+    #
+    #   If you have previously specified a log group for a server, you can
+    #   clear it, and in effect turn off structured logging, by providing an
+    #   empty value for this parameter in an `update-server` call. For
+    #   example:
+    #
+    #   `update-server --server-id s-1234567890abcdef0
+    #   --structured-log-destinations`
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedServer AWS API Documentation
     #
     class DescribedServer < Struct.new(
@@ -2461,7 +2567,8 @@ module Aws::Transfer
       :state,
       :tags,
       :user_count,
-      :workflow_details)
+      :workflow_details,
+      :structured_log_destinations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5076,6 +5183,13 @@ module Aws::Transfer
     #   `StartFileTransfer` request. Additionally, you need to provide read
     #   and write access to the parent directory of the files that you
     #   intend to send with `StartFileTransfer`.
+    #
+    #   If you are using Basic authentication for your AS2 connector, the
+    #   access role requires the `secretsmanager:GetSecretValue` permission
+    #   for the secret. If the secret is encrypted using a customer-managed
+    #   key instead of the Amazon Web Services managed key in Secrets
+    #   Manager, then the role also needs the `kms:Decrypt` permission for
+    #   that key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateAgreementRequest AWS API Documentation
@@ -5172,6 +5286,13 @@ module Aws::Transfer
     #   `StartFileTransfer` request. Additionally, you need to provide read
     #   and write access to the parent directory of the files that you
     #   intend to send with `StartFileTransfer`.
+    #
+    #   If you are using Basic authentication for your AS2 connector, the
+    #   access role requires the `secretsmanager:GetSecretValue` permission
+    #   for the secret. If the secret is encrypted using a customer-managed
+    #   key instead of the Amazon Web Services managed key in Secrets
+    #   Manager, then the role also needs the `kms:Decrypt` permission for
+    #   that key.
     #   @return [String]
     #
     # @!attribute [rw] logging_role
@@ -5520,6 +5641,26 @@ module Aws::Transfer
     #   --workflow-details '\{"OnUpload":[]\}'`
     #   @return [Types::WorkflowDetails]
     #
+    # @!attribute [rw] structured_log_destinations
+    #   Specifies the log groups to which your server logs are sent.
+    #
+    #   To specify a log group, you must provide the ARN for an existing log
+    #   group. In this case, the format of the log group is as follows:
+    #
+    #   `arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*`
+    #
+    #   For example,
+    #   `arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*`
+    #
+    #   If you have previously specified a log group for a server, you can
+    #   clear it, and in effect turn off structured logging, by providing an
+    #   empty value for this parameter in an `update-server` call. For
+    #   example:
+    #
+    #   `update-server --server-id s-1234567890abcdef0
+    #   --structured-log-destinations`
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateServerRequest AWS API Documentation
     #
     class UpdateServerRequest < Struct.new(
@@ -5535,7 +5676,8 @@ module Aws::Transfer
       :protocols,
       :security_policy_name,
       :server_id,
-      :workflow_details)
+      :workflow_details,
+      :structured_log_destinations)
       SENSITIVE = [:host_key]
       include Aws::Structure
     end

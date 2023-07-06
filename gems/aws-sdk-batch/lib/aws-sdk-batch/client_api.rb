@@ -176,6 +176,7 @@ module Aws::Batch
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     RetryAction = Shapes::StringShape.new(name: 'RetryAction')
     RetryStrategy = Shapes::StructureShape.new(name: 'RetryStrategy')
+    RuntimePlatform = Shapes::StructureShape.new(name: 'RuntimePlatform')
     SchedulingPolicyDetail = Shapes::StructureShape.new(name: 'SchedulingPolicyDetail')
     SchedulingPolicyDetailList = Shapes::ListShape.new(name: 'SchedulingPolicyDetailList')
     SchedulingPolicyListingDetail = Shapes::StructureShape.new(name: 'SchedulingPolicyListingDetail')
@@ -344,6 +345,7 @@ module Aws::Batch
     ContainerDetail.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     ContainerDetail.add_member(:fargate_platform_configuration, Shapes::ShapeRef.new(shape: FargatePlatformConfiguration, location_name: "fargatePlatformConfiguration"))
     ContainerDetail.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "ephemeralStorage"))
+    ContainerDetail.add_member(:runtime_platform, Shapes::ShapeRef.new(shape: RuntimePlatform, location_name: "runtimePlatform"))
     ContainerDetail.struct_class = Types::ContainerDetail
 
     ContainerOverrides.add_member(:vcpus, Shapes::ShapeRef.new(shape: Integer, deprecated: true, location_name: "vcpus", metadata: {"deprecatedMessage"=>"This field is deprecated, use resourceRequirements instead."}))
@@ -375,6 +377,7 @@ module Aws::Batch
     ContainerProperties.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     ContainerProperties.add_member(:fargate_platform_configuration, Shapes::ShapeRef.new(shape: FargatePlatformConfiguration, location_name: "fargatePlatformConfiguration"))
     ContainerProperties.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "ephemeralStorage"))
+    ContainerProperties.add_member(:runtime_platform, Shapes::ShapeRef.new(shape: RuntimePlatform, location_name: "runtimePlatform"))
     ContainerProperties.struct_class = Types::ContainerProperties
 
     ContainerSummary.add_member(:exit_code, Shapes::ShapeRef.new(shape: Integer, location_name: "exitCode"))
@@ -899,6 +902,10 @@ module Aws::Batch
     RetryStrategy.add_member(:attempts, Shapes::ShapeRef.new(shape: Integer, location_name: "attempts"))
     RetryStrategy.add_member(:evaluate_on_exit, Shapes::ShapeRef.new(shape: EvaluateOnExitList, location_name: "evaluateOnExit"))
     RetryStrategy.struct_class = Types::RetryStrategy
+
+    RuntimePlatform.add_member(:operating_system_family, Shapes::ShapeRef.new(shape: String, location_name: "operatingSystemFamily"))
+    RuntimePlatform.add_member(:cpu_architecture, Shapes::ShapeRef.new(shape: String, location_name: "cpuArchitecture"))
+    RuntimePlatform.struct_class = Types::RuntimePlatform
 
     SchedulingPolicyDetail.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     SchedulingPolicyDetail.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "arn"))

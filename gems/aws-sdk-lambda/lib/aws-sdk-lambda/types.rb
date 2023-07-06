@@ -751,14 +751,15 @@ module Aws::Lambda
     #
     # @!attribute [rw] starting_position
     #   The position in a stream from which to start reading. Required for
-    #   Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources.
-    #   `AT_TIMESTAMP` is supported only for Amazon Kinesis streams and
-    #   Amazon DocumentDB.
+    #   Amazon Kinesis and Amazon DynamoDB Stream event sources.
+    #   `AT_TIMESTAMP` is supported only for Amazon Kinesis streams, Amazon
+    #   DocumentDB, Amazon MSK, and self-managed Apache Kafka.
     #   @return [String]
     #
     # @!attribute [rw] starting_position_timestamp
     #   With `StartingPosition` set to `AT_TIMESTAMP`, the time from which
-    #   to start reading.
+    #   to start reading. `StartingPositionTimestamp` cannot be in the
+    #   future.
     #   @return [Time]
     #
     # @!attribute [rw] destination_config
@@ -1781,14 +1782,15 @@ module Aws::Lambda
     #
     # @!attribute [rw] starting_position
     #   The position in a stream from which to start reading. Required for
-    #   Amazon Kinesis, Amazon DynamoDB, and Amazon MSK stream sources.
-    #   `AT_TIMESTAMP` is supported only for Amazon Kinesis streams and
-    #   Amazon DocumentDB.
+    #   Amazon Kinesis and Amazon DynamoDB Stream event sources.
+    #   `AT_TIMESTAMP` is supported only for Amazon Kinesis streams, Amazon
+    #   DocumentDB, Amazon MSK, and self-managed Apache Kafka.
     #   @return [String]
     #
     # @!attribute [rw] starting_position_timestamp
     #   With `StartingPosition` set to `AT_TIMESTAMP`, the time from which
-    #   to start reading.
+    #   to start reading. `StartingPositionTimestamp` cannot be in the
+    #   future.
     #   @return [Time]
     #
     # @!attribute [rw] batch_size
@@ -5223,6 +5225,27 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # Lambda has detected your function being invoked in a recursive loop
+    # with other Amazon Web Services resources and stopped your function's
+    # invocation.
+    #
+    # @!attribute [rw] type
+    #   The exception type.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The exception message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RecursiveInvocationException AWS API Documentation
+    #
+    class RecursiveInvocationException < Struct.new(
+      :type,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] layer_name
     #   The name or Amazon Resource Name (ARN) of the layer.
     #   @return [String]
@@ -5506,13 +5529,9 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # The function's Lambda SnapStart setting. Set `ApplyOn` to
+    # The function's [Lambda SnapStart][1] setting. Set `ApplyOn` to
     # `PublishedVersions` to create a snapshot of the initialized execution
     # environment when you publish a function version.
-    #
-    # SnapStart is supported with the `java11` runtime. For more
-    # information, see [Improving startup performance with Lambda
-    # SnapStart][1].
     #
     #
     #

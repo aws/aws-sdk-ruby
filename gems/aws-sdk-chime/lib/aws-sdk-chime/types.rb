@@ -6088,14 +6088,23 @@ module Aws::Chime
     #
     # @!attribute [rw] screen_data_url
     #   The screen data URL.
+    #
+    #   **This parameter is is no longer supported and no longer used by the
+    #   Amazon Chime SDK.**
     #   @return [String]
     #
     # @!attribute [rw] screen_sharing_url
     #   The screen sharing URL.
+    #
+    #   **This parameter is is no longer supported and no longer used by the
+    #   Amazon Chime SDK.**.
     #   @return [String]
     #
     # @!attribute [rw] screen_viewing_url
     #   The screen viewing URL.
+    #
+    #   **This parameter is is no longer supported and no longer used by the
+    #   Amazon Chime SDK.**
     #   @return [String]
     #
     # @!attribute [rw] signaling_url
@@ -6104,6 +6113,9 @@ module Aws::Chime
     #
     # @!attribute [rw] turn_control_url
     #   The turn control URL.
+    #
+    #   **This parameter is is no longer supported and no longer used by the
+    #   Amazon Chime SDK.**
     #   @return [String]
     #
     # @!attribute [rw] event_ingestion_url

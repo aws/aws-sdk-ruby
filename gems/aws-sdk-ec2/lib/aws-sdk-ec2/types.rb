@@ -992,7 +992,12 @@ module Aws::EC2
     #
     # @!attribute [rw] quantity
     #   The number of Dedicated Hosts to allocate to your account with these
-    #   parameters.
+    #   parameters. If you are allocating the Dedicated Hosts on an Outpost,
+    #   and you specify **AssetIds**, you can omit this parameter. In this
+    #   case, Amazon EC2 allocates a Dedicated Host on each specified
+    #   hardware asset. If you specify both **AssetIds** and **Quantity**,
+    #   then the value that you specify for **Quantity** must be equal to
+    #   the number of asset IDs specified.
     #   @return [Integer]
     #
     # @!attribute [rw] tag_specifications
@@ -1013,7 +1018,11 @@ module Aws::EC2
     #
     # @!attribute [rw] outpost_arn
     #   The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on
-    #   which to allocate the Dedicated Host.
+    #   which to allocate the Dedicated Host. If you specify **OutpostArn**,
+    #   you can optionally specify **AssetIds**.
+    #
+    #   If you are allocating the Dedicated Host in a Region, omit this
+    #   parameter.
     #   @return [String]
     #
     # @!attribute [rw] host_maintenance
@@ -1025,6 +1034,22 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-maintenance.html
     #   @return [String]
+    #
+    # @!attribute [rw] asset_ids
+    #   The IDs of the Outpost hardware assets on which to allocate the
+    #   Dedicated Hosts. Targeting specific hardware assets on an Outpost
+    #   can help to minimize latency between your workloads. This parameter
+    #   is supported only if you specify **OutpostArn**. If you are
+    #   allocating the Dedicated Hosts in a Region, omit this parameter.
+    #
+    #   * If you specify this parameter, you can omit **Quantity**. In this
+    #     case, Amazon EC2 allocates a Dedicated Host on each specified
+    #     hardware asset.
+    #
+    #   * If you specify both **AssetIds** and **Quantity**, then the value
+    #     for **Quantity** must be equal to the number of asset IDs
+    #     specified.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateHostsRequest AWS API Documentation
     #
@@ -1038,7 +1063,8 @@ module Aws::EC2
       :tag_specifications,
       :host_recovery,
       :outpost_arn,
-      :host_maintenance)
+      :host_maintenance,
+      :asset_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6189,7 +6215,12 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] amd_sev_snp
-    #   Indicates whether the instance is enabled for AMD SEV-SNP.
+    #   Indicates whether the instance is enabled for AMD SEV-SNP. For more
+    #   information, see [AMD SEV-SNP][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sev-snp.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CpuOptions AWS API Documentation
@@ -6217,7 +6248,12 @@ module Aws::EC2
     #
     # @!attribute [rw] amd_sev_snp
     #   Indicates whether to enable the instance for AMD SEV-SNP. AMD
-    #   SEV-SNP is supported with M6a, R6a, and C6a instance types only.
+    #   SEV-SNP is supported with M6a, R6a, and C6a instance types only. For
+    #   more information, see [AMD SEV-SNP][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sev-snp.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CpuOptionsRequest AWS API Documentation
@@ -19368,6 +19404,9 @@ module Aws::EC2
     #   * `processor-info.sustained-clock-speed-in-ghz` - The CPU clock
     #     speed, in GHz.
     #
+    #   * `processor-info.supported-features` - The supported CPU features
+    #     (`amd-sev-snp`).
+    #
     #   * `supported-boot-mode` - The boot mode (`legacy-bios` \| `uefi`).
     #
     #   * `supported-root-device-type` - The root device type (`ebs` \|
@@ -19427,9 +19466,16 @@ module Aws::EC2
     #   The instance type. For more information, see [Instance types][1] in
     #   the *Amazon EC2 User Guide*.
     #
+    #   When you change your EBS-backed instance type, instance restart or
+    #   replacement behavior depends on the instance type compatibility
+    #   between the old and new types. An instance that's backed by an
+    #   instance store volume is always replaced. For more information, see
+    #   [Change the instance type][2] in the *Amazon EC2 User Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-resize.html
     #   @return [Array<Types::InstanceTypeInfo>]
     #
     # @!attribute [rw] next_token
@@ -31567,8 +31613,10 @@ module Aws::EC2
     #   @return [Types::InstanceRequirements]
     #
     # @!attribute [rw] image_id
-    #   The ID of the AMI. An AMI is required to launch an instance. The AMI
-    #   ID must be specified here or in the launch template.
+    #   The ID of the AMI. An AMI is required to launch an instance. This
+    #   parameter is only available for fleets of type `instant`. For fleets
+    #   of type `maintain` and `request`, you must specify the AMI ID in the
+    #   launch template.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateOverrides AWS API Documentation
@@ -31660,8 +31708,10 @@ module Aws::EC2
     #   @return [Types::InstanceRequirementsRequest]
     #
     # @!attribute [rw] image_id
-    #   The ID of the AMI. An AMI is required to launch an instance. The AMI
-    #   ID must be specified here or in the launch template.
+    #   The ID of the AMI. An AMI is required to launch an instance. This
+    #   parameter is only available for fleets of type `instant`. For fleets
+    #   of type `maintain` and `request`, you must specify the AMI ID in the
+    #   launch template.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateOverridesRequest AWS API Documentation
@@ -34912,6 +34962,11 @@ module Aws::EC2
     #   Dedicated Host.
     #   @return [String]
     #
+    # @!attribute [rw] asset_id
+    #   The ID of the Outpost hardware asset on which the Dedicated Host is
+    #   allocated.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Host AWS API Documentation
     #
     class Host < Struct.new(
@@ -34933,7 +34988,8 @@ module Aws::EC2
       :availability_zone_id,
       :member_of_service_linked_resource_group,
       :outpost_arn,
-      :host_maintenance)
+      :host_maintenance,
+      :asset_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41430,7 +41486,9 @@ module Aws::EC2
     # Describes a launch template and overrides.
     #
     # @!attribute [rw] launch_template_specification
-    #   The launch template.
+    #   The launch template to use. Make sure that the launch template does
+    #   not contain the `NetworkInterfaceId` parameter because you can't
+    #   specify a network interface ID in a Spot Fleet.
     #   @return [Types::FleetLaunchTemplateSpecification]
     #
     # @!attribute [rw] overrides
@@ -45023,10 +45081,11 @@ module Aws::EC2
     # @!attribute [rw] tenancy
     #   The tenancy for the instance.
     #
-    #   <note markdown="1"> For T3 instances, you can't change the tenancy from `dedicated` to
-    #   `host`, or from `host` to `dedicated`. Attempting to make one of
-    #   these unsupported tenancy changes results in the `InvalidTenancy`
-    #   error code.
+    #   <note markdown="1"> For T3 instances, you must launch the instance on a Dedicated Host
+    #   to use a tenancy of `host`. You can't change the tenancy from
+    #   `host` to `dedicated` or `default`. Attempting to make one of these
+    #   unsupported tenancy changes results in an `InvalidRequest` error
+    #   code.
     #
     #    </note>
     #   @return [String]
@@ -45038,6 +45097,8 @@ module Aws::EC2
     #
     # @!attribute [rw] host_resource_group_arn
     #   The ARN of the host resource group in which to place the instance.
+    #   The instance must have a tenancy of `host` to specify this
+    #   parameter.
     #   @return [String]
     #
     # @!attribute [rw] group_id
@@ -47696,7 +47757,7 @@ module Aws::EC2
       :tunnel_options,
       :dry_run,
       :skip_tunnel_replacement)
-      SENSITIVE = []
+      SENSITIVE = [:tunnel_options]
       include Aws::Structure
     end
 
@@ -47911,7 +47972,7 @@ module Aws::EC2
       :startup_action,
       :log_options,
       :enable_tunnel_lifecycle_control)
-      SENSITIVE = []
+      SENSITIVE = [:pre_shared_key]
       include Aws::Structure
     end
 
@@ -50646,7 +50707,11 @@ module Aws::EC2
     # @!attribute [rw] supported_features
     #   Indicates whether the instance type supports AMD SEV-SNP. If the
     #   request returns `amd-sev-snp`, AMD SEV-SNP is supported. Otherwise,
-    #   it is not supported.
+    #   it is not supported. For more information, see [ AMD SEV-SNP][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sev-snp.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProcessorInfo AWS API Documentation
@@ -55178,11 +55243,18 @@ module Aws::EC2
     #   The instance type. For more information, see [Instance types][1] in
     #   the *Amazon EC2 User Guide*.
     #
+    #   When you change your EBS-backed instance type, instance restart or
+    #   replacement behavior depends on the instance type compatibility
+    #   between the old and new types. An instance that's backed by an
+    #   instance store volume is always replaced. For more information, see
+    #   [Change the instance type][2] in the *Amazon EC2 User Guide*.
+    #
     #   Default: `m1.small`
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-resize.html
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_address_count
@@ -62148,7 +62220,7 @@ module Aws::EC2
       :startup_action,
       :log_options,
       :enable_tunnel_lifecycle_control)
-      SENSITIVE = []
+      SENSITIVE = [:pre_shared_key]
       include Aws::Structure
     end
 
@@ -63149,7 +63221,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the destinations for Verified Access logs.
+    # Options for Verified Access logs.
     #
     # @!attribute [rw] s3
     #   Sends Verified Access logs to Amazon S3.
@@ -63163,12 +63235,24 @@ module Aws::EC2
     #   Sends Verified Access logs to Kinesis.
     #   @return [Types::VerifiedAccessLogKinesisDataFirehoseDestinationOptions]
     #
+    # @!attribute [rw] log_version
+    #   The logging version to use.
+    #
+    #   Valid values: `ocsf-0.1` \| `ocsf-1.0.0-rc.2`
+    #   @return [String]
+    #
+    # @!attribute [rw] include_trust_context
+    #   Include trust data sent by trust providers into the logs.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VerifiedAccessLogOptions AWS API Documentation
     #
     class VerifiedAccessLogOptions < Struct.new(
       :s3,
       :cloud_watch_logs,
-      :kinesis_data_firehose)
+      :kinesis_data_firehose,
+      :log_version,
+      :include_trust_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -63237,7 +63321,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the destinations for Verified Access logs.
+    # Describes the options for Verified Access logs.
     #
     # @!attribute [rw] s3
     #   Amazon S3 logging options.
@@ -63251,12 +63335,22 @@ module Aws::EC2
     #   Kinesis logging destination.
     #   @return [Types::VerifiedAccessLogKinesisDataFirehoseDestination]
     #
+    # @!attribute [rw] log_version
+    #   Describes current setting for the logging version.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_trust_context
+    #   Describes current setting for including trust data into the logs.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VerifiedAccessLogs AWS API Documentation
     #
     class VerifiedAccessLogs < Struct.new(
       :s3,
       :cloud_watch_logs,
-      :kinesis_data_firehose)
+      :kinesis_data_firehose,
+      :log_version,
+      :include_trust_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -64411,7 +64505,7 @@ module Aws::EC2
       :routes,
       :tags,
       :vgw_telemetry)
-      SENSITIVE = []
+      SENSITIVE = [:customer_gateway_configuration]
       include Aws::Structure
     end
 
@@ -64901,7 +64995,7 @@ module Aws::EC2
       :startup_action,
       :log_options,
       :enable_tunnel_lifecycle_control)
-      SENSITIVE = []
+      SENSITIVE = [:pre_shared_key]
       include Aws::Structure
     end
 

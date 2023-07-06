@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.783.0 (2023-07-03)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.782.0 (2023-06-27)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::AppFabric`.
+
+1.781.0 (2023-06-20)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.780.0 (2023-06-15)
 ------------------
 

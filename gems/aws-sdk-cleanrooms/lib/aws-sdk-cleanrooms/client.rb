@@ -528,7 +528,7 @@ module Aws::CleanRooms
     #   A description for the configured table.
     #
     # @option params [required, Types::TableReference] :table_reference
-    #   A reference to the AWS Glue table being configured.
+    #   A reference to the Glue table being configured.
     #
     # @option params [required, Array<String>] :allowed_columns
     #   The columns of the underlying table that can be used by collaborations
@@ -555,8 +555,8 @@ module Aws::CleanRooms
     #     description: "TableDescription",
     #     table_reference: { # required
     #       glue: {
-    #         table_name: "GlueResourceName", # required
-    #         database_name: "GlueResourceName", # required
+    #         table_name: "GlueTableName", # required
+    #         database_name: "GlueDatabaseName", # required
     #       },
     #     },
     #     allowed_columns: ["ColumnName"], # required
@@ -617,6 +617,7 @@ module Aws::CleanRooms
     #       v1: {
     #         list: {
     #           join_columns: ["AnalysisRuleColumnName"], # required
+    #           allowed_join_operators: ["OR"], # accepts OR, AND
     #           list_columns: ["AnalysisRuleColumnName"], # required
     #         },
     #         aggregation: {
@@ -628,6 +629,7 @@ module Aws::CleanRooms
     #           ],
     #           join_columns: ["AnalysisRuleColumnName"], # required
     #           join_required: "QUERY_RUNNER", # accepts QUERY_RUNNER
+    #           allowed_join_operators: ["OR"], # accepts OR, AND
     #           dimension_columns: ["AnalysisRuleColumnName"], # required
     #           scalar_functions: ["TRUNC"], # required, accepts TRUNC, ABS, CEILING, FLOOR, LN, LOG, ROUND, SQRT, CAST, LOWER, RTRIM, UPPER, COALESCE
     #           output_constraints: [ # required
@@ -648,6 +650,8 @@ module Aws::CleanRooms
     #   resp.analysis_rule.configured_table_arn #=> String
     #   resp.analysis_rule.policy.v1.list.join_columns #=> Array
     #   resp.analysis_rule.policy.v1.list.join_columns[0] #=> String
+    #   resp.analysis_rule.policy.v1.list.allowed_join_operators #=> Array
+    #   resp.analysis_rule.policy.v1.list.allowed_join_operators[0] #=> String, one of "OR", "AND"
     #   resp.analysis_rule.policy.v1.list.list_columns #=> Array
     #   resp.analysis_rule.policy.v1.list.list_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.aggregation.aggregate_columns #=> Array
@@ -657,6 +661,8 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.aggregation.join_columns #=> Array
     #   resp.analysis_rule.policy.v1.aggregation.join_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.aggregation.join_required #=> String, one of "QUERY_RUNNER"
+    #   resp.analysis_rule.policy.v1.aggregation.allowed_join_operators #=> Array
+    #   resp.analysis_rule.policy.v1.aggregation.allowed_join_operators[0] #=> String, one of "OR", "AND"
     #   resp.analysis_rule.policy.v1.aggregation.dimension_columns #=> Array
     #   resp.analysis_rule.policy.v1.aggregation.dimension_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.aggregation.scalar_functions #=> Array
@@ -1067,6 +1073,8 @@ module Aws::CleanRooms
     #   resp.analysis_rule.configured_table_arn #=> String
     #   resp.analysis_rule.policy.v1.list.join_columns #=> Array
     #   resp.analysis_rule.policy.v1.list.join_columns[0] #=> String
+    #   resp.analysis_rule.policy.v1.list.allowed_join_operators #=> Array
+    #   resp.analysis_rule.policy.v1.list.allowed_join_operators[0] #=> String, one of "OR", "AND"
     #   resp.analysis_rule.policy.v1.list.list_columns #=> Array
     #   resp.analysis_rule.policy.v1.list.list_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.aggregation.aggregate_columns #=> Array
@@ -1076,6 +1084,8 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.aggregation.join_columns #=> Array
     #   resp.analysis_rule.policy.v1.aggregation.join_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.aggregation.join_required #=> String, one of "QUERY_RUNNER"
+    #   resp.analysis_rule.policy.v1.aggregation.allowed_join_operators #=> Array
+    #   resp.analysis_rule.policy.v1.aggregation.allowed_join_operators[0] #=> String, one of "OR", "AND"
     #   resp.analysis_rule.policy.v1.aggregation.dimension_columns #=> Array
     #   resp.analysis_rule.policy.v1.aggregation.dimension_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.aggregation.scalar_functions #=> Array
@@ -1309,6 +1319,8 @@ module Aws::CleanRooms
     #   resp.analysis_rule.update_time #=> Time
     #   resp.analysis_rule.policy.v1.list.join_columns #=> Array
     #   resp.analysis_rule.policy.v1.list.join_columns[0] #=> String
+    #   resp.analysis_rule.policy.v1.list.allowed_join_operators #=> Array
+    #   resp.analysis_rule.policy.v1.list.allowed_join_operators[0] #=> String, one of "OR", "AND"
     #   resp.analysis_rule.policy.v1.list.list_columns #=> Array
     #   resp.analysis_rule.policy.v1.list.list_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.aggregation.aggregate_columns #=> Array
@@ -1318,6 +1330,8 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.aggregation.join_columns #=> Array
     #   resp.analysis_rule.policy.v1.aggregation.join_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.aggregation.join_required #=> String, one of "QUERY_RUNNER"
+    #   resp.analysis_rule.policy.v1.aggregation.allowed_join_operators #=> Array
+    #   resp.analysis_rule.policy.v1.aggregation.allowed_join_operators[0] #=> String, one of "OR", "AND"
     #   resp.analysis_rule.policy.v1.aggregation.dimension_columns #=> Array
     #   resp.analysis_rule.policy.v1.aggregation.dimension_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.aggregation.scalar_functions #=> Array
@@ -1727,7 +1741,7 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
-    # Creates a protected query that is started by AWS Clean Rooms.
+    # Creates a protected query that is started by Clean Rooms .
     #
     # @option params [required, String] :type
     #   The type of the protected query to be started.
@@ -1752,7 +1766,7 @@ module Aws::CleanRooms
     #     type: "SQL", # required, accepts SQL
     #     membership_identifier: "MembershipIdentifier", # required
     #     sql_parameters: { # required
-    #       query_string: "ProtectedQuerySQLParametersQueryStringString", # required
+    #       query_string: "ProtectedQuerySQLParametersQueryStringString",
     #     },
     #     result_configuration: { # required
     #       output_configuration: { # required
@@ -1975,6 +1989,7 @@ module Aws::CleanRooms
     #       v1: {
     #         list: {
     #           join_columns: ["AnalysisRuleColumnName"], # required
+    #           allowed_join_operators: ["OR"], # accepts OR, AND
     #           list_columns: ["AnalysisRuleColumnName"], # required
     #         },
     #         aggregation: {
@@ -1986,6 +2001,7 @@ module Aws::CleanRooms
     #           ],
     #           join_columns: ["AnalysisRuleColumnName"], # required
     #           join_required: "QUERY_RUNNER", # accepts QUERY_RUNNER
+    #           allowed_join_operators: ["OR"], # accepts OR, AND
     #           dimension_columns: ["AnalysisRuleColumnName"], # required
     #           scalar_functions: ["TRUNC"], # required, accepts TRUNC, ABS, CEILING, FLOOR, LN, LOG, ROUND, SQRT, CAST, LOWER, RTRIM, UPPER, COALESCE
     #           output_constraints: [ # required
@@ -2006,6 +2022,8 @@ module Aws::CleanRooms
     #   resp.analysis_rule.configured_table_arn #=> String
     #   resp.analysis_rule.policy.v1.list.join_columns #=> Array
     #   resp.analysis_rule.policy.v1.list.join_columns[0] #=> String
+    #   resp.analysis_rule.policy.v1.list.allowed_join_operators #=> Array
+    #   resp.analysis_rule.policy.v1.list.allowed_join_operators[0] #=> String, one of "OR", "AND"
     #   resp.analysis_rule.policy.v1.list.list_columns #=> Array
     #   resp.analysis_rule.policy.v1.list.list_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.aggregation.aggregate_columns #=> Array
@@ -2015,6 +2033,8 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.aggregation.join_columns #=> Array
     #   resp.analysis_rule.policy.v1.aggregation.join_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.aggregation.join_required #=> String, one of "QUERY_RUNNER"
+    #   resp.analysis_rule.policy.v1.aggregation.allowed_join_operators #=> Array
+    #   resp.analysis_rule.policy.v1.aggregation.allowed_join_operators[0] #=> String, one of "OR", "AND"
     #   resp.analysis_rule.policy.v1.aggregation.dimension_columns #=> Array
     #   resp.analysis_rule.policy.v1.aggregation.dimension_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.aggregation.scalar_functions #=> Array
@@ -2196,7 +2216,7 @@ module Aws::CleanRooms
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

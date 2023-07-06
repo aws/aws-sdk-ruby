@@ -375,6 +375,9 @@ module Aws::Mgn
 
     # Archive application.
     #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
     # @option params [required, String] :application_id
     #   Application ID.
     #
@@ -394,6 +397,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.archive_application({
+    #     account_id: "AccountID",
     #     application_id: "ApplicationID", # required
     #   })
     #
@@ -425,6 +429,9 @@ module Aws::Mgn
 
     # Archive wave.
     #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
     # @option params [required, String] :wave_id
     #   Wave ID.
     #
@@ -443,6 +450,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.archive_wave({
+    #     account_id: "AccountID",
     #     wave_id: "WaveID", # required
     #   })
     #
@@ -474,6 +482,9 @@ module Aws::Mgn
 
     # Associate applications to wave.
     #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
     # @option params [required, Array<String>] :application_i_ds
     #   Application IDs list.
     #
@@ -485,6 +496,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_applications({
+    #     account_id: "AccountID",
     #     application_i_ds: ["ApplicationID"], # required
     #     wave_id: "WaveID", # required
     #   })
@@ -500,6 +512,9 @@ module Aws::Mgn
 
     # Associate source servers to application.
     #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
     # @option params [required, String] :application_id
     #   Application ID.
     #
@@ -511,6 +526,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_source_servers({
+    #     account_id: "AccountID",
     #     application_id: "ApplicationID", # required
     #     source_server_i_ds: ["SourceServerID"], # required
     #   })
@@ -528,6 +544,9 @@ module Aws::Mgn
     # specific Source Server IDs to one of the following: READY\_FOR\_TEST
     # or READY\_FOR\_CUTOVER. This command only works if the Source Server
     # is already launchable (dataReplicationInfo.lagDuration is not null.)
+    #
+    # @option params [String] :account_id
+    #   The request to change the source server migration account ID.
     #
     # @option params [required, Types::ChangeServerLifeCycleStateSourceServerLifecycle] :life_cycle
     #   The request to change the source server migration lifecycle state.
@@ -555,6 +574,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.change_server_life_cycle_state({
+    #     account_id: "AccountID",
     #     life_cycle: { # required
     #       state: "READY_FOR_TEST", # required, accepts READY_FOR_TEST, READY_FOR_CUTOVER, CUTOVER
     #     },
@@ -638,6 +658,9 @@ module Aws::Mgn
 
     # Create application.
     #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
     # @option params [String] :description
     #   Application description.
     #
@@ -663,6 +686,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_application({
+    #     account_id: "AccountID",
     #     description: "ApplicationDescription",
     #     name: "ApplicationName", # required
     #     tags: {
@@ -920,6 +944,10 @@ module Aws::Mgn
     #   Request to use Dedicated Replication Servers during Replication
     #   Settings template creation.
     #
+    # @option params [Boolean] :use_fips_endpoint
+    #   Request to use Fips Endpoint during Replication Settings template
+    #   creation.
+    #
     # @return [Types::ReplicationConfigurationTemplate] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ReplicationConfigurationTemplate#arn #arn} => String
@@ -937,6 +965,7 @@ module Aws::Mgn
     #   * {Types::ReplicationConfigurationTemplate#staging_area_tags #staging_area_tags} => Hash&lt;String,String&gt;
     #   * {Types::ReplicationConfigurationTemplate#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::ReplicationConfigurationTemplate#use_dedicated_replication_server #use_dedicated_replication_server} => Boolean
+    #   * {Types::ReplicationConfigurationTemplate#use_fips_endpoint #use_fips_endpoint} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -958,6 +987,7 @@ module Aws::Mgn
     #       "TagKey" => "TagValue",
     #     },
     #     use_dedicated_replication_server: false, # required
+    #     use_fips_endpoint: false,
     #   })
     #
     # @example Response structure
@@ -980,6 +1010,7 @@ module Aws::Mgn
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.use_dedicated_replication_server #=> Boolean
+    #   resp.use_fips_endpoint #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CreateReplicationConfigurationTemplate AWS API Documentation
     #
@@ -991,6 +1022,9 @@ module Aws::Mgn
     end
 
     # Create wave.
+    #
+    # @option params [String] :account_id
+    #   Account ID.
     #
     # @option params [String] :description
     #   Wave description.
@@ -1016,6 +1050,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_wave({
+    #     account_id: "AccountID",
     #     description: "WaveDescription",
     #     name: "WaveName", # required
     #     tags: {
@@ -1051,6 +1086,9 @@ module Aws::Mgn
 
     # Delete application.
     #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
     # @option params [required, String] :application_id
     #   Application ID.
     #
@@ -1059,6 +1097,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_application({
+    #     account_id: "AccountID",
     #     application_id: "ApplicationID", # required
     #   })
     #
@@ -1073,6 +1112,9 @@ module Aws::Mgn
 
     # Deletes a single Job by ID.
     #
+    # @option params [String] :account_id
+    #   Request to delete Job from service by Account ID.
+    #
     # @option params [required, String] :job_id
     #   Request to delete Job from service by Job ID.
     #
@@ -1081,6 +1123,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_job({
+    #     account_id: "AccountID",
     #     job_id: "JobID", # required
     #   })
     #
@@ -1140,6 +1183,9 @@ module Aws::Mgn
 
     # Deletes a single source server by ID.
     #
+    # @option params [String] :account_id
+    #   Request to delete Source Server from service by Account ID.
+    #
     # @option params [required, String] :source_server_id
     #   Request to delete Source Server from service by Server ID.
     #
@@ -1148,6 +1194,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_source_server({
+    #     account_id: "AccountID",
     #     source_server_id: "SourceServerID", # required
     #   })
     #
@@ -1184,6 +1231,9 @@ module Aws::Mgn
 
     # Delete wave.
     #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
     # @option params [required, String] :wave_id
     #   Wave ID.
     #
@@ -1192,6 +1242,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_wave({
+    #     account_id: "AccountID",
     #     wave_id: "WaveID", # required
     #   })
     #
@@ -1205,6 +1256,9 @@ module Aws::Mgn
     end
 
     # Retrieves detailed job log items with paging.
+    #
+    # @option params [String] :account_id
+    #   Request to describe Job log Account ID.
     #
     # @option params [required, String] :job_id
     #   Request to describe Job log job ID.
@@ -1225,6 +1279,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_job_log_items({
+    #     account_id: "AccountID",
     #     job_id: "JobID", # required
     #     max_results: 1,
     #     next_token: "PaginationToken",
@@ -1258,6 +1313,9 @@ module Aws::Mgn
     # which are APIs available only to *Support* and only used in response
     # to relevant support tickets.
     #
+    # @option params [String] :account_id
+    #   Request to describe job log items by Account ID.
+    #
     # @option params [Types::DescribeJobsRequestFilters] :filters
     #   Request to describe Job log filters.
     #
@@ -1277,6 +1335,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_jobs({
+    #     account_id: "AccountID",
     #     filters: {
     #       from_date: "ISO8601DatetimeString",
     #       job_i_ds: ["JobID"],
@@ -1458,6 +1517,7 @@ module Aws::Mgn
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["TagKey"] #=> String
     #   resp.items[0].use_dedicated_replication_server #=> Boolean
+    #   resp.items[0].use_fips_endpoint #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeReplicationConfigurationTemplates AWS API Documentation
@@ -1470,6 +1530,9 @@ module Aws::Mgn
     end
 
     # Retrieves all SourceServers or multiple SourceServers by ID.
+    #
+    # @option params [String] :account_id
+    #   Request to filter Source Servers list by Accoun ID.
     #
     # @option params [Types::DescribeSourceServersRequestFilters] :filters
     #   Request to filter Source Servers list.
@@ -1490,6 +1553,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_source_servers({
+    #     account_id: "AccountID",
     #     filters: {
     #       application_i_ds: ["ApplicationID"],
     #       is_archived: false,
@@ -1626,6 +1690,9 @@ module Aws::Mgn
 
     # Disassociate applications from wave.
     #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
     # @option params [required, Array<String>] :application_i_ds
     #   Application IDs list.
     #
@@ -1637,6 +1704,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_applications({
+    #     account_id: "AccountID",
     #     application_i_ds: ["ApplicationID"], # required
     #     wave_id: "WaveID", # required
     #   })
@@ -1652,6 +1720,9 @@ module Aws::Mgn
 
     # Disassociate source servers from application.
     #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
     # @option params [required, String] :application_id
     #   Application ID.
     #
@@ -1663,6 +1734,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_source_servers({
+    #     account_id: "AccountID",
     #     application_id: "ApplicationID", # required
     #     source_server_i_ds: ["SourceServerID"], # required
     #   })
@@ -1691,6 +1763,9 @@ module Aws::Mgn
     # dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration
     # will be nullified.
     #
+    # @option params [String] :account_id
+    #   Request to disconnect Source Server from service by Account ID.
+    #
     # @option params [required, String] :source_server_id
     #   Request to disconnect Source Server from service by Server ID.
     #
@@ -1713,6 +1788,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.disconnect_from_service({
+    #     account_id: "AccountID",
     #     source_server_id: "SourceServerID", # required
     #   })
     #
@@ -1805,6 +1881,9 @@ module Aws::Mgn
     # dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration
     # will be nullified.
     #
+    # @option params [String] :account_id
+    #   Request to finalize Cutover by Source Account ID.
+    #
     # @option params [required, String] :source_server_id
     #   Request to finalize Cutover by Source Server ID.
     #
@@ -1827,6 +1906,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.finalize_cutover({
+    #     account_id: "AccountID",
     #     source_server_id: "SourceServerID", # required
     #   })
     #
@@ -1908,6 +1988,9 @@ module Aws::Mgn
     # Lists all LaunchConfigurations available, filtered by Source Server
     # IDs.
     #
+    # @option params [String] :account_id
+    #   Request to get Launch Configuration information by Account ID.
+    #
     # @option params [required, String] :source_server_id
     #   Request to get Launch Configuration information by Source Server ID.
     #
@@ -1929,6 +2012,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_launch_configuration({
+    #     account_id: "AccountID",
     #     source_server_id: "SourceServerID", # required
     #   })
     #
@@ -1972,6 +2056,9 @@ module Aws::Mgn
 
     # Lists all ReplicationConfigurations, filtered by Source Server ID.
     #
+    # @option params [String] :account_id
+    #   Request to get Replication Configuration by Account ID.
+    #
     # @option params [required, String] :source_server_id
     #   Request to get Replication Configuration by Source Server ID.
     #
@@ -1992,10 +2079,12 @@ module Aws::Mgn
     #   * {Types::ReplicationConfiguration#staging_area_subnet_id #staging_area_subnet_id} => String
     #   * {Types::ReplicationConfiguration#staging_area_tags #staging_area_tags} => Hash&lt;String,String&gt;
     #   * {Types::ReplicationConfiguration#use_dedicated_replication_server #use_dedicated_replication_server} => Boolean
+    #   * {Types::ReplicationConfiguration#use_fips_endpoint #use_fips_endpoint} => Boolean
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_replication_configuration({
+    #     account_id: "AccountID",
     #     source_server_id: "SourceServerID", # required
     #   })
     #
@@ -2023,6 +2112,7 @@ module Aws::Mgn
     #   resp.staging_area_tags #=> Hash
     #   resp.staging_area_tags["TagKey"] #=> String
     #   resp.use_dedicated_replication_server #=> Boolean
+    #   resp.use_fips_endpoint #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/GetReplicationConfiguration AWS API Documentation
     #
@@ -2048,6 +2138,9 @@ module Aws::Mgn
 
     # Retrieves all applications or multiple applications by ID.
     #
+    # @option params [String] :account_id
+    #   Applications list Account ID.
+    #
     # @option params [Types::ListApplicationsRequestFilters] :filters
     #   Applications list filters.
     #
@@ -2067,6 +2160,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_applications({
+    #     account_id: "AccountID",
     #     filters: {
     #       application_i_ds: ["ApplicationID"],
     #       is_archived: false,
@@ -2228,6 +2322,7 @@ module Aws::Mgn
     # @example Response structure
     #
     #   resp.items #=> Array
+    #   resp.items[0].error_data.account_id #=> String
     #   resp.items[0].error_data.application_id #=> String
     #   resp.items[0].error_data.ec2_launch_template_id #=> String
     #   resp.items[0].error_data.raw_error #=> String
@@ -2303,7 +2398,48 @@ module Aws::Mgn
       req.send_request(options)
     end
 
+    # List Managed Accounts.
+    #
+    # @option params [Integer] :max_results
+    #   List managed accounts request max results.
+    #
+    # @option params [String] :next_token
+    #   List managed accounts request next token.
+    #
+    # @return [Types::ListManagedAccountsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListManagedAccountsResponse#items #items} => Array&lt;Types::ManagedAccount&gt;
+    #   * {Types::ListManagedAccountsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_managed_accounts({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].account_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListManagedAccounts AWS API Documentation
+    #
+    # @overload list_managed_accounts(params = {})
+    # @param [Hash] params ({})
+    def list_managed_accounts(params = {}, options = {})
+      req = build_request(:list_managed_accounts, params)
+      req.send_request(options)
+    end
+
     # List source server post migration custom actions.
+    #
+    # @option params [String] :account_id
+    #   Account ID to return when listing source server post migration custom
+    #   actions.
     #
     # @option params [Types::SourceServerActionsRequestFilters] :filters
     #   Filters to apply when listing source server post migration custom
@@ -2330,6 +2466,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_source_server_actions({
+    #     account_id: "AccountID",
     #     filters: {
     #       action_i_ds: ["ActionID"],
     #     },
@@ -2463,6 +2600,9 @@ module Aws::Mgn
 
     # Retrieves all waves or multiple waves by ID.
     #
+    # @option params [String] :account_id
+    #   Request account ID.
+    #
     # @option params [Types::ListWavesRequestFilters] :filters
     #   Waves list filters.
     #
@@ -2482,6 +2622,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_waves({
+    #     account_id: "AccountID",
     #     filters: {
     #       is_archived: false,
     #       wave_i_ds: ["WaveID"],
@@ -2523,6 +2664,9 @@ module Aws::Mgn
     # by ID. This command only works for SourceServers with a lifecycle.
     # state which equals DISCONNECTED or CUTOVER.
     #
+    # @option params [String] :account_id
+    #   Mark as archived by Account ID.
+    #
     # @option params [required, String] :source_server_id
     #   Mark as archived by Source Server ID.
     #
@@ -2545,6 +2689,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.mark_as_archived({
+    #     account_id: "AccountID",
     #     source_server_id: "SourceServerID", # required
     #   })
     #
@@ -2623,7 +2768,116 @@ module Aws::Mgn
       req.send_request(options)
     end
 
+    # Pause Replication.
+    #
+    # @option params [String] :account_id
+    #   Pause Replication Request account ID.
+    #
+    # @option params [required, String] :source_server_id
+    #   Pause Replication Request source server ID.
+    #
+    # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SourceServer#application_id #application_id} => String
+    #   * {Types::SourceServer#arn #arn} => String
+    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
+    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
+    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
+    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
+    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
+    #   * {Types::SourceServer#replication_type #replication_type} => String
+    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
+    #   * {Types::SourceServer#source_server_id #source_server_id} => String
+    #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
+    #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.pause_replication({
+    #     account_id: "AccountID",
+    #     source_server_id: "SourceServerID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_id #=> String
+    #   resp.arn #=> String
+    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
+    #   resp.data_replication_info.data_replication_error.raw_error #=> String
+    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
+    #   resp.data_replication_info.data_replication_initiation.start_date_time #=> String
+    #   resp.data_replication_info.data_replication_initiation.steps #=> Array
+    #   resp.data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
+    #   resp.data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
+    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
+    #   resp.data_replication_info.eta_date_time #=> String
+    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.last_snapshot_date_time #=> String
+    #   resp.data_replication_info.replicated_disks #=> Array
+    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
+    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.fqdn_for_action_framework #=> String
+    #   resp.is_archived #=> Boolean
+    #   resp.launched_instance.ec2_instance_id #=> String
+    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
+    #   resp.launched_instance.job_id #=> String
+    #   resp.life_cycle.added_to_service_date_time #=> String
+    #   resp.life_cycle.elapsed_replication_duration #=> String
+    #   resp.life_cycle.first_byte_date_time #=> String
+    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
+    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_seen_by_service_date_time #=> String
+    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
+    #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
+    #   resp.life_cycle.last_test.initiated.job_id #=> String
+    #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED", "PENDING_INSTALLATION"
+    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
+    #   resp.source_properties.cpus #=> Array
+    #   resp.source_properties.cpus[0].cores #=> Integer
+    #   resp.source_properties.cpus[0].model_name #=> String
+    #   resp.source_properties.disks #=> Array
+    #   resp.source_properties.disks[0].bytes #=> Integer
+    #   resp.source_properties.disks[0].device_name #=> String
+    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.identification_hints.fqdn #=> String
+    #   resp.source_properties.identification_hints.hostname #=> String
+    #   resp.source_properties.identification_hints.vm_path #=> String
+    #   resp.source_properties.identification_hints.vm_ware_uuid #=> String
+    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.network_interfaces #=> Array
+    #   resp.source_properties.network_interfaces[0].ips #=> Array
+    #   resp.source_properties.network_interfaces[0].ips[0] #=> String
+    #   resp.source_properties.network_interfaces[0].is_primary #=> Boolean
+    #   resp.source_properties.network_interfaces[0].mac_address #=> String
+    #   resp.source_properties.os.full_string #=> String
+    #   resp.source_properties.ram_bytes #=> Integer
+    #   resp.source_properties.recommended_instance_type #=> String
+    #   resp.source_server_id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.user_provided_id #=> String
+    #   resp.vcenter_client_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/PauseReplication AWS API Documentation
+    #
+    # @overload pause_replication(params = {})
+    # @param [Hash] params ({})
+    def pause_replication(params = {}, options = {})
+      req = build_request(:pause_replication, params)
+      req.send_request(options)
+    end
+
     # Put source server post migration custom action.
+    #
+    # @option params [String] :account_id
+    #   Source server post migration custom account ID.
     #
     # @option params [required, String] :action_id
     #   Source server post migration custom action ID.
@@ -2682,6 +2936,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_source_server_action({
+    #     account_id: "AccountID",
     #     action_id: "ActionID", # required
     #     action_name: "ActionName", # required
     #     active: false,
@@ -2858,6 +3113,9 @@ module Aws::Mgn
 
     # Remove source server post migration custom action.
     #
+    # @option params [String] :account_id
+    #   Source server post migration account ID.
+    #
     # @option params [required, String] :action_id
     #   Source server post migration custom action ID to remove.
     #
@@ -2869,6 +3127,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_source_server_action({
+    #     account_id: "AccountID",
     #     action_id: "ActionID", # required
     #     source_server_id: "SourceServerID", # required
     #   })
@@ -2909,10 +3168,119 @@ module Aws::Mgn
       req.send_request(options)
     end
 
+    # Resume Replication.
+    #
+    # @option params [String] :account_id
+    #   Resume Replication Request account ID.
+    #
+    # @option params [required, String] :source_server_id
+    #   Resume Replication Request source server ID.
+    #
+    # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SourceServer#application_id #application_id} => String
+    #   * {Types::SourceServer#arn #arn} => String
+    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
+    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
+    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
+    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
+    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
+    #   * {Types::SourceServer#replication_type #replication_type} => String
+    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
+    #   * {Types::SourceServer#source_server_id #source_server_id} => String
+    #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
+    #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.resume_replication({
+    #     account_id: "AccountID",
+    #     source_server_id: "SourceServerID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_id #=> String
+    #   resp.arn #=> String
+    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
+    #   resp.data_replication_info.data_replication_error.raw_error #=> String
+    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
+    #   resp.data_replication_info.data_replication_initiation.start_date_time #=> String
+    #   resp.data_replication_info.data_replication_initiation.steps #=> Array
+    #   resp.data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
+    #   resp.data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
+    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
+    #   resp.data_replication_info.eta_date_time #=> String
+    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.last_snapshot_date_time #=> String
+    #   resp.data_replication_info.replicated_disks #=> Array
+    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
+    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.fqdn_for_action_framework #=> String
+    #   resp.is_archived #=> Boolean
+    #   resp.launched_instance.ec2_instance_id #=> String
+    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
+    #   resp.launched_instance.job_id #=> String
+    #   resp.life_cycle.added_to_service_date_time #=> String
+    #   resp.life_cycle.elapsed_replication_duration #=> String
+    #   resp.life_cycle.first_byte_date_time #=> String
+    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
+    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_seen_by_service_date_time #=> String
+    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
+    #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
+    #   resp.life_cycle.last_test.initiated.job_id #=> String
+    #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED", "PENDING_INSTALLATION"
+    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
+    #   resp.source_properties.cpus #=> Array
+    #   resp.source_properties.cpus[0].cores #=> Integer
+    #   resp.source_properties.cpus[0].model_name #=> String
+    #   resp.source_properties.disks #=> Array
+    #   resp.source_properties.disks[0].bytes #=> Integer
+    #   resp.source_properties.disks[0].device_name #=> String
+    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.identification_hints.fqdn #=> String
+    #   resp.source_properties.identification_hints.hostname #=> String
+    #   resp.source_properties.identification_hints.vm_path #=> String
+    #   resp.source_properties.identification_hints.vm_ware_uuid #=> String
+    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.network_interfaces #=> Array
+    #   resp.source_properties.network_interfaces[0].ips #=> Array
+    #   resp.source_properties.network_interfaces[0].ips[0] #=> String
+    #   resp.source_properties.network_interfaces[0].is_primary #=> Boolean
+    #   resp.source_properties.network_interfaces[0].mac_address #=> String
+    #   resp.source_properties.os.full_string #=> String
+    #   resp.source_properties.ram_bytes #=> Integer
+    #   resp.source_properties.recommended_instance_type #=> String
+    #   resp.source_server_id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.user_provided_id #=> String
+    #   resp.vcenter_client_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ResumeReplication AWS API Documentation
+    #
+    # @overload resume_replication(params = {})
+    # @param [Hash] params ({})
+    def resume_replication(params = {}, options = {})
+      req = build_request(:resume_replication, params)
+      req.send_request(options)
+    end
+
     # Causes the data replication initiation sequence to begin immediately
     # upon next Handshake for specified SourceServer IDs, regardless of when
     # the previous initiation started. This command will not work if the
     # SourceServer is not stalled or is in a DISCONNECTED or STOPPED state.
+    #
+    # @option params [String] :account_id
+    #   Retry data replication for Account ID.
     #
     # @option params [required, String] :source_server_id
     #   Retry data replication for Source Server ID.
@@ -2936,6 +3304,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.retry_data_replication({
+    #     account_id: "AccountID",
     #     source_server_id: "SourceServerID", # required
     #   })
     #
@@ -3018,6 +3387,9 @@ module Aws::Mgn
     # starts a LAUNCH job whose initiatedBy property is StartCutover and
     # changes the SourceServer.lifeCycle.state property to CUTTING\_OVER.
     #
+    # @option params [String] :account_id
+    #   Start Cutover by Account IDs
+    #
     # @option params [required, Array<String>] :source_server_i_ds
     #   Start Cutover by Source Server IDs.
     #
@@ -3031,6 +3403,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_cutover({
+    #     account_id: "AccountID",
     #     source_server_i_ds: ["SourceServerID"], # required
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -3178,6 +3551,9 @@ module Aws::Mgn
 
     # Starts replication for SNAPSHOT\_SHIPPING agents.
     #
+    # @option params [String] :account_id
+    #   Account ID on which to start replication.
+    #
     # @option params [required, String] :source_server_id
     #   ID of source server on which to start replication.
     #
@@ -3200,6 +3576,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_replication({
+    #     account_id: "AccountID",
     #     source_server_id: "SourceServerID", # required
     #   })
     #
@@ -3282,6 +3659,9 @@ module Aws::Mgn
     # starts a LAUNCH job whose initiatedBy property is StartTest and
     # changes the SourceServer.lifeCycle.state property to TESTING.
     #
+    # @option params [String] :account_id
+    #   Start Test for Account ID.
+    #
     # @option params [required, Array<String>] :source_server_i_ds
     #   Start Test for Source Server IDs.
     #
@@ -3295,6 +3675,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_test({
+    #     account_id: "AccountID",
     #     source_server_i_ds: ["SourceServerID"], # required
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -3342,6 +3723,112 @@ module Aws::Mgn
       req.send_request(options)
     end
 
+    # Stop Replication.
+    #
+    # @option params [String] :account_id
+    #   Stop Replication Request account ID.
+    #
+    # @option params [required, String] :source_server_id
+    #   Stop Replication Request source server ID.
+    #
+    # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SourceServer#application_id #application_id} => String
+    #   * {Types::SourceServer#arn #arn} => String
+    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
+    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
+    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
+    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
+    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
+    #   * {Types::SourceServer#replication_type #replication_type} => String
+    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
+    #   * {Types::SourceServer#source_server_id #source_server_id} => String
+    #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
+    #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_replication({
+    #     account_id: "AccountID",
+    #     source_server_id: "SourceServerID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_id #=> String
+    #   resp.arn #=> String
+    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
+    #   resp.data_replication_info.data_replication_error.raw_error #=> String
+    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
+    #   resp.data_replication_info.data_replication_initiation.start_date_time #=> String
+    #   resp.data_replication_info.data_replication_initiation.steps #=> Array
+    #   resp.data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
+    #   resp.data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
+    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
+    #   resp.data_replication_info.eta_date_time #=> String
+    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.last_snapshot_date_time #=> String
+    #   resp.data_replication_info.replicated_disks #=> Array
+    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
+    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.fqdn_for_action_framework #=> String
+    #   resp.is_archived #=> Boolean
+    #   resp.launched_instance.ec2_instance_id #=> String
+    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
+    #   resp.launched_instance.job_id #=> String
+    #   resp.life_cycle.added_to_service_date_time #=> String
+    #   resp.life_cycle.elapsed_replication_duration #=> String
+    #   resp.life_cycle.first_byte_date_time #=> String
+    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
+    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_seen_by_service_date_time #=> String
+    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
+    #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
+    #   resp.life_cycle.last_test.initiated.job_id #=> String
+    #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED", "PENDING_INSTALLATION"
+    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
+    #   resp.source_properties.cpus #=> Array
+    #   resp.source_properties.cpus[0].cores #=> Integer
+    #   resp.source_properties.cpus[0].model_name #=> String
+    #   resp.source_properties.disks #=> Array
+    #   resp.source_properties.disks[0].bytes #=> Integer
+    #   resp.source_properties.disks[0].device_name #=> String
+    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.identification_hints.fqdn #=> String
+    #   resp.source_properties.identification_hints.hostname #=> String
+    #   resp.source_properties.identification_hints.vm_path #=> String
+    #   resp.source_properties.identification_hints.vm_ware_uuid #=> String
+    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.network_interfaces #=> Array
+    #   resp.source_properties.network_interfaces[0].ips #=> Array
+    #   resp.source_properties.network_interfaces[0].ips[0] #=> String
+    #   resp.source_properties.network_interfaces[0].is_primary #=> Boolean
+    #   resp.source_properties.network_interfaces[0].mac_address #=> String
+    #   resp.source_properties.os.full_string #=> String
+    #   resp.source_properties.ram_bytes #=> Integer
+    #   resp.source_properties.recommended_instance_type #=> String
+    #   resp.source_server_id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.user_provided_id #=> String
+    #   resp.vcenter_client_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StopReplication AWS API Documentation
+    #
+    # @overload stop_replication(params = {})
+    # @param [Hash] params ({})
+    def stop_replication(params = {}, options = {})
+      req = build_request(:stop_replication, params)
+      req.send_request(options)
+    end
+
     # Adds or overwrites only the specified tags for the specified
     # Application Migration Service resource or resources. When you specify
     # an existing tag key, the value is overwritten with the new value. Each
@@ -3378,6 +3865,9 @@ module Aws::Mgn
     # instances. This command will not work for any Source Server with a
     # lifecycle.state of TESTING, CUTTING\_OVER, or CUTOVER.
     #
+    # @option params [String] :account_id
+    #   Terminate Target instance by Account ID
+    #
     # @option params [required, Array<String>] :source_server_i_ds
     #   Terminate Target instance by Source Server IDs.
     #
@@ -3391,6 +3881,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.terminate_target_instances({
+    #     account_id: "AccountID",
     #     source_server_i_ds: ["SourceServerID"], # required
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -3440,6 +3931,9 @@ module Aws::Mgn
 
     # Unarchive application.
     #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
     # @option params [required, String] :application_id
     #   Application ID.
     #
@@ -3459,6 +3953,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.unarchive_application({
+    #     account_id: "AccountID",
     #     application_id: "ApplicationID", # required
     #   })
     #
@@ -3490,6 +3985,9 @@ module Aws::Mgn
 
     # Unarchive wave.
     #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
     # @option params [required, String] :wave_id
     #   Wave ID.
     #
@@ -3508,6 +4006,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.unarchive_wave({
+    #     account_id: "AccountID",
     #     wave_id: "WaveID", # required
     #   })
     #
@@ -3566,6 +4065,9 @@ module Aws::Mgn
 
     # Update application.
     #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
     # @option params [required, String] :application_id
     #   Application ID.
     #
@@ -3591,6 +4093,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_application({
+    #     account_id: "AccountID",
     #     application_id: "ApplicationID", # required
     #     description: "ApplicationDescription",
     #     name: "ApplicationName",
@@ -3623,6 +4126,9 @@ module Aws::Mgn
     end
 
     # Updates multiple LaunchConfigurations by Source Server ID.
+    #
+    # @option params [String] :account_id
+    #   Update Launch configuration Account ID.
     #
     # @option params [String] :boot_mode
     #   Update Launch configuration boot mode request.
@@ -3675,6 +4181,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_launch_configuration({
+    #     account_id: "AccountID",
     #     boot_mode: "LEGACY_BIOS", # accepts LEGACY_BIOS, UEFI
     #     copy_private_ip: false,
     #     copy_tags: false,
@@ -3924,6 +4431,9 @@ module Aws::Mgn
     # Allows you to update multiple ReplicationConfigurations by Source
     # Server ID.
     #
+    # @option params [String] :account_id
+    #   Update replication configuration Account ID request.
+    #
     # @option params [Boolean] :associate_default_security_group
     #   Update replication configuration associate default Application
     #   Migration Service Security group request.
@@ -3974,6 +4484,9 @@ module Aws::Mgn
     #   Update replication configuration use dedicated Replication Server
     #   request.
     #
+    # @option params [Boolean] :use_fips_endpoint
+    #   Update replication configuration use Fips Endpoint.
+    #
     # @return [Types::ReplicationConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ReplicationConfiguration#associate_default_security_group #associate_default_security_group} => Boolean
@@ -3991,10 +4504,12 @@ module Aws::Mgn
     #   * {Types::ReplicationConfiguration#staging_area_subnet_id #staging_area_subnet_id} => String
     #   * {Types::ReplicationConfiguration#staging_area_tags #staging_area_tags} => Hash&lt;String,String&gt;
     #   * {Types::ReplicationConfiguration#use_dedicated_replication_server #use_dedicated_replication_server} => Boolean
+    #   * {Types::ReplicationConfiguration#use_fips_endpoint #use_fips_endpoint} => Boolean
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_replication_configuration({
+    #     account_id: "AccountID",
     #     associate_default_security_group: false,
     #     bandwidth_throttling: 1,
     #     create_public_ip: false,
@@ -4020,6 +4535,7 @@ module Aws::Mgn
     #       "TagKey" => "TagValue",
     #     },
     #     use_dedicated_replication_server: false,
+    #     use_fips_endpoint: false,
     #   })
     #
     # @example Response structure
@@ -4046,6 +4562,7 @@ module Aws::Mgn
     #   resp.staging_area_tags #=> Hash
     #   resp.staging_area_tags["TagKey"] #=> String
     #   resp.use_dedicated_replication_server #=> Boolean
+    #   resp.use_fips_endpoint #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateReplicationConfiguration AWS API Documentation
     #
@@ -4108,6 +4625,9 @@ module Aws::Mgn
     #   Update replication configuration template use dedicated Replication
     #   Server request.
     #
+    # @option params [Boolean] :use_fips_endpoint
+    #   Update replication configuration template use Fips Endpoint request.
+    #
     # @return [Types::ReplicationConfigurationTemplate] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ReplicationConfigurationTemplate#arn #arn} => String
@@ -4125,6 +4645,7 @@ module Aws::Mgn
     #   * {Types::ReplicationConfigurationTemplate#staging_area_tags #staging_area_tags} => Hash&lt;String,String&gt;
     #   * {Types::ReplicationConfigurationTemplate#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::ReplicationConfigurationTemplate#use_dedicated_replication_server #use_dedicated_replication_server} => Boolean
+    #   * {Types::ReplicationConfigurationTemplate#use_fips_endpoint #use_fips_endpoint} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -4145,6 +4666,7 @@ module Aws::Mgn
     #       "TagKey" => "TagValue",
     #     },
     #     use_dedicated_replication_server: false,
+    #     use_fips_endpoint: false,
     #   })
     #
     # @example Response structure
@@ -4167,6 +4689,7 @@ module Aws::Mgn
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.use_dedicated_replication_server #=> Boolean
+    #   resp.use_fips_endpoint #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateReplicationConfigurationTemplate AWS API Documentation
     #
@@ -4179,6 +4702,9 @@ module Aws::Mgn
 
     # Allows you to change between the AGENT\_BASED replication type and the
     # SNAPSHOT\_SHIPPING replication type.
+    #
+    # @option params [String] :account_id
+    #   Account ID on which to update replication type.
     #
     # @option params [required, String] :replication_type
     #   Replication type to which to update source server.
@@ -4205,6 +4731,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_source_server_replication_type({
+    #     account_id: "AccountID",
     #     replication_type: "AGENT_BASED", # required, accepts AGENT_BASED, SNAPSHOT_SHIPPING
     #     source_server_id: "SourceServerID", # required
     #   })
@@ -4286,6 +4813,9 @@ module Aws::Mgn
 
     # Update wave.
     #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
     # @option params [String] :description
     #   Wave description.
     #
@@ -4310,6 +4840,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_wave({
+    #     account_id: "AccountID",
     #     description: "WaveDescription",
     #     name: "WaveName",
     #     wave_id: "WaveID", # required
@@ -4354,7 +4885,7 @@ module Aws::Mgn
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mgn'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
