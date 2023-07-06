@@ -349,5 +349,37 @@ module Aws
         expect(config.sdk_ua_app_id).to eq('peccy-service')
       end
     end
+
+    context 'configured_endpoint' do
+      let(:config) do
+        SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+        )
+      end
+      it 'resolves configured_endpoint from global urls' do
+        expect(config.configured_endpoint(profile: 'global_endpoint_url'))
+          .to eq('https://play.min.io:9000')
+      end
+
+      it 'resolves service specific endpoints over global urls' do
+        expect(config.configured_endpoint(
+          profile: 'service_specific_and_global_endpoint_url',
+          service_id: 's3'))
+          .to eq('https://play.min.io:9000')
+
+        expect(config.configured_endpoint(
+          profile: 'service_specific_and_global_endpoint_url',
+          service_id: 'other_service'))
+          .to eq('http://localhost:1234')
+      end
+
+      it 'transforms service_id' do
+        expect(config.configured_endpoint(
+          profile: 'service_specific_and_global_endpoint_url',
+          service_id: 'Elastic Beanstalk'))
+          .to eq('http://localhost:8000')
+      end
+    end
   end
 end

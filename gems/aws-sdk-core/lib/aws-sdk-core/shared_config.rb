@@ -167,6 +167,26 @@ module Aws
       token
     end
 
+    # Source a custom configured endpoint from the shared configuration file
+    #
+    # @param [Hash] options
+    # @option options [String] :profile
+    # @option options [String] :service_id
+    def configured_endpoint(opts = {})
+      # services section is only allowed in the shared config file (not credentials)
+      profile = opts[:profile] || @profile_name
+      service_id = opts[:service_id]&.gsub(" ", "_")&.downcase
+      if @parsed_config && (prof_config = @parsed_config[profile])
+        services_section_name = prof_config['services']
+        if (services_config = @parsed_config["services #{services_section_name}"]) &&
+          (service_config = services_config[service_id])
+          return service_config['endpoint_url'] if service_config['endpoint_url']
+        end
+        return prof_config['endpoint_url']
+      end
+      nil
+    end
+
     # Add an accessor method (similar to attr_reader) to return a configuration value
     # Uses the get_config_value below to control where
     # values are loaded from
@@ -198,7 +218,8 @@ module Aws
       :s3_us_east_1_regional_endpoint,
       :s3_disable_multiregion_access_points,
       :defaults_mode,
-      :sdk_ua_app_id
+      :sdk_ua_app_id,
+      :ignore_configured_endpoint_urls
     )
 
     private

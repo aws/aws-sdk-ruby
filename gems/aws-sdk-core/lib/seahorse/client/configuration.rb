@@ -204,10 +204,6 @@ module Seahorse
         def value_at(opt_name)
           value = @struct[opt_name]
           if value.is_a?(Defaults)
-            # Legacy endpoints must continue to exist.
-            if opt_name == :endpoint && @struct.members.include?(:regional_endpoint)
-              @struct[:regional_endpoint] = true
-            end
             resolve_defaults(opt_name, value)
           else
             value

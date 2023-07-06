@@ -29,6 +29,11 @@ region = sa-east-1
 
 [sso-session dev]
 sso_region = us-east-1
+
+[services test-services]
+s3 =
+   endpoint_url = https://localhost:8000
+
       FILE
     }
 
@@ -51,6 +56,12 @@ sso_region = us-east-1
 
     it 'can parse sso-session sections' do
       parsed = IniParser.ini_parse(mock_config)
-      expect(parsed['sso-session dev']['sso_region']).to eq('us-east-1')    end
+      expect(parsed['sso-session dev']['sso_region']).to eq('us-east-1')
+    end
+
+    it 'can parse services sections' do
+      parsed = IniParser.ini_parse(mock_config)
+      expect(parsed['services test-services']['s3']['endpoint_url']).to eq('https://localhost:8000')
+    end
   end
 end
