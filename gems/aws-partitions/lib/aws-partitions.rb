@@ -195,7 +195,7 @@ module Aws
         end
       end
 
-      # @param [Hash] partition metadata
+      # @param [Hash] partition_metadata
       # @api private For Internal use only
       def merge_metadata(partition_metadata)
         default_partition_list.merge_metadata(partition_metadata)
