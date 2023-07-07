@@ -882,6 +882,9 @@ module Aws::DatabaseMigrationService
     # @option params [Types::GcpMySQLSettings] :gcp_my_sql_settings
     #   Settings in JSON format for the source GCP MySQL endpoint.
     #
+    # @option params [Types::TimestreamSettings] :timestream_settings
+    #   Settings in JSON format for the target Amazon Timestream endpoint.
+    #
     # @return [Types::CreateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEndpointResponse#endpoint #endpoint} => Types::Endpoint
@@ -1016,6 +1019,8 @@ module Aws::DatabaseMigrationService
     #       kms_key_id: "String",
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
+    #       use_update_look_up: false,
+    #       replicate_shard_collections: false,
     #     },
     #     kinesis_settings: {
     #       stream_arn: "String",
@@ -1049,6 +1054,7 @@ module Aws::DatabaseMigrationService
     #       sasl_password: "SecretString",
     #       no_hex_prefix: false,
     #       sasl_mechanism: "scram-sha-512", # accepts scram-sha-512, plain
+    #       ssl_endpoint_identification_algorithm: "none", # accepts none, https
     #     },
     #     elasticsearch_settings: {
     #       service_access_role_arn: "String", # required
@@ -1120,6 +1126,8 @@ module Aws::DatabaseMigrationService
     #       secrets_manager_secret_id: "String",
     #       trim_space_in_char: false,
     #       map_boolean_as_boolean: false,
+    #       map_jsonb_as_clob: false,
+    #       map_long_varchar_as: "wstring", # accepts wstring, clob, nclob
     #     },
     #     my_sql_settings: {
     #       after_connect_script: "String",
@@ -1180,6 +1188,7 @@ module Aws::DatabaseMigrationService
     #       secrets_manager_oracle_asm_secret_id: "String",
     #       trim_space_in_char: false,
     #       convert_timestamp_with_zone_to_utc: false,
+    #       open_transaction_window: 1,
     #     },
     #     sybase_settings: {
     #       database_name: "String",
@@ -1234,6 +1243,8 @@ module Aws::DatabaseMigrationService
     #       kms_key_id: "String",
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
+    #       use_update_look_up: false,
+    #       replicate_shard_collections: false,
     #     },
     #     redis_settings: {
     #       server_name: "String", # required
@@ -1259,6 +1270,13 @@ module Aws::DatabaseMigrationService
     #       username: "String",
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
+    #     },
+    #     timestream_settings: {
+    #       database_name: "String", # required
+    #       memory_duration: 1, # required
+    #       magnetic_duration: 1, # required
+    #       cdc_inserts_and_updates: false,
+    #       enable_magnetic_store_writes: false,
     #     },
     #   })
     #
@@ -1339,6 +1357,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.mongo_db_settings.kms_key_id #=> String
     #   resp.endpoint.mongo_db_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.mongo_db_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.mongo_db_settings.use_update_look_up #=> Boolean
+    #   resp.endpoint.mongo_db_settings.replicate_shard_collections #=> Boolean
     #   resp.endpoint.kinesis_settings.stream_arn #=> String
     #   resp.endpoint.kinesis_settings.message_format #=> String, one of "json", "json-unformatted"
     #   resp.endpoint.kinesis_settings.service_access_role_arn #=> String
@@ -1368,6 +1388,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.kafka_settings.sasl_password #=> String
     #   resp.endpoint.kafka_settings.no_hex_prefix #=> Boolean
     #   resp.endpoint.kafka_settings.sasl_mechanism #=> String, one of "scram-sha-512", "plain"
+    #   resp.endpoint.kafka_settings.ssl_endpoint_identification_algorithm #=> String, one of "none", "https"
     #   resp.endpoint.elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -1431,6 +1452,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.postgre_sql_settings.trim_space_in_char #=> Boolean
     #   resp.endpoint.postgre_sql_settings.map_boolean_as_boolean #=> Boolean
+    #   resp.endpoint.postgre_sql_settings.map_jsonb_as_clob #=> Boolean
+    #   resp.endpoint.postgre_sql_settings.map_long_varchar_as #=> String, one of "wstring", "clob", "nclob"
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
     #   resp.endpoint.my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoint.my_sql_settings.database_name #=> String
@@ -1488,6 +1511,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_secret_id #=> String
     #   resp.endpoint.oracle_settings.trim_space_in_char #=> Boolean
     #   resp.endpoint.oracle_settings.convert_timestamp_with_zone_to_utc #=> Boolean
+    #   resp.endpoint.oracle_settings.open_transaction_window #=> Integer
     #   resp.endpoint.sybase_settings.database_name #=> String
     #   resp.endpoint.sybase_settings.password #=> String
     #   resp.endpoint.sybase_settings.port #=> Integer
@@ -1533,6 +1557,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.doc_db_settings.kms_key_id #=> String
     #   resp.endpoint.doc_db_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.doc_db_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.doc_db_settings.use_update_look_up #=> Boolean
+    #   resp.endpoint.doc_db_settings.replicate_shard_collections #=> Boolean
     #   resp.endpoint.redis_settings.server_name #=> String
     #   resp.endpoint.redis_settings.port #=> Integer
     #   resp.endpoint.redis_settings.ssl_security_protocol #=> String, one of "plaintext", "ssl-encryption"
@@ -1554,6 +1580,11 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.gcp_my_sql_settings.username #=> String
     #   resp.endpoint.gcp_my_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.gcp_my_sql_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.timestream_settings.database_name #=> String
+    #   resp.endpoint.timestream_settings.memory_duration #=> Integer
+    #   resp.endpoint.timestream_settings.magnetic_duration #=> Integer
+    #   resp.endpoint.timestream_settings.cdc_inserts_and_updates #=> Boolean
+    #   resp.endpoint.timestream_settings.enable_magnetic_store_writes #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpoint AWS API Documentation
     #
@@ -1725,6 +1756,158 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Creates a configuration that you can later provide to configure and
+    # start an DMS Serverless replication. You can also provide options to
+    # validate the configuration inputs before you start the replication.
+    #
+    # @option params [required, String] :replication_config_identifier
+    #   A unique identifier that you want to use to create a
+    #   `ReplicationConfigArn` that is returned as part of the output from
+    #   this action. You can then pass this output `ReplicationConfigArn` as
+    #   the value of the `ReplicationConfigArn` option for other actions to
+    #   identify both DMS Serverless replications and replication
+    #   configurations that you want those actions to operate on. For some
+    #   actions, you can also use either this unique identifier or a
+    #   corresponding ARN in action filters to identify the specific
+    #   replication and replication configuration to operate on.
+    #
+    # @option params [required, String] :source_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the source endpoint for this DMS
+    #   Serverless replication configuration.
+    #
+    # @option params [required, String] :target_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the target endpoint for this DMS
+    #   serverless replication configuration.
+    #
+    # @option params [required, Types::ComputeConfig] :compute_config
+    #   Configuration parameters for provisioning an DMS Serverless
+    #   replication.
+    #
+    # @option params [required, String] :replication_type
+    #   The type of DMS Serverless replication to provision using this
+    #   replication configuration.
+    #
+    #   Possible values:
+    #
+    #   * `"full-load"`
+    #
+    #   * `"cdc"`
+    #
+    #   * `"full-load-and-cdc"`
+    #
+    # @option params [required, String] :table_mappings
+    #   JSON table mappings for DMS Serverless replications that are
+    #   provisioned using this replication configuration. For more
+    #   information, see [ Specifying table selection and transformations
+    #   rules using JSON][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.SelectionTransformation.html
+    #
+    # @option params [String] :replication_settings
+    #   Optional JSON settings for DMS Serverless replications that are
+    #   provisioned using this replication configuration. For example, see [
+    #   Change processing tuning settings][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.ChangeProcessingTuning.html
+    #
+    # @option params [String] :supplemental_settings
+    #   Optional JSON settings for specifying supplemental data. For more
+    #   information, see [ Specifying supplemental data for task settings][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html
+    #
+    # @option params [String] :resource_identifier
+    #   Optional unique value or name that you set for a given resource that
+    #   can be used to construct an Amazon Resource Name (ARN) for that
+    #   resource. For more information, see [ Fine-grained access control
+    #   using resource names and tags][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.FineGrainedAccess
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   One or more optional tags associated with resources used by the DMS
+    #   Serverless replication. For more information, see [ Tagging resources
+    #   in Database Migration Service][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tagging.html
+    #
+    # @return [Types::CreateReplicationConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateReplicationConfigResponse#replication_config #replication_config} => Types::ReplicationConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_replication_config({
+    #     replication_config_identifier: "String", # required
+    #     source_endpoint_arn: "String", # required
+    #     target_endpoint_arn: "String", # required
+    #     compute_config: { # required
+    #       availability_zone: "String",
+    #       dns_name_servers: "String",
+    #       kms_key_id: "String",
+    #       max_capacity_units: 1,
+    #       min_capacity_units: 1,
+    #       multi_az: false,
+    #       preferred_maintenance_window: "String",
+    #       replication_subnet_group_id: "String",
+    #       vpc_security_group_ids: ["String"],
+    #     },
+    #     replication_type: "full-load", # required, accepts full-load, cdc, full-load-and-cdc
+    #     table_mappings: "String", # required
+    #     replication_settings: "String",
+    #     supplemental_settings: "String",
+    #     resource_identifier: "String",
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #         resource_arn: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replication_config.replication_config_identifier #=> String
+    #   resp.replication_config.replication_config_arn #=> String
+    #   resp.replication_config.source_endpoint_arn #=> String
+    #   resp.replication_config.target_endpoint_arn #=> String
+    #   resp.replication_config.replication_type #=> String, one of "full-load", "cdc", "full-load-and-cdc"
+    #   resp.replication_config.compute_config.availability_zone #=> String
+    #   resp.replication_config.compute_config.dns_name_servers #=> String
+    #   resp.replication_config.compute_config.kms_key_id #=> String
+    #   resp.replication_config.compute_config.max_capacity_units #=> Integer
+    #   resp.replication_config.compute_config.min_capacity_units #=> Integer
+    #   resp.replication_config.compute_config.multi_az #=> Boolean
+    #   resp.replication_config.compute_config.preferred_maintenance_window #=> String
+    #   resp.replication_config.compute_config.replication_subnet_group_id #=> String
+    #   resp.replication_config.compute_config.vpc_security_group_ids #=> Array
+    #   resp.replication_config.compute_config.vpc_security_group_ids[0] #=> String
+    #   resp.replication_config.replication_settings #=> String
+    #   resp.replication_config.supplemental_settings #=> String
+    #   resp.replication_config.table_mappings #=> String
+    #   resp.replication_config.replication_config_create_time #=> Time
+    #   resp.replication_config.replication_config_update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationConfig AWS API Documentation
+    #
+    # @overload create_replication_config(params = {})
+    # @param [Hash] params ({})
+    def create_replication_config(params = {}, options = {})
+      req = build_request(:create_replication_config, params)
+      req.send_request(options)
+    end
+
     # Creates the replication instance using the specified parameters.
     #
     # DMS requires that your account have certain roles with appropriate
@@ -1763,12 +1946,14 @@ module Aws::DatabaseMigrationService
     #   `"dms.c4.large"`.
     #
     #   For more information on the settings and capacities for the available
-    #   replication instance classes, see [ Selecting the right DMS
-    #   replication instance for your migration][1].
+    #   replication instance classes, see [ Choosing the right DMS replication
+    #   instance][1]; and, [Selecting the best size for a replication
+    #   instance][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.Types.html
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_BestPractices.SizingReplicationInstance.html
     #
     # @option params [Array<String>] :vpc_security_group_ids
     #   Specifies the VPC security group to be used with the replication
@@ -1778,7 +1963,7 @@ module Aws::DatabaseMigrationService
     # @option params [String] :availability_zone
     #   The Availability Zone where the replication instance will be created.
     #   The default value is a random, system-chosen Availability Zone in the
-    #   endpoint's Amazon Web Services Region, for example: `us-east-1d`
+    #   endpoint's Amazon Web Services Region, for example: `us-east-1d`.
     #
     # @option params [String] :replication_subnet_group_identifier
     #   A subnet group to associate with the replication instance.
@@ -2043,6 +2228,18 @@ module Aws::DatabaseMigrationService
     # The VPC needs to have at least one subnet in at least two availability
     # zones in the Amazon Web Services Region, otherwise the service will
     # throw a `ReplicationSubnetGroupDoesNotCoverEnoughAZs` exception.
+    #
+    # If a replication subnet group exists in your Amazon Web Services
+    # account, the CreateReplicationSubnetGroup action returns the following
+    # error message: The Replication Subnet Group already exists. In this
+    # case, delete the existing replication subnet group. To do so, use the
+    # [DeleteReplicationSubnetGroup][1] action. Optionally, choose Subnet
+    # groups in the DMS console, then choose your subnet group. Next, choose
+    # Delete from Actions.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/en_us/dms/latest/APIReference/API_DeleteReplicationSubnetGroup.html
     #
     # @option params [required, String] :replication_subnet_group_identifier
     #   The name for the replication subnet group. This value is stored as a
@@ -2581,6 +2778,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.mongo_db_settings.kms_key_id #=> String
     #   resp.endpoint.mongo_db_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.mongo_db_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.mongo_db_settings.use_update_look_up #=> Boolean
+    #   resp.endpoint.mongo_db_settings.replicate_shard_collections #=> Boolean
     #   resp.endpoint.kinesis_settings.stream_arn #=> String
     #   resp.endpoint.kinesis_settings.message_format #=> String, one of "json", "json-unformatted"
     #   resp.endpoint.kinesis_settings.service_access_role_arn #=> String
@@ -2610,6 +2809,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.kafka_settings.sasl_password #=> String
     #   resp.endpoint.kafka_settings.no_hex_prefix #=> Boolean
     #   resp.endpoint.kafka_settings.sasl_mechanism #=> String, one of "scram-sha-512", "plain"
+    #   resp.endpoint.kafka_settings.ssl_endpoint_identification_algorithm #=> String, one of "none", "https"
     #   resp.endpoint.elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -2673,6 +2873,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.postgre_sql_settings.trim_space_in_char #=> Boolean
     #   resp.endpoint.postgre_sql_settings.map_boolean_as_boolean #=> Boolean
+    #   resp.endpoint.postgre_sql_settings.map_jsonb_as_clob #=> Boolean
+    #   resp.endpoint.postgre_sql_settings.map_long_varchar_as #=> String, one of "wstring", "clob", "nclob"
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
     #   resp.endpoint.my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoint.my_sql_settings.database_name #=> String
@@ -2730,6 +2932,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_secret_id #=> String
     #   resp.endpoint.oracle_settings.trim_space_in_char #=> Boolean
     #   resp.endpoint.oracle_settings.convert_timestamp_with_zone_to_utc #=> Boolean
+    #   resp.endpoint.oracle_settings.open_transaction_window #=> Integer
     #   resp.endpoint.sybase_settings.database_name #=> String
     #   resp.endpoint.sybase_settings.password #=> String
     #   resp.endpoint.sybase_settings.port #=> Integer
@@ -2775,6 +2978,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.doc_db_settings.kms_key_id #=> String
     #   resp.endpoint.doc_db_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.doc_db_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.doc_db_settings.use_update_look_up #=> Boolean
+    #   resp.endpoint.doc_db_settings.replicate_shard_collections #=> Boolean
     #   resp.endpoint.redis_settings.server_name #=> String
     #   resp.endpoint.redis_settings.port #=> Integer
     #   resp.endpoint.redis_settings.ssl_security_protocol #=> String, one of "plaintext", "ssl-encryption"
@@ -2796,6 +3001,11 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.gcp_my_sql_settings.username #=> String
     #   resp.endpoint.gcp_my_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.gcp_my_sql_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.timestream_settings.database_name #=> String
+    #   resp.endpoint.timestream_settings.memory_duration #=> Integer
+    #   resp.endpoint.timestream_settings.magnetic_duration #=> Integer
+    #   resp.endpoint.timestream_settings.cdc_inserts_and_updates #=> Boolean
+    #   resp.endpoint.timestream_settings.enable_magnetic_store_writes #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteEndpoint AWS API Documentation
     #
@@ -2892,6 +3102,57 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def delete_fleet_advisor_databases(params = {}, options = {})
       req = build_request(:delete_fleet_advisor_databases, params)
+      req.send_request(options)
+    end
+
+    # Deletes an DMS Serverless replication configuration. This effectively
+    # deprovisions any and all replications that use this configuration. You
+    # can't delete the configuration for an DMS Serverless replication that
+    # is ongoing. You can delete the configuration when the replication is
+    # in a non-RUNNING and non-STARTING state.
+    #
+    # @option params [required, String] :replication_config_arn
+    #   The replication config to delete.
+    #
+    # @return [Types::DeleteReplicationConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteReplicationConfigResponse#replication_config #replication_config} => Types::ReplicationConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_replication_config({
+    #     replication_config_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replication_config.replication_config_identifier #=> String
+    #   resp.replication_config.replication_config_arn #=> String
+    #   resp.replication_config.source_endpoint_arn #=> String
+    #   resp.replication_config.target_endpoint_arn #=> String
+    #   resp.replication_config.replication_type #=> String, one of "full-load", "cdc", "full-load-and-cdc"
+    #   resp.replication_config.compute_config.availability_zone #=> String
+    #   resp.replication_config.compute_config.dns_name_servers #=> String
+    #   resp.replication_config.compute_config.kms_key_id #=> String
+    #   resp.replication_config.compute_config.max_capacity_units #=> Integer
+    #   resp.replication_config.compute_config.min_capacity_units #=> Integer
+    #   resp.replication_config.compute_config.multi_az #=> Boolean
+    #   resp.replication_config.compute_config.preferred_maintenance_window #=> String
+    #   resp.replication_config.compute_config.replication_subnet_group_id #=> String
+    #   resp.replication_config.compute_config.vpc_security_group_ids #=> Array
+    #   resp.replication_config.compute_config.vpc_security_group_ids[0] #=> String
+    #   resp.replication_config.replication_settings #=> String
+    #   resp.replication_config.supplemental_settings #=> String
+    #   resp.replication_config.table_mappings #=> String
+    #   resp.replication_config.replication_config_create_time #=> Time
+    #   resp.replication_config.replication_config_update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationConfig AWS API Documentation
+    #
+    # @overload delete_replication_config(params = {})
+    # @param [Hash] params ({})
+    def delete_replication_config(params = {}, options = {})
+      req = build_request(:delete_replication_config, params)
       req.send_request(options)
     end
 
@@ -3545,7 +3806,7 @@ module Aws::DatabaseMigrationService
     # when you create an endpoint for a specific database engine.
     #
     # @option params [required, String] :engine_name
-    #   The databse engine used for your source or target endpoint.
+    #   The database engine used for your source or target endpoint.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -3833,6 +4094,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].mongo_db_settings.kms_key_id #=> String
     #   resp.endpoints[0].mongo_db_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoints[0].mongo_db_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoints[0].mongo_db_settings.use_update_look_up #=> Boolean
+    #   resp.endpoints[0].mongo_db_settings.replicate_shard_collections #=> Boolean
     #   resp.endpoints[0].kinesis_settings.stream_arn #=> String
     #   resp.endpoints[0].kinesis_settings.message_format #=> String, one of "json", "json-unformatted"
     #   resp.endpoints[0].kinesis_settings.service_access_role_arn #=> String
@@ -3862,6 +4125,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].kafka_settings.sasl_password #=> String
     #   resp.endpoints[0].kafka_settings.no_hex_prefix #=> Boolean
     #   resp.endpoints[0].kafka_settings.sasl_mechanism #=> String, one of "scram-sha-512", "plain"
+    #   resp.endpoints[0].kafka_settings.ssl_endpoint_identification_algorithm #=> String, one of "none", "https"
     #   resp.endpoints[0].elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoints[0].elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoints[0].elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -3925,6 +4189,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].postgre_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoints[0].postgre_sql_settings.trim_space_in_char #=> Boolean
     #   resp.endpoints[0].postgre_sql_settings.map_boolean_as_boolean #=> Boolean
+    #   resp.endpoints[0].postgre_sql_settings.map_jsonb_as_clob #=> Boolean
+    #   resp.endpoints[0].postgre_sql_settings.map_long_varchar_as #=> String, one of "wstring", "clob", "nclob"
     #   resp.endpoints[0].my_sql_settings.after_connect_script #=> String
     #   resp.endpoints[0].my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoints[0].my_sql_settings.database_name #=> String
@@ -3982,6 +4248,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].oracle_settings.secrets_manager_oracle_asm_secret_id #=> String
     #   resp.endpoints[0].oracle_settings.trim_space_in_char #=> Boolean
     #   resp.endpoints[0].oracle_settings.convert_timestamp_with_zone_to_utc #=> Boolean
+    #   resp.endpoints[0].oracle_settings.open_transaction_window #=> Integer
     #   resp.endpoints[0].sybase_settings.database_name #=> String
     #   resp.endpoints[0].sybase_settings.password #=> String
     #   resp.endpoints[0].sybase_settings.port #=> Integer
@@ -4027,6 +4294,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].doc_db_settings.kms_key_id #=> String
     #   resp.endpoints[0].doc_db_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoints[0].doc_db_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoints[0].doc_db_settings.use_update_look_up #=> Boolean
+    #   resp.endpoints[0].doc_db_settings.replicate_shard_collections #=> Boolean
     #   resp.endpoints[0].redis_settings.server_name #=> String
     #   resp.endpoints[0].redis_settings.port #=> Integer
     #   resp.endpoints[0].redis_settings.ssl_security_protocol #=> String, one of "plaintext", "ssl-encryption"
@@ -4048,6 +4317,11 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].gcp_my_sql_settings.username #=> String
     #   resp.endpoints[0].gcp_my_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoints[0].gcp_my_sql_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoints[0].timestream_settings.database_name #=> String
+    #   resp.endpoints[0].timestream_settings.memory_duration #=> Integer
+    #   resp.endpoints[0].timestream_settings.magnetic_duration #=> Integer
+    #   resp.endpoints[0].timestream_settings.cdc_inserts_and_updates #=> Boolean
+    #   resp.endpoints[0].timestream_settings.enable_magnetic_store_writes #=> Boolean
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4899,6 +5173,7 @@ module Aws::DatabaseMigrationService
     #   resp.recommendations[0].data.rds_engine.requirements_to_target.storage_size #=> Integer
     #   resp.recommendations[0].data.rds_engine.requirements_to_target.storage_iops #=> Integer
     #   resp.recommendations[0].data.rds_engine.requirements_to_target.deployment_option #=> String
+    #   resp.recommendations[0].data.rds_engine.requirements_to_target.engine_version #=> String
     #   resp.recommendations[0].data.rds_engine.target_configuration.engine_edition #=> String
     #   resp.recommendations[0].data.rds_engine.target_configuration.instance_type #=> String
     #   resp.recommendations[0].data.rds_engine.target_configuration.instance_vcpu #=> Float
@@ -4907,6 +5182,7 @@ module Aws::DatabaseMigrationService
     #   resp.recommendations[0].data.rds_engine.target_configuration.storage_size #=> Integer
     #   resp.recommendations[0].data.rds_engine.target_configuration.storage_iops #=> Integer
     #   resp.recommendations[0].data.rds_engine.target_configuration.deployment_option #=> String
+    #   resp.recommendations[0].data.rds_engine.target_configuration.engine_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeRecommendations AWS API Documentation
     #
@@ -4962,6 +5238,77 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def describe_refresh_schemas_status(params = {}, options = {})
       req = build_request(:describe_refresh_schemas_status, params)
+      req.send_request(options)
+    end
+
+    # Returns one or more existing DMS Serverless replication configurations
+    # as a list of structures.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters applied to the replication configs.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   marker, up to the value specified by `MaxRecords`.
+    #
+    # @return [Types::DescribeReplicationConfigsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeReplicationConfigsResponse#marker #marker} => String
+    #   * {Types::DescribeReplicationConfigsResponse#replication_configs #replication_configs} => Array&lt;Types::ReplicationConfig&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_replication_configs({
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.replication_configs #=> Array
+    #   resp.replication_configs[0].replication_config_identifier #=> String
+    #   resp.replication_configs[0].replication_config_arn #=> String
+    #   resp.replication_configs[0].source_endpoint_arn #=> String
+    #   resp.replication_configs[0].target_endpoint_arn #=> String
+    #   resp.replication_configs[0].replication_type #=> String, one of "full-load", "cdc", "full-load-and-cdc"
+    #   resp.replication_configs[0].compute_config.availability_zone #=> String
+    #   resp.replication_configs[0].compute_config.dns_name_servers #=> String
+    #   resp.replication_configs[0].compute_config.kms_key_id #=> String
+    #   resp.replication_configs[0].compute_config.max_capacity_units #=> Integer
+    #   resp.replication_configs[0].compute_config.min_capacity_units #=> Integer
+    #   resp.replication_configs[0].compute_config.multi_az #=> Boolean
+    #   resp.replication_configs[0].compute_config.preferred_maintenance_window #=> String
+    #   resp.replication_configs[0].compute_config.replication_subnet_group_id #=> String
+    #   resp.replication_configs[0].compute_config.vpc_security_group_ids #=> Array
+    #   resp.replication_configs[0].compute_config.vpc_security_group_ids[0] #=> String
+    #   resp.replication_configs[0].replication_settings #=> String
+    #   resp.replication_configs[0].supplemental_settings #=> String
+    #   resp.replication_configs[0].table_mappings #=> String
+    #   resp.replication_configs[0].replication_config_create_time #=> Time
+    #   resp.replication_configs[0].replication_config_update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationConfigs AWS API Documentation
+    #
+    # @overload describe_replication_configs(params = {})
+    # @param [Hash] params ({})
+    def describe_replication_configs(params = {}, options = {})
+      req = build_request(:describe_replication_configs, params)
       req.send_request(options)
     end
 
@@ -5242,6 +5589,87 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def describe_replication_subnet_groups(params = {}, options = {})
       req = build_request(:describe_replication_subnet_groups, params)
+      req.send_request(options)
+    end
+
+    # Returns table and schema statistics for one or more provisioned
+    # replications that use a given DMS Serverless replication
+    # configuration.
+    #
+    # @option params [required, String] :replication_config_arn
+    #   The replication config to describe.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   marker, up to the value specified by `MaxRecords`.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters applied to the replication table statistics.
+    #
+    # @return [Types::DescribeReplicationTableStatisticsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeReplicationTableStatisticsResponse#replication_config_arn #replication_config_arn} => String
+    #   * {Types::DescribeReplicationTableStatisticsResponse#marker #marker} => String
+    #   * {Types::DescribeReplicationTableStatisticsResponse#replication_table_statistics #replication_table_statistics} => Array&lt;Types::TableStatistics&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_replication_table_statistics({
+    #     replication_config_arn: "String", # required
+    #     max_records: 1,
+    #     marker: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replication_config_arn #=> String
+    #   resp.marker #=> String
+    #   resp.replication_table_statistics #=> Array
+    #   resp.replication_table_statistics[0].schema_name #=> String
+    #   resp.replication_table_statistics[0].table_name #=> String
+    #   resp.replication_table_statistics[0].inserts #=> Integer
+    #   resp.replication_table_statistics[0].deletes #=> Integer
+    #   resp.replication_table_statistics[0].updates #=> Integer
+    #   resp.replication_table_statistics[0].ddls #=> Integer
+    #   resp.replication_table_statistics[0].applied_inserts #=> Integer
+    #   resp.replication_table_statistics[0].applied_deletes #=> Integer
+    #   resp.replication_table_statistics[0].applied_updates #=> Integer
+    #   resp.replication_table_statistics[0].applied_ddls #=> Integer
+    #   resp.replication_table_statistics[0].full_load_rows #=> Integer
+    #   resp.replication_table_statistics[0].full_load_condtnl_chk_failed_rows #=> Integer
+    #   resp.replication_table_statistics[0].full_load_error_rows #=> Integer
+    #   resp.replication_table_statistics[0].full_load_start_time #=> Time
+    #   resp.replication_table_statistics[0].full_load_end_time #=> Time
+    #   resp.replication_table_statistics[0].full_load_reloaded #=> Boolean
+    #   resp.replication_table_statistics[0].last_update_time #=> Time
+    #   resp.replication_table_statistics[0].table_state #=> String
+    #   resp.replication_table_statistics[0].validation_pending_records #=> Integer
+    #   resp.replication_table_statistics[0].validation_failed_records #=> Integer
+    #   resp.replication_table_statistics[0].validation_suspended_records #=> Integer
+    #   resp.replication_table_statistics[0].validation_state #=> String
+    #   resp.replication_table_statistics[0].validation_state_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTableStatistics AWS API Documentation
+    #
+    # @overload describe_replication_table_statistics(params = {})
+    # @param [Hash] params ({})
+    def describe_replication_table_statistics(params = {}, options = {})
+      req = build_request(:describe_replication_table_statistics, params)
       req.send_request(options)
     end
 
@@ -5580,6 +6008,91 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def describe_replication_tasks(params = {}, options = {})
       req = build_request(:describe_replication_tasks, params)
+      req.send_request(options)
+    end
+
+    # Provides details on replication progress by returning status
+    # information for one or more provisioned DMS Serverless replications.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters applied to the replications.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   marker, up to the value specified by `MaxRecords`.
+    #
+    # @return [Types::DescribeReplicationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeReplicationsResponse#marker #marker} => String
+    #   * {Types::DescribeReplicationsResponse#replications #replications} => Array&lt;Types::Replication&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_replications({
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.replications #=> Array
+    #   resp.replications[0].replication_config_identifier #=> String
+    #   resp.replications[0].replication_config_arn #=> String
+    #   resp.replications[0].source_endpoint_arn #=> String
+    #   resp.replications[0].target_endpoint_arn #=> String
+    #   resp.replications[0].replication_type #=> String, one of "full-load", "cdc", "full-load-and-cdc"
+    #   resp.replications[0].status #=> String
+    #   resp.replications[0].provision_data.provision_state #=> String
+    #   resp.replications[0].provision_data.provisioned_capacity_units #=> Integer
+    #   resp.replications[0].provision_data.date_provisioned #=> Time
+    #   resp.replications[0].provision_data.is_new_provisioning_available #=> Boolean
+    #   resp.replications[0].provision_data.date_new_provisioning_data_available #=> Time
+    #   resp.replications[0].provision_data.reason_for_new_provisioning_data #=> String
+    #   resp.replications[0].stop_reason #=> String
+    #   resp.replications[0].failure_messages #=> Array
+    #   resp.replications[0].failure_messages[0] #=> String
+    #   resp.replications[0].replication_stats.full_load_progress_percent #=> Integer
+    #   resp.replications[0].replication_stats.elapsed_time_millis #=> Integer
+    #   resp.replications[0].replication_stats.tables_loaded #=> Integer
+    #   resp.replications[0].replication_stats.tables_loading #=> Integer
+    #   resp.replications[0].replication_stats.tables_queued #=> Integer
+    #   resp.replications[0].replication_stats.tables_errored #=> Integer
+    #   resp.replications[0].replication_stats.fresh_start_date #=> Time
+    #   resp.replications[0].replication_stats.start_date #=> Time
+    #   resp.replications[0].replication_stats.stop_date #=> Time
+    #   resp.replications[0].replication_stats.full_load_start_date #=> Time
+    #   resp.replications[0].replication_stats.full_load_finish_date #=> Time
+    #   resp.replications[0].start_replication_type #=> String
+    #   resp.replications[0].cdc_start_time #=> Time
+    #   resp.replications[0].cdc_start_position #=> String
+    #   resp.replications[0].cdc_stop_position #=> String
+    #   resp.replications[0].recovery_checkpoint #=> String
+    #   resp.replications[0].replication_create_time #=> Time
+    #   resp.replications[0].replication_update_time #=> Time
+    #   resp.replications[0].replication_last_stop_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplications AWS API Documentation
+    #
+    # @overload describe_replications(params = {})
+    # @param [Hash] params ({})
+    def describe_replications(params = {}, options = {})
+      req = build_request(:describe_replications, params)
       req.send_request(options)
     end
 
@@ -6173,6 +6686,9 @@ module Aws::DatabaseMigrationService
     # @option params [Types::GcpMySQLSettings] :gcp_my_sql_settings
     #   Settings in JSON format for the source GCP MySQL endpoint.
     #
+    # @option params [Types::TimestreamSettings] :timestream_settings
+    #   Settings in JSON format for the target Amazon Timestream endpoint.
+    #
     # @return [Types::ModifyEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyEndpointResponse#endpoint #endpoint} => Types::Endpoint
@@ -6285,6 +6801,8 @@ module Aws::DatabaseMigrationService
     #       kms_key_id: "String",
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
+    #       use_update_look_up: false,
+    #       replicate_shard_collections: false,
     #     },
     #     kinesis_settings: {
     #       stream_arn: "String",
@@ -6318,6 +6836,7 @@ module Aws::DatabaseMigrationService
     #       sasl_password: "SecretString",
     #       no_hex_prefix: false,
     #       sasl_mechanism: "scram-sha-512", # accepts scram-sha-512, plain
+    #       ssl_endpoint_identification_algorithm: "none", # accepts none, https
     #     },
     #     elasticsearch_settings: {
     #       service_access_role_arn: "String", # required
@@ -6389,6 +6908,8 @@ module Aws::DatabaseMigrationService
     #       secrets_manager_secret_id: "String",
     #       trim_space_in_char: false,
     #       map_boolean_as_boolean: false,
+    #       map_jsonb_as_clob: false,
+    #       map_long_varchar_as: "wstring", # accepts wstring, clob, nclob
     #     },
     #     my_sql_settings: {
     #       after_connect_script: "String",
@@ -6449,6 +6970,7 @@ module Aws::DatabaseMigrationService
     #       secrets_manager_oracle_asm_secret_id: "String",
     #       trim_space_in_char: false,
     #       convert_timestamp_with_zone_to_utc: false,
+    #       open_transaction_window: 1,
     #     },
     #     sybase_settings: {
     #       database_name: "String",
@@ -6502,6 +7024,8 @@ module Aws::DatabaseMigrationService
     #       kms_key_id: "String",
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
+    #       use_update_look_up: false,
+    #       replicate_shard_collections: false,
     #     },
     #     redis_settings: {
     #       server_name: "String", # required
@@ -6528,6 +7052,13 @@ module Aws::DatabaseMigrationService
     #       username: "String",
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
+    #     },
+    #     timestream_settings: {
+    #       database_name: "String", # required
+    #       memory_duration: 1, # required
+    #       magnetic_duration: 1, # required
+    #       cdc_inserts_and_updates: false,
+    #       enable_magnetic_store_writes: false,
     #     },
     #   })
     #
@@ -6608,6 +7139,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.mongo_db_settings.kms_key_id #=> String
     #   resp.endpoint.mongo_db_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.mongo_db_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.mongo_db_settings.use_update_look_up #=> Boolean
+    #   resp.endpoint.mongo_db_settings.replicate_shard_collections #=> Boolean
     #   resp.endpoint.kinesis_settings.stream_arn #=> String
     #   resp.endpoint.kinesis_settings.message_format #=> String, one of "json", "json-unformatted"
     #   resp.endpoint.kinesis_settings.service_access_role_arn #=> String
@@ -6637,6 +7170,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.kafka_settings.sasl_password #=> String
     #   resp.endpoint.kafka_settings.no_hex_prefix #=> Boolean
     #   resp.endpoint.kafka_settings.sasl_mechanism #=> String, one of "scram-sha-512", "plain"
+    #   resp.endpoint.kafka_settings.ssl_endpoint_identification_algorithm #=> String, one of "none", "https"
     #   resp.endpoint.elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -6700,6 +7234,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.postgre_sql_settings.trim_space_in_char #=> Boolean
     #   resp.endpoint.postgre_sql_settings.map_boolean_as_boolean #=> Boolean
+    #   resp.endpoint.postgre_sql_settings.map_jsonb_as_clob #=> Boolean
+    #   resp.endpoint.postgre_sql_settings.map_long_varchar_as #=> String, one of "wstring", "clob", "nclob"
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
     #   resp.endpoint.my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoint.my_sql_settings.database_name #=> String
@@ -6757,6 +7293,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_secret_id #=> String
     #   resp.endpoint.oracle_settings.trim_space_in_char #=> Boolean
     #   resp.endpoint.oracle_settings.convert_timestamp_with_zone_to_utc #=> Boolean
+    #   resp.endpoint.oracle_settings.open_transaction_window #=> Integer
     #   resp.endpoint.sybase_settings.database_name #=> String
     #   resp.endpoint.sybase_settings.password #=> String
     #   resp.endpoint.sybase_settings.port #=> Integer
@@ -6802,6 +7339,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.doc_db_settings.kms_key_id #=> String
     #   resp.endpoint.doc_db_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.doc_db_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.doc_db_settings.use_update_look_up #=> Boolean
+    #   resp.endpoint.doc_db_settings.replicate_shard_collections #=> Boolean
     #   resp.endpoint.redis_settings.server_name #=> String
     #   resp.endpoint.redis_settings.port #=> Integer
     #   resp.endpoint.redis_settings.ssl_security_protocol #=> String, one of "plaintext", "ssl-encryption"
@@ -6823,6 +7362,11 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.gcp_my_sql_settings.username #=> String
     #   resp.endpoint.gcp_my_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.gcp_my_sql_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.timestream_settings.database_name #=> String
+    #   resp.endpoint.timestream_settings.memory_duration #=> Integer
+    #   resp.endpoint.timestream_settings.magnetic_duration #=> Integer
+    #   resp.endpoint.timestream_settings.cdc_inserts_and_updates #=> Boolean
+    #   resp.endpoint.timestream_settings.enable_magnetic_store_writes #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpoint AWS API Documentation
     #
@@ -6891,6 +7435,108 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def modify_event_subscription(params = {}, options = {})
       req = build_request(:modify_event_subscription, params)
+      req.send_request(options)
+    end
+
+    # Modifies an existing DMS Serverless replication configuration that you
+    # can use to start a replication. This command includes input validation
+    # and logic to check the state of any replication that uses this
+    # configuration. You can only modify a replication configuration before
+    # any replication that uses it has started. As soon as you have
+    # initially started a replication with a given configuiration, you
+    # can't modify that configuration, even if you stop it.
+    #
+    # Other run statuses that allow you to run this command include FAILED
+    # and CREATED. A provisioning state that allows you to run this command
+    # is FAILED\_PROVISION.
+    #
+    # @option params [required, String] :replication_config_arn
+    #   The Amazon Resource Name of the replication to modify.
+    #
+    # @option params [String] :replication_config_identifier
+    #   The new replication config to apply to the replication.
+    #
+    # @option params [String] :replication_type
+    #   The type of replication.
+    #
+    # @option params [String] :table_mappings
+    #   Table mappings specified in the replication.
+    #
+    # @option params [String] :replication_settings
+    #   The settings for the replication.
+    #
+    # @option params [String] :supplemental_settings
+    #   Additional settings for the replication.
+    #
+    # @option params [Types::ComputeConfig] :compute_config
+    #   Configuration parameters for provisioning an DMS Serverless
+    #   replication.
+    #
+    # @option params [String] :source_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the source endpoint for this DMS
+    #   serverless replication configuration.
+    #
+    # @option params [String] :target_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the target endpoint for this DMS
+    #   serverless replication configuration.
+    #
+    # @return [Types::ModifyReplicationConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyReplicationConfigResponse#replication_config #replication_config} => Types::ReplicationConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_replication_config({
+    #     replication_config_arn: "String", # required
+    #     replication_config_identifier: "String",
+    #     replication_type: "full-load", # accepts full-load, cdc, full-load-and-cdc
+    #     table_mappings: "String",
+    #     replication_settings: "String",
+    #     supplemental_settings: "String",
+    #     compute_config: {
+    #       availability_zone: "String",
+    #       dns_name_servers: "String",
+    #       kms_key_id: "String",
+    #       max_capacity_units: 1,
+    #       min_capacity_units: 1,
+    #       multi_az: false,
+    #       preferred_maintenance_window: "String",
+    #       replication_subnet_group_id: "String",
+    #       vpc_security_group_ids: ["String"],
+    #     },
+    #     source_endpoint_arn: "String",
+    #     target_endpoint_arn: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replication_config.replication_config_identifier #=> String
+    #   resp.replication_config.replication_config_arn #=> String
+    #   resp.replication_config.source_endpoint_arn #=> String
+    #   resp.replication_config.target_endpoint_arn #=> String
+    #   resp.replication_config.replication_type #=> String, one of "full-load", "cdc", "full-load-and-cdc"
+    #   resp.replication_config.compute_config.availability_zone #=> String
+    #   resp.replication_config.compute_config.dns_name_servers #=> String
+    #   resp.replication_config.compute_config.kms_key_id #=> String
+    #   resp.replication_config.compute_config.max_capacity_units #=> Integer
+    #   resp.replication_config.compute_config.min_capacity_units #=> Integer
+    #   resp.replication_config.compute_config.multi_az #=> Boolean
+    #   resp.replication_config.compute_config.preferred_maintenance_window #=> String
+    #   resp.replication_config.compute_config.replication_subnet_group_id #=> String
+    #   resp.replication_config.compute_config.vpc_security_group_ids #=> Array
+    #   resp.replication_config.compute_config.vpc_security_group_ids[0] #=> String
+    #   resp.replication_config.replication_settings #=> String
+    #   resp.replication_config.supplemental_settings #=> String
+    #   resp.replication_config.table_mappings #=> String
+    #   resp.replication_config.replication_config_create_time #=> Time
+    #   resp.replication_config.replication_config_update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationConfig AWS API Documentation
+    #
+    # @overload modify_replication_config(params = {})
+    # @param [Hash] params ({})
+    def modify_replication_config(params = {}, options = {})
+      req = build_request(:modify_replication_config, params)
       req.send_request(options)
     end
 
@@ -7575,6 +8221,56 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Reloads the target database table with the source data for a given DMS
+    # Serverless replication configuration.
+    #
+    # You can only use this operation with a task in the RUNNING state,
+    # otherwise the service will throw an `InvalidResourceStateFault`
+    # exception.
+    #
+    # @option params [required, String] :replication_config_arn
+    #   The Amazon Resource Name of the replication config for which to reload
+    #   tables.
+    #
+    # @option params [required, Array<Types::TableToReload>] :tables_to_reload
+    #   The list of tables to reload.
+    #
+    # @option params [String] :reload_option
+    #   Options for reload. Specify `data-reload` to reload the data and
+    #   re-validate it if validation is enabled. Specify `validate-only` to
+    #   re-validate the table. This option applies only when validation is
+    #   enabled for the replication.
+    #
+    # @return [Types::ReloadReplicationTablesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ReloadReplicationTablesResponse#replication_config_arn #replication_config_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reload_replication_tables({
+    #     replication_config_arn: "String", # required
+    #     tables_to_reload: [ # required
+    #       {
+    #         schema_name: "String", # required
+    #         table_name: "String", # required
+    #       },
+    #     ],
+    #     reload_option: "data-reload", # accepts data-reload, validate-only
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replication_config_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReloadReplicationTables AWS API Documentation
+    #
+    # @overload reload_replication_tables(params = {})
+    # @param [Hash] params ({})
+    def reload_replication_tables(params = {}, options = {})
+      req = build_request(:reload_replication_tables, params)
+      req.send_request(options)
+    end
+
     # Reloads the target database table with the source data.
     #
     # You can only use this operation with a task in the `RUNNING` state,
@@ -7739,6 +8435,98 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def start_recommendations(params = {}, options = {})
       req = build_request(:start_recommendations, params)
+      req.send_request(options)
+    end
+
+    # For a given DMS Serverless replication configuration, DMS connects to
+    # the source endpoint and collects the metadata to analyze the
+    # replication workload. Using this metadata, DMS then computes and
+    # provisions the required capacity and starts replicating to the target
+    # endpoint using the server resources that DMS has provisioned for the
+    # DMS Serverless replication.
+    #
+    # @option params [required, String] :replication_config_arn
+    #   The Amazon Resource Name of the replication for which to start
+    #   replication.
+    #
+    # @option params [required, String] :start_replication_type
+    #   The replication type.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :cdc_start_time
+    #   Indicates the start time for a change data capture (CDC) operation.
+    #   Use either `CdcStartTime` or `CdcStartPosition` to specify when you
+    #   want a CDC operation to start. Specifying both values results in an
+    #   error.
+    #
+    # @option params [String] :cdc_start_position
+    #   Indicates when you want a change data capture (CDC) operation to
+    #   start. Use either `CdcStartPosition` or `CdcStartTime` to specify when
+    #   you want a CDC operation to start. Specifying both values results in
+    #   an error.
+    #
+    #   The value can be in date, checkpoint, or LSN/SCN format.
+    #
+    # @option params [String] :cdc_stop_position
+    #   Indicates when you want a change data capture (CDC) operation to stop.
+    #   The value can be either server time or commit time.
+    #
+    # @return [Types::StartReplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartReplicationResponse#replication #replication} => Types::Replication
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_replication({
+    #     replication_config_arn: "String", # required
+    #     start_replication_type: "String", # required
+    #     cdc_start_time: Time.now,
+    #     cdc_start_position: "String",
+    #     cdc_stop_position: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replication.replication_config_identifier #=> String
+    #   resp.replication.replication_config_arn #=> String
+    #   resp.replication.source_endpoint_arn #=> String
+    #   resp.replication.target_endpoint_arn #=> String
+    #   resp.replication.replication_type #=> String, one of "full-load", "cdc", "full-load-and-cdc"
+    #   resp.replication.status #=> String
+    #   resp.replication.provision_data.provision_state #=> String
+    #   resp.replication.provision_data.provisioned_capacity_units #=> Integer
+    #   resp.replication.provision_data.date_provisioned #=> Time
+    #   resp.replication.provision_data.is_new_provisioning_available #=> Boolean
+    #   resp.replication.provision_data.date_new_provisioning_data_available #=> Time
+    #   resp.replication.provision_data.reason_for_new_provisioning_data #=> String
+    #   resp.replication.stop_reason #=> String
+    #   resp.replication.failure_messages #=> Array
+    #   resp.replication.failure_messages[0] #=> String
+    #   resp.replication.replication_stats.full_load_progress_percent #=> Integer
+    #   resp.replication.replication_stats.elapsed_time_millis #=> Integer
+    #   resp.replication.replication_stats.tables_loaded #=> Integer
+    #   resp.replication.replication_stats.tables_loading #=> Integer
+    #   resp.replication.replication_stats.tables_queued #=> Integer
+    #   resp.replication.replication_stats.tables_errored #=> Integer
+    #   resp.replication.replication_stats.fresh_start_date #=> Time
+    #   resp.replication.replication_stats.start_date #=> Time
+    #   resp.replication.replication_stats.stop_date #=> Time
+    #   resp.replication.replication_stats.full_load_start_date #=> Time
+    #   resp.replication.replication_stats.full_load_finish_date #=> Time
+    #   resp.replication.start_replication_type #=> String
+    #   resp.replication.cdc_start_time #=> Time
+    #   resp.replication.cdc_start_position #=> String
+    #   resp.replication.cdc_stop_position #=> String
+    #   resp.replication.recovery_checkpoint #=> String
+    #   resp.replication.replication_create_time #=> Time
+    #   resp.replication.replication_update_time #=> Time
+    #   resp.replication.replication_last_stop_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplication AWS API Documentation
+    #
+    # @overload start_replication(params = {})
+    # @param [Hash] params ({})
+    def start_replication(params = {}, options = {})
+      req = build_request(:start_replication, params)
       req.send_request(options)
     end
 
@@ -8096,6 +8884,69 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # For a given DMS Serverless replication configuration, DMS stops any
+    # and all ongoing DMS Serverless replications. This command doesn't
+    # deprovision the stopped replications.
+    #
+    # @option params [required, String] :replication_config_arn
+    #   The Amazon Resource Name of the replication to stop.
+    #
+    # @return [Types::StopReplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopReplicationResponse#replication #replication} => Types::Replication
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_replication({
+    #     replication_config_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replication.replication_config_identifier #=> String
+    #   resp.replication.replication_config_arn #=> String
+    #   resp.replication.source_endpoint_arn #=> String
+    #   resp.replication.target_endpoint_arn #=> String
+    #   resp.replication.replication_type #=> String, one of "full-load", "cdc", "full-load-and-cdc"
+    #   resp.replication.status #=> String
+    #   resp.replication.provision_data.provision_state #=> String
+    #   resp.replication.provision_data.provisioned_capacity_units #=> Integer
+    #   resp.replication.provision_data.date_provisioned #=> Time
+    #   resp.replication.provision_data.is_new_provisioning_available #=> Boolean
+    #   resp.replication.provision_data.date_new_provisioning_data_available #=> Time
+    #   resp.replication.provision_data.reason_for_new_provisioning_data #=> String
+    #   resp.replication.stop_reason #=> String
+    #   resp.replication.failure_messages #=> Array
+    #   resp.replication.failure_messages[0] #=> String
+    #   resp.replication.replication_stats.full_load_progress_percent #=> Integer
+    #   resp.replication.replication_stats.elapsed_time_millis #=> Integer
+    #   resp.replication.replication_stats.tables_loaded #=> Integer
+    #   resp.replication.replication_stats.tables_loading #=> Integer
+    #   resp.replication.replication_stats.tables_queued #=> Integer
+    #   resp.replication.replication_stats.tables_errored #=> Integer
+    #   resp.replication.replication_stats.fresh_start_date #=> Time
+    #   resp.replication.replication_stats.start_date #=> Time
+    #   resp.replication.replication_stats.stop_date #=> Time
+    #   resp.replication.replication_stats.full_load_start_date #=> Time
+    #   resp.replication.replication_stats.full_load_finish_date #=> Time
+    #   resp.replication.start_replication_type #=> String
+    #   resp.replication.cdc_start_time #=> Time
+    #   resp.replication.cdc_start_position #=> String
+    #   resp.replication.cdc_stop_position #=> String
+    #   resp.replication.recovery_checkpoint #=> String
+    #   resp.replication.replication_create_time #=> Time
+    #   resp.replication.replication_update_time #=> Time
+    #   resp.replication.replication_last_stop_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StopReplication AWS API Documentation
+    #
+    # @overload stop_replication(params = {})
+    # @param [Hash] params ({})
+    def stop_replication(params = {}, options = {})
+      req = build_request(:stop_replication, params)
+      req.send_request(options)
+    end
+
     # Stops the replication task.
     #
     # @option params [required, String] :replication_task_arn
@@ -8294,7 +9145,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

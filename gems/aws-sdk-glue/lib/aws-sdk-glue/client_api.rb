@@ -610,6 +610,7 @@ module Aws::Glue
     GrokPattern = Shapes::StringShape.new(name: 'GrokPattern')
     HashString = Shapes::StringShape.new(name: 'HashString')
     HudiTargetCompressionType = Shapes::StringShape.new(name: 'HudiTargetCompressionType')
+    IcebergInput = Shapes::StructureShape.new(name: 'IcebergInput')
     IcebergTarget = Shapes::StructureShape.new(name: 'IcebergTarget')
     IcebergTargetList = Shapes::ListShape.new(name: 'IcebergTargetList')
     IdString = Shapes::StringShape.new(name: 'IdString')
@@ -745,6 +746,7 @@ module Aws::Glue
     MetadataKeyString = Shapes::StringShape.new(name: 'MetadataKeyString')
     MetadataKeyValuePair = Shapes::StructureShape.new(name: 'MetadataKeyValuePair')
     MetadataList = Shapes::ListShape.new(name: 'MetadataList')
+    MetadataOperation = Shapes::StringShape.new(name: 'MetadataOperation')
     MetadataValueString = Shapes::StringShape.new(name: 'MetadataValueString')
     MicrosoftSQLServerCatalogSource = Shapes::StructureShape.new(name: 'MicrosoftSQLServerCatalogSource')
     MicrosoftSQLServerCatalogTarget = Shapes::StructureShape.new(name: 'MicrosoftSQLServerCatalogTarget')
@@ -775,6 +777,7 @@ module Aws::Glue
     NullableDouble = Shapes::FloatShape.new(name: 'NullableDouble')
     NullableInteger = Shapes::IntegerShape.new(name: 'NullableInteger')
     OneInput = Shapes::ListShape.new(name: 'OneInput')
+    OpenTableFormatInput = Shapes::StructureShape.new(name: 'OpenTableFormatInput')
     OperationTimeoutException = Shapes::StructureShape.new(name: 'OperationTimeoutException')
     Option = Shapes::StructureShape.new(name: 'Option')
     OptionList = Shapes::ListShape.new(name: 'OptionList')
@@ -2146,6 +2149,7 @@ module Aws::Glue
     CreateTableRequest.add_member(:table_input, Shapes::ShapeRef.new(shape: TableInput, required: true, location_name: "TableInput"))
     CreateTableRequest.add_member(:partition_indexes, Shapes::ShapeRef.new(shape: PartitionIndexList, location_name: "PartitionIndexes"))
     CreateTableRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: TransactionIdString, location_name: "TransactionId"))
+    CreateTableRequest.add_member(:open_table_format_input, Shapes::ShapeRef.new(shape: OpenTableFormatInput, location_name: "OpenTableFormatInput"))
     CreateTableRequest.struct_class = Types::CreateTableRequest
 
     CreateTableResponse.struct_class = Types::CreateTableResponse
@@ -3532,6 +3536,10 @@ module Aws::Glue
     GrokClassifier.add_member(:custom_patterns, Shapes::ShapeRef.new(shape: CustomPatterns, location_name: "CustomPatterns"))
     GrokClassifier.struct_class = Types::GrokClassifier
 
+    IcebergInput.add_member(:metadata_operation, Shapes::ShapeRef.new(shape: MetadataOperation, required: true, location_name: "MetadataOperation"))
+    IcebergInput.add_member(:version, Shapes::ShapeRef.new(shape: VersionString, location_name: "Version"))
+    IcebergInput.struct_class = Types::IcebergInput
+
     IcebergTarget.add_member(:paths, Shapes::ShapeRef.new(shape: PathList, location_name: "Paths"))
     IcebergTarget.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, location_name: "ConnectionName"))
     IcebergTarget.add_member(:exclusions, Shapes::ShapeRef.new(shape: PathList, location_name: "Exclusions"))
@@ -4132,6 +4140,9 @@ module Aws::Glue
     NullValueFields.member = Shapes::ShapeRef.new(shape: NullValueField)
 
     OneInput.member = Shapes::ShapeRef.new(shape: NodeId)
+
+    OpenTableFormatInput.add_member(:iceberg_input, Shapes::ShapeRef.new(shape: IcebergInput, location_name: "IcebergInput"))
+    OpenTableFormatInput.struct_class = Types::OpenTableFormatInput
 
     OperationTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     OperationTimeoutException.struct_class = Types::OperationTimeoutException

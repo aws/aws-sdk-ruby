@@ -56,6 +56,11 @@ module Aws::MediaTailor
 
     # Ad break configuration parameters.
     #
+    # @!attribute [rw] ad_break_metadata
+    #   Defines a list of key/value pairs that MediaTailor generates within
+    #   the `EXT-X-ASSET`tag for `SCTE35_ENHANCED` output.
+    #   @return [Array<Types::KeyValuePair>]
+    #
     # @!attribute [rw] message_type
     #   The SCTE-35 ad insertion type. Accepted value: `SPLICE_INSERT`,
     #   `TIME_SIGNAL`.
@@ -91,6 +96,7 @@ module Aws::MediaTailor
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/AdBreak AWS API Documentation
     #
     class AdBreak < Struct.new(
+      :ad_break_metadata,
       :message_type,
       :offset_millis,
       :slate,
@@ -2088,6 +2094,13 @@ module Aws::MediaTailor
 
     # HLS playlist configuration parameters.
     #
+    # @!attribute [rw] ad_markup_type
+    #   Determines the type of SCTE 35 tags to use in ad markup. Specify
+    #   `DATERANGE` to use `DATERANGE` tags (for live or VOD content).
+    #   Specify `SCTE35_ENHANCED` to use `EXT-X-CUE-OUT` and `EXT-X-CUE-IN`
+    #   tags (for VOD content only).
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] manifest_window_seconds
     #   The total duration (in seconds) of each manifest. Minimum value:
     #   `30` seconds. Maximum value: `3600` seconds.
@@ -2096,6 +2109,7 @@ module Aws::MediaTailor
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/HlsPlaylistSettings AWS API Documentation
     #
     class HlsPlaylistSettings < Struct.new(
+      :ad_markup_type,
       :manifest_window_seconds)
       SENSITIVE = []
       include Aws::Structure
@@ -2141,6 +2155,32 @@ module Aws::MediaTailor
       :path,
       :source_group,
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # For `SCTE35_ENHANCED` output, defines a key and corresponding value.
+    # MediaTailor generates these pairs within the `EXT-X-ASSET`tag.
+    #
+    # @!attribute [rw] key
+    #   For `SCTE35_ENHANCED` output, defines a key. MediaTailor takes this
+    #   key, and its associated value, and generates the key/value pair
+    #   within the `EXT-X-ASSET`tag. If you specify a key, you must also
+    #   specify a corresponding value.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   For `SCTE35_ENHANCED` output, defines a vaue. MediaTailor; takes
+    #   this value, and its associated key, and generates the key/value pair
+    #   within the `EXT-X-ASSET`tag. If you specify a value, you must also
+    #   specify a corresponding key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/KeyValuePair AWS API Documentation
+    #
+    class KeyValuePair < Struct.new(
+      :key,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end

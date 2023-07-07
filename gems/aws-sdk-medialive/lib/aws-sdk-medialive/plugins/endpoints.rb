@@ -120,6 +120,10 @@ module Aws::MediaLive
             Aws::MediaLive::Endpoints::DescribeReservation.build(context)
           when :describe_schedule
             Aws::MediaLive::Endpoints::DescribeSchedule.build(context)
+          when :describe_account_configuration
+            Aws::MediaLive::Endpoints::DescribeAccountConfiguration.build(context)
+          when :describe_thumbnails
+            Aws::MediaLive::Endpoints::DescribeThumbnails.build(context)
           when :list_channels
             Aws::MediaLive::Endpoints::ListChannels.build(context)
           when :list_input_device_transfers
@@ -146,6 +150,8 @@ module Aws::MediaLive
             Aws::MediaLive::Endpoints::RebootInputDevice.build(context)
           when :reject_input_device_transfer
             Aws::MediaLive::Endpoints::RejectInputDeviceTransfer.build(context)
+          when :update_account_configuration
+            Aws::MediaLive::Endpoints::UpdateAccountConfiguration.build(context)
           when :start_channel
             Aws::MediaLive::Endpoints::StartChannel.build(context)
           when :start_input_device_maintenance_window

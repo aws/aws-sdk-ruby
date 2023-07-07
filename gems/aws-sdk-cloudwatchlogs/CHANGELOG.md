@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2023-07-07)
+------------------
+
+* Feature - Add CMK encryption support for CloudWatch Logs Insights query result data
+
 1.67.0 (2023-07-06)
 ------------------
 

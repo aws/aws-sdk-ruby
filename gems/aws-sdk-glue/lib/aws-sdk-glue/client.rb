@@ -4225,6 +4225,10 @@ module Aws::Glue
     # @option params [String] :transaction_id
     #   The ID of the transaction.
     #
+    # @option params [Types::OpenTableFormatInput] :open_table_format_input
+    #   Specifies an `OpenTableFormatInput` structure when creating an open
+    #   format table.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -4321,6 +4325,12 @@ module Aws::Glue
     #       },
     #     ],
     #     transaction_id: "TransactionIdString",
+    #     open_table_format_input: {
+    #       iceberg_input: {
+    #         metadata_operation: "CREATE", # required, accepts CREATE
+    #         version: "VersionString",
+    #       },
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTable AWS API Documentation
@@ -15940,7 +15950,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.146.0'
+      context[:gem_version] = '1.147.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

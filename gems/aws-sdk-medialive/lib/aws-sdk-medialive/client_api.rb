@@ -32,6 +32,7 @@ module Aws::MediaLive
     AcceptInputDeviceTransferResponse = Shapes::StructureShape.new(name: 'AcceptInputDeviceTransferResponse')
     AccessDenied = Shapes::StructureShape.new(name: 'AccessDenied')
     AccessibilityType = Shapes::StringShape.new(name: 'AccessibilityType')
+    AccountConfiguration = Shapes::StructureShape.new(name: 'AccountConfiguration')
     AfdSignaling = Shapes::StringShape.new(name: 'AfdSignaling')
     AncillarySourceSettings = Shapes::StructureShape.new(name: 'AncillarySourceSettings')
     ArchiveCdnSettings = Shapes::StructureShape.new(name: 'ArchiveCdnSettings')
@@ -164,6 +165,9 @@ module Aws::MediaLive
     DeleteScheduleRequest = Shapes::StructureShape.new(name: 'DeleteScheduleRequest')
     DeleteScheduleResponse = Shapes::StructureShape.new(name: 'DeleteScheduleResponse')
     DeleteTagsRequest = Shapes::StructureShape.new(name: 'DeleteTagsRequest')
+    DescribeAccountConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeAccountConfigurationRequest')
+    DescribeAccountConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeAccountConfigurationResponse')
+    DescribeAccountConfigurationResultModel = Shapes::StructureShape.new(name: 'DescribeAccountConfigurationResultModel')
     DescribeChannelRequest = Shapes::StructureShape.new(name: 'DescribeChannelRequest')
     DescribeChannelResponse = Shapes::StructureShape.new(name: 'DescribeChannelResponse')
     DescribeInputDeviceRequest = Shapes::StructureShape.new(name: 'DescribeInputDeviceRequest')
@@ -184,6 +188,9 @@ module Aws::MediaLive
     DescribeReservationResponse = Shapes::StructureShape.new(name: 'DescribeReservationResponse')
     DescribeScheduleRequest = Shapes::StructureShape.new(name: 'DescribeScheduleRequest')
     DescribeScheduleResponse = Shapes::StructureShape.new(name: 'DescribeScheduleResponse')
+    DescribeThumbnailsRequest = Shapes::StructureShape.new(name: 'DescribeThumbnailsRequest')
+    DescribeThumbnailsResponse = Shapes::StructureShape.new(name: 'DescribeThumbnailsResponse')
+    DescribeThumbnailsResultModel = Shapes::StructureShape.new(name: 'DescribeThumbnailsResultModel')
     DeviceSettingsSyncState = Shapes::StringShape.new(name: 'DeviceSettingsSyncState')
     DeviceUpdateStatus = Shapes::StringShape.new(name: 'DeviceUpdateStatus')
     DolbyEProgramSelection = Shapes::StringShape.new(name: 'DolbyEProgramSelection')
@@ -638,7 +645,13 @@ module Aws::MediaLive
     TemporalFilterPostFilterSharpening = Shapes::StringShape.new(name: 'TemporalFilterPostFilterSharpening')
     TemporalFilterSettings = Shapes::StructureShape.new(name: 'TemporalFilterSettings')
     TemporalFilterStrength = Shapes::StringShape.new(name: 'TemporalFilterStrength')
+    Thumbnail = Shapes::StructureShape.new(name: 'Thumbnail')
+    ThumbnailConfiguration = Shapes::StructureShape.new(name: 'ThumbnailConfiguration')
     ThumbnailData = Shapes::StructureShape.new(name: 'ThumbnailData')
+    ThumbnailDetail = Shapes::StructureShape.new(name: 'ThumbnailDetail')
+    ThumbnailNoData = Shapes::StructureShape.new(name: 'ThumbnailNoData')
+    ThumbnailState = Shapes::StringShape.new(name: 'ThumbnailState')
+    ThumbnailType = Shapes::StringShape.new(name: 'ThumbnailType')
     TimecodeBurninFontSize = Shapes::StringShape.new(name: 'TimecodeBurninFontSize')
     TimecodeBurninPosition = Shapes::StringShape.new(name: 'TimecodeBurninPosition')
     TimecodeBurninSettings = Shapes::StructureShape.new(name: 'TimecodeBurninSettings')
@@ -656,6 +669,10 @@ module Aws::MediaLive
     UdpOutputSettings = Shapes::StructureShape.new(name: 'UdpOutputSettings')
     UdpTimedMetadataId3Frame = Shapes::StringShape.new(name: 'UdpTimedMetadataId3Frame')
     UnprocessableEntityException = Shapes::StructureShape.new(name: 'UnprocessableEntityException')
+    UpdateAccountConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateAccountConfigurationRequest')
+    UpdateAccountConfigurationRequestModel = Shapes::StructureShape.new(name: 'UpdateAccountConfigurationRequestModel')
+    UpdateAccountConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateAccountConfigurationResponse')
+    UpdateAccountConfigurationResultModel = Shapes::StructureShape.new(name: 'UpdateAccountConfigurationResultModel')
     UpdateChannel = Shapes::StructureShape.new(name: 'UpdateChannel')
     UpdateChannelClass = Shapes::StructureShape.new(name: 'UpdateChannelClass')
     UpdateChannelClassRequest = Shapes::StructureShape.new(name: 'UpdateChannelClassRequest')
@@ -809,6 +826,8 @@ module Aws::MediaLive
     __listOfRtmpAdMarkers = Shapes::ListShape.new(name: '__listOfRtmpAdMarkers')
     __listOfScheduleAction = Shapes::ListShape.new(name: '__listOfScheduleAction')
     __listOfScte35Descriptor = Shapes::ListShape.new(name: '__listOfScte35Descriptor')
+    __listOfThumbnail = Shapes::ListShape.new(name: '__listOfThumbnail')
+    __listOfThumbnailDetail = Shapes::ListShape.new(name: '__listOfThumbnailDetail')
     __listOfTransferringInputDeviceSummary = Shapes::ListShape.new(name: '__listOfTransferringInputDeviceSummary')
     __listOfValidationError = Shapes::ListShape.new(name: '__listOfValidationError')
     __listOfVideoDescription = Shapes::ListShape.new(name: '__listOfVideoDescription')
@@ -867,6 +886,9 @@ module Aws::MediaLive
 
     AccessDenied.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     AccessDenied.struct_class = Types::AccessDenied
+
+    AccountConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: __string, location_name: "kmsKeyId"))
+    AccountConfiguration.struct_class = Types::AccountConfiguration
 
     AncillarySourceSettings.add_member(:source_ancillary_channel_number, Shapes::ShapeRef.new(shape: __integerMin1Max4, location_name: "sourceAncillaryChannelNumber"))
     AncillarySourceSettings.struct_class = Types::AncillarySourceSettings
@@ -1447,6 +1469,14 @@ module Aws::MediaLive
     DeleteTagsRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location: "querystring", location_name: "tagKeys"))
     DeleteTagsRequest.struct_class = Types::DeleteTagsRequest
 
+    DescribeAccountConfigurationRequest.struct_class = Types::DescribeAccountConfigurationRequest
+
+    DescribeAccountConfigurationResponse.add_member(:account_configuration, Shapes::ShapeRef.new(shape: AccountConfiguration, location_name: "accountConfiguration"))
+    DescribeAccountConfigurationResponse.struct_class = Types::DescribeAccountConfigurationResponse
+
+    DescribeAccountConfigurationResultModel.add_member(:account_configuration, Shapes::ShapeRef.new(shape: AccountConfiguration, location_name: "accountConfiguration"))
+    DescribeAccountConfigurationResultModel.struct_class = Types::DescribeAccountConfigurationResultModel
+
     DescribeChannelRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelId"))
     DescribeChannelRequest.struct_class = Types::DescribeChannelRequest
 
@@ -1608,6 +1638,17 @@ module Aws::MediaLive
     DescribeScheduleResponse.add_member(:schedule_actions, Shapes::ShapeRef.new(shape: __listOfScheduleAction, location_name: "scheduleActions"))
     DescribeScheduleResponse.struct_class = Types::DescribeScheduleResponse
 
+    DescribeThumbnailsRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelId"))
+    DescribeThumbnailsRequest.add_member(:pipeline_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "querystring", location_name: "pipelineId"))
+    DescribeThumbnailsRequest.add_member(:thumbnail_type, Shapes::ShapeRef.new(shape: __string, required: true, location: "querystring", location_name: "thumbnailType"))
+    DescribeThumbnailsRequest.struct_class = Types::DescribeThumbnailsRequest
+
+    DescribeThumbnailsResponse.add_member(:thumbnail_details, Shapes::ShapeRef.new(shape: __listOfThumbnailDetail, location_name: "thumbnailDetails"))
+    DescribeThumbnailsResponse.struct_class = Types::DescribeThumbnailsResponse
+
+    DescribeThumbnailsResultModel.add_member(:thumbnail_details, Shapes::ShapeRef.new(shape: __listOfThumbnailDetail, location_name: "thumbnailDetails"))
+    DescribeThumbnailsResultModel.struct_class = Types::DescribeThumbnailsResultModel
+
     DolbyVision81Settings.struct_class = Types::DolbyVision81Settings
 
     DvbNitSettings.add_member(:network_id, Shapes::ShapeRef.new(shape: __integerMin0Max65536, required: true, location_name: "networkId"))
@@ -1708,6 +1749,7 @@ module Aws::MediaLive
     EncoderSettings.add_member(:output_groups, Shapes::ShapeRef.new(shape: __listOfOutputGroup, required: true, location_name: "outputGroups"))
     EncoderSettings.add_member(:timecode_config, Shapes::ShapeRef.new(shape: TimecodeConfig, required: true, location_name: "timecodeConfig"))
     EncoderSettings.add_member(:video_descriptions, Shapes::ShapeRef.new(shape: __listOfVideoDescription, required: true, location_name: "videoDescriptions"))
+    EncoderSettings.add_member(:thumbnail_configuration, Shapes::ShapeRef.new(shape: ThumbnailConfiguration, location_name: "thumbnailConfiguration"))
     EncoderSettings.struct_class = Types::EncoderSettings
 
     Esam.add_member(:acquisition_point_id, Shapes::ShapeRef.new(shape: __stringMax256, required: true, location_name: "acquisitionPointId"))
@@ -3030,8 +3072,23 @@ module Aws::MediaLive
     TemporalFilterSettings.add_member(:strength, Shapes::ShapeRef.new(shape: TemporalFilterStrength, location_name: "strength"))
     TemporalFilterSettings.struct_class = Types::TemporalFilterSettings
 
+    Thumbnail.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "body"))
+    Thumbnail.add_member(:content_type, Shapes::ShapeRef.new(shape: __string, location_name: "contentType"))
+    Thumbnail.add_member(:thumbnail_type, Shapes::ShapeRef.new(shape: ThumbnailType, location_name: "thumbnailType"))
+    Thumbnail.add_member(:time_stamp, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "timeStamp"))
+    Thumbnail.struct_class = Types::Thumbnail
+
+    ThumbnailConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: ThumbnailState, required: true, location_name: "state"))
+    ThumbnailConfiguration.struct_class = Types::ThumbnailConfiguration
+
     ThumbnailData.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "body"))
     ThumbnailData.struct_class = Types::ThumbnailData
+
+    ThumbnailDetail.add_member(:pipeline_id, Shapes::ShapeRef.new(shape: __string, location_name: "pipelineId"))
+    ThumbnailDetail.add_member(:thumbnails, Shapes::ShapeRef.new(shape: __listOfThumbnail, location_name: "thumbnails"))
+    ThumbnailDetail.struct_class = Types::ThumbnailDetail
+
+    ThumbnailNoData.struct_class = Types::ThumbnailNoData
 
     TimecodeBurninSettings.add_member(:font_size, Shapes::ShapeRef.new(shape: TimecodeBurninFontSize, required: true, location_name: "fontSize"))
     TimecodeBurninSettings.add_member(:position, Shapes::ShapeRef.new(shape: TimecodeBurninPosition, required: true, location_name: "position"))
@@ -3084,6 +3141,18 @@ module Aws::MediaLive
     UnprocessableEntityException.add_member(:element_path, Shapes::ShapeRef.new(shape: __string, location_name: "elementPath"))
     UnprocessableEntityException.add_member(:error_message, Shapes::ShapeRef.new(shape: __string, location_name: "errorMessage"))
     UnprocessableEntityException.struct_class = Types::UnprocessableEntityException
+
+    UpdateAccountConfigurationRequest.add_member(:account_configuration, Shapes::ShapeRef.new(shape: AccountConfiguration, location_name: "accountConfiguration"))
+    UpdateAccountConfigurationRequest.struct_class = Types::UpdateAccountConfigurationRequest
+
+    UpdateAccountConfigurationRequestModel.add_member(:account_configuration, Shapes::ShapeRef.new(shape: AccountConfiguration, location_name: "accountConfiguration"))
+    UpdateAccountConfigurationRequestModel.struct_class = Types::UpdateAccountConfigurationRequestModel
+
+    UpdateAccountConfigurationResponse.add_member(:account_configuration, Shapes::ShapeRef.new(shape: AccountConfiguration, location_name: "accountConfiguration"))
+    UpdateAccountConfigurationResponse.struct_class = Types::UpdateAccountConfigurationResponse
+
+    UpdateAccountConfigurationResultModel.add_member(:account_configuration, Shapes::ShapeRef.new(shape: AccountConfiguration, location_name: "accountConfiguration"))
+    UpdateAccountConfigurationResultModel.struct_class = Types::UpdateAccountConfigurationResultModel
 
     UpdateChannel.add_member(:cdi_input_specification, Shapes::ShapeRef.new(shape: CdiInputSpecification, location_name: "cdiInputSpecification"))
     UpdateChannel.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfOutputDestination, location_name: "destinations"))
@@ -3380,6 +3449,10 @@ module Aws::MediaLive
     __listOfScheduleAction.member = Shapes::ShapeRef.new(shape: ScheduleAction)
 
     __listOfScte35Descriptor.member = Shapes::ShapeRef.new(shape: Scte35Descriptor)
+
+    __listOfThumbnail.member = Shapes::ShapeRef.new(shape: Thumbnail)
+
+    __listOfThumbnailDetail.member = Shapes::ShapeRef.new(shape: ThumbnailDetail)
 
     __listOfTransferringInputDeviceSummary.member = Shapes::ShapeRef.new(shape: TransferringInputDeviceSummary)
 
@@ -3904,6 +3977,36 @@ module Aws::MediaLive
         )
       end)
 
+      api.add_operation(:describe_account_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAccountConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/accountConfiguration"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAccountConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAccountConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:describe_thumbnails, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeThumbnails"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/channels/{channelId}/thumbnails"
+        o.input = Shapes::ShapeRef.new(shape: DescribeThumbnailsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeThumbnailsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:list_channels, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListChannels"
         o.http_method = "GET"
@@ -4145,6 +4248,21 @@ module Aws::MediaLive
         o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_account_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAccountConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/prod/accountConfiguration"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAccountConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAccountConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:start_channel, Seahorse::Model::Operation.new.tap do |o|

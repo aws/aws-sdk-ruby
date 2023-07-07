@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2023-07-07)
+------------------
+
+* Feature - The AWS Elemental MediaTailor SDK for Channel Assembly has added support for EXT-X-CUE-OUT and EXT-X-CUE-IN tags to specify ad breaks in HLS outputs, including support for EXT-OATCLS, EXT-X-ASSET, and EXT-X-CUE-OUT-CONT accessory tags.
+
 1.65.0 (2023-07-06)
 ------------------
 

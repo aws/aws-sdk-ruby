@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.103.0 (2023-07-07)
+------------------
+
+* Feature - This release enables the use of Thumbnails in AWS Elemental MediaLive.
+
 1.102.0 (2023-07-06)
 ------------------
 
