@@ -125,7 +125,7 @@ module Aws
           expect(ECSCredentials.new(backoff: 0).retries).to be(5)
         end
 
-        it 'keeps trying "retries" times, with exponential backoff' do
+        it 'retries with exponential backoff' do
           expected_request =
             stub_request(:get, "http://169.254.170.2#{path}")
               .to_raise(Errno::ECONNREFUSED)
