@@ -42,7 +42,7 @@ module Aws
         end
       end
 
-      # @param [Partition] partition
+      # @param [Partition] partitions_metadata
       # @api private
       def merge_metadata(partitions_metadata)
         partitions_metadata['partitions'].each do |partition_metadata|

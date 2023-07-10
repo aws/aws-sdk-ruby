@@ -43,11 +43,41 @@ module Aws::LocationService
     #
     # @!attribute [rw] allow_actions
     #   A list of allowed actions that an API key resource grants
-    #   permissions to perform
+    #   permissions to perform. You must have at least one action for each
+    #   type of resource. For example, if you have a place resource, you
+    #   must include at least one place action.
     #
-    #   <note markdown="1"> Currently, the only valid action is `geo:GetMap*` as an input to the
-    #   list. For example, `["geo:GetMap*"]` is valid but
-    #   `["geo:GetMapTile"]` is not.
+    #   The following are valid values for the actions.
+    #
+    #   * **Map actions**
+    #
+    #     * `geo:GetMap*` - Allows all actions needed for map rendering.
+    #
+    #     ^
+    #
+    #   * **Place actions**
+    #
+    #     * `geo:SearchPlaceIndexForText` - Allows geocoding.
+    #
+    #     * `geo:SearchPlaceIndexForPosition` - Allows reverse geocoding.
+    #
+    #     * `geo:SearchPlaceIndexForSuggestions` - Allows generating
+    #       suggestions from text.
+    #
+    #     * `GetPlace` - Allows finding a place by place ID.
+    #
+    #   * **Route actions**
+    #
+    #     * `geo:CalculateRoute` - Allows point to point routing.
+    #
+    #     * `geo:CalculateRouteMatrix` - Allows calculating a matrix of
+    #       routes.
+    #
+    #   <note markdown="1"> You must use these strings exactly. For example, to provide access
+    #   to map rendering, the only valid action is `geo:GetMap*` as an input
+    #   to the list. `["geo:GetMap*"]` is valid but `["geo:GetMapTile"]` is
+    #   not. Similarly, you cannot use `["geo:SearchPlaceIndexFor*"]` - you
+    #   must list each of the Place actions separately.
     #
     #    </note>
     #   @return [Array<String>]
@@ -79,39 +109,24 @@ module Aws::LocationService
     #
     # @!attribute [rw] allow_resources
     #   A list of allowed resource ARNs that a API key bearer can perform
-    #   actions on
+    #   actions on.
+    #
+    #   * The ARN must be the correct ARN for a map, place, or route ARN.
+    #     You may include wildcards in the resource-id to match multiple
+    #     resources of the same type.
+    #
+    #   * The resources must be in the same `partition`, `region`, and
+    #     `account-id` as the key that is being created.
+    #
+    #   * Other than wildcards, you must include the full ARN, including the
+    #     `arn`, `partition`, `service`, `region`, `account-id` and
+    #     `resource-id`, delimited by colons (:).
+    #
+    #   * No spaces allowed, even with wildcards. For example,
+    #     `arn:aws:geo:region:account-id:map/ExampleMap*`.
     #
     #   For more information about ARN format, see [Amazon Resource Names
     #   (ARNs)][1].
-    #
-    #   <note markdown="1"> In this preview, you can allow only map resources.
-    #
-    #    </note>
-    #
-    #   Requirements:
-    #
-    #   * Must be prefixed with `arn`.
-    #
-    #   * `partition` and `service` must not be empty and should begin with
-    #     only alphanumeric characters (A–Z, a–z, 0–9) and contain only
-    #     alphanumeric numbers, hyphens (-) and periods (.).
-    #
-    #   * `region` and `account-id` can be empty or should begin with only
-    #     alphanumeric characters (A–Z, a–z, 0–9) and contain only
-    #     alphanumeric numbers, hyphens (-) and periods (.).
-    #
-    #   * `resource-id` can begin with any character except for forward
-    #     slash (/) and contain any characters after, including forward
-    #     slashes to form a path.
-    #
-    #     `resource-id` can also include wildcard characters, denoted by an
-    #     asterisk (*).
-    #
-    #   * `arn`, `partition`, `service`, `region`, `account-id` and
-    #     `resource-id` must be delimited by a colon (:).
-    #
-    #   * No spaces allowed. For example,
-    #     `arn:aws:geo:region:account-id:map/ExampleMap*`.
     #
     #
     #
@@ -448,8 +463,11 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] geofence_properties
-    #   Specifies additional user-defined properties to store with the
-    #   Geofence. An array of key-value pairs.
+    #   Associates one of more properties with the geofence. A property is a
+    #   key-value pair stored with the geofence and added to any geofence
+    #   event triggered with that geofence.
+    #
+    #   Format: `"key" : "value"`
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] geometry
@@ -725,6 +743,14 @@ module Aws::LocationService
     #   Default Value: `Kilometers`
     #   @return [String]
     #
+    # @!attribute [rw] key
+    #   The optional [API key][1] to authorize the request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   @return [String]
+    #
     # @!attribute [rw] travel_mode
     #   Specifies the mode of transport when calculating a route. Used in
     #   estimating the speed of travel and road compatibility.
@@ -771,9 +797,10 @@ module Aws::LocationService
       :departure_time,
       :destination_positions,
       :distance_unit,
+      :key,
       :travel_mode,
       :truck_mode_options)
-      SENSITIVE = []
+      SENSITIVE = [:key]
       include Aws::Structure
     end
 
@@ -962,6 +989,14 @@ module Aws::LocationService
     #   Valid Values: `false` \| `true`
     #   @return [Boolean]
     #
+    # @!attribute [rw] key
+    #   The optional [API key][1] to authorize the request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   @return [String]
+    #
     # @!attribute [rw] travel_mode
     #   Specifies the mode of transport when calculating a route. Used in
     #   estimating the speed of travel and road compatibility. You can
@@ -1042,10 +1077,11 @@ module Aws::LocationService
       :destination_position,
       :distance_unit,
       :include_leg_geometry,
+      :key,
       :travel_mode,
       :truck_mode_options,
       :waypoint_positions)
-      SENSITIVE = [:departure_position, :destination_position]
+      SENSITIVE = [:departure_position, :destination_position, :key]
       include Aws::Structure
     end
 
@@ -1850,6 +1886,17 @@ module Aws::LocationService
     #   An optional description for the tracker resource.
     #   @return [String]
     #
+    # @!attribute [rw] event_bridge_enabled
+    #   Whether to enable position `UPDATE` events from this tracker to be
+    #   sent to EventBridge.
+    #
+    #   <note markdown="1"> You do not need enable this feature to get `ENTER` and `EXIT` events
+    #   for geofences with this tracker. Those events are always sent to
+    #   EventBridge.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @!attribute [rw] kms_key_id
     #   A key identifier for an [Amazon Web Services KMS customer managed
     #   key][1]. Enter a key ID, key ARN, alias name, or alias ARN.
@@ -1940,6 +1987,7 @@ module Aws::LocationService
     #
     class CreateTrackerRequest < Struct.new(
       :description,
+      :event_bridge_enabled,
       :kms_key_id,
       :position_filtering,
       :pricing_plan,
@@ -2587,6 +2635,11 @@ module Aws::LocationService
     #   The optional description for the tracker resource.
     #   @return [String]
     #
+    # @!attribute [rw] event_bridge_enabled
+    #   Whether `UPDATE` events from this tracker in EventBridge are
+    #   enabled. If set to `true` these events will be sent to EventBridge.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] kms_key_id
     #   A key identifier for an [Amazon Web Services KMS customer managed
     #   key][1] assigned to the Amazon Location resource.
@@ -2640,6 +2693,7 @@ module Aws::LocationService
     class DescribeTrackerResponse < Struct.new(
       :create_time,
       :description,
+      :event_bridge_enabled,
       :kms_key_id,
       :position_filtering,
       :pricing_plan,
@@ -3012,8 +3066,11 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] geofence_properties
-    #   Contains additional user-defined properties stored with the
-    #   geofence. An array of key-value pairs.
+    #   User defined properties of the geofence. A property is a key-value
+    #   pair stored with the geofence and added to any geofence event
+    #   triggered with that geofence.
+    #
+    #   Format: `"key" : "value"`
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] geometry
@@ -3351,6 +3408,14 @@ module Aws::LocationService
     #   search.
     #   @return [String]
     #
+    # @!attribute [rw] key
+    #   The optional [API key][1] to authorize the request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   @return [String]
+    #
     # @!attribute [rw] language
     #   The preferred language used to return results. The value must be a
     #   valid [BCP 47][1] language tag, for example, `en` for English.
@@ -3384,9 +3449,10 @@ module Aws::LocationService
     #
     class GetPlaceRequest < Struct.new(
       :index_name,
+      :key,
       :language,
       :place_id)
-      SENSITIVE = []
+      SENSITIVE = [:key]
       include Aws::Structure
     end
 
@@ -3732,8 +3798,11 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] geofence_properties
-    #   Contains additional user-defined properties stored with the
-    #   geofence. An array of key-value pairs.
+    #   User defined properties of the geofence. A property is a key-value
+    #   pair stored with the geofence and added to any geofence event
+    #   triggered with that geofence.
+    #
+    #   Format: `"key" : "value"`
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] geometry
@@ -4778,8 +4847,11 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] geofence_properties
-    #   Specifies additional user-defined properties to store with the
-    #   Geofence. An array of key-value pairs.
+    #   Associates one of more properties with the geofence. A property is a
+    #   key-value pair stored with the geofence and added to any geofence
+    #   event triggered with that geofence.
+    #
+    #   Format: `"key" : "value"`
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] geometry
@@ -5076,6 +5148,14 @@ module Aws::LocationService
     #   The name of the place index resource you want to use for the search.
     #   @return [String]
     #
+    # @!attribute [rw] key
+    #   The optional [API key][1] to authorize the request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   @return [String]
+    #
     # @!attribute [rw] language
     #   The preferred language used to return results. The value must be a
     #   valid [BCP 47][1] language tag, for example, `en` for English.
@@ -5123,10 +5203,11 @@ module Aws::LocationService
     #
     class SearchPlaceIndexForPositionRequest < Struct.new(
       :index_name,
+      :key,
       :language,
       :max_results,
       :position)
-      SENSITIVE = [:position]
+      SENSITIVE = [:key, :position]
       include Aws::Structure
     end
 
@@ -5273,6 +5354,14 @@ module Aws::LocationService
     #   The name of the place index resource you want to use for the search.
     #   @return [String]
     #
+    # @!attribute [rw] key
+    #   The optional [API key][1] to authorize the request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   @return [String]
+    #
     # @!attribute [rw] language
     #   The preferred language used to return results. The value must be a
     #   valid [BCP 47][1] language tag, for example, `en` for English.
@@ -5317,10 +5406,11 @@ module Aws::LocationService
       :filter_categories,
       :filter_countries,
       :index_name,
+      :key,
       :language,
       :max_results,
       :text)
-      SENSITIVE = [:bias_position, :filter_b_box, :text]
+      SENSITIVE = [:bias_position, :filter_b_box, :key, :text]
       include Aws::Structure
     end
 
@@ -5494,6 +5584,14 @@ module Aws::LocationService
     #   The name of the place index resource you want to use for the search.
     #   @return [String]
     #
+    # @!attribute [rw] key
+    #   The optional [API key][1] to authorize the request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   @return [String]
+    #
     # @!attribute [rw] language
     #   The preferred language used to return results. The value must be a
     #   valid [BCP 47][1] language tag, for example, `en` for English.
@@ -5538,10 +5636,11 @@ module Aws::LocationService
       :filter_categories,
       :filter_countries,
       :index_name,
+      :key,
       :language,
       :max_results,
       :text)
-      SENSITIVE = [:bias_position, :filter_b_box, :text]
+      SENSITIVE = [:bias_position, :filter_b_box, :key, :text]
       include Aws::Structure
     end
 
@@ -6251,6 +6350,17 @@ module Aws::LocationService
     #   Updates the description for the tracker resource.
     #   @return [String]
     #
+    # @!attribute [rw] event_bridge_enabled
+    #   Whether to enable position `UPDATE` events from this tracker to be
+    #   sent to EventBridge.
+    #
+    #   <note markdown="1"> You do not need enable this feature to get `ENTER` and `EXIT` events
+    #   for geofences with this tracker. Those events are always sent to
+    #   EventBridge.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @!attribute [rw] position_filtering
     #   Updates the position filtering for the tracker resource.
     #
@@ -6297,6 +6407,7 @@ module Aws::LocationService
     #
     class UpdateTrackerRequest < Struct.new(
       :description,
+      :event_bridge_enabled,
       :position_filtering,
       :pricing_plan,
       :pricing_plan_data_source,

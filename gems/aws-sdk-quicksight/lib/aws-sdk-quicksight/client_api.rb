@@ -211,6 +211,7 @@ module Aws::QuickSight
     ColorList = Shapes::ListShape.new(name: 'ColorList')
     ColorScale = Shapes::StructureShape.new(name: 'ColorScale')
     ColorScaleColorList = Shapes::ListShape.new(name: 'ColorScaleColorList')
+    ColorsConfiguration = Shapes::StructureShape.new(name: 'ColorsConfiguration')
     ColumnConfiguration = Shapes::StructureShape.new(name: 'ColumnConfiguration')
     ColumnConfigurationList = Shapes::ListShape.new(name: 'ColumnConfigurationList')
     ColumnDataRole = Shapes::StringShape.new(name: 'ColumnDataRole')
@@ -323,6 +324,8 @@ module Aws::QuickSight
     CustomActionNavigationOperation = Shapes::StructureShape.new(name: 'CustomActionNavigationOperation')
     CustomActionSetParametersOperation = Shapes::StructureShape.new(name: 'CustomActionSetParametersOperation')
     CustomActionURLOperation = Shapes::StructureShape.new(name: 'CustomActionURLOperation')
+    CustomColor = Shapes::StructureShape.new(name: 'CustomColor')
+    CustomColorsList = Shapes::ListShape.new(name: 'CustomColorsList')
     CustomContentConfiguration = Shapes::StructureShape.new(name: 'CustomContentConfiguration')
     CustomContentImageScalingConfiguration = Shapes::StringShape.new(name: 'CustomContentImageScalingConfiguration')
     CustomContentType = Shapes::StringShape.new(name: 'CustomContentType')
@@ -1308,12 +1311,16 @@ module Aws::QuickSight
     SimpleNumericalAggregationFunction = Shapes::StringShape.new(name: 'SimpleNumericalAggregationFunction')
     SiteBaseUrl = Shapes::StringShape.new(name: 'SiteBaseUrl')
     SliderControlDisplayOptions = Shapes::StructureShape.new(name: 'SliderControlDisplayOptions')
+    SmallMultiplesAxisPlacement = Shapes::StringShape.new(name: 'SmallMultiplesAxisPlacement')
+    SmallMultiplesAxisProperties = Shapes::StructureShape.new(name: 'SmallMultiplesAxisProperties')
+    SmallMultiplesAxisScale = Shapes::StringShape.new(name: 'SmallMultiplesAxisScale')
     SmallMultiplesDimensionFieldList = Shapes::ListShape.new(name: 'SmallMultiplesDimensionFieldList')
     SmallMultiplesOptions = Shapes::StructureShape.new(name: 'SmallMultiplesOptions')
     SnowflakeParameters = Shapes::StructureShape.new(name: 'SnowflakeParameters')
     SortDirection = Shapes::StringShape.new(name: 'SortDirection')
     Spacing = Shapes::StructureShape.new(name: 'Spacing')
     SparkParameters = Shapes::StructureShape.new(name: 'SparkParameters')
+    SpecialValue = Shapes::StringShape.new(name: 'SpecialValue')
     SqlEndpointPath = Shapes::StringShape.new(name: 'SqlEndpointPath')
     SqlQuery = Shapes::StringShape.new(name: 'SqlQuery')
     SqlServerParameters = Shapes::StructureShape.new(name: 'SqlServerParameters')
@@ -1675,7 +1682,7 @@ module Aws::QuickSight
 
     AggregationSortConfiguration.add_member(:column, Shapes::ShapeRef.new(shape: ColumnIdentifier, required: true, location_name: "Column"))
     AggregationSortConfiguration.add_member(:sort_direction, Shapes::ShapeRef.new(shape: SortDirection, required: true, location_name: "SortDirection"))
-    AggregationSortConfiguration.add_member(:aggregation_function, Shapes::ShapeRef.new(shape: AggregationFunction, required: true, location_name: "AggregationFunction"))
+    AggregationSortConfiguration.add_member(:aggregation_function, Shapes::ShapeRef.new(shape: AggregationFunction, location_name: "AggregationFunction"))
     AggregationSortConfiguration.struct_class = Types::AggregationSortConfiguration
 
     AggregationSortConfigurationList.member = Shapes::ShapeRef.new(shape: AggregationSortConfiguration)
@@ -2238,9 +2245,13 @@ module Aws::QuickSight
 
     ColorScaleColorList.member = Shapes::ShapeRef.new(shape: DataColor)
 
+    ColorsConfiguration.add_member(:custom_colors, Shapes::ShapeRef.new(shape: CustomColorsList, location_name: "CustomColors"))
+    ColorsConfiguration.struct_class = Types::ColorsConfiguration
+
     ColumnConfiguration.add_member(:column, Shapes::ShapeRef.new(shape: ColumnIdentifier, required: true, location_name: "Column"))
     ColumnConfiguration.add_member(:format_configuration, Shapes::ShapeRef.new(shape: FormatConfiguration, location_name: "FormatConfiguration"))
     ColumnConfiguration.add_member(:role, Shapes::ShapeRef.new(shape: ColumnRole, location_name: "Role"))
+    ColumnConfiguration.add_member(:colors_configuration, Shapes::ShapeRef.new(shape: ColorsConfiguration, location_name: "ColorsConfiguration"))
     ColumnConfiguration.struct_class = Types::ColumnConfiguration
 
     ColumnConfigurationList.member = Shapes::ShapeRef.new(shape: ColumnConfiguration)
@@ -2787,6 +2798,13 @@ module Aws::QuickSight
     CustomActionURLOperation.add_member(:url_template, Shapes::ShapeRef.new(shape: URLOperationTemplate, required: true, location_name: "URLTemplate"))
     CustomActionURLOperation.add_member(:url_target, Shapes::ShapeRef.new(shape: URLTargetConfiguration, required: true, location_name: "URLTarget"))
     CustomActionURLOperation.struct_class = Types::CustomActionURLOperation
+
+    CustomColor.add_member(:field_value, Shapes::ShapeRef.new(shape: FieldValue, location_name: "FieldValue"))
+    CustomColor.add_member(:color, Shapes::ShapeRef.new(shape: HexColor, required: true, location_name: "Color"))
+    CustomColor.add_member(:special_value, Shapes::ShapeRef.new(shape: SpecialValue, location_name: "SpecialValue"))
+    CustomColor.struct_class = Types::CustomColor
+
+    CustomColorsList.member = Shapes::ShapeRef.new(shape: CustomColor)
 
     CustomContentConfiguration.add_member(:content_url, Shapes::ShapeRef.new(shape: URLOperationTemplate, location_name: "ContentUrl"))
     CustomContentConfiguration.add_member(:content_type, Shapes::ShapeRef.new(shape: CustomContentType, location_name: "ContentType"))
@@ -6474,11 +6492,17 @@ module Aws::QuickSight
     SliderControlDisplayOptions.add_member(:title_options, Shapes::ShapeRef.new(shape: LabelOptions, location_name: "TitleOptions"))
     SliderControlDisplayOptions.struct_class = Types::SliderControlDisplayOptions
 
+    SmallMultiplesAxisProperties.add_member(:scale, Shapes::ShapeRef.new(shape: SmallMultiplesAxisScale, location_name: "Scale"))
+    SmallMultiplesAxisProperties.add_member(:placement, Shapes::ShapeRef.new(shape: SmallMultiplesAxisPlacement, location_name: "Placement"))
+    SmallMultiplesAxisProperties.struct_class = Types::SmallMultiplesAxisProperties
+
     SmallMultiplesDimensionFieldList.member = Shapes::ShapeRef.new(shape: DimensionField)
 
     SmallMultiplesOptions.add_member(:max_visible_rows, Shapes::ShapeRef.new(shape: VisiblePanelRows, location_name: "MaxVisibleRows"))
     SmallMultiplesOptions.add_member(:max_visible_columns, Shapes::ShapeRef.new(shape: VisiblePanelColumns, location_name: "MaxVisibleColumns"))
     SmallMultiplesOptions.add_member(:panel_configuration, Shapes::ShapeRef.new(shape: PanelConfiguration, location_name: "PanelConfiguration"))
+    SmallMultiplesOptions.add_member(:x_axis, Shapes::ShapeRef.new(shape: SmallMultiplesAxisProperties, location_name: "XAxis"))
+    SmallMultiplesOptions.add_member(:y_axis, Shapes::ShapeRef.new(shape: SmallMultiplesAxisProperties, location_name: "YAxis"))
     SmallMultiplesOptions.struct_class = Types::SmallMultiplesOptions
 
     SnowflakeParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))

@@ -8,7 +8,7 @@ module Aws
       class PermanentRedirect < ServiceError
         # @param [Seahorse::Client::RequestContext] context
         # @param [String] message
-        # @param [Aws::S3::Types::PermanentRedirect] data
+        # @param [Aws::S3::Types::PermanentRedirect] _data
         def initialize(context, message, _data = Aws::EmptyStructure.new)
           data = Aws::S3::Types::PermanentRedirect.new(message: message)
           body = context.http_response.body_contents

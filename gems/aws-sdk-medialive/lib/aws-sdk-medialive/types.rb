@@ -157,6 +157,17 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # @!attribute [rw] kms_key_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AccountConfiguration AWS API Documentation
+    #
+    class AccountConfiguration < Struct.new(
+      :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Ancillary Source Settings
     #
     # @!attribute [rw] source_ancillary_channel_number
@@ -4197,6 +4208,10 @@ module Aws::MediaLive
     # @!attribute [rw] video_descriptions
     #   @return [Array<Types::VideoDescription>]
     #
+    # @!attribute [rw] thumbnail_configuration
+    #   Thumbnail configuration settings.
+    #   @return [Types::ThumbnailConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/EncoderSettings AWS API Documentation
     #
     class EncoderSettings < Struct.new(
@@ -4211,7 +4226,8 @@ module Aws::MediaLive
       :nielsen_configuration,
       :output_groups,
       :timecode_config,
-      :video_descriptions)
+      :video_descriptions,
+      :thumbnail_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4549,6 +4565,79 @@ module Aws::MediaLive
     #
     class GatewayTimeoutException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeAccountConfigurationRequest AWS API Documentation
+    #
+    class DescribeAccountConfigurationRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] account_configuration
+    #   @return [Types::AccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeAccountConfigurationResponse AWS API Documentation
+    #
+    class DescribeAccountConfigurationResponse < Struct.new(
+      :account_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The account's configuration.
+    #
+    # @!attribute [rw] account_configuration
+    #   @return [Types::AccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeAccountConfigurationResultModel AWS API Documentation
+    #
+    class DescribeAccountConfigurationResultModel < Struct.new(
+      :account_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_id
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_id
+    #   @return [String]
+    #
+    # @!attribute [rw] thumbnail_type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeThumbnailsRequest AWS API Documentation
+    #
+    class DescribeThumbnailsRequest < Struct.new(
+      :channel_id,
+      :pipeline_id,
+      :thumbnail_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] thumbnail_details
+    #   @return [Array<Types::ThumbnailDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeThumbnailsResponse AWS API Documentation
+    #
+    class DescribeThumbnailsResponse < Struct.new(
+      :thumbnail_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Thumbnail details for all the pipelines of a running channel.
+    #
+    # @!attribute [rw] thumbnail_details
+    #   @return [Array<Types::ThumbnailDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeThumbnailsResultModel AWS API Documentation
+    #
+    class DescribeThumbnailsResultModel < Struct.new(
+      :thumbnail_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10661,6 +10750,54 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_configuration
+    #   @return [Types::AccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationRequest AWS API Documentation
+    #
+    class UpdateAccountConfigurationRequest < Struct.new(
+      :account_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The desired new account configuration.
+    #
+    # @!attribute [rw] account_configuration
+    #   @return [Types::AccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationRequestModel AWS API Documentation
+    #
+    class UpdateAccountConfigurationRequestModel < Struct.new(
+      :account_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_configuration
+    #   @return [Types::AccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationResponse AWS API Documentation
+    #
+    class UpdateAccountConfigurationResponse < Struct.new(
+      :account_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The account's updated configuration.
+    #
+    # @!attribute [rw] account_configuration
+    #   @return [Types::AccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationResultModel AWS API Documentation
+    #
+    class UpdateAccountConfigurationResultModel < Struct.new(
+      :account_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Smpte Tt Destination Settings
     #
     # @api private
@@ -11244,6 +11381,48 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Details of a single thumbnail
+    #
+    # @!attribute [rw] body
+    #   The binary data for the latest thumbnail.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   The content type for the latest thumbnail.
+    #   @return [String]
+    #
+    # @!attribute [rw] thumbnail_type
+    #   Thumbnail Type
+    #   @return [String]
+    #
+    # @!attribute [rw] time_stamp
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Thumbnail AWS API Documentation
+    #
+    class Thumbnail < Struct.new(
+      :body,
+      :content_type,
+      :thumbnail_type,
+      :time_stamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Thumbnail Configuration
+    #
+    # @!attribute [rw] state
+    #   Whether Thumbnail is enabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ThumbnailConfiguration AWS API Documentation
+    #
+    class ThumbnailConfiguration < Struct.new(
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The binary data for the thumbnail that the Link device has most
     # recently sent to MediaLive.
     #
@@ -11259,6 +11438,31 @@ module Aws::MediaLive
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Thumbnail details for one pipeline of a running channel.
+    #
+    # @!attribute [rw] pipeline_id
+    #   Pipeline ID
+    #   @return [String]
+    #
+    # @!attribute [rw] thumbnails
+    #   thumbnails of a single pipeline
+    #   @return [Array<Types::Thumbnail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ThumbnailDetail AWS API Documentation
+    #
+    class ThumbnailDetail < Struct.new(
+      :pipeline_id,
+      :thumbnails)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response when thumbnail has no data. It should have no message.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ThumbnailNoData AWS API Documentation
+    #
+    class ThumbnailNoData < Aws::EmptyStructure; end
 
     # Timecode Burnin Settings
     #

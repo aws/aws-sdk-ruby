@@ -28,6 +28,7 @@ require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
+require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/sign.rb'
@@ -77,6 +78,7 @@ module Aws::MediaLive
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::Sign)
@@ -190,6 +192,10 @@ module Aws::MediaLive
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
     #
+    #   @option options [Boolean] :disable_request_compression (false)
+    #     When set to 'true' the request body will not be compressed
+    #     for supported operations.
+    #
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
@@ -229,6 +235,11 @@ module Aws::MediaLive
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #
+    #   @option options [Integer] :request_min_compression_size_bytes (10240)
+    #     The minimum size in bytes that triggers compression for request
+    #     bodies. The value must be non-negative integer value between 0
+    #     and 10485780 bytes inclusive.
     #
     #   @option options [Proc] :retry_backoff
     #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
@@ -1455,6 +1466,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
     #   resp.channel.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].width #=> Integer
+    #   resp.channel.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
     #   resp.channel.id #=> String
     #   resp.channel.input_attachments #=> Array
     #   resp.channel.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
@@ -2547,6 +2559,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
     #   resp.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
+    #   resp.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
     #   resp.id #=> String
     #   resp.input_attachments #=> Array
     #   resp.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
@@ -3512,6 +3525,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
     #   resp.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
+    #   resp.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
     #   resp.id #=> String
     #   resp.input_attachments #=> Array
     #   resp.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
@@ -4191,6 +4205,64 @@ module Aws::MediaLive
     # @param [Hash] params ({})
     def describe_schedule(params = {}, options = {})
       req = build_request(:describe_schedule, params)
+      req.send_request(options)
+    end
+
+    # Get account configuration
+    #
+    # @return [Types::DescribeAccountConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAccountConfigurationResponse#account_configuration #account_configuration} => Types::AccountConfiguration
+    #
+    # @example Response structure
+    #
+    #   resp.account_configuration.kms_key_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeAccountConfiguration AWS API Documentation
+    #
+    # @overload describe_account_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_account_configuration(params = {}, options = {})
+      req = build_request(:describe_account_configuration, params)
+      req.send_request(options)
+    end
+
+    # Describe the latest thumbnails data.
+    #
+    # @option params [required, String] :channel_id
+    #
+    # @option params [required, String] :pipeline_id
+    #
+    # @option params [required, String] :thumbnail_type
+    #
+    # @return [Types::DescribeThumbnailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeThumbnailsResponse#thumbnail_details #thumbnail_details} => Array&lt;Types::ThumbnailDetail&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_thumbnails({
+    #     channel_id: "__string", # required
+    #     pipeline_id: "__string", # required
+    #     thumbnail_type: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.thumbnail_details #=> Array
+    #   resp.thumbnail_details[0].pipeline_id #=> String
+    #   resp.thumbnail_details[0].thumbnails #=> Array
+    #   resp.thumbnail_details[0].thumbnails[0].body #=> String
+    #   resp.thumbnail_details[0].thumbnails[0].content_type #=> String
+    #   resp.thumbnail_details[0].thumbnails[0].thumbnail_type #=> String, one of "UNSPECIFIED", "CURRENT_ACTIVE"
+    #   resp.thumbnail_details[0].thumbnails[0].time_stamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeThumbnails AWS API Documentation
+    #
+    # @overload describe_thumbnails(params = {})
+    # @param [Hash] params ({})
+    def describe_thumbnails(params = {}, options = {})
+      req = build_request(:describe_thumbnails, params)
       req.send_request(options)
     end
 
@@ -4955,6 +5027,35 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # Update account configuration
+    #
+    # @option params [Types::AccountConfiguration] :account_configuration
+    #
+    # @return [Types::UpdateAccountConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAccountConfigurationResponse#account_configuration #account_configuration} => Types::AccountConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_account_configuration({
+    #     account_configuration: {
+    #       kms_key_id: "__string",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_configuration.kms_key_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfiguration AWS API Documentation
+    #
+    # @overload update_account_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_account_configuration(params = {}, options = {})
+      req = build_request(:update_account_configuration, params)
+      req.send_request(options)
+    end
+
     # Starts an existing channel
     #
     # @option params [required, String] :channel_id
@@ -5548,6 +5649,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
     #   resp.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
+    #   resp.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
     #   resp.id #=> String
     #   resp.input_attachments #=> Array
     #   resp.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
@@ -6321,6 +6423,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
     #   resp.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
+    #   resp.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
     #   resp.id #=> String
     #   resp.input_attachments #=> Array
     #   resp.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
@@ -7093,6 +7196,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
     #   resp.channel.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].width #=> Integer
+    #   resp.channel.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
     #   resp.channel.id #=> String
     #   resp.channel.input_attachments #=> Array
     #   resp.channel.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
@@ -7797,6 +7901,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].scaling_behavior #=> String, one of "DEFAULT", "STRETCH_TO_OUTPUT"
     #   resp.channel.encoder_settings.video_descriptions[0].sharpness #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].width #=> Integer
+    #   resp.channel.encoder_settings.thumbnail_configuration.state #=> String, one of "AUTO", "DISABLED"
     #   resp.channel.id #=> String
     #   resp.channel.input_attachments #=> Array
     #   resp.channel.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
@@ -8339,7 +8444,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.101.0'
+      context[:gem_version] = '1.103.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

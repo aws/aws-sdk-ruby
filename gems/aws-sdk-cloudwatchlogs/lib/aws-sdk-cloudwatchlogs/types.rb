@@ -55,6 +55,10 @@ module Aws::CloudWatchLogs
 
     # @!attribute [rw] log_group_name
     #   The name of the log group.
+    #
+    #   In your `AssociateKmsKey` operation, you must specify either the
+    #   `resourceIdentifier` parameter or the `logGroup` parameter, but you
+    #   can't specify both.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -69,11 +73,39 @@ module Aws::CloudWatchLogs
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
     #   @return [String]
     #
+    # @!attribute [rw] resource_identifier
+    #   Specifies the target for this operation. You must specify one of the
+    #   following:
+    #
+    #   * Specify the following ARN to have future [GetQueryResults][1]
+    #     operations in this account encrypt the results with the specified
+    #     KMS key. Replace *REGION* and *ACCOUNT\_ID* with your Region and
+    #     account ID.
+    #
+    #     `arn:aws:logs:REGION:ACCOUNT_ID:query-result:*`
+    #
+    #   * Specify the ARN of a log group to have CloudWatch Logs use the KMS
+    #     key to encrypt log events that are ingested and stored by that log
+    #     group. The log group ARN must be in the following format. Replace
+    #     *REGION* and *ACCOUNT\_ID* with your Region and account ID.
+    #
+    #     `arn:aws:logs:REGION:ACCOUNT_ID:log-group:LOG_GROUP_NAME `
+    #
+    #   In your `AssociateKmsKey` operation, you must specify either the
+    #   `resourceIdentifier` parameter or the `logGroup` parameter, but you
+    #   can't specify both.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetQueryResults.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/AssociateKmsKeyRequest AWS API Documentation
     #
     class AssociateKmsKeyRequest < Struct.new(
       :log_group_name,
-      :kms_key_id)
+      :kms_key_id,
+      :resource_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -990,12 +1022,46 @@ module Aws::CloudWatchLogs
 
     # @!attribute [rw] log_group_name
     #   The name of the log group.
+    #
+    #   In your `DisassociateKmsKey` operation, you must specify either the
+    #   `resourceIdentifier` parameter or the `logGroup` parameter, but you
+    #   can't specify both.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   Specifies the target for this operation. You must specify one of the
+    #   following:
+    #
+    #   * Specify the ARN of a log group to stop having CloudWatch Logs use
+    #     the KMS key to encrypt log events that are ingested and stored by
+    #     that log group. After you run this operation, CloudWatch Logs
+    #     encrypts ingested log events with the default CloudWatch Logs
+    #     method. The log group ARN must be in the following format. Replace
+    #     *REGION* and *ACCOUNT\_ID* with your Region and account ID.
+    #
+    #     `arn:aws:logs:REGION:ACCOUNT_ID:log-group:LOG_GROUP_NAME `
+    #
+    #   * Specify the following ARN to stop using this key to encrypt the
+    #     results of future [StartQuery][1] operations in this account.
+    #     Replace *REGION* and *ACCOUNT\_ID* with your Region and account
+    #     ID.
+    #
+    #     `arn:aws:logs:REGION:ACCOUNT_ID:query-result:*`
+    #
+    #   In your `DisssociateKmsKey` operation, you must specify either the
+    #   `resourceIdentifier` parameter or the `logGroup` parameter, but you
+    #   can't specify both.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DisassociateKmsKeyRequest AWS API Documentation
     #
     class DisassociateKmsKeyRequest < Struct.new(
-      :log_group_name)
+      :log_group_name,
+      :resource_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1426,8 +1492,9 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] time
     #   The time to set as the center of the query. If you specify `time`,
-    #   the 15 minutes before this time are queries. If you omit `time`, the
-    #   8 minutes before and 8 minutes after this time are searched.
+    #   the 8 minutes before and 8 minutes after this time are searched. If
+    #   you omit `time`, the most recent 15 minutes up to the current time
+    #   are searched.
     #
     #   The `time` value is specified as epoch time, which is the number of
     #   seconds since `January 1, 1970, 00:00:00 UTC`.
@@ -1529,8 +1596,8 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] statistics
     #   Includes the number of log events scanned by the query, the number
     #   of log events that matched the query criteria, and the total number
-    #   of bytes in the log events that were scanned. These values reflect
-    #   the full raw results of the query.
+    #   of bytes in the scanned log events. These values reflect the full
+    #   raw results of the query.
     #   @return [Types::QueryStatistics]
     #
     # @!attribute [rw] status
@@ -1543,12 +1610,24 @@ module Aws::CloudWatchLogs
     #   your query into a number of queries.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_key
+    #   If you associated an KMS key with the CloudWatch Logs Insights query
+    #   results in this account, this field displays the ARN of the key
+    #   that's used to encrypt the query results when [StartQuery][1]
+    #   stores them.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetQueryResultsResponse AWS API Documentation
     #
     class GetQueryResultsResponse < Struct.new(
       :results,
       :statistics,
-      :status)
+      :status,
+      :encryption_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2084,10 +2163,10 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] scope
-    #   Currently the only valid value for this parameter is `GLOBAL`, which
+    #   Currently the only valid value for this parameter is `ALL`, which
     #   specifies that the data protection policy applies to all log groups
-    #   in the account. If you omit this parameter, the default of `GLOBAL`
-    #   is used.
+    #   in the account. If you omit this parameter, the default of `ALL` is
+    #   used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutAccountPolicyRequest AWS API Documentation
@@ -2855,7 +2934,7 @@ module Aws::CloudWatchLogs
     #   The log group on which to perform the query.
     #
     #   <note markdown="1"> A `StartQuery` operation must include exactly one of the following
-    #   parameters: `logGroupName`, `logGroupNames` or
+    #   parameters: `logGroupName`, `logGroupNames`, or
     #   `logGroupIdentifiers`.
     #
     #    </note>
@@ -2866,7 +2945,7 @@ module Aws::CloudWatchLogs
     #   groups.
     #
     #   <note markdown="1"> A `StartQuery` operation must include exactly one of the following
-    #   parameters: `logGroupName`, `logGroupNames` or
+    #   parameters: `logGroupName`, `logGroupNames`, or
     #   `logGroupIdentifiers`.
     #
     #    </note>
@@ -2884,7 +2963,7 @@ module Aws::CloudWatchLogs
     #   If you specify an ARN, the ARN can't end with an asterisk (*).
     #
     #   A `StartQuery` operation must include exactly one of the following
-    #   parameters: `logGroupName`, `logGroupNames` or
+    #   parameters: `logGroupName`, `logGroupNames`, or
     #   `logGroupIdentifiers`.
     #   @return [Array<String>]
     #

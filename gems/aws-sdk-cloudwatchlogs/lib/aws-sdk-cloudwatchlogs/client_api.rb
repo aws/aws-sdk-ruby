@@ -75,6 +75,7 @@ module Aws::CloudWatchLogs
     DimensionsValue = Shapes::StringShape.new(name: 'DimensionsValue')
     DisassociateKmsKeyRequest = Shapes::StructureShape.new(name: 'DisassociateKmsKeyRequest')
     Distribution = Shapes::StringShape.new(name: 'Distribution')
+    EncryptionKey = Shapes::StringShape.new(name: 'EncryptionKey')
     EventId = Shapes::StringShape.new(name: 'EventId')
     EventMessage = Shapes::StringShape.new(name: 'EventMessage')
     EventNumber = Shapes::IntegerShape.new(name: 'EventNumber')
@@ -194,6 +195,7 @@ module Aws::CloudWatchLogs
     QueryString = Shapes::StringShape.new(name: 'QueryString')
     RejectedLogEventsInfo = Shapes::StructureShape.new(name: 'RejectedLogEventsInfo')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
+    ResourceIdentifier = Shapes::StringShape.new(name: 'ResourceIdentifier')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourcePolicies = Shapes::ListShape.new(name: 'ResourcePolicies')
     ResourcePolicy = Shapes::StructureShape.new(name: 'ResourcePolicy')
@@ -248,8 +250,9 @@ module Aws::CloudWatchLogs
     AccountPolicy.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
     AccountPolicy.struct_class = Types::AccountPolicy
 
-    AssociateKmsKeyRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
+    AssociateKmsKeyRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, location_name: "logGroupName"))
     AssociateKmsKeyRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, required: true, location_name: "kmsKeyId"))
+    AssociateKmsKeyRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier"))
     AssociateKmsKeyRequest.struct_class = Types::AssociateKmsKeyRequest
 
     CancelExportTaskRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: ExportTaskId, required: true, location_name: "taskId"))
@@ -430,7 +433,8 @@ module Aws::CloudWatchLogs
     Dimensions.key = Shapes::ShapeRef.new(shape: DimensionsKey)
     Dimensions.value = Shapes::ShapeRef.new(shape: DimensionsValue)
 
-    DisassociateKmsKeyRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
+    DisassociateKmsKeyRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, location_name: "logGroupName"))
+    DisassociateKmsKeyRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier"))
     DisassociateKmsKeyRequest.struct_class = Types::DisassociateKmsKeyRequest
 
     ExportTask.add_member(:task_id, Shapes::ShapeRef.new(shape: ExportTaskId, location_name: "taskId"))
@@ -529,6 +533,7 @@ module Aws::CloudWatchLogs
     GetQueryResultsResponse.add_member(:results, Shapes::ShapeRef.new(shape: QueryResults, location_name: "results"))
     GetQueryResultsResponse.add_member(:statistics, Shapes::ShapeRef.new(shape: QueryStatistics, location_name: "statistics"))
     GetQueryResultsResponse.add_member(:status, Shapes::ShapeRef.new(shape: QueryStatus, location_name: "status"))
+    GetQueryResultsResponse.add_member(:encryption_key, Shapes::ShapeRef.new(shape: EncryptionKey, location_name: "encryptionKey"))
     GetQueryResultsResponse.struct_class = Types::GetQueryResultsResponse
 
     InheritedProperties.member = Shapes::ShapeRef.new(shape: InheritedProperty)

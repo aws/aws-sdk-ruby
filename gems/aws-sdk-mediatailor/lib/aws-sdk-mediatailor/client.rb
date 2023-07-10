@@ -28,6 +28,7 @@ require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
+require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/sign.rb'
@@ -77,6 +78,7 @@ module Aws::MediaTailor
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::Sign)
@@ -190,6 +192,10 @@ module Aws::MediaTailor
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
     #
+    #   @option options [Boolean] :disable_request_compression (false)
+    #     When set to 'true' the request body will not be compressed
+    #     for supported operations.
+    #
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
@@ -229,6 +235,11 @@ module Aws::MediaTailor
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #
+    #   @option options [Integer] :request_min_compression_size_bytes (10240)
+    #     The minimum size in bytes that triggers compression for request
+    #     bodies. The value must be non-negative integer value between 0
+    #     and 10485780 bytes inclusive.
     #
     #   @option options [Proc] :retry_backoff
     #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
@@ -526,6 +537,7 @@ module Aws::MediaTailor
     #           suggested_presentation_delay_seconds: 1,
     #         },
     #         hls_playlist_settings: {
+    #           ad_markup_type: ["DATERANGE"], # accepts DATERANGE, SCTE35_ENHANCED
     #           manifest_window_seconds: 1,
     #         },
     #         manifest_name: "__string", # required
@@ -553,6 +565,8 @@ module Aws::MediaTailor
     #   resp.outputs[0].dash_playlist_settings.min_buffer_time_seconds #=> Integer
     #   resp.outputs[0].dash_playlist_settings.min_update_period_seconds #=> Integer
     #   resp.outputs[0].dash_playlist_settings.suggested_presentation_delay_seconds #=> Integer
+    #   resp.outputs[0].hls_playlist_settings.ad_markup_type #=> Array
+    #   resp.outputs[0].hls_playlist_settings.ad_markup_type[0] #=> String, one of "DATERANGE", "SCTE35_ENHANCED"
     #   resp.outputs[0].hls_playlist_settings.manifest_window_seconds #=> Integer
     #   resp.outputs[0].manifest_name #=> String
     #   resp.outputs[0].playback_url #=> String
@@ -784,6 +798,12 @@ module Aws::MediaTailor
     #   resp = client.create_program({
     #     ad_breaks: [
     #       {
+    #         ad_break_metadata: [
+    #           {
+    #             key: "String", # required
+    #             value: "String", # required
+    #           },
+    #         ],
     #         message_type: "SPLICE_INSERT", # accepts SPLICE_INSERT, TIME_SIGNAL
     #         offset_millis: 1,
     #         slate: {
@@ -834,6 +854,9 @@ module Aws::MediaTailor
     # @example Response structure
     #
     #   resp.ad_breaks #=> Array
+    #   resp.ad_breaks[0].ad_break_metadata #=> Array
+    #   resp.ad_breaks[0].ad_break_metadata[0].key #=> String
+    #   resp.ad_breaks[0].ad_break_metadata[0].value #=> String
     #   resp.ad_breaks[0].message_type #=> String, one of "SPLICE_INSERT", "TIME_SIGNAL"
     #   resp.ad_breaks[0].offset_millis #=> Integer
     #   resp.ad_breaks[0].slate.source_location_name #=> String
@@ -1314,6 +1337,8 @@ module Aws::MediaTailor
     #   resp.outputs[0].dash_playlist_settings.min_buffer_time_seconds #=> Integer
     #   resp.outputs[0].dash_playlist_settings.min_update_period_seconds #=> Integer
     #   resp.outputs[0].dash_playlist_settings.suggested_presentation_delay_seconds #=> Integer
+    #   resp.outputs[0].hls_playlist_settings.ad_markup_type #=> Array
+    #   resp.outputs[0].hls_playlist_settings.ad_markup_type[0] #=> String, one of "DATERANGE", "SCTE35_ENHANCED"
     #   resp.outputs[0].hls_playlist_settings.manifest_window_seconds #=> Integer
     #   resp.outputs[0].manifest_name #=> String
     #   resp.outputs[0].playback_url #=> String
@@ -1417,6 +1442,9 @@ module Aws::MediaTailor
     # @example Response structure
     #
     #   resp.ad_breaks #=> Array
+    #   resp.ad_breaks[0].ad_break_metadata #=> Array
+    #   resp.ad_breaks[0].ad_break_metadata[0].key #=> String
+    #   resp.ad_breaks[0].ad_break_metadata[0].value #=> String
     #   resp.ad_breaks[0].message_type #=> String, one of "SPLICE_INSERT", "TIME_SIGNAL"
     #   resp.ad_breaks[0].offset_millis #=> Integer
     #   resp.ad_breaks[0].slate.source_location_name #=> String
@@ -1897,6 +1925,8 @@ module Aws::MediaTailor
     #   resp.items[0].outputs[0].dash_playlist_settings.min_buffer_time_seconds #=> Integer
     #   resp.items[0].outputs[0].dash_playlist_settings.min_update_period_seconds #=> Integer
     #   resp.items[0].outputs[0].dash_playlist_settings.suggested_presentation_delay_seconds #=> Integer
+    #   resp.items[0].outputs[0].hls_playlist_settings.ad_markup_type #=> Array
+    #   resp.items[0].outputs[0].hls_playlist_settings.ad_markup_type[0] #=> String, one of "DATERANGE", "SCTE35_ENHANCED"
     #   resp.items[0].outputs[0].hls_playlist_settings.manifest_window_seconds #=> Integer
     #   resp.items[0].outputs[0].manifest_name #=> String
     #   resp.items[0].outputs[0].playback_url #=> String
@@ -2678,6 +2708,7 @@ module Aws::MediaTailor
     #           suggested_presentation_delay_seconds: 1,
     #         },
     #         hls_playlist_settings: {
+    #           ad_markup_type: ["DATERANGE"], # accepts DATERANGE, SCTE35_ENHANCED
     #           manifest_window_seconds: 1,
     #         },
     #         manifest_name: "__string", # required
@@ -2700,6 +2731,8 @@ module Aws::MediaTailor
     #   resp.outputs[0].dash_playlist_settings.min_buffer_time_seconds #=> Integer
     #   resp.outputs[0].dash_playlist_settings.min_update_period_seconds #=> Integer
     #   resp.outputs[0].dash_playlist_settings.suggested_presentation_delay_seconds #=> Integer
+    #   resp.outputs[0].hls_playlist_settings.ad_markup_type #=> Array
+    #   resp.outputs[0].hls_playlist_settings.ad_markup_type[0] #=> String, one of "DATERANGE", "SCTE35_ENHANCED"
     #   resp.outputs[0].hls_playlist_settings.manifest_window_seconds #=> Integer
     #   resp.outputs[0].manifest_name #=> String
     #   resp.outputs[0].playback_url #=> String
@@ -2810,6 +2843,12 @@ module Aws::MediaTailor
     #   resp = client.update_program({
     #     ad_breaks: [
     #       {
+    #         ad_break_metadata: [
+    #           {
+    #             key: "String", # required
+    #             value: "String", # required
+    #           },
+    #         ],
     #         message_type: "SPLICE_INSERT", # accepts SPLICE_INSERT, TIME_SIGNAL
     #         offset_millis: 1,
     #         slate: {
@@ -2854,6 +2893,9 @@ module Aws::MediaTailor
     # @example Response structure
     #
     #   resp.ad_breaks #=> Array
+    #   resp.ad_breaks[0].ad_break_metadata #=> Array
+    #   resp.ad_breaks[0].ad_break_metadata[0].key #=> String
+    #   resp.ad_breaks[0].ad_break_metadata[0].value #=> String
     #   resp.ad_breaks[0].message_type #=> String, one of "SPLICE_INSERT", "TIME_SIGNAL"
     #   resp.ad_breaks[0].offset_millis #=> Integer
     #   resp.ad_breaks[0].slate.source_location_name #=> String
@@ -3053,7 +3095,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

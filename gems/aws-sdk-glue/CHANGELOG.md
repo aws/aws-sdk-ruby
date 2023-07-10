@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.147.0 (2023-07-07)
+------------------
+
+* Feature - This release enables customers to create new Apache Iceberg tables and associated metadata in Amazon S3 by using native AWS Glue CreateTable operation.
+
+1.146.0 (2023-07-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.145.0 (2023-06-29)
 ------------------
 
