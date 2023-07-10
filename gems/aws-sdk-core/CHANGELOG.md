@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support `AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE` in `ECSCredentials` and allow for link-local http addresses.
+
 * Feature - Add support for Request Compression.
 
 3.176.1 (2023-06-29)

@@ -349,7 +349,7 @@ module Aws
           expect(creds.set?).to be(false)
         when /invalid field Expiration/
           expect { ECSCredentials.new(backoff: 0) }
-            .to raise_error(ArgumentError, /invalid date/)
+            .to raise_error(ArgumentError, /invalid date|invalid xmlschema/)
         else
           expect { ECSCredentials.new(backoff: 0) }
             .to raise_error(RuntimeError)
