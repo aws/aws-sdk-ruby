@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add support for configuring the endpoint URL in the shared configuration file or via an environment variable for a specific AWS service or all AWS services.
+
 3.177.0 (2023-07-06)
 ------------------
 
