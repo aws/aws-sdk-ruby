@@ -17,6 +17,9 @@ module Aws
     # @api private
     class Non200Response < RuntimeError; end
 
+    # Raised when the token file cannot be read.
+    class TokenFileReadError < RuntimeError; end
+
     # These are the errors we trap when attempting to talk to the
     # instance metadata service.  Any of these imply the service
     # is not present, no responding or some other non-recoverable
@@ -64,7 +67,6 @@ module Aws
       endpoint = options[:endpoint] ||
                  ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI']
       initialize_uri(options, credential_path, endpoint)
-      @authorization_token = ENV['AWS_CONTAINER_AUTHORIZATION_TOKEN']
 
       @retries = options[:retries] || 5
       @http_open_timeout = options[:http_open_timeout] || 5
@@ -103,11 +105,18 @@ module Aws
 
     def initialize_full_uri(endpoint)
       uri = URI.parse(endpoint)
+      validate_full_uri_scheme!(uri)
       validate_full_uri!(uri)
       @host = uri.host
       @port = uri.port
       @scheme = uri.scheme
-      @credential_path = uri.path
+      @credential_path = uri.request_uri
+    end
+
+    def validate_full_uri_scheme!(full_uri)
+      return if full_uri.is_a?(URI::HTTP) || full_uri.is_a?(URI::HTTPS)
+
+      raise ArgumentError, "'#{full_uri}' must be a valid HTTP or HTTPS URI"
     end
 
     # Validate that the full URI is using a loopback address if scheme is http.
@@ -115,25 +124,45 @@ module Aws
       return unless full_uri.scheme == 'http'
 
       begin
-        return if ip_loopback?(IPAddr.new(full_uri.host))
+        return if valid_ip_address?(IPAddr.new(full_uri.host))
       rescue IPAddr::InvalidAddressError
         addresses = Resolv.getaddresses(full_uri.host)
-        return if addresses.all? { |addr| ip_loopback?(IPAddr.new(addr)) }
+        return if addresses.all? { |addr| valid_ip_address?(IPAddr.new(addr)) }
       end
 
       raise ArgumentError,
             'AWS_CONTAINER_CREDENTIALS_FULL_URI must use a loopback '\
-            'address when using the http scheme.'
+            'or a link-local address when using the http scheme.'
+    end
+
+    def valid_ip_address?(ip_address)
+      ip_loopback?(ip_address) || ip_link_local?(ip_address)
     end
 
     # loopback? method is available in Ruby 2.5+
     # Replicate the logic here.
+    # loopback (IPv4 127.0.0.0/8, IPv6 ::1/128)
     def ip_loopback?(ip_address)
       case ip_address.family
       when Socket::AF_INET
         ip_address & 0xff000000 == 0x7f000000
       when Socket::AF_INET6
         ip_address == 1
+      else
+        false
+      end
+    end
+
+    # link_local? method is available in Ruby 2.5+
+    # Replicate the logic here.
+    # link-local (IPv4 169.254.0.0/16, IPv6 fe80::/10)
+    def ip_link_local?(ip_address)
+      case ip_address.family
+      when Socket::AF_INET
+        ip_address & 0xffff0000 == 0xa9fe0000
+      when Socket::AF_INET6
+        ip_address & 0xffc0_0000_0000_0000_0000_0000_0000_0000 ==
+          0xfe80_0000_0000_0000_0000_0000_0000_0000
       else
         false
       end
@@ -174,8 +203,26 @@ module Aws
           http_get(conn, @credential_path)
         end
       end
+    rescue TokenFileReadError
+      raise
     rescue StandardError
       '{}'
+    end
+
+    def fetch_authorization_token
+      if (path = ENV['AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE'])
+        fetch_authorization_token_file(path)
+      elsif (token = ENV['AWS_CONTAINER_AUTHORIZATION_TOKEN'])
+        token
+      end
+    end
+
+    def fetch_authorization_token_file(path)
+      File.read(path).strip
+    rescue Errno::ENOENT
+      raise TokenFileReadError,
+            'AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE is set '\
+            "but the file doesn't exist: #{path}"
     end
 
     def open_connection
@@ -190,7 +237,8 @@ module Aws
 
     def http_get(connection, path)
       request = Net::HTTP::Get.new(path)
-      request['Authorization'] = @authorization_token if @authorization_token
+      authorization_token = fetch_authorization_token
+      request['Authorization'] = authorization_token if authorization_token
       response = connection.request(request)
       raise Non200Response unless response.code.to_i == 200
 
@@ -202,6 +250,8 @@ module Aws
       retries = 0
       begin
         yield
+      rescue TokenFileReadError
+        raise
       rescue *error_classes => _e
         raise unless retries < max_retries
 
