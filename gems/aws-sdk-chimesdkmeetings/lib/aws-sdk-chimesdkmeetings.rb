@@ -52,6 +52,6 @@ require_relative 'aws-sdk-chimesdkmeetings/customizations'
 # @!group service
 module Aws::ChimeSDKMeetings
 
-  GEM_VERSION = '1.22.0'
+  GEM_VERSION = '1.23.0'
 
 end

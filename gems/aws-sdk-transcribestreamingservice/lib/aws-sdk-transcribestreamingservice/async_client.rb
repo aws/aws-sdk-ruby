@@ -155,6 +155,10 @@ module Aws::TranscribeStreamingService
     #   @option options [Proc] :event_stream_handler
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
     #
+    #   @option options [Boolean] :ignore_configured_endpoint_urls
+    #     Setting to true disables use of endpoint URLs provided via environment
+    #     variables and the shared configuration file.
+    #
     #   @option options [Proc] :input_event_stream_handler
     #     When an EventStream or Proc object is provided, it can be used for sending events for the event stream.
     #
@@ -1643,7 +1647,7 @@ module Aws::TranscribeStreamingService
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribestreamingservice'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

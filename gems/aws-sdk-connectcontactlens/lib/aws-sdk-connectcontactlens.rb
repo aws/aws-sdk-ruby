@@ -52,6 +52,6 @@ require_relative 'aws-sdk-connectcontactlens/customizations'
 # @!group service
 module Aws::ConnectContactLens
 
-  GEM_VERSION = '1.17.0'
+  GEM_VERSION = '1.18.0'
 
 end

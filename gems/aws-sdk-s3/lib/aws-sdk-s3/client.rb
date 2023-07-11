@@ -272,6 +272,10 @@ module Aws::S3
     #     When set to `true`, the bucket name is always left in the
     #     request URI and never moved to the host as a sub-domain.
     #
+    #   @option options [Boolean] :ignore_configured_endpoint_urls
+    #     Setting to true disables use of endpoint URLs provided via environment
+    #     variables and the shared configuration file.
+    #
     #   @option options [Proc] :input_event_stream_handler
     #     When an EventStream or Proc object is provided, it can be used for sending events for the event stream.
     #
@@ -15647,7 +15651,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.128.0'
+      context[:gem_version] = '1.129.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

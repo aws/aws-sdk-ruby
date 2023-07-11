@@ -52,6 +52,6 @@ require_relative 'aws-sdk-gamelift/customizations'
 # @!group service
 module Aws::GameLift
 
-  GEM_VERSION = '1.68.0'
+  GEM_VERSION = '1.69.0'
 
 end
