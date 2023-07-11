@@ -110,6 +110,20 @@ module Aws::DatabaseMigrationService
       end
     end
 
+    class CreateReplicationConfig
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DatabaseMigrationService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CreateReplicationInstance
       def self.build(context)
         unless context.config.regional_endpoint
@@ -223,6 +237,20 @@ module Aws::DatabaseMigrationService
     end
 
     class DeleteFleetAdvisorDatabases
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DatabaseMigrationService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DeleteReplicationConfig
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -572,6 +600,20 @@ module Aws::DatabaseMigrationService
       end
     end
 
+    class DescribeReplicationConfigs
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DatabaseMigrationService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DescribeReplicationInstanceTaskLogs
       def self.build(context)
         unless context.config.regional_endpoint
@@ -601,6 +643,20 @@ module Aws::DatabaseMigrationService
     end
 
     class DescribeReplicationSubnetGroups
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DatabaseMigrationService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DescribeReplicationTableStatistics
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -657,6 +713,20 @@ module Aws::DatabaseMigrationService
     end
 
     class DescribeReplicationTasks
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DatabaseMigrationService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DescribeReplications
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -754,6 +824,20 @@ module Aws::DatabaseMigrationService
       end
     end
 
+    class ModifyReplicationConfig
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DatabaseMigrationService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ModifyReplicationInstance
       def self.build(context)
         unless context.config.regional_endpoint
@@ -838,6 +922,20 @@ module Aws::DatabaseMigrationService
       end
     end
 
+    class ReloadReplicationTables
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DatabaseMigrationService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ReloadTables
       def self.build(context)
         unless context.config.regional_endpoint
@@ -894,6 +992,20 @@ module Aws::DatabaseMigrationService
       end
     end
 
+    class StartReplication
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DatabaseMigrationService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class StartReplicationTask
       def self.build(context)
         unless context.config.regional_endpoint
@@ -923,6 +1035,20 @@ module Aws::DatabaseMigrationService
     end
 
     class StartReplicationTaskAssessmentRun
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DatabaseMigrationService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class StopReplication
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

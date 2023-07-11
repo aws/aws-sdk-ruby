@@ -5214,6 +5214,11 @@ module Aws::Glue
     #   The ID of the transaction.
     #   @return [String]
     #
+    # @!attribute [rw] open_table_format_input
+    #   Specifies an `OpenTableFormatInput` structure when creating an open
+    #   format table.
+    #   @return [Types::OpenTableFormatInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTableRequest AWS API Documentation
     #
     class CreateTableRequest < Struct.new(
@@ -5221,7 +5226,8 @@ module Aws::Glue
       :database_name,
       :table_input,
       :partition_indexes,
-      :transaction_id)
+      :transaction_id,
+      :open_table_format_input)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11802,6 +11808,26 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # A structure that defines an Apache Iceberg metadata table to create in
+    # the catalog.
+    #
+    # @!attribute [rw] metadata_operation
+    #   A required metadata operation. Can only be set to `CREATE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The table version for the Iceberg table. Defaults to 2.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IcebergInput AWS API Documentation
+    #
+    class IcebergInput < Struct.new(
+      :metadata_operation,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies an Apache Iceberg data source where Iceberg tables are
     # stored in Amazon S3.
     #
@@ -15120,6 +15146,21 @@ module Aws::Glue
     class NullValueField < Struct.new(
       :value,
       :datatype)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure representing an open format table.
+    #
+    # @!attribute [rw] iceberg_input
+    #   Specifies an `IcebergInput` structure that defines an Apache Iceberg
+    #   metadata table.
+    #   @return [Types::IcebergInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/OpenTableFormatInput AWS API Documentation
+    #
+    class OpenTableFormatInput < Struct.new(
+      :iceberg_input)
       SENSITIVE = []
       include Aws::Structure
     end

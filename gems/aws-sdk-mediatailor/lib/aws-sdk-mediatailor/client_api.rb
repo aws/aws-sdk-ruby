@@ -16,7 +16,9 @@ module Aws::MediaTailor
     AccessConfiguration = Shapes::StructureShape.new(name: 'AccessConfiguration')
     AccessType = Shapes::StringShape.new(name: 'AccessType')
     AdBreak = Shapes::StructureShape.new(name: 'AdBreak')
+    AdBreakMetadataList = Shapes::ListShape.new(name: 'AdBreakMetadataList')
     AdMarkerPassthrough = Shapes::StructureShape.new(name: 'AdMarkerPassthrough')
+    AdMarkupType = Shapes::StringShape.new(name: 'AdMarkupType')
     Alert = Shapes::StructureShape.new(name: 'Alert')
     AvailMatchingCriteria = Shapes::StructureShape.new(name: 'AvailMatchingCriteria')
     AvailSuppression = Shapes::StructureShape.new(name: 'AvailSuppression')
@@ -89,6 +91,7 @@ module Aws::MediaTailor
     HttpPackageConfiguration = Shapes::StructureShape.new(name: 'HttpPackageConfiguration')
     HttpPackageConfigurations = Shapes::ListShape.new(name: 'HttpPackageConfigurations')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
+    KeyValuePair = Shapes::StructureShape.new(name: 'KeyValuePair')
     ListAlertsRequest = Shapes::StructureShape.new(name: 'ListAlertsRequest')
     ListAlertsResponse = Shapes::StructureShape.new(name: 'ListAlertsResponse')
     ListChannelsRequest = Shapes::StructureShape.new(name: 'ListChannelsRequest')
@@ -188,17 +191,21 @@ module Aws::MediaTailor
     __mapOf__string = Shapes::MapShape.new(name: '__mapOf__string')
     __string = Shapes::StringShape.new(name: '__string')
     __timestampUnix = Shapes::TimestampShape.new(name: '__timestampUnix', timestampFormat: "unixTimestamp")
+    adMarkupTypes = Shapes::ListShape.new(name: 'adMarkupTypes')
 
     AccessConfiguration.add_member(:access_type, Shapes::ShapeRef.new(shape: AccessType, location_name: "AccessType"))
     AccessConfiguration.add_member(:secrets_manager_access_token_configuration, Shapes::ShapeRef.new(shape: SecretsManagerAccessTokenConfiguration, location_name: "SecretsManagerAccessTokenConfiguration"))
     AccessConfiguration.struct_class = Types::AccessConfiguration
 
+    AdBreak.add_member(:ad_break_metadata, Shapes::ShapeRef.new(shape: AdBreakMetadataList, location_name: "AdBreakMetadata"))
     AdBreak.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
     AdBreak.add_member(:offset_millis, Shapes::ShapeRef.new(shape: __long, location_name: "OffsetMillis"))
     AdBreak.add_member(:slate, Shapes::ShapeRef.new(shape: SlateSource, location_name: "Slate"))
     AdBreak.add_member(:splice_insert_message, Shapes::ShapeRef.new(shape: SpliceInsertMessage, location_name: "SpliceInsertMessage"))
     AdBreak.add_member(:time_signal_message, Shapes::ShapeRef.new(shape: TimeSignalMessage, location_name: "TimeSignalMessage"))
     AdBreak.struct_class = Types::AdBreak
+
+    AdBreakMetadataList.member = Shapes::ShapeRef.new(shape: KeyValuePair)
 
     AdMarkerPassthrough.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
     AdMarkerPassthrough.struct_class = Types::AdMarkerPassthrough
@@ -564,6 +571,7 @@ module Aws::MediaTailor
     HlsConfiguration.add_member(:manifest_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "ManifestEndpointPrefix"))
     HlsConfiguration.struct_class = Types::HlsConfiguration
 
+    HlsPlaylistSettings.add_member(:ad_markup_type, Shapes::ShapeRef.new(shape: adMarkupTypes, location_name: "AdMarkupType"))
     HlsPlaylistSettings.add_member(:manifest_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "ManifestWindowSeconds"))
     HlsPlaylistSettings.struct_class = Types::HlsPlaylistSettings
 
@@ -576,6 +584,10 @@ module Aws::MediaTailor
     HttpPackageConfiguration.struct_class = Types::HttpPackageConfiguration
 
     HttpPackageConfigurations.member = Shapes::ShapeRef.new(shape: HttpPackageConfiguration)
+
+    KeyValuePair.add_member(:key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Key"))
+    KeyValuePair.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
+    KeyValuePair.struct_class = Types::KeyValuePair
 
     ListAlertsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListAlertsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
@@ -986,6 +998,8 @@ module Aws::MediaTailor
 
     __mapOf__string.key = Shapes::ShapeRef.new(shape: __string)
     __mapOf__string.value = Shapes::ShapeRef.new(shape: __string)
+
+    adMarkupTypes.member = Shapes::ShapeRef.new(shape: AdMarkupType)
 
 
     # @api private

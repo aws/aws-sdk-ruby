@@ -17,7 +17,7 @@ module Aws
             current_profile = named_profile[1] if named_profile
           elsif current_profile
             unless line.nil?
-              item = line.match(/^(.+?)\s*=\s*(.+?)\s*$/)
+              item = line.match(/^(.+?)\s*=\s*([^\s].*?)\s*$/)
               prefix = line.match(/^(.+?)\s*=\s*$/)
             end
             if item && item[1].match(/^\s+/)

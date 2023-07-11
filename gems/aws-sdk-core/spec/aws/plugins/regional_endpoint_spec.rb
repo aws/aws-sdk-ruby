@@ -6,14 +6,10 @@ module Aws
   module Plugins
     describe RegionalEndpoint do
       RegionalEndpointClient = ApiHelper.sample_service.const_get(:Client)
-
-      let(:env) { {} }
-
+      
       let(:client_class) { RegionalEndpointClient }
 
-      before do
-        stub_const('ENV', env)
-      end
+      let(:region) { 'REGION' }
 
       describe 'region option' do
         it 'adds a :region configuration option' do
@@ -22,35 +18,35 @@ module Aws
         end
 
         it 'defaults to ENV["AWS_DEFAULT_REGION"]' do
-          env['AWS_DEFAULT_REGION'] = 'env-region'
+          ENV['AWS_DEFAULT_REGION'] = 'env-region'
           expect(client_class.new.config.region).to eq('env-region')
         end
 
         it 'defaults to ENV["AWS_REGION"]' do
-          env['AWS_REGION'] = 'env-fallback1'
+          ENV['AWS_REGION'] = 'env-fallback1'
           expect(client_class.new.config.region).to eq('env-fallback1')
         end
 
         it 'falls back to ENV["AMAZON_REGION"]' do
-          env['AMAZON_REGION'] = 'region-fallback2'
+          ENV['AMAZON_REGION'] = 'region-fallback2'
           expect(client_class.new.config.region).to eq('region-fallback2')
         end
 
         it 'prefers AWS_REGION to AMAZON_REGION or AWS_DEFAULT_REGION' do
-          env['AWS_REGION'] = 'aws-region'
-          env['AMAZON_REGION'] = 'amazon-region'
-          env['AWS_DEFAULT_REGION'] = 'aws-default-region'
+          ENV['AWS_REGION'] = 'aws-region'
+          ENV['AMAZON_REGION'] = 'amazon-region'
+          ENV['AWS_DEFAULT_REGION'] = 'aws-default-region'
           expect(client_class.new.config.region).to eq('aws-region')
         end
 
         it 'prefers AWS_REGION to AMAZON_REGION' do
-          env['AWS_REGION'] = 'aws-region'
-          env['AMAZON_REGION'] = 'amazon-region'
+          ENV['AWS_REGION'] = 'aws-region'
+          ENV['AMAZON_REGION'] = 'amazon-region'
           expect(client_class.new.config.region).to eq('aws-region')
         end
 
         it 'can be set directly, overriding the ENV["AWS_REGION"]' do
-          env['AWS_REGION'] = 'env-region'
+          ENV['AWS_REGION'] = 'env-region'
           expect(client_class.new(region: 'cfg').config.region).to eq('cfg')
         end
 
@@ -90,11 +86,119 @@ module Aws
       end
 
       describe 'endpoint option' do
-        it 'defaults the endpoint to PREFIX.REGION.amazonaws.com' do
+        it 'preserves legacy pre-endpoints2.0 behavior and sets the endpoint and regional_endpoint' do
           prefix = client_class.api.metadata['endpointPrefix']
-          client = client_class.new(region: 'REGION')
+          client = client_class.new(region: region)
           expect(client.config.endpoint.to_s)
-            .to eq("https://#{prefix}.REGION.amazonaws.com")
+            .to eq("https://#{prefix}.#{region}.amazonaws.com")
+          expect(client.config.regional_endpoint).to be_truthy
+        end
+
+        context 'ENV["AWS_IGNORE_CONFIGURED_ENDPOINT_URLS"] set' do
+          before { ENV['AWS_IGNORE_CONFIGURED_ENDPOINT_URLS'] = 'True' }
+
+          it 'ignores ENV["AWS_ENDPOINT_URL"]' do
+            ENV['AWS_ENDPOINT_URL'] = 'custom-env-url'
+            expect(client_class.new(region: region).config.endpoint.to_s)
+              .not_to eq('custom-env-url')
+          end
+
+          it 'ignores endpoint_url in shared config' do
+            expect(Aws.shared_config).not_to receive(:configured_endpoint)
+            client_class.new(region: region)
+          end
+
+          it 'uses client configured endpoint' do
+            expect(client_class.new(
+              region: region, endpoint: 'https://custom-client-endpoint'
+            ).config.endpoint.to_s).to eq('https://custom-client-endpoint')
+          end
+        end
+
+        context 'Shared config ignore_configured_endpoint_urls set' do
+          before do
+            allow_any_instance_of(Aws::SharedConfig)
+              .to receive(:ignore_configured_endpoint_urls).and_return('true')
+          end
+
+          it 'ignores ENV["AWS_ENDPOINT_URL"]' do
+            ENV['AWS_ENDPOINT_URL'] = 'custom-env-url'
+            expect(client_class.new(region: region).config.endpoint.to_s)
+              .not_to eq('custom-env-url')
+          end
+
+          it 'ignores endpoint_url in shared config' do
+            expect(Aws.shared_config).not_to receive(:configured_endpoint)
+            client_class.new(region: region)
+          end
+
+          it 'uses client configured endpoint' do
+            expect(client_class.new(
+              region: region, endpoint: 'https://custom-client-endpoint'
+            ).config.endpoint.to_s).to eq('https://custom-client-endpoint')
+          end
+        end
+
+        context 'client ignore_configured_endpoint_urls set' do
+          let(:cfg) do
+            {
+              region: region,
+              ignore_configured_endpoint_urls: true
+            }
+          end
+
+          it 'ignores ENV["AWS_ENDPOINT_URL"]' do
+            ENV['AWS_ENDPOINT_URL'] = 'custom-env-url'
+            expect(client_class.new(cfg).config.endpoint.to_s)
+              .not_to eq('custom-env-url')
+          end
+
+          it 'ignores endpoint_url in shared config' do
+            expect(Aws.shared_config).not_to receive(:configured_endpoint)
+            client_class.new(cfg)
+          end
+
+          it 'ignores ENV["AWS_ENDPOINT_URL"] even when Shared config ignore_configured_endpoint_urls set' do
+            allow_any_instance_of(Aws::SharedConfig)
+              .to receive(:ignore_configured_endpoint_urls).and_return('true')
+            ENV['AWS_ENDPOINT_URL'] = 'custom-env-url'
+            expect(client_class.new(cfg).config.endpoint.to_s)
+              .not_to eq('custom-env-url')
+          end
+        end
+
+        it 'uses configured_endpoint from shared config' do
+          allow(Aws.shared_config).to receive(:configured_endpoint)
+            .and_return('https://shared-config')
+          expect(client_class.new(region: region).config.endpoint.to_s)
+            .to eq('https://shared-config')
+        end
+
+        it 'uses ENV["AWS_ENDPOINT_URL"] over shared config' do
+          allow(Aws.shared_config).to receive(:configured_endpoint)
+            .and_return('https://shared-config')
+          ENV['AWS_ENDPOINT_URL'] = 'https://global-env'
+          expect(client_class.new(region: region).config.endpoint.to_s)
+            .to eq('https://global-env')
+        end
+
+        it 'uses service specific ENV over ENV["AWS_ENDPOINT_URL"]' do
+          allow(Aws.shared_config).to receive(:configured_endpoint)
+            .and_return('https://shared-config')
+          ENV['AWS_ENDPOINT_URL'] = 'https://global-env'
+          ENV['AWS_ENDPOINT_URL_SVC'] = 'https://service-env'
+          expect(client_class.new(region: region).config.endpoint.to_s)
+            .to eq('https://service-env')
+        end
+
+        it 'uses client configured endpoint over all other configuration' do
+          allow(Aws.shared_config).to receive(:configured_endpoint)
+            .and_return('https://shared-config')
+          ENV['AWS_ENDPOINT_URL'] = 'https://global-env'
+          ENV['AWS_ENDPOINT_URL_SVC'] = 'https://service-env'
+          expect(client_class.new(
+            region: region, endpoint: 'https://client').config.endpoint.to_s)
+            .to eq('https://client')
         end
       end
 

@@ -315,26 +315,28 @@ module Aws
 
       # @!group Fields
 
-      # The key to use for the uploaded object. You can use `${filename}`
-      # as a variable in the key. This will be replaced with the name
-      # of the file as provided by the user.
+      # @!method key(key)
+      #   The key to use for the uploaded object. You can use `${filename}`
+      #   as a variable in the key. This will be replaced with the name
+      #   of the file as provided by the user.
       #
-      # For example, if the key is given as `/user/betty/${filename}` and
-      # the file uploaded is named `lolcatz.jpg`, the resultant key will
-      # be `/user/betty/lolcatz.jpg`.
+      #   For example, if the key is given as `/user/betty/${filename}` and
+      #   the file uploaded is named `lolcatz.jpg`, the resultant key will
+      #   be `/user/betty/lolcatz.jpg`.
       #
-      # @param [String] key
-      # @see http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html)
-      # @return [self]
+      #   @param [String] key
+      #   @see http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html)
+      #   @return [self]
       define_field(:key) do |key|
         @key_set = true
         with('key', key)
       end
 
-      # Specify a prefix the uploaded
-      # @param [String] prefix
-      # @see #key
-      # @return [self]
+      # @!method key_starts_with(prefix)
+      #   Specify a prefix the uploaded
+      #   @param [String] prefix
+      #   @see #key
+      #   @return [self]
       define_field(:key_starts_with) do |prefix|
         @key_set = true
         starts_with('key', prefix)
@@ -412,26 +414,29 @@ module Aws
       #   @return [self]
       define_field(:content_encoding, 'Content-Encoding', starts_with: true)
 
-      # The date and time at which the object is no longer cacheable.
-      # @note This does not affect the expiration of the presigned post
-      #   signature.
-      # @param [Time] time
-      # @see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21
-      # @return [self]
+      # @!method expires(time)
+      #   The date and time at which the object is no longer cacheable.
+      #   @note This does not affect the expiration of the presigned post
+      #     signature.
+      #   @param [Time] time
+      #   @see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21
+      #   @return [self]
       define_field(:expires) do |time|
         with('Expires', time.httpdate)
       end
 
-      # @param [String] prefix
-      # @see #expires
-      # @return [self]
+      # @!method expires_starts_with(prefix)
+      #   @param [String] prefix
+      #   @see #expires
+      #   @return [self]
       define_field(:expires_starts_with) do |prefix|
         starts_with('Expires', prefix)
       end
 
-      # The minimum and maximum allowable size for the uploaded content.
-      # @param [Range<Integer>] byte_range
-      # @return [self]
+      # @!method content_length_range(byte_range)
+      #   The minimum and maximum allowable size for the uploaded content.
+      #   @param [Range<Integer>] byte_range
+      #   @return [self]
       define_field(:content_length_range) do |byte_range|
         min = byte_range.begin
         max = byte_range.end
@@ -507,10 +512,11 @@ module Aws
       #   @return [self]
       define_field(:website_redirect_location, 'x-amz-website-redirect-location')
 
-      # Metadata hash to store with the uploaded object. Hash keys will be
-      # prefixed with "x-amz-meta-".
-      # @param [Hash<String,String>] hash
-      # @return [self]
+      # @!method metadata(hash)
+      #   Metadata hash to store with the uploaded object. Hash keys will be
+      #   prefixed with "x-amz-meta-".
+      #   @param [Hash<String,String>] hash
+      #   @return [self]
       define_field(:metadata) do |hash|
         hash.each do |key, value|
           with("x-amz-meta-#{key}", value)
@@ -518,10 +524,11 @@ module Aws
         self
       end
 
-      # Specify allowable prefix for each key in the metadata hash.
-      # @param [Hash<String,String>] hash
-      # @see #metadata
-      # @return [self]
+      # @!method metadata_starts_with(hash)
+      #   Specify allowable prefix for each key in the metadata hash.
+      #   @param [Hash<String,String>] hash
+      #   @see #metadata
+      #   @return [self]
       define_field(:metadata_starts_with) do |hash|
         hash.each do |key, value|
           starts_with("x-amz-meta-#{key}", value)
@@ -571,24 +578,26 @@ module Aws
         'x-amz-server-side-encryption-customer-algorithm'
       )
 
-      # Specifies the customer-provided encryption key for Amazon S3 to use
-      # in encrypting data. This value is used to store the object and then
-      # it is discarded; Amazon does not store the encryption key.
+      # @!method server_side_encryption_customer_key(value)
+      #   Specifies the customer-provided encryption key for Amazon S3 to use
+      #   in encrypting data. This value is used to store the object and then
+      #   it is discarded; Amazon does not store the encryption key.
       #
-      # You must also call {#server_side_encryption_customer_algorithm}.
+      #   You must also call {#server_side_encryption_customer_algorithm}.
       #
-      # @param [String] value
-      # @see #server_side_encryption_customer_algorithm
-      # @return [self]
+      #   @param [String] value
+      #   @see #server_side_encryption_customer_algorithm
+      #   @return [self]
       define_field(:server_side_encryption_customer_key) do |value|
         field_name = 'x-amz-server-side-encryption-customer-key'
         with(field_name, base64(value))
         with(field_name + '-MD5', base64(OpenSSL::Digest::MD5.digest(value)))
       end
 
-      # @param [String] prefix
-      # @see #server_side_encryption_customer_key
-      # @return [self]
+      # @!method server_side_encryption_customer_key_starts_with(prefix)
+      #   @param [String] prefix
+      #   @see #server_side_encryption_customer_key
+      #   @return [self]
       define_field(:server_side_encryption_customer_key_starts_with) do |prefix|
         field_name = 'x-amz-server-side-encryption-customer-key'
         starts_with(field_name, prefix)

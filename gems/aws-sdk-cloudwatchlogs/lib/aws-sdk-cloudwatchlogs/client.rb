@@ -216,6 +216,10 @@ module Aws::CloudWatchLogs
     #   @option options [Boolean] :endpoint_discovery (false)
     #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
+    #   @option options [Boolean] :ignore_configured_endpoint_urls
+    #     Setting to true disables use of endpoint URLs provided via environment
+    #     variables and the shared configuration file.
+    #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
     #
@@ -394,19 +398,56 @@ module Aws::CloudWatchLogs
 
     # @!group API Operations
 
-    # Associates the specified KMS key with the specified log group.
+    # Associates the specified KMS key with either one log group in the
+    # account, or with all stored CloudWatch Logs query insights results in
+    # the account.
     #
-    # Associating a KMS key with a log group overrides any existing
-    # associations between the log group and a KMS key. After a KMS key is
-    # associated with a log group, all newly ingested data for the log group
-    # is encrypted using the KMS key. This association is stored as long as
-    # the data encrypted with the KMS keyis still within CloudWatch Logs.
-    # This enables CloudWatch Logs to decrypt this data whenever it is
-    # requested.
+    # When you use `AssociateKmsKey`, you specify either the `logGroupName`
+    # parameter or the `resourceIdentifier` parameter. You can't specify
+    # both of those parameters in the same operation.
     #
-    # CloudWatch Logs supports only symmetric KMS keys. Do not use an
-    # associate an asymmetric KMS key with your log group. For more
-    # information, see [Using Symmetric and Asymmetric Keys][1].
+    # * Specify the `logGroupName` parameter to cause all log events stored
+    #   in the log group to be encrypted with that key. Only the log events
+    #   ingested after the key is associated are encrypted with that key.
+    #
+    #   Associating a KMS key with a log group overrides any existing
+    #   associations between the log group and a KMS key. After a KMS key is
+    #   associated with a log group, all newly ingested data for the log
+    #   group is encrypted using the KMS key. This association is stored as
+    #   long as the data encrypted with the KMS key is still within
+    #   CloudWatch Logs. This enables CloudWatch Logs to decrypt this data
+    #   whenever it is requested.
+    #
+    #   Associating a key with a log group does not cause the results of
+    #   queries of that log group to be encrypted with that key. To have
+    #   query results encrypted with a KMS key, you must use an
+    #   `AssociateKmsKey` operation with the `resourceIdentifier` parameter
+    #   that specifies a `query-result` resource.
+    #
+    # * Specify the `resourceIdentifier` parameter with a `query-result`
+    #   resource, to use that key to encrypt the stored results of all
+    #   future [StartQuery][1] operations in the account. The response from
+    #   a [GetQueryResults][2] operation will still return the query results
+    #   in plain text.
+    #
+    #   Even if you have not associated a key with your query results, the
+    #   query results are encrypted when stored, using the default
+    #   CloudWatch Logs method.
+    #
+    #   If you run a query from a monitoring account that queries logs in a
+    #   source account, the query results key from the monitoring account,
+    #   if any, is used.
+    #
+    # If you delete the key that is used to encrypt log events or log group
+    # query results, then all the associated stored log events or query
+    # results that were encrypted with that key will be unencryptable and
+    # unusable.
+    #
+    # <note markdown="1"> CloudWatch Logs supports only symmetric KMS keys. Do not use an
+    # associate an asymmetric KMS key with your log group or query results.
+    # For more information, see [Using Symmetric and Asymmetric Keys][3].
+    #
+    #  </note>
     #
     # It can take up to 5 minutes for this operation to take effect.
     #
@@ -416,10 +457,16 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetQueryResults.html
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
     #
-    # @option params [required, String] :log_group_name
+    # @option params [String] :log_group_name
     #   The name of the log group.
+    #
+    #   In your `AssociateKmsKey` operation, you must specify either the
+    #   `resourceIdentifier` parameter or the `logGroup` parameter, but you
+    #   can't specify both.
     #
     # @option params [required, String] :kms_key_id
     #   The Amazon Resource Name (ARN) of the KMS key to use when encrypting
@@ -432,13 +479,40 @@ module Aws::CloudWatchLogs
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
     #
+    # @option params [String] :resource_identifier
+    #   Specifies the target for this operation. You must specify one of the
+    #   following:
+    #
+    #   * Specify the following ARN to have future [GetQueryResults][1]
+    #     operations in this account encrypt the results with the specified
+    #     KMS key. Replace *REGION* and *ACCOUNT\_ID* with your Region and
+    #     account ID.
+    #
+    #     `arn:aws:logs:REGION:ACCOUNT_ID:query-result:*`
+    #
+    #   * Specify the ARN of a log group to have CloudWatch Logs use the KMS
+    #     key to encrypt log events that are ingested and stored by that log
+    #     group. The log group ARN must be in the following format. Replace
+    #     *REGION* and *ACCOUNT\_ID* with your Region and account ID.
+    #
+    #     `arn:aws:logs:REGION:ACCOUNT_ID:log-group:LOG_GROUP_NAME `
+    #
+    #   In your `AssociateKmsKey` operation, you must specify either the
+    #   `resourceIdentifier` parameter or the `logGroup` parameter, but you
+    #   can't specify both.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetQueryResults.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_kms_key({
-    #     log_group_name: "LogGroupName", # required
+    #     log_group_name: "LogGroupName",
     #     kms_key_id: "KmsKeyId", # required
+    #     resource_identifier: "ResourceIdentifier",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/AssociateKmsKey AWS API Documentation
@@ -1625,25 +1699,76 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Disassociates the associated KMS key from the specified log group.
+    # Disassociates the specified KMS key from the specified log group or
+    # from all CloudWatch Logs Insights query results in the account.
     #
-    # After the KMS key is disassociated from the log group, CloudWatch Logs
-    # stops encrypting newly ingested data for the log group. All previously
-    # ingested data remains encrypted, and CloudWatch Logs requires
-    # permissions for the KMS key whenever the encrypted data is requested.
+    # When you use `DisassociateKmsKey`, you specify either the
+    # `logGroupName` parameter or the `resourceIdentifier` parameter. You
+    # can't specify both of those parameters in the same operation.
     #
-    # Note that it can take up to 5 minutes for this operation to take
-    # effect.
+    # * Specify the `logGroupName` parameter to stop using the KMS key to
+    #   encrypt future log events ingested and stored in the log group.
+    #   Instead, they will be encrypted with the default CloudWatch Logs
+    #   method. The log events that were ingested while the key was
+    #   associated with the log group are still encrypted with that key.
+    #   Therefore, CloudWatch Logs will need permissions for the key
+    #   whenever that data is accessed.
     #
-    # @option params [required, String] :log_group_name
+    # * Specify the `resourceIdentifier` parameter with the `query-result`
+    #   resource to stop using the KMS key to encrypt the results of all
+    #   future [StartQuery][1] operations in the account. They will instead
+    #   be encrypted with the default CloudWatch Logs method. The results
+    #   from queries that ran while the key was associated with the account
+    #   are still encrypted with that key. Therefore, CloudWatch Logs will
+    #   need permissions for the key whenever that data is accessed.
+    #
+    # It can take up to 5 minutes for this operation to take effect.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html
+    #
+    # @option params [String] :log_group_name
     #   The name of the log group.
+    #
+    #   In your `DisassociateKmsKey` operation, you must specify either the
+    #   `resourceIdentifier` parameter or the `logGroup` parameter, but you
+    #   can't specify both.
+    #
+    # @option params [String] :resource_identifier
+    #   Specifies the target for this operation. You must specify one of the
+    #   following:
+    #
+    #   * Specify the ARN of a log group to stop having CloudWatch Logs use
+    #     the KMS key to encrypt log events that are ingested and stored by
+    #     that log group. After you run this operation, CloudWatch Logs
+    #     encrypts ingested log events with the default CloudWatch Logs
+    #     method. The log group ARN must be in the following format. Replace
+    #     *REGION* and *ACCOUNT\_ID* with your Region and account ID.
+    #
+    #     `arn:aws:logs:REGION:ACCOUNT_ID:log-group:LOG_GROUP_NAME `
+    #
+    #   * Specify the following ARN to stop using this key to encrypt the
+    #     results of future [StartQuery][1] operations in this account.
+    #     Replace *REGION* and *ACCOUNT\_ID* with your Region and account ID.
+    #
+    #     `arn:aws:logs:REGION:ACCOUNT_ID:query-result:*`
+    #
+    #   In your `DisssociateKmsKey` operation, you must specify either the
+    #   `resourceIdentifier` parameter or the `logGroup` parameter, but you
+    #   can't specify both.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_kms_key({
-    #     log_group_name: "LogGroupName", # required
+    #     log_group_name: "LogGroupName",
+    #     resource_identifier: "ResourceIdentifier",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DisassociateKmsKey AWS API Documentation
@@ -2001,8 +2126,9 @@ module Aws::CloudWatchLogs
     #
     # @option params [Integer] :time
     #   The time to set as the center of the query. If you specify `time`, the
-    #   15 minutes before this time are queries. If you omit `time`, the 8
-    #   minutes before and 8 minutes after this time are searched.
+    #   8 minutes before and 8 minutes after this time are searched. If you
+    #   omit `time`, the most recent 15 minutes up to the current time are
+    #   searched.
     #
     #   The `time` value is specified as epoch time, which is the number of
     #   seconds since `January 1, 1970, 00:00:00 UTC`.
@@ -2124,6 +2250,7 @@ module Aws::CloudWatchLogs
     #   * {Types::GetQueryResultsResponse#results #results} => Array&lt;Array&lt;Types::ResultField&gt;&gt;
     #   * {Types::GetQueryResultsResponse#statistics #statistics} => Types::QueryStatistics
     #   * {Types::GetQueryResultsResponse#status #status} => String
+    #   * {Types::GetQueryResultsResponse#encryption_key #encryption_key} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2141,6 +2268,7 @@ module Aws::CloudWatchLogs
     #   resp.statistics.records_scanned #=> Float
     #   resp.statistics.bytes_scanned #=> Float
     #   resp.status #=> String, one of "Scheduled", "Running", "Complete", "Failed", "Cancelled", "Timeout", "Unknown"
+    #   resp.encryption_key #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetQueryResults AWS API Documentation
     #
@@ -2329,10 +2457,9 @@ module Aws::CloudWatchLogs
     #   `DATA_PROTECTION_POLICY`.
     #
     # @option params [String] :scope
-    #   Currently the only valid value for this parameter is `GLOBAL`, which
+    #   Currently the only valid value for this parameter is `ALL`, which
     #   specifies that the data protection policy applies to all log groups in
-    #   the account. If you omit this parameter, the default of `GLOBAL` is
-    #   used.
+    #   the account. If you omit this parameter, the default of `ALL` is used.
     #
     # @return [Types::PutAccountPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2994,8 +3121,10 @@ module Aws::CloudWatchLogs
     # * An Amazon Kinesis data stream belonging to the same account as the
     #   subscription filter, for same-account delivery.
     #
-    # * A logical destination that belongs to a different account, for
-    #   cross-account delivery.
+    # * A logical destination created with [PutDestination][2] that belongs
+    #   to a different account, for cross-account delivery. We currently
+    #   support Kinesis Data Streams and Kinesis Data Firehose as logical
+    #   destinations.
     #
     # * An Amazon Kinesis Data Firehose delivery stream that belongs to the
     #   same account as the subscription filter, for same-account delivery.
@@ -3014,6 +3143,7 @@ module Aws::CloudWatchLogs
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestination.html
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
@@ -3096,6 +3226,16 @@ module Aws::CloudWatchLogs
     #
     # For more information, see [CloudWatch Logs Insights Query Syntax][1].
     #
+    # After you run a query using `StartQuery`, the query results are stored
+    # by CloudWatch Logs. You can use [GetQueryResults][2] to retrieve the
+    # results of a query, using the `queryId` that `StartQuery` returns.
+    #
+    # If you have associated a KMS key with the query results in this
+    # account, then [StartQuery][3] uses that key to encrypt the results
+    # when it stores them. If no key is associated with query results, the
+    # query results are encrypted with the default CloudWatch Logs
+    # encryption method.
+    #
     # Queries time out after 60 minutes of runtime. If your queries are
     # timing out, reduce the time range being searched or partition your
     # query into a number of queries.
@@ -3103,7 +3243,7 @@ module Aws::CloudWatchLogs
     # If you are using CloudWatch cross-account observability, you can use
     # this operation in a monitoring account to start a query in a linked
     # source account. For more information, see [CloudWatch cross-account
-    # observability][2]. For a cross-account `StartQuery` operation, the
+    # observability][4]. For a cross-account `StartQuery` operation, the
     # query definition must be defined in the monitoring account.
     #
     # You can have up to 30 concurrent CloudWatch Logs insights queries,
@@ -3112,13 +3252,15 @@ module Aws::CloudWatchLogs
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
-    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetQueryResults.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html
+    # [4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html
     #
     # @option params [String] :log_group_name
     #   The log group on which to perform the query.
     #
     #   <note markdown="1"> A `StartQuery` operation must include exactly one of the following
-    #   parameters: `logGroupName`, `logGroupNames` or `logGroupIdentifiers`.
+    #   parameters: `logGroupName`, `logGroupNames`, or `logGroupIdentifiers`.
     #
     #    </note>
     #
@@ -3127,7 +3269,7 @@ module Aws::CloudWatchLogs
     #   groups.
     #
     #   <note markdown="1"> A `StartQuery` operation must include exactly one of the following
-    #   parameters: `logGroupName`, `logGroupNames` or `logGroupIdentifiers`.
+    #   parameters: `logGroupName`, `logGroupNames`, or `logGroupIdentifiers`.
     #
     #    </note>
     #
@@ -3142,7 +3284,7 @@ module Aws::CloudWatchLogs
     #   If you specify an ARN, the ARN can't end with an asterisk (*).
     #
     #   A `StartQuery` operation must include exactly one of the following
-    #   parameters: `logGroupName`, `logGroupNames` or `logGroupIdentifiers`.
+    #   parameters: `logGroupName`, `logGroupNames`, or `logGroupIdentifiers`.
     #
     # @option params [required, Integer] :start_time
     #   The beginning of the time range to query. The range is inclusive, so
@@ -3472,7 +3614,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

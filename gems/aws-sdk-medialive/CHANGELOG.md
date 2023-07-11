@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2023-07-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.103.0 (2023-07-07)
+------------------
+
+* Feature - This release enables the use of Thumbnails in AWS Elemental MediaLive.
+
 1.102.0 (2023-07-06)
 ------------------
 

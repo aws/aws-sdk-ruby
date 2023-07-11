@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2023-07-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.82.0 (2023-07-07)
+------------------
+
+* Feature - Releasing DMS Serverless. Adding support for PostgreSQL 15.x as source and target endpoint. Adding support for DocDB Elastic Clusters with sharded collections, PostgreSQL datatype mapping customization and disabling hostname validation of the certificate authority in Kafka endpoint settings
+
 1.81.0 (2023-07-06)
 ------------------
 

@@ -6,7 +6,7 @@ module Aws
     # @return [Credentials]
     attr_reader :credentials
 
-    # @param [Time]
+    # @return [Time]
     attr_reader :expiration
 
     # @return [Boolean]

@@ -70,6 +70,8 @@ module Aws::DatabaseMigrationService
             Aws::DatabaseMigrationService::Endpoints::CreateEventSubscription.build(context)
           when :create_fleet_advisor_collector
             Aws::DatabaseMigrationService::Endpoints::CreateFleetAdvisorCollector.build(context)
+          when :create_replication_config
+            Aws::DatabaseMigrationService::Endpoints::CreateReplicationConfig.build(context)
           when :create_replication_instance
             Aws::DatabaseMigrationService::Endpoints::CreateReplicationInstance.build(context)
           when :create_replication_subnet_group
@@ -88,6 +90,8 @@ module Aws::DatabaseMigrationService
             Aws::DatabaseMigrationService::Endpoints::DeleteFleetAdvisorCollector.build(context)
           when :delete_fleet_advisor_databases
             Aws::DatabaseMigrationService::Endpoints::DeleteFleetAdvisorDatabases.build(context)
+          when :delete_replication_config
+            Aws::DatabaseMigrationService::Endpoints::DeleteReplicationConfig.build(context)
           when :delete_replication_instance
             Aws::DatabaseMigrationService::Endpoints::DeleteReplicationInstance.build(context)
           when :delete_replication_subnet_group
@@ -136,12 +140,16 @@ module Aws::DatabaseMigrationService
             Aws::DatabaseMigrationService::Endpoints::DescribeRecommendations.build(context)
           when :describe_refresh_schemas_status
             Aws::DatabaseMigrationService::Endpoints::DescribeRefreshSchemasStatus.build(context)
+          when :describe_replication_configs
+            Aws::DatabaseMigrationService::Endpoints::DescribeReplicationConfigs.build(context)
           when :describe_replication_instance_task_logs
             Aws::DatabaseMigrationService::Endpoints::DescribeReplicationInstanceTaskLogs.build(context)
           when :describe_replication_instances
             Aws::DatabaseMigrationService::Endpoints::DescribeReplicationInstances.build(context)
           when :describe_replication_subnet_groups
             Aws::DatabaseMigrationService::Endpoints::DescribeReplicationSubnetGroups.build(context)
+          when :describe_replication_table_statistics
+            Aws::DatabaseMigrationService::Endpoints::DescribeReplicationTableStatistics.build(context)
           when :describe_replication_task_assessment_results
             Aws::DatabaseMigrationService::Endpoints::DescribeReplicationTaskAssessmentResults.build(context)
           when :describe_replication_task_assessment_runs
@@ -150,6 +158,8 @@ module Aws::DatabaseMigrationService
             Aws::DatabaseMigrationService::Endpoints::DescribeReplicationTaskIndividualAssessments.build(context)
           when :describe_replication_tasks
             Aws::DatabaseMigrationService::Endpoints::DescribeReplicationTasks.build(context)
+          when :describe_replications
+            Aws::DatabaseMigrationService::Endpoints::DescribeReplications.build(context)
           when :describe_schemas
             Aws::DatabaseMigrationService::Endpoints::DescribeSchemas.build(context)
           when :describe_table_statistics
@@ -162,6 +172,8 @@ module Aws::DatabaseMigrationService
             Aws::DatabaseMigrationService::Endpoints::ModifyEndpoint.build(context)
           when :modify_event_subscription
             Aws::DatabaseMigrationService::Endpoints::ModifyEventSubscription.build(context)
+          when :modify_replication_config
+            Aws::DatabaseMigrationService::Endpoints::ModifyReplicationConfig.build(context)
           when :modify_replication_instance
             Aws::DatabaseMigrationService::Endpoints::ModifyReplicationInstance.build(context)
           when :modify_replication_subnet_group
@@ -174,6 +186,8 @@ module Aws::DatabaseMigrationService
             Aws::DatabaseMigrationService::Endpoints::RebootReplicationInstance.build(context)
           when :refresh_schemas
             Aws::DatabaseMigrationService::Endpoints::RefreshSchemas.build(context)
+          when :reload_replication_tables
+            Aws::DatabaseMigrationService::Endpoints::ReloadReplicationTables.build(context)
           when :reload_tables
             Aws::DatabaseMigrationService::Endpoints::ReloadTables.build(context)
           when :remove_tags_from_resource
@@ -182,12 +196,16 @@ module Aws::DatabaseMigrationService
             Aws::DatabaseMigrationService::Endpoints::RunFleetAdvisorLsaAnalysis.build(context)
           when :start_recommendations
             Aws::DatabaseMigrationService::Endpoints::StartRecommendations.build(context)
+          when :start_replication
+            Aws::DatabaseMigrationService::Endpoints::StartReplication.build(context)
           when :start_replication_task
             Aws::DatabaseMigrationService::Endpoints::StartReplicationTask.build(context)
           when :start_replication_task_assessment
             Aws::DatabaseMigrationService::Endpoints::StartReplicationTaskAssessment.build(context)
           when :start_replication_task_assessment_run
             Aws::DatabaseMigrationService::Endpoints::StartReplicationTaskAssessmentRun.build(context)
+          when :stop_replication
+            Aws::DatabaseMigrationService::Endpoints::StopReplication.build(context)
           when :stop_replication_task
             Aws::DatabaseMigrationService::Endpoints::StopReplicationTask.build(context)
           when :test_connection
