@@ -22,10 +22,10 @@ module Aws
       #   use for copying parts.
       # @option [Boolean] :use_source_parts (false) Use part sizes defined on
       #   the source object if any exist. If copying or moving an object that
-      # is already multipart, this does not re-part the object, instead
-      # re-using the part definitions on the original. That means the etag
-      # and any checksums will not change. this is especially useful if the
-      # source object has parts with varied sizes.
+      #   is already multipart, this does not re-part the object, instead
+      #   re-using the part definitions on the original. That means the etag
+      #   and any checksums will not change. this is especially useful if the
+      #   source object has parts with varied sizes.
       def initialize(options = {})
         @use_source_parts = options.delete(:use_source_parts) || false
         @thread_count = options.delete(:thread_count) || 10
