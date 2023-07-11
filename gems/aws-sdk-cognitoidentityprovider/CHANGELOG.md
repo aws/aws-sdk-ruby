@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2023-07-11)
+------------------
+
+* Feature - API model updated in Amazon Cognito
+
 1.77.0 (2023-07-06)
 ------------------
 
