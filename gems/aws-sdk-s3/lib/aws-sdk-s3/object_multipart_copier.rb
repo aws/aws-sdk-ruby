@@ -15,18 +15,21 @@ module Aws
       MAX_PARTS = 10_000
 
       # @option options [Client] :client
-      # @option [Integer] :min_part_size (52428800) Size of copied parts.
-      #   Defaults to 50MB.
-      #   will be constructed from the given `options' hash.
-      # @option [Integer] :thread_count (10) Number of concurrent threads to
-      #   use for copying parts.
+      # @option options [Integer] :min_part_size (52428800)
+      #   Size of copied parts. Defaults to 50MB.
+      # @option options [Integer] :thread_count (10) Number of concurrent
+      #   threads to use for copying parts.
+      # @option options [Boolean] :use_source_parts (false) Use part sizes
+      #   defined on the source object if any exist. If copying or moving an
+      #   object that is already multipart, this does not re-part the object,
+      #   instead re-using the part definitions on the original. That means
+      #   the etag and any checksums will not change. This is especially
+      #   useful if the source object has parts with varied sizes.
       def initialize(options = {})
+        @use_source_parts = options.delete(:use_source_parts) || false
         @thread_count = options.delete(:thread_count) || 10
         @min_part_size = options.delete(:min_part_size) || (FIVE_MB * 10)
         @client = options[:client] || Client.new
-        if options[:checksum_algorithm]
-          raise ArgumentError, 'Multipart Copy does not support setting :checksum_algorithm'
-        end
       end
 
       # @return [Client]
@@ -78,10 +81,9 @@ module Aws
       end
 
       def copy_part(part)
-        {
-          etag: @client.upload_part_copy(part).copy_part_result.etag,
-          part_number: part[:part_number],
-        }
+        @client.upload_part_copy(part).copy_part_result.to_h.merge({
+          part_number: part[:part_number]
+        }).tap { |result| result.delete(:last_modified) }
       end
 
       def complete_upload(parts, options)
@@ -104,22 +106,35 @@ module Aws
         parts = []
         options = options_for(:upload_part_copy, options)
         while offset < size
+          part_size = calculate_part_size(part_number, default_part_size, options)
           parts << options.merge({
             part_number: part_number,
-            copy_source_range: byte_range(offset, default_part_size, size),
+            copy_source_range: byte_range(offset, part_size, size),
           })
           part_number += 1
-          offset += default_part_size
+          offset += part_size
         end
         parts
       end
 
-      def byte_range(offset, default_part_size, size)
-        if offset + default_part_size < size
-          "bytes=#{offset}-#{offset + default_part_size - 1}"
+      def byte_range(offset, part_size, size)
+        if offset + part_size < size
+          "bytes=#{offset}-#{offset + part_size - 1}"
         else
           "bytes=#{offset}-#{size - 1}"
         end
+      end
+
+      def calculate_part_size(part_number, default_part_size, options)
+        if @use_source_parts && source_has_parts(options)
+          source_metadata(options.merge({ part_number: part_number }))[:content_length]
+        else
+          default_part_size
+        end
+      end
+
+      def source_has_parts(options)
+        @source_has_parts ||= source_metadata(options.merge({ part_number: 1 }))[:parts_count]
       end
 
       def source_metadata(options)
@@ -138,6 +153,7 @@ module Aws
         key = CGI.unescape(key)
         opts = { bucket: bucket, key: key }
         opts[:version_id] = version_id if version_id
+        opts[:part_number] = options[:part_number] if options[:part_number]
         client.head_object(opts).to_h
       end
 

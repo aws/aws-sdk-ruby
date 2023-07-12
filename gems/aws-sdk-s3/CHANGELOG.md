@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Allow Object multipart copy API to work when requiring a checksum algorithm.
+* Feature - Allow Object multipart copy API to optionally copy parts as they exist on the source object if it has parts, instead of generating new part ranges, when specifying `use_source_parts: true`.
+
 1.129.0 (2023-07-11)
 ------------------
 

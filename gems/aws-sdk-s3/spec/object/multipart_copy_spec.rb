@@ -529,6 +529,119 @@ module Aws
             expect(options).to eq(multipart_copy: true)
           end
         end
+
+        context 'with multipart_copy: true and checksum_algorithm specified' do
+          before(:each) do
+            size = 300 * 1024 * 1024 # 300MB
+            allow(client).to receive(:head_object).with({
+              bucket: 'source-bucket',
+              key: 'source key'
+            }).and_return(Types::HeadObjectOutput.new(content_length: size))
+          end
+
+          it 'includes the checksum algorithm when one is specified' do
+            expect(client).to receive(:create_multipart_upload)
+              .with({
+                      bucket: 'bucket',
+                      key: 'unescaped/key path',
+                      checksum_algorithm: 'SHA256'
+              })
+              .and_return(
+                client.stub_data(:create_multipart_upload, upload_id: 'id')
+              )
+
+            (1..6).each do |n|
+              range = "bytes=#{(n - 1) * 52_428_800}-#{n * 52_428_800 - 1}"
+
+              expect(client).to receive(:upload_part_copy).with({
+                bucket: 'bucket',
+                key: 'unescaped/key path',
+                part_number: n,
+                copy_source: 'source-bucket/source%20key',
+                copy_source_range: range,
+                upload_id: 'id'
+              }).and_return(
+                client.stub_data(
+                  :upload_part_copy,
+                  copy_part_result: { etag: "etag#{n}", checksum_sha256: "sha256value#{n}" }
+                )
+              )
+            end
+
+            expect(client).to receive(:complete_multipart_upload).with({
+              bucket: 'bucket',
+              key: 'unescaped/key path',
+              upload_id: 'id',
+              multipart_upload: {
+                parts: (1..6).map { |n| { etag: "etag#{n}", checksum_sha256: "sha256value#{n}", part_number: n } }
+              }
+            })
+            object.copy_from('source-bucket/source%20key', multipart_copy: true, checksum_algorithm: 'SHA256')
+          end
+        end
+
+        context 'with multipart_copy: true and use_source_parts: true' do
+          before(:each) do
+            size = 300 * 1024 * 1024 # 300MB
+            part_size = size / 3 # 3 100MB parts
+            allow(client).to receive(:head_object).with({
+              bucket: 'source-bucket',
+              key: 'source key'
+            }).and_return(Types::HeadObjectOutput.new(content_length: size))
+            allow(client).to receive(:head_object).with({
+              bucket: 'source-bucket',
+              key: 'source key',
+              part_number: 1
+            }).and_return(Types::HeadObjectOutput.new(content_length: part_size, parts_count: 3))
+
+            (1..3).each do |n|
+              allow(client).to receive(:head_object).with({
+                bucket: 'source-bucket',
+                key: 'source key',
+                part_number: n
+              }).and_return(Types::HeadObjectOutput.new(content_length: part_size, parts_count: 3))
+            end
+          end
+
+          it 'uses part sizes specified on the source' do
+            expect(client).to receive(:create_multipart_upload)
+              .with({
+                      bucket: 'bucket',
+                      key: 'unescaped/key path'
+              })
+              .and_return(
+                client.stub_data(:create_multipart_upload, upload_id: 'id')
+              )
+
+            (1..3).each do |n|
+              range = "bytes=#{(n - 1) * 104_857_600}-#{n * 104_857_600 - 1}"
+
+              allow(client).to receive(:upload_part_copy).with({
+                bucket: 'bucket',
+                key: 'unescaped/key path',
+                part_number: n,
+                copy_source: 'source-bucket/source%20key',
+                copy_source_range: range,
+                upload_id: 'id'
+              }).and_return(
+                client.stub_data(
+                  :upload_part_copy,
+                  copy_part_result: { etag: "etag#{n}" }
+                )
+              )
+            end
+
+            expect(client).to receive(:complete_multipart_upload).with({
+              bucket: 'bucket',
+              key: 'unescaped/key path',
+              upload_id: 'id',
+              multipart_upload: {
+                parts: (1..3).map { |n| { etag: "etag#{n}", part_number: n } }
+              }
+            })
+            object.copy_from('source-bucket/source%20key', multipart_copy: true, use_source_parts: true)
+          end
+        end
       end
     end
   end

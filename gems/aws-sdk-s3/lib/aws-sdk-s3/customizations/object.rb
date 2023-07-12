@@ -46,6 +46,14 @@ module Aws
       #   different region. You do not need to specify this option
       #   if you have provided a `:source_client` or a `:content_length`.
       #
+      # @option options [Boolean] :use_source_parts (false) Only used when
+      #   `:multipart_copy` is `true`. Use part sizes defined on the source
+      #   object if any exist. If copying or moving an object that
+      #   is already multipart, this does not re-part the object, instead
+      #   re-using the part definitions on the original. That means the etag
+      #   and any checksums will not change. This is especially useful if the
+      #   source object has parts with varied sizes.
+      #
       # @example Basic object copy
       #
       #   bucket = Aws::S3::Bucket.new('target-bucket')
