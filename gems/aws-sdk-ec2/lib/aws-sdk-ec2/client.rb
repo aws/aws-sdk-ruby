@@ -32604,6 +32604,11 @@ module Aws::EC2
     #   resp.store_image_task_results[0].store_task_failure_reason #=> String
     #   resp.next_token #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * store_image_task_complete
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeStoreImageTasks AWS API Documentation
     #
     # @overload describe_store_image_tasks(params = {})
@@ -56801,6 +56806,7 @@ module Aws::EC2
     # | snapshot_completed              | {Client#describe_snapshots}               | 15       | 40            |
     # | snapshot_imported               | {Client#describe_import_snapshot_tasks}   | 15       | 40            |
     # | spot_instance_request_fulfilled | {Client#describe_spot_instance_requests}  | 15       | 40            |
+    # | store_image_task_complete       | {Client#describe_store_image_tasks}       | 5        | 40            |
     # | subnet_available                | {Client#describe_subnets}                 | 15       | 40            |
     # | system_status_ok                | {Client#describe_instance_status}         | 15       | 40            |
     # | volume_available                | {Client#describe_volumes}                 | 15       | 40            |
@@ -56886,6 +56892,7 @@ module Aws::EC2
         snapshot_completed: Waiters::SnapshotCompleted,
         snapshot_imported: Waiters::SnapshotImported,
         spot_instance_request_fulfilled: Waiters::SpotInstanceRequestFulfilled,
+        store_image_task_complete: Waiters::StoreImageTaskComplete,
         subnet_available: Waiters::SubnetAvailable,
         system_status_ok: Waiters::SystemStatusOk,
         volume_available: Waiters::VolumeAvailable,

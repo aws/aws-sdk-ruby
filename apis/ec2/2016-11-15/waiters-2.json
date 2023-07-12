@@ -507,7 +507,7 @@
       ]
     },
     "StoreImageTaskComplete": {
-      "Delay": 5,
+      "delay": 5,
       "operation": "DescribeStoreImageTasks",
       "maxAttempts": 40,
       "acceptors": [
@@ -528,7 +528,7 @@
           "matcher": "pathAny",
           "state": "retry",
           "argument": "store_image_task_results[].store_task_state"
-        },
+        }
       ]
     },
     "SubnetAvailable": {
