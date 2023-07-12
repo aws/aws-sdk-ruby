@@ -506,6 +506,31 @@
         }
       ]
     },
+    "StoreImageTaskComplete": {
+      "Delay": 5,
+      "operation": "DescribeStoreImageTasks",
+      "maxAttempts": 40,
+      "acceptors": [
+        {
+          "expected": "Completed",
+          "matcher": "pathAll",
+          "state": "success",
+          "argument": "StoreImageTaskResults[].StoreTaskState"
+        },
+        {
+          "expected": "Failed",
+          "matcher": "pathAny",
+          "state": "failure",
+          "argument": "store_image_task_results[].store_task_state"
+        },
+        {
+          "expected": "InProgress",
+          "matcher": "pathAny",
+          "state": "retry",
+          "argument": "store_image_task_results[].store_task_state"
+        },
+      ]
+    },
     "SubnetAvailable": {
       "delay": 15,
       "operation": "DescribeSubnets",
