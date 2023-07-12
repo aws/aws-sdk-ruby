@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add a waiter for StoreImageTaskComplete.
+
 1.389.0 (2023-07-11)
 ------------------
 
