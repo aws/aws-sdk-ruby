@@ -521,13 +521,13 @@
           "expected": "Failed",
           "matcher": "pathAny",
           "state": "failure",
-          "argument": "store_image_task_results[].store_task_state"
+          "argument": "StoreImageTaskResults[].StoreTaskState"
         },
         {
           "expected": "InProgress",
           "matcher": "pathAny",
           "state": "retry",
-          "argument": "store_image_task_results[].store_task_state"
+          "argument": "StoreImageTaskResults[].StoreTaskState"
         }
       ]
     },
