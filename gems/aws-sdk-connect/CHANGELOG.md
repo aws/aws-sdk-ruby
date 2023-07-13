@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.120.0 (2023-07-13)
+------------------
+
+* Feature - Add support for deleting Queues and Routing Profiles.
+
 1.119.0 (2023-07-11)
 ------------------
 

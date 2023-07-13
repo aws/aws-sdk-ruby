@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.130.0 (2023-07-13)
+------------------
+
+* Feature - S3 Inventory now supports Object Access Control List and Object Owner as available object metadata fields in inventory reports.
+
 * Feature - Allow Object multipart copy API to work when requiring a checksum algorithm.
 * Feature - Allow Object multipart copy API to optionally copy parts as they exist on the source object if it has parts, instead of generating new part ranges, when specifying `use_source_parts: true`.
 

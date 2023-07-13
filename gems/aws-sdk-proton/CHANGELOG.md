@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2023-07-13)
+------------------
+
+* Feature - This release adds support for deployment history for Proton provisioned resources
+
 1.29.0 (2023-07-11)
 ------------------
 

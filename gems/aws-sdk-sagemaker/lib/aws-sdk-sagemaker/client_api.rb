@@ -2051,6 +2051,7 @@ module Aws::SageMaker
     WorkforceVpcEndpointId = Shapes::StringShape.new(name: 'WorkforceVpcEndpointId')
     WorkforceVpcId = Shapes::StringShape.new(name: 'WorkforceVpcId')
     Workforces = Shapes::ListShape.new(name: 'Workforces')
+    WorkspaceSettings = Shapes::StructureShape.new(name: 'WorkspaceSettings')
     Workteam = Shapes::StructureShape.new(name: 'Workteam')
     WorkteamArn = Shapes::StringShape.new(name: 'WorkteamArn')
     WorkteamName = Shapes::StringShape.new(name: 'WorkteamName')
@@ -2490,6 +2491,7 @@ module Aws::SageMaker
 
     CanvasAppSettings.add_member(:time_series_forecasting_settings, Shapes::ShapeRef.new(shape: TimeSeriesForecastingSettings, location_name: "TimeSeriesForecastingSettings"))
     CanvasAppSettings.add_member(:model_register_settings, Shapes::ShapeRef.new(shape: ModelRegisterSettings, location_name: "ModelRegisterSettings"))
+    CanvasAppSettings.add_member(:workspace_settings, Shapes::ShapeRef.new(shape: WorkspaceSettings, location_name: "WorkspaceSettings"))
     CanvasAppSettings.struct_class = Types::CanvasAppSettings
 
     CapacitySize.add_member(:type, Shapes::ShapeRef.new(shape: CapacitySizeType, required: true, location_name: "Type"))
@@ -9074,6 +9076,10 @@ module Aws::SageMaker
     WorkforceVpcConfigResponse.struct_class = Types::WorkforceVpcConfigResponse
 
     Workforces.member = Shapes::ShapeRef.new(shape: Workforce)
+
+    WorkspaceSettings.add_member(:s3_artifact_path, Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3ArtifactPath"))
+    WorkspaceSettings.add_member(:s3_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "S3KmsKeyId"))
+    WorkspaceSettings.struct_class = Types::WorkspaceSettings
 
     Workteam.add_member(:workteam_name, Shapes::ShapeRef.new(shape: WorkteamName, required: true, location_name: "WorkteamName"))
     Workteam.add_member(:member_definitions, Shapes::ShapeRef.new(shape: MemberDefinitions, required: true, location_name: "MemberDefinitions"))

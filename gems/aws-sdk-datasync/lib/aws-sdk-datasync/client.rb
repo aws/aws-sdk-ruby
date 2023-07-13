@@ -516,87 +516,70 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Activates an DataSync agent that you have deployed in your storage
-    # environment. The activation process associates your agent with your
-    # account. In the activation process, you specify information such as
-    # the Amazon Web Services Region that you want to activate the agent in.
-    # You activate the agent in the Amazon Web Services Region where your
-    # target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are
-    # created in this Amazon Web Services Region.
+    # Activates an DataSync agent that you've deployed in your storage
+    # environment. The activation process associates the agent with your
+    # Amazon Web Services account.
     #
-    # You can activate the agent in a VPC (virtual private cloud) or provide
-    # the agent access to a VPC endpoint so you can run tasks without going
-    # over the public internet.
+    # If you haven't deployed an agent yet, see the following topics to
+    # learn more:
     #
-    # You can use an agent for more than one location. If a task uses
-    # multiple agents, all of them need to have status AVAILABLE for the
-    # task to run. If you use multiple agents for a source location, the
-    # status of all the agents must be AVAILABLE for the task to run.
+    # * [Agent requirements][1]
     #
-    # Agents are automatically updated by Amazon Web Services on a regular
-    # basis, using a mechanism that ensures minimal interruption to your
-    # tasks.
+    # * [Create an agent][2]
+    #
+    # <note markdown="1"> If you're transferring between Amazon Web Services storage services,
+    # you don't need a DataSync agent.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/agent-requirements.html
+    # [2]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-agent.html
     #
     # @option params [required, String] :activation_key
-    #   Your agent activation key. You can get the activation key either by
-    #   sending an HTTP GET request with redirects that enable you to get the
-    #   agent IP address (port 80). Alternatively, you can get it from the
-    #   DataSync console.
+    #   Specifies your DataSync agent's activation key. If you don't have an
+    #   activation key, see [Activate your agent][1].
     #
-    #   The redirect URL returned in the response provides you the activation
-    #   key for your agent in the query string parameter `activationKey`. It
-    #   might also include other activation-related parameters; however, these
-    #   are merely defaults. The arguments you pass to this API call determine
-    #   the actual configuration of your agent.
     #
-    #   For more information, see Activating an Agent in the *DataSync User
-    #   Guide.*
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/activate-agent.html
     #
     # @option params [String] :agent_name
-    #   The name you configured for your agent. This value is a text reference
-    #   that is used to identify the agent in the console.
+    #   Specifies a name for your agent. You can see this name in the DataSync
+    #   console.
     #
     # @option params [Array<Types::TagListEntry>] :tags
-    #   The key-value pair that represents the tag that you want to associate
-    #   with the agent. The value can be an empty string. This value helps you
-    #   manage, filter, and search for your agents.
-    #
-    #   <note markdown="1"> Valid characters for key and value are letters, spaces, and numbers
-    #   representable in UTF-8 format, and the following special characters: +
-    #   - = . \_ : / @.
-    #
-    #    </note>
+    #   Specifies labels that help you categorize, filter, and search for your
+    #   Amazon Web Services resources. We recommend creating at least one tag
+    #   for your agent.
     #
     # @option params [String] :vpc_endpoint_id
-    #   The ID of the VPC (virtual private cloud) endpoint that the agent has
-    #   access to. This is the client-side VPC endpoint, also called a
-    #   PrivateLink. If you don't have a PrivateLink VPC endpoint, see
-    #   [Creating a VPC Endpoint Service Configuration][1] in the Amazon VPC
-    #   User Guide.
+    #   Specifies the ID of the VPC endpoint that you want your agent to
+    #   connect to. For example, a VPC endpoint ID looks like
+    #   `vpce-01234d5aff67890e1`.
     #
-    #   VPC endpoint ID looks like this: `vpce-01234d5aff67890e1`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html#create-endpoint-service
+    #   The VPC endpoint you use must include the DataSync service name (for
+    #   example, `com.amazonaws.us-east-2.datasync`).
     #
     # @option params [Array<String>] :subnet_arns
-    #   The Amazon Resource Names (ARNs) of the subnets in which DataSync will
-    #   create elastic network interfaces for each data transfer task. The
-    #   agent that runs a task must be private. When you start a task that is
-    #   associated with an agent created in a VPC, or one that has access to
-    #   an IP address in a VPC, then the task is also private. In this case,
-    #   DataSync creates four network interfaces for each task in your subnet.
-    #   For a data transfer to work, the agent must be able to route to all
-    #   these four network interfaces.
+    #   Specifies the ARN of the subnet where you want to run your DataSync
+    #   task when using a VPC endpoint. This is the subnet where DataSync
+    #   creates and manages the [network interfaces][1] for your transfer.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces
     #
     # @option params [Array<String>] :security_group_arns
-    #   The ARNs of the security groups used to protect your data transfer
-    #   task subnets. See [SecurityGroupArns][1].
+    #   Specifies the Amazon Resource Name (ARN) of the security group that
+    #   protects your task's [network interfaces][1] when [using a virtual
+    #   private cloud (VPC) endpoint][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_Ec2Config.html#DataSync-Type-Ec2Config-SecurityGroupArns
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#choose-service-endpoint-vpc
     #
     # @return [Types::CreateAgentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -981,12 +964,15 @@ module Aws::DataSync
     #   tag for your location.
     #
     # @option params [required, String] :user
-    #   Specifies the user who has the permissions to access files and folders
-    #   in the file system.
+    #   Specifies the user who has the permissions to access files, folders,
+    #   and metadata in your file system.
     #
-    #   For information about choosing a user name that ensures sufficient
-    #   permissions to files, folders, and metadata, see
-    #   [user](create-fsx-location.html#FSxWuser).
+    #   For information about choosing a user with sufficient permissions, see
+    #   [Required permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-windows-location-permissions
     #
     # @option params [String] :domain
     #   Specifies the name of the Windows domain that the FSx for Windows File
@@ -1321,11 +1307,20 @@ module Aws::DataSync
     #   your resources. We recommend creating a name tag for your location.
     #
     # @option params [String, StringIO, File] :server_certificate
-    #   Specifies a certificate to authenticate with an object storage system
-    #   that uses a private or self-signed certificate authority (CA). You
-    #   must specify a Base64-encoded `.pem` file (for example,
-    #   `file:///home/user/.ssh/storage_sys_certificate.pem`). The certificate
-    #   can be up to 32768 bytes (before Base64 encoding).
+    #   Specifies a file with the certificates that are used to sign the
+    #   object storage server's certificate (for example,
+    #   `file:///home/user/.ssh/storage_sys_certificate.pem`). The file you
+    #   specify must include the following:
+    #
+    #   * The certificate of the signing certificate authority (CA)
+    #
+    #   * Any intermediate certificates
+    #
+    #   * base64 encoding
+    #
+    #   * A `.pem` extension
+    #
+    #   The file can be up to 32768 bytes (before base64 encoding).
     #
     #   To use this parameter, configure `ServerProtocol` to `HTTPS`.
     #
@@ -2537,6 +2532,7 @@ module Aws::DataSync
     #   resp.resource_details.net_app_ontapsv_ms[0].nfs_exported_volumes #=> Integer
     #   resp.resource_details.net_app_ontapsv_ms[0].recommendation_status #=> String, one of "NONE", "IN_PROGRESS", "COMPLETED", "FAILED"
     #   resp.resource_details.net_app_ontapsv_ms[0].total_snapshot_capacity_used #=> Integer
+    #   resp.resource_details.net_app_ontapsv_ms[0].lun_count #=> Integer
     #   resp.resource_details.net_app_ontap_volumes #=> Array
     #   resp.resource_details.net_app_ontap_volumes[0].volume_name #=> String
     #   resp.resource_details.net_app_ontap_volumes[0].resource_id #=> String
@@ -2566,6 +2562,7 @@ module Aws::DataSync
     #   resp.resource_details.net_app_ontap_volumes[0].recommendations[0].storage_configuration["PtolemyString"] #=> String
     #   resp.resource_details.net_app_ontap_volumes[0].recommendations[0].estimated_monthly_storage_cost #=> String
     #   resp.resource_details.net_app_ontap_volumes[0].recommendation_status #=> String, one of "NONE", "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.resource_details.net_app_ontap_volumes[0].lun_count #=> Integer
     #   resp.resource_details.net_app_ontap_clusters #=> Array
     #   resp.resource_details.net_app_ontap_clusters[0].cifs_share_count #=> Integer
     #   resp.resource_details.net_app_ontap_clusters[0].nfs_exported_volumes #=> Integer
@@ -2591,6 +2588,7 @@ module Aws::DataSync
     #   resp.resource_details.net_app_ontap_clusters[0].recommendations[0].storage_configuration["PtolemyString"] #=> String
     #   resp.resource_details.net_app_ontap_clusters[0].recommendations[0].estimated_monthly_storage_cost #=> String
     #   resp.resource_details.net_app_ontap_clusters[0].recommendation_status #=> String, one of "NONE", "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.resource_details.net_app_ontap_clusters[0].lun_count #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeStorageSystemResources AWS API Documentation
@@ -4055,7 +4053,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

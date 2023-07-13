@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.197.0 (2023-07-13)
+------------------
+
+* Feature - Amazon SageMaker Canvas adds WorkspeceSettings support for CanvasAppSettings
+
 1.196.0 (2023-07-11)
 ------------------
 

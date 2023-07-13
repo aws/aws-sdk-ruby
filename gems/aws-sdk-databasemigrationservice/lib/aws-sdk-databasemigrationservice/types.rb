@@ -7318,6 +7318,17 @@ module Aws::DatabaseMigrationService
     #   When true, DMS migrates LONG values as VARCHAR.
     #   @return [String]
     #
+    # @!attribute [rw] database_mode
+    #   Specifies whether to use default or custom replication behavior for
+    #   PostgreSQL-compatible endpoints. You can use this setting to specify
+    #   replication behavior for endpoints that require additional
+    #   configuration, such as Babelfish endpoints.
+    #   @return [String]
+    #
+    # @!attribute [rw] babelfish_database_name
+    #   The Babelfish for Aurora PostgreSQL database name for the endpoint.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/PostgreSQLSettings AWS API Documentation
     #
     class PostgreSQLSettings < Struct.new(
@@ -7342,7 +7353,9 @@ module Aws::DatabaseMigrationService
       :trim_space_in_char,
       :map_boolean_as_boolean,
       :map_jsonb_as_clob,
-      :map_long_varchar_as)
+      :map_long_varchar_as,
+      :database_mode,
+      :babelfish_database_name)
       SENSITIVE = [:password]
       include Aws::Structure
     end

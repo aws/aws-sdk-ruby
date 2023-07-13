@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.390.0 (2023-07-13)
+------------------
+
+* Feature - This release adds support for the C7gn and Hpc7g instances. C7gn instances are powered by AWS Graviton3 processors and the fifth-generation AWS Nitro Cards. Hpc7g instances are powered by AWS Graviton 3E processors and provide up to 200 Gbps network bandwidth.
+
 1.389.0 (2023-07-11)
 ------------------
 

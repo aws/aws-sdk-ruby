@@ -3062,6 +3062,28 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
+    # @!attribute [rw] queue_id
+    #   The identifier for the queue.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteQueueRequest AWS API Documentation
+    #
+    class DeleteQueueRequest < Struct.new(
+      :instance_id,
+      :queue_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
     # @!attribute [rw] quick_connect_id
     #   The identifier for the quick connect.
     #   @return [String]
@@ -3071,6 +3093,28 @@ module Aws::Connect
     class DeleteQuickConnectRequest < Struct.new(
       :instance_id,
       :quick_connect_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_id
+    #   The identifier of the routing profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteRoutingProfileRequest AWS API Documentation
+    #
+    class DeleteRoutingProfileRequest < Struct.new(
+      :instance_id,
+      :routing_profile_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7091,8 +7135,8 @@ module Aws::Connect
     #   @return [Boolean]
     #
     # @!attribute [rw] instance_access_url
-    #   This URL allows contact center users to access Amazon Connect admin
-    #   website.
+    #   This URL allows contact center users to access the Amazon Connect
+    #   admin website.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Instance AWS API Documentation
@@ -7206,8 +7250,8 @@ module Aws::Connect
     #   @return [Boolean]
     #
     # @!attribute [rw] instance_access_url
-    #   This URL allows contact center users to access Amazon Connect admin
-    #   website.
+    #   This URL allows contact center users to access the Amazon Connect
+    #   admin website.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InstanceSummary AWS API Documentation

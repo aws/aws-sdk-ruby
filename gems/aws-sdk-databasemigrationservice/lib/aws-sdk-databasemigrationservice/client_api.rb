@@ -66,6 +66,7 @@ module Aws::DatabaseMigrationService
     DataFormatValue = Shapes::StringShape.new(name: 'DataFormatValue')
     DatabaseInstanceSoftwareDetailsResponse = Shapes::StructureShape.new(name: 'DatabaseInstanceSoftwareDetailsResponse')
     DatabaseList = Shapes::ListShape.new(name: 'DatabaseList')
+    DatabaseMode = Shapes::StringShape.new(name: 'DatabaseMode')
     DatabaseResponse = Shapes::StructureShape.new(name: 'DatabaseResponse')
     DatabaseShortInfoResponse = Shapes::StructureShape.new(name: 'DatabaseShortInfoResponse')
     DatePartitionDelimiterValue = Shapes::StringShape.new(name: 'DatePartitionDelimiterValue')
@@ -1541,6 +1542,8 @@ module Aws::DatabaseMigrationService
     PostgreSQLSettings.add_member(:map_boolean_as_boolean, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MapBooleanAsBoolean"))
     PostgreSQLSettings.add_member(:map_jsonb_as_clob, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MapJsonbAsClob"))
     PostgreSQLSettings.add_member(:map_long_varchar_as, Shapes::ShapeRef.new(shape: LongVarcharMappingType, location_name: "MapLongVarcharAs"))
+    PostgreSQLSettings.add_member(:database_mode, Shapes::ShapeRef.new(shape: DatabaseMode, location_name: "DatabaseMode"))
+    PostgreSQLSettings.add_member(:babelfish_database_name, Shapes::ShapeRef.new(shape: String, location_name: "BabelfishDatabaseName"))
     PostgreSQLSettings.struct_class = Types::PostgreSQLSettings
 
     ProvisionData.add_member(:provision_state, Shapes::ShapeRef.new(shape: String, location_name: "ProvisionState"))

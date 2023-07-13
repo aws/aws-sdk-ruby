@@ -1132,6 +1132,8 @@ module Aws::DatabaseMigrationService
     #       map_boolean_as_boolean: false,
     #       map_jsonb_as_clob: false,
     #       map_long_varchar_as: "wstring", # accepts wstring, clob, nclob
+    #       database_mode: "default", # accepts default, babelfish
+    #       babelfish_database_name: "String",
     #     },
     #     my_sql_settings: {
     #       after_connect_script: "String",
@@ -1458,6 +1460,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.map_boolean_as_boolean #=> Boolean
     #   resp.endpoint.postgre_sql_settings.map_jsonb_as_clob #=> Boolean
     #   resp.endpoint.postgre_sql_settings.map_long_varchar_as #=> String, one of "wstring", "clob", "nclob"
+    #   resp.endpoint.postgre_sql_settings.database_mode #=> String, one of "default", "babelfish"
+    #   resp.endpoint.postgre_sql_settings.babelfish_database_name #=> String
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
     #   resp.endpoint.my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoint.my_sql_settings.database_name #=> String
@@ -2879,6 +2883,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.map_boolean_as_boolean #=> Boolean
     #   resp.endpoint.postgre_sql_settings.map_jsonb_as_clob #=> Boolean
     #   resp.endpoint.postgre_sql_settings.map_long_varchar_as #=> String, one of "wstring", "clob", "nclob"
+    #   resp.endpoint.postgre_sql_settings.database_mode #=> String, one of "default", "babelfish"
+    #   resp.endpoint.postgre_sql_settings.babelfish_database_name #=> String
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
     #   resp.endpoint.my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoint.my_sql_settings.database_name #=> String
@@ -4195,6 +4201,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].postgre_sql_settings.map_boolean_as_boolean #=> Boolean
     #   resp.endpoints[0].postgre_sql_settings.map_jsonb_as_clob #=> Boolean
     #   resp.endpoints[0].postgre_sql_settings.map_long_varchar_as #=> String, one of "wstring", "clob", "nclob"
+    #   resp.endpoints[0].postgre_sql_settings.database_mode #=> String, one of "default", "babelfish"
+    #   resp.endpoints[0].postgre_sql_settings.babelfish_database_name #=> String
     #   resp.endpoints[0].my_sql_settings.after_connect_script #=> String
     #   resp.endpoints[0].my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoints[0].my_sql_settings.database_name #=> String
@@ -6914,6 +6922,8 @@ module Aws::DatabaseMigrationService
     #       map_boolean_as_boolean: false,
     #       map_jsonb_as_clob: false,
     #       map_long_varchar_as: "wstring", # accepts wstring, clob, nclob
+    #       database_mode: "default", # accepts default, babelfish
+    #       babelfish_database_name: "String",
     #     },
     #     my_sql_settings: {
     #       after_connect_script: "String",
@@ -7240,6 +7250,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.map_boolean_as_boolean #=> Boolean
     #   resp.endpoint.postgre_sql_settings.map_jsonb_as_clob #=> Boolean
     #   resp.endpoint.postgre_sql_settings.map_long_varchar_as #=> String, one of "wstring", "clob", "nclob"
+    #   resp.endpoint.postgre_sql_settings.database_mode #=> String, one of "default", "babelfish"
+    #   resp.endpoint.postgre_sql_settings.babelfish_database_name #=> String
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
     #   resp.endpoint.my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoint.my_sql_settings.database_name #=> String
@@ -9149,7 +9161,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -191,7 +191,9 @@ module Aws::Connect
     DeleteInstanceRequest = Shapes::StructureShape.new(name: 'DeleteInstanceRequest')
     DeleteIntegrationAssociationRequest = Shapes::StructureShape.new(name: 'DeleteIntegrationAssociationRequest')
     DeletePromptRequest = Shapes::StructureShape.new(name: 'DeletePromptRequest')
+    DeleteQueueRequest = Shapes::StructureShape.new(name: 'DeleteQueueRequest')
     DeleteQuickConnectRequest = Shapes::StructureShape.new(name: 'DeleteQuickConnectRequest')
+    DeleteRoutingProfileRequest = Shapes::StructureShape.new(name: 'DeleteRoutingProfileRequest')
     DeleteRuleRequest = Shapes::StructureShape.new(name: 'DeleteRuleRequest')
     DeleteSecurityProfileRequest = Shapes::StructureShape.new(name: 'DeleteSecurityProfileRequest')
     DeleteTaskTemplateRequest = Shapes::StructureShape.new(name: 'DeleteTaskTemplateRequest')
@@ -1539,9 +1541,17 @@ module Aws::Connect
     DeletePromptRequest.add_member(:prompt_id, Shapes::ShapeRef.new(shape: PromptId, required: true, location: "uri", location_name: "PromptId"))
     DeletePromptRequest.struct_class = Types::DeletePromptRequest
 
+    DeleteQueueRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DeleteQueueRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "QueueId"))
+    DeleteQueueRequest.struct_class = Types::DeleteQueueRequest
+
     DeleteQuickConnectRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DeleteQuickConnectRequest.add_member(:quick_connect_id, Shapes::ShapeRef.new(shape: QuickConnectId, required: true, location: "uri", location_name: "QuickConnectId"))
     DeleteQuickConnectRequest.struct_class = Types::DeleteQuickConnectRequest
+
+    DeleteRoutingProfileRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DeleteRoutingProfileRequest.add_member(:routing_profile_id, Shapes::ShapeRef.new(shape: RoutingProfileId, required: true, location: "uri", location_name: "RoutingProfileId"))
+    DeleteRoutingProfileRequest.struct_class = Types::DeleteRoutingProfileRequest
 
     DeleteRuleRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DeleteRuleRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location: "uri", location_name: "RuleId"))
@@ -4599,6 +4609,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:delete_queue, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteQueue"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/queues/{InstanceId}/{QueueId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteQueueRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:delete_quick_connect, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteQuickConnect"
         o.http_method = "DELETE"
@@ -4608,6 +4632,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:delete_routing_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRoutingProfile"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/routing-profiles/{InstanceId}/{RoutingProfileId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRoutingProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)

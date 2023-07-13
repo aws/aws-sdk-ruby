@@ -908,6 +908,7 @@ module Aws::DataSync
     NetAppONTAPCluster.add_member(:cluster_block_storage_logical_used, Shapes::ShapeRef.new(shape: NonNegativeLong, location_name: "ClusterBlockStorageLogicalUsed"))
     NetAppONTAPCluster.add_member(:recommendations, Shapes::ShapeRef.new(shape: Recommendations, location_name: "Recommendations"))
     NetAppONTAPCluster.add_member(:recommendation_status, Shapes::ShapeRef.new(shape: RecommendationStatus, location_name: "RecommendationStatus"))
+    NetAppONTAPCluster.add_member(:lun_count, Shapes::ShapeRef.new(shape: NonNegativeLong, location_name: "LunCount"))
     NetAppONTAPCluster.struct_class = Types::NetAppONTAPCluster
 
     NetAppONTAPClusters.member = Shapes::ShapeRef.new(shape: NetAppONTAPCluster)
@@ -925,6 +926,7 @@ module Aws::DataSync
     NetAppONTAPSVM.add_member(:nfs_exported_volumes, Shapes::ShapeRef.new(shape: NonNegativeLong, location_name: "NfsExportedVolumes"))
     NetAppONTAPSVM.add_member(:recommendation_status, Shapes::ShapeRef.new(shape: RecommendationStatus, location_name: "RecommendationStatus"))
     NetAppONTAPSVM.add_member(:total_snapshot_capacity_used, Shapes::ShapeRef.new(shape: NonNegativeLong, location_name: "TotalSnapshotCapacityUsed"))
+    NetAppONTAPSVM.add_member(:lun_count, Shapes::ShapeRef.new(shape: NonNegativeLong, location_name: "LunCount"))
     NetAppONTAPSVM.struct_class = Types::NetAppONTAPSVM
 
     NetAppONTAPSVMs.member = Shapes::ShapeRef.new(shape: NetAppONTAPSVM)
@@ -943,6 +945,7 @@ module Aws::DataSync
     NetAppONTAPVolume.add_member(:max_p95_performance, Shapes::ShapeRef.new(shape: MaxP95Performance, location_name: "MaxP95Performance"))
     NetAppONTAPVolume.add_member(:recommendations, Shapes::ShapeRef.new(shape: Recommendations, location_name: "Recommendations"))
     NetAppONTAPVolume.add_member(:recommendation_status, Shapes::ShapeRef.new(shape: RecommendationStatus, location_name: "RecommendationStatus"))
+    NetAppONTAPVolume.add_member(:lun_count, Shapes::ShapeRef.new(shape: NonNegativeLong, location_name: "LunCount"))
     NetAppONTAPVolume.struct_class = Types::NetAppONTAPVolume
 
     NetAppONTAPVolumes.member = Shapes::ShapeRef.new(shape: NetAppONTAPVolume)

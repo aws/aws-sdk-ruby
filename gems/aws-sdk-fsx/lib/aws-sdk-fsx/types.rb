@@ -407,6 +407,47 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # Sets the autocommit period of files in an FSx for ONTAP SnapLock
+    # volume, which determines how long the files must remain unmodified
+    # before they're automatically transitioned to the write once, read
+    # many (WORM) state.
+    #
+    # For more information, see [Autocommit][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/worm-state.html#worm-state-autocommit
+    #
+    # @!attribute [rw] type
+    #   Defines the type of time for the autocommit period of a file in an
+    #   FSx for ONTAP SnapLock volume. Setting this value to `NONE` disables
+    #   autocommit. The default value is `NONE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Defines the amount of time for the autocommit period of a file in an
+    #   FSx for ONTAP SnapLock volume. The following ranges are valid:
+    #
+    #   * `Minutes`: 5 - 65,535
+    #
+    #   * `Hours`: 1 - 65,535
+    #
+    #   * `Days`: 1 - 3,650
+    #
+    #   * `Months`: 1 - 120
+    #
+    #   * `Years`: 1 - 10
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/AutocommitPeriod AWS API Documentation
+    #
+    class AutocommitPeriod < Struct.new(
+      :type,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A backup of an Amazon FSx for Windows File Server, Amazon FSx for
     # Lustre file system, Amazon FSx for NetApp ONTAP volume, or Amazon FSx
     # for OpenZFS file system.
@@ -2306,8 +2347,7 @@ module Aws::FSx
     #
     # @!attribute [rw] size_in_megabytes
     #   Specifies the size of the volume, in megabytes (MB), that you are
-    #   creating. Provide any whole number in the range of 20–104857600 to
-    #   specify the size of the volume.
+    #   creating.
     #   @return [Integer]
     #
     # @!attribute [rw] storage_efficiency_enabled
@@ -2409,6 +2449,10 @@ module Aws::FSx
     #   volume, regardless of this value.
     #   @return [Boolean]
     #
+    # @!attribute [rw] snaplock_configuration
+    #   Specifies the SnapLock configuration for an FSx for ONTAP volume.
+    #   @return [Types::CreateSnaplockConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateOntapVolumeConfiguration AWS API Documentation
     #
     class CreateOntapVolumeConfiguration < Struct.new(
@@ -2420,7 +2464,8 @@ module Aws::FSx
       :tiering_policy,
       :ontap_volume_type,
       :snapshot_policy,
-      :copy_tags_to_backups)
+      :copy_tags_to_backups,
+      :snaplock_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2587,6 +2632,97 @@ module Aws::FSx
       :read_only,
       :nfs_exports,
       :user_and_group_quotas)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the SnapLock configuration when creating an FSx for ONTAP
+    # SnapLock volume.
+    #
+    # @!attribute [rw] audit_log_volume
+    #   Enables or disables the audit log volume for an FSx for ONTAP
+    #   SnapLock volume. The default value is `false`. If you set
+    #   `AuditLogVolume` to `true`, the SnapLock volume is created as an
+    #   audit log volume. The minimum retention period for an audit log
+    #   volume is six months.
+    #
+    #   For more information, see [ SnapLock audit log volumes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#snaplock-audit-log-volume
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] autocommit_period
+    #   The configuration object for setting the autocommit period of files
+    #   in an FSx for ONTAP SnapLock volume.
+    #   @return [Types::AutocommitPeriod]
+    #
+    # @!attribute [rw] privileged_delete
+    #   Enables, disables, or permanently disables privileged delete on an
+    #   FSx for ONTAP SnapLock Enterprise volume. Enabling privileged delete
+    #   allows SnapLock administrators to delete WORM files even if they
+    #   have active retention periods. `PERMANENTLY_DISABLED` is a terminal
+    #   state. If privileged delete is permanently disabled on a SnapLock
+    #   volume, you can't re-enable it. The default value is `DISABLED`.
+    #
+    #   For more information, see [Privileged delete][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#privileged-delete
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_period
+    #   Specifies the retention period of an FSx for ONTAP SnapLock volume.
+    #   @return [Types::SnaplockRetentionPeriod]
+    #
+    # @!attribute [rw] snaplock_type
+    #   Specifies the retention mode of an FSx for ONTAP SnapLock volume.
+    #   After it is set, it can't be changed. You can choose one of the
+    #   following retention modes:
+    #
+    #   * `COMPLIANCE`: Files transitioned to write once, read many (WORM)
+    #     on a Compliance volume can't be deleted until their retention
+    #     periods expire. This retention mode is used to address government
+    #     or industry-specific mandates or to protect against ransomware
+    #     attacks. For more information, see [SnapLock Compliance][1].
+    #
+    #   * `ENTERPRISE`: Files transitioned to WORM on an Enterprise volume
+    #     can be deleted by authorized users before their retention periods
+    #     expire using privileged delete. This retention mode is used to
+    #     advance an organization's data integrity and internal compliance
+    #     or to test retention settings before using SnapLock Compliance.
+    #     For more information, see [SnapLock Enterprise][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-compliance.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.htmlFile
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_append_mode_enabled
+    #   Enables or disables volume-append mode on an FSx for ONTAP SnapLock
+    #   volume. Volume-append mode allows you to create WORM-appendable
+    #   files and write data to them incrementally. The default value is
+    #   `false`.
+    #
+    #   For more information, see [Volume-append mode][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/worm-state.html#worm-state-append
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateSnaplockConfiguration AWS API Documentation
+    #
+    class CreateSnaplockConfiguration < Struct.new(
+      :audit_log_volume,
+      :autocommit_period,
+      :privileged_delete,
+      :retention_period,
+      :snaplock_type,
+      :volume_append_mode_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3946,8 +4082,9 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # Use to specify skipping a final backup, or to add tags to a final
-    # backup.
+    # Use to specify skipping a final backup, adding tags to a final backup,
+    # or bypassing the retention period of an FSx for ONTAP SnapLock
+    # Enterprise volume when deleting an FSx for ONTAP volume.
     #
     # @!attribute [rw] skip_final_backup
     #   Set to true if you want to skip taking a final backup of the volume
@@ -3958,11 +4095,27 @@ module Aws::FSx
     #   A list of `Tag` values, with a maximum of 50 elements.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] bypass_snaplock_enterprise_retention
+    #   Setting this to `true` allows a SnapLock administrator to delete an
+    #   FSx for ONTAP SnapLock Enterprise volume with unexpired write once,
+    #   read many (WORM) files. The IAM permission
+    #   `fsx:BypassSnaplockEnterpriseRetention` is also required to delete
+    #   SnapLock Enterprise volumes with unexpired WORM files. The default
+    #   value is `false`.
+    #
+    #   For more information, see [ Deleting a SnapLock volume ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#snaplock-delete-volume
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteVolumeOntapConfiguration AWS API Documentation
     #
     class DeleteVolumeOntapConfiguration < Struct.new(
       :skip_final_backup,
-      :final_backup_tags)
+      :final_backup_tags,
+      :bypass_snaplock_enterprise_retention)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6264,6 +6417,11 @@ module Aws::FSx
     #   volume, regardless of this value.
     #   @return [Boolean]
     #
+    # @!attribute [rw] snaplock_configuration
+    #   The SnapLock configuration object for an FSx for ONTAP SnapLock
+    #   volume.
+    #   @return [Types::SnaplockConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OntapVolumeConfiguration AWS API Documentation
     #
     class OntapVolumeConfiguration < Struct.new(
@@ -6278,7 +6436,8 @@ module Aws::FSx
       :uuid,
       :ontap_volume_type,
       :snapshot_policy,
-      :copy_tags_to_backups)
+      :copy_tags_to_backups,
+      :snaplock_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6823,6 +6982,53 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # Specifies the retention period of an FSx for ONTAP SnapLock volume.
+    # After it is set, it can't be changed. Files can't be deleted or
+    # modified during the retention period.
+    #
+    # For more information, see [Working with the retention period in
+    # SnapLock][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-retention.html
+    #
+    # @!attribute [rw] type
+    #   Defines the type of time for the retention period of an FSx for
+    #   ONTAP SnapLock volume. Set it to one of the valid types. If you set
+    #   it to `INFINITE`, the files are retained forever. If you set it to
+    #   `UNSPECIFIED`, the files are retained until you set an explicit
+    #   retention period.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Defines the amount of time for the retention period of an FSx for
+    #   ONTAP SnapLock volume. You can't set a value for `INFINITE` or
+    #   `UNSPECIFIED`. For all other options, the following ranges are
+    #   valid:
+    #
+    #   * `Seconds`: 0 - 65,535
+    #
+    #   * `Minutes`: 0 - 65,535
+    #
+    #   * `Hours`: 0 - 24
+    #
+    #   * `Days`: 0 - 365
+    #
+    #   * `Months`: 0 - 12
+    #
+    #   * `Years`: 0 - 100
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/RetentionPeriod AWS API Documentation
+    #
+    class RetentionPeriod < Struct.new(
+      :type,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for an Amazon S3 data repository linked to an Amazon
     # FSx for Lustre file system with a data repository association. The
     # configuration consists of an `AutoImportPolicy` that defines which
@@ -7046,6 +7252,135 @@ module Aws::FSx
     class ServiceLimitExceeded < Struct.new(
       :limit,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the SnapLock configuration for an FSx for ONTAP SnapLock
+    # volume.
+    #
+    # @!attribute [rw] audit_log_volume
+    #   Enables or disables the audit log volume for an FSx for ONTAP
+    #   SnapLock volume. The default value is `false`. If you set
+    #   `AuditLogVolume` to `true`, the SnapLock volume is created as an
+    #   audit log volume. The minimum retention period for an audit log
+    #   volume is six months.
+    #
+    #   For more information, see [ SnapLock audit log volumes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#snaplock-audit-log-volume
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] autocommit_period
+    #   The configuration object for setting the autocommit period of files
+    #   in an FSx for ONTAP SnapLock volume.
+    #   @return [Types::AutocommitPeriod]
+    #
+    # @!attribute [rw] privileged_delete
+    #   Enables, disables, or permanently disables privileged delete on an
+    #   FSx for ONTAP SnapLock Enterprise volume. Enabling privileged delete
+    #   allows SnapLock administrators to delete write once, read many
+    #   (WORM) files even if they have active retention periods.
+    #   `PERMANENTLY_DISABLED` is a terminal state. If privileged delete is
+    #   permanently disabled on a SnapLock volume, you can't re-enable it.
+    #   The default value is `DISABLED`.
+    #
+    #   For more information, see [Privileged delete][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#privileged-delete
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_period
+    #   Specifies the retention period of an FSx for ONTAP SnapLock volume.
+    #   @return [Types::SnaplockRetentionPeriod]
+    #
+    # @!attribute [rw] snaplock_type
+    #   Specifies the retention mode of an FSx for ONTAP SnapLock volume.
+    #   After it is set, it can't be changed. You can choose one of the
+    #   following retention modes:
+    #
+    #   * `COMPLIANCE`: Files transitioned to write once, read many (WORM)
+    #     on a Compliance volume can't be deleted until their retention
+    #     periods expire. This retention mode is used to address government
+    #     or industry-specific mandates or to protect against ransomware
+    #     attacks. For more information, see [SnapLock Compliance][1].
+    #
+    #   * `ENTERPRISE`: Files transitioned to WORM on an Enterprise volume
+    #     can be deleted by authorized users before their retention periods
+    #     expire using privileged delete. This retention mode is used to
+    #     advance an organization's data integrity and internal compliance
+    #     or to test retention settings before using SnapLock Compliance.
+    #     For more information, see [SnapLock Enterprise][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-compliance.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.htmlFile
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_append_mode_enabled
+    #   Enables or disables volume-append mode on an FSx for ONTAP SnapLock
+    #   volume. Volume-append mode allows you to create WORM-appendable
+    #   files and write data to them incrementally. The default value is
+    #   `false`.
+    #
+    #   For more information, see [Volume-append mode][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/worm-state.html#worm-state-append
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SnaplockConfiguration AWS API Documentation
+    #
+    class SnaplockConfiguration < Struct.new(
+      :audit_log_volume,
+      :autocommit_period,
+      :privileged_delete,
+      :retention_period,
+      :snaplock_type,
+      :volume_append_mode_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration to set the retention period of an FSx for ONTAP
+    # SnapLock volume. The retention period includes default, maximum, and
+    # minimum settings. For more information, see [Working with the
+    # retention period in SnapLock][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-retention.html
+    #
+    # @!attribute [rw] default_retention
+    #   The retention period assigned to a write once, read many (WORM) file
+    #   by default if an explicit retention period is not set for an FSx for
+    #   ONTAP SnapLock volume. The default retention period must be greater
+    #   than or equal to the minimum retention period and less than or equal
+    #   to the maximum retention period.
+    #   @return [Types::RetentionPeriod]
+    #
+    # @!attribute [rw] minimum_retention
+    #   The shortest retention period that can be assigned to a WORM file on
+    #   an FSx for ONTAP SnapLock volume.
+    #   @return [Types::RetentionPeriod]
+    #
+    # @!attribute [rw] maximum_retention
+    #   The longest retention period that can be assigned to a WORM file on
+    #   an FSx for ONTAP SnapLock volume.
+    #   @return [Types::RetentionPeriod]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SnaplockRetentionPeriod AWS API Documentation
+    #
+    class SnaplockRetentionPeriod < Struct.new(
+      :default_retention,
+      :minimum_retention,
+      :maximum_retention)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8155,7 +8490,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] security_style
-    #   The security style for the volume, which can be `UNIX`. `NTFS`, or
+    #   The security style for the volume, which can be `UNIX`, `NTFS`, or
     #   `MIXED`.
     #   @return [String]
     #
@@ -8212,6 +8547,11 @@ module Aws::FSx
     #   volume, regardless of this value.
     #   @return [Boolean]
     #
+    # @!attribute [rw] snaplock_configuration
+    #   The configuration object for updating the SnapLock configuration of
+    #   an FSx for ONTAP SnapLock volume.
+    #   @return [Types::UpdateSnaplockConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateOntapVolumeConfiguration AWS API Documentation
     #
     class UpdateOntapVolumeConfiguration < Struct.new(
@@ -8221,7 +8561,8 @@ module Aws::FSx
       :storage_efficiency_enabled,
       :tiering_policy,
       :snapshot_policy,
-      :copy_tags_to_backups)
+      :copy_tags_to_backups,
+      :snaplock_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8299,6 +8640,73 @@ module Aws::FSx
       :nfs_exports,
       :user_and_group_quotas,
       :read_only)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Updates the SnapLock configuration for an existing FSx for ONTAP
+    # volume.
+    #
+    # @!attribute [rw] audit_log_volume
+    #   Enables or disables the audit log volume for an FSx for ONTAP
+    #   SnapLock volume. The default value is `false`. If you set
+    #   `AuditLogVolume` to `true`, the SnapLock volume is created as an
+    #   audit log volume. The minimum retention period for an audit log
+    #   volume is six months.
+    #
+    #   For more information, see [ SnapLock audit log volumes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#snaplock-audit-log-volume
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] autocommit_period
+    #   The configuration object for setting the autocommit period of files
+    #   in an FSx for ONTAP SnapLock volume.
+    #   @return [Types::AutocommitPeriod]
+    #
+    # @!attribute [rw] privileged_delete
+    #   Enables, disables, or permanently disables privileged delete on an
+    #   FSx for ONTAP SnapLock Enterprise volume. Enabling privileged delete
+    #   allows SnapLock administrators to delete write once, read many
+    #   (WORM) files even if they have active retention periods.
+    #   `PERMANENTLY_DISABLED` is a terminal state. If privileged delete is
+    #   permanently disabled on a SnapLock volume, you can't re-enable it.
+    #   The default value is `DISABLED`.
+    #
+    #   For more information, see [Privileged delete][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#privileged-delete
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_period
+    #   Specifies the retention period of an FSx for ONTAP SnapLock volume.
+    #   @return [Types::SnaplockRetentionPeriod]
+    #
+    # @!attribute [rw] volume_append_mode_enabled
+    #   Enables or disables volume-append mode on an FSx for ONTAP SnapLock
+    #   volume. Volume-append mode allows you to create WORM-appendable
+    #   files and write data to them incrementally. The default value is
+    #   `false`.
+    #
+    #   For more information, see [Volume-append mode][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/worm-state.html#worm-state-append
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateSnaplockConfiguration AWS API Documentation
+    #
+    class UpdateSnaplockConfiguration < Struct.new(
+      :audit_log_volume,
+      :autocommit_period,
+      :privileged_delete,
+      :retention_period,
+      :volume_append_mode_enabled)
       SENSITIVE = []
       include Aws::Structure
     end

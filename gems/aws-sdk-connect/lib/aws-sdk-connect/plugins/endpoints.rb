@@ -138,8 +138,12 @@ module Aws::Connect
             Aws::Connect::Endpoints::DeleteIntegrationAssociation.build(context)
           when :delete_prompt
             Aws::Connect::Endpoints::DeletePrompt.build(context)
+          when :delete_queue
+            Aws::Connect::Endpoints::DeleteQueue.build(context)
           when :delete_quick_connect
             Aws::Connect::Endpoints::DeleteQuickConnect.build(context)
+          when :delete_routing_profile
+            Aws::Connect::Endpoints::DeleteRoutingProfile.build(context)
           when :delete_rule
             Aws::Connect::Endpoints::DeleteRule.build(context)
           when :delete_security_profile

@@ -1870,6 +1870,7 @@ module Aws::MediaTailor
     #   resp.items #=> Array
     #   resp.items[0].alert_code #=> String
     #   resp.items[0].alert_message #=> String
+    #   resp.items[0].category #=> String, one of "SCHEDULING_ERROR", "PLAYBACK_WARNING", "INFO"
     #   resp.items[0].last_modified_time #=> Time
     #   resp.items[0].related_resource_arns #=> Array
     #   resp.items[0].related_resource_arns[0] #=> String
@@ -3099,7 +3100,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

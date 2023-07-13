@@ -2917,6 +2917,37 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Deletes a queue.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :queue_id
+    #   The identifier for the queue.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_queue({
+    #     instance_id: "InstanceId", # required
+    #     queue_id: "QueueId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteQueue AWS API Documentation
+    #
+    # @overload delete_queue(params = {})
+    # @param [Hash] params ({})
+    def delete_queue(params = {}, options = {})
+      req = build_request(:delete_queue, params)
+      req.send_request(options)
+    end
+
     # Deletes a quick connect.
     #
     # @option params [required, String] :instance_id
@@ -2945,6 +2976,37 @@ module Aws::Connect
     # @param [Hash] params ({})
     def delete_quick_connect(params = {}, options = {})
       req = build_request(:delete_quick_connect, params)
+      req.send_request(options)
+    end
+
+    # Deletes a routing profile.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :routing_profile_id
+    #   The identifier of the routing profile.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_routing_profile({
+    #     instance_id: "InstanceId", # required
+    #     routing_profile_id: "RoutingProfileId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteRoutingProfile AWS API Documentation
+    #
+    # @overload delete_routing_profile(params = {})
+    # @param [Hash] params ({})
+    def delete_routing_profile(params = {}, options = {})
+      req = build_request(:delete_routing_profile, params)
       req.send_request(options)
     end
 
@@ -12552,7 +12614,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.119.0'
+      context[:gem_version] = '1.120.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2023-07-13)
+------------------
+
+* Feature - Enhanced PostgreSQL target endpoint settings for providing Babelfish support.
+
 1.83.0 (2023-07-11)
 ------------------
 

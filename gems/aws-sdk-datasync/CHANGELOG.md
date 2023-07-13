@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2023-07-13)
+------------------
+
+* Feature - Added LunCount to the response object of DescribeStorageSystemResourcesResponse, LunCount represents the number of LUNs on a storage system resource.
+
 1.61.0 (2023-07-11)
 ------------------
 
