@@ -3,17 +3,24 @@ li .item { color: #666; cursor: pointer; }
 #search { width: 170px; position: static; margin: 3px; margin-left: 10px; font-size: 0.9em; color: #666; padding-left: 0; padding-right: 24px; }
 
 /* Override opacity for at least a 4.5 contrast ratio */
-li.collapsed a.toggle {
-    opacity: 1;
-    cursor: default;
-    background-position: top left;
-}
+li.collapsed a.toggle { opacity: 1; cursor: default; background-position: top left; }
 
 /* Make all links bolder. 400 is normal, 700 is bold  */
 a { font-weight: 550; }
 
+/* For small screen sizes */
 @media (max-width: 320px) {
   body { height: 100%; overflow: hidden; overflow-wrap: break-word; }
   #main { height: 100%; overflow: auto; }
-  #search { display: none; }
+}
+
+/* For status message search results reading */
+.visually-hidden {
+  position: absolute;
+  top: auto;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px,  1px);
+  width: 1px;
+  height: 1px;
+  white-space: nowrap;
 }

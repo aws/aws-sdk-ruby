@@ -111,8 +111,8 @@ function enableSearch() {
     }
   });
 
-  // custom - add role status
-  $('#full_list').after("<div id='noresults' role='status' style='display:none'></div>");
+  // custom - add role status and visually hidden class
+  $('#full_list').after("<div id='noresults' role='status' class='visually-hidden'></div>");
 }
 
 function ignoredKeyPress(event) {
@@ -140,7 +140,7 @@ function clearSearch() {
 function performSearch(searchString) {
   clearSearchTimeout();
   $('#full_list, #content').addClass('insearch');
-  $('#noresults').text('').hide();
+  $('#noresults').text('').addClass('visually-hidden');
   partialSearch(searchString, 0);
 }
 
@@ -179,11 +179,12 @@ function searchDone() {
   // bug fix
   var found = $('#full_list li > div.found').length;
   if (found === 0) {
-    $('#noresults').text('No results were found.').hide().fadeIn();
+    $('#noresults').text('No results were found.');
   } else {
     // accessibility - read out results
-    $('#noresults').text('There are ' + found + ' results.').hide().fadeIn();
+    $('#noresults').text('There are ' + found + ' results.');
   }
+  $('#noresults').removeClass('visually-hidden');
   $('#content').removeClass('insearch');
 }
 
