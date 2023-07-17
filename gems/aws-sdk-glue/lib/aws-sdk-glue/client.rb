@@ -10744,7 +10744,7 @@ module Aws::Glue
     #       requested_columns: ["ColumnNameString"],
     #       all_columns_requested: false,
     #     },
-    #     supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION
+    #     supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION, NESTED_PERMISSION, NESTED_CELL_PERMISSION
     #   })
     #
     # @example Response structure
@@ -10946,7 +10946,7 @@ module Aws::Glue
     #       requested_columns: ["ColumnNameString"],
     #       all_columns_requested: false,
     #     },
-    #     supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION
+    #     supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION, NESTED_PERMISSION, NESTED_CELL_PERMISSION
     #     next_token: "Token",
     #     segment: {
     #       segment_number: 1, # required
@@ -11058,7 +11058,7 @@ module Aws::Glue
     #       requested_columns: ["ColumnNameString"],
     #       all_columns_requested: false,
     #     },
-    #     supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION
+    #     supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION, NESTED_PERMISSION, NESTED_CELL_PERMISSION
     #   })
     #
     # @example Response structure
@@ -15954,7 +15954,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.148.0'
+      context[:gem_version] = '1.149.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

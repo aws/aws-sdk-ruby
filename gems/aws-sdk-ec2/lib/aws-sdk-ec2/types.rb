@@ -39458,6 +39458,14 @@ module Aws::EC2
     #   Indicates whether Nitro Enclaves is supported.
     #   @return [String]
     #
+    # @!attribute [rw] nitro_tpm_support
+    #   Indicates whether NitroTPM is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] nitro_tpm_info
+    #   Describes the supported NitroTPM versions for the instance type.
+    #   @return [Types::NitroTpmInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceTypeInfo AWS API Documentation
     #
     class InstanceTypeInfo < Struct.new(
@@ -39485,7 +39493,9 @@ module Aws::EC2
       :dedicated_hosts_supported,
       :auto_recovery_supported,
       :supported_boot_modes,
-      :nitro_enclaves_support)
+      :nitro_enclaves_support,
+      :nitro_tpm_support,
+      :nitro_tpm_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -49324,6 +49334,20 @@ module Aws::EC2
     class NewDhcpConfiguration < Struct.new(
       :key,
       :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the supported NitroTPM versions for the instance type.
+    #
+    # @!attribute [rw] supported_versions
+    #   Indicates the supported NitroTPM versions.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NitroTpmInfo AWS API Documentation
+    #
+    class NitroTpmInfo < Struct.new(
+      :supported_versions)
       SENSITIVE = []
       include Aws::Structure
     end

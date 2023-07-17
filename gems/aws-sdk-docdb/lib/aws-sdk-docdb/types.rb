@@ -3983,9 +3983,24 @@ module Aws::DocDB
     #
     # @!attribute [rw] engine_version
     #   The version number of the database engine to which you want to
-    #   upgrade. Modifying engine version is not supported on Amazon
-    #   DocumentDB.
+    #   upgrade. Changing this parameter results in an outage. The change is
+    #   applied during the next maintenance window unless `ApplyImmediately`
+    #   is enabled.
+    #
+    #   To list all of the available engine versions for Amazon DocumentDB
+    #   use the following command:
+    #
+    #   `aws docdb describe-db-engine-versions --engine docdb --query
+    #   "DBEngineVersions[].EngineVersion"`
     #   @return [String]
+    #
+    # @!attribute [rw] allow_major_version_upgrade
+    #   A value that indicates whether major version upgrades are allowed.
+    #
+    #   Constraints: You must allow major version upgrades when specifying a
+    #   value for the `EngineVersion` parameter that is a different major
+    #   version than the DB cluster's current version.
+    #   @return [Boolean]
     #
     # @!attribute [rw] deletion_protection
     #   Specifies whether this cluster can be deleted. If
@@ -4010,6 +4025,7 @@ module Aws::DocDB
       :preferred_maintenance_window,
       :cloudwatch_logs_export_configuration,
       :engine_version,
+      :allow_major_version_upgrade,
       :deletion_protection)
       SENSITIVE = []
       include Aws::Structure

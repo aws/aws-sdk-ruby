@@ -644,6 +644,11 @@ module Aws::IVS
     #   and merged together. Default: 0.
     #   @return [Integer]
     #
+    # @!attribute [rw] rendition_configuration
+    #   Object that describes which renditions should be recorded for a
+    #   stream.
+    #   @return [Types::RenditionConfiguration]
+    #
     # @!attribute [rw] tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
     #   See [Tagging Amazon Web Services Resources][1] for more information,
@@ -668,6 +673,7 @@ module Aws::IVS
       :destination_configuration,
       :name,
       :recording_reconnect_window_seconds,
+      :rendition_configuration,
       :tags,
       :thumbnail_configuration)
       SENSITIVE = []
@@ -1413,6 +1419,11 @@ module Aws::IVS
     #   and merged together. Default: 0.
     #   @return [Integer]
     #
+    # @!attribute [rw] rendition_configuration
+    #   Object that describes which renditions should be recorded for a
+    #   stream.
+    #   @return [Types::RenditionConfiguration]
+    #
     # @!attribute [rw] state
     #   Indicates the current state of the recording configuration. When the
     #   state is `ACTIVE`, the configuration is ready for recording a
@@ -1444,6 +1455,7 @@ module Aws::IVS
       :destination_configuration,
       :name,
       :recording_reconnect_window_seconds,
+      :rendition_configuration,
       :state,
       :tags,
       :thumbnail_configuration)
@@ -1492,6 +1504,39 @@ module Aws::IVS
       :name,
       :state,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object that describes which renditions should be recorded for a
+    # stream.
+    #
+    # @!attribute [rw] rendition_selection
+    #   Indicates which set of renditions are recorded for a stream. For
+    #   `BASIC` channels, the `CUSTOM` value has no effect. If `CUSTOM` is
+    #   specified, a set of renditions must be specified in the `renditions`
+    #   field. Default: `ALL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] renditions
+    #   Indicates which renditions are recorded for a stream, if
+    #   `renditionSelection` is `CUSTOM`; otherwise, this field is
+    #   irrelevant. The selected renditions are recorded if they are
+    #   available during the stream. If a selected rendition is unavailable,
+    #   the best available rendition is recorded. For details on the
+    #   resolution dimensions of each rendition, see [Auto-Record to Amazon
+    #   S3][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ivs/latest/userguide/record-to-s3.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/RenditionConfiguration AWS API Documentation
+    #
+    class RenditionConfiguration < Struct.new(
+      :rendition_selection,
+      :renditions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1945,18 +1990,42 @@ module Aws::IVS
     #   Thumbnail recording mode. Default: `INTERVAL`.
     #   @return [String]
     #
+    # @!attribute [rw] resolution
+    #   Indicates the desired resolution of recorded thumbnails. Thumbnails
+    #   are recorded at the selected resolution if the corresponding
+    #   rendition is available during the stream; otherwise, they are
+    #   recorded at source resolution. For more information about resolution
+    #   values and their corresponding height and width dimensions, see
+    #   [Auto-Record to Amazon S3][1]. Default: Null (source resolution is
+    #   returned).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ivs/latest/userguide/record-to-s3.html
+    #   @return [String]
+    #
+    # @!attribute [rw] storage
+    #   Indicates the format in which thumbnails are recorded. `SEQUENTIAL`
+    #   records all generated thumbnails in a serial manner, to the
+    #   media/thumbnails directory. `LATEST` saves the latest thumbnail in
+    #   media/latest\_thumbnail/thumb.jpg and overwrites it at the interval
+    #   specified by `targetIntervalSeconds`. You can enable both
+    #   `SEQUENTIAL` and `LATEST`. Default: `SEQUENTIAL`.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] target_interval_seconds
     #   The targeted thumbnail-generation interval in seconds. This is
     #   configurable (and required) only if `recordingMode` is `INTERVAL`.
     #   Default: 60.
     #
-    #   **Important:** Setting a value for `targetIntervalSeconds` does not
-    #   guarantee that thumbnails are generated at the specified interval.
-    #   For thumbnails to be generated at the `targetIntervalSeconds`
-    #   interval, the `IDR/Keyframe` value for the input video must be less
-    #   than the `targetIntervalSeconds` value. See [ Amazon IVS Streaming
-    #   Configuration][1] for information on setting `IDR/Keyframe` to the
-    #   recommended value in video-encoder settings.
+    #   **Important:** For the `BASIC` channel type, setting a value for
+    #   `targetIntervalSeconds` does not guarantee that thumbnails are
+    #   generated at the specified interval. For thumbnails to be generated
+    #   at the `targetIntervalSeconds` interval, the `IDR/Keyframe` value
+    #   for the input video must be less than the `targetIntervalSeconds`
+    #   value. See [ Amazon IVS Streaming Configuration][1] for information
+    #   on setting `IDR/Keyframe` to the recommended value in video-encoder
+    #   settings.
     #
     #
     #
@@ -1967,6 +2036,8 @@ module Aws::IVS
     #
     class ThumbnailConfiguration < Struct.new(
       :recording_mode,
+      :resolution,
+      :storage,
       :target_interval_seconds)
       SENSITIVE = []
       include Aws::Structure

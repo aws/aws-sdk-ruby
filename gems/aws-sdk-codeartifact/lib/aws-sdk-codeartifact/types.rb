@@ -2635,6 +2635,8 @@ module Aws::CodeArtifact
     # @!attribute [rw] format
     #   A format that specifies the type of the package version with the
     #   requested asset file.
+    #
+    #   The only supported value is `generic`.
     #   @return [String]
     #
     # @!attribute [rw] namespace

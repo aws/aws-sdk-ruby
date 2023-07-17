@@ -680,6 +680,10 @@ module Aws::IVS
     #   interval, the multiple streams will be considered a single broadcast
     #   and merged together. Default: 0.
     #
+    # @option params [Types::RenditionConfiguration] :rendition_configuration
+    #   Object that describes which renditions should be recorded for a
+    #   stream.
+    #
     # @option params [Hash<String,String>] :tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`. See
     #   [Tagging Amazon Web Services Resources][1] for more information,
@@ -710,11 +714,17 @@ module Aws::IVS
     #     },
     #     name: "RecordingConfigurationName",
     #     recording_reconnect_window_seconds: 1,
+    #     rendition_configuration: {
+    #       rendition_selection: "ALL", # accepts ALL, NONE, CUSTOM
+    #       renditions: ["FULL_HD"], # accepts FULL_HD, HD, SD, LOWEST_RESOLUTION
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
     #     thumbnail_configuration: {
     #       recording_mode: "DISABLED", # accepts DISABLED, INTERVAL
+    #       resolution: "FULL_HD", # accepts FULL_HD, HD, SD, LOWEST_RESOLUTION
+    #       storage: ["SEQUENTIAL"], # accepts SEQUENTIAL, LATEST
     #       target_interval_seconds: 1,
     #     },
     #   })
@@ -725,10 +735,16 @@ module Aws::IVS
     #   resp.recording_configuration.destination_configuration.s3.bucket_name #=> String
     #   resp.recording_configuration.name #=> String
     #   resp.recording_configuration.recording_reconnect_window_seconds #=> Integer
+    #   resp.recording_configuration.rendition_configuration.rendition_selection #=> String, one of "ALL", "NONE", "CUSTOM"
+    #   resp.recording_configuration.rendition_configuration.renditions #=> Array
+    #   resp.recording_configuration.rendition_configuration.renditions[0] #=> String, one of "FULL_HD", "HD", "SD", "LOWEST_RESOLUTION"
     #   resp.recording_configuration.state #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE"
     #   resp.recording_configuration.tags #=> Hash
     #   resp.recording_configuration.tags["TagKey"] #=> String
     #   resp.recording_configuration.thumbnail_configuration.recording_mode #=> String, one of "DISABLED", "INTERVAL"
+    #   resp.recording_configuration.thumbnail_configuration.resolution #=> String, one of "FULL_HD", "HD", "SD", "LOWEST_RESOLUTION"
+    #   resp.recording_configuration.thumbnail_configuration.storage #=> Array
+    #   resp.recording_configuration.thumbnail_configuration.storage[0] #=> String, one of "SEQUENTIAL", "LATEST"
     #   resp.recording_configuration.thumbnail_configuration.target_interval_seconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateRecordingConfiguration AWS API Documentation
@@ -1006,10 +1022,16 @@ module Aws::IVS
     #   resp.recording_configuration.destination_configuration.s3.bucket_name #=> String
     #   resp.recording_configuration.name #=> String
     #   resp.recording_configuration.recording_reconnect_window_seconds #=> Integer
+    #   resp.recording_configuration.rendition_configuration.rendition_selection #=> String, one of "ALL", "NONE", "CUSTOM"
+    #   resp.recording_configuration.rendition_configuration.renditions #=> Array
+    #   resp.recording_configuration.rendition_configuration.renditions[0] #=> String, one of "FULL_HD", "HD", "SD", "LOWEST_RESOLUTION"
     #   resp.recording_configuration.state #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE"
     #   resp.recording_configuration.tags #=> Hash
     #   resp.recording_configuration.tags["TagKey"] #=> String
     #   resp.recording_configuration.thumbnail_configuration.recording_mode #=> String, one of "DISABLED", "INTERVAL"
+    #   resp.recording_configuration.thumbnail_configuration.resolution #=> String, one of "FULL_HD", "HD", "SD", "LOWEST_RESOLUTION"
+    #   resp.recording_configuration.thumbnail_configuration.storage #=> Array
+    #   resp.recording_configuration.thumbnail_configuration.storage[0] #=> String, one of "SEQUENTIAL", "LATEST"
     #   resp.recording_configuration.thumbnail_configuration.target_interval_seconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetRecordingConfiguration AWS API Documentation
@@ -1140,10 +1162,16 @@ module Aws::IVS
     #   resp.stream_session.recording_configuration.destination_configuration.s3.bucket_name #=> String
     #   resp.stream_session.recording_configuration.name #=> String
     #   resp.stream_session.recording_configuration.recording_reconnect_window_seconds #=> Integer
+    #   resp.stream_session.recording_configuration.rendition_configuration.rendition_selection #=> String, one of "ALL", "NONE", "CUSTOM"
+    #   resp.stream_session.recording_configuration.rendition_configuration.renditions #=> Array
+    #   resp.stream_session.recording_configuration.rendition_configuration.renditions[0] #=> String, one of "FULL_HD", "HD", "SD", "LOWEST_RESOLUTION"
     #   resp.stream_session.recording_configuration.state #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE"
     #   resp.stream_session.recording_configuration.tags #=> Hash
     #   resp.stream_session.recording_configuration.tags["TagKey"] #=> String
     #   resp.stream_session.recording_configuration.thumbnail_configuration.recording_mode #=> String, one of "DISABLED", "INTERVAL"
+    #   resp.stream_session.recording_configuration.thumbnail_configuration.resolution #=> String, one of "FULL_HD", "HD", "SD", "LOWEST_RESOLUTION"
+    #   resp.stream_session.recording_configuration.thumbnail_configuration.storage #=> Array
+    #   resp.stream_session.recording_configuration.thumbnail_configuration.storage[0] #=> String, one of "SEQUENTIAL", "LATEST"
     #   resp.stream_session.recording_configuration.thumbnail_configuration.target_interval_seconds #=> Integer
     #   resp.stream_session.start_time #=> Time
     #   resp.stream_session.stream_id #=> String
@@ -1866,7 +1894,7 @@ module Aws::IVS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivs'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.149.0 (2023-07-17)
+------------------
+
+* Feature - Adding new supported permission type flags to get-unfiltered endpoints that callers may pass to indicate support for enforcing Lake Formation fine-grained access control on nested column attributes.
+
 1.148.0 (2023-07-11)
 ------------------
 

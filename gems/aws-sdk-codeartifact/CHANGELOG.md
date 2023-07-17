@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2023-07-17)
+------------------
+
+* Feature - Doc only update for AWS CodeArtifact
+
 1.32.0 (2023-07-11)
 ------------------
 

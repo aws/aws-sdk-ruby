@@ -24493,6 +24493,9 @@ module Aws::EC2
     #   resp.instance_types[0].supported_boot_modes #=> Array
     #   resp.instance_types[0].supported_boot_modes[0] #=> String, one of "legacy-bios", "uefi"
     #   resp.instance_types[0].nitro_enclaves_support #=> String, one of "unsupported", "supported"
+    #   resp.instance_types[0].nitro_tpm_support #=> String, one of "unsupported", "supported"
+    #   resp.instance_types[0].nitro_tpm_info.supported_versions #=> Array
+    #   resp.instance_types[0].nitro_tpm_info.supported_versions[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceTypes AWS API Documentation
@@ -56709,7 +56712,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.390.0'
+      context[:gem_version] = '1.391.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

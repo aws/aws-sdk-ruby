@@ -2548,6 +2548,8 @@ module Aws::CodeArtifact
     #   A format that specifies the type of the package version with the
     #   requested asset file.
     #
+    #   The only supported value is `generic`.
+    #
     # @option params [String] :namespace
     #   The namespace of the package version to publish.
     #
@@ -3090,7 +3092,7 @@ module Aws::CodeArtifact
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codeartifact'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

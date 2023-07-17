@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2023-07-17)
+------------------
+
+* Feature - Added major version upgrade option in ModifyDBCluster API
+
 1.52.0 (2023-07-11)
 ------------------
 

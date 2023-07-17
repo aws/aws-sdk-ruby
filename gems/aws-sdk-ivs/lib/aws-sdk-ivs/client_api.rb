@@ -110,6 +110,10 @@ module Aws::IVS
     RecordingConfigurationSummary = Shapes::StructureShape.new(name: 'RecordingConfigurationSummary')
     RecordingMode = Shapes::StringShape.new(name: 'RecordingMode')
     RecordingReconnectWindowSeconds = Shapes::IntegerShape.new(name: 'RecordingReconnectWindowSeconds')
+    RenditionConfiguration = Shapes::StructureShape.new(name: 'RenditionConfiguration')
+    RenditionConfigurationRendition = Shapes::StringShape.new(name: 'RenditionConfigurationRendition')
+    RenditionConfigurationRenditionList = Shapes::ListShape.new(name: 'RenditionConfigurationRenditionList')
+    RenditionConfigurationRenditionSelection = Shapes::StringShape.new(name: 'RenditionConfigurationRenditionSelection')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     S3DestinationBucketName = Shapes::StringShape.new(name: 'S3DestinationBucketName')
@@ -152,6 +156,9 @@ module Aws::IVS
     TargetIntervalSeconds = Shapes::IntegerShape.new(name: 'TargetIntervalSeconds')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     ThumbnailConfiguration = Shapes::StructureShape.new(name: 'ThumbnailConfiguration')
+    ThumbnailConfigurationResolution = Shapes::StringShape.new(name: 'ThumbnailConfigurationResolution')
+    ThumbnailConfigurationStorage = Shapes::StringShape.new(name: 'ThumbnailConfigurationStorage')
+    ThumbnailConfigurationStorageList = Shapes::ListShape.new(name: 'ThumbnailConfigurationStorageList')
     Time = Shapes::TimestampShape.new(name: 'Time', timestampFormat: "iso8601")
     TranscodePreset = Shapes::StringShape.new(name: 'TranscodePreset')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -269,6 +276,7 @@ module Aws::IVS
     CreateRecordingConfigurationRequest.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, required: true, location_name: "destinationConfiguration"))
     CreateRecordingConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: RecordingConfigurationName, location_name: "name"))
     CreateRecordingConfigurationRequest.add_member(:recording_reconnect_window_seconds, Shapes::ShapeRef.new(shape: RecordingReconnectWindowSeconds, location_name: "recordingReconnectWindowSeconds"))
+    CreateRecordingConfigurationRequest.add_member(:rendition_configuration, Shapes::ShapeRef.new(shape: RenditionConfiguration, location_name: "renditionConfiguration"))
     CreateRecordingConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateRecordingConfigurationRequest.add_member(:thumbnail_configuration, Shapes::ShapeRef.new(shape: ThumbnailConfiguration, location_name: "thumbnailConfiguration"))
     CreateRecordingConfigurationRequest.struct_class = Types::CreateRecordingConfigurationRequest
@@ -435,6 +443,7 @@ module Aws::IVS
     RecordingConfiguration.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, required: true, location_name: "destinationConfiguration"))
     RecordingConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: RecordingConfigurationName, location_name: "name"))
     RecordingConfiguration.add_member(:recording_reconnect_window_seconds, Shapes::ShapeRef.new(shape: RecordingReconnectWindowSeconds, location_name: "recordingReconnectWindowSeconds"))
+    RecordingConfiguration.add_member(:rendition_configuration, Shapes::ShapeRef.new(shape: RenditionConfiguration, location_name: "renditionConfiguration"))
     RecordingConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: RecordingConfigurationState, required: true, location_name: "state"))
     RecordingConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     RecordingConfiguration.add_member(:thumbnail_configuration, Shapes::ShapeRef.new(shape: ThumbnailConfiguration, location_name: "thumbnailConfiguration"))
@@ -448,6 +457,12 @@ module Aws::IVS
     RecordingConfigurationSummary.add_member(:state, Shapes::ShapeRef.new(shape: RecordingConfigurationState, required: true, location_name: "state"))
     RecordingConfigurationSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     RecordingConfigurationSummary.struct_class = Types::RecordingConfigurationSummary
+
+    RenditionConfiguration.add_member(:rendition_selection, Shapes::ShapeRef.new(shape: RenditionConfigurationRenditionSelection, location_name: "renditionSelection"))
+    RenditionConfiguration.add_member(:renditions, Shapes::ShapeRef.new(shape: RenditionConfigurationRenditionList, location_name: "renditions"))
+    RenditionConfiguration.struct_class = Types::RenditionConfiguration
+
+    RenditionConfigurationRenditionList.member = Shapes::ShapeRef.new(shape: RenditionConfigurationRendition)
 
     ResourceNotFoundException.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -551,8 +566,12 @@ module Aws::IVS
     ThrottlingException.struct_class = Types::ThrottlingException
 
     ThumbnailConfiguration.add_member(:recording_mode, Shapes::ShapeRef.new(shape: RecordingMode, location_name: "recordingMode"))
+    ThumbnailConfiguration.add_member(:resolution, Shapes::ShapeRef.new(shape: ThumbnailConfigurationResolution, location_name: "resolution"))
+    ThumbnailConfiguration.add_member(:storage, Shapes::ShapeRef.new(shape: ThumbnailConfigurationStorageList, location_name: "storage"))
     ThumbnailConfiguration.add_member(:target_interval_seconds, Shapes::ShapeRef.new(shape: TargetIntervalSeconds, location_name: "targetIntervalSeconds"))
     ThumbnailConfiguration.struct_class = Types::ThumbnailConfiguration
+
+    ThumbnailConfigurationStorageList.member = Shapes::ShapeRef.new(shape: ThumbnailConfigurationStorage)
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
@@ -627,7 +646,10 @@ module Aws::IVS
         o.http_request_uri = "/BatchStartViewerSessionRevocation"
         o.input = Shapes::ShapeRef.new(shape: BatchStartViewerSessionRevocationRequest)
         o.output = Shapes::ShapeRef.new(shape: BatchStartViewerSessionRevocationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_channel, Seahorse::Model::Operation.new.tap do |o|
@@ -931,9 +953,11 @@ module Aws::IVS
         o.http_request_uri = "/StartViewerSessionRevocation"
         o.input = Shapes::ShapeRef.new(shape: StartViewerSessionRevocationRequest)
         o.output = Shapes::ShapeRef.new(shape: StartViewerSessionRevocationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 

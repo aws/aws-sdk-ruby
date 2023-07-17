@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.391.0 (2023-07-17)
+------------------
+
+* Feature - Add Nitro TPM support on DescribeInstanceTypes
+
 1.390.0 (2023-07-13)
 ------------------
 

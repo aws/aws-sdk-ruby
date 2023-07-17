@@ -2169,6 +2169,10 @@ module Aws::EC2
     NewDhcpConfigurationList = Shapes::ListShape.new(name: 'NewDhcpConfigurationList')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NitroEnclavesSupport = Shapes::StringShape.new(name: 'NitroEnclavesSupport')
+    NitroTpmInfo = Shapes::StructureShape.new(name: 'NitroTpmInfo')
+    NitroTpmSupport = Shapes::StringShape.new(name: 'NitroTpmSupport')
+    NitroTpmSupportedVersionType = Shapes::StringShape.new(name: 'NitroTpmSupportedVersionType')
+    NitroTpmSupportedVersionsList = Shapes::ListShape.new(name: 'NitroTpmSupportedVersionsList')
     OccurrenceDayRequestSet = Shapes::ListShape.new(name: 'OccurrenceDayRequestSet')
     OccurrenceDaySet = Shapes::ListShape.new(name: 'OccurrenceDaySet')
     OfferingClassType = Shapes::StringShape.new(name: 'OfferingClassType')
@@ -9864,6 +9868,8 @@ module Aws::EC2
     InstanceTypeInfo.add_member(:auto_recovery_supported, Shapes::ShapeRef.new(shape: AutoRecoveryFlag, location_name: "autoRecoverySupported"))
     InstanceTypeInfo.add_member(:supported_boot_modes, Shapes::ShapeRef.new(shape: BootModeTypeList, location_name: "supportedBootModes"))
     InstanceTypeInfo.add_member(:nitro_enclaves_support, Shapes::ShapeRef.new(shape: NitroEnclavesSupport, location_name: "nitroEnclavesSupport"))
+    InstanceTypeInfo.add_member(:nitro_tpm_support, Shapes::ShapeRef.new(shape: NitroTpmSupport, location_name: "nitroTpmSupport"))
+    InstanceTypeInfo.add_member(:nitro_tpm_info, Shapes::ShapeRef.new(shape: NitroTpmInfo, location_name: "nitroTpmInfo"))
     InstanceTypeInfo.struct_class = Types::InstanceTypeInfo
 
     InstanceTypeInfoFromInstanceRequirements.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
@@ -11753,6 +11759,11 @@ module Aws::EC2
     NewDhcpConfiguration.struct_class = Types::NewDhcpConfiguration
 
     NewDhcpConfigurationList.member = Shapes::ShapeRef.new(shape: NewDhcpConfiguration, location_name: "item")
+
+    NitroTpmInfo.add_member(:supported_versions, Shapes::ShapeRef.new(shape: NitroTpmSupportedVersionsList, location_name: "supportedVersions"))
+    NitroTpmInfo.struct_class = Types::NitroTpmInfo
+
+    NitroTpmSupportedVersionsList.member = Shapes::ShapeRef.new(shape: NitroTpmSupportedVersionType, location_name: "item")
 
     OccurrenceDayRequestSet.member = Shapes::ShapeRef.new(shape: Integer, location_name: "OccurenceDay")
 
