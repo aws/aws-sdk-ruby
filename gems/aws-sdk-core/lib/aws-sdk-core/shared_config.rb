@@ -169,9 +169,9 @@ module Aws
 
     # Source a custom configured endpoint from the shared configuration file
     #
-    # @param [Hash] options
-    # @option options [String] :profile
-    # @option options [String] :service_id
+    # @param [Hash] opts
+    # @option opts [String] :profile
+    # @option opts [String] :service_id
     def configured_endpoint(opts = {})
       # services section is only allowed in the shared config file (not credentials)
       profile = opts[:profile] || @profile_name
