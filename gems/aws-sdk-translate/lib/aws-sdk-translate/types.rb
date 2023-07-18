@@ -241,11 +241,14 @@ module Aws::Translate
     #   Describes the format of the document. You can specify one of the
     #   following:
     #
-    #   * text/html - The input data consists of HTML content. Amazon
+    #   * `text/html` - The input data consists of HTML content. Amazon
     #     Translate translates only the text in the HTML element.
     #
-    #   * text/plain - The input data consists of unformatted text. Amazon
+    #   * `text/plain` - The input data consists of unformatted text. Amazon
     #     Translate translates every character in the content.
+    #
+    #   * `application/vnd.openxmlformats-officedocument.wordprocessingml.document`
+    #     - The input data consists of a Word document (.docx).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/Document AWS API Documentation

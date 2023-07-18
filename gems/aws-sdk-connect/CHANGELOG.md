@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.121.0 (2023-07-18)
+------------------
+
+* Feature - GetMetricDataV2 API: Update to include Contact Lens Conversational Analytics Metrics
+
 1.120.0 (2023-07-13)
 ------------------
 

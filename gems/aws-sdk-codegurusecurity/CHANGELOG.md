@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2023-07-18)
+------------------
+
+* Feature - Documentation updates for CodeGuru Security.
+
 1.4.0 (2023-07-11)
 ------------------
 

@@ -86,6 +86,8 @@ module Aws::MainframeModernization
             Aws::MainframeModernization::Endpoints::GetDeployment.build(context)
           when :get_environment
             Aws::MainframeModernization::Endpoints::GetEnvironment.build(context)
+          when :get_signed_bluinsights_url
+            Aws::MainframeModernization::Endpoints::GetSignedBluinsightsUrl.build(context)
           when :list_application_versions
             Aws::MainframeModernization::Endpoints::ListApplicationVersions.build(context)
           when :list_applications

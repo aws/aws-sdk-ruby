@@ -172,10 +172,20 @@ module Aws::LexModelsV2
             Aws::LexModelsV2::Endpoints::ListExports.build(context)
           when :list_imports
             Aws::LexModelsV2::Endpoints::ListImports.build(context)
+          when :list_intent_metrics
+            Aws::LexModelsV2::Endpoints::ListIntentMetrics.build(context)
+          when :list_intent_paths
+            Aws::LexModelsV2::Endpoints::ListIntentPaths.build(context)
+          when :list_intent_stage_metrics
+            Aws::LexModelsV2::Endpoints::ListIntentStageMetrics.build(context)
           when :list_intents
             Aws::LexModelsV2::Endpoints::ListIntents.build(context)
           when :list_recommended_intents
             Aws::LexModelsV2::Endpoints::ListRecommendedIntents.build(context)
+          when :list_session_analytics_data
+            Aws::LexModelsV2::Endpoints::ListSessionAnalyticsData.build(context)
+          when :list_session_metrics
+            Aws::LexModelsV2::Endpoints::ListSessionMetrics.build(context)
           when :list_slot_types
             Aws::LexModelsV2::Endpoints::ListSlotTypes.build(context)
           when :list_slots
@@ -190,6 +200,10 @@ module Aws::LexModelsV2
             Aws::LexModelsV2::Endpoints::ListTestSetRecords.build(context)
           when :list_test_sets
             Aws::LexModelsV2::Endpoints::ListTestSets.build(context)
+          when :list_utterance_analytics_data
+            Aws::LexModelsV2::Endpoints::ListUtteranceAnalyticsData.build(context)
+          when :list_utterance_metrics
+            Aws::LexModelsV2::Endpoints::ListUtteranceMetrics.build(context)
           when :search_associated_transcripts
             Aws::LexModelsV2::Endpoints::SearchAssociatedTranscripts.build(context)
           when :start_bot_recommendation

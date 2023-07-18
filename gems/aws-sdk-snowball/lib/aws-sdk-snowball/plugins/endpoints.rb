@@ -98,6 +98,8 @@ module Aws::Snowball
             Aws::Snowball::Endpoints::ListJobs.build(context)
           when :list_long_term_pricing
             Aws::Snowball::Endpoints::ListLongTermPricing.build(context)
+          when :list_pickup_locations
+            Aws::Snowball::Endpoints::ListPickupLocations.build(context)
           when :list_service_versions
             Aws::Snowball::Endpoints::ListServiceVersions.build(context)
           when :update_cluster

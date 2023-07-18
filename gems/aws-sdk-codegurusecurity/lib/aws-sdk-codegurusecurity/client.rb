@@ -467,7 +467,7 @@ module Aws::CodeGuruSecurity
     #
     # @option params [String] :analysis_type
     #   The type of analysis you want CodeGuru Security to perform in the
-    #   scan, either `Security` or `All`. The `Secuirty` type only generates
+    #   scan, either `Security` or `All`. The `Security` type only generates
     #   findings related to security. The `All` type generates both security
     #   findings and quality findings. Defaults to `Security` type if missing.
     #
@@ -863,7 +863,8 @@ module Aws::CodeGuruSecurity
       req.send_request(options)
     end
 
-    # Returns a list of all the scans in an account.
+    # Returns a list of all the standard scans in an account. Does not
+    # return express scans.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in the response. Use this
@@ -1050,7 +1051,7 @@ module Aws::CodeGuruSecurity
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codegurusecurity'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2023-07-18)
+------------------
+
+* Feature - Allows UpdateEnvironment to update the environment to 0 host capacity. New GetSignedBluinsightsUrl API
+
 1.9.0 (2023-07-11)
 ------------------
 

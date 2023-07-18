@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2023-07-18)
+------------------
+
+* Feature - Added DOCX word document support to TranslateDocument API
+
 1.56.0 (2023-07-11)
 ------------------
 

@@ -5771,6 +5771,386 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # Retrieves summary metrics for the intents in your bot. The following
+    # fields are required:
+    #
+    # * `metrics` – A list of [AnalyticsIntentMetric][1] objects. In each
+    #   object, use the `name` field to specify the metric to calculate, the
+    #   `statistic` field to specify whether to calculate the `Sum`,
+    #   `Average`, or `Max` number, and the `order` field to specify whether
+    #   to sort the results in `Ascending` or `Descending` order.
+    #
+    # * `startDateTime` and `endDateTime` – Define a time range for which
+    #   you want to retrieve results.
+    #
+    # Of the optional fields, you can organize the results in the following
+    # ways:
+    #
+    # * Use the `filters` field to filter the results, the `groupBy` field
+    #   to specify categories by which to group the results, and the `binBy`
+    #   field to specify time intervals by which to group the results.
+    #
+    # * Use the `maxResults` field to limit the number of results to return
+    #   in a single response and the `nextToken` field to return the next
+    #   batch of results if the response does not return the full set of
+    #   results.
+    #
+    # Note that an `order` field exists in both `binBy` and `metrics`. You
+    # can specify only one `order` in a given request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_AnalyticsIntentMetric.html
+    #
+    # @option params [required, String] :bot_id
+    #   The identifier for the bot for which you want to retrieve intent
+    #   metrics.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_date_time
+    #   The timestamp that marks the beginning of the range of time for which
+    #   you want to see intent metrics.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_date_time
+    #   The date and time that marks the end of the range of time for which
+    #   you want to see intent metrics.
+    #
+    # @option params [required, Array<Types::AnalyticsIntentMetric>] :metrics
+    #   A list of objects, each of which contains a metric you want to list,
+    #   the statistic for the metric you want to return, and the order by
+    #   which to organize the results.
+    #
+    # @option params [Array<Types::AnalyticsBinBySpecification>] :bin_by
+    #   A list of objects, each of which contains specifications for
+    #   organizing the results by time.
+    #
+    # @option params [Array<Types::AnalyticsIntentGroupBySpecification>] :group_by
+    #   A list of objects, each of which specifies how to group the results.
+    #   You can group by the following criteria:
+    #
+    #   * `IntentName` – The name of the intent.
+    #
+    #   * `IntentEndState` – The final state of the intent. The possible end
+    #     states are detailed in [Key definitions][1] in the user guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/analytics-key-definitions-intents
+    #
+    # @option params [Array<Types::AnalyticsIntentFilter>] :filters
+    #   A list of objects, each of which describes a condition by which you
+    #   want to filter the results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in each page of results. If
+    #   there are fewer results than the maximum page size, only the actual
+    #   number of results are returned.
+    #
+    # @option params [String] :next_token
+    #   If the response from the ListIntentMetrics operation contains more
+    #   results than specified in the maxResults parameter, a token is
+    #   returned in the response.
+    #
+    #   Use the returned token in the nextToken parameter of a
+    #   ListIntentMetrics request to return the next page of results. For a
+    #   complete set of results, call the ListIntentMetrics operation until
+    #   the nextToken returned in the response is null.
+    #
+    # @return [Types::ListIntentMetricsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIntentMetricsResponse#bot_id #bot_id} => String
+    #   * {Types::ListIntentMetricsResponse#results #results} => Array&lt;Types::AnalyticsIntentResult&gt;
+    #   * {Types::ListIntentMetricsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_intent_metrics({
+    #     bot_id: "Id", # required
+    #     start_date_time: Time.now, # required
+    #     end_date_time: Time.now, # required
+    #     metrics: [ # required
+    #       {
+    #         name: "Count", # required, accepts Count, Success, Failure, Switched, Dropped
+    #         statistic: "Sum", # required, accepts Sum, Avg, Max
+    #         order: "Ascending", # accepts Ascending, Descending
+    #       },
+    #     ],
+    #     bin_by: [
+    #       {
+    #         name: "ConversationStartTime", # required, accepts ConversationStartTime, UtteranceTimestamp
+    #         interval: "OneHour", # required, accepts OneHour, OneDay
+    #         order: "Ascending", # accepts Ascending, Descending
+    #       },
+    #     ],
+    #     group_by: [
+    #       {
+    #         name: "IntentName", # required, accepts IntentName, IntentEndState, IntentLevel
+    #       },
+    #     ],
+    #     filters: [
+    #       {
+    #         name: "BotAliasId", # required, accepts BotAliasId, BotVersion, LocaleId, Modality, Channel, SessionId, OriginatingRequestId, IntentName, IntentEndState
+    #         operator: "EQ", # required, accepts EQ, GT, LT
+    #         values: ["AnalyticsFilterValue"], # required
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.results #=> Array
+    #   resp.results[0].bin_keys #=> Array
+    #   resp.results[0].bin_keys[0].name #=> String, one of "ConversationStartTime", "UtteranceTimestamp"
+    #   resp.results[0].bin_keys[0].value #=> Integer
+    #   resp.results[0].group_by_keys #=> Array
+    #   resp.results[0].group_by_keys[0].name #=> String, one of "IntentName", "IntentEndState", "IntentLevel"
+    #   resp.results[0].group_by_keys[0].value #=> String
+    #   resp.results[0].metrics_results #=> Array
+    #   resp.results[0].metrics_results[0].name #=> String, one of "Count", "Success", "Failure", "Switched", "Dropped"
+    #   resp.results[0].metrics_results[0].statistic #=> String, one of "Sum", "Avg", "Max"
+    #   resp.results[0].metrics_results[0].value #=> Float
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListIntentMetrics AWS API Documentation
+    #
+    # @overload list_intent_metrics(params = {})
+    # @param [Hash] params ({})
+    def list_intent_metrics(params = {}, options = {})
+      req = build_request(:list_intent_metrics, params)
+      req.send_request(options)
+    end
+
+    # Retrieves summary statistics for a path of intents that users take
+    # over sessions with your bot. The following fields are required:
+    #
+    # * `startDateTime` and `endDateTime` – Define a time range for which
+    #   you want to retrieve results.
+    #
+    # * `intentPath` – Define an order of intents for which you want to
+    #   retrieve metrics. Separate intents in the path with a forward slash.
+    #   For example, populate the `intentPath` field with
+    #   `/BookCar/BookHotel` to see details about how many times users
+    #   invoked the `BookCar` and `BookHotel` intents in that order.
+    #
+    # Use the optional `filters` field to filter the results.
+    #
+    # @option params [required, String] :bot_id
+    #   The identifier for the bot for which you want to retrieve intent path
+    #   metrics.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_date_time
+    #   The date and time that marks the beginning of the range of time for
+    #   which you want to see intent path metrics.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_date_time
+    #   The date and time that marks the end of the range of time for which
+    #   you want to see intent path metrics.
+    #
+    # @option params [required, String] :intent_path
+    #   The intent path for which you want to retrieve metrics. Use a forward
+    #   slash to separate intents in the path. For example:
+    #
+    #   * /BookCar
+    #
+    #   * /BookCar/BookHotel
+    #
+    #   * /BookHotel/BookCar
+    #
+    # @option params [Array<Types::AnalyticsPathFilter>] :filters
+    #   A list of objects, each describes a condition by which you want to
+    #   filter the results.
+    #
+    # @return [Types::ListIntentPathsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIntentPathsResponse#node_summaries #node_summaries} => Array&lt;Types::AnalyticsIntentNodeSummary&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_intent_paths({
+    #     bot_id: "Id", # required
+    #     start_date_time: Time.now, # required
+    #     end_date_time: Time.now, # required
+    #     intent_path: "AnalyticsPath", # required
+    #     filters: [
+    #       {
+    #         name: "BotAliasId", # required, accepts BotAliasId, BotVersion, LocaleId, Modality, Channel
+    #         operator: "EQ", # required, accepts EQ, GT, LT
+    #         values: ["AnalyticsFilterValue"], # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.node_summaries #=> Array
+    #   resp.node_summaries[0].intent_name #=> String
+    #   resp.node_summaries[0].intent_path #=> String
+    #   resp.node_summaries[0].intent_count #=> Integer
+    #   resp.node_summaries[0].intent_level #=> Integer
+    #   resp.node_summaries[0].node_type #=> String, one of "Inner", "Exit"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListIntentPaths AWS API Documentation
+    #
+    # @overload list_intent_paths(params = {})
+    # @param [Hash] params ({})
+    def list_intent_paths(params = {}, options = {})
+      req = build_request(:list_intent_paths, params)
+      req.send_request(options)
+    end
+
+    # Retrieves summary metrics for the intent stages in your bot. The
+    # following fields are required:
+    #
+    # * `metrics` – A list of [AnalyticsIntentStageMetric][1] objects. In
+    #   each object, use the `name` field to specify the metric to
+    #   calculate, the `statistic` field to specify whether to calculate the
+    #   `Sum`, `Average`, or `Max` number, and the `order` field to specify
+    #   whether to sort the results in `Ascending` or `Descending` order.
+    #
+    # * `startDateTime` and `endDateTime` – Define a time range for which
+    #   you want to retrieve results.
+    #
+    # Of the optional fields, you can organize the results in the following
+    # ways:
+    #
+    # * Use the `filters` field to filter the results, the `groupBy` field
+    #   to specify categories by which to group the results, and the `binBy`
+    #   field to specify time intervals by which to group the results.
+    #
+    # * Use the `maxResults` field to limit the number of results to return
+    #   in a single response and the `nextToken` field to return the next
+    #   batch of results if the response does not return the full set of
+    #   results.
+    #
+    # Note that an `order` field exists in both `binBy` and `metrics`. You
+    # can only specify one `order` in a given request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_AnalyticsIntentStageMetric.html
+    #
+    # @option params [required, String] :bot_id
+    #   The identifier for the bot for which you want to retrieve intent stage
+    #   metrics.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_date_time
+    #   The date and time that marks the beginning of the range of time for
+    #   which you want to see intent stage metrics.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_date_time
+    #   The date and time that marks the end of the range of time for which
+    #   you want to see intent stage metrics.
+    #
+    # @option params [required, Array<Types::AnalyticsIntentStageMetric>] :metrics
+    #   A list of objects, each of which contains a metric you want to list,
+    #   the statistic for the metric you want to return, and the method by
+    #   which to organize the results.
+    #
+    # @option params [Array<Types::AnalyticsBinBySpecification>] :bin_by
+    #   A list of objects, each of which contains specifications for
+    #   organizing the results by time.
+    #
+    # @option params [Array<Types::AnalyticsIntentStageGroupBySpecification>] :group_by
+    #   A list of objects, each of which specifies how to group the results.
+    #   You can group by the following criteria:
+    #
+    #   * `IntentStageName` – The name of the intent stage.
+    #
+    #   * `SwitchedToIntent` – The intent to which the conversation was
+    #     switched (if any).
+    #
+    # @option params [Array<Types::AnalyticsIntentStageFilter>] :filters
+    #   A list of objects, each of which describes a condition by which you
+    #   want to filter the results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in each page of results. If
+    #   there are fewer results than the maximum page size, only the actual
+    #   number of results are returned.
+    #
+    # @option params [String] :next_token
+    #   If the response from the ListIntentStageMetrics operation contains
+    #   more results than specified in the maxResults parameter, a token is
+    #   returned in the response.
+    #
+    #   Use the returned token in the nextToken parameter of a
+    #   ListIntentStageMetrics request to return the next page of results. For
+    #   a complete set of results, call the ListIntentStageMetrics operation
+    #   until the nextToken returned in the response is null.
+    #
+    # @return [Types::ListIntentStageMetricsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIntentStageMetricsResponse#bot_id #bot_id} => String
+    #   * {Types::ListIntentStageMetricsResponse#results #results} => Array&lt;Types::AnalyticsIntentStageResult&gt;
+    #   * {Types::ListIntentStageMetricsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_intent_stage_metrics({
+    #     bot_id: "Id", # required
+    #     start_date_time: Time.now, # required
+    #     end_date_time: Time.now, # required
+    #     metrics: [ # required
+    #       {
+    #         name: "Count", # required, accepts Count, Success, Failed, Dropped, Retry
+    #         statistic: "Sum", # required, accepts Sum, Avg, Max
+    #         order: "Ascending", # accepts Ascending, Descending
+    #       },
+    #     ],
+    #     bin_by: [
+    #       {
+    #         name: "ConversationStartTime", # required, accepts ConversationStartTime, UtteranceTimestamp
+    #         interval: "OneHour", # required, accepts OneHour, OneDay
+    #         order: "Ascending", # accepts Ascending, Descending
+    #       },
+    #     ],
+    #     group_by: [
+    #       {
+    #         name: "IntentStageName", # required, accepts IntentStageName, SwitchedToIntent
+    #       },
+    #     ],
+    #     filters: [
+    #       {
+    #         name: "BotAliasId", # required, accepts BotAliasId, BotVersion, LocaleId, Modality, Channel, SessionId, OriginatingRequestId, IntentName, IntentStageName
+    #         operator: "EQ", # required, accepts EQ, GT, LT
+    #         values: ["AnalyticsFilterValue"], # required
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.results #=> Array
+    #   resp.results[0].bin_keys #=> Array
+    #   resp.results[0].bin_keys[0].name #=> String, one of "ConversationStartTime", "UtteranceTimestamp"
+    #   resp.results[0].bin_keys[0].value #=> Integer
+    #   resp.results[0].group_by_keys #=> Array
+    #   resp.results[0].group_by_keys[0].name #=> String, one of "IntentStageName", "SwitchedToIntent"
+    #   resp.results[0].group_by_keys[0].value #=> String
+    #   resp.results[0].metrics_results #=> Array
+    #   resp.results[0].metrics_results[0].name #=> String, one of "Count", "Success", "Failed", "Dropped", "Retry"
+    #   resp.results[0].metrics_results[0].statistic #=> String, one of "Sum", "Avg", "Max"
+    #   resp.results[0].metrics_results[0].value #=> Float
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListIntentStageMetrics AWS API Documentation
+    #
+    # @overload list_intent_stage_metrics(params = {})
+    # @param [Hash] params ({})
+    def list_intent_stage_metrics(params = {}, options = {})
+      req = build_request(:list_intent_stage_metrics, params)
+      req.send_request(options)
+    end
+
     # Get a list of intents that meet the specified criteria.
     #
     # @option params [required, String] :bot_id
@@ -5941,6 +6321,267 @@ module Aws::LexModelsV2
     # @param [Hash] params ({})
     def list_recommended_intents(params = {}, options = {})
       req = build_request(:list_recommended_intents, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of metadata for individual user sessions with your
+    # bot. The `startDateTime` and `endDateTime` fields are required. These
+    # fields define a time range for which you want to retrieve results. Of
+    # the optional fields, you can organize the results in the following
+    # ways:
+    #
+    # * Use the `filters` field to filter the results and the `sortBy` field
+    #   to specify the values by which to sort the results.
+    #
+    # * Use the `maxResults` field to limit the number of results to return
+    #   in a single response and the `nextToken` field to return the next
+    #   batch of results if the response does not return the full set of
+    #   results.
+    #
+    # @option params [required, String] :bot_id
+    #   The identifier for the bot for which you want to retrieve session
+    #   analytics.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_date_time
+    #   The date and time that marks the beginning of the range of time for
+    #   which you want to see session analytics.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_date_time
+    #   The date and time that marks the end of the range of time for which
+    #   you want to see session analytics.
+    #
+    # @option params [Types::SessionDataSortBy] :sort_by
+    #   An object specifying the measure and method by which to sort the
+    #   session analytics data.
+    #
+    # @option params [Array<Types::AnalyticsSessionFilter>] :filters
+    #   A list of objects, each of which describes a condition by which you
+    #   want to filter the results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in each page of results. If
+    #   there are fewer results than the maximum page size, only the actual
+    #   number of results are returned.
+    #
+    # @option params [String] :next_token
+    #   If the response from the ListSessionAnalyticsData operation contains
+    #   more results than specified in the maxResults parameter, a token is
+    #   returned in the response.
+    #
+    #   Use the returned token in the nextToken parameter of a
+    #   ListSessionAnalyticsData request to return the next page of results.
+    #   For a complete set of results, call the ListSessionAnalyticsData
+    #   operation until the nextToken returned in the response is null.
+    #
+    # @return [Types::ListSessionAnalyticsDataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSessionAnalyticsDataResponse#bot_id #bot_id} => String
+    #   * {Types::ListSessionAnalyticsDataResponse#next_token #next_token} => String
+    #   * {Types::ListSessionAnalyticsDataResponse#sessions #sessions} => Array&lt;Types::SessionSpecification&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_session_analytics_data({
+    #     bot_id: "Id", # required
+    #     start_date_time: Time.now, # required
+    #     end_date_time: Time.now, # required
+    #     sort_by: {
+    #       name: "ConversationStartTime", # required, accepts ConversationStartTime, NumberOfTurns, Duration
+    #       order: "Ascending", # required, accepts Ascending, Descending
+    #     },
+    #     filters: [
+    #       {
+    #         name: "BotAliasId", # required, accepts BotAliasId, BotVersion, LocaleId, Modality, Channel, Duration, ConversationEndState, SessionId, OriginatingRequestId, IntentPath
+    #         operator: "EQ", # required, accepts EQ, GT, LT
+    #         values: ["AnalyticsFilterValue"], # required
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.next_token #=> String
+    #   resp.sessions #=> Array
+    #   resp.sessions[0].bot_alias_id #=> String
+    #   resp.sessions[0].bot_version #=> String
+    #   resp.sessions[0].locale_id #=> String
+    #   resp.sessions[0].channel #=> String, one of "Facebook", "Slack", "TwilioSms"
+    #   resp.sessions[0].session_id #=> String
+    #   resp.sessions[0].conversation_start_time #=> Time
+    #   resp.sessions[0].conversation_end_time #=> Time
+    #   resp.sessions[0].conversation_duration_seconds #=> Integer
+    #   resp.sessions[0].conversation_end_state #=> String, one of "Success", "Failure", "Dropped"
+    #   resp.sessions[0].mode #=> String, one of "Speech", "Text", "DTMF", "MultiMode"
+    #   resp.sessions[0].number_of_turns #=> Integer
+    #   resp.sessions[0].invoked_intent_samples #=> Array
+    #   resp.sessions[0].invoked_intent_samples[0].intent_name #=> String
+    #   resp.sessions[0].originating_request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListSessionAnalyticsData AWS API Documentation
+    #
+    # @overload list_session_analytics_data(params = {})
+    # @param [Hash] params ({})
+    def list_session_analytics_data(params = {}, options = {})
+      req = build_request(:list_session_analytics_data, params)
+      req.send_request(options)
+    end
+
+    # Retrieves summary metrics for the user sessions with your bot. The
+    # following fields are required:
+    #
+    # * `metrics` – A list of [AnalyticsSessionMetric][1] objects. In each
+    #   object, use the `name` field to specify the metric to calculate, the
+    #   `statistic` field to specify whether to calculate the `Sum`,
+    #   `Average`, or `Max` number, and the `order` field to specify whether
+    #   to sort the results in `Ascending` or `Descending` order.
+    #
+    # * `startDateTime` and `endDateTime` – Define a time range for which
+    #   you want to retrieve results.
+    #
+    # Of the optional fields, you can organize the results in the following
+    # ways:
+    #
+    # * Use the `filters` field to filter the results, the `groupBy` field
+    #   to specify categories by which to group the results, and the `binBy`
+    #   field to specify time intervals by which to group the results.
+    #
+    # * Use the `maxResults` field to limit the number of results to return
+    #   in a single response and the `nextToken` field to return the next
+    #   batch of results if the response does not return the full set of
+    #   results.
+    #
+    # Note that an `order` field exists in both `binBy` and `metrics`.
+    # Currently, you can specify it in either field, but not in both.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_AnalyticsSessionMetric.html
+    #
+    # @option params [required, String] :bot_id
+    #   The identifier for the bot for which you want to retrieve session
+    #   metrics.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_date_time
+    #   The date and time that marks the beginning of the range of time for
+    #   which you want to see session metrics.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_date_time
+    #   The date and time that marks the end of the range of time for which
+    #   you want to see session metrics.
+    #
+    # @option params [required, Array<Types::AnalyticsSessionMetric>] :metrics
+    #   A list of objects, each of which contains a metric you want to list,
+    #   the statistic for the metric you want to return, and the method by
+    #   which to organize the results.
+    #
+    # @option params [Array<Types::AnalyticsBinBySpecification>] :bin_by
+    #   A list of objects, each of which contains specifications for
+    #   organizing the results by time.
+    #
+    # @option params [Array<Types::AnalyticsSessionGroupBySpecification>] :group_by
+    #   A list of objects, each of which specifies how to group the results.
+    #   You can group by the following criteria:
+    #
+    #   * `ConversationEndState` – The final state of the conversation. The
+    #     possible end states are detailed in [Key definitions][1] in the user
+    #     guide.
+    #
+    #   * `LocaleId` – The unique identifier of the bot locale.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/analytics-key-definitions-conversations
+    #
+    # @option params [Array<Types::AnalyticsSessionFilter>] :filters
+    #   A list of objects, each of which describes a condition by which you
+    #   want to filter the results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in each page of results. If
+    #   there are fewer results than the maximum page size, only the actual
+    #   number of results are returned.
+    #
+    # @option params [String] :next_token
+    #   If the response from the ListSessionMetrics operation contains more
+    #   results than specified in the maxResults parameter, a token is
+    #   returned in the response.
+    #
+    #   Use the returned token in the nextToken parameter of a
+    #   ListSessionMetrics request to return the next page of results. For a
+    #   complete set of results, call the ListSessionMetrics operation until
+    #   the nextToken returned in the response is null.
+    #
+    # @return [Types::ListSessionMetricsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSessionMetricsResponse#bot_id #bot_id} => String
+    #   * {Types::ListSessionMetricsResponse#results #results} => Array&lt;Types::AnalyticsSessionResult&gt;
+    #   * {Types::ListSessionMetricsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_session_metrics({
+    #     bot_id: "Id", # required
+    #     start_date_time: Time.now, # required
+    #     end_date_time: Time.now, # required
+    #     metrics: [ # required
+    #       {
+    #         name: "Count", # required, accepts Count, Success, Failure, Dropped, Duration, TurnsPerConversation, Concurrency
+    #         statistic: "Sum", # required, accepts Sum, Avg, Max
+    #         order: "Ascending", # accepts Ascending, Descending
+    #       },
+    #     ],
+    #     bin_by: [
+    #       {
+    #         name: "ConversationStartTime", # required, accepts ConversationStartTime, UtteranceTimestamp
+    #         interval: "OneHour", # required, accepts OneHour, OneDay
+    #         order: "Ascending", # accepts Ascending, Descending
+    #       },
+    #     ],
+    #     group_by: [
+    #       {
+    #         name: "ConversationEndState", # required, accepts ConversationEndState, LocaleId
+    #       },
+    #     ],
+    #     filters: [
+    #       {
+    #         name: "BotAliasId", # required, accepts BotAliasId, BotVersion, LocaleId, Modality, Channel, Duration, ConversationEndState, SessionId, OriginatingRequestId, IntentPath
+    #         operator: "EQ", # required, accepts EQ, GT, LT
+    #         values: ["AnalyticsFilterValue"], # required
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.results #=> Array
+    #   resp.results[0].bin_keys #=> Array
+    #   resp.results[0].bin_keys[0].name #=> String, one of "ConversationStartTime", "UtteranceTimestamp"
+    #   resp.results[0].bin_keys[0].value #=> Integer
+    #   resp.results[0].group_by_keys #=> Array
+    #   resp.results[0].group_by_keys[0].name #=> String, one of "ConversationEndState", "LocaleId"
+    #   resp.results[0].group_by_keys[0].value #=> String
+    #   resp.results[0].metrics_results #=> Array
+    #   resp.results[0].metrics_results[0].name #=> String, one of "Count", "Success", "Failure", "Dropped", "Duration", "TurnsPerConversation", "Concurrency"
+    #   resp.results[0].metrics_results[0].statistic #=> String, one of "Sum", "Avg", "Max"
+    #   resp.results[0].metrics_results[0].value #=> Float
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListSessionMetrics AWS API Documentation
+    #
+    # @overload list_session_metrics(params = {})
+    # @param [Hash] params ({})
+    def list_session_metrics(params = {}, options = {})
+      req = build_request(:list_session_metrics, params)
       req.send_request(options)
     end
 
@@ -6524,6 +7165,298 @@ module Aws::LexModelsV2
     # @param [Hash] params ({})
     def list_test_sets(params = {}, options = {})
       req = build_request(:list_test_sets, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of metadata for individual user utterances to your
+    # bot. The `startDateTime` and `endDateTime` fields are required. These
+    # fields define a time range for which you want to retrieve results. Of
+    # the optional fields, you can organize the results in the following
+    # ways:
+    #
+    # * Use the `filters` field to filter the results and the `sortBy` field
+    #   to specify the values by which to sort the results.
+    #
+    # * Use the `maxResults` field to limit the number of results to return
+    #   in a single response and the `nextToken` field to return the next
+    #   batch of results if the response does not return the full set of
+    #   results.
+    #
+    # @option params [required, String] :bot_id
+    #   The identifier for the bot for which you want to retrieve utterance
+    #   analytics.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_date_time
+    #   The date and time that marks the beginning of the range of time for
+    #   which you want to see utterance analytics.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_date_time
+    #   The date and time that marks the end of the range of time for which
+    #   you want to see utterance analytics.
+    #
+    # @option params [Types::UtteranceDataSortBy] :sort_by
+    #   An object specifying the measure and method by which to sort the
+    #   utterance analytics data.
+    #
+    # @option params [Array<Types::AnalyticsUtteranceFilter>] :filters
+    #   A list of objects, each of which describes a condition by which you
+    #   want to filter the results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in each page of results. If
+    #   there are fewer results than the maximum page size, only the actual
+    #   number of results are returned.
+    #
+    # @option params [String] :next_token
+    #   If the response from the ListUtteranceAnalyticsData operation contains
+    #   more results than specified in the maxResults parameter, a token is
+    #   returned in the response.
+    #
+    #   Use the returned token in the nextToken parameter of a
+    #   ListUtteranceAnalyticsData request to return the next page of results.
+    #   For a complete set of results, call the ListUtteranceAnalyticsData
+    #   operation until the nextToken returned in the response is null.
+    #
+    # @return [Types::ListUtteranceAnalyticsDataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListUtteranceAnalyticsDataResponse#bot_id #bot_id} => String
+    #   * {Types::ListUtteranceAnalyticsDataResponse#next_token #next_token} => String
+    #   * {Types::ListUtteranceAnalyticsDataResponse#utterances #utterances} => Array&lt;Types::UtteranceSpecification&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_utterance_analytics_data({
+    #     bot_id: "Id", # required
+    #     start_date_time: Time.now, # required
+    #     end_date_time: Time.now, # required
+    #     sort_by: {
+    #       name: "UtteranceTimestamp", # required, accepts UtteranceTimestamp
+    #       order: "Ascending", # required, accepts Ascending, Descending
+    #     },
+    #     filters: [
+    #       {
+    #         name: "BotAliasId", # required, accepts BotAliasId, BotVersion, LocaleId, Modality, Channel, SessionId, OriginatingRequestId, UtteranceState, UtteranceText
+    #         operator: "EQ", # required, accepts EQ, GT, LT
+    #         values: ["AnalyticsFilterValue"], # required
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.next_token #=> String
+    #   resp.utterances #=> Array
+    #   resp.utterances[0].bot_alias_id #=> String
+    #   resp.utterances[0].bot_version #=> String
+    #   resp.utterances[0].locale_id #=> String
+    #   resp.utterances[0].session_id #=> String
+    #   resp.utterances[0].channel #=> String, one of "Facebook", "Slack", "TwilioSms"
+    #   resp.utterances[0].mode #=> String, one of "Speech", "Text", "DTMF", "MultiMode"
+    #   resp.utterances[0].conversation_start_time #=> Time
+    #   resp.utterances[0].conversation_end_time #=> Time
+    #   resp.utterances[0].utterance #=> String
+    #   resp.utterances[0].utterance_timestamp #=> Time
+    #   resp.utterances[0].audio_voice_duration_millis #=> Integer
+    #   resp.utterances[0].utterance_understood #=> Boolean
+    #   resp.utterances[0].input_type #=> String
+    #   resp.utterances[0].output_type #=> String
+    #   resp.utterances[0].associated_intent_name #=> String
+    #   resp.utterances[0].associated_slot_name #=> String
+    #   resp.utterances[0].intent_state #=> String, one of "Failed", "Fulfilled", "InProgress", "ReadyForFulfillment", "Waiting", "FulfillmentInProgress"
+    #   resp.utterances[0].dialog_action_type #=> String
+    #   resp.utterances[0].bot_response_audio_voice_id #=> String
+    #   resp.utterances[0].slots_filled_in_session #=> String
+    #   resp.utterances[0].utterance_request_id #=> String
+    #   resp.utterances[0].bot_responses #=> Array
+    #   resp.utterances[0].bot_responses[0].content #=> String
+    #   resp.utterances[0].bot_responses[0].content_type #=> String, one of "PlainText", "CustomPayload", "SSML", "ImageResponseCard"
+    #   resp.utterances[0].bot_responses[0].image_response_card.title #=> String
+    #   resp.utterances[0].bot_responses[0].image_response_card.subtitle #=> String
+    #   resp.utterances[0].bot_responses[0].image_response_card.image_url #=> String
+    #   resp.utterances[0].bot_responses[0].image_response_card.buttons #=> Array
+    #   resp.utterances[0].bot_responses[0].image_response_card.buttons[0].text #=> String
+    #   resp.utterances[0].bot_responses[0].image_response_card.buttons[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListUtteranceAnalyticsData AWS API Documentation
+    #
+    # @overload list_utterance_analytics_data(params = {})
+    # @param [Hash] params ({})
+    def list_utterance_analytics_data(params = {}, options = {})
+      req = build_request(:list_utterance_analytics_data, params)
+      req.send_request(options)
+    end
+
+    # Retrieves summary metrics for the utterances in your bot. The
+    # following fields are required:
+    #
+    # * `metrics` – A list of [AnalyticsUtteranceMetric][1] objects. In each
+    #   object, use the `name` field to specify the metric to calculate, the
+    #   `statistic` field to specify whether to calculate the `Sum`,
+    #   `Average`, or `Max` number, and the `order` field to specify whether
+    #   to sort the results in `Ascending` or `Descending` order.
+    #
+    # * `startDateTime` and `endDateTime` – Define a time range for which
+    #   you want to retrieve results.
+    #
+    # Of the optional fields, you can organize the results in the following
+    # ways:
+    #
+    # * Use the `filters` field to filter the results, the `groupBy` field
+    #   to specify categories by which to group the results, and the `binBy`
+    #   field to specify time intervals by which to group the results.
+    #
+    # * Use the `maxResults` field to limit the number of results to return
+    #   in a single response and the `nextToken` field to return the next
+    #   batch of results if the response does not return the full set of
+    #   results.
+    #
+    # Note that an `order` field exists in both `binBy` and `metrics`.
+    # Currently, you can specify it in either field, but not in both.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_AnalyticsUtteranceMetric.html
+    #
+    # @option params [required, String] :bot_id
+    #   The identifier for the bot for which you want to retrieve utterance
+    #   metrics.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_date_time
+    #   The date and time that marks the beginning of the range of time for
+    #   which you want to see utterance metrics.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_date_time
+    #   The date and time that marks the end of the range of time for which
+    #   you want to see utterance metrics.
+    #
+    # @option params [required, Array<Types::AnalyticsUtteranceMetric>] :metrics
+    #   A list of objects, each of which contains a metric you want to list,
+    #   the statistic for the metric you want to return, and the method by
+    #   which to organize the results.
+    #
+    # @option params [Array<Types::AnalyticsBinBySpecification>] :bin_by
+    #   A list of objects, each of which contains specifications for
+    #   organizing the results by time.
+    #
+    # @option params [Array<Types::AnalyticsUtteranceGroupBySpecification>] :group_by
+    #   A list of objects, each of which specifies how to group the results.
+    #   You can group by the following criteria:
+    #
+    #   * `UtteranceText` – The transcription of the utterance.
+    #
+    #   * `UtteranceState` – The state of the utterance. The possible states
+    #     are detailed in [Key definitions][1] in the user guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/analytics-key-definitions-utterances
+    #
+    # @option params [Array<Types::AnalyticsUtteranceAttribute>] :attributes
+    #   A list containing attributes related to the utterance that you want
+    #   the response to return. The following attributes are possible:
+    #
+    #   * `LastUsedIntent` – The last used intent at the time of the
+    #     utterance.
+    #
+    #   ^
+    #
+    # @option params [Array<Types::AnalyticsUtteranceFilter>] :filters
+    #   A list of objects, each of which describes a condition by which you
+    #   want to filter the results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in each page of results. If
+    #   there are fewer results than the maximum page size, only the actual
+    #   number of results are returned.
+    #
+    # @option params [String] :next_token
+    #   If the response from the ListUtteranceMetrics operation contains more
+    #   results than specified in the maxResults parameter, a token is
+    #   returned in the response.
+    #
+    #   Use the returned token in the nextToken parameter of a
+    #   ListUtteranceMetrics request to return the next page of results. For a
+    #   complete set of results, call the ListUtteranceMetrics operation until
+    #   the nextToken returned in the response is null.
+    #
+    # @return [Types::ListUtteranceMetricsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListUtteranceMetricsResponse#bot_id #bot_id} => String
+    #   * {Types::ListUtteranceMetricsResponse#results #results} => Array&lt;Types::AnalyticsUtteranceResult&gt;
+    #   * {Types::ListUtteranceMetricsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_utterance_metrics({
+    #     bot_id: "Id", # required
+    #     start_date_time: Time.now, # required
+    #     end_date_time: Time.now, # required
+    #     metrics: [ # required
+    #       {
+    #         name: "Count", # required, accepts Count, Missed, Detected, UtteranceTimestamp
+    #         statistic: "Sum", # required, accepts Sum, Avg, Max
+    #         order: "Ascending", # accepts Ascending, Descending
+    #       },
+    #     ],
+    #     bin_by: [
+    #       {
+    #         name: "ConversationStartTime", # required, accepts ConversationStartTime, UtteranceTimestamp
+    #         interval: "OneHour", # required, accepts OneHour, OneDay
+    #         order: "Ascending", # accepts Ascending, Descending
+    #       },
+    #     ],
+    #     group_by: [
+    #       {
+    #         name: "UtteranceText", # required, accepts UtteranceText, UtteranceState
+    #       },
+    #     ],
+    #     attributes: [
+    #       {
+    #         name: "LastUsedIntent", # required, accepts LastUsedIntent
+    #       },
+    #     ],
+    #     filters: [
+    #       {
+    #         name: "BotAliasId", # required, accepts BotAliasId, BotVersion, LocaleId, Modality, Channel, SessionId, OriginatingRequestId, UtteranceState, UtteranceText
+    #         operator: "EQ", # required, accepts EQ, GT, LT
+    #         values: ["AnalyticsFilterValue"], # required
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.results #=> Array
+    #   resp.results[0].bin_keys #=> Array
+    #   resp.results[0].bin_keys[0].name #=> String, one of "ConversationStartTime", "UtteranceTimestamp"
+    #   resp.results[0].bin_keys[0].value #=> Integer
+    #   resp.results[0].group_by_keys #=> Array
+    #   resp.results[0].group_by_keys[0].name #=> String, one of "UtteranceText", "UtteranceState"
+    #   resp.results[0].group_by_keys[0].value #=> String
+    #   resp.results[0].metrics_results #=> Array
+    #   resp.results[0].metrics_results[0].name #=> String, one of "Count", "Missed", "Detected", "UtteranceTimestamp"
+    #   resp.results[0].metrics_results[0].statistic #=> String, one of "Sum", "Avg", "Max"
+    #   resp.results[0].metrics_results[0].value #=> Float
+    #   resp.results[0].attribute_results #=> Array
+    #   resp.results[0].attribute_results[0].last_used_intent #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListUtteranceMetrics AWS API Documentation
+    #
+    # @overload list_utterance_metrics(params = {})
+    # @param [Hash] params ({})
+    def list_utterance_metrics(params = {}, options = {})
+      req = build_request(:list_utterance_metrics, params)
       req.send_request(options)
     end
 
@@ -8757,7 +9690,7 @@ module Aws::LexModelsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

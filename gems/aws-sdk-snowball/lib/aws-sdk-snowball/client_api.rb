@@ -16,6 +16,7 @@ module Aws::Snowball
     Address = Shapes::StructureShape.new(name: 'Address')
     AddressId = Shapes::StringShape.new(name: 'AddressId')
     AddressList = Shapes::ListShape.new(name: 'AddressList')
+    AddressType = Shapes::StringShape.new(name: 'AddressType')
     AmiId = Shapes::StringShape.new(name: 'AmiId')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelClusterRequest = Shapes::StructureShape.new(name: 'CancelClusterRequest')
@@ -55,11 +56,13 @@ module Aws::Snowball
     DescribeReturnShippingLabelRequest = Shapes::StructureShape.new(name: 'DescribeReturnShippingLabelRequest')
     DescribeReturnShippingLabelResult = Shapes::StructureShape.new(name: 'DescribeReturnShippingLabelResult')
     DeviceConfiguration = Shapes::StructureShape.new(name: 'DeviceConfiguration')
+    DevicePickupId = Shapes::StringShape.new(name: 'DevicePickupId')
     DeviceServiceName = Shapes::StringShape.new(name: 'DeviceServiceName')
     EKSOnDeviceServiceConfiguration = Shapes::StructureShape.new(name: 'EKSOnDeviceServiceConfiguration')
     Ec2AmiResource = Shapes::StructureShape.new(name: 'Ec2AmiResource')
     Ec2AmiResourceList = Shapes::ListShape.new(name: 'Ec2AmiResourceList')
     Ec2RequestFailedException = Shapes::StructureShape.new(name: 'Ec2RequestFailedException')
+    Email = Shapes::StringShape.new(name: 'Email')
     EventTriggerDefinition = Shapes::StructureShape.new(name: 'EventTriggerDefinition')
     EventTriggerDefinitionList = Shapes::ListShape.new(name: 'EventTriggerDefinitionList')
     GSTIN = Shapes::StringShape.new(name: 'GSTIN')
@@ -72,6 +75,7 @@ module Aws::Snowball
     GetSoftwareUpdatesRequest = Shapes::StructureShape.new(name: 'GetSoftwareUpdatesRequest')
     GetSoftwareUpdatesResult = Shapes::StructureShape.new(name: 'GetSoftwareUpdatesResult')
     INDTaxDocuments = Shapes::StructureShape.new(name: 'INDTaxDocuments')
+    ImpactLevel = Shapes::StringShape.new(name: 'ImpactLevel')
     InitialClusterSize = Shapes::IntegerShape.new(name: 'InitialClusterSize')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InvalidAddressException = Shapes::StructureShape.new(name: 'InvalidAddressException')
@@ -106,6 +110,8 @@ module Aws::Snowball
     ListLimit = Shapes::IntegerShape.new(name: 'ListLimit')
     ListLongTermPricingRequest = Shapes::StructureShape.new(name: 'ListLongTermPricingRequest')
     ListLongTermPricingResult = Shapes::StructureShape.new(name: 'ListLongTermPricingResult')
+    ListPickupLocationsRequest = Shapes::StructureShape.new(name: 'ListPickupLocationsRequest')
+    ListPickupLocationsResult = Shapes::StructureShape.new(name: 'ListPickupLocationsResult')
     ListServiceVersionsRequest = Shapes::StructureShape.new(name: 'ListServiceVersionsRequest')
     ListServiceVersionsResult = Shapes::StructureShape.new(name: 'ListServiceVersionsResult')
     Long = Shapes::IntegerShape.new(name: 'Long')
@@ -119,6 +125,8 @@ module Aws::Snowball
     NodeFaultTolerance = Shapes::IntegerShape.new(name: 'NodeFaultTolerance')
     Notification = Shapes::StructureShape.new(name: 'Notification')
     OnDeviceServiceConfiguration = Shapes::StructureShape.new(name: 'OnDeviceServiceConfiguration')
+    PhoneNumber = Shapes::StringShape.new(name: 'PhoneNumber')
+    PickupDetails = Shapes::StructureShape.new(name: 'PickupDetails')
     RemoteManagement = Shapes::StringShape.new(name: 'RemoteManagement')
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
     ReturnShippingLabelAlreadyExistsException = Shapes::StructureShape.new(name: 'ReturnShippingLabelAlreadyExistsException')
@@ -174,6 +182,7 @@ module Aws::Snowball
     Address.add_member(:postal_code, Shapes::ShapeRef.new(shape: String, location_name: "PostalCode"))
     Address.add_member(:phone_number, Shapes::ShapeRef.new(shape: String, location_name: "PhoneNumber"))
     Address.add_member(:is_restricted, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsRestricted"))
+    Address.add_member(:type, Shapes::ShapeRef.new(shape: AddressType, location_name: "Type"))
     Address.struct_class = Types::Address
 
     AddressList.member = Shapes::ShapeRef.new(shape: Address)
@@ -272,6 +281,8 @@ module Aws::Snowball
     CreateJobRequest.add_member(:device_configuration, Shapes::ShapeRef.new(shape: DeviceConfiguration, location_name: "DeviceConfiguration"))
     CreateJobRequest.add_member(:remote_management, Shapes::ShapeRef.new(shape: RemoteManagement, location_name: "RemoteManagement"))
     CreateJobRequest.add_member(:long_term_pricing_id, Shapes::ShapeRef.new(shape: LongTermPricingId, location_name: "LongTermPricingId"))
+    CreateJobRequest.add_member(:impact_level, Shapes::ShapeRef.new(shape: ImpactLevel, location_name: "ImpactLevel"))
+    CreateJobRequest.add_member(:pickup_details, Shapes::ShapeRef.new(shape: PickupDetails, location_name: "PickupDetails"))
     CreateJobRequest.struct_class = Types::CreateJobRequest
 
     CreateJobResult.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
@@ -279,7 +290,7 @@ module Aws::Snowball
 
     CreateLongTermPricingRequest.add_member(:long_term_pricing_type, Shapes::ShapeRef.new(shape: LongTermPricingType, required: true, location_name: "LongTermPricingType"))
     CreateLongTermPricingRequest.add_member(:is_long_term_pricing_auto_renew, Shapes::ShapeRef.new(shape: JavaBoolean, location_name: "IsLongTermPricingAutoRenew"))
-    CreateLongTermPricingRequest.add_member(:snowball_type, Shapes::ShapeRef.new(shape: SnowballType, location_name: "SnowballType"))
+    CreateLongTermPricingRequest.add_member(:snowball_type, Shapes::ShapeRef.new(shape: SnowballType, required: true, location_name: "SnowballType"))
     CreateLongTermPricingRequest.struct_class = Types::CreateLongTermPricingRequest
 
     CreateLongTermPricingResult.add_member(:long_term_pricing_id, Shapes::ShapeRef.new(shape: LongTermPricingId, location_name: "LongTermPricingId"))
@@ -441,6 +452,9 @@ module Aws::Snowball
     JobMetadata.add_member(:remote_management, Shapes::ShapeRef.new(shape: RemoteManagement, location_name: "RemoteManagement"))
     JobMetadata.add_member(:long_term_pricing_id, Shapes::ShapeRef.new(shape: LongTermPricingId, location_name: "LongTermPricingId"))
     JobMetadata.add_member(:on_device_service_configuration, Shapes::ShapeRef.new(shape: OnDeviceServiceConfiguration, location_name: "OnDeviceServiceConfiguration"))
+    JobMetadata.add_member(:impact_level, Shapes::ShapeRef.new(shape: ImpactLevel, location_name: "ImpactLevel"))
+    JobMetadata.add_member(:pickup_details, Shapes::ShapeRef.new(shape: PickupDetails, location_name: "PickupDetails"))
+    JobMetadata.add_member(:snowball_id, Shapes::ShapeRef.new(shape: String, location_name: "SnowballId"))
     JobMetadata.struct_class = Types::JobMetadata
 
     JobMetadataList.member = Shapes::ShapeRef.new(shape: JobMetadata)
@@ -506,6 +520,14 @@ module Aws::Snowball
     ListLongTermPricingResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListLongTermPricingResult.struct_class = Types::ListLongTermPricingResult
 
+    ListPickupLocationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListLimit, location_name: "MaxResults"))
+    ListPickupLocationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListPickupLocationsRequest.struct_class = Types::ListPickupLocationsRequest
+
+    ListPickupLocationsResult.add_member(:addresses, Shapes::ShapeRef.new(shape: AddressList, location_name: "Addresses"))
+    ListPickupLocationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListPickupLocationsResult.struct_class = Types::ListPickupLocationsResult
+
     ListServiceVersionsRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "ServiceName"))
     ListServiceVersionsRequest.add_member(:dependent_services, Shapes::ShapeRef.new(shape: DependentServiceList, location_name: "DependentServices"))
     ListServiceVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListLimit, location_name: "MaxResults"))
@@ -543,6 +565,7 @@ module Aws::Snowball
     Notification.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: SnsTopicARN, location_name: "SnsTopicARN"))
     Notification.add_member(:job_states_to_notify, Shapes::ShapeRef.new(shape: JobStateList, location_name: "JobStatesToNotify"))
     Notification.add_member(:notify_all, Shapes::ShapeRef.new(shape: Boolean, location_name: "NotifyAll"))
+    Notification.add_member(:device_pickup_sns_topic_arn, Shapes::ShapeRef.new(shape: SnsTopicARN, location_name: "DevicePickupSnsTopicARN"))
     Notification.struct_class = Types::Notification
 
     OnDeviceServiceConfiguration.add_member(:nfs_on_device_service, Shapes::ShapeRef.new(shape: NFSOnDeviceServiceConfiguration, location_name: "NFSOnDeviceService"))
@@ -550,6 +573,15 @@ module Aws::Snowball
     OnDeviceServiceConfiguration.add_member(:eks_on_device_service, Shapes::ShapeRef.new(shape: EKSOnDeviceServiceConfiguration, location_name: "EKSOnDeviceService"))
     OnDeviceServiceConfiguration.add_member(:s3_on_device_service, Shapes::ShapeRef.new(shape: S3OnDeviceServiceConfiguration, location_name: "S3OnDeviceService"))
     OnDeviceServiceConfiguration.struct_class = Types::OnDeviceServiceConfiguration
+
+    PickupDetails.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    PickupDetails.add_member(:phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "PhoneNumber"))
+    PickupDetails.add_member(:email, Shapes::ShapeRef.new(shape: Email, location_name: "Email"))
+    PickupDetails.add_member(:identification_number, Shapes::ShapeRef.new(shape: String, location_name: "IdentificationNumber"))
+    PickupDetails.add_member(:identification_expiration_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "IdentificationExpirationDate"))
+    PickupDetails.add_member(:identification_issuing_org, Shapes::ShapeRef.new(shape: String, location_name: "IdentificationIssuingOrg"))
+    PickupDetails.add_member(:device_pickup_id, Shapes::ShapeRef.new(shape: DevicePickupId, location_name: "DevicePickupId"))
+    PickupDetails.struct_class = Types::PickupDetails
 
     ReturnShippingLabelAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ReturnShippingLabelAlreadyExistsException.struct_class = Types::ReturnShippingLabelAlreadyExistsException
@@ -623,6 +655,7 @@ module Aws::Snowball
     UpdateJobRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     UpdateJobRequest.add_member(:snowball_capacity_preference, Shapes::ShapeRef.new(shape: SnowballCapacity, location_name: "SnowballCapacityPreference"))
     UpdateJobRequest.add_member(:forwarding_address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "ForwardingAddressId"))
+    UpdateJobRequest.add_member(:pickup_details, Shapes::ShapeRef.new(shape: PickupDetails, location_name: "PickupDetails"))
     UpdateJobRequest.struct_class = Types::UpdateJobRequest
 
     UpdateJobResult.struct_class = Types::UpdateJobResult
@@ -903,6 +936,21 @@ module Aws::Snowball
         o.output = Shapes::ShapeRef.new(shape: ListLongTermPricingResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_pickup_locations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPickupLocations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListPickupLocationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPickupLocationsResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
