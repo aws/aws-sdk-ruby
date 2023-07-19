@@ -35,7 +35,7 @@ module Aws::EC2
     end
     alias :dhcp_options_id :id
 
-    # One or more DHCP options in the set.
+    # The DHCP options in the set.
     # @return [Array<Types::DhcpConfiguration>]
     def dhcp_configurations
       data[:dhcp_configurations]

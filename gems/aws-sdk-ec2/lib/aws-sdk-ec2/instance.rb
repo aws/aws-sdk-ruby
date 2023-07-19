@@ -675,10 +675,10 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, Array<String>] :groups
-    #   The ID of one or more of the VPC's security groups. You cannot
-    #   specify security groups from a different VPC.
+    #   The IDs of the security groups. You cannot specify security groups
+    #   from a different VPC.
     # @option options [required, String] :vpc_id
-    #   The ID of a ClassicLink-enabled VPC.
+    #   The ID of the ClassicLink-enabled VPC.
     # @return [Types::AttachClassicLinkVpcResult]
     def attach_classic_link_vpc(options = {})
       options = options.merge(instance_id: @id)
@@ -796,19 +796,20 @@ module Aws::EC2
     #   brackets (\[\]), spaces ( ), periods (.), slashes (/), dashes (-),
     #   single quotes ('), at-signs (@), or underscores(\_)
     # @option options [Boolean] :no_reboot
-    #   By default, when Amazon EC2 creates the new AMI, it reboots the
-    #   instance so that it can take snapshots of the attached volumes while
-    #   data is at rest, in order to ensure a consistent state. You can set
-    #   the `NoReboot` parameter to `true` in the API request, or use the
-    #   `--no-reboot` option in the CLI to prevent Amazon EC2 from shutting
-    #   down and rebooting the instance.
+    #   Indicates whether or not the instance should be automatically rebooted
+    #   before creating the image. Specify one of the following values:
     #
-    #   If you choose to bypass the shutdown and reboot process by setting the
-    #   `NoReboot` parameter to `true` in the API request, or by using the
-    #   `--no-reboot` option in the CLI, we can't guarantee the file system
-    #   integrity of the created image.
+    #   * `true` - The instance is not rebooted before creating the image.
+    #     This creates crash-consistent snapshots that include only the data
+    #     that has been written to the volumes at the time the snapshots are
+    #     created. Buffered data and data in memory that has not yet been
+    #     written to the volumes is not included in the snapshots.
     #
-    #   Default: `false` (follow standard reboot process)
+    #   * `false` - The instance is rebooted before creating the image. This
+    #     ensures that all buffered data and data in memory is written to the
+    #     volumes before the snapshots are created.
+    #
+    #   Default: `false`
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the AMI and snapshots on creation. You can tag
     #   the AMI, the snapshots, or both.

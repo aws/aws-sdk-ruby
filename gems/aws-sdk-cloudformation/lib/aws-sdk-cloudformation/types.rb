@@ -3972,6 +3972,10 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html
     #   @return [String]
     #
+    # @!attribute [rw] template_summary_config
+    #   Specifies options for the `GetTemplateSummary` API action.
+    #   @return [Types::TemplateSummaryConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplateSummaryInput AWS API Documentation
     #
     class GetTemplateSummaryInput < Struct.new(
@@ -3979,7 +3983,8 @@ module Aws::CloudFormation
       :template_url,
       :stack_name,
       :stack_set_name,
-      :call_as)
+      :call_as,
+      :template_summary_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4044,6 +4049,10 @@ module Aws::CloudFormation
     #   `AWS::S3::Bucket` resource.
     #   @return [Array<Types::ResourceIdentifierSummary>]
     #
+    # @!attribute [rw] warnings
+    #   An object containing any warnings returned.
+    #   @return [Types::Warnings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplateSummaryOutput AWS API Documentation
     #
     class GetTemplateSummaryOutput < Struct.new(
@@ -4055,7 +4064,8 @@ module Aws::CloudFormation
       :version,
       :metadata,
       :declared_transforms,
-      :resource_identifier_summaries)
+      :resource_identifier_summaries,
+      :warnings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8465,6 +8475,22 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # Options for the `GetTemplateSummary` API action.
+    #
+    # @!attribute [rw] treat_unrecognized_resource_types_as_warnings
+    #   If set to `True`, any unrecognized resource types generate warnings
+    #   and not an error. Any unrecognized resource types are returned in
+    #   the `Warnings` output parameter.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/TemplateSummaryConfig AWS API Documentation
+    #
+    class TemplateSummaryConfig < Struct.new(
+      :treat_unrecognized_resource_types_as_warnings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the extension.
     #
@@ -9905,6 +9931,23 @@ module Aws::CloudFormation
       :capabilities,
       :capabilities_reason,
       :declared_transforms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains any warnings returned by the `GetTemplateSummary` API action.
+    #
+    # @!attribute [rw] unrecognized_resource_types
+    #   A list of all of the unrecognized resource types. This is only
+    #   returned if the `TemplateSummaryConfig` parameter has the
+    #   `TreatUnrecognizedResourceTypesAsWarning` configuration set to
+    #   `True`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Warnings AWS API Documentation
+    #
+    class Warnings < Struct.new(
+      :unrecognized_resource_types)
       SENSITIVE = []
       include Aws::Structure
     end

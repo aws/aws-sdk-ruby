@@ -467,6 +467,7 @@ module Aws
             'MediaStore' => 'mediastore',
             'MediaStoreData' => 'data.mediastore',
             'MediaTailor' => 'api.mediatailor',
+            'MedicalImaging' => 'medical-imaging',
             'MemoryDB' => 'memory-db',
             'Mgn' => 'mgn',
             'MigrationHub' => 'mgh',

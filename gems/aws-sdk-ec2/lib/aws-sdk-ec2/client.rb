@@ -1489,14 +1489,14 @@ module Aws::EC2
 
     # Assigns one or more private IPv4 addresses to a private NAT gateway.
     # For more information, see [Work with NAT gateways][1] in the *Amazon
-    # Virtual Private Cloud User Guide*.
+    # VPC User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-working-with
     #
     # @option params [required, String] :nat_gateway_id
-    #   The NAT gateway ID.
+    #   The ID of the NAT gateway.
     #
     # @option params [Array<String>] :private_ip_addresses
     #   The private IPv4 addresses you want to assign to the private NAT
@@ -1744,8 +1744,8 @@ module Aws::EC2
     # the instance renews its DHCP lease. You can explicitly renew the lease
     # using the operating system on the instance.
     #
-    # For more information, see [DHCP options sets][1] in the *Amazon
-    # Virtual Private Cloud User Guide*.
+    # For more information, see [DHCP options sets][1] in the *Amazon VPC
+    # User Guide*.
     #
     #
     #
@@ -2088,12 +2088,12 @@ module Aws::EC2
 
     # Associates Elastic IP addresses (EIPs) and private IPv4 addresses with
     # a public NAT gateway. For more information, see [Work with NAT
-    # gateways][1] in the *Amazon Virtual Private Cloud User Guide*.
+    # gateways][1] in the *Amazon VPC User Guide*.
     #
     # By default, you can associate up to 2 Elastic IP addresses per public
     # NAT gateway. You can increase the limit by requesting a quota
     # adjustment. For more information, see [Elastic IP address quotas][2]
-    # in the *Amazon Virtual Private Cloud User Guide*.
+    # in the *Amazon VPC User Guide*.
     #
     #
     #
@@ -2101,7 +2101,7 @@ module Aws::EC2
     # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-eips
     #
     # @option params [required, String] :nat_gateway_id
-    #   The NAT gateway ID.
+    #   The ID of the NAT gateway.
     #
     # @option params [required, Array<String>] :allocation_ids
     #   The allocation IDs of EIPs that you want to associate with your NAT
@@ -2159,8 +2159,8 @@ module Aws::EC2
     # an association ID, which you need in order to disassociate the route
     # table later. A route table can be associated with multiple subnets.
     #
-    # For more information, see [Route tables][1] in the *Amazon Virtual
-    # Private Cloud User Guide*.
+    # For more information, see [Route tables][1] in the *Amazon VPC User
+    # Guide*.
     #
     #
     #
@@ -2512,13 +2512,13 @@ module Aws::EC2
     # block, an IPv6 pool, or an Amazon-provided IPv6 CIDR block.
     #
     # For more information about associating CIDR blocks with your VPC and
-    # applicable restrictions, see [VPC and subnet sizing][2] in the *Amazon
-    # Virtual Private Cloud User Guide*.
+    # applicable restrictions, see [IP addressing for your VPCs and
+    # subnets][2] in the *Amazon VPC User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html
-    # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#VPC_Sizing
+    # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html
     #
     # @option params [Boolean] :amazon_provided_ipv_6_cidr_block
     #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
@@ -2632,15 +2632,12 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
-    # EC2-Classic to a VPC. For more information, see [Migrate from
-    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # <note markdown="1"> This action is deprecated.
     #
     #  </note>
     #
     # Links an EC2-Classic instance to a ClassicLink-enabled VPC through one
-    # or more of the VPC's security groups. You cannot link an EC2-Classic
+    # or more of the VPC security groups. You cannot link an EC2-Classic
     # instance to more than one VPC at a time. You can only link an instance
     # that's in the `running` state. An instance is automatically unlinked
     # from a VPC when it's stopped - you can link it to the VPC again when
@@ -2653,10 +2650,6 @@ module Aws::EC2
     # Linking your instance to a VPC is sometimes referred to as *attaching*
     # your instance.
     #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
-    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -2664,15 +2657,14 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, Array<String>] :groups
-    #   The ID of one or more of the VPC's security groups. You cannot
-    #   specify security groups from a different VPC.
+    #   The IDs of the security groups. You cannot specify security groups
+    #   from a different VPC.
     #
     # @option params [required, String] :instance_id
-    #   The ID of an EC2-Classic instance to link to the ClassicLink-enabled
-    #   VPC.
+    #   The ID of the EC2-Classic instance.
     #
     # @option params [required, String] :vpc_id
-    #   The ID of a ClassicLink-enabled VPC.
+    #   The ID of the ClassicLink-enabled VPC.
     #
     # @return [Types::AttachClassicLinkVpcResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2702,12 +2694,12 @@ module Aws::EC2
 
     # Attaches an internet gateway or a virtual private gateway to a VPC,
     # enabling connectivity between the internet and the VPC. For more
-    # information about your VPC and internet gateway, see the [Amazon
-    # Virtual Private Cloud User Guide][1].
+    # information, see [Internet gateways][1] in the *Amazon VPC User
+    # Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -3140,8 +3132,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # \[VPC only\] Adds the specified outbound (egress) rules to a security
-    # group for use with a VPC.
+    # Adds the specified outbound (egress) rules to a security group for use
+    # with a VPC.
     #
     # An outbound rule permits instances to send traffic to the specified
     # IPv4 or IPv6 CIDR address ranges, or to the instances that are
@@ -3368,17 +3360,9 @@ module Aws::EC2
     # For more information about VPC security group quotas, see [Amazon VPC
     # quotas][1].
     #
-    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
-    # EC2-Classic to a VPC. For more information, see [Migrate from
-    # EC2-Classic to a VPC][2] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
-    #
-    #  </note>
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
     #
     # @option params [String] :cidr_ip
     #   The IPv4 address range, in CIDR format. You can't specify this
@@ -3403,8 +3387,8 @@ module Aws::EC2
     #   groups in a nondefault VPC, you must specify the security group ID.
     #
     # @option params [String] :group_name
-    #   \[EC2-Classic, default VPC\] The name of the security group. You must
-    #   specify either the security group ID or the security group name in the
+    #   \[Default VPC\] The name of the security group. You must specify
+    #   either the security group ID or the security group name in the
     #   request. For security groups in a nondefault VPC, you must specify the
     #   security group ID.
     #
@@ -3415,9 +3399,9 @@ module Aws::EC2
     #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
     #   Numbers][1]). To specify `icmpv6`, use a set of IP permissions.
     #
-    #   \[VPC only\] Use `-1` to specify all protocols. If you specify `-1` or
-    #   a protocol other than `tcp`, `udp`, or `icmp`, traffic on all ports is
-    #   allowed, regardless of any ports you specify.
+    #   Use `-1` to specify all protocols. If you specify `-1` or a protocol
+    #   other than `tcp`, `udp`, or `icmp`, traffic on all ports is allowed,
+    #   regardless of any ports you specify.
     #
     #   Alternatively, use a set of IP permissions to specify multiple rules
     #   and a description for the rule.
@@ -3427,16 +3411,16 @@ module Aws::EC2
     #   [1]: http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
     #
     # @option params [String] :source_security_group_name
-    #   \[EC2-Classic, default VPC\] The name of the source security group.
-    #   You can't specify this parameter in combination with the following
-    #   parameters: the CIDR IP address range, the start of the port range,
-    #   the IP protocol, and the end of the port range. Creates rules that
-    #   grant full ICMP, UDP, and TCP access. To create a rule with a specific
-    #   IP protocol and port range, use a set of IP permissions instead. For
-    #   EC2-VPC, the source security group must be in the same VPC.
+    #   \[Default VPC\] The name of the source security group. You can't
+    #   specify this parameter in combination with the following parameters:
+    #   the CIDR IP address range, the start of the port range, the IP
+    #   protocol, and the end of the port range. Creates rules that grant full
+    #   ICMP, UDP, and TCP access. To create a rule with a specific IP
+    #   protocol and port range, use a set of IP permissions instead. The
+    #   source security group must be in the same VPC.
     #
     # @option params [String] :source_security_group_owner_id
-    #   \[nondefault VPC\] The Amazon Web Services account ID for the source
+    #   \[Nondefault VPC\] The Amazon Web Services account ID for the source
     #   security group, if the source security group is in a different
     #   account. You can't specify this parameter in combination with the
     #   following parameters: the CIDR IP address range, the IP protocol, the
@@ -5744,8 +5728,7 @@ module Aws::EC2
     # Creates a default subnet with a size `/20` IPv4 CIDR block in the
     # specified Availability Zone in your default VPC. You can have only one
     # default subnet per Availability Zone. For more information, see
-    # [Creating a default subnet][1] in the *Amazon Virtual Private Cloud
-    # User Guide*.
+    # [Create a default subnet][1] in the *Amazon VPC User Guide*.
     #
     #
     #
@@ -5820,31 +5803,16 @@ module Aws::EC2
 
     # Creates a default VPC with a size `/16` IPv4 CIDR block and a default
     # subnet in each Availability Zone. For more information about the
-    # components of a default VPC, see [Default VPC and default subnets][1]
-    # in the *Amazon Virtual Private Cloud User Guide*. You cannot specify
-    # the components of the default VPC yourself.
+    # components of a default VPC, see [Default VPCs][1] in the *Amazon VPC
+    # User Guide*. You cannot specify the components of the default VPC
+    # yourself.
     #
     # If you deleted your previous default VPC, you can create a default
     # VPC. You cannot have more than one default VPC per Region.
     #
-    # If your account supports EC2-Classic, you cannot use this action to
-    # create a default VPC in a Region that supports EC2-Classic. If you
-    # want a default VPC in a Region that supports EC2-Classic, see "I
-    # really want a default VPC for my existing EC2 account. Is that
-    # possible?" in the [Default VPCs FAQ][2].
-    #
-    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
-    # EC2-Classic to a VPC. For more information, see [Migrate from
-    # EC2-Classic to a VPC][3] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
-    #
-    #  </note>
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html
-    # [2]: http://aws.amazon.com/vpc/faqs/#Default_VPCs
-    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -5938,8 +5906,8 @@ module Aws::EC2
     # create a set of options, and if your VPC has an internet gateway, make
     # sure to set the `domain-name-servers` option either to
     # `AmazonProvidedDNS` or to a domain name server of your choice. For
-    # more information, see [DHCP options sets][2] in the *Amazon Virtual
-    # Private Cloud User Guide*.
+    # more information, see [DHCP options sets][2] in the *Amazon VPC User
+    # Guide*.
     #
     #
     #
@@ -6794,18 +6762,6 @@ module Aws::EC2
     # Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance
     # that is either running or stopped.
     #
-    # By default, when Amazon EC2 creates the new AMI, it reboots the
-    # instance so that it can take snapshots of the attached volumes while
-    # data is at rest, in order to ensure a consistent state. You can set
-    # the `NoReboot` parameter to `true` in the API request, or use the
-    # `--no-reboot` option in the CLI to prevent Amazon EC2 from shutting
-    # down and rebooting the instance.
-    #
-    # If you choose to bypass the shutdown and reboot process by setting the
-    # `NoReboot` parameter to `true` in the API request, or by using the
-    # `--no-reboot` option in the CLI, we can't guarantee the file system
-    # integrity of the created image.
-    #
     # If you customized your instance with instance store volumes or Amazon
     # EBS volumes in addition to the root device volume, the new AMI
     # contains block device mapping information for those volumes. When you
@@ -6844,19 +6800,20 @@ module Aws::EC2
     #   single quotes ('), at-signs (@), or underscores(\_)
     #
     # @option params [Boolean] :no_reboot
-    #   By default, when Amazon EC2 creates the new AMI, it reboots the
-    #   instance so that it can take snapshots of the attached volumes while
-    #   data is at rest, in order to ensure a consistent state. You can set
-    #   the `NoReboot` parameter to `true` in the API request, or use the
-    #   `--no-reboot` option in the CLI to prevent Amazon EC2 from shutting
-    #   down and rebooting the instance.
+    #   Indicates whether or not the instance should be automatically rebooted
+    #   before creating the image. Specify one of the following values:
     #
-    #   If you choose to bypass the shutdown and reboot process by setting the
-    #   `NoReboot` parameter to `true` in the API request, or by using the
-    #   `--no-reboot` option in the CLI, we can't guarantee the file system
-    #   integrity of the created image.
+    #   * `true` - The instance is not rebooted before creating the image.
+    #     This creates crash-consistent snapshots that include only the data
+    #     that has been written to the volumes at the time the snapshots are
+    #     created. Buffered data and data in memory that has not yet been
+    #     written to the volumes is not included in the snapshots.
     #
-    #   Default: `false` (follow standard reboot process)
+    #   * `false` - The instance is rebooted before creating the image. This
+    #     ensures that all buffered data and data in memory is written to the
+    #     volumes before the snapshots are created.
+    #
+    #   Default: `false`
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the AMI and snapshots on creation. You can tag
@@ -6966,9 +6923,9 @@ module Aws::EC2
 
     # Creates an EC2 Instance Connect Endpoint.
     #
-    # An EC2 Instance Connect Endpoint allows you to connect to a resource,
-    # without requiring the resource to have a public IPv4 address. For more
-    # information, see [Connect to your resources without requiring a public
+    # An EC2 Instance Connect Endpoint allows you to connect to an instance,
+    # without requiring the instance to have a public IPv4 address. For more
+    # information, see [Connect to your instances without requiring a public
     # IPv4 address using EC2 Instance Connect Endpoint][1] in the *Amazon
     # EC2 User Guide*.
     #
@@ -7212,10 +7169,10 @@ module Aws::EC2
 
     # Exports a running or stopped instance to an Amazon S3 bucket.
     #
-    # For information about the supported operating systems, image formats,
-    # and known limitations for the types of instances you can export, see
-    # [Exporting an instance as a VM Using VM Import/Export][1] in the *VM
-    # Import/Export User Guide*.
+    # For information about the prerequisites for your Amazon S3 bucket,
+    # supported operating systems, image formats, and known limitations for
+    # the types of instances you can export, see [Exporting an instance as a
+    # VM Using VM Import/Export][1] in the *VM Import/Export User Guide*.
     #
     #
     #
@@ -7294,12 +7251,12 @@ module Aws::EC2
     # Creates an internet gateway for use with a VPC. After creating the
     # internet gateway, you attach it to a VPC using AttachInternetGateway.
     #
-    # For more information about your VPC and internet gateway, see the
-    # [Amazon Virtual Private Cloud User Guide][1].
+    # For more information, see [Internet gateways][1] in the *Amazon VPC
+    # User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the internet gateway.
@@ -9225,8 +9182,8 @@ module Aws::EC2
     # behind a small pool of allowlisted IPv4 addresses, preserving private
     # IPv4 addresses, and communicating between overlapping networks.
     #
-    # For more information, see [NAT gateways][1] in the *Amazon Virtual
-    # Private Cloud User Guide*.
+    # For more information, see [NAT gateways][1] in the *Amazon VPC User
+    # Guide*.
     #
     #
     #
@@ -9275,9 +9232,8 @@ module Aws::EC2
     #   assigned.
     #
     # @option params [Array<String>] :secondary_allocation_ids
-    #   Secondary EIP allocation IDs. For more information about secondary
-    #   addresses, see [Create a NAT gateway][1] in the *Amazon Virtual
-    #   Private Cloud User Guide*.
+    #   Secondary EIP allocation IDs. For more information, see [Create a NAT
+    #   gateway][1] in the *Amazon VPC User Guide*.
     #
     #
     #
@@ -9285,8 +9241,8 @@ module Aws::EC2
     #
     # @option params [Array<String>] :secondary_private_ip_addresses
     #   Secondary private IPv4 addresses. For more information about secondary
-    #   addresses, see [Create a NAT gateway][1] in the *Amazon Virtual
-    #   Private Cloud User Guide*.
+    #   addresses, see [Create a NAT gateway][1] in the *Amazon VPC User
+    #   Guide*.
     #
     #
     #
@@ -9296,7 +9252,7 @@ module Aws::EC2
     #   \[Private NAT gateway only\] The number of secondary private IPv4
     #   addresses you want to assign to the NAT gateway. For more information
     #   about secondary addresses, see [Create a NAT gateway][1] in the
-    #   *Amazon Virtual Private Cloud User Guide*.
+    #   *Amazon VPC User Guide*.
     #
     #
     #
@@ -9402,12 +9358,12 @@ module Aws::EC2
     # of security (in addition to security groups) for the instances in your
     # VPC.
     #
-    # For more information, see [Network ACLs][1] in the *Amazon Virtual
-    # Private Cloud User Guide*.
+    # For more information, see [Network ACLs][1] in the *Amazon VPC User
+    # Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -9532,11 +9488,11 @@ module Aws::EC2
     # it, or create an entry and delete the old one.
     #
     # For more information about network ACLs, see [Network ACLs][1] in the
-    # *Amazon Virtual Private Cloud User Guide*.
+    # *Amazon VPC User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html
     #
     # @option params [String] :cidr_block
     #   The IPv4 network range to allow or deny, in CIDR notation (for example
@@ -10875,7 +10831,7 @@ module Aws::EC2
     # where to target the traffic.
     #
     # For more information about route tables, see [Route tables][1] in the
-    # *Amazon Virtual Private Cloud User Guide*.
+    # *Amazon VPC User Guide*.
     #
     #
     #
@@ -10996,8 +10952,8 @@ module Aws::EC2
     # Creates a route table for the specified VPC. After you create a route
     # table, you can add routes and associate the table with a subnet.
     #
-    # For more information, see [Route tables][1] in the *Amazon Virtual
-    # Private Cloud User Guide*.
+    # For more information, see [Route tables][1] in the *Amazon VPC User
+    # Guide*.
     #
     #
     #
@@ -11121,17 +11077,14 @@ module Aws::EC2
     # Virtual Private Cloud User Guide*.
     #
     # When you create a security group, you specify a friendly name of your
-    # choice. You can have a security group for use in EC2-Classic with the
-    # same name as a security group for use in a VPC. However, you can't
-    # have two security groups for use in EC2-Classic with the same name or
-    # two security groups for use in a VPC with the same name.
+    # choice. You can't have two security groups for the same VPC with the
+    # same name.
     #
-    # You have a default security group for use in EC2-Classic and a default
-    # security group for use in your VPC. If you don't specify a security
-    # group when you launch an instance, the instance is launched into the
-    # appropriate default security group. A default security group includes
-    # a default rule that grants instances unrestricted network access to
-    # each other.
+    # You have a default security group for use in your VPC. If you don't
+    # specify a security group when you launch an instance, the instance is
+    # launched into the appropriate default security group. A default
+    # security group includes a default rule that grants instances
+    # unrestricted network access to each other.
     #
     # You can add or remove rules from your security groups using
     # AuthorizeSecurityGroupIngress, AuthorizeSecurityGroupEgress,
@@ -11140,28 +11093,18 @@ module Aws::EC2
     # For more information about VPC security group limits, see [Amazon VPC
     # Limits][3].
     #
-    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
-    # EC2-Classic to a VPC. For more information, see [Migrate from
-    # EC2-Classic to a VPC][4] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
-    #
-    #  </note>
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html
     # [2]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html
     # [3]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
-    # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
     #
     # @option params [required, String] :description
     #   A description for the security group.
     #
     #   Constraints: Up to 255 characters in length
     #
-    #   Constraints for EC2-Classic: ASCII characters
-    #
-    #   Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and
+    #   Valid characters: a-z, A-Z, 0-9, spaces, and
     #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
     #
     # @option params [required, String] :group_name
@@ -11169,13 +11112,11 @@ module Aws::EC2
     #
     #   Constraints: Up to 255 characters in length. Cannot start with `sg-`.
     #
-    #   Constraints for EC2-Classic: ASCII characters
-    #
-    #   Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and
+    #   Valid characters: a-z, A-Z, 0-9, spaces, and
     #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
     #
     # @option params [String] :vpc_id
-    #   \[EC2-VPC\] The ID of the VPC. Required for EC2-VPC.
+    #   The ID of the VPC. Required for a nondefault VPC.
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the security group.
@@ -11706,8 +11647,7 @@ module Aws::EC2
     # instances (they're all stopped), but no remaining IP addresses
     # available.
     #
-    # For more information, see [Subnets][1] in the *Amazon Virtual Private
-    # Cloud User Guide*.
+    # For more information, see [Subnets][1] in the *Amazon VPC User Guide*.
     #
     #
     #
@@ -11725,15 +11665,14 @@ module Aws::EC2
     #
     #   To create a subnet in a Local Zone, set this value to the Local Zone
     #   ID, for example `us-west-2-lax-1a`. For information about the Regions
-    #   that support Local Zones, see [Available Regions][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   that support Local Zones, see [Local Zones locations][1].
     #
     #   To create a subnet in an Outpost, set this value to the Availability
     #   Zone for the Outpost and specify the Outpost ARN.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions
+    #   [1]: http://aws.amazon.com/about-aws/global-infrastructure/localzones/locations/
     #
     # @option params [String] :availability_zone_id
     #   The AZ ID or the Local Zone ID of the subnet.
@@ -13770,7 +13709,8 @@ module Aws::EC2
     # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-volume.html
     #
     # @option params [required, String] :availability_zone
-    #   The Availability Zone in which to create the volume.
+    #   The ID of the Availability Zone in which to create the volume. For
+    #   example, `us-east-1a`.
     #
     # @option params [Boolean] :encrypted
     #   Indicates whether the volume should be encrypted. The effect of
@@ -14064,8 +14004,8 @@ module Aws::EC2
     end
 
     # Creates a VPC with the specified CIDR blocks. For more information,
-    # see [VPC CIDR blocks][1] in the *Amazon Virtual Private Cloud User
-    # Guide*.
+    # see [IP addressing for your VPCs and subnets][1] in the *Amazon VPC
+    # User Guide*.
     #
     # You can optionally request an IPv6 CIDR block for the VPC. You can
     # request an Amazon-provided IPv6 CIDR block from Amazon's pool of IPv6
@@ -14075,16 +14015,16 @@ module Aws::EC2
     # By default, each instance that you launch in the VPC has the default
     # DHCP options, which include only a default DNS server that we provide
     # (AmazonProvidedDNS). For more information, see [DHCP option sets][3]
-    # in the *Amazon Virtual Private Cloud User Guide*.
+    # in the *Amazon VPC User Guide*.
     #
     # You can specify the instance tenancy value for the VPC when you create
     # it. You can't change this value for the VPC after you create it. For
-    # more information, see [Dedicated Instances][4] in the *Amazon Elastic
-    # Compute Cloud User Guide*.
+    # more information, see [Dedicated Instances][4] in the *Amazon EC2 User
+    # Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/configure-your-vpc.html#vpc-cidr-blocks
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html
     # [3]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html
     # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html
@@ -14266,11 +14206,11 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Creates a VPC endpoint for a specified service. An endpoint enables
-    # you to create a private connection between your VPC and the service.
-    # The service may be provided by Amazon Web Services, an Amazon Web
+    # Creates a VPC endpoint. A VPC endpoint provides a private connection
+    # between the specified VPC and the specified endpoint service. You can
+    # use an endpoint service provided by Amazon Web Services, an Amazon Web
     # Services Marketplace Partner, or another Amazon Web Services account.
-    # For more information, see the [Amazon Web Services PrivateLink
+    # For more information, see the [Amazon Web Services PrivateLink User
     # Guide][1].
     #
     #
@@ -14289,10 +14229,10 @@ module Aws::EC2
     #   Default: Gateway
     #
     # @option params [required, String] :vpc_id
-    #   The ID of the VPC for the endpoint.
+    #   The ID of the VPC.
     #
     # @option params [required, String] :service_name
-    #   The service name.
+    #   The name of the endpoint service.
     #
     # @option params [String] :policy_document
     #   (Interface and gateway endpoints) A policy to attach to the endpoint
@@ -17017,29 +16957,16 @@ module Aws::EC2
     # Deletes a security group.
     #
     # If you attempt to delete a security group that is associated with an
-    # instance, or is referenced by another security group, the operation
-    # fails with `InvalidGroup.InUse` in EC2-Classic or
-    # `DependencyViolation` in EC2-VPC.
-    #
-    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
-    # EC2-Classic to a VPC. For more information, see [Migrate from
-    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
-    #
-    #  </note>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
+    # instance or network interface or is referenced by another security
+    # group, the operation fails with `DependencyViolation`.
     #
     # @option params [String] :group_id
-    #   The ID of the security group. Required for a nondefault VPC.
+    #   The ID of the security group.
     #
     # @option params [String] :group_name
-    #   \[EC2-Classic, default VPC\] The name of the security group. You can
-    #   specify either the security group name or the security group ID. For
-    #   security groups in a nondefault VPC, you must specify the security
-    #   group ID.
+    #   \[Default VPC\] The name of the security group. You can specify either
+    #   the security group name or the security group ID. For security groups
+    #   in a nondefault VPC, you must specify the security group ID.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -20151,24 +20078,17 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # <note markdown="1"> This action is deprecated.
+    #
+    #  </note>
+    #
     # Describes one or more of your linked EC2-Classic instances. This
     # request only returns information about EC2-Classic instances linked to
     # a VPC through ClassicLink. You cannot use this request to return
     # information about other instances.
     #
-    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
-    # EC2-Classic to a VPC. For more information, see [Migrate from
-    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
-    #
-    #  </note>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
-    #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `group-id` - The ID of a VPC security group that's associated with
     #     the instance.
@@ -20187,8 +20107,6 @@ module Aws::EC2
     #
     #   * `vpc-id` - The ID of the VPC to which the instance is linked.
     #
-    #     `vpc-id` - The ID of the VPC that the instance is linked to.
-    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -20196,7 +20114,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<String>] :instance_ids
-    #   One or more instance IDs. Must be instances linked to a VPC through
+    #   The instance IDs. Must be instances linked to a VPC through
     #   ClassicLink.
     #
     # @option params [Integer] :max_results
@@ -20940,8 +20858,8 @@ module Aws::EC2
 
     # Describes one or more of your DHCP options sets.
     #
-    # For more information, see [DHCP options sets][1] in the *Amazon
-    # Virtual Private Cloud User Guide*.
+    # For more information, see [DHCP options sets][1] in the *Amazon VPC
+    # User Guide*.
     #
     #
     #
@@ -20953,7 +20871,7 @@ module Aws::EC2
     #   Default: Describes all your DHCP options sets.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `dhcp-options-id` - The ID of a DHCP options set.
     #
@@ -21080,7 +20998,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<String>] :egress_only_internet_gateway_ids
-    #   One or more egress-only internet gateway IDs.
+    #   The IDs of the egress-only internet gateways.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. To get the
@@ -21096,7 +21014,7 @@ module Aws::EC2
     #   continues from the end of the items returned by the previous request.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
@@ -22938,7 +22856,7 @@ module Aws::EC2
     #   The filters.
     #
     #   * `architecture` - The image architecture (`i386` \| `x86_64` \|
-    #     `arm64`).
+    #     `arm64` \| `x86_64_mac` \| `arm64_mac`).
     #
     #   * `block-device-mapping.delete-on-termination` - A Boolean value that
     #     indicates whether the Amazon EBS volume is deleted on instance
@@ -24231,8 +24149,8 @@ module Aws::EC2
     #   * `bare-metal` - Indicates whether it is a bare metal instance type
     #     (`true` \| `false`).
     #
-    #   * `burstable-performance-supported` - Indicates whether it is a
-    #     burstable performance instance type (`true` \| `false`).
+    #   * `burstable-performance-supported` - Indicates whether the instance
+    #     type is a burstable performance T instance type (`true` \| `false`).
     #
     #   * `current-generation` - Indicates whether this instance type is the
     #     latest generation instance type of an instance family (`true` \|
@@ -24337,6 +24255,15 @@ module Aws::EC2
     #
     #   * `network-info.network-performance` - The network performance (for
     #     example, "25 Gigabit").
+    #
+    #   * `nitro-enclaves-support` - Indicates whether Nitro Enclaves is
+    #     supported (`supported` \| `unsupported`).
+    #
+    #   * `nitro-tpm-support` - Indicates whether NitroTPM is supported
+    #     (`supported` \| `unsupported`).
+    #
+    #   * `nitro-tpm-info.supported-versions` - The supported NitroTPM version
+    #     (`2.0`).
     #
     #   * `processor-info.supported-architecture` - The CPU architecture
     #     (`arm64` \| `i386` \| `x86_64`).
@@ -25094,7 +25021,7 @@ module Aws::EC2
     # Describes one or more of your internet gateways.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `attachment.state` - The current state of the attachment between the
     #     gateway and the VPC (`available`). Present only if a VPC is
@@ -25124,7 +25051,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<String>] :internet_gateway_ids
-    #   One or more internet gateway IDs.
+    #   The IDs of the internet gateways.
     #
     #   Default: Describes all your internet gateways.
     #
@@ -26961,7 +26888,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<Types::Filter>] :filter
-    #   One or more filters.
+    #   The filters.
     #
     #   * `nat-gateway-id` - The ID of the NAT gateway.
     #
@@ -26992,7 +26919,7 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [Array<String>] :nat_gateway_ids
-    #   One or more NAT gateway IDs.
+    #   The IDs of the NAT gateways.
     #
     # @option params [String] :next_token
     #   The token returned from a previous paginated request. Pagination
@@ -27105,15 +27032,15 @@ module Aws::EC2
 
     # Describes one or more of your network ACLs.
     #
-    # For more information, see [Network ACLs][1] in the *Amazon Virtual
-    # Private Cloud User Guide*.
+    # For more information, see [Network ACLs][1] in the *Amazon VPC User
+    # Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `association.association-id` - The ID of an association ID for the
     #     ACL.
@@ -27177,7 +27104,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<String>] :network_acl_ids
-    #   One or more network ACL IDs.
+    #   The IDs of the network ACLs.
     #
     #   Default: Describes all your network ACLs.
     #
@@ -30077,15 +30004,15 @@ module Aws::EC2
     # implicitly associated with the main route table. This command does not
     # return the subnet ID for implicit associations.
     #
-    # For more information, see [Route tables][1] in the *Amazon Virtual
-    # Private Cloud User Guide*.
+    # For more information, see [Route tables][1] in the *Amazon VPC User
+    # Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `association.route-table-association-id` - The ID of an association
     #     ID for the route table.
@@ -30162,7 +30089,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<String>] :route_table_ids
-    #   One or more route table IDs.
+    #   The IDs of the route tables.
     #
     #   Default: Describes all your route tables.
     #
@@ -30500,9 +30427,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # \[VPC only\] Describes the VPCs on the other side of a VPC peering
-    # connection that are referencing the security groups you've specified
-    # in this request.
+    # Describes the VPCs on the other side of a VPC peering connection that
+    # are referencing the security groups you've specified in this request.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -30659,25 +30585,6 @@ module Aws::EC2
     # Describes the specified security groups or all of your security
     # groups.
     #
-    # A security group is for use with instances either in the EC2-Classic
-    # platform or in a specific VPC. For more information, see [Amazon EC2
-    # security groups][1] in the *Amazon Elastic Compute Cloud User Guide*
-    # and [Security groups for your VPC][2] in the *Amazon Virtual Private
-    # Cloud User Guide*.
-    #
-    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
-    # EC2-Classic to a VPC. For more information, see [Migrate from
-    # EC2-Classic to a VPC][3] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
-    #
-    #  </note>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html
-    # [2]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html
-    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
-    #
     # @option params [Array<Types::Filter>] :filters
     #   The filters. If using multiple filters for rules, the results include
     #   security groups for which any combination of rules - not necessarily a
@@ -30768,10 +30675,8 @@ module Aws::EC2
     #   Default: Describes all of your security groups.
     #
     # @option params [Array<String>] :group_names
-    #   \[EC2-Classic and default VPC only\] The names of the security groups.
-    #   You can specify either the security group name or the security group
-    #   ID. For security groups in a nondefault VPC, use the `group-name`
-    #   filter to describe security groups by name.
+    #   \[Default VPC\] The names of the security groups. You can specify
+    #   either the security group name or the security group ID.
     #
     #   Default: Describes all of your security groups.
     #
@@ -32421,11 +32326,11 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # \[VPC only\] Describes the stale security group rules for security
-    # groups in a specified VPC. Rules are stale when they reference a
-    # deleted security group in the same VPC or in a peer VPC, or if they
-    # reference a security group in a peer VPC for which the VPC peering
-    # connection has been deleted.
+    # Describes the stale security group rules for security groups in a
+    # specified VPC. Rules are stale when they reference a deleted security
+    # group in the same VPC or in a peer VPC, or if they reference a
+    # security group in a peer VPC for which the VPC peering connection has
+    # been deleted.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -32618,15 +32523,14 @@ module Aws::EC2
 
     # Describes one or more of your subnets.
     #
-    # For more information, see [Your VPC and subnets][1] in the *Amazon
-    # Virtual Private Cloud User Guide*.
+    # For more information, see [Subnets][1] in the *Amazon VPC User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `availability-zone` - The Availability Zone for the subnet. You can
     #     also use `availabilityZone` as the filter name.
@@ -32716,7 +32620,7 @@ module Aws::EC2
     #   * `vpc-id` - The ID of the VPC for the subnet.
     #
     # @option params [Array<String>] :subnet_ids
-    #   One or more subnet IDs.
+    #   The IDs of the subnets.
     #
     #   Default: Describes all your subnets.
     #
@@ -35313,21 +35217,14 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the ClassicLink status of one or more VPCs.
-    #
-    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
-    # EC2-Classic to a VPC. For more information, see [Migrate from
-    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # <note markdown="1"> This action is deprecated.
     #
     #  </note>
     #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
+    # Describes the ClassicLink status of the specified VPCs.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `is-classic-link-enabled` - Whether the VPC is enabled for
     #     ClassicLink (`true` \| `false`).
@@ -35349,8 +35246,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<String>] :vpc_ids
-    #   One or more VPCs for which you want to describe the ClassicLink
-    #   status.
+    #   The VPCs for which you want to describe the ClassicLink status.
     #
     # @return [Types::DescribeVpcClassicLinkResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -35387,10 +35283,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
-    # EC2-Classic to a VPC. For more information, see [Migrate from
-    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # <note markdown="1"> This action is deprecated.
     #
     #  </note>
     #
@@ -35399,13 +35292,7 @@ module Aws::EC2
     # its private IP address when addressed from an instance in the VPC to
     # which it's linked. Similarly, the DNS hostname of an instance in a
     # VPC resolves to its private IP address when addressed from a linked
-    # EC2-Classic instance. For more information, see [ClassicLink][2] in
-    # the *Amazon Elastic Compute Cloud User Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
+    # EC2-Classic instance.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. To get the
@@ -35421,7 +35308,7 @@ module Aws::EC2
     #   continues from the end of the items returned by the previous request.
     #
     # @option params [Array<String>] :vpc_ids
-    #   One or more VPC IDs.
+    #   The IDs of the VPCs.
     #
     # @return [Types::DescribeVpcClassicLinkDnsSupportResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -36036,7 +35923,7 @@ module Aws::EC2
     # Describes one or more of your VPC peering connections.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `accepter-vpc-info.cidr-block` - The IPv4 CIDR block of the accepter
     #     VPC.
@@ -36083,7 +35970,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<String>] :vpc_peering_connection_ids
-    #   One or more VPC peering connection IDs.
+    #   The IDs of the VPC peering connections.
     #
     #   Default: Describes all your VPC peering connections.
     #
@@ -36174,7 +36061,7 @@ module Aws::EC2
     # Describes one or more of your VPCs.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `cidr` - The primary IPv4 CIDR block of the VPC. The CIDR block you
     #     specify must exactly match the VPC's CIDR block for information to
@@ -36224,7 +36111,7 @@ module Aws::EC2
     #   * `vpc-id` - The ID of the VPC.
     #
     # @option params [Array<String>] :vpc_ids
-    #   One or more VPC IDs.
+    #   The IDs of the VPCs.
     #
     #   Default: Describes all your VPCs.
     #
@@ -36600,10 +36487,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
-    # EC2-Classic to a VPC. For more information, see [Migrate from
-    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # <note markdown="1"> This action is deprecated.
     #
     #  </note>
     #
@@ -36611,10 +36495,6 @@ module Aws::EC2
     # instance has been unlinked, the VPC security groups are no longer
     # associated with it. An instance is automatically unlinked from a VPC
     # when it's stopped.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -37470,19 +37350,12 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Disables ClassicLink for a VPC. You cannot disable ClassicLink for a
-    # VPC that has EC2-Classic instances linked to it.
-    #
-    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
-    # EC2-Classic to a VPC. For more information, see [Migrate from
-    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # <note markdown="1"> This action is deprecated.
     #
     #  </note>
     #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
+    # Disables ClassicLink for a VPC. You cannot disable ClassicLink for a
+    # VPC that has EC2-Classic instances linked to it.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -37517,25 +37390,15 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Disables ClassicLink DNS support for a VPC. If disabled, DNS hostnames
-    # resolve to public IP addresses when addressed between a linked
-    # EC2-Classic instance and instances in the VPC to which it's linked.
-    # For more information, see [ClassicLink][1] in the *Amazon Elastic
-    # Compute Cloud User Guide*.
-    #
-    # You must specify a VPC ID in the request.
-    #
-    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
-    # EC2-Classic to a VPC. For more information, see [Migrate from
-    # EC2-Classic to a VPC][2] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # <note markdown="1"> This action is deprecated.
     #
     #  </note>
     #
+    # Disables ClassicLink DNS support for a VPC. If disabled, DNS hostnames
+    # resolve to public IP addresses when addressed between a linked
+    # EC2-Classic instance and instances in the VPC to which it's linked.
     #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
+    # You must specify a VPC ID in the request.
     #
     # @option params [String] :vpc_id
     #   The ID of the VPC.
@@ -37891,25 +37754,25 @@ module Aws::EC2
     # Disassociates secondary Elastic IP addresses (EIPs) from a public NAT
     # gateway. You cannot disassociate your primary EIP. For more
     # information, see [Edit secondary IP address associations][1] in the
-    # *Amazon Virtual Private Cloud User Guide*.
+    # *Amazon VPC User Guide*.
     #
     # While disassociating is in progress, you cannot associate/disassociate
     # additional EIPs while the connections are being drained. You are,
     # however, allowed to delete the NAT gateway.
     #
-    # An EIP will only be released at the end of MaxDrainDurationSeconds.
-    # The EIPs stay associated and support the existing connections but do
-    # not support any new connections (new connections are distributed
-    # across the remaining associated EIPs). As the existing connections
-    # drain out, the EIPs (and the corresponding private IPs mapped to them)
-    # get released.
+    # An EIP is released only at the end of MaxDrainDurationSeconds. It
+    # stays associated and supports the existing connections but does not
+    # support any new connections (new connections are distributed across
+    # the remaining associated EIPs). As the existing connections drain out,
+    # the EIPs (and the corresponding private IP addresses mapped to them)
+    # are released.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-edit-secondary
     #
     # @option params [required, String] :nat_gateway_id
-    #   The NAT gateway ID.
+    #   The ID of the NAT gateway.
     #
     # @option params [required, Array<String>] :association_ids
     #   The association IDs of EIPs that have been associated with the NAT
@@ -37967,7 +37830,7 @@ module Aws::EC2
     # After you perform this action, the subnet no longer uses the routes in
     # the route table. Instead, it uses the routes in the VPC's main route
     # table. For more information about route tables, see [Route tables][1]
-    # in the *Amazon Virtual Private Cloud User Guide*.
+    # in the *Amazon VPC User Guide*.
     #
     #
     #
@@ -38912,10 +38775,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
-    # EC2-Classic to a VPC. For more information, see [Migrate from
-    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # <note markdown="1"> This action is deprecated.
     #
     #  </note>
     #
@@ -38924,14 +38784,7 @@ module Aws::EC2
     # addresses. You cannot enable your VPC for ClassicLink if any of your
     # VPC route tables have existing routes for address ranges within the
     # `10.0.0.0/8` IP address range, excluding local routes for VPCs in the
-    # `10.0.0.0/16` and `10.1.0.0/16` IP address ranges. For more
-    # information, see [ClassicLink][2] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
+    # `10.0.0.0/16` and `10.1.0.0/16` IP address ranges.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -38966,10 +38819,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
-    # EC2-Classic to a VPC. For more information, see [Migrate from
-    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # <note markdown="1"> This action is deprecated.
     #
     #  </note>
     #
@@ -38978,15 +38828,9 @@ module Aws::EC2
     # its private IP address when addressed from an instance in the VPC to
     # which it's linked. Similarly, the DNS hostname of an instance in a
     # VPC resolves to its private IP address when addressed from a linked
-    # EC2-Classic instance. For more information, see [ClassicLink][2] in
-    # the *Amazon Elastic Compute Cloud User Guide*.
+    # EC2-Classic instance.
     #
     # You must specify a VPC ID in the request.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
     #
     # @option params [String] :vpc_id
     #   The ID of the VPC.
@@ -39867,6 +39711,11 @@ module Aws::EC2
     #
     # * Create a set of named queries in Athena that you can use to get
     #   started quickly
+    #
+    # <note markdown="1"> `GetFlowLogsIntegrationTemplate` does not support integration between
+    # Amazon Web Services Transit Gateway Flow Logs and Amazon Athena.
+    #
+    #  </note>
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -42873,11 +42722,7 @@ module Aws::EC2
     #
     #   * Key ID
     #
-    #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the key, the Amazon Web Services account
-    #     ID of the key owner, the `alias` namespace, and then the key alias.
-    #     For example,
-    #     arn:aws:kms:*us-east-1*:*012345678910*:alias/*ExampleAlias*.
+    #   * Key alias
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
     #     followed by the Region of the key, the Amazon Web Services account
@@ -42921,7 +42766,9 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html#prerequisites-image
     #
     # @option params [String] :platform
-    #   The operating system of the virtual machine.
+    #   The operating system of the virtual machine. If you import a VM that
+    #   is compatible with Unified Extensible Firmware Interface (UEFI) using
+    #   an EBS snapshot, you must specify a value for the platform.
     #
     #   Valid values: `Windows` \| `Linux`
     #
@@ -43059,24 +42906,32 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # <note markdown="1"> We recommend that you use the [ `ImportImage` ][1] API. For more
+    # information, see [Importing a VM as an image using VM
+    # Import/Export][2] in the *VM Import/Export User Guide*.
+    #
+    #  </note>
+    #
     # Creates an import instance task using metadata from the specified disk
     # image.
+    #
+    # This API action is not supported by the Command Line Interface (CLI).
+    # For information about using the Amazon EC2 CLI, which is deprecated,
+    # see [Importing a VM to Amazon EC2][3] in the *Amazon EC2 CLI
+    # Reference* PDF file.
     #
     # This API action supports only single-volume VMs. To import
     # multi-volume VMs, use ImportImage instead.
     #
-    # This API action is not supported by the Command Line Interface (CLI).
-    # For information about using the Amazon EC2 CLI, which is deprecated,
-    # see [Importing a VM to Amazon EC2][1] in the *Amazon EC2 CLI
-    # Reference* PDF file.
-    #
     # For information about the import manifest referenced by this API
-    # action, see [VM Import Manifest][2].
+    # action, see [VM Import Manifest][4].
     #
     #
     #
-    # [1]: https://awsdocs.s3.amazonaws.com/EC2/ec2-clt.pdf#UsingVirtualMachinesinAmazonEC2
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportImage.html
+    # [2]: https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html
+    # [3]: https://awsdocs.s3.amazonaws.com/EC2/ec2-clt.pdf#UsingVirtualMachinesinAmazonEC2
+    # [4]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html
     #
     # @option params [String] :description
     #   A description for the instance being imported.
@@ -43314,11 +43169,7 @@ module Aws::EC2
     #
     #   * Key ID
     #
-    #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the key, the Amazon Web Services account
-    #     ID of the key owner, the `alias` namespace, and then the key alias.
-    #     For example,
-    #     arn:aws:kms:*us-east-1*:*012345678910*:alias/*ExampleAlias*.
+    #   * Key alias
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
     #     followed by the Region of the key, the Amazon Web Services account
@@ -45471,8 +45322,7 @@ module Aws::EC2
     #
     # @option params [String] :http_protocol_ipv_6
     #   Enables or disables the IPv6 endpoint for the instance metadata
-    #   service. This setting applies only if you have enabled the HTTP
-    #   metadata endpoint.
+    #   service. Applies only if you enabled the HTTP metadata endpoint.
     #
     # @option params [String] :instance_metadata_tags
     #   Set to `enabled` to allow access to instance tags from the instance
@@ -48698,26 +48548,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
-    # EC2-Classic to a VPC. For more information, see [Migrate from
-    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
-    #
-    #  </note>
-    #
     # Modifies the VPC peering connection options on one side of a VPC
-    # peering connection. You can do the following:
-    #
-    # * Enable/disable communication over the peering connection between an
-    #   EC2-Classic instance that's linked to your VPC (using ClassicLink)
-    #   and instances in the peer VPC.
-    #
-    # * Enable/disable communication over the peering connection between
-    #   instances in your VPC and an EC2-Classic instance that's linked to
-    #   the peer VPC.
-    #
-    # * Enable/disable the ability to resolve public DNS hostnames to
-    #   private IP addresses when queried from instances in the peer VPC.
+    # peering connection.
     #
     # If the peered VPCs are in the same Amazon Web Services account, you
     # can enable DNS resolution for queries from the local VPC. This ensures
@@ -48732,10 +48564,6 @@ module Aws::EC2
     # accepter VPC peering options. To verify which VPCs are the accepter
     # and the requester for a VPC peering connection, use the
     # DescribeVpcPeeringConnections command.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
     #
     # @option params [Types::PeeringConnectionOptionsRequest] :accepter_peering_connection_options
     #   The VPC peering connection options for the accepter VPC.
@@ -48801,8 +48629,8 @@ module Aws::EC2
     # otherwise during launch. The tenancy of any existing instances in the
     # VPC is not affected.
     #
-    # For more information, see [Dedicated Instances][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # For more information, see [Dedicated Instances][1] in the *Amazon EC2
+    # User Guide*.
     #
     #
     #
@@ -50941,7 +50769,7 @@ module Aws::EC2
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyIpamResourceCidr.html
-    # [2]: https://docs.aws.amazon.com/vpc/latest/ipam/release-pool-alloc-ipam.html
+    # [2]: https://docs.aws.amazon.com/vpc/latest/ipam/release-alloc-ipam.html
     # [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/query-api-troubleshooting.html#eventual-consistency
     #
     # @option params [Boolean] :dry_run
@@ -51034,13 +50862,13 @@ module Aws::EC2
     # Changes which network ACL a subnet is associated with. By default when
     # you create a subnet, it's automatically associated with the default
     # network ACL. For more information, see [Network ACLs][1] in the
-    # *Amazon Virtual Private Cloud User Guide*.
+    # *Amazon VPC User Guide*.
     #
     # This is an idempotent operation.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html
     #
     # @option params [required, String] :association_id
     #   The ID of the current association between the original network ACL and
@@ -51096,11 +50924,11 @@ module Aws::EC2
     end
 
     # Replaces an entry (rule) in a network ACL. For more information, see
-    # [Network ACLs][1] in the *Amazon Virtual Private Cloud User Guide*.
+    # [Network ACLs][1] in the *Amazon VPC User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html
     #
     # @option params [String] :cidr_block
     #   The IPv4 network range to allow or deny, in CIDR notation (for example
@@ -51206,8 +51034,8 @@ module Aws::EC2
     # You must also specify exactly one of the resources from the parameter
     # list, or reset the local route to its default target.
     #
-    # For more information, see [Route tables][1] in the *Amazon Virtual
-    # Private Cloud User Guide*.
+    # For more information, see [Route tables][1] in the *Amazon VPC User
+    # Guide*.
     #
     #
     #
@@ -51322,7 +51150,7 @@ module Aws::EC2
     # gateway, or virtual private gateway in a VPC. After the operation
     # completes, the subnet or gateway uses the routes in the new route
     # table. For more information about route tables, see [Route tables][1]
-    # in the *Amazon Virtual Private Cloud User Guide*.
+    # in the *Amazon VPC User Guide*.
     #
     # You can also use this operation to change which table is the main
     # route table in the VPC. Specify the main route table's association ID
@@ -53100,9 +52928,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # \[VPC only\] Removes the specified outbound (egress) rules from a
-    # security group for EC2-VPC. This action does not apply to security
-    # groups for use in EC2-Classic.
+    # Removes the specified outbound (egress) rules from the specified
+    # security group.
     #
     # You can specify rules using either rule IDs or security group rule
     # properties. If you use rule properties, the values that you specify
@@ -53114,7 +52941,7 @@ module Aws::EC2
     # security group rule has a description, you do not need to specify the
     # description to revoke the rule.
     #
-    # \[Default VPC\] If the values you specify do not match the existing
+    # For a default VPC, if the values you specify do not match the existing
     # rule's values, no error is returned, and the output describes the
     # security group rules that were not revoked.
     #
@@ -53262,26 +53089,15 @@ module Aws::EC2
     # security group rule has a description, you do not need to specify the
     # description to revoke the rule.
     #
-    # \[EC2-Classic, default VPC\] If the values you specify do not match
-    # the existing rule's values, no error is returned, and the output
-    # describes the security group rules that were not revoked.
+    # For a default VPC, if the values you specify do not match the existing
+    # rule's values, no error is returned, and the output describes the
+    # security group rules that were not revoked.
     #
     # Amazon Web Services recommends that you describe the security group to
     # verify that the rules were removed.
     #
     # Rule changes are propagated to instances within the security group as
     # quickly as possible. However, a small delay might occur.
-    #
-    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
-    # EC2-Classic to a VPC. For more information, see [Migrate from
-    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
-    #
-    #  </note>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
     #
     # @option params [String] :cidr_ip
     #   The CIDR IP address range. You can't specify this parameter when
@@ -53293,13 +53109,11 @@ module Aws::EC2
     #   all ICMP types.
     #
     # @option params [String] :group_id
-    #   The ID of the security group. You must specify either the security
-    #   group ID or the security group name in the request. For security
-    #   groups in a nondefault VPC, you must specify the security group ID.
+    #   The ID of the security group.
     #
     # @option params [String] :group_name
-    #   \[EC2-Classic, default VPC\] The name of the security group. You must
-    #   specify either the security group ID or the security group name in the
+    #   \[Default VPC\] The name of the security group. You must specify
+    #   either the security group ID or the security group name in the
     #   request. For security groups in a nondefault VPC, you must specify the
     #   security group ID.
     #
@@ -53316,22 +53130,15 @@ module Aws::EC2
     #   [1]: http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
     #
     # @option params [String] :source_security_group_name
-    #   \[EC2-Classic, default VPC\] The name of the source security group.
-    #   You can't specify this parameter in combination with the following
-    #   parameters: the CIDR IP address range, the start of the port range,
-    #   the IP protocol, and the end of the port range. For EC2-VPC, the
-    #   source security group must be in the same VPC. To revoke a specific
-    #   rule for an IP protocol and port range, use a set of IP permissions
-    #   instead.
+    #   \[Default VPC\] The name of the source security group. You can't
+    #   specify this parameter in combination with the following parameters:
+    #   the CIDR IP address range, the start of the port range, the IP
+    #   protocol, and the end of the port range. The source security group
+    #   must be in the same VPC. To revoke a specific rule for an IP protocol
+    #   and port range, use a set of IP permissions instead.
     #
     # @option params [String] :source_security_group_owner_id
-    #   \[EC2-Classic\] The Amazon Web Services account ID of the source
-    #   security group, if the source security group is in a different
-    #   account. You can't specify this parameter in combination with the
-    #   following parameters: the CIDR IP address range, the IP protocol, the
-    #   start of the port range, and the end of the port range. To revoke a
-    #   specific rule for an IP protocol and port range, use a set of IP
-    #   permissions instead.
+    #   Not supported.
     #
     # @option params [Integer] :to_port
     #   If the protocol is TCP or UDP, this is the end of the port range. If
@@ -53511,18 +53318,9 @@ module Aws::EC2
     #   The instance type. For more information, see [Instance types][1] in
     #   the *Amazon EC2 User Guide*.
     #
-    #   When you change your EBS-backed instance type, instance restart or
-    #   replacement behavior depends on the instance type compatibility
-    #   between the old and new types. An instance that's backed by an
-    #   instance store volume is always replaced. For more information, see
-    #   [Change the instance type][2] in the *Amazon EC2 User Guide*.
-    #
-    #   Default: `m1.small`
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-resize.html
     #
     # @option params [Integer] :ipv_6_address_count
     #   The number of IPv6 addresses to associate with the primary network
@@ -53869,7 +53667,8 @@ module Aws::EC2
     #
     # @option params [Types::PrivateDnsNameOptionsRequest] :private_dns_name_options
     #   The options for the instance hostname. The default values are
-    #   inherited from the subnet.
+    #   inherited from the subnet. Applies only if creating a network
+    #   interface, not attaching an existing one.
     #
     # @option params [Types::InstanceMaintenanceOptionsRequest] :maintenance_options
     #   The maintenance and recovery options for the instance.
@@ -56288,8 +56087,8 @@ module Aws::EC2
 
     # Unassigns secondary private IPv4 addresses from a private NAT gateway.
     # You cannot unassign your primary private IP. For more information, see
-    # [Edit secondary IP address associations][1] in the *Amazon Virtual
-    # Private Cloud User Guide*.
+    # [Edit secondary IP address associations][1] in the *Amazon VPC User
+    # Guide*.
     #
     # While unassigning is in progress, you cannot assign/unassign
     # additional IP addresses while the connections are being drained. You
@@ -56297,10 +56096,10 @@ module Aws::EC2
     #
     # A private IP address will only be released at the end of
     # MaxDrainDurationSeconds. The private IP addresses stay associated and
-    # support the existing connections but do not support any new
+    # support the existing connections, but do not support any new
     # connections (new connections are distributed across the remaining
     # assigned private IP address). After the existing connections drain
-    # out, the private IP addresses get released.
+    # out, the private IP addresses are released.
     #
     #
     #
@@ -56311,7 +56110,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-edit-secondary
     #
     # @option params [required, String] :nat_gateway_id
-    #   The NAT gateway ID.
+    #   The ID of the NAT gateway.
     #
     # @option params [required, Array<String>] :private_ip_addresses
     #   The private IPv4 addresses you want to unassign.
@@ -56406,11 +56205,11 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # \[VPC only\] Updates the description of an egress (outbound) security
-    # group rule. You can replace an existing description, or add a
-    # description to a rule that did not have one previously. You can remove
-    # a description for a security group rule by omitting the description
-    # parameter in the request.
+    # Updates the description of an egress (outbound) security group rule.
+    # You can replace an existing description, or add a description to a
+    # rule that did not have one previously. You can remove a description
+    # for a security group rule by omitting the description parameter in the
+    # request.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -56425,8 +56224,7 @@ module Aws::EC2
     #
     # @option params [String] :group_name
     #   \[Default VPC\] The name of the security group. You must specify
-    #   either the security group ID or the security group name in the
-    #   request.
+    #   either the security group ID or the security group name.
     #
     # @option params [Array<Types::IpPermission>] :ip_permissions
     #   The IP permissions for the security group rule. You must specify
@@ -56547,18 +56345,17 @@ module Aws::EC2
     #   groups in a nondefault VPC, you must specify the security group ID.
     #
     # @option params [String] :group_name
-    #   \[EC2-Classic, default VPC\] The name of the security group. You must
-    #   specify either the security group ID or the security group name in the
-    #   request. For security groups in a nondefault VPC, you must specify the
-    #   security group ID.
+    #   \[Default VPC\] The name of the security group. You must specify
+    #   either the security group ID or the security group name. For security
+    #   groups in a nondefault VPC, you must specify the security group ID.
     #
     # @option params [Array<Types::IpPermission>] :ip_permissions
     #   The IP permissions for the security group rule. You must specify
     #   either IP permissions or a description.
     #
     # @option params [Array<Types::SecurityGroupRuleDescription>] :security_group_rule_descriptions
-    #   \[VPC only\] The description for the ingress security group rules. You
-    #   must specify either a description or IP permissions.
+    #   The description for the ingress security group rules. You must specify
+    #   either a description or IP permissions.
     #
     # @return [Types::UpdateSecurityGroupRuleDescriptionsIngressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -56712,7 +56509,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.391.0'
+      context[:gem_version] = '1.392.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

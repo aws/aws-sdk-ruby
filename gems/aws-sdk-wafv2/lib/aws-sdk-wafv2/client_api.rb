@@ -283,6 +283,7 @@ module Aws::WAFV2
     RateLimitLabelNamespace = Shapes::StructureShape.new(name: 'RateLimitLabelNamespace')
     RateLimitQueryArgument = Shapes::StructureShape.new(name: 'RateLimitQueryArgument')
     RateLimitQueryString = Shapes::StructureShape.new(name: 'RateLimitQueryString')
+    RateLimitUriPath = Shapes::StructureShape.new(name: 'RateLimitUriPath')
     RedactedFields = Shapes::ListShape.new(name: 'RedactedFields')
     Regex = Shapes::StructureShape.new(name: 'Regex')
     RegexMatchStatement = Shapes::StructureShape.new(name: 'RegexMatchStatement')
@@ -1214,6 +1215,7 @@ module Aws::WAFV2
     RateBasedStatementCustomKey.add_member(:forwarded_ip, Shapes::ShapeRef.new(shape: RateLimitForwardedIP, location_name: "ForwardedIP"))
     RateBasedStatementCustomKey.add_member(:ip, Shapes::ShapeRef.new(shape: RateLimitIP, location_name: "IP"))
     RateBasedStatementCustomKey.add_member(:label_namespace, Shapes::ShapeRef.new(shape: RateLimitLabelNamespace, location_name: "LabelNamespace"))
+    RateBasedStatementCustomKey.add_member(:uri_path, Shapes::ShapeRef.new(shape: RateLimitUriPath, location_name: "UriPath"))
     RateBasedStatementCustomKey.struct_class = Types::RateBasedStatementCustomKey
 
     RateBasedStatementCustomKeys.member = Shapes::ShapeRef.new(shape: RateBasedStatementCustomKey)
@@ -1245,6 +1247,9 @@ module Aws::WAFV2
 
     RateLimitQueryString.add_member(:text_transformations, Shapes::ShapeRef.new(shape: TextTransformations, required: true, location_name: "TextTransformations"))
     RateLimitQueryString.struct_class = Types::RateLimitQueryString
+
+    RateLimitUriPath.add_member(:text_transformations, Shapes::ShapeRef.new(shape: TextTransformations, required: true, location_name: "TextTransformations"))
+    RateLimitUriPath.struct_class = Types::RateLimitUriPath
 
     RedactedFields.member = Shapes::ShapeRef.new(shape: FieldToMatch)
 

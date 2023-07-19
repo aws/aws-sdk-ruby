@@ -84,6 +84,8 @@ module Aws::SsmSap
             Aws::SsmSap::Endpoints::PutResourcePermission.build(context)
           when :register_application
             Aws::SsmSap::Endpoints::RegisterApplication.build(context)
+          when :start_application_refresh
+            Aws::SsmSap::Endpoints::StartApplicationRefresh.build(context)
           when :tag_resource
             Aws::SsmSap::Endpoints::TagResource.build(context)
           when :untag_resource

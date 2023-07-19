@@ -4061,6 +4061,9 @@ module Aws::CloudFormation
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html
     #
+    # @option params [Types::TemplateSummaryConfig] :template_summary_config
+    #   Specifies options for the `GetTemplateSummary` API action.
+    #
     # @return [Types::GetTemplateSummaryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetTemplateSummaryOutput#parameters #parameters} => Array&lt;Types::ParameterDeclaration&gt;
@@ -4072,6 +4075,7 @@ module Aws::CloudFormation
     #   * {Types::GetTemplateSummaryOutput#metadata #metadata} => String
     #   * {Types::GetTemplateSummaryOutput#declared_transforms #declared_transforms} => Array&lt;String&gt;
     #   * {Types::GetTemplateSummaryOutput#resource_identifier_summaries #resource_identifier_summaries} => Array&lt;Types::ResourceIdentifierSummary&gt;
+    #   * {Types::GetTemplateSummaryOutput#warnings #warnings} => Types::Warnings
     #
     # @example Request syntax with placeholder values
     #
@@ -4081,6 +4085,9 @@ module Aws::CloudFormation
     #     stack_name: "StackNameOrId",
     #     stack_set_name: "StackSetNameOrId",
     #     call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
+    #     template_summary_config: {
+    #       treat_unrecognized_resource_types_as_warnings: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -4109,6 +4116,8 @@ module Aws::CloudFormation
     #   resp.resource_identifier_summaries[0].logical_resource_ids[0] #=> String
     #   resp.resource_identifier_summaries[0].resource_identifiers #=> Array
     #   resp.resource_identifier_summaries[0].resource_identifiers[0] #=> String
+    #   resp.warnings.unrecognized_resource_types #=> Array
+    #   resp.warnings.unrecognized_resource_types[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplateSummary AWS API Documentation
     #
@@ -6996,7 +7005,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

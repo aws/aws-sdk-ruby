@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.86.0 (2023-07-19)
+------------------
+
+* Feature - SDK and documentation updates for GetTemplateSummary API (unrecognized resources)
+
 1.85.0 (2023-07-11)
 ------------------
 

@@ -434,6 +434,7 @@ module Aws::CloudFormation
     TemplateParameter = Shapes::StructureShape.new(name: 'TemplateParameter')
     TemplateParameters = Shapes::ListShape.new(name: 'TemplateParameters')
     TemplateStage = Shapes::StringShape.new(name: 'TemplateStage')
+    TemplateSummaryConfig = Shapes::StructureShape.new(name: 'TemplateSummaryConfig')
     TemplateURL = Shapes::StringShape.new(name: 'TemplateURL')
     TestTypeInput = Shapes::StructureShape.new(name: 'TestTypeInput')
     TestTypeOutput = Shapes::StructureShape.new(name: 'TestTypeOutput')
@@ -445,6 +446,7 @@ module Aws::CloudFormation
     TotalStackInstancesCount = Shapes::IntegerShape.new(name: 'TotalStackInstancesCount')
     TransformName = Shapes::StringShape.new(name: 'TransformName')
     TransformsList = Shapes::ListShape.new(name: 'TransformsList')
+    TreatUnrecognizedResourceTypesAsWarnings = Shapes::BooleanShape.new(name: 'TreatUnrecognizedResourceTypesAsWarnings')
     Type = Shapes::StringShape.new(name: 'Type')
     TypeArn = Shapes::StringShape.new(name: 'TypeArn')
     TypeConfiguration = Shapes::StringShape.new(name: 'TypeConfiguration')
@@ -486,6 +488,7 @@ module Aws::CloudFormation
     Version = Shapes::StringShape.new(name: 'Version')
     VersionBump = Shapes::StringShape.new(name: 'VersionBump')
     Visibility = Shapes::StringShape.new(name: 'Visibility')
+    Warnings = Shapes::StructureShape.new(name: 'Warnings')
 
     AccountGateResult.add_member(:status, Shapes::ShapeRef.new(shape: AccountGateStatus, location_name: "Status"))
     AccountGateResult.add_member(:status_reason, Shapes::ShapeRef.new(shape: AccountGateStatusReason, location_name: "StatusReason"))
@@ -992,6 +995,7 @@ module Aws::CloudFormation
     GetTemplateSummaryInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackNameOrId, location_name: "StackName"))
     GetTemplateSummaryInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetNameOrId, location_name: "StackSetName"))
     GetTemplateSummaryInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
+    GetTemplateSummaryInput.add_member(:template_summary_config, Shapes::ShapeRef.new(shape: TemplateSummaryConfig, location_name: "TemplateSummaryConfig"))
     GetTemplateSummaryInput.struct_class = Types::GetTemplateSummaryInput
 
     GetTemplateSummaryOutput.add_member(:parameters, Shapes::ShapeRef.new(shape: ParameterDeclarations, location_name: "Parameters"))
@@ -1003,6 +1007,7 @@ module Aws::CloudFormation
     GetTemplateSummaryOutput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
     GetTemplateSummaryOutput.add_member(:declared_transforms, Shapes::ShapeRef.new(shape: TransformsList, location_name: "DeclaredTransforms"))
     GetTemplateSummaryOutput.add_member(:resource_identifier_summaries, Shapes::ShapeRef.new(shape: ResourceIdentifierSummaries, location_name: "ResourceIdentifierSummaries"))
+    GetTemplateSummaryOutput.add_member(:warnings, Shapes::ShapeRef.new(shape: Warnings, location_name: "Warnings"))
     GetTemplateSummaryOutput.struct_class = Types::GetTemplateSummaryOutput
 
     ImportStacksToStackSetInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetNameOrId, required: true, location_name: "StackSetName"))
@@ -1678,6 +1683,9 @@ module Aws::CloudFormation
 
     TemplateParameters.member = Shapes::ShapeRef.new(shape: TemplateParameter)
 
+    TemplateSummaryConfig.add_member(:treat_unrecognized_resource_types_as_warnings, Shapes::ShapeRef.new(shape: TreatUnrecognizedResourceTypesAsWarnings, location_name: "TreatUnrecognizedResourceTypesAsWarnings"))
+    TemplateSummaryConfig.struct_class = Types::TemplateSummaryConfig
+
     TestTypeInput.add_member(:arn, Shapes::ShapeRef.new(shape: TypeArn, location_name: "Arn"))
     TestTypeInput.add_member(:type, Shapes::ShapeRef.new(shape: ThirdPartyType, location_name: "Type"))
     TestTypeInput.add_member(:type_name, Shapes::ShapeRef.new(shape: TypeName, location_name: "TypeName"))
@@ -1828,6 +1836,9 @@ module Aws::CloudFormation
     ValidateTemplateOutput.add_member(:capabilities_reason, Shapes::ShapeRef.new(shape: CapabilitiesReason, location_name: "CapabilitiesReason"))
     ValidateTemplateOutput.add_member(:declared_transforms, Shapes::ShapeRef.new(shape: TransformsList, location_name: "DeclaredTransforms"))
     ValidateTemplateOutput.struct_class = Types::ValidateTemplateOutput
+
+    Warnings.add_member(:unrecognized_resource_types, Shapes::ShapeRef.new(shape: ResourceTypes, location_name: "UnrecognizedResourceTypes"))
+    Warnings.struct_class = Types::Warnings
 
 
     # @api private

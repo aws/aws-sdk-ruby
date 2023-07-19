@@ -32,6 +32,10 @@ module Aws::SsmSap
     #   The status of the application.
     #   @return [String]
     #
+    # @!attribute [rw] discovery_status
+    #   The latest discovery result for the application.
+    #   @return [String]
+    #
     # @!attribute [rw] components
     #   The components of the application.
     #   @return [Array<String>]
@@ -52,6 +56,7 @@ module Aws::SsmSap
       :arn,
       :app_registry_arn,
       :status,
+      :discovery_status,
       :components,
       :last_updated,
       :status_message)
@@ -114,11 +119,66 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
+    # Describes the properties of the associated host.
+    #
+    # @!attribute [rw] hostname
+    #   The name of the host.
+    #   @return [String]
+    #
+    # @!attribute [rw] ec2_instance_id
+    #   The ID of the Amazon EC2 instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] os_version
+    #   The version of the operating system.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/AssociatedHost AWS API Documentation
+    #
+    class AssociatedHost < Struct.new(
+      :hostname,
+      :ec2_instance_id,
+      :os_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration parameters for AWS Backint Agent for SAP HANA. You can
+    # backup your SAP HANA database with AWS Backup or Amazon S3.
+    #
+    # @!attribute [rw] backint_mode
+    #   AWS service for your database backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] ensure_no_backup_in_process
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/BackintConfig AWS API Documentation
+    #
+    class BackintConfig < Struct.new(
+      :backint_mode,
+      :ensure_no_backup_in_process)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The SAP component of your application.
     #
     # @!attribute [rw] component_id
     #   The ID of the component.
     #   @return [String]
+    #
+    # @!attribute [rw] parent_component
+    #   The parent component of a highly available environment. For example,
+    #   in a highly available SAP on AWS workload, the parent component
+    #   consists of the entire setup, including the child components.
+    #   @return [String]
+    #
+    # @!attribute [rw] child_components
+    #   The child components of a highly available environment. For example,
+    #   in a highly available SAP on AWS workload, the child component
+    #   consists of the primary and secondar instances.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] application_id
     #   The ID of the application.
@@ -131,6 +191,26 @@ module Aws::SsmSap
     # @!attribute [rw] status
     #   The status of the component.
     #   @return [String]
+    #
+    # @!attribute [rw] sap_hostname
+    #   The hostname of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] sap_kernel_version
+    #   The kernel version of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] hdb_version
+    #   The SAP HANA version of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] resilience
+    #   Details of the SAP HANA system replication for the component.
+    #   @return [Types::Resilience]
+    #
+    # @!attribute [rw] associated_host
+    #   The associated host of the component.
+    #   @return [Types::AssociatedHost]
     #
     # @!attribute [rw] databases
     #   The SAP HANA databases of the component.
@@ -148,17 +228,29 @@ module Aws::SsmSap
     #   The time at which the component was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the component.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/Component AWS API Documentation
     #
     class Component < Struct.new(
       :component_id,
+      :parent_component,
+      :child_components,
       :application_id,
       :component_type,
       :status,
+      :sap_hostname,
+      :sap_kernel_version,
+      :hdb_version,
+      :resilience,
+      :associated_host,
       :databases,
       :hosts,
       :primary_host,
-      :last_updated)
+      :last_updated,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -181,13 +273,18 @@ module Aws::SsmSap
     #   The tags of the component.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the component summary.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ComponentSummary AWS API Documentation
     #
     class ComponentSummary < Struct.new(
       :application_id,
       :component_id,
       :component_type,
-      :tags)
+      :tags,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -449,10 +546,15 @@ module Aws::SsmSap
     #   for SAP.
     #   @return [Types::Component]
     #
+    # @!attribute [rw] tags
+    #   The tags of a component.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetComponentOutput AWS API Documentation
     #
     class GetComponentOutput < Struct.new(
-      :component)
+      :component,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -559,25 +661,35 @@ module Aws::SsmSap
     #   The name of the Dedicated Host.
     #   @return [String]
     #
-    # @!attribute [rw] host_role
-    #   The role of the Dedicated Host.
-    #   @return [String]
-    #
     # @!attribute [rw] host_ip
     #   The IP address of the Dedicated Host.
+    #   @return [String]
+    #
+    # @!attribute [rw] ec2_instance_id
+    #   The ID of Amazon EC2 instance.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
     #   The instance ID of the instance on the Dedicated Host.
     #   @return [String]
     #
+    # @!attribute [rw] host_role
+    #   The role of the Dedicated Host.
+    #   @return [String]
+    #
+    # @!attribute [rw] os_version
+    #   The version of the operating system.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/Host AWS API Documentation
     #
     class Host < Struct.new(
       :host_name,
-      :host_role,
       :host_ip,
-      :instance_id)
+      :ec2_instance_id,
+      :instance_id,
+      :host_role,
+      :os_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -949,6 +1061,35 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
+    # Details of the SAP HANA system replication for the instance.
+    #
+    # @!attribute [rw] hsr_tier
+    #   The tier of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] hsr_replication_mode
+    #   The replication mode of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] hsr_operation_mode
+    #   The operation mode of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_status
+    #   The cluster status of the component.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/Resilience AWS API Documentation
+    #
+    class Resilience < Struct.new(
+      :hsr_tier,
+      :hsr_replication_mode,
+      :hsr_operation_mode,
+      :cluster_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The resource is not available.
     #
     # @!attribute [rw] message
@@ -958,6 +1099,30 @@ module Aws::SsmSap
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_id
+    #   The ID of the application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/StartApplicationRefreshInput AWS API Documentation
+    #
+    class StartApplicationRefreshInput < Struct.new(
+      :application_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation_id
+    #   The ID of the operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/StartApplicationRefreshOutput AWS API Documentation
+    #
+    class StartApplicationRefreshOutput < Struct.new(
+      :operation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1017,12 +1182,17 @@ module Aws::SsmSap
     #   The credentials to be removed.
     #   @return [Array<Types::ApplicationCredential>]
     #
+    # @!attribute [rw] backint
+    #   Installation of AWS Backint Agent for SAP HANA.
+    #   @return [Types::BackintConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/UpdateApplicationSettingsInput AWS API Documentation
     #
     class UpdateApplicationSettingsInput < Struct.new(
       :application_id,
       :credentials_to_add_or_update,
-      :credentials_to_remove)
+      :credentials_to_remove,
+      :backint)
       SENSITIVE = []
       include Aws::Structure
     end

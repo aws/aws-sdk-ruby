@@ -253,13 +253,19 @@ module Aws::RAM
     #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #   @return [String]
     #
+    # @!attribute [rw] sources
+    #   Specifies from which source accounts the service principal has
+    #   access to the resources in this resource share.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/AssociateResourceShareRequest AWS API Documentation
     #
     class AssociateResourceShareRequest < Struct.new(
       :resource_share_arn,
       :resource_arns,
       :principals,
-      :client_token)
+      :client_token,
+      :sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -671,6 +677,11 @@ module Aws::RAM
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] sources
+    #   Specifies from which source accounts the service principal has
+    #   access to the resources in this resource share.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/CreateResourceShareRequest AWS API Documentation
     #
     class CreateResourceShareRequest < Struct.new(
@@ -680,7 +691,8 @@ module Aws::RAM
       :tags,
       :allow_external_principals,
       :client_token,
-      :permission_arns)
+      :permission_arns,
+      :sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1060,13 +1072,19 @@ module Aws::RAM
     #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #   @return [String]
     #
+    # @!attribute [rw] sources
+    #   Specifies from which source accounts the service principal no longer
+    #   has access to the resources in this resource share.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/DisassociateResourceShareRequest AWS API Documentation
     #
     class DisassociateResourceShareRequest < Struct.new(
       :resource_share_arn,
       :resource_arns,
       :principals,
-      :client_token)
+      :client_token,
+      :sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1257,7 +1275,7 @@ module Aws::RAM
     #   Specifies the ID of the principal whose resource shares you want to
     #   retrieve. This can be an Amazon Web Services account ID, an
     #   organization ID, an organizational unit ID, or the [Amazon Resource
-    #   Name (ARN)][1] of an individual IAM user or role.
+    #   Name (ARN)][1] of an individual IAM role or user.
     #
     #   You cannot specify this parameter if the association type is
     #   `RESOURCE`.

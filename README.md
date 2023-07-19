@@ -386,6 +386,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Greengrass                                        | Aws::Greengrass                          | aws-sdk-greengrass                          | 2017-06-07  |
 | AWS Ground Station                                    | Aws::GroundStation                       | aws-sdk-groundstation                       | 2019-05-23  |
 | AWS Health APIs and Notifications                     | Aws::Health                              | aws-sdk-health                              | 2016-08-04  |
+| AWS Health Imaging                                    | Aws::MedicalImaging                      | aws-sdk-medicalimaging                      | 2023-07-19  |
 | AWS Identity and Access Management                    | Aws::IAM                                 | aws-sdk-iam                                 | 2010-05-08  |
 | AWS Import/Export                                     | Aws::ImportExport                        | aws-sdk-importexport                        | 2010-06-01  |
 | AWS IoT                                               | Aws::IoT                                 | aws-sdk-iot                                 | 2015-05-28  |

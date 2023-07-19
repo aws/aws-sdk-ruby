@@ -971,6 +971,14 @@ module Aws::WAFV2
     #                 label_namespace: {
     #                   namespace: "LabelNamespace", # required
     #                 },
+    #                 uri_path: {
+    #                   text_transformations: [ # required
+    #                     {
+    #                       priority: 1, # required
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #             ],
     #           },
@@ -2122,6 +2130,14 @@ module Aws::WAFV2
     #                 label_namespace: {
     #                   namespace: "LabelNamespace", # required
     #                 },
+    #                 uri_path: {
+    #                   text_transformations: [ # required
+    #                     {
+    #                       priority: 1, # required
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #             ],
     #           },
@@ -3101,6 +3117,14 @@ module Aws::WAFV2
     #                 },
     #                 label_namespace: {
     #                   namespace: "LabelNamespace", # required
+    #                 },
+    #                 uri_path: {
+    #                   text_transformations: [ # required
+    #                     {
+    #                       priority: 1, # required
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                     },
+    #                   ],
     #                 },
     #               },
     #             ],
@@ -4865,6 +4889,9 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].query_string.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].query_string.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].label_namespace.namespace #=> String
+    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].uri_path.text_transformations #=> Array
+    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].uri_path.text_transformations[0].priority #=> Integer
+    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].uri_path.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.rule_group.rules[0].statement.and_statement.statements #=> Array
     #   resp.rule_group.rules[0].statement.and_statement.statements[0] #=> Types::Statement
     #   resp.rule_group.rules[0].statement.or_statement.statements #=> Array
@@ -7352,6 +7379,14 @@ module Aws::WAFV2
     #                 label_namespace: {
     #                   namespace: "LabelNamespace", # required
     #                 },
+    #                 uri_path: {
+    #                   text_transformations: [ # required
+    #                     {
+    #                       priority: 1, # required
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #             ],
     #           },
@@ -8366,6 +8401,14 @@ module Aws::WAFV2
     #                 label_namespace: {
     #                   namespace: "LabelNamespace", # required
     #                 },
+    #                 uri_path: {
+    #                   text_transformations: [ # required
+    #                     {
+    #                       priority: 1, # required
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #             ],
     #           },
@@ -8769,7 +8812,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

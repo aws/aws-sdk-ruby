@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.789.0 (2023-07-19)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::MedicalImaging`.
+
 1.788.0 (2023-07-18)
 ------------------
 

@@ -279,18 +279,9 @@ module Aws::EC2
     #   The instance type. For more information, see [Instance types][1] in
     #   the *Amazon EC2 User Guide*.
     #
-    #   When you change your EBS-backed instance type, instance restart or
-    #   replacement behavior depends on the instance type compatibility
-    #   between the old and new types. An instance that's backed by an
-    #   instance store volume is always replaced. For more information, see
-    #   [Change the instance type][2] in the *Amazon EC2 User Guide*.
-    #
-    #   Default: `m1.small`
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-resize.html
     # @option options [Integer] :ipv_6_address_count
     #   The number of IPv6 addresses to associate with the primary network
     #   interface. Amazon EC2 chooses the IPv6 addresses from the range of
@@ -599,7 +590,8 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html
     # @option options [Types::PrivateDnsNameOptionsRequest] :private_dns_name_options
     #   The options for the instance hostname. The default values are
-    #   inherited from the subnet.
+    #   inherited from the subnet. Applies only if creating a network
+    #   interface, not attaching an existing one.
     # @option options [Types::InstanceMaintenanceOptionsRequest] :maintenance_options
     #   The maintenance and recovery options for the instance.
     # @option options [Boolean] :disable_api_stop
@@ -771,17 +763,16 @@ module Aws::EC2
     #   provide an address, a private IPv4 address will be automatically
     #   assigned.
     # @option options [Array<String>] :secondary_allocation_ids
-    #   Secondary EIP allocation IDs. For more information about secondary
-    #   addresses, see [Create a NAT gateway][1] in the *Amazon Virtual
-    #   Private Cloud User Guide*.
+    #   Secondary EIP allocation IDs. For more information, see [Create a NAT
+    #   gateway][1] in the *Amazon VPC User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
     # @option options [Array<String>] :secondary_private_ip_addresses
     #   Secondary private IPv4 addresses. For more information about secondary
-    #   addresses, see [Create a NAT gateway][1] in the *Amazon Virtual
-    #   Private Cloud User Guide*.
+    #   addresses, see [Create a NAT gateway][1] in the *Amazon VPC User
+    #   Guide*.
     #
     #
     #
@@ -790,7 +781,7 @@ module Aws::EC2
     #   \[Private NAT gateway only\] The number of secondary private IPv4
     #   addresses you want to assign to the NAT gateway. For more information
     #   about secondary addresses, see [Create a NAT gateway][1] in the
-    #   *Amazon Virtual Private Cloud User Guide*.
+    #   *Amazon VPC User Guide*.
     #
     #
     #
@@ -1115,21 +1106,17 @@ module Aws::EC2
     #
     #   Constraints: Up to 255 characters in length
     #
-    #   Constraints for EC2-Classic: ASCII characters
-    #
-    #   Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and
+    #   Valid characters: a-z, A-Z, 0-9, spaces, and
     #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
     # @option options [required, String] :group_name
     #   The name of the security group.
     #
     #   Constraints: Up to 255 characters in length. Cannot start with `sg-`.
     #
-    #   Constraints for EC2-Classic: ASCII characters
-    #
-    #   Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and
+    #   Valid characters: a-z, A-Z, 0-9, spaces, and
     #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
     # @option options [String] :vpc_id
-    #   \[EC2-VPC\] The ID of the VPC. Required for EC2-VPC.
+    #   The ID of the VPC. Required for a nondefault VPC.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the security group.
     # @option options [Boolean] :dry_run
@@ -1247,15 +1234,14 @@ module Aws::EC2
     #
     #   To create a subnet in a Local Zone, set this value to the Local Zone
     #   ID, for example `us-west-2-lax-1a`. For information about the Regions
-    #   that support Local Zones, see [Available Regions][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   that support Local Zones, see [Local Zones locations][1].
     #
     #   To create a subnet in an Outpost, set this value to the Availability
     #   Zone for the Outpost and specify the Outpost ARN.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions
+    #   [1]: http://aws.amazon.com/about-aws/global-infrastructure/localzones/locations/
     # @option options [String] :availability_zone_id
     #   The AZ ID or the Local Zone ID of the subnet.
     # @option options [String] :cidr_block
@@ -1402,7 +1388,8 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :availability_zone
-    #   The Availability Zone in which to create the volume.
+    #   The ID of the Availability Zone in which to create the volume. For
+    #   example, `us-east-1a`.
     # @option options [Boolean] :encrypted
     #   Indicates whether the volume should be encrypted. The effect of
     #   setting the encryption state to `true` depends on the volume origin
@@ -2088,7 +2075,7 @@ module Aws::EC2
     #
     #   Default: Describes all your DHCP options sets.
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `dhcp-options-id` - The ID of a DHCP options set.
     #
@@ -2179,7 +2166,7 @@ module Aws::EC2
     #   The filters.
     #
     #   * `architecture` - The image architecture (`i386` \| `x86_64` \|
-    #     `arm64`).
+    #     `arm64` \| `x86_64_mac` \| `arm64_mac`).
     #
     #   * `block-device-mapping.delete-on-termination` - A Boolean value that
     #     indicates whether the Amazon EBS volume is deleted on instance
@@ -2674,7 +2661,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `attachment.state` - The current state of the attachment between the
     #     gateway and the VPC (`available`). Present only if a VPC is
@@ -2702,7 +2689,7 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<String>] :internet_gateway_ids
-    #   One or more internet gateway IDs.
+    #   The IDs of the internet gateways.
     #
     #   Default: Describes all your internet gateways.
     # @return [InternetGateway::Collection]
@@ -2830,7 +2817,7 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::Filter>] :filter
-    #   One or more filters.
+    #   The filters.
     #
     #   * `nat-gateway-id` - The ID of the NAT gateway.
     #
@@ -2851,7 +2838,7 @@ module Aws::EC2
     #
     #   * `vpc-id` - The ID of the VPC in which the NAT gateway resides.
     # @option options [Array<String>] :nat_gateway_ids
-    #   One or more NAT gateway IDs.
+    #   The IDs of the NAT gateways.
     # @return [NatGateway::Collection]
     def nat_gateways(options = {})
       batches = Enumerator.new do |y|
@@ -2896,7 +2883,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `association.association-id` - The ID of an association ID for the
     #     ACL.
@@ -2958,7 +2945,7 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<String>] :network_acl_ids
-    #   One or more network ACL IDs.
+    #   The IDs of the network ACLs.
     #
     #   Default: Describes all your network ACLs.
     # @return [NetworkAcl::Collection]
@@ -3262,7 +3249,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `association.route-table-association-id` - The ID of an association
     #     ID for the route table.
@@ -3337,7 +3324,7 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<String>] :route_table_ids
-    #   One or more route table IDs.
+    #   The IDs of the route tables.
     #
     #   Default: Describes all your route tables.
     # @return [RouteTable::Collection]
@@ -3472,10 +3459,8 @@ module Aws::EC2
     #
     #   Default: Describes all of your security groups.
     # @option options [Array<String>] :group_names
-    #   \[EC2-Classic and default VPC only\] The names of the security groups.
-    #   You can specify either the security group name or the security group
-    #   ID. For security groups in a nondefault VPC, use the `group-name`
-    #   filter to describe security groups by name.
+    #   \[Default VPC\] The names of the security groups. You can specify
+    #   either the security group name or the security group ID.
     #
     #   Default: Describes all of your security groups.
     # @option options [Boolean] :dry_run
@@ -3631,7 +3616,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `availability-zone` - The Availability Zone for the subnet. You can
     #     also use `availabilityZone` as the filter name.
@@ -3720,7 +3705,7 @@ module Aws::EC2
     #
     #   * `vpc-id` - The ID of the VPC for the subnet.
     # @option options [Array<String>] :subnet_ids
-    #   One or more subnet IDs.
+    #   The IDs of the subnets.
     #
     #   Default: Describes all your subnets.
     # @option options [Boolean] :dry_run
@@ -3967,7 +3952,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `accepter-vpc-info.cidr-block` - The IPv4 CIDR block of the accepter
     #     VPC.
@@ -4012,7 +3997,7 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<String>] :vpc_peering_connection_ids
-    #   One or more VPC peering connection IDs.
+    #   The IDs of the VPC peering connections.
     #
     #   Default: Describes all your VPC peering connections.
     # @return [VpcPeeringConnection::Collection]
@@ -4050,7 +4035,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `cidr` - The primary IPv4 CIDR block of the VPC. The CIDR block you
     #     specify must exactly match the VPC's CIDR block for information to
@@ -4099,7 +4084,7 @@ module Aws::EC2
     #
     #   * `vpc-id` - The ID of the VPC.
     # @option options [Array<String>] :vpc_ids
-    #   One or more VPC IDs.
+    #   The IDs of the VPCs.
     #
     #   Default: Describes all your VPCs.
     # @option options [Boolean] :dry_run

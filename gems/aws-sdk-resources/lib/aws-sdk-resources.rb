@@ -230,6 +230,7 @@ module Aws
   autoload :MediaStore, 'aws-sdk-mediastore'
   autoload :MediaStoreData, 'aws-sdk-mediastoredata'
   autoload :MediaTailor, 'aws-sdk-mediatailor'
+  autoload :MedicalImaging, 'aws-sdk-medicalimaging'
   autoload :MemoryDB, 'aws-sdk-memorydb'
   autoload :Mgn, 'aws-sdk-mgn'
   autoload :MigrationHub, 'aws-sdk-migrationhub'

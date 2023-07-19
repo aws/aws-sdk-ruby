@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.168.0 (2023-07-19)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-medicalimaging` gem.
+
 3.167.0 (2023-06-27)
 ------------------
 

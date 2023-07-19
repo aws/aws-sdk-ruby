@@ -540,6 +540,10 @@ module Aws::RAM
     #
     #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
+    # @option params [Array<String>] :sources
+    #   Specifies from which source accounts the service principal has access
+    #   to the resources in this resource share.
+    #
     # @return [Types::AssociateResourceShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AssociateResourceShareResponse#resource_share_associations #resource_share_associations} => Array&lt;Types::ResourceShareAssociation&gt;
@@ -552,6 +556,7 @@ module Aws::RAM
     #     resource_arns: ["String"],
     #     principals: ["String"],
     #     client_token: "String",
+    #     sources: ["String"],
     #   })
     #
     # @example Response structure
@@ -1004,6 +1009,10 @@ module Aws::RAM
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
+    # @option params [Array<String>] :sources
+    #   Specifies from which source accounts the service principal has access
+    #   to the resources in this resource share.
+    #
     # @return [Types::CreateResourceShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateResourceShareResponse#resource_share #resource_share} => Types::ResourceShare
@@ -1024,6 +1033,7 @@ module Aws::RAM
     #     allow_external_principals: false,
     #     client_token: "String",
     #     permission_arns: ["String"],
+    #     sources: ["String"],
     #   })
     #
     # @example Response structure
@@ -1322,6 +1332,10 @@ module Aws::RAM
     #
     #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
+    # @option params [Array<String>] :sources
+    #   Specifies from which source accounts the service principal no longer
+    #   has access to the resources in this resource share.
+    #
     # @return [Types::DisassociateResourceShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DisassociateResourceShareResponse#resource_share_associations #resource_share_associations} => Array&lt;Types::ResourceShareAssociation&gt;
@@ -1334,6 +1348,7 @@ module Aws::RAM
     #     resource_arns: ["String"],
     #     principals: ["String"],
     #     client_token: "String",
+    #     sources: ["String"],
     #   })
     #
     # @example Response structure
@@ -1617,7 +1632,7 @@ module Aws::RAM
     #   Specifies the ID of the principal whose resource shares you want to
     #   retrieve. This can be an Amazon Web Services account ID, an
     #   organization ID, an organizational unit ID, or the [Amazon Resource
-    #   Name (ARN)][1] of an individual IAM user or role.
+    #   Name (ARN)][1] of an individual IAM role or user.
     #
     #   You cannot specify this parameter if the association type is
     #   `RESOURCE`.
@@ -3272,7 +3287,7 @@ module Aws::RAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ram'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

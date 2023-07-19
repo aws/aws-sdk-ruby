@@ -505,18 +505,9 @@ module Aws::EC2
     #   The instance type. For more information, see [Instance types][1] in
     #   the *Amazon EC2 User Guide*.
     #
-    #   When you change your EBS-backed instance type, instance restart or
-    #   replacement behavior depends on the instance type compatibility
-    #   between the old and new types. An instance that's backed by an
-    #   instance store volume is always replaced. For more information, see
-    #   [Change the instance type][2] in the *Amazon EC2 User Guide*.
-    #
-    #   Default: `m1.small`
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-resize.html
     # @option options [Integer] :ipv_6_address_count
     #   The number of IPv6 addresses to associate with the primary network
     #   interface. Amazon EC2 chooses the IPv6 addresses from the range of
@@ -820,7 +811,8 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html
     # @option options [Types::PrivateDnsNameOptionsRequest] :private_dns_name_options
     #   The options for the instance hostname. The default values are
-    #   inherited from the subnet.
+    #   inherited from the subnet. Applies only if creating a network
+    #   interface, not attaching an existing one.
     # @option options [Types::InstanceMaintenanceOptionsRequest] :maintenance_options
     #   The maintenance and recovery options for the instance.
     # @option options [Boolean] :disable_api_stop
@@ -1451,7 +1443,7 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::Filter>] :filter
-    #   One or more filters.
+    #   The filters.
     #
     #   * `nat-gateway-id` - The ID of the NAT gateway.
     #
@@ -1472,7 +1464,7 @@ module Aws::EC2
     #
     #   * `vpc-id` - The ID of the VPC in which the NAT gateway resides.
     # @option options [Array<String>] :nat_gateway_ids
-    #   One or more NAT gateway IDs.
+    #   The IDs of the NAT gateways.
     # @return [NatGateway::Collection]
     def nat_gateways(options = {})
       batches = Enumerator.new do |y|

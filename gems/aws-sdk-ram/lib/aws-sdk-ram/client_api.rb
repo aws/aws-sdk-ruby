@@ -144,6 +144,7 @@ module Aws::RAM
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SetDefaultPermissionVersionRequest = Shapes::StructureShape.new(name: 'SetDefaultPermissionVersionRequest')
     SetDefaultPermissionVersionResponse = Shapes::StructureShape.new(name: 'SetDefaultPermissionVersionResponse')
+    SourceArnOrAccountList = Shapes::ListShape.new(name: 'SourceArnOrAccountList')
     String = Shapes::StringShape.new(name: 'String')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagFilter = Shapes::StructureShape.new(name: 'TagFilter')
@@ -188,6 +189,7 @@ module Aws::RAM
     AssociateResourceShareRequest.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ResourceArnList, location_name: "resourceArns"))
     AssociateResourceShareRequest.add_member(:principals, Shapes::ShapeRef.new(shape: PrincipalArnOrIdList, location_name: "principals"))
     AssociateResourceShareRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
+    AssociateResourceShareRequest.add_member(:sources, Shapes::ShapeRef.new(shape: SourceArnOrAccountList, location_name: "sources"))
     AssociateResourceShareRequest.struct_class = Types::AssociateResourceShareRequest
 
     AssociateResourceShareResponse.add_member(:resource_share_associations, Shapes::ShapeRef.new(shape: ResourceShareAssociationList, location_name: "resourceShareAssociations"))
@@ -233,6 +235,7 @@ module Aws::RAM
     CreateResourceShareRequest.add_member(:allow_external_principals, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowExternalPrincipals"))
     CreateResourceShareRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
     CreateResourceShareRequest.add_member(:permission_arns, Shapes::ShapeRef.new(shape: PermissionArnList, location_name: "permissionArns"))
+    CreateResourceShareRequest.add_member(:sources, Shapes::ShapeRef.new(shape: SourceArnOrAccountList, location_name: "sources"))
     CreateResourceShareRequest.struct_class = Types::CreateResourceShareRequest
 
     CreateResourceShareResponse.add_member(:resource_share, Shapes::ShapeRef.new(shape: ResourceShare, location_name: "resourceShare"))
@@ -279,6 +282,7 @@ module Aws::RAM
     DisassociateResourceShareRequest.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ResourceArnList, location_name: "resourceArns"))
     DisassociateResourceShareRequest.add_member(:principals, Shapes::ShapeRef.new(shape: PrincipalArnOrIdList, location_name: "principals"))
     DisassociateResourceShareRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
+    DisassociateResourceShareRequest.add_member(:sources, Shapes::ShapeRef.new(shape: SourceArnOrAccountList, location_name: "sources"))
     DisassociateResourceShareRequest.struct_class = Types::DisassociateResourceShareRequest
 
     DisassociateResourceShareResponse.add_member(:resource_share_associations, Shapes::ShapeRef.new(shape: ResourceShareAssociationList, location_name: "resourceShareAssociations"))
@@ -681,6 +685,8 @@ module Aws::RAM
     SetDefaultPermissionVersionResponse.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
     SetDefaultPermissionVersionResponse.struct_class = Types::SetDefaultPermissionVersionResponse
 
+    SourceArnOrAccountList.member = Shapes::ShapeRef.new(shape: String)
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "value"))
     Tag.struct_class = Types::Tag
@@ -859,6 +865,7 @@ module Aws::RAM
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceShareLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: TagPolicyViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: TagLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
