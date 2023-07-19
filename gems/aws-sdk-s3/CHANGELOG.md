@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add support for verifying checksums in FileDownloader.
+
 1.130.0 (2023-07-13)
 ------------------
 
