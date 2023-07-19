@@ -31,6 +31,17 @@ module Aws
           key: options[:key],
         }
         @params[:version_id] = options[:version_id] if options[:version_id]
+        @params[:checksum_mode] = options[:checksum_mode] || 'ENABLED'
+        @on_checksum_validated = options[:on_checksum_validated]
+
+        if @on_checksum_validated && @params[:checksum_mode] != 'ENABLED'
+          raise ArgumentError, "You must set checksum_mode: 'ENABLED' " +
+            "when providing a on_checksum_validated callback"
+        end
+
+        if @on_checksum_validated && !@on_checksum_validated.respond_to?(:call)
+          raise ArgumentError, 'on_checksum_validated must be callable'
+        end
 
         Aws::Plugins::UserAgent.feature('s3-transfer') do
           case @mode
@@ -129,6 +140,14 @@ module Aws
                 @params.merge(param.to_sym => chunk)
               )
               write(resp)
+              if @on_checksum_validated &&
+                resp.context[:http_checksum] &&
+                resp.context[:http_checksum][:validated]
+                @on_checksum_validated.call(
+                  resp.context[:http_checksum][:validated],
+                  resp
+                )
+              end
             end
           end
           threads.each(&:join)
@@ -142,9 +161,17 @@ module Aws
       end
 
       def single_request
-        @client.get_object(
+        resp = @client.get_object(
           @params.merge(response_target: @path)
         )
+        if @on_checksum_validated &&
+          resp.context[:http_checksum] &&
+          resp.context[:http_checksum][:validated]
+          @on_checksum_validated.call(
+            resp.context[:http_checksum][:validated],
+            resp
+          )
+        end
       end
     end
   end
