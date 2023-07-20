@@ -23,7 +23,22 @@ module Aws::S3
       disable_multi_region_access_points = parameters.disable_multi_region_access_points
       use_arn_region = parameters.use_arn_region
       if Aws::Endpoints::Matchers.set?(region)
-        if Aws::Endpoints::Matchers.set?(bucket) && (hardware_type = Aws::Endpoints::Matchers.substring(bucket, 49, 50, true)) && (region_prefix = Aws::Endpoints::Matchers.substring(bucket, 8, 12, true)) && (abba_suffix = Aws::Endpoints::Matchers.substring(bucket, 0, 7, true)) && (outpost_id = Aws::Endpoints::Matchers.substring(bucket, 32, 49, true)) && (region_partition = Aws::Endpoints::Matchers.aws_partition(region)) && Aws::Endpoints::Matchers.string_equals?(abba_suffix, "--op-s3")
+        if Aws::Endpoints::Matchers.boolean_equals?(accelerate, true) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
+          raise ArgumentError, "Accelerate cannot be used with FIPS"
+        end
+        if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.set?(endpoint)
+          raise ArgumentError, "Cannot set dual-stack in combination with a custom endpoint."
+        end
+        if Aws::Endpoints::Matchers.set?(endpoint) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
+          raise ArgumentError, "A custom endpoint cannot be combined with FIPS"
+        end
+        if Aws::Endpoints::Matchers.set?(endpoint) && Aws::Endpoints::Matchers.boolean_equals?(accelerate, true)
+          raise ArgumentError, "A custom endpoint cannot be combined with S3 Accelerate"
+        end
+        if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && (partition_result = Aws::Endpoints::Matchers.aws_partition(region)) && Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-cn")
+          raise ArgumentError, "Partition does not support FIPS"
+        end
+        if Aws::Endpoints::Matchers.set?(bucket) && (hardware_type = Aws::Endpoints::Matchers.substring(bucket, 49, 50, true)) && (region_prefix = Aws::Endpoints::Matchers.substring(bucket, 8, 12, true)) && (bucket_alias_suffix = Aws::Endpoints::Matchers.substring(bucket, 0, 7, true)) && (outpost_id = Aws::Endpoints::Matchers.substring(bucket, 32, 49, true)) && (region_partition = Aws::Endpoints::Matchers.aws_partition(region)) && Aws::Endpoints::Matchers.string_equals?(bucket_alias_suffix, "--op-s3")
           if Aws::Endpoints::Matchers.valid_host_label?(outpost_id, false)
             if Aws::Endpoints::Matchers.string_equals?(hardware_type, "e")
               if Aws::Endpoints::Matchers.string_equals?(region_prefix, "beta")
@@ -55,123 +70,11 @@ module Aws::S3
           if Aws::Endpoints::Matchers.set?(endpoint) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(Aws::Endpoints::Matchers.parse_url(endpoint)))
             raise ArgumentError, "Custom endpoint `#{endpoint}` was not a valid URI"
           end
-          if Aws::Endpoints::Matchers.set?(force_path_style) && Aws::Endpoints::Matchers.boolean_equals?(force_path_style, true)
-            if Aws::Endpoints::Matchers.aws_parse_arn(bucket)
-              raise ArgumentError, "Path-style addressing cannot be used with ARN buckets"
-            end
-            if (uri_encoded_bucket = Aws::Endpoints::Matchers.uri_encode(bucket))
-              if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.set?(endpoint)
-                raise ArgumentError, "Cannot set dual-stack in combination with a custom endpoint."
-              end
-              if (partition_result = Aws::Endpoints::Matchers.aws_partition(region))
-                if Aws::Endpoints::Matchers.boolean_equals?(accelerate, false)
-                  if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                    return Aws::Endpoints::Endpoint.new(url: "https://s3-fips.dualstack.us-east-1.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-                  end
-                  if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                    return Aws::Endpoints::Endpoint.new(url: "https://s3-fips.dualstack.us-east-1.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-                  end
-                  if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, true)
-                    return Aws::Endpoints::Endpoint.new(url: "https://s3-fips.dualstack.#{region}.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-                  end
-                  if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, false)
-                    return Aws::Endpoints::Endpoint.new(url: "https://s3-fips.dualstack.#{region}.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-                  end
-                  if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                    return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['normalizedPath']}#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-                  end
-                  if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                    return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['normalizedPath']}#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-                  end
-                  if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, true)
-                    return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['normalizedPath']}#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-                  end
-                  if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, false)
-                    return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['normalizedPath']}#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-                  end
-                  if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                    return Aws::Endpoints::Endpoint.new(url: "https://s3-fips.us-east-1.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-                  end
-                  if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                    return Aws::Endpoints::Endpoint.new(url: "https://s3-fips.us-east-1.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-                  end
-                  if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, true)
-                    return Aws::Endpoints::Endpoint.new(url: "https://s3-fips.#{region}.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-                  end
-                  if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, false)
-                    return Aws::Endpoints::Endpoint.new(url: "https://s3-fips.#{region}.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-                  end
-                  if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                    return Aws::Endpoints::Endpoint.new(url: "https://s3.dualstack.us-east-1.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-                  end
-                  if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                    return Aws::Endpoints::Endpoint.new(url: "https://s3.dualstack.us-east-1.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-                  end
-                  if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, true)
-                    return Aws::Endpoints::Endpoint.new(url: "https://s3.dualstack.#{region}.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-                  end
-                  if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, false)
-                    return Aws::Endpoints::Endpoint.new(url: "https://s3.dualstack.#{region}.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-                  end
-                  if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                    return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['normalizedPath']}#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-                  end
-                  if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                    return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['normalizedPath']}#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-                  end
-                  if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, true)
-                    if Aws::Endpoints::Matchers.string_equals?(region, "us-east-1")
-                      return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['normalizedPath']}#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-                    end
-                    return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['normalizedPath']}#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-                  end
-                  if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, false)
-                    return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['normalizedPath']}#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-                  end
-                  if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                    return Aws::Endpoints::Endpoint.new(url: "https://s3.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-                  end
-                  if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                    return Aws::Endpoints::Endpoint.new(url: "https://s3.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-                  end
-                  if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, true)
-                    if Aws::Endpoints::Matchers.string_equals?(region, "us-east-1")
-                      return Aws::Endpoints::Endpoint.new(url: "https://s3.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-                    end
-                    return Aws::Endpoints::Endpoint.new(url: "https://s3.#{region}.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-                  end
-                  if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, false)
-                    return Aws::Endpoints::Endpoint.new(url: "https://s3.#{region}.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-                  end
-                end
-                raise ArgumentError, "Path-style addressing cannot be used with S3 Accelerate"
-              end
-              raise ArgumentError, "A valid partition could not be determined"
-            end
-          end
-          if Aws::Endpoints::Matchers.aws_virtual_hostable_s3_bucket?(bucket, false)
+          if Aws::Endpoints::Matchers.boolean_equals?(force_path_style, false) && Aws::Endpoints::Matchers.aws_virtual_hostable_s3_bucket?(bucket, false)
             if (partition_result = Aws::Endpoints::Matchers.aws_partition(region))
               if Aws::Endpoints::Matchers.valid_host_label?(region, false)
-                if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-cn")
-                  raise ArgumentError, "Partition does not support FIPS"
-                end
-                if Aws::Endpoints::Matchers.boolean_equals?(accelerate, true) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
-                  raise ArgumentError, "Accelerate cannot be used with FIPS"
-                end
                 if Aws::Endpoints::Matchers.boolean_equals?(accelerate, true) && Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-cn")
                   raise ArgumentError, "S3 Accelerate cannot be used in this region"
-                end
-                if Aws::Endpoints::Matchers.set?(endpoint) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
-                  raise ArgumentError, "Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"
-                end
-                if Aws::Endpoints::Matchers.set?(endpoint) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
-                  raise ArgumentError, "Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"
-                end
-                if Aws::Endpoints::Matchers.set?(endpoint) && Aws::Endpoints::Matchers.boolean_equals?(accelerate, true)
-                  raise ArgumentError, "Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"
-                end
-                if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(accelerate, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                  return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.s3-fips.dualstack.us-east-1.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
                 end
                 if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(accelerate, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
                   return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.s3-fips.dualstack.us-east-1.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
@@ -185,17 +88,11 @@ module Aws::S3
                 if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(accelerate, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
                   return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.s3-fips.us-east-1.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
                 end
-                if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(accelerate, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                  return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.s3-fips.us-east-1.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-                end
                 if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(accelerate, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, true)
                   return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.s3-fips.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
                 end
                 if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(accelerate, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, false)
                   return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.s3-fips.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-                end
-                if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(accelerate, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                  return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.s3-accelerate.dualstack.us-east-1.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
                 end
                 if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(accelerate, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
                   return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.s3-accelerate.dualstack.us-east-1.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
@@ -209,20 +106,11 @@ module Aws::S3
                 if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(accelerate, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
                   return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.s3.dualstack.us-east-1.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
                 end
-                if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(accelerate, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                  return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.s3.dualstack.us-east-1.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-                end
                 if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(accelerate, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, true)
                   return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.s3.dualstack.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
                 end
                 if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(accelerate, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, false)
                   return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.s3.dualstack.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-                end
-                if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(accelerate, false) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(url, "isIp"), true) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                  return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['normalizedPath']}#{bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-                end
-                if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(accelerate, false) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(url, "isIp"), false) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                  return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{bucket}.#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
                 end
                 if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(accelerate, false) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(url, "isIp"), true) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
                   return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['normalizedPath']}#{bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
@@ -251,9 +139,6 @@ module Aws::S3
                 if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(accelerate, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
                   return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.s3-accelerate.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
                 end
-                if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(accelerate, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                  return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.s3-accelerate.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-                end
                 if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(accelerate, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, true)
                   if Aws::Endpoints::Matchers.string_equals?(region, "us-east-1")
                     return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.s3-accelerate.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
@@ -262,9 +147,6 @@ module Aws::S3
                 end
                 if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(accelerate, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, false)
                   return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.s3-accelerate.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-                end
-                if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(accelerate, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                  return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.s3.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
                 end
                 if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(accelerate, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
                   return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.s3.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
@@ -281,18 +163,16 @@ module Aws::S3
               end
               raise ArgumentError, "Invalid region: region was not a valid DNS name."
             end
-            raise ArgumentError, "A valid partition could not be determined"
           end
-          if Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(url, "scheme"), "http") && Aws::Endpoints::Matchers.aws_virtual_hostable_s3_bucket?(bucket, true) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.boolean_equals?(accelerate, false)
+          if Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(url, "scheme"), "http") && Aws::Endpoints::Matchers.aws_virtual_hostable_s3_bucket?(bucket, true) && Aws::Endpoints::Matchers.boolean_equals?(force_path_style, false) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.boolean_equals?(accelerate, false)
             if (partition_result = Aws::Endpoints::Matchers.aws_partition(region))
               if Aws::Endpoints::Matchers.valid_host_label?(region, false)
                 return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{bucket}.#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
               end
               raise ArgumentError, "Invalid region: region was not a valid DNS name."
             end
-            raise ArgumentError, "A valid partition could not be determined"
           end
-          if (bucket_arn = Aws::Endpoints::Matchers.aws_parse_arn(bucket))
+          if Aws::Endpoints::Matchers.boolean_equals?(force_path_style, false) && (bucket_arn = Aws::Endpoints::Matchers.aws_parse_arn(bucket))
             if (arn_type = Aws::Endpoints::Matchers.attr(bucket_arn, "resourceId[0]")) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(arn_type, ""))
               if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(bucket_arn, "service"), "s3-object-lambda")
                 if Aws::Endpoints::Matchers.string_equals?(arn_type, "accesspoint")
@@ -320,9 +200,6 @@ module Aws::S3
                                 end
                                 if Aws::Endpoints::Matchers.valid_host_label?(Aws::Endpoints::Matchers.attr(bucket_arn, "accountId"), false)
                                   if Aws::Endpoints::Matchers.valid_host_label?(access_point_name, false)
-                                    if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(bucket_partition, "name"), "aws-cn")
-                                      raise ArgumentError, "Partition does not support FIPS"
-                                    end
                                     if Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint))
                                       return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{access_point_name}-#{bucket_arn['accountId']}.#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3-object-lambda", "signingRegion"=>"#{bucket_arn['region']}"}]})
                                     end
@@ -339,9 +216,7 @@ module Aws::S3
                             end
                             raise ArgumentError, "Client was configured for partition `#{partition_result['name']}` but ARN (`#{bucket}`) has `#{bucket_partition['name']}`"
                           end
-                          raise ArgumentError, "A valid partition could not be determined"
                         end
-                        raise ArgumentError, "Could not load partition for ARN region `#{bucket_arn['region']}`"
                       end
                       raise ArgumentError, "Invalid ARN: The ARN may only contain a single resource component after `accesspoint`."
                     end
@@ -373,12 +248,6 @@ module Aws::S3
                                         if Aws::Endpoints::Matchers.boolean_equals?(accelerate, true)
                                           raise ArgumentError, "Access Points do not support S3 Accelerate"
                                         end
-                                        if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(bucket_partition, "name"), "aws-cn")
-                                          raise ArgumentError, "Partition does not support FIPS"
-                                        end
-                                        if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.set?(endpoint)
-                                          raise ArgumentError, "DualStack cannot be combined with a Host override (PrivateLink)"
-                                        end
                                         if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
                                           return Aws::Endpoints::Endpoint.new(url: "https://#{access_point_name}-#{bucket_arn['accountId']}.s3-accesspoint-fips.dualstack.#{bucket_arn['region']}.#{bucket_partition['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{bucket_arn['region']}"}]})
                                         end
@@ -405,13 +274,10 @@ module Aws::S3
                               end
                               raise ArgumentError, "Client was configured for partition `#{partition_result['name']}` but ARN (`#{bucket}`) has `#{bucket_partition['name']}`"
                             end
-                            raise ArgumentError, "A valid partition could not be determined"
                           end
-                          raise ArgumentError, "Could not load partition for ARN region `#{bucket_arn['region']}`"
                         end
                         raise ArgumentError, "Invalid ARN: The ARN may only contain a single resource component after `accesspoint`."
                       end
-                      raise ArgumentError, "Invalid ARN: bucket ARN is missing a region"
                     end
                   end
                   if Aws::Endpoints::Matchers.valid_host_label?(access_point_name, true)
@@ -433,7 +299,6 @@ module Aws::S3
                       end
                       raise ArgumentError, "Client was configured for partition `#{mrap_partition['name']}` but bucket referred to partition `#{bucket_arn['partition']}`"
                     end
-                    raise ArgumentError, "#{region} was not a valid region"
                   end
                   raise ArgumentError, "Invalid Access Point Name"
                 end
@@ -482,9 +347,7 @@ module Aws::S3
                         end
                         raise ArgumentError, "Client was configured for partition `#{partition_result['name']}` but ARN (`#{bucket}`) has `#{bucket_partition['name']}`"
                       end
-                      raise ArgumentError, "A valid partition could not be determined"
                     end
-                    raise ArgumentError, "Could not load partition for ARN region #{bucket_arn['region']}"
                   end
                   raise ArgumentError, "Invalid ARN: The outpost Id may only contain a-z, A-Z, 0-9 and `-`. Found: `#{outpost_id}`"
                 end
@@ -497,15 +360,12 @@ module Aws::S3
           if (arn_prefix = Aws::Endpoints::Matchers.substring(bucket, 0, 4, false)) && Aws::Endpoints::Matchers.string_equals?(arn_prefix, "arn:") && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(Aws::Endpoints::Matchers.aws_parse_arn(bucket)))
             raise ArgumentError, "Invalid ARN: `#{bucket}` was not a valid ARN"
           end
+          if Aws::Endpoints::Matchers.boolean_equals?(force_path_style, true) && Aws::Endpoints::Matchers.aws_parse_arn(bucket)
+            raise ArgumentError, "Path-style addressing cannot be used with ARN buckets"
+          end
           if (uri_encoded_bucket = Aws::Endpoints::Matchers.uri_encode(bucket))
-            if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.set?(endpoint)
-              raise ArgumentError, "Cannot set dual-stack in combination with a custom endpoint."
-            end
             if (partition_result = Aws::Endpoints::Matchers.aws_partition(region))
               if Aws::Endpoints::Matchers.boolean_equals?(accelerate, false)
-                if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                  return Aws::Endpoints::Endpoint.new(url: "https://s3-fips.dualstack.us-east-1.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-                end
                 if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
                   return Aws::Endpoints::Endpoint.new(url: "https://s3-fips.dualstack.us-east-1.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
                 end
@@ -514,21 +374,6 @@ module Aws::S3
                 end
                 if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, false)
                   return Aws::Endpoints::Endpoint.new(url: "https://s3-fips.dualstack.#{region}.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-                end
-                if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                  return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['normalizedPath']}#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-                end
-                if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                  return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['normalizedPath']}#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-                end
-                if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, true)
-                  return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['normalizedPath']}#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-                end
-                if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, false)
-                  return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['normalizedPath']}#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-                end
-                if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                  return Aws::Endpoints::Endpoint.new(url: "https://s3-fips.us-east-1.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
                 end
                 if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
                   return Aws::Endpoints::Endpoint.new(url: "https://s3-fips.us-east-1.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
@@ -542,17 +387,11 @@ module Aws::S3
                 if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
                   return Aws::Endpoints::Endpoint.new(url: "https://s3.dualstack.us-east-1.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
                 end
-                if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                  return Aws::Endpoints::Endpoint.new(url: "https://s3.dualstack.us-east-1.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-                end
                 if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, true)
                   return Aws::Endpoints::Endpoint.new(url: "https://s3.dualstack.#{region}.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
                 end
                 if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, false)
                   return Aws::Endpoints::Endpoint.new(url: "https://s3.dualstack.#{region}.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-                end
-                if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                  return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['normalizedPath']}#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
                 end
                 if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
                   return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['normalizedPath']}#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
@@ -569,9 +408,6 @@ module Aws::S3
                 if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
                   return Aws::Endpoints::Endpoint.new(url: "https://s3.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
                 end
-                if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                  return Aws::Endpoints::Endpoint.new(url: "https://s3.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-                end
                 if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, true)
                   if Aws::Endpoints::Matchers.string_equals?(region, "us-east-1")
                     return Aws::Endpoints::Endpoint.new(url: "https://s3.#{partition_result['dnsSuffix']}/#{uri_encoded_bucket}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
@@ -584,7 +420,6 @@ module Aws::S3
               end
               raise ArgumentError, "Path-style addressing cannot be used with S3 Accelerate"
             end
-            raise ArgumentError, "A valid partition could not be determined"
           end
         end
         if Aws::Endpoints::Matchers.set?(use_object_lambda_endpoint) && Aws::Endpoints::Matchers.boolean_equals?(use_object_lambda_endpoint, true)
@@ -596,9 +431,6 @@ module Aws::S3
               if Aws::Endpoints::Matchers.boolean_equals?(accelerate, true)
                 raise ArgumentError, "S3 Object Lambda does not support S3 Accelerate"
               end
-              if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-cn")
-                raise ArgumentError, "Partition does not support FIPS"
-              end
               if Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint))
                 return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3-object-lambda", "signingRegion"=>"#{region}"}]})
               end
@@ -609,29 +441,10 @@ module Aws::S3
             end
             raise ArgumentError, "Invalid region: region was not a valid DNS name."
           end
-          raise ArgumentError, "A valid partition could not be determined"
         end
         if Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(bucket))
           if (partition_result = Aws::Endpoints::Matchers.aws_partition(region))
             if Aws::Endpoints::Matchers.valid_host_label?(region, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-cn")
-                raise ArgumentError, "Partition does not support FIPS"
-              end
-              if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-              end
-              if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-              end
-              if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, true)
-                return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-              end
-              if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, false)
-                return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-              end
-              if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                return Aws::Endpoints::Endpoint.new(url: "https://s3-fips.dualstack.us-east-1.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-              end
               if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
                 return Aws::Endpoints::Endpoint.new(url: "https://s3-fips.dualstack.us-east-1.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
               end
@@ -640,21 +453,6 @@ module Aws::S3
               end
               if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, false)
                 return Aws::Endpoints::Endpoint.new(url: "https://s3-fips.dualstack.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-              end
-              if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-              end
-              if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-              end
-              if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, true)
-                return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-              end
-              if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, false)
-                return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-              end
-              if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                return Aws::Endpoints::Endpoint.new(url: "https://s3-fips.us-east-1.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
               end
               if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
                 return Aws::Endpoints::Endpoint.new(url: "https://s3-fips.us-east-1.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
@@ -665,21 +463,6 @@ module Aws::S3
               if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, false)
                 return Aws::Endpoints::Endpoint.new(url: "https://s3-fips.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
               end
-              if Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-              end
-              if Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-              end
-              if Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, true)
-                return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-              end
-              if Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, false)
-                return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-              end
-              if Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                return Aws::Endpoints::Endpoint.new(url: "https://s3.dualstack.us-east-1.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-              end
               if Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
                 return Aws::Endpoints::Endpoint.new(url: "https://s3.dualstack.us-east-1.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
               end
@@ -688,9 +471,6 @@ module Aws::S3
               end
               if Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, false)
                 return Aws::Endpoints::Endpoint.new(url: "https://s3.dualstack.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
-              end
-              if Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
               end
               if Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
                 return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
@@ -707,9 +487,6 @@ module Aws::S3
               if Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
                 return Aws::Endpoints::Endpoint.new(url: "https://s3.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
               end
-              if Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                return Aws::Endpoints::Endpoint.new(url: "https://s3.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1"}]})
-              end
               if Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(endpoint)) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(region, "aws-global")) && Aws::Endpoints::Matchers.boolean_equals?(use_global_endpoint, true)
                 if Aws::Endpoints::Matchers.string_equals?(region, "us-east-1")
                   return Aws::Endpoints::Endpoint.new(url: "https://s3.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
@@ -722,7 +499,6 @@ module Aws::S3
             end
             raise ArgumentError, "Invalid region: region was not a valid DNS name."
           end
-          raise ArgumentError, "A valid partition could not be determined"
         end
       end
       raise ArgumentError, "A region must be set when sending requests to S3."

@@ -62,16 +62,26 @@ module Aws::CodeCatalyst
             Aws::CodeCatalyst::Endpoints::CreateDevEnvironment.build(context)
           when :create_project
             Aws::CodeCatalyst::Endpoints::CreateProject.build(context)
+          when :create_source_repository
+            Aws::CodeCatalyst::Endpoints::CreateSourceRepository.build(context)
           when :create_source_repository_branch
             Aws::CodeCatalyst::Endpoints::CreateSourceRepositoryBranch.build(context)
           when :delete_access_token
             Aws::CodeCatalyst::Endpoints::DeleteAccessToken.build(context)
           when :delete_dev_environment
             Aws::CodeCatalyst::Endpoints::DeleteDevEnvironment.build(context)
+          when :delete_project
+            Aws::CodeCatalyst::Endpoints::DeleteProject.build(context)
+          when :delete_source_repository
+            Aws::CodeCatalyst::Endpoints::DeleteSourceRepository.build(context)
+          when :delete_space
+            Aws::CodeCatalyst::Endpoints::DeleteSpace.build(context)
           when :get_dev_environment
             Aws::CodeCatalyst::Endpoints::GetDevEnvironment.build(context)
           when :get_project
             Aws::CodeCatalyst::Endpoints::GetProject.build(context)
+          when :get_source_repository
+            Aws::CodeCatalyst::Endpoints::GetSourceRepository.build(context)
           when :get_source_repository_clone_urls
             Aws::CodeCatalyst::Endpoints::GetSourceRepositoryCloneUrls.build(context)
           when :get_space
@@ -106,6 +116,10 @@ module Aws::CodeCatalyst
             Aws::CodeCatalyst::Endpoints::StopDevEnvironmentSession.build(context)
           when :update_dev_environment
             Aws::CodeCatalyst::Endpoints::UpdateDevEnvironment.build(context)
+          when :update_project
+            Aws::CodeCatalyst::Endpoints::UpdateProject.build(context)
+          when :update_space
+            Aws::CodeCatalyst::Endpoints::UpdateSpace.build(context)
           when :verify_session
             Aws::CodeCatalyst::Endpoints::VerifySession.build(context)
           end

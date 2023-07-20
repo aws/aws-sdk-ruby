@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.131.0 (2023-07-20)
+------------------
+
+* Feature - Improve performance of S3 clients by simplifying and optimizing endpoint resolution.
+
 1.130.0 (2023-07-13)
 ------------------
 

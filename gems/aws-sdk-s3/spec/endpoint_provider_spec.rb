@@ -303,7 +303,7 @@ module Aws::S3
 
     context 'SDK::Host + access point + Dualstack is an error' do
       let(:expected) do
-        {"error"=>"DualStack cannot be combined with a Host override (PrivateLink)"}
+        {"error"=>"Cannot set dual-stack in combination with a custom endpoint."}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -2294,45 +2294,42 @@ module Aws::S3
       end
     end
 
-    context 'non-bucket endpoint with FIPS: TODO(descriptive)' do
+    context 'non-bucket endpoint override with FIPS = error' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"http://beta.example.com:1234/path"}}
+        {"error"=>"A custom endpoint cannot be combined with FIPS"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:region=>"us-west-2", :endpoint=>"http://beta.example.com:1234/path", :use_fips=>true, :use_dual_stack=>false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
-    context 'FIPS + dualstack + custom endpoint TODO(descriptive)' do
+    context 'FIPS + dualstack + custom endpoint' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"http://beta.example.com:1234/path"}}
+        {"error"=>"Cannot set dual-stack in combination with a custom endpoint."}
       end
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:region=>"us-west-2", :endpoint=>"http://beta.example.com:1234/path", :use_fips=>true, :use_dual_stack=>true})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
-    context 'dualstack + custom endpoint TODO(descriptive)' do
+    context 'dualstack + custom endpoint' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"http://beta.example.com:1234/path"}}
+        {"error"=>"Cannot set dual-stack in combination with a custom endpoint."}
       end
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:region=>"us-west-2", :endpoint=>"http://beta.example.com:1234/path", :use_fips=>false, :use_dual_stack=>true})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
@@ -2491,29 +2488,27 @@ module Aws::S3
 
     context 'endpoint override + FIPS + dualstack (BUG)' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true, "signingRegion"=>"us-east-1"}]}, "url"=>"http://foo.com/bucket%21"}}
+        {"error"=>"A custom endpoint cannot be combined with FIPS"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:region=>"us-east-1", :bucket=>"bucket!", :force_path_style=>true, :use_fips=>true, :use_dual_stack=>false, :endpoint=>"http://foo.com"})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
     context 'endpoint override + non-dns bucket + FIPS (BUG)' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true, "signingRegion"=>"us-east-1"}]}, "url"=>"http://foo.com/bucket%21"}}
+        {"error"=>"A custom endpoint cannot be combined with FIPS"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:region=>"us-east-1", :bucket=>"bucket!", :use_fips=>true, :use_dual_stack=>false, :endpoint=>"http://foo.com"})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
@@ -2561,15 +2556,14 @@ module Aws::S3
 
     context 'URI encoded bucket + use global endpoint' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true, "signingRegion"=>"us-east-1"}]}, "url"=>"https://foo.com/bucket%21"}}
+        {"error"=>"A custom endpoint cannot be combined with FIPS"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:region=>"us-east-1", :bucket=>"bucket!", :use_fips=>true, :use_dual_stack=>false, :use_global_endpoint=>true, :endpoint=>"https://foo.com"})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
@@ -2631,15 +2625,14 @@ module Aws::S3
 
     context 'endpoint override + non-uri safe endpoint + force path style' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true, "signingRegion"=>"us-east-1"}]}, "url"=>"http://foo.com/bucket%21"}}
+        {"error"=>"A custom endpoint cannot be combined with FIPS"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:region=>"us-east-1", :bucket=>"bucket!", :force_path_style=>true, :accelerate=>false, :use_dual_stack=>false, :use_fips=>true, :endpoint=>"http://foo.com", :use_global_endpoint=>true})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
@@ -2657,45 +2650,42 @@ module Aws::S3
       end
     end
 
-    context 'endpoint override + FIPS + dualstack (this is wrong—it&#39;s a bug in the UseGlobalEndpoint branch)' do
+    context 'endpoint override + FIPS + dualstack' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true, "signingRegion"=>"us-east-1"}]}, "url"=>"http://foo.com"}}
+        {"error"=>"Cannot set dual-stack in combination with a custom endpoint."}
       end
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:region=>"us-east-1", :use_dual_stack=>true, :use_fips=>true, :use_global_endpoint=>true, :endpoint=>"http://foo.com"})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
     context 'non-bucket endpoint override + dualstack + global endpoint' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true, "signingRegion"=>"us-east-1"}]}, "url"=>"http://foo.com"}}
+        {"error"=>"Cannot set dual-stack in combination with a custom endpoint."}
       end
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>true, :use_global_endpoint=>true, :endpoint=>"http://foo.com"})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
     context 'Endpoint override + UseGlobalEndpoint + us-east-1' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true, "signingRegion"=>"us-east-1"}]}, "url"=>"http://foo.com"}}
+        {"error"=>"A custom endpoint cannot be combined with FIPS"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>true, :use_dual_stack=>false, :use_global_endpoint=>true, :endpoint=>"http://foo.com"})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
@@ -2705,7 +2695,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"cn-north-1", :use_fips=>true, :use_dual_stack=>false, :use_global_endpoint=>true, :endpoint=>"http://foo.com"})
+        params = EndpointParameters.new(**{:region=>"cn-north-1", :use_fips=>true, :use_dual_stack=>false, :use_global_endpoint=>true})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -2768,17 +2758,16 @@ module Aws::S3
       end
     end
 
-    context 'aws-global + fips + custom endpoint (TODO: should be an error)' do
+    context 'aws-global + fips + custom endpoint' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingRegion"=>"us-east-1", "name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true}]}, "url"=>"http://foo.com/bucket%21"}}
+        {"error"=>"A custom endpoint cannot be combined with FIPS"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:region=>"aws-global", :bucket=>"bucket!", :use_dual_stack=>false, :use_fips=>true, :accelerate=>false, :endpoint=>"http://foo.com"})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
@@ -2796,17 +2785,16 @@ module Aws::S3
       end
     end
 
-    context 'aws-global + dualstack + custom endpoint (TODO: should be an error)' do
+    context 'aws-global + dualstack + custom endpoint' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingRegion"=>"us-east-1", "name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true}]}, "url"=>"http://foo.com"}}
+        {"error"=>"Cannot set dual-stack in combination with a custom endpoint."}
       end
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:region=>"aws-global", :use_dual_stack=>true, :use_fips=>false, :accelerate=>false, :endpoint=>"http://foo.com"})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
@@ -2824,7 +2812,7 @@ module Aws::S3
       end
     end
 
-    context 'FIPS + aws-global + path only bucket. TODO: this should be an error' do
+    context 'FIPS + aws-global + path only bucket. This is not supported by S3 but we allow garbage in garbage out' do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingRegion"=>"us-east-1", "name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-fips.dualstack.us-east-1.amazonaws.com/bucket%21"}}
       end
@@ -2838,31 +2826,29 @@ module Aws::S3
       end
     end
 
-    context 'aws-global + FIPS + endpoint override. TODO: should this be an error?' do
+    context 'aws-global + FIPS + endpoint override.' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingRegion"=>"us-east-1", "name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true}]}, "url"=>"http://foo.com"}}
+        {"error"=>"A custom endpoint cannot be combined with FIPS"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:region=>"aws-global", :use_fips=>true, :endpoint=>"http://foo.com"})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
-    context 'force path style, aws-global &amp; endpoint override' do
+    context 'force path style, FIPS, aws-global &amp; endpoint override' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingRegion"=>"us-east-1", "name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true}]}, "url"=>"http://foo.com/bucket%21"}}
+        {"error"=>"A custom endpoint cannot be combined with FIPS"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:region=>"aws-global", :bucket=>"bucket!", :force_path_style=>true, :use_fips=>true, :endpoint=>"http://foo.com"})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
@@ -2882,15 +2868,14 @@ module Aws::S3
 
     context 'endpoint override with aws-global region' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingRegion"=>"us-east-1", "name"=>"sigv4", "signingName"=>"s3", "disableDoubleEncoding"=>true}]}, "url"=>"http://foo.com"}}
+        {"error"=>"Cannot set dual-stack in combination with a custom endpoint."}
       end
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:region=>"aws-global", :use_fips=>true, :use_dual_stack=>true, :endpoint=>"http://foo.com"})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
@@ -3959,15 +3944,14 @@ module Aws::S3
 
     context 'path style + fips@cn-north-1' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"s3", "signingRegion"=>"cn-north-1", "disableDoubleEncoding"=>true, "name"=>"sigv4"}]}, "url"=>"https://s3-fips.cn-north-1.amazonaws.com.cn/bucket-name"}}
+        {"error"=>"Partition does not support FIPS"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>true, :region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>true})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
       end
 
       it 'produces the correct output from the client when calling get_object' do
@@ -3978,15 +3962,12 @@ module Aws::S3
           s3_us_east_1_regional_endpoint: 'regional',
           stub_responses: true
         )
-        expect_auth({"signingName"=>"s3", "signingRegion"=>"cn-north-1", "disableDoubleEncoding"=>true, "name"=>"sigv4"})
-        resp = client.get_object(
-          bucket: 'bucket-name',
-          key: 'key',
-        )
-        expected_uri = URI.parse(expected['endpoint']['url'])
-        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
-        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
-        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+        expect do
+          client.get_object(
+            bucket: 'bucket-name',
+            key: 'key',
+          )
+        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
@@ -4428,7 +4409,7 @@ module Aws::S3
 
     context 'SDK::Host + FIPS@us-west-2' do
       let(:expected) do
-        {"error"=>"Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"}
+        {"error"=>"A custom endpoint cannot be combined with FIPS"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4457,7 +4438,7 @@ module Aws::S3
 
     context 'SDK::Host + DualStack@us-west-2' do
       let(:expected) do
-        {"error"=>"Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"}
+        {"error"=>"Cannot set dual-stack in combination with a custom endpoint."}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4486,7 +4467,7 @@ module Aws::S3
 
     context 'SDK::HOST + accelerate@us-west-2' do
       let(:expected) do
-        {"error"=>"Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"}
+        {"error"=>"A custom endpoint cannot be combined with S3 Accelerate"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4610,13 +4591,13 @@ module Aws::S3
       end
     end
 
-    context 'SDK::Host + FIPS@cn-north-1' do
+    context 'FIPS@cn-north-1' do
       let(:expected) do
         {"error"=>"Partition does not support FIPS"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :endpoint=>"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>true})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>true})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -4625,7 +4606,7 @@ module Aws::S3
 
     context 'SDK::Host + DualStack@cn-north-1' do
       let(:expected) do
-        {"error"=>"Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"}
+        {"error"=>"Cannot set dual-stack in combination with a custom endpoint."}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4654,7 +4635,7 @@ module Aws::S3
 
     context 'SDK::HOST + accelerate@cn-north-1' do
       let(:expected) do
-        {"error"=>"S3 Accelerate cannot be used in this region"}
+        {"error"=>"A custom endpoint cannot be combined with S3 Accelerate"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4764,7 +4745,7 @@ module Aws::S3
 
     context 'SDK::Host + FIPS@af-south-1' do
       let(:expected) do
-        {"error"=>"Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"}
+        {"error"=>"A custom endpoint cannot be combined with FIPS"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4793,7 +4774,7 @@ module Aws::S3
 
     context 'SDK::Host + DualStack@af-south-1' do
       let(:expected) do
-        {"error"=>"Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"}
+        {"error"=>"Cannot set dual-stack in combination with a custom endpoint."}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4822,7 +4803,7 @@ module Aws::S3
 
     context 'SDK::HOST + accelerate@af-south-1' do
       let(:expected) do
-        {"error"=>"Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate"}
+        {"error"=>"A custom endpoint cannot be combined with S3 Accelerate"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -6298,7 +6279,7 @@ module Aws::S3
       end
     end
 
-    context 'S3 Outposts Abba Real Outpost Prod us-west-1' do
+    context 'S3 Outposts bucketAlias Real Outpost Prod us-west-1' do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.op-0b1d075431d83bebd.s3-outposts.us-west-1.amazonaws.com"}}
       end
@@ -6312,7 +6293,7 @@ module Aws::S3
       end
     end
 
-    context 'S3 Outposts Abba Real Outpost Prod ap-east-1' do
+    context 'S3 Outposts bucketAlias Real Outpost Prod ap-east-1' do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"ap-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.op-0b1d075431d83bebd.s3-outposts.ap-east-1.amazonaws.com"}}
       end
@@ -6326,7 +6307,7 @@ module Aws::S3
       end
     end
 
-    context 'S3 Outposts Abba Ec2 Outpost Prod us-east-1' do
+    context 'S3 Outposts bucketAlias Ec2 Outpost Prod us-east-1' do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://test-accessp-e0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.ec2.s3-outposts.us-east-1.amazonaws.com"}}
       end
@@ -6340,7 +6321,7 @@ module Aws::S3
       end
     end
 
-    context 'S3 Outposts Abba Ec2 Outpost Prod me-south-1' do
+    context 'S3 Outposts bucketAlias Ec2 Outpost Prod me-south-1' do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"me-south-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://test-accessp-e0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3.ec2.s3-outposts.me-south-1.amazonaws.com"}}
       end
@@ -6354,7 +6335,7 @@ module Aws::S3
       end
     end
 
-    context 'S3 Outposts Abba Real Outpost Beta' do
+    context 'S3 Outposts bucketAlias Real Outpost Beta' do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kbeta0--op-s3.op-0b1d075431d83bebd.example.amazonaws.com"}}
       end
@@ -6368,7 +6349,7 @@ module Aws::S3
       end
     end
 
-    context 'S3 Outposts Abba Ec2 Outpost Beta' do
+    context 'S3 Outposts bucketAlias Ec2 Outpost Beta' do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://161743052723-e00000136899934034jeahy1t8gpzpbwjj8kb7beta0--op-s3.ec2.example.amazonaws.com"}}
       end
@@ -6382,7 +6363,7 @@ module Aws::S3
       end
     end
 
-    context 'S3 Outposts Abba - No endpoint set for beta' do
+    context 'S3 Outposts bucketAlias - No endpoint set for beta' do
       let(:expected) do
         {"error"=>"Expected a endpoint to be specified but no endpoint was found"}
       end
@@ -6395,7 +6376,7 @@ module Aws::S3
       end
     end
 
-    context 'S3 Outposts Abba Invalid hardware type' do
+    context 'S3 Outposts bucketAlias Invalid hardware type' do
       let(:expected) do
         {"error"=>"Unrecognized hardware type: \"Expected hardware type o or e but got h\""}
       end
@@ -6408,7 +6389,7 @@ module Aws::S3
       end
     end
 
-    context 'S3 Outposts Abba Special character in Outpost Arn' do
+    context 'S3 Outposts bucketAlias Special character in Outpost Arn' do
       let(:expected) do
         {"error"=>"Invalid ARN: The outpost Id must only contain a-z, A-Z, 0-9 and `-`."}
       end
@@ -6421,7 +6402,7 @@ module Aws::S3
       end
     end
 
-    context 'S3 Outposts Abba - No endpoint set for beta' do
+    context 'S3 Outposts bucketAlias - No endpoint set for beta' do
       let(:expected) do
         {"error"=>"Expected a endpoint to be specified but no endpoint was found"}
       end

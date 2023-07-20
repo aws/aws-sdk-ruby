@@ -6002,8 +6002,8 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
-    # Retrieves summary metrics for the intent stages in your bot. The
-    # following fields are required:
+    # Retrieves summary metrics for the stages within intents in your bot.
+    # The following fields are required:
     #
     # * `metrics` – A list of [AnalyticsIntentStageMetric][1] objects. In
     #   each object, use the `name` field to specify the metric to
@@ -6410,7 +6410,7 @@ module Aws::LexModelsV2
     #   resp.sessions[0].bot_alias_id #=> String
     #   resp.sessions[0].bot_version #=> String
     #   resp.sessions[0].locale_id #=> String
-    #   resp.sessions[0].channel #=> String, one of "Facebook", "Slack", "TwilioSms"
+    #   resp.sessions[0].channel #=> String
     #   resp.sessions[0].session_id #=> String
     #   resp.sessions[0].conversation_start_time #=> Time
     #   resp.sessions[0].conversation_end_time #=> Time
@@ -7168,10 +7168,22 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # <note markdown="1"> To use this API operation, your IAM role must have permissions to
+    # perform the [ListAggregatedUtterances][1] operation, which provides
+    # access to utterance-related analytics. See [Viewing utterance
+    # statistics][2] for the IAM policy to apply to the IAM role.
+    #
+    #  </note>
+    #
     # Retrieves a list of metadata for individual user utterances to your
-    # bot. The `startDateTime` and `endDateTime` fields are required. These
-    # fields define a time range for which you want to retrieve results. Of
-    # the optional fields, you can organize the results in the following
+    # bot. The following fields are required:
+    #
+    # * `startDateTime` and `endDateTime` – Define a time range for which
+    #   you want to retrieve results.
+    #
+    # ^
+    #
+    # Of the optional fields, you can organize the results in the following
     # ways:
     #
     # * Use the `filters` field to filter the results and the `sortBy` field
@@ -7181,6 +7193,11 @@ module Aws::LexModelsV2
     #   in a single response and the `nextToken` field to return the next
     #   batch of results if the response does not return the full set of
     #   results.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListAggregatedUtterances.html
+    # [2]: https://docs.aws.amazon.com/lexv2/latest/dg/monitoring-utterances.html
     #
     # @option params [required, String] :bot_id
     #   The identifier for the bot for which you want to retrieve utterance
@@ -7255,7 +7272,7 @@ module Aws::LexModelsV2
     #   resp.utterances[0].bot_version #=> String
     #   resp.utterances[0].locale_id #=> String
     #   resp.utterances[0].session_id #=> String
-    #   resp.utterances[0].channel #=> String, one of "Facebook", "Slack", "TwilioSms"
+    #   resp.utterances[0].channel #=> String
     #   resp.utterances[0].mode #=> String, one of "Speech", "Text", "DTMF", "MultiMode"
     #   resp.utterances[0].conversation_start_time #=> Time
     #   resp.utterances[0].conversation_end_time #=> Time
@@ -7291,10 +7308,17 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # <note markdown="1"> To use this API operation, your IAM role must have permissions to
+    # perform the [ListAggregatedUtterances][1] operation, which provides
+    # access to utterance-related analytics. See [Viewing utterance
+    # statistics][2] for the IAM policy to apply to the IAM role.
+    #
+    #  </note>
+    #
     # Retrieves summary metrics for the utterances in your bot. The
     # following fields are required:
     #
-    # * `metrics` – A list of [AnalyticsUtteranceMetric][1] objects. In each
+    # * `metrics` – A list of [AnalyticsUtteranceMetric][3] objects. In each
     #   object, use the `name` field to specify the metric to calculate, the
     #   `statistic` field to specify whether to calculate the `Sum`,
     #   `Average`, or `Max` number, and the `order` field to specify whether
@@ -7320,7 +7344,9 @@ module Aws::LexModelsV2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_AnalyticsUtteranceMetric.html
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListAggregatedUtterances.html
+    # [2]: https://docs.aws.amazon.com/lexv2/latest/dg/monitoring-utterances.html
+    # [3]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_AnalyticsUtteranceMetric.html
     #
     # @option params [required, String] :bot_id
     #   The identifier for the bot for which you want to retrieve utterance
@@ -9690,7 +9716,7 @@ module Aws::LexModelsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

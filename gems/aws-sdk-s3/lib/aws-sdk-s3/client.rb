@@ -12495,20 +12495,21 @@ module Aws::S3
     #   * {Types::PutObjectOutput#request_charged #request_charged} => String
     #
     #
-    # @example Example: To create an object.
+    # @example Example: To upload an object
     #
-    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
+    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
+    #   # syntax. S3 returns VersionId of the newly created object.
     #
     #   resp = client.put_object({
-    #     body: "filetoupload", 
+    #     body: "HappyFace.jpg", 
     #     bucket: "examplebucket", 
-    #     key: "objectkey", 
+    #     key: "HappyFace.jpg", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
+    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
     #   }
     #
     # @example Example: To upload object and specify user-defined metadata
@@ -12532,41 +12533,6 @@ module Aws::S3
     #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
     #   }
     #
-    # @example Example: To upload an object
-    #
-    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
-    #   # syntax. S3 returns VersionId of the newly created object.
-    #
-    #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
-    #   }
-    #
-    # @example Example: To upload an object and specify canned ACL.
-    #
-    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
-    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     acl: "authenticated-read", 
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
-    #   }
-    #
     # @example Example: To upload an object (specify optional headers)
     #
     #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
@@ -12587,22 +12553,20 @@ module Aws::S3
     #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
     #   }
     #
-    # @example Example: To upload an object and specify optional tags
+    # @example Example: To create an object.
     #
-    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
-    #   # S3 returns version ID of the newly created object.
+    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
     #
     #   resp = client.put_object({
-    #     body: "c:\\HappyFace.jpg", 
+    #     body: "filetoupload", 
     #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #     tagging: "key1=value1&key2=value2", 
+    #     key: "objectkey", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
+    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
     #   }
     #
     # @example Example: To upload an object and specify server-side encryption and object tags
@@ -12623,6 +12587,42 @@ module Aws::S3
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
     #     server_side_encryption: "AES256", 
     #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
+    #   }
+    #
+    # @example Example: To upload an object and specify optional tags
+    #
+    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
+    #   # S3 returns version ID of the newly created object.
+    #
+    #   resp = client.put_object({
+    #     body: "c:\\HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #     tagging: "key1=value1&key2=value2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
+    #   }
+    #
+    # @example Example: To upload an object and specify canned ACL.
+    #
+    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
+    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     acl: "authenticated-read", 
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
     #   }
     #
     # @example Streaming a file from disk
@@ -15653,7 +15653,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.130.0'
+      context[:gem_version] = '1.131.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

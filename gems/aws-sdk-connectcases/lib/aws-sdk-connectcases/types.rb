@@ -141,12 +141,17 @@ module Aws::ConnectCases
     #   A filter for cases. Only one value can be provided.
     #   @return [Types::CaseFilter]
     #
+    # @!attribute [rw] or_all
+    #   Provides "or all" filtering.
+    #   @return [Array<Types::CaseFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/CaseFilter AWS API Documentation
     #
     class CaseFilter < Struct.new(
       :and_all,
       :field,
       :not,
+      :or_all,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -155,6 +160,7 @@ module Aws::ConnectCases
       class AndAll < CaseFilter; end
       class Field < CaseFilter; end
       class Not < CaseFilter; end
+      class OrAll < CaseFilter; end
       class Unknown < CaseFilter; end
     end
 
@@ -593,6 +599,18 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
+    # An empty value. You cannot set `EmptyFieldValue` on a field that is
+    # required on a case template.
+    #
+    # This structure will never have any data members. It signifies an empty
+    # value on a case field.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/EmptyFieldValue AWS API Documentation
+    #
+    class EmptyFieldValue < Aws::EmptyStructure; end
+
     # Configuration to enable EventBridge case event delivery and determine
     # what data is delivered.
     #
@@ -877,6 +895,10 @@ module Aws::ConnectCases
     #   value can be provided.
     #   @return [Float]
     #
+    # @!attribute [rw] empty_value
+    #   An empty value.
+    #   @return [Types::EmptyFieldValue]
+    #
     # @!attribute [rw] string_value
     #   String value type.
     #   @return [String]
@@ -886,6 +908,7 @@ module Aws::ConnectCases
     class FieldValueUnion < Struct.new(
       :boolean_value,
       :double_value,
+      :empty_value,
       :string_value,
       :unknown)
       SENSITIVE = []
@@ -894,6 +917,7 @@ module Aws::ConnectCases
 
       class BooleanValue < FieldValueUnion; end
       class DoubleValue < FieldValueUnion; end
+      class EmptyValue < FieldValueUnion; end
       class StringValue < FieldValueUnion; end
       class Unknown < FieldValueUnion; end
     end

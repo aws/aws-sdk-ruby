@@ -102,8 +102,14 @@ module Aws::SecurityLake
             Aws::SecurityLake::Endpoints::ListLogSources.build(context)
           when :list_subscribers
             Aws::SecurityLake::Endpoints::ListSubscribers.build(context)
+          when :list_tags_for_resource
+            Aws::SecurityLake::Endpoints::ListTagsForResource.build(context)
           when :register_data_lake_delegated_administrator
             Aws::SecurityLake::Endpoints::RegisterDataLakeDelegatedAdministrator.build(context)
+          when :tag_resource
+            Aws::SecurityLake::Endpoints::TagResource.build(context)
+          when :untag_resource
+            Aws::SecurityLake::Endpoints::UntagResource.build(context)
           when :update_data_lake
             Aws::SecurityLake::Endpoints::UpdateDataLake.build(context)
           when :update_data_lake_exception_subscription

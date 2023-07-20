@@ -12099,7 +12099,8 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] feature_group_name
-    #   The name of the `FeatureGroup` you want described.
+    #   The name or Amazon Resource Name (ARN) of the `FeatureGroup` you
+    #   want described.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -12240,7 +12241,8 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] feature_group_name
-    #   The name of the feature group containing the feature.
+    #   The name or Amazon Resource Name (ARN) of the feature group
+    #   containing the feature.
     #   @return [String]
     #
     # @!attribute [rw] feature_name
@@ -17742,7 +17744,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The name, Arn, `CreationTime`, `FeatureGroup` values,
+    # The name, ARN, `CreationTime`, `FeatureGroup` values,
     # `LastUpdatedTime` and `EnableOnlineStorage` status of a
     # `FeatureGroup`.
     #
@@ -26770,6 +26772,68 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] name_contains
+    #   A string that partially matches one or more `ResourceCatalog`s
+    #   names. Filters `ResourceCatalog` by name.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time_after
+    #   Use this parameter to search for `ResourceCatalog`s created after a
+    #   specific date and time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   Use this parameter to search for `ResourceCatalog`s created before a
+    #   specific date and time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] sort_order
+    #   The order in which the resource catalogs are listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The value on which the resource catalog list is sorted.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results returned by `ListResourceCatalogs`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to resume pagination of `ListResourceCatalogs` results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListResourceCatalogsRequest AWS API Documentation
+    #
+    class ListResourceCatalogsRequest < Struct.new(
+      :name_contains,
+      :creation_time_after,
+      :creation_time_before,
+      :sort_order,
+      :sort_by,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_catalogs
+    #   A list of the requested `ResourceCatalog`s.
+    #   @return [Array<Types::ResourceCatalog>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to resume pagination of `ListResourceCatalogs` results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListResourceCatalogsResponse AWS API Documentation
+    #
+    class ListResourceCatalogsResponse < Struct.new(
+      :resource_catalogs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   If the previous response was truncated, you will receive this token.
     #   Use it in your next request to receive the next set of results.
@@ -34727,6 +34791,43 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A resource catalog containing all of the resources of a specific
+    # resource type within a resource owner account. For an example on
+    # sharing the Amazon SageMaker Feature Store
+    # `DefaultFeatureGroupCatalog`, see [Share Amazon SageMaker Catalog
+    # resource type][1] in the Amazon SageMaker Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/feature-store-cross-account-discoverability-share-sagemaker-catalog.html
+    #
+    # @!attribute [rw] resource_catalog_arn
+    #   The Amazon Resource Name (ARN) of the `ResourceCatalog`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_catalog_name
+    #   The name of the `ResourceCatalog`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A free form description of the `ResourceCatalog`.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time the `ResourceCatalog` was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceCatalog AWS API Documentation
+    #
+    class ResourceCatalog < Struct.new(
+      :resource_catalog_arn,
+      :resource_catalog_name,
+      :description,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the resources, including machine learning (ML) compute
     # instances and ML storage volumes, to use for model training.
     #
@@ -35581,6 +35682,21 @@ module Aws::SageMaker
     #   The maximum number of results to return.
     #   @return [Integer]
     #
+    # @!attribute [rw] cross_account_filter_option
+    #   A cross account filter option. When the value is `"CrossAccount"`
+    #   the search results will only include resources made discoverable to
+    #   you from other accounts. When the value is `"SameAccount"` or `null`
+    #   the search results will only include resources from your account.
+    #   Default is `null`. For more information on searching for resources
+    #   made discoverable to your account, see [ Search discoverable
+    #   resources][1] in the SageMaker Developer Guide. The maximum number
+    #   of `ResourceCatalog`s viewable is 1000.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-cross-account-discoverability-use.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchRequest AWS API Documentation
     #
     class SearchRequest < Struct.new(
@@ -35589,7 +35705,8 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       :next_token,
-      :max_results)
+      :max_results,
+      :cross_account_filter_option)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39820,7 +39937,8 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] feature_group_name
-    #   The name of the feature group that you're updating.
+    #   The name or Amazon Resource Name (ARN) of the feature group that
+    #   you're updating.
     #   @return [String]
     #
     # @!attribute [rw] feature_additions
@@ -39858,8 +39976,8 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] feature_group_name
-    #   The name of the feature group containing the feature that you're
-    #   updating.
+    #   The name or Amazon Resource Name (ARN) of the feature group
+    #   containing the feature that you're updating.
     #   @return [String]
     #
     # @!attribute [rw] feature_name

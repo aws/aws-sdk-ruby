@@ -542,6 +542,8 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.creation_time #=> String
     #   resp.resolver_endpoint.modification_time #=> String
     #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
+    #   resp.resolver_endpoint.outpost_arn #=> String
+    #   resp.resolver_endpoint.preferred_instance_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/AssociateResolverEndpointIpAddress AWS API Documentation
     #
@@ -911,6 +913,78 @@ module Aws::Route53Resolver
       req.send_request(options)
     end
 
+    # Creates an Route 53 Resolver on an Outpost.
+    #
+    # @option params [required, String] :creator_request_id
+    #   A unique string that identifies the request and that allows failed
+    #   requests to be retried without the risk of running the operation
+    #   twice.
+    #
+    #   `CreatorRequestId` can be any unique string, for example, a date/time
+    #   stamp.
+    #
+    # @option params [required, String] :name
+    #   A friendly name that lets you easily find a configuration in the
+    #   Resolver dashboard in the Route 53 console.
+    #
+    # @option params [Integer] :instance_count
+    #   Number of Amazon EC2 instances for the Resolver on Outpost. The
+    #   default and minimal value is 4.
+    #
+    # @option params [required, String] :preferred_instance_type
+    #   The Amazon EC2 instance type. If you specify this, you must also
+    #   specify a value for the `OutpostArn`.
+    #
+    # @option params [required, String] :outpost_arn
+    #   The Amazon Resource Name (ARN) of the Outpost. If you specify this,
+    #   you must also specify a value for the `PreferredInstanceType`.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A string that helps identify the Route 53 Resolvers on Outpost.
+    #
+    # @return [Types::CreateOutpostResolverResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateOutpostResolverResponse#outpost_resolver #outpost_resolver} => Types::OutpostResolver
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_outpost_resolver({
+    #     creator_request_id: "CreatorRequestId", # required
+    #     name: "OutpostResolverName", # required
+    #     instance_count: 1,
+    #     preferred_instance_type: "OutpostInstanceType", # required
+    #     outpost_arn: "OutpostArn", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.outpost_resolver.arn #=> String
+    #   resp.outpost_resolver.creation_time #=> String
+    #   resp.outpost_resolver.modification_time #=> String
+    #   resp.outpost_resolver.creator_request_id #=> String
+    #   resp.outpost_resolver.id #=> String
+    #   resp.outpost_resolver.instance_count #=> Integer
+    #   resp.outpost_resolver.preferred_instance_type #=> String
+    #   resp.outpost_resolver.name #=> String
+    #   resp.outpost_resolver.status #=> String, one of "CREATING", "OPERATIONAL", "UPDATING", "DELETING", "ACTION_NEEDED", "FAILED_CREATION", "FAILED_DELETION"
+    #   resp.outpost_resolver.status_message #=> String
+    #   resp.outpost_resolver.outpost_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateOutpostResolver AWS API Documentation
+    #
+    # @overload create_outpost_resolver(params = {})
+    # @param [Hash] params ({})
+    def create_outpost_resolver(params = {}, options = {})
+      req = build_request(:create_outpost_resolver, params)
+      req.send_request(options)
+    end
+
     # Creates a Resolver endpoint. There are two types of Resolver
     # endpoints, inbound and outbound:
     #
@@ -958,9 +1032,17 @@ module Aws::Route53Resolver
     #   endpoint.
     #
     # @option params [String] :resolver_endpoint_type
-    #   For the endpoint type you can choose either IPv4, IPv6. or dual-stack.
+    #   For the endpoint type you can choose either IPv4, IPv6, or dual-stack.
     #   A dual-stack endpoint means that it will resolve via both IPv4 and
     #   IPv6. This endpoint type is applied to all IP addresses.
+    #
+    # @option params [String] :outpost_arn
+    #   The Amazon Resource Name (ARN) of the Outpost. If you specify this,
+    #   you must also specify a value for the `PreferredInstanceType`.
+    #
+    # @option params [String] :preferred_instance_type
+    #   The instance type. If you specify this, you must also specify a value
+    #   for the `OutpostArn`.
     #
     # @return [Types::CreateResolverEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -987,6 +1069,8 @@ module Aws::Route53Resolver
     #       },
     #     ],
     #     resolver_endpoint_type: "IPV6", # accepts IPV6, IPV4, DUALSTACK
+    #     outpost_arn: "OutpostArn",
+    #     preferred_instance_type: "OutpostInstanceType",
     #   })
     #
     # @example Response structure
@@ -1005,6 +1089,8 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.creation_time #=> String
     #   resp.resolver_endpoint.modification_time #=> String
     #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
+    #   resp.resolver_endpoint.outpost_arn #=> String
+    #   resp.resolver_endpoint.preferred_instance_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateResolverEndpoint AWS API Documentation
     #
@@ -1153,7 +1239,8 @@ module Aws::Route53Resolver
     #
     # @option params [Array<Types::TargetAddress>] :target_ips
     #   The IPs that you want Resolver to forward DNS queries to. You can
-    #   specify only IPv4 addresses. Separate IP addresses with a space.
+    #   specify either Ipv4 or Ipv6 addresses but not both in the same rule.
+    #   Separate IP addresses with a space.
     #
     #   `TargetIps` is available only when the value of `Rule type` is
     #   `FORWARD`.
@@ -1342,6 +1429,44 @@ module Aws::Route53Resolver
       req.send_request(options)
     end
 
+    # Deletes a Resolver on the Outpost.
+    #
+    # @option params [required, String] :id
+    #   A unique string that identifies the Resolver on the Outpost.
+    #
+    # @return [Types::DeleteOutpostResolverResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteOutpostResolverResponse#outpost_resolver #outpost_resolver} => Types::OutpostResolver
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_outpost_resolver({
+    #     id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.outpost_resolver.arn #=> String
+    #   resp.outpost_resolver.creation_time #=> String
+    #   resp.outpost_resolver.modification_time #=> String
+    #   resp.outpost_resolver.creator_request_id #=> String
+    #   resp.outpost_resolver.id #=> String
+    #   resp.outpost_resolver.instance_count #=> Integer
+    #   resp.outpost_resolver.preferred_instance_type #=> String
+    #   resp.outpost_resolver.name #=> String
+    #   resp.outpost_resolver.status #=> String, one of "CREATING", "OPERATIONAL", "UPDATING", "DELETING", "ACTION_NEEDED", "FAILED_CREATION", "FAILED_DELETION"
+    #   resp.outpost_resolver.status_message #=> String
+    #   resp.outpost_resolver.outpost_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteOutpostResolver AWS API Documentation
+    #
+    # @overload delete_outpost_resolver(params = {})
+    # @param [Hash] params ({})
+    def delete_outpost_resolver(params = {}, options = {})
+      req = build_request(:delete_outpost_resolver, params)
+      req.send_request(options)
+    end
+
     # Deletes a Resolver endpoint. The effect of deleting a Resolver
     # endpoint depends on whether it's an inbound or an outbound Resolver
     # endpoint:
@@ -1381,6 +1506,8 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.creation_time #=> String
     #   resp.resolver_endpoint.modification_time #=> String
     #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
+    #   resp.resolver_endpoint.outpost_arn #=> String
+    #   resp.resolver_endpoint.preferred_instance_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteResolverEndpoint AWS API Documentation
     #
@@ -1591,6 +1718,8 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.creation_time #=> String
     #   resp.resolver_endpoint.modification_time #=> String
     #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
+    #   resp.resolver_endpoint.outpost_arn #=> String
+    #   resp.resolver_endpoint.preferred_instance_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DisassociateResolverEndpointIpAddress AWS API Documentation
     #
@@ -1879,6 +2008,46 @@ module Aws::Route53Resolver
       req.send_request(options)
     end
 
+    # Gets information about a specified Resolver on the Outpost, such as
+    # its instance count and type, name, and the current status of the
+    # Resolver.
+    #
+    # @option params [required, String] :id
+    #   The ID of the Resolver on the Outpost.
+    #
+    # @return [Types::GetOutpostResolverResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetOutpostResolverResponse#outpost_resolver #outpost_resolver} => Types::OutpostResolver
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_outpost_resolver({
+    #     id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.outpost_resolver.arn #=> String
+    #   resp.outpost_resolver.creation_time #=> String
+    #   resp.outpost_resolver.modification_time #=> String
+    #   resp.outpost_resolver.creator_request_id #=> String
+    #   resp.outpost_resolver.id #=> String
+    #   resp.outpost_resolver.instance_count #=> Integer
+    #   resp.outpost_resolver.preferred_instance_type #=> String
+    #   resp.outpost_resolver.name #=> String
+    #   resp.outpost_resolver.status #=> String, one of "CREATING", "OPERATIONAL", "UPDATING", "DELETING", "ACTION_NEEDED", "FAILED_CREATION", "FAILED_DELETION"
+    #   resp.outpost_resolver.status_message #=> String
+    #   resp.outpost_resolver.outpost_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetOutpostResolver AWS API Documentation
+    #
+    # @overload get_outpost_resolver(params = {})
+    # @param [Hash] params ({})
+    def get_outpost_resolver(params = {}, options = {})
+      req = build_request(:get_outpost_resolver, params)
+      req.send_request(options)
+    end
+
     # Retrieves the behavior configuration of Route 53 Resolver behavior for
     # a single VPC from Amazon Virtual Private Cloud.
     #
@@ -1977,6 +2146,8 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.creation_time #=> String
     #   resp.resolver_endpoint.modification_time #=> String
     #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
+    #   resp.resolver_endpoint.outpost_arn #=> String
+    #   resp.resolver_endpoint.preferred_instance_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetResolverEndpoint AWS API Documentation
     #
@@ -2690,6 +2861,61 @@ module Aws::Route53Resolver
       req.send_request(options)
     end
 
+    # Lists all the Resolvers on Outposts that were created using the
+    # current Amazon Web Services account.
+    #
+    # @option params [String] :outpost_arn
+    #   The Amazon Resource Name (ARN) of the Outpost.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of Resolvers on the Outpost that you want to return
+    #   in the response to a `ListOutpostResolver` request. If you don't
+    #   specify a value for `MaxResults`, the request returns up to 100
+    #   Resolvers.
+    #
+    # @option params [String] :next_token
+    #   For the first `ListOutpostResolver` request, omit this value.
+    #
+    # @return [Types::ListOutpostResolversResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOutpostResolversResponse#outpost_resolvers #outpost_resolvers} => Array&lt;Types::OutpostResolver&gt;
+    #   * {Types::ListOutpostResolversResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_outpost_resolvers({
+    #     outpost_arn: "OutpostArn",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.outpost_resolvers #=> Array
+    #   resp.outpost_resolvers[0].arn #=> String
+    #   resp.outpost_resolvers[0].creation_time #=> String
+    #   resp.outpost_resolvers[0].modification_time #=> String
+    #   resp.outpost_resolvers[0].creator_request_id #=> String
+    #   resp.outpost_resolvers[0].id #=> String
+    #   resp.outpost_resolvers[0].instance_count #=> Integer
+    #   resp.outpost_resolvers[0].preferred_instance_type #=> String
+    #   resp.outpost_resolvers[0].name #=> String
+    #   resp.outpost_resolvers[0].status #=> String, one of "CREATING", "OPERATIONAL", "UPDATING", "DELETING", "ACTION_NEEDED", "FAILED_CREATION", "FAILED_DELETION"
+    #   resp.outpost_resolvers[0].status_message #=> String
+    #   resp.outpost_resolvers[0].outpost_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListOutpostResolvers AWS API Documentation
+    #
+    # @overload list_outpost_resolvers(params = {})
+    # @param [Hash] params ({})
+    def list_outpost_resolvers(params = {}, options = {})
+      req = build_request(:list_outpost_resolvers, params)
+      req.send_request(options)
+    end
+
     # Retrieves the Resolver configurations that you have defined. Route 53
     # Resolver uses the configurations to manage DNS resolution behavior for
     # your VPCs.
@@ -2849,7 +3075,7 @@ module Aws::Route53Resolver
     #   resp.ip_addresses[0].subnet_id #=> String
     #   resp.ip_addresses[0].ip #=> String
     #   resp.ip_addresses[0].ipv_6 #=> String
-    #   resp.ip_addresses[0].status #=> String, one of "CREATING", "FAILED_CREATION", "ATTACHING", "ATTACHED", "REMAP_DETACHING", "REMAP_ATTACHING", "DETACHING", "FAILED_RESOURCE_GONE", "DELETING", "DELETE_FAILED_FAS_EXPIRED", "UPDATING"
+    #   resp.ip_addresses[0].status #=> String, one of "CREATING", "FAILED_CREATION", "ATTACHING", "ATTACHED", "REMAP_DETACHING", "REMAP_ATTACHING", "DETACHING", "FAILED_RESOURCE_GONE", "DELETING", "DELETE_FAILED_FAS_EXPIRED", "UPDATING", "UPDATE_FAILED"
     #   resp.ip_addresses[0].status_message #=> String
     #   resp.ip_addresses[0].creation_time #=> String
     #   resp.ip_addresses[0].modification_time #=> String
@@ -2930,6 +3156,8 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoints[0].creation_time #=> String
     #   resp.resolver_endpoints[0].modification_time #=> String
     #   resp.resolver_endpoints[0].resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
+    #   resp.resolver_endpoints[0].outpost_arn #=> String
+    #   resp.resolver_endpoints[0].preferred_instance_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListResolverEndpoints AWS API Documentation
     #
@@ -3482,8 +3710,6 @@ module Aws::Route53Resolver
     #
     #   * `route53resolver:DisassociateResolverQueryLogConfig`
     #
-    #   * `route53resolver:ListResolverQueryLogConfigAssociations`
-    #
     #   * `route53resolver:ListResolverQueryLogConfigs`
     #
     #   In the `Resource` section of the statement, you specify the ARNs for
@@ -3953,6 +4179,57 @@ module Aws::Route53Resolver
       req.send_request(options)
     end
 
+    # You can use `UpdateOutpostResolver` to update the instance count,
+    # type, or name of a Resolver on an Outpost.
+    #
+    # @option params [required, String] :id
+    #   A unique string that identifies Resolver on an Outpost.
+    #
+    # @option params [String] :name
+    #   Name of the Resolver on the Outpost.
+    #
+    # @option params [Integer] :instance_count
+    #   The Amazon EC2 instance count for a Resolver on the Outpost.
+    #
+    # @option params [String] :preferred_instance_type
+    #   Amazon EC2 instance type.
+    #
+    # @return [Types::UpdateOutpostResolverResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateOutpostResolverResponse#outpost_resolver #outpost_resolver} => Types::OutpostResolver
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_outpost_resolver({
+    #     id: "ResourceId", # required
+    #     name: "OutpostResolverName",
+    #     instance_count: 1,
+    #     preferred_instance_type: "OutpostInstanceType",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.outpost_resolver.arn #=> String
+    #   resp.outpost_resolver.creation_time #=> String
+    #   resp.outpost_resolver.modification_time #=> String
+    #   resp.outpost_resolver.creator_request_id #=> String
+    #   resp.outpost_resolver.id #=> String
+    #   resp.outpost_resolver.instance_count #=> Integer
+    #   resp.outpost_resolver.preferred_instance_type #=> String
+    #   resp.outpost_resolver.name #=> String
+    #   resp.outpost_resolver.status #=> String, one of "CREATING", "OPERATIONAL", "UPDATING", "DELETING", "ACTION_NEEDED", "FAILED_CREATION", "FAILED_DELETION"
+    #   resp.outpost_resolver.status_message #=> String
+    #   resp.outpost_resolver.outpost_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateOutpostResolver AWS API Documentation
+    #
+    # @overload update_outpost_resolver(params = {})
+    # @param [Hash] params ({})
+    def update_outpost_resolver(params = {}, options = {})
+      req = build_request(:update_outpost_resolver, params)
+      req.send_request(options)
+    end
+
     # Updates the behavior configuration of Route 53 Resolver behavior for a
     # single VPC from Amazon Virtual Private Cloud.
     #
@@ -4063,8 +4340,12 @@ module Aws::Route53Resolver
     #   Specifies the endpoint type for what type of IP address the endpoint
     #   uses to forward DNS queries.
     #
+    #   Updating to `IPV6` type isn't currently supported.
+    #
     # @option params [Array<Types::UpdateIpAddress>] :update_ip_addresses
-    #   Updates the Resolver endpoint type to IpV4, Ipv6, or dual-stack.
+    #   Specifies the IPv6 address when you update the Resolver endpoint from
+    #   IPv4 to dual-stack. If you don't specify an IPv6 address, one will be
+    #   automatically chosen from your subnet.
     #
     # @return [Types::UpdateResolverEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4100,6 +4381,8 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.creation_time #=> String
     #   resp.resolver_endpoint.modification_time #=> String
     #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
+    #   resp.resolver_endpoint.outpost_arn #=> String
+    #   resp.resolver_endpoint.preferred_instance_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateResolverEndpoint AWS API Documentation
     #
@@ -4183,7 +4466,7 @@ module Aws::Route53Resolver
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53resolver'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

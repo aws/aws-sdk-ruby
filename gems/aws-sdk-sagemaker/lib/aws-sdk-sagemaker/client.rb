@@ -11427,7 +11427,8 @@ module Aws::SageMaker
     # identifier for each `FeatureGroup`, and more.
     #
     # @option params [required, String] :feature_group_name
-    #   The name of the `FeatureGroup` you want described.
+    #   The name or Amazon Resource Name (ARN) of the `FeatureGroup` you want
+    #   described.
     #
     # @option params [String] :next_token
     #   A token to resume pagination of the list of `Features`
@@ -11456,7 +11457,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_feature_group({
-    #     feature_group_name: "FeatureGroupName", # required
+    #     feature_group_name: "FeatureGroupNameOrArn", # required
     #     next_token: "NextToken",
     #   })
     #
@@ -11506,7 +11507,8 @@ module Aws::SageMaker
     # Shows the metadata for a feature within a feature group.
     #
     # @option params [required, String] :feature_group_name
-    #   The name of the feature group containing the feature.
+    #   The name or Amazon Resource Name (ARN) of the feature group containing
+    #   the feature.
     #
     # @option params [required, String] :feature_name
     #   The name of the feature.
@@ -11525,7 +11527,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_feature_metadata({
-    #     feature_group_name: "FeatureGroupName", # required
+    #     feature_group_name: "FeatureGroupNameOrArn", # required
     #     feature_name: "FeatureName", # required
     #   })
     #
@@ -19433,6 +19435,70 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Lists Amazon SageMaker Catalogs based on given filters and orders. The
+    # maximum number of `ResourceCatalog`s viewable is 1000.
+    #
+    # @option params [String] :name_contains
+    #   A string that partially matches one or more `ResourceCatalog`s names.
+    #   Filters `ResourceCatalog` by name.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   Use this parameter to search for `ResourceCatalog`s created after a
+    #   specific date and time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   Use this parameter to search for `ResourceCatalog`s created before a
+    #   specific date and time.
+    #
+    # @option params [String] :sort_order
+    #   The order in which the resource catalogs are listed.
+    #
+    # @option params [String] :sort_by
+    #   The value on which the resource catalog list is sorted.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results returned by `ListResourceCatalogs`.
+    #
+    # @option params [String] :next_token
+    #   A token to resume pagination of `ListResourceCatalogs` results.
+    #
+    # @return [Types::ListResourceCatalogsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResourceCatalogsResponse#resource_catalogs #resource_catalogs} => Array&lt;Types::ResourceCatalog&gt;
+    #   * {Types::ListResourceCatalogsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resource_catalogs({
+    #     name_contains: "ResourceCatalogName",
+    #     creation_time_after: Time.now,
+    #     creation_time_before: Time.now,
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     sort_by: "CreationTime", # accepts CreationTime
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_catalogs #=> Array
+    #   resp.resource_catalogs[0].resource_catalog_arn #=> String
+    #   resp.resource_catalogs[0].resource_catalog_name #=> String
+    #   resp.resource_catalogs[0].description #=> String
+    #   resp.resource_catalogs[0].creation_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListResourceCatalogs AWS API Documentation
+    #
+    # @overload list_resource_catalogs(params = {})
+    # @param [Hash] params ({})
+    def list_resource_catalogs(params = {}, options = {})
+      req = build_request(:list_resource_catalogs, params)
+      req.send_request(options)
+    end
+
     # Lists spaces.
     #
     # @option params [String] :next_token
@@ -20740,6 +20806,20 @@ module Aws::SageMaker
     # @option params [Integer] :max_results
     #   The maximum number of results to return.
     #
+    # @option params [String] :cross_account_filter_option
+    #   A cross account filter option. When the value is `"CrossAccount"` the
+    #   search results will only include resources made discoverable to you
+    #   from other accounts. When the value is `"SameAccount"` or `null` the
+    #   search results will only include resources from your account. Default
+    #   is `null`. For more information on searching for resources made
+    #   discoverable to your account, see [ Search discoverable resources][1]
+    #   in the SageMaker Developer Guide. The maximum number of
+    #   `ResourceCatalog`s viewable is 1000.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-cross-account-discoverability-use.html
+    #
     # @return [Types::SearchResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SearchResponse#results #results} => Array&lt;Types::SearchRecord&gt;
@@ -20782,6 +20862,7 @@ module Aws::SageMaker
     #     sort_order: "Ascending", # accepts Ascending, Descending
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     cross_account_filter_option: "SameAccount", # accepts SameAccount, CrossAccount
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Search AWS API Documentation
@@ -22203,10 +22284,25 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Updates the feature group.
+    # Updates the feature group by either adding features or updating the
+    # online store configuration. Use one of the following request
+    # parameters at a time while using the `UpdateFeatureGroup` API.
+    #
+    # You can add features for your feature group using the
+    # `FeatureAdditions` request parameter. Features cannot be removed from
+    # a feature group.
+    #
+    # You can update the online store configuration by using the
+    # `OnlineStoreConfig` request parameter. If a `TtlDuration` is
+    # specified, the default `TtlDuration` applies for all records added to
+    # the feature group *after the feature group is updated*. If a record
+    # level `TtlDuration` exists from using the `PutRecord` API, the record
+    # level `TtlDuration` applies to that record instead of the default
+    # `TtlDuration`.
     #
     # @option params [required, String] :feature_group_name
-    #   The name of the feature group that you're updating.
+    #   The name or Amazon Resource Name (ARN) of the feature group that
+    #   you're updating.
     #
     # @option params [Array<Types::FeatureDefinition>] :feature_additions
     #   Updates the feature group. Updating a feature group is an asynchronous
@@ -22224,7 +22320,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_feature_group({
-    #     feature_group_name: "FeatureGroupName", # required
+    #     feature_group_name: "FeatureGroupNameOrArn", # required
     #     feature_additions: [
     #       {
     #         feature_name: "FeatureName",
@@ -22255,8 +22351,8 @@ module Aws::SageMaker
     # Updates the description and parameters of the feature group.
     #
     # @option params [required, String] :feature_group_name
-    #   The name of the feature group containing the feature that you're
-    #   updating.
+    #   The name or Amazon Resource Name (ARN) of the feature group containing
+    #   the feature that you're updating.
     #
     # @option params [required, String] :feature_name
     #   The name of the feature that you're updating.
@@ -22277,7 +22373,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_feature_metadata({
-    #     feature_group_name: "FeatureGroupName", # required
+    #     feature_group_name: "FeatureGroupNameOrArn", # required
     #     feature_name: "FeatureName", # required
     #     description: "FeatureDescription",
     #     parameter_additions: [
@@ -23901,7 +23997,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.197.0'
+      context[:gem_version] = '1.198.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
