@@ -164,14 +164,18 @@ module Aws
         resp = @client.get_object(
           @params.merge(response_target: @path)
         )
-        if @on_checksum_validated &&
-          resp.context[:http_checksum] &&
+
+        return resp unless @on_checksum_validated
+
+        if resp.context[:http_checksum] &&
           resp.context[:http_checksum][:validated]
           @on_checksum_validated.call(
             resp.context[:http_checksum][:validated],
             resp
           )
         end
+
+        resp
       end
     end
   end
