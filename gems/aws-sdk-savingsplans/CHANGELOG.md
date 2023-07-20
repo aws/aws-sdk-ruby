@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2023-07-20)
+------------------
+
+* Feature - Savings Plans endpoints update
+
 1.33.0 (2023-07-11)
 ------------------
 
