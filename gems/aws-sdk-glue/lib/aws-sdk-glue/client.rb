@@ -826,6 +826,13 @@ module Aws::Glue
     #   resp.crawlers[0].targets.iceberg_targets[0].exclusions #=> Array
     #   resp.crawlers[0].targets.iceberg_targets[0].exclusions[0] #=> String
     #   resp.crawlers[0].targets.iceberg_targets[0].maximum_traversal_depth #=> Integer
+    #   resp.crawlers[0].targets.hudi_targets #=> Array
+    #   resp.crawlers[0].targets.hudi_targets[0].paths #=> Array
+    #   resp.crawlers[0].targets.hudi_targets[0].paths[0] #=> String
+    #   resp.crawlers[0].targets.hudi_targets[0].connection_name #=> String
+    #   resp.crawlers[0].targets.hudi_targets[0].exclusions #=> Array
+    #   resp.crawlers[0].targets.hudi_targets[0].exclusions[0] #=> String
+    #   resp.crawlers[0].targets.hudi_targets[0].maximum_traversal_depth #=> Integer
     #   resp.crawlers[0].database_name #=> String
     #   resp.crawlers[0].description #=> String
     #   resp.crawlers[0].classifiers #=> Array
@@ -2795,6 +2802,14 @@ module Aws::Glue
     #           maximum_traversal_depth: 1,
     #         },
     #       ],
+    #       hudi_targets: [
+    #         {
+    #           paths: ["Path"],
+    #           connection_name: "ConnectionName",
+    #           exclusions: ["Path"],
+    #           maximum_traversal_depth: 1,
+    #         },
+    #       ],
     #     },
     #     schedule: "CronExpression",
     #     classifiers: ["NameString"],
@@ -3354,28 +3369,49 @@ module Aws::Glue
     #
     # @option params [String] :worker_type
     #   The type of predefined worker that is allocated when a job runs.
-    #   Accepts a value of Standard, G.1X, G.2X, or G.025X for Spark jobs.
+    #   Accepts a value of G.1X, G.2X, G.4X, G.8X or G.025X for Spark jobs.
     #   Accepts the value Z.2X for Ray jobs.
     #
-    #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
-    #     of memory and a 50GB disk, and 2 executors per worker.
+    #   * For the `G.1X` worker type, each worker maps to 1 DPU (4 vCPUs, 16
+    #     GB of memory) with 84GB disk (approximately 34GB free), and provides
+    #     1 executor per worker. We recommend this worker type for workloads
+    #     such as data transforms, joins, and queries, to offers a scalable
+    #     and cost effective way to run most jobs.
     #
-    #   * For the `G.1X` worker type, each worker maps to 1 DPU (4 vCPU, 16 GB
-    #     of memory, 64 GB disk), and provides 1 executor per worker. We
-    #     recommend this worker type for memory-intensive jobs.
+    #   * For the `G.2X` worker type, each worker maps to 2 DPU (8 vCPUs, 32
+    #     GB of memory) with 128GB disk (approximately 77GB free), and
+    #     provides 1 executor per worker. We recommend this worker type for
+    #     workloads such as data transforms, joins, and queries, to offers a
+    #     scalable and cost effective way to run most jobs.
     #
-    #   * For the `G.2X` worker type, each worker maps to 2 DPU (8 vCPU, 32 GB
-    #     of memory, 128 GB disk), and provides 1 executor per worker. We
-    #     recommend this worker type for memory-intensive jobs.
+    #   * For the `G.4X` worker type, each worker maps to 4 DPU (16 vCPUs, 64
+    #     GB of memory) with 256GB disk (approximately 235GB free), and
+    #     provides 1 executor per worker. We recommend this worker type for
+    #     jobs whose workloads contain your most demanding transforms,
+    #     aggregations, joins, and queries. This worker type is available only
+    #     for Glue version 3.0 or later Spark ETL jobs in the following Amazon
+    #     Web Services Regions: US East (Ohio), US East (N. Virginia), US West
+    #     (Oregon), Asia Pacific (Singapore), Asia Pacific (Sydney), Asia
+    #     Pacific (Tokyo), Canada (Central), Europe (Frankfurt), Europe
+    #     (Ireland), and Europe (Stockholm).
     #
-    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2 vCPU,
-    #     4 GB of memory, 64 GB disk), and provides 1 executor per worker. We
-    #     recommend this worker type for low volume streaming jobs. This
-    #     worker type is only available for Glue version 3.0 streaming jobs.
+    #   * For the `G.8X` worker type, each worker maps to 8 DPU (32 vCPUs, 128
+    #     GB of memory) with 512GB disk (approximately 487GB free), and
+    #     provides 1 executor per worker. We recommend this worker type for
+    #     jobs whose workloads contain your most demanding transforms,
+    #     aggregations, joins, and queries. This worker type is available only
+    #     for Glue version 3.0 or later Spark ETL jobs, in the same Amazon Web
+    #     Services Regions as supported for the `G.4X` worker type.
     #
-    #   * For the `Z.2X` worker type, each worker maps to 2 M-DPU (8vCPU, 64
-    #     GB of m emory, 128 GB disk), and provides up to 8 Ray workers based
-    #     on the autoscaler.
+    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2 vCPUs,
+    #     4 GB of memory) with 84GB disk (approximately 34GB free), and
+    #     provides 1 executor per worker. We recommend this worker type for
+    #     low volume streaming jobs. This worker type is only available for
+    #     Glue version 3.0 streaming jobs.
+    #
+    #   * For the `Z.2X` worker type, each worker maps to 2 M-DPU (8vCPUs, 64
+    #     GB of memory) with 128 GB disk (approximately 120GB free), and
+    #     provides up to 8 Ray workers based on the autoscaler.
     #
     # @option params [Hash<String,Types::CodeGenConfigurationNode>] :code_gen_configuration_nodes
     #   The representation of a directed acyclic graph on which both the Glue
@@ -4114,24 +4150,44 @@ module Aws::Glue
     #   session.
     #
     # @option params [String] :worker_type
-    #   The type of predefined worker that is allocated to use for the
-    #   session. Accepts a value of Standard, G.1X, G.2X, or G.025X.
+    #   The type of predefined worker that is allocated when a job runs.
+    #   Accepts a value of G.1X, G.2X, G.4X, or G.8X for Spark jobs. Accepts
+    #   the value Z.2X for Ray notebooks.
     #
-    #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
-    #     of memory and a 50GB disk, and 2 executors per worker.
+    #   * For the `G.1X` worker type, each worker maps to 1 DPU (4 vCPUs, 16
+    #     GB of memory) with 84GB disk (approximately 34GB free), and provides
+    #     1 executor per worker. We recommend this worker type for workloads
+    #     such as data transforms, joins, and queries, to offers a scalable
+    #     and cost effective way to run most jobs.
     #
-    #   * For the `G.1X` worker type, each worker maps to 1 DPU (4 vCPU, 16 GB
-    #     of memory, 64 GB disk), and provides 1 executor per worker. We
-    #     recommend this worker type for memory-intensive jobs.
+    #   * For the `G.2X` worker type, each worker maps to 2 DPU (8 vCPUs, 32
+    #     GB of memory) with 128GB disk (approximately 77GB free), and
+    #     provides 1 executor per worker. We recommend this worker type for
+    #     workloads such as data transforms, joins, and queries, to offers a
+    #     scalable and cost effective way to run most jobs.
     #
-    #   * For the `G.2X` worker type, each worker maps to 2 DPU (8 vCPU, 32 GB
-    #     of memory, 128 GB disk), and provides 1 executor per worker. We
-    #     recommend this worker type for memory-intensive jobs.
+    #   * For the `G.4X` worker type, each worker maps to 4 DPU (16 vCPUs, 64
+    #     GB of memory) with 256GB disk (approximately 235GB free), and
+    #     provides 1 executor per worker. We recommend this worker type for
+    #     jobs whose workloads contain your most demanding transforms,
+    #     aggregations, joins, and queries. This worker type is available only
+    #     for Glue version 3.0 or later Spark ETL jobs in the following Amazon
+    #     Web Services Regions: US East (Ohio), US East (N. Virginia), US West
+    #     (Oregon), Asia Pacific (Singapore), Asia Pacific (Sydney), Asia
+    #     Pacific (Tokyo), Canada (Central), Europe (Frankfurt), Europe
+    #     (Ireland), and Europe (Stockholm).
     #
-    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2 vCPU,
-    #     4 GB of memory, 64 GB disk), and provides 1 executor per worker. We
-    #     recommend this worker type for low volume streaming jobs. This
-    #     worker type is only available for Glue version 3.0 streaming jobs.
+    #   * For the `G.8X` worker type, each worker maps to 8 DPU (32 vCPUs, 128
+    #     GB of memory) with 512GB disk (approximately 487GB free), and
+    #     provides 1 executor per worker. We recommend this worker type for
+    #     jobs whose workloads contain your most demanding transforms,
+    #     aggregations, joins, and queries. This worker type is available only
+    #     for Glue version 3.0 or later Spark ETL jobs, in the same Amazon Web
+    #     Services Regions as supported for the `G.4X` worker type.
+    #
+    #   * For the `Z.2X` worker type, each worker maps to 2 M-DPU (8vCPUs, 64
+    #     GB of memory) with 128 GB disk (approximately 120GB free), and
+    #     provides up to 8 Ray workers based on the autoscaler.
     #
     # @option params [String] :security_configuration
     #   The name of the SecurityConfiguration structure to be used with the
@@ -6042,6 +6098,13 @@ module Aws::Glue
     #   resp.crawler.targets.iceberg_targets[0].exclusions #=> Array
     #   resp.crawler.targets.iceberg_targets[0].exclusions[0] #=> String
     #   resp.crawler.targets.iceberg_targets[0].maximum_traversal_depth #=> Integer
+    #   resp.crawler.targets.hudi_targets #=> Array
+    #   resp.crawler.targets.hudi_targets[0].paths #=> Array
+    #   resp.crawler.targets.hudi_targets[0].paths[0] #=> String
+    #   resp.crawler.targets.hudi_targets[0].connection_name #=> String
+    #   resp.crawler.targets.hudi_targets[0].exclusions #=> Array
+    #   resp.crawler.targets.hudi_targets[0].exclusions[0] #=> String
+    #   resp.crawler.targets.hudi_targets[0].maximum_traversal_depth #=> Integer
     #   resp.crawler.database_name #=> String
     #   resp.crawler.description #=> String
     #   resp.crawler.classifiers #=> Array
@@ -6196,6 +6259,13 @@ module Aws::Glue
     #   resp.crawlers[0].targets.iceberg_targets[0].exclusions #=> Array
     #   resp.crawlers[0].targets.iceberg_targets[0].exclusions[0] #=> String
     #   resp.crawlers[0].targets.iceberg_targets[0].maximum_traversal_depth #=> Integer
+    #   resp.crawlers[0].targets.hudi_targets #=> Array
+    #   resp.crawlers[0].targets.hudi_targets[0].paths #=> Array
+    #   resp.crawlers[0].targets.hudi_targets[0].paths[0] #=> String
+    #   resp.crawlers[0].targets.hudi_targets[0].connection_name #=> String
+    #   resp.crawlers[0].targets.hudi_targets[0].exclusions #=> Array
+    #   resp.crawlers[0].targets.hudi_targets[0].exclusions[0] #=> String
+    #   resp.crawlers[0].targets.hudi_targets[0].maximum_traversal_depth #=> Integer
     #   resp.crawlers[0].database_name #=> String
     #   resp.crawlers[0].description #=> String
     #   resp.crawlers[0].classifiers #=> Array
@@ -13931,28 +14001,49 @@ module Aws::Glue
     #
     # @option params [String] :worker_type
     #   The type of predefined worker that is allocated when a job runs.
-    #   Accepts a value of Standard, G.1X, G.2X, or G.025X for Spark jobs.
+    #   Accepts a value of G.1X, G.2X, G.4X, G.8X or G.025X for Spark jobs.
     #   Accepts the value Z.2X for Ray jobs.
     #
-    #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
-    #     of memory and a 50GB disk, and 2 executors per worker.
+    #   * For the `G.1X` worker type, each worker maps to 1 DPU (4 vCPUs, 16
+    #     GB of memory) with 84GB disk (approximately 34GB free), and provides
+    #     1 executor per worker. We recommend this worker type for workloads
+    #     such as data transforms, joins, and queries, to offers a scalable
+    #     and cost effective way to run most jobs.
     #
-    #   * For the `G.1X` worker type, each worker maps to 1 DPU (4 vCPU, 16 GB
-    #     of memory, 64 GB disk), and provides 1 executor per worker. We
-    #     recommend this worker type for memory-intensive jobs.
+    #   * For the `G.2X` worker type, each worker maps to 2 DPU (8 vCPUs, 32
+    #     GB of memory) with 128GB disk (approximately 77GB free), and
+    #     provides 1 executor per worker. We recommend this worker type for
+    #     workloads such as data transforms, joins, and queries, to offers a
+    #     scalable and cost effective way to run most jobs.
     #
-    #   * For the `G.2X` worker type, each worker maps to 2 DPU (8 vCPU, 32 GB
-    #     of memory, 128 GB disk), and provides 1 executor per worker. We
-    #     recommend this worker type for memory-intensive jobs.
+    #   * For the `G.4X` worker type, each worker maps to 4 DPU (16 vCPUs, 64
+    #     GB of memory) with 256GB disk (approximately 235GB free), and
+    #     provides 1 executor per worker. We recommend this worker type for
+    #     jobs whose workloads contain your most demanding transforms,
+    #     aggregations, joins, and queries. This worker type is available only
+    #     for Glue version 3.0 or later Spark ETL jobs in the following Amazon
+    #     Web Services Regions: US East (Ohio), US East (N. Virginia), US West
+    #     (Oregon), Asia Pacific (Singapore), Asia Pacific (Sydney), Asia
+    #     Pacific (Tokyo), Canada (Central), Europe (Frankfurt), Europe
+    #     (Ireland), and Europe (Stockholm).
     #
-    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2 vCPU,
-    #     4 GB of memory, 64 GB disk), and provides 1 executor per worker. We
-    #     recommend this worker type for low volume streaming jobs. This
-    #     worker type is only available for Glue version 3.0 streaming jobs.
+    #   * For the `G.8X` worker type, each worker maps to 8 DPU (32 vCPUs, 128
+    #     GB of memory) with 512GB disk (approximately 487GB free), and
+    #     provides 1 executor per worker. We recommend this worker type for
+    #     jobs whose workloads contain your most demanding transforms,
+    #     aggregations, joins, and queries. This worker type is available only
+    #     for Glue version 3.0 or later Spark ETL jobs, in the same Amazon Web
+    #     Services Regions as supported for the `G.4X` worker type.
     #
-    #   * For the `Z.2X` worker type, each worker maps to 2 DPU (8vCPU, 64 GB
-    #     of m emory, 128 GB disk), and provides up to 8 Ray workers (one per
-    #     vCPU) based on the autoscaler.
+    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2 vCPUs,
+    #     4 GB of memory) with 84GB disk (approximately 34GB free), and
+    #     provides 1 executor per worker. We recommend this worker type for
+    #     low volume streaming jobs. This worker type is only available for
+    #     Glue version 3.0 streaming jobs.
+    #
+    #   * For the `Z.2X` worker type, each worker maps to 2 M-DPU (8vCPUs, 64
+    #     GB of memory) with 128 GB disk (approximately 120GB free), and
+    #     provides up to 8 Ray workers based on the autoscaler.
     #
     # @option params [Integer] :number_of_workers
     #   The number of workers of a defined `workerType` that are allocated
@@ -14891,6 +14982,14 @@ module Aws::Glue
     #         },
     #       ],
     #       iceberg_targets: [
+    #         {
+    #           paths: ["Path"],
+    #           connection_name: "ConnectionName",
+    #           exclusions: ["Path"],
+    #           maximum_traversal_depth: 1,
+    #         },
+    #       ],
+    #       hudi_targets: [
     #         {
     #           paths: ["Path"],
     #           connection_name: "ConnectionName",
@@ -15954,7 +16053,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.149.0'
+      context[:gem_version] = '1.150.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

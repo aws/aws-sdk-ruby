@@ -72,17 +72,10 @@ module Aws::RDS
       data[:master_username]
     end
 
-    # The meaning of this parameter differs depending on the database
-    # engine.
-    #
-    # * For RDS for MariaDB, Microsoft SQL Server, MySQL, and PostgreSQL -
-    #   The name of the initial database specified for this DB instance when
-    #   it was created, if one was provided. This same name is returned for
-    #   the life of the DB instance.
-    #
-    # * For RDS for Oracle - The Oracle System ID (SID) of the created DB
-    #   instance. This value is only returned when the object returned is an
-    #   Oracle DB instance.
+    # Contains the initial database name that you provided (if required)
+    # when you created the DB instance. This name is returned for the life
+    # of your DB instance. For an RDS for Oracle CDB instance, the name
+    # identifies the PDB rather than the CDB.
     # @return [String]
     def db_name
       data[:db_name]
@@ -967,119 +960,124 @@ module Aws::RDS
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
     #     ca_certificate_identifier: "String",
+    #     db_system_id: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
-    #   The meaning of this parameter differs depending on the database
-    #   engine.
+    #   The meaning of this parameter differs according to the database engine
+    #   you use.
     #
-    #   Amazon Aurora MySQL
+    #   **MySQL**
     #
-    #   : The name of the database to create when the primary DB instance of
-    #     the Aurora MySQL DB cluster is created. If you don't specify a
-    #     value, Amazon RDS doesn't create a database in the DB cluster.
+    #   The name of the database to create when the DB instance is created. If
+    #   this parameter isn't specified, no database is created in the DB
+    #   instance.
     #
-    #     Constraints:
+    #   Constraints:
     #
-    #     * Must contain 1 to 64 alphanumeric characters.
+    #   * Must contain 1 to 64 letters or numbers.
     #
-    #     * Can't be a word reserved by the database engine.
+    #   * Must begin with a letter. Subsequent characters can be letters,
+    #     underscores, or digits (0-9).
     #
-    #   Amazon Aurora PostgreSQL
+    #   * Can't be a word reserved by the specified database engine
     #
-    #   : The name of the database to create when the primary DB instance of
-    #     the Aurora PostgreSQL DB cluster is created.
+    #   **MariaDB**
     #
-    #     Default: `postgres`
+    #   The name of the database to create when the DB instance is created. If
+    #   this parameter isn't specified, no database is created in the DB
+    #   instance.
     #
-    #     Constraints:
+    #   Constraints:
     #
-    #     * Must contain 1 to 63 alphanumeric characters.
+    #   * Must contain 1 to 64 letters or numbers.
     #
-    #     * Must begin with a letter. Subsequent characters can be letters,
-    #       underscores, or digits (0 to 9).
+    #   * Must begin with a letter. Subsequent characters can be letters,
+    #     underscores, or digits (0-9).
     #
-    #     * Can't be a word reserved by the database engine.
+    #   * Can't be a word reserved by the specified database engine
     #
-    #   Amazon RDS Custom for Oracle
+    #   **PostgreSQL**
     #
-    #   : The Oracle System ID (SID) of the created RDS Custom DB instance.
+    #   The name of the database to create when the DB instance is created. If
+    #   this parameter isn't specified, a database named `postgres` is
+    #   created in the DB instance.
     #
-    #     Default: `ORCL`
+    #   Constraints:
     #
-    #     Constraints:
+    #   * Must contain 1 to 63 letters, numbers, or underscores.
     #
-    #     * Must contain 1 to 8 alphanumeric characters.
+    #   * Must begin with a letter. Subsequent characters can be letters,
+    #     underscores, or digits (0-9).
     #
-    #     * Must contain a letter.
+    #   * Can't be a word reserved by the specified database engine
     #
-    #     * Can't be a word reserved by the database engine.
+    #   **Oracle**
     #
-    #   Amazon RDS Custom for SQL Server
+    #   The Oracle System ID (SID) of the created DB instance. If you don't
+    #   specify a value, the default value is `ORCL`. You can't specify the
+    #   string `null`, or any other reserved word, for `DBName`.
     #
-    #   : Not applicable. Must be null.
+    #   Default: `ORCL`
     #
-    #   RDS for MariaDB
+    #   Constraints:
     #
-    #   : The name of the database to create when the DB instance is created.
-    #     If you don't specify a value, Amazon RDS doesn't create a database
-    #     in the DB instance.
+    #   * Can't be longer than 8 characters
     #
-    #     Constraints:
+    #   ^
     #
-    #     * Must contain 1 to 64 letters or numbers.
+    #   **Amazon RDS Custom for Oracle**
     #
-    #     * Must begin with a letter. Subsequent characters can be letters,
-    #       underscores, or digits (0-9).
+    #   The Oracle System ID (SID) of the created RDS Custom DB instance. If
+    #   you don't specify a value, the default value is `ORCL` for non-CDBs
+    #   and `RDSCDB` for CDBs.
     #
-    #     * Can't be a word reserved by the database engine.
+    #   Default: `ORCL`
     #
-    #   RDS for MySQL
+    #   Constraints:
     #
-    #   : The name of the database to create when the DB instance is created.
-    #     If you don't specify a value, Amazon RDS doesn't create a database
-    #     in the DB instance.
+    #   * It must contain 1 to 8 alphanumeric characters.
     #
-    #     Constraints:
+    #   * It must contain a letter.
     #
-    #     * Must contain 1 to 64 letters or numbers.
+    #   * It can't be a word reserved by the database engine.
     #
-    #     * Must begin with a letter. Subsequent characters can be letters,
-    #       underscores, or digits (0-9).
+    #   **Amazon RDS Custom for SQL Server**
     #
-    #     * Can't be a word reserved by the database engine.
+    #   Not applicable. Must be null.
     #
-    #   RDS for Oracle
+    #   **SQL Server**
     #
-    #   : The Oracle System ID (SID) of the created DB instance.
+    #   Not applicable. Must be null.
     #
-    #     Default: `ORCL`
+    #   **Amazon Aurora MySQL**
     #
-    #     Constraints:
+    #   The name of the database to create when the primary DB instance of the
+    #   Aurora MySQL DB cluster is created. If this parameter isn't specified
+    #   for an Aurora MySQL DB cluster, no database is created in the DB
+    #   cluster.
     #
-    #     * Can't be longer than 8 characters.
+    #   Constraints:
     #
-    #     * Can't be a word reserved by the database engine, such as the
-    #       string `NULL`.
+    #   * It must contain 1 to 64 alphanumeric characters.
     #
-    #   RDS for PostgreSQL
+    #   * It can't be a word reserved by the database engine.
     #
-    #   : The name of the database to create when the DB instance is created.
+    #   **Amazon Aurora PostgreSQL**
     #
-    #     Default: `postgres`
+    #   The name of the database to create when the primary DB instance of the
+    #   Aurora PostgreSQL DB cluster is created. If this parameter isn't
+    #   specified for an Aurora PostgreSQL DB cluster, a database named
+    #   `postgres` is created in the DB cluster.
     #
-    #     Constraints:
+    #   Constraints:
     #
-    #     * Must contain 1 to 63 letters, numbers, or underscores.
+    #   * It must contain 1 to 63 alphanumeric characters.
     #
-    #     * Must begin with a letter. Subsequent characters can be letters,
-    #       underscores, or digits (0-9).
+    #   * It must begin with a letter. Subsequent characters can be letters,
+    #     underscores, or digits (0 to 9).
     #
-    #     * Can't be a word reserved by the database engine.
-    #
-    #   RDS for SQL Server
-    #
-    #   : Not applicable. Must be null.
+    #   * It can't be a word reserved by the database engine.
     # @option options [Integer] :allocated_storage
     #   The amount of storage in gibibytes (GiB) to allocate for the DB
     #   instance.
@@ -2054,6 +2052,13 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
+    # @option options [String] :db_system_id
+    #   The Oracle system identifier (SID), which is the name of the Oracle
+    #   database instance that manages your database files. In this context,
+    #   the term "Oracle database instance" refers exclusively to the system
+    #   global area (SGA) and Oracle background processes. If you don't
+    #   specify a SID, the value defaults to `RDSCDB`. The Oracle SID is also
+    #   the name of your CDB.
     # @return [DBInstance]
     def create(options = {})
       options = options.merge(db_instance_identifier: @id)
