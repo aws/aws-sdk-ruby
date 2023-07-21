@@ -41,7 +41,6 @@ module Seahorse
           context = RequestContext.new
           expect(Response.new(context: context).context).to be(context)
         end
-
       end
 
       describe '#checksum_validated' do
