@@ -34,14 +34,7 @@ module Aws
         @params[:checksum_mode] = options[:checksum_mode] || 'ENABLED'
         @on_checksum_validated = options[:on_checksum_validated]
 
-        if @on_checksum_validated && @params[:checksum_mode] != 'ENABLED'
-          raise ArgumentError, "You must set checksum_mode: 'ENABLED' " +
-            "when providing a on_checksum_validated callback"
-        end
-
-        if @on_checksum_validated && !@on_checksum_validated.respond_to?(:call)
-          raise ArgumentError, 'on_checksum_validated must be callable'
-        end
+        validate!
 
         Aws::Plugins::UserAgent.feature('s3-transfer') do
           case @mode
@@ -64,6 +57,17 @@ module Aws
       end
 
       private
+
+      def validate!
+        if @on_checksum_validated && @params[:checksum_mode] != 'ENABLED'
+          raise ArgumentError, "You must set checksum_mode: 'ENABLED' " +
+            "when providing a on_checksum_validated callback"
+        end
+
+        if @on_checksum_validated && !@on_checksum_validated.respond_to?(:call)
+          raise ArgumentError, 'on_checksum_validated must be callable'
+        end
+      end
 
       def multipart_download
         resp = @client.head_object(@params.merge(part_number: 1))
@@ -140,13 +144,8 @@ module Aws
                 @params.merge(param.to_sym => chunk)
               )
               write(resp)
-              if @on_checksum_validated &&
-                resp.context[:http_checksum] &&
-                resp.context[:http_checksum][:validated]
-                @on_checksum_validated.call(
-                  resp.context[:http_checksum][:validated],
-                  resp
-                )
+              if @on_checksum_validated && resp.checksum_validated
+                @on_checksum_validated.call(resp.checksum_validated, resp)
               end
             end
           end
@@ -167,12 +166,8 @@ module Aws
 
         return resp unless @on_checksum_validated
 
-        if resp.context[:http_checksum] &&
-          resp.context[:http_checksum][:validated]
-          @on_checksum_validated.call(
-            resp.context[:http_checksum][:validated],
-            resp
-          )
+        if resp.checksum_validated
+          @on_checksum_validated.call(resp.checksum_validated, resp)
         end
 
         resp

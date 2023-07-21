@@ -44,6 +44,19 @@ module Seahorse
 
       end
 
+      describe '#checksum_validated' do
+        it 'returns nil when no checksum was validated' do
+          expect(Response.new.checksum_validated).to be_nil
+        end
+
+        it 'returns the checksum algorithm' do
+          context = RequestContext.new
+          context[:http_checksum] = {validated: 'CRC32'}
+
+          expect(Response.new(context: context).checksum_validated).to eq('CRC32')
+        end
+      end
+
       describe 'callbacks' do
 
         let(:http_resp) { Http::Response.new }
