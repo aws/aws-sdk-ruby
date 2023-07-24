@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add `checksum_validated` method to response.
+
 3.178.0 (2023-07-11)
 ------------------
 
