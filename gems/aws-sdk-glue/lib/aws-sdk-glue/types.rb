@@ -2219,6 +2219,10 @@ module Aws::Glue
     #   input data and returns a collection of Dynamic Frames.
     #   @return [Types::EvaluateDataQualityMultiFrame]
     #
+    # @!attribute [rw] recipe
+    #   Specifies a Glue DataBrew recipe node.
+    #   @return [Types::Recipe]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CodeGenConfigurationNode AWS API Documentation
     #
     class CodeGenConfigurationNode < Struct.new(
@@ -2287,7 +2291,8 @@ module Aws::Glue
       :s3_delta_direct_target,
       :amazon_redshift_source,
       :amazon_redshift_target,
-      :evaluate_data_quality_multi_frame)
+      :evaluate_data_quality_multi_frame,
+      :recipe)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16099,6 +16104,49 @@ module Aws::Glue
       :metadata_info_map,
       :schema_version_id,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A Glue Studio node that uses a Glue DataBrew recipe in Glue jobs.
+    #
+    # @!attribute [rw] name
+    #   The name of the Glue Studio node.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The nodes that are inputs to the recipe node, identified by id.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] recipe_reference
+    #   A reference to the DataBrew recipe used by the node.
+    #   @return [Types::RecipeReference]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Recipe AWS API Documentation
+    #
+    class Recipe < Struct.new(
+      :name,
+      :inputs,
+      :recipe_reference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A reference to a Glue DataBrew recipe.
+    #
+    # @!attribute [rw] recipe_arn
+    #   The ARN of the DataBrew recipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] recipe_version
+    #   The RecipeVersion of the DataBrew recipe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RecipeReference AWS API Documentation
+    #
+    class RecipeReference < Struct.new(
+      :recipe_arn,
+      :recipe_version)
       SENSITIVE = []
       include Aws::Structure
     end

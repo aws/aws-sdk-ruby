@@ -32144,7 +32144,7 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].product_description #=> String, one of "Linux/UNIX", "Linux/UNIX (Amazon VPC)", "Windows", "Windows (Amazon VPC)"
     #   resp.spot_instance_requests[0].spot_instance_request_id #=> String
     #   resp.spot_instance_requests[0].spot_price #=> String
-    #   resp.spot_instance_requests[0].state #=> String, one of "open", "active", "closed", "cancelled", "failed"
+    #   resp.spot_instance_requests[0].state #=> String, one of "open", "active", "closed", "cancelled", "failed", "disabled"
     #   resp.spot_instance_requests[0].status.code #=> String
     #   resp.spot_instance_requests[0].status.message #=> String
     #   resp.spot_instance_requests[0].status.update_time #=> Time
@@ -52258,7 +52258,7 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].product_description #=> String, one of "Linux/UNIX", "Linux/UNIX (Amazon VPC)", "Windows", "Windows (Amazon VPC)"
     #   resp.spot_instance_requests[0].spot_instance_request_id #=> String
     #   resp.spot_instance_requests[0].spot_price #=> String
-    #   resp.spot_instance_requests[0].state #=> String, one of "open", "active", "closed", "cancelled", "failed"
+    #   resp.spot_instance_requests[0].state #=> String, one of "open", "active", "closed", "cancelled", "failed", "disabled"
     #   resp.spot_instance_requests[0].status.code #=> String
     #   resp.spot_instance_requests[0].status.message #=> String
     #   resp.spot_instance_requests[0].status.update_time #=> Time
@@ -56509,7 +56509,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.392.0'
+      context[:gem_version] = '1.393.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

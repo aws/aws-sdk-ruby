@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2023-07-24)
+------------------
+
+* Feature - This release introduces the new API 'GetSavingsPlanPurchaseRecommendationDetails', which retrieves the details for a Savings Plan recommendation. It also updates the existing API 'GetSavingsPlansPurchaseRecommendation' to include the recommendation detail ID.
+
 1.88.0 (2023-07-11)
 ------------------
 

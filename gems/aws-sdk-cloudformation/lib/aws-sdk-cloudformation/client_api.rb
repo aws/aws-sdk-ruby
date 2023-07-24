@@ -202,6 +202,8 @@ module Aws::CloudFormation
     ListExportsOutput = Shapes::StructureShape.new(name: 'ListExportsOutput')
     ListImportsInput = Shapes::StructureShape.new(name: 'ListImportsInput')
     ListImportsOutput = Shapes::StructureShape.new(name: 'ListImportsOutput')
+    ListStackInstanceResourceDriftsInput = Shapes::StructureShape.new(name: 'ListStackInstanceResourceDriftsInput')
+    ListStackInstanceResourceDriftsOutput = Shapes::StructureShape.new(name: 'ListStackInstanceResourceDriftsOutput')
     ListStackInstancesInput = Shapes::StructureShape.new(name: 'ListStackInstancesInput')
     ListStackInstancesOutput = Shapes::StructureShape.new(name: 'ListStackInstancesOutput')
     ListStackResourcesInput = Shapes::StructureShape.new(name: 'ListStackResourcesInput')
@@ -367,6 +369,8 @@ module Aws::CloudFormation
     StackInstanceFilterValues = Shapes::StringShape.new(name: 'StackInstanceFilterValues')
     StackInstanceFilters = Shapes::ListShape.new(name: 'StackInstanceFilters')
     StackInstanceNotFoundException = Shapes::StructureShape.new(name: 'StackInstanceNotFoundException')
+    StackInstanceResourceDriftsSummaries = Shapes::ListShape.new(name: 'StackInstanceResourceDriftsSummaries')
+    StackInstanceResourceDriftsSummary = Shapes::StructureShape.new(name: 'StackInstanceResourceDriftsSummary')
     StackInstanceStatus = Shapes::StringShape.new(name: 'StackInstanceStatus')
     StackInstanceSummaries = Shapes::ListShape.new(name: 'StackInstanceSummaries')
     StackInstanceSummary = Shapes::StructureShape.new(name: 'StackInstanceSummary')
@@ -1057,6 +1061,20 @@ module Aws::CloudFormation
     ListImportsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListImportsOutput.struct_class = Types::ListImportsOutput
 
+    ListStackInstanceResourceDriftsInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetNameOrId, required: true, location_name: "StackSetName"))
+    ListStackInstanceResourceDriftsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListStackInstanceResourceDriftsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListStackInstanceResourceDriftsInput.add_member(:stack_instance_resource_drift_statuses, Shapes::ShapeRef.new(shape: StackResourceDriftStatusFilters, location_name: "StackInstanceResourceDriftStatuses"))
+    ListStackInstanceResourceDriftsInput.add_member(:stack_instance_account, Shapes::ShapeRef.new(shape: Account, required: true, location_name: "StackInstanceAccount"))
+    ListStackInstanceResourceDriftsInput.add_member(:stack_instance_region, Shapes::ShapeRef.new(shape: Region, required: true, location_name: "StackInstanceRegion"))
+    ListStackInstanceResourceDriftsInput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "OperationId"))
+    ListStackInstanceResourceDriftsInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
+    ListStackInstanceResourceDriftsInput.struct_class = Types::ListStackInstanceResourceDriftsInput
+
+    ListStackInstanceResourceDriftsOutput.add_member(:summaries, Shapes::ShapeRef.new(shape: StackInstanceResourceDriftsSummaries, location_name: "Summaries"))
+    ListStackInstanceResourceDriftsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListStackInstanceResourceDriftsOutput.struct_class = Types::ListStackInstanceResourceDriftsOutput
+
     ListStackInstancesInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, required: true, location_name: "StackSetName"))
     ListStackInstancesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListStackInstancesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -1458,6 +1476,18 @@ module Aws::CloudFormation
     StackInstanceFilters.member = Shapes::ShapeRef.new(shape: StackInstanceFilter)
 
     StackInstanceNotFoundException.struct_class = Types::StackInstanceNotFoundException
+
+    StackInstanceResourceDriftsSummaries.member = Shapes::ShapeRef.new(shape: StackInstanceResourceDriftsSummary)
+
+    StackInstanceResourceDriftsSummary.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, required: true, location_name: "StackId"))
+    StackInstanceResourceDriftsSummary.add_member(:logical_resource_id, Shapes::ShapeRef.new(shape: LogicalResourceId, required: true, location_name: "LogicalResourceId"))
+    StackInstanceResourceDriftsSummary.add_member(:physical_resource_id, Shapes::ShapeRef.new(shape: PhysicalResourceId, location_name: "PhysicalResourceId"))
+    StackInstanceResourceDriftsSummary.add_member(:physical_resource_id_context, Shapes::ShapeRef.new(shape: PhysicalResourceIdContext, location_name: "PhysicalResourceIdContext"))
+    StackInstanceResourceDriftsSummary.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))
+    StackInstanceResourceDriftsSummary.add_member(:property_differences, Shapes::ShapeRef.new(shape: PropertyDifferences, location_name: "PropertyDifferences"))
+    StackInstanceResourceDriftsSummary.add_member(:stack_resource_drift_status, Shapes::ShapeRef.new(shape: StackResourceDriftStatus, required: true, location_name: "StackResourceDriftStatus"))
+    StackInstanceResourceDriftsSummary.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
+    StackInstanceResourceDriftsSummary.struct_class = Types::StackInstanceResourceDriftsSummary
 
     StackInstanceSummaries.member = Shapes::ShapeRef.new(shape: StackInstanceSummary)
 
@@ -2311,6 +2341,17 @@ module Aws::CloudFormation
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_stack_instance_resource_drifts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListStackInstanceResourceDrifts"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListStackInstanceResourceDriftsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListStackInstanceResourceDriftsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: StackSetNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: StackInstanceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotFoundException)
       end)
 
       api.add_operation(:list_stack_instances, Seahorse::Model::Operation.new.tap do |o|

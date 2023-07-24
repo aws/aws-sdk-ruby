@@ -13,6 +13,8 @@ module Aws::ChimeSDKMediaPipelines
 
     include Seahorse::Model
 
+    ActiveSpeakerOnlyConfiguration = Shapes::StructureShape.new(name: 'ActiveSpeakerOnlyConfiguration')
+    ActiveSpeakerPosition = Shapes::StringShape.new(name: 'ActiveSpeakerPosition')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AmazonTranscribeCallAnalyticsProcessorConfiguration = Shapes::StructureShape.new(name: 'AmazonTranscribeCallAnalyticsProcessorConfiguration')
     AmazonTranscribeProcessorConfiguration = Shapes::StructureShape.new(name: 'AmazonTranscribeProcessorConfiguration')
@@ -30,7 +32,10 @@ module Aws::ChimeSDKMediaPipelines
     AudioSampleRateOption = Shapes::StringShape.new(name: 'AudioSampleRateOption')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BorderColor = Shapes::StringShape.new(name: 'BorderColor')
+    BorderThickness = Shapes::IntegerShape.new(name: 'BorderThickness')
     CallAnalyticsLanguageCode = Shapes::StringShape.new(name: 'CallAnalyticsLanguageCode')
+    CanvasOrientation = Shapes::StringShape.new(name: 'CanvasOrientation')
     CategoryName = Shapes::StringShape.new(name: 'CategoryName')
     CategoryNameList = Shapes::ListShape.new(name: 'CategoryNameList')
     ChannelDefinition = Shapes::StructureShape.new(name: 'ChannelDefinition')
@@ -55,6 +60,7 @@ module Aws::ChimeSDKMediaPipelines
     ContentRedactionOutput = Shapes::StringShape.new(name: 'ContentRedactionOutput')
     ContentShareLayoutOption = Shapes::StringShape.new(name: 'ContentShareLayoutOption')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
+    CornerRadius = Shapes::IntegerShape.new(name: 'CornerRadius')
     CreateMediaCapturePipelineRequest = Shapes::StructureShape.new(name: 'CreateMediaCapturePipelineRequest')
     CreateMediaCapturePipelineResponse = Shapes::StructureShape.new(name: 'CreateMediaCapturePipelineResponse')
     CreateMediaConcatenationPipelineRequest = Shapes::StructureShape.new(name: 'CreateMediaConcatenationPipelineRequest')
@@ -84,6 +90,9 @@ module Aws::ChimeSDKMediaPipelines
     GetMediaPipelineResponse = Shapes::StructureShape.new(name: 'GetMediaPipelineResponse')
     GridViewConfiguration = Shapes::StructureShape.new(name: 'GridViewConfiguration')
     GuidString = Shapes::StringShape.new(name: 'GuidString')
+    HighlightColor = Shapes::StringShape.new(name: 'HighlightColor')
+    HorizontalLayoutConfiguration = Shapes::StructureShape.new(name: 'HorizontalLayoutConfiguration')
+    HorizontalTilePosition = Shapes::StringShape.new(name: 'HorizontalTilePosition')
     Iso8601Timestamp = Shapes::TimestampShape.new(name: 'Iso8601Timestamp', timestampFormat: "iso8601")
     IssueDetectionConfiguration = Shapes::StructureShape.new(name: 'IssueDetectionConfiguration')
     Keyword = Shapes::StringShape.new(name: 'Keyword')
@@ -94,6 +103,7 @@ module Aws::ChimeSDKMediaPipelines
     KinesisVideoStreamRecordingSourceRuntimeConfiguration = Shapes::StructureShape.new(name: 'KinesisVideoStreamRecordingSourceRuntimeConfiguration')
     KinesisVideoStreamSourceRuntimeConfiguration = Shapes::StructureShape.new(name: 'KinesisVideoStreamSourceRuntimeConfiguration')
     LambdaFunctionSinkConfiguration = Shapes::StructureShape.new(name: 'LambdaFunctionSinkConfiguration')
+    LanguageOptions = Shapes::StringShape.new(name: 'LanguageOptions')
     LayoutOption = Shapes::StringShape.new(name: 'LayoutOption')
     ListMediaCapturePipelinesRequest = Shapes::StructureShape.new(name: 'ListMediaCapturePipelinesRequest')
     ListMediaCapturePipelinesResponse = Shapes::StructureShape.new(name: 'ListMediaCapturePipelinesResponse')
@@ -182,6 +192,9 @@ module Aws::ChimeSDKMediaPipelines
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottledClientException = Shapes::StructureShape.new(name: 'ThrottledClientException')
+    TileAspectRatio = Shapes::StringShape.new(name: 'TileAspectRatio')
+    TileCount = Shapes::IntegerShape.new(name: 'TileCount')
+    TileOrder = Shapes::StringShape.new(name: 'TileOrder')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TimestampRange = Shapes::StructureShape.new(name: 'TimestampRange')
     TranscriptionMessagesConcatenationConfiguration = Shapes::StructureShape.new(name: 'TranscriptionMessagesConcatenationConfiguration')
@@ -191,14 +204,22 @@ module Aws::ChimeSDKMediaPipelines
     UpdateMediaInsightsPipelineConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateMediaInsightsPipelineConfigurationRequest')
     UpdateMediaInsightsPipelineConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateMediaInsightsPipelineConfigurationResponse')
     UpdateMediaInsightsPipelineStatusRequest = Shapes::StructureShape.new(name: 'UpdateMediaInsightsPipelineStatusRequest')
+    VerticalLayoutConfiguration = Shapes::StructureShape.new(name: 'VerticalLayoutConfiguration')
+    VerticalTilePosition = Shapes::StringShape.new(name: 'VerticalTilePosition')
     VideoArtifactsConfiguration = Shapes::StructureShape.new(name: 'VideoArtifactsConfiguration')
+    VideoAttribute = Shapes::StructureShape.new(name: 'VideoAttribute')
     VideoConcatenationConfiguration = Shapes::StructureShape.new(name: 'VideoConcatenationConfiguration')
     VideoMuxType = Shapes::StringShape.new(name: 'VideoMuxType')
     VocabularyFilterMethod = Shapes::StringShape.new(name: 'VocabularyFilterMethod')
     VocabularyFilterName = Shapes::StringShape.new(name: 'VocabularyFilterName')
+    VocabularyFilterNames = Shapes::StringShape.new(name: 'VocabularyFilterNames')
     VocabularyName = Shapes::StringShape.new(name: 'VocabularyName')
+    VocabularyNames = Shapes::StringShape.new(name: 'VocabularyNames')
     VoiceAnalyticsConfigurationStatus = Shapes::StringShape.new(name: 'VoiceAnalyticsConfigurationStatus')
     VoiceAnalyticsProcessorConfiguration = Shapes::StructureShape.new(name: 'VoiceAnalyticsProcessorConfiguration')
+
+    ActiveSpeakerOnlyConfiguration.add_member(:active_speaker_position, Shapes::ShapeRef.new(shape: ActiveSpeakerPosition, location_name: "ActiveSpeakerPosition"))
+    ActiveSpeakerOnlyConfiguration.struct_class = Types::ActiveSpeakerOnlyConfiguration
 
     AmazonTranscribeCallAnalyticsProcessorConfiguration.add_member(:language_code, Shapes::ShapeRef.new(shape: CallAnalyticsLanguageCode, required: true, location_name: "LanguageCode"))
     AmazonTranscribeCallAnalyticsProcessorConfiguration.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, location_name: "VocabularyName"))
@@ -215,7 +236,7 @@ module Aws::ChimeSDKMediaPipelines
     AmazonTranscribeCallAnalyticsProcessorConfiguration.add_member(:call_analytics_stream_categories, Shapes::ShapeRef.new(shape: CategoryNameList, location_name: "CallAnalyticsStreamCategories"))
     AmazonTranscribeCallAnalyticsProcessorConfiguration.struct_class = Types::AmazonTranscribeCallAnalyticsProcessorConfiguration
 
-    AmazonTranscribeProcessorConfiguration.add_member(:language_code, Shapes::ShapeRef.new(shape: CallAnalyticsLanguageCode, required: true, location_name: "LanguageCode"))
+    AmazonTranscribeProcessorConfiguration.add_member(:language_code, Shapes::ShapeRef.new(shape: CallAnalyticsLanguageCode, location_name: "LanguageCode"))
     AmazonTranscribeProcessorConfiguration.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, location_name: "VocabularyName"))
     AmazonTranscribeProcessorConfiguration.add_member(:vocabulary_filter_name, Shapes::ShapeRef.new(shape: VocabularyFilterName, location_name: "VocabularyFilterName"))
     AmazonTranscribeProcessorConfiguration.add_member(:vocabulary_filter_method, Shapes::ShapeRef.new(shape: VocabularyFilterMethod, location_name: "VocabularyFilterMethod"))
@@ -227,6 +248,11 @@ module Aws::ChimeSDKMediaPipelines
     AmazonTranscribeProcessorConfiguration.add_member(:pii_entity_types, Shapes::ShapeRef.new(shape: PiiEntityTypes, location_name: "PiiEntityTypes"))
     AmazonTranscribeProcessorConfiguration.add_member(:language_model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "LanguageModelName"))
     AmazonTranscribeProcessorConfiguration.add_member(:filter_partial_results, Shapes::ShapeRef.new(shape: Boolean, location_name: "FilterPartialResults"))
+    AmazonTranscribeProcessorConfiguration.add_member(:identify_language, Shapes::ShapeRef.new(shape: Boolean, location_name: "IdentifyLanguage"))
+    AmazonTranscribeProcessorConfiguration.add_member(:language_options, Shapes::ShapeRef.new(shape: LanguageOptions, location_name: "LanguageOptions"))
+    AmazonTranscribeProcessorConfiguration.add_member(:preferred_language, Shapes::ShapeRef.new(shape: CallAnalyticsLanguageCode, location_name: "PreferredLanguage"))
+    AmazonTranscribeProcessorConfiguration.add_member(:vocabulary_names, Shapes::ShapeRef.new(shape: VocabularyNames, location_name: "VocabularyNames"))
+    AmazonTranscribeProcessorConfiguration.add_member(:vocabulary_filter_names, Shapes::ShapeRef.new(shape: VocabularyFilterNames, location_name: "VocabularyFilterNames"))
     AmazonTranscribeProcessorConfiguration.struct_class = Types::AmazonTranscribeProcessorConfiguration
 
     ArtifactsConcatenationConfiguration.add_member(:audio, Shapes::ShapeRef.new(shape: AudioConcatenationConfiguration, required: true, location_name: "Audio"))
@@ -406,7 +432,18 @@ module Aws::ChimeSDKMediaPipelines
 
     GridViewConfiguration.add_member(:content_share_layout, Shapes::ShapeRef.new(shape: ContentShareLayoutOption, required: true, location_name: "ContentShareLayout"))
     GridViewConfiguration.add_member(:presenter_only_configuration, Shapes::ShapeRef.new(shape: PresenterOnlyConfiguration, location_name: "PresenterOnlyConfiguration"))
+    GridViewConfiguration.add_member(:active_speaker_only_configuration, Shapes::ShapeRef.new(shape: ActiveSpeakerOnlyConfiguration, location_name: "ActiveSpeakerOnlyConfiguration"))
+    GridViewConfiguration.add_member(:horizontal_layout_configuration, Shapes::ShapeRef.new(shape: HorizontalLayoutConfiguration, location_name: "HorizontalLayoutConfiguration"))
+    GridViewConfiguration.add_member(:vertical_layout_configuration, Shapes::ShapeRef.new(shape: VerticalLayoutConfiguration, location_name: "VerticalLayoutConfiguration"))
+    GridViewConfiguration.add_member(:video_attribute, Shapes::ShapeRef.new(shape: VideoAttribute, location_name: "VideoAttribute"))
+    GridViewConfiguration.add_member(:canvas_orientation, Shapes::ShapeRef.new(shape: CanvasOrientation, location_name: "CanvasOrientation"))
     GridViewConfiguration.struct_class = Types::GridViewConfiguration
+
+    HorizontalLayoutConfiguration.add_member(:tile_order, Shapes::ShapeRef.new(shape: TileOrder, location_name: "TileOrder"))
+    HorizontalLayoutConfiguration.add_member(:tile_position, Shapes::ShapeRef.new(shape: HorizontalTilePosition, location_name: "TilePosition"))
+    HorizontalLayoutConfiguration.add_member(:tile_count, Shapes::ShapeRef.new(shape: TileCount, location_name: "TileCount"))
+    HorizontalLayoutConfiguration.add_member(:tile_aspect_ratio, Shapes::ShapeRef.new(shape: TileAspectRatio, location_name: "TileAspectRatio"))
+    HorizontalLayoutConfiguration.struct_class = Types::HorizontalLayoutConfiguration
 
     IssueDetectionConfiguration.add_member(:rule_name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "RuleName"))
     IssueDetectionConfiguration.struct_class = Types::IssueDetectionConfiguration
@@ -715,9 +752,21 @@ module Aws::ChimeSDKMediaPipelines
     UpdateMediaInsightsPipelineStatusRequest.add_member(:update_status, Shapes::ShapeRef.new(shape: MediaPipelineStatusUpdate, required: true, location_name: "UpdateStatus"))
     UpdateMediaInsightsPipelineStatusRequest.struct_class = Types::UpdateMediaInsightsPipelineStatusRequest
 
+    VerticalLayoutConfiguration.add_member(:tile_order, Shapes::ShapeRef.new(shape: TileOrder, location_name: "TileOrder"))
+    VerticalLayoutConfiguration.add_member(:tile_position, Shapes::ShapeRef.new(shape: VerticalTilePosition, location_name: "TilePosition"))
+    VerticalLayoutConfiguration.add_member(:tile_count, Shapes::ShapeRef.new(shape: TileCount, location_name: "TileCount"))
+    VerticalLayoutConfiguration.add_member(:tile_aspect_ratio, Shapes::ShapeRef.new(shape: TileAspectRatio, location_name: "TileAspectRatio"))
+    VerticalLayoutConfiguration.struct_class = Types::VerticalLayoutConfiguration
+
     VideoArtifactsConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: ArtifactsState, required: true, location_name: "State"))
     VideoArtifactsConfiguration.add_member(:mux_type, Shapes::ShapeRef.new(shape: VideoMuxType, location_name: "MuxType"))
     VideoArtifactsConfiguration.struct_class = Types::VideoArtifactsConfiguration
+
+    VideoAttribute.add_member(:corner_radius, Shapes::ShapeRef.new(shape: CornerRadius, location_name: "CornerRadius"))
+    VideoAttribute.add_member(:border_color, Shapes::ShapeRef.new(shape: BorderColor, location_name: "BorderColor"))
+    VideoAttribute.add_member(:highlight_color, Shapes::ShapeRef.new(shape: HighlightColor, location_name: "HighlightColor"))
+    VideoAttribute.add_member(:border_thickness, Shapes::ShapeRef.new(shape: BorderThickness, location_name: "BorderThickness"))
+    VideoAttribute.struct_class = Types::VideoAttribute
 
     VideoConcatenationConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: ArtifactsConcatenationState, required: true, location_name: "State"))
     VideoConcatenationConfiguration.struct_class = Types::VideoConcatenationConfiguration

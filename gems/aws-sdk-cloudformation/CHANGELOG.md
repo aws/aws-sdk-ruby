@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2023-07-24)
+------------------
+
+* Feature - This release supports filtering by DRIFT_STATUS for existing API ListStackInstances and adds support for a new API ListStackInstanceResourceDrifts. Customers can now view resource drift information from their StackSet management accounts.
+
 1.86.0 (2023-07-19)
 ------------------
 

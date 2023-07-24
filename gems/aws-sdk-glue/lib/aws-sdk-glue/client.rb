@@ -1829,6 +1829,11 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_options #=> Hash
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_options["AdditionalOptionKeys"] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.stop_job_on_failure_options.stop_job_on_failure_timing #=> String, one of "Immediate", "AfterDataLoad"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.recipe_reference.recipe_arn #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.recipe_reference.recipe_version #=> String
     #   resp.jobs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
     #   resp.jobs[0].source_control_details.repository #=> String
@@ -7691,6 +7696,11 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_options #=> Hash
     #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_options["AdditionalOptionKeys"] #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.stop_job_on_failure_options.stop_job_on_failure_timing #=> String, one of "Immediate", "AfterDataLoad"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].recipe.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].recipe.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].recipe.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].recipe.recipe_reference.recipe_arn #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].recipe.recipe_reference.recipe_version #=> String
     #   resp.job.execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.job.source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
     #   resp.job.source_control_details.repository #=> String
@@ -8697,6 +8707,11 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_options #=> Hash
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_options["AdditionalOptionKeys"] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.stop_job_on_failure_options.stop_job_on_failure_timing #=> String, one of "Immediate", "AfterDataLoad"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.recipe_reference.recipe_arn #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.recipe_reference.recipe_version #=> String
     #   resp.jobs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
     #   resp.jobs[0].source_control_details.repository #=> String
@@ -16053,7 +16068,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.150.0'
+      context[:gem_version] = '1.151.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

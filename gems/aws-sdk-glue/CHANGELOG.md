@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.151.0 (2023-07-24)
+------------------
+
+* Feature - Added support for Data Preparation Recipe node in Glue Studio jobs
+
 1.150.0 (2023-07-21)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.132.0 (2023-07-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 * Feature - Add support for verifying checksums in FileDownloader.
 
 1.131.0 (2023-07-20)

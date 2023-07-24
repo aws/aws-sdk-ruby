@@ -855,6 +855,9 @@ module Aws::Glue
     QuerySchemaVersionMetadataMaxResults = Shapes::IntegerShape.new(name: 'QuerySchemaVersionMetadataMaxResults')
     QuerySchemaVersionMetadataResponse = Shapes::StructureShape.new(name: 'QuerySchemaVersionMetadataResponse')
     QuoteChar = Shapes::StringShape.new(name: 'QuoteChar')
+    Recipe = Shapes::StructureShape.new(name: 'Recipe')
+    RecipeReference = Shapes::StructureShape.new(name: 'RecipeReference')
+    RecipeVersion = Shapes::StringShape.new(name: 'RecipeVersion')
     RecordsCount = Shapes::IntegerShape.new(name: 'RecordsCount')
     RecrawlBehavior = Shapes::StringShape.new(name: 'RecrawlBehavior')
     RecrawlPolicy = Shapes::StructureShape.new(name: 'RecrawlPolicy')
@@ -1658,6 +1661,7 @@ module Aws::Glue
     CodeGenConfigurationNode.add_member(:amazon_redshift_source, Shapes::ShapeRef.new(shape: AmazonRedshiftSource, location_name: "AmazonRedshiftSource"))
     CodeGenConfigurationNode.add_member(:amazon_redshift_target, Shapes::ShapeRef.new(shape: AmazonRedshiftTarget, location_name: "AmazonRedshiftTarget"))
     CodeGenConfigurationNode.add_member(:evaluate_data_quality_multi_frame, Shapes::ShapeRef.new(shape: EvaluateDataQualityMultiFrame, location_name: "EvaluateDataQualityMultiFrame"))
+    CodeGenConfigurationNode.add_member(:recipe, Shapes::ShapeRef.new(shape: Recipe, location_name: "Recipe"))
     CodeGenConfigurationNode.struct_class = Types::CodeGenConfigurationNode
 
     CodeGenConfigurationNodes.key = Shapes::ShapeRef.new(shape: NodeId)
@@ -4350,6 +4354,15 @@ module Aws::Glue
     QuerySchemaVersionMetadataResponse.add_member(:schema_version_id, Shapes::ShapeRef.new(shape: SchemaVersionIdString, location_name: "SchemaVersionId"))
     QuerySchemaVersionMetadataResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: SchemaRegistryTokenString, location_name: "NextToken"))
     QuerySchemaVersionMetadataResponse.struct_class = Types::QuerySchemaVersionMetadataResponse
+
+    Recipe.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
+    Recipe.add_member(:inputs, Shapes::ShapeRef.new(shape: OneInput, required: true, location_name: "Inputs"))
+    Recipe.add_member(:recipe_reference, Shapes::ShapeRef.new(shape: RecipeReference, required: true, location_name: "RecipeReference"))
+    Recipe.struct_class = Types::Recipe
+
+    RecipeReference.add_member(:recipe_arn, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "RecipeArn"))
+    RecipeReference.add_member(:recipe_version, Shapes::ShapeRef.new(shape: RecipeVersion, required: true, location_name: "RecipeVersion"))
+    RecipeReference.struct_class = Types::RecipeReference
 
     RecrawlPolicy.add_member(:recrawl_behavior, Shapes::ShapeRef.new(shape: RecrawlBehavior, location_name: "RecrawlBehavior"))
     RecrawlPolicy.struct_class = Types::RecrawlPolicy

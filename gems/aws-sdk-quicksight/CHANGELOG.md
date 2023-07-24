@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2023-07-24)
+------------------
+
+* Feature - This release launches new Snapshot APIs for CSV and PDF exports, adds support for info icon for filters and parameters in Exploration APIs, adds modeled exception to the DeleteAccountCustomization API, and introduces AttributeAggregationFunction's ability to add UNIQUE_VALUE aggregation in tooltips.
+
 1.86.0 (2023-07-11)
 ------------------
 

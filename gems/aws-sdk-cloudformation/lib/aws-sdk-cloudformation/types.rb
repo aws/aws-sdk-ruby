@@ -819,10 +819,10 @@ module Aws::CloudFormation
     #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
     #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
     #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
-    #   [8]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
-    #   [9]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
-    #   [10]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
-    #   [11]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
+    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
+    #   [9]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
+    #   [10]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
+    #   [11]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_types
@@ -1161,10 +1161,10 @@ module Aws::CloudFormation
     #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
     #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
     #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
-    #   [8]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
-    #   [9]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
-    #   [10]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
-    #   [11]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
+    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
+    #   [9]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
+    #   [10]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
+    #   [11]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_types
@@ -1274,8 +1274,8 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html
-    #   [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackInput AWS API Documentation
@@ -1579,10 +1579,10 @@ module Aws::CloudFormation
     #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
     #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
     #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
-    #   [8]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
-    #   [9]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
-    #   [10]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
-    #   [11]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
+    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/using-iam-template.html#capabilities
+    #   [9]: https://docs.aws.amazon.com/AWSCloudFormation/template-macros.html
+    #   [10]: https://docs.aws.amazon.com/AWSCloudFormation/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
+    #   [11]: https://docs.aws.amazon.com/AWSCloudFormation/transform-aws-serverless.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -1610,7 +1610,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/stacksets-prereqs.html
     #   @return [String]
     #
     # @!attribute [rw] execution_role_name
@@ -4308,6 +4308,117 @@ module Aws::CloudFormation
     end
 
     # @!attribute [rw] stack_set_name
+    #   The name or unique ID of the stack set that you want to list drifted
+    #   resources for.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous paginated request didn't return all of the
+    #   remaining results, the response object's `NextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   this action again and assign that token to the request object's
+    #   `NextToken` parameter. If there are no remaining results, the
+    #   previous response object's `NextToken` parameter is set to `null`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned with a single call. If
+    #   the number of available results exceeds this maximum, the response
+    #   includes a `NextToken` value that you can assign to the `NextToken`
+    #   request parameter to get the next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stack_instance_resource_drift_statuses
+    #   The resource drift status of the stack instance.
+    #
+    #   * `DELETED`: The resource differs from its expected template
+    #     configuration in that the resource has been deleted.
+    #
+    #   * `MODIFIED`: One or more resource properties differ from their
+    #     expected template values.
+    #
+    #   * `IN_SYNC`: The resource's actual configuration matches its
+    #     expected template configuration.
+    #
+    #   * `NOT_CHECKED`: CloudFormation doesn't currently return this
+    #     value.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] stack_instance_account
+    #   The name of the Amazon Web Services account that you want to list
+    #   resource drifts for.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_instance_region
+    #   The name of the Region where you want to list resource drifts.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_id
+    #   The unique ID of the drift operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] call_as
+    #   \[Service-managed permissions\] Specifies whether you are acting as
+    #   an account administrator in the organization's management account
+    #   or as a delegated administrator in a member account.
+    #
+    #   By default, `SELF` is specified. Use `SELF` for stack sets with
+    #   self-managed permissions.
+    #
+    #   * If you are signed in to the management account, specify `SELF`.
+    #
+    #   * If you are signed in to a delegated administrator account, specify
+    #     `DELEGATED_ADMIN`.
+    #
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation
+    #     User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackInstanceResourceDriftsInput AWS API Documentation
+    #
+    class ListStackInstanceResourceDriftsInput < Struct.new(
+      :stack_set_name,
+      :next_token,
+      :max_results,
+      :stack_instance_resource_drift_statuses,
+      :stack_instance_account,
+      :stack_instance_region,
+      :operation_id,
+      :call_as)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] summaries
+    #   A list of `StackInstanceResourceDriftSummary` structures that
+    #   contain information about the specified stack instances.
+    #   @return [Array<Types::StackInstanceResourceDriftsSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous paginated request didn't return all of the
+    #   remaining results, the response object's `NextToken` parameter
+    #   value is set to a token. To retrieve the next set of results, call
+    #   this action again and assign that token to the request object's
+    #   `NextToken` parameter. If there are no remaining results, the
+    #   previous response object's `NextToken` parameter is set to `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackInstanceResourceDriftsOutput AWS API Documentation
+    #
+    class ListStackInstanceResourceDriftsOutput < Struct.new(
+      :summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stack_set_name
     #   The name or unique ID of the stack set that you want to list stack
     #   instances for.
     #   @return [String]
@@ -6028,7 +6139,7 @@ module Aws::CloudFormation
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-rollback-triggers.html
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-rollback-triggers.html
     #
     # @!attribute [rw] rollback_triggers
     #   The triggers to monitor during stack creation or update actions.
@@ -6452,8 +6563,8 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
-    #   [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html
     #   @return [Boolean]
     #
     # @!attribute [rw] parent_id
@@ -6467,7 +6578,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
     #   @return [String]
     #
     # @!attribute [rw] root_id
@@ -6480,7 +6591,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
     #   @return [String]
     #
     # @!attribute [rw] drift_information
@@ -6492,7 +6603,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
     #   @return [Types::StackDriftInformation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Stack AWS API Documentation
@@ -6907,6 +7018,81 @@ module Aws::CloudFormation
     #
     class StackInstanceNotFoundException < Aws::EmptyStructure; end
 
+    # The structure containing summary information about resource drifts for
+    # a stack instance.
+    #
+    # @!attribute [rw] stack_id
+    #   The ID of the stack instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] logical_resource_id
+    #   The logical name of the resource specified in the template.
+    #   @return [String]
+    #
+    # @!attribute [rw] physical_resource_id
+    #   The name or unique identifier that corresponds to a physical
+    #   instance ID of a resource supported by CloudFormation.
+    #   @return [String]
+    #
+    # @!attribute [rw] physical_resource_id_context
+    #   Context information that enables CloudFormation to uniquely identify
+    #   a resource. CloudFormation uses context key-value pairs in cases
+    #   where a resource's logical and physical IDs aren't enough to
+    #   uniquely identify that resource. Each context key-value pair
+    #   specifies a unique resource that contains the targeted resource.
+    #   @return [Array<Types::PhysicalResourceIdContextKeyValuePair>]
+    #
+    # @!attribute [rw] resource_type
+    #   Type of resource. For more information, go to [Amazon Web Services
+    #   Resource Types Reference][1] in the CloudFormation User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
+    #   @return [String]
+    #
+    # @!attribute [rw] property_differences
+    #   Status of the actual configuration of the resource compared to its
+    #   expected configuration. These will be present only for resources
+    #   whose `StackInstanceResourceDriftStatus` is `MODIFIED`.
+    #   @return [Array<Types::PropertyDifference>]
+    #
+    # @!attribute [rw] stack_resource_drift_status
+    #   The drift status of the resource in a stack instance.
+    #
+    #   * `DELETED`: The resource differs from its expected template
+    #     configuration in that the resource has been deleted.
+    #
+    #   * `MODIFIED`: One or more resource properties differ from their
+    #     expected template values.
+    #
+    #   * `IN_SYNC`: The resource's actual configuration matches its
+    #     expected template configuration.
+    #
+    #   * `NOT_CHECKED`: CloudFormation doesn't currently return this
+    #     value.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   Time at which the stack instance drift detection operation was
+    #   initiated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackInstanceResourceDriftsSummary AWS API Documentation
+    #
+    class StackInstanceResourceDriftsSummary < Struct.new(
+      :stack_id,
+      :logical_resource_id,
+      :physical_resource_id,
+      :physical_resource_id_context,
+      :resource_type,
+      :property_differences,
+      :stack_resource_drift_status,
+      :timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The structure that contains summary information about a stack
     # instance.
     #
@@ -7080,7 +7266,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
     #   @return [Types::StackResourceDriftInformation]
     #
     # @!attribute [rw] module_info
@@ -7170,7 +7356,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
     #   @return [Types::StackResourceDriftInformation]
     #
     # @!attribute [rw] module_info
@@ -7216,7 +7402,7 @@ module Aws::CloudFormation
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
-    # [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html
+    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html
     #
     # @!attribute [rw] stack_id
     #   The ID of the stack.
@@ -7444,7 +7630,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
     #   @return [Types::StackResourceDriftInformationSummary]
     #
     # @!attribute [rw] module_info
@@ -7533,7 +7719,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/stacksets-prereqs.html
     #   @return [String]
     #
     # @!attribute [rw] execution_role_name
@@ -7824,7 +8010,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/stacksets-prereqs.html
     #   @return [String]
     #
     # @!attribute [rw] execution_role_name
@@ -8323,7 +8509,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
     #   @return [String]
     #
     # @!attribute [rw] root_id
@@ -8336,7 +8522,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
     #   @return [String]
     #
     # @!attribute [rw] drift_information
@@ -8348,7 +8534,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
     #   @return [Types::StackDriftInformationSummary]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSummary AWS API Documentation
@@ -9145,10 +9331,10 @@ module Aws::CloudFormation
     #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
     #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
     #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
-    #   [8]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
-    #   [9]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
-    #   [10]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
-    #   [11]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
+    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
+    #   [9]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
+    #   [10]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
+    #   [11]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_types
@@ -9566,10 +9752,10 @@ module Aws::CloudFormation
     #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
     #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
     #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
-    #   [8]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
-    #   [9]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
-    #   [10]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
-    #   [11]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
+    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/using-iam-template.html#capabilities
+    #   [9]: https://docs.aws.amazon.com/AWSCloudFormation/template-macros.html
+    #   [10]: https://docs.aws.amazon.com/AWSCloudFormation/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
+    #   [11]: https://docs.aws.amazon.com/AWSCloudFormation/transform-aws-serverless.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -9629,7 +9815,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/stacksets-prereqs.html
     #   @return [String]
     #
     # @!attribute [rw] execution_role_name

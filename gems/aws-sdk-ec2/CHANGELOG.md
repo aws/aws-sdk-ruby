@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.393.0 (2023-07-24)
+------------------
+
+* Feature - Add "disabled" enum value to SpotInstanceState.
+
 1.392.0 (2023-07-19)
 ------------------
 
