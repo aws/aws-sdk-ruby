@@ -492,6 +492,18 @@ module Aws
       #   retrieve the object. For more about object versioning, see:
       #   https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectVersioning.html
       #
+      # @option options [String] checksum_mode (ENABLED) When `ENABLED` and
+      #   the object has a stored checksum, it will be used to validate the
+      #   download and will raise an `Aws::Errors::ChecksumError` if
+      #   checksum validation fails. You may provide a `on_checksum_validated`
+      #   callback if you need to verify that validation occured and which
+      #   algorithm was used.
+      #
+      # @option options [Callable] on_checksum_validated Called each time a
+      #   request's checksum is validated with the checksum algorithm and the
+      #   response.  For multipart downloads, this will be called for each
+      #   part that is downloaded and validated.
+      #
       # @return [Boolean] Returns `true` when the file is downloaded without
       #   any errors.
       def download_file(destination, options = {})
