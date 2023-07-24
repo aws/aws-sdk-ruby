@@ -3591,8 +3591,8 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] volume_encryption_key
-    #   The symmetric KMS key used to encrypt data stored on your WorkSpace.
-    #   Amazon WorkSpaces does not support asymmetric KMS keys.
+    #   The ARN of the symmetric KMS key used to encrypt data stored on your
+    #   WorkSpace. Amazon WorkSpaces does not support asymmetric KMS keys.
     #   @return [String]
     #
     # @!attribute [rw] user_volume_encryption_enabled
@@ -4199,8 +4199,8 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] volume_encryption_key
-    #   The symmetric KMS key used to encrypt data stored on your WorkSpace.
-    #   Amazon WorkSpaces does not support asymmetric KMS keys.
+    #   The ARN of the symmetric KMS key used to encrypt data stored on your
+    #   WorkSpace. Amazon WorkSpaces does not support asymmetric KMS keys.
     #   @return [String]
     #
     # @!attribute [rw] user_volume_encryption_enabled

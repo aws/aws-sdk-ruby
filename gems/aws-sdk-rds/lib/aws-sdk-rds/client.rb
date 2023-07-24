@@ -1820,6 +1820,7 @@ module Aws::RDS
     #   resp.db_snapshot.snapshot_database_time #=> Time
     #   resp.db_snapshot.snapshot_target #=> String
     #   resp.db_snapshot.storage_throughput #=> Integer
+    #   resp.db_snapshot.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshot AWS API Documentation
     #
@@ -4008,116 +4009,120 @@ module Aws::RDS
     # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.CreateInstance.html
     #
     # @option params [String] :db_name
-    #   The meaning of this parameter differs depending on the database
-    #   engine.
+    #   The meaning of this parameter differs according to the database engine
+    #   you use.
     #
-    #   Amazon Aurora MySQL
+    #   **MySQL**
     #
-    #   : The name of the database to create when the primary DB instance of
-    #     the Aurora MySQL DB cluster is created. If you don't specify a
-    #     value, Amazon RDS doesn't create a database in the DB cluster.
+    #   The name of the database to create when the DB instance is created. If
+    #   this parameter isn't specified, no database is created in the DB
+    #   instance.
     #
-    #     Constraints:
+    #   Constraints:
     #
-    #     * Must contain 1 to 64 alphanumeric characters.
+    #   * Must contain 1 to 64 letters or numbers.
     #
-    #     * Can't be a word reserved by the database engine.
+    #   * Must begin with a letter. Subsequent characters can be letters,
+    #     underscores, or digits (0-9).
     #
-    #   Amazon Aurora PostgreSQL
+    #   * Can't be a word reserved by the specified database engine
     #
-    #   : The name of the database to create when the primary DB instance of
-    #     the Aurora PostgreSQL DB cluster is created.
+    #   **MariaDB**
     #
-    #     Default: `postgres`
+    #   The name of the database to create when the DB instance is created. If
+    #   this parameter isn't specified, no database is created in the DB
+    #   instance.
     #
-    #     Constraints:
+    #   Constraints:
     #
-    #     * Must contain 1 to 63 alphanumeric characters.
+    #   * Must contain 1 to 64 letters or numbers.
     #
-    #     * Must begin with a letter. Subsequent characters can be letters,
-    #       underscores, or digits (0 to 9).
+    #   * Must begin with a letter. Subsequent characters can be letters,
+    #     underscores, or digits (0-9).
     #
-    #     * Can't be a word reserved by the database engine.
+    #   * Can't be a word reserved by the specified database engine
     #
-    #   Amazon RDS Custom for Oracle
+    #   **PostgreSQL**
     #
-    #   : The Oracle System ID (SID) of the created RDS Custom DB instance.
+    #   The name of the database to create when the DB instance is created. If
+    #   this parameter isn't specified, a database named `postgres` is
+    #   created in the DB instance.
     #
-    #     Default: `ORCL`
+    #   Constraints:
     #
-    #     Constraints:
+    #   * Must contain 1 to 63 letters, numbers, or underscores.
     #
-    #     * Must contain 1 to 8 alphanumeric characters.
+    #   * Must begin with a letter. Subsequent characters can be letters,
+    #     underscores, or digits (0-9).
     #
-    #     * Must contain a letter.
+    #   * Can't be a word reserved by the specified database engine
     #
-    #     * Can't be a word reserved by the database engine.
+    #   **Oracle**
     #
-    #   Amazon RDS Custom for SQL Server
+    #   The Oracle System ID (SID) of the created DB instance. If you don't
+    #   specify a value, the default value is `ORCL`. You can't specify the
+    #   string `null`, or any other reserved word, for `DBName`.
     #
-    #   : Not applicable. Must be null.
+    #   Default: `ORCL`
     #
-    #   RDS for MariaDB
+    #   Constraints:
     #
-    #   : The name of the database to create when the DB instance is created.
-    #     If you don't specify a value, Amazon RDS doesn't create a database
-    #     in the DB instance.
+    #   * Can't be longer than 8 characters
     #
-    #     Constraints:
+    #   ^
     #
-    #     * Must contain 1 to 64 letters or numbers.
+    #   **Amazon RDS Custom for Oracle**
     #
-    #     * Must begin with a letter. Subsequent characters can be letters,
-    #       underscores, or digits (0-9).
+    #   The Oracle System ID (SID) of the created RDS Custom DB instance. If
+    #   you don't specify a value, the default value is `ORCL` for non-CDBs
+    #   and `RDSCDB` for CDBs.
     #
-    #     * Can't be a word reserved by the database engine.
+    #   Default: `ORCL`
     #
-    #   RDS for MySQL
+    #   Constraints:
     #
-    #   : The name of the database to create when the DB instance is created.
-    #     If you don't specify a value, Amazon RDS doesn't create a database
-    #     in the DB instance.
+    #   * It must contain 1 to 8 alphanumeric characters.
     #
-    #     Constraints:
+    #   * It must contain a letter.
     #
-    #     * Must contain 1 to 64 letters or numbers.
+    #   * It can't be a word reserved by the database engine.
     #
-    #     * Must begin with a letter. Subsequent characters can be letters,
-    #       underscores, or digits (0-9).
+    #   **Amazon RDS Custom for SQL Server**
     #
-    #     * Can't be a word reserved by the database engine.
+    #   Not applicable. Must be null.
     #
-    #   RDS for Oracle
+    #   **SQL Server**
     #
-    #   : The Oracle System ID (SID) of the created DB instance.
+    #   Not applicable. Must be null.
     #
-    #     Default: `ORCL`
+    #   **Amazon Aurora MySQL**
     #
-    #     Constraints:
+    #   The name of the database to create when the primary DB instance of the
+    #   Aurora MySQL DB cluster is created. If this parameter isn't specified
+    #   for an Aurora MySQL DB cluster, no database is created in the DB
+    #   cluster.
     #
-    #     * Can't be longer than 8 characters.
+    #   Constraints:
     #
-    #     * Can't be a word reserved by the database engine, such as the
-    #       string `NULL`.
+    #   * It must contain 1 to 64 alphanumeric characters.
     #
-    #   RDS for PostgreSQL
+    #   * It can't be a word reserved by the database engine.
     #
-    #   : The name of the database to create when the DB instance is created.
+    #   **Amazon Aurora PostgreSQL**
     #
-    #     Default: `postgres`
+    #   The name of the database to create when the primary DB instance of the
+    #   Aurora PostgreSQL DB cluster is created. If this parameter isn't
+    #   specified for an Aurora PostgreSQL DB cluster, a database named
+    #   `postgres` is created in the DB cluster.
     #
-    #     Constraints:
+    #   Constraints:
     #
-    #     * Must contain 1 to 63 letters, numbers, or underscores.
+    #   * It must contain 1 to 63 alphanumeric characters.
     #
-    #     * Must begin with a letter. Subsequent characters can be letters,
-    #       underscores, or digits (0-9).
+    #   * It must begin with a letter. Subsequent characters can be letters,
+    #     underscores, or digits (0 to 9).
     #
-    #     * Can't be a word reserved by the database engine.
-    #
-    #   RDS for SQL Server
-    #
-    #   : Not applicable. Must be null.
+    #   * It can't be a word reserved by the database engine.
     #
     # @option params [required, String] :db_instance_identifier
     #   The identifier for this DB instance. This parameter is stored as a
@@ -5164,6 +5169,14 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
     #
+    # @option params [String] :db_system_id
+    #   The Oracle system identifier (SID), which is the name of the Oracle
+    #   database instance that manages your database files. In this context,
+    #   the term "Oracle database instance" refers exclusively to the system
+    #   global area (SGA) and Oracle background processes. If you don't
+    #   specify a SID, the value defaults to `RDSCDB`. The Oracle SID is also
+    #   the name of your CDB.
+    #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -5350,6 +5363,7 @@ module Aws::RDS
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
     #     ca_certificate_identifier: "String",
+    #     db_system_id: "String",
     #   })
     #
     # @example Response structure
@@ -7017,6 +7031,7 @@ module Aws::RDS
     #   resp.db_snapshot.snapshot_database_time #=> Time
     #   resp.db_snapshot.snapshot_target #=> String
     #   resp.db_snapshot.storage_throughput #=> Integer
+    #   resp.db_snapshot.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshot AWS API Documentation
     #
@@ -7646,7 +7661,7 @@ module Aws::RDS
     # Deletes a blue/green deployment.
     #
     # For more information, see [Using Amazon RDS Blue/Green Deployments for
-    # database updates][1] in the *Amazon RDS User Guide* and [ Using Amazon
+    # database updates][1] in the *Amazon RDS User Guide* and [Using Amazon
     # RDS Blue/Green Deployments for database updates][2] in the *Amazon
     # Aurora User Guide*.
     #
@@ -7656,8 +7671,8 @@ module Aws::RDS
     # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html
     #
     # @option params [required, String] :blue_green_deployment_identifier
-    #   The blue/green deployment identifier of the deployment to be deleted.
-    #   This parameter isn't case-sensitive.
+    #   The unique identifier of the blue/green deployment to delete. This
+    #   parameter isn't case-sensitive.
     #
     #   Constraints:
     #
@@ -7666,9 +7681,9 @@ module Aws::RDS
     #   ^
     #
     # @option params [Boolean] :delete_target
-    #   A value that indicates whether to delete the resources in the green
-    #   environment. You can't specify this option if the blue/green
-    #   deployment [status][1] is `SWITCHOVER_COMPLETED`.
+    #   Specifies whether to delete the resources in the green environment.
+    #   You can't specify this option if the blue/green deployment
+    #   [status][1] is `SWITCHOVER_COMPLETED`.
     #
     #
     #
@@ -9163,6 +9178,7 @@ module Aws::RDS
     #   resp.db_snapshot.snapshot_database_time #=> Time
     #   resp.db_snapshot.snapshot_target #=> String
     #   resp.db_snapshot.storage_throughput #=> Integer
+    #   resp.db_snapshot.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshot AWS API Documentation
     #
@@ -9550,7 +9566,7 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Returns information about blue/green deployments.
+    # Describes one or more blue/green deployments.
     #
     # For more information, see [Using Amazon RDS Blue/Green Deployments for
     # database updates][1] in the *Amazon RDS User Guide* and [ Using Amazon
@@ -9563,14 +9579,13 @@ module Aws::RDS
     # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html
     #
     # @option params [String] :blue_green_deployment_identifier
-    #   The blue/green deployment identifier. If this parameter is specified,
-    #   information from only the specific blue/green deployment is returned.
-    #   This parameter isn't case-sensitive.
+    #   The blue/green deployment identifier. If you specify this parameter,
+    #   the response only includes information about the specific blue/green
+    #   deployment. This parameter isn't case-sensitive.
     #
     #   Constraints:
     #
-    #   * If supplied, must match an existing blue/green deployment
-    #     identifier.
+    #   * Must match an existing blue/green deployment identifier.
     #
     #   ^
     #
@@ -9578,7 +9593,7 @@ module Aws::RDS
     #   A filter that specifies one or more blue/green deployments to
     #   describe.
     #
-    #   Supported filters:
+    #   Valid Values:
     #
     #   * `blue-green-deployment-identifier` - Accepts system-generated
     #     identifiers for blue/green deployments. The results list only
@@ -9599,9 +9614,9 @@ module Aws::RDS
     #
     # @option params [String] :marker
     #   An optional pagination token provided by a previous
-    #   `DescribeBlueGreenDeployments` request. If this parameter is
-    #   specified, the response includes only records beyond the marker, up to
-    #   the value specified by `MaxRecords`.
+    #   `DescribeBlueGreenDeployments` request. If you specify this parameter,
+    #   the response only includes records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -9611,7 +9626,11 @@ module Aws::RDS
     #
     #   Default: 100
     #
-    #   Constraints: Minimum 20, maximum 100.
+    #   Constraints:
+    #
+    #   * Must be a minimum of 20.
+    #
+    #   * Can't exceed 100.
     #
     # @return [Types::DescribeBlueGreenDeploymentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -13027,6 +13046,7 @@ module Aws::RDS
     #   resp.db_snapshots[0].snapshot_database_time #=> Time
     #   resp.db_snapshots[0].snapshot_target #=> String
     #   resp.db_snapshots[0].storage_throughput #=> Integer
+    #   resp.db_snapshots[0].db_system_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -19426,6 +19446,7 @@ module Aws::RDS
     #   resp.db_snapshot.snapshot_database_time #=> Time
     #   resp.db_snapshot.snapshot_target #=> String
     #   resp.db_snapshot.storage_throughput #=> Integer
+    #   resp.db_snapshot.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshot AWS API Documentation
     #
@@ -27441,7 +27462,7 @@ module Aws::RDS
     # routed to the databases in the green environment.
     #
     # For more information, see [Using Amazon RDS Blue/Green Deployments for
-    # database updates][1] in the *Amazon RDS User Guide* and [ Using Amazon
+    # database updates][1] in the *Amazon RDS User Guide* and [Using Amazon
     # RDS Blue/Green Deployments for database updates][2] in the *Amazon
     # Aurora User Guide*.
     #
@@ -27451,7 +27472,7 @@ module Aws::RDS
     # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html
     #
     # @option params [required, String] :blue_green_deployment_identifier
-    #   The blue/green deployment identifier.
+    #   The unique identifier of the blue/green deployment.
     #
     #   Constraints:
     #
@@ -27460,8 +27481,9 @@ module Aws::RDS
     #   ^
     #
     # @option params [Integer] :switchover_timeout
-    #   The amount of time, in seconds, for the switchover to complete. The
-    #   default is 300.
+    #   The amount of time, in seconds, for the switchover to complete.
+    #
+    #   Default: 300
     #
     #   If the switchover takes longer than the specified duration, then any
     #   changes are rolled back, and no changes are made to the environments.
@@ -27844,7 +27866,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.185.0'
+      context[:gem_version] = '1.186.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

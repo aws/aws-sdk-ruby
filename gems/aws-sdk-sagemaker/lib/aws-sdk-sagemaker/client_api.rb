@@ -401,6 +401,7 @@ module Aws::SageMaker
     CreateWorkteamRequest = Shapes::StructureShape.new(name: 'CreateWorkteamRequest')
     CreateWorkteamResponse = Shapes::StructureShape.new(name: 'CreateWorkteamResponse')
     CreationTime = Shapes::TimestampShape.new(name: 'CreationTime')
+    CrossAccountFilterOption = Shapes::StringShape.new(name: 'CrossAccountFilterOption')
     CsvContentType = Shapes::StringShape.new(name: 'CsvContentType')
     CsvContentTypes = Shapes::ListShape.new(name: 'CsvContentTypes')
     CustomImage = Shapes::StructureShape.new(name: 'CustomImage')
@@ -763,6 +764,7 @@ module Aws::SageMaker
     FeatureGroupMaxResults = Shapes::IntegerShape.new(name: 'FeatureGroupMaxResults')
     FeatureGroupName = Shapes::StringShape.new(name: 'FeatureGroupName')
     FeatureGroupNameContains = Shapes::StringShape.new(name: 'FeatureGroupNameContains')
+    FeatureGroupNameOrArn = Shapes::StringShape.new(name: 'FeatureGroupNameOrArn')
     FeatureGroupSortBy = Shapes::StringShape.new(name: 'FeatureGroupSortBy')
     FeatureGroupSortOrder = Shapes::StringShape.new(name: 'FeatureGroupSortOrder')
     FeatureGroupStatus = Shapes::StringShape.new(name: 'FeatureGroupStatus')
@@ -1163,6 +1165,8 @@ module Aws::SageMaker
     ListProcessingJobsResponse = Shapes::StructureShape.new(name: 'ListProcessingJobsResponse')
     ListProjectsInput = Shapes::StructureShape.new(name: 'ListProjectsInput')
     ListProjectsOutput = Shapes::StructureShape.new(name: 'ListProjectsOutput')
+    ListResourceCatalogsRequest = Shapes::StructureShape.new(name: 'ListResourceCatalogsRequest')
+    ListResourceCatalogsResponse = Shapes::StructureShape.new(name: 'ListResourceCatalogsResponse')
     ListSpacesRequest = Shapes::StructureShape.new(name: 'ListSpacesRequest')
     ListSpacesResponse = Shapes::StructureShape.new(name: 'ListSpacesResponse')
     ListStageDevicesRequest = Shapes::StructureShape.new(name: 'ListStageDevicesRequest')
@@ -1651,6 +1655,13 @@ module Aws::SageMaker
     RepositoryUrl = Shapes::StringShape.new(name: 'RepositoryUrl')
     ResolvedAttributes = Shapes::StructureShape.new(name: 'ResolvedAttributes')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
+    ResourceCatalog = Shapes::StructureShape.new(name: 'ResourceCatalog')
+    ResourceCatalogArn = Shapes::StringShape.new(name: 'ResourceCatalogArn')
+    ResourceCatalogDescription = Shapes::StringShape.new(name: 'ResourceCatalogDescription')
+    ResourceCatalogList = Shapes::ListShape.new(name: 'ResourceCatalogList')
+    ResourceCatalogName = Shapes::StringShape.new(name: 'ResourceCatalogName')
+    ResourceCatalogSortBy = Shapes::StringShape.new(name: 'ResourceCatalogSortBy')
+    ResourceCatalogSortOrder = Shapes::StringShape.new(name: 'ResourceCatalogSortOrder')
     ResourceConfig = Shapes::StructureShape.new(name: 'ResourceConfig')
     ResourceConfigForUpdate = Shapes::StructureShape.new(name: 'ResourceConfigForUpdate')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
@@ -4040,7 +4051,7 @@ module Aws::SageMaker
     DescribeExperimentResponse.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "LastModifiedBy"))
     DescribeExperimentResponse.struct_class = Types::DescribeExperimentResponse
 
-    DescribeFeatureGroupRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupName, required: true, location_name: "FeatureGroupName"))
+    DescribeFeatureGroupRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupNameOrArn, required: true, location_name: "FeatureGroupName"))
     DescribeFeatureGroupRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeFeatureGroupRequest.struct_class = Types::DescribeFeatureGroupRequest
 
@@ -4063,7 +4074,7 @@ module Aws::SageMaker
     DescribeFeatureGroupResponse.add_member(:online_store_total_size_bytes, Shapes::ShapeRef.new(shape: OnlineStoreTotalSizeBytes, location_name: "OnlineStoreTotalSizeBytes"))
     DescribeFeatureGroupResponse.struct_class = Types::DescribeFeatureGroupResponse
 
-    DescribeFeatureMetadataRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupName, required: true, location_name: "FeatureGroupName"))
+    DescribeFeatureMetadataRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupNameOrArn, required: true, location_name: "FeatureGroupName"))
     DescribeFeatureMetadataRequest.add_member(:feature_name, Shapes::ShapeRef.new(shape: FeatureName, required: true, location_name: "FeatureName"))
     DescribeFeatureMetadataRequest.struct_class = Types::DescribeFeatureMetadataRequest
 
@@ -6560,6 +6571,19 @@ module Aws::SageMaker
     ListProjectsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListProjectsOutput.struct_class = Types::ListProjectsOutput
 
+    ListResourceCatalogsRequest.add_member(:name_contains, Shapes::ShapeRef.new(shape: ResourceCatalogName, location_name: "NameContains"))
+    ListResourceCatalogsRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeAfter"))
+    ListResourceCatalogsRequest.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeBefore"))
+    ListResourceCatalogsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: ResourceCatalogSortOrder, location_name: "SortOrder"))
+    ListResourceCatalogsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: ResourceCatalogSortBy, location_name: "SortBy"))
+    ListResourceCatalogsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListResourceCatalogsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListResourceCatalogsRequest.struct_class = Types::ListResourceCatalogsRequest
+
+    ListResourceCatalogsResponse.add_member(:resource_catalogs, Shapes::ShapeRef.new(shape: ResourceCatalogList, location_name: "ResourceCatalogs"))
+    ListResourceCatalogsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListResourceCatalogsResponse.struct_class = Types::ListResourceCatalogsResponse
+
     ListSpacesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListSpacesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListSpacesRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
@@ -7981,6 +8005,14 @@ module Aws::SageMaker
     ResolvedAttributes.add_member(:completion_criteria, Shapes::ShapeRef.new(shape: AutoMLJobCompletionCriteria, location_name: "CompletionCriteria"))
     ResolvedAttributes.struct_class = Types::ResolvedAttributes
 
+    ResourceCatalog.add_member(:resource_catalog_arn, Shapes::ShapeRef.new(shape: ResourceCatalogArn, required: true, location_name: "ResourceCatalogArn"))
+    ResourceCatalog.add_member(:resource_catalog_name, Shapes::ShapeRef.new(shape: ResourceCatalogName, required: true, location_name: "ResourceCatalogName"))
+    ResourceCatalog.add_member(:description, Shapes::ShapeRef.new(shape: ResourceCatalogDescription, required: true, location_name: "Description"))
+    ResourceCatalog.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    ResourceCatalog.struct_class = Types::ResourceCatalog
+
+    ResourceCatalogList.member = Shapes::ShapeRef.new(shape: ResourceCatalog)
+
     ResourceConfig.add_member(:instance_type, Shapes::ShapeRef.new(shape: TrainingInstanceType, location_name: "InstanceType"))
     ResourceConfig.add_member(:instance_count, Shapes::ShapeRef.new(shape: TrainingInstanceCount, location_name: "InstanceCount"))
     ResourceConfig.add_member(:volume_size_in_gb, Shapes::ShapeRef.new(shape: VolumeSizeInGB, required: true, location_name: "VolumeSizeInGB"))
@@ -8090,6 +8122,7 @@ module Aws::SageMaker
     SearchRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SearchSortOrder, location_name: "SortOrder"))
     SearchRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     SearchRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchRequest.add_member(:cross_account_filter_option, Shapes::ShapeRef.new(shape: CrossAccountFilterOption, location_name: "CrossAccountFilterOption"))
     SearchRequest.struct_class = Types::SearchRequest
 
     SearchResponse.add_member(:results, Shapes::ShapeRef.new(shape: SearchResultsList, location_name: "Results"))
@@ -8779,7 +8812,7 @@ module Aws::SageMaker
     UpdateExperimentResponse.add_member(:experiment_arn, Shapes::ShapeRef.new(shape: ExperimentArn, location_name: "ExperimentArn"))
     UpdateExperimentResponse.struct_class = Types::UpdateExperimentResponse
 
-    UpdateFeatureGroupRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupName, required: true, location_name: "FeatureGroupName"))
+    UpdateFeatureGroupRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupNameOrArn, required: true, location_name: "FeatureGroupName"))
     UpdateFeatureGroupRequest.add_member(:feature_additions, Shapes::ShapeRef.new(shape: FeatureAdditions, location_name: "FeatureAdditions"))
     UpdateFeatureGroupRequest.add_member(:online_store_config, Shapes::ShapeRef.new(shape: OnlineStoreConfigUpdate, location_name: "OnlineStoreConfig"))
     UpdateFeatureGroupRequest.struct_class = Types::UpdateFeatureGroupRequest
@@ -8787,7 +8820,7 @@ module Aws::SageMaker
     UpdateFeatureGroupResponse.add_member(:feature_group_arn, Shapes::ShapeRef.new(shape: FeatureGroupArn, required: true, location_name: "FeatureGroupArn"))
     UpdateFeatureGroupResponse.struct_class = Types::UpdateFeatureGroupResponse
 
-    UpdateFeatureMetadataRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupName, required: true, location_name: "FeatureGroupName"))
+    UpdateFeatureMetadataRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupNameOrArn, required: true, location_name: "FeatureGroupName"))
     UpdateFeatureMetadataRequest.add_member(:feature_name, Shapes::ShapeRef.new(shape: FeatureName, required: true, location_name: "FeatureName"))
     UpdateFeatureMetadataRequest.add_member(:description, Shapes::ShapeRef.new(shape: FeatureDescription, location_name: "Description"))
     UpdateFeatureMetadataRequest.add_member(:parameter_additions, Shapes::ShapeRef.new(shape: FeatureParameterAdditions, location_name: "ParameterAdditions"))
@@ -11474,6 +11507,20 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListProjectsInput)
         o.output = Shapes::ShapeRef.new(shape: ListProjectsOutput)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_resource_catalogs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListResourceCatalogs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListResourceCatalogsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListResourceCatalogsResponse)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

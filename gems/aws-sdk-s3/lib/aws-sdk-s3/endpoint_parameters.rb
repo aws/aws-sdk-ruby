@@ -119,6 +119,10 @@ module Aws::S3
       end
       self[:endpoint] = options[:endpoint]
       self[:force_path_style] = options[:force_path_style]
+      self[:force_path_style] = false if self[:force_path_style].nil?
+      if self[:force_path_style].nil?
+        raise ArgumentError, "Missing required EndpointParameter: :force_path_style"
+      end
       self[:accelerate] = options[:accelerate]
       self[:accelerate] = false if self[:accelerate].nil?
       if self[:accelerate].nil?

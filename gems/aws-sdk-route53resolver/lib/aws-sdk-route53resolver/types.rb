@@ -433,6 +433,65 @@ module Aws::Route53Resolver
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and that allows failed
     #   requests to be retried without the risk of running the operation
+    #   twice.
+    #
+    #   `CreatorRequestId` can be any unique string, for example, a
+    #   date/time stamp.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A friendly name that lets you easily find a configuration in the
+    #   Resolver dashboard in the Route 53 console.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_count
+    #   Number of Amazon EC2 instances for the Resolver on Outpost. The
+    #   default and minimal value is 4.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] preferred_instance_type
+    #   The Amazon EC2 instance type. If you specify this, you must also
+    #   specify a value for the `OutpostArn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] outpost_arn
+    #   The Amazon Resource Name (ARN) of the Outpost. If you specify this,
+    #   you must also specify a value for the `PreferredInstanceType`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A string that helps identify the Route 53 Resolvers on Outpost.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateOutpostResolverRequest AWS API Documentation
+    #
+    class CreateOutpostResolverRequest < Struct.new(
+      :creator_request_id,
+      :name,
+      :instance_count,
+      :preferred_instance_type,
+      :outpost_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] outpost_resolver
+    #   Information about the `CreateOutpostResolver` request, including the
+    #   status of the request.
+    #   @return [Types::OutpostResolver]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateOutpostResolverResponse AWS API Documentation
+    #
+    class CreateOutpostResolverResponse < Struct.new(
+      :outpost_resolver)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] creator_request_id
+    #   A unique string that identifies the request and that allows failed
+    #   requests to be retried without the risk of running the operation
     #   twice. `CreatorRequestId` can be any unique string, for example, a
     #   date/time stamp.
     #   @return [String]
@@ -474,10 +533,20 @@ module Aws::Route53Resolver
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] resolver_endpoint_type
-    #   For the endpoint type you can choose either IPv4, IPv6. or
+    #   For the endpoint type you can choose either IPv4, IPv6, or
     #   dual-stack. A dual-stack endpoint means that it will resolve via
     #   both IPv4 and IPv6. This endpoint type is applied to all IP
     #   addresses.
+    #   @return [String]
+    #
+    # @!attribute [rw] outpost_arn
+    #   The Amazon Resource Name (ARN) of the Outpost. If you specify this,
+    #   you must also specify a value for the `PreferredInstanceType`.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_instance_type
+    #   The instance type. If you specify this, you must also specify a
+    #   value for the `OutpostArn`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateResolverEndpointRequest AWS API Documentation
@@ -489,7 +558,9 @@ module Aws::Route53Resolver
       :direction,
       :ip_addresses,
       :tags,
-      :resolver_endpoint_type)
+      :resolver_endpoint_type,
+      :outpost_arn,
+      :preferred_instance_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -613,7 +684,8 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] target_ips
     #   The IPs that you want Resolver to forward DNS queries to. You can
-    #   specify only IPv4 addresses. Separate IP addresses with a space.
+    #   specify either Ipv4 or Ipv6 addresses but not both in the same rule.
+    #   Separate IP addresses with a space.
     #
     #   `TargetIps` is available only when the value of `Rule type` is
     #   `FORWARD`.
@@ -732,6 +804,31 @@ module Aws::Route53Resolver
     #
     class DeleteFirewallRuleResponse < Struct.new(
       :firewall_rule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   A unique string that identifies the Resolver on the Outpost.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteOutpostResolverRequest AWS API Documentation
+    #
+    class DeleteOutpostResolverRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] outpost_resolver
+    #   Information about the `DeleteOutpostResolver` request, including the
+    #   status of the request.
+    #   @return [Types::OutpostResolver]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteOutpostResolverResponse AWS API Documentation
+    #
+    class DeleteOutpostResolverResponse < Struct.new(
+      :outpost_resolver)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1756,6 +1853,31 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
+    # @!attribute [rw] id
+    #   The ID of the Resolver on the Outpost.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetOutpostResolverRequest AWS API Documentation
+    #
+    class GetOutpostResolverRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] outpost_resolver
+    #   Information about the `GetOutpostResolver` request, including the
+    #   status of the request.
+    #   @return [Types::OutpostResolver]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetOutpostResolverResponse AWS API Documentation
+    #
+    class GetOutpostResolverResponse < Struct.new(
+      :outpost_resolver)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_id
     #   Resource ID of the Amazon VPC that you want to get information
     #   about.
@@ -2657,6 +2779,53 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
+    # @!attribute [rw] outpost_arn
+    #   The Amazon Resource Name (ARN) of the Outpost.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of Resolvers on the Outpost that you want to
+    #   return in the response to a `ListOutpostResolver` request. If you
+    #   don't specify a value for `MaxResults`, the request returns up to
+    #   100 Resolvers.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   For the first `ListOutpostResolver` request, omit this value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListOutpostResolversRequest AWS API Documentation
+    #
+    class ListOutpostResolversRequest < Struct.new(
+      :outpost_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] outpost_resolvers
+    #   The Resolvers on Outposts that were created by using the current
+    #   Amazon Web Services account, and that match the specified filters,
+    #   if any.
+    #   @return [Array<Types::OutpostResolver>]
+    #
+    # @!attribute [rw] next_token
+    #   If more than `MaxResults` Resolvers match the specified criteria,
+    #   you can submit another `ListOutpostResolver` request to get the next
+    #   group of results. In the next request, specify the value of
+    #   `NextToken` from the previous response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListOutpostResolversResponse AWS API Documentation
+    #
+    class ListOutpostResolversResponse < Struct.new(
+      :outpost_resolvers,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] max_results
     #   The maximum number of Resolver configurations that you want to
     #   return in the response to a `ListResolverConfigs` request. If you
@@ -3383,6 +3552,75 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
+    # A complex type that contains settings for an existing Resolver on an
+    # Outpost.
+    #
+    # @!attribute [rw] arn
+    #   The ARN (Amazon Resource Name) for the Resolver on an Outpost.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the Outpost Resolver was created, in Unix
+    #   time format and Coordinated Universal Time (UTC).
+    #   @return [String]
+    #
+    # @!attribute [rw] modification_time
+    #   The date and time that the Outpost Resolver was modified, in Unix
+    #   time format and Coordinated Universal Time (UTC).
+    #   @return [String]
+    #
+    # @!attribute [rw] creator_request_id
+    #   A unique string that identifies the request that created the
+    #   Resolver endpoint. The `CreatorRequestId` allows failed requests to
+    #   be retried without the risk of running the operation twice.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the Resolver on Outpost.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_count
+    #   Amazon EC2 instance count for the Resolver on the Outpost.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] preferred_instance_type
+    #   The Amazon EC2 instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Name of the Resolver.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of the Resolver.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A detailed description of the Resolver.
+    #   @return [String]
+    #
+    # @!attribute [rw] outpost_arn
+    #   The ARN (Amazon Resource Name) for the Outpost.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/OutpostResolver AWS API Documentation
+    #
+    class OutpostResolver < Struct.new(
+      :arn,
+      :creation_time,
+      :modification_time,
+      :creator_request_id,
+      :id,
+      :instance_count,
+      :preferred_instance_type,
+      :name,
+      :status,
+      :status_message,
+      :outpost_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] arn
     #   The ARN (Amazon Resource Name) for the rule group that you want to
     #   share.
@@ -3428,8 +3666,6 @@ module Aws::Route53Resolver
     #   * `route53resolver:AssociateResolverQueryLogConfig`
     #
     #   * `route53resolver:DisassociateResolverQueryLogConfig`
-    #
-    #   * `route53resolver:ListResolverQueryLogConfigAssociations`
     #
     #   * `route53resolver:ListResolverQueryLogConfigs`
     #
@@ -3725,6 +3961,14 @@ module Aws::Route53Resolver
     #   The Resolver endpoint IP address type.
     #   @return [String]
     #
+    # @!attribute [rw] outpost_arn
+    #   The ARN (Amazon Resource Name) for the Outpost.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_instance_type
+    #   The Amazon EC2 instance type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ResolverEndpoint AWS API Documentation
     #
     class ResolverEndpoint < Struct.new(
@@ -3740,7 +3984,9 @@ module Aws::Route53Resolver
       :status_message,
       :creation_time,
       :modification_time,
-      :resolver_endpoint_type)
+      :resolver_endpoint_type,
+      :outpost_arn,
+      :preferred_instance_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4000,8 +4246,7 @@ module Aws::Route53Resolver
     # @!attribute [rw] target_ips
     #   An array that contains the IP addresses and ports that an outbound
     #   endpoint forwards DNS queries to. Typically, these are the IP
-    #   addresses of DNS resolvers on your network. Specify IPv4 addresses.
-    #   IPv6 is not supported.
+    #   addresses of DNS resolvers on your network.
     #   @return [Array<Types::TargetAddress>]
     #
     # @!attribute [rw] resolver_endpoint_id
@@ -4213,6 +4458,19 @@ module Aws::Route53Resolver
     class ResourceUnavailableException < Struct.new(
       :message,
       :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Fulfilling the request would cause one or more quotas to be exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4670,6 +4928,45 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
+    # @!attribute [rw] id
+    #   A unique string that identifies Resolver on an Outpost.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Name of the Resolver on the Outpost.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_count
+    #   The Amazon EC2 instance count for a Resolver on the Outpost.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] preferred_instance_type
+    #   Amazon EC2 instance type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateOutpostResolverRequest AWS API Documentation
+    #
+    class UpdateOutpostResolverRequest < Struct.new(
+      :id,
+      :name,
+      :instance_count,
+      :preferred_instance_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] outpost_resolver
+    #   The response to an `UpdateOutpostResolver` request.
+    #   @return [Types::OutpostResolver]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateOutpostResolverResponse AWS API Documentation
+    #
+    class UpdateOutpostResolverResponse < Struct.new(
+      :outpost_resolver)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_id
     #   Resource ID of the Amazon VPC that you want to update the Resolver
     #   configuration for.
@@ -4766,10 +5063,14 @@ module Aws::Route53Resolver
     # @!attribute [rw] resolver_endpoint_type
     #   Specifies the endpoint type for what type of IP address the endpoint
     #   uses to forward DNS queries.
+    #
+    #   Updating to `IPV6` type isn't currently supported.
     #   @return [String]
     #
     # @!attribute [rw] update_ip_addresses
-    #   Updates the Resolver endpoint type to IpV4, Ipv6, or dual-stack.
+    #   Specifies the IPv6 address when you update the Resolver endpoint
+    #   from IPv4 to dual-stack. If you don't specify an IPv6 address, one
+    #   will be automatically chosen from your subnet.
     #   @return [Array<Types::UpdateIpAddress>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateResolverEndpointRequest AWS API Documentation

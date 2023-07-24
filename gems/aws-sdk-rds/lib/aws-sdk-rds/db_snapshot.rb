@@ -265,6 +265,14 @@ module Aws::RDS
       data[:storage_throughput]
     end
 
+    # The Oracle system identifier (SID), which is the name of the Oracle
+    # database instance that manages your database files. The Oracle SID is
+    # also the name of your CDB.
+    # @return [String]
+    def db_system_id
+      data[:db_system_id]
+    end
+
     # @!endgroup
 
     # @return [Client]

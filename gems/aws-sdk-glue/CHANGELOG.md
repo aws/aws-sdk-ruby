@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.150.0 (2023-07-21)
+------------------
+
+* Feature - This release adds support for AWS Glue Crawler with Apache Hudi Tables, allowing Crawlers to discover Hudi Tables in S3 and register them in Glue Data Catalog for query engines to query against.
+
 1.149.0 (2023-07-17)
 ------------------
 

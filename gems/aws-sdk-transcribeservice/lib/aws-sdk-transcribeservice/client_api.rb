@@ -168,6 +168,10 @@ module Aws::TranscribeService
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TimestampMilliseconds = Shapes::IntegerShape.new(name: 'TimestampMilliseconds')
+    ToxicityCategories = Shapes::ListShape.new(name: 'ToxicityCategories')
+    ToxicityCategory = Shapes::StringShape.new(name: 'ToxicityCategory')
+    ToxicityDetection = Shapes::ListShape.new(name: 'ToxicityDetection')
+    ToxicityDetectionSettings = Shapes::StructureShape.new(name: 'ToxicityDetectionSettings')
     TranscribeArn = Shapes::StringShape.new(name: 'TranscribeArn')
     Transcript = Shapes::StructureShape.new(name: 'Transcript')
     TranscriptFilter = Shapes::StructureShape.new(name: 'TranscriptFilter')
@@ -717,6 +721,7 @@ module Aws::TranscribeService
     StartTranscriptionJobRequest.add_member(:subtitles, Shapes::ShapeRef.new(shape: Subtitles, location_name: "Subtitles"))
     StartTranscriptionJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     StartTranscriptionJobRequest.add_member(:language_id_settings, Shapes::ShapeRef.new(shape: LanguageIdSettingsMap, location_name: "LanguageIdSettings"))
+    StartTranscriptionJobRequest.add_member(:toxicity_detection, Shapes::ShapeRef.new(shape: ToxicityDetection, location_name: "ToxicityDetection"))
     StartTranscriptionJobRequest.struct_class = Types::StartTranscriptionJobRequest
 
     StartTranscriptionJobResponse.add_member(:transcription_job, Shapes::ShapeRef.new(shape: TranscriptionJob, location_name: "TranscriptionJob"))
@@ -750,6 +755,13 @@ module Aws::TranscribeService
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    ToxicityCategories.member = Shapes::ShapeRef.new(shape: ToxicityCategory)
+
+    ToxicityDetection.member = Shapes::ShapeRef.new(shape: ToxicityDetectionSettings)
+
+    ToxicityDetectionSettings.add_member(:toxicity_categories, Shapes::ShapeRef.new(shape: ToxicityCategories, required: true, location_name: "ToxicityCategories"))
+    ToxicityDetectionSettings.struct_class = Types::ToxicityDetectionSettings
 
     Transcript.add_member(:transcript_file_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "TranscriptFileUri"))
     Transcript.add_member(:redacted_transcript_file_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "RedactedTranscriptFileUri"))
@@ -786,6 +798,7 @@ module Aws::TranscribeService
     TranscriptionJob.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     TranscriptionJob.add_member(:subtitles, Shapes::ShapeRef.new(shape: SubtitlesOutput, location_name: "Subtitles"))
     TranscriptionJob.add_member(:language_id_settings, Shapes::ShapeRef.new(shape: LanguageIdSettingsMap, location_name: "LanguageIdSettings"))
+    TranscriptionJob.add_member(:toxicity_detection, Shapes::ShapeRef.new(shape: ToxicityDetection, location_name: "ToxicityDetection"))
     TranscriptionJob.struct_class = Types::TranscriptionJob
 
     TranscriptionJobSummaries.member = Shapes::ShapeRef.new(shape: TranscriptionJobSummary)
@@ -804,6 +817,7 @@ module Aws::TranscribeService
     TranscriptionJobSummary.add_member(:identify_multiple_languages, Shapes::ShapeRef.new(shape: Boolean, location_name: "IdentifyMultipleLanguages"))
     TranscriptionJobSummary.add_member(:identified_language_score, Shapes::ShapeRef.new(shape: IdentifiedLanguageScore, location_name: "IdentifiedLanguageScore"))
     TranscriptionJobSummary.add_member(:language_codes, Shapes::ShapeRef.new(shape: LanguageCodeList, location_name: "LanguageCodes"))
+    TranscriptionJobSummary.add_member(:toxicity_detection, Shapes::ShapeRef.new(shape: ToxicityDetection, location_name: "ToxicityDetection"))
     TranscriptionJobSummary.struct_class = Types::TranscriptionJobSummary
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TranscribeArn, required: true, location_name: "ResourceArn"))

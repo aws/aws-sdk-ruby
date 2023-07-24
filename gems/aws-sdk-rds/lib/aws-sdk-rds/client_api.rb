@@ -1032,6 +1032,7 @@ module Aws::RDS
     CreateDBInstanceMessage.add_member(:manage_master_user_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ManageMasterUserPassword"))
     CreateDBInstanceMessage.add_member(:master_user_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterUserSecretKmsKeyId"))
     CreateDBInstanceMessage.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CACertificateIdentifier"))
+    CreateDBInstanceMessage.add_member(:db_system_id, Shapes::ShapeRef.new(shape: String, location_name: "DBSystemId"))
     CreateDBInstanceMessage.struct_class = Types::CreateDBInstanceMessage
 
     CreateDBInstanceReadReplicaMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
@@ -1785,6 +1786,7 @@ module Aws::RDS
     DBSnapshot.add_member(:snapshot_database_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "SnapshotDatabaseTime"))
     DBSnapshot.add_member(:snapshot_target, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotTarget"))
     DBSnapshot.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
+    DBSnapshot.add_member(:db_system_id, Shapes::ShapeRef.new(shape: String, location_name: "DBSystemId"))
     DBSnapshot.struct_class = Types::DBSnapshot
 
     DBSnapshotAlreadyExistsFault.struct_class = Types::DBSnapshotAlreadyExistsFault

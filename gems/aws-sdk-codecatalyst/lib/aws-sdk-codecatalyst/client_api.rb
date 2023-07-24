@@ -32,10 +32,18 @@ module Aws::CodeCatalyst
     CreateProjectResponse = Shapes::StructureShape.new(name: 'CreateProjectResponse')
     CreateSourceRepositoryBranchRequest = Shapes::StructureShape.new(name: 'CreateSourceRepositoryBranchRequest')
     CreateSourceRepositoryBranchResponse = Shapes::StructureShape.new(name: 'CreateSourceRepositoryBranchResponse')
+    CreateSourceRepositoryRequest = Shapes::StructureShape.new(name: 'CreateSourceRepositoryRequest')
+    CreateSourceRepositoryResponse = Shapes::StructureShape.new(name: 'CreateSourceRepositoryResponse')
     DeleteAccessTokenRequest = Shapes::StructureShape.new(name: 'DeleteAccessTokenRequest')
     DeleteAccessTokenResponse = Shapes::StructureShape.new(name: 'DeleteAccessTokenResponse')
     DeleteDevEnvironmentRequest = Shapes::StructureShape.new(name: 'DeleteDevEnvironmentRequest')
     DeleteDevEnvironmentResponse = Shapes::StructureShape.new(name: 'DeleteDevEnvironmentResponse')
+    DeleteProjectRequest = Shapes::StructureShape.new(name: 'DeleteProjectRequest')
+    DeleteProjectResponse = Shapes::StructureShape.new(name: 'DeleteProjectResponse')
+    DeleteSourceRepositoryRequest = Shapes::StructureShape.new(name: 'DeleteSourceRepositoryRequest')
+    DeleteSourceRepositoryResponse = Shapes::StructureShape.new(name: 'DeleteSourceRepositoryResponse')
+    DeleteSpaceRequest = Shapes::StructureShape.new(name: 'DeleteSpaceRequest')
+    DeleteSpaceResponse = Shapes::StructureShape.new(name: 'DeleteSpaceResponse')
     DevEnvironmentAccessDetails = Shapes::StructureShape.new(name: 'DevEnvironmentAccessDetails')
     DevEnvironmentRepositorySummaries = Shapes::ListShape.new(name: 'DevEnvironmentRepositorySummaries')
     DevEnvironmentRepositorySummary = Shapes::StructureShape.new(name: 'DevEnvironmentRepositorySummary')
@@ -68,6 +76,8 @@ module Aws::CodeCatalyst
     GetProjectResponse = Shapes::StructureShape.new(name: 'GetProjectResponse')
     GetSourceRepositoryCloneUrlsRequest = Shapes::StructureShape.new(name: 'GetSourceRepositoryCloneUrlsRequest')
     GetSourceRepositoryCloneUrlsResponse = Shapes::StructureShape.new(name: 'GetSourceRepositoryCloneUrlsResponse')
+    GetSourceRepositoryRequest = Shapes::StructureShape.new(name: 'GetSourceRepositoryRequest')
+    GetSourceRepositoryResponse = Shapes::StructureShape.new(name: 'GetSourceRepositoryResponse')
     GetSpaceRequest = Shapes::StructureShape.new(name: 'GetSpaceRequest')
     GetSpaceResponse = Shapes::StructureShape.new(name: 'GetSpaceResponse')
     GetSubscriptionRequest = Shapes::StructureShape.new(name: 'GetSubscriptionRequest')
@@ -145,6 +155,7 @@ module Aws::CodeCatalyst
     SourceRepositoryDescriptionString = Shapes::StringShape.new(name: 'SourceRepositoryDescriptionString')
     SourceRepositoryIdString = Shapes::StringShape.new(name: 'SourceRepositoryIdString')
     SourceRepositoryNameString = Shapes::StringShape.new(name: 'SourceRepositoryNameString')
+    SpaceDescription = Shapes::StringShape.new(name: 'SpaceDescription')
     SpaceSummaries = Shapes::ListShape.new(name: 'SpaceSummaries')
     SpaceSummary = Shapes::StructureShape.new(name: 'SpaceSummary')
     StartDevEnvironmentRequest = Shapes::StructureShape.new(name: 'StartDevEnvironmentRequest')
@@ -168,6 +179,10 @@ module Aws::CodeCatalyst
     UpdateDevEnvironmentRequestAliasString = Shapes::StringShape.new(name: 'UpdateDevEnvironmentRequestAliasString')
     UpdateDevEnvironmentResponse = Shapes::StructureShape.new(name: 'UpdateDevEnvironmentResponse')
     UpdateDevEnvironmentResponseAliasString = Shapes::StringShape.new(name: 'UpdateDevEnvironmentResponseAliasString')
+    UpdateProjectRequest = Shapes::StructureShape.new(name: 'UpdateProjectRequest')
+    UpdateProjectResponse = Shapes::StructureShape.new(name: 'UpdateProjectResponse')
+    UpdateSpaceRequest = Shapes::StructureShape.new(name: 'UpdateSpaceRequest')
+    UpdateSpaceResponse = Shapes::StructureShape.new(name: 'UpdateSpaceResponse')
     UserIdentity = Shapes::StructureShape.new(name: 'UserIdentity')
     UserType = Shapes::StringShape.new(name: 'UserType')
     Uuid = Shapes::StringShape.new(name: 'Uuid')
@@ -238,6 +253,18 @@ module Aws::CodeCatalyst
     CreateSourceRepositoryBranchResponse.add_member(:head_commit_id, Shapes::ShapeRef.new(shape: String, location_name: "headCommitId"))
     CreateSourceRepositoryBranchResponse.struct_class = Types::CreateSourceRepositoryBranchResponse
 
+    CreateSourceRepositoryRequest.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "spaceName"))
+    CreateSourceRepositoryRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "projectName"))
+    CreateSourceRepositoryRequest.add_member(:name, Shapes::ShapeRef.new(shape: SourceRepositoryNameString, required: true, location: "uri", location_name: "name"))
+    CreateSourceRepositoryRequest.add_member(:description, Shapes::ShapeRef.new(shape: SourceRepositoryDescriptionString, location_name: "description"))
+    CreateSourceRepositoryRequest.struct_class = Types::CreateSourceRepositoryRequest
+
+    CreateSourceRepositoryResponse.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "spaceName"))
+    CreateSourceRepositoryResponse.add_member(:project_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "projectName"))
+    CreateSourceRepositoryResponse.add_member(:name, Shapes::ShapeRef.new(shape: SourceRepositoryNameString, required: true, location_name: "name"))
+    CreateSourceRepositoryResponse.add_member(:description, Shapes::ShapeRef.new(shape: SourceRepositoryDescriptionString, location_name: "description"))
+    CreateSourceRepositoryResponse.struct_class = Types::CreateSourceRepositoryResponse
+
     DeleteAccessTokenRequest.add_member(:id, Shapes::ShapeRef.new(shape: AccessTokenId, required: true, location: "uri", location_name: "id"))
     DeleteAccessTokenRequest.struct_class = Types::DeleteAccessTokenRequest
 
@@ -252,6 +279,32 @@ module Aws::CodeCatalyst
     DeleteDevEnvironmentResponse.add_member(:project_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "projectName"))
     DeleteDevEnvironmentResponse.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "id"))
     DeleteDevEnvironmentResponse.struct_class = Types::DeleteDevEnvironmentResponse
+
+    DeleteProjectRequest.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "spaceName"))
+    DeleteProjectRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "name"))
+    DeleteProjectRequest.struct_class = Types::DeleteProjectRequest
+
+    DeleteProjectResponse.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "spaceName"))
+    DeleteProjectResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "name"))
+    DeleteProjectResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
+    DeleteProjectResponse.struct_class = Types::DeleteProjectResponse
+
+    DeleteSourceRepositoryRequest.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "spaceName"))
+    DeleteSourceRepositoryRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "projectName"))
+    DeleteSourceRepositoryRequest.add_member(:name, Shapes::ShapeRef.new(shape: SourceRepositoryNameString, required: true, location: "uri", location_name: "name"))
+    DeleteSourceRepositoryRequest.struct_class = Types::DeleteSourceRepositoryRequest
+
+    DeleteSourceRepositoryResponse.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "spaceName"))
+    DeleteSourceRepositoryResponse.add_member(:project_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "projectName"))
+    DeleteSourceRepositoryResponse.add_member(:name, Shapes::ShapeRef.new(shape: SourceRepositoryNameString, required: true, location_name: "name"))
+    DeleteSourceRepositoryResponse.struct_class = Types::DeleteSourceRepositoryResponse
+
+    DeleteSpaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "name"))
+    DeleteSpaceRequest.struct_class = Types::DeleteSpaceRequest
+
+    DeleteSpaceResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "name"))
+    DeleteSpaceResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
+    DeleteSpaceResponse.struct_class = Types::DeleteSpaceResponse
 
     DevEnvironmentAccessDetails.add_member(:stream_url, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "streamUrl"))
     DevEnvironmentAccessDetails.add_member(:token_value, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "tokenValue"))
@@ -370,6 +423,19 @@ module Aws::CodeCatalyst
 
     GetSourceRepositoryCloneUrlsResponse.add_member(:https, Shapes::ShapeRef.new(shape: String, required: true, location_name: "https"))
     GetSourceRepositoryCloneUrlsResponse.struct_class = Types::GetSourceRepositoryCloneUrlsResponse
+
+    GetSourceRepositoryRequest.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "spaceName"))
+    GetSourceRepositoryRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "projectName"))
+    GetSourceRepositoryRequest.add_member(:name, Shapes::ShapeRef.new(shape: SourceRepositoryNameString, required: true, location: "uri", location_name: "name"))
+    GetSourceRepositoryRequest.struct_class = Types::GetSourceRepositoryRequest
+
+    GetSourceRepositoryResponse.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "spaceName"))
+    GetSourceRepositoryResponse.add_member(:project_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "projectName"))
+    GetSourceRepositoryResponse.add_member(:name, Shapes::ShapeRef.new(shape: SourceRepositoryNameString, required: true, location_name: "name"))
+    GetSourceRepositoryResponse.add_member(:description, Shapes::ShapeRef.new(shape: SourceRepositoryDescriptionString, location_name: "description"))
+    GetSourceRepositoryResponse.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdatedTime"))
+    GetSourceRepositoryResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdTime"))
+    GetSourceRepositoryResponse.struct_class = Types::GetSourceRepositoryResponse
 
     GetSpaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "name"))
     GetSpaceRequest.struct_class = Types::GetSpaceRequest
@@ -626,6 +692,26 @@ module Aws::CodeCatalyst
     UpdateDevEnvironmentResponse.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
     UpdateDevEnvironmentResponse.struct_class = Types::UpdateDevEnvironmentResponse
 
+    UpdateProjectRequest.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "spaceName"))
+    UpdateProjectRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "name"))
+    UpdateProjectRequest.add_member(:description, Shapes::ShapeRef.new(shape: ProjectDescription, location_name: "description"))
+    UpdateProjectRequest.struct_class = Types::UpdateProjectRequest
+
+    UpdateProjectResponse.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, location_name: "spaceName"))
+    UpdateProjectResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "name"))
+    UpdateProjectResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
+    UpdateProjectResponse.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    UpdateProjectResponse.struct_class = Types::UpdateProjectResponse
+
+    UpdateSpaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "name"))
+    UpdateSpaceRequest.add_member(:description, Shapes::ShapeRef.new(shape: SpaceDescription, location_name: "description"))
+    UpdateSpaceRequest.struct_class = Types::UpdateSpaceRequest
+
+    UpdateSpaceResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "name"))
+    UpdateSpaceResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
+    UpdateSpaceResponse.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    UpdateSpaceResponse.struct_class = Types::UpdateSpaceResponse
+
     UserIdentity.add_member(:user_type, Shapes::ShapeRef.new(shape: UserType, required: true, location_name: "userType"))
     UserIdentity.add_member(:principal_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "principalId"))
     UserIdentity.add_member(:user_name, Shapes::ShapeRef.new(shape: String, location_name: "userName"))
@@ -698,6 +784,20 @@ module Aws::CodeCatalyst
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:create_source_repository, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSourceRepository"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/spaces/{spaceName}/projects/{projectName}/sourceRepositories/{name}"
+        o.input = Shapes::ShapeRef.new(shape: CreateSourceRepositoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSourceRepositoryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:create_source_repository_branch, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateSourceRepositoryBranch"
         o.http_method = "PUT"
@@ -740,6 +840,48 @@ module Aws::CodeCatalyst
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:delete_project, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteProject"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/spaces/{spaceName}/projects/{name}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteProjectRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteProjectResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_source_repository, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSourceRepository"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/spaces/{spaceName}/projects/{projectName}/sourceRepositories/{name}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSourceRepositoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSourceRepositoryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_space, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSpace"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/spaces/{name}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSpaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSpaceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:get_dev_environment, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetDevEnvironment"
         o.http_method = "GET"
@@ -760,6 +902,20 @@ module Aws::CodeCatalyst
         o.http_request_uri = "/v1/spaces/{spaceName}/projects/{name}"
         o.input = Shapes::ShapeRef.new(shape: GetProjectRequest)
         o.output = Shapes::ShapeRef.new(shape: GetProjectResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_source_repository, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSourceRepository"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/spaces/{spaceName}/projects/{projectName}/sourceRepositories/{name}"
+        o.input = Shapes::ShapeRef.new(shape: GetSourceRepositoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSourceRepositoryResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1045,6 +1201,34 @@ module Aws::CodeCatalyst
         o.http_request_uri = "/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments/{id}"
         o.input = Shapes::ShapeRef.new(shape: UpdateDevEnvironmentRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDevEnvironmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_project, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateProject"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/v1/spaces/{spaceName}/projects/{name}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateProjectRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateProjectResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_space, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSpace"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/v1/spaces/{name}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSpaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSpaceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

@@ -533,6 +533,8 @@ module Aws::ConnectCases
     #         value: { # required
     #           boolean_value: false,
     #           double_value: 1.0,
+    #           empty_value: {
+    #           },
     #           string_value: "FieldValueUnionStringValueString",
     #         },
     #       },
@@ -558,10 +560,14 @@ module Aws::ConnectCases
     # cases, fields, templates and layouts. Each Amazon Connect instance can
     # be associated with only one Cases domain.
     #
-    # This will not associate your connect instance to Cases domain.
+    # <important markdown="1"> This will not associate your connect instance to Cases domain.
     # Instead, use the Amazon Connect [CreateIntegrationAssociation][1] API.
     # You need specific IAM permissions to successfully associate the Cases
     # domain. For more information, see [Onboard to Cases][2].
+    #
+    #       </important>
+    #
+    #  </important>
     #
     #
     #
@@ -848,7 +854,9 @@ module Aws::ConnectCases
       req.send_request(options)
     end
 
-    # Deletes a domain.
+    # Deletes a Cases domain.
+    #
+    #      <note> <p>After deleting your domain you must disassociate the deleted domain from your Amazon Connect instance with another API call before being able to use Cases again with this Amazon Connect instance. See <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteIntegrationAssociation.html">DeleteIntegrationAssociation</a>.</p> </note>
     #
     # @option params [required, String] :domain_id
     #   The unique identifier of the Cases domain.
@@ -1515,6 +1523,8 @@ module Aws::ConnectCases
     #           value: { # required
     #             boolean_value: false,
     #             double_value: 1.0,
+    #             empty_value: {
+    #             },
     #             string_value: "FieldValueUnionStringValueString",
     #           },
     #         },
@@ -1523,6 +1533,8 @@ module Aws::ConnectCases
     #           value: { # required
     #             boolean_value: false,
     #             double_value: 1.0,
+    #             empty_value: {
+    #             },
     #             string_value: "FieldValueUnionStringValueString",
     #           },
     #         },
@@ -1531,6 +1543,8 @@ module Aws::ConnectCases
     #           value: { # required
     #             boolean_value: false,
     #             double_value: 1.0,
+    #             empty_value: {
+    #             },
     #             string_value: "FieldValueUnionStringValueString",
     #           },
     #         },
@@ -1539,6 +1553,8 @@ module Aws::ConnectCases
     #           value: { # required
     #             boolean_value: false,
     #             double_value: 1.0,
+    #             empty_value: {
+    #             },
     #             string_value: "FieldValueUnionStringValueString",
     #           },
     #         },
@@ -1547,6 +1563,8 @@ module Aws::ConnectCases
     #           value: { # required
     #             boolean_value: false,
     #             double_value: 1.0,
+    #             empty_value: {
+    #             },
     #             string_value: "FieldValueUnionStringValueString",
     #           },
     #         },
@@ -1555,6 +1573,8 @@ module Aws::ConnectCases
     #           value: { # required
     #             boolean_value: false,
     #             double_value: 1.0,
+    #             empty_value: {
+    #             },
     #             string_value: "FieldValueUnionStringValueString",
     #           },
     #         },
@@ -1562,6 +1582,11 @@ module Aws::ConnectCases
     #       not: {
     #         # recursive CaseFilter
     #       },
+    #       or_all: [
+    #         {
+    #           # recursive CaseFilter
+    #         },
+    #       ],
     #     },
     #     max_results: 1,
     #     next_token: "NextToken",
@@ -1757,6 +1782,8 @@ module Aws::ConnectCases
     #         value: { # required
     #           boolean_value: false,
     #           double_value: 1.0,
+    #           empty_value: {
+    #           },
     #           string_value: "FieldValueUnionStringValueString",
     #         },
     #       },
@@ -1954,7 +1981,7 @@ module Aws::ConnectCases
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connectcases'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

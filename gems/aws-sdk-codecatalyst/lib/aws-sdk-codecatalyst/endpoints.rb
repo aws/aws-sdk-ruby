@@ -51,6 +51,19 @@ module Aws::CodeCatalyst
       end
     end
 
+    class CreateSourceRepository
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CodeCatalyst::EndpointParameters.new(
+          use_fips: context.config.use_fips_endpoint,
+          region: context.config.region,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CreateSourceRepositoryBranch
       def self.build(context)
         unless context.config.regional_endpoint
@@ -90,6 +103,45 @@ module Aws::CodeCatalyst
       end
     end
 
+    class DeleteProject
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CodeCatalyst::EndpointParameters.new(
+          use_fips: context.config.use_fips_endpoint,
+          region: context.config.region,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DeleteSourceRepository
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CodeCatalyst::EndpointParameters.new(
+          use_fips: context.config.use_fips_endpoint,
+          region: context.config.region,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DeleteSpace
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CodeCatalyst::EndpointParameters.new(
+          use_fips: context.config.use_fips_endpoint,
+          region: context.config.region,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class GetDevEnvironment
       def self.build(context)
         unless context.config.regional_endpoint
@@ -104,6 +156,19 @@ module Aws::CodeCatalyst
     end
 
     class GetProject
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CodeCatalyst::EndpointParameters.new(
+          use_fips: context.config.use_fips_endpoint,
+          region: context.config.region,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class GetSourceRepository
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -325,6 +390,32 @@ module Aws::CodeCatalyst
     end
 
     class UpdateDevEnvironment
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CodeCatalyst::EndpointParameters.new(
+          use_fips: context.config.use_fips_endpoint,
+          region: context.config.region,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UpdateProject
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CodeCatalyst::EndpointParameters.new(
+          use_fips: context.config.use_fips_endpoint,
+          region: context.config.region,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UpdateSpace
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

@@ -514,6 +514,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::ListProcessingJobs.build(context)
           when :list_projects
             Aws::SageMaker::Endpoints::ListProjects.build(context)
+          when :list_resource_catalogs
+            Aws::SageMaker::Endpoints::ListResourceCatalogs.build(context)
           when :list_spaces
             Aws::SageMaker::Endpoints::ListSpaces.build(context)
           when :list_stage_devices

@@ -115,6 +115,8 @@ module Aws::SecurityLake
     ListLogSourcesResponse = Shapes::StructureShape.new(name: 'ListLogSourcesResponse')
     ListSubscribersRequest = Shapes::StructureShape.new(name: 'ListSubscribersRequest')
     ListSubscribersResponse = Shapes::StructureShape.new(name: 'ListSubscribersResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LogSource = Shapes::StructureShape.new(name: 'LogSource')
     LogSourceList = Shapes::ListShape.new(name: 'LogSourceList')
     LogSourceResource = Shapes::UnionShape.new(name: 'LogSourceResource')
@@ -144,8 +146,17 @@ module Aws::SecurityLake
     SubscriberStatus = Shapes::StringShape.new(name: 'SubscriberStatus')
     SubscriptionProtocol = Shapes::StringShape.new(name: 'SubscriptionProtocol')
     SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     UUID = Shapes::StringShape.new(name: 'UUID')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateDataLakeExceptionSubscriptionRequest = Shapes::StructureShape.new(name: 'UpdateDataLakeExceptionSubscriptionRequest')
     UpdateDataLakeExceptionSubscriptionRequestExceptionTimeToLiveLong = Shapes::IntegerShape.new(name: 'UpdateDataLakeExceptionSubscriptionRequestExceptionTimeToLiveLong')
     UpdateDataLakeExceptionSubscriptionResponse = Shapes::StructureShape.new(name: 'UpdateDataLakeExceptionSubscriptionResponse')
@@ -220,6 +231,7 @@ module Aws::SecurityLake
 
     CreateDataLakeRequest.add_member(:configurations, Shapes::ShapeRef.new(shape: DataLakeConfigurationList, required: true, location_name: "configurations"))
     CreateDataLakeRequest.add_member(:meta_store_manager_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "metaStoreManagerRoleArn"))
+    CreateDataLakeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateDataLakeRequest.struct_class = Types::CreateDataLakeRequest
 
     CreateDataLakeResponse.add_member(:data_lakes, Shapes::ShapeRef.new(shape: DataLakeResourceList, location_name: "dataLakes"))
@@ -237,6 +249,7 @@ module Aws::SecurityLake
     CreateSubscriberRequest.add_member(:subscriber_description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "subscriberDescription"))
     CreateSubscriberRequest.add_member(:subscriber_identity, Shapes::ShapeRef.new(shape: AwsIdentity, required: true, location_name: "subscriberIdentity"))
     CreateSubscriberRequest.add_member(:subscriber_name, Shapes::ShapeRef.new(shape: CreateSubscriberRequestSubscriberNameString, required: true, location_name: "subscriberName"))
+    CreateSubscriberRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateSubscriberRequest.struct_class = Types::CreateSubscriberRequest
 
     CreateSubscriberResponse.add_member(:subscriber, Shapes::ShapeRef.new(shape: SubscriberResource, location_name: "subscriber"))
@@ -453,6 +466,12 @@ module Aws::SecurityLake
     ListSubscribersResponse.add_member(:subscribers, Shapes::ShapeRef.new(shape: SubscriberResourceList, location_name: "subscribers"))
     ListSubscribersResponse.struct_class = Types::ListSubscribersResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "uri", location_name: "resourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     LogSource.add_member(:account, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "account"))
     LogSource.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "region"))
     LogSource.add_member(:sources, Shapes::ShapeRef.new(shape: LogSourceResourceList, location_name: "sources"))
@@ -513,11 +532,31 @@ module Aws::SecurityLake
 
     SubscriberResourceList.member = Shapes::ShapeRef.new(shape: SubscriberResource)
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "uri", location_name: "resourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ThrottlingException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, location_name: "quotaCode"))
     ThrottlingException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
     ThrottlingException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, location_name: "serviceCode"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "uri", location_name: "resourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateDataLakeExceptionSubscriptionRequest.add_member(:exception_time_to_live, Shapes::ShapeRef.new(shape: UpdateDataLakeExceptionSubscriptionRequestExceptionTimeToLiveLong, location_name: "exceptionTimeToLive"))
     UpdateDataLakeExceptionSubscriptionRequest.add_member(:notification_endpoint, Shapes::ShapeRef.new(shape: SafeString, required: true, location_name: "notificationEndpoint"))
@@ -913,12 +952,54 @@ module Aws::SecurityLake
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:register_data_lake_delegated_administrator, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RegisterDataLakeDelegatedAdministrator"
         o.http_method = "POST"
         o.http_request_uri = "/v1/datalake/delegate"
         o.input = Shapes::ShapeRef.new(shape: RegisterDataLakeDelegatedAdministratorRequest)
         o.output = Shapes::ShapeRef.new(shape: RegisterDataLakeDelegatedAdministratorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

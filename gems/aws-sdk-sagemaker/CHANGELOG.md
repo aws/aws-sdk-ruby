@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.198.0 (2023-07-20)
+------------------
+
+* Feature - Cross account support for SageMaker Feature Store
+
 1.197.0 (2023-07-13)
 ------------------
 

@@ -70,6 +70,8 @@ module Aws::Route53Resolver
             Aws::Route53Resolver::Endpoints::CreateFirewallRule.build(context)
           when :create_firewall_rule_group
             Aws::Route53Resolver::Endpoints::CreateFirewallRuleGroup.build(context)
+          when :create_outpost_resolver
+            Aws::Route53Resolver::Endpoints::CreateOutpostResolver.build(context)
           when :create_resolver_endpoint
             Aws::Route53Resolver::Endpoints::CreateResolverEndpoint.build(context)
           when :create_resolver_query_log_config
@@ -82,6 +84,8 @@ module Aws::Route53Resolver
             Aws::Route53Resolver::Endpoints::DeleteFirewallRule.build(context)
           when :delete_firewall_rule_group
             Aws::Route53Resolver::Endpoints::DeleteFirewallRuleGroup.build(context)
+          when :delete_outpost_resolver
+            Aws::Route53Resolver::Endpoints::DeleteOutpostResolver.build(context)
           when :delete_resolver_endpoint
             Aws::Route53Resolver::Endpoints::DeleteResolverEndpoint.build(context)
           when :delete_resolver_query_log_config
@@ -106,6 +110,8 @@ module Aws::Route53Resolver
             Aws::Route53Resolver::Endpoints::GetFirewallRuleGroupAssociation.build(context)
           when :get_firewall_rule_group_policy
             Aws::Route53Resolver::Endpoints::GetFirewallRuleGroupPolicy.build(context)
+          when :get_outpost_resolver
+            Aws::Route53Resolver::Endpoints::GetOutpostResolver.build(context)
           when :get_resolver_config
             Aws::Route53Resolver::Endpoints::GetResolverConfig.build(context)
           when :get_resolver_dnssec_config
@@ -138,6 +144,8 @@ module Aws::Route53Resolver
             Aws::Route53Resolver::Endpoints::ListFirewallRuleGroups.build(context)
           when :list_firewall_rules
             Aws::Route53Resolver::Endpoints::ListFirewallRules.build(context)
+          when :list_outpost_resolvers
+            Aws::Route53Resolver::Endpoints::ListOutpostResolvers.build(context)
           when :list_resolver_configs
             Aws::Route53Resolver::Endpoints::ListResolverConfigs.build(context)
           when :list_resolver_dnssec_configs
@@ -174,6 +182,8 @@ module Aws::Route53Resolver
             Aws::Route53Resolver::Endpoints::UpdateFirewallRule.build(context)
           when :update_firewall_rule_group_association
             Aws::Route53Resolver::Endpoints::UpdateFirewallRuleGroupAssociation.build(context)
+          when :update_outpost_resolver
+            Aws::Route53Resolver::Endpoints::UpdateOutpostResolver.build(context)
           when :update_resolver_config
             Aws::Route53Resolver::Endpoints::UpdateResolverConfig.build(context)
           when :update_resolver_dnssec_config

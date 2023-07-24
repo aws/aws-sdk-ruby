@@ -609,7 +609,9 @@ module Aws::Glue
     GrokClassifier = Shapes::StructureShape.new(name: 'GrokClassifier')
     GrokPattern = Shapes::StringShape.new(name: 'GrokPattern')
     HashString = Shapes::StringShape.new(name: 'HashString')
+    HudiTarget = Shapes::StructureShape.new(name: 'HudiTarget')
     HudiTargetCompressionType = Shapes::StringShape.new(name: 'HudiTargetCompressionType')
+    HudiTargetList = Shapes::ListShape.new(name: 'HudiTargetList')
     IcebergInput = Shapes::StructureShape.new(name: 'IcebergInput')
     IcebergTarget = Shapes::StructureShape.new(name: 'IcebergTarget')
     IcebergTargetList = Shapes::ListShape.new(name: 'IcebergTargetList')
@@ -1872,6 +1874,7 @@ module Aws::Glue
     CrawlerTargets.add_member(:catalog_targets, Shapes::ShapeRef.new(shape: CatalogTargetList, location_name: "CatalogTargets"))
     CrawlerTargets.add_member(:delta_targets, Shapes::ShapeRef.new(shape: DeltaTargetList, location_name: "DeltaTargets"))
     CrawlerTargets.add_member(:iceberg_targets, Shapes::ShapeRef.new(shape: IcebergTargetList, location_name: "IcebergTargets"))
+    CrawlerTargets.add_member(:hudi_targets, Shapes::ShapeRef.new(shape: HudiTargetList, location_name: "HudiTargets"))
     CrawlerTargets.struct_class = Types::CrawlerTargets
 
     CrawlsFilter.add_member(:field_name, Shapes::ShapeRef.new(shape: FieldName, location_name: "FieldName"))
@@ -3535,6 +3538,14 @@ module Aws::Glue
     GrokClassifier.add_member(:grok_pattern, Shapes::ShapeRef.new(shape: GrokPattern, required: true, location_name: "GrokPattern"))
     GrokClassifier.add_member(:custom_patterns, Shapes::ShapeRef.new(shape: CustomPatterns, location_name: "CustomPatterns"))
     GrokClassifier.struct_class = Types::GrokClassifier
+
+    HudiTarget.add_member(:paths, Shapes::ShapeRef.new(shape: PathList, location_name: "Paths"))
+    HudiTarget.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, location_name: "ConnectionName"))
+    HudiTarget.add_member(:exclusions, Shapes::ShapeRef.new(shape: PathList, location_name: "Exclusions"))
+    HudiTarget.add_member(:maximum_traversal_depth, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "MaximumTraversalDepth"))
+    HudiTarget.struct_class = Types::HudiTarget
+
+    HudiTargetList.member = Shapes::ShapeRef.new(shape: HudiTarget)
 
     IcebergInput.add_member(:metadata_operation, Shapes::ShapeRef.new(shape: MetadataOperation, required: true, location_name: "MetadataOperation"))
     IcebergInput.add_member(:version, Shapes::ShapeRef.new(shape: VersionString, location_name: "Version"))

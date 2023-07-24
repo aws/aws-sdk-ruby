@@ -1407,7 +1407,7 @@ module Aws::LexModelsV2
     #   * `Detected` – The number of utterances that Amazon Lex managed to
     #     detect.
     #
-    #   * `UtteranceTimeStamp` – The date and time of the utterance.
+    #   * `UtteranceTimestamp` – The date and time of the utterance.
     #   @return [String]
     #
     # @!attribute [rw] statistic
@@ -14373,7 +14373,7 @@ module Aws::LexModelsV2
     #
     #   * `Count` – The number of utterances.
     #
-    #   * `UtteranceTimeStamp` – The date and time of the utterance.
+    #   * `UtteranceTimestamp` – The date and time of the utterance.
     #   @return [String]
     #
     # @!attribute [rw] order

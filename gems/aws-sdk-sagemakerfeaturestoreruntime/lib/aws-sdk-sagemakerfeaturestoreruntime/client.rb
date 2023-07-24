@@ -391,9 +391,9 @@ module Aws::SageMakerFeatureStoreRuntime
     # Retrieves a batch of `Records` from a `FeatureGroup`.
     #
     # @option params [required, Array<Types::BatchGetRecordIdentifier>] :identifiers
-    #   A list of `FeatureGroup` names, with their corresponding
-    #   `RecordIdentifier` value, and Feature name that have been requested to
-    #   be retrieved in batch.
+    #   A list containing the name or Amazon Resource Name (ARN) of the
+    #   `FeatureGroup`, the list of names of `Feature`s to be retrieved, and
+    #   the corresponding `RecordIdentifier` values as strings.
     #
     # @option params [String] :expiration_time_response
     #   Parameter to request `ExpiresAt` in response. If `Enabled`,
@@ -411,7 +411,7 @@ module Aws::SageMakerFeatureStoreRuntime
     #   resp = client.batch_get_record({
     #     identifiers: [ # required
     #       {
-    #         feature_group_name: "FeatureGroupName", # required
+    #         feature_group_name: "FeatureGroupNameOrArn", # required
     #         record_identifiers_value_as_string: ["ValueAsString"], # required
     #         feature_names: ["FeatureName"],
     #       },
@@ -471,7 +471,8 @@ module Aws::SageMakerFeatureStoreRuntime
     #   is written to the `OfflineStore`.
     #
     # @option params [required, String] :feature_group_name
-    #   The name of the feature group to delete the record from.
+    #   The name or Amazon Resource Name (ARN) of the feature group to delete
+    #   the record from.
     #
     # @option params [required, String] :record_identifier_value_as_string
     #   The value for the `RecordIdentifier` that uniquely identifies the
@@ -495,7 +496,7 @@ module Aws::SageMakerFeatureStoreRuntime
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_record({
-    #     feature_group_name: "FeatureGroupName", # required
+    #     feature_group_name: "FeatureGroupNameOrArn", # required
     #     record_identifier_value_as_string: "ValueAsString", # required
     #     event_time: "ValueAsString", # required
     #     target_stores: ["OnlineStore"], # accepts OnlineStore, OfflineStore
@@ -517,8 +518,8 @@ module Aws::SageMakerFeatureStoreRuntime
     # returned.
     #
     # @option params [required, String] :feature_group_name
-    #   The name of the feature group from which you want to retrieve a
-    #   record.
+    #   The name or Amazon Resource Name (ARN) of the feature group from which
+    #   you want to retrieve a record.
     #
     # @option params [required, String] :record_identifier_value_as_string
     #   The value that corresponds to `RecordIdentifier` type and uniquely
@@ -530,8 +531,8 @@ module Aws::SageMakerFeatureStoreRuntime
     #
     # @option params [String] :expiration_time_response
     #   Parameter to request `ExpiresAt` in response. If `Enabled`,
-    #   `BatchGetRecord` will return the value of `ExpiresAt`, if it is not
-    #   null. If `Disabled` and null, `BatchGetRecord` will return null.
+    #   `GetRecord` will return the value of `ExpiresAt`, if it is not null.
+    #   If `Disabled` and null, `GetRecord` will return null.
     #
     # @return [Types::GetRecordResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -541,7 +542,7 @@ module Aws::SageMakerFeatureStoreRuntime
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_record({
-    #     feature_group_name: "FeatureGroupName", # required
+    #     feature_group_name: "FeatureGroupNameOrArn", # required
     #     record_identifier_value_as_string: "ValueAsString", # required
     #     feature_names: ["FeatureName"],
     #     expiration_time_response: "Enabled", # accepts Enabled, Disabled
@@ -563,14 +564,28 @@ module Aws::SageMakerFeatureStoreRuntime
       req.send_request(options)
     end
 
-    # Used for data ingestion into the `FeatureStore`. The `PutRecord` API
-    # writes to both the `OnlineStore` and `OfflineStore`. If the record is
-    # the latest record for the `recordIdentifier`, the record is written to
-    # both the `OnlineStore` and `OfflineStore`. If the record is a historic
-    # record, it is written only to the `OfflineStore`.
+    # The `PutRecord` API is used to ingest a list of `Records` into your
+    # feature group.
+    #
+    # If a new record’s `EventTime` is greater, the new record is written to
+    # both the `OnlineStore` and `OfflineStore`. Otherwise, the record is a
+    # historic record and it is written only to the `OfflineStore`.
+    #
+    # You can specify the ingestion to be applied to the `OnlineStore`,
+    # `OfflineStore`, or both by using the `TargetStores` request parameter.
+    #
+    # You can set the ingested record to expire at a given time to live
+    # (TTL) duration after the record’s event time, `ExpiresAt` =
+    # `EventTime` + `TtlDuration`, by specifying the `TtlDuration`
+    # parameter. A record level `TtlDuration` is set when specifying the
+    # `TtlDuration` parameter using the `PutRecord` API call. If the input
+    # `TtlDuration` is `null` or unspecified, `TtlDuration` is set to the
+    # default feature group level `TtlDuration`. A record level
+    # `TtlDuration` supersedes the group level `TtlDuration`.
     #
     # @option params [required, String] :feature_group_name
-    #   The name of the feature group that you want to insert the record into.
+    #   The name or Amazon Resource Name (ARN) of the feature group that you
+    #   want to insert the record into.
     #
     # @option params [required, Array<Types::FeatureValue>] :record
     #   List of FeatureValues to be inserted. This will be a full over-write.
@@ -603,7 +618,7 @@ module Aws::SageMakerFeatureStoreRuntime
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_record({
-    #     feature_group_name: "FeatureGroupName", # required
+    #     feature_group_name: "FeatureGroupNameOrArn", # required
     #     record: [ # required
     #       {
     #         feature_name: "FeatureName", # required
@@ -639,7 +654,7 @@ module Aws::SageMakerFeatureStoreRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemakerfeaturestoreruntime'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
