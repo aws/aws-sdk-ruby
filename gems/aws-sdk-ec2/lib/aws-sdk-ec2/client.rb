@@ -24387,6 +24387,8 @@ module Aws::EC2
     #   resp.instance_types[0].network_info.network_cards[0].network_card_index #=> Integer
     #   resp.instance_types[0].network_info.network_cards[0].network_performance #=> String
     #   resp.instance_types[0].network_info.network_cards[0].maximum_network_interfaces #=> Integer
+    #   resp.instance_types[0].network_info.network_cards[0].baseline_bandwidth_in_gbps #=> Float
+    #   resp.instance_types[0].network_info.network_cards[0].peak_bandwidth_in_gbps #=> Float
     #   resp.instance_types[0].network_info.ipv_4_addresses_per_interface #=> Integer
     #   resp.instance_types[0].network_info.ipv_6_addresses_per_interface #=> Integer
     #   resp.instance_types[0].network_info.ipv_6_supported #=> Boolean
@@ -24413,6 +24415,8 @@ module Aws::EC2
     #   resp.instance_types[0].inference_accelerator_info.accelerators[0].count #=> Integer
     #   resp.instance_types[0].inference_accelerator_info.accelerators[0].name #=> String
     #   resp.instance_types[0].inference_accelerator_info.accelerators[0].manufacturer #=> String
+    #   resp.instance_types[0].inference_accelerator_info.accelerators[0].memory_info.size_in_mi_b #=> Integer
+    #   resp.instance_types[0].inference_accelerator_info.total_inference_memory_in_mi_b #=> Integer
     #   resp.instance_types[0].hibernation_supported #=> Boolean
     #   resp.instance_types[0].burstable_performance_supported #=> Boolean
     #   resp.instance_types[0].dedicated_hosts_supported #=> Boolean
@@ -56509,7 +56513,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.393.0'
+      context[:gem_version] = '1.394.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

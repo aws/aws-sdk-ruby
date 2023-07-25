@@ -240,6 +240,10 @@ module Aws::ConnectWisdomService
     #   The description.
     #   @return [String]
     #
+    # @!attribute [rw] integration_configuration
+    #   The configuration information for the Wisdom assistant integration.
+    #   @return [Types::AssistantIntegrationConfiguration]
+    #
     # @!attribute [rw] name
     #   The name.
     #   @return [String]
@@ -267,11 +271,27 @@ module Aws::ConnectWisdomService
       :assistant_arn,
       :assistant_id,
       :description,
+      :integration_configuration,
       :name,
       :server_side_encryption_configuration,
       :status,
       :tags,
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration information for the Wisdom assistant integration.
+    #
+    # @!attribute [rw] topic_integration_arn
+    #   The Amazon Resource Name (ARN) of the integrated Amazon SNS topic
+    #   used for streaming chat messages.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/AssistantIntegrationConfiguration AWS API Documentation
+    #
+    class AssistantIntegrationConfiguration < Struct.new(
+      :topic_integration_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -289,6 +309,10 @@ module Aws::ConnectWisdomService
     # @!attribute [rw] description
     #   The description of the assistant.
     #   @return [String]
+    #
+    # @!attribute [rw] integration_configuration
+    #   The configuration information for the Wisdom assistant integration.
+    #   @return [Types::AssistantIntegrationConfiguration]
     #
     # @!attribute [rw] name
     #   The name of the assistant.
@@ -317,6 +341,7 @@ module Aws::ConnectWisdomService
       :assistant_arn,
       :assistant_id,
       :description,
+      :integration_configuration,
       :name,
       :server_side_encryption_configuration,
       :status,
@@ -2054,6 +2079,10 @@ module Aws::ConnectWisdomService
     #   The description of the session.
     #   @return [String]
     #
+    # @!attribute [rw] integration_configuration
+    #   The configuration information for the session integration.
+    #   @return [Types::SessionIntegrationConfiguration]
+    #
     # @!attribute [rw] name
     #   The name of the session.
     #   @return [String]
@@ -2075,10 +2104,26 @@ module Aws::ConnectWisdomService
     #
     class SessionData < Struct.new(
       :description,
+      :integration_configuration,
       :name,
       :session_arn,
       :session_id,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration information for the session integration.
+    #
+    # @!attribute [rw] topic_integration_arn
+    #   The Amazon Resource Name (ARN) of the integrated Amazon SNS topic
+    #   used for streaming chat messages.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/SessionIntegrationConfiguration AWS API Documentation
+    #
+    class SessionIntegrationConfiguration < Struct.new(
+      :topic_integration_arn)
       SENSITIVE = []
       include Aws::Structure
     end

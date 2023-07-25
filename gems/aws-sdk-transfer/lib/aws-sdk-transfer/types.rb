@@ -23,8 +23,8 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # Contains the details for a connector object. The connector object is
-    # used for AS2 outbound processes, to connect the Transfer Family
+    # Contains the details for an AS2 connector object. The connector object
+    # is used for AS2 outbound processes, to connect the Transfer Family
     # customer with the trading partner.
     #
     # @!attribute [rw] local_profile_id
@@ -445,11 +445,12 @@ module Aws::Transfer
     end
 
     # @!attribute [rw] url
-    #   The URL of the partner's AS2 endpoint.
+    #   The URL of the partner's AS2 or SFTP endpoint.
     #   @return [String]
     #
     # @!attribute [rw] as_2_config
-    #   A structure that contains the parameters for a connector object.
+    #   A structure that contains the parameters for an AS2 connector
+    #   object.
     #   @return [Types::As2ConnectorConfig]
     #
     # @!attribute [rw] access_role
@@ -486,6 +487,11 @@ module Aws::Transfer
     #   Tags are metadata attached to connectors for any purpose.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] sftp_config
+    #   A structure that contains the parameters for an SFTP connector
+    #   object.
+    #   @return [Types::SftpConnectorConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateConnectorRequest AWS API Documentation
     #
     class CreateConnectorRequest < Struct.new(
@@ -493,7 +499,8 @@ module Aws::Transfer
       :as_2_config,
       :access_role,
       :logging_role,
-      :tags)
+      :tags,
+      :sftp_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -931,7 +938,8 @@ module Aws::Transfer
     #   In most cases, you can use this value instead of the session policy
     #   to lock your user down to the designated home directory
     #   ("`chroot`"). To do this, you can set `Entry` to `/` and set
-    #   `Target` to the HomeDirectory parameter value.
+    #   `Target` to the value the user should see for their home directory
+    #   when they log in.
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
@@ -2050,11 +2058,12 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] url
-    #   The URL of the partner's AS2 endpoint.
+    #   The URL of the partner's AS2 or SFTP endpoint.
     #   @return [String]
     #
     # @!attribute [rw] as_2_config
-    #   A structure that contains the parameters for a connector object.
+    #   A structure that contains the parameters for an AS2 connector
+    #   object.
     #   @return [Types::As2ConnectorConfig]
     #
     # @!attribute [rw] access_role
@@ -2090,6 +2099,11 @@ module Aws::Transfer
     #   Key-value pairs that can be used to group and search for connectors.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] sftp_config
+    #   A structure that contains the parameters for an SFTP connector
+    #   object.
+    #   @return [Types::SftpConnectorConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedConnector AWS API Documentation
     #
     class DescribedConnector < Struct.new(
@@ -2099,7 +2113,8 @@ module Aws::Transfer
       :as_2_config,
       :access_role,
       :logging_role,
-      :tags)
+      :tags,
+      :sftp_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4018,7 +4033,7 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] url
-    #   The URL of the partner's AS2 endpoint.
+    #   The URL of the partner's AS2 or SFTP endpoint.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListedConnector AWS API Documentation
@@ -4702,6 +4717,44 @@ module Aws::Transfer
       include Aws::Structure
     end
 
+    # Contains the details for an SFTP connector object. The connector
+    # object is used for transferring files to and from a partner's SFTP
+    # server.
+    #
+    # @!attribute [rw] user_secret_id
+    #   The identifiers for the secrets (in Amazon Web Services Secrets
+    #   Manager) that contain the SFTP user's private keys or passwords.
+    #   @return [String]
+    #
+    # @!attribute [rw] trusted_host_keys
+    #   The public portion of the host key, or keys, that are used to
+    #   authenticate the user to the external server to which you are
+    #   connecting. You can use the `ssh-keyscan` command against the SFTP
+    #   server to retrieve the necessary key.
+    #
+    #   The three standard SSH public key format elements are `<key type>`,
+    #   `<body base64>`, and an optional `<comment>`, with spaces between
+    #   each element.
+    #
+    #   For the trusted host key, Transfer Family accepts RSA and ECDSA
+    #   keys.
+    #
+    #   * For RSA keys, the key type is `ssh-rsa`.
+    #
+    #   * For ECDSA keys, the key type is either `ecdsa-sha2-nistp256`,
+    #     `ecdsa-sha2-nistp384`, or `ecdsa-sha2-nistp521`, depending on the
+    #     size of the key you generated.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/SftpConnectorConfig AWS API Documentation
+    #
+    class SftpConnectorConfig < Struct.new(
+      :user_secret_id,
+      :trusted_host_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about the public Secure Shell (SSH) key that is
     # associated with a Transfer Family user for the specific file transfer
     # protocol-enabled server (as identified by `ServerId`). The information
@@ -4741,22 +4794,44 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] send_file_paths
-    #   An array of strings. Each string represents the absolute path for
-    #   one outbound file transfer. For example, `
-    #   DOC-EXAMPLE-BUCKET/myfile.txt `.
+    #   One or more source paths for the Transfer Family server. Each string
+    #   represents a source file path for one outbound file transfer. For
+    #   example, ` DOC-EXAMPLE-BUCKET/myfile.txt `.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] retrieve_file_paths
+    #   One or more source paths for the partner's SFTP server. Each string
+    #   represents a source file path for one inbound file transfer.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] local_directory_path
+    #   For an inbound transfer, the `LocaDirectoryPath` specifies the
+    #   destination for one or more files that are transferred from the
+    #   partner's SFTP server.
+    #   @return [String]
+    #
+    # @!attribute [rw] remote_directory_path
+    #   For an outbound transfer, the `RemoteDirectoryPath` specifies the
+    #   destination for one or more files that are transferred to the
+    #   partner's SFTP server. If you don't specify a
+    #   `RemoteDirectoryPath`, the destination for transferred files is the
+    #   SFTP user's home directory.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/StartFileTransferRequest AWS API Documentation
     #
     class StartFileTransferRequest < Struct.new(
       :connector_id,
-      :send_file_paths)
+      :send_file_paths,
+      :retrieve_file_paths,
+      :local_directory_path,
+      :remote_directory_path)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] transfer_id
-    #   Returns the unique identifier for this file transfer.
+    #   Returns the unique identifier for the file transfer.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/StartFileTransferResponse AWS API Documentation
@@ -4868,6 +4943,56 @@ module Aws::Transfer
       :name,
       :tags,
       :source_file_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_id
+    #   The unique identifier for the connector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/TestConnectionRequest AWS API Documentation
+    #
+    class TestConnectionRequest < Struct.new(
+      :connector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_id
+    #   Returns the identifier of the connector object that you are testing.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Returns `OK` for successful test, or `ERROR` if the test fails.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Returns `Connection succeeded` if the test is successful. Or,
+    #   returns a descriptive error message if the test fails. The following
+    #   list provides the details for some error messages and
+    #   troubleshooting steps for each.
+    #
+    #   * **Unable to access secrets manager**: Verify that your secret name
+    #     aligns with the one in Transfer Role permissions.
+    #
+    #   * **Unknown Host/Connection failed**: Verify the server URL in the
+    #     connector configuration , and verify that the login credentials
+    #     work successfully outside of the connector.
+    #
+    #   * **Private key not found**: Verify that the secret exists and is
+    #     formatted correctly.
+    #
+    #   * **Invalid trusted host keys**: Verify that the trusted host key in
+    #     the connector configuration matches the `ssh-keyscan` output.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/TestConnectionResponse AWS API Documentation
+    #
+    class TestConnectionResponse < Struct.new(
+      :connector_id,
+      :status,
+      :status_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5266,11 +5391,12 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] url
-    #   The URL of the partner's AS2 endpoint.
+    #   The URL of the partner's AS2 or SFTP endpoint.
     #   @return [String]
     #
     # @!attribute [rw] as_2_config
-    #   A structure that contains the parameters for a connector object.
+    #   A structure that contains the parameters for an AS2 connector
+    #   object.
     #   @return [Types::As2ConnectorConfig]
     #
     # @!attribute [rw] access_role
@@ -5302,6 +5428,11 @@ module Aws::Transfer
     #   CloudWatch logs.
     #   @return [String]
     #
+    # @!attribute [rw] sftp_config
+    #   A structure that contains the parameters for an SFTP connector
+    #   object.
+    #   @return [Types::SftpConnectorConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateConnectorRequest AWS API Documentation
     #
     class UpdateConnectorRequest < Struct.new(
@@ -5309,7 +5440,8 @@ module Aws::Transfer
       :url,
       :as_2_config,
       :access_role,
-      :logging_role)
+      :logging_role,
+      :sftp_config)
       SENSITIVE = []
       include Aws::Structure
     end

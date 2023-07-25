@@ -22,6 +22,13 @@ module Aws::DataSync
     AgentListEntry = Shapes::StructureShape.new(name: 'AgentListEntry')
     AgentStatus = Shapes::StringShape.new(name: 'AgentStatus')
     Atime = Shapes::StringShape.new(name: 'Atime')
+    AzureAccessTier = Shapes::StringShape.new(name: 'AzureAccessTier')
+    AzureBlobAuthenticationType = Shapes::StringShape.new(name: 'AzureBlobAuthenticationType')
+    AzureBlobContainerUrl = Shapes::StringShape.new(name: 'AzureBlobContainerUrl')
+    AzureBlobSasConfiguration = Shapes::StructureShape.new(name: 'AzureBlobSasConfiguration')
+    AzureBlobSasToken = Shapes::StringShape.new(name: 'AzureBlobSasToken')
+    AzureBlobSubdirectory = Shapes::StringShape.new(name: 'AzureBlobSubdirectory')
+    AzureBlobType = Shapes::StringShape.new(name: 'AzureBlobType')
     BytesPerSecond = Shapes::IntegerShape.new(name: 'BytesPerSecond')
     CancelTaskExecutionRequest = Shapes::StructureShape.new(name: 'CancelTaskExecutionRequest')
     CancelTaskExecutionResponse = Shapes::StructureShape.new(name: 'CancelTaskExecutionResponse')
@@ -29,6 +36,8 @@ module Aws::DataSync
     CollectionDurationMinutes = Shapes::IntegerShape.new(name: 'CollectionDurationMinutes')
     CreateAgentRequest = Shapes::StructureShape.new(name: 'CreateAgentRequest')
     CreateAgentResponse = Shapes::StructureShape.new(name: 'CreateAgentResponse')
+    CreateLocationAzureBlobRequest = Shapes::StructureShape.new(name: 'CreateLocationAzureBlobRequest')
+    CreateLocationAzureBlobResponse = Shapes::StructureShape.new(name: 'CreateLocationAzureBlobResponse')
     CreateLocationEfsRequest = Shapes::StructureShape.new(name: 'CreateLocationEfsRequest')
     CreateLocationEfsResponse = Shapes::StructureShape.new(name: 'CreateLocationEfsResponse')
     CreateLocationFsxLustreRequest = Shapes::StructureShape.new(name: 'CreateLocationFsxLustreRequest')
@@ -62,6 +71,8 @@ module Aws::DataSync
     DescribeAgentResponse = Shapes::StructureShape.new(name: 'DescribeAgentResponse')
     DescribeDiscoveryJobRequest = Shapes::StructureShape.new(name: 'DescribeDiscoveryJobRequest')
     DescribeDiscoveryJobResponse = Shapes::StructureShape.new(name: 'DescribeDiscoveryJobResponse')
+    DescribeLocationAzureBlobRequest = Shapes::StructureShape.new(name: 'DescribeLocationAzureBlobRequest')
+    DescribeLocationAzureBlobResponse = Shapes::StructureShape.new(name: 'DescribeLocationAzureBlobResponse')
     DescribeLocationEfsRequest = Shapes::StructureShape.new(name: 'DescribeLocationEfsRequest')
     DescribeLocationEfsResponse = Shapes::StructureShape.new(name: 'DescribeLocationEfsResponse')
     DescribeLocationFsxLustreRequest = Shapes::StructureShape.new(name: 'DescribeLocationFsxLustreRequest')
@@ -295,6 +306,8 @@ module Aws::DataSync
     UpdateAgentResponse = Shapes::StructureShape.new(name: 'UpdateAgentResponse')
     UpdateDiscoveryJobRequest = Shapes::StructureShape.new(name: 'UpdateDiscoveryJobRequest')
     UpdateDiscoveryJobResponse = Shapes::StructureShape.new(name: 'UpdateDiscoveryJobResponse')
+    UpdateLocationAzureBlobRequest = Shapes::StructureShape.new(name: 'UpdateLocationAzureBlobRequest')
+    UpdateLocationAzureBlobResponse = Shapes::StructureShape.new(name: 'UpdateLocationAzureBlobResponse')
     UpdateLocationHdfsRequest = Shapes::StructureShape.new(name: 'UpdateLocationHdfsRequest')
     UpdateLocationHdfsResponse = Shapes::StructureShape.new(name: 'UpdateLocationHdfsResponse')
     UpdateLocationNfsRequest = Shapes::StructureShape.new(name: 'UpdateLocationNfsRequest')
@@ -336,6 +349,9 @@ module Aws::DataSync
     AgentListEntry.add_member(:status, Shapes::ShapeRef.new(shape: AgentStatus, location_name: "Status"))
     AgentListEntry.struct_class = Types::AgentListEntry
 
+    AzureBlobSasConfiguration.add_member(:token, Shapes::ShapeRef.new(shape: AzureBlobSasToken, required: true, location_name: "Token"))
+    AzureBlobSasConfiguration.struct_class = Types::AzureBlobSasConfiguration
+
     CancelTaskExecutionRequest.add_member(:task_execution_arn, Shapes::ShapeRef.new(shape: TaskExecutionArn, required: true, location_name: "TaskExecutionArn"))
     CancelTaskExecutionRequest.struct_class = Types::CancelTaskExecutionRequest
 
@@ -356,6 +372,19 @@ module Aws::DataSync
 
     CreateAgentResponse.add_member(:agent_arn, Shapes::ShapeRef.new(shape: AgentArn, location_name: "AgentArn"))
     CreateAgentResponse.struct_class = Types::CreateAgentResponse
+
+    CreateLocationAzureBlobRequest.add_member(:container_url, Shapes::ShapeRef.new(shape: AzureBlobContainerUrl, required: true, location_name: "ContainerUrl"))
+    CreateLocationAzureBlobRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AzureBlobAuthenticationType, required: true, location_name: "AuthenticationType"))
+    CreateLocationAzureBlobRequest.add_member(:sas_configuration, Shapes::ShapeRef.new(shape: AzureBlobSasConfiguration, location_name: "SasConfiguration"))
+    CreateLocationAzureBlobRequest.add_member(:blob_type, Shapes::ShapeRef.new(shape: AzureBlobType, location_name: "BlobType"))
+    CreateLocationAzureBlobRequest.add_member(:access_tier, Shapes::ShapeRef.new(shape: AzureAccessTier, location_name: "AccessTier"))
+    CreateLocationAzureBlobRequest.add_member(:subdirectory, Shapes::ShapeRef.new(shape: AzureBlobSubdirectory, location_name: "Subdirectory"))
+    CreateLocationAzureBlobRequest.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, required: true, location_name: "AgentArns"))
+    CreateLocationAzureBlobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
+    CreateLocationAzureBlobRequest.struct_class = Types::CreateLocationAzureBlobRequest
+
+    CreateLocationAzureBlobResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
+    CreateLocationAzureBlobResponse.struct_class = Types::CreateLocationAzureBlobResponse
 
     CreateLocationEfsRequest.add_member(:subdirectory, Shapes::ShapeRef.new(shape: EfsSubdirectory, location_name: "Subdirectory"))
     CreateLocationEfsRequest.add_member(:efs_filesystem_arn, Shapes::ShapeRef.new(shape: EfsFilesystemArn, required: true, location_name: "EfsFilesystemArn"))
@@ -532,6 +561,18 @@ module Aws::DataSync
     DescribeDiscoveryJobResponse.add_member(:job_start_time, Shapes::ShapeRef.new(shape: DiscoveryTime, location_name: "JobStartTime"))
     DescribeDiscoveryJobResponse.add_member(:job_end_time, Shapes::ShapeRef.new(shape: DiscoveryTime, location_name: "JobEndTime"))
     DescribeDiscoveryJobResponse.struct_class = Types::DescribeDiscoveryJobResponse
+
+    DescribeLocationAzureBlobRequest.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "LocationArn"))
+    DescribeLocationAzureBlobRequest.struct_class = Types::DescribeLocationAzureBlobRequest
+
+    DescribeLocationAzureBlobResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
+    DescribeLocationAzureBlobResponse.add_member(:location_uri, Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
+    DescribeLocationAzureBlobResponse.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AzureBlobAuthenticationType, location_name: "AuthenticationType"))
+    DescribeLocationAzureBlobResponse.add_member(:blob_type, Shapes::ShapeRef.new(shape: AzureBlobType, location_name: "BlobType"))
+    DescribeLocationAzureBlobResponse.add_member(:access_tier, Shapes::ShapeRef.new(shape: AzureAccessTier, location_name: "AccessTier"))
+    DescribeLocationAzureBlobResponse.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
+    DescribeLocationAzureBlobResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
+    DescribeLocationAzureBlobResponse.struct_class = Types::DescribeLocationAzureBlobResponse
 
     DescribeLocationEfsRequest.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "LocationArn"))
     DescribeLocationEfsRequest.struct_class = Types::DescribeLocationEfsRequest
@@ -1134,6 +1175,17 @@ module Aws::DataSync
 
     UpdateDiscoveryJobResponse.struct_class = Types::UpdateDiscoveryJobResponse
 
+    UpdateLocationAzureBlobRequest.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "LocationArn"))
+    UpdateLocationAzureBlobRequest.add_member(:subdirectory, Shapes::ShapeRef.new(shape: AzureBlobSubdirectory, location_name: "Subdirectory"))
+    UpdateLocationAzureBlobRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AzureBlobAuthenticationType, location_name: "AuthenticationType"))
+    UpdateLocationAzureBlobRequest.add_member(:sas_configuration, Shapes::ShapeRef.new(shape: AzureBlobSasConfiguration, location_name: "SasConfiguration"))
+    UpdateLocationAzureBlobRequest.add_member(:blob_type, Shapes::ShapeRef.new(shape: AzureBlobType, location_name: "BlobType"))
+    UpdateLocationAzureBlobRequest.add_member(:access_tier, Shapes::ShapeRef.new(shape: AzureAccessTier, location_name: "AccessTier"))
+    UpdateLocationAzureBlobRequest.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
+    UpdateLocationAzureBlobRequest.struct_class = Types::UpdateLocationAzureBlobRequest
+
+    UpdateLocationAzureBlobResponse.struct_class = Types::UpdateLocationAzureBlobResponse
+
     UpdateLocationHdfsRequest.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "LocationArn"))
     UpdateLocationHdfsRequest.add_member(:subdirectory, Shapes::ShapeRef.new(shape: HdfsSubdirectory, location_name: "Subdirectory"))
     UpdateLocationHdfsRequest.add_member(:name_nodes, Shapes::ShapeRef.new(shape: HdfsNameNodeList, location_name: "NameNodes"))
@@ -1258,6 +1310,16 @@ module Aws::DataSync
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateAgentRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateAgentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:create_location_azure_blob, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLocationAzureBlob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateLocationAzureBlobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateLocationAzureBlobResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
@@ -1421,6 +1483,16 @@ module Aws::DataSync
         }
         o.input = Shapes::ShapeRef.new(shape: DescribeDiscoveryJobRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeDiscoveryJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:describe_location_azure_blob, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeLocationAzureBlob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeLocationAzureBlobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeLocationAzureBlobResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
@@ -1815,6 +1887,16 @@ module Aws::DataSync
         }
         o.input = Shapes::ShapeRef.new(shape: UpdateDiscoveryJobRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDiscoveryJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:update_location_azure_blob, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateLocationAzureBlob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateLocationAzureBlobRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateLocationAzureBlobResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)

@@ -571,7 +571,8 @@ module Aws::BillingConductor
     #
     # @option params [required, Types::AccountGrouping] :account_grouping
     #   The set of accounts that will be under the billing group. The set of
-    #   accounts resemble the linked accounts in a consolidated family.
+    #   accounts resemble the linked accounts in a consolidated billing
+    #   family.
     #
     # @option params [required, Types::ComputationPreference] :computation_preference
     #   The preferences and settings that will be used to compute the Amazon
@@ -598,6 +599,7 @@ module Aws::BillingConductor
     #     name: "BillingGroupName", # required
     #     account_grouping: { # required
     #       linked_account_ids: ["AccountId"], # required
+    #       auto_associate: false,
     #     },
     #     computation_preference: { # required
     #       pricing_plan_arn: "PricingPlanFullArn", # required
@@ -1199,6 +1201,7 @@ module Aws::BillingConductor
     #       arns: ["BillingGroupArn"],
     #       pricing_plan: "PricingPlanFullArn",
     #       statuses: ["ACTIVE"], # accepts ACTIVE, PRIMARY_ACCOUNT_MISSING
+    #       auto_associate: false,
     #     },
     #   })
     #
@@ -1215,6 +1218,7 @@ module Aws::BillingConductor
     #   resp.billing_groups[0].last_modified_time #=> Integer
     #   resp.billing_groups[0].status #=> String, one of "ACTIVE", "PRIMARY_ACCOUNT_MISSING"
     #   resp.billing_groups[0].status_reason #=> String
+    #   resp.billing_groups[0].account_grouping.auto_associate #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListBillingGroups AWS API Documentation
@@ -1747,6 +1751,10 @@ module Aws::BillingConductor
     # @option params [String] :description
     #   A description of the billing group.
     #
+    # @option params [Types::UpdateBillingGroupAccountGrouping] :account_grouping
+    #   Specifies if the billing group has automatic account association
+    #   (`AutoAssociate`) enabled.
+    #
     # @return [Types::UpdateBillingGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateBillingGroupOutput#arn #arn} => String
@@ -1758,6 +1766,7 @@ module Aws::BillingConductor
     #   * {Types::UpdateBillingGroupOutput#last_modified_time #last_modified_time} => Integer
     #   * {Types::UpdateBillingGroupOutput#status #status} => String
     #   * {Types::UpdateBillingGroupOutput#status_reason #status_reason} => String
+    #   * {Types::UpdateBillingGroupOutput#account_grouping #account_grouping} => Types::UpdateBillingGroupAccountGrouping
     #
     # @example Request syntax with placeholder values
     #
@@ -1769,6 +1778,9 @@ module Aws::BillingConductor
     #       pricing_plan_arn: "PricingPlanFullArn", # required
     #     },
     #     description: "BillingGroupDescription",
+    #     account_grouping: {
+    #       auto_associate: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -1782,6 +1794,7 @@ module Aws::BillingConductor
     #   resp.last_modified_time #=> Integer
     #   resp.status #=> String, one of "ACTIVE", "PRIMARY_ACCOUNT_MISSING"
     #   resp.status_reason #=> String
+    #   resp.account_grouping.auto_associate #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/UpdateBillingGroup AWS API Documentation
     #
@@ -1999,7 +2012,7 @@ module Aws::BillingConductor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-billingconductor'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -8086,6 +8086,10 @@ module Aws::RDS
     #   read replica.
     #   @return [String]
     #
+    # @!attribute [rw] percent_progress
+    #   The progress of the storage optimization operation as a percentage.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
     #
     class DBInstance < Struct.new(
@@ -8169,7 +8173,8 @@ module Aws::RDS
       :db_system_id,
       :master_user_secret,
       :certificate_details,
-      :read_replica_source_db_cluster_identifier)
+      :read_replica_source_db_cluster_identifier,
+      :percent_progress)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15870,7 +15875,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] ca_certificate_identifier
-    #   The CA certificate identifier to use for the DB instance6's server
+    #   The CA certificate identifier to use for the DB instance's server
     #   certificate.
     #
     #   This setting doesn't apply to RDS Custom DB instances.
@@ -17005,8 +17010,8 @@ module Aws::RDS
     end
 
     # @!attribute [rw] global_cluster_identifier
-    #   The DB cluster identifier for the global cluster being modified.
-    #   This parameter isn't case-sensitive.
+    #   The cluster identifier for the global cluster to modify. This
+    #   parameter isn't case-sensitive.
     #
     #   Constraints:
     #
@@ -17016,32 +17021,29 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] new_global_cluster_identifier
-    #   The new cluster identifier for the global database cluster when
-    #   modifying a global database cluster. This value is stored as a
-    #   lowercase string.
+    #   The new cluster identifier for the global database cluster. This
+    #   value is stored as a lowercase string.
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 letters, numbers, or hyphens
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens.
     #
-    #   * The first character must be a letter
+    #   * The first character must be a letter.
     #
-    #   * Can't end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `my-cluster2`
     #   @return [String]
     #
     # @!attribute [rw] deletion_protection
-    #   Indicates if the global database cluster has deletion protection
-    #   enabled. The global database cluster can't be deleted when deletion
-    #   protection is enabled.
+    #   Specifies whether to enable deletion protection for the global
+    #   database cluster. The global database cluster can't be deleted when
+    #   deletion protection is enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] engine_version
     #   The version number of the database engine to which you want to
-    #   upgrade. Changing this parameter results in an outage. The change is
-    #   applied during the next maintenance window unless `ApplyImmediately`
-    #   is enabled.
+    #   upgrade.
     #
     #   To list all of the available engine versions for `aurora-mysql` (for
     #   MySQL-based Aurora global databases), use the following command:
@@ -17059,11 +17061,11 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] allow_major_version_upgrade
-    #   A value that indicates whether major version upgrades are allowed.
+    #   Specifies whether to allow major version upgrades.
     #
-    #   Constraints: You must allow major version upgrades when specifying a
-    #   value for the `EngineVersion` parameter that is a different major
-    #   version than the DB cluster's current version.
+    #   Constraints: Must be enabled if you specify a value for the
+    #   `EngineVersion` parameter that's a different major version than the
+    #   global cluster's current version.
     #
     #   If you upgrade the major version of a global database, the cluster
     #   and DB instance parameter groups are set to the default parameter

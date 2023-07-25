@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.187.0 (2023-07-25)
+------------------
+
+* Feature - This release adds support for monitoring storage optimization progress on the DescribeDBInstances API.
+
 1.186.0 (2023-07-21)
 ------------------
 

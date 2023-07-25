@@ -37157,13 +37157,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] content_column
     #   The name of the column used to provide the sentences to be
-    #   classified. It should not be the same as the target column
-    #   (Required).
+    #   classified. It should not be the same as the target column.
     #   @return [String]
     #
     # @!attribute [rw] target_label_column
     #   The name of the column used to provide the class labels. It should
-    #   not be same as the content column (Required).
+    #   not be same as the content column.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TextClassificationJobConfig AWS API Documentation

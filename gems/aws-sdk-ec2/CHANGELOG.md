@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.394.0 (2023-07-25)
+------------------
+
+* Feature - This release adds an instance's peak and baseline network bandwidth as well as the memory sizes of an instance's inference accelerators to DescribeInstanceTypes.
+
 1.393.0 (2023-07-24)
 ------------------
 

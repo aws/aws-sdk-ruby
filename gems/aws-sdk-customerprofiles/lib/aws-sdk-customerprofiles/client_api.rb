@@ -18,6 +18,7 @@ module Aws::CustomerProfiles
     AddProfileKeyResponse = Shapes::StructureShape.new(name: 'AddProfileKeyResponse')
     AdditionalSearchKey = Shapes::StructureShape.new(name: 'AdditionalSearchKey')
     Address = Shapes::StructureShape.new(name: 'Address')
+    AddressList = Shapes::ListShape.new(name: 'AddressList')
     AppflowIntegration = Shapes::StructureShape.new(name: 'AppflowIntegration')
     AppflowIntegrationWorkflowAttributes = Shapes::StructureShape.new(name: 'AppflowIntegrationWorkflowAttributes')
     AppflowIntegrationWorkflowMetrics = Shapes::StructureShape.new(name: 'AppflowIntegrationWorkflowMetrics')
@@ -25,7 +26,9 @@ module Aws::CustomerProfiles
     AttributeDetails = Shapes::StructureShape.new(name: 'AttributeDetails')
     AttributeItem = Shapes::StructureShape.new(name: 'AttributeItem')
     AttributeList = Shapes::ListShape.new(name: 'AttributeList')
+    AttributeMatchingModel = Shapes::StringShape.new(name: 'AttributeMatchingModel')
     AttributeSourceIdMap = Shapes::MapShape.new(name: 'AttributeSourceIdMap')
+    AttributeTypesSelector = Shapes::StructureShape.new(name: 'AttributeTypesSelector')
     Attributes = Shapes::MapShape.new(name: 'Attributes')
     AutoMerging = Shapes::StructureShape.new(name: 'AutoMerging')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
@@ -78,6 +81,7 @@ module Aws::CustomerProfiles
     DomainStats = Shapes::StructureShape.new(name: 'DomainStats')
     Double = Shapes::FloatShape.new(name: 'Double')
     Double0To1 = Shapes::FloatShape.new(name: 'Double0To1')
+    EmailList = Shapes::ListShape.new(name: 'EmailList')
     EventStreamDestinationDetails = Shapes::StructureShape.new(name: 'EventStreamDestinationDetails')
     EventStreamDestinationStatus = Shapes::StringShape.new(name: 'EventStreamDestinationStatus')
     EventStreamState = Shapes::StringShape.new(name: 'EventStreamState')
@@ -114,6 +118,8 @@ module Aws::CustomerProfiles
     GetProfileObjectTypeResponse = Shapes::StructureShape.new(name: 'GetProfileObjectTypeResponse')
     GetProfileObjectTypeTemplateRequest = Shapes::StructureShape.new(name: 'GetProfileObjectTypeTemplateRequest')
     GetProfileObjectTypeTemplateResponse = Shapes::StructureShape.new(name: 'GetProfileObjectTypeTemplateResponse')
+    GetSimilarProfilesRequest = Shapes::StructureShape.new(name: 'GetSimilarProfilesRequest')
+    GetSimilarProfilesResponse = Shapes::StructureShape.new(name: 'GetSimilarProfilesResponse')
     GetWorkflowRequest = Shapes::StructureShape.new(name: 'GetWorkflowRequest')
     GetWorkflowResponse = Shapes::StructureShape.new(name: 'GetWorkflowResponse')
     GetWorkflowStepsRequest = Shapes::StructureShape.new(name: 'GetWorkflowStepsRequest')
@@ -158,6 +164,8 @@ module Aws::CustomerProfiles
     ListProfileObjectsItem = Shapes::StructureShape.new(name: 'ListProfileObjectsItem')
     ListProfileObjectsRequest = Shapes::StructureShape.new(name: 'ListProfileObjectsRequest')
     ListProfileObjectsResponse = Shapes::StructureShape.new(name: 'ListProfileObjectsResponse')
+    ListRuleBasedMatchesRequest = Shapes::StructureShape.new(name: 'ListRuleBasedMatchesRequest')
+    ListRuleBasedMatchesResponse = Shapes::StructureShape.new(name: 'ListRuleBasedMatchesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListWorkflowsItem = Shapes::StructureShape.new(name: 'ListWorkflowsItem')
@@ -165,12 +173,19 @@ module Aws::CustomerProfiles
     ListWorkflowsResponse = Shapes::StructureShape.new(name: 'ListWorkflowsResponse')
     MarketoConnectorOperator = Shapes::StringShape.new(name: 'MarketoConnectorOperator')
     MarketoSourceProperties = Shapes::StructureShape.new(name: 'MarketoSourceProperties')
+    MatchIdList = Shapes::ListShape.new(name: 'MatchIdList')
     MatchItem = Shapes::StructureShape.new(name: 'MatchItem')
+    MatchType = Shapes::StringShape.new(name: 'MatchType')
     MatchesList = Shapes::ListShape.new(name: 'MatchesList')
     MatchingAttributes = Shapes::ListShape.new(name: 'MatchingAttributes')
     MatchingAttributesList = Shapes::ListShape.new(name: 'MatchingAttributesList')
     MatchingRequest = Shapes::StructureShape.new(name: 'MatchingRequest')
     MatchingResponse = Shapes::StructureShape.new(name: 'MatchingResponse')
+    MatchingRule = Shapes::StructureShape.new(name: 'MatchingRule')
+    MatchingRuleAttributeList = Shapes::ListShape.new(name: 'MatchingRuleAttributeList')
+    MatchingRules = Shapes::ListShape.new(name: 'MatchingRules')
+    MaxAllowedRuleLevelForMatching = Shapes::IntegerShape.new(name: 'MaxAllowedRuleLevelForMatching')
+    MaxAllowedRuleLevelForMerging = Shapes::IntegerShape.new(name: 'MaxAllowedRuleLevelForMerging')
     MergeProfilesRequest = Shapes::StructureShape.new(name: 'MergeProfilesRequest')
     MergeProfilesResponse = Shapes::StructureShape.new(name: 'MergeProfilesResponse')
     Object = Shapes::StringShape.new(name: 'Object')
@@ -183,6 +198,7 @@ module Aws::CustomerProfiles
     Operator = Shapes::StringShape.new(name: 'Operator')
     OperatorPropertiesKeys = Shapes::StringShape.new(name: 'OperatorPropertiesKeys')
     PartyType = Shapes::StringShape.new(name: 'PartyType')
+    PhoneNumberList = Shapes::ListShape.new(name: 'PhoneNumberList')
     Profile = Shapes::StructureShape.new(name: 'Profile')
     ProfileIdList = Shapes::ListShape.new(name: 'ProfileIdList')
     ProfileIdToBeMergedList = Shapes::ListShape.new(name: 'ProfileIdToBeMergedList')
@@ -200,6 +216,10 @@ module Aws::CustomerProfiles
     Range = Shapes::StructureShape.new(name: 'Range')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    RuleBasedMatchingRequest = Shapes::StructureShape.new(name: 'RuleBasedMatchingRequest')
+    RuleBasedMatchingResponse = Shapes::StructureShape.new(name: 'RuleBasedMatchingResponse')
+    RuleBasedMatchingStatus = Shapes::StringShape.new(name: 'RuleBasedMatchingStatus')
+    RuleLevel = Shapes::IntegerShape.new(name: 'RuleLevel')
     S3ConnectorOperator = Shapes::StringShape.new(name: 'S3ConnectorOperator')
     S3ExportingConfig = Shapes::StructureShape.new(name: 'S3ExportingConfig')
     S3ExportingLocation = Shapes::StructureShape.new(name: 'S3ExportingLocation')
@@ -318,6 +338,8 @@ module Aws::CustomerProfiles
     Address.add_member(:postal_code, Shapes::ShapeRef.new(shape: string1To255, location_name: "PostalCode"))
     Address.struct_class = Types::Address
 
+    AddressList.member = Shapes::ShapeRef.new(shape: string1To255)
+
     AppflowIntegration.add_member(:flow_definition, Shapes::ShapeRef.new(shape: FlowDefinition, required: true, location_name: "FlowDefinition"))
     AppflowIntegration.add_member(:batches, Shapes::ShapeRef.new(shape: Batches, location_name: "Batches"))
     AppflowIntegration.struct_class = Types::AppflowIntegration
@@ -353,6 +375,12 @@ module Aws::CustomerProfiles
 
     AttributeSourceIdMap.key = Shapes::ShapeRef.new(shape: string1To255)
     AttributeSourceIdMap.value = Shapes::ShapeRef.new(shape: uuid)
+
+    AttributeTypesSelector.add_member(:attribute_matching_model, Shapes::ShapeRef.new(shape: AttributeMatchingModel, required: true, location_name: "AttributeMatchingModel"))
+    AttributeTypesSelector.add_member(:address, Shapes::ShapeRef.new(shape: AddressList, location_name: "Address"))
+    AttributeTypesSelector.add_member(:phone_number, Shapes::ShapeRef.new(shape: PhoneNumberList, location_name: "PhoneNumber"))
+    AttributeTypesSelector.add_member(:email_address, Shapes::ShapeRef.new(shape: EmailList, location_name: "EmailAddress"))
+    AttributeTypesSelector.struct_class = Types::AttributeTypesSelector
 
     Attributes.key = Shapes::ShapeRef.new(shape: string1To255)
     Attributes.value = Shapes::ShapeRef.new(shape: string1To255)
@@ -421,6 +449,7 @@ module Aws::CustomerProfiles
     CreateDomainRequest.add_member(:default_encryption_key, Shapes::ShapeRef.new(shape: encryptionKey, location_name: "DefaultEncryptionKey"))
     CreateDomainRequest.add_member(:dead_letter_queue_url, Shapes::ShapeRef.new(shape: sqsQueueUrl, location_name: "DeadLetterQueueUrl"))
     CreateDomainRequest.add_member(:matching, Shapes::ShapeRef.new(shape: MatchingRequest, location_name: "Matching"))
+    CreateDomainRequest.add_member(:rule_based_matching, Shapes::ShapeRef.new(shape: RuleBasedMatchingRequest, location_name: "RuleBasedMatching"))
     CreateDomainRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateDomainRequest.struct_class = Types::CreateDomainRequest
 
@@ -429,6 +458,7 @@ module Aws::CustomerProfiles
     CreateDomainResponse.add_member(:default_encryption_key, Shapes::ShapeRef.new(shape: encryptionKey, location_name: "DefaultEncryptionKey"))
     CreateDomainResponse.add_member(:dead_letter_queue_url, Shapes::ShapeRef.new(shape: sqsQueueUrl, location_name: "DeadLetterQueueUrl"))
     CreateDomainResponse.add_member(:matching, Shapes::ShapeRef.new(shape: MatchingResponse, location_name: "Matching"))
+    CreateDomainResponse.add_member(:rule_based_matching, Shapes::ShapeRef.new(shape: RuleBasedMatchingResponse, location_name: "RuleBasedMatching"))
     CreateDomainResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "CreatedAt"))
     CreateDomainResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastUpdatedAt"))
     CreateDomainResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -561,6 +591,8 @@ module Aws::CustomerProfiles
     DomainStats.add_member(:total_size, Shapes::ShapeRef.new(shape: long, location_name: "TotalSize"))
     DomainStats.struct_class = Types::DomainStats
 
+    EmailList.member = Shapes::ShapeRef.new(shape: string1To255)
+
     EventStreamDestinationDetails.add_member(:uri, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "Uri"))
     EventStreamDestinationDetails.add_member(:status, Shapes::ShapeRef.new(shape: EventStreamDestinationStatus, required: true, location_name: "Status"))
     EventStreamDestinationDetails.add_member(:unhealthy_since, Shapes::ShapeRef.new(shape: timestamp, location_name: "UnhealthySince"))
@@ -671,6 +703,7 @@ module Aws::CustomerProfiles
     GetDomainResponse.add_member(:dead_letter_queue_url, Shapes::ShapeRef.new(shape: sqsQueueUrl, location_name: "DeadLetterQueueUrl"))
     GetDomainResponse.add_member(:stats, Shapes::ShapeRef.new(shape: DomainStats, location_name: "Stats"))
     GetDomainResponse.add_member(:matching, Shapes::ShapeRef.new(shape: MatchingResponse, location_name: "Matching"))
+    GetDomainResponse.add_member(:rule_based_matching, Shapes::ShapeRef.new(shape: RuleBasedMatchingResponse, location_name: "RuleBasedMatching"))
     GetDomainResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "CreatedAt"))
     GetDomainResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastUpdatedAt"))
     GetDomainResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -761,6 +794,22 @@ module Aws::CustomerProfiles
     GetProfileObjectTypeTemplateResponse.add_member(:fields, Shapes::ShapeRef.new(shape: FieldMap, location_name: "Fields"))
     GetProfileObjectTypeTemplateResponse.add_member(:keys, Shapes::ShapeRef.new(shape: KeyMap, location_name: "Keys"))
     GetProfileObjectTypeTemplateResponse.struct_class = Types::GetProfileObjectTypeTemplateResponse
+
+    GetSimilarProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location: "querystring", location_name: "next-token"))
+    GetSimilarProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxSize100, location: "querystring", location_name: "max-results"))
+    GetSimilarProfilesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    GetSimilarProfilesRequest.add_member(:match_type, Shapes::ShapeRef.new(shape: MatchType, required: true, location_name: "MatchType"))
+    GetSimilarProfilesRequest.add_member(:search_key, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "SearchKey"))
+    GetSimilarProfilesRequest.add_member(:search_value, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "SearchValue"))
+    GetSimilarProfilesRequest.struct_class = Types::GetSimilarProfilesRequest
+
+    GetSimilarProfilesResponse.add_member(:profile_ids, Shapes::ShapeRef.new(shape: ProfileIdList, location_name: "ProfileIds"))
+    GetSimilarProfilesResponse.add_member(:match_id, Shapes::ShapeRef.new(shape: string1To255, location_name: "MatchId"))
+    GetSimilarProfilesResponse.add_member(:match_type, Shapes::ShapeRef.new(shape: MatchType, location_name: "MatchType"))
+    GetSimilarProfilesResponse.add_member(:rule_level, Shapes::ShapeRef.new(shape: RuleLevel, location_name: "RuleLevel"))
+    GetSimilarProfilesResponse.add_member(:confidence_score, Shapes::ShapeRef.new(shape: Double, location_name: "ConfidenceScore"))
+    GetSimilarProfilesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location_name: "NextToken"))
+    GetSimilarProfilesResponse.struct_class = Types::GetSimilarProfilesResponse
 
     GetWorkflowRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     GetWorkflowRequest.add_member(:workflow_id, Shapes::ShapeRef.new(shape: uuid, required: true, location: "uri", location_name: "WorkflowId"))
@@ -965,6 +1014,15 @@ module Aws::CustomerProfiles
     ListProfileObjectsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location_name: "NextToken"))
     ListProfileObjectsResponse.struct_class = Types::ListProfileObjectsResponse
 
+    ListRuleBasedMatchesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location: "querystring", location_name: "next-token"))
+    ListRuleBasedMatchesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxSize100, location: "querystring", location_name: "max-results"))
+    ListRuleBasedMatchesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    ListRuleBasedMatchesRequest.struct_class = Types::ListRuleBasedMatchesRequest
+
+    ListRuleBasedMatchesResponse.add_member(:match_ids, Shapes::ShapeRef.new(shape: MatchIdList, location_name: "MatchIds"))
+    ListRuleBasedMatchesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location_name: "NextToken"))
+    ListRuleBasedMatchesResponse.struct_class = Types::ListRuleBasedMatchesResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TagArn, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -995,6 +1053,8 @@ module Aws::CustomerProfiles
     MarketoSourceProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "Object"))
     MarketoSourceProperties.struct_class = Types::MarketoSourceProperties
 
+    MatchIdList.member = Shapes::ShapeRef.new(shape: string1To255)
+
     MatchItem.add_member(:match_id, Shapes::ShapeRef.new(shape: string1To255, location_name: "MatchId"))
     MatchItem.add_member(:profile_ids, Shapes::ShapeRef.new(shape: ProfileIdList, location_name: "ProfileIds"))
     MatchItem.add_member(:confidence_score, Shapes::ShapeRef.new(shape: Double, location_name: "ConfidenceScore"))
@@ -1017,6 +1077,13 @@ module Aws::CustomerProfiles
     MatchingResponse.add_member(:auto_merging, Shapes::ShapeRef.new(shape: AutoMerging, location_name: "AutoMerging"))
     MatchingResponse.add_member(:exporting_config, Shapes::ShapeRef.new(shape: ExportingConfig, location_name: "ExportingConfig"))
     MatchingResponse.struct_class = Types::MatchingResponse
+
+    MatchingRule.add_member(:rule, Shapes::ShapeRef.new(shape: MatchingRuleAttributeList, required: true, location_name: "Rule"))
+    MatchingRule.struct_class = Types::MatchingRule
+
+    MatchingRuleAttributeList.member = Shapes::ShapeRef.new(shape: string1To255)
+
+    MatchingRules.member = Shapes::ShapeRef.new(shape: MatchingRule)
 
     MergeProfilesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     MergeProfilesRequest.add_member(:main_profile_id, Shapes::ShapeRef.new(shape: uuid, required: true, location_name: "MainProfileId"))
@@ -1044,6 +1111,8 @@ module Aws::CustomerProfiles
 
     ObjectTypeNames.key = Shapes::ShapeRef.new(shape: string1To255)
     ObjectTypeNames.value = Shapes::ShapeRef.new(shape: typeName)
+
+    PhoneNumberList.member = Shapes::ShapeRef.new(shape: string1To255)
 
     Profile.add_member(:profile_id, Shapes::ShapeRef.new(shape: uuid, location_name: "ProfileId"))
     Profile.add_member(:account_number, Shapes::ShapeRef.new(shape: string1To255, location_name: "AccountNumber"))
@@ -1144,6 +1213,25 @@ module Aws::CustomerProfiles
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: message, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    RuleBasedMatchingRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: optionalBoolean, required: true, location_name: "Enabled"))
+    RuleBasedMatchingRequest.add_member(:matching_rules, Shapes::ShapeRef.new(shape: MatchingRules, location_name: "MatchingRules"))
+    RuleBasedMatchingRequest.add_member(:max_allowed_rule_level_for_merging, Shapes::ShapeRef.new(shape: MaxAllowedRuleLevelForMerging, location_name: "MaxAllowedRuleLevelForMerging"))
+    RuleBasedMatchingRequest.add_member(:max_allowed_rule_level_for_matching, Shapes::ShapeRef.new(shape: MaxAllowedRuleLevelForMatching, location_name: "MaxAllowedRuleLevelForMatching"))
+    RuleBasedMatchingRequest.add_member(:attribute_types_selector, Shapes::ShapeRef.new(shape: AttributeTypesSelector, location_name: "AttributeTypesSelector"))
+    RuleBasedMatchingRequest.add_member(:conflict_resolution, Shapes::ShapeRef.new(shape: ConflictResolution, location_name: "ConflictResolution"))
+    RuleBasedMatchingRequest.add_member(:exporting_config, Shapes::ShapeRef.new(shape: ExportingConfig, location_name: "ExportingConfig"))
+    RuleBasedMatchingRequest.struct_class = Types::RuleBasedMatchingRequest
+
+    RuleBasedMatchingResponse.add_member(:enabled, Shapes::ShapeRef.new(shape: optionalBoolean, location_name: "Enabled"))
+    RuleBasedMatchingResponse.add_member(:matching_rules, Shapes::ShapeRef.new(shape: MatchingRules, location_name: "MatchingRules"))
+    RuleBasedMatchingResponse.add_member(:status, Shapes::ShapeRef.new(shape: RuleBasedMatchingStatus, location_name: "Status"))
+    RuleBasedMatchingResponse.add_member(:max_allowed_rule_level_for_merging, Shapes::ShapeRef.new(shape: MaxAllowedRuleLevelForMerging, location_name: "MaxAllowedRuleLevelForMerging"))
+    RuleBasedMatchingResponse.add_member(:max_allowed_rule_level_for_matching, Shapes::ShapeRef.new(shape: MaxAllowedRuleLevelForMatching, location_name: "MaxAllowedRuleLevelForMatching"))
+    RuleBasedMatchingResponse.add_member(:attribute_types_selector, Shapes::ShapeRef.new(shape: AttributeTypesSelector, location_name: "AttributeTypesSelector"))
+    RuleBasedMatchingResponse.add_member(:conflict_resolution, Shapes::ShapeRef.new(shape: ConflictResolution, location_name: "ConflictResolution"))
+    RuleBasedMatchingResponse.add_member(:exporting_config, Shapes::ShapeRef.new(shape: ExportingConfig, location_name: "ExportingConfig"))
+    RuleBasedMatchingResponse.struct_class = Types::RuleBasedMatchingResponse
 
     S3ExportingConfig.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: s3BucketName, required: true, location_name: "S3BucketName"))
     S3ExportingConfig.add_member(:s3_key_name, Shapes::ShapeRef.new(shape: s3KeyNameCustomerOutputConfig, location_name: "S3KeyName"))
@@ -1285,6 +1373,7 @@ module Aws::CustomerProfiles
     UpdateDomainRequest.add_member(:default_encryption_key, Shapes::ShapeRef.new(shape: encryptionKey, location_name: "DefaultEncryptionKey"))
     UpdateDomainRequest.add_member(:dead_letter_queue_url, Shapes::ShapeRef.new(shape: sqsQueueUrl, location_name: "DeadLetterQueueUrl"))
     UpdateDomainRequest.add_member(:matching, Shapes::ShapeRef.new(shape: MatchingRequest, location_name: "Matching"))
+    UpdateDomainRequest.add_member(:rule_based_matching, Shapes::ShapeRef.new(shape: RuleBasedMatchingRequest, location_name: "RuleBasedMatching"))
     UpdateDomainRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     UpdateDomainRequest.struct_class = Types::UpdateDomainRequest
 
@@ -1293,6 +1382,7 @@ module Aws::CustomerProfiles
     UpdateDomainResponse.add_member(:default_encryption_key, Shapes::ShapeRef.new(shape: encryptionKey, location_name: "DefaultEncryptionKey"))
     UpdateDomainResponse.add_member(:dead_letter_queue_url, Shapes::ShapeRef.new(shape: sqsQueueUrl, location_name: "DeadLetterQueueUrl"))
     UpdateDomainResponse.add_member(:matching, Shapes::ShapeRef.new(shape: MatchingResponse, location_name: "Matching"))
+    UpdateDomainResponse.add_member(:rule_based_matching, Shapes::ShapeRef.new(shape: RuleBasedMatchingResponse, location_name: "RuleBasedMatching"))
     UpdateDomainResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "CreatedAt"))
     UpdateDomainResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastUpdatedAt"))
     UpdateDomainResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -1694,6 +1784,19 @@ module Aws::CustomerProfiles
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:get_similar_profiles, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSimilarProfiles"
+        o.http_method = "POST"
+        o.http_request_uri = "/domains/{DomainName}/matches"
+        o.input = Shapes::ShapeRef.new(shape: GetSimilarProfilesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSimilarProfilesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_workflow, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetWorkflow"
         o.http_method = "GET"
@@ -1849,6 +1952,19 @@ module Aws::CustomerProfiles
         o.http_request_uri = "/domains/{DomainName}/profiles/objects"
         o.input = Shapes::ShapeRef.new(shape: ListProfileObjectsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListProfileObjectsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:list_rule_based_matches, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRuleBasedMatches"
+        o.http_method = "GET"
+        o.http_request_uri = "/domains/{DomainName}/profiles/ruleBasedMatches"
+        o.input = Shapes::ShapeRef.new(shape: ListRuleBasedMatchesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRuleBasedMatchesResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

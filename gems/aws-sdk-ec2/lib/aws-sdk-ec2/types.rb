@@ -36642,10 +36642,16 @@ module Aws::EC2
     #   Describes the Inference accelerators for the instance type.
     #   @return [Array<Types::InferenceDeviceInfo>]
     #
+    # @!attribute [rw] total_inference_memory_in_mi_b
+    #   The total size of the memory for the inference accelerators for the
+    #   instance type, in MiB.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InferenceAcceleratorInfo AWS API Documentation
     #
     class InferenceAcceleratorInfo < Struct.new(
-      :accelerators)
+      :accelerators,
+      :total_inference_memory_in_mi_b)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -36664,12 +36670,32 @@ module Aws::EC2
     #   The manufacturer of the Inference accelerator.
     #   @return [String]
     #
+    # @!attribute [rw] memory_info
+    #   Describes the memory available to the inference accelerator.
+    #   @return [Types::InferenceDeviceMemoryInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InferenceDeviceInfo AWS API Documentation
     #
     class InferenceDeviceInfo < Struct.new(
       :count,
       :name,
-      :manufacturer)
+      :manufacturer,
+      :memory_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the memory available to the inference accelerator.
+    #
+    # @!attribute [rw] size_in_mi_b
+    #   The size of the memory available to the inference accelerator, in
+    #   MiB.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InferenceDeviceMemoryInfo AWS API Documentation
+    #
+    class InferenceDeviceMemoryInfo < Struct.new(
+      :size_in_mi_b)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -48540,12 +48566,22 @@ module Aws::EC2
     #   The maximum number of network interfaces for the network card.
     #   @return [Integer]
     #
+    # @!attribute [rw] baseline_bandwidth_in_gbps
+    #   The baseline network performance of the network card, in Gbps.
+    #   @return [Float]
+    #
+    # @!attribute [rw] peak_bandwidth_in_gbps
+    #   The peak (burst) network performance of the network card, in Gbps.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkCardInfo AWS API Documentation
     #
     class NetworkCardInfo < Struct.new(
       :network_card_index,
       :network_performance,
-      :maximum_network_interfaces)
+      :maximum_network_interfaces,
+      :baseline_bandwidth_in_gbps,
+      :peak_bandwidth_in_gbps)
       SENSITIVE = []
       include Aws::Structure
     end

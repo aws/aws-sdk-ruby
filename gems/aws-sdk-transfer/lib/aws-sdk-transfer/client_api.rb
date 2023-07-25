@@ -236,6 +236,7 @@ module Aws::Transfer
     S3Tags = Shapes::ListShape.new(name: 'S3Tags')
     S3VersionId = Shapes::StringShape.new(name: 'S3VersionId')
     SecondaryGids = Shapes::ListShape.new(name: 'SecondaryGids')
+    SecretId = Shapes::StringShape.new(name: 'SecretId')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     SecurityPolicyName = Shapes::StringShape.new(name: 'SecurityPolicyName')
@@ -251,6 +252,9 @@ module Aws::Transfer
     SessionId = Shapes::StringShape.new(name: 'SessionId')
     SetStatOption = Shapes::StringShape.new(name: 'SetStatOption')
     SftpAuthenticationMethods = Shapes::StringShape.new(name: 'SftpAuthenticationMethods')
+    SftpConnectorConfig = Shapes::StructureShape.new(name: 'SftpConnectorConfig')
+    SftpConnectorTrustedHostKey = Shapes::StringShape.new(name: 'SftpConnectorTrustedHostKey')
+    SftpConnectorTrustedHostKeyList = Shapes::ListShape.new(name: 'SftpConnectorTrustedHostKeyList')
     SigningAlg = Shapes::StringShape.new(name: 'SigningAlg')
     SourceFileLocation = Shapes::StringShape.new(name: 'SourceFileLocation')
     SourceIp = Shapes::StringShape.new(name: 'SourceIp')
@@ -263,6 +267,7 @@ module Aws::Transfer
     StartFileTransferResponse = Shapes::StructureShape.new(name: 'StartFileTransferResponse')
     StartServerRequest = Shapes::StructureShape.new(name: 'StartServerRequest')
     State = Shapes::StringShape.new(name: 'State')
+    Status = Shapes::StringShape.new(name: 'Status')
     StatusCode = Shapes::IntegerShape.new(name: 'StatusCode')
     StepResultOutputsJson = Shapes::StringShape.new(name: 'StepResultOutputsJson')
     StopServerRequest = Shapes::StructureShape.new(name: 'StopServerRequest')
@@ -276,6 +281,8 @@ module Aws::Transfer
     TagStepDetails = Shapes::StructureShape.new(name: 'TagStepDetails')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::ListShape.new(name: 'Tags')
+    TestConnectionRequest = Shapes::StructureShape.new(name: 'TestConnectionRequest')
+    TestConnectionResponse = Shapes::StructureShape.new(name: 'TestConnectionResponse')
     TestIdentityProviderRequest = Shapes::StructureShape.new(name: 'TestIdentityProviderRequest')
     TestIdentityProviderResponse = Shapes::StructureShape.new(name: 'TestIdentityProviderResponse')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
@@ -371,10 +378,11 @@ module Aws::Transfer
     CreateAgreementResponse.struct_class = Types::CreateAgreementResponse
 
     CreateConnectorRequest.add_member(:url, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "Url"))
-    CreateConnectorRequest.add_member(:as_2_config, Shapes::ShapeRef.new(shape: As2ConnectorConfig, required: true, location_name: "As2Config"))
+    CreateConnectorRequest.add_member(:as_2_config, Shapes::ShapeRef.new(shape: As2ConnectorConfig, location_name: "As2Config"))
     CreateConnectorRequest.add_member(:access_role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "AccessRole"))
     CreateConnectorRequest.add_member(:logging_role, Shapes::ShapeRef.new(shape: Role, location_name: "LoggingRole"))
     CreateConnectorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateConnectorRequest.add_member(:sftp_config, Shapes::ShapeRef.new(shape: SftpConnectorConfig, location_name: "SftpConfig"))
     CreateConnectorRequest.struct_class = Types::CreateConnectorRequest
 
     CreateConnectorResponse.add_member(:connector_id, Shapes::ShapeRef.new(shape: ConnectorId, required: true, location_name: "ConnectorId"))
@@ -606,6 +614,7 @@ module Aws::Transfer
     DescribedConnector.add_member(:access_role, Shapes::ShapeRef.new(shape: Role, location_name: "AccessRole"))
     DescribedConnector.add_member(:logging_role, Shapes::ShapeRef.new(shape: Role, location_name: "LoggingRole"))
     DescribedConnector.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    DescribedConnector.add_member(:sftp_config, Shapes::ShapeRef.new(shape: SftpConnectorConfig, location_name: "SftpConfig"))
     DescribedConnector.struct_class = Types::DescribedConnector
 
     DescribedExecution.add_member(:execution_id, Shapes::ShapeRef.new(shape: ExecutionId, location_name: "ExecutionId"))
@@ -1046,6 +1055,12 @@ module Aws::Transfer
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ServiceErrorMessage, location_name: "Message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
+    SftpConnectorConfig.add_member(:user_secret_id, Shapes::ShapeRef.new(shape: SecretId, location_name: "UserSecretId"))
+    SftpConnectorConfig.add_member(:trusted_host_keys, Shapes::ShapeRef.new(shape: SftpConnectorTrustedHostKeyList, location_name: "TrustedHostKeys"))
+    SftpConnectorConfig.struct_class = Types::SftpConnectorConfig
+
+    SftpConnectorTrustedHostKeyList.member = Shapes::ShapeRef.new(shape: SftpConnectorTrustedHostKey)
+
     SshPublicKey.add_member(:date_imported, Shapes::ShapeRef.new(shape: DateImported, required: true, location_name: "DateImported"))
     SshPublicKey.add_member(:ssh_public_key_body, Shapes::ShapeRef.new(shape: SshPublicKeyBody, required: true, location_name: "SshPublicKeyBody"))
     SshPublicKey.add_member(:ssh_public_key_id, Shapes::ShapeRef.new(shape: SshPublicKeyId, required: true, location_name: "SshPublicKeyId"))
@@ -1054,7 +1069,10 @@ module Aws::Transfer
     SshPublicKeys.member = Shapes::ShapeRef.new(shape: SshPublicKey)
 
     StartFileTransferRequest.add_member(:connector_id, Shapes::ShapeRef.new(shape: ConnectorId, required: true, location_name: "ConnectorId"))
-    StartFileTransferRequest.add_member(:send_file_paths, Shapes::ShapeRef.new(shape: FilePaths, required: true, location_name: "SendFilePaths"))
+    StartFileTransferRequest.add_member(:send_file_paths, Shapes::ShapeRef.new(shape: FilePaths, location_name: "SendFilePaths"))
+    StartFileTransferRequest.add_member(:retrieve_file_paths, Shapes::ShapeRef.new(shape: FilePaths, location_name: "RetrieveFilePaths"))
+    StartFileTransferRequest.add_member(:local_directory_path, Shapes::ShapeRef.new(shape: FilePath, location_name: "LocalDirectoryPath"))
+    StartFileTransferRequest.add_member(:remote_directory_path, Shapes::ShapeRef.new(shape: FilePath, location_name: "RemoteDirectoryPath"))
     StartFileTransferRequest.struct_class = Types::StartFileTransferRequest
 
     StartFileTransferResponse.add_member(:transfer_id, Shapes::ShapeRef.new(shape: TransferId, required: true, location_name: "TransferId"))
@@ -1086,6 +1104,14 @@ module Aws::Transfer
     TagStepDetails.struct_class = Types::TagStepDetails
 
     Tags.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TestConnectionRequest.add_member(:connector_id, Shapes::ShapeRef.new(shape: ConnectorId, required: true, location_name: "ConnectorId"))
+    TestConnectionRequest.struct_class = Types::TestConnectionRequest
+
+    TestConnectionResponse.add_member(:connector_id, Shapes::ShapeRef.new(shape: ConnectorId, location_name: "ConnectorId"))
+    TestConnectionResponse.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
+    TestConnectionResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: Message, location_name: "StatusMessage"))
+    TestConnectionResponse.struct_class = Types::TestConnectionResponse
 
     TestIdentityProviderRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
     TestIdentityProviderRequest.add_member(:server_protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "ServerProtocol"))
@@ -1148,6 +1174,7 @@ module Aws::Transfer
     UpdateConnectorRequest.add_member(:as_2_config, Shapes::ShapeRef.new(shape: As2ConnectorConfig, location_name: "As2Config"))
     UpdateConnectorRequest.add_member(:access_role, Shapes::ShapeRef.new(shape: Role, location_name: "AccessRole"))
     UpdateConnectorRequest.add_member(:logging_role, Shapes::ShapeRef.new(shape: Role, location_name: "LoggingRole"))
+    UpdateConnectorRequest.add_member(:sftp_config, Shapes::ShapeRef.new(shape: SftpConnectorConfig, location_name: "SftpConfig"))
     UpdateConnectorRequest.struct_class = Types::UpdateConnectorRequest
 
     UpdateConnectorResponse.add_member(:connector_id, Shapes::ShapeRef.new(shape: ConnectorId, required: true, location_name: "ConnectorId"))
@@ -1914,6 +1941,18 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:test_connection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TestConnection"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TestConnectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: TestConnectionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)

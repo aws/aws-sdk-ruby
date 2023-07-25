@@ -766,6 +766,9 @@ module Aws::STS
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html
     #
+    # @option params [Array<Types::ProvidedContext>] :provided_contexts
+    #   Reserved for future use.
+    #
     # @return [Types::AssumeRoleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AssumeRoleResponse#credentials #credentials} => Types::Credentials
@@ -839,6 +842,12 @@ module Aws::STS
     #     serial_number: "serialNumberType",
     #     token_code: "tokenCodeType",
     #     source_identity: "sourceIdentityType",
+    #     provided_contexts: [
+    #       {
+    #         provider_arn: "arnType",
+    #         context_assertion: "contextAssertionType",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1401,7 +1410,8 @@ module Aws::STS
     #   by the identity provider. Your application must get this token by
     #   authenticating the user who is using your application with a web
     #   identity provider before the application makes an
-    #   `AssumeRoleWithWebIdentity` call.
+    #   `AssumeRoleWithWebIdentity` call. Only tokens with RSA algorithms
+    #   (RS256) are supported.
     #
     # @option params [String] :provider_id
     #   The fully qualified host component of the domain name of the OAuth 2.0
@@ -2334,7 +2344,7 @@ module Aws::STS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.179.0'
+      context[:gem_version] = '3.180.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

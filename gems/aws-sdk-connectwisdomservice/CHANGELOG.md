@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2023-07-25)
+------------------
+
+* Feature - This release added two new data types: AssistantIntegrationConfiguration, and SessionIntegrationConfiguration to support Wisdom integration with Amazon Connect Chat
+
 1.18.0 (2023-07-11)
 ------------------
 

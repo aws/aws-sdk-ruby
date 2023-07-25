@@ -8371,8 +8371,8 @@ module Aws::SageMaker
     TensorBoardOutputConfig.struct_class = Types::TensorBoardOutputConfig
 
     TextClassificationJobConfig.add_member(:completion_criteria, Shapes::ShapeRef.new(shape: AutoMLJobCompletionCriteria, location_name: "CompletionCriteria"))
-    TextClassificationJobConfig.add_member(:content_column, Shapes::ShapeRef.new(shape: ContentColumn, location_name: "ContentColumn"))
-    TextClassificationJobConfig.add_member(:target_label_column, Shapes::ShapeRef.new(shape: TargetLabelColumn, location_name: "TargetLabelColumn"))
+    TextClassificationJobConfig.add_member(:content_column, Shapes::ShapeRef.new(shape: ContentColumn, required: true, location_name: "ContentColumn"))
+    TextClassificationJobConfig.add_member(:target_label_column, Shapes::ShapeRef.new(shape: TargetLabelColumn, required: true, location_name: "TargetLabelColumn"))
     TextClassificationJobConfig.struct_class = Types::TextClassificationJobConfig
 
     TimeSeriesConfig.add_member(:target_attribute_name, Shapes::ShapeRef.new(shape: TargetAttributeName, required: true, location_name: "TargetAttributeName"))

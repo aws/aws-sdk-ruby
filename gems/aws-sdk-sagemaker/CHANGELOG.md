@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.199.0 (2023-07-25)
+------------------
+
+* Feature - Mark ContentColumn and TargetLabelColumn as required Targets in TextClassificationJobConfig in CreateAutoMLJobV2API
+
 1.198.0 (2023-07-20)
 ------------------
 

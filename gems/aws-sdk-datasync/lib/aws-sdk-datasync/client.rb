@@ -417,7 +417,7 @@ module Aws::DataSync
     # @option params [required, Array<String>] :agent_arns
     #   Specifies the Amazon Resource Name (ARN) of the DataSync agent that
     #   connects to and reads from your on-premises storage system's
-    #   management interface.
+    #   management interface. You can only specify one ARN.
     #
     # @option params [String] :cloud_watch_log_group_arn
     #   Specifies the ARN of the Amazon CloudWatch log group for monitoring
@@ -565,7 +565,8 @@ module Aws::DataSync
     # @option params [Array<String>] :subnet_arns
     #   Specifies the ARN of the subnet where you want to run your DataSync
     #   task when using a VPC endpoint. This is the subnet where DataSync
-    #   creates and manages the [network interfaces][1] for your transfer.
+    #   creates and manages the [network interfaces][1] for your transfer. You
+    #   can only specify one ARN.
     #
     #
     #
@@ -574,7 +575,7 @@ module Aws::DataSync
     # @option params [Array<String>] :security_group_arns
     #   Specifies the Amazon Resource Name (ARN) of the security group that
     #   protects your task's [network interfaces][1] when [using a virtual
-    #   private cloud (VPC) endpoint][2].
+    #   private cloud (VPC) endpoint][2]. You can only specify one ARN.
     #
     #
     #
@@ -611,6 +612,110 @@ module Aws::DataSync
     # @param [Hash] params ({})
     def create_agent(params = {}, options = {})
       req = build_request(:create_agent, params)
+      req.send_request(options)
+    end
+
+    # Creates an endpoint for a Microsoft Azure Blob Storage container that
+    # DataSync can use as a transfer source or destination.
+    #
+    # Before you begin, make sure you know [how DataSync accesses Azure Blob
+    # Storage][1] and works with [access tiers][2] and [blob types][3]. You
+    # also need a [DataSync agent][4] that can connect to your container.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-access
+    # [2]: https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-access-tiers
+    # [3]: https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#blob-types
+    # [4]: https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-creating-agent
+    #
+    # @option params [required, String] :container_url
+    #   Specifies the URL of the Azure Blob Storage container involved in your
+    #   transfer.
+    #
+    # @option params [required, String] :authentication_type
+    #   Specifies the authentication method DataSync uses to access your Azure
+    #   Blob Storage. DataSync can access blob storage using a shared access
+    #   signature (SAS).
+    #
+    # @option params [Types::AzureBlobSasConfiguration] :sas_configuration
+    #   Specifies the SAS configuration that allows DataSync to access your
+    #   Azure Blob Storage.
+    #
+    # @option params [String] :blob_type
+    #   Specifies the type of blob that you want your objects or files to be
+    #   when transferring them into Azure Blob Storage. Currently, DataSync
+    #   only supports moving data into Azure Blob Storage as block blobs. For
+    #   more information on blob types, see the [Azure Blob Storage
+    #   documentation][1].
+    #
+    #
+    #
+    #   [1]: https://learn.microsoft.com/en-us/rest/api/storageservices/understanding-block-blobs--append-blobs--and-page-blobs
+    #
+    # @option params [String] :access_tier
+    #   Specifies the access tier that you want your objects or files
+    #   transferred into. This only applies when using the location as a
+    #   transfer destination. For more information, see [Access tiers][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-access-tiers
+    #
+    # @option params [String] :subdirectory
+    #   Specifies path segments if you want to limit your transfer to a
+    #   virtual directory in your container (for example, `/my/images`).
+    #
+    # @option params [required, Array<String>] :agent_arns
+    #   Specifies the Amazon Resource Name (ARN) of the DataSync agent that
+    #   can connect with your Azure Blob Storage container.
+    #
+    #   You can specify more than one agent. For more information, see [Using
+    #   multiple agents for your transfer][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/multiple-agents.html
+    #
+    # @option params [Array<Types::TagListEntry>] :tags
+    #   Specifies labels that help you categorize, filter, and search for your
+    #   Amazon Web Services resources. We recommend creating at least a name
+    #   tag for your transfer location.
+    #
+    # @return [Types::CreateLocationAzureBlobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLocationAzureBlobResponse#location_arn #location_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_location_azure_blob({
+    #     container_url: "AzureBlobContainerUrl", # required
+    #     authentication_type: "SAS", # required, accepts SAS
+    #     sas_configuration: {
+    #       token: "AzureBlobSasToken", # required
+    #     },
+    #     blob_type: "BLOCK", # accepts BLOCK
+    #     access_tier: "HOT", # accepts HOT, COOL, ARCHIVE
+    #     subdirectory: "AzureBlobSubdirectory",
+    #     agent_arns: ["AgentArn"], # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.location_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationAzureBlob AWS API Documentation
+    #
+    # @overload create_location_azure_blob(params = {})
+    # @param [Hash] params ({})
+    def create_location_azure_blob(params = {}, options = {})
+      req = build_request(:create_location_azure_blob, params)
       req.send_request(options)
     end
 
@@ -1151,15 +1256,14 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Defines a file system on a Network File System (NFS) server that can
-    # be read from or written to.
+    # Creates an endpoint for an Network File System (NFS) file server that
+    # DataSync can use for a data transfer.
     #
     # @option params [required, String] :subdirectory
-    #   The subdirectory in the NFS file system that is used to read data from
-    #   the NFS source location or write data to the NFS destination. The NFS
-    #   path should be a path that's exported by the NFS server, or a
-    #   subdirectory of that path. The path should be such that it can be
-    #   mounted by other NFS clients in your network.
+    #   Specifies the subdirectory in the NFS file server that DataSync
+    #   transfers to or from. The NFS path should be a path that's exported
+    #   by the NFS server, or a subdirectory of that path. The path should be
+    #   such that it can be mounted by other NFS clients in your network.
     #
     #   To see all the paths exported by your NFS server, run "`showmount -e
     #   nfs-server-name`" from an NFS client that has access to your server.
@@ -1178,24 +1282,20 @@ module Aws::DataSync
     #   If you are copying data to or from your Snowcone device, see [NFS
     #   Server on Snowcone][1] for more information.
     #
-    #   For information about NFS export configuration, see 18.7. The
-    #   /etc/exports Configuration File in the Red Hat Enterprise Linux
-    #   documentation.
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone
     #
     # @option params [required, String] :server_hostname
-    #   The name of the NFS server. This value is the IP address or Domain
-    #   Name Service (DNS) name of the NFS server. An agent that is installed
-    #   on-premises uses this hostname to mount the NFS server in a network.
+    #   Specifies the IP address or domain name of your NFS file server. An
+    #   agent that is installed on-premises uses this hostname to mount the
+    #   NFS server in a network.
     #
     #   If you are copying data to or from your Snowcone device, see [NFS
     #   Server on Snowcone][1] for more information.
     #
-    #   <note markdown="1"> This name must either be DNS-compliant or must be an IP version 4
-    #   (IPv4) address.
+    #   <note markdown="1"> You must specify be an IP version 4 address or Domain Name System
+    #   (DNS)-compliant name.
     #
     #    </note>
     #
@@ -1204,8 +1304,8 @@ module Aws::DataSync
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone
     #
     # @option params [required, Types::OnPremConfig] :on_prem_config
-    #   Contains a list of Amazon Resource Names (ARNs) of agents that are
-    #   used to connect to an NFS server.
+    #   Specifies the Amazon Resource Names (ARNs) of agents that DataSync
+    #   uses to connect to your NFS file server.
     #
     #   If you are copying data to or from your Snowcone device, see [NFS
     #   Server on Snowcone][1] for more information.
@@ -1215,12 +1315,13 @@ module Aws::DataSync
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone
     #
     # @option params [Types::NfsMountOptions] :mount_options
-    #   The NFS mount options that DataSync can use to mount your NFS share.
+    #   Specifies the mount options that DataSync can use to mount your NFS
+    #   share.
     #
     # @option params [Array<Types::TagListEntry>] :tags
-    #   The key-value pair that represents the tag that you want to add to the
-    #   location. The value can be an empty string. We recommend using tags to
-    #   name your resources.
+    #   Specifies labels that help you categorize, filter, and search for your
+    #   Amazon Web Services resources. We recommend creating at least a name
+    #   tag for your location.
     #
     # @return [Types::CreateLocationNfsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1464,8 +1565,10 @@ module Aws::DataSync
     end
 
     # Creates an endpoint for a Server Message Block (SMB) file server that
-    # DataSync can access for a transfer. For more information, see
-    # [Creating an SMB location][1].
+    # DataSync can use for a data transfer.
+    #
+    # Before you begin, make sure that you understand how DataSync [accesses
+    # an SMB file server][1].
     #
     #
     #
@@ -1873,6 +1976,49 @@ module Aws::DataSync
     # @param [Hash] params ({})
     def describe_discovery_job(params = {}, options = {})
       req = build_request(:describe_discovery_job, params)
+      req.send_request(options)
+    end
+
+    # Provides details about how an DataSync transfer location for Microsoft
+    # Azure Blob Storage is configured.
+    #
+    # @option params [required, String] :location_arn
+    #   Specifies the Amazon Resource Name (ARN) of your Azure Blob Storage
+    #   transfer location.
+    #
+    # @return [Types::DescribeLocationAzureBlobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeLocationAzureBlobResponse#location_arn #location_arn} => String
+    #   * {Types::DescribeLocationAzureBlobResponse#location_uri #location_uri} => String
+    #   * {Types::DescribeLocationAzureBlobResponse#authentication_type #authentication_type} => String
+    #   * {Types::DescribeLocationAzureBlobResponse#blob_type #blob_type} => String
+    #   * {Types::DescribeLocationAzureBlobResponse#access_tier #access_tier} => String
+    #   * {Types::DescribeLocationAzureBlobResponse#agent_arns #agent_arns} => Array&lt;String&gt;
+    #   * {Types::DescribeLocationAzureBlobResponse#creation_time #creation_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_location_azure_blob({
+    #     location_arn: "LocationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.location_arn #=> String
+    #   resp.location_uri #=> String
+    #   resp.authentication_type #=> String, one of "SAS"
+    #   resp.blob_type #=> String, one of "BLOCK"
+    #   resp.access_tier #=> String, one of "HOT", "COOL", "ARCHIVE"
+    #   resp.agent_arns #=> Array
+    #   resp.agent_arns[0] #=> String
+    #   resp.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationAzureBlob AWS API Documentation
+    #
+    # @overload describe_location_azure_blob(params = {})
+    # @param [Hash] params ({})
+    def describe_location_azure_blob(params = {}, options = {})
+      req = build_request(:describe_location_azure_blob, params)
       req.send_request(options)
     end
 
@@ -2600,10 +2746,10 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Returns metadata about a task.
+    # Provides information about an DataSync transfer task.
     #
     # @option params [required, String] :task_arn
-    #   The Amazon Resource Name (ARN) of the task to describe.
+    #   Specifies the Amazon Resource Name (ARN) of the transfer task.
     #
     # @return [Types::DescribeTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2678,10 +2824,11 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Returns detailed metadata about a task that is being executed.
+    # Provides information about an DataSync transfer task that's running.
     #
     # @option params [required, String] :task_execution_arn
-    #   The Amazon Resource Name (ARN) of the task that is being executed.
+    #   Specifies the Amazon Resource Name (ARN) of the transfer task that's
+    #   running.
     #
     # @return [Types::DescribeTaskExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3502,6 +3649,82 @@ module Aws::DataSync
       req.send_request(options)
     end
 
+    # Modifies some configurations of the Microsoft Azure Blob Storage
+    # transfer location that you're using with DataSync.
+    #
+    # @option params [required, String] :location_arn
+    #   Specifies the ARN of the Azure Blob Storage transfer location that
+    #   you're updating.
+    #
+    # @option params [String] :subdirectory
+    #   Specifies path segments if you want to limit your transfer to a
+    #   virtual directory in your container (for example, `/my/images`).
+    #
+    # @option params [String] :authentication_type
+    #   Specifies the authentication method DataSync uses to access your Azure
+    #   Blob Storage. DataSync can access blob storage using a shared access
+    #   signature (SAS).
+    #
+    # @option params [Types::AzureBlobSasConfiguration] :sas_configuration
+    #   Specifies the SAS configuration that allows DataSync to access your
+    #   Azure Blob Storage.
+    #
+    # @option params [String] :blob_type
+    #   Specifies the type of blob that you want your objects or files to be
+    #   when transferring them into Azure Blob Storage. Currently, DataSync
+    #   only supports moving data into Azure Blob Storage as block blobs. For
+    #   more information on blob types, see the [Azure Blob Storage
+    #   documentation][1].
+    #
+    #
+    #
+    #   [1]: https://learn.microsoft.com/en-us/rest/api/storageservices/understanding-block-blobs--append-blobs--and-page-blobs
+    #
+    # @option params [String] :access_tier
+    #   Specifies the access tier that you want your objects or files
+    #   transferred into. This only applies when using the location as a
+    #   transfer destination. For more information, see [Access tiers][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-access-tiers
+    #
+    # @option params [Array<String>] :agent_arns
+    #   Specifies the Amazon Resource Name (ARN) of the DataSync agent that
+    #   can connect with your Azure Blob Storage container.
+    #
+    #   You can specify more than one agent. For more information, see [Using
+    #   multiple agents for your transfer][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/multiple-agents.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_location_azure_blob({
+    #     location_arn: "LocationArn", # required
+    #     subdirectory: "AzureBlobSubdirectory",
+    #     authentication_type: "SAS", # accepts SAS
+    #     sas_configuration: {
+    #       token: "AzureBlobSasToken", # required
+    #     },
+    #     blob_type: "BLOCK", # accepts BLOCK
+    #     access_tier: "HOT", # accepts HOT, COOL, ARCHIVE
+    #     agent_arns: ["AgentArn"],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateLocationAzureBlob AWS API Documentation
+    #
+    # @overload update_location_azure_blob(params = {})
+    # @param [Hash] params ({})
+    def update_location_azure_blob(params = {}, options = {})
+      req = build_request(:update_location_azure_blob, params)
+      req.send_request(options)
+    end
+
     # Updates some parameters of a previously created location for a Hadoop
     # Distributed File System cluster.
     #
@@ -3606,14 +3829,15 @@ module Aws::DataSync
     # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html
     #
     # @option params [required, String] :location_arn
-    #   The Amazon Resource Name (ARN) of the NFS location to update.
+    #   Specifies the Amazon Resource Name (ARN) of the NFS location that you
+    #   want to update.
     #
     # @option params [String] :subdirectory
-    #   The subdirectory in the NFS file system that is used to read data from
-    #   the NFS source location or write data to the NFS destination. The NFS
-    #   path should be a path that's exported by the NFS server, or a
-    #   subdirectory of that path. The path should be such that it can be
-    #   mounted by other NFS clients in your network.
+    #   Specifies the subdirectory in your NFS file system that DataSync uses
+    #   to read from or write to during a transfer. The NFS path should be
+    #   exported by the NFS server, or a subdirectory of that path. The path
+    #   should be such that it can be mounted by other NFS clients in your
+    #   network.
     #
     #   To see all the paths exported by your NFS server, run "`showmount -e
     #   nfs-server-name`" from an NFS client that has access to your server.
@@ -3631,10 +3855,6 @@ module Aws::DataSync
     #
     #   If you are copying data to or from your Snowcone device, see [NFS
     #   Server on Snowcone][1] for more information.
-    #
-    #   For information about NFS export configuration, see 18.7. The
-    #   /etc/exports Configuration File in the Red Hat Enterprise Linux
-    #   documentation.
     #
     #
     #
@@ -3841,7 +4061,8 @@ module Aws::DataSync
     #
     # @option params [Array<String>] :agent_arns
     #   Specifies the Amazon Resource Name (ARN) of the DataSync agent that
-    #   connects to and reads your on-premises storage system.
+    #   connects to and reads your on-premises storage system. You can only
+    #   specify one ARN.
     #
     # @option params [String] :name
     #   Specifies a familiar name for your on-premises storage system.
@@ -4053,7 +4274,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -607,6 +607,15 @@ module Aws::CustomerProfiles
     #
     #   [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
     #
+    # @option params [Types::RuleBasedMatchingRequest] :rule_based_matching
+    #   The process of matching duplicate profiles using the Rule-Based
+    #   matching. If `RuleBasedMatching` = true, Amazon Connect Customer
+    #   Profiles will start to match and merge your profiles according to your
+    #   configuration in the `RuleBasedMatchingRequest`. You can use the
+    #   `ListRuleBasedMatches` and `GetSimilarProfiles` API to return and
+    #   review the results. Also, if you have configured `ExportingConfig` in
+    #   the `RuleBasedMatchingRequest`, you can download the results from S3.
+    #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
     #
@@ -617,6 +626,7 @@ module Aws::CustomerProfiles
     #   * {Types::CreateDomainResponse#default_encryption_key #default_encryption_key} => String
     #   * {Types::CreateDomainResponse#dead_letter_queue_url #dead_letter_queue_url} => String
     #   * {Types::CreateDomainResponse#matching #matching} => Types::MatchingResponse
+    #   * {Types::CreateDomainResponse#rule_based_matching #rule_based_matching} => Types::RuleBasedMatchingResponse
     #   * {Types::CreateDomainResponse#created_at #created_at} => Time
     #   * {Types::CreateDomainResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::CreateDomainResponse#tags #tags} => Hash&lt;String,String&gt;
@@ -654,6 +664,32 @@ module Aws::CustomerProfiles
     #         },
     #       },
     #     },
+    #     rule_based_matching: {
+    #       enabled: false, # required
+    #       matching_rules: [
+    #         {
+    #           rule: ["string1To255"], # required
+    #         },
+    #       ],
+    #       max_allowed_rule_level_for_merging: 1,
+    #       max_allowed_rule_level_for_matching: 1,
+    #       attribute_types_selector: {
+    #         attribute_matching_model: "ONE_TO_ONE", # required, accepts ONE_TO_ONE, MANY_TO_MANY
+    #         address: ["string1To255"],
+    #         phone_number: ["string1To255"],
+    #         email_address: ["string1To255"],
+    #       },
+    #       conflict_resolution: {
+    #         conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
+    #         source_name: "string1To255",
+    #       },
+    #       exporting_config: {
+    #         s3_exporting: {
+    #           s3_bucket_name: "s3BucketName", # required
+    #           s3_key_name: "s3KeyNameCustomerOutputConfig",
+    #         },
+    #       },
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -677,6 +713,24 @@ module Aws::CustomerProfiles
     #   resp.matching.auto_merging.min_allowed_confidence_score_for_merging #=> Float
     #   resp.matching.exporting_config.s3_exporting.s3_bucket_name #=> String
     #   resp.matching.exporting_config.s3_exporting.s3_key_name #=> String
+    #   resp.rule_based_matching.enabled #=> Boolean
+    #   resp.rule_based_matching.matching_rules #=> Array
+    #   resp.rule_based_matching.matching_rules[0].rule #=> Array
+    #   resp.rule_based_matching.matching_rules[0].rule[0] #=> String
+    #   resp.rule_based_matching.status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE"
+    #   resp.rule_based_matching.max_allowed_rule_level_for_merging #=> Integer
+    #   resp.rule_based_matching.max_allowed_rule_level_for_matching #=> Integer
+    #   resp.rule_based_matching.attribute_types_selector.attribute_matching_model #=> String, one of "ONE_TO_ONE", "MANY_TO_MANY"
+    #   resp.rule_based_matching.attribute_types_selector.address #=> Array
+    #   resp.rule_based_matching.attribute_types_selector.address[0] #=> String
+    #   resp.rule_based_matching.attribute_types_selector.phone_number #=> Array
+    #   resp.rule_based_matching.attribute_types_selector.phone_number[0] #=> String
+    #   resp.rule_based_matching.attribute_types_selector.email_address #=> Array
+    #   resp.rule_based_matching.attribute_types_selector.email_address[0] #=> String
+    #   resp.rule_based_matching.conflict_resolution.conflict_resolving_model #=> String, one of "RECENCY", "SOURCE"
+    #   resp.rule_based_matching.conflict_resolution.source_name #=> String
+    #   resp.rule_based_matching.exporting_config.s3_exporting.s3_bucket_name #=> String
+    #   resp.rule_based_matching.exporting_config.s3_exporting.s3_key_name #=> String
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
     #   resp.tags #=> Hash
@@ -1520,6 +1574,7 @@ module Aws::CustomerProfiles
     #   * {Types::GetDomainResponse#dead_letter_queue_url #dead_letter_queue_url} => String
     #   * {Types::GetDomainResponse#stats #stats} => Types::DomainStats
     #   * {Types::GetDomainResponse#matching #matching} => Types::MatchingResponse
+    #   * {Types::GetDomainResponse#rule_based_matching #rule_based_matching} => Types::RuleBasedMatchingResponse
     #   * {Types::GetDomainResponse#created_at #created_at} => Time
     #   * {Types::GetDomainResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::GetDomainResponse#tags #tags} => Hash&lt;String,String&gt;
@@ -1552,6 +1607,24 @@ module Aws::CustomerProfiles
     #   resp.matching.auto_merging.min_allowed_confidence_score_for_merging #=> Float
     #   resp.matching.exporting_config.s3_exporting.s3_bucket_name #=> String
     #   resp.matching.exporting_config.s3_exporting.s3_key_name #=> String
+    #   resp.rule_based_matching.enabled #=> Boolean
+    #   resp.rule_based_matching.matching_rules #=> Array
+    #   resp.rule_based_matching.matching_rules[0].rule #=> Array
+    #   resp.rule_based_matching.matching_rules[0].rule[0] #=> String
+    #   resp.rule_based_matching.status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE"
+    #   resp.rule_based_matching.max_allowed_rule_level_for_merging #=> Integer
+    #   resp.rule_based_matching.max_allowed_rule_level_for_matching #=> Integer
+    #   resp.rule_based_matching.attribute_types_selector.attribute_matching_model #=> String, one of "ONE_TO_ONE", "MANY_TO_MANY"
+    #   resp.rule_based_matching.attribute_types_selector.address #=> Array
+    #   resp.rule_based_matching.attribute_types_selector.address[0] #=> String
+    #   resp.rule_based_matching.attribute_types_selector.phone_number #=> Array
+    #   resp.rule_based_matching.attribute_types_selector.phone_number[0] #=> String
+    #   resp.rule_based_matching.attribute_types_selector.email_address #=> Array
+    #   resp.rule_based_matching.attribute_types_selector.email_address[0] #=> String
+    #   resp.rule_based_matching.conflict_resolution.conflict_resolving_model #=> String, one of "RECENCY", "SOURCE"
+    #   resp.rule_based_matching.conflict_resolution.source_name #=> String
+    #   resp.rule_based_matching.exporting_config.s3_exporting.s3_bucket_name #=> String
+    #   resp.rule_based_matching.exporting_config.s3_exporting.s3_key_name #=> String
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
     #   resp.tags #=> Hash
@@ -1944,6 +2017,68 @@ module Aws::CustomerProfiles
     # @param [Hash] params ({})
     def get_profile_object_type_template(params = {}, options = {})
       req = build_request(:get_profile_object_type_template, params)
+      req.send_request(options)
+    end
+
+    # Returns a set of profiles that belong to the same matching group using
+    # the `matchId` or `profileId`. You can also specify the type of
+    # matching that you want for finding similar profiles using either
+    # `RULE_BASED_MATCHING` or `ML_BASED_MATCHING`.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from the previous `GetSimilarProfiles` API call.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects returned per page.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :match_type
+    #   Specify the type of matching to get similar profiles for.
+    #
+    # @option params [required, String] :search_key
+    #   The string indicating the search key to be used.
+    #
+    # @option params [required, String] :search_value
+    #   The string based on `SearchKey` to be searched for similar profiles.
+    #
+    # @return [Types::GetSimilarProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSimilarProfilesResponse#profile_ids #profile_ids} => Array&lt;String&gt;
+    #   * {Types::GetSimilarProfilesResponse#match_id #match_id} => String
+    #   * {Types::GetSimilarProfilesResponse#match_type #match_type} => String
+    #   * {Types::GetSimilarProfilesResponse#rule_level #rule_level} => Integer
+    #   * {Types::GetSimilarProfilesResponse#confidence_score #confidence_score} => Float
+    #   * {Types::GetSimilarProfilesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_similar_profiles({
+    #     next_token: "token",
+    #     max_results: 1,
+    #     domain_name: "name", # required
+    #     match_type: "RULE_BASED_MATCHING", # required, accepts RULE_BASED_MATCHING, ML_BASED_MATCHING
+    #     search_key: "string1To255", # required
+    #     search_value: "string1To255", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile_ids #=> Array
+    #   resp.profile_ids[0] #=> String
+    #   resp.match_id #=> String
+    #   resp.match_type #=> String, one of "RULE_BASED_MATCHING", "ML_BASED_MATCHING"
+    #   resp.rule_level #=> Integer
+    #   resp.confidence_score #=> Float
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetSimilarProfiles AWS API Documentation
+    #
+    # @overload get_similar_profiles(params = {})
+    # @param [Hash] params ({})
+    def get_similar_profiles(params = {}, options = {})
+      req = build_request(:get_similar_profiles, params)
       req.send_request(options)
     end
 
@@ -2536,6 +2671,46 @@ module Aws::CustomerProfiles
     # @param [Hash] params ({})
     def list_profile_objects(params = {}, options = {})
       req = build_request(:list_profile_objects, params)
+      req.send_request(options)
+    end
+
+    # Returns a set of `MatchIds` that belong to the given domain.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from the previous `ListRuleBasedMatches` API
+    #   call.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of `MatchIds` returned per page.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @return [Types::ListRuleBasedMatchesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRuleBasedMatchesResponse#match_ids #match_ids} => Array&lt;String&gt;
+    #   * {Types::ListRuleBasedMatchesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_rule_based_matches({
+    #     next_token: "token",
+    #     max_results: 1,
+    #     domain_name: "name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.match_ids #=> Array
+    #   resp.match_ids[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListRuleBasedMatches AWS API Documentation
+    #
+    # @overload list_rule_based_matches(params = {})
+    # @param [Hash] params ({})
+    def list_rule_based_matches(params = {}, options = {})
+      req = build_request(:list_rule_based_matches, params)
       req.send_request(options)
     end
 
@@ -3440,6 +3615,15 @@ module Aws::CustomerProfiles
     #
     #   [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
     #
+    # @option params [Types::RuleBasedMatchingRequest] :rule_based_matching
+    #   The process of matching duplicate profiles using the rule-Based
+    #   matching. If `RuleBasedMatching` = true, Amazon Connect Customer
+    #   Profiles will start to match and merge your profiles according to your
+    #   configuration in the `RuleBasedMatchingRequest`. You can use the
+    #   `ListRuleBasedMatches` and `GetSimilarProfiles` API to return and
+    #   review the results. Also, if you have configured `ExportingConfig` in
+    #   the `RuleBasedMatchingRequest`, you can download the results from S3.
+    #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
     #
@@ -3450,6 +3634,7 @@ module Aws::CustomerProfiles
     #   * {Types::UpdateDomainResponse#default_encryption_key #default_encryption_key} => String
     #   * {Types::UpdateDomainResponse#dead_letter_queue_url #dead_letter_queue_url} => String
     #   * {Types::UpdateDomainResponse#matching #matching} => Types::MatchingResponse
+    #   * {Types::UpdateDomainResponse#rule_based_matching #rule_based_matching} => Types::RuleBasedMatchingResponse
     #   * {Types::UpdateDomainResponse#created_at #created_at} => Time
     #   * {Types::UpdateDomainResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::UpdateDomainResponse#tags #tags} => Hash&lt;String,String&gt;
@@ -3487,6 +3672,32 @@ module Aws::CustomerProfiles
     #         },
     #       },
     #     },
+    #     rule_based_matching: {
+    #       enabled: false, # required
+    #       matching_rules: [
+    #         {
+    #           rule: ["string1To255"], # required
+    #         },
+    #       ],
+    #       max_allowed_rule_level_for_merging: 1,
+    #       max_allowed_rule_level_for_matching: 1,
+    #       attribute_types_selector: {
+    #         attribute_matching_model: "ONE_TO_ONE", # required, accepts ONE_TO_ONE, MANY_TO_MANY
+    #         address: ["string1To255"],
+    #         phone_number: ["string1To255"],
+    #         email_address: ["string1To255"],
+    #       },
+    #       conflict_resolution: {
+    #         conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
+    #         source_name: "string1To255",
+    #       },
+    #       exporting_config: {
+    #         s3_exporting: {
+    #           s3_bucket_name: "s3BucketName", # required
+    #           s3_key_name: "s3KeyNameCustomerOutputConfig",
+    #         },
+    #       },
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -3510,6 +3721,24 @@ module Aws::CustomerProfiles
     #   resp.matching.auto_merging.min_allowed_confidence_score_for_merging #=> Float
     #   resp.matching.exporting_config.s3_exporting.s3_bucket_name #=> String
     #   resp.matching.exporting_config.s3_exporting.s3_key_name #=> String
+    #   resp.rule_based_matching.enabled #=> Boolean
+    #   resp.rule_based_matching.matching_rules #=> Array
+    #   resp.rule_based_matching.matching_rules[0].rule #=> Array
+    #   resp.rule_based_matching.matching_rules[0].rule[0] #=> String
+    #   resp.rule_based_matching.status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE"
+    #   resp.rule_based_matching.max_allowed_rule_level_for_merging #=> Integer
+    #   resp.rule_based_matching.max_allowed_rule_level_for_matching #=> Integer
+    #   resp.rule_based_matching.attribute_types_selector.attribute_matching_model #=> String, one of "ONE_TO_ONE", "MANY_TO_MANY"
+    #   resp.rule_based_matching.attribute_types_selector.address #=> Array
+    #   resp.rule_based_matching.attribute_types_selector.address[0] #=> String
+    #   resp.rule_based_matching.attribute_types_selector.phone_number #=> Array
+    #   resp.rule_based_matching.attribute_types_selector.phone_number[0] #=> String
+    #   resp.rule_based_matching.attribute_types_selector.email_address #=> Array
+    #   resp.rule_based_matching.attribute_types_selector.email_address[0] #=> String
+    #   resp.rule_based_matching.conflict_resolution.conflict_resolving_model #=> String, one of "RECENCY", "SOURCE"
+    #   resp.rule_based_matching.conflict_resolution.source_name #=> String
+    #   resp.rule_based_matching.exporting_config.s3_exporting.s3_bucket_name #=> String
+    #   resp.rule_based_matching.exporting_config.s3_exporting.s3_key_name #=> String
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
     #   resp.tags #=> Hash
@@ -3715,7 +3944,7 @@ module Aws::CustomerProfiles
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2023-07-25)
+------------------
+
+* Feature - This release adds support for SFTP Connectors.
+
 1.75.0 (2023-07-11)
 ------------------
 

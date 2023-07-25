@@ -287,6 +287,10 @@ module Aws::STS
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html
     #   @return [String]
     #
+    # @!attribute [rw] provided_contexts
+    #   Reserved for future use.
+    #   @return [Array<Types::ProvidedContext>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleRequest AWS API Documentation
     #
     class AssumeRoleRequest < Struct.new(
@@ -300,7 +304,8 @@ module Aws::STS
       :external_id,
       :serial_number,
       :token_code,
-      :source_identity)
+      :source_identity,
+      :provided_contexts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -652,7 +657,8 @@ module Aws::STS
     #   provided by the identity provider. Your application must get this
     #   token by authenticating the user who is using your application with
     #   a web identity provider before the application makes an
-    #   `AssumeRoleWithWebIdentity` call.
+    #   `AssumeRoleWithWebIdentity` call. Only tokens with RSA algorithms
+    #   (RS256) are supported.
     #   @return [String]
     #
     # @!attribute [rw] provider_id
@@ -1493,6 +1499,25 @@ module Aws::STS
     #
     class PolicyDescriptorType < Struct.new(
       :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Reserved for future use.
+    #
+    # @!attribute [rw] provider_arn
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] context_assertion
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/ProvidedContext AWS API Documentation
+    #
+    class ProvidedContext < Struct.new(
+      :provider_arn,
+      :context_assertion)
       SENSITIVE = []
       include Aws::Structure
     end

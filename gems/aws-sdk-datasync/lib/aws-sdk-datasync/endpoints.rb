@@ -54,6 +54,20 @@ module Aws::DataSync
       end
     end
 
+    class CreateLocationAzureBlob
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataSync::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CreateLocationEfs
       def self.build(context)
         unless context.config.regional_endpoint
@@ -265,6 +279,20 @@ module Aws::DataSync
     end
 
     class DescribeDiscoveryJob
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataSync::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DescribeLocationAzureBlob
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -699,6 +727,20 @@ module Aws::DataSync
     end
 
     class UpdateDiscoveryJob
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataSync::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UpdateLocationAzureBlob
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

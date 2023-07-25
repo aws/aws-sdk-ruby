@@ -751,6 +751,12 @@ module Aws::RDS
       data[:read_replica_source_db_cluster_identifier]
     end
 
+    # The progress of the storage optimization operation as a percentage.
+    # @return [String]
+    def percent_progress
+      data[:percent_progress]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -3319,7 +3325,7 @@ module Aws::RDS
     #
     #   This setting doesn't apply to RDS Custom DB instances.
     # @option options [String] :ca_certificate_identifier
-    #   The CA certificate identifier to use for the DB instance6's server
+    #   The CA certificate identifier to use for the DB instance's server
     #   certificate.
     #
     #   This setting doesn't apply to RDS Custom DB instances.

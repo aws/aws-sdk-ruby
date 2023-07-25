@@ -1532,8 +1532,8 @@ module Aws::SageMaker
     #           max_runtime_per_training_job_in_seconds: 1,
     #           max_auto_ml_job_runtime_in_seconds: 1,
     #         },
-    #         content_column: "ContentColumn",
-    #         target_label_column: "TargetLabelColumn",
+    #         content_column: "ContentColumn", # required
+    #         target_label_column: "TargetLabelColumn", # required
     #       },
     #       tabular_job_config: {
     #         candidate_generation_config: {
@@ -23997,7 +23997,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.198.0'
+      context[:gem_version] = '1.199.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

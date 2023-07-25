@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2023-07-25)
+------------------
+
+* Feature - AWS DataSync now supports Microsoft Azure Blob Storage locations.
+
 1.62.0 (2023-07-13)
 ------------------
 

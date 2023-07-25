@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2023-07-25)
+------------------
+
+* Feature - Added support for Auto-Assocate Billing Groups for CreateBillingGroup, UpdateBillingGroup, and ListBillingGroups.
+
 1.12.0 (2023-07-11)
 ------------------
 

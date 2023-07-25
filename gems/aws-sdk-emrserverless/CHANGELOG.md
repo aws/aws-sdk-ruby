@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2023-07-25)
+------------------
+
+* Feature - This release adds support for publishing application logs to CloudWatch.
+
 1.13.0 (2023-07-11)
 ------------------
 

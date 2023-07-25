@@ -199,6 +199,7 @@ module Aws::EC2
     AvailableInstanceCapacityList = Shapes::ListShape.new(name: 'AvailableInstanceCapacityList')
     BareMetal = Shapes::StringShape.new(name: 'BareMetal')
     BareMetalFlag = Shapes::BooleanShape.new(name: 'BareMetalFlag')
+    BaselineBandwidthInGbps = Shapes::FloatShape.new(name: 'BaselineBandwidthInGbps')
     BaselineBandwidthInMbps = Shapes::IntegerShape.new(name: 'BaselineBandwidthInMbps')
     BaselineEbsBandwidthMbps = Shapes::StructureShape.new(name: 'BaselineEbsBandwidthMbps')
     BaselineEbsBandwidthMbpsRequest = Shapes::StructureShape.new(name: 'BaselineEbsBandwidthMbpsRequest')
@@ -1570,6 +1571,8 @@ module Aws::EC2
     InferenceDeviceInfo = Shapes::StructureShape.new(name: 'InferenceDeviceInfo')
     InferenceDeviceInfoList = Shapes::ListShape.new(name: 'InferenceDeviceInfoList')
     InferenceDeviceManufacturerName = Shapes::StringShape.new(name: 'InferenceDeviceManufacturerName')
+    InferenceDeviceMemoryInfo = Shapes::StructureShape.new(name: 'InferenceDeviceMemoryInfo')
+    InferenceDeviceMemorySize = Shapes::IntegerShape.new(name: 'InferenceDeviceMemorySize')
     InferenceDeviceName = Shapes::StringShape.new(name: 'InferenceDeviceName')
     InsideCidrBlocksStringList = Shapes::ListShape.new(name: 'InsideCidrBlocksStringList')
     Instance = Shapes::StructureShape.new(name: 'Instance')
@@ -2199,6 +2202,7 @@ module Aws::EC2
     PayerResponsibility = Shapes::StringShape.new(name: 'PayerResponsibility')
     PaymentOption = Shapes::StringShape.new(name: 'PaymentOption')
     PciId = Shapes::StructureShape.new(name: 'PciId')
+    PeakBandwidthInGbps = Shapes::FloatShape.new(name: 'PeakBandwidthInGbps')
     PeeringAttachmentStatus = Shapes::StructureShape.new(name: 'PeeringAttachmentStatus')
     PeeringConnectionOptions = Shapes::StructureShape.new(name: 'PeeringConnectionOptions')
     PeeringConnectionOptionsRequest = Shapes::StructureShape.new(name: 'PeeringConnectionOptionsRequest')
@@ -3031,6 +3035,7 @@ module Aws::EC2
     snapshotTierStatusSet = Shapes::ListShape.new(name: 'snapshotTierStatusSet')
     totalFpgaMemory = Shapes::IntegerShape.new(name: 'totalFpgaMemory')
     totalGpuMemory = Shapes::IntegerShape.new(name: 'totalGpuMemory')
+    totalInferenceMemory = Shapes::IntegerShape.new(name: 'totalInferenceMemory')
 
     AcceleratorCount.add_member(:min, Shapes::ShapeRef.new(shape: Integer, location_name: "min"))
     AcceleratorCount.add_member(:max, Shapes::ShapeRef.new(shape: Integer, location_name: "max"))
@@ -9413,14 +9418,19 @@ module Aws::EC2
     ImportVolumeTaskDetails.struct_class = Types::ImportVolumeTaskDetails
 
     InferenceAcceleratorInfo.add_member(:accelerators, Shapes::ShapeRef.new(shape: InferenceDeviceInfoList, location_name: "accelerators"))
+    InferenceAcceleratorInfo.add_member(:total_inference_memory_in_mi_b, Shapes::ShapeRef.new(shape: totalInferenceMemory, location_name: "totalInferenceMemoryInMiB"))
     InferenceAcceleratorInfo.struct_class = Types::InferenceAcceleratorInfo
 
     InferenceDeviceInfo.add_member(:count, Shapes::ShapeRef.new(shape: InferenceDeviceCount, location_name: "count"))
     InferenceDeviceInfo.add_member(:name, Shapes::ShapeRef.new(shape: InferenceDeviceName, location_name: "name"))
     InferenceDeviceInfo.add_member(:manufacturer, Shapes::ShapeRef.new(shape: InferenceDeviceManufacturerName, location_name: "manufacturer"))
+    InferenceDeviceInfo.add_member(:memory_info, Shapes::ShapeRef.new(shape: InferenceDeviceMemoryInfo, location_name: "memoryInfo"))
     InferenceDeviceInfo.struct_class = Types::InferenceDeviceInfo
 
     InferenceDeviceInfoList.member = Shapes::ShapeRef.new(shape: InferenceDeviceInfo)
+
+    InferenceDeviceMemoryInfo.add_member(:size_in_mi_b, Shapes::ShapeRef.new(shape: InferenceDeviceMemorySize, location_name: "sizeInMiB"))
+    InferenceDeviceMemoryInfo.struct_class = Types::InferenceDeviceMemoryInfo
 
     InsideCidrBlocksStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
@@ -11565,6 +11575,8 @@ module Aws::EC2
     NetworkCardInfo.add_member(:network_card_index, Shapes::ShapeRef.new(shape: NetworkCardIndex, location_name: "networkCardIndex"))
     NetworkCardInfo.add_member(:network_performance, Shapes::ShapeRef.new(shape: NetworkPerformance, location_name: "networkPerformance"))
     NetworkCardInfo.add_member(:maximum_network_interfaces, Shapes::ShapeRef.new(shape: MaxNetworkInterfaces, location_name: "maximumNetworkInterfaces"))
+    NetworkCardInfo.add_member(:baseline_bandwidth_in_gbps, Shapes::ShapeRef.new(shape: BaselineBandwidthInGbps, location_name: "baselineBandwidthInGbps"))
+    NetworkCardInfo.add_member(:peak_bandwidth_in_gbps, Shapes::ShapeRef.new(shape: PeakBandwidthInGbps, location_name: "peakBandwidthInGbps"))
     NetworkCardInfo.struct_class = Types::NetworkCardInfo
 
     NetworkCardInfoList.member = Shapes::ShapeRef.new(shape: NetworkCardInfo, location_name: "item")

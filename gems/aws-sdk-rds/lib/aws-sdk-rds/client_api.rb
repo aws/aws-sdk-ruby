@@ -1539,6 +1539,7 @@ module Aws::RDS
     DBInstance.add_member(:master_user_secret, Shapes::ShapeRef.new(shape: MasterUserSecret, location_name: "MasterUserSecret"))
     DBInstance.add_member(:certificate_details, Shapes::ShapeRef.new(shape: CertificateDetails, location_name: "CertificateDetails"))
     DBInstance.add_member(:read_replica_source_db_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ReadReplicaSourceDBClusterIdentifier"))
+    DBInstance.add_member(:percent_progress, Shapes::ShapeRef.new(shape: String, location_name: "PercentProgress"))
     DBInstance.struct_class = Types::DBInstance
 
     DBInstanceAlreadyExistsFault.struct_class = Types::DBInstanceAlreadyExistsFault

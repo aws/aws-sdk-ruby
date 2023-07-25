@@ -43,6 +43,8 @@ module Aws::STS
     NameQualifier = Shapes::StringShape.new(name: 'NameQualifier')
     PackedPolicyTooLargeException = Shapes::StructureShape.new(name: 'PackedPolicyTooLargeException')
     PolicyDescriptorType = Shapes::StructureShape.new(name: 'PolicyDescriptorType')
+    ProvidedContext = Shapes::StructureShape.new(name: 'ProvidedContext')
+    ProvidedContextsListType = Shapes::ListShape.new(name: 'ProvidedContextsListType')
     RegionDisabledException = Shapes::StructureShape.new(name: 'RegionDisabledException')
     SAMLAssertionType = Shapes::StringShape.new(name: 'SAMLAssertionType')
     Subject = Shapes::StringShape.new(name: 'Subject')
@@ -54,6 +56,7 @@ module Aws::STS
     arnType = Shapes::StringShape.new(name: 'arnType')
     assumedRoleIdType = Shapes::StringShape.new(name: 'assumedRoleIdType')
     clientTokenType = Shapes::StringShape.new(name: 'clientTokenType')
+    contextAssertionType = Shapes::StringShape.new(name: 'contextAssertionType')
     dateType = Shapes::TimestampShape.new(name: 'dateType')
     decodedMessageType = Shapes::StringShape.new(name: 'decodedMessageType')
     durationSecondsType = Shapes::IntegerShape.new(name: 'durationSecondsType')
@@ -97,6 +100,7 @@ module Aws::STS
     AssumeRoleRequest.add_member(:serial_number, Shapes::ShapeRef.new(shape: serialNumberType, location_name: "SerialNumber"))
     AssumeRoleRequest.add_member(:token_code, Shapes::ShapeRef.new(shape: tokenCodeType, location_name: "TokenCode"))
     AssumeRoleRequest.add_member(:source_identity, Shapes::ShapeRef.new(shape: sourceIdentityType, location_name: "SourceIdentity"))
+    AssumeRoleRequest.add_member(:provided_contexts, Shapes::ShapeRef.new(shape: ProvidedContextsListType, location_name: "ProvidedContexts"))
     AssumeRoleRequest.struct_class = Types::AssumeRoleRequest
 
     AssumeRoleResponse.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, location_name: "Credentials"))
@@ -218,6 +222,12 @@ module Aws::STS
 
     PolicyDescriptorType.add_member(:arn, Shapes::ShapeRef.new(shape: arnType, location_name: "arn"))
     PolicyDescriptorType.struct_class = Types::PolicyDescriptorType
+
+    ProvidedContext.add_member(:provider_arn, Shapes::ShapeRef.new(shape: arnType, location_name: "ProviderArn"))
+    ProvidedContext.add_member(:context_assertion, Shapes::ShapeRef.new(shape: contextAssertionType, location_name: "ContextAssertion"))
+    ProvidedContext.struct_class = Types::ProvidedContext
+
+    ProvidedContextsListType.member = Shapes::ShapeRef.new(shape: ProvidedContext)
 
     RegionDisabledException.add_member(:message, Shapes::ShapeRef.new(shape: regionDisabledMessage, location_name: "message"))
     RegionDisabledException.struct_class = Types::RegionDisabledException

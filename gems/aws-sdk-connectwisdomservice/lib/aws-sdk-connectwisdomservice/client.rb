@@ -442,6 +442,7 @@ module Aws::ConnectWisdomService
     #   resp.assistant.assistant_arn #=> String
     #   resp.assistant.assistant_id #=> String
     #   resp.assistant.description #=> String
+    #   resp.assistant.integration_configuration.topic_integration_arn #=> String
     #   resp.assistant.name #=> String
     #   resp.assistant.server_side_encryption_configuration.kms_key_id #=> String
     #   resp.assistant.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
@@ -802,6 +803,7 @@ module Aws::ConnectWisdomService
     # @example Response structure
     #
     #   resp.session.description #=> String
+    #   resp.session.integration_configuration.topic_integration_arn #=> String
     #   resp.session.name #=> String
     #   resp.session.session_arn #=> String
     #   resp.session.session_id #=> String
@@ -956,6 +958,7 @@ module Aws::ConnectWisdomService
     #   resp.assistant.assistant_arn #=> String
     #   resp.assistant.assistant_id #=> String
     #   resp.assistant.description #=> String
+    #   resp.assistant.integration_configuration.topic_integration_arn #=> String
     #   resp.assistant.name #=> String
     #   resp.assistant.server_side_encryption_configuration.kms_key_id #=> String
     #   resp.assistant.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
@@ -1256,6 +1259,7 @@ module Aws::ConnectWisdomService
     # @example Response structure
     #
     #   resp.session.description #=> String
+    #   resp.session.integration_configuration.topic_integration_arn #=> String
     #   resp.session.name #=> String
     #   resp.session.session_arn #=> String
     #   resp.session.session_id #=> String
@@ -1353,6 +1357,7 @@ module Aws::ConnectWisdomService
     #   resp.assistant_summaries[0].assistant_arn #=> String
     #   resp.assistant_summaries[0].assistant_id #=> String
     #   resp.assistant_summaries[0].description #=> String
+    #   resp.assistant_summaries[0].integration_configuration.topic_integration_arn #=> String
     #   resp.assistant_summaries[0].name #=> String
     #   resp.assistant_summaries[0].server_side_encryption_configuration.kms_key_id #=> String
     #   resp.assistant_summaries[0].status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
@@ -2030,7 +2035,7 @@ module Aws::ConnectWisdomService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connectwisdomservice'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
