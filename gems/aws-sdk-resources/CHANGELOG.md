@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.169.0 (2023-07-26)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-managedblockchainquery` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-entityresolution` gem.
+
 3.168.0 (2023-07-19)
 ------------------
 

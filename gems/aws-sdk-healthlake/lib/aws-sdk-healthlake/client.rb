@@ -398,20 +398,20 @@ module Aws::HealthLake
 
     # @!group API Operations
 
-    # Creates a Data Store that can ingest and export FHIR formatted data.
+    # Creates a data store that can ingest and export FHIR formatted data.
     #
     # @option params [String] :datastore_name
-    #   The user generated name for the Data Store.
+    #   The user generated name for the data store.
     #
     # @option params [required, String] :datastore_type_version
-    #   The FHIR version of the Data Store. The only supported version is R4.
+    #   The FHIR version of the data store. The only supported version is R4.
     #
     # @option params [Types::SseConfiguration] :sse_configuration
     #   The server-side encryption key configuration for a customer provided
-    #   encryption key specified for creating a Data Store.
+    #   encryption key specified for creating a data store.
     #
     # @option params [Types::PreloadDataConfig] :preload_data_config
-    #   Optional parameter to preload data upon creation of the Data Store.
+    #   Optional parameter to preload data upon creation of the data store.
     #   Currently, the only supported preloaded data is synthetic data
     #   generated from Synthea.
     #
@@ -422,11 +422,11 @@ module Aws::HealthLake
     #   not need to pass this option.**
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Resource tags that are applied to a Data Store when it is created.
+    #   Resource tags that are applied to a data store when it is created.
     #
     # @option params [Types::IdentityProviderConfiguration] :identity_provider_configuration
     #   The configuration of the identity provider that you want to use for
-    #   your Data Store.
+    #   your data store.
     #
     # @return [Types::CreateFHIRDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -480,10 +480,10 @@ module Aws::HealthLake
       req.send_request(options)
     end
 
-    # Deletes a Data Store.
+    # Deletes a data store.
     #
     # @option params [required, String] :datastore_id
-    #   The AWS-generated ID for the Data Store to be deleted.
+    #   The AWS-generated ID for the data store to be deleted.
     #
     # @return [Types::DeleteFHIRDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -514,12 +514,13 @@ module Aws::HealthLake
       req.send_request(options)
     end
 
-    # Gets the properties associated with the FHIR Data Store, including the
-    # Data Store ID, Data Store ARN, Data Store name, Data Store status,
-    # created at, Data Store type version, and Data Store endpoint.
+    # Gets the properties associated with the FHIR data store, including the
+    # data store ID, data store ARN, data store name, data store status,
+    # when the data store was created, data store type version, and the data
+    # store's endpoint.
     #
     # @option params [required, String] :datastore_id
-    #   The AWS-generated Data Store ID.
+    #   The AWS-generated data store ID.
     #
     # @return [Types::DescribeFHIRDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -561,7 +562,7 @@ module Aws::HealthLake
     # name, and the status of the job.
     #
     # @option params [required, String] :datastore_id
-    #   The AWS generated ID for the Data Store from which files are being
+    #   The AWS generated ID for the data store from which files are being
     #   exported from for an export job.
     #
     # @option params [required, String] :job_id
@@ -604,7 +605,7 @@ module Aws::HealthLake
     # name, and the status of the job.
     #
     # @option params [required, String] :datastore_id
-    #   The AWS-generated ID of the Data Store.
+    #   The AWS-generated ID of the data store.
     #
     # @option params [required, String] :job_id
     #   The AWS-generated job ID.
@@ -643,17 +644,17 @@ module Aws::HealthLake
       req.send_request(options)
     end
 
-    # Lists all FHIR Data Stores that are in the user’s account, regardless
-    # of Data Store status.
+    # Lists all FHIR data stores that are in the user’s account, regardless
+    # of data store status.
     #
     # @option params [Types::DatastoreFilter] :filter
-    #   Lists all filters associated with a FHIR Data Store request.
+    #   Lists all filters associated with a FHIR data store request.
     #
     # @option params [String] :next_token
-    #   Fetches the next page of Data Stores when results are paginated.
+    #   Fetches the next page of data stores when results are paginated.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of Data Stores returned in a single page of a
+    #   The maximum number of data stores returned in a single page of a
     #   ListFHIRDatastoresRequest call.
     #
     # @return [Types::ListFHIRDatastoresResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -709,7 +710,7 @@ module Aws::HealthLake
     #
     # @option params [required, String] :datastore_id
     #   This parameter limits the response to the export job with the
-    #   specified Data Store ID.
+    #   specified data store ID.
     #
     # @option params [String] :next_token
     #   A pagination token used to identify the next page of results to return
@@ -783,7 +784,7 @@ module Aws::HealthLake
     #
     # @option params [required, String] :datastore_id
     #   This parameter limits the response to the import job with the
-    #   specified Data Store ID.
+    #   specified data store ID.
     #
     # @option params [String] :next_token
     #   A pagination token used to identify the next page of results to return
@@ -853,10 +854,10 @@ module Aws::HealthLake
       req.send_request(options)
     end
 
-    # Returns a list of all existing tags associated with a Data Store.
+    # Returns a list of all existing tags associated with a data store.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name(ARN) of the Data Store for which tags are
+    #   The Amazon Resource Name(ARN) of the data store for which tags are
     #   being added.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -894,7 +895,7 @@ module Aws::HealthLake
     #   was created.
     #
     # @option params [required, String] :datastore_id
-    #   The AWS generated ID for the Data Store from which files are being
+    #   The AWS generated ID for the data store from which files are being
     #   exported for an export job.
     #
     # @option params [required, String] :data_access_role_arn
@@ -956,10 +957,10 @@ module Aws::HealthLake
     #   was created.
     #
     # @option params [required, String] :datastore_id
-    #   The AWS-generated Data Store ID.
+    #   The AWS-generated data store ID.
     #
     # @option params [required, String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) that gives Amazon HealthLake access
+    #   The Amazon Resource Name (ARN) that gives AWS HealthLake access
     #   permission.
     #
     # @option params [required, String] :client_token
@@ -1007,15 +1008,15 @@ module Aws::HealthLake
       req.send_request(options)
     end
 
-    # Adds a user specified key and value tag to a Data Store.
+    # Adds a user specified key and value tag to a data store.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name(ARN)that gives Amazon HealthLake access to
-    #   the Data Store which tags are being added to.
+    #   The Amazon Resource Name(ARN)that gives AWS HealthLake access to the
+    #   data store which tags are being added to.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   The user specified key and value pair tags being added to a Data
-    #   Store.
+    #   The user specified key and value pair tags being added to a data
+    #   store.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1040,14 +1041,14 @@ module Aws::HealthLake
       req.send_request(options)
     end
 
-    # Removes tags from a Data Store.
+    # Removes tags from a data store.
     #
     # @option params [required, String] :resource_arn
-    #   "The Amazon Resource Name(ARN) of the Data Store for which tags are
-    #   being removed
+    #   The Amazon Resource Name(ARN) of the data store for which tags are
+    #   being removed.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   The keys for the tags to be removed from the Healthlake Data Store.
+    #   The keys for the tags to be removed from the HealthLake data store.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1080,7 +1081,7 @@ module Aws::HealthLake
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-healthlake'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

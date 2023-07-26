@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.152.0 (2023-07-26)
+------------------
+
+* Feature - Release Glue Studio Snowflake Connector Node for SDK/CLI
+
 1.151.0 (2023-07-24)
 ------------------
 

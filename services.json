@@ -404,6 +404,9 @@
   "ElasticsearchService": {
     "models": "es/2015-01-01"
   },
+  "EntityResolution": {
+    "models": "entityresolution/2018-05-10"
+  },
   "EventBridge": {
     "models": "eventbridge/2015-10-07"
   },
@@ -679,6 +682,9 @@
   },
   "ManagedBlockchain": {
     "models": "managedblockchain/2018-09-24"
+  },
+  "ManagedBlockchainQuery": {
+    "models": "managedblockchain-query/2023-05-04"
   },
   "ManagedGrafana": {
     "models": "grafana/2020-08-18"

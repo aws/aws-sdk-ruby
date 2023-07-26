@@ -24,7 +24,7 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
-    # The Data Store is in a transition state and the user requested action
+    # The data store is in a transition state and the user requested action
     # can not be performed.
     #
     # @!attribute [rw] message
@@ -39,21 +39,21 @@ module Aws::HealthLake
     end
 
     # @!attribute [rw] datastore_name
-    #   The user generated name for the Data Store.
+    #   The user generated name for the data store.
     #   @return [String]
     #
     # @!attribute [rw] datastore_type_version
-    #   The FHIR version of the Data Store. The only supported version is
+    #   The FHIR version of the data store. The only supported version is
     #   R4.
     #   @return [String]
     #
     # @!attribute [rw] sse_configuration
     #   The server-side encryption key configuration for a customer provided
-    #   encryption key specified for creating a Data Store.
+    #   encryption key specified for creating a data store.
     #   @return [Types::SseConfiguration]
     #
     # @!attribute [rw] preload_data_config
-    #   Optional parameter to preload data upon creation of the Data Store.
+    #   Optional parameter to preload data upon creation of the data store.
     #   Currently, the only supported preloaded data is synthetic data
     #   generated from Synthea.
     #   @return [Types::PreloadDataConfig]
@@ -66,12 +66,12 @@ module Aws::HealthLake
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Resource tags that are applied to a Data Store when it is created.
+    #   Resource tags that are applied to a data store when it is created.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] identity_provider_configuration
     #   The configuration of the identity provider that you want to use for
-    #   your Data Store.
+    #   your data store.
     #   @return [Types::IdentityProviderConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/CreateFHIRDatastoreRequest AWS API Documentation
@@ -89,23 +89,22 @@ module Aws::HealthLake
     end
 
     # @!attribute [rw] datastore_id
-    #   The AWS-generated Data Store id. This id is in the output from the
-    #   initial Data Store creation call.
+    #   The AWS-generated data store id. This id is in the output from the
+    #   initial data store creation call.
     #   @return [String]
     #
     # @!attribute [rw] datastore_arn
-    #   The Data Store ARN is generated during the creation of the Data
-    #   Store and can be found in the output from the initial Data Store
+    #   The data store ARN is generated during the creation of the data
+    #   store and can be found in the output from the initial data store
     #   creation call.
     #   @return [String]
     #
     # @!attribute [rw] datastore_status
-    #   The status of the FHIR Data Store. Possible statuses are ‘CREATING’,
-    #   ‘ACTIVE’, ‘DELETING’, ‘DELETED’.
+    #   The status of the FHIR data store.
     #   @return [String]
     #
     # @!attribute [rw] datastore_endpoint
-    #   The AWS endpoint for the created Data Store.
+    #   The AWS endpoint for the created data store.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/CreateFHIRDatastoreResponse AWS API Documentation
@@ -119,25 +118,25 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
-    # The filters applied to Data Store query.
+    # The filters applied to data store query.
     #
     # @!attribute [rw] datastore_name
-    #   Allows the user to filter Data Store results by name.
+    #   Allows the user to filter data store results by name.
     #   @return [String]
     #
     # @!attribute [rw] datastore_status
-    #   Allows the user to filter Data Store results by status.
+    #   Allows the user to filter data store results by status.
     #   @return [String]
     #
     # @!attribute [rw] created_before
     #   A filter that allows the user to set cutoff dates for records. All
-    #   Data Stores created before the specified date will be included in
+    #   data stores created before the specified date will be included in
     #   the results.
     #   @return [Time]
     #
     # @!attribute [rw] created_after
     #   A filter that allows the user to set cutoff dates for records. All
-    #   Data Stores created after the specified date will be included in the
+    #   data stores created after the specified date will be included in the
     #   results.
     #   @return [Time]
     #
@@ -152,28 +151,27 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
-    # Displays the properties of the Data Store, including the ID, ARN,
-    # name, and the status of the Data Store.
+    # Displays the properties of the data store, including the ID, ARN,
+    # name, and the status of the data store.
     #
     # @!attribute [rw] datastore_id
-    #   The AWS-generated ID number for the Data Store.
+    #   The AWS-generated ID number for the data store.
     #   @return [String]
     #
     # @!attribute [rw] datastore_arn
-    #   The Amazon Resource Name used in the creation of the Data Store.
+    #   The Amazon Resource Name used in the creation of the data store.
     #   @return [String]
     #
     # @!attribute [rw] datastore_name
-    #   The user-generated name for the Data Store.
+    #   The user-generated name for the data store.
     #   @return [String]
     #
     # @!attribute [rw] datastore_status
-    #   The status of the Data Store. Possible statuses are 'CREATING',
-    #   'ACTIVE', 'DELETING', or 'DELETED'.
+    #   The status of the data store.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The time that a Data Store was created.
+    #   The time that a data store was created.
     #   @return [Time]
     #
     # @!attribute [rw] datastore_type_version
@@ -181,8 +179,8 @@ module Aws::HealthLake
     #   @return [String]
     #
     # @!attribute [rw] datastore_endpoint
-    #   The AWS endpoint for the Data Store. Each Data Store will have it's
-    #   own endpoint with Data Store ID in the endpoint URL.
+    #   The AWS endpoint for the data store. Each data store will have it's
+    #   own endpoint with data store ID in the endpoint URL.
     #   @return [String]
     #
     # @!attribute [rw] sse_configuration
@@ -191,13 +189,13 @@ module Aws::HealthLake
     #   @return [Types::SseConfiguration]
     #
     # @!attribute [rw] preload_data_config
-    #   The preloaded data configuration for the Data Store. Only data
+    #   The preloaded data configuration for the data store. Only data
     #   preloaded from Synthea is supported.
     #   @return [Types::PreloadDataConfig]
     #
     # @!attribute [rw] identity_provider_configuration
-    #   The identity provider that you selected when you created the Data
-    #   Store.
+    #   The identity provider that you selected when you created the data
+    #   store.
     #   @return [Types::IdentityProviderConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DatastoreProperties AWS API Documentation
@@ -218,7 +216,7 @@ module Aws::HealthLake
     end
 
     # @!attribute [rw] datastore_id
-    #   The AWS-generated ID for the Data Store to be deleted.
+    #   The AWS-generated ID for the data store to be deleted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DeleteFHIRDatastoreRequest AWS API Documentation
@@ -230,21 +228,21 @@ module Aws::HealthLake
     end
 
     # @!attribute [rw] datastore_id
-    #   The AWS-generated ID for the Data Store to be deleted.
+    #   The AWS-generated ID for the data store to be deleted.
     #   @return [String]
     #
     # @!attribute [rw] datastore_arn
-    #   The Amazon Resource Name (ARN) that gives Amazon HealthLake access
+    #   The Amazon Resource Name (ARN) that gives AWS HealthLake access
     #   permission.
     #   @return [String]
     #
     # @!attribute [rw] datastore_status
-    #   The status of the Data Store that the user has requested to be
+    #   The status of the data store that the user has requested to be
     #   deleted.
     #   @return [String]
     #
     # @!attribute [rw] datastore_endpoint
-    #   The AWS endpoint for the Data Store the user has requested to be
+    #   The AWS endpoint for the data store the user has requested to be
     #   deleted.
     #   @return [String]
     #
@@ -260,7 +258,7 @@ module Aws::HealthLake
     end
 
     # @!attribute [rw] datastore_id
-    #   The AWS-generated Data Store ID.
+    #   The AWS-generated data store ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DescribeFHIRDatastoreRequest AWS API Documentation
@@ -272,9 +270,10 @@ module Aws::HealthLake
     end
 
     # @!attribute [rw] datastore_properties
-    #   All properties associated with a Data Store, including the Data
-    #   Store ID, Data Store ARN, Data Store name, Data Store status,
-    #   created at, Data Store type version, and Data Store endpoint.
+    #   All properties associated with a data store, including the data
+    #   store ID, data store ARN, data store name, data store status, when
+    #   the data store was created, data store type version, and the data
+    #   store's endpoint.
     #   @return [Types::DatastoreProperties]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DescribeFHIRDatastoreResponse AWS API Documentation
@@ -286,7 +285,7 @@ module Aws::HealthLake
     end
 
     # @!attribute [rw] datastore_id
-    #   The AWS generated ID for the Data Store from which files are being
+    #   The AWS generated ID for the data store from which files are being
     #   exported from for an export job.
     #   @return [String]
     #
@@ -317,7 +316,7 @@ module Aws::HealthLake
     end
 
     # @!attribute [rw] datastore_id
-    #   The AWS-generated ID of the Data Store.
+    #   The AWS-generated ID of the data store.
     #   @return [String]
     #
     # @!attribute [rw] job_id
@@ -371,7 +370,7 @@ module Aws::HealthLake
     #   @return [Time]
     #
     # @!attribute [rw] datastore_id
-    #   The AWS generated ID for the Data Store from which files are being
+    #   The AWS generated ID for the data store from which files are being
     #   exported for an export job.
     #   @return [String]
     #
@@ -405,17 +404,17 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
-    # The identity provider configuration that you gave when the Data Store
+    # The identity provider configuration that you gave when the data store
     # was created.
     #
     # @!attribute [rw] authorization_strategy
     #   The authorization strategy that you selected when you created the
-    #   Data Store.
+    #   data store.
     #   @return [String]
     #
     # @!attribute [rw] fine_grained_authorization_enabled
-    #   If you enabled fine-grained authorization when you created the Data
-    #   Store.
+    #   If you enabled fine-grained authorization when you created the data
+    #   store.
     #   @return [Boolean]
     #
     # @!attribute [rw] metadata
@@ -465,7 +464,7 @@ module Aws::HealthLake
     end
 
     # Displays the properties of the import job, including the ID, Arn,
-    # Name, and the status of the Data Store.
+    # Name, and the status of the data store.
     #
     # @!attribute [rw] job_id
     #   The AWS-generated id number for the Import job.
@@ -503,8 +502,8 @@ module Aws::HealthLake
     #   @return [Types::OutputDataConfig]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) that gives Amazon HealthLake access
-    #   to your input data.
+    #   The Amazon Resource Name (ARN) that gives AWS HealthLake access to
+    #   your input data.
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -537,7 +536,7 @@ module Aws::HealthLake
     #
     # @!attribute [rw] s3_uri
     #   The S3Uri is the user specified S3 location of the FHIR data to be
-    #   imported into Amazon HealthLake.
+    #   imported into AWS HealthLake.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/InputDataConfig AWS API Documentation
@@ -566,17 +565,17 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
-    # The customer-managed-key(CMK) used when creating a Data Store. If a
+    # The customer-managed-key(CMK) used when creating a data store. If a
     # customer owned key is not specified, an AWS owned key will be used for
     # encryption.
     #
     # @!attribute [rw] cmk_type
-    #   The type of customer-managed-key(CMK) used for encyrption. The two
+    #   The type of customer-managed-key(CMK) used for encryption. The two
     #   types of supported CMKs are customer owned CMKs and AWS owned CMKs.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The KMS encryption key id/alias used to encrypt the Data Store
+    #   The KMS encryption key id/alias used to encrypt the data store
     #   contents at rest.
     #   @return [String]
     #
@@ -590,15 +589,15 @@ module Aws::HealthLake
     end
 
     # @!attribute [rw] filter
-    #   Lists all filters associated with a FHIR Data Store request.
+    #   Lists all filters associated with a FHIR data store request.
     #   @return [Types::DatastoreFilter]
     #
     # @!attribute [rw] next_token
-    #   Fetches the next page of Data Stores when results are paginated.
+    #   Fetches the next page of data stores when results are paginated.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of Data Stores returned in a single page of a
+    #   The maximum number of data stores returned in a single page of a
     #   ListFHIRDatastoresRequest call.
     #   @return [Integer]
     #
@@ -613,7 +612,7 @@ module Aws::HealthLake
     end
 
     # @!attribute [rw] datastore_properties_list
-    #   All properties associated with the listed Data Stores.
+    #   All properties associated with the listed data stores.
     #   @return [Array<Types::DatastoreProperties>]
     #
     # @!attribute [rw] next_token
@@ -632,7 +631,7 @@ module Aws::HealthLake
 
     # @!attribute [rw] datastore_id
     #   This parameter limits the response to the export job with the
-    #   specified Data Store ID.
+    #   specified data store ID.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -700,7 +699,7 @@ module Aws::HealthLake
 
     # @!attribute [rw] datastore_id
     #   This parameter limits the response to the import job with the
-    #   specified Data Store ID.
+    #   specified data store ID.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -767,7 +766,7 @@ module Aws::HealthLake
     end
 
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name(ARN) of the Data Store for which tags are
+    #   The Amazon Resource Name(ARN) of the data store for which tags are
     #   being added.
     #   @return [String]
     #
@@ -780,7 +779,7 @@ module Aws::HealthLake
     end
 
     # @!attribute [rw] tags
-    #   Returns a list of tags associated with a Data Store.
+    #   Returns a list of tags associated with a data store.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ListTagsForResourceResponse AWS API Documentation
@@ -816,7 +815,7 @@ module Aws::HealthLake
       class Unknown < OutputDataConfig; end
     end
 
-    # The input properties for the preloaded Data Store. Only data preloaded
+    # The input properties for the preloaded data store. Only data preloaded
     # from Synthea is supported.
     #
     # @!attribute [rw] preload_data_type
@@ -832,7 +831,7 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
-    # The requested Data Store was not found.
+    # The requested data store was not found.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -850,7 +849,7 @@ module Aws::HealthLake
     #
     # @!attribute [rw] s3_uri
     #   The S3Uri is the user specified S3 location of the FHIR data to be
-    #   imported into Amazon HealthLake.
+    #   imported into AWS HealthLake.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -892,7 +891,7 @@ module Aws::HealthLake
     #   @return [Types::OutputDataConfig]
     #
     # @!attribute [rw] datastore_id
-    #   The AWS generated ID for the Data Store from which files are being
+    #   The AWS generated ID for the data store from which files are being
     #   exported for an export job.
     #   @return [String]
     #
@@ -929,7 +928,7 @@ module Aws::HealthLake
     #   @return [String]
     #
     # @!attribute [rw] datastore_id
-    #   The AWS generated ID for the Data Store from which files are being
+    #   The AWS generated ID for the data store from which files are being
     #   exported for an export job.
     #   @return [String]
     #
@@ -958,11 +957,11 @@ module Aws::HealthLake
     #   @return [Types::OutputDataConfig]
     #
     # @!attribute [rw] datastore_id
-    #   The AWS-generated Data Store ID.
+    #   The AWS-generated data store ID.
     #   @return [String]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) that gives Amazon HealthLake access
+    #   The Amazon Resource Name (ARN) that gives AWS HealthLake access
     #   permission.
     #   @return [String]
     #
@@ -995,7 +994,7 @@ module Aws::HealthLake
     #   @return [String]
     #
     # @!attribute [rw] datastore_id
-    #   The AWS-generated Data Store ID.
+    #   The AWS-generated data store ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/StartFHIRImportJobResponse AWS API Documentation
@@ -1029,13 +1028,13 @@ module Aws::HealthLake
     end
 
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name(ARN)that gives Amazon HealthLake access to
-    #   the Data Store which tags are being added to.
+    #   The Amazon Resource Name(ARN)that gives AWS HealthLake access to the
+    #   data store which tags are being added to.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The user specified key and value pair tags being added to a Data
-    #   Store.
+    #   The user specified key and value pair tags being added to a data
+    #   store.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/TagResourceRequest AWS API Documentation
@@ -1066,12 +1065,12 @@ module Aws::HealthLake
     end
 
     # @!attribute [rw] resource_arn
-    #   "The Amazon Resource Name(ARN) of the Data Store for which tags are
-    #   being removed
+    #   The Amazon Resource Name(ARN) of the data store for which tags are
+    #   being removed.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   The keys for the tags to be removed from the Healthlake Data Store.
+    #   The keys for the tags to be removed from the HealthLake data store.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/UntagResourceRequest AWS API Documentation

@@ -445,7 +445,7 @@ module Aws::OpenSearchServerless
     #   resp.collection_details[0].last_modified_date #=> Integer
     #   resp.collection_details[0].name #=> String
     #   resp.collection_details[0].status #=> String, one of "CREATING", "DELETING", "ACTIVE", "FAILED"
-    #   resp.collection_details[0].type #=> String, one of "SEARCH", "TIMESERIES"
+    #   resp.collection_details[0].type #=> String, one of "SEARCH", "TIMESERIES", "VECTORSEARCH"
     #   resp.collection_error_details #=> Array
     #   resp.collection_error_details[0].error_code #=> String
     #   resp.collection_error_details[0].error_message #=> String
@@ -615,7 +615,7 @@ module Aws::OpenSearchServerless
     #         value: "TagValue", # required
     #       },
     #     ],
-    #     type: "SEARCH", # accepts SEARCH, TIMESERIES
+    #     type: "SEARCH", # accepts SEARCH, TIMESERIES, VECTORSEARCH
     #   })
     #
     # @example Response structure
@@ -628,7 +628,7 @@ module Aws::OpenSearchServerless
     #   resp.create_collection_detail.last_modified_date #=> Integer
     #   resp.create_collection_detail.name #=> String
     #   resp.create_collection_detail.status #=> String, one of "CREATING", "DELETING", "ACTIVE", "FAILED"
-    #   resp.create_collection_detail.type #=> String, one of "SEARCH", "TIMESERIES"
+    #   resp.create_collection_detail.type #=> String, one of "SEARCH", "TIMESERIES", "VECTORSEARCH"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/CreateCollection AWS API Documentation
     #
@@ -1758,7 +1758,7 @@ module Aws::OpenSearchServerless
     #   resp.update_collection_detail.last_modified_date #=> Integer
     #   resp.update_collection_detail.name #=> String
     #   resp.update_collection_detail.status #=> String, one of "CREATING", "DELETING", "ACTIVE", "FAILED"
-    #   resp.update_collection_detail.type #=> String, one of "SEARCH", "TIMESERIES"
+    #   resp.update_collection_detail.type #=> String, one of "SEARCH", "TIMESERIES", "VECTORSEARCH"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/UpdateCollection AWS API Documentation
     #
@@ -1987,7 +1987,7 @@ module Aws::OpenSearchServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opensearchserverless'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

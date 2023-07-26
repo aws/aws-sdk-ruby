@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.115.0 (2023-07-26)
+------------------
+
+* Feature - This release includes general updates to user documentation.
+
 1.114.0 (2023-07-21)
 ------------------
 

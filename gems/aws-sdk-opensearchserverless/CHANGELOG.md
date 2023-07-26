@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2023-07-26)
+------------------
+
+* Feature - This release adds new collection type VectorSearch.
+
 1.7.0 (2023-07-11)
 ------------------
 

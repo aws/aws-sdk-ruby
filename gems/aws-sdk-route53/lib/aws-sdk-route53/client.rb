@@ -690,10 +690,11 @@ module Aws::Route53
     #
     # When you submit a `ChangeResourceRecordSets` request, Route 53
     # propagates your changes to all of the Route 53 authoritative DNS
-    # servers. While your changes are propagating, `GetChange` returns a
-    # status of `PENDING`. When propagation is complete, `GetChange` returns
-    # a status of `INSYNC`. Changes generally propagate to all Route 53 name
-    # servers within 60 seconds. For more information, see [GetChange][2].
+    # servers managing the hosted zone. While your changes are propagating,
+    # `GetChange` returns a status of `PENDING`. When propagation is
+    # complete, `GetChange` returns a status of `INSYNC`. Changes generally
+    # propagate to all Route 53 name servers managing the hosted zone within
+    # 60 seconds. For more information, see [GetChange][2].
     #
     # **Limits on ChangeResourceRecordSets Requests**
     #
@@ -1759,6 +1760,12 @@ module Aws::Route53
     #   set when you created it. For more information about reusable
     #   delegation sets, see [CreateReusableDelegationSet][1].
     #
+    #   If you are using a reusable delegation set to create a public hosted
+    #   zone for a subdomain, make sure that the parent hosted zone doesn't
+    #   use one or more of the same name servers. If you have overlapping
+    #   nameservers, the operation will cause a `ConflictingDomainsExist`
+    #   error.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateReusableDelegationSet.html
@@ -2281,6 +2288,16 @@ module Aws::Route53
     # as www.example.com). Amazon Route 53 responds to DNS queries for the
     # domain or subdomain name by using the resource record sets that
     # `CreateTrafficPolicyInstance` created.
+    #
+    # <note markdown="1"> After you submit an `CreateTrafficPolicyInstance` request, there's a
+    # brief delay while Amazon Route 53 creates the resource record sets
+    # that are specified in the traffic policy definition. Use
+    # `GetTrafficPolicyInstance` with the `id` of new traffic policy
+    # instance to confirm that the `CreateTrafficPolicyInstance` request
+    # completed successfully. For more information, see the `State` response
+    # element.
+    #
+    #  </note>
     #
     # @option params [required, String] :hosted_zone_id
     #   The ID of the hosted zone that you want Amazon Route 53 to create
@@ -3096,11 +3113,11 @@ module Aws::Route53
     # one of the following values:
     #
     # * `PENDING` indicates that the changes in this request have not
-    #   propagated to all Amazon Route 53 DNS servers. This is the initial
-    #   status of all change batch requests.
+    #   propagated to all Amazon Route 53 DNS servers managing the hosted
+    #   zone. This is the initial status of all change batch requests.
     #
     # * `INSYNC` indicates that the changes have propagated to all Route 53
-    #   DNS servers.
+    #   DNS servers managing the hosted zone.
     #
     # @option params [required, String] :id
     #   The ID of the change batch request. The value that you specify here is
@@ -3792,11 +3809,10 @@ module Aws::Route53
 
     # Gets information about a specified traffic policy instance.
     #
-    # <note markdown="1"> After you submit a `CreateTrafficPolicyInstance` or an
-    # `UpdateTrafficPolicyInstance` request, there's a brief delay while
-    # Amazon Route 53 creates the resource record sets that are specified in
-    # the traffic policy definition. For more information, see the `State`
-    # response element.
+    # <note markdown="1"> Use `GetTrafficPolicyInstance` with the `id` of new traffic policy
+    # instance to confirm that the `CreateTrafficPolicyInstance` or an
+    # `UpdateTrafficPolicyInstance` request completed successfully. For more
+    # information, see the `State` response element.
     #
     #  </note>
     #
@@ -5424,6 +5440,13 @@ module Aws::Route53
     #
     # This call only supports querying public hosted zones.
     #
+    # <note markdown="1"> The `TestDnsAnswer ` returns information similar to what you would
+    # expect from the answer section of the `dig` command. Therefore, if you
+    # query for the name servers of a subdomain that point to the parent
+    # name servers, those will not be returned.
+    #
+    #  </note>
+    #
     # @option params [required, String] :hosted_zone_id
     #   The ID of the hosted zone that you want Amazon Route 53 to simulate a
     #   query for.
@@ -5996,6 +6019,16 @@ module Aws::Route53
       req.send_request(options)
     end
 
+    # <note markdown="1"> After you submit a `UpdateTrafficPolicyInstance` request, there's a
+    # brief delay while Route 53 creates the resource record sets that are
+    # specified in the traffic policy definition. Use
+    # `GetTrafficPolicyInstance` with the `id` of updated traffic policy
+    # instance confirm that the `UpdateTrafficPolicyInstance` request
+    # completed successfully. For more information, see the `State` response
+    # element.
+    #
+    #  </note>
+    #
     # Updates the resource record sets in a specified hosted zone that were
     # created based on the settings in a specified traffic policy version.
     #
@@ -6080,7 +6113,7 @@ module Aws::Route53
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

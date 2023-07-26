@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2023-07-26)
+------------------
+
+* Feature - Updating the HealthLake service documentation.
+
 1.20.0 (2023-07-11)
 ------------------
 

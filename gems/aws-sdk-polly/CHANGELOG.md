@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2023-07-26)
+------------------
+
+* Feature - Amazon Polly adds 1 new voice - Lisa (nl-BE)
+
 1.72.0 (2023-07-11)
 ------------------
 

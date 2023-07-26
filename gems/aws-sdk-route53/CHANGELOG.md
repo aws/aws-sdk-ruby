@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2023-07-26)
+------------------
+
+* Feature - Update that corrects the documents for received feedback.
+
 1.76.0 (2023-07-11)
 ------------------
 

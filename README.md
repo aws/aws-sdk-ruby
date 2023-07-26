@@ -379,6 +379,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Elemental MediaPackage v2                         | Aws::MediaPackageV2                      | aws-sdk-mediapackagev2                      | 2022-12-25  |
 | AWS Elemental MediaStore                              | Aws::MediaStore                          | aws-sdk-mediastore                          | 2017-09-01  |
 | AWS Elemental MediaStore Data Plane                   | Aws::MediaStoreData                      | aws-sdk-mediastoredata                      | 2017-09-01  |
+| AWS EntityResolution                                  | Aws::EntityResolution                    | aws-sdk-entityresolution                    | 2018-05-10  |
 | AWS Fault Injection Simulator                         | Aws::FIS                                 | aws-sdk-fis                                 | 2020-12-01  |
 | AWS Global Accelerator                                | Aws::GlobalAccelerator                   | aws-sdk-globalaccelerator                   | 2018-08-08  |
 | AWS Glue                                              | Aws::Glue                                | aws-sdk-glue                                | 2017-03-31  |
@@ -581,6 +582,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Macie                                          | Aws::Macie                               | aws-sdk-macie                               | 2017-12-19  |
 | Amazon Macie 2                                        | Aws::Macie2                              | aws-sdk-macie2                              | 2020-01-01  |
 | Amazon Managed Blockchain                             | Aws::ManagedBlockchain                   | aws-sdk-managedblockchain                   | 2018-09-24  |
+| Amazon Managed Blockchain Query                       | Aws::ManagedBlockchainQuery              | aws-sdk-managedblockchainquery              | 2023-05-04  |
 | Amazon Managed Grafana                                | Aws::ManagedGrafana                      | aws-sdk-managedgrafana                      | 2020-08-18  |
 | Amazon Mechanical Turk                                | Aws::MTurk                               | aws-sdk-mturk                               | 2017-01-17  |
 | Amazon MemoryDB                                       | Aws::MemoryDB                            | aws-sdk-memorydb                            | 2021-01-01  |

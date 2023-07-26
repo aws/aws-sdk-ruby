@@ -517,7 +517,24 @@ module Aws::CloudControlApi
     #
     #    </note>
     #
-    #        <p>Specify the desired state as one of the following:</p> <ul> <li> <p>A JSON blob</p> </li> <li> <p>A local path containing the desired state in JSON data format</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-create.html#resource-operations-create-desiredstate">Composing the desired state of the resource</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p> <p>For more information about the properties of a specific resource, refer to the related topic for the resource in the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">Resource and property types reference</a> in the <i>CloudFormation Users Guide</i>.</p>
+    #   Specify the desired state as one of the following:
+    #
+    #   * A JSON blob
+    #
+    #   * A local path containing the desired state in JSON data format
+    #
+    #   For more information, see [Composing the desired state of the
+    #   resource][1] in the *Amazon Web Services Cloud Control API User
+    #   Guide*.
+    #
+    #   For more information about the properties of a specific resource,
+    #   refer to the related topic for the resource in the [Resource and
+    #   property types reference][2] in the *CloudFormation Users Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-create.html#resource-operations-create-desiredstate
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
     #
     # @return [Types::CreateResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1134,7 +1151,7 @@ module Aws::CloudControlApi
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudcontrolapi'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

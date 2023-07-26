@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2023-07-26)
+------------------
+
+* Feature - The service is renaming as a part of AWS Health.
+
 1.9.0 (2023-07-11)
 ------------------
 

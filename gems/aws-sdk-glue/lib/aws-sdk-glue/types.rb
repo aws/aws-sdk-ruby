@@ -351,7 +351,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] data
-    #   Specifies the data of the Amazon Reshift target node.
+    #   Specifies the data of the Amazon Redshift target node.
     #   @return [Types::AmazonRedshiftNodeData]
     #
     # @!attribute [rw] inputs
@@ -2223,6 +2223,14 @@ module Aws::Glue
     #   Specifies a Glue DataBrew recipe node.
     #   @return [Types::Recipe]
     #
+    # @!attribute [rw] snowflake_source
+    #   Specifies a Snowflake data source.
+    #   @return [Types::SnowflakeSource]
+    #
+    # @!attribute [rw] snowflake_target
+    #   Specifies a target that writes to a Snowflake data source.
+    #   @return [Types::SnowflakeTarget]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CodeGenConfigurationNode AWS API Documentation
     #
     class CodeGenConfigurationNode < Struct.new(
@@ -2292,7 +2300,9 @@ module Aws::Glue
       :amazon_redshift_source,
       :amazon_redshift_target,
       :evaluate_data_quality_multi_frame,
-      :recipe)
+      :recipe,
+      :snowflake_source,
+      :snowflake_target)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18195,6 +18205,190 @@ module Aws::Glue
       :skewed_column_names,
       :skewed_column_values,
       :skewed_column_value_location_maps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies configuration for Snowflake nodes in Glue Studio.
+    #
+    # @!attribute [rw] source_type
+    #   Specifies how retrieved data is specified. Valid values: `"table"`,
+    #   ` "query"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection
+    #   Specifies a Glue Data Catalog Connection to a Snowflake endpoint.
+    #   @return [Types::Option]
+    #
+    # @!attribute [rw] schema
+    #   Specifies a Snowflake database schema for your node to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   Specifies a Snowflake table for your node to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   Specifies a Snowflake database for your node to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] temp_dir
+    #   Not currently used.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role
+    #   Not currently used.
+    #   @return [Types::Option]
+    #
+    # @!attribute [rw] additional_options
+    #   Specifies additional options passed to the Snowflake connector. If
+    #   options are specified elsewhere in this node, this will take
+    #   precedence.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] sample_query
+    #   A SQL string used to retrieve data with the `query` sourcetype.
+    #   @return [String]
+    #
+    # @!attribute [rw] pre_action
+    #   A SQL string run before the Snowflake connector performs its
+    #   standard actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] post_action
+    #   A SQL string run after the Snowflake connector performs its standard
+    #   actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   Specifies what action to take when writing to a table with
+    #   preexisting data. Valid values: ` append`, `merge`, `truncate`,
+    #   `drop`.
+    #   @return [String]
+    #
+    # @!attribute [rw] upsert
+    #   Used when Action is `append`. Specifies the resolution behavior when
+    #   a row already exists. If true, preexisting rows will be updated. If
+    #   false, those rows will be inserted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] merge_action
+    #   Specifies a merge action. Valid values: `simple`, `custom`. If
+    #   simple, merge behavior is defined by `MergeWhenMatched` and `
+    #   MergeWhenNotMatched`. If custom, defined by `MergeClause`.
+    #   @return [String]
+    #
+    # @!attribute [rw] merge_when_matched
+    #   Specifies how to resolve records that match preexisting data when
+    #   merging. Valid values: ` update`, `delete`.
+    #   @return [String]
+    #
+    # @!attribute [rw] merge_when_not_matched
+    #   Specifies how to process records that do not match preexisting data
+    #   when merging. Valid values: `insert`, `none`.
+    #   @return [String]
+    #
+    # @!attribute [rw] merge_clause
+    #   A SQL statement that specifies a custom merge behavior.
+    #   @return [String]
+    #
+    # @!attribute [rw] staging_table
+    #   The name of a staging table used when performing `merge` or upsert
+    #   `append` actions. Data is written to this table, then moved to
+    #   `table` by a generated postaction.
+    #   @return [String]
+    #
+    # @!attribute [rw] selected_columns
+    #   Specifies the columns combined to identify a record when detecting
+    #   matches for merges and upserts. A list of structures with `value`,
+    #   `label` and ` description` keys. Each structure describes a column.
+    #   @return [Array<Types::Option>]
+    #
+    # @!attribute [rw] auto_pushdown
+    #   Specifies whether automatic query pushdown is enabled. If pushdown
+    #   is enabled, then when a query is run on Spark, if part of the query
+    #   can be "pushed down" to the Snowflake server, it is pushed down.
+    #   This improves performance of some queries.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] table_schema
+    #   Manually defines the target schema for the node. A list of
+    #   structures with `value` , `label` and `description` keys. Each
+    #   structure defines a column.
+    #   @return [Array<Types::Option>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SnowflakeNodeData AWS API Documentation
+    #
+    class SnowflakeNodeData < Struct.new(
+      :source_type,
+      :connection,
+      :schema,
+      :table,
+      :database,
+      :temp_dir,
+      :iam_role,
+      :additional_options,
+      :sample_query,
+      :pre_action,
+      :post_action,
+      :action,
+      :upsert,
+      :merge_action,
+      :merge_when_matched,
+      :merge_when_not_matched,
+      :merge_clause,
+      :staging_table,
+      :selected_columns,
+      :auto_pushdown,
+      :table_schema)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a Snowflake data source.
+    #
+    # @!attribute [rw] name
+    #   The name of the Snowflake data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   Configuration for the Snowflake data source.
+    #   @return [Types::SnowflakeNodeData]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies user-defined schemas for your output data.
+    #   @return [Array<Types::GlueSchema>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SnowflakeSource AWS API Documentation
+    #
+    class SnowflakeSource < Struct.new(
+      :name,
+      :data,
+      :output_schemas)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a Snowflake target.
+    #
+    # @!attribute [rw] name
+    #   The name of the Snowflake target.
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   Specifies the data of the Snowflake target node.
+    #   @return [Types::SnowflakeNodeData]
+    #
+    # @!attribute [rw] inputs
+    #   The nodes that are inputs to the data target.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SnowflakeTarget AWS API Documentation
+    #
+    class SnowflakeTarget < Struct.new(
+      :name,
+      :data,
+      :inputs)
       SENSITIVE = []
       include Aws::Structure
     end

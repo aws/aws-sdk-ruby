@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.793.0 (2023-07-26)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ManagedBlockchainQuery`.
+
+* Feature - Added support for enumerating regions for `Aws::EntityResolution`.
+
 1.792.0 (2023-07-24)
 ------------------
 
