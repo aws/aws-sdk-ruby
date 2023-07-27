@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.200.0 (2023-07-27)
+------------------
+
+* Feature - Expose ProfilerConfig attribute in SageMaker Search API response.
+
 1.199.0 (2023-07-25)
 ------------------
 

@@ -158,6 +158,12 @@ module Aws::EC2
       data[:restore_expiry_time]
     end
 
+    # Reserved for future use.
+    # @return [String]
+    def sse_type
+      data[:sse_type]
+    end
+
     # @!endgroup
 
     # @return [Client]

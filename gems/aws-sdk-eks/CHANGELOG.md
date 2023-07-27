@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2023-07-27)
+------------------
+
+* Feature - Add multiple customer error code to handle customer caused failure when managing EKS node groups
+
 1.88.0 (2023-07-11)
 ------------------
 

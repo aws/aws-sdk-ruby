@@ -93,6 +93,7 @@ module Aws::EC2
   # | snapshot_completed              | {Client#describe_snapshots}               | 15       | 40            |
   # | snapshot_imported               | {Client#describe_import_snapshot_tasks}   | 15       | 40            |
   # | spot_instance_request_fulfilled | {Client#describe_spot_instance_requests}  | 15       | 40            |
+  # | store_image_task_complete       | {Client#describe_store_image_tasks}       | 5        | 40            |
   # | subnet_available                | {Client#describe_subnets}                 | 15       | 40            |
   # | system_status_ok                | {Client#describe_instance_status}         | 15       | 40            |
   # | volume_available                | {Client#describe_volumes}                 | 15       | 40            |
@@ -1193,6 +1194,56 @@ module Aws::EC2
 
       # @option (see Client#describe_spot_instance_requests)
       # @return (see Client#describe_spot_instance_requests)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class StoreImageTaskComplete
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :delay (5)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 40,
+          delay: 5,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_store_image_tasks,
+            acceptors: [
+              {
+                "expected" => "Completed",
+                "matcher" => "pathAll",
+                "state" => "success",
+                "argument" => "store_image_task_results[].store_task_state"
+              },
+              {
+                "expected" => "Failed",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "store_image_task_results[].store_task_state"
+              },
+              {
+                "expected" => "InProgress",
+                "matcher" => "pathAny",
+                "state" => "retry",
+                "argument" => "store_image_task_results[].store_task_state"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_store_image_tasks)
+      # @return (see Client#describe_store_image_tasks)
       def wait(params = {})
         @waiter.wait(client: @client, params: params)
       end

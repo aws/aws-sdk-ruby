@@ -37771,6 +37771,11 @@ module Aws::SageMaker
     #   training job.
     #   @return [Array<Types::DebugRuleEvaluationStatus>]
     #
+    # @!attribute [rw] profiler_config
+    #   Configuration information for Amazon SageMaker Debugger system
+    #   monitoring, framework profiling, and storage paths.
+    #   @return [Types::ProfilerConfig]
+    #
     # @!attribute [rw] environment
     #   The environment variables to set in the Docker container.
     #   @return [Hash<String,String>]
@@ -37828,6 +37833,7 @@ module Aws::SageMaker
       :debug_rule_configurations,
       :tensor_board_output_config,
       :debug_rule_evaluation_statuses,
+      :profiler_config,
       :environment,
       :retry_strategy,
       :tags)

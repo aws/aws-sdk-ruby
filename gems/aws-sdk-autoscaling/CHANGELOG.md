@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2023-07-27)
+------------------
+
+* Feature - This release updates validation for instance types used in the AllowedInstanceTypes and ExcludedInstanceTypes parameters of the InstanceRequirements property of a MixedInstancesPolicy.
+
 1.94.0 (2023-07-11)
 ------------------
 

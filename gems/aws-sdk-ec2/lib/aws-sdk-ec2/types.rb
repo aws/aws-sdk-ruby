@@ -32752,10 +32752,15 @@ module Aws::EC2
     #   Indicates whether encryption by default is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] sse_type
+    #   Reserved for future use.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetEbsEncryptionByDefaultResult AWS API Documentation
     #
     class GetEbsEncryptionByDefaultResult < Struct.new(
-      :ebs_encryption_by_default)
+      :ebs_encryption_by_default,
+      :sse_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -54717,6 +54722,10 @@ module Aws::EC2
     #   The size of the volume, in GiB.
     #   @return [Integer]
     #
+    # @!attribute [rw] sse_type
+    #   Reserved for future use.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RestoreSnapshotFromRecycleBinResult AWS API Documentation
     #
     class RestoreSnapshotFromRecycleBinResult < Struct.new(
@@ -54729,7 +54738,8 @@ module Aws::EC2
       :start_time,
       :state,
       :volume_id,
-      :volume_size)
+      :volume_size,
+      :sse_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -57422,6 +57432,10 @@ module Aws::EC2
     #   automatically re-archived.
     #   @return [Time]
     #
+    # @!attribute [rw] sse_type
+    #   Reserved for future use.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Snapshot AWS API Documentation
     #
     class Snapshot < Struct.new(
@@ -57441,7 +57455,8 @@ module Aws::EC2
       :outpost_arn,
       :tags,
       :storage_tier,
-      :restore_expiry_time)
+      :restore_expiry_time,
+      :sse_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -57591,6 +57606,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html
     #   @return [String]
     #
+    # @!attribute [rw] sse_type
+    #   Reserved for future use.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SnapshotInfo AWS API Documentation
     #
     class SnapshotInfo < Struct.new(
@@ -57604,7 +57623,8 @@ module Aws::EC2
       :progress,
       :owner_id,
       :snapshot_id,
-      :outpost_arn)
+      :outpost_arn,
+      :sse_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -63641,6 +63661,10 @@ module Aws::EC2
     #   The throughput that the volume supports, in MiB/s.
     #   @return [Integer]
     #
+    # @!attribute [rw] sse_type
+    #   Reserved for future use.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Volume AWS API Documentation
     #
     class Volume < Struct.new(
@@ -63659,7 +63683,8 @@ module Aws::EC2
       :volume_type,
       :fast_restored,
       :multi_attach_enabled,
-      :throughput)
+      :throughput,
+      :sse_type)
       SENSITIVE = []
       include Aws::Structure
     end

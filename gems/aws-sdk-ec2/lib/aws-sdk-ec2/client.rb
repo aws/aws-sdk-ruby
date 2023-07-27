@@ -11289,6 +11289,7 @@ module Aws::EC2
     #   * {Types::Snapshot#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::Snapshot#storage_tier #storage_tier} => String
     #   * {Types::Snapshot#restore_expiry_time #restore_expiry_time} => Time
+    #   * {Types::Snapshot#sse_type #sse_type} => String
     #
     #
     # @example Example: To create a snapshot
@@ -11355,6 +11356,7 @@ module Aws::EC2
     #   resp.tags[0].value #=> String
     #   resp.storage_tier #=> String, one of "archive", "standard"
     #   resp.restore_expiry_time #=> Time
+    #   resp.sse_type #=> String, one of "sse-ebs", "sse-kms", "none"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSnapshot AWS API Documentation
     #
@@ -11469,6 +11471,7 @@ module Aws::EC2
     #   resp.snapshots[0].owner_id #=> String
     #   resp.snapshots[0].snapshot_id #=> String
     #   resp.snapshots[0].outpost_arn #=> String
+    #   resp.snapshots[0].sse_type #=> String, one of "sse-ebs", "sse-kms", "none"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSnapshots AWS API Documentation
     #
@@ -13886,6 +13889,7 @@ module Aws::EC2
     #   * {Types::Volume#fast_restored #fast_restored} => Boolean
     #   * {Types::Volume#multi_attach_enabled #multi_attach_enabled} => Boolean
     #   * {Types::Volume#throughput #throughput} => Integer
+    #   * {Types::Volume#sse_type #sse_type} => String
     #
     #
     # @example Example: To create a new volume
@@ -13993,6 +13997,7 @@ module Aws::EC2
     #   resp.fast_restored #=> Boolean
     #   resp.multi_attach_enabled #=> Boolean
     #   resp.throughput #=> Integer
+    #   resp.sse_type #=> String, one of "sse-ebs", "sse-kms", "none"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVolume AWS API Documentation
     #
@@ -31235,6 +31240,7 @@ module Aws::EC2
     #   resp.snapshots[0].tags[0].value #=> String
     #   resp.snapshots[0].storage_tier #=> String, one of "archive", "standard"
     #   resp.snapshots[0].restore_expiry_time #=> Time
+    #   resp.snapshots[0].sse_type #=> String, one of "sse-ebs", "sse-kms", "none"
     #   resp.next_token #=> String
     #
     #
@@ -32515,6 +32521,11 @@ module Aws::EC2
     #   resp.store_image_task_results[0].store_task_state #=> String
     #   resp.store_image_task_results[0].store_task_failure_reason #=> String
     #   resp.next_token #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * store_image_task_complete
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeStoreImageTasks AWS API Documentation
     #
@@ -34998,6 +35009,7 @@ module Aws::EC2
     #   resp.volumes[0].fast_restored #=> Boolean
     #   resp.volumes[0].multi_attach_enabled #=> Boolean
     #   resp.volumes[0].throughput #=> Integer
+    #   resp.volumes[0].sse_type #=> String, one of "sse-ebs", "sse-kms", "none"
     #   resp.next_token #=> String
     #
     #
@@ -39680,6 +39692,7 @@ module Aws::EC2
     # @return [Types::GetEbsEncryptionByDefaultResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetEbsEncryptionByDefaultResult#ebs_encryption_by_default #ebs_encryption_by_default} => Boolean
+    #   * {Types::GetEbsEncryptionByDefaultResult#sse_type #sse_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -39690,6 +39703,7 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.ebs_encryption_by_default #=> Boolean
+    #   resp.sse_type #=> String, one of "sse-ebs", "sse-kms", "none"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetEbsEncryptionByDefault AWS API Documentation
     #
@@ -52785,6 +52799,7 @@ module Aws::EC2
     #   * {Types::RestoreSnapshotFromRecycleBinResult#state #state} => String
     #   * {Types::RestoreSnapshotFromRecycleBinResult#volume_id #volume_id} => String
     #   * {Types::RestoreSnapshotFromRecycleBinResult#volume_size #volume_size} => Integer
+    #   * {Types::RestoreSnapshotFromRecycleBinResult#sse_type #sse_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -52805,6 +52820,7 @@ module Aws::EC2
     #   resp.state #=> String, one of "pending", "completed", "error", "recoverable", "recovering"
     #   resp.volume_id #=> String
     #   resp.volume_size #=> Integer
+    #   resp.sse_type #=> String, one of "sse-ebs", "sse-kms", "none"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RestoreSnapshotFromRecycleBin AWS API Documentation
     #
@@ -56513,7 +56529,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.394.0'
+      context[:gem_version] = '1.395.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -56605,6 +56621,7 @@ module Aws::EC2
     # | snapshot_completed              | {Client#describe_snapshots}               | 15       | 40            |
     # | snapshot_imported               | {Client#describe_import_snapshot_tasks}   | 15       | 40            |
     # | spot_instance_request_fulfilled | {Client#describe_spot_instance_requests}  | 15       | 40            |
+    # | store_image_task_complete       | {Client#describe_store_image_tasks}       | 5        | 40            |
     # | subnet_available                | {Client#describe_subnets}                 | 15       | 40            |
     # | system_status_ok                | {Client#describe_instance_status}         | 15       | 40            |
     # | volume_available                | {Client#describe_volumes}                 | 15       | 40            |
@@ -56690,6 +56707,7 @@ module Aws::EC2
         snapshot_completed: Waiters::SnapshotCompleted,
         snapshot_imported: Waiters::SnapshotImported,
         spot_instance_request_fulfilled: Waiters::SpotInstanceRequestFulfilled,
+        store_image_task_complete: Waiters::StoreImageTaskComplete,
         subnet_available: Waiters::SubnetAvailable,
         system_status_ok: Waiters::SystemStatusOk,
         volume_available: Waiters::VolumeAvailable,

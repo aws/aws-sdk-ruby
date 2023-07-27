@@ -130,6 +130,12 @@ module Aws::EC2
       data[:throughput]
     end
 
+    # Reserved for future use.
+    # @return [String]
+    def sse_type
+      data[:sse_type]
+    end
+
     # @!endgroup
 
     # @return [Client]

@@ -829,12 +829,12 @@ module Aws::AutoScaling
     # 6.  **If you finish before the timeout period ends, send a callback by
     #     using the CompleteLifecycleAction API call.**
     #
-    # For more information, see [Amazon EC2 Auto Scaling lifecycle hooks][1]
-    # in the *Amazon EC2 Auto Scaling User Guide*.
+    # For more information, see [Complete a lifecycle action][1] in the
+    # *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/completing-lifecycle-hooks.html
     #
     # @option params [required, String] :lifecycle_hook_name
     #   The name of the lifecycle hook.
@@ -2352,14 +2352,16 @@ module Aws::AutoScaling
     #   {
     #     auto_scaling_groups: [
     #       {
-    #         auto_scaling_group_arn: "arn:aws:autoscaling:us-west-2:123456789012:autoScalingGroup:930d940e-891e-4781-a11a-7b0acd480f03:autoScalingGroupName/my-auto-scaling-group", 
+    #         auto_scaling_group_arn: "arn:aws:autoscaling:us-west-1:123456789012:autoScalingGroup:12345678-1234-1234-1234-123456789012:autoScalingGroupName/my-auto-scaling-group", 
     #         auto_scaling_group_name: "my-auto-scaling-group", 
     #         availability_zones: [
+    #           "us-west-2a", 
+    #           "us-west-2b", 
     #           "us-west-2c", 
     #         ], 
-    #         created_time: Time.parse("2013-08-19T20:53:25.584Z"), 
+    #         created_time: Time.parse("2023-03-09T22:15:11.611Z"), 
     #         default_cooldown: 300, 
-    #         desired_capacity: 1, 
+    #         desired_capacity: 2, 
     #         enabled_metrics: [
     #         ], 
     #         health_check_grace_period: 300, 
@@ -2368,7 +2370,17 @@ module Aws::AutoScaling
     #           {
     #             availability_zone: "us-west-2c", 
     #             health_status: "Healthy", 
-    #             instance_id: "i-4ba0837f", 
+    #             instance_id: "i-05b4f7d5be44822a6", 
+    #             instance_type: "t3.micro", 
+    #             launch_configuration_name: "my-launch-config", 
+    #             lifecycle_state: "InService", 
+    #             protected_from_scale_in: false, 
+    #           }, 
+    #           {
+    #             availability_zone: "us-west-2b", 
+    #             health_status: "Healthy", 
+    #             instance_id: "i-0c20ac468fa3049e8", 
+    #             instance_type: "t3.micro", 
     #             launch_configuration_name: "my-launch-config", 
     #             lifecycle_state: "InService", 
     #             protected_from_scale_in: false, 
@@ -2377,17 +2389,22 @@ module Aws::AutoScaling
     #         launch_configuration_name: "my-launch-config", 
     #         load_balancer_names: [
     #         ], 
-    #         max_size: 1, 
-    #         min_size: 0, 
+    #         max_size: 5, 
+    #         min_size: 1, 
     #         new_instances_protected_from_scale_in: false, 
+    #         service_linked_role_arn: "arn:aws:iam::123456789012:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling", 
     #         suspended_processes: [
     #         ], 
     #         tags: [
     #         ], 
+    #         target_group_arns: [
+    #         ], 
     #         termination_policies: [
     #           "Default", 
     #         ], 
-    #         vpc_zone_identifier: "subnet-12345678", 
+    #         traffic_sources: [
+    #         ], 
+    #         vpc_zone_identifier: "subnet-5ea0c127,subnet-6194ea3b,subnet-c934b782", 
     #       }, 
     #     ], 
     #   }
@@ -2579,7 +2596,7 @@ module Aws::AutoScaling
     #
     #   resp = client.describe_auto_scaling_instances({
     #     instance_ids: [
-    #       "i-4ba0837f", 
+    #       "i-05b4f7d5be44822a6", 
     #     ], 
     #   })
     #
@@ -2590,7 +2607,8 @@ module Aws::AutoScaling
     #         auto_scaling_group_name: "my-auto-scaling-group", 
     #         availability_zone: "us-west-2c", 
     #         health_status: "HEALTHY", 
-    #         instance_id: "i-4ba0837f", 
+    #         instance_id: "i-05b4f7d5be44822a6", 
+    #         instance_type: "t3.micro", 
     #         launch_configuration_name: "my-launch-config", 
     #         lifecycle_state: "InService", 
     #         protected_from_scale_in: false, 
@@ -2726,18 +2744,35 @@ module Aws::AutoScaling
     #       {
     #         auto_scaling_group_name: "my-auto-scaling-group", 
     #         instance_refresh_id: "08b91cf7-8fa6-48af-b6a6-d227f40f1b9b", 
-    #         instances_to_update: 5, 
-    #         percentage_complete: 0, 
-    #         start_time: Time.parse("2020-06-02T18:11:27Z"), 
+    #         instances_to_update: 0, 
+    #         percentage_complete: 50, 
+    #         preferences: {
+    #           auto_rollback: true, 
+    #           instance_warmup: 60, 
+    #           min_healthy_percentage: 90, 
+    #           scale_in_protected_instances: "Ignore", 
+    #           skip_matching: false, 
+    #           standby_instances: "Ignore", 
+    #         }, 
+    #         start_time: Time.parse("2023-06-13T16:46:52+00:00"), 
     #         status: "InProgress", 
+    #         status_reason: "Waiting for instances to warm up before continuing. For example: i-0645704820a8e83ff is warming up.", 
     #       }, 
     #       {
     #         auto_scaling_group_name: "my-auto-scaling-group", 
-    #         end_time: Time.parse("2020-06-02T16:53:37Z"), 
-    #         instance_refresh_id: "dd7728d0-5bc4-4575-96a3-1b2c52bf8bb1", 
+    #         end_time: Time.parse("2023-06-02T13:59:45+00:00"), 
+    #         instance_refresh_id: "0e151305-1e57-4a32-a256-1fd14157c5ec", 
     #         instances_to_update: 0, 
     #         percentage_complete: 100, 
-    #         start_time: Time.parse("2020-06-02T16:43:19Z"), 
+    #         preferences: {
+    #           auto_rollback: true, 
+    #           instance_warmup: 60, 
+    #           min_healthy_percentage: 90, 
+    #           scale_in_protected_instances: "Ignore", 
+    #           skip_matching: false, 
+    #           standby_instances: "Ignore", 
+    #         }, 
+    #         start_time: Time.parse("2023-06-02T13:53:37+00:00"), 
     #         status: "Successful", 
     #       }, 
     #     ], 
@@ -3674,6 +3709,7 @@ module Aws::AutoScaling
     #     activities: [
     #       {
     #         activity_id: "f9f2d65b-f1f2-43e7-b46d-d86756459699", 
+    #         auto_scaling_group_arn: "arn:aws:autoscaling:us-east-1:123456789012:autoScalingGroup:12345678-1234-1234-1234-123456789012:autoScalingGroupName/my-auto-scaling-group", 
     #         auto_scaling_group_name: "my-auto-scaling-group", 
     #         cause: "At 2013-08-19T20:53:25Z a user request created an AutoScalingGroup changing the desired capacity from 0 to 1.  At 2013-08-19T20:53:29Z an instance was started in response to a difference between desired and actual capacity, increasing the capacity from 0 to 1.", 
     #         description: "Launching a new EC2 instance: i-4ba0837f", 
@@ -4148,6 +4184,8 @@ module Aws::AutoScaling
     #   * {Types::DescribeWarmPoolAnswer#instances #instances} => Array&lt;Types::Instance&gt;
     #   * {Types::DescribeWarmPoolAnswer#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_warm_pool({
@@ -4405,7 +4443,7 @@ module Aws::AutoScaling
     # Detaches one or more traffic sources from the specified Auto Scaling
     # group.
     #
-    # When you detach a taffic, it enters the `Removing` state while
+    # When you detach a traffic source, it enters the `Removing` state while
     # deregistering the instances in the group. When all instances are
     # deregistered, then you can no longer describe the traffic source using
     # the DescribeTrafficSources API call. The instances continue to run.
@@ -5309,7 +5347,7 @@ module Aws::AutoScaling
     #   The amount by which to scale, based on the specified adjustment type.
     #   A positive value adds to the current capacity while a negative number
     #   removes from the current capacity. For exact capacity, you must
-    #   specify a positive value.
+    #   specify a non-negative value.
     #
     #   Required if the policy type is `SimpleScaling`. (Not used with any
     #   other policy type.)
@@ -6033,7 +6071,7 @@ module Aws::AutoScaling
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html
     #
-    # @option params [String] :auto_scaling_group_name
+    # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #
     # @return [Types::RollbackInstanceRefreshAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -6043,7 +6081,7 @@ module Aws::AutoScaling
     # @example Request syntax with placeholder values
     #
     #   resp = client.rollback_instance_refresh({
-    #     auto_scaling_group_name: "XmlStringMaxLen255",
+    #     auto_scaling_group_name: "XmlStringMaxLen255", # required
     #   })
     #
     # @example Response structure
@@ -7025,7 +7063,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.94.0'
+      context[:gem_version] = '1.95.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
