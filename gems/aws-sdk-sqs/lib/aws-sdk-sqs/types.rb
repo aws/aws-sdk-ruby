@@ -2384,8 +2384,10 @@ module Aws::SQS
 
     # @!attribute [rw] source_arn
     #   The ARN of the queue that contains the messages to be moved to
-    #   another queue. Currently, only dead-letter queue (DLQ) ARNs are
-    #   accepted.
+    #   another queue. Currently, only ARNs of dead-letter queues (DLQs)
+    #   whose sources are other Amazon SQS queues are accepted. DLQs whose
+    #   sources are non-SQS queues, such as Lambda or Amazon SNS topics, are
+    #   not currently supported.
     #   @return [String]
     #
     # @!attribute [rw] destination_arn
