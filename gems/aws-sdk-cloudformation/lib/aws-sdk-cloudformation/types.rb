@@ -330,6 +330,7 @@ module Aws::CloudFormation
     # An error occurred during a CloudFormation registry operation.
     #
     # @!attribute [rw] message
+    #   An message with details about the error that occurred.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CFNRegistryException AWS API Documentation
@@ -1278,6 +1279,19 @@ module Aws::CloudFormation
     #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] retain_except_on_create
+    #   This deletion policy deletes newly created resources, but retains
+    #   existing resources, when a stack operation is rolled back. This
+    #   ensures new, empty, and unused resources are deleted, while critical
+    #   resources and their data are retained. `RetainExceptOnCreate` can be
+    #   specified for any resource that supports the [ DeletionPolicy][1]
+    #   attribute.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackInput AWS API Documentation
     #
     class CreateStackInput < Struct.new(
@@ -1297,7 +1311,8 @@ module Aws::CloudFormation
       :stack_policy_url,
       :tags,
       :client_request_token,
-      :enable_termination_protection)
+      :enable_termination_protection,
+      :retain_except_on_create)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3746,13 +3761,27 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateChangeSet.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] retain_except_on_create
+    #   This deletion policy deletes newly created resources, but retains
+    #   existing resources, when a stack operation is rolled back. This
+    #   ensures new, empty, and unused resources are deleted, while critical
+    #   resources and their data are retained. `RetainExceptOnCreate` can be
+    #   specified for any resource that supports the [ DeletionPolicy][1]
+    #   attribute.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ExecuteChangeSetInput AWS API Documentation
     #
     class ExecuteChangeSetInput < Struct.new(
       :change_set_name,
       :stack_name,
       :client_request_token,
-      :disable_rollback)
+      :disable_rollback,
+      :retain_except_on_create)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6213,12 +6242,26 @@ module Aws::CloudFormation
     #   A unique identifier for this `RollbackStack` request.
     #   @return [String]
     #
+    # @!attribute [rw] retain_except_on_create
+    #   This deletion policy deletes newly created resources, but retains
+    #   existing resources, when a stack operation is rolled back. This
+    #   ensures new, empty, and unused resources are deleted, while critical
+    #   resources and their data are retained. `RetainExceptOnCreate` can be
+    #   specified for any resource that supports the [ DeletionPolicy][1]
+    #   attribute.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackStackInput AWS API Documentation
     #
     class RollbackStackInput < Struct.new(
       :stack_name,
       :role_arn,
-      :client_request_token)
+      :client_request_token,
+      :retain_except_on_create)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6606,6 +6649,19 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
     #   @return [Types::StackDriftInformation]
     #
+    # @!attribute [rw] retain_except_on_create
+    #   This deletion policy deletes newly created resources, but retains
+    #   existing resources, when a stack operation is rolled back. This
+    #   ensures new, empty, and unused resources are deleted, while critical
+    #   resources and their data are retained. `RetainExceptOnCreate` can be
+    #   specified for any resource that supports the [ DeletionPolicy][1]
+    #   attribute.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Stack AWS API Documentation
     #
     class Stack < Struct.new(
@@ -6630,7 +6686,8 @@ module Aws::CloudFormation
       :enable_termination_protection,
       :parent_id,
       :root_id,
-      :drift_information)
+      :drift_information,
+      :retain_except_on_create)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9444,6 +9501,19 @@ module Aws::CloudFormation
     #   `Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002`.
     #   @return [String]
     #
+    # @!attribute [rw] retain_except_on_create
+    #   This deletion policy deletes newly created resources, but retains
+    #   existing resources, when a stack operation is rolled back. This
+    #   ensures new, empty, and unused resources are deleted, while critical
+    #   resources and their data are retained. `RetainExceptOnCreate` can be
+    #   specified for any resource that supports the [ DeletionPolicy][1]
+    #   attribute.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackInput AWS API Documentation
     #
     class UpdateStackInput < Struct.new(
@@ -9463,7 +9533,8 @@ module Aws::CloudFormation
       :notification_arns,
       :tags,
       :disable_rollback,
-      :client_request_token)
+      :client_request_token,
+      :retain_except_on_create)
       SENSITIVE = []
       include Aws::Structure
     end

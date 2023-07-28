@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2023-07-28)
+------------------
+
+* Feature - This release enable customer to add/remove/update more than one workload for a component
+
 1.38.0 (2023-07-11)
 ------------------
 

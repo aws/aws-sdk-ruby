@@ -1521,6 +1521,37 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # The default sending limits for journeys in the application. To
+    # override these limits and define custom limits for a specific journey,
+    # use the Journey resource.
+    #
+    # @!attribute [rw] daily_cap
+    #   The daily number of messages that an endpoint can receive from all
+    #   journeys. The maximum value is 100. If set to 0, this limit will not
+    #   apply.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timeframe_cap
+    #   The default maximum number of messages that can be sent to an
+    #   endpoint during the specified timeframe for all journeys.
+    #   @return [Types::JourneyTimeframeCap]
+    #
+    # @!attribute [rw] total_cap
+    #   The default maximum number of messages that a single journey can
+    #   sent to a single endpoint. The maximum value is 100. If set to 0,
+    #   this limit will not apply.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ApplicationSettingsJourneyLimits AWS API Documentation
+    #
+    class ApplicationSettingsJourneyLimits < Struct.new(
+      :daily_cap,
+      :timeframe_cap,
+      :total_cap)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about an application, including the default
     # settings for an application.
     #
@@ -1567,6 +1598,12 @@ module Aws::Pinpoint
     #   enabled.
     #   @return [Types::QuietTime]
     #
+    # @!attribute [rw] journey_limits
+    #   The default sending limits for journeys in the application. These
+    #   limits apply to each journey for the application but can be
+    #   overridden, on a per journey basis, with the JourneyLimits resource.
+    #   @return [Types::ApplicationSettingsJourneyLimits]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ApplicationSettingsResource AWS API Documentation
     #
     class ApplicationSettingsResource < Struct.new(
@@ -1574,7 +1611,8 @@ module Aws::Pinpoint
       :campaign_hook,
       :last_modified_date,
       :limits,
-      :quiet_time)
+      :quiet_time,
+      :journey_limits)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5640,15 +5678,32 @@ module Aws::Pinpoint
     #   that you received from Google to communicate with Google services.
     #   @return [String]
     #
+    # @!attribute [rw] default_authentication_method
+    #   The default authentication method used for GCM. Values are either
+    #   "TOKEN" or "KEY". Defaults to "KEY".
+    #   @return [String]
+    #
     # @!attribute [rw] enabled
     #   Specifies whether to enable the GCM channel for the application.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] service_json
+    #   The contents of the JSON file provided by Google during registration
+    #   in order to generate an access token for authentication. For more
+    #   information see [Migrate from legacy FCM APIs to HTTP v1][1].
+    #
+    #
+    #
+    #   [1]: https://firebase.google.com/docs/cloud-messaging/migrate-v1
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GCMChannelRequest AWS API Documentation
     #
     class GCMChannelRequest < Struct.new(
       :api_key,
-      :enabled)
+      :default_authentication_method,
+      :enabled,
+      :service_json)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5672,6 +5727,11 @@ module Aws::Pinpoint
     #   that you received from Google to communicate with Google services.
     #   @return [String]
     #
+    # @!attribute [rw] default_authentication_method
+    #   The default authentication method used for GCM. Values are either
+    #   "TOKEN" or "KEY". Defaults to "KEY".
+    #   @return [String]
+    #
     # @!attribute [rw] enabled
     #   Specifies whether the GCM channel is enabled for the application.
     #   @return [Boolean]
@@ -5679,6 +5739,11 @@ module Aws::Pinpoint
     # @!attribute [rw] has_credential
     #   (Not used) This property is retained only for backward
     #   compatibility.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] has_fcm_service_credentials
+    #   Returns true if the JSON file provided by Google during registration
+    #   process was used in the **ServiceJson** field of the request.
     #   @return [Boolean]
     #
     # @!attribute [rw] id
@@ -5713,8 +5778,10 @@ module Aws::Pinpoint
       :application_id,
       :creation_date,
       :credential,
+      :default_authentication_method,
       :enabled,
       :has_credential,
+      :has_fcm_service_credentials,
       :id,
       :is_archived,
       :last_modified_by,
@@ -5778,6 +5845,12 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] image_url
     #   The URL of an image to display in the push notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_authentication_method
+    #   The preferred authentication method, with valid values "KEY" or
+    #   "TOKEN". If a value isn't provided then the
+    #   **DefaultAuthenticationMethod** is used.
     #   @return [String]
     #
     # @!attribute [rw] priority
@@ -5866,6 +5939,7 @@ module Aws::Pinpoint
       :icon_reference,
       :image_icon_url,
       :image_url,
+      :preferred_authentication_method,
       :priority,
       :raw_content,
       :restricted_package_name,
@@ -8049,7 +8123,8 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] template_type
-    #   The type of the template.
+    #   The type of channel that the message template is designed for. For
+    #   an in-app message template, this value is INAPP.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -8348,13 +8423,26 @@ module Aws::Pinpoint
     #   journey.
     #   @return [String]
     #
+    # @!attribute [rw] timeframe_cap
+    #   The number of messages that an endpoint can receive during the
+    #   specified timeframe.
+    #   @return [Types::JourneyTimeframeCap]
+    #
+    # @!attribute [rw] total_cap
+    #   The maximum number of messages a journey can sent to a single
+    #   endpoint. The maximum value is 100. If set to 0, this limit will not
+    #   apply.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyLimits AWS API Documentation
     #
     class JourneyLimits < Struct.new(
       :daily_cap,
       :endpoint_reentry_cap,
       :messages_per_second,
-      :endpoint_reentry_interval)
+      :endpoint_reentry_interval,
+      :timeframe_cap,
+      :total_cap)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8893,6 +8981,29 @@ module Aws::Pinpoint
     #
     class JourneyStateRequest < Struct.new(
       :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The number of messages that can be sent to an endpoint during the
+    # specified timeframe for all journeys.
+    #
+    # @!attribute [rw] cap
+    #   The maximum number of messages that all journeys can send to an
+    #   endpoint during the specified timeframe. The maximum value is 100.
+    #   If set to 0, this limit will not apply.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] days
+    #   The length of the timeframe in days. The maximum value is 30. If set
+    #   to 0, this limit will not apply.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyTimeframeCap AWS API Documentation
+    #
+    class JourneyTimeframeCap < Struct.new(
+      :cap,
+      :days)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11771,13 +11882,19 @@ module Aws::Pinpoint
     #   supported for campaigns.
     #   @return [Types::Template]
     #
+    # @!attribute [rw] in_app_template
+    #   The InApp template to use for the message. The InApp template object
+    #   is not supported for SendMessages.
+    #   @return [Types::Template]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TemplateConfiguration AWS API Documentation
     #
     class TemplateConfiguration < Struct.new(
       :email_template,
       :push_template,
       :sms_template,
-      :voice_template)
+      :voice_template,
+      :in_app_template)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11861,7 +11978,7 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] template_type
     #   The type of channel that the message template is designed for.
-    #   Possible values are: EMAIL, PUSH, SMS, and VOICE.
+    #   Possible values are: EMAIL, PUSH, SMS, INAPP, and VOICE.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -11915,7 +12032,7 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] template_type
     #   The type of channel that the message template is designed for.
-    #   Possible values are: EMAIL, PUSH, SMS, and VOICE.
+    #   Possible values are: EMAIL, PUSH, SMS, INAPP, and VOICE.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -13495,13 +13612,20 @@ module Aws::Pinpoint
     #   campaign or journey.
     #   @return [Types::QuietTime]
     #
+    # @!attribute [rw] journey_limits
+    #   The default sending limits for journeys in the application. These
+    #   limits apply to each journey for the application but can be
+    #   overridden, on a per journey basis, with the JourneyLimits resource.
+    #   @return [Types::ApplicationSettingsJourneyLimits]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteApplicationSettingsRequest AWS API Documentation
     #
     class WriteApplicationSettingsRequest < Struct.new(
       :campaign_hook,
       :cloud_watch_metrics_enabled,
       :limits,
-      :quiet_time)
+      :quiet_time,
+      :journey_limits)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -442,6 +442,20 @@ module Aws::CloudFront
     # configuration. Then you can use `CreateContinuousDeploymentPolicy` to
     # incrementally move traffic to the staging distribution.
     #
+    # This API operation requires the following IAM permissions:
+    #
+    # * [GetDistribution][1]
+    #
+    # * [CreateDistribution][2]
+    #
+    # * [CopyDistribution][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistribution.html
+    # [2]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CreateDistribution.html
+    # [3]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CopyDistribution.html
+    #
     # @option params [required, String] :primary_distribution_id
     #   The identifier of the primary distribution whose configuration you are
     #   copying. To get a distribution ID, use `ListDistributions`.
@@ -461,6 +475,14 @@ module Aws::CloudFront
     #   helps to prevent CloudFront from creating a duplicate resource if you
     #   accidentally resubmit an identical request.
     #
+    # @option params [Boolean] :enabled
+    #   A Boolean flag to specify the state of the staging distribution when
+    #   it's created. When you set this value to `True`, the staging
+    #   distribution is enabled. When you set this value to `False`, the
+    #   staging distribution is disabled.
+    #
+    #   If you omit this field, the default value is `True`.
+    #
     # @return [Types::CopyDistributionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CopyDistributionResult#distribution #distribution} => Types::Distribution
@@ -474,6 +496,7 @@ module Aws::CloudFront
     #     staging: false,
     #     if_match: "string",
     #     caller_reference: "string", # required
+    #     enabled: false,
     #   })
     #
     # @example Response structure
@@ -1373,7 +1396,17 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Create a new distribution with tags.
+    # Create a new distribution with tags. This API operation requires the
+    # following IAM permissions:
+    #
+    # * [CreateDistribution][1]
+    #
+    # * [TagResource][2]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CreateDistribution.html
+    # [2]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_TagResource.html
     #
     # @option params [required, Types::DistributionConfigWithTags] :distribution_config_with_tags
     #   The distribution's configuration information.
@@ -2030,7 +2063,7 @@ module Aws::CloudFront
     #     name: "FunctionName", # required
     #     function_config: { # required
     #       comment: "string", # required
-    #       runtime: "cloudfront-js-1.0", # required, accepts cloudfront-js-1.0
+    #       runtime: "cloudfront-js-1.0", # required, accepts cloudfront-js-1.0, cloudfront-js-2.0
     #     },
     #     function_code: "data", # required
     #   })
@@ -2040,7 +2073,7 @@ module Aws::CloudFront
     #   resp.function_summary.name #=> String
     #   resp.function_summary.status #=> String
     #   resp.function_summary.function_config.comment #=> String
-    #   resp.function_summary.function_config.runtime #=> String, one of "cloudfront-js-1.0"
+    #   resp.function_summary.function_config.runtime #=> String, one of "cloudfront-js-1.0", "cloudfront-js-2.0"
     #   resp.function_summary.function_metadata.function_arn #=> String
     #   resp.function_summary.function_metadata.stage #=> String, one of "DEVELOPMENT", "LIVE"
     #   resp.function_summary.function_metadata.created_time #=> Time
@@ -3398,7 +3431,7 @@ module Aws::CloudFront
     #   resp.function_summary.name #=> String
     #   resp.function_summary.status #=> String
     #   resp.function_summary.function_config.comment #=> String
-    #   resp.function_summary.function_config.runtime #=> String, one of "cloudfront-js-1.0"
+    #   resp.function_summary.function_config.runtime #=> String, one of "cloudfront-js-1.0", "cloudfront-js-2.0"
     #   resp.function_summary.function_metadata.function_arn #=> String
     #   resp.function_summary.function_metadata.stage #=> String, one of "DEVELOPMENT", "LIVE"
     #   resp.function_summary.function_metadata.created_time #=> Time
@@ -6337,7 +6370,7 @@ module Aws::CloudFront
     #   resp.function_list.items[0].name #=> String
     #   resp.function_list.items[0].status #=> String
     #   resp.function_list.items[0].function_config.comment #=> String
-    #   resp.function_list.items[0].function_config.runtime #=> String, one of "cloudfront-js-1.0"
+    #   resp.function_list.items[0].function_config.runtime #=> String, one of "cloudfront-js-1.0", "cloudfront-js-2.0"
     #   resp.function_list.items[0].function_metadata.function_arn #=> String
     #   resp.function_list.items[0].function_metadata.stage #=> String, one of "DEVELOPMENT", "LIVE"
     #   resp.function_list.items[0].function_metadata.created_time #=> Time
@@ -6924,7 +6957,7 @@ module Aws::CloudFront
     #   resp.function_summary.name #=> String
     #   resp.function_summary.status #=> String
     #   resp.function_summary.function_config.comment #=> String
-    #   resp.function_summary.function_config.runtime #=> String, one of "cloudfront-js-1.0"
+    #   resp.function_summary.function_config.runtime #=> String, one of "cloudfront-js-1.0", "cloudfront-js-2.0"
     #   resp.function_summary.function_metadata.function_arn #=> String
     #   resp.function_summary.function_metadata.stage #=> String, one of "DEVELOPMENT", "LIVE"
     #   resp.function_summary.function_metadata.created_time #=> Time
@@ -7029,7 +7062,7 @@ module Aws::CloudFront
     #   resp.test_result.function_summary.name #=> String
     #   resp.test_result.function_summary.status #=> String
     #   resp.test_result.function_summary.function_config.comment #=> String
-    #   resp.test_result.function_summary.function_config.runtime #=> String, one of "cloudfront-js-1.0"
+    #   resp.test_result.function_summary.function_config.runtime #=> String, one of "cloudfront-js-1.0", "cloudfront-js-2.0"
     #   resp.test_result.function_summary.function_metadata.function_arn #=> String
     #   resp.test_result.function_summary.function_metadata.stage #=> String, one of "DEVELOPMENT", "LIVE"
     #   resp.test_result.function_summary.function_metadata.created_time #=> Time
@@ -7835,6 +7868,17 @@ module Aws::CloudFront
     # will disable the continuous deployment policy and move your domain's
     # traffic back to the primary distribution.
     #
+    # This API operation requires the following IAM permissions:
+    #
+    # * [GetDistribution][1]
+    #
+    # * [UpdateDistribution][2]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistribution.html
+    # [2]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html
+    #
     # @option params [required, String] :id
     #   The identifier of the primary distribution to which you are copying a
     #   staging distribution's configuration.
@@ -8247,7 +8291,7 @@ module Aws::CloudFront
     #     if_match: "string", # required
     #     function_config: { # required
     #       comment: "string", # required
-    #       runtime: "cloudfront-js-1.0", # required, accepts cloudfront-js-1.0
+    #       runtime: "cloudfront-js-1.0", # required, accepts cloudfront-js-1.0, cloudfront-js-2.0
     #     },
     #     function_code: "data", # required
     #   })
@@ -8257,7 +8301,7 @@ module Aws::CloudFront
     #   resp.function_summary.name #=> String
     #   resp.function_summary.status #=> String
     #   resp.function_summary.function_config.comment #=> String
-    #   resp.function_summary.function_config.runtime #=> String, one of "cloudfront-js-1.0"
+    #   resp.function_summary.function_config.runtime #=> String, one of "cloudfront-js-1.0", "cloudfront-js-2.0"
     #   resp.function_summary.function_metadata.function_arn #=> String
     #   resp.function_summary.function_metadata.stage #=> String, one of "DEVELOPMENT", "LIVE"
     #   resp.function_summary.function_metadata.created_time #=> Time
@@ -8896,7 +8940,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

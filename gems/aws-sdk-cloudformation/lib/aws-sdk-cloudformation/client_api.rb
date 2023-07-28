@@ -329,6 +329,7 @@ module Aws::CloudFormation
     ResourceTypes = Shapes::ListShape.new(name: 'ResourceTypes')
     ResourcesToImport = Shapes::ListShape.new(name: 'ResourcesToImport')
     ResourcesToSkip = Shapes::ListShape.new(name: 'ResourcesToSkip')
+    RetainExceptOnCreate = Shapes::BooleanShape.new(name: 'RetainExceptOnCreate')
     RetainResources = Shapes::ListShape.new(name: 'RetainResources')
     RetainStacks = Shapes::BooleanShape.new(name: 'RetainStacks')
     RetainStacksNullable = Shapes::BooleanShape.new(name: 'RetainStacksNullable')
@@ -650,6 +651,7 @@ module Aws::CloudFormation
     CreateStackInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateStackInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     CreateStackInput.add_member(:enable_termination_protection, Shapes::ShapeRef.new(shape: EnableTerminationProtection, location_name: "EnableTerminationProtection"))
+    CreateStackInput.add_member(:retain_except_on_create, Shapes::ShapeRef.new(shape: RetainExceptOnCreate, location_name: "RetainExceptOnCreate"))
     CreateStackInput.struct_class = Types::CreateStackInput
 
     CreateStackInstancesInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, required: true, location_name: "StackSetName"))
@@ -968,6 +970,7 @@ module Aws::CloudFormation
     ExecuteChangeSetInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackNameOrId, location_name: "StackName"))
     ExecuteChangeSetInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     ExecuteChangeSetInput.add_member(:disable_rollback, Shapes::ShapeRef.new(shape: DisableRollback, location_name: "DisableRollback"))
+    ExecuteChangeSetInput.add_member(:retain_except_on_create, Shapes::ShapeRef.new(shape: RetainExceptOnCreate, location_name: "RetainExceptOnCreate"))
     ExecuteChangeSetInput.struct_class = Types::ExecuteChangeSetInput
 
     ExecuteChangeSetOutput.struct_class = Types::ExecuteChangeSetOutput
@@ -1356,6 +1359,7 @@ module Aws::CloudFormation
     RollbackStackInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackNameOrId, required: true, location_name: "StackName"))
     RollbackStackInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
     RollbackStackInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
+    RollbackStackInput.add_member(:retain_except_on_create, Shapes::ShapeRef.new(shape: RetainExceptOnCreate, location_name: "RetainExceptOnCreate"))
     RollbackStackInput.struct_class = Types::RollbackStackInput
 
     RollbackStackOutput.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "StackId"))
@@ -1420,6 +1424,7 @@ module Aws::CloudFormation
     Stack.add_member(:parent_id, Shapes::ShapeRef.new(shape: StackId, location_name: "ParentId"))
     Stack.add_member(:root_id, Shapes::ShapeRef.new(shape: StackId, location_name: "RootId"))
     Stack.add_member(:drift_information, Shapes::ShapeRef.new(shape: StackDriftInformation, location_name: "DriftInformation"))
+    Stack.add_member(:retain_except_on_create, Shapes::ShapeRef.new(shape: RetainExceptOnCreate, location_name: "RetainExceptOnCreate"))
     Stack.struct_class = Types::Stack
 
     StackDriftInformation.add_member(:stack_drift_status, Shapes::ShapeRef.new(shape: StackDriftStatus, required: true, location_name: "StackDriftStatus"))
@@ -1807,6 +1812,7 @@ module Aws::CloudFormation
     UpdateStackInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     UpdateStackInput.add_member(:disable_rollback, Shapes::ShapeRef.new(shape: DisableRollback, location_name: "DisableRollback"))
     UpdateStackInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
+    UpdateStackInput.add_member(:retain_except_on_create, Shapes::ShapeRef.new(shape: RetainExceptOnCreate, location_name: "RetainExceptOnCreate"))
     UpdateStackInput.struct_class = Types::UpdateStackInput
 
     UpdateStackInstancesInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetNameOrId, required: true, location_name: "StackSetName"))

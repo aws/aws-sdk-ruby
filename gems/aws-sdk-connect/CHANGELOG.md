@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.122.0 (2023-07-28)
+------------------
+
+* Feature - This release adds support for new number types.
+
 1.121.0 (2023-07-18)
 ------------------
 

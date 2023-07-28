@@ -1349,6 +1349,18 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html
     #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
     #
+    # @option params [Boolean] :retain_except_on_create
+    #   This deletion policy deletes newly created resources, but retains
+    #   existing resources, when a stack operation is rolled back. This
+    #   ensures new, empty, and unused resources are deleted, while critical
+    #   resources and their data are retained. `RetainExceptOnCreate` can be
+    #   specified for any resource that supports the [ DeletionPolicy][1]
+    #   attribute.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html
+    #
     # @return [Types::CreateStackOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStackOutput#stack_id #stack_id} => String
@@ -1393,6 +1405,7 @@ module Aws::CloudFormation
     #     ],
     #     client_request_token: "ClientRequestToken",
     #     enable_termination_protection: false,
+    #     retain_except_on_create: false,
     #   })
     #
     # @example Response structure
@@ -3305,6 +3318,7 @@ module Aws::CloudFormation
     #   resp.stacks[0].root_id #=> String
     #   resp.stacks[0].drift_information.stack_drift_status #=> String, one of "DRIFTED", "IN_SYNC", "UNKNOWN", "NOT_CHECKED"
     #   resp.stacks[0].drift_information.last_check_timestamp #=> Time
+    #   resp.stacks[0].retain_except_on_create #=> Boolean
     #   resp.next_token #=> String
     #
     #
@@ -3871,6 +3885,18 @@ module Aws::CloudFormation
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateChangeSet.html
     #
+    # @option params [Boolean] :retain_except_on_create
+    #   This deletion policy deletes newly created resources, but retains
+    #   existing resources, when a stack operation is rolled back. This
+    #   ensures new, empty, and unused resources are deleted, while critical
+    #   resources and their data are retained. `RetainExceptOnCreate` can be
+    #   specified for any resource that supports the [ DeletionPolicy][1]
+    #   attribute.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3880,6 +3906,7 @@ module Aws::CloudFormation
     #     stack_name: "StackNameOrId",
     #     client_request_token: "ClientRequestToken",
     #     disable_rollback: false,
+    #     retain_except_on_create: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ExecuteChangeSet AWS API Documentation
@@ -5679,6 +5706,18 @@ module Aws::CloudFormation
     # @option params [String] :client_request_token
     #   A unique identifier for this `RollbackStack` request.
     #
+    # @option params [Boolean] :retain_except_on_create
+    #   This deletion policy deletes newly created resources, but retains
+    #   existing resources, when a stack operation is rolled back. This
+    #   ensures new, empty, and unused resources are deleted, while critical
+    #   resources and their data are retained. `RetainExceptOnCreate` can be
+    #   specified for any resource that supports the [ DeletionPolicy][1]
+    #   attribute.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html
+    #
     # @return [Types::RollbackStackOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RollbackStackOutput#stack_id #stack_id} => String
@@ -5689,6 +5728,7 @@ module Aws::CloudFormation
     #     stack_name: "StackNameOrId", # required
     #     role_arn: "RoleARN",
     #     client_request_token: "ClientRequestToken",
+    #     retain_except_on_create: false,
     #   })
     #
     # @example Response structure
@@ -6363,6 +6403,18 @@ module Aws::CloudFormation
     #   token in the following format:
     #   `Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002`.
     #
+    # @option params [Boolean] :retain_except_on_create
+    #   This deletion policy deletes newly created resources, but retains
+    #   existing resources, when a stack operation is rolled back. This
+    #   ensures new, empty, and unused resources are deleted, while critical
+    #   resources and their data are retained. `RetainExceptOnCreate` can be
+    #   specified for any resource that supports the [ DeletionPolicy][1]
+    #   attribute.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html
+    #
     # @return [Types::UpdateStackOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateStackOutput#stack_id #stack_id} => String
@@ -6407,6 +6459,7 @@ module Aws::CloudFormation
     #     ],
     #     disable_rollback: false,
     #     client_request_token: "ClientRequestToken",
+    #     retain_except_on_create: false,
     #   })
     #
     # @example Response structure
@@ -7123,7 +7176,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

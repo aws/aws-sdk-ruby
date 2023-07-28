@@ -59,9 +59,8 @@ module Aws::CloudFront
     #
     # @!attribute [rw] enabled
     #   This field is `true` if any of the Amazon Web Services accounts in
-    #   the list have active CloudFront key pairs that CloudFront can use to
-    #   verify the signatures of signed URLs and signed cookies. If not,
-    #   this field is `false`.
+    #   the list are configured as trusted signers. If not, this field is
+    #   `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] quantity
@@ -1653,13 +1652,23 @@ module Aws::CloudFront
     #   if you accidentally resubmit an identical request.
     #   @return [String]
     #
+    # @!attribute [rw] enabled
+    #   A Boolean flag to specify the state of the staging distribution when
+    #   it's created. When you set this value to `True`, the staging
+    #   distribution is enabled. When you set this value to `False`, the
+    #   staging distribution is disabled.
+    #
+    #   If you omit this field, the default value is `True`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CopyDistributionRequest AWS API Documentation
     #
     class CopyDistributionRequest < Struct.new(
       :primary_distribution_id,
       :staging,
       :if_match,
-      :caller_reference)
+      :caller_reference,
+      :enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4581,8 +4590,7 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] runtime
-    #   The function's runtime environment. The only valid value is
-    #   `cloudfront-js-1.0`.
+    #   The function's runtime environment verion.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FunctionConfig AWS API Documentation
@@ -11950,9 +11958,9 @@ module Aws::CloudFront
     # can use to verify the signatures of signed URLs and signed cookies.
     #
     # @!attribute [rw] enabled
-    #   This field is `true` if any of the Amazon Web Services accounts have
-    #   public keys that CloudFront can use to verify the signatures of
-    #   signed URLs and signed cookies. If not, this field is `false`.
+    #   This field is `true` if any of the Amazon Web Services accounts in
+    #   the list are configured as trusted signers. If not, this field is
+    #   `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] quantity

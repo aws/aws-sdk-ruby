@@ -56,6 +56,8 @@ module Aws::ApplicationInsights
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :add_workload
+            Aws::ApplicationInsights::Endpoints::AddWorkload.build(context)
           when :create_application
             Aws::ApplicationInsights::Endpoints::CreateApplication.build(context)
           when :create_component
@@ -84,6 +86,8 @@ module Aws::ApplicationInsights
             Aws::ApplicationInsights::Endpoints::DescribeProblem.build(context)
           when :describe_problem_observations
             Aws::ApplicationInsights::Endpoints::DescribeProblemObservations.build(context)
+          when :describe_workload
+            Aws::ApplicationInsights::Endpoints::DescribeWorkload.build(context)
           when :list_applications
             Aws::ApplicationInsights::Endpoints::ListApplications.build(context)
           when :list_components
@@ -98,6 +102,10 @@ module Aws::ApplicationInsights
             Aws::ApplicationInsights::Endpoints::ListProblems.build(context)
           when :list_tags_for_resource
             Aws::ApplicationInsights::Endpoints::ListTagsForResource.build(context)
+          when :list_workloads
+            Aws::ApplicationInsights::Endpoints::ListWorkloads.build(context)
+          when :remove_workload
+            Aws::ApplicationInsights::Endpoints::RemoveWorkload.build(context)
           when :tag_resource
             Aws::ApplicationInsights::Endpoints::TagResource.build(context)
           when :untag_resource
@@ -110,6 +118,10 @@ module Aws::ApplicationInsights
             Aws::ApplicationInsights::Endpoints::UpdateComponentConfiguration.build(context)
           when :update_log_pattern
             Aws::ApplicationInsights::Endpoints::UpdateLogPattern.build(context)
+          when :update_problem
+            Aws::ApplicationInsights::Endpoints::UpdateProblem.build(context)
+          when :update_workload
+            Aws::ApplicationInsights::Endpoints::UpdateWorkload.build(context)
           end
         end
       end

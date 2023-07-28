@@ -32,7 +32,7 @@ require_relative 'aws-sdk-applicationinsights/customizations'
 # structure.
 #
 #     application_insights = Aws::ApplicationInsights::Client.new
-#     resp = application_insights.create_application(params)
+#     resp = application_insights.add_workload(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-applicationinsights/customizations'
 # @!group service
 module Aws::ApplicationInsights
 
-  GEM_VERSION = '1.38.0'
+  GEM_VERSION = '1.39.0'
 
 end

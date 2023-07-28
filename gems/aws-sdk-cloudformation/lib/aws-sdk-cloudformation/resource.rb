@@ -75,6 +75,7 @@ module Aws::CloudFormation
     #     ],
     #     client_request_token: "ClientRequestToken",
     #     enable_termination_protection: false,
+    #     retain_except_on_create: false,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :stack_name
@@ -315,6 +316,17 @@ module Aws::CloudFormation
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html
     #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
+    # @option options [Boolean] :retain_except_on_create
+    #   This deletion policy deletes newly created resources, but retains
+    #   existing resources, when a stack operation is rolled back. This
+    #   ensures new, empty, and unused resources are deleted, while critical
+    #   resources and their data are retained. `RetainExceptOnCreate` can be
+    #   specified for any resource that supports the [ DeletionPolicy][1]
+    #   attribute.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html
     # @return [Stack]
     def create_stack(options = {})
       Aws::Plugins::UserAgent.feature('resource') do
