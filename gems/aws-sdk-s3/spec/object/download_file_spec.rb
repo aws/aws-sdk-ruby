@@ -48,7 +48,6 @@ module Aws
           allow(client).to receive(:head_object).with({
             bucket: 'bucket',
             key: 'small',
-            checksum_mode: 'ENABLED',
             part_number: 1
           }).and_return(
             client.stub_data(
@@ -62,7 +61,6 @@ module Aws
             bucket: 'bucket',
             key: 'small',
             part_number: 1,
-            checksum_mode: 'ENABLED',
             version_id: version_id
           }).and_return(
             client.stub_data(
@@ -75,7 +73,6 @@ module Aws
           allow(client).to receive(:head_object).with({
             bucket: 'bucket',
             key: 'large',
-            checksum_mode: 'ENABLED',
             part_number: 1
           }).and_return(
             client.stub_data(
@@ -87,7 +84,6 @@ module Aws
 
           allow(client).to receive(:head_object).with({
             bucket: 'bucket',
-            checksum_mode: 'ENABLED',
             key: 'large'
           }).and_return(
             client.stub_data(
@@ -99,7 +95,6 @@ module Aws
           allow(client).to receive(:head_object).with({
             bucket: 'bucket',
             key: 'single',
-            checksum_mode: 'ENABLED',
             part_number: 1
           }).and_return(
             client.stub_data(
@@ -114,7 +109,6 @@ module Aws
           expect(client).to receive(:get_object).with({
             bucket: 'bucket',
             key: 'small',
-            checksum_mode: 'ENABLED',
             response_target: path
           }).exactly(1).times
 
@@ -125,7 +119,6 @@ module Aws
           expect(client).to receive(:head_object).with({
             bucket: 'bucket',
             key: 'large',
-            checksum_mode: 'ENABLED',
             part_number: 1
           }).exactly(1).times
 
@@ -140,7 +133,6 @@ module Aws
           expect(client).to receive(:head_object).with({
             bucket: 'bucket',
             key: 'single',
-            checksum_mode: 'ENABLED',
             part_number: 1
           }).exactly(1).times
 
@@ -155,7 +147,6 @@ module Aws
           expect(client).to receive(:get_object).with({
             bucket: 'bucket',
             key: 'small',
-            checksum_mode: 'ENABLED',
             version_id: version_id,
             response_target: path
           }).exactly(1).times
@@ -163,53 +154,100 @@ module Aws
           small_obj.download_file(path, version_id: version_id)
         end
 
-        it 'raises an error when checksum validation fails on single part' do
-          client.stub_responses(:get_object, {body: 'body', checksum_sha1: 'invalid'})
+        context "checksum_mode: 'ENABLED'" do
+          before(:each) do
+            allow(client).to receive(:head_object).with({
+              bucket: 'bucket',
+              key: 'small',
+              checksum_mode: 'ENABLED',
+              part_number: 1
+            }).and_return(
+              client.stub_data(
+                :head_object,
+                content_length: one_meg,
+                parts_count: nil
+              )
+            )
 
-          expect do
-            small_obj.download_file(path)
-          end.to raise_error(Aws::Errors::ChecksumError)
-        end
+            allow(client).to receive(:head_object).with({
+              bucket: 'bucket',
+              key: 'large',
+              checksum_mode: 'ENABLED',
+              part_number: 1
+            }).and_return(
+              client.stub_data(
+                :head_object,
+                content_length: 5 * one_meg,
+                parts_count: 4
+              )
+            )
 
-        it 'raises an error when checksum validation fails on multipart' do
-          client.stub_responses(:get_object, {body: 'body', checksum_sha1: 'invalid'})
-          expect(Thread).to receive(:new).and_yield
+            allow(client).to receive(:head_object).with({
+              bucket: 'bucket',
+              key: 'large',
+              checksum_mode: 'ENABLED'
+            }).and_return(
+              client.stub_data(
+                :head_object,
+                content_length: 20 * one_meg
+              )
+            )
 
-          expect do
-            large_obj.download_file(path)
-          end.to raise_error(Aws::Errors::ChecksumError)
-        end
-
-        it 'calls on_checksum_validated on single part' do
-          callback_data = {called: 0}
-          client.stub_responses(
-            :get_object,
-            {body: 'body', checksum_sha1: 'Agg/RXngimEkJcDBoX7ket14O5Q='}
-          )
-          callback = proc do |_alg, _resp|
-            callback_data[:called] += 1
           end
 
-          small_obj.download_file(path, on_checksum_validated: callback)
-          expect(callback_data[:called]).to eq(1)
-        end
-
-        it 'calls on_checksum_validated on multipart' do
-          callback_data = {called: 0}
-          client.stub_responses(
-            :get_object,
-            {
-              body: 'body',
-              content_range: 'bytes 0-4/4',
-              checksum_sha1: 'Agg/RXngimEkJcDBoX7ket14O5Q='
-            }
-          )
-          callback = proc do |_alg, _resp|
-            callback_data[:called] += 1
+          it 'raises an error when checksum validation fails on single part' do
+            client.stub_responses(:get_object, {body: 'body', checksum_sha1: 'invalid'})
+            expect do
+              small_obj.download_file(path, checksum_mode: 'ENABLED')
+            end.to raise_error(Aws::Errors::ChecksumError)
           end
 
-          large_obj.download_file(path, on_checksum_validated: callback)
-          expect(callback_data[:called]).to eq(4)
+          it 'raises an error when checksum validation fails on multipart' do
+            client.stub_responses(:get_object, {body: 'body', checksum_sha1: 'invalid'})
+            expect(Thread).to receive(:new).and_yield
+
+            expect do
+              large_obj.download_file(path, checksum_mode: 'ENABLED')
+            end.to raise_error(Aws::Errors::ChecksumError)
+          end
+
+          it 'calls on_checksum_validated on single part' do
+            callback_data = {called: 0}
+            client.stub_responses(
+              :get_object,
+              {body: 'body', checksum_sha1: 'Agg/RXngimEkJcDBoX7ket14O5Q='}
+            )
+            callback = proc do |_alg, _resp|
+              callback_data[:called] += 1
+            end
+
+            small_obj.download_file(path,
+              on_checksum_validated: callback,
+              checksum_mode: 'ENABLED'
+            )
+            expect(callback_data[:called]).to eq(1)
+          end
+
+          it 'calls on_checksum_validated on multipart' do
+            callback_data = {called: 0}
+            client.stub_responses(
+              :get_object,
+              {
+                body: 'body',
+                content_range: 'bytes 0-4/4',
+                checksum_sha1: 'Agg/RXngimEkJcDBoX7ket14O5Q='
+              }
+            )
+            callback = proc do |_alg, _resp|
+              callback_data[:called] += 1
+            end
+
+            large_obj.download_file(path,
+              on_checksum_validated: callback,
+              checksum_mode: 'ENABLED'
+            )
+            expect(callback_data[:called]).to eq(4)
+          end
         end
 
         it 'raises an error if an invalid mode is specified' do
@@ -238,7 +276,12 @@ module Aws
         end
 
         it 'raises an error if :on_checksum_validated is not callable' do
-          expect { large_obj.download_file(path, on_checksum_validated: 'string') }
+          expect do
+            large_obj.download_file(path,
+              on_checksum_validated: 'string',
+              checksum_mode: 'ENABLED'
+            )
+          end
             .to raise_error(
               ArgumentError,
               'on_checksum_validated must be callable'

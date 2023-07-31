@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Don't default `checksum_mode` in `FileDownloader` when `stub_responses` is true (#2888).
+
 1.132.0 (2023-07-24)
 ------------------
 

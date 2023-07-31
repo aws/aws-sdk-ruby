@@ -31,7 +31,13 @@ module Aws
           key: options[:key],
         }
         @params[:version_id] = options[:version_id] if options[:version_id]
-        @params[:checksum_mode] = options[:checksum_mode] || 'ENABLED'
+
+        if options[:checksum_mode]
+          @params[:checksum_mode] = options[:checksum_mode]
+        elsif !@client.config.stub_responses
+          @params[:checksum_mode] = 'ENABLED'
+        end
+
         @on_checksum_validated = options[:on_checksum_validated]
 
         validate!
