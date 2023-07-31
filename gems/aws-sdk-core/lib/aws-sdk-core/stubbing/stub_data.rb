@@ -13,11 +13,22 @@ module Aws
       def stub(data = {})
         stub = EmptyStub.new(@rules).stub
         remove_paging_tokens(stub)
+        remove_checksums(stub)
         apply_data(data, stub)
         stub
       end
 
       private
+
+      def remove_checksums(stub)
+        if @rules && @rules.shape.is_a?(Seahorse::Model::Shapes::StructureShape)
+          @rules.shape.members.each do |key, member|
+            if member.location == 'header' && member.location_name.start_with?('x-amz-checksum-')
+              stub[key] = nil
+            end
+          end
+        end
+      end
 
       def remove_paging_tokens(stub)
         if @pager
