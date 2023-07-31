@@ -33,7 +33,7 @@ require_relative 'aws-sdk-cleanrooms/customizations'
 # structure.
 #
 #     clean_rooms = Aws::CleanRooms::Client.new
-#     resp = clean_rooms.batch_get_schema(params)
+#     resp = clean_rooms.batch_get_collaboration_analysis_template(params)
 #
 # See {Client} for more information.
 #
@@ -53,6 +53,6 @@ require_relative 'aws-sdk-cleanrooms/customizations'
 # @!group service
 module Aws::CleanRooms
 
-  GEM_VERSION = '1.8.0'
+  GEM_VERSION = '1.9.0'
 
 end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2023-07-31)
+------------------
+
+* Feature - Amazon Route 53 now supports the Israel (Tel Aviv) Region (il-central-1) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+
 1.77.0 (2023-07-26)
 ------------------
 

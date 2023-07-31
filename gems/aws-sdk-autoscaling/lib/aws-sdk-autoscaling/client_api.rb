@@ -30,6 +30,8 @@ module Aws::AutoScaling
     AdjustmentType = Shapes::StructureShape.new(name: 'AdjustmentType')
     AdjustmentTypes = Shapes::ListShape.new(name: 'AdjustmentTypes')
     Alarm = Shapes::StructureShape.new(name: 'Alarm')
+    AlarmList = Shapes::ListShape.new(name: 'AlarmList')
+    AlarmSpecification = Shapes::StructureShape.new(name: 'AlarmSpecification')
     Alarms = Shapes::ListShape.new(name: 'Alarms')
     AllowedInstanceType = Shapes::StringShape.new(name: 'AllowedInstanceType')
     AllowedInstanceTypes = Shapes::ListShape.new(name: 'AllowedInstanceTypes')
@@ -437,6 +439,11 @@ module Aws::AutoScaling
     Alarm.add_member(:alarm_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "AlarmName"))
     Alarm.add_member(:alarm_arn, Shapes::ShapeRef.new(shape: ResourceName, location_name: "AlarmARN"))
     Alarm.struct_class = Types::Alarm
+
+    AlarmList.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
+
+    AlarmSpecification.add_member(:alarms, Shapes::ShapeRef.new(shape: AlarmList, location_name: "Alarms"))
+    AlarmSpecification.struct_class = Types::AlarmSpecification
 
     Alarms.member = Shapes::ShapeRef.new(shape: Alarm)
 
@@ -1312,6 +1319,7 @@ module Aws::AutoScaling
     RefreshPreferences.add_member(:auto_rollback, Shapes::ShapeRef.new(shape: AutoRollback, location_name: "AutoRollback"))
     RefreshPreferences.add_member(:scale_in_protected_instances, Shapes::ShapeRef.new(shape: ScaleInProtectedInstances, location_name: "ScaleInProtectedInstances"))
     RefreshPreferences.add_member(:standby_instances, Shapes::ShapeRef.new(shape: StandbyInstances, location_name: "StandbyInstances"))
+    RefreshPreferences.add_member(:alarm_specification, Shapes::ShapeRef.new(shape: AlarmSpecification, location_name: "AlarmSpecification"))
     RefreshPreferences.struct_class = Types::RefreshPreferences
 
     ResourceContentionFault.add_member(:message, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "message"))

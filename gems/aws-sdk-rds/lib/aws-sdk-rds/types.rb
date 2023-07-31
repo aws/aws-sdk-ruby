@@ -2787,6 +2787,14 @@ module Aws::RDS
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #   @return [String]
     #
+    # @!attribute [rw] enable_local_write_forwarding
+    #   Specifies whether read replicas can forward write operations to the
+    #   writer DB instance in the DB cluster. By default, write operations
+    #   aren't allowed on reader DB instances.
+    #
+    #   Valid for: Aurora DB clusters only
+    #   @return [Boolean]
+    #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -2844,6 +2852,7 @@ module Aws::RDS
       :db_system_id,
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
+      :enable_local_write_forwarding,
       :source_region)
       SENSITIVE = []
       include Aws::Structure
@@ -6413,6 +6422,12 @@ module Aws::RDS
     #   This setting is only for Aurora DB clusters.
     #   @return [Time]
     #
+    # @!attribute [rw] local_write_forwarding_status
+    #   Specifies whether an Aurora DB cluster has in-cluster write
+    #   forwarding enabled, not enabled, requested, or is in the process of
+    #   enabling it.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
     #
     class DBCluster < Struct.new(
@@ -6487,7 +6502,8 @@ module Aws::RDS
       :network_type,
       :db_system_id,
       :master_user_secret,
-      :io_optimized_next_allowed_modification_time)
+      :io_optimized_next_allowed_modification_time,
+      :local_write_forwarding_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7450,6 +7466,15 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] supports_local_write_forwarding
+    #   A value that indicates whether the DB engine version supports
+    #   forwarding write operations from reader DB instances to the writer
+    #   DB instance in the DB cluster. By default, write operations aren't
+    #   allowed on reader DB instances.
+    #
+    #   Valid for: Aurora DB clusters only
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBEngineVersion AWS API Documentation
     #
     class DBEngineVersion < Struct.new(
@@ -7483,7 +7508,8 @@ module Aws::RDS
       :supports_babelfish,
       :custom_db_engine_version_manifest,
       :supports_certificate_rotation_without_restart,
-      :supported_ca_certificate_identifiers)
+      :supported_ca_certificate_identifiers,
+      :supports_local_write_forwarding)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15180,6 +15206,14 @@ module Aws::RDS
     #   ^
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_local_write_forwarding
+    #   Specifies whether read replicas can forward write operations to the
+    #   writer DB instance in the DB cluster. By default, write operations
+    #   aren't allowed on reader DB instances.
+    #
+    #   Valid for: Aurora DB clusters only
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterMessage AWS API Documentation
     #
     class ModifyDBClusterMessage < Struct.new(
@@ -15223,7 +15257,8 @@ module Aws::RDS
       :rotate_master_user_password,
       :master_user_secret_kms_key_id,
       :engine_mode,
-      :allow_engine_mode_change)
+      :allow_engine_mode_change,
+      :enable_local_write_forwarding)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23799,6 +23834,15 @@ module Aws::RDS
     #   PostgreSQL with the target engine version.
     #   @return [Boolean]
     #
+    # @!attribute [rw] supports_local_write_forwarding
+    #   A value that indicates whether the target engine version supports
+    #   forwarding write operations from reader DB instances to the writer
+    #   DB instance in the DB cluster. By default, write operations aren't
+    #   allowed on reader DB instances.
+    #
+    #   Valid for: Aurora DB clusters only
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/UpgradeTarget AWS API Documentation
     #
     class UpgradeTarget < Struct.new(
@@ -23810,7 +23854,8 @@ module Aws::RDS
       :supported_engine_modes,
       :supports_parallel_query,
       :supports_global_databases,
-      :supports_babelfish)
+      :supports_babelfish,
+      :supports_local_write_forwarding)
       SENSITIVE = []
       include Aws::Structure
     end

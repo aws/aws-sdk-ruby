@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.180.1 (2023-07-31)
+------------------
+
 * Issue - Remove checksums from default stubs (#2888).
 
 3.180.0 (2023-07-25)

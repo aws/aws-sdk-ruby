@@ -1889,7 +1889,7 @@ module Aws::AmplifyUIBuilder
       req.send_request(options)
     end
 
-    # Creates a new form for an Amplify.
+    # Creates a new form for an Amplify app.
     #
     # @option params [required, String] :app_id
     #   The unique ID of the Amplify app to associate with the form.
@@ -3194,6 +3194,11 @@ module Aws::AmplifyUIBuilder
     #   resp.job.render_config.react.script #=> String, one of "jsx", "tsx", "js"
     #   resp.job.render_config.react.render_type_declarations #=> Boolean
     #   resp.job.render_config.react.inline_source_map #=> Boolean
+    #   resp.job.render_config.react.api_configuration.graph_ql_config.types_file_path #=> String
+    #   resp.job.render_config.react.api_configuration.graph_ql_config.queries_file_path #=> String
+    #   resp.job.render_config.react.api_configuration.graph_ql_config.mutations_file_path #=> String
+    #   resp.job.render_config.react.api_configuration.graph_ql_config.subscriptions_file_path #=> String
+    #   resp.job.render_config.react.api_configuration.graph_ql_config.fragments_file_path #=> String
     #   resp.job.generic_data_schema.data_source_type #=> String, one of "DataStore"
     #   resp.job.generic_data_schema.models #=> Hash
     #   resp.job.generic_data_schema.models["String"].fields #=> Hash
@@ -4317,8 +4322,8 @@ module Aws::AmplifyUIBuilder
       req.send_request(options)
     end
 
-    # Starts a code generation job for for a specified Amplify app and
-    # backend environment.
+    # Starts a code generation job for a specified Amplify app and backend
+    # environment.
     #
     # @option params [required, String] :app_id
     #   The unique ID for the Amplify app.
@@ -4354,6 +4359,19 @@ module Aws::AmplifyUIBuilder
     #           script: "jsx", # accepts jsx, tsx, js
     #           render_type_declarations: false,
     #           inline_source_map: false,
+    #           api_configuration: {
+    #             graph_ql_config: {
+    #               types_file_path: "String", # required
+    #               queries_file_path: "String", # required
+    #               mutations_file_path: "String", # required
+    #               subscriptions_file_path: "String", # required
+    #               fragments_file_path: "String", # required
+    #             },
+    #             data_store_config: {
+    #             },
+    #             no_api_config: {
+    #             },
+    #           },
     #         },
     #       },
     #       generic_data_schema: {
@@ -4435,6 +4453,11 @@ module Aws::AmplifyUIBuilder
     #   resp.entity.render_config.react.script #=> String, one of "jsx", "tsx", "js"
     #   resp.entity.render_config.react.render_type_declarations #=> Boolean
     #   resp.entity.render_config.react.inline_source_map #=> Boolean
+    #   resp.entity.render_config.react.api_configuration.graph_ql_config.types_file_path #=> String
+    #   resp.entity.render_config.react.api_configuration.graph_ql_config.queries_file_path #=> String
+    #   resp.entity.render_config.react.api_configuration.graph_ql_config.mutations_file_path #=> String
+    #   resp.entity.render_config.react.api_configuration.graph_ql_config.subscriptions_file_path #=> String
+    #   resp.entity.render_config.react.api_configuration.graph_ql_config.fragments_file_path #=> String
     #   resp.entity.generic_data_schema.data_source_type #=> String, one of "DataStore"
     #   resp.entity.generic_data_schema.models #=> Hash
     #   resp.entity.generic_data_schema.models["String"].fields #=> Hash
@@ -6385,7 +6408,7 @@ module Aws::AmplifyUIBuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplifyuibuilder'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

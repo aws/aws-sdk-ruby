@@ -76,6 +76,8 @@ module Aws::LookoutEquipment
             Aws::LookoutEquipment::Endpoints::DeleteLabelGroup.build(context)
           when :delete_model
             Aws::LookoutEquipment::Endpoints::DeleteModel.build(context)
+          when :delete_resource_policy
+            Aws::LookoutEquipment::Endpoints::DeleteResourcePolicy.build(context)
           when :describe_data_ingestion_job
             Aws::LookoutEquipment::Endpoints::DescribeDataIngestionJob.build(context)
           when :describe_dataset
@@ -88,6 +90,14 @@ module Aws::LookoutEquipment
             Aws::LookoutEquipment::Endpoints::DescribeLabelGroup.build(context)
           when :describe_model
             Aws::LookoutEquipment::Endpoints::DescribeModel.build(context)
+          when :describe_model_version
+            Aws::LookoutEquipment::Endpoints::DescribeModelVersion.build(context)
+          when :describe_resource_policy
+            Aws::LookoutEquipment::Endpoints::DescribeResourcePolicy.build(context)
+          when :import_dataset
+            Aws::LookoutEquipment::Endpoints::ImportDataset.build(context)
+          when :import_model_version
+            Aws::LookoutEquipment::Endpoints::ImportModelVersion.build(context)
           when :list_data_ingestion_jobs
             Aws::LookoutEquipment::Endpoints::ListDataIngestionJobs.build(context)
           when :list_datasets
@@ -102,12 +112,16 @@ module Aws::LookoutEquipment
             Aws::LookoutEquipment::Endpoints::ListLabelGroups.build(context)
           when :list_labels
             Aws::LookoutEquipment::Endpoints::ListLabels.build(context)
+          when :list_model_versions
+            Aws::LookoutEquipment::Endpoints::ListModelVersions.build(context)
           when :list_models
             Aws::LookoutEquipment::Endpoints::ListModels.build(context)
           when :list_sensor_statistics
             Aws::LookoutEquipment::Endpoints::ListSensorStatistics.build(context)
           when :list_tags_for_resource
             Aws::LookoutEquipment::Endpoints::ListTagsForResource.build(context)
+          when :put_resource_policy
+            Aws::LookoutEquipment::Endpoints::PutResourcePolicy.build(context)
           when :start_data_ingestion_job
             Aws::LookoutEquipment::Endpoints::StartDataIngestionJob.build(context)
           when :start_inference_scheduler
@@ -118,6 +132,8 @@ module Aws::LookoutEquipment
             Aws::LookoutEquipment::Endpoints::TagResource.build(context)
           when :untag_resource
             Aws::LookoutEquipment::Endpoints::UntagResource.build(context)
+          when :update_active_model_version
+            Aws::LookoutEquipment::Endpoints::UpdateActiveModelVersion.build(context)
           when :update_inference_scheduler
             Aws::LookoutEquipment::Endpoints::UpdateInferenceScheduler.build(context)
           when :update_label_group

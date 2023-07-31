@@ -527,6 +527,59 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
+    # Gets vulnerability details for findings.
+    #
+    # @option params [required, Array<String>] :finding_arns
+    #   A list of finding ARNs.
+    #
+    # @return [Types::BatchGetFindingDetailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetFindingDetailsResponse#errors #errors} => Array&lt;Types::FindingDetailsError&gt;
+    #   * {Types::BatchGetFindingDetailsResponse#finding_details #finding_details} => Array&lt;Types::FindingDetail&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_finding_details({
+    #     finding_arns: ["FindingArn"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].error_code #=> String, one of "INTERNAL_ERROR", "ACCESS_DENIED", "FINDING_DETAILS_NOT_FOUND", "INVALID_INPUT"
+    #   resp.errors[0].error_message #=> String
+    #   resp.errors[0].finding_arn #=> String
+    #   resp.finding_details #=> Array
+    #   resp.finding_details[0].cisa_data.action #=> String
+    #   resp.finding_details[0].cisa_data.date_added #=> Time
+    #   resp.finding_details[0].cisa_data.date_due #=> Time
+    #   resp.finding_details[0].cwes #=> Array
+    #   resp.finding_details[0].cwes[0] #=> String
+    #   resp.finding_details[0].epss_score #=> Float
+    #   resp.finding_details[0].evidences #=> Array
+    #   resp.finding_details[0].evidences[0].evidence_detail #=> String
+    #   resp.finding_details[0].evidences[0].evidence_rule #=> String
+    #   resp.finding_details[0].evidences[0].severity #=> String
+    #   resp.finding_details[0].exploit_observed.first_seen #=> Time
+    #   resp.finding_details[0].exploit_observed.last_seen #=> Time
+    #   resp.finding_details[0].finding_arn #=> String
+    #   resp.finding_details[0].reference_urls #=> Array
+    #   resp.finding_details[0].reference_urls[0] #=> String
+    #   resp.finding_details[0].risk_score #=> Integer
+    #   resp.finding_details[0].tools #=> Array
+    #   resp.finding_details[0].tools[0] #=> String
+    #   resp.finding_details[0].ttps #=> Array
+    #   resp.finding_details[0].ttps[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/BatchGetFindingDetails AWS API Documentation
+    #
+    # @overload batch_get_finding_details(params = {})
+    # @param [Hash] params ({})
+    def batch_get_finding_details(params = {}, options = {})
+      req = build_request(:batch_get_finding_details, params)
+      req.send_request(options)
+    end
+
     # Gets free trial status for multiple Amazon Web Services accounts.
     #
     # @option params [required, Array<String>] :account_ids
@@ -4244,7 +4297,7 @@ module Aws::Inspector2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-inspector2'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

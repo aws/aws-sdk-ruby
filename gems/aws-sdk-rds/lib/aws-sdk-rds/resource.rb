@@ -102,6 +102,7 @@ module Aws::RDS
     #     db_system_id: "String",
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
+    #     enable_local_write_forwarding: false,
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -844,6 +845,12 @@ module Aws::RDS
     #   Amazon Web Services Region.
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    # @option options [Boolean] :enable_local_write_forwarding
+    #   Specifies whether read replicas can forward write operations to the
+    #   writer DB instance in the DB cluster. By default, write operations
+    #   aren't allowed on reader DB instances.
+    #
+    #   Valid for: Aurora DB clusters only
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.

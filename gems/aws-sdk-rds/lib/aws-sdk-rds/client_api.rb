@@ -424,6 +424,7 @@ module Aws::RDS
     KeyList = Shapes::ListShape.new(name: 'KeyList')
     KmsKeyIdOrArn = Shapes::StringShape.new(name: 'KmsKeyIdOrArn')
     ListTagsForResourceMessage = Shapes::StructureShape.new(name: 'ListTagsForResourceMessage')
+    LocalWriteForwardingStatus = Shapes::StringShape.new(name: 'LocalWriteForwardingStatus')
     LogTypeList = Shapes::ListShape.new(name: 'LogTypeList')
     Long = Shapes::IntegerShape.new(name: 'Long')
     LongOptional = Shapes::IntegerShape.new(name: 'LongOptional')
@@ -950,6 +951,7 @@ module Aws::RDS
     CreateDBClusterMessage.add_member(:db_system_id, Shapes::ShapeRef.new(shape: String, location_name: "DBSystemId"))
     CreateDBClusterMessage.add_member(:manage_master_user_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ManageMasterUserPassword"))
     CreateDBClusterMessage.add_member(:master_user_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterUserSecretKmsKeyId"))
+    CreateDBClusterMessage.add_member(:enable_local_write_forwarding, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableLocalWriteForwarding"))
     CreateDBClusterMessage.add_member(:source_region, Shapes::ShapeRef.new(shape: String, location_name: "SourceRegion"))
     CreateDBClusterMessage.struct_class = Types::CreateDBClusterMessage
 
@@ -1264,6 +1266,7 @@ module Aws::RDS
     DBCluster.add_member(:db_system_id, Shapes::ShapeRef.new(shape: String, location_name: "DBSystemId"))
     DBCluster.add_member(:master_user_secret, Shapes::ShapeRef.new(shape: MasterUserSecret, location_name: "MasterUserSecret"))
     DBCluster.add_member(:io_optimized_next_allowed_modification_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "IOOptimizedNextAllowedModificationTime"))
+    DBCluster.add_member(:local_write_forwarding_status, Shapes::ShapeRef.new(shape: LocalWriteForwardingStatus, location_name: "LocalWriteForwardingStatus"))
     DBCluster.struct_class = Types::DBCluster
 
     DBClusterAlreadyExistsFault.struct_class = Types::DBClusterAlreadyExistsFault
@@ -1450,6 +1453,7 @@ module Aws::RDS
     DBEngineVersion.add_member(:custom_db_engine_version_manifest, Shapes::ShapeRef.new(shape: CustomDBEngineVersionManifest, location_name: "CustomDBEngineVersionManifest"))
     DBEngineVersion.add_member(:supports_certificate_rotation_without_restart, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "SupportsCertificateRotationWithoutRestart"))
     DBEngineVersion.add_member(:supported_ca_certificate_identifiers, Shapes::ShapeRef.new(shape: CACertificateIdentifiersList, location_name: "SupportedCACertificateIdentifiers"))
+    DBEngineVersion.add_member(:supports_local_write_forwarding, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "SupportsLocalWriteForwarding"))
     DBEngineVersion.struct_class = Types::DBEngineVersion
 
     DBEngineVersionList.member = Shapes::ShapeRef.new(shape: DBEngineVersion, location_name: "DBEngineVersion")
@@ -2614,6 +2618,7 @@ module Aws::RDS
     ModifyDBClusterMessage.add_member(:master_user_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterUserSecretKmsKeyId"))
     ModifyDBClusterMessage.add_member(:engine_mode, Shapes::ShapeRef.new(shape: String, location_name: "EngineMode"))
     ModifyDBClusterMessage.add_member(:allow_engine_mode_change, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowEngineModeChange"))
+    ModifyDBClusterMessage.add_member(:enable_local_write_forwarding, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableLocalWriteForwarding"))
     ModifyDBClusterMessage.struct_class = Types::ModifyDBClusterMessage
 
     ModifyDBClusterParameterGroupMessage.add_member(:db_cluster_parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterParameterGroupName"))
@@ -3649,6 +3654,7 @@ module Aws::RDS
     UpgradeTarget.add_member(:supports_parallel_query, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "SupportsParallelQuery"))
     UpgradeTarget.add_member(:supports_global_databases, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "SupportsGlobalDatabases"))
     UpgradeTarget.add_member(:supports_babelfish, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "SupportsBabelfish"))
+    UpgradeTarget.add_member(:supports_local_write_forwarding, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "SupportsLocalWriteForwarding"))
     UpgradeTarget.struct_class = Types::UpgradeTarget
 
     UserAuthConfig.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))

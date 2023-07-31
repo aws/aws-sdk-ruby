@@ -388,6 +388,63 @@ module Aws::CleanRooms
 
     # @!group API Operations
 
+    # Retrieves multiple analysis templates within a collaboration by their
+    # Amazon Resource Names (ARNs).
+    #
+    # @option params [required, String] :collaboration_identifier
+    #   A unique identifier for the collaboration that the analysis templates
+    #   belong to. Currently accepts collaboration ID.
+    #
+    # @option params [required, Array<String>] :analysis_template_arns
+    #   The Amazon Resource Name (ARN) associated with the analysis template
+    #   within a collaboration.
+    #
+    # @return [Types::BatchGetCollaborationAnalysisTemplateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetCollaborationAnalysisTemplateOutput#collaboration_analysis_templates #collaboration_analysis_templates} => Array&lt;Types::CollaborationAnalysisTemplate&gt;
+    #   * {Types::BatchGetCollaborationAnalysisTemplateOutput#errors #errors} => Array&lt;Types::BatchGetCollaborationAnalysisTemplateError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_collaboration_analysis_template({
+    #     collaboration_identifier: "CollaborationIdentifier", # required
+    #     analysis_template_arns: ["AnalysisTemplateArn"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.collaboration_analysis_templates #=> Array
+    #   resp.collaboration_analysis_templates[0].id #=> String
+    #   resp.collaboration_analysis_templates[0].arn #=> String
+    #   resp.collaboration_analysis_templates[0].collaboration_id #=> String
+    #   resp.collaboration_analysis_templates[0].collaboration_arn #=> String
+    #   resp.collaboration_analysis_templates[0].description #=> String
+    #   resp.collaboration_analysis_templates[0].creator_account_id #=> String
+    #   resp.collaboration_analysis_templates[0].name #=> String
+    #   resp.collaboration_analysis_templates[0].create_time #=> Time
+    #   resp.collaboration_analysis_templates[0].update_time #=> Time
+    #   resp.collaboration_analysis_templates[0].schema.referenced_tables #=> Array
+    #   resp.collaboration_analysis_templates[0].schema.referenced_tables[0] #=> String
+    #   resp.collaboration_analysis_templates[0].format #=> String, one of "SQL"
+    #   resp.collaboration_analysis_templates[0].source.text #=> String
+    #   resp.collaboration_analysis_templates[0].analysis_parameters #=> Array
+    #   resp.collaboration_analysis_templates[0].analysis_parameters[0].name #=> String
+    #   resp.collaboration_analysis_templates[0].analysis_parameters[0].type #=> String, one of "SMALLINT", "INTEGER", "BIGINT", "DECIMAL", "REAL", "DOUBLE_PRECISION", "BOOLEAN", "CHAR", "VARCHAR", "DATE", "TIMESTAMP", "TIMESTAMPTZ", "TIME", "TIMETZ", "VARBYTE"
+    #   resp.collaboration_analysis_templates[0].analysis_parameters[0].default_value #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].arn #=> String
+    #   resp.errors[0].code #=> String
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/BatchGetCollaborationAnalysisTemplate AWS API Documentation
+    #
+    # @overload batch_get_collaboration_analysis_template(params = {})
+    # @param [Hash] params ({})
+    def batch_get_collaboration_analysis_template(params = {}, options = {})
+      req = build_request(:batch_get_collaboration_analysis_template, params)
+      req.send_request(options)
+    end
+
     # Retrieves multiple schemas by their identifiers.
     #
     # @option params [required, String] :collaboration_identifier
@@ -419,7 +476,7 @@ module Aws::CleanRooms
     #   resp.schemas[0].partition_keys[0].name #=> String
     #   resp.schemas[0].partition_keys[0].type #=> String
     #   resp.schemas[0].analysis_rule_types #=> Array
-    #   resp.schemas[0].analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST"
+    #   resp.schemas[0].analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
     #   resp.schemas[0].analysis_method #=> String, one of "DIRECT_QUERY"
     #   resp.schemas[0].creator_account_id #=> String
     #   resp.schemas[0].name #=> String
@@ -440,6 +497,89 @@ module Aws::CleanRooms
     # @param [Hash] params ({})
     def batch_get_schema(params = {}, options = {})
       req = build_request(:batch_get_schema, params)
+      req.send_request(options)
+    end
+
+    # Creates a new analysis template.
+    #
+    # @option params [String] :description
+    #   The description of the analysis template.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The identifier for a membership resource.
+    #
+    # @option params [required, String] :name
+    #   The name of the analysis template.
+    #
+    # @option params [required, String] :format
+    #   The format of the analysis template.
+    #
+    # @option params [required, Types::AnalysisSource] :source
+    #   The information in the analysis template. Currently supports `text`,
+    #   the query text for the analysis template.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   An optional label that you can assign to a resource when you create
+    #   it. Each tag consists of a key and an optional value, both of which
+    #   you define. When you use tagging, you can also use tag-based access
+    #   control in IAM policies to control access to this resource.
+    #
+    # @option params [Array<Types::AnalysisParameter>] :analysis_parameters
+    #   The parameters of the analysis template.
+    #
+    # @return [Types::CreateAnalysisTemplateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAnalysisTemplateOutput#analysis_template #analysis_template} => Types::AnalysisTemplate
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_analysis_template({
+    #     description: "ResourceDescription",
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     name: "TableAlias", # required
+    #     format: "SQL", # required, accepts SQL
+    #     source: { # required
+    #       text: "AnalysisTemplateText",
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     analysis_parameters: [
+    #       {
+    #         name: "ParameterName", # required
+    #         type: "SMALLINT", # required, accepts SMALLINT, INTEGER, BIGINT, DECIMAL, REAL, DOUBLE_PRECISION, BOOLEAN, CHAR, VARCHAR, DATE, TIMESTAMP, TIMESTAMPTZ, TIME, TIMETZ, VARBYTE
+    #         default_value: "ParameterValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.analysis_template.id #=> String
+    #   resp.analysis_template.arn #=> String
+    #   resp.analysis_template.collaboration_id #=> String
+    #   resp.analysis_template.collaboration_arn #=> String
+    #   resp.analysis_template.membership_id #=> String
+    #   resp.analysis_template.membership_arn #=> String
+    #   resp.analysis_template.description #=> String
+    #   resp.analysis_template.name #=> String
+    #   resp.analysis_template.create_time #=> Time
+    #   resp.analysis_template.update_time #=> Time
+    #   resp.analysis_template.schema.referenced_tables #=> Array
+    #   resp.analysis_template.schema.referenced_tables[0] #=> String
+    #   resp.analysis_template.format #=> String, one of "SQL"
+    #   resp.analysis_template.source.text #=> String
+    #   resp.analysis_template.analysis_parameters #=> Array
+    #   resp.analysis_template.analysis_parameters[0].name #=> String
+    #   resp.analysis_template.analysis_parameters[0].type #=> String, one of "SMALLINT", "INTEGER", "BIGINT", "DECIMAL", "REAL", "DOUBLE_PRECISION", "BOOLEAN", "CHAR", "VARCHAR", "DATE", "TIMESTAMP", "TIMESTAMPTZ", "TIME", "TIMETZ", "VARBYTE"
+    #   resp.analysis_template.analysis_parameters[0].default_value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateAnalysisTemplate AWS API Documentation
+    #
+    # @overload create_analysis_template(params = {})
+    # @param [Hash] params ({})
+    def create_analysis_template(params = {}, options = {})
+      req = build_request(:create_analysis_template, params)
       req.send_request(options)
     end
 
@@ -592,7 +732,7 @@ module Aws::CleanRooms
     #   resp.configured_table.create_time #=> Time
     #   resp.configured_table.update_time #=> Time
     #   resp.configured_table.analysis_rule_types #=> Array
-    #   resp.configured_table.analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST"
+    #   resp.configured_table.analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
     #   resp.configured_table.analysis_method #=> String, one of "DIRECT_QUERY"
     #   resp.configured_table.allowed_columns #=> Array
     #   resp.configured_table.allowed_columns[0] #=> String
@@ -614,7 +754,7 @@ module Aws::CleanRooms
     #   for. Currently accepts the configured table ID.
     #
     # @option params [required, String] :analysis_rule_type
-    #   The type of analysis rule. Valid values are AGGREGATION and LIST.
+    #   The type of analysis rule.
     #
     # @option params [required, Types::ConfiguredTableAnalysisRulePolicy] :analysis_rule_policy
     #   The entire created configured table analysis rule object.
@@ -627,7 +767,7 @@ module Aws::CleanRooms
     #
     #   resp = client.create_configured_table_analysis_rule({
     #     configured_table_identifier: "ConfiguredTableIdentifier", # required
-    #     analysis_rule_type: "AGGREGATION", # required, accepts AGGREGATION, LIST
+    #     analysis_rule_type: "AGGREGATION", # required, accepts AGGREGATION, LIST, CUSTOM
     #     analysis_rule_policy: { # required
     #       v1: {
     #         list: {
@@ -654,6 +794,10 @@ module Aws::CleanRooms
     #               type: "COUNT_DISTINCT", # required, accepts COUNT_DISTINCT
     #             },
     #           ],
+    #         },
+    #         custom: {
+    #           allowed_analyses: ["AnalysisTemplateArnOrQueryWildcard"], # required
+    #           allowed_analysis_providers: ["AccountId"],
     #         },
     #       },
     #     },
@@ -686,7 +830,11 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].column_name #=> String
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].minimum #=> Integer
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].type #=> String, one of "COUNT_DISTINCT"
-    #   resp.analysis_rule.type #=> String, one of "AGGREGATION", "LIST"
+    #   resp.analysis_rule.policy.v1.custom.allowed_analyses #=> Array
+    #   resp.analysis_rule.policy.v1.custom.allowed_analyses[0] #=> String
+    #   resp.analysis_rule.policy.v1.custom.allowed_analysis_providers #=> Array
+    #   resp.analysis_rule.policy.v1.custom.allowed_analysis_providers[0] #=> String
+    #   resp.analysis_rule.type #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
     #   resp.analysis_rule.create_time #=> Time
     #   resp.analysis_rule.update_time #=> Time
     #
@@ -823,6 +971,32 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
+    # Deletes an analysis template.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The identifier for a membership resource.
+    #
+    # @option params [required, String] :analysis_template_identifier
+    #   The identifier for the analysis template resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_analysis_template({
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     analysis_template_identifier: "AnalysisTemplateIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DeleteAnalysisTemplate AWS API Documentation
+    #
+    # @overload delete_analysis_template(params = {})
+    # @param [Hash] params ({})
+    def delete_analysis_template(params = {}, options = {})
+      req = build_request(:delete_analysis_template, params)
+      req.send_request(options)
+    end
+
     # Deletes a collaboration. It can only be called by the collaboration
     # owner.
     #
@@ -885,7 +1059,7 @@ module Aws::CleanRooms
     #
     #   resp = client.delete_configured_table_analysis_rule({
     #     configured_table_identifier: "ConfiguredTableIdentifier", # required
-    #     analysis_rule_type: "AGGREGATION", # required, accepts AGGREGATION, LIST
+    #     analysis_rule_type: "AGGREGATION", # required, accepts AGGREGATION, LIST, CUSTOM
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DeleteConfiguredTableAnalysisRule AWS API Documentation
@@ -977,6 +1151,55 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
+    # Retrieves an analysis template.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The identifier for a membership resource.
+    #
+    # @option params [required, String] :analysis_template_identifier
+    #   The identifier for the analysis template resource.
+    #
+    # @return [Types::GetAnalysisTemplateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAnalysisTemplateOutput#analysis_template #analysis_template} => Types::AnalysisTemplate
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_analysis_template({
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     analysis_template_identifier: "AnalysisTemplateIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.analysis_template.id #=> String
+    #   resp.analysis_template.arn #=> String
+    #   resp.analysis_template.collaboration_id #=> String
+    #   resp.analysis_template.collaboration_arn #=> String
+    #   resp.analysis_template.membership_id #=> String
+    #   resp.analysis_template.membership_arn #=> String
+    #   resp.analysis_template.description #=> String
+    #   resp.analysis_template.name #=> String
+    #   resp.analysis_template.create_time #=> Time
+    #   resp.analysis_template.update_time #=> Time
+    #   resp.analysis_template.schema.referenced_tables #=> Array
+    #   resp.analysis_template.schema.referenced_tables[0] #=> String
+    #   resp.analysis_template.format #=> String, one of "SQL"
+    #   resp.analysis_template.source.text #=> String
+    #   resp.analysis_template.analysis_parameters #=> Array
+    #   resp.analysis_template.analysis_parameters[0].name #=> String
+    #   resp.analysis_template.analysis_parameters[0].type #=> String, one of "SMALLINT", "INTEGER", "BIGINT", "DECIMAL", "REAL", "DOUBLE_PRECISION", "BOOLEAN", "CHAR", "VARCHAR", "DATE", "TIMESTAMP", "TIMESTAMPTZ", "TIME", "TIMETZ", "VARBYTE"
+    #   resp.analysis_template.analysis_parameters[0].default_value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetAnalysisTemplate AWS API Documentation
+    #
+    # @overload get_analysis_template(params = {})
+    # @param [Hash] params ({})
+    def get_analysis_template(params = {}, options = {})
+      req = build_request(:get_analysis_template, params)
+      req.send_request(options)
+    end
+
     # Returns metadata about a collaboration.
     #
     # @option params [required, String] :collaboration_identifier
@@ -1020,6 +1243,56 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
+    # Retrieves an analysis template within a collaboration.
+    #
+    # @option params [required, String] :collaboration_identifier
+    #   A unique identifier for the collaboration that the analysis templates
+    #   belong to. Currently accepts collaboration ID.
+    #
+    # @option params [required, String] :analysis_template_arn
+    #   The Amazon Resource Name (ARN) associated with the analysis template
+    #   within a collaboration.
+    #
+    # @return [Types::GetCollaborationAnalysisTemplateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCollaborationAnalysisTemplateOutput#collaboration_analysis_template #collaboration_analysis_template} => Types::CollaborationAnalysisTemplate
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_collaboration_analysis_template({
+    #     collaboration_identifier: "CollaborationIdentifier", # required
+    #     analysis_template_arn: "AnalysisTemplateArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.collaboration_analysis_template.id #=> String
+    #   resp.collaboration_analysis_template.arn #=> String
+    #   resp.collaboration_analysis_template.collaboration_id #=> String
+    #   resp.collaboration_analysis_template.collaboration_arn #=> String
+    #   resp.collaboration_analysis_template.description #=> String
+    #   resp.collaboration_analysis_template.creator_account_id #=> String
+    #   resp.collaboration_analysis_template.name #=> String
+    #   resp.collaboration_analysis_template.create_time #=> Time
+    #   resp.collaboration_analysis_template.update_time #=> Time
+    #   resp.collaboration_analysis_template.schema.referenced_tables #=> Array
+    #   resp.collaboration_analysis_template.schema.referenced_tables[0] #=> String
+    #   resp.collaboration_analysis_template.format #=> String, one of "SQL"
+    #   resp.collaboration_analysis_template.source.text #=> String
+    #   resp.collaboration_analysis_template.analysis_parameters #=> Array
+    #   resp.collaboration_analysis_template.analysis_parameters[0].name #=> String
+    #   resp.collaboration_analysis_template.analysis_parameters[0].type #=> String, one of "SMALLINT", "INTEGER", "BIGINT", "DECIMAL", "REAL", "DOUBLE_PRECISION", "BOOLEAN", "CHAR", "VARCHAR", "DATE", "TIMESTAMP", "TIMESTAMPTZ", "TIME", "TIMETZ", "VARBYTE"
+    #   resp.collaboration_analysis_template.analysis_parameters[0].default_value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetCollaborationAnalysisTemplate AWS API Documentation
+    #
+    # @overload get_collaboration_analysis_template(params = {})
+    # @param [Hash] params ({})
+    def get_collaboration_analysis_template(params = {}, options = {})
+      req = build_request(:get_collaboration_analysis_template, params)
+      req.send_request(options)
+    end
+
     # Retrieves a configured table.
     #
     # @option params [required, String] :configured_table_identifier
@@ -1046,7 +1319,7 @@ module Aws::CleanRooms
     #   resp.configured_table.create_time #=> Time
     #   resp.configured_table.update_time #=> Time
     #   resp.configured_table.analysis_rule_types #=> Array
-    #   resp.configured_table.analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST"
+    #   resp.configured_table.analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
     #   resp.configured_table.analysis_method #=> String, one of "DIRECT_QUERY"
     #   resp.configured_table.allowed_columns #=> Array
     #   resp.configured_table.allowed_columns[0] #=> String
@@ -1079,7 +1352,7 @@ module Aws::CleanRooms
     #
     #   resp = client.get_configured_table_analysis_rule({
     #     configured_table_identifier: "ConfiguredTableIdentifier", # required
-    #     analysis_rule_type: "AGGREGATION", # required, accepts AGGREGATION, LIST
+    #     analysis_rule_type: "AGGREGATION", # required, accepts AGGREGATION, LIST, CUSTOM
     #   })
     #
     # @example Response structure
@@ -1109,7 +1382,11 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].column_name #=> String
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].minimum #=> Integer
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].type #=> String, one of "COUNT_DISTINCT"
-    #   resp.analysis_rule.type #=> String, one of "AGGREGATION", "LIST"
+    #   resp.analysis_rule.policy.v1.custom.allowed_analyses #=> Array
+    #   resp.analysis_rule.policy.v1.custom.allowed_analyses[0] #=> String
+    #   resp.analysis_rule.policy.v1.custom.allowed_analysis_providers #=> Array
+    #   resp.analysis_rule.policy.v1.custom.allowed_analysis_providers[0] #=> String
+    #   resp.analysis_rule.type #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
     #   resp.analysis_rule.create_time #=> Time
     #   resp.analysis_rule.update_time #=> Time
     #
@@ -1232,6 +1509,9 @@ module Aws::CleanRooms
     #   resp.protected_query.membership_arn #=> String
     #   resp.protected_query.create_time #=> Time
     #   resp.protected_query.sql_parameters.query_string #=> String
+    #   resp.protected_query.sql_parameters.analysis_template_arn #=> String
+    #   resp.protected_query.sql_parameters.parameters #=> Hash
+    #   resp.protected_query.sql_parameters.parameters["ParameterName"] #=> String
     #   resp.protected_query.status #=> String, one of "SUBMITTED", "STARTED", "CANCELLED", "CANCELLING", "FAILED", "SUCCESS", "TIMED_OUT"
     #   resp.protected_query.result_configuration.output_configuration.s3.result_format #=> String, one of "CSV", "PARQUET"
     #   resp.protected_query.result_configuration.output_configuration.s3.bucket #=> String
@@ -1279,7 +1559,7 @@ module Aws::CleanRooms
     #   resp.schema.partition_keys[0].name #=> String
     #   resp.schema.partition_keys[0].type #=> String
     #   resp.schema.analysis_rule_types #=> Array
-    #   resp.schema.analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST"
+    #   resp.schema.analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
     #   resp.schema.analysis_method #=> String, one of "DIRECT_QUERY"
     #   resp.schema.creator_account_id #=> String
     #   resp.schema.name #=> String
@@ -1322,13 +1602,13 @@ module Aws::CleanRooms
     #   resp = client.get_schema_analysis_rule({
     #     collaboration_identifier: "CollaborationIdentifier", # required
     #     name: "TableAlias", # required
-    #     type: "AGGREGATION", # required, accepts AGGREGATION, LIST
+    #     type: "AGGREGATION", # required, accepts AGGREGATION, LIST, CUSTOM
     #   })
     #
     # @example Response structure
     #
     #   resp.analysis_rule.collaboration_id #=> String
-    #   resp.analysis_rule.type #=> String, one of "AGGREGATION", "LIST"
+    #   resp.analysis_rule.type #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
     #   resp.analysis_rule.name #=> String
     #   resp.analysis_rule.create_time #=> Time
     #   resp.analysis_rule.update_time #=> Time
@@ -1355,6 +1635,10 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].column_name #=> String
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].minimum #=> Integer
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].type #=> String, one of "COUNT_DISTINCT"
+    #   resp.analysis_rule.policy.v1.custom.allowed_analyses #=> Array
+    #   resp.analysis_rule.policy.v1.custom.allowed_analyses[0] #=> String
+    #   resp.analysis_rule.policy.v1.custom.allowed_analysis_providers #=> Array
+    #   resp.analysis_rule.policy.v1.custom.allowed_analysis_providers[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetSchemaAnalysisRule AWS API Documentation
     #
@@ -1362,6 +1646,108 @@ module Aws::CleanRooms
     # @param [Hash] params ({})
     def get_schema_analysis_rule(params = {}, options = {})
       req = build_request(:get_schema_analysis_rule, params)
+      req.send_request(options)
+    end
+
+    # Lists analysis templates that the caller owns.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The identifier for a membership resource.
+    #
+    # @option params [String] :next_token
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the results that is returned per call.
+    #
+    # @return [Types::ListAnalysisTemplatesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAnalysisTemplatesOutput#next_token #next_token} => String
+    #   * {Types::ListAnalysisTemplatesOutput#analysis_template_summaries #analysis_template_summaries} => Array&lt;Types::AnalysisTemplateSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_analysis_templates({
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.analysis_template_summaries #=> Array
+    #   resp.analysis_template_summaries[0].arn #=> String
+    #   resp.analysis_template_summaries[0].create_time #=> Time
+    #   resp.analysis_template_summaries[0].id #=> String
+    #   resp.analysis_template_summaries[0].name #=> String
+    #   resp.analysis_template_summaries[0].update_time #=> Time
+    #   resp.analysis_template_summaries[0].membership_arn #=> String
+    #   resp.analysis_template_summaries[0].membership_id #=> String
+    #   resp.analysis_template_summaries[0].collaboration_arn #=> String
+    #   resp.analysis_template_summaries[0].collaboration_id #=> String
+    #   resp.analysis_template_summaries[0].description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListAnalysisTemplates AWS API Documentation
+    #
+    # @overload list_analysis_templates(params = {})
+    # @param [Hash] params ({})
+    def list_analysis_templates(params = {}, options = {})
+      req = build_request(:list_analysis_templates, params)
+      req.send_request(options)
+    end
+
+    # Lists analysis templates within a collaboration.
+    #
+    # @option params [required, String] :collaboration_identifier
+    #   A unique identifier for the collaboration that the analysis templates
+    #   belong to. Currently accepts collaboration ID.
+    #
+    # @option params [String] :next_token
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the results that is returned per call.
+    #
+    # @return [Types::ListCollaborationAnalysisTemplatesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCollaborationAnalysisTemplatesOutput#next_token #next_token} => String
+    #   * {Types::ListCollaborationAnalysisTemplatesOutput#collaboration_analysis_template_summaries #collaboration_analysis_template_summaries} => Array&lt;Types::CollaborationAnalysisTemplateSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_collaboration_analysis_templates({
+    #     collaboration_identifier: "CollaborationIdentifier", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.collaboration_analysis_template_summaries #=> Array
+    #   resp.collaboration_analysis_template_summaries[0].arn #=> String
+    #   resp.collaboration_analysis_template_summaries[0].create_time #=> Time
+    #   resp.collaboration_analysis_template_summaries[0].id #=> String
+    #   resp.collaboration_analysis_template_summaries[0].name #=> String
+    #   resp.collaboration_analysis_template_summaries[0].update_time #=> Time
+    #   resp.collaboration_analysis_template_summaries[0].collaboration_arn #=> String
+    #   resp.collaboration_analysis_template_summaries[0].collaboration_id #=> String
+    #   resp.collaboration_analysis_template_summaries[0].creator_account_id #=> String
+    #   resp.collaboration_analysis_template_summaries[0].description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationAnalysisTemplates AWS API Documentation
+    #
+    # @overload list_collaboration_analysis_templates(params = {})
+    # @param [Hash] params ({})
+    def list_collaboration_analysis_templates(params = {}, options = {})
+      req = build_request(:list_collaboration_analysis_templates, params)
       req.send_request(options)
     end
 
@@ -1501,7 +1887,7 @@ module Aws::CleanRooms
     #   resp.configured_table_summaries[0].create_time #=> Time
     #   resp.configured_table_summaries[0].update_time #=> Time
     #   resp.configured_table_summaries[0].analysis_rule_types #=> Array
-    #   resp.configured_table_summaries[0].analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST"
+    #   resp.configured_table_summaries[0].analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
     #   resp.configured_table_summaries[0].analysis_method #=> String, one of "DIRECT_QUERY"
     #   resp.next_token #=> String
     #
@@ -1713,7 +2099,7 @@ module Aws::CleanRooms
     #   resp.schema_summaries[0].collaboration_id #=> String
     #   resp.schema_summaries[0].collaboration_arn #=> String
     #   resp.schema_summaries[0].analysis_rule_types #=> Array
-    #   resp.schema_summaries[0].analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST"
+    #   resp.schema_summaries[0].analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
     #   resp.schema_summaries[0].analysis_method #=> String, one of "DIRECT_QUERY"
     #   resp.next_token #=> String
     #
@@ -1782,6 +2168,10 @@ module Aws::CleanRooms
     #     membership_identifier: "MembershipIdentifier", # required
     #     sql_parameters: { # required
     #       query_string: "ProtectedQuerySQLParametersQueryStringString",
+    #       analysis_template_arn: "AnalysisTemplateArn",
+    #       parameters: {
+    #         "ParameterName" => "ParameterValue",
+    #       },
     #     },
     #     result_configuration: { # required
     #       output_configuration: { # required
@@ -1801,6 +2191,9 @@ module Aws::CleanRooms
     #   resp.protected_query.membership_arn #=> String
     #   resp.protected_query.create_time #=> Time
     #   resp.protected_query.sql_parameters.query_string #=> String
+    #   resp.protected_query.sql_parameters.analysis_template_arn #=> String
+    #   resp.protected_query.sql_parameters.parameters #=> Hash
+    #   resp.protected_query.sql_parameters.parameters["ParameterName"] #=> String
     #   resp.protected_query.status #=> String, one of "SUBMITTED", "STARTED", "CANCELLED", "CANCELLING", "FAILED", "SUCCESS", "TIMED_OUT"
     #   resp.protected_query.result_configuration.output_configuration.s3.result_format #=> String, one of "CSV", "PARQUET"
     #   resp.protected_query.result_configuration.output_configuration.s3.bucket #=> String
@@ -1872,6 +2265,59 @@ module Aws::CleanRooms
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates the analysis template metadata.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The identifier for a membership resource.
+    #
+    # @option params [required, String] :analysis_template_identifier
+    #   The identifier for the analysis template resource.
+    #
+    # @option params [String] :description
+    #   A new description for the analysis template.
+    #
+    # @return [Types::UpdateAnalysisTemplateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAnalysisTemplateOutput#analysis_template #analysis_template} => Types::AnalysisTemplate
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_analysis_template({
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     analysis_template_identifier: "AnalysisTemplateIdentifier", # required
+    #     description: "ResourceDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.analysis_template.id #=> String
+    #   resp.analysis_template.arn #=> String
+    #   resp.analysis_template.collaboration_id #=> String
+    #   resp.analysis_template.collaboration_arn #=> String
+    #   resp.analysis_template.membership_id #=> String
+    #   resp.analysis_template.membership_arn #=> String
+    #   resp.analysis_template.description #=> String
+    #   resp.analysis_template.name #=> String
+    #   resp.analysis_template.create_time #=> Time
+    #   resp.analysis_template.update_time #=> Time
+    #   resp.analysis_template.schema.referenced_tables #=> Array
+    #   resp.analysis_template.schema.referenced_tables[0] #=> String
+    #   resp.analysis_template.format #=> String, one of "SQL"
+    #   resp.analysis_template.source.text #=> String
+    #   resp.analysis_template.analysis_parameters #=> Array
+    #   resp.analysis_template.analysis_parameters[0].name #=> String
+    #   resp.analysis_template.analysis_parameters[0].type #=> String, one of "SMALLINT", "INTEGER", "BIGINT", "DECIMAL", "REAL", "DOUBLE_PRECISION", "BOOLEAN", "CHAR", "VARCHAR", "DATE", "TIMESTAMP", "TIMESTAMPTZ", "TIME", "TIMETZ", "VARBYTE"
+    #   resp.analysis_template.analysis_parameters[0].default_value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateAnalysisTemplate AWS API Documentation
+    #
+    # @overload update_analysis_template(params = {})
+    # @param [Hash] params ({})
+    def update_analysis_template(params = {}, options = {})
+      req = build_request(:update_analysis_template, params)
       req.send_request(options)
     end
 
@@ -1963,7 +2409,7 @@ module Aws::CleanRooms
     #   resp.configured_table.create_time #=> Time
     #   resp.configured_table.update_time #=> Time
     #   resp.configured_table.analysis_rule_types #=> Array
-    #   resp.configured_table.analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST"
+    #   resp.configured_table.analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
     #   resp.configured_table.analysis_method #=> String, one of "DIRECT_QUERY"
     #   resp.configured_table.allowed_columns #=> Array
     #   resp.configured_table.allowed_columns[0] #=> String
@@ -1999,7 +2445,7 @@ module Aws::CleanRooms
     #
     #   resp = client.update_configured_table_analysis_rule({
     #     configured_table_identifier: "ConfiguredTableIdentifier", # required
-    #     analysis_rule_type: "AGGREGATION", # required, accepts AGGREGATION, LIST
+    #     analysis_rule_type: "AGGREGATION", # required, accepts AGGREGATION, LIST, CUSTOM
     #     analysis_rule_policy: { # required
     #       v1: {
     #         list: {
@@ -2026,6 +2472,10 @@ module Aws::CleanRooms
     #               type: "COUNT_DISTINCT", # required, accepts COUNT_DISTINCT
     #             },
     #           ],
+    #         },
+    #         custom: {
+    #           allowed_analyses: ["AnalysisTemplateArnOrQueryWildcard"], # required
+    #           allowed_analysis_providers: ["AccountId"],
     #         },
     #       },
     #     },
@@ -2058,7 +2508,11 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].column_name #=> String
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].minimum #=> Integer
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].type #=> String, one of "COUNT_DISTINCT"
-    #   resp.analysis_rule.type #=> String, one of "AGGREGATION", "LIST"
+    #   resp.analysis_rule.policy.v1.custom.allowed_analyses #=> Array
+    #   resp.analysis_rule.policy.v1.custom.allowed_analyses[0] #=> String
+    #   resp.analysis_rule.policy.v1.custom.allowed_analysis_providers #=> Array
+    #   resp.analysis_rule.policy.v1.custom.allowed_analysis_providers[0] #=> String
+    #   resp.analysis_rule.type #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
     #   resp.analysis_rule.create_time #=> Time
     #   resp.analysis_rule.update_time #=> Time
     #
@@ -2200,6 +2654,9 @@ module Aws::CleanRooms
     #   resp.protected_query.membership_arn #=> String
     #   resp.protected_query.create_time #=> Time
     #   resp.protected_query.sql_parameters.query_string #=> String
+    #   resp.protected_query.sql_parameters.analysis_template_arn #=> String
+    #   resp.protected_query.sql_parameters.parameters #=> Hash
+    #   resp.protected_query.sql_parameters.parameters["ParameterName"] #=> String
     #   resp.protected_query.status #=> String, one of "SUBMITTED", "STARTED", "CANCELLED", "CANCELLING", "FAILED", "SUCCESS", "TIMED_OUT"
     #   resp.protected_query.result_configuration.output_configuration.s3.result_format #=> String, one of "CSV", "PARQUET"
     #   resp.protected_query.result_configuration.output_configuration.s3.bucket #=> String
@@ -2231,7 +2688,7 @@ module Aws::CleanRooms
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

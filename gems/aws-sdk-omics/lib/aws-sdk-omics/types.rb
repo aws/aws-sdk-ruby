@@ -1745,6 +1745,10 @@ module Aws::Omics
     #   the read set has a status.
     #   @return [String]
     #
+    # @!attribute [rw] creation_type
+    #   The creation type of the read set.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetReadSetMetadataResponse AWS API Documentation
     #
     class GetReadSetMetadataResponse < Struct.new(
@@ -1761,7 +1765,8 @@ module Aws::Omics
       :sequence_information,
       :reference_arn,
       :files,
-      :status_message)
+      :status_message,
+      :creation_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4018,6 +4023,10 @@ module Aws::Omics
     #   Where the source originated.
     #   @return [String]
     #
+    # @!attribute [rw] creation_type
+    #   The creation type of the read set.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ReadSetFilter AWS API Documentation
     #
     class ReadSetFilter < Struct.new(
@@ -4028,7 +4037,8 @@ module Aws::Omics
       :created_before,
       :sample_id,
       :subject_id,
-      :generated_from)
+      :generated_from,
+      :creation_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4088,6 +4098,10 @@ module Aws::Omics
     #   read set has a status.
     #   @return [String]
     #
+    # @!attribute [rw] creation_type
+    #   The creation type of the read set.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ReadSetListItem AWS API Documentation
     #
     class ReadSetListItem < Struct.new(
@@ -4103,7 +4117,8 @@ module Aws::Omics
       :file_type,
       :sequence_information,
       :creation_time,
-      :status_message)
+      :status_message,
+      :creation_type)
       SENSITIVE = []
       include Aws::Structure
     end

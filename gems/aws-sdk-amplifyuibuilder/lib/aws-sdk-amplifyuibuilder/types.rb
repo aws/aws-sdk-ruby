@@ -77,6 +77,41 @@ module Aws::AmplifyUIBuilder
       include Aws::Structure
     end
 
+    # Describes the API configuration for a code generation job.
+    #
+    # @note ApiConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ApiConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ApiConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] graph_ql_config
+    #   The configuration for an application using GraphQL APIs.
+    #   @return [Types::GraphQLRenderConfig]
+    #
+    # @!attribute [rw] data_store_config
+    #   The configuration for an application using DataStore APIs.
+    #   @return [Types::DataStoreRenderConfig]
+    #
+    # @!attribute [rw] no_api_config
+    #   The configuration for an application with no API being used.
+    #   @return [Types::NoApiRenderConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ApiConfiguration AWS API Documentation
+    #
+    class ApiConfiguration < Struct.new(
+      :graph_ql_config,
+      :data_store_config,
+      :no_api_config,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class GraphQlConfig < ApiConfiguration; end
+      class DataStoreConfig < ApiConfiguration; end
+      class NoApiConfig < ApiConfiguration; end
+      class Unknown < ApiConfiguration; end
+    end
+
     # Describes the feature flags that you can specify for a code generation
     # job.
     #
@@ -261,7 +296,7 @@ module Aws::AmplifyUIBuilder
     #
     # @!attribute [rw] render_config
     #   Describes the configuration information for rendering the UI
-    #   component associated the code generation job.
+    #   component associated with the code generation job.
     #   @return [Types::CodegenJobRenderConfig]
     #
     # @!attribute [rw] generic_data_schema
@@ -367,7 +402,7 @@ module Aws::AmplifyUIBuilder
     end
 
     # Describes the configuration information for rendering the UI component
-    # associated the code generation job.
+    # associated with the code generation job.
     #
     # @note CodegenJobRenderConfig is a union - when making an API calls you must set exactly one of the members.
     #
@@ -1236,6 +1271,15 @@ module Aws::AmplifyUIBuilder
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Describes the DataStore configuration for an API for a code generation
+    # job.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/DataStoreRenderConfig AWS API Documentation
+    #
+    class DataStoreRenderConfig < Aws::EmptyStructure; end
 
     # @!attribute [rw] app_id
     #   The unique ID of the Amplify app associated with the component to
@@ -2266,6 +2310,46 @@ module Aws::AmplifyUIBuilder
       include Aws::Structure
     end
 
+    # Describes the GraphQL configuration for an API for a code generation
+    # job.
+    #
+    # @!attribute [rw] types_file_path
+    #   The path to the GraphQL types file, relative to the component output
+    #   directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] queries_file_path
+    #   The path to the GraphQL queries file, relative to the component
+    #   output directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] mutations_file_path
+    #   The path to the GraphQL mutations file, relative to the component
+    #   output directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscriptions_file_path
+    #   The path to the GraphQL subscriptions file, relative to the
+    #   component output directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] fragments_file_path
+    #   The path to the GraphQL fragments file, relative to the component
+    #   output directory.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/GraphQLRenderConfig AWS API Documentation
+    #
+    class GraphQLRenderConfig < Struct.new(
+      :types_file_path,
+      :queries_file_path,
+      :mutations_file_path,
+      :subscriptions_file_path,
+      :fragments_file_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An internal error has occurred. Please retry your request.
     #
     # @!attribute [rw] message
@@ -2498,6 +2582,14 @@ module Aws::AmplifyUIBuilder
       include Aws::Structure
     end
 
+    # Describes the configuration for an application with no API being used.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/NoApiRenderConfig AWS API Documentation
+    #
+    class NoApiRenderConfig < Aws::EmptyStructure; end
+
     # Stores information for generating Amplify DataStore queries. Use a
     # `Predicate` to retrieve a subset of the data in a collection.
     #
@@ -2603,6 +2695,10 @@ module Aws::AmplifyUIBuilder
     #   source maps.
     #   @return [Boolean]
     #
+    # @!attribute [rw] api_configuration
+    #   The API configuration for the code generation job.
+    #   @return [Types::ApiConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ReactStartCodegenJobData AWS API Documentation
     #
     class ReactStartCodegenJobData < Struct.new(
@@ -2610,7 +2706,8 @@ module Aws::AmplifyUIBuilder
       :target,
       :script,
       :render_type_declarations,
-      :inline_source_map)
+      :inline_source_map,
+      :api_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

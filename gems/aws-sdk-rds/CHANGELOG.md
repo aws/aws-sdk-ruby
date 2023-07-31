@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.188.0 (2023-07-31)
+------------------
+
+* Feature - This release adds support for Aurora MySQL local write forwarding, which allows for forwarding of write operations from reader DB instances to the writer DB instance.
+
 1.187.0 (2023-07-25)
 ------------------
 

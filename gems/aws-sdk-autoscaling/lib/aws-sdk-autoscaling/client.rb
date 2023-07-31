@@ -1229,84 +1229,6 @@ module Aws::AutoScaling
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
-    #
-    # @example Example: To create an Auto Scaling group
-    #
-    #   # This example creates an Auto Scaling group.
-    #
-    #   resp = client.create_auto_scaling_group({
-    #     auto_scaling_group_name: "my-auto-scaling-group", 
-    #     launch_template: {
-    #       launch_template_name: "my-template-for-auto-scaling", 
-    #       version: "$Latest", 
-    #     }, 
-    #     max_instance_lifetime: 2592000, 
-    #     max_size: 3, 
-    #     min_size: 1, 
-    #     vpc_zone_identifier: "subnet-057fa0918fEXAMPLE", 
-    #   })
-    #
-    # @example Example: To create an Auto Scaling group with an attached target group
-    #
-    #   # This example creates an Auto Scaling group and attaches the specified target group.
-    #
-    #   resp = client.create_auto_scaling_group({
-    #     auto_scaling_group_name: "my-auto-scaling-group", 
-    #     health_check_grace_period: 300, 
-    #     health_check_type: "ELB", 
-    #     launch_template: {
-    #       launch_template_name: "my-template-for-auto-scaling", 
-    #       version: "$Latest", 
-    #     }, 
-    #     max_size: 3, 
-    #     min_size: 1, 
-    #     target_group_arns: [
-    #       "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
-    #     ], 
-    #     vpc_zone_identifier: "subnet-057fa0918fEXAMPLE, subnet-610acd08EXAMPLE", 
-    #   })
-    #
-    # @example Example: To create an Auto Scaling group with a mixed instances policy
-    #
-    #   # This example creates an Auto Scaling group with a mixed instances policy. It specifies the c5.large, c5a.large, and
-    #   # c6g.large instance types and defines a different launch template for the c6g.large instance type.
-    #
-    #   resp = client.create_auto_scaling_group({
-    #     auto_scaling_group_name: "my-asg", 
-    #     desired_capacity: 3, 
-    #     max_size: 5, 
-    #     min_size: 1, 
-    #     mixed_instances_policy: {
-    #       instances_distribution: {
-    #         on_demand_base_capacity: 1, 
-    #         on_demand_percentage_above_base_capacity: 50, 
-    #         spot_allocation_strategy: "capacity-optimized", 
-    #       }, 
-    #       launch_template: {
-    #         launch_template_specification: {
-    #           launch_template_name: "my-launch-template-for-x86", 
-    #           version: "$Latest", 
-    #         }, 
-    #         overrides: [
-    #           {
-    #             instance_type: "c6g.large", 
-    #             launch_template_specification: {
-    #               launch_template_name: "my-launch-template-for-arm", 
-    #               version: "$Latest", 
-    #             }, 
-    #           }, 
-    #           {
-    #             instance_type: "c5.large", 
-    #           }, 
-    #           {
-    #             instance_type: "c5a.large", 
-    #           }, 
-    #         ], 
-    #       }, 
-    #     }, 
-    #     vpc_zone_identifier: "subnet-057fa0918fEXAMPLE, subnet-610acd08EXAMPLE", 
-    #   })
-    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_auto_scaling_group({
@@ -2747,8 +2669,13 @@ module Aws::AutoScaling
     #         instances_to_update: 0, 
     #         percentage_complete: 50, 
     #         preferences: {
+    #           alarm_specification: {
+    #             alarms: [
+    #               "my-alarm", 
+    #             ], 
+    #           }, 
     #           auto_rollback: true, 
-    #           instance_warmup: 60, 
+    #           instance_warmup: 200, 
     #           min_healthy_percentage: 90, 
     #           scale_in_protected_instances: "Ignore", 
     #           skip_matching: false, 
@@ -2765,8 +2692,13 @@ module Aws::AutoScaling
     #         instances_to_update: 0, 
     #         percentage_complete: 100, 
     #         preferences: {
+    #           alarm_specification: {
+    #             alarms: [
+    #               "my-alarm", 
+    #             ], 
+    #           }, 
     #           auto_rollback: true, 
-    #           instance_warmup: 60, 
+    #           instance_warmup: 200, 
     #           min_healthy_percentage: 90, 
     #           scale_in_protected_instances: "Ignore", 
     #           skip_matching: false, 
@@ -2811,6 +2743,8 @@ module Aws::AutoScaling
     #   resp.instance_refreshes[0].preferences.auto_rollback #=> Boolean
     #   resp.instance_refreshes[0].preferences.scale_in_protected_instances #=> String, one of "Refresh", "Ignore", "Wait"
     #   resp.instance_refreshes[0].preferences.standby_instances #=> String, one of "Terminate", "Ignore", "Wait"
+    #   resp.instance_refreshes[0].preferences.alarm_specification.alarms #=> Array
+    #   resp.instance_refreshes[0].preferences.alarm_specification.alarms[0] #=> String
     #   resp.instance_refreshes[0].desired_configuration.launch_template.launch_template_id #=> String
     #   resp.instance_refreshes[0].desired_configuration.launch_template.launch_template_name #=> String
     #   resp.instance_refreshes[0].desired_configuration.launch_template.version #=> String
@@ -6361,6 +6295,8 @@ module Aws::AutoScaling
     #
     #   * Checkpoints
     #
+    #   * CloudWatch alarms
+    #
     #   * Skip matching
     #
     # @return [Types::StartInstanceRefreshAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -6381,9 +6317,14 @@ module Aws::AutoScaling
     #       }, 
     #     }, 
     #     preferences: {
-    #       instance_warmup: 400, 
+    #       alarm_specification: {
+    #         alarms: [
+    #           "my-alarm", 
+    #         ], 
+    #       }, 
+    #       auto_rollback: true, 
+    #       instance_warmup: 200, 
     #       min_healthy_percentage: 90, 
-    #       skip_matching: true, 
     #     }, 
     #   })
     #
@@ -6493,6 +6434,9 @@ module Aws::AutoScaling
     #       auto_rollback: false,
     #       scale_in_protected_instances: "Refresh", # accepts Refresh, Ignore, Wait
     #       standby_instances: "Terminate", # accepts Terminate, Ignore, Wait
+    #       alarm_specification: {
+    #         alarms: ["XmlStringMaxLen255"],
+    #       },
     #     },
     #   })
     #
@@ -7063,7 +7007,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.95.0'
+      context[:gem_version] = '1.96.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

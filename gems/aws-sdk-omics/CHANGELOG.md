@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2023-07-31)
+------------------
+
+* Feature - Add CreationType filter for ListReadSets
+
 1.10.0 (2023-07-26)
 ------------------
 

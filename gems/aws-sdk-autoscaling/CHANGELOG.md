@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2023-07-31)
+------------------
+
+* Feature - You can now configure an instance refresh to set its status to 'failed' when it detects that a specified CloudWatch alarm has gone into the ALARM state. You can also choose to roll back the instance refresh automatically when the alarm threshold is met.
+
 1.95.0 (2023-07-27)
 ------------------
 

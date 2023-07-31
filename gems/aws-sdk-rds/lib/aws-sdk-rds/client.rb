@@ -2330,6 +2330,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#custom_db_engine_version_manifest #custom_db_engine_version_manifest} => String
     #   * {Types::DBEngineVersion#supports_certificate_rotation_without_restart #supports_certificate_rotation_without_restart} => Boolean
     #   * {Types::DBEngineVersion#supported_ca_certificate_identifiers #supported_ca_certificate_identifiers} => Array&lt;String&gt;
+    #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -2379,6 +2380,7 @@ module Aws::RDS
     #   resp.valid_upgrade_target[0].supports_parallel_query #=> Boolean
     #   resp.valid_upgrade_target[0].supports_global_databases #=> Boolean
     #   resp.valid_upgrade_target[0].supports_babelfish #=> Boolean
+    #   resp.valid_upgrade_target[0].supports_local_write_forwarding #=> Boolean
     #   resp.supported_timezones #=> Array
     #   resp.supported_timezones[0].timezone_name #=> String
     #   resp.exportable_log_types #=> Array
@@ -2406,6 +2408,7 @@ module Aws::RDS
     #   resp.supports_certificate_rotation_without_restart #=> Boolean
     #   resp.supported_ca_certificate_identifiers #=> Array
     #   resp.supported_ca_certificate_identifiers[0] #=> String
+    #   resp.supports_local_write_forwarding #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateCustomDBEngineVersion AWS API Documentation
     #
@@ -3230,6 +3233,13 @@ module Aws::RDS
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
+    # @option params [Boolean] :enable_local_write_forwarding
+    #   Specifies whether read replicas can forward write operations to the
+    #   writer DB instance in the DB cluster. By default, write operations
+    #   aren't allowed on reader DB instances.
+    #
+    #   Valid for: Aurora DB clusters only
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -3433,6 +3443,7 @@ module Aws::RDS
     #     db_system_id: "String",
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
+    #     enable_local_write_forwarding: false,
     #     source_region: "String",
     #   })
     #
@@ -3554,6 +3565,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -7940,6 +7952,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#custom_db_engine_version_manifest #custom_db_engine_version_manifest} => String
     #   * {Types::DBEngineVersion#supports_certificate_rotation_without_restart #supports_certificate_rotation_without_restart} => Boolean
     #   * {Types::DBEngineVersion#supported_ca_certificate_identifiers #supported_ca_certificate_identifiers} => Array&lt;String&gt;
+    #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -7977,6 +7990,7 @@ module Aws::RDS
     #   resp.valid_upgrade_target[0].supports_parallel_query #=> Boolean
     #   resp.valid_upgrade_target[0].supports_global_databases #=> Boolean
     #   resp.valid_upgrade_target[0].supports_babelfish #=> Boolean
+    #   resp.valid_upgrade_target[0].supports_local_write_forwarding #=> Boolean
     #   resp.supported_timezones #=> Array
     #   resp.supported_timezones[0].timezone_name #=> String
     #   resp.exportable_log_types #=> Array
@@ -8004,6 +8018,7 @@ module Aws::RDS
     #   resp.supports_certificate_rotation_without_restart #=> Boolean
     #   resp.supported_ca_certificate_identifiers #=> Array
     #   resp.supported_ca_certificate_identifiers[0] #=> String
+    #   resp.supports_local_write_forwarding #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteCustomDBEngineVersion AWS API Documentation
     #
@@ -8234,6 +8249,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -11245,6 +11261,7 @@ module Aws::RDS
     #   resp.db_clusters[0].master_user_secret.secret_status #=> String
     #   resp.db_clusters[0].master_user_secret.kms_key_id #=> String
     #   resp.db_clusters[0].io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_clusters[0].local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -11493,6 +11510,7 @@ module Aws::RDS
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_parallel_query #=> Boolean
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_global_databases #=> Boolean
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_babelfish #=> Boolean
+    #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_local_write_forwarding #=> Boolean
     #   resp.db_engine_versions[0].supported_timezones #=> Array
     #   resp.db_engine_versions[0].supported_timezones[0].timezone_name #=> String
     #   resp.db_engine_versions[0].exportable_log_types #=> Array
@@ -11520,6 +11538,7 @@ module Aws::RDS
     #   resp.db_engine_versions[0].supports_certificate_rotation_without_restart #=> Boolean
     #   resp.db_engine_versions[0].supported_ca_certificate_identifiers #=> Array
     #   resp.db_engine_versions[0].supported_ca_certificate_identifiers[0] #=> String
+    #   resp.db_engine_versions[0].supports_local_write_forwarding #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBEngineVersions AWS API Documentation
     #
@@ -15742,6 +15761,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -16289,6 +16309,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#custom_db_engine_version_manifest #custom_db_engine_version_manifest} => String
     #   * {Types::DBEngineVersion#supports_certificate_rotation_without_restart #supports_certificate_rotation_without_restart} => Boolean
     #   * {Types::DBEngineVersion#supported_ca_certificate_identifiers #supported_ca_certificate_identifiers} => Array&lt;String&gt;
+    #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -16328,6 +16349,7 @@ module Aws::RDS
     #   resp.valid_upgrade_target[0].supports_parallel_query #=> Boolean
     #   resp.valid_upgrade_target[0].supports_global_databases #=> Boolean
     #   resp.valid_upgrade_target[0].supports_babelfish #=> Boolean
+    #   resp.valid_upgrade_target[0].supports_local_write_forwarding #=> Boolean
     #   resp.supported_timezones #=> Array
     #   resp.supported_timezones[0].timezone_name #=> String
     #   resp.exportable_log_types #=> Array
@@ -16355,6 +16377,7 @@ module Aws::RDS
     #   resp.supports_certificate_rotation_without_restart #=> Boolean
     #   resp.supported_ca_certificate_identifiers #=> Array
     #   resp.supported_ca_certificate_identifiers[0] #=> String
+    #   resp.supports_local_write_forwarding #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyCustomDBEngineVersion AWS API Documentation
     #
@@ -17038,6 +17061,13 @@ module Aws::RDS
     #
     #   ^
     #
+    # @option params [Boolean] :enable_local_write_forwarding
+    #   Specifies whether read replicas can forward write operations to the
+    #   writer DB instance in the DB cluster. By default, write operations
+    #   aren't allowed on reader DB instances.
+    #
+    #   Valid for: Aurora DB clusters only
+    #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -17174,6 +17204,7 @@ module Aws::RDS
     #     master_user_secret_kms_key_id: "String",
     #     engine_mode: "String",
     #     allow_engine_mode_change: false,
+    #     enable_local_write_forwarding: false,
     #   })
     #
     # @example Response structure
@@ -17294,6 +17325,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -20514,6 +20546,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -20789,6 +20822,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBCluster AWS API Documentation
     #
@@ -22246,6 +22280,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
     #
@@ -22938,6 +22973,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -23599,6 +23635,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -26317,6 +26354,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -27129,6 +27167,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -27877,7 +27916,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.187.0'
+      context[:gem_version] = '1.188.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

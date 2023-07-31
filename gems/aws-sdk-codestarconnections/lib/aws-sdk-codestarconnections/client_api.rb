@@ -301,6 +301,7 @@ module Aws::CodeStarconnections
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListConnectionsInput)
         o.output = Shapes::ShapeRef.new(shape: ListConnectionsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2023-07-31)
+------------------
+
+* Feature - Add support for in-aws right sizing
+
 1.19.0 (2023-07-11)
 ------------------
 

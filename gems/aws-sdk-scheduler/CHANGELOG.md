@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2023-07-31)
+------------------
+
+* Feature - This release introduces automatic deletion of schedules in EventBridge Scheduler. If configured, EventBridge Scheduler automatically deletes a schedule after the schedule has completed its last invocation.
+
 1.7.0 (2023-07-11)
 ------------------
 

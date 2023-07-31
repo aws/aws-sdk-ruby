@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2023-07-31)
+------------------
+
+* Feature - Amplify Studio releases GraphQL support for codegen job action.
+
 1.17.0 (2023-07-11)
 ------------------
 

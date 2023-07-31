@@ -24,7 +24,7 @@ module Aws::CodeStarconnections
     end
 
     # A resource that is used to connect third-party source providers with
-    # services like AWS CodePipeline.
+    # services like CodePipeline.
     #
     # Note: A connection created through CloudFormation, the CLI, or the SDK
     # is in `PENDING` status by default. You can make its status
@@ -32,13 +32,13 @@ module Aws::CodeStarconnections
     #
     # @!attribute [rw] connection_name
     #   The name of the connection. Connection names must be unique in an
-    #   AWS user account.
+    #   Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] connection_arn
     #   The Amazon Resource Name (ARN) of the connection. The ARN is used as
-    #   the connection reference when the connection is shared between AWS
-    #   services.
+    #   the connection reference when the connection is shared between
+    #   Amazon Web Services.
     #
     #   <note markdown="1"> The ARN is never reused if the connection is deleted.
     #
@@ -84,8 +84,7 @@ module Aws::CodeStarconnections
     #   @return [String]
     #
     # @!attribute [rw] connection_name
-    #   The name of the connection to be created. The name must be unique in
-    #   the calling AWS account.
+    #   The name of the connection to be created.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -111,7 +110,7 @@ module Aws::CodeStarconnections
     # @!attribute [rw] connection_arn
     #   The Amazon Resource Name (ARN) of the connection to be created. The
     #   ARN is used as the connection reference when the connection is
-    #   shared between AWS services.
+    #   shared between Amazon Web Services services.
     #
     #   <note markdown="1"> The ARN is never reused if the connection is deleted.
     #
@@ -132,8 +131,7 @@ module Aws::CodeStarconnections
     end
 
     # @!attribute [rw] name
-    #   The name of the host to be created. The name must be unique in the
-    #   calling AWS account.
+    #   The name of the host to be created.
     #   @return [String]
     #
     # @!attribute [rw] provider_type
@@ -511,7 +509,8 @@ module Aws::CodeStarconnections
 
     # A tag is a key-value pair that is used to manage the resource.
     #
-    # This tag is available for use by AWS services that support tags.
+    # This tag is available for use by Amazon Web Services services that
+    # support tags.
     #
     # @!attribute [rw] key
     #   The tag's key.

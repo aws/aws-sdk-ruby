@@ -654,6 +654,13 @@ module Aws::RDS
       data[:io_optimized_next_allowed_modification_time]
     end
 
+    # Specifies whether an Aurora DB cluster has in-cluster write forwarding
+    # enabled, not enabled, requested, or is in the process of enabling it.
+    # @return [String]
+    def local_write_forwarding_status
+      data[:local_write_forwarding_status]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -858,6 +865,7 @@ module Aws::RDS
     #     db_system_id: "String",
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
+    #     enable_local_write_forwarding: false,
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -1585,6 +1593,12 @@ module Aws::RDS
     #   Amazon Web Services Region.
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    # @option options [Boolean] :enable_local_write_forwarding
+    #   Specifies whether read replicas can forward write operations to the
+    #   writer DB instance in the DB cluster. By default, write operations
+    #   aren't allowed on reader DB instances.
+    #
+    #   Valid for: Aurora DB clusters only
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -1774,6 +1788,7 @@ module Aws::RDS
     #     master_user_secret_kms_key_id: "String",
     #     engine_mode: "String",
     #     allow_engine_mode_change: false,
+    #     enable_local_write_forwarding: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :new_db_cluster_identifier
@@ -2382,6 +2397,12 @@ module Aws::RDS
     #     mode.
     #
     #   ^
+    # @option options [Boolean] :enable_local_write_forwarding
+    #   Specifies whether read replicas can forward write operations to the
+    #   writer DB instance in the DB cluster. By default, write operations
+    #   aren't allowed on reader DB instances.
+    #
+    #   Valid for: Aurora DB clusters only
     # @return [DBCluster]
     def modify(options = {})
       options = options.merge(db_cluster_identifier: @id)
