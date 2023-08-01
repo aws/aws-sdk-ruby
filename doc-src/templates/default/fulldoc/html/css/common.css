@@ -10,7 +10,7 @@ a { font-weight: 550; }
 
 /* For small screen sizes */
 @media (max-width: 320px) {
-  body { height: 100%; overflow: hidden; overflow-wrap: break-word; }
+  body { height: 100%; overflow-wrap: break-word; }
   #main { height: 100%; overflow: auto; }
 }
 
