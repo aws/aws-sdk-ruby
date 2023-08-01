@@ -159,7 +159,7 @@ module Aws::RDS
       data[:kms_key_id]
     end
 
-    # The Amazon Resource Name (ARN) for the DB cluster snapshot.
+    # Specifies the Amazon Resource Name (ARN) for the DB cluster snapshot.
     # @return [String]
     def db_cluster_snapshot_arn
       data[:db_cluster_snapshot_arn]
@@ -203,6 +203,13 @@ module Aws::RDS
     # @return [String]
     def storage_type
       data[:storage_type]
+    end
+
+    # Specifies the resource ID of the DB cluster that this DB cluster
+    # snapshot was created from.
+    # @return [String]
+    def db_cluster_resource_id
+      data[:db_cluster_resource_id]
     end
 
     # @!endgroup

@@ -3112,6 +3112,9 @@ module Aws::MediaLive
     # @!attribute [rw] tags
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] availability_zone
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputDeviceResponse AWS API Documentation
     #
     class DescribeInputDeviceResponse < Struct.new(
@@ -3127,7 +3130,8 @@ module Aws::MediaLive
       :serial_number,
       :type,
       :uhd_device_settings,
-      :tags)
+      :tags,
+      :availability_zone)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6379,6 +6383,10 @@ module Aws::MediaLive
     #   A collection of key-value pairs.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone associated with this input device.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDevice AWS API Documentation
     #
     class InputDevice < Struct.new(
@@ -6394,7 +6402,8 @@ module Aws::MediaLive
       :serial_number,
       :type,
       :uhd_device_settings,
-      :tags)
+      :tags,
+      :availability_zone)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6627,6 +6636,10 @@ module Aws::MediaLive
     #   A collection of key-value pairs.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone associated with this input device.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceSummary AWS API Documentation
     #
     class InputDeviceSummary < Struct.new(
@@ -6642,7 +6655,8 @@ module Aws::MediaLive
       :serial_number,
       :type,
       :uhd_device_settings,
-      :tags)
+      :tags,
+      :availability_zone)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11957,12 +11971,17 @@ module Aws::MediaLive
     #   The settings that you want to apply to the UHD input device.
     #   @return [Types::InputDeviceConfigurableSettings]
     #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone you want associated with this input device.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputDevice AWS API Documentation
     #
     class UpdateInputDevice < Struct.new(
       :hd_device_settings,
       :name,
-      :uhd_device_settings)
+      :uhd_device_settings,
+      :availability_zone)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11981,13 +12000,17 @@ module Aws::MediaLive
     #   Configurable settings for the input device.
     #   @return [Types::InputDeviceConfigurableSettings]
     #
+    # @!attribute [rw] availability_zone
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputDeviceRequest AWS API Documentation
     #
     class UpdateInputDeviceRequest < Struct.new(
       :hd_device_settings,
       :input_device_id,
       :name,
-      :uhd_device_settings)
+      :uhd_device_settings,
+      :availability_zone)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12046,6 +12069,9 @@ module Aws::MediaLive
     # @!attribute [rw] tags
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] availability_zone
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputDeviceResponse AWS API Documentation
     #
     class UpdateInputDeviceResponse < Struct.new(
@@ -12061,7 +12087,8 @@ module Aws::MediaLive
       :serial_number,
       :type,
       :uhd_device_settings,
-      :tags)
+      :tags,
+      :availability_zone)
       SENSITIVE = []
       include Aws::Structure
     end

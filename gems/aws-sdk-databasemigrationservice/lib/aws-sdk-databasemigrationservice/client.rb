@@ -4349,6 +4349,57 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Returns information about the replication instance versions used in
+    # the project.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   marker, up to the value specified by `MaxRecords`.
+    #
+    # @return [Types::DescribeEngineVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEngineVersionsResponse#engine_versions #engine_versions} => Array&lt;Types::EngineVersion&gt;
+    #   * {Types::DescribeEngineVersionsResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_engine_versions({
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.engine_versions #=> Array
+    #   resp.engine_versions[0].version #=> String
+    #   resp.engine_versions[0].lifecycle #=> String
+    #   resp.engine_versions[0].release_status #=> String, one of "beta", "prod"
+    #   resp.engine_versions[0].launch_date #=> Time
+    #   resp.engine_versions[0].auto_upgrade_date #=> Time
+    #   resp.engine_versions[0].deprecation_date #=> Time
+    #   resp.engine_versions[0].force_upgrade_date #=> Time
+    #   resp.engine_versions[0].available_upgrades #=> Array
+    #   resp.engine_versions[0].available_upgrades[0] #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEngineVersions AWS API Documentation
+    #
+    # @overload describe_engine_versions(params = {})
+    # @param [Hash] params ({})
+    def describe_engine_versions(params = {}, options = {})
+      req = build_request(:describe_engine_versions, params)
+      req.send_request(options)
+    end
+
     # Lists categories for all event source types, or, if specified, for a
     # specified source type. You can see a list of the event categories and
     # source types in [Working with Events and Notifications][1] in the
@@ -9161,7 +9212,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.84.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

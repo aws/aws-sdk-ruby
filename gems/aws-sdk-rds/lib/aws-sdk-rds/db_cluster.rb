@@ -1661,6 +1661,7 @@ module Aws::RDS
     #   dbcluster = db_cluster.delete({
     #     skip_final_snapshot: false,
     #     final_db_snapshot_identifier: "String",
+    #     delete_automated_backups: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :skip_final_snapshot
@@ -1692,6 +1693,11 @@ module Aws::RDS
     #   * First character must be a letter
     #
     #   * Can't end with a hyphen or contain two consecutive hyphens
+    # @option options [Boolean] :delete_automated_backups
+    #   A value that indicates whether to remove automated backups immediately
+    #   after the DB cluster is deleted. This parameter isn't case-sensitive.
+    #   The default is to remove automated backups immediately after the DB
+    #   cluster is deleted.
     # @return [DBCluster]
     def delete(options = {})
       options = options.merge(db_cluster_identifier: @id)
@@ -2460,6 +2466,7 @@ module Aws::RDS
     #       max_capacity: 1.0,
     #     },
     #     network_type: "String",
+    #     source_db_cluster_resource_id: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_cluster_identifier
@@ -2814,6 +2821,8 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    # @option options [String] :source_db_cluster_resource_id
+    #   The resource ID of the source DB cluster from which to restore.
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(source_db_cluster_identifier: @id)
@@ -2950,6 +2959,7 @@ module Aws::RDS
     #     ],
     #     include_shared: false,
     #     include_public: false,
+    #     db_cluster_resource_id: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_cluster_snapshot_identifier
@@ -3021,6 +3031,8 @@ module Aws::RDS
     #
     #   You can share a manual DB cluster snapshot as public by using the
     #   ModifyDBClusterSnapshotAttribute API action.
+    # @option options [String] :db_cluster_resource_id
+    #   A specific DB cluster resource ID to describe.
     # @return [DBClusterSnapshot::Collection]
     def snapshots(options = {})
       batches = Enumerator.new do |y|

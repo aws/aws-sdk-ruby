@@ -390,21 +390,23 @@ module Aws::InternetMonitor
 
     # Creates a monitor in Amazon CloudWatch Internet Monitor. A monitor is
     # built based on information from the application resources that you
-    # add: Amazon Virtual Private Clouds (VPCs), Amazon CloudFront
-    # distributions, and WorkSpaces directories. Internet Monitor then
-    # publishes internet measurements from Amazon Web Services that are
-    # specific to the *city-networks*, that is, the locations and ASNs
+    # add: VPCs, Network Load Balancers (NLBs), Amazon CloudFront
+    # distributions, and Amazon WorkSpaces directories. Internet Monitor
+    # then publishes internet measurements from Amazon Web Services that are
+    # specific to the *city-networks*. That is, the locations and ASNs
     # (typically internet service providers or ISPs), where clients access
     # your application. For more information, see [Using Amazon CloudWatch
     # Internet Monitor][1] in the *Amazon CloudWatch User Guide*.
     #
-    # When you create a monitor, you set a maximum limit for the number of
-    # city-networks where client traffic is monitored. The city-network
-    # maximum that you choose is the limit, but you only pay for the number
-    # of city-networks that are actually monitored. You can change the
-    # maximum at any time by updating your monitor. For more information,
-    # see [Choosing a city-network maximum value][2] in the *Amazon
-    # CloudWatch User Guide*.
+    # When you create a monitor, you choose the percentage of traffic that
+    # you want to monitor. You can also set a maximum limit for the number
+    # of city-networks where client traffic is monitored, that caps the
+    # total traffic that Internet Monitor monitors. A city-network maximum
+    # is the limit of city-networks, but you only pay for the number of
+    # city-networks that are actually monitored. You can update your monitor
+    # at any time to change the percentage of traffic to monitor or the
+    # city-networks maximum. For more information, see [Choosing a
+    # city-network maximum value][2] in the *Amazon CloudWatch User Guide*.
     #
     #
     #
@@ -416,14 +418,15 @@ module Aws::InternetMonitor
     #
     # @option params [Array<String>] :resources
     #   The resources to include in a monitor, which you provide as a set of
-    #   Amazon Resource Names (ARNs).
+    #   Amazon Resource Names (ARNs). Resources can be VPCs, NLBs, Amazon
+    #   CloudFront distributions, or Amazon WorkSpaces directories.
     #
-    #   You can add a combination of Amazon Virtual Private Clouds (VPCs) and
-    #   Amazon CloudFront distributions, or you can add Amazon WorkSpaces
-    #   directories. You can't add all three types of resources.
+    #   You can add a combination of VPCs and CloudFront distributions, or you
+    #   can add WorkSpaces directories, or you can add NLBs. You can't add
+    #   NLBs or WorkSpaces directories together with any other resources.
     #
-    #   <note markdown="1"> If you add only VPC resources, at least one VPC must have an Internet
-    #   Gateway attached to it, to make sure that it has internet
+    #   <note markdown="1"> If you add only Amazon VPC resources, at least one VPC must have an
+    #   Internet Gateway attached to it, to make sure that it has internet
     #   connectivity.
     #
     #    </note>
@@ -443,9 +446,9 @@ module Aws::InternetMonitor
     # @option params [Integer] :max_city_networks_to_monitor
     #   The maximum number of city-networks to monitor for your resources. A
     #   city-network is the location (city) where clients access your
-    #   application resources from and the network or ASN, such as an internet
-    #   service provider (ISP), that clients access the resources through.
-    #   This limit helps control billing costs.
+    #   application resources from and the ASN or network provider, such as an
+    #   internet service provider (ISP), that clients access the resources
+    #   through. Setting this limit can help control billing costs.
     #
     #   To learn more, see [Choosing a city-network maximum value ][1] in the
     #   Amazon CloudWatch Internet Monitor section of the *CloudWatch User
@@ -461,14 +464,33 @@ module Aws::InternetMonitor
     #
     # @option params [Integer] :traffic_percentage_to_monitor
     #   The percentage of the internet-facing traffic for your application
-    #   that you want to monitor with this monitor.
+    #   that you want to monitor with this monitor. If you set a city-networks
+    #   maximum, that limit overrides the traffic percentage that you set.
+    #
+    #   To learn more, see [Choosing an application traffic percentage to
+    #   monitor ][1] in the Amazon CloudWatch Internet Monitor section of the
+    #   *CloudWatch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMTrafficPercentage.html
     #
     # @option params [Types::HealthEventsConfig] :health_events_config
-    #   Defines the health event threshold percentages, for performance score
-    #   and availability score. Internet Monitor creates a health event when
-    #   there's an internet issue that affects your application end users
-    #   where a health score percentage is at or below a set threshold. If you
-    #   don't set a health event threshold, the default calue is 95%.
+    #   Defines the threshold percentages and other configuration information
+    #   for when Amazon CloudWatch Internet Monitor creates a health event.
+    #   Internet Monitor creates a health event when an internet issue that
+    #   affects your application end users has a health score percentage that
+    #   is at or below a specific threshold, and, sometimes, when other
+    #   criteria are met.
+    #
+    #   If you don't set a health event threshold, the default value is 95%.
+    #
+    #   For more information, see [ Change health event thresholds][1] in the
+    #   Internet Monitor section of the *CloudWatch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-overview.html#IMUpdateThresholdFromOverview
     #
     # @return [Types::CreateMonitorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -496,6 +518,16 @@ module Aws::InternetMonitor
     #     health_events_config: {
     #       availability_score_threshold: 1.0,
     #       performance_score_threshold: 1.0,
+    #       availability_local_health_events_config: {
+    #         status: "ENABLED", # accepts ENABLED, DISABLED
+    #         health_score_threshold: 1.0,
+    #         min_traffic_impact: 1.0,
+    #       },
+    #       performance_local_health_events_config: {
+    #         status: "ENABLED", # accepts ENABLED, DISABLED
+    #         health_score_threshold: 1.0,
+    #         min_traffic_impact: 1.0,
+    #       },
     #     },
     #   })
     #
@@ -537,12 +569,12 @@ module Aws::InternetMonitor
 
     # Gets information the Amazon CloudWatch Internet Monitor has created
     # and stored about a health event for a specified monitor. This
-    # information includes the impacted locations, and all of the
-    # information related to the event by location.
+    # information includes the impacted locations, and all the information
+    # related to the event, by location.
     #
-    # The information returned includes the performance, availability, and
-    # round-trip time impact, information about the network providers, the
-    # event type, and so on.
+    # The information returned includes the impact on performance,
+    # availability, and round-trip time, information about the network
+    # providers (ASNs), the event type, and so on.
     #
     # Information rolled up at the global traffic level is also returned,
     # including the impact type and total traffic impact.
@@ -615,7 +647,7 @@ module Aws::InternetMonitor
     #   resp.impacted_locations[0].internet_health.performance.round_trip_time.p95 #=> Float
     #   resp.status #=> String, one of "ACTIVE", "RESOLVED"
     #   resp.percent_of_total_traffic_impacted #=> Float
-    #   resp.impact_type #=> String, one of "AVAILABILITY", "PERFORMANCE"
+    #   resp.impact_type #=> String, one of "AVAILABILITY", "PERFORMANCE", "LOCAL_AVAILABILITY", "LOCAL_PERFORMANCE"
     #   resp.health_score_threshold #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/GetHealthEvent AWS API Documentation
@@ -677,6 +709,12 @@ module Aws::InternetMonitor
     #   resp.traffic_percentage_to_monitor #=> Integer
     #   resp.health_events_config.availability_score_threshold #=> Float
     #   resp.health_events_config.performance_score_threshold #=> Float
+    #   resp.health_events_config.availability_local_health_events_config.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.health_events_config.availability_local_health_events_config.health_score_threshold #=> Float
+    #   resp.health_events_config.availability_local_health_events_config.min_traffic_impact #=> Float
+    #   resp.health_events_config.performance_local_health_events_config.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.health_events_config.performance_local_health_events_config.health_score_threshold #=> Float
+    #   resp.health_events_config.performance_local_health_events_config.min_traffic_impact #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/GetMonitor AWS API Documentation
     #
@@ -688,9 +726,8 @@ module Aws::InternetMonitor
     end
 
     # Lists all health events for a monitor in Amazon CloudWatch Internet
-    # Monitor. Returns all information for health events including the
-    # client location information the network cause and status, event start
-    # and end time, percentage of total traffic impacted, and status.
+    # Monitor. Returns information for health events including the event
+    # start and end time and the status.
     #
     # <note markdown="1"> Health events that have start times during the time frame that is
     # requested are not included in the list of health events.
@@ -776,7 +813,7 @@ module Aws::InternetMonitor
     #   resp.health_events[0].impacted_locations[0].internet_health.performance.round_trip_time.p95 #=> Float
     #   resp.health_events[0].status #=> String, one of "ACTIVE", "RESOLVED"
     #   resp.health_events[0].percent_of_total_traffic_impacted #=> Float
-    #   resp.health_events[0].impact_type #=> String, one of "AVAILABILITY", "PERFORMANCE"
+    #   resp.health_events[0].impact_type #=> String, one of "AVAILABILITY", "PERFORMANCE", "LOCAL_AVAILABILITY", "LOCAL_PERFORMANCE"
     #   resp.health_events[0].health_score_threshold #=> Float
     #   resp.next_token #=> String
     #
@@ -935,10 +972,11 @@ module Aws::InternetMonitor
       req.send_request(options)
     end
 
-    # Updates a monitor. You can update a monitor to change the maximum
-    # number of city-networks (locations and ASNs or internet service
-    # providers), to add or remove resources, or to change the status of the
-    # monitor. Note that you can't change the name of a monitor.
+    # Updates a monitor. You can update a monitor to change the percentage
+    # of traffic to monitor or the maximum number of city-networks
+    # (locations and ASNs), to add or remove resources, or to change the
+    # status of the monitor. Note that you can't change the name of a
+    # monitor.
     #
     # The city-network maximum that you choose is the limit, but you only
     # pay for the number of city-networks that are actually monitored. For
@@ -954,15 +992,16 @@ module Aws::InternetMonitor
     #
     # @option params [Array<String>] :resources_to_add
     #   The resources to include in a monitor, which you provide as a set of
-    #   Amazon Resource Names (ARNs).
+    #   Amazon Resource Names (ARNs). Resources can be VPCs, NLBs, Amazon
+    #   CloudFront distributions, or Amazon WorkSpaces directories.
     #
-    #   You can add a combination of Amazon Virtual Private Clouds (VPCs) and
-    #   Amazon CloudFront distributions, or you can add Amazon WorkSpaces
-    #   directories. You can't add all three types of resources.
+    #   You can add a combination of VPCs and CloudFront distributions, or you
+    #   can add WorkSpaces directories, or you can add NLBs. You can't add
+    #   NLBs or WorkSpaces directories together with any other resources.
     #
-    #   <note markdown="1"> If you add only VPC resources, at least one VPC must have an Internet
-    #   Gateway attached to it, to make sure that it has internet
-    #   connectivity.
+    #   <note markdown="1"> If you add only Amazon Virtual Private Clouds resources, at least one
+    #   VPC must have an Internet Gateway attached to it, to make sure that it
+    #   has internet connectivity.
     #
     #    </note>
     #
@@ -984,10 +1023,11 @@ module Aws::InternetMonitor
     #   not need to pass this option.**
     #
     # @option params [Integer] :max_city_networks_to_monitor
-    #   The maximum number of city-networks to monitor for your resources. A
+    #   The maximum number of city-networks to monitor for your application. A
     #   city-network is the location (city) where clients access your
-    #   application resources from and the network or ASN, such as an internet
-    #   service provider, that clients access the resources through.
+    #   application resources from and the ASN or network provider, such as an
+    #   internet service provider (ISP), that clients access the resources
+    #   through. Setting this limit can help control billing costs.
     #
     # @option params [Types::InternetMeasurementsLogDelivery] :internet_measurements_log_delivery
     #   Publish internet measurements for Internet Monitor to another
@@ -996,13 +1036,29 @@ module Aws::InternetMonitor
     #
     # @option params [Integer] :traffic_percentage_to_monitor
     #   The percentage of the internet-facing traffic for your application
-    #   that you want to monitor with this monitor.
+    #   that you want to monitor with this monitor. If you set a city-networks
+    #   maximum, that limit overrides the traffic percentage that you set.
+    #
+    #   To learn more, see [Choosing an application traffic percentage to
+    #   monitor ][1] in the Amazon CloudWatch Internet Monitor section of the
+    #   *CloudWatch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMTrafficPercentage.html
     #
     # @option params [Types::HealthEventsConfig] :health_events_config
-    #   The list of health event thresholds. A health event threshold
-    #   percentage, for performance and availability, determines when Internet
-    #   Monitor creates a health event when there's an internet issue that
-    #   affects your application end users.
+    #   The list of health score thresholds. A threshold percentage for health
+    #   scores, along with other configuration information, determines when
+    #   Internet Monitor creates a health event when there's an internet
+    #   issue that affects your application end users.
+    #
+    #   For more information, see [ Change health event thresholds][1] in the
+    #   Internet Monitor section of the *CloudWatch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-overview.html#IMUpdateThresholdFromOverview
     #
     # @return [Types::UpdateMonitorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1029,6 +1085,16 @@ module Aws::InternetMonitor
     #     health_events_config: {
     #       availability_score_threshold: 1.0,
     #       performance_score_threshold: 1.0,
+    #       availability_local_health_events_config: {
+    #         status: "ENABLED", # accepts ENABLED, DISABLED
+    #         health_score_threshold: 1.0,
+    #         min_traffic_impact: 1.0,
+    #       },
+    #       performance_local_health_events_config: {
+    #         status: "ENABLED", # accepts ENABLED, DISABLED
+    #         health_score_threshold: 1.0,
+    #         min_traffic_impact: 1.0,
+    #       },
     #     },
     #   })
     #
@@ -1059,7 +1125,7 @@ module Aws::InternetMonitor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-internetmonitor'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

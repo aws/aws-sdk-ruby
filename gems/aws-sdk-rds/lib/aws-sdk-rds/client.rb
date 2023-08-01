@@ -1410,6 +1410,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.tag_list[0].value #=> String
     #   resp.db_cluster_snapshot.db_system_id #=> String
     #   resp.db_cluster_snapshot.storage_type #=> String
+    #   resp.db_cluster_snapshot.db_cluster_resource_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBClusterSnapshot AWS API Documentation
     #
@@ -3991,6 +3992,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.tag_list[0].value #=> String
     #   resp.db_cluster_snapshot.db_system_id #=> String
     #   resp.db_cluster_snapshot.storage_type #=> String
+    #   resp.db_cluster_snapshot.db_cluster_resource_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterSnapshot AWS API Documentation
     #
@@ -8090,6 +8092,12 @@ module Aws::RDS
     #
     #   * Can't end with a hyphen or contain two consecutive hyphens
     #
+    # @option params [Boolean] :delete_automated_backups
+    #   A value that indicates whether to remove automated backups immediately
+    #   after the DB cluster is deleted. This parameter isn't case-sensitive.
+    #   The default is to remove automated backups immediately after the DB
+    #   cluster is deleted.
+    #
     # @return [Types::DeleteDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -8129,6 +8137,7 @@ module Aws::RDS
     #     db_cluster_identifier: "String", # required
     #     skip_final_snapshot: false,
     #     final_db_snapshot_identifier: "String",
+    #     delete_automated_backups: false,
     #   })
     #
     # @example Response structure
@@ -8257,6 +8266,61 @@ module Aws::RDS
     # @param [Hash] params ({})
     def delete_db_cluster(params = {}, options = {})
       req = build_request(:delete_db_cluster, params)
+      req.send_request(options)
+    end
+
+    # Deletes automated backups using the `DbClusterResourceId` value of the
+    # source DB cluster or the Amazon Resource Name (ARN) of the automated
+    # backups.
+    #
+    # @option params [required, String] :db_cluster_resource_id
+    #   The identifier for the source DB cluster, which can't be changed and
+    #   which is unique to an Amazon Web Services Region.
+    #
+    # @return [Types::DeleteDBClusterAutomatedBackupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDBClusterAutomatedBackupResult#db_cluster_automated_backup #db_cluster_automated_backup} => Types::DBClusterAutomatedBackup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_db_cluster_automated_backup({
+    #     db_cluster_resource_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_cluster_automated_backup.engine #=> String
+    #   resp.db_cluster_automated_backup.vpc_id #=> String
+    #   resp.db_cluster_automated_backup.db_cluster_automated_backups_arn #=> String
+    #   resp.db_cluster_automated_backup.db_cluster_identifier #=> String
+    #   resp.db_cluster_automated_backup.restore_window.earliest_time #=> Time
+    #   resp.db_cluster_automated_backup.restore_window.latest_time #=> Time
+    #   resp.db_cluster_automated_backup.master_username #=> String
+    #   resp.db_cluster_automated_backup.db_cluster_resource_id #=> String
+    #   resp.db_cluster_automated_backup.region #=> String
+    #   resp.db_cluster_automated_backup.license_model #=> String
+    #   resp.db_cluster_automated_backup.status #=> String
+    #   resp.db_cluster_automated_backup.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster_automated_backup.cluster_create_time #=> Time
+    #   resp.db_cluster_automated_backup.storage_encrypted #=> Boolean
+    #   resp.db_cluster_automated_backup.allocated_storage #=> Integer
+    #   resp.db_cluster_automated_backup.engine_version #=> String
+    #   resp.db_cluster_automated_backup.db_cluster_arn #=> String
+    #   resp.db_cluster_automated_backup.backup_retention_period #=> Integer
+    #   resp.db_cluster_automated_backup.engine_mode #=> String
+    #   resp.db_cluster_automated_backup.availability_zones #=> Array
+    #   resp.db_cluster_automated_backup.availability_zones[0] #=> String
+    #   resp.db_cluster_automated_backup.port #=> Integer
+    #   resp.db_cluster_automated_backup.kms_key_id #=> String
+    #   resp.db_cluster_automated_backup.storage_type #=> String
+    #   resp.db_cluster_automated_backup.iops #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterAutomatedBackup AWS API Documentation
+    #
+    # @overload delete_db_cluster_automated_backup(params = {})
+    # @param [Hash] params ({})
+    def delete_db_cluster_automated_backup(params = {}, options = {})
+      req = build_request(:delete_db_cluster_automated_backup, params)
       req.send_request(options)
     end
 
@@ -8494,6 +8558,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.tag_list[0].value #=> String
     #   resp.db_cluster_snapshot.db_system_id #=> String
     #   resp.db_cluster_snapshot.storage_type #=> String
+    #   resp.db_cluster_snapshot.db_cluster_resource_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterSnapshot AWS API Documentation
     #
@@ -10050,6 +10115,117 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Displays backups for both current and deleted DB clusters. For
+    # example, use this operation to find details about automated backups
+    # for previously deleted clusters. Current clusters are returned for
+    # both the `DescribeDBClusterAutomatedBackups` and `DescribeDBClusters`
+    # operations.
+    #
+    # All parameters are optional.
+    #
+    # @option params [String] :db_cluster_resource_id
+    #   The resource ID of the DB cluster that is the source of the automated
+    #   backup. This parameter isn't case-sensitive.
+    #
+    # @option params [String] :db_cluster_identifier
+    #   (Optional) The user-supplied DB cluster identifier. If this parameter
+    #   is specified, it must match the identifier of an existing DB cluster.
+    #   It returns information from the specific DB cluster's automated
+    #   backup. This parameter isn't case-sensitive.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   A filter that specifies which resources to return based on status.
+    #
+    #   Supported filters are the following:
+    #
+    #   * `status`
+    #
+    #     * `retained` - Automated backups for deleted clusters and after
+    #       backup replication is stopped.
+    #
+    #     ^
+    #
+    #   * `db-cluster-id` - Accepts DB cluster identifiers and Amazon Resource
+    #     Names (ARNs). The results list includes only information about the
+    #     DB cluster automated backups identified by these ARNs.
+    #
+    #   * `db-cluster-resource-id` - Accepts DB resource identifiers and
+    #     Amazon Resource Names (ARNs). The results list includes only
+    #     information about the DB cluster resources identified by these ARNs.
+    #
+    #   Returns all resources by default. The status for each resource is
+    #   specified in the response.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
+    #
+    # @option params [String] :marker
+    #   The pagination token provided in the previous request. If this
+    #   parameter is specified the response includes only records beyond the
+    #   marker, up to `MaxRecords`.
+    #
+    # @return [Types::DBClusterAutomatedBackupMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DBClusterAutomatedBackupMessage#marker #marker} => String
+    #   * {Types::DBClusterAutomatedBackupMessage#db_cluster_automated_backups #db_cluster_automated_backups} => Array&lt;Types::DBClusterAutomatedBackup&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_db_cluster_automated_backups({
+    #     db_cluster_resource_id: "String",
+    #     db_cluster_identifier: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.db_cluster_automated_backups #=> Array
+    #   resp.db_cluster_automated_backups[0].engine #=> String
+    #   resp.db_cluster_automated_backups[0].vpc_id #=> String
+    #   resp.db_cluster_automated_backups[0].db_cluster_automated_backups_arn #=> String
+    #   resp.db_cluster_automated_backups[0].db_cluster_identifier #=> String
+    #   resp.db_cluster_automated_backups[0].restore_window.earliest_time #=> Time
+    #   resp.db_cluster_automated_backups[0].restore_window.latest_time #=> Time
+    #   resp.db_cluster_automated_backups[0].master_username #=> String
+    #   resp.db_cluster_automated_backups[0].db_cluster_resource_id #=> String
+    #   resp.db_cluster_automated_backups[0].region #=> String
+    #   resp.db_cluster_automated_backups[0].license_model #=> String
+    #   resp.db_cluster_automated_backups[0].status #=> String
+    #   resp.db_cluster_automated_backups[0].iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster_automated_backups[0].cluster_create_time #=> Time
+    #   resp.db_cluster_automated_backups[0].storage_encrypted #=> Boolean
+    #   resp.db_cluster_automated_backups[0].allocated_storage #=> Integer
+    #   resp.db_cluster_automated_backups[0].engine_version #=> String
+    #   resp.db_cluster_automated_backups[0].db_cluster_arn #=> String
+    #   resp.db_cluster_automated_backups[0].backup_retention_period #=> Integer
+    #   resp.db_cluster_automated_backups[0].engine_mode #=> String
+    #   resp.db_cluster_automated_backups[0].availability_zones #=> Array
+    #   resp.db_cluster_automated_backups[0].availability_zones[0] #=> String
+    #   resp.db_cluster_automated_backups[0].port #=> Integer
+    #   resp.db_cluster_automated_backups[0].kms_key_id #=> String
+    #   resp.db_cluster_automated_backups[0].storage_type #=> String
+    #   resp.db_cluster_automated_backups[0].iops #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterAutomatedBackups AWS API Documentation
+    #
+    # @overload describe_db_cluster_automated_backups(params = {})
+    # @param [Hash] params ({})
+    def describe_db_cluster_automated_backups(params = {}, options = {})
+      req = build_request(:describe_db_cluster_automated_backups, params)
+      req.send_request(options)
+    end
+
     # Returns information about backtracks for a DB cluster.
     #
     # For more information on Amazon Aurora, see [ What is Amazon
@@ -10811,6 +10987,9 @@ module Aws::RDS
     #   You can share a manual DB cluster snapshot as public by using the
     #   ModifyDBClusterSnapshotAttribute API action.
     #
+    # @option params [String] :db_cluster_resource_id
+    #   A specific DB cluster resource ID to describe.
+    #
     # @return [Types::DBClusterSnapshotMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DBClusterSnapshotMessage#marker #marker} => String
@@ -10899,6 +11078,7 @@ module Aws::RDS
     #     marker: "String",
     #     include_shared: false,
     #     include_public: false,
+    #     db_cluster_resource_id: "String",
     #   })
     #
     # @example Response structure
@@ -10932,6 +11112,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshots[0].tag_list[0].value #=> String
     #   resp.db_cluster_snapshots[0].db_system_id #=> String
     #   resp.db_cluster_snapshots[0].storage_type #=> String
+    #   resp.db_cluster_snapshots[0].db_cluster_resource_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -11565,7 +11746,7 @@ module Aws::RDS
     # @option params [String] :db_instance_identifier
     #   (Optional) The user-supplied instance identifier. If this parameter is
     #   specified, it must match the identifier of an existing DB instance. It
-    #   returns information from the specific DB instance' automated backup.
+    #   returns information from the specific DB instance's automated backup.
     #   This parameter isn't case-sensitive.
     #
     # @option params [Array<Types::Filter>] :filters
@@ -11575,13 +11756,13 @@ module Aws::RDS
     #
     #   * `status`
     #
-    #     * `active` - automated backups for current instances
+    #     * `active` - Automated backups for current instances.
     #
-    #     * `retained` - automated backups for deleted instances and after
-    #       backup replication is stopped
+    #     * `creating` - Automated backups that are waiting for the first
+    #       automated snapshot to be available.
     #
-    #     * `creating` - automated backups that are waiting for the first
-    #       automated snapshot to be available
+    #     * `retained` - Automated backups for deleted instances and after
+    #       backup replication is stopped.
     #
     #   * `db-instance-id` - Accepts DB instance identifiers and Amazon
     #     Resource Names (ARNs). The results list includes only information
@@ -23040,7 +23221,7 @@ module Aws::RDS
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
-    # @option params [required, String] :source_db_cluster_identifier
+    # @option params [String] :source_db_cluster_identifier
     #   The identifier of the source DB cluster from which to restore.
     #
     #   Constraints:
@@ -23401,6 +23582,9 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #
+    # @option params [String] :source_db_cluster_resource_id
+    #   The resource ID of the source DB cluster from which to restore.
+    #
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterToPointInTimeResult#db_cluster #db_cluster} => Types::DBCluster
@@ -23475,7 +23659,7 @@ module Aws::RDS
     #   resp = client.restore_db_cluster_to_point_in_time({
     #     db_cluster_identifier: "String", # required
     #     restore_type: "String",
-    #     source_db_cluster_identifier: "String", # required
+    #     source_db_cluster_identifier: "String",
     #     restore_to_time: Time.now,
     #     use_latest_restorable_time: false,
     #     port: 1,
@@ -23515,6 +23699,7 @@ module Aws::RDS
     #       max_capacity: 1.0,
     #     },
     #     network_type: "String",
+    #     source_db_cluster_resource_id: "String",
     #   })
     #
     # @example Response structure
@@ -27916,7 +28101,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.188.0'
+      context[:gem_version] = '1.189.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

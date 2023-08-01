@@ -6514,6 +6514,195 @@ module Aws::RDS
     #
     class DBClusterAlreadyExistsFault < Aws::EmptyStructure; end
 
+    # An automated backup of a DB cluster. It consists of system backups,
+    # transaction logs, and the database cluster properties that existed at
+    # the time you deleted the source cluster.
+    #
+    # @!attribute [rw] engine
+    #   The name of the database engine for this automated backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The VPC ID associated with the DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_automated_backups_arn
+    #   The Amazon Resource Name (ARN) for the automated backups.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The identifier for the source DB cluster, which can't be changed
+    #   and which is unique to an Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_window
+    #   Earliest and latest time an instance can be restored to:
+    #   @return [Types::RestoreWindow]
+    #
+    # @!attribute [rw] master_username
+    #   The master user name of the automated backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_resource_id
+    #   The resource ID for the source DB cluster, which can't be changed
+    #   and which is unique to an Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region associated with the automated backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] license_model
+    #   The license model information for this DB cluster automated backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   A list of status information for an automated backup:
+    #
+    #   * `retained` - Automated backups for deleted clusters.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_database_authentication_enabled
+    #   True if mapping of Amazon Web Services Identity and Access
+    #   Management (IAM) accounts to database accounts is enabled, and
+    #   otherwise false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cluster_create_time
+    #   The time when the DB cluster was created, in Universal Coordinated
+    #   Time (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] storage_encrypted
+    #   Specifies whether the source DB cluster is encrypted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] allocated_storage
+    #   For all database engines except Amazon Aurora, `AllocatedStorage`
+    #   specifies the allocated storage size in gibibytes (GiB). For Aurora,
+    #   `AllocatedStorage` always returns 1, because Aurora DB cluster
+    #   storage size isn't fixed, but instead automatically adjusts as
+    #   needed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] engine_version
+    #   The version of the database engine for the automated backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_arn
+    #   The Amazon Resource Name (ARN) for the source DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_retention_period
+    #   The retention period for the automated backups.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] engine_mode
+    #   The engine mode of the database engine for the automated backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zones
+    #   The Availability Zones where instances in the DB cluster can be
+    #   created. For information on Amazon Web Services Regions and
+    #   Availability Zones, see [Regions and Availability Zones][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] port
+    #   The port number that the automated backup used for connections.
+    #
+    #   Default: Inherits from the source DB cluster
+    #
+    #   Valid Values: `1150-65535`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Web Services KMS key ID for an automated backup.
+    #
+    #   The Amazon Web Services KMS key identifier is the key ARN, key ID,
+    #   alias ARN, or alias name for the KMS key.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_type
+    #   The storage type associated with the DB cluster.
+    #
+    #   This setting is only for non-Aurora Multi-AZ DB clusters.
+    #   @return [String]
+    #
+    # @!attribute [rw] iops
+    #   The IOPS (I/O operations per second) value for the automated backup.
+    #
+    #   This setting is only for non-Aurora Multi-AZ DB clusters.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterAutomatedBackup AWS API Documentation
+    #
+    class DBClusterAutomatedBackup < Struct.new(
+      :engine,
+      :vpc_id,
+      :db_cluster_automated_backups_arn,
+      :db_cluster_identifier,
+      :restore_window,
+      :master_username,
+      :db_cluster_resource_id,
+      :region,
+      :license_model,
+      :status,
+      :iam_database_authentication_enabled,
+      :cluster_create_time,
+      :storage_encrypted,
+      :allocated_storage,
+      :engine_version,
+      :db_cluster_arn,
+      :backup_retention_period,
+      :engine_mode,
+      :availability_zones,
+      :port,
+      :kms_key_id,
+      :storage_type,
+      :iops)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   The pagination token provided in the previous request. If this
+    #   parameter is specified the response includes only records beyond the
+    #   marker, up to `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_automated_backups
+    #   A list of `DBClusterAutomatedBackup` backups.
+    #   @return [Array<Types::DBClusterAutomatedBackup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterAutomatedBackupMessage AWS API Documentation
+    #
+    class DBClusterAutomatedBackupMessage < Struct.new(
+      :marker,
+      :db_cluster_automated_backups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # No automated backup for this DB cluster was found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterAutomatedBackupNotFoundFault AWS API Documentation
+    #
+    class DBClusterAutomatedBackupNotFoundFault < Aws::EmptyStructure; end
+
+    # The quota for retained automated backups was exceeded. This prevents
+    # you from retaining any additional automated backups. The retained
+    # automated backups quota is the same as your DB cluster quota.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterAutomatedBackupQuotaExceededFault AWS API Documentation
+    #
+    class DBClusterAutomatedBackupQuotaExceededFault < Aws::EmptyStructure; end
+
     # This data type is used as a response element in the
     # `DescribeDBClusterBacktracks` action.
     #
@@ -7112,7 +7301,8 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] db_cluster_snapshot_arn
-    #   The Amazon Resource Name (ARN) for the DB cluster snapshot.
+    #   Specifies the Amazon Resource Name (ARN) for the DB cluster
+    #   snapshot.
     #   @return [String]
     #
     # @!attribute [rw] source_db_cluster_snapshot_arn
@@ -7146,6 +7336,11 @@ module Aws::RDS
     #   This setting is only for Aurora DB clusters.
     #   @return [String]
     #
+    # @!attribute [rw] db_cluster_resource_id
+    #   Specifies the resource ID of the DB cluster that this DB cluster
+    #   snapshot was created from.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterSnapshot AWS API Documentation
     #
     class DBClusterSnapshot < Struct.new(
@@ -7172,7 +7367,8 @@ module Aws::RDS
       :iam_database_authentication_enabled,
       :tag_list,
       :db_system_id,
-      :storage_type)
+      :storage_type,
+      :db_cluster_resource_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8220,7 +8416,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] dbi_resource_id
-    #   The identifier for the source DB instance, which can't be changed
+    #   The resource ID for the source DB instance, which can't be changed
     #   and which is unique to an Amazon Web Services Region.
     #   @return [String]
     #
@@ -8229,8 +8425,8 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] db_instance_identifier
-    #   The customer id of the instance that is/was associated with the
-    #   automated backup.
+    #   The identifier for the source DB instance, which can't be changed
+    #   and which is unique to an Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] restore_window
@@ -8244,11 +8440,11 @@ module Aws::RDS
     # @!attribute [rw] status
     #   Provides a list of status information for an automated backup:
     #
-    #   * `active` - automated backups for current instances
+    #   * `active` - Automated backups for current instances.
     #
-    #   * `retained` - automated backups for deleted instances
+    #   * `retained` - Automated backups for deleted instances.
     #
-    #   * `creating` - automated backups that are waiting for the first
+    #   * `creating` - Automated backups that are waiting for the first
     #     automated snapshot to be available.
     #   @return [String]
     #
@@ -8279,7 +8475,7 @@ module Aws::RDS
     #   @return [Time]
     #
     # @!attribute [rw] master_username
-    #   The license model of an automated backup.
+    #   The master user name of an automated backup.
     #   @return [String]
     #
     # @!attribute [rw] engine
@@ -8422,7 +8618,7 @@ module Aws::RDS
 
     # The quota for retained automated backups was exceeded. This prevents
     # you from retaining any additional automated backups. The retained
-    # automated backups quota is the same as your DB Instance quota.
+    # automated backups quota is the same as your DB instance quota.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceAutomatedBackupQuotaExceededFault AWS API Documentation
     #
@@ -9754,6 +9950,33 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @!attribute [rw] db_cluster_resource_id
+    #   The identifier for the source DB cluster, which can't be changed
+    #   and which is unique to an Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterAutomatedBackupMessage AWS API Documentation
+    #
+    class DeleteDBClusterAutomatedBackupMessage < Struct.new(
+      :db_cluster_resource_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_cluster_automated_backup
+    #   An automated backup of a DB cluster. It consists of system backups,
+    #   transaction logs, and the database cluster properties that existed
+    #   at the time you deleted the source cluster.
+    #   @return [Types::DBClusterAutomatedBackup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterAutomatedBackupResult AWS API Documentation
+    #
+    class DeleteDBClusterAutomatedBackupResult < Struct.new(
+      :db_cluster_automated_backup)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] db_cluster_endpoint_identifier
     #   The identifier associated with the custom endpoint. This parameter
     #   is stored as a lowercase string.
@@ -9811,12 +10034,20 @@ module Aws::RDS
     #   * Can't end with a hyphen or contain two consecutive hyphens
     #   @return [String]
     #
+    # @!attribute [rw] delete_automated_backups
+    #   A value that indicates whether to remove automated backups
+    #   immediately after the DB cluster is deleted. This parameter isn't
+    #   case-sensitive. The default is to remove automated backups
+    #   immediately after the DB cluster is deleted.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterMessage AWS API Documentation
     #
     class DeleteDBClusterMessage < Struct.new(
       :db_cluster_identifier,
       :skip_final_snapshot,
-      :final_db_snapshot_identifier)
+      :final_db_snapshot_identifier,
+      :delete_automated_backups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10426,6 +10657,68 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @!attribute [rw] db_cluster_resource_id
+    #   The resource ID of the DB cluster that is the source of the
+    #   automated backup. This parameter isn't case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   (Optional) The user-supplied DB cluster identifier. If this
+    #   parameter is specified, it must match the identifier of an existing
+    #   DB cluster. It returns information from the specific DB cluster's
+    #   automated backup. This parameter isn't case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A filter that specifies which resources to return based on status.
+    #
+    #   Supported filters are the following:
+    #
+    #   * `status`
+    #
+    #     * `retained` - Automated backups for deleted clusters and after
+    #       backup replication is stopped.
+    #
+    #     ^
+    #
+    #   * `db-cluster-id` - Accepts DB cluster identifiers and Amazon
+    #     Resource Names (ARNs). The results list includes only information
+    #     about the DB cluster automated backups identified by these ARNs.
+    #
+    #   * `db-cluster-resource-id` - Accepts DB resource identifiers and
+    #     Amazon Resource Names (ARNs). The results list includes only
+    #     information about the DB cluster resources identified by these
+    #     ARNs.
+    #
+    #   Returns all resources by default. The status for each resource is
+    #   specified in the response.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   The pagination token provided in the previous request. If this
+    #   parameter is specified the response includes only records beyond the
+    #   marker, up to `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterAutomatedBackupsMessage AWS API Documentation
+    #
+    class DescribeDBClusterAutomatedBackupsMessage < Struct.new(
+      :db_cluster_resource_id,
+      :db_cluster_identifier,
+      :filters,
+      :max_records,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] db_cluster_identifier
     #   The DB cluster identifier of the DB cluster to be described. This
     #   parameter is stored as a lowercase string.
@@ -10811,6 +11104,10 @@ module Aws::RDS
     #   ModifyDBClusterSnapshotAttribute API action.
     #   @return [Boolean]
     #
+    # @!attribute [rw] db_cluster_resource_id
+    #   A specific DB cluster resource ID to describe.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterSnapshotsMessage AWS API Documentation
     #
     class DescribeDBClusterSnapshotsMessage < Struct.new(
@@ -10821,7 +11118,8 @@ module Aws::RDS
       :max_records,
       :marker,
       :include_shared,
-      :include_public)
+      :include_public,
+      :db_cluster_resource_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11072,7 +11370,7 @@ module Aws::RDS
     # @!attribute [rw] db_instance_identifier
     #   (Optional) The user-supplied instance identifier. If this parameter
     #   is specified, it must match the identifier of an existing DB
-    #   instance. It returns information from the specific DB instance'
+    #   instance. It returns information from the specific DB instance's
     #   automated backup. This parameter isn't case-sensitive.
     #   @return [String]
     #
@@ -11083,13 +11381,13 @@ module Aws::RDS
     #
     #   * `status`
     #
-    #     * `active` - automated backups for current instances
+    #     * `active` - Automated backups for current instances.
     #
-    #     * `retained` - automated backups for deleted instances and after
-    #       backup replication is stopped
+    #     * `creating` - Automated backups that are waiting for the first
+    #       automated snapshot to be available.
     #
-    #     * `creating` - automated backups that are waiting for the first
-    #       automated snapshot to be available
+    #     * `retained` - Automated backups for deleted instances and after
+    #       backup replication is stopped.
     #
     #   * `db-instance-id` - Accepts DB instance identifiers and Amazon
     #     Resource Names (ARNs). The results list includes only information
@@ -13992,6 +14290,13 @@ module Aws::RDS
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidCustomDBEngineVersionStateFault AWS API Documentation
     #
     class InvalidCustomDBEngineVersionStateFault < Aws::EmptyStructure; end
+
+    # The automated backup is in an invalid state. For example, this
+    # automated backup is associated with an active cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBClusterAutomatedBackupStateFault AWS API Documentation
+    #
+    class InvalidDBClusterAutomatedBackupStateFault < Aws::EmptyStructure; end
 
     # `Capacity` isn't a valid Aurora Serverless DB cluster capacity. Valid
     # capacity values are `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`.
@@ -20631,6 +20936,10 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #   @return [String]
     #
+    # @!attribute [rw] source_db_cluster_resource_id
+    #   The resource ID of the source DB cluster from which to restore.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
@@ -20660,7 +20969,8 @@ module Aws::RDS
       :publicly_accessible,
       :iops,
       :serverless_v2_scaling_configuration,
-      :network_type)
+      :network_type,
+      :source_db_cluster_resource_id)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -2858,7 +2858,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] end_time_offset
-    #   If specified, monitoring jobs substract this time from the end time.
+    #   If specified, monitoring jobs subtract this time from the end time.
     #   For information about using offsets for scheduling monitoring jobs,
     #   see [Schedule Model Quality Monitoring Jobs][1].
     #
@@ -11956,6 +11956,12 @@ module Aws::SageMaker
     #     for information about the failure. [DeleteEndpoint][4] is the only
     #     operation that can be performed on a failed endpoint.
     #
+    #   * `UpdateRollbackFailed`: Both the rolling deployment and
+    #     auto-rollback failed. Your endpoint is in service with a mix of
+    #     the old and new endpoint configurations. For information about how
+    #     to remedy this issue and restore the endpoint's status to
+    #     `InService`, see [Rolling Deployments][6].
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html
@@ -11963,6 +11969,7 @@ module Aws::SageMaker
     #   [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpointWeightsAndCapacities.html
     #   [4]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteEndpoint.html
     #   [5]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpoint.html
+    #   [6]: https://docs.aws.amazon.com/sagemaker/latest/dg/deployment-guardrails-rolling.html
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
@@ -28827,7 +28834,8 @@ module Aws::SageMaker
     # The model latency threshold.
     #
     # @!attribute [rw] percentile
-    #   The model latency percentile threshold.
+    #   The model latency percentile threshold. For custom load tests,
+    #   specify the value as `P95`.
     #   @return [String]
     #
     # @!attribute [rw] value_in_milliseconds
@@ -31739,7 +31747,8 @@ module Aws::SageMaker
     # Defines the traffic pattern.
     #
     # @!attribute [rw] initial_number_of_users
-    #   Specifies how many concurrent users to start with.
+    #   Specifies how many concurrent users to start with. The value should
+    #   be between 1 and 3.
     #   @return [Integer]
     #
     # @!attribute [rw] spawn_rate
@@ -31747,7 +31756,9 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] duration_in_seconds
-    #   Specifies how long traffic phase should be.
+    #   Specifies how long a traffic phase should be. For custom load tests,
+    #   the value should be between 120 and 3600. This value should not
+    #   exceed `JobDurationInSeconds`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Phase AWS API Documentation
@@ -34263,7 +34274,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] job_duration_in_seconds
-    #   Specifies the maximum duration of the job, in seconds.&gt;
+    #   Specifies the maximum duration of the job, in seconds. The maximum
+    #   value is 7200.
     #   @return [Integer]
     #
     # @!attribute [rw] traffic_pattern
@@ -34462,11 +34474,19 @@ module Aws::SageMaker
     #   container.
     #   @return [Array<Types::ModelLatencyThreshold>]
     #
+    # @!attribute [rw] flat_invocations
+    #   Stops a load test when the number of invocations (TPS) peaks and
+    #   flattens, which means that the instance has reached capacity. The
+    #   default value is `Stop`. If you want the load test to continue after
+    #   invocations have flattened, set the value to `Continue`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobStoppingConditions AWS API Documentation
     #
     class RecommendationJobStoppingConditions < Struct.new(
       :max_invocations,
-      :model_latency_thresholds)
+      :model_latency_thresholds,
+      :flat_invocations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -36338,6 +36358,34 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Defines the stairs traffic pattern for an Inference Recommender load
+    # test. This pattern type consists of multiple steps where the number of
+    # users increases at each step.
+    #
+    # Specify either the stairs or phases traffic pattern.
+    #
+    # @!attribute [rw] duration_in_seconds
+    #   Defines how long each traffic step should be.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_steps
+    #   Specifies how many steps to perform during traffic.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] users_per_step
+    #   Specifies how many new users to spawn in each step.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Stairs AWS API Documentation
+    #
+    class Stairs < Struct.new(
+      :duration_in_seconds,
+      :number_of_steps,
+      :users_per_step)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] edge_deployment_plan_name
     #   The name of the edge deployment plan to start.
     #   @return [String]
@@ -37402,18 +37450,23 @@ module Aws::SageMaker
     # Defines the traffic pattern of the load test.
     #
     # @!attribute [rw] traffic_type
-    #   Defines the traffic patterns.
+    #   Defines the traffic patterns. Choose either `PHASES` or `STAIRS`.
     #   @return [String]
     #
     # @!attribute [rw] phases
     #   Defines the phases traffic specification.
     #   @return [Array<Types::Phase>]
     #
+    # @!attribute [rw] stairs
+    #   Defines the stairs traffic pattern.
+    #   @return [Types::Stairs]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrafficPattern AWS API Documentation
     #
     class TrafficPattern < Struct.new(
       :traffic_type,
-      :phases)
+      :phases,
+      :stairs)
       SENSITIVE = []
       include Aws::Structure
     end

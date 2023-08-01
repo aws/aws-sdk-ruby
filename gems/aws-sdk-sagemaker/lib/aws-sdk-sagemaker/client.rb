@@ -4463,7 +4463,7 @@ module Aws::SageMaker
     #       model_package_version_arn: "ModelPackageArn",
     #       job_duration_in_seconds: 1,
     #       traffic_pattern: {
-    #         traffic_type: "PHASES", # accepts PHASES
+    #         traffic_type: "PHASES", # accepts PHASES, STAIRS
     #         phases: [
     #           {
     #             initial_number_of_users: 1,
@@ -4471,6 +4471,11 @@ module Aws::SageMaker
     #             duration_in_seconds: 1,
     #           },
     #         ],
+    #         stairs: {
+    #           duration_in_seconds: 1,
+    #           number_of_steps: 1,
+    #           users_per_step: 1,
+    #         },
     #       },
     #       resource_limit: {
     #         max_number_of_tests: 1,
@@ -4530,6 +4535,7 @@ module Aws::SageMaker
     #           value_in_milliseconds: 1,
     #         },
     #       ],
+    #       flat_invocations: "Continue", # accepts Continue, Stop
     #     },
     #     output_config: {
     #       kms_key_id: "KmsKeyId",
@@ -12315,11 +12321,14 @@ module Aws::SageMaker
     #   resp.failure_reason #=> String
     #   resp.input_config.model_package_version_arn #=> String
     #   resp.input_config.job_duration_in_seconds #=> Integer
-    #   resp.input_config.traffic_pattern.traffic_type #=> String, one of "PHASES"
+    #   resp.input_config.traffic_pattern.traffic_type #=> String, one of "PHASES", "STAIRS"
     #   resp.input_config.traffic_pattern.phases #=> Array
     #   resp.input_config.traffic_pattern.phases[0].initial_number_of_users #=> Integer
     #   resp.input_config.traffic_pattern.phases[0].spawn_rate #=> Integer
     #   resp.input_config.traffic_pattern.phases[0].duration_in_seconds #=> Integer
+    #   resp.input_config.traffic_pattern.stairs.duration_in_seconds #=> Integer
+    #   resp.input_config.traffic_pattern.stairs.number_of_steps #=> Integer
+    #   resp.input_config.traffic_pattern.stairs.users_per_step #=> Integer
     #   resp.input_config.resource_limit.max_number_of_tests #=> Integer
     #   resp.input_config.resource_limit.max_parallel_of_tests #=> Integer
     #   resp.input_config.endpoint_configurations #=> Array
@@ -12356,6 +12365,7 @@ module Aws::SageMaker
     #   resp.stopping_conditions.model_latency_thresholds #=> Array
     #   resp.stopping_conditions.model_latency_thresholds[0].percentile #=> String
     #   resp.stopping_conditions.model_latency_thresholds[0].value_in_milliseconds #=> Integer
+    #   resp.stopping_conditions.flat_invocations #=> String, one of "Continue", "Stop"
     #   resp.inference_recommendations #=> Array
     #   resp.inference_recommendations[0].metrics.cost_per_hour #=> Float
     #   resp.inference_recommendations[0].metrics.cost_per_inference #=> Float
@@ -23997,7 +24007,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.200.0'
+      context[:gem_version] = '1.201.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

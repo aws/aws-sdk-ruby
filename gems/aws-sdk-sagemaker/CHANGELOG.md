@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.201.0 (2023-08-01)
+------------------
+
+* Feature - Add Stairs TrafficPattern and FlatInvocations to RecommendationJobStoppingConditions
+
 1.200.0 (2023-07-27)
 ------------------
 

@@ -122,6 +122,8 @@ module Aws::RDS
             Aws::RDS::Endpoints::DeleteCustomDBEngineVersion.build(context)
           when :delete_db_cluster
             Aws::RDS::Endpoints::DeleteDBCluster.build(context)
+          when :delete_db_cluster_automated_backup
+            Aws::RDS::Endpoints::DeleteDBClusterAutomatedBackup.build(context)
           when :delete_db_cluster_endpoint
             Aws::RDS::Endpoints::DeleteDBClusterEndpoint.build(context)
           when :delete_db_cluster_parameter_group
@@ -158,6 +160,8 @@ module Aws::RDS
             Aws::RDS::Endpoints::DescribeBlueGreenDeployments.build(context)
           when :describe_certificates
             Aws::RDS::Endpoints::DescribeCertificates.build(context)
+          when :describe_db_cluster_automated_backups
+            Aws::RDS::Endpoints::DescribeDBClusterAutomatedBackups.build(context)
           when :describe_db_cluster_backtracks
             Aws::RDS::Endpoints::DescribeDBClusterBacktracks.build(context)
           when :describe_db_cluster_endpoints

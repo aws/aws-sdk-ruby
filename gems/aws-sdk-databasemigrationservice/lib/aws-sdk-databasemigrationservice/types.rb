@@ -2350,6 +2350,48 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEngineVersionsMessage AWS API Documentation
+    #
+    class DescribeEngineVersionsMessage < Struct.new(
+      :max_records,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] engine_versions
+    #   Returned `EngineVersion` objects that describe the replication
+    #   instance engine versions used in the project.
+    #   @return [Array<Types::EngineVersion>]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEngineVersionsResponse AWS API Documentation
+    #
+    class DescribeEngineVersionsResponse < Struct.new(
+      :engine_versions,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] source_type
     #   The type of DMS resource that generates events.
     #
@@ -4184,6 +4226,62 @@ module Aws::DatabaseMigrationService
       :int_value_min,
       :int_value_max,
       :default_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about a replication instance version.
+    #
+    # @!attribute [rw] version
+    #   The version number of the replication instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle
+    #   The lifecycle status of the replication instance version. Valid
+    #   values are `DEPRECATED`, `DEFAULT_VERSION`, and `ACTIVE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] release_status
+    #   The release status of the replication instance version.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_date
+    #   The date when the replication instance version became publicly
+    #   available.
+    #   @return [Time]
+    #
+    # @!attribute [rw] auto_upgrade_date
+    #   The date when the replication instance will be automatically
+    #   upgraded. This setting only applies if the `auto-minor-version`
+    #   setting is enabled.
+    #   @return [Time]
+    #
+    # @!attribute [rw] deprecation_date
+    #   The date when the replication instance version will be deprecated
+    #   and can no longer be requested.
+    #   @return [Time]
+    #
+    # @!attribute [rw] force_upgrade_date
+    #   The date when the replication instance will have a version upgrade
+    #   forced.
+    #   @return [Time]
+    #
+    # @!attribute [rw] available_upgrades
+    #   The list of valid replication instance versions that you can upgrade
+    #   to.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/EngineVersion AWS API Documentation
+    #
+    class EngineVersion < Struct.new(
+      :version,
+      :lifecycle,
+      :release_status,
+      :launch_date,
+      :auto_upgrade_date,
+      :deprecation_date,
+      :force_upgrade_date,
+      :available_upgrades)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7319,9 +7417,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] database_mode
-    #   Specifies whether to use default or custom replication behavior for
-    #   PostgreSQL-compatible endpoints. You can use this setting to specify
-    #   replication behavior for endpoints that require additional
+    #   Specifies the default behavior of the replication's handling of
+    #   PostgreSQL- compatible endpoints that require some additional
     #   configuration, such as Babelfish endpoints.
     #   @return [String]
     #

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2023-08-01)
+------------------
+
+* Feature - This release adds support for price capacity optimized allocation strategy for Spot Instances.
+
 1.75.0 (2023-07-11)
 ------------------
 

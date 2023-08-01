@@ -46,6 +46,8 @@ module Aws::InternetMonitor
     ListMonitorsOutput = Shapes::StructureShape.new(name: 'ListMonitorsOutput')
     ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
     ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
+    LocalHealthEventsConfig = Shapes::StructureShape.new(name: 'LocalHealthEventsConfig')
+    LocalHealthEventsConfigStatus = Shapes::StringShape.new(name: 'LocalHealthEventsConfigStatus')
     LogDeliveryStatus = Shapes::StringShape.new(name: 'LogDeliveryStatus')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MaxCityNetworksToMonitor = Shapes::IntegerShape.new(name: 'MaxCityNetworksToMonitor')
@@ -170,6 +172,8 @@ module Aws::InternetMonitor
 
     HealthEventsConfig.add_member(:availability_score_threshold, Shapes::ShapeRef.new(shape: Percentage, location_name: "AvailabilityScoreThreshold"))
     HealthEventsConfig.add_member(:performance_score_threshold, Shapes::ShapeRef.new(shape: Percentage, location_name: "PerformanceScoreThreshold"))
+    HealthEventsConfig.add_member(:availability_local_health_events_config, Shapes::ShapeRef.new(shape: LocalHealthEventsConfig, location_name: "AvailabilityLocalHealthEventsConfig"))
+    HealthEventsConfig.add_member(:performance_local_health_events_config, Shapes::ShapeRef.new(shape: LocalHealthEventsConfig, location_name: "PerformanceLocalHealthEventsConfig"))
     HealthEventsConfig.struct_class = Types::HealthEventsConfig
 
     ImpactedLocation.add_member(:as_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ASName"))
@@ -232,6 +236,11 @@ module Aws::InternetMonitor
 
     ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
+
+    LocalHealthEventsConfig.add_member(:status, Shapes::ShapeRef.new(shape: LocalHealthEventsConfigStatus, location_name: "Status"))
+    LocalHealthEventsConfig.add_member(:health_score_threshold, Shapes::ShapeRef.new(shape: Percentage, location_name: "HealthScoreThreshold"))
+    LocalHealthEventsConfig.add_member(:min_traffic_impact, Shapes::ShapeRef.new(shape: Percentage, location_name: "MinTrafficImpact"))
+    LocalHealthEventsConfig.struct_class = Types::LocalHealthEventsConfig
 
     Monitor.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "MonitorName"))
     Monitor.add_member(:monitor_arn, Shapes::ShapeRef.new(shape: MonitorArn, required: true, location_name: "MonitorArn"))

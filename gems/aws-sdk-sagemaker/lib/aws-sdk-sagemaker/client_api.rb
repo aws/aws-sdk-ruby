@@ -796,6 +796,7 @@ module Aws::SageMaker
     FinalAutoMLJobObjectiveMetric = Shapes::StructureShape.new(name: 'FinalAutoMLJobObjectiveMetric')
     FinalHyperParameterTuningJobObjectiveMetric = Shapes::StructureShape.new(name: 'FinalHyperParameterTuningJobObjectiveMetric')
     FinalMetricDataList = Shapes::ListShape.new(name: 'FinalMetricDataList')
+    FlatInvocations = Shapes::StringShape.new(name: 'FlatInvocations')
     Float = Shapes::FloatShape.new(name: 'Float')
     FlowDefinitionArn = Shapes::StringShape.new(name: 'FlowDefinitionArn')
     FlowDefinitionName = Shapes::StringShape.new(name: 'FlowDefinitionName')
@@ -1432,6 +1433,7 @@ module Aws::SageMaker
     NotificationConfiguration = Shapes::StructureShape.new(name: 'NotificationConfiguration')
     NotificationTopicArn = Shapes::StringShape.new(name: 'NotificationTopicArn')
     NumberOfHumanWorkersPerDataObject = Shapes::IntegerShape.new(name: 'NumberOfHumanWorkersPerDataObject')
+    NumberOfSteps = Shapes::IntegerShape.new(name: 'NumberOfSteps')
     ObjectiveStatus = Shapes::StringShape.new(name: 'ObjectiveStatus')
     ObjectiveStatusCounter = Shapes::IntegerShape.new(name: 'ObjectiveStatusCounter')
     ObjectiveStatusCounters = Shapes::StructureShape.new(name: 'ObjectiveStatusCounters')
@@ -1770,6 +1772,7 @@ module Aws::SageMaker
     SpawnRate = Shapes::IntegerShape.new(name: 'SpawnRate')
     SplitType = Shapes::StringShape.new(name: 'SplitType')
     StageStatus = Shapes::StringShape.new(name: 'StageStatus')
+    Stairs = Shapes::StructureShape.new(name: 'Stairs')
     StartEdgeDeploymentStageRequest = Shapes::StructureShape.new(name: 'StartEdgeDeploymentStageRequest')
     StartInferenceExperimentRequest = Shapes::StructureShape.new(name: 'StartInferenceExperimentRequest')
     StartInferenceExperimentResponse = Shapes::StructureShape.new(name: 'StartInferenceExperimentResponse')
@@ -2027,6 +2030,7 @@ module Aws::SageMaker
     UserProfileSortKey = Shapes::StringShape.new(name: 'UserProfileSortKey')
     UserProfileStatus = Shapes::StringShape.new(name: 'UserProfileStatus')
     UserSettings = Shapes::StructureShape.new(name: 'UserSettings')
+    UsersPerStep = Shapes::IntegerShape.new(name: 'UsersPerStep')
     UtilizationMetric = Shapes::FloatShape.new(name: 'UtilizationMetric')
     ValidationFraction = Shapes::FloatShape.new(name: 'ValidationFraction')
     VariantName = Shapes::StringShape.new(name: 'VariantName')
@@ -7936,6 +7940,7 @@ module Aws::SageMaker
 
     RecommendationJobStoppingConditions.add_member(:max_invocations, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxInvocations"))
     RecommendationJobStoppingConditions.add_member(:model_latency_thresholds, Shapes::ShapeRef.new(shape: ModelLatencyThresholds, location_name: "ModelLatencyThresholds"))
+    RecommendationJobStoppingConditions.add_member(:flat_invocations, Shapes::ShapeRef.new(shape: FlatInvocations, location_name: "FlatInvocations"))
     RecommendationJobStoppingConditions.struct_class = Types::RecommendationJobStoppingConditions
 
     RecommendationJobSupportedContentTypes.member = Shapes::ShapeRef.new(shape: String)
@@ -8226,6 +8231,11 @@ module Aws::SageMaker
     SpaceSettings.add_member(:kernel_gateway_app_settings, Shapes::ShapeRef.new(shape: KernelGatewayAppSettings, location_name: "KernelGatewayAppSettings"))
     SpaceSettings.struct_class = Types::SpaceSettings
 
+    Stairs.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: TrafficDurationInSeconds, location_name: "DurationInSeconds"))
+    Stairs.add_member(:number_of_steps, Shapes::ShapeRef.new(shape: NumberOfSteps, location_name: "NumberOfSteps"))
+    Stairs.add_member(:users_per_step, Shapes::ShapeRef.new(shape: UsersPerStep, location_name: "UsersPerStep"))
+    Stairs.struct_class = Types::Stairs
+
     StartEdgeDeploymentStageRequest.add_member(:edge_deployment_plan_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "EdgeDeploymentPlanName"))
     StartEdgeDeploymentStageRequest.add_member(:stage_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "StageName"))
     StartEdgeDeploymentStageRequest.struct_class = Types::StartEdgeDeploymentStageRequest
@@ -8400,6 +8410,7 @@ module Aws::SageMaker
 
     TrafficPattern.add_member(:traffic_type, Shapes::ShapeRef.new(shape: TrafficType, location_name: "TrafficType"))
     TrafficPattern.add_member(:phases, Shapes::ShapeRef.new(shape: Phases, location_name: "Phases"))
+    TrafficPattern.add_member(:stairs, Shapes::ShapeRef.new(shape: Stairs, location_name: "Stairs"))
     TrafficPattern.struct_class = Types::TrafficPattern
 
     TrafficRoutingConfig.add_member(:type, Shapes::ShapeRef.new(shape: TrafficRoutingConfigType, required: true, location_name: "Type"))

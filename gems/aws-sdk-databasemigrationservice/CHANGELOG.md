@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2023-08-01)
+------------------
+
+* Feature - Adding new API describe-engine-versions which provides information about the lifecycle of a replication instance's version.
+
 1.84.0 (2023-07-13)
 ------------------
 

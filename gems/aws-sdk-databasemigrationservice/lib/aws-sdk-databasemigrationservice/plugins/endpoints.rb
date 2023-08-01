@@ -114,6 +114,8 @@ module Aws::DatabaseMigrationService
             Aws::DatabaseMigrationService::Endpoints::DescribeEndpointTypes.build(context)
           when :describe_endpoints
             Aws::DatabaseMigrationService::Endpoints::DescribeEndpoints.build(context)
+          when :describe_engine_versions
+            Aws::DatabaseMigrationService::Endpoints::DescribeEngineVersions.build(context)
           when :describe_event_categories
             Aws::DatabaseMigrationService::Endpoints::DescribeEventCategories.build(context)
           when :describe_event_subscriptions

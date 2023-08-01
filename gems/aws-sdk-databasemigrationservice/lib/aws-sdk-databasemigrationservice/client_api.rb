@@ -25,6 +25,7 @@ module Aws::DatabaseMigrationService
     AuthTypeValue = Shapes::StringShape.new(name: 'AuthTypeValue')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
     AvailabilityZonesList = Shapes::ListShape.new(name: 'AvailabilityZonesList')
+    AvailableUpgradesList = Shapes::ListShape.new(name: 'AvailableUpgradesList')
     BatchStartRecommendationsErrorEntry = Shapes::StructureShape.new(name: 'BatchStartRecommendationsErrorEntry')
     BatchStartRecommendationsErrorEntryList = Shapes::ListShape.new(name: 'BatchStartRecommendationsErrorEntryList')
     BatchStartRecommendationsRequest = Shapes::StructureShape.new(name: 'BatchStartRecommendationsRequest')
@@ -106,6 +107,8 @@ module Aws::DatabaseMigrationService
     DescribeEndpointTypesResponse = Shapes::StructureShape.new(name: 'DescribeEndpointTypesResponse')
     DescribeEndpointsMessage = Shapes::StructureShape.new(name: 'DescribeEndpointsMessage')
     DescribeEndpointsResponse = Shapes::StructureShape.new(name: 'DescribeEndpointsResponse')
+    DescribeEngineVersionsMessage = Shapes::StructureShape.new(name: 'DescribeEngineVersionsMessage')
+    DescribeEngineVersionsResponse = Shapes::StructureShape.new(name: 'DescribeEngineVersionsResponse')
     DescribeEventCategoriesMessage = Shapes::StructureShape.new(name: 'DescribeEventCategoriesMessage')
     DescribeEventCategoriesResponse = Shapes::StructureShape.new(name: 'DescribeEventCategoriesResponse')
     DescribeEventSubscriptionsMessage = Shapes::StructureShape.new(name: 'DescribeEventSubscriptionsMessage')
@@ -170,6 +173,8 @@ module Aws::DatabaseMigrationService
     EndpointSettingEnumValues = Shapes::ListShape.new(name: 'EndpointSettingEnumValues')
     EndpointSettingTypeValue = Shapes::StringShape.new(name: 'EndpointSettingTypeValue')
     EndpointSettingsList = Shapes::ListShape.new(name: 'EndpointSettingsList')
+    EngineVersion = Shapes::StructureShape.new(name: 'EngineVersion')
+    EngineVersionList = Shapes::ListShape.new(name: 'EngineVersionList')
     Event = Shapes::StructureShape.new(name: 'Event')
     EventCategoriesList = Shapes::ListShape.new(name: 'EventCategoriesList')
     EventCategoryGroup = Shapes::StructureShape.new(name: 'EventCategoryGroup')
@@ -401,6 +406,8 @@ module Aws::DatabaseMigrationService
     AvailabilityZone.struct_class = Types::AvailabilityZone
 
     AvailabilityZonesList.member = Shapes::ShapeRef.new(shape: String)
+
+    AvailableUpgradesList.member = Shapes::ShapeRef.new(shape: String)
 
     BatchStartRecommendationsErrorEntry.add_member(:database_id, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseId"))
     BatchStartRecommendationsErrorEntry.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -769,6 +776,14 @@ module Aws::DatabaseMigrationService
     DescribeEndpointsResponse.add_member(:endpoints, Shapes::ShapeRef.new(shape: EndpointList, location_name: "Endpoints"))
     DescribeEndpointsResponse.struct_class = Types::DescribeEndpointsResponse
 
+    DescribeEngineVersionsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeEngineVersionsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeEngineVersionsMessage.struct_class = Types::DescribeEngineVersionsMessage
+
+    DescribeEngineVersionsResponse.add_member(:engine_versions, Shapes::ShapeRef.new(shape: EngineVersionList, location_name: "EngineVersions"))
+    DescribeEngineVersionsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeEngineVersionsResponse.struct_class = Types::DescribeEngineVersionsResponse
+
     DescribeEventCategoriesMessage.add_member(:source_type, Shapes::ShapeRef.new(shape: String, location_name: "SourceType"))
     DescribeEventCategoriesMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     DescribeEventCategoriesMessage.struct_class = Types::DescribeEventCategoriesMessage
@@ -1085,6 +1100,18 @@ module Aws::DatabaseMigrationService
     EndpointSettingEnumValues.member = Shapes::ShapeRef.new(shape: String)
 
     EndpointSettingsList.member = Shapes::ShapeRef.new(shape: EndpointSetting)
+
+    EngineVersion.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "Version"))
+    EngineVersion.add_member(:lifecycle, Shapes::ShapeRef.new(shape: String, location_name: "Lifecycle"))
+    EngineVersion.add_member(:release_status, Shapes::ShapeRef.new(shape: ReleaseStatusValues, location_name: "ReleaseStatus"))
+    EngineVersion.add_member(:launch_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "LaunchDate"))
+    EngineVersion.add_member(:auto_upgrade_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "AutoUpgradeDate"))
+    EngineVersion.add_member(:deprecation_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "DeprecationDate"))
+    EngineVersion.add_member(:force_upgrade_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "ForceUpgradeDate"))
+    EngineVersion.add_member(:available_upgrades, Shapes::ShapeRef.new(shape: AvailableUpgradesList, location_name: "AvailableUpgrades"))
+    EngineVersion.struct_class = Types::EngineVersion
+
+    EngineVersionList.member = Shapes::ShapeRef.new(shape: EngineVersion)
 
     Event.add_member(:source_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SourceIdentifier"))
     Event.add_member(:source_type, Shapes::ShapeRef.new(shape: SourceType, location_name: "SourceType"))
@@ -2509,6 +2536,20 @@ module Aws::DatabaseMigrationService
         o.input = Shapes::ShapeRef.new(shape: DescribeEndpointsMessage)
         o.output = Shapes::ShapeRef.new(shape: DescribeEndpointsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_engine_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeEngineVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeEngineVersionsMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeEngineVersionsResponse)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_records",
           tokens: {

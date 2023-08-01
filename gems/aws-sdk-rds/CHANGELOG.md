@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.189.0 (2023-08-01)
+------------------
+
+* Feature - Added support for deleted clusters PiTR.
+
 1.188.0 (2023-07-31)
 ------------------
 
