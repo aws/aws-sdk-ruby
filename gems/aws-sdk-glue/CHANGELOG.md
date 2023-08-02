@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.153.0 (2023-08-02)
+------------------
+
+* Feature - This release includes additional Glue Streaming KAKFA SASL property types.
+
 1.152.0 (2023-07-26)
 ------------------
 

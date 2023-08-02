@@ -8837,6 +8837,30 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A customized metric.
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the customized metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace of the customized metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistic
+    #   The statistic of the customized metric.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CustomizedMetricSpecification AWS API Documentation
+    #
+    class CustomizedMetricSpecification < Struct.new(
+      :metric_name,
+      :namespace,
+      :statistic)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration to control how SageMaker captures inference data.
     #
     # @!attribute [rw] enable_capture
@@ -16495,6 +16519,43 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # An object with the recommended values for you to specify when creating
+    # an autoscaling policy.
+    #
+    # @!attribute [rw] min_capacity
+    #   The recommended minimum capacity to specify for your autoscaling
+    #   policy.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_capacity
+    #   The recommended maximum capacity to specify for your autoscaling
+    #   policy.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scale_in_cooldown
+    #   The recommended scale in cooldown time for your autoscaling policy.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scale_out_cooldown
+    #   The recommended scale out cooldown time for your autoscaling policy.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scaling_policies
+    #   An object of the scaling policies for each metric.
+    #   @return [Array<Types::ScalingPolicy>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DynamicScalingConfiguration AWS API Documentation
+    #
+    class DynamicScalingConfiguration < Struct.new(
+      :min_capacity,
+      :max_capacity,
+      :scale_in_cooldown,
+      :scale_out_cooldown,
+      :scaling_policies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configurations and outcomes of an Amazon EMR step execution.
     #
     # @!attribute [rw] cluster_id
@@ -18383,6 +18444,99 @@ module Aws::SageMaker
     #
     class GetSagemakerServicecatalogPortfolioStatusOutput < Struct.new(
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inference_recommendations_job_name
+    #   The name of a previously completed Inference Recommender job.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommendation_id
+    #   The recommendation ID of a previously completed inference
+    #   recommendation. This ID should come from one of the recommendations
+    #   returned by the job specified in the
+    #   `InferenceRecommendationsJobName` field.
+    #
+    #   Specify either this field or the `EndpointName` field.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_name
+    #   The name of an endpoint benchmarked during a previously completed
+    #   inference recommendation job. This name should come from one of the
+    #   recommendations returned by the job specified in the
+    #   `InferenceRecommendationsJobName` field.
+    #
+    #   Specify either this field or the `RecommendationId` field.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_cpu_utilization_per_core
+    #   The percentage of how much utilization you want an instance to use
+    #   before autoscaling. The default value is 50%.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scaling_policy_objective
+    #   An object where you specify the anticipated traffic pattern for an
+    #   endpoint.
+    #   @return [Types::ScalingPolicyObjective]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GetScalingConfigurationRecommendationRequest AWS API Documentation
+    #
+    class GetScalingConfigurationRecommendationRequest < Struct.new(
+      :inference_recommendations_job_name,
+      :recommendation_id,
+      :endpoint_name,
+      :target_cpu_utilization_per_core,
+      :scaling_policy_objective)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inference_recommendations_job_name
+    #   The name of a previously completed Inference Recommender job.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommendation_id
+    #   The recommendation ID of a previously completed inference
+    #   recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_name
+    #   The name of an endpoint benchmarked during a previously completed
+    #   Inference Recommender job.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_cpu_utilization_per_core
+    #   The percentage of how much utilization you want an instance to use
+    #   before autoscaling, which you specified in the request. The default
+    #   value is 50%.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scaling_policy_objective
+    #   An object representing the anticipated traffic pattern for an
+    #   endpoint that you specified in the request.
+    #   @return [Types::ScalingPolicyObjective]
+    #
+    # @!attribute [rw] metric
+    #   An object with a list of metrics that were benchmarked during the
+    #   previously completed Inference Recommender job.
+    #   @return [Types::ScalingPolicyMetric]
+    #
+    # @!attribute [rw] dynamic_scaling_configuration
+    #   An object with the recommended values for you to specify when
+    #   creating an autoscaling policy.
+    #   @return [Types::DynamicScalingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GetScalingConfigurationRecommendationResponse AWS API Documentation
+    #
+    class GetScalingConfigurationRecommendationResponse < Struct.new(
+      :inference_recommendations_job_name,
+      :recommendation_id,
+      :endpoint_name,
+      :target_cpu_utilization_per_core,
+      :scaling_policy_objective,
+      :metric,
+      :dynamic_scaling_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27846,6 +28000,33 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # An object containing information about a metric.
+    #
+    # @note MetricSpecification is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of MetricSpecification corresponding to the set member.
+    #
+    # @!attribute [rw] predefined
+    #   Information about a predefined metric.
+    #   @return [Types::PredefinedMetricSpecification]
+    #
+    # @!attribute [rw] customized
+    #   Information about a customized metric.
+    #   @return [Types::CustomizedMetricSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MetricSpecification AWS API Documentation
+    #
+    class MetricSpecification < Struct.new(
+      :predefined,
+      :customized,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Predefined < MetricSpecification; end
+      class Customized < MetricSpecification; end
+      class Unknown < MetricSpecification; end
+    end
+
     # Details about the metrics source.
     #
     # @!attribute [rw] content_type
@@ -32268,6 +32449,21 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A specification for a predefined metric.
+    #
+    # @!attribute [rw] predefined_metric_type
+    #   The metric type. You can only apply SageMaker metric types to
+    #   SageMaker endpoints.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PredefinedMetricSpecification AWS API Documentation
+    #
+    class PredefinedMetricSpecification < Struct.new(
+      :predefined_metric_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration for the cluster used to run a processing job.
     #
     # @!attribute [rw] instance_count
@@ -35470,6 +35666,75 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # An object containing a recommended scaling policy.
+    #
+    # @note ScalingPolicy is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ScalingPolicy corresponding to the set member.
+    #
+    # @!attribute [rw] target_tracking
+    #   A target tracking scaling policy. Includes support for predefined or
+    #   customized metrics.
+    #   @return [Types::TargetTrackingScalingPolicyConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ScalingPolicy AWS API Documentation
+    #
+    class ScalingPolicy < Struct.new(
+      :target_tracking,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class TargetTracking < ScalingPolicy; end
+      class Unknown < ScalingPolicy; end
+    end
+
+    # The metric for a scaling policy.
+    #
+    # @!attribute [rw] invocations_per_instance
+    #   The number of invocations sent to a model, normalized by
+    #   `InstanceCount` in each ProductionVariant. `1/numberOfInstances` is
+    #   sent as the value on each request, where `numberOfInstances` is the
+    #   number of active instances for the ProductionVariant behind the
+    #   endpoint at the time of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] model_latency
+    #   The interval of time taken by a model to respond as viewed from
+    #   SageMaker. This interval includes the local communication times
+    #   taken to send the request and to fetch the response from the
+    #   container of a model and the time taken to complete the inference in
+    #   the container.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ScalingPolicyMetric AWS API Documentation
+    #
+    class ScalingPolicyMetric < Struct.new(
+      :invocations_per_instance,
+      :model_latency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object where you specify the anticipated traffic pattern for an
+    # endpoint.
+    #
+    # @!attribute [rw] min_invocations_per_minute
+    #   The minimum number of expected requests to your endpoint per minute.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_invocations_per_minute
+    #   The maximum number of expected requests to your endpoint per minute.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ScalingPolicyObjective AWS API Documentation
+    #
+    class ScalingPolicyObjective < Struct.new(
+      :min_invocations_per_minute,
+      :max_invocations_per_minute)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration details about the monitoring schedule.
     #
     # @!attribute [rw] schedule_expression
@@ -37155,6 +37420,35 @@ module Aws::SageMaker
       :os,
       :arch,
       :accelerator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A target tracking scaling policy. Includes support for predefined or
+    # customized metrics.
+    #
+    # When using the [PutScalingPolicy][1] API, this parameter is required
+    # when you are creating a policy with the policy type
+    # `TargetTrackingScaling`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/application/APIReference/API_PutScalingPolicy.html
+    #
+    # @!attribute [rw] metric_specification
+    #   An object containing information about a metric.
+    #   @return [Types::MetricSpecification]
+    #
+    # @!attribute [rw] target_value
+    #   The recommended target value to specify for the metric when creating
+    #   a scaling policy.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TargetTrackingScalingPolicyConfiguration AWS API Documentation
+    #
+    class TargetTrackingScalingPolicyConfiguration < Struct.new(
+      :metric_specification,
+      :target_value)
       SENSITIVE = []
       include Aws::Structure
     end

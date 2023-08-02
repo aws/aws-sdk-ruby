@@ -117,6 +117,7 @@ module Aws::CognitoIdentityProvider
     ClientPermissionListType = Shapes::ListShape.new(name: 'ClientPermissionListType')
     ClientPermissionType = Shapes::StringShape.new(name: 'ClientPermissionType')
     ClientSecretType = Shapes::StringShape.new(name: 'ClientSecretType')
+    CloudWatchLogsConfigurationType = Shapes::StructureShape.new(name: 'CloudWatchLogsConfigurationType')
     CodeDeliveryDetailsListType = Shapes::ListShape.new(name: 'CodeDeliveryDetailsListType')
     CodeDeliveryDetailsType = Shapes::StructureShape.new(name: 'CodeDeliveryDetailsType')
     CodeDeliveryFailureException = Shapes::StructureShape.new(name: 'CodeDeliveryFailureException')
@@ -214,6 +215,7 @@ module Aws::CognitoIdentityProvider
     EventIdType = Shapes::StringShape.new(name: 'EventIdType')
     EventResponseType = Shapes::StringShape.new(name: 'EventResponseType')
     EventRiskType = Shapes::StructureShape.new(name: 'EventRiskType')
+    EventSourceName = Shapes::StringShape.new(name: 'EventSourceName')
     EventType = Shapes::StringShape.new(name: 'EventType')
     ExpiredCodeException = Shapes::StructureShape.new(name: 'ExpiredCodeException')
     ExplicitAuthFlowsListType = Shapes::ListShape.new(name: 'ExplicitAuthFlowsListType')
@@ -233,6 +235,8 @@ module Aws::CognitoIdentityProvider
     GetGroupResponse = Shapes::StructureShape.new(name: 'GetGroupResponse')
     GetIdentityProviderByIdentifierRequest = Shapes::StructureShape.new(name: 'GetIdentityProviderByIdentifierRequest')
     GetIdentityProviderByIdentifierResponse = Shapes::StructureShape.new(name: 'GetIdentityProviderByIdentifierResponse')
+    GetLogDeliveryConfigurationRequest = Shapes::StructureShape.new(name: 'GetLogDeliveryConfigurationRequest')
+    GetLogDeliveryConfigurationResponse = Shapes::StructureShape.new(name: 'GetLogDeliveryConfigurationResponse')
     GetSigningCertificateRequest = Shapes::StructureShape.new(name: 'GetSigningCertificateRequest')
     GetSigningCertificateResponse = Shapes::StructureShape.new(name: 'GetSigningCertificateResponse')
     GetUICustomizationRequest = Shapes::StructureShape.new(name: 'GetUICustomizationRequest')
@@ -296,6 +300,10 @@ module Aws::CognitoIdentityProvider
     ListUsersInGroupResponse = Shapes::StructureShape.new(name: 'ListUsersInGroupResponse')
     ListUsersRequest = Shapes::StructureShape.new(name: 'ListUsersRequest')
     ListUsersResponse = Shapes::StructureShape.new(name: 'ListUsersResponse')
+    LogConfigurationListType = Shapes::ListShape.new(name: 'LogConfigurationListType')
+    LogConfigurationType = Shapes::StructureShape.new(name: 'LogConfigurationType')
+    LogDeliveryConfigurationType = Shapes::StructureShape.new(name: 'LogDeliveryConfigurationType')
+    LogLevel = Shapes::StringShape.new(name: 'LogLevel')
     LogoutURLsListType = Shapes::ListShape.new(name: 'LogoutURLsListType')
     LongType = Shapes::IntegerShape.new(name: 'LongType')
     MFAMethodNotFoundException = Shapes::StructureShape.new(name: 'MFAMethodNotFoundException')
@@ -369,6 +377,8 @@ module Aws::CognitoIdentityProvider
     SecretCodeType = Shapes::StringShape.new(name: 'SecretCodeType')
     SecretHashType = Shapes::StringShape.new(name: 'SecretHashType')
     SessionType = Shapes::StringShape.new(name: 'SessionType')
+    SetLogDeliveryConfigurationRequest = Shapes::StructureShape.new(name: 'SetLogDeliveryConfigurationRequest')
+    SetLogDeliveryConfigurationResponse = Shapes::StructureShape.new(name: 'SetLogDeliveryConfigurationResponse')
     SetRiskConfigurationRequest = Shapes::StructureShape.new(name: 'SetRiskConfigurationRequest')
     SetRiskConfigurationResponse = Shapes::StructureShape.new(name: 'SetRiskConfigurationResponse')
     SetUICustomizationRequest = Shapes::StructureShape.new(name: 'SetUICustomizationRequest')
@@ -810,6 +820,9 @@ module Aws::CognitoIdentityProvider
 
     ClientPermissionListType.member = Shapes::ShapeRef.new(shape: ClientPermissionType)
 
+    CloudWatchLogsConfigurationType.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "LogGroupArn"))
+    CloudWatchLogsConfigurationType.struct_class = Types::CloudWatchLogsConfigurationType
+
     CodeDeliveryDetailsListType.member = Shapes::ShapeRef.new(shape: CodeDeliveryDetailsType)
 
     CodeDeliveryDetailsType.add_member(:destination, Shapes::ShapeRef.new(shape: StringType, location_name: "Destination"))
@@ -1180,6 +1193,12 @@ module Aws::CognitoIdentityProvider
     GetIdentityProviderByIdentifierResponse.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProviderType, required: true, location_name: "IdentityProvider"))
     GetIdentityProviderByIdentifierResponse.struct_class = Types::GetIdentityProviderByIdentifierResponse
 
+    GetLogDeliveryConfigurationRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    GetLogDeliveryConfigurationRequest.struct_class = Types::GetLogDeliveryConfigurationRequest
+
+    GetLogDeliveryConfigurationResponse.add_member(:log_delivery_configuration, Shapes::ShapeRef.new(shape: LogDeliveryConfigurationType, location_name: "LogDeliveryConfiguration"))
+    GetLogDeliveryConfigurationResponse.struct_class = Types::GetLogDeliveryConfigurationResponse
+
     GetSigningCertificateRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     GetSigningCertificateRequest.struct_class = Types::GetSigningCertificateRequest
 
@@ -1406,6 +1425,17 @@ module Aws::CognitoIdentityProvider
     ListUsersResponse.add_member(:pagination_token, Shapes::ShapeRef.new(shape: SearchPaginationTokenType, location_name: "PaginationToken"))
     ListUsersResponse.struct_class = Types::ListUsersResponse
 
+    LogConfigurationListType.member = Shapes::ShapeRef.new(shape: LogConfigurationType)
+
+    LogConfigurationType.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, required: true, location_name: "LogLevel"))
+    LogConfigurationType.add_member(:event_source, Shapes::ShapeRef.new(shape: EventSourceName, required: true, location_name: "EventSource"))
+    LogConfigurationType.add_member(:cloud_watch_logs_configuration, Shapes::ShapeRef.new(shape: CloudWatchLogsConfigurationType, location_name: "CloudWatchLogsConfiguration"))
+    LogConfigurationType.struct_class = Types::LogConfigurationType
+
+    LogDeliveryConfigurationType.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    LogDeliveryConfigurationType.add_member(:log_configurations, Shapes::ShapeRef.new(shape: LogConfigurationListType, required: true, location_name: "LogConfigurations"))
+    LogDeliveryConfigurationType.struct_class = Types::LogDeliveryConfigurationType
+
     LogoutURLsListType.member = Shapes::ShapeRef.new(shape: RedirectUrlType)
 
     MFAMethodNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
@@ -1567,6 +1597,13 @@ module Aws::CognitoIdentityProvider
     ScopeListType.member = Shapes::ShapeRef.new(shape: ScopeType)
 
     SearchedAttributeNamesListType.member = Shapes::ShapeRef.new(shape: AttributeNameType)
+
+    SetLogDeliveryConfigurationRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    SetLogDeliveryConfigurationRequest.add_member(:log_configurations, Shapes::ShapeRef.new(shape: LogConfigurationListType, required: true, location_name: "LogConfigurations"))
+    SetLogDeliveryConfigurationRequest.struct_class = Types::SetLogDeliveryConfigurationRequest
+
+    SetLogDeliveryConfigurationResponse.add_member(:log_delivery_configuration, Shapes::ShapeRef.new(shape: LogDeliveryConfigurationType, location_name: "LogDeliveryConfiguration"))
+    SetLogDeliveryConfigurationResponse.struct_class = Types::SetLogDeliveryConfigurationResponse
 
     SetRiskConfigurationRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     SetRiskConfigurationRequest.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId"))
@@ -2995,6 +3032,19 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
+      api.add_operation(:get_log_delivery_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLogDeliveryConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetLogDeliveryConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetLogDeliveryConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:get_signing_certificate, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetSigningCertificate"
         o.http_method = "POST"
@@ -3359,6 +3409,19 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedTokenTypeException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+      end)
+
+      api.add_operation(:set_log_delivery_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SetLogDeliveryConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SetLogDeliveryConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: SetLogDeliveryConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:set_risk_configuration, Seahorse::Model::Operation.new.tap do |o|

@@ -14876,6 +14876,90 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Starts an Amazon SageMaker Inference Recommender autoscaling
+    # recommendation job. Returns recommendations for autoscaling policies
+    # that you can apply to your SageMaker endpoint.
+    #
+    # @option params [required, String] :inference_recommendations_job_name
+    #   The name of a previously completed Inference Recommender job.
+    #
+    # @option params [String] :recommendation_id
+    #   The recommendation ID of a previously completed inference
+    #   recommendation. This ID should come from one of the recommendations
+    #   returned by the job specified in the `InferenceRecommendationsJobName`
+    #   field.
+    #
+    #   Specify either this field or the `EndpointName` field.
+    #
+    # @option params [String] :endpoint_name
+    #   The name of an endpoint benchmarked during a previously completed
+    #   inference recommendation job. This name should come from one of the
+    #   recommendations returned by the job specified in the
+    #   `InferenceRecommendationsJobName` field.
+    #
+    #   Specify either this field or the `RecommendationId` field.
+    #
+    # @option params [Integer] :target_cpu_utilization_per_core
+    #   The percentage of how much utilization you want an instance to use
+    #   before autoscaling. The default value is 50%.
+    #
+    # @option params [Types::ScalingPolicyObjective] :scaling_policy_objective
+    #   An object where you specify the anticipated traffic pattern for an
+    #   endpoint.
+    #
+    # @return [Types::GetScalingConfigurationRecommendationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetScalingConfigurationRecommendationResponse#inference_recommendations_job_name #inference_recommendations_job_name} => String
+    #   * {Types::GetScalingConfigurationRecommendationResponse#recommendation_id #recommendation_id} => String
+    #   * {Types::GetScalingConfigurationRecommendationResponse#endpoint_name #endpoint_name} => String
+    #   * {Types::GetScalingConfigurationRecommendationResponse#target_cpu_utilization_per_core #target_cpu_utilization_per_core} => Integer
+    #   * {Types::GetScalingConfigurationRecommendationResponse#scaling_policy_objective #scaling_policy_objective} => Types::ScalingPolicyObjective
+    #   * {Types::GetScalingConfigurationRecommendationResponse#metric #metric} => Types::ScalingPolicyMetric
+    #   * {Types::GetScalingConfigurationRecommendationResponse#dynamic_scaling_configuration #dynamic_scaling_configuration} => Types::DynamicScalingConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_scaling_configuration_recommendation({
+    #     inference_recommendations_job_name: "RecommendationJobName", # required
+    #     recommendation_id: "String",
+    #     endpoint_name: "EndpointName",
+    #     target_cpu_utilization_per_core: 1,
+    #     scaling_policy_objective: {
+    #       min_invocations_per_minute: 1,
+    #       max_invocations_per_minute: 1,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.inference_recommendations_job_name #=> String
+    #   resp.recommendation_id #=> String
+    #   resp.endpoint_name #=> String
+    #   resp.target_cpu_utilization_per_core #=> Integer
+    #   resp.scaling_policy_objective.min_invocations_per_minute #=> Integer
+    #   resp.scaling_policy_objective.max_invocations_per_minute #=> Integer
+    #   resp.metric.invocations_per_instance #=> Integer
+    #   resp.metric.model_latency #=> Integer
+    #   resp.dynamic_scaling_configuration.min_capacity #=> Integer
+    #   resp.dynamic_scaling_configuration.max_capacity #=> Integer
+    #   resp.dynamic_scaling_configuration.scale_in_cooldown #=> Integer
+    #   resp.dynamic_scaling_configuration.scale_out_cooldown #=> Integer
+    #   resp.dynamic_scaling_configuration.scaling_policies #=> Array
+    #   resp.dynamic_scaling_configuration.scaling_policies[0].target_tracking.metric_specification.predefined.predefined_metric_type #=> String
+    #   resp.dynamic_scaling_configuration.scaling_policies[0].target_tracking.metric_specification.customized.metric_name #=> String
+    #   resp.dynamic_scaling_configuration.scaling_policies[0].target_tracking.metric_specification.customized.namespace #=> String
+    #   resp.dynamic_scaling_configuration.scaling_policies[0].target_tracking.metric_specification.customized.statistic #=> String, one of "Average", "Minimum", "Maximum", "SampleCount", "Sum"
+    #   resp.dynamic_scaling_configuration.scaling_policies[0].target_tracking.target_value #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GetScalingConfigurationRecommendation AWS API Documentation
+    #
+    # @overload get_scaling_configuration_recommendation(params = {})
+    # @param [Hash] params ({})
+    def get_scaling_configuration_recommendation(params = {}, options = {})
+      req = build_request(:get_scaling_configuration_recommendation, params)
+      req.send_request(options)
+    end
+
     # An auto-complete API for the search functionality in the SageMaker
     # console. It returns suggestions of possible matches for the property
     # name to use in `Search` queries. Provides suggestions for
@@ -24007,7 +24091,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.201.0'
+      context[:gem_version] = '1.202.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

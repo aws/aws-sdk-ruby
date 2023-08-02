@@ -410,6 +410,7 @@ module Aws::SageMaker
     CustomerMetadataKeyList = Shapes::ListShape.new(name: 'CustomerMetadataKeyList')
     CustomerMetadataMap = Shapes::MapShape.new(name: 'CustomerMetadataMap')
     CustomerMetadataValue = Shapes::StringShape.new(name: 'CustomerMetadataValue')
+    CustomizedMetricSpecification = Shapes::StructureShape.new(name: 'CustomizedMetricSpecification')
     DataCaptureConfig = Shapes::StructureShape.new(name: 'DataCaptureConfig')
     DataCaptureConfigSummary = Shapes::StructureShape.new(name: 'DataCaptureConfigSummary')
     DataCatalogConfig = Shapes::StructureShape.new(name: 'DataCatalogConfig')
@@ -667,12 +668,14 @@ module Aws::SageMaker
     DomainSettings = Shapes::StructureShape.new(name: 'DomainSettings')
     DomainSettingsForUpdate = Shapes::StructureShape.new(name: 'DomainSettingsForUpdate')
     DomainStatus = Shapes::StringShape.new(name: 'DomainStatus')
+    Double = Shapes::FloatShape.new(name: 'Double')
     DoubleParameterValue = Shapes::FloatShape.new(name: 'DoubleParameterValue')
     DriftCheckBaselines = Shapes::StructureShape.new(name: 'DriftCheckBaselines')
     DriftCheckBias = Shapes::StructureShape.new(name: 'DriftCheckBias')
     DriftCheckExplainability = Shapes::StructureShape.new(name: 'DriftCheckExplainability')
     DriftCheckModelDataQuality = Shapes::StructureShape.new(name: 'DriftCheckModelDataQuality')
     DriftCheckModelQuality = Shapes::StructureShape.new(name: 'DriftCheckModelQuality')
+    DynamicScalingConfiguration = Shapes::StructureShape.new(name: 'DynamicScalingConfiguration')
     EMRStepMetadata = Shapes::StructureShape.new(name: 'EMRStepMetadata')
     Edge = Shapes::StructureShape.new(name: 'Edge')
     EdgeDeploymentConfig = Shapes::StructureShape.new(name: 'EdgeDeploymentConfig')
@@ -826,6 +829,8 @@ module Aws::SageMaker
     GetModelPackageGroupPolicyOutput = Shapes::StructureShape.new(name: 'GetModelPackageGroupPolicyOutput')
     GetSagemakerServicecatalogPortfolioStatusInput = Shapes::StructureShape.new(name: 'GetSagemakerServicecatalogPortfolioStatusInput')
     GetSagemakerServicecatalogPortfolioStatusOutput = Shapes::StructureShape.new(name: 'GetSagemakerServicecatalogPortfolioStatusOutput')
+    GetScalingConfigurationRecommendationRequest = Shapes::StructureShape.new(name: 'GetScalingConfigurationRecommendationRequest')
+    GetScalingConfigurationRecommendationResponse = Shapes::StructureShape.new(name: 'GetScalingConfigurationRecommendationResponse')
     GetSearchSuggestionsRequest = Shapes::StructureShape.new(name: 'GetSearchSuggestionsRequest')
     GetSearchSuggestionsResponse = Shapes::StructureShape.new(name: 'GetSearchSuggestionsResponse')
     GitConfig = Shapes::StructureShape.new(name: 'GitConfig')
@@ -1233,6 +1238,7 @@ module Aws::SageMaker
     MetricName = Shapes::StringShape.new(name: 'MetricName')
     MetricRegex = Shapes::StringShape.new(name: 'MetricRegex')
     MetricSetSource = Shapes::StringShape.new(name: 'MetricSetSource')
+    MetricSpecification = Shapes::UnionShape.new(name: 'MetricSpecification')
     MetricValue = Shapes::FloatShape.new(name: 'MetricValue')
     MetricsSource = Shapes::StructureShape.new(name: 'MetricsSource')
     MinimumInstanceMetadataServiceVersion = Shapes::StringShape.new(name: 'MinimumInstanceMetadataServiceVersion')
@@ -1504,6 +1510,7 @@ module Aws::SageMaker
     PipelineSummaryList = Shapes::ListShape.new(name: 'PipelineSummaryList')
     PlatformIdentifier = Shapes::StringShape.new(name: 'PlatformIdentifier')
     PolicyString = Shapes::StringShape.new(name: 'PolicyString')
+    PredefinedMetricSpecification = Shapes::StructureShape.new(name: 'PredefinedMetricSpecification')
     PresignedDomainUrl = Shapes::StringShape.new(name: 'PresignedDomainUrl')
     ProbabilityThresholdAttribute = Shapes::FloatShape.new(name: 'ProbabilityThresholdAttribute')
     ProblemType = Shapes::StringShape.new(name: 'ProblemType')
@@ -1703,6 +1710,10 @@ module Aws::SageMaker
     SagemakerServicecatalogStatus = Shapes::StringShape.new(name: 'SagemakerServicecatalogStatus')
     SampleWeightAttributeName = Shapes::StringShape.new(name: 'SampleWeightAttributeName')
     SamplingPercentage = Shapes::IntegerShape.new(name: 'SamplingPercentage')
+    ScalingPolicies = Shapes::ListShape.new(name: 'ScalingPolicies')
+    ScalingPolicy = Shapes::UnionShape.new(name: 'ScalingPolicy')
+    ScalingPolicyMetric = Shapes::StructureShape.new(name: 'ScalingPolicyMetric')
+    ScalingPolicyObjective = Shapes::StructureShape.new(name: 'ScalingPolicyObjective')
     ScheduleConfig = Shapes::StructureShape.new(name: 'ScheduleConfig')
     ScheduleExpression = Shapes::StringShape.new(name: 'ScheduleExpression')
     ScheduleStatus = Shapes::StringShape.new(name: 'ScheduleStatus')
@@ -1780,6 +1791,7 @@ module Aws::SageMaker
     StartNotebookInstanceInput = Shapes::StructureShape.new(name: 'StartNotebookInstanceInput')
     StartPipelineExecutionRequest = Shapes::StructureShape.new(name: 'StartPipelineExecutionRequest')
     StartPipelineExecutionResponse = Shapes::StructureShape.new(name: 'StartPipelineExecutionResponse')
+    Statistic = Shapes::StringShape.new(name: 'Statistic')
     StatusDetails = Shapes::StringShape.new(name: 'StatusDetails')
     StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
     StepDescription = Shapes::StringShape.new(name: 'StepDescription')
@@ -1844,6 +1856,7 @@ module Aws::SageMaker
     TargetPlatformAccelerator = Shapes::StringShape.new(name: 'TargetPlatformAccelerator')
     TargetPlatformArch = Shapes::StringShape.new(name: 'TargetPlatformArch')
     TargetPlatformOs = Shapes::StringShape.new(name: 'TargetPlatformOs')
+    TargetTrackingScalingPolicyConfiguration = Shapes::StructureShape.new(name: 'TargetTrackingScalingPolicyConfiguration')
     TaskAvailabilityLifetimeInSeconds = Shapes::IntegerShape.new(name: 'TaskAvailabilityLifetimeInSeconds')
     TaskCount = Shapes::IntegerShape.new(name: 'TaskCount')
     TaskDescription = Shapes::StringShape.new(name: 'TaskDescription')
@@ -2032,6 +2045,7 @@ module Aws::SageMaker
     UserSettings = Shapes::StructureShape.new(name: 'UserSettings')
     UsersPerStep = Shapes::IntegerShape.new(name: 'UsersPerStep')
     UtilizationMetric = Shapes::FloatShape.new(name: 'UtilizationMetric')
+    UtilizationPercentagePerCore = Shapes::IntegerShape.new(name: 'UtilizationPercentagePerCore')
     ValidationFraction = Shapes::FloatShape.new(name: 'ValidationFraction')
     VariantName = Shapes::StringShape.new(name: 'VariantName')
     VariantProperty = Shapes::StructureShape.new(name: 'VariantProperty')
@@ -3399,6 +3413,11 @@ module Aws::SageMaker
 
     CustomerMetadataMap.key = Shapes::ShapeRef.new(shape: CustomerMetadataKey)
     CustomerMetadataMap.value = Shapes::ShapeRef.new(shape: CustomerMetadataValue)
+
+    CustomizedMetricSpecification.add_member(:metric_name, Shapes::ShapeRef.new(shape: String, location_name: "MetricName"))
+    CustomizedMetricSpecification.add_member(:namespace, Shapes::ShapeRef.new(shape: String, location_name: "Namespace"))
+    CustomizedMetricSpecification.add_member(:statistic, Shapes::ShapeRef.new(shape: Statistic, location_name: "Statistic"))
+    CustomizedMetricSpecification.struct_class = Types::CustomizedMetricSpecification
 
     DataCaptureConfig.add_member(:enable_capture, Shapes::ShapeRef.new(shape: EnableCapture, location_name: "EnableCapture"))
     DataCaptureConfig.add_member(:initial_sampling_percentage, Shapes::ShapeRef.new(shape: SamplingPercentage, required: true, location_name: "InitialSamplingPercentage"))
@@ -4858,6 +4877,13 @@ module Aws::SageMaker
     DriftCheckModelQuality.add_member(:constraints, Shapes::ShapeRef.new(shape: MetricsSource, location_name: "Constraints"))
     DriftCheckModelQuality.struct_class = Types::DriftCheckModelQuality
 
+    DynamicScalingConfiguration.add_member(:min_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "MinCapacity"))
+    DynamicScalingConfiguration.add_member(:max_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxCapacity"))
+    DynamicScalingConfiguration.add_member(:scale_in_cooldown, Shapes::ShapeRef.new(shape: Integer, location_name: "ScaleInCooldown"))
+    DynamicScalingConfiguration.add_member(:scale_out_cooldown, Shapes::ShapeRef.new(shape: Integer, location_name: "ScaleOutCooldown"))
+    DynamicScalingConfiguration.add_member(:scaling_policies, Shapes::ShapeRef.new(shape: ScalingPolicies, location_name: "ScalingPolicies"))
+    DynamicScalingConfiguration.struct_class = Types::DynamicScalingConfiguration
+
     EMRStepMetadata.add_member(:cluster_id, Shapes::ShapeRef.new(shape: String256, location_name: "ClusterId"))
     EMRStepMetadata.add_member(:step_id, Shapes::ShapeRef.new(shape: String256, location_name: "StepId"))
     EMRStepMetadata.add_member(:step_name, Shapes::ShapeRef.new(shape: String256, location_name: "StepName"))
@@ -5224,6 +5250,22 @@ module Aws::SageMaker
 
     GetSagemakerServicecatalogPortfolioStatusOutput.add_member(:status, Shapes::ShapeRef.new(shape: SagemakerServicecatalogStatus, location_name: "Status"))
     GetSagemakerServicecatalogPortfolioStatusOutput.struct_class = Types::GetSagemakerServicecatalogPortfolioStatusOutput
+
+    GetScalingConfigurationRecommendationRequest.add_member(:inference_recommendations_job_name, Shapes::ShapeRef.new(shape: RecommendationJobName, required: true, location_name: "InferenceRecommendationsJobName"))
+    GetScalingConfigurationRecommendationRequest.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: String, location_name: "RecommendationId"))
+    GetScalingConfigurationRecommendationRequest.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, location_name: "EndpointName"))
+    GetScalingConfigurationRecommendationRequest.add_member(:target_cpu_utilization_per_core, Shapes::ShapeRef.new(shape: UtilizationPercentagePerCore, location_name: "TargetCpuUtilizationPerCore"))
+    GetScalingConfigurationRecommendationRequest.add_member(:scaling_policy_objective, Shapes::ShapeRef.new(shape: ScalingPolicyObjective, location_name: "ScalingPolicyObjective"))
+    GetScalingConfigurationRecommendationRequest.struct_class = Types::GetScalingConfigurationRecommendationRequest
+
+    GetScalingConfigurationRecommendationResponse.add_member(:inference_recommendations_job_name, Shapes::ShapeRef.new(shape: RecommendationJobName, location_name: "InferenceRecommendationsJobName"))
+    GetScalingConfigurationRecommendationResponse.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: String, location_name: "RecommendationId"))
+    GetScalingConfigurationRecommendationResponse.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, location_name: "EndpointName"))
+    GetScalingConfigurationRecommendationResponse.add_member(:target_cpu_utilization_per_core, Shapes::ShapeRef.new(shape: UtilizationPercentagePerCore, location_name: "TargetCpuUtilizationPerCore"))
+    GetScalingConfigurationRecommendationResponse.add_member(:scaling_policy_objective, Shapes::ShapeRef.new(shape: ScalingPolicyObjective, location_name: "ScalingPolicyObjective"))
+    GetScalingConfigurationRecommendationResponse.add_member(:metric, Shapes::ShapeRef.new(shape: ScalingPolicyMetric, location_name: "Metric"))
+    GetScalingConfigurationRecommendationResponse.add_member(:dynamic_scaling_configuration, Shapes::ShapeRef.new(shape: DynamicScalingConfiguration, location_name: "DynamicScalingConfiguration"))
+    GetScalingConfigurationRecommendationResponse.struct_class = Types::GetScalingConfigurationRecommendationResponse
 
     GetSearchSuggestionsRequest.add_member(:resource, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "Resource"))
     GetSearchSuggestionsRequest.add_member(:suggestion_query, Shapes::ShapeRef.new(shape: SuggestionQuery, location_name: "SuggestionQuery"))
@@ -6786,6 +6828,14 @@ module Aws::SageMaker
 
     MetricDefinitionList.member = Shapes::ShapeRef.new(shape: MetricDefinition)
 
+    MetricSpecification.add_member(:predefined, Shapes::ShapeRef.new(shape: PredefinedMetricSpecification, location_name: "Predefined"))
+    MetricSpecification.add_member(:customized, Shapes::ShapeRef.new(shape: CustomizedMetricSpecification, location_name: "Customized"))
+    MetricSpecification.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    MetricSpecification.add_member_subclass(:predefined, Types::MetricSpecification::Predefined)
+    MetricSpecification.add_member_subclass(:customized, Types::MetricSpecification::Customized)
+    MetricSpecification.add_member_subclass(:unknown, Types::MetricSpecification::Unknown)
+    MetricSpecification.struct_class = Types::MetricSpecification
+
     MetricsSource.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, required: true, location_name: "ContentType"))
     MetricsSource.add_member(:content_digest, Shapes::ShapeRef.new(shape: ContentDigest, location_name: "ContentDigest"))
     MetricsSource.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
@@ -7590,6 +7640,9 @@ module Aws::SageMaker
 
     PipelineSummaryList.member = Shapes::ShapeRef.new(shape: PipelineSummary)
 
+    PredefinedMetricSpecification.add_member(:predefined_metric_type, Shapes::ShapeRef.new(shape: String, location_name: "PredefinedMetricType"))
+    PredefinedMetricSpecification.struct_class = Types::PredefinedMetricSpecification
+
     ProcessingClusterConfig.add_member(:instance_count, Shapes::ShapeRef.new(shape: ProcessingInstanceCount, required: true, location_name: "InstanceCount"))
     ProcessingClusterConfig.add_member(:instance_type, Shapes::ShapeRef.new(shape: ProcessingInstanceType, required: true, location_name: "InstanceType"))
     ProcessingClusterConfig.add_member(:volume_size_in_gb, Shapes::ShapeRef.new(shape: ProcessingVolumeSizeInGB, required: true, location_name: "VolumeSizeInGB"))
@@ -8093,6 +8146,22 @@ module Aws::SageMaker
 
     SageMakerImageVersionAliases.member = Shapes::ShapeRef.new(shape: SageMakerImageVersionAlias)
 
+    ScalingPolicies.member = Shapes::ShapeRef.new(shape: ScalingPolicy)
+
+    ScalingPolicy.add_member(:target_tracking, Shapes::ShapeRef.new(shape: TargetTrackingScalingPolicyConfiguration, location_name: "TargetTracking"))
+    ScalingPolicy.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ScalingPolicy.add_member_subclass(:target_tracking, Types::ScalingPolicy::TargetTracking)
+    ScalingPolicy.add_member_subclass(:unknown, Types::ScalingPolicy::Unknown)
+    ScalingPolicy.struct_class = Types::ScalingPolicy
+
+    ScalingPolicyMetric.add_member(:invocations_per_instance, Shapes::ShapeRef.new(shape: Integer, location_name: "InvocationsPerInstance"))
+    ScalingPolicyMetric.add_member(:model_latency, Shapes::ShapeRef.new(shape: Integer, location_name: "ModelLatency"))
+    ScalingPolicyMetric.struct_class = Types::ScalingPolicyMetric
+
+    ScalingPolicyObjective.add_member(:min_invocations_per_minute, Shapes::ShapeRef.new(shape: Integer, location_name: "MinInvocationsPerMinute"))
+    ScalingPolicyObjective.add_member(:max_invocations_per_minute, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxInvocationsPerMinute"))
+    ScalingPolicyObjective.struct_class = Types::ScalingPolicyObjective
+
     ScheduleConfig.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpression, required: true, location_name: "ScheduleExpression"))
     ScheduleConfig.struct_class = Types::ScheduleConfig
 
@@ -8370,6 +8439,10 @@ module Aws::SageMaker
     TargetPlatform.add_member(:arch, Shapes::ShapeRef.new(shape: TargetPlatformArch, required: true, location_name: "Arch"))
     TargetPlatform.add_member(:accelerator, Shapes::ShapeRef.new(shape: TargetPlatformAccelerator, location_name: "Accelerator"))
     TargetPlatform.struct_class = Types::TargetPlatform
+
+    TargetTrackingScalingPolicyConfiguration.add_member(:metric_specification, Shapes::ShapeRef.new(shape: MetricSpecification, location_name: "MetricSpecification"))
+    TargetTrackingScalingPolicyConfiguration.add_member(:target_value, Shapes::ShapeRef.new(shape: Double, location_name: "TargetValue"))
+    TargetTrackingScalingPolicyConfiguration.struct_class = Types::TargetTrackingScalingPolicyConfiguration
 
     TaskKeywords.member = Shapes::ShapeRef.new(shape: TaskKeyword)
 
@@ -10695,6 +10768,15 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetSagemakerServicecatalogPortfolioStatusInput)
         o.output = Shapes::ShapeRef.new(shape: GetSagemakerServicecatalogPortfolioStatusOutput)
+      end)
+
+      api.add_operation(:get_scaling_configuration_recommendation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetScalingConfigurationRecommendation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetScalingConfigurationRecommendationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetScalingConfigurationRecommendationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
       api.add_operation(:get_search_suggestions, Seahorse::Model::Operation.new.tap do |o|

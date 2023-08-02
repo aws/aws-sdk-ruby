@@ -32,7 +32,7 @@ module Aws::Budgets
     #
     # @!attribute [rw] budget_name
     #   A string that represents the budget name. The ":" and "\\"
-    #   characters aren't allowed.
+    #   characters, and the "/action/" substring, aren't allowed.
     #   @return [String]
     #
     # @!attribute [rw] notification_type
@@ -182,7 +182,8 @@ module Aws::Budgets
     #
     # @!attribute [rw] budget_name
     #   The name of a budget. The name must be unique within an account. The
-    #   `:` and `` characters aren't allowed in `BudgetName`.
+    #   `:` and `` characters, and the "/action/" substring, aren't
+    #   allowed in `BudgetName`.
     #   @return [String]
     #
     # @!attribute [rw] budget_limit
@@ -332,7 +333,7 @@ module Aws::Budgets
     #
     # @!attribute [rw] budget_name
     #   A string that represents the budget name. The ":" and "\\"
-    #   characters aren't allowed.
+    #   characters, and the "/action/" substring, aren't allowed.
     #   @return [String]
     #
     class BudgetNotificationsForAccount < Struct.new(
@@ -347,7 +348,7 @@ module Aws::Budgets
     #
     # @!attribute [rw] budget_name
     #   A string that represents the budget name. The ":" and "\\"
-    #   characters aren't allowed.
+    #   characters, and the "/action/" substring, aren't allowed.
     #   @return [String]
     #
     # @!attribute [rw] budget_type
@@ -531,7 +532,7 @@ module Aws::Budgets
     #
     # @!attribute [rw] budget_name
     #   A string that represents the budget name. The ":" and "\\"
-    #   characters aren't allowed.
+    #   characters, and the "/action/" substring, aren't allowed.
     #   @return [String]
     #
     # @!attribute [rw] notification_type
@@ -585,7 +586,7 @@ module Aws::Budgets
     #
     # @!attribute [rw] budget_name
     #   A string that represents the budget name. The ":" and "\\"
-    #   characters aren't allowed.
+    #   characters, and the "/action/" substring, aren't allowed.
     #   @return [String]
     #
     # @!attribute [rw] action_id
@@ -741,7 +742,7 @@ module Aws::Budgets
     #
     # @!attribute [rw] budget_name
     #   A string that represents the budget name. The ":" and "\\"
-    #   characters aren't allowed.
+    #   characters, and the "/action/" substring, aren't allowed.
     #   @return [String]
     #
     # @!attribute [rw] action_id
@@ -763,7 +764,7 @@ module Aws::Budgets
     #
     # @!attribute [rw] budget_name
     #   A string that represents the budget name. The ":" and "\\"
-    #   characters aren't allowed.
+    #   characters, and the "/action/" substring, aren't allowed.
     #   @return [String]
     #
     # @!attribute [rw] action
@@ -865,7 +866,7 @@ module Aws::Budgets
     #
     # @!attribute [rw] budget_name
     #   A string that represents the budget name. The ":" and "\\"
-    #   characters aren't allowed.
+    #   characters, and the "/action/" substring, aren't allowed.
     #   @return [String]
     #
     # @!attribute [rw] action_id
@@ -920,7 +921,7 @@ module Aws::Budgets
     #
     # @!attribute [rw] budget_name
     #   A string that represents the budget name. The ":" and "\\"
-    #   characters aren't allowed.
+    #   characters, and the "/action/" substring, aren't allowed.
     #   @return [String]
     #
     # @!attribute [rw] action_id
@@ -942,7 +943,7 @@ module Aws::Budgets
     #
     # @!attribute [rw] budget_name
     #   A string that represents the budget name. The ":" and "\\"
-    #   characters aren't allowed.
+    #   characters, and the "/action/" substring, aren't allowed.
     #   @return [String]
     #
     # @!attribute [rw] action
@@ -999,7 +1000,7 @@ module Aws::Budgets
     #
     # @!attribute [rw] budget_name
     #   A string that represents the budget name. The ":" and "\\"
-    #   characters aren't allowed.
+    #   characters, and the "/action/" substring, aren't allowed.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1077,7 +1078,7 @@ module Aws::Budgets
     #
     # @!attribute [rw] budget_name
     #   A string that represents the budget name. The ":" and "\\"
-    #   characters aren't allowed.
+    #   characters, and the "/action/" substring, aren't allowed.
     #   @return [String]
     #
     # @!attribute [rw] time_period
@@ -1318,7 +1319,7 @@ module Aws::Budgets
     #
     # @!attribute [rw] budget_name
     #   A string that represents the budget name. The ":" and "\\"
-    #   characters aren't allowed.
+    #   characters, and the "/action/" substring, aren't allowed.
     #   @return [String]
     #
     # @!attribute [rw] action_id
@@ -1345,7 +1346,7 @@ module Aws::Budgets
     #
     # @!attribute [rw] budget_name
     #   A string that represents the budget name. The ":" and "\\"
-    #   characters aren't allowed.
+    #   characters, and the "/action/" substring, aren't allowed.
     #   @return [String]
     #
     # @!attribute [rw] action_id
@@ -1741,7 +1742,7 @@ module Aws::Budgets
     #
     # @!attribute [rw] budget_name
     #   A string that represents the budget name. The ":" and "\\"
-    #   characters aren't allowed.
+    #   characters, and the "/action/" substring, aren't allowed.
     #   @return [String]
     #
     # @!attribute [rw] action_id
@@ -1794,7 +1795,7 @@ module Aws::Budgets
     #
     # @!attribute [rw] budget_name
     #   A string that represents the budget name. The ":" and "\\"
-    #   characters aren't allowed.
+    #   characters, and the "/action/" substring, aren't allowed.
     #   @return [String]
     #
     # @!attribute [rw] old_action
