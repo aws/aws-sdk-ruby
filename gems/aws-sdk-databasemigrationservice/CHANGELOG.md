@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.86.0 (2023-08-03)
+------------------
+
+* Feature - The release makes public API for DMS Schema Conversion feature.
+
 1.85.0 (2023-08-01)
 ------------------
 

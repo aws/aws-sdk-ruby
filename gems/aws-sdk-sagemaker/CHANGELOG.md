@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.203.0 (2023-08-03)
+------------------
+
+* Feature - Amazon SageMaker now supports running training jobs on p5.48xlarge instance types.
+
 1.202.0 (2023-08-02)
 ------------------
 

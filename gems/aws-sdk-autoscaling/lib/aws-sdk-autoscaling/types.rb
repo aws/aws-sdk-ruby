@@ -211,7 +211,7 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] alarms
     #   The names of one or more CloudWatch alarms to monitor for the
-    #   instance refresh.
+    #   instance refresh. You can specify up to 10 alarms.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AlarmSpecification AWS API Documentation

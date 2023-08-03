@@ -598,6 +598,7 @@ module Aws::EC2
     #         ena_srd_udp_enabled: false,
     #       },
     #     },
+    #     enable_primary_ipv_6: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Types::NetworkInterfaceAttachmentChanges] :attachment
@@ -626,6 +627,22 @@ module Aws::EC2
     # @option options [Types::EnaSrdSpecification] :ena_srd_specification
     #   Updates the ENA Express configuration for the network interface that’s
     #   attached to the instance.
+    # @option options [Boolean] :enable_primary_ipv_6
+    #   If you’re modifying a network interface in a dual-stack or IPv6-only
+    #   subnet, you have the option to assign a primary IPv6 IP address. A
+    #   primary IPv6 address is an IPv6 GUA address associated with an ENI
+    #   that you have enabled to use a primary IPv6 address. Use this option
+    #   if the instance that this ENI will be attached to relies on its IPv6
+    #   address not changing. Amazon Web Services will automatically assign an
+    #   IPv6 address associated with the ENI attached to your instance to be
+    #   the primary IPv6 address. Once you enable an IPv6 GUA address to be a
+    #   primary IPv6, you cannot disable it. When you enable an IPv6 GUA
+    #   address to be a primary IPv6, the first IPv6 GUA will be made the
+    #   primary IPv6 address until the instance is terminated or the network
+    #   interface is detached. If you have multiple IPv6 addresses associated
+    #   with an ENI attached to your instance and you enable a primary IPv6
+    #   address, the first IPv6 GUA address associated with the ENI becomes
+    #   the primary IPv6 address.
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(network_interface_id: @id)

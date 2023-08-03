@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2023-08-03)
+------------------
+
+* Feature - Updated the deprecation date for Amazon Linux. Doc only update.
+
 1.54.0 (2023-07-11)
 ------------------
 

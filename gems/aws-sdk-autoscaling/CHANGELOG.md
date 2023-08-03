@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2023-08-03)
+------------------
+
+* Feature - Documentation changes related to Amazon EC2 Auto Scaling APIs.
+
 1.96.0 (2023-07-31)
 ------------------
 
