@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.123.0 (2023-08-04)
+------------------
+
+* Feature - Added a new API UpdateRoutingProfileAgentAvailabilityTimer to update agent availability timer of a routing profile.
+
 1.122.0 (2023-07-28)
 ------------------
 

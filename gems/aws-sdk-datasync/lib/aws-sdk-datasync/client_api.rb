@@ -360,6 +360,7 @@ module Aws::DataSync
     Capacity.add_member(:used, Shapes::ShapeRef.new(shape: NonNegativeLong, location_name: "Used"))
     Capacity.add_member(:provisioned, Shapes::ShapeRef.new(shape: NonNegativeLong, location_name: "Provisioned"))
     Capacity.add_member(:logical_used, Shapes::ShapeRef.new(shape: NonNegativeLong, location_name: "LogicalUsed"))
+    Capacity.add_member(:cluster_cloud_storage_used, Shapes::ShapeRef.new(shape: NonNegativeLong, location_name: "ClusterCloudStorageUsed"))
     Capacity.struct_class = Types::Capacity
 
     CreateAgentRequest.add_member(:activation_key, Shapes::ShapeRef.new(shape: ActivationKey, required: true, location_name: "ActivationKey"))
@@ -950,6 +951,7 @@ module Aws::DataSync
     NetAppONTAPCluster.add_member(:recommendations, Shapes::ShapeRef.new(shape: Recommendations, location_name: "Recommendations"))
     NetAppONTAPCluster.add_member(:recommendation_status, Shapes::ShapeRef.new(shape: RecommendationStatus, location_name: "RecommendationStatus"))
     NetAppONTAPCluster.add_member(:lun_count, Shapes::ShapeRef.new(shape: NonNegativeLong, location_name: "LunCount"))
+    NetAppONTAPCluster.add_member(:cluster_cloud_storage_used, Shapes::ShapeRef.new(shape: NonNegativeLong, location_name: "ClusterCloudStorageUsed"))
     NetAppONTAPCluster.struct_class = Types::NetAppONTAPCluster
 
     NetAppONTAPClusters.member = Shapes::ShapeRef.new(shape: NetAppONTAPCluster)

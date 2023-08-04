@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.204.0 (2023-08-04)
+------------------
+
+* Feature - Including DataCaptureConfig key in the Amazon Sagemaker Search's transform job object
+
 1.203.0 (2023-08-03)
 ------------------
 

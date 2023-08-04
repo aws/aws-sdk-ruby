@@ -38706,6 +38706,11 @@ module Aws::SageMaker
     #   A list of tags associated with the transform job.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] data_capture_config
+    #   Configuration to control how SageMaker captures inference data for
+    #   batch transform jobs.
+    #   @return [Types::BatchDataCaptureConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformJob AWS API Documentation
     #
     class TransformJob < Struct.new(
@@ -38729,7 +38734,8 @@ module Aws::SageMaker
       :auto_ml_job_arn,
       :data_processing,
       :experiment_config,
-      :tags)
+      :tags,
+      :data_capture_config)
       SENSITIVE = []
       include Aws::Structure
     end

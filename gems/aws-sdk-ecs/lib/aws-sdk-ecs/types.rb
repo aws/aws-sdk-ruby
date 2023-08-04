@@ -127,11 +127,11 @@ module Aws::ECS
     #
     # @!attribute [rw] auto_scaling_group_arn
     #   The Amazon Resource Name (ARN) that identifies the Auto Scaling
-    #   group.
+    #   group, or the Auto Scaling group name.
     #   @return [String]
     #
     # @!attribute [rw] managed_scaling
-    #   The managed scaling settings for the Auto Scaling group capacity
+    #   he managed scaling settings for the Auto Scaling group capacity
     #   provider.
     #   @return [Types::ManagedScaling]
     #
@@ -1404,6 +1404,8 @@ module Aws::ECS
     #   [Amazon ECS-optimized Linux AMI][2] in the *Amazon Elastic Container
     #   Service Developer Guide*.
     #
+    #   The valid values are 2-120 seconds.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html
@@ -1443,6 +1445,8 @@ module Aws::ECS
     #   container agent and `ecs-init`. For more information, see [Amazon
     #   ECS-optimized Linux AMI][2] in the *Amazon Elastic Container Service
     #   Developer Guide*.
+    #
+    #   The valid values are 2-120 seconds.
     #
     #
     #
@@ -1838,22 +1842,44 @@ module Aws::ECS
     #   @return [Types::FirelensConfiguration]
     #
     # @!attribute [rw] credential_specs
-    #   A list of ARNs in SSM or Amazon S3 to a credential spec
-    #   (`credspec`code&gt;) file that configures a container for Active
-    #   Directory authentication. This parameter is only used with
-    #   domainless authentication.
+    #   A list of ARNs in SSM or Amazon S3 to a credential spec (`CredSpec`)
+    #   file that configures the container for Active Directory
+    #   authentication. We recommend that you use this parameter instead of
+    #   the `dockerSecurityOptions`. The maximum number of ARNs is 1.
     #
-    #   The format for each ARN is `credentialspecdomainless:MyARN`. Replace
-    #   `MyARN` with the ARN in SSM or Amazon S3.
+    #   There are two formats for each ARN.
     #
-    #   The `credspec` must provide a ARN in Secrets Manager for a secret
-    #   containing the username, password, and the domain to connect to. For
-    #   better security, the instance isn't joined to the domain for
-    #   domainless authentication. Other applications on the instance can't
-    #   use the domainless credentials. You can use this parameter to run
-    #   tasks on the same instance, even it the tasks need to join different
-    #   domains. For more information, see [Using gMSAs for Windows
-    #   Containers][1] and [Using gMSAs for Linux Containers][2].
+    #   credentialspecdomainless:MyARN
+    #
+    #   : You use `credentialspecdomainless:MyARN` to provide a `CredSpec`
+    #     with an additional section for a secret in Secrets Manager. You
+    #     provide the login credentials to the domain in the secret.
+    #
+    #     Each task that runs on any container instance can join different
+    #     domains.
+    #
+    #     You can use this format without joining the container instance to
+    #     a domain.
+    #
+    #   credentialspec:MyARN
+    #
+    #   : You use `credentialspec:MyARN` to provide a `CredSpec` for a
+    #     single domain.
+    #
+    #     You must join the container instance to the domain before you
+    #     start any tasks that use this task definition.
+    #
+    #   In both formats, replace `MyARN` with the ARN in SSM or Amazon S3.
+    #
+    #   If you provide a `credentialspecdomainless:MyARN`, the `credspec`
+    #   must provide a ARN in Secrets Manager for a secret containing the
+    #   username, password, and the domain to connect to. For better
+    #   security, the instance isn't joined to the domain for domainless
+    #   authentication. Other applications on the instance can't use the
+    #   domainless credentials. You can use this parameter to run tasks on
+    #   the same instance, even it the tasks need to join different domains.
+    #   For more information, see [Using gMSAs for Windows Containers][1]
+    #   and [Using gMSAs for Linux Containers][2].
     #
     #
     #
@@ -2196,6 +2222,15 @@ module Aws::ECS
     # override can be passed in. An example of an empty container override
     # is `\{"containerOverrides": [ ] \}`. If a non-empty container override
     # is specified, the `name` parameter must be included.
+    #
+    # You can use Secrets Manager or Amazon Web Services Systems Manager
+    # Parameter Store to store the sensitive data. For more information, see
+    # [Retrieve secrets through environment variables][1] in the Amazon ECS
+    # Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/secrets-envvar.html
     #
     # @!attribute [rw] name
     #   The name of the container that receives the override. This parameter
@@ -2974,7 +3009,8 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] task_definition
-    #   The task definition for the tasks in the task set to use.
+    #   The task definition for the tasks in the task set to use. If a
+    #   revision isn't specified, the latest `ACTIVE` revision is used.
     #   @return [String]
     #
     # @!attribute [rw] network_configuration
@@ -3603,9 +3639,13 @@ module Aws::ECS
     # failure. For more information, see [Rolling update][1] in the *Amazon
     # Elastic Container Service Developer Guide*.
     #
+    # For more information about API failure reasons, see [API failure
+    # reasons][2] in the *Amazon Elastic Container Service Developer Guide*.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/api_failures_messages.html
     #
     # @!attribute [rw] enable
     #   Determines whether to use the deployment circuit breaker logic for
@@ -4538,8 +4578,7 @@ module Aws::ECS
     # variables][2] in the *Amazon Elastic Container Service Developer
     # Guide*.
     #
-    # This parameter is only supported for tasks hosted on Fargate using the
-    # following platform versions:
+    # You must use the following platforms for the Fargate launch type:
     #
     # * Linux platform version `1.4.0` or later.
     #
@@ -6263,8 +6302,7 @@ module Aws::ECS
     #   target group or groups associated with a service or task set.
     #
     #   A target group ARN is only specified when using an Application Load
-    #   Balancer or Network Load Balancer. If you're using a Classic Load
-    #   Balancer, omit the target group ARN.
+    #   Balancer or Network Load Balancer.
     #
     #   For services using the `ECS` deployment controller, you can specify
     #   one or multiple target groups. For more information, see
@@ -6293,9 +6331,8 @@ module Aws::ECS
     #   The name of the load balancer to associate with the Amazon ECS
     #   service or task set.
     #
-    #   A load balancer name is only specified when using a Classic Load
-    #   Balancer. If you are using an Application Load Balancer or a Network
-    #   Load Balancer the load balancer name parameter should be omitted.
+    #   If you are using an Application Load Balancer or a Network Load
+    #   Balancer the load balancer name parameter should be omitted.
     #   @return [String]
     #
     # @!attribute [rw] container_name
@@ -6337,9 +6374,15 @@ module Aws::ECS
     # containers.
     #
     # * Amazon ECS currently supports a subset of the logging drivers
-    #   available to the Docker daemon (shown in the valid values below).
-    #   Additional log drivers may be available in future releases of the
-    #   Amazon ECS container agent.
+    #   available to the Docker daemon. Additional log drivers may be
+    #   available in future releases of the Amazon ECS container agent.
+    #
+    #   For tasks on Fargate, the supported log drivers are `awslogs`,
+    #   `splunk`, and `awsfirelens`.
+    #
+    #   For tasks hosted on Amazon EC2 instances, the supported log drivers
+    #   are `awslogs`, `fluentd`, `gelf`, `json-file`, `journald`,
+    #   `logentries`,`syslog`, `splunk`, and `awsfirelens`.
     #
     # * This parameter requires version 1.18 of the Docker Remote API or
     #   greater on your container instance.
@@ -6540,8 +6583,8 @@ module Aws::ECS
     # @!attribute [rw] maximum_scaling_step_size
     #   The maximum number of Amazon EC2 instances that Amazon ECS will
     #   scale out at one time. The scale in process is not affected by this
-    #   parameter. If this parameter is omitted, the default value of `1` is
-    #   used.
+    #   parameter. If this parameter is omitted, the default value of
+    #   `10000` is used.
     #   @return [Integer]
     #
     # @!attribute [rw] instance_warmup_period
@@ -6955,10 +6998,10 @@ module Aws::ECS
     #   is listed on the instance under
     #   `/proc/sys/net/ipv4/ip_local_port_range`. If this kernel parameter
     #   is unavailable, the default ephemeral port range from 49153 through
-    #   65535 is used. Do not attempt to specify a host port in the
-    #   ephemeral port range as these are reserved for automatic assignment.
-    #   In general, ports below 32768 are outside of the ephemeral port
-    #   range.
+    #   65535 (Linux) or 49152 through 65535 (Windows) is used. Do not
+    #   attempt to specify a host port in the ephemeral port range as these
+    #   are reserved for automatic assignment. In general, ports below 32768
+    #   are outside of the ephemeral port range.
     #
     #   The default reserved ports are 22 for SSH, the Docker ports 2375 and
     #   2376, and the Amazon ECS container agent ports 51678-51680. Any host
@@ -8824,9 +8867,15 @@ module Aws::ECS
     #   your containers.
     #
     #   * Amazon ECS currently supports a subset of the logging drivers
-    #     available to the Docker daemon (shown in the valid values below).
-    #     Additional log drivers may be available in future releases of the
-    #     Amazon ECS container agent.
+    #     available to the Docker daemon. Additional log drivers may be
+    #     available in future releases of the Amazon ECS container agent.
+    #
+    #     For tasks on Fargate, the supported log drivers are `awslogs`,
+    #     `splunk`, and `awsfirelens`.
+    #
+    #     For tasks hosted on Amazon EC2 instances, the supported log
+    #     drivers are `awslogs`, `fluentd`, `gelf`, `json-file`, `journald`,
+    #     `logentries`,`syslog`, `splunk`, and `awsfirelens`.
     #
     #   * This parameter requires version 1.18 of the Docker Remote API or
     #     greater on your container instance.
@@ -9900,6 +9949,9 @@ module Aws::ECS
     #   The stop code indicating why a task was stopped. The `stoppedReason`
     #   might contain additional details.
     #
+    #   For more information about stop code, see [Stopped tasks error
+    #   codes][1] in the *Amazon ECS User Guide*.
+    #
     #   The following are valid values:
     #
     #   * `TaskFailedToStart`
@@ -9913,6 +9965,10 @@ module Aws::ECS
     #   * `ServiceSchedulerInitiated`
     #
     #   * `SpotInterruption`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/userguide/stopped-task-error-codes.html
     #   @return [String]
     #
     # @!attribute [rw] stopped_at
@@ -9928,7 +9984,7 @@ module Aws::ECS
     # @!attribute [rw] stopping_at
     #   The Unix timestamp for the time when the task stops. More
     #   specifically, it's for the time when the task transitions from the
-    #   `RUNNING` state to `STOPPED`.
+    #   `RUNNING` state to `STOPPING`.
     #   @return [Time]
     #
     # @!attribute [rw] tags
@@ -10213,9 +10269,10 @@ module Aws::ECS
     #   @return [Types::RuntimePlatform]
     #
     # @!attribute [rw] requires_compatibilities
-    #   The task launch types the task definition was validated against. For
-    #   more information, see [Amazon ECS launch types][1] in the *Amazon
-    #   Elastic Container Service Developer Guide*.
+    #   The task launch types the task definition was validated against. The
+    #   valid values are `EC2`, `FARGATE`, and `EXTERNAL`. For more
+    #   information, see [Amazon ECS launch types][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
     #
     #
     #
@@ -11565,6 +11622,8 @@ module Aws::ECS
     #   numbers, underscores, and hyphens are allowed. This name is
     #   referenced in the `sourceVolume` parameter of container definition
     #   `mountPoints`.
+    #
+    #   This is required wwhen you use an Amazon EFS volume.
     #   @return [String]
     #
     # @!attribute [rw] host

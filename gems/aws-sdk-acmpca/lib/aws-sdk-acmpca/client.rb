@@ -1722,11 +1722,11 @@ module Aws::ACMPCA
     # @option params [String] :idempotency_token
     #   Alphanumeric string that can be used to distinguish between calls to
     #   the **IssueCertificate** action. Idempotency tokens for
-    #   **IssueCertificate** time out after one minute. Therefore, if you call
-    #   **IssueCertificate** multiple times with the same idempotency token
-    #   within one minute, Amazon Web Services Private CA recognizes that you
-    #   are requesting only one certificate and will issue only one. If you
-    #   change the idempotency token for each call, Amazon Web Services
+    #   **IssueCertificate** time out after five minutes. Therefore, if you
+    #   call **IssueCertificate** multiple times with the same idempotency
+    #   token within five minutes, Amazon Web Services Private CA recognizes
+    #   that you are requesting only one certificate and will issue only one.
+    #   If you change the idempotency token for each call, Amazon Web Services
     #   Private CA recognizes that you are requesting multiple certificates.
     #
     # @return [Types::IssueCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2586,7 +2586,7 @@ module Aws::ACMPCA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acmpca'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

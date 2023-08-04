@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2023-08-04)
+------------------
+
+* Feature - Display cloud storage used capacity at a cluster level.
+
 1.63.0 (2023-07-25)
 ------------------
 

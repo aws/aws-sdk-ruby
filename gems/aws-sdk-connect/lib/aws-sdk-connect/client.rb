@@ -1867,6 +1867,11 @@ module Aws::Connect
     #   For example, \\\{ "tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
+    # @option params [String] :agent_availability_timer
+    #   Whether agents with this routing profile will have their routing order
+    #   calculated based on *time since their last inbound contact* or
+    #   *longest idle time*.
+    #
     # @return [Types::CreateRoutingProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRoutingProfileResponse#routing_profile_arn #routing_profile_arn} => String
@@ -1901,6 +1906,7 @@ module Aws::Connect
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     agent_availability_timer: "TIME_SINCE_LAST_ACTIVITY", # accepts TIME_SINCE_LAST_ACTIVITY, TIME_SINCE_LAST_INBOUND
     #   })
     #
     # @example Response structure
@@ -4112,6 +4118,7 @@ module Aws::Connect
     #   resp.routing_profile.tags["TagKey"] #=> String
     #   resp.routing_profile.number_of_associated_queues #=> Integer
     #   resp.routing_profile.number_of_associated_users #=> Integer
+    #   resp.routing_profile.agent_availability_timer #=> String, one of "TIME_SINCE_LAST_ACTIVITY", "TIME_SINCE_LAST_INBOUND"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeRoutingProfile AWS API Documentation
     #
@@ -9332,6 +9339,7 @@ module Aws::Connect
     #   resp.routing_profiles[0].tags["TagKey"] #=> String
     #   resp.routing_profiles[0].number_of_associated_queues #=> Integer
     #   resp.routing_profiles[0].number_of_associated_users #=> Integer
+    #   resp.routing_profiles[0].agent_availability_timer #=> String, one of "TIME_SINCE_LAST_ACTIVITY", "TIME_SINCE_LAST_INBOUND"
     #   resp.next_token #=> String
     #   resp.approximate_total_count #=> Integer
     #
@@ -11965,6 +11973,45 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Whether agents with this routing profile will have their routing order
+    # calculated based on *time since their last inbound contact* or
+    # *longest idle time*.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :routing_profile_id
+    #   The identifier of the routing profile.
+    #
+    # @option params [required, String] :agent_availability_timer
+    #   Whether agents with this routing profile will have their routing order
+    #   calculated based on *time since their last inbound contact* or
+    #   *longest idle time*.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_routing_profile_agent_availability_timer({
+    #     instance_id: "InstanceId", # required
+    #     routing_profile_id: "RoutingProfileId", # required
+    #     agent_availability_timer: "TIME_SINCE_LAST_ACTIVITY", # required, accepts TIME_SINCE_LAST_ACTIVITY, TIME_SINCE_LAST_INBOUND
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateRoutingProfileAgentAvailabilityTimer AWS API Documentation
+    #
+    # @overload update_routing_profile_agent_availability_timer(params = {})
+    # @param [Hash] params ({})
+    def update_routing_profile_agent_availability_timer(params = {}, options = {})
+      req = build_request(:update_routing_profile_agent_availability_timer, params)
+      req.send_request(options)
+    end
+
     # Updates the channels that agents can handle in the Contact Control
     # Panel (CCP) for a routing profile.
     #
@@ -12766,7 +12813,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.122.0'
+      context[:gem_version] = '1.123.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

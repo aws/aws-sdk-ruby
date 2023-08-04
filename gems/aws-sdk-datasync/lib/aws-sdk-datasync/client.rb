@@ -1256,67 +1256,53 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Creates an endpoint for an Network File System (NFS) file server that
+    # Creates an endpoint for a Network File System (NFS) file server that
     # DataSync can use for a data transfer.
     #
+    # For more information, see [Configuring transfers to or from an NFS
+    # file server][1].
+    #
+    # <note markdown="1"> If you're copying data to or from an Snowcone device, you can also
+    # use `CreateLocationNfs` to create your transfer location. For more
+    # information, see [Configuring transfers with Snowcone][2].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html
+    # [2]: https://docs.aws.amazon.com/datasync/latest/userguide/nfs-on-snowcone.html
+    #
     # @option params [required, String] :subdirectory
-    #   Specifies the subdirectory in the NFS file server that DataSync
-    #   transfers to or from. The NFS path should be a path that's exported
-    #   by the NFS server, or a subdirectory of that path. The path should be
-    #   such that it can be mounted by other NFS clients in your network.
+    #   Specifies the export path in your NFS file server that you want
+    #   DataSync to mount.
     #
-    #   To see all the paths exported by your NFS server, run "`showmount -e
-    #   nfs-server-name`" from an NFS client that has access to your server.
-    #   You can specify any directory that appears in the results, and any
-    #   subdirectory of that directory. Ensure that the NFS export is
-    #   accessible without Kerberos authentication.
-    #
-    #   To transfer all the data in the folder you specified, DataSync needs
-    #   to have permissions to read all the data. To ensure this, either
-    #   configure the NFS export with `no_root_squash,` or ensure that the
-    #   permissions for all of the files that you want DataSync allow read
-    #   access for all users. Doing either enables the agent to read the
-    #   files. For the agent to access directories, you must additionally
-    #   enable all execute access.
-    #
-    #   If you are copying data to or from your Snowcone device, see [NFS
-    #   Server on Snowcone][1] for more information.
+    #   This path (or a subdirectory of the path) is where DataSync transfers
+    #   data to or from. For information on configuring an export for
+    #   DataSync, see [Accessing NFS file servers][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#accessing-nfs
     #
     # @option params [required, String] :server_hostname
-    #   Specifies the IP address or domain name of your NFS file server. An
-    #   agent that is installed on-premises uses this hostname to mount the
-    #   NFS server in a network.
-    #
-    #   If you are copying data to or from your Snowcone device, see [NFS
-    #   Server on Snowcone][1] for more information.
-    #
-    #   <note markdown="1"> You must specify be an IP version 4 address or Domain Name System
-    #   (DNS)-compliant name.
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone
+    #   Specifies the Domain Name System (DNS) name or IP version 4 address of
+    #   the NFS file server that your DataSync agent connects to.
     #
     # @option params [required, Types::OnPremConfig] :on_prem_config
-    #   Specifies the Amazon Resource Names (ARNs) of agents that DataSync
-    #   uses to connect to your NFS file server.
+    #   Specifies the Amazon Resource Name (ARN) of the DataSync agent that
+    #   want to connect to your NFS file server.
     #
-    #   If you are copying data to or from your Snowcone device, see [NFS
-    #   Server on Snowcone][1] for more information.
+    #   You can specify more than one agent. For more information, see [Using
+    #   multiple agents for transfers][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/multiple-agents.html
     #
     # @option params [Types::NfsMountOptions] :mount_options
-    #   Specifies the mount options that DataSync can use to mount your NFS
-    #   share.
+    #   Specifies the options that DataSync can use to mount your NFS file
+    #   server.
     #
     # @option params [Array<Types::TagListEntry>] :tags
     #   Specifies labels that help you categorize, filter, and search for your
@@ -2300,10 +2286,12 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Returns metadata, such as the path information, about an NFS location.
+    # Provides details about how an DataSync transfer location for a Network
+    # File System (NFS) file server is configured.
     #
     # @option params [required, String] :location_arn
-    #   The Amazon Resource Name (ARN) of the NFS location to describe.
+    #   Specifies the Amazon Resource Name (ARN) of the NFS location that you
+    #   want information about.
     #
     # @return [Types::DescribeLocationNfsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2585,6 +2573,7 @@ module Aws::DataSync
     #   resp.metrics[0].capacity.used #=> Integer
     #   resp.metrics[0].capacity.provisioned #=> Integer
     #   resp.metrics[0].capacity.logical_used #=> Integer
+    #   resp.metrics[0].capacity.cluster_cloud_storage_used #=> Integer
     #   resp.metrics[0].resource_id #=> String
     #   resp.metrics[0].resource_type #=> String, one of "SVM", "VOLUME", "CLUSTER"
     #   resp.next_token #=> String
@@ -2735,6 +2724,7 @@ module Aws::DataSync
     #   resp.resource_details.net_app_ontap_clusters[0].recommendations[0].estimated_monthly_storage_cost #=> String
     #   resp.resource_details.net_app_ontap_clusters[0].recommendation_status #=> String, one of "NONE", "IN_PROGRESS", "COMPLETED", "FAILED"
     #   resp.resource_details.net_app_ontap_clusters[0].lun_count #=> Integer
+    #   resp.resource_details.net_app_ontap_clusters[0].cluster_cloud_storage_used #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeStorageSystemResources AWS API Documentation
@@ -3820,49 +3810,35 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Updates some of the parameters of a previously created location for
-    # Network File System (NFS) access. For information about creating an
-    # NFS location, see [Creating a location for NFS][1].
+    # Modifies some configurations of the Network File System (NFS) transfer
+    # location that you're using with DataSync.
+    #
+    # For more information, see [Configuring transfers to or from an NFS
+    # file server][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html
     #
     # @option params [required, String] :location_arn
-    #   Specifies the Amazon Resource Name (ARN) of the NFS location that you
-    #   want to update.
+    #   Specifies the Amazon Resource Name (ARN) of the NFS transfer location
+    #   that you want to update.
     #
     # @option params [String] :subdirectory
-    #   Specifies the subdirectory in your NFS file system that DataSync uses
-    #   to read from or write to during a transfer. The NFS path should be
-    #   exported by the NFS server, or a subdirectory of that path. The path
-    #   should be such that it can be mounted by other NFS clients in your
-    #   network.
+    #   Specifies the export path in your NFS file server that you want
+    #   DataSync to mount.
     #
-    #   To see all the paths exported by your NFS server, run "`showmount -e
-    #   nfs-server-name`" from an NFS client that has access to your server.
-    #   You can specify any directory that appears in the results, and any
-    #   subdirectory of that directory. Ensure that the NFS export is
-    #   accessible without Kerberos authentication.
-    #
-    #   To transfer all the data in the folder that you specified, DataSync
-    #   must have permissions to read all the data. To ensure this, either
-    #   configure the NFS export with `no_root_squash`, or ensure that the
-    #   files you want DataSync to access have permissions that allow read
-    #   access for all users. Doing either option enables the agent to read
-    #   the files. For the agent to access directories, you must additionally
-    #   enable all execute access.
-    #
-    #   If you are copying data to or from your Snowcone device, see [NFS
-    #   Server on Snowcone][1] for more information.
+    #   This path (or a subdirectory of the path) is where DataSync transfers
+    #   data to or from. For information on configuring an export for
+    #   DataSync, see [Accessing NFS file servers][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#accessing-nfs
     #
     # @option params [Types::OnPremConfig] :on_prem_config
-    #   A list of Amazon Resource Names (ARNs) of agents to use for a Network
-    #   File System (NFS) location.
+    #   The DataSync agents that are connecting to a Network File System (NFS)
+    #   location.
     #
     # @option params [Types::NfsMountOptions] :mount_options
     #   Specifies how DataSync can access a location using the NFS protocol.
@@ -4274,7 +4250,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

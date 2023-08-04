@@ -1994,6 +1994,12 @@ module Aws::Connect
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] agent_availability_timer
+    #   Whether agents with this routing profile will have their routing
+    #   order calculated based on *time since their last inbound contact* or
+    #   *longest idle time*.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateRoutingProfileRequest AWS API Documentation
     #
     class CreateRoutingProfileRequest < Struct.new(
@@ -2003,7 +2009,8 @@ module Aws::Connect
       :default_outbound_queue_id,
       :queue_configs,
       :media_concurrencies,
-      :tags)
+      :tags,
+      :agent_availability_timer)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11042,6 +11049,12 @@ module Aws::Connect
     #   The number of associated users in routing profile.
     #   @return [Integer]
     #
+    # @!attribute [rw] agent_availability_timer
+    #   Whether agents with this routing profile will have their routing
+    #   order calculated based on *time since their last inbound contact* or
+    #   *longest idle time*.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfile AWS API Documentation
     #
     class RoutingProfile < Struct.new(
@@ -11054,7 +11067,8 @@ module Aws::Connect
       :default_outbound_queue_id,
       :tags,
       :number_of_associated_queues,
-      :number_of_associated_users)
+      :number_of_associated_users,
+      :agent_availability_timer)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14660,6 +14674,35 @@ module Aws::Connect
       :quick_connect_id,
       :name,
       :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_id
+    #   The identifier of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_availability_timer
+    #   Whether agents with this routing profile will have their routing
+    #   order calculated based on *time since their last inbound contact* or
+    #   *longest idle time*.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateRoutingProfileAgentAvailabilityTimerRequest AWS API Documentation
+    #
+    class UpdateRoutingProfileAgentAvailabilityTimerRequest < Struct.new(
+      :instance_id,
+      :routing_profile_id,
+      :agent_availability_timer)
       SENSITIVE = []
       include Aws::Structure
     end

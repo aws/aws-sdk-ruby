@@ -418,6 +418,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::UpdateQuickConnectConfig.build(context)
           when :update_quick_connect_name
             Aws::Connect::Endpoints::UpdateQuickConnectName.build(context)
+          when :update_routing_profile_agent_availability_timer
+            Aws::Connect::Endpoints::UpdateRoutingProfileAgentAvailabilityTimer.build(context)
           when :update_routing_profile_concurrency
             Aws::Connect::Endpoints::UpdateRoutingProfileConcurrency.build(context)
           when :update_routing_profile_default_outbound_queue
