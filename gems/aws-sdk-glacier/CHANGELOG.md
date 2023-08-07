@@ -1,13 +1,15 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix `complete_multipart_upload` to calculate a Tree Hash checksum. (#2890)
+
 1.54.0 (2023-07-11)
 ------------------
 
 * Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
 
 1.53.0 (2023-07-06)
-------------------
+------------------  
 
 * Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
 
