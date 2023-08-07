@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix inconsistent behavior of `stub_responses` when `simple_attributes` is disabled.
+
 1.93.0 (2023-07-25)
 ------------------
 
