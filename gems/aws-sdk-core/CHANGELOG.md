@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.180.2 (2023-08-07)
+------------------
+
 * Issue - Fix parsing of ini files with mixes of blank properties and nested configurations.
 
 3.180.1 (2023-07-31)

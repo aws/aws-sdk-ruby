@@ -414,8 +414,8 @@ module Aws::KinesisVideoArchivedMedia
     # the GetClip.OutgoingBytes Amazon CloudWatch metric. For information
     # about using CloudWatch to monitor Kinesis Video Streams, see
     # Monitoring Kinesis Video Streams. For pricing information, see Amazon
-    # Kinesis Video Streams Pricing and AWS Pricing. Charges for outgoing
-    # AWS data apply.
+    # Kinesis Video Streams Pricing and  Amazon Web Services Pricing.
+    # Charges for outgoing Amazon Web Services data apply.
     # `
     #
     # @option params [String] :stream_name
@@ -511,7 +511,7 @@ module Aws::KinesisVideoArchivedMedia
     #     <note markdown="1"> Don't share or store this token where an unauthorized entity can
     #     access it. The token provides access to the content of the stream.
     #     Safeguard the token with the same measures that you use with your
-    #     AWS credentials.
+    #     Amazon Web Services credentials.
     #
     #      </note>
     #
@@ -574,9 +574,9 @@ module Aws::KinesisVideoArchivedMedia
     # monitoring the `GetMP4MediaFragment.OutgoingBytes` Amazon CloudWatch
     # metric. For information about using CloudWatch to monitor Kinesis
     # Video Streams, see [Monitoring Kinesis Video Streams][8]. For pricing
-    # information, see [Amazon Kinesis Video Streams Pricing][6] and [AWS
-    # Pricing][9]. Charges for both HLS sessions and outgoing AWS data
-    # apply.
+    # information, see [Amazon Kinesis Video Streams Pricing][6] and [Amazon
+    # Web Services Pricing][9]. Charges for both HLS sessions and outgoing
+    # Amazon Web Services data apply.
     #
     # For more information about HLS, see [HTTP Live Streaming][10] on the
     # [Apple Developer site][11].
@@ -589,8 +589,8 @@ module Aws::KinesisVideoArchivedMedia
     #   in addition to what the HTTP status code provides.
     #
     # * `x-amz-RequestId` HTTP header – if you want to report an issue to
-    #   AWS, the support team can better diagnose the problem if given the
-    #   Request Id.
+    #   Amazon Web Services the support team can better diagnose the problem
+    #   if given the Request Id.
     #
     #  Both the HTTP status code and the ErrorType header can be utilized to
     # make programmatic decisions about whether errors are retry-able and
@@ -806,10 +806,12 @@ module Aws::KinesisVideoArchivedMedia
     # An Amazon Kinesis video stream has the following requirements for
     # providing data through HLS:
     #
-    # * The media must contain h.264 or h.265 encoded video and, optionally,
-    #   AAC encoded audio. Specifically, the codec ID of track 1 should be
-    #   `V_MPEG/ISO/AVC` (for h.264) or `V_MPEG/ISO/HEVC` (for h.265).
-    #   Optionally, the codec ID of track 2 should be `A_AAC`.
+    # * For streaming video, the media must contain H.264 or H.265 encoded
+    #   video and, optionally, AAC encoded audio. Specifically, the codec ID
+    #   of track 1 should be `V_MPEG/ISO/AVC` (for H.264) or
+    #   `V_MPEG/ISO/HEVC` (for H.265). Optionally, the codec ID of track 2
+    #   should be `A_AAC`. For audio only streaming, the codec ID of track 1
+    #   should be `A_AAC`.
     #
     # * Data retention must be greater than 0.
     #
@@ -845,7 +847,7 @@ module Aws::KinesisVideoArchivedMedia
     #     <note markdown="1"> Don't share or store this token where an unauthorized entity
     #     could access it. The token provides access to the content of the
     #     stream. Safeguard the token with the same measures that you would
-    #     use with your AWS credentials.
+    #     use with your Amazon Web Services credentials.
     #
     #      </note>
     #
@@ -901,18 +903,23 @@ module Aws::KinesisVideoArchivedMedia
     #       their child atoms, containing the encoded fragment's media
     #       frames and their timestamps.
     #
-    #       <note markdown="1"> After the first media fragment is made available in a streaming
-    #       session, any fragments that don't contain the same codec
-    #       private data cause an error to be returned when those different
-    #       media fragments are loaded. Therefore, the codec private data
-    #       should not change between fragments in a session. This also
-    #       means that the session fails if the fragments in a stream change
-    #       from having only video to having both audio and video.
+    #       <note markdown="1"> For the HLS streaming session, in-track codec private data (CPD)
+    #       changes are supported. After the first media fragment is made
+    #       available in a streaming session, fragments can contain CPD
+    #       changes for each track. Therefore, the fragments in a session
+    #       can have a different resolution, bit rate, or other information
+    #       in the CPD without interrupting playback. However, any change
+    #       made in the track number or track codec format can return an
+    #       error when those different media fragments are loaded. For
+    #       example, streaming will fail if the fragments in the stream
+    #       change from having only video to having both audio and video, or
+    #       if an AAC audio track is changed to an ALAW audio track. For
+    #       each streaming session, only 500 CPD changes are allowed.
     #
     #        </note>
     #
-    #       Data retrieved with this action is billable. See [Pricing][6]
-    #       for details.
+    #       Data retrieved with this action is billable. For information,
+    #       see [Pricing][6].
     #
     #     * **GetTSFragment:** Retrieves MPEG TS fragments containing both
     #       initialization and media data for all tracks in the stream.
@@ -934,9 +941,9 @@ module Aws::KinesisVideoArchivedMedia
     # monitoring the `GetMP4MediaFragment.OutgoingBytes` Amazon CloudWatch
     # metric. For information about using CloudWatch to monitor Kinesis
     # Video Streams, see [Monitoring Kinesis Video Streams][8]. For pricing
-    # information, see [Amazon Kinesis Video Streams Pricing][6] and [AWS
-    # Pricing][9]. Charges for both HLS sessions and outgoing AWS data
-    # apply.
+    # information, see [Amazon Kinesis Video Streams Pricing][6] and [Amazon
+    # Web Services Pricing][9]. Charges for both HLS sessions and outgoing
+    # Amazon Web Services data apply.
     #
     # For more information about HLS, see [HTTP Live Streaming][10] on the
     # [Apple Developer site][11].
@@ -949,8 +956,8 @@ module Aws::KinesisVideoArchivedMedia
     #   in addition to what the HTTP status code provides.
     #
     # * `x-amz-RequestId` HTTP header – if you want to report an issue to
-    #   AWS, the support team can better diagnose the problem if given the
-    #   Request Id.
+    #   Amazon Web Services, the support team can better diagnose the
+    #   problem if given the Request Id.
     #
     #  Both the HTTP status code and the ErrorType header can be utilized to
     # make programmatic decisions about whether errors are retry-able and
@@ -1214,16 +1221,19 @@ module Aws::KinesisVideoArchivedMedia
     #   an image to be returned.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_timestamp
-    #   The end timestamp for the range of images to be generated.
+    #   The end timestamp for the range of images to be generated. If the time
+    #   range between `StartTimestamp` and `EndTimestamp` is more than 300
+    #   seconds above `StartTimestamp`, you will receive an
+    #   `IllegalArgumentException`.
     #
-    # @option params [required, Integer] :sampling_interval
+    # @option params [Integer] :sampling_interval
     #   The time interval in milliseconds (ms) at which the images need to be
-    #   generated from the stream. The minimum value that can be provided is
-    #   3000 ms. If the timestamp range is less than the sampling interval,
-    #   the Image from the `startTimestamp` will be returned if available.
+    #   generated from the stream, with a default of 3000 ms. The minimum
+    #   value that can be provided is 200 ms. If the timestamp range is less
+    #   than the sampling interval, the Image from the `startTimestamp` will
+    #   be returned if available.
     #
-    #   <note markdown="1"> The minimum value of 3000 ms is a soft limit. If needed, a lower
-    #   sampling frequency can be requested.
+    #   <note markdown="1"> The minimum value of 200 ms is a hard limit.
     #
     #    </note>
     #
@@ -1262,8 +1272,9 @@ module Aws::KinesisVideoArchivedMedia
     # @option params [Integer] :max_results
     #   The maximum number of images to be returned by the API.
     #
-    #   <note markdown="1"> The default limit is 100 images per API response. The additional
-    #   results will be paginated.
+    #   <note markdown="1"> The default limit is 25 images per API response. Providing a
+    #   `MaxResults` greater than this value will result in a page size of 25.
+    #   Any additional results will be paginated.
     #
     #    </note>
     #
@@ -1287,7 +1298,7 @@ module Aws::KinesisVideoArchivedMedia
     #     image_selector_type: "PRODUCER_TIMESTAMP", # required, accepts PRODUCER_TIMESTAMP, SERVER_TIMESTAMP
     #     start_timestamp: Time.now, # required
     #     end_timestamp: Time.now, # required
-    #     sampling_interval: 1, # required
+    #     sampling_interval: 1,
     #     format: "JPEG", # required, accepts JPEG, PNG
     #     format_config: {
     #       "JPEGQuality" => "FormatConfigValue",
@@ -1334,8 +1345,8 @@ module Aws::KinesisVideoArchivedMedia
     #   in addition to what the HTTP status code provides.
     #
     # * `x-amz-RequestId` HTTP header – if you want to report an issue to
-    #   AWS, the support team can better diagnose the problem if given the
-    #   Request Id.
+    #   Amazon Web Services, the support team can better diagnose the
+    #   problem if given the Request Id.
     #
     #  Both the HTTP status code and the ErrorType header can be utilized to
     # make programmatic decisions about whether errors are retry-able and
@@ -1416,8 +1427,8 @@ module Aws::KinesisVideoArchivedMedia
     #   in addition to what the HTTP status code provides.
     #
     # * `x-amz-RequestId` HTTP header – if you want to report an issue to
-    #   AWS, the support team can better diagnose the problem if given the
-    #   Request Id.
+    #   Amazon Web Services, the support team can better diagnose the
+    #   problem if given the Request Id.
     #
     #  Both the HTTP status code and the ErrorType header can be utilized to
     # make programmatic decisions about whether errors are retry-able and
@@ -1512,7 +1523,7 @@ module Aws::KinesisVideoArchivedMedia
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisvideoarchivedmedia'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

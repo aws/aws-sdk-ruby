@@ -731,7 +731,7 @@ module Aws::IVSRealTime
     # @example Response structure
     #
     #   resp.events #=> Array
-    #   resp.events[0].error_code #=> String, one of "INSUFFICIENT_CAPABILITIES"
+    #   resp.events[0].error_code #=> String, one of "INSUFFICIENT_CAPABILITIES", "QUOTA_EXCEEDED", "PUBLISHER_NOT_FOUND"
     #   resp.events[0].event_time #=> Time
     #   resp.events[0].name #=> String, one of "JOINED", "LEFT", "PUBLISH_STARTED", "PUBLISH_STOPPED", "SUBSCRIBE_STARTED", "SUBSCRIBE_STOPPED", "PUBLISH_ERROR", "SUBSCRIBE_ERROR", "JOIN_ERROR"
     #   resp.events[0].participant_id #=> String
@@ -1052,7 +1052,7 @@ module Aws::IVSRealTime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivsrealtime'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

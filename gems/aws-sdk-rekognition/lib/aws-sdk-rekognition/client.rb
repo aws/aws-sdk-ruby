@@ -857,8 +857,7 @@ module Aws::Rekognition
     #
     # @example Example: CopyProjectVersion
     #
-    #   # This operation copies a version of an Amazon Rekognition Custom Labels model from a source project to a destination
-    #   # project.
+    #   # Copies a version of an Amazon Rekognition Custom Labels model from a source project to a destination project.
     #
     #   resp = client.copy_project_version({
     #     destination_project_arn: "arn:aws:rekognition:us-east-1:555555555555:project/DestinationProject/1656705098765", 
@@ -982,9 +981,9 @@ module Aws::Rekognition
     # a dataset by using an Amazon Sagemaker format manifest file or by
     # copying an existing Amazon Rekognition Custom Labels dataset.
     #
-    # To create a training dataset for a project, specify `train` for the
+    # To create a training dataset for a project, specify `TRAIN` for the
     # value of `DatasetType`. To create the test dataset for a project,
-    # specify `test` for the value of `DatasetType`.
+    # specify `TEST` for the value of `DatasetType`.
     #
     # The response from `CreateDataset` is the Amazon Resource Name (ARN)
     # for the dataset. Creating a dataset takes a while to complete. Use
@@ -1014,8 +1013,8 @@ module Aws::Rekognition
     #   can use the console or call UpdateDatasetEntries.
     #
     # @option params [required, String] :dataset_type
-    #   The type of the dataset. Specify `train` to create a training dataset.
-    #   Specify `test` to create a test dataset.
+    #   The type of the dataset. Specify `TRAIN` to create a training dataset.
+    #   Specify `TEST` to create a test dataset.
     #
     # @option params [required, String] :project_arn
     #   The ARN of the Amazon Rekognition Custom Labels project to which you
@@ -1024,6 +1023,29 @@ module Aws::Rekognition
     # @return [Types::CreateDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDatasetResponse#dataset_arn #dataset_arn} => String
+    #
+    #
+    # @example Example: To create an Amazon Rekognition Custom Labels dataset
+    #
+    #   # Creates an Amazon Rekognition Custom Labels dataset with a manifest file stored in an Amazon S3 bucket.
+    #
+    #   resp = client.create_dataset({
+    #     dataset_source: {
+    #       ground_truth_manifest: {
+    #         s3_object: {
+    #           bucket: "my-bucket", 
+    #           name: "datasets/flowers_training/manifests/output/output.manifest", 
+    #         }, 
+    #       }, 
+    #     }, 
+    #     dataset_type: "TRAIN", 
+    #     project_arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-project/1690474772815", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     dataset_arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-project/dataset/train/1690476084535", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1055,13 +1077,17 @@ module Aws::Rekognition
 
     # This API operation initiates a Face Liveness session. It returns a
     # `SessionId`, which you can use to start streaming Face Liveness video
-    # and get the results for a Face Liveness session. You can use the
-    # `OutputConfig` option in the Settings parameter to provide an Amazon
-    # S3 bucket location. The Amazon S3 bucket stores reference images and
-    # audit images. You can use `AuditImagesLimit` to limit the number of
-    # audit images returned. This number is between 0 and 4. By default, it
-    # is set to 0. The limit is best effort and based on the duration of the
-    # selfie-video.
+    # and get the results for a Face Liveness session.
+    #
+    # You can use the `OutputConfig` option in the Settings parameter to
+    # provide an Amazon S3 bucket location. The Amazon S3 bucket stores
+    # reference images and audit images. If no Amazon S3 bucket is defined,
+    # raw bytes are sent instead.
+    #
+    # You can use `AuditImagesLimit` to limit the number of audit images
+    # returned when `GetFaceLivenessSessionResults` is called. This number
+    # is between 0 and 4. By default, it is set to 0. The limit is best
+    # effort and based on the duration of the selfie-video.
     #
     # @option params [String] :kms_key_id
     #   The identifier for your AWS Key Management Service key (AWS KMS key).
@@ -1120,6 +1146,20 @@ module Aws::Rekognition
     # @return [Types::CreateProjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateProjectResponse#project_arn #project_arn} => String
+    #
+    #
+    # @example Example: To create an Amazon Rekognition Custom Labels project
+    #
+    #   # Creates an Amazon Rekognition Custom Labels project.
+    #
+    #   resp = client.create_project({
+    #     project_name: "my-project", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     project_arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-project/1690405809285", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1231,6 +1271,25 @@ module Aws::Rekognition
     # @return [Types::CreateProjectVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateProjectVersionResponse#project_version_arn #project_version_arn} => String
+    #
+    #
+    # @example Example: To train an Amazon Rekognition Custom Labels model
+    #
+    #   # Trains a version of an Amazon Rekognition Custom Labels model.
+    #
+    #   resp = client.create_project_version({
+    #     output_config: {
+    #       s3_bucket: "output_bucket", 
+    #       s3_key_prefix: "output_folder", 
+    #     }, 
+    #     project_arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-project/1690474772815", 
+    #     version_name: "1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     project_version_arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-project/version/1/1690556751958", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1596,6 +1655,19 @@ module Aws::Rekognition
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete an Amazon Rekognition Custom Labels dataset
+    #
+    #   # Deletes an Amazon Rekognition Custom Labels dataset.
+    #
+    #   resp = client.delete_dataset({
+    #     dataset_arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-project/dataset/test/1690556733321", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_dataset({
@@ -1689,6 +1761,20 @@ module Aws::Rekognition
     #
     #   * {Types::DeleteProjectResponse#status #status} => String
     #
+    #
+    # @example Example: To delete an Amazon Rekognition Custom Labels project
+    #
+    #   # Deletes an Amazon Rekognition Custom Labels projects.
+    #
+    #   resp = client.delete_project({
+    #     project_arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-project/1690405809285", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     status: "DELETING", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_project({
@@ -1774,6 +1860,20 @@ module Aws::Rekognition
     # @return [Types::DeleteProjectVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteProjectVersionResponse#status #status} => String
+    #
+    #
+    # @example Example: To delete an Amazon Rekognition Custom Labels model
+    #
+    #   # Deletes a version of an Amazon Rekognition Custom Labels model.
+    #
+    #   resp = client.delete_project_version({
+    #     project_version_arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-project/version/1/1690556751958", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     status: "DELETING", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1922,6 +2022,32 @@ module Aws::Rekognition
     #
     #   * {Types::DescribeDatasetResponse#dataset_description #dataset_description} => Types::DatasetDescription
     #
+    #
+    # @example Example: To describe an Amazon Rekognition Custom Labels dataset
+    #
+    #   # Describes an Amazon Rekognition Custom Labels dataset.
+    #
+    #   resp = client.describe_dataset({
+    #     dataset_arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-project/dataset/train/1690476084535", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     dataset_description: {
+    #       creation_timestamp: Time.parse("2023-07-27T09:41:24.738000-07:00"), 
+    #       dataset_stats: {
+    #         error_entries: 0, 
+    #         labeled_entries: 15, 
+    #         total_entries: 15, 
+    #         total_labels: 9, 
+    #       }, 
+    #       last_updated_timestamp: Time.parse("2023-07-28T09:46:45.406000-07:00"), 
+    #       status: "UPDATE_FAILED", 
+    #       status_message: "The manifest file contains images from multiple S3 buckets.", 
+    #       status_message_code: "CLIENT_ERROR", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_dataset({
@@ -1986,6 +2112,110 @@ module Aws::Rekognition
     #   * {Types::DescribeProjectVersionsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To describe an Amazon Rekognition Custom Labels model
+    #
+    #   # Describes a version of an Amazon Rekognition Custom Labels model.
+    #
+    #   resp = client.describe_project_versions({
+    #     project_arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-project/1690474772815", 
+    #     version_names: [
+    #       "1", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "", 
+    #     project_version_descriptions: [
+    #       {
+    #         billable_training_time_in_seconds: 1899, 
+    #         creation_timestamp: Time.parse("2023-07-28T08:05:51.958000-07:00"), 
+    #         evaluation_result: {
+    #           f1_score: 1, 
+    #           summary: {
+    #             s3_object: {
+    #               bucket: "custom-labels-console-us-east-1-111111111", 
+    #               name: "my-model-output/EvaluationResultSummary-my-project-1.json", 
+    #             }, 
+    #           }, 
+    #         }, 
+    #         manifest_summary: {
+    #           s3_object: {
+    #             bucket: "custom-labels-console-us-east-1-111111111", 
+    #             name: "my-model-output/ManifestSummary-my-project-1.json", 
+    #           }, 
+    #         }, 
+    #         output_config: {
+    #           s3_bucket: "custom-labels-console-us-east-1-111111111", 
+    #           s3_key_prefix: "my-model-output", 
+    #         }, 
+    #         project_version_arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-project/version/1/1690556751958", 
+    #         status: "TRAINING_COMPLETED", 
+    #         status_message: "The model is ready to run.", 
+    #         testing_data_result: {
+    #           input: {
+    #             auto_create: false, 
+    #           }, 
+    #           output: {
+    #             assets: [
+    #               {
+    #                 ground_truth_manifest: {
+    #                   s3_object: {
+    #                     bucket: "custom-labels-console-us-east-1-111111111", 
+    #                     name: "my-model-output/TestingGroundTruth-my-project-1.json", 
+    #                   }, 
+    #                 }, 
+    #               }, 
+    #             ], 
+    #             auto_create: false, 
+    #           }, 
+    #           validation: {
+    #             assets: [
+    #               {
+    #                 ground_truth_manifest: {
+    #                   s3_object: {
+    #                     bucket: "custom-labels-console-us-east-1-111111111", 
+    #                     name: "my-model-output/TestingManifestWithValidation-my-project-1.json", 
+    #                   }, 
+    #                 }, 
+    #               }, 
+    #             ], 
+    #           }, 
+    #         }, 
+    #         training_data_result: {
+    #           input: {
+    #           }, 
+    #           output: {
+    #             assets: [
+    #               {
+    #                 ground_truth_manifest: {
+    #                   s3_object: {
+    #                     bucket: "custom-labels-console-us-east-1-111111111", 
+    #                     name: "my-model-output/TrainingGroundTruth-my-project-1.json", 
+    #                   }, 
+    #                 }, 
+    #               }, 
+    #             ], 
+    #           }, 
+    #           validation: {
+    #             assets: [
+    #               {
+    #                 ground_truth_manifest: {
+    #                   s3_object: {
+    #                     bucket: "custom-labels-console-us-east-1-111111111", 
+    #                     name: "my-model-output/TrainingManifestWithValidation-my-project-1.json", 
+    #                   }, 
+    #                 }, 
+    #               }, 
+    #             ], 
+    #           }, 
+    #         }, 
+    #         training_end_timestamp: Time.parse("2023-07-28T08:33:10.827000-07:00"), 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2087,6 +2317,46 @@ module Aws::Rekognition
     #   * {Types::DescribeProjectsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To describe an Amazon Rekognition Custom Labels project.
+    #
+    #   # Describes an Amazon Rekognition Custom Labels projects.
+    #
+    #   resp = client.describe_projects({
+    #     project_names: [
+    #       "my-project", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     project_descriptions: [
+    #       {
+    #         creation_timestamp: Time.parse("2022-06-13T15:16:00.634000-07:00"), 
+    #         datasets: [
+    #           {
+    #             creation_timestamp: Time.parse("2022-06-13T15:17:34.620000-07:00"), 
+    #             dataset_arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-project/dataset/test/1655158654491", 
+    #             dataset_type: "TEST", 
+    #             status: "CREATE_COMPLETE", 
+    #             status_message: "The dataset was successfully created from the manifest file.", 
+    #             status_message_code: "SUCCESS", 
+    #           }, 
+    #           {
+    #             creation_timestamp: Time.parse("2022-06-13T15:17:50.118000-07:00"), 
+    #             dataset_arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-project/dataset/train/1655158669954", 
+    #             dataset_type: "TRAIN", 
+    #             status: "CREATE_COMPLETE", 
+    #             status_message: "The dataset was successfully created from the manifest file.", 
+    #             status_message_code: "SUCCESS", 
+    #           }, 
+    #         ], 
+    #         project_arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-project/1655158560634", 
+    #         status: "CREATED", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2282,6 +2552,37 @@ module Aws::Rekognition
     #
     #   * {Types::DetectCustomLabelsResponse#custom_labels #custom_labels} => Array&lt;Types::CustomLabel&gt;
     #
+    #
+    # @example Example: To detect custom labels in an image with an Amazon Rekognition Custom Labels model
+    #
+    #   # Detects custom labels in an image with an Amazon Rekognition Custom Labels model
+    #
+    #   resp = client.detect_custom_labels({
+    #     image: {
+    #       s3_object: {
+    #         bucket: "custom-labels-console-us-east-1-1111111111", 
+    #         name: "assets/flowers_1_test_dataset/camellia4.jpg", 
+    #       }, 
+    #     }, 
+    #     max_results: 100, 
+    #     min_confidence: 50, 
+    #     project_version_arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-project/version/my-project.2023-07-31T11.49.37/1690829378219", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     custom_labels: [
+    #       {
+    #         confidence: 67.56399536132812, 
+    #         name: "with_leaves", 
+    #       }, 
+    #       {
+    #         confidence: 50.65699768066406, 
+    #         name: "without_leaves", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.detect_custom_labels({
@@ -2366,6 +2667,10 @@ module Aws::Rekognition
     #   If you provide both, `["ALL", "DEFAULT"]`, the service uses a logical
     #   "AND" operator to determine which attributes to return (in this
     #   case, all attributes).
+    #
+    #   Note that while the FaceOccluded and EyeDirection attributes are
+    #   supported when using `DetectFaces`, they aren't supported when
+    #   analyzing videos with `StartFaceDetection` and `GetFaceDetection`.
     #
     # @return [Types::DetectFacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2533,10 +2838,11 @@ module Aws::Rekognition
     # and exclusive filters. For more information on filtering see
     # [Detecting Labels in an Image][1].
     #
-    # You can specify `MinConfidence` to control the confidence threshold
-    # for the labels returned. The default is 55%. You can also add the
-    # `MaxLabels` parameter to limit the number of labels returned. The
-    # default and upper limit is 1000 labels.
+    # When getting labels, you can specify `MinConfidence` to control the
+    # confidence threshold for the labels returned. The default is 55%. You
+    # can also add the `MaxLabels` parameter to limit the number of labels
+    # returned. The default and upper limit is 1000 labels. These arguments
+    # are only valid when supplying GENERAL\_LABELS as a feature type.
     #
     # **Response Elements**
     #
@@ -2639,7 +2945,8 @@ module Aws::Rekognition
     # @option params [Integer] :max_labels
     #   Maximum number of labels you want the service to return in the
     #   response. The service returns the specified number of highest
-    #   confidence labels.
+    #   confidence labels. Only valid when GENERAL\_LABELS is specified as a
+    #   feature type in the Feature input parameter.
     #
     # @option params [Float] :min_confidence
     #   Specifies the minimum confidence level for the labels to return.
@@ -2647,7 +2954,9 @@ module Aws::Rekognition
     #   than this specified value.
     #
     #   If `MinConfidence` is not specified, the operation returns labels with
-    #   a confidence values greater than or equal to 55 percent.
+    #   a confidence values greater than or equal to 55 percent. Only valid
+    #   when GENERAL\_LABELS is specified as a feature type in the Feature
+    #   input parameter.
     #
     # @option params [Array<String>] :features
     #   A list of the types of analysis to perform. Specifying GENERAL\_LABELS
@@ -3231,6 +3540,26 @@ module Aws::Rekognition
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To distribute an Amazon Rekognition Custom Labels dataset
+    #
+    #   # Distributes an Amazon Rekognition Custom Labels training dataset to a test dataset.
+    #
+    #   resp = client.distribute_dataset_entries({
+    #     datasets: [
+    #       {
+    #         arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-proj-2/dataset/train/1690564858106", 
+    #       }, 
+    #       {
+    #         arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-proj-2/dataset/test/1690564858106", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.distribute_dataset_entries({
@@ -3623,6 +3952,9 @@ module Aws::Rekognition
     # `GetFaceDetection` and populate the `NextToken` request parameter with
     # the token value returned from the previous call to `GetFaceDetection`.
     #
+    # Note that for the `GetFaceDetection` operation, the returned values
+    # for `FaceOccluded` and `EyeDirection` will always be "null".
+    #
     # @option params [required, String] :job_id
     #   Unique identifier for the face detection job. The `JobId` is returned
     #   from `StartFaceDetection`.
@@ -3732,8 +4064,12 @@ module Aws::Rekognition
     # `CreateFaceLivenessSession`. Returns the corresponding Face Liveness
     # confidence score, a reference image that includes a face bounding box,
     # and audit images that also contain face bounding boxes. The Face
-    # Liveness confidence score ranges from 0 to 100. The reference image
-    # can optionally be returned.
+    # Liveness confidence score ranges from 0 to 100.
+    #
+    # The number of audit images returned by `GetFaceLivenessSessionResults`
+    # is defined by the `AuditImagesLimit` paramater when calling
+    # `CreateFaceLivenessSession`. Reference images are always returned when
+    # possible.
     #
     # @option params [required, String] :session_id
     #   A unique 128-bit UUID. This is used to uniquely identify the session
@@ -4425,7 +4761,7 @@ module Aws::Rekognition
     # `StartLabelDetection`.
     #
     # `GetTextDetection` returns an array of detected text
-    # (`TextDetections`) sorted by the time the text was detected, up to 50
+    # (`TextDetections`) sorted by the time the text was detected, up to 100
     # words per frame of video.
     #
     # Each element of the array includes the detected text, the precentage
@@ -5090,6 +5426,31 @@ module Aws::Rekognition
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: To list the entries in an Amazon Rekognition Custom Labels dataset
+    #
+    #   # Lists the JSON line entries in an Amazon Rekognition Custom Labels dataset.
+    #
+    #   resp = client.list_dataset_entries({
+    #     contains_labels: [
+    #       "camellia", 
+    #     ], 
+    #     dataset_arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-proj-2/dataset/train/1690564858106", 
+    #     has_errors: true, 
+    #     labeled: true, 
+    #     max_results: 100, 
+    #     next_token: "", 
+    #     source_ref_contains: "camellia4.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     dataset_entries: [
+    #       "{\"source-ref\":\"s3://custom-labels-console-us-east-1-1111111111/assets/flowers_1_train_dataset/camellia4.jpg\",\"camellia\":1,\"camellia-metadata\":{\"confidence\":1,\"job-name\":\"labeling-job/camellia\",\"class-name\":\"camellia\",\"human-annotated\":\"yes\",\"creation-date\":\"2021-07-11T03:32:13.456Z\",\"type\":\"groundtruth/image-classification\"},\"with_leaves\":1,\"with_leaves-metadata\":{\"confidence\":1,\"job-name\":\"labeling-job/with_leaves\",\"class-name\":\"with_leaves\",\"human-annotated\":\"yes\",\"creation-date\":\"2021-07-11T03:32:13.456Z\",\"type\":\"groundtruth/image-classification\"},\"cl-metadata\":{\"is_labeled\":true}}", 
+    #     ], 
+    #     next_token: "", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_dataset_entries({
@@ -5149,6 +5510,41 @@ module Aws::Rekognition
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: To list the entries in an Amazon Rekognition Custom Labels dataset
+    #
+    #   # Lists the JSON line entries in an Amazon Rekognition Custom Labels dataset.
+    #
+    #   resp = client.list_dataset_labels({
+    #     dataset_arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-proj-2/dataset/train/1690564858106", 
+    #     max_results: 100, 
+    #     next_token: "", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     dataset_label_descriptions: [
+    #       {
+    #         label_name: "camellia", 
+    #         label_stats: {
+    #           entry_count: 1, 
+    #         }, 
+    #       }, 
+    #       {
+    #         label_name: "with_leaves", 
+    #         label_stats: {
+    #           entry_count: 2, 
+    #         }, 
+    #       }, 
+    #       {
+    #         label_name: "mediterranean_spurge", 
+    #         label_stats: {
+    #           entry_count: 1, 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_dataset_labels({
@@ -5194,10 +5590,12 @@ module Aws::Rekognition
     #   Maximum number of faces to return.
     #
     # @option params [String] :user_id
-    #   An array of user IDs to match when listing faces in a collection.
+    #   An array of user IDs to filter results with when listing faces in a
+    #   collection.
     #
     # @option params [Array<String>] :face_ids
-    #   An array of face IDs to match when listing faces in a collection.
+    #   An array of face IDs to filter results with when listing faces in a
+    #   collection.
     #
     # @return [Types::ListFacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6958,6 +7356,22 @@ module Aws::Rekognition
     #
     #   * {Types::StartProjectVersionResponse#status #status} => String
     #
+    #
+    # @example Example: To start an Amazon Rekognition Custom Labels model
+    #
+    #   # Starts a version of an Amazon Rekognition Custom Labels model.
+    #
+    #   resp = client.start_project_version({
+    #     max_inference_units: 1, 
+    #     min_inference_units: 1, 
+    #     project_version_arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-project/version/1/1690556751958", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     status: "STARTING", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_project_version({
@@ -7268,6 +7682,20 @@ module Aws::Rekognition
     #
     #   * {Types::StopProjectVersionResponse#status #status} => String
     #
+    #
+    # @example Example: To stop an Amazon Rekognition Custom Labels model.
+    #
+    #   # Stops a version of an Amazon Rekognition Custom Labels model.
+    #
+    #   resp = client.stop_project_version({
+    #     project_version_arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-project/version/1/1690556751958", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     status: "STOPPING", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.stop_project_version({
@@ -7410,6 +7838,22 @@ module Aws::Rekognition
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To-add dataset entries to an Amazon Rekognition Custom Labels dataset
+    #
+    #   # Adds dataset entries to an Amazon Rekognition Custom Labels dataset.
+    #
+    #   resp = client.update_dataset_entries({
+    #     changes: {
+    #       ground_truth: "{\"source-ref\":\"s3://custom-labels-console-us-east-1-111111111/assets/flowers_1_test_dataset/mediterranean_spurge4.jpg\",\"mediterranean_spurge\":1,\"mediterranean_spurge-metadata\":{\"confidence\":1,\"job-name\":\"labeling-job/mediterranean_spurge\",\"class-name\":\"mediterranean_spurge\",\"human-annotated\":\"yes\",\"creation-date\":\"2021-07-11T03:33:42.025Z\",\"type\":\"groundtruth/image-classification\"},\"with_leaves\":1,\"with_leaves-metadata\":{\"confidence\":1,\"job-name\":\"labeling-job/with_leaves\",\"class-name\":\"with_leaves\",\"human-annotated\":\"yes\",\"creation-date\":\"2021-07-11T03:33:42.025Z\",\"type\":\"groundtruth/image-classification\"}}", 
+    #     }, 
+    #     dataset_arn: "arn:aws:rekognition:us-east-1:111122223333:project/my-proj-2/dataset/train/1690564858106", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_dataset_entries({
@@ -7505,7 +7949,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
