@@ -8,6 +8,8 @@ module Aws
       def ini_parse(raw)
         current_profile = nil
         current_prefix = nil
+        item = nil
+        previous_item = nil
         raw.lines.inject({}) do |acc, line|
           line = line.split(/^|\s;/).first # remove comments
           profile = line.match(/^\[([^\[\]]+)\]\s*(#.+)?$/) unless line.nil?
@@ -17,11 +19,16 @@ module Aws
             current_profile = named_profile[1] if named_profile
           elsif current_profile
             unless line.nil?
-              item = line.match(/^(.+?)\s*=\s*([^\s].*?)\s*$/)
+              previous_item = item
+              item = line.match(/^(.+?)\s*=\s*(.+?)\s*$/)
               prefix = line.match(/^(.+?)\s*=\s*$/)
             end
             if item && item[1].match(/^\s+/)
               # Need to add lines to a nested configuration.
+              if current_prefix.nil? && previous_item[2].strip.empty?
+                current_prefix = previous_item[1]
+                acc[current_profile][current_prefix] = {}
+              end
               inner_item = line.match(/^\s*(.+?)\s*=\s*(.+?)\s*$/)
               acc[current_profile] ||= {}
               acc[current_profile][current_prefix] ||= {}
