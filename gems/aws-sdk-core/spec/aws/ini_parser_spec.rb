@@ -38,6 +38,8 @@ s3 =
 aws_session_token = 
 s3 = 
    region = ap-southeast-1
+   blank_sub_property = 
+
       FILE
     }
 
@@ -68,6 +70,7 @@ s3 =
     it 'can parse blank properties mixed with nested configurations with spaces' do
       expect(parsed['blank-property']['aws_session_token']).to eq(' ')
       expect(parsed['blank-property']['s3']['region']).to eq('ap-southeast-1')
+      expect(parsed['blank-property']['s3']['blank_sub_property']).to eq(' ')
     end
   end
 end
