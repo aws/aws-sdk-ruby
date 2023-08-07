@@ -1,7 +1,27 @@
 Unreleased Changes
 ------------------
 
-* Feature - Support `AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE` in `ECSCredentials` and allow for link-local http addresses.
+* Feature - Support `AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE` in `ECSCredentials` and allow for ECS and EKS link-local http addresses.
+
+3.180.2 (2023-08-07)
+------------------
+
+* Issue - Fix parsing of ini files with mixes of blank properties and nested configurations.
+
+3.180.1 (2023-07-31)
+------------------
+
+* Issue - Remove checksums from default stubs (#2888).
+
+3.180.0 (2023-07-25)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+3.179.0 (2023-07-24)
+------------------
+
+* Feature - Add `checksum_validated` method to response.
 
 3.178.0 (2023-07-11)
 ------------------

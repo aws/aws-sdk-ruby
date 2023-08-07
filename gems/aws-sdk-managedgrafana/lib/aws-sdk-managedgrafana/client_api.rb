@@ -53,6 +53,7 @@ module Aws::ManagedGrafana
     DisassociateLicenseResponse = Shapes::StructureShape.new(name: 'DisassociateLicenseResponse')
     Endpoint = Shapes::StringShape.new(name: 'Endpoint')
     GrafanaVersion = Shapes::StringShape.new(name: 'GrafanaVersion')
+    GrafanaVersionList = Shapes::ListShape.new(name: 'GrafanaVersionList')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     IdpMetadata = Shapes::UnionShape.new(name: 'IdpMetadata')
     IdpMetadataUrl = Shapes::StringShape.new(name: 'IdpMetadataUrl')
@@ -64,6 +65,9 @@ module Aws::ManagedGrafana
     ListPermissionsResponse = Shapes::StructureShape.new(name: 'ListPermissionsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListVersionsRequest = Shapes::StructureShape.new(name: 'ListVersionsRequest')
+    ListVersionsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListVersionsRequestMaxResultsInteger')
+    ListVersionsResponse = Shapes::StructureShape.new(name: 'ListVersionsResponse')
     ListWorkspacesRequest = Shapes::StructureShape.new(name: 'ListWorkspacesRequest')
     ListWorkspacesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListWorkspacesRequestMaxResultsInteger')
     ListWorkspacesResponse = Shapes::StructureShape.new(name: 'ListWorkspacesResponse')
@@ -237,6 +241,7 @@ module Aws::ManagedGrafana
     DescribeWorkspaceConfigurationRequest.struct_class = Types::DescribeWorkspaceConfigurationRequest
 
     DescribeWorkspaceConfigurationResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: OverridableConfigurationJson, required: true, location_name: "configuration", metadata: {"jsonvalue"=>true}))
+    DescribeWorkspaceConfigurationResponse.add_member(:grafana_version, Shapes::ShapeRef.new(shape: GrafanaVersion, location_name: "grafanaVersion"))
     DescribeWorkspaceConfigurationResponse.struct_class = Types::DescribeWorkspaceConfigurationResponse
 
     DescribeWorkspaceRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
@@ -251,6 +256,8 @@ module Aws::ManagedGrafana
 
     DisassociateLicenseResponse.add_member(:workspace, Shapes::ShapeRef.new(shape: WorkspaceDescription, required: true, location_name: "workspace"))
     DisassociateLicenseResponse.struct_class = Types::DisassociateLicenseResponse
+
+    GrafanaVersionList.member = Shapes::ShapeRef.new(shape: GrafanaVersion)
 
     IdpMetadata.add_member(:url, Shapes::ShapeRef.new(shape: IdpMetadataUrl, location_name: "url"))
     IdpMetadata.add_member(:xml, Shapes::ShapeRef.new(shape: String, location_name: "xml"))
@@ -281,6 +288,15 @@ module Aws::ManagedGrafana
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    ListVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListVersionsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListVersionsRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, location: "querystring", location_name: "workspace-id"))
+    ListVersionsRequest.struct_class = Types::ListVersionsRequest
+
+    ListVersionsResponse.add_member(:grafana_versions, Shapes::ShapeRef.new(shape: GrafanaVersionList, location_name: "grafanaVersions"))
+    ListVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListVersionsResponse.struct_class = Types::ListVersionsResponse
 
     ListWorkspacesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListWorkspacesRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListWorkspacesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
@@ -392,6 +408,7 @@ module Aws::ManagedGrafana
     UpdateWorkspaceAuthenticationResponse.struct_class = Types::UpdateWorkspaceAuthenticationResponse
 
     UpdateWorkspaceConfigurationRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: OverridableConfigurationJson, required: true, location_name: "configuration", metadata: {"jsonvalue"=>true}))
+    UpdateWorkspaceConfigurationRequest.add_member(:grafana_version, Shapes::ShapeRef.new(shape: GrafanaVersion, location_name: "grafanaVersion"))
     UpdateWorkspaceConfigurationRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
     UpdateWorkspaceConfigurationRequest.struct_class = Types::UpdateWorkspaceConfigurationRequest
 
@@ -650,6 +667,25 @@ module Aws::ManagedGrafana
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:list_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListVersions"
+        o.http_method = "GET"
+        o.http_request_uri = "/versions"
+        o.input = Shapes::ShapeRef.new(shape: ListVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_workspaces, Seahorse::Model::Operation.new.tap do |o|

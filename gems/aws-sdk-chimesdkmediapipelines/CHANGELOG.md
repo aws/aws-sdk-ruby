@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2023-07-24)
+------------------
+
+* Feature - AWS Media Pipeline compositing enhancement and Media Insights Pipeline auto language identification.
+
 1.10.0 (2023-07-11)
 ------------------
 

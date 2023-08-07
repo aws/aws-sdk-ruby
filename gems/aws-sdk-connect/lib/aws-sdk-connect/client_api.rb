@@ -21,6 +21,7 @@ module Aws::Connect
     ActivateEvaluationFormRequest = Shapes::StructureShape.new(name: 'ActivateEvaluationFormRequest')
     ActivateEvaluationFormResponse = Shapes::StructureShape.new(name: 'ActivateEvaluationFormResponse')
     AfterContactWorkTimeLimit = Shapes::IntegerShape.new(name: 'AfterContactWorkTimeLimit')
+    AgentAvailabilityTimer = Shapes::StringShape.new(name: 'AgentAvailabilityTimer')
     AgentContactReference = Shapes::StructureShape.new(name: 'AgentContactReference')
     AgentContactReferenceList = Shapes::ListShape.new(name: 'AgentContactReferenceList')
     AgentFirstName = Shapes::StringShape.new(name: 'AgentFirstName')
@@ -191,7 +192,9 @@ module Aws::Connect
     DeleteInstanceRequest = Shapes::StructureShape.new(name: 'DeleteInstanceRequest')
     DeleteIntegrationAssociationRequest = Shapes::StructureShape.new(name: 'DeleteIntegrationAssociationRequest')
     DeletePromptRequest = Shapes::StructureShape.new(name: 'DeletePromptRequest')
+    DeleteQueueRequest = Shapes::StructureShape.new(name: 'DeleteQueueRequest')
     DeleteQuickConnectRequest = Shapes::StructureShape.new(name: 'DeleteQuickConnectRequest')
+    DeleteRoutingProfileRequest = Shapes::StructureShape.new(name: 'DeleteRoutingProfileRequest')
     DeleteRuleRequest = Shapes::StructureShape.new(name: 'DeleteRuleRequest')
     DeleteSecurityProfileRequest = Shapes::StructureShape.new(name: 'DeleteSecurityProfileRequest')
     DeleteTaskTemplateRequest = Shapes::StructureShape.new(name: 'DeleteTaskTemplateRequest')
@@ -882,6 +885,7 @@ module Aws::Connect
     UpdateQuickConnectConfigRequest = Shapes::StructureShape.new(name: 'UpdateQuickConnectConfigRequest')
     UpdateQuickConnectDescription = Shapes::StringShape.new(name: 'UpdateQuickConnectDescription')
     UpdateQuickConnectNameRequest = Shapes::StructureShape.new(name: 'UpdateQuickConnectNameRequest')
+    UpdateRoutingProfileAgentAvailabilityTimerRequest = Shapes::StructureShape.new(name: 'UpdateRoutingProfileAgentAvailabilityTimerRequest')
     UpdateRoutingProfileConcurrencyRequest = Shapes::StructureShape.new(name: 'UpdateRoutingProfileConcurrencyRequest')
     UpdateRoutingProfileDefaultOutboundQueueRequest = Shapes::StructureShape.new(name: 'UpdateRoutingProfileDefaultOutboundQueueRequest')
     UpdateRoutingProfileNameRequest = Shapes::StructureShape.new(name: 'UpdateRoutingProfileNameRequest')
@@ -1341,6 +1345,7 @@ module Aws::Connect
     CreateRoutingProfileRequest.add_member(:queue_configs, Shapes::ShapeRef.new(shape: RoutingProfileQueueConfigList, location_name: "QueueConfigs"))
     CreateRoutingProfileRequest.add_member(:media_concurrencies, Shapes::ShapeRef.new(shape: MediaConcurrencies, required: true, location_name: "MediaConcurrencies"))
     CreateRoutingProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateRoutingProfileRequest.add_member(:agent_availability_timer, Shapes::ShapeRef.new(shape: AgentAvailabilityTimer, location_name: "AgentAvailabilityTimer"))
     CreateRoutingProfileRequest.struct_class = Types::CreateRoutingProfileRequest
 
     CreateRoutingProfileResponse.add_member(:routing_profile_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "RoutingProfileArn"))
@@ -1539,9 +1544,17 @@ module Aws::Connect
     DeletePromptRequest.add_member(:prompt_id, Shapes::ShapeRef.new(shape: PromptId, required: true, location: "uri", location_name: "PromptId"))
     DeletePromptRequest.struct_class = Types::DeletePromptRequest
 
+    DeleteQueueRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DeleteQueueRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "QueueId"))
+    DeleteQueueRequest.struct_class = Types::DeleteQueueRequest
+
     DeleteQuickConnectRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DeleteQuickConnectRequest.add_member(:quick_connect_id, Shapes::ShapeRef.new(shape: QuickConnectId, required: true, location: "uri", location_name: "QuickConnectId"))
     DeleteQuickConnectRequest.struct_class = Types::DeleteQuickConnectRequest
+
+    DeleteRoutingProfileRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DeleteRoutingProfileRequest.add_member(:routing_profile_id, Shapes::ShapeRef.new(shape: RoutingProfileId, required: true, location: "uri", location_name: "RoutingProfileId"))
+    DeleteRoutingProfileRequest.struct_class = Types::DeleteRoutingProfileRequest
 
     DeleteRuleRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DeleteRuleRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location: "uri", location_name: "RuleId"))
@@ -3051,6 +3064,7 @@ module Aws::Connect
     RoutingProfile.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     RoutingProfile.add_member(:number_of_associated_queues, Shapes::ShapeRef.new(shape: Long, location_name: "NumberOfAssociatedQueues"))
     RoutingProfile.add_member(:number_of_associated_users, Shapes::ShapeRef.new(shape: Long, location_name: "NumberOfAssociatedUsers"))
+    RoutingProfile.add_member(:agent_availability_timer, Shapes::ShapeRef.new(shape: AgentAvailabilityTimer, location_name: "AgentAvailabilityTimer"))
     RoutingProfile.struct_class = Types::RoutingProfile
 
     RoutingProfileList.member = Shapes::ShapeRef.new(shape: RoutingProfile)
@@ -3760,6 +3774,11 @@ module Aws::Connect
     UpdateQuickConnectNameRequest.add_member(:name, Shapes::ShapeRef.new(shape: QuickConnectName, location_name: "Name"))
     UpdateQuickConnectNameRequest.add_member(:description, Shapes::ShapeRef.new(shape: UpdateQuickConnectDescription, location_name: "Description"))
     UpdateQuickConnectNameRequest.struct_class = Types::UpdateQuickConnectNameRequest
+
+    UpdateRoutingProfileAgentAvailabilityTimerRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    UpdateRoutingProfileAgentAvailabilityTimerRequest.add_member(:routing_profile_id, Shapes::ShapeRef.new(shape: RoutingProfileId, required: true, location: "uri", location_name: "RoutingProfileId"))
+    UpdateRoutingProfileAgentAvailabilityTimerRequest.add_member(:agent_availability_timer, Shapes::ShapeRef.new(shape: AgentAvailabilityTimer, required: true, location_name: "AgentAvailabilityTimer"))
+    UpdateRoutingProfileAgentAvailabilityTimerRequest.struct_class = Types::UpdateRoutingProfileAgentAvailabilityTimerRequest
 
     UpdateRoutingProfileConcurrencyRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     UpdateRoutingProfileConcurrencyRequest.add_member(:routing_profile_id, Shapes::ShapeRef.new(shape: RoutingProfileId, required: true, location: "uri", location_name: "RoutingProfileId"))
@@ -4599,6 +4618,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:delete_queue, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteQueue"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/queues/{InstanceId}/{QueueId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteQueueRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:delete_quick_connect, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteQuickConnect"
         o.http_method = "DELETE"
@@ -4608,6 +4641,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:delete_routing_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRoutingProfile"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/routing-profiles/{InstanceId}/{RoutingProfileId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRoutingProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
@@ -6680,6 +6727,19 @@ module Aws::Connect
         o.http_method = "POST"
         o.http_request_uri = "/quick-connects/{InstanceId}/{QuickConnectId}/name"
         o.input = Shapes::ShapeRef.new(shape: UpdateQuickConnectNameRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:update_routing_profile_agent_availability_timer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRoutingProfileAgentAvailabilityTimer"
+        o.http_method = "POST"
+        o.http_request_uri = "/routing-profiles/{InstanceId}/{RoutingProfileId}/agent-availability-timer"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRoutingProfileAgentAvailabilityTimerRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)

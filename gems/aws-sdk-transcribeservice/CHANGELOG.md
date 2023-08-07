@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2023-07-20)
+------------------
+
+* Feature - Added API argument --toxicity-detection to startTranscriptionJob API, which allows users to view toxicity scores of submitted audio.
+
 1.87.0 (2023-07-11)
 ------------------
 

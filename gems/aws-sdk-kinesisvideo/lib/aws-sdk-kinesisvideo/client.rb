@@ -1735,6 +1735,12 @@ module Aws::KinesisVideo
     # * If the `StorageStatus` is enabled, the data will be stored in the
     #   `StreamARN` provided.
     #
+    # If `StorageStatus` is enabled, direct peer-to-peer (master-viewer)
+    # connections no longer occur. Peers connect directly to the storage
+    # session. You must call the `JoinStorageSession` API to trigger an SDP
+    # offer send and establish a connection between a peer and the storage
+    # session.
+    #
     # @option params [required, String] :channel_arn
     #   The Amazon Resource Name (ARN) of the channel.
     #
@@ -1927,7 +1933,7 @@ module Aws::KinesisVideo
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisvideo'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2023-07-27)
+------------------
+
+* Feature - SDK and documentation updates for Amazon Elastic Block Store API
+
 1.33.0 (2023-07-11)
 ------------------
 

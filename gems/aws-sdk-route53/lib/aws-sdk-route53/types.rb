@@ -1301,6 +1301,12 @@ module Aws::Route53
     #   delegation set when you created it. For more information about
     #   reusable delegation sets, see [CreateReusableDelegationSet][1].
     #
+    #   If you are using a reusable delegation set to create a public hosted
+    #   zone for a subdomain, make sure that the parent hosted zone doesn't
+    #   use one or more of the same name servers. If you have overlapping
+    #   nameservers, the operation will cause a `ConflictingDomainsExist`
+    #   error.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateReusableDelegationSet.html

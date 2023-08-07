@@ -59,7 +59,7 @@ module Aws::EC2
       data[:owner_id]
     end
 
-    # \[VPC only\] The outbound rules associated with the security group.
+    # The outbound rules associated with the security group.
     # @return [Array<Types::IpPermission>]
     def ip_permissions_egress
       data[:ip_permissions_egress]
@@ -71,7 +71,7 @@ module Aws::EC2
       data[:tags]
     end
 
-    # \[VPC only\] The ID of the VPC for the security group.
+    # The ID of the VPC for the security group.
     # @return [String]
     def vpc_id
       data[:vpc_id]
@@ -384,8 +384,8 @@ module Aws::EC2
     #   Alternatively, use a set of IP permissions to specify multiple rules
     #   and a description for the rule.
     # @option options [String] :group_name
-    #   \[EC2-Classic, default VPC\] The name of the security group. You must
-    #   specify either the security group ID or the security group name in the
+    #   \[Default VPC\] The name of the security group. You must specify
+    #   either the security group ID or the security group name in the
     #   request. For security groups in a nondefault VPC, you must specify the
     #   security group ID.
     # @option options [Array<Types::IpPermission>] :ip_permissions
@@ -394,9 +394,9 @@ module Aws::EC2
     #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
     #   Numbers][1]). To specify `icmpv6`, use a set of IP permissions.
     #
-    #   \[VPC only\] Use `-1` to specify all protocols. If you specify `-1` or
-    #   a protocol other than `tcp`, `udp`, or `icmp`, traffic on all ports is
-    #   allowed, regardless of any ports you specify.
+    #   Use `-1` to specify all protocols. If you specify `-1` or a protocol
+    #   other than `tcp`, `udp`, or `icmp`, traffic on all ports is allowed,
+    #   regardless of any ports you specify.
     #
     #   Alternatively, use a set of IP permissions to specify multiple rules
     #   and a description for the rule.
@@ -405,15 +405,15 @@ module Aws::EC2
     #
     #   [1]: http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
     # @option options [String] :source_security_group_name
-    #   \[EC2-Classic, default VPC\] The name of the source security group.
-    #   You can't specify this parameter in combination with the following
-    #   parameters: the CIDR IP address range, the start of the port range,
-    #   the IP protocol, and the end of the port range. Creates rules that
-    #   grant full ICMP, UDP, and TCP access. To create a rule with a specific
-    #   IP protocol and port range, use a set of IP permissions instead. For
-    #   EC2-VPC, the source security group must be in the same VPC.
+    #   \[Default VPC\] The name of the source security group. You can't
+    #   specify this parameter in combination with the following parameters:
+    #   the CIDR IP address range, the start of the port range, the IP
+    #   protocol, and the end of the port range. Creates rules that grant full
+    #   ICMP, UDP, and TCP access. To create a rule with a specific IP
+    #   protocol and port range, use a set of IP permissions instead. The
+    #   source security group must be in the same VPC.
     # @option options [String] :source_security_group_owner_id
-    #   \[nondefault VPC\] The Amazon Web Services account ID for the source
+    #   \[Nondefault VPC\] The Amazon Web Services account ID for the source
     #   security group, if the source security group is in a different
     #   account. You can't specify this parameter in combination with the
     #   following parameters: the CIDR IP address range, the IP protocol, the
@@ -539,10 +539,9 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [String] :group_name
-    #   \[EC2-Classic, default VPC\] The name of the security group. You can
-    #   specify either the security group name or the security group ID. For
-    #   security groups in a nondefault VPC, you must specify the security
-    #   group ID.
+    #   \[Default VPC\] The name of the security group. You can specify either
+    #   the security group name or the security group ID. For security groups
+    #   in a nondefault VPC, you must specify the security group ID.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -698,8 +697,8 @@ module Aws::EC2
     #   the protocol is ICMP, this is the type number. A value of -1 indicates
     #   all ICMP types.
     # @option options [String] :group_name
-    #   \[EC2-Classic, default VPC\] The name of the security group. You must
-    #   specify either the security group ID or the security group name in the
+    #   \[Default VPC\] The name of the security group. You must specify
+    #   either the security group ID or the security group name in the
     #   request. For security groups in a nondefault VPC, you must specify the
     #   security group ID.
     # @option options [Array<Types::IpPermission>] :ip_permissions
@@ -713,21 +712,14 @@ module Aws::EC2
     #
     #   [1]: http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
     # @option options [String] :source_security_group_name
-    #   \[EC2-Classic, default VPC\] The name of the source security group.
-    #   You can't specify this parameter in combination with the following
-    #   parameters: the CIDR IP address range, the start of the port range,
-    #   the IP protocol, and the end of the port range. For EC2-VPC, the
-    #   source security group must be in the same VPC. To revoke a specific
-    #   rule for an IP protocol and port range, use a set of IP permissions
-    #   instead.
+    #   \[Default VPC\] The name of the source security group. You can't
+    #   specify this parameter in combination with the following parameters:
+    #   the CIDR IP address range, the start of the port range, the IP
+    #   protocol, and the end of the port range. The source security group
+    #   must be in the same VPC. To revoke a specific rule for an IP protocol
+    #   and port range, use a set of IP permissions instead.
     # @option options [String] :source_security_group_owner_id
-    #   \[EC2-Classic\] The Amazon Web Services account ID of the source
-    #   security group, if the source security group is in a different
-    #   account. You can't specify this parameter in combination with the
-    #   following parameters: the CIDR IP address range, the IP protocol, the
-    #   start of the port range, and the end of the port range. To revoke a
-    #   specific rule for an IP protocol and port range, use a set of IP
-    #   permissions instead.
+    #   Not supported.
     # @option options [Integer] :to_port
     #   If the protocol is TCP or UDP, this is the end of the port range. If
     #   the protocol is ICMP, this is the code. A value of -1 indicates all

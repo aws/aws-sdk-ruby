@@ -37,7 +37,9 @@ module Aws::Proton
     CompatibleEnvironmentTemplateList = Shapes::ListShape.new(name: 'CompatibleEnvironmentTemplateList')
     Component = Shapes::StructureShape.new(name: 'Component')
     ComponentArn = Shapes::StringShape.new(name: 'ComponentArn')
+    ComponentDeploymentIdList = Shapes::ListShape.new(name: 'ComponentDeploymentIdList')
     ComponentDeploymentUpdateType = Shapes::StringShape.new(name: 'ComponentDeploymentUpdateType')
+    ComponentState = Shapes::StructureShape.new(name: 'ComponentState')
     ComponentSummary = Shapes::StructureShape.new(name: 'ComponentSummary')
     ComponentSummaryList = Shapes::ListShape.new(name: 'ComponentSummaryList')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -68,6 +70,8 @@ module Aws::Proton
     CreateTemplateSyncConfigOutput = Shapes::StructureShape.new(name: 'CreateTemplateSyncConfigOutput')
     DeleteComponentInput = Shapes::StructureShape.new(name: 'DeleteComponentInput')
     DeleteComponentOutput = Shapes::StructureShape.new(name: 'DeleteComponentOutput')
+    DeleteDeploymentInput = Shapes::StructureShape.new(name: 'DeleteDeploymentInput')
+    DeleteDeploymentOutput = Shapes::StructureShape.new(name: 'DeleteDeploymentOutput')
     DeleteEnvironmentAccountConnectionInput = Shapes::StructureShape.new(name: 'DeleteEnvironmentAccountConnectionInput')
     DeleteEnvironmentAccountConnectionOutput = Shapes::StructureShape.new(name: 'DeleteEnvironmentAccountConnectionOutput')
     DeleteEnvironmentInput = Shapes::StructureShape.new(name: 'DeleteEnvironmentInput')
@@ -88,8 +92,14 @@ module Aws::Proton
     DeleteServiceTemplateVersionOutput = Shapes::StructureShape.new(name: 'DeleteServiceTemplateVersionOutput')
     DeleteTemplateSyncConfigInput = Shapes::StructureShape.new(name: 'DeleteTemplateSyncConfigInput')
     DeleteTemplateSyncConfigOutput = Shapes::StructureShape.new(name: 'DeleteTemplateSyncConfigOutput')
+    Deployment = Shapes::StructureShape.new(name: 'Deployment')
+    DeploymentArn = Shapes::StringShape.new(name: 'DeploymentArn')
     DeploymentId = Shapes::StringShape.new(name: 'DeploymentId')
+    DeploymentState = Shapes::UnionShape.new(name: 'DeploymentState')
     DeploymentStatus = Shapes::StringShape.new(name: 'DeploymentStatus')
+    DeploymentSummary = Shapes::StructureShape.new(name: 'DeploymentSummary')
+    DeploymentSummaryList = Shapes::ListShape.new(name: 'DeploymentSummaryList')
+    DeploymentTargetResourceType = Shapes::StringShape.new(name: 'DeploymentTargetResourceType')
     DeploymentUpdateType = Shapes::StringShape.new(name: 'DeploymentUpdateType')
     Description = Shapes::StringShape.new(name: 'Description')
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
@@ -104,6 +114,7 @@ module Aws::Proton
     EnvironmentAccountConnectionSummary = Shapes::StructureShape.new(name: 'EnvironmentAccountConnectionSummary')
     EnvironmentAccountConnectionSummaryList = Shapes::ListShape.new(name: 'EnvironmentAccountConnectionSummaryList')
     EnvironmentArn = Shapes::StringShape.new(name: 'EnvironmentArn')
+    EnvironmentState = Shapes::StructureShape.new(name: 'EnvironmentState')
     EnvironmentSummary = Shapes::StructureShape.new(name: 'EnvironmentSummary')
     EnvironmentSummaryList = Shapes::ListShape.new(name: 'EnvironmentSummaryList')
     EnvironmentTemplate = Shapes::StructureShape.new(name: 'EnvironmentTemplate')
@@ -122,6 +133,8 @@ module Aws::Proton
     GetAccountSettingsOutput = Shapes::StructureShape.new(name: 'GetAccountSettingsOutput')
     GetComponentInput = Shapes::StructureShape.new(name: 'GetComponentInput')
     GetComponentOutput = Shapes::StructureShape.new(name: 'GetComponentOutput')
+    GetDeploymentInput = Shapes::StructureShape.new(name: 'GetDeploymentInput')
+    GetDeploymentOutput = Shapes::StructureShape.new(name: 'GetDeploymentOutput')
     GetEnvironmentAccountConnectionInput = Shapes::StructureShape.new(name: 'GetEnvironmentAccountConnectionInput')
     GetEnvironmentAccountConnectionOutput = Shapes::StructureShape.new(name: 'GetEnvironmentAccountConnectionOutput')
     GetEnvironmentInput = Shapes::StructureShape.new(name: 'GetEnvironmentInput')
@@ -164,6 +177,8 @@ module Aws::Proton
     ListComponentProvisionedResourcesOutput = Shapes::StructureShape.new(name: 'ListComponentProvisionedResourcesOutput')
     ListComponentsInput = Shapes::StructureShape.new(name: 'ListComponentsInput')
     ListComponentsOutput = Shapes::StructureShape.new(name: 'ListComponentsOutput')
+    ListDeploymentsInput = Shapes::StructureShape.new(name: 'ListDeploymentsInput')
+    ListDeploymentsOutput = Shapes::StructureShape.new(name: 'ListDeploymentsOutput')
     ListEnvironmentAccountConnectionsInput = Shapes::StructureShape.new(name: 'ListEnvironmentAccountConnectionsInput')
     ListEnvironmentAccountConnectionsOutput = Shapes::StructureShape.new(name: 'ListEnvironmentAccountConnectionsOutput')
     ListEnvironmentOutputsInput = Shapes::StructureShape.new(name: 'ListEnvironmentOutputsInput')
@@ -257,9 +272,11 @@ module Aws::Proton
     ServiceArn = Shapes::StringShape.new(name: 'ServiceArn')
     ServiceInstance = Shapes::StructureShape.new(name: 'ServiceInstance')
     ServiceInstanceArn = Shapes::StringShape.new(name: 'ServiceInstanceArn')
+    ServiceInstanceState = Shapes::StructureShape.new(name: 'ServiceInstanceState')
     ServiceInstanceSummary = Shapes::StructureShape.new(name: 'ServiceInstanceSummary')
     ServiceInstanceSummaryList = Shapes::ListShape.new(name: 'ServiceInstanceSummaryList')
     ServicePipeline = Shapes::StructureShape.new(name: 'ServicePipeline')
+    ServicePipelineState = Shapes::StructureShape.new(name: 'ServicePipelineState')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ServiceStatus = Shapes::StringShape.new(name: 'ServiceStatus')
     ServiceSummary = Shapes::StructureShape.new(name: 'ServiceSummary')
@@ -391,24 +408,36 @@ module Aws::Proton
     Component.add_member(:deployment_status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "deploymentStatusMessage"))
     Component.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     Component.add_member(:environment_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "environmentName"))
+    Component.add_member(:last_attempted_deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "lastAttemptedDeploymentId"))
     Component.add_member(:last_client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "lastClientRequestToken"))
     Component.add_member(:last_deployment_attempted_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastDeploymentAttemptedAt"))
     Component.add_member(:last_deployment_succeeded_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastDeploymentSucceededAt"))
     Component.add_member(:last_modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastModifiedAt"))
+    Component.add_member(:last_succeeded_deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "lastSucceededDeploymentId"))
     Component.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     Component.add_member(:service_instance_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "serviceInstanceName"))
     Component.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "serviceName"))
     Component.add_member(:service_spec, Shapes::ShapeRef.new(shape: SpecContents, location_name: "serviceSpec"))
     Component.struct_class = Types::Component
 
+    ComponentDeploymentIdList.member = Shapes::ShapeRef.new(shape: DeploymentId)
+
+    ComponentState.add_member(:service_instance_name, Shapes::ShapeRef.new(shape: ResourceNameOrEmpty, location_name: "serviceInstanceName"))
+    ComponentState.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceNameOrEmpty, location_name: "serviceName"))
+    ComponentState.add_member(:service_spec, Shapes::ShapeRef.new(shape: SpecContents, location_name: "serviceSpec"))
+    ComponentState.add_member(:template_file, Shapes::ShapeRef.new(shape: TemplateFileContents, location_name: "templateFile"))
+    ComponentState.struct_class = Types::ComponentState
+
     ComponentSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ComponentArn, required: true, location_name: "arn"))
     ComponentSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     ComponentSummary.add_member(:deployment_status, Shapes::ShapeRef.new(shape: DeploymentStatus, required: true, location_name: "deploymentStatus"))
     ComponentSummary.add_member(:deployment_status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "deploymentStatusMessage"))
     ComponentSummary.add_member(:environment_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "environmentName"))
+    ComponentSummary.add_member(:last_attempted_deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "lastAttemptedDeploymentId"))
     ComponentSummary.add_member(:last_deployment_attempted_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastDeploymentAttemptedAt"))
     ComponentSummary.add_member(:last_deployment_succeeded_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastDeploymentSucceededAt"))
     ComponentSummary.add_member(:last_modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastModifiedAt"))
+    ComponentSummary.add_member(:last_succeeded_deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "lastSucceededDeploymentId"))
     ComponentSummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     ComponentSummary.add_member(:service_instance_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "serviceInstanceName"))
     ComponentSummary.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "serviceName"))
@@ -582,6 +611,12 @@ module Aws::Proton
     DeleteComponentOutput.add_member(:component, Shapes::ShapeRef.new(shape: Component, location_name: "component"))
     DeleteComponentOutput.struct_class = Types::DeleteComponentOutput
 
+    DeleteDeploymentInput.add_member(:id, Shapes::ShapeRef.new(shape: DeploymentId, required: true, location_name: "id"))
+    DeleteDeploymentInput.struct_class = Types::DeleteDeploymentInput
+
+    DeleteDeploymentOutput.add_member(:deployment, Shapes::ShapeRef.new(shape: Deployment, location_name: "deployment"))
+    DeleteDeploymentOutput.struct_class = Types::DeleteDeploymentOutput
+
     DeleteEnvironmentAccountConnectionInput.add_member(:id, Shapes::ShapeRef.new(shape: EnvironmentAccountConnectionId, required: true, location_name: "id"))
     DeleteEnvironmentAccountConnectionInput.struct_class = Types::DeleteEnvironmentAccountConnectionInput
 
@@ -648,6 +683,57 @@ module Aws::Proton
     DeleteTemplateSyncConfigOutput.add_member(:template_sync_config, Shapes::ShapeRef.new(shape: TemplateSyncConfig, location_name: "templateSyncConfig"))
     DeleteTemplateSyncConfigOutput.struct_class = Types::DeleteTemplateSyncConfigOutput
 
+    Deployment.add_member(:arn, Shapes::ShapeRef.new(shape: DeploymentArn, required: true, location_name: "arn"))
+    Deployment.add_member(:completed_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "completedAt"))
+    Deployment.add_member(:component_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "componentName"))
+    Deployment.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    Deployment.add_member(:deployment_status, Shapes::ShapeRef.new(shape: DeploymentStatus, required: true, location_name: "deploymentStatus"))
+    Deployment.add_member(:deployment_status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "deploymentStatusMessage"))
+    Deployment.add_member(:environment_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "environmentName"))
+    Deployment.add_member(:id, Shapes::ShapeRef.new(shape: DeploymentId, required: true, location_name: "id"))
+    Deployment.add_member(:initial_state, Shapes::ShapeRef.new(shape: DeploymentState, location_name: "initialState"))
+    Deployment.add_member(:last_attempted_deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "lastAttemptedDeploymentId"))
+    Deployment.add_member(:last_modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastModifiedAt"))
+    Deployment.add_member(:last_succeeded_deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "lastSucceededDeploymentId"))
+    Deployment.add_member(:service_instance_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "serviceInstanceName"))
+    Deployment.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "serviceName"))
+    Deployment.add_member(:target_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "targetArn"))
+    Deployment.add_member(:target_resource_created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "targetResourceCreatedAt"))
+    Deployment.add_member(:target_resource_type, Shapes::ShapeRef.new(shape: DeploymentTargetResourceType, required: true, location_name: "targetResourceType"))
+    Deployment.add_member(:target_state, Shapes::ShapeRef.new(shape: DeploymentState, location_name: "targetState"))
+    Deployment.struct_class = Types::Deployment
+
+    DeploymentState.add_member(:component, Shapes::ShapeRef.new(shape: ComponentState, location_name: "component"))
+    DeploymentState.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentState, location_name: "environment"))
+    DeploymentState.add_member(:service_instance, Shapes::ShapeRef.new(shape: ServiceInstanceState, location_name: "serviceInstance"))
+    DeploymentState.add_member(:service_pipeline, Shapes::ShapeRef.new(shape: ServicePipelineState, location_name: "servicePipeline"))
+    DeploymentState.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    DeploymentState.add_member_subclass(:component, Types::DeploymentState::Component)
+    DeploymentState.add_member_subclass(:environment, Types::DeploymentState::Environment)
+    DeploymentState.add_member_subclass(:service_instance, Types::DeploymentState::ServiceInstance)
+    DeploymentState.add_member_subclass(:service_pipeline, Types::DeploymentState::ServicePipeline)
+    DeploymentState.add_member_subclass(:unknown, Types::DeploymentState::Unknown)
+    DeploymentState.struct_class = Types::DeploymentState
+
+    DeploymentSummary.add_member(:arn, Shapes::ShapeRef.new(shape: DeploymentArn, required: true, location_name: "arn"))
+    DeploymentSummary.add_member(:completed_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "completedAt"))
+    DeploymentSummary.add_member(:component_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "componentName"))
+    DeploymentSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    DeploymentSummary.add_member(:deployment_status, Shapes::ShapeRef.new(shape: DeploymentStatus, required: true, location_name: "deploymentStatus"))
+    DeploymentSummary.add_member(:environment_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "environmentName"))
+    DeploymentSummary.add_member(:id, Shapes::ShapeRef.new(shape: DeploymentId, required: true, location_name: "id"))
+    DeploymentSummary.add_member(:last_attempted_deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "lastAttemptedDeploymentId"))
+    DeploymentSummary.add_member(:last_modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastModifiedAt"))
+    DeploymentSummary.add_member(:last_succeeded_deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "lastSucceededDeploymentId"))
+    DeploymentSummary.add_member(:service_instance_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "serviceInstanceName"))
+    DeploymentSummary.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "serviceName"))
+    DeploymentSummary.add_member(:target_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "targetArn"))
+    DeploymentSummary.add_member(:target_resource_created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "targetResourceCreatedAt"))
+    DeploymentSummary.add_member(:target_resource_type, Shapes::ShapeRef.new(shape: DeploymentTargetResourceType, required: true, location_name: "targetResourceType"))
+    DeploymentSummary.struct_class = Types::DeploymentSummary
+
+    DeploymentSummaryList.member = Shapes::ShapeRef.new(shape: DeploymentSummary)
+
     Environment.add_member(:arn, Shapes::ShapeRef.new(shape: EnvironmentArn, required: true, location_name: "arn"))
     Environment.add_member(:codebuild_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "codebuildRoleArn"))
     Environment.add_member(:component_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "componentRoleArn"))
@@ -657,8 +743,10 @@ module Aws::Proton
     Environment.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     Environment.add_member(:environment_account_connection_id, Shapes::ShapeRef.new(shape: EnvironmentAccountConnectionId, location_name: "environmentAccountConnectionId"))
     Environment.add_member(:environment_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "environmentAccountId"))
+    Environment.add_member(:last_attempted_deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "lastAttemptedDeploymentId"))
     Environment.add_member(:last_deployment_attempted_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastDeploymentAttemptedAt"))
     Environment.add_member(:last_deployment_succeeded_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastDeploymentSucceededAt"))
+    Environment.add_member(:last_succeeded_deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "lastSucceededDeploymentId"))
     Environment.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     Environment.add_member(:proton_service_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "protonServiceRoleArn"))
     Environment.add_member(:provisioning, Shapes::ShapeRef.new(shape: Provisioning, location_name: "provisioning"))
@@ -698,6 +786,12 @@ module Aws::Proton
 
     EnvironmentAccountConnectionSummaryList.member = Shapes::ShapeRef.new(shape: EnvironmentAccountConnectionSummary)
 
+    EnvironmentState.add_member(:spec, Shapes::ShapeRef.new(shape: SpecContents, location_name: "spec"))
+    EnvironmentState.add_member(:template_major_version, Shapes::ShapeRef.new(shape: TemplateVersionPart, required: true, location_name: "templateMajorVersion"))
+    EnvironmentState.add_member(:template_minor_version, Shapes::ShapeRef.new(shape: TemplateVersionPart, required: true, location_name: "templateMinorVersion"))
+    EnvironmentState.add_member(:template_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "templateName"))
+    EnvironmentState.struct_class = Types::EnvironmentState
+
     EnvironmentSummary.add_member(:arn, Shapes::ShapeRef.new(shape: EnvironmentArn, required: true, location_name: "arn"))
     EnvironmentSummary.add_member(:component_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "componentRoleArn"))
     EnvironmentSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
@@ -706,8 +800,10 @@ module Aws::Proton
     EnvironmentSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     EnvironmentSummary.add_member(:environment_account_connection_id, Shapes::ShapeRef.new(shape: EnvironmentAccountConnectionId, location_name: "environmentAccountConnectionId"))
     EnvironmentSummary.add_member(:environment_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "environmentAccountId"))
+    EnvironmentSummary.add_member(:last_attempted_deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "lastAttemptedDeploymentId"))
     EnvironmentSummary.add_member(:last_deployment_attempted_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastDeploymentAttemptedAt"))
     EnvironmentSummary.add_member(:last_deployment_succeeded_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastDeploymentSucceededAt"))
+    EnvironmentSummary.add_member(:last_succeeded_deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "lastSucceededDeploymentId"))
     EnvironmentSummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     EnvironmentSummary.add_member(:proton_service_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "protonServiceRoleArn"))
     EnvironmentSummary.add_member(:provisioning, Shapes::ShapeRef.new(shape: Provisioning, location_name: "provisioning"))
@@ -784,6 +880,16 @@ module Aws::Proton
 
     GetComponentOutput.add_member(:component, Shapes::ShapeRef.new(shape: Component, location_name: "component"))
     GetComponentOutput.struct_class = Types::GetComponentOutput
+
+    GetDeploymentInput.add_member(:component_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "componentName"))
+    GetDeploymentInput.add_member(:environment_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "environmentName"))
+    GetDeploymentInput.add_member(:id, Shapes::ShapeRef.new(shape: DeploymentId, required: true, location_name: "id"))
+    GetDeploymentInput.add_member(:service_instance_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "serviceInstanceName"))
+    GetDeploymentInput.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "serviceName"))
+    GetDeploymentInput.struct_class = Types::GetDeploymentInput
+
+    GetDeploymentOutput.add_member(:deployment, Shapes::ShapeRef.new(shape: Deployment, location_name: "deployment"))
+    GetDeploymentOutput.struct_class = Types::GetDeploymentOutput
 
     GetEnvironmentAccountConnectionInput.add_member(:id, Shapes::ShapeRef.new(shape: EnvironmentAccountConnectionId, required: true, location_name: "id"))
     GetEnvironmentAccountConnectionInput.struct_class = Types::GetEnvironmentAccountConnectionInput
@@ -904,6 +1010,7 @@ module Aws::Proton
     LatestSyncBlockers.member = Shapes::ShapeRef.new(shape: SyncBlocker)
 
     ListComponentOutputsInput.add_member(:component_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "componentName"))
+    ListComponentOutputsInput.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "deploymentId"))
     ListComponentOutputsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: EmptyNextToken, location_name: "nextToken"))
     ListComponentOutputsInput.struct_class = Types::ListComponentOutputsInput
 
@@ -930,6 +1037,18 @@ module Aws::Proton
     ListComponentsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListComponentsOutput.struct_class = Types::ListComponentsOutput
 
+    ListDeploymentsInput.add_member(:component_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "componentName"))
+    ListDeploymentsInput.add_member(:environment_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "environmentName"))
+    ListDeploymentsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxPageResults, location_name: "maxResults"))
+    ListDeploymentsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListDeploymentsInput.add_member(:service_instance_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "serviceInstanceName"))
+    ListDeploymentsInput.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "serviceName"))
+    ListDeploymentsInput.struct_class = Types::ListDeploymentsInput
+
+    ListDeploymentsOutput.add_member(:deployments, Shapes::ShapeRef.new(shape: DeploymentSummaryList, required: true, location_name: "deployments"))
+    ListDeploymentsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListDeploymentsOutput.struct_class = Types::ListDeploymentsOutput
+
     ListEnvironmentAccountConnectionsInput.add_member(:environment_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "environmentName"))
     ListEnvironmentAccountConnectionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxPageResults, location_name: "maxResults"))
     ListEnvironmentAccountConnectionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -941,6 +1060,7 @@ module Aws::Proton
     ListEnvironmentAccountConnectionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListEnvironmentAccountConnectionsOutput.struct_class = Types::ListEnvironmentAccountConnectionsOutput
 
+    ListEnvironmentOutputsInput.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "deploymentId"))
     ListEnvironmentOutputsInput.add_member(:environment_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "environmentName"))
     ListEnvironmentOutputsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: EmptyNextToken, location_name: "nextToken"))
     ListEnvironmentOutputsInput.struct_class = Types::ListEnvironmentOutputsInput
@@ -1002,6 +1122,7 @@ module Aws::Proton
     ListRepositorySyncDefinitionsOutput.add_member(:sync_definitions, Shapes::ShapeRef.new(shape: RepositorySyncDefinitionList, required: true, location_name: "syncDefinitions"))
     ListRepositorySyncDefinitionsOutput.struct_class = Types::ListRepositorySyncDefinitionsOutput
 
+    ListServiceInstanceOutputsInput.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "deploymentId"))
     ListServiceInstanceOutputsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: EmptyNextToken, location_name: "nextToken"))
     ListServiceInstanceOutputsInput.add_member(:service_instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "serviceInstanceName"))
     ListServiceInstanceOutputsInput.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "serviceName"))
@@ -1038,6 +1159,7 @@ module Aws::Proton
     ListServiceInstancesOutput.add_member(:service_instances, Shapes::ShapeRef.new(shape: ServiceInstanceSummaryList, required: true, location_name: "serviceInstances"))
     ListServiceInstancesOutput.struct_class = Types::ListServiceInstancesOutput
 
+    ListServicePipelineOutputsInput.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "deploymentId"))
     ListServicePipelineOutputsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: EmptyNextToken, location_name: "nextToken"))
     ListServicePipelineOutputsInput.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "serviceName"))
     ListServicePipelineOutputsInput.struct_class = Types::ListServicePipelineOutputsInput
@@ -1223,9 +1345,11 @@ module Aws::Proton
     ServiceInstance.add_member(:deployment_status, Shapes::ShapeRef.new(shape: DeploymentStatus, required: true, location_name: "deploymentStatus"))
     ServiceInstance.add_member(:deployment_status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "deploymentStatusMessage"))
     ServiceInstance.add_member(:environment_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "environmentName"))
+    ServiceInstance.add_member(:last_attempted_deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "lastAttemptedDeploymentId"))
     ServiceInstance.add_member(:last_client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "lastClientRequestToken"))
     ServiceInstance.add_member(:last_deployment_attempted_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastDeploymentAttemptedAt"))
     ServiceInstance.add_member(:last_deployment_succeeded_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastDeploymentSucceededAt"))
+    ServiceInstance.add_member(:last_succeeded_deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "lastSucceededDeploymentId"))
     ServiceInstance.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     ServiceInstance.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "serviceName"))
     ServiceInstance.add_member(:spec, Shapes::ShapeRef.new(shape: SpecContents, location_name: "spec"))
@@ -1234,13 +1358,24 @@ module Aws::Proton
     ServiceInstance.add_member(:template_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "templateName"))
     ServiceInstance.struct_class = Types::ServiceInstance
 
+    ServiceInstanceState.add_member(:last_successful_component_deployment_ids, Shapes::ShapeRef.new(shape: ComponentDeploymentIdList, location_name: "lastSuccessfulComponentDeploymentIds"))
+    ServiceInstanceState.add_member(:last_successful_environment_deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "lastSuccessfulEnvironmentDeploymentId"))
+    ServiceInstanceState.add_member(:last_successful_service_pipeline_deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "lastSuccessfulServicePipelineDeploymentId"))
+    ServiceInstanceState.add_member(:spec, Shapes::ShapeRef.new(shape: SpecContents, required: true, location_name: "spec"))
+    ServiceInstanceState.add_member(:template_major_version, Shapes::ShapeRef.new(shape: TemplateVersionPart, required: true, location_name: "templateMajorVersion"))
+    ServiceInstanceState.add_member(:template_minor_version, Shapes::ShapeRef.new(shape: TemplateVersionPart, required: true, location_name: "templateMinorVersion"))
+    ServiceInstanceState.add_member(:template_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "templateName"))
+    ServiceInstanceState.struct_class = Types::ServiceInstanceState
+
     ServiceInstanceSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ServiceInstanceArn, required: true, location_name: "arn"))
     ServiceInstanceSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     ServiceInstanceSummary.add_member(:deployment_status, Shapes::ShapeRef.new(shape: DeploymentStatus, required: true, location_name: "deploymentStatus"))
     ServiceInstanceSummary.add_member(:deployment_status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "deploymentStatusMessage"))
     ServiceInstanceSummary.add_member(:environment_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "environmentName"))
+    ServiceInstanceSummary.add_member(:last_attempted_deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "lastAttemptedDeploymentId"))
     ServiceInstanceSummary.add_member(:last_deployment_attempted_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastDeploymentAttemptedAt"))
     ServiceInstanceSummary.add_member(:last_deployment_succeeded_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastDeploymentSucceededAt"))
+    ServiceInstanceSummary.add_member(:last_succeeded_deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "lastSucceededDeploymentId"))
     ServiceInstanceSummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     ServiceInstanceSummary.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "serviceName"))
     ServiceInstanceSummary.add_member(:template_major_version, Shapes::ShapeRef.new(shape: TemplateVersionPart, required: true, location_name: "templateMajorVersion"))
@@ -1254,13 +1389,21 @@ module Aws::Proton
     ServicePipeline.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     ServicePipeline.add_member(:deployment_status, Shapes::ShapeRef.new(shape: DeploymentStatus, required: true, location_name: "deploymentStatus"))
     ServicePipeline.add_member(:deployment_status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "deploymentStatusMessage"))
+    ServicePipeline.add_member(:last_attempted_deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "lastAttemptedDeploymentId"))
     ServicePipeline.add_member(:last_deployment_attempted_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastDeploymentAttemptedAt"))
     ServicePipeline.add_member(:last_deployment_succeeded_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastDeploymentSucceededAt"))
+    ServicePipeline.add_member(:last_succeeded_deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "lastSucceededDeploymentId"))
     ServicePipeline.add_member(:spec, Shapes::ShapeRef.new(shape: SpecContents, location_name: "spec"))
     ServicePipeline.add_member(:template_major_version, Shapes::ShapeRef.new(shape: TemplateVersionPart, required: true, location_name: "templateMajorVersion"))
     ServicePipeline.add_member(:template_minor_version, Shapes::ShapeRef.new(shape: TemplateVersionPart, required: true, location_name: "templateMinorVersion"))
     ServicePipeline.add_member(:template_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "templateName"))
     ServicePipeline.struct_class = Types::ServicePipeline
+
+    ServicePipelineState.add_member(:spec, Shapes::ShapeRef.new(shape: SpecContents, location_name: "spec"))
+    ServicePipelineState.add_member(:template_major_version, Shapes::ShapeRef.new(shape: TemplateVersionPart, required: true, location_name: "templateMajorVersion"))
+    ServicePipelineState.add_member(:template_minor_version, Shapes::ShapeRef.new(shape: TemplateVersionPart, required: true, location_name: "templateMinorVersion"))
+    ServicePipelineState.add_member(:template_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "templateName"))
+    ServicePipelineState.struct_class = Types::ServicePipelineState
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
@@ -1820,6 +1963,19 @@ module Aws::Proton
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:delete_deployment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDeployment"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDeploymentInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDeploymentOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:delete_environment, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteEnvironment"
         o.http_method = "POST"
@@ -1979,6 +2135,19 @@ module Aws::Proton
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetComponentInput)
         o.output = Shapes::ShapeRef.new(shape: GetComponentOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_deployment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDeployment"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDeploymentInput)
+        o.output = Shapes::ShapeRef.new(shape: GetDeploymentOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -2238,6 +2407,25 @@ module Aws::Proton
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_deployments, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDeployments"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListDeploymentsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListDeploymentsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",

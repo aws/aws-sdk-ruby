@@ -176,6 +176,8 @@ module Aws::CognitoIdentityProvider
             Aws::CognitoIdentityProvider::Endpoints::GetGroup.build(context)
           when :get_identity_provider_by_identifier
             Aws::CognitoIdentityProvider::Endpoints::GetIdentityProviderByIdentifier.build(context)
+          when :get_log_delivery_configuration
+            Aws::CognitoIdentityProvider::Endpoints::GetLogDeliveryConfiguration.build(context)
           when :get_signing_certificate
             Aws::CognitoIdentityProvider::Endpoints::GetSigningCertificate.build(context)
           when :get_ui_customization
@@ -216,6 +218,8 @@ module Aws::CognitoIdentityProvider
             Aws::CognitoIdentityProvider::Endpoints::RespondToAuthChallenge.build(context)
           when :revoke_token
             Aws::CognitoIdentityProvider::Endpoints::RevokeToken.build(context)
+          when :set_log_delivery_configuration
+            Aws::CognitoIdentityProvider::Endpoints::SetLogDeliveryConfiguration.build(context)
           when :set_risk_configuration
             Aws::CognitoIdentityProvider::Endpoints::SetRiskConfiguration.build(context)
           when :set_ui_customization

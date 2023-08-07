@@ -33,12 +33,6 @@ module Aws::Route53Resolver
           end
           if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
             if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
-              if Aws::Endpoints::Matchers.string_equals?(region, "us-gov-east-1")
-                return Aws::Endpoints::Endpoint.new(url: "https://route53resolver.us-gov-east-1.amazonaws.com", headers: {}, properties: {})
-              end
-              if Aws::Endpoints::Matchers.string_equals?(region, "us-gov-west-1")
-                return Aws::Endpoints::Endpoint.new(url: "https://route53resolver.us-gov-west-1.amazonaws.com", headers: {}, properties: {})
-              end
               return Aws::Endpoints::Endpoint.new(url: "https://route53resolver-fips.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"

@@ -58,6 +58,8 @@ module Aws::ResilienceHub
           case context.operation_name
           when :add_draft_app_version_resource_mappings
             Aws::ResilienceHub::Endpoints::AddDraftAppVersionResourceMappings.build(context)
+          when :batch_update_recommendation_status
+            Aws::ResilienceHub::Endpoints::BatchUpdateRecommendationStatus.build(context)
           when :create_app
             Aws::ResilienceHub::Endpoints::CreateApp.build(context)
           when :create_app_version_app_component
@@ -104,6 +106,8 @@ module Aws::ResilienceHub
             Aws::ResilienceHub::Endpoints::ImportResourcesToDraftAppVersion.build(context)
           when :list_alarm_recommendations
             Aws::ResilienceHub::Endpoints::ListAlarmRecommendations.build(context)
+          when :list_app_assessment_compliance_drifts
+            Aws::ResilienceHub::Endpoints::ListAppAssessmentComplianceDrifts.build(context)
           when :list_app_assessments
             Aws::ResilienceHub::Endpoints::ListAppAssessments.build(context)
           when :list_app_component_compliances

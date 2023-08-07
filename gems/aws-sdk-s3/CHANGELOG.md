@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.132.0 (2023-07-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Feature - Add support for verifying checksums in FileDownloader.
+
+1.131.0 (2023-07-20)
+------------------
+
+* Feature - Improve performance of S3 clients by simplifying and optimizing endpoint resolution.
+
+1.130.0 (2023-07-13)
+------------------
+
+* Feature - S3 Inventory now supports Object Access Control List and Object Owner as available object metadata fields in inventory reports.
+
+* Feature - Allow Object multipart copy API to work when requiring a checksum algorithm.
+* Feature - Allow Object multipart copy API to optionally copy parts as they exist on the source object if it has parts, instead of generating new part ranges, when specifying `use_source_parts: true`.
+
 1.129.0 (2023-07-11)
 ------------------
 

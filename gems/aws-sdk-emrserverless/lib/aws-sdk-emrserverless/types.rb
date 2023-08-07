@@ -248,6 +248,57 @@ module Aws::EMRServerless
       include Aws::Structure
     end
 
+    # The Amazon CloudWatch configuration for monitoring logs. You can
+    # configure your jobs to send log information to CloudWatch.
+    #
+    # @!attribute [rw] enabled
+    #   Enables CloudWatch logging.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] log_group_name
+    #   The name of the log group in Amazon CloudWatch Logs where you want
+    #   to publish your logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_stream_name_prefix
+    #   Prefix for the CloudWatch log stream name.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_key_arn
+    #   The Key Management Service (KMS) key ARN to encrypt the logs that
+    #   you store in CloudWatch Logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_types
+    #   The types of logs that you want to publish to CloudWatch. If you
+    #   don't specify any log types, driver STDOUT and STDERR logs will be
+    #   published to CloudWatch Logs by default. For more information
+    #   including the supported worker types for Hive and Spark, see
+    #   [Logging for EMR Serverless with CloudWatch][1].
+    #
+    #   * **Key Valid Values**: `SPARK_DRIVER`, `SPARK_EXECUTOR`,
+    #     `HIVE_DRIVER`, `TEZ_TASK`
+    #
+    #   * **Array Members Valid Values**: `STDOUT`, `STDERR`, `HIVE_LOG`,
+    #     `TEZ_AM`, `SYSTEM_LOGS`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/emr/latest/EMR-Serverless-UserGuide/logging.html#jobs-log-storage-cw
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/CloudWatchLoggingConfiguration AWS API Documentation
+    #
+    class CloudWatchLoggingConfiguration < Struct.new(
+      :enabled,
+      :log_group_name,
+      :log_stream_name_prefix,
+      :encryption_key_arn,
+      :log_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A configuration specification to be used when provisioning an
     # application. A configuration consists of a classification, properties,
     # and optional nested configurations. A classification refers to an
@@ -1014,11 +1065,17 @@ module Aws::EMRServerless
     #   The managed log persistence configuration for a job run.
     #   @return [Types::ManagedPersistenceMonitoringConfiguration]
     #
+    # @!attribute [rw] cloud_watch_logging_configuration
+    #   The Amazon CloudWatch configuration for monitoring logs. You can
+    #   configure your jobs to send log information to CloudWatch.
+    #   @return [Types::CloudWatchLoggingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/MonitoringConfiguration AWS API Documentation
     #
     class MonitoringConfiguration < Struct.new(
       :s3_monitoring_configuration,
-      :managed_persistence_monitoring_configuration)
+      :managed_persistence_monitoring_configuration,
+      :cloud_watch_logging_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

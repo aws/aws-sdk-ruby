@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2023-07-20)
+------------------
+
+* Feature - This release adds support for updating and deleting spaces and projects in Amazon CodeCatalyst. It also adds support for creating, getting, and deleting source repositories in CodeCatalyst projects.
+
 1.9.0 (2023-07-11)
 ------------------
 

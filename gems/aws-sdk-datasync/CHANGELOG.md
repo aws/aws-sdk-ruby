@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2023-08-04)
+------------------
+
+* Feature - Display cloud storage used capacity at a cluster level.
+
+1.63.0 (2023-07-25)
+------------------
+
+* Feature - AWS DataSync now supports Microsoft Azure Blob Storage locations.
+
+1.62.0 (2023-07-13)
+------------------
+
+* Feature - Added LunCount to the response object of DescribeStorageSystemResourcesResponse, LunCount represents the number of LUNs on a storage system resource.
+
 1.61.0 (2023-07-11)
 ------------------
 

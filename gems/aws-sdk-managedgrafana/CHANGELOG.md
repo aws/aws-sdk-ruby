@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2023-07-19)
+------------------
+
+* Feature - Amazon Managed Grafana now supports grafanaVersion update for existing workspaces with UpdateWorkspaceConfiguration API. DescribeWorkspaceConfiguration API additionally returns grafanaVersion. A new ListVersions API lists available versions or, if given a workspaceId, the versions it can upgrade to.
+
 1.19.0 (2023-07-11)
 ------------------
 

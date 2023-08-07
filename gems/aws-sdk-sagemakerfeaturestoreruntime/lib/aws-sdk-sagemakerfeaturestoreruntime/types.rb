@@ -66,8 +66,8 @@ module Aws::SageMakerFeatureStoreRuntime
     # in a batch.
     #
     # @!attribute [rw] feature_group_name
-    #   A `FeatureGroupName` containing Records you are retrieving in a
-    #   batch.
+    #   The name or Amazon Resource Name (ARN) of the `FeatureGroup`
+    #   containing the records you are retrieving in a batch.
     #   @return [String]
     #
     # @!attribute [rw] record_identifiers_value_as_string
@@ -90,9 +90,9 @@ module Aws::SageMakerFeatureStoreRuntime
     end
 
     # @!attribute [rw] identifiers
-    #   A list of `FeatureGroup` names, with their corresponding
-    #   `RecordIdentifier` value, and Feature name that have been requested
-    #   to be retrieved in batch.
+    #   A list containing the name or Amazon Resource Name (ARN) of the
+    #   `FeatureGroup`, the list of names of `Feature`s to be retrieved, and
+    #   the corresponding `RecordIdentifier` values as strings.
     #   @return [Array<Types::BatchGetRecordIdentifier>]
     #
     # @!attribute [rw] expiration_time_response
@@ -134,7 +134,7 @@ module Aws::SageMakerFeatureStoreRuntime
       include Aws::Structure
     end
 
-    # The output of Records that have been retrieved in a batch.
+    # The output of records that have been retrieved in a batch.
     #
     # @!attribute [rw] feature_group_name
     #   The `FeatureGroupName` containing Records you retrieved in a batch.
@@ -164,7 +164,8 @@ module Aws::SageMakerFeatureStoreRuntime
     end
 
     # @!attribute [rw] feature_group_name
-    #   The name of the feature group to delete the record from.
+    #   The name or Amazon Resource Name (ARN) of the feature group to
+    #   delete the record from.
     #   @return [String]
     #
     # @!attribute [rw] record_identifier_value_as_string
@@ -222,8 +223,8 @@ module Aws::SageMakerFeatureStoreRuntime
     end
 
     # @!attribute [rw] feature_group_name
-    #   The name of the feature group from which you want to retrieve a
-    #   record.
+    #   The name or Amazon Resource Name (ARN) of the feature group from
+    #   which you want to retrieve a record.
     #   @return [String]
     #
     # @!attribute [rw] record_identifier_value_as_string
@@ -238,8 +239,8 @@ module Aws::SageMakerFeatureStoreRuntime
     #
     # @!attribute [rw] expiration_time_response
     #   Parameter to request `ExpiresAt` in response. If `Enabled`,
-    #   `BatchGetRecord` will return the value of `ExpiresAt`, if it is not
-    #   null. If `Disabled` and null, `BatchGetRecord` will return null.
+    #   `GetRecord` will return the value of `ExpiresAt`, if it is not null.
+    #   If `Disabled` and null, `GetRecord` will return null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/GetRecordRequest AWS API Documentation
@@ -285,8 +286,8 @@ module Aws::SageMakerFeatureStoreRuntime
     end
 
     # @!attribute [rw] feature_group_name
-    #   The name of the feature group that you want to insert the record
-    #   into.
+    #   The name or Amazon Resource Name (ARN) of the feature group that you
+    #   want to insert the record into.
     #   @return [String]
     #
     # @!attribute [rw] record

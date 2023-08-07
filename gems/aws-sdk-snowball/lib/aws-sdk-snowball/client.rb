@@ -523,6 +523,7 @@ module Aws::Snowball
     #       postal_code: "String",
     #       phone_number: "String",
     #       is_restricted: false,
+    #       type: "CUST_PICKUP", # accepts CUST_PICKUP, AWS_SHIP
     #     },
     #   })
     #
@@ -781,12 +782,13 @@ module Aws::Snowball
     #     address_id: "AddressId", # required
     #     kms_key_arn: "KmsKeyARN",
     #     role_arn: "RoleARN",
-    #     snowball_type: "STANDARD", # required, accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD, V3_5C, V3_5S
+    #     snowball_type: "STANDARD", # required, accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD, V3_5C, V3_5S, RACK_5U_C
     #     shipping_option: "SECOND_DAY", # required, accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #     notification: {
     #       sns_topic_arn: "SnsTopicARN",
     #       job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #       notify_all: false,
+    #       device_pickup_sns_topic_arn: "SnsTopicARN",
     #     },
     #     forwarding_address_id: "AddressId",
     #     tax_documents: {
@@ -794,11 +796,11 @@ module Aws::Snowball
     #         gstin: "GSTIN",
     #       },
     #     },
-    #     remote_management: "INSTALLED_ONLY", # accepts INSTALLED_ONLY, INSTALLED_AUTOSTART
+    #     remote_management: "INSTALLED_ONLY", # accepts INSTALLED_ONLY, INSTALLED_AUTOSTART, NOT_INSTALLED
     #     initial_cluster_size: 1,
     #     force_create_jobs: false,
     #     long_term_pricing_ids: ["LongTermPricingId"],
-    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, T14, T32, NoPreference, T240
+    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, T14, T32, NoPreference, T240, T13
     #   })
     #
     # @example Response structure
@@ -809,7 +811,7 @@ module Aws::Snowball
     #   resp.job_list_entries[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_list_entries[0].is_master #=> Boolean
     #   resp.job_list_entries[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C", "V3_5S"
+    #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C", "V3_5S", "RACK_5U_C"
     #   resp.job_list_entries[0].creation_date #=> Time
     #   resp.job_list_entries[0].description #=> String
     #
@@ -891,6 +893,10 @@ module Aws::Snowball
     #
     #   * Description: Snowball Edge Storage Optimized with EC2 Compute
     #
+    #   <note markdown="1"> This device is replaced with T98.
+    #
+    #    </note>
+    #
     #
     #
     # * Device type: **STANDARD**
@@ -919,13 +925,11 @@ module Aws::Snowball
     #
     #
     #
-    # * Device type: **V3\_5C**
+    # * Snow Family device type: **RACK\_5U\_C**
     #
-    #   * Capacity: T32
+    #   * Capacity: T13
     #
-    #   * Description: Snowball Edge Compute Optimized without GPU
-    #
-    #
+    #   * Description: Snowblade.
     #
     # * Device type: **V3\_5S**
     #
@@ -1067,10 +1071,19 @@ module Aws::Snowball
     #   from outside of your internal network. When set to
     #   `INSTALLED_AUTOSTART`, remote management will automatically be
     #   available when the device arrives at your location. Otherwise, you
-    #   need to use the Snowball Client to manage the device.
+    #   need to use the Snowball Edge client to manage the device. When set to
+    #   `NOT_INSTALLED`, remote management will not be available on the
+    #   device.
     #
     # @option params [String] :long_term_pricing_id
     #   The ID of the long-term pricing type for the device.
+    #
+    # @option params [String] :impact_level
+    #   The highest impact level of data that will be stored or processed on
+    #   the device, provided at job creation.
+    #
+    # @option params [Types::PickupDetails] :pickup_details
+    #   Information identifying the person picking up the device.
     #
     # @return [Types::CreateJobResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1174,15 +1187,16 @@ module Aws::Snowball
     #     address_id: "AddressId",
     #     kms_key_arn: "KmsKeyARN",
     #     role_arn: "RoleARN",
-    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, T14, T32, NoPreference, T240
+    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, T14, T32, NoPreference, T240, T13
     #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #     notification: {
     #       sns_topic_arn: "SnsTopicARN",
     #       job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #       notify_all: false,
+    #       device_pickup_sns_topic_arn: "SnsTopicARN",
     #     },
     #     cluster_id: "ClusterId",
-    #     snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD, V3_5C, V3_5S
+    #     snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD, V3_5C, V3_5S, RACK_5U_C
     #     forwarding_address_id: "AddressId",
     #     tax_documents: {
     #       ind: {
@@ -1196,8 +1210,18 @@ module Aws::Snowball
     #         },
     #       },
     #     },
-    #     remote_management: "INSTALLED_ONLY", # accepts INSTALLED_ONLY, INSTALLED_AUTOSTART
+    #     remote_management: "INSTALLED_ONLY", # accepts INSTALLED_ONLY, INSTALLED_AUTOSTART, NOT_INSTALLED
     #     long_term_pricing_id: "LongTermPricingId",
+    #     impact_level: "IL2", # accepts IL2, IL4, IL5, IL6, IL99
+    #     pickup_details: {
+    #       name: "String",
+    #       phone_number: "PhoneNumber",
+    #       email: "Email",
+    #       identification_number: "String",
+    #       identification_expiration_date: Time.now,
+    #       identification_issuing_org: "String",
+    #       device_pickup_id: "DevicePickupId",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1226,7 +1250,7 @@ module Aws::Snowball
     #   Specifies whether the current long-term pricing type for the device
     #   should be renewed.
     #
-    # @option params [String] :snowball_type
+    # @option params [required, String] :snowball_type
     #   The type of Snow Family devices to use for the long-term pricing job.
     #
     # @return [Types::CreateLongTermPricingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1238,7 +1262,7 @@ module Aws::Snowball
     #   resp = client.create_long_term_pricing({
     #     long_term_pricing_type: "OneYear", # required, accepts OneYear, ThreeYear, OneMonth
     #     is_long_term_pricing_auto_renew: false,
-    #     snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD, V3_5C, V3_5S
+    #     snowball_type: "STANDARD", # required, accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD, V3_5C, V3_5S, RACK_5U_C
     #   })
     #
     # @example Response structure
@@ -1347,6 +1371,7 @@ module Aws::Snowball
     #   resp.address.postal_code #=> String
     #   resp.address.phone_number #=> String
     #   resp.address.is_restricted #=> Boolean
+    #   resp.address.type #=> String, one of "CUST_PICKUP", "AWS_SHIP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeAddress AWS API Documentation
     #
@@ -1427,6 +1452,7 @@ module Aws::Snowball
     #   resp.addresses[0].postal_code #=> String
     #   resp.addresses[0].phone_number #=> String
     #   resp.addresses[0].is_restricted #=> Boolean
+    #   resp.addresses[0].type #=> String, one of "CUST_PICKUP", "AWS_SHIP"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeAddresses AWS API Documentation
@@ -1501,7 +1527,7 @@ module Aws::Snowball
     #   resp.cluster_metadata.role_arn #=> String
     #   resp.cluster_metadata.cluster_state #=> String, one of "AwaitingQuorum", "Pending", "InUse", "Complete", "Cancelled"
     #   resp.cluster_metadata.job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.cluster_metadata.snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C", "V3_5S"
+    #   resp.cluster_metadata.snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C", "V3_5S", "RACK_5U_C"
     #   resp.cluster_metadata.creation_date #=> Time
     #   resp.cluster_metadata.resources.s3_resources #=> Array
     #   resp.cluster_metadata.resources.s3_resources[0].bucket_arn #=> String
@@ -1523,6 +1549,7 @@ module Aws::Snowball
     #   resp.cluster_metadata.notification.job_states_to_notify #=> Array
     #   resp.cluster_metadata.notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.cluster_metadata.notification.notify_all #=> Boolean
+    #   resp.cluster_metadata.notification.device_pickup_sns_topic_arn #=> String
     #   resp.cluster_metadata.forwarding_address_id #=> String
     #   resp.cluster_metadata.tax_documents.ind.gstin #=> String
     #   resp.cluster_metadata.on_device_service_configuration.nfs_on_device_service.storage_limit #=> Integer
@@ -1610,7 +1637,7 @@ module Aws::Snowball
     #   resp.job_metadata.job_id #=> String
     #   resp.job_metadata.job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_metadata.job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.job_metadata.snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C", "V3_5S"
+    #   resp.job_metadata.snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C", "V3_5S", "RACK_5U_C"
     #   resp.job_metadata.creation_date #=> Time
     #   resp.job_metadata.resources.s3_resources #=> Array
     #   resp.job_metadata.resources.s3_resources[0].bucket_arn #=> String
@@ -1635,11 +1662,12 @@ module Aws::Snowball
     #   resp.job_metadata.shipping_details.inbound_shipment.tracking_number #=> String
     #   resp.job_metadata.shipping_details.outbound_shipment.status #=> String
     #   resp.job_metadata.shipping_details.outbound_shipment.tracking_number #=> String
-    #   resp.job_metadata.snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "T98", "T8", "T14", "T32", "NoPreference", "T240"
+    #   resp.job_metadata.snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "T98", "T8", "T14", "T32", "NoPreference", "T240", "T13"
     #   resp.job_metadata.notification.sns_topic_arn #=> String
     #   resp.job_metadata.notification.job_states_to_notify #=> Array
     #   resp.job_metadata.notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_metadata.notification.notify_all #=> Boolean
+    #   resp.job_metadata.notification.device_pickup_sns_topic_arn #=> String
     #   resp.job_metadata.data_transfer_progress.bytes_transferred #=> Integer
     #   resp.job_metadata.data_transfer_progress.objects_transferred #=> Integer
     #   resp.job_metadata.data_transfer_progress.total_bytes #=> Integer
@@ -1651,7 +1679,7 @@ module Aws::Snowball
     #   resp.job_metadata.forwarding_address_id #=> String
     #   resp.job_metadata.tax_documents.ind.gstin #=> String
     #   resp.job_metadata.device_configuration.snowcone_device_configuration.wireless_connection.is_wifi_enabled #=> Boolean
-    #   resp.job_metadata.remote_management #=> String, one of "INSTALLED_ONLY", "INSTALLED_AUTOSTART"
+    #   resp.job_metadata.remote_management #=> String, one of "INSTALLED_ONLY", "INSTALLED_AUTOSTART", "NOT_INSTALLED"
     #   resp.job_metadata.long_term_pricing_id #=> String
     #   resp.job_metadata.on_device_service_configuration.nfs_on_device_service.storage_limit #=> Integer
     #   resp.job_metadata.on_device_service_configuration.nfs_on_device_service.storage_unit #=> String, one of "TB"
@@ -1663,11 +1691,20 @@ module Aws::Snowball
     #   resp.job_metadata.on_device_service_configuration.s3_on_device_service.storage_unit #=> String, one of "TB"
     #   resp.job_metadata.on_device_service_configuration.s3_on_device_service.service_size #=> Integer
     #   resp.job_metadata.on_device_service_configuration.s3_on_device_service.fault_tolerance #=> Integer
+    #   resp.job_metadata.impact_level #=> String, one of "IL2", "IL4", "IL5", "IL6", "IL99"
+    #   resp.job_metadata.pickup_details.name #=> String
+    #   resp.job_metadata.pickup_details.phone_number #=> String
+    #   resp.job_metadata.pickup_details.email #=> String
+    #   resp.job_metadata.pickup_details.identification_number #=> String
+    #   resp.job_metadata.pickup_details.identification_expiration_date #=> Time
+    #   resp.job_metadata.pickup_details.identification_issuing_org #=> String
+    #   resp.job_metadata.pickup_details.device_pickup_id #=> String
+    #   resp.job_metadata.snowball_id #=> String
     #   resp.sub_job_metadata #=> Array
     #   resp.sub_job_metadata[0].job_id #=> String
     #   resp.sub_job_metadata[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.sub_job_metadata[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.sub_job_metadata[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C", "V3_5S"
+    #   resp.sub_job_metadata[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C", "V3_5S", "RACK_5U_C"
     #   resp.sub_job_metadata[0].creation_date #=> Time
     #   resp.sub_job_metadata[0].resources.s3_resources #=> Array
     #   resp.sub_job_metadata[0].resources.s3_resources[0].bucket_arn #=> String
@@ -1692,11 +1729,12 @@ module Aws::Snowball
     #   resp.sub_job_metadata[0].shipping_details.inbound_shipment.tracking_number #=> String
     #   resp.sub_job_metadata[0].shipping_details.outbound_shipment.status #=> String
     #   resp.sub_job_metadata[0].shipping_details.outbound_shipment.tracking_number #=> String
-    #   resp.sub_job_metadata[0].snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "T98", "T8", "T14", "T32", "NoPreference", "T240"
+    #   resp.sub_job_metadata[0].snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "T98", "T8", "T14", "T32", "NoPreference", "T240", "T13"
     #   resp.sub_job_metadata[0].notification.sns_topic_arn #=> String
     #   resp.sub_job_metadata[0].notification.job_states_to_notify #=> Array
     #   resp.sub_job_metadata[0].notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.sub_job_metadata[0].notification.notify_all #=> Boolean
+    #   resp.sub_job_metadata[0].notification.device_pickup_sns_topic_arn #=> String
     #   resp.sub_job_metadata[0].data_transfer_progress.bytes_transferred #=> Integer
     #   resp.sub_job_metadata[0].data_transfer_progress.objects_transferred #=> Integer
     #   resp.sub_job_metadata[0].data_transfer_progress.total_bytes #=> Integer
@@ -1708,7 +1746,7 @@ module Aws::Snowball
     #   resp.sub_job_metadata[0].forwarding_address_id #=> String
     #   resp.sub_job_metadata[0].tax_documents.ind.gstin #=> String
     #   resp.sub_job_metadata[0].device_configuration.snowcone_device_configuration.wireless_connection.is_wifi_enabled #=> Boolean
-    #   resp.sub_job_metadata[0].remote_management #=> String, one of "INSTALLED_ONLY", "INSTALLED_AUTOSTART"
+    #   resp.sub_job_metadata[0].remote_management #=> String, one of "INSTALLED_ONLY", "INSTALLED_AUTOSTART", "NOT_INSTALLED"
     #   resp.sub_job_metadata[0].long_term_pricing_id #=> String
     #   resp.sub_job_metadata[0].on_device_service_configuration.nfs_on_device_service.storage_limit #=> Integer
     #   resp.sub_job_metadata[0].on_device_service_configuration.nfs_on_device_service.storage_unit #=> String, one of "TB"
@@ -1720,6 +1758,15 @@ module Aws::Snowball
     #   resp.sub_job_metadata[0].on_device_service_configuration.s3_on_device_service.storage_unit #=> String, one of "TB"
     #   resp.sub_job_metadata[0].on_device_service_configuration.s3_on_device_service.service_size #=> Integer
     #   resp.sub_job_metadata[0].on_device_service_configuration.s3_on_device_service.fault_tolerance #=> Integer
+    #   resp.sub_job_metadata[0].impact_level #=> String, one of "IL2", "IL4", "IL5", "IL6", "IL99"
+    #   resp.sub_job_metadata[0].pickup_details.name #=> String
+    #   resp.sub_job_metadata[0].pickup_details.phone_number #=> String
+    #   resp.sub_job_metadata[0].pickup_details.email #=> String
+    #   resp.sub_job_metadata[0].pickup_details.identification_number #=> String
+    #   resp.sub_job_metadata[0].pickup_details.identification_expiration_date #=> Time
+    #   resp.sub_job_metadata[0].pickup_details.identification_issuing_org #=> String
+    #   resp.sub_job_metadata[0].pickup_details.device_pickup_id #=> String
+    #   resp.sub_job_metadata[0].snowball_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeJob AWS API Documentation
     #
@@ -2073,7 +2120,7 @@ module Aws::Snowball
     #   resp.job_list_entries[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_list_entries[0].is_master #=> Boolean
     #   resp.job_list_entries[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C", "V3_5S"
+    #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C", "V3_5S", "RACK_5U_C"
     #   resp.job_list_entries[0].creation_date #=> Time
     #   resp.job_list_entries[0].description #=> String
     #   resp.next_token #=> String
@@ -2152,14 +2199,15 @@ module Aws::Snowball
       req.send_request(options)
     end
 
-    # This action returns a list of the different Amazon EC2 Amazon Machine
-    # Images (AMIs) that are owned by your Amazon Web Services accountthat
-    # would be supported for use on a Snow device. Currently, supported AMIs
-    # are based on the Amazon Linux-2, Ubuntu 20.04 LTS - Focal, or Ubuntu
-    # 22.04 LTS - Jammy images, available on the Amazon Web Services
-    # Marketplace. Ubuntu 16.04 LTS - Xenial (HVM) images are no longer
-    # supported in the Market, but still supported for use on devices
-    # through Amazon EC2 VM Import/Export and running locally in AMIs.
+    # This action returns a list of the different Amazon EC2-compatible
+    # Amazon Machine Images (AMIs) that are owned by your Amazon Web
+    # Services accountthat would be supported for use on a Snow device.
+    # Currently, supported AMIs are based on the Amazon Linux-2, Ubuntu
+    # 20.04 LTS - Focal, or Ubuntu 22.04 LTS - Jammy images, available on
+    # the Amazon Web Services Marketplace. Ubuntu 16.04 LTS - Xenial (HVM)
+    # images are no longer supported in the Market, but still supported for
+    # use on devices through Amazon EC2 VM Import/Export and running locally
+    # in AMIs.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results for the list of compatible images.
@@ -2261,7 +2309,7 @@ module Aws::Snowball
     #   resp.job_list_entries[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_list_entries[0].is_master #=> Boolean
     #   resp.job_list_entries[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C", "V3_5S"
+    #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C", "V3_5S", "RACK_5U_C"
     #   resp.job_list_entries[0].creation_date #=> Time
     #   resp.job_list_entries[0].description #=> String
     #   resp.next_token #=> String
@@ -2309,7 +2357,7 @@ module Aws::Snowball
     #   resp.long_term_pricing_entries[0].replacement_job #=> String
     #   resp.long_term_pricing_entries[0].is_long_term_pricing_auto_renew #=> Boolean
     #   resp.long_term_pricing_entries[0].long_term_pricing_status #=> String
-    #   resp.long_term_pricing_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C", "V3_5S"
+    #   resp.long_term_pricing_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C", "V3_5S", "RACK_5U_C"
     #   resp.long_term_pricing_entries[0].job_ids #=> Array
     #   resp.long_term_pricing_entries[0].job_ids[0] #=> String
     #   resp.next_token #=> String
@@ -2320,6 +2368,86 @@ module Aws::Snowball
     # @param [Hash] params ({})
     def list_long_term_pricing(params = {}, options = {})
       req = build_request(:list_long_term_pricing, params)
+      req.send_request(options)
+    end
+
+    # A list of locations from which the customer can choose to pickup a
+    # device.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of locations to list per page.
+    #
+    # @option params [String] :next_token
+    #   HTTP requests are stateless. To identify what object comes "next" in
+    #   the list of `ListPickupLocationsRequest` objects, you have the option
+    #   of specifying `NextToken` as the starting point for your returned
+    #   list.
+    #
+    # @return [Types::ListPickupLocationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPickupLocationsResult#addresses #addresses} => Array&lt;Types::Address&gt;
+    #   * {Types::ListPickupLocationsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To get a list of locations from which the customer can choose to pickup a device.
+    #
+    #   # Returns a specified number of Address objects. Each Address is a pickup location address for Snow Family devices.
+    #
+    #   resp = client.list_pickup_locations({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     addresses: [
+    #       {
+    #         address_id: "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b", 
+    #         city: "Seattle", 
+    #         company: "My Company", 
+    #         country: "US", 
+    #         name: "My Name", 
+    #         phone_number: "425-555-5555", 
+    #         postal_code: "98101", 
+    #         state_or_province: "WA", 
+    #         street_1: "123 Main Street", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_pickup_locations({
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.addresses #=> Array
+    #   resp.addresses[0].address_id #=> String
+    #   resp.addresses[0].name #=> String
+    #   resp.addresses[0].company #=> String
+    #   resp.addresses[0].street_1 #=> String
+    #   resp.addresses[0].street_2 #=> String
+    #   resp.addresses[0].street_3 #=> String
+    #   resp.addresses[0].city #=> String
+    #   resp.addresses[0].state_or_province #=> String
+    #   resp.addresses[0].prefecture_or_district #=> String
+    #   resp.addresses[0].landmark #=> String
+    #   resp.addresses[0].country #=> String
+    #   resp.addresses[0].postal_code #=> String
+    #   resp.addresses[0].phone_number #=> String
+    #   resp.addresses[0].is_restricted #=> Boolean
+    #   resp.addresses[0].type #=> String, one of "CUST_PICKUP", "AWS_SHIP"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListPickupLocations AWS API Documentation
+    #
+    # @overload list_pickup_locations(params = {})
+    # @param [Hash] params ({})
+    def list_pickup_locations(params = {}, options = {})
+      req = build_request(:list_pickup_locations, params)
       req.send_request(options)
     end
 
@@ -2509,6 +2637,7 @@ module Aws::Snowball
     #       sns_topic_arn: "SnsTopicARN",
     #       job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #       notify_all: false,
+    #       device_pickup_sns_topic_arn: "SnsTopicARN",
     #     },
     #     forwarding_address_id: "AddressId",
     #   })
@@ -2576,6 +2705,9 @@ module Aws::Snowball
     #   The updated ID for the forwarding address for a job. This field is not
     #   supported in most regions.
     #
+    # @option params [Types::PickupDetails] :pickup_details
+    #   Information identifying the person picking up the device.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -2601,6 +2733,7 @@ module Aws::Snowball
     #       sns_topic_arn: "SnsTopicARN",
     #       job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWSSortingFacility, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #       notify_all: false,
+    #       device_pickup_sns_topic_arn: "SnsTopicARN",
     #     },
     #     resources: {
     #       s3_resources: [
@@ -2658,8 +2791,17 @@ module Aws::Snowball
     #     address_id: "AddressId",
     #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #     description: "String",
-    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, T14, T32, NoPreference, T240
+    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, T14, T32, NoPreference, T240, T13
     #     forwarding_address_id: "AddressId",
+    #     pickup_details: {
+    #       name: "String",
+    #       phone_number: "PhoneNumber",
+    #       email: "Email",
+    #       identification_number: "String",
+    #       identification_expiration_date: Time.now,
+    #       identification_issuing_org: "String",
+    #       device_pickup_id: "DevicePickupId",
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateJob AWS API Documentation
@@ -2749,7 +2891,7 @@ module Aws::Snowball
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-snowball'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

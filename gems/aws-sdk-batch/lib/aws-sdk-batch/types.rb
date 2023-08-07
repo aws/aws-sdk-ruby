@@ -445,11 +445,20 @@ module Aws::Batch
     #     allocation strategy is only available for Spot Instance compute
     #     resources.
     #
-    #   With both `BEST_FIT_PROGRESSIVE` and `SPOT_CAPACITY_OPTIMIZED`
-    #   strategies using On-Demand or Spot Instances, and the `BEST_FIT`
-    #   strategy using Spot Instances, Batch might need to exceed `maxvCpus`
-    #   to meet your capacity requirements. In this event, Batch never
-    #   exceeds `maxvCpus` by more than a single instance.
+    #   SPOT\_PRICE\_CAPACITY\_OPTIMIZED
+    #
+    #   : The price and capacity optimized allocation strategy looks at both
+    #     price and capacity to select the Spot Instance pools that are the
+    #     least likely to be interrupted and have the lowest possible price.
+    #     This allocation strategy is only available for Spot Instance
+    #     compute resources.
+    #
+    #   With `BEST_FIT_PROGRESSIVE`,`SPOT_CAPACITY_OPTIMIZED` and
+    #   `SPOT_PRICE_CAPACITY_OPTIMIZED` strategies using On-Demand or Spot
+    #   Instances, and the `BEST_FIT` strategy using Spot Instances, Batch
+    #   might need to exceed `maxvCpus` to meet your capacity requirements.
+    #   In this event, Batch never exceeds `maxvCpus` by more than a single
+    #   instance.
     #
     #
     #
@@ -471,13 +480,14 @@ module Aws::Batch
     # @!attribute [rw] maxv_cpus
     #   The maximum number of vCPUs that a compute environment can support.
     #
-    #   <note markdown="1"> With both `BEST_FIT_PROGRESSIVE` and `SPOT_CAPACITY_OPTIMIZED`
-    #   allocation strategies using On-Demand or Spot Instances, and the
-    #   `BEST_FIT` strategy using Spot Instances, Batch might need to exceed
-    #   `maxvCpus` to meet your capacity requirements. In this event, Batch
-    #   never exceeds `maxvCpus` by more than a single instance. For
-    #   example, no more than a single instance from among those specified
-    #   in your compute environment is allocated.
+    #   <note markdown="1"> With `BEST_FIT_PROGRESSIVE`, `SPOT_CAPACITY_OPTIMIZED` and
+    #   `SPOT_PRICE_CAPACITY_OPTIMIZED` allocation strategies using
+    #   On-Demand or Spot Instances, and the `BEST_FIT` strategy using Spot
+    #   Instances, Batch might need to exceed `maxvCpus` to meet your
+    #   capacity requirements. In this event, Batch never exceeds `maxvCpus`
+    #   by more than a single instance. For example, no more than a single
+    #   instance from among those specified in your compute environment is
+    #   allocated.
     #
     #    </note>
     #   @return [Integer]
@@ -775,13 +785,13 @@ module Aws::Batch
     #   The maximum number of Amazon EC2 vCPUs that an environment can
     #   reach.
     #
-    #   <note markdown="1"> With both `BEST_FIT_PROGRESSIVE` and `SPOT_CAPACITY_OPTIMIZED`
-    #   allocation strategies using On-Demand or Spot Instances, and the
-    #   `BEST_FIT` strategy using Spot Instances, Batch might need to exceed
-    #   `maxvCpus` to meet your capacity requirements. In this event, Batch
-    #   never exceeds `maxvCpus` by more than a single instance. That is, no
-    #   more than a single instance from among those specified in your
-    #   compute environment.
+    #   <note markdown="1"> With `BEST_FIT_PROGRESSIVE`, `SPOT_CAPACITY_OPTIMIZED`, and
+    #   `SPOT_PRICE_CAPACITY_OPTIMIZED` allocation strategies using
+    #   On-Demand or Spot Instances, and the `BEST_FIT` strategy using Spot
+    #   Instances, Batch might need to exceed `maxvCpus` to meet your
+    #   capacity requirements. In this event, Batch never exceeds `maxvCpus`
+    #   by more than a single instance. That is, no more than a single
+    #   instance from among those specified in your compute environment.
     #
     #    </note>
     #   @return [Integer]
@@ -904,11 +914,20 @@ module Aws::Batch
     #     allocation strategy is only available for Spot Instance compute
     #     resources.
     #
-    #   With both `BEST_FIT_PROGRESSIVE` and `SPOT_CAPACITY_OPTIMIZED`
-    #   strategies using On-Demand or Spot Instances, and the `BEST_FIT`
-    #   strategy using Spot Instances, Batch might need to exceed `maxvCpus`
-    #   to meet your capacity requirements. In this event, Batch never
-    #   exceeds `maxvCpus` by more than a single instance.
+    #   SPOT\_PRICE\_CAPACITY\_OPTIMIZED
+    #
+    #   : The price and capacity optimized allocation strategy looks at both
+    #     price and capacity to select the Spot Instance pools that are the
+    #     least likely to be interrupted and have the lowest possible price.
+    #     This allocation strategy is only available for Spot Instance
+    #     compute resources.
+    #
+    #   With both `BEST_FIT_PROGRESSIVE`, `SPOT_CAPACITY_OPTIMIZED`, and
+    #   `SPOT_PRICE_CAPACITY_OPTIMIZED` strategies using On-Demand or Spot
+    #   Instances, and the `BEST_FIT` strategy using Spot Instances, Batch
+    #   might need to exceed `maxvCpus` to meet your capacity requirements.
+    #   In this event, Batch never exceeds `maxvCpus` by more than a single
+    #   instance.
     #
     #
     #
@@ -5927,7 +5946,7 @@ module Aws::Batch
     #
     # @!attribute [rw] cpu_architecture
     #   The vCPU architecture. The default value is `X86_64`. Valid values
-    #   are `X86_64` and ` ARM64`.
+    #   are `X86_64` and `ARM64`.
     #
     #   <note markdown="1"> This parameter must be set to `X86_64` for Windows containers.
     #

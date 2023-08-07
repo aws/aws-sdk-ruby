@@ -210,6 +210,1267 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Contains the time metric, interval, and method by which to bin the
+    # analytics data.
+    #
+    # @!attribute [rw] name
+    #   Specifies the time metric by which to bin the analytics data.
+    #   @return [String]
+    #
+    # @!attribute [rw] interval
+    #   Specifies the interval of time by which to bin the analytics data.
+    #   @return [String]
+    #
+    # @!attribute [rw] order
+    #   Specifies whether to bin the analytics data in ascending or
+    #   descending order. If this field is left blank, the default order is
+    #   by the key of the bin in descending order.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsBinBySpecification AWS API Documentation
+    #
+    class AnalyticsBinBySpecification < Struct.new(
+      :name,
+      :interval,
+      :order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object containing the criterion by which to bin the results and the
+    # value that defines that bin.
+    #
+    # @!attribute [rw] name
+    #   The criterion by which to bin the results.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the criterion that defines the bin.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsBinKey AWS API Documentation
+    #
+    class AnalyticsBinKey < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains fields describing a condition by which to filter the intents.
+    # The expression may be understood as `name` `operator` `values`. For
+    # example:
+    #
+    # * `IntentName CO Book` – The intent name contains the string "Book."
+    #
+    # * `BotVersion EQ 2` – The bot version is equal to two.
+    #
+    # The operators that each filter supports are listed below:
+    #
+    # * `BotAlias` – `EQ`.
+    #
+    # * `BotVersion` – `EQ`.
+    #
+    # * `LocaleId` – `EQ`.
+    #
+    # * `Modality` – `EQ`.
+    #
+    # * `Channel` – `EQ`.
+    #
+    # * `SessionId` – `EQ`.
+    #
+    # * `OriginatingRequestId` – `EQ`.
+    #
+    # * `IntentName` – `EQ`, `CO`.
+    #
+    # * `IntentEndState` – `EQ`, `CO`.
+    #
+    # @!attribute [rw] name
+    #   The category by which to filter the intents. The descriptions for
+    #   each option are as follows:
+    #
+    #   * `BotAlias` – The name of the bot alias.
+    #
+    #   * `BotVersion` – The version of the bot.
+    #
+    #   * `LocaleId` – The locale of the bot.
+    #
+    #   * `Modality` – The modality of the session with the bot (audio,
+    #     DTMF, or text).
+    #
+    #   * `Channel` – The channel that the bot is integrated with.
+    #
+    #   * `SessionId` – The identifier of the session with the bot.
+    #
+    #   * `OriginatingRequestId` – The identifier of the first request in a
+    #     session.
+    #
+    #   * `IntentName` – The name of the intent.
+    #
+    #   * `IntentEndState` – The final state of the intent.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   The operation by which to filter the category. The following
+    #   operations are possible:
+    #
+    #   * `CO` – Contains
+    #
+    #   * `EQ` – Equals
+    #
+    #   * `GT` – Greater than
+    #
+    #   * `LT` – Less than
+    #
+    #   The operators that each filter supports are listed below:
+    #
+    #   * `BotAlias` – `EQ`.
+    #
+    #   * `BotVersion` – `EQ`.
+    #
+    #   * `LocaleId` – `EQ`.
+    #
+    #   * `Modality` – `EQ`.
+    #
+    #   * `Channel` – `EQ`.
+    #
+    #   * `SessionId` – `EQ`.
+    #
+    #   * `OriginatingRequestId` – `EQ`.
+    #
+    #   * `IntentName` – `EQ`, `CO`.
+    #
+    #   * `IntentEndState` – `EQ`, `CO`.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   An array containing the values of the category by which to apply the
+    #   operator to filter the results. You can provide multiple values if
+    #   the operator is `EQ` or `CO`. If you provide multiple values, you
+    #   filter for results that equal/contain any of the values. For
+    #   example, if the `name`, `operator`, and `values` fields are
+    #   `Modality`, `EQ`, and `[Speech, Text]`, the operation filters for
+    #   results where the modality was either `Speech` or `Text`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsIntentFilter AWS API Documentation
+    #
+    class AnalyticsIntentFilter < Struct.new(
+      :name,
+      :operator,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the category by which the intent analytics were grouped and a
+    # member of that category.
+    #
+    # @!attribute [rw] name
+    #   A category by which the intent analytics were grouped.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   A member of the category by which the intent analytics were grouped.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsIntentGroupByKey AWS API Documentation
+    #
+    class AnalyticsIntentGroupByKey < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the category by which to group the intents.
+    #
+    # @!attribute [rw] name
+    #   Specifies whether to group the intent stages by their name or their
+    #   end state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsIntentGroupBySpecification AWS API Documentation
+    #
+    class AnalyticsIntentGroupBySpecification < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the metric and the summary statistic you want to calculate,
+    # and the order in which to sort the results, for the intents in the
+    # bot.
+    #
+    # @!attribute [rw] name
+    #   The metric for which you want to get intent summary statistics.
+    #
+    #   * `Count` – The number of times the intent was invoked.
+    #
+    #   * `Success` – The number of times the intent succeeded.
+    #
+    #   * `Failure` – The number of times the intent failed.
+    #
+    #   * `Switched` – The number of times there was a switch to a different
+    #     intent.
+    #
+    #   * `Dropped` – The number of times the user dropped the intent.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistic
+    #   The summary statistic to calculate.
+    #
+    #   * `Sum` – The total count for the category you provide in `name`.
+    #
+    #   * `Average` – The total count divided by the number of intents in
+    #     the category you provide in `name`.
+    #
+    #   * `Max` – The highest count in the category you provide in `name`.
+    #   @return [String]
+    #
+    # @!attribute [rw] order
+    #   Specifies whether to sort the results in ascending or descending
+    #   order.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsIntentMetric AWS API Documentation
+    #
+    class AnalyticsIntentMetric < Struct.new(
+      :name,
+      :statistic,
+      :order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object containing the results for the intent metric you requested.
+    #
+    # @!attribute [rw] name
+    #   The metric that you requested. See [Key definitions][1] for more
+    #   details about these metrics.
+    #
+    #   * `Count` – The number of times the intent was invoked.
+    #
+    #   * `Success` – The number of times the intent succeeded.
+    #
+    #   * `Failure` – The number of times the intent failed.
+    #
+    #   * `Switched` – The number of times there was a switch to a different
+    #     intent.
+    #
+    #   * `Dropped` – The number of times the user dropped the intent.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/analytics-key-definitions.html
+    #   @return [String]
+    #
+    # @!attribute [rw] statistic
+    #   The statistic that you requested to calculate.
+    #
+    #   * `Sum` – The total count for the category you provide in `name`.
+    #
+    #   * `Average` – The total count divided by the number of intents in
+    #     the category you provide in `name`.
+    #
+    #   * `Max` – The highest count in the category you provide in `name`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the summary statistic for the metric that you
+    #   requested.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsIntentMetricResult AWS API Documentation
+    #
+    class AnalyticsIntentMetricResult < Struct.new(
+      :name,
+      :statistic,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object containing information about the requested path.
+    #
+    # @!attribute [rw] intent_name
+    #   The name of the intent at the end of the requested path.
+    #   @return [String]
+    #
+    # @!attribute [rw] intent_path
+    #   The path.
+    #   @return [String]
+    #
+    # @!attribute [rw] intent_count
+    #   The total number of sessions that follow the given path to the given
+    #   intent.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] intent_level
+    #   The number of intents up to and including the requested path.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] node_type
+    #   Specifies whether the node is the end of a path (`Exit`) or not
+    #   (`Inner`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsIntentNodeSummary AWS API Documentation
+    #
+    class AnalyticsIntentNodeSummary < Struct.new(
+      :intent_name,
+      :intent_path,
+      :intent_count,
+      :intent_level,
+      :node_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object containing the results for the intent metrics you requested
+    # and the bin and/or group(s) they refer to, if applicable.
+    #
+    # @!attribute [rw] bin_keys
+    #   A list of objects containing the criteria you requested for binning
+    #   results and the values of the bins.
+    #   @return [Array<Types::AnalyticsBinKey>]
+    #
+    # @!attribute [rw] group_by_keys
+    #   A list of objects containing the criteria you requested for grouping
+    #   results and the values of the groups.
+    #   @return [Array<Types::AnalyticsIntentGroupByKey>]
+    #
+    # @!attribute [rw] metrics_results
+    #   A list of objects, each of which contains a metric you want to list,
+    #   the statistic for the metric you want to return, and the method by
+    #   which to organize the results.
+    #   @return [Array<Types::AnalyticsIntentMetricResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsIntentResult AWS API Documentation
+    #
+    class AnalyticsIntentResult < Struct.new(
+      :bin_keys,
+      :group_by_keys,
+      :metrics_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains fields describing a condition by which to filter the intent
+    # stages. The expression may be understood as `name` `operator`
+    # `values`. For example:
+    #
+    # * `IntentName CO Book` – The intent name contains the string "Book."
+    #
+    # * `BotVersion EQ 2` – The bot version is equal to two.
+    #
+    # The operators that each filter supports are listed below:
+    #
+    # * `BotAlias` – `EQ`.
+    #
+    # * `BotVersion` – `EQ`.
+    #
+    # * `LocaleId` – `EQ`.
+    #
+    # * `Modality` – `EQ`.
+    #
+    # * `Channel` – `EQ`.
+    #
+    # * `SessionId` – `EQ`.
+    #
+    # * `OriginatingRequestId` – `EQ`.
+    #
+    # * `IntentName` – `EQ`, `CO`.
+    #
+    # * `IntentStageName` – `EQ`, `CO`.
+    #
+    # @!attribute [rw] name
+    #   The category by which to filter the intent stages. The descriptions
+    #   for each option are as follows:
+    #
+    #   * `BotAlias` – The name of the bot alias.
+    #
+    #   * `BotVersion` – The version of the bot.
+    #
+    #   * `LocaleId` – The locale of the bot.
+    #
+    #   * `Modality` – The modality of the session with the bot (audio,
+    #     DTMF, or text).
+    #
+    #   * `Channel` – The channel that the bot is integrated with.
+    #
+    #   * `SessionId` – The identifier of the session with the bot.
+    #
+    #   * `OriginatingRequestId` – The identifier of the first request in a
+    #     session.
+    #
+    #   * `IntentName` – The name of the intent.
+    #
+    #   * `IntentStageName` – The stage in the intent.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   The operation by which to filter the category. The following
+    #   operations are possible:
+    #
+    #   * `CO` – Contains
+    #
+    #   * `EQ` – Equals
+    #
+    #   * `GT` – Greater than
+    #
+    #   * `LT` – Less than
+    #
+    #   The operators that each filter supports are listed below:
+    #
+    #   * `BotAlias` – `EQ`.
+    #
+    #   * `BotVersion` – `EQ`.
+    #
+    #   * `LocaleId` – `EQ`.
+    #
+    #   * `Modality` – `EQ`.
+    #
+    #   * `Channel` – `EQ`.
+    #
+    #   * `SessionId` – `EQ`.
+    #
+    #   * `OriginatingRequestId` – `EQ`.
+    #
+    #   * `IntentName` – `EQ`, `CO`.
+    #
+    #   * `IntentStageName` – `EQ`, `CO`.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   An array containing the values of the category by which to apply the
+    #   operator to filter the results. You can provide multiple values if
+    #   the operator is `EQ` or `CO`. If you provide multiple values, you
+    #   filter for results that equal/contain any of the values. For
+    #   example, if the `name`, `operator`, and `values` fields are
+    #   `Modality`, `EQ`, and `[Speech, Text]`, the operation filters for
+    #   results where the modality was either `Speech` or `Text`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsIntentStageFilter AWS API Documentation
+    #
+    class AnalyticsIntentStageFilter < Struct.new(
+      :name,
+      :operator,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the category by which the intent stage analytics and the
+    # values for that category were grouped.
+    #
+    # @!attribute [rw] name
+    #   A category by which the intent stage analytics were grouped.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   A member of the category by which the intent stage analytics were
+    #   grouped.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsIntentStageGroupByKey AWS API Documentation
+    #
+    class AnalyticsIntentStageGroupByKey < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the category by which to group the intent stages.
+    #
+    # @!attribute [rw] name
+    #   Specifies whether to group the intent stages by their name or the
+    #   intent to which the session was switched.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsIntentStageGroupBySpecification AWS API Documentation
+    #
+    class AnalyticsIntentStageGroupBySpecification < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the metric and the summary statistic you want to calculate,
+    # and the order in which to sort the results, for the intent stages
+    # across the user sessions with the bot.
+    #
+    # @!attribute [rw] name
+    #   The metric for which you want to get intent stage summary
+    #   statistics. See [Key definitions][1] for more details about these
+    #   metrics.
+    #
+    #   * `Count` – The number of times the intent stage occurred.
+    #
+    #   * `Success` – The number of times the intent stage succeeded.
+    #
+    #   * `Failure` – The number of times the intent stage failed.
+    #
+    #   * `Dropped` – The number of times the user dropped the intent stage.
+    #
+    #   * `Retry` – The number of times the bot tried to elicit a response
+    #     from the user at this stage.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/analytics-key-definitions.html
+    #   @return [String]
+    #
+    # @!attribute [rw] statistic
+    #   The summary statistic to calculate.
+    #
+    #   * `Sum` – The total count for the category you provide in `name`.
+    #
+    #   * `Average` – The total count divided by the number of intent stages
+    #     in the category you provide in `name`.
+    #
+    #   * `Max` – The highest count in the category you provide in `name`.
+    #   @return [String]
+    #
+    # @!attribute [rw] order
+    #   Specifies whether to sort the results in ascending or descending
+    #   order of the summary statistic (`value` in the response).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsIntentStageMetric AWS API Documentation
+    #
+    class AnalyticsIntentStageMetric < Struct.new(
+      :name,
+      :statistic,
+      :order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object containing the results for an intent stage metric you
+    # requested.
+    #
+    # @!attribute [rw] name
+    #   The metric that you requested.
+    #
+    #   * `Count` – The number of times the intent stage occurred.
+    #
+    #   * `Success` – The number of times the intent stage succeeded.
+    #
+    #   * `Failure` – The number of times the intent stage failed.
+    #
+    #   * `Dropped` – The number of times the user dropped the intent stage.
+    #
+    #   * `Retry` – The number of times the bot tried to elicit a response
+    #     from the user at this stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistic
+    #   The summary statistic that you requested to calculate.
+    #
+    #   * `Sum` – The total count for the category you provide in `name`.
+    #
+    #   * `Average` – The total count divided by the number of intent stages
+    #     in the category you provide in `name`.
+    #
+    #   * `Max` – The highest count in the category you provide in `name`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the summary statistic for the metric that you
+    #   requested.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsIntentStageMetricResult AWS API Documentation
+    #
+    class AnalyticsIntentStageMetricResult < Struct.new(
+      :name,
+      :statistic,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object containing the results for the intent stage metrics you
+    # requested and the bin and/or group they refer to, if applicable.
+    #
+    # @!attribute [rw] bin_keys
+    #   A list of objects containing the criteria you requested for binning
+    #   results and the values of the bins.
+    #   @return [Array<Types::AnalyticsBinKey>]
+    #
+    # @!attribute [rw] group_by_keys
+    #   A list of objects containing the criteria you requested for grouping
+    #   results and the values of the bins.
+    #   @return [Array<Types::AnalyticsIntentStageGroupByKey>]
+    #
+    # @!attribute [rw] metrics_results
+    #   A list of objects, each of which contains a metric you want to list,
+    #   the statistic for the metric you want to return, and the method by
+    #   which to organize the results.
+    #   @return [Array<Types::AnalyticsIntentStageMetricResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsIntentStageResult AWS API Documentation
+    #
+    class AnalyticsIntentStageResult < Struct.new(
+      :bin_keys,
+      :group_by_keys,
+      :metrics_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains fields describing a condition by which to filter the paths.
+    # The expression may be understood as `name` `operator` `values`. For
+    # example:
+    #
+    # * `LocaleId EQ en` – The locale is "en".
+    #
+    # * `BotVersion EQ 2` – The bot version is equal to two.
+    #
+    # The operators that each filter supports are listed below:
+    #
+    # * `BotAlias` – `EQ`.
+    #
+    # * `BotVersion` – `EQ`.
+    #
+    # * `LocaleId` – `EQ`.
+    #
+    # * `Modality` – `EQ`.
+    #
+    # * `Channel` – `EQ`.
+    #
+    # @!attribute [rw] name
+    #   The category by which to filter the intent paths. The descriptions
+    #   for each option are as follows:
+    #
+    #   * `BotAlias` – The name of the bot alias.
+    #
+    #   * `BotVersion` – The version of the bot.
+    #
+    #   * `LocaleId` – The locale of the bot.
+    #
+    #   * `Modality` – The modality of the session with the bot (audio,
+    #     DTMF, or text).
+    #
+    #   * `Channel` – The channel that the bot is integrated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   The operation by which to filter the category. The following
+    #   operations are possible:
+    #
+    #   * `CO` – Contains
+    #
+    #   * `EQ` – Equals
+    #
+    #   * `GT` – Greater than
+    #
+    #   * `LT` – Less than
+    #
+    #   The operators that each filter supports are listed below:
+    #
+    #   * `BotAlias` – `EQ`.
+    #
+    #   * `BotVersion` – `EQ`.
+    #
+    #   * `LocaleId` – `EQ`.
+    #
+    #   * `Modality` – `EQ`.
+    #
+    #   * `Channel` – `EQ`.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   An array containing the values of the category by which to apply the
+    #   operator to filter the results. You can provide multiple values if
+    #   the operator is `EQ` or `CO`. If you provide multiple values, you
+    #   filter for results that equal/contain any of the values. For
+    #   example, if the `name`, `operator`, and `values` fields are
+    #   `Modality`, `EQ`, and `[Speech, Text]`, the operation filters for
+    #   results where the modality was either `Speech` or `Text`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsPathFilter AWS API Documentation
+    #
+    class AnalyticsPathFilter < Struct.new(
+      :name,
+      :operator,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains fields describing a condition by which to filter the
+    # sessions. The expression may be understood as `name` `operator`
+    # `values`. For example:
+    #
+    # * `LocaleId EQ en` – The locale is "en".
+    #
+    # * `Duration GT 200` – The duration is greater than 200 seconds.
+    #
+    # The operators that each filter supports are listed below:
+    #
+    # * `BotAlias` – `EQ`.
+    #
+    # * `BotVersion` – `EQ`.
+    #
+    # * `LocaleId` – `EQ`.
+    #
+    # * `Modality` – `EQ`.
+    #
+    # * `Channel` – `EQ`.
+    #
+    # * `Duration` – `EQ`, `GT`, `LT`.
+    #
+    # * `conversationEndState` – `EQ`, `CO`.
+    #
+    # * `SessionId` – `EQ`.
+    #
+    # * `OriginatingRequestId` – `EQ`.
+    #
+    # * `IntentPath` – `EQ`.
+    #
+    # @!attribute [rw] name
+    #   The category by which to filter the sessions. The descriptions for
+    #   each option are as follows:
+    #
+    #   * `BotAlias` – The name of the bot alias.
+    #
+    #   * `BotVersion` – The version of the bot.
+    #
+    #   * `LocaleId` – The locale of the bot.
+    #
+    #   * `Modality` – The modality of the session with the bot (audio,
+    #     DTMF, or text).
+    #
+    #   * `Channel` – The channel that the bot is integrated with.
+    #
+    #   * `Duration` – The duration of the session.
+    #
+    #   * `conversationEndState` – The final state of the session.
+    #
+    #   * `SessionId` – The identifier of the session with the bot.
+    #
+    #   * `OriginatingRequestId` – The identifier of the first request in a
+    #     session.
+    #
+    #   * `IntentPath` – The order of intents taken in a session.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   The operation by which to filter the category. The following
+    #   operations are possible:
+    #
+    #   * `CO` – Contains
+    #
+    #   * `EQ` – Equals
+    #
+    #   * `GT` – Greater than
+    #
+    #   * `LT` – Less than
+    #
+    #   The operators that each filter supports are listed below:
+    #
+    #   * `BotAlias` – `EQ`.
+    #
+    #   * `BotVersion` – `EQ`.
+    #
+    #   * `LocaleId` – `EQ`.
+    #
+    #   * `Modality` – `EQ`.
+    #
+    #   * `Channel` – `EQ`.
+    #
+    #   * `Duration` – `EQ`, `GT`, `LT`.
+    #
+    #   * `conversationEndState` – `EQ`, `CO`.
+    #
+    #   * `SessionId` – `EQ`.
+    #
+    #   * `OriginatingRequestId` – `EQ`.
+    #
+    #   * `IntentPath` – `EQ`.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   An array containing the values of the category by which to apply the
+    #   operator to filter the results. You can provide multiple values if
+    #   the operator is `EQ` or `CO`. If you provide multiple values, you
+    #   filter for results that equal/contain any of the values. For
+    #   example, if the `name`, `operator`, and `values` fields are
+    #   `Modality`, `EQ`, and `[Speech, Text]`, the operation filters for
+    #   results where the modality was either `Speech` or `Text`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsSessionFilter AWS API Documentation
+    #
+    class AnalyticsSessionFilter < Struct.new(
+      :name,
+      :operator,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the category by which the session analytics were grouped and
+    # a member of that category.
+    #
+    # @!attribute [rw] name
+    #   The category by which the session analytics were grouped.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   A member of the category by which the session analytics were
+    #   grouped.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsSessionGroupByKey AWS API Documentation
+    #
+    class AnalyticsSessionGroupByKey < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the category by which to group the sessions.
+    #
+    # @!attribute [rw] name
+    #   Specifies whether to group the session by their end state or their
+    #   locale.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsSessionGroupBySpecification AWS API Documentation
+    #
+    class AnalyticsSessionGroupBySpecification < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the metric and the summary statistic you want to calculate,
+    # and the order in which to sort the results, for the user sessions with
+    # the bot.
+    #
+    # @!attribute [rw] name
+    #   The metric for which you want to get session summary statistics.
+    #
+    #   * `Count` – The number of sessions.
+    #
+    #   * `Success` – The number of sessions that succeeded.
+    #
+    #   * `Failure` – The number of sessions that failed.
+    #
+    #   * `Dropped` – The number of sessions that the user dropped.
+    #
+    #   * `Duration` – The duration of sessions.
+    #
+    #   * `TurnsPerSession` – The number of turns in the sessions.
+    #
+    #   * `Concurrency` – The number of sessions occurring in the same
+    #     period of time.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistic
+    #   The summary statistic to calculate.
+    #
+    #   * `Sum` – The total count for the category you provide in `name`.
+    #
+    #   * `Average` – The total count divided by the number of sessions in
+    #     the category you provide in `name`.
+    #
+    #   * `Max` – The highest count in the category you provide in `name`.
+    #   @return [String]
+    #
+    # @!attribute [rw] order
+    #   Specifies whether to sort the results in ascending or descending
+    #   order.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsSessionMetric AWS API Documentation
+    #
+    class AnalyticsSessionMetric < Struct.new(
+      :name,
+      :statistic,
+      :order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object containing the results for a session metric you requested.
+    #
+    # @!attribute [rw] name
+    #   The metric that you requested.
+    #
+    #   * `Count` – The number of sessions.
+    #
+    #   * `Success` – The number of sessions that succeeded.
+    #
+    #   * `Failure` – The number of sessions that failed.
+    #
+    #   * `Dropped` – The number of sessions that the user dropped.
+    #
+    #   * `Duration` – The duration of sessions.
+    #
+    #   * `TurnPersession` – The number of turns in the sessions.
+    #
+    #   * `Concurrency` – The number of sessions occurring in the same
+    #     period of time.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistic
+    #   The summary statistic that you requested to calculate.
+    #
+    #   * `Sum` – The total count for the category you provide in `name`.
+    #
+    #   * `Average` – The total count divided by the number of sessions in
+    #     the category you provide in `name`.
+    #
+    #   * `Max` – The highest count in the category you provide in `name`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the summary statistic for the metric that you
+    #   requested.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsSessionMetricResult AWS API Documentation
+    #
+    class AnalyticsSessionMetricResult < Struct.new(
+      :name,
+      :statistic,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object containing the results for the session metrics you requested
+    # and the bin and/or group(s) they refer to, if applicable.
+    #
+    # @!attribute [rw] bin_keys
+    #   A list of objects containing the criteria you requested for binning
+    #   results and the values of the bins.
+    #   @return [Array<Types::AnalyticsBinKey>]
+    #
+    # @!attribute [rw] group_by_keys
+    #   A list of objects containing the criteria you requested for grouping
+    #   results and the values of the bins.
+    #   @return [Array<Types::AnalyticsSessionGroupByKey>]
+    #
+    # @!attribute [rw] metrics_results
+    #   A list of objects, each of which contains a metric you want to list,
+    #   the statistic for the metric you want to return, and the method by
+    #   which to organize the results.
+    #   @return [Array<Types::AnalyticsSessionMetricResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsSessionResult AWS API Documentation
+    #
+    class AnalyticsSessionResult < Struct.new(
+      :bin_keys,
+      :group_by_keys,
+      :metrics_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that specifies the last used intent at the time of the
+    # utterance as an attribute to return.
+    #
+    # @!attribute [rw] name
+    #   An attribute to return. The only available attribute is the intent
+    #   that the bot mapped the utterance to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsUtteranceAttribute AWS API Documentation
+    #
+    class AnalyticsUtteranceAttribute < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object containing the intent that the bot mapped the utterance to.
+    #
+    # @!attribute [rw] last_used_intent
+    #   The intent that the bot mapped the utterance to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsUtteranceAttributeResult AWS API Documentation
+    #
+    class AnalyticsUtteranceAttributeResult < Struct.new(
+      :last_used_intent)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains fields describing a condition by which to filter the
+    # utterances. The expression may be understood as `name` `operator`
+    # `values`. For example:
+    #
+    # * `LocaleId EQ Book` – The locale is the string "en".
+    #
+    # * `UtteranceText CO help` – The text of the utterance contains the
+    #   string "help".
+    #
+    # The operators that each filter supports are listed below:
+    #
+    # * `BotAlias` – `EQ`.
+    #
+    # * `BotVersion` – `EQ`.
+    #
+    # * `LocaleId` – `EQ`.
+    #
+    # * `Modality` – `EQ`.
+    #
+    # * `Channel` – `EQ`.
+    #
+    # * `SessionId` – `EQ`.
+    #
+    # * `OriginatingRequestId` – `EQ`.
+    #
+    # * `UtteranceState` – `EQ`.
+    #
+    # * `UtteranceText` – `EQ`, `CO`.
+    #
+    # @!attribute [rw] name
+    #   The category by which to filter the utterances. The descriptions for
+    #   each option are as follows:
+    #
+    #   * `BotAlias` – The name of the bot alias.
+    #
+    #   * `BotVersion` – The version of the bot.
+    #
+    #   * `LocaleId` – The locale of the bot.
+    #
+    #   * `Modality` – The modality of the session with the bot (audio,
+    #     DTMF, or text).
+    #
+    #   * `Channel` – The channel that the bot is integrated with.
+    #
+    #   * `SessionId` – The identifier of the session with the bot.
+    #
+    #   * `OriginatingRequestId` – The identifier of the first request in a
+    #     session.
+    #
+    #   * `UtteranceState` – The state of the utterance.
+    #
+    #   * `UtteranceText` – The text in the utterance.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   The operation by which to filter the category. The following
+    #   operations are possible:
+    #
+    #   * `CO` – Contains
+    #
+    #   * `EQ` – Equals
+    #
+    #   * `GT` – Greater than
+    #
+    #   * `LT` – Less than
+    #
+    #   The operators that each filter supports are listed below:
+    #
+    #   * `BotAlias` – `EQ`.
+    #
+    #   * `BotVersion` – `EQ`.
+    #
+    #   * `LocaleId` – `EQ`.
+    #
+    #   * `Modality` – `EQ`.
+    #
+    #   * `Channel` – `EQ`.
+    #
+    #   * `SessionId` – `EQ`.
+    #
+    #   * `OriginatingRequestId` – `EQ`.
+    #
+    #   * `UtteranceState` – `EQ`.
+    #
+    #   * `UtteranceText` – `EQ`, `CO`.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   An array containing the values of the category by which to apply the
+    #   operator to filter the results. You can provide multiple values if
+    #   the operator is `EQ` or `CO`. If you provide multiple values, you
+    #   filter for results that equal/contain any of the values. For
+    #   example, if the `name`, `operator`, and `values` fields are
+    #   `Modality`, `EQ`, and `[Speech, Text]`, the operation filters for
+    #   results where the modality was either `Speech` or `Text`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsUtteranceFilter AWS API Documentation
+    #
+    class AnalyticsUtteranceFilter < Struct.new(
+      :name,
+      :operator,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the category by which the utterance analytics were grouped
+    # and the values for that category.
+    #
+    # @!attribute [rw] name
+    #   The category by which the utterance analytics were grouped.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   A member of the category by which the utterance analytics were
+    #   grouped.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsUtteranceGroupByKey AWS API Documentation
+    #
+    class AnalyticsUtteranceGroupByKey < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the category by which to group the utterances.
+    #
+    # @!attribute [rw] name
+    #   Specifies whether to group the utterances by their text or their
+    #   state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsUtteranceGroupBySpecification AWS API Documentation
+    #
+    class AnalyticsUtteranceGroupBySpecification < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the metric and the summary statistic you want to calculate,
+    # and the order in which to sort the results, for the utterances across
+    # the user sessions with the bot.
+    #
+    # @!attribute [rw] name
+    #   The metric for which you want to get utterance summary statistics.
+    #
+    #   * `Count` – The number of utterances.
+    #
+    #   * `Missed` – The number of utterances that Amazon Lex failed to
+    #     recognize.
+    #
+    #   * `Detected` – The number of utterances that Amazon Lex managed to
+    #     detect.
+    #
+    #   * `UtteranceTimestamp` – The date and time of the utterance.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistic
+    #   The summary statistic to calculate.
+    #
+    #   * `Sum` – The total count for the category you provide in `name`.
+    #
+    #   * `Average` – The total count divided by the number of utterances in
+    #     the category you provide in `name`.
+    #
+    #   * `Max` – The highest count in the category you provide in `name`.
+    #   @return [String]
+    #
+    # @!attribute [rw] order
+    #   Specifies whether to sort the results in ascending or descending
+    #   order.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsUtteranceMetric AWS API Documentation
+    #
+    class AnalyticsUtteranceMetric < Struct.new(
+      :name,
+      :statistic,
+      :order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object containing the results for the utterance metric you
+    # requested.
+    #
+    # @!attribute [rw] name
+    #   The metric that you requested.
+    #
+    #   * `Count` – The number of utterances.
+    #
+    #   * `Missed` – The number of utterances that Amazon Lex failed to
+    #     recognize.
+    #
+    #   * `Detected` – The number of utterances that Amazon Lex managed to
+    #     detect.
+    #
+    #   * `UtteranceTimestamp` – The date and time of the utterance.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistic
+    #   The summary statistic that you requested to calculate.
+    #
+    #   * `Sum` – The total count for the category you provide in `name`.
+    #
+    #   * `Average` – The total count divided by the number of utterances in
+    #     the category you provide in `name`.
+    #
+    #   * `Max` – The highest count in the category you provide in `name`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the summary statistic for the metric that you
+    #   requested.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsUtteranceMetricResult AWS API Documentation
+    #
+    class AnalyticsUtteranceMetricResult < Struct.new(
+      :name,
+      :statistic,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object containing the results for the utterance metrics you
+    # requested and the bin and/or group(s) they refer to, if applicable.
+    #
+    # @!attribute [rw] bin_keys
+    #   A list of objects containing the criteria you requested for binning
+    #   results and the values of the bins.
+    #   @return [Array<Types::AnalyticsBinKey>]
+    #
+    # @!attribute [rw] group_by_keys
+    #   A list of objects containing the criteria you requested for grouping
+    #   results and the values of the bins.
+    #   @return [Array<Types::AnalyticsUtteranceGroupByKey>]
+    #
+    # @!attribute [rw] metrics_results
+    #   A list of objects, each of which contains a metric you want to list,
+    #   the statistic for the metric you want to return, and the method by
+    #   which to organize the results.
+    #   @return [Array<Types::AnalyticsUtteranceMetricResult>]
+    #
+    # @!attribute [rw] attribute_results
+    #   A list of objects containing information about the last used intent
+    #   at the time of an utterance.
+    #   @return [Array<Types::AnalyticsUtteranceAttributeResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AnalyticsUtteranceResult AWS API Documentation
+    #
+    class AnalyticsUtteranceResult < Struct.new(
+      :bin_keys,
+      :group_by_keys,
+      :metrics_results,
+      :attribute_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The object containing information that associates the recommended
     # intent/slot type with a conversation.
     #
@@ -6503,6 +7764,20 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # An object containing the name of an intent that was invoked.
+    #
+    # @!attribute [rw] intent_name
+    #   The name of an intent that was invoked.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/InvokedIntentSample AWS API Documentation
+    #
+    class InvokedIntentSample < Struct.new(
+      :intent_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides configuration information for the `AMAZON.KendraSearchIntent`
     # intent. When you use this intent, Amazon Lex searches the specified
     # Amazon Kendra index and returns documents from the index that match
@@ -7477,6 +8752,273 @@ module Aws::LexModelsV2
     end
 
     # @!attribute [rw] bot_id
+    #   The identifier for the bot for which you want to retrieve intent
+    #   metrics.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date_time
+    #   The timestamp that marks the beginning of the range of time for
+    #   which you want to see intent metrics.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date_time
+    #   The date and time that marks the end of the range of time for which
+    #   you want to see intent metrics.
+    #   @return [Time]
+    #
+    # @!attribute [rw] metrics
+    #   A list of objects, each of which contains a metric you want to list,
+    #   the statistic for the metric you want to return, and the order by
+    #   which to organize the results.
+    #   @return [Array<Types::AnalyticsIntentMetric>]
+    #
+    # @!attribute [rw] bin_by
+    #   A list of objects, each of which contains specifications for
+    #   organizing the results by time.
+    #   @return [Array<Types::AnalyticsBinBySpecification>]
+    #
+    # @!attribute [rw] group_by
+    #   A list of objects, each of which specifies how to group the results.
+    #   You can group by the following criteria:
+    #
+    #   * `IntentName` – The name of the intent.
+    #
+    #   * `IntentEndState` – The final state of the intent. The possible end
+    #     states are detailed in [Key definitions][1] in the user guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/analytics-key-definitions-intents
+    #   @return [Array<Types::AnalyticsIntentGroupBySpecification>]
+    #
+    # @!attribute [rw] filters
+    #   A list of objects, each of which describes a condition by which you
+    #   want to filter the results.
+    #   @return [Array<Types::AnalyticsIntentFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in each page of results. If
+    #   there are fewer results than the maximum page size, only the actual
+    #   number of results are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the response from the ListIntentMetrics operation contains more
+    #   results than specified in the maxResults parameter, a token is
+    #   returned in the response.
+    #
+    #   Use the returned token in the nextToken parameter of a
+    #   ListIntentMetrics request to return the next page of results. For a
+    #   complete set of results, call the ListIntentMetrics operation until
+    #   the nextToken returned in the response is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListIntentMetricsRequest AWS API Documentation
+    #
+    class ListIntentMetricsRequest < Struct.new(
+      :bot_id,
+      :start_date_time,
+      :end_date_time,
+      :metrics,
+      :bin_by,
+      :group_by,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The identifier for the bot for which you retrieved intent metrics.
+    #   @return [String]
+    #
+    # @!attribute [rw] results
+    #   The results for the intent metrics.
+    #   @return [Array<Types::AnalyticsIntentResult>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response from the ListIntentMetrics operation contains more
+    #   results than specified in the maxResults parameter, a token is
+    #   returned in the response.
+    #
+    #   Use the returned token in the nextToken parameter of a
+    #   ListIntentMetrics request to return the next page of results. For a
+    #   complete set of results, call the ListIntentMetrics operation until
+    #   the nextToken returned in the response is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListIntentMetricsResponse AWS API Documentation
+    #
+    class ListIntentMetricsResponse < Struct.new(
+      :bot_id,
+      :results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The identifier for the bot for which you want to retrieve intent
+    #   path metrics.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date_time
+    #   The date and time that marks the beginning of the range of time for
+    #   which you want to see intent path metrics.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date_time
+    #   The date and time that marks the end of the range of time for which
+    #   you want to see intent path metrics.
+    #   @return [Time]
+    #
+    # @!attribute [rw] intent_path
+    #   The intent path for which you want to retrieve metrics. Use a
+    #   forward slash to separate intents in the path. For example:
+    #
+    #   * /BookCar
+    #
+    #   * /BookCar/BookHotel
+    #
+    #   * /BookHotel/BookCar
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A list of objects, each describes a condition by which you want to
+    #   filter the results.
+    #   @return [Array<Types::AnalyticsPathFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListIntentPathsRequest AWS API Documentation
+    #
+    class ListIntentPathsRequest < Struct.new(
+      :bot_id,
+      :start_date_time,
+      :end_date_time,
+      :intent_path,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] node_summaries
+    #   A list of objects, each of which contains information about a node
+    #   in the intent path for which you requested metrics.
+    #   @return [Array<Types::AnalyticsIntentNodeSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListIntentPathsResponse AWS API Documentation
+    #
+    class ListIntentPathsResponse < Struct.new(
+      :node_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The identifier for the bot for which you want to retrieve intent
+    #   stage metrics.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date_time
+    #   The date and time that marks the beginning of the range of time for
+    #   which you want to see intent stage metrics.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date_time
+    #   The date and time that marks the end of the range of time for which
+    #   you want to see intent stage metrics.
+    #   @return [Time]
+    #
+    # @!attribute [rw] metrics
+    #   A list of objects, each of which contains a metric you want to list,
+    #   the statistic for the metric you want to return, and the method by
+    #   which to organize the results.
+    #   @return [Array<Types::AnalyticsIntentStageMetric>]
+    #
+    # @!attribute [rw] bin_by
+    #   A list of objects, each of which contains specifications for
+    #   organizing the results by time.
+    #   @return [Array<Types::AnalyticsBinBySpecification>]
+    #
+    # @!attribute [rw] group_by
+    #   A list of objects, each of which specifies how to group the results.
+    #   You can group by the following criteria:
+    #
+    #   * `IntentStageName` – The name of the intent stage.
+    #
+    #   * `SwitchedToIntent` – The intent to which the conversation was
+    #     switched (if any).
+    #   @return [Array<Types::AnalyticsIntentStageGroupBySpecification>]
+    #
+    # @!attribute [rw] filters
+    #   A list of objects, each of which describes a condition by which you
+    #   want to filter the results.
+    #   @return [Array<Types::AnalyticsIntentStageFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in each page of results. If
+    #   there are fewer results than the maximum page size, only the actual
+    #   number of results are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the response from the ListIntentStageMetrics operation contains
+    #   more results than specified in the maxResults parameter, a token is
+    #   returned in the response.
+    #
+    #   Use the returned token in the nextToken parameter of a
+    #   ListIntentStageMetrics request to return the next page of results.
+    #   For a complete set of results, call the ListIntentStageMetrics
+    #   operation until the nextToken returned in the response is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListIntentStageMetricsRequest AWS API Documentation
+    #
+    class ListIntentStageMetricsRequest < Struct.new(
+      :bot_id,
+      :start_date_time,
+      :end_date_time,
+      :metrics,
+      :bin_by,
+      :group_by,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The identifier for the bot for which you retrieved intent stage
+    #   metrics.
+    #   @return [String]
+    #
+    # @!attribute [rw] results
+    #   The results for the intent stage metrics.
+    #   @return [Array<Types::AnalyticsIntentStageResult>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response from the ListIntentStageMetrics operation contains
+    #   more results than specified in the maxResults parameter, a token is
+    #   returned in the response.
+    #
+    #   Use the returned token in the nextToken parameter of a
+    #   ListIntentStageMetrics request to return the next page of results.
+    #   For a complete set of results, call the ListIntentStageMetrics
+    #   operation until the nextToken returned in the response is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListIntentStageMetricsResponse AWS API Documentation
+    #
+    class ListIntentStageMetricsResponse < Struct.new(
+      :bot_id,
+      :results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
     #   The unique identifier of the bot that contains the intent.
     #   @return [String]
     #
@@ -7669,6 +9211,200 @@ module Aws::LexModelsV2
       :locale_id,
       :bot_recommendation_id,
       :summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The identifier for the bot for which you want to retrieve session
+    #   analytics.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date_time
+    #   The date and time that marks the beginning of the range of time for
+    #   which you want to see session analytics.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date_time
+    #   The date and time that marks the end of the range of time for which
+    #   you want to see session analytics.
+    #   @return [Time]
+    #
+    # @!attribute [rw] sort_by
+    #   An object specifying the measure and method by which to sort the
+    #   session analytics data.
+    #   @return [Types::SessionDataSortBy]
+    #
+    # @!attribute [rw] filters
+    #   A list of objects, each of which describes a condition by which you
+    #   want to filter the results.
+    #   @return [Array<Types::AnalyticsSessionFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in each page of results. If
+    #   there are fewer results than the maximum page size, only the actual
+    #   number of results are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the response from the ListSessionAnalyticsData operation contains
+    #   more results than specified in the maxResults parameter, a token is
+    #   returned in the response.
+    #
+    #   Use the returned token in the nextToken parameter of a
+    #   ListSessionAnalyticsData request to return the next page of results.
+    #   For a complete set of results, call the ListSessionAnalyticsData
+    #   operation until the nextToken returned in the response is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListSessionAnalyticsDataRequest AWS API Documentation
+    #
+    class ListSessionAnalyticsDataRequest < Struct.new(
+      :bot_id,
+      :start_date_time,
+      :end_date_time,
+      :sort_by,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot that the sessions belong to.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the response from the ListSessionAnalyticsData operation contains
+    #   more results than specified in the maxResults parameter, a token is
+    #   returned in the response.
+    #
+    #   Use the returned token in the nextToken parameter of a
+    #   ListSessionAnalyticsData request to return the next page of results.
+    #   For a complete set of results, call the ListSessionAnalyticsData
+    #   operation until the nextToken returned in the response is null.
+    #   @return [String]
+    #
+    # @!attribute [rw] sessions
+    #   A list of objects, each of which contains information about a
+    #   session with the bot.
+    #   @return [Array<Types::SessionSpecification>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListSessionAnalyticsDataResponse AWS API Documentation
+    #
+    class ListSessionAnalyticsDataResponse < Struct.new(
+      :bot_id,
+      :next_token,
+      :sessions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The identifier for the bot for which you want to retrieve session
+    #   metrics.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date_time
+    #   The date and time that marks the beginning of the range of time for
+    #   which you want to see session metrics.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date_time
+    #   The date and time that marks the end of the range of time for which
+    #   you want to see session metrics.
+    #   @return [Time]
+    #
+    # @!attribute [rw] metrics
+    #   A list of objects, each of which contains a metric you want to list,
+    #   the statistic for the metric you want to return, and the method by
+    #   which to organize the results.
+    #   @return [Array<Types::AnalyticsSessionMetric>]
+    #
+    # @!attribute [rw] bin_by
+    #   A list of objects, each of which contains specifications for
+    #   organizing the results by time.
+    #   @return [Array<Types::AnalyticsBinBySpecification>]
+    #
+    # @!attribute [rw] group_by
+    #   A list of objects, each of which specifies how to group the results.
+    #   You can group by the following criteria:
+    #
+    #   * `ConversationEndState` – The final state of the conversation. The
+    #     possible end states are detailed in [Key definitions][1] in the
+    #     user guide.
+    #
+    #   * `LocaleId` – The unique identifier of the bot locale.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/analytics-key-definitions-conversations
+    #   @return [Array<Types::AnalyticsSessionGroupBySpecification>]
+    #
+    # @!attribute [rw] filters
+    #   A list of objects, each of which describes a condition by which you
+    #   want to filter the results.
+    #   @return [Array<Types::AnalyticsSessionFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in each page of results. If
+    #   there are fewer results than the maximum page size, only the actual
+    #   number of results are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the response from the ListSessionMetrics operation contains more
+    #   results than specified in the maxResults parameter, a token is
+    #   returned in the response.
+    #
+    #   Use the returned token in the nextToken parameter of a
+    #   ListSessionMetrics request to return the next page of results. For a
+    #   complete set of results, call the ListSessionMetrics operation until
+    #   the nextToken returned in the response is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListSessionMetricsRequest AWS API Documentation
+    #
+    class ListSessionMetricsRequest < Struct.new(
+      :bot_id,
+      :start_date_time,
+      :end_date_time,
+      :metrics,
+      :bin_by,
+      :group_by,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The identifier for the bot for which you retrieved session metrics.
+    #   @return [String]
+    #
+    # @!attribute [rw] results
+    #   The results for the session metrics.
+    #   @return [Array<Types::AnalyticsSessionResult>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response from the ListSessionMetrics operation contains more
+    #   results than specified in the maxResults parameter, a token is
+    #   returned in the response.
+    #
+    #   Use the returned token in the nextToken parameter of a
+    #   ListSessionMetrics request to return the next page of results. For a
+    #   complete set of results, call the ListSessionMetrics operation until
+    #   the nextToken returned in the response is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListSessionMetricsResponse AWS API Documentation
+    #
+    class ListSessionMetricsResponse < Struct.new(
+      :bot_id,
+      :results,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -8093,6 +9829,213 @@ module Aws::LexModelsV2
     #
     class ListTestSetsResponse < Struct.new(
       :test_sets,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The identifier for the bot for which you want to retrieve utterance
+    #   analytics.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date_time
+    #   The date and time that marks the beginning of the range of time for
+    #   which you want to see utterance analytics.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date_time
+    #   The date and time that marks the end of the range of time for which
+    #   you want to see utterance analytics.
+    #   @return [Time]
+    #
+    # @!attribute [rw] sort_by
+    #   An object specifying the measure and method by which to sort the
+    #   utterance analytics data.
+    #   @return [Types::UtteranceDataSortBy]
+    #
+    # @!attribute [rw] filters
+    #   A list of objects, each of which describes a condition by which you
+    #   want to filter the results.
+    #   @return [Array<Types::AnalyticsUtteranceFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in each page of results. If
+    #   there are fewer results than the maximum page size, only the actual
+    #   number of results are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the response from the ListUtteranceAnalyticsData operation
+    #   contains more results than specified in the maxResults parameter, a
+    #   token is returned in the response.
+    #
+    #   Use the returned token in the nextToken parameter of a
+    #   ListUtteranceAnalyticsData request to return the next page of
+    #   results. For a complete set of results, call the
+    #   ListUtteranceAnalyticsData operation until the nextToken returned in
+    #   the response is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListUtteranceAnalyticsDataRequest AWS API Documentation
+    #
+    class ListUtteranceAnalyticsDataRequest < Struct.new(
+      :bot_id,
+      :start_date_time,
+      :end_date_time,
+      :sort_by,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot that the utterances belong to.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the response from the ListUtteranceAnalyticsData operation
+    #   contains more results than specified in the maxResults parameter, a
+    #   token is returned in the response.
+    #
+    #   Use the returned token in the nextToken parameter of a
+    #   ListUtteranceAnalyticsData request to return the next page of
+    #   results. For a complete set of results, call the
+    #   ListUtteranceAnalyticsData operation until the nextToken returned in
+    #   the response is null.
+    #   @return [String]
+    #
+    # @!attribute [rw] utterances
+    #   A list of objects, each of which contains information about an
+    #   utterance in a user session with your bot.
+    #   @return [Array<Types::UtteranceSpecification>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListUtteranceAnalyticsDataResponse AWS API Documentation
+    #
+    class ListUtteranceAnalyticsDataResponse < Struct.new(
+      :bot_id,
+      :next_token,
+      :utterances)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The identifier for the bot for which you want to retrieve utterance
+    #   metrics.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date_time
+    #   The date and time that marks the beginning of the range of time for
+    #   which you want to see utterance metrics.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date_time
+    #   The date and time that marks the end of the range of time for which
+    #   you want to see utterance metrics.
+    #   @return [Time]
+    #
+    # @!attribute [rw] metrics
+    #   A list of objects, each of which contains a metric you want to list,
+    #   the statistic for the metric you want to return, and the method by
+    #   which to organize the results.
+    #   @return [Array<Types::AnalyticsUtteranceMetric>]
+    #
+    # @!attribute [rw] bin_by
+    #   A list of objects, each of which contains specifications for
+    #   organizing the results by time.
+    #   @return [Array<Types::AnalyticsBinBySpecification>]
+    #
+    # @!attribute [rw] group_by
+    #   A list of objects, each of which specifies how to group the results.
+    #   You can group by the following criteria:
+    #
+    #   * `UtteranceText` – The transcription of the utterance.
+    #
+    #   * `UtteranceState` – The state of the utterance. The possible states
+    #     are detailed in [Key definitions][1] in the user guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/analytics-key-definitions-utterances
+    #   @return [Array<Types::AnalyticsUtteranceGroupBySpecification>]
+    #
+    # @!attribute [rw] attributes
+    #   A list containing attributes related to the utterance that you want
+    #   the response to return. The following attributes are possible:
+    #
+    #   * `LastUsedIntent` – The last used intent at the time of the
+    #     utterance.
+    #
+    #   ^
+    #   @return [Array<Types::AnalyticsUtteranceAttribute>]
+    #
+    # @!attribute [rw] filters
+    #   A list of objects, each of which describes a condition by which you
+    #   want to filter the results.
+    #   @return [Array<Types::AnalyticsUtteranceFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in each page of results. If
+    #   there are fewer results than the maximum page size, only the actual
+    #   number of results are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the response from the ListUtteranceMetrics operation contains
+    #   more results than specified in the maxResults parameter, a token is
+    #   returned in the response.
+    #
+    #   Use the returned token in the nextToken parameter of a
+    #   ListUtteranceMetrics request to return the next page of results. For
+    #   a complete set of results, call the ListUtteranceMetrics operation
+    #   until the nextToken returned in the response is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListUtteranceMetricsRequest AWS API Documentation
+    #
+    class ListUtteranceMetricsRequest < Struct.new(
+      :bot_id,
+      :start_date_time,
+      :end_date_time,
+      :metrics,
+      :bin_by,
+      :group_by,
+      :attributes,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The identifier for the bot for which you retrieved utterance
+    #   metrics.
+    #   @return [String]
+    #
+    # @!attribute [rw] results
+    #   The results for the utterance metrics.
+    #   @return [Array<Types::AnalyticsUtteranceResult>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response from the ListUtteranceMetrics operation contains
+    #   more results than specified in the maxResults parameter, a token is
+    #   returned in the response.
+    #
+    #   Use the returned token in the nextToken parameter of a
+    #   ListUtteranceMetrics request to return the next page of results. For
+    #   a complete set of results, call the ListUtteranceMetrics operation
+    #   until the nextToken returned in the response is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListUtteranceMetricsResponse AWS API Documentation
+    #
+    class ListUtteranceMetricsResponse < Struct.new(
+      :bot_id,
+      :results,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -9034,6 +10977,128 @@ module Aws::LexModelsV2
     #
     class ServiceQuotaExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object specifying the measure and method by which to sort the
+    # session analytics data.
+    #
+    # @!attribute [rw] name
+    #   The measure by which to sort the session analytics data.
+    #
+    #   * `conversationStartTime` – The date and time when the conversation
+    #     began. A conversation is defined as a unique combination of a
+    #     `sessionId` and an `originatingRequestId`.
+    #
+    #   * `numberOfTurns` – The number of turns that the session took.
+    #
+    #   * `conversationDurationSeconds` – The duration of the conversation
+    #     in seconds.
+    #   @return [String]
+    #
+    # @!attribute [rw] order
+    #   Specifies whether to sort the results in ascending or descending
+    #   order.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/SessionDataSortBy AWS API Documentation
+    #
+    class SessionDataSortBy < Struct.new(
+      :name,
+      :order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object containing information about a specific session.
+    #
+    # @!attribute [rw] bot_alias_id
+    #   The identifier of the alias of the bot that the session was held
+    #   with.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot that the session was held with.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The locale of the bot that the session was held with.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel
+    #   The channel that is integrated with the bot that the session was
+    #   held with.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The identifier of the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] conversation_start_time
+    #   The date and time when the conversation began. A conversation is
+    #   defined as a unique combination of a `sessionId` and an
+    #   `originatingRequestId`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] conversation_end_time
+    #   The date and time when the conversation ended. A conversation is
+    #   defined as a unique combination of a `sessionId` and an
+    #   `originatingRequestId`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] conversation_duration_seconds
+    #   The duration of the conversation in seconds. A conversation is
+    #   defined as a unique combination of a `sessionId` and an
+    #   `originatingRequestId`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] conversation_end_state
+    #   The final state of the conversation. A conversation is defined as a
+    #   unique combination of a `sessionId` and an `originatingRequestId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The mode of the session. The possible values are as follows:
+    #
+    #   * `Speech` – The session was spoken.
+    #
+    #   * `Text` – The session was written.
+    #
+    #   * `DTMF` – The session used a touch-tone keypad (Dual Tone
+    #     Multi-Frequency).
+    #
+    #   * `MultiMode` – The session used multiple modes.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_turns
+    #   The number of turns that the session took.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] invoked_intent_samples
+    #   A list of objects containing the name of an intent that was invoked.
+    #   @return [Array<Types::InvokedIntentSample>]
+    #
+    # @!attribute [rw] originating_request_id
+    #   The identifier of the first request in a session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/SessionSpecification AWS API Documentation
+    #
+    class SessionSpecification < Struct.new(
+      :bot_alias_id,
+      :bot_version,
+      :locale_id,
+      :channel,
+      :session_id,
+      :conversation_start_time,
+      :conversation_end_time,
+      :conversation_duration_seconds,
+      :conversation_end_state,
+      :mode,
+      :number_of_turns,
+      :invoked_intent_samples,
+      :originating_request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12257,6 +14322,74 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # An object that contains a response to the utterance from the bot.
+    #
+    # @!attribute [rw] content
+    #   The text of the response to the utterance from the bot.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   The type of the response. The following values are possible:
+    #
+    #   * `PlainText` – A plain text string.
+    #
+    #   * `CustomPayload` – A response string that you can customize to
+    #     include data or metadata for your application.
+    #
+    #   * `SSML` – A string that includes Speech Synthesis Markup Language
+    #     to customize the audio response.
+    #
+    #   * `ImageResponseCard` – An image with buttons that the customer can
+    #     select. See [ImageResponseCard][1] for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_ImageResponseCard.html
+    #   @return [String]
+    #
+    # @!attribute [rw] image_response_card
+    #   A card that is shown to the user by a messaging platform. You define
+    #   the contents of the card, the card is displayed by the platform.
+    #
+    #   When you use a response card, the response from the user is
+    #   constrained to the text associated with a button on the card.
+    #   @return [Types::ImageResponseCard]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UtteranceBotResponse AWS API Documentation
+    #
+    class UtteranceBotResponse < Struct.new(
+      :content,
+      :content_type,
+      :image_response_card)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object specifying the measure and method by which to sort the
+    # utterance data.
+    #
+    # @!attribute [rw] name
+    #   The measure by which to sort the utterance analytics data.
+    #
+    #   * `Count` – The number of utterances.
+    #
+    #   * `UtteranceTimestamp` – The date and time of the utterance.
+    #   @return [String]
+    #
+    # @!attribute [rw] order
+    #   Specifies whether to sort the results in ascending or descending
+    #   order.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UtteranceDataSortBy AWS API Documentation
+    #
+    class UtteranceDataSortBy < Struct.new(
+      :name,
+      :order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about input of an utterance.
     #
     # @!attribute [rw] text_input
@@ -12315,6 +14448,180 @@ module Aws::LexModelsV2
     #
     class UtteranceLevelTestResults < Struct.new(
       :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object containing information about a specific utterance.
+    #
+    # @!attribute [rw] bot_alias_id
+    #   The identifier of the alias of the bot that the utterance was made
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot that the utterance was made to.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The locale of the bot that the utterance was made to.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The identifier of the session that the utterance was made in.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel
+    #   The channel that is integrated with the bot that the utterance was
+    #   made to.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The mode of the session. The possible values are as follows:
+    #
+    #   * `Speech` – The session consisted of spoken dialogue.
+    #
+    #   * `Text` – The session consisted of written dialogue.
+    #
+    #   * `DTMF` – The session consisted of touch-tone keypad (Dual Tone
+    #     Multi-Frequency) key presses.
+    #
+    #   * `MultiMode` – The session consisted of multiple modes.
+    #   @return [String]
+    #
+    # @!attribute [rw] conversation_start_time
+    #   The date and time when the conversation in which the utterance took
+    #   place began. A conversation is defined as a unique combination of a
+    #   `sessionId` and an `originatingRequestId`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] conversation_end_time
+    #   The date and time when the conversation in which the utterance took
+    #   place ended. A conversation is defined as a unique combination of a
+    #   `sessionId` and an `originatingRequestId`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] utterance
+    #   The text of the utterance.
+    #   @return [String]
+    #
+    # @!attribute [rw] utterance_timestamp
+    #   The date and time when the utterance took place.
+    #   @return [Time]
+    #
+    # @!attribute [rw] audio_voice_duration_millis
+    #   The duration in milliseconds of the audio associated with the
+    #   utterance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] utterance_understood
+    #   Specifies whether the bot understood the utterance or not.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] input_type
+    #   The input type of the utterance. The possible values are as follows:
+    #
+    #   * PCM format: audio data must be in little-endian byte order.
+    #
+    #     * `audio/l16; rate=16000; channels=1`
+    #
+    #     * `audio/x-l16; sample-rate=16000; channel-count=1`
+    #
+    #     * `audio/lpcm; sample-rate=8000; sample-size-bits=16;
+    #       channel-count=1; is-big-endian=false`
+    #
+    #   * Opus format
+    #
+    #     * `audio/x-cbr-opus-with-preamble;preamble-size=0;bit-rate=256000;frame-size-milliseconds=4`
+    #
+    #     ^
+    #
+    #   * Text format
+    #
+    #     * `text/plain; charset=utf-8`
+    #
+    #     ^
+    #   @return [String]
+    #
+    # @!attribute [rw] output_type
+    #   The output type of the utterance. The possible values are as
+    #   follows:
+    #
+    #   * `audio/mpeg`
+    #
+    #   * `audio/ogg`
+    #
+    #   * `audio/pcm (16 KHz)`
+    #
+    #   * `audio/` (defaults to `mpeg`)
+    #
+    #   * `text/plain; charset=utf-8`
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_intent_name
+    #   The name of the intent that the utterance is associated to.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_slot_name
+    #   The name of the slot that the utterance is associated to.
+    #   @return [String]
+    #
+    # @!attribute [rw] intent_state
+    #   The state of the intent that the utterance is associated to.
+    #   @return [String]
+    #
+    # @!attribute [rw] dialog_action_type
+    #   The type of dialog action that the utterance is associated to. See
+    #   the `type` field in [DialogAction][1] for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_DialogAction.html
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_response_audio_voice_id
+    #   The identifier for the audio of the bot response.
+    #   @return [String]
+    #
+    # @!attribute [rw] slots_filled_in_session
+    #   The slots that have been filled in the session by the time of the
+    #   utterance.
+    #   @return [String]
+    #
+    # @!attribute [rw] utterance_request_id
+    #   The identifier of the request associated with the utterance.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_responses
+    #   A list of objects containing information about the bot response to
+    #   the utterance.
+    #   @return [Array<Types::UtteranceBotResponse>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UtteranceSpecification AWS API Documentation
+    #
+    class UtteranceSpecification < Struct.new(
+      :bot_alias_id,
+      :bot_version,
+      :locale_id,
+      :session_id,
+      :channel,
+      :mode,
+      :conversation_start_time,
+      :conversation_end_time,
+      :utterance,
+      :utterance_timestamp,
+      :audio_voice_duration_millis,
+      :utterance_understood,
+      :input_type,
+      :output_type,
+      :associated_intent_name,
+      :associated_slot_name,
+      :intent_state,
+      :dialog_action_type,
+      :bot_response_audio_voice_id,
+      :slots_filled_in_session,
+      :utterance_request_id,
+      :bot_responses)
       SENSITIVE = []
       include Aws::Structure
     end

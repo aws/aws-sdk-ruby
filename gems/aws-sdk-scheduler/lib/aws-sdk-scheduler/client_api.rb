@@ -13,6 +13,7 @@ module Aws::Scheduler
 
     include Seahorse::Model
 
+    ActionAfterCompletion = Shapes::StringShape.new(name: 'ActionAfterCompletion')
     AssignPublicIp = Shapes::StringShape.new(name: 'AssignPublicIp')
     AwsVpcConfiguration = Shapes::StructureShape.new(name: 'AwsVpcConfiguration')
     CapacityProvider = Shapes::StringShape.new(name: 'CapacityProvider')
@@ -154,6 +155,7 @@ module Aws::Scheduler
     CreateScheduleGroupOutput.add_member(:schedule_group_arn, Shapes::ShapeRef.new(shape: ScheduleGroupArn, required: true, location_name: "ScheduleGroupArn"))
     CreateScheduleGroupOutput.struct_class = Types::CreateScheduleGroupOutput
 
+    CreateScheduleInput.add_member(:action_after_completion, Shapes::ShapeRef.new(shape: ActionAfterCompletion, location_name: "ActionAfterCompletion"))
     CreateScheduleInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateScheduleInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateScheduleInput.add_member(:end_date, Shapes::ShapeRef.new(shape: EndDate, location_name: "EndDate"))
@@ -225,6 +227,7 @@ module Aws::Scheduler
     GetScheduleInput.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "Name"))
     GetScheduleInput.struct_class = Types::GetScheduleInput
 
+    GetScheduleOutput.add_member(:action_after_completion, Shapes::ShapeRef.new(shape: ActionAfterCompletion, location_name: "ActionAfterCompletion"))
     GetScheduleOutput.add_member(:arn, Shapes::ShapeRef.new(shape: ScheduleArn, location_name: "Arn"))
     GetScheduleOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: CreationDate, location_name: "CreationDate"))
     GetScheduleOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -377,6 +380,7 @@ module Aws::Scheduler
 
     UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
+    UpdateScheduleInput.add_member(:action_after_completion, Shapes::ShapeRef.new(shape: ActionAfterCompletion, location_name: "ActionAfterCompletion"))
     UpdateScheduleInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     UpdateScheduleInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     UpdateScheduleInput.add_member(:end_date, Shapes::ShapeRef.new(shape: EndDate, location_name: "EndDate"))

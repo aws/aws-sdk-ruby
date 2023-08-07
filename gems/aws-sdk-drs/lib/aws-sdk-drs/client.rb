@@ -574,7 +574,7 @@ module Aws::Drs
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     target_instance_type_right_sizing_method: "NONE", # accepts NONE, BASIC
+    #     target_instance_type_right_sizing_method: "NONE", # accepts NONE, BASIC, IN_AWS
     #   })
     #
     # @example Response structure
@@ -588,7 +588,7 @@ module Aws::Drs
     #   resp.launch_configuration_template.licensing.os_byol #=> Boolean
     #   resp.launch_configuration_template.tags #=> Hash
     #   resp.launch_configuration_template.tags["TagKey"] #=> String
-    #   resp.launch_configuration_template.target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC"
+    #   resp.launch_configuration_template.target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC", "IN_AWS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/CreateLaunchConfigurationTemplate AWS API Documentation
     #
@@ -1085,7 +1085,7 @@ module Aws::Drs
     #   resp.items[0].licensing.os_byol #=> Boolean
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["TagKey"] #=> String
-    #   resp.items[0].target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC"
+    #   resp.items[0].target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC", "IN_AWS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DescribeLaunchConfigurationTemplates AWS API Documentation
@@ -1728,7 +1728,7 @@ module Aws::Drs
     #   resp.licensing.os_byol #=> Boolean
     #   resp.name #=> String
     #   resp.source_server_id #=> String
-    #   resp.target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC"
+    #   resp.target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC", "IN_AWS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/GetLaunchConfiguration AWS API Documentation
     #
@@ -2730,7 +2730,7 @@ module Aws::Drs
     #     },
     #     name: "SmallBoundedString",
     #     source_server_id: "SourceServerID", # required
-    #     target_instance_type_right_sizing_method: "NONE", # accepts NONE, BASIC
+    #     target_instance_type_right_sizing_method: "NONE", # accepts NONE, BASIC, IN_AWS
     #   })
     #
     # @example Response structure
@@ -2742,7 +2742,7 @@ module Aws::Drs
     #   resp.licensing.os_byol #=> Boolean
     #   resp.name #=> String
     #   resp.source_server_id #=> String
-    #   resp.target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC"
+    #   resp.target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC", "IN_AWS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/UpdateLaunchConfiguration AWS API Documentation
     #
@@ -2791,7 +2791,7 @@ module Aws::Drs
     #     licensing: {
     #       os_byol: false,
     #     },
-    #     target_instance_type_right_sizing_method: "NONE", # accepts NONE, BASIC
+    #     target_instance_type_right_sizing_method: "NONE", # accepts NONE, BASIC, IN_AWS
     #   })
     #
     # @example Response structure
@@ -2805,7 +2805,7 @@ module Aws::Drs
     #   resp.launch_configuration_template.licensing.os_byol #=> Boolean
     #   resp.launch_configuration_template.tags #=> Hash
     #   resp.launch_configuration_template.tags["TagKey"] #=> String
-    #   resp.launch_configuration_template.target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC"
+    #   resp.launch_configuration_template.target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC", "IN_AWS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/UpdateLaunchConfigurationTemplate AWS API Documentation
     #
@@ -3137,7 +3137,7 @@ module Aws::Drs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-drs'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

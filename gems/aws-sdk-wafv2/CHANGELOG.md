@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2023-07-19)
+------------------
+
+* Feature - Added the URI path to the custom aggregation keys that you can specify for a rate-based rule.
+
 1.66.0 (2023-07-11)
 ------------------
 

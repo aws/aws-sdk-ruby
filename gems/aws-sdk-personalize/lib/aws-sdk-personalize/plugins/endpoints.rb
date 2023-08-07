@@ -184,6 +184,8 @@ module Aws::Personalize
             Aws::Personalize::Endpoints::UntagResource.build(context)
           when :update_campaign
             Aws::Personalize::Endpoints::UpdateCampaign.build(context)
+          when :update_dataset
+            Aws::Personalize::Endpoints::UpdateDataset.build(context)
           when :update_metric_attribution
             Aws::Personalize::Endpoints::UpdateMetricAttribution.build(context)
           when :update_recommender

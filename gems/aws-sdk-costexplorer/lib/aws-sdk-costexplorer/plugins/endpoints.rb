@@ -94,6 +94,8 @@ module Aws::CostExplorer
             Aws::CostExplorer::Endpoints::GetReservationUtilization.build(context)
           when :get_rightsizing_recommendation
             Aws::CostExplorer::Endpoints::GetRightsizingRecommendation.build(context)
+          when :get_savings_plan_purchase_recommendation_details
+            Aws::CostExplorer::Endpoints::GetSavingsPlanPurchaseRecommendationDetails.build(context)
           when :get_savings_plans_coverage
             Aws::CostExplorer::Endpoints::GetSavingsPlansCoverage.build(context)
           when :get_savings_plans_purchase_recommendation

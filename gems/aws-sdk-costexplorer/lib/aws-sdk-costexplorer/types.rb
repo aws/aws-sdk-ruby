@@ -151,7 +151,7 @@ module Aws::CostExplorer
     #
     #       * The corresponding `Expression` for this example is as follows:
     #         `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
-    #         “us-west-1” ] \} \}`
+    #         "us-west-1" ] \} \}`
     #
     #       * As shown in the previous example, lists of dimension values
     #         are combined with `OR` when applying the filter.
@@ -162,7 +162,7 @@ module Aws::CostExplorer
     #       supported.
     #
     #       * For example, you can filter for linked account names that
-    #         start with “a”.
+    #         start with "a".
     #
     #       * The corresponding `Expression` for this example is as follows:
     #         `\{ "Dimensions": \{ "Key": "LINKED_ACCOUNT_NAME",
@@ -256,10 +256,27 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # The association between a monitor, threshold, and list of subscribers
-    # used to deliver notifications about anomalies detected by a monitor
-    # that exceeds a threshold. The content consists of the detailed
-    # metadata and the current status of the `AnomalySubscription` object.
+    # An `AnomalySubscription` resource (also referred to as an alert
+    # subscription) sends notifications about specific anomalies that meet
+    # an alerting criteria defined by you.
+    #
+    # You can specify the frequency of the alerts and the subscribers to
+    # notify.
+    #
+    # Anomaly subscriptions can be associated with one or more [
+    # `AnomalyMonitor` ][1] resources, and they only send notifications
+    # about anomalies detected by those associated monitors. You can also
+    # configure a threshold to further control which anomalies are included
+    # in the notifications.
+    #
+    # Anomalies that don’t exceed the chosen threshold and therefore don’t
+    # trigger notifications from an anomaly subscription will still be
+    # available on the console and from the [ `GetAnomalies` ][2] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalyMonitor.html
+    # [2]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetAnomalies.html
     #
     # @!attribute [rw] subscription_arn
     #   The `AnomalySubscription` Amazon Resource Name (ARN).
@@ -280,19 +297,31 @@ module Aws::CostExplorer
     # @!attribute [rw] threshold
     #   (deprecated)
     #
-    #   The dollar value that triggers a notification if the threshold is
-    #   exceeded.
+    #   An absolute dollar value that must be exceeded by the anomaly's
+    #   total impact (see [Impact][1] for more details) for an anomaly
+    #   notification to be generated.
     #
     #   This field has been deprecated. To specify a threshold, use
     #   ThresholdExpression. Continued use of Threshold will be treated as
     #   shorthand syntax for a ThresholdExpression.
     #
     #   One of Threshold or ThresholdExpression is required for this
-    #   resource.
+    #   resource. You cannot specify both.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Impact.html
     #   @return [Float]
     #
     # @!attribute [rw] frequency
-    #   The frequency that anomaly reports are sent over email.
+    #   The frequency that anomaly notifications are sent. Notifications are
+    #   sent either over email (for DAILY and WEEKLY frequencies) or SNS
+    #   (for IMMEDIATE frequency). For more information, see [Creating an
+    #   Amazon SNS topic for anomaly notifications][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cost-management/latest/userguide/ad-SNS.html
     #   @return [String]
     #
     # @!attribute [rw] subscription_name
@@ -304,12 +333,15 @@ module Aws::CostExplorer
     #   want to generate alerts for. This supports dimensions and nested
     #   expressions. The supported dimensions are
     #   `ANOMALY_TOTAL_IMPACT_ABSOLUTE` and
-    #   `ANOMALY_TOTAL_IMPACT_PERCENTAGE`. The supported nested expression
-    #   types are `AND` and `OR`. The match option `GREATER_THAN_OR_EQUAL`
-    #   is required. Values must be numbers between 0 and 10,000,000,000.
+    #   `ANOMALY_TOTAL_IMPACT_PERCENTAGE`, corresponding to an anomaly’s
+    #   TotalImpact and TotalImpactPercentage, respectively (see [Impact][2]
+    #   for more details). The supported nested expression types are `AND`
+    #   and `OR`. The match option `GREATER_THAN_OR_EQUAL` is required.
+    #   Values must be numbers between 0 and 10,000,000,000 in string
+    #   format.
     #
     #   One of Threshold or ThresholdExpression is required for this
-    #   resource.
+    #   resource. You cannot specify both.
     #
     #   The following are examples of valid ThresholdExpressions:
     #
@@ -338,6 +370,7 @@ module Aws::CostExplorer
     #
     #
     #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+    #   [2]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Impact.html
     #   @return [Types::Expression]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/AnomalySubscription AWS API Documentation
@@ -593,10 +626,7 @@ module Aws::CostExplorer
     #   An [Expression][1] object used to categorize costs. This supports
     #   dimensions, tags, and nested expressions. Currently the only
     #   dimensions supported are `LINKED_ACCOUNT`, `SERVICE_CODE`,
-    #   `RECORD_TYPE`, and `LINKED_ACCOUNT_NAME`.
-    #
-    #   Root level `OR` isn't supported. We recommend that you create a
-    #   separate rule instead.
+    #   `RECORD_TYPE`, `LINKED_ACCOUNT_NAME`, `REGION`, and `USAGE_TYPE`.
     #
     #   `RECORD_TYPE` is a dimension used for Cost Explorer APIs, and is
     #   also supported for Cost Category expressions. This dimension uses
@@ -1705,7 +1735,7 @@ module Aws::CostExplorer
     #
     #     * The corresponding `Expression` for this example is as follows:
     #       `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
-    #       “us-west-1” ] \} \}`
+    #       "us-west-1" ] \} \}`
     #
     #     * As shown in the previous example, lists of dimension values are
     #       combined with `OR` when applying the filter.
@@ -1715,7 +1745,7 @@ module Aws::CostExplorer
     #     the documentation for each specific API to see what is supported.
     #
     #     * For example, you can filter for linked account names that start
-    #       with “a”.
+    #       with "a".
     #
     #     * The corresponding `Expression` for this example is as follows:
     #       `\{ "Dimensions": \{ "Key": "LINKED_ACCOUNT_NAME",
@@ -2334,7 +2364,7 @@ module Aws::CostExplorer
     #
     #       * The corresponding `Expression` for this example is as follows:
     #         `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
-    #         “us-west-1” ] \} \}`
+    #         "us-west-1" ] \} \}`
     #
     #       * As shown in the previous example, lists of dimension values
     #         are combined with `OR` when applying the filter.
@@ -2345,7 +2375,7 @@ module Aws::CostExplorer
     #       supported.
     #
     #       * For example, you can filter for linked account names that
-    #         start with “a”.
+    #         start with "a".
     #
     #       * The corresponding `Expression` for this example is as follows:
     #         `\{ "Dimensions": \{ "Key": "LINKED_ACCOUNT_NAME",
@@ -2831,7 +2861,7 @@ module Aws::CostExplorer
     #
     #       * The corresponding `Expression` for this example is as follows:
     #         `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
-    #         “us-west-1” ] \} \}`
+    #         "us-west-1" ] \} \}`
     #
     #       * As shown in the previous example, lists of dimension values
     #         are combined with `OR` when applying the filter.
@@ -2842,7 +2872,7 @@ module Aws::CostExplorer
     #       supported.
     #
     #       * For example, you can filter for linked account names that
-    #         start with “a”.
+    #         start with "a".
     #
     #       * The corresponding `Expression` for this example is as follows:
     #         `\{ "Dimensions": \{ "Key": "LINKED_ACCOUNT_NAME",
@@ -3306,7 +3336,7 @@ module Aws::CostExplorer
     #
     #       * The corresponding `Expression` for this example is as follows:
     #         `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
-    #         “us-west-1” ] \} \}`
+    #         "us-west-1" ] \} \}`
     #
     #       * As shown in the previous example, lists of dimension values
     #         are combined with `OR` when applying the filter.
@@ -3317,7 +3347,7 @@ module Aws::CostExplorer
     #       supported.
     #
     #       * For example, you can filter for linked account names that
-    #         start with “a”.
+    #         start with "a".
     #
     #       * The corresponding `Expression` for this example is as follows:
     #         `\{ "Dimensions": \{ "Key": "LINKED_ACCOUNT_NAME",
@@ -3634,7 +3664,7 @@ module Aws::CostExplorer
     #
     #       * The corresponding `Expression` for this example is as follows:
     #         `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
-    #         “us-west-1” ] \} \}`
+    #         "us-west-1" ] \} \}`
     #
     #       * As shown in the previous example, lists of dimension values
     #         are combined with `OR` when applying the filter.
@@ -3645,7 +3675,7 @@ module Aws::CostExplorer
     #       supported.
     #
     #       * For example, you can filter for linked account names that
-    #         start with “a”.
+    #         start with "a".
     #
     #       * The corresponding `Expression` for this example is as follows:
     #         `\{ "Dimensions": \{ "Key": "LINKED_ACCOUNT_NAME",
@@ -3768,6 +3798,36 @@ module Aws::CostExplorer
       :rightsizing_recommendations,
       :next_page_token,
       :configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recommendation_detail_id
+    #   The ID that is associated with the Savings Plan recommendation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetSavingsPlanPurchaseRecommendationDetailsRequest AWS API Documentation
+    #
+    class GetSavingsPlanPurchaseRecommendationDetailsRequest < Struct.new(
+      :recommendation_detail_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recommendation_detail_id
+    #   The ID that is associated with the Savings Plan recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommendation_detail_data
+    #   Contains detailed information about a specific Savings Plan
+    #   recommendation.
+    #   @return [Types::RecommendationDetailData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetSavingsPlanPurchaseRecommendationDetailsResponse AWS API Documentation
+    #
+    class GetSavingsPlanPurchaseRecommendationDetailsResponse < Struct.new(
+      :recommendation_detail_id,
+      :recommendation_detail_data)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4228,7 +4288,7 @@ module Aws::CostExplorer
     #
     #       * The corresponding `Expression` for this example is as follows:
     #         `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
-    #         “us-west-1” ] \} \}`
+    #         "us-west-1" ] \} \}`
     #
     #       * As shown in the previous example, lists of dimension values
     #         are combined with `OR` when applying the filter.
@@ -4239,7 +4299,7 @@ module Aws::CostExplorer
     #       supported.
     #
     #       * For example, you can filter for linked account names that
-    #         start with “a”.
+    #         start with "a".
     #
     #       * The corresponding `Expression` for this example is as follows:
     #         `\{ "Dimensions": \{ "Key": "LINKED_ACCOUNT_NAME",
@@ -4978,6 +5038,221 @@ module Aws::CostExplorer
       :license_model,
       :current_generation,
       :size_flex_eligible)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details and metrics for the given recommendation.
+    #
+    # @!attribute [rw] account_scope
+    #   The account scope that you want your recommendations for. Amazon Web
+    #   Services calculates recommendations including the management account
+    #   and member accounts if the value is set to PAYER. If the value is
+    #   LINKED, recommendations are calculated for individual member
+    #   accounts only.
+    #   @return [String]
+    #
+    # @!attribute [rw] lookback_period_in_days
+    #   How many days of previous usage that Amazon Web Services considers
+    #   when making this recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] savings_plans_type
+    #   The requested Savings Plan recommendation type.
+    #   @return [String]
+    #
+    # @!attribute [rw] term_in_years
+    #   The term of the commitment in years.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_option
+    #   The payment option for the commitment (for example, All Upfront or
+    #   No Upfront).
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The AccountID that the recommendation is generated for.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   The currency code that Amazon Web Services used to generate the
+    #   recommendation and present potential savings.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_family
+    #   The instance family of the recommended Savings Plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The region the recommendation is generated for.
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_id
+    #   The unique ID that's used to distinguish Savings Plans from one
+    #   another.
+    #   @return [String]
+    #
+    # @!attribute [rw] generation_timestamp
+    #   The period of time that you want the usage and costs for.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_usage_timestamp
+    #   The period of time that you want the usage and costs for.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_average_hourly_on_demand_spend
+    #   The average value of hourly On-Demand spend over the lookback period
+    #   of the applicable usage type.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_maximum_hourly_on_demand_spend
+    #   The highest value of hourly On-Demand spend over the lookback period
+    #   of the applicable usage type.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_minimum_hourly_on_demand_spend
+    #   The lowest value of hourly On-Demand spend over the lookback period
+    #   of the applicable usage type.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_average_utilization
+    #   The estimated utilization of the recommended Savings Plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_monthly_savings_amount
+    #   The estimated monthly savings amount based on the recommended
+    #   Savings Plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_on_demand_cost
+    #   The remaining On-Demand cost estimated to not be covered by the
+    #   recommended Savings Plan, over the length of the lookback period.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_on_demand_cost_with_current_commitment
+    #   The estimated On-Demand costs you expect with no additional
+    #   commitment, based on your usage of the selected time period and the
+    #   Savings Plan you own.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_roi
+    #   The estimated return on investment that's based on the recommended
+    #   Savings Plan that you purchased. This is calculated as
+    #   estimatedSavingsAmount/estimatedSPCost*100.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_sp_cost
+    #   The cost of the recommended Savings Plan over the length of the
+    #   lookback period.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_savings_amount
+    #   The estimated savings amount that's based on the recommended
+    #   Savings Plan over the length of the lookback period.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_savings_percentage
+    #   The estimated savings percentage relative to the total cost of
+    #   applicable On-Demand usage over the lookback period.
+    #   @return [String]
+    #
+    # @!attribute [rw] existing_hourly_commitment
+    #   The existing hourly commitment for the Savings Plan type.
+    #   @return [String]
+    #
+    # @!attribute [rw] hourly_commitment_to_purchase
+    #   The recommended hourly commitment level for the Savings Plan type
+    #   and the configuration that's based on the usage during the lookback
+    #   period.
+    #   @return [String]
+    #
+    # @!attribute [rw] upfront_cost
+    #   The upfront cost of the recommended Savings Plan, based on the
+    #   selected payment option.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_average_coverage
+    #   The average value of hourly coverage over the lookback period.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_average_coverage
+    #   The estimated coverage of the recommended Savings Plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] metrics_over_lookback_period
+    #   The related hourly cost, coverage, and utilization metrics over the
+    #   lookback period.
+    #   @return [Array<Types::RecommendationDetailHourlyMetrics>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RecommendationDetailData AWS API Documentation
+    #
+    class RecommendationDetailData < Struct.new(
+      :account_scope,
+      :lookback_period_in_days,
+      :savings_plans_type,
+      :term_in_years,
+      :payment_option,
+      :account_id,
+      :currency_code,
+      :instance_family,
+      :region,
+      :offering_id,
+      :generation_timestamp,
+      :latest_usage_timestamp,
+      :current_average_hourly_on_demand_spend,
+      :current_maximum_hourly_on_demand_spend,
+      :current_minimum_hourly_on_demand_spend,
+      :estimated_average_utilization,
+      :estimated_monthly_savings_amount,
+      :estimated_on_demand_cost,
+      :estimated_on_demand_cost_with_current_commitment,
+      :estimated_roi,
+      :estimated_sp_cost,
+      :estimated_savings_amount,
+      :estimated_savings_percentage,
+      :existing_hourly_commitment,
+      :hourly_commitment_to_purchase,
+      :upfront_cost,
+      :current_average_coverage,
+      :estimated_average_coverage,
+      :metrics_over_lookback_period)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the hourly metrics for the given recommendation over the
+    # lookback period.
+    #
+    # @!attribute [rw] start_time
+    #   The period of time that you want the usage and costs for.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_on_demand_cost
+    #   The remaining On-Demand cost estimated to not be covered by the
+    #   recommended Savings Plan, over the length of the lookback period.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_coverage
+    #   The current amount of Savings Plans eligible usage that the Savings
+    #   Plan covered.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_coverage
+    #   The estimated coverage amount based on the recommended Savings Plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_new_commitment_utilization
+    #   The estimated utilization for the recommended Savings Plan.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RecommendationDetailHourlyMetrics AWS API Documentation
+    #
+    class RecommendationDetailHourlyMetrics < Struct.new(
+      :start_time,
+      :estimated_on_demand_cost,
+      :current_coverage,
+      :estimated_coverage,
+      :estimated_new_commitment_utilization)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5945,6 +6220,11 @@ module Aws::CostExplorer
     #   of the applicable usage type.
     #   @return [String]
     #
+    # @!attribute [rw] recommendation_detail_id
+    #   Contains detailed information about a specific Savings Plan
+    #   recommendation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/SavingsPlansPurchaseRecommendationDetail AWS API Documentation
     #
     class SavingsPlansPurchaseRecommendationDetail < Struct.new(
@@ -5963,7 +6243,8 @@ module Aws::CostExplorer
       :estimated_monthly_savings_amount,
       :current_minimum_hourly_on_demand_spend,
       :current_maximum_hourly_on_demand_spend,
-      :current_average_hourly_on_demand_spend)
+      :current_average_hourly_on_demand_spend,
+      :recommendation_detail_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6640,6 +6921,9 @@ module Aws::CostExplorer
     #   This field has been deprecated. To update a threshold, use
     #   ThresholdExpression. Continued use of Threshold will be treated as
     #   shorthand syntax for a ThresholdExpression.
+    #
+    #   You can specify either Threshold or ThresholdExpression, but not
+    #   both.
     #   @return [Float]
     #
     # @!attribute [rw] frequency
@@ -6664,9 +6948,15 @@ module Aws::CostExplorer
     #   anomalies that you want to generate alerts for. This supports
     #   dimensions and nested expressions. The supported dimensions are
     #   `ANOMALY_TOTAL_IMPACT_ABSOLUTE` and
-    #   `ANOMALY_TOTAL_IMPACT_PERCENTAGE`. The supported nested expression
-    #   types are `AND` and `OR`. The match option `GREATER_THAN_OR_EQUAL`
-    #   is required. Values must be numbers between 0 and 10,000,000,000.
+    #   `ANOMALY_TOTAL_IMPACT_PERCENTAGE`, corresponding to an anomaly’s
+    #   TotalImpact and TotalImpactPercentage, respectively (see [Impact][2]
+    #   for more details). The supported nested expression types are `AND`
+    #   and `OR`. The match option `GREATER_THAN_OR_EQUAL` is required.
+    #   Values must be numbers between 0 and 10,000,000,000 in string
+    #   format.
+    #
+    #   You can specify either Threshold or ThresholdExpression, but not
+    #   both.
     #
     #   The following are examples of valid ThresholdExpressions:
     #
@@ -6695,6 +6985,7 @@ module Aws::CostExplorer
     #
     #
     #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+    #   [2]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Impact.html
     #   @return [Types::Expression]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UpdateAnomalySubscriptionRequest AWS API Documentation

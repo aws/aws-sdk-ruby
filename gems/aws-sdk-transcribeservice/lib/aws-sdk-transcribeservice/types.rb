@@ -4104,6 +4104,19 @@ module Aws::TranscribeService
     #   `
     #   @return [Hash<String,Types::LanguageIdSettings>]
     #
+    # @!attribute [rw] toxicity_detection
+    #   Enables toxic speech detection in your transcript. If you include
+    #   `ToxicityDetection` in your request, you must also include
+    #   `ToxicityCategories`.
+    #
+    #   For information on the types of toxic speech Amazon Transcribe can
+    #   detect, see [Detecting toxic speech][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/toxic-language.html
+    #   @return [Array<Types::ToxicityDetectionSettings>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartTranscriptionJobRequest AWS API Documentation
     #
     class StartTranscriptionJobRequest < Struct.new(
@@ -4125,7 +4138,8 @@ module Aws::TranscribeService
       :language_options,
       :subtitles,
       :tags,
-      :language_id_settings)
+      :language_id_settings,
+      :toxicity_detection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4301,6 +4315,24 @@ module Aws::TranscribeService
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # Contains `ToxicityCategories`, which is a required parameter if you
+    # want to enable toxicity detection (`ToxicityDetection`) in your
+    # transcription request.
+    #
+    # @!attribute [rw] toxicity_categories
+    #   If you include `ToxicityDetection` in your transcription request,
+    #   you must also include `ToxicityCategories`. The only accepted value
+    #   for this parameter is `ALL`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ToxicityDetectionSettings AWS API Documentation
+    #
+    class ToxicityDetectionSettings < Struct.new(
+      :toxicity_categories)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Provides you with the Amazon S3 URI you can use to access your
     # transcript.
@@ -4623,6 +4655,11 @@ module Aws::TranscribeService
     #   your request.
     #   @return [Hash<String,Types::LanguageIdSettings>]
     #
+    # @!attribute [rw] toxicity_detection
+    #   Provides information about the toxicity detection settings applied
+    #   to your transcription.
+    #   @return [Array<Types::ToxicityDetectionSettings>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscriptionJob AWS API Documentation
     #
     class TranscriptionJob < Struct.new(
@@ -4648,7 +4685,8 @@ module Aws::TranscribeService
       :language_codes,
       :tags,
       :subtitles,
-      :language_id_settings)
+      :language_id_settings,
+      :toxicity_detection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4767,6 +4805,11 @@ module Aws::TranscribeService
     #   parameter, `LanguageCode`, is present.
     #   @return [Array<Types::LanguageCodeItem>]
     #
+    # @!attribute [rw] toxicity_detection
+    #   Indicates whether toxicity detection was enabled for the specified
+    #   transcription job.
+    #   @return [Array<Types::ToxicityDetectionSettings>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscriptionJobSummary AWS API Documentation
     #
     class TranscriptionJobSummary < Struct.new(
@@ -4783,7 +4826,8 @@ module Aws::TranscribeService
       :identify_language,
       :identify_multiple_languages,
       :identified_language_score,
-      :language_codes)
+      :language_codes,
+      :toxicity_detection)
       SENSITIVE = []
       include Aws::Structure
     end

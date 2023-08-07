@@ -486,7 +486,10 @@ module Aws::LakeFormation
     #   @return [Types::RowFilter]
     #
     # @!attribute [rw] column_names
-    #   A list of column names.
+    #   A list of column names and/or nested column attributes. When
+    #   specifying nested attributes, use a qualified dot (.) delimited
+    #   format such as "address"."zip". Nested attributes within this
+    #   list may not exceed a depth of 5.
     #   @return [Array<String>]
     #
     # @!attribute [rw] column_wildcard
@@ -569,6 +572,12 @@ module Aws::LakeFormation
     #   users or IAM roles.
     #   @return [Array<Types::DataLakePrincipal>]
     #
+    # @!attribute [rw] read_only_admins
+    #   A list of Lake Formation principals with only view access to the
+    #   resources, without the ability to make changes. Supported principals
+    #   are IAM users or IAM roles.
+    #   @return [Array<Types::DataLakePrincipal>]
+    #
     # @!attribute [rw] create_database_default_permissions
     #   Specifies whether access control on newly created database is
     #   managed by Lake Formation permissions or exclusively by IAM
@@ -642,12 +651,18 @@ module Aws::LakeFormation
     #   If false or null, no Amazon EMR clusters will be able to access data
     #   in Amazon S3 locations that are registered with Lake Formation.
     #
-    #   For more information, see [(Optional) Allow Data Filtering on Amazon
-    #   EMR][1].
+    #   For more information, see [(Optional) Allow external data
+    #   filtering][1].
     #
     #
     #
-    #   [1]: https://docs-aws.amazon.com/lake-formation/latest/dg/getting-started-setup.html#emr-switch
+    #   [1]: https://docs.aws.amazon.com/lake-formation/latest/dg/initial-LF-setup.html#external-data-filter
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] allow_full_table_external_data_access
+    #   Whether to allow a third-party query engine to get data access
+    #   credentials without session tags when a caller has full data access
+    #   permissions.
     #   @return [Boolean]
     #
     # @!attribute [rw] external_data_filtering_allow_list
@@ -669,11 +684,13 @@ module Aws::LakeFormation
     #
     class DataLakeSettings < Struct.new(
       :data_lake_admins,
+      :read_only_admins,
       :create_database_default_permissions,
       :create_table_default_permissions,
       :parameters,
       :trusted_resource_owners,
       :allow_external_data_filtering,
+      :allow_full_table_external_data_access,
       :external_data_filtering_allow_list,
       :authorized_session_tag_value_list)
       SENSITIVE = []

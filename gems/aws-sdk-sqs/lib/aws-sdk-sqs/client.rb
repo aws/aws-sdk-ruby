@@ -497,16 +497,27 @@ module Aws::SQS
       req.send_request(options)
     end
 
-    # Cancels a specified message movement task.
+    # Cancels a specified message movement task. A message movement can only
+    # be cancelled when the current status is RUNNING. Cancelling a message
+    # movement task does not revert the messages that have already been
+    # moved. It can only stop the messages that have not been moved yet.
     #
-    # <note markdown="1"> * A message movement can only be cancelled when the current status is
-    #   RUNNING.
+    # <note markdown="1"> * This action is currently limited to supporting message redrive from
+    #   [dead-letter queues (DLQs)][1] only. In this context, the source
+    #   queue is the dead-letter queue (DLQ), while the destination queue
+    #   can be the original source queue (from which the messages were
+    #   driven to the dead-letter-queue), or a custom destination queue.
     #
-    # * Cancelling a message movement task does not revert the messages that
-    #   have already been moved. It can only stop the messages that have not
-    #   been moved yet.
+    # * Currently, only standard queues are supported.
+    #
+    # * Only one active message movement task is supported per queue at any
+    #   given time.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html
     #
     # @option params [required, String] :task_handle
     #   An identifier associated with a message movement task.
@@ -1519,6 +1530,23 @@ module Aws::SQS
     # Gets the most recent message movement tasks (up to 10) under a
     # specific source queue.
     #
+    # <note markdown="1"> * This action is currently limited to supporting message redrive from
+    #   [dead-letter queues (DLQs)][1] only. In this context, the source
+    #   queue is the dead-letter queue (DLQ), while the destination queue
+    #   can be the original source queue (from which the messages were
+    #   driven to the dead-letter-queue), or a custom destination queue.
+    #
+    # * Currently, only standard queues are supported.
+    #
+    # * Only one active message movement task is supported per queue at any
+    #   given time.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html
+    #
     # @option params [required, String] :source_arn
     #   The ARN of the queue whose message movement tasks are to be listed.
     #
@@ -1669,7 +1697,8 @@ module Aws::SQS
       req.send_request(options)
     end
 
-    # Deletes the messages in a queue specified by the `QueueURL` parameter.
+    # Deletes available messages in a queue (including in-flight messages)
+    # specified by the `QueueURL` parameter.
     #
     # When you use the `PurgeQueue` action, you can't retrieve any messages
     # deleted from a queue.
@@ -2580,21 +2609,34 @@ module Aws::SQS
     # queue to a specified destination queue.
     #
     # <note markdown="1"> * This action is currently limited to supporting message redrive from
-    #   dead-letter queues (DLQs) only. In this context, the source queue is
-    #   the dead-letter queue (DLQ), while the destination queue can be the
+    #   queues that are configured as [dead-letter queues (DLQs)][1] of
+    #   other Amazon SQS queues only. Non-SQS queue sources of dead-letter
+    #   queues, such as Lambda or Amazon SNS topics, are currently not
+    #   supported.
+    #
+    # * In dead-letter queues redrive context, the `StartMessageMoveTask`
+    #   the source queue is the DLQ, while the destination queue can be the
     #   original source queue (from which the messages were driven to the
     #   dead-letter-queue), or a custom destination queue.
     #
-    # * Currently, only standard queues are supported.
+    # * Currently, only standard queues support redrive. FIFO queues don't
+    #   support redrive.
     #
     # * Only one active message movement task is supported per queue at any
     #   given time.
     #
     #  </note>
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html
+    #
     # @option params [required, String] :source_arn
     #   The ARN of the queue that contains the messages to be moved to another
-    #   queue. Currently, only dead-letter queue (DLQ) ARNs are accepted.
+    #   queue. Currently, only ARNs of dead-letter queues (DLQs) whose sources
+    #   are other Amazon SQS queues are accepted. DLQs whose sources are
+    #   non-SQS queues, such as Lambda or Amazon SNS topics, are not currently
+    #   supported.
     #
     # @option params [String] :destination_arn
     #   The ARN of the queue that receives the moved messages. You can use
@@ -2744,7 +2786,7 @@ module Aws::SQS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sqs'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

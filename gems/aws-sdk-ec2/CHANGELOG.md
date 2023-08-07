@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.396.0 (2023-08-03)
+------------------
+
+* Feature - This release adds new parameter isPrimaryIPv6 to  allow assigning an IPv6 address as a primary IPv6 address to a network interface which cannot be changed to give equivalent functionality available for network interfaces with primary IPv4 address.
+
+1.395.0 (2023-07-27)
+------------------
+
+* Feature - SDK and documentation updates for Amazon Elastic Block Store APIs
+
+1.394.0 (2023-07-25)
+------------------
+
+* Feature - This release adds an instance's peak and baseline network bandwidth as well as the memory sizes of an instance's inference accelerators to DescribeInstanceTypes.
+
+1.393.0 (2023-07-24)
+------------------
+
+* Feature - Add "disabled" enum value to SpotInstanceState.
+
+1.392.0 (2023-07-19)
+------------------
+
+* Feature - Amazon EC2 documentation updates.
+
+1.391.0 (2023-07-17)
+------------------
+
+* Feature - Add Nitro TPM support on DescribeInstanceTypes
+
+1.390.0 (2023-07-13)
+------------------
+
+* Feature - This release adds support for the C7gn and Hpc7g instances. C7gn instances are powered by AWS Graviton3 processors and the fifth-generation AWS Nitro Cards. Hpc7g instances are powered by AWS Graviton 3E processors and provide up to 200 Gbps network bandwidth.
+
 1.389.0 (2023-07-11)
 ------------------
 

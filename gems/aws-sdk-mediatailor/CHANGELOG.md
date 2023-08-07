@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2023-07-13)
+------------------
+
+* Feature - Adds categories to MediaTailor channel assembly alerts
+
 1.67.0 (2023-07-11)
 ------------------
 

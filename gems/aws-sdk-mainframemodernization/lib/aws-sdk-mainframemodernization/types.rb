@@ -369,8 +369,10 @@ module Aws::MainframeModernization
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the role associated with the
-    #   application.
+    #   The Amazon Resource Name (ARN) that identifies a role that the
+    #   application uses to access Amazon Web Services resources that are
+    #   not part of the application or are in a different Amazon Web
+    #   Services account.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1835,10 +1837,23 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
+    # @!attribute [rw] signed_bi_url
+    #   Single sign-on AWS Blu Insights URL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/GetSignedBluinsightsUrlResponse AWS API Documentation
+    #
+    class GetSignedBluinsightsUrlResponse < Struct.new(
+      :signed_bi_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines the details of a high availability configuration.
     #
     # @!attribute [rw] desired_capacity
-    #   The number of instances in a high availability configuration.
+    #   The number of instances in a high availability configuration. The
+    #   minimum possible value is 1 and the maximum is 100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/HighAvailabilityConfig AWS API Documentation
@@ -2833,7 +2848,8 @@ module Aws::MainframeModernization
     #   @return [Boolean]
     #
     # @!attribute [rw] desired_capacity
-    #   The desired capacity for the runtime environment to update.
+    #   The desired capacity for the runtime environment to update. The
+    #   minimum possible value is 0 and the maximum is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] engine_version

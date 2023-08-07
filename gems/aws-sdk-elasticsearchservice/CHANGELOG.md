@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2023-07-18)
+------------------
+
+* Feature - Regex Validation on the ElasticSearch Engine Version attribute
+
 1.75.0 (2023-07-11)
 ------------------
 

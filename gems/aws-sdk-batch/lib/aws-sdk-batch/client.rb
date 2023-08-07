@@ -512,7 +512,8 @@ module Aws::Batch
     #   it to the **AWSBatchServiceRole** service-linked role.
     #
     # * Set the allocation strategy (`allocationStrategy`) parameter to
-    #   `BEST_FIT_PROGRESSIVE` or `SPOT_CAPACITY_OPTIMIZED`.
+    #   `BEST_FIT_PROGRESSIVE`, `SPOT_CAPACITY_OPTIMIZED`, or
+    #   `SPOT_PRICE_CAPACITY_OPTIMIZED`.
     #
     # * Set the update to latest image version
     #   (`updateToLatestImageVersion`) parameter to `true`. The
@@ -775,7 +776,7 @@ module Aws::Batch
     #     unmanagedv_cpus: 1,
     #     compute_resources: {
     #       type: "EC2", # required, accepts EC2, SPOT, FARGATE, FARGATE_SPOT
-    #       allocation_strategy: "BEST_FIT", # accepts BEST_FIT, BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED
+    #       allocation_strategy: "BEST_FIT", # accepts BEST_FIT, BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED, SPOT_PRICE_CAPACITY_OPTIMIZED
     #       minv_cpus: 1,
     #       maxv_cpus: 1, # required
     #       desiredv_cpus: 1,
@@ -1305,7 +1306,7 @@ module Aws::Batch
     #   resp.compute_environments[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "DELETED", "VALID", "INVALID"
     #   resp.compute_environments[0].status_reason #=> String
     #   resp.compute_environments[0].compute_resources.type #=> String, one of "EC2", "SPOT", "FARGATE", "FARGATE_SPOT"
-    #   resp.compute_environments[0].compute_resources.allocation_strategy #=> String, one of "BEST_FIT", "BEST_FIT_PROGRESSIVE", "SPOT_CAPACITY_OPTIMIZED"
+    #   resp.compute_environments[0].compute_resources.allocation_strategy #=> String, one of "BEST_FIT", "BEST_FIT_PROGRESSIVE", "SPOT_CAPACITY_OPTIMIZED", "SPOT_PRICE_CAPACITY_OPTIMIZED"
     #   resp.compute_environments[0].compute_resources.minv_cpus #=> Integer
     #   resp.compute_environments[0].compute_resources.maxv_cpus #=> Integer
     #   resp.compute_environments[0].compute_resources.desiredv_cpus #=> Integer
@@ -3520,7 +3521,7 @@ module Aws::Batch
     #       desiredv_cpus: 1,
     #       subnets: ["String"],
     #       security_group_ids: ["String"],
-    #       allocation_strategy: "BEST_FIT_PROGRESSIVE", # accepts BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED
+    #       allocation_strategy: "BEST_FIT_PROGRESSIVE", # accepts BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED, SPOT_PRICE_CAPACITY_OPTIMIZED
     #       instance_types: ["String"],
     #       ec2_key_pair: "String",
     #       instance_role: "String",
@@ -3709,7 +3710,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

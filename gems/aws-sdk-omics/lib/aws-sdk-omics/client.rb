@@ -1641,6 +1641,7 @@ module Aws::Omics
     #   * {Types::GetReadSetMetadataResponse#reference_arn #reference_arn} => String
     #   * {Types::GetReadSetMetadataResponse#files #files} => Types::ReadSetFiles
     #   * {Types::GetReadSetMetadataResponse#status_message #status_message} => String
+    #   * {Types::GetReadSetMetadataResponse#creation_type #creation_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1676,6 +1677,7 @@ module Aws::Omics
     #   resp.files.index.part_size #=> Integer
     #   resp.files.index.content_length #=> Integer
     #   resp.status_message #=> String
+    #   resp.creation_type #=> String, one of "IMPORT", "UPLOAD"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetReadSetMetadata AWS API Documentation
     #
@@ -2742,6 +2744,7 @@ module Aws::Omics
     #       sample_id: "SampleId",
     #       subject_id: "SubjectId",
     #       generated_from: "GeneratedFrom",
+    #       creation_type: "IMPORT", # accepts IMPORT, UPLOAD
     #     },
     #   })
     #
@@ -2765,6 +2768,7 @@ module Aws::Omics
     #   resp.read_sets[0].sequence_information.alignment #=> String
     #   resp.read_sets[0].creation_time #=> Time
     #   resp.read_sets[0].status_message #=> String
+    #   resp.read_sets[0].creation_type #=> String, one of "IMPORT", "UPLOAD"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListReadSets AWS API Documentation
     #
@@ -4084,7 +4088,7 @@ module Aws::Omics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

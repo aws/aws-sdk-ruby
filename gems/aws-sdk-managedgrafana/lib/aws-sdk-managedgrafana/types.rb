@@ -288,7 +288,8 @@ module Aws::ManagedGrafana
     # @!attribute [rw] grafana_version
     #   Specifies the version of Grafana to support in the new workspace.
     #
-    #   Supported values are `8.4` and `9.4`.
+    #   To get a list of supported version, use the `ListVersions`
+    #   operation.
     #   @return [String]
     #
     # @!attribute [rw] network_access_control
@@ -349,6 +350,11 @@ module Aws::ManagedGrafana
     # @!attribute [rw] vpc_configuration
     #   The configuration settings for an Amazon VPC that contains data
     #   sources for your Grafana workspace to connect to.
+    #
+    #   <note markdown="1"> Connecting to a private VPC is not yet available in the Asia Pacific
+    #   (Seoul) Region (ap-northeast-2).
+    #
+    #    </note>
     #   @return [Types::VpcConfiguration]
     #
     # @!attribute [rw] workspace_data_sources
@@ -529,10 +535,15 @@ module Aws::ManagedGrafana
     #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
     #   @return [String]
     #
+    # @!attribute [rw] grafana_version
+    #   The supported Grafana version for the workspace.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DescribeWorkspaceConfigurationResponse AWS API Documentation
     #
     class DescribeWorkspaceConfigurationResponse < Struct.new(
-      :configuration)
+      :configuration,
+      :grafana_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -728,6 +739,51 @@ module Aws::ManagedGrafana
     end
 
     # @!attribute [rw] max_results
+    #   The maximum number of results to include in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use when requesting the next set of results. You
+    #   receive this token from a previous `ListVersions` operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace to list the available upgrade versions. If
+    #   not included, lists all versions of Grafana that are supported for
+    #   `CreateWorkspace`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ListVersionsRequest AWS API Documentation
+    #
+    class ListVersionsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] grafana_versions
+    #   The Grafana versions available to create. If a workspace ID is
+    #   included in the request, the Grafana versions to which this
+    #   workspace can be upgraded.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use in a subsequent `ListVersions` operation to return
+    #   the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ListVersionsResponse AWS API Documentation
+    #
+    class ListVersionsResponse < Struct.new(
+      :grafana_versions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
     #   The maximum number of workspaces to include in the results.
     #   @return [Integer]
     #
@@ -768,18 +824,31 @@ module Aws::ManagedGrafana
     #
     # When this is configured, only listed IP addresses and VPC endpoints
     # will be able to access your workspace. Standard Grafana authentication
-    # and authorization will still be required.
+    # and authorization are still required.
+    #
+    # Access is granted to a caller that is in either the IP address list or
+    # the VPC endpoint list - they do not need to be in both.
     #
     # If this is not configured, or is removed, then all IP addresses and
-    # VPC endpoints will be allowed. Standard Grafana authentication and
-    # authorization will still be required.
+    # VPC endpoints are allowed. Standard Grafana authentication and
+    # authorization are still required.
+    #
+    # <note markdown="1"> While both `prefixListIds` and `vpceIds` are required, you can pass in
+    # an empty array of strings for either parameter if you do not want to
+    # allow any of that type.
+    #
+    #  If both are passed as empty arrays, no traffic is allowed to the
+    # workspace, because only *explicitly* allowed connections are accepted.
+    #
+    #  </note>
     #
     # @!attribute [rw] prefix_list_ids
     #   An array of prefix list IDs. A prefix list is a list of CIDR ranges
     #   of IP addresses. The IP addresses specified are allowed to access
     #   your workspace. If the list is not included in the configuration
-    #   then no IP addresses will be allowed to access the workspace. You
-    #   create a prefix list using the Amazon VPC console.
+    #   (passed an empty array) then no IP addresses are allowed to access
+    #   the workspace. You create a prefix list using the Amazon VPC
+    #   console.
     #
     #   Prefix list IDs have the format `pl-1a2b3c4d `.
     #
@@ -796,8 +865,9 @@ module Aws::ManagedGrafana
     #   An array of Amazon VPC endpoint IDs for the workspace. You can
     #   create VPC endpoints to your Amazon Managed Grafana workspace for
     #   access from within a VPC. If a `NetworkAccessConfiguration` is
-    #   specified then only VPC endpoints specified here will be allowed to
-    #   access the workspace.
+    #   specified then only VPC endpoints specified here are allowed to
+    #   access the workspace. If you pass in an empty array of strings, then
+    #   no VPCs are allowed to access the workspace.
     #
     #   VPC endpoint IDs have the format `vpce-1a2b3c4d `.
     #
@@ -808,7 +878,7 @@ module Aws::ManagedGrafana
     #   <note markdown="1"> The only VPC endpoints that can be specified here are interface VPC
     #   endpoints for Grafana workspaces (using the
     #   `com.amazonaws.[region].grafana-workspace` service endpoint). Other
-    #   VPC endpoints will be ignored.
+    #   VPC endpoints are ignored.
     #
     #    </note>
     #
@@ -1212,6 +1282,16 @@ module Aws::ManagedGrafana
     #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
     #   @return [String]
     #
+    # @!attribute [rw] grafana_version
+    #   Specifies the version of Grafana to support in the new workspace.
+    #
+    #   Can only be used to upgrade (for example, from 8.4 to 9.4), not
+    #   downgrade (for example, from 9.4 to 8.4).
+    #
+    #   To know what versions are available to upgrade to for a specific
+    #   workspace, see the `ListVersions` operation.
+    #   @return [String]
+    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace to update.
     #   @return [String]
@@ -1220,6 +1300,7 @@ module Aws::ManagedGrafana
     #
     class UpdateWorkspaceConfigurationRequest < Struct.new(
       :configuration,
+      :grafana_version,
       :workspace_id)
       SENSITIVE = []
       include Aws::Structure
@@ -1462,6 +1543,9 @@ module Aws::ManagedGrafana
     #
     # <note markdown="1"> Provided `securityGroupIds` and `subnetIds` must be part of the same
     # VPC.
+    #
+    #  Connecting to a private VPC is not yet available in the Asia Pacific
+    # (Seoul) Region (ap-northeast-2).
     #
     #  </note>
     #

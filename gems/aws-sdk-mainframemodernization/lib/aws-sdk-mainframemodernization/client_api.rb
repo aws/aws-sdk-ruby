@@ -102,6 +102,7 @@ module Aws::MainframeModernization
     GetDeploymentResponse = Shapes::StructureShape.new(name: 'GetDeploymentResponse')
     GetEnvironmentRequest = Shapes::StructureShape.new(name: 'GetEnvironmentRequest')
     GetEnvironmentResponse = Shapes::StructureShape.new(name: 'GetEnvironmentResponse')
+    GetSignedBluinsightsUrlResponse = Shapes::StructureShape.new(name: 'GetSignedBluinsightsUrlResponse')
     HighAvailabilityConfig = Shapes::StructureShape.new(name: 'HighAvailabilityConfig')
     Identifier = Shapes::StringShape.new(name: 'Identifier')
     IdentifierList = Shapes::ListShape.new(name: 'IdentifierList')
@@ -597,6 +598,9 @@ module Aws::MainframeModernization
     GetEnvironmentResponse.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String50, required: true, location_name: "vpcId"))
     GetEnvironmentResponse.struct_class = Types::GetEnvironmentResponse
 
+    GetSignedBluinsightsUrlResponse.add_member(:signed_bi_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "signedBiUrl"))
+    GetSignedBluinsightsUrlResponse.struct_class = Types::GetSignedBluinsightsUrlResponse
+
     HighAvailabilityConfig.add_member(:desired_capacity, Shapes::ShapeRef.new(shape: CapacityValue, required: true, location_name: "desiredCapacity"))
     HighAvailabilityConfig.struct_class = Types::HighAvailabilityConfig
 
@@ -888,12 +892,12 @@ module Aws::MainframeModernization
         o.http_request_uri = "/applications/{applicationId}/batch-job-executions/{executionId}/cancel"
         o.input = Shapes::ShapeRef.new(shape: CancelBatchJobExecutionRequest)
         o.output = Shapes::ShapeRef.new(shape: CancelBatchJobExecutionResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:create_application, Seahorse::Model::Operation.new.tap do |o|
@@ -902,12 +906,12 @@ module Aws::MainframeModernization
         o.http_request_uri = "/applications"
         o.input = Shapes::ShapeRef.new(shape: CreateApplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateApplicationResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:create_data_set_import_task, Seahorse::Model::Operation.new.tap do |o|
@@ -916,13 +920,13 @@ module Aws::MainframeModernization
         o.http_request_uri = "/applications/{applicationId}/dataset-import-task"
         o.input = Shapes::ShapeRef.new(shape: CreateDataSetImportTaskRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateDataSetImportTaskResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:create_deployment, Seahorse::Model::Operation.new.tap do |o|
@@ -931,13 +935,13 @@ module Aws::MainframeModernization
         o.http_request_uri = "/applications/{applicationId}/deployments"
         o.input = Shapes::ShapeRef.new(shape: CreateDeploymentRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateDeploymentResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:create_environment, Seahorse::Model::Operation.new.tap do |o|
@@ -946,12 +950,12 @@ module Aws::MainframeModernization
         o.http_request_uri = "/environments"
         o.input = Shapes::ShapeRef.new(shape: CreateEnvironmentRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateEnvironmentResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:delete_application, Seahorse::Model::Operation.new.tap do |o|
@@ -960,11 +964,11 @@ module Aws::MainframeModernization
         o.http_request_uri = "/applications/{applicationId}"
         o.input = Shapes::ShapeRef.new(shape: DeleteApplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteApplicationResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:delete_application_from_environment, Seahorse::Model::Operation.new.tap do |o|
@@ -973,12 +977,12 @@ module Aws::MainframeModernization
         o.http_request_uri = "/applications/{applicationId}/environment/{environmentId}"
         o.input = Shapes::ShapeRef.new(shape: DeleteApplicationFromEnvironmentRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteApplicationFromEnvironmentResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:delete_environment, Seahorse::Model::Operation.new.tap do |o|
@@ -987,11 +991,11 @@ module Aws::MainframeModernization
         o.http_request_uri = "/environments/{environmentId}"
         o.input = Shapes::ShapeRef.new(shape: DeleteEnvironmentRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteEnvironmentResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:get_application, Seahorse::Model::Operation.new.tap do |o|
@@ -1000,11 +1004,11 @@ module Aws::MainframeModernization
         o.http_request_uri = "/applications/{applicationId}"
         o.input = Shapes::ShapeRef.new(shape: GetApplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_application_version, Seahorse::Model::Operation.new.tap do |o|
@@ -1013,11 +1017,11 @@ module Aws::MainframeModernization
         o.http_request_uri = "/applications/{applicationId}/versions/{applicationVersion}"
         o.input = Shapes::ShapeRef.new(shape: GetApplicationVersionRequest)
         o.output = Shapes::ShapeRef.new(shape: GetApplicationVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_batch_job_execution, Seahorse::Model::Operation.new.tap do |o|
@@ -1026,11 +1030,11 @@ module Aws::MainframeModernization
         o.http_request_uri = "/applications/{applicationId}/batch-job-executions/{executionId}"
         o.input = Shapes::ShapeRef.new(shape: GetBatchJobExecutionRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBatchJobExecutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_data_set_details, Seahorse::Model::Operation.new.tap do |o|
@@ -1039,11 +1043,11 @@ module Aws::MainframeModernization
         o.http_request_uri = "/applications/{applicationId}/datasets/{dataSetName}"
         o.input = Shapes::ShapeRef.new(shape: GetDataSetDetailsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDataSetDetailsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_data_set_import_task, Seahorse::Model::Operation.new.tap do |o|
@@ -1052,11 +1056,11 @@ module Aws::MainframeModernization
         o.http_request_uri = "/applications/{applicationId}/dataset-import-tasks/{taskId}"
         o.input = Shapes::ShapeRef.new(shape: GetDataSetImportTaskRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDataSetImportTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_deployment, Seahorse::Model::Operation.new.tap do |o|
@@ -1065,11 +1069,11 @@ module Aws::MainframeModernization
         o.http_request_uri = "/applications/{applicationId}/deployments/{deploymentId}"
         o.input = Shapes::ShapeRef.new(shape: GetDeploymentRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDeploymentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_environment, Seahorse::Model::Operation.new.tap do |o|
@@ -1078,11 +1082,22 @@ module Aws::MainframeModernization
         o.http_request_uri = "/environments/{environmentId}"
         o.input = Shapes::ShapeRef.new(shape: GetEnvironmentRequest)
         o.output = Shapes::ShapeRef.new(shape: GetEnvironmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_signed_bluinsights_url, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSignedBluinsightsUrl"
+        o.http_method = "GET"
+        o.http_request_uri = "/signed-bi-url"
+        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: GetSignedBluinsightsUrlResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:list_application_versions, Seahorse::Model::Operation.new.tap do |o|
@@ -1091,11 +1106,11 @@ module Aws::MainframeModernization
         o.http_request_uri = "/applications/{applicationId}/versions"
         o.input = Shapes::ShapeRef.new(shape: ListApplicationVersionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListApplicationVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1110,10 +1125,10 @@ module Aws::MainframeModernization
         o.http_request_uri = "/applications"
         o.input = Shapes::ShapeRef.new(shape: ListApplicationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListApplicationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1128,11 +1143,11 @@ module Aws::MainframeModernization
         o.http_request_uri = "/applications/{applicationId}/batch-job-definitions"
         o.input = Shapes::ShapeRef.new(shape: ListBatchJobDefinitionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListBatchJobDefinitionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1147,11 +1162,11 @@ module Aws::MainframeModernization
         o.http_request_uri = "/applications/{applicationId}/batch-job-executions"
         o.input = Shapes::ShapeRef.new(shape: ListBatchJobExecutionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListBatchJobExecutionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1166,11 +1181,11 @@ module Aws::MainframeModernization
         o.http_request_uri = "/applications/{applicationId}/dataset-import-tasks"
         o.input = Shapes::ShapeRef.new(shape: ListDataSetImportHistoryRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDataSetImportHistoryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1185,11 +1200,11 @@ module Aws::MainframeModernization
         o.http_request_uri = "/applications/{applicationId}/datasets"
         o.input = Shapes::ShapeRef.new(shape: ListDataSetsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDataSetsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1204,11 +1219,11 @@ module Aws::MainframeModernization
         o.http_request_uri = "/applications/{applicationId}/deployments"
         o.input = Shapes::ShapeRef.new(shape: ListDeploymentsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDeploymentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1223,10 +1238,10 @@ module Aws::MainframeModernization
         o.http_request_uri = "/engine-versions"
         o.input = Shapes::ShapeRef.new(shape: ListEngineVersionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListEngineVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1241,10 +1256,10 @@ module Aws::MainframeModernization
         o.http_request_uri = "/environments"
         o.input = Shapes::ShapeRef.new(shape: ListEnvironmentsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListEnvironmentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1259,11 +1274,11 @@ module Aws::MainframeModernization
         o.http_request_uri = "/tags/{resourceArn}"
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:start_application, Seahorse::Model::Operation.new.tap do |o|
@@ -1272,12 +1287,12 @@ module Aws::MainframeModernization
         o.http_request_uri = "/applications/{applicationId}/start"
         o.input = Shapes::ShapeRef.new(shape: StartApplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: StartApplicationResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:start_batch_job, Seahorse::Model::Operation.new.tap do |o|
@@ -1286,12 +1301,12 @@ module Aws::MainframeModernization
         o.http_request_uri = "/applications/{applicationId}/batch-job"
         o.input = Shapes::ShapeRef.new(shape: StartBatchJobRequest)
         o.output = Shapes::ShapeRef.new(shape: StartBatchJobResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:stop_application, Seahorse::Model::Operation.new.tap do |o|
@@ -1300,12 +1315,12 @@ module Aws::MainframeModernization
         o.http_request_uri = "/applications/{applicationId}/stop"
         o.input = Shapes::ShapeRef.new(shape: StopApplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: StopApplicationResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1314,12 +1329,12 @@ module Aws::MainframeModernization
         o.http_request_uri = "/tags/{resourceArn}"
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1328,11 +1343,11 @@ module Aws::MainframeModernization
         o.http_request_uri = "/tags/{resourceArn}"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_application, Seahorse::Model::Operation.new.tap do |o|
@@ -1341,12 +1356,12 @@ module Aws::MainframeModernization
         o.http_request_uri = "/applications/{applicationId}"
         o.input = Shapes::ShapeRef.new(shape: UpdateApplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateApplicationResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:update_environment, Seahorse::Model::Operation.new.tap do |o|
@@ -1355,13 +1370,13 @@ module Aws::MainframeModernization
         o.http_request_uri = "/environments/{environmentId}"
         o.input = Shapes::ShapeRef.new(shape: UpdateEnvironmentRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateEnvironmentResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
     end
 

@@ -144,6 +144,8 @@ module Aws::CloudFormation
             Aws::CloudFormation::Endpoints::ListExports.build(context)
           when :list_imports
             Aws::CloudFormation::Endpoints::ListImports.build(context)
+          when :list_stack_instance_resource_drifts
+            Aws::CloudFormation::Endpoints::ListStackInstanceResourceDrifts.build(context)
           when :list_stack_instances
             Aws::CloudFormation::Endpoints::ListStackInstances.build(context)
           when :list_stack_resources

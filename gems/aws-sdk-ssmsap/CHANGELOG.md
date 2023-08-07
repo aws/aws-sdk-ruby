@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2023-07-19)
+------------------
+
+* Feature - Added support for SAP Hana High Availability discovery (primary and secondary nodes) and Backint agent installation with SSM for SAP.
+
 1.8.0 (2023-07-11)
 ------------------
 

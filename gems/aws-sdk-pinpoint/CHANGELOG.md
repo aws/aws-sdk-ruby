@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2023-07-28)
+------------------
+
+* Feature - Added support for sending push notifications using the FCM v1 API with json credentials. Amazon Pinpoint customers can now deliver messages to Android devices using both FCM v1 API and the legacy FCM/GCM API
+
 1.78.0 (2023-07-11)
 ------------------
 

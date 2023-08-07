@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2023-07-31)
+------------------
+
+* Feature - This release adds 1 new API: BatchGetFindingDetails to retrieve enhanced vulnerability intelligence details for findings.
+
 1.19.0 (2023-07-11)
 ------------------
 

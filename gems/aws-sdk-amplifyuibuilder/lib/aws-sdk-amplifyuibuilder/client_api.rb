@@ -14,6 +14,7 @@ module Aws::AmplifyUIBuilder
     include Seahorse::Model
 
     ActionParameters = Shapes::StructureShape.new(name: 'ActionParameters')
+    ApiConfiguration = Shapes::UnionShape.new(name: 'ApiConfiguration')
     AppId = Shapes::StringShape.new(name: 'AppId')
     AssociatedFieldsList = Shapes::ListShape.new(name: 'AssociatedFieldsList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -73,6 +74,7 @@ module Aws::AmplifyUIBuilder
     CreateThemeData = Shapes::StructureShape.new(name: 'CreateThemeData')
     CreateThemeRequest = Shapes::StructureShape.new(name: 'CreateThemeRequest')
     CreateThemeResponse = Shapes::StructureShape.new(name: 'CreateThemeResponse')
+    DataStoreRenderConfig = Shapes::StructureShape.new(name: 'DataStoreRenderConfig')
     DeleteComponentRequest = Shapes::StructureShape.new(name: 'DeleteComponentRequest')
     DeleteFormRequest = Shapes::StructureShape.new(name: 'DeleteFormRequest')
     DeleteThemeRequest = Shapes::StructureShape.new(name: 'DeleteThemeRequest')
@@ -126,6 +128,7 @@ module Aws::AmplifyUIBuilder
     GetMetadataResponse = Shapes::StructureShape.new(name: 'GetMetadataResponse')
     GetThemeRequest = Shapes::StructureShape.new(name: 'GetThemeRequest')
     GetThemeResponse = Shapes::StructureShape.new(name: 'GetThemeResponse')
+    GraphQLRenderConfig = Shapes::StructureShape.new(name: 'GraphQLRenderConfig')
     IdentifierList = Shapes::ListShape.new(name: 'IdentifierList')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -147,6 +150,7 @@ module Aws::AmplifyUIBuilder
     ListThemesRequest = Shapes::StructureShape.new(name: 'ListThemesRequest')
     ListThemesResponse = Shapes::StructureShape.new(name: 'ListThemesResponse')
     MutationActionSetStateParameter = Shapes::StructureShape.new(name: 'MutationActionSetStateParameter')
+    NoApiRenderConfig = Shapes::StructureShape.new(name: 'NoApiRenderConfig')
     NumValues = Shapes::ListShape.new(name: 'NumValues')
     OperandType = Shapes::StringShape.new(name: 'OperandType')
     Predicate = Shapes::StructureShape.new(name: 'Predicate')
@@ -213,6 +217,16 @@ module Aws::AmplifyUIBuilder
     ActionParameters.add_member(:fields, Shapes::ShapeRef.new(shape: ComponentProperties, location_name: "fields"))
     ActionParameters.add_member(:state, Shapes::ShapeRef.new(shape: MutationActionSetStateParameter, location_name: "state"))
     ActionParameters.struct_class = Types::ActionParameters
+
+    ApiConfiguration.add_member(:graph_ql_config, Shapes::ShapeRef.new(shape: GraphQLRenderConfig, location_name: "graphQLConfig"))
+    ApiConfiguration.add_member(:data_store_config, Shapes::ShapeRef.new(shape: DataStoreRenderConfig, location_name: "dataStoreConfig"))
+    ApiConfiguration.add_member(:no_api_config, Shapes::ShapeRef.new(shape: NoApiRenderConfig, location_name: "noApiConfig"))
+    ApiConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ApiConfiguration.add_member_subclass(:graph_ql_config, Types::ApiConfiguration::GraphQlConfig)
+    ApiConfiguration.add_member_subclass(:data_store_config, Types::ApiConfiguration::DataStoreConfig)
+    ApiConfiguration.add_member_subclass(:no_api_config, Types::ApiConfiguration::NoApiConfig)
+    ApiConfiguration.add_member_subclass(:unknown, Types::ApiConfiguration::Unknown)
+    ApiConfiguration.struct_class = Types::ApiConfiguration
 
     AssociatedFieldsList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -504,6 +518,8 @@ module Aws::AmplifyUIBuilder
     CreateThemeResponse[:payload] = :entity
     CreateThemeResponse[:payload_member] = CreateThemeResponse.member(:entity)
 
+    DataStoreRenderConfig.struct_class = Types::DataStoreRenderConfig
+
     DeleteComponentRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "appId"))
     DeleteComponentRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "environmentName"))
     DeleteComponentRequest.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "id"))
@@ -747,6 +763,13 @@ module Aws::AmplifyUIBuilder
     GetThemeResponse[:payload] = :theme
     GetThemeResponse[:payload_member] = GetThemeResponse.member(:theme)
 
+    GraphQLRenderConfig.add_member(:types_file_path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "typesFilePath"))
+    GraphQLRenderConfig.add_member(:queries_file_path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "queriesFilePath"))
+    GraphQLRenderConfig.add_member(:mutations_file_path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "mutationsFilePath"))
+    GraphQLRenderConfig.add_member(:subscriptions_file_path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "subscriptionsFilePath"))
+    GraphQLRenderConfig.add_member(:fragments_file_path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "fragmentsFilePath"))
+    GraphQLRenderConfig.struct_class = Types::GraphQLRenderConfig
+
     IdentifierList.member = Shapes::ShapeRef.new(shape: String)
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -800,6 +823,8 @@ module Aws::AmplifyUIBuilder
     MutationActionSetStateParameter.add_member(:set, Shapes::ShapeRef.new(shape: ComponentProperty, required: true, location_name: "set"))
     MutationActionSetStateParameter.struct_class = Types::MutationActionSetStateParameter
 
+    NoApiRenderConfig.struct_class = Types::NoApiRenderConfig
+
     NumValues.member = Shapes::ShapeRef.new(shape: Integer)
 
     Predicate.add_member(:or, Shapes::ShapeRef.new(shape: PredicateList, location_name: "or"))
@@ -828,6 +853,7 @@ module Aws::AmplifyUIBuilder
     ReactStartCodegenJobData.add_member(:script, Shapes::ShapeRef.new(shape: JSScript, location_name: "script"))
     ReactStartCodegenJobData.add_member(:render_type_declarations, Shapes::ShapeRef.new(shape: Boolean, location_name: "renderTypeDeclarations"))
     ReactStartCodegenJobData.add_member(:inline_source_map, Shapes::ShapeRef.new(shape: Boolean, location_name: "inlineSourceMap"))
+    ReactStartCodegenJobData.add_member(:api_configuration, Shapes::ShapeRef.new(shape: ApiConfiguration, location_name: "apiConfiguration"))
     ReactStartCodegenJobData.struct_class = Types::ReactStartCodegenJobData
 
     RefreshTokenRequest.add_member(:provider, Shapes::ShapeRef.new(shape: TokenProviders, required: true, location: "uri", location_name: "provider"))

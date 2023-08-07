@@ -29,6 +29,7 @@ module Aws::EMRServerless
     CancelJobRunRequest = Shapes::StructureShape.new(name: 'CancelJobRunRequest')
     CancelJobRunResponse = Shapes::StructureShape.new(name: 'CancelJobRunResponse')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    CloudWatchLoggingConfiguration = Shapes::StructureShape.new(name: 'CloudWatchLoggingConfiguration')
     Configuration = Shapes::StructureShape.new(name: 'Configuration')
     ConfigurationList = Shapes::ListShape.new(name: 'ConfigurationList')
     ConfigurationOverrides = Shapes::StructureShape.new(name: 'ConfigurationOverrides')
@@ -82,6 +83,11 @@ module Aws::EMRServerless
     ListJobRunsResponse = Shapes::StructureShape.new(name: 'ListJobRunsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
+    LogStreamNamePrefix = Shapes::StringShape.new(name: 'LogStreamNamePrefix')
+    LogTypeList = Shapes::ListShape.new(name: 'LogTypeList')
+    LogTypeMap = Shapes::MapShape.new(name: 'LogTypeMap')
+    LogTypeString = Shapes::StringShape.new(name: 'LogTypeString')
     ManagedPersistenceMonitoringConfiguration = Shapes::StructureShape.new(name: 'ManagedPersistenceMonitoringConfiguration')
     MaximumAllowedResources = Shapes::StructureShape.new(name: 'MaximumAllowedResources')
     MemorySize = Shapes::StringShape.new(name: 'MemorySize')
@@ -183,6 +189,13 @@ module Aws::EMRServerless
     CancelJobRunResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "applicationId"))
     CancelJobRunResponse.add_member(:job_run_id, Shapes::ShapeRef.new(shape: JobRunId, required: true, location_name: "jobRunId"))
     CancelJobRunResponse.struct_class = Types::CancelJobRunResponse
+
+    CloudWatchLoggingConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
+    CloudWatchLoggingConfiguration.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, location_name: "logGroupName"))
+    CloudWatchLoggingConfiguration.add_member(:log_stream_name_prefix, Shapes::ShapeRef.new(shape: LogStreamNamePrefix, location_name: "logStreamNamePrefix"))
+    CloudWatchLoggingConfiguration.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: EncryptionKeyArn, location_name: "encryptionKeyArn"))
+    CloudWatchLoggingConfiguration.add_member(:log_types, Shapes::ShapeRef.new(shape: LogTypeMap, location_name: "logTypes"))
+    CloudWatchLoggingConfiguration.struct_class = Types::CloudWatchLoggingConfiguration
 
     Configuration.add_member(:classification, Shapes::ShapeRef.new(shape: String1024, required: true, location_name: "classification"))
     Configuration.add_member(:properties, Shapes::ShapeRef.new(shape: SensitivePropertiesMap, location_name: "properties"))
@@ -341,6 +354,11 @@ module Aws::EMRServerless
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    LogTypeList.member = Shapes::ShapeRef.new(shape: LogTypeString)
+
+    LogTypeMap.key = Shapes::ShapeRef.new(shape: WorkerTypeString)
+    LogTypeMap.value = Shapes::ShapeRef.new(shape: LogTypeList)
+
     ManagedPersistenceMonitoringConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
     ManagedPersistenceMonitoringConfiguration.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: EncryptionKeyArn, location_name: "encryptionKeyArn"))
     ManagedPersistenceMonitoringConfiguration.struct_class = Types::ManagedPersistenceMonitoringConfiguration
@@ -352,6 +370,7 @@ module Aws::EMRServerless
 
     MonitoringConfiguration.add_member(:s3_monitoring_configuration, Shapes::ShapeRef.new(shape: S3MonitoringConfiguration, location_name: "s3MonitoringConfiguration"))
     MonitoringConfiguration.add_member(:managed_persistence_monitoring_configuration, Shapes::ShapeRef.new(shape: ManagedPersistenceMonitoringConfiguration, location_name: "managedPersistenceMonitoringConfiguration"))
+    MonitoringConfiguration.add_member(:cloud_watch_logging_configuration, Shapes::ShapeRef.new(shape: CloudWatchLoggingConfiguration, location_name: "cloudWatchLoggingConfiguration"))
     MonitoringConfiguration.struct_class = Types::MonitoringConfiguration
 
     NetworkConfiguration.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "subnetIds"))

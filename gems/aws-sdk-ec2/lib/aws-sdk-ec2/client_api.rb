@@ -199,6 +199,7 @@ module Aws::EC2
     AvailableInstanceCapacityList = Shapes::ListShape.new(name: 'AvailableInstanceCapacityList')
     BareMetal = Shapes::StringShape.new(name: 'BareMetal')
     BareMetalFlag = Shapes::BooleanShape.new(name: 'BareMetalFlag')
+    BaselineBandwidthInGbps = Shapes::FloatShape.new(name: 'BaselineBandwidthInGbps')
     BaselineBandwidthInMbps = Shapes::IntegerShape.new(name: 'BaselineBandwidthInMbps')
     BaselineEbsBandwidthMbps = Shapes::StructureShape.new(name: 'BaselineEbsBandwidthMbps')
     BaselineEbsBandwidthMbpsRequest = Shapes::StructureShape.new(name: 'BaselineEbsBandwidthMbpsRequest')
@@ -1570,6 +1571,8 @@ module Aws::EC2
     InferenceDeviceInfo = Shapes::StructureShape.new(name: 'InferenceDeviceInfo')
     InferenceDeviceInfoList = Shapes::ListShape.new(name: 'InferenceDeviceInfoList')
     InferenceDeviceManufacturerName = Shapes::StringShape.new(name: 'InferenceDeviceManufacturerName')
+    InferenceDeviceMemoryInfo = Shapes::StructureShape.new(name: 'InferenceDeviceMemoryInfo')
+    InferenceDeviceMemorySize = Shapes::IntegerShape.new(name: 'InferenceDeviceMemorySize')
     InferenceDeviceName = Shapes::StringShape.new(name: 'InferenceDeviceName')
     InsideCidrBlocksStringList = Shapes::ListShape.new(name: 'InsideCidrBlocksStringList')
     Instance = Shapes::StructureShape.new(name: 'Instance')
@@ -2169,6 +2172,10 @@ module Aws::EC2
     NewDhcpConfigurationList = Shapes::ListShape.new(name: 'NewDhcpConfigurationList')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NitroEnclavesSupport = Shapes::StringShape.new(name: 'NitroEnclavesSupport')
+    NitroTpmInfo = Shapes::StructureShape.new(name: 'NitroTpmInfo')
+    NitroTpmSupport = Shapes::StringShape.new(name: 'NitroTpmSupport')
+    NitroTpmSupportedVersionType = Shapes::StringShape.new(name: 'NitroTpmSupportedVersionType')
+    NitroTpmSupportedVersionsList = Shapes::ListShape.new(name: 'NitroTpmSupportedVersionsList')
     OccurrenceDayRequestSet = Shapes::ListShape.new(name: 'OccurrenceDayRequestSet')
     OccurrenceDaySet = Shapes::ListShape.new(name: 'OccurrenceDaySet')
     OfferingClassType = Shapes::StringShape.new(name: 'OfferingClassType')
@@ -2195,6 +2202,7 @@ module Aws::EC2
     PayerResponsibility = Shapes::StringShape.new(name: 'PayerResponsibility')
     PaymentOption = Shapes::StringShape.new(name: 'PaymentOption')
     PciId = Shapes::StructureShape.new(name: 'PciId')
+    PeakBandwidthInGbps = Shapes::FloatShape.new(name: 'PeakBandwidthInGbps')
     PeeringAttachmentStatus = Shapes::StructureShape.new(name: 'PeeringAttachmentStatus')
     PeeringConnectionOptions = Shapes::StructureShape.new(name: 'PeeringConnectionOptions')
     PeeringConnectionOptionsRequest = Shapes::StructureShape.new(name: 'PeeringConnectionOptionsRequest')
@@ -2500,6 +2508,7 @@ module Aws::EC2
     S3ObjectTag = Shapes::StructureShape.new(name: 'S3ObjectTag')
     S3ObjectTagList = Shapes::ListShape.new(name: 'S3ObjectTagList')
     S3Storage = Shapes::StructureShape.new(name: 'S3Storage')
+    SSEType = Shapes::StringShape.new(name: 'SSEType')
     ScheduledInstance = Shapes::StructureShape.new(name: 'ScheduledInstance')
     ScheduledInstanceAvailability = Shapes::StructureShape.new(name: 'ScheduledInstanceAvailability')
     ScheduledInstanceAvailabilitySet = Shapes::ListShape.new(name: 'ScheduledInstanceAvailabilitySet')
@@ -3027,6 +3036,7 @@ module Aws::EC2
     snapshotTierStatusSet = Shapes::ListShape.new(name: 'snapshotTierStatusSet')
     totalFpgaMemory = Shapes::IntegerShape.new(name: 'totalFpgaMemory')
     totalGpuMemory = Shapes::IntegerShape.new(name: 'totalGpuMemory')
+    totalInferenceMemory = Shapes::IntegerShape.new(name: 'totalInferenceMemory')
 
     AcceleratorCount.add_member(:min, Shapes::ShapeRef.new(shape: Integer, location_name: "min"))
     AcceleratorCount.add_member(:max, Shapes::ShapeRef.new(shape: Integer, location_name: "max"))
@@ -4763,6 +4773,7 @@ module Aws::EC2
     CreateNetworkInterfaceRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "subnetId"))
     CreateNetworkInterfaceRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateNetworkInterfaceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateNetworkInterfaceRequest.add_member(:enable_primary_ipv_6, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnablePrimaryIpv6"))
     CreateNetworkInterfaceRequest.struct_class = Types::CreateNetworkInterfaceRequest
 
     CreateNetworkInterfaceResult.add_member(:network_interface, Shapes::ShapeRef.new(shape: NetworkInterface, location_name: "networkInterface"))
@@ -8651,6 +8662,7 @@ module Aws::EC2
     GetEbsEncryptionByDefaultRequest.struct_class = Types::GetEbsEncryptionByDefaultRequest
 
     GetEbsEncryptionByDefaultResult.add_member(:ebs_encryption_by_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "ebsEncryptionByDefault"))
+    GetEbsEncryptionByDefaultResult.add_member(:sse_type, Shapes::ShapeRef.new(shape: SSEType, location_name: "sseType"))
     GetEbsEncryptionByDefaultResult.struct_class = Types::GetEbsEncryptionByDefaultResult
 
     GetFlowLogsIntegrationTemplateRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -9409,14 +9421,19 @@ module Aws::EC2
     ImportVolumeTaskDetails.struct_class = Types::ImportVolumeTaskDetails
 
     InferenceAcceleratorInfo.add_member(:accelerators, Shapes::ShapeRef.new(shape: InferenceDeviceInfoList, location_name: "accelerators"))
+    InferenceAcceleratorInfo.add_member(:total_inference_memory_in_mi_b, Shapes::ShapeRef.new(shape: totalInferenceMemory, location_name: "totalInferenceMemoryInMiB"))
     InferenceAcceleratorInfo.struct_class = Types::InferenceAcceleratorInfo
 
     InferenceDeviceInfo.add_member(:count, Shapes::ShapeRef.new(shape: InferenceDeviceCount, location_name: "count"))
     InferenceDeviceInfo.add_member(:name, Shapes::ShapeRef.new(shape: InferenceDeviceName, location_name: "name"))
     InferenceDeviceInfo.add_member(:manufacturer, Shapes::ShapeRef.new(shape: InferenceDeviceManufacturerName, location_name: "manufacturer"))
+    InferenceDeviceInfo.add_member(:memory_info, Shapes::ShapeRef.new(shape: InferenceDeviceMemoryInfo, location_name: "memoryInfo"))
     InferenceDeviceInfo.struct_class = Types::InferenceDeviceInfo
 
     InferenceDeviceInfoList.member = Shapes::ShapeRef.new(shape: InferenceDeviceInfo)
+
+    InferenceDeviceMemoryInfo.add_member(:size_in_mi_b, Shapes::ShapeRef.new(shape: InferenceDeviceMemorySize, location_name: "sizeInMiB"))
+    InferenceDeviceMemoryInfo.struct_class = Types::InferenceDeviceMemoryInfo
 
     InsideCidrBlocksStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
@@ -9609,6 +9626,7 @@ module Aws::EC2
     InstanceIpv4PrefixList.member = Shapes::ShapeRef.new(shape: InstanceIpv4Prefix, location_name: "item")
 
     InstanceIpv6Address.add_member(:ipv_6_address, Shapes::ShapeRef.new(shape: String, location_name: "ipv6Address"))
+    InstanceIpv6Address.add_member(:is_primary_ipv_6, Shapes::ShapeRef.new(shape: Boolean, location_name: "isPrimaryIpv6"))
     InstanceIpv6Address.struct_class = Types::InstanceIpv6Address
 
     InstanceIpv6AddressList.member = Shapes::ShapeRef.new(shape: InstanceIpv6Address, location_name: "item")
@@ -9712,6 +9730,7 @@ module Aws::EC2
     InstanceNetworkInterfaceSpecification.add_member(:ipv_4_prefix_count, Shapes::ShapeRef.new(shape: Integer, location_name: "Ipv4PrefixCount"))
     InstanceNetworkInterfaceSpecification.add_member(:ipv_6_prefixes, Shapes::ShapeRef.new(shape: Ipv6PrefixList, location_name: "Ipv6Prefix"))
     InstanceNetworkInterfaceSpecification.add_member(:ipv_6_prefix_count, Shapes::ShapeRef.new(shape: Integer, location_name: "Ipv6PrefixCount"))
+    InstanceNetworkInterfaceSpecification.add_member(:primary_ipv_6, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrimaryIpv6"))
     InstanceNetworkInterfaceSpecification.struct_class = Types::InstanceNetworkInterfaceSpecification
 
     InstanceNetworkInterfaceSpecificationList.member = Shapes::ShapeRef.new(shape: InstanceNetworkInterfaceSpecification, location_name: "item")
@@ -9864,6 +9883,8 @@ module Aws::EC2
     InstanceTypeInfo.add_member(:auto_recovery_supported, Shapes::ShapeRef.new(shape: AutoRecoveryFlag, location_name: "autoRecoverySupported"))
     InstanceTypeInfo.add_member(:supported_boot_modes, Shapes::ShapeRef.new(shape: BootModeTypeList, location_name: "supportedBootModes"))
     InstanceTypeInfo.add_member(:nitro_enclaves_support, Shapes::ShapeRef.new(shape: NitroEnclavesSupport, location_name: "nitroEnclavesSupport"))
+    InstanceTypeInfo.add_member(:nitro_tpm_support, Shapes::ShapeRef.new(shape: NitroTpmSupport, location_name: "nitroTpmSupport"))
+    InstanceTypeInfo.add_member(:nitro_tpm_info, Shapes::ShapeRef.new(shape: NitroTpmInfo, location_name: "nitroTpmInfo"))
     InstanceTypeInfo.struct_class = Types::InstanceTypeInfo
 
     InstanceTypeInfoFromInstanceRequirements.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
@@ -10397,6 +10418,7 @@ module Aws::EC2
     LaunchTemplateInstanceNetworkInterfaceSpecification.add_member(:ipv_4_prefix_count, Shapes::ShapeRef.new(shape: Integer, location_name: "ipv4PrefixCount"))
     LaunchTemplateInstanceNetworkInterfaceSpecification.add_member(:ipv_6_prefixes, Shapes::ShapeRef.new(shape: Ipv6PrefixListResponse, location_name: "ipv6PrefixSet"))
     LaunchTemplateInstanceNetworkInterfaceSpecification.add_member(:ipv_6_prefix_count, Shapes::ShapeRef.new(shape: Integer, location_name: "ipv6PrefixCount"))
+    LaunchTemplateInstanceNetworkInterfaceSpecification.add_member(:primary_ipv_6, Shapes::ShapeRef.new(shape: Boolean, location_name: "primaryIpv6"))
     LaunchTemplateInstanceNetworkInterfaceSpecification.struct_class = Types::LaunchTemplateInstanceNetworkInterfaceSpecification
 
     LaunchTemplateInstanceNetworkInterfaceSpecificationList.member = Shapes::ShapeRef.new(shape: LaunchTemplateInstanceNetworkInterfaceSpecification, location_name: "item")
@@ -10420,6 +10442,7 @@ module Aws::EC2
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequest.add_member(:ipv_4_prefix_count, Shapes::ShapeRef.new(shape: Integer, location_name: "Ipv4PrefixCount"))
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequest.add_member(:ipv_6_prefixes, Shapes::ShapeRef.new(shape: Ipv6PrefixList, location_name: "Ipv6Prefix"))
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequest.add_member(:ipv_6_prefix_count, Shapes::ShapeRef.new(shape: Integer, location_name: "Ipv6PrefixCount"))
+    LaunchTemplateInstanceNetworkInterfaceSpecificationRequest.add_member(:primary_ipv_6, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrimaryIpv6"))
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequest.struct_class = Types::LaunchTemplateInstanceNetworkInterfaceSpecificationRequest
 
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequestList.member = Shapes::ShapeRef.new(shape: LaunchTemplateInstanceNetworkInterfaceSpecificationRequest, location_name: "InstanceNetworkInterfaceSpecification")
@@ -11042,6 +11065,7 @@ module Aws::EC2
     ModifyNetworkInterfaceAttributeRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, required: true, location_name: "networkInterfaceId"))
     ModifyNetworkInterfaceAttributeRequest.add_member(:source_dest_check, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "sourceDestCheck"))
     ModifyNetworkInterfaceAttributeRequest.add_member(:ena_srd_specification, Shapes::ShapeRef.new(shape: EnaSrdSpecification, location_name: "EnaSrdSpecification"))
+    ModifyNetworkInterfaceAttributeRequest.add_member(:enable_primary_ipv_6, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnablePrimaryIpv6"))
     ModifyNetworkInterfaceAttributeRequest.struct_class = Types::ModifyNetworkInterfaceAttributeRequest
 
     ModifyPrivateDnsNameOptionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -11559,6 +11583,8 @@ module Aws::EC2
     NetworkCardInfo.add_member(:network_card_index, Shapes::ShapeRef.new(shape: NetworkCardIndex, location_name: "networkCardIndex"))
     NetworkCardInfo.add_member(:network_performance, Shapes::ShapeRef.new(shape: NetworkPerformance, location_name: "networkPerformance"))
     NetworkCardInfo.add_member(:maximum_network_interfaces, Shapes::ShapeRef.new(shape: MaxNetworkInterfaces, location_name: "maximumNetworkInterfaces"))
+    NetworkCardInfo.add_member(:baseline_bandwidth_in_gbps, Shapes::ShapeRef.new(shape: BaselineBandwidthInGbps, location_name: "baselineBandwidthInGbps"))
+    NetworkCardInfo.add_member(:peak_bandwidth_in_gbps, Shapes::ShapeRef.new(shape: PeakBandwidthInGbps, location_name: "peakBandwidthInGbps"))
     NetworkCardInfo.struct_class = Types::NetworkCardInfo
 
     NetworkCardInfoList.member = Shapes::ShapeRef.new(shape: NetworkCardInfo, location_name: "item")
@@ -11718,6 +11744,7 @@ module Aws::EC2
     NetworkInterfaceIdSet.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
     NetworkInterfaceIpv6Address.add_member(:ipv_6_address, Shapes::ShapeRef.new(shape: String, location_name: "ipv6Address"))
+    NetworkInterfaceIpv6Address.add_member(:is_primary_ipv_6, Shapes::ShapeRef.new(shape: Boolean, location_name: "isPrimaryIpv6"))
     NetworkInterfaceIpv6Address.struct_class = Types::NetworkInterfaceIpv6Address
 
     NetworkInterfaceIpv6AddressesList.member = Shapes::ShapeRef.new(shape: NetworkInterfaceIpv6Address, location_name: "item")
@@ -11753,6 +11780,11 @@ module Aws::EC2
     NewDhcpConfiguration.struct_class = Types::NewDhcpConfiguration
 
     NewDhcpConfigurationList.member = Shapes::ShapeRef.new(shape: NewDhcpConfiguration, location_name: "item")
+
+    NitroTpmInfo.add_member(:supported_versions, Shapes::ShapeRef.new(shape: NitroTpmSupportedVersionsList, location_name: "supportedVersions"))
+    NitroTpmInfo.struct_class = Types::NitroTpmInfo
+
+    NitroTpmSupportedVersionsList.member = Shapes::ShapeRef.new(shape: NitroTpmSupportedVersionType, location_name: "item")
 
     OccurrenceDayRequestSet.member = Shapes::ShapeRef.new(shape: Integer, location_name: "OccurenceDay")
 
@@ -12831,6 +12863,7 @@ module Aws::EC2
     RestoreSnapshotFromRecycleBinResult.add_member(:state, Shapes::ShapeRef.new(shape: SnapshotState, location_name: "status"))
     RestoreSnapshotFromRecycleBinResult.add_member(:volume_id, Shapes::ShapeRef.new(shape: String, location_name: "volumeId"))
     RestoreSnapshotFromRecycleBinResult.add_member(:volume_size, Shapes::ShapeRef.new(shape: Integer, location_name: "volumeSize"))
+    RestoreSnapshotFromRecycleBinResult.add_member(:sse_type, Shapes::ShapeRef.new(shape: SSEType, location_name: "sseType"))
     RestoreSnapshotFromRecycleBinResult.struct_class = Types::RestoreSnapshotFromRecycleBinResult
 
     RestoreSnapshotTierRequest.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, required: true, location_name: "SnapshotId"))
@@ -12998,6 +13031,7 @@ module Aws::EC2
     RunInstancesRequest.add_member(:private_dns_name_options, Shapes::ShapeRef.new(shape: PrivateDnsNameOptionsRequest, location_name: "PrivateDnsNameOptions"))
     RunInstancesRequest.add_member(:maintenance_options, Shapes::ShapeRef.new(shape: InstanceMaintenanceOptionsRequest, location_name: "MaintenanceOptions"))
     RunInstancesRequest.add_member(:disable_api_stop, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableApiStop"))
+    RunInstancesRequest.add_member(:enable_primary_ipv_6, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnablePrimaryIpv6"))
     RunInstancesRequest.struct_class = Types::RunInstancesRequest
 
     RunScheduledInstancesRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
@@ -13323,6 +13357,7 @@ module Aws::EC2
     Snapshot.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     Snapshot.add_member(:storage_tier, Shapes::ShapeRef.new(shape: StorageTier, location_name: "storageTier"))
     Snapshot.add_member(:restore_expiry_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "restoreExpiryTime"))
+    Snapshot.add_member(:sse_type, Shapes::ShapeRef.new(shape: SSEType, location_name: "sseType"))
     Snapshot.struct_class = Types::Snapshot
 
     SnapshotDetail.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
@@ -13358,6 +13393,7 @@ module Aws::EC2
     SnapshotInfo.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     SnapshotInfo.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
     SnapshotInfo.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "outpostArn"))
+    SnapshotInfo.add_member(:sse_type, Shapes::ShapeRef.new(shape: SSEType, location_name: "sseType"))
     SnapshotInfo.struct_class = Types::SnapshotInfo
 
     SnapshotList.member = Shapes::ShapeRef.new(shape: Snapshot, location_name: "item")
@@ -14623,6 +14659,7 @@ module Aws::EC2
     Volume.add_member(:fast_restored, Shapes::ShapeRef.new(shape: Boolean, location_name: "fastRestored"))
     Volume.add_member(:multi_attach_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "multiAttachEnabled"))
     Volume.add_member(:throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "throughput"))
+    Volume.add_member(:sse_type, Shapes::ShapeRef.new(shape: SSEType, location_name: "sseType"))
     Volume.struct_class = Types::Volume
 
     VolumeAttachment.add_member(:attach_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "attachTime"))

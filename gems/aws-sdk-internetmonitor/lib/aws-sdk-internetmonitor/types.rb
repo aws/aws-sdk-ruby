@@ -23,16 +23,17 @@ module Aws::InternetMonitor
       include Aws::Structure
     end
 
-    # Measurements about the availability for your application on the
-    # internet, calculated by Amazon CloudWatch Internet Monitor. Amazon Web
-    # Services has substantial historical data about internet performance
-    # and availability between Amazon Web Services services and different
-    # network providers and geographies. By applying statistical analysis to
-    # the data, Internet Monitor can detect when the performance and
-    # availability for your application has dropped, compared to an
-    # estimated baseline that's already calculated. To make it easier to
-    # see those drops, we report that information to you in the form of
-    # health scores: a performance score and an availability score.
+    # Amazon CloudWatch Internet Monitor calculates measurements about the
+    # availability for your application's internet traffic between client
+    # locations and Amazon Web Services. Amazon Web Services has substantial
+    # historical data about internet performance and availability between
+    # Amazon Web Services services and different network providers and
+    # geographies. By applying statistical analysis to the data, Internet
+    # Monitor can detect when the performance and availability for your
+    # application has dropped, compared to an estimated baseline that's
+    # already calculated. To make it easier to see those drops, we report
+    # that information to you in the form of health scores: a performance
+    # score and an availability score.
     #
     # Availability in Internet Monitor represents the estimated percentage
     # of traffic that is not seeing an availability drop. For example, an
@@ -70,11 +71,15 @@ module Aws::InternetMonitor
     #   @return [Float]
     #
     # @!attribute [rw] percent_of_total_traffic_impacted
-    #   The percentage of impact caused by a health event for total traffic
-    #   globally.
+    #   The impact on total traffic that a health event has, in increased
+    #   latency or reduced availability. This is the percentage of how much
+    #   latency has increased or availability has decreased during the
+    #   event, compared to what is typical for traffic from this client
+    #   location to the Amazon Web Services location using this client
+    #   network.
     #
     #   For information about how Internet Monitor calculates impact, see
-    #   [Inside Internet Monitor][1] in the Amazon CloudWatch Internet
+    #   [How Internet Monitor works][1] in the Amazon CloudWatch Internet
     #   Monitor section of the Amazon CloudWatch User Guide.
     #
     #
@@ -137,13 +142,15 @@ module Aws::InternetMonitor
     #
     # @!attribute [rw] resources
     #   The resources to include in a monitor, which you provide as a set of
-    #   Amazon Resource Names (ARNs).
+    #   Amazon Resource Names (ARNs). Resources can be VPCs, NLBs, Amazon
+    #   CloudFront distributions, or Amazon WorkSpaces directories.
     #
-    #   You can add a combination of Amazon Virtual Private Clouds (VPCs)
-    #   and Amazon CloudFront distributions, or you can add Amazon
-    #   WorkSpaces directories. You can't add all three types of resources.
+    #   You can add a combination of VPCs and CloudFront distributions, or
+    #   you can add WorkSpaces directories, or you can add NLBs. You can't
+    #   add NLBs or WorkSpaces directories together with any other
+    #   resources.
     #
-    #   <note markdown="1"> If you add only VPC resources, at least one VPC must have an
+    #   <note markdown="1"> If you add only Amazon VPC resources, at least one VPC must have an
     #   Internet Gateway attached to it, to make sure that it has internet
     #   connectivity.
     #
@@ -167,9 +174,10 @@ module Aws::InternetMonitor
     # @!attribute [rw] max_city_networks_to_monitor
     #   The maximum number of city-networks to monitor for your resources. A
     #   city-network is the location (city) where clients access your
-    #   application resources from and the network or ASN, such as an
-    #   internet service provider (ISP), that clients access the resources
-    #   through. This limit helps control billing costs.
+    #   application resources from and the ASN or network provider, such as
+    #   an internet service provider (ISP), that clients access the
+    #   resources through. Setting this limit can help control billing
+    #   costs.
     #
     #   To learn more, see [Choosing a city-network maximum value ][1] in
     #   the Amazon CloudWatch Internet Monitor section of the *CloudWatch
@@ -187,16 +195,36 @@ module Aws::InternetMonitor
     #
     # @!attribute [rw] traffic_percentage_to_monitor
     #   The percentage of the internet-facing traffic for your application
-    #   that you want to monitor with this monitor.
+    #   that you want to monitor with this monitor. If you set a
+    #   city-networks maximum, that limit overrides the traffic percentage
+    #   that you set.
+    #
+    #   To learn more, see [Choosing an application traffic percentage to
+    #   monitor ][1] in the Amazon CloudWatch Internet Monitor section of
+    #   the *CloudWatch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMTrafficPercentage.html
     #   @return [Integer]
     #
     # @!attribute [rw] health_events_config
-    #   Defines the health event threshold percentages, for performance
-    #   score and availability score. Internet Monitor creates a health
-    #   event when there's an internet issue that affects your application
-    #   end users where a health score percentage is at or below a set
-    #   threshold. If you don't set a health event threshold, the default
-    #   calue is 95%.
+    #   Defines the threshold percentages and other configuration
+    #   information for when Amazon CloudWatch Internet Monitor creates a
+    #   health event. Internet Monitor creates a health event when an
+    #   internet issue that affects your application end users has a health
+    #   score percentage that is at or below a specific threshold, and,
+    #   sometimes, when other criteria are met.
+    #
+    #   If you don't set a health event threshold, the default value is
+    #   95%.
+    #
+    #   For more information, see [ Change health event thresholds][1] in
+    #   the Internet Monitor section of the *CloudWatch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-overview.html#IMUpdateThresholdFromOverview
     #   @return [Types::HealthEventsConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/CreateMonitorInput AWS API Documentation
@@ -300,7 +328,12 @@ module Aws::InternetMonitor
     #   @return [String]
     #
     # @!attribute [rw] percent_of_total_traffic_impacted
-    #   The impact on total traffic that a health event has.
+    #   The impact on total traffic that a health event has, in increased
+    #   latency or reduced availability. This is the percentage of how much
+    #   latency has increased or availability has decreased during the
+    #   event, compared to what is typical for traffic from this client
+    #   location to the Amazon Web Services location using this client
+    #   network.
     #   @return [Float]
     #
     # @!attribute [rw] impact_type
@@ -308,8 +341,10 @@ module Aws::InternetMonitor
     #   @return [String]
     #
     # @!attribute [rw] health_score_threshold
-    #   The threshold percentage for health events when Amazon CloudWatch
-    #   Internet Monitor creates a health event.
+    #   The threshold percentage for a health score that determines, along
+    #   with other configuration information, when Internet Monitor creates
+    #   a health event when there's an internet issue that affects your
+    #   application end users.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/GetHealthEventOutput AWS API Documentation
@@ -351,8 +386,8 @@ module Aws::InternetMonitor
     #   @return [String]
     #
     # @!attribute [rw] resources
-    #   The resources that have been added for the monitor. Resources are
-    #   listed by their Amazon Resource Names (ARNs).
+    #   The resources monitored by the monitor. Resources are listed by
+    #   their Amazon Resource Names (ARNs).
     #   @return [Array<String>]
     #
     # @!attribute [rw] status
@@ -383,9 +418,9 @@ module Aws::InternetMonitor
     # @!attribute [rw] max_city_networks_to_monitor
     #   The maximum number of city-networks to monitor for your resources. A
     #   city-network is the location (city) where clients access your
-    #   application resources from and the network or ASN, such as an
-    #   internet service provider (ISP), that clients access the resources
-    #   through. This limit helps control billing costs.
+    #   application resources from and the ASN or network provider, such as
+    #   an internet service provider (ISP), that clients access the
+    #   resources through. This limit can help control billing costs.
     #
     #   To learn more, see [Choosing a city-network maximum value ][1] in
     #   the Amazon CloudWatch Internet Monitor section of the *CloudWatch
@@ -404,15 +439,31 @@ module Aws::InternetMonitor
     #
     # @!attribute [rw] traffic_percentage_to_monitor
     #   The percentage of the internet-facing traffic for your application
-    #   that you want to monitor with this monitor.
+    #   to monitor with this monitor. If you set a city-networks maximum,
+    #   that limit overrides the traffic percentage that you set.
+    #
+    #   To learn more, see [Choosing an application traffic percentage to
+    #   monitor ][1] in the Amazon CloudWatch Internet Monitor section of
+    #   the *CloudWatch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMTrafficPercentage.html
     #   @return [Integer]
     #
     # @!attribute [rw] health_events_config
-    #   The list of health event thresholds. A health event threshold
-    #   percentage, for performance and availability, determines the level
-    #   of impact at which Amazon CloudWatch Internet Monitor creates a
-    #   health event when there's an internet issue that affects your
-    #   application end users.
+    #   The list of health event threshold configurations. The threshold
+    #   percentage for a health score determines, along with other
+    #   configuration information, when Internet Monitor creates a health
+    #   event when there's an internet issue that affects your application
+    #   end users.
+    #
+    #   For more information, see [ Change health event thresholds][1] in
+    #   the Internet Monitor section of the *CloudWatch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-overview.html#IMUpdateThresholdFromOverview
     #   @return [Types::HealthEventsConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/GetMonitorOutput AWS API Documentation
@@ -473,8 +524,12 @@ module Aws::InternetMonitor
     #   @return [String]
     #
     # @!attribute [rw] percent_of_total_traffic_impacted
-    #   The impact on global traffic monitored by this monitor for this
-    #   health event.
+    #   The impact on total traffic that a health event has, in increased
+    #   latency or reduced availability. This is the percentage of how much
+    #   latency has increased or availability has decreased during the
+    #   event, compared to what is typical for traffic from this client
+    #   location to the Amazon Web Services location using this client
+    #   network.
     #   @return [Float]
     #
     # @!attribute [rw] impact_type
@@ -505,12 +560,35 @@ module Aws::InternetMonitor
       include Aws::Structure
     end
 
-    # A complex type for the configuration. Defines the health event
-    # threshold percentages, for performance score and availability score.
-    # Amazon CloudWatch Internet Monitor creates a health event when
-    # there's an internet issue that affects your application end users
-    # where a health score percentage is at or below a set threshold. If you
-    # don't set a health event threshold, the default value is 95%.
+    # A complex type with the configuration information that determines the
+    # threshold and other conditions for when Internet Monitor creates a
+    # health event for an overall performance or availability issue, across
+    # an application's geographies.
+    #
+    # Defines the percentages, for overall performance scores and
+    # availability scores for an application, that are the thresholds for
+    # when Amazon CloudWatch Internet Monitor creates a health event. You
+    # can override the defaults to set a custom threshold for overall
+    # performance or availability scores, or both.
+    #
+    # You can also set thresholds for local health scores,, where Internet
+    # Monitor creates a health event when scores cross a threshold for one
+    # or more city-networks, in addition to creating an event when an
+    # overall score crosses a threshold.
+    #
+    # If you don't set a health event threshold, the default value is 95%.
+    #
+    # For local thresholds, you also set a minimum percentage of overall
+    # traffic that is impacted by an issue before Internet Monitor creates
+    # an event. In addition, you can disable local thresholds, for
+    # performance scores, availability scores, or both.
+    #
+    # For more information, see [ Change health event thresholds][1] in the
+    # Internet Monitor section of the *CloudWatch User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-overview.html#IMUpdateThresholdFromOverview
     #
     # @!attribute [rw] availability_score_threshold
     #   The health event threshold percentage set for availability scores.
@@ -520,11 +598,25 @@ module Aws::InternetMonitor
     #   The health event threshold percentage set for performance scores.
     #   @return [Float]
     #
+    # @!attribute [rw] availability_local_health_events_config
+    #   The configuration that determines the threshold and other conditions
+    #   for when Internet Monitor creates a health event for a local
+    #   availability issue.
+    #   @return [Types::LocalHealthEventsConfig]
+    #
+    # @!attribute [rw] performance_local_health_events_config
+    #   The configuration that determines the threshold and other conditions
+    #   for when Internet Monitor creates a health event for a local
+    #   performance issue.
+    #   @return [Types::LocalHealthEventsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/HealthEventsConfig AWS API Documentation
     #
     class HealthEventsConfig < Struct.new(
       :availability_score_threshold,
-      :performance_score_threshold)
+      :performance_score_threshold,
+      :availability_local_health_events_config,
+      :performance_local_health_events_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -663,9 +755,9 @@ module Aws::InternetMonitor
     # geographies. By applying statistical analysis to the data, Internet
     # Monitor can detect when the performance and availability for your
     # application has dropped, compared to an estimated baseline that's
-    # already calculated. To make it easier to see those drops, we report
-    # that information to you in the form of health scores: a performance
-    # score and an availability score.
+    # already calculated. To make it easier to see those drops, Internet
+    # Monitor reports the information to you in the form of health scores: a
+    # performance score and an availability score.
     #
     # @!attribute [rw] availability
     #   Availability in Internet Monitor represents the estimated percentage
@@ -872,6 +964,52 @@ module Aws::InternetMonitor
       include Aws::Structure
     end
 
+    # A complex type with the configuration information that determines the
+    # threshold and other conditions for when Internet Monitor creates a
+    # health event for a local performance or availability issue, when
+    # scores cross a threshold for one or more city-networks.
+    #
+    # Defines the percentages, for performance scores or availability
+    # scores, that are the local thresholds for when Amazon CloudWatch
+    # Internet Monitor creates a health event. Also defines whether a local
+    # threshold is enabled or disabled, and the minimum percentage of
+    # overall traffic that must be impacted by an issue before Internet
+    # Monitor creates an event when a threshold is crossed for a local
+    # health score.
+    #
+    # For more information, see [ Change health event thresholds][1] in the
+    # Internet Monitor section of the *CloudWatch User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-overview.html#IMUpdateThresholdFromOverview
+    #
+    # @!attribute [rw] status
+    #   The status of whether Internet Monitor creates a health event based
+    #   on a threshold percentage set for a local health score. The status
+    #   can be `ENABLED` or `DISABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] health_score_threshold
+    #   The health event threshold percentage set for a local health score.
+    #   @return [Float]
+    #
+    # @!attribute [rw] min_traffic_impact
+    #   The minimum percentage of overall traffic for an application that
+    #   must be impacted by an issue before Internet Monitor creates an
+    #   event when a threshold is crossed for a local health score.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/LocalHealthEventsConfig AWS API Documentation
+    #
+    class LocalHealthEventsConfig < Struct.new(
+      :status,
+      :health_score_threshold,
+      :min_traffic_impact)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The description of and information about a monitor in Amazon
     # CloudWatch Internet Monitor.
     #
@@ -962,16 +1100,17 @@ module Aws::InternetMonitor
       include Aws::Structure
     end
 
-    # Measurements about the performance for your application on the
-    # internet calculated by Amazon CloudWatch Internet Monitor. Amazon Web
-    # Services has substantial historical data about internet performance
-    # and availability between Amazon Web Services services and different
-    # network providers and geographies. By applying statistical analysis to
-    # the data, Internet Monitor can detect when the performance and
-    # availability for your application has dropped, compared to an
-    # estimated baseline that's already calculated. To make it easier to
-    # see those drops, we report that information to you in the form of
-    # health scores: a performance score and an availability score.
+    # Amazon CloudWatch Internet Monitor calculates measurements about the
+    # performance for your application's internet traffic between client
+    # locations and Amazon Web Services. Amazon Web Services has substantial
+    # historical data about internet performance and availability between
+    # Amazon Web Services services and different network providers and
+    # geographies. By applying statistical analysis to the data, Internet
+    # Monitor can detect when the performance and availability for your
+    # application has dropped, compared to an estimated baseline that's
+    # already calculated. To make it easier to see those drops, we report
+    # that information to you in the form of health scores: a performance
+    # score and an availability score.
     #
     # Performance in Internet Monitor represents the estimated percentage of
     # traffic that is not seeing a performance drop. For example, a
@@ -1009,10 +1148,12 @@ module Aws::InternetMonitor
     #   @return [Float]
     #
     # @!attribute [rw] percent_of_total_traffic_impacted
-    #   How much performance impact was caused by a health event for total
-    #   traffic globally. For performance, this is the percentage of how
-    #   much latency increased during the event compared to typical
-    #   performance for your application traffic globally.
+    #   The impact on total traffic that a health event has, in increased
+    #   latency or reduced availability. This is the percentage of how much
+    #   latency has increased or availability has decreased during the
+    #   event, compared to what is typical for traffic from this client
+    #   location to the Amazon Web Services location using this client
+    #   network.
     #
     #   For more information, see [When Amazon Web Services creates and
     #   resolves health events][1] in the Amazon CloudWatch Internet Monitor
@@ -1210,15 +1351,17 @@ module Aws::InternetMonitor
     #
     # @!attribute [rw] resources_to_add
     #   The resources to include in a monitor, which you provide as a set of
-    #   Amazon Resource Names (ARNs).
+    #   Amazon Resource Names (ARNs). Resources can be VPCs, NLBs, Amazon
+    #   CloudFront distributions, or Amazon WorkSpaces directories.
     #
-    #   You can add a combination of Amazon Virtual Private Clouds (VPCs)
-    #   and Amazon CloudFront distributions, or you can add Amazon
-    #   WorkSpaces directories. You can't add all three types of resources.
+    #   You can add a combination of VPCs and CloudFront distributions, or
+    #   you can add WorkSpaces directories, or you can add NLBs. You can't
+    #   add NLBs or WorkSpaces directories together with any other
+    #   resources.
     #
-    #   <note markdown="1"> If you add only VPC resources, at least one VPC must have an
-    #   Internet Gateway attached to it, to make sure that it has internet
-    #   connectivity.
+    #   <note markdown="1"> If you add only Amazon Virtual Private Clouds resources, at least
+    #   one VPC must have an Internet Gateway attached to it, to make sure
+    #   that it has internet connectivity.
     #
     #    </note>
     #   @return [Array<String>]
@@ -1244,11 +1387,12 @@ module Aws::InternetMonitor
     #   @return [String]
     #
     # @!attribute [rw] max_city_networks_to_monitor
-    #   The maximum number of city-networks to monitor for your resources. A
-    #   city-network is the location (city) where clients access your
-    #   application resources from and the network or ASN, such as an
-    #   internet service provider, that clients access the resources
-    #   through.
+    #   The maximum number of city-networks to monitor for your application.
+    #   A city-network is the location (city) where clients access your
+    #   application resources from and the ASN or network provider, such as
+    #   an internet service provider (ISP), that clients access the
+    #   resources through. Setting this limit can help control billing
+    #   costs.
     #   @return [Integer]
     #
     # @!attribute [rw] internet_measurements_log_delivery
@@ -1259,14 +1403,31 @@ module Aws::InternetMonitor
     #
     # @!attribute [rw] traffic_percentage_to_monitor
     #   The percentage of the internet-facing traffic for your application
-    #   that you want to monitor with this monitor.
+    #   that you want to monitor with this monitor. If you set a
+    #   city-networks maximum, that limit overrides the traffic percentage
+    #   that you set.
+    #
+    #   To learn more, see [Choosing an application traffic percentage to
+    #   monitor ][1] in the Amazon CloudWatch Internet Monitor section of
+    #   the *CloudWatch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMTrafficPercentage.html
     #   @return [Integer]
     #
     # @!attribute [rw] health_events_config
-    #   The list of health event thresholds. A health event threshold
-    #   percentage, for performance and availability, determines when
-    #   Internet Monitor creates a health event when there's an internet
-    #   issue that affects your application end users.
+    #   The list of health score thresholds. A threshold percentage for
+    #   health scores, along with other configuration information,
+    #   determines when Internet Monitor creates a health event when
+    #   there's an internet issue that affects your application end users.
+    #
+    #   For more information, see [ Change health event thresholds][1] in
+    #   the Internet Monitor section of the *CloudWatch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-overview.html#IMUpdateThresholdFromOverview
     #   @return [Types::HealthEventsConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/UpdateMonitorInput AWS API Documentation

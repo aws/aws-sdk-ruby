@@ -62,6 +62,8 @@ module Aws::Inspector2
             Aws::Inspector2::Endpoints::BatchGetAccountStatus.build(context)
           when :batch_get_code_snippet
             Aws::Inspector2::Endpoints::BatchGetCodeSnippet.build(context)
+          when :batch_get_finding_details
+            Aws::Inspector2::Endpoints::BatchGetFindingDetails.build(context)
           when :batch_get_free_trial_info
             Aws::Inspector2::Endpoints::BatchGetFreeTrialInfo.build(context)
           when :batch_get_member_ec2_deep_inspection_status

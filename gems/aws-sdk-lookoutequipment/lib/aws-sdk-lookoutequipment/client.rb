@@ -400,10 +400,9 @@ module Aws::LookoutEquipment
 
     # Creates a container for a collection of data being ingested for
     # analysis. The dataset contains the metadata describing where the data
-    # is and what the data actually looks like. In other words, it contains
-    # the location of the data source, the data schema, and other
-    # information. A dataset also contains any tags associated with the
-    # ingested data.
+    # is and what the data actually looks like. For example, it contains the
+    # location of the data source, the data schema, and other information. A
+    # dataset also contains any tags associated with the ingested data.
     #
     # @option params [required, String] :dataset_name
     #   The name of the dataset being created.
@@ -453,7 +452,7 @@ module Aws::LookoutEquipment
     #
     #   resp.dataset_name #=> String
     #   resp.dataset_arn #=> String
-    #   resp.status #=> String, one of "CREATED", "INGESTION_IN_PROGRESS", "ACTIVE"
+    #   resp.status #=> String, one of "CREATED", "INGESTION_IN_PROGRESS", "ACTIVE", "IMPORT_IN_PROGRESS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/CreateDataset AWS API Documentation
     #
@@ -848,7 +847,7 @@ module Aws::LookoutEquipment
     # @example Response structure
     #
     #   resp.model_arn #=> String
-    #   resp.status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
+    #   resp.status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED", "IMPORT_IN_PROGRESS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/CreateModel AWS API Documentation
     #
@@ -985,6 +984,29 @@ module Aws::LookoutEquipment
       req.send_request(options)
     end
 
+    # Deletes the resource policy attached to the resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource for which the resource
+    #   policy should be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_policy({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DeleteResourcePolicy AWS API Documentation
+    #
+    # @overload delete_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy(params = {}, options = {})
+      req = build_request(:delete_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Provides information on a specific data ingestion job such as creation
     # time, dataset ARN, and status.
     #
@@ -1006,6 +1028,7 @@ module Aws::LookoutEquipment
     #   * {Types::DescribeDataIngestionJobResponse#ingested_data_size #ingested_data_size} => Integer
     #   * {Types::DescribeDataIngestionJobResponse#data_start_time #data_start_time} => Time
     #   * {Types::DescribeDataIngestionJobResponse#data_end_time #data_end_time} => Time
+    #   * {Types::DescribeDataIngestionJobResponse#source_dataset_arn #source_dataset_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1022,7 +1045,7 @@ module Aws::LookoutEquipment
     #   resp.ingestion_input_configuration.s3_input_configuration.key_pattern #=> String
     #   resp.role_arn #=> String
     #   resp.created_at #=> Time
-    #   resp.status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
+    #   resp.status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED", "IMPORT_IN_PROGRESS"
     #   resp.failed_reason #=> String
     #   resp.data_quality_summary.insufficient_sensor_data.missing_complete_sensor_data.affected_sensor_count #=> Integer
     #   resp.data_quality_summary.insufficient_sensor_data.sensors_with_short_date_range.affected_sensor_count #=> Integer
@@ -1041,6 +1064,7 @@ module Aws::LookoutEquipment
     #   resp.ingested_data_size #=> Integer
     #   resp.data_start_time #=> Time
     #   resp.data_end_time #=> Time
+    #   resp.source_dataset_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeDataIngestionJob AWS API Documentation
     #
@@ -1072,6 +1096,7 @@ module Aws::LookoutEquipment
     #   * {Types::DescribeDatasetResponse#role_arn #role_arn} => String
     #   * {Types::DescribeDatasetResponse#data_start_time #data_start_time} => Time
     #   * {Types::DescribeDatasetResponse#data_end_time #data_end_time} => Time
+    #   * {Types::DescribeDatasetResponse#source_dataset_arn #source_dataset_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1085,7 +1110,7 @@ module Aws::LookoutEquipment
     #   resp.dataset_arn #=> String
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
-    #   resp.status #=> String, one of "CREATED", "INGESTION_IN_PROGRESS", "ACTIVE"
+    #   resp.status #=> String, one of "CREATED", "INGESTION_IN_PROGRESS", "ACTIVE", "IMPORT_IN_PROGRESS"
     #   resp.schema #=> String
     #   resp.server_side_kms_key_id #=> String
     #   resp.ingestion_input_configuration.s3_input_configuration.bucket #=> String
@@ -1107,6 +1132,7 @@ module Aws::LookoutEquipment
     #   resp.role_arn #=> String
     #   resp.data_start_time #=> Time
     #   resp.data_end_time #=> Time
+    #   resp.source_dataset_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeDataset AWS API Documentation
     #
@@ -1295,6 +1321,15 @@ module Aws::LookoutEquipment
     #   * {Types::DescribeModelResponse#created_at #created_at} => Time
     #   * {Types::DescribeModelResponse#server_side_kms_key_id #server_side_kms_key_id} => String
     #   * {Types::DescribeModelResponse#off_condition #off_condition} => String
+    #   * {Types::DescribeModelResponse#source_model_version_arn #source_model_version_arn} => String
+    #   * {Types::DescribeModelResponse#import_job_start_time #import_job_start_time} => Time
+    #   * {Types::DescribeModelResponse#import_job_end_time #import_job_end_time} => Time
+    #   * {Types::DescribeModelResponse#active_model_version #active_model_version} => Integer
+    #   * {Types::DescribeModelResponse#active_model_version_arn #active_model_version_arn} => String
+    #   * {Types::DescribeModelResponse#model_version_activated_at #model_version_activated_at} => Time
+    #   * {Types::DescribeModelResponse#previous_active_model_version #previous_active_model_version} => Integer
+    #   * {Types::DescribeModelResponse#previous_active_model_version_arn #previous_active_model_version_arn} => String
+    #   * {Types::DescribeModelResponse#previous_model_version_activated_at #previous_model_version_activated_at} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -1318,7 +1353,7 @@ module Aws::LookoutEquipment
     #   resp.evaluation_data_end_time #=> Time
     #   resp.role_arn #=> String
     #   resp.data_pre_processing_configuration.target_sampling_rate #=> String, one of "PT1S", "PT5S", "PT10S", "PT15S", "PT30S", "PT1M", "PT5M", "PT10M", "PT15M", "PT30M", "PT1H"
-    #   resp.status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
+    #   resp.status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED", "IMPORT_IN_PROGRESS"
     #   resp.training_execution_start_time #=> Time
     #   resp.training_execution_end_time #=> Time
     #   resp.failed_reason #=> String
@@ -1327,6 +1362,15 @@ module Aws::LookoutEquipment
     #   resp.created_at #=> Time
     #   resp.server_side_kms_key_id #=> String
     #   resp.off_condition #=> String
+    #   resp.source_model_version_arn #=> String
+    #   resp.import_job_start_time #=> Time
+    #   resp.import_job_end_time #=> Time
+    #   resp.active_model_version #=> Integer
+    #   resp.active_model_version_arn #=> String
+    #   resp.model_version_activated_at #=> Time
+    #   resp.previous_active_model_version #=> Integer
+    #   resp.previous_active_model_version_arn #=> String
+    #   resp.previous_model_version_activated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeModel AWS API Documentation
     #
@@ -1334,6 +1378,277 @@ module Aws::LookoutEquipment
     # @param [Hash] params ({})
     def describe_model(params = {}, options = {})
       req = build_request(:describe_model, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a specific machine learning model version.
+    #
+    # @option params [required, String] :model_name
+    #   The name of the machine learning model that this version belongs to.
+    #
+    # @option params [required, Integer] :model_version
+    #   The version of the machine learning model.
+    #
+    # @return [Types::DescribeModelVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeModelVersionResponse#model_name #model_name} => String
+    #   * {Types::DescribeModelVersionResponse#model_arn #model_arn} => String
+    #   * {Types::DescribeModelVersionResponse#model_version #model_version} => Integer
+    #   * {Types::DescribeModelVersionResponse#model_version_arn #model_version_arn} => String
+    #   * {Types::DescribeModelVersionResponse#status #status} => String
+    #   * {Types::DescribeModelVersionResponse#source_type #source_type} => String
+    #   * {Types::DescribeModelVersionResponse#dataset_name #dataset_name} => String
+    #   * {Types::DescribeModelVersionResponse#dataset_arn #dataset_arn} => String
+    #   * {Types::DescribeModelVersionResponse#schema #schema} => String
+    #   * {Types::DescribeModelVersionResponse#labels_input_configuration #labels_input_configuration} => Types::LabelsInputConfiguration
+    #   * {Types::DescribeModelVersionResponse#training_data_start_time #training_data_start_time} => Time
+    #   * {Types::DescribeModelVersionResponse#training_data_end_time #training_data_end_time} => Time
+    #   * {Types::DescribeModelVersionResponse#evaluation_data_start_time #evaluation_data_start_time} => Time
+    #   * {Types::DescribeModelVersionResponse#evaluation_data_end_time #evaluation_data_end_time} => Time
+    #   * {Types::DescribeModelVersionResponse#role_arn #role_arn} => String
+    #   * {Types::DescribeModelVersionResponse#data_pre_processing_configuration #data_pre_processing_configuration} => Types::DataPreProcessingConfiguration
+    #   * {Types::DescribeModelVersionResponse#training_execution_start_time #training_execution_start_time} => Time
+    #   * {Types::DescribeModelVersionResponse#training_execution_end_time #training_execution_end_time} => Time
+    #   * {Types::DescribeModelVersionResponse#failed_reason #failed_reason} => String
+    #   * {Types::DescribeModelVersionResponse#model_metrics #model_metrics} => String
+    #   * {Types::DescribeModelVersionResponse#last_updated_time #last_updated_time} => Time
+    #   * {Types::DescribeModelVersionResponse#created_at #created_at} => Time
+    #   * {Types::DescribeModelVersionResponse#server_side_kms_key_id #server_side_kms_key_id} => String
+    #   * {Types::DescribeModelVersionResponse#off_condition #off_condition} => String
+    #   * {Types::DescribeModelVersionResponse#source_model_version_arn #source_model_version_arn} => String
+    #   * {Types::DescribeModelVersionResponse#import_job_start_time #import_job_start_time} => Time
+    #   * {Types::DescribeModelVersionResponse#import_job_end_time #import_job_end_time} => Time
+    #   * {Types::DescribeModelVersionResponse#imported_data_size_in_bytes #imported_data_size_in_bytes} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_model_version({
+    #     model_name: "ModelName", # required
+    #     model_version: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_name #=> String
+    #   resp.model_arn #=> String
+    #   resp.model_version #=> Integer
+    #   resp.model_version_arn #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED", "IMPORT_IN_PROGRESS", "CANCELED"
+    #   resp.source_type #=> String, one of "TRAINING", "RETRAINING", "IMPORT"
+    #   resp.dataset_name #=> String
+    #   resp.dataset_arn #=> String
+    #   resp.schema #=> String
+    #   resp.labels_input_configuration.s3_input_configuration.bucket #=> String
+    #   resp.labels_input_configuration.s3_input_configuration.prefix #=> String
+    #   resp.labels_input_configuration.label_group_name #=> String
+    #   resp.training_data_start_time #=> Time
+    #   resp.training_data_end_time #=> Time
+    #   resp.evaluation_data_start_time #=> Time
+    #   resp.evaluation_data_end_time #=> Time
+    #   resp.role_arn #=> String
+    #   resp.data_pre_processing_configuration.target_sampling_rate #=> String, one of "PT1S", "PT5S", "PT10S", "PT15S", "PT30S", "PT1M", "PT5M", "PT10M", "PT15M", "PT30M", "PT1H"
+    #   resp.training_execution_start_time #=> Time
+    #   resp.training_execution_end_time #=> Time
+    #   resp.failed_reason #=> String
+    #   resp.model_metrics #=> String
+    #   resp.last_updated_time #=> Time
+    #   resp.created_at #=> Time
+    #   resp.server_side_kms_key_id #=> String
+    #   resp.off_condition #=> String
+    #   resp.source_model_version_arn #=> String
+    #   resp.import_job_start_time #=> Time
+    #   resp.import_job_end_time #=> Time
+    #   resp.imported_data_size_in_bytes #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeModelVersion AWS API Documentation
+    #
+    # @overload describe_model_version(params = {})
+    # @param [Hash] params ({})
+    def describe_model_version(params = {}, options = {})
+      req = build_request(:describe_model_version, params)
+      req.send_request(options)
+    end
+
+    # Provides the details of a resource policy attached to a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that is associated with
+    #   the resource policy.
+    #
+    # @return [Types::DescribeResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeResourcePolicyResponse#policy_revision_id #policy_revision_id} => String
+    #   * {Types::DescribeResourcePolicyResponse#resource_policy #resource_policy} => String
+    #   * {Types::DescribeResourcePolicyResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeResourcePolicyResponse#last_modified_time #last_modified_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_resource_policy({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy_revision_id #=> String
+    #   resp.resource_policy #=> String
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeResourcePolicy AWS API Documentation
+    #
+    # @overload describe_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def describe_resource_policy(params = {}, options = {})
+      req = build_request(:describe_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Imports a dataset.
+    #
+    # @option params [required, String] :source_dataset_arn
+    #   The Amazon Resource Name (ARN) of the dataset to import.
+    #
+    # @option params [String] :dataset_name
+    #   The name of the machine learning dataset to be created. If the dataset
+    #   already exists, Amazon Lookout for Equipment overwrites the existing
+    #   dataset. If you don't specify this field, it is filled with the name
+    #   of the source dataset.
+    #
+    # @option params [required, String] :client_token
+    #   A unique identifier for the request. If you do not set the client
+    #   request token, Amazon Lookout for Equipment generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :server_side_kms_key_id
+    #   Provides the identifier of the KMS key key used to encrypt model data
+    #   by Amazon Lookout for Equipment.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Any tags associated with the dataset to be created.
+    #
+    # @return [Types::ImportDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportDatasetResponse#dataset_name #dataset_name} => String
+    #   * {Types::ImportDatasetResponse#dataset_arn #dataset_arn} => String
+    #   * {Types::ImportDatasetResponse#status #status} => String
+    #   * {Types::ImportDatasetResponse#job_id #job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_dataset({
+    #     source_dataset_arn: "DatasetArn", # required
+    #     dataset_name: "DatasetName",
+    #     client_token: "IdempotenceToken", # required
+    #     server_side_kms_key_id: "NameOrArn",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset_name #=> String
+    #   resp.dataset_arn #=> String
+    #   resp.status #=> String, one of "CREATED", "INGESTION_IN_PROGRESS", "ACTIVE", "IMPORT_IN_PROGRESS"
+    #   resp.job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ImportDataset AWS API Documentation
+    #
+    # @overload import_dataset(params = {})
+    # @param [Hash] params ({})
+    def import_dataset(params = {}, options = {})
+      req = build_request(:import_dataset, params)
+      req.send_request(options)
+    end
+
+    # Imports a model that has been trained successfully.
+    #
+    # @option params [required, String] :source_model_version_arn
+    #   The Amazon Resource Name (ARN) of the model version to import.
+    #
+    # @option params [String] :model_name
+    #   The name for the machine learning model to be created. If the model
+    #   already exists, Amazon Lookout for Equipment creates a new version. If
+    #   you do not specify this field, it is filled with the name of the
+    #   source model.
+    #
+    # @option params [required, String] :dataset_name
+    #   The name of the dataset for the machine learning model being imported.
+    #
+    # @option params [Types::LabelsInputConfiguration] :labels_input_configuration
+    #   Contains the configuration information for the S3 location being used
+    #   to hold label data.
+    #
+    # @option params [required, String] :client_token
+    #   A unique identifier for the request. If you do not set the client
+    #   request token, Amazon Lookout for Equipment generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :role_arn
+    #   The Amazon Resource Name (ARN) of a role with permission to access the
+    #   data source being used to create the machine learning model.
+    #
+    # @option params [String] :server_side_kms_key_id
+    #   Provides the identifier of the KMS key key used to encrypt model data
+    #   by Amazon Lookout for Equipment.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags associated with the machine learning model to be created.
+    #
+    # @return [Types::ImportModelVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportModelVersionResponse#model_name #model_name} => String
+    #   * {Types::ImportModelVersionResponse#model_arn #model_arn} => String
+    #   * {Types::ImportModelVersionResponse#model_version_arn #model_version_arn} => String
+    #   * {Types::ImportModelVersionResponse#model_version #model_version} => Integer
+    #   * {Types::ImportModelVersionResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_model_version({
+    #     source_model_version_arn: "ModelVersionArn", # required
+    #     model_name: "ModelName",
+    #     dataset_name: "DatasetIdentifier", # required
+    #     labels_input_configuration: {
+    #       s3_input_configuration: {
+    #         bucket: "S3Bucket", # required
+    #         prefix: "S3Prefix",
+    #       },
+    #       label_group_name: "LabelGroupName",
+    #     },
+    #     client_token: "IdempotenceToken", # required
+    #     role_arn: "IamRoleArn",
+    #     server_side_kms_key_id: "NameOrArn",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_name #=> String
+    #   resp.model_arn #=> String
+    #   resp.model_version_arn #=> String
+    #   resp.model_version #=> Integer
+    #   resp.status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED", "IMPORT_IN_PROGRESS", "CANCELED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ImportModelVersion AWS API Documentation
+    #
+    # @overload import_model_version(params = {})
+    # @param [Hash] params ({})
+    def import_model_version(params = {}, options = {})
+      req = build_request(:import_model_version, params)
       req.send_request(options)
     end
 
@@ -1366,7 +1681,7 @@ module Aws::LookoutEquipment
     #     dataset_name: "DatasetName",
     #     next_token: "NextToken",
     #     max_results: 1,
-    #     status: "IN_PROGRESS", # accepts IN_PROGRESS, SUCCESS, FAILED
+    #     status: "IN_PROGRESS", # accepts IN_PROGRESS, SUCCESS, FAILED, IMPORT_IN_PROGRESS
     #   })
     #
     # @example Response structure
@@ -1379,7 +1694,7 @@ module Aws::LookoutEquipment
     #   resp.data_ingestion_job_summaries[0].ingestion_input_configuration.s3_input_configuration.bucket #=> String
     #   resp.data_ingestion_job_summaries[0].ingestion_input_configuration.s3_input_configuration.prefix #=> String
     #   resp.data_ingestion_job_summaries[0].ingestion_input_configuration.s3_input_configuration.key_pattern #=> String
-    #   resp.data_ingestion_job_summaries[0].status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
+    #   resp.data_ingestion_job_summaries[0].status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED", "IMPORT_IN_PROGRESS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ListDataIngestionJobs AWS API Documentation
     #
@@ -1424,7 +1739,7 @@ module Aws::LookoutEquipment
     #   resp.dataset_summaries #=> Array
     #   resp.dataset_summaries[0].dataset_name #=> String
     #   resp.dataset_summaries[0].dataset_arn #=> String
-    #   resp.dataset_summaries[0].status #=> String, one of "CREATED", "INGESTION_IN_PROGRESS", "ACTIVE"
+    #   resp.dataset_summaries[0].status #=> String, one of "CREATED", "INGESTION_IN_PROGRESS", "ACTIVE", "IMPORT_IN_PROGRESS"
     #   resp.dataset_summaries[0].created_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ListDatasets AWS API Documentation
@@ -1455,7 +1770,7 @@ module Aws::LookoutEquipment
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :interval_end_time
     #   Returns all the inference events with an end start time equal to or
-    #   greater than less than the end time given
+    #   greater than less than the end time given.
     #
     # @return [Types::ListInferenceEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1587,7 +1902,7 @@ module Aws::LookoutEquipment
     #   The name of the ML model used by the inference scheduler to be listed.
     #
     # @option params [String] :status
-    #   Specifies the current status of the inference schedulers to list.
+    #   Specifies the current status of the inference schedulers.
     #
     # @return [Types::ListInferenceSchedulersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1740,6 +2055,87 @@ module Aws::LookoutEquipment
       req.send_request(options)
     end
 
+    # Generates a list of all model versions for a given model, including
+    # the model version, model version ARN, and status. To list a subset of
+    # versions, use the `MaxModelVersion` and `MinModelVersion` fields.
+    #
+    # @option params [required, String] :model_name
+    #   Then name of the machine learning model for which the model versions
+    #   are to be listed.
+    #
+    # @option params [String] :next_token
+    #   If the total number of results exceeds the limit that the response can
+    #   display, the response returns an opaque pagination token indicating
+    #   where to continue the listing of machine learning model versions. Use
+    #   this token in the `NextToken` field in the request to list the next
+    #   page of results.
+    #
+    # @option params [Integer] :max_results
+    #   Specifies the maximum number of machine learning model versions to
+    #   list.
+    #
+    # @option params [String] :status
+    #   Filter the results based on the current status of the model version.
+    #
+    # @option params [String] :source_type
+    #   Filter the results based on the way the model version was generated.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :created_at_end_time
+    #   Filter results to return all the model versions created before this
+    #   time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :created_at_start_time
+    #   Filter results to return all the model versions created after this
+    #   time.
+    #
+    # @option params [Integer] :max_model_version
+    #   Specifies the highest version of the model to return in the list.
+    #
+    # @option params [Integer] :min_model_version
+    #   Specifies the lowest version of the model to return in the list.
+    #
+    # @return [Types::ListModelVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListModelVersionsResponse#next_token #next_token} => String
+    #   * {Types::ListModelVersionsResponse#model_version_summaries #model_version_summaries} => Array&lt;Types::ModelVersionSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_model_versions({
+    #     model_name: "ModelName", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     status: "IN_PROGRESS", # accepts IN_PROGRESS, SUCCESS, FAILED, IMPORT_IN_PROGRESS, CANCELED
+    #     source_type: "TRAINING", # accepts TRAINING, RETRAINING, IMPORT
+    #     created_at_end_time: Time.now,
+    #     created_at_start_time: Time.now,
+    #     max_model_version: 1,
+    #     min_model_version: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.model_version_summaries #=> Array
+    #   resp.model_version_summaries[0].model_name #=> String
+    #   resp.model_version_summaries[0].model_arn #=> String
+    #   resp.model_version_summaries[0].model_version #=> Integer
+    #   resp.model_version_summaries[0].model_version_arn #=> String
+    #   resp.model_version_summaries[0].created_at #=> Time
+    #   resp.model_version_summaries[0].status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED", "IMPORT_IN_PROGRESS", "CANCELED"
+    #   resp.model_version_summaries[0].source_type #=> String, one of "TRAINING", "RETRAINING", "IMPORT"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ListModelVersions AWS API Documentation
+    #
+    # @overload list_model_versions(params = {})
+    # @param [Hash] params ({})
+    def list_model_versions(params = {}, options = {})
+      req = build_request(:list_model_versions, params)
+      req.send_request(options)
+    end
+
     # Generates a list of all models in the account, including model name
     # and ARN, dataset, and status.
     #
@@ -1772,7 +2168,7 @@ module Aws::LookoutEquipment
     #   resp = client.list_models({
     #     next_token: "NextToken",
     #     max_results: 1,
-    #     status: "IN_PROGRESS", # accepts IN_PROGRESS, SUCCESS, FAILED
+    #     status: "IN_PROGRESS", # accepts IN_PROGRESS, SUCCESS, FAILED, IMPORT_IN_PROGRESS
     #     model_name_begins_with: "ModelName",
     #     dataset_name_begins_with: "DatasetName",
     #   })
@@ -1785,8 +2181,10 @@ module Aws::LookoutEquipment
     #   resp.model_summaries[0].model_arn #=> String
     #   resp.model_summaries[0].dataset_name #=> String
     #   resp.model_summaries[0].dataset_arn #=> String
-    #   resp.model_summaries[0].status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
+    #   resp.model_summaries[0].status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED", "IMPORT_IN_PROGRESS"
     #   resp.model_summaries[0].created_at #=> Time
+    #   resp.model_summaries[0].active_model_version #=> Integer
+    #   resp.model_summaries[0].active_model_version_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ListModels AWS API Documentation
     #
@@ -1899,6 +2297,53 @@ module Aws::LookoutEquipment
       req.send_request(options)
     end
 
+    # Creates a resource control policy for a given resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource for which the policy is
+    #   being created.
+    #
+    # @option params [required, String] :resource_policy
+    #   The JSON-formatted resource policy to create.
+    #
+    # @option params [String] :policy_revision_id
+    #   A unique identifier for a revision of the resource policy.
+    #
+    # @option params [required, String] :client_token
+    #   A unique identifier for the request. If you do not set the client
+    #   request token, Amazon Lookout for Equipment generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutResourcePolicyResponse#resource_arn #resource_arn} => String
+    #   * {Types::PutResourcePolicyResponse#policy_revision_id #policy_revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_resource_policy({
+    #     resource_arn: "ResourceArn", # required
+    #     resource_policy: "Policy", # required
+    #     policy_revision_id: "PolicyRevisionId",
+    #     client_token: "IdempotenceToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.policy_revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/PutResourcePolicy AWS API Documentation
+    #
+    # @overload put_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def put_resource_policy(params = {}, options = {})
+      req = build_request(:put_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Starts a data ingestion job. Amazon Lookout for Equipment returns the
     # job status.
     #
@@ -1943,7 +2388,7 @@ module Aws::LookoutEquipment
     # @example Response structure
     #
     #   resp.job_id #=> String
-    #   resp.status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
+    #   resp.status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED", "IMPORT_IN_PROGRESS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/StartDataIngestionJob AWS API Documentation
     #
@@ -2092,6 +2537,50 @@ module Aws::LookoutEquipment
       req.send_request(options)
     end
 
+    # Sets the active model version for a given machine learning model.
+    #
+    # @option params [required, String] :model_name
+    #   The name of the machine learning model for which the active model
+    #   version is being set.
+    #
+    # @option params [required, Integer] :model_version
+    #   The version of the machine learning model for which the active model
+    #   version is being set.
+    #
+    # @return [Types::UpdateActiveModelVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateActiveModelVersionResponse#model_name #model_name} => String
+    #   * {Types::UpdateActiveModelVersionResponse#model_arn #model_arn} => String
+    #   * {Types::UpdateActiveModelVersionResponse#current_active_version #current_active_version} => Integer
+    #   * {Types::UpdateActiveModelVersionResponse#previous_active_version #previous_active_version} => Integer
+    #   * {Types::UpdateActiveModelVersionResponse#current_active_version_arn #current_active_version_arn} => String
+    #   * {Types::UpdateActiveModelVersionResponse#previous_active_version_arn #previous_active_version_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_active_model_version({
+    #     model_name: "ModelName", # required
+    #     model_version: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_name #=> String
+    #   resp.model_arn #=> String
+    #   resp.current_active_version #=> Integer
+    #   resp.previous_active_version #=> Integer
+    #   resp.current_active_version_arn #=> String
+    #   resp.previous_active_version_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/UpdateActiveModelVersion AWS API Documentation
+    #
+    # @overload update_active_model_version(params = {})
+    # @param [Hash] params ({})
+    def update_active_model_version(params = {}, options = {})
+      req = build_request(:update_active_model_version, params)
+      req.send_request(options)
+    end
+
     # Updates an inference scheduler.
     #
     # @option params [required, String] :inference_scheduler_name
@@ -2210,7 +2699,7 @@ module Aws::LookoutEquipment
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutequipment'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

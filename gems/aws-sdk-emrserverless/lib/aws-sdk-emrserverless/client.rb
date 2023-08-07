@@ -632,9 +632,19 @@ module Aws::EMRServerless
       req.send_request(options)
     end
 
-    # Returns a URL to access the job run dashboard. The generated URL is
-    # valid for one hour, after which you must invoke the API again to
-    # generate a new URL.
+    # Creates and returns a URL that you can use to access the application
+    # UIs for a job run.
+    #
+    # For jobs in a running state, the application UI is a live user
+    # interface such as the Spark or Tez web UI. For completed jobs, the
+    # application UI is a persistent application user interface such as the
+    # Spark History Server or persistent Tez UI.
+    #
+    # <note markdown="1"> The URL is valid for one hour after you generate it. To access the
+    # application UI after that hour elapses, you must invoke the API again
+    # to generate a new URL.
+    #
+    #  </note>
     #
     # @option params [required, String] :application_id
     #   The ID of the application.
@@ -707,6 +717,13 @@ module Aws::EMRServerless
     #   resp.job_run.configuration_overrides.monitoring_configuration.s3_monitoring_configuration.encryption_key_arn #=> String
     #   resp.job_run.configuration_overrides.monitoring_configuration.managed_persistence_monitoring_configuration.enabled #=> Boolean
     #   resp.job_run.configuration_overrides.monitoring_configuration.managed_persistence_monitoring_configuration.encryption_key_arn #=> String
+    #   resp.job_run.configuration_overrides.monitoring_configuration.cloud_watch_logging_configuration.enabled #=> Boolean
+    #   resp.job_run.configuration_overrides.monitoring_configuration.cloud_watch_logging_configuration.log_group_name #=> String
+    #   resp.job_run.configuration_overrides.monitoring_configuration.cloud_watch_logging_configuration.log_stream_name_prefix #=> String
+    #   resp.job_run.configuration_overrides.monitoring_configuration.cloud_watch_logging_configuration.encryption_key_arn #=> String
+    #   resp.job_run.configuration_overrides.monitoring_configuration.cloud_watch_logging_configuration.log_types #=> Hash
+    #   resp.job_run.configuration_overrides.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"] #=> Array
+    #   resp.job_run.configuration_overrides.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"][0] #=> String
     #   resp.job_run.job_driver.spark_submit.entry_point #=> String
     #   resp.job_run.job_driver.spark_submit.entry_point_arguments #=> Array
     #   resp.job_run.job_driver.spark_submit.entry_point_arguments[0] #=> String
@@ -986,6 +1003,15 @@ module Aws::EMRServerless
     #           enabled: false,
     #           encryption_key_arn: "EncryptionKeyArn",
     #         },
+    #         cloud_watch_logging_configuration: {
+    #           enabled: false, # required
+    #           log_group_name: "LogGroupName",
+    #           log_stream_name_prefix: "LogStreamNamePrefix",
+    #           encryption_key_arn: "EncryptionKeyArn",
+    #           log_types: {
+    #             "WorkerTypeString" => ["LogTypeString"],
+    #           },
+    #         },
     #       },
     #     },
     #     tags: {
@@ -1258,7 +1284,7 @@ module Aws::EMRServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emrserverless'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

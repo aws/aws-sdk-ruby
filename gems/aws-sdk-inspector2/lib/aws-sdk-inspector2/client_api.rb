@@ -53,6 +53,8 @@ module Aws::Inspector2
     BatchGetCodeSnippetRequest = Shapes::StructureShape.new(name: 'BatchGetCodeSnippetRequest')
     BatchGetCodeSnippetRequestFindingArnsList = Shapes::ListShape.new(name: 'BatchGetCodeSnippetRequestFindingArnsList')
     BatchGetCodeSnippetResponse = Shapes::StructureShape.new(name: 'BatchGetCodeSnippetResponse')
+    BatchGetFindingDetailsRequest = Shapes::StructureShape.new(name: 'BatchGetFindingDetailsRequest')
+    BatchGetFindingDetailsResponse = Shapes::StructureShape.new(name: 'BatchGetFindingDetailsResponse')
     BatchGetFreeTrialInfoRequest = Shapes::StructureShape.new(name: 'BatchGetFreeTrialInfoRequest')
     BatchGetFreeTrialInfoRequestAccountIdsList = Shapes::ListShape.new(name: 'BatchGetFreeTrialInfoRequestAccountIdsList')
     BatchGetFreeTrialInfoResponse = Shapes::StructureShape.new(name: 'BatchGetFreeTrialInfoResponse')
@@ -166,6 +168,11 @@ module Aws::Inspector2
     EpssScoreValue = Shapes::FloatShape.new(name: 'EpssScoreValue')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    Evidence = Shapes::StructureShape.new(name: 'Evidence')
+    EvidenceDetail = Shapes::StringShape.new(name: 'EvidenceDetail')
+    EvidenceList = Shapes::ListShape.new(name: 'EvidenceList')
+    EvidenceRule = Shapes::StringShape.new(name: 'EvidenceRule')
+    EvidenceSeverity = Shapes::StringShape.new(name: 'EvidenceSeverity')
     ExecutionRoleArn = Shapes::StringShape.new(name: 'ExecutionRoleArn')
     ExploitAvailable = Shapes::StringShape.new(name: 'ExploitAvailable')
     ExploitObserved = Shapes::StructureShape.new(name: 'ExploitObserved')
@@ -187,7 +194,13 @@ module Aws::Inspector2
     FilterReason = Shapes::StringShape.new(name: 'FilterReason')
     Finding = Shapes::StructureShape.new(name: 'Finding')
     FindingArn = Shapes::StringShape.new(name: 'FindingArn')
+    FindingArnList = Shapes::ListShape.new(name: 'FindingArnList')
     FindingDescription = Shapes::StringShape.new(name: 'FindingDescription')
+    FindingDetail = Shapes::StructureShape.new(name: 'FindingDetail')
+    FindingDetails = Shapes::ListShape.new(name: 'FindingDetails')
+    FindingDetailsError = Shapes::StructureShape.new(name: 'FindingDetailsError')
+    FindingDetailsErrorCode = Shapes::StringShape.new(name: 'FindingDetailsErrorCode')
+    FindingDetailsErrorList = Shapes::ListShape.new(name: 'FindingDetailsErrorList')
     FindingList = Shapes::ListShape.new(name: 'FindingList')
     FindingStatus = Shapes::StringShape.new(name: 'FindingStatus')
     FindingTitle = Shapes::StringShape.new(name: 'FindingTitle')
@@ -354,6 +367,7 @@ module Aws::Inspector2
     ResourceStringFilterList = Shapes::ListShape.new(name: 'ResourceStringFilterList')
     ResourceStringInput = Shapes::StringShape.new(name: 'ResourceStringInput')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    RiskScore = Shapes::IntegerShape.new(name: 'RiskScore')
     Runtime = Shapes::StringShape.new(name: 'Runtime')
     SbomReportFormat = Shapes::StringShape.new(name: 'SbomReportFormat')
     ScanStatus = Shapes::StructureShape.new(name: 'ScanStatus')
@@ -402,6 +416,8 @@ module Aws::Inspector2
     TitleAggregation = Shapes::StructureShape.new(name: 'TitleAggregation')
     TitleAggregationResponse = Shapes::StructureShape.new(name: 'TitleAggregationResponse')
     TitleSortBy = Shapes::StringShape.new(name: 'TitleSortBy')
+    Tool = Shapes::StringShape.new(name: 'Tool')
+    Tools = Shapes::ListShape.new(name: 'Tools')
     Ttp = Shapes::StringShape.new(name: 'Ttp')
     Ttps = Shapes::ListShape.new(name: 'Ttps')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -634,6 +650,13 @@ module Aws::Inspector2
     BatchGetCodeSnippetResponse.add_member(:code_snippet_results, Shapes::ShapeRef.new(shape: CodeSnippetResultList, location_name: "codeSnippetResults"))
     BatchGetCodeSnippetResponse.add_member(:errors, Shapes::ShapeRef.new(shape: CodeSnippetErrorList, location_name: "errors"))
     BatchGetCodeSnippetResponse.struct_class = Types::BatchGetCodeSnippetResponse
+
+    BatchGetFindingDetailsRequest.add_member(:finding_arns, Shapes::ShapeRef.new(shape: FindingArnList, required: true, location_name: "findingArns"))
+    BatchGetFindingDetailsRequest.struct_class = Types::BatchGetFindingDetailsRequest
+
+    BatchGetFindingDetailsResponse.add_member(:errors, Shapes::ShapeRef.new(shape: FindingDetailsErrorList, location_name: "errors"))
+    BatchGetFindingDetailsResponse.add_member(:finding_details, Shapes::ShapeRef.new(shape: FindingDetails, location_name: "findingDetails"))
+    BatchGetFindingDetailsResponse.struct_class = Types::BatchGetFindingDetailsResponse
 
     BatchGetFreeTrialInfoRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: BatchGetFreeTrialInfoRequestAccountIdsList, required: true, location_name: "accountIds"))
     BatchGetFreeTrialInfoRequest.struct_class = Types::BatchGetFreeTrialInfoRequest
@@ -953,6 +976,13 @@ module Aws::Inspector2
     EpssDetails.add_member(:score, Shapes::ShapeRef.new(shape: EpssScoreValue, location_name: "score"))
     EpssDetails.struct_class = Types::EpssDetails
 
+    Evidence.add_member(:evidence_detail, Shapes::ShapeRef.new(shape: EvidenceDetail, location_name: "evidenceDetail"))
+    Evidence.add_member(:evidence_rule, Shapes::ShapeRef.new(shape: EvidenceRule, location_name: "evidenceRule"))
+    Evidence.add_member(:severity, Shapes::ShapeRef.new(shape: EvidenceSeverity, location_name: "severity"))
+    Evidence.struct_class = Types::Evidence
+
+    EvidenceList.member = Shapes::ShapeRef.new(shape: Evidence)
+
     ExploitObserved.add_member(:first_seen, Shapes::ShapeRef.new(shape: FirstSeen, location_name: "firstSeen"))
     ExploitObserved.add_member(:last_seen, Shapes::ShapeRef.new(shape: LastSeen, location_name: "lastSeen"))
     ExploitObserved.struct_class = Types::ExploitObserved
@@ -1058,6 +1088,29 @@ module Aws::Inspector2
     Finding.add_member(:type, Shapes::ShapeRef.new(shape: FindingType, required: true, location_name: "type"))
     Finding.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "updatedAt"))
     Finding.struct_class = Types::Finding
+
+    FindingArnList.member = Shapes::ShapeRef.new(shape: FindingArn)
+
+    FindingDetail.add_member(:cisa_data, Shapes::ShapeRef.new(shape: CisaData, location_name: "cisaData"))
+    FindingDetail.add_member(:cwes, Shapes::ShapeRef.new(shape: Cwes, location_name: "cwes"))
+    FindingDetail.add_member(:epss_score, Shapes::ShapeRef.new(shape: Double, location_name: "epssScore"))
+    FindingDetail.add_member(:evidences, Shapes::ShapeRef.new(shape: EvidenceList, location_name: "evidences"))
+    FindingDetail.add_member(:exploit_observed, Shapes::ShapeRef.new(shape: ExploitObserved, location_name: "exploitObserved"))
+    FindingDetail.add_member(:finding_arn, Shapes::ShapeRef.new(shape: FindingArn, location_name: "findingArn"))
+    FindingDetail.add_member(:reference_urls, Shapes::ShapeRef.new(shape: VulnerabilityReferenceUrls, location_name: "referenceUrls"))
+    FindingDetail.add_member(:risk_score, Shapes::ShapeRef.new(shape: RiskScore, location_name: "riskScore"))
+    FindingDetail.add_member(:tools, Shapes::ShapeRef.new(shape: Tools, location_name: "tools"))
+    FindingDetail.add_member(:ttps, Shapes::ShapeRef.new(shape: Ttps, location_name: "ttps"))
+    FindingDetail.struct_class = Types::FindingDetail
+
+    FindingDetails.member = Shapes::ShapeRef.new(shape: FindingDetail)
+
+    FindingDetailsError.add_member(:error_code, Shapes::ShapeRef.new(shape: FindingDetailsErrorCode, required: true, location_name: "errorCode"))
+    FindingDetailsError.add_member(:error_message, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "errorMessage"))
+    FindingDetailsError.add_member(:finding_arn, Shapes::ShapeRef.new(shape: FindingArn, required: true, location_name: "findingArn"))
+    FindingDetailsError.struct_class = Types::FindingDetailsError
+
+    FindingDetailsErrorList.member = Shapes::ShapeRef.new(shape: FindingDetailsError)
 
     FindingList.member = Shapes::ShapeRef.new(shape: Finding)
 
@@ -1584,6 +1637,8 @@ module Aws::Inspector2
     TitleAggregationResponse.add_member(:vulnerability_id, Shapes::ShapeRef.new(shape: String, location_name: "vulnerabilityId"))
     TitleAggregationResponse.struct_class = Types::TitleAggregationResponse
 
+    Tools.member = Shapes::ShapeRef.new(shape: Tool)
+
     Ttps.member = Shapes::ShapeRef.new(shape: Ttp)
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "resourceArn"))
@@ -1755,6 +1810,18 @@ module Aws::Inspector2
         o.http_request_uri = "/codesnippet/batchget"
         o.input = Shapes::ShapeRef.new(shape: BatchGetCodeSnippetRequest)
         o.output = Shapes::ShapeRef.new(shape: BatchGetCodeSnippetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:batch_get_finding_details, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetFindingDetails"
+        o.http_method = "POST"
+        o.http_request_uri = "/findings/details/batch/get"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetFindingDetailsRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetFindingDetailsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

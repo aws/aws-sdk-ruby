@@ -715,7 +715,9 @@ module Aws::DynamoDB
     end
 
     # @!attribute [rw] responses
-    #   The response to each PartiQL statement in the batch.
+    #   The response to each PartiQL statement in the batch. The values of
+    #   the list are ordered according to the ordering of the request
+    #   statements.
     #   @return [Array<Types::BatchStatementResponse>]
     #
     # @!attribute [rw] consumed_capacity
@@ -9075,8 +9077,8 @@ module Aws::DynamoDB
     # @!attribute [rw] return_values_on_condition_check_failure
     #   Use `ReturnValuesOnConditionCheckFailure` to get the item attributes
     #   if the `Update` condition fails. For
-    #   `ReturnValuesOnConditionCheckFailure`, the valid values are: NONE,
-    #   ALL\_OLD, UPDATED\_OLD, ALL\_NEW, UPDATED\_NEW.
+    #   `ReturnValuesOnConditionCheckFailure`, the valid values are: NONE
+    #   and ALL\_OLD.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Update AWS API Documentation

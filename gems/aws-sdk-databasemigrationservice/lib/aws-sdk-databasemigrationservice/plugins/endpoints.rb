@@ -64,12 +64,18 @@ module Aws::DatabaseMigrationService
             Aws::DatabaseMigrationService::Endpoints::BatchStartRecommendations.build(context)
           when :cancel_replication_task_assessment_run
             Aws::DatabaseMigrationService::Endpoints::CancelReplicationTaskAssessmentRun.build(context)
+          when :create_data_provider
+            Aws::DatabaseMigrationService::Endpoints::CreateDataProvider.build(context)
           when :create_endpoint
             Aws::DatabaseMigrationService::Endpoints::CreateEndpoint.build(context)
           when :create_event_subscription
             Aws::DatabaseMigrationService::Endpoints::CreateEventSubscription.build(context)
           when :create_fleet_advisor_collector
             Aws::DatabaseMigrationService::Endpoints::CreateFleetAdvisorCollector.build(context)
+          when :create_instance_profile
+            Aws::DatabaseMigrationService::Endpoints::CreateInstanceProfile.build(context)
+          when :create_migration_project
+            Aws::DatabaseMigrationService::Endpoints::CreateMigrationProject.build(context)
           when :create_replication_config
             Aws::DatabaseMigrationService::Endpoints::CreateReplicationConfig.build(context)
           when :create_replication_instance
@@ -82,6 +88,8 @@ module Aws::DatabaseMigrationService
             Aws::DatabaseMigrationService::Endpoints::DeleteCertificate.build(context)
           when :delete_connection
             Aws::DatabaseMigrationService::Endpoints::DeleteConnection.build(context)
+          when :delete_data_provider
+            Aws::DatabaseMigrationService::Endpoints::DeleteDataProvider.build(context)
           when :delete_endpoint
             Aws::DatabaseMigrationService::Endpoints::DeleteEndpoint.build(context)
           when :delete_event_subscription
@@ -90,6 +98,10 @@ module Aws::DatabaseMigrationService
             Aws::DatabaseMigrationService::Endpoints::DeleteFleetAdvisorCollector.build(context)
           when :delete_fleet_advisor_databases
             Aws::DatabaseMigrationService::Endpoints::DeleteFleetAdvisorDatabases.build(context)
+          when :delete_instance_profile
+            Aws::DatabaseMigrationService::Endpoints::DeleteInstanceProfile.build(context)
+          when :delete_migration_project
+            Aws::DatabaseMigrationService::Endpoints::DeleteMigrationProject.build(context)
           when :delete_replication_config
             Aws::DatabaseMigrationService::Endpoints::DeleteReplicationConfig.build(context)
           when :delete_replication_instance
@@ -108,18 +120,26 @@ module Aws::DatabaseMigrationService
             Aws::DatabaseMigrationService::Endpoints::DescribeCertificates.build(context)
           when :describe_connections
             Aws::DatabaseMigrationService::Endpoints::DescribeConnections.build(context)
+          when :describe_conversion_configuration
+            Aws::DatabaseMigrationService::Endpoints::DescribeConversionConfiguration.build(context)
+          when :describe_data_providers
+            Aws::DatabaseMigrationService::Endpoints::DescribeDataProviders.build(context)
           when :describe_endpoint_settings
             Aws::DatabaseMigrationService::Endpoints::DescribeEndpointSettings.build(context)
           when :describe_endpoint_types
             Aws::DatabaseMigrationService::Endpoints::DescribeEndpointTypes.build(context)
           when :describe_endpoints
             Aws::DatabaseMigrationService::Endpoints::DescribeEndpoints.build(context)
+          when :describe_engine_versions
+            Aws::DatabaseMigrationService::Endpoints::DescribeEngineVersions.build(context)
           when :describe_event_categories
             Aws::DatabaseMigrationService::Endpoints::DescribeEventCategories.build(context)
           when :describe_event_subscriptions
             Aws::DatabaseMigrationService::Endpoints::DescribeEventSubscriptions.build(context)
           when :describe_events
             Aws::DatabaseMigrationService::Endpoints::DescribeEvents.build(context)
+          when :describe_extension_pack_associations
+            Aws::DatabaseMigrationService::Endpoints::DescribeExtensionPackAssociations.build(context)
           when :describe_fleet_advisor_collectors
             Aws::DatabaseMigrationService::Endpoints::DescribeFleetAdvisorCollectors.build(context)
           when :describe_fleet_advisor_databases
@@ -130,6 +150,20 @@ module Aws::DatabaseMigrationService
             Aws::DatabaseMigrationService::Endpoints::DescribeFleetAdvisorSchemaObjectSummary.build(context)
           when :describe_fleet_advisor_schemas
             Aws::DatabaseMigrationService::Endpoints::DescribeFleetAdvisorSchemas.build(context)
+          when :describe_instance_profiles
+            Aws::DatabaseMigrationService::Endpoints::DescribeInstanceProfiles.build(context)
+          when :describe_metadata_model_assessments
+            Aws::DatabaseMigrationService::Endpoints::DescribeMetadataModelAssessments.build(context)
+          when :describe_metadata_model_conversions
+            Aws::DatabaseMigrationService::Endpoints::DescribeMetadataModelConversions.build(context)
+          when :describe_metadata_model_exports_as_script
+            Aws::DatabaseMigrationService::Endpoints::DescribeMetadataModelExportsAsScript.build(context)
+          when :describe_metadata_model_exports_to_target
+            Aws::DatabaseMigrationService::Endpoints::DescribeMetadataModelExportsToTarget.build(context)
+          when :describe_metadata_model_imports
+            Aws::DatabaseMigrationService::Endpoints::DescribeMetadataModelImports.build(context)
+          when :describe_migration_projects
+            Aws::DatabaseMigrationService::Endpoints::DescribeMigrationProjects.build(context)
           when :describe_orderable_replication_instances
             Aws::DatabaseMigrationService::Endpoints::DescribeOrderableReplicationInstances.build(context)
           when :describe_pending_maintenance_actions
@@ -164,14 +198,24 @@ module Aws::DatabaseMigrationService
             Aws::DatabaseMigrationService::Endpoints::DescribeSchemas.build(context)
           when :describe_table_statistics
             Aws::DatabaseMigrationService::Endpoints::DescribeTableStatistics.build(context)
+          when :export_metadata_model_assessment
+            Aws::DatabaseMigrationService::Endpoints::ExportMetadataModelAssessment.build(context)
           when :import_certificate
             Aws::DatabaseMigrationService::Endpoints::ImportCertificate.build(context)
           when :list_tags_for_resource
             Aws::DatabaseMigrationService::Endpoints::ListTagsForResource.build(context)
+          when :modify_conversion_configuration
+            Aws::DatabaseMigrationService::Endpoints::ModifyConversionConfiguration.build(context)
+          when :modify_data_provider
+            Aws::DatabaseMigrationService::Endpoints::ModifyDataProvider.build(context)
           when :modify_endpoint
             Aws::DatabaseMigrationService::Endpoints::ModifyEndpoint.build(context)
           when :modify_event_subscription
             Aws::DatabaseMigrationService::Endpoints::ModifyEventSubscription.build(context)
+          when :modify_instance_profile
+            Aws::DatabaseMigrationService::Endpoints::ModifyInstanceProfile.build(context)
+          when :modify_migration_project
+            Aws::DatabaseMigrationService::Endpoints::ModifyMigrationProject.build(context)
           when :modify_replication_config
             Aws::DatabaseMigrationService::Endpoints::ModifyReplicationConfig.build(context)
           when :modify_replication_instance
@@ -194,6 +238,18 @@ module Aws::DatabaseMigrationService
             Aws::DatabaseMigrationService::Endpoints::RemoveTagsFromResource.build(context)
           when :run_fleet_advisor_lsa_analysis
             Aws::DatabaseMigrationService::Endpoints::RunFleetAdvisorLsaAnalysis.build(context)
+          when :start_extension_pack_association
+            Aws::DatabaseMigrationService::Endpoints::StartExtensionPackAssociation.build(context)
+          when :start_metadata_model_assessment
+            Aws::DatabaseMigrationService::Endpoints::StartMetadataModelAssessment.build(context)
+          when :start_metadata_model_conversion
+            Aws::DatabaseMigrationService::Endpoints::StartMetadataModelConversion.build(context)
+          when :start_metadata_model_export_as_script
+            Aws::DatabaseMigrationService::Endpoints::StartMetadataModelExportAsScript.build(context)
+          when :start_metadata_model_export_to_target
+            Aws::DatabaseMigrationService::Endpoints::StartMetadataModelExportToTarget.build(context)
+          when :start_metadata_model_import
+            Aws::DatabaseMigrationService::Endpoints::StartMetadataModelImport.build(context)
           when :start_recommendations
             Aws::DatabaseMigrationService::Endpoints::StartRecommendations.build(context)
           when :start_replication

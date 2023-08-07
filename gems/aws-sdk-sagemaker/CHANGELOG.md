@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.204.0 (2023-08-04)
+------------------
+
+* Feature - Including DataCaptureConfig key in the Amazon Sagemaker Search's transform job object
+
+1.203.0 (2023-08-03)
+------------------
+
+* Feature - Amazon SageMaker now supports running training jobs on p5.48xlarge instance types.
+
+1.202.0 (2023-08-02)
+------------------
+
+* Feature - SageMaker Inference Recommender introduces a new API GetScalingConfigurationRecommendation to recommend auto scaling policies based on completed Inference Recommender jobs.
+
+1.201.0 (2023-08-01)
+------------------
+
+* Feature - Add Stairs TrafficPattern and FlatInvocations to RecommendationJobStoppingConditions
+
+1.200.0 (2023-07-27)
+------------------
+
+* Feature - Expose ProfilerConfig attribute in SageMaker Search API response.
+
+1.199.0 (2023-07-25)
+------------------
+
+* Feature - Mark ContentColumn and TargetLabelColumn as required Targets in TextClassificationJobConfig in CreateAutoMLJobV2API
+
+1.198.0 (2023-07-20)
+------------------
+
+* Feature - Cross account support for SageMaker Feature Store
+
+1.197.0 (2023-07-13)
+------------------
+
+* Feature - Amazon SageMaker Canvas adds WorkspeceSettings support for CanvasAppSettings
+
 1.196.0 (2023-07-11)
 ------------------
 

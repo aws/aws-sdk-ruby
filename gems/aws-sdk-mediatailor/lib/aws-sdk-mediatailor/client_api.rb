@@ -20,6 +20,7 @@ module Aws::MediaTailor
     AdMarkerPassthrough = Shapes::StructureShape.new(name: 'AdMarkerPassthrough')
     AdMarkupType = Shapes::StringShape.new(name: 'AdMarkupType')
     Alert = Shapes::StructureShape.new(name: 'Alert')
+    AlertCategory = Shapes::StringShape.new(name: 'AlertCategory')
     AvailMatchingCriteria = Shapes::StructureShape.new(name: 'AvailMatchingCriteria')
     AvailSuppression = Shapes::StructureShape.new(name: 'AvailSuppression')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
@@ -212,6 +213,7 @@ module Aws::MediaTailor
 
     Alert.add_member(:alert_code, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "AlertCode"))
     Alert.add_member(:alert_message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "AlertMessage"))
+    Alert.add_member(:category, Shapes::ShapeRef.new(shape: AlertCategory, location_name: "Category"))
     Alert.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: __timestampUnix, required: true, location_name: "LastModifiedTime"))
     Alert.add_member(:related_resource_arns, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "RelatedResourceArns"))
     Alert.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ResourceArn"))

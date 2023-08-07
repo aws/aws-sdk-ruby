@@ -877,8 +877,8 @@ module Aws::WAFV2
     # You must specify exactly one setting: either `All`, `IncludedCookies`,
     # or `ExcludedCookies`.
     #
-    # Example JSON: `"MatchPattern": \{ "IncludedCookies":
-    # \{"KeyToInclude1", "KeyToInclude2", "KeyToInclude3"\} \}`
+    # Example JSON: `"MatchPattern": \{ "IncludedCookies": [
+    # "session-id-time", "session-id" ] \}`
     #
     # @!attribute [rw] all
     #   Inspect all cookies.
@@ -921,8 +921,8 @@ module Aws::WAFV2
     #   You must specify exactly one setting: either `All`,
     #   `IncludedCookies`, or `ExcludedCookies`.
     #
-    #   Example JSON: `"MatchPattern": \{ "IncludedCookies":
-    #   \{"KeyToInclude1", "KeyToInclude2", "KeyToInclude3"\} \}`
+    #   Example JSON: `"MatchPattern": \{ "IncludedCookies": [
+    #   "session-id-time", "session-id" ] \}`
     #   @return [Types::CookieMatchPattern]
     #
     # @!attribute [rw] match_scope
@@ -3395,8 +3395,8 @@ module Aws::WAFV2
     # You must specify exactly one setting: either `All`, `IncludedHeaders`,
     # or `ExcludedHeaders`.
     #
-    # Example JSON: `"MatchPattern": \{ "ExcludedHeaders":
-    # \{"KeyToExclude1", "KeyToExclude2"\} \}`
+    # Example JSON: `"MatchPattern": \{ "ExcludedHeaders": [
+    # "KeyToExclude1", "KeyToExclude2" ] \}`
     #
     # @!attribute [rw] all
     #   Inspect all headers.
@@ -3476,8 +3476,8 @@ module Aws::WAFV2
     #   You must specify exactly one setting: either `All`,
     #   `IncludedHeaders`, or `ExcludedHeaders`.
     #
-    #   Example JSON: `"MatchPattern": \{ "ExcludedHeaders":
-    #   \{"KeyToExclude1", "KeyToExclude2"\} \}`
+    #   Example JSON: `"MatchPattern": \{ "ExcludedHeaders": [
+    #   "KeyToExclude1", "KeyToExclude2" ] \}`
     #   @return [Types::HeaderMatchPattern]
     #
     # @!attribute [rw] match_scope
@@ -6156,6 +6156,13 @@ module Aws::WAFV2
     #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-label-requirements.html
     #   @return [Types::RateLimitLabelNamespace]
     #
+    # @!attribute [rw] uri_path
+    #   Use the request's URI path as an aggregate key. Each distinct URI
+    #   path contributes to the aggregation instance. If you use just the
+    #   URI path as your custom key, then each URI path fully defines an
+    #   aggregation instance.
+    #   @return [Types::RateLimitUriPath]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateBasedStatementCustomKey AWS API Documentation
     #
     class RateBasedStatementCustomKey < Struct.new(
@@ -6166,7 +6173,8 @@ module Aws::WAFV2
       :http_method,
       :forwarded_ip,
       :ip,
-      :label_namespace)
+      :label_namespace,
+      :uri_path)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6403,6 +6411,31 @@ module Aws::WAFV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateLimitQueryString AWS API Documentation
     #
     class RateLimitQueryString < Struct.new(
+      :text_transformations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the request's URI path as an aggregate key for a rate-based
+    # rule. Each distinct URI path contributes to the aggregation instance.
+    # If you use just the URI path as your custom key, then each URI path
+    # fully defines an aggregation instance.
+    #
+    # @!attribute [rw] text_transformations
+    #   Text transformations eliminate some of the unusual formatting that
+    #   attackers use in web requests in an effort to bypass detection. Text
+    #   transformations are used in rule match statements, to transform the
+    #   `FieldToMatch` request component before inspecting it, and they're
+    #   used in rate-based rule statements, to transform request components
+    #   before using them as custom aggregation keys. If you specify one or
+    #   more transformations to apply, WAF performs all transformations on
+    #   the specified content, starting from the lowest priority setting,
+    #   and then uses the component contents.
+    #   @return [Array<Types::TextTransformation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateLimitUriPath AWS API Documentation
+    #
+    class RateLimitUriPath < Struct.new(
       :text_transformations)
       SENSITIVE = []
       include Aws::Structure

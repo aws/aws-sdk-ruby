@@ -390,6 +390,10 @@ module Aws::Scheduler
 
     # Creates the specified schedule.
     #
+    # @option params [String] :action_after_completion
+    #   Specifies the action that EventBridge Scheduler applies to the
+    #   schedule after the schedule completes invoking the target.
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request. If you do not specify a client token,
@@ -429,7 +433,7 @@ module Aws::Scheduler
     #
     #   * `at` expression - `at(yyyy-mm-ddThh:mm:ss)`
     #
-    #   * `rate` expression - `rate(unit value)`
+    #   * `rate` expression - `rate(value unit)`
     #
     #   * `cron` expression - `cron(fields)`
     #
@@ -478,6 +482,7 @@ module Aws::Scheduler
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_schedule({
+    #     action_after_completion: "NONE", # accepts NONE, DELETE
     #     client_token: "ClientToken",
     #     description: "Description",
     #     end_date: Time.now,
@@ -718,6 +723,7 @@ module Aws::Scheduler
     #
     # @return [Types::GetScheduleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetScheduleOutput#action_after_completion #action_after_completion} => String
     #   * {Types::GetScheduleOutput#arn #arn} => String
     #   * {Types::GetScheduleOutput#creation_date #creation_date} => Time
     #   * {Types::GetScheduleOutput#description #description} => String
@@ -742,6 +748,7 @@ module Aws::Scheduler
     #
     # @example Response structure
     #
+    #   resp.action_after_completion #=> String, one of "NONE", "DELETE"
     #   resp.arn #=> String
     #   resp.creation_date #=> Time
     #   resp.description #=> String
@@ -1055,6 +1062,10 @@ module Aws::Scheduler
     # `GetSchedule` API operation and make a note of all optional parameters
     # for your `UpdateSchedule` call.
     #
+    # @option params [String] :action_after_completion
+    #   Specifies the action that EventBridge Scheduler applies to the
+    #   schedule after the schedule completes invoking the target.
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request. If you do not specify a client token,
@@ -1096,7 +1107,7 @@ module Aws::Scheduler
     #
     #   * `at` expression - `at(yyyy-mm-ddThh:mm:ss)`
     #
-    #   * `rate` expression - `rate(unit value)`
+    #   * `rate` expression - `rate(value unit)`
     #
     #   * `cron` expression - `cron(fields)`
     #
@@ -1146,6 +1157,7 @@ module Aws::Scheduler
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_schedule({
+    #     action_after_completion: "NONE", # accepts NONE, DELETE
     #     client_token: "ClientToken",
     #     description: "Description",
     #     end_date: Time.now,
@@ -1260,7 +1272,7 @@ module Aws::Scheduler
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-scheduler'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

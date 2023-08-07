@@ -40,6 +40,8 @@ module Aws::RDS
   # * {CustomDBEngineVersionNotFoundFault}
   # * {CustomDBEngineVersionQuotaExceededFault}
   # * {DBClusterAlreadyExistsFault}
+  # * {DBClusterAutomatedBackupNotFoundFault}
+  # * {DBClusterAutomatedBackupQuotaExceededFault}
   # * {DBClusterBacktrackNotFoundFault}
   # * {DBClusterEndpointAlreadyExistsFault}
   # * {DBClusterEndpointNotFoundFault}
@@ -102,6 +104,7 @@ module Aws::RDS
   # * {InsufficientStorageClusterCapacityFault}
   # * {InvalidBlueGreenDeploymentStateFault}
   # * {InvalidCustomDBEngineVersionStateFault}
+  # * {InvalidDBClusterAutomatedBackupStateFault}
   # * {InvalidDBClusterCapacityFault}
   # * {InvalidDBClusterEndpointStateFault}
   # * {InvalidDBClusterSnapshotStateFault}
@@ -285,6 +288,26 @@ module Aws::RDS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RDS::Types::DBClusterAlreadyExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class DBClusterAutomatedBackupNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::DBClusterAutomatedBackupNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class DBClusterAutomatedBackupQuotaExceededFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::DBClusterAutomatedBackupQuotaExceededFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -905,6 +928,16 @@ module Aws::RDS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RDS::Types::InvalidCustomDBEngineVersionStateFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidDBClusterAutomatedBackupStateFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::InvalidDBClusterAutomatedBackupStateFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

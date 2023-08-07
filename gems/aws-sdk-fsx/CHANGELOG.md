@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2023-07-13)
+------------------
+
+* Feature - Amazon FSx for NetApp ONTAP now supports SnapLock, an ONTAP feature that enables you to protect your files in a volume by transitioning them to a write once, read many (WORM) state.
+
 1.72.0 (2023-07-11)
 ------------------
 

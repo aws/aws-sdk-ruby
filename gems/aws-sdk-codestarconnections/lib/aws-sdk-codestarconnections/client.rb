@@ -398,18 +398,17 @@ module Aws::CodeStarconnections
 
     # @!group API Operations
 
-    # Creates a connection that can then be given to other AWS services like
-    # CodePipeline so that it can access third-party code repositories. The
-    # connection is in pending status until the third-party connection
-    # handshake is completed from the console.
+    # Creates a connection that can then be given to other Amazon Web
+    # Services services like CodePipeline so that it can access third-party
+    # code repositories. The connection is in pending status until the
+    # third-party connection handshake is completed from the console.
     #
     # @option params [String] :provider_type
     #   The name of the external provider where your third-party code
     #   repository is configured.
     #
     # @option params [required, String] :connection_name
-    #   The name of the connection to be created. The name must be unique in
-    #   the calling AWS account.
+    #   The name of the connection to be created.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The key-value pair to use when tagging the resource.
@@ -426,7 +425,7 @@ module Aws::CodeStarconnections
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_connection({
-    #     provider_type: "Bitbucket", # accepts Bitbucket, GitHub, GitHubEnterpriseServer
+    #     provider_type: "Bitbucket", # accepts Bitbucket, GitHub, GitHubEnterpriseServer, GitLab
     #     connection_name: "ConnectionName", # required
     #     tags: [
     #       {
@@ -466,8 +465,7 @@ module Aws::CodeStarconnections
     #  </note>
     #
     # @option params [required, String] :name
-    #   The name of the host to be created. The name must be unique in the
-    #   calling AWS account.
+    #   The name of the host to be created.
     #
     # @option params [required, String] :provider_type
     #   The name of the installed provider to be associated with your
@@ -495,7 +493,7 @@ module Aws::CodeStarconnections
     #
     #   resp = client.create_host({
     #     name: "HostName", # required
-    #     provider_type: "Bitbucket", # required, accepts Bitbucket, GitHub, GitHubEnterpriseServer
+    #     provider_type: "Bitbucket", # required, accepts Bitbucket, GitHub, GitHubEnterpriseServer, GitLab
     #     provider_endpoint: "Url", # required
     #     vpc_configuration: {
     #       vpc_id: "VpcId", # required
@@ -601,7 +599,7 @@ module Aws::CodeStarconnections
     #
     #   resp.connection.connection_name #=> String
     #   resp.connection.connection_arn #=> String
-    #   resp.connection.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer"
+    #   resp.connection.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab"
     #   resp.connection.owner_account_id #=> String
     #   resp.connection.connection_status #=> String, one of "PENDING", "AVAILABLE", "ERROR"
     #   resp.connection.host_arn #=> String
@@ -639,7 +637,7 @@ module Aws::CodeStarconnections
     #
     #   resp.name #=> String
     #   resp.status #=> String
-    #   resp.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer"
+    #   resp.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab"
     #   resp.provider_endpoint #=> String
     #   resp.vpc_configuration.vpc_id #=> String
     #   resp.vpc_configuration.subnet_ids #=> Array
@@ -686,7 +684,7 @@ module Aws::CodeStarconnections
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_connections({
-    #     provider_type_filter: "Bitbucket", # accepts Bitbucket, GitHub, GitHubEnterpriseServer
+    #     provider_type_filter: "Bitbucket", # accepts Bitbucket, GitHub, GitHubEnterpriseServer, GitLab
     #     host_arn_filter: "HostArn",
     #     max_results: 1,
     #     next_token: "NextToken",
@@ -697,7 +695,7 @@ module Aws::CodeStarconnections
     #   resp.connections #=> Array
     #   resp.connections[0].connection_name #=> String
     #   resp.connections[0].connection_arn #=> String
-    #   resp.connections[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer"
+    #   resp.connections[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab"
     #   resp.connections[0].owner_account_id #=> String
     #   resp.connections[0].connection_status #=> String, one of "PENDING", "AVAILABLE", "ERROR"
     #   resp.connections[0].host_arn #=> String
@@ -742,7 +740,7 @@ module Aws::CodeStarconnections
     #   resp.hosts #=> Array
     #   resp.hosts[0].name #=> String
     #   resp.hosts[0].host_arn #=> String
-    #   resp.hosts[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer"
+    #   resp.hosts[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab"
     #   resp.hosts[0].provider_endpoint #=> String
     #   resp.hosts[0].vpc_configuration.vpc_id #=> String
     #   resp.hosts[0].vpc_configuration.subnet_ids #=> Array
@@ -828,7 +826,7 @@ module Aws::CodeStarconnections
       req.send_request(options)
     end
 
-    # Removes tags from an AWS resource.
+    # Removes tags from an Amazon Web Services resource.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource to remove tags from.
@@ -904,7 +902,7 @@ module Aws::CodeStarconnections
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codestarconnections'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

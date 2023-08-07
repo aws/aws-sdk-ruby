@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2023-07-20)
+------------------
+
+* Feature - This release adds support for Route 53 On Outposts, a new feature that allows customers to run Route 53 Resolver and Resolver endpoints locally on their Outposts.
+
 1.46.0 (2023-07-11)
 ------------------
 

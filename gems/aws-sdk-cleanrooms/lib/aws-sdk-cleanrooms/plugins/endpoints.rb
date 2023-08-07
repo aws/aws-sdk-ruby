@@ -56,8 +56,12 @@ module Aws::CleanRooms
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :batch_get_collaboration_analysis_template
+            Aws::CleanRooms::Endpoints::BatchGetCollaborationAnalysisTemplate.build(context)
           when :batch_get_schema
             Aws::CleanRooms::Endpoints::BatchGetSchema.build(context)
+          when :create_analysis_template
+            Aws::CleanRooms::Endpoints::CreateAnalysisTemplate.build(context)
           when :create_collaboration
             Aws::CleanRooms::Endpoints::CreateCollaboration.build(context)
           when :create_configured_table
@@ -68,6 +72,8 @@ module Aws::CleanRooms
             Aws::CleanRooms::Endpoints::CreateConfiguredTableAssociation.build(context)
           when :create_membership
             Aws::CleanRooms::Endpoints::CreateMembership.build(context)
+          when :delete_analysis_template
+            Aws::CleanRooms::Endpoints::DeleteAnalysisTemplate.build(context)
           when :delete_collaboration
             Aws::CleanRooms::Endpoints::DeleteCollaboration.build(context)
           when :delete_configured_table
@@ -80,8 +86,12 @@ module Aws::CleanRooms
             Aws::CleanRooms::Endpoints::DeleteMember.build(context)
           when :delete_membership
             Aws::CleanRooms::Endpoints::DeleteMembership.build(context)
+          when :get_analysis_template
+            Aws::CleanRooms::Endpoints::GetAnalysisTemplate.build(context)
           when :get_collaboration
             Aws::CleanRooms::Endpoints::GetCollaboration.build(context)
+          when :get_collaboration_analysis_template
+            Aws::CleanRooms::Endpoints::GetCollaborationAnalysisTemplate.build(context)
           when :get_configured_table
             Aws::CleanRooms::Endpoints::GetConfiguredTable.build(context)
           when :get_configured_table_analysis_rule
@@ -96,6 +106,10 @@ module Aws::CleanRooms
             Aws::CleanRooms::Endpoints::GetSchema.build(context)
           when :get_schema_analysis_rule
             Aws::CleanRooms::Endpoints::GetSchemaAnalysisRule.build(context)
+          when :list_analysis_templates
+            Aws::CleanRooms::Endpoints::ListAnalysisTemplates.build(context)
+          when :list_collaboration_analysis_templates
+            Aws::CleanRooms::Endpoints::ListCollaborationAnalysisTemplates.build(context)
           when :list_collaborations
             Aws::CleanRooms::Endpoints::ListCollaborations.build(context)
           when :list_configured_table_associations
@@ -118,6 +132,8 @@ module Aws::CleanRooms
             Aws::CleanRooms::Endpoints::TagResource.build(context)
           when :untag_resource
             Aws::CleanRooms::Endpoints::UntagResource.build(context)
+          when :update_analysis_template
+            Aws::CleanRooms::Endpoints::UpdateAnalysisTemplate.build(context)
           when :update_collaboration
             Aws::CleanRooms::Endpoints::UpdateCollaboration.build(context)
           when :update_configured_table

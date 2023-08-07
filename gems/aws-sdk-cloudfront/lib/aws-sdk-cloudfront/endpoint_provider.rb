@@ -25,46 +25,13 @@ module Aws::CloudFront
       end
       if Aws::Endpoints::Matchers.set?(region)
         if (partition_result = Aws::Endpoints::Matchers.aws_partition(region))
-          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws")
-            if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS")) && Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
-                return Aws::Endpoints::Endpoint.new(url: "https://cloudfront-fips.#{region}.api.aws", headers: {}, properties: {})
-              end
-              raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
-            end
-            if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
-                return Aws::Endpoints::Endpoint.new(url: "https://cloudfront-fips.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"cloudfront", "signingRegion"=>"us-east-1"}]})
-              end
-              raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
-            end
-            if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
-                return Aws::Endpoints::Endpoint.new(url: "https://cloudfront.#{region}.api.aws", headers: {}, properties: {})
-              end
-              raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
-            end
+          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws") && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false)
             return Aws::Endpoints::Endpoint.new(url: "https://cloudfront.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"cloudfront", "signingRegion"=>"us-east-1"}]})
           end
-          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-cn")
-            if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS")) && Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
-                return Aws::Endpoints::Endpoint.new(url: "https://cloudfront-fips.#{region}.api.amazonwebservices.com.cn", headers: {}, properties: {})
-              end
-              raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
-            end
-            if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
-                return Aws::Endpoints::Endpoint.new(url: "https://cloudfront-fips.#{region}.amazonaws.com.cn", headers: {}, properties: {})
-              end
-              raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
-            end
-            if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
-                return Aws::Endpoints::Endpoint.new(url: "https://cloudfront.#{region}.api.amazonwebservices.com.cn", headers: {}, properties: {})
-              end
-              raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
-            end
+          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws") && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false)
+            return Aws::Endpoints::Endpoint.new(url: "https://cloudfront-fips.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"cloudfront", "signingRegion"=>"us-east-1"}]})
+          end
+          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-cn") && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false)
             return Aws::Endpoints::Endpoint.new(url: "https://cloudfront.cn-northwest-1.amazonaws.com.cn", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"cloudfront", "signingRegion"=>"cn-northwest-1"}]})
           end
           if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
@@ -75,9 +42,6 @@ module Aws::CloudFront
           end
           if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
             if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
-              if Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-                return Aws::Endpoints::Endpoint.new(url: "https://cloudfront-fips.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"cloudfront", "signingRegion"=>"us-east-1"}]})
-              end
               return Aws::Endpoints::Endpoint.new(url: "https://cloudfront-fips.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
@@ -87,12 +51,6 @@ module Aws::CloudFront
               return Aws::Endpoints::Endpoint.new(url: "https://cloudfront.#{region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
-          end
-          if Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-            return Aws::Endpoints::Endpoint.new(url: "https://cloudfront.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"cloudfront", "signingRegion"=>"us-east-1"}]})
-          end
-          if Aws::Endpoints::Matchers.string_equals?(region, "aws-cn-global")
-            return Aws::Endpoints::Endpoint.new(url: "https://cloudfront.cn-northwest-1.amazonaws.com.cn", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"cloudfront", "signingRegion"=>"cn-northwest-1"}]})
           end
           return Aws::Endpoints::Endpoint.new(url: "https://cloudfront.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
         end

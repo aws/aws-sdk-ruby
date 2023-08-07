@@ -62,6 +62,8 @@ module Aws::DataSync
             Aws::DataSync::Endpoints::CancelTaskExecution.build(context)
           when :create_agent
             Aws::DataSync::Endpoints::CreateAgent.build(context)
+          when :create_location_azure_blob
+            Aws::DataSync::Endpoints::CreateLocationAzureBlob.build(context)
           when :create_location_efs
             Aws::DataSync::Endpoints::CreateLocationEfs.build(context)
           when :create_location_fsx_lustre
@@ -94,6 +96,8 @@ module Aws::DataSync
             Aws::DataSync::Endpoints::DescribeAgent.build(context)
           when :describe_discovery_job
             Aws::DataSync::Endpoints::DescribeDiscoveryJob.build(context)
+          when :describe_location_azure_blob
+            Aws::DataSync::Endpoints::DescribeLocationAzureBlob.build(context)
           when :describe_location_efs
             Aws::DataSync::Endpoints::DescribeLocationEfs.build(context)
           when :describe_location_fsx_lustre
@@ -156,6 +160,8 @@ module Aws::DataSync
             Aws::DataSync::Endpoints::UpdateAgent.build(context)
           when :update_discovery_job
             Aws::DataSync::Endpoints::UpdateDiscoveryJob.build(context)
+          when :update_location_azure_blob
+            Aws::DataSync::Endpoints::UpdateLocationAzureBlob.build(context)
           when :update_location_hdfs
             Aws::DataSync::Endpoints::UpdateLocationHdfs.build(context)
           when :update_location_nfs

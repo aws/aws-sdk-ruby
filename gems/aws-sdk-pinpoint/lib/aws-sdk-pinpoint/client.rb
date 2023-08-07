@@ -656,6 +656,10 @@ module Aws::Pinpoint
     #               name: "__string",
     #               version: "__string",
     #             },
+    #             in_app_template: {
+    #               name: "__string",
+    #               version: "__string",
+    #             },
     #           },
     #           treatment_description: "__string",
     #           treatment_name: "__string",
@@ -891,6 +895,10 @@ module Aws::Pinpoint
     #           name: "__string",
     #           version: "__string",
     #         },
+    #         in_app_template: {
+    #           name: "__string",
+    #           version: "__string",
+    #         },
     #       },
     #       treatment_description: "__string",
     #       treatment_name: "__string",
@@ -1041,6 +1049,8 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.voice_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.voice_template.version #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.in_app_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.in_app_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
@@ -1203,6 +1213,8 @@ module Aws::Pinpoint
     #   resp.campaign_response.template_configuration.sms_template.version #=> String
     #   resp.campaign_response.template_configuration.voice_template.name #=> String
     #   resp.campaign_response.template_configuration.voice_template.version #=> String
+    #   resp.campaign_response.template_configuration.in_app_template.name #=> String
+    #   resp.campaign_response.template_configuration.in_app_template.version #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -1774,6 +1786,11 @@ module Aws::Pinpoint
     #         endpoint_reentry_cap: 1,
     #         messages_per_second: 1,
     #         endpoint_reentry_interval: "__string",
+    #         timeframe_cap: {
+    #           cap: 1,
+    #           days: 1,
+    #         },
+    #         total_cap: 1,
     #       },
     #       local_time: false,
     #       name: "__string", # required
@@ -2062,6 +2079,9 @@ module Aws::Pinpoint
     #   resp.journey_response.limits.endpoint_reentry_cap #=> Integer
     #   resp.journey_response.limits.messages_per_second #=> Integer
     #   resp.journey_response.limits.endpoint_reentry_interval #=> String
+    #   resp.journey_response.limits.timeframe_cap.cap #=> Integer
+    #   resp.journey_response.limits.timeframe_cap.days #=> Integer
+    #   resp.journey_response.limits.total_cap #=> Integer
     #   resp.journey_response.local_time #=> Boolean
     #   resp.journey_response.name #=> String
     #   resp.journey_response.quiet_time.end #=> String
@@ -3084,6 +3104,8 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.voice_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.voice_template.version #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.in_app_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.in_app_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
@@ -3246,6 +3268,8 @@ module Aws::Pinpoint
     #   resp.campaign_response.template_configuration.sms_template.version #=> String
     #   resp.campaign_response.template_configuration.voice_template.name #=> String
     #   resp.campaign_response.template_configuration.voice_template.version #=> String
+    #   resp.campaign_response.template_configuration.in_app_template.name #=> String
+    #   resp.campaign_response.template_configuration.in_app_template.version #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -3448,8 +3472,10 @@ module Aws::Pinpoint
     #   resp.gcm_channel_response.application_id #=> String
     #   resp.gcm_channel_response.creation_date #=> String
     #   resp.gcm_channel_response.credential #=> String
+    #   resp.gcm_channel_response.default_authentication_method #=> String
     #   resp.gcm_channel_response.enabled #=> Boolean
     #   resp.gcm_channel_response.has_credential #=> Boolean
+    #   resp.gcm_channel_response.has_fcm_service_credentials #=> Boolean
     #   resp.gcm_channel_response.id #=> String
     #   resp.gcm_channel_response.is_archived #=> Boolean
     #   resp.gcm_channel_response.last_modified_by #=> String
@@ -3668,6 +3694,9 @@ module Aws::Pinpoint
     #   resp.journey_response.limits.endpoint_reentry_cap #=> Integer
     #   resp.journey_response.limits.messages_per_second #=> Integer
     #   resp.journey_response.limits.endpoint_reentry_interval #=> String
+    #   resp.journey_response.limits.timeframe_cap.cap #=> Integer
+    #   resp.journey_response.limits.timeframe_cap.days #=> Integer
+    #   resp.journey_response.limits.total_cap #=> Integer
     #   resp.journey_response.local_time #=> Boolean
     #   resp.journey_response.name #=> String
     #   resp.journey_response.quiet_time.end #=> String
@@ -4464,6 +4493,10 @@ module Aws::Pinpoint
     #   resp.application_settings_resource.limits.session #=> Integer
     #   resp.application_settings_resource.quiet_time.end #=> String
     #   resp.application_settings_resource.quiet_time.start #=> String
+    #   resp.application_settings_resource.journey_limits.daily_cap #=> Integer
+    #   resp.application_settings_resource.journey_limits.timeframe_cap.cap #=> Integer
+    #   resp.application_settings_resource.journey_limits.timeframe_cap.days #=> Integer
+    #   resp.application_settings_resource.journey_limits.total_cap #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApplicationSettings AWS API Documentation
     #
@@ -4711,6 +4744,8 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.voice_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.voice_template.version #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.in_app_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.in_app_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
@@ -4873,6 +4908,8 @@ module Aws::Pinpoint
     #   resp.campaign_response.template_configuration.sms_template.version #=> String
     #   resp.campaign_response.template_configuration.voice_template.name #=> String
     #   resp.campaign_response.template_configuration.voice_template.version #=> String
+    #   resp.campaign_response.template_configuration.in_app_template.name #=> String
+    #   resp.campaign_response.template_configuration.in_app_template.version #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -5163,6 +5200,8 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.voice_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.voice_template.version #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.in_app_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.in_app_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
@@ -5325,6 +5364,8 @@ module Aws::Pinpoint
     #   resp.campaign_response.template_configuration.sms_template.version #=> String
     #   resp.campaign_response.template_configuration.voice_template.name #=> String
     #   resp.campaign_response.template_configuration.voice_template.version #=> String
+    #   resp.campaign_response.template_configuration.in_app_template.name #=> String
+    #   resp.campaign_response.template_configuration.in_app_template.version #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -5507,6 +5548,8 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.sms_template.version #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.voice_template.name #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.voice_template.version #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.in_app_template.name #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.in_app_template.version #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].application_id #=> String
@@ -5669,6 +5712,8 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].template_configuration.sms_template.version #=> String
     #   resp.campaigns_response.item[0].template_configuration.voice_template.name #=> String
     #   resp.campaigns_response.item[0].template_configuration.voice_template.version #=> String
+    #   resp.campaigns_response.item[0].template_configuration.in_app_template.name #=> String
+    #   resp.campaigns_response.item[0].template_configuration.in_app_template.version #=> String
     #   resp.campaigns_response.item[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].version #=> Integer
@@ -5850,6 +5895,8 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.sms_template.version #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.voice_template.name #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.voice_template.version #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.in_app_template.name #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.in_app_template.version #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].application_id #=> String
@@ -6012,6 +6059,8 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].template_configuration.sms_template.version #=> String
     #   resp.campaigns_response.item[0].template_configuration.voice_template.name #=> String
     #   resp.campaigns_response.item[0].template_configuration.voice_template.version #=> String
+    #   resp.campaigns_response.item[0].template_configuration.in_app_template.name #=> String
+    #   resp.campaigns_response.item[0].template_configuration.in_app_template.version #=> String
     #   resp.campaigns_response.item[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].version #=> Integer
@@ -6365,8 +6414,10 @@ module Aws::Pinpoint
     #   resp.gcm_channel_response.application_id #=> String
     #   resp.gcm_channel_response.creation_date #=> String
     #   resp.gcm_channel_response.credential #=> String
+    #   resp.gcm_channel_response.default_authentication_method #=> String
     #   resp.gcm_channel_response.enabled #=> Boolean
     #   resp.gcm_channel_response.has_credential #=> Boolean
+    #   resp.gcm_channel_response.has_fcm_service_credentials #=> Boolean
     #   resp.gcm_channel_response.id #=> String
     #   resp.gcm_channel_response.is_archived #=> Boolean
     #   resp.gcm_channel_response.last_modified_by #=> String
@@ -6822,6 +6873,9 @@ module Aws::Pinpoint
     #   resp.journey_response.limits.endpoint_reentry_cap #=> Integer
     #   resp.journey_response.limits.messages_per_second #=> Integer
     #   resp.journey_response.limits.endpoint_reentry_interval #=> String
+    #   resp.journey_response.limits.timeframe_cap.cap #=> Integer
+    #   resp.journey_response.limits.timeframe_cap.days #=> Integer
+    #   resp.journey_response.limits.total_cap #=> Integer
     #   resp.journey_response.local_time #=> Boolean
     #   resp.journey_response.name #=> String
     #   resp.journey_response.quiet_time.end #=> String
@@ -8487,6 +8541,9 @@ module Aws::Pinpoint
     #   resp.journeys_response.item[0].limits.endpoint_reentry_cap #=> Integer
     #   resp.journeys_response.item[0].limits.messages_per_second #=> Integer
     #   resp.journeys_response.item[0].limits.endpoint_reentry_interval #=> String
+    #   resp.journeys_response.item[0].limits.timeframe_cap.cap #=> Integer
+    #   resp.journeys_response.item[0].limits.timeframe_cap.days #=> Integer
+    #   resp.journeys_response.item[0].limits.total_cap #=> Integer
     #   resp.journeys_response.item[0].local_time #=> Boolean
     #   resp.journeys_response.item[0].name #=> String
     #   resp.journeys_response.item[0].quiet_time.end #=> String
@@ -9093,6 +9150,7 @@ module Aws::Pinpoint
     #           icon_reference: "__string",
     #           image_icon_url: "__string",
     #           image_url: "__string",
+    #           preferred_authentication_method: "__string",
     #           priority: "__string",
     #           raw_content: "__string",
     #           restricted_package_name: "__string",
@@ -9143,6 +9201,10 @@ module Aws::Pinpoint
     #           version: "__string",
     #         },
     #         voice_template: {
+    #           name: "__string",
+    #           version: "__string",
+    #         },
+    #         in_app_template: {
     #           name: "__string",
     #           version: "__string",
     #         },
@@ -9377,6 +9439,7 @@ module Aws::Pinpoint
     #           icon_reference: "__string",
     #           image_icon_url: "__string",
     #           image_url: "__string",
+    #           preferred_authentication_method: "__string",
     #           priority: "__string",
     #           raw_content: "__string",
     #           restricted_package_name: "__string",
@@ -9427,6 +9490,10 @@ module Aws::Pinpoint
     #           version: "__string",
     #         },
     #         voice_template: {
+    #           name: "__string",
+    #           version: "__string",
+    #         },
+    #         in_app_template: {
     #           name: "__string",
     #           version: "__string",
     #         },
@@ -9818,6 +9885,14 @@ module Aws::Pinpoint
     #         end: "__string",
     #         start: "__string",
     #       },
+    #       journey_limits: {
+    #         daily_cap: 1,
+    #         timeframe_cap: {
+    #           cap: 1,
+    #           days: 1,
+    #         },
+    #         total_cap: 1,
+    #       },
     #     },
     #   })
     #
@@ -9835,6 +9910,10 @@ module Aws::Pinpoint
     #   resp.application_settings_resource.limits.session #=> Integer
     #   resp.application_settings_resource.quiet_time.end #=> String
     #   resp.application_settings_resource.quiet_time.start #=> String
+    #   resp.application_settings_resource.journey_limits.daily_cap #=> Integer
+    #   resp.application_settings_resource.journey_limits.timeframe_cap.cap #=> Integer
+    #   resp.application_settings_resource.journey_limits.timeframe_cap.days #=> Integer
+    #   resp.application_settings_resource.journey_limits.total_cap #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApplicationSettings AWS API Documentation
     #
@@ -10123,6 +10202,10 @@ module Aws::Pinpoint
     #               name: "__string",
     #               version: "__string",
     #             },
+    #             in_app_template: {
+    #               name: "__string",
+    #               version: "__string",
+    #             },
     #           },
     #           treatment_description: "__string",
     #           treatment_name: "__string",
@@ -10358,6 +10441,10 @@ module Aws::Pinpoint
     #           name: "__string",
     #           version: "__string",
     #         },
+    #         in_app_template: {
+    #           name: "__string",
+    #           version: "__string",
+    #         },
     #       },
     #       treatment_description: "__string",
     #       treatment_name: "__string",
@@ -10508,6 +10595,8 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.voice_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.voice_template.version #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.in_app_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.in_app_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
@@ -10670,6 +10759,8 @@ module Aws::Pinpoint
     #   resp.campaign_response.template_configuration.sms_template.version #=> String
     #   resp.campaign_response.template_configuration.voice_template.name #=> String
     #   resp.campaign_response.template_configuration.voice_template.version #=> String
+    #   resp.campaign_response.template_configuration.in_app_template.name #=> String
+    #   resp.campaign_response.template_configuration.in_app_template.version #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -10964,8 +11055,10 @@ module Aws::Pinpoint
     #   resp = client.update_gcm_channel({
     #     application_id: "__string", # required
     #     gcm_channel_request: { # required
-    #       api_key: "__string", # required
+    #       api_key: "__string",
+    #       default_authentication_method: "__string",
     #       enabled: false,
+    #       service_json: "__string",
     #     },
     #   })
     #
@@ -10974,8 +11067,10 @@ module Aws::Pinpoint
     #   resp.gcm_channel_response.application_id #=> String
     #   resp.gcm_channel_response.creation_date #=> String
     #   resp.gcm_channel_response.credential #=> String
+    #   resp.gcm_channel_response.default_authentication_method #=> String
     #   resp.gcm_channel_response.enabled #=> Boolean
     #   resp.gcm_channel_response.has_credential #=> Boolean
+    #   resp.gcm_channel_response.has_fcm_service_credentials #=> Boolean
     #   resp.gcm_channel_response.id #=> String
     #   resp.gcm_channel_response.is_archived #=> Boolean
     #   resp.gcm_channel_response.last_modified_by #=> String
@@ -11398,6 +11493,11 @@ module Aws::Pinpoint
     #         endpoint_reentry_cap: 1,
     #         messages_per_second: 1,
     #         endpoint_reentry_interval: "__string",
+    #         timeframe_cap: {
+    #           cap: 1,
+    #           days: 1,
+    #         },
+    #         total_cap: 1,
     #       },
     #       local_time: false,
     #       name: "__string", # required
@@ -11686,6 +11786,9 @@ module Aws::Pinpoint
     #   resp.journey_response.limits.endpoint_reentry_cap #=> Integer
     #   resp.journey_response.limits.messages_per_second #=> Integer
     #   resp.journey_response.limits.endpoint_reentry_interval #=> String
+    #   resp.journey_response.limits.timeframe_cap.cap #=> Integer
+    #   resp.journey_response.limits.timeframe_cap.days #=> Integer
+    #   resp.journey_response.limits.total_cap #=> Integer
     #   resp.journey_response.local_time #=> Boolean
     #   resp.journey_response.name #=> String
     #   resp.journey_response.quiet_time.end #=> String
@@ -11945,6 +12048,9 @@ module Aws::Pinpoint
     #   resp.journey_response.limits.endpoint_reentry_cap #=> Integer
     #   resp.journey_response.limits.messages_per_second #=> Integer
     #   resp.journey_response.limits.endpoint_reentry_interval #=> String
+    #   resp.journey_response.limits.timeframe_cap.cap #=> Integer
+    #   resp.journey_response.limits.timeframe_cap.days #=> Integer
+    #   resp.journey_response.limits.total_cap #=> Integer
     #   resp.journey_response.local_time #=> Boolean
     #   resp.journey_response.name #=> String
     #   resp.journey_response.quiet_time.end #=> String
@@ -12746,7 +12852,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2023-08-07)
+------------------
+
+* Feature - This release enables minimum of Images SamplingInterval to be as low as 200 milliseconds in Kinesis Video Stream Image feature.
+
 1.51.0 (2023-07-11)
 ------------------
 

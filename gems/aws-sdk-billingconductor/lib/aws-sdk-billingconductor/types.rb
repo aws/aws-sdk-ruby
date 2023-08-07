@@ -53,7 +53,8 @@ module Aws::BillingConductor
     end
 
     # The set of accounts that will be under the billing group. The set of
-    # accounts resemble the linked accounts in a consolidated family.
+    # accounts resemble the linked accounts in a consolidated billing
+    # family.
     #
     # @!attribute [rw] linked_account_ids
     #   The account IDs that make up the billing group. Account IDs must be
@@ -61,10 +62,17 @@ module Aws::BillingConductor
     #   another billing group.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] auto_associate
+    #   Specifies if this billing group will automatically associate newly
+    #   added Amazon Web Services accounts that join your consolidated
+    #   billing family.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/AccountGrouping AWS API Documentation
     #
     class AccountGrouping < Struct.new(
-      :linked_account_ids)
+      :linked_account_ids,
+      :auto_associate)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -341,6 +349,11 @@ module Aws::BillingConductor
     #   The reason why the billing group is in its current status.
     #   @return [String]
     #
+    # @!attribute [rw] account_grouping
+    #   Specifies if the billing group has automatic account association
+    #   (`AutoAssociate`) enabled.
+    #   @return [Types::ListBillingGroupAccountGrouping]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/BillingGroupListElement AWS API Documentation
     #
     class BillingGroupListElement < Struct.new(
@@ -353,7 +366,8 @@ module Aws::BillingConductor
       :creation_time,
       :last_modified_time,
       :status,
-      :status_reason)
+      :status_reason,
+      :account_grouping)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -417,7 +431,8 @@ module Aws::BillingConductor
     #
     # @!attribute [rw] account_grouping
     #   The set of accounts that will be under the billing group. The set of
-    #   accounts resemble the linked accounts in a consolidated family.
+    #   accounts resemble the linked accounts in a consolidated billing
+    #   family.
     #   @return [Types::AccountGrouping]
     #
     # @!attribute [rw] computation_preference
@@ -1244,6 +1259,22 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
+    # Specifies if the billing group has the following features enabled.
+    #
+    # @!attribute [rw] auto_associate
+    #   Specifies if this billing group will automatically associate newly
+    #   added Amazon Web Services accounts that join your consolidated
+    #   billing family.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListBillingGroupAccountGrouping AWS API Documentation
+    #
+    class ListBillingGroupAccountGrouping < Struct.new(
+      :auto_associate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The filter used to retrieve specific `BillingGroupCostReportElements`.
     #
     # @!attribute [rw] billing_group_arns
@@ -1324,12 +1355,19 @@ module Aws::BillingConductor
     #   specific time range
     #   @return [Array<String>]
     #
+    # @!attribute [rw] auto_associate
+    #   Specifies if this billing group will automatically associate newly
+    #   added Amazon Web Services accounts that join your consolidated
+    #   billing family.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListBillingGroupsFilter AWS API Documentation
     #
     class ListBillingGroupsFilter < Struct.new(
       :arns,
       :pricing_plan,
-      :statuses)
+      :statuses,
+      :auto_associate)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2254,6 +2292,22 @@ module Aws::BillingConductor
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # Specifies if the billing group has the following features enabled.
+    #
+    # @!attribute [rw] auto_associate
+    #   Specifies if this billing group will automatically associate newly
+    #   added Amazon Web Services accounts that join your consolidated
+    #   billing family.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/UpdateBillingGroupAccountGrouping AWS API Documentation
+    #
+    class UpdateBillingGroupAccountGrouping < Struct.new(
+      :auto_associate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the billing group being updated.
     #   @return [String]
@@ -2277,6 +2331,11 @@ module Aws::BillingConductor
     #   A description of the billing group.
     #   @return [String]
     #
+    # @!attribute [rw] account_grouping
+    #   Specifies if the billing group has automatic account association
+    #   (`AutoAssociate`) enabled.
+    #   @return [Types::UpdateBillingGroupAccountGrouping]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/UpdateBillingGroupInput AWS API Documentation
     #
     class UpdateBillingGroupInput < Struct.new(
@@ -2284,7 +2343,8 @@ module Aws::BillingConductor
       :name,
       :status,
       :computation_preference,
-      :description)
+      :description,
+      :account_grouping)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -2329,6 +2389,11 @@ module Aws::BillingConductor
     #   The reason why the billing group is in its current status.
     #   @return [String]
     #
+    # @!attribute [rw] account_grouping
+    #   Specifies if the billing group has automatic account association
+    #   (`AutoAssociate`) enabled.
+    #   @return [Types::UpdateBillingGroupAccountGrouping]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/UpdateBillingGroupOutput AWS API Documentation
     #
     class UpdateBillingGroupOutput < Struct.new(
@@ -2340,7 +2405,8 @@ module Aws::BillingConductor
       :size,
       :last_modified_time,
       :status,
-      :status_reason)
+      :status_reason,
+      :account_grouping)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -2692,7 +2758,7 @@ module Aws::BillingConductor
     end
 
     # The input doesn't match with the constraints specified by Amazon Web
-    # Services services.
+    # Services.
     #
     # @!attribute [rw] message
     #   @return [String]

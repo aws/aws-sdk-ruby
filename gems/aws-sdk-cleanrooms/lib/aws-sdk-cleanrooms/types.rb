@@ -80,6 +80,35 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # Optional. The member who can query can provide this placeholder for a
+    # literal data value in an analysis template.
+    #
+    # @!attribute [rw] name
+    #   The name of the parameter. The name must use only alphanumeric,
+    #   underscore (\_), or hyphen (-) characters but cannot start or end
+    #   with a hyphen.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_value
+    #   Optional. The default value that is applied in the analysis
+    #   template. The member who can query can override this value in the
+    #   query editor.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisParameter AWS API Documentation
+    #
+    class AnalysisParameter < Struct.new(
+      :name,
+      :type,
+      :default_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A specification about how data from the configured table can be used
     # in a query.
     #
@@ -88,8 +117,7 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of analysis rule. Valid values are `AGGREGATION` and
-    #   `LIST`.
+    #   The type of analysis rule.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -121,8 +149,8 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
-    # Enables query structure and specified queries that produce aggregate
-    # statistics.
+    # A type of analysis rule that enables query structure and specified
+    # queries that produce aggregate statistics.
     #
     # @!attribute [rw] aggregate_columns
     #   The columns that query runners are allowed to use in aggregation
@@ -174,6 +202,28 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # A type of analysis rule that enables the table owner to approve custom
+    # SQL queries on their configured tables.
+    #
+    # @!attribute [rw] allowed_analyses
+    #   The analysis templates that are allowed by the custom analysis rule.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_analysis_providers
+    #   The Amazon Web Services accounts that are allowed to query by the
+    #   custom analysis rule. Required when `allowedAnalyses` is
+    #   `ANY_QUERY`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisRuleCustom AWS API Documentation
+    #
+    class AnalysisRuleCustom < Struct.new(
+      :allowed_analyses,
+      :allowed_analysis_providers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A type of analysis rule that enables row-level analysis.
     #
     # @!attribute [rw] join_columns
@@ -182,7 +232,7 @@ module Aws::CleanRooms
     #   @return [Array<String>]
     #
     # @!attribute [rw] allowed_join_operators
-    #   Which logical operators (if any) are to be used in an INNER JOIN
+    #   The logical operators (if any) that are to be used in an INNER JOIN
     #   match condition. Default is `AND`.
     #   @return [Array<String>]
     #
@@ -201,13 +251,13 @@ module Aws::CleanRooms
     end
 
     # Controls on the query specifications that can be run on configured
-    # table..
+    # table.
     #
     # @note AnalysisRulePolicy is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AnalysisRulePolicy corresponding to the set member.
     #
     # @!attribute [rw] v1
     #   Controls on the query specifications that can be run on configured
-    #   table..
+    #   table.
     #   @return [Types::AnalysisRulePolicyV1]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisRulePolicy AWS API Documentation
@@ -224,7 +274,7 @@ module Aws::CleanRooms
     end
 
     # Controls on the query specifications that can be run on configured
-    # table..
+    # table.
     #
     # @note AnalysisRulePolicyV1 is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AnalysisRulePolicyV1 corresponding to the set member.
     #
@@ -238,11 +288,17 @@ module Aws::CleanRooms
     #   configured table.
     #   @return [Types::AnalysisRuleAggregation]
     #
+    # @!attribute [rw] custom
+    #   Analysis rule type that enables custom SQL queries on a configured
+    #   table.
+    #   @return [Types::AnalysisRuleCustom]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisRulePolicyV1 AWS API Documentation
     #
     class AnalysisRulePolicyV1 < Struct.new(
       :list,
       :aggregation,
+      :custom,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -250,7 +306,251 @@ module Aws::CleanRooms
 
       class List < AnalysisRulePolicyV1; end
       class Aggregation < AnalysisRulePolicyV1; end
+      class Custom < AnalysisRulePolicyV1; end
       class Unknown < AnalysisRulePolicyV1; end
+    end
+
+    # A relation within an analysis.
+    #
+    # @!attribute [rw] referenced_tables
+    #   The tables referenced in the analysis schema.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisSchema AWS API Documentation
+    #
+    class AnalysisSchema < Struct.new(
+      :referenced_tables)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The structure that defines the body of the analysis template.
+    #
+    # @note AnalysisSource is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note AnalysisSource is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AnalysisSource corresponding to the set member.
+    #
+    # @!attribute [rw] text
+    #   The query text.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisSource AWS API Documentation
+    #
+    class AnalysisSource < Struct.new(
+      :text,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Text < AnalysisSource; end
+      class Unknown < AnalysisSource; end
+    end
+
+    # The analysis template.
+    #
+    # @!attribute [rw] id
+    #   The identifier for the analysis template.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the analysis template.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_id
+    #   The unique ID for the associated collaboration of the analysis
+    #   template.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_arn
+    #   The unique ARN for the analysis template’s associated collaboration.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_id
+    #   The identifier of a member who created the analysis template.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_arn
+    #   The Amazon Resource Name (ARN) of the member who created the
+    #   analysis template.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the analysis template.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the analysis template.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time that the analysis template was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The time that the analysis template was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] schema
+    #   The entire schema object.
+    #   @return [Types::AnalysisSchema]
+    #
+    # @!attribute [rw] format
+    #   The format of the analysis template.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source of the analysis template.
+    #   @return [Types::AnalysisSource]
+    #
+    # @!attribute [rw] analysis_parameters
+    #   The parameters of the analysis template.
+    #   @return [Array<Types::AnalysisParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisTemplate AWS API Documentation
+    #
+    class AnalysisTemplate < Struct.new(
+      :id,
+      :arn,
+      :collaboration_id,
+      :collaboration_arn,
+      :membership_id,
+      :membership_arn,
+      :description,
+      :name,
+      :create_time,
+      :update_time,
+      :schema,
+      :format,
+      :source,
+      :analysis_parameters)
+      SENSITIVE = [:source]
+      include Aws::Structure
+    end
+
+    # The metadata of the analysis template.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the analysis template.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time that the analysis template summary was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the analysis template.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the analysis template.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_time
+    #   The time that the analysis template summary was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] membership_arn
+    #   The Amazon Resource Name (ARN) of the member who created the
+    #   analysis template.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_id
+    #   The identifier for a membership resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_arn
+    #   The unique ARN for the analysis template summary’s associated
+    #   collaboration.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_id
+    #   A unique identifier for the collaboration that the analysis template
+    #   summary belongs to. Currently accepts collaboration ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the analysis template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisTemplateSummary AWS API Documentation
+    #
+    class AnalysisTemplateSummary < Struct.new(
+      :arn,
+      :create_time,
+      :id,
+      :name,
+      :update_time,
+      :membership_arn,
+      :membership_id,
+      :collaboration_arn,
+      :collaboration_id,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of errors thrown by the call to retrieve multiple analysis
+    # templates within a collaboration by their identifiers.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the analysis template.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   An error code for the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A description of why the call failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/BatchGetCollaborationAnalysisTemplateError AWS API Documentation
+    #
+    class BatchGetCollaborationAnalysisTemplateError < Struct.new(
+      :arn,
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collaboration_identifier
+    #   A unique identifier for the collaboration that the analysis
+    #   templates belong to. Currently accepts collaboration ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_template_arns
+    #   The Amazon Resource Name (ARN) associated with the analysis template
+    #   within a collaboration.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/BatchGetCollaborationAnalysisTemplateInput AWS API Documentation
+    #
+    class BatchGetCollaborationAnalysisTemplateInput < Struct.new(
+      :collaboration_identifier,
+      :analysis_template_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collaboration_analysis_templates
+    #   The retrieved list of analysis templates within a collaboration.
+    #   @return [Array<Types::CollaborationAnalysisTemplate>]
+    #
+    # @!attribute [rw] errors
+    #   Error reasons for collaboration analysis templates that could not be
+    #   retrieved. One error is returned for every collaboration analysis
+    #   template that could not be retrieved.
+    #   @return [Array<Types::BatchGetCollaborationAnalysisTemplateError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/BatchGetCollaborationAnalysisTemplateOutput AWS API Documentation
+    #
+    class BatchGetCollaborationAnalysisTemplateOutput < Struct.new(
+      :collaboration_analysis_templates,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # An error describing why a schema could not be fetched.
@@ -392,6 +692,143 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # The analysis template within a collaboration.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the analysis template.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the analysis template.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_id
+    #   A unique identifier for the collaboration that the analysis
+    #   templates belong to. Currently accepts collaboration ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_arn
+    #   The unique ARN for the analysis template’s associated collaboration.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the analysis template.
+    #   @return [String]
+    #
+    # @!attribute [rw] creator_account_id
+    #   The identifier used to reference members of the collaboration.
+    #   Currently only supports Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the analysis template.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time that the analysis template within a collaboration was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The time that the analysis template in the collaboration was last
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] schema
+    #   The entire schema object.
+    #   @return [Types::AnalysisSchema]
+    #
+    # @!attribute [rw] format
+    #   The format of the analysis template in the collaboration.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source of the analysis template within a collaboration.
+    #   @return [Types::AnalysisSource]
+    #
+    # @!attribute [rw] analysis_parameters
+    #   The analysis parameters that have been specified in the analysis
+    #   template.
+    #   @return [Array<Types::AnalysisParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationAnalysisTemplate AWS API Documentation
+    #
+    class CollaborationAnalysisTemplate < Struct.new(
+      :id,
+      :arn,
+      :collaboration_id,
+      :collaboration_arn,
+      :description,
+      :creator_account_id,
+      :name,
+      :create_time,
+      :update_time,
+      :schema,
+      :format,
+      :source,
+      :analysis_parameters)
+      SENSITIVE = [:source]
+      include Aws::Structure
+    end
+
+    # The metadata of the analysis template within a collaboration.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the analysis template.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time that the summary of the analysis template in a
+    #   collaboration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the analysis template.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the analysis template.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_time
+    #   The time that the summary of the analysis template in the
+    #   collaboration was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] collaboration_arn
+    #   The unique ARN for the analysis template’s associated collaboration.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_id
+    #   A unique identifier for the collaboration that the analysis
+    #   templates belong to. Currently accepts collaboration ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] creator_account_id
+    #   The identifier used to reference members of the collaboration.
+    #   Currently only supports Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the analysis template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationAnalysisTemplateSummary AWS API Documentation
+    #
+    class CollaborationAnalysisTemplateSummary < Struct.new(
+      :arn,
+      :create_time,
+      :id,
+      :name,
+      :update_time,
+      :collaboration_arn,
+      :collaboration_id,
+      :creator_account_id,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The metadata of the collaboration.
     #
     # @!attribute [rw] id
@@ -505,8 +942,8 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] analysis_rule_types
     #   The types of analysis rules associated with this configured table.
-    #   Valid values are `AGGREGATION` and `LIST`. Currently, only one
-    #   analysis rule may be associated with a configured table.
+    #   Currently, only one analysis rule may be associated with a
+    #   configured table.
     #   @return [Array<String>]
     #
     # @!attribute [rw] analysis_method
@@ -552,8 +989,7 @@ module Aws::CleanRooms
     #   @return [Types::ConfiguredTableAnalysisRulePolicy]
     #
     # @!attribute [rw] type
-    #   The type of configured table analysis rule. Valid values are
-    #   `AGGREGATION` and `LIST`.
+    #   The type of configured table analysis rule.
     #   @return [String]
     #
     # @!attribute [rw] create_time
@@ -619,11 +1055,17 @@ module Aws::CleanRooms
     #   configured table.
     #   @return [Types::AnalysisRuleAggregation]
     #
+    # @!attribute [rw] custom
+    #   A type of analysis rule that enables the table owner to approve
+    #   custom SQL queries on their configured tables.
+    #   @return [Types::AnalysisRuleCustom]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ConfiguredTableAnalysisRulePolicyV1 AWS API Documentation
     #
     class ConfiguredTableAnalysisRulePolicyV1 < Struct.new(
       :list,
       :aggregation,
+      :custom,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -631,6 +1073,7 @@ module Aws::CleanRooms
 
       class List < ConfiguredTableAnalysisRulePolicyV1; end
       class Aggregation < ConfiguredTableAnalysisRulePolicyV1; end
+      class Custom < ConfiguredTableAnalysisRulePolicyV1; end
       class Unknown < ConfiguredTableAnalysisRulePolicyV1; end
     end
 
@@ -834,6 +1277,64 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # @!attribute [rw] description
+    #   The description of the analysis template.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The identifier for a membership resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the analysis template.
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   The format of the analysis template.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The information in the analysis template. Currently supports `text`,
+    #   the query text for the analysis template.
+    #   @return [Types::AnalysisSource]
+    #
+    # @!attribute [rw] tags
+    #   An optional label that you can assign to a resource when you create
+    #   it. Each tag consists of a key and an optional value, both of which
+    #   you define. When you use tagging, you can also use tag-based access
+    #   control in IAM policies to control access to this resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] analysis_parameters
+    #   The parameters of the analysis template.
+    #   @return [Array<Types::AnalysisParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateAnalysisTemplateInput AWS API Documentation
+    #
+    class CreateAnalysisTemplateInput < Struct.new(
+      :description,
+      :membership_identifier,
+      :name,
+      :format,
+      :source,
+      :tags,
+      :analysis_parameters)
+      SENSITIVE = [:source]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analysis_template
+    #   The analysis template.
+    #   @return [Types::AnalysisTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateAnalysisTemplateOutput AWS API Documentation
+    #
+    class CreateAnalysisTemplateOutput < Struct.new(
+      :analysis_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] members
     #   A list of initial members, not including the creator. This list is
     #   immutable.
@@ -906,7 +1407,7 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] analysis_rule_type
-    #   The type of analysis rule. Valid values are AGGREGATION and LIST.
+    #   The type of analysis rule.
     #   @return [String]
     #
     # @!attribute [rw] analysis_rule_policy
@@ -1118,6 +1619,27 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # @!attribute [rw] membership_identifier
+    #   The identifier for a membership resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_template_identifier
+    #   The identifier for the analysis template resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DeleteAnalysisTemplateInput AWS API Documentation
+    #
+    class DeleteAnalysisTemplateInput < Struct.new(
+      :membership_identifier,
+      :analysis_template_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DeleteAnalysisTemplateOutput AWS API Documentation
+    #
+    class DeleteAnalysisTemplateOutput < Aws::EmptyStructure; end
+
     # @!attribute [rw] collaboration_identifier
     #   The identifier for the collaboration.
     #   @return [String]
@@ -1237,6 +1759,66 @@ module Aws::CleanRooms
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DeleteMembershipOutput AWS API Documentation
     #
     class DeleteMembershipOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] membership_identifier
+    #   The identifier for a membership resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_template_identifier
+    #   The identifier for the analysis template resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetAnalysisTemplateInput AWS API Documentation
+    #
+    class GetAnalysisTemplateInput < Struct.new(
+      :membership_identifier,
+      :analysis_template_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analysis_template
+    #   The analysis template.
+    #   @return [Types::AnalysisTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetAnalysisTemplateOutput AWS API Documentation
+    #
+    class GetAnalysisTemplateOutput < Struct.new(
+      :analysis_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collaboration_identifier
+    #   A unique identifier for the collaboration that the analysis
+    #   templates belong to. Currently accepts collaboration ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_template_arn
+    #   The Amazon Resource Name (ARN) associated with the analysis template
+    #   within a collaboration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetCollaborationAnalysisTemplateInput AWS API Documentation
+    #
+    class GetCollaborationAnalysisTemplateInput < Struct.new(
+      :collaboration_identifier,
+      :analysis_template_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collaboration_analysis_template
+    #   The analysis template within a collaboration.
+    #   @return [Types::CollaborationAnalysisTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetCollaborationAnalysisTemplateOutput AWS API Documentation
+    #
+    class GetCollaborationAnalysisTemplateOutput < Struct.new(
+      :collaboration_analysis_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] collaboration_identifier
     #   The identifier for the collaboration.
@@ -1498,6 +2080,89 @@ module Aws::CleanRooms
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   The identifier for a membership resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of the results that is returned per call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListAnalysisTemplatesInput AWS API Documentation
+    #
+    class ListAnalysisTemplatesInput < Struct.new(
+      :membership_identifier,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_template_summaries
+    #   Lists analysis template metadata.
+    #   @return [Array<Types::AnalysisTemplateSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListAnalysisTemplatesOutput AWS API Documentation
+    #
+    class ListAnalysisTemplatesOutput < Struct.new(
+      :next_token,
+      :analysis_template_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collaboration_identifier
+    #   A unique identifier for the collaboration that the analysis
+    #   templates belong to. Currently accepts collaboration ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of the results that is returned per call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationAnalysisTemplatesInput AWS API Documentation
+    #
+    class ListCollaborationAnalysisTemplatesInput < Struct.new(
+      :collaboration_identifier,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_analysis_template_summaries
+    #   The metadata of the analysis template within a collaboration.
+    #   @return [Array<Types::CollaborationAnalysisTemplateSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationAnalysisTemplatesOutput AWS API Documentation
+    #
+    class ListCollaborationAnalysisTemplatesOutput < Struct.new(
+      :next_token,
+      :collaboration_analysis_template_summaries)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2238,10 +2903,21 @@ module Aws::CleanRooms
     #   The query string to be submitted.
     #   @return [String]
     #
+    # @!attribute [rw] analysis_template_arn
+    #   The Amazon Resource Name (ARN) associated with the analysis template
+    #   within a collaboration.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The protected query SQL parameters.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedQuerySQLParameters AWS API Documentation
     #
     class ProtectedQuerySQLParameters < Struct.new(
-      :query_string)
+      :query_string,
+      :analysis_template_arn,
+      :parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2332,8 +3008,8 @@ module Aws::CleanRooms
     #   @return [Array<Types::Column>]
     #
     # @!attribute [rw] analysis_rule_types
-    #   The analysis rule types associated with the schema. Valued values
-    #   are LIST and AGGREGATION. Currently, only one entry is present.
+    #   The analysis rule types associated with the schema. Currently, only
+    #   one entry is present.
     #   @return [Array<String>]
     #
     # @!attribute [rw] analysis_method
@@ -2596,6 +3272,40 @@ module Aws::CleanRooms
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UntagResourceOutput AWS API Documentation
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] membership_identifier
+    #   The identifier for a membership resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_template_identifier
+    #   The identifier for the analysis template resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A new description for the analysis template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateAnalysisTemplateInput AWS API Documentation
+    #
+    class UpdateAnalysisTemplateInput < Struct.new(
+      :membership_identifier,
+      :analysis_template_identifier,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analysis_template
+    #   The analysis template.
+    #   @return [Types::AnalysisTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateAnalysisTemplateOutput AWS API Documentation
+    #
+    class UpdateAnalysisTemplateOutput < Struct.new(
+      :analysis_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] collaboration_identifier
     #   The identifier for the collaboration.

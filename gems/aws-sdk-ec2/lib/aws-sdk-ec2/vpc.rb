@@ -317,11 +317,10 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, Array<String>] :groups
-    #   The ID of one or more of the VPC's security groups. You cannot
-    #   specify security groups from a different VPC.
+    #   The IDs of the security groups. You cannot specify security groups
+    #   from a different VPC.
     # @option options [required, String] :instance_id
-    #   The ID of an EC2-Classic instance to link to the ClassicLink-enabled
-    #   VPC.
+    #   The ID of the EC2-Classic instance.
     # @return [Types::AttachClassicLinkVpcResult]
     def attach_classic_link_instance(options = {})
       options = options.merge(vpc_id: @id)
@@ -452,18 +451,14 @@ module Aws::EC2
     #
     #   Constraints: Up to 255 characters in length
     #
-    #   Constraints for EC2-Classic: ASCII characters
-    #
-    #   Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and
+    #   Valid characters: a-z, A-Z, 0-9, spaces, and
     #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
     # @option options [required, String] :group_name
     #   The name of the security group.
     #
     #   Constraints: Up to 255 characters in length. Cannot start with `sg-`.
     #
-    #   Constraints for EC2-Classic: ASCII characters
-    #
-    #   Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and
+    #   Valid characters: a-z, A-Z, 0-9, spaces, and
     #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the security group.
@@ -518,15 +513,14 @@ module Aws::EC2
     #
     #   To create a subnet in a Local Zone, set this value to the Local Zone
     #   ID, for example `us-west-2-lax-1a`. For information about the Regions
-    #   that support Local Zones, see [Available Regions][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   that support Local Zones, see [Local Zones locations][1].
     #
     #   To create a subnet in an Outpost, set this value to the Availability
     #   Zone for the Outpost and specify the Outpost ARN.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions
+    #   [1]: http://aws.amazon.com/about-aws/global-infrastructure/localzones/locations/
     # @option options [String] :availability_zone_id
     #   The AZ ID or the Local Zone ID of the subnet.
     # @option options [String] :cidr_block
@@ -892,7 +886,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `accepter-vpc-info.cidr-block` - The IPv4 CIDR block of the accepter
     #     VPC.
@@ -937,7 +931,7 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<String>] :vpc_peering_connection_ids
-    #   One or more VPC peering connection IDs.
+    #   The IDs of the VPC peering connections.
     #
     #   Default: Describes all your VPC peering connections.
     # @return [VpcPeeringConnection::Collection]
@@ -1320,7 +1314,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `attachment.state` - The current state of the attachment between the
     #     gateway and the VPC (`available`). Present only if a VPC is
@@ -1348,7 +1342,7 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<String>] :internet_gateway_ids
-    #   One or more internet gateway IDs.
+    #   The IDs of the internet gateways.
     #
     #   Default: Describes all your internet gateways.
     # @return [InternetGateway::Collection]
@@ -1390,7 +1384,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `association.association-id` - The ID of an association ID for the
     #     ACL.
@@ -1452,7 +1446,7 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<String>] :network_acl_ids
-    #   One or more network ACL IDs.
+    #   The IDs of the network ACLs.
     #
     #   Default: Describes all your network ACLs.
     # @return [NetworkAcl::Collection]
@@ -1658,7 +1652,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `accepter-vpc-info.cidr-block` - The IPv4 CIDR block of the accepter
     #     VPC.
@@ -1703,7 +1697,7 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<String>] :vpc_peering_connection_ids
-    #   One or more VPC peering connection IDs.
+    #   The IDs of the VPC peering connections.
     #
     #   Default: Describes all your VPC peering connections.
     # @return [VpcPeeringConnection::Collection]
@@ -1745,7 +1739,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `association.route-table-association-id` - The ID of an association
     #     ID for the route table.
@@ -1820,7 +1814,7 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<String>] :route_table_ids
-    #   One or more route table IDs.
+    #   The IDs of the route tables.
     #
     #   Default: Describes all your route tables.
     # @return [RouteTable::Collection]
@@ -1950,10 +1944,8 @@ module Aws::EC2
     #
     #   Default: Describes all of your security groups.
     # @option options [Array<String>] :group_names
-    #   \[EC2-Classic and default VPC only\] The names of the security groups.
-    #   You can specify either the security group name or the security group
-    #   ID. For security groups in a nondefault VPC, use the `group-name`
-    #   filter to describe security groups by name.
+    #   \[Default VPC\] The names of the security groups. You can specify
+    #   either the security group name or the security group ID.
     #
     #   Default: Describes all of your security groups.
     # @option options [Boolean] :dry_run
@@ -2000,7 +1992,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `availability-zone` - The Availability Zone for the subnet. You can
     #     also use `availabilityZone` as the filter name.
@@ -2089,7 +2081,7 @@ module Aws::EC2
     #
     #   * `vpc-id` - The ID of the VPC for the subnet.
     # @option options [Array<String>] :subnet_ids
-    #   One or more subnet IDs.
+    #   The IDs of the subnets.
     #
     #   Default: Describes all your subnets.
     # @option options [Boolean] :dry_run

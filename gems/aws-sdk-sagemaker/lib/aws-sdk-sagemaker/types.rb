@@ -2858,7 +2858,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] end_time_offset
-    #   If specified, monitoring jobs substract this time from the end time.
+    #   If specified, monitoring jobs subtract this time from the end time.
     #   For information about using offsets for scheduling monitoring jobs,
     #   see [Schedule Model Quality Monitoring Jobs][1].
     #
@@ -3103,11 +3103,16 @@ module Aws::SageMaker
     #   The model registry settings for the SageMaker Canvas application.
     #   @return [Types::ModelRegisterSettings]
     #
+    # @!attribute [rw] workspace_settings
+    #   The workspace settings for the SageMaker Canvas application.
+    #   @return [Types::WorkspaceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CanvasAppSettings AWS API Documentation
     #
     class CanvasAppSettings < Struct.new(
       :time_series_forecasting_settings,
-      :model_register_settings)
+      :model_register_settings,
+      :workspace_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8832,6 +8837,30 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A customized metric.
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the customized metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace of the customized metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistic
+    #   The statistic of the customized metric.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CustomizedMetricSpecification AWS API Documentation
+    #
+    class CustomizedMetricSpecification < Struct.new(
+      :metric_name,
+      :namespace,
+      :statistic)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration to control how SageMaker captures inference data.
     #
     # @!attribute [rw] enable_capture
@@ -11951,6 +11980,12 @@ module Aws::SageMaker
     #     for information about the failure. [DeleteEndpoint][4] is the only
     #     operation that can be performed on a failed endpoint.
     #
+    #   * `UpdateRollbackFailed`: Both the rolling deployment and
+    #     auto-rollback failed. Your endpoint is in service with a mix of
+    #     the old and new endpoint configurations. For information about how
+    #     to remedy this issue and restore the endpoint's status to
+    #     `InService`, see [Rolling Deployments][6].
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html
@@ -11958,6 +11993,7 @@ module Aws::SageMaker
     #   [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpointWeightsAndCapacities.html
     #   [4]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteEndpoint.html
     #   [5]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpoint.html
+    #   [6]: https://docs.aws.amazon.com/sagemaker/latest/dg/deployment-guardrails-rolling.html
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
@@ -12094,7 +12130,8 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] feature_group_name
-    #   The name of the `FeatureGroup` you want described.
+    #   The name or Amazon Resource Name (ARN) of the `FeatureGroup` you
+    #   want described.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -12235,7 +12272,8 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] feature_group_name
-    #   The name of the feature group containing the feature.
+    #   The name or Amazon Resource Name (ARN) of the feature group
+    #   containing the feature.
     #   @return [String]
     #
     # @!attribute [rw] feature_name
@@ -16481,6 +16519,43 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # An object with the recommended values for you to specify when creating
+    # an autoscaling policy.
+    #
+    # @!attribute [rw] min_capacity
+    #   The recommended minimum capacity to specify for your autoscaling
+    #   policy.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_capacity
+    #   The recommended maximum capacity to specify for your autoscaling
+    #   policy.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scale_in_cooldown
+    #   The recommended scale in cooldown time for your autoscaling policy.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scale_out_cooldown
+    #   The recommended scale out cooldown time for your autoscaling policy.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scaling_policies
+    #   An object of the scaling policies for each metric.
+    #   @return [Array<Types::ScalingPolicy>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DynamicScalingConfiguration AWS API Documentation
+    #
+    class DynamicScalingConfiguration < Struct.new(
+      :min_capacity,
+      :max_capacity,
+      :scale_in_cooldown,
+      :scale_out_cooldown,
+      :scaling_policies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configurations and outcomes of an Amazon EMR step execution.
     #
     # @!attribute [rw] cluster_id
@@ -17737,7 +17812,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The name, Arn, `CreationTime`, `FeatureGroup` values,
+    # The name, ARN, `CreationTime`, `FeatureGroup` values,
     # `LastUpdatedTime` and `EnableOnlineStorage` status of a
     # `FeatureGroup`.
     #
@@ -18369,6 +18444,99 @@ module Aws::SageMaker
     #
     class GetSagemakerServicecatalogPortfolioStatusOutput < Struct.new(
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inference_recommendations_job_name
+    #   The name of a previously completed Inference Recommender job.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommendation_id
+    #   The recommendation ID of a previously completed inference
+    #   recommendation. This ID should come from one of the recommendations
+    #   returned by the job specified in the
+    #   `InferenceRecommendationsJobName` field.
+    #
+    #   Specify either this field or the `EndpointName` field.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_name
+    #   The name of an endpoint benchmarked during a previously completed
+    #   inference recommendation job. This name should come from one of the
+    #   recommendations returned by the job specified in the
+    #   `InferenceRecommendationsJobName` field.
+    #
+    #   Specify either this field or the `RecommendationId` field.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_cpu_utilization_per_core
+    #   The percentage of how much utilization you want an instance to use
+    #   before autoscaling. The default value is 50%.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scaling_policy_objective
+    #   An object where you specify the anticipated traffic pattern for an
+    #   endpoint.
+    #   @return [Types::ScalingPolicyObjective]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GetScalingConfigurationRecommendationRequest AWS API Documentation
+    #
+    class GetScalingConfigurationRecommendationRequest < Struct.new(
+      :inference_recommendations_job_name,
+      :recommendation_id,
+      :endpoint_name,
+      :target_cpu_utilization_per_core,
+      :scaling_policy_objective)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inference_recommendations_job_name
+    #   The name of a previously completed Inference Recommender job.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommendation_id
+    #   The recommendation ID of a previously completed inference
+    #   recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_name
+    #   The name of an endpoint benchmarked during a previously completed
+    #   Inference Recommender job.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_cpu_utilization_per_core
+    #   The percentage of how much utilization you want an instance to use
+    #   before autoscaling, which you specified in the request. The default
+    #   value is 50%.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scaling_policy_objective
+    #   An object representing the anticipated traffic pattern for an
+    #   endpoint that you specified in the request.
+    #   @return [Types::ScalingPolicyObjective]
+    #
+    # @!attribute [rw] metric
+    #   An object with a list of metrics that were benchmarked during the
+    #   previously completed Inference Recommender job.
+    #   @return [Types::ScalingPolicyMetric]
+    #
+    # @!attribute [rw] dynamic_scaling_configuration
+    #   An object with the recommended values for you to specify when
+    #   creating an autoscaling policy.
+    #   @return [Types::DynamicScalingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GetScalingConfigurationRecommendationResponse AWS API Documentation
+    #
+    class GetScalingConfigurationRecommendationResponse < Struct.new(
+      :inference_recommendations_job_name,
+      :recommendation_id,
+      :endpoint_name,
+      :target_cpu_utilization_per_core,
+      :scaling_policy_objective,
+      :metric,
+      :dynamic_scaling_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26765,6 +26933,68 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] name_contains
+    #   A string that partially matches one or more `ResourceCatalog`s
+    #   names. Filters `ResourceCatalog` by name.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time_after
+    #   Use this parameter to search for `ResourceCatalog`s created after a
+    #   specific date and time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   Use this parameter to search for `ResourceCatalog`s created before a
+    #   specific date and time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] sort_order
+    #   The order in which the resource catalogs are listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The value on which the resource catalog list is sorted.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results returned by `ListResourceCatalogs`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to resume pagination of `ListResourceCatalogs` results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListResourceCatalogsRequest AWS API Documentation
+    #
+    class ListResourceCatalogsRequest < Struct.new(
+      :name_contains,
+      :creation_time_after,
+      :creation_time_before,
+      :sort_order,
+      :sort_by,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_catalogs
+    #   A list of the requested `ResourceCatalog`s.
+    #   @return [Array<Types::ResourceCatalog>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to resume pagination of `ListResourceCatalogs` results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListResourceCatalogsResponse AWS API Documentation
+    #
+    class ListResourceCatalogsResponse < Struct.new(
+      :resource_catalogs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   If the previous response was truncated, you will receive this token.
     #   Use it in your next request to receive the next set of results.
@@ -27770,6 +28000,33 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # An object containing information about a metric.
+    #
+    # @note MetricSpecification is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of MetricSpecification corresponding to the set member.
+    #
+    # @!attribute [rw] predefined
+    #   Information about a predefined metric.
+    #   @return [Types::PredefinedMetricSpecification]
+    #
+    # @!attribute [rw] customized
+    #   Information about a customized metric.
+    #   @return [Types::CustomizedMetricSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MetricSpecification AWS API Documentation
+    #
+    class MetricSpecification < Struct.new(
+      :predefined,
+      :customized,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Predefined < MetricSpecification; end
+      class Customized < MetricSpecification; end
+      class Unknown < MetricSpecification; end
+    end
+
     # Details about the metrics source.
     #
     # @!attribute [rw] content_type
@@ -28758,7 +29015,8 @@ module Aws::SageMaker
     # The model latency threshold.
     #
     # @!attribute [rw] percentile
-    #   The model latency percentile threshold.
+    #   The model latency percentile threshold. For custom load tests,
+    #   specify the value as `P95`.
     #   @return [String]
     #
     # @!attribute [rw] value_in_milliseconds
@@ -31670,7 +31928,8 @@ module Aws::SageMaker
     # Defines the traffic pattern.
     #
     # @!attribute [rw] initial_number_of_users
-    #   Specifies how many concurrent users to start with.
+    #   Specifies how many concurrent users to start with. The value should
+    #   be between 1 and 3.
     #   @return [Integer]
     #
     # @!attribute [rw] spawn_rate
@@ -31678,7 +31937,9 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] duration_in_seconds
-    #   Specifies how long traffic phase should be.
+    #   Specifies how long a traffic phase should be. For custom load tests,
+    #   the value should be between 120 and 3600. This value should not
+    #   exceed `JobDurationInSeconds`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Phase AWS API Documentation
@@ -32184,6 +32445,21 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       :last_execution_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A specification for a predefined metric.
+    #
+    # @!attribute [rw] predefined_metric_type
+    #   The metric type. You can only apply SageMaker metric types to
+    #   SageMaker endpoints.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PredefinedMetricSpecification AWS API Documentation
+    #
+    class PredefinedMetricSpecification < Struct.new(
+      :predefined_metric_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34194,7 +34470,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] job_duration_in_seconds
-    #   Specifies the maximum duration of the job, in seconds.&gt;
+    #   Specifies the maximum duration of the job, in seconds. The maximum
+    #   value is 7200.
     #   @return [Integer]
     #
     # @!attribute [rw] traffic_pattern
@@ -34393,11 +34670,19 @@ module Aws::SageMaker
     #   container.
     #   @return [Array<Types::ModelLatencyThreshold>]
     #
+    # @!attribute [rw] flat_invocations
+    #   Stops a load test when the number of invocations (TPS) peaks and
+    #   flattens, which means that the instance has reached capacity. The
+    #   default value is `Stop`. If you want the load test to continue after
+    #   invocations have flattened, set the value to `Continue`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobStoppingConditions AWS API Documentation
     #
     class RecommendationJobStoppingConditions < Struct.new(
       :max_invocations,
-      :model_latency_thresholds)
+      :model_latency_thresholds,
+      :flat_invocations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34718,6 +35003,43 @@ module Aws::SageMaker
       :auto_ml_job_objective,
       :problem_type,
       :completion_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A resource catalog containing all of the resources of a specific
+    # resource type within a resource owner account. For an example on
+    # sharing the Amazon SageMaker Feature Store
+    # `DefaultFeatureGroupCatalog`, see [Share Amazon SageMaker Catalog
+    # resource type][1] in the Amazon SageMaker Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/feature-store-cross-account-discoverability-share-sagemaker-catalog.html
+    #
+    # @!attribute [rw] resource_catalog_arn
+    #   The Amazon Resource Name (ARN) of the `ResourceCatalog`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_catalog_name
+    #   The name of the `ResourceCatalog`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A free form description of the `ResourceCatalog`.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time the `ResourceCatalog` was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceCatalog AWS API Documentation
+    #
+    class ResourceCatalog < Struct.new(
+      :resource_catalog_arn,
+      :resource_catalog_name,
+      :description,
+      :creation_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35057,15 +35379,10 @@ module Aws::SageMaker
     # endpoint.
     #
     # @!attribute [rw] maximum_batch_size
-    #   Specifies the type and size of the endpoint capacity to activate for
-    #   a blue/green deployment, a rolling deployment, or a rollback
-    #   strategy. You can specify your batches as either instance count or
-    #   the overall percentage or your fleet.
-    #
-    #   For a rollback strategy, if you don't specify the fields in this
-    #   object, or if you set the `Value` to 100%, then SageMaker uses a
-    #   blue/green rollback strategy and rolls all traffic back to the blue
-    #   fleet.
+    #   Batch size for each rolling step to provision capacity and turn on
+    #   traffic on the new endpoint fleet, and terminate capacity on the old
+    #   endpoint fleet. Value must be between 5% to 50% of the variant's
+    #   total instance count.
     #   @return [Types::CapacitySize]
     #
     # @!attribute [rw] wait_interval_in_seconds
@@ -35079,15 +35396,12 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] rollback_maximum_batch_size
-    #   Specifies the type and size of the endpoint capacity to activate for
-    #   a blue/green deployment, a rolling deployment, or a rollback
-    #   strategy. You can specify your batches as either instance count or
-    #   the overall percentage or your fleet.
-    #
-    #   For a rollback strategy, if you don't specify the fields in this
-    #   object, or if you set the `Value` to 100%, then SageMaker uses a
-    #   blue/green rollback strategy and rolls all traffic back to the blue
-    #   fleet.
+    #   Batch size for rollback to the old endpoint fleet. Each rolling step
+    #   to provision capacity and turn on traffic on the old endpoint fleet,
+    #   and terminate capacity on the new endpoint fleet. If this field is
+    #   absent, the default value will be set to 100% of total capacity
+    #   which means to bring up the whole capacity of the old fleet at once
+    #   during rollback.
     #   @return [Types::CapacitySize]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RollingUpdatePolicy AWS API Documentation
@@ -35352,6 +35666,75 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # An object containing a recommended scaling policy.
+    #
+    # @note ScalingPolicy is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ScalingPolicy corresponding to the set member.
+    #
+    # @!attribute [rw] target_tracking
+    #   A target tracking scaling policy. Includes support for predefined or
+    #   customized metrics.
+    #   @return [Types::TargetTrackingScalingPolicyConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ScalingPolicy AWS API Documentation
+    #
+    class ScalingPolicy < Struct.new(
+      :target_tracking,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class TargetTracking < ScalingPolicy; end
+      class Unknown < ScalingPolicy; end
+    end
+
+    # The metric for a scaling policy.
+    #
+    # @!attribute [rw] invocations_per_instance
+    #   The number of invocations sent to a model, normalized by
+    #   `InstanceCount` in each ProductionVariant. `1/numberOfInstances` is
+    #   sent as the value on each request, where `numberOfInstances` is the
+    #   number of active instances for the ProductionVariant behind the
+    #   endpoint at the time of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] model_latency
+    #   The interval of time taken by a model to respond as viewed from
+    #   SageMaker. This interval includes the local communication times
+    #   taken to send the request and to fetch the response from the
+    #   container of a model and the time taken to complete the inference in
+    #   the container.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ScalingPolicyMetric AWS API Documentation
+    #
+    class ScalingPolicyMetric < Struct.new(
+      :invocations_per_instance,
+      :model_latency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object where you specify the anticipated traffic pattern for an
+    # endpoint.
+    #
+    # @!attribute [rw] min_invocations_per_minute
+    #   The minimum number of expected requests to your endpoint per minute.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_invocations_per_minute
+    #   The maximum number of expected requests to your endpoint per minute.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ScalingPolicyObjective AWS API Documentation
+    #
+    class ScalingPolicyObjective < Struct.new(
+      :min_invocations_per_minute,
+      :max_invocations_per_minute)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration details about the monitoring schedule.
     #
     # @!attribute [rw] schedule_expression
@@ -35584,6 +35967,21 @@ module Aws::SageMaker
     #   The maximum number of results to return.
     #   @return [Integer]
     #
+    # @!attribute [rw] cross_account_filter_option
+    #   A cross account filter option. When the value is `"CrossAccount"`
+    #   the search results will only include resources made discoverable to
+    #   you from other accounts. When the value is `"SameAccount"` or `null`
+    #   the search results will only include resources from your account.
+    #   Default is `null`. For more information on searching for resources
+    #   made discoverable to your account, see [ Search discoverable
+    #   resources][1] in the SageMaker Developer Guide. The maximum number
+    #   of `ResourceCatalog`s viewable is 1000.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-cross-account-discoverability-use.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchRequest AWS API Documentation
     #
     class SearchRequest < Struct.new(
@@ -35592,7 +35990,8 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       :next_token,
-      :max_results)
+      :max_results,
+      :cross_account_filter_option)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -36220,6 +36619,34 @@ module Aws::SageMaker
     class SpaceSettings < Struct.new(
       :jupyter_server_app_settings,
       :kernel_gateway_app_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the stairs traffic pattern for an Inference Recommender load
+    # test. This pattern type consists of multiple steps where the number of
+    # users increases at each step.
+    #
+    # Specify either the stairs or phases traffic pattern.
+    #
+    # @!attribute [rw] duration_in_seconds
+    #   Defines how long each traffic step should be.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_steps
+    #   Specifies how many steps to perform during traffic.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] users_per_step
+    #   Specifies how many new users to spawn in each step.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Stairs AWS API Documentation
+    #
+    class Stairs < Struct.new(
+      :duration_in_seconds,
+      :number_of_steps,
+      :users_per_step)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -36997,6 +37424,35 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A target tracking scaling policy. Includes support for predefined or
+    # customized metrics.
+    #
+    # When using the [PutScalingPolicy][1] API, this parameter is required
+    # when you are creating a policy with the policy type
+    # `TargetTrackingScaling`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/application/APIReference/API_PutScalingPolicy.html
+    #
+    # @!attribute [rw] metric_specification
+    #   An object containing information about a metric.
+    #   @return [Types::MetricSpecification]
+    #
+    # @!attribute [rw] target_value
+    #   The recommended target value to specify for the metric when creating
+    #   a scaling policy.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TargetTrackingScalingPolicyConfiguration AWS API Documentation
+    #
+    class TargetTrackingScalingPolicyConfiguration < Struct.new(
+      :metric_specification,
+      :target_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The TensorBoard app settings.
     #
     # @!attribute [rw] default_resource_spec
@@ -37043,13 +37499,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] content_column
     #   The name of the column used to provide the sentences to be
-    #   classified. It should not be the same as the target column
-    #   (Required).
+    #   classified. It should not be the same as the target column.
     #   @return [String]
     #
     # @!attribute [rw] target_label_column
     #   The name of the column used to provide the class labels. It should
-    #   not be same as the content column (Required).
+    #   not be same as the content column.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TextClassificationJobConfig AWS API Documentation
@@ -37133,15 +37588,6 @@ module Aws::SageMaker
     #   `TimeSeriesConfig`.
     #
     #    </note>
-    #
-    #   When not provided, the AutoML job V2 includes all the columns from
-    #   the original dataset that are not already declared in
-    #   `TimeSeriesConfig`. If provided, the AutoML job V2 only considers
-    #   these additional columns as a complement to the ones declared in
-    #   `TimeSeriesConfig`.
-    #
-    #   Autopilot supports the following data types: `numeric`,
-    #   `categorical`, `text`, and `datetime`.
     #   @return [String]
     #
     # @!attribute [rw] completion_criteria
@@ -37298,18 +37744,23 @@ module Aws::SageMaker
     # Defines the traffic pattern of the load test.
     #
     # @!attribute [rw] traffic_type
-    #   Defines the traffic patterns.
+    #   Defines the traffic patterns. Choose either `PHASES` or `STAIRS`.
     #   @return [String]
     #
     # @!attribute [rw] phases
     #   Defines the phases traffic specification.
     #   @return [Array<Types::Phase>]
     #
+    # @!attribute [rw] stairs
+    #   Defines the stairs traffic pattern.
+    #   @return [Types::Stairs]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrafficPattern AWS API Documentation
     #
     class TrafficPattern < Struct.new(
       :traffic_type,
-      :phases)
+      :phases,
+      :stairs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37667,6 +38118,11 @@ module Aws::SageMaker
     #   training job.
     #   @return [Array<Types::DebugRuleEvaluationStatus>]
     #
+    # @!attribute [rw] profiler_config
+    #   Configuration information for Amazon SageMaker Debugger system
+    #   monitoring, framework profiling, and storage paths.
+    #   @return [Types::ProfilerConfig]
+    #
     # @!attribute [rw] environment
     #   The environment variables to set in the Docker container.
     #   @return [Hash<String,String>]
@@ -37724,6 +38180,7 @@ module Aws::SageMaker
       :debug_rule_configurations,
       :tensor_board_output_config,
       :debug_rule_evaluation_statuses,
+      :profiler_config,
       :environment,
       :retry_strategy,
       :tags)
@@ -38249,6 +38706,11 @@ module Aws::SageMaker
     #   A list of tags associated with the transform job.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] data_capture_config
+    #   Configuration to control how SageMaker captures inference data for
+    #   batch transform jobs.
+    #   @return [Types::BatchDataCaptureConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformJob AWS API Documentation
     #
     class TransformJob < Struct.new(
@@ -38272,7 +38734,8 @@ module Aws::SageMaker
       :auto_ml_job_arn,
       :data_processing,
       :experiment_config,
-      :tags)
+      :tags,
+      :data_capture_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39832,7 +40295,8 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] feature_group_name
-    #   The name of the feature group that you're updating.
+    #   The name or Amazon Resource Name (ARN) of the feature group that
+    #   you're updating.
     #   @return [String]
     #
     # @!attribute [rw] feature_additions
@@ -39870,8 +40334,8 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] feature_group_name
-    #   The name of the feature group containing the feature that you're
-    #   updating.
+    #   The name or Amazon Resource Name (ARN) of the feature group
+    #   containing the feature that you're updating.
     #   @return [String]
     #
     # @!attribute [rw] feature_name
@@ -41462,6 +41926,30 @@ module Aws::SageMaker
       :security_group_ids,
       :subnets,
       :vpc_endpoint_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The workspace settings for the SageMaker Canvas application.
+    #
+    # @!attribute [rw] s3_artifact_path
+    #   The Amazon S3 bucket used to store artifacts generated by Canvas.
+    #   Updating the Amazon S3 location impacts existing configuration
+    #   settings, and Canvas users no longer have access to their artifacts.
+    #   Canvas users must log out and log back in to apply the new location.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_kms_key_id
+    #   The Amazon Web Services Key Management Service (KMS) encryption key
+    #   ID that is used to encrypt artifacts generated by Canvas in the
+    #   Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/WorkspaceSettings AWS API Documentation
+    #
+    class WorkspaceSettings < Struct.new(
+      :s3_artifact_path,
+      :s3_kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end

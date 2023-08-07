@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2023-07-26)
+------------------
+
+* Feature - Updates the documentation for CreateResource.
+
 1.15.0 (2023-07-11)
 ------------------
 

@@ -646,19 +646,24 @@ module Aws::Transfer
     end
 
     # Creates the connector, which captures the parameters for an outbound
-    # connection for the AS2 protocol. The connector is required for sending
-    # files to an externally hosted AS2 server. For more details about
-    # connectors, see [Create AS2 connectors][1].
+    # connection for the AS2 or SFTP protocol. The connector is required for
+    # sending files to an externally hosted AS2 or SFTP server. For more
+    # details about AS2 connectors, see [Create AS2 connectors][1].
+    #
+    # <note markdown="1"> You must specify exactly one configuration object: either for AS2
+    # (`As2Config`) or SFTP (`SftpConfig`).
+    #
+    #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/transfer/latest/userguide/create-b2b-server.html#configure-as2-connector
     #
     # @option params [required, String] :url
-    #   The URL of the partner's AS2 endpoint.
+    #   The URL of the partner's AS2 or SFTP endpoint.
     #
-    # @option params [required, Types::As2ConnectorConfig] :as_2_config
-    #   A structure that contains the parameters for a connector object.
+    # @option params [Types::As2ConnectorConfig] :as_2_config
+    #   A structure that contains the parameters for an AS2 connector object.
     #
     # @option params [required, String] :access_role
     #   With AS2, you can send files by calling `StartFileTransfer` and
@@ -690,6 +695,9 @@ module Aws::Transfer
     #   Key-value pairs that can be used to group and search for connectors.
     #   Tags are metadata attached to connectors for any purpose.
     #
+    # @option params [Types::SftpConnectorConfig] :sftp_config
+    #   A structure that contains the parameters for an SFTP connector object.
+    #
     # @return [Types::CreateConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateConnectorResponse#connector_id #connector_id} => String
@@ -698,7 +706,7 @@ module Aws::Transfer
     #
     #   resp = client.create_connector({
     #     url: "Url", # required
-    #     as_2_config: { # required
+    #     as_2_config: {
     #       local_profile_id: "ProfileId",
     #       partner_profile_id: "ProfileId",
     #       message_subject: "MessageSubject",
@@ -717,6 +725,10 @@ module Aws::Transfer
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     sftp_config: {
+    #       user_secret_id: "SecretId",
+    #       trusted_host_keys: ["SftpConnectorTrustedHostKey"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -1187,8 +1199,8 @@ module Aws::Transfer
     #
     #   In most cases, you can use this value instead of the session policy to
     #   lock your user down to the designated home directory ("`chroot`").
-    #   To do this, you can set `Entry` to `/` and set `Target` to the
-    #   HomeDirectory parameter value.
+    #   To do this, you can set `Entry` to `/` and set `Target` to the value
+    #   the user should see for their home directory when they log in.
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
@@ -1606,7 +1618,7 @@ module Aws::Transfer
       req.send_request(options)
     end
 
-    # Deletes the agreement that's specified in the provided `ConnectorId`.
+    # Deletes the connector that's specified in the provided `ConnectorId`.
     #
     # @option params [required, String] :connector_id
     #   The unique identifier for the connector.
@@ -1979,6 +1991,9 @@ module Aws::Transfer
     #   resp.connector.tags #=> Array
     #   resp.connector.tags[0].key #=> String
     #   resp.connector.tags[0].value #=> String
+    #   resp.connector.sftp_config.user_secret_id #=> String
+    #   resp.connector.sftp_config.trusted_host_keys #=> Array
+    #   resp.connector.sftp_config.trusted_host_keys[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeConnector AWS API Documentation
     #
@@ -3241,16 +3256,49 @@ module Aws::Transfer
       req.send_request(options)
     end
 
-    # Begins an outbound file transfer to a remote AS2 server. You specify
-    # the `ConnectorId` and the file paths for where to send the files.
+    # Begins a file transfer between local Amazon Web Services storage and a
+    # remote AS2 or SFTP server.
+    #
+    # * For an AS2 connector, you specify the `ConnectorId` and one or more
+    #   `SendFilePaths` to identify the files you want to transfer.
+    #
+    # * For an SFTP connector, the file transfer can be either outbound or
+    #   inbound. In both cases, you specify the `ConnectorId`. Depending on
+    #   the direction of the transfer, you also specify the following items:
+    #
+    #   * If you are transferring file from a partner's SFTP server to a
+    #     Transfer Family server, you specify one or more
+    #     `RetreiveFilePaths` to identify the files you want to transfer,
+    #     and a `LocalDirectoryPath` to specify the destination folder.
+    #
+    #   * If you are transferring file to a partner's SFTP server from
+    #     Amazon Web Services storage, you specify one or more
+    #     `SendFilePaths` to identify the files you want to transfer, and a
+    #     `RemoteDirectoryPath` to specify the destination folder.
     #
     # @option params [required, String] :connector_id
     #   The unique identifier for the connector.
     #
-    # @option params [required, Array<String>] :send_file_paths
-    #   An array of strings. Each string represents the absolute path for one
-    #   outbound file transfer. For example, ` DOC-EXAMPLE-BUCKET/myfile.txt
-    #   `.
+    # @option params [Array<String>] :send_file_paths
+    #   One or more source paths for the Transfer Family server. Each string
+    #   represents a source file path for one outbound file transfer. For
+    #   example, ` DOC-EXAMPLE-BUCKET/myfile.txt `.
+    #
+    # @option params [Array<String>] :retrieve_file_paths
+    #   One or more source paths for the partner's SFTP server. Each string
+    #   represents a source file path for one inbound file transfer.
+    #
+    # @option params [String] :local_directory_path
+    #   For an inbound transfer, the `LocaDirectoryPath` specifies the
+    #   destination for one or more files that are transferred from the
+    #   partner's SFTP server.
+    #
+    # @option params [String] :remote_directory_path
+    #   For an outbound transfer, the `RemoteDirectoryPath` specifies the
+    #   destination for one or more files that are transferred to the
+    #   partner's SFTP server. If you don't specify a `RemoteDirectoryPath`,
+    #   the destination for transferred files is the SFTP user's home
+    #   directory.
     #
     # @return [Types::StartFileTransferResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3260,7 +3308,10 @@ module Aws::Transfer
     #
     #   resp = client.start_file_transfer({
     #     connector_id: "ConnectorId", # required
-    #     send_file_paths: ["FilePath"], # required
+    #     send_file_paths: ["FilePath"],
+    #     retrieve_file_paths: ["FilePath"],
+    #     local_directory_path: "FilePath",
+    #     remote_directory_path: "FilePath",
     #   })
     #
     # @example Response structure
@@ -3379,6 +3430,41 @@ module Aws::Transfer
     # @param [Hash] params ({})
     def tag_resource(params = {}, options = {})
       req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Tests whether your SFTP connector is set up successfully. We highly
+    # recommend that you call this operation to test your ability to
+    # transfer files between a Transfer Family server and a trading
+    # partner's SFTP server.
+    #
+    # @option params [required, String] :connector_id
+    #   The unique identifier for the connector.
+    #
+    # @return [Types::TestConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TestConnectionResponse#connector_id #connector_id} => String
+    #   * {Types::TestConnectionResponse#status #status} => String
+    #   * {Types::TestConnectionResponse#status_message #status_message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.test_connection({
+    #     connector_id: "ConnectorId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connector_id #=> String
+    #   resp.status #=> String
+    #   resp.status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/TestConnection AWS API Documentation
+    #
+    # @overload test_connection(params = {})
+    # @param [Hash] params ({})
+    def test_connection(params = {}, options = {})
+      req = build_request(:test_connection, params)
       req.send_request(options)
     end
 
@@ -3801,10 +3887,10 @@ module Aws::Transfer
     #   The unique identifier for the connector.
     #
     # @option params [String] :url
-    #   The URL of the partner's AS2 endpoint.
+    #   The URL of the partner's AS2 or SFTP endpoint.
     #
     # @option params [Types::As2ConnectorConfig] :as_2_config
-    #   A structure that contains the parameters for a connector object.
+    #   A structure that contains the parameters for an AS2 connector object.
     #
     # @option params [String] :access_role
     #   With AS2, you can send files by calling `StartFileTransfer` and
@@ -3832,6 +3918,9 @@ module Aws::Transfer
     #   Amazon S3 events. When set, you can view connector activity in your
     #   CloudWatch logs.
     #
+    # @option params [Types::SftpConnectorConfig] :sftp_config
+    #   A structure that contains the parameters for an SFTP connector object.
+    #
     # @return [Types::UpdateConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateConnectorResponse#connector_id #connector_id} => String
@@ -3854,6 +3943,10 @@ module Aws::Transfer
     #     },
     #     access_role: "Role",
     #     logging_role: "Role",
+    #     sftp_config: {
+    #       user_secret_id: "SecretId",
+    #       trusted_host_keys: ["SftpConnectorTrustedHostKey"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -4421,7 +4514,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

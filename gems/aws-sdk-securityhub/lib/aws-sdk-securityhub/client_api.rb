@@ -82,6 +82,10 @@ module Aws::SecurityHub
     AwsAppSyncGraphQlApiLogConfigDetails = Shapes::StructureShape.new(name: 'AwsAppSyncGraphQlApiLogConfigDetails')
     AwsAppSyncGraphQlApiOpenIdConnectConfigDetails = Shapes::StructureShape.new(name: 'AwsAppSyncGraphQlApiOpenIdConnectConfigDetails')
     AwsAppSyncGraphQlApiUserPoolConfigDetails = Shapes::StructureShape.new(name: 'AwsAppSyncGraphQlApiUserPoolConfigDetails')
+    AwsAthenaWorkGroupConfigurationDetails = Shapes::StructureShape.new(name: 'AwsAthenaWorkGroupConfigurationDetails')
+    AwsAthenaWorkGroupConfigurationResultConfigurationDetails = Shapes::StructureShape.new(name: 'AwsAthenaWorkGroupConfigurationResultConfigurationDetails')
+    AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails = Shapes::StructureShape.new(name: 'AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails')
+    AwsAthenaWorkGroupDetails = Shapes::StructureShape.new(name: 'AwsAthenaWorkGroupDetails')
     AwsAutoScalingAutoScalingGroupAvailabilityZonesList = Shapes::ListShape.new(name: 'AwsAutoScalingAutoScalingGroupAvailabilityZonesList')
     AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails = Shapes::StructureShape.new(name: 'AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails')
     AwsAutoScalingAutoScalingGroupDetails = Shapes::StructureShape.new(name: 'AwsAutoScalingAutoScalingGroupDetails')
@@ -491,6 +495,8 @@ module Aws::SecurityHub
     AwsRdsDbClusterMembers = Shapes::ListShape.new(name: 'AwsRdsDbClusterMembers')
     AwsRdsDbClusterOptionGroupMembership = Shapes::StructureShape.new(name: 'AwsRdsDbClusterOptionGroupMembership')
     AwsRdsDbClusterOptionGroupMemberships = Shapes::ListShape.new(name: 'AwsRdsDbClusterOptionGroupMemberships')
+    AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute = Shapes::StructureShape.new(name: 'AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute')
+    AwsRdsDbClusterSnapshotDbClusterSnapshotAttributes = Shapes::ListShape.new(name: 'AwsRdsDbClusterSnapshotDbClusterSnapshotAttributes')
     AwsRdsDbClusterSnapshotDetails = Shapes::StructureShape.new(name: 'AwsRdsDbClusterSnapshotDetails')
     AwsRdsDbDomainMembership = Shapes::StructureShape.new(name: 'AwsRdsDbDomainMembership')
     AwsRdsDbDomainMemberships = Shapes::ListShape.new(name: 'AwsRdsDbDomainMemberships')
@@ -1440,6 +1446,22 @@ module Aws::SecurityHub
     AwsAppSyncGraphQlApiUserPoolConfigDetails.add_member(:default_action, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DefaultAction"))
     AwsAppSyncGraphQlApiUserPoolConfigDetails.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "UserPoolId"))
     AwsAppSyncGraphQlApiUserPoolConfigDetails.struct_class = Types::AwsAppSyncGraphQlApiUserPoolConfigDetails
+
+    AwsAthenaWorkGroupConfigurationDetails.add_member(:result_configuration, Shapes::ShapeRef.new(shape: AwsAthenaWorkGroupConfigurationResultConfigurationDetails, location_name: "ResultConfiguration"))
+    AwsAthenaWorkGroupConfigurationDetails.struct_class = Types::AwsAthenaWorkGroupConfigurationDetails
+
+    AwsAthenaWorkGroupConfigurationResultConfigurationDetails.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails, location_name: "EncryptionConfiguration"))
+    AwsAthenaWorkGroupConfigurationResultConfigurationDetails.struct_class = Types::AwsAthenaWorkGroupConfigurationResultConfigurationDetails
+
+    AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails.add_member(:encryption_option, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "EncryptionOption"))
+    AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails.add_member(:kms_key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "KmsKey"))
+    AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails.struct_class = Types::AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails
+
+    AwsAthenaWorkGroupDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsAthenaWorkGroupDetails.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
+    AwsAthenaWorkGroupDetails.add_member(:state, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "State"))
+    AwsAthenaWorkGroupDetails.add_member(:configuration, Shapes::ShapeRef.new(shape: AwsAthenaWorkGroupConfigurationDetails, location_name: "Configuration"))
+    AwsAthenaWorkGroupDetails.struct_class = Types::AwsAthenaWorkGroupDetails
 
     AwsAutoScalingAutoScalingGroupAvailabilityZonesList.member = Shapes::ShapeRef.new(shape: AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails)
 
@@ -3657,6 +3679,12 @@ module Aws::SecurityHub
 
     AwsRdsDbClusterOptionGroupMemberships.member = Shapes::ShapeRef.new(shape: AwsRdsDbClusterOptionGroupMembership)
 
+    AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute.add_member(:attribute_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AttributeName"))
+    AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute.add_member(:attribute_values, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "AttributeValues"))
+    AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute.struct_class = Types::AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute
+
+    AwsRdsDbClusterSnapshotDbClusterSnapshotAttributes.member = Shapes::ShapeRef.new(shape: AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute)
+
     AwsRdsDbClusterSnapshotDetails.add_member(:availability_zones, Shapes::ShapeRef.new(shape: StringList, location_name: "AvailabilityZones"))
     AwsRdsDbClusterSnapshotDetails.add_member(:snapshot_create_time, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SnapshotCreateTime"))
     AwsRdsDbClusterSnapshotDetails.add_member(:engine, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Engine"))
@@ -3675,6 +3703,7 @@ module Aws::SecurityHub
     AwsRdsDbClusterSnapshotDetails.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DbClusterIdentifier"))
     AwsRdsDbClusterSnapshotDetails.add_member(:db_cluster_snapshot_identifier, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DbClusterSnapshotIdentifier"))
     AwsRdsDbClusterSnapshotDetails.add_member(:iam_database_authentication_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "IamDatabaseAuthenticationEnabled"))
+    AwsRdsDbClusterSnapshotDetails.add_member(:db_cluster_snapshot_attributes, Shapes::ShapeRef.new(shape: AwsRdsDbClusterSnapshotDbClusterSnapshotAttributes, location_name: "DbClusterSnapshotAttributes"))
     AwsRdsDbClusterSnapshotDetails.struct_class = Types::AwsRdsDbClusterSnapshotDetails
 
     AwsRdsDbDomainMembership.add_member(:domain, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Domain"))
@@ -5648,6 +5677,7 @@ module Aws::SecurityHub
     ResourceDetails.add_member(:aws_event_schemas_registry, Shapes::ShapeRef.new(shape: AwsEventSchemasRegistryDetails, location_name: "AwsEventSchemasRegistry"))
     ResourceDetails.add_member(:aws_guard_duty_detector, Shapes::ShapeRef.new(shape: AwsGuardDutyDetectorDetails, location_name: "AwsGuardDutyDetector"))
     ResourceDetails.add_member(:aws_step_function_state_machine, Shapes::ShapeRef.new(shape: AwsStepFunctionStateMachineDetails, location_name: "AwsStepFunctionStateMachine"))
+    ResourceDetails.add_member(:aws_athena_work_group, Shapes::ShapeRef.new(shape: AwsAthenaWorkGroupDetails, location_name: "AwsAthenaWorkGroup"))
     ResourceDetails.struct_class = Types::ResourceDetails
 
     ResourceList.member = Shapes::ShapeRef.new(shape: Resource)

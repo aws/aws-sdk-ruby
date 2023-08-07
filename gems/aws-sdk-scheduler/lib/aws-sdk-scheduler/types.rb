@@ -125,6 +125,11 @@ module Aws::Scheduler
       include Aws::Structure
     end
 
+    # @!attribute [rw] action_after_completion
+    #   Specifies the action that EventBridge Scheduler applies to the
+    #   schedule after the schedule completes invoking the target.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request. If you do not specify a client token,
@@ -171,7 +176,7 @@ module Aws::Scheduler
     #
     #   * `at` expression - `at(yyyy-mm-ddThh:mm:ss)`
     #
-    #   * `rate` expression - `rate(unit value)`
+    #   * `rate` expression - `rate(value unit)`
     #
     #   * `cron` expression - `cron(fields)`
     #
@@ -221,6 +226,7 @@ module Aws::Scheduler
     # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/CreateScheduleInput AWS API Documentation
     #
     class CreateScheduleInput < Struct.new(
+      :action_after_completion,
       :client_token,
       :description,
       :end_date,
@@ -558,6 +564,11 @@ module Aws::Scheduler
       include Aws::Structure
     end
 
+    # @!attribute [rw] action_after_completion
+    #   Indicates the action that EventBridge Scheduler applies to the
+    #   schedule after the schedule completes invoking the target.
+    #   @return [String]
+    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the schedule.
     #   @return [String]
@@ -605,7 +616,7 @@ module Aws::Scheduler
     #
     #   * `at` expression - `at(yyyy-mm-ddThh:mm:ss)`
     #
-    #   * `rate` expression - `rate(unit value)`
+    #   * `rate` expression - `rate(value unit)`
     #
     #   * `cron` expression - `cron(fields)`
     #
@@ -655,6 +666,7 @@ module Aws::Scheduler
     # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/GetScheduleOutput AWS API Documentation
     #
     class GetScheduleOutput < Struct.new(
+      :action_after_completion,
       :arn,
       :creation_date,
       :description,
@@ -1295,6 +1307,11 @@ module Aws::Scheduler
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
 
+    # @!attribute [rw] action_after_completion
+    #   Specifies the action that EventBridge Scheduler applies to the
+    #   schedule after the schedule completes invoking the target.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request. If you do not specify a client token,
@@ -1344,7 +1361,7 @@ module Aws::Scheduler
     #
     #   * `at` expression - `at(yyyy-mm-ddThh:mm:ss)`
     #
-    #   * `rate` expression - `rate(unit value)`
+    #   * `rate` expression - `rate(value unit)`
     #
     #   * `cron` expression - `cron(fields)`
     #
@@ -1395,6 +1412,7 @@ module Aws::Scheduler
     # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/UpdateScheduleInput AWS API Documentation
     #
     class UpdateScheduleInput < Struct.new(
+      :action_after_completion,
       :client_token,
       :description,
       :end_date,

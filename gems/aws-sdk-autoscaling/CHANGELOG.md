@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2023-08-03)
+------------------
+
+* Feature - Documentation changes related to Amazon EC2 Auto Scaling APIs.
+
+1.96.0 (2023-07-31)
+------------------
+
+* Feature - You can now configure an instance refresh to set its status to 'failed' when it detects that a specified CloudWatch alarm has gone into the ALARM state. You can also choose to roll back the instance refresh automatically when the alarm threshold is met.
+
+1.95.0 (2023-07-27)
+------------------
+
+* Feature - This release updates validation for instance types used in the AllowedInstanceTypes and ExcludedInstanceTypes parameters of the InstanceRequirements property of a MixedInstancesPolicy.
+
 1.94.0 (2023-07-11)
 ------------------
 

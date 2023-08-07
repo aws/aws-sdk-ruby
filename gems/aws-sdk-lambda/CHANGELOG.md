@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2023-07-25)
+------------------
+
+* Feature - Add Python 3.11 (python3.11) support to AWS Lambda
+
 1.103.0 (2023-07-11)
 ------------------
 

@@ -1560,7 +1560,7 @@ module Aws::CostExplorer
     #
     #       * The corresponding `Expression` for this example is as follows:
     #         `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
-    #         “us-west-1” ] \} \}`
+    #         "us-west-1" ] \} \}`
     #
     #       * As shown in the previous example, lists of dimension values are
     #         combined with `OR` when applying the filter.
@@ -1570,7 +1570,7 @@ module Aws::CostExplorer
     #       the documentation for each specific API to see what is supported.
     #
     #       * For example, you can filter for linked account names that start
-    #         with “a”.
+    #         with "a".
     #
     #       * The corresponding `Expression` for this example is as follows:
     #         `\{ "Dimensions": \{ "Key": "LINKED_ACCOUNT_NAME",
@@ -2105,7 +2105,7 @@ module Aws::CostExplorer
     #
     #       * The corresponding `Expression` for this example is as follows:
     #         `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
-    #         “us-west-1” ] \} \}`
+    #         "us-west-1" ] \} \}`
     #
     #       * As shown in the previous example, lists of dimension values are
     #         combined with `OR` when applying the filter.
@@ -2115,7 +2115,7 @@ module Aws::CostExplorer
     #       the documentation for each specific API to see what is supported.
     #
     #       * For example, you can filter for linked account names that start
-    #         with “a”.
+    #         with "a".
     #
     #       * The corresponding `Expression` for this example is as follows:
     #         `\{ "Dimensions": \{ "Key": "LINKED_ACCOUNT_NAME",
@@ -2615,7 +2615,7 @@ module Aws::CostExplorer
     #
     #       * The corresponding `Expression` for this example is as follows:
     #         `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
-    #         “us-west-1” ] \} \}`
+    #         "us-west-1" ] \} \}`
     #
     #       * As shown in the previous example, lists of dimension values are
     #         combined with `OR` when applying the filter.
@@ -2625,7 +2625,7 @@ module Aws::CostExplorer
     #       the documentation for each specific API to see what is supported.
     #
     #       * For example, you can filter for linked account names that start
-    #         with “a”.
+    #         with "a".
     #
     #       * The corresponding `Expression` for this example is as follows:
     #         `\{ "Dimensions": \{ "Key": "LINKED_ACCOUNT_NAME",
@@ -3124,7 +3124,7 @@ module Aws::CostExplorer
     #
     #       * The corresponding `Expression` for this example is as follows:
     #         `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
-    #         “us-west-1” ] \} \}`
+    #         "us-west-1" ] \} \}`
     #
     #       * As shown in the previous example, lists of dimension values are
     #         combined with `OR` when applying the filter.
@@ -3134,7 +3134,7 @@ module Aws::CostExplorer
     #       the documentation for each specific API to see what is supported.
     #
     #       * For example, you can filter for linked account names that start
-    #         with “a”.
+    #         with "a".
     #
     #       * The corresponding `Expression` for this example is as follows:
     #         `\{ "Dimensions": \{ "Key": "LINKED_ACCOUNT_NAME",
@@ -3351,6 +3351,71 @@ module Aws::CostExplorer
     # @param [Hash] params ({})
     def get_rightsizing_recommendation(params = {}, options = {})
       req = build_request(:get_rightsizing_recommendation, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details for a Savings Plan recommendation. These details
+    # include the hourly data-points that construct the new cost, coverage,
+    # and utilization charts.
+    #
+    # @option params [required, String] :recommendation_detail_id
+    #   The ID that is associated with the Savings Plan recommendation.
+    #
+    # @return [Types::GetSavingsPlanPurchaseRecommendationDetailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSavingsPlanPurchaseRecommendationDetailsResponse#recommendation_detail_id #recommendation_detail_id} => String
+    #   * {Types::GetSavingsPlanPurchaseRecommendationDetailsResponse#recommendation_detail_data #recommendation_detail_data} => Types::RecommendationDetailData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_savings_plan_purchase_recommendation_details({
+    #     recommendation_detail_id: "RecommendationDetailId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recommendation_detail_id #=> String
+    #   resp.recommendation_detail_data.account_scope #=> String, one of "PAYER", "LINKED"
+    #   resp.recommendation_detail_data.lookback_period_in_days #=> String, one of "SEVEN_DAYS", "THIRTY_DAYS", "SIXTY_DAYS"
+    #   resp.recommendation_detail_data.savings_plans_type #=> String, one of "COMPUTE_SP", "EC2_INSTANCE_SP", "SAGEMAKER_SP"
+    #   resp.recommendation_detail_data.term_in_years #=> String, one of "ONE_YEAR", "THREE_YEARS"
+    #   resp.recommendation_detail_data.payment_option #=> String, one of "NO_UPFRONT", "PARTIAL_UPFRONT", "ALL_UPFRONT", "LIGHT_UTILIZATION", "MEDIUM_UTILIZATION", "HEAVY_UTILIZATION"
+    #   resp.recommendation_detail_data.account_id #=> String
+    #   resp.recommendation_detail_data.currency_code #=> String
+    #   resp.recommendation_detail_data.instance_family #=> String
+    #   resp.recommendation_detail_data.region #=> String
+    #   resp.recommendation_detail_data.offering_id #=> String
+    #   resp.recommendation_detail_data.generation_timestamp #=> String
+    #   resp.recommendation_detail_data.latest_usage_timestamp #=> String
+    #   resp.recommendation_detail_data.current_average_hourly_on_demand_spend #=> String
+    #   resp.recommendation_detail_data.current_maximum_hourly_on_demand_spend #=> String
+    #   resp.recommendation_detail_data.current_minimum_hourly_on_demand_spend #=> String
+    #   resp.recommendation_detail_data.estimated_average_utilization #=> String
+    #   resp.recommendation_detail_data.estimated_monthly_savings_amount #=> String
+    #   resp.recommendation_detail_data.estimated_on_demand_cost #=> String
+    #   resp.recommendation_detail_data.estimated_on_demand_cost_with_current_commitment #=> String
+    #   resp.recommendation_detail_data.estimated_roi #=> String
+    #   resp.recommendation_detail_data.estimated_sp_cost #=> String
+    #   resp.recommendation_detail_data.estimated_savings_amount #=> String
+    #   resp.recommendation_detail_data.estimated_savings_percentage #=> String
+    #   resp.recommendation_detail_data.existing_hourly_commitment #=> String
+    #   resp.recommendation_detail_data.hourly_commitment_to_purchase #=> String
+    #   resp.recommendation_detail_data.upfront_cost #=> String
+    #   resp.recommendation_detail_data.current_average_coverage #=> String
+    #   resp.recommendation_detail_data.estimated_average_coverage #=> String
+    #   resp.recommendation_detail_data.metrics_over_lookback_period #=> Array
+    #   resp.recommendation_detail_data.metrics_over_lookback_period[0].start_time #=> String
+    #   resp.recommendation_detail_data.metrics_over_lookback_period[0].estimated_on_demand_cost #=> String
+    #   resp.recommendation_detail_data.metrics_over_lookback_period[0].current_coverage #=> String
+    #   resp.recommendation_detail_data.metrics_over_lookback_period[0].estimated_coverage #=> String
+    #   resp.recommendation_detail_data.metrics_over_lookback_period[0].estimated_new_commitment_utilization #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetSavingsPlanPurchaseRecommendationDetails AWS API Documentation
+    #
+    # @overload get_savings_plan_purchase_recommendation_details(params = {})
+    # @param [Hash] params ({})
+    def get_savings_plan_purchase_recommendation_details(params = {}, options = {})
+      req = build_request(:get_savings_plan_purchase_recommendation_details, params)
       req.send_request(options)
     end
 
@@ -3652,6 +3717,7 @@ module Aws::CostExplorer
     #   resp.savings_plans_purchase_recommendation.savings_plans_purchase_recommendation_details[0].current_minimum_hourly_on_demand_spend #=> String
     #   resp.savings_plans_purchase_recommendation.savings_plans_purchase_recommendation_details[0].current_maximum_hourly_on_demand_spend #=> String
     #   resp.savings_plans_purchase_recommendation.savings_plans_purchase_recommendation_details[0].current_average_hourly_on_demand_spend #=> String
+    #   resp.savings_plans_purchase_recommendation.savings_plans_purchase_recommendation_details[0].recommendation_detail_id #=> String
     #   resp.savings_plans_purchase_recommendation.savings_plans_purchase_recommendation_summary.estimated_roi #=> String
     #   resp.savings_plans_purchase_recommendation.savings_plans_purchase_recommendation_summary.currency_code #=> String
     #   resp.savings_plans_purchase_recommendation.savings_plans_purchase_recommendation_summary.estimated_total_cost #=> String
@@ -4036,7 +4102,7 @@ module Aws::CostExplorer
     #
     #       * The corresponding `Expression` for this example is as follows:
     #         `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
-    #         “us-west-1” ] \} \}`
+    #         "us-west-1" ] \} \}`
     #
     #       * As shown in the previous example, lists of dimension values are
     #         combined with `OR` when applying the filter.
@@ -4046,7 +4112,7 @@ module Aws::CostExplorer
     #       the documentation for each specific API to see what is supported.
     #
     #       * For example, you can filter for linked account names that start
-    #         with “a”.
+    #         with "a".
     #
     #       * The corresponding `Expression` for this example is as follows:
     #         `\{ "Dimensions": \{ "Key": "LINKED_ACCOUNT_NAME",
@@ -4771,7 +4837,18 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # Updates an existing cost anomaly monitor subscription.
+    # Updates an existing cost anomaly subscription. Specify the fields that
+    # you want to update. Omitted fields are unchanged.
+    #
+    # <note markdown="1"> The JSON below describes the generic construct for each type. See
+    # [Request Parameters][1] for possible values as they apply to
+    # `AnomalySubscription`.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_UpdateAnomalySubscription.html#API_UpdateAnomalySubscription_RequestParameters
     #
     # @option params [required, String] :subscription_arn
     #   A cost anomaly subscription Amazon Resource Name (ARN).
@@ -4784,6 +4861,8 @@ module Aws::CostExplorer
     #   This field has been deprecated. To update a threshold, use
     #   ThresholdExpression. Continued use of Threshold will be treated as
     #   shorthand syntax for a ThresholdExpression.
+    #
+    #   You can specify either Threshold or ThresholdExpression, but not both.
     #
     # @option params [String] :frequency
     #   The update to the frequency value that subscribers receive
@@ -4802,10 +4881,14 @@ module Aws::CostExplorer
     #   The update to the [Expression][1] object used to specify the anomalies
     #   that you want to generate alerts for. This supports dimensions and
     #   nested expressions. The supported dimensions are
-    #   `ANOMALY_TOTAL_IMPACT_ABSOLUTE` and `ANOMALY_TOTAL_IMPACT_PERCENTAGE`.
-    #   The supported nested expression types are `AND` and `OR`. The match
-    #   option `GREATER_THAN_OR_EQUAL` is required. Values must be numbers
-    #   between 0 and 10,000,000,000.
+    #   `ANOMALY_TOTAL_IMPACT_ABSOLUTE` and `ANOMALY_TOTAL_IMPACT_PERCENTAGE`,
+    #   corresponding to an anomaly’s TotalImpact and TotalImpactPercentage,
+    #   respectively (see [Impact][2] for more details). The supported nested
+    #   expression types are `AND` and `OR`. The match option
+    #   `GREATER_THAN_OR_EQUAL` is required. Values must be numbers between 0
+    #   and 10,000,000,000 in string format.
+    #
+    #   You can specify either Threshold or ThresholdExpression, but not both.
     #
     #   The following are examples of valid ThresholdExpressions:
     #
@@ -4834,6 +4917,7 @@ module Aws::CostExplorer
     #
     #
     #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+    #   [2]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Impact.html
     #
     # @return [Types::UpdateAnomalySubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5066,7 +5150,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

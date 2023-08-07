@@ -168,6 +168,10 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::DescribeDashboardDefinition.build(context)
           when :describe_dashboard_permissions
             Aws::QuickSight::Endpoints::DescribeDashboardPermissions.build(context)
+          when :describe_dashboard_snapshot_job
+            Aws::QuickSight::Endpoints::DescribeDashboardSnapshotJob.build(context)
+          when :describe_dashboard_snapshot_job_result
+            Aws::QuickSight::Endpoints::DescribeDashboardSnapshotJobResult.build(context)
           when :describe_data_set
             Aws::QuickSight::Endpoints::DescribeDataSet.build(context)
           when :describe_data_set_permissions
@@ -310,6 +314,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::StartAssetBundleExportJob.build(context)
           when :start_asset_bundle_import_job
             Aws::QuickSight::Endpoints::StartAssetBundleImportJob.build(context)
+          when :start_dashboard_snapshot_job
+            Aws::QuickSight::Endpoints::StartDashboardSnapshotJob.build(context)
           when :tag_resource
             Aws::QuickSight::Endpoints::TagResource.build(context)
           when :untag_resource

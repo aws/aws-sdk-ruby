@@ -106,6 +106,8 @@ module Aws::CustomerProfiles
             Aws::CustomerProfiles::Endpoints::GetProfileObjectType.build(context)
           when :get_profile_object_type_template
             Aws::CustomerProfiles::Endpoints::GetProfileObjectTypeTemplate.build(context)
+          when :get_similar_profiles
+            Aws::CustomerProfiles::Endpoints::GetSimilarProfiles.build(context)
           when :get_workflow
             Aws::CustomerProfiles::Endpoints::GetWorkflow.build(context)
           when :get_workflow_steps
@@ -130,6 +132,8 @@ module Aws::CustomerProfiles
             Aws::CustomerProfiles::Endpoints::ListProfileObjectTypes.build(context)
           when :list_profile_objects
             Aws::CustomerProfiles::Endpoints::ListProfileObjects.build(context)
+          when :list_rule_based_matches
+            Aws::CustomerProfiles::Endpoints::ListRuleBasedMatches.build(context)
           when :list_tags_for_resource
             Aws::CustomerProfiles::Endpoints::ListTagsForResource.build(context)
           when :list_workflows

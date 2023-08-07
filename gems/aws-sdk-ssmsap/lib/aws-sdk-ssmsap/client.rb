@@ -480,6 +480,7 @@ module Aws::SsmSap
     #   resp.application.arn #=> String
     #   resp.application.app_registry_arn #=> String
     #   resp.application.status #=> String, one of "ACTIVATED", "STARTING", "STOPPED", "STOPPING", "FAILED", "REGISTERING", "DELETING", "UNKNOWN"
+    #   resp.application.discovery_status #=> String, one of "SUCCESS", "REGISTRATION_FAILED", "REFRESH_FAILED", "REGISTERING", "DELETING"
     #   resp.application.components #=> Array
     #   resp.application.components[0] #=> String
     #   resp.application.last_updated #=> Time
@@ -508,6 +509,7 @@ module Aws::SsmSap
     # @return [Types::GetComponentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetComponentOutput#component #component} => Types::Component
+    #   * {Types::GetComponentOutput#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -519,18 +521,36 @@ module Aws::SsmSap
     # @example Response structure
     #
     #   resp.component.component_id #=> String
+    #   resp.component.parent_component #=> String
+    #   resp.component.child_components #=> Array
+    #   resp.component.child_components[0] #=> String
     #   resp.component.application_id #=> String
-    #   resp.component.component_type #=> String, one of "HANA"
-    #   resp.component.status #=> String, one of "ACTIVATED"
+    #   resp.component.component_type #=> String, one of "HANA", "HANA_NODE"
+    #   resp.component.status #=> String, one of "ACTIVATED", "STARTING", "STOPPED", "STOPPING", "RUNNING", "RUNNING_WITH_ERROR", "UNDEFINED"
+    #   resp.component.sap_hostname #=> String
+    #   resp.component.sap_kernel_version #=> String
+    #   resp.component.hdb_version #=> String
+    #   resp.component.resilience.hsr_tier #=> String
+    #   resp.component.resilience.hsr_replication_mode #=> String, one of "PRIMARY", "NONE", "SYNC", "SYNCMEM", "ASYNC"
+    #   resp.component.resilience.hsr_operation_mode #=> String, one of "PRIMARY", "LOGREPLAY", "DELTA_DATASHIPPING", "LOGREPLAY_READACCESS", "NONE"
+    #   resp.component.resilience.cluster_status #=> String, one of "ONLINE", "STANDBY", "MAINTENANCE", "OFFLINE", "NONE"
+    #   resp.component.associated_host.hostname #=> String
+    #   resp.component.associated_host.ec2_instance_id #=> String
+    #   resp.component.associated_host.os_version #=> String
     #   resp.component.databases #=> Array
     #   resp.component.databases[0] #=> String
     #   resp.component.hosts #=> Array
     #   resp.component.hosts[0].host_name #=> String
-    #   resp.component.hosts[0].host_role #=> String, one of "LEADER", "WORKER", "STANDBY", "UNKNOWN"
     #   resp.component.hosts[0].host_ip #=> String
+    #   resp.component.hosts[0].ec2_instance_id #=> String
     #   resp.component.hosts[0].instance_id #=> String
+    #   resp.component.hosts[0].host_role #=> String, one of "LEADER", "WORKER", "STANDBY", "UNKNOWN"
+    #   resp.component.hosts[0].os_version #=> String
     #   resp.component.primary_host #=> String
     #   resp.component.last_updated #=> Time
+    #   resp.component.arn #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetComponent AWS API Documentation
     #
@@ -582,7 +602,7 @@ module Aws::SsmSap
     #   resp.database.database_name #=> String
     #   resp.database.database_type #=> String, one of "SYSTEM", "TENANT"
     #   resp.database.arn #=> String
-    #   resp.database.status #=> String, one of "RUNNING", "STARTING", "STOPPED", "WARNING", "UNKNOWN"
+    #   resp.database.status #=> String, one of "RUNNING", "STARTING", "STOPPED", "WARNING", "UNKNOWN", "ERROR"
     #   resp.database.primary_host #=> String
     #   resp.database.sql_port #=> Integer
     #   resp.database.last_updated #=> Time
@@ -748,9 +768,10 @@ module Aws::SsmSap
     #   resp.components #=> Array
     #   resp.components[0].application_id #=> String
     #   resp.components[0].component_id #=> String
-    #   resp.components[0].component_type #=> String, one of "HANA"
+    #   resp.components[0].component_type #=> String, one of "HANA", "HANA_NODE"
     #   resp.components[0].tags #=> Hash
     #   resp.components[0].tags["TagKey"] #=> String
+    #   resp.components[0].arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListComponents AWS API Documentation
@@ -1010,6 +1031,7 @@ module Aws::SsmSap
     #   resp.application.arn #=> String
     #   resp.application.app_registry_arn #=> String
     #   resp.application.status #=> String, one of "ACTIVATED", "STARTING", "STOPPED", "STOPPING", "FAILED", "REGISTERING", "DELETING", "UNKNOWN"
+    #   resp.application.discovery_status #=> String, one of "SUCCESS", "REGISTRATION_FAILED", "REFRESH_FAILED", "REGISTERING", "DELETING"
     #   resp.application.components #=> Array
     #   resp.application.components[0] #=> String
     #   resp.application.last_updated #=> Time
@@ -1022,6 +1044,34 @@ module Aws::SsmSap
     # @param [Hash] params ({})
     def register_application(params = {}, options = {})
       req = build_request(:register_application, params)
+      req.send_request(options)
+    end
+
+    # Refreshes a registered application.
+    #
+    # @option params [required, String] :application_id
+    #   The ID of the application.
+    #
+    # @return [Types::StartApplicationRefreshOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartApplicationRefreshOutput#operation_id #operation_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_application_refresh({
+    #     application_id: "ApplicationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operation_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/StartApplicationRefresh AWS API Documentation
+    #
+    # @overload start_application_refresh(params = {})
+    # @param [Hash] params ({})
+    def start_application_refresh(params = {}, options = {})
+      req = build_request(:start_application_refresh, params)
       req.send_request(options)
     end
 
@@ -1092,6 +1142,9 @@ module Aws::SsmSap
     # @option params [Array<Types::ApplicationCredential>] :credentials_to_remove
     #   The credentials to be removed.
     #
+    # @option params [Types::BackintConfig] :backint
+    #   Installation of AWS Backint Agent for SAP HANA.
+    #
     # @return [Types::UpdateApplicationSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateApplicationSettingsOutput#message #message} => String
@@ -1115,6 +1168,10 @@ module Aws::SsmSap
     #         secret_id: "SecretId", # required
     #       },
     #     ],
+    #     backint: {
+    #       backint_mode: "AWSBackup", # required, accepts AWSBackup
+    #       ensure_no_backup_in_process: false, # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -1145,7 +1202,7 @@ module Aws::SsmSap
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssmsap'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

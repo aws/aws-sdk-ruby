@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2023-08-01)
+------------------
+
+* Feature - Amazon Polly adds new French Belgian voice - Isabelle. Isabelle is available as Neural voice only.
+
+1.73.0 (2023-07-26)
+------------------
+
+* Feature - Amazon Polly adds 1 new voice - Lisa (nl-BE)
+
 1.72.0 (2023-07-11)
 ------------------
 

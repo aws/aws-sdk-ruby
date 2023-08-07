@@ -454,10 +454,32 @@ module Aws::ChimeSDKMediaPipelines
     #           layout: "GridView", # accepts GridView
     #           resolution: "HD", # accepts HD, FHD
     #           grid_view_configuration: { # required
-    #             content_share_layout: "PresenterOnly", # required, accepts PresenterOnly, Horizontal, Vertical
+    #             content_share_layout: "PresenterOnly", # required, accepts PresenterOnly, Horizontal, Vertical, ActiveSpeakerOnly
     #             presenter_only_configuration: {
     #               presenter_position: "TopLeft", # accepts TopLeft, TopRight, BottomLeft, BottomRight
     #             },
+    #             active_speaker_only_configuration: {
+    #               active_speaker_position: "TopLeft", # accepts TopLeft, TopRight, BottomLeft, BottomRight
+    #             },
+    #             horizontal_layout_configuration: {
+    #               tile_order: "JoinSequence", # accepts JoinSequence, SpeakerSequence
+    #               tile_position: "Top", # accepts Top, Bottom
+    #               tile_count: 1,
+    #               tile_aspect_ratio: "TileAspectRatio",
+    #             },
+    #             vertical_layout_configuration: {
+    #               tile_order: "JoinSequence", # accepts JoinSequence, SpeakerSequence
+    #               tile_position: "Left", # accepts Left, Right
+    #               tile_count: 1,
+    #               tile_aspect_ratio: "TileAspectRatio",
+    #             },
+    #             video_attribute: {
+    #               corner_radius: 1,
+    #               border_color: "Black", # accepts Black, Blue, Red, Green, White, Yellow
+    #               highlight_color: "Black", # accepts Black, Blue, Red, Green, White, Yellow
+    #               border_thickness: 1,
+    #             },
+    #             canvas_orientation: "Landscape", # accepts Landscape, Portrait
     #           },
     #         },
     #       },
@@ -492,8 +514,22 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.content.mux_type #=> String, one of "ContentOnly"
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.layout #=> String, one of "GridView"
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.resolution #=> String, one of "HD", "FHD"
-    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.content_share_layout #=> String, one of "PresenterOnly", "Horizontal", "Vertical"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.content_share_layout #=> String, one of "PresenterOnly", "Horizontal", "Vertical", "ActiveSpeakerOnly"
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.presenter_only_configuration.presenter_position #=> String, one of "TopLeft", "TopRight", "BottomLeft", "BottomRight"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.active_speaker_only_configuration.active_speaker_position #=> String, one of "TopLeft", "TopRight", "BottomLeft", "BottomRight"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.horizontal_layout_configuration.tile_order #=> String, one of "JoinSequence", "SpeakerSequence"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.horizontal_layout_configuration.tile_position #=> String, one of "Top", "Bottom"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.horizontal_layout_configuration.tile_count #=> Integer
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.horizontal_layout_configuration.tile_aspect_ratio #=> String
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.vertical_layout_configuration.tile_order #=> String, one of "JoinSequence", "SpeakerSequence"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.vertical_layout_configuration.tile_position #=> String, one of "Left", "Right"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.vertical_layout_configuration.tile_count #=> Integer
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.vertical_layout_configuration.tile_aspect_ratio #=> String
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.video_attribute.corner_radius #=> Integer
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.video_attribute.border_color #=> String, one of "Black", "Blue", "Red", "Green", "White", "Yellow"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.video_attribute.highlight_color #=> String, one of "Black", "Blue", "Red", "Green", "White", "Yellow"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.video_attribute.border_thickness #=> Integer
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.canvas_orientation #=> String, one of "Landscape", "Portrait"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/CreateMediaCapturePipeline AWS API Documentation
     #
@@ -630,7 +666,9 @@ module Aws::ChimeSDKMediaPipelines
     #   source.
     #
     # @option params [Types::S3RecordingSinkRuntimeConfiguration] :s3_recording_sink_runtime_configuration
-    #   The runtime configuration for the S3 recording sink.
+    #   The runtime configuration for the S3 recording sink. If specified, the
+    #   settings in this structure override any settings in
+    #   `S3RecordingSinkConfiguration`.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags assigned to the media insights pipeline.
@@ -816,7 +854,7 @@ module Aws::ChimeSDKMediaPipelines
     #           call_analytics_stream_categories: ["CategoryName"],
     #         },
     #         amazon_transcribe_processor_configuration: {
-    #           language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR
+    #           language_code: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR
     #           vocabulary_name: "VocabularyName",
     #           vocabulary_filter_name: "VocabularyFilterName",
     #           vocabulary_filter_method: "remove", # accepts remove, mask, tag
@@ -828,6 +866,11 @@ module Aws::ChimeSDKMediaPipelines
     #           pii_entity_types: "PiiEntityTypes",
     #           language_model_name: "ModelName",
     #           filter_partial_results: false,
+    #           identify_language: false,
+    #           language_options: "LanguageOptions",
+    #           preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR
+    #           vocabulary_names: "VocabularyNames",
+    #           vocabulary_filter_names: "VocabularyFilterNames",
     #         },
     #         kinesis_data_stream_sink_configuration: {
     #           insights_target: "Arn",
@@ -907,6 +950,11 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.pii_entity_types #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.language_model_name #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.filter_partial_results #=> Boolean
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.identify_language #=> Boolean
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.language_options #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.preferred_language #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.vocabulary_names #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.vocabulary_filter_names #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].kinesis_data_stream_sink_configuration.insights_target #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].s3_recording_sink_configuration.destination #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].s3_recording_sink_configuration.recording_file_format #=> String, one of "Wav", "Opus"
@@ -963,10 +1011,32 @@ module Aws::ChimeSDKMediaPipelines
     #             layout: "GridView", # accepts GridView
     #             resolution: "HD", # accepts HD, FHD
     #             grid_view_configuration: { # required
-    #               content_share_layout: "PresenterOnly", # required, accepts PresenterOnly, Horizontal, Vertical
+    #               content_share_layout: "PresenterOnly", # required, accepts PresenterOnly, Horizontal, Vertical, ActiveSpeakerOnly
     #               presenter_only_configuration: {
     #                 presenter_position: "TopLeft", # accepts TopLeft, TopRight, BottomLeft, BottomRight
     #               },
+    #               active_speaker_only_configuration: {
+    #                 active_speaker_position: "TopLeft", # accepts TopLeft, TopRight, BottomLeft, BottomRight
+    #               },
+    #               horizontal_layout_configuration: {
+    #                 tile_order: "JoinSequence", # accepts JoinSequence, SpeakerSequence
+    #                 tile_position: "Top", # accepts Top, Bottom
+    #                 tile_count: 1,
+    #                 tile_aspect_ratio: "TileAspectRatio",
+    #               },
+    #               vertical_layout_configuration: {
+    #                 tile_order: "JoinSequence", # accepts JoinSequence, SpeakerSequence
+    #                 tile_position: "Left", # accepts Left, Right
+    #                 tile_count: 1,
+    #                 tile_aspect_ratio: "TileAspectRatio",
+    #               },
+    #               video_attribute: {
+    #                 corner_radius: 1,
+    #                 border_color: "Black", # accepts Black, Blue, Red, Green, White, Yellow
+    #                 highlight_color: "Black", # accepts Black, Blue, Red, Green, White, Yellow
+    #                 border_thickness: 1,
+    #               },
+    #               canvas_orientation: "Landscape", # accepts Landscape, Portrait
     #             },
     #           },
     #           source_configuration: {
@@ -1005,8 +1075,22 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.mux_type #=> String, one of "AudioWithCompositedVideo", "AudioWithActiveSpeakerVideo"
     #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.layout #=> String, one of "GridView"
     #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.resolution #=> String, one of "HD", "FHD"
-    #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.content_share_layout #=> String, one of "PresenterOnly", "Horizontal", "Vertical"
+    #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.content_share_layout #=> String, one of "PresenterOnly", "Horizontal", "Vertical", "ActiveSpeakerOnly"
     #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.presenter_only_configuration.presenter_position #=> String, one of "TopLeft", "TopRight", "BottomLeft", "BottomRight"
+    #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.active_speaker_only_configuration.active_speaker_position #=> String, one of "TopLeft", "TopRight", "BottomLeft", "BottomRight"
+    #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.horizontal_layout_configuration.tile_order #=> String, one of "JoinSequence", "SpeakerSequence"
+    #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.horizontal_layout_configuration.tile_position #=> String, one of "Top", "Bottom"
+    #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.horizontal_layout_configuration.tile_count #=> Integer
+    #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.horizontal_layout_configuration.tile_aspect_ratio #=> String
+    #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.vertical_layout_configuration.tile_order #=> String, one of "JoinSequence", "SpeakerSequence"
+    #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.vertical_layout_configuration.tile_position #=> String, one of "Left", "Right"
+    #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.vertical_layout_configuration.tile_count #=> Integer
+    #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.vertical_layout_configuration.tile_aspect_ratio #=> String
+    #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.video_attribute.corner_radius #=> Integer
+    #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.video_attribute.border_color #=> String, one of "Black", "Blue", "Red", "Green", "White", "Yellow"
+    #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.video_attribute.highlight_color #=> String, one of "Black", "Blue", "Red", "Green", "White", "Yellow"
+    #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.video_attribute.border_thickness #=> Integer
+    #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.canvas_orientation #=> String, one of "Landscape", "Portrait"
     #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.source_configuration.selected_video_streams.attendee_ids #=> Array
     #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.source_configuration.selected_video_streams.attendee_ids[0] #=> String
     #   resp.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.source_configuration.selected_video_streams.external_user_ids #=> Array
@@ -1135,8 +1219,22 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.content.mux_type #=> String, one of "ContentOnly"
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.layout #=> String, one of "GridView"
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.resolution #=> String, one of "HD", "FHD"
-    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.content_share_layout #=> String, one of "PresenterOnly", "Horizontal", "Vertical"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.content_share_layout #=> String, one of "PresenterOnly", "Horizontal", "Vertical", "ActiveSpeakerOnly"
     #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.presenter_only_configuration.presenter_position #=> String, one of "TopLeft", "TopRight", "BottomLeft", "BottomRight"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.active_speaker_only_configuration.active_speaker_position #=> String, one of "TopLeft", "TopRight", "BottomLeft", "BottomRight"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.horizontal_layout_configuration.tile_order #=> String, one of "JoinSequence", "SpeakerSequence"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.horizontal_layout_configuration.tile_position #=> String, one of "Top", "Bottom"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.horizontal_layout_configuration.tile_count #=> Integer
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.horizontal_layout_configuration.tile_aspect_ratio #=> String
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.vertical_layout_configuration.tile_order #=> String, one of "JoinSequence", "SpeakerSequence"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.vertical_layout_configuration.tile_position #=> String, one of "Left", "Right"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.vertical_layout_configuration.tile_count #=> Integer
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.vertical_layout_configuration.tile_aspect_ratio #=> String
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.video_attribute.corner_radius #=> Integer
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.video_attribute.border_color #=> String, one of "Black", "Blue", "Red", "Green", "White", "Yellow"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.video_attribute.highlight_color #=> String, one of "Black", "Blue", "Red", "Green", "White", "Yellow"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.video_attribute.border_thickness #=> Integer
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.canvas_orientation #=> String, one of "Landscape", "Portrait"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/GetMediaCapturePipeline AWS API Documentation
     #
@@ -1210,6 +1308,11 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.pii_entity_types #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.language_model_name #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.filter_partial_results #=> Boolean
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.identify_language #=> Boolean
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.language_options #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.preferred_language #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.vocabulary_names #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.vocabulary_filter_names #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].kinesis_data_stream_sink_configuration.insights_target #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].s3_recording_sink_configuration.destination #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].s3_recording_sink_configuration.recording_file_format #=> String, one of "Wav", "Opus"
@@ -1268,16 +1371,44 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.content.mux_type #=> String, one of "ContentOnly"
     #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.layout #=> String, one of "GridView"
     #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.resolution #=> String, one of "HD", "FHD"
-    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.content_share_layout #=> String, one of "PresenterOnly", "Horizontal", "Vertical"
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.content_share_layout #=> String, one of "PresenterOnly", "Horizontal", "Vertical", "ActiveSpeakerOnly"
     #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.presenter_only_configuration.presenter_position #=> String, one of "TopLeft", "TopRight", "BottomLeft", "BottomRight"
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.active_speaker_only_configuration.active_speaker_position #=> String, one of "TopLeft", "TopRight", "BottomLeft", "BottomRight"
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.horizontal_layout_configuration.tile_order #=> String, one of "JoinSequence", "SpeakerSequence"
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.horizontal_layout_configuration.tile_position #=> String, one of "Top", "Bottom"
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.horizontal_layout_configuration.tile_count #=> Integer
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.horizontal_layout_configuration.tile_aspect_ratio #=> String
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.vertical_layout_configuration.tile_order #=> String, one of "JoinSequence", "SpeakerSequence"
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.vertical_layout_configuration.tile_position #=> String, one of "Left", "Right"
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.vertical_layout_configuration.tile_count #=> Integer
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.vertical_layout_configuration.tile_aspect_ratio #=> String
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.video_attribute.corner_radius #=> Integer
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.video_attribute.border_color #=> String, one of "Black", "Blue", "Red", "Green", "White", "Yellow"
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.video_attribute.highlight_color #=> String, one of "Black", "Blue", "Red", "Green", "White", "Yellow"
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.video_attribute.border_thickness #=> Integer
+    #   resp.media_pipeline.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.composited_video.grid_view_configuration.canvas_orientation #=> String, one of "Landscape", "Portrait"
     #   resp.media_pipeline.media_live_connector_pipeline.sources #=> Array
     #   resp.media_pipeline.media_live_connector_pipeline.sources[0].source_type #=> String, one of "ChimeSdkMeeting"
     #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.arn #=> String
     #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.mux_type #=> String, one of "AudioWithCompositedVideo", "AudioWithActiveSpeakerVideo"
     #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.layout #=> String, one of "GridView"
     #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.resolution #=> String, one of "HD", "FHD"
-    #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.content_share_layout #=> String, one of "PresenterOnly", "Horizontal", "Vertical"
+    #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.content_share_layout #=> String, one of "PresenterOnly", "Horizontal", "Vertical", "ActiveSpeakerOnly"
     #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.presenter_only_configuration.presenter_position #=> String, one of "TopLeft", "TopRight", "BottomLeft", "BottomRight"
+    #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.active_speaker_only_configuration.active_speaker_position #=> String, one of "TopLeft", "TopRight", "BottomLeft", "BottomRight"
+    #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.horizontal_layout_configuration.tile_order #=> String, one of "JoinSequence", "SpeakerSequence"
+    #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.horizontal_layout_configuration.tile_position #=> String, one of "Top", "Bottom"
+    #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.horizontal_layout_configuration.tile_count #=> Integer
+    #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.horizontal_layout_configuration.tile_aspect_ratio #=> String
+    #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.vertical_layout_configuration.tile_order #=> String, one of "JoinSequence", "SpeakerSequence"
+    #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.vertical_layout_configuration.tile_position #=> String, one of "Left", "Right"
+    #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.vertical_layout_configuration.tile_count #=> Integer
+    #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.vertical_layout_configuration.tile_aspect_ratio #=> String
+    #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.video_attribute.corner_radius #=> Integer
+    #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.video_attribute.border_color #=> String, one of "Black", "Blue", "Red", "Green", "White", "Yellow"
+    #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.video_attribute.highlight_color #=> String, one of "Black", "Blue", "Red", "Green", "White", "Yellow"
+    #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.video_attribute.border_thickness #=> Integer
+    #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.composited_video.grid_view_configuration.canvas_orientation #=> String, one of "Landscape", "Portrait"
     #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.source_configuration.selected_video_streams.attendee_ids #=> Array
     #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.source_configuration.selected_video_streams.attendee_ids[0] #=> String
     #   resp.media_pipeline.media_live_connector_pipeline.sources[0].chime_sdk_meeting_live_connector_configuration.source_configuration.selected_video_streams.external_user_ids #=> Array
@@ -1623,7 +1754,7 @@ module Aws::ChimeSDKMediaPipelines
     #           call_analytics_stream_categories: ["CategoryName"],
     #         },
     #         amazon_transcribe_processor_configuration: {
-    #           language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR
+    #           language_code: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR
     #           vocabulary_name: "VocabularyName",
     #           vocabulary_filter_name: "VocabularyFilterName",
     #           vocabulary_filter_method: "remove", # accepts remove, mask, tag
@@ -1635,6 +1766,11 @@ module Aws::ChimeSDKMediaPipelines
     #           pii_entity_types: "PiiEntityTypes",
     #           language_model_name: "ModelName",
     #           filter_partial_results: false,
+    #           identify_language: false,
+    #           language_options: "LanguageOptions",
+    #           preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR
+    #           vocabulary_names: "VocabularyNames",
+    #           vocabulary_filter_names: "VocabularyFilterNames",
     #         },
     #         kinesis_data_stream_sink_configuration: {
     #           insights_target: "Arn",
@@ -1707,6 +1843,11 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.pii_entity_types #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.language_model_name #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.filter_partial_results #=> Boolean
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.identify_language #=> Boolean
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.language_options #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.preferred_language #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.vocabulary_names #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.vocabulary_filter_names #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].kinesis_data_stream_sink_configuration.insights_target #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].s3_recording_sink_configuration.destination #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].s3_recording_sink_configuration.recording_file_format #=> String, one of "Wav", "Opus"
@@ -1768,7 +1909,7 @@ module Aws::ChimeSDKMediaPipelines
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmediapipelines'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

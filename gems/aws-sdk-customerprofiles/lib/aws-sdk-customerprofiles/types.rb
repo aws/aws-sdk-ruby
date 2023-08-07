@@ -329,6 +329,92 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # Configuration information about the `AttributeTypesSelector `where the
+    # rule-based identity resolution uses to match profiles. You can choose
+    # how profiles are compared across attribute types and which attribute
+    # to use for matching from each type. There are three attribute types
+    # you can configure:
+    #
+    # * Email type
+    #
+    #   * You can choose from `Email`, `BusinessEmail`, and `PersonalEmail`
+    #
+    #   ^
+    #
+    # * Phone number type
+    #
+    #   * You can choose from `Phone`, `HomePhone`, and `MobilePhone`
+    #
+    #   ^
+    #
+    # * Address type
+    #
+    #   * You can choose from `Address`, `BusinessAddress`,
+    #     `MaillingAddress`, and `ShippingAddress`
+    #
+    #   ^
+    #
+    # You can either choose `ONE_TO_ONE` or `MANY_TO_MANY` as the
+    # `AttributeMatchingModel`. When choosing `MANY_TO_MANY`, the system can
+    # match attribute across the sub-types of an attribute type. For
+    # example, if the value of the `Email` field of Profile A and the value
+    # of `BusinessEmail` field of Profile B matches, the two profiles are
+    # matched on the Email type. When choosing `ONE_TO_ONE` the system can
+    # only match if the sub-types are exact matches. For example, only when
+    # the value of the `Email` field of Profile A and the value of the
+    # `Email` field of Profile B matches, the two profiles are matched on
+    # the Email type.
+    #
+    # @!attribute [rw] attribute_matching_model
+    #   Configures the `AttributeMatchingModel`, you can either choose
+    #   `ONE_TO_ONE` or `MANY_TO_MANY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] address
+    #   The `Address` type. You can choose from `Address`,
+    #   `BusinessAddress`, `MaillingAddress`, and `ShippingAddress`.
+    #
+    #   You only can use the Address type in the `MatchingRule`. For
+    #   example, if you want to match profile based on
+    #   `BusinessAddress.City` or `MaillingAddress.City`, you need to choose
+    #   the `BusinessAddress` and the `MaillingAddress` to represent the
+    #   Address type and specify the `Address.City` on the matching rule.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] phone_number
+    #   The `PhoneNumber` type. You can choose from `PhoneNumber`,
+    #   `HomePhoneNumber`, and `MobilePhoneNumber`.
+    #
+    #   You only can use the `PhoneNumber` type in the `MatchingRule`. For
+    #   example, if you want to match a profile based on `Phone` or
+    #   `HomePhone`, you need to choose the `Phone` and the `HomePhone` to
+    #   represent the `PhoneNumber` type and only specify the `PhoneNumber`
+    #   on the matching rule.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] email_address
+    #   The `Email` type. You can choose from `EmailAddress`,
+    #   `BusinessEmailAddress` and `PersonalEmailAddress`.
+    #
+    #   You only can use the `EmailAddress` type in the `MatchingRule`. For
+    #   example, if you want to match profile based on
+    #   `PersonalEmailAddress` or `BusinessEmailAddress`, you need to choose
+    #   the `PersonalEmailAddress` and the `BusinessEmailAddress` to
+    #   represent the `EmailAddress` type and only specify the
+    #   `EmailAddress` on the matching rule.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/AttributeTypesSelector AWS API Documentation
+    #
+    class AttributeTypesSelector < Struct.new(
+      :attribute_matching_model,
+      :address,
+      :phone_number,
+      :email_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration settings for how to perform the auto-merging of
     # profiles.
     #
@@ -654,6 +740,17 @@ module Aws::CustomerProfiles
     #   [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
     #   @return [Types::MatchingRequest]
     #
+    # @!attribute [rw] rule_based_matching
+    #   The process of matching duplicate profiles using the Rule-Based
+    #   matching. If `RuleBasedMatching` = true, Amazon Connect Customer
+    #   Profiles will start to match and merge your profiles according to
+    #   your configuration in the `RuleBasedMatchingRequest`. You can use
+    #   the `ListRuleBasedMatches` and `GetSimilarProfiles` API to return
+    #   and review the results. Also, if you have configured
+    #   `ExportingConfig` in the `RuleBasedMatchingRequest`, you can
+    #   download the results from S3.
+    #   @return [Types::RuleBasedMatchingRequest]
+    #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
     #   resource.
@@ -667,6 +764,7 @@ module Aws::CustomerProfiles
       :default_encryption_key,
       :dead_letter_queue_url,
       :matching,
+      :rule_based_matching,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -709,6 +807,17 @@ module Aws::CustomerProfiles
     #   [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
     #   @return [Types::MatchingResponse]
     #
+    # @!attribute [rw] rule_based_matching
+    #   The process of matching duplicate profiles using the Rule-Based
+    #   matching. If `RuleBasedMatching` = true, Amazon Connect Customer
+    #   Profiles will start to match and merge your profiles according to
+    #   your configuration in the `RuleBasedMatchingRequest`. You can use
+    #   the `ListRuleBasedMatches` and `GetSimilarProfiles` API to return
+    #   and review the results. Also, if you have configured
+    #   `ExportingConfig` in the `RuleBasedMatchingRequest`, you can
+    #   download the results from S3.
+    #   @return [Types::RuleBasedMatchingResponse]
+    #
     # @!attribute [rw] created_at
     #   The timestamp of when the domain was created.
     #   @return [Time]
@@ -730,6 +839,7 @@ module Aws::CustomerProfiles
       :default_encryption_key,
       :dead_letter_queue_url,
       :matching,
+      :rule_based_matching,
       :created_at,
       :last_updated_at,
       :tags)
@@ -1835,6 +1945,17 @@ module Aws::CustomerProfiles
     #   [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
     #   @return [Types::MatchingResponse]
     #
+    # @!attribute [rw] rule_based_matching
+    #   The process of matching duplicate profiles using the Rule-Based
+    #   matching. If `RuleBasedMatching` = true, Amazon Connect Customer
+    #   Profiles will start to match and merge your profiles according to
+    #   your configuration in the `RuleBasedMatchingRequest`. You can use
+    #   the `ListRuleBasedMatches` and `GetSimilarProfiles` API to return
+    #   and review the results. Also, if you have configured
+    #   `ExportingConfig` in the `RuleBasedMatchingRequest`, you can
+    #   download the results from S3.
+    #   @return [Types::RuleBasedMatchingResponse]
+    #
     # @!attribute [rw] created_at
     #   The timestamp of when the domain was created.
     #   @return [Time]
@@ -1857,6 +1978,7 @@ module Aws::CustomerProfiles
       :dead_letter_queue_url,
       :stats,
       :matching,
+      :rule_based_matching,
       :created_at,
       :last_updated_at,
       :tags)
@@ -2308,6 +2430,91 @@ module Aws::CustomerProfiles
       :source_last_updated_timestamp_format,
       :fields,
       :keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The pagination token from the previous `GetSimilarProfiles` API
+    #   call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects returned per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] match_type
+    #   Specify the type of matching to get similar profiles for.
+    #   @return [String]
+    #
+    # @!attribute [rw] search_key
+    #   The string indicating the search key to be used.
+    #   @return [String]
+    #
+    # @!attribute [rw] search_value
+    #   The string based on `SearchKey` to be searched for similar profiles.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetSimilarProfilesRequest AWS API Documentation
+    #
+    class GetSimilarProfilesRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :domain_name,
+      :match_type,
+      :search_key,
+      :search_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile_ids
+    #   Set of `profileId`s that belong to the same matching group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] match_id
+    #   The string `matchId` that the similar profiles belong to.
+    #   @return [String]
+    #
+    # @!attribute [rw] match_type
+    #   Specify the type of matching to get similar profiles for.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_level
+    #   The integer rule level that the profiles matched on.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] confidence_score
+    #   It only has value when the `MatchType` is `ML_BASED_MATCHING`.A
+    #   number between 0 and 1, where a higher score means higher
+    #   similarity. Examining match confidence scores lets you distinguish
+    #   between groups of similar records in which the system is highly
+    #   confident (which you may decide to merge), groups of similar records
+    #   about which the system is uncertain (which you may decide to have
+    #   reviewed by a human), and groups of similar records that the system
+    #   deems to be unlikely (which you may decide to reject). Given
+    #   confidence scores vary as per the data input, it should not be used
+    #   as an absolute measure of matching quality.
+    #   @return [Float]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from the previous `GetSimilarProfiles` API
+    #   call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetSimilarProfilesResponse AWS API Documentation
+    #
+    class GetSimilarProfilesResponse < Struct.new(
+      :profile_ids,
+      :match_id,
+      :match_type,
+      :rule_level,
+      :confidence_score,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3268,6 +3475,47 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   The pagination token from the previous `ListRuleBasedMatches` API
+    #   call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of `MatchIds` returned per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListRuleBasedMatchesRequest AWS API Documentation
+    #
+    class ListRuleBasedMatchesRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :domain_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] match_ids
+    #   The list of `MatchIds` for the given domain.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from the previous `ListRuleBasedMatches` API
+    #   call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListRuleBasedMatchesResponse AWS API Documentation
+    #
+    class ListRuleBasedMatchesResponse < Struct.new(
+      :match_ids,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The ARN of the resource for which you want to view tags.
     #   @return [String]
@@ -3501,6 +3749,57 @@ module Aws::CustomerProfiles
       :job_schedule,
       :auto_merging,
       :exporting_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies how does the rule-based matching process should match
+    # profiles. You can choose from the following attributes to build the
+    # matching Rule:
+    #
+    # * AccountNumber
+    #
+    # * Address.Address
+    #
+    # * Address.City
+    #
+    # * Address.Country
+    #
+    # * Address.County
+    #
+    # * Address.PostalCode
+    #
+    # * Address.State
+    #
+    # * Address.Province
+    #
+    # * BirthDate
+    #
+    # * BusinessName
+    #
+    # * EmailAddress
+    #
+    # * FirstName
+    #
+    # * Gender
+    #
+    # * LastName
+    #
+    # * MiddleName
+    #
+    # * PhoneNumber
+    #
+    # * Any customized profile attributes that start with the `Attributes`
+    #
+    # @!attribute [rw] rule
+    #   A single rule level of the `MatchRules`. Configures how the
+    #   rule-based matching process should match profiles.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/MatchingRule AWS API Documentation
+    #
+    class MatchingRule < Struct.new(
+      :rule)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4118,6 +4417,163 @@ module Aws::CustomerProfiles
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request to enable the rule-based matching.
+    #
+    # @!attribute [rw] enabled
+    #   The flag that enables the rule-based matching process of duplicate
+    #   profiles.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] matching_rules
+    #   Configures how the rule-based matching process should match
+    #   profiles. You can have up to 15 `MatchingRule` in the
+    #   `MatchingRules`.
+    #   @return [Array<Types::MatchingRule>]
+    #
+    # @!attribute [rw] max_allowed_rule_level_for_merging
+    #   [MatchingRule][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_MatchingRule.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_allowed_rule_level_for_matching
+    #   Indicates the maximum allowed rule level.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] attribute_types_selector
+    #   Configures information about the `AttributeTypesSelector` where the
+    #   rule-based identity resolution uses to match profiles.
+    #   @return [Types::AttributeTypesSelector]
+    #
+    # @!attribute [rw] conflict_resolution
+    #   How the auto-merging process should resolve conflicts between
+    #   different profiles.
+    #   @return [Types::ConflictResolution]
+    #
+    # @!attribute [rw] exporting_config
+    #   Configuration information about the S3 bucket where Identity
+    #   Resolution Jobs writes result files.
+    #
+    #   <note markdown="1"> You need to give Customer Profiles service principal write
+    #   permission to your S3 bucket. Otherwise, you'll get an exception in
+    #   the API response. For an example policy, see [Amazon Connect
+    #   Customer Profiles cross-service confused deputy prevention][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html#customer-profiles-cross-service
+    #   @return [Types::ExportingConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/RuleBasedMatchingRequest AWS API Documentation
+    #
+    class RuleBasedMatchingRequest < Struct.new(
+      :enabled,
+      :matching_rules,
+      :max_allowed_rule_level_for_merging,
+      :max_allowed_rule_level_for_matching,
+      :attribute_types_selector,
+      :conflict_resolution,
+      :exporting_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response of the Rule-based matching request.
+    #
+    # @!attribute [rw] enabled
+    #   The flag that enables the rule-based matching process of duplicate
+    #   profiles.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] matching_rules
+    #   Configures how the rule-based matching process should match
+    #   profiles. You can have up to 15 `MatchingRule` in the
+    #   `MatchingRules`.
+    #   @return [Array<Types::MatchingRule>]
+    #
+    # @!attribute [rw] status
+    #   PENDING
+    #
+    #   * The first status after configuration a rule-based matching rule.
+    #     If it is an existing domain, the rule-based Identity Resolution
+    #     waits one hour before creating the matching rule. If it is a new
+    #     domain, the system will skip the `PENDING` stage.
+    #
+    #   ^
+    #
+    #   IN\_PROGRESS
+    #
+    #   * The system is creating the rule-based matching rule. Under this
+    #     status, the system is evaluating the existing data and you can no
+    #     longer change the Rule-based matching configuration.
+    #
+    #   ^
+    #
+    #   ACTIVE
+    #
+    #   * The rule is ready to use. You can change the rule a day after the
+    #     status is in `ACTIVE`.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] max_allowed_rule_level_for_merging
+    #   [MatchingRule][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_MatchingRule.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_allowed_rule_level_for_matching
+    #   Indicates the maximum allowed rule level.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] attribute_types_selector
+    #   Configures information about the `AttributeTypesSelector` where the
+    #   rule-based identity resolution uses to match profiles.
+    #   @return [Types::AttributeTypesSelector]
+    #
+    # @!attribute [rw] conflict_resolution
+    #   How the auto-merging process should resolve conflicts between
+    #   different profiles.
+    #   @return [Types::ConflictResolution]
+    #
+    # @!attribute [rw] exporting_config
+    #   Configuration information about the S3 bucket where Identity
+    #   Resolution Jobs writes result files.
+    #
+    #   <note markdown="1"> You need to give Customer Profiles service principal write
+    #   permission to your S3 bucket. Otherwise, you'll get an exception in
+    #   the API response. For an example policy, see [Amazon Connect
+    #   Customer Profiles cross-service confused deputy prevention][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html#customer-profiles-cross-service
+    #   @return [Types::ExportingConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/RuleBasedMatchingResponse AWS API Documentation
+    #
+    class RuleBasedMatchingResponse < Struct.new(
+      :enabled,
+      :matching_rules,
+      :status,
+      :max_allowed_rule_level_for_merging,
+      :max_allowed_rule_level_for_matching,
+      :attribute_types_selector,
+      :conflict_resolution,
+      :exporting_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4785,6 +5241,17 @@ module Aws::CustomerProfiles
     #   [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
     #   @return [Types::MatchingRequest]
     #
+    # @!attribute [rw] rule_based_matching
+    #   The process of matching duplicate profiles using the rule-Based
+    #   matching. If `RuleBasedMatching` = true, Amazon Connect Customer
+    #   Profiles will start to match and merge your profiles according to
+    #   your configuration in the `RuleBasedMatchingRequest`. You can use
+    #   the `ListRuleBasedMatches` and `GetSimilarProfiles` API to return
+    #   and review the results. Also, if you have configured
+    #   `ExportingConfig` in the `RuleBasedMatchingRequest`, you can
+    #   download the results from S3.
+    #   @return [Types::RuleBasedMatchingRequest]
+    #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
     #   resource.
@@ -4798,6 +5265,7 @@ module Aws::CustomerProfiles
       :default_encryption_key,
       :dead_letter_queue_url,
       :matching,
+      :rule_based_matching,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -4840,6 +5308,17 @@ module Aws::CustomerProfiles
     #   [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
     #   @return [Types::MatchingResponse]
     #
+    # @!attribute [rw] rule_based_matching
+    #   The process of matching duplicate profiles using the rule-Based
+    #   matching. If `RuleBasedMatching` = true, Amazon Connect Customer
+    #   Profiles will start to match and merge your profiles according to
+    #   your configuration in the `RuleBasedMatchingRequest`. You can use
+    #   the `ListRuleBasedMatches` and `GetSimilarProfiles` API to return
+    #   and review the results. Also, if you have configured
+    #   `ExportingConfig` in the `RuleBasedMatchingRequest`, you can
+    #   download the results from S3.
+    #   @return [Types::RuleBasedMatchingResponse]
+    #
     # @!attribute [rw] created_at
     #   The timestamp of when the domain was created.
     #   @return [Time]
@@ -4861,6 +5340,7 @@ module Aws::CustomerProfiles
       :default_encryption_key,
       :dead_letter_queue_url,
       :matching,
+      :rule_based_matching,
       :created_at,
       :last_updated_at,
       :tags)

@@ -852,6 +852,20 @@ module Aws::CognitoIdentityProvider
       end
     end
 
+    class GetLogDeliveryConfiguration
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CognitoIdentityProvider::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class GetSigningCertificate
       def self.build(context)
         unless context.config.regional_endpoint
@@ -1119,6 +1133,20 @@ module Aws::CognitoIdentityProvider
     end
 
     class RevokeToken
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CognitoIdentityProvider::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class SetLogDeliveryConfiguration
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

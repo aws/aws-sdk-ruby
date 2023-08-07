@@ -393,6 +393,17 @@ module Aws::EBS
     # status to `completed`. You cannot write new blocks to a snapshot after
     # it has been completed.
     #
+    # <note markdown="1"> You should always retry requests that receive server (`5xx`) error
+    # responses, and `ThrottlingException` and `RequestThrottledException`
+    # client error responses. For more information see [Error retries][1] in
+    # the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html
+    #
     # @option params [required, String] :snapshot_id
     #   The ID of the snapshot.
     #
@@ -445,6 +456,17 @@ module Aws::EBS
     end
 
     # Returns the data in a block in an Amazon Elastic Block Store snapshot.
+    #
+    # <note markdown="1"> You should always retry requests that receive server (`5xx`) error
+    # responses, and `ThrottlingException` and `RequestThrottledException`
+    # client error responses. For more information see [Error retries][1] in
+    # the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html
     #
     # @option params [required, String] :snapshot_id
     #   The ID of the snapshot containing the block from which to get data.
@@ -504,6 +526,17 @@ module Aws::EBS
     # Returns information about the blocks that are different between two
     # Amazon Elastic Block Store snapshots of the same volume/snapshot
     # lineage.
+    #
+    # <note markdown="1"> You should always retry requests that receive server (`5xx`) error
+    # responses, and `ThrottlingException` and `RequestThrottledException`
+    # client error responses. For more information see [Error retries][1] in
+    # the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html
     #
     # @option params [String] :first_snapshot_id
     #   The ID of the first snapshot to use for the comparison.
@@ -584,6 +617,17 @@ module Aws::EBS
     # Returns information about the blocks in an Amazon Elastic Block Store
     # snapshot.
     #
+    # <note markdown="1"> You should always retry requests that receive server (`5xx`) error
+    # responses, and `ThrottlingException` and `RequestThrottledException`
+    # client error responses. For more information see [Error retries][1] in
+    # the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html
+    #
     # @option params [required, String] :snapshot_id
     #   The ID of the snapshot from which to get block indexes and block
     #   tokens.
@@ -654,6 +698,17 @@ module Aws::EBS
     # the `pending` state.
     #
     # Data written to a snapshot must be aligned with 512-KiB sectors.
+    #
+    # <note markdown="1"> You should always retry requests that receive server (`5xx`) error
+    # responses, and `ThrottlingException` and `RequestThrottledException`
+    # client error responses. For more information see [Error retries][1] in
+    # the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html
     #
     # @option params [required, String] :snapshot_id
     #   The ID of the snapshot.
@@ -747,9 +802,17 @@ module Aws::EBS
     # After creating the snapshot, use [ PutSnapshotBlock][1] to write
     # blocks of data to the snapshot.
     #
+    # <note markdown="1"> You should always retry requests that receive server (`5xx`) error
+    # responses, and `ThrottlingException` and `RequestThrottledException`
+    # client error responses. For more information see [Error retries][2] in
+    # the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/ebs/latest/APIReference/API_PutSnapshotBlock.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html
     #
     # @option params [required, Integer] :volume_size
     #   The size of the volume, in GiB. The maximum size is `65536` GiB (64
@@ -873,6 +936,7 @@ module Aws::EBS
     #   * {Types::StartSnapshotResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::StartSnapshotResponse#parent_snapshot_id #parent_snapshot_id} => String
     #   * {Types::StartSnapshotResponse#kms_key_arn #kms_key_arn} => String
+    #   * {Types::StartSnapshotResponse#sse_type #sse_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -906,6 +970,7 @@ module Aws::EBS
     #   resp.tags[0].value #=> String
     #   resp.parent_snapshot_id #=> String
     #   resp.kms_key_arn #=> String
+    #   resp.sse_type #=> String, one of "sse-ebs", "sse-kms", "none"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ebs-2019-11-02/StartSnapshot AWS API Documentation
     #
@@ -929,7 +994,7 @@ module Aws::EBS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ebs'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2023-07-25)
+------------------
+
+* Feature - Add support for CONTAINS and NOT_CONTAINS comparison operators for Automation Rules string filters and map filters
+
 1.89.0 (2023-07-11)
 ------------------
 

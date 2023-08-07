@@ -49,6 +49,8 @@ module Aws::QuickSight
     AnonymousUserDashboardVisualEmbeddingConfiguration = Shapes::StructureShape.new(name: 'AnonymousUserDashboardVisualEmbeddingConfiguration')
     AnonymousUserEmbeddingExperienceConfiguration = Shapes::StructureShape.new(name: 'AnonymousUserEmbeddingExperienceConfiguration')
     AnonymousUserQSearchBarEmbeddingConfiguration = Shapes::StructureShape.new(name: 'AnonymousUserQSearchBarEmbeddingConfiguration')
+    AnonymousUserSnapshotJobResult = Shapes::StructureShape.new(name: 'AnonymousUserSnapshotJobResult')
+    AnonymousUserSnapshotJobResultList = Shapes::ListShape.new(name: 'AnonymousUserSnapshotJobResultList')
     ArcAxisConfiguration = Shapes::StructureShape.new(name: 'ArcAxisConfiguration')
     ArcAxisDisplayRange = Shapes::StructureShape.new(name: 'ArcAxisDisplayRange')
     ArcConfiguration = Shapes::StructureShape.new(name: 'ArcConfiguration')
@@ -123,6 +125,7 @@ module Aws::QuickSight
     AssetBundleResourceArns = Shapes::ListShape.new(name: 'AssetBundleResourceArns')
     AssignmentStatus = Shapes::StringShape.new(name: 'AssignmentStatus')
     AthenaParameters = Shapes::StructureShape.new(name: 'AthenaParameters')
+    AttributeAggregationFunction = Shapes::StructureShape.new(name: 'AttributeAggregationFunction')
     AuroraParameters = Shapes::StructureShape.new(name: 'AuroraParameters')
     AuroraPostgreSqlParameters = Shapes::StructureShape.new(name: 'AuroraPostgreSqlParameters')
     AuthenticationMethodOption = Shapes::StringShape.new(name: 'AuthenticationMethodOption')
@@ -530,6 +533,10 @@ module Aws::QuickSight
     DescribeDashboardPermissionsResponse = Shapes::StructureShape.new(name: 'DescribeDashboardPermissionsResponse')
     DescribeDashboardRequest = Shapes::StructureShape.new(name: 'DescribeDashboardRequest')
     DescribeDashboardResponse = Shapes::StructureShape.new(name: 'DescribeDashboardResponse')
+    DescribeDashboardSnapshotJobRequest = Shapes::StructureShape.new(name: 'DescribeDashboardSnapshotJobRequest')
+    DescribeDashboardSnapshotJobResponse = Shapes::StructureShape.new(name: 'DescribeDashboardSnapshotJobResponse')
+    DescribeDashboardSnapshotJobResultRequest = Shapes::StructureShape.new(name: 'DescribeDashboardSnapshotJobResultRequest')
+    DescribeDashboardSnapshotJobResultResponse = Shapes::StructureShape.new(name: 'DescribeDashboardSnapshotJobResultResponse')
     DescribeDataSetPermissionsRequest = Shapes::StructureShape.new(name: 'DescribeDataSetPermissionsRequest')
     DescribeDataSetPermissionsResponse = Shapes::StructureShape.new(name: 'DescribeDataSetPermissionsResponse')
     DescribeDataSetRefreshPropertiesRequest = Shapes::StructureShape.new(name: 'DescribeDataSetRefreshPropertiesRequest')
@@ -1204,6 +1211,7 @@ module Aws::QuickSight
     RowLevelPermissionTagRuleList = Shapes::ListShape.new(name: 'RowLevelPermissionTagRuleList')
     RowSortList = Shapes::ListShape.new(name: 'RowSortList')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
+    S3BucketConfiguration = Shapes::StructureShape.new(name: 'S3BucketConfiguration')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
     S3Parameters = Shapes::StructureShape.new(name: 'S3Parameters')
     S3Source = Shapes::StructureShape.new(name: 'S3Source')
@@ -1259,6 +1267,7 @@ module Aws::QuickSight
     SensitiveLong = Shapes::IntegerShape.new(name: 'SensitiveLong')
     SensitiveLongList = Shapes::ListShape.new(name: 'SensitiveLongList')
     SensitiveLongObject = Shapes::IntegerShape.new(name: 'SensitiveLongObject')
+    SensitiveS3Uri = Shapes::StringShape.new(name: 'SensitiveS3Uri')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     SensitiveStringList = Shapes::ListShape.new(name: 'SensitiveStringList')
     SensitiveStringObject = Shapes::StringShape.new(name: 'SensitiveStringObject')
@@ -1271,6 +1280,7 @@ module Aws::QuickSight
     SessionLifetimeInMinutesInvalidException = Shapes::StructureShape.new(name: 'SessionLifetimeInMinutesInvalidException')
     SessionTag = Shapes::StructureShape.new(name: 'SessionTag')
     SessionTagKey = Shapes::StringShape.new(name: 'SessionTagKey')
+    SessionTagKeyList = Shapes::ListShape.new(name: 'SessionTagKeyList')
     SessionTagList = Shapes::ListShape.new(name: 'SessionTagList')
     SessionTagValue = Shapes::StringShape.new(name: 'SessionTagValue')
     SetParameterValueConfiguration = Shapes::StructureShape.new(name: 'SetParameterValueConfiguration')
@@ -1279,6 +1289,8 @@ module Aws::QuickSight
     Sheet = Shapes::StructureShape.new(name: 'Sheet')
     SheetContentType = Shapes::StringShape.new(name: 'SheetContentType')
     SheetControlDateTimePickerType = Shapes::StringShape.new(name: 'SheetControlDateTimePickerType')
+    SheetControlInfoIconLabelOptions = Shapes::StructureShape.new(name: 'SheetControlInfoIconLabelOptions')
+    SheetControlInfoIconText = Shapes::StringShape.new(name: 'SheetControlInfoIconText')
     SheetControlLayout = Shapes::StructureShape.new(name: 'SheetControlLayout')
     SheetControlLayoutConfiguration = Shapes::StructureShape.new(name: 'SheetControlLayoutConfiguration')
     SheetControlLayoutList = Shapes::ListShape.new(name: 'SheetControlLayoutList')
@@ -1307,6 +1319,7 @@ module Aws::QuickSight
     ShortRestrictiveResourceId = Shapes::StringShape.new(name: 'ShortRestrictiveResourceId')
     ShortRichText = Shapes::StringShape.new(name: 'ShortRichText')
     SignupResponse = Shapes::StructureShape.new(name: 'SignupResponse')
+    SimpleAttributeAggregationFunction = Shapes::StringShape.new(name: 'SimpleAttributeAggregationFunction')
     SimpleClusterMarker = Shapes::StructureShape.new(name: 'SimpleClusterMarker')
     SimpleNumericalAggregationFunction = Shapes::StringShape.new(name: 'SimpleNumericalAggregationFunction')
     SiteBaseUrl = Shapes::StringShape.new(name: 'SiteBaseUrl')
@@ -1316,6 +1329,34 @@ module Aws::QuickSight
     SmallMultiplesAxisScale = Shapes::StringShape.new(name: 'SmallMultiplesAxisScale')
     SmallMultiplesDimensionFieldList = Shapes::ListShape.new(name: 'SmallMultiplesDimensionFieldList')
     SmallMultiplesOptions = Shapes::StructureShape.new(name: 'SmallMultiplesOptions')
+    SnapshotAnonymousUser = Shapes::StructureShape.new(name: 'SnapshotAnonymousUser')
+    SnapshotAnonymousUserList = Shapes::ListShape.new(name: 'SnapshotAnonymousUserList')
+    SnapshotAnonymousUserRedacted = Shapes::StructureShape.new(name: 'SnapshotAnonymousUserRedacted')
+    SnapshotAnonymousUserRedactedList = Shapes::ListShape.new(name: 'SnapshotAnonymousUserRedactedList')
+    SnapshotConfiguration = Shapes::StructureShape.new(name: 'SnapshotConfiguration')
+    SnapshotDestinationConfiguration = Shapes::StructureShape.new(name: 'SnapshotDestinationConfiguration')
+    SnapshotFile = Shapes::StructureShape.new(name: 'SnapshotFile')
+    SnapshotFileFormatType = Shapes::StringShape.new(name: 'SnapshotFileFormatType')
+    SnapshotFileGroup = Shapes::StructureShape.new(name: 'SnapshotFileGroup')
+    SnapshotFileGroupList = Shapes::ListShape.new(name: 'SnapshotFileGroupList')
+    SnapshotFileList = Shapes::ListShape.new(name: 'SnapshotFileList')
+    SnapshotFileSheetSelection = Shapes::StructureShape.new(name: 'SnapshotFileSheetSelection')
+    SnapshotFileSheetSelectionList = Shapes::ListShape.new(name: 'SnapshotFileSheetSelectionList')
+    SnapshotFileSheetSelectionScope = Shapes::StringShape.new(name: 'SnapshotFileSheetSelectionScope')
+    SnapshotFileSheetSelectionVisualIdList = Shapes::ListShape.new(name: 'SnapshotFileSheetSelectionVisualIdList')
+    SnapshotJobErrorInfo = Shapes::StructureShape.new(name: 'SnapshotJobErrorInfo')
+    SnapshotJobResult = Shapes::StructureShape.new(name: 'SnapshotJobResult')
+    SnapshotJobResultErrorInfo = Shapes::StructureShape.new(name: 'SnapshotJobResultErrorInfo')
+    SnapshotJobResultErrorInfoList = Shapes::ListShape.new(name: 'SnapshotJobResultErrorInfoList')
+    SnapshotJobResultFileGroup = Shapes::StructureShape.new(name: 'SnapshotJobResultFileGroup')
+    SnapshotJobResultFileGroupList = Shapes::ListShape.new(name: 'SnapshotJobResultFileGroupList')
+    SnapshotJobS3Result = Shapes::StructureShape.new(name: 'SnapshotJobS3Result')
+    SnapshotJobS3ResultList = Shapes::ListShape.new(name: 'SnapshotJobS3ResultList')
+    SnapshotJobStatus = Shapes::StringShape.new(name: 'SnapshotJobStatus')
+    SnapshotS3DestinationConfiguration = Shapes::StructureShape.new(name: 'SnapshotS3DestinationConfiguration')
+    SnapshotS3DestinationConfigurationList = Shapes::ListShape.new(name: 'SnapshotS3DestinationConfigurationList')
+    SnapshotUserConfiguration = Shapes::StructureShape.new(name: 'SnapshotUserConfiguration')
+    SnapshotUserConfigurationRedacted = Shapes::StructureShape.new(name: 'SnapshotUserConfigurationRedacted')
     SnowflakeParameters = Shapes::StructureShape.new(name: 'SnowflakeParameters')
     SortDirection = Shapes::StringShape.new(name: 'SortDirection')
     Spacing = Shapes::StructureShape.new(name: 'Spacing')
@@ -1329,6 +1370,8 @@ module Aws::QuickSight
     StartAssetBundleExportJobResponse = Shapes::StructureShape.new(name: 'StartAssetBundleExportJobResponse')
     StartAssetBundleImportJobRequest = Shapes::StructureShape.new(name: 'StartAssetBundleImportJobRequest')
     StartAssetBundleImportJobResponse = Shapes::StructureShape.new(name: 'StartAssetBundleImportJobResponse')
+    StartDashboardSnapshotJobRequest = Shapes::StructureShape.new(name: 'StartDashboardSnapshotJobRequest')
+    StartDashboardSnapshotJobResponse = Shapes::StructureShape.new(name: 'StartDashboardSnapshotJobResponse')
     StatePersistenceConfigurations = Shapes::StructureShape.new(name: 'StatePersistenceConfigurations')
     Status = Shapes::StringShape.new(name: 'Status')
     StatusCode = Shapes::IntegerShape.new(name: 'StatusCode')
@@ -1675,6 +1718,7 @@ module Aws::QuickSight
     AggregationFunction.add_member(:numerical_aggregation_function, Shapes::ShapeRef.new(shape: NumericalAggregationFunction, location_name: "NumericalAggregationFunction"))
     AggregationFunction.add_member(:categorical_aggregation_function, Shapes::ShapeRef.new(shape: CategoricalAggregationFunction, location_name: "CategoricalAggregationFunction"))
     AggregationFunction.add_member(:date_aggregation_function, Shapes::ShapeRef.new(shape: DateAggregationFunction, location_name: "DateAggregationFunction"))
+    AggregationFunction.add_member(:attribute_aggregation_function, Shapes::ShapeRef.new(shape: AttributeAggregationFunction, location_name: "AttributeAggregationFunction"))
     AggregationFunction.struct_class = Types::AggregationFunction
 
     AggregationFunctionParameters.key = Shapes::ShapeRef.new(shape: LimitedString)
@@ -1765,6 +1809,11 @@ module Aws::QuickSight
 
     AnonymousUserQSearchBarEmbeddingConfiguration.add_member(:initial_topic_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location_name: "InitialTopicId"))
     AnonymousUserQSearchBarEmbeddingConfiguration.struct_class = Types::AnonymousUserQSearchBarEmbeddingConfiguration
+
+    AnonymousUserSnapshotJobResult.add_member(:file_groups, Shapes::ShapeRef.new(shape: SnapshotJobResultFileGroupList, location_name: "FileGroups"))
+    AnonymousUserSnapshotJobResult.struct_class = Types::AnonymousUserSnapshotJobResult
+
+    AnonymousUserSnapshotJobResultList.member = Shapes::ShapeRef.new(shape: AnonymousUserSnapshotJobResult)
 
     ArcAxisConfiguration.add_member(:range, Shapes::ShapeRef.new(shape: ArcAxisDisplayRange, location_name: "Range"))
     ArcAxisConfiguration.add_member(:reserve_range, Shapes::ShapeRef.new(shape: Integer, location_name: "ReserveRange"))
@@ -1970,6 +2019,10 @@ module Aws::QuickSight
     AthenaParameters.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroup, location_name: "WorkGroup"))
     AthenaParameters.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     AthenaParameters.struct_class = Types::AthenaParameters
+
+    AttributeAggregationFunction.add_member(:simple_attribute_aggregation, Shapes::ShapeRef.new(shape: SimpleAttributeAggregationFunction, location_name: "SimpleAttributeAggregation"))
+    AttributeAggregationFunction.add_member(:value_for_multiple_values, Shapes::ShapeRef.new(shape: String, location_name: "ValueForMultipleValues"))
+    AttributeAggregationFunction.struct_class = Types::AttributeAggregationFunction
 
     AuroraParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
     AuroraParameters.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))
@@ -3244,6 +3297,7 @@ module Aws::QuickSight
 
     DateTimePickerControlDisplayOptions.add_member(:title_options, Shapes::ShapeRef.new(shape: LabelOptions, location_name: "TitleOptions"))
     DateTimePickerControlDisplayOptions.add_member(:date_time_format, Shapes::ShapeRef.new(shape: DateTimeFormat, location_name: "DateTimeFormat"))
+    DateTimePickerControlDisplayOptions.add_member(:info_icon_label_options, Shapes::ShapeRef.new(shape: SheetControlInfoIconLabelOptions, location_name: "InfoIconLabelOptions"))
     DateTimePickerControlDisplayOptions.struct_class = Types::DateTimePickerControlDisplayOptions
 
     DateTimeValueWhenUnsetConfiguration.add_member(:value_when_unset_option, Shapes::ShapeRef.new(shape: ValueWhenUnsetOption, location_name: "ValueWhenUnsetOption"))
@@ -3685,6 +3739,39 @@ module Aws::QuickSight
     DescribeDashboardResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DescribeDashboardResponse.struct_class = Types::DescribeDashboardResponse
 
+    DescribeDashboardSnapshotJobRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeDashboardSnapshotJobRequest.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "DashboardId"))
+    DescribeDashboardSnapshotJobRequest.add_member(:snapshot_job_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "SnapshotJobId"))
+    DescribeDashboardSnapshotJobRequest.struct_class = Types::DescribeDashboardSnapshotJobRequest
+
+    DescribeDashboardSnapshotJobResponse.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "AwsAccountId"))
+    DescribeDashboardSnapshotJobResponse.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, location_name: "DashboardId"))
+    DescribeDashboardSnapshotJobResponse.add_member(:snapshot_job_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, location_name: "SnapshotJobId"))
+    DescribeDashboardSnapshotJobResponse.add_member(:user_configuration, Shapes::ShapeRef.new(shape: SnapshotUserConfigurationRedacted, location_name: "UserConfiguration"))
+    DescribeDashboardSnapshotJobResponse.add_member(:snapshot_configuration, Shapes::ShapeRef.new(shape: SnapshotConfiguration, location_name: "SnapshotConfiguration"))
+    DescribeDashboardSnapshotJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    DescribeDashboardSnapshotJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: SnapshotJobStatus, location_name: "JobStatus"))
+    DescribeDashboardSnapshotJobResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    DescribeDashboardSnapshotJobResponse.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
+    DescribeDashboardSnapshotJobResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RequestId"))
+    DescribeDashboardSnapshotJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location_name: "Status"))
+    DescribeDashboardSnapshotJobResponse.struct_class = Types::DescribeDashboardSnapshotJobResponse
+
+    DescribeDashboardSnapshotJobResultRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeDashboardSnapshotJobResultRequest.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "DashboardId"))
+    DescribeDashboardSnapshotJobResultRequest.add_member(:snapshot_job_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "SnapshotJobId"))
+    DescribeDashboardSnapshotJobResultRequest.struct_class = Types::DescribeDashboardSnapshotJobResultRequest
+
+    DescribeDashboardSnapshotJobResultResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    DescribeDashboardSnapshotJobResultResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: SnapshotJobStatus, location_name: "JobStatus"))
+    DescribeDashboardSnapshotJobResultResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    DescribeDashboardSnapshotJobResultResponse.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
+    DescribeDashboardSnapshotJobResultResponse.add_member(:result, Shapes::ShapeRef.new(shape: SnapshotJobResult, location_name: "Result"))
+    DescribeDashboardSnapshotJobResultResponse.add_member(:error_info, Shapes::ShapeRef.new(shape: SnapshotJobErrorInfo, location_name: "ErrorInfo"))
+    DescribeDashboardSnapshotJobResultResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RequestId"))
+    DescribeDashboardSnapshotJobResultResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DescribeDashboardSnapshotJobResultResponse.struct_class = Types::DescribeDashboardSnapshotJobResultResponse
+
     DescribeDataSetPermissionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DescribeDataSetPermissionsRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "DataSetId"))
     DescribeDataSetPermissionsRequest.struct_class = Types::DescribeDataSetPermissionsRequest
@@ -4030,6 +4117,7 @@ module Aws::QuickSight
 
     DropDownControlDisplayOptions.add_member(:select_all_options, Shapes::ShapeRef.new(shape: ListControlSelectAllOptions, location_name: "SelectAllOptions"))
     DropDownControlDisplayOptions.add_member(:title_options, Shapes::ShapeRef.new(shape: LabelOptions, location_name: "TitleOptions"))
+    DropDownControlDisplayOptions.add_member(:info_icon_label_options, Shapes::ShapeRef.new(shape: SheetControlInfoIconLabelOptions, location_name: "InfoIconLabelOptions"))
     DropDownControlDisplayOptions.struct_class = Types::DropDownControlDisplayOptions
 
     DynamicDefaultValue.add_member(:user_name_column, Shapes::ShapeRef.new(shape: ColumnIdentifier, location_name: "UserNameColumn"))
@@ -5035,6 +5123,7 @@ module Aws::QuickSight
     ListControlDisplayOptions.add_member(:search_options, Shapes::ShapeRef.new(shape: ListControlSearchOptions, location_name: "SearchOptions"))
     ListControlDisplayOptions.add_member(:select_all_options, Shapes::ShapeRef.new(shape: ListControlSelectAllOptions, location_name: "SelectAllOptions"))
     ListControlDisplayOptions.add_member(:title_options, Shapes::ShapeRef.new(shape: LabelOptions, location_name: "TitleOptions"))
+    ListControlDisplayOptions.add_member(:info_icon_label_options, Shapes::ShapeRef.new(shape: SheetControlInfoIconLabelOptions, location_name: "InfoIconLabelOptions"))
     ListControlDisplayOptions.struct_class = Types::ListControlDisplayOptions
 
     ListControlSearchOptions.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
@@ -6082,6 +6171,7 @@ module Aws::QuickSight
 
     RelativeDateTimeControlDisplayOptions.add_member(:title_options, Shapes::ShapeRef.new(shape: LabelOptions, location_name: "TitleOptions"))
     RelativeDateTimeControlDisplayOptions.add_member(:date_time_format, Shapes::ShapeRef.new(shape: DateTimeFormat, location_name: "DateTimeFormat"))
+    RelativeDateTimeControlDisplayOptions.add_member(:info_icon_label_options, Shapes::ShapeRef.new(shape: SheetControlInfoIconLabelOptions, location_name: "InfoIconLabelOptions"))
     RelativeDateTimeControlDisplayOptions.struct_class = Types::RelativeDateTimeControlDisplayOptions
 
     RelativeDatesFilter.add_member(:filter_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "FilterId"))
@@ -6171,6 +6261,11 @@ module Aws::QuickSight
     RowLevelPermissionTagRuleList.member = Shapes::ShapeRef.new(shape: RowLevelPermissionTagRule)
 
     RowSortList.member = Shapes::ShapeRef.new(shape: FieldSortOptions)
+
+    S3BucketConfiguration.add_member(:bucket_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "BucketName"))
+    S3BucketConfiguration.add_member(:bucket_prefix, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "BucketPrefix"))
+    S3BucketConfiguration.add_member(:bucket_region, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "BucketRegion"))
+    S3BucketConfiguration.struct_class = Types::S3BucketConfiguration
 
     S3Parameters.add_member(:manifest_file_location, Shapes::ShapeRef.new(shape: ManifestFileLocation, required: true, location_name: "ManifestFileLocation"))
     S3Parameters.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
@@ -6404,6 +6499,8 @@ module Aws::QuickSight
     SessionTag.add_member(:value, Shapes::ShapeRef.new(shape: SessionTagValue, required: true, location_name: "Value"))
     SessionTag.struct_class = Types::SessionTag
 
+    SessionTagKeyList.member = Shapes::ShapeRef.new(shape: SessionTagKey)
+
     SessionTagList.member = Shapes::ShapeRef.new(shape: SessionTag)
 
     SetParameterValueConfiguration.add_member(:destination_parameter_name, Shapes::ShapeRef.new(shape: ParameterName, required: true, location_name: "DestinationParameterName"))
@@ -6418,6 +6515,10 @@ module Aws::QuickSight
     Sheet.add_member(:sheet_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, location_name: "SheetId"))
     Sheet.add_member(:name, Shapes::ShapeRef.new(shape: SheetName, location_name: "Name"))
     Sheet.struct_class = Types::Sheet
+
+    SheetControlInfoIconLabelOptions.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
+    SheetControlInfoIconLabelOptions.add_member(:info_icon_text, Shapes::ShapeRef.new(shape: SheetControlInfoIconText, location_name: "InfoIconText"))
+    SheetControlInfoIconLabelOptions.struct_class = Types::SheetControlInfoIconLabelOptions
 
     SheetControlLayout.add_member(:configuration, Shapes::ShapeRef.new(shape: SheetControlLayoutConfiguration, required: true, location_name: "Configuration"))
     SheetControlLayout.struct_class = Types::SheetControlLayout
@@ -6490,6 +6591,7 @@ module Aws::QuickSight
     SimpleClusterMarker.struct_class = Types::SimpleClusterMarker
 
     SliderControlDisplayOptions.add_member(:title_options, Shapes::ShapeRef.new(shape: LabelOptions, location_name: "TitleOptions"))
+    SliderControlDisplayOptions.add_member(:info_icon_label_options, Shapes::ShapeRef.new(shape: SheetControlInfoIconLabelOptions, location_name: "InfoIconLabelOptions"))
     SliderControlDisplayOptions.struct_class = Types::SliderControlDisplayOptions
 
     SmallMultiplesAxisProperties.add_member(:scale, Shapes::ShapeRef.new(shape: SmallMultiplesAxisScale, location_name: "Scale"))
@@ -6504,6 +6606,81 @@ module Aws::QuickSight
     SmallMultiplesOptions.add_member(:x_axis, Shapes::ShapeRef.new(shape: SmallMultiplesAxisProperties, location_name: "XAxis"))
     SmallMultiplesOptions.add_member(:y_axis, Shapes::ShapeRef.new(shape: SmallMultiplesAxisProperties, location_name: "YAxis"))
     SmallMultiplesOptions.struct_class = Types::SmallMultiplesOptions
+
+    SnapshotAnonymousUser.add_member(:row_level_permission_tags, Shapes::ShapeRef.new(shape: SessionTagList, location_name: "RowLevelPermissionTags"))
+    SnapshotAnonymousUser.struct_class = Types::SnapshotAnonymousUser
+
+    SnapshotAnonymousUserList.member = Shapes::ShapeRef.new(shape: SnapshotAnonymousUser)
+
+    SnapshotAnonymousUserRedacted.add_member(:row_level_permission_tag_keys, Shapes::ShapeRef.new(shape: SessionTagKeyList, location_name: "RowLevelPermissionTagKeys"))
+    SnapshotAnonymousUserRedacted.struct_class = Types::SnapshotAnonymousUserRedacted
+
+    SnapshotAnonymousUserRedactedList.member = Shapes::ShapeRef.new(shape: SnapshotAnonymousUserRedacted)
+
+    SnapshotConfiguration.add_member(:file_groups, Shapes::ShapeRef.new(shape: SnapshotFileGroupList, required: true, location_name: "FileGroups"))
+    SnapshotConfiguration.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: SnapshotDestinationConfiguration, location_name: "DestinationConfiguration"))
+    SnapshotConfiguration.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "Parameters"))
+    SnapshotConfiguration.struct_class = Types::SnapshotConfiguration
+
+    SnapshotDestinationConfiguration.add_member(:s3_destinations, Shapes::ShapeRef.new(shape: SnapshotS3DestinationConfigurationList, location_name: "S3Destinations"))
+    SnapshotDestinationConfiguration.struct_class = Types::SnapshotDestinationConfiguration
+
+    SnapshotFile.add_member(:sheet_selections, Shapes::ShapeRef.new(shape: SnapshotFileSheetSelectionList, required: true, location_name: "SheetSelections"))
+    SnapshotFile.add_member(:format_type, Shapes::ShapeRef.new(shape: SnapshotFileFormatType, required: true, location_name: "FormatType"))
+    SnapshotFile.struct_class = Types::SnapshotFile
+
+    SnapshotFileGroup.add_member(:files, Shapes::ShapeRef.new(shape: SnapshotFileList, location_name: "Files"))
+    SnapshotFileGroup.struct_class = Types::SnapshotFileGroup
+
+    SnapshotFileGroupList.member = Shapes::ShapeRef.new(shape: SnapshotFileGroup)
+
+    SnapshotFileList.member = Shapes::ShapeRef.new(shape: SnapshotFile)
+
+    SnapshotFileSheetSelection.add_member(:sheet_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "SheetId"))
+    SnapshotFileSheetSelection.add_member(:selection_scope, Shapes::ShapeRef.new(shape: SnapshotFileSheetSelectionScope, required: true, location_name: "SelectionScope"))
+    SnapshotFileSheetSelection.add_member(:visual_ids, Shapes::ShapeRef.new(shape: SnapshotFileSheetSelectionVisualIdList, location_name: "VisualIds"))
+    SnapshotFileSheetSelection.struct_class = Types::SnapshotFileSheetSelection
+
+    SnapshotFileSheetSelectionList.member = Shapes::ShapeRef.new(shape: SnapshotFileSheetSelection)
+
+    SnapshotFileSheetSelectionVisualIdList.member = Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId)
+
+    SnapshotJobErrorInfo.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    SnapshotJobErrorInfo.add_member(:error_type, Shapes::ShapeRef.new(shape: String, location_name: "ErrorType"))
+    SnapshotJobErrorInfo.struct_class = Types::SnapshotJobErrorInfo
+
+    SnapshotJobResult.add_member(:anonymous_users, Shapes::ShapeRef.new(shape: AnonymousUserSnapshotJobResultList, location_name: "AnonymousUsers"))
+    SnapshotJobResult.struct_class = Types::SnapshotJobResult
+
+    SnapshotJobResultErrorInfo.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    SnapshotJobResultErrorInfo.add_member(:error_type, Shapes::ShapeRef.new(shape: String, location_name: "ErrorType"))
+    SnapshotJobResultErrorInfo.struct_class = Types::SnapshotJobResultErrorInfo
+
+    SnapshotJobResultErrorInfoList.member = Shapes::ShapeRef.new(shape: SnapshotJobResultErrorInfo)
+
+    SnapshotJobResultFileGroup.add_member(:files, Shapes::ShapeRef.new(shape: SnapshotFileList, location_name: "Files"))
+    SnapshotJobResultFileGroup.add_member(:s3_results, Shapes::ShapeRef.new(shape: SnapshotJobS3ResultList, location_name: "S3Results"))
+    SnapshotJobResultFileGroup.struct_class = Types::SnapshotJobResultFileGroup
+
+    SnapshotJobResultFileGroupList.member = Shapes::ShapeRef.new(shape: SnapshotJobResultFileGroup)
+
+    SnapshotJobS3Result.add_member(:s3_destination_configuration, Shapes::ShapeRef.new(shape: SnapshotS3DestinationConfiguration, location_name: "S3DestinationConfiguration"))
+    SnapshotJobS3Result.add_member(:s3_uri, Shapes::ShapeRef.new(shape: SensitiveS3Uri, location_name: "S3Uri"))
+    SnapshotJobS3Result.add_member(:error_info, Shapes::ShapeRef.new(shape: SnapshotJobResultErrorInfoList, location_name: "ErrorInfo"))
+    SnapshotJobS3Result.struct_class = Types::SnapshotJobS3Result
+
+    SnapshotJobS3ResultList.member = Shapes::ShapeRef.new(shape: SnapshotJobS3Result)
+
+    SnapshotS3DestinationConfiguration.add_member(:bucket_configuration, Shapes::ShapeRef.new(shape: S3BucketConfiguration, location_name: "BucketConfiguration"))
+    SnapshotS3DestinationConfiguration.struct_class = Types::SnapshotS3DestinationConfiguration
+
+    SnapshotS3DestinationConfigurationList.member = Shapes::ShapeRef.new(shape: SnapshotS3DestinationConfiguration)
+
+    SnapshotUserConfiguration.add_member(:anonymous_users, Shapes::ShapeRef.new(shape: SnapshotAnonymousUserList, location_name: "AnonymousUsers"))
+    SnapshotUserConfiguration.struct_class = Types::SnapshotUserConfiguration
+
+    SnapshotUserConfigurationRedacted.add_member(:anonymous_users, Shapes::ShapeRef.new(shape: SnapshotAnonymousUserRedactedList, location_name: "AnonymousUsers"))
+    SnapshotUserConfigurationRedacted.struct_class = Types::SnapshotUserConfigurationRedacted
 
     SnowflakeParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
     SnowflakeParameters.add_member(:database, Shapes::ShapeRef.new(shape: Database, required: true, location_name: "Database"))
@@ -6554,6 +6731,19 @@ module Aws::QuickSight
     StartAssetBundleImportJobResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RequestId"))
     StartAssetBundleImportJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     StartAssetBundleImportJobResponse.struct_class = Types::StartAssetBundleImportJobResponse
+
+    StartDashboardSnapshotJobRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    StartDashboardSnapshotJobRequest.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "DashboardId"))
+    StartDashboardSnapshotJobRequest.add_member(:snapshot_job_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "SnapshotJobId"))
+    StartDashboardSnapshotJobRequest.add_member(:user_configuration, Shapes::ShapeRef.new(shape: SnapshotUserConfiguration, required: true, location_name: "UserConfiguration"))
+    StartDashboardSnapshotJobRequest.add_member(:snapshot_configuration, Shapes::ShapeRef.new(shape: SnapshotConfiguration, required: true, location_name: "SnapshotConfiguration"))
+    StartDashboardSnapshotJobRequest.struct_class = Types::StartDashboardSnapshotJobRequest
+
+    StartDashboardSnapshotJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    StartDashboardSnapshotJobResponse.add_member(:snapshot_job_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, location_name: "SnapshotJobId"))
+    StartDashboardSnapshotJobResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RequestId"))
+    StartDashboardSnapshotJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    StartDashboardSnapshotJobResponse.struct_class = Types::StartDashboardSnapshotJobResponse
 
     StatePersistenceConfigurations.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
     StatePersistenceConfigurations.struct_class = Types::StatePersistenceConfigurations
@@ -6837,6 +7027,7 @@ module Aws::QuickSight
 
     TextAreaControlDisplayOptions.add_member(:title_options, Shapes::ShapeRef.new(shape: LabelOptions, location_name: "TitleOptions"))
     TextAreaControlDisplayOptions.add_member(:placeholder_options, Shapes::ShapeRef.new(shape: TextControlPlaceholderOptions, location_name: "PlaceholderOptions"))
+    TextAreaControlDisplayOptions.add_member(:info_icon_label_options, Shapes::ShapeRef.new(shape: SheetControlInfoIconLabelOptions, location_name: "InfoIconLabelOptions"))
     TextAreaControlDisplayOptions.struct_class = Types::TextAreaControlDisplayOptions
 
     TextConditionalFormat.add_member(:background_color, Shapes::ShapeRef.new(shape: ConditionalFormattingColor, location_name: "BackgroundColor"))
@@ -6849,6 +7040,7 @@ module Aws::QuickSight
 
     TextFieldControlDisplayOptions.add_member(:title_options, Shapes::ShapeRef.new(shape: LabelOptions, location_name: "TitleOptions"))
     TextFieldControlDisplayOptions.add_member(:placeholder_options, Shapes::ShapeRef.new(shape: TextControlPlaceholderOptions, location_name: "PlaceholderOptions"))
+    TextFieldControlDisplayOptions.add_member(:info_icon_label_options, Shapes::ShapeRef.new(shape: SheetControlInfoIconLabelOptions, location_name: "InfoIconLabelOptions"))
     TextFieldControlDisplayOptions.struct_class = Types::TextFieldControlDisplayOptions
 
     Theme.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -8234,6 +8426,8 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
       end)
@@ -8705,6 +8899,34 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:describe_dashboard_snapshot_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDashboardSnapshotJob"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/dashboards/{DashboardId}/snapshot-jobs/{SnapshotJobId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDashboardSnapshotJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDashboardSnapshotJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:describe_dashboard_snapshot_job_result, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDashboardSnapshotJobResult"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/dashboards/{DashboardId}/snapshot-jobs/{SnapshotJobId}/result"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDashboardSnapshotJobResultRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDashboardSnapshotJobResultResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
@@ -9347,6 +9569,12 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -9363,6 +9591,12 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_iam_policy_assignments, Seahorse::Model::Operation.new.tap do |o|
@@ -9377,6 +9611,12 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_iam_policy_assignments_for_user, Seahorse::Model::Operation.new.tap do |o|
@@ -9392,6 +9632,12 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentUpdatingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_ingestions, Seahorse::Model::Operation.new.tap do |o|
@@ -9628,6 +9874,12 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_users, Seahorse::Model::Operation.new.tap do |o|
@@ -9644,6 +9896,12 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_vpc_connections, Seahorse::Model::Operation.new.tap do |o|
@@ -9823,6 +10081,12 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:start_asset_bundle_export_job, Seahorse::Model::Operation.new.tap do |o|
@@ -9853,6 +10117,23 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:start_dashboard_snapshot_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartDashboardSnapshotJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/dashboards/{DashboardId}/snapshot-jobs"
+        o.input = Shapes::ShapeRef.new(shape: StartDashboardSnapshotJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartDashboardSnapshotJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedPricingPlanException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

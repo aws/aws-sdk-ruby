@@ -80,6 +80,11 @@ module Aws::Snowball
     #   option to true. This field is not supported in most regions.
     #   @return [Boolean]
     #
+    # @!attribute [rw] type
+    #   Differentiates between delivery address and pickup address in the
+    #   customer account. Provided at job creation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/Address AWS API Documentation
     #
     class Address < Struct.new(
@@ -96,7 +101,8 @@ module Aws::Snowball
       :country,
       :postal_code,
       :phone_number,
-      :is_restricted)
+      :is_restricted,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -565,7 +571,7 @@ module Aws::Snowball
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/snowball/latest/api-reference/API_ListJobs.html#API_ListJobs_ResponseSyntax
+    #   [1]: http://amazonaws.com/snowball/latest/api-reference/API_ListJobs.html#API_ListJobs_ResponseSyntax
     #   @return [Array<Types::JobListEntry>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateClusterResult AWS API Documentation
@@ -725,12 +731,23 @@ module Aws::Snowball
     #   from outside of your internal network. When set to
     #   `INSTALLED_AUTOSTART`, remote management will automatically be
     #   available when the device arrives at your location. Otherwise, you
-    #   need to use the Snowball Client to manage the device.
+    #   need to use the Snowball Edge client to manage the device. When set
+    #   to `NOT_INSTALLED`, remote management will not be available on the
+    #   device.
     #   @return [String]
     #
     # @!attribute [rw] long_term_pricing_id
     #   The ID of the long-term pricing type for the device.
     #   @return [String]
+    #
+    # @!attribute [rw] impact_level
+    #   The highest impact level of data that will be stored or processed on
+    #   the device, provided at job creation.
+    #   @return [String]
+    #
+    # @!attribute [rw] pickup_details
+    #   Information identifying the person picking up the device.
+    #   @return [Types::PickupDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateJobRequest AWS API Documentation
     #
@@ -751,7 +768,9 @@ module Aws::Snowball
       :tax_documents,
       :device_configuration,
       :remote_management,
-      :long_term_pricing_id)
+      :long_term_pricing_id,
+      :impact_level,
+      :pickup_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1093,9 +1112,9 @@ module Aws::Snowball
     end
 
     # A JSON-formatted object that contains the IDs for an Amazon Machine
-    # Image (AMI), including the Amazon EC2 AMI ID and the Snow device AMI
-    # ID. Each AMI has these two IDs to simplify identifying the AMI in both
-    # the Amazon Web Services Cloud and on the device.
+    # Image (AMI), including the Amazon EC2-compatible AMI ID and the Snow
+    # device AMI ID. Each AMI has these two IDs to simplify identifying the
+    # AMI in both the Amazon Web Services Cloud and on the device.
     #
     # @!attribute [rw] ami_id
     #   The ID of the AMI in Amazon EC2.
@@ -1578,6 +1597,19 @@ module Aws::Snowball
     #   Amazon Web Services Snow Family device.
     #   @return [Types::OnDeviceServiceConfiguration]
     #
+    # @!attribute [rw] impact_level
+    #   The highest impact level of data that will be stored or processed on
+    #   the device, provided at job creation.
+    #   @return [String]
+    #
+    # @!attribute [rw] pickup_details
+    #   Information identifying the person picking up the device.
+    #   @return [Types::PickupDetails]
+    #
+    # @!attribute [rw] snowball_id
+    #   Unique ID associated with a device.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/JobMetadata AWS API Documentation
     #
     class JobMetadata < Struct.new(
@@ -1602,7 +1634,10 @@ module Aws::Snowball
       :device_configuration,
       :remote_management,
       :long_term_pricing_id,
-      :on_device_service_configuration)
+      :on_device_service_configuration,
+      :impact_level,
+      :pickup_details,
+      :snowball_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1895,6 +1930,46 @@ module Aws::Snowball
       include Aws::Structure
     end
 
+    # @!attribute [rw] max_results
+    #   The maximum number of locations to list per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   HTTP requests are stateless. To identify what object comes "next"
+    #   in the list of `ListPickupLocationsRequest` objects, you have the
+    #   option of specifying `NextToken` as the starting point for your
+    #   returned list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListPickupLocationsRequest AWS API Documentation
+    #
+    class ListPickupLocationsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] addresses
+    #   Information about the address of pickup locations.
+    #   @return [Array<Types::Address>]
+    #
+    # @!attribute [rw] next_token
+    #   HTTP requests are stateless. To identify what object comes "next"
+    #   in the list of `ListPickupLocationsResult` objects, you have the
+    #   option of specifying `NextToken` as the starting point for your
+    #   returned list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListPickupLocationsResult AWS API Documentation
+    #
+    class ListPickupLocationsResult < Struct.new(
+      :addresses,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] service_name
     #   The name of the service for which you're requesting supported
     #   versions.
@@ -2079,12 +2154,18 @@ module Aws::Snowball
     #   Any change in job state will trigger a notification for this job.
     #   @return [Boolean]
     #
+    # @!attribute [rw] device_pickup_sns_topic_arn
+    #   Used to send SNS notifications for the person picking up the device
+    #   (identified during job creation).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/Notification AWS API Documentation
     #
     class Notification < Struct.new(
       :sns_topic_arn,
       :job_states_to_notify,
-      :notify_all)
+      :notify_all,
+      :device_pickup_sns_topic_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2119,6 +2200,53 @@ module Aws::Snowball
       :eks_on_device_service,
       :s3_on_device_service)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information identifying the person picking up the device.
+    #
+    # @!attribute [rw] name
+    #   The name of the person picking up the device.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number
+    #   The phone number of the person picking up the device.
+    #   @return [String]
+    #
+    # @!attribute [rw] email
+    #   The email address of the person picking up the device.
+    #   @return [String]
+    #
+    # @!attribute [rw] identification_number
+    #   The number on the credential identifying the person picking up the
+    #   device.
+    #   @return [String]
+    #
+    # @!attribute [rw] identification_expiration_date
+    #   Expiration date of the credential identifying the person picking up
+    #   the device.
+    #   @return [Time]
+    #
+    # @!attribute [rw] identification_issuing_org
+    #   Organization that issued the credential identifying the person
+    #   picking up the device.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_pickup_id
+    #   The unique ID for a device that will be picked up.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/PickupDetails AWS API Documentation
+    #
+    class PickupDetails < Struct.new(
+      :name,
+      :phone_number,
+      :email,
+      :identification_number,
+      :identification_expiration_date,
+      :identification_issuing_org,
+      :device_pickup_id)
+      SENSITIVE = [:phone_number, :email]
       include Aws::Structure
     end
 
@@ -2514,6 +2642,10 @@ module Aws::Snowball
     #   not supported in most regions.
     #   @return [String]
     #
+    # @!attribute [rw] pickup_details
+    #   Information identifying the person picking up the device.
+    #   @return [Types::PickupDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateJobRequest AWS API Documentation
     #
     class UpdateJobRequest < Struct.new(
@@ -2526,7 +2658,8 @@ module Aws::Snowball
       :shipping_option,
       :description,
       :snowball_capacity_preference,
-      :forwarding_address_id)
+      :forwarding_address_id,
+      :pickup_details)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -443,7 +443,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.organizational_units[0] #=> String
     #   resp.workspace.permission_type #=> String, one of "CUSTOMER_MANAGED", "SERVICE_MANAGED"
     #   resp.workspace.stack_set_name #=> String
-    #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED"
+    #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED", "VERSION_UPDATING", "VERSION_UPDATE_FAILED"
     #   resp.workspace.tags #=> Hash
     #   resp.workspace.tags["TagKey"] #=> String
     #   resp.workspace.vpc_configuration.security_group_ids #=> Array
@@ -514,7 +514,7 @@ module Aws::ManagedGrafana
     # @option params [String] :grafana_version
     #   Specifies the version of Grafana to support in the new workspace.
     #
-    #   Supported values are `8.4` and `9.4`.
+    #   To get a list of supported version, use the `ListVersions` operation.
     #
     # @option params [Types::NetworkAccessConfiguration] :network_access_control
     #   Configuration for network access to your workspace.
@@ -569,6 +569,11 @@ module Aws::ManagedGrafana
     # @option params [Types::VpcConfiguration] :vpc_configuration
     #   The configuration settings for an Amazon VPC that contains data
     #   sources for your Grafana workspace to connect to.
+    #
+    #   <note markdown="1"> Connecting to a private VPC is not yet available in the Asia Pacific
+    #   (Seoul) Region (ap-northeast-2).
+    #
+    #    </note>
     #
     # @option params [Array<String>] :workspace_data_sources
     #   This parameter is for internal use only, and should not be used.
@@ -664,7 +669,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.organizational_units[0] #=> String
     #   resp.workspace.permission_type #=> String, one of "CUSTOMER_MANAGED", "SERVICE_MANAGED"
     #   resp.workspace.stack_set_name #=> String
-    #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED"
+    #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED", "VERSION_UPDATING", "VERSION_UPDATE_FAILED"
     #   resp.workspace.tags #=> Hash
     #   resp.workspace.tags["TagKey"] #=> String
     #   resp.workspace.vpc_configuration.security_group_ids #=> Array
@@ -782,7 +787,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.organizational_units[0] #=> String
     #   resp.workspace.permission_type #=> String, one of "CUSTOMER_MANAGED", "SERVICE_MANAGED"
     #   resp.workspace.stack_set_name #=> String
-    #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED"
+    #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED", "VERSION_UPDATING", "VERSION_UPDATE_FAILED"
     #   resp.workspace.tags #=> Hash
     #   resp.workspace.tags["TagKey"] #=> String
     #   resp.workspace.vpc_configuration.security_group_ids #=> Array
@@ -879,7 +884,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.organizational_units[0] #=> String
     #   resp.workspace.permission_type #=> String, one of "CUSTOMER_MANAGED", "SERVICE_MANAGED"
     #   resp.workspace.stack_set_name #=> String
-    #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED"
+    #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED", "VERSION_UPDATING", "VERSION_UPDATE_FAILED"
     #   resp.workspace.tags #=> Hash
     #   resp.workspace.tags["TagKey"] #=> String
     #   resp.workspace.vpc_configuration.security_group_ids #=> Array
@@ -952,6 +957,7 @@ module Aws::ManagedGrafana
     # @return [Types::DescribeWorkspaceConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeWorkspaceConfigurationResponse#configuration #configuration} => String
+    #   * {Types::DescribeWorkspaceConfigurationResponse#grafana_version #grafana_version} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -962,6 +968,7 @@ module Aws::ManagedGrafana
     # @example Response structure
     #
     #   resp.configuration #=> String
+    #   resp.grafana_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DescribeWorkspaceConfiguration AWS API Documentation
     #
@@ -1021,7 +1028,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.organizational_units[0] #=> String
     #   resp.workspace.permission_type #=> String, one of "CUSTOMER_MANAGED", "SERVICE_MANAGED"
     #   resp.workspace.stack_set_name #=> String
-    #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED"
+    #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED", "VERSION_UPDATING", "VERSION_UPDATE_FAILED"
     #   resp.workspace.tags #=> Hash
     #   resp.workspace.tags["TagKey"] #=> String
     #   resp.workspace.vpc_configuration.security_group_ids #=> Array
@@ -1135,6 +1142,52 @@ module Aws::ManagedGrafana
       req.send_request(options)
     end
 
+    # Lists available versions of Grafana. These are available when calling
+    # `CreateWorkspace`. Optionally, include a workspace to list the
+    # versions to which it can be upgraded.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to include in the response.
+    #
+    # @option params [String] :next_token
+    #   The token to use when requesting the next set of results. You receive
+    #   this token from a previous `ListVersions` operation.
+    #
+    # @option params [String] :workspace_id
+    #   The ID of the workspace to list the available upgrade versions. If not
+    #   included, lists all versions of Grafana that are supported for
+    #   `CreateWorkspace`.
+    #
+    # @return [Types::ListVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListVersionsResponse#grafana_versions #grafana_versions} => Array&lt;String&gt;
+    #   * {Types::ListVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_versions({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     workspace_id: "WorkspaceId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.grafana_versions #=> Array
+    #   resp.grafana_versions[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ListVersions AWS API Documentation
+    #
+    # @overload list_versions(params = {})
+    # @param [Hash] params ({})
+    def list_versions(params = {}, options = {})
+      req = build_request(:list_versions, params)
+      req.send_request(options)
+    end
+
     # Returns a list of Amazon Managed Grafana workspaces in the account,
     # with some information about each workspace. For more complete
     # information about one workspace, use [DescribeWorkspace][1].
@@ -1180,7 +1233,7 @@ module Aws::ManagedGrafana
     #   resp.workspaces[0].name #=> String
     #   resp.workspaces[0].notification_destinations #=> Array
     #   resp.workspaces[0].notification_destinations[0] #=> String, one of "SNS"
-    #   resp.workspaces[0].status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED"
+    #   resp.workspaces[0].status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED", "VERSION_UPDATING", "VERSION_UPDATE_FAILED"
     #   resp.workspaces[0].tags #=> Hash
     #   resp.workspaces[0].tags["TagKey"] #=> String
     #
@@ -1495,7 +1548,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.organizational_units[0] #=> String
     #   resp.workspace.permission_type #=> String, one of "CUSTOMER_MANAGED", "SERVICE_MANAGED"
     #   resp.workspace.stack_set_name #=> String
-    #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED"
+    #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED", "VERSION_UPDATING", "VERSION_UPDATE_FAILED"
     #   resp.workspace.tags #=> Hash
     #   resp.workspace.tags["TagKey"] #=> String
     #   resp.workspace.vpc_configuration.security_group_ids #=> Array
@@ -1620,6 +1673,15 @@ module Aws::ManagedGrafana
     #
     #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
     #
+    # @option params [String] :grafana_version
+    #   Specifies the version of Grafana to support in the new workspace.
+    #
+    #   Can only be used to upgrade (for example, from 8.4 to 9.4), not
+    #   downgrade (for example, from 9.4 to 8.4).
+    #
+    #   To know what versions are available to upgrade to for a specific
+    #   workspace, see the `ListVersions` operation.
+    #
     # @option params [required, String] :workspace_id
     #   The ID of the workspace to update.
     #
@@ -1629,6 +1691,7 @@ module Aws::ManagedGrafana
     #
     #   resp = client.update_workspace_configuration({
     #     configuration: "OverridableConfigurationJson", # required
+    #     grafana_version: "GrafanaVersion",
     #     workspace_id: "WorkspaceId", # required
     #   })
     #
@@ -1654,7 +1717,7 @@ module Aws::ManagedGrafana
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-managedgrafana'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

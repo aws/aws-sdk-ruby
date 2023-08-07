@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2023-07-20)
+------------------
+
+* Feature - This release adds the ability to assign a case to a queue or user.
+
 1.10.0 (2023-07-11)
 ------------------
 

@@ -46,6 +46,14 @@ module Aws
       #   different region. You do not need to specify this option
       #   if you have provided a `:source_client` or a `:content_length`.
       #
+      # @option options [Boolean] :use_source_parts (false) Only used when
+      #   `:multipart_copy` is `true`. Use part sizes defined on the source
+      #   object if any exist. If copying or moving an object that
+      #   is already multipart, this does not re-part the object, instead
+      #   re-using the part definitions on the original. That means the etag
+      #   and any checksums will not change. This is especially useful if the
+      #   source object has parts with varied sizes.
+      #
       # @example Basic object copy
       #
       #   bucket = Aws::S3::Bucket.new('target-bucket')
@@ -483,6 +491,18 @@ module Aws
       # @option options [String] version_id The object version id used to
       #   retrieve the object. For more about object versioning, see:
       #   https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectVersioning.html
+      #
+      # @option options [String] checksum_mode (ENABLED) When `ENABLED` and
+      #   the object has a stored checksum, it will be used to validate the
+      #   download and will raise an `Aws::Errors::ChecksumError` if
+      #   checksum validation fails. You may provide a `on_checksum_validated`
+      #   callback if you need to verify that validation occured and which
+      #   algorithm was used.
+      #
+      # @option options [Callable] on_checksum_validated Called each time a
+      #   request's checksum is validated with the checksum algorithm and the
+      #   response.  For multipart downloads, this will be called for each
+      #   part that is downloaded and validated.
       #
       # @return [Boolean] Returns `true` when the file is downloaded without
       #   any errors.

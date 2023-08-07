@@ -92,6 +92,7 @@ module Aws::Personalize
     DatasetSchemaSummary = Shapes::StructureShape.new(name: 'DatasetSchemaSummary')
     DatasetSummary = Shapes::StructureShape.new(name: 'DatasetSummary')
     DatasetType = Shapes::StringShape.new(name: 'DatasetType')
+    DatasetUpdateSummary = Shapes::StructureShape.new(name: 'DatasetUpdateSummary')
     Datasets = Shapes::ListShape.new(name: 'Datasets')
     Date = Shapes::TimestampShape.new(name: 'Date')
     DefaultCategoricalHyperParameterRange = Shapes::StructureShape.new(name: 'DefaultCategoricalHyperParameterRange')
@@ -290,6 +291,8 @@ module Aws::Personalize
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateCampaignRequest = Shapes::StructureShape.new(name: 'UpdateCampaignRequest')
     UpdateCampaignResponse = Shapes::StructureShape.new(name: 'UpdateCampaignResponse')
+    UpdateDatasetRequest = Shapes::StructureShape.new(name: 'UpdateDatasetRequest')
+    UpdateDatasetResponse = Shapes::StructureShape.new(name: 'UpdateDatasetResponse')
     UpdateMetricAttributionRequest = Shapes::StructureShape.new(name: 'UpdateMetricAttributionRequest')
     UpdateMetricAttributionResponse = Shapes::StructureShape.new(name: 'UpdateMetricAttributionResponse')
     UpdateRecommenderRequest = Shapes::StructureShape.new(name: 'UpdateRecommenderRequest')
@@ -596,6 +599,7 @@ module Aws::Personalize
     Dataset.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
     Dataset.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
     Dataset.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
+    Dataset.add_member(:latest_dataset_update, Shapes::ShapeRef.new(shape: DatasetUpdateSummary, location_name: "latestDatasetUpdate"))
     Dataset.struct_class = Types::Dataset
 
     DatasetExportJob.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, location_name: "jobName"))
@@ -691,6 +695,13 @@ module Aws::Personalize
     DatasetSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
     DatasetSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
     DatasetSummary.struct_class = Types::DatasetSummary
+
+    DatasetUpdateSummary.add_member(:schema_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "schemaArn"))
+    DatasetUpdateSummary.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    DatasetUpdateSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
+    DatasetUpdateSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
+    DatasetUpdateSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
+    DatasetUpdateSummary.struct_class = Types::DatasetUpdateSummary
 
     Datasets.member = Shapes::ShapeRef.new(shape: DatasetSummary)
 
@@ -1334,6 +1345,13 @@ module Aws::Personalize
 
     UpdateCampaignResponse.add_member(:campaign_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "campaignArn"))
     UpdateCampaignResponse.struct_class = Types::UpdateCampaignResponse
+
+    UpdateDatasetRequest.add_member(:dataset_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "datasetArn"))
+    UpdateDatasetRequest.add_member(:schema_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "schemaArn"))
+    UpdateDatasetRequest.struct_class = Types::UpdateDatasetRequest
+
+    UpdateDatasetResponse.add_member(:dataset_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetArn"))
+    UpdateDatasetResponse.struct_class = Types::UpdateDatasetResponse
 
     UpdateMetricAttributionRequest.add_member(:add_metrics, Shapes::ShapeRef.new(shape: MetricAttributes, location_name: "addMetrics"))
     UpdateMetricAttributionRequest.add_member(:remove_metrics, Shapes::ShapeRef.new(shape: MetricAttributesNamesList, location_name: "removeMetrics"))
@@ -2169,6 +2187,17 @@ module Aws::Personalize
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateCampaignRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateCampaignResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:update_dataset, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateDataset"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateDatasetRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateDatasetResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)

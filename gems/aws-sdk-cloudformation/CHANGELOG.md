@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2023-07-28)
+------------------
+
+* Feature - This SDK release is for the feature launch of AWS CloudFormation RetainExceptOnCreate. It adds a new parameter retainExceptOnCreate in the following APIs: CreateStack, UpdateStack, RollbackStack, ExecuteChangeSet.
+
+1.87.0 (2023-07-24)
+------------------
+
+* Feature - This release supports filtering by DRIFT_STATUS for existing API ListStackInstances and adds support for a new API ListStackInstanceResourceDrifts. Customers can now view resource drift information from their StackSet management accounts.
+
+1.86.0 (2023-07-19)
+------------------
+
+* Feature - SDK and documentation updates for GetTemplateSummary API (unrecognized resources)
+
 1.85.0 (2023-07-11)
 ------------------
 

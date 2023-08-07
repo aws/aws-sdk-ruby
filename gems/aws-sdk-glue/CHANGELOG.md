@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.153.0 (2023-08-02)
+------------------
+
+* Feature - This release includes additional Glue Streaming KAKFA SASL property types.
+
+1.152.0 (2023-07-26)
+------------------
+
+* Feature - Release Glue Studio Snowflake Connector Node for SDK/CLI
+
+1.151.0 (2023-07-24)
+------------------
+
+* Feature - Added support for Data Preparation Recipe node in Glue Studio jobs
+
+1.150.0 (2023-07-21)
+------------------
+
+* Feature - This release adds support for AWS Glue Crawler with Apache Hudi Tables, allowing Crawlers to discover Hudi Tables in S3 and register them in Glue Data Catalog for query engines to query against.
+
+1.149.0 (2023-07-17)
+------------------
+
+* Feature - Adding new supported permission type flags to get-unfiltered endpoints that callers may pass to indicate support for enforcing Lake Formation fine-grained access control on nested column attributes.
+
 1.148.0 (2023-07-11)
 ------------------
 

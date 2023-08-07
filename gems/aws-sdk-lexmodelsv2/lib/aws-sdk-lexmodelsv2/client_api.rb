@@ -29,6 +29,101 @@ module Aws::LexModelsV2
     AggregatedUtterancesSummaryList = Shapes::ListShape.new(name: 'AggregatedUtterancesSummaryList')
     AllowedInputTypes = Shapes::StructureShape.new(name: 'AllowedInputTypes')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
+    AnalyticsBinByList = Shapes::ListShape.new(name: 'AnalyticsBinByList')
+    AnalyticsBinByName = Shapes::StringShape.new(name: 'AnalyticsBinByName')
+    AnalyticsBinBySpecification = Shapes::StructureShape.new(name: 'AnalyticsBinBySpecification')
+    AnalyticsBinKey = Shapes::StructureShape.new(name: 'AnalyticsBinKey')
+    AnalyticsBinKeys = Shapes::ListShape.new(name: 'AnalyticsBinKeys')
+    AnalyticsBinValue = Shapes::IntegerShape.new(name: 'AnalyticsBinValue')
+    AnalyticsChannel = Shapes::StringShape.new(name: 'AnalyticsChannel')
+    AnalyticsCommonFilterName = Shapes::StringShape.new(name: 'AnalyticsCommonFilterName')
+    AnalyticsFilterOperator = Shapes::StringShape.new(name: 'AnalyticsFilterOperator')
+    AnalyticsFilterValue = Shapes::StringShape.new(name: 'AnalyticsFilterValue')
+    AnalyticsFilterValues = Shapes::ListShape.new(name: 'AnalyticsFilterValues')
+    AnalyticsGroupByValue = Shapes::StringShape.new(name: 'AnalyticsGroupByValue')
+    AnalyticsIntentField = Shapes::StringShape.new(name: 'AnalyticsIntentField')
+    AnalyticsIntentFilter = Shapes::StructureShape.new(name: 'AnalyticsIntentFilter')
+    AnalyticsIntentFilterName = Shapes::StringShape.new(name: 'AnalyticsIntentFilterName')
+    AnalyticsIntentFilters = Shapes::ListShape.new(name: 'AnalyticsIntentFilters')
+    AnalyticsIntentGroupByKey = Shapes::StructureShape.new(name: 'AnalyticsIntentGroupByKey')
+    AnalyticsIntentGroupByKeys = Shapes::ListShape.new(name: 'AnalyticsIntentGroupByKeys')
+    AnalyticsIntentGroupByList = Shapes::ListShape.new(name: 'AnalyticsIntentGroupByList')
+    AnalyticsIntentGroupBySpecification = Shapes::StructureShape.new(name: 'AnalyticsIntentGroupBySpecification')
+    AnalyticsIntentMetric = Shapes::StructureShape.new(name: 'AnalyticsIntentMetric')
+    AnalyticsIntentMetricName = Shapes::StringShape.new(name: 'AnalyticsIntentMetricName')
+    AnalyticsIntentMetricResult = Shapes::StructureShape.new(name: 'AnalyticsIntentMetricResult')
+    AnalyticsIntentMetricResults = Shapes::ListShape.new(name: 'AnalyticsIntentMetricResults')
+    AnalyticsIntentMetrics = Shapes::ListShape.new(name: 'AnalyticsIntentMetrics')
+    AnalyticsIntentNodeSummaries = Shapes::ListShape.new(name: 'AnalyticsIntentNodeSummaries')
+    AnalyticsIntentNodeSummary = Shapes::StructureShape.new(name: 'AnalyticsIntentNodeSummary')
+    AnalyticsIntentResult = Shapes::StructureShape.new(name: 'AnalyticsIntentResult')
+    AnalyticsIntentResults = Shapes::ListShape.new(name: 'AnalyticsIntentResults')
+    AnalyticsIntentStageField = Shapes::StringShape.new(name: 'AnalyticsIntentStageField')
+    AnalyticsIntentStageFilter = Shapes::StructureShape.new(name: 'AnalyticsIntentStageFilter')
+    AnalyticsIntentStageFilterName = Shapes::StringShape.new(name: 'AnalyticsIntentStageFilterName')
+    AnalyticsIntentStageFilters = Shapes::ListShape.new(name: 'AnalyticsIntentStageFilters')
+    AnalyticsIntentStageGroupByKey = Shapes::StructureShape.new(name: 'AnalyticsIntentStageGroupByKey')
+    AnalyticsIntentStageGroupByKeys = Shapes::ListShape.new(name: 'AnalyticsIntentStageGroupByKeys')
+    AnalyticsIntentStageGroupByList = Shapes::ListShape.new(name: 'AnalyticsIntentStageGroupByList')
+    AnalyticsIntentStageGroupBySpecification = Shapes::StructureShape.new(name: 'AnalyticsIntentStageGroupBySpecification')
+    AnalyticsIntentStageMetric = Shapes::StructureShape.new(name: 'AnalyticsIntentStageMetric')
+    AnalyticsIntentStageMetricName = Shapes::StringShape.new(name: 'AnalyticsIntentStageMetricName')
+    AnalyticsIntentStageMetricResult = Shapes::StructureShape.new(name: 'AnalyticsIntentStageMetricResult')
+    AnalyticsIntentStageMetricResults = Shapes::ListShape.new(name: 'AnalyticsIntentStageMetricResults')
+    AnalyticsIntentStageMetrics = Shapes::ListShape.new(name: 'AnalyticsIntentStageMetrics')
+    AnalyticsIntentStageResult = Shapes::StructureShape.new(name: 'AnalyticsIntentStageResult')
+    AnalyticsIntentStageResults = Shapes::ListShape.new(name: 'AnalyticsIntentStageResults')
+    AnalyticsInterval = Shapes::StringShape.new(name: 'AnalyticsInterval')
+    AnalyticsLongValue = Shapes::IntegerShape.new(name: 'AnalyticsLongValue')
+    AnalyticsMetricStatistic = Shapes::StringShape.new(name: 'AnalyticsMetricStatistic')
+    AnalyticsMetricValue = Shapes::FloatShape.new(name: 'AnalyticsMetricValue')
+    AnalyticsModality = Shapes::StringShape.new(name: 'AnalyticsModality')
+    AnalyticsNodeCount = Shapes::IntegerShape.new(name: 'AnalyticsNodeCount')
+    AnalyticsNodeLevel = Shapes::IntegerShape.new(name: 'AnalyticsNodeLevel')
+    AnalyticsNodeType = Shapes::StringShape.new(name: 'AnalyticsNodeType')
+    AnalyticsOriginatingRequestId = Shapes::StringShape.new(name: 'AnalyticsOriginatingRequestId')
+    AnalyticsPath = Shapes::StringShape.new(name: 'AnalyticsPath')
+    AnalyticsPathFilter = Shapes::StructureShape.new(name: 'AnalyticsPathFilter')
+    AnalyticsPathFilters = Shapes::ListShape.new(name: 'AnalyticsPathFilters')
+    AnalyticsSessionField = Shapes::StringShape.new(name: 'AnalyticsSessionField')
+    AnalyticsSessionFilter = Shapes::StructureShape.new(name: 'AnalyticsSessionFilter')
+    AnalyticsSessionFilterName = Shapes::StringShape.new(name: 'AnalyticsSessionFilterName')
+    AnalyticsSessionFilters = Shapes::ListShape.new(name: 'AnalyticsSessionFilters')
+    AnalyticsSessionGroupByKey = Shapes::StructureShape.new(name: 'AnalyticsSessionGroupByKey')
+    AnalyticsSessionGroupByKeys = Shapes::ListShape.new(name: 'AnalyticsSessionGroupByKeys')
+    AnalyticsSessionGroupByList = Shapes::ListShape.new(name: 'AnalyticsSessionGroupByList')
+    AnalyticsSessionGroupBySpecification = Shapes::StructureShape.new(name: 'AnalyticsSessionGroupBySpecification')
+    AnalyticsSessionId = Shapes::StringShape.new(name: 'AnalyticsSessionId')
+    AnalyticsSessionMetric = Shapes::StructureShape.new(name: 'AnalyticsSessionMetric')
+    AnalyticsSessionMetricName = Shapes::StringShape.new(name: 'AnalyticsSessionMetricName')
+    AnalyticsSessionMetricResult = Shapes::StructureShape.new(name: 'AnalyticsSessionMetricResult')
+    AnalyticsSessionMetricResults = Shapes::ListShape.new(name: 'AnalyticsSessionMetricResults')
+    AnalyticsSessionMetrics = Shapes::ListShape.new(name: 'AnalyticsSessionMetrics')
+    AnalyticsSessionResult = Shapes::StructureShape.new(name: 'AnalyticsSessionResult')
+    AnalyticsSessionResults = Shapes::ListShape.new(name: 'AnalyticsSessionResults')
+    AnalyticsSessionSortByName = Shapes::StringShape.new(name: 'AnalyticsSessionSortByName')
+    AnalyticsSortOrder = Shapes::StringShape.new(name: 'AnalyticsSortOrder')
+    AnalyticsUtteranceAttribute = Shapes::StructureShape.new(name: 'AnalyticsUtteranceAttribute')
+    AnalyticsUtteranceAttributeName = Shapes::StringShape.new(name: 'AnalyticsUtteranceAttributeName')
+    AnalyticsUtteranceAttributeResult = Shapes::StructureShape.new(name: 'AnalyticsUtteranceAttributeResult')
+    AnalyticsUtteranceAttributeResults = Shapes::ListShape.new(name: 'AnalyticsUtteranceAttributeResults')
+    AnalyticsUtteranceAttributes = Shapes::ListShape.new(name: 'AnalyticsUtteranceAttributes')
+    AnalyticsUtteranceField = Shapes::StringShape.new(name: 'AnalyticsUtteranceField')
+    AnalyticsUtteranceFilter = Shapes::StructureShape.new(name: 'AnalyticsUtteranceFilter')
+    AnalyticsUtteranceFilterName = Shapes::StringShape.new(name: 'AnalyticsUtteranceFilterName')
+    AnalyticsUtteranceFilters = Shapes::ListShape.new(name: 'AnalyticsUtteranceFilters')
+    AnalyticsUtteranceGroupByKey = Shapes::StructureShape.new(name: 'AnalyticsUtteranceGroupByKey')
+    AnalyticsUtteranceGroupByKeys = Shapes::ListShape.new(name: 'AnalyticsUtteranceGroupByKeys')
+    AnalyticsUtteranceGroupByList = Shapes::ListShape.new(name: 'AnalyticsUtteranceGroupByList')
+    AnalyticsUtteranceGroupBySpecification = Shapes::StructureShape.new(name: 'AnalyticsUtteranceGroupBySpecification')
+    AnalyticsUtteranceMetric = Shapes::StructureShape.new(name: 'AnalyticsUtteranceMetric')
+    AnalyticsUtteranceMetricName = Shapes::StringShape.new(name: 'AnalyticsUtteranceMetricName')
+    AnalyticsUtteranceMetricResult = Shapes::StructureShape.new(name: 'AnalyticsUtteranceMetricResult')
+    AnalyticsUtteranceMetricResults = Shapes::ListShape.new(name: 'AnalyticsUtteranceMetricResults')
+    AnalyticsUtteranceMetrics = Shapes::ListShape.new(name: 'AnalyticsUtteranceMetrics')
+    AnalyticsUtteranceResult = Shapes::StructureShape.new(name: 'AnalyticsUtteranceResult')
+    AnalyticsUtteranceResults = Shapes::ListShape.new(name: 'AnalyticsUtteranceResults')
+    AnalyticsUtteranceSortByName = Shapes::StringShape.new(name: 'AnalyticsUtteranceSortByName')
     AssociatedTranscript = Shapes::StructureShape.new(name: 'AssociatedTranscript')
     AssociatedTranscriptFilter = Shapes::StructureShape.new(name: 'AssociatedTranscriptFilter')
     AssociatedTranscriptFilterName = Shapes::StringShape.new(name: 'AssociatedTranscriptFilterName')
@@ -137,6 +232,7 @@ module Aws::LexModelsV2
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContextTimeToLiveInSeconds = Shapes::IntegerShape.new(name: 'ContextTimeToLiveInSeconds')
     ContextTurnsToLive = Shapes::IntegerShape.new(name: 'ContextTurnsToLive')
+    ConversationEndState = Shapes::StringShape.new(name: 'ConversationEndState')
     ConversationLevelIntentClassificationResultItem = Shapes::StructureShape.new(name: 'ConversationLevelIntentClassificationResultItem')
     ConversationLevelIntentClassificationResults = Shapes::ListShape.new(name: 'ConversationLevelIntentClassificationResults')
     ConversationLevelResultDetail = Shapes::StructureShape.new(name: 'ConversationLevelResultDetail')
@@ -327,10 +423,13 @@ module Aws::LexModelsV2
     IntentSignature = Shapes::StringShape.new(name: 'IntentSignature')
     IntentSortAttribute = Shapes::StringShape.new(name: 'IntentSortAttribute')
     IntentSortBy = Shapes::StructureShape.new(name: 'IntentSortBy')
+    IntentState = Shapes::StringShape.new(name: 'IntentState')
     IntentStatistics = Shapes::StructureShape.new(name: 'IntentStatistics')
     IntentSummary = Shapes::StructureShape.new(name: 'IntentSummary')
     IntentSummaryList = Shapes::ListShape.new(name: 'IntentSummaryList')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    InvokedIntentSample = Shapes::StructureShape.new(name: 'InvokedIntentSample')
+    InvokedIntentSamples = Shapes::ListShape.new(name: 'InvokedIntentSamples')
     ItemId = Shapes::StringShape.new(name: 'ItemId')
     KendraConfiguration = Shapes::StructureShape.new(name: 'KendraConfiguration')
     KendraIndexArn = Shapes::StringShape.new(name: 'KendraIndexArn')
@@ -360,10 +459,20 @@ module Aws::LexModelsV2
     ListExportsResponse = Shapes::StructureShape.new(name: 'ListExportsResponse')
     ListImportsRequest = Shapes::StructureShape.new(name: 'ListImportsRequest')
     ListImportsResponse = Shapes::StructureShape.new(name: 'ListImportsResponse')
+    ListIntentMetricsRequest = Shapes::StructureShape.new(name: 'ListIntentMetricsRequest')
+    ListIntentMetricsResponse = Shapes::StructureShape.new(name: 'ListIntentMetricsResponse')
+    ListIntentPathsRequest = Shapes::StructureShape.new(name: 'ListIntentPathsRequest')
+    ListIntentPathsResponse = Shapes::StructureShape.new(name: 'ListIntentPathsResponse')
+    ListIntentStageMetricsRequest = Shapes::StructureShape.new(name: 'ListIntentStageMetricsRequest')
+    ListIntentStageMetricsResponse = Shapes::StructureShape.new(name: 'ListIntentStageMetricsResponse')
     ListIntentsRequest = Shapes::StructureShape.new(name: 'ListIntentsRequest')
     ListIntentsResponse = Shapes::StructureShape.new(name: 'ListIntentsResponse')
     ListRecommendedIntentsRequest = Shapes::StructureShape.new(name: 'ListRecommendedIntentsRequest')
     ListRecommendedIntentsResponse = Shapes::StructureShape.new(name: 'ListRecommendedIntentsResponse')
+    ListSessionAnalyticsDataRequest = Shapes::StructureShape.new(name: 'ListSessionAnalyticsDataRequest')
+    ListSessionAnalyticsDataResponse = Shapes::StructureShape.new(name: 'ListSessionAnalyticsDataResponse')
+    ListSessionMetricsRequest = Shapes::StructureShape.new(name: 'ListSessionMetricsRequest')
+    ListSessionMetricsResponse = Shapes::StructureShape.new(name: 'ListSessionMetricsResponse')
     ListSlotTypesRequest = Shapes::StructureShape.new(name: 'ListSlotTypesRequest')
     ListSlotTypesResponse = Shapes::StructureShape.new(name: 'ListSlotTypesResponse')
     ListSlotsRequest = Shapes::StructureShape.new(name: 'ListSlotsRequest')
@@ -378,6 +487,10 @@ module Aws::LexModelsV2
     ListTestSetRecordsResponse = Shapes::StructureShape.new(name: 'ListTestSetRecordsResponse')
     ListTestSetsRequest = Shapes::StructureShape.new(name: 'ListTestSetsRequest')
     ListTestSetsResponse = Shapes::StructureShape.new(name: 'ListTestSetsResponse')
+    ListUtteranceAnalyticsDataRequest = Shapes::StructureShape.new(name: 'ListUtteranceAnalyticsDataRequest')
+    ListUtteranceAnalyticsDataResponse = Shapes::StructureShape.new(name: 'ListUtteranceAnalyticsDataResponse')
+    ListUtteranceMetricsRequest = Shapes::StructureShape.new(name: 'ListUtteranceMetricsRequest')
+    ListUtteranceMetricsResponse = Shapes::StructureShape.new(name: 'ListUtteranceMetricsResponse')
     LocaleId = Shapes::StringShape.new(name: 'LocaleId')
     LocaleName = Shapes::StringShape.new(name: 'LocaleName')
     LogPrefix = Shapes::StringShape.new(name: 'LogPrefix')
@@ -464,7 +577,10 @@ module Aws::LexModelsV2
     SentimentAnalysisSettings = Shapes::StructureShape.new(name: 'SentimentAnalysisSettings')
     ServicePrincipal = Shapes::StringShape.new(name: 'ServicePrincipal')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    SessionDataSortBy = Shapes::StructureShape.new(name: 'SessionDataSortBy')
     SessionId = Shapes::StringShape.new(name: 'SessionId')
+    SessionSpecification = Shapes::StructureShape.new(name: 'SessionSpecification')
+    SessionSpecifications = Shapes::ListShape.new(name: 'SessionSpecifications')
     SessionTTL = Shapes::IntegerShape.new(name: 'SessionTTL')
     SkipResourceInUseCheck = Shapes::BooleanShape.new(name: 'SkipResourceInUseCheck')
     SlotCaptureSetting = Shapes::StructureShape.new(name: 'SlotCaptureSetting')
@@ -629,10 +745,17 @@ module Aws::LexModelsV2
     Utterance = Shapes::StringShape.new(name: 'Utterance')
     UtteranceAggregationDuration = Shapes::StructureShape.new(name: 'UtteranceAggregationDuration')
     UtteranceAudioInputSpecification = Shapes::StructureShape.new(name: 'UtteranceAudioInputSpecification')
+    UtteranceBotResponse = Shapes::StructureShape.new(name: 'UtteranceBotResponse')
+    UtteranceBotResponses = Shapes::ListShape.new(name: 'UtteranceBotResponses')
+    UtteranceContentType = Shapes::StringShape.new(name: 'UtteranceContentType')
+    UtteranceDataSortBy = Shapes::StructureShape.new(name: 'UtteranceDataSortBy')
     UtteranceInputSpecification = Shapes::StructureShape.new(name: 'UtteranceInputSpecification')
     UtteranceLevelTestResultItem = Shapes::StructureShape.new(name: 'UtteranceLevelTestResultItem')
     UtteranceLevelTestResultItemList = Shapes::ListShape.new(name: 'UtteranceLevelTestResultItemList')
     UtteranceLevelTestResults = Shapes::StructureShape.new(name: 'UtteranceLevelTestResults')
+    UtteranceSpecification = Shapes::StructureShape.new(name: 'UtteranceSpecification')
+    UtteranceSpecifications = Shapes::ListShape.new(name: 'UtteranceSpecifications')
+    UtteranceUnderstood = Shapes::BooleanShape.new(name: 'UtteranceUnderstood')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     Value = Shapes::StringShape.new(name: 'Value')
     VoiceEngine = Shapes::StringShape.new(name: 'VoiceEngine')
@@ -683,6 +806,204 @@ module Aws::LexModelsV2
     AllowedInputTypes.add_member(:allow_audio_input, Shapes::ShapeRef.new(shape: BoxedBoolean, required: true, location_name: "allowAudioInput"))
     AllowedInputTypes.add_member(:allow_dtmf_input, Shapes::ShapeRef.new(shape: BoxedBoolean, required: true, location_name: "allowDTMFInput"))
     AllowedInputTypes.struct_class = Types::AllowedInputTypes
+
+    AnalyticsBinByList.member = Shapes::ShapeRef.new(shape: AnalyticsBinBySpecification)
+
+    AnalyticsBinBySpecification.add_member(:name, Shapes::ShapeRef.new(shape: AnalyticsBinByName, required: true, location_name: "name"))
+    AnalyticsBinBySpecification.add_member(:interval, Shapes::ShapeRef.new(shape: AnalyticsInterval, required: true, location_name: "interval"))
+    AnalyticsBinBySpecification.add_member(:order, Shapes::ShapeRef.new(shape: AnalyticsSortOrder, location_name: "order"))
+    AnalyticsBinBySpecification.struct_class = Types::AnalyticsBinBySpecification
+
+    AnalyticsBinKey.add_member(:name, Shapes::ShapeRef.new(shape: AnalyticsBinByName, location_name: "name"))
+    AnalyticsBinKey.add_member(:value, Shapes::ShapeRef.new(shape: AnalyticsBinValue, location_name: "value"))
+    AnalyticsBinKey.struct_class = Types::AnalyticsBinKey
+
+    AnalyticsBinKeys.member = Shapes::ShapeRef.new(shape: AnalyticsBinKey)
+
+    AnalyticsFilterValues.member = Shapes::ShapeRef.new(shape: AnalyticsFilterValue)
+
+    AnalyticsIntentFilter.add_member(:name, Shapes::ShapeRef.new(shape: AnalyticsIntentFilterName, required: true, location_name: "name"))
+    AnalyticsIntentFilter.add_member(:operator, Shapes::ShapeRef.new(shape: AnalyticsFilterOperator, required: true, location_name: "operator"))
+    AnalyticsIntentFilter.add_member(:values, Shapes::ShapeRef.new(shape: AnalyticsFilterValues, required: true, location_name: "values"))
+    AnalyticsIntentFilter.struct_class = Types::AnalyticsIntentFilter
+
+    AnalyticsIntentFilters.member = Shapes::ShapeRef.new(shape: AnalyticsIntentFilter)
+
+    AnalyticsIntentGroupByKey.add_member(:name, Shapes::ShapeRef.new(shape: AnalyticsIntentField, location_name: "name"))
+    AnalyticsIntentGroupByKey.add_member(:value, Shapes::ShapeRef.new(shape: AnalyticsGroupByValue, location_name: "value"))
+    AnalyticsIntentGroupByKey.struct_class = Types::AnalyticsIntentGroupByKey
+
+    AnalyticsIntentGroupByKeys.member = Shapes::ShapeRef.new(shape: AnalyticsIntentGroupByKey)
+
+    AnalyticsIntentGroupByList.member = Shapes::ShapeRef.new(shape: AnalyticsIntentGroupBySpecification)
+
+    AnalyticsIntentGroupBySpecification.add_member(:name, Shapes::ShapeRef.new(shape: AnalyticsIntentField, required: true, location_name: "name"))
+    AnalyticsIntentGroupBySpecification.struct_class = Types::AnalyticsIntentGroupBySpecification
+
+    AnalyticsIntentMetric.add_member(:name, Shapes::ShapeRef.new(shape: AnalyticsIntentMetricName, required: true, location_name: "name"))
+    AnalyticsIntentMetric.add_member(:statistic, Shapes::ShapeRef.new(shape: AnalyticsMetricStatistic, required: true, location_name: "statistic"))
+    AnalyticsIntentMetric.add_member(:order, Shapes::ShapeRef.new(shape: AnalyticsSortOrder, location_name: "order"))
+    AnalyticsIntentMetric.struct_class = Types::AnalyticsIntentMetric
+
+    AnalyticsIntentMetricResult.add_member(:name, Shapes::ShapeRef.new(shape: AnalyticsIntentMetricName, location_name: "name"))
+    AnalyticsIntentMetricResult.add_member(:statistic, Shapes::ShapeRef.new(shape: AnalyticsMetricStatistic, location_name: "statistic"))
+    AnalyticsIntentMetricResult.add_member(:value, Shapes::ShapeRef.new(shape: AnalyticsMetricValue, location_name: "value"))
+    AnalyticsIntentMetricResult.struct_class = Types::AnalyticsIntentMetricResult
+
+    AnalyticsIntentMetricResults.member = Shapes::ShapeRef.new(shape: AnalyticsIntentMetricResult)
+
+    AnalyticsIntentMetrics.member = Shapes::ShapeRef.new(shape: AnalyticsIntentMetric)
+
+    AnalyticsIntentNodeSummaries.member = Shapes::ShapeRef.new(shape: AnalyticsIntentNodeSummary)
+
+    AnalyticsIntentNodeSummary.add_member(:intent_name, Shapes::ShapeRef.new(shape: Name, location_name: "intentName"))
+    AnalyticsIntentNodeSummary.add_member(:intent_path, Shapes::ShapeRef.new(shape: AnalyticsPath, location_name: "intentPath"))
+    AnalyticsIntentNodeSummary.add_member(:intent_count, Shapes::ShapeRef.new(shape: AnalyticsNodeCount, location_name: "intentCount"))
+    AnalyticsIntentNodeSummary.add_member(:intent_level, Shapes::ShapeRef.new(shape: AnalyticsNodeLevel, location_name: "intentLevel"))
+    AnalyticsIntentNodeSummary.add_member(:node_type, Shapes::ShapeRef.new(shape: AnalyticsNodeType, location_name: "nodeType"))
+    AnalyticsIntentNodeSummary.struct_class = Types::AnalyticsIntentNodeSummary
+
+    AnalyticsIntentResult.add_member(:bin_keys, Shapes::ShapeRef.new(shape: AnalyticsBinKeys, location_name: "binKeys"))
+    AnalyticsIntentResult.add_member(:group_by_keys, Shapes::ShapeRef.new(shape: AnalyticsIntentGroupByKeys, location_name: "groupByKeys"))
+    AnalyticsIntentResult.add_member(:metrics_results, Shapes::ShapeRef.new(shape: AnalyticsIntentMetricResults, location_name: "metricsResults"))
+    AnalyticsIntentResult.struct_class = Types::AnalyticsIntentResult
+
+    AnalyticsIntentResults.member = Shapes::ShapeRef.new(shape: AnalyticsIntentResult)
+
+    AnalyticsIntentStageFilter.add_member(:name, Shapes::ShapeRef.new(shape: AnalyticsIntentStageFilterName, required: true, location_name: "name"))
+    AnalyticsIntentStageFilter.add_member(:operator, Shapes::ShapeRef.new(shape: AnalyticsFilterOperator, required: true, location_name: "operator"))
+    AnalyticsIntentStageFilter.add_member(:values, Shapes::ShapeRef.new(shape: AnalyticsFilterValues, required: true, location_name: "values"))
+    AnalyticsIntentStageFilter.struct_class = Types::AnalyticsIntentStageFilter
+
+    AnalyticsIntentStageFilters.member = Shapes::ShapeRef.new(shape: AnalyticsIntentStageFilter)
+
+    AnalyticsIntentStageGroupByKey.add_member(:name, Shapes::ShapeRef.new(shape: AnalyticsIntentStageField, location_name: "name"))
+    AnalyticsIntentStageGroupByKey.add_member(:value, Shapes::ShapeRef.new(shape: AnalyticsGroupByValue, location_name: "value"))
+    AnalyticsIntentStageGroupByKey.struct_class = Types::AnalyticsIntentStageGroupByKey
+
+    AnalyticsIntentStageGroupByKeys.member = Shapes::ShapeRef.new(shape: AnalyticsIntentStageGroupByKey)
+
+    AnalyticsIntentStageGroupByList.member = Shapes::ShapeRef.new(shape: AnalyticsIntentStageGroupBySpecification)
+
+    AnalyticsIntentStageGroupBySpecification.add_member(:name, Shapes::ShapeRef.new(shape: AnalyticsIntentStageField, required: true, location_name: "name"))
+    AnalyticsIntentStageGroupBySpecification.struct_class = Types::AnalyticsIntentStageGroupBySpecification
+
+    AnalyticsIntentStageMetric.add_member(:name, Shapes::ShapeRef.new(shape: AnalyticsIntentStageMetricName, required: true, location_name: "name"))
+    AnalyticsIntentStageMetric.add_member(:statistic, Shapes::ShapeRef.new(shape: AnalyticsMetricStatistic, required: true, location_name: "statistic"))
+    AnalyticsIntentStageMetric.add_member(:order, Shapes::ShapeRef.new(shape: AnalyticsSortOrder, location_name: "order"))
+    AnalyticsIntentStageMetric.struct_class = Types::AnalyticsIntentStageMetric
+
+    AnalyticsIntentStageMetricResult.add_member(:name, Shapes::ShapeRef.new(shape: AnalyticsIntentStageMetricName, location_name: "name"))
+    AnalyticsIntentStageMetricResult.add_member(:statistic, Shapes::ShapeRef.new(shape: AnalyticsMetricStatistic, location_name: "statistic"))
+    AnalyticsIntentStageMetricResult.add_member(:value, Shapes::ShapeRef.new(shape: AnalyticsMetricValue, location_name: "value"))
+    AnalyticsIntentStageMetricResult.struct_class = Types::AnalyticsIntentStageMetricResult
+
+    AnalyticsIntentStageMetricResults.member = Shapes::ShapeRef.new(shape: AnalyticsIntentStageMetricResult)
+
+    AnalyticsIntentStageMetrics.member = Shapes::ShapeRef.new(shape: AnalyticsIntentStageMetric)
+
+    AnalyticsIntentStageResult.add_member(:bin_keys, Shapes::ShapeRef.new(shape: AnalyticsBinKeys, location_name: "binKeys"))
+    AnalyticsIntentStageResult.add_member(:group_by_keys, Shapes::ShapeRef.new(shape: AnalyticsIntentStageGroupByKeys, location_name: "groupByKeys"))
+    AnalyticsIntentStageResult.add_member(:metrics_results, Shapes::ShapeRef.new(shape: AnalyticsIntentStageMetricResults, location_name: "metricsResults"))
+    AnalyticsIntentStageResult.struct_class = Types::AnalyticsIntentStageResult
+
+    AnalyticsIntentStageResults.member = Shapes::ShapeRef.new(shape: AnalyticsIntentStageResult)
+
+    AnalyticsPathFilter.add_member(:name, Shapes::ShapeRef.new(shape: AnalyticsCommonFilterName, required: true, location_name: "name"))
+    AnalyticsPathFilter.add_member(:operator, Shapes::ShapeRef.new(shape: AnalyticsFilterOperator, required: true, location_name: "operator"))
+    AnalyticsPathFilter.add_member(:values, Shapes::ShapeRef.new(shape: AnalyticsFilterValues, required: true, location_name: "values"))
+    AnalyticsPathFilter.struct_class = Types::AnalyticsPathFilter
+
+    AnalyticsPathFilters.member = Shapes::ShapeRef.new(shape: AnalyticsPathFilter)
+
+    AnalyticsSessionFilter.add_member(:name, Shapes::ShapeRef.new(shape: AnalyticsSessionFilterName, required: true, location_name: "name"))
+    AnalyticsSessionFilter.add_member(:operator, Shapes::ShapeRef.new(shape: AnalyticsFilterOperator, required: true, location_name: "operator"))
+    AnalyticsSessionFilter.add_member(:values, Shapes::ShapeRef.new(shape: AnalyticsFilterValues, required: true, location_name: "values"))
+    AnalyticsSessionFilter.struct_class = Types::AnalyticsSessionFilter
+
+    AnalyticsSessionFilters.member = Shapes::ShapeRef.new(shape: AnalyticsSessionFilter)
+
+    AnalyticsSessionGroupByKey.add_member(:name, Shapes::ShapeRef.new(shape: AnalyticsSessionField, location_name: "name"))
+    AnalyticsSessionGroupByKey.add_member(:value, Shapes::ShapeRef.new(shape: AnalyticsGroupByValue, location_name: "value"))
+    AnalyticsSessionGroupByKey.struct_class = Types::AnalyticsSessionGroupByKey
+
+    AnalyticsSessionGroupByKeys.member = Shapes::ShapeRef.new(shape: AnalyticsSessionGroupByKey)
+
+    AnalyticsSessionGroupByList.member = Shapes::ShapeRef.new(shape: AnalyticsSessionGroupBySpecification)
+
+    AnalyticsSessionGroupBySpecification.add_member(:name, Shapes::ShapeRef.new(shape: AnalyticsSessionField, required: true, location_name: "name"))
+    AnalyticsSessionGroupBySpecification.struct_class = Types::AnalyticsSessionGroupBySpecification
+
+    AnalyticsSessionMetric.add_member(:name, Shapes::ShapeRef.new(shape: AnalyticsSessionMetricName, required: true, location_name: "name"))
+    AnalyticsSessionMetric.add_member(:statistic, Shapes::ShapeRef.new(shape: AnalyticsMetricStatistic, required: true, location_name: "statistic"))
+    AnalyticsSessionMetric.add_member(:order, Shapes::ShapeRef.new(shape: AnalyticsSortOrder, location_name: "order"))
+    AnalyticsSessionMetric.struct_class = Types::AnalyticsSessionMetric
+
+    AnalyticsSessionMetricResult.add_member(:name, Shapes::ShapeRef.new(shape: AnalyticsSessionMetricName, location_name: "name"))
+    AnalyticsSessionMetricResult.add_member(:statistic, Shapes::ShapeRef.new(shape: AnalyticsMetricStatistic, location_name: "statistic"))
+    AnalyticsSessionMetricResult.add_member(:value, Shapes::ShapeRef.new(shape: AnalyticsMetricValue, location_name: "value"))
+    AnalyticsSessionMetricResult.struct_class = Types::AnalyticsSessionMetricResult
+
+    AnalyticsSessionMetricResults.member = Shapes::ShapeRef.new(shape: AnalyticsSessionMetricResult)
+
+    AnalyticsSessionMetrics.member = Shapes::ShapeRef.new(shape: AnalyticsSessionMetric)
+
+    AnalyticsSessionResult.add_member(:bin_keys, Shapes::ShapeRef.new(shape: AnalyticsBinKeys, location_name: "binKeys"))
+    AnalyticsSessionResult.add_member(:group_by_keys, Shapes::ShapeRef.new(shape: AnalyticsSessionGroupByKeys, location_name: "groupByKeys"))
+    AnalyticsSessionResult.add_member(:metrics_results, Shapes::ShapeRef.new(shape: AnalyticsSessionMetricResults, location_name: "metricsResults"))
+    AnalyticsSessionResult.struct_class = Types::AnalyticsSessionResult
+
+    AnalyticsSessionResults.member = Shapes::ShapeRef.new(shape: AnalyticsSessionResult)
+
+    AnalyticsUtteranceAttribute.add_member(:name, Shapes::ShapeRef.new(shape: AnalyticsUtteranceAttributeName, required: true, location_name: "name"))
+    AnalyticsUtteranceAttribute.struct_class = Types::AnalyticsUtteranceAttribute
+
+    AnalyticsUtteranceAttributeResult.add_member(:last_used_intent, Shapes::ShapeRef.new(shape: Name, location_name: "lastUsedIntent"))
+    AnalyticsUtteranceAttributeResult.struct_class = Types::AnalyticsUtteranceAttributeResult
+
+    AnalyticsUtteranceAttributeResults.member = Shapes::ShapeRef.new(shape: AnalyticsUtteranceAttributeResult)
+
+    AnalyticsUtteranceAttributes.member = Shapes::ShapeRef.new(shape: AnalyticsUtteranceAttribute)
+
+    AnalyticsUtteranceFilter.add_member(:name, Shapes::ShapeRef.new(shape: AnalyticsUtteranceFilterName, required: true, location_name: "name"))
+    AnalyticsUtteranceFilter.add_member(:operator, Shapes::ShapeRef.new(shape: AnalyticsFilterOperator, required: true, location_name: "operator"))
+    AnalyticsUtteranceFilter.add_member(:values, Shapes::ShapeRef.new(shape: AnalyticsFilterValues, required: true, location_name: "values"))
+    AnalyticsUtteranceFilter.struct_class = Types::AnalyticsUtteranceFilter
+
+    AnalyticsUtteranceFilters.member = Shapes::ShapeRef.new(shape: AnalyticsUtteranceFilter)
+
+    AnalyticsUtteranceGroupByKey.add_member(:name, Shapes::ShapeRef.new(shape: AnalyticsUtteranceField, location_name: "name"))
+    AnalyticsUtteranceGroupByKey.add_member(:value, Shapes::ShapeRef.new(shape: AnalyticsGroupByValue, location_name: "value"))
+    AnalyticsUtteranceGroupByKey.struct_class = Types::AnalyticsUtteranceGroupByKey
+
+    AnalyticsUtteranceGroupByKeys.member = Shapes::ShapeRef.new(shape: AnalyticsUtteranceGroupByKey)
+
+    AnalyticsUtteranceGroupByList.member = Shapes::ShapeRef.new(shape: AnalyticsUtteranceGroupBySpecification)
+
+    AnalyticsUtteranceGroupBySpecification.add_member(:name, Shapes::ShapeRef.new(shape: AnalyticsUtteranceField, required: true, location_name: "name"))
+    AnalyticsUtteranceGroupBySpecification.struct_class = Types::AnalyticsUtteranceGroupBySpecification
+
+    AnalyticsUtteranceMetric.add_member(:name, Shapes::ShapeRef.new(shape: AnalyticsUtteranceMetricName, required: true, location_name: "name"))
+    AnalyticsUtteranceMetric.add_member(:statistic, Shapes::ShapeRef.new(shape: AnalyticsMetricStatistic, required: true, location_name: "statistic"))
+    AnalyticsUtteranceMetric.add_member(:order, Shapes::ShapeRef.new(shape: AnalyticsSortOrder, location_name: "order"))
+    AnalyticsUtteranceMetric.struct_class = Types::AnalyticsUtteranceMetric
+
+    AnalyticsUtteranceMetricResult.add_member(:name, Shapes::ShapeRef.new(shape: AnalyticsUtteranceMetricName, location_name: "name"))
+    AnalyticsUtteranceMetricResult.add_member(:statistic, Shapes::ShapeRef.new(shape: AnalyticsMetricStatistic, location_name: "statistic"))
+    AnalyticsUtteranceMetricResult.add_member(:value, Shapes::ShapeRef.new(shape: AnalyticsMetricValue, location_name: "value"))
+    AnalyticsUtteranceMetricResult.struct_class = Types::AnalyticsUtteranceMetricResult
+
+    AnalyticsUtteranceMetricResults.member = Shapes::ShapeRef.new(shape: AnalyticsUtteranceMetricResult)
+
+    AnalyticsUtteranceMetrics.member = Shapes::ShapeRef.new(shape: AnalyticsUtteranceMetric)
+
+    AnalyticsUtteranceResult.add_member(:bin_keys, Shapes::ShapeRef.new(shape: AnalyticsBinKeys, location_name: "binKeys"))
+    AnalyticsUtteranceResult.add_member(:group_by_keys, Shapes::ShapeRef.new(shape: AnalyticsUtteranceGroupByKeys, location_name: "groupByKeys"))
+    AnalyticsUtteranceResult.add_member(:metrics_results, Shapes::ShapeRef.new(shape: AnalyticsUtteranceMetricResults, location_name: "metricsResults"))
+    AnalyticsUtteranceResult.add_member(:attribute_results, Shapes::ShapeRef.new(shape: AnalyticsUtteranceAttributeResults, location_name: "attributeResults"))
+    AnalyticsUtteranceResult.struct_class = Types::AnalyticsUtteranceResult
+
+    AnalyticsUtteranceResults.member = Shapes::ShapeRef.new(shape: AnalyticsUtteranceResult)
 
     AssociatedTranscript.add_member(:transcript, Shapes::ShapeRef.new(shape: Transcript, location_name: "transcript"))
     AssociatedTranscript.struct_class = Types::AssociatedTranscript
@@ -1910,6 +2231,11 @@ module Aws::LexModelsV2
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    InvokedIntentSample.add_member(:intent_name, Shapes::ShapeRef.new(shape: Name, location_name: "intentName"))
+    InvokedIntentSample.struct_class = Types::InvokedIntentSample
+
+    InvokedIntentSamples.member = Shapes::ShapeRef.new(shape: InvokedIntentSample)
+
     KendraConfiguration.add_member(:kendra_index, Shapes::ShapeRef.new(shape: KendraIndexArn, required: true, location_name: "kendraIndex"))
     KendraConfiguration.add_member(:query_filter_string_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "queryFilterStringEnabled"))
     KendraConfiguration.add_member(:query_filter_string, Shapes::ShapeRef.new(shape: QueryFilterString, location_name: "queryFilterString"))
@@ -2072,6 +2398,48 @@ module Aws::LexModelsV2
     ListImportsResponse.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, location_name: "localeId"))
     ListImportsResponse.struct_class = Types::ListImportsResponse
 
+    ListIntentMetricsRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
+    ListIntentMetricsRequest.add_member(:start_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startDateTime"))
+    ListIntentMetricsRequest.add_member(:end_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endDateTime"))
+    ListIntentMetricsRequest.add_member(:metrics, Shapes::ShapeRef.new(shape: AnalyticsIntentMetrics, required: true, location_name: "metrics"))
+    ListIntentMetricsRequest.add_member(:bin_by, Shapes::ShapeRef.new(shape: AnalyticsBinByList, location_name: "binBy"))
+    ListIntentMetricsRequest.add_member(:group_by, Shapes::ShapeRef.new(shape: AnalyticsIntentGroupByList, location_name: "groupBy"))
+    ListIntentMetricsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: AnalyticsIntentFilters, location_name: "filters"))
+    ListIntentMetricsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListIntentMetricsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListIntentMetricsRequest.struct_class = Types::ListIntentMetricsRequest
+
+    ListIntentMetricsResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
+    ListIntentMetricsResponse.add_member(:results, Shapes::ShapeRef.new(shape: AnalyticsIntentResults, location_name: "results"))
+    ListIntentMetricsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListIntentMetricsResponse.struct_class = Types::ListIntentMetricsResponse
+
+    ListIntentPathsRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
+    ListIntentPathsRequest.add_member(:start_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startDateTime"))
+    ListIntentPathsRequest.add_member(:end_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endDateTime"))
+    ListIntentPathsRequest.add_member(:intent_path, Shapes::ShapeRef.new(shape: AnalyticsPath, required: true, location_name: "intentPath"))
+    ListIntentPathsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: AnalyticsPathFilters, location_name: "filters"))
+    ListIntentPathsRequest.struct_class = Types::ListIntentPathsRequest
+
+    ListIntentPathsResponse.add_member(:node_summaries, Shapes::ShapeRef.new(shape: AnalyticsIntentNodeSummaries, location_name: "nodeSummaries"))
+    ListIntentPathsResponse.struct_class = Types::ListIntentPathsResponse
+
+    ListIntentStageMetricsRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
+    ListIntentStageMetricsRequest.add_member(:start_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startDateTime"))
+    ListIntentStageMetricsRequest.add_member(:end_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endDateTime"))
+    ListIntentStageMetricsRequest.add_member(:metrics, Shapes::ShapeRef.new(shape: AnalyticsIntentStageMetrics, required: true, location_name: "metrics"))
+    ListIntentStageMetricsRequest.add_member(:bin_by, Shapes::ShapeRef.new(shape: AnalyticsBinByList, location_name: "binBy"))
+    ListIntentStageMetricsRequest.add_member(:group_by, Shapes::ShapeRef.new(shape: AnalyticsIntentStageGroupByList, location_name: "groupBy"))
+    ListIntentStageMetricsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: AnalyticsIntentStageFilters, location_name: "filters"))
+    ListIntentStageMetricsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListIntentStageMetricsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListIntentStageMetricsRequest.struct_class = Types::ListIntentStageMetricsRequest
+
+    ListIntentStageMetricsResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
+    ListIntentStageMetricsResponse.add_member(:results, Shapes::ShapeRef.new(shape: AnalyticsIntentStageResults, location_name: "results"))
+    ListIntentStageMetricsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListIntentStageMetricsResponse.struct_class = Types::ListIntentStageMetricsResponse
+
     ListIntentsRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
     ListIntentsRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, required: true, location: "uri", location_name: "botVersion"))
     ListIntentsRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location: "uri", location_name: "localeId"))
@@ -2103,6 +2471,36 @@ module Aws::LexModelsV2
     ListRecommendedIntentsResponse.add_member(:summary_list, Shapes::ShapeRef.new(shape: RecommendedIntentSummaryList, location_name: "summaryList"))
     ListRecommendedIntentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListRecommendedIntentsResponse.struct_class = Types::ListRecommendedIntentsResponse
+
+    ListSessionAnalyticsDataRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
+    ListSessionAnalyticsDataRequest.add_member(:start_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startDateTime"))
+    ListSessionAnalyticsDataRequest.add_member(:end_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endDateTime"))
+    ListSessionAnalyticsDataRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SessionDataSortBy, location_name: "sortBy"))
+    ListSessionAnalyticsDataRequest.add_member(:filters, Shapes::ShapeRef.new(shape: AnalyticsSessionFilters, location_name: "filters"))
+    ListSessionAnalyticsDataRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListSessionAnalyticsDataRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListSessionAnalyticsDataRequest.struct_class = Types::ListSessionAnalyticsDataRequest
+
+    ListSessionAnalyticsDataResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
+    ListSessionAnalyticsDataResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListSessionAnalyticsDataResponse.add_member(:sessions, Shapes::ShapeRef.new(shape: SessionSpecifications, location_name: "sessions"))
+    ListSessionAnalyticsDataResponse.struct_class = Types::ListSessionAnalyticsDataResponse
+
+    ListSessionMetricsRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
+    ListSessionMetricsRequest.add_member(:start_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startDateTime"))
+    ListSessionMetricsRequest.add_member(:end_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endDateTime"))
+    ListSessionMetricsRequest.add_member(:metrics, Shapes::ShapeRef.new(shape: AnalyticsSessionMetrics, required: true, location_name: "metrics"))
+    ListSessionMetricsRequest.add_member(:bin_by, Shapes::ShapeRef.new(shape: AnalyticsBinByList, location_name: "binBy"))
+    ListSessionMetricsRequest.add_member(:group_by, Shapes::ShapeRef.new(shape: AnalyticsSessionGroupByList, location_name: "groupBy"))
+    ListSessionMetricsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: AnalyticsSessionFilters, location_name: "filters"))
+    ListSessionMetricsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListSessionMetricsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListSessionMetricsRequest.struct_class = Types::ListSessionMetricsRequest
+
+    ListSessionMetricsResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
+    ListSessionMetricsResponse.add_member(:results, Shapes::ShapeRef.new(shape: AnalyticsSessionResults, location_name: "results"))
+    ListSessionMetricsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListSessionMetricsResponse.struct_class = Types::ListSessionMetricsResponse
 
     ListSlotTypesRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
     ListSlotTypesRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, required: true, location: "uri", location_name: "botVersion"))
@@ -2180,6 +2578,37 @@ module Aws::LexModelsV2
     ListTestSetsResponse.add_member(:test_sets, Shapes::ShapeRef.new(shape: TestSetSummaryList, location_name: "testSets"))
     ListTestSetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListTestSetsResponse.struct_class = Types::ListTestSetsResponse
+
+    ListUtteranceAnalyticsDataRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
+    ListUtteranceAnalyticsDataRequest.add_member(:start_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startDateTime"))
+    ListUtteranceAnalyticsDataRequest.add_member(:end_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endDateTime"))
+    ListUtteranceAnalyticsDataRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: UtteranceDataSortBy, location_name: "sortBy"))
+    ListUtteranceAnalyticsDataRequest.add_member(:filters, Shapes::ShapeRef.new(shape: AnalyticsUtteranceFilters, location_name: "filters"))
+    ListUtteranceAnalyticsDataRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListUtteranceAnalyticsDataRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListUtteranceAnalyticsDataRequest.struct_class = Types::ListUtteranceAnalyticsDataRequest
+
+    ListUtteranceAnalyticsDataResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
+    ListUtteranceAnalyticsDataResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListUtteranceAnalyticsDataResponse.add_member(:utterances, Shapes::ShapeRef.new(shape: UtteranceSpecifications, location_name: "utterances"))
+    ListUtteranceAnalyticsDataResponse.struct_class = Types::ListUtteranceAnalyticsDataResponse
+
+    ListUtteranceMetricsRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
+    ListUtteranceMetricsRequest.add_member(:start_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startDateTime"))
+    ListUtteranceMetricsRequest.add_member(:end_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endDateTime"))
+    ListUtteranceMetricsRequest.add_member(:metrics, Shapes::ShapeRef.new(shape: AnalyticsUtteranceMetrics, required: true, location_name: "metrics"))
+    ListUtteranceMetricsRequest.add_member(:bin_by, Shapes::ShapeRef.new(shape: AnalyticsBinByList, location_name: "binBy"))
+    ListUtteranceMetricsRequest.add_member(:group_by, Shapes::ShapeRef.new(shape: AnalyticsUtteranceGroupByList, location_name: "groupBy"))
+    ListUtteranceMetricsRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: AnalyticsUtteranceAttributes, location_name: "attributes"))
+    ListUtteranceMetricsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: AnalyticsUtteranceFilters, location_name: "filters"))
+    ListUtteranceMetricsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListUtteranceMetricsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListUtteranceMetricsRequest.struct_class = Types::ListUtteranceMetricsRequest
+
+    ListUtteranceMetricsResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
+    ListUtteranceMetricsResponse.add_member(:results, Shapes::ShapeRef.new(shape: AnalyticsUtteranceResults, location_name: "results"))
+    ListUtteranceMetricsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListUtteranceMetricsResponse.struct_class = Types::ListUtteranceMetricsResponse
 
     Message.add_member(:plain_text_message, Shapes::ShapeRef.new(shape: PlainTextMessage, location_name: "plainTextMessage"))
     Message.add_member(:custom_payload, Shapes::ShapeRef.new(shape: CustomPayload, location_name: "customPayload"))
@@ -2366,6 +2795,27 @@ module Aws::LexModelsV2
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    SessionDataSortBy.add_member(:name, Shapes::ShapeRef.new(shape: AnalyticsSessionSortByName, required: true, location_name: "name"))
+    SessionDataSortBy.add_member(:order, Shapes::ShapeRef.new(shape: AnalyticsSortOrder, required: true, location_name: "order"))
+    SessionDataSortBy.struct_class = Types::SessionDataSortBy
+
+    SessionSpecification.add_member(:bot_alias_id, Shapes::ShapeRef.new(shape: BotAliasId, location_name: "botAliasId"))
+    SessionSpecification.add_member(:bot_version, Shapes::ShapeRef.new(shape: NumericalBotVersion, location_name: "botVersion"))
+    SessionSpecification.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, location_name: "localeId"))
+    SessionSpecification.add_member(:channel, Shapes::ShapeRef.new(shape: AnalyticsChannel, location_name: "channel"))
+    SessionSpecification.add_member(:session_id, Shapes::ShapeRef.new(shape: AnalyticsSessionId, location_name: "sessionId"))
+    SessionSpecification.add_member(:conversation_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "conversationStartTime"))
+    SessionSpecification.add_member(:conversation_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "conversationEndTime"))
+    SessionSpecification.add_member(:conversation_duration_seconds, Shapes::ShapeRef.new(shape: AnalyticsLongValue, location_name: "conversationDurationSeconds"))
+    SessionSpecification.add_member(:conversation_end_state, Shapes::ShapeRef.new(shape: ConversationEndState, location_name: "conversationEndState"))
+    SessionSpecification.add_member(:mode, Shapes::ShapeRef.new(shape: AnalyticsModality, location_name: "mode"))
+    SessionSpecification.add_member(:number_of_turns, Shapes::ShapeRef.new(shape: AnalyticsLongValue, location_name: "numberOfTurns"))
+    SessionSpecification.add_member(:invoked_intent_samples, Shapes::ShapeRef.new(shape: InvokedIntentSamples, location_name: "invokedIntentSamples"))
+    SessionSpecification.add_member(:originating_request_id, Shapes::ShapeRef.new(shape: AnalyticsOriginatingRequestId, location_name: "originatingRequestId"))
+    SessionSpecification.struct_class = Types::SessionSpecification
+
+    SessionSpecifications.member = Shapes::ShapeRef.new(shape: SessionSpecification)
 
     SlotCaptureSetting.add_member(:capture_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "captureResponse"))
     SlotCaptureSetting.add_member(:capture_next_step, Shapes::ShapeRef.new(shape: DialogState, location_name: "captureNextStep"))
@@ -3024,6 +3474,17 @@ module Aws::LexModelsV2
     UtteranceAudioInputSpecification.add_member(:audio_file_s3_location, Shapes::ShapeRef.new(shape: AudioFileS3Location, required: true, location_name: "audioFileS3Location"))
     UtteranceAudioInputSpecification.struct_class = Types::UtteranceAudioInputSpecification
 
+    UtteranceBotResponse.add_member(:content, Shapes::ShapeRef.new(shape: String, location_name: "content"))
+    UtteranceBotResponse.add_member(:content_type, Shapes::ShapeRef.new(shape: UtteranceContentType, location_name: "contentType"))
+    UtteranceBotResponse.add_member(:image_response_card, Shapes::ShapeRef.new(shape: ImageResponseCard, location_name: "imageResponseCard"))
+    UtteranceBotResponse.struct_class = Types::UtteranceBotResponse
+
+    UtteranceBotResponses.member = Shapes::ShapeRef.new(shape: UtteranceBotResponse)
+
+    UtteranceDataSortBy.add_member(:name, Shapes::ShapeRef.new(shape: AnalyticsUtteranceSortByName, required: true, location_name: "name"))
+    UtteranceDataSortBy.add_member(:order, Shapes::ShapeRef.new(shape: AnalyticsSortOrder, required: true, location_name: "order"))
+    UtteranceDataSortBy.struct_class = Types::UtteranceDataSortBy
+
     UtteranceInputSpecification.add_member(:text_input, Shapes::ShapeRef.new(shape: TestSetUtteranceText, location_name: "textInput"))
     UtteranceInputSpecification.add_member(:audio_input, Shapes::ShapeRef.new(shape: UtteranceAudioInputSpecification, location_name: "audioInput"))
     UtteranceInputSpecification.struct_class = Types::UtteranceInputSpecification
@@ -3037,6 +3498,32 @@ module Aws::LexModelsV2
 
     UtteranceLevelTestResults.add_member(:items, Shapes::ShapeRef.new(shape: UtteranceLevelTestResultItemList, required: true, location_name: "items"))
     UtteranceLevelTestResults.struct_class = Types::UtteranceLevelTestResults
+
+    UtteranceSpecification.add_member(:bot_alias_id, Shapes::ShapeRef.new(shape: BotAliasId, location_name: "botAliasId"))
+    UtteranceSpecification.add_member(:bot_version, Shapes::ShapeRef.new(shape: NumericalBotVersion, location_name: "botVersion"))
+    UtteranceSpecification.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, location_name: "localeId"))
+    UtteranceSpecification.add_member(:session_id, Shapes::ShapeRef.new(shape: AnalyticsSessionId, location_name: "sessionId"))
+    UtteranceSpecification.add_member(:channel, Shapes::ShapeRef.new(shape: AnalyticsChannel, location_name: "channel"))
+    UtteranceSpecification.add_member(:mode, Shapes::ShapeRef.new(shape: AnalyticsModality, location_name: "mode"))
+    UtteranceSpecification.add_member(:conversation_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "conversationStartTime"))
+    UtteranceSpecification.add_member(:conversation_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "conversationEndTime"))
+    UtteranceSpecification.add_member(:utterance, Shapes::ShapeRef.new(shape: String, location_name: "utterance"))
+    UtteranceSpecification.add_member(:utterance_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "utteranceTimestamp"))
+    UtteranceSpecification.add_member(:audio_voice_duration_millis, Shapes::ShapeRef.new(shape: AnalyticsLongValue, location_name: "audioVoiceDurationMillis"))
+    UtteranceSpecification.add_member(:utterance_understood, Shapes::ShapeRef.new(shape: UtteranceUnderstood, location_name: "utteranceUnderstood"))
+    UtteranceSpecification.add_member(:input_type, Shapes::ShapeRef.new(shape: String, location_name: "inputType"))
+    UtteranceSpecification.add_member(:output_type, Shapes::ShapeRef.new(shape: String, location_name: "outputType"))
+    UtteranceSpecification.add_member(:associated_intent_name, Shapes::ShapeRef.new(shape: Name, location_name: "associatedIntentName"))
+    UtteranceSpecification.add_member(:associated_slot_name, Shapes::ShapeRef.new(shape: Name, location_name: "associatedSlotName"))
+    UtteranceSpecification.add_member(:intent_state, Shapes::ShapeRef.new(shape: IntentState, location_name: "intentState"))
+    UtteranceSpecification.add_member(:dialog_action_type, Shapes::ShapeRef.new(shape: String, location_name: "dialogActionType"))
+    UtteranceSpecification.add_member(:bot_response_audio_voice_id, Shapes::ShapeRef.new(shape: String, location_name: "botResponseAudioVoiceId"))
+    UtteranceSpecification.add_member(:slots_filled_in_session, Shapes::ShapeRef.new(shape: String, location_name: "slotsFilledInSession"))
+    UtteranceSpecification.add_member(:utterance_request_id, Shapes::ShapeRef.new(shape: Id, location_name: "utteranceRequestId"))
+    UtteranceSpecification.add_member(:bot_responses, Shapes::ShapeRef.new(shape: UtteranceBotResponses, location_name: "botResponses"))
+    UtteranceSpecification.struct_class = Types::UtteranceSpecification
+
+    UtteranceSpecifications.member = Shapes::ShapeRef.new(shape: UtteranceSpecification)
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
@@ -3891,6 +4378,57 @@ module Aws::LexModelsV2
         )
       end)
 
+      api.add_operation(:list_intent_metrics, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListIntentMetrics"
+        o.http_method = "POST"
+        o.http_request_uri = "/bots/{botId}/analytics/intentmetrics"
+        o.input = Shapes::ShapeRef.new(shape: ListIntentMetricsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListIntentMetricsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_intent_paths, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListIntentPaths"
+        o.http_method = "POST"
+        o.http_request_uri = "/bots/{botId}/analytics/intentpaths"
+        o.input = Shapes::ShapeRef.new(shape: ListIntentPathsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListIntentPathsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:list_intent_stage_metrics, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListIntentStageMetrics"
+        o.http_method = "POST"
+        o.http_request_uri = "/bots/{botId}/analytics/intentstagemetrics"
+        o.input = Shapes::ShapeRef.new(shape: ListIntentStageMetricsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListIntentStageMetricsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_intents, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListIntents"
         o.http_method = "POST"
@@ -3920,6 +4458,44 @@ module Aws::LexModelsV2
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_session_analytics_data, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSessionAnalyticsData"
+        o.http_method = "POST"
+        o.http_request_uri = "/bots/{botId}/analytics/sessions"
+        o.input = Shapes::ShapeRef.new(shape: ListSessionAnalyticsDataRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSessionAnalyticsDataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_session_metrics, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSessionMetrics"
+        o.http_method = "POST"
+        o.http_request_uri = "/bots/{botId}/analytics/sessionmetrics"
+        o.input = Shapes::ShapeRef.new(shape: ListSessionMetricsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSessionMetricsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -4041,6 +4617,44 @@ module Aws::LexModelsV2
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_utterance_analytics_data, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListUtteranceAnalyticsData"
+        o.http_method = "POST"
+        o.http_request_uri = "/bots/{botId}/analytics/utterances"
+        o.input = Shapes::ShapeRef.new(shape: ListUtteranceAnalyticsDataRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListUtteranceAnalyticsDataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_utterance_metrics, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListUtteranceMetrics"
+        o.http_method = "POST"
+        o.http_request_uri = "/bots/{botId}/analytics/utterancemetrics"
+        o.input = Shapes::ShapeRef.new(shape: ListUtteranceMetricsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListUtteranceMetricsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",

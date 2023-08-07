@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.86.0 (2023-08-03)
+------------------
+
+* Feature - The release makes public API for DMS Schema Conversion feature.
+
+1.85.0 (2023-08-01)
+------------------
+
+* Feature - Adding new API describe-engine-versions which provides information about the lifecycle of a replication instance's version.
+
+1.84.0 (2023-07-13)
+------------------
+
+* Feature - Enhanced PostgreSQL target endpoint settings for providing Babelfish support.
+
 1.83.0 (2023-07-11)
 ------------------
 

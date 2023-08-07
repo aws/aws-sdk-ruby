@@ -609,7 +609,9 @@ module Aws::Glue
     GrokClassifier = Shapes::StructureShape.new(name: 'GrokClassifier')
     GrokPattern = Shapes::StringShape.new(name: 'GrokPattern')
     HashString = Shapes::StringShape.new(name: 'HashString')
+    HudiTarget = Shapes::StructureShape.new(name: 'HudiTarget')
     HudiTargetCompressionType = Shapes::StringShape.new(name: 'HudiTargetCompressionType')
+    HudiTargetList = Shapes::ListShape.new(name: 'HudiTargetList')
     IcebergInput = Shapes::StructureShape.new(name: 'IcebergInput')
     IcebergTarget = Shapes::StructureShape.new(name: 'IcebergTarget')
     IcebergTargetList = Shapes::ListShape.new(name: 'IcebergTargetList')
@@ -853,6 +855,9 @@ module Aws::Glue
     QuerySchemaVersionMetadataMaxResults = Shapes::IntegerShape.new(name: 'QuerySchemaVersionMetadataMaxResults')
     QuerySchemaVersionMetadataResponse = Shapes::StructureShape.new(name: 'QuerySchemaVersionMetadataResponse')
     QuoteChar = Shapes::StringShape.new(name: 'QuoteChar')
+    Recipe = Shapes::StructureShape.new(name: 'Recipe')
+    RecipeReference = Shapes::StructureShape.new(name: 'RecipeReference')
+    RecipeVersion = Shapes::StringShape.new(name: 'RecipeVersion')
     RecordsCount = Shapes::IntegerShape.new(name: 'RecordsCount')
     RecrawlBehavior = Shapes::StringShape.new(name: 'RecrawlBehavior')
     RecrawlPolicy = Shapes::StructureShape.new(name: 'RecrawlPolicy')
@@ -956,6 +961,9 @@ module Aws::Glue
     SessionList = Shapes::ListShape.new(name: 'SessionList')
     SessionStatus = Shapes::StringShape.new(name: 'SessionStatus')
     SkewedInfo = Shapes::StructureShape.new(name: 'SkewedInfo')
+    SnowflakeNodeData = Shapes::StructureShape.new(name: 'SnowflakeNodeData')
+    SnowflakeSource = Shapes::StructureShape.new(name: 'SnowflakeSource')
+    SnowflakeTarget = Shapes::StructureShape.new(name: 'SnowflakeTarget')
     Sort = Shapes::StringShape.new(name: 'Sort')
     SortCriteria = Shapes::ListShape.new(name: 'SortCriteria')
     SortCriterion = Shapes::StructureShape.new(name: 'SortCriterion')
@@ -1656,6 +1664,9 @@ module Aws::Glue
     CodeGenConfigurationNode.add_member(:amazon_redshift_source, Shapes::ShapeRef.new(shape: AmazonRedshiftSource, location_name: "AmazonRedshiftSource"))
     CodeGenConfigurationNode.add_member(:amazon_redshift_target, Shapes::ShapeRef.new(shape: AmazonRedshiftTarget, location_name: "AmazonRedshiftTarget"))
     CodeGenConfigurationNode.add_member(:evaluate_data_quality_multi_frame, Shapes::ShapeRef.new(shape: EvaluateDataQualityMultiFrame, location_name: "EvaluateDataQualityMultiFrame"))
+    CodeGenConfigurationNode.add_member(:recipe, Shapes::ShapeRef.new(shape: Recipe, location_name: "Recipe"))
+    CodeGenConfigurationNode.add_member(:snowflake_source, Shapes::ShapeRef.new(shape: SnowflakeSource, location_name: "SnowflakeSource"))
+    CodeGenConfigurationNode.add_member(:snowflake_target, Shapes::ShapeRef.new(shape: SnowflakeTarget, location_name: "SnowflakeTarget"))
     CodeGenConfigurationNode.struct_class = Types::CodeGenConfigurationNode
 
     CodeGenConfigurationNodes.key = Shapes::ShapeRef.new(shape: NodeId)
@@ -1872,6 +1883,7 @@ module Aws::Glue
     CrawlerTargets.add_member(:catalog_targets, Shapes::ShapeRef.new(shape: CatalogTargetList, location_name: "CatalogTargets"))
     CrawlerTargets.add_member(:delta_targets, Shapes::ShapeRef.new(shape: DeltaTargetList, location_name: "DeltaTargets"))
     CrawlerTargets.add_member(:iceberg_targets, Shapes::ShapeRef.new(shape: IcebergTargetList, location_name: "IcebergTargets"))
+    CrawlerTargets.add_member(:hudi_targets, Shapes::ShapeRef.new(shape: HudiTargetList, location_name: "HudiTargets"))
     CrawlerTargets.struct_class = Types::CrawlerTargets
 
     CrawlsFilter.add_member(:field_name, Shapes::ShapeRef.new(shape: FieldName, location_name: "FieldName"))
@@ -3536,6 +3548,14 @@ module Aws::Glue
     GrokClassifier.add_member(:custom_patterns, Shapes::ShapeRef.new(shape: CustomPatterns, location_name: "CustomPatterns"))
     GrokClassifier.struct_class = Types::GrokClassifier
 
+    HudiTarget.add_member(:paths, Shapes::ShapeRef.new(shape: PathList, location_name: "Paths"))
+    HudiTarget.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, location_name: "ConnectionName"))
+    HudiTarget.add_member(:exclusions, Shapes::ShapeRef.new(shape: PathList, location_name: "Exclusions"))
+    HudiTarget.add_member(:maximum_traversal_depth, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "MaximumTraversalDepth"))
+    HudiTarget.struct_class = Types::HudiTarget
+
+    HudiTargetList.member = Shapes::ShapeRef.new(shape: HudiTarget)
+
     IcebergInput.add_member(:metadata_operation, Shapes::ShapeRef.new(shape: MetadataOperation, required: true, location_name: "MetadataOperation"))
     IcebergInput.add_member(:version, Shapes::ShapeRef.new(shape: VersionString, location_name: "Version"))
     IcebergInput.struct_class = Types::IcebergInput
@@ -4340,6 +4360,15 @@ module Aws::Glue
     QuerySchemaVersionMetadataResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: SchemaRegistryTokenString, location_name: "NextToken"))
     QuerySchemaVersionMetadataResponse.struct_class = Types::QuerySchemaVersionMetadataResponse
 
+    Recipe.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
+    Recipe.add_member(:inputs, Shapes::ShapeRef.new(shape: OneInput, required: true, location_name: "Inputs"))
+    Recipe.add_member(:recipe_reference, Shapes::ShapeRef.new(shape: RecipeReference, required: true, location_name: "RecipeReference"))
+    Recipe.struct_class = Types::Recipe
+
+    RecipeReference.add_member(:recipe_arn, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "RecipeArn"))
+    RecipeReference.add_member(:recipe_version, Shapes::ShapeRef.new(shape: RecipeVersion, required: true, location_name: "RecipeVersion"))
+    RecipeReference.struct_class = Types::RecipeReference
+
     RecrawlPolicy.add_member(:recrawl_behavior, Shapes::ShapeRef.new(shape: RecrawlBehavior, location_name: "RecrawlBehavior"))
     RecrawlPolicy.struct_class = Types::RecrawlPolicy
 
@@ -4751,6 +4780,39 @@ module Aws::Glue
     SkewedInfo.add_member(:skewed_column_values, Shapes::ShapeRef.new(shape: ColumnValueStringList, location_name: "SkewedColumnValues"))
     SkewedInfo.add_member(:skewed_column_value_location_maps, Shapes::ShapeRef.new(shape: LocationMap, location_name: "SkewedColumnValueLocationMaps"))
     SkewedInfo.struct_class = Types::SkewedInfo
+
+    SnowflakeNodeData.add_member(:source_type, Shapes::ShapeRef.new(shape: GenericLimitedString, location_name: "SourceType"))
+    SnowflakeNodeData.add_member(:connection, Shapes::ShapeRef.new(shape: Option, location_name: "Connection"))
+    SnowflakeNodeData.add_member(:schema, Shapes::ShapeRef.new(shape: GenericString, location_name: "Schema"))
+    SnowflakeNodeData.add_member(:table, Shapes::ShapeRef.new(shape: GenericString, location_name: "Table"))
+    SnowflakeNodeData.add_member(:database, Shapes::ShapeRef.new(shape: GenericString, location_name: "Database"))
+    SnowflakeNodeData.add_member(:temp_dir, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "TempDir"))
+    SnowflakeNodeData.add_member(:iam_role, Shapes::ShapeRef.new(shape: Option, location_name: "IamRole"))
+    SnowflakeNodeData.add_member(:additional_options, Shapes::ShapeRef.new(shape: AdditionalOptions, location_name: "AdditionalOptions"))
+    SnowflakeNodeData.add_member(:sample_query, Shapes::ShapeRef.new(shape: GenericString, location_name: "SampleQuery"))
+    SnowflakeNodeData.add_member(:pre_action, Shapes::ShapeRef.new(shape: GenericString, location_name: "PreAction"))
+    SnowflakeNodeData.add_member(:post_action, Shapes::ShapeRef.new(shape: GenericString, location_name: "PostAction"))
+    SnowflakeNodeData.add_member(:action, Shapes::ShapeRef.new(shape: GenericString, location_name: "Action"))
+    SnowflakeNodeData.add_member(:upsert, Shapes::ShapeRef.new(shape: BooleanValue, location_name: "Upsert"))
+    SnowflakeNodeData.add_member(:merge_action, Shapes::ShapeRef.new(shape: GenericLimitedString, location_name: "MergeAction"))
+    SnowflakeNodeData.add_member(:merge_when_matched, Shapes::ShapeRef.new(shape: GenericLimitedString, location_name: "MergeWhenMatched"))
+    SnowflakeNodeData.add_member(:merge_when_not_matched, Shapes::ShapeRef.new(shape: GenericLimitedString, location_name: "MergeWhenNotMatched"))
+    SnowflakeNodeData.add_member(:merge_clause, Shapes::ShapeRef.new(shape: GenericString, location_name: "MergeClause"))
+    SnowflakeNodeData.add_member(:staging_table, Shapes::ShapeRef.new(shape: GenericString, location_name: "StagingTable"))
+    SnowflakeNodeData.add_member(:selected_columns, Shapes::ShapeRef.new(shape: OptionList, location_name: "SelectedColumns"))
+    SnowflakeNodeData.add_member(:auto_pushdown, Shapes::ShapeRef.new(shape: BooleanValue, location_name: "AutoPushdown"))
+    SnowflakeNodeData.add_member(:table_schema, Shapes::ShapeRef.new(shape: OptionList, location_name: "TableSchema"))
+    SnowflakeNodeData.struct_class = Types::SnowflakeNodeData
+
+    SnowflakeSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
+    SnowflakeSource.add_member(:data, Shapes::ShapeRef.new(shape: SnowflakeNodeData, required: true, location_name: "Data"))
+    SnowflakeSource.add_member(:output_schemas, Shapes::ShapeRef.new(shape: GlueSchemas, location_name: "OutputSchemas"))
+    SnowflakeSource.struct_class = Types::SnowflakeSource
+
+    SnowflakeTarget.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
+    SnowflakeTarget.add_member(:data, Shapes::ShapeRef.new(shape: SnowflakeNodeData, required: true, location_name: "Data"))
+    SnowflakeTarget.add_member(:inputs, Shapes::ShapeRef.new(shape: OneInput, location_name: "Inputs"))
+    SnowflakeTarget.struct_class = Types::SnowflakeTarget
 
     SortCriteria.member = Shapes::ShapeRef.new(shape: SortCriterion)
 

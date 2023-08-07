@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2023-07-28)
+------------------
+
+* Feature - Documentation changes related to SQS APIs.
+
 1.61.0 (2023-07-11)
 ------------------
 

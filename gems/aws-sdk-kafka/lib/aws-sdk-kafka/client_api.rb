@@ -33,6 +33,10 @@ module Aws::Kafka
     ClusterOperationInfo = Shapes::StructureShape.new(name: 'ClusterOperationInfo')
     ClusterOperationStep = Shapes::StructureShape.new(name: 'ClusterOperationStep')
     ClusterOperationStepInfo = Shapes::StructureShape.new(name: 'ClusterOperationStepInfo')
+    ClusterOperationV2 = Shapes::StructureShape.new(name: 'ClusterOperationV2')
+    ClusterOperationV2Provisioned = Shapes::StructureShape.new(name: 'ClusterOperationV2Provisioned')
+    ClusterOperationV2Serverless = Shapes::StructureShape.new(name: 'ClusterOperationV2Serverless')
+    ClusterOperationV2Summary = Shapes::StructureShape.new(name: 'ClusterOperationV2Summary')
     ClusterState = Shapes::StringShape.new(name: 'ClusterState')
     ClusterType = Shapes::StringShape.new(name: 'ClusterType')
     CompatibleKafkaVersion = Shapes::StructureShape.new(name: 'CompatibleKafkaVersion')
@@ -60,6 +64,8 @@ module Aws::Kafka
     DeleteVpcConnectionResponse = Shapes::StructureShape.new(name: 'DeleteVpcConnectionResponse')
     DescribeClusterOperationRequest = Shapes::StructureShape.new(name: 'DescribeClusterOperationRequest')
     DescribeClusterOperationResponse = Shapes::StructureShape.new(name: 'DescribeClusterOperationResponse')
+    DescribeClusterOperationV2Request = Shapes::StructureShape.new(name: 'DescribeClusterOperationV2Request')
+    DescribeClusterOperationV2Response = Shapes::StructureShape.new(name: 'DescribeClusterOperationV2Response')
     DescribeClusterRequest = Shapes::StructureShape.new(name: 'DescribeClusterRequest')
     DescribeClusterResponse = Shapes::StructureShape.new(name: 'DescribeClusterResponse')
     DescribeClusterV2Request = Shapes::StructureShape.new(name: 'DescribeClusterV2Request')
@@ -95,6 +101,8 @@ module Aws::Kafka
     ListClientVpcConnectionsResponse = Shapes::StructureShape.new(name: 'ListClientVpcConnectionsResponse')
     ListClusterOperationsRequest = Shapes::StructureShape.new(name: 'ListClusterOperationsRequest')
     ListClusterOperationsResponse = Shapes::StructureShape.new(name: 'ListClusterOperationsResponse')
+    ListClusterOperationsV2Request = Shapes::StructureShape.new(name: 'ListClusterOperationsV2Request')
+    ListClusterOperationsV2Response = Shapes::StructureShape.new(name: 'ListClusterOperationsV2Response')
     ListClustersRequest = Shapes::StructureShape.new(name: 'ListClustersRequest')
     ListClustersResponse = Shapes::StructureShape.new(name: 'ListClustersResponse')
     ListClustersV2Request = Shapes::StructureShape.new(name: 'ListClustersV2Request')
@@ -178,6 +186,7 @@ module Aws::Kafka
     VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
     VpcConnection = Shapes::StructureShape.new(name: 'VpcConnection')
     VpcConnectionInfo = Shapes::StructureShape.new(name: 'VpcConnectionInfo')
+    VpcConnectionInfoServerless = Shapes::StructureShape.new(name: 'VpcConnectionInfoServerless')
     VpcConnectionState = Shapes::StringShape.new(name: 'VpcConnectionState')
     VpcConnectivity = Shapes::StructureShape.new(name: 'VpcConnectivity')
     VpcConnectivityClientAuthentication = Shapes::StructureShape.new(name: 'VpcConnectivityClientAuthentication')
@@ -198,6 +207,7 @@ module Aws::Kafka
     __listOfClusterInfo = Shapes::ListShape.new(name: '__listOfClusterInfo')
     __listOfClusterOperationInfo = Shapes::ListShape.new(name: '__listOfClusterOperationInfo')
     __listOfClusterOperationStep = Shapes::ListShape.new(name: '__listOfClusterOperationStep')
+    __listOfClusterOperationV2Summary = Shapes::ListShape.new(name: '__listOfClusterOperationV2Summary')
     __listOfCompatibleKafkaVersion = Shapes::ListShape.new(name: '__listOfCompatibleKafkaVersion')
     __listOfConfiguration = Shapes::ListShape.new(name: '__listOfConfiguration')
     __listOfConfigurationRevision = Shapes::ListShape.new(name: '__listOfConfigurationRevision')
@@ -338,6 +348,35 @@ module Aws::Kafka
     ClusterOperationStepInfo.add_member(:step_status, Shapes::ShapeRef.new(shape: __string, location_name: "stepStatus"))
     ClusterOperationStepInfo.struct_class = Types::ClusterOperationStepInfo
 
+    ClusterOperationV2.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterArn"))
+    ClusterOperationV2.add_member(:cluster_type, Shapes::ShapeRef.new(shape: ClusterType, location_name: "clusterType"))
+    ClusterOperationV2.add_member(:start_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "startTime"))
+    ClusterOperationV2.add_member(:end_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "endTime"))
+    ClusterOperationV2.add_member(:operation_arn, Shapes::ShapeRef.new(shape: __string, location_name: "operationArn"))
+    ClusterOperationV2.add_member(:operation_state, Shapes::ShapeRef.new(shape: __string, location_name: "operationState"))
+    ClusterOperationV2.add_member(:operation_type, Shapes::ShapeRef.new(shape: __string, location_name: "operationType"))
+    ClusterOperationV2.add_member(:provisioned, Shapes::ShapeRef.new(shape: ClusterOperationV2Provisioned, location_name: "provisioned"))
+    ClusterOperationV2.add_member(:serverless, Shapes::ShapeRef.new(shape: ClusterOperationV2Serverless, location_name: "serverless"))
+    ClusterOperationV2.struct_class = Types::ClusterOperationV2
+
+    ClusterOperationV2Provisioned.add_member(:operation_steps, Shapes::ShapeRef.new(shape: __listOfClusterOperationStep, location_name: "operationSteps"))
+    ClusterOperationV2Provisioned.add_member(:source_cluster_info, Shapes::ShapeRef.new(shape: MutableClusterInfo, location_name: "sourceClusterInfo"))
+    ClusterOperationV2Provisioned.add_member(:target_cluster_info, Shapes::ShapeRef.new(shape: MutableClusterInfo, location_name: "targetClusterInfo"))
+    ClusterOperationV2Provisioned.add_member(:vpc_connection_info, Shapes::ShapeRef.new(shape: VpcConnectionInfo, location_name: "vpcConnectionInfo"))
+    ClusterOperationV2Provisioned.struct_class = Types::ClusterOperationV2Provisioned
+
+    ClusterOperationV2Serverless.add_member(:vpc_connection_info, Shapes::ShapeRef.new(shape: VpcConnectionInfoServerless, location_name: "vpcConnectionInfo"))
+    ClusterOperationV2Serverless.struct_class = Types::ClusterOperationV2Serverless
+
+    ClusterOperationV2Summary.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterArn"))
+    ClusterOperationV2Summary.add_member(:cluster_type, Shapes::ShapeRef.new(shape: ClusterType, location_name: "clusterType"))
+    ClusterOperationV2Summary.add_member(:start_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "startTime"))
+    ClusterOperationV2Summary.add_member(:end_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "endTime"))
+    ClusterOperationV2Summary.add_member(:operation_arn, Shapes::ShapeRef.new(shape: __string, location_name: "operationArn"))
+    ClusterOperationV2Summary.add_member(:operation_state, Shapes::ShapeRef.new(shape: __string, location_name: "operationState"))
+    ClusterOperationV2Summary.add_member(:operation_type, Shapes::ShapeRef.new(shape: __string, location_name: "operationType"))
+    ClusterOperationV2Summary.struct_class = Types::ClusterOperationV2Summary
+
     CompatibleKafkaVersion.add_member(:source_version, Shapes::ShapeRef.new(shape: __string, location_name: "sourceVersion"))
     CompatibleKafkaVersion.add_member(:target_versions, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "targetVersions"))
     CompatibleKafkaVersion.struct_class = Types::CompatibleKafkaVersion
@@ -462,6 +501,12 @@ module Aws::Kafka
 
     DescribeClusterOperationResponse.add_member(:cluster_operation_info, Shapes::ShapeRef.new(shape: ClusterOperationInfo, location_name: "clusterOperationInfo"))
     DescribeClusterOperationResponse.struct_class = Types::DescribeClusterOperationResponse
+
+    DescribeClusterOperationV2Request.add_member(:cluster_operation_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterOperationArn"))
+    DescribeClusterOperationV2Request.struct_class = Types::DescribeClusterOperationV2Request
+
+    DescribeClusterOperationV2Response.add_member(:cluster_operation_info, Shapes::ShapeRef.new(shape: ClusterOperationV2, location_name: "clusterOperationInfo"))
+    DescribeClusterOperationV2Response.struct_class = Types::DescribeClusterOperationV2Response
 
     DescribeClusterRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
     DescribeClusterRequest.struct_class = Types::DescribeClusterRequest
@@ -605,6 +650,15 @@ module Aws::Kafka
     ListClusterOperationsResponse.add_member(:cluster_operation_info_list, Shapes::ShapeRef.new(shape: __listOfClusterOperationInfo, location_name: "clusterOperationInfoList"))
     ListClusterOperationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     ListClusterOperationsResponse.struct_class = Types::ListClusterOperationsResponse
+
+    ListClusterOperationsV2Request.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
+    ListClusterOperationsV2Request.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListClusterOperationsV2Request.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListClusterOperationsV2Request.struct_class = Types::ListClusterOperationsV2Request
+
+    ListClusterOperationsV2Response.add_member(:cluster_operation_info_list, Shapes::ShapeRef.new(shape: __listOfClusterOperationV2Summary, location_name: "clusterOperationInfoList"))
+    ListClusterOperationsV2Response.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListClusterOperationsV2Response.struct_class = Types::ListClusterOperationsV2Response
 
     ListClustersRequest.add_member(:cluster_name_filter, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "clusterNameFilter"))
     ListClustersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -968,6 +1022,12 @@ module Aws::Kafka
     VpcConnectionInfo.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "creationTime"))
     VpcConnectionInfo.struct_class = Types::VpcConnectionInfo
 
+    VpcConnectionInfoServerless.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "creationTime"))
+    VpcConnectionInfoServerless.add_member(:owner, Shapes::ShapeRef.new(shape: __string, location_name: "owner"))
+    VpcConnectionInfoServerless.add_member(:user_identity, Shapes::ShapeRef.new(shape: UserIdentity, location_name: "userIdentity"))
+    VpcConnectionInfoServerless.add_member(:vpc_connection_arn, Shapes::ShapeRef.new(shape: __string, location_name: "vpcConnectionArn"))
+    VpcConnectionInfoServerless.struct_class = Types::VpcConnectionInfoServerless
+
     VpcConnectivity.add_member(:client_authentication, Shapes::ShapeRef.new(shape: VpcConnectivityClientAuthentication, location_name: "clientAuthentication"))
     VpcConnectivity.struct_class = Types::VpcConnectivity
 
@@ -1006,6 +1066,8 @@ module Aws::Kafka
     __listOfClusterOperationInfo.member = Shapes::ShapeRef.new(shape: ClusterOperationInfo)
 
     __listOfClusterOperationStep.member = Shapes::ShapeRef.new(shape: ClusterOperationStep)
+
+    __listOfClusterOperationV2Summary.member = Shapes::ShapeRef.new(shape: ClusterOperationV2Summary)
 
     __listOfCompatibleKafkaVersion.member = Shapes::ShapeRef.new(shape: CompatibleKafkaVersion)
 
@@ -1197,6 +1259,21 @@ module Aws::Kafka
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
       end)
 
+      api.add_operation(:describe_cluster_operation_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeClusterOperationV2"
+        o.http_method = "GET"
+        o.http_request_uri = "/api/v2/operations/{clusterOperationArn}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeClusterOperationV2Request)
+        o.output = Shapes::ShapeRef.new(shape: DescribeClusterOperationV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:describe_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeConfiguration"
         o.http_method = "GET"
@@ -1292,6 +1369,27 @@ module Aws::Kafka
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_cluster_operations_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListClusterOperationsV2"
+        o.http_method = "GET"
+        o.http_request_uri = "/api/v2/clusters/{clusterArn}/operations"
+        o.input = Shapes::ShapeRef.new(shape: ListClusterOperationsV2Request)
+        o.output = Shapes::ShapeRef.new(shape: ListClusterOperationsV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

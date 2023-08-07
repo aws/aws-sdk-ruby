@@ -447,17 +447,17 @@ module Aws::IAM
     #
     #  </note>
     #
-    # For more information about roles, see [Working with roles][4]. For
-    # more information about instance profiles, see [About instance
-    # profiles][5].
+    # For more information about roles, see [IAM roles][4] in the *IAM User
+    # Guide*. For more information about instance profiles, see [Using
+    # instance profiles][5] in the *IAM User Guide*.
     #
     #
     #
     # [1]: https://en.wikipedia.org/wiki/Eventual_consistency
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateIamInstanceProfile.html
     # [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateIamInstanceProfile.html
-    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html
-    # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
+    # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
     #
     # @option params [required, String] :instance_profile_name
     #   The name of the instance profile to update.
@@ -1324,11 +1324,11 @@ module Aws::IAM
     # access Amazon Web Services.
     #
     # <note markdown="1"> Amazon Web Services secures communication with some OIDC identity
-    # providers (IdPs) through our library of trusted certificate
+    # providers (IdPs) through our library of trusted root certificate
     # authorities (CAs) instead of using a certificate thumbprint to verify
-    # your IdP server certificate. These OIDC IdPs include Google, Auth0,
-    # and those that use an Amazon S3 bucket to host a JSON Web Key Set
-    # (JWKS) endpoint. In these cases, your legacy thumbprint remains in
+    # your IdP server certificate. These OIDC IdPs include Auth0, GitHub,
+    # Google, and those that use an Amazon S3 bucket to host a JSON Web Key
+    # Set (JWKS) endpoint. In these cases, your legacy thumbprint remains in
     # your configuration, but is no longer used for validation.
     #
     #  </note>
@@ -1729,14 +1729,16 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Creates a new role for your Amazon Web Services account. For more
-    # information about roles, see [IAM roles][1]. For information about
-    # quotas for role names and the number of roles you can create, see [IAM
-    # and STS quotas][2] in the *IAM User Guide*.
+    # Creates a new role for your Amazon Web Services account.
+    #
+    # For more information about roles, see [IAM roles][1] in the *IAM User
+    # Guide*. For information about quotas for role names and the number of
+    # roles you can create, see [IAM and STS quotas][2] in the *IAM User
+    # Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
     # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html
     #
     # @option params [String] :path
@@ -2734,12 +2736,12 @@ module Aws::IAM
     # instance profile that is associated with a running instance will break
     # any applications running on the instance.
     #
-    # For more information about instance profiles, see [About instance
-    # profiles][1].
+    # For more information about instance profiles, see [Using instance
+    # profiles][1] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
     #
     # @option params [required, String] :instance_profile_name
     #   The name of the instance profile to delete.
@@ -4883,12 +4885,12 @@ module Aws::IAM
 
     # Retrieves information about the specified instance profile, including
     # the instance profile's path, GUID, ARN, and role. For more
-    # information about instance profiles, see [About instance profiles][1]
+    # information about instance profiles, see [Using instance profiles][1]
     # in the *IAM User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
     #
     # @option params [required, String] :instance_profile_name
     #   The name of the instance profile to get information about.
@@ -5446,8 +5448,8 @@ module Aws::IAM
 
     # Retrieves information about the specified role, including the role's
     # path, GUID, ARN, and the role's trust policy that grants permission
-    # to assume the role. For more information about roles, see [Working
-    # with roles][1].
+    # to assume the role. For more information about roles, see [IAM
+    # roles][1] in the *IAM User Guide*.
     #
     # <note markdown="1"> Policies returned by this operation are URL-encoded compliant with
     # [RFC 3986][2]. You can use a URL decoding method to convert the policy
@@ -5459,7 +5461,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
     # [2]: https://tools.ietf.org/html/rfc3986
     #
     # @option params [required, String] :role_name
@@ -5561,14 +5563,14 @@ module Aws::IAM
     # For more information about policies, see [Managed policies and inline
     # policies][2] in the *IAM User Guide*.
     #
-    # For more information about roles, see [Using roles to delegate
-    # permissions and federate identities][3].
+    # For more information about roles, see [IAM roles][3] in the *IAM User
+    # Guide*.
     #
     #
     #
     # [1]: https://tools.ietf.org/html/rfc3986
     # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
-    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
     #
     # @option params [required, String] :role_name
     #   The name of the role associated with the policy.
@@ -7284,7 +7286,8 @@ module Aws::IAM
 
     # Lists the instance profiles that have the specified path prefix. If
     # there are none, the operation returns an empty list. For more
-    # information about instance profiles, see [About instance profiles][1].
+    # information about instance profiles, see [Using instance profiles][1]
+    # in the *IAM User Guide*.
     #
     # <note markdown="1"> IAM resource-listing operations return a subset of the available
     # attributes for the resource. For example, this operation does not
@@ -7299,7 +7302,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
     #
     # @option params [String] :path_prefix
     #   The path prefix for filtering the results. For example, the prefix
@@ -7393,15 +7396,15 @@ module Aws::IAM
 
     # Lists the instance profiles that have the specified associated IAM
     # role. If there are none, the operation returns an empty list. For more
-    # information about instance profiles, go to [About instance
-    # profiles][1].
+    # information about instance profiles, go to [Using instance
+    # profiles][1] in the *IAM User Guide*.
     #
     # You can paginate the results using the `MaxItems` and `Marker`
     # parameters.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
     #
     # @option params [required, String] :role_name
     #   The name of the role to list instance profiles for.
@@ -8343,7 +8346,7 @@ module Aws::IAM
 
     # Lists the IAM roles that have the specified path prefix. If there are
     # none, the operation returns an empty list. For more information about
-    # roles, see [Working with roles][1].
+    # roles, see [IAM roles][1] in the *IAM User Guide*.
     #
     # <note markdown="1"> IAM resource-listing operations return a subset of the available
     # attributes for the resource. This operation does not return the
@@ -8365,7 +8368,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
     #
     # @option params [String] :path_prefix
     #   The path prefix for filtering the results. For example, the prefix
@@ -9441,7 +9444,7 @@ module Aws::IAM
     #   You must provide policies in JSON format in IAM. However, for
     #   CloudFormation templates formatted in YAML, you can provide the policy
     #   in JSON or YAML format. CloudFormation always converts a YAML policy
-    #   to JSON format before submitting it to = IAM.
+    #   to JSON format before submitting it to IAM.
     #
     #   The [regex pattern][1] used to validate this parameter is a string of
     #   characters consisting of the following:
@@ -9555,8 +9558,8 @@ module Aws::IAM
     # as part of the role's access (permissions) policy. The role's trust
     # policy is created at the same time as the role, using [ `CreateRole`
     # ][1]. You can update a role's trust policy using [
-    # `UpdateAssumerolePolicy` ][2]. For more information about IAM roles,
-    # see [Using roles to delegate permissions and federate identities][3].
+    # `UpdateAssumeRolePolicy` ][2]. For more information about roles, see
+    # [IAM roles][3] in the *IAM User Guide*.
     #
     # A role can also have a managed policy attached to it. To attach a
     # managed policy to a role, use [ `AttachRolePolicy` ][4]. To create a
@@ -9877,14 +9880,14 @@ module Aws::IAM
     # role from an instance profile that is associated with a running
     # instance might break any applications running on the instance.
     #
-    # For more information about IAM roles, see [Working with roles][1]. For
-    # more information about instance profiles, see [About instance
-    # profiles][2].
+    # For more information about roles, see [IAM roles][1] in the *IAM User
+    # Guide*. For more information about instance profiles, see [Using
+    # instance profiles][2] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html
-    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
     #
     # @option params [required, String] :instance_profile_name
     #   The name of the instance profile to update.
@@ -12478,11 +12481,11 @@ module Aws::IAM
     # certificate thumbprint is updated.
     #
     # <note markdown="1"> Amazon Web Services secures communication with some OIDC identity
-    # providers (IdPs) through our library of trusted certificate
+    # providers (IdPs) through our library of trusted root certificate
     # authorities (CAs) instead of using a certificate thumbprint to verify
-    # your IdP server certificate. These OIDC IdPs include Google, Auth0,
-    # and those that use an Amazon S3 bucket to host a JSON Web Key Set
-    # (JWKS) endpoint. In these cases, your legacy thumbprint remains in
+    # your IdP server certificate. These OIDC IdPs include Auth0, GitHub,
+    # Google, and those that use an Amazon S3 bucket to host a JSON Web Key
+    # Set (JWKS) endpoint. In these cases, your legacy thumbprint remains in
     # your configuration, but is no longer used for validation.
     #
     #  </note>
@@ -13458,7 +13461,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

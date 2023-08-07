@@ -206,6 +206,22 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
+    # Specifies the CloudWatch alarm specification to use in an instance
+    # refresh.
+    #
+    # @!attribute [rw] alarms
+    #   The names of one or more CloudWatch alarms to monitor for the
+    #   instance refresh. You can specify up to 10 alarms.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AlarmSpecification AWS API Documentation
+    #
+    class AlarmSpecification < Struct.new(
+      :alarms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You already have an Auto Scaling group or launch configuration with
     # this name.
     #
@@ -5842,7 +5858,7 @@ module Aws::AutoScaling
     #   The amount by which to scale, based on the specified adjustment
     #   type. A positive value adds to the current capacity while a negative
     #   number removes from the current capacity. For exact capacity, you
-    #   must specify a positive value.
+    #   must specify a non-negative value.
     #
     #   Required if the policy type is `SimpleScaling`. (Not used with any
     #   other policy type.)
@@ -6242,8 +6258,8 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] auto_rollback
     #   (Optional) Indicates whether to roll back the Auto Scaling group to
-    #   its previous configuration if the instance refresh fails. The
-    #   default is `false`.
+    #   its previous configuration if the instance refresh fails or a
+    #   CloudWatch alarm threshold is met. The default is `false`.
     #
     #   A rollback is not supported in the following situations:
     #
@@ -6256,6 +6272,13 @@ module Aws::AutoScaling
     #
     #   * The Auto Scaling group uses the launch template's `$Latest` or
     #     `$Default` version.
+    #
+    #   For more information, see [Undo changes with a rollback][1] in the
+    #   *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/instance-refresh-rollback.html
     #   @return [Boolean]
     #
     # @!attribute [rw] scale_in_protected_instances
@@ -6304,6 +6327,12 @@ module Aws::AutoScaling
     #     instances to service. Otherwise, the instance refresh will fail.
     #   @return [String]
     #
+    # @!attribute [rw] alarm_specification
+    #   (Optional) The CloudWatch alarm specification. CloudWatch alarms can
+    #   be used to identify any issues and fail the operation if an alarm
+    #   threshold is met.
+    #   @return [Types::AlarmSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/RefreshPreferences AWS API Documentation
     #
     class RefreshPreferences < Struct.new(
@@ -6314,7 +6343,8 @@ module Aws::AutoScaling
       :skip_matching,
       :auto_rollback,
       :scale_in_protected_instances,
-      :standby_instances)
+      :standby_instances,
+      :alarm_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6913,6 +6943,8 @@ module Aws::AutoScaling
     #
     #   * Checkpoints
     #
+    #   * CloudWatch alarms
+    #
     #   * Skip matching
     #   @return [Types::RefreshPreferences]
     #
@@ -6986,13 +7018,8 @@ module Aws::AutoScaling
     # @!attribute [rw] scaling_adjustment
     #   The amount by which to scale, based on the specified adjustment
     #   type. A positive value adds to the current capacity while a negative
-    #   number removes from the current capacity.
-    #
-    #   The amount by which to scale. The adjustment is based on the value
-    #   that you specified in the `AdjustmentType` property (either an
-    #   absolute number or a percentage). A positive value adds to the
-    #   current capacity and a negative number subtracts from the current
-    #   capacity.
+    #   number removes from the current capacity. For exact capacity, you
+    #   must specify a non-negative value.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/StepAdjustment AWS API Documentation

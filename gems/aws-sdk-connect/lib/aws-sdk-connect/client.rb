@@ -1867,6 +1867,11 @@ module Aws::Connect
     #   For example, \\\{ "tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
+    # @option params [String] :agent_availability_timer
+    #   Whether agents with this routing profile will have their routing order
+    #   calculated based on *time since their last inbound contact* or
+    #   *longest idle time*.
+    #
     # @return [Types::CreateRoutingProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRoutingProfileResponse#routing_profile_arn #routing_profile_arn} => String
@@ -1901,6 +1906,7 @@ module Aws::Connect
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     agent_availability_timer: "TIME_SINCE_LAST_ACTIVITY", # accepts TIME_SINCE_LAST_ACTIVITY, TIME_SINCE_LAST_INBOUND
     #   })
     #
     # @example Response structure
@@ -2917,6 +2923,37 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Deletes a queue.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :queue_id
+    #   The identifier for the queue.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_queue({
+    #     instance_id: "InstanceId", # required
+    #     queue_id: "QueueId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteQueue AWS API Documentation
+    #
+    # @overload delete_queue(params = {})
+    # @param [Hash] params ({})
+    def delete_queue(params = {}, options = {})
+      req = build_request(:delete_queue, params)
+      req.send_request(options)
+    end
+
     # Deletes a quick connect.
     #
     # @option params [required, String] :instance_id
@@ -2945,6 +2982,37 @@ module Aws::Connect
     # @param [Hash] params ({})
     def delete_quick_connect(params = {}, options = {})
       req = build_request(:delete_quick_connect, params)
+      req.send_request(options)
+    end
+
+    # Deletes a routing profile.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :routing_profile_id
+    #   The identifier of the routing profile.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_routing_profile({
+    #     instance_id: "InstanceId", # required
+    #     routing_profile_id: "RoutingProfileId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteRoutingProfile AWS API Documentation
+    #
+    # @overload delete_routing_profile(params = {})
+    # @param [Hash] params ({})
+    def delete_routing_profile(params = {}, options = {})
+      req = build_request(:delete_routing_profile, params)
       req.send_request(options)
     end
 
@@ -3852,7 +3920,7 @@ module Aws::Connect
     #   resp.claimed_phone_number_summary.phone_number_arn #=> String
     #   resp.claimed_phone_number_summary.phone_number #=> String
     #   resp.claimed_phone_number_summary.phone_number_country_code #=> String, one of "AF", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BA", "BW", "BR", "IO", "VG", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CK", "CR", "HR", "CU", "CW", "CY", "CZ", "CD", "DK", "DJ", "DM", "DO", "TL", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "PF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "CI", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "KP", "MP", "NO", "OM", "PK", "PW", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "CG", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "KR", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "VI", "UG", "UA", "AE", "GB", "US", "UY", "UZ", "VU", "VA", "VE", "VN", "WF", "EH", "YE", "ZM", "ZW"
-    #   resp.claimed_phone_number_summary.phone_number_type #=> String, one of "TOLL_FREE", "DID"
+    #   resp.claimed_phone_number_summary.phone_number_type #=> String, one of "TOLL_FREE", "DID", "UIFN", "SHARED", "THIRD_PARTY_TF", "THIRD_PARTY_DID"
     #   resp.claimed_phone_number_summary.phone_number_description #=> String
     #   resp.claimed_phone_number_summary.target_arn #=> String
     #   resp.claimed_phone_number_summary.tags #=> Hash
@@ -4050,6 +4118,7 @@ module Aws::Connect
     #   resp.routing_profile.tags["TagKey"] #=> String
     #   resp.routing_profile.number_of_associated_queues #=> Integer
     #   resp.routing_profile.number_of_associated_users #=> Integer
+    #   resp.routing_profile.agent_availability_timer #=> String, one of "TIME_SINCE_LAST_ACTIVITY", "TIME_SINCE_LAST_INBOUND"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeRoutingProfile AWS API Documentation
     #
@@ -5608,6 +5677,8 @@ module Aws::Connect
     #
     #   * User hierarchy groups
     #
+    #   * Feature
+    #
     #   At least one filter must be passed from queues, routing profiles,
     #   agents, or user hierarchy groups.
     #
@@ -5620,7 +5691,8 @@ module Aws::Connect
     #     single request. Valid filter keys: `QUEUE` \| `ROUTING_PROFILE` \|
     #     `AGENT` \| `CHANNEL` \| `AGENT_HIERARCHY_LEVEL_ONE` \|
     #     `AGENT_HIERARCHY_LEVEL_TWO` \| `AGENT_HIERARCHY_LEVEL_THREE` \|
-    #     `AGENT_HIERARCHY_LEVEL_FOUR` \| `AGENT_HIERARCHY_LEVEL_FIVE`
+    #     `AGENT_HIERARCHY_LEVEL_FOUR` \| `AGENT_HIERARCHY_LEVEL_FIVE` \|
+    #     `FEATURE`
     #
     #   * **Filter values**: A maximum of 100 filter values are supported in a
     #     single request. VOICE, CHAT, and TASK are valid `filterValue` for
@@ -5628,6 +5700,10 @@ module Aws::Connect
     #     filter values. For example, a GetMetricDataV2 request can filter by
     #     50 queues, 35 agents, and 15 routing profiles for a total of 100
     #     filter values, along with 3 channel filters.
+    #
+    #     `contact_lens_conversational_analytics` is a valid filterValue for
+    #     the `FEATURE` filter key. It is available only to contacts analyzed
+    #     by Contact Lens conversational analytics.
     #
     #
     #
@@ -5707,6 +5783,21 @@ module Aws::Connect
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy, Feature
+    #
+    #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
+    #
+    #      </note>
+    #
+    #   AVG\_AGENT\_CONNECTING\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid metric filter key: `INITIATION_METHOD`. For now, this metric
+    #     only supports the following as `INITIATION_METHOD`: `INBOUND` \|
+    #     `OUTBOUND` \| `CALLBACK` \| `API`
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
     #
     #   AVG\_AGENT\_CONNECTING\_TIME
@@ -5720,19 +5811,66 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
     #
-    #   AVG\_HANDLE\_TIME
+    #   AVG\_CONTACT\_DURATION
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy, Feature
+    #
+    #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
+    #
+    #      </note>
+    #
+    #   AVG\_CONVERSATION\_DURATION
     #
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
+    #
+    #   AVG\_GREETING\_TIME\_AGENT
+    #
+    #   : This metric is available only for contacts analyzed by Contact Lens
+    #     conversational analytics.
+    #
+    #     Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   AVG\_HANDLE\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy, Feature
+    #
+    #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
+    #
+    #      </note>
     #
     #   AVG\_HOLD\_TIME
     #
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy
+    #     Agent Hierarchy, Feature
+    #
+    #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
+    #
+    #      </note>
+    #
+    #   AVG\_HOLDS
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy, Feature
+    #
+    #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
+    #
+    #      </note>
     #
     #   AVG\_INTERACTION\_AND\_HOLD\_TIME
     #
@@ -5745,13 +5883,83 @@ module Aws::Connect
     #
     #   : Unit: Seconds
     #
-    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Feature
+    #
+    #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
+    #
+    #      </note>
+    #
+    #   AVG\_INTERRUPTIONS\_AGENT
+    #
+    #   : This metric is available only for contacts analyzed by Contact Lens
+    #     conversational analytics.
+    #
+    #     Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   AVG\_INTERRUPTION\_TIME\_AGENT
+    #
+    #   : This metric is available only for contacts analyzed by Contact Lens
+    #     conversational analytics.
+    #
+    #     Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   AVG\_NON\_TALK\_TIME
+    #
+    #   : This metric is available only for contacts analyzed by Contact Lens
+    #     conversational analytics.
+    #
+    #     Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
     #
     #   AVG\_QUEUE\_ANSWER\_TIME
     #
     #   : Unit: Seconds
     #
-    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Feature
+    #
+    #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
+    #
+    #      </note>
+    #
+    #   AVG\_TALK\_TIME
+    #
+    #   : This metric is available only for contacts analyzed by Contact Lens
+    #     conversational analytics.
+    #
+    #     Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   AVG\_TALK\_TIME\_AGENT
+    #
+    #   : This metric is available only for contacts analyzed by Contact Lens
+    #     conversational analytics.
+    #
+    #     Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   AVG\_TALK\_TIME\_CUSTOMER
+    #
+    #   : This metric is available only for contacts analyzed by Contact Lens
+    #     conversational analytics.
+    #
+    #     Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
     #
     #   CONTACTS\_ABANDONED
     #
@@ -5766,7 +5974,12 @@ module Aws::Connect
     #
     #     Valid metric filter key: `INITIATION_METHOD`
     #
-    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Feature
+    #
+    #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
+    #
+    #      </note>
     #
     #   CONTACTS\_HANDLED
     #
@@ -5775,7 +5988,11 @@ module Aws::Connect
     #     Valid metric filter key: `INITIATION_METHOD`, `DISCONNECT_REASON`
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy
+    #     Agent Hierarchy, Feature
+    #
+    #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
+    #
+    #      </note>
     #
     #   CONTACTS\_HOLD\_ABANDONS
     #
@@ -5796,7 +6013,11 @@ module Aws::Connect
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy
+    #     Agent Hierarchy, Feature
+    #
+    #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
+    #
+    #      </note>
     #
     #   CONTACTS\_TRANSFERRED\_OUT\_BY\_AGENT
     #
@@ -7161,7 +7382,7 @@ module Aws::Connect
     #
     #   resp = client.list_phone_numbers({
     #     instance_id: "InstanceId", # required
-    #     phone_number_types: ["TOLL_FREE"], # accepts TOLL_FREE, DID
+    #     phone_number_types: ["TOLL_FREE"], # accepts TOLL_FREE, DID, UIFN, SHARED, THIRD_PARTY_TF, THIRD_PARTY_DID
     #     phone_number_country_codes: ["AF"], # accepts AF, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BA, BW, BR, IO, VG, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CK, CR, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, TL, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, CI, JM, JP, JE, JO, KZ, KE, KI, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, AN, NC, NZ, NI, NE, NG, NU, KP, MP, NO, OM, PK, PW, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, CG, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, KR, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TG, TK, TO, TT, TN, TR, TM, TC, TV, VI, UG, UA, AE, GB, US, UY, UZ, VU, VA, VE, VN, WF, EH, YE, ZM, ZW
     #     next_token: "NextToken",
     #     max_results: 1,
@@ -7173,7 +7394,7 @@ module Aws::Connect
     #   resp.phone_number_summary_list[0].id #=> String
     #   resp.phone_number_summary_list[0].arn #=> String
     #   resp.phone_number_summary_list[0].phone_number #=> String
-    #   resp.phone_number_summary_list[0].phone_number_type #=> String, one of "TOLL_FREE", "DID"
+    #   resp.phone_number_summary_list[0].phone_number_type #=> String, one of "TOLL_FREE", "DID", "UIFN", "SHARED", "THIRD_PARTY_TF", "THIRD_PARTY_DID"
     #   resp.phone_number_summary_list[0].phone_number_country_code #=> String, one of "AF", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BA", "BW", "BR", "IO", "VG", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CK", "CR", "HR", "CU", "CW", "CY", "CZ", "CD", "DK", "DJ", "DM", "DO", "TL", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "PF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "CI", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "KP", "MP", "NO", "OM", "PK", "PW", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "CG", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "KR", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "VI", "UG", "UA", "AE", "GB", "US", "UY", "UZ", "VU", "VA", "VE", "VN", "WF", "EH", "YE", "ZM", "ZW"
     #   resp.next_token #=> String
     #
@@ -7238,7 +7459,7 @@ module Aws::Connect
     #     max_results: 1,
     #     next_token: "LargeNextToken",
     #     phone_number_country_codes: ["AF"], # accepts AF, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BA, BW, BR, IO, VG, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CK, CR, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, TL, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, CI, JM, JP, JE, JO, KZ, KE, KI, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, AN, NC, NZ, NI, NE, NG, NU, KP, MP, NO, OM, PK, PW, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, CG, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, KR, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TG, TK, TO, TT, TN, TR, TM, TC, TV, VI, UG, UA, AE, GB, US, UY, UZ, VU, VA, VE, VN, WF, EH, YE, ZM, ZW
-    #     phone_number_types: ["TOLL_FREE"], # accepts TOLL_FREE, DID
+    #     phone_number_types: ["TOLL_FREE"], # accepts TOLL_FREE, DID, UIFN, SHARED, THIRD_PARTY_TF, THIRD_PARTY_DID
     #     phone_number_prefix: "PhoneNumberPrefix",
     #   })
     #
@@ -7250,7 +7471,7 @@ module Aws::Connect
     #   resp.list_phone_numbers_summary_list[0].phone_number_arn #=> String
     #   resp.list_phone_numbers_summary_list[0].phone_number #=> String
     #   resp.list_phone_numbers_summary_list[0].phone_number_country_code #=> String, one of "AF", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BA", "BW", "BR", "IO", "VG", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CK", "CR", "HR", "CU", "CW", "CY", "CZ", "CD", "DK", "DJ", "DM", "DO", "TL", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "PF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "CI", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "KP", "MP", "NO", "OM", "PK", "PW", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "CG", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "KR", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "VI", "UG", "UA", "AE", "GB", "US", "UY", "UZ", "VU", "VA", "VE", "VN", "WF", "EH", "YE", "ZM", "ZW"
-    #   resp.list_phone_numbers_summary_list[0].phone_number_type #=> String, one of "TOLL_FREE", "DID"
+    #   resp.list_phone_numbers_summary_list[0].phone_number_type #=> String, one of "TOLL_FREE", "DID", "UIFN", "SHARED", "THIRD_PARTY_TF", "THIRD_PARTY_DID"
     #   resp.list_phone_numbers_summary_list[0].target_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPhoneNumbersV2 AWS API Documentation
@@ -8497,7 +8718,7 @@ module Aws::Connect
     #   resp = client.search_available_phone_numbers({
     #     target_arn: "ARN", # required
     #     phone_number_country_code: "AF", # required, accepts AF, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BA, BW, BR, IO, VG, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CK, CR, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, TL, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, CI, JM, JP, JE, JO, KZ, KE, KI, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, AN, NC, NZ, NI, NE, NG, NU, KP, MP, NO, OM, PK, PW, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, CG, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, KR, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TG, TK, TO, TT, TN, TR, TM, TC, TV, VI, UG, UA, AE, GB, US, UY, UZ, VU, VA, VE, VN, WF, EH, YE, ZM, ZW
-    #     phone_number_type: "TOLL_FREE", # required, accepts TOLL_FREE, DID
+    #     phone_number_type: "TOLL_FREE", # required, accepts TOLL_FREE, DID, UIFN, SHARED, THIRD_PARTY_TF, THIRD_PARTY_DID
     #     phone_number_prefix: "PhoneNumberPrefix",
     #     max_results: 1,
     #     next_token: "LargeNextToken",
@@ -8509,7 +8730,7 @@ module Aws::Connect
     #   resp.available_numbers_list #=> Array
     #   resp.available_numbers_list[0].phone_number #=> String
     #   resp.available_numbers_list[0].phone_number_country_code #=> String, one of "AF", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BA", "BW", "BR", "IO", "VG", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CK", "CR", "HR", "CU", "CW", "CY", "CZ", "CD", "DK", "DJ", "DM", "DO", "TL", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "PF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "CI", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "KP", "MP", "NO", "OM", "PK", "PW", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "CG", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "KR", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "VI", "UG", "UA", "AE", "GB", "US", "UY", "UZ", "VU", "VA", "VE", "VN", "WF", "EH", "YE", "ZM", "ZW"
-    #   resp.available_numbers_list[0].phone_number_type #=> String, one of "TOLL_FREE", "DID"
+    #   resp.available_numbers_list[0].phone_number_type #=> String, one of "TOLL_FREE", "DID", "UIFN", "SHARED", "THIRD_PARTY_TF", "THIRD_PARTY_DID"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchAvailablePhoneNumbers AWS API Documentation
     #
@@ -9118,6 +9339,7 @@ module Aws::Connect
     #   resp.routing_profiles[0].tags["TagKey"] #=> String
     #   resp.routing_profiles[0].number_of_associated_queues #=> Integer
     #   resp.routing_profiles[0].number_of_associated_users #=> Integer
+    #   resp.routing_profiles[0].agent_availability_timer #=> String, one of "TIME_SINCE_LAST_ACTIVITY", "TIME_SINCE_LAST_INBOUND"
     #   resp.next_token #=> String
     #   resp.approximate_total_count #=> Integer
     #
@@ -11751,6 +11973,45 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Whether agents with this routing profile will have their routing order
+    # calculated based on *time since their last inbound contact* or
+    # *longest idle time*.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :routing_profile_id
+    #   The identifier of the routing profile.
+    #
+    # @option params [required, String] :agent_availability_timer
+    #   Whether agents with this routing profile will have their routing order
+    #   calculated based on *time since their last inbound contact* or
+    #   *longest idle time*.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_routing_profile_agent_availability_timer({
+    #     instance_id: "InstanceId", # required
+    #     routing_profile_id: "RoutingProfileId", # required
+    #     agent_availability_timer: "TIME_SINCE_LAST_ACTIVITY", # required, accepts TIME_SINCE_LAST_ACTIVITY, TIME_SINCE_LAST_INBOUND
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateRoutingProfileAgentAvailabilityTimer AWS API Documentation
+    #
+    # @overload update_routing_profile_agent_availability_timer(params = {})
+    # @param [Hash] params ({})
+    def update_routing_profile_agent_availability_timer(params = {}, options = {})
+      req = build_request(:update_routing_profile_agent_availability_timer, params)
+      req.send_request(options)
+    end
+
     # Updates the channels that agents can handle in the Contact Control
     # Panel (CCP) for a routing profile.
     #
@@ -12552,7 +12813,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.119.0'
+      context[:gem_version] = '1.123.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

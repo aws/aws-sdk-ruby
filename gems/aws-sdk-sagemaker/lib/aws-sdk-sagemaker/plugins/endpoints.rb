@@ -394,6 +394,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::GetModelPackageGroupPolicy.build(context)
           when :get_sagemaker_servicecatalog_portfolio_status
             Aws::SageMaker::Endpoints::GetSagemakerServicecatalogPortfolioStatus.build(context)
+          when :get_scaling_configuration_recommendation
+            Aws::SageMaker::Endpoints::GetScalingConfigurationRecommendation.build(context)
           when :get_search_suggestions
             Aws::SageMaker::Endpoints::GetSearchSuggestions.build(context)
           when :import_hub_content
@@ -514,6 +516,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::ListProcessingJobs.build(context)
           when :list_projects
             Aws::SageMaker::Endpoints::ListProjects.build(context)
+          when :list_resource_catalogs
+            Aws::SageMaker::Endpoints::ListResourceCatalogs.build(context)
           when :list_spaces
             Aws::SageMaker::Endpoints::ListSpaces.build(context)
           when :list_stage_devices

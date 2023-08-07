@@ -775,6 +775,18 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snapshot_policy #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.audit_log_volume #=> Boolean
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.autocommit_period.type #=> String, one of "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "NONE"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.autocommit_period.value #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.privileged_delete #=> String, one of "DISABLED", "ENABLED", "PERMANENTLY_DISABLED"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.default_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.default_retention.value #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.value #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.value #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.snaplock_type #=> String, one of "COMPLIANCE", "ENTERPRISE"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.volume_append_mode_enabled #=> Boolean
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -869,6 +881,18 @@ module Aws::FSx
     #   resp.backup.volume.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
     #   resp.backup.volume.ontap_configuration.snapshot_policy #=> String
     #   resp.backup.volume.ontap_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.backup.volume.ontap_configuration.snaplock_configuration.audit_log_volume #=> Boolean
+    #   resp.backup.volume.ontap_configuration.snaplock_configuration.autocommit_period.type #=> String, one of "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "NONE"
+    #   resp.backup.volume.ontap_configuration.snaplock_configuration.autocommit_period.value #=> Integer
+    #   resp.backup.volume.ontap_configuration.snaplock_configuration.privileged_delete #=> String, one of "DISABLED", "ENABLED", "PERMANENTLY_DISABLED"
+    #   resp.backup.volume.ontap_configuration.snaplock_configuration.retention_period.default_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.backup.volume.ontap_configuration.snaplock_configuration.retention_period.default_retention.value #=> Integer
+    #   resp.backup.volume.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.backup.volume.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.value #=> Integer
+    #   resp.backup.volume.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.backup.volume.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.value #=> Integer
+    #   resp.backup.volume.ontap_configuration.snaplock_configuration.snaplock_type #=> String, one of "COMPLIANCE", "ENTERPRISE"
+    #   resp.backup.volume.ontap_configuration.snaplock_configuration.volume_append_mode_enabled #=> Boolean
     #   resp.backup.volume.resource_arn #=> String
     #   resp.backup.volume.tags #=> Array
     #   resp.backup.volume.tags[0].key #=> String
@@ -1263,6 +1287,18 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snapshot_policy #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.audit_log_volume #=> Boolean
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.autocommit_period.type #=> String, one of "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "NONE"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.autocommit_period.value #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.privileged_delete #=> String, one of "DISABLED", "ENABLED", "PERMANENTLY_DISABLED"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.default_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.default_retention.value #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.value #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.value #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.snaplock_type #=> String, one of "COMPLIANCE", "ENTERPRISE"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.volume_append_mode_enabled #=> Boolean
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -1357,6 +1393,18 @@ module Aws::FSx
     #   resp.backup.volume.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
     #   resp.backup.volume.ontap_configuration.snapshot_policy #=> String
     #   resp.backup.volume.ontap_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.backup.volume.ontap_configuration.snaplock_configuration.audit_log_volume #=> Boolean
+    #   resp.backup.volume.ontap_configuration.snaplock_configuration.autocommit_period.type #=> String, one of "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "NONE"
+    #   resp.backup.volume.ontap_configuration.snaplock_configuration.autocommit_period.value #=> Integer
+    #   resp.backup.volume.ontap_configuration.snaplock_configuration.privileged_delete #=> String, one of "DISABLED", "ENABLED", "PERMANENTLY_DISABLED"
+    #   resp.backup.volume.ontap_configuration.snaplock_configuration.retention_period.default_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.backup.volume.ontap_configuration.snaplock_configuration.retention_period.default_retention.value #=> Integer
+    #   resp.backup.volume.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.backup.volume.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.value #=> Integer
+    #   resp.backup.volume.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.backup.volume.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.value #=> Integer
+    #   resp.backup.volume.ontap_configuration.snaplock_configuration.snaplock_type #=> String, one of "COMPLIANCE", "ENTERPRISE"
+    #   resp.backup.volume.ontap_configuration.snaplock_configuration.volume_append_mode_enabled #=> Boolean
     #   resp.backup.volume.resource_arn #=> String
     #   resp.backup.volume.tags #=> Array
     #   resp.backup.volume.tags[0].key #=> String
@@ -2479,6 +2527,18 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snapshot_policy #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.audit_log_volume #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.autocommit_period.type #=> String, one of "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "NONE"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.autocommit_period.value #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.privileged_delete #=> String, one of "DISABLED", "ENABLED", "PERMANENTLY_DISABLED"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.default_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.default_retention.value #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.value #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.value #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.snaplock_type #=> String, one of "COMPLIANCE", "ENTERPRISE"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.volume_append_mode_enabled #=> Boolean
     #   resp.file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -2977,6 +3037,18 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snapshot_policy #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.audit_log_volume #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.autocommit_period.type #=> String, one of "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "NONE"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.autocommit_period.value #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.privileged_delete #=> String, one of "DISABLED", "ENABLED", "PERMANENTLY_DISABLED"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.default_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.default_retention.value #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.value #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.value #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.snaplock_type #=> String, one of "COMPLIANCE", "ENTERPRISE"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.volume_append_mode_enabled #=> Boolean
     #   resp.file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -3253,6 +3325,18 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
     #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snapshot_policy #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.audit_log_volume #=> Boolean
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.autocommit_period.type #=> String, one of "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "NONE"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.autocommit_period.value #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.privileged_delete #=> String, one of "DISABLED", "ENABLED", "PERMANENTLY_DISABLED"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.default_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.default_retention.value #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.value #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.value #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.snaplock_type #=> String, one of "COMPLIANCE", "ENTERPRISE"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.volume_append_mode_enabled #=> Boolean
     #   resp.snapshot.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.snapshot.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -3466,6 +3550,30 @@ module Aws::FSx
     #       ontap_volume_type: "RW", # accepts RW, DP
     #       snapshot_policy: "SnapshotPolicy",
     #       copy_tags_to_backups: false,
+    #       snaplock_configuration: {
+    #         audit_log_volume: false,
+    #         autocommit_period: {
+    #           type: "MINUTES", # required, accepts MINUTES, HOURS, DAYS, MONTHS, YEARS, NONE
+    #           value: 1,
+    #         },
+    #         privileged_delete: "DISABLED", # accepts DISABLED, ENABLED, PERMANENTLY_DISABLED
+    #         retention_period: {
+    #           default_retention: { # required
+    #             type: "SECONDS", # required, accepts SECONDS, MINUTES, HOURS, DAYS, MONTHS, YEARS, INFINITE, UNSPECIFIED
+    #             value: 1,
+    #           },
+    #           minimum_retention: { # required
+    #             type: "SECONDS", # required, accepts SECONDS, MINUTES, HOURS, DAYS, MONTHS, YEARS, INFINITE, UNSPECIFIED
+    #             value: 1,
+    #           },
+    #           maximum_retention: { # required
+    #             type: "SECONDS", # required, accepts SECONDS, MINUTES, HOURS, DAYS, MONTHS, YEARS, INFINITE, UNSPECIFIED
+    #             value: 1,
+    #           },
+    #         },
+    #         snaplock_type: "COMPLIANCE", # required, accepts COMPLIANCE, ENTERPRISE
+    #         volume_append_mode_enabled: false,
+    #       },
     #     },
     #     tags: [
     #       {
@@ -3524,6 +3632,18 @@ module Aws::FSx
     #   resp.volume.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
     #   resp.volume.ontap_configuration.snapshot_policy #=> String
     #   resp.volume.ontap_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.volume.ontap_configuration.snaplock_configuration.audit_log_volume #=> Boolean
+    #   resp.volume.ontap_configuration.snaplock_configuration.autocommit_period.type #=> String, one of "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "NONE"
+    #   resp.volume.ontap_configuration.snaplock_configuration.autocommit_period.value #=> Integer
+    #   resp.volume.ontap_configuration.snaplock_configuration.privileged_delete #=> String, one of "DISABLED", "ENABLED", "PERMANENTLY_DISABLED"
+    #   resp.volume.ontap_configuration.snaplock_configuration.retention_period.default_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.volume.ontap_configuration.snaplock_configuration.retention_period.default_retention.value #=> Integer
+    #   resp.volume.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.volume.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.value #=> Integer
+    #   resp.volume.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.volume.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.value #=> Integer
+    #   resp.volume.ontap_configuration.snaplock_configuration.snaplock_type #=> String, one of "COMPLIANCE", "ENTERPRISE"
+    #   resp.volume.ontap_configuration.snaplock_configuration.volume_append_mode_enabled #=> Boolean
     #   resp.volume.resource_arn #=> String
     #   resp.volume.tags #=> Array
     #   resp.volume.tags[0].key #=> String
@@ -3722,6 +3842,30 @@ module Aws::FSx
     #       ontap_volume_type: "RW", # accepts RW, DP
     #       snapshot_policy: "SnapshotPolicy",
     #       copy_tags_to_backups: false,
+    #       snaplock_configuration: {
+    #         audit_log_volume: false,
+    #         autocommit_period: {
+    #           type: "MINUTES", # required, accepts MINUTES, HOURS, DAYS, MONTHS, YEARS, NONE
+    #           value: 1,
+    #         },
+    #         privileged_delete: "DISABLED", # accepts DISABLED, ENABLED, PERMANENTLY_DISABLED
+    #         retention_period: {
+    #           default_retention: { # required
+    #             type: "SECONDS", # required, accepts SECONDS, MINUTES, HOURS, DAYS, MONTHS, YEARS, INFINITE, UNSPECIFIED
+    #             value: 1,
+    #           },
+    #           minimum_retention: { # required
+    #             type: "SECONDS", # required, accepts SECONDS, MINUTES, HOURS, DAYS, MONTHS, YEARS, INFINITE, UNSPECIFIED
+    #             value: 1,
+    #           },
+    #           maximum_retention: { # required
+    #             type: "SECONDS", # required, accepts SECONDS, MINUTES, HOURS, DAYS, MONTHS, YEARS, INFINITE, UNSPECIFIED
+    #             value: 1,
+    #           },
+    #         },
+    #         snaplock_type: "COMPLIANCE", # required, accepts COMPLIANCE, ENTERPRISE
+    #         volume_append_mode_enabled: false,
+    #       },
     #     },
     #     tags: [
     #       {
@@ -3750,6 +3894,18 @@ module Aws::FSx
     #   resp.volume.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
     #   resp.volume.ontap_configuration.snapshot_policy #=> String
     #   resp.volume.ontap_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.volume.ontap_configuration.snaplock_configuration.audit_log_volume #=> Boolean
+    #   resp.volume.ontap_configuration.snaplock_configuration.autocommit_period.type #=> String, one of "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "NONE"
+    #   resp.volume.ontap_configuration.snaplock_configuration.autocommit_period.value #=> Integer
+    #   resp.volume.ontap_configuration.snaplock_configuration.privileged_delete #=> String, one of "DISABLED", "ENABLED", "PERMANENTLY_DISABLED"
+    #   resp.volume.ontap_configuration.snaplock_configuration.retention_period.default_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.volume.ontap_configuration.snaplock_configuration.retention_period.default_retention.value #=> Integer
+    #   resp.volume.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.volume.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.value #=> Integer
+    #   resp.volume.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.volume.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.value #=> Integer
+    #   resp.volume.ontap_configuration.snaplock_configuration.snaplock_type #=> String, one of "COMPLIANCE", "ENTERPRISE"
+    #   resp.volume.ontap_configuration.snaplock_configuration.volume_append_mode_enabled #=> Boolean
     #   resp.volume.resource_arn #=> String
     #   resp.volume.tags #=> Array
     #   resp.volume.tags[0].key #=> String
@@ -4340,6 +4496,7 @@ module Aws::FSx
     #           value: "TagValue", # required
     #         },
     #       ],
+    #       bypass_snaplock_enterprise_retention: false,
     #     },
     #     open_zfs_configuration: {
     #       options: ["DELETE_CHILD_VOLUMES_AND_SNAPSHOTS"], # accepts DELETE_CHILD_VOLUMES_AND_SNAPSHOTS
@@ -4571,6 +4728,18 @@ module Aws::FSx
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.snapshot_policy #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.audit_log_volume #=> Boolean
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.autocommit_period.type #=> String, one of "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "NONE"
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.autocommit_period.value #=> Integer
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.privileged_delete #=> String, one of "DISABLED", "ENABLED", "PERMANENTLY_DISABLED"
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.default_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.default_retention.value #=> Integer
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.value #=> Integer
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.value #=> Integer
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.snaplock_type #=> String, one of "COMPLIANCE", "ENTERPRISE"
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.volume_append_mode_enabled #=> Boolean
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -4665,6 +4834,18 @@ module Aws::FSx
     #   resp.backups[0].volume.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
     #   resp.backups[0].volume.ontap_configuration.snapshot_policy #=> String
     #   resp.backups[0].volume.ontap_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.backups[0].volume.ontap_configuration.snaplock_configuration.audit_log_volume #=> Boolean
+    #   resp.backups[0].volume.ontap_configuration.snaplock_configuration.autocommit_period.type #=> String, one of "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "NONE"
+    #   resp.backups[0].volume.ontap_configuration.snaplock_configuration.autocommit_period.value #=> Integer
+    #   resp.backups[0].volume.ontap_configuration.snaplock_configuration.privileged_delete #=> String, one of "DISABLED", "ENABLED", "PERMANENTLY_DISABLED"
+    #   resp.backups[0].volume.ontap_configuration.snaplock_configuration.retention_period.default_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.backups[0].volume.ontap_configuration.snaplock_configuration.retention_period.default_retention.value #=> Integer
+    #   resp.backups[0].volume.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.backups[0].volume.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.value #=> Integer
+    #   resp.backups[0].volume.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.backups[0].volume.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.value #=> Integer
+    #   resp.backups[0].volume.ontap_configuration.snaplock_configuration.snaplock_type #=> String, one of "COMPLIANCE", "ENTERPRISE"
+    #   resp.backups[0].volume.ontap_configuration.snaplock_configuration.volume_append_mode_enabled #=> Boolean
     #   resp.backups[0].volume.resource_arn #=> String
     #   resp.backups[0].volume.tags #=> Array
     #   resp.backups[0].volume.tags[0].key #=> String
@@ -5366,6 +5547,18 @@ module Aws::FSx
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.snapshot_policy #=> String
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.audit_log_volume #=> Boolean
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.autocommit_period.type #=> String, one of "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "NONE"
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.autocommit_period.value #=> Integer
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.privileged_delete #=> String, one of "DISABLED", "ENABLED", "PERMANENTLY_DISABLED"
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.default_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.default_retention.value #=> Integer
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.value #=> Integer
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.value #=> Integer
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.snaplock_type #=> String, one of "COMPLIANCE", "ENTERPRISE"
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.volume_append_mode_enabled #=> Boolean
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -5643,6 +5836,18 @@ module Aws::FSx
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.snapshot_policy #=> String
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.audit_log_volume #=> Boolean
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.autocommit_period.type #=> String, one of "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "NONE"
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.autocommit_period.value #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.privileged_delete #=> String, one of "DISABLED", "ENABLED", "PERMANENTLY_DISABLED"
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.default_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.default_retention.value #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.value #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.value #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.snaplock_type #=> String, one of "COMPLIANCE", "ENTERPRISE"
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.volume_append_mode_enabled #=> Boolean
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -5832,6 +6037,18 @@ module Aws::FSx
     #   resp.volumes[0].ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
     #   resp.volumes[0].ontap_configuration.snapshot_policy #=> String
     #   resp.volumes[0].ontap_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.volumes[0].ontap_configuration.snaplock_configuration.audit_log_volume #=> Boolean
+    #   resp.volumes[0].ontap_configuration.snaplock_configuration.autocommit_period.type #=> String, one of "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "NONE"
+    #   resp.volumes[0].ontap_configuration.snaplock_configuration.autocommit_period.value #=> Integer
+    #   resp.volumes[0].ontap_configuration.snaplock_configuration.privileged_delete #=> String, one of "DISABLED", "ENABLED", "PERMANENTLY_DISABLED"
+    #   resp.volumes[0].ontap_configuration.snaplock_configuration.retention_period.default_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.volumes[0].ontap_configuration.snaplock_configuration.retention_period.default_retention.value #=> Integer
+    #   resp.volumes[0].ontap_configuration.snaplock_configuration.retention_period.minimum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.volumes[0].ontap_configuration.snaplock_configuration.retention_period.minimum_retention.value #=> Integer
+    #   resp.volumes[0].ontap_configuration.snaplock_configuration.retention_period.maximum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.volumes[0].ontap_configuration.snaplock_configuration.retention_period.maximum_retention.value #=> Integer
+    #   resp.volumes[0].ontap_configuration.snaplock_configuration.snaplock_type #=> String, one of "COMPLIANCE", "ENTERPRISE"
+    #   resp.volumes[0].ontap_configuration.snaplock_configuration.volume_append_mode_enabled #=> Boolean
     #   resp.volumes[0].resource_arn #=> String
     #   resp.volumes[0].tags #=> Array
     #   resp.volumes[0].tags[0].key #=> String
@@ -6244,6 +6461,18 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snapshot_policy #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.audit_log_volume #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.autocommit_period.type #=> String, one of "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "NONE"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.autocommit_period.value #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.privileged_delete #=> String, one of "DISABLED", "ENABLED", "PERMANENTLY_DISABLED"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.default_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.default_retention.value #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.value #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.value #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.snaplock_type #=> String, one of "COMPLIANCE", "ENTERPRISE"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.volume_append_mode_enabled #=> Boolean
     #   resp.file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -6491,6 +6720,18 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
     #   resp.administrative_actions[0].target_volume_values.ontap_configuration.snapshot_policy #=> String
     #   resp.administrative_actions[0].target_volume_values.ontap_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.audit_log_volume #=> Boolean
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.autocommit_period.type #=> String, one of "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "NONE"
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.autocommit_period.value #=> Integer
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.privileged_delete #=> String, one of "DISABLED", "ENABLED", "PERMANENTLY_DISABLED"
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.default_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.default_retention.value #=> Integer
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.value #=> Integer
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.value #=> Integer
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.snaplock_type #=> String, one of "COMPLIANCE", "ENTERPRISE"
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.volume_append_mode_enabled #=> Boolean
     #   resp.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -6823,6 +7064,8 @@ module Aws::FSx
     #
     # * `DataCompressionType`
     #
+    # * `LogConfiguration`
+    #
     # * `LustreRootSquashConfiguration`
     #
     # * `StorageCapacity`
@@ -7153,6 +7396,18 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snapshot_policy #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.audit_log_volume #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.autocommit_period.type #=> String, one of "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "NONE"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.autocommit_period.value #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.privileged_delete #=> String, one of "DISABLED", "ENABLED", "PERMANENTLY_DISABLED"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.default_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.default_retention.value #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.value #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.value #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.snaplock_type #=> String, one of "COMPLIANCE", "ENTERPRISE"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.volume_append_mode_enabled #=> Boolean
     #   resp.file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -7391,6 +7646,18 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
     #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snapshot_policy #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.audit_log_volume #=> Boolean
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.autocommit_period.type #=> String, one of "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "NONE"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.autocommit_period.value #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.privileged_delete #=> String, one of "DISABLED", "ENABLED", "PERMANENTLY_DISABLED"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.default_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.default_retention.value #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.value #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.value #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.snaplock_type #=> String, one of "COMPLIANCE", "ENTERPRISE"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snaplock_configuration.volume_append_mode_enabled #=> Boolean
     #   resp.snapshot.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.snapshot.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -7569,6 +7836,29 @@ module Aws::FSx
     #       },
     #       snapshot_policy: "SnapshotPolicy",
     #       copy_tags_to_backups: false,
+    #       snaplock_configuration: {
+    #         audit_log_volume: false,
+    #         autocommit_period: {
+    #           type: "MINUTES", # required, accepts MINUTES, HOURS, DAYS, MONTHS, YEARS, NONE
+    #           value: 1,
+    #         },
+    #         privileged_delete: "DISABLED", # accepts DISABLED, ENABLED, PERMANENTLY_DISABLED
+    #         retention_period: {
+    #           default_retention: { # required
+    #             type: "SECONDS", # required, accepts SECONDS, MINUTES, HOURS, DAYS, MONTHS, YEARS, INFINITE, UNSPECIFIED
+    #             value: 1,
+    #           },
+    #           minimum_retention: { # required
+    #             type: "SECONDS", # required, accepts SECONDS, MINUTES, HOURS, DAYS, MONTHS, YEARS, INFINITE, UNSPECIFIED
+    #             value: 1,
+    #           },
+    #           maximum_retention: { # required
+    #             type: "SECONDS", # required, accepts SECONDS, MINUTES, HOURS, DAYS, MONTHS, YEARS, INFINITE, UNSPECIFIED
+    #             value: 1,
+    #           },
+    #         },
+    #         volume_append_mode_enabled: false,
+    #       },
     #     },
     #     name: "VolumeName",
     #     open_zfs_configuration: {
@@ -7616,6 +7906,18 @@ module Aws::FSx
     #   resp.volume.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
     #   resp.volume.ontap_configuration.snapshot_policy #=> String
     #   resp.volume.ontap_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.volume.ontap_configuration.snaplock_configuration.audit_log_volume #=> Boolean
+    #   resp.volume.ontap_configuration.snaplock_configuration.autocommit_period.type #=> String, one of "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "NONE"
+    #   resp.volume.ontap_configuration.snaplock_configuration.autocommit_period.value #=> Integer
+    #   resp.volume.ontap_configuration.snaplock_configuration.privileged_delete #=> String, one of "DISABLED", "ENABLED", "PERMANENTLY_DISABLED"
+    #   resp.volume.ontap_configuration.snaplock_configuration.retention_period.default_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.volume.ontap_configuration.snaplock_configuration.retention_period.default_retention.value #=> Integer
+    #   resp.volume.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.volume.ontap_configuration.snaplock_configuration.retention_period.minimum_retention.value #=> Integer
+    #   resp.volume.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.type #=> String, one of "SECONDS", "MINUTES", "HOURS", "DAYS", "MONTHS", "YEARS", "INFINITE", "UNSPECIFIED"
+    #   resp.volume.ontap_configuration.snaplock_configuration.retention_period.maximum_retention.value #=> Integer
+    #   resp.volume.ontap_configuration.snaplock_configuration.snaplock_type #=> String, one of "COMPLIANCE", "ENTERPRISE"
+    #   resp.volume.ontap_configuration.snaplock_configuration.volume_append_mode_enabled #=> Boolean
     #   resp.volume.resource_arn #=> String
     #   resp.volume.tags #=> Array
     #   resp.volume.tags[0].key #=> String
@@ -7779,7 +8081,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

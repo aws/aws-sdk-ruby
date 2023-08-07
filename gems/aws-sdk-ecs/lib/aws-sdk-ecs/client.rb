@@ -1635,7 +1635,8 @@ module Aws::ECS
     #   value.
     #
     # @option params [required, String] :task_definition
-    #   The task definition for the tasks in the task set to use.
+    #   The task definition for the tasks in the task set to use. If a
+    #   revision isn't specified, the latest `ACTIVE` revision is used.
     #
     # @option params [Types::NetworkConfiguration] :network_configuration
     #   An object representing the network configuration for a task set.
@@ -4061,6 +4062,11 @@ module Aws::ECS
     # Currently, stopped tasks appear in the returned results for at least
     # one hour.
     #
+    # If you have tasks with tags, and then delete the cluster, the tagged
+    # tasks are returned in the response. If you create a new cluster with
+    # the same name as the deleted cluster, the tagged tasks are not
+    # included in the response.
+    #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
     #   hosts the task or tasks to describe. If you do not specify a cluster,
@@ -5303,8 +5309,6 @@ module Aws::ECS
     # started the task, or by the desired status of the task.
     #
     # Recently stopped tasks might appear in the returned results.
-    # Currently, stopped tasks appear in the returned results for at least
-    # one hour.
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster to
@@ -8865,23 +8869,21 @@ module Aws::ECS
     #   with the largest number of running tasks for this service.
     #
     # <note markdown="1"> You must have a service-linked role when you update any of the
-    # following service properties. If you specified a custom role when you
-    # created the service, Amazon ECS automatically replaces the
-    # [roleARN][2] associated with the service with the ARN of your
-    # service-linked role. For more information, see [Service-linked
-    # roles][3] in the *Amazon Elastic Container Service Developer Guide*.
+    # following service properties:
     #
-    #  * `loadBalancers,`
+    #  * `loadBalancers`,
     #
     # * `serviceRegistries`
+    #
+    #  For more information about the role see the `CreateService` request
+    # parameter [ `role` ][2].
     #
     #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html
-    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_Service.html#ECS-Type-Service-roleArn
-    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html#ECS-CreateService-request-role
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -9746,7 +9748,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.126.0'
+      context[:gem_version] = '1.127.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

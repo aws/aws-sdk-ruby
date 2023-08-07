@@ -10,6 +10,20 @@
 module Aws::ChimeSDKMediaPipelines
   module Types
 
+    # Defines the configuration for an `ActiveSpeakerOnly` video tile.
+    #
+    # @!attribute [rw] active_speaker_position
+    #   The position of the `ActiveSpeakerOnly` video tile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/ActiveSpeakerOnlyConfiguration AWS API Documentation
+    #
+    class ActiveSpeakerOnlyConfiguration < Struct.new(
+      :active_speaker_position)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure that contains the configuration settings for an Amazon
     # Transcribe call analytics processor.
     #
@@ -365,6 +379,29 @@ module Aws::ChimeSDKMediaPipelines
     #   of the insights target.
     #   @return [Boolean]
     #
+    # @!attribute [rw] identify_language
+    #   Turns language identification on or off.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] language_options
+    #   The language options for the transcription, such as automatic
+    #   language detection.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_language
+    #   The preferred language for the transcription.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_names
+    #   The names of the custom vocabulary or vocabularies used during
+    #   transcription.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_filter_names
+    #   The names of the custom vocabulary filter or filters using during
+    #   transcription.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/AmazonTranscribeProcessorConfiguration AWS API Documentation
     #
     class AmazonTranscribeProcessorConfiguration < Struct.new(
@@ -379,7 +416,12 @@ module Aws::ChimeSDKMediaPipelines
       :content_redaction_type,
       :pii_entity_types,
       :language_model_name,
-      :filter_partial_results)
+      :filter_partial_results,
+      :identify_language,
+      :language_options,
+      :preferred_language,
+      :vocabulary_names,
+      :vocabulary_filter_names)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -921,7 +963,9 @@ module Aws::ChimeSDKMediaPipelines
     #   @return [Types::KinesisVideoStreamRecordingSourceRuntimeConfiguration]
     #
     # @!attribute [rw] s3_recording_sink_runtime_configuration
-    #   The runtime configuration for the S3 recording sink.
+    #   The runtime configuration for the S3 recording sink. If specified,
+    #   the settings in this structure override any settings in
+    #   `S3RecordingSinkConfiguration`.
     #   @return [Types::S3RecordingSinkRuntimeConfiguration]
     #
     # @!attribute [rw] tags
@@ -1203,11 +1247,65 @@ module Aws::ChimeSDKMediaPipelines
     #   Defines the configuration options for a presenter only video tile.
     #   @return [Types::PresenterOnlyConfiguration]
     #
+    # @!attribute [rw] active_speaker_only_configuration
+    #   The configuration settings for an `ActiveSpeakerOnly` video tile.
+    #   @return [Types::ActiveSpeakerOnlyConfiguration]
+    #
+    # @!attribute [rw] horizontal_layout_configuration
+    #   The configuration settings for a horizontal layout.
+    #   @return [Types::HorizontalLayoutConfiguration]
+    #
+    # @!attribute [rw] vertical_layout_configuration
+    #   The configuration settings for a vertical layout.
+    #   @return [Types::VerticalLayoutConfiguration]
+    #
+    # @!attribute [rw] video_attribute
+    #   The attribute settings for the video tiles.
+    #   @return [Types::VideoAttribute]
+    #
+    # @!attribute [rw] canvas_orientation
+    #   The orientation setting, horizontal or vertical.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/GridViewConfiguration AWS API Documentation
     #
     class GridViewConfiguration < Struct.new(
       :content_share_layout,
-      :presenter_only_configuration)
+      :presenter_only_configuration,
+      :active_speaker_only_configuration,
+      :horizontal_layout_configuration,
+      :vertical_layout_configuration,
+      :video_attribute,
+      :canvas_orientation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the configuration settings for the horizontal layout.
+    #
+    # @!attribute [rw] tile_order
+    #   Sets the automatic ordering of the video tiles.
+    #   @return [String]
+    #
+    # @!attribute [rw] tile_position
+    #   Sets the position of horizontal tiles.
+    #   @return [String]
+    #
+    # @!attribute [rw] tile_count
+    #   The maximum number of video tiles to display.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tile_aspect_ratio
+    #   Sets the aspect ratio of the video tiles, such as 16:9.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/HorizontalLayoutConfiguration AWS API Documentation
+    #
+    class HorizontalLayoutConfiguration < Struct.new(
+      :tile_order,
+      :tile_position,
+      :tile_count,
+      :tile_aspect_ratio)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2601,6 +2699,35 @@ module Aws::ChimeSDKMediaPipelines
       include Aws::Structure
     end
 
+    # Defines the configuration settings for a vertial layout.
+    #
+    # @!attribute [rw] tile_order
+    #   Sets the automatic ordering of the video tiles.
+    #   @return [String]
+    #
+    # @!attribute [rw] tile_position
+    #   Sets the position of vertical tiles.
+    #   @return [String]
+    #
+    # @!attribute [rw] tile_count
+    #   The maximum number of tiles to display.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tile_aspect_ratio
+    #   Sets the aspect ratio of the video tiles, such as 16:9.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/VerticalLayoutConfiguration AWS API Documentation
+    #
+    class VerticalLayoutConfiguration < Struct.new(
+      :tile_order,
+      :tile_position,
+      :tile_count,
+      :tile_aspect_ratio)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The video artifact configuration object.
     #
     # @!attribute [rw] state
@@ -2616,6 +2743,35 @@ module Aws::ChimeSDKMediaPipelines
     class VideoArtifactsConfiguration < Struct.new(
       :state,
       :mux_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the settings for a video tile.
+    #
+    # @!attribute [rw] corner_radius
+    #   Sets the corner radius of all video tiles.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] border_color
+    #   Defines the border color of all video tiles.
+    #   @return [String]
+    #
+    # @!attribute [rw] highlight_color
+    #   Defines the highlight color for the active video tile.
+    #   @return [String]
+    #
+    # @!attribute [rw] border_thickness
+    #   Defines the border thickness for all video tiles.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/VideoAttribute AWS API Documentation
+    #
+    class VideoAttribute < Struct.new(
+      :corner_radius,
+      :border_color,
+      :highlight_color,
+      :border_thickness)
       SENSITIVE = []
       include Aws::Structure
     end

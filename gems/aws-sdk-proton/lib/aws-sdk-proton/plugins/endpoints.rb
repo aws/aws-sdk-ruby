@@ -92,6 +92,8 @@ module Aws::Proton
             Aws::Proton::Endpoints::CreateTemplateSyncConfig.build(context)
           when :delete_component
             Aws::Proton::Endpoints::DeleteComponent.build(context)
+          when :delete_deployment
+            Aws::Proton::Endpoints::DeleteDeployment.build(context)
           when :delete_environment
             Aws::Proton::Endpoints::DeleteEnvironment.build(context)
           when :delete_environment_account_connection
@@ -116,6 +118,8 @@ module Aws::Proton
             Aws::Proton::Endpoints::GetAccountSettings.build(context)
           when :get_component
             Aws::Proton::Endpoints::GetComponent.build(context)
+          when :get_deployment
+            Aws::Proton::Endpoints::GetDeployment.build(context)
           when :get_environment
             Aws::Proton::Endpoints::GetEnvironment.build(context)
           when :get_environment_account_connection
@@ -154,6 +158,8 @@ module Aws::Proton
             Aws::Proton::Endpoints::ListComponentProvisionedResources.build(context)
           when :list_components
             Aws::Proton::Endpoints::ListComponents.build(context)
+          when :list_deployments
+            Aws::Proton::Endpoints::ListDeployments.build(context)
           when :list_environment_account_connections
             Aws::Proton::Endpoints::ListEnvironmentAccountConnections.build(context)
           when :list_environment_outputs

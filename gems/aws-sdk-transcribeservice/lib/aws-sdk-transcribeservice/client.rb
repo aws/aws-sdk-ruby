@@ -1694,6 +1694,9 @@ module Aws::TranscribeService
     #   resp.transcription_job.language_id_settings["LanguageCode"].vocabulary_name #=> String
     #   resp.transcription_job.language_id_settings["LanguageCode"].vocabulary_filter_name #=> String
     #   resp.transcription_job.language_id_settings["LanguageCode"].language_model_name #=> String
+    #   resp.transcription_job.toxicity_detection #=> Array
+    #   resp.transcription_job.toxicity_detection[0].toxicity_categories #=> Array
+    #   resp.transcription_job.toxicity_detection[0].toxicity_categories[0] #=> String, one of "ALL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetTranscriptionJob AWS API Documentation
     #
@@ -2281,6 +2284,9 @@ module Aws::TranscribeService
     #   resp.transcription_job_summaries[0].language_codes #=> Array
     #   resp.transcription_job_summaries[0].language_codes[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE"
     #   resp.transcription_job_summaries[0].language_codes[0].duration_in_seconds #=> Float
+    #   resp.transcription_job_summaries[0].toxicity_detection #=> Array
+    #   resp.transcription_job_summaries[0].toxicity_detection[0].toxicity_categories #=> Array
+    #   resp.transcription_job_summaries[0].toxicity_detection[0].toxicity_categories[0] #=> String, one of "ALL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListTranscriptionJobs AWS API Documentation
     #
@@ -3325,6 +3331,18 @@ module Aws::TranscribeService
     #   VocabularyFilterName (or both) sub-parameter.</p>
     #   `
     #
+    # @option params [Array<Types::ToxicityDetectionSettings>] :toxicity_detection
+    #   Enables toxic speech detection in your transcript. If you include
+    #   `ToxicityDetection` in your request, you must also include
+    #   `ToxicityCategories`.
+    #
+    #   For information on the types of toxic speech Amazon Transcribe can
+    #   detect, see [Detecting toxic speech][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/toxic-language.html
+    #
     # @return [Types::StartTranscriptionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartTranscriptionJobResponse#transcription_job #transcription_job} => Types::TranscriptionJob
@@ -3388,6 +3406,11 @@ module Aws::TranscribeService
     #         language_model_name: "ModelName",
     #       },
     #     },
+    #     toxicity_detection: [
+    #       {
+    #         toxicity_categories: ["ALL"], # required, accepts ALL
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -3440,6 +3463,9 @@ module Aws::TranscribeService
     #   resp.transcription_job.language_id_settings["LanguageCode"].vocabulary_name #=> String
     #   resp.transcription_job.language_id_settings["LanguageCode"].vocabulary_filter_name #=> String
     #   resp.transcription_job.language_id_settings["LanguageCode"].language_model_name #=> String
+    #   resp.transcription_job.toxicity_detection #=> Array
+    #   resp.transcription_job.toxicity_detection[0].toxicity_categories #=> Array
+    #   resp.transcription_job.toxicity_detection[0].toxicity_categories[0] #=> String, one of "ALL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartTranscriptionJob AWS API Documentation
     #
@@ -3972,7 +3998,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2023-07-28)
+------------------
+
+* Feature - Add a new JavaScript runtime version for CloudFront Functions.
+
 1.81.0 (2023-07-11)
 ------------------
 

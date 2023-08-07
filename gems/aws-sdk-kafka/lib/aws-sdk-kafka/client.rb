@@ -1238,6 +1238,120 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # Returns a description of the cluster operation specified by the ARN.
+    #
+    # @option params [required, String] :cluster_operation_arn
+    #
+    # @return [Types::DescribeClusterOperationV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeClusterOperationV2Response#cluster_operation_info #cluster_operation_info} => Types::ClusterOperationV2
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_cluster_operation_v2({
+    #     cluster_operation_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_operation_info.cluster_arn #=> String
+    #   resp.cluster_operation_info.cluster_type #=> String, one of "PROVISIONED", "SERVERLESS"
+    #   resp.cluster_operation_info.start_time #=> Time
+    #   resp.cluster_operation_info.end_time #=> Time
+    #   resp.cluster_operation_info.operation_arn #=> String
+    #   resp.cluster_operation_info.operation_state #=> String
+    #   resp.cluster_operation_info.operation_type #=> String
+    #   resp.cluster_operation_info.provisioned.operation_steps #=> Array
+    #   resp.cluster_operation_info.provisioned.operation_steps[0].step_info.step_status #=> String
+    #   resp.cluster_operation_info.provisioned.operation_steps[0].step_name #=> String
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.broker_ebs_volume_info #=> Array
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.broker_ebs_volume_info[0].kafka_broker_node_id #=> String
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.broker_ebs_volume_info[0].provisioned_throughput.enabled #=> Boolean
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.broker_ebs_volume_info[0].provisioned_throughput.volume_throughput #=> Integer
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.broker_ebs_volume_info[0].volume_size_gb #=> Integer
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.configuration_info.arn #=> String
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.configuration_info.revision #=> Integer
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.number_of_broker_nodes #=> Integer
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER", "PER_TOPIC_PER_PARTITION"
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.kafka_version #=> String
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.logging_info.broker_logs.cloud_watch_logs.enabled #=> Boolean
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.logging_info.broker_logs.cloud_watch_logs.log_group #=> String
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.logging_info.broker_logs.firehose.delivery_stream #=> String
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.logging_info.broker_logs.firehose.enabled #=> Boolean
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.logging_info.broker_logs.s3.bucket #=> String
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.logging_info.broker_logs.s3.enabled #=> Boolean
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.logging_info.broker_logs.s3.prefix #=> String
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.instance_type #=> String
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.client_authentication.sasl.scram.enabled #=> Boolean
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.client_authentication.sasl.iam.enabled #=> Boolean
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.client_authentication.tls.certificate_authority_arn_list #=> Array
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.client_authentication.tls.certificate_authority_arn_list[0] #=> String
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.client_authentication.tls.enabled #=> Boolean
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.client_authentication.unauthenticated.enabled #=> Boolean
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.encryption_info.encryption_at_rest.data_volume_kms_key_id #=> String
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.encryption_info.encryption_in_transit.client_broker #=> String, one of "TLS", "TLS_PLAINTEXT", "PLAINTEXT"
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.encryption_info.encryption_in_transit.in_cluster #=> Boolean
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.connectivity_info.public_access.type #=> String
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.scram.enabled #=> Boolean
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam.enabled #=> Boolean
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.connectivity_info.vpc_connectivity.client_authentication.tls.enabled #=> Boolean
+    #   resp.cluster_operation_info.provisioned.source_cluster_info.storage_mode #=> String, one of "LOCAL", "TIERED"
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.broker_ebs_volume_info #=> Array
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.broker_ebs_volume_info[0].kafka_broker_node_id #=> String
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.broker_ebs_volume_info[0].provisioned_throughput.enabled #=> Boolean
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.broker_ebs_volume_info[0].provisioned_throughput.volume_throughput #=> Integer
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.broker_ebs_volume_info[0].volume_size_gb #=> Integer
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.configuration_info.arn #=> String
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.configuration_info.revision #=> Integer
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.number_of_broker_nodes #=> Integer
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER", "PER_TOPIC_PER_PARTITION"
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.kafka_version #=> String
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.logging_info.broker_logs.cloud_watch_logs.enabled #=> Boolean
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.logging_info.broker_logs.cloud_watch_logs.log_group #=> String
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.logging_info.broker_logs.firehose.delivery_stream #=> String
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.logging_info.broker_logs.firehose.enabled #=> Boolean
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.logging_info.broker_logs.s3.bucket #=> String
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.logging_info.broker_logs.s3.enabled #=> Boolean
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.logging_info.broker_logs.s3.prefix #=> String
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.instance_type #=> String
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.client_authentication.sasl.scram.enabled #=> Boolean
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.client_authentication.sasl.iam.enabled #=> Boolean
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.client_authentication.tls.certificate_authority_arn_list #=> Array
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.client_authentication.tls.certificate_authority_arn_list[0] #=> String
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.client_authentication.tls.enabled #=> Boolean
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.client_authentication.unauthenticated.enabled #=> Boolean
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.encryption_info.encryption_at_rest.data_volume_kms_key_id #=> String
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.encryption_info.encryption_in_transit.client_broker #=> String, one of "TLS", "TLS_PLAINTEXT", "PLAINTEXT"
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.encryption_info.encryption_in_transit.in_cluster #=> Boolean
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.connectivity_info.public_access.type #=> String
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.scram.enabled #=> Boolean
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam.enabled #=> Boolean
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.connectivity_info.vpc_connectivity.client_authentication.tls.enabled #=> Boolean
+    #   resp.cluster_operation_info.provisioned.target_cluster_info.storage_mode #=> String, one of "LOCAL", "TIERED"
+    #   resp.cluster_operation_info.provisioned.vpc_connection_info.vpc_connection_arn #=> String
+    #   resp.cluster_operation_info.provisioned.vpc_connection_info.owner #=> String
+    #   resp.cluster_operation_info.provisioned.vpc_connection_info.user_identity.type #=> String, one of "AWSACCOUNT", "AWSSERVICE"
+    #   resp.cluster_operation_info.provisioned.vpc_connection_info.user_identity.principal_id #=> String
+    #   resp.cluster_operation_info.provisioned.vpc_connection_info.creation_time #=> Time
+    #   resp.cluster_operation_info.serverless.vpc_connection_info.creation_time #=> Time
+    #   resp.cluster_operation_info.serverless.vpc_connection_info.owner #=> String
+    #   resp.cluster_operation_info.serverless.vpc_connection_info.user_identity.type #=> String, one of "AWSACCOUNT", "AWSSERVICE"
+    #   resp.cluster_operation_info.serverless.vpc_connection_info.user_identity.principal_id #=> String
+    #   resp.cluster_operation_info.serverless.vpc_connection_info.vpc_connection_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeClusterOperationV2 AWS API Documentation
+    #
+    # @overload describe_cluster_operation_v2(params = {})
+    # @param [Hash] params ({})
+    def describe_cluster_operation_v2(params = {}, options = {})
+      req = build_request(:describe_cluster_operation_v2, params)
+      req.send_request(options)
+    end
+
     # Returns a description of this MSK configuration.
     #
     # @option params [required, String] :arn
@@ -1596,6 +1710,51 @@ module Aws::Kafka
     # @param [Hash] params ({})
     def list_cluster_operations(params = {}, options = {})
       req = build_request(:list_cluster_operations, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of all the operations that have been performed on the
+    # specified MSK cluster.
+    #
+    # @option params [required, String] :cluster_arn
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListClusterOperationsV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListClusterOperationsV2Response#cluster_operation_info_list #cluster_operation_info_list} => Array&lt;Types::ClusterOperationV2Summary&gt;
+    #   * {Types::ListClusterOperationsV2Response#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cluster_operations_v2({
+    #     cluster_arn: "__string", # required
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_operation_info_list #=> Array
+    #   resp.cluster_operation_info_list[0].cluster_arn #=> String
+    #   resp.cluster_operation_info_list[0].cluster_type #=> String, one of "PROVISIONED", "SERVERLESS"
+    #   resp.cluster_operation_info_list[0].start_time #=> Time
+    #   resp.cluster_operation_info_list[0].end_time #=> Time
+    #   resp.cluster_operation_info_list[0].operation_arn #=> String
+    #   resp.cluster_operation_info_list[0].operation_state #=> String
+    #   resp.cluster_operation_info_list[0].operation_type #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListClusterOperationsV2 AWS API Documentation
+    #
+    # @overload list_cluster_operations_v2(params = {})
+    # @param [Hash] params ({})
+    def list_cluster_operations_v2(params = {}, options = {})
+      req = build_request(:list_cluster_operations_v2, params)
       req.send_request(options)
     end
 
@@ -2829,7 +2988,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

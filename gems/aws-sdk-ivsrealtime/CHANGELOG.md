@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2023-08-07)
+------------------
+
+* Feature - Add QUOTA_EXCEEDED and PUBLISHER_NOT_FOUND to EventErrorCode for stage health events.
+
 1.7.0 (2023-07-11)
 ------------------
 

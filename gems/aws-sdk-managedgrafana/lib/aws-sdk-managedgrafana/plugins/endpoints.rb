@@ -78,6 +78,8 @@ module Aws::ManagedGrafana
             Aws::ManagedGrafana::Endpoints::ListPermissions.build(context)
           when :list_tags_for_resource
             Aws::ManagedGrafana::Endpoints::ListTagsForResource.build(context)
+          when :list_versions
+            Aws::ManagedGrafana::Endpoints::ListVersions.build(context)
           when :list_workspaces
             Aws::ManagedGrafana::Endpoints::ListWorkspaces.build(context)
           when :tag_resource

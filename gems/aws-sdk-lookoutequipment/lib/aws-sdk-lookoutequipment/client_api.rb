@@ -52,6 +52,7 @@ module Aws::LookoutEquipment
     DeleteLabelGroupRequest = Shapes::StructureShape.new(name: 'DeleteLabelGroupRequest')
     DeleteLabelRequest = Shapes::StructureShape.new(name: 'DeleteLabelRequest')
     DeleteModelRequest = Shapes::StructureShape.new(name: 'DeleteModelRequest')
+    DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
     DescribeDataIngestionJobRequest = Shapes::StructureShape.new(name: 'DescribeDataIngestionJobRequest')
     DescribeDataIngestionJobResponse = Shapes::StructureShape.new(name: 'DescribeDataIngestionJobResponse')
     DescribeDatasetRequest = Shapes::StructureShape.new(name: 'DescribeDatasetRequest')
@@ -64,6 +65,10 @@ module Aws::LookoutEquipment
     DescribeLabelResponse = Shapes::StructureShape.new(name: 'DescribeLabelResponse')
     DescribeModelRequest = Shapes::StructureShape.new(name: 'DescribeModelRequest')
     DescribeModelResponse = Shapes::StructureShape.new(name: 'DescribeModelResponse')
+    DescribeModelVersionRequest = Shapes::StructureShape.new(name: 'DescribeModelVersionRequest')
+    DescribeModelVersionResponse = Shapes::StructureShape.new(name: 'DescribeModelVersionResponse')
+    DescribeResourcePolicyRequest = Shapes::StructureShape.new(name: 'DescribeResourcePolicyRequest')
+    DescribeResourcePolicyResponse = Shapes::StructureShape.new(name: 'DescribeResourcePolicyResponse')
     DuplicateTimestamps = Shapes::StructureShape.new(name: 'DuplicateTimestamps')
     Equipment = Shapes::StringShape.new(name: 'Equipment')
     EventDurationInSeconds = Shapes::IntegerShape.new(name: 'EventDurationInSeconds')
@@ -73,6 +78,10 @@ module Aws::LookoutEquipment
     Float = Shapes::FloatShape.new(name: 'Float')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     IdempotenceToken = Shapes::StringShape.new(name: 'IdempotenceToken')
+    ImportDatasetRequest = Shapes::StructureShape.new(name: 'ImportDatasetRequest')
+    ImportDatasetResponse = Shapes::StructureShape.new(name: 'ImportDatasetResponse')
+    ImportModelVersionRequest = Shapes::StructureShape.new(name: 'ImportModelVersionRequest')
+    ImportModelVersionResponse = Shapes::StructureShape.new(name: 'ImportModelVersionResponse')
     InferenceEventSummaries = Shapes::ListShape.new(name: 'InferenceEventSummaries')
     InferenceEventSummary = Shapes::StructureShape.new(name: 'InferenceEventSummary')
     InferenceExecutionStatus = Shapes::StringShape.new(name: 'InferenceExecutionStatus')
@@ -127,6 +136,8 @@ module Aws::LookoutEquipment
     ListLabelGroupsResponse = Shapes::StructureShape.new(name: 'ListLabelGroupsResponse')
     ListLabelsRequest = Shapes::StructureShape.new(name: 'ListLabelsRequest')
     ListLabelsResponse = Shapes::StructureShape.new(name: 'ListLabelsResponse')
+    ListModelVersionsRequest = Shapes::StructureShape.new(name: 'ListModelVersionsRequest')
+    ListModelVersionsResponse = Shapes::StructureShape.new(name: 'ListModelVersionsResponse')
     ListModelsRequest = Shapes::StructureShape.new(name: 'ListModelsRequest')
     ListModelsResponse = Shapes::StructureShape.new(name: 'ListModelsResponse')
     ListOfDiscardedFiles = Shapes::ListShape.new(name: 'ListOfDiscardedFiles')
@@ -143,12 +154,23 @@ module Aws::LookoutEquipment
     ModelStatus = Shapes::StringShape.new(name: 'ModelStatus')
     ModelSummaries = Shapes::ListShape.new(name: 'ModelSummaries')
     ModelSummary = Shapes::StructureShape.new(name: 'ModelSummary')
+    ModelVersion = Shapes::IntegerShape.new(name: 'ModelVersion')
+    ModelVersionArn = Shapes::StringShape.new(name: 'ModelVersionArn')
+    ModelVersionSourceType = Shapes::StringShape.new(name: 'ModelVersionSourceType')
+    ModelVersionStatus = Shapes::StringShape.new(name: 'ModelVersionStatus')
+    ModelVersionSummaries = Shapes::ListShape.new(name: 'ModelVersionSummaries')
+    ModelVersionSummary = Shapes::StructureShape.new(name: 'ModelVersionSummary')
     MonotonicValues = Shapes::StructureShape.new(name: 'MonotonicValues')
     Monotonicity = Shapes::StringShape.new(name: 'Monotonicity')
     MultipleOperatingModes = Shapes::StructureShape.new(name: 'MultipleOperatingModes')
     NameOrArn = Shapes::StringShape.new(name: 'NameOrArn')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OffCondition = Shapes::StringShape.new(name: 'OffCondition')
+    Policy = Shapes::StringShape.new(name: 'Policy')
+    PolicyRevisionId = Shapes::StringShape.new(name: 'PolicyRevisionId')
+    PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
+    PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
+    ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
@@ -180,6 +202,8 @@ module Aws::LookoutEquipment
     UnsupportedTimestamps = Shapes::StructureShape.new(name: 'UnsupportedTimestamps')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateActiveModelVersionRequest = Shapes::StructureShape.new(name: 'UpdateActiveModelVersionRequest')
+    UpdateActiveModelVersionResponse = Shapes::StructureShape.new(name: 'UpdateActiveModelVersionResponse')
     UpdateInferenceSchedulerRequest = Shapes::StructureShape.new(name: 'UpdateInferenceSchedulerRequest')
     UpdateLabelGroupRequest = Shapes::StructureShape.new(name: 'UpdateLabelGroupRequest')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
@@ -316,6 +340,9 @@ module Aws::LookoutEquipment
     DeleteModelRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
     DeleteModelRequest.struct_class = Types::DeleteModelRequest
 
+    DeleteResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
+
     DescribeDataIngestionJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: IngestionJobId, required: true, location_name: "JobId"))
     DescribeDataIngestionJobRequest.struct_class = Types::DescribeDataIngestionJobRequest
 
@@ -332,6 +359,7 @@ module Aws::LookoutEquipment
     DescribeDataIngestionJobResponse.add_member(:ingested_data_size, Shapes::ShapeRef.new(shape: DataSizeInBytes, location_name: "IngestedDataSize"))
     DescribeDataIngestionJobResponse.add_member(:data_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DataStartTime"))
     DescribeDataIngestionJobResponse.add_member(:data_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DataEndTime"))
+    DescribeDataIngestionJobResponse.add_member(:source_dataset_arn, Shapes::ShapeRef.new(shape: DatasetArn, location_name: "SourceDatasetArn"))
     DescribeDataIngestionJobResponse.struct_class = Types::DescribeDataIngestionJobResponse
 
     DescribeDatasetRequest.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetIdentifier, required: true, location_name: "DatasetName"))
@@ -350,6 +378,7 @@ module Aws::LookoutEquipment
     DescribeDatasetResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "RoleArn"))
     DescribeDatasetResponse.add_member(:data_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DataStartTime"))
     DescribeDatasetResponse.add_member(:data_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DataEndTime"))
+    DescribeDatasetResponse.add_member(:source_dataset_arn, Shapes::ShapeRef.new(shape: DatasetArn, location_name: "SourceDatasetArn"))
     DescribeDatasetResponse.struct_class = Types::DescribeDatasetResponse
 
     DescribeInferenceSchedulerRequest.add_member(:inference_scheduler_name, Shapes::ShapeRef.new(shape: InferenceSchedulerIdentifier, required: true, location_name: "InferenceSchedulerName"))
@@ -421,12 +450,94 @@ module Aws::LookoutEquipment
     DescribeModelResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     DescribeModelResponse.add_member(:server_side_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "ServerSideKmsKeyId"))
     DescribeModelResponse.add_member(:off_condition, Shapes::ShapeRef.new(shape: OffCondition, location_name: "OffCondition"))
+    DescribeModelResponse.add_member(:source_model_version_arn, Shapes::ShapeRef.new(shape: ModelVersionArn, location_name: "SourceModelVersionArn"))
+    DescribeModelResponse.add_member(:import_job_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ImportJobStartTime"))
+    DescribeModelResponse.add_member(:import_job_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ImportJobEndTime"))
+    DescribeModelResponse.add_member(:active_model_version, Shapes::ShapeRef.new(shape: ModelVersion, location_name: "ActiveModelVersion"))
+    DescribeModelResponse.add_member(:active_model_version_arn, Shapes::ShapeRef.new(shape: ModelVersionArn, location_name: "ActiveModelVersionArn"))
+    DescribeModelResponse.add_member(:model_version_activated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ModelVersionActivatedAt"))
+    DescribeModelResponse.add_member(:previous_active_model_version, Shapes::ShapeRef.new(shape: ModelVersion, location_name: "PreviousActiveModelVersion"))
+    DescribeModelResponse.add_member(:previous_active_model_version_arn, Shapes::ShapeRef.new(shape: ModelVersionArn, location_name: "PreviousActiveModelVersionArn"))
+    DescribeModelResponse.add_member(:previous_model_version_activated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "PreviousModelVersionActivatedAt"))
     DescribeModelResponse.struct_class = Types::DescribeModelResponse
+
+    DescribeModelVersionRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
+    DescribeModelVersionRequest.add_member(:model_version, Shapes::ShapeRef.new(shape: ModelVersion, required: true, location_name: "ModelVersion"))
+    DescribeModelVersionRequest.struct_class = Types::DescribeModelVersionRequest
+
+    DescribeModelVersionResponse.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelName"))
+    DescribeModelVersionResponse.add_member(:model_arn, Shapes::ShapeRef.new(shape: ModelArn, location_name: "ModelArn"))
+    DescribeModelVersionResponse.add_member(:model_version, Shapes::ShapeRef.new(shape: ModelVersion, location_name: "ModelVersion"))
+    DescribeModelVersionResponse.add_member(:model_version_arn, Shapes::ShapeRef.new(shape: ModelVersionArn, location_name: "ModelVersionArn"))
+    DescribeModelVersionResponse.add_member(:status, Shapes::ShapeRef.new(shape: ModelVersionStatus, location_name: "Status"))
+    DescribeModelVersionResponse.add_member(:source_type, Shapes::ShapeRef.new(shape: ModelVersionSourceType, location_name: "SourceType"))
+    DescribeModelVersionResponse.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetName, location_name: "DatasetName"))
+    DescribeModelVersionResponse.add_member(:dataset_arn, Shapes::ShapeRef.new(shape: DatasetArn, location_name: "DatasetArn"))
+    DescribeModelVersionResponse.add_member(:schema, Shapes::ShapeRef.new(shape: InlineDataSchema, location_name: "Schema"))
+    DescribeModelVersionResponse.add_member(:labels_input_configuration, Shapes::ShapeRef.new(shape: LabelsInputConfiguration, location_name: "LabelsInputConfiguration"))
+    DescribeModelVersionResponse.add_member(:training_data_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TrainingDataStartTime"))
+    DescribeModelVersionResponse.add_member(:training_data_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TrainingDataEndTime"))
+    DescribeModelVersionResponse.add_member(:evaluation_data_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EvaluationDataStartTime"))
+    DescribeModelVersionResponse.add_member(:evaluation_data_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EvaluationDataEndTime"))
+    DescribeModelVersionResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "RoleArn"))
+    DescribeModelVersionResponse.add_member(:data_pre_processing_configuration, Shapes::ShapeRef.new(shape: DataPreProcessingConfiguration, location_name: "DataPreProcessingConfiguration"))
+    DescribeModelVersionResponse.add_member(:training_execution_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TrainingExecutionStartTime"))
+    DescribeModelVersionResponse.add_member(:training_execution_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TrainingExecutionEndTime"))
+    DescribeModelVersionResponse.add_member(:failed_reason, Shapes::ShapeRef.new(shape: BoundedLengthString, location_name: "FailedReason"))
+    DescribeModelVersionResponse.add_member(:model_metrics, Shapes::ShapeRef.new(shape: ModelMetrics, location_name: "ModelMetrics"))
+    DescribeModelVersionResponse.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
+    DescribeModelVersionResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    DescribeModelVersionResponse.add_member(:server_side_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "ServerSideKmsKeyId"))
+    DescribeModelVersionResponse.add_member(:off_condition, Shapes::ShapeRef.new(shape: OffCondition, location_name: "OffCondition"))
+    DescribeModelVersionResponse.add_member(:source_model_version_arn, Shapes::ShapeRef.new(shape: ModelVersionArn, location_name: "SourceModelVersionArn"))
+    DescribeModelVersionResponse.add_member(:import_job_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ImportJobStartTime"))
+    DescribeModelVersionResponse.add_member(:import_job_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ImportJobEndTime"))
+    DescribeModelVersionResponse.add_member(:imported_data_size_in_bytes, Shapes::ShapeRef.new(shape: DataSizeInBytes, location_name: "ImportedDataSizeInBytes"))
+    DescribeModelVersionResponse.struct_class = Types::DescribeModelVersionResponse
+
+    DescribeResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    DescribeResourcePolicyRequest.struct_class = Types::DescribeResourcePolicyRequest
+
+    DescribeResourcePolicyResponse.add_member(:policy_revision_id, Shapes::ShapeRef.new(shape: PolicyRevisionId, location_name: "PolicyRevisionId"))
+    DescribeResourcePolicyResponse.add_member(:resource_policy, Shapes::ShapeRef.new(shape: Policy, location_name: "ResourcePolicy"))
+    DescribeResourcePolicyResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    DescribeResourcePolicyResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    DescribeResourcePolicyResponse.struct_class = Types::DescribeResourcePolicyResponse
 
     DuplicateTimestamps.add_member(:total_number_of_duplicate_timestamps, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "TotalNumberOfDuplicateTimestamps"))
     DuplicateTimestamps.struct_class = Types::DuplicateTimestamps
 
     FaultCodes.member = Shapes::ShapeRef.new(shape: FaultCode)
+
+    ImportDatasetRequest.add_member(:source_dataset_arn, Shapes::ShapeRef.new(shape: DatasetArn, required: true, location_name: "SourceDatasetArn"))
+    ImportDatasetRequest.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetName, location_name: "DatasetName"))
+    ImportDatasetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotenceToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    ImportDatasetRequest.add_member(:server_side_kms_key_id, Shapes::ShapeRef.new(shape: NameOrArn, location_name: "ServerSideKmsKeyId"))
+    ImportDatasetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ImportDatasetRequest.struct_class = Types::ImportDatasetRequest
+
+    ImportDatasetResponse.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetName, location_name: "DatasetName"))
+    ImportDatasetResponse.add_member(:dataset_arn, Shapes::ShapeRef.new(shape: DatasetArn, location_name: "DatasetArn"))
+    ImportDatasetResponse.add_member(:status, Shapes::ShapeRef.new(shape: DatasetStatus, location_name: "Status"))
+    ImportDatasetResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: IngestionJobId, location_name: "JobId"))
+    ImportDatasetResponse.struct_class = Types::ImportDatasetResponse
+
+    ImportModelVersionRequest.add_member(:source_model_version_arn, Shapes::ShapeRef.new(shape: ModelVersionArn, required: true, location_name: "SourceModelVersionArn"))
+    ImportModelVersionRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelName"))
+    ImportModelVersionRequest.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetIdentifier, required: true, location_name: "DatasetName"))
+    ImportModelVersionRequest.add_member(:labels_input_configuration, Shapes::ShapeRef.new(shape: LabelsInputConfiguration, location_name: "LabelsInputConfiguration"))
+    ImportModelVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotenceToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    ImportModelVersionRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "RoleArn"))
+    ImportModelVersionRequest.add_member(:server_side_kms_key_id, Shapes::ShapeRef.new(shape: NameOrArn, location_name: "ServerSideKmsKeyId"))
+    ImportModelVersionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ImportModelVersionRequest.struct_class = Types::ImportModelVersionRequest
+
+    ImportModelVersionResponse.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelName"))
+    ImportModelVersionResponse.add_member(:model_arn, Shapes::ShapeRef.new(shape: ModelArn, location_name: "ModelArn"))
+    ImportModelVersionResponse.add_member(:model_version_arn, Shapes::ShapeRef.new(shape: ModelVersionArn, location_name: "ModelVersionArn"))
+    ImportModelVersionResponse.add_member(:model_version, Shapes::ShapeRef.new(shape: ModelVersion, location_name: "ModelVersion"))
+    ImportModelVersionResponse.add_member(:status, Shapes::ShapeRef.new(shape: ModelVersionStatus, location_name: "Status"))
+    ImportModelVersionResponse.struct_class = Types::ImportModelVersionResponse
 
     InferenceEventSummaries.member = Shapes::ShapeRef.new(shape: InferenceEventSummary)
 
@@ -620,6 +731,21 @@ module Aws::LookoutEquipment
     ListLabelsResponse.add_member(:label_summaries, Shapes::ShapeRef.new(shape: LabelSummaries, location_name: "LabelSummaries"))
     ListLabelsResponse.struct_class = Types::ListLabelsResponse
 
+    ListModelVersionsRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
+    ListModelVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListModelVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListModelVersionsRequest.add_member(:status, Shapes::ShapeRef.new(shape: ModelVersionStatus, location_name: "Status"))
+    ListModelVersionsRequest.add_member(:source_type, Shapes::ShapeRef.new(shape: ModelVersionSourceType, location_name: "SourceType"))
+    ListModelVersionsRequest.add_member(:created_at_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAtEndTime"))
+    ListModelVersionsRequest.add_member(:created_at_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAtStartTime"))
+    ListModelVersionsRequest.add_member(:max_model_version, Shapes::ShapeRef.new(shape: ModelVersion, location_name: "MaxModelVersion"))
+    ListModelVersionsRequest.add_member(:min_model_version, Shapes::ShapeRef.new(shape: ModelVersion, location_name: "MinModelVersion"))
+    ListModelVersionsRequest.struct_class = Types::ListModelVersionsRequest
+
+    ListModelVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListModelVersionsResponse.add_member(:model_version_summaries, Shapes::ShapeRef.new(shape: ModelVersionSummaries, location_name: "ModelVersionSummaries"))
+    ListModelVersionsResponse.struct_class = Types::ListModelVersionsResponse
+
     ListModelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListModelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListModelsRequest.add_member(:status, Shapes::ShapeRef.new(shape: ModelStatus, location_name: "Status"))
@@ -664,7 +790,20 @@ module Aws::LookoutEquipment
     ModelSummary.add_member(:dataset_arn, Shapes::ShapeRef.new(shape: DatasetArn, location_name: "DatasetArn"))
     ModelSummary.add_member(:status, Shapes::ShapeRef.new(shape: ModelStatus, location_name: "Status"))
     ModelSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    ModelSummary.add_member(:active_model_version, Shapes::ShapeRef.new(shape: ModelVersion, location_name: "ActiveModelVersion"))
+    ModelSummary.add_member(:active_model_version_arn, Shapes::ShapeRef.new(shape: ModelVersionArn, location_name: "ActiveModelVersionArn"))
     ModelSummary.struct_class = Types::ModelSummary
+
+    ModelVersionSummaries.member = Shapes::ShapeRef.new(shape: ModelVersionSummary)
+
+    ModelVersionSummary.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelName"))
+    ModelVersionSummary.add_member(:model_arn, Shapes::ShapeRef.new(shape: ModelArn, location_name: "ModelArn"))
+    ModelVersionSummary.add_member(:model_version, Shapes::ShapeRef.new(shape: ModelVersion, location_name: "ModelVersion"))
+    ModelVersionSummary.add_member(:model_version_arn, Shapes::ShapeRef.new(shape: ModelVersionArn, location_name: "ModelVersionArn"))
+    ModelVersionSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    ModelVersionSummary.add_member(:status, Shapes::ShapeRef.new(shape: ModelVersionStatus, location_name: "Status"))
+    ModelVersionSummary.add_member(:source_type, Shapes::ShapeRef.new(shape: ModelVersionSourceType, location_name: "SourceType"))
+    ModelVersionSummary.struct_class = Types::ModelVersionSummary
 
     MonotonicValues.add_member(:status, Shapes::ShapeRef.new(shape: StatisticalIssueStatus, required: true, location_name: "Status"))
     MonotonicValues.add_member(:monotonicity, Shapes::ShapeRef.new(shape: Monotonicity, location_name: "Monotonicity"))
@@ -672,6 +811,16 @@ module Aws::LookoutEquipment
 
     MultipleOperatingModes.add_member(:status, Shapes::ShapeRef.new(shape: StatisticalIssueStatus, required: true, location_name: "Status"))
     MultipleOperatingModes.struct_class = Types::MultipleOperatingModes
+
+    PutResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    PutResourcePolicyRequest.add_member(:resource_policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "ResourcePolicy"))
+    PutResourcePolicyRequest.add_member(:policy_revision_id, Shapes::ShapeRef.new(shape: PolicyRevisionId, location_name: "PolicyRevisionId"))
+    PutResourcePolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotenceToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    PutResourcePolicyRequest.struct_class = Types::PutResourcePolicyRequest
+
+    PutResourcePolicyResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
+    PutResourcePolicyResponse.add_member(:policy_revision_id, Shapes::ShapeRef.new(shape: PolicyRevisionId, location_name: "PolicyRevisionId"))
+    PutResourcePolicyResponse.struct_class = Types::PutResourcePolicyResponse
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: BoundedLengthString, required: true, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -758,6 +907,18 @@ module Aws::LookoutEquipment
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateActiveModelVersionRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
+    UpdateActiveModelVersionRequest.add_member(:model_version, Shapes::ShapeRef.new(shape: ModelVersion, required: true, location_name: "ModelVersion"))
+    UpdateActiveModelVersionRequest.struct_class = Types::UpdateActiveModelVersionRequest
+
+    UpdateActiveModelVersionResponse.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelName"))
+    UpdateActiveModelVersionResponse.add_member(:model_arn, Shapes::ShapeRef.new(shape: ModelArn, location_name: "ModelArn"))
+    UpdateActiveModelVersionResponse.add_member(:current_active_version, Shapes::ShapeRef.new(shape: ModelVersion, location_name: "CurrentActiveVersion"))
+    UpdateActiveModelVersionResponse.add_member(:previous_active_version, Shapes::ShapeRef.new(shape: ModelVersion, location_name: "PreviousActiveVersion"))
+    UpdateActiveModelVersionResponse.add_member(:current_active_version_arn, Shapes::ShapeRef.new(shape: ModelVersionArn, location_name: "CurrentActiveVersionArn"))
+    UpdateActiveModelVersionResponse.add_member(:previous_active_version_arn, Shapes::ShapeRef.new(shape: ModelVersionArn, location_name: "PreviousActiveVersionArn"))
+    UpdateActiveModelVersionResponse.struct_class = Types::UpdateActiveModelVersionResponse
 
     UpdateInferenceSchedulerRequest.add_member(:inference_scheduler_name, Shapes::ShapeRef.new(shape: InferenceSchedulerIdentifier, required: true, location_name: "InferenceSchedulerName"))
     UpdateInferenceSchedulerRequest.add_member(:data_delay_offset_in_minutes, Shapes::ShapeRef.new(shape: DataDelayOffsetInMinutes, location_name: "DataDelayOffsetInMinutes"))
@@ -936,6 +1097,20 @@ module Aws::LookoutEquipment
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:delete_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:describe_data_ingestion_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeDataIngestionJob"
         o.http_method = "POST"
@@ -1009,6 +1184,62 @@ module Aws::LookoutEquipment
         o.output = Shapes::ShapeRef.new(shape: DescribeModelResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:describe_model_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeModelVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeModelVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeModelVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:describe_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:import_dataset, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ImportDataset"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ImportDatasetRequest)
+        o.output = Shapes::ShapeRef.new(shape: ImportDatasetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:import_model_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ImportModelVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ImportModelVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: ImportModelVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1142,6 +1373,25 @@ module Aws::LookoutEquipment
         )
       end)
 
+      api.add_operation(:list_model_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListModelVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListModelVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListModelVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_models, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListModels"
         o.http_method = "POST"
@@ -1188,6 +1438,21 @@ module Aws::LookoutEquipment
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:put_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
@@ -1260,6 +1525,20 @@ module Aws::LookoutEquipment
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_active_model_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateActiveModelVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateActiveModelVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateActiveModelVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_inference_scheduler, Seahorse::Model::Operation.new.tap do |o|

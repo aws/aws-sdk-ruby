@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2023-07-31)
+------------------
+
+* Feature - New integration with the Gitlab provider type.
+
 1.31.0 (2023-07-11)
 ------------------
 

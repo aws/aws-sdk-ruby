@@ -152,6 +152,8 @@ module Aws::Transfer
             Aws::Transfer::Endpoints::StopServer.build(context)
           when :tag_resource
             Aws::Transfer::Endpoints::TagResource.build(context)
+          when :test_connection
+            Aws::Transfer::Endpoints::TestConnection.build(context)
           when :test_identity_provider
             Aws::Transfer::Endpoints::TestIdentityProvider.build(context)
           when :untag_resource

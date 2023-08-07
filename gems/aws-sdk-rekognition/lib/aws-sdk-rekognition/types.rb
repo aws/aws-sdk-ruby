@@ -869,8 +869,8 @@ module Aws::Rekognition
     #   @return [Types::DatasetSource]
     #
     # @!attribute [rw] dataset_type
-    #   The type of the dataset. Specify `train` to create a training
-    #   dataset. Specify `test` to create a test dataset.
+    #   The type of the dataset. Specify `TRAIN` to create a training
+    #   dataset. Specify `TEST` to create a test dataset.
     #   @return [String]
     #
     # @!attribute [rw] project_arn
@@ -1981,6 +1981,10 @@ module Aws::Rekognition
     #   If you provide both, `["ALL", "DEFAULT"]`, the service uses a
     #   logical "AND" operator to determine which attributes to return (in
     #   this case, all attributes).
+    #
+    #   Note that while the FaceOccluded and EyeDirection attributes are
+    #   supported when using `DetectFaces`, they aren't supported when
+    #   analyzing videos with `StartFaceDetection` and `GetFaceDetection`.
     #   @return [Array<String>]
     #
     class DetectFacesRequest < Struct.new(
@@ -2151,7 +2155,8 @@ module Aws::Rekognition
     # @!attribute [rw] max_labels
     #   Maximum number of labels you want the service to return in the
     #   response. The service returns the specified number of highest
-    #   confidence labels.
+    #   confidence labels. Only valid when GENERAL\_LABELS is specified as a
+    #   feature type in the Feature input parameter.
     #   @return [Integer]
     #
     # @!attribute [rw] min_confidence
@@ -2160,7 +2165,9 @@ module Aws::Rekognition
     #   than this specified value.
     #
     #   If `MinConfidence` is not specified, the operation returns labels
-    #   with a confidence values greater than or equal to 55 percent.
+    #   with a confidence values greater than or equal to 55 percent. Only
+    #   valid when GENERAL\_LABELS is specified as a feature type in the
+    #   Feature input parameter.
     #   @return [Float]
     #
     # @!attribute [rw] features
@@ -3487,7 +3494,8 @@ module Aws::Rekognition
     #   Base64-encoded bytes that return an image. If the
     #   CreateFaceLivenessSession request included an OutputConfig argument,
     #   the image will be uploaded to an S3Object specified in the output
-    #   configuration.
+    #   configuration. If no Amazon S3 bucket is defined, raw bytes are sent
+    #   instead.
     #   @return [Array<Types::AuditImage>]
     #
     class GetFaceLivenessSessionResultsResponse < Struct.new(
@@ -4811,11 +4819,13 @@ module Aws::Rekognition
     #   @return [Integer]
     #
     # @!attribute [rw] user_id
-    #   An array of user IDs to match when listing faces in a collection.
+    #   An array of user IDs to filter results with when listing faces in a
+    #   collection.
     #   @return [String]
     #
     # @!attribute [rw] face_ids
-    #   An array of face IDs to match when listing faces in a collection.
+    #   An array of face IDs to filter results with when listing faces in a
+    #   collection.
     #   @return [Array<String>]
     #
     class ListFacesRequest < Struct.new(

@@ -76,6 +76,7 @@ module Aws::Omics
     CreateWorkflowRequestStorageCapacityInteger = Shapes::IntegerShape.new(name: 'CreateWorkflowRequestStorageCapacityInteger')
     CreateWorkflowResponse = Shapes::StructureShape.new(name: 'CreateWorkflowResponse')
     CreationTime = Shapes::TimestampShape.new(name: 'CreationTime', timestampFormat: "iso8601")
+    CreationType = Shapes::StringShape.new(name: 'CreationType')
     DeleteAnnotationStoreRequest = Shapes::StructureShape.new(name: 'DeleteAnnotationStoreRequest')
     DeleteAnnotationStoreResponse = Shapes::StructureShape.new(name: 'DeleteAnnotationStoreResponse')
     DeleteReferenceRequest = Shapes::StructureShape.new(name: 'DeleteReferenceRequest')
@@ -880,6 +881,7 @@ module Aws::Omics
     GetReadSetMetadataResponse.add_member(:reference_arn, Shapes::ShapeRef.new(shape: ReferenceArn, location_name: "referenceArn"))
     GetReadSetMetadataResponse.add_member(:files, Shapes::ShapeRef.new(shape: ReadSetFiles, location_name: "files"))
     GetReadSetMetadataResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: ReadSetStatusMessage, location_name: "statusMessage"))
+    GetReadSetMetadataResponse.add_member(:creation_type, Shapes::ShapeRef.new(shape: CreationType, location_name: "creationType"))
     GetReadSetMetadataResponse.struct_class = Types::GetReadSetMetadataResponse
 
     GetReadSetRequest.add_member(:id, Shapes::ShapeRef.new(shape: ReadSetId, required: true, location: "uri", location_name: "id"))
@@ -1393,6 +1395,7 @@ module Aws::Omics
     ReadSetFilter.add_member(:sample_id, Shapes::ShapeRef.new(shape: SampleId, location_name: "sampleId"))
     ReadSetFilter.add_member(:subject_id, Shapes::ShapeRef.new(shape: SubjectId, location_name: "subjectId"))
     ReadSetFilter.add_member(:generated_from, Shapes::ShapeRef.new(shape: GeneratedFrom, location_name: "generatedFrom"))
+    ReadSetFilter.add_member(:creation_type, Shapes::ShapeRef.new(shape: CreationType, location_name: "creationType"))
     ReadSetFilter.struct_class = Types::ReadSetFilter
 
     ReadSetIdList.member = Shapes::ShapeRef.new(shape: ReadSetId)
@@ -1412,6 +1415,7 @@ module Aws::Omics
     ReadSetListItem.add_member(:sequence_information, Shapes::ShapeRef.new(shape: SequenceInformation, location_name: "sequenceInformation"))
     ReadSetListItem.add_member(:creation_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "creationTime"))
     ReadSetListItem.add_member(:status_message, Shapes::ShapeRef.new(shape: ReadSetStatusMessage, location_name: "statusMessage"))
+    ReadSetListItem.add_member(:creation_type, Shapes::ShapeRef.new(shape: CreationType, location_name: "creationType"))
     ReadSetListItem.struct_class = Types::ReadSetListItem
 
     ReadSetUploadPartList.member = Shapes::ShapeRef.new(shape: ReadSetUploadPartListItem)

@@ -1496,8 +1496,8 @@ module Aws::Personalize
     #   @return [Boolean]
     #
     # @!attribute [rw] recipe_arn
-    #   The ARN of the recipe to use for model training. Only specified when
-    #   `performAutoML` is false.
+    #   The ARN of the recipe to use for model training. This is required
+    #   when `performAutoML` is false.
     #   @return [String]
     #
     # @!attribute [rw] dataset_group_arn
@@ -1686,6 +1686,10 @@ module Aws::Personalize
     #   A time stamp that shows when the dataset was updated.
     #   @return [Time]
     #
+    # @!attribute [rw] latest_dataset_update
+    #   Describes the latest update to the dataset.
+    #   @return [Types::DatasetUpdateSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/Dataset AWS API Documentation
     #
     class Dataset < Struct.new(
@@ -1696,7 +1700,8 @@ module Aws::Personalize
       :schema_arn,
       :status,
       :creation_date_time,
-      :last_updated_date_time)
+      :last_updated_date_time,
+      :latest_dataset_update)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2279,6 +2284,41 @@ module Aws::Personalize
       :dataset_arn,
       :dataset_type,
       :status,
+      :creation_date_time,
+      :last_updated_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an update to a dataset.
+    #
+    # @!attribute [rw] schema_arn
+    #   The Amazon Resource Name (ARN) of the schema that replaced the
+    #   previous schema of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the dataset update.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   If updating a dataset fails, provides the reason why.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The creation date and time (in Unix time) of the dataset update.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The last update date and time (in Unix time) of the dataset.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DatasetUpdateSummary AWS API Documentation
+    #
+    class DatasetUpdateSummary < Struct.new(
+      :schema_arn,
+      :status,
+      :failure_reason,
       :creation_date_time,
       :last_updated_date_time)
       SENSITIVE = []
@@ -4721,7 +4761,8 @@ module Aws::Personalize
     #   @return [Boolean]
     #
     # @!attribute [rw] recipe_arn
-    #   The ARN of the recipe used to create the solution.
+    #   The ARN of the recipe used to create the solution. This is required
+    #   when `performAutoML` is false.
     #   @return [String]
     #
     # @!attribute [rw] dataset_group_arn
@@ -5317,6 +5358,36 @@ module Aws::Personalize
     #
     class UpdateCampaignResponse < Struct.new(
       :campaign_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_arn
+    #   The Amazon Resource Name (ARN) of the dataset that you want to
+    #   update.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_arn
+    #   The Amazon Resource Name (ARN) of the new schema you want use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/UpdateDatasetRequest AWS API Documentation
+    #
+    class UpdateDatasetRequest < Struct.new(
+      :dataset_arn,
+      :schema_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_arn
+    #   The Amazon Resource Name (ARN) of the dataset you updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/UpdateDatasetResponse AWS API Documentation
+    #
+    class UpdateDatasetResponse < Struct.new(
+      :dataset_arn)
       SENSITIVE = []
       include Aws::Structure
     end

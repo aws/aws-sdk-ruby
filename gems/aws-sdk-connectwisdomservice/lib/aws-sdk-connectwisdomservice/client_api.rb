@@ -22,6 +22,7 @@ module Aws::ConnectWisdomService
     AssistantAssociationSummary = Shapes::StructureShape.new(name: 'AssistantAssociationSummary')
     AssistantAssociationSummaryList = Shapes::ListShape.new(name: 'AssistantAssociationSummaryList')
     AssistantData = Shapes::StructureShape.new(name: 'AssistantData')
+    AssistantIntegrationConfiguration = Shapes::StructureShape.new(name: 'AssistantIntegrationConfiguration')
     AssistantList = Shapes::ListShape.new(name: 'AssistantList')
     AssistantStatus = Shapes::StringShape.new(name: 'AssistantStatus')
     AssistantSummary = Shapes::StructureShape.new(name: 'AssistantSummary')
@@ -139,6 +140,7 @@ module Aws::ConnectWisdomService
     ServerSideEncryptionConfiguration = Shapes::StructureShape.new(name: 'ServerSideEncryptionConfiguration')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SessionData = Shapes::StructureShape.new(name: 'SessionData')
+    SessionIntegrationConfiguration = Shapes::StructureShape.new(name: 'SessionIntegrationConfiguration')
     SessionSummaries = Shapes::ListShape.new(name: 'SessionSummaries')
     SessionSummary = Shapes::StructureShape.new(name: 'SessionSummary')
     SourceConfiguration = Shapes::UnionShape.new(name: 'SourceConfiguration')
@@ -209,6 +211,7 @@ module Aws::ConnectWisdomService
     AssistantData.add_member(:assistant_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assistantArn"))
     AssistantData.add_member(:assistant_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "assistantId"))
     AssistantData.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    AssistantData.add_member(:integration_configuration, Shapes::ShapeRef.new(shape: AssistantIntegrationConfiguration, location_name: "integrationConfiguration"))
     AssistantData.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     AssistantData.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "serverSideEncryptionConfiguration"))
     AssistantData.add_member(:status, Shapes::ShapeRef.new(shape: AssistantStatus, required: true, location_name: "status"))
@@ -216,11 +219,15 @@ module Aws::ConnectWisdomService
     AssistantData.add_member(:type, Shapes::ShapeRef.new(shape: AssistantType, required: true, location_name: "type"))
     AssistantData.struct_class = Types::AssistantData
 
+    AssistantIntegrationConfiguration.add_member(:topic_integration_arn, Shapes::ShapeRef.new(shape: GenericArn, location_name: "topicIntegrationArn"))
+    AssistantIntegrationConfiguration.struct_class = Types::AssistantIntegrationConfiguration
+
     AssistantList.member = Shapes::ShapeRef.new(shape: AssistantSummary)
 
     AssistantSummary.add_member(:assistant_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assistantArn"))
     AssistantSummary.add_member(:assistant_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "assistantId"))
     AssistantSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    AssistantSummary.add_member(:integration_configuration, Shapes::ShapeRef.new(shape: AssistantIntegrationConfiguration, location_name: "integrationConfiguration"))
     AssistantSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     AssistantSummary.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "serverSideEncryptionConfiguration"))
     AssistantSummary.add_member(:status, Shapes::ShapeRef.new(shape: AssistantStatus, required: true, location_name: "status"))
@@ -604,11 +611,15 @@ module Aws::ConnectWisdomService
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     SessionData.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    SessionData.add_member(:integration_configuration, Shapes::ShapeRef.new(shape: SessionIntegrationConfiguration, location_name: "integrationConfiguration"))
     SessionData.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     SessionData.add_member(:session_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "sessionArn"))
     SessionData.add_member(:session_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "sessionId"))
     SessionData.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     SessionData.struct_class = Types::SessionData
+
+    SessionIntegrationConfiguration.add_member(:topic_integration_arn, Shapes::ShapeRef.new(shape: GenericArn, location_name: "topicIntegrationArn"))
+    SessionIntegrationConfiguration.struct_class = Types::SessionIntegrationConfiguration
 
     SessionSummaries.member = Shapes::ShapeRef.new(shape: SessionSummary)
 

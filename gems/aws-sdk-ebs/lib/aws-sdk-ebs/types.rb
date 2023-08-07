@@ -227,7 +227,12 @@ module Aws::EBS
       include Aws::Structure
     end
 
-    # An internal error has occurred.
+    # An internal error has occurred. For more information see [Error
+    # retries][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -498,8 +503,13 @@ module Aws::EBS
       include Aws::Structure
     end
 
-    # The number of API requests has exceed the maximum allowed API request
-    # throttling limit.
+    # The number of API requests has exceeded the maximum allowed API
+    # request throttling limit for the snapshot. For more information see
+    # [Error retries][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -737,6 +747,10 @@ module Aws::EBS
     #   key used to encrypt the snapshot.
     #   @return [String]
     #
+    # @!attribute [rw] sse_type
+    #   Reserved for future use.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ebs-2019-11-02/StartSnapshotResponse AWS API Documentation
     #
     class StartSnapshotResponse < Struct.new(
@@ -749,7 +763,8 @@ module Aws::EBS
       :block_size,
       :tags,
       :parent_snapshot_id,
-      :kms_key_arn)
+      :kms_key_arn,
+      :sse_type)
       SENSITIVE = [:kms_key_arn]
       include Aws::Structure
     end

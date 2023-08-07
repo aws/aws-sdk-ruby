@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.93.1 (2023-08-07)
+------------------
+
+* Issue - Fix inconsistent behavior of `stub_responses` when `simple_attributes` is disabled.
+
+1.93.0 (2023-07-25)
+------------------
+
+* Feature - Documentation updates for DynamoDB
+
 1.92.0 (2023-07-11)
 ------------------
 

@@ -800,6 +800,36 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # @!attribute [rw] finding_arns
+    #   A list of finding ARNs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/BatchGetFindingDetailsRequest AWS API Documentation
+    #
+    class BatchGetFindingDetailsRequest < Struct.new(
+      :finding_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] errors
+    #   Error information for findings that details could not be returned
+    #   for.
+    #   @return [Array<Types::FindingDetailsError>]
+    #
+    # @!attribute [rw] finding_details
+    #   A finding's vulnerability details.
+    #   @return [Array<Types::FindingDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/BatchGetFindingDetailsResponse AWS API Documentation
+    #
+    class BatchGetFindingDetailsResponse < Struct.new(
+      :errors,
+      :finding_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] account_ids
     #   The account IDs to get free trial status for.
     #   @return [Array<String>]
@@ -1770,7 +1800,7 @@ module Aws::Inspector2
     #   @return [String]
     #
     # @!attribute [rw] key_prefix
-    #   The prefix of the Amazon S3 bucket used to export findings.
+    #   The prefix that the findings will be written under.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
@@ -2194,6 +2224,30 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # Details of the evidence for a vulnerability identified in a finding.
+    #
+    # @!attribute [rw] evidence_detail
+    #   The evidence details.
+    #   @return [String]
+    #
+    # @!attribute [rw] evidence_rule
+    #   The evidence rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   The evidence severity.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/Evidence AWS API Documentation
+    #
+    class Evidence < Struct.new(
+      :evidence_detail,
+      :evidence_rule,
+      :severity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information on when this exploit was observed.
     #
     # @!attribute [rw] first_seen
@@ -2510,7 +2564,7 @@ module Aws::Inspector2
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] network_protocol
-    #   Details on the ingress source addresses used to filter findings.
+    #   Details on network protocol used to filter findings.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] port_range
@@ -2730,6 +2784,94 @@ module Aws::Inspector2
       :title,
       :type,
       :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of the vulnerability identified in a finding.
+    #
+    # @!attribute [rw] cisa_data
+    #   The Cybersecurity and Infrastructure Security Agency (CISA) details
+    #   for a specific vulnerability.
+    #   @return [Types::CisaData]
+    #
+    # @!attribute [rw] cwes
+    #   The Common Weakness Enumerations (CWEs) associated with the
+    #   vulnerability.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] epss_score
+    #   The Exploit Prediction Scoring System (EPSS) score of the
+    #   vulnerability.
+    #   @return [Float]
+    #
+    # @!attribute [rw] evidences
+    #   Information on the evidence of the vulnerability.
+    #   @return [Array<Types::Evidence>]
+    #
+    # @!attribute [rw] exploit_observed
+    #   Contains information on when this exploit was observed.
+    #   @return [Types::ExploitObserved]
+    #
+    # @!attribute [rw] finding_arn
+    #   The finding ARN that the vulnerability details are associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] reference_urls
+    #   The reference URLs for the vulnerability data.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] risk_score
+    #   The risk score of the vulnerability.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tools
+    #   The known malware tools or kits that can exploit the vulnerability.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ttps
+    #   The MITRE adversary tactics, techniques, or procedures (TTPs)
+    #   associated with the vulnerability.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/FindingDetail AWS API Documentation
+    #
+    class FindingDetail < Struct.new(
+      :cisa_data,
+      :cwes,
+      :epss_score,
+      :evidences,
+      :exploit_observed,
+      :finding_arn,
+      :reference_urls,
+      :risk_score,
+      :tools,
+      :ttps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an error encountered when trying to return vulnerability
+    # data for a finding.
+    #
+    # @!attribute [rw] error_code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_arn
+    #   The finding ARN that returned an error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/FindingDetailsError AWS API Documentation
+    #
+    class FindingDetailsError < Struct.new(
+      :error_code,
+      :error_message,
+      :finding_arn)
       SENSITIVE = []
       include Aws::Structure
     end

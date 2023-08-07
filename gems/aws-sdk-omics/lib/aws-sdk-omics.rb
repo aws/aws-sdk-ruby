@@ -53,6 +53,6 @@ require_relative 'aws-sdk-omics/customizations'
 # @!group service
 module Aws::Omics
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.11.0'
 
 end

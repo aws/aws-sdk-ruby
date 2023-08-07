@@ -3734,6 +3734,7 @@ module Aws::MediaLive
     #   * {Types::DescribeInputDeviceResponse#type #type} => String
     #   * {Types::DescribeInputDeviceResponse#uhd_device_settings #uhd_device_settings} => Types::InputDeviceUhdSettings
     #   * {Types::DescribeInputDeviceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeInputDeviceResponse#availability_zone #availability_zone} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3778,6 +3779,7 @@ module Aws::MediaLive
     #   resp.uhd_device_settings.latency_ms #=> Integer
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
+    #   resp.availability_zone #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputDevice AWS API Documentation
     #
@@ -4504,6 +4506,7 @@ module Aws::MediaLive
     #   resp.input_devices[0].uhd_device_settings.latency_ms #=> Integer
     #   resp.input_devices[0].tags #=> Hash
     #   resp.input_devices[0].tags["__string"] #=> String
+    #   resp.input_devices[0].availability_zone #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListInputDevices AWS API Documentation
@@ -8112,6 +8115,8 @@ module Aws::MediaLive
     # @option params [Types::InputDeviceConfigurableSettings] :uhd_device_settings
     #   Configurable settings for the input device.
     #
+    # @option params [String] :availability_zone
+    #
     # @return [Types::UpdateInputDeviceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateInputDeviceResponse#arn #arn} => String
@@ -8127,6 +8132,7 @@ module Aws::MediaLive
     #   * {Types::UpdateInputDeviceResponse#type #type} => String
     #   * {Types::UpdateInputDeviceResponse#uhd_device_settings #uhd_device_settings} => Types::InputDeviceUhdSettings
     #   * {Types::UpdateInputDeviceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::UpdateInputDeviceResponse#availability_zone #availability_zone} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -8143,6 +8149,7 @@ module Aws::MediaLive
     #       max_bitrate: 1,
     #       latency_ms: 1,
     #     },
+    #     availability_zone: "__string",
     #   })
     #
     # @example Response structure
@@ -8182,6 +8189,7 @@ module Aws::MediaLive
     #   resp.uhd_device_settings.latency_ms #=> Integer
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
+    #   resp.availability_zone #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputDevice AWS API Documentation
     #
@@ -8448,7 +8456,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2023-08-04)
+------------------
+
+* Feature - Documentation correction for AWS Private CA
+
 1.59.0 (2023-07-11)
 ------------------
 

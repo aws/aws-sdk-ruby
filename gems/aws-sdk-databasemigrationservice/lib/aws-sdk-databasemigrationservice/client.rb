@@ -619,6 +619,121 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Creates a data provider using the provided settings. A data provider
+    # stores a data store type and location information about your database.
+    #
+    # @option params [String] :data_provider_name
+    #   A user-friendly name for the data provider.
+    #
+    # @option params [String] :description
+    #   A user-friendly description of the data provider.
+    #
+    # @option params [required, String] :engine
+    #   The type of database engine for the data provider. Valid values
+    #   include `"aurora"`, `"aurora_postgresql"`, `"mysql"`, `"oracle"`,
+    #   `"postgres"`, and `"sqlserver"`. A value of `"aurora"` represents
+    #   Amazon Aurora MySQL-Compatible Edition.
+    #
+    # @option params [required, Types::DataProviderSettings] :settings
+    #   The settings in JSON format for a data provider.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   One or more tags to be assigned to the data provider.
+    #
+    # @return [Types::CreateDataProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDataProviderResponse#data_provider #data_provider} => Types::DataProvider
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_data_provider({
+    #     data_provider_name: "String",
+    #     description: "String",
+    #     engine: "String", # required
+    #     settings: { # required
+    #       postgre_sql_settings: {
+    #         server_name: "String",
+    #         port: 1,
+    #         database_name: "String",
+    #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
+    #         certificate_arn: "String",
+    #       },
+    #       my_sql_settings: {
+    #         server_name: "String",
+    #         port: 1,
+    #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
+    #         certificate_arn: "String",
+    #       },
+    #       oracle_settings: {
+    #         server_name: "String",
+    #         port: 1,
+    #         database_name: "String",
+    #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
+    #         certificate_arn: "String",
+    #         asm_server: "String",
+    #         secrets_manager_oracle_asm_secret_id: "String",
+    #         secrets_manager_oracle_asm_access_role_arn: "String",
+    #         secrets_manager_security_db_encryption_secret_id: "String",
+    #         secrets_manager_security_db_encryption_access_role_arn: "String",
+    #       },
+    #       microsoft_sql_server_settings: {
+    #         server_name: "String",
+    #         port: 1,
+    #         database_name: "String",
+    #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
+    #         certificate_arn: "String",
+    #       },
+    #     },
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #         resource_arn: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_provider.data_provider_name #=> String
+    #   resp.data_provider.data_provider_arn #=> String
+    #   resp.data_provider.data_provider_creation_time #=> Time
+    #   resp.data_provider.description #=> String
+    #   resp.data_provider.engine #=> String
+    #   resp.data_provider.settings.postgre_sql_settings.server_name #=> String
+    #   resp.data_provider.settings.postgre_sql_settings.port #=> Integer
+    #   resp.data_provider.settings.postgre_sql_settings.database_name #=> String
+    #   resp.data_provider.settings.postgre_sql_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_provider.settings.postgre_sql_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.my_sql_settings.server_name #=> String
+    #   resp.data_provider.settings.my_sql_settings.port #=> Integer
+    #   resp.data_provider.settings.my_sql_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_provider.settings.my_sql_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.oracle_settings.server_name #=> String
+    #   resp.data_provider.settings.oracle_settings.port #=> Integer
+    #   resp.data_provider.settings.oracle_settings.database_name #=> String
+    #   resp.data_provider.settings.oracle_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_provider.settings.oracle_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.oracle_settings.asm_server #=> String
+    #   resp.data_provider.settings.oracle_settings.secrets_manager_oracle_asm_secret_id #=> String
+    #   resp.data_provider.settings.oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
+    #   resp.data_provider.settings.oracle_settings.secrets_manager_security_db_encryption_secret_id #=> String
+    #   resp.data_provider.settings.oracle_settings.secrets_manager_security_db_encryption_access_role_arn #=> String
+    #   resp.data_provider.settings.microsoft_sql_server_settings.server_name #=> String
+    #   resp.data_provider.settings.microsoft_sql_server_settings.port #=> Integer
+    #   resp.data_provider.settings.microsoft_sql_server_settings.database_name #=> String
+    #   resp.data_provider.settings.microsoft_sql_server_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_provider.settings.microsoft_sql_server_settings.certificate_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateDataProvider AWS API Documentation
+    #
+    # @overload create_data_provider(params = {})
+    # @param [Hash] params ({})
+    def create_data_provider(params = {}, options = {})
+      req = build_request(:create_data_provider, params)
+      req.send_request(options)
+    end
+
     # Creates an endpoint using the provided settings.
     #
     # <note markdown="1"> For a MySQL source or target endpoint, don't explicitly specify the
@@ -1132,6 +1247,8 @@ module Aws::DatabaseMigrationService
     #       map_boolean_as_boolean: false,
     #       map_jsonb_as_clob: false,
     #       map_long_varchar_as: "wstring", # accepts wstring, clob, nclob
+    #       database_mode: "default", # accepts default, babelfish
+    #       babelfish_database_name: "String",
     #     },
     #     my_sql_settings: {
     #       after_connect_script: "String",
@@ -1458,6 +1575,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.map_boolean_as_boolean #=> Boolean
     #   resp.endpoint.postgre_sql_settings.map_jsonb_as_clob #=> Boolean
     #   resp.endpoint.postgre_sql_settings.map_long_varchar_as #=> String, one of "wstring", "clob", "nclob"
+    #   resp.endpoint.postgre_sql_settings.database_mode #=> String, one of "default", "babelfish"
+    #   resp.endpoint.postgre_sql_settings.babelfish_database_name #=> String
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
     #   resp.endpoint.my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoint.my_sql_settings.database_name #=> String
@@ -1757,6 +1876,217 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def create_fleet_advisor_collector(params = {}, options = {})
       req = build_request(:create_fleet_advisor_collector, params)
+      req.send_request(options)
+    end
+
+    # Creates the instance profile using the specified parameters.
+    #
+    # @option params [String] :availability_zone
+    #   The Availability Zone where the instance profile will be created. The
+    #   default value is a random, system-chosen Availability Zone in the
+    #   Amazon Web Services Region where your data provider is created, for
+    #   examplem `us-east-1d`.
+    #
+    # @option params [String] :kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key that is used to encrypt
+    #   the connection parameters for the instance profile.
+    #
+    #   If you don't specify a value for the `KmsKeyArn` parameter, then DMS
+    #   uses your default encryption key.
+    #
+    #   KMS creates the default encryption key for your Amazon Web Services
+    #   account. Your Amazon Web Services account has a different default
+    #   encryption key for each Amazon Web Services Region.
+    #
+    # @option params [Boolean] :publicly_accessible
+    #   Specifies the accessibility options for the instance profile. A value
+    #   of `true` represents an instance profile with a public IP address. A
+    #   value of `false` represents an instance profile with a private IP
+    #   address. The default value is `true`.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   One or more tags to be assigned to the instance profile.
+    #
+    # @option params [String] :network_type
+    #   Specifies the network type for the instance profile. A value of `IPV4`
+    #   represents an instance profile with IPv4 network type and only
+    #   supports IPv4 addressing. A value of `IPV6` represents an instance
+    #   profile with IPv6 network type and only supports IPv6 addressing. A
+    #   value of `DUAL` represents an instance profile with dual network type
+    #   that supports IPv4 and IPv6 addressing.
+    #
+    # @option params [String] :instance_profile_name
+    #   A user-friendly name for the instance profile.
+    #
+    # @option params [String] :description
+    #   A user-friendly description of the instance profile.
+    #
+    # @option params [String] :subnet_group_identifier
+    #   A subnet group to associate with the instance profile.
+    #
+    # @option params [Array<String>] :vpc_security_groups
+    #   Specifies the VPC security group names to be used with the instance
+    #   profile. The VPC security group must work with the VPC containing the
+    #   instance profile.
+    #
+    # @return [Types::CreateInstanceProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateInstanceProfileResponse#instance_profile #instance_profile} => Types::InstanceProfile
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_instance_profile({
+    #     availability_zone: "String",
+    #     kms_key_arn: "String",
+    #     publicly_accessible: false,
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #         resource_arn: "String",
+    #       },
+    #     ],
+    #     network_type: "String",
+    #     instance_profile_name: "String",
+    #     description: "String",
+    #     subnet_group_identifier: "String",
+    #     vpc_security_groups: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_profile.instance_profile_arn #=> String
+    #   resp.instance_profile.availability_zone #=> String
+    #   resp.instance_profile.kms_key_arn #=> String
+    #   resp.instance_profile.publicly_accessible #=> Boolean
+    #   resp.instance_profile.network_type #=> String
+    #   resp.instance_profile.instance_profile_name #=> String
+    #   resp.instance_profile.description #=> String
+    #   resp.instance_profile.instance_profile_creation_time #=> Time
+    #   resp.instance_profile.subnet_group_identifier #=> String
+    #   resp.instance_profile.vpc_security_groups #=> Array
+    #   resp.instance_profile.vpc_security_groups[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateInstanceProfile AWS API Documentation
+    #
+    # @overload create_instance_profile(params = {})
+    # @param [Hash] params ({})
+    def create_instance_profile(params = {}, options = {})
+      req = build_request(:create_instance_profile, params)
+      req.send_request(options)
+    end
+
+    # Creates the migration project using the specified parameters.
+    #
+    # You can run this action only after you create an instance profile and
+    # data providers using [CreateInstanceProfile][1] and
+    # [CreateDataProvider][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateInstanceProfile.html
+    # [2]: https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateDataProvider.html
+    #
+    # @option params [String] :migration_project_name
+    #   A user-friendly name for the migration project.
+    #
+    # @option params [required, Array<Types::DataProviderDescriptorDefinition>] :source_data_provider_descriptors
+    #   Information about the source data provider, including the name, ARN,
+    #   and Secrets Manager parameters.
+    #
+    # @option params [required, Array<Types::DataProviderDescriptorDefinition>] :target_data_provider_descriptors
+    #   Information about the target data provider, including the name, ARN,
+    #   and Amazon Web Services Secrets Manager parameters.
+    #
+    # @option params [required, String] :instance_profile_identifier
+    #   The identifier of the associated instance profile. Identifiers must
+    #   begin with a letter and must contain only ASCII letters, digits, and
+    #   hyphens. They can't end with a hyphen, or contain two consecutive
+    #   hyphens.
+    #
+    # @option params [String] :transformation_rules
+    #   The settings in JSON format for migration rules. Migration rules make
+    #   it possible for you to change the object names according to the rules
+    #   that you specify. For example, you can change an object name to
+    #   lowercase or uppercase, add or remove a prefix or suffix, or rename
+    #   objects.
+    #
+    # @option params [String] :description
+    #   A user-friendly description of the migration project.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   One or more tags to be assigned to the migration project.
+    #
+    # @option params [Types::SCApplicationAttributes] :schema_conversion_application_attributes
+    #   The schema conversion application attributes, including the Amazon S3
+    #   bucket name and Amazon S3 role ARN.
+    #
+    # @return [Types::CreateMigrationProjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMigrationProjectResponse#migration_project #migration_project} => Types::MigrationProject
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_migration_project({
+    #     migration_project_name: "String",
+    #     source_data_provider_descriptors: [ # required
+    #       {
+    #         data_provider_identifier: "String", # required
+    #         secrets_manager_secret_id: "String",
+    #         secrets_manager_access_role_arn: "String",
+    #       },
+    #     ],
+    #     target_data_provider_descriptors: [ # required
+    #       {
+    #         data_provider_identifier: "String", # required
+    #         secrets_manager_secret_id: "String",
+    #         secrets_manager_access_role_arn: "String",
+    #       },
+    #     ],
+    #     instance_profile_identifier: "String", # required
+    #     transformation_rules: "String",
+    #     description: "String",
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #         resource_arn: "String",
+    #       },
+    #     ],
+    #     schema_conversion_application_attributes: {
+    #       s3_bucket_path: "String",
+    #       s3_bucket_role_arn: "String",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.migration_project.migration_project_name #=> String
+    #   resp.migration_project.migration_project_arn #=> String
+    #   resp.migration_project.migration_project_creation_time #=> Time
+    #   resp.migration_project.source_data_provider_descriptors #=> Array
+    #   resp.migration_project.source_data_provider_descriptors[0].secrets_manager_secret_id #=> String
+    #   resp.migration_project.source_data_provider_descriptors[0].secrets_manager_access_role_arn #=> String
+    #   resp.migration_project.source_data_provider_descriptors[0].data_provider_name #=> String
+    #   resp.migration_project.source_data_provider_descriptors[0].data_provider_arn #=> String
+    #   resp.migration_project.target_data_provider_descriptors #=> Array
+    #   resp.migration_project.target_data_provider_descriptors[0].secrets_manager_secret_id #=> String
+    #   resp.migration_project.target_data_provider_descriptors[0].secrets_manager_access_role_arn #=> String
+    #   resp.migration_project.target_data_provider_descriptors[0].data_provider_name #=> String
+    #   resp.migration_project.target_data_provider_descriptors[0].data_provider_arn #=> String
+    #   resp.migration_project.instance_profile_arn #=> String
+    #   resp.migration_project.instance_profile_name #=> String
+    #   resp.migration_project.transformation_rules #=> String
+    #   resp.migration_project.description #=> String
+    #   resp.migration_project.schema_conversion_application_attributes.s3_bucket_path #=> String
+    #   resp.migration_project.schema_conversion_application_attributes.s3_bucket_role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateMigrationProject AWS API Documentation
+    #
+    # @overload create_migration_project(params = {})
+    # @param [Hash] params ({})
+    def create_migration_project(params = {}, options = {})
+      req = build_request(:create_migration_project, params)
       req.send_request(options)
     end
 
@@ -2659,6 +2989,67 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Deletes the specified data provider.
+    #
+    # <note markdown="1"> All migration projects associated with the data provider must be
+    # deleted or modified before you can delete the data provider.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :data_provider_identifier
+    #   The identifier of the data provider to delete.
+    #
+    # @return [Types::DeleteDataProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDataProviderResponse#data_provider #data_provider} => Types::DataProvider
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_data_provider({
+    #     data_provider_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_provider.data_provider_name #=> String
+    #   resp.data_provider.data_provider_arn #=> String
+    #   resp.data_provider.data_provider_creation_time #=> Time
+    #   resp.data_provider.description #=> String
+    #   resp.data_provider.engine #=> String
+    #   resp.data_provider.settings.postgre_sql_settings.server_name #=> String
+    #   resp.data_provider.settings.postgre_sql_settings.port #=> Integer
+    #   resp.data_provider.settings.postgre_sql_settings.database_name #=> String
+    #   resp.data_provider.settings.postgre_sql_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_provider.settings.postgre_sql_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.my_sql_settings.server_name #=> String
+    #   resp.data_provider.settings.my_sql_settings.port #=> Integer
+    #   resp.data_provider.settings.my_sql_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_provider.settings.my_sql_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.oracle_settings.server_name #=> String
+    #   resp.data_provider.settings.oracle_settings.port #=> Integer
+    #   resp.data_provider.settings.oracle_settings.database_name #=> String
+    #   resp.data_provider.settings.oracle_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_provider.settings.oracle_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.oracle_settings.asm_server #=> String
+    #   resp.data_provider.settings.oracle_settings.secrets_manager_oracle_asm_secret_id #=> String
+    #   resp.data_provider.settings.oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
+    #   resp.data_provider.settings.oracle_settings.secrets_manager_security_db_encryption_secret_id #=> String
+    #   resp.data_provider.settings.oracle_settings.secrets_manager_security_db_encryption_access_role_arn #=> String
+    #   resp.data_provider.settings.microsoft_sql_server_settings.server_name #=> String
+    #   resp.data_provider.settings.microsoft_sql_server_settings.port #=> Integer
+    #   resp.data_provider.settings.microsoft_sql_server_settings.database_name #=> String
+    #   resp.data_provider.settings.microsoft_sql_server_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_provider.settings.microsoft_sql_server_settings.certificate_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteDataProvider AWS API Documentation
+    #
+    # @overload delete_data_provider(params = {})
+    # @param [Hash] params ({})
+    def delete_data_provider(params = {}, options = {})
+      req = build_request(:delete_data_provider, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified endpoint.
     #
     # <note markdown="1"> All tasks associated with the endpoint must be deleted before you can
@@ -2879,6 +3270,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.map_boolean_as_boolean #=> Boolean
     #   resp.endpoint.postgre_sql_settings.map_jsonb_as_clob #=> Boolean
     #   resp.endpoint.postgre_sql_settings.map_long_varchar_as #=> String, one of "wstring", "clob", "nclob"
+    #   resp.endpoint.postgre_sql_settings.database_mode #=> String, one of "default", "babelfish"
+    #   resp.endpoint.postgre_sql_settings.babelfish_database_name #=> String
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
     #   resp.endpoint.my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoint.my_sql_settings.database_name #=> String
@@ -3106,6 +3499,100 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def delete_fleet_advisor_databases(params = {}, options = {})
       req = build_request(:delete_fleet_advisor_databases, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified instance profile.
+    #
+    # <note markdown="1"> All migration projects associated with the instance profile must be
+    # deleted or modified before you can delete the instance profile.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :instance_profile_identifier
+    #   The identifier of the instance profile to delete.
+    #
+    # @return [Types::DeleteInstanceProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteInstanceProfileResponse#instance_profile #instance_profile} => Types::InstanceProfile
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_instance_profile({
+    #     instance_profile_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_profile.instance_profile_arn #=> String
+    #   resp.instance_profile.availability_zone #=> String
+    #   resp.instance_profile.kms_key_arn #=> String
+    #   resp.instance_profile.publicly_accessible #=> Boolean
+    #   resp.instance_profile.network_type #=> String
+    #   resp.instance_profile.instance_profile_name #=> String
+    #   resp.instance_profile.description #=> String
+    #   resp.instance_profile.instance_profile_creation_time #=> Time
+    #   resp.instance_profile.subnet_group_identifier #=> String
+    #   resp.instance_profile.vpc_security_groups #=> Array
+    #   resp.instance_profile.vpc_security_groups[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteInstanceProfile AWS API Documentation
+    #
+    # @overload delete_instance_profile(params = {})
+    # @param [Hash] params ({})
+    def delete_instance_profile(params = {}, options = {})
+      req = build_request(:delete_instance_profile, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified migration project.
+    #
+    # <note markdown="1"> The migration project must be closed before you can delete it.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :migration_project_identifier
+    #   The name or Amazon Resource Name (ARN) of the migration project to
+    #   delete.
+    #
+    # @return [Types::DeleteMigrationProjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteMigrationProjectResponse#migration_project #migration_project} => Types::MigrationProject
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_migration_project({
+    #     migration_project_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.migration_project.migration_project_name #=> String
+    #   resp.migration_project.migration_project_arn #=> String
+    #   resp.migration_project.migration_project_creation_time #=> Time
+    #   resp.migration_project.source_data_provider_descriptors #=> Array
+    #   resp.migration_project.source_data_provider_descriptors[0].secrets_manager_secret_id #=> String
+    #   resp.migration_project.source_data_provider_descriptors[0].secrets_manager_access_role_arn #=> String
+    #   resp.migration_project.source_data_provider_descriptors[0].data_provider_name #=> String
+    #   resp.migration_project.source_data_provider_descriptors[0].data_provider_arn #=> String
+    #   resp.migration_project.target_data_provider_descriptors #=> Array
+    #   resp.migration_project.target_data_provider_descriptors[0].secrets_manager_secret_id #=> String
+    #   resp.migration_project.target_data_provider_descriptors[0].secrets_manager_access_role_arn #=> String
+    #   resp.migration_project.target_data_provider_descriptors[0].data_provider_name #=> String
+    #   resp.migration_project.target_data_provider_descriptors[0].data_provider_arn #=> String
+    #   resp.migration_project.instance_profile_arn #=> String
+    #   resp.migration_project.instance_profile_name #=> String
+    #   resp.migration_project.transformation_rules #=> String
+    #   resp.migration_project.description #=> String
+    #   resp.migration_project.schema_conversion_application_attributes.s3_bucket_path #=> String
+    #   resp.migration_project.schema_conversion_application_attributes.s3_bucket_role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteMigrationProject AWS API Documentation
+    #
+    # @overload delete_migration_project(params = {})
+    # @param [Hash] params ({})
+    def delete_migration_project(params = {}, options = {})
+      req = build_request(:delete_migration_project, params)
       req.send_request(options)
     end
 
@@ -3806,6 +4293,124 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Returns configuration parameters for a schema conversion project.
+    #
+    # @option params [required, String] :migration_project_identifier
+    #   The name or Amazon Resource Name (ARN) for the schema conversion
+    #   project to describe.
+    #
+    # @return [Types::DescribeConversionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeConversionConfigurationResponse#migration_project_identifier #migration_project_identifier} => String
+    #   * {Types::DescribeConversionConfigurationResponse#conversion_configuration #conversion_configuration} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_conversion_configuration({
+    #     migration_project_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.migration_project_identifier #=> String
+    #   resp.conversion_configuration #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeConversionConfiguration AWS API Documentation
+    #
+    # @overload describe_conversion_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_conversion_configuration(params = {}, options = {})
+      req = build_request(:describe_conversion_configuration, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of data providers for your account in the
+    # current region.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters applied to the data providers described in the form of
+    #   key-value pairs.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, DMS includes a
+    #   pagination token in the response so that you can retrieve the
+    #   remaining results.
+    #
+    # @option params [String] :marker
+    #   Specifies the unique pagination token that makes it possible to
+    #   display the next page of results. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #
+    #   If `Marker` is returned by a previous response, there are more results
+    #   available. The value of `Marker` is a unique pagination token for each
+    #   page. To retrieve the next page, make the call again using the
+    #   returned token and keeping all other arguments unchanged.
+    #
+    # @return [Types::DescribeDataProvidersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDataProvidersResponse#marker #marker} => String
+    #   * {Types::DescribeDataProvidersResponse#data_providers #data_providers} => Array&lt;Types::DataProvider&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_data_providers({
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.data_providers #=> Array
+    #   resp.data_providers[0].data_provider_name #=> String
+    #   resp.data_providers[0].data_provider_arn #=> String
+    #   resp.data_providers[0].data_provider_creation_time #=> Time
+    #   resp.data_providers[0].description #=> String
+    #   resp.data_providers[0].engine #=> String
+    #   resp.data_providers[0].settings.postgre_sql_settings.server_name #=> String
+    #   resp.data_providers[0].settings.postgre_sql_settings.port #=> Integer
+    #   resp.data_providers[0].settings.postgre_sql_settings.database_name #=> String
+    #   resp.data_providers[0].settings.postgre_sql_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_providers[0].settings.postgre_sql_settings.certificate_arn #=> String
+    #   resp.data_providers[0].settings.my_sql_settings.server_name #=> String
+    #   resp.data_providers[0].settings.my_sql_settings.port #=> Integer
+    #   resp.data_providers[0].settings.my_sql_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_providers[0].settings.my_sql_settings.certificate_arn #=> String
+    #   resp.data_providers[0].settings.oracle_settings.server_name #=> String
+    #   resp.data_providers[0].settings.oracle_settings.port #=> Integer
+    #   resp.data_providers[0].settings.oracle_settings.database_name #=> String
+    #   resp.data_providers[0].settings.oracle_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_providers[0].settings.oracle_settings.certificate_arn #=> String
+    #   resp.data_providers[0].settings.oracle_settings.asm_server #=> String
+    #   resp.data_providers[0].settings.oracle_settings.secrets_manager_oracle_asm_secret_id #=> String
+    #   resp.data_providers[0].settings.oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
+    #   resp.data_providers[0].settings.oracle_settings.secrets_manager_security_db_encryption_secret_id #=> String
+    #   resp.data_providers[0].settings.oracle_settings.secrets_manager_security_db_encryption_access_role_arn #=> String
+    #   resp.data_providers[0].settings.microsoft_sql_server_settings.server_name #=> String
+    #   resp.data_providers[0].settings.microsoft_sql_server_settings.port #=> Integer
+    #   resp.data_providers[0].settings.microsoft_sql_server_settings.database_name #=> String
+    #   resp.data_providers[0].settings.microsoft_sql_server_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_providers[0].settings.microsoft_sql_server_settings.certificate_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeDataProviders AWS API Documentation
+    #
+    # @overload describe_data_providers(params = {})
+    # @param [Hash] params ({})
+    def describe_data_providers(params = {}, options = {})
+      req = build_request(:describe_data_providers, params)
+      req.send_request(options)
+    end
+
     # Returns information about the possible endpoint settings available
     # when you create an endpoint for a specific database engine.
     #
@@ -4195,6 +4800,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].postgre_sql_settings.map_boolean_as_boolean #=> Boolean
     #   resp.endpoints[0].postgre_sql_settings.map_jsonb_as_clob #=> Boolean
     #   resp.endpoints[0].postgre_sql_settings.map_long_varchar_as #=> String, one of "wstring", "clob", "nclob"
+    #   resp.endpoints[0].postgre_sql_settings.database_mode #=> String, one of "default", "babelfish"
+    #   resp.endpoints[0].postgre_sql_settings.babelfish_database_name #=> String
     #   resp.endpoints[0].my_sql_settings.after_connect_script #=> String
     #   resp.endpoints[0].my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoints[0].my_sql_settings.database_name #=> String
@@ -4338,6 +4945,57 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def describe_endpoints(params = {}, options = {})
       req = build_request(:describe_endpoints, params)
+      req.send_request(options)
+    end
+
+    # Returns information about the replication instance versions used in
+    # the project.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   marker, up to the value specified by `MaxRecords`.
+    #
+    # @return [Types::DescribeEngineVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEngineVersionsResponse#engine_versions #engine_versions} => Array&lt;Types::EngineVersion&gt;
+    #   * {Types::DescribeEngineVersionsResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_engine_versions({
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.engine_versions #=> Array
+    #   resp.engine_versions[0].version #=> String
+    #   resp.engine_versions[0].lifecycle #=> String
+    #   resp.engine_versions[0].release_status #=> String, one of "beta", "prod"
+    #   resp.engine_versions[0].launch_date #=> Time
+    #   resp.engine_versions[0].auto_upgrade_date #=> Time
+    #   resp.engine_versions[0].deprecation_date #=> Time
+    #   resp.engine_versions[0].force_upgrade_date #=> Time
+    #   resp.engine_versions[0].available_upgrades #=> Array
+    #   resp.engine_versions[0].available_upgrades[0] #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEngineVersions AWS API Documentation
+    #
+    # @overload describe_engine_versions(params = {})
+    # @param [Hash] params ({})
+    def describe_engine_versions(params = {}, options = {})
+      req = build_request(:describe_engine_versions, params)
       req.send_request(options)
     end
 
@@ -4558,6 +5216,76 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def describe_events(params = {}, options = {})
       req = build_request(:describe_events, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of extension pack associations for the
+    # specified migration project. An extension pack is an add-on module
+    # that emulates functions present in a source database that are required
+    # when converting objects to the target database.
+    #
+    # @option params [required, String] :migration_project_identifier
+    #   The name or Amazon Resource Name (ARN) for the migration project.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters applied to the extension pack associations described in the
+    #   form of key-value pairs.
+    #
+    # @option params [String] :marker
+    #   Specifies the unique pagination token that makes it possible to
+    #   display the next page of results. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #
+    #   If `Marker` is returned by a previous response, there are more results
+    #   available. The value of `Marker` is a unique pagination token for each
+    #   page. To retrieve the next page, make the call again using the
+    #   returned token and keeping all other arguments unchanged.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, DMS includes a
+    #   pagination token in the response so that you can retrieve the
+    #   remaining results.
+    #
+    # @return [Types::DescribeExtensionPackAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeExtensionPackAssociationsResponse#marker #marker} => String
+    #   * {Types::DescribeExtensionPackAssociationsResponse#requests #requests} => Array&lt;Types::SchemaConversionRequest&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_extension_pack_associations({
+    #     migration_project_identifier: "String", # required
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     marker: "String",
+    #     max_records: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.requests #=> Array
+    #   resp.requests[0].status #=> String
+    #   resp.requests[0].request_identifier #=> String
+    #   resp.requests[0].migration_project_arn #=> String
+    #   resp.requests[0].error.default_error_details.message #=> String
+    #   resp.requests[0].export_sql_details.s3_object_key #=> String
+    #   resp.requests[0].export_sql_details.object_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeExtensionPackAssociations AWS API Documentation
+    #
+    # @overload describe_extension_pack_associations(params = {})
+    # @param [Hash] params ({})
+    def describe_extension_pack_associations(params = {}, options = {})
+      req = build_request(:describe_extension_pack_associations, params)
       req.send_request(options)
     end
 
@@ -4911,6 +5639,486 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def describe_fleet_advisor_schemas(params = {}, options = {})
       req = build_request(:describe_fleet_advisor_schemas, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of instance profiles for your account in the
+    # current region.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters applied to the instance profiles described in the form of
+    #   key-value pairs.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, DMS includes a
+    #   pagination token in the response so that you can retrieve the
+    #   remaining results.
+    #
+    # @option params [String] :marker
+    #   Specifies the unique pagination token that makes it possible to
+    #   display the next page of results. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #
+    #   If `Marker` is returned by a previous response, there are more results
+    #   available. The value of `Marker` is a unique pagination token for each
+    #   page. To retrieve the next page, make the call again using the
+    #   returned token and keeping all other arguments unchanged.
+    #
+    # @return [Types::DescribeInstanceProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInstanceProfilesResponse#marker #marker} => String
+    #   * {Types::DescribeInstanceProfilesResponse#instance_profiles #instance_profiles} => Array&lt;Types::InstanceProfile&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_instance_profiles({
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.instance_profiles #=> Array
+    #   resp.instance_profiles[0].instance_profile_arn #=> String
+    #   resp.instance_profiles[0].availability_zone #=> String
+    #   resp.instance_profiles[0].kms_key_arn #=> String
+    #   resp.instance_profiles[0].publicly_accessible #=> Boolean
+    #   resp.instance_profiles[0].network_type #=> String
+    #   resp.instance_profiles[0].instance_profile_name #=> String
+    #   resp.instance_profiles[0].description #=> String
+    #   resp.instance_profiles[0].instance_profile_creation_time #=> Time
+    #   resp.instance_profiles[0].subnet_group_identifier #=> String
+    #   resp.instance_profiles[0].vpc_security_groups #=> Array
+    #   resp.instance_profiles[0].vpc_security_groups[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeInstanceProfiles AWS API Documentation
+    #
+    # @overload describe_instance_profiles(params = {})
+    # @param [Hash] params ({})
+    def describe_instance_profiles(params = {}, options = {})
+      req = build_request(:describe_instance_profiles, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of metadata model assessments for your
+    # account in the current region.
+    #
+    # @option params [required, String] :migration_project_identifier
+    #   The name or Amazon Resource Name (ARN) of the migration project.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters applied to the metadata model assessments described in the
+    #   form of key-value pairs.
+    #
+    # @option params [String] :marker
+    #   Specifies the unique pagination token that makes it possible to
+    #   display the next page of results. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #
+    #   If `Marker` is returned by a previous response, there are more results
+    #   available. The value of `Marker` is a unique pagination token for each
+    #   page. To retrieve the next page, make the call again using the
+    #   returned token and keeping all other arguments unchanged.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, DMS includes a
+    #   pagination token in the response so that you can retrieve the
+    #   remaining results.
+    #
+    # @return [Types::DescribeMetadataModelAssessmentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMetadataModelAssessmentsResponse#marker #marker} => String
+    #   * {Types::DescribeMetadataModelAssessmentsResponse#requests #requests} => Array&lt;Types::SchemaConversionRequest&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_metadata_model_assessments({
+    #     migration_project_identifier: "String", # required
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     marker: "String",
+    #     max_records: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.requests #=> Array
+    #   resp.requests[0].status #=> String
+    #   resp.requests[0].request_identifier #=> String
+    #   resp.requests[0].migration_project_arn #=> String
+    #   resp.requests[0].error.default_error_details.message #=> String
+    #   resp.requests[0].export_sql_details.s3_object_key #=> String
+    #   resp.requests[0].export_sql_details.object_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeMetadataModelAssessments AWS API Documentation
+    #
+    # @overload describe_metadata_model_assessments(params = {})
+    # @param [Hash] params ({})
+    def describe_metadata_model_assessments(params = {}, options = {})
+      req = build_request(:describe_metadata_model_assessments, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of metadata model conversions for a migration
+    # project.
+    #
+    # @option params [required, String] :migration_project_identifier
+    #   The migration project name or Amazon Resource Name (ARN).
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters applied to the metadata model conversions described in the
+    #   form of key-value pairs.
+    #
+    # @option params [String] :marker
+    #   Specifies the unique pagination token that makes it possible to
+    #   display the next page of results. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #
+    #   If `Marker` is returned by a previous response, there are more results
+    #   available. The value of `Marker` is a unique pagination token for each
+    #   page. To retrieve the next page, make the call again using the
+    #   returned token and keeping all other arguments unchanged.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, DMS includes a
+    #   pagination token in the response so that you can retrieve the
+    #   remaining results.
+    #
+    # @return [Types::DescribeMetadataModelConversionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMetadataModelConversionsResponse#marker #marker} => String
+    #   * {Types::DescribeMetadataModelConversionsResponse#requests #requests} => Array&lt;Types::SchemaConversionRequest&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_metadata_model_conversions({
+    #     migration_project_identifier: "String", # required
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     marker: "String",
+    #     max_records: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.requests #=> Array
+    #   resp.requests[0].status #=> String
+    #   resp.requests[0].request_identifier #=> String
+    #   resp.requests[0].migration_project_arn #=> String
+    #   resp.requests[0].error.default_error_details.message #=> String
+    #   resp.requests[0].export_sql_details.s3_object_key #=> String
+    #   resp.requests[0].export_sql_details.object_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeMetadataModelConversions AWS API Documentation
+    #
+    # @overload describe_metadata_model_conversions(params = {})
+    # @param [Hash] params ({})
+    def describe_metadata_model_conversions(params = {}, options = {})
+      req = build_request(:describe_metadata_model_conversions, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of metadata model exports.
+    #
+    # @option params [required, String] :migration_project_identifier
+    #   The migration project name or Amazon Resource Name (ARN).
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters applied to the metadata model exports described in the form of
+    #   key-value pairs.
+    #
+    # @option params [String] :marker
+    #   Specifies the unique pagination token that makes it possible to
+    #   display the next page of results. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #
+    #   If `Marker` is returned by a previous response, there are more results
+    #   available. The value of `Marker` is a unique pagination token for each
+    #   page. To retrieve the next page, make the call again using the
+    #   returned token and keeping all other arguments unchanged.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, DMS includes a
+    #   pagination token in the response so that you can retrieve the
+    #   remaining results.
+    #
+    # @return [Types::DescribeMetadataModelExportsAsScriptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMetadataModelExportsAsScriptResponse#marker #marker} => String
+    #   * {Types::DescribeMetadataModelExportsAsScriptResponse#requests #requests} => Array&lt;Types::SchemaConversionRequest&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_metadata_model_exports_as_script({
+    #     migration_project_identifier: "String", # required
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     marker: "String",
+    #     max_records: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.requests #=> Array
+    #   resp.requests[0].status #=> String
+    #   resp.requests[0].request_identifier #=> String
+    #   resp.requests[0].migration_project_arn #=> String
+    #   resp.requests[0].error.default_error_details.message #=> String
+    #   resp.requests[0].export_sql_details.s3_object_key #=> String
+    #   resp.requests[0].export_sql_details.object_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeMetadataModelExportsAsScript AWS API Documentation
+    #
+    # @overload describe_metadata_model_exports_as_script(params = {})
+    # @param [Hash] params ({})
+    def describe_metadata_model_exports_as_script(params = {}, options = {})
+      req = build_request(:describe_metadata_model_exports_as_script, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of metadata model exports.
+    #
+    # @option params [required, String] :migration_project_identifier
+    #   The migration project name or Amazon Resource Name (ARN).
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters applied to the metadata model exports described in the form of
+    #   key-value pairs.
+    #
+    # @option params [String] :marker
+    #   Specifies the unique pagination token that makes it possible to
+    #   display the next page of results. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #
+    #   If `Marker` is returned by a previous response, there are more results
+    #   available. The value of `Marker` is a unique pagination token for each
+    #   page. To retrieve the next page, make the call again using the
+    #   returned token and keeping all other arguments unchanged.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, DMS includes a
+    #   pagination token in the response so that you can retrieve the
+    #   remaining results.
+    #
+    # @return [Types::DescribeMetadataModelExportsToTargetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMetadataModelExportsToTargetResponse#marker #marker} => String
+    #   * {Types::DescribeMetadataModelExportsToTargetResponse#requests #requests} => Array&lt;Types::SchemaConversionRequest&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_metadata_model_exports_to_target({
+    #     migration_project_identifier: "String", # required
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     marker: "String",
+    #     max_records: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.requests #=> Array
+    #   resp.requests[0].status #=> String
+    #   resp.requests[0].request_identifier #=> String
+    #   resp.requests[0].migration_project_arn #=> String
+    #   resp.requests[0].error.default_error_details.message #=> String
+    #   resp.requests[0].export_sql_details.s3_object_key #=> String
+    #   resp.requests[0].export_sql_details.object_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeMetadataModelExportsToTarget AWS API Documentation
+    #
+    # @overload describe_metadata_model_exports_to_target(params = {})
+    # @param [Hash] params ({})
+    def describe_metadata_model_exports_to_target(params = {}, options = {})
+      req = build_request(:describe_metadata_model_exports_to_target, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of metadata model imports.
+    #
+    # @option params [required, String] :migration_project_identifier
+    #   The migration project name or Amazon Resource Name (ARN).
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters applied to the metadata model imports described in the form of
+    #   key-value pairs.
+    #
+    # @option params [String] :marker
+    #   Specifies the unique pagination token that makes it possible to
+    #   display the next page of results. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #
+    #   If `Marker` is returned by a previous response, there are more results
+    #   available. The value of `Marker` is a unique pagination token for each
+    #   page. To retrieve the next page, make the call again using the
+    #   returned token and keeping all other arguments unchanged.
+    #
+    # @option params [Integer] :max_records
+    #   A paginated list of metadata model imports.
+    #
+    # @return [Types::DescribeMetadataModelImportsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMetadataModelImportsResponse#marker #marker} => String
+    #   * {Types::DescribeMetadataModelImportsResponse#requests #requests} => Array&lt;Types::SchemaConversionRequest&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_metadata_model_imports({
+    #     migration_project_identifier: "String", # required
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     marker: "String",
+    #     max_records: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.requests #=> Array
+    #   resp.requests[0].status #=> String
+    #   resp.requests[0].request_identifier #=> String
+    #   resp.requests[0].migration_project_arn #=> String
+    #   resp.requests[0].error.default_error_details.message #=> String
+    #   resp.requests[0].export_sql_details.s3_object_key #=> String
+    #   resp.requests[0].export_sql_details.object_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeMetadataModelImports AWS API Documentation
+    #
+    # @overload describe_metadata_model_imports(params = {})
+    # @param [Hash] params ({})
+    def describe_metadata_model_imports(params = {}, options = {})
+      req = build_request(:describe_metadata_model_imports, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of migration projects for your account in the
+    # current region.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters applied to the migration projects described in the form of
+    #   key-value pairs.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, DMS includes a
+    #   pagination token in the response so that you can retrieve the
+    #   remaining results.
+    #
+    # @option params [String] :marker
+    #   Specifies the unique pagination token that makes it possible to
+    #   display the next page of results. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #
+    #   If `Marker` is returned by a previous response, there are more results
+    #   available. The value of `Marker` is a unique pagination token for each
+    #   page. To retrieve the next page, make the call again using the
+    #   returned token and keeping all other arguments unchanged.
+    #
+    # @return [Types::DescribeMigrationProjectsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMigrationProjectsResponse#marker #marker} => String
+    #   * {Types::DescribeMigrationProjectsResponse#migration_projects #migration_projects} => Array&lt;Types::MigrationProject&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_migration_projects({
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.migration_projects #=> Array
+    #   resp.migration_projects[0].migration_project_name #=> String
+    #   resp.migration_projects[0].migration_project_arn #=> String
+    #   resp.migration_projects[0].migration_project_creation_time #=> Time
+    #   resp.migration_projects[0].source_data_provider_descriptors #=> Array
+    #   resp.migration_projects[0].source_data_provider_descriptors[0].secrets_manager_secret_id #=> String
+    #   resp.migration_projects[0].source_data_provider_descriptors[0].secrets_manager_access_role_arn #=> String
+    #   resp.migration_projects[0].source_data_provider_descriptors[0].data_provider_name #=> String
+    #   resp.migration_projects[0].source_data_provider_descriptors[0].data_provider_arn #=> String
+    #   resp.migration_projects[0].target_data_provider_descriptors #=> Array
+    #   resp.migration_projects[0].target_data_provider_descriptors[0].secrets_manager_secret_id #=> String
+    #   resp.migration_projects[0].target_data_provider_descriptors[0].secrets_manager_access_role_arn #=> String
+    #   resp.migration_projects[0].target_data_provider_descriptors[0].data_provider_name #=> String
+    #   resp.migration_projects[0].target_data_provider_descriptors[0].data_provider_arn #=> String
+    #   resp.migration_projects[0].instance_profile_arn #=> String
+    #   resp.migration_projects[0].instance_profile_name #=> String
+    #   resp.migration_projects[0].transformation_rules #=> String
+    #   resp.migration_projects[0].description #=> String
+    #   resp.migration_projects[0].schema_conversion_application_attributes.s3_bucket_path #=> String
+    #   resp.migration_projects[0].schema_conversion_application_attributes.s3_bucket_role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeMigrationProjects AWS API Documentation
+    #
+    # @overload describe_migration_projects(params = {})
+    # @param [Hash] params ({})
+    def describe_migration_projects(params = {}, options = {})
+      req = build_request(:describe_migration_projects, params)
       req.send_request(options)
     end
 
@@ -6282,6 +7490,52 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Saves a copy of a database migration assessment report to your Amazon
+    # S3 bucket. DMS can save your assessment report as a comma-separated
+    # value (CSV) or a PDF file.
+    #
+    # @option params [required, String] :migration_project_identifier
+    #   The migration project name or Amazon Resource Name (ARN).
+    #
+    # @option params [required, String] :selection_rules
+    #   A value that specifies the database objects to assess.
+    #
+    # @option params [String] :file_name
+    #   The name of the assessment file to create in your Amazon S3 bucket.
+    #
+    # @option params [Array<String>] :assessment_report_types
+    #   The file format of the assessment file.
+    #
+    # @return [Types::ExportMetadataModelAssessmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportMetadataModelAssessmentResponse#pdf_report #pdf_report} => Types::ExportMetadataModelAssessmentResultEntry
+    #   * {Types::ExportMetadataModelAssessmentResponse#csv_report #csv_report} => Types::ExportMetadataModelAssessmentResultEntry
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_metadata_model_assessment({
+    #     migration_project_identifier: "String", # required
+    #     selection_rules: "String", # required
+    #     file_name: "String",
+    #     assessment_report_types: ["pdf"], # accepts pdf, csv
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pdf_report.s3_object_key #=> String
+    #   resp.pdf_report.object_url #=> String
+    #   resp.csv_report.s3_object_key #=> String
+    #   resp.csv_report.object_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ExportMetadataModelAssessment AWS API Documentation
+    #
+    # @overload export_metadata_model_assessment(params = {})
+    # @param [Hash] params ({})
+    def export_metadata_model_assessment(params = {}, options = {})
+      req = build_request(:export_metadata_model_assessment, params)
+      req.send_request(options)
+    end
+
     # Uploads the specified certificate.
     #
     # @option params [required, String] :certificate_identifier
@@ -6419,6 +7673,167 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Modifies the specified schema conversion configuration using the
+    # provided parameters.
+    #
+    # @option params [required, String] :migration_project_identifier
+    #   The migration project name or Amazon Resource Name (ARN).
+    #
+    # @option params [required, String] :conversion_configuration
+    #   The new conversion configuration.
+    #
+    # @return [Types::ModifyConversionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyConversionConfigurationResponse#migration_project_identifier #migration_project_identifier} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_conversion_configuration({
+    #     migration_project_identifier: "String", # required
+    #     conversion_configuration: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.migration_project_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyConversionConfiguration AWS API Documentation
+    #
+    # @overload modify_conversion_configuration(params = {})
+    # @param [Hash] params ({})
+    def modify_conversion_configuration(params = {}, options = {})
+      req = build_request(:modify_conversion_configuration, params)
+      req.send_request(options)
+    end
+
+    # Modifies the specified data provider using the provided settings.
+    #
+    # <note markdown="1"> You must remove the data provider from all migration projects before
+    # you can modify it.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :data_provider_identifier
+    #   The identifier of the data provider. Identifiers must begin with a
+    #   letter and must contain only ASCII letters, digits, and hyphens. They
+    #   can't end with a hyphen, or contain two consecutive hyphens.
+    #
+    # @option params [String] :data_provider_name
+    #   The name of the data provider.
+    #
+    # @option params [String] :description
+    #   A user-friendly description of the data provider.
+    #
+    # @option params [String] :engine
+    #   The type of database engine for the data provider. Valid values
+    #   include `"aurora"`, `"aurora_postgresql"`, `"mysql"`, `"oracle"`,
+    #   `"postgres"`, and `"sqlserver"`. A value of `"aurora"` represents
+    #   Amazon Aurora MySQL-Compatible Edition.
+    #
+    # @option params [Boolean] :exact_settings
+    #   If this attribute is Y, the current call to `ModifyDataProvider`
+    #   replaces all existing data provider settings with the exact settings
+    #   that you specify in this call. If this attribute is N, the current
+    #   call to `ModifyDataProvider` does two things:
+    #
+    #   * It replaces any data provider settings that already exist with new
+    #     values, for settings with the same names.
+    #
+    #   * It creates new data provider settings that you specify in the call,
+    #     for settings with different names.
+    #
+    # @option params [Types::DataProviderSettings] :settings
+    #   The settings in JSON format for a data provider.
+    #
+    # @return [Types::ModifyDataProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyDataProviderResponse#data_provider #data_provider} => Types::DataProvider
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_data_provider({
+    #     data_provider_identifier: "String", # required
+    #     data_provider_name: "String",
+    #     description: "String",
+    #     engine: "String",
+    #     exact_settings: false,
+    #     settings: {
+    #       postgre_sql_settings: {
+    #         server_name: "String",
+    #         port: 1,
+    #         database_name: "String",
+    #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
+    #         certificate_arn: "String",
+    #       },
+    #       my_sql_settings: {
+    #         server_name: "String",
+    #         port: 1,
+    #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
+    #         certificate_arn: "String",
+    #       },
+    #       oracle_settings: {
+    #         server_name: "String",
+    #         port: 1,
+    #         database_name: "String",
+    #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
+    #         certificate_arn: "String",
+    #         asm_server: "String",
+    #         secrets_manager_oracle_asm_secret_id: "String",
+    #         secrets_manager_oracle_asm_access_role_arn: "String",
+    #         secrets_manager_security_db_encryption_secret_id: "String",
+    #         secrets_manager_security_db_encryption_access_role_arn: "String",
+    #       },
+    #       microsoft_sql_server_settings: {
+    #         server_name: "String",
+    #         port: 1,
+    #         database_name: "String",
+    #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
+    #         certificate_arn: "String",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_provider.data_provider_name #=> String
+    #   resp.data_provider.data_provider_arn #=> String
+    #   resp.data_provider.data_provider_creation_time #=> Time
+    #   resp.data_provider.description #=> String
+    #   resp.data_provider.engine #=> String
+    #   resp.data_provider.settings.postgre_sql_settings.server_name #=> String
+    #   resp.data_provider.settings.postgre_sql_settings.port #=> Integer
+    #   resp.data_provider.settings.postgre_sql_settings.database_name #=> String
+    #   resp.data_provider.settings.postgre_sql_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_provider.settings.postgre_sql_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.my_sql_settings.server_name #=> String
+    #   resp.data_provider.settings.my_sql_settings.port #=> Integer
+    #   resp.data_provider.settings.my_sql_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_provider.settings.my_sql_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.oracle_settings.server_name #=> String
+    #   resp.data_provider.settings.oracle_settings.port #=> Integer
+    #   resp.data_provider.settings.oracle_settings.database_name #=> String
+    #   resp.data_provider.settings.oracle_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_provider.settings.oracle_settings.certificate_arn #=> String
+    #   resp.data_provider.settings.oracle_settings.asm_server #=> String
+    #   resp.data_provider.settings.oracle_settings.secrets_manager_oracle_asm_secret_id #=> String
+    #   resp.data_provider.settings.oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
+    #   resp.data_provider.settings.oracle_settings.secrets_manager_security_db_encryption_secret_id #=> String
+    #   resp.data_provider.settings.oracle_settings.secrets_manager_security_db_encryption_access_role_arn #=> String
+    #   resp.data_provider.settings.microsoft_sql_server_settings.server_name #=> String
+    #   resp.data_provider.settings.microsoft_sql_server_settings.port #=> Integer
+    #   resp.data_provider.settings.microsoft_sql_server_settings.database_name #=> String
+    #   resp.data_provider.settings.microsoft_sql_server_settings.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.data_provider.settings.microsoft_sql_server_settings.certificate_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyDataProvider AWS API Documentation
+    #
+    # @overload modify_data_provider(params = {})
+    # @param [Hash] params ({})
+    def modify_data_provider(params = {}, options = {})
+      req = build_request(:modify_data_provider, params)
       req.send_request(options)
     end
 
@@ -6914,6 +8329,8 @@ module Aws::DatabaseMigrationService
     #       map_boolean_as_boolean: false,
     #       map_jsonb_as_clob: false,
     #       map_long_varchar_as: "wstring", # accepts wstring, clob, nclob
+    #       database_mode: "default", # accepts default, babelfish
+    #       babelfish_database_name: "String",
     #     },
     #     my_sql_settings: {
     #       after_connect_script: "String",
@@ -7240,6 +8657,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.map_boolean_as_boolean #=> Boolean
     #   resp.endpoint.postgre_sql_settings.map_jsonb_as_clob #=> Boolean
     #   resp.endpoint.postgre_sql_settings.map_long_varchar_as #=> String, one of "wstring", "clob", "nclob"
+    #   resp.endpoint.postgre_sql_settings.database_mode #=> String, one of "default", "babelfish"
+    #   resp.endpoint.postgre_sql_settings.babelfish_database_name #=> String
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
     #   resp.endpoint.my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoint.my_sql_settings.database_name #=> String
@@ -7439,6 +8858,204 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def modify_event_subscription(params = {}, options = {})
       req = build_request(:modify_event_subscription, params)
+      req.send_request(options)
+    end
+
+    # Modifies the specified instance profile using the provided parameters.
+    #
+    # <note markdown="1"> All migration projects associated with the instance profile must be
+    # deleted or modified before you can modify the instance profile.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :instance_profile_identifier
+    #   The identifier of the instance profile. Identifiers must begin with a
+    #   letter and must contain only ASCII letters, digits, and hyphens. They
+    #   can't end with a hyphen, or contain two consecutive hyphens.
+    #
+    # @option params [String] :availability_zone
+    #   The Availability Zone where the instance profile runs.
+    #
+    # @option params [String] :kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key that is used to encrypt
+    #   the connection parameters for the instance profile.
+    #
+    #   If you don't specify a value for the `KmsKeyArn` parameter, then DMS
+    #   uses your default encryption key.
+    #
+    #   KMS creates the default encryption key for your Amazon Web Services
+    #   account. Your Amazon Web Services account has a different default
+    #   encryption key for each Amazon Web Services Region.
+    #
+    # @option params [Boolean] :publicly_accessible
+    #   Specifies the accessibility options for the instance profile. A value
+    #   of `true` represents an instance profile with a public IP address. A
+    #   value of `false` represents an instance profile with a private IP
+    #   address. The default value is `true`.
+    #
+    # @option params [String] :network_type
+    #   Specifies the network type for the instance profile. A value of `IPV4`
+    #   represents an instance profile with IPv4 network type and only
+    #   supports IPv4 addressing. A value of `IPV6` represents an instance
+    #   profile with IPv6 network type and only supports IPv6 addressing. A
+    #   value of `DUAL` represents an instance profile with dual network type
+    #   that supports IPv4 and IPv6 addressing.
+    #
+    # @option params [String] :instance_profile_name
+    #   A user-friendly name for the instance profile.
+    #
+    # @option params [String] :description
+    #   A user-friendly description for the instance profile.
+    #
+    # @option params [String] :subnet_group_identifier
+    #   A subnet group to associate with the instance profile.
+    #
+    # @option params [Array<String>] :vpc_security_groups
+    #   Specifies the VPC security groups to be used with the instance
+    #   profile. The VPC security group must work with the VPC containing the
+    #   instance profile.
+    #
+    # @return [Types::ModifyInstanceProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyInstanceProfileResponse#instance_profile #instance_profile} => Types::InstanceProfile
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_instance_profile({
+    #     instance_profile_identifier: "String", # required
+    #     availability_zone: "String",
+    #     kms_key_arn: "String",
+    #     publicly_accessible: false,
+    #     network_type: "String",
+    #     instance_profile_name: "String",
+    #     description: "String",
+    #     subnet_group_identifier: "String",
+    #     vpc_security_groups: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_profile.instance_profile_arn #=> String
+    #   resp.instance_profile.availability_zone #=> String
+    #   resp.instance_profile.kms_key_arn #=> String
+    #   resp.instance_profile.publicly_accessible #=> Boolean
+    #   resp.instance_profile.network_type #=> String
+    #   resp.instance_profile.instance_profile_name #=> String
+    #   resp.instance_profile.description #=> String
+    #   resp.instance_profile.instance_profile_creation_time #=> Time
+    #   resp.instance_profile.subnet_group_identifier #=> String
+    #   resp.instance_profile.vpc_security_groups #=> Array
+    #   resp.instance_profile.vpc_security_groups[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyInstanceProfile AWS API Documentation
+    #
+    # @overload modify_instance_profile(params = {})
+    # @param [Hash] params ({})
+    def modify_instance_profile(params = {}, options = {})
+      req = build_request(:modify_instance_profile, params)
+      req.send_request(options)
+    end
+
+    # Modifies the specified migration project using the provided
+    # parameters.
+    #
+    # <note markdown="1"> The migration project must be closed before you can modify it.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :migration_project_identifier
+    #   The identifier of the migration project. Identifiers must begin with a
+    #   letter and must contain only ASCII letters, digits, and hyphens. They
+    #   can't end with a hyphen, or contain two consecutive hyphens.
+    #
+    # @option params [String] :migration_project_name
+    #   A user-friendly name for the migration project.
+    #
+    # @option params [Array<Types::DataProviderDescriptorDefinition>] :source_data_provider_descriptors
+    #   Information about the source data provider, including the name, ARN,
+    #   and Amazon Web Services Secrets Manager parameters.
+    #
+    # @option params [Array<Types::DataProviderDescriptorDefinition>] :target_data_provider_descriptors
+    #   Information about the target data provider, including the name, ARN,
+    #   and Amazon Web Services Secrets Manager parameters.
+    #
+    # @option params [String] :instance_profile_identifier
+    #   The name or Amazon Resource Name (ARN) for the instance profile.
+    #
+    # @option params [String] :transformation_rules
+    #   The settings in JSON format for migration rules. Migration rules make
+    #   it possible for you to change the object names according to the rules
+    #   that you specify. For example, you can change an object name to
+    #   lowercase or uppercase, add or remove a prefix or suffix, or rename
+    #   objects.
+    #
+    # @option params [String] :description
+    #   A user-friendly description of the migration project.
+    #
+    # @option params [Types::SCApplicationAttributes] :schema_conversion_application_attributes
+    #   The schema conversion application attributes, including the Amazon S3
+    #   bucket name and Amazon S3 role ARN.
+    #
+    # @return [Types::ModifyMigrationProjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyMigrationProjectResponse#migration_project #migration_project} => Types::MigrationProject
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_migration_project({
+    #     migration_project_identifier: "String", # required
+    #     migration_project_name: "String",
+    #     source_data_provider_descriptors: [
+    #       {
+    #         data_provider_identifier: "String", # required
+    #         secrets_manager_secret_id: "String",
+    #         secrets_manager_access_role_arn: "String",
+    #       },
+    #     ],
+    #     target_data_provider_descriptors: [
+    #       {
+    #         data_provider_identifier: "String", # required
+    #         secrets_manager_secret_id: "String",
+    #         secrets_manager_access_role_arn: "String",
+    #       },
+    #     ],
+    #     instance_profile_identifier: "String",
+    #     transformation_rules: "String",
+    #     description: "String",
+    #     schema_conversion_application_attributes: {
+    #       s3_bucket_path: "String",
+    #       s3_bucket_role_arn: "String",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.migration_project.migration_project_name #=> String
+    #   resp.migration_project.migration_project_arn #=> String
+    #   resp.migration_project.migration_project_creation_time #=> Time
+    #   resp.migration_project.source_data_provider_descriptors #=> Array
+    #   resp.migration_project.source_data_provider_descriptors[0].secrets_manager_secret_id #=> String
+    #   resp.migration_project.source_data_provider_descriptors[0].secrets_manager_access_role_arn #=> String
+    #   resp.migration_project.source_data_provider_descriptors[0].data_provider_name #=> String
+    #   resp.migration_project.source_data_provider_descriptors[0].data_provider_arn #=> String
+    #   resp.migration_project.target_data_provider_descriptors #=> Array
+    #   resp.migration_project.target_data_provider_descriptors[0].secrets_manager_secret_id #=> String
+    #   resp.migration_project.target_data_provider_descriptors[0].secrets_manager_access_role_arn #=> String
+    #   resp.migration_project.target_data_provider_descriptors[0].data_provider_name #=> String
+    #   resp.migration_project.target_data_provider_descriptors[0].data_provider_arn #=> String
+    #   resp.migration_project.instance_profile_arn #=> String
+    #   resp.migration_project.instance_profile_name #=> String
+    #   resp.migration_project.transformation_rules #=> String
+    #   resp.migration_project.description #=> String
+    #   resp.migration_project.schema_conversion_application_attributes.s3_bucket_path #=> String
+    #   resp.migration_project.schema_conversion_application_attributes.s3_bucket_role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyMigrationProject AWS API Documentation
+    #
+    # @overload modify_migration_project(params = {})
+    # @param [Hash] params ({})
+    def modify_migration_project(params = {}, options = {})
+      req = build_request(:modify_migration_project, params)
       req.send_request(options)
     end
 
@@ -8397,6 +10014,231 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Applies the extension pack to your target database. An extension pack
+    # is an add-on module that emulates functions present in a source
+    # database that are required when converting objects to the target
+    # database.
+    #
+    # @option params [required, String] :migration_project_identifier
+    #   The migration project name or Amazon Resource Name (ARN).
+    #
+    # @return [Types::StartExtensionPackAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartExtensionPackAssociationResponse#request_identifier #request_identifier} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_extension_pack_association({
+    #     migration_project_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartExtensionPackAssociation AWS API Documentation
+    #
+    # @overload start_extension_pack_association(params = {})
+    # @param [Hash] params ({})
+    def start_extension_pack_association(params = {}, options = {})
+      req = build_request(:start_extension_pack_association, params)
+      req.send_request(options)
+    end
+
+    # Creates a database migration assessment report by assessing the
+    # migration complexity for your source database. A database migration
+    # assessment report summarizes all of the schema conversion tasks. It
+    # also details the action items for database objects that can't be
+    # converted to the database engine of your target database instance.
+    #
+    # @option params [required, String] :migration_project_identifier
+    #   The migration project name or Amazon Resource Name (ARN).
+    #
+    # @option params [required, String] :selection_rules
+    #   A value that specifies the database objects to assess.
+    #
+    # @return [Types::StartMetadataModelAssessmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartMetadataModelAssessmentResponse#request_identifier #request_identifier} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_metadata_model_assessment({
+    #     migration_project_identifier: "String", # required
+    #     selection_rules: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartMetadataModelAssessment AWS API Documentation
+    #
+    # @overload start_metadata_model_assessment(params = {})
+    # @param [Hash] params ({})
+    def start_metadata_model_assessment(params = {}, options = {})
+      req = build_request(:start_metadata_model_assessment, params)
+      req.send_request(options)
+    end
+
+    # Converts your source database objects to a format compatible with the
+    # target database.
+    #
+    # @option params [required, String] :migration_project_identifier
+    #   The migration project name or Amazon Resource Name (ARN).
+    #
+    # @option params [required, String] :selection_rules
+    #   A value that specifies the database objects to convert.
+    #
+    # @return [Types::StartMetadataModelConversionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartMetadataModelConversionResponse#request_identifier #request_identifier} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_metadata_model_conversion({
+    #     migration_project_identifier: "String", # required
+    #     selection_rules: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartMetadataModelConversion AWS API Documentation
+    #
+    # @overload start_metadata_model_conversion(params = {})
+    # @param [Hash] params ({})
+    def start_metadata_model_conversion(params = {}, options = {})
+      req = build_request(:start_metadata_model_conversion, params)
+      req.send_request(options)
+    end
+
+    # Saves your converted code to a file as a SQL script, and stores this
+    # file on your Amazon S3 bucket.
+    #
+    # @option params [required, String] :migration_project_identifier
+    #   The migration project name or Amazon Resource Name (ARN).
+    #
+    # @option params [required, String] :selection_rules
+    #   A value that specifies the database objects to export.
+    #
+    # @option params [required, String] :origin
+    #   Whether to export the metadata model from the source or the target.
+    #
+    # @option params [String] :file_name
+    #   The name of the model file to create in the Amazon S3 bucket.
+    #
+    # @return [Types::StartMetadataModelExportAsScriptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartMetadataModelExportAsScriptResponse#request_identifier #request_identifier} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_metadata_model_export_as_script({
+    #     migration_project_identifier: "String", # required
+    #     selection_rules: "String", # required
+    #     origin: "SOURCE", # required, accepts SOURCE, TARGET
+    #     file_name: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartMetadataModelExportAsScript AWS API Documentation
+    #
+    # @overload start_metadata_model_export_as_script(params = {})
+    # @param [Hash] params ({})
+    def start_metadata_model_export_as_script(params = {}, options = {})
+      req = build_request(:start_metadata_model_export_as_script, params)
+      req.send_request(options)
+    end
+
+    # Applies converted database objects to your target database.
+    #
+    # @option params [required, String] :migration_project_identifier
+    #   The migration project name or Amazon Resource Name (ARN).
+    #
+    # @option params [required, String] :selection_rules
+    #   A value that specifies the database objects to export.
+    #
+    # @option params [Boolean] :overwrite_extension_pack
+    #   Whether to overwrite the migration project extension pack. An
+    #   extension pack is an add-on module that emulates functions present in
+    #   a source database that are required when converting objects to the
+    #   target database.
+    #
+    # @return [Types::StartMetadataModelExportToTargetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartMetadataModelExportToTargetResponse#request_identifier #request_identifier} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_metadata_model_export_to_target({
+    #     migration_project_identifier: "String", # required
+    #     selection_rules: "String", # required
+    #     overwrite_extension_pack: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartMetadataModelExportToTarget AWS API Documentation
+    #
+    # @overload start_metadata_model_export_to_target(params = {})
+    # @param [Hash] params ({})
+    def start_metadata_model_export_to_target(params = {}, options = {})
+      req = build_request(:start_metadata_model_export_to_target, params)
+      req.send_request(options)
+    end
+
+    # Loads the metadata for all the dependent database objects of the
+    # parent object.
+    #
+    # This operation uses your project's Amazon S3 bucket as a metadata
+    # cache to improve performance.
+    #
+    # @option params [required, String] :migration_project_identifier
+    #   The migration project name or Amazon Resource Name (ARN).
+    #
+    # @option params [required, String] :selection_rules
+    #   A value that specifies the database objects to import.
+    #
+    # @option params [required, String] :origin
+    #   Whether to load metadata to the source or target database.
+    #
+    # @option params [Boolean] :refresh
+    #   If `true`, DMS loads metadata for the specified objects from the
+    #   source database.
+    #
+    # @return [Types::StartMetadataModelImportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartMetadataModelImportResponse#request_identifier #request_identifier} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_metadata_model_import({
+    #     migration_project_identifier: "String", # required
+    #     selection_rules: "String", # required
+    #     origin: "SOURCE", # required, accepts SOURCE, TARGET
+    #     refresh: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartMetadataModelImport AWS API Documentation
+    #
+    # @overload start_metadata_model_import(params = {})
+    # @param [Hash] params ({})
+    def start_metadata_model_import(params = {}, options = {})
+      req = build_request(:start_metadata_model_import, params)
+      req.send_request(options)
+    end
+
     # Starts the analysis of your source database to provide recommendations
     # of target engines.
     #
@@ -9149,7 +10991,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

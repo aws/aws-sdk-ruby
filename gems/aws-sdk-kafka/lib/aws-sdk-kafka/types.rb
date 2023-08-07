@@ -519,6 +519,138 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # Returns information about a cluster operation.
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_type
+    #   The type of cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   @return [Time]
+    #
+    # @!attribute [rw] operation_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_state
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_type
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned
+    #   Properties of a provisioned cluster.
+    #   @return [Types::ClusterOperationV2Provisioned]
+    #
+    # @!attribute [rw] serverless
+    #   Properties of a serverless cluster.
+    #   @return [Types::ClusterOperationV2Serverless]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ClusterOperationV2 AWS API Documentation
+    #
+    class ClusterOperationV2 < Struct.new(
+      :cluster_arn,
+      :cluster_type,
+      :start_time,
+      :end_time,
+      :operation_arn,
+      :operation_state,
+      :operation_type,
+      :provisioned,
+      :serverless)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns information about a provisioned cluster operation.
+    #
+    # @!attribute [rw] operation_steps
+    #   @return [Array<Types::ClusterOperationStep>]
+    #
+    # @!attribute [rw] source_cluster_info
+    #   Information about cluster attributes that can be updated via update
+    #   APIs.
+    #   @return [Types::MutableClusterInfo]
+    #
+    # @!attribute [rw] target_cluster_info
+    #   Information about cluster attributes that can be updated via update
+    #   APIs.
+    #   @return [Types::MutableClusterInfo]
+    #
+    # @!attribute [rw] vpc_connection_info
+    #   Description of the VPC connection for CreateVpcConnection and
+    #   DeleteVpcConnection operations.
+    #   @return [Types::VpcConnectionInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ClusterOperationV2Provisioned AWS API Documentation
+    #
+    class ClusterOperationV2Provisioned < Struct.new(
+      :operation_steps,
+      :source_cluster_info,
+      :target_cluster_info,
+      :vpc_connection_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns information about a serverless cluster operation.
+    #
+    # @!attribute [rw] vpc_connection_info
+    #   Description of the VPC connection for CreateVpcConnection and
+    #   DeleteVpcConnection operations.
+    #   @return [Types::VpcConnectionInfoServerless]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ClusterOperationV2Serverless AWS API Documentation
+    #
+    class ClusterOperationV2Serverless < Struct.new(
+      :vpc_connection_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns information about a cluster operation.
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_type
+    #   The type of cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   @return [Time]
+    #
+    # @!attribute [rw] operation_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_state
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ClusterOperationV2Summary AWS API Documentation
+    #
+    class ClusterOperationV2Summary < Struct.new(
+      :cluster_arn,
+      :cluster_type,
+      :start_time,
+      :end_time,
+      :operation_arn,
+      :operation_state,
+      :operation_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The client VPC connection object.
     #
     # @!attribute [rw] authentication
@@ -1102,6 +1234,17 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # @!attribute [rw] cluster_operation_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeClusterOperationV2Request AWS API Documentation
+    #
+    class DescribeClusterOperationV2Request < Struct.new(
+      :cluster_operation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a cluster operation.
     #
     # @!attribute [rw] cluster_operation_info
@@ -1111,6 +1254,20 @@ module Aws::Kafka
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeClusterOperationResponse AWS API Documentation
     #
     class DescribeClusterOperationResponse < Struct.new(
+      :cluster_operation_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a cluster operation.
+    #
+    # @!attribute [rw] cluster_operation_info
+    #   Cluster operation information
+    #   @return [Types::ClusterOperationV2]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeClusterOperationV2Response AWS API Documentation
+    #
+    class DescribeClusterOperationV2Response < Struct.new(
       :cluster_operation_info)
       SENSITIVE = []
       include Aws::Structure
@@ -1689,6 +1846,25 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListClusterOperationsV2Request AWS API Documentation
+    #
+    class ListClusterOperationsV2Request < Struct.new(
+      :cluster_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The response contains an array containing cluster operation
     # information and a next token if the response is truncated.
     #
@@ -1705,6 +1881,24 @@ module Aws::Kafka
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListClusterOperationsResponse AWS API Documentation
     #
     class ListClusterOperationsResponse < Struct.new(
+      :cluster_operation_info_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response contains an array containing cluster operation
+    # information and a next token if the response is truncated.
+    #
+    # @!attribute [rw] cluster_operation_info_list
+    #   @return [Array<Types::ClusterOperationV2Summary>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListClusterOperationsV2Response AWS API Documentation
+    #
+    class ListClusterOperationsV2Response < Struct.new(
       :cluster_operation_info_list,
       :next_token)
       SENSITIVE = []
@@ -3659,6 +3853,33 @@ module Aws::Kafka
       :owner,
       :user_identity,
       :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Description of the VPC connection for CreateVpcConnection and
+    # DeleteVpcConnection operations.
+    #
+    # @!attribute [rw] creation_time
+    #   @return [Time]
+    #
+    # @!attribute [rw] owner
+    #   @return [String]
+    #
+    # @!attribute [rw] user_identity
+    #   Description of the requester that calls the API operation.
+    #   @return [Types::UserIdentity]
+    #
+    # @!attribute [rw] vpc_connection_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/VpcConnectionInfoServerless AWS API Documentation
+    #
+    class VpcConnectionInfoServerless < Struct.new(
+      :creation_time,
+      :owner,
+      :user_identity,
+      :vpc_connection_arn)
       SENSITIVE = []
       include Aws::Structure
     end

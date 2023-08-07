@@ -335,11 +335,19 @@ module Aws::SecurityLake
     #   normalization of Amazon Web Services log sources and custom sources.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   An array of objects, one for each tag to associate with the data
+    #   lake configuration. For each tag, you must specify both a tag key
+    #   and a tag value. A tag value cannot be null, but it can be an empty
+    #   string.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateDataLakeRequest AWS API Documentation
     #
     class CreateDataLakeRequest < Struct.new(
       :configurations,
-      :meta_store_manager_role_arn)
+      :meta_store_manager_role_arn,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -408,6 +416,12 @@ module Aws::SecurityLake
     #   The name of your Security Lake subscriber account.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   An array of objects, one for each tag to associate with the
+    #   subscriber. For each tag, you must specify both a tag key and a tag
+    #   value. A tag value cannot be null, but it can be an empty string.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateSubscriberRequest AWS API Documentation
     #
     class CreateSubscriberRequest < Struct.new(
@@ -415,7 +429,8 @@ module Aws::SecurityLake
       :sources,
       :subscriber_description,
       :subscriber_identity,
-      :subscriber_name)
+      :subscriber_name,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -623,7 +638,7 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # The details for a Security Lake exception
+    # The details for an Amazon Security Lake exception.
     #
     # @!attribute [rw] exception
     #   The underlying exception of a Security Lake exception.
@@ -1025,8 +1040,8 @@ module Aws::SecurityLake
     class DeleteDataLakeExceptionSubscriptionResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] auto_enable_new_account
-    #   Removes the automatic enablement of configuration settings for new
-    #   member accounts in Security Lake.
+    #   Turns off automatic enablement of Security Lake for member accounts
+    #   that are added to an organization.
     #   @return [Array<Types::DataLakeAutoEnableNewAccountConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/DeleteDataLakeOrganizationConfigurationRequest AWS API Documentation
@@ -1262,8 +1277,8 @@ module Aws::SecurityLake
     #   The Amazon Resource Name (ARN) of the EventBridge API destinations
     #   IAM role that you created. For more information about ARNs and how
     #   to use them in policies, see [Managing data access][1] and [Amazon
-    #   Web Services Managed Policies][2] in the Amazon Security Lake User
-    #   Guide.
+    #   Web Services Managed Policies][2] in the *Amazon Security Lake User
+    #   Guide*.
     #
     #
     #
@@ -1465,6 +1480,32 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Security Lake resource
+    #   to retrieve the tags for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   An array of objects, one for each tag (key and value) that’s
+    #   associated with the Amazon Security Lake resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Amazon Security Lake can collect logs and events from
     # natively-supported Amazon Web Services services and custom sources.
     #
@@ -1491,8 +1532,8 @@ module Aws::SecurityLake
     end
 
     # The supported source types from which logs and events are collected in
-    # Amazon Security Lake. For the list of supported Amazon Web Services,
-    # see the [Amazon Security Lake User Guide][1].
+    # Amazon Security Lake. For a list of supported Amazon Web Services, see
+    # the [Amazon Security Lake User Guide][1].
     #
     #
     #
@@ -1504,12 +1545,21 @@ module Aws::SecurityLake
     #
     # @!attribute [rw] aws_log_source
     #   Amazon Security Lake supports log and event collection for natively
-    #   supported Amazon Web Services.
+    #   supported Amazon Web Services. For more information, see the [Amazon
+    #   Security Lake User Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
     #   @return [Types::AwsLogSourceResource]
     #
     # @!attribute [rw] custom_log_source
-    #   Amazon Security Lake supports custom source types. For a detailed
-    #   list, see the Amazon Security Lake User Guide.
+    #   Amazon Security Lake supports custom source types. For more
+    #   information, see the [Amazon Security Lake User Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/custom-sources.html
     #   @return [Types::CustomLogSourceResource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/LogSourceResource AWS API Documentation
@@ -1646,8 +1696,12 @@ module Aws::SecurityLake
     #
     # @!attribute [rw] sources
     #   Amazon Security Lake supports log and event collection for natively
-    #   supported Amazon Web Services. For more information, see the Amazon
-    #   Security Lake User Guide.
+    #   supported Amazon Web Services. For more information, see the [Amazon
+    #   Security Lake User Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/source-management.html
     #   @return [Array<Types::LogSourceResource>]
     #
     # @!attribute [rw] subscriber_arn
@@ -1707,6 +1761,74 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
+    # A *tag* is a label that you can define and associate with Amazon Web
+    # Services resources, including certain types of Amazon Security Lake
+    # resources. Tags can help you identify, categorize, and manage
+    # resources in different ways, such as by owner, environment, or other
+    # criteria. You can associate tags with the following types of Security
+    # Lake resources: subscribers, and the data lake configuration for your
+    # Amazon Web Services account in individual Amazon Web Services Regions.
+    #
+    # A resource can have up to 50 tags. Each tag consists of a required
+    # *tag key* and an associated *tag value*. A *tag key* is a general
+    # label that acts as a category for a more specific tag value. Each tag
+    # key must be unique and it can have only one tag value. A *tag value*
+    # acts as a descriptor for a tag key. Tag keys and values are case
+    # sensitive. They can contain letters, numbers, spaces, or the following
+    # symbols: \_ . : / = + @ -
+    #
+    # For more information, see [Tagging Amazon Security Lake resources][1]
+    # in the *Amazon Security Lake User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/tagging-resources.html
+    #
+    # @!attribute [rw] key
+    #   The name of the tag. This is a general label that acts as a category
+    #   for a more specific tag value (`value`).
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value that’s associated with the specified tag key (`key`). This
+    #   value acts as a descriptor for the tag key. A tag value cannot be
+    #   null, but it can be an empty string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Security Lake resource
+    #   to add or update the tags for.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   An array of objects, one for each tag (key and value) to associate
+    #   with the Amazon Security Lake resource. For each tag, you must
+    #   specify both a tag key and a tag value. A tag value cannot be null,
+    #   but it can be an empty string.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # The limit on the number of requests per second was exceeded.
     #
     # @!attribute [rw] message
@@ -1735,6 +1857,30 @@ module Aws::SecurityLake
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Security Lake resource
+    #   to remove one or more tags from.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of one or more tag keys. For each value in the list, specify
+    #   the tag key for a tag to remove from the Amazon Security Lake
+    #   resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] exception_time_to_live
     #   The time-to-live (TTL) for the exception message to remain.

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2023-08-02)
+------------------
+
+* Feature - As part of CAE tagging integration we need to update our budget names regex filter to prevent customers from using "/action/" in their budget names.
+
 1.57.0 (2023-07-11)
 ------------------
 

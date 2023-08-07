@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2023-07-31)
+------------------
+
+* Feature - This release includes new import resource, model versioning and resource policy features.
+
 1.21.0 (2023-07-11)
 ------------------
 

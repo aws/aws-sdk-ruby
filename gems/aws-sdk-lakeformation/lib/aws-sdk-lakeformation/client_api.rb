@@ -409,11 +409,13 @@ module Aws::LakeFormation
     DataLakePrincipalList.member = Shapes::ShapeRef.new(shape: DataLakePrincipal)
 
     DataLakeSettings.add_member(:data_lake_admins, Shapes::ShapeRef.new(shape: DataLakePrincipalList, location_name: "DataLakeAdmins"))
+    DataLakeSettings.add_member(:read_only_admins, Shapes::ShapeRef.new(shape: DataLakePrincipalList, location_name: "ReadOnlyAdmins"))
     DataLakeSettings.add_member(:create_database_default_permissions, Shapes::ShapeRef.new(shape: PrincipalPermissionsList, location_name: "CreateDatabaseDefaultPermissions"))
     DataLakeSettings.add_member(:create_table_default_permissions, Shapes::ShapeRef.new(shape: PrincipalPermissionsList, location_name: "CreateTableDefaultPermissions"))
     DataLakeSettings.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "Parameters"))
     DataLakeSettings.add_member(:trusted_resource_owners, Shapes::ShapeRef.new(shape: TrustedResourceOwners, location_name: "TrustedResourceOwners"))
     DataLakeSettings.add_member(:allow_external_data_filtering, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "AllowExternalDataFiltering"))
+    DataLakeSettings.add_member(:allow_full_table_external_data_access, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "AllowFullTableExternalDataAccess"))
     DataLakeSettings.add_member(:external_data_filtering_allow_list, Shapes::ShapeRef.new(shape: DataLakePrincipalList, location_name: "ExternalDataFilteringAllowList"))
     DataLakeSettings.add_member(:authorized_session_tag_value_list, Shapes::ShapeRef.new(shape: AuthorizedSessionTagValueList, location_name: "AuthorizedSessionTagValueList"))
     DataLakeSettings.struct_class = Types::DataLakeSettings
@@ -583,7 +585,7 @@ module Aws::LakeFormation
     GetTemporaryGluePartitionCredentialsRequest.add_member(:permissions, Shapes::ShapeRef.new(shape: PermissionList, location_name: "Permissions"))
     GetTemporaryGluePartitionCredentialsRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: CredentialTimeoutDurationSecondInteger, location_name: "DurationSeconds"))
     GetTemporaryGluePartitionCredentialsRequest.add_member(:audit_context, Shapes::ShapeRef.new(shape: AuditContext, location_name: "AuditContext"))
-    GetTemporaryGluePartitionCredentialsRequest.add_member(:supported_permission_types, Shapes::ShapeRef.new(shape: PermissionTypeList, required: true, location_name: "SupportedPermissionTypes"))
+    GetTemporaryGluePartitionCredentialsRequest.add_member(:supported_permission_types, Shapes::ShapeRef.new(shape: PermissionTypeList, location_name: "SupportedPermissionTypes"))
     GetTemporaryGluePartitionCredentialsRequest.struct_class = Types::GetTemporaryGluePartitionCredentialsRequest
 
     GetTemporaryGluePartitionCredentialsResponse.add_member(:access_key_id, Shapes::ShapeRef.new(shape: AccessKeyIdString, location_name: "AccessKeyId"))
@@ -596,7 +598,7 @@ module Aws::LakeFormation
     GetTemporaryGlueTableCredentialsRequest.add_member(:permissions, Shapes::ShapeRef.new(shape: PermissionList, location_name: "Permissions"))
     GetTemporaryGlueTableCredentialsRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: CredentialTimeoutDurationSecondInteger, location_name: "DurationSeconds"))
     GetTemporaryGlueTableCredentialsRequest.add_member(:audit_context, Shapes::ShapeRef.new(shape: AuditContext, location_name: "AuditContext"))
-    GetTemporaryGlueTableCredentialsRequest.add_member(:supported_permission_types, Shapes::ShapeRef.new(shape: PermissionTypeList, required: true, location_name: "SupportedPermissionTypes"))
+    GetTemporaryGlueTableCredentialsRequest.add_member(:supported_permission_types, Shapes::ShapeRef.new(shape: PermissionTypeList, location_name: "SupportedPermissionTypes"))
     GetTemporaryGlueTableCredentialsRequest.struct_class = Types::GetTemporaryGlueTableCredentialsRequest
 
     GetTemporaryGlueTableCredentialsResponse.add_member(:access_key_id, Shapes::ShapeRef.new(shape: AccessKeyIdString, location_name: "AccessKeyId"))

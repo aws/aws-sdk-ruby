@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.189.0 (2023-08-01)
+------------------
+
+* Feature - Added support for deleted clusters PiTR.
+
+1.188.0 (2023-07-31)
+------------------
+
+* Feature - This release adds support for Aurora MySQL local write forwarding, which allows for forwarding of write operations from reader DB instances to the writer DB instance.
+
+1.187.0 (2023-07-25)
+------------------
+
+* Feature - This release adds support for monitoring storage optimization progress on the DescribeDBInstances API.
+
+1.186.0 (2023-07-21)
+------------------
+
+* Feature - Adds support for the DBSystemID parameter of CreateDBInstance to RDS Custom for Oracle.
+
 1.185.0 (2023-07-11)
 ------------------
 

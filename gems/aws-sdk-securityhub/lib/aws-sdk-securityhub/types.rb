@@ -449,10 +449,10 @@ module Aws::SecurityHub
     #   Specifies whether a rule is the last to be applied with respect to a
     #   finding that matches the rule criteria. This is useful when a
     #   finding matches the criteria for multiple rules, and each rule has
-    #   different actions. If the value of this field is set to `true` for a
-    #   rule, Security Hub applies the rule action to a finding that matches
-    #   the rule criteria and doesn't evaluate other rules for the
-    #   finding.  The default value of this field is `false`.
+    #   different actions. If a rule is terminal, Security Hub applies the
+    #   rule action to a finding that matches the rule criteria and doesn't
+    #   evaluate other rules for the finding. By default, a rule isn't
+    #   terminal.
     #   @return [Boolean]
     #
     # @!attribute [rw] criteria
@@ -891,10 +891,10 @@ module Aws::SecurityHub
     #   Specifies whether a rule is the last to be applied with respect to a
     #   finding that matches the rule criteria. This is useful when a
     #   finding matches the criteria for multiple rules, and each rule has
-    #   different actions. If the value of this field is set to `true` for a
-    #   rule, Security Hub applies the rule action to a finding that matches
-    #   the rule criteria and doesn't evaluate other rules for the
-    #   finding.  The default value of this field is `false`.
+    #   different actions. If a rule is terminal, Security Hub applies the
+    #   rule action to a finding that matches the rule criteria and doesn't
+    #   evaluate other rules for the finding. By default, a rule isn't
+    #   terminal.
     #   @return [Boolean]
     #
     # @!attribute [rw] created_at
@@ -2191,6 +2191,106 @@ module Aws::SecurityHub
       :aws_region,
       :default_action,
       :user_pool_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of the workgroup, which includes the location in
+    # Amazon Simple Storage Service (Amazon S3) where query results are
+    # stored, the encryption option, if any, used for query results, whether
+    # Amazon CloudWatch metrics are enabled for the workgroup, and the limit
+    # for the amount of bytes scanned (cutoff) per query, if it is
+    # specified.
+    #
+    # @!attribute [rw] result_configuration
+    #   The location in Amazon S3 where query and calculation results are
+    #   stored and the encryption option, if any, used for query and
+    #   calculation results. These are known as client-side settings. If
+    #   workgroup settings override client-side settings, then the query
+    #   uses the workgroup settings.
+    #   @return [Types::AwsAthenaWorkGroupConfigurationResultConfigurationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAthenaWorkGroupConfigurationDetails AWS API Documentation
+    #
+    class AwsAthenaWorkGroupConfigurationDetails < Struct.new(
+      :result_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The location in Amazon Simple Storage Service (Amazon S3) where query
+    # and calculation results are stored and the encryption option, if any,
+    # used for query and calculation results. These are known as client-side
+    # settings. If workgroup settings override client-side settings, then
+    # the query uses the workgroup settings.
+    #
+    # @!attribute [rw] encryption_configuration
+    #   Specifies the method used to encrypt the user’s data stores in the
+    #   Athena workgroup.
+    #   @return [Types::AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAthenaWorkGroupConfigurationResultConfigurationDetails AWS API Documentation
+    #
+    class AwsAthenaWorkGroupConfigurationResultConfigurationDetails < Struct.new(
+      :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the method used to encrypt the user’s data stores in the
+    # Athena workgroup.
+    #
+    # @!attribute [rw] encryption_option
+    #   Indicates whether Amazon Simple Storage Service (Amazon S3)
+    #   server-side encryption with Amazon S3 managed keys (SSE\_S3),
+    #   server-side encryption with KMS keys (SSE\_KMS), or client-side
+    #   encryption with KMS customer managed keys (CSE\_KMS) is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key
+    #   For `SSE_KMS` and `CSE_KMS`, this is the KMS key Amazon Resource
+    #   Name (ARN) or ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails AWS API Documentation
+    #
+    class AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails < Struct.new(
+      :encryption_option,
+      :kms_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about an Amazon Athena workgroup.
+    #
+    # @!attribute [rw] name
+    #   The workgroup name.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The workgroup description.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Whether the workgroup is enabled or disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The configuration of the workgroup, which includes the location in
+    #   Amazon Simple Storage Service (Amazon S3) where query results are
+    #   stored, the encryption option, if any, used for query results,
+    #   whether Amazon CloudWatch metrics are enabled for the workgroup, and
+    #   the limit for the amount of bytes scanned (cutoff) per query, if it
+    #   is specified.
+    #   @return [Types::AwsAthenaWorkGroupConfigurationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAthenaWorkGroupDetails AWS API Documentation
+    #
+    class AwsAthenaWorkGroupDetails < Struct.new(
+      :name,
+      :description,
+      :state,
+      :configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14129,6 +14229,35 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Contains the name and values of a manual Amazon Relational Database
+    # Service (RDS) DB cluster snapshot attribute.
+    #
+    # @!attribute [rw] attribute_name
+    #   The name of the manual DB cluster snapshot attribute. The attribute
+    #   named `restore` refers to the list of Amazon Web Services accounts
+    #   that have permission to copy or restore the manual DB cluster
+    #   snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_values
+    #   The value(s) for the manual DB cluster snapshot attribute. If the
+    #   `AttributeName` field is set to `restore`, then this element returns
+    #   a list of IDs of the Amazon Web Services accounts that are
+    #   authorized to copy or restore the manual DB cluster snapshot. If a
+    #   value of `all` is in the list, then the manual DB cluster snapshot
+    #   is public and available for any Amazon Web Services account to copy
+    #   or restore.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute AWS API Documentation
+    #
+    class AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute < Struct.new(
+      :attribute_name,
+      :attribute_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an Amazon RDS DB cluster snapshot.
     #
     # @!attribute [rw] availability_zones
@@ -14227,6 +14356,11 @@ module Aws::SecurityHub
     #   Whether mapping of IAM accounts to database accounts is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] db_cluster_snapshot_attributes
+    #   Contains the name and values of a manual DB cluster snapshot
+    #   attribute.
+    #   @return [Array<Types::AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbClusterSnapshotDetails AWS API Documentation
     #
     class AwsRdsDbClusterSnapshotDetails < Struct.new(
@@ -14247,7 +14381,8 @@ module Aws::SecurityHub
       :kms_key_id,
       :db_cluster_identifier,
       :db_cluster_snapshot_identifier,
-      :iam_database_authentication_enabled)
+      :iam_database_authentication_enabled,
+      :db_cluster_snapshot_attributes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20734,10 +20869,10 @@ module Aws::SecurityHub
     #   Specifies whether a rule is the last to be applied with respect to a
     #   finding that matches the rule criteria. This is useful when a
     #   finding matches the criteria for multiple rules, and each rule has
-    #   different actions. If the value of this field is set to `true` for a
-    #   rule, Security Hub applies the rule action to a finding that matches
-    #   the rule criteria and doesn't evaluate other rules for the finding.
-    #   The default value of this field is `false`.
+    #   different actions. If a rule is terminal, Security Hub applies the
+    #   rule action to a finding that matches the rule criteria and doesn't
+    #   evaluate other rules for the finding. By default, a rule isn't
+    #   terminal.
     #   @return [Boolean]
     #
     # @!attribute [rw] criteria
@@ -23264,8 +23399,9 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # A map filter for querying findings. Each map filter provides the field
-    # to check, the value to look for, and the comparison operator.
+    # A map filter for filtering Security Hub findings. Each map filter
+    # provides the field to check for, the value to check for, and the
+    # comparison operator.
     #
     # @!attribute [rw] key
     #   The key of the map filter. For example, for `ResourceTags`, `Key`
@@ -23277,31 +23413,69 @@ module Aws::SecurityHub
     #   The value for the key in the map filter. Filter values are case
     #   sensitive. For example, one of the values for a tag called
     #   `Department` might be `Security`. If you provide `security` as the
-    #   filter value, then there is no match.
+    #   filter value, then there's no match.
     #   @return [String]
     #
     # @!attribute [rw] comparison
-    #   The condition to apply to the key value when querying for findings
-    #   with a map filter.
+    #   The condition to apply to the key value when filtering Security Hub
+    #   findings with a map filter.
     #
-    #   To search for values that exactly match the filter value, use
-    #   `EQUALS`. For example, for the `ResourceTags` field, the filter
-    #   `Department EQUALS Security` matches findings that have the value
-    #   `Security` for the tag `Department`.
+    #   To search for values that have the filter value, use one of the
+    #   following comparison operators:
     #
-    #   To search for values other than the filter value, use `NOT_EQUALS`.
-    #   For example, for the `ResourceTags` field, the filter `Department
-    #   NOT_EQUALS Finance` matches findings that do not have the value
-    #   `Finance` for the tag `Department`.
+    #   * To search for values that include the filter value, use
+    #     `CONTAINS`. For example, for the `ResourceTags` field, the filter
+    #     `Department CONTAINS Security` matches findings that include the
+    #     value `Security` for the `Department` tag. In the same example, a
+    #     finding with a value of `Security team` for the `Department` tag
+    #     is a match.
     #
-    #   `EQUALS` filters on the same field are joined by `OR`. A finding
-    #   matches if it matches any one of those filters.
+    #   * To search for values that exactly match the filter value, use
+    #     `EQUALS`. For example, for the `ResourceTags` field, the filter
+    #     `Department EQUALS Security` matches findings that have the value
+    #     `Security` for the `Department` tag.
     #
-    #   `NOT_EQUALS` filters on the same field are joined by `AND`. A
-    #   finding matches only if it matches all of those filters.
+    #   `CONTAINS` and `EQUALS` filters on the same field are joined by
+    #   `OR`. A finding matches if it matches any one of those filters. For
+    #   example, the filters `Department CONTAINS Security OR Department
+    #   CONTAINS Finance` match a finding that includes either `Security`,
+    #   `Finance`, or both values.
     #
-    #   You cannot have both an `EQUALS` filter and a `NOT_EQUALS` filter on
-    #   the same field.
+    #   To search for values that don't have the filter value, use one of
+    #   the following comparison operators:
+    #
+    #   * To search for values that exclude the filter value, use
+    #     `NOT_CONTAINS`. For example, for the `ResourceTags` field, the
+    #     filter `Department NOT_CONTAINS Finance` matches findings that
+    #     exclude the value `Finance` for the `Department` tag.
+    #
+    #   * To search for values other than the filter value, use
+    #     `NOT_EQUALS`. For example, for the `ResourceTags` field, the
+    #     filter `Department NOT_EQUALS Finance` matches findings that don’t
+    #     have the value `Finance` for the `Department` tag.
+    #
+    #   `NOT_CONTAINS` and `NOT_EQUALS` filters on the same field are joined
+    #   by `AND`. A finding matches only if it matches all of those filters.
+    #   For example, the filters `Department NOT_CONTAINS Security AND
+    #   Department NOT_CONTAINS Finance` match a finding that excludes both
+    #   the `Security` and `Finance` values.
+    #
+    #   `CONTAINS` filters can only be used with other `CONTAINS` filters.
+    #   `NOT_CONTAINS` filters can only be used with other `NOT_CONTAINS`
+    #   filters.
+    #
+    #   You can’t have both a `CONTAINS` filter and a `NOT_CONTAINS` filter
+    #   on the same field. Similarly, you can’t have both an `EQUALS` filter
+    #   and a `NOT_EQUALS` filter on the same field. Combining filters in
+    #   this way returns an error.
+    #
+    #   `CONTAINS` and `NOT_CONTAINS` operators can be used only with
+    #   automation rules. For more information, see [Automation rules][1] in
+    #   the *Security Hub User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/automation-rules.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/MapFilter AWS API Documentation
@@ -24648,6 +24822,12 @@ module Aws::SecurityHub
     #   workflow consisting of a series of event-driven steps.
     #   @return [Types::AwsStepFunctionStateMachineDetails]
     #
+    # @!attribute [rw] aws_athena_work_group
+    #   Provides information about an Amazon Athena workgroup. A workgroup
+    #   helps you separate users, teams, applications, or workloads. It also
+    #   helps you set limits on data processing and track costs.
+    #   @return [Types::AwsAthenaWorkGroupDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceDetails AWS API Documentation
     #
     class ResourceDetails < Struct.new(
@@ -24739,7 +24919,8 @@ module Aws::SecurityHub
       :aws_app_sync_graph_ql_api,
       :aws_event_schemas_registry,
       :aws_guard_duty_detector,
-      :aws_step_function_state_machine)
+      :aws_step_function_state_machine,
+      :aws_athena_work_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26189,75 +26370,85 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # A string filter for querying findings.
+    # A string filter for filtering Security Hub findings.
     #
     # @!attribute [rw] value
     #   The string filter value. Filter values are case sensitive. For
     #   example, the product name for control-based findings is `Security
-    #   Hub`. If you provide `security hub` as the filter text, then there
-    #   is no match.
+    #   Hub`. If you provide `security hub` as the filter value, there's no
+    #   match.
     #   @return [String]
     #
     # @!attribute [rw] comparison
-    #   The condition to apply to a string value when querying for findings.
-    #   To search for values that contain the filter criteria value, use one
-    #   of the following comparison operators:
+    #   The condition to apply to a string value when filtering Security Hub
+    #   findings.
+    #
+    #   To search for values that have the filter value, use one of the
+    #   following comparison operators:
+    #
+    #   * To search for values that include the filter value, use
+    #     `CONTAINS`. For example, the filter `Title CONTAINS CloudFront`
+    #     matches findings that have a `Title` that includes the string
+    #     CloudFront.
     #
     #   * To search for values that exactly match the filter value, use
-    #     `EQUALS`.
-    #
-    #     For example, the filter `ResourceType EQUALS AwsEc2SecurityGroup`
-    #     only matches findings that have a resource type of
-    #     `AwsEc2SecurityGroup`.
+    #     `EQUALS`. For example, the filter `AwsAccountId EQUALS
+    #     123456789012` only matches findings that have an account ID of
+    #     `123456789012`.
     #
     #   * To search for values that start with the filter value, use
-    #     `PREFIX`.
+    #     `PREFIX`. For example, the filter `ResourceRegion PREFIX us`
+    #     matches findings that have a `ResourceRegion` that starts with
+    #     `us`. A `ResourceRegion` that starts with a different value, such
+    #     as `af`, `ap`, or `ca`, doesn't match.
     #
-    #     For example, the filter `ResourceType PREFIX AwsIam` matches
-    #     findings that have a resource type that starts with `AwsIam`.
-    #     Findings with a resource type of `AwsIamPolicy`, `AwsIamRole`, or
-    #     `AwsIamUser` would all match.
+    #   `CONTAINS`, `EQUALS`, and `PREFIX` filters on the same field are
+    #   joined by `OR`. A finding matches if it matches any one of those
+    #   filters. For example, the filters `Title CONTAINS CloudFront OR
+    #   Title CONTAINS CloudWatch` match a finding that includes either
+    #   `CloudFront`, `CloudWatch`, or both strings in the title.
     #
-    #   `EQUALS` and `PREFIX` filters on the same field are joined by `OR`.
-    #   A finding matches if it matches any one of those filters.
+    #   To search for values that don’t have the filter value, use one of
+    #   the following comparison operators:
     #
-    #   To search for values that do not contain the filter criteria value,
-    #   use one of the following comparison operators:
+    #   * To search for values that exclude the filter value, use
+    #     `NOT_CONTAINS`. For example, the filter `Title NOT_CONTAINS
+    #     CloudFront` matches findings that have a `Title` that excludes the
+    #     string CloudFront.
     #
-    #   * To search for values that do not exactly match the filter value,
-    #     use `NOT_EQUALS`.
+    #   * To search for values other than the filter value, use
+    #     `NOT_EQUALS`. For example, the filter `AwsAccountId NOT_EQUALS
+    #     123456789012` only matches findings that have an account ID other
+    #     than `123456789012`.
     #
-    #     For example, the filter `ResourceType NOT_EQUALS AwsIamPolicy`
-    #     matches findings that have a resource type other than
-    #     `AwsIamPolicy`.
+    #   * To search for values that don't start with the filter value, use
+    #     `PREFIX_NOT_EQUALS`. For example, the filter `ResourceRegion
+    #     PREFIX_NOT_EQUALS us` matches findings with a `ResourceRegion`
+    #     that starts with a value other than `us`.
     #
-    #   * To search for values that do not start with the filter value, use
-    #     `PREFIX_NOT_EQUALS`.
+    #   `NOT_CONTAINS`, `NOT_EQUALS`, and `PREFIX_NOT_EQUALS` filters on the
+    #   same field are joined by `AND`. A finding matches only if it matches
+    #   all of those filters. For example, the filters `Title NOT_CONTAINS
+    #   CloudFront AND Title NOT_CONTAINS CloudWatch` match a finding that
+    #   excludes both `CloudFront` and `CloudWatch` in the title.
     #
-    #     For example, the filter `ResourceType PREFIX_NOT_EQUALS AwsIam`
-    #     matches findings that have a resource type that does not start
-    #     with `AwsIam`. Findings with a resource type of `AwsIamPolicy`,
-    #     `AwsIamRole`, or `AwsIamUser` would all be excluded from the
-    #     results.
-    #
-    #   `NOT_EQUALS` and `PREFIX_NOT_EQUALS` filters on the same field are
-    #   joined by `AND`. A finding matches only if it matches all of those
+    #   You can’t have both a `CONTAINS` filter and a `NOT_CONTAINS` filter
+    #   on the same field. Similarly, you can't provide both an `EQUALS`
+    #   filter and a `NOT_EQUALS` or `PREFIX_NOT_EQUALS` filter on the same
+    #   field. Combining filters in this way returns an error. `CONTAINS`
+    #   filters can only be used with other `CONTAINS` filters.
+    #   `NOT_CONTAINS` filters can only be used with other `NOT_CONTAINS`
     #   filters.
-    #
-    #   For filters on the same field, you cannot provide both an `EQUALS`
-    #   filter and a `NOT_EQUALS` or `PREFIX_NOT_EQUALS` filter. Combining
-    #   filters in this way always returns an error, even if the provided
-    #   filter values would return valid results.
     #
     #   You can combine `PREFIX` filters with `NOT_EQUALS` or
     #   `PREFIX_NOT_EQUALS` filters for the same field. Security Hub first
-    #   processes the `PREFIX` filters, then the `NOT_EQUALS` or
+    #   processes the `PREFIX` filters, and then the `NOT_EQUALS` or
     #   `PREFIX_NOT_EQUALS` filters.
     #
-    #   For example, for the following filter, Security Hub first identifies
-    #   findings that have resource types that start with either `AwsIAM` or
-    #   `AwsEc2`. It then excludes findings that have a resource type of
-    #   `AwsIamPolicy` and findings that have a resource type of
+    #   For example, for the following filters, Security Hub first
+    #   identifies findings that have resource types that start with either
+    #   `AwsIam` or `AwsEc2`. It then excludes findings that have a resource
+    #   type of `AwsIamPolicy` and findings that have a resource type of
     #   `AwsEc2NetworkInterface`.
     #
     #   * `ResourceType PREFIX AwsIam`
@@ -26267,6 +26458,14 @@ module Aws::SecurityHub
     #   * `ResourceType NOT_EQUALS AwsIamPolicy`
     #
     #   * `ResourceType NOT_EQUALS AwsEc2NetworkInterface`
+    #
+    #   `CONTAINS` and `NOT_CONTAINS` operators can be used only with
+    #   automation rules. For more information, see [Automation rules][1] in
+    #   the *Security Hub User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/automation-rules.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StringFilter AWS API Documentation
@@ -26598,10 +26797,10 @@ module Aws::SecurityHub
     #   Specifies whether a rule is the last to be applied with respect to a
     #   finding that matches the rule criteria. This is useful when a
     #   finding matches the criteria for multiple rules, and each rule has
-    #   different actions. If the value of this field is set to `true` for a
-    #   rule, Security Hub applies the rule action to a finding that matches
-    #   the rule criteria and doesn't evaluate other rules for the
-    #   finding.  The default value of this field is `false`.
+    #   different actions. If a rule is terminal, Security Hub applies the
+    #   rule action to a finding that matches the rule criteria and doesn't
+    #   evaluate other rules for the finding. By default, a rule isn't
+    #   terminal.
     #   @return [Boolean]
     #
     # @!attribute [rw] criteria

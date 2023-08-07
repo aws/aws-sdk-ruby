@@ -21,9 +21,11 @@ module Aws
       def data_to_http_resp(operation_name, data)
         api = config.api
         operation = api.operation(operation_name)
-        translator = Plugins::SimpleAttributes::ValueTranslator
-        translator = translator.new(operation.output, :marshal)
-        data = translator.apply(data)
+        if config.simple_attributes
+          translator = Plugins::SimpleAttributes::ValueTranslator
+          translator = translator.new(operation.output, :marshal)
+          data = translator.apply(data)
+        end
         ParamValidator.validate!(operation.output, data)
         protocol_helper.stub_data(api, operation, data)
       end

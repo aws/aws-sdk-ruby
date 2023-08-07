@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2023-07-13)
+------------------
+
+* Feature - This release provides ability to customers to change schema associated with their datasets in Amazon Personalize
+
 1.52.0 (2023-07-11)
 ------------------
 

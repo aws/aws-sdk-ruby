@@ -515,7 +515,7 @@ module Aws::Budgets
     #
     # @option params [required, String] :budget_name
     #   A string that represents the budget name. The ":" and "\\"
-    #   characters aren't allowed.
+    #   characters, and the "/action/" substring, aren't allowed.
     #
     # @option params [required, String] :notification_type
     #   The type of a notification. It must be ACTUAL or FORECASTED.
@@ -725,7 +725,7 @@ module Aws::Budgets
     #
     # @option params [required, String] :budget_name
     #   A string that represents the budget name. The ":" and "\\"
-    #   characters aren't allowed.
+    #   characters, and the "/action/" substring, aren't allowed.
     #
     # @option params [required, String] :action_id
     #   A system-generated universally unique identifier (UUID) for the
@@ -943,7 +943,7 @@ module Aws::Budgets
     #
     # @option params [required, String] :budget_name
     #   A string that represents the budget name. The ":" and "\\"
-    #   characters aren't allowed.
+    #   characters, and the "/action/" substring, aren't allowed.
     #
     # @option params [required, String] :action_id
     #   A system-generated universally unique identifier (UUID) for the
@@ -1008,7 +1008,7 @@ module Aws::Budgets
     #
     # @option params [required, String] :budget_name
     #   A string that represents the budget name. The ":" and "\\"
-    #   characters aren't allowed.
+    #   characters, and the "/action/" substring, aren't allowed.
     #
     # @option params [required, String] :action_id
     #   A system-generated universally unique identifier (UUID) for the
@@ -1161,7 +1161,7 @@ module Aws::Budgets
     #
     # @option params [required, String] :budget_name
     #   A string that represents the budget name. The ":" and "\\"
-    #   characters aren't allowed.
+    #   characters, and the "/action/" substring, aren't allowed.
     #
     # @option params [Integer] :max_results
     #   An integer that represents how many entries a paginated response
@@ -1279,7 +1279,7 @@ module Aws::Budgets
     #
     # @option params [required, String] :budget_name
     #   A string that represents the budget name. The ":" and "\\"
-    #   characters aren't allowed.
+    #   characters, and the "/action/" substring, aren't allowed.
     #
     # @option params [Types::TimePeriod] :time_period
     #   Retrieves how often the budget went into an `ALARM` state for the
@@ -1542,7 +1542,7 @@ module Aws::Budgets
     #
     # @option params [required, String] :budget_name
     #   A string that represents the budget name. The ":" and "\\"
-    #   characters aren't allowed.
+    #   characters, and the "/action/" substring, aren't allowed.
     #
     # @option params [required, String] :action_id
     #   A system-generated universally unique identifier (UUID) for the
@@ -1678,7 +1678,7 @@ module Aws::Budgets
     #
     # @option params [required, String] :budget_name
     #   A string that represents the budget name. The ":" and "\\"
-    #   characters aren't allowed.
+    #   characters, and the "/action/" substring, aren't allowed.
     #
     # @option params [required, String] :action_id
     #   A system-generated universally unique identifier (UUID) for the
@@ -1919,7 +1919,7 @@ module Aws::Budgets
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-budgets'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

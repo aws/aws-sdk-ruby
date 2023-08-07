@@ -339,6 +339,65 @@ module Aws::CodeCatalyst
       include Aws::Structure
     end
 
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project in the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the source repository. For more information about name
+    #   requirements, see [Quotas for source repositories][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codecatalyst/latest/userguide/source-quotas.html
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the source repository.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/CreateSourceRepositoryRequest AWS API Documentation
+    #
+    class CreateSourceRepositoryRequest < Struct.new(
+      :space_name,
+      :project_name,
+      :name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project in the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the source repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the source repository.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/CreateSourceRepositoryResponse AWS API Documentation
+    #
+    class CreateSourceRepositoryResponse < Struct.new(
+      :space_name,
+      :project_name,
+      :name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] id
     #   The ID of the personal access token to delete. You can find the IDs
     #   of all PATs associated with your Amazon Web Services Builder ID in a
@@ -399,6 +458,122 @@ module Aws::CodeCatalyst
       :space_name,
       :project_name,
       :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the project in the space. To retrieve a list of project
+    #   names, use ListProjects.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/DeleteProjectRequest AWS API Documentation
+    #
+    class DeleteProjectRequest < Struct.new(
+      :space_name,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the project in the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The friendly name displayed to users of the project in Amazon
+    #   CodeCatalyst.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/DeleteProjectResponse AWS API Documentation
+    #
+    class DeleteProjectResponse < Struct.new(
+      :space_name,
+      :name,
+      :display_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project in the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the source repository.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/DeleteSourceRepositoryRequest AWS API Documentation
+    #
+    class DeleteSourceRepositoryRequest < Struct.new(
+      :space_name,
+      :project_name,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project in the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the repository.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/DeleteSourceRepositoryResponse AWS API Documentation
+    #
+    class DeleteSourceRepositoryResponse < Struct.new(
+      :space_name,
+      :project_name,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the space. To retrieve a list of space names, use
+    #   ListSpaces.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/DeleteSpaceRequest AWS API Documentation
+    #
+    class DeleteSpaceRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The friendly name of the space displayed to users of the space in
+    #   Amazon CodeCatalyst.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/DeleteSpaceResponse AWS API Documentation
+    #
+    class DeleteSpaceResponse < Struct.new(
+      :name,
+      :display_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -672,6 +847,7 @@ module Aws::CodeCatalyst
     #   @return [String]
     #
     # @!attribute [rw] user_agent
+    #   The user agent whose actions are recorded in the event.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/EventLogEntry AWS API Documentation
@@ -737,13 +913,18 @@ module Aws::CodeCatalyst
       include Aws::Structure
     end
 
+    # Information about a filter used to limit results of a query.
+    #
     # @!attribute [rw] key
+    #   A key that can be used to sort results.
     #   @return [String]
     #
     # @!attribute [rw] values
+    #   The values of the key.
     #   @return [Array<String>]
     #
     # @!attribute [rw] comparison_operator
+    #   The operator used to compare the fields.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/Filter AWS API Documentation
@@ -938,6 +1119,75 @@ module Aws::CodeCatalyst
     #
     class GetSourceRepositoryCloneUrlsResponse < Struct.new(
       :https)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project in the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the source repository.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/GetSourceRepositoryRequest AWS API Documentation
+    #
+    class GetSourceRepositoryRequest < Struct.new(
+      :space_name,
+      :project_name,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project in the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the source repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the source repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time the source repository was last updated, in coordinated
+    #   universal time (UTC) timestamp format as specified in [RFC 3339][1].
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_time
+    #   The time the source repository was created, in coordinated universal
+    #   time (UTC) timestamp format as specified in [RFC 3339][1].
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/GetSourceRepositoryResponse AWS API Documentation
+    #
+    class GetSourceRepositoryResponse < Struct.new(
+      :space_name,
+      :project_name,
+      :name,
+      :description,
+      :last_updated_time,
+      :created_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1655,7 +1905,7 @@ module Aws::CodeCatalyst
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   The value of the key.
+    #   The values of the key.
     #   @return [Array<String>]
     #
     # @!attribute [rw] comparison_operator
@@ -2138,6 +2388,96 @@ module Aws::CodeCatalyst
       include Aws::Structure
     end
 
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the project.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/UpdateProjectRequest AWS API Documentation
+    #
+    class UpdateProjectRequest < Struct.new(
+      :space_name,
+      :name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The friendly name of the project displayed to users in Amazon
+    #   CodeCatalyst.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the project.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/UpdateProjectResponse AWS API Documentation
+    #
+    class UpdateProjectResponse < Struct.new(
+      :space_name,
+      :name,
+      :display_name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the space.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/UpdateSpaceRequest AWS API Documentation
+    #
+    class UpdateSpaceRequest < Struct.new(
+      :name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The friendly name of the space displayed to users in Amazon
+    #   CodeCatalyst.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the space.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/UpdateSpaceResponse AWS API Documentation
+    #
+    class UpdateSpaceResponse < Struct.new(
+      :name,
+      :display_name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a user whose activity is recorded in an event for a
     # space.
     #
@@ -2147,6 +2487,7 @@ module Aws::CodeCatalyst
     #   @return [String]
     #
     # @!attribute [rw] principal_id
+    #   The ID of the Amazon CodeCatalyst service principal.
     #   @return [String]
     #
     # @!attribute [rw] user_name

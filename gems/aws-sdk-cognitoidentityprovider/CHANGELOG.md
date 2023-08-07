@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2023-08-02)
+------------------
+
+* Feature - New feature that logs Cognito user pool error messages to CloudWatch logs.
+
+1.79.0 (2023-07-13)
+------------------
+
+* Feature - API model updated in Amazon Cognito
+
 1.78.0 (2023-07-11)
 ------------------
 

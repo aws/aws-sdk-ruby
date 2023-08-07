@@ -477,10 +477,12 @@ module Aws::Proton
     #   resp.component.deployment_status_message #=> String
     #   resp.component.description #=> String
     #   resp.component.environment_name #=> String
+    #   resp.component.last_attempted_deployment_id #=> String
     #   resp.component.last_client_request_token #=> String
     #   resp.component.last_deployment_attempted_at #=> Time
     #   resp.component.last_deployment_succeeded_at #=> Time
     #   resp.component.last_modified_at #=> Time
+    #   resp.component.last_succeeded_deployment_id #=> String
     #   resp.component.name #=> String
     #   resp.component.service_instance_name #=> String
     #   resp.component.service_name #=> String
@@ -539,8 +541,10 @@ module Aws::Proton
     #   resp.environment.description #=> String
     #   resp.environment.environment_account_connection_id #=> String
     #   resp.environment.environment_account_id #=> String
+    #   resp.environment.last_attempted_deployment_id #=> String
     #   resp.environment.last_deployment_attempted_at #=> Time
     #   resp.environment.last_deployment_succeeded_at #=> Time
+    #   resp.environment.last_succeeded_deployment_id #=> String
     #   resp.environment.name #=> String
     #   resp.environment.proton_service_role_arn #=> String
     #   resp.environment.provisioning #=> String, one of "CUSTOMER_MANAGED"
@@ -608,9 +612,11 @@ module Aws::Proton
     #   resp.service_instance.deployment_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "CANCELLING", "CANCELLED"
     #   resp.service_instance.deployment_status_message #=> String
     #   resp.service_instance.environment_name #=> String
+    #   resp.service_instance.last_attempted_deployment_id #=> String
     #   resp.service_instance.last_client_request_token #=> String
     #   resp.service_instance.last_deployment_attempted_at #=> Time
     #   resp.service_instance.last_deployment_succeeded_at #=> Time
+    #   resp.service_instance.last_succeeded_deployment_id #=> String
     #   resp.service_instance.name #=> String
     #   resp.service_instance.service_name #=> String
     #   resp.service_instance.spec #=> String
@@ -668,8 +674,10 @@ module Aws::Proton
     #   resp.pipeline.created_at #=> Time
     #   resp.pipeline.deployment_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "CANCELLING", "CANCELLED"
     #   resp.pipeline.deployment_status_message #=> String
+    #   resp.pipeline.last_attempted_deployment_id #=> String
     #   resp.pipeline.last_deployment_attempted_at #=> Time
     #   resp.pipeline.last_deployment_succeeded_at #=> Time
+    #   resp.pipeline.last_succeeded_deployment_id #=> String
     #   resp.pipeline.spec #=> String
     #   resp.pipeline.template_major_version #=> String
     #   resp.pipeline.template_minor_version #=> String
@@ -785,10 +793,12 @@ module Aws::Proton
     #   resp.component.deployment_status_message #=> String
     #   resp.component.description #=> String
     #   resp.component.environment_name #=> String
+    #   resp.component.last_attempted_deployment_id #=> String
     #   resp.component.last_client_request_token #=> String
     #   resp.component.last_deployment_attempted_at #=> Time
     #   resp.component.last_deployment_succeeded_at #=> Time
     #   resp.component.last_modified_at #=> Time
+    #   resp.component.last_succeeded_deployment_id #=> String
     #   resp.component.name #=> String
     #   resp.component.service_instance_name #=> String
     #   resp.component.service_name #=> String
@@ -964,8 +974,10 @@ module Aws::Proton
     #   resp.environment.description #=> String
     #   resp.environment.environment_account_connection_id #=> String
     #   resp.environment.environment_account_id #=> String
+    #   resp.environment.last_attempted_deployment_id #=> String
     #   resp.environment.last_deployment_attempted_at #=> Time
     #   resp.environment.last_deployment_succeeded_at #=> Time
+    #   resp.environment.last_succeeded_deployment_id #=> String
     #   resp.environment.name #=> String
     #   resp.environment.proton_service_role_arn #=> String
     #   resp.environment.provisioning #=> String, one of "CUSTOMER_MANAGED"
@@ -1471,8 +1483,10 @@ module Aws::Proton
     #   resp.service.pipeline.created_at #=> Time
     #   resp.service.pipeline.deployment_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "CANCELLING", "CANCELLED"
     #   resp.service.pipeline.deployment_status_message #=> String
+    #   resp.service.pipeline.last_attempted_deployment_id #=> String
     #   resp.service.pipeline.last_deployment_attempted_at #=> Time
     #   resp.service.pipeline.last_deployment_succeeded_at #=> Time
+    #   resp.service.pipeline.last_succeeded_deployment_id #=> String
     #   resp.service.pipeline.spec #=> String
     #   resp.service.pipeline.template_major_version #=> String
     #   resp.service.pipeline.template_minor_version #=> String
@@ -1557,9 +1571,11 @@ module Aws::Proton
     #   resp.service_instance.deployment_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "CANCELLING", "CANCELLED"
     #   resp.service_instance.deployment_status_message #=> String
     #   resp.service_instance.environment_name #=> String
+    #   resp.service_instance.last_attempted_deployment_id #=> String
     #   resp.service_instance.last_client_request_token #=> String
     #   resp.service_instance.last_deployment_attempted_at #=> Time
     #   resp.service_instance.last_deployment_succeeded_at #=> Time
+    #   resp.service_instance.last_succeeded_deployment_id #=> String
     #   resp.service_instance.name #=> String
     #   resp.service_instance.service_name #=> String
     #   resp.service_instance.spec #=> String
@@ -1930,10 +1946,12 @@ module Aws::Proton
     #   resp.component.deployment_status_message #=> String
     #   resp.component.description #=> String
     #   resp.component.environment_name #=> String
+    #   resp.component.last_attempted_deployment_id #=> String
     #   resp.component.last_client_request_token #=> String
     #   resp.component.last_deployment_attempted_at #=> Time
     #   resp.component.last_deployment_succeeded_at #=> Time
     #   resp.component.last_modified_at #=> Time
+    #   resp.component.last_succeeded_deployment_id #=> String
     #   resp.component.name #=> String
     #   resp.component.service_instance_name #=> String
     #   resp.component.service_name #=> String
@@ -1945,6 +1963,89 @@ module Aws::Proton
     # @param [Hash] params ({})
     def delete_component(params = {}, options = {})
       req = build_request(:delete_component, params)
+      req.send_request(options)
+    end
+
+    # Delete the deployment.
+    #
+    # @option params [required, String] :id
+    #   The ID of the deployment to delete.
+    #
+    # @return [Types::DeleteDeploymentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDeploymentOutput#deployment #deployment} => Types::Deployment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_deployment({
+    #     id: "DeploymentId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deployment.arn #=> String
+    #   resp.deployment.completed_at #=> Time
+    #   resp.deployment.component_name #=> String
+    #   resp.deployment.created_at #=> Time
+    #   resp.deployment.deployment_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "CANCELLING", "CANCELLED"
+    #   resp.deployment.deployment_status_message #=> String
+    #   resp.deployment.environment_name #=> String
+    #   resp.deployment.id #=> String
+    #   resp.deployment.initial_state.component.service_instance_name #=> String
+    #   resp.deployment.initial_state.component.service_name #=> String
+    #   resp.deployment.initial_state.component.service_spec #=> String
+    #   resp.deployment.initial_state.component.template_file #=> String
+    #   resp.deployment.initial_state.environment.spec #=> String
+    #   resp.deployment.initial_state.environment.template_major_version #=> String
+    #   resp.deployment.initial_state.environment.template_minor_version #=> String
+    #   resp.deployment.initial_state.environment.template_name #=> String
+    #   resp.deployment.initial_state.service_instance.last_successful_component_deployment_ids #=> Array
+    #   resp.deployment.initial_state.service_instance.last_successful_component_deployment_ids[0] #=> String
+    #   resp.deployment.initial_state.service_instance.last_successful_environment_deployment_id #=> String
+    #   resp.deployment.initial_state.service_instance.last_successful_service_pipeline_deployment_id #=> String
+    #   resp.deployment.initial_state.service_instance.spec #=> String
+    #   resp.deployment.initial_state.service_instance.template_major_version #=> String
+    #   resp.deployment.initial_state.service_instance.template_minor_version #=> String
+    #   resp.deployment.initial_state.service_instance.template_name #=> String
+    #   resp.deployment.initial_state.service_pipeline.spec #=> String
+    #   resp.deployment.initial_state.service_pipeline.template_major_version #=> String
+    #   resp.deployment.initial_state.service_pipeline.template_minor_version #=> String
+    #   resp.deployment.initial_state.service_pipeline.template_name #=> String
+    #   resp.deployment.last_attempted_deployment_id #=> String
+    #   resp.deployment.last_modified_at #=> Time
+    #   resp.deployment.last_succeeded_deployment_id #=> String
+    #   resp.deployment.service_instance_name #=> String
+    #   resp.deployment.service_name #=> String
+    #   resp.deployment.target_arn #=> String
+    #   resp.deployment.target_resource_created_at #=> Time
+    #   resp.deployment.target_resource_type #=> String, one of "ENVIRONMENT", "SERVICE_PIPELINE", "SERVICE_INSTANCE", "COMPONENT"
+    #   resp.deployment.target_state.component.service_instance_name #=> String
+    #   resp.deployment.target_state.component.service_name #=> String
+    #   resp.deployment.target_state.component.service_spec #=> String
+    #   resp.deployment.target_state.component.template_file #=> String
+    #   resp.deployment.target_state.environment.spec #=> String
+    #   resp.deployment.target_state.environment.template_major_version #=> String
+    #   resp.deployment.target_state.environment.template_minor_version #=> String
+    #   resp.deployment.target_state.environment.template_name #=> String
+    #   resp.deployment.target_state.service_instance.last_successful_component_deployment_ids #=> Array
+    #   resp.deployment.target_state.service_instance.last_successful_component_deployment_ids[0] #=> String
+    #   resp.deployment.target_state.service_instance.last_successful_environment_deployment_id #=> String
+    #   resp.deployment.target_state.service_instance.last_successful_service_pipeline_deployment_id #=> String
+    #   resp.deployment.target_state.service_instance.spec #=> String
+    #   resp.deployment.target_state.service_instance.template_major_version #=> String
+    #   resp.deployment.target_state.service_instance.template_minor_version #=> String
+    #   resp.deployment.target_state.service_instance.template_name #=> String
+    #   resp.deployment.target_state.service_pipeline.spec #=> String
+    #   resp.deployment.target_state.service_pipeline.template_major_version #=> String
+    #   resp.deployment.target_state.service_pipeline.template_minor_version #=> String
+    #   resp.deployment.target_state.service_pipeline.template_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/DeleteDeployment AWS API Documentation
+    #
+    # @overload delete_deployment(params = {})
+    # @param [Hash] params ({})
+    def delete_deployment(params = {}, options = {})
+      req = build_request(:delete_deployment, params)
       req.send_request(options)
     end
 
@@ -1974,8 +2075,10 @@ module Aws::Proton
     #   resp.environment.description #=> String
     #   resp.environment.environment_account_connection_id #=> String
     #   resp.environment.environment_account_id #=> String
+    #   resp.environment.last_attempted_deployment_id #=> String
     #   resp.environment.last_deployment_attempted_at #=> Time
     #   resp.environment.last_deployment_succeeded_at #=> Time
+    #   resp.environment.last_succeeded_deployment_id #=> String
     #   resp.environment.name #=> String
     #   resp.environment.proton_service_role_arn #=> String
     #   resp.environment.provisioning #=> String, one of "CUSTOMER_MANAGED"
@@ -2218,8 +2321,10 @@ module Aws::Proton
     #   resp.service.pipeline.created_at #=> Time
     #   resp.service.pipeline.deployment_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "CANCELLING", "CANCELLED"
     #   resp.service.pipeline.deployment_status_message #=> String
+    #   resp.service.pipeline.last_attempted_deployment_id #=> String
     #   resp.service.pipeline.last_deployment_attempted_at #=> Time
     #   resp.service.pipeline.last_deployment_succeeded_at #=> Time
+    #   resp.service.pipeline.last_succeeded_deployment_id #=> String
     #   resp.service.pipeline.spec #=> String
     #   resp.service.pipeline.template_major_version #=> String
     #   resp.service.pipeline.template_minor_version #=> String
@@ -2463,10 +2568,12 @@ module Aws::Proton
     #   resp.component.deployment_status_message #=> String
     #   resp.component.description #=> String
     #   resp.component.environment_name #=> String
+    #   resp.component.last_attempted_deployment_id #=> String
     #   resp.component.last_client_request_token #=> String
     #   resp.component.last_deployment_attempted_at #=> Time
     #   resp.component.last_deployment_succeeded_at #=> Time
     #   resp.component.last_modified_at #=> Time
+    #   resp.component.last_succeeded_deployment_id #=> String
     #   resp.component.name #=> String
     #   resp.component.service_instance_name #=> String
     #   resp.component.service_name #=> String
@@ -2484,6 +2591,106 @@ module Aws::Proton
     # @param [Hash] params ({})
     def get_component(params = {}, options = {})
       req = build_request(:get_component, params)
+      req.send_request(options)
+    end
+
+    # Get detailed data for a deployment.
+    #
+    # @option params [String] :component_name
+    #   The name of a component that you want to get the detailed data for.
+    #
+    # @option params [String] :environment_name
+    #   The name of a environment that you want to get the detailed data for.
+    #
+    # @option params [required, String] :id
+    #   The ID of the deployment that you want to get the detailed data for.
+    #
+    # @option params [String] :service_instance_name
+    #   The name of the service instance associated with the given deployment
+    #   ID. `serviceName` must be specified to identify the service instance.
+    #
+    # @option params [String] :service_name
+    #   The name of the service associated with the given deployment ID.
+    #
+    # @return [Types::GetDeploymentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDeploymentOutput#deployment #deployment} => Types::Deployment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_deployment({
+    #     component_name: "ResourceName",
+    #     environment_name: "ResourceName",
+    #     id: "DeploymentId", # required
+    #     service_instance_name: "ResourceName",
+    #     service_name: "ResourceName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deployment.arn #=> String
+    #   resp.deployment.completed_at #=> Time
+    #   resp.deployment.component_name #=> String
+    #   resp.deployment.created_at #=> Time
+    #   resp.deployment.deployment_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "CANCELLING", "CANCELLED"
+    #   resp.deployment.deployment_status_message #=> String
+    #   resp.deployment.environment_name #=> String
+    #   resp.deployment.id #=> String
+    #   resp.deployment.initial_state.component.service_instance_name #=> String
+    #   resp.deployment.initial_state.component.service_name #=> String
+    #   resp.deployment.initial_state.component.service_spec #=> String
+    #   resp.deployment.initial_state.component.template_file #=> String
+    #   resp.deployment.initial_state.environment.spec #=> String
+    #   resp.deployment.initial_state.environment.template_major_version #=> String
+    #   resp.deployment.initial_state.environment.template_minor_version #=> String
+    #   resp.deployment.initial_state.environment.template_name #=> String
+    #   resp.deployment.initial_state.service_instance.last_successful_component_deployment_ids #=> Array
+    #   resp.deployment.initial_state.service_instance.last_successful_component_deployment_ids[0] #=> String
+    #   resp.deployment.initial_state.service_instance.last_successful_environment_deployment_id #=> String
+    #   resp.deployment.initial_state.service_instance.last_successful_service_pipeline_deployment_id #=> String
+    #   resp.deployment.initial_state.service_instance.spec #=> String
+    #   resp.deployment.initial_state.service_instance.template_major_version #=> String
+    #   resp.deployment.initial_state.service_instance.template_minor_version #=> String
+    #   resp.deployment.initial_state.service_instance.template_name #=> String
+    #   resp.deployment.initial_state.service_pipeline.spec #=> String
+    #   resp.deployment.initial_state.service_pipeline.template_major_version #=> String
+    #   resp.deployment.initial_state.service_pipeline.template_minor_version #=> String
+    #   resp.deployment.initial_state.service_pipeline.template_name #=> String
+    #   resp.deployment.last_attempted_deployment_id #=> String
+    #   resp.deployment.last_modified_at #=> Time
+    #   resp.deployment.last_succeeded_deployment_id #=> String
+    #   resp.deployment.service_instance_name #=> String
+    #   resp.deployment.service_name #=> String
+    #   resp.deployment.target_arn #=> String
+    #   resp.deployment.target_resource_created_at #=> Time
+    #   resp.deployment.target_resource_type #=> String, one of "ENVIRONMENT", "SERVICE_PIPELINE", "SERVICE_INSTANCE", "COMPONENT"
+    #   resp.deployment.target_state.component.service_instance_name #=> String
+    #   resp.deployment.target_state.component.service_name #=> String
+    #   resp.deployment.target_state.component.service_spec #=> String
+    #   resp.deployment.target_state.component.template_file #=> String
+    #   resp.deployment.target_state.environment.spec #=> String
+    #   resp.deployment.target_state.environment.template_major_version #=> String
+    #   resp.deployment.target_state.environment.template_minor_version #=> String
+    #   resp.deployment.target_state.environment.template_name #=> String
+    #   resp.deployment.target_state.service_instance.last_successful_component_deployment_ids #=> Array
+    #   resp.deployment.target_state.service_instance.last_successful_component_deployment_ids[0] #=> String
+    #   resp.deployment.target_state.service_instance.last_successful_environment_deployment_id #=> String
+    #   resp.deployment.target_state.service_instance.last_successful_service_pipeline_deployment_id #=> String
+    #   resp.deployment.target_state.service_instance.spec #=> String
+    #   resp.deployment.target_state.service_instance.template_major_version #=> String
+    #   resp.deployment.target_state.service_instance.template_minor_version #=> String
+    #   resp.deployment.target_state.service_instance.template_name #=> String
+    #   resp.deployment.target_state.service_pipeline.spec #=> String
+    #   resp.deployment.target_state.service_pipeline.template_major_version #=> String
+    #   resp.deployment.target_state.service_pipeline.template_minor_version #=> String
+    #   resp.deployment.target_state.service_pipeline.template_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetDeployment AWS API Documentation
+    #
+    # @overload get_deployment(params = {})
+    # @param [Hash] params ({})
+    def get_deployment(params = {}, options = {})
+      req = build_request(:get_deployment, params)
       req.send_request(options)
     end
 
@@ -2514,8 +2721,10 @@ module Aws::Proton
     #   resp.environment.description #=> String
     #   resp.environment.environment_account_connection_id #=> String
     #   resp.environment.environment_account_id #=> String
+    #   resp.environment.last_attempted_deployment_id #=> String
     #   resp.environment.last_deployment_attempted_at #=> Time
     #   resp.environment.last_deployment_succeeded_at #=> Time
+    #   resp.environment.last_succeeded_deployment_id #=> String
     #   resp.environment.name #=> String
     #   resp.environment.proton_service_role_arn #=> String
     #   resp.environment.provisioning #=> String, one of "CUSTOMER_MANAGED"
@@ -2882,8 +3091,10 @@ module Aws::Proton
     #   resp.service.pipeline.created_at #=> Time
     #   resp.service.pipeline.deployment_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "CANCELLING", "CANCELLED"
     #   resp.service.pipeline.deployment_status_message #=> String
+    #   resp.service.pipeline.last_attempted_deployment_id #=> String
     #   resp.service.pipeline.last_deployment_attempted_at #=> Time
     #   resp.service.pipeline.last_deployment_succeeded_at #=> Time
+    #   resp.service.pipeline.last_succeeded_deployment_id #=> String
     #   resp.service.pipeline.spec #=> String
     #   resp.service.pipeline.template_major_version #=> String
     #   resp.service.pipeline.template_minor_version #=> String
@@ -2941,9 +3152,11 @@ module Aws::Proton
     #   resp.service_instance.deployment_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "CANCELLING", "CANCELLED"
     #   resp.service_instance.deployment_status_message #=> String
     #   resp.service_instance.environment_name #=> String
+    #   resp.service_instance.last_attempted_deployment_id #=> String
     #   resp.service_instance.last_client_request_token #=> String
     #   resp.service_instance.last_deployment_attempted_at #=> Time
     #   resp.service_instance.last_deployment_succeeded_at #=> Time
+    #   resp.service_instance.last_succeeded_deployment_id #=> String
     #   resp.service_instance.name #=> String
     #   resp.service_instance.service_name #=> String
     #   resp.service_instance.spec #=> String
@@ -3344,6 +3557,9 @@ module Aws::Proton
     # @option params [required, String] :component_name
     #   The name of the component whose outputs you want.
     #
+    # @option params [String] :deployment_id
+    #   The ID of the deployment whose outputs you want.
+    #
     # @option params [String] :next_token
     #   A token that indicates the location of the next output in the array of
     #   outputs, after the list of outputs that was previously requested.
@@ -3359,6 +3575,7 @@ module Aws::Proton
     #
     #   resp = client.list_component_outputs({
     #     component_name: "ResourceName", # required
+    #     deployment_id: "DeploymentId",
     #     next_token: "EmptyNextToken",
     #   })
     #
@@ -3482,9 +3699,11 @@ module Aws::Proton
     #   resp.components[0].deployment_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "CANCELLING", "CANCELLED"
     #   resp.components[0].deployment_status_message #=> String
     #   resp.components[0].environment_name #=> String
+    #   resp.components[0].last_attempted_deployment_id #=> String
     #   resp.components[0].last_deployment_attempted_at #=> Time
     #   resp.components[0].last_deployment_succeeded_at #=> Time
     #   resp.components[0].last_modified_at #=> Time
+    #   resp.components[0].last_succeeded_deployment_id #=> String
     #   resp.components[0].name #=> String
     #   resp.components[0].service_instance_name #=> String
     #   resp.components[0].service_name #=> String
@@ -3496,6 +3715,80 @@ module Aws::Proton
     # @param [Hash] params ({})
     def list_components(params = {}, options = {})
       req = build_request(:list_components, params)
+      req.send_request(options)
+    end
+
+    # List deployments. You can filter the result list by environment,
+    # service, or a single service instance.
+    #
+    # @option params [String] :component_name
+    #   The name of a component for result list filtering. Proton returns
+    #   deployments associated with that component.
+    #
+    # @option params [String] :environment_name
+    #   The name of an environment for result list filtering. Proton returns
+    #   deployments associated with the environment.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of deployments to list.
+    #
+    # @option params [String] :next_token
+    #   A token that indicates the location of the next deployment in the
+    #   array of deployment, after the list of deployment that was previously
+    #   requested.
+    #
+    # @option params [String] :service_instance_name
+    #   The name of a service instance for result list filtering. Proton
+    #   returns the deployments associated with the service instance.
+    #
+    # @option params [String] :service_name
+    #   The name of a service for result list filtering. Proton returns
+    #   deployments associated with service instances of the service.
+    #
+    # @return [Types::ListDeploymentsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDeploymentsOutput#deployments #deployments} => Array&lt;Types::DeploymentSummary&gt;
+    #   * {Types::ListDeploymentsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_deployments({
+    #     component_name: "ResourceName",
+    #     environment_name: "ResourceName",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     service_instance_name: "ResourceName",
+    #     service_name: "ResourceName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deployments #=> Array
+    #   resp.deployments[0].arn #=> String
+    #   resp.deployments[0].completed_at #=> Time
+    #   resp.deployments[0].component_name #=> String
+    #   resp.deployments[0].created_at #=> Time
+    #   resp.deployments[0].deployment_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "CANCELLING", "CANCELLED"
+    #   resp.deployments[0].environment_name #=> String
+    #   resp.deployments[0].id #=> String
+    #   resp.deployments[0].last_attempted_deployment_id #=> String
+    #   resp.deployments[0].last_modified_at #=> Time
+    #   resp.deployments[0].last_succeeded_deployment_id #=> String
+    #   resp.deployments[0].service_instance_name #=> String
+    #   resp.deployments[0].service_name #=> String
+    #   resp.deployments[0].target_arn #=> String
+    #   resp.deployments[0].target_resource_created_at #=> Time
+    #   resp.deployments[0].target_resource_type #=> String, one of "ENVIRONMENT", "SERVICE_PIPELINE", "SERVICE_INSTANCE", "COMPONENT"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListDeployments AWS API Documentation
+    #
+    # @overload list_deployments(params = {})
+    # @param [Hash] params ({})
+    def list_deployments(params = {}, options = {})
+      req = build_request(:list_deployments, params)
       req.send_request(options)
     end
 
@@ -3570,6 +3863,9 @@ module Aws::Proton
 
     # List the infrastructure as code outputs for your environment.
     #
+    # @option params [String] :deployment_id
+    #   The ID of the deployment whose outputs you want.
+    #
     # @option params [required, String] :environment_name
     #   The environment name.
     #
@@ -3588,6 +3884,7 @@ module Aws::Proton
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_environment_outputs({
+    #     deployment_id: "DeploymentId",
     #     environment_name: "ResourceName", # required
     #     next_token: "EmptyNextToken",
     #   })
@@ -3803,8 +4100,10 @@ module Aws::Proton
     #   resp.environments[0].description #=> String
     #   resp.environments[0].environment_account_connection_id #=> String
     #   resp.environments[0].environment_account_id #=> String
+    #   resp.environments[0].last_attempted_deployment_id #=> String
     #   resp.environments[0].last_deployment_attempted_at #=> Time
     #   resp.environments[0].last_deployment_succeeded_at #=> Time
+    #   resp.environments[0].last_succeeded_deployment_id #=> String
     #   resp.environments[0].name #=> String
     #   resp.environments[0].proton_service_role_arn #=> String
     #   resp.environments[0].provisioning #=> String, one of "CUSTOMER_MANAGED"
@@ -3916,6 +4215,9 @@ module Aws::Proton
 
     # Get a list service of instance Infrastructure as Code (IaC) outputs.
     #
+    # @option params [String] :deployment_id
+    #   The ID of the deployment whose outputs you want.
+    #
     # @option params [String] :next_token
     #   A token that indicates the location of the next output in the array of
     #   outputs, after the list of outputs that was previously requested.
@@ -3936,6 +4238,7 @@ module Aws::Proton
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_service_instance_outputs({
+    #     deployment_id: "DeploymentId",
     #     next_token: "EmptyNextToken",
     #     service_instance_name: "ResourceName", # required
     #     service_name: "ResourceName", # required
@@ -4066,8 +4369,10 @@ module Aws::Proton
     #   resp.service_instances[0].deployment_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "CANCELLING", "CANCELLED"
     #   resp.service_instances[0].deployment_status_message #=> String
     #   resp.service_instances[0].environment_name #=> String
+    #   resp.service_instances[0].last_attempted_deployment_id #=> String
     #   resp.service_instances[0].last_deployment_attempted_at #=> Time
     #   resp.service_instances[0].last_deployment_succeeded_at #=> Time
+    #   resp.service_instances[0].last_succeeded_deployment_id #=> String
     #   resp.service_instances[0].name #=> String
     #   resp.service_instances[0].service_name #=> String
     #   resp.service_instances[0].template_major_version #=> String
@@ -4084,6 +4389,9 @@ module Aws::Proton
     end
 
     # Get a list of service pipeline Infrastructure as Code (IaC) outputs.
+    #
+    # @option params [String] :deployment_id
+    #   The ID of the deployment you want the outputs for.
     #
     # @option params [String] :next_token
     #   A token that indicates the location of the next output in the array of
@@ -4102,6 +4410,7 @@ module Aws::Proton
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_service_pipeline_outputs({
+    #     deployment_id: "DeploymentId",
     #     next_token: "EmptyNextToken",
     #     service_name: "ResourceName", # required
     #   })
@@ -4716,10 +5025,12 @@ module Aws::Proton
     #   resp.component.deployment_status_message #=> String
     #   resp.component.description #=> String
     #   resp.component.environment_name #=> String
+    #   resp.component.last_attempted_deployment_id #=> String
     #   resp.component.last_client_request_token #=> String
     #   resp.component.last_deployment_attempted_at #=> Time
     #   resp.component.last_deployment_succeeded_at #=> Time
     #   resp.component.last_modified_at #=> Time
+    #   resp.component.last_succeeded_deployment_id #=> String
     #   resp.component.name #=> String
     #   resp.component.service_instance_name #=> String
     #   resp.component.service_name #=> String
@@ -4937,8 +5248,10 @@ module Aws::Proton
     #   resp.environment.description #=> String
     #   resp.environment.environment_account_connection_id #=> String
     #   resp.environment.environment_account_id #=> String
+    #   resp.environment.last_attempted_deployment_id #=> String
     #   resp.environment.last_deployment_attempted_at #=> Time
     #   resp.environment.last_deployment_succeeded_at #=> Time
+    #   resp.environment.last_succeeded_deployment_id #=> String
     #   resp.environment.name #=> String
     #   resp.environment.proton_service_role_arn #=> String
     #   resp.environment.provisioning #=> String, one of "CUSTOMER_MANAGED"
@@ -5202,8 +5515,10 @@ module Aws::Proton
     #   resp.service.pipeline.created_at #=> Time
     #   resp.service.pipeline.deployment_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "CANCELLING", "CANCELLED"
     #   resp.service.pipeline.deployment_status_message #=> String
+    #   resp.service.pipeline.last_attempted_deployment_id #=> String
     #   resp.service.pipeline.last_deployment_attempted_at #=> Time
     #   resp.service.pipeline.last_deployment_succeeded_at #=> Time
+    #   resp.service.pipeline.last_succeeded_deployment_id #=> String
     #   resp.service.pipeline.spec #=> String
     #   resp.service.pipeline.template_major_version #=> String
     #   resp.service.pipeline.template_minor_version #=> String
@@ -5324,9 +5639,11 @@ module Aws::Proton
     #   resp.service_instance.deployment_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "CANCELLING", "CANCELLED"
     #   resp.service_instance.deployment_status_message #=> String
     #   resp.service_instance.environment_name #=> String
+    #   resp.service_instance.last_attempted_deployment_id #=> String
     #   resp.service_instance.last_client_request_token #=> String
     #   resp.service_instance.last_deployment_attempted_at #=> Time
     #   resp.service_instance.last_deployment_succeeded_at #=> Time
+    #   resp.service_instance.last_succeeded_deployment_id #=> String
     #   resp.service_instance.name #=> String
     #   resp.service_instance.service_name #=> String
     #   resp.service_instance.spec #=> String
@@ -5458,8 +5775,10 @@ module Aws::Proton
     #   resp.pipeline.created_at #=> Time
     #   resp.pipeline.deployment_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "CANCELLING", "CANCELLED"
     #   resp.pipeline.deployment_status_message #=> String
+    #   resp.pipeline.last_attempted_deployment_id #=> String
     #   resp.pipeline.last_deployment_attempted_at #=> Time
     #   resp.pipeline.last_deployment_succeeded_at #=> Time
+    #   resp.pipeline.last_succeeded_deployment_id #=> String
     #   resp.pipeline.spec #=> String
     #   resp.pipeline.template_major_version #=> String
     #   resp.pipeline.template_minor_version #=> String
@@ -5777,7 +6096,7 @@ module Aws::Proton
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-proton'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

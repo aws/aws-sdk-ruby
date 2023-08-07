@@ -445,8 +445,10 @@ module Aws::MainframeModernization
     #   The unique identifier of the application.
     #
     # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) of the role associated with the
-    #   application.
+    #   The Amazon Resource Name (ARN) that identifies a role that the
+    #   application uses to access Amazon Web Services resources that are not
+    #   part of the application or are in a different Amazon Web Services
+    #   account.
     #
     # @option params [Hash<String,String>] :tags
     #   A list of tags to apply to the application.
@@ -1209,7 +1211,7 @@ module Aws::MainframeModernization
     #   resp.publicly_accessible #=> Boolean
     #   resp.security_group_ids #=> Array
     #   resp.security_group_ids[0] #=> String
-    #   resp.status #=> String, one of "Creating", "Available", "Deleting", "Failed", "Updating"
+    #   resp.status #=> String, one of "Creating", "Available", "Updating", "Deleting", "Failed"
     #   resp.status_reason #=> String
     #   resp.storage_configurations #=> Array
     #   resp.storage_configurations[0].efs.file_system_id #=> String
@@ -1228,6 +1230,26 @@ module Aws::MainframeModernization
     # @param [Hash] params ({})
     def get_environment(params = {}, options = {})
       req = build_request(:get_environment, params)
+      req.send_request(options)
+    end
+
+    # Gets a single sign-on URL that can be used to connect to AWS Blu
+    # Insights.
+    #
+    # @return [Types::GetSignedBluinsightsUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSignedBluinsightsUrlResponse#signed_bi_url #signed_bi_url} => String
+    #
+    # @example Response structure
+    #
+    #   resp.signed_bi_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/GetSignedBluinsightsUrl AWS API Documentation
+    #
+    # @overload get_signed_bluinsights_url(params = {})
+    # @param [Hash] params ({})
+    def get_signed_bluinsights_url(params = {}, options = {})
+      req = build_request(:get_signed_bluinsights_url, params)
       req.send_request(options)
     end
 
@@ -1715,7 +1737,7 @@ module Aws::MainframeModernization
     #   resp.environments[0].environment_id #=> String
     #   resp.environments[0].instance_type #=> String
     #   resp.environments[0].name #=> String
-    #   resp.environments[0].status #=> String, one of "Creating", "Available", "Deleting", "Failed", "Updating"
+    #   resp.environments[0].status #=> String, one of "Creating", "Available", "Updating", "Deleting", "Failed"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/ListEnvironments AWS API Documentation
@@ -1970,7 +1992,8 @@ module Aws::MainframeModernization
     #   will fail if `applyDuringMaintenanceWindow` is set to true.
     #
     # @option params [Integer] :desired_capacity
-    #   The desired capacity for the runtime environment to update.
+    #   The desired capacity for the runtime environment to update. The
+    #   minimum possible value is 0 and the maximum is 100.
     #
     # @option params [String] :engine_version
     #   The version of the runtime engine for the runtime environment.
@@ -2028,7 +2051,7 @@ module Aws::MainframeModernization
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mainframemodernization'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

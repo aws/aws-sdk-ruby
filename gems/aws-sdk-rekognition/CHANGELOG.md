@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.86.0 (2023-08-07)
+------------------
+
+* Feature - This release adds code snippets for Amazon Rekognition Custom Labels.
+
 1.85.0 (2023-07-11)
 ------------------
 

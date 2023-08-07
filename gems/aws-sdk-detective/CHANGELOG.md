@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2023-08-07)
+------------------
+
+* Feature - Updated the email validation regex to be in line with the TLD name specifications.
+
 1.38.0 (2023-07-11)
 ------------------
 

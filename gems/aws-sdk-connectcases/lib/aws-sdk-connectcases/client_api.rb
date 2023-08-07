@@ -32,6 +32,7 @@ module Aws::ConnectCases
     CaseEventIncludedDataFieldsList = Shapes::ListShape.new(name: 'CaseEventIncludedDataFieldsList')
     CaseFilter = Shapes::UnionShape.new(name: 'CaseFilter')
     CaseFilterAndAllList = Shapes::ListShape.new(name: 'CaseFilterAndAllList')
+    CaseFilterOrAllList = Shapes::ListShape.new(name: 'CaseFilterOrAllList')
     CaseId = Shapes::StringShape.new(name: 'CaseId')
     CaseSummary = Shapes::StructureShape.new(name: 'CaseSummary')
     Channel = Shapes::StringShape.new(name: 'Channel')
@@ -70,6 +71,7 @@ module Aws::ConnectCases
     DomainSummary = Shapes::StructureShape.new(name: 'DomainSummary')
     DomainSummaryList = Shapes::ListShape.new(name: 'DomainSummaryList')
     Double = Shapes::FloatShape.new(name: 'Double')
+    EmptyFieldValue = Shapes::StructureShape.new(name: 'EmptyFieldValue')
     EventBridgeConfiguration = Shapes::StructureShape.new(name: 'EventBridgeConfiguration')
     EventIncludedData = Shapes::StructureShape.new(name: 'EventIncludedData')
     FieldArn = Shapes::StringShape.new(name: 'FieldArn')
@@ -238,14 +240,18 @@ module Aws::ConnectCases
     CaseFilter.add_member(:and_all, Shapes::ShapeRef.new(shape: CaseFilterAndAllList, location_name: "andAll"))
     CaseFilter.add_member(:field, Shapes::ShapeRef.new(shape: FieldFilter, location_name: "field"))
     CaseFilter.add_member(:not, Shapes::ShapeRef.new(shape: CaseFilter, location_name: "not"))
+    CaseFilter.add_member(:or_all, Shapes::ShapeRef.new(shape: CaseFilterOrAllList, location_name: "orAll"))
     CaseFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     CaseFilter.add_member_subclass(:and_all, Types::CaseFilter::AndAll)
     CaseFilter.add_member_subclass(:field, Types::CaseFilter::Field)
     CaseFilter.add_member_subclass(:not, Types::CaseFilter::Not)
+    CaseFilter.add_member_subclass(:or_all, Types::CaseFilter::OrAll)
     CaseFilter.add_member_subclass(:unknown, Types::CaseFilter::Unknown)
     CaseFilter.struct_class = Types::CaseFilter
 
     CaseFilterAndAllList.member = Shapes::ShapeRef.new(shape: CaseFilter)
+
+    CaseFilterOrAllList.member = Shapes::ShapeRef.new(shape: CaseFilter)
 
     CaseSummary.add_member(:case_id, Shapes::ShapeRef.new(shape: CaseId, required: true, location_name: "caseId"))
     CaseSummary.add_member(:template_id, Shapes::ShapeRef.new(shape: TemplateId, required: true, location_name: "templateId"))
@@ -347,6 +353,8 @@ module Aws::ConnectCases
 
     DomainSummaryList.member = Shapes::ShapeRef.new(shape: DomainSummary)
 
+    EmptyFieldValue.struct_class = Types::EmptyFieldValue
+
     EventBridgeConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
     EventBridgeConfiguration.add_member(:included_data, Shapes::ShapeRef.new(shape: EventIncludedData, location_name: "includedData"))
     EventBridgeConfiguration.struct_class = Types::EventBridgeConfiguration
@@ -413,10 +421,12 @@ module Aws::ConnectCases
 
     FieldValueUnion.add_member(:boolean_value, Shapes::ShapeRef.new(shape: Boolean, location_name: "booleanValue"))
     FieldValueUnion.add_member(:double_value, Shapes::ShapeRef.new(shape: Double, location_name: "doubleValue"))
+    FieldValueUnion.add_member(:empty_value, Shapes::ShapeRef.new(shape: EmptyFieldValue, location_name: "emptyValue"))
     FieldValueUnion.add_member(:string_value, Shapes::ShapeRef.new(shape: FieldValueUnionStringValueString, location_name: "stringValue"))
     FieldValueUnion.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     FieldValueUnion.add_member_subclass(:boolean_value, Types::FieldValueUnion::BooleanValue)
     FieldValueUnion.add_member_subclass(:double_value, Types::FieldValueUnion::DoubleValue)
+    FieldValueUnion.add_member_subclass(:empty_value, Types::FieldValueUnion::EmptyValue)
     FieldValueUnion.add_member_subclass(:string_value, Types::FieldValueUnion::StringValue)
     FieldValueUnion.add_member_subclass(:unknown, Types::FieldValueUnion::Unknown)
     FieldValueUnion.struct_class = Types::FieldValueUnion

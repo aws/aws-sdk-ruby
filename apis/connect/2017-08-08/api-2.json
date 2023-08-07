@@ -705,6 +705,22 @@
         {"shape":"InternalServiceException"}
       ]
     },
+    "DeleteQueue":{
+      "name":"DeleteQueue",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/queues/{InstanceId}/{QueueId}"
+      },
+      "input":{"shape":"DeleteQueueRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
     "DeleteQuickConnect":{
       "name":"DeleteQuickConnect",
       "http":{
@@ -716,6 +732,22 @@
         {"shape":"InvalidRequestException"},
         {"shape":"InvalidParameterException"},
         {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
+    "DeleteRoutingProfile":{
+      "name":"DeleteRoutingProfile",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/routing-profiles/{InstanceId}/{RoutingProfileId}"
+      },
+      "input":{"shape":"DeleteRoutingProfileRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceInUseException"},
         {"shape":"ThrottlingException"},
         {"shape":"InternalServiceException"}
       ]
@@ -2895,6 +2927,21 @@
         {"shape":"InternalServiceException"}
       ]
     },
+    "UpdateRoutingProfileAgentAvailabilityTimer":{
+      "name":"UpdateRoutingProfileAgentAvailabilityTimer",
+      "http":{
+        "method":"POST",
+        "requestUri":"/routing-profiles/{InstanceId}/{RoutingProfileId}/agent-availability-timer"
+      },
+      "input":{"shape":"UpdateRoutingProfileAgentAvailabilityTimerRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
     "UpdateRoutingProfileConcurrency":{
       "name":"UpdateRoutingProfileConcurrency",
       "http":{
@@ -3196,6 +3243,13 @@
     "AfterContactWorkTimeLimit":{
       "type":"integer",
       "min":0
+    },
+    "AgentAvailabilityTimer":{
+      "type":"string",
+      "enum":[
+        "TIME_SINCE_LAST_ACTIVITY",
+        "TIME_SINCE_LAST_INBOUND"
+      ]
     },
     "AgentContactReference":{
       "type":"structure",
@@ -4287,7 +4341,8 @@
         "DefaultOutboundQueueId":{"shape":"QueueId"},
         "QueueConfigs":{"shape":"RoutingProfileQueueConfigList"},
         "MediaConcurrencies":{"shape":"MediaConcurrencies"},
-        "Tags":{"shape":"TagMap"}
+        "Tags":{"shape":"TagMap"},
+        "AgentAvailabilityTimer":{"shape":"AgentAvailabilityTimer"}
       }
     },
     "CreateRoutingProfileResponse":{
@@ -4859,6 +4914,25 @@
         }
       }
     },
+    "DeleteQueueRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "QueueId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "QueueId":{
+          "shape":"QueueId",
+          "location":"uri",
+          "locationName":"QueueId"
+        }
+      }
+    },
     "DeleteQuickConnectRequest":{
       "type":"structure",
       "required":[
@@ -4875,6 +4949,25 @@
           "shape":"QuickConnectId",
           "location":"uri",
           "locationName":"QuickConnectId"
+        }
+      }
+    },
+    "DeleteRoutingProfileRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "RoutingProfileId"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "RoutingProfileId":{
+          "shape":"RoutingProfileId",
+          "location":"uri",
+          "locationName":"RoutingProfileId"
         }
       }
     },
@@ -9084,13 +9177,17 @@
       "type":"string",
       "enum":[
         "TOLL_FREE",
-        "DID"
+        "DID",
+        "UIFN",
+        "SHARED",
+        "THIRD_PARTY_TF",
+        "THIRD_PARTY_DID"
       ]
     },
     "PhoneNumberTypes":{
       "type":"list",
       "member":{"shape":"PhoneNumberType"},
-      "max":2
+      "max":6
     },
     "PhoneNumberWorkflowMessage":{
       "type":"string",
@@ -9705,7 +9802,8 @@
         "DefaultOutboundQueueId":{"shape":"QueueId"},
         "Tags":{"shape":"TagMap"},
         "NumberOfAssociatedQueues":{"shape":"Long"},
-        "NumberOfAssociatedUsers":{"shape":"Long"}
+        "NumberOfAssociatedUsers":{"shape":"Long"},
+        "AgentAvailabilityTimer":{"shape":"AgentAvailabilityTimer"}
       }
     },
     "RoutingProfileDescription":{
@@ -11700,6 +11798,27 @@
         },
         "Name":{"shape":"QuickConnectName"},
         "Description":{"shape":"UpdateQuickConnectDescription"}
+      }
+    },
+    "UpdateRoutingProfileAgentAvailabilityTimerRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "RoutingProfileId",
+        "AgentAvailabilityTimer"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "RoutingProfileId":{
+          "shape":"RoutingProfileId",
+          "location":"uri",
+          "locationName":"RoutingProfileId"
+        },
+        "AgentAvailabilityTimer":{"shape":"AgentAvailabilityTimer"}
       }
     },
     "UpdateRoutingProfileConcurrencyRequest":{

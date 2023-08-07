@@ -138,6 +138,10 @@ module Aws::MediaTailor
     #   reason for the alert.
     #   @return [String]
     #
+    # @!attribute [rw] category
+    #   The category that MediaTailor assigns to the alert.
+    #   @return [String]
+    #
     # @!attribute [rw] last_modified_time
     #   The timestamp when the alert was last modified.
     #   @return [Time]
@@ -155,6 +159,7 @@ module Aws::MediaTailor
     class Alert < Struct.new(
       :alert_code,
       :alert_message,
+      :category,
       :last_modified_time,
       :related_resource_arns,
       :resource_arn)
@@ -2170,7 +2175,7 @@ module Aws::MediaTailor
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   For `SCTE35_ENHANCED` output, defines a vaue. MediaTailor; takes
+    #   For `SCTE35_ENHANCED` output, defines a value. MediaTailor; takes
     #   this value, and its associated key, and generates the key/value pair
     #   within the `EXT-X-ASSET`tag. If you specify a value, you must also
     #   specify a corresponding key.

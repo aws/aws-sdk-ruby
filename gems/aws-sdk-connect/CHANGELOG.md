@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.123.0 (2023-08-04)
+------------------
+
+* Feature - Added a new API UpdateRoutingProfileAgentAvailabilityTimer to update agent availability timer of a routing profile.
+
+1.122.0 (2023-07-28)
+------------------
+
+* Feature - This release adds support for new number types.
+
+1.121.0 (2023-07-18)
+------------------
+
+* Feature - GetMetricDataV2 API: Update to include Contact Lens Conversational Analytics Metrics
+
+1.120.0 (2023-07-13)
+------------------
+
+* Feature - Add support for deleting Queues and Routing Profiles.
+
 1.119.0 (2023-07-11)
 ------------------
 

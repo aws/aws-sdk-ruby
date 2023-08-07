@@ -78,6 +78,8 @@ module Aws::Kafka
             Aws::Kafka::Endpoints::DescribeClusterV2.build(context)
           when :describe_cluster_operation
             Aws::Kafka::Endpoints::DescribeClusterOperation.build(context)
+          when :describe_cluster_operation_v2
+            Aws::Kafka::Endpoints::DescribeClusterOperationV2.build(context)
           when :describe_configuration
             Aws::Kafka::Endpoints::DescribeConfiguration.build(context)
           when :describe_configuration_revision
@@ -92,6 +94,8 @@ module Aws::Kafka
             Aws::Kafka::Endpoints::GetCompatibleKafkaVersions.build(context)
           when :list_cluster_operations
             Aws::Kafka::Endpoints::ListClusterOperations.build(context)
+          when :list_cluster_operations_v2
+            Aws::Kafka::Endpoints::ListClusterOperationsV2.build(context)
           when :list_clusters
             Aws::Kafka::Endpoints::ListClusters.build(context)
           when :list_clusters_v2

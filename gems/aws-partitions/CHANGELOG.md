@@ -1,6 +1,78 @@
 Unreleased Changes
 ------------------
 
+1.799.0 (2023-08-07)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.798.0 (2023-08-04)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.797.0 (2023-08-02)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.796.0 (2023-08-01)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.795.0 (2023-07-31)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.794.0 (2023-07-28)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.793.0 (2023-07-26)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ManagedBlockchainQuery`.
+
+* Feature - Added support for enumerating regions for `Aws::EntityResolution`.
+
+1.792.0 (2023-07-24)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.791.0 (2023-07-21)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.790.0 (2023-07-20)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.789.0 (2023-07-19)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::MedicalImaging`.
+
+1.788.0 (2023-07-18)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.787.0 (2023-07-17)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.786.0 (2023-07-13)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.785.0 (2023-07-07)
 ------------------
 

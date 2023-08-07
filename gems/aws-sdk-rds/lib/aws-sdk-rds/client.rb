@@ -1410,6 +1410,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.tag_list[0].value #=> String
     #   resp.db_cluster_snapshot.db_system_id #=> String
     #   resp.db_cluster_snapshot.storage_type #=> String
+    #   resp.db_cluster_snapshot.db_cluster_resource_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBClusterSnapshot AWS API Documentation
     #
@@ -1820,6 +1821,7 @@ module Aws::RDS
     #   resp.db_snapshot.snapshot_database_time #=> Time
     #   resp.db_snapshot.snapshot_target #=> String
     #   resp.db_snapshot.storage_throughput #=> Integer
+    #   resp.db_snapshot.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshot AWS API Documentation
     #
@@ -2329,6 +2331,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#custom_db_engine_version_manifest #custom_db_engine_version_manifest} => String
     #   * {Types::DBEngineVersion#supports_certificate_rotation_without_restart #supports_certificate_rotation_without_restart} => Boolean
     #   * {Types::DBEngineVersion#supported_ca_certificate_identifiers #supported_ca_certificate_identifiers} => Array&lt;String&gt;
+    #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -2378,6 +2381,7 @@ module Aws::RDS
     #   resp.valid_upgrade_target[0].supports_parallel_query #=> Boolean
     #   resp.valid_upgrade_target[0].supports_global_databases #=> Boolean
     #   resp.valid_upgrade_target[0].supports_babelfish #=> Boolean
+    #   resp.valid_upgrade_target[0].supports_local_write_forwarding #=> Boolean
     #   resp.supported_timezones #=> Array
     #   resp.supported_timezones[0].timezone_name #=> String
     #   resp.exportable_log_types #=> Array
@@ -2405,6 +2409,7 @@ module Aws::RDS
     #   resp.supports_certificate_rotation_without_restart #=> Boolean
     #   resp.supported_ca_certificate_identifiers #=> Array
     #   resp.supported_ca_certificate_identifiers[0] #=> String
+    #   resp.supports_local_write_forwarding #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateCustomDBEngineVersion AWS API Documentation
     #
@@ -3229,6 +3234,13 @@ module Aws::RDS
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
+    # @option params [Boolean] :enable_local_write_forwarding
+    #   Specifies whether read replicas can forward write operations to the
+    #   writer DB instance in the DB cluster. By default, write operations
+    #   aren't allowed on reader DB instances.
+    #
+    #   Valid for: Aurora DB clusters only
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -3432,6 +3444,7 @@ module Aws::RDS
     #     db_system_id: "String",
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
+    #     enable_local_write_forwarding: false,
     #     source_region: "String",
     #   })
     #
@@ -3553,6 +3566,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -3978,6 +3992,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.tag_list[0].value #=> String
     #   resp.db_cluster_snapshot.db_system_id #=> String
     #   resp.db_cluster_snapshot.storage_type #=> String
+    #   resp.db_cluster_snapshot.db_cluster_resource_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterSnapshot AWS API Documentation
     #
@@ -4008,116 +4023,120 @@ module Aws::RDS
     # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.CreateInstance.html
     #
     # @option params [String] :db_name
-    #   The meaning of this parameter differs depending on the database
-    #   engine.
+    #   The meaning of this parameter differs according to the database engine
+    #   you use.
     #
-    #   Amazon Aurora MySQL
+    #   **MySQL**
     #
-    #   : The name of the database to create when the primary DB instance of
-    #     the Aurora MySQL DB cluster is created. If you don't specify a
-    #     value, Amazon RDS doesn't create a database in the DB cluster.
+    #   The name of the database to create when the DB instance is created. If
+    #   this parameter isn't specified, no database is created in the DB
+    #   instance.
     #
-    #     Constraints:
+    #   Constraints:
     #
-    #     * Must contain 1 to 64 alphanumeric characters.
+    #   * Must contain 1 to 64 letters or numbers.
     #
-    #     * Can't be a word reserved by the database engine.
+    #   * Must begin with a letter. Subsequent characters can be letters,
+    #     underscores, or digits (0-9).
     #
-    #   Amazon Aurora PostgreSQL
+    #   * Can't be a word reserved by the specified database engine
     #
-    #   : The name of the database to create when the primary DB instance of
-    #     the Aurora PostgreSQL DB cluster is created.
+    #   **MariaDB**
     #
-    #     Default: `postgres`
+    #   The name of the database to create when the DB instance is created. If
+    #   this parameter isn't specified, no database is created in the DB
+    #   instance.
     #
-    #     Constraints:
+    #   Constraints:
     #
-    #     * Must contain 1 to 63 alphanumeric characters.
+    #   * Must contain 1 to 64 letters or numbers.
     #
-    #     * Must begin with a letter. Subsequent characters can be letters,
-    #       underscores, or digits (0 to 9).
+    #   * Must begin with a letter. Subsequent characters can be letters,
+    #     underscores, or digits (0-9).
     #
-    #     * Can't be a word reserved by the database engine.
+    #   * Can't be a word reserved by the specified database engine
     #
-    #   Amazon RDS Custom for Oracle
+    #   **PostgreSQL**
     #
-    #   : The Oracle System ID (SID) of the created RDS Custom DB instance.
+    #   The name of the database to create when the DB instance is created. If
+    #   this parameter isn't specified, a database named `postgres` is
+    #   created in the DB instance.
     #
-    #     Default: `ORCL`
+    #   Constraints:
     #
-    #     Constraints:
+    #   * Must contain 1 to 63 letters, numbers, or underscores.
     #
-    #     * Must contain 1 to 8 alphanumeric characters.
+    #   * Must begin with a letter. Subsequent characters can be letters,
+    #     underscores, or digits (0-9).
     #
-    #     * Must contain a letter.
+    #   * Can't be a word reserved by the specified database engine
     #
-    #     * Can't be a word reserved by the database engine.
+    #   **Oracle**
     #
-    #   Amazon RDS Custom for SQL Server
+    #   The Oracle System ID (SID) of the created DB instance. If you don't
+    #   specify a value, the default value is `ORCL`. You can't specify the
+    #   string `null`, or any other reserved word, for `DBName`.
     #
-    #   : Not applicable. Must be null.
+    #   Default: `ORCL`
     #
-    #   RDS for MariaDB
+    #   Constraints:
     #
-    #   : The name of the database to create when the DB instance is created.
-    #     If you don't specify a value, Amazon RDS doesn't create a database
-    #     in the DB instance.
+    #   * Can't be longer than 8 characters
     #
-    #     Constraints:
+    #   ^
     #
-    #     * Must contain 1 to 64 letters or numbers.
+    #   **Amazon RDS Custom for Oracle**
     #
-    #     * Must begin with a letter. Subsequent characters can be letters,
-    #       underscores, or digits (0-9).
+    #   The Oracle System ID (SID) of the created RDS Custom DB instance. If
+    #   you don't specify a value, the default value is `ORCL` for non-CDBs
+    #   and `RDSCDB` for CDBs.
     #
-    #     * Can't be a word reserved by the database engine.
+    #   Default: `ORCL`
     #
-    #   RDS for MySQL
+    #   Constraints:
     #
-    #   : The name of the database to create when the DB instance is created.
-    #     If you don't specify a value, Amazon RDS doesn't create a database
-    #     in the DB instance.
+    #   * It must contain 1 to 8 alphanumeric characters.
     #
-    #     Constraints:
+    #   * It must contain a letter.
     #
-    #     * Must contain 1 to 64 letters or numbers.
+    #   * It can't be a word reserved by the database engine.
     #
-    #     * Must begin with a letter. Subsequent characters can be letters,
-    #       underscores, or digits (0-9).
+    #   **Amazon RDS Custom for SQL Server**
     #
-    #     * Can't be a word reserved by the database engine.
+    #   Not applicable. Must be null.
     #
-    #   RDS for Oracle
+    #   **SQL Server**
     #
-    #   : The Oracle System ID (SID) of the created DB instance.
+    #   Not applicable. Must be null.
     #
-    #     Default: `ORCL`
+    #   **Amazon Aurora MySQL**
     #
-    #     Constraints:
+    #   The name of the database to create when the primary DB instance of the
+    #   Aurora MySQL DB cluster is created. If this parameter isn't specified
+    #   for an Aurora MySQL DB cluster, no database is created in the DB
+    #   cluster.
     #
-    #     * Can't be longer than 8 characters.
+    #   Constraints:
     #
-    #     * Can't be a word reserved by the database engine, such as the
-    #       string `NULL`.
+    #   * It must contain 1 to 64 alphanumeric characters.
     #
-    #   RDS for PostgreSQL
+    #   * It can't be a word reserved by the database engine.
     #
-    #   : The name of the database to create when the DB instance is created.
+    #   **Amazon Aurora PostgreSQL**
     #
-    #     Default: `postgres`
+    #   The name of the database to create when the primary DB instance of the
+    #   Aurora PostgreSQL DB cluster is created. If this parameter isn't
+    #   specified for an Aurora PostgreSQL DB cluster, a database named
+    #   `postgres` is created in the DB cluster.
     #
-    #     Constraints:
+    #   Constraints:
     #
-    #     * Must contain 1 to 63 letters, numbers, or underscores.
+    #   * It must contain 1 to 63 alphanumeric characters.
     #
-    #     * Must begin with a letter. Subsequent characters can be letters,
-    #       underscores, or digits (0-9).
+    #   * It must begin with a letter. Subsequent characters can be letters,
+    #     underscores, or digits (0 to 9).
     #
-    #     * Can't be a word reserved by the database engine.
-    #
-    #   RDS for SQL Server
-    #
-    #   : Not applicable. Must be null.
+    #   * It can't be a word reserved by the database engine.
     #
     # @option params [required, String] :db_instance_identifier
     #   The identifier for this DB instance. This parameter is stored as a
@@ -5164,6 +5183,14 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
     #
+    # @option params [String] :db_system_id
+    #   The Oracle system identifier (SID), which is the name of the Oracle
+    #   database instance that manages your database files. In this context,
+    #   the term "Oracle database instance" refers exclusively to the system
+    #   global area (SGA) and Oracle background processes. If you don't
+    #   specify a SID, the value defaults to `RDSCDB`. The Oracle SID is also
+    #   the name of your CDB.
+    #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -5350,6 +5377,7 @@ module Aws::RDS
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
     #     ca_certificate_identifier: "String",
+    #     db_system_id: "String",
     #   })
     #
     # @example Response structure
@@ -5508,6 +5536,7 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
+    #   resp.db_instance.percent_progress #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -6415,6 +6444,7 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
+    #   resp.db_instance.percent_progress #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -7017,6 +7047,7 @@ module Aws::RDS
     #   resp.db_snapshot.snapshot_database_time #=> Time
     #   resp.db_snapshot.snapshot_target #=> String
     #   resp.db_snapshot.storage_throughput #=> Integer
+    #   resp.db_snapshot.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshot AWS API Documentation
     #
@@ -7344,10 +7375,11 @@ module Aws::RDS
     # that receives data from the primary cluster through high-speed
     # replication performed by the Aurora storage subsystem.
     #
-    # You can create a global database that is initially empty, and then add
-    # a primary cluster and a secondary cluster to it. Or you can specify an
-    # existing Aurora cluster during the create operation, and this cluster
-    # becomes the primary cluster of the global database.
+    # You can create a global database that is initially empty, and then
+    # create the primary and secondary DB clusters in the global database.
+    # Or you can specify an existing Aurora cluster during the create
+    # operation, and this cluster becomes the primary cluster of the global
+    # database.
     #
     # <note markdown="1"> This operation applies only to Aurora DB clusters.
     #
@@ -7646,7 +7678,7 @@ module Aws::RDS
     # Deletes a blue/green deployment.
     #
     # For more information, see [Using Amazon RDS Blue/Green Deployments for
-    # database updates][1] in the *Amazon RDS User Guide* and [ Using Amazon
+    # database updates][1] in the *Amazon RDS User Guide* and [Using Amazon
     # RDS Blue/Green Deployments for database updates][2] in the *Amazon
     # Aurora User Guide*.
     #
@@ -7656,8 +7688,8 @@ module Aws::RDS
     # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html
     #
     # @option params [required, String] :blue_green_deployment_identifier
-    #   The blue/green deployment identifier of the deployment to be deleted.
-    #   This parameter isn't case-sensitive.
+    #   The unique identifier of the blue/green deployment to delete. This
+    #   parameter isn't case-sensitive.
     #
     #   Constraints:
     #
@@ -7666,9 +7698,9 @@ module Aws::RDS
     #   ^
     #
     # @option params [Boolean] :delete_target
-    #   A value that indicates whether to delete the resources in the green
-    #   environment. You can't specify this option if the blue/green
-    #   deployment [status][1] is `SWITCHOVER_COMPLETED`.
+    #   Specifies whether to delete the resources in the green environment.
+    #   You can't specify this option if the blue/green deployment
+    #   [status][1] is `SWITCHOVER_COMPLETED`.
     #
     #
     #
@@ -7922,6 +7954,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#custom_db_engine_version_manifest #custom_db_engine_version_manifest} => String
     #   * {Types::DBEngineVersion#supports_certificate_rotation_without_restart #supports_certificate_rotation_without_restart} => Boolean
     #   * {Types::DBEngineVersion#supported_ca_certificate_identifiers #supported_ca_certificate_identifiers} => Array&lt;String&gt;
+    #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -7959,6 +7992,7 @@ module Aws::RDS
     #   resp.valid_upgrade_target[0].supports_parallel_query #=> Boolean
     #   resp.valid_upgrade_target[0].supports_global_databases #=> Boolean
     #   resp.valid_upgrade_target[0].supports_babelfish #=> Boolean
+    #   resp.valid_upgrade_target[0].supports_local_write_forwarding #=> Boolean
     #   resp.supported_timezones #=> Array
     #   resp.supported_timezones[0].timezone_name #=> String
     #   resp.exportable_log_types #=> Array
@@ -7986,6 +8020,7 @@ module Aws::RDS
     #   resp.supports_certificate_rotation_without_restart #=> Boolean
     #   resp.supported_ca_certificate_identifiers #=> Array
     #   resp.supported_ca_certificate_identifiers[0] #=> String
+    #   resp.supports_local_write_forwarding #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteCustomDBEngineVersion AWS API Documentation
     #
@@ -8057,6 +8092,12 @@ module Aws::RDS
     #
     #   * Can't end with a hyphen or contain two consecutive hyphens
     #
+    # @option params [Boolean] :delete_automated_backups
+    #   A value that indicates whether to remove automated backups immediately
+    #   after the DB cluster is deleted. This parameter isn't case-sensitive.
+    #   The default is to remove automated backups immediately after the DB
+    #   cluster is deleted.
+    #
     # @return [Types::DeleteDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -8096,6 +8137,7 @@ module Aws::RDS
     #     db_cluster_identifier: "String", # required
     #     skip_final_snapshot: false,
     #     final_db_snapshot_identifier: "String",
+    #     delete_automated_backups: false,
     #   })
     #
     # @example Response structure
@@ -8216,6 +8258,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -8223,6 +8266,61 @@ module Aws::RDS
     # @param [Hash] params ({})
     def delete_db_cluster(params = {}, options = {})
       req = build_request(:delete_db_cluster, params)
+      req.send_request(options)
+    end
+
+    # Deletes automated backups using the `DbClusterResourceId` value of the
+    # source DB cluster or the Amazon Resource Name (ARN) of the automated
+    # backups.
+    #
+    # @option params [required, String] :db_cluster_resource_id
+    #   The identifier for the source DB cluster, which can't be changed and
+    #   which is unique to an Amazon Web Services Region.
+    #
+    # @return [Types::DeleteDBClusterAutomatedBackupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDBClusterAutomatedBackupResult#db_cluster_automated_backup #db_cluster_automated_backup} => Types::DBClusterAutomatedBackup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_db_cluster_automated_backup({
+    #     db_cluster_resource_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_cluster_automated_backup.engine #=> String
+    #   resp.db_cluster_automated_backup.vpc_id #=> String
+    #   resp.db_cluster_automated_backup.db_cluster_automated_backups_arn #=> String
+    #   resp.db_cluster_automated_backup.db_cluster_identifier #=> String
+    #   resp.db_cluster_automated_backup.restore_window.earliest_time #=> Time
+    #   resp.db_cluster_automated_backup.restore_window.latest_time #=> Time
+    #   resp.db_cluster_automated_backup.master_username #=> String
+    #   resp.db_cluster_automated_backup.db_cluster_resource_id #=> String
+    #   resp.db_cluster_automated_backup.region #=> String
+    #   resp.db_cluster_automated_backup.license_model #=> String
+    #   resp.db_cluster_automated_backup.status #=> String
+    #   resp.db_cluster_automated_backup.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster_automated_backup.cluster_create_time #=> Time
+    #   resp.db_cluster_automated_backup.storage_encrypted #=> Boolean
+    #   resp.db_cluster_automated_backup.allocated_storage #=> Integer
+    #   resp.db_cluster_automated_backup.engine_version #=> String
+    #   resp.db_cluster_automated_backup.db_cluster_arn #=> String
+    #   resp.db_cluster_automated_backup.backup_retention_period #=> Integer
+    #   resp.db_cluster_automated_backup.engine_mode #=> String
+    #   resp.db_cluster_automated_backup.availability_zones #=> Array
+    #   resp.db_cluster_automated_backup.availability_zones[0] #=> String
+    #   resp.db_cluster_automated_backup.port #=> Integer
+    #   resp.db_cluster_automated_backup.kms_key_id #=> String
+    #   resp.db_cluster_automated_backup.storage_type #=> String
+    #   resp.db_cluster_automated_backup.iops #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterAutomatedBackup AWS API Documentation
+    #
+    # @overload delete_db_cluster_automated_backup(params = {})
+    # @param [Hash] params ({})
+    def delete_db_cluster_automated_backup(params = {}, options = {})
+      req = build_request(:delete_db_cluster_automated_backup, params)
       req.send_request(options)
     end
 
@@ -8460,6 +8558,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.tag_list[0].value #=> String
     #   resp.db_cluster_snapshot.db_system_id #=> String
     #   resp.db_cluster_snapshot.storage_type #=> String
+    #   resp.db_cluster_snapshot.db_cluster_resource_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterSnapshot AWS API Documentation
     #
@@ -8749,6 +8848,7 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
+    #   resp.db_instance.percent_progress #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -9163,6 +9263,7 @@ module Aws::RDS
     #   resp.db_snapshot.snapshot_database_time #=> Time
     #   resp.db_snapshot.snapshot_target #=> String
     #   resp.db_snapshot.storage_throughput #=> Integer
+    #   resp.db_snapshot.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshot AWS API Documentation
     #
@@ -9550,7 +9651,7 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Returns information about blue/green deployments.
+    # Describes one or more blue/green deployments.
     #
     # For more information, see [Using Amazon RDS Blue/Green Deployments for
     # database updates][1] in the *Amazon RDS User Guide* and [ Using Amazon
@@ -9563,14 +9664,13 @@ module Aws::RDS
     # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html
     #
     # @option params [String] :blue_green_deployment_identifier
-    #   The blue/green deployment identifier. If this parameter is specified,
-    #   information from only the specific blue/green deployment is returned.
-    #   This parameter isn't case-sensitive.
+    #   The blue/green deployment identifier. If you specify this parameter,
+    #   the response only includes information about the specific blue/green
+    #   deployment. This parameter isn't case-sensitive.
     #
     #   Constraints:
     #
-    #   * If supplied, must match an existing blue/green deployment
-    #     identifier.
+    #   * Must match an existing blue/green deployment identifier.
     #
     #   ^
     #
@@ -9578,7 +9678,7 @@ module Aws::RDS
     #   A filter that specifies one or more blue/green deployments to
     #   describe.
     #
-    #   Supported filters:
+    #   Valid Values:
     #
     #   * `blue-green-deployment-identifier` - Accepts system-generated
     #     identifiers for blue/green deployments. The results list only
@@ -9599,9 +9699,9 @@ module Aws::RDS
     #
     # @option params [String] :marker
     #   An optional pagination token provided by a previous
-    #   `DescribeBlueGreenDeployments` request. If this parameter is
-    #   specified, the response includes only records beyond the marker, up to
-    #   the value specified by `MaxRecords`.
+    #   `DescribeBlueGreenDeployments` request. If you specify this parameter,
+    #   the response only includes records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -9611,7 +9711,11 @@ module Aws::RDS
     #
     #   Default: 100
     #
-    #   Constraints: Minimum 20, maximum 100.
+    #   Constraints:
+    #
+    #   * Must be a minimum of 20.
+    #
+    #   * Can't exceed 100.
     #
     # @return [Types::DescribeBlueGreenDeploymentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10008,6 +10112,117 @@ module Aws::RDS
     # @param [Hash] params ({})
     def describe_certificates(params = {}, options = {})
       req = build_request(:describe_certificates, params)
+      req.send_request(options)
+    end
+
+    # Displays backups for both current and deleted DB clusters. For
+    # example, use this operation to find details about automated backups
+    # for previously deleted clusters. Current clusters are returned for
+    # both the `DescribeDBClusterAutomatedBackups` and `DescribeDBClusters`
+    # operations.
+    #
+    # All parameters are optional.
+    #
+    # @option params [String] :db_cluster_resource_id
+    #   The resource ID of the DB cluster that is the source of the automated
+    #   backup. This parameter isn't case-sensitive.
+    #
+    # @option params [String] :db_cluster_identifier
+    #   (Optional) The user-supplied DB cluster identifier. If this parameter
+    #   is specified, it must match the identifier of an existing DB cluster.
+    #   It returns information from the specific DB cluster's automated
+    #   backup. This parameter isn't case-sensitive.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   A filter that specifies which resources to return based on status.
+    #
+    #   Supported filters are the following:
+    #
+    #   * `status`
+    #
+    #     * `retained` - Automated backups for deleted clusters and after
+    #       backup replication is stopped.
+    #
+    #     ^
+    #
+    #   * `db-cluster-id` - Accepts DB cluster identifiers and Amazon Resource
+    #     Names (ARNs). The results list includes only information about the
+    #     DB cluster automated backups identified by these ARNs.
+    #
+    #   * `db-cluster-resource-id` - Accepts DB resource identifiers and
+    #     Amazon Resource Names (ARNs). The results list includes only
+    #     information about the DB cluster resources identified by these ARNs.
+    #
+    #   Returns all resources by default. The status for each resource is
+    #   specified in the response.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
+    #
+    # @option params [String] :marker
+    #   The pagination token provided in the previous request. If this
+    #   parameter is specified the response includes only records beyond the
+    #   marker, up to `MaxRecords`.
+    #
+    # @return [Types::DBClusterAutomatedBackupMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DBClusterAutomatedBackupMessage#marker #marker} => String
+    #   * {Types::DBClusterAutomatedBackupMessage#db_cluster_automated_backups #db_cluster_automated_backups} => Array&lt;Types::DBClusterAutomatedBackup&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_db_cluster_automated_backups({
+    #     db_cluster_resource_id: "String",
+    #     db_cluster_identifier: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.db_cluster_automated_backups #=> Array
+    #   resp.db_cluster_automated_backups[0].engine #=> String
+    #   resp.db_cluster_automated_backups[0].vpc_id #=> String
+    #   resp.db_cluster_automated_backups[0].db_cluster_automated_backups_arn #=> String
+    #   resp.db_cluster_automated_backups[0].db_cluster_identifier #=> String
+    #   resp.db_cluster_automated_backups[0].restore_window.earliest_time #=> Time
+    #   resp.db_cluster_automated_backups[0].restore_window.latest_time #=> Time
+    #   resp.db_cluster_automated_backups[0].master_username #=> String
+    #   resp.db_cluster_automated_backups[0].db_cluster_resource_id #=> String
+    #   resp.db_cluster_automated_backups[0].region #=> String
+    #   resp.db_cluster_automated_backups[0].license_model #=> String
+    #   resp.db_cluster_automated_backups[0].status #=> String
+    #   resp.db_cluster_automated_backups[0].iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster_automated_backups[0].cluster_create_time #=> Time
+    #   resp.db_cluster_automated_backups[0].storage_encrypted #=> Boolean
+    #   resp.db_cluster_automated_backups[0].allocated_storage #=> Integer
+    #   resp.db_cluster_automated_backups[0].engine_version #=> String
+    #   resp.db_cluster_automated_backups[0].db_cluster_arn #=> String
+    #   resp.db_cluster_automated_backups[0].backup_retention_period #=> Integer
+    #   resp.db_cluster_automated_backups[0].engine_mode #=> String
+    #   resp.db_cluster_automated_backups[0].availability_zones #=> Array
+    #   resp.db_cluster_automated_backups[0].availability_zones[0] #=> String
+    #   resp.db_cluster_automated_backups[0].port #=> Integer
+    #   resp.db_cluster_automated_backups[0].kms_key_id #=> String
+    #   resp.db_cluster_automated_backups[0].storage_type #=> String
+    #   resp.db_cluster_automated_backups[0].iops #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterAutomatedBackups AWS API Documentation
+    #
+    # @overload describe_db_cluster_automated_backups(params = {})
+    # @param [Hash] params ({})
+    def describe_db_cluster_automated_backups(params = {}, options = {})
+      req = build_request(:describe_db_cluster_automated_backups, params)
       req.send_request(options)
     end
 
@@ -10772,6 +10987,9 @@ module Aws::RDS
     #   You can share a manual DB cluster snapshot as public by using the
     #   ModifyDBClusterSnapshotAttribute API action.
     #
+    # @option params [String] :db_cluster_resource_id
+    #   A specific DB cluster resource ID to describe.
+    #
     # @return [Types::DBClusterSnapshotMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DBClusterSnapshotMessage#marker #marker} => String
@@ -10860,6 +11078,7 @@ module Aws::RDS
     #     marker: "String",
     #     include_shared: false,
     #     include_public: false,
+    #     db_cluster_resource_id: "String",
     #   })
     #
     # @example Response structure
@@ -10893,6 +11112,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshots[0].tag_list[0].value #=> String
     #   resp.db_cluster_snapshots[0].db_system_id #=> String
     #   resp.db_cluster_snapshots[0].storage_type #=> String
+    #   resp.db_cluster_snapshots[0].db_cluster_resource_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -11222,6 +11442,7 @@ module Aws::RDS
     #   resp.db_clusters[0].master_user_secret.secret_status #=> String
     #   resp.db_clusters[0].master_user_secret.kms_key_id #=> String
     #   resp.db_clusters[0].io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_clusters[0].local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -11470,6 +11691,7 @@ module Aws::RDS
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_parallel_query #=> Boolean
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_global_databases #=> Boolean
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_babelfish #=> Boolean
+    #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_local_write_forwarding #=> Boolean
     #   resp.db_engine_versions[0].supported_timezones #=> Array
     #   resp.db_engine_versions[0].supported_timezones[0].timezone_name #=> String
     #   resp.db_engine_versions[0].exportable_log_types #=> Array
@@ -11497,6 +11719,7 @@ module Aws::RDS
     #   resp.db_engine_versions[0].supports_certificate_rotation_without_restart #=> Boolean
     #   resp.db_engine_versions[0].supported_ca_certificate_identifiers #=> Array
     #   resp.db_engine_versions[0].supported_ca_certificate_identifiers[0] #=> String
+    #   resp.db_engine_versions[0].supports_local_write_forwarding #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBEngineVersions AWS API Documentation
     #
@@ -11523,7 +11746,7 @@ module Aws::RDS
     # @option params [String] :db_instance_identifier
     #   (Optional) The user-supplied instance identifier. If this parameter is
     #   specified, it must match the identifier of an existing DB instance. It
-    #   returns information from the specific DB instance' automated backup.
+    #   returns information from the specific DB instance's automated backup.
     #   This parameter isn't case-sensitive.
     #
     # @option params [Array<Types::Filter>] :filters
@@ -11533,13 +11756,13 @@ module Aws::RDS
     #
     #   * `status`
     #
-    #     * `active` - automated backups for current instances
+    #     * `active` - Automated backups for current instances.
     #
-    #     * `retained` - automated backups for deleted instances and after
-    #       backup replication is stopped
+    #     * `creating` - Automated backups that are waiting for the first
+    #       automated snapshot to be available.
     #
-    #     * `creating` - automated backups that are waiting for the first
-    #       automated snapshot to be available
+    #     * `retained` - Automated backups for deleted instances and after
+    #       backup replication is stopped.
     #
     #   * `db-instance-id` - Accepts DB instance identifiers and Amazon
     #     Resource Names (ARNs). The results list includes only information
@@ -11943,6 +12166,7 @@ module Aws::RDS
     #   resp.db_instances[0].certificate_details.ca_identifier #=> String
     #   resp.db_instances[0].certificate_details.valid_till #=> Time
     #   resp.db_instances[0].read_replica_source_db_cluster_identifier #=> String
+    #   resp.db_instances[0].percent_progress #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -13027,6 +13251,7 @@ module Aws::RDS
     #   resp.db_snapshots[0].snapshot_database_time #=> Time
     #   resp.db_snapshots[0].snapshot_target #=> String
     #   resp.db_snapshots[0].storage_throughput #=> Integer
+    #   resp.db_snapshots[0].db_system_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -15717,6 +15942,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -16264,6 +16490,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#custom_db_engine_version_manifest #custom_db_engine_version_manifest} => String
     #   * {Types::DBEngineVersion#supports_certificate_rotation_without_restart #supports_certificate_rotation_without_restart} => Boolean
     #   * {Types::DBEngineVersion#supported_ca_certificate_identifiers #supported_ca_certificate_identifiers} => Array&lt;String&gt;
+    #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -16303,6 +16530,7 @@ module Aws::RDS
     #   resp.valid_upgrade_target[0].supports_parallel_query #=> Boolean
     #   resp.valid_upgrade_target[0].supports_global_databases #=> Boolean
     #   resp.valid_upgrade_target[0].supports_babelfish #=> Boolean
+    #   resp.valid_upgrade_target[0].supports_local_write_forwarding #=> Boolean
     #   resp.supported_timezones #=> Array
     #   resp.supported_timezones[0].timezone_name #=> String
     #   resp.exportable_log_types #=> Array
@@ -16330,6 +16558,7 @@ module Aws::RDS
     #   resp.supports_certificate_rotation_without_restart #=> Boolean
     #   resp.supported_ca_certificate_identifiers #=> Array
     #   resp.supported_ca_certificate_identifiers[0] #=> String
+    #   resp.supports_local_write_forwarding #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyCustomDBEngineVersion AWS API Documentation
     #
@@ -17013,6 +17242,13 @@ module Aws::RDS
     #
     #   ^
     #
+    # @option params [Boolean] :enable_local_write_forwarding
+    #   Specifies whether read replicas can forward write operations to the
+    #   writer DB instance in the DB cluster. By default, write operations
+    #   aren't allowed on reader DB instances.
+    #
+    #   Valid for: Aurora DB clusters only
+    #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -17149,6 +17385,7 @@ module Aws::RDS
     #     master_user_secret_kms_key_id: "String",
     #     engine_mode: "String",
     #     allow_engine_mode_change: false,
+    #     enable_local_write_forwarding: false,
     #   })
     #
     # @example Response structure
@@ -17269,6 +17506,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -18104,7 +18342,7 @@ module Aws::RDS
     #   This setting doesn't apply to RDS Custom DB instances.
     #
     # @option params [String] :ca_certificate_identifier
-    #   The CA certificate identifier to use for the DB instance6's server
+    #   The CA certificate identifier to use for the DB instance's server
     #   certificate.
     #
     #   This setting doesn't apply to RDS Custom DB instances.
@@ -18927,6 +19165,7 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
+    #   resp.db_instance.percent_progress #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -19426,6 +19665,7 @@ module Aws::RDS
     #   resp.db_snapshot.snapshot_database_time #=> Time
     #   resp.db_snapshot.snapshot_target #=> String
     #   resp.db_snapshot.storage_throughput #=> Integer
+    #   resp.db_snapshot.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshot AWS API Documentation
     #
@@ -19814,13 +20054,13 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Modify a setting for an Amazon Aurora global cluster. You can change
+    # Modifies a setting for an Amazon Aurora global cluster. You can change
     # one or more database configuration parameters by specifying these
     # parameters and the new values in the request. For more information on
     # Amazon Aurora, see [ What is Amazon Aurora?][1] in the *Amazon Aurora
     # User Guide*.
     #
-    # <note markdown="1"> This action only applies to Aurora DB clusters.
+    # <note markdown="1"> This operation only applies to Aurora global database clusters.
     #
     #  </note>
     #
@@ -19829,7 +20069,7 @@ module Aws::RDS
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
     #
     # @option params [String] :global_cluster_identifier
-    #   The DB cluster identifier for the global cluster being modified. This
+    #   The cluster identifier for the global cluster to modify. This
     #   parameter isn't case-sensitive.
     #
     #   Constraints:
@@ -19839,30 +20079,27 @@ module Aws::RDS
     #   ^
     #
     # @option params [String] :new_global_cluster_identifier
-    #   The new cluster identifier for the global database cluster when
-    #   modifying a global database cluster. This value is stored as a
-    #   lowercase string.
+    #   The new cluster identifier for the global database cluster. This value
+    #   is stored as a lowercase string.
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 letters, numbers, or hyphens
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens.
     #
-    #   * The first character must be a letter
+    #   * The first character must be a letter.
     #
-    #   * Can't end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `my-cluster2`
     #
     # @option params [Boolean] :deletion_protection
-    #   Indicates if the global database cluster has deletion protection
-    #   enabled. The global database cluster can't be deleted when deletion
-    #   protection is enabled.
+    #   Specifies whether to enable deletion protection for the global
+    #   database cluster. The global database cluster can't be deleted when
+    #   deletion protection is enabled.
     #
     # @option params [String] :engine_version
     #   The version number of the database engine to which you want to
-    #   upgrade. Changing this parameter results in an outage. The change is
-    #   applied during the next maintenance window unless `ApplyImmediately`
-    #   is enabled.
+    #   upgrade.
     #
     #   To list all of the available engine versions for `aurora-mysql` (for
     #   MySQL-based Aurora global databases), use the following command:
@@ -19878,11 +20115,11 @@ module Aws::RDS
     #   --query '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]' ``
     #
     # @option params [Boolean] :allow_major_version_upgrade
-    #   A value that indicates whether major version upgrades are allowed.
+    #   Specifies whether to allow major version upgrades.
     #
-    #   Constraints: You must allow major version upgrades when specifying a
-    #   value for the `EngineVersion` parameter that is a different major
-    #   version than the DB cluster's current version.
+    #   Constraints: Must be enabled if you specify a value for the
+    #   `EngineVersion` parameter that's a different major version than the
+    #   global cluster's current version.
     #
     #   If you upgrade the major version of a global database, the cluster and
     #   DB instance parameter groups are set to the default parameter groups
@@ -20337,6 +20574,7 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
+    #   resp.db_instance.percent_progress #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -20489,6 +20727,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -20764,6 +21003,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBCluster AWS API Documentation
     #
@@ -21004,6 +21244,7 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
+    #   resp.db_instance.percent_progress #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -22220,6 +22461,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
     #
@@ -22912,6 +23154,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -22978,7 +23221,7 @@ module Aws::RDS
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
-    # @option params [required, String] :source_db_cluster_identifier
+    # @option params [String] :source_db_cluster_identifier
     #   The identifier of the source DB cluster from which to restore.
     #
     #   Constraints:
@@ -23339,6 +23582,9 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #
+    # @option params [String] :source_db_cluster_resource_id
+    #   The resource ID of the source DB cluster from which to restore.
+    #
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterToPointInTimeResult#db_cluster #db_cluster} => Types::DBCluster
@@ -23413,7 +23659,7 @@ module Aws::RDS
     #   resp = client.restore_db_cluster_to_point_in_time({
     #     db_cluster_identifier: "String", # required
     #     restore_type: "String",
-    #     source_db_cluster_identifier: "String", # required
+    #     source_db_cluster_identifier: "String",
     #     restore_to_time: Time.now,
     #     use_latest_restorable_time: false,
     #     port: 1,
@@ -23453,6 +23699,7 @@ module Aws::RDS
     #       max_capacity: 1.0,
     #     },
     #     network_type: "String",
+    #     source_db_cluster_resource_id: "String",
     #   })
     #
     # @example Response structure
@@ -23573,6 +23820,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -24351,6 +24599,7 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
+    #   resp.db_instance.percent_progress #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -25083,6 +25332,7 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
+    #   resp.db_instance.percent_progress #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -25908,6 +26158,7 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
+    #   resp.db_instance.percent_progress #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -26288,6 +26539,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -26499,6 +26751,7 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
+    #   resp.db_instance.percent_progress #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -27099,6 +27352,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -27317,6 +27571,7 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
+    #   resp.db_instance.percent_progress #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -27441,7 +27696,7 @@ module Aws::RDS
     # routed to the databases in the green environment.
     #
     # For more information, see [Using Amazon RDS Blue/Green Deployments for
-    # database updates][1] in the *Amazon RDS User Guide* and [ Using Amazon
+    # database updates][1] in the *Amazon RDS User Guide* and [Using Amazon
     # RDS Blue/Green Deployments for database updates][2] in the *Amazon
     # Aurora User Guide*.
     #
@@ -27451,7 +27706,7 @@ module Aws::RDS
     # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html
     #
     # @option params [required, String] :blue_green_deployment_identifier
-    #   The blue/green deployment identifier.
+    #   The unique identifier of the blue/green deployment.
     #
     #   Constraints:
     #
@@ -27460,8 +27715,9 @@ module Aws::RDS
     #   ^
     #
     # @option params [Integer] :switchover_timeout
-    #   The amount of time, in seconds, for the switchover to complete. The
-    #   default is 300.
+    #   The amount of time, in seconds, for the switchover to complete.
+    #
+    #   Default: 300
     #
     #   If the switchover takes longer than the specified duration, then any
     #   changes are rolled back, and no changes are made to the environments.
@@ -27821,6 +28077,7 @@ module Aws::RDS
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
+    #   resp.db_instance.percent_progress #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverReadReplica AWS API Documentation
     #
@@ -27844,7 +28101,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.185.0'
+      context[:gem_version] = '1.189.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -224,12 +224,17 @@ module Aws::QuickSight
     #   * `MAX`: Select the largest date value.
     #   @return [String]
     #
+    # @!attribute [rw] attribute_aggregation_function
+    #   Aggregation for attributes.
+    #   @return [Types::AttributeAggregationFunction]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AggregationFunction AWS API Documentation
     #
     class AggregationFunction < Struct.new(
       :numerical_aggregation_function,
       :categorical_aggregation_function,
-      :date_aggregation_function)
+      :date_aggregation_function,
+      :attribute_aggregation_function)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -712,6 +717,26 @@ module Aws::QuickSight
     #
     class AnonymousUserQSearchBarEmbeddingConfiguration < Struct.new(
       :initial_topic_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains the file groups that are requested for the
+    # artifact generation in a `StartDashboardSnapshotJob` API call.
+    #
+    # @!attribute [rw] file_groups
+    #   A list of `SnapshotJobResultFileGroup` objects that contain
+    #   information on the files that are requested during a
+    #   `StartDashboardSnapshotJob` API call. If the job succeeds, these
+    #   objects contain the location where the snapshot artifacts are
+    #   stored. If the job fails, the objects contain information about the
+    #   error that caused the job to fail.
+    #   @return [Array<Types::SnapshotJobResultFileGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AnonymousUserSnapshotJobResult AWS API Documentation
+    #
+    class AnonymousUserSnapshotJobResult < Struct.new(
+      :file_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1532,6 +1557,32 @@ module Aws::QuickSight
     class AthenaParameters < Struct.new(
       :work_group,
       :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Aggregation for attributes.
+    #
+    # @!attribute [rw] simple_attribute_aggregation
+    #   The built-in aggregation functions for attributes.
+    #
+    #   * `UNIQUE_VALUE`: Returns the unique value for a field, aggregated
+    #     by the dimension fields.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] value_for_multiple_values
+    #   Used by the `UNIQUE_VALUE` aggregation function. If there are
+    #   multiple values for the field used by the aggregation, the value for
+    #   this property will be returned instead. Defaults to '*'.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AttributeAggregationFunction AWS API Documentation
+    #
+    class AttributeAggregationFunction < Struct.new(
+      :simple_attribute_aggregation,
+      :value_for_multiple_values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7936,11 +7987,16 @@ module Aws::QuickSight
     #   Customize how dates are formatted in controls.
     #   @return [String]
     #
+    # @!attribute [rw] info_icon_label_options
+    #   The configuration of info icon label options.
+    #   @return [Types::SheetControlInfoIconLabelOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DateTimePickerControlDisplayOptions AWS API Documentation
     #
     class DateTimePickerControlDisplayOptions < Struct.new(
       :title_options,
-      :date_time_format)
+      :date_time_format,
+      :info_icon_label_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10138,6 +10194,185 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that the dashboard
+    #   snapshot job is executed in.
+    #   @return [String]
+    #
+    # @!attribute [rw] dashboard_id
+    #   The ID of the dashboard that you have started a snapshot job for.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_job_id
+    #   The ID of the job to be described. The job ID is set when you start
+    #   a new job with a `StartDashboardSnapshotJob` API call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeDashboardSnapshotJobRequest AWS API Documentation
+    #
+    class DescribeDashboardSnapshotJobRequest < Struct.new(
+      :aws_account_id,
+      :dashboard_id,
+      :snapshot_job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that the dashboard
+    #   snapshot job is executed in.
+    #   @return [String]
+    #
+    # @!attribute [rw] dashboard_id
+    #   The ID of the dashboard that you have started a snapshot job for.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_job_id
+    #   The ID of the job to be described. The job ID is set when you start
+    #   a new job with a `StartDashboardSnapshotJob` API call.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_configuration
+    #   The user configuration for the snapshot job. This information is
+    #   provided when you make a `StartDashboardSnapshotJob` API call.
+    #   @return [Types::SnapshotUserConfigurationRedacted]
+    #
+    # @!attribute [rw] snapshot_configuration
+    #   The snapshot configuration of the job. This information is provided
+    #   when you make a `StartDashboardSnapshotJob` API call.
+    #   @return [Types::SnapshotConfiguration]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the snapshot job. The job ARN is
+    #   generated when you start a new job with a
+    #   `StartDashboardSnapshotJob` API call.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   Indicates the status of a job. The status updates as the job
+    #   executes. This shows one of the following values.
+    #
+    #   * `COMPLETED` - The job was completed successfully.
+    #
+    #   * `FAILED` - The job failed to execute.
+    #
+    #   * `QUEUED` - The job is queued and hasn't started yet.
+    #
+    #   * `RUNNING` - The job is still running.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time that the snapshot job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time that the snapshot job status was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeDashboardSnapshotJobResponse AWS API Documentation
+    #
+    class DescribeDashboardSnapshotJobResponse < Struct.new(
+      :aws_account_id,
+      :dashboard_id,
+      :snapshot_job_id,
+      :user_configuration,
+      :snapshot_configuration,
+      :arn,
+      :job_status,
+      :created_time,
+      :last_updated_time,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that the dashboard
+    #   snapshot job is executed in.
+    #   @return [String]
+    #
+    # @!attribute [rw] dashboard_id
+    #   The ID of the dashboard that you have started a snapshot job for.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_job_id
+    #   The ID of the job to be described. The job ID is set when you start
+    #   a new job with a `StartDashboardSnapshotJob` API call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeDashboardSnapshotJobResultRequest AWS API Documentation
+    #
+    class DescribeDashboardSnapshotJobResultRequest < Struct.new(
+      :aws_account_id,
+      :dashboard_id,
+      :snapshot_job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the snapshot job. The job ARN is
+    #   generated when you start a new job with a
+    #   `StartDashboardSnapshotJob` API call.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   Indicates the status of a job after it has reached a terminal state.
+    #   A finished snapshot job will retuen a `COMPLETED` or `FAILED`
+    #   status.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time that a snapshot job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time that a snapshot job status was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] result
+    #   The result of the snapshot job. Jobs that have successfully
+    #   completed will return the S3Uri where they are located. Jobs that
+    #   have failedwill return information on the error that caused the job
+    #   to fail.
+    #   @return [Types::SnapshotJobResult]
+    #
+    # @!attribute [rw] error_info
+    #   Displays information for the error that caused a job to fail.
+    #   @return [Types::SnapshotJobErrorInfo]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeDashboardSnapshotJobResultResponse AWS API Documentation
+    #
+    class DescribeDashboardSnapshotJobResultResponse < Struct.new(
+      :arn,
+      :job_status,
+      :created_time,
+      :last_updated_time,
+      :result,
+      :error_info,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
     #   The Amazon Web Services account ID.
     #   @return [String]
     #
@@ -11765,11 +12000,16 @@ module Aws::QuickSight
     #   The options to configure the title visibility, name, and font size.
     #   @return [Types::LabelOptions]
     #
+    # @!attribute [rw] info_icon_label_options
+    #   The configuration of info icon label options.
+    #   @return [Types::SheetControlInfoIconLabelOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DropDownControlDisplayOptions AWS API Documentation
     #
     class DropDownControlDisplayOptions < Struct.new(
       :select_all_options,
-      :title_options)
+      :title_options,
+      :info_icon_label_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16704,12 +16944,17 @@ module Aws::QuickSight
     #   The options to configure the title visibility, name, and font size.
     #   @return [Types::LabelOptions]
     #
+    # @!attribute [rw] info_icon_label_options
+    #   The configuration of info icon label options.
+    #   @return [Types::SheetControlInfoIconLabelOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListControlDisplayOptions AWS API Documentation
     #
     class ListControlDisplayOptions < Struct.new(
       :search_options,
       :select_all_options,
-      :title_options)
+      :title_options,
+      :info_icon_label_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21901,11 +22146,16 @@ module Aws::QuickSight
     #   Customize how dates are formatted in controls.
     #   @return [String]
     #
+    # @!attribute [rw] info_icon_label_options
+    #   The configuration of info icon label options.
+    #   @return [Types::SheetControlInfoIconLabelOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RelativeDateTimeControlDisplayOptions AWS API Documentation
     #
     class RelativeDateTimeControlDisplayOptions < Struct.new(
       :title_options,
-      :date_time_format)
+      :date_time_format,
+      :info_icon_label_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22332,6 +22582,37 @@ module Aws::QuickSight
       :tag_multi_value_delimiter,
       :match_all_value)
       SENSITIVE = [:match_all_value]
+      include Aws::Structure
+    end
+
+    # An optional structure that contains the Amazon S3 bucket configuration
+    # that the generated snapshots are stored in. If you don't provide this
+    # information, generated snapshots are stored in the default Amazon
+    # QuickSight bucket.
+    #
+    # @!attribute [rw] bucket_name
+    #   The name of an existing Amazon S3 bucket where the generated
+    #   snapshot artifacts are sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_prefix
+    #   The prefix of the Amazon S3 bucket that the generated snapshots are
+    #   stored in.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_region
+    #   The region that the Amazon S3 bucket is located in. The bucket must
+    #   be located in the same region that the `StartDashboardSnapshotJob`
+    #   API call is made.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/S3BucketConfiguration AWS API Documentation
+    #
+    class S3BucketConfiguration < Struct.new(
+      :bucket_name,
+      :bucket_prefix,
+      :bucket_region)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -23530,6 +23811,25 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A control to display info icons for filters and parameters.
+    #
+    # @!attribute [rw] visibility
+    #   The visibility configuration of info icon label options.
+    #   @return [String]
+    #
+    # @!attribute [rw] info_icon_text
+    #   The text content of info icon.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SheetControlInfoIconLabelOptions AWS API Documentation
+    #
+    class SheetControlInfoIconLabelOptions < Struct.new(
+      :visibility,
+      :info_icon_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A grid layout to define the placement of sheet control.
     #
     # @!attribute [rw] configuration
@@ -23867,10 +24167,15 @@ module Aws::QuickSight
     #   The options to configure the title visibility, name, and font size.
     #   @return [Types::LabelOptions]
     #
+    # @!attribute [rw] info_icon_label_options
+    #   The configuration of info icon label options.
+    #   @return [Types::SheetControlInfoIconLabelOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SliderControlDisplayOptions AWS API Documentation
     #
     class SliderControlDisplayOptions < Struct.new(
-      :title_options)
+      :title_options,
+      :info_icon_label_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23937,6 +24242,327 @@ module Aws::QuickSight
       :panel_configuration,
       :x_axis,
       :y_axis)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains information on the anonymous user
+    # configuration.
+    #
+    # @!attribute [rw] row_level_permission_tags
+    #   The tags to be used for row-level security (RLS). Make sure that the
+    #   relevant datasets have RLS tags configured before you start a
+    #   snapshot export job. You can configure the RLS tags of a dataset
+    #   with a `DataSet$RowLevelPermissionTagConfiguration` API call.
+    #
+    #   These are not the tags that are used for Amazon Web Services
+    #   resource tagging. For more information on row level security in
+    #   Amazon QuickSight, see [Using Row-Level Security (RLS) with
+    #   Tags][1]in the *Amazon QuickSight User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html
+    #   @return [Array<Types::SessionTag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SnapshotAnonymousUser AWS API Documentation
+    #
+    class SnapshotAnonymousUser < Struct.new(
+      :row_level_permission_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Use this structure to redact sensitive information that you provide
+    # about an anonymous user from the snapshot.
+    #
+    # @!attribute [rw] row_level_permission_tag_keys
+    #   The tag keys for the `RowLevelPermissionTags`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SnapshotAnonymousUserRedacted AWS API Documentation
+    #
+    class SnapshotAnonymousUserRedacted < Struct.new(
+      :row_level_permission_tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration of the dashboard snapshot.
+    #
+    # @!attribute [rw] file_groups
+    #   A list of `SnapshotJobResultFileGroup` objects that contain
+    #   information about the snapshot that is generated. This list can hold
+    #   a maximum of 6 `FileGroup` configurations.
+    #   @return [Array<Types::SnapshotFileGroup>]
+    #
+    # @!attribute [rw] destination_configuration
+    #   A structure that contains information on the Amazon S3 bucket that
+    #   the generated snapshot is stored in.
+    #   @return [Types::SnapshotDestinationConfiguration]
+    #
+    # @!attribute [rw] parameters
+    #   A list of Amazon QuickSight parameters and the list's override
+    #   values.
+    #   @return [Types::Parameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SnapshotConfiguration AWS API Documentation
+    #
+    class SnapshotConfiguration < Struct.new(
+      :file_groups,
+      :destination_configuration,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains information on the Amazon S3 destinations of
+    # the generated snapshot.
+    #
+    # @!attribute [rw] s3_destinations
+    #   A list of `SnapshotS3DestinationConfiguration` objects that contain
+    #   Amazon S3 destination configurations. This structure can hold a
+    #   maximum of 1 `S3DestinationConfiguration`.
+    #   @return [Array<Types::SnapshotS3DestinationConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SnapshotDestinationConfiguration AWS API Documentation
+    #
+    class SnapshotDestinationConfiguration < Struct.new(
+      :s3_destinations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains the information for the snapshot that you
+    # want to generate. This information is provided by you when you start a
+    # new snapshot job.
+    #
+    # @!attribute [rw] sheet_selections
+    #   A list of `SnapshotFileSheetSelection` objects that contain
+    #   information on the dashboard sheet that is exported. These objects
+    #   provide information about the snapshot artifacts that are generated
+    #   during the job. This structure can hold a maximum of 5 CSV
+    #   configurations or 1 configuration for PDF.
+    #   @return [Array<Types::SnapshotFileSheetSelection>]
+    #
+    # @!attribute [rw] format_type
+    #   The format of the snapshot file to be generated. You can choose
+    #   between `CSV` and `PDF`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SnapshotFile AWS API Documentation
+    #
+    class SnapshotFile < Struct.new(
+      :sheet_selections,
+      :format_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains the information on the snapshot files.
+    #
+    # @!attribute [rw] files
+    #   A list of `SnapshotFile` objects that contain the information on the
+    #   snapshot files that need to be generated. This structure can hold 1
+    #   configuration at a time.
+    #   @return [Array<Types::SnapshotFile>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SnapshotFileGroup AWS API Documentation
+    #
+    class SnapshotFileGroup < Struct.new(
+      :files)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains information that identifies the snapshot
+    # that needs to be generated.
+    #
+    # @!attribute [rw] sheet_id
+    #   The sheet ID of the dashboard to generate the snapshot artifact
+    #   from. This value is required for CSV or PDF format types.
+    #   @return [String]
+    #
+    # @!attribute [rw] selection_scope
+    #   The selection scope of the visuals on a sheet of a dashboard that
+    #   you are generating a snapthot of. You can choose one of the
+    #   following options.
+    #
+    #   * `ALL_VISUALS` - Selects all visuals that are on the sheet. This
+    #     value is required if the snapshot is a PDF.
+    #
+    #   * `SELECTED_VISUALS` - Select the visual that you want to add to the
+    #     snapshot. This value is required if the snapshot is a CSV.
+    #   @return [String]
+    #
+    # @!attribute [rw] visual_ids
+    #   A structure that lists the IDs of the visuals in the selected sheet.
+    #   Supported visual types are table, pivot table visuals. This value is
+    #   required if you are generating a CSV. This value supports a maximum
+    #   of 1 visual ID.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SnapshotFileSheetSelection AWS API Documentation
+    #
+    class SnapshotFileSheetSelection < Struct.new(
+      :sheet_id,
+      :selection_scope,
+      :visual_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information on the error that caused the
+    # snapshot job to fail.
+    #
+    # @!attribute [rw] error_message
+    #   The error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_type
+    #   The error type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SnapshotJobErrorInfo AWS API Documentation
+    #
+    class SnapshotJobErrorInfo < Struct.new(
+      :error_message,
+      :error_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that provides information on the result of a snapshot job.
+    # This object provides information about the job, the job status, and
+    # the location of the generated file.
+    #
+    # @!attribute [rw] anonymous_users
+    #   A list of `AnonymousUserSnapshotJobResult` objects that contain
+    #   information on anonymous users and their user configurations. This
+    #   data provided by you when you make a `StartDashboardSnapshotJob` API
+    #   call.
+    #   @return [Array<Types::AnonymousUserSnapshotJobResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SnapshotJobResult AWS API Documentation
+    #
+    class SnapshotJobResult < Struct.new(
+      :anonymous_users)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information on the error that caused the snapshot job to fail.
+    #
+    # @!attribute [rw] error_message
+    #   The error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_type
+    #   The error type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SnapshotJobResultErrorInfo AWS API Documentation
+    #
+    class SnapshotJobResultErrorInfo < Struct.new(
+      :error_message,
+      :error_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains information on the generated snapshot file
+    # groups.
+    #
+    # @!attribute [rw] files
+    #   A list of `SnapshotFile` objects.
+    #   @return [Array<Types::SnapshotFile>]
+    #
+    # @!attribute [rw] s3_results
+    #   A list of `SnapshotJobS3Result` objects.
+    #   @return [Array<Types::SnapshotJobS3Result>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SnapshotJobResultFileGroup AWS API Documentation
+    #
+    class SnapshotJobResultFileGroup < Struct.new(
+      :files,
+      :s3_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon S3 result from the snapshot job. The result includes the
+    # `DestinationConfiguration` and the Amazon S3 Uri. If an error occured
+    # during the job, the result returns information on the error.
+    #
+    # @!attribute [rw] s3_destination_configuration
+    #   A list of Amazon S3 bucket configurations that are provided when you
+    #   make a `StartDashboardSnapshotJob` API call.
+    #   @return [Types::SnapshotS3DestinationConfiguration]
+    #
+    # @!attribute [rw] s3_uri
+    #   The Amazon S3 Uri.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_info
+    #   An array of error records that describe any failures that occur
+    #   while the dashboard snapshot job runs.
+    #   @return [Array<Types::SnapshotJobResultErrorInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SnapshotJobS3Result AWS API Documentation
+    #
+    class SnapshotJobS3Result < Struct.new(
+      :s3_destination_configuration,
+      :s3_uri,
+      :error_info)
+      SENSITIVE = [:s3_uri]
+      include Aws::Structure
+    end
+
+    # A structure that describes the Amazon S3 settings to use to save the
+    # generated dashboard snapshot.
+    #
+    # @!attribute [rw] bucket_configuration
+    #   A structure that contains details about the Amazon S3 bucket that
+    #   the generated dashboard snapshot is saved in.
+    #   @return [Types::S3BucketConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SnapshotS3DestinationConfiguration AWS API Documentation
+    #
+    class SnapshotS3DestinationConfiguration < Struct.new(
+      :bucket_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains information about the users that the
+    # dashboard snapshot is generated for.
+    #
+    # @!attribute [rw] anonymous_users
+    #   An array of records that describe the anonymous users that the
+    #   dashboard snapshot is generated for.
+    #   @return [Array<Types::SnapshotAnonymousUser>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SnapshotUserConfiguration AWS API Documentation
+    #
+    class SnapshotUserConfiguration < Struct.new(
+      :anonymous_users)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains information about the users that the
+    # dashboard snapshot is generated for. Sensitive user information is
+    # excluded.
+    #
+    # @!attribute [rw] anonymous_users
+    #   An array of records that describe anonymous users that the dashboard
+    #   snapshot is generated for. Sensitive user information is excluded.
+    #   @return [Array<Types::SnapshotAnonymousUserRedacted>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SnapshotUserConfigurationRedacted AWS API Documentation
+    #
+    class SnapshotUserConfigurationRedacted < Struct.new(
+      :anonymous_users)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24211,6 +24837,74 @@ module Aws::QuickSight
     class StartAssetBundleImportJobResponse < Struct.new(
       :arn,
       :asset_bundle_import_job_id,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that the dashboard
+    #   snapshot job is executed in.
+    #   @return [String]
+    #
+    # @!attribute [rw] dashboard_id
+    #   The ID of the dashboard that you want to start a snapshot job for.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_job_id
+    #   An ID for the dashboard snapshot job. This ID is unique to the
+    #   dashboard while the job is running. This ID can be used to poll the
+    #   status of a job with a `DescribeDashboardSnapshotJob` while the job
+    #   runs. You can reuse this ID for another job 24 hours after the
+    #   current job is completed.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_configuration
+    #   A structure that contains information about the anonymous users that
+    #   the generated snapshot is for. This API will not return information
+    #   about registered Amazon QuickSight.
+    #   @return [Types::SnapshotUserConfiguration]
+    #
+    # @!attribute [rw] snapshot_configuration
+    #   A structure that describes the configuration of the dashboard
+    #   snapshot.
+    #   @return [Types::SnapshotConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/StartDashboardSnapshotJobRequest AWS API Documentation
+    #
+    class StartDashboardSnapshotJobRequest < Struct.new(
+      :aws_account_id,
+      :dashboard_id,
+      :snapshot_job_id,
+      :user_configuration,
+      :snapshot_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the dashboard snapshot job.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_job_id
+    #   The ID of the job. The job ID is set when you start a new job with a
+    #   `StartDashboardSnapshotJob` API call.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/StartDashboardSnapshotJobResponse AWS API Documentation
+    #
+    class StartDashboardSnapshotJobResponse < Struct.new(
+      :arn,
+      :snapshot_job_id,
       :request_id,
       :status)
       SENSITIVE = []
@@ -25520,11 +26214,16 @@ module Aws::QuickSight
     #   The configuration of the placeholder options in a text area control.
     #   @return [Types::TextControlPlaceholderOptions]
     #
+    # @!attribute [rw] info_icon_label_options
+    #   The configuration of info icon label options.
+    #   @return [Types::SheetControlInfoIconLabelOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TextAreaControlDisplayOptions AWS API Documentation
     #
     class TextAreaControlDisplayOptions < Struct.new(
       :title_options,
-      :placeholder_options)
+      :placeholder_options,
+      :info_icon_label_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25579,11 +26278,16 @@ module Aws::QuickSight
     #   control.
     #   @return [Types::TextControlPlaceholderOptions]
     #
+    # @!attribute [rw] info_icon_label_options
+    #   The configuration of info icon label options.
+    #   @return [Types::SheetControlInfoIconLabelOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TextFieldControlDisplayOptions AWS API Documentation
     #
     class TextFieldControlDisplayOptions < Struct.new(
       :title_options,
-      :placeholder_options)
+      :placeholder_options,
+      :info_icon_label_options)
       SENSITIVE = []
       include Aws::Structure
     end

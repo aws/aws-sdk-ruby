@@ -26,7 +26,7 @@ module Aws::SageMakerFeatureStoreRuntime
     DeletionMode = Shapes::StringShape.new(name: 'DeletionMode')
     ExpirationTimeResponse = Shapes::StringShape.new(name: 'ExpirationTimeResponse')
     ExpiresAt = Shapes::StringShape.new(name: 'ExpiresAt')
-    FeatureGroupName = Shapes::StringShape.new(name: 'FeatureGroupName')
+    FeatureGroupNameOrArn = Shapes::StringShape.new(name: 'FeatureGroupNameOrArn')
     FeatureName = Shapes::StringShape.new(name: 'FeatureName')
     FeatureNames = Shapes::ListShape.new(name: 'FeatureNames')
     FeatureValue = Shapes::StructureShape.new(name: 'FeatureValue')
@@ -59,7 +59,7 @@ module Aws::SageMakerFeatureStoreRuntime
 
     BatchGetRecordErrors.member = Shapes::ShapeRef.new(shape: BatchGetRecordError)
 
-    BatchGetRecordIdentifier.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupName, required: true, location_name: "FeatureGroupName"))
+    BatchGetRecordIdentifier.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupNameOrArn, required: true, location_name: "FeatureGroupName"))
     BatchGetRecordIdentifier.add_member(:record_identifiers_value_as_string, Shapes::ShapeRef.new(shape: RecordIdentifiers, required: true, location_name: "RecordIdentifiersValueAsString"))
     BatchGetRecordIdentifier.add_member(:feature_names, Shapes::ShapeRef.new(shape: FeatureNames, location_name: "FeatureNames"))
     BatchGetRecordIdentifier.struct_class = Types::BatchGetRecordIdentifier
@@ -83,7 +83,7 @@ module Aws::SageMakerFeatureStoreRuntime
 
     BatchGetRecordResultDetails.member = Shapes::ShapeRef.new(shape: BatchGetRecordResultDetail)
 
-    DeleteRecordRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupName, required: true, location: "uri", location_name: "FeatureGroupName"))
+    DeleteRecordRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupNameOrArn, required: true, location: "uri", location_name: "FeatureGroupName"))
     DeleteRecordRequest.add_member(:record_identifier_value_as_string, Shapes::ShapeRef.new(shape: ValueAsString, required: true, location: "querystring", location_name: "RecordIdentifierValueAsString"))
     DeleteRecordRequest.add_member(:event_time, Shapes::ShapeRef.new(shape: ValueAsString, required: true, location: "querystring", location_name: "EventTime"))
     DeleteRecordRequest.add_member(:target_stores, Shapes::ShapeRef.new(shape: TargetStores, location: "querystring", location_name: "TargetStores"))
@@ -96,7 +96,7 @@ module Aws::SageMakerFeatureStoreRuntime
     FeatureValue.add_member(:value_as_string, Shapes::ShapeRef.new(shape: ValueAsString, required: true, location_name: "ValueAsString"))
     FeatureValue.struct_class = Types::FeatureValue
 
-    GetRecordRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupName, required: true, location: "uri", location_name: "FeatureGroupName"))
+    GetRecordRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupNameOrArn, required: true, location: "uri", location_name: "FeatureGroupName"))
     GetRecordRequest.add_member(:record_identifier_value_as_string, Shapes::ShapeRef.new(shape: ValueAsString, required: true, location: "querystring", location_name: "RecordIdentifierValueAsString"))
     GetRecordRequest.add_member(:feature_names, Shapes::ShapeRef.new(shape: FeatureNames, location: "querystring", location_name: "FeatureName"))
     GetRecordRequest.add_member(:expiration_time_response, Shapes::ShapeRef.new(shape: ExpirationTimeResponse, location: "querystring", location_name: "ExpirationTimeResponse"))
@@ -109,7 +109,7 @@ module Aws::SageMakerFeatureStoreRuntime
     InternalFailure.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     InternalFailure.struct_class = Types::InternalFailure
 
-    PutRecordRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupName, required: true, location: "uri", location_name: "FeatureGroupName"))
+    PutRecordRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupNameOrArn, required: true, location: "uri", location_name: "FeatureGroupName"))
     PutRecordRequest.add_member(:record, Shapes::ShapeRef.new(shape: Record, required: true, location_name: "Record"))
     PutRecordRequest.add_member(:target_stores, Shapes::ShapeRef.new(shape: TargetStores, location_name: "TargetStores"))
     PutRecordRequest.add_member(:ttl_duration, Shapes::ShapeRef.new(shape: TtlDuration, location_name: "TtlDuration"))

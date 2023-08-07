@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2023-07-20)
+------------------
+
+* Feature - Adding support for Tags on Create and Resource Tagging API.
+
 1.9.0 (2023-07-11)
 ------------------
 

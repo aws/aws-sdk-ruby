@@ -594,6 +594,59 @@ module Aws::CodeCatalyst
       req.send_request(options)
     end
 
+    # Creates an empty Git-based source repository in a specified project.
+    # The repository is created with an initial empty commit with a default
+    # branch named `main`.
+    #
+    # @option params [required, String] :space_name
+    #   The name of the space.
+    #
+    # @option params [required, String] :project_name
+    #   The name of the project in the space.
+    #
+    # @option params [required, String] :name
+    #   The name of the source repository. For more information about name
+    #   requirements, see [Quotas for source repositories][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codecatalyst/latest/userguide/source-quotas.html
+    #
+    # @option params [String] :description
+    #   The description of the source repository.
+    #
+    # @return [Types::CreateSourceRepositoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSourceRepositoryResponse#space_name #space_name} => String
+    #   * {Types::CreateSourceRepositoryResponse#project_name #project_name} => String
+    #   * {Types::CreateSourceRepositoryResponse#name #name} => String
+    #   * {Types::CreateSourceRepositoryResponse#description #description} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_source_repository({
+    #     space_name: "NameString", # required
+    #     project_name: "NameString", # required
+    #     name: "SourceRepositoryNameString", # required
+    #     description: "SourceRepositoryDescriptionString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.space_name #=> String
+    #   resp.project_name #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/CreateSourceRepository AWS API Documentation
+    #
+    # @overload create_source_repository(params = {})
+    # @param [Hash] params ({})
+    def create_source_repository(params = {}, options = {})
+      req = build_request(:create_source_repository, params)
+      req.send_request(options)
+    end
+
     # Creates a branch in a specified source repository in Amazon
     # CodeCatalyst.
     #
@@ -719,6 +772,120 @@ module Aws::CodeCatalyst
       req.send_request(options)
     end
 
+    # Deletes a project in a space.
+    #
+    # @option params [required, String] :space_name
+    #   The name of the space.
+    #
+    # @option params [required, String] :name
+    #   The name of the project in the space. To retrieve a list of project
+    #   names, use ListProjects.
+    #
+    # @return [Types::DeleteProjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteProjectResponse#space_name #space_name} => String
+    #   * {Types::DeleteProjectResponse#name #name} => String
+    #   * {Types::DeleteProjectResponse#display_name #display_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_project({
+    #     space_name: "NameString", # required
+    #     name: "NameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.space_name #=> String
+    #   resp.name #=> String
+    #   resp.display_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/DeleteProject AWS API Documentation
+    #
+    # @overload delete_project(params = {})
+    # @param [Hash] params ({})
+    def delete_project(params = {}, options = {})
+      req = build_request(:delete_project, params)
+      req.send_request(options)
+    end
+
+    # Deletes a source repository in Amazon CodeCatalyst. You cannot use
+    # this API to delete a linked repository. It can only be used to delete
+    # a Amazon CodeCatalyst source repository.
+    #
+    # @option params [required, String] :space_name
+    #   The name of the space.
+    #
+    # @option params [required, String] :project_name
+    #   The name of the project in the space.
+    #
+    # @option params [required, String] :name
+    #   The name of the source repository.
+    #
+    # @return [Types::DeleteSourceRepositoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteSourceRepositoryResponse#space_name #space_name} => String
+    #   * {Types::DeleteSourceRepositoryResponse#project_name #project_name} => String
+    #   * {Types::DeleteSourceRepositoryResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_source_repository({
+    #     space_name: "NameString", # required
+    #     project_name: "NameString", # required
+    #     name: "SourceRepositoryNameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.space_name #=> String
+    #   resp.project_name #=> String
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/DeleteSourceRepository AWS API Documentation
+    #
+    # @overload delete_source_repository(params = {})
+    # @param [Hash] params ({})
+    def delete_source_repository(params = {}, options = {})
+      req = build_request(:delete_source_repository, params)
+      req.send_request(options)
+    end
+
+    # Deletes a space.
+    #
+    # Deleting a space cannot be undone. Additionally, since space names
+    # must be unique across Amazon CodeCatalyst, you cannot reuse names of
+    # deleted spaces.
+    #
+    # @option params [required, String] :name
+    #   The name of the space. To retrieve a list of space names, use
+    #   ListSpaces.
+    #
+    # @return [Types::DeleteSpaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteSpaceResponse#name #name} => String
+    #   * {Types::DeleteSpaceResponse#display_name #display_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_space({
+    #     name: "NameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.display_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/DeleteSpace AWS API Documentation
+    #
+    # @overload delete_space(params = {})
+    # @param [Hash] params ({})
+    def delete_space(params = {}, options = {})
+      req = build_request(:delete_space, params)
+      req.send_request(options)
+    end
+
     # Returns information about a Dev Environment for a source repository in
     # a project. Dev Environments are specific to the user who creates them.
     #
@@ -821,6 +988,52 @@ module Aws::CodeCatalyst
     # @param [Hash] params ({})
     def get_project(params = {}, options = {})
       req = build_request(:get_project, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a source repository.
+    #
+    # @option params [required, String] :space_name
+    #   The name of the space.
+    #
+    # @option params [required, String] :project_name
+    #   The name of the project in the space.
+    #
+    # @option params [required, String] :name
+    #   The name of the source repository.
+    #
+    # @return [Types::GetSourceRepositoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSourceRepositoryResponse#space_name #space_name} => String
+    #   * {Types::GetSourceRepositoryResponse#project_name #project_name} => String
+    #   * {Types::GetSourceRepositoryResponse#name #name} => String
+    #   * {Types::GetSourceRepositoryResponse#description #description} => String
+    #   * {Types::GetSourceRepositoryResponse#last_updated_time #last_updated_time} => Time
+    #   * {Types::GetSourceRepositoryResponse#created_time #created_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_source_repository({
+    #     space_name: "NameString", # required
+    #     project_name: "NameString", # required
+    #     name: "SourceRepositoryNameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.space_name #=> String
+    #   resp.project_name #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.last_updated_time #=> Time
+    #   resp.created_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/GetSourceRepository AWS API Documentation
+    #
+    # @overload get_source_repository(params = {})
+    # @param [Hash] params ({})
+    def get_source_repository(params = {}, options = {})
+      req = build_request(:get_source_repository, params)
       req.send_request(options)
     end
 
@@ -1745,6 +1958,84 @@ module Aws::CodeCatalyst
       req.send_request(options)
     end
 
+    # Changes one or more values for a project.
+    #
+    # @option params [required, String] :space_name
+    #   The name of the space.
+    #
+    # @option params [required, String] :name
+    #   The name of the project.
+    #
+    # @option params [String] :description
+    #   The description of the project.
+    #
+    # @return [Types::UpdateProjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateProjectResponse#space_name #space_name} => String
+    #   * {Types::UpdateProjectResponse#name #name} => String
+    #   * {Types::UpdateProjectResponse#display_name #display_name} => String
+    #   * {Types::UpdateProjectResponse#description #description} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_project({
+    #     space_name: "NameString", # required
+    #     name: "NameString", # required
+    #     description: "ProjectDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.space_name #=> String
+    #   resp.name #=> String
+    #   resp.display_name #=> String
+    #   resp.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/UpdateProject AWS API Documentation
+    #
+    # @overload update_project(params = {})
+    # @param [Hash] params ({})
+    def update_project(params = {}, options = {})
+      req = build_request(:update_project, params)
+      req.send_request(options)
+    end
+
+    # Changes one or more values for a space.
+    #
+    # @option params [required, String] :name
+    #   The name of the space.
+    #
+    # @option params [String] :description
+    #   The description of the space.
+    #
+    # @return [Types::UpdateSpaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSpaceResponse#name #name} => String
+    #   * {Types::UpdateSpaceResponse#display_name #display_name} => String
+    #   * {Types::UpdateSpaceResponse#description #description} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_space({
+    #     name: "NameString", # required
+    #     description: "SpaceDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.display_name #=> String
+    #   resp.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/UpdateSpace AWS API Documentation
+    #
+    # @overload update_space(params = {})
+    # @param [Hash] params ({})
+    def update_space(params = {}, options = {})
+      req = build_request(:update_space, params)
+      req.send_request(options)
+    end
+
     # Verifies whether the calling user has a valid Amazon CodeCatalyst
     # login and session. If successful, this returns the ID of the user in
     # Amazon CodeCatalyst.
@@ -1779,7 +2070,7 @@ module Aws::CodeCatalyst
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codecatalyst'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1994,6 +1994,12 @@ module Aws::Connect
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] agent_availability_timer
+    #   Whether agents with this routing profile will have their routing
+    #   order calculated based on *time since their last inbound contact* or
+    #   *longest idle time*.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateRoutingProfileRequest AWS API Documentation
     #
     class CreateRoutingProfileRequest < Struct.new(
@@ -2003,7 +2009,8 @@ module Aws::Connect
       :default_outbound_queue_id,
       :queue_configs,
       :media_concurrencies,
-      :tags)
+      :tags,
+      :agent_availability_timer)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3062,6 +3069,28 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
+    # @!attribute [rw] queue_id
+    #   The identifier for the queue.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteQueueRequest AWS API Documentation
+    #
+    class DeleteQueueRequest < Struct.new(
+      :instance_id,
+      :queue_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
     # @!attribute [rw] quick_connect_id
     #   The identifier for the quick connect.
     #   @return [String]
@@ -3071,6 +3100,28 @@ module Aws::Connect
     class DeleteQuickConnectRequest < Struct.new(
       :instance_id,
       :quick_connect_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_id
+    #   The identifier of the routing profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteRoutingProfileRequest AWS API Documentation
+    #
+    class DeleteRoutingProfileRequest < Struct.new(
+      :instance_id,
+      :routing_profile_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6016,6 +6067,8 @@ module Aws::Connect
     #
     #   * User hierarchy groups
     #
+    #   * Feature
+    #
     #   At least one filter must be passed from queues, routing profiles,
     #   agents, or user hierarchy groups.
     #
@@ -6028,7 +6081,8 @@ module Aws::Connect
     #     single request. Valid filter keys: `QUEUE` \| `ROUTING_PROFILE` \|
     #     `AGENT` \| `CHANNEL` \| `AGENT_HIERARCHY_LEVEL_ONE` \|
     #     `AGENT_HIERARCHY_LEVEL_TWO` \| `AGENT_HIERARCHY_LEVEL_THREE` \|
-    #     `AGENT_HIERARCHY_LEVEL_FOUR` \| `AGENT_HIERARCHY_LEVEL_FIVE`
+    #     `AGENT_HIERARCHY_LEVEL_FOUR` \| `AGENT_HIERARCHY_LEVEL_FIVE` \|
+    #     `FEATURE`
     #
     #   * **Filter values**: A maximum of 100 filter values are supported in
     #     a single request. VOICE, CHAT, and TASK are valid `filterValue`
@@ -6036,6 +6090,10 @@ module Aws::Connect
     #     of 100 filter values. For example, a GetMetricDataV2 request can
     #     filter by 50 queues, 35 agents, and 15 routing profiles for a
     #     total of 100 filter values, along with 3 channel filters.
+    #
+    #     `contact_lens_conversational_analytics` is a valid filterValue for
+    #     the `FEATURE` filter key. It is available only to contacts
+    #     analyzed by Contact Lens conversational analytics.
     #
     #
     #
@@ -6118,6 +6176,21 @@ module Aws::Connect
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy, Feature
+    #
+    #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
+    #
+    #      </note>
+    #
+    #   AVG\_AGENT\_CONNECTING\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid metric filter key: `INITIATION_METHOD`. For now, this metric
+    #     only supports the following as `INITIATION_METHOD`: `INBOUND` \|
+    #     `OUTBOUND` \| `CALLBACK` \| `API`
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy
     #
     #   AVG\_AGENT\_CONNECTING\_TIME
@@ -6131,19 +6204,66 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy
     #
-    #   AVG\_HANDLE\_TIME
+    #   AVG\_CONTACT\_DURATION
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy, Feature
+    #
+    #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
+    #
+    #      </note>
+    #
+    #   AVG\_CONVERSATION\_DURATION
     #
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy
+    #
+    #   AVG\_GREETING\_TIME\_AGENT
+    #
+    #   : This metric is available only for contacts analyzed by Contact
+    #     Lens conversational analytics.
+    #
+    #     Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
+    #
+    #   AVG\_HANDLE\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy, Feature
+    #
+    #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
+    #
+    #      </note>
     #
     #   AVG\_HOLD\_TIME
     #
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, Feature
+    #
+    #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
+    #
+    #      </note>
+    #
+    #   AVG\_HOLDS
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy, Feature
+    #
+    #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
+    #
+    #      </note>
     #
     #   AVG\_INTERACTION\_AND\_HOLD\_TIME
     #
@@ -6156,13 +6276,83 @@ module Aws::Connect
     #
     #   : Unit: Seconds
     #
-    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Feature
+    #
+    #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
+    #
+    #      </note>
+    #
+    #   AVG\_INTERRUPTIONS\_AGENT
+    #
+    #   : This metric is available only for contacts analyzed by Contact
+    #     Lens conversational analytics.
+    #
+    #     Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
+    #
+    #   AVG\_INTERRUPTION\_TIME\_AGENT
+    #
+    #   : This metric is available only for contacts analyzed by Contact
+    #     Lens conversational analytics.
+    #
+    #     Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
+    #
+    #   AVG\_NON\_TALK\_TIME
+    #
+    #   : This metric is available only for contacts analyzed by Contact
+    #     Lens conversational analytics.
+    #
+    #     Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
     #
     #   AVG\_QUEUE\_ANSWER\_TIME
     #
     #   : Unit: Seconds
     #
-    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Feature
+    #
+    #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
+    #
+    #      </note>
+    #
+    #   AVG\_TALK\_TIME
+    #
+    #   : This metric is available only for contacts analyzed by Contact
+    #     Lens conversational analytics.
+    #
+    #     Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
+    #
+    #   AVG\_TALK\_TIME\_AGENT
+    #
+    #   : This metric is available only for contacts analyzed by Contact
+    #     Lens conversational analytics.
+    #
+    #     Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
+    #
+    #   AVG\_TALK\_TIME\_CUSTOMER
+    #
+    #   : This metric is available only for contacts analyzed by Contact
+    #     Lens conversational analytics.
+    #
+    #     Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
     #
     #   CONTACTS\_ABANDONED
     #
@@ -6177,7 +6367,12 @@ module Aws::Connect
     #
     #     Valid metric filter key: `INITIATION_METHOD`
     #
-    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Feature
+    #
+    #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
+    #
+    #      </note>
     #
     #   CONTACTS\_HANDLED
     #
@@ -6186,7 +6381,11 @@ module Aws::Connect
     #     Valid metric filter key: `INITIATION_METHOD`, `DISCONNECT_REASON`
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, Feature
+    #
+    #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
+    #
+    #      </note>
     #
     #   CONTACTS\_HOLD\_ABANDONS
     #
@@ -6207,7 +6406,11 @@ module Aws::Connect
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #     Agent, Agent Hierarchy, Feature
+    #
+    #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
+    #
+    #      </note>
     #
     #   CONTACTS\_TRANSFERRED\_OUT\_BY\_AGENT
     #
@@ -7091,8 +7294,8 @@ module Aws::Connect
     #   @return [Boolean]
     #
     # @!attribute [rw] instance_access_url
-    #   This URL allows contact center users to access Amazon Connect admin
-    #   website.
+    #   This URL allows contact center users to access the Amazon Connect
+    #   admin website.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Instance AWS API Documentation
@@ -7206,8 +7409,8 @@ module Aws::Connect
     #   @return [Boolean]
     #
     # @!attribute [rw] instance_access_url
-    #   This URL allows contact center users to access Amazon Connect admin
-    #   website.
+    #   This URL allows contact center users to access the Amazon Connect
+    #   admin website.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InstanceSummary AWS API Documentation
@@ -10846,6 +11049,12 @@ module Aws::Connect
     #   The number of associated users in routing profile.
     #   @return [Integer]
     #
+    # @!attribute [rw] agent_availability_timer
+    #   Whether agents with this routing profile will have their routing
+    #   order calculated based on *time since their last inbound contact* or
+    #   *longest idle time*.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfile AWS API Documentation
     #
     class RoutingProfile < Struct.new(
@@ -10858,7 +11067,8 @@ module Aws::Connect
       :default_outbound_queue_id,
       :tags,
       :number_of_associated_queues,
-      :number_of_associated_users)
+      :number_of_associated_users,
+      :agent_availability_timer)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14464,6 +14674,35 @@ module Aws::Connect
       :quick_connect_id,
       :name,
       :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_id
+    #   The identifier of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_availability_timer
+    #   Whether agents with this routing profile will have their routing
+    #   order calculated based on *time since their last inbound contact* or
+    #   *longest idle time*.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateRoutingProfileAgentAvailabilityTimerRequest AWS API Documentation
+    #
+    class UpdateRoutingProfileAgentAvailabilityTimerRequest < Struct.new(
+      :instance_id,
+      :routing_profile_id,
+      :agent_availability_timer)
       SENSITIVE = []
       include Aws::Structure
     end

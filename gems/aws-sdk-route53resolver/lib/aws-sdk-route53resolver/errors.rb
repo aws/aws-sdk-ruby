@@ -40,6 +40,7 @@ module Aws::Route53Resolver
   # * {ResourceInUseException}
   # * {ResourceNotFoundException}
   # * {ResourceUnavailableException}
+  # * {ServiceQuotaExceededException}
   # * {ThrottlingException}
   # * {UnknownResourceException}
   # * {ValidationException}
@@ -272,6 +273,21 @@ module Aws::Route53Resolver
       # @return [String]
       def resource_type
         @data[:resource_type]
+      end
+    end
+
+    class ServiceQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53Resolver::Types::ServiceQuotaExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

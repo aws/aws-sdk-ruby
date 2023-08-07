@@ -1671,7 +1671,7 @@ module Aws::Personalize
     #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/determining-use-case.html
     #
     # @option params [String] :recipe_arn
-    #   The ARN of the recipe to use for model training. Only specified when
+    #   The ARN of the recipe to use for model training. This is required when
     #   `performAutoML` is false.
     #
     # @option params [required, String] :dataset_group_arn
@@ -2387,6 +2387,11 @@ module Aws::Personalize
     #   resp.dataset.status #=> String
     #   resp.dataset.creation_date_time #=> Time
     #   resp.dataset.last_updated_date_time #=> Time
+    #   resp.dataset.latest_dataset_update.schema_arn #=> String
+    #   resp.dataset.latest_dataset_update.status #=> String
+    #   resp.dataset.latest_dataset_update.failure_reason #=> String
+    #   resp.dataset.latest_dataset_update.creation_date_time #=> Time
+    #   resp.dataset.latest_dataset_update.last_updated_date_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeDataset AWS API Documentation
     #
@@ -4145,6 +4150,43 @@ module Aws::Personalize
       req.send_request(options)
     end
 
+    # Update a dataset to replace its schema with a new or existing one. For
+    # more information, see [Replacing a dataset's schema][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/updating-dataset-schema.html
+    #
+    # @option params [required, String] :dataset_arn
+    #   The Amazon Resource Name (ARN) of the dataset that you want to update.
+    #
+    # @option params [required, String] :schema_arn
+    #   The Amazon Resource Name (ARN) of the new schema you want use.
+    #
+    # @return [Types::UpdateDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDatasetResponse#dataset_arn #dataset_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_dataset({
+    #     dataset_arn: "Arn", # required
+    #     schema_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/UpdateDataset AWS API Documentation
+    #
+    # @overload update_dataset(params = {})
+    # @param [Hash] params ({})
+    def update_dataset(params = {}, options = {})
+      req = build_request(:update_dataset, params)
+      req.send_request(options)
+    end
+
     # Updates a metric attribution.
     #
     # @option params [Array<Types::MetricAttribute>] :add_metrics
@@ -4263,7 +4305,7 @@ module Aws::Personalize
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalize'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

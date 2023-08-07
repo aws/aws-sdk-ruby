@@ -212,7 +212,7 @@ module Aws::CodeGuruSecurity
 
     # @!attribute [rw] analysis_type
     #   The type of analysis you want CodeGuru Security to perform in the
-    #   scan, either `Security` or `All`. The `Secuirty` type only generates
+    #   scan, either `Security` or `All`. The `Security` type only generates
     #   findings related to security. The `All` type generates both security
     #   findings and quality findings. Defaults to `Security` type if
     #   missing.

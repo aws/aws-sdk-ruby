@@ -765,7 +765,7 @@ module Aws::STS
 
     context 'UseGlobalEndpoint with legacy region `ap-northeast-1`' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"}]}, "url"=>"https://sts.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"}]}, "url"=>"https://sts.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -782,7 +782,7 @@ module Aws::STS
           sts_regional_endpoints: 'legacy',
           stub_responses: true
         )
-        expect_auth({"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"})
+        expect_auth({"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"})
         resp = client.get_caller_identity(
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
@@ -794,7 +794,7 @@ module Aws::STS
 
     context 'UseGlobalEndpoint with legacy region `ap-south-1`' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"}]}, "url"=>"https://sts.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"}]}, "url"=>"https://sts.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -811,7 +811,7 @@ module Aws::STS
           sts_regional_endpoints: 'legacy',
           stub_responses: true
         )
-        expect_auth({"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"})
+        expect_auth({"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"})
         resp = client.get_caller_identity(
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
@@ -823,7 +823,7 @@ module Aws::STS
 
     context 'UseGlobalEndpoint with legacy region `ap-southeast-1`' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"}]}, "url"=>"https://sts.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"}]}, "url"=>"https://sts.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -840,7 +840,7 @@ module Aws::STS
           sts_regional_endpoints: 'legacy',
           stub_responses: true
         )
-        expect_auth({"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"})
+        expect_auth({"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"})
         resp = client.get_caller_identity(
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
@@ -852,7 +852,7 @@ module Aws::STS
 
     context 'UseGlobalEndpoint with legacy region `ap-southeast-2`' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"}]}, "url"=>"https://sts.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"}]}, "url"=>"https://sts.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -869,7 +869,7 @@ module Aws::STS
           sts_regional_endpoints: 'legacy',
           stub_responses: true
         )
-        expect_auth({"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"})
+        expect_auth({"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"})
         resp = client.get_caller_identity(
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
@@ -881,7 +881,7 @@ module Aws::STS
 
     context 'UseGlobalEndpoint with legacy region `aws-global`' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"}]}, "url"=>"https://sts.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"}]}, "url"=>"https://sts.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -898,7 +898,7 @@ module Aws::STS
           sts_regional_endpoints: 'legacy',
           stub_responses: true
         )
-        expect_auth({"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"})
+        expect_auth({"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"})
         resp = client.get_caller_identity(
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
@@ -910,7 +910,7 @@ module Aws::STS
 
     context 'UseGlobalEndpoint with legacy region `ca-central-1`' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"}]}, "url"=>"https://sts.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"}]}, "url"=>"https://sts.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -927,7 +927,7 @@ module Aws::STS
           sts_regional_endpoints: 'legacy',
           stub_responses: true
         )
-        expect_auth({"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"})
+        expect_auth({"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"})
         resp = client.get_caller_identity(
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
@@ -939,7 +939,7 @@ module Aws::STS
 
     context 'UseGlobalEndpoint with legacy region `eu-central-1`' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"}]}, "url"=>"https://sts.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"}]}, "url"=>"https://sts.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -956,7 +956,7 @@ module Aws::STS
           sts_regional_endpoints: 'legacy',
           stub_responses: true
         )
-        expect_auth({"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"})
+        expect_auth({"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"})
         resp = client.get_caller_identity(
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
@@ -968,7 +968,7 @@ module Aws::STS
 
     context 'UseGlobalEndpoint with legacy region `eu-north-1`' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"}]}, "url"=>"https://sts.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"}]}, "url"=>"https://sts.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -985,7 +985,7 @@ module Aws::STS
           sts_regional_endpoints: 'legacy',
           stub_responses: true
         )
-        expect_auth({"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"})
+        expect_auth({"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"})
         resp = client.get_caller_identity(
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
@@ -997,7 +997,7 @@ module Aws::STS
 
     context 'UseGlobalEndpoint with legacy region `eu-west-1`' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"}]}, "url"=>"https://sts.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"}]}, "url"=>"https://sts.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -1014,7 +1014,7 @@ module Aws::STS
           sts_regional_endpoints: 'legacy',
           stub_responses: true
         )
-        expect_auth({"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"})
+        expect_auth({"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"})
         resp = client.get_caller_identity(
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
@@ -1026,7 +1026,7 @@ module Aws::STS
 
     context 'UseGlobalEndpoint with legacy region `eu-west-2`' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"}]}, "url"=>"https://sts.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"}]}, "url"=>"https://sts.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -1043,7 +1043,7 @@ module Aws::STS
           sts_regional_endpoints: 'legacy',
           stub_responses: true
         )
-        expect_auth({"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"})
+        expect_auth({"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"})
         resp = client.get_caller_identity(
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
@@ -1055,7 +1055,7 @@ module Aws::STS
 
     context 'UseGlobalEndpoint with legacy region `eu-west-3`' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"}]}, "url"=>"https://sts.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"}]}, "url"=>"https://sts.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -1072,7 +1072,7 @@ module Aws::STS
           sts_regional_endpoints: 'legacy',
           stub_responses: true
         )
-        expect_auth({"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"})
+        expect_auth({"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"})
         resp = client.get_caller_identity(
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
@@ -1084,7 +1084,7 @@ module Aws::STS
 
     context 'UseGlobalEndpoint with legacy region `sa-east-1`' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"}]}, "url"=>"https://sts.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"}]}, "url"=>"https://sts.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -1101,7 +1101,7 @@ module Aws::STS
           sts_regional_endpoints: 'legacy',
           stub_responses: true
         )
-        expect_auth({"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"})
+        expect_auth({"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"})
         resp = client.get_caller_identity(
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
@@ -1113,7 +1113,7 @@ module Aws::STS
 
     context 'UseGlobalEndpoint with legacy region `us-east-1`' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"}]}, "url"=>"https://sts.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"}]}, "url"=>"https://sts.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -1130,7 +1130,7 @@ module Aws::STS
           sts_regional_endpoints: 'legacy',
           stub_responses: true
         )
-        expect_auth({"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"})
+        expect_auth({"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"})
         resp = client.get_caller_identity(
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
@@ -1142,7 +1142,7 @@ module Aws::STS
 
     context 'UseGlobalEndpoint with legacy region `us-east-2`' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"}]}, "url"=>"https://sts.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"}]}, "url"=>"https://sts.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -1159,7 +1159,7 @@ module Aws::STS
           sts_regional_endpoints: 'legacy',
           stub_responses: true
         )
-        expect_auth({"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"})
+        expect_auth({"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"})
         resp = client.get_caller_identity(
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
@@ -1171,7 +1171,7 @@ module Aws::STS
 
     context 'UseGlobalEndpoint with legacy region `us-west-1`' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"}]}, "url"=>"https://sts.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"}]}, "url"=>"https://sts.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -1188,7 +1188,7 @@ module Aws::STS
           sts_regional_endpoints: 'legacy',
           stub_responses: true
         )
-        expect_auth({"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"})
+        expect_auth({"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"})
         resp = client.get_caller_identity(
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
@@ -1200,7 +1200,7 @@ module Aws::STS
 
     context 'UseGlobalEndpoint with legacy region `us-west-2`' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"}]}, "url"=>"https://sts.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"}]}, "url"=>"https://sts.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -1217,7 +1217,7 @@ module Aws::STS
           sts_regional_endpoints: 'legacy',
           stub_responses: true
         )
-        expect_auth({"signingRegion"=>"us-east-1", "signingName"=>"sts", "name"=>"sigv4"})
+        expect_auth({"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-1"})
         resp = client.get_caller_identity(
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
@@ -1229,7 +1229,7 @@ module Aws::STS
 
     context 'UseGlobalEndpoint with Non-legacy region `us-east-3`' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingRegion"=>"us-east-3", "signingName"=>"sts", "name"=>"sigv4"}]}, "url"=>"https://sts.us-east-3.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-3"}]}, "url"=>"https://sts.us-east-3.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -1246,7 +1246,7 @@ module Aws::STS
           sts_regional_endpoints: 'legacy',
           stub_responses: true
         )
-        expect_auth({"signingRegion"=>"us-east-3", "signingName"=>"sts", "name"=>"sigv4"})
+        expect_auth({"signingName"=>"sts", "name"=>"sigv4", "signingRegion"=>"us-east-3"})
         resp = client.get_caller_identity(
         )
         expected_uri = URI.parse(expected['endpoint']['url'])

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.115.0 (2023-07-26)
+------------------
+
+* Feature - This release includes general updates to user documentation.
+
+1.114.0 (2023-07-21)
+------------------
+
+* Feature - This release includes improvements to Preserve 444 handling, compatibility of HEVC sources without frame rates, and general improvements to MP4 outputs.
+
 1.113.0 (2023-07-11)
 ------------------
 

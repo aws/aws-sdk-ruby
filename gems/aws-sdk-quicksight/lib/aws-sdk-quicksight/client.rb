@@ -4541,6 +4541,173 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Describes an existing snapshot job.
+    #
+    # Poll job descriptions after a job starts to know the status of the
+    # job. For information on available status codes, see `JobStatus`.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that the dashboard snapshot
+    #   job is executed in.
+    #
+    # @option params [required, String] :dashboard_id
+    #   The ID of the dashboard that you have started a snapshot job for.
+    #
+    # @option params [required, String] :snapshot_job_id
+    #   The ID of the job to be described. The job ID is set when you start a
+    #   new job with a `StartDashboardSnapshotJob` API call.
+    #
+    # @return [Types::DescribeDashboardSnapshotJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDashboardSnapshotJobResponse#aws_account_id #aws_account_id} => String
+    #   * {Types::DescribeDashboardSnapshotJobResponse#dashboard_id #dashboard_id} => String
+    #   * {Types::DescribeDashboardSnapshotJobResponse#snapshot_job_id #snapshot_job_id} => String
+    #   * {Types::DescribeDashboardSnapshotJobResponse#user_configuration #user_configuration} => Types::SnapshotUserConfigurationRedacted
+    #   * {Types::DescribeDashboardSnapshotJobResponse#snapshot_configuration #snapshot_configuration} => Types::SnapshotConfiguration
+    #   * {Types::DescribeDashboardSnapshotJobResponse#arn #arn} => String
+    #   * {Types::DescribeDashboardSnapshotJobResponse#job_status #job_status} => String
+    #   * {Types::DescribeDashboardSnapshotJobResponse#created_time #created_time} => Time
+    #   * {Types::DescribeDashboardSnapshotJobResponse#last_updated_time #last_updated_time} => Time
+    #   * {Types::DescribeDashboardSnapshotJobResponse#request_id #request_id} => String
+    #   * {Types::DescribeDashboardSnapshotJobResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_dashboard_snapshot_job({
+    #     aws_account_id: "AwsAccountId", # required
+    #     dashboard_id: "ShortRestrictiveResourceId", # required
+    #     snapshot_job_id: "ShortRestrictiveResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.aws_account_id #=> String
+    #   resp.dashboard_id #=> String
+    #   resp.snapshot_job_id #=> String
+    #   resp.user_configuration.anonymous_users #=> Array
+    #   resp.user_configuration.anonymous_users[0].row_level_permission_tag_keys #=> Array
+    #   resp.user_configuration.anonymous_users[0].row_level_permission_tag_keys[0] #=> String
+    #   resp.snapshot_configuration.file_groups #=> Array
+    #   resp.snapshot_configuration.file_groups[0].files #=> Array
+    #   resp.snapshot_configuration.file_groups[0].files[0].sheet_selections #=> Array
+    #   resp.snapshot_configuration.file_groups[0].files[0].sheet_selections[0].sheet_id #=> String
+    #   resp.snapshot_configuration.file_groups[0].files[0].sheet_selections[0].selection_scope #=> String, one of "ALL_VISUALS", "SELECTED_VISUALS"
+    #   resp.snapshot_configuration.file_groups[0].files[0].sheet_selections[0].visual_ids #=> Array
+    #   resp.snapshot_configuration.file_groups[0].files[0].sheet_selections[0].visual_ids[0] #=> String
+    #   resp.snapshot_configuration.file_groups[0].files[0].format_type #=> String, one of "CSV", "PDF"
+    #   resp.snapshot_configuration.destination_configuration.s3_destinations #=> Array
+    #   resp.snapshot_configuration.destination_configuration.s3_destinations[0].bucket_configuration.bucket_name #=> String
+    #   resp.snapshot_configuration.destination_configuration.s3_destinations[0].bucket_configuration.bucket_prefix #=> String
+    #   resp.snapshot_configuration.destination_configuration.s3_destinations[0].bucket_configuration.bucket_region #=> String
+    #   resp.snapshot_configuration.parameters.string_parameters #=> Array
+    #   resp.snapshot_configuration.parameters.string_parameters[0].name #=> String
+    #   resp.snapshot_configuration.parameters.string_parameters[0].values #=> Array
+    #   resp.snapshot_configuration.parameters.string_parameters[0].values[0] #=> String
+    #   resp.snapshot_configuration.parameters.integer_parameters #=> Array
+    #   resp.snapshot_configuration.parameters.integer_parameters[0].name #=> String
+    #   resp.snapshot_configuration.parameters.integer_parameters[0].values #=> Array
+    #   resp.snapshot_configuration.parameters.integer_parameters[0].values[0] #=> Integer
+    #   resp.snapshot_configuration.parameters.decimal_parameters #=> Array
+    #   resp.snapshot_configuration.parameters.decimal_parameters[0].name #=> String
+    #   resp.snapshot_configuration.parameters.decimal_parameters[0].values #=> Array
+    #   resp.snapshot_configuration.parameters.decimal_parameters[0].values[0] #=> Float
+    #   resp.snapshot_configuration.parameters.date_time_parameters #=> Array
+    #   resp.snapshot_configuration.parameters.date_time_parameters[0].name #=> String
+    #   resp.snapshot_configuration.parameters.date_time_parameters[0].values #=> Array
+    #   resp.snapshot_configuration.parameters.date_time_parameters[0].values[0] #=> Time
+    #   resp.arn #=> String
+    #   resp.job_status #=> String, one of "QUEUED", "RUNNING", "COMPLETED", "FAILED"
+    #   resp.created_time #=> Time
+    #   resp.last_updated_time #=> Time
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeDashboardSnapshotJob AWS API Documentation
+    #
+    # @overload describe_dashboard_snapshot_job(params = {})
+    # @param [Hash] params ({})
+    def describe_dashboard_snapshot_job(params = {}, options = {})
+      req = build_request(:describe_dashboard_snapshot_job, params)
+      req.send_request(options)
+    end
+
+    # Describes the result of an existing snapshot job that has finished
+    # running.
+    #
+    # A finished snapshot job will return a `COMPLETED` or `FAILED` status
+    # when you poll the job with a `DescribeDashboardSnapshotJob` API call.
+    #
+    # If the job has not finished running, this operation returns a message
+    # that says `Dashboard Snapshot Job with id <SnapshotjobId> has not
+    # reached a terminal state.`.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that the dashboard snapshot
+    #   job is executed in.
+    #
+    # @option params [required, String] :dashboard_id
+    #   The ID of the dashboard that you have started a snapshot job for.
+    #
+    # @option params [required, String] :snapshot_job_id
+    #   The ID of the job to be described. The job ID is set when you start a
+    #   new job with a `StartDashboardSnapshotJob` API call.
+    #
+    # @return [Types::DescribeDashboardSnapshotJobResultResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDashboardSnapshotJobResultResponse#arn #arn} => String
+    #   * {Types::DescribeDashboardSnapshotJobResultResponse#job_status #job_status} => String
+    #   * {Types::DescribeDashboardSnapshotJobResultResponse#created_time #created_time} => Time
+    #   * {Types::DescribeDashboardSnapshotJobResultResponse#last_updated_time #last_updated_time} => Time
+    #   * {Types::DescribeDashboardSnapshotJobResultResponse#result #result} => Types::SnapshotJobResult
+    #   * {Types::DescribeDashboardSnapshotJobResultResponse#error_info #error_info} => Types::SnapshotJobErrorInfo
+    #   * {Types::DescribeDashboardSnapshotJobResultResponse#request_id #request_id} => String
+    #   * {Types::DescribeDashboardSnapshotJobResultResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_dashboard_snapshot_job_result({
+    #     aws_account_id: "AwsAccountId", # required
+    #     dashboard_id: "ShortRestrictiveResourceId", # required
+    #     snapshot_job_id: "ShortRestrictiveResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.job_status #=> String, one of "QUEUED", "RUNNING", "COMPLETED", "FAILED"
+    #   resp.created_time #=> Time
+    #   resp.last_updated_time #=> Time
+    #   resp.result.anonymous_users #=> Array
+    #   resp.result.anonymous_users[0].file_groups #=> Array
+    #   resp.result.anonymous_users[0].file_groups[0].files #=> Array
+    #   resp.result.anonymous_users[0].file_groups[0].files[0].sheet_selections #=> Array
+    #   resp.result.anonymous_users[0].file_groups[0].files[0].sheet_selections[0].sheet_id #=> String
+    #   resp.result.anonymous_users[0].file_groups[0].files[0].sheet_selections[0].selection_scope #=> String, one of "ALL_VISUALS", "SELECTED_VISUALS"
+    #   resp.result.anonymous_users[0].file_groups[0].files[0].sheet_selections[0].visual_ids #=> Array
+    #   resp.result.anonymous_users[0].file_groups[0].files[0].sheet_selections[0].visual_ids[0] #=> String
+    #   resp.result.anonymous_users[0].file_groups[0].files[0].format_type #=> String, one of "CSV", "PDF"
+    #   resp.result.anonymous_users[0].file_groups[0].s3_results #=> Array
+    #   resp.result.anonymous_users[0].file_groups[0].s3_results[0].s3_destination_configuration.bucket_configuration.bucket_name #=> String
+    #   resp.result.anonymous_users[0].file_groups[0].s3_results[0].s3_destination_configuration.bucket_configuration.bucket_prefix #=> String
+    #   resp.result.anonymous_users[0].file_groups[0].s3_results[0].s3_destination_configuration.bucket_configuration.bucket_region #=> String
+    #   resp.result.anonymous_users[0].file_groups[0].s3_results[0].s3_uri #=> String
+    #   resp.result.anonymous_users[0].file_groups[0].s3_results[0].error_info #=> Array
+    #   resp.result.anonymous_users[0].file_groups[0].s3_results[0].error_info[0].error_message #=> String
+    #   resp.result.anonymous_users[0].file_groups[0].s3_results[0].error_info[0].error_type #=> String
+    #   resp.error_info.error_message #=> String
+    #   resp.error_info.error_type #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeDashboardSnapshotJobResult AWS API Documentation
+    #
+    # @overload describe_dashboard_snapshot_job_result(params = {})
+    # @param [Hash] params ({})
+    def describe_dashboard_snapshot_job_result(params = {}, options = {})
+      req = build_request(:describe_dashboard_snapshot_job_result, params)
+      req.send_request(options)
+    end
+
     # Describes a dataset. This operation doesn't support datasets that
     # include uploaded files as a source.
     #
@@ -7417,6 +7584,8 @@ module Aws::QuickSight
     #   * {Types::ListGroupMembershipsResponse#request_id #request_id} => String
     #   * {Types::ListGroupMembershipsResponse#status #status} => Integer
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_group_memberships({
@@ -7467,6 +7636,8 @@ module Aws::QuickSight
     #   * {Types::ListGroupsResponse#next_token #next_token} => String
     #   * {Types::ListGroupsResponse#request_id #request_id} => String
     #   * {Types::ListGroupsResponse#status #status} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -7524,6 +7695,8 @@ module Aws::QuickSight
     #   * {Types::ListIAMPolicyAssignmentsResponse#request_id #request_id} => String
     #   * {Types::ListIAMPolicyAssignmentsResponse#status #status} => Integer
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_iam_policy_assignments({
@@ -7579,6 +7752,8 @@ module Aws::QuickSight
     #   * {Types::ListIAMPolicyAssignmentsForUserResponse#request_id #request_id} => String
     #   * {Types::ListIAMPolicyAssignmentsForUserResponse#next_token #next_token} => String
     #   * {Types::ListIAMPolicyAssignmentsForUserResponse#status #status} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -8274,6 +8449,8 @@ module Aws::QuickSight
     #   * {Types::ListUserGroupsResponse#request_id #request_id} => String
     #   * {Types::ListUserGroupsResponse#status #status} => Integer
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_user_groups({
@@ -8327,6 +8504,8 @@ module Aws::QuickSight
     #   * {Types::ListUsersResponse#next_token #next_token} => String
     #   * {Types::ListUsersResponse#request_id #request_id} => String
     #   * {Types::ListUsersResponse#status #status} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -9052,6 +9231,8 @@ module Aws::QuickSight
     #   * {Types::SearchGroupsResponse#request_id #request_id} => String
     #   * {Types::SearchGroupsResponse#status #status} => Integer
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_groups({
@@ -9472,6 +9653,134 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def start_asset_bundle_import_job(params = {}, options = {})
       req = build_request(:start_asset_bundle_import_job, params)
+      req.send_request(options)
+    end
+
+    # Starts an asynchronous job that generates a dashboard snapshot. You
+    # can request up to one paginated PDF and up to five CSVs per API call.
+    #
+    # Poll job descriptions with a `DescribeDashboardSnapshotJob` API call.
+    # Once the job succeeds, use the `DescribeDashboardSnapshotJobResult`
+    # API to obtain the download URIs that the job generates.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that the dashboard snapshot
+    #   job is executed in.
+    #
+    # @option params [required, String] :dashboard_id
+    #   The ID of the dashboard that you want to start a snapshot job for.
+    #
+    # @option params [required, String] :snapshot_job_id
+    #   An ID for the dashboard snapshot job. This ID is unique to the
+    #   dashboard while the job is running. This ID can be used to poll the
+    #   status of a job with a `DescribeDashboardSnapshotJob` while the job
+    #   runs. You can reuse this ID for another job 24 hours after the current
+    #   job is completed.
+    #
+    # @option params [required, Types::SnapshotUserConfiguration] :user_configuration
+    #   A structure that contains information about the anonymous users that
+    #   the generated snapshot is for. This API will not return information
+    #   about registered Amazon QuickSight.
+    #
+    # @option params [required, Types::SnapshotConfiguration] :snapshot_configuration
+    #   A structure that describes the configuration of the dashboard
+    #   snapshot.
+    #
+    # @return [Types::StartDashboardSnapshotJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartDashboardSnapshotJobResponse#arn #arn} => String
+    #   * {Types::StartDashboardSnapshotJobResponse#snapshot_job_id #snapshot_job_id} => String
+    #   * {Types::StartDashboardSnapshotJobResponse#request_id #request_id} => String
+    #   * {Types::StartDashboardSnapshotJobResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_dashboard_snapshot_job({
+    #     aws_account_id: "AwsAccountId", # required
+    #     dashboard_id: "ShortRestrictiveResourceId", # required
+    #     snapshot_job_id: "ShortRestrictiveResourceId", # required
+    #     user_configuration: { # required
+    #       anonymous_users: [
+    #         {
+    #           row_level_permission_tags: [
+    #             {
+    #               key: "SessionTagKey", # required
+    #               value: "SessionTagValue", # required
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #     },
+    #     snapshot_configuration: { # required
+    #       file_groups: [ # required
+    #         {
+    #           files: [
+    #             {
+    #               sheet_selections: [ # required
+    #                 {
+    #                   sheet_id: "ShortRestrictiveResourceId", # required
+    #                   selection_scope: "ALL_VISUALS", # required, accepts ALL_VISUALS, SELECTED_VISUALS
+    #                   visual_ids: ["ShortRestrictiveResourceId"],
+    #                 },
+    #               ],
+    #               format_type: "CSV", # required, accepts CSV, PDF
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #       destination_configuration: {
+    #         s3_destinations: [
+    #           {
+    #             bucket_configuration: {
+    #               bucket_name: "NonEmptyString", # required
+    #               bucket_prefix: "NonEmptyString", # required
+    #               bucket_region: "NonEmptyString", # required
+    #             },
+    #           },
+    #         ],
+    #       },
+    #       parameters: {
+    #         string_parameters: [
+    #           {
+    #             name: "NonEmptyString", # required
+    #             values: ["SensitiveString"], # required
+    #           },
+    #         ],
+    #         integer_parameters: [
+    #           {
+    #             name: "NonEmptyString", # required
+    #             values: [1], # required
+    #           },
+    #         ],
+    #         decimal_parameters: [
+    #           {
+    #             name: "NonEmptyString", # required
+    #             values: [1.0], # required
+    #           },
+    #         ],
+    #         date_time_parameters: [
+    #           {
+    #             name: "NonEmptyString", # required
+    #             values: [Time.now], # required
+    #           },
+    #         ],
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.snapshot_job_id #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/StartDashboardSnapshotJob AWS API Documentation
+    #
+    # @overload start_dashboard_snapshot_job(params = {})
+    # @param [Hash] params ({})
+    def start_dashboard_snapshot_job(params = {}, options = {})
+      req = build_request(:start_dashboard_snapshot_job, params)
       req.send_request(options)
     end
 
@@ -12164,7 +12473,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

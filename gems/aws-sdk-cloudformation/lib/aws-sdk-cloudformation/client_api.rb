@@ -202,6 +202,8 @@ module Aws::CloudFormation
     ListExportsOutput = Shapes::StructureShape.new(name: 'ListExportsOutput')
     ListImportsInput = Shapes::StructureShape.new(name: 'ListImportsInput')
     ListImportsOutput = Shapes::StructureShape.new(name: 'ListImportsOutput')
+    ListStackInstanceResourceDriftsInput = Shapes::StructureShape.new(name: 'ListStackInstanceResourceDriftsInput')
+    ListStackInstanceResourceDriftsOutput = Shapes::StructureShape.new(name: 'ListStackInstanceResourceDriftsOutput')
     ListStackInstancesInput = Shapes::StructureShape.new(name: 'ListStackInstancesInput')
     ListStackInstancesOutput = Shapes::StructureShape.new(name: 'ListStackInstancesOutput')
     ListStackResourcesInput = Shapes::StructureShape.new(name: 'ListStackResourcesInput')
@@ -327,6 +329,7 @@ module Aws::CloudFormation
     ResourceTypes = Shapes::ListShape.new(name: 'ResourceTypes')
     ResourcesToImport = Shapes::ListShape.new(name: 'ResourcesToImport')
     ResourcesToSkip = Shapes::ListShape.new(name: 'ResourcesToSkip')
+    RetainExceptOnCreate = Shapes::BooleanShape.new(name: 'RetainExceptOnCreate')
     RetainResources = Shapes::ListShape.new(name: 'RetainResources')
     RetainStacks = Shapes::BooleanShape.new(name: 'RetainStacks')
     RetainStacksNullable = Shapes::BooleanShape.new(name: 'RetainStacksNullable')
@@ -367,6 +370,8 @@ module Aws::CloudFormation
     StackInstanceFilterValues = Shapes::StringShape.new(name: 'StackInstanceFilterValues')
     StackInstanceFilters = Shapes::ListShape.new(name: 'StackInstanceFilters')
     StackInstanceNotFoundException = Shapes::StructureShape.new(name: 'StackInstanceNotFoundException')
+    StackInstanceResourceDriftsSummaries = Shapes::ListShape.new(name: 'StackInstanceResourceDriftsSummaries')
+    StackInstanceResourceDriftsSummary = Shapes::StructureShape.new(name: 'StackInstanceResourceDriftsSummary')
     StackInstanceStatus = Shapes::StringShape.new(name: 'StackInstanceStatus')
     StackInstanceSummaries = Shapes::ListShape.new(name: 'StackInstanceSummaries')
     StackInstanceSummary = Shapes::StructureShape.new(name: 'StackInstanceSummary')
@@ -434,6 +439,7 @@ module Aws::CloudFormation
     TemplateParameter = Shapes::StructureShape.new(name: 'TemplateParameter')
     TemplateParameters = Shapes::ListShape.new(name: 'TemplateParameters')
     TemplateStage = Shapes::StringShape.new(name: 'TemplateStage')
+    TemplateSummaryConfig = Shapes::StructureShape.new(name: 'TemplateSummaryConfig')
     TemplateURL = Shapes::StringShape.new(name: 'TemplateURL')
     TestTypeInput = Shapes::StructureShape.new(name: 'TestTypeInput')
     TestTypeOutput = Shapes::StructureShape.new(name: 'TestTypeOutput')
@@ -445,6 +451,7 @@ module Aws::CloudFormation
     TotalStackInstancesCount = Shapes::IntegerShape.new(name: 'TotalStackInstancesCount')
     TransformName = Shapes::StringShape.new(name: 'TransformName')
     TransformsList = Shapes::ListShape.new(name: 'TransformsList')
+    TreatUnrecognizedResourceTypesAsWarnings = Shapes::BooleanShape.new(name: 'TreatUnrecognizedResourceTypesAsWarnings')
     Type = Shapes::StringShape.new(name: 'Type')
     TypeArn = Shapes::StringShape.new(name: 'TypeArn')
     TypeConfiguration = Shapes::StringShape.new(name: 'TypeConfiguration')
@@ -486,6 +493,7 @@ module Aws::CloudFormation
     Version = Shapes::StringShape.new(name: 'Version')
     VersionBump = Shapes::StringShape.new(name: 'VersionBump')
     Visibility = Shapes::StringShape.new(name: 'Visibility')
+    Warnings = Shapes::StructureShape.new(name: 'Warnings')
 
     AccountGateResult.add_member(:status, Shapes::ShapeRef.new(shape: AccountGateStatus, location_name: "Status"))
     AccountGateResult.add_member(:status_reason, Shapes::ShapeRef.new(shape: AccountGateStatusReason, location_name: "StatusReason"))
@@ -643,6 +651,7 @@ module Aws::CloudFormation
     CreateStackInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateStackInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     CreateStackInput.add_member(:enable_termination_protection, Shapes::ShapeRef.new(shape: EnableTerminationProtection, location_name: "EnableTerminationProtection"))
+    CreateStackInput.add_member(:retain_except_on_create, Shapes::ShapeRef.new(shape: RetainExceptOnCreate, location_name: "RetainExceptOnCreate"))
     CreateStackInput.struct_class = Types::CreateStackInput
 
     CreateStackInstancesInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, required: true, location_name: "StackSetName"))
@@ -961,6 +970,7 @@ module Aws::CloudFormation
     ExecuteChangeSetInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackNameOrId, location_name: "StackName"))
     ExecuteChangeSetInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     ExecuteChangeSetInput.add_member(:disable_rollback, Shapes::ShapeRef.new(shape: DisableRollback, location_name: "DisableRollback"))
+    ExecuteChangeSetInput.add_member(:retain_except_on_create, Shapes::ShapeRef.new(shape: RetainExceptOnCreate, location_name: "RetainExceptOnCreate"))
     ExecuteChangeSetInput.struct_class = Types::ExecuteChangeSetInput
 
     ExecuteChangeSetOutput.struct_class = Types::ExecuteChangeSetOutput
@@ -992,6 +1002,7 @@ module Aws::CloudFormation
     GetTemplateSummaryInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackNameOrId, location_name: "StackName"))
     GetTemplateSummaryInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetNameOrId, location_name: "StackSetName"))
     GetTemplateSummaryInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
+    GetTemplateSummaryInput.add_member(:template_summary_config, Shapes::ShapeRef.new(shape: TemplateSummaryConfig, location_name: "TemplateSummaryConfig"))
     GetTemplateSummaryInput.struct_class = Types::GetTemplateSummaryInput
 
     GetTemplateSummaryOutput.add_member(:parameters, Shapes::ShapeRef.new(shape: ParameterDeclarations, location_name: "Parameters"))
@@ -1003,6 +1014,7 @@ module Aws::CloudFormation
     GetTemplateSummaryOutput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
     GetTemplateSummaryOutput.add_member(:declared_transforms, Shapes::ShapeRef.new(shape: TransformsList, location_name: "DeclaredTransforms"))
     GetTemplateSummaryOutput.add_member(:resource_identifier_summaries, Shapes::ShapeRef.new(shape: ResourceIdentifierSummaries, location_name: "ResourceIdentifierSummaries"))
+    GetTemplateSummaryOutput.add_member(:warnings, Shapes::ShapeRef.new(shape: Warnings, location_name: "Warnings"))
     GetTemplateSummaryOutput.struct_class = Types::GetTemplateSummaryOutput
 
     ImportStacksToStackSetInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetNameOrId, required: true, location_name: "StackSetName"))
@@ -1051,6 +1063,20 @@ module Aws::CloudFormation
     ListImportsOutput.add_member(:imports, Shapes::ShapeRef.new(shape: Imports, location_name: "Imports"))
     ListImportsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListImportsOutput.struct_class = Types::ListImportsOutput
+
+    ListStackInstanceResourceDriftsInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetNameOrId, required: true, location_name: "StackSetName"))
+    ListStackInstanceResourceDriftsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListStackInstanceResourceDriftsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListStackInstanceResourceDriftsInput.add_member(:stack_instance_resource_drift_statuses, Shapes::ShapeRef.new(shape: StackResourceDriftStatusFilters, location_name: "StackInstanceResourceDriftStatuses"))
+    ListStackInstanceResourceDriftsInput.add_member(:stack_instance_account, Shapes::ShapeRef.new(shape: Account, required: true, location_name: "StackInstanceAccount"))
+    ListStackInstanceResourceDriftsInput.add_member(:stack_instance_region, Shapes::ShapeRef.new(shape: Region, required: true, location_name: "StackInstanceRegion"))
+    ListStackInstanceResourceDriftsInput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "OperationId"))
+    ListStackInstanceResourceDriftsInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
+    ListStackInstanceResourceDriftsInput.struct_class = Types::ListStackInstanceResourceDriftsInput
+
+    ListStackInstanceResourceDriftsOutput.add_member(:summaries, Shapes::ShapeRef.new(shape: StackInstanceResourceDriftsSummaries, location_name: "Summaries"))
+    ListStackInstanceResourceDriftsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListStackInstanceResourceDriftsOutput.struct_class = Types::ListStackInstanceResourceDriftsOutput
 
     ListStackInstancesInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, required: true, location_name: "StackSetName"))
     ListStackInstancesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -1333,6 +1359,7 @@ module Aws::CloudFormation
     RollbackStackInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackNameOrId, required: true, location_name: "StackName"))
     RollbackStackInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
     RollbackStackInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
+    RollbackStackInput.add_member(:retain_except_on_create, Shapes::ShapeRef.new(shape: RetainExceptOnCreate, location_name: "RetainExceptOnCreate"))
     RollbackStackInput.struct_class = Types::RollbackStackInput
 
     RollbackStackOutput.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "StackId"))
@@ -1397,6 +1424,7 @@ module Aws::CloudFormation
     Stack.add_member(:parent_id, Shapes::ShapeRef.new(shape: StackId, location_name: "ParentId"))
     Stack.add_member(:root_id, Shapes::ShapeRef.new(shape: StackId, location_name: "RootId"))
     Stack.add_member(:drift_information, Shapes::ShapeRef.new(shape: StackDriftInformation, location_name: "DriftInformation"))
+    Stack.add_member(:retain_except_on_create, Shapes::ShapeRef.new(shape: RetainExceptOnCreate, location_name: "RetainExceptOnCreate"))
     Stack.struct_class = Types::Stack
 
     StackDriftInformation.add_member(:stack_drift_status, Shapes::ShapeRef.new(shape: StackDriftStatus, required: true, location_name: "StackDriftStatus"))
@@ -1453,6 +1481,18 @@ module Aws::CloudFormation
     StackInstanceFilters.member = Shapes::ShapeRef.new(shape: StackInstanceFilter)
 
     StackInstanceNotFoundException.struct_class = Types::StackInstanceNotFoundException
+
+    StackInstanceResourceDriftsSummaries.member = Shapes::ShapeRef.new(shape: StackInstanceResourceDriftsSummary)
+
+    StackInstanceResourceDriftsSummary.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, required: true, location_name: "StackId"))
+    StackInstanceResourceDriftsSummary.add_member(:logical_resource_id, Shapes::ShapeRef.new(shape: LogicalResourceId, required: true, location_name: "LogicalResourceId"))
+    StackInstanceResourceDriftsSummary.add_member(:physical_resource_id, Shapes::ShapeRef.new(shape: PhysicalResourceId, location_name: "PhysicalResourceId"))
+    StackInstanceResourceDriftsSummary.add_member(:physical_resource_id_context, Shapes::ShapeRef.new(shape: PhysicalResourceIdContext, location_name: "PhysicalResourceIdContext"))
+    StackInstanceResourceDriftsSummary.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))
+    StackInstanceResourceDriftsSummary.add_member(:property_differences, Shapes::ShapeRef.new(shape: PropertyDifferences, location_name: "PropertyDifferences"))
+    StackInstanceResourceDriftsSummary.add_member(:stack_resource_drift_status, Shapes::ShapeRef.new(shape: StackResourceDriftStatus, required: true, location_name: "StackResourceDriftStatus"))
+    StackInstanceResourceDriftsSummary.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
+    StackInstanceResourceDriftsSummary.struct_class = Types::StackInstanceResourceDriftsSummary
 
     StackInstanceSummaries.member = Shapes::ShapeRef.new(shape: StackInstanceSummary)
 
@@ -1678,6 +1718,9 @@ module Aws::CloudFormation
 
     TemplateParameters.member = Shapes::ShapeRef.new(shape: TemplateParameter)
 
+    TemplateSummaryConfig.add_member(:treat_unrecognized_resource_types_as_warnings, Shapes::ShapeRef.new(shape: TreatUnrecognizedResourceTypesAsWarnings, location_name: "TreatUnrecognizedResourceTypesAsWarnings"))
+    TemplateSummaryConfig.struct_class = Types::TemplateSummaryConfig
+
     TestTypeInput.add_member(:arn, Shapes::ShapeRef.new(shape: TypeArn, location_name: "Arn"))
     TestTypeInput.add_member(:type, Shapes::ShapeRef.new(shape: ThirdPartyType, location_name: "Type"))
     TestTypeInput.add_member(:type_name, Shapes::ShapeRef.new(shape: TypeName, location_name: "TypeName"))
@@ -1769,6 +1812,7 @@ module Aws::CloudFormation
     UpdateStackInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     UpdateStackInput.add_member(:disable_rollback, Shapes::ShapeRef.new(shape: DisableRollback, location_name: "DisableRollback"))
     UpdateStackInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
+    UpdateStackInput.add_member(:retain_except_on_create, Shapes::ShapeRef.new(shape: RetainExceptOnCreate, location_name: "RetainExceptOnCreate"))
     UpdateStackInput.struct_class = Types::UpdateStackInput
 
     UpdateStackInstancesInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetNameOrId, required: true, location_name: "StackSetName"))
@@ -1828,6 +1872,9 @@ module Aws::CloudFormation
     ValidateTemplateOutput.add_member(:capabilities_reason, Shapes::ShapeRef.new(shape: CapabilitiesReason, location_name: "CapabilitiesReason"))
     ValidateTemplateOutput.add_member(:declared_transforms, Shapes::ShapeRef.new(shape: TransformsList, location_name: "DeclaredTransforms"))
     ValidateTemplateOutput.struct_class = Types::ValidateTemplateOutput
+
+    Warnings.add_member(:unrecognized_resource_types, Shapes::ShapeRef.new(shape: ResourceTypes, location_name: "UnrecognizedResourceTypes"))
+    Warnings.struct_class = Types::Warnings
 
 
     # @api private
@@ -2300,6 +2347,17 @@ module Aws::CloudFormation
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_stack_instance_resource_drifts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListStackInstanceResourceDrifts"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListStackInstanceResourceDriftsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListStackInstanceResourceDriftsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: StackSetNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: StackInstanceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotFoundException)
       end)
 
       api.add_operation(:list_stack_instances, Seahorse::Model::Operation.new.tap do |o|

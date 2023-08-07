@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2023-07-17)
+------------------
+
+* Feature - This release provides the flexibility to configure what renditions or thumbnail qualities to record when creating recording configuration.
+
 1.37.0 (2023-07-11)
 ------------------
 

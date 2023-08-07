@@ -41,7 +41,7 @@ module Aws::EC2
       data[:associations]
     end
 
-    # One or more entries (rules) in the network ACL.
+    # The entries (rules) in the network ACL.
     # @return [Array<Types::NetworkAclEntry>]
     def entries
       data[:entries]

@@ -398,6 +398,52 @@ module Aws::ApplicationInsights
 
     # @!group API Operations
 
+    # Adds a workload to a component. Each component can have at most five
+    # workloads.
+    #
+    # @option params [required, String] :resource_group_name
+    #   The name of the resource group.
+    #
+    # @option params [required, String] :component_name
+    #   The name of the component.
+    #
+    # @option params [required, Types::WorkloadConfiguration] :workload_configuration
+    #   The configuration settings of the workload. The value is the escaped
+    #   JSON of the configuration.
+    #
+    # @return [Types::AddWorkloadResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AddWorkloadResponse#workload_id #workload_id} => String
+    #   * {Types::AddWorkloadResponse#workload_configuration #workload_configuration} => Types::WorkloadConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_workload({
+    #     resource_group_name: "ResourceGroupName", # required
+    #     component_name: "ComponentName", # required
+    #     workload_configuration: { # required
+    #       workload_name: "WorkloadName",
+    #       tier: "CUSTOM", # accepts CUSTOM, DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB_TIER, DOT_NET_WEB, SQL_SERVER, SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP, MYSQL, POSTGRESQL, JAVA_JMX, ORACLE, SAP_HANA_MULTI_NODE, SAP_HANA_SINGLE_NODE, SAP_HANA_HIGH_AVAILABILITY, SQL_SERVER_FAILOVER_CLUSTER_INSTANCE, SHAREPOINT, ACTIVE_DIRECTORY, SAP_NETWEAVER_STANDARD, SAP_NETWEAVER_DISTRIBUTED, SAP_NETWEAVER_HIGH_AVAILABILITY
+    #       configuration: "ComponentConfiguration",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workload_id #=> String
+    #   resp.workload_configuration.workload_name #=> String
+    #   resp.workload_configuration.tier #=> String, one of "CUSTOM", "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB_TIER", "DOT_NET_WEB", "SQL_SERVER", "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", "MYSQL", "POSTGRESQL", "JAVA_JMX", "ORACLE", "SAP_HANA_MULTI_NODE", "SAP_HANA_SINGLE_NODE", "SAP_HANA_HIGH_AVAILABILITY", "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE", "SHAREPOINT", "ACTIVE_DIRECTORY", "SAP_NETWEAVER_STANDARD", "SAP_NETWEAVER_DISTRIBUTED", "SAP_NETWEAVER_HIGH_AVAILABILITY"
+    #   resp.workload_configuration.configuration #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/AddWorkload AWS API Documentation
+    #
+    # @overload add_workload(params = {})
+    # @param [Hash] params ({})
+    def add_workload(params = {}, options = {})
+      req = build_request(:add_workload, params)
+      req.send_request(options)
+    end
+
     # Adds an application that is created from a resource group.
     #
     # @option params [String] :resource_group_name
@@ -459,6 +505,7 @@ module Aws::ApplicationInsights
     #
     # @example Response structure
     #
+    #   resp.application_info.account_id #=> String
     #   resp.application_info.resource_group_name #=> String
     #   resp.application_info.life_cycle #=> String
     #   resp.application_info.ops_item_sns_topic_arn #=> String
@@ -654,6 +701,9 @@ module Aws::ApplicationInsights
     # @option params [required, String] :resource_group_name
     #   The name of the resource group.
     #
+    # @option params [String] :account_id
+    #   The AWS account ID for the resource group owner.
+    #
     # @return [Types::DescribeApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeApplicationResponse#application_info #application_info} => Types::ApplicationInfo
@@ -662,10 +712,12 @@ module Aws::ApplicationInsights
     #
     #   resp = client.describe_application({
     #     resource_group_name: "ResourceGroupName", # required
+    #     account_id: "AccountId",
     #   })
     #
     # @example Response structure
     #
+    #   resp.application_info.account_id #=> String
     #   resp.application_info.resource_group_name #=> String
     #   resp.application_info.life_cycle #=> String
     #   resp.application_info.ops_item_sns_topic_arn #=> String
@@ -693,6 +745,9 @@ module Aws::ApplicationInsights
     # @option params [required, String] :component_name
     #   The name of the component.
     #
+    # @option params [String] :account_id
+    #   The AWS account ID for the resource group owner.
+    #
     # @return [Types::DescribeComponentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeComponentResponse#application_component #application_component} => Types::ApplicationComponent
@@ -703,6 +758,7 @@ module Aws::ApplicationInsights
     #   resp = client.describe_component({
     #     resource_group_name: "ResourceGroupName", # required
     #     component_name: "ComponentName", # required
+    #     account_id: "AccountId",
     #   })
     #
     # @example Response structure
@@ -711,7 +767,7 @@ module Aws::ApplicationInsights
     #   resp.application_component.component_remarks #=> String
     #   resp.application_component.resource_type #=> String
     #   resp.application_component.os_type #=> String, one of "WINDOWS", "LINUX"
-    #   resp.application_component.tier #=> String, one of "CUSTOM", "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB_TIER", "DOT_NET_WEB", "SQL_SERVER", "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", "MYSQL", "POSTGRESQL", "JAVA_JMX", "ORACLE", "SAP_HANA_MULTI_NODE", "SAP_HANA_SINGLE_NODE", "SAP_HANA_HIGH_AVAILABILITY", "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE", "SHAREPOINT", "ACTIVE_DIRECTORY"
+    #   resp.application_component.tier #=> String, one of "CUSTOM", "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB_TIER", "DOT_NET_WEB", "SQL_SERVER", "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", "MYSQL", "POSTGRESQL", "JAVA_JMX", "ORACLE", "SAP_HANA_MULTI_NODE", "SAP_HANA_SINGLE_NODE", "SAP_HANA_HIGH_AVAILABILITY", "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE", "SHAREPOINT", "ACTIVE_DIRECTORY", "SAP_NETWEAVER_STANDARD", "SAP_NETWEAVER_DISTRIBUTED", "SAP_NETWEAVER_HIGH_AVAILABILITY"
     #   resp.application_component.monitor #=> Boolean
     #   resp.application_component.detected_workload #=> Hash
     #   resp.application_component.detected_workload["Tier"] #=> Hash
@@ -736,6 +792,9 @@ module Aws::ApplicationInsights
     # @option params [required, String] :component_name
     #   The name of the component.
     #
+    # @option params [String] :account_id
+    #   The AWS account ID for the resource group owner.
+    #
     # @return [Types::DescribeComponentConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeComponentConfigurationResponse#monitor #monitor} => Boolean
@@ -747,12 +806,13 @@ module Aws::ApplicationInsights
     #   resp = client.describe_component_configuration({
     #     resource_group_name: "ResourceGroupName", # required
     #     component_name: "ComponentName", # required
+    #     account_id: "AccountId",
     #   })
     #
     # @example Response structure
     #
     #   resp.monitor #=> Boolean
-    #   resp.tier #=> String, one of "CUSTOM", "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB_TIER", "DOT_NET_WEB", "SQL_SERVER", "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", "MYSQL", "POSTGRESQL", "JAVA_JMX", "ORACLE", "SAP_HANA_MULTI_NODE", "SAP_HANA_SINGLE_NODE", "SAP_HANA_HIGH_AVAILABILITY", "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE", "SHAREPOINT", "ACTIVE_DIRECTORY"
+    #   resp.tier #=> String, one of "CUSTOM", "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB_TIER", "DOT_NET_WEB", "SQL_SERVER", "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", "MYSQL", "POSTGRESQL", "JAVA_JMX", "ORACLE", "SAP_HANA_MULTI_NODE", "SAP_HANA_SINGLE_NODE", "SAP_HANA_HIGH_AVAILABILITY", "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE", "SHAREPOINT", "ACTIVE_DIRECTORY", "SAP_NETWEAVER_STANDARD", "SAP_NETWEAVER_DISTRIBUTED", "SAP_NETWEAVER_HIGH_AVAILABILITY"
     #   resp.component_configuration #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeComponentConfiguration AWS API Documentation
@@ -775,6 +835,9 @@ module Aws::ApplicationInsights
     # @option params [required, String] :tier
     #   The tier of the application component.
     #
+    # @option params [String] :recommendation_type
+    #   The recommended configuration type.
+    #
     # @return [Types::DescribeComponentConfigurationRecommendationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeComponentConfigurationRecommendationResponse#component_configuration #component_configuration} => String
@@ -784,7 +847,8 @@ module Aws::ApplicationInsights
     #   resp = client.describe_component_configuration_recommendation({
     #     resource_group_name: "ResourceGroupName", # required
     #     component_name: "ComponentName", # required
-    #     tier: "CUSTOM", # required, accepts CUSTOM, DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB_TIER, DOT_NET_WEB, SQL_SERVER, SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP, MYSQL, POSTGRESQL, JAVA_JMX, ORACLE, SAP_HANA_MULTI_NODE, SAP_HANA_SINGLE_NODE, SAP_HANA_HIGH_AVAILABILITY, SQL_SERVER_FAILOVER_CLUSTER_INSTANCE, SHAREPOINT, ACTIVE_DIRECTORY
+    #     tier: "CUSTOM", # required, accepts CUSTOM, DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB_TIER, DOT_NET_WEB, SQL_SERVER, SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP, MYSQL, POSTGRESQL, JAVA_JMX, ORACLE, SAP_HANA_MULTI_NODE, SAP_HANA_SINGLE_NODE, SAP_HANA_HIGH_AVAILABILITY, SQL_SERVER_FAILOVER_CLUSTER_INSTANCE, SHAREPOINT, ACTIVE_DIRECTORY, SAP_NETWEAVER_STANDARD, SAP_NETWEAVER_DISTRIBUTED, SAP_NETWEAVER_HIGH_AVAILABILITY
+    #     recommendation_type: "INFRA_ONLY", # accepts INFRA_ONLY, WORKLOAD_ONLY, ALL
     #   })
     #
     # @example Response structure
@@ -811,9 +875,13 @@ module Aws::ApplicationInsights
     # @option params [required, String] :pattern_name
     #   The name of the log pattern.
     #
+    # @option params [String] :account_id
+    #   The AWS account ID for the resource group owner.
+    #
     # @return [Types::DescribeLogPatternResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeLogPatternResponse#resource_group_name #resource_group_name} => String
+    #   * {Types::DescribeLogPatternResponse#account_id #account_id} => String
     #   * {Types::DescribeLogPatternResponse#log_pattern #log_pattern} => Types::LogPattern
     #
     # @example Request syntax with placeholder values
@@ -822,11 +890,13 @@ module Aws::ApplicationInsights
     #     resource_group_name: "ResourceGroupName", # required
     #     pattern_set_name: "LogPatternSetName", # required
     #     pattern_name: "LogPatternName", # required
+    #     account_id: "AccountId",
     #   })
     #
     # @example Response structure
     #
     #   resp.resource_group_name #=> String
+    #   resp.account_id #=> String
     #   resp.log_pattern.pattern_set_name #=> String
     #   resp.log_pattern.pattern_name #=> String
     #   resp.log_pattern.pattern #=> String
@@ -846,6 +916,9 @@ module Aws::ApplicationInsights
     # @option params [required, String] :observation_id
     #   The ID of the observation.
     #
+    # @option params [String] :account_id
+    #   The AWS account ID for the resource group owner.
+    #
     # @return [Types::DescribeObservationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeObservationResponse#observation #observation} => Types::Observation
@@ -854,6 +927,7 @@ module Aws::ApplicationInsights
     #
     #   resp = client.describe_observation({
     #     observation_id: "ObservationId", # required
+    #     account_id: "AccountId",
     #   })
     #
     # @example Response structure
@@ -918,6 +992,10 @@ module Aws::ApplicationInsights
     # @option params [required, String] :problem_id
     #   The ID of the problem.
     #
+    # @option params [String] :account_id
+    #   The AWS account ID for the owner of the resource group affected by the
+    #   problem.
+    #
     # @return [Types::DescribeProblemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeProblemResponse#problem #problem} => Types::Problem
@@ -926,6 +1004,7 @@ module Aws::ApplicationInsights
     #
     #   resp = client.describe_problem({
     #     problem_id: "ProblemId", # required
+    #     account_id: "AccountId",
     #   })
     #
     # @example Response structure
@@ -933,16 +1012,19 @@ module Aws::ApplicationInsights
     #   resp.problem.id #=> String
     #   resp.problem.title #=> String
     #   resp.problem.insights #=> String
-    #   resp.problem.status #=> String, one of "IGNORE", "RESOLVED", "PENDING", "RECURRING"
+    #   resp.problem.status #=> String, one of "IGNORE", "RESOLVED", "PENDING", "RECURRING", "RECOVERING"
     #   resp.problem.affected_resource #=> String
     #   resp.problem.start_time #=> Time
     #   resp.problem.end_time #=> Time
     #   resp.problem.severity_level #=> String, one of "Informative", "Low", "Medium", "High"
+    #   resp.problem.account_id #=> String
     #   resp.problem.resource_group_name #=> String
     #   resp.problem.feedback #=> Hash
     #   resp.problem.feedback["FeedbackKey"] #=> String, one of "NOT_SPECIFIED", "USEFUL", "NOT_USEFUL"
     #   resp.problem.recurring_count #=> Integer
     #   resp.problem.last_recurrence_time #=> Time
+    #   resp.problem.visibility #=> String, one of "IGNORED", "VISIBLE"
+    #   resp.problem.resolution_method #=> String, one of "MANUAL", "AUTOMATIC", "UNRESOLVED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeProblem AWS API Documentation
     #
@@ -958,6 +1040,9 @@ module Aws::ApplicationInsights
     # @option params [required, String] :problem_id
     #   The ID of the problem.
     #
+    # @option params [String] :account_id
+    #   The AWS account ID for the resource group owner.
+    #
     # @return [Types::DescribeProblemObservationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeProblemObservationsResponse#related_observations #related_observations} => Types::RelatedObservations
@@ -966,6 +1051,7 @@ module Aws::ApplicationInsights
     #
     #   resp = client.describe_problem_observations({
     #     problem_id: "ProblemId", # required
+    #     account_id: "AccountId",
     #   })
     #
     # @example Response structure
@@ -1026,6 +1112,52 @@ module Aws::ApplicationInsights
       req.send_request(options)
     end
 
+    # Describes a workload and its configuration.
+    #
+    # @option params [required, String] :resource_group_name
+    #   The name of the resource group.
+    #
+    # @option params [required, String] :component_name
+    #   The name of the component.
+    #
+    # @option params [required, String] :workload_id
+    #   The ID of the workload.
+    #
+    # @option params [String] :account_id
+    #   The AWS account ID for the workload owner.
+    #
+    # @return [Types::DescribeWorkloadResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeWorkloadResponse#workload_id #workload_id} => String
+    #   * {Types::DescribeWorkloadResponse#workload_remarks #workload_remarks} => String
+    #   * {Types::DescribeWorkloadResponse#workload_configuration #workload_configuration} => Types::WorkloadConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_workload({
+    #     resource_group_name: "ResourceGroupName", # required
+    #     component_name: "ComponentName", # required
+    #     workload_id: "WorkloadId", # required
+    #     account_id: "AccountId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workload_id #=> String
+    #   resp.workload_remarks #=> String
+    #   resp.workload_configuration.workload_name #=> String
+    #   resp.workload_configuration.tier #=> String, one of "CUSTOM", "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB_TIER", "DOT_NET_WEB", "SQL_SERVER", "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", "MYSQL", "POSTGRESQL", "JAVA_JMX", "ORACLE", "SAP_HANA_MULTI_NODE", "SAP_HANA_SINGLE_NODE", "SAP_HANA_HIGH_AVAILABILITY", "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE", "SHAREPOINT", "ACTIVE_DIRECTORY", "SAP_NETWEAVER_STANDARD", "SAP_NETWEAVER_DISTRIBUTED", "SAP_NETWEAVER_HIGH_AVAILABILITY"
+    #   resp.workload_configuration.configuration #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeWorkload AWS API Documentation
+    #
+    # @overload describe_workload(params = {})
+    # @param [Hash] params ({})
+    def describe_workload(params = {}, options = {})
+      req = build_request(:describe_workload, params)
+      req.send_request(options)
+    end
+
     # Lists the IDs of the applications that you are monitoring.
     #
     # @option params [Integer] :max_results
@@ -1035,6 +1167,9 @@ module Aws::ApplicationInsights
     #
     # @option params [String] :next_token
     #   The token to request the next page of results.
+    #
+    # @option params [String] :account_id
+    #   The AWS account ID for the resource group owner.
     #
     # @return [Types::ListApplicationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1048,11 +1183,13 @@ module Aws::ApplicationInsights
     #   resp = client.list_applications({
     #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     account_id: "AccountId",
     #   })
     #
     # @example Response structure
     #
     #   resp.application_info_list #=> Array
+    #   resp.application_info_list[0].account_id #=> String
     #   resp.application_info_list[0].resource_group_name #=> String
     #   resp.application_info_list[0].life_cycle #=> String
     #   resp.application_info_list[0].ops_item_sns_topic_arn #=> String
@@ -1086,6 +1223,9 @@ module Aws::ApplicationInsights
     # @option params [String] :next_token
     #   The token to request the next page of results.
     #
+    # @option params [String] :account_id
+    #   The AWS account ID for the resource group owner.
+    #
     # @return [Types::ListComponentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListComponentsResponse#application_component_list #application_component_list} => Array&lt;Types::ApplicationComponent&gt;
@@ -1099,6 +1239,7 @@ module Aws::ApplicationInsights
     #     resource_group_name: "ResourceGroupName", # required
     #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     account_id: "AccountId",
     #   })
     #
     # @example Response structure
@@ -1108,7 +1249,7 @@ module Aws::ApplicationInsights
     #   resp.application_component_list[0].component_remarks #=> String
     #   resp.application_component_list[0].resource_type #=> String
     #   resp.application_component_list[0].os_type #=> String, one of "WINDOWS", "LINUX"
-    #   resp.application_component_list[0].tier #=> String, one of "CUSTOM", "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB_TIER", "DOT_NET_WEB", "SQL_SERVER", "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", "MYSQL", "POSTGRESQL", "JAVA_JMX", "ORACLE", "SAP_HANA_MULTI_NODE", "SAP_HANA_SINGLE_NODE", "SAP_HANA_HIGH_AVAILABILITY", "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE", "SHAREPOINT", "ACTIVE_DIRECTORY"
+    #   resp.application_component_list[0].tier #=> String, one of "CUSTOM", "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB_TIER", "DOT_NET_WEB", "SQL_SERVER", "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", "MYSQL", "POSTGRESQL", "JAVA_JMX", "ORACLE", "SAP_HANA_MULTI_NODE", "SAP_HANA_SINGLE_NODE", "SAP_HANA_HIGH_AVAILABILITY", "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE", "SHAREPOINT", "ACTIVE_DIRECTORY", "SAP_NETWEAVER_STANDARD", "SAP_NETWEAVER_DISTRIBUTED", "SAP_NETWEAVER_HIGH_AVAILABILITY"
     #   resp.application_component_list[0].monitor #=> Boolean
     #   resp.application_component_list[0].detected_workload #=> Hash
     #   resp.application_component_list[0].detected_workload["Tier"] #=> Hash
@@ -1166,6 +1307,9 @@ module Aws::ApplicationInsights
     #   from the end of the previous results that returned the `NextToken`
     #   value. This value is `null` when there are no more results to return.
     #
+    # @option params [String] :account_id
+    #   The AWS account ID for the resource group owner.
+    #
     # @return [Types::ListConfigurationHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListConfigurationHistoryResponse#event_list #event_list} => Array&lt;Types::ConfigurationEvent&gt;
@@ -1182,11 +1326,14 @@ module Aws::ApplicationInsights
     #     event_status: "INFO", # accepts INFO, WARN, ERROR
     #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     account_id: "AccountId",
     #   })
     #
     # @example Response structure
     #
     #   resp.event_list #=> Array
+    #   resp.event_list[0].resource_group_name #=> String
+    #   resp.event_list[0].account_id #=> String
     #   resp.event_list[0].monitored_resource_arn #=> String
     #   resp.event_list[0].event_status #=> String, one of "INFO", "WARN", "ERROR"
     #   resp.event_list[0].event_resource_type #=> String, one of "CLOUDWATCH_ALARM", "CLOUDWATCH_LOG", "CLOUDFORMATION", "SSM_ASSOCIATION"
@@ -1217,9 +1364,13 @@ module Aws::ApplicationInsights
     # @option params [String] :next_token
     #   The token to request the next page of results.
     #
+    # @option params [String] :account_id
+    #   The AWS account ID for the resource group owner.
+    #
     # @return [Types::ListLogPatternSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListLogPatternSetsResponse#resource_group_name #resource_group_name} => String
+    #   * {Types::ListLogPatternSetsResponse#account_id #account_id} => String
     #   * {Types::ListLogPatternSetsResponse#log_pattern_sets #log_pattern_sets} => Array&lt;String&gt;
     #   * {Types::ListLogPatternSetsResponse#next_token #next_token} => String
     #
@@ -1231,11 +1382,13 @@ module Aws::ApplicationInsights
     #     resource_group_name: "ResourceGroupName", # required
     #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     account_id: "AccountId",
     #   })
     #
     # @example Response structure
     #
     #   resp.resource_group_name #=> String
+    #   resp.account_id #=> String
     #   resp.log_pattern_sets #=> Array
     #   resp.log_pattern_sets[0] #=> String
     #   resp.next_token #=> String
@@ -1265,9 +1418,13 @@ module Aws::ApplicationInsights
     # @option params [String] :next_token
     #   The token to request the next page of results.
     #
+    # @option params [String] :account_id
+    #   The AWS account ID for the resource group owner.
+    #
     # @return [Types::ListLogPatternsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListLogPatternsResponse#resource_group_name #resource_group_name} => String
+    #   * {Types::ListLogPatternsResponse#account_id #account_id} => String
     #   * {Types::ListLogPatternsResponse#log_patterns #log_patterns} => Array&lt;Types::LogPattern&gt;
     #   * {Types::ListLogPatternsResponse#next_token #next_token} => String
     #
@@ -1280,11 +1437,13 @@ module Aws::ApplicationInsights
     #     pattern_set_name: "LogPatternSetName",
     #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     account_id: "AccountId",
     #   })
     #
     # @example Response structure
     #
     #   resp.resource_group_name #=> String
+    #   resp.account_id #=> String
     #   resp.log_patterns #=> Array
     #   resp.log_patterns[0].pattern_set_name #=> String
     #   resp.log_patterns[0].pattern_name #=> String
@@ -1302,6 +1461,9 @@ module Aws::ApplicationInsights
     end
 
     # Lists the problems with your application.
+    #
+    # @option params [String] :account_id
+    #   The AWS account ID for the resource group owner.
     #
     # @option params [String] :resource_group_name
     #   The name of the resource group.
@@ -1326,23 +1488,30 @@ module Aws::ApplicationInsights
     # @option params [String] :component_name
     #   The name of the component.
     #
+    # @option params [String] :visibility
+    #   Specifies whether or not you can view the problem. If not specified,
+    #   visible and ignored problems are returned.
+    #
     # @return [Types::ListProblemsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListProblemsResponse#problem_list #problem_list} => Array&lt;Types::Problem&gt;
     #   * {Types::ListProblemsResponse#next_token #next_token} => String
     #   * {Types::ListProblemsResponse#resource_group_name #resource_group_name} => String
+    #   * {Types::ListProblemsResponse#account_id #account_id} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_problems({
+    #     account_id: "AccountId",
     #     resource_group_name: "ResourceGroupName",
     #     start_time: Time.now,
     #     end_time: Time.now,
     #     max_results: 1,
     #     next_token: "PaginationToken",
     #     component_name: "ComponentName",
+    #     visibility: "IGNORED", # accepts IGNORED, VISIBLE
     #   })
     #
     # @example Response structure
@@ -1351,18 +1520,22 @@ module Aws::ApplicationInsights
     #   resp.problem_list[0].id #=> String
     #   resp.problem_list[0].title #=> String
     #   resp.problem_list[0].insights #=> String
-    #   resp.problem_list[0].status #=> String, one of "IGNORE", "RESOLVED", "PENDING", "RECURRING"
+    #   resp.problem_list[0].status #=> String, one of "IGNORE", "RESOLVED", "PENDING", "RECURRING", "RECOVERING"
     #   resp.problem_list[0].affected_resource #=> String
     #   resp.problem_list[0].start_time #=> Time
     #   resp.problem_list[0].end_time #=> Time
     #   resp.problem_list[0].severity_level #=> String, one of "Informative", "Low", "Medium", "High"
+    #   resp.problem_list[0].account_id #=> String
     #   resp.problem_list[0].resource_group_name #=> String
     #   resp.problem_list[0].feedback #=> Hash
     #   resp.problem_list[0].feedback["FeedbackKey"] #=> String, one of "NOT_SPECIFIED", "USEFUL", "NOT_USEFUL"
     #   resp.problem_list[0].recurring_count #=> Integer
     #   resp.problem_list[0].last_recurrence_time #=> Time
+    #   resp.problem_list[0].visibility #=> String, one of "IGNORED", "VISIBLE"
+    #   resp.problem_list[0].resolution_method #=> String, one of "MANUAL", "AUTOMATIC", "UNRESOLVED"
     #   resp.next_token #=> String
     #   resp.resource_group_name #=> String
+    #   resp.account_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListProblems AWS API Documentation
     #
@@ -1406,6 +1579,91 @@ module Aws::ApplicationInsights
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Lists the workloads that are configured on a given component.
+    #
+    # @option params [required, String] :resource_group_name
+    #   The name of the resource group.
+    #
+    # @option params [required, String] :component_name
+    #   The name of the component.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another call with the returned `NextToken`
+    #   value.
+    #
+    # @option params [String] :next_token
+    #   The token to request the next page of results.
+    #
+    # @option params [String] :account_id
+    #   The AWS account ID of the owner of the workload.
+    #
+    # @return [Types::ListWorkloadsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWorkloadsResponse#workload_list #workload_list} => Array&lt;Types::Workload&gt;
+    #   * {Types::ListWorkloadsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_workloads({
+    #     resource_group_name: "ResourceGroupName", # required
+    #     component_name: "ComponentName", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     account_id: "AccountId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workload_list #=> Array
+    #   resp.workload_list[0].workload_id #=> String
+    #   resp.workload_list[0].component_name #=> String
+    #   resp.workload_list[0].workload_name #=> String
+    #   resp.workload_list[0].tier #=> String, one of "CUSTOM", "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB_TIER", "DOT_NET_WEB", "SQL_SERVER", "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", "MYSQL", "POSTGRESQL", "JAVA_JMX", "ORACLE", "SAP_HANA_MULTI_NODE", "SAP_HANA_SINGLE_NODE", "SAP_HANA_HIGH_AVAILABILITY", "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE", "SHAREPOINT", "ACTIVE_DIRECTORY", "SAP_NETWEAVER_STANDARD", "SAP_NETWEAVER_DISTRIBUTED", "SAP_NETWEAVER_HIGH_AVAILABILITY"
+    #   resp.workload_list[0].workload_remarks #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListWorkloads AWS API Documentation
+    #
+    # @overload list_workloads(params = {})
+    # @param [Hash] params ({})
+    def list_workloads(params = {}, options = {})
+      req = build_request(:list_workloads, params)
+      req.send_request(options)
+    end
+
+    # Remove workload from a component.
+    #
+    # @option params [required, String] :resource_group_name
+    #   The name of the resource group.
+    #
+    # @option params [required, String] :component_name
+    #   The name of the component.
+    #
+    # @option params [required, String] :workload_id
+    #   The ID of the workload.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_workload({
+    #     resource_group_name: "ResourceGroupName", # required
+    #     component_name: "ComponentName", # required
+    #     workload_id: "WorkloadId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/RemoveWorkload AWS API Documentation
+    #
+    # @overload remove_workload(params = {})
+    # @param [Hash] params ({})
+    def remove_workload(params = {}, options = {})
+      req = build_request(:remove_workload, params)
       req.send_request(options)
     end
 
@@ -1530,6 +1788,7 @@ module Aws::ApplicationInsights
     #
     # @example Response structure
     #
+    #   resp.application_info.account_id #=> String
     #   resp.application_info.resource_group_name #=> String
     #   resp.application_info.life_cycle #=> String
     #   resp.application_info.ops_item_sns_topic_arn #=> String
@@ -1625,7 +1884,7 @@ module Aws::ApplicationInsights
     #     resource_group_name: "ResourceGroupName", # required
     #     component_name: "ComponentName", # required
     #     monitor: false,
-    #     tier: "CUSTOM", # accepts CUSTOM, DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB_TIER, DOT_NET_WEB, SQL_SERVER, SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP, MYSQL, POSTGRESQL, JAVA_JMX, ORACLE, SAP_HANA_MULTI_NODE, SAP_HANA_SINGLE_NODE, SAP_HANA_HIGH_AVAILABILITY, SQL_SERVER_FAILOVER_CLUSTER_INSTANCE, SHAREPOINT, ACTIVE_DIRECTORY
+    #     tier: "CUSTOM", # accepts CUSTOM, DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB_TIER, DOT_NET_WEB, SQL_SERVER, SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP, MYSQL, POSTGRESQL, JAVA_JMX, ORACLE, SAP_HANA_MULTI_NODE, SAP_HANA_SINGLE_NODE, SAP_HANA_HIGH_AVAILABILITY, SQL_SERVER_FAILOVER_CLUSTER_INSTANCE, SHAREPOINT, ACTIVE_DIRECTORY, SAP_NETWEAVER_STANDARD, SAP_NETWEAVER_DISTRIBUTED, SAP_NETWEAVER_HIGH_AVAILABILITY
     #     component_configuration: "ComponentConfiguration",
     #     auto_config_enabled: false,
     #   })
@@ -1699,6 +1958,91 @@ module Aws::ApplicationInsights
       req.send_request(options)
     end
 
+    # Updates the visibility of the problem or specifies the problem as
+    # `RESOLVED`.
+    #
+    # @option params [required, String] :problem_id
+    #   The ID of the problem.
+    #
+    # @option params [String] :update_status
+    #   The status of the problem. Arguments can be passed for only problems
+    #   that show a status of `RECOVERING`.
+    #
+    # @option params [String] :visibility
+    #   The visibility of a problem. When you pass a value of `IGNORED`, the
+    #   problem is removed from the default view, and all notifications for
+    #   the problem are suspended. When `VISIBLE` is passed, the `IGNORED`
+    #   action is reversed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_problem({
+    #     problem_id: "ProblemId", # required
+    #     update_status: "RESOLVED", # accepts RESOLVED
+    #     visibility: "IGNORED", # accepts IGNORED, VISIBLE
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/UpdateProblem AWS API Documentation
+    #
+    # @overload update_problem(params = {})
+    # @param [Hash] params ({})
+    def update_problem(params = {}, options = {})
+      req = build_request(:update_problem, params)
+      req.send_request(options)
+    end
+
+    # Adds a workload to a component. Each component can have at most five
+    # workloads.
+    #
+    # @option params [required, String] :resource_group_name
+    #   The name of the resource group.
+    #
+    # @option params [required, String] :component_name
+    #   The name of the component.
+    #
+    # @option params [String] :workload_id
+    #   The ID of the workload.
+    #
+    # @option params [required, Types::WorkloadConfiguration] :workload_configuration
+    #   The configuration settings of the workload. The value is the escaped
+    #   JSON of the configuration.
+    #
+    # @return [Types::UpdateWorkloadResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateWorkloadResponse#workload_id #workload_id} => String
+    #   * {Types::UpdateWorkloadResponse#workload_configuration #workload_configuration} => Types::WorkloadConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_workload({
+    #     resource_group_name: "ResourceGroupName", # required
+    #     component_name: "ComponentName", # required
+    #     workload_id: "WorkloadId",
+    #     workload_configuration: { # required
+    #       workload_name: "WorkloadName",
+    #       tier: "CUSTOM", # accepts CUSTOM, DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB_TIER, DOT_NET_WEB, SQL_SERVER, SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP, MYSQL, POSTGRESQL, JAVA_JMX, ORACLE, SAP_HANA_MULTI_NODE, SAP_HANA_SINGLE_NODE, SAP_HANA_HIGH_AVAILABILITY, SQL_SERVER_FAILOVER_CLUSTER_INSTANCE, SHAREPOINT, ACTIVE_DIRECTORY, SAP_NETWEAVER_STANDARD, SAP_NETWEAVER_DISTRIBUTED, SAP_NETWEAVER_HIGH_AVAILABILITY
+    #       configuration: "ComponentConfiguration",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workload_id #=> String
+    #   resp.workload_configuration.workload_name #=> String
+    #   resp.workload_configuration.tier #=> String, one of "CUSTOM", "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB_TIER", "DOT_NET_WEB", "SQL_SERVER", "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP", "MYSQL", "POSTGRESQL", "JAVA_JMX", "ORACLE", "SAP_HANA_MULTI_NODE", "SAP_HANA_SINGLE_NODE", "SAP_HANA_HIGH_AVAILABILITY", "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE", "SHAREPOINT", "ACTIVE_DIRECTORY", "SAP_NETWEAVER_STANDARD", "SAP_NETWEAVER_DISTRIBUTED", "SAP_NETWEAVER_HIGH_AVAILABILITY"
+    #   resp.workload_configuration.configuration #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/UpdateWorkload AWS API Documentation
+    #
+    # @overload update_workload(params = {})
+    # @param [Hash] params ({})
+    def update_workload(params = {}, options = {})
+      req = build_request(:update_workload, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1712,7 +2056,7 @@ module Aws::ApplicationInsights
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationinsights'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

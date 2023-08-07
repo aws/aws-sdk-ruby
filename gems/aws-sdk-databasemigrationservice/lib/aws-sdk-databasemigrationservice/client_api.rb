@@ -21,10 +21,13 @@ module Aws::DatabaseMigrationService
     ApplyPendingMaintenanceActionMessage = Shapes::StructureShape.new(name: 'ApplyPendingMaintenanceActionMessage')
     ApplyPendingMaintenanceActionResponse = Shapes::StructureShape.new(name: 'ApplyPendingMaintenanceActionResponse')
     ArnList = Shapes::ListShape.new(name: 'ArnList')
+    AssessmentReportType = Shapes::StringShape.new(name: 'AssessmentReportType')
+    AssessmentReportTypesList = Shapes::ListShape.new(name: 'AssessmentReportTypesList')
     AuthMechanismValue = Shapes::StringShape.new(name: 'AuthMechanismValue')
     AuthTypeValue = Shapes::StringShape.new(name: 'AuthTypeValue')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
     AvailabilityZonesList = Shapes::ListShape.new(name: 'AvailabilityZonesList')
+    AvailableUpgradesList = Shapes::ListShape.new(name: 'AvailableUpgradesList')
     BatchStartRecommendationsErrorEntry = Shapes::StructureShape.new(name: 'BatchStartRecommendationsErrorEntry')
     BatchStartRecommendationsErrorEntryList = Shapes::ListShape.new(name: 'BatchStartRecommendationsErrorEntryList')
     BatchStartRecommendationsRequest = Shapes::StructureShape.new(name: 'BatchStartRecommendationsRequest')
@@ -49,12 +52,18 @@ module Aws::DatabaseMigrationService
     ComputeConfig = Shapes::StructureShape.new(name: 'ComputeConfig')
     Connection = Shapes::StructureShape.new(name: 'Connection')
     ConnectionList = Shapes::ListShape.new(name: 'ConnectionList')
+    CreateDataProviderMessage = Shapes::StructureShape.new(name: 'CreateDataProviderMessage')
+    CreateDataProviderResponse = Shapes::StructureShape.new(name: 'CreateDataProviderResponse')
     CreateEndpointMessage = Shapes::StructureShape.new(name: 'CreateEndpointMessage')
     CreateEndpointResponse = Shapes::StructureShape.new(name: 'CreateEndpointResponse')
     CreateEventSubscriptionMessage = Shapes::StructureShape.new(name: 'CreateEventSubscriptionMessage')
     CreateEventSubscriptionResponse = Shapes::StructureShape.new(name: 'CreateEventSubscriptionResponse')
     CreateFleetAdvisorCollectorRequest = Shapes::StructureShape.new(name: 'CreateFleetAdvisorCollectorRequest')
     CreateFleetAdvisorCollectorResponse = Shapes::StructureShape.new(name: 'CreateFleetAdvisorCollectorResponse')
+    CreateInstanceProfileMessage = Shapes::StructureShape.new(name: 'CreateInstanceProfileMessage')
+    CreateInstanceProfileResponse = Shapes::StructureShape.new(name: 'CreateInstanceProfileResponse')
+    CreateMigrationProjectMessage = Shapes::StructureShape.new(name: 'CreateMigrationProjectMessage')
+    CreateMigrationProjectResponse = Shapes::StructureShape.new(name: 'CreateMigrationProjectResponse')
     CreateReplicationConfigMessage = Shapes::StructureShape.new(name: 'CreateReplicationConfigMessage')
     CreateReplicationConfigResponse = Shapes::StructureShape.new(name: 'CreateReplicationConfigResponse')
     CreateReplicationInstanceMessage = Shapes::StructureShape.new(name: 'CreateReplicationInstanceMessage')
@@ -64,23 +73,38 @@ module Aws::DatabaseMigrationService
     CreateReplicationTaskMessage = Shapes::StructureShape.new(name: 'CreateReplicationTaskMessage')
     CreateReplicationTaskResponse = Shapes::StructureShape.new(name: 'CreateReplicationTaskResponse')
     DataFormatValue = Shapes::StringShape.new(name: 'DataFormatValue')
+    DataProvider = Shapes::StructureShape.new(name: 'DataProvider')
+    DataProviderDescriptor = Shapes::StructureShape.new(name: 'DataProviderDescriptor')
+    DataProviderDescriptorDefinition = Shapes::StructureShape.new(name: 'DataProviderDescriptorDefinition')
+    DataProviderDescriptorDefinitionList = Shapes::ListShape.new(name: 'DataProviderDescriptorDefinitionList')
+    DataProviderDescriptorList = Shapes::ListShape.new(name: 'DataProviderDescriptorList')
+    DataProviderList = Shapes::ListShape.new(name: 'DataProviderList')
+    DataProviderSettings = Shapes::UnionShape.new(name: 'DataProviderSettings')
     DatabaseInstanceSoftwareDetailsResponse = Shapes::StructureShape.new(name: 'DatabaseInstanceSoftwareDetailsResponse')
     DatabaseList = Shapes::ListShape.new(name: 'DatabaseList')
+    DatabaseMode = Shapes::StringShape.new(name: 'DatabaseMode')
     DatabaseResponse = Shapes::StructureShape.new(name: 'DatabaseResponse')
     DatabaseShortInfoResponse = Shapes::StructureShape.new(name: 'DatabaseShortInfoResponse')
     DatePartitionDelimiterValue = Shapes::StringShape.new(name: 'DatePartitionDelimiterValue')
     DatePartitionSequenceValue = Shapes::StringShape.new(name: 'DatePartitionSequenceValue')
+    DefaultErrorDetails = Shapes::StructureShape.new(name: 'DefaultErrorDetails')
     DeleteCertificateMessage = Shapes::StructureShape.new(name: 'DeleteCertificateMessage')
     DeleteCertificateResponse = Shapes::StructureShape.new(name: 'DeleteCertificateResponse')
     DeleteCollectorRequest = Shapes::StructureShape.new(name: 'DeleteCollectorRequest')
     DeleteConnectionMessage = Shapes::StructureShape.new(name: 'DeleteConnectionMessage')
     DeleteConnectionResponse = Shapes::StructureShape.new(name: 'DeleteConnectionResponse')
+    DeleteDataProviderMessage = Shapes::StructureShape.new(name: 'DeleteDataProviderMessage')
+    DeleteDataProviderResponse = Shapes::StructureShape.new(name: 'DeleteDataProviderResponse')
     DeleteEndpointMessage = Shapes::StructureShape.new(name: 'DeleteEndpointMessage')
     DeleteEndpointResponse = Shapes::StructureShape.new(name: 'DeleteEndpointResponse')
     DeleteEventSubscriptionMessage = Shapes::StructureShape.new(name: 'DeleteEventSubscriptionMessage')
     DeleteEventSubscriptionResponse = Shapes::StructureShape.new(name: 'DeleteEventSubscriptionResponse')
     DeleteFleetAdvisorDatabasesRequest = Shapes::StructureShape.new(name: 'DeleteFleetAdvisorDatabasesRequest')
     DeleteFleetAdvisorDatabasesResponse = Shapes::StructureShape.new(name: 'DeleteFleetAdvisorDatabasesResponse')
+    DeleteInstanceProfileMessage = Shapes::StructureShape.new(name: 'DeleteInstanceProfileMessage')
+    DeleteInstanceProfileResponse = Shapes::StructureShape.new(name: 'DeleteInstanceProfileResponse')
+    DeleteMigrationProjectMessage = Shapes::StructureShape.new(name: 'DeleteMigrationProjectMessage')
+    DeleteMigrationProjectResponse = Shapes::StructureShape.new(name: 'DeleteMigrationProjectResponse')
     DeleteReplicationConfigMessage = Shapes::StructureShape.new(name: 'DeleteReplicationConfigMessage')
     DeleteReplicationConfigResponse = Shapes::StructureShape.new(name: 'DeleteReplicationConfigResponse')
     DeleteReplicationInstanceMessage = Shapes::StructureShape.new(name: 'DeleteReplicationInstanceMessage')
@@ -99,18 +123,26 @@ module Aws::DatabaseMigrationService
     DescribeCertificatesResponse = Shapes::StructureShape.new(name: 'DescribeCertificatesResponse')
     DescribeConnectionsMessage = Shapes::StructureShape.new(name: 'DescribeConnectionsMessage')
     DescribeConnectionsResponse = Shapes::StructureShape.new(name: 'DescribeConnectionsResponse')
+    DescribeConversionConfigurationMessage = Shapes::StructureShape.new(name: 'DescribeConversionConfigurationMessage')
+    DescribeConversionConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeConversionConfigurationResponse')
+    DescribeDataProvidersMessage = Shapes::StructureShape.new(name: 'DescribeDataProvidersMessage')
+    DescribeDataProvidersResponse = Shapes::StructureShape.new(name: 'DescribeDataProvidersResponse')
     DescribeEndpointSettingsMessage = Shapes::StructureShape.new(name: 'DescribeEndpointSettingsMessage')
     DescribeEndpointSettingsResponse = Shapes::StructureShape.new(name: 'DescribeEndpointSettingsResponse')
     DescribeEndpointTypesMessage = Shapes::StructureShape.new(name: 'DescribeEndpointTypesMessage')
     DescribeEndpointTypesResponse = Shapes::StructureShape.new(name: 'DescribeEndpointTypesResponse')
     DescribeEndpointsMessage = Shapes::StructureShape.new(name: 'DescribeEndpointsMessage')
     DescribeEndpointsResponse = Shapes::StructureShape.new(name: 'DescribeEndpointsResponse')
+    DescribeEngineVersionsMessage = Shapes::StructureShape.new(name: 'DescribeEngineVersionsMessage')
+    DescribeEngineVersionsResponse = Shapes::StructureShape.new(name: 'DescribeEngineVersionsResponse')
     DescribeEventCategoriesMessage = Shapes::StructureShape.new(name: 'DescribeEventCategoriesMessage')
     DescribeEventCategoriesResponse = Shapes::StructureShape.new(name: 'DescribeEventCategoriesResponse')
     DescribeEventSubscriptionsMessage = Shapes::StructureShape.new(name: 'DescribeEventSubscriptionsMessage')
     DescribeEventSubscriptionsResponse = Shapes::StructureShape.new(name: 'DescribeEventSubscriptionsResponse')
     DescribeEventsMessage = Shapes::StructureShape.new(name: 'DescribeEventsMessage')
     DescribeEventsResponse = Shapes::StructureShape.new(name: 'DescribeEventsResponse')
+    DescribeExtensionPackAssociationsMessage = Shapes::StructureShape.new(name: 'DescribeExtensionPackAssociationsMessage')
+    DescribeExtensionPackAssociationsResponse = Shapes::StructureShape.new(name: 'DescribeExtensionPackAssociationsResponse')
     DescribeFleetAdvisorCollectorsRequest = Shapes::StructureShape.new(name: 'DescribeFleetAdvisorCollectorsRequest')
     DescribeFleetAdvisorCollectorsResponse = Shapes::StructureShape.new(name: 'DescribeFleetAdvisorCollectorsResponse')
     DescribeFleetAdvisorDatabasesRequest = Shapes::StructureShape.new(name: 'DescribeFleetAdvisorDatabasesRequest')
@@ -121,6 +153,20 @@ module Aws::DatabaseMigrationService
     DescribeFleetAdvisorSchemaObjectSummaryResponse = Shapes::StructureShape.new(name: 'DescribeFleetAdvisorSchemaObjectSummaryResponse')
     DescribeFleetAdvisorSchemasRequest = Shapes::StructureShape.new(name: 'DescribeFleetAdvisorSchemasRequest')
     DescribeFleetAdvisorSchemasResponse = Shapes::StructureShape.new(name: 'DescribeFleetAdvisorSchemasResponse')
+    DescribeInstanceProfilesMessage = Shapes::StructureShape.new(name: 'DescribeInstanceProfilesMessage')
+    DescribeInstanceProfilesResponse = Shapes::StructureShape.new(name: 'DescribeInstanceProfilesResponse')
+    DescribeMetadataModelAssessmentsMessage = Shapes::StructureShape.new(name: 'DescribeMetadataModelAssessmentsMessage')
+    DescribeMetadataModelAssessmentsResponse = Shapes::StructureShape.new(name: 'DescribeMetadataModelAssessmentsResponse')
+    DescribeMetadataModelConversionsMessage = Shapes::StructureShape.new(name: 'DescribeMetadataModelConversionsMessage')
+    DescribeMetadataModelConversionsResponse = Shapes::StructureShape.new(name: 'DescribeMetadataModelConversionsResponse')
+    DescribeMetadataModelExportsAsScriptMessage = Shapes::StructureShape.new(name: 'DescribeMetadataModelExportsAsScriptMessage')
+    DescribeMetadataModelExportsAsScriptResponse = Shapes::StructureShape.new(name: 'DescribeMetadataModelExportsAsScriptResponse')
+    DescribeMetadataModelExportsToTargetMessage = Shapes::StructureShape.new(name: 'DescribeMetadataModelExportsToTargetMessage')
+    DescribeMetadataModelExportsToTargetResponse = Shapes::StructureShape.new(name: 'DescribeMetadataModelExportsToTargetResponse')
+    DescribeMetadataModelImportsMessage = Shapes::StructureShape.new(name: 'DescribeMetadataModelImportsMessage')
+    DescribeMetadataModelImportsResponse = Shapes::StructureShape.new(name: 'DescribeMetadataModelImportsResponse')
+    DescribeMigrationProjectsMessage = Shapes::StructureShape.new(name: 'DescribeMigrationProjectsMessage')
+    DescribeMigrationProjectsResponse = Shapes::StructureShape.new(name: 'DescribeMigrationProjectsResponse')
     DescribeOrderableReplicationInstancesMessage = Shapes::StructureShape.new(name: 'DescribeOrderableReplicationInstancesMessage')
     DescribeOrderableReplicationInstancesResponse = Shapes::StructureShape.new(name: 'DescribeOrderableReplicationInstancesResponse')
     DescribePendingMaintenanceActionsMessage = Shapes::StructureShape.new(name: 'DescribePendingMaintenanceActionsMessage')
@@ -169,6 +215,9 @@ module Aws::DatabaseMigrationService
     EndpointSettingEnumValues = Shapes::ListShape.new(name: 'EndpointSettingEnumValues')
     EndpointSettingTypeValue = Shapes::StringShape.new(name: 'EndpointSettingTypeValue')
     EndpointSettingsList = Shapes::ListShape.new(name: 'EndpointSettingsList')
+    EngineVersion = Shapes::StructureShape.new(name: 'EngineVersion')
+    EngineVersionList = Shapes::ListShape.new(name: 'EngineVersionList')
+    ErrorDetails = Shapes::UnionShape.new(name: 'ErrorDetails')
     Event = Shapes::StructureShape.new(name: 'Event')
     EventCategoriesList = Shapes::ListShape.new(name: 'EventCategoriesList')
     EventCategoryGroup = Shapes::StructureShape.new(name: 'EventCategoryGroup')
@@ -178,6 +227,10 @@ module Aws::DatabaseMigrationService
     EventSubscriptionsList = Shapes::ListShape.new(name: 'EventSubscriptionsList')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     ExcludeTestList = Shapes::ListShape.new(name: 'ExcludeTestList')
+    ExportMetadataModelAssessmentMessage = Shapes::StructureShape.new(name: 'ExportMetadataModelAssessmentMessage')
+    ExportMetadataModelAssessmentResponse = Shapes::StructureShape.new(name: 'ExportMetadataModelAssessmentResponse')
+    ExportMetadataModelAssessmentResultEntry = Shapes::StructureShape.new(name: 'ExportMetadataModelAssessmentResultEntry')
+    ExportSqlDetails = Shapes::StructureShape.new(name: 'ExportSqlDetails')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterValueList = Shapes::ListShape.new(name: 'FilterValueList')
@@ -192,6 +245,8 @@ module Aws::DatabaseMigrationService
     ImportCertificateResponse = Shapes::StructureShape.new(name: 'ImportCertificateResponse')
     IncludeTestList = Shapes::ListShape.new(name: 'IncludeTestList')
     IndividualAssessmentNameList = Shapes::ListShape.new(name: 'IndividualAssessmentNameList')
+    InstanceProfile = Shapes::StructureShape.new(name: 'InstanceProfile')
+    InstanceProfileList = Shapes::ListShape.new(name: 'InstanceProfileList')
     InsufficientResourceCapacityFault = Shapes::StructureShape.new(name: 'InsufficientResourceCapacityFault')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntegerList = Shapes::ListShape.new(name: 'IntegerList')
@@ -201,6 +256,7 @@ module Aws::DatabaseMigrationService
     InvalidResourceStateFault = Shapes::StructureShape.new(name: 'InvalidResourceStateFault')
     InvalidSubnet = Shapes::StructureShape.new(name: 'InvalidSubnet')
     InventoryData = Shapes::StructureShape.new(name: 'InventoryData')
+    Iso8601DateTime = Shapes::TimestampShape.new(name: 'Iso8601DateTime', timestampFormat: "iso8601")
     KMSAccessDeniedFault = Shapes::StructureShape.new(name: 'KMSAccessDeniedFault')
     KMSDisabledFault = Shapes::StructureShape.new(name: 'KMSDisabledFault')
     KMSFault = Shapes::StructureShape.new(name: 'KMSFault')
@@ -223,11 +279,22 @@ module Aws::DatabaseMigrationService
     LongVarcharMappingType = Shapes::StringShape.new(name: 'LongVarcharMappingType')
     MessageFormatValue = Shapes::StringShape.new(name: 'MessageFormatValue')
     MicrosoftSQLServerSettings = Shapes::StructureShape.new(name: 'MicrosoftSQLServerSettings')
+    MicrosoftSqlServerDataProviderSettings = Shapes::StructureShape.new(name: 'MicrosoftSqlServerDataProviderSettings')
+    MigrationProject = Shapes::StructureShape.new(name: 'MigrationProject')
+    MigrationProjectList = Shapes::ListShape.new(name: 'MigrationProjectList')
     MigrationTypeValue = Shapes::StringShape.new(name: 'MigrationTypeValue')
+    ModifyConversionConfigurationMessage = Shapes::StructureShape.new(name: 'ModifyConversionConfigurationMessage')
+    ModifyConversionConfigurationResponse = Shapes::StructureShape.new(name: 'ModifyConversionConfigurationResponse')
+    ModifyDataProviderMessage = Shapes::StructureShape.new(name: 'ModifyDataProviderMessage')
+    ModifyDataProviderResponse = Shapes::StructureShape.new(name: 'ModifyDataProviderResponse')
     ModifyEndpointMessage = Shapes::StructureShape.new(name: 'ModifyEndpointMessage')
     ModifyEndpointResponse = Shapes::StructureShape.new(name: 'ModifyEndpointResponse')
     ModifyEventSubscriptionMessage = Shapes::StructureShape.new(name: 'ModifyEventSubscriptionMessage')
     ModifyEventSubscriptionResponse = Shapes::StructureShape.new(name: 'ModifyEventSubscriptionResponse')
+    ModifyInstanceProfileMessage = Shapes::StructureShape.new(name: 'ModifyInstanceProfileMessage')
+    ModifyInstanceProfileResponse = Shapes::StructureShape.new(name: 'ModifyInstanceProfileResponse')
+    ModifyMigrationProjectMessage = Shapes::StructureShape.new(name: 'ModifyMigrationProjectMessage')
+    ModifyMigrationProjectResponse = Shapes::StructureShape.new(name: 'ModifyMigrationProjectResponse')
     ModifyReplicationConfigMessage = Shapes::StructureShape.new(name: 'ModifyReplicationConfigMessage')
     ModifyReplicationConfigResponse = Shapes::StructureShape.new(name: 'ModifyReplicationConfigResponse')
     ModifyReplicationInstanceMessage = Shapes::StructureShape.new(name: 'ModifyReplicationInstanceMessage')
@@ -240,17 +307,21 @@ module Aws::DatabaseMigrationService
     MoveReplicationTaskMessage = Shapes::StructureShape.new(name: 'MoveReplicationTaskMessage')
     MoveReplicationTaskResponse = Shapes::StructureShape.new(name: 'MoveReplicationTaskResponse')
     MySQLSettings = Shapes::StructureShape.new(name: 'MySQLSettings')
+    MySqlDataProviderSettings = Shapes::StructureShape.new(name: 'MySqlDataProviderSettings')
     NeptuneSettings = Shapes::StructureShape.new(name: 'NeptuneSettings')
     NestingLevelValue = Shapes::StringShape.new(name: 'NestingLevelValue')
+    OracleDataProviderSettings = Shapes::StructureShape.new(name: 'OracleDataProviderSettings')
     OracleSettings = Shapes::StructureShape.new(name: 'OracleSettings')
     OrderableReplicationInstance = Shapes::StructureShape.new(name: 'OrderableReplicationInstance')
     OrderableReplicationInstanceList = Shapes::ListShape.new(name: 'OrderableReplicationInstanceList')
+    OriginTypeValue = Shapes::StringShape.new(name: 'OriginTypeValue')
     ParquetVersionValue = Shapes::StringShape.new(name: 'ParquetVersionValue')
     PendingMaintenanceAction = Shapes::StructureShape.new(name: 'PendingMaintenanceAction')
     PendingMaintenanceActionDetails = Shapes::ListShape.new(name: 'PendingMaintenanceActionDetails')
     PendingMaintenanceActions = Shapes::ListShape.new(name: 'PendingMaintenanceActions')
     PluginNameValue = Shapes::StringShape.new(name: 'PluginNameValue')
     PostgreSQLSettings = Shapes::StructureShape.new(name: 'PostgreSQLSettings')
+    PostgreSqlDataProviderSettings = Shapes::StructureShape.new(name: 'PostgreSqlDataProviderSettings')
     ProvisionData = Shapes::StructureShape.new(name: 'ProvisionData')
     RdsConfiguration = Shapes::StructureShape.new(name: 'RdsConfiguration')
     RdsRecommendation = Shapes::StructureShape.new(name: 'RdsRecommendation')
@@ -313,9 +384,12 @@ module Aws::DatabaseMigrationService
     S3AccessDeniedFault = Shapes::StructureShape.new(name: 'S3AccessDeniedFault')
     S3ResourceNotFoundFault = Shapes::StructureShape.new(name: 'S3ResourceNotFoundFault')
     S3Settings = Shapes::StructureShape.new(name: 'S3Settings')
+    SCApplicationAttributes = Shapes::StructureShape.new(name: 'SCApplicationAttributes')
     SNSInvalidTopicFault = Shapes::StructureShape.new(name: 'SNSInvalidTopicFault')
     SNSNoAuthorizationFault = Shapes::StructureShape.new(name: 'SNSNoAuthorizationFault')
     SafeguardPolicy = Shapes::StringShape.new(name: 'SafeguardPolicy')
+    SchemaConversionRequest = Shapes::StructureShape.new(name: 'SchemaConversionRequest')
+    SchemaConversionRequestList = Shapes::ListShape.new(name: 'SchemaConversionRequestList')
     SchemaList = Shapes::ListShape.new(name: 'SchemaList')
     SchemaResponse = Shapes::StructureShape.new(name: 'SchemaResponse')
     SchemaShortInfoResponse = Shapes::StructureShape.new(name: 'SchemaShortInfoResponse')
@@ -324,6 +398,18 @@ module Aws::DatabaseMigrationService
     SourceIdsList = Shapes::ListShape.new(name: 'SourceIdsList')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
     SslSecurityProtocolValue = Shapes::StringShape.new(name: 'SslSecurityProtocolValue')
+    StartExtensionPackAssociationMessage = Shapes::StructureShape.new(name: 'StartExtensionPackAssociationMessage')
+    StartExtensionPackAssociationResponse = Shapes::StructureShape.new(name: 'StartExtensionPackAssociationResponse')
+    StartMetadataModelAssessmentMessage = Shapes::StructureShape.new(name: 'StartMetadataModelAssessmentMessage')
+    StartMetadataModelAssessmentResponse = Shapes::StructureShape.new(name: 'StartMetadataModelAssessmentResponse')
+    StartMetadataModelConversionMessage = Shapes::StructureShape.new(name: 'StartMetadataModelConversionMessage')
+    StartMetadataModelConversionResponse = Shapes::StructureShape.new(name: 'StartMetadataModelConversionResponse')
+    StartMetadataModelExportAsScriptMessage = Shapes::StructureShape.new(name: 'StartMetadataModelExportAsScriptMessage')
+    StartMetadataModelExportAsScriptResponse = Shapes::StructureShape.new(name: 'StartMetadataModelExportAsScriptResponse')
+    StartMetadataModelExportToTargetMessage = Shapes::StructureShape.new(name: 'StartMetadataModelExportToTargetMessage')
+    StartMetadataModelExportToTargetResponse = Shapes::StructureShape.new(name: 'StartMetadataModelExportToTargetResponse')
+    StartMetadataModelImportMessage = Shapes::StructureShape.new(name: 'StartMetadataModelImportMessage')
+    StartMetadataModelImportResponse = Shapes::StructureShape.new(name: 'StartMetadataModelImportResponse')
     StartRecommendationsRequest = Shapes::StructureShape.new(name: 'StartRecommendationsRequest')
     StartRecommendationsRequestEntry = Shapes::StructureShape.new(name: 'StartRecommendationsRequestEntry')
     StartRecommendationsRequestEntryList = Shapes::ListShape.new(name: 'StartRecommendationsRequestEntryList')
@@ -396,10 +482,14 @@ module Aws::DatabaseMigrationService
 
     ArnList.member = Shapes::ShapeRef.new(shape: String)
 
+    AssessmentReportTypesList.member = Shapes::ShapeRef.new(shape: AssessmentReportType)
+
     AvailabilityZone.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     AvailabilityZone.struct_class = Types::AvailabilityZone
 
     AvailabilityZonesList.member = Shapes::ShapeRef.new(shape: String)
+
+    AvailableUpgradesList.member = Shapes::ShapeRef.new(shape: String)
 
     BatchStartRecommendationsErrorEntry.add_member(:database_id, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseId"))
     BatchStartRecommendationsErrorEntry.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -487,6 +577,16 @@ module Aws::DatabaseMigrationService
 
     ConnectionList.member = Shapes::ShapeRef.new(shape: Connection)
 
+    CreateDataProviderMessage.add_member(:data_provider_name, Shapes::ShapeRef.new(shape: String, location_name: "DataProviderName"))
+    CreateDataProviderMessage.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    CreateDataProviderMessage.add_member(:engine, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Engine"))
+    CreateDataProviderMessage.add_member(:settings, Shapes::ShapeRef.new(shape: DataProviderSettings, required: true, location_name: "Settings"))
+    CreateDataProviderMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateDataProviderMessage.struct_class = Types::CreateDataProviderMessage
+
+    CreateDataProviderResponse.add_member(:data_provider, Shapes::ShapeRef.new(shape: DataProvider, location_name: "DataProvider"))
+    CreateDataProviderResponse.struct_class = Types::CreateDataProviderResponse
+
     CreateEndpointMessage.add_member(:endpoint_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointIdentifier"))
     CreateEndpointMessage.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: ReplicationEndpointTypeValue, required: true, location_name: "EndpointType"))
     CreateEndpointMessage.add_member(:engine_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EngineName"))
@@ -552,6 +652,33 @@ module Aws::DatabaseMigrationService
     CreateFleetAdvisorCollectorResponse.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: String, location_name: "S3BucketName"))
     CreateFleetAdvisorCollectorResponse.struct_class = Types::CreateFleetAdvisorCollectorResponse
 
+    CreateInstanceProfileMessage.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
+    CreateInstanceProfileMessage.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyArn"))
+    CreateInstanceProfileMessage.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "PubliclyAccessible"))
+    CreateInstanceProfileMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateInstanceProfileMessage.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
+    CreateInstanceProfileMessage.add_member(:instance_profile_name, Shapes::ShapeRef.new(shape: String, location_name: "InstanceProfileName"))
+    CreateInstanceProfileMessage.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    CreateInstanceProfileMessage.add_member(:subnet_group_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SubnetGroupIdentifier"))
+    CreateInstanceProfileMessage.add_member(:vpc_security_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "VpcSecurityGroups"))
+    CreateInstanceProfileMessage.struct_class = Types::CreateInstanceProfileMessage
+
+    CreateInstanceProfileResponse.add_member(:instance_profile, Shapes::ShapeRef.new(shape: InstanceProfile, location_name: "InstanceProfile"))
+    CreateInstanceProfileResponse.struct_class = Types::CreateInstanceProfileResponse
+
+    CreateMigrationProjectMessage.add_member(:migration_project_name, Shapes::ShapeRef.new(shape: String, location_name: "MigrationProjectName"))
+    CreateMigrationProjectMessage.add_member(:source_data_provider_descriptors, Shapes::ShapeRef.new(shape: DataProviderDescriptorDefinitionList, required: true, location_name: "SourceDataProviderDescriptors"))
+    CreateMigrationProjectMessage.add_member(:target_data_provider_descriptors, Shapes::ShapeRef.new(shape: DataProviderDescriptorDefinitionList, required: true, location_name: "TargetDataProviderDescriptors"))
+    CreateMigrationProjectMessage.add_member(:instance_profile_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceProfileIdentifier"))
+    CreateMigrationProjectMessage.add_member(:transformation_rules, Shapes::ShapeRef.new(shape: String, location_name: "TransformationRules"))
+    CreateMigrationProjectMessage.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    CreateMigrationProjectMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateMigrationProjectMessage.add_member(:schema_conversion_application_attributes, Shapes::ShapeRef.new(shape: SCApplicationAttributes, location_name: "SchemaConversionApplicationAttributes"))
+    CreateMigrationProjectMessage.struct_class = Types::CreateMigrationProjectMessage
+
+    CreateMigrationProjectResponse.add_member(:migration_project, Shapes::ShapeRef.new(shape: MigrationProject, location_name: "MigrationProject"))
+    CreateMigrationProjectResponse.struct_class = Types::CreateMigrationProjectResponse
+
     CreateReplicationConfigMessage.add_member(:replication_config_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationConfigIdentifier"))
     CreateReplicationConfigMessage.add_member(:source_endpoint_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceEndpointArn"))
     CreateReplicationConfigMessage.add_member(:target_endpoint_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TargetEndpointArn"))
@@ -615,6 +742,43 @@ module Aws::DatabaseMigrationService
     CreateReplicationTaskResponse.add_member(:replication_task, Shapes::ShapeRef.new(shape: ReplicationTask, location_name: "ReplicationTask"))
     CreateReplicationTaskResponse.struct_class = Types::CreateReplicationTaskResponse
 
+    DataProvider.add_member(:data_provider_name, Shapes::ShapeRef.new(shape: String, location_name: "DataProviderName"))
+    DataProvider.add_member(:data_provider_arn, Shapes::ShapeRef.new(shape: String, location_name: "DataProviderArn"))
+    DataProvider.add_member(:data_provider_creation_time, Shapes::ShapeRef.new(shape: Iso8601DateTime, location_name: "DataProviderCreationTime"))
+    DataProvider.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    DataProvider.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
+    DataProvider.add_member(:settings, Shapes::ShapeRef.new(shape: DataProviderSettings, location_name: "Settings"))
+    DataProvider.struct_class = Types::DataProvider
+
+    DataProviderDescriptor.add_member(:secrets_manager_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecretId"))
+    DataProviderDescriptor.add_member(:secrets_manager_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerAccessRoleArn"))
+    DataProviderDescriptor.add_member(:data_provider_name, Shapes::ShapeRef.new(shape: String, location_name: "DataProviderName"))
+    DataProviderDescriptor.add_member(:data_provider_arn, Shapes::ShapeRef.new(shape: String, location_name: "DataProviderArn"))
+    DataProviderDescriptor.struct_class = Types::DataProviderDescriptor
+
+    DataProviderDescriptorDefinition.add_member(:data_provider_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataProviderIdentifier"))
+    DataProviderDescriptorDefinition.add_member(:secrets_manager_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecretId"))
+    DataProviderDescriptorDefinition.add_member(:secrets_manager_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerAccessRoleArn"))
+    DataProviderDescriptorDefinition.struct_class = Types::DataProviderDescriptorDefinition
+
+    DataProviderDescriptorDefinitionList.member = Shapes::ShapeRef.new(shape: DataProviderDescriptorDefinition)
+
+    DataProviderDescriptorList.member = Shapes::ShapeRef.new(shape: DataProviderDescriptor)
+
+    DataProviderList.member = Shapes::ShapeRef.new(shape: DataProvider)
+
+    DataProviderSettings.add_member(:postgre_sql_settings, Shapes::ShapeRef.new(shape: PostgreSqlDataProviderSettings, location_name: "PostgreSqlSettings"))
+    DataProviderSettings.add_member(:my_sql_settings, Shapes::ShapeRef.new(shape: MySqlDataProviderSettings, location_name: "MySqlSettings"))
+    DataProviderSettings.add_member(:oracle_settings, Shapes::ShapeRef.new(shape: OracleDataProviderSettings, location_name: "OracleSettings"))
+    DataProviderSettings.add_member(:microsoft_sql_server_settings, Shapes::ShapeRef.new(shape: MicrosoftSqlServerDataProviderSettings, location_name: "MicrosoftSqlServerSettings"))
+    DataProviderSettings.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    DataProviderSettings.add_member_subclass(:postgre_sql_settings, Types::DataProviderSettings::PostgreSqlSettings)
+    DataProviderSettings.add_member_subclass(:my_sql_settings, Types::DataProviderSettings::MySqlSettings)
+    DataProviderSettings.add_member_subclass(:oracle_settings, Types::DataProviderSettings::OracleSettings)
+    DataProviderSettings.add_member_subclass(:microsoft_sql_server_settings, Types::DataProviderSettings::MicrosoftSqlServerSettings)
+    DataProviderSettings.add_member_subclass(:unknown, Types::DataProviderSettings::Unknown)
+    DataProviderSettings.struct_class = Types::DataProviderSettings
+
     DatabaseInstanceSoftwareDetailsResponse.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     DatabaseInstanceSoftwareDetailsResponse.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
     DatabaseInstanceSoftwareDetailsResponse.add_member(:engine_edition, Shapes::ShapeRef.new(shape: String, location_name: "EngineEdition"))
@@ -641,6 +805,9 @@ module Aws::DatabaseMigrationService
     DatabaseShortInfoResponse.add_member(:database_engine, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseEngine"))
     DatabaseShortInfoResponse.struct_class = Types::DatabaseShortInfoResponse
 
+    DefaultErrorDetails.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    DefaultErrorDetails.struct_class = Types::DefaultErrorDetails
+
     DeleteCertificateMessage.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CertificateArn"))
     DeleteCertificateMessage.struct_class = Types::DeleteCertificateMessage
 
@@ -656,6 +823,12 @@ module Aws::DatabaseMigrationService
 
     DeleteConnectionResponse.add_member(:connection, Shapes::ShapeRef.new(shape: Connection, location_name: "Connection"))
     DeleteConnectionResponse.struct_class = Types::DeleteConnectionResponse
+
+    DeleteDataProviderMessage.add_member(:data_provider_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataProviderIdentifier"))
+    DeleteDataProviderMessage.struct_class = Types::DeleteDataProviderMessage
+
+    DeleteDataProviderResponse.add_member(:data_provider, Shapes::ShapeRef.new(shape: DataProvider, location_name: "DataProvider"))
+    DeleteDataProviderResponse.struct_class = Types::DeleteDataProviderResponse
 
     DeleteEndpointMessage.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointArn"))
     DeleteEndpointMessage.struct_class = Types::DeleteEndpointMessage
@@ -674,6 +847,18 @@ module Aws::DatabaseMigrationService
 
     DeleteFleetAdvisorDatabasesResponse.add_member(:database_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "DatabaseIds"))
     DeleteFleetAdvisorDatabasesResponse.struct_class = Types::DeleteFleetAdvisorDatabasesResponse
+
+    DeleteInstanceProfileMessage.add_member(:instance_profile_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceProfileIdentifier"))
+    DeleteInstanceProfileMessage.struct_class = Types::DeleteInstanceProfileMessage
+
+    DeleteInstanceProfileResponse.add_member(:instance_profile, Shapes::ShapeRef.new(shape: InstanceProfile, location_name: "InstanceProfile"))
+    DeleteInstanceProfileResponse.struct_class = Types::DeleteInstanceProfileResponse
+
+    DeleteMigrationProjectMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MigrationProjectIdentifier"))
+    DeleteMigrationProjectMessage.struct_class = Types::DeleteMigrationProjectMessage
+
+    DeleteMigrationProjectResponse.add_member(:migration_project, Shapes::ShapeRef.new(shape: MigrationProject, location_name: "MigrationProject"))
+    DeleteMigrationProjectResponse.struct_class = Types::DeleteMigrationProjectResponse
 
     DeleteReplicationConfigMessage.add_member(:replication_config_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationConfigArn"))
     DeleteReplicationConfigMessage.struct_class = Types::DeleteReplicationConfigMessage
@@ -741,6 +926,22 @@ module Aws::DatabaseMigrationService
     DescribeConnectionsResponse.add_member(:connections, Shapes::ShapeRef.new(shape: ConnectionList, location_name: "Connections"))
     DescribeConnectionsResponse.struct_class = Types::DescribeConnectionsResponse
 
+    DescribeConversionConfigurationMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MigrationProjectIdentifier"))
+    DescribeConversionConfigurationMessage.struct_class = Types::DescribeConversionConfigurationMessage
+
+    DescribeConversionConfigurationResponse.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: String, location_name: "MigrationProjectIdentifier"))
+    DescribeConversionConfigurationResponse.add_member(:conversion_configuration, Shapes::ShapeRef.new(shape: String, location_name: "ConversionConfiguration"))
+    DescribeConversionConfigurationResponse.struct_class = Types::DescribeConversionConfigurationResponse
+
+    DescribeDataProvidersMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeDataProvidersMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeDataProvidersMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeDataProvidersMessage.struct_class = Types::DescribeDataProvidersMessage
+
+    DescribeDataProvidersResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeDataProvidersResponse.add_member(:data_providers, Shapes::ShapeRef.new(shape: DataProviderList, location_name: "DataProviders"))
+    DescribeDataProvidersResponse.struct_class = Types::DescribeDataProvidersResponse
+
     DescribeEndpointSettingsMessage.add_member(:engine_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EngineName"))
     DescribeEndpointSettingsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
     DescribeEndpointSettingsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
@@ -767,6 +968,14 @@ module Aws::DatabaseMigrationService
     DescribeEndpointsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribeEndpointsResponse.add_member(:endpoints, Shapes::ShapeRef.new(shape: EndpointList, location_name: "Endpoints"))
     DescribeEndpointsResponse.struct_class = Types::DescribeEndpointsResponse
+
+    DescribeEngineVersionsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeEngineVersionsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeEngineVersionsMessage.struct_class = Types::DescribeEngineVersionsMessage
+
+    DescribeEngineVersionsResponse.add_member(:engine_versions, Shapes::ShapeRef.new(shape: EngineVersionList, location_name: "EngineVersions"))
+    DescribeEngineVersionsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeEngineVersionsResponse.struct_class = Types::DescribeEngineVersionsResponse
 
     DescribeEventCategoriesMessage.add_member(:source_type, Shapes::ShapeRef.new(shape: String, location_name: "SourceType"))
     DescribeEventCategoriesMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
@@ -799,6 +1008,16 @@ module Aws::DatabaseMigrationService
     DescribeEventsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribeEventsResponse.add_member(:events, Shapes::ShapeRef.new(shape: EventList, location_name: "Events"))
     DescribeEventsResponse.struct_class = Types::DescribeEventsResponse
+
+    DescribeExtensionPackAssociationsMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MigrationProjectIdentifier"))
+    DescribeExtensionPackAssociationsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeExtensionPackAssociationsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeExtensionPackAssociationsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeExtensionPackAssociationsMessage.struct_class = Types::DescribeExtensionPackAssociationsMessage
+
+    DescribeExtensionPackAssociationsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeExtensionPackAssociationsResponse.add_member(:requests, Shapes::ShapeRef.new(shape: SchemaConversionRequestList, location_name: "Requests"))
+    DescribeExtensionPackAssociationsResponse.struct_class = Types::DescribeExtensionPackAssociationsResponse
 
     DescribeFleetAdvisorCollectorsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     DescribeFleetAdvisorCollectorsRequest.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
@@ -843,6 +1062,74 @@ module Aws::DatabaseMigrationService
     DescribeFleetAdvisorSchemasResponse.add_member(:fleet_advisor_schemas, Shapes::ShapeRef.new(shape: FleetAdvisorSchemaList, location_name: "FleetAdvisorSchemas"))
     DescribeFleetAdvisorSchemasResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeFleetAdvisorSchemasResponse.struct_class = Types::DescribeFleetAdvisorSchemasResponse
+
+    DescribeInstanceProfilesMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeInstanceProfilesMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeInstanceProfilesMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeInstanceProfilesMessage.struct_class = Types::DescribeInstanceProfilesMessage
+
+    DescribeInstanceProfilesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeInstanceProfilesResponse.add_member(:instance_profiles, Shapes::ShapeRef.new(shape: InstanceProfileList, location_name: "InstanceProfiles"))
+    DescribeInstanceProfilesResponse.struct_class = Types::DescribeInstanceProfilesResponse
+
+    DescribeMetadataModelAssessmentsMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MigrationProjectIdentifier"))
+    DescribeMetadataModelAssessmentsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeMetadataModelAssessmentsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeMetadataModelAssessmentsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeMetadataModelAssessmentsMessage.struct_class = Types::DescribeMetadataModelAssessmentsMessage
+
+    DescribeMetadataModelAssessmentsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeMetadataModelAssessmentsResponse.add_member(:requests, Shapes::ShapeRef.new(shape: SchemaConversionRequestList, location_name: "Requests"))
+    DescribeMetadataModelAssessmentsResponse.struct_class = Types::DescribeMetadataModelAssessmentsResponse
+
+    DescribeMetadataModelConversionsMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MigrationProjectIdentifier"))
+    DescribeMetadataModelConversionsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeMetadataModelConversionsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeMetadataModelConversionsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeMetadataModelConversionsMessage.struct_class = Types::DescribeMetadataModelConversionsMessage
+
+    DescribeMetadataModelConversionsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeMetadataModelConversionsResponse.add_member(:requests, Shapes::ShapeRef.new(shape: SchemaConversionRequestList, location_name: "Requests"))
+    DescribeMetadataModelConversionsResponse.struct_class = Types::DescribeMetadataModelConversionsResponse
+
+    DescribeMetadataModelExportsAsScriptMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MigrationProjectIdentifier"))
+    DescribeMetadataModelExportsAsScriptMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeMetadataModelExportsAsScriptMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeMetadataModelExportsAsScriptMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeMetadataModelExportsAsScriptMessage.struct_class = Types::DescribeMetadataModelExportsAsScriptMessage
+
+    DescribeMetadataModelExportsAsScriptResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeMetadataModelExportsAsScriptResponse.add_member(:requests, Shapes::ShapeRef.new(shape: SchemaConversionRequestList, location_name: "Requests"))
+    DescribeMetadataModelExportsAsScriptResponse.struct_class = Types::DescribeMetadataModelExportsAsScriptResponse
+
+    DescribeMetadataModelExportsToTargetMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MigrationProjectIdentifier"))
+    DescribeMetadataModelExportsToTargetMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeMetadataModelExportsToTargetMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeMetadataModelExportsToTargetMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeMetadataModelExportsToTargetMessage.struct_class = Types::DescribeMetadataModelExportsToTargetMessage
+
+    DescribeMetadataModelExportsToTargetResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeMetadataModelExportsToTargetResponse.add_member(:requests, Shapes::ShapeRef.new(shape: SchemaConversionRequestList, location_name: "Requests"))
+    DescribeMetadataModelExportsToTargetResponse.struct_class = Types::DescribeMetadataModelExportsToTargetResponse
+
+    DescribeMetadataModelImportsMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MigrationProjectIdentifier"))
+    DescribeMetadataModelImportsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeMetadataModelImportsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeMetadataModelImportsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeMetadataModelImportsMessage.struct_class = Types::DescribeMetadataModelImportsMessage
+
+    DescribeMetadataModelImportsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeMetadataModelImportsResponse.add_member(:requests, Shapes::ShapeRef.new(shape: SchemaConversionRequestList, location_name: "Requests"))
+    DescribeMetadataModelImportsResponse.struct_class = Types::DescribeMetadataModelImportsResponse
+
+    DescribeMigrationProjectsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeMigrationProjectsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeMigrationProjectsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeMigrationProjectsMessage.struct_class = Types::DescribeMigrationProjectsMessage
+
+    DescribeMigrationProjectsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeMigrationProjectsResponse.add_member(:migration_projects, Shapes::ShapeRef.new(shape: MigrationProjectList, location_name: "MigrationProjects"))
+    DescribeMigrationProjectsResponse.struct_class = Types::DescribeMigrationProjectsResponse
 
     DescribeOrderableReplicationInstancesMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
     DescribeOrderableReplicationInstancesMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
@@ -1085,6 +1372,24 @@ module Aws::DatabaseMigrationService
 
     EndpointSettingsList.member = Shapes::ShapeRef.new(shape: EndpointSetting)
 
+    EngineVersion.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "Version"))
+    EngineVersion.add_member(:lifecycle, Shapes::ShapeRef.new(shape: String, location_name: "Lifecycle"))
+    EngineVersion.add_member(:release_status, Shapes::ShapeRef.new(shape: ReleaseStatusValues, location_name: "ReleaseStatus"))
+    EngineVersion.add_member(:launch_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "LaunchDate"))
+    EngineVersion.add_member(:auto_upgrade_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "AutoUpgradeDate"))
+    EngineVersion.add_member(:deprecation_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "DeprecationDate"))
+    EngineVersion.add_member(:force_upgrade_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "ForceUpgradeDate"))
+    EngineVersion.add_member(:available_upgrades, Shapes::ShapeRef.new(shape: AvailableUpgradesList, location_name: "AvailableUpgrades"))
+    EngineVersion.struct_class = Types::EngineVersion
+
+    EngineVersionList.member = Shapes::ShapeRef.new(shape: EngineVersion)
+
+    ErrorDetails.add_member(:default_error_details, Shapes::ShapeRef.new(shape: DefaultErrorDetails, location_name: "defaultErrorDetails"))
+    ErrorDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ErrorDetails.add_member_subclass(:default_error_details, Types::ErrorDetails::DefaultErrorDetails)
+    ErrorDetails.add_member_subclass(:unknown, Types::ErrorDetails::Unknown)
+    ErrorDetails.struct_class = Types::ErrorDetails
+
     Event.add_member(:source_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SourceIdentifier"))
     Event.add_member(:source_type, Shapes::ShapeRef.new(shape: SourceType, location_name: "SourceType"))
     Event.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -1116,6 +1421,24 @@ module Aws::DatabaseMigrationService
     EventSubscriptionsList.member = Shapes::ShapeRef.new(shape: EventSubscription)
 
     ExcludeTestList.member = Shapes::ShapeRef.new(shape: String)
+
+    ExportMetadataModelAssessmentMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MigrationProjectIdentifier"))
+    ExportMetadataModelAssessmentMessage.add_member(:selection_rules, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SelectionRules"))
+    ExportMetadataModelAssessmentMessage.add_member(:file_name, Shapes::ShapeRef.new(shape: String, location_name: "FileName"))
+    ExportMetadataModelAssessmentMessage.add_member(:assessment_report_types, Shapes::ShapeRef.new(shape: AssessmentReportTypesList, location_name: "AssessmentReportTypes"))
+    ExportMetadataModelAssessmentMessage.struct_class = Types::ExportMetadataModelAssessmentMessage
+
+    ExportMetadataModelAssessmentResponse.add_member(:pdf_report, Shapes::ShapeRef.new(shape: ExportMetadataModelAssessmentResultEntry, location_name: "PdfReport"))
+    ExportMetadataModelAssessmentResponse.add_member(:csv_report, Shapes::ShapeRef.new(shape: ExportMetadataModelAssessmentResultEntry, location_name: "CsvReport"))
+    ExportMetadataModelAssessmentResponse.struct_class = Types::ExportMetadataModelAssessmentResponse
+
+    ExportMetadataModelAssessmentResultEntry.add_member(:s3_object_key, Shapes::ShapeRef.new(shape: String, location_name: "S3ObjectKey"))
+    ExportMetadataModelAssessmentResultEntry.add_member(:object_url, Shapes::ShapeRef.new(shape: String, location_name: "ObjectURL"))
+    ExportMetadataModelAssessmentResultEntry.struct_class = Types::ExportMetadataModelAssessmentResultEntry
+
+    ExportSqlDetails.add_member(:s3_object_key, Shapes::ShapeRef.new(shape: String, location_name: "S3ObjectKey"))
+    ExportSqlDetails.add_member(:object_url, Shapes::ShapeRef.new(shape: String, location_name: "ObjectURL"))
+    ExportSqlDetails.struct_class = Types::ExportSqlDetails
 
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     Filter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValueList, required: true, location_name: "Values"))
@@ -1182,6 +1505,20 @@ module Aws::DatabaseMigrationService
     IncludeTestList.member = Shapes::ShapeRef.new(shape: String)
 
     IndividualAssessmentNameList.member = Shapes::ShapeRef.new(shape: String)
+
+    InstanceProfile.add_member(:instance_profile_arn, Shapes::ShapeRef.new(shape: String, location_name: "InstanceProfileArn"))
+    InstanceProfile.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
+    InstanceProfile.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyArn"))
+    InstanceProfile.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "PubliclyAccessible"))
+    InstanceProfile.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
+    InstanceProfile.add_member(:instance_profile_name, Shapes::ShapeRef.new(shape: String, location_name: "InstanceProfileName"))
+    InstanceProfile.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    InstanceProfile.add_member(:instance_profile_creation_time, Shapes::ShapeRef.new(shape: Iso8601DateTime, location_name: "InstanceProfileCreationTime"))
+    InstanceProfile.add_member(:subnet_group_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SubnetGroupIdentifier"))
+    InstanceProfile.add_member(:vpc_security_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "VpcSecurityGroups"))
+    InstanceProfile.struct_class = Types::InstanceProfile
+
+    InstanceProfileList.member = Shapes::ShapeRef.new(shape: InstanceProfile)
 
     InsufficientResourceCapacityFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     InsufficientResourceCapacityFault.struct_class = Types::InsufficientResourceCapacityFault
@@ -1297,6 +1634,45 @@ module Aws::DatabaseMigrationService
     MicrosoftSQLServerSettings.add_member(:force_lob_lookup, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ForceLobLookup"))
     MicrosoftSQLServerSettings.struct_class = Types::MicrosoftSQLServerSettings
 
+    MicrosoftSqlServerDataProviderSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
+    MicrosoftSqlServerDataProviderSettings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
+    MicrosoftSqlServerDataProviderSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
+    MicrosoftSqlServerDataProviderSettings.add_member(:ssl_mode, Shapes::ShapeRef.new(shape: DmsSslModeValue, location_name: "SslMode"))
+    MicrosoftSqlServerDataProviderSettings.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CertificateArn"))
+    MicrosoftSqlServerDataProviderSettings.struct_class = Types::MicrosoftSqlServerDataProviderSettings
+
+    MigrationProject.add_member(:migration_project_name, Shapes::ShapeRef.new(shape: String, location_name: "MigrationProjectName"))
+    MigrationProject.add_member(:migration_project_arn, Shapes::ShapeRef.new(shape: String, location_name: "MigrationProjectArn"))
+    MigrationProject.add_member(:migration_project_creation_time, Shapes::ShapeRef.new(shape: Iso8601DateTime, location_name: "MigrationProjectCreationTime"))
+    MigrationProject.add_member(:source_data_provider_descriptors, Shapes::ShapeRef.new(shape: DataProviderDescriptorList, location_name: "SourceDataProviderDescriptors"))
+    MigrationProject.add_member(:target_data_provider_descriptors, Shapes::ShapeRef.new(shape: DataProviderDescriptorList, location_name: "TargetDataProviderDescriptors"))
+    MigrationProject.add_member(:instance_profile_arn, Shapes::ShapeRef.new(shape: String, location_name: "InstanceProfileArn"))
+    MigrationProject.add_member(:instance_profile_name, Shapes::ShapeRef.new(shape: String, location_name: "InstanceProfileName"))
+    MigrationProject.add_member(:transformation_rules, Shapes::ShapeRef.new(shape: String, location_name: "TransformationRules"))
+    MigrationProject.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    MigrationProject.add_member(:schema_conversion_application_attributes, Shapes::ShapeRef.new(shape: SCApplicationAttributes, location_name: "SchemaConversionApplicationAttributes"))
+    MigrationProject.struct_class = Types::MigrationProject
+
+    MigrationProjectList.member = Shapes::ShapeRef.new(shape: MigrationProject)
+
+    ModifyConversionConfigurationMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MigrationProjectIdentifier"))
+    ModifyConversionConfigurationMessage.add_member(:conversion_configuration, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ConversionConfiguration"))
+    ModifyConversionConfigurationMessage.struct_class = Types::ModifyConversionConfigurationMessage
+
+    ModifyConversionConfigurationResponse.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: String, location_name: "MigrationProjectIdentifier"))
+    ModifyConversionConfigurationResponse.struct_class = Types::ModifyConversionConfigurationResponse
+
+    ModifyDataProviderMessage.add_member(:data_provider_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataProviderIdentifier"))
+    ModifyDataProviderMessage.add_member(:data_provider_name, Shapes::ShapeRef.new(shape: String, location_name: "DataProviderName"))
+    ModifyDataProviderMessage.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    ModifyDataProviderMessage.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
+    ModifyDataProviderMessage.add_member(:exact_settings, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ExactSettings"))
+    ModifyDataProviderMessage.add_member(:settings, Shapes::ShapeRef.new(shape: DataProviderSettings, location_name: "Settings"))
+    ModifyDataProviderMessage.struct_class = Types::ModifyDataProviderMessage
+
+    ModifyDataProviderResponse.add_member(:data_provider, Shapes::ShapeRef.new(shape: DataProvider, location_name: "DataProvider"))
+    ModifyDataProviderResponse.struct_class = Types::ModifyDataProviderResponse
+
     ModifyEndpointMessage.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointArn"))
     ModifyEndpointMessage.add_member(:endpoint_identifier, Shapes::ShapeRef.new(shape: String, location_name: "EndpointIdentifier"))
     ModifyEndpointMessage.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: ReplicationEndpointTypeValue, location_name: "EndpointType"))
@@ -1345,6 +1721,33 @@ module Aws::DatabaseMigrationService
 
     ModifyEventSubscriptionResponse.add_member(:event_subscription, Shapes::ShapeRef.new(shape: EventSubscription, location_name: "EventSubscription"))
     ModifyEventSubscriptionResponse.struct_class = Types::ModifyEventSubscriptionResponse
+
+    ModifyInstanceProfileMessage.add_member(:instance_profile_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceProfileIdentifier"))
+    ModifyInstanceProfileMessage.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
+    ModifyInstanceProfileMessage.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyArn"))
+    ModifyInstanceProfileMessage.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "PubliclyAccessible"))
+    ModifyInstanceProfileMessage.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
+    ModifyInstanceProfileMessage.add_member(:instance_profile_name, Shapes::ShapeRef.new(shape: String, location_name: "InstanceProfileName"))
+    ModifyInstanceProfileMessage.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    ModifyInstanceProfileMessage.add_member(:subnet_group_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SubnetGroupIdentifier"))
+    ModifyInstanceProfileMessage.add_member(:vpc_security_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "VpcSecurityGroups"))
+    ModifyInstanceProfileMessage.struct_class = Types::ModifyInstanceProfileMessage
+
+    ModifyInstanceProfileResponse.add_member(:instance_profile, Shapes::ShapeRef.new(shape: InstanceProfile, location_name: "InstanceProfile"))
+    ModifyInstanceProfileResponse.struct_class = Types::ModifyInstanceProfileResponse
+
+    ModifyMigrationProjectMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MigrationProjectIdentifier"))
+    ModifyMigrationProjectMessage.add_member(:migration_project_name, Shapes::ShapeRef.new(shape: String, location_name: "MigrationProjectName"))
+    ModifyMigrationProjectMessage.add_member(:source_data_provider_descriptors, Shapes::ShapeRef.new(shape: DataProviderDescriptorDefinitionList, location_name: "SourceDataProviderDescriptors"))
+    ModifyMigrationProjectMessage.add_member(:target_data_provider_descriptors, Shapes::ShapeRef.new(shape: DataProviderDescriptorDefinitionList, location_name: "TargetDataProviderDescriptors"))
+    ModifyMigrationProjectMessage.add_member(:instance_profile_identifier, Shapes::ShapeRef.new(shape: String, location_name: "InstanceProfileIdentifier"))
+    ModifyMigrationProjectMessage.add_member(:transformation_rules, Shapes::ShapeRef.new(shape: String, location_name: "TransformationRules"))
+    ModifyMigrationProjectMessage.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    ModifyMigrationProjectMessage.add_member(:schema_conversion_application_attributes, Shapes::ShapeRef.new(shape: SCApplicationAttributes, location_name: "SchemaConversionApplicationAttributes"))
+    ModifyMigrationProjectMessage.struct_class = Types::ModifyMigrationProjectMessage
+
+    ModifyMigrationProjectResponse.add_member(:migration_project, Shapes::ShapeRef.new(shape: MigrationProject, location_name: "MigrationProject"))
+    ModifyMigrationProjectResponse.struct_class = Types::ModifyMigrationProjectResponse
 
     ModifyReplicationConfigMessage.add_member(:replication_config_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationConfigArn"))
     ModifyReplicationConfigMessage.add_member(:replication_config_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationConfigIdentifier"))
@@ -1440,6 +1843,12 @@ module Aws::DatabaseMigrationService
     MySQLSettings.add_member(:secrets_manager_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecretId"))
     MySQLSettings.struct_class = Types::MySQLSettings
 
+    MySqlDataProviderSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
+    MySqlDataProviderSettings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
+    MySqlDataProviderSettings.add_member(:ssl_mode, Shapes::ShapeRef.new(shape: DmsSslModeValue, location_name: "SslMode"))
+    MySqlDataProviderSettings.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CertificateArn"))
+    MySqlDataProviderSettings.struct_class = Types::MySqlDataProviderSettings
+
     NeptuneSettings.add_member(:service_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "ServiceAccessRoleArn"))
     NeptuneSettings.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "S3BucketName"))
     NeptuneSettings.add_member(:s3_bucket_folder, Shapes::ShapeRef.new(shape: String, required: true, location_name: "S3BucketFolder"))
@@ -1448,6 +1857,18 @@ module Aws::DatabaseMigrationService
     NeptuneSettings.add_member(:max_retry_count, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRetryCount"))
     NeptuneSettings.add_member(:iam_auth_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IamAuthEnabled"))
     NeptuneSettings.struct_class = Types::NeptuneSettings
+
+    OracleDataProviderSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
+    OracleDataProviderSettings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
+    OracleDataProviderSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
+    OracleDataProviderSettings.add_member(:ssl_mode, Shapes::ShapeRef.new(shape: DmsSslModeValue, location_name: "SslMode"))
+    OracleDataProviderSettings.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CertificateArn"))
+    OracleDataProviderSettings.add_member(:asm_server, Shapes::ShapeRef.new(shape: String, location_name: "AsmServer"))
+    OracleDataProviderSettings.add_member(:secrets_manager_oracle_asm_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerOracleAsmSecretId"))
+    OracleDataProviderSettings.add_member(:secrets_manager_oracle_asm_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerOracleAsmAccessRoleArn"))
+    OracleDataProviderSettings.add_member(:secrets_manager_security_db_encryption_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecurityDbEncryptionSecretId"))
+    OracleDataProviderSettings.add_member(:secrets_manager_security_db_encryption_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecurityDbEncryptionAccessRoleArn"))
+    OracleDataProviderSettings.struct_class = Types::OracleDataProviderSettings
 
     OracleSettings.add_member(:add_supplemental_logging, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AddSupplementalLogging"))
     OracleSettings.add_member(:archived_log_dest_id, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ArchivedLogDestId"))
@@ -1541,7 +1962,16 @@ module Aws::DatabaseMigrationService
     PostgreSQLSettings.add_member(:map_boolean_as_boolean, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MapBooleanAsBoolean"))
     PostgreSQLSettings.add_member(:map_jsonb_as_clob, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MapJsonbAsClob"))
     PostgreSQLSettings.add_member(:map_long_varchar_as, Shapes::ShapeRef.new(shape: LongVarcharMappingType, location_name: "MapLongVarcharAs"))
+    PostgreSQLSettings.add_member(:database_mode, Shapes::ShapeRef.new(shape: DatabaseMode, location_name: "DatabaseMode"))
+    PostgreSQLSettings.add_member(:babelfish_database_name, Shapes::ShapeRef.new(shape: String, location_name: "BabelfishDatabaseName"))
     PostgreSQLSettings.struct_class = Types::PostgreSQLSettings
+
+    PostgreSqlDataProviderSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
+    PostgreSqlDataProviderSettings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
+    PostgreSqlDataProviderSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
+    PostgreSqlDataProviderSettings.add_member(:ssl_mode, Shapes::ShapeRef.new(shape: DmsSslModeValue, location_name: "SslMode"))
+    PostgreSqlDataProviderSettings.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CertificateArn"))
+    PostgreSqlDataProviderSettings.struct_class = Types::PostgreSqlDataProviderSettings
 
     ProvisionData.add_member(:provision_state, Shapes::ShapeRef.new(shape: String, location_name: "ProvisionState"))
     ProvisionData.add_member(:provisioned_capacity_units, Shapes::ShapeRef.new(shape: Integer, location_name: "ProvisionedCapacityUnits"))
@@ -1936,11 +2366,24 @@ module Aws::DatabaseMigrationService
     S3Settings.add_member(:glue_catalog_generation, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "GlueCatalogGeneration"))
     S3Settings.struct_class = Types::S3Settings
 
+    SCApplicationAttributes.add_member(:s3_bucket_path, Shapes::ShapeRef.new(shape: String, location_name: "S3BucketPath"))
+    SCApplicationAttributes.add_member(:s3_bucket_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "S3BucketRoleArn"))
+    SCApplicationAttributes.struct_class = Types::SCApplicationAttributes
+
     SNSInvalidTopicFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     SNSInvalidTopicFault.struct_class = Types::SNSInvalidTopicFault
 
     SNSNoAuthorizationFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     SNSNoAuthorizationFault.struct_class = Types::SNSNoAuthorizationFault
+
+    SchemaConversionRequest.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    SchemaConversionRequest.add_member(:request_identifier, Shapes::ShapeRef.new(shape: String, location_name: "RequestIdentifier"))
+    SchemaConversionRequest.add_member(:migration_project_arn, Shapes::ShapeRef.new(shape: String, location_name: "MigrationProjectArn"))
+    SchemaConversionRequest.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "Error"))
+    SchemaConversionRequest.add_member(:export_sql_details, Shapes::ShapeRef.new(shape: ExportSqlDetails, location_name: "ExportSqlDetails"))
+    SchemaConversionRequest.struct_class = Types::SchemaConversionRequest
+
+    SchemaConversionRequestList.member = Shapes::ShapeRef.new(shape: SchemaConversionRequest)
 
     SchemaList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -1968,6 +2411,52 @@ module Aws::DatabaseMigrationService
     ServerShortInfoResponse.struct_class = Types::ServerShortInfoResponse
 
     SourceIdsList.member = Shapes::ShapeRef.new(shape: String)
+
+    StartExtensionPackAssociationMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MigrationProjectIdentifier"))
+    StartExtensionPackAssociationMessage.struct_class = Types::StartExtensionPackAssociationMessage
+
+    StartExtensionPackAssociationResponse.add_member(:request_identifier, Shapes::ShapeRef.new(shape: String, location_name: "RequestIdentifier"))
+    StartExtensionPackAssociationResponse.struct_class = Types::StartExtensionPackAssociationResponse
+
+    StartMetadataModelAssessmentMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MigrationProjectIdentifier"))
+    StartMetadataModelAssessmentMessage.add_member(:selection_rules, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SelectionRules"))
+    StartMetadataModelAssessmentMessage.struct_class = Types::StartMetadataModelAssessmentMessage
+
+    StartMetadataModelAssessmentResponse.add_member(:request_identifier, Shapes::ShapeRef.new(shape: String, location_name: "RequestIdentifier"))
+    StartMetadataModelAssessmentResponse.struct_class = Types::StartMetadataModelAssessmentResponse
+
+    StartMetadataModelConversionMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MigrationProjectIdentifier"))
+    StartMetadataModelConversionMessage.add_member(:selection_rules, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SelectionRules"))
+    StartMetadataModelConversionMessage.struct_class = Types::StartMetadataModelConversionMessage
+
+    StartMetadataModelConversionResponse.add_member(:request_identifier, Shapes::ShapeRef.new(shape: String, location_name: "RequestIdentifier"))
+    StartMetadataModelConversionResponse.struct_class = Types::StartMetadataModelConversionResponse
+
+    StartMetadataModelExportAsScriptMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MigrationProjectIdentifier"))
+    StartMetadataModelExportAsScriptMessage.add_member(:selection_rules, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SelectionRules"))
+    StartMetadataModelExportAsScriptMessage.add_member(:origin, Shapes::ShapeRef.new(shape: OriginTypeValue, required: true, location_name: "Origin"))
+    StartMetadataModelExportAsScriptMessage.add_member(:file_name, Shapes::ShapeRef.new(shape: String, location_name: "FileName"))
+    StartMetadataModelExportAsScriptMessage.struct_class = Types::StartMetadataModelExportAsScriptMessage
+
+    StartMetadataModelExportAsScriptResponse.add_member(:request_identifier, Shapes::ShapeRef.new(shape: String, location_name: "RequestIdentifier"))
+    StartMetadataModelExportAsScriptResponse.struct_class = Types::StartMetadataModelExportAsScriptResponse
+
+    StartMetadataModelExportToTargetMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MigrationProjectIdentifier"))
+    StartMetadataModelExportToTargetMessage.add_member(:selection_rules, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SelectionRules"))
+    StartMetadataModelExportToTargetMessage.add_member(:overwrite_extension_pack, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "OverwriteExtensionPack"))
+    StartMetadataModelExportToTargetMessage.struct_class = Types::StartMetadataModelExportToTargetMessage
+
+    StartMetadataModelExportToTargetResponse.add_member(:request_identifier, Shapes::ShapeRef.new(shape: String, location_name: "RequestIdentifier"))
+    StartMetadataModelExportToTargetResponse.struct_class = Types::StartMetadataModelExportToTargetResponse
+
+    StartMetadataModelImportMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MigrationProjectIdentifier"))
+    StartMetadataModelImportMessage.add_member(:selection_rules, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SelectionRules"))
+    StartMetadataModelImportMessage.add_member(:origin, Shapes::ShapeRef.new(shape: OriginTypeValue, required: true, location_name: "Origin"))
+    StartMetadataModelImportMessage.add_member(:refresh, Shapes::ShapeRef.new(shape: Boolean, location_name: "Refresh"))
+    StartMetadataModelImportMessage.struct_class = Types::StartMetadataModelImportMessage
+
+    StartMetadataModelImportResponse.add_member(:request_identifier, Shapes::ShapeRef.new(shape: String, location_name: "RequestIdentifier"))
+    StartMetadataModelImportResponse.struct_class = Types::StartMetadataModelImportResponse
 
     StartRecommendationsRequest.add_member(:database_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DatabaseId"))
     StartRecommendationsRequest.add_member(:settings, Shapes::ShapeRef.new(shape: RecommendationSettings, required: true, location_name: "Settings"))
@@ -2195,6 +2684,17 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
       end)
 
+      api.add_operation(:create_data_provider, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDataProvider"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateDataProviderMessage)
+        o.output = Shapes::ShapeRef.new(shape: CreateDataProviderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsFault)
+      end)
+
       api.add_operation(:create_endpoint, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateEndpoint"
         o.http_method = "POST"
@@ -2239,6 +2739,36 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: S3AccessDeniedFault)
         o.errors << Shapes::ShapeRef.new(shape: S3ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
+      end)
+
+      api.add_operation(:create_instance_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateInstanceProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateInstanceProfileMessage)
+        o.output = Shapes::ShapeRef.new(shape: CreateInstanceProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: S3ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: S3AccessDeniedFault)
+      end)
+
+      api.add_operation(:create_migration_project, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateMigrationProject"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateMigrationProjectMessage)
+        o.output = Shapes::ShapeRef.new(shape: CreateMigrationProjectResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: S3ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: S3AccessDeniedFault)
       end)
 
       api.add_operation(:create_replication_config, Seahorse::Model::Operation.new.tap do |o|
@@ -2324,6 +2854,17 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
       end)
 
+      api.add_operation(:delete_data_provider, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDataProvider"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDataProviderMessage)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDataProviderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+      end)
+
       api.add_operation(:delete_endpoint, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteEndpoint"
         o.http_method = "POST"
@@ -2362,6 +2903,28 @@ module Aws::DatabaseMigrationService
         o.output = Shapes::ShapeRef.new(shape: DeleteFleetAdvisorDatabasesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidOperationFault)
+      end)
+
+      api.add_operation(:delete_instance_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteInstanceProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteInstanceProfileMessage)
+        o.output = Shapes::ShapeRef.new(shape: DeleteInstanceProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+      end)
+
+      api.add_operation(:delete_migration_project, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteMigrationProject"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteMigrationProjectMessage)
+        o.output = Shapes::ShapeRef.new(shape: DeleteMigrationProjectResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
       end)
 
       api.add_operation(:delete_replication_config, Seahorse::Model::Operation.new.tap do |o|
@@ -2471,6 +3034,31 @@ module Aws::DatabaseMigrationService
         )
       end)
 
+      api.add_operation(:describe_conversion_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeConversionConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeConversionConfigurationMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeConversionConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+      end)
+
+      api.add_operation(:describe_data_providers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDataProviders"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDataProvidersMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDataProvidersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
       api.add_operation(:describe_endpoint_settings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeEndpointSettings"
         o.http_method = "POST"
@@ -2514,6 +3102,20 @@ module Aws::DatabaseMigrationService
         )
       end)
 
+      api.add_operation(:describe_engine_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeEngineVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeEngineVersionsMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeEngineVersionsResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
       api.add_operation(:describe_event_categories, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeEventCategories"
         o.http_method = "POST"
@@ -2543,6 +3145,20 @@ module Aws::DatabaseMigrationService
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeEventsMessage)
         o.output = Shapes::ShapeRef.new(shape: DescribeEventsResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_extension_pack_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeExtensionPackAssociations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeExtensionPackAssociationsMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeExtensionPackAssociationsResponse)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_records",
           tokens: {
@@ -2622,6 +3238,113 @@ module Aws::DatabaseMigrationService
           limit_key: "max_records",
           tokens: {
             "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_instance_profiles, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeInstanceProfiles"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeInstanceProfilesMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeInstanceProfilesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_metadata_model_assessments, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeMetadataModelAssessments"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeMetadataModelAssessmentsMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeMetadataModelAssessmentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_metadata_model_conversions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeMetadataModelConversions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeMetadataModelConversionsMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeMetadataModelConversionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_metadata_model_exports_as_script, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeMetadataModelExportsAsScript"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeMetadataModelExportsAsScriptMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeMetadataModelExportsAsScriptResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_metadata_model_exports_to_target, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeMetadataModelExportsToTarget"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeMetadataModelExportsToTargetMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeMetadataModelExportsToTargetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_metadata_model_imports, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeMetadataModelImports"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeMetadataModelImportsMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeMetadataModelImportsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_migration_projects, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeMigrationProjects"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeMigrationProjectsMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeMigrationProjectsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
           }
         )
       end)
@@ -2881,6 +3604,15 @@ module Aws::DatabaseMigrationService
         )
       end)
 
+      api.add_operation(:export_metadata_model_assessment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ExportMetadataModelAssessment"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ExportMetadataModelAssessmentMessage)
+        o.output = Shapes::ShapeRef.new(shape: ExportMetadataModelAssessmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+      end)
+
       api.add_operation(:import_certificate, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ImportCertificate"
         o.http_method = "POST"
@@ -2899,6 +3631,27 @@ module Aws::DatabaseMigrationService
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceMessage)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+      end)
+
+      api.add_operation(:modify_conversion_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyConversionConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyConversionConfigurationMessage)
+        o.output = Shapes::ShapeRef.new(shape: ModifyConversionConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+      end)
+
+      api.add_operation(:modify_data_provider, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyDataProvider"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyDataProviderMessage)
+        o.output = Shapes::ShapeRef.new(shape: ModifyDataProviderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
       end)
 
       api.add_operation(:modify_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -2929,6 +3682,33 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSThrottlingFault)
+      end)
+
+      api.add_operation(:modify_instance_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyInstanceProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyInstanceProfileMessage)
+        o.output = Shapes::ShapeRef.new(shape: ModifyInstanceProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: S3ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: S3AccessDeniedFault)
+      end)
+
+      api.add_operation(:modify_migration_project, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyMigrationProject"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyMigrationProjectMessage)
+        o.output = Shapes::ShapeRef.new(shape: ModifyMigrationProjectResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: S3ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: S3AccessDeniedFault)
       end)
 
       api.add_operation(:modify_replication_config, Seahorse::Model::Operation.new.tap do |o|
@@ -3058,6 +3838,102 @@ module Aws::DatabaseMigrationService
         o.output = Shapes::ShapeRef.new(shape: RunFleetAdvisorLsaAnalysisResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+      end)
+
+      api.add_operation(:start_extension_pack_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartExtensionPackAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartExtensionPackAssociationMessage)
+        o.output = Shapes::ShapeRef.new(shape: StartExtensionPackAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: S3ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: S3AccessDeniedFault)
+      end)
+
+      api.add_operation(:start_metadata_model_assessment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMetadataModelAssessment"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartMetadataModelAssessmentMessage)
+        o.output = Shapes::ShapeRef.new(shape: StartMetadataModelAssessmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: S3ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: S3AccessDeniedFault)
+      end)
+
+      api.add_operation(:start_metadata_model_conversion, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMetadataModelConversion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartMetadataModelConversionMessage)
+        o.output = Shapes::ShapeRef.new(shape: StartMetadataModelConversionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: S3ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: S3AccessDeniedFault)
+      end)
+
+      api.add_operation(:start_metadata_model_export_as_script, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMetadataModelExportAsScript"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartMetadataModelExportAsScriptMessage)
+        o.output = Shapes::ShapeRef.new(shape: StartMetadataModelExportAsScriptResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: S3ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: S3AccessDeniedFault)
+      end)
+
+      api.add_operation(:start_metadata_model_export_to_target, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMetadataModelExportToTarget"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartMetadataModelExportToTargetMessage)
+        o.output = Shapes::ShapeRef.new(shape: StartMetadataModelExportToTargetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: S3ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: S3AccessDeniedFault)
+      end)
+
+      api.add_operation(:start_metadata_model_import, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMetadataModelImport"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartMetadataModelImportMessage)
+        o.output = Shapes::ShapeRef.new(shape: StartMetadataModelImportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: S3ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: S3AccessDeniedFault)
       end)
 
       api.add_operation(:start_recommendations, Seahorse::Model::Operation.new.tap do |o|
