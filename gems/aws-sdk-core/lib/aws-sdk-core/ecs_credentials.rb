@@ -20,6 +20,9 @@ module Aws
     # Raised when the token file cannot be read.
     class TokenFileReadError < RuntimeError; end
 
+    # Raised when the token file is invalid.
+    class InvalidTokenError < RuntimeError; end
+
     # These are the errors we trap when attempting to talk to the
     # instance metadata service.  Any of these imply the service
     # is not present, no responding or some other non-recoverable
@@ -132,11 +135,11 @@ module Aws
 
       raise ArgumentError,
             'AWS_CONTAINER_CREDENTIALS_FULL_URI must use a loopback '\
-            'or a link-local address when using the http scheme.'
+            'or an ECS or EKS link-local address when using the http scheme.'
     end
 
     def valid_ip_address?(ip_address)
-      ip_loopback?(ip_address) || ip_link_local?(ip_address)
+      ip_loopback?(ip_address) || ecs_or_eks_ip?(ip_address)
     end
 
     # loopback? method is available in Ruby 2.5+
@@ -153,16 +156,15 @@ module Aws
       end
     end
 
-    # link_local? method is available in Ruby 2.5+
-    # Replicate the logic here.
-    # link-local (IPv4 169.254.0.0/16, IPv6 fe80::/10)
-    def ip_link_local?(ip_address)
+    # Verify that the IP address is a link-local address from ECS or EKS.
+    # ECS container host (IPv4 `169.254.170.2`)
+    # EKS container host (IPv4 `169.254.170.23`, IPv6 `fd00:ec2::23`)
+    def ecs_or_eks_ip?(ip_address)
       case ip_address.family
       when Socket::AF_INET
-        ip_address & 0xffff0000 == 0xa9fe0000
+        [0xa9feaa02, 0xa9feaa17].include?(ip_address)
       when Socket::AF_INET6
-        ip_address & 0xffc0_0000_0000_0000_0000_0000_0000_0000 ==
-          0xfe80_0000_0000_0000_0000_0000_0000_0000
+        ip_address == 0xfd00_0ec2_0000_0000_0000_0000_0000_0023
       else
         false
       end
@@ -203,7 +205,7 @@ module Aws
           http_get(conn, @credential_path)
         end
       end
-    rescue TokenFileReadError
+    rescue TokenFileReadError, InvalidTokenError
       raise
     rescue StandardError
       '{}'
@@ -225,6 +227,14 @@ module Aws
             "but the file doesn't exist: #{path}"
     end
 
+    def validate_authorization_token!(token)
+      return unless token.include?("\r\n")
+
+      raise InvalidTokenError,
+            'Invalid Authorization token: token contains '\
+            'a newline and carriage return character.'
+    end
+
     def open_connection
       http = Net::HTTP.new(@host, @port, nil)
       http.open_timeout = @http_open_timeout
@@ -237,12 +247,18 @@ module Aws
 
     def http_get(connection, path)
       request = Net::HTTP::Get.new(path)
-      authorization_token = fetch_authorization_token
-      request['Authorization'] = authorization_token if authorization_token
+      set_authorization_token(request)
       response = connection.request(request)
       raise Non200Response unless response.code.to_i == 200
 
       response.body
+    end
+
+    def set_authorization_token(request)
+      if (authorization_token = fetch_authorization_token)
+        validate_authorization_token!(authorization_token)
+        request['Authorization'] = authorization_token
+      end
     end
 
     def retry_errors(error_classes, options = {})
@@ -250,7 +266,7 @@ module Aws
       retries = 0
       begin
         yield
-      rescue TokenFileReadError
+      rescue TokenFileReadError, InvalidTokenError
         raise
       rescue *error_classes => _e
         raise unless retries < max_retries

@@ -187,6 +187,33 @@ module Aws
           end.to raise_error(ArgumentError)
         end
       end
+
+      context 'validating token' do
+        context 'AWS_CONTAINER_AUTHORIZATION_TOKEN' do
+          before do
+            ENV['AWS_CONTAINER_AUTHORIZATION_TOKEN'] = "bad\r\ntoken"
+          end
+
+          it 'validates the token for carriage return and newline' do
+            expect do
+              ECSCredentials.new(backoff: 0)
+            end.to raise_error(ECSCredentials::InvalidTokenError)
+          end
+        end
+
+        context 'AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE' do
+          before do
+            expect(File).to receive(:read).and_return("bad\r\ntoken")
+            ENV['AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE'] = '/some/path/to/file'
+          end
+
+          it 'validates the token for carriage return and newline' do
+            expect do
+              ECSCredentials.new(backoff: 0)
+            end.to raise_error(ECSCredentials::InvalidTokenError)
+          end
+        end
+      end
     end
 
     # This section is redundant with json runner tests, but keeping anyway
@@ -314,7 +341,7 @@ module Aws
           if expect['type'] == 'error'
             error = ArgumentError
             if expect['reason'] =~ /failed to read authorization token/
-              error = Aws::ECSCredentials::TokenFileReadError
+              error = ECSCredentials::TokenFileReadError
             end
             expect { ECSCredentials.new }.to raise_error(error)
           elsif expect['type'] == 'success'
@@ -343,13 +370,12 @@ module Aws
 
       def handle_expectation(expect)
         # hacky, but test cases assume we throw errors
+        # our credential providers just return nil when not set
         case expect['reason']
-        when /401 Unauthorized/, /429 Too Many Requests/, /missing required field/
+        when /301 Moved Permanently/, /401 Unauthorized/,
+             /429 Too Many Requests/, /500 Internal Server Error/
           creds = ECSCredentials.new(backoff: 0)
           expect(creds.set?).to be(false)
-        when /invalid field Expiration/
-          expect { ECSCredentials.new(backoff: 0) }
-            .to raise_error(ArgumentError, /invalid date|invalid xmlschema/)
         else
           expect { ECSCredentials.new(backoff: 0) }
             .to raise_error(RuntimeError)
