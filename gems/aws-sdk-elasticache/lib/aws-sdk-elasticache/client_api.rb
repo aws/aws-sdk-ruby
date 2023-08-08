@@ -348,6 +348,8 @@ module Aws::ElastiCache
     TestFailoverMessage = Shapes::StructureShape.new(name: 'TestFailoverMessage')
     TestFailoverNotAvailableFault = Shapes::StructureShape.new(name: 'TestFailoverNotAvailableFault')
     TestFailoverResult = Shapes::StructureShape.new(name: 'TestFailoverResult')
+    TestMigrationMessage = Shapes::StructureShape.new(name: 'TestMigrationMessage')
+    TestMigrationResponse = Shapes::StructureShape.new(name: 'TestMigrationResponse')
     TimeRangeFilter = Shapes::StructureShape.new(name: 'TimeRangeFilter')
     TransitEncryptionMode = Shapes::StringShape.new(name: 'TransitEncryptionMode')
     UGReplicationGroupIdList = Shapes::ListShape.new(name: 'UGReplicationGroupIdList')
@@ -1715,6 +1717,13 @@ module Aws::ElastiCache
     TestFailoverResult.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
     TestFailoverResult.struct_class = Types::TestFailoverResult
 
+    TestMigrationMessage.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationGroupId"))
+    TestMigrationMessage.add_member(:customer_node_endpoint_list, Shapes::ShapeRef.new(shape: CustomerNodeEndpointList, required: true, location_name: "CustomerNodeEndpointList"))
+    TestMigrationMessage.struct_class = Types::TestMigrationMessage
+
+    TestMigrationResponse.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
+    TestMigrationResponse.struct_class = Types::TestMigrationResponse
+
     TimeRangeFilter.add_member(:start_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "StartTime"))
     TimeRangeFilter.add_member(:end_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "EndTime"))
     TimeRangeFilter.struct_class = Types::TimeRangeFilter
@@ -2809,6 +2818,18 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: InvalidKMSKeyFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+      end)
+
+      api.add_operation(:test_migration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TestMigration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TestMigrationMessage)
+        o.output = Shapes::ShapeRef.new(shape: TestMigrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ReplicationGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidReplicationGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ReplicationGroupAlreadyUnderMigrationFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
       end)
     end
 

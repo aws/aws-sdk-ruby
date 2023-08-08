@@ -68,7 +68,7 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] value
     #   The user to which the access level applies. The only supported value
-    #   is `Self`.
+    #   is `self`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AccessLevelFilter AWS API Documentation
@@ -4592,7 +4592,7 @@ module Aws::ServiceCatalog
     #   The record identifier of the last request performed on this
     #   provisioned product of the following types:
     #
-    #   * ProvisionedProduct
+    #   * ProvisionProduct
     #
     #   * UpdateProvisionedProduct
     #
@@ -4605,7 +4605,7 @@ module Aws::ServiceCatalog
     #   The record identifier of the last successful request performed on
     #   this provisioned product of the following types:
     #
-    #   * ProvisionedProduct
+    #   * ProvisionProduct
     #
     #   * UpdateProvisionedProduct
     #
@@ -4743,7 +4743,7 @@ module Aws::ServiceCatalog
     #   The record identifier of the last request performed on this
     #   provisioned product of the following types:
     #
-    #   * ProvisionedProduct
+    #   * ProvisionProduct
     #
     #   * UpdateProvisionedProduct
     #
@@ -4756,7 +4756,7 @@ module Aws::ServiceCatalog
     #   The record identifier of the last successful request performed on
     #   this provisioned product of the following types:
     #
-    #   * ProvisionedProduct
+    #   * ProvisionProduct
     #
     #   * UpdateProvisionedProduct
     #
@@ -4980,12 +4980,7 @@ module Aws::ServiceCatalog
     # @!attribute [rw] type
     #   The type of provisioning artifact.
     #
-    #   * `CLOUD_FORMATION_TEMPLATE` - CloudFormation template
-    #
-    #   * `MARKETPLACE_AMI` - Amazon Web Services Marketplace AMI
-    #
-    #   * `MARKETPLACE_CAR` - Amazon Web Services Marketplace Clusters and
-    #     Amazon Web Services Resources
+    #   `CLOUD_FORMATION_TEMPLATE` - CloudFormation template
     #   @return [String]
     #
     # @!attribute [rw] created_time
@@ -5164,17 +5159,15 @@ module Aws::ServiceCatalog
     #
     #   * `CLOUD_FORMATION_TEMPLATE` - CloudFormation template
     #
-    #   * `MARKETPLACE_AMI` - Amazon Web Services Marketplace AMI
-    #
-    #   * `MARKETPLACE_CAR` - Amazon Web Services Marketplace Clusters and
-    #     Amazon Web Services Resources
-    #
     #   * `TERRAFORM_OPEN_SOURCE` - Terraform open source configuration file
     #   @return [String]
     #
     # @!attribute [rw] disable_template_validation
     #   If set to true, Service Catalog stops validating the specified
     #   provisioning artifact even if it is invalid.
+    #
+    #   Service Catalog does not support template validation for the
+    #   `TERRAFORM_OS` product type.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactProperties AWS API Documentation
@@ -5428,7 +5421,8 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] provisioned_product_type
     #   The type of provisioned product. The supported values are
-    #   `CFN_STACK` and `CFN_STACKSET`.
+    #   `CFN_STACK`, `CFN_STACKSET`, `TERRAFORM_OPEN_SOURCE`, and
+    #   `TERRAFORM_CLOUD`.
     #   @return [String]
     #
     # @!attribute [rw] record_type
@@ -5951,10 +5945,10 @@ module Aws::ServiceCatalog
     #
     #   When the key is `SearchQuery`, the searchable fields are `arn`,
     #   `createdTime`, `id`, `lastRecordId`, `idempotencyToken`, `name`,
-    #   `physicalId`, `productId`, `provisioningArtifact`, `type`, `status`,
-    #   `tags`, `userArn`, `userArnSession`, `lastProvisioningRecordId`,
-    #   `lastSuccessfulProvisioningRecordId`, `productName`, and
-    #   `provisioningArtifactName`.
+    #   `physicalId`, `productId`, `provisioningArtifactId`, `type`,
+    #   `status`, `tags`, `userArn`, `userArnSession`,
+    #   `lastProvisioningRecordId`, `lastSuccessfulProvisioningRecordId`,
+    #   `productName`, and `provisioningArtifactName`.
     #
     #   Example: `"SearchQuery":["status:AVAILABLE"]`
     #   @return [Hash<String,Array<String>>]

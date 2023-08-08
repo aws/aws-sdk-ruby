@@ -80,6 +80,8 @@ module Aws::Backup
     CreateFrameworkOutput = Shapes::StructureShape.new(name: 'CreateFrameworkOutput')
     CreateLegalHoldInput = Shapes::StructureShape.new(name: 'CreateLegalHoldInput')
     CreateLegalHoldOutput = Shapes::StructureShape.new(name: 'CreateLegalHoldOutput')
+    CreateLogicallyAirGappedBackupVaultInput = Shapes::StructureShape.new(name: 'CreateLogicallyAirGappedBackupVaultInput')
+    CreateLogicallyAirGappedBackupVaultOutput = Shapes::StructureShape.new(name: 'CreateLogicallyAirGappedBackupVaultOutput')
     CreateReportPlanInput = Shapes::StructureShape.new(name: 'CreateReportPlanInput')
     CreateReportPlanOutput = Shapes::StructureShape.new(name: 'CreateReportPlanOutput')
     CronExpression = Shapes::StringShape.new(name: 'CronExpression')
@@ -178,6 +180,8 @@ module Aws::Backup
     ListLegalHoldsInput = Shapes::StructureShape.new(name: 'ListLegalHoldsInput')
     ListLegalHoldsOutput = Shapes::StructureShape.new(name: 'ListLegalHoldsOutput')
     ListOfTags = Shapes::ListShape.new(name: 'ListOfTags')
+    ListProtectedResourcesByBackupVaultInput = Shapes::StructureShape.new(name: 'ListProtectedResourcesByBackupVaultInput')
+    ListProtectedResourcesByBackupVaultOutput = Shapes::StructureShape.new(name: 'ListProtectedResourcesByBackupVaultOutput')
     ListProtectedResourcesInput = Shapes::StructureShape.new(name: 'ListProtectedResourcesInput')
     ListProtectedResourcesOutput = Shapes::StructureShape.new(name: 'ListProtectedResourcesOutput')
     ListRecoveryPointsByBackupVaultInput = Shapes::StructureShape.new(name: 'ListRecoveryPointsByBackupVaultInput')
@@ -267,6 +271,8 @@ module Aws::Backup
     UpdateReportPlanInput = Shapes::StructureShape.new(name: 'UpdateReportPlanInput')
     UpdateReportPlanOutput = Shapes::StructureShape.new(name: 'UpdateReportPlanOutput')
     VaultNames = Shapes::ListShape.new(name: 'VaultNames')
+    VaultState = Shapes::StringShape.new(name: 'VaultState')
+    VaultType = Shapes::StringShape.new(name: 'VaultType')
     WindowMinutes = Shapes::IntegerShape.new(name: 'WindowMinutes')
     boolean = Shapes::BooleanShape.new(name: 'boolean')
     integer = Shapes::IntegerShape.new(name: 'integer')
@@ -556,6 +562,19 @@ module Aws::Backup
     CreateLegalHoldOutput.add_member(:recovery_point_selection, Shapes::ShapeRef.new(shape: RecoveryPointSelection, location_name: "RecoveryPointSelection"))
     CreateLegalHoldOutput.struct_class = Types::CreateLegalHoldOutput
 
+    CreateLogicallyAirGappedBackupVaultInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
+    CreateLogicallyAirGappedBackupVaultInput.add_member(:backup_vault_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "BackupVaultTags"))
+    CreateLogicallyAirGappedBackupVaultInput.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: string, location_name: "CreatorRequestId"))
+    CreateLogicallyAirGappedBackupVaultInput.add_member(:min_retention_days, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "MinRetentionDays"))
+    CreateLogicallyAirGappedBackupVaultInput.add_member(:max_retention_days, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "MaxRetentionDays"))
+    CreateLogicallyAirGappedBackupVaultInput.struct_class = Types::CreateLogicallyAirGappedBackupVaultInput
+
+    CreateLogicallyAirGappedBackupVaultOutput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, location_name: "BackupVaultName"))
+    CreateLogicallyAirGappedBackupVaultOutput.add_member(:backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "BackupVaultArn"))
+    CreateLogicallyAirGappedBackupVaultOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
+    CreateLogicallyAirGappedBackupVaultOutput.add_member(:vault_state, Shapes::ShapeRef.new(shape: VaultState, location_name: "VaultState"))
+    CreateLogicallyAirGappedBackupVaultOutput.struct_class = Types::CreateLogicallyAirGappedBackupVaultOutput
+
     CreateReportPlanInput.add_member(:report_plan_name, Shapes::ShapeRef.new(shape: ReportPlanName, required: true, location_name: "ReportPlanName"))
     CreateReportPlanInput.add_member(:report_plan_description, Shapes::ShapeRef.new(shape: ReportPlanDescription, location_name: "ReportPlanDescription"))
     CreateReportPlanInput.add_member(:report_delivery_channel, Shapes::ShapeRef.new(shape: ReportDeliveryChannel, required: true, location_name: "ReportDeliveryChannel"))
@@ -645,10 +664,12 @@ module Aws::Backup
     DescribeBackupJobOutput.struct_class = Types::DescribeBackupJobOutput
 
     DescribeBackupVaultInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "backupVaultName"))
+    DescribeBackupVaultInput.add_member(:backup_vault_account_id, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "backupVaultAccountId"))
     DescribeBackupVaultInput.struct_class = Types::DescribeBackupVaultInput
 
     DescribeBackupVaultOutput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: string, location_name: "BackupVaultName"))
     DescribeBackupVaultOutput.add_member(:backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "BackupVaultArn"))
+    DescribeBackupVaultOutput.add_member(:vault_type, Shapes::ShapeRef.new(shape: VaultType, location_name: "VaultType"))
     DescribeBackupVaultOutput.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "EncryptionKeyArn"))
     DescribeBackupVaultOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
     DescribeBackupVaultOutput.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: string, location_name: "CreatorRequestId"))
@@ -695,6 +716,7 @@ module Aws::Backup
 
     DescribeRecoveryPointInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
     DescribeRecoveryPointInput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "recoveryPointArn"))
+    DescribeRecoveryPointInput.add_member(:backup_vault_account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "backupVaultAccountId"))
     DescribeRecoveryPointInput.struct_class = Types::DescribeRecoveryPointInput
 
     DescribeRecoveryPointOutput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "RecoveryPointArn"))
@@ -863,6 +885,7 @@ module Aws::Backup
 
     GetRecoveryPointRestoreMetadataInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
     GetRecoveryPointRestoreMetadataInput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "recoveryPointArn"))
+    GetRecoveryPointRestoreMetadataInput.add_member(:backup_vault_account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "backupVaultAccountId"))
     GetRecoveryPointRestoreMetadataInput.struct_class = Types::GetRecoveryPointRestoreMetadataInput
 
     GetRecoveryPointRestoreMetadataOutput.add_member(:backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "BackupVaultArn"))
@@ -968,6 +991,8 @@ module Aws::Backup
     ListBackupSelectionsOutput.add_member(:backup_selections_list, Shapes::ShapeRef.new(shape: BackupSelectionsList, location_name: "BackupSelectionsList"))
     ListBackupSelectionsOutput.struct_class = Types::ListBackupSelectionsOutput
 
+    ListBackupVaultsInput.add_member(:by_vault_type, Shapes::ShapeRef.new(shape: VaultType, location: "querystring", location_name: "vaultType"))
+    ListBackupVaultsInput.add_member(:by_shared, Shapes::ShapeRef.new(shape: boolean, location: "querystring", location_name: "shared"))
     ListBackupVaultsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "nextToken"))
     ListBackupVaultsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListBackupVaultsInput.struct_class = Types::ListBackupVaultsInput
@@ -1012,6 +1037,16 @@ module Aws::Backup
 
     ListOfTags.member = Shapes::ShapeRef.new(shape: Condition)
 
+    ListProtectedResourcesByBackupVaultInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
+    ListProtectedResourcesByBackupVaultInput.add_member(:backup_vault_account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "backupVaultAccountId"))
+    ListProtectedResourcesByBackupVaultInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "nextToken"))
+    ListProtectedResourcesByBackupVaultInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListProtectedResourcesByBackupVaultInput.struct_class = Types::ListProtectedResourcesByBackupVaultInput
+
+    ListProtectedResourcesByBackupVaultOutput.add_member(:results, Shapes::ShapeRef.new(shape: ProtectedResourcesList, location_name: "Results"))
+    ListProtectedResourcesByBackupVaultOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "NextToken"))
+    ListProtectedResourcesByBackupVaultOutput.struct_class = Types::ListProtectedResourcesByBackupVaultOutput
+
     ListProtectedResourcesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "nextToken"))
     ListProtectedResourcesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListProtectedResourcesInput.struct_class = Types::ListProtectedResourcesInput
@@ -1021,6 +1056,7 @@ module Aws::Backup
     ListProtectedResourcesOutput.struct_class = Types::ListProtectedResourcesOutput
 
     ListRecoveryPointsByBackupVaultInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
+    ListRecoveryPointsByBackupVaultInput.add_member(:backup_vault_account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "backupVaultAccountId"))
     ListRecoveryPointsByBackupVaultInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "nextToken"))
     ListRecoveryPointsByBackupVaultInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListRecoveryPointsByBackupVaultInput.add_member(:by_resource_arn, Shapes::ShapeRef.new(shape: ARN, location: "querystring", location_name: "resourceArn"))
@@ -1487,6 +1523,20 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:create_logically_air_gapped_backup_vault, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLogicallyAirGappedBackupVault"
+        o.http_method = "PUT"
+        o.http_request_uri = "/logically-air-gapped-backup-vaults/{backupVaultName}"
+        o.input = Shapes::ShapeRef.new(shape: CreateLogicallyAirGappedBackupVaultInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateLogicallyAirGappedBackupVaultOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
       api.add_operation(:create_report_plan, Seahorse::Model::Operation.new.tap do |o|
@@ -2051,6 +2101,23 @@ module Aws::Backup
         o.input = Shapes::ShapeRef.new(shape: ListProtectedResourcesInput)
         o.output = Shapes::ShapeRef.new(shape: ListProtectedResourcesOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_protected_resources_by_backup_vault, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListProtectedResourcesByBackupVault"
+        o.http_method = "GET"
+        o.http_request_uri = "/backup-vaults/{backupVaultName}/resources/"
+        o.input = Shapes::ShapeRef.new(shape: ListProtectedResourcesByBackupVaultInput)
+        o.output = Shapes::ShapeRef.new(shape: ListProtectedResourcesByBackupVaultOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",

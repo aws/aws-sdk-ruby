@@ -68,6 +68,8 @@ module Aws::Backup
             Aws::Backup::Endpoints::CreateFramework.build(context)
           when :create_legal_hold
             Aws::Backup::Endpoints::CreateLegalHold.build(context)
+          when :create_logically_air_gapped_backup_vault
+            Aws::Backup::Endpoints::CreateLogicallyAirGappedBackupVault.build(context)
           when :create_report_plan
             Aws::Backup::Endpoints::CreateReportPlan.build(context)
           when :delete_backup_plan
@@ -154,6 +156,8 @@ module Aws::Backup
             Aws::Backup::Endpoints::ListLegalHolds.build(context)
           when :list_protected_resources
             Aws::Backup::Endpoints::ListProtectedResources.build(context)
+          when :list_protected_resources_by_backup_vault
+            Aws::Backup::Endpoints::ListProtectedResourcesByBackupVault.build(context)
           when :list_recovery_points_by_backup_vault
             Aws::Backup::Endpoints::ListRecoveryPointsByBackupVault.build(context)
           when :list_recovery_points_by_legal_hold

@@ -835,6 +835,85 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # This request creates a logical container where backups are stored.
+    #
+    # This request includes a name, optionally one or more resource tags, an
+    # encryption key, and a request ID.
+    #
+    # <note markdown="1"> Do not include sensitive data, such as passport numbers, in the name
+    # of a backup vault.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :backup_vault_name
+    #   This is the name of the vault that is being created.
+    #
+    # @option params [Hash<String,String>] :backup_vault_tags
+    #   These are the tags that will be included in the newly-created vault.
+    #
+    # @option params [String] :creator_request_id
+    #   This is the ID of the creation request.
+    #
+    # @option params [required, Integer] :min_retention_days
+    #   This setting specifies the minimum retention period that the vault
+    #   retains its recovery points. If this parameter is not specified, no
+    #   minimum retention period is enforced.
+    #
+    #   If specified, any backup or copy job to the vault must have a
+    #   lifecycle policy with a retention period equal to or longer than the
+    #   minimum retention period. If a job retention period is shorter than
+    #   that minimum retention period, then the vault fails the backup or copy
+    #   job, and you should either modify your lifecycle settings or use a
+    #   different vault.
+    #
+    # @option params [required, Integer] :max_retention_days
+    #   This is the setting that specifies the maximum retention period that
+    #   the vault retains its recovery points. If this parameter is not
+    #   specified, Backup does not enforce a maximum retention period on the
+    #   recovery points in the vault (allowing indefinite storage).
+    #
+    #   If specified, any backup or copy job to the vault must have a
+    #   lifecycle policy with a retention period equal to or shorter than the
+    #   maximum retention period. If the job retention period is longer than
+    #   that maximum retention period, then the vault fails the backup or copy
+    #   job, and you should either modify your lifecycle settings or use a
+    #   different vault.
+    #
+    # @return [Types::CreateLogicallyAirGappedBackupVaultOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLogicallyAirGappedBackupVaultOutput#backup_vault_name #backup_vault_name} => String
+    #   * {Types::CreateLogicallyAirGappedBackupVaultOutput#backup_vault_arn #backup_vault_arn} => String
+    #   * {Types::CreateLogicallyAirGappedBackupVaultOutput#creation_date #creation_date} => Time
+    #   * {Types::CreateLogicallyAirGappedBackupVaultOutput#vault_state #vault_state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_logically_air_gapped_backup_vault({
+    #     backup_vault_name: "BackupVaultName", # required
+    #     backup_vault_tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     creator_request_id: "string",
+    #     min_retention_days: 1, # required
+    #     max_retention_days: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.backup_vault_name #=> String
+    #   resp.backup_vault_arn #=> String
+    #   resp.creation_date #=> Time
+    #   resp.vault_state #=> String, one of "CREATING", "AVAILABLE", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateLogicallyAirGappedBackupVault AWS API Documentation
+    #
+    # @overload create_logically_air_gapped_backup_vault(params = {})
+    # @param [Hash] params ({})
+    def create_logically_air_gapped_backup_vault(params = {}, options = {})
+      req = build_request(:create_logically_air_gapped_backup_vault, params)
+      req.send_request(options)
+    end
+
     # Creates a report plan. A report plan is a document that contains
     # information about the contents of the report and where Backup will
     # deliver it.
@@ -1284,10 +1363,14 @@ module Aws::Backup
     #   create them and the Amazon Web Services Region where they are created.
     #   They consist of lowercase letters, numbers, and hyphens.
     #
+    # @option params [String] :backup_vault_account_id
+    #   This is the account ID of the specified backup vault.
+    #
     # @return [Types::DescribeBackupVaultOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeBackupVaultOutput#backup_vault_name #backup_vault_name} => String
     #   * {Types::DescribeBackupVaultOutput#backup_vault_arn #backup_vault_arn} => String
+    #   * {Types::DescribeBackupVaultOutput#vault_type #vault_type} => String
     #   * {Types::DescribeBackupVaultOutput#encryption_key_arn #encryption_key_arn} => String
     #   * {Types::DescribeBackupVaultOutput#creation_date #creation_date} => Time
     #   * {Types::DescribeBackupVaultOutput#creator_request_id #creator_request_id} => String
@@ -1301,12 +1384,14 @@ module Aws::Backup
     #
     #   resp = client.describe_backup_vault({
     #     backup_vault_name: "string", # required
+    #     backup_vault_account_id: "string",
     #   })
     #
     # @example Response structure
     #
     #   resp.backup_vault_name #=> String
     #   resp.backup_vault_arn #=> String
+    #   resp.vault_type #=> String, one of "BACKUP_VAULT", "LOGICALLY_AIR_GAPPED_BACKUP_VAULT"
     #   resp.encryption_key_arn #=> String
     #   resp.creation_date #=> Time
     #   resp.creator_request_id #=> String
@@ -1505,6 +1590,9 @@ module Aws::Backup
     #   point; for example,
     #   `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
     #
+    # @option params [String] :backup_vault_account_id
+    #   This is the account ID of the specified backup vault.
+    #
     # @return [Types::DescribeRecoveryPointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeRecoveryPointOutput#recovery_point_arn #recovery_point_arn} => String
@@ -1536,6 +1624,7 @@ module Aws::Backup
     #   resp = client.describe_recovery_point({
     #     backup_vault_name: "BackupVaultName", # required
     #     recovery_point_arn: "ARN", # required
+    #     backup_vault_account_id: "AccountId",
     #   })
     #
     # @example Response structure
@@ -2217,6 +2306,9 @@ module Aws::Backup
     #   point; for example,
     #   `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
     #
+    # @option params [String] :backup_vault_account_id
+    #   This is the account ID of the specified backup vault.
+    #
     # @return [Types::GetRecoveryPointRestoreMetadataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRecoveryPointRestoreMetadataOutput#backup_vault_arn #backup_vault_arn} => String
@@ -2228,6 +2320,7 @@ module Aws::Backup
     #   resp = client.get_recovery_point_restore_metadata({
     #     backup_vault_name: "BackupVaultName", # required
     #     recovery_point_arn: "ARN", # required
+    #     backup_vault_account_id: "AccountId",
     #   })
     #
     # @example Response structure
@@ -2624,6 +2717,12 @@ module Aws::Backup
     # Returns a list of recovery point storage containers along with
     # information about them.
     #
+    # @option params [String] :by_vault_type
+    #   This parameter will sort the list of vaults by vault type.
+    #
+    # @option params [Boolean] :by_shared
+    #   This parameter will sort the list of vaults by shared vaults.
+    #
     # @option params [String] :next_token
     #   The next item following a partial list of returned items. For example,
     #   if a request is made to return `maxResults` number of items,
@@ -2643,6 +2742,8 @@ module Aws::Backup
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_backup_vaults({
+    #     by_vault_type: "BACKUP_VAULT", # accepts BACKUP_VAULT, LOGICALLY_AIR_GAPPED_BACKUP_VAULT
+    #     by_shared: false,
     #     next_token: "string",
     #     max_results: 1,
     #   })
@@ -2942,6 +3043,60 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # This request lists the protected resources corresponding to each
+    # backup vault.
+    #
+    # @option params [required, String] :backup_vault_name
+    #   This is the list of protected resources by backup vault within the
+    #   vault(s) you specify by name.
+    #
+    # @option params [String] :backup_vault_account_id
+    #   This is the list of protected resources by backup vault within the
+    #   vault(s) you specify by account ID.
+    #
+    # @option params [String] :next_token
+    #   The next item following a partial list of returned items. For example,
+    #   if a request is made to return `maxResults` number of items,
+    #   `NextToken` allows you to return more items in your list starting at
+    #   the location pointed to by the next token.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to be returned.
+    #
+    # @return [Types::ListProtectedResourcesByBackupVaultOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProtectedResourcesByBackupVaultOutput#results #results} => Array&lt;Types::ProtectedResource&gt;
+    #   * {Types::ListProtectedResourcesByBackupVaultOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_protected_resources_by_backup_vault({
+    #     backup_vault_name: "BackupVaultName", # required
+    #     backup_vault_account_id: "AccountId",
+    #     next_token: "string",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results #=> Array
+    #   resp.results[0].resource_arn #=> String
+    #   resp.results[0].resource_type #=> String
+    #   resp.results[0].last_backup_time #=> Time
+    #   resp.results[0].resource_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListProtectedResourcesByBackupVault AWS API Documentation
+    #
+    # @overload list_protected_resources_by_backup_vault(params = {})
+    # @param [Hash] params ({})
+    def list_protected_resources_by_backup_vault(params = {}, options = {})
+      req = build_request(:list_protected_resources_by_backup_vault, params)
+      req.send_request(options)
+    end
+
     # Returns detailed information about the recovery points stored in a
     # backup vault.
     #
@@ -2955,6 +3110,9 @@ module Aws::Backup
     #   creates the backup.
     #
     #    </note>
+    #
+    # @option params [String] :backup_vault_account_id
+    #   This parameter will sort the list of recovery points by account ID.
     #
     # @option params [String] :next_token
     #   The next item following a partial list of returned items. For example,
@@ -2998,6 +3156,7 @@ module Aws::Backup
     #
     #   resp = client.list_recovery_points_by_backup_vault({
     #     backup_vault_name: "BackupVaultName", # required
+    #     backup_vault_account_id: "AccountId",
     #     next_token: "string",
     #     max_results: 1,
     #     by_resource_arn: "ARN",
@@ -3655,6 +3814,8 @@ module Aws::Backup
     #   and the default is 8 hours. If this value is included, it must be at
     #   least 60 minutes to avoid errors.
     #
+    #   This parameter has a maximum value of 100 years (52,560,000 minutes).
+    #
     #   During the start window, the backup job status remains in `CREATED`
     #   status until it has successfully begun or until the start window time
     #   has run out. If within the start window time Backup receives an error
@@ -3671,6 +3832,9 @@ module Aws::Backup
     #   does not add additional time for `StartWindowMinutes`, or if the
     #   backup started later than scheduled.
     #
+    #   Like `StartWindowMinutes`, this parameter has a maximum value of 100
+    #   years (52,560,000 minutes).
+    #
     # @option params [Types::Lifecycle] :lifecycle
     #   The lifecycle defines when a protected resource is transitioned to
     #   cold storage and when it expires. Backup will transition and expire
@@ -3686,6 +3850,8 @@ module Aws::Backup
     #   listed in the "Lifecycle to cold storage" section of the [ Feature
     #   availability by resource][1] table. Backup ignores this expression for
     #   other resource types.
+    #
+    #   This parameter has a maximum value of 100 years (36,500 days).
     #
     #
     #
@@ -4488,7 +4654,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
