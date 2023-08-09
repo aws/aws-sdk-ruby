@@ -231,7 +231,7 @@ module Aws
             response_target: path
           }).exactly(1).times
 
-          small_obj.download_file(path, checksum_mode: nil)
+          small_obj.download_file(path, checksum_mode: 'DISABLED')
         end
 
         it 'raises an error if an invalid mode is specified' do

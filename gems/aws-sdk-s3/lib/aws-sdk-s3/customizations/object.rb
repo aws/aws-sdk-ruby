@@ -498,7 +498,7 @@ module Aws
       #   checksum validation fails. You may provide a `on_checksum_validated`
       #   callback if you need to verify that validation occurred and which
       #   algorithm was used.  To disable checksum validation, set
-      #   `checksum_mode` to either `false` or `nil`.
+      #   `checksum_mode` to "DISABLED" or false.
       #
       # @option options [Callable] on_checksum_validated Called each time a
       #   request's checksum is validated with the checksum algorithm and the
