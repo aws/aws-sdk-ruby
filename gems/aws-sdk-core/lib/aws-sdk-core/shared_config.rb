@@ -359,12 +359,8 @@ module Aws
          !(prof_config.keys & SSO_CREDENTIAL_PROFILE_KEYS).empty?
 
         if sso_session_name = prof_config['sso_session']
-          sso_session = cfg["sso-session #{sso_session_name}"]
-          unless sso_session
-            raise ArgumentError,
-                  "sso-session #{sso_session_name} must be defined in the config file. " \
-                    "Referenced by profile #{profile}"
-          end
+          sso_session = sso_session(cfg, profile, sso_session_name)
+
           sso_region = sso_session['sso_region']
           sso_start_url = sso_session['sso_start_url']
 
@@ -402,16 +398,7 @@ module Aws
         !(prof_config.keys & SSO_TOKEN_PROFILE_KEYS).empty?
 
         sso_session_name = prof_config['sso_session']
-        sso_session = cfg["sso-session #{sso_session_name}"]
-        unless sso_session
-          raise ArgumentError,
-                "sso-session #{sso_session_name} must be defined in the config file." \
-                  "Referenced by profile #{profile}"
-        end
-
-        unless sso_session['sso_region']
-          raise ArgumentError, "sso-session #{sso_session_name} missing required parameter: sso_region"
-        end
+        sso_session = sso_session(cfg, profile, sso_session_name)
 
         SSOTokenProvider.new(
           sso_session: sso_session_name,
@@ -468,6 +455,27 @@ module Aws
       ret ||= ENV['AWS_PROFILE']
       ret ||= 'default'
       ret
+    end
+
+    def sso_session(cfg, profile, sso_session_name)
+      sso_session = cfg["sso-session #{sso_session_name}"]
+
+      if sso_session.nil? && sso_session_name.match(/\s/)
+        # aws sso-configure may add quotes around sso session names with whitespace
+        sso_session = cfg["sso-session '#{sso_session_name}'"]
+      end
+
+      unless sso_session
+        raise ArgumentError,
+          "sso-session #{sso_session_name} must be defined in the config file. " \
+                    "Referenced by profile #{profile}"
+      end
+
+      unless sso_session['sso_region']
+        raise ArgumentError, "sso-session #{sso_session_name} missing required parameter: sso_region"
+      end
+
+      sso_session
     end
   end
 end

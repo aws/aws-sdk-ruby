@@ -161,6 +161,29 @@ module Aws
         ).to eq('SSO_AKID')
       end
 
+      it 'loads SSO credentials from when the session name has quotes' do
+        expect(SSOCredentials).to receive(:new).with(
+          sso_start_url: nil,
+          sso_region: 'us-east-1',
+          sso_account_id: 'SSO_ACCOUNT_ID',
+          sso_role_name: 'SSO_ROLE_NAME',
+          sso_session: 'sso test session'
+        ).and_return(
+          double(
+            'creds',
+            set?: true,
+            credentials: double(access_key_id: 'SSO_AKID')
+          )
+        )
+        client = ApiHelper.sample_rest_xml::Client.new(
+          profile: 'sso_creds_session_with_quotes',
+          token_provider: nil
+        )
+        expect(
+          client.config.credentials.credentials.access_key_id
+        ).to eq('SSO_AKID')
+      end
+
       it 'raises when attempting to load an incomplete SSO Profile' do
         expect do
           ApiHelper.sample_rest_xml::Client.new(
