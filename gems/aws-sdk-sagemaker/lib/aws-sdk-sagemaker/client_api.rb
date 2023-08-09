@@ -1261,6 +1261,7 @@ module Aws::SageMaker
     ModelCardExportJobSummary = Shapes::StructureShape.new(name: 'ModelCardExportJobSummary')
     ModelCardExportJobSummaryList = Shapes::ListShape.new(name: 'ModelCardExportJobSummaryList')
     ModelCardExportOutputConfig = Shapes::StructureShape.new(name: 'ModelCardExportOutputConfig')
+    ModelCardNameOrArn = Shapes::StringShape.new(name: 'ModelCardNameOrArn')
     ModelCardProcessingStatus = Shapes::StringShape.new(name: 'ModelCardProcessingStatus')
     ModelCardSecurityConfig = Shapes::StructureShape.new(name: 'ModelCardSecurityConfig')
     ModelCardSortBy = Shapes::StringShape.new(name: 'ModelCardSortBy')
@@ -3091,7 +3092,7 @@ module Aws::SageMaker
     CreateModelBiasJobDefinitionResponse.add_member(:job_definition_arn, Shapes::ShapeRef.new(shape: MonitoringJobDefinitionArn, required: true, location_name: "JobDefinitionArn"))
     CreateModelBiasJobDefinitionResponse.struct_class = Types::CreateModelBiasJobDefinitionResponse
 
-    CreateModelCardExportJobRequest.add_member(:model_card_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "ModelCardName"))
+    CreateModelCardExportJobRequest.add_member(:model_card_name, Shapes::ShapeRef.new(shape: ModelCardNameOrArn, required: true, location_name: "ModelCardName"))
     CreateModelCardExportJobRequest.add_member(:model_card_version, Shapes::ShapeRef.new(shape: Integer, location_name: "ModelCardVersion"))
     CreateModelCardExportJobRequest.add_member(:model_card_export_job_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "ModelCardExportJobName"))
     CreateModelCardExportJobRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: ModelCardExportOutputConfig, required: true, location_name: "OutputConfig"))
@@ -4342,7 +4343,7 @@ module Aws::SageMaker
     DescribeModelCardExportJobResponse.add_member(:export_artifacts, Shapes::ShapeRef.new(shape: ModelCardExportArtifacts, location_name: "ExportArtifacts"))
     DescribeModelCardExportJobResponse.struct_class = Types::DescribeModelCardExportJobResponse
 
-    DescribeModelCardRequest.add_member(:model_card_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "ModelCardName"))
+    DescribeModelCardRequest.add_member(:model_card_name, Shapes::ShapeRef.new(shape: ModelCardNameOrArn, required: true, location_name: "ModelCardName"))
     DescribeModelCardRequest.add_member(:model_card_version, Shapes::ShapeRef.new(shape: Integer, location_name: "ModelCardVersion"))
     DescribeModelCardRequest.struct_class = Types::DescribeModelCardRequest
 
@@ -6341,7 +6342,7 @@ module Aws::SageMaker
     ListModelCardVersionsRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeAfter"))
     ListModelCardVersionsRequest.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeBefore"))
     ListModelCardVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListModelCardVersionsRequest.add_member(:model_card_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "ModelCardName"))
+    ListModelCardVersionsRequest.add_member(:model_card_name, Shapes::ShapeRef.new(shape: ModelCardNameOrArn, required: true, location_name: "ModelCardName"))
     ListModelCardVersionsRequest.add_member(:model_card_status, Shapes::ShapeRef.new(shape: ModelCardStatus, location_name: "ModelCardStatus"))
     ListModelCardVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListModelCardVersionsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: ModelCardVersionSortBy, location_name: "SortBy"))
@@ -8960,7 +8961,7 @@ module Aws::SageMaker
     UpdateInferenceExperimentResponse.add_member(:inference_experiment_arn, Shapes::ShapeRef.new(shape: InferenceExperimentArn, required: true, location_name: "InferenceExperimentArn"))
     UpdateInferenceExperimentResponse.struct_class = Types::UpdateInferenceExperimentResponse
 
-    UpdateModelCardRequest.add_member(:model_card_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "ModelCardName"))
+    UpdateModelCardRequest.add_member(:model_card_name, Shapes::ShapeRef.new(shape: ModelCardNameOrArn, required: true, location_name: "ModelCardName"))
     UpdateModelCardRequest.add_member(:content, Shapes::ShapeRef.new(shape: ModelCardContent, location_name: "Content"))
     UpdateModelCardRequest.add_member(:model_card_status, Shapes::ShapeRef.new(shape: ModelCardStatus, location_name: "ModelCardStatus"))
     UpdateModelCardRequest.struct_class = Types::UpdateModelCardRequest

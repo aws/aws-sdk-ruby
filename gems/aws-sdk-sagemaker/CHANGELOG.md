@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.205.0 (2023-08-09)
+------------------
+
+* Feature - This release adds support for cross account access for SageMaker Model Cards through AWS RAM.
+
 1.204.0 (2023-08-04)
 ------------------
 

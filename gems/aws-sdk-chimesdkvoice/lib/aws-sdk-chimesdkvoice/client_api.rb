@@ -202,6 +202,7 @@ module Aws::ChimeSDKVoice
     PhoneNumberErrorList = Shapes::ListShape.new(name: 'PhoneNumberErrorList')
     PhoneNumberList = Shapes::ListShape.new(name: 'PhoneNumberList')
     PhoneNumberMaxResults = Shapes::IntegerShape.new(name: 'PhoneNumberMaxResults')
+    PhoneNumberName = Shapes::StringShape.new(name: 'PhoneNumberName')
     PhoneNumberOrder = Shapes::StructureShape.new(name: 'PhoneNumberOrder')
     PhoneNumberOrderList = Shapes::ListShape.new(name: 'PhoneNumberOrderList')
     PhoneNumberOrderStatus = Shapes::StringShape.new(name: 'PhoneNumberOrderStatus')
@@ -412,6 +413,7 @@ module Aws::ChimeSDKVoice
 
     CreatePhoneNumberOrderRequest.add_member(:product_type, Shapes::ShapeRef.new(shape: PhoneNumberProductType, required: true, location_name: "ProductType"))
     CreatePhoneNumberOrderRequest.add_member(:e164_phone_numbers, Shapes::ShapeRef.new(shape: E164PhoneNumberList, required: true, location_name: "E164PhoneNumbers"))
+    CreatePhoneNumberOrderRequest.add_member(:name, Shapes::ShapeRef.new(shape: PhoneNumberName, location_name: "Name"))
     CreatePhoneNumberOrderRequest.struct_class = Types::CreatePhoneNumberOrderRequest
 
     CreatePhoneNumberOrderResponse.add_member(:phone_number_order, Shapes::ShapeRef.new(shape: PhoneNumberOrder, location_name: "PhoneNumberOrder"))
@@ -860,6 +862,7 @@ module Aws::ChimeSDKVoice
     PhoneNumber.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
     PhoneNumber.add_member(:deletion_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "DeletionTimestamp"))
     PhoneNumber.add_member(:order_id, Shapes::ShapeRef.new(shape: GuidString, location_name: "OrderId"))
+    PhoneNumber.add_member(:name, Shapes::ShapeRef.new(shape: PhoneNumberName, location_name: "Name"))
     PhoneNumber.struct_class = Types::PhoneNumber
 
     PhoneNumberAssociation.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
@@ -1175,11 +1178,13 @@ module Aws::ChimeSDKVoice
     UpdatePhoneNumberRequest.add_member(:phone_number_id, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, required: true, location: "uri", location_name: "phoneNumberId"))
     UpdatePhoneNumberRequest.add_member(:product_type, Shapes::ShapeRef.new(shape: PhoneNumberProductType, location_name: "ProductType"))
     UpdatePhoneNumberRequest.add_member(:calling_name, Shapes::ShapeRef.new(shape: CallingName, location_name: "CallingName"))
+    UpdatePhoneNumberRequest.add_member(:name, Shapes::ShapeRef.new(shape: PhoneNumberName, location_name: "Name"))
     UpdatePhoneNumberRequest.struct_class = Types::UpdatePhoneNumberRequest
 
     UpdatePhoneNumberRequestItem.add_member(:phone_number_id, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, required: true, location_name: "PhoneNumberId"))
     UpdatePhoneNumberRequestItem.add_member(:product_type, Shapes::ShapeRef.new(shape: PhoneNumberProductType, location_name: "ProductType"))
     UpdatePhoneNumberRequestItem.add_member(:calling_name, Shapes::ShapeRef.new(shape: CallingName, location_name: "CallingName"))
+    UpdatePhoneNumberRequestItem.add_member(:name, Shapes::ShapeRef.new(shape: PhoneNumberName, location_name: "Name"))
     UpdatePhoneNumberRequestItem.struct_class = Types::UpdatePhoneNumberRequestItem
 
     UpdatePhoneNumberRequestItemList.member = Shapes::ShapeRef.new(shape: UpdatePhoneNumberRequestItem)

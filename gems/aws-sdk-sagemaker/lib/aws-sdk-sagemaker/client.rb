@@ -5293,7 +5293,7 @@ module Aws::SageMaker
     # Creates an Amazon SageMaker Model Card export job.
     #
     # @option params [required, String] :model_card_name
-    #   The name of the model card to export.
+    #   The name or Amazon Resource Name (ARN) of the model card to export.
     #
     # @option params [Integer] :model_card_version
     #   The version of the model card to export. If a version is not provided,
@@ -5313,7 +5313,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_model_card_export_job({
-    #     model_card_name: "EntityName", # required
+    #     model_card_name: "ModelCardNameOrArn", # required
     #     model_card_version: 1,
     #     model_card_export_job_name: "EntityName", # required
     #     output_config: { # required
@@ -12731,7 +12731,7 @@ module Aws::SageMaker
     # Amazon SageMaker Model Card.
     #
     # @option params [required, String] :model_card_name
-    #   The name of the model card to describe.
+    #   The name or Amazon Resource Name (ARN) of the model card to describe.
     #
     # @option params [Integer] :model_card_version
     #   The version of the model card to describe. If a version is not
@@ -12754,7 +12754,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_model_card({
-    #     model_card_name: "EntityName", # required
+    #     model_card_name: "ModelCardNameOrArn", # required
     #     model_card_version: 1,
     #   })
     #
@@ -18030,7 +18030,8 @@ module Aws::SageMaker
     #   The maximum number of model card versions to list.
     #
     # @option params [required, String] :model_card_name
-    #   List model card versions for the model card with the specified name.
+    #   List model card versions for the model card with the specified name or
+    #   Amazon Resource Name (ARN).
     #
     # @option params [String] :model_card_status
     #   Only list model card versions with the specified approval status.
@@ -18060,7 +18061,7 @@ module Aws::SageMaker
     #     creation_time_after: Time.now,
     #     creation_time_before: Time.now,
     #     max_results: 1,
-    #     model_card_name: "EntityName", # required
+    #     model_card_name: "ModelCardNameOrArn", # required
     #     model_card_status: "Draft", # accepts Draft, PendingReview, Approved, Archived
     #     next_token: "NextToken",
     #     sort_by: "Version", # accepts Version
@@ -22781,7 +22782,7 @@ module Aws::SageMaker
     # single call.
     #
     # @option params [required, String] :model_card_name
-    #   The name of the model card to update.
+    #   The name or Amazon Resource Name (ARN) of the model card to update.
     #
     # @option params [String] :content
     #   The updated model card content. Content must be in [model card JSON
@@ -22815,7 +22816,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_model_card({
-    #     model_card_name: "EntityName", # required
+    #     model_card_name: "ModelCardNameOrArn", # required
     #     content: "ModelCardContent",
     #     model_card_status: "Draft", # accepts Draft, PendingReview, Approved, Archived
     #   })
@@ -24091,7 +24092,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.204.0'
+      context[:gem_version] = '1.205.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -601,7 +601,7 @@ module Aws::SSOOIDC
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.180.2'
+      context[:gem_version] = '3.180.3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

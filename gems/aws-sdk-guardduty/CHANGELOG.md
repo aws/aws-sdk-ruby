@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2023-08-09)
+------------------
+
+* Feature - Added autoEnable ALL to UpdateOrganizationConfiguration and DescribeOrganizationConfiguration APIs.
+
 1.76.0 (2023-07-11)
 ------------------
 

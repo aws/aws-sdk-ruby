@@ -480,14 +480,18 @@ module Aws::FSx
 
     # Cancels an existing Amazon FSx for Lustre data repository task if that
     # task is in either the `PENDING` or `EXECUTING` state. When you cancel
-    # a task, Amazon FSx does the following.
+    # am export task, Amazon FSx does the following.
     #
     # * Any files that FSx has already exported are not reverted.
     #
-    # * FSx continues to export any files that are "in-flight" when the
-    #   cancel operation is received.
+    # * FSx continues to export any files that are in-flight when the cancel
+    #   operation is received.
     #
     # * FSx does not export any files that have not yet been exported.
+    #
+    # For a release task, Amazon FSx will stop releasing files upon
+    # cancellation. Any files that have already been released will remain in
+    # the released state.
     #
     # @option params [required, String] :task_id
     #   Specifies the data repository task to cancel.
@@ -731,6 +735,8 @@ module Aws::FSx
     #   resp.backup.file_system.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.backup.file_system.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.backup.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.backup.file_system.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.backup.file_system.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.backup.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -752,7 +758,7 @@ module Aws::FSx
     #   resp.backup.file_system.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
     #   resp.backup.file_system.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.backup.file_system.administrative_actions #=> Array
-    #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
+    #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION"
     #   resp.backup.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.backup.file_system.administrative_actions[0].request_time #=> Time
     #   resp.backup.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -851,12 +857,17 @@ module Aws::FSx
     #   resp.backup.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backup.file_system.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.backup.file_system.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.backup.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.backup.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_1"
     #   resp.backup.file_system.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.backup.file_system.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.backup.file_system.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backup.file_system.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.backup.file_system.open_zfs_configuration.root_volume_id #=> String
+    #   resp.backup.file_system.open_zfs_configuration.preferred_subnet_id #=> String
+    #   resp.backup.file_system.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.backup.file_system.open_zfs_configuration.route_table_ids #=> Array
+    #   resp.backup.file_system.open_zfs_configuration.route_table_ids[0] #=> String
+    #   resp.backup.file_system.open_zfs_configuration.endpoint_ip_address #=> String
     #   resp.backup.directory_information.domain_name #=> String
     #   resp.backup.directory_information.active_directory_id #=> String
     #   resp.backup.directory_information.resource_arn #=> String
@@ -901,7 +912,7 @@ module Aws::FSx
     #   resp.backup.volume.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.backup.volume.lifecycle_transition_reason.message #=> String
     #   resp.backup.volume.administrative_actions #=> Array
-    #   resp.backup.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
+    #   resp.backup.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION"
     #   resp.backup.volume.administrative_actions[0].progress_percent #=> Integer
     #   resp.backup.volume.administrative_actions[0].request_time #=> Time
     #   resp.backup.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -948,6 +959,8 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -992,12 +1005,17 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_1"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.preferred_subnet_id #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids[0] #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address #=> String
     #   resp.backup.volume.administrative_actions[0].failure_details.message #=> String
     #   resp.backup.volume.administrative_actions[0].target_volume_values #=> Types::Volume
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.resource_arn #=> String
@@ -1243,6 +1261,8 @@ module Aws::FSx
     #   resp.backup.file_system.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.backup.file_system.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.backup.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.backup.file_system.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.backup.file_system.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.backup.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -1264,7 +1284,7 @@ module Aws::FSx
     #   resp.backup.file_system.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
     #   resp.backup.file_system.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.backup.file_system.administrative_actions #=> Array
-    #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
+    #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION"
     #   resp.backup.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.backup.file_system.administrative_actions[0].request_time #=> Time
     #   resp.backup.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -1363,12 +1383,17 @@ module Aws::FSx
     #   resp.backup.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backup.file_system.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.backup.file_system.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.backup.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.backup.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_1"
     #   resp.backup.file_system.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.backup.file_system.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.backup.file_system.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backup.file_system.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.backup.file_system.open_zfs_configuration.root_volume_id #=> String
+    #   resp.backup.file_system.open_zfs_configuration.preferred_subnet_id #=> String
+    #   resp.backup.file_system.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.backup.file_system.open_zfs_configuration.route_table_ids #=> Array
+    #   resp.backup.file_system.open_zfs_configuration.route_table_ids[0] #=> String
+    #   resp.backup.file_system.open_zfs_configuration.endpoint_ip_address #=> String
     #   resp.backup.directory_information.domain_name #=> String
     #   resp.backup.directory_information.active_directory_id #=> String
     #   resp.backup.directory_information.resource_arn #=> String
@@ -1413,7 +1438,7 @@ module Aws::FSx
     #   resp.backup.volume.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.backup.volume.lifecycle_transition_reason.message #=> String
     #   resp.backup.volume.administrative_actions #=> Array
-    #   resp.backup.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
+    #   resp.backup.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION"
     #   resp.backup.volume.administrative_actions[0].progress_percent #=> Integer
     #   resp.backup.volume.administrative_actions[0].request_time #=> Time
     #   resp.backup.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -1460,6 +1485,8 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -1504,12 +1531,17 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_1"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.preferred_subnet_id #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids[0] #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address #=> String
     #   resp.backup.volume.administrative_actions[0].failure_details.message #=> String
     #   resp.backup.volume.administrative_actions[0].target_volume_values #=> Types::Volume
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.resource_arn #=> String
@@ -1711,17 +1743,26 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Creates an Amazon FSx for Lustre data repository task. You use data
-    # repository tasks to perform bulk operations between your Amazon FSx
-    # file system and its linked data repositories. An example of a data
-    # repository task is exporting any data and metadata changes, including
-    # POSIX metadata, to files, directories, and symbolic links (symlinks)
-    # from your FSx file system to a linked data repository. A
+    # Creates an Amazon FSx for Lustre data repository task. A
     # `CreateDataRepositoryTask` operation will fail if a data repository is
-    # not linked to the FSx file system. To learn more about data repository
-    # tasks, see [Data Repository Tasks][1]. To learn more about linking a
-    # data repository to your file system, see [Linking your file system to
-    # an S3 bucket][2].
+    # not linked to the FSx file system.
+    #
+    # You use import and export data repository tasks to perform bulk
+    # operations between your FSx for Lustre file system and its linked data
+    # repositories. An example of a data repository task is exporting any
+    # data and metadata changes, including POSIX metadata, to files,
+    # directories, and symbolic links (symlinks) from your FSx file system
+    # to a linked data repository.
+    #
+    # You use release data repository tasks to release data from your file
+    # system for files that are archived to S3. The metadata of released
+    # files remains on the file system so users or applications can still
+    # access released files by reading the files again, which will restore
+    # data from Amazon S3 to the FSx for Lustre file system.
+    #
+    # To learn more about data repository tasks, see [Data Repository
+    # Tasks][1]. To learn more about linking a data repository to your file
+    # system, see [Linking your file system to an S3 bucket][2].
     #
     #
     #
@@ -1731,11 +1772,28 @@ module Aws::FSx
     # @option params [required, String] :type
     #   Specifies the type of data repository task to create.
     #
+    #   * `EXPORT_TO_REPOSITORY` tasks export from your Amazon FSx for Lustre
+    #     file system to a linked data repository.
+    #
+    #   * `IMPORT_METADATA_FROM_REPOSITORY` tasks import metadata changes from
+    #     a linked S3 bucket to your Amazon FSx for Lustre file system.
+    #
+    #   * `RELEASE_DATA_FROM_FILESYSTEM` tasks release files in your Amazon
+    #     FSx for Lustre file system that are archived and that meet your
+    #     specified release criteria.
+    #
+    #   * `AUTO_RELEASE_DATA` tasks automatically release files from an Amazon
+    #     File Cache resource.
+    #
     # @option params [Array<String>] :paths
     #   A list of paths for the data repository task to use when the task is
-    #   processed. If a path that you provide isn't valid, the task fails.
+    #   processed. If a path that you provide isn't valid, the task fails. If
+    #   you don't provide paths, the default behavior is to export all files
+    #   to S3 (for export tasks), import all files from S3 (for import tasks),
+    #   or release all archived files that meet the last accessed time
+    #   criteria (for release tasks).
     #
-    #   * For export tasks, the list contains paths on the Amazon FSx file
+    #   * For export tasks, the list contains paths on the FSx for Lustre file
     #     system from which the files are exported to the Amazon S3 bucket.
     #     The default path is the file system root directory. The paths you
     #     provide need to be relative to the mount point of the file system.
@@ -1744,9 +1802,21 @@ module Aws::FSx
     #     provide is `path1`.
     #
     #   * For import tasks, the list contains paths in the Amazon S3 bucket
-    #     from which POSIX metadata changes are imported to the Amazon FSx
+    #     from which POSIX metadata changes are imported to the FSx for Lustre
     #     file system. The path can be an S3 bucket or prefix in the format
     #     `s3://myBucket/myPrefix` (where `myPrefix` is optional).
+    #
+    #   * For release tasks, the list contains directory or file paths on the
+    #     FSx for Lustre file system from which to release archived files. If
+    #     a directory is specified, files within the directory are released.
+    #     If a file path is specified, only that file is released. To release
+    #     all archived files in the file system, specify a forward slash (/)
+    #     as the path.
+    #
+    #     <note markdown="1"> A file must also meet the last accessed time criteria specified in
+    #     for the file to be released.
+    #
+    #      </note>
     #
     # @option params [required, String] :file_system_id
     #   The globally unique ID of the file system, assigned by Amazon FSx.
@@ -1779,6 +1849,10 @@ module Aws::FSx
     #   Cache `AUTO_RELEASE_DATA` task that automatically releases files from
     #   the cache.
     #
+    # @option params [Types::ReleaseConfiguration] :release_configuration
+    #   The configuration that specifies the last accessed time criteria for
+    #   files that will be released from an Amazon FSx for Lustre file system.
+    #
     # @return [Types::CreateDataRepositoryTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDataRepositoryTaskResponse#data_repository_task #data_repository_task} => Types::DataRepositoryTask
@@ -1803,6 +1877,12 @@ module Aws::FSx
     #       },
     #     ],
     #     capacity_to_release: 1,
+    #     release_configuration: {
+    #       duration_since_last_access: {
+    #         unit: "DAYS", # accepts DAYS
+    #         value: 1,
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1832,6 +1912,8 @@ module Aws::FSx
     #   resp.data_repository_task.report.scope #=> String, one of "FAILED_FILES_ONLY"
     #   resp.data_repository_task.capacity_to_release #=> Integer
     #   resp.data_repository_task.file_cache_id #=> String
+    #   resp.data_repository_task.release_configuration.duration_since_last_access.unit #=> String, one of "DAYS"
+    #   resp.data_repository_task.release_configuration.duration_since_last_access.value #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateDataRepositoryTask AWS API Documentation
     #
@@ -2361,6 +2443,10 @@ module Aws::FSx
     #         file_share_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
     #         audit_log_destination: "GeneralARN",
     #       },
+    #       disk_iops_configuration: {
+    #         mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
+    #         iops: 1,
+    #       },
     #     },
     #     lustre_configuration: {
     #       weekly_maintenance_start_time: "WeeklyTime",
@@ -2405,7 +2491,7 @@ module Aws::FSx
     #       copy_tags_to_backups: false,
     #       copy_tags_to_volumes: false,
     #       daily_automatic_backup_start_time: "DailyTime",
-    #       deployment_type: "SINGLE_AZ_1", # required, accepts SINGLE_AZ_1, SINGLE_AZ_2
+    #       deployment_type: "SINGLE_AZ_1", # required, accepts SINGLE_AZ_1, SINGLE_AZ_2, MULTI_AZ_1
     #       throughput_capacity: 1, # required
     #       weekly_maintenance_start_time: "WeeklyTime",
     #       disk_iops_configuration: {
@@ -2435,6 +2521,9 @@ module Aws::FSx
     #         copy_tags_to_snapshots: false,
     #         read_only: false,
     #       },
+    #       preferred_subnet_id: "SubnetId",
+    #       endpoint_ip_address_range: "IpAddressRange",
+    #       route_table_ids: ["RouteTableId"],
     #     },
     #   })
     #
@@ -2483,6 +2572,8 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.file_system.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.file_system.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.file_system.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -2504,7 +2595,7 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
     #   resp.file_system.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.file_system.administrative_actions #=> Array
-    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
+    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.file_system.administrative_actions[0].request_time #=> Time
     #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -2603,12 +2694,17 @@ module Aws::FSx
     #   resp.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.file_system.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_1"
     #   resp.file_system.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.file_system.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_system.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.file_system.open_zfs_configuration.root_volume_id #=> String
+    #   resp.file_system.open_zfs_configuration.preferred_subnet_id #=> String
+    #   resp.file_system.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.file_system.open_zfs_configuration.route_table_ids #=> Array
+    #   resp.file_system.open_zfs_configuration.route_table_ids[0] #=> String
+    #   resp.file_system.open_zfs_configuration.endpoint_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystem AWS API Documentation
     #
@@ -2883,6 +2979,10 @@ module Aws::FSx
     #         file_share_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
     #         audit_log_destination: "GeneralARN",
     #       },
+    #       disk_iops_configuration: {
+    #         mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
+    #         iops: 1,
+    #       },
     #     },
     #     lustre_configuration: {
     #       weekly_maintenance_start_time: "WeeklyTime",
@@ -2914,7 +3014,7 @@ module Aws::FSx
     #       copy_tags_to_backups: false,
     #       copy_tags_to_volumes: false,
     #       daily_automatic_backup_start_time: "DailyTime",
-    #       deployment_type: "SINGLE_AZ_1", # required, accepts SINGLE_AZ_1, SINGLE_AZ_2
+    #       deployment_type: "SINGLE_AZ_1", # required, accepts SINGLE_AZ_1, SINGLE_AZ_2, MULTI_AZ_1
     #       throughput_capacity: 1, # required
     #       weekly_maintenance_start_time: "WeeklyTime",
     #       disk_iops_configuration: {
@@ -2944,6 +3044,9 @@ module Aws::FSx
     #         copy_tags_to_snapshots: false,
     #         read_only: false,
     #       },
+    #       preferred_subnet_id: "SubnetId",
+    #       endpoint_ip_address_range: "IpAddressRange",
+    #       route_table_ids: ["RouteTableId"],
     #     },
     #     storage_capacity: 1,
     #   })
@@ -2993,6 +3096,8 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.file_system.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.file_system.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.file_system.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -3014,7 +3119,7 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
     #   resp.file_system.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.file_system.administrative_actions #=> Array
-    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
+    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.file_system.administrative_actions[0].request_time #=> Time
     #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -3113,12 +3218,17 @@ module Aws::FSx
     #   resp.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.file_system.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_1"
     #   resp.file_system.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.file_system.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_system.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.file_system.open_zfs_configuration.root_volume_id #=> String
+    #   resp.file_system.open_zfs_configuration.preferred_subnet_id #=> String
+    #   resp.file_system.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.file_system.open_zfs_configuration.route_table_ids #=> Array
+    #   resp.file_system.open_zfs_configuration.route_table_ids[0] #=> String
+    #   resp.file_system.open_zfs_configuration.endpoint_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemFromBackup AWS API Documentation
     #
@@ -3210,7 +3320,7 @@ module Aws::FSx
     #   resp.snapshot.tags[0].key #=> String
     #   resp.snapshot.tags[0].value #=> String
     #   resp.snapshot.administrative_actions #=> Array
-    #   resp.snapshot.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
+    #   resp.snapshot.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION"
     #   resp.snapshot.administrative_actions[0].progress_percent #=> Integer
     #   resp.snapshot.administrative_actions[0].request_time #=> Time
     #   resp.snapshot.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -3257,6 +3367,8 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -3301,12 +3413,17 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_1"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.preferred_subnet_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids #=> Array
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids[0] #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address #=> String
     #   resp.snapshot.administrative_actions[0].failure_details.message #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.creation_time #=> Time
     #   resp.snapshot.administrative_actions[0].target_volume_values.file_system_id #=> String
@@ -3652,7 +3769,7 @@ module Aws::FSx
     #   resp.volume.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.volume.lifecycle_transition_reason.message #=> String
     #   resp.volume.administrative_actions #=> Array
-    #   resp.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
+    #   resp.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION"
     #   resp.volume.administrative_actions[0].progress_percent #=> Integer
     #   resp.volume.administrative_actions[0].request_time #=> Time
     #   resp.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -3699,6 +3816,8 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -3743,12 +3862,17 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_1"
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.preferred_subnet_id #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids[0] #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address #=> String
     #   resp.volume.administrative_actions[0].failure_details.message #=> String
     #   resp.volume.administrative_actions[0].target_volume_values #=> Types::Volume
     #   resp.volume.administrative_actions[0].target_snapshot_values.resource_arn #=> String
@@ -3914,7 +4038,7 @@ module Aws::FSx
     #   resp.volume.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.volume.lifecycle_transition_reason.message #=> String
     #   resp.volume.administrative_actions #=> Array
-    #   resp.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
+    #   resp.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION"
     #   resp.volume.administrative_actions[0].progress_percent #=> Integer
     #   resp.volume.administrative_actions[0].request_time #=> Time
     #   resp.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -3961,6 +4085,8 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -4005,12 +4131,17 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_1"
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.preferred_subnet_id #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids[0] #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address #=> String
     #   resp.volume.administrative_actions[0].failure_details.message #=> String
     #   resp.volume.administrative_actions[0].target_volume_values #=> Types::Volume
     #   resp.volume.administrative_actions[0].target_snapshot_values.resource_arn #=> String
@@ -4684,6 +4815,8 @@ module Aws::FSx
     #   resp.backups[0].file_system.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.backups[0].file_system.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.backups[0].file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.backups[0].file_system.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.backups[0].file_system.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.backups[0].file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -4705,7 +4838,7 @@ module Aws::FSx
     #   resp.backups[0].file_system.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
     #   resp.backups[0].file_system.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.backups[0].file_system.administrative_actions #=> Array
-    #   resp.backups[0].file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
+    #   resp.backups[0].file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION"
     #   resp.backups[0].file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.backups[0].file_system.administrative_actions[0].request_time #=> Time
     #   resp.backups[0].file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -4804,12 +4937,17 @@ module Aws::FSx
     #   resp.backups[0].file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backups[0].file_system.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.backups[0].file_system.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.backups[0].file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.backups[0].file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_1"
     #   resp.backups[0].file_system.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.backups[0].file_system.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.backups[0].file_system.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backups[0].file_system.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.backups[0].file_system.open_zfs_configuration.root_volume_id #=> String
+    #   resp.backups[0].file_system.open_zfs_configuration.preferred_subnet_id #=> String
+    #   resp.backups[0].file_system.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.backups[0].file_system.open_zfs_configuration.route_table_ids #=> Array
+    #   resp.backups[0].file_system.open_zfs_configuration.route_table_ids[0] #=> String
+    #   resp.backups[0].file_system.open_zfs_configuration.endpoint_ip_address #=> String
     #   resp.backups[0].directory_information.domain_name #=> String
     #   resp.backups[0].directory_information.active_directory_id #=> String
     #   resp.backups[0].directory_information.resource_arn #=> String
@@ -4854,7 +4992,7 @@ module Aws::FSx
     #   resp.backups[0].volume.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.backups[0].volume.lifecycle_transition_reason.message #=> String
     #   resp.backups[0].volume.administrative_actions #=> Array
-    #   resp.backups[0].volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
+    #   resp.backups[0].volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION"
     #   resp.backups[0].volume.administrative_actions[0].progress_percent #=> Integer
     #   resp.backups[0].volume.administrative_actions[0].request_time #=> Time
     #   resp.backups[0].volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -4901,6 +5039,8 @@ module Aws::FSx
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -4945,12 +5085,17 @@ module Aws::FSx
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_1"
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.preferred_subnet_id #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids #=> Array
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids[0] #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address #=> String
     #   resp.backups[0].volume.administrative_actions[0].failure_details.message #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_volume_values #=> Types::Volume
     #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.resource_arn #=> String
@@ -5184,6 +5329,8 @@ module Aws::FSx
     #   resp.data_repository_tasks[0].report.scope #=> String, one of "FAILED_FILES_ONLY"
     #   resp.data_repository_tasks[0].capacity_to_release #=> Integer
     #   resp.data_repository_tasks[0].file_cache_id #=> String
+    #   resp.data_repository_tasks[0].release_configuration.duration_since_last_access.unit #=> String, one of "DAYS"
+    #   resp.data_repository_tasks[0].release_configuration.duration_since_last_access.value #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeDataRepositoryTasks AWS API Documentation
@@ -5503,6 +5650,8 @@ module Aws::FSx
     #   resp.file_systems[0].windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.file_systems[0].windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.file_systems[0].windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.file_systems[0].windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.file_systems[0].windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.file_systems[0].lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_systems[0].lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.file_systems[0].lustre_configuration.data_repository_configuration.import_path #=> String
@@ -5524,7 +5673,7 @@ module Aws::FSx
     #   resp.file_systems[0].lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
     #   resp.file_systems[0].lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.file_systems[0].administrative_actions #=> Array
-    #   resp.file_systems[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
+    #   resp.file_systems[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION"
     #   resp.file_systems[0].administrative_actions[0].progress_percent #=> Integer
     #   resp.file_systems[0].administrative_actions[0].request_time #=> Time
     #   resp.file_systems[0].administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -5623,12 +5772,17 @@ module Aws::FSx
     #   resp.file_systems[0].open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_systems[0].open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.file_systems[0].open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.file_systems[0].open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.file_systems[0].open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_1"
     #   resp.file_systems[0].open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.file_systems[0].open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_systems[0].open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_systems[0].open_zfs_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.file_systems[0].open_zfs_configuration.root_volume_id #=> String
+    #   resp.file_systems[0].open_zfs_configuration.preferred_subnet_id #=> String
+    #   resp.file_systems[0].open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.file_systems[0].open_zfs_configuration.route_table_ids #=> Array
+    #   resp.file_systems[0].open_zfs_configuration.route_table_ids[0] #=> String
+    #   resp.file_systems[0].open_zfs_configuration.endpoint_ip_address #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeFileSystems AWS API Documentation
@@ -5721,7 +5875,7 @@ module Aws::FSx
     #   resp.snapshots[0].tags[0].key #=> String
     #   resp.snapshots[0].tags[0].value #=> String
     #   resp.snapshots[0].administrative_actions #=> Array
-    #   resp.snapshots[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
+    #   resp.snapshots[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION"
     #   resp.snapshots[0].administrative_actions[0].progress_percent #=> Integer
     #   resp.snapshots[0].administrative_actions[0].request_time #=> Time
     #   resp.snapshots[0].administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -5768,6 +5922,8 @@ module Aws::FSx
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -5812,12 +5968,17 @@ module Aws::FSx
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_1"
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.preferred_subnet_id #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids #=> Array
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids[0] #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address #=> String
     #   resp.snapshots[0].administrative_actions[0].failure_details.message #=> String
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.creation_time #=> Time
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.file_system_id #=> String
@@ -6057,7 +6218,7 @@ module Aws::FSx
     #   resp.volumes[0].volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.volumes[0].lifecycle_transition_reason.message #=> String
     #   resp.volumes[0].administrative_actions #=> Array
-    #   resp.volumes[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
+    #   resp.volumes[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION"
     #   resp.volumes[0].administrative_actions[0].progress_percent #=> Integer
     #   resp.volumes[0].administrative_actions[0].request_time #=> Time
     #   resp.volumes[0].administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -6104,6 +6265,8 @@ module Aws::FSx
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -6148,12 +6311,17 @@ module Aws::FSx
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_1"
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.preferred_subnet_id #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids #=> Array
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids[0] #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address #=> String
     #   resp.volumes[0].administrative_actions[0].failure_details.message #=> String
     #   resp.volumes[0].administrative_actions[0].target_volume_values #=> Types::Volume
     #   resp.volumes[0].administrative_actions[0].target_snapshot_values.resource_arn #=> String
@@ -6417,6 +6585,8 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.file_system.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.file_system.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.file_system.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -6438,7 +6608,7 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
     #   resp.file_system.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.file_system.administrative_actions #=> Array
-    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
+    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.file_system.administrative_actions[0].request_time #=> Time
     #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -6537,12 +6707,17 @@ module Aws::FSx
     #   resp.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.file_system.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_1"
     #   resp.file_system.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.file_system.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_system.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.file_system.open_zfs_configuration.root_volume_id #=> String
+    #   resp.file_system.open_zfs_configuration.preferred_subnet_id #=> String
+    #   resp.file_system.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.file_system.open_zfs_configuration.route_table_ids #=> Array
+    #   resp.file_system.open_zfs_configuration.route_table_ids[0] #=> String
+    #   resp.file_system.open_zfs_configuration.endpoint_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/ReleaseFileSystemNfsV3Locks AWS API Documentation
     #
@@ -6605,7 +6780,7 @@ module Aws::FSx
     #   resp.volume_id #=> String
     #   resp.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING", "AVAILABLE"
     #   resp.administrative_actions #=> Array
-    #   resp.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
+    #   resp.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION"
     #   resp.administrative_actions[0].progress_percent #=> Integer
     #   resp.administrative_actions[0].request_time #=> Time
     #   resp.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -6652,6 +6827,8 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -6696,12 +6873,17 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_1"
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
+    #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.preferred_subnet_id #=> String
+    #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids #=> Array
+    #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids[0] #=> String
+    #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address #=> String
     #   resp.administrative_actions[0].failure_details.message #=> String
     #   resp.administrative_actions[0].target_volume_values.creation_time #=> Time
     #   resp.administrative_actions[0].target_volume_values.file_system_id #=> String
@@ -7049,7 +7231,11 @@ module Aws::FSx
     #
     # * `StorageCapacity`
     #
+    # * `StorageType`
+    #
     # * `ThroughputCapacity`
+    #
+    # * `DiskIopsConfiguration`
     #
     # * `WeeklyMaintenanceStartTime`
     #
@@ -7192,6 +7378,9 @@ module Aws::FSx
     # @option params [Types::UpdateFileSystemOpenZFSConfiguration] :open_zfs_configuration
     #   The configuration updates for an FSx for OpenZFS file system.
     #
+    # @option params [String] :storage_type
+    #   Specifies the file system's storage type.
+    #
     # @return [Types::UpdateFileSystemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFileSystemResponse#file_system #file_system} => Types::FileSystem
@@ -7264,6 +7453,10 @@ module Aws::FSx
     #         file_share_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
     #         audit_log_destination: "GeneralARN",
     #       },
+    #       disk_iops_configuration: {
+    #         mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
+    #         iops: 1,
+    #       },
     #     },
     #     lustre_configuration: {
     #       weekly_maintenance_start_time: "WeeklyTime",
@@ -7304,7 +7497,10 @@ module Aws::FSx
     #         mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
     #         iops: 1,
     #       },
+    #       add_route_table_ids: ["RouteTableId"],
+    #       remove_route_table_ids: ["RouteTableId"],
     #     },
+    #     storage_type: "SSD", # accepts SSD, HDD
     #   })
     #
     # @example Response structure
@@ -7352,6 +7548,8 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.file_system.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.file_system.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.file_system.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -7373,7 +7571,7 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
     #   resp.file_system.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.file_system.administrative_actions #=> Array
-    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
+    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.file_system.administrative_actions[0].request_time #=> Time
     #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -7472,12 +7670,17 @@ module Aws::FSx
     #   resp.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.file_system.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_1"
     #   resp.file_system.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.file_system.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.file_system.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.file_system.open_zfs_configuration.root_volume_id #=> String
+    #   resp.file_system.open_zfs_configuration.preferred_subnet_id #=> String
+    #   resp.file_system.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.file_system.open_zfs_configuration.route_table_ids #=> Array
+    #   resp.file_system.open_zfs_configuration.route_table_ids[0] #=> String
+    #   resp.file_system.open_zfs_configuration.endpoint_ip_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystem AWS API Documentation
     #
@@ -7531,7 +7734,7 @@ module Aws::FSx
     #   resp.snapshot.tags[0].key #=> String
     #   resp.snapshot.tags[0].value #=> String
     #   resp.snapshot.administrative_actions #=> Array
-    #   resp.snapshot.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
+    #   resp.snapshot.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION"
     #   resp.snapshot.administrative_actions[0].progress_percent #=> Integer
     #   resp.snapshot.administrative_actions[0].request_time #=> Time
     #   resp.snapshot.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -7578,6 +7781,8 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -7622,12 +7827,17 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_1"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.preferred_subnet_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids #=> Array
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids[0] #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address #=> String
     #   resp.snapshot.administrative_actions[0].failure_details.message #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.creation_time #=> Time
     #   resp.snapshot.administrative_actions[0].target_volume_values.file_system_id #=> String
@@ -7926,7 +8136,7 @@ module Aws::FSx
     #   resp.volume.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.volume.lifecycle_transition_reason.message #=> String
     #   resp.volume.administrative_actions #=> Array
-    #   resp.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
+    #   resp.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE", "THROUGHPUT_OPTIMIZATION", "IOPS_OPTIMIZATION", "STORAGE_TYPE_OPTIMIZATION"
     #   resp.volume.administrative_actions[0].progress_percent #=> Integer
     #   resp.volume.administrative_actions[0].request_time #=> Time
     #   resp.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -7973,6 +8183,8 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -8017,12 +8229,17 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_1"
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.preferred_subnet_id #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address_range #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.route_table_ids[0] #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.endpoint_ip_address #=> String
     #   resp.volume.administrative_actions[0].failure_details.message #=> String
     #   resp.volume.administrative_actions[0].target_volume_values #=> Types::Volume
     #   resp.volume.administrative_actions[0].target_snapshot_values.resource_arn #=> String
@@ -8081,7 +8298,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

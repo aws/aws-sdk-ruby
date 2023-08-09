@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.180.3 (2023-08-09)
+------------------
+
 * Issue - Add support for sso-session names with whitespace configured by the CLI `aws sso configure` command (#2895).
 
 3.180.2 (2023-08-07)

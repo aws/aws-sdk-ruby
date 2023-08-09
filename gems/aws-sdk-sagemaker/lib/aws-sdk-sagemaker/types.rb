@@ -6774,7 +6774,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] model_card_name
-    #   The name of the model card to export.
+    #   The name or Amazon Resource Name (ARN) of the model card to export.
     #   @return [String]
     #
     # @!attribute [rw] model_card_version
@@ -13596,7 +13596,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] model_card_name
-    #   The name of the model card that the model export job exports.
+    #   The name or Amazon Resource Name (ARN) of the model card that the
+    #   model export job exports.
     #   @return [String]
     #
     # @!attribute [rw] model_card_version
@@ -13641,7 +13642,8 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] model_card_name
-    #   The name of the model card to describe.
+    #   The name or Amazon Resource Name (ARN) of the model card to
+    #   describe.
     #   @return [String]
     #
     # @!attribute [rw] model_card_version
@@ -25480,7 +25482,8 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] model_card_name
-    #   List model card versions for the model card with the specified name.
+    #   List model card versions for the model card with the specified name
+    #   or Amazon Resource Name (ARN).
     #   @return [String]
     #
     # @!attribute [rw] model_card_status
@@ -31463,7 +31466,7 @@ module Aws::SageMaker
     #     `"CompilerOptions": ""--verbose 1 --num-neuroncores 2 -O2""`.
     #
     #     For information about supported compiler options, see [ Neuron
-    #     Compiler CLI][1].
+    #     Compiler CLI Reference Guide][1].
     #
     #   * `CoreML`: Compilation for the CoreML [OutputConfig][2]
     #     `TargetDevice` supports the following compiler options:
@@ -31494,7 +31497,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: https://github.com/aws/aws-neuron-sdk/blob/master/docs/neuron-cc/command-line-reference.md
+    #   [1]: https://awsdocs-neuron.readthedocs-hosted.com/en/latest/compiler/neuronx-cc/api-reference-guide/neuron-compiler-cli-reference-guide.html
     #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OutputConfig.html
     #   @return [String]
     #
@@ -40617,7 +40620,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] model_card_name
-    #   The name of the model card to update.
+    #   The name or Amazon Resource Name (ARN) of the model card to update.
     #   @return [String]
     #
     # @!attribute [rw] content
