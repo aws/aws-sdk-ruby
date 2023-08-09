@@ -31,7 +31,13 @@ module Aws
           key: options[:key],
         }
         @params[:version_id] = options[:version_id] if options[:version_id]
-        @params[:checksum_mode] = options[:checksum_mode] || 'ENABLED'
+
+        # checksum_mode only supports the value "ENABLED"
+        # falsey values (false/nil) or "DISABLED" should be considered
+        # disabled and the api parameter should be unset.
+        if (checksum_mode = options.fetch(:checksum_mode, 'ENABLED'))
+          @params[:checksum_mode] = checksum_mode unless checksum_mode.upcase == 'DISABLED'
+        end
         @on_checksum_validated = options[:on_checksum_validated]
 
         validate!

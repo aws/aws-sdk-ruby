@@ -212,6 +212,28 @@ module Aws
           expect(callback_data[:called]).to eq(4)
         end
 
+        it 'supports disabling checksum_mode' do
+          expect(client).to receive(:head_object).with({
+            bucket: 'bucket',
+            key: 'small',
+            part_number: 1
+          }).and_return(
+            client.stub_data(
+              :head_object,
+              content_length: one_meg,
+              parts_count: nil
+            )
+          )
+
+          expect(client).to receive(:get_object).with({
+            bucket: 'bucket',
+            key: 'small',
+            response_target: path
+          }).exactly(1).times
+
+          small_obj.download_file(path, checksum_mode: 'DISABLED')
+        end
+
         it 'raises an error if an invalid mode is specified' do
           expect { large_obj.download_file(path, mode: 'invalid_mode') }
             .to raise_error(

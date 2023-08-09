@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Add support for disabling checksum validation in `Object#download_file` (#2893).
+
 1.132.0 (2023-07-24)
 ------------------
 
