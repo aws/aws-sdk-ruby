@@ -95,7 +95,7 @@ module Aws
 
       it 'prefers sso credentials over assume role' do
         expect(SSOCredentials).to receive(:new).with(
-          sso_start_url: nil,
+          sso_start_url: 'START_URL',
           sso_region: 'us-east-1',
           sso_account_id: 'SSO_ACCOUNT_ID',
           sso_role_name: 'SSO_ROLE_NAME',
@@ -163,7 +163,7 @@ module Aws
 
       it 'loads SSO credentials from when the session name has quotes' do
         expect(SSOCredentials).to receive(:new).with(
-          sso_start_url: nil,
+          sso_start_url: 'START_URL',
           sso_region: 'us-east-1',
           sso_account_id: 'SSO_ACCOUNT_ID',
           sso_role_name: 'SSO_ROLE_NAME',
@@ -389,7 +389,7 @@ module Aws
 
         it 'supports :source_profile from sso credentials' do
           expect(SSOCredentials).to receive(:new).with(
-            sso_start_url: nil,
+            sso_start_url: 'START_URL',
             sso_region: 'us-east-1',
             sso_account_id: 'SSO_ACCOUNT_ID',
             sso_role_name: 'SSO_ROLE_NAME',
