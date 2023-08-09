@@ -30,6 +30,9 @@ region = sa-east-1
 [sso-session dev]
 sso_region = us-east-1
 
+[sso-session 'profile with spaces']
+sso_region = us-east-1
+
 [services test-services]
 s3 =
    endpoint_url = https://localhost:8000
