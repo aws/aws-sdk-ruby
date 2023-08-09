@@ -385,7 +385,7 @@ module Aws
           sso_role_name: prof_config['sso_role_name'],
           sso_session: prof_config['sso_session'],
           sso_region: sso_region,
-          sso_start_url: prof_config['sso_start_url']
+          sso_start_url: sso_start_url
           )
       end
     end
@@ -458,12 +458,8 @@ module Aws
     end
 
     def sso_session(cfg, profile, sso_session_name)
-      sso_session = cfg["sso-session #{sso_session_name}"]
-
-      if sso_session.nil? && sso_session_name.match(/\s/)
-        # aws sso-configure may add quotes around sso session names with whitespace
-        sso_session = cfg["sso-session '#{sso_session_name}'"]
-      end
+      # aws sso-configure may add quotes around sso session names with whitespace
+      sso_session = cfg["sso-session #{sso_session_name}"] || cfg["sso-session '#{sso_session_name}'"]
 
       unless sso_session
         raise ArgumentError,
