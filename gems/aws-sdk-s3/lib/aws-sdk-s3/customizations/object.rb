@@ -496,8 +496,9 @@ module Aws
       #   the object has a stored checksum, it will be used to validate the
       #   download and will raise an `Aws::Errors::ChecksumError` if
       #   checksum validation fails. You may provide a `on_checksum_validated`
-      #   callback if you need to verify that validation occured and which
-      #   algorithm was used.
+      #   callback if you need to verify that validation occurred and which
+      #   algorithm was used.  To disable checksum validation, set
+      #   `checksum_mode` to either `false` or `nil`.
       #
       # @option options [Callable] on_checksum_validated Called each time a
       #   request's checksum is validated with the checksum algorithm and the
