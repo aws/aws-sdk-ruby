@@ -405,6 +405,7 @@ module Aws::Omics
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TaskId = Shapes::StringShape.new(name: 'TaskId')
+    TaskInstanceType = Shapes::StringShape.new(name: 'TaskInstanceType')
     TaskList = Shapes::ListShape.new(name: 'TaskList')
     TaskListItem = Shapes::StructureShape.new(name: 'TaskListItem')
     TaskListItemCpusInteger = Shapes::IntegerShape.new(name: 'TaskListItemCpusInteger')
@@ -1007,6 +1008,7 @@ module Aws::Omics
     GetRunTaskResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: TaskStatusMessage, location_name: "statusMessage"))
     GetRunTaskResponse.add_member(:log_stream, Shapes::ShapeRef.new(shape: TaskLogStream, location_name: "logStream"))
     GetRunTaskResponse.add_member(:gpus, Shapes::ShapeRef.new(shape: GetRunTaskResponseGpusInteger, location_name: "gpus"))
+    GetRunTaskResponse.add_member(:instance_type, Shapes::ShapeRef.new(shape: TaskInstanceType, location_name: "instanceType"))
     GetRunTaskResponse.struct_class = Types::GetRunTaskResponse
 
     GetSequenceStoreRequest.add_member(:id, Shapes::ShapeRef.new(shape: SequenceStoreId, required: true, location: "uri", location_name: "id"))
@@ -1701,6 +1703,7 @@ module Aws::Omics
     TaskListItem.add_member(:start_time, Shapes::ShapeRef.new(shape: TaskTimestamp, location_name: "startTime"))
     TaskListItem.add_member(:stop_time, Shapes::ShapeRef.new(shape: TaskTimestamp, location_name: "stopTime"))
     TaskListItem.add_member(:gpus, Shapes::ShapeRef.new(shape: TaskListItemGpusInteger, location_name: "gpus"))
+    TaskListItem.add_member(:instance_type, Shapes::ShapeRef.new(shape: TaskInstanceType, location_name: "instanceType"))
     TaskListItem.struct_class = Types::TaskListItem
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))

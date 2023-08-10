@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2023-08-10)
+------------------
+
+* Feature - Documentation updates for AW Transfer Family
+
 1.76.0 (2023-07-25)
 ------------------
 

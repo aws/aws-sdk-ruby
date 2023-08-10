@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2023-08-10)
+------------------
+
+* Feature - This release enables configuring security groups for Network Load Balancers
+
 1.89.0 (2023-07-11)
 ------------------
 

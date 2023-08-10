@@ -2035,6 +2035,7 @@ module Aws::Omics
     #   * {Types::GetRunTaskResponse#status_message #status_message} => String
     #   * {Types::GetRunTaskResponse#log_stream #log_stream} => String
     #   * {Types::GetRunTaskResponse#gpus #gpus} => Integer
+    #   * {Types::GetRunTaskResponse#instance_type #instance_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2056,6 +2057,7 @@ module Aws::Omics
     #   resp.status_message #=> String
     #   resp.log_stream #=> String
     #   resp.gpus #=> Integer
+    #   resp.instance_type #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2314,7 +2316,7 @@ module Aws::Omics
     #   IDs of annotation import jobs to retrieve.
     #
     # @option params [String] :next_token
-    #   Specify the pagination token from a previous request to retrieve the
+    #   Specifies the pagination token from a previous request to retrieve the
     #   next page of results.
     #
     # @option params [Types::ListAnnotationImportJobsFilter] :filter
@@ -3037,6 +3039,7 @@ module Aws::Omics
     #   resp.items[0].start_time #=> Time
     #   resp.items[0].stop_time #=> Time
     #   resp.items[0].gpus #=> Integer
+    #   resp.items[0].instance_type #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListRunTasks AWS API Documentation
@@ -4088,7 +4091,7 @@ module Aws::Omics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -192,7 +192,11 @@ module Aws::CloudTrail
     #
     #     * `AWS::KendraRanking::ExecutionPlan`
     #
+    #     * `AWS::ManagedBlockchain::Network`
+    #
     #     * `AWS::ManagedBlockchain::Node`
+    #
+    #     * `AWS::MedicalImaging::Datastore`
     #
     #     * `AWS::SageMaker::ExperimentTrialComponent`
     #
@@ -203,6 +207,10 @@ module Aws::CloudTrail
     #     * `AWS::S3ObjectLambda::AccessPoint`
     #
     #     * `AWS::S3Outposts::Object`
+    #
+    #     * `AWS::SSMMessages::ControlChannel`
+    #
+    #     * `AWS::VerifiedPermissions::PolicyStore`
     #
     #     You can have only one `resources.type` ﬁeld per selector. To log
     #     data events on more than one resource type, add another selector.
@@ -320,11 +328,27 @@ module Aws::CloudTrail
     #
     #     ^
     #
+    #     When `resources.type` equals `AWS::ManagedBlockchain::Network`,
+    #     and the operator is set to `Equals` or `NotEquals`, the ARN must
+    #     be in the following format:
+    #
+    #     * `arn:<partition>:managedblockchain:::networks/<network_name>`
+    #
+    #     ^
+    #
     #     When `resources.type` equals `AWS::ManagedBlockchain::Node`, and
     #     the operator is set to `Equals` or `NotEquals`, the ARN must be in
     #     the following format:
     #
     #     * `arn:<partition>:managedblockchain:<region>:<account_ID>:nodes/<node_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::MedicalImaging::Datastore`, and
+    #     the operator is set to `Equals` or `NotEquals`, the ARN must be in
+    #     the following format:
+    #
+    #     * `arn:<partition>:medical-imaging:<region>:<account_ID>:datastore/<data_store_ID>`
     #
     #     ^
     #
@@ -369,6 +393,23 @@ module Aws::CloudTrail
     #     following format:
     #
     #     * `arn:<partition>:s3-outposts:<region>:<account_ID>:<object_path>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::SSMMessages::ControlChannel`,
+    #     and the operator is set to `Equals` or `NotEquals`, the ARN must
+    #     be in the following format:
+    #
+    #     * `arn:<partition>:ssmmessages:<region>:<account_ID>:control-channel/<channel_ID>`
+    #
+    #     ^
+    #
+    #     When resources.type equals
+    #     `AWS::VerifiedPermissions::PolicyStore`, and the operator is set
+    #     to `Equals` or `NotEquals`, the ARN must be in the following
+    #     format:
+    #
+    #     * `arn:<partition>:verifiedpermissions:<region>:<account_ID>:policy-store/<policy_store_UUID>`
     #
     #     ^
     #   @return [String]
@@ -695,6 +736,20 @@ module Aws::CloudTrail
     # @!attribute [rw] retention_period
     #   The retention period of the event data store, in days. You can set a
     #   retention period of up to 2557 days, the equivalent of seven years.
+    #   CloudTrail Lake determines whether to retain an event by checking if
+    #   the `eventTime` of the event is within the specified retention
+    #   period. For example, if you set a retention period of 90 days,
+    #   CloudTrail will remove events when the `eventTime` is older than 90
+    #   days.
+    #
+    #   <note markdown="1"> If you plan to copy trail events to this event data store, we
+    #   recommend that you consider both the age of the events that you want
+    #   to copy as well as how long you want to keep the copied events in
+    #   your event data store. For example, if you copy trail events that
+    #   are 5 years old and specify a retention period of 7 years, the event
+    #   data store will retain those events for two years.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] termination_protection_enabled
@@ -1173,7 +1228,11 @@ module Aws::CloudTrail
     #
     #   * `AWS::KendraRanking::ExecutionPlan`
     #
+    #   * `AWS::ManagedBlockchain::Network`
+    #
     #   * `AWS::ManagedBlockchain::Node`
+    #
+    #   * `AWS::MedicalImaging::Datastore`
     #
     #   * `AWS::SageMaker::ExperimentTrialComponent`
     #
@@ -1184,6 +1243,10 @@ module Aws::CloudTrail
     #   * `AWS::S3ObjectLambda::AccessPoint`
     #
     #   * `AWS::S3Outposts::Object`
+    #
+    #   * `AWS::SSMMessages::ControlChannel`
+    #
+    #   * `AWS::VerifiedPermissions::PolicyStore`
     #
     #
     #
@@ -3306,8 +3369,9 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # You are already running the maximum number of concurrent queries. Wait
-    # a minute for some queries to finish, and then run the query again.
+    # You are already running the maximum number of concurrent queries. The
+    # maximum number of concurrent queries is 10. Wait a minute for some
+    # queries to finish, and then run the query again.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/MaxConcurrentQueriesException AWS API Documentation
     #
@@ -4535,7 +4599,21 @@ module Aws::CloudTrail
     #   @return [Boolean]
     #
     # @!attribute [rw] retention_period
-    #   The retention period, in days.
+    #   The retention period of the event data store, in days. You can set a
+    #   retention period of up to 2557 days, the equivalent of seven years.
+    #   CloudTrail Lake determines whether to retain an event by checking if
+    #   the `eventTime` of the event is within the specified retention
+    #   period. For example, if you set a retention period of 90 days,
+    #   CloudTrail will remove events when the `eventTime` is older than 90
+    #   days.
+    #
+    #   <note markdown="1"> If you decrease the retention period of an event data store,
+    #   CloudTrail will remove any events with an `eventTime` older than the
+    #   new retention period. For example, if the previous retention period
+    #   was 365 days and you decrease it to 100 days, CloudTrail will remove
+    #   events with an `eventTime` older than 100 days.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] termination_protection_enabled

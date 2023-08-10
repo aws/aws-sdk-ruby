@@ -880,6 +880,45 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Associates an agent with a traffic distribution group.
+    #
+    # @option params [required, String] :traffic_distribution_group_id
+    #   The identifier of the traffic distribution group. This can be the ID
+    #   or the ARN if the API is being called in the Region where the traffic
+    #   distribution group was created. The ARN must be provided if the call
+    #   is from the replicated Region.
+    #
+    # @option params [required, String] :user_id
+    #   The identifier of the user account. This can be the ID or the ARN of
+    #   the user.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_traffic_distribution_group_user({
+    #     traffic_distribution_group_id: "TrafficDistributionGroupIdOrArn", # required
+    #     user_id: "UserId", # required
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateTrafficDistributionGroupUser AWS API Documentation
+    #
+    # @overload associate_traffic_distribution_group_user(params = {})
+    # @param [Hash] params ({})
+    def associate_traffic_distribution_group_user(params = {}, options = {})
+      req = build_request(:associate_traffic_distribution_group_user, params)
+      req.send_request(options)
+    end
+
     # Claims an available phone number to your Amazon Connect instance or
     # traffic distribution group. You can call this API only in the same
     # Amazon Web Services Region where the Amazon Connect instance or
@@ -1869,8 +1908,8 @@ module Aws::Connect
     #
     # @option params [String] :agent_availability_timer
     #   Whether agents with this routing profile will have their routing order
-    #   calculated based on *time since their last inbound contact* or
-    #   *longest idle time*.
+    #   calculated based on *longest idle time* or *time since their last
+    #   inbound contact*.
     #
     # @return [Types::CreateRoutingProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4272,6 +4311,7 @@ module Aws::Connect
     #   resp.traffic_distribution_group.status #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "CREATION_FAILED", "PENDING_DELETION", "DELETION_FAILED", "UPDATE_IN_PROGRESS"
     #   resp.traffic_distribution_group.tags #=> Hash
     #   resp.traffic_distribution_group.tags["TagKey"] #=> String
+    #   resp.traffic_distribution_group.is_default #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeTrafficDistributionGroup AWS API Documentation
     #
@@ -4842,6 +4882,45 @@ module Aws::Connect
     # @param [Hash] params ({})
     def disassociate_security_key(params = {}, options = {})
       req = build_request(:disassociate_security_key, params)
+      req.send_request(options)
+    end
+
+    # Disassociates an agent from a traffic distribution group.
+    #
+    # @option params [required, String] :traffic_distribution_group_id
+    #   The identifier of the traffic distribution group. This can be the ID
+    #   or the ARN if the API is being called in the Region where the traffic
+    #   distribution group was created. The ARN must be provided if the call
+    #   is from the replicated Region.
+    #
+    # @option params [required, String] :user_id
+    #   The identifier for the user. This can be the ID or the ARN of the
+    #   user.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_traffic_distribution_group_user({
+    #     traffic_distribution_group_id: "TrafficDistributionGroupIdOrArn", # required
+    #     user_id: "UserId", # required
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateTrafficDistributionGroupUser AWS API Documentation
+    #
+    # @overload disassociate_traffic_distribution_group_user(params = {})
+    # @param [Hash] params ({})
+    def disassociate_traffic_distribution_group_user(params = {}, options = {})
+      req = build_request(:disassociate_traffic_distribution_group_user, params)
       req.send_request(options)
     end
 
@@ -6294,6 +6373,8 @@ module Aws::Connect
     #   * {Types::GetTrafficDistributionResponse#telephony_config #telephony_config} => Types::TelephonyConfig
     #   * {Types::GetTrafficDistributionResponse#id #id} => String
     #   * {Types::GetTrafficDistributionResponse#arn #arn} => String
+    #   * {Types::GetTrafficDistributionResponse#sign_in_config #sign_in_config} => Types::SignInConfig
+    #   * {Types::GetTrafficDistributionResponse#agent_config #agent_config} => Types::AgentConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -6308,6 +6389,12 @@ module Aws::Connect
     #   resp.telephony_config.distributions[0].percentage #=> Integer
     #   resp.id #=> String
     #   resp.arn #=> String
+    #   resp.sign_in_config.distributions #=> Array
+    #   resp.sign_in_config.distributions[0].region #=> String
+    #   resp.sign_in_config.distributions[0].enabled #=> Boolean
+    #   resp.agent_config.distributions #=> Array
+    #   resp.agent_config.distributions[0].region #=> String
+    #   resp.agent_config.distributions[0].percentage #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetTrafficDistribution AWS API Documentation
     #
@@ -7416,6 +7503,15 @@ module Aws::Connect
     # for Your Contact Center][1] in the *Amazon Connect Administrator
     # Guide*.
     #
+    # <note markdown="1"> * When given an instance ARN, `ListPhoneNumbersV2` returns only the
+    #   phone numbers claimed to the instance.
+    #
+    # * When given a traffic distribution group ARN `ListPhoneNumbersV2`
+    #   returns only the phone numbers claimed to the traffic distribution
+    #   group.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html
@@ -8182,6 +8278,52 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Lists traffic distribution group users.
+    #
+    # @option params [required, String] :traffic_distribution_group_id
+    #   The identifier of the traffic distribution group. This can be the ID
+    #   or the ARN if the API is being called in the Region where the traffic
+    #   distribution group was created. The ARN must be provided if the call
+    #   is from the replicated Region.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @return [Types::ListTrafficDistributionGroupUsersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTrafficDistributionGroupUsersResponse#next_token #next_token} => String
+    #   * {Types::ListTrafficDistributionGroupUsersResponse#traffic_distribution_group_user_summary_list #traffic_distribution_group_user_summary_list} => Array&lt;Types::TrafficDistributionGroupUserSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_traffic_distribution_group_users({
+    #     traffic_distribution_group_id: "TrafficDistributionGroupIdOrArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.traffic_distribution_group_user_summary_list #=> Array
+    #   resp.traffic_distribution_group_user_summary_list[0].user_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListTrafficDistributionGroupUsers AWS API Documentation
+    #
+    # @overload list_traffic_distribution_group_users(params = {})
+    # @param [Hash] params ({})
+    def list_traffic_distribution_group_users(params = {}, options = {})
+      req = build_request(:list_traffic_distribution_group_users, params)
+      req.send_request(options)
+    end
+
     # Lists traffic distribution groups.
     #
     # @option params [Integer] :max_results
@@ -8224,6 +8366,7 @@ module Aws::Connect
     #   resp.traffic_distribution_group_summary_list[0].name #=> String
     #   resp.traffic_distribution_group_summary_list[0].instance_arn #=> String
     #   resp.traffic_distribution_group_summary_list[0].status #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "CREATION_FAILED", "PENDING_DELETION", "DELETION_FAILED", "UPDATE_IN_PROGRESS"
+    #   resp.traffic_distribution_group_summary_list[0].is_default #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListTrafficDistributionGroups AWS API Documentation
     #
@@ -10595,7 +10738,8 @@ module Aws::Connect
     #   The identifier for the queue.
     #
     # @option params [String] :user_id
-    #   The identifier for the user.
+    #   The identifier for the user. This can be the ID or the ARN of the
+    #   user.
     #
     # @option params [required, String] :contact_flow_id
     #   The identifier of the flow.
@@ -12477,6 +12621,13 @@ module Aws::Connect
     # Updates the traffic distribution for a given traffic distribution
     # group.
     #
+    # <note markdown="1"> You can change the `SignInConfig` only for a default
+    # `TrafficDistributionGroup`. If you call `UpdateTrafficDistribution`
+    # with a modified `SignInConfig` and a non-default
+    # `TrafficDistributionGroup`, an `InvalidRequestException` is returned.
+    #
+    #  </note>
+    #
     # For more information about updating a traffic distribution group, see
     # [Update telephony traffic distribution across Amazon Web Services
     # Regions ][1] in the *Amazon Connect Administrator Guide*.
@@ -12494,6 +12645,13 @@ module Aws::Connect
     # @option params [Types::TelephonyConfig] :telephony_config
     #   The distribution of traffic between the instance and its replica(s).
     #
+    # @option params [Types::SignInConfig] :sign_in_config
+    #   The distribution of allowing signing in to the instance and its
+    #   replica(s).
+    #
+    # @option params [Types::AgentConfig] :agent_config
+    #   The distribution of agents between the instance and its replica(s).
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -12501,6 +12659,22 @@ module Aws::Connect
     #   resp = client.update_traffic_distribution({
     #     id: "TrafficDistributionGroupIdOrArn", # required
     #     telephony_config: {
+    #       distributions: [ # required
+    #         {
+    #           region: "AwsRegion", # required
+    #           percentage: 1, # required
+    #         },
+    #       ],
+    #     },
+    #     sign_in_config: {
+    #       distributions: [ # required
+    #         {
+    #           region: "AwsRegion", # required
+    #           enabled: false, # required
+    #         },
+    #       ],
+    #     },
+    #     agent_config: {
     #       distributions: [ # required
     #         {
     #           region: "AwsRegion", # required
@@ -12813,7 +12987,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.123.0'
+      context[:gem_version] = '1.124.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

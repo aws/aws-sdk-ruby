@@ -2310,6 +2310,10 @@ module Aws::Omics
     #   The number of Graphics Processing Units (GPU) specified in the task.
     #   @return [Integer]
     #
+    # @!attribute [rw] instance_type
+    #   The instance type for a task.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetRunTaskResponse AWS API Documentation
     #
     class GetRunTaskResponse < Struct.new(
@@ -2323,7 +2327,8 @@ module Aws::Omics
       :stop_time,
       :status_message,
       :log_stream,
-      :gpus)
+      :gpus,
+      :instance_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2920,8 +2925,8 @@ module Aws::Omics
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   Specify the pagination token from a previous request to retrieve the
-    #   next page of results.
+    #   Specifies the pagination token from a previous request to retrieve
+    #   the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] filter
@@ -2944,7 +2949,8 @@ module Aws::Omics
     #   @return [Array<Types::AnnotationImportJobItem>]
     #
     # @!attribute [rw] next_token
-    #   A pagination token that's included if more results are available.
+    #   Specifies the pagination token from a previous request to retrieve
+    #   the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListAnnotationImportJobsResponse AWS API Documentation
@@ -5266,6 +5272,10 @@ module Aws::Omics
     #   task.
     #   @return [Integer]
     #
+    # @!attribute [rw] instance_type
+    #   The instance type for a task.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/TaskListItem AWS API Documentation
     #
     class TaskListItem < Struct.new(
@@ -5277,7 +5287,8 @@ module Aws::Omics
       :creation_time,
       :start_time,
       :stop_time,
-      :gpus)
+      :gpus,
+      :instance_type)
       SENSITIVE = []
       include Aws::Structure
     end

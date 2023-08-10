@@ -88,6 +88,20 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The distribution of agents between the instance and its replica(s).
+    #
+    # @!attribute [rw] distributions
+    #   Information about traffic distributions.
+    #   @return [Array<Types::Distribution>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentConfig AWS API Documentation
+    #
+    class AgentConfig < Struct.new(
+      :distributions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the [contact][1] associated to the user.
     #
     #
@@ -585,6 +599,41 @@ module Aws::Connect
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] traffic_distribution_group_id
+    #   The identifier of the traffic distribution group. This can be the ID
+    #   or the ARN if the API is being called in the Region where the
+    #   traffic distribution group was created. The ARN must be provided if
+    #   the call is from the replicated Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier of the user account. This can be the ID or the ARN of
+    #   the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateTrafficDistributionGroupUserRequest AWS API Documentation
+    #
+    class AssociateTrafficDistributionGroupUserRequest < Struct.new(
+      :traffic_distribution_group_id,
+      :user_id,
+      :instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateTrafficDistributionGroupUserResponse AWS API Documentation
+    #
+    class AssociateTrafficDistributionGroupUserResponse < Aws::EmptyStructure; end
 
     # Information about a reference when the `referenceType` is
     # `ATTACHMENT`. Otherwise, null.
@@ -1996,8 +2045,8 @@ module Aws::Connect
     #
     # @!attribute [rw] agent_availability_timer
     #   Whether agents with this routing profile will have their routing
-    #   order calculated based on *time since their last inbound contact* or
-    #   *longest idle time*.
+    #   order calculated based on *longest idle time* or *time since their
+    #   last inbound contact*.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateRoutingProfileRequest AWS API Documentation
@@ -4332,6 +4381,41 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @!attribute [rw] traffic_distribution_group_id
+    #   The identifier of the traffic distribution group. This can be the ID
+    #   or the ARN if the API is being called in the Region where the
+    #   traffic distribution group was created. The ARN must be provided if
+    #   the call is from the replicated Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier for the user. This can be the ID or the ARN of the
+    #   user.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateTrafficDistributionGroupUserRequest AWS API Documentation
+    #
+    class DisassociateTrafficDistributionGroupUserRequest < Struct.new(
+      :traffic_distribution_group_id,
+      :user_id,
+      :instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateTrafficDistributionGroupUserResponse AWS API Documentation
+    #
+    class DisassociateTrafficDistributionGroupUserResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] user_id
     #   The identifier of the user account.
     #   @return [String]
@@ -5741,7 +5825,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] user_id
-    #   The identifier for the user.
+    #   The identifier for the user. This can be the ID or the ARN of the
+    #   user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetFederationTokenResponse AWS API Documentation
@@ -6703,12 +6788,23 @@ module Aws::Connect
     #   The Amazon Resource Name (ARN) of the traffic distribution group.
     #   @return [String]
     #
+    # @!attribute [rw] sign_in_config
+    #   The distribution of allowing signing in to the instance and its
+    #   replica(s).
+    #   @return [Types::SignInConfig]
+    #
+    # @!attribute [rw] agent_config
+    #   The distribution of agents between the instance and its replica(s).
+    #   @return [Types::AgentConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetTrafficDistributionResponse AWS API Documentation
     #
     class GetTrafficDistributionResponse < Struct.new(
       :telephony_config,
       :id,
-      :arn)
+      :arn,
+      :sign_in_config,
+      :agent_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9322,6 +9418,51 @@ module Aws::Connect
     class ListTaskTemplatesResponse < Struct.new(
       :task_templates,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_distribution_group_id
+    #   The identifier of the traffic distribution group. This can be the ID
+    #   or the ARN if the API is being called in the Region where the
+    #   traffic distribution group was created. The ARN must be provided if
+    #   the call is from the replicated Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListTrafficDistributionGroupUsersRequest AWS API Documentation
+    #
+    class ListTrafficDistributionGroupUsersRequest < Struct.new(
+      :traffic_distribution_group_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_distribution_group_user_summary_list
+    #   A list of traffic distribution group users.
+    #   @return [Array<Types::TrafficDistributionGroupUserSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListTrafficDistributionGroupUsersResponse AWS API Documentation
+    #
+    class ListTrafficDistributionGroupUsersResponse < Struct.new(
+      :next_token,
+      :traffic_distribution_group_user_summary_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12392,6 +12533,41 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The distribution of allowing signing in to the instance and its
+    # replica(s).
+    #
+    # @!attribute [rw] distributions
+    #   Information about traffic distributions.
+    #   @return [Array<Types::SignInDistribution>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SignInConfig AWS API Documentation
+    #
+    class SignInConfig < Struct.new(
+      :distributions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The distribution of sign in traffic between the instance and its
+    # replica(s).
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region of the sign in distribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Whether sign in distribution is enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SignInDistribution AWS API Documentation
+    #
+    class SignInDistribution < Struct.new(
+      :region,
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the automation option based on a rule category for a
     # single select question.
     #
@@ -13575,6 +13751,22 @@ module Aws::Connect
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] is_default
+    #   Whether this is the default traffic distribution group created
+    #   during instance replication. The default traffic distribution group
+    #   cannot be deleted by the `DeleteTrafficDistributionGroup` API. The
+    #   default traffic distribution group is deleted as part of the process
+    #   for deleting a replica.
+    #
+    #   <note markdown="1"> You can change the `SignInConfig` only for a default
+    #   `TrafficDistributionGroup`. If you call `UpdateTrafficDistribution`
+    #   with a modified `SignInConfig` and a non-default
+    #   `TrafficDistributionGroup`, an `InvalidRequestException` is
+    #   returned.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TrafficDistributionGroup AWS API Documentation
     #
     class TrafficDistributionGroup < Struct.new(
@@ -13584,7 +13776,8 @@ module Aws::Connect
       :description,
       :instance_arn,
       :status,
-      :tags)
+      :tags,
+      :is_default)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13641,6 +13834,14 @@ module Aws::Connect
     #   [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateTrafficDistributionGroup.html
     #   @return [String]
     #
+    # @!attribute [rw] is_default
+    #   Whether this is the default traffic distribution group created
+    #   during instance replication. The default traffic distribution group
+    #   cannot be deleted by the `DeleteTrafficDistributionGroup` API. The
+    #   default traffic distribution group is deleted as part of the process
+    #   for deleting a replica.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TrafficDistributionGroupSummary AWS API Documentation
     #
     class TrafficDistributionGroupSummary < Struct.new(
@@ -13648,7 +13849,23 @@ module Aws::Connect
       :arn,
       :name,
       :instance_arn,
-      :status)
+      :status,
+      :is_default)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a traffic distribution group user.
+    #
+    # @!attribute [rw] user_id
+    #   The identifier for the user. This can be the ID or the ARN of the
+    #   user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TrafficDistributionGroupUserSummary AWS API Documentation
+    #
+    class TrafficDistributionGroupUserSummary < Struct.new(
+      :user_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13671,7 +13888,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] user_id
-    #   The identifier for the user.
+    #   The identifier for the user. This can be the ID or the ARN of the
+    #   user.
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
@@ -15069,11 +15287,22 @@ module Aws::Connect
     #   The distribution of traffic between the instance and its replica(s).
     #   @return [Types::TelephonyConfig]
     #
+    # @!attribute [rw] sign_in_config
+    #   The distribution of allowing signing in to the instance and its
+    #   replica(s).
+    #   @return [Types::SignInConfig]
+    #
+    # @!attribute [rw] agent_config
+    #   The distribution of agents between the instance and its replica(s).
+    #   @return [Types::AgentConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateTrafficDistributionRequest AWS API Documentation
     #
     class UpdateTrafficDistributionRequest < Struct.new(
       :id,
-      :telephony_config)
+      :telephony_config,
+      :sign_in_config,
+      :agent_config)
       SENSITIVE = []
       include Aws::Structure
     end

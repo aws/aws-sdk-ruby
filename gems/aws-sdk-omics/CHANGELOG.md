@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2023-08-10)
+------------------
+
+* Feature - This release adds instanceType to GetRunTask & ListRunTasks responses.
+
 1.11.0 (2023-07-31)
 ------------------
 

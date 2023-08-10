@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2023-08-10)
+------------------
+
+* Feature - Documentation updates for CloudTrail.
+
 1.66.0 (2023-07-11)
 ------------------
 

@@ -78,6 +78,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::AssociateRoutingProfileQueues.build(context)
           when :associate_security_key
             Aws::Connect::Endpoints::AssociateSecurityKey.build(context)
+          when :associate_traffic_distribution_group_user
+            Aws::Connect::Endpoints::AssociateTrafficDistributionGroupUser.build(context)
           when :claim_phone_number
             Aws::Connect::Endpoints::ClaimPhoneNumber.build(context)
           when :create_agent_status
@@ -222,6 +224,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::DisassociateRoutingProfileQueues.build(context)
           when :disassociate_security_key
             Aws::Connect::Endpoints::DisassociateSecurityKey.build(context)
+          when :disassociate_traffic_distribution_group_user
+            Aws::Connect::Endpoints::DisassociateTrafficDistributionGroupUser.build(context)
           when :dismiss_user_contact
             Aws::Connect::Endpoints::DismissUserContact.build(context)
           when :get_contact_attributes
@@ -304,6 +308,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::ListTagsForResource.build(context)
           when :list_task_templates
             Aws::Connect::Endpoints::ListTaskTemplates.build(context)
+          when :list_traffic_distribution_group_users
+            Aws::Connect::Endpoints::ListTrafficDistributionGroupUsers.build(context)
           when :list_traffic_distribution_groups
             Aws::Connect::Endpoints::ListTrafficDistributionGroups.build(context)
           when :list_use_cases

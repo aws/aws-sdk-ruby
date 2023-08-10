@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2023-08-10)
+------------------
+
+* Feature - Add additional InvalidRequestException to list of possible exceptions for ListSecret.
+
 1.81.0 (2023-07-13)
 ------------------
 

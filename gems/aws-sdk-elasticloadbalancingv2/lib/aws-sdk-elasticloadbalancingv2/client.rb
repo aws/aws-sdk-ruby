@@ -893,8 +893,8 @@ module Aws::ElasticLoadBalancingV2
     #   subnets.
     #
     # @option params [Array<String>] :security_groups
-    #   \[Application Load Balancers\] The IDs of the security groups for the
-    #   load balancer.
+    #   \[Application Load Balancers and Network Load Balancers\] The IDs of
+    #   the security groups for the load balancer.
     #
     # @option params [String] :scheme
     #   The nodes of an Internet-facing load balancer have public IP
@@ -1076,6 +1076,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.load_balancers[0].security_groups[0] #=> String
     #   resp.load_balancers[0].ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.load_balancers[0].customer_owned_ipv_4_pool #=> String
+    #   resp.load_balancers[0].enforce_security_group_inbound_rules_on_private_link_traffic #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateLoadBalancer AWS API Documentation
     #
@@ -1746,6 +1747,9 @@ module Aws::ElasticLoadBalancingV2
     # After the targets are deregistered, they no longer receive traffic
     # from the load balancer.
     #
+    # Note: If the specified target does not exist, the action returns
+    # successfully.
+    #
     # @option params [required, String] :target_group_arn
     #   The Amazon Resource Name (ARN) of the target group.
     #
@@ -2208,6 +2212,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.load_balancers[0].security_groups[0] #=> String
     #   resp.load_balancers[0].ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.load_balancers[0].customer_owned_ipv_4_pool #=> String
+    #   resp.load_balancers[0].enforce_security_group_inbound_rules_on_private_link_traffic #=> String
     #   resp.next_marker #=> String
     #
     #
@@ -4151,11 +4156,14 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # Associates the specified security groups with the specified
-    # Application Load Balancer. The specified security groups override the
-    # previously associated security groups.
+    # Application Load Balancer or Network Load Balancer. The specified
+    # security groups override the previously associated security groups.
     #
-    # You can't specify a security group for a Network Load Balancer or
-    # Gateway Load Balancer.
+    # You can't perform this operation on a Network Load Balancer unless
+    # you specified a security group for the load balancer when you created
+    # it.
+    #
+    # You can't associate a security group with a Gateway Load Balancer.
     #
     # @option params [required, String] :load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
@@ -4163,9 +4171,15 @@ module Aws::ElasticLoadBalancingV2
     # @option params [required, Array<String>] :security_groups
     #   The IDs of the security groups.
     #
+    # @option params [String] :enforce_security_group_inbound_rules_on_private_link_traffic
+    #   Indicates whether to evaluate inbound security group rules for traffic
+    #   sent to a Network Load Balancer through Amazon Web Services
+    #   PrivateLink. The default is `on`.
+    #
     # @return [Types::SetSecurityGroupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SetSecurityGroupsOutput#security_group_ids #security_group_ids} => Array&lt;String&gt;
+    #   * {Types::SetSecurityGroupsOutput#enforce_security_group_inbound_rules_on_private_link_traffic #enforce_security_group_inbound_rules_on_private_link_traffic} => String
     #
     #
     # @example Example: To associate a security group with a load balancer
@@ -4191,12 +4205,14 @@ module Aws::ElasticLoadBalancingV2
     #   resp = client.set_security_groups({
     #     load_balancer_arn: "LoadBalancerArn", # required
     #     security_groups: ["SecurityGroupId"], # required
+    #     enforce_security_group_inbound_rules_on_private_link_traffic: "on", # accepts on, off
     #   })
     #
     # @example Response structure
     #
     #   resp.security_group_ids #=> Array
     #   resp.security_group_ids[0] #=> String
+    #   resp.enforce_security_group_inbound_rules_on_private_link_traffic #=> String, one of "on", "off"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSecurityGroups AWS API Documentation
     #
@@ -4261,7 +4277,7 @@ module Aws::ElasticLoadBalancingV2
     #   subnets for your load balancer. The possible values are `ipv4` (for
     #   IPv4 addresses) and `dualstack` (for IPv4 and IPv6 addresses). You
     #   can’t specify `dualstack` for a load balancer with a UDP or TCP\_UDP
-    #   listener. .
+    #   listener.
     #
     # @return [Types::SetSubnetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4346,7 +4362,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

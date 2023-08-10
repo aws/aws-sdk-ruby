@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.124.0 (2023-08-10)
+------------------
+
+* Feature - This release adds APIs to provision agents that are global / available in multiple AWS regions and distribute them across these regions by percentage.
+
 1.123.0 (2023-08-04)
 ------------------
 

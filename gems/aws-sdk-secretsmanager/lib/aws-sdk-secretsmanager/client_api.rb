@@ -625,6 +625,7 @@ module Aws::SecretsManager
         o.input = Shapes::ShapeRef.new(shape: ListSecretsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListSecretsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o[:pager] = Aws::Pager.new(
