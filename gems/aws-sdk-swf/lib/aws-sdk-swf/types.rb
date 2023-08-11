@@ -1657,10 +1657,21 @@ module Aws::SWF
     #   to this event.
     #   @return [Integer]
     #
+    # @!attribute [rw] task_list
+    #   Represents a task list.
+    #   @return [Types::TaskList]
+    #
+    # @!attribute [rw] task_list_schedule_to_start_timeout
+    #   The maximum amount of time the decision task can wait to be assigned
+    #   to a worker.
+    #   @return [String]
+    #
     class DecisionTaskCompletedEventAttributes < Struct.new(
       :execution_context,
       :scheduled_event_id,
-      :started_event_id)
+      :started_event_id,
+      :task_list,
+      :task_list_schedule_to_start_timeout)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1693,10 +1704,16 @@ module Aws::SWF
     #   equal to `0`. You can use `NONE` to specify unlimited duration.
     #   @return [String]
     #
+    # @!attribute [rw] schedule_to_start_timeout
+    #   The maximum amount of time the decision task can wait to be assigned
+    #   to a worker.
+    #   @return [String]
+    #
     class DecisionTaskScheduledEventAttributes < Struct.new(
       :task_list,
       :task_priority,
-      :start_to_close_timeout)
+      :start_to_close_timeout,
+      :schedule_to_start_timeout)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4151,10 +4168,33 @@ module Aws::SWF
     #   User defined context to add to workflow execution.
     #   @return [String]
     #
+    # @!attribute [rw] task_list
+    #   The task list to use for the future decision tasks of this workflow
+    #   execution. This list overrides the original task list you specified
+    #   while starting the workflow execution.
+    #   @return [Types::TaskList]
+    #
+    # @!attribute [rw] task_list_schedule_to_start_timeout
+    #   Specifies a timeout (in seconds) for the task list override. When
+    #   this parameter is missing, the task list override is permanent. This
+    #   parameter makes it possible to temporarily override the task list.
+    #   If a decision task scheduled on the override task list is not
+    #   started within the timeout, the decision task will time out. Amazon
+    #   SWF will revert the override and schedule a new decision task to the
+    #   original task list.
+    #
+    #   If a decision task scheduled on the override task list is started
+    #   within the timeout, but not completed within the start-to-close
+    #   timeout, Amazon SWF will also revert the override and schedule a new
+    #   decision task to the original task list.
+    #   @return [String]
+    #
     class RespondDecisionTaskCompletedInput < Struct.new(
       :task_token,
       :decisions,
-      :execution_context)
+      :execution_context,
+      :task_list,
+      :task_list_schedule_to_start_timeout)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -91,6 +91,10 @@ module Aws::QuickSight
     #   The status of your account subscription.
     #   @return [String]
     #
+    # @!attribute [rw] iam_identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) for the IAM Identity Center instance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AccountInfo AWS API Documentation
     #
     class AccountInfo < Struct.new(
@@ -98,7 +102,8 @@ module Aws::QuickSight
       :edition,
       :notification_email,
       :authentication_type,
-      :account_subscription_status)
+      :account_subscription_status,
+      :iam_identity_center_instance_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20667,6 +20672,28 @@ module Aws::QuickSight
     #   is `VISIBLE`.
     #   @return [String]
     #
+    # @!attribute [rw] rows_layout
+    #   The layout for the row dimension headers of a pivot table. Choose
+    #   one of the following options.
+    #
+    #   * `TABULAR`: (Default) Each row field is displayed in a separate
+    #     column.
+    #
+    #   * `HIERARCHY`: All row fields are displayed in a single column.
+    #     Indentation is used to differentiate row headers of different
+    #     fields.
+    #   @return [String]
+    #
+    # @!attribute [rw] rows_label_options
+    #   The options for the label that is located above the row headers.
+    #   This option is only applicable when `RowsLayout` is set to
+    #   `HIERARCHY`.
+    #   @return [Types::PivotTableRowsLabelOptions]
+    #
+    # @!attribute [rw] default_cell_width
+    #   The default cell width of the pivot table.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PivotTableOptions AWS API Documentation
     #
     class PivotTableOptions < Struct.new(
@@ -20679,7 +20706,10 @@ module Aws::QuickSight
       :cell_style,
       :row_field_names_style,
       :row_alternate_color_options,
-      :collapsed_row_dimensions_visibility)
+      :collapsed_row_dimensions_visibility,
+      :rows_layout,
+      :rows_label_options,
+      :default_cell_width)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20699,6 +20729,26 @@ module Aws::QuickSight
     class PivotTablePaginatedReportOptions < Struct.new(
       :vertical_overflow_visibility,
       :overflow_column_header_visibility)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options for the label thta is located above the row headers. This
+    # option is only applicable when `RowsLayout` is set to `HIERARCHY`.
+    #
+    # @!attribute [rw] visibility
+    #   The visibility of the rows label.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_label
+    #   The custom label string for the rows label.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PivotTableRowsLabelOptions AWS API Documentation
+    #
+    class PivotTableRowsLabelOptions < Struct.new(
+      :visibility,
+      :custom_label)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22434,11 +22484,16 @@ module Aws::QuickSight
     #   Determines the list of row alternate colors.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] use_primary_background_color
+    #   The primary background color options for alternate rows.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RowAlternateColorOptions AWS API Documentation
     #
     class RowAlternateColorOptions < Struct.new(
       :status,
-      :row_alternate_colors)
+      :row_alternate_colors,
+      :use_primary_background_color)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24347,7 +24402,7 @@ module Aws::QuickSight
     #
     # @!attribute [rw] format_type
     #   The format of the snapshot file to be generated. You can choose
-    #   between `CSV` and `PDF`.
+    #   between `CSV` or `PDF`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SnapshotFile AWS API Documentation
@@ -24380,7 +24435,7 @@ module Aws::QuickSight
     #
     # @!attribute [rw] sheet_id
     #   The sheet ID of the dashboard to generate the snapshot artifact
-    #   from. This value is required for CSV or PDF format types.
+    #   from. This value is required for CSV and PDF format types.
     #   @return [String]
     #
     # @!attribute [rw] selection_scope
@@ -24396,10 +24451,10 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] visual_ids
-    #   A structure that lists the IDs of the visuals in the selected sheet.
-    #   Supported visual types are table, pivot table visuals. This value is
-    #   required if you are generating a CSV. This value supports a maximum
-    #   of 1 visual ID.
+    #   A list of visual IDs that are located in the selected sheet. This
+    #   structure supports tables and pivot tables. This structure is
+    #   required if you are generating a CSV. You can add a maximum of 1
+    #   visual ID to this structure.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SnapshotFileSheetSelection AWS API Documentation
@@ -25125,6 +25180,10 @@ module Aws::QuickSight
     #   The cell styling options for the subtotals of header cells.
     #   @return [Types::TableCellStyle]
     #
+    # @!attribute [rw] style_targets
+    #   The style targets options for subtotals.
+    #   @return [Array<Types::TableStyleTarget>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SubtotalOptions AWS API Documentation
     #
     class SubtotalOptions < Struct.new(
@@ -25134,7 +25193,8 @@ module Aws::QuickSight
       :field_level_options,
       :total_cell_style,
       :value_cell_style,
-      :metric_header_cell_style)
+      :metric_header_cell_style,
+      :style_targets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25670,6 +25730,20 @@ module Aws::QuickSight
     class TableSortConfiguration < Struct.new(
       :row_sort,
       :pagination_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The table style target.
+    #
+    # @!attribute [rw] cell_type
+    #   The cell type of the table style target.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TableStyleTarget AWS API Documentation
+    #
+    class TableStyleTarget < Struct.new(
+      :cell_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27082,6 +27156,10 @@ module Aws::QuickSight
     #   The other names or aliases for the calculated field cell value.
     #   @return [Array<Types::CellValueSynonym>]
     #
+    # @!attribute [rw] non_additive
+    #   The non additive for the table style target.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicCalculatedField AWS API Documentation
     #
     class TopicCalculatedField < Struct.new(
@@ -27100,7 +27178,8 @@ module Aws::QuickSight
       :allowed_aggregations,
       :not_allowed_aggregations,
       :never_aggregate_in_filter,
-      :cell_value_synonyms)
+      :cell_value_synonyms,
+      :non_additive)
       SENSITIVE = [:expression]
       include Aws::Structure
     end
@@ -27189,8 +27268,7 @@ module Aws::QuickSight
     #
     # @!attribute [rw] aggregation
     #   The type of aggregation that is performed on the column data when
-    #   it's queried. Valid values for this structure are `SUM`, `MAX`,
-    #   `MIN`, `COUNT`, `DISTINCT_COUNT`, and `AVERAGE`.
+    #   it's queried.
     #   @return [String]
     #
     # @!attribute [rw] is_included_in_topic
@@ -27244,6 +27322,10 @@ module Aws::QuickSight
     #   The other names or aliases for the column cell value.
     #   @return [Array<Types::CellValueSynonym>]
     #
+    # @!attribute [rw] non_additive
+    #   The non additive value for the column.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicColumn AWS API Documentation
     #
     class TopicColumn < Struct.new(
@@ -27262,7 +27344,8 @@ module Aws::QuickSight
       :not_allowed_aggregations,
       :default_formatting,
       :never_aggregate_in_filter,
-      :cell_value_synonyms)
+      :cell_value_synonyms,
+      :non_additive)
       SENSITIVE = []
       include Aws::Structure
     end

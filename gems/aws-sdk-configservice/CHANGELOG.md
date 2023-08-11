@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2023-08-11)
+------------------
+
+* Feature - Updated ResourceType enum with new resource types onboarded by AWS Config in July 2023.
+
 1.96.0 (2023-07-11)
 ------------------
 

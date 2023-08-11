@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2023-08-11)
+------------------
+
+* Feature - Adds sensitive trait to required input shapes.
+
 1.25.0 (2023-07-11)
 ------------------
 

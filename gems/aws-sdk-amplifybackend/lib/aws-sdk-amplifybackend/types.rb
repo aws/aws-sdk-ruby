@@ -721,7 +721,7 @@ module Aws::AmplifyBackend
       :delivery_method,
       :email_settings,
       :sms_settings)
-      SENSITIVE = []
+      SENSITIVE = [:email_settings, :sms_settings]
       include Aws::Structure
     end
 
@@ -1029,7 +1029,7 @@ module Aws::AmplifyBackend
       :delivery_method,
       :email_settings,
       :sms_settings)
-      SENSITIVE = []
+      SENSITIVE = [:email_settings, :sms_settings]
       include Aws::Structure
     end
 
@@ -2987,7 +2987,7 @@ module Aws::AmplifyBackend
       :google,
       :login_with_amazon,
       :sign_in_with_apple)
-      SENSITIVE = []
+      SENSITIVE = [:facebook, :google, :login_with_amazon, :sign_in_with_apple]
       include Aws::Structure
     end
 
@@ -3090,7 +3090,7 @@ module Aws::AmplifyBackend
       :delivery_method,
       :email_settings,
       :sms_settings)
-      SENSITIVE = []
+      SENSITIVE = [:email_settings, :sms_settings]
       include Aws::Structure
     end
 
@@ -3375,7 +3375,7 @@ module Aws::AmplifyBackend
       :delivery_method,
       :email_settings,
       :sms_settings)
-      SENSITIVE = []
+      SENSITIVE = [:email_settings, :sms_settings]
       include Aws::Structure
     end
 

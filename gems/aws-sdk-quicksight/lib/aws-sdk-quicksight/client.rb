@@ -686,9 +686,9 @@ module Aws::QuickSight
     #
     #   resp = client.create_account_subscription({
     #     edition: "STANDARD", # required, accepts STANDARD, ENTERPRISE, ENTERPRISE_AND_Q
-    #     authentication_method: "IAM_AND_QUICKSIGHT", # required, accepts IAM_AND_QUICKSIGHT, IAM_ONLY, ACTIVE_DIRECTORY
+    #     authentication_method: "IAM_AND_QUICKSIGHT", # required, accepts IAM_AND_QUICKSIGHT, IAM_ONLY, ACTIVE_DIRECTORY, IAM_IDENTITY_CENTER
     #     aws_account_id: "AwsAccountId", # required
-    #     account_name: "String", # required
+    #     account_name: "AccountName", # required
     #     notification_email: "String", # required
     #     active_directory_name: "String",
     #     realm: "String",
@@ -2474,7 +2474,7 @@ module Aws::QuickSight
     #               column_description: "LimitedString",
     #               column_synonyms: ["LimitedString"],
     #               column_data_role: "DIMENSION", # accepts DIMENSION, MEASURE
-    #               aggregation: "SUM", # accepts SUM, MAX, MIN, COUNT, DISTINCT_COUNT, AVERAGE
+    #               aggregation: "SUM", # accepts SUM, MAX, MIN, COUNT, DISTINCT_COUNT, AVERAGE, MEDIAN, STDEV, STDEVP, VAR, VARP
     #               is_included_in_topic: false,
     #               disable_indexing: false,
     #               comparative_order: {
@@ -2523,6 +2523,7 @@ module Aws::QuickSight
     #                   synonyms: ["String"],
     #                 },
     #               ],
+    #               non_additive: false,
     #             },
     #           ],
     #           calculated_fields: [
@@ -2555,7 +2556,7 @@ module Aws::QuickSight
     #                   currency_symbol: "LimitedString",
     #                 },
     #               },
-    #               aggregation: "SUM", # accepts SUM, MAX, MIN, COUNT, DISTINCT_COUNT, AVERAGE
+    #               aggregation: "SUM", # accepts SUM, MAX, MIN, COUNT, DISTINCT_COUNT, AVERAGE, MEDIAN, STDEV, STDEVP, VAR, VARP
     #               comparative_order: {
     #                 use_ordering: "GREATER_IS_BETTER", # accepts GREATER_IS_BETTER, LESSER_IS_BETTER, SPECIFIED
     #                 specifed_order: ["String"],
@@ -2581,6 +2582,7 @@ module Aws::QuickSight
     #                   synonyms: ["String"],
     #                 },
     #               ],
+    #               non_additive: false,
     #             },
     #           ],
     #           named_entities: [
@@ -3951,6 +3953,7 @@ module Aws::QuickSight
     #   resp.account_info.notification_email #=> String
     #   resp.account_info.authentication_type #=> String
     #   resp.account_info.account_subscription_status #=> String
+    #   resp.account_info.iam_identity_center_instance_arn #=> String
     #   resp.status #=> Integer
     #   resp.request_id #=> String
     #
@@ -6100,7 +6103,7 @@ module Aws::QuickSight
     #   resp.topic.data_sets[0].columns[0].column_synonyms #=> Array
     #   resp.topic.data_sets[0].columns[0].column_synonyms[0] #=> String
     #   resp.topic.data_sets[0].columns[0].column_data_role #=> String, one of "DIMENSION", "MEASURE"
-    #   resp.topic.data_sets[0].columns[0].aggregation #=> String, one of "SUM", "MAX", "MIN", "COUNT", "DISTINCT_COUNT", "AVERAGE"
+    #   resp.topic.data_sets[0].columns[0].aggregation #=> String, one of "SUM", "MAX", "MIN", "COUNT", "DISTINCT_COUNT", "AVERAGE", "MEDIAN", "STDEV", "STDEVP", "VAR", "VARP"
     #   resp.topic.data_sets[0].columns[0].is_included_in_topic #=> Boolean
     #   resp.topic.data_sets[0].columns[0].disable_indexing #=> Boolean
     #   resp.topic.data_sets[0].columns[0].comparative_order.use_ordering #=> String, one of "GREATER_IS_BETTER", "LESSER_IS_BETTER", "SPECIFIED"
@@ -6141,6 +6144,7 @@ module Aws::QuickSight
     #   resp.topic.data_sets[0].columns[0].cell_value_synonyms[0].cell_value #=> String
     #   resp.topic.data_sets[0].columns[0].cell_value_synonyms[0].synonyms #=> Array
     #   resp.topic.data_sets[0].columns[0].cell_value_synonyms[0].synonyms[0] #=> String
+    #   resp.topic.data_sets[0].columns[0].non_additive #=> Boolean
     #   resp.topic.data_sets[0].calculated_fields #=> Array
     #   resp.topic.data_sets[0].calculated_fields[0].calculated_field_name #=> String
     #   resp.topic.data_sets[0].calculated_fields[0].calculated_field_description #=> String
@@ -6165,7 +6169,7 @@ module Aws::QuickSight
     #   resp.topic.data_sets[0].calculated_fields[0].default_formatting.display_format_options.negative_format.prefix #=> String
     #   resp.topic.data_sets[0].calculated_fields[0].default_formatting.display_format_options.negative_format.suffix #=> String
     #   resp.topic.data_sets[0].calculated_fields[0].default_formatting.display_format_options.currency_symbol #=> String
-    #   resp.topic.data_sets[0].calculated_fields[0].aggregation #=> String, one of "SUM", "MAX", "MIN", "COUNT", "DISTINCT_COUNT", "AVERAGE"
+    #   resp.topic.data_sets[0].calculated_fields[0].aggregation #=> String, one of "SUM", "MAX", "MIN", "COUNT", "DISTINCT_COUNT", "AVERAGE", "MEDIAN", "STDEV", "STDEVP", "VAR", "VARP"
     #   resp.topic.data_sets[0].calculated_fields[0].comparative_order.use_ordering #=> String, one of "GREATER_IS_BETTER", "LESSER_IS_BETTER", "SPECIFIED"
     #   resp.topic.data_sets[0].calculated_fields[0].comparative_order.specifed_order #=> Array
     #   resp.topic.data_sets[0].calculated_fields[0].comparative_order.specifed_order[0] #=> String
@@ -6189,6 +6193,7 @@ module Aws::QuickSight
     #   resp.topic.data_sets[0].calculated_fields[0].cell_value_synonyms[0].cell_value #=> String
     #   resp.topic.data_sets[0].calculated_fields[0].cell_value_synonyms[0].synonyms #=> Array
     #   resp.topic.data_sets[0].calculated_fields[0].cell_value_synonyms[0].synonyms[0] #=> String
+    #   resp.topic.data_sets[0].calculated_fields[0].non_additive #=> Boolean
     #   resp.topic.data_sets[0].named_entities #=> Array
     #   resp.topic.data_sets[0].named_entities[0].entity_name #=> String
     #   resp.topic.data_sets[0].named_entities[0].entity_description #=> String
@@ -6394,7 +6399,7 @@ module Aws::QuickSight
     #   resp.user.user_name #=> String
     #   resp.user.email #=> String
     #   resp.user.role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER"
-    #   resp.user.identity_type #=> String, one of "IAM", "QUICKSIGHT"
+    #   resp.user.identity_type #=> String, one of "IAM", "QUICKSIGHT", "IAM_IDENTITY_CENTER"
     #   resp.user.active #=> Boolean
     #   resp.user.principal_id #=> String
     #   resp.user.custom_permissions_name #=> String
@@ -8523,7 +8528,7 @@ module Aws::QuickSight
     #   resp.user_list[0].user_name #=> String
     #   resp.user_list[0].email #=> String
     #   resp.user_list[0].role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER"
-    #   resp.user_list[0].identity_type #=> String, one of "IAM", "QUICKSIGHT"
+    #   resp.user_list[0].identity_type #=> String, one of "IAM", "QUICKSIGHT", "IAM_IDENTITY_CENTER"
     #   resp.user_list[0].active #=> Boolean
     #   resp.user_list[0].principal_id #=> String
     #   resp.user_list[0].custom_permissions_name #=> String
@@ -8796,7 +8801,7 @@ module Aws::QuickSight
     # @example Request syntax with placeholder values
     #
     #   resp = client.register_user({
-    #     identity_type: "IAM", # required, accepts IAM, QUICKSIGHT
+    #     identity_type: "IAM", # required, accepts IAM, QUICKSIGHT, IAM_IDENTITY_CENTER
     #     email: "String", # required
     #     user_role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER, RESTRICTED_AUTHOR, RESTRICTED_READER
     #     iam_arn: "String",
@@ -8816,7 +8821,7 @@ module Aws::QuickSight
     #   resp.user.user_name #=> String
     #   resp.user.email #=> String
     #   resp.user.role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER"
-    #   resp.user.identity_type #=> String, one of "IAM", "QUICKSIGHT"
+    #   resp.user.identity_type #=> String, one of "IAM", "QUICKSIGHT", "IAM_IDENTITY_CENTER"
     #   resp.user.active #=> Boolean
     #   resp.user.principal_id #=> String
     #   resp.user.custom_permissions_name #=> String
@@ -9657,7 +9662,11 @@ module Aws::QuickSight
     end
 
     # Starts an asynchronous job that generates a dashboard snapshot. You
-    # can request up to one paginated PDF and up to five CSVs per API call.
+    # can request one of the following format configurations per API call.
+    #
+    # * 1 paginated PDF
+    #
+    # * 5 CSVs
     #
     # Poll job descriptions with a `DescribeDashboardSnapshotJob` API call.
     # Once the job succeeds, use the `DescribeDashboardSnapshotJobResult`
@@ -11974,7 +11983,7 @@ module Aws::QuickSight
     #               column_description: "LimitedString",
     #               column_synonyms: ["LimitedString"],
     #               column_data_role: "DIMENSION", # accepts DIMENSION, MEASURE
-    #               aggregation: "SUM", # accepts SUM, MAX, MIN, COUNT, DISTINCT_COUNT, AVERAGE
+    #               aggregation: "SUM", # accepts SUM, MAX, MIN, COUNT, DISTINCT_COUNT, AVERAGE, MEDIAN, STDEV, STDEVP, VAR, VARP
     #               is_included_in_topic: false,
     #               disable_indexing: false,
     #               comparative_order: {
@@ -12023,6 +12032,7 @@ module Aws::QuickSight
     #                   synonyms: ["String"],
     #                 },
     #               ],
+    #               non_additive: false,
     #             },
     #           ],
     #           calculated_fields: [
@@ -12055,7 +12065,7 @@ module Aws::QuickSight
     #                   currency_symbol: "LimitedString",
     #                 },
     #               },
-    #               aggregation: "SUM", # accepts SUM, MAX, MIN, COUNT, DISTINCT_COUNT, AVERAGE
+    #               aggregation: "SUM", # accepts SUM, MAX, MIN, COUNT, DISTINCT_COUNT, AVERAGE, MEDIAN, STDEV, STDEVP, VAR, VARP
     #               comparative_order: {
     #                 use_ordering: "GREATER_IS_BETTER", # accepts GREATER_IS_BETTER, LESSER_IS_BETTER, SPECIFIED
     #                 specifed_order: ["String"],
@@ -12081,6 +12091,7 @@ module Aws::QuickSight
     #                   synonyms: ["String"],
     #                 },
     #               ],
+    #               non_additive: false,
     #             },
     #           ],
     #           named_entities: [
@@ -12375,7 +12386,7 @@ module Aws::QuickSight
     #   resp.user.user_name #=> String
     #   resp.user.email #=> String
     #   resp.user.role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER"
-    #   resp.user.identity_type #=> String, one of "IAM", "QUICKSIGHT"
+    #   resp.user.identity_type #=> String, one of "IAM", "QUICKSIGHT", "IAM_IDENTITY_CENTER"
     #   resp.user.active #=> Boolean
     #   resp.user.principal_id #=> String
     #   resp.user.custom_permissions_name #=> String
@@ -12473,7 +12484,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

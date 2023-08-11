@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.397.0 (2023-08-11)
+------------------
+
+* Feature - Amazon EC2 P5 instances, powered by the latest NVIDIA H100 Tensor Core GPUs, deliver the highest performance in EC2 for deep learning (DL) and HPC applications. M7i-flex and M7i instances are next-generation general purpose instances powered by custom 4th Generation Intel Xeon Scalable processors.
+
 1.396.0 (2023-08-03)
 ------------------
 

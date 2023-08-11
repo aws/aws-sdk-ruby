@@ -28,17 +28,18 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-add-header.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-action-add-header.html
     #
     # @!attribute [rw] header_name
-    #   The name of the header to add. Must be between 1 and 50 characters,
-    #   inclusive, and consist of alphanumeric (a-z, A-Z, 0-9) characters
-    #   and dashes only.
+    #   The name of the header to add to the incoming message. The name must
+    #   contain at least one character, and can contain up to 50 characters.
+    #   It consists of alphanumeric (a–z, A–Z, 0–9) characters and dashes.
     #   @return [String]
     #
     # @!attribute [rw] header_value
-    #   Must be less than 2048 characters, and must not contain newline
-    #   characters ("\\r" or "\\n").
+    #   The content to include in the header. This value can contain up to
+    #   2048 characters. It can't contain newline (`\n`) or carriage return
+    #   (`\r`) characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/AddHeaderAction AWS API Documentation
@@ -101,18 +102,20 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-bounce.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-action-bounce.html
     #
     # @!attribute [rw] topic_arn
     #   The Amazon Resource Name (ARN) of the Amazon SNS topic to notify
-    #   when the bounce action is taken. An example of an Amazon SNS topic
-    #   ARN is `arn:aws:sns:us-west-2:123456789012:MyTopic`. For more
-    #   information about Amazon SNS topics, see the [Amazon SNS Developer
-    #   Guide][1].
+    #   when the bounce action is taken. You can find the ARN of a topic by
+    #   using the [ListTopics][1] operation in Amazon SNS.
+    #
+    #   For more information about Amazon SNS topics, see the [Amazon SNS
+    #   Developer Guide][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/api/API_ListTopics.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
     #   @return [String]
     #
     # @!attribute [rw] smtp_reply_code
@@ -137,7 +140,7 @@ module Aws::SES
     #
     # @!attribute [rw] sender
     #   The email address of the sender of the bounced email. This is the
-    #   address from which the bounce message will be sent.
+    #   address from which the bounce message is sent.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/BounceAction AWS API Documentation
@@ -161,7 +164,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email.html
     #
     # @!attribute [rw] recipient
     #   The email address of the recipient of the bounced email.
@@ -176,7 +179,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #   @return [String]
     #
     # @!attribute [rw] bounce_type
@@ -209,20 +212,24 @@ module Aws::SES
     #   and BCC: fields.
     #
     #   <note markdown="1"> Amazon SES does not support the SMTPUTF8 extension, as described in
-    #   [RFC6531][1]. For this reason, the *local part* of a destination
-    #   email address (the part of the email address that precedes the @
-    #   sign) may only contain [7-bit ASCII characters][2]. If the *domain
-    #   part* of an address (the part after the @ sign) contains non-ASCII
-    #   characters, they must be encoded using Punycode, as described in
-    #   [RFC3492][3].
+    #   [RFC6531][1]. For this reason, the email address string must be
+    #   7-bit ASCII. If you want to send to or from email addresses that
+    #   contain Unicode characters in the domain part of an address, you
+    #   must encode the domain using Punycode. Punycode is not permitted in
+    #   the local part of the email address (the part before the @ sign) nor
+    #   in the "friendly from" name. If you want to use Unicode characters
+    #   in the "friendly from" name, you must encode the "friendly from"
+    #   name using MIME encoded-word syntax, as described in [Sending raw
+    #   email using the Amazon SES API][2]. For more information about
+    #   Punycode, see [RFC 3492][3].
     #
     #    </note>
     #
     #
     #
     #   [1]: https://tools.ietf.org/html/rfc6531
-    #   [2]: https://en.wikipedia.org/wiki/Email_address#Local-part
-    #   [3]: https://tools.ietf.org/html/rfc3492.html
+    #   [2]: https://docs.aws.amazon.com/ses/latest/dg/send-email-raw.html
+    #   [3]: http://tools.ietf.org/html/rfc3492
     #   @return [Types::Destination]
     #
     # @!attribute [rw] replacement_tags
@@ -258,7 +265,7 @@ module Aws::SES
     #
     #   Possible values for this parameter include:
     #
-    #   * `Success`: Amazon SES accepted the message, and will attempt to
+    #   * `Success`: Amazon SES accepted the message, and attempts to
     #     deliver it to the recipients.
     #
     #   * `MessageRejected`: The message was rejected because it contained a
@@ -345,17 +352,18 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html
     #
     # @!attribute [rw] rule_set_name
-    #   The name of the rule set to create. The name must:
+    #   The name of the rule set to create. The name must meet the following
+    #   requirements:
     #
-    #   * This value can only contain ASCII letters (a-z, A-Z), numbers
-    #     (0-9), underscores (\_), or dashes (-).
+    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores
+    #     (\_), or dashes (-).
     #
     #   * Start and end with a letter or number.
     #
-    #   * Contain less than 64 characters.
+    #   * Contain 64 characters or fewer.
     #   @return [String]
     #
     # @!attribute [rw] original_rule_set_name
@@ -387,7 +395,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
     #
     # @!attribute [rw] dimension_configurations
     #   A list of dimensions upon which to categorize your emails when you
@@ -410,35 +418,37 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
     #
     # @!attribute [rw] dimension_name
     #   The name of an Amazon CloudWatch dimension associated with an email
-    #   sending metric. The name must:
+    #   sending metric. The name must meet the following requirements:
     #
-    #   * This value can only contain ASCII letters (a-z, A-Z), numbers
-    #     (0-9), underscores (\_), or dashes (-).
+    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores
+    #     (\_), dashes (-), or colons (:).
     #
-    #   * Contain less than 256 characters.
+    #   * Contain 256 characters or fewer.
     #   @return [String]
     #
     # @!attribute [rw] dimension_value_source
     #   The place where Amazon SES finds the value of a dimension to publish
-    #   to Amazon CloudWatch. If you want Amazon SES to use the message tags
-    #   that you specify using an `X-SES-MESSAGE-TAGS` header or a parameter
-    #   to the `SendEmail`/`SendRawEmail` API, choose `messageTag`. If you
-    #   want Amazon SES to use your own email headers, choose `emailHeader`.
+    #   to Amazon CloudWatch. To use the message tags that you specify using
+    #   an `X-SES-MESSAGE-TAGS` header or a parameter to the
+    #   `SendEmail`/`SendRawEmail` API, specify `messageTag`. To use your
+    #   own email headers, specify `emailHeader`. To put a custom tag on any
+    #   link included in your email, specify `linkTag`.
     #   @return [String]
     #
     # @!attribute [rw] default_dimension_value
     #   The default value of the dimension that is published to Amazon
     #   CloudWatch if you do not provide the value of the dimension when you
-    #   send an email. The default value must:
+    #   send an email. The default value must meet the following
+    #   requirements:
     #
-    #   * This value can only contain ASCII letters (a-z, A-Z), numbers
-    #     (0-9), underscores (\_), or dashes (-).
+    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores
+    #     (\_), dashes (-), at signs (@), or periods (.).
     #
-    #   * Contain less than 256 characters.
+    #   * Contain 256 characters or fewer.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CloudWatchDimensionConfiguration AWS API Documentation
@@ -460,8 +470,8 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/using-configuration-sets.html
-    # [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/using-configuration-sets.html
+    # [2]: https://docs.aws.amazon.com/ses/latest/dg/
     #
     # @!attribute [rw] name
     #   The name of the configuration set. The name must meet the following
@@ -554,14 +564,14 @@ module Aws::SES
 
     # Represents a request to create a configuration set event destination.
     # A configuration set event destination, which can be either Amazon
-    # CloudWatch or Amazon Kinesis Firehose, describes an AWS service in
-    # which Amazon SES publishes the email sending events associated with a
-    # configuration set. For information about using configuration sets, see
-    # the [Amazon SES Developer Guide][1].
+    # CloudWatch or Amazon Kinesis Firehose, describes an Amazon Web
+    # Services service in which Amazon SES publishes the email sending
+    # events associated with a configuration set. For information about
+    # using configuration sets, see the [Amazon SES Developer Guide][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
     #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set that the event destination should
@@ -569,8 +579,8 @@ module Aws::SES
     #   @return [String]
     #
     # @!attribute [rw] event_destination
-    #   An object that describes the AWS service that email sending event
-    #   information will be published to.
+    #   An object that describes the Amazon Web Services service that email
+    #   sending event where information is published.
     #   @return [Types::EventDestination]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateConfigurationSetEventDestinationRequest AWS API Documentation
@@ -594,7 +604,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
     #
     # @!attribute [rw] configuration_set
     #   A data structure that contains the name of the configuration set.
@@ -632,7 +642,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/configure-custom-open-click-domains.html
     #   @return [Types::TrackingOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateConfigurationSetTrackingOptionsRequest AWS API Documentation
@@ -673,7 +683,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html#custom-verification-emails-faq
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom
     #   @return [String]
     #
     # @!attribute [rw] success_redirection_url
@@ -705,7 +715,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html
     #
     # @!attribute [rw] filter
     #   A data structure that describes the IP address filter to create,
@@ -733,16 +743,16 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html
     #
     # @!attribute [rw] rule_set_name
-    #   The name of the rule set that the receipt rule will be added to.
+    #   The name of the rule set where the receipt rule is added.
     #   @return [String]
     #
     # @!attribute [rw] after
-    #   The name of an existing rule after which the new rule will be
-    #   placed. If this parameter is null, the new rule will be inserted at
-    #   the beginning of the rule list.
+    #   The name of an existing rule after which the new rule is placed. If
+    #   this parameter is null, the new rule is inserted at the beginning of
+    #   the rule list.
     #   @return [String]
     #
     # @!attribute [rw] rule
@@ -772,17 +782,18 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html
     #
     # @!attribute [rw] rule_set_name
-    #   The name of the rule set to create. The name must:
+    #   The name of the rule set to create. The name must meet the following
+    #   requirements:
     #
-    #   * This value can only contain ASCII letters (a-z, A-Z), numbers
-    #     (0-9), underscores (\_), or dashes (-).
+    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores
+    #     (\_), or dashes (-).
     #
     #   * Start and end with a letter or number.
     #
-    #   * Contain less than 64 characters.
+    #   * Contain 64 characters or fewer.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateReceiptRuleSetRequest AWS API Documentation
@@ -804,11 +815,11 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/send-personalized-email-api.html
     #
     # @!attribute [rw] template
-    #   The content of the email, composed of a subject line, an HTML part,
-    #   and a text-only part.
+    #   The content of the email, composed of a subject line and either an
+    #   HTML part or a text-only part.
     #   @return [Types::Template]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateTemplateRequest AWS API Documentation
@@ -906,7 +917,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
     #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set from which to delete the event
@@ -938,7 +949,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
     #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set to delete.
@@ -962,8 +973,7 @@ module Aws::SES
     # configuration set.
     #
     # @!attribute [rw] configuration_set_name
-    #   The name of the configuration set from which you want to delete the
-    #   tracking options.
+    #   The name of the configuration set.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSetTrackingOptionsRequest AWS API Documentation
@@ -984,8 +994,7 @@ module Aws::SES
     # template.
     #
     # @!attribute [rw] template_name
-    #   The name of the custom verification email template that you want to
-    #   delete.
+    #   The name of the custom verification email template to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteCustomVerificationEmailTemplateRequest AWS API Documentation
@@ -1003,16 +1012,15 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #
     # @!attribute [rw] identity
-    #   The identity that is associated with the policy that you want to
-    #   delete. You can specify the identity by using its name or by using
-    #   its Amazon Resource Name (ARN). Examples: `user@example.com`,
-    #   `example.com`,
+    #   The identity that is associated with the policy to delete. You can
+    #   specify the identity by using its name or by using its Amazon
+    #   Resource Name (ARN). Examples: `user@example.com`, `example.com`,
     #   `arn:aws:ses:us-east-1:123456789012:identity/example.com`.
     #
-    #   To successfully call this API, you must own the identity.
+    #   To successfully call this operation, you must own the identity.
     #   @return [String]
     #
     # @!attribute [rw] policy_name
@@ -1038,8 +1046,8 @@ module Aws::SES
     # email address or domain).
     #
     # @!attribute [rw] identity
-    #   The identity to be removed from the list of identities for the AWS
-    #   Account.
+    #   The identity to be removed from the list of identities for the
+    #   Amazon Web Services account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteIdentityRequest AWS API Documentation
@@ -1062,7 +1070,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html
     #
     # @!attribute [rw] filter_name
     #   The name of the IP address filter to delete.
@@ -1088,7 +1096,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html
     #
     # @!attribute [rw] rule_set_name
     #   The name of the receipt rule set that contains the receipt rule to
@@ -1121,7 +1129,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html
     #
     # @!attribute [rw] rule_set_name
     #   The name of the receipt rule set to delete.
@@ -1146,7 +1154,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/send-personalized-email-api.html
     #
     # @!attribute [rw] template_name
     #   The name of the template to be deleted.
@@ -1165,7 +1173,8 @@ module Aws::SES
     class DeleteTemplateResponse < Aws::EmptyStructure; end
 
     # Represents a request to delete an email address from the list of email
-    # addresses you have attempted to verify under your AWS account.
+    # addresses you have attempted to verify under your Amazon Web Services
+    # account.
     #
     # @!attribute [rw] email_address
     #   An email address to be removed from the list of verified addresses.
@@ -1205,7 +1214,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html
     #
     # @api private
     #
@@ -1242,7 +1251,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
     #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set to describe.
@@ -1267,7 +1276,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
     #
     # @!attribute [rw] configuration_set
     #   The configuration set object associated with the specified
@@ -1311,7 +1320,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html
     #
     # @!attribute [rw] rule_set_name
     #   The name of the receipt rule set that the receipt rule belongs to.
@@ -1352,7 +1361,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html
     #
     # @!attribute [rw] rule_set_name
     #   The name of the receipt rule set to describe.
@@ -1391,19 +1400,24 @@ module Aws::SES
     # BCC: fields.
     #
     # <note markdown="1"> Amazon SES does not support the SMTPUTF8 extension, as described in
-    # [RFC6531][1]. For this reason, the *local part* of a destination email
-    # address (the part of the email address that precedes the @ sign) may
-    # only contain [7-bit ASCII characters][2]. If the *domain part* of an
-    # address (the part after the @ sign) contains non-ASCII characters,
-    # they must be encoded using Punycode, as described in [RFC3492][3].
+    # [RFC6531][1]. For this reason, the email address string must be 7-bit
+    # ASCII. If you want to send to or from email addresses that contain
+    # Unicode characters in the domain part of an address, you must encode
+    # the domain using Punycode. Punycode is not permitted in the local part
+    # of the email address (the part before the @ sign) nor in the
+    # "friendly from" name. If you want to use Unicode characters in the
+    # "friendly from" name, you must encode the "friendly from" name
+    # using MIME encoded-word syntax, as described in [Sending raw email
+    # using the Amazon SES API][2]. For more information about Punycode, see
+    # [RFC 3492][3].
     #
     #  </note>
     #
     #
     #
     # [1]: https://tools.ietf.org/html/rfc6531
-    # [2]: https://en.wikipedia.org/wiki/Email_address#Local-part
-    # [3]: https://tools.ietf.org/html/rfc3492.html
+    # [2]: https://docs.aws.amazon.com/ses/latest/dg/send-email-raw.html
+    # [3]: http://tools.ietf.org/html/rfc3492
     #
     # @!attribute [rw] to_addresses
     #   The recipients to place on the To: line of the message.
@@ -1427,8 +1441,7 @@ module Aws::SES
       include Aws::Structure
     end
 
-    # Contains information about the event destination that the specified
-    # email sending events will be published to.
+    # Contains information about an event destination.
     #
     # <note markdown="1"> When you create or update an event destination, you must provide one,
     # and only one, destination. The destination can be Amazon CloudWatch,
@@ -1445,15 +1458,16 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
     #
     # @!attribute [rw] name
-    #   The name of the event destination. The name must:
+    #   The name of the event destination. The name must meet the following
+    #   requirements:
     #
-    #   * This value can only contain ASCII letters (a-z, A-Z), numbers
-    #     (0-9), underscores (\_), or dashes (-).
+    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores
+    #     (\_), or dashes (-).
     #
-    #   * Contain less than 64 characters.
+    #   * Contain 64 characters or fewer.
     #   @return [String]
     #
     # @!attribute [rw] enabled
@@ -1467,6 +1481,28 @@ module Aws::SES
     # @!attribute [rw] matching_event_types
     #   The type of email sending events to publish to the event
     #   destination.
+    #
+    #   * `send` - The call was successful and Amazon SES is attempting to
+    #     deliver the email.
+    #
+    #   * `reject` - Amazon SES determined that the email contained a virus
+    #     and rejected it.
+    #
+    #   * `bounce` - The recipient's mail server permanently rejected the
+    #     email. This corresponds to a hard bounce.
+    #
+    #   * `complaint` - The recipient marked the email as spam.
+    #
+    #   * `delivery` - Amazon SES successfully delivered the email to the
+    #     recipient's mail server.
+    #
+    #   * `open` - The recipient received the email and opened it in their
+    #     email client.
+    #
+    #   * `click` - The recipient clicked one or more links in the email.
+    #
+    #   * `renderingFailure` - Amazon SES did not send the email because of
+    #     a template rendering issue.
     #   @return [Array<String>]
     #
     # @!attribute [rw] kinesis_firehose_destination
@@ -1545,7 +1581,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email.html
     #
     # @!attribute [rw] name
     #   The name of the header to add. Must be between 1 and 50 characters,
@@ -1554,8 +1590,8 @@ module Aws::SES
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value of the header to add. Must be less than 2048 characters,
-    #   and must not contain newline characters ("\\r" or "\\n").
+    #   The value of the header to add. Must contain 2048 characters or
+    #   fewer, and must not contain newline characters ("\\r" or "\\n").
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ExtensionField AWS API Documentation
@@ -1585,11 +1621,11 @@ module Aws::SES
     end
 
     # Represents a request to return the email sending status for your
-    # Amazon SES account in the current AWS Region.
+    # Amazon SES account in the current Amazon Web Services Region.
     #
     # @!attribute [rw] enabled
     #   Describes whether email sending is enabled or disabled for your
-    #   Amazon SES account in the current AWS Region.
+    #   Amazon SES account in the current Amazon Web Services Region.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetAccountSendingEnabledResponse AWS API Documentation
@@ -1604,8 +1640,7 @@ module Aws::SES
     # template.
     #
     # @!attribute [rw] template_name
-    #   The name of the custom verification email template that you want to
-    #   retrieve.
+    #   The name of the custom verification email template to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetCustomVerificationEmailTemplateRequest AWS API Documentation
@@ -1666,7 +1701,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy.html
     #
     # @!attribute [rw] identities
     #   A list of one or more verified identities - email addresses,
@@ -1704,7 +1739,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/mail-from.html
     #
     # @!attribute [rw] identities
     #   A list of one or more identities.
@@ -1738,7 +1773,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications.html
     #
     # @!attribute [rw] identities
     #   A list of one or more identities. You can specify an identity by
@@ -1776,15 +1811,15 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #
     # @!attribute [rw] identity
-    #   The identity for which the policies will be retrieved. You can
-    #   specify an identity by using its name or by using its Amazon
-    #   Resource Name (ARN). Examples: `user@example.com`, `example.com`,
+    #   The identity for which the policies are retrieved. You can specify
+    #   an identity by using its name or by using its Amazon Resource Name
+    #   (ARN). Examples: `user@example.com`, `example.com`,
     #   `arn:aws:ses:us-east-1:123456789012:identity/example.com`.
     #
-    #   To successfully call this API, you must own the identity.
+    #   To successfully call this operation, you must own the identity.
     #   @return [String]
     #
     # @!attribute [rw] policy_names
@@ -1824,7 +1859,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html
     #
     # @!attribute [rw] identities
     #   A list of identities.
@@ -1902,7 +1937,7 @@ module Aws::SES
     end
 
     # @!attribute [rw] template_name
-    #   The name of the template you want to retrieve.
+    #   The name of the template to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetTemplateRequest AWS API Documentation
@@ -1914,8 +1949,8 @@ module Aws::SES
     end
 
     # @!attribute [rw] template
-    #   The content of the email, composed of a subject line, an HTML part,
-    #   and a text-only part.
+    #   The content of the email, composed of a subject line and either an
+    #   HTML part or a text-only part.
     #   @return [Types::Template]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetTemplateResponse AWS API Documentation
@@ -1955,7 +1990,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/IdentityDkimAttributes AWS API Documentation
@@ -2015,48 +2050,48 @@ module Aws::SES
     #
     # @!attribute [rw] bounce_topic
     #   The Amazon Resource Name (ARN) of the Amazon SNS topic where Amazon
-    #   SES will publish bounce notifications.
+    #   SES publishes bounce notifications.
     #   @return [String]
     #
     # @!attribute [rw] complaint_topic
     #   The Amazon Resource Name (ARN) of the Amazon SNS topic where Amazon
-    #   SES will publish complaint notifications.
+    #   SES publishes complaint notifications.
     #   @return [String]
     #
     # @!attribute [rw] delivery_topic
     #   The Amazon Resource Name (ARN) of the Amazon SNS topic where Amazon
-    #   SES will publish delivery notifications.
+    #   SES publishes delivery notifications.
     #   @return [String]
     #
     # @!attribute [rw] forwarding_enabled
-    #   Describes whether Amazon SES will forward bounce and complaint
-    #   notifications as email. `true` indicates that Amazon SES will
-    #   forward bounce and complaint notifications as email, while `false`
-    #   indicates that bounce and complaint notifications will be published
-    #   only to the specified bounce and complaint Amazon SNS topics.
+    #   Describes whether Amazon SES forwards bounce and complaint
+    #   notifications as email. `true` indicates that Amazon SES forwards
+    #   bounce and complaint notifications as email, while `false` indicates
+    #   that bounce and complaint notifications are published only to the
+    #   specified bounce and complaint Amazon SNS topics.
     #   @return [Boolean]
     #
     # @!attribute [rw] headers_in_bounce_notifications_enabled
     #   Describes whether Amazon SES includes the original email headers in
     #   Amazon SNS notifications of type `Bounce`. A value of `true`
-    #   specifies that Amazon SES will include headers in bounce
-    #   notifications, and a value of `false` specifies that Amazon SES will
-    #   not include headers in bounce notifications.
+    #   specifies that Amazon SES includes headers in bounce notifications,
+    #   and a value of `false` specifies that Amazon SES does not include
+    #   headers in bounce notifications.
     #   @return [Boolean]
     #
     # @!attribute [rw] headers_in_complaint_notifications_enabled
     #   Describes whether Amazon SES includes the original email headers in
     #   Amazon SNS notifications of type `Complaint`. A value of `true`
-    #   specifies that Amazon SES will include headers in complaint
-    #   notifications, and a value of `false` specifies that Amazon SES will
+    #   specifies that Amazon SES includes headers in complaint
+    #   notifications, and a value of `false` specifies that Amazon SES does
     #   not include headers in complaint notifications.
     #   @return [Boolean]
     #
     # @!attribute [rw] headers_in_delivery_notifications_enabled
     #   Describes whether Amazon SES includes the original email headers in
     #   Amazon SNS notifications of type `Delivery`. A value of `true`
-    #   specifies that Amazon SES will include headers in delivery
-    #   notifications, and a value of `false` specifies that Amazon SES will
+    #   specifies that Amazon SES includes headers in delivery
+    #   notifications, and a value of `false` specifies that Amazon SES does
     #   not include headers in delivery notifications.
     #   @return [Boolean]
     #
@@ -2148,10 +2183,10 @@ module Aws::SES
       include Aws::Structure
     end
 
-    # Indicates that the provided AWS Lambda function is invalid, or that
-    # Amazon SES could not execute the provided function, possibly due to
-    # permissions issues. For information about giving permissions, see the
-    # [Amazon SES Developer Guide][1].
+    # Indicates that the provided Amazon Web Services Lambda function is
+    # invalid, or that Amazon SES could not execute the provided function,
+    # possibly due to permissions issues. For information about giving
+    # permissions, see the [Amazon SES Developer Guide][1].
     #
     #
     #
@@ -2191,10 +2226,10 @@ module Aws::SES
       include Aws::Structure
     end
 
-    # Indicates that the provided Amazon S3 bucket or AWS KMS encryption key
-    # is invalid, or that Amazon SES could not publish to the bucket,
-    # possibly due to permissions issues. For information about giving
-    # permissions, see the [Amazon SES Developer Guide][1].
+    # Indicates that the provided Amazon S3 bucket or Amazon Web Services
+    # KMS encryption key is invalid, or that Amazon SES could not publish to
+    # the bucket, possibly due to permissions issues. For information about
+    # giving permissions, see the [Amazon SES Developer Guide][1].
     #
     #
     #
@@ -2292,7 +2327,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
     #
     # @!attribute [rw] iam_role_arn
     #   The ARN of the IAM role under which Amazon SES publishes email
@@ -2313,41 +2348,43 @@ module Aws::SES
       include Aws::Structure
     end
 
-    # When included in a receipt rule, this action calls an AWS Lambda
-    # function and, optionally, publishes a notification to Amazon Simple
-    # Notification Service (Amazon SNS).
+    # When included in a receipt rule, this action calls an Amazon Web
+    # Services Lambda function and, optionally, publishes a notification to
+    # Amazon Simple Notification Service (Amazon SNS).
     #
-    # To enable Amazon SES to call your AWS Lambda function or to publish to
-    # an Amazon SNS topic of another account, Amazon SES must have
-    # permission to access those resources. For information about giving
-    # permissions, see the [Amazon SES Developer Guide][1].
+    # To enable Amazon SES to call your Amazon Web Services Lambda function
+    # or to publish to an Amazon SNS topic of another account, Amazon SES
+    # must have permission to access those resources. For information about
+    # giving permissions, see the [Amazon SES Developer Guide][1].
     #
-    # For information about using AWS Lambda actions in receipt rules, see
-    # the [Amazon SES Developer Guide][2].
+    # For information about using Amazon Web Services Lambda actions in
+    # receipt rules, see the [Amazon SES Developer Guide][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html
-    # [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-lambda.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-permissions.html
+    # [2]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-action-lambda.html
     #
     # @!attribute [rw] topic_arn
     #   The Amazon Resource Name (ARN) of the Amazon SNS topic to notify
-    #   when the Lambda action is taken. An example of an Amazon SNS topic
-    #   ARN is `arn:aws:sns:us-west-2:123456789012:MyTopic`. For more
-    #   information about Amazon SNS topics, see the [Amazon SNS Developer
-    #   Guide][1].
+    #   when the Lambda action is executed. You can find the ARN of a topic
+    #   by using the [ListTopics][1] operation in Amazon SNS.
+    #
+    #   For more information about Amazon SNS topics, see the [Amazon SNS
+    #   Developer Guide][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/api/API_ListTopics.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
     #   @return [String]
     #
     # @!attribute [rw] function_arn
-    #   The Amazon Resource Name (ARN) of the AWS Lambda function. An
-    #   example of an AWS Lambda function ARN is
-    #   `arn:aws:lambda:us-west-2:account-id:function:MyFunction`. For more
-    #   information about AWS Lambda, see the [AWS Lambda Developer
-    #   Guide][1].
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Lambda
+    #   function. An example of an Amazon Web Services Lambda function ARN
+    #   is `arn:aws:lambda:us-west-2:account-id:function:MyFunction`. For
+    #   more information about Amazon Web Services Lambda, see the [Amazon
+    #   Web Services Lambda Developer Guide][1].
     #
     #
     #
@@ -2355,17 +2392,18 @@ module Aws::SES
     #   @return [String]
     #
     # @!attribute [rw] invocation_type
-    #   The invocation type of the AWS Lambda function. An invocation type
-    #   of `RequestResponse` means that the execution of the function will
-    #   immediately result in a response, and a value of `Event` means that
-    #   the function will be invoked asynchronously. The default value is
-    #   `Event`. For information about AWS Lambda invocation types, see the
-    #   [AWS Lambda Developer Guide][1].
+    #   The invocation type of the Amazon Web Services Lambda function. An
+    #   invocation type of `RequestResponse` means that the execution of the
+    #   function immediately results in a response, and a value of `Event`
+    #   means that the function is invoked asynchronously. The default value
+    #   is `Event`. For information about Amazon Web Services Lambda
+    #   invocation types, see the [Amazon Web Services Lambda Developer
+    #   Guide][1].
     #
     #   There is a 30-second timeout on `RequestResponse` invocations. You
     #   should use `Event` invocation in most cases. Use `RequestResponse`
-    #   only when you want to make a mail flow decision, such as whether to
-    #   stop the receipt rule or the receipt rule set.
+    #   only to make a mail flow decision, such as whether to stop the
+    #   receipt rule or the receipt rule set.
     #
     #
     #
@@ -2395,13 +2433,13 @@ module Aws::SES
     class LimitExceededException < Aws::EmptyStructure; end
 
     # Represents a request to list the configuration sets associated with
-    # your AWS account. Configuration sets enable you to publish email
-    # sending events. For information about using configuration sets, see
-    # the [Amazon SES Developer Guide][1].
+    # your Amazon Web Services account. Configuration sets enable you to
+    # publish email sending events. For information about using
+    # configuration sets, see the [Amazon SES Developer Guide][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
     #
     # @!attribute [rw] next_token
     #   A token returned from a previous call to `ListConfigurationSets` to
@@ -2422,14 +2460,14 @@ module Aws::SES
       include Aws::Structure
     end
 
-    # A list of configuration sets associated with your AWS account.
-    # Configuration sets enable you to publish email sending events. For
-    # information about using configuration sets, see the [Amazon SES
-    # Developer Guide][1].
+    # A list of configuration sets associated with your Amazon Web Services
+    # account. Configuration sets enable you to publish email sending
+    # events. For information about using configuration sets, see the
+    # [Amazon SES Developer Guide][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
     #
     # @!attribute [rw] configuration_sets
     #   A list of configuration sets.
@@ -2459,7 +2497,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom
     #
     # @!attribute [rw] next_token
     #   An array the contains the name and creation time stamp for each
@@ -2470,7 +2508,7 @@ module Aws::SES
     #   The maximum number of custom verification email templates to return.
     #   This value must be at least 1 and less than or equal to 50. If you
     #   do not specify a value, or if you specify a value less than 1 or
-    #   greater than 50, the operation will return up to 50 results.
+    #   greater than 50, the operation returns up to 50 results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListCustomVerificationEmailTemplatesRequest AWS API Documentation
@@ -2507,12 +2545,12 @@ module Aws::SES
 
     # Represents a request to return a list of all identities (email
     # addresses and domains) that you have attempted to verify under your
-    # AWS account, regardless of verification status.
+    # Amazon Web Services account, regardless of verification status.
     #
     # @!attribute [rw] identity_type
     #   The type of the identities to list. Possible values are
     #   "EmailAddress" and "Domain". If this parameter is omitted, then
-    #   all identities will be listed.
+    #   all identities are listed.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2535,7 +2573,7 @@ module Aws::SES
     end
 
     # A list of all identities that you have attempted to verify under your
-    # AWS account, regardless of verification status.
+    # Amazon Web Services account, regardless of verification status.
     #
     # @!attribute [rw] identities
     #   A list of identities.
@@ -2562,16 +2600,16 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #
     # @!attribute [rw] identity
     #   The identity that is associated with the policy for which the
-    #   policies will be listed. You can specify an identity by using its
-    #   name or by using its Amazon Resource Name (ARN). Examples:
+    #   policies are listed. You can specify an identity by using its name
+    #   or by using its Amazon Resource Name (ARN). Examples:
     #   `user@example.com`, `example.com`,
     #   `arn:aws:ses:us-east-1:123456789012:identity/example.com`.
     #
-    #   To successfully call this API, you must own the identity.
+    #   To successfully call this operation, you must own the identity.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListIdentityPoliciesRequest AWS API Documentation
@@ -2598,13 +2636,13 @@ module Aws::SES
     end
 
     # Represents a request to list the IP address filters that exist under
-    # your AWS account. You use IP address filters when you receive email
-    # with Amazon SES. For more information, see the [Amazon SES Developer
-    # Guide][1].
+    # your Amazon Web Services account. You use IP address filters when you
+    # receive email with Amazon SES. For more information, see the [Amazon
+    # SES Developer Guide][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html
     #
     # @api private
     #
@@ -2612,7 +2650,8 @@ module Aws::SES
     #
     class ListReceiptFiltersRequest < Aws::EmptyStructure; end
 
-    # A list of IP address filters that exist under your AWS account.
+    # A list of IP address filters that exist under your Amazon Web Services
+    # account.
     #
     # @!attribute [rw] filters
     #   A list of IP address filter data structures, which each consist of a
@@ -2629,13 +2668,13 @@ module Aws::SES
     end
 
     # Represents a request to list the receipt rule sets that exist under
-    # your AWS account. You use receipt rule sets to receive email with
-    # Amazon SES. For more information, see the [Amazon SES Developer
-    # Guide][1].
+    # your Amazon Web Services account. You use receipt rule sets to receive
+    # email with Amazon SES. For more information, see the [Amazon SES
+    # Developer Guide][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html
     #
     # @!attribute [rw] next_token
     #   A token returned from a previous call to `ListReceiptRuleSets` to
@@ -2650,7 +2689,8 @@ module Aws::SES
       include Aws::Structure
     end
 
-    # A list of receipt rule sets that exist under your AWS account.
+    # A list of receipt rule sets that exist under your Amazon Web Services
+    # account.
     #
     # @!attribute [rw] rule_sets
     #   The metadata for the currently active receipt rule set. The metadata
@@ -2681,9 +2721,9 @@ module Aws::SES
     #
     # @!attribute [rw] max_items
     #   The maximum number of templates to return. This value must be at
-    #   least 1 and less than or equal to 10. If you do not specify a value,
-    #   or if you specify a value less than 1 or greater than 10, the
-    #   operation will return up to 10 results.
+    #   least 1 and less than or equal to 100. If more than 100 items are
+    #   requested, the page size will automatically set to 100. If you do
+    #   not specify a value, 10 is the default page size.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListTemplatesRequest AWS API Documentation
@@ -2703,7 +2743,8 @@ module Aws::SES
     # @!attribute [rw] next_token
     #   A token indicating that there are additional email templates
     #   available to be listed. Pass this token to a subsequent call to
-    #   `ListTemplates` to retrieve the next 50 email templates.
+    #   `ListTemplates` to retrieve the next set of email templates within
+    #   your page size.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListTemplatesResponse AWS API Documentation
@@ -2716,7 +2757,7 @@ module Aws::SES
     end
 
     # A list of email addresses that you have verified with Amazon SES under
-    # your AWS account.
+    # your Amazon Web Services account.
     #
     # @!attribute [rw] verified_email_addresses
     #   A list of email addresses that have been verified.
@@ -2747,7 +2788,7 @@ module Aws::SES
     #
     # @!attribute [rw] subject
     #   The subject of the message: A short summary of the content, which
-    #   will appear in the recipient's inbox.
+    #   appears in the recipient's inbox.
     #   @return [Types::Content]
     #
     # @!attribute [rw] body
@@ -2772,7 +2813,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email.html
     #
     # @!attribute [rw] reporting_mta
     #   The reporting MTA that attempted to deliver the message, formatted
@@ -2824,24 +2865,25 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
     #
     # @!attribute [rw] name
-    #   The name of the tag. The name must:
+    #   The name of the tag. The name must meet the following requirements:
     #
-    #   * This value can only contain ASCII letters (a-z, A-Z), numbers
-    #     (0-9), underscores (\_), or dashes (-).
+    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores
+    #     (\_), or dashes (-).
     #
-    #   * Contain less than 256 characters.
+    #   * Contain 256 characters or fewer.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value of the tag. The value must:
+    #   The value of the tag. The value must meet the following
+    #   requirements:
     #
-    #   * This value can only contain ASCII letters (a-z, A-Z), numbers
-    #     (0-9), underscores (\_), or dashes (-).
+    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores
+    #     (\_), or dashes (-).
     #
-    #   * Contain less than 256 characters.
+    #   * Contain 256 characters or fewer.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/MessageTag AWS API Documentation
@@ -2878,8 +2920,7 @@ module Aws::SES
     # A request to modify the delivery options for a configuration set.
     #
     # @!attribute [rw] configuration_set_name
-    #   The name of the configuration set that you want to specify the
-    #   delivery options for.
+    #   The name of the configuration set.
     #   @return [String]
     #
     # @!attribute [rw] delivery_options
@@ -2910,15 +2951,15 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #
     # @!attribute [rw] identity
-    #   The identity that the policy will apply to. You can specify an
+    #   The identity to which that the policy applies. You can specify an
     #   identity by using its name or by using its Amazon Resource Name
     #   (ARN). Examples: `user@example.com`, `example.com`,
     #   `arn:aws:ses:us-east-1:123456789012:identity/example.com`.
     #
-    #   To successfully call this API, you must own the identity.
+    #   To successfully call this operation, you must own the identity.
     #   @return [String]
     #
     # @!attribute [rw] policy_name
@@ -2937,7 +2978,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-policies.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization-policies.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/PutIdentityPolicyRequest AWS API Documentation
@@ -2961,11 +3002,11 @@ module Aws::SES
     # @!attribute [rw] data
     #   The raw data of the message. This data needs to base64-encoded if
     #   you are accessing Amazon SES directly through the HTTPS interface.
-    #   If you are accessing Amazon SES using an AWS SDK, the SDK takes care
-    #   of the base 64-encoding for you. In all cases, the client must
-    #   ensure that the message format complies with Internet email
-    #   standards regarding email header fields, MIME types, and MIME
-    #   encoding.
+    #   If you are accessing Amazon SES using an Amazon Web Services SDK,
+    #   the SDK takes care of the base 64-encoding for you. In all cases,
+    #   the client must ensure that the message format complies with
+    #   Internet email standards regarding email header fields, MIME types,
+    #   and MIME encoding.
     #
     #   The To:, CC:, and BCC: headers in the raw message can contain a
     #   group list.
@@ -2982,7 +3023,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/send-email-raw.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/RawMessage AWS API Documentation
@@ -3002,7 +3043,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html
     #
     # @!attribute [rw] s3_action
     #   Saves the received message to an Amazon Simple Storage Service
@@ -3022,8 +3063,8 @@ module Aws::SES
     #   @return [Types::WorkmailAction]
     #
     # @!attribute [rw] lambda_action
-    #   Calls an AWS Lambda function, and optionally, publishes a
-    #   notification to Amazon SNS.
+    #   Calls an Amazon Web Services Lambda function, and optionally,
+    #   publishes a notification to Amazon SNS.
     #   @return [Types::LambdaAction]
     #
     # @!attribute [rw] stop_action
@@ -3062,17 +3103,18 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-ip-filtering-console-walkthrough.html
     #
     # @!attribute [rw] name
-    #   The name of the IP address filter. The name must:
+    #   The name of the IP address filter. The name must meet the following
+    #   requirements:
     #
-    #   * This value can only contain ASCII letters (a-z, A-Z), numbers
-    #     (0-9), underscores (\_), or dashes (-).
+    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores
+    #     (\_), or dashes (-).
     #
     #   * Start and end with a letter or number.
     #
-    #   * Contain less than 64 characters.
+    #   * Contain 64 characters or fewer.
     #   @return [String]
     #
     # @!attribute [rw] ip_filter
@@ -3098,7 +3140,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-ip-filtering-console-walkthrough.html
     #
     # @!attribute [rw] policy
     #   Indicates whether to block or allow incoming mail from the specified
@@ -3106,11 +3148,11 @@ module Aws::SES
     #   @return [String]
     #
     # @!attribute [rw] cidr
-    #   A single IP address or a range of IP addresses that you want to
-    #   block or allow, specified in Classless Inter-Domain Routing (CIDR)
-    #   notation. An example of a single email address is 10.0.0.1. An
-    #   example of a range of IP addresses is 10.0.0.1/24. For more
-    #   information about CIDR notation, see [RFC 2317][1].
+    #   A single IP address or a range of IP addresses to block or allow,
+    #   specified in Classless Inter-Domain Routing (CIDR) notation. An
+    #   example of a single email address is 10.0.0.1. An example of a range
+    #   of IP addresses is 10.0.0.1/24. For more information about CIDR
+    #   notation, see [RFC 2317][1].
     #
     #
     #
@@ -3140,17 +3182,18 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html
     #
     # @!attribute [rw] name
-    #   The name of the receipt rule. The name must:
+    #   The name of the receipt rule. The name must meet the following
+    #   requirements:
     #
-    #   * This value can only contain ASCII letters (a-z, A-Z), numbers
-    #     (0-9), underscores (\_), or dashes (-).
+    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores
+    #     (\_), dashes (-), or periods (.).
     #
     #   * Start and end with a letter or number.
     #
-    #   * Contain less than 64 characters.
+    #   * Contain 64 characters or fewer.
     #   @return [String]
     #
     # @!attribute [rw] enabled
@@ -3160,14 +3203,14 @@ module Aws::SES
     # @!attribute [rw] tls_policy
     #   Specifies whether Amazon SES should require that incoming email is
     #   delivered over a connection encrypted with Transport Layer Security
-    #   (TLS). If this parameter is set to `Require`, Amazon SES will bounce
+    #   (TLS). If this parameter is set to `Require`, Amazon SES bounces
     #   emails that are not received over TLS. The default is `Optional`.
     #   @return [String]
     #
     # @!attribute [rw] recipients
     #   The recipient domains and email addresses that the receipt rule
-    #   applies to. If this field is not specified, this rule will match all
-    #   recipients under all verified domains.
+    #   applies to. If this field is not specified, this rule matches all
+    #   recipients on all verified domains.
     #   @return [Array<String>]
     #
     # @!attribute [rw] actions
@@ -3205,17 +3248,18 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html#receiving-email-concepts-rules
     #
     # @!attribute [rw] name
-    #   The name of the receipt rule set. The name must:
+    #   The name of the receipt rule set. The name must meet the following
+    #   requirements:
     #
-    #   * This value can only contain ASCII letters (a-z, A-Z), numbers
-    #     (0-9), underscores (\_), or dashes (-).
+    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores
+    #     (\_), or dashes (-).
     #
     #   * Start and end with a letter or number.
     #
-    #   * Contain less than 64 characters.
+    #   * Contain 64 characters or fewer.
     #   @return [String]
     #
     # @!attribute [rw] created_timestamp
@@ -3240,12 +3284,12 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email.html
     #
     # @!attribute [rw] final_recipient
     #   The email address that the message was ultimately delivered to. This
     #   corresponds to the `Final-Recipient` in the DSN. If not specified,
-    #   `FinalRecipient` will be set to the `Recipient` specified in the
+    #   `FinalRecipient` is set to the `Recipient` specified in the
     #   `BouncedRecipientInfo` structure. Either `FinalRecipient` or the
     #   recipient in `BouncedRecipientInfo` must be a recipient of the
     #   original bounced message.
@@ -3333,15 +3377,14 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html
     #
     # @!attribute [rw] rule_set_name
     #   The name of the receipt rule set to reorder.
     #   @return [String]
     #
     # @!attribute [rw] rule_names
-    #   A list of the specified receipt rule set's receipt rules in the
-    #   order that you want to put them.
+    #   The specified receipt rule set's receipt rules, in order.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ReorderReceiptRuleSetRequest AWS API Documentation
@@ -3364,9 +3407,9 @@ module Aws::SES
     #
     # @!attribute [rw] sending_enabled
     #   Describes whether email sending is enabled or disabled for the
-    #   configuration set. If the value is `true`, then Amazon SES will send
+    #   configuration set. If the value is `true`, then Amazon SES sends
     #   emails that use the configuration set. If the value is `false`,
-    #   Amazon SES will not send emails that use the configuration set. The
+    #   Amazon SES does not send emails that use the configuration set. The
     #   default value is `true`. You can change this setting using
     #   UpdateConfigurationSetSendingEnabled.
     #   @return [Boolean]
@@ -3439,14 +3482,13 @@ module Aws::SES
     # Service (Amazon SNS).
     #
     # To enable Amazon SES to write emails to your Amazon S3 bucket, use an
-    # AWS KMS key to encrypt your emails, or publish to an Amazon SNS topic
-    # of another account, Amazon SES must have permission to access those
-    # resources. For information about giving permissions, see the [Amazon
-    # SES Developer Guide][1].
+    # Amazon Web Services KMS key to encrypt your emails, or publish to an
+    # Amazon SNS topic of another account, Amazon SES must have permission
+    # to access those resources. For information about granting permissions,
+    # see the [Amazon SES Developer Guide][1].
     #
     # <note markdown="1"> When you save your emails to an Amazon S3 bucket, the maximum email
-    # size (including headers) is 30 MB. Emails larger than that will
-    # bounce.
+    # size (including headers) is 40 MB. Emails larger than that bounces.
     #
     #  </note>
     #
@@ -3455,23 +3497,25 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html
-    # [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-s3.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-permissions.html
+    # [2]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-action-s3.html
     #
     # @!attribute [rw] topic_arn
     #   The ARN of the Amazon SNS topic to notify when the message is saved
-    #   to the Amazon S3 bucket. An example of an Amazon SNS topic ARN is
-    #   `arn:aws:sns:us-west-2:123456789012:MyTopic`. For more information
-    #   about Amazon SNS topics, see the [Amazon SNS Developer Guide][1].
+    #   to the Amazon S3 bucket. You can find the ARN of a topic by using
+    #   the [ListTopics][1] operation in Amazon SNS.
+    #
+    #   For more information about Amazon SNS topics, see the [Amazon SNS
+    #   Developer Guide][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/api/API_ListTopics.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
     #   @return [String]
     #
     # @!attribute [rw] bucket_name
-    #   The name of the Amazon S3 bucket that incoming email will be saved
-    #   to.
+    #   The name of the Amazon S3 bucket for incoming email.
     #   @return [String]
     #
     # @!attribute [rw] object_key_prefix
@@ -3483,42 +3527,43 @@ module Aws::SES
     # @!attribute [rw] kms_key_arn
     #   The customer master key that Amazon SES should use to encrypt your
     #   emails before saving them to the Amazon S3 bucket. You can use the
-    #   default master key or a custom master key you created in AWS KMS as
-    #   follows:
+    #   default master key or a custom master key that you created in Amazon
+    #   Web Services KMS as follows:
     #
     #   * To use the default master key, provide an ARN in the form of
     #     `arn:aws:kms:REGION:ACCOUNT-ID-WITHOUT-HYPHENS:alias/aws/ses`. For
-    #     example, if your AWS account ID is 123456789012 and you want to
-    #     use the default master key in the US West (Oregon) region, the ARN
-    #     of the default master key would be
+    #     example, if your Amazon Web Services account ID is 123456789012
+    #     and you want to use the default master key in the US West (Oregon)
+    #     Region, the ARN of the default master key would be
     #     `arn:aws:kms:us-west-2:123456789012:alias/aws/ses`. If you use the
     #     default master key, you don't need to perform any extra steps to
     #     give Amazon SES permission to use the key.
     #
-    #   * To use a custom master key you created in AWS KMS, provide the ARN
-    #     of the master key and ensure that you add a statement to your
-    #     key's policy to give Amazon SES permission to use it. For more
-    #     information about giving permissions, see the [Amazon SES
-    #     Developer Guide][1].
+    #   * To use a custom master key that you created in Amazon Web Services
+    #     KMS, provide the ARN of the master key and ensure that you add a
+    #     statement to your key's policy to give Amazon SES permission to
+    #     use it. For more information about giving permissions, see the
+    #     [Amazon SES Developer Guide][1].
     #
-    #   For more information about key policies, see the [AWS KMS Developer
-    #   Guide][2]. If you do not specify a master key, Amazon SES will not
-    #   encrypt your emails.
+    #   For more information about key policies, see the [Amazon Web
+    #   Services KMS Developer Guide][2]. If you do not specify a master
+    #   key, Amazon SES does not encrypt your emails.
     #
     #   Your mail is encrypted by Amazon SES using the Amazon S3 encryption
     #   client before the mail is submitted to Amazon S3 for storage. It is
     #   not encrypted using Amazon S3 server-side encryption. This means
     #   that you must use the Amazon S3 encryption client to decrypt the
     #   email after retrieving it from Amazon S3, as the service has no
-    #   access to use your AWS KMS keys for decryption. This encryption
-    #   client is currently available with the [AWS SDK for Java][3] and
-    #   [AWS SDK for Ruby][4] only. For more information about client-side
-    #   encryption using AWS KMS master keys, see the [Amazon S3 Developer
+    #   access to use your Amazon Web Services KMS keys for decryption. This
+    #   encryption client is currently available with the [Amazon Web
+    #   Services SDK for Java][3] and [Amazon Web Services SDK for Ruby][4]
+    #   only. For more information about client-side encryption using Amazon
+    #   Web Services KMS master keys, see the [Amazon S3 Developer
     #   Guide][5].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-permissions.html
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html
     #   [3]: http://aws.amazon.com/sdk-for-java/
     #   [4]: http://aws.amazon.com/sdk-for-ruby/
@@ -3550,26 +3595,29 @@ module Aws::SES
     # about giving permissions, see the [Amazon SES Developer Guide][1].
     #
     # You can only publish emails that are 150 KB or less (including the
-    # header) to Amazon SNS. Larger emails will bounce. If you anticipate
-    # emails larger than 150 KB, use the S3 action instead.
+    # header) to Amazon SNS. Larger emails bounce. If you anticipate emails
+    # larger than 150 KB, use the S3 action instead.
     #
     # For information about using a receipt rule to publish an Amazon SNS
     # notification, see the [Amazon SES Developer Guide][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html
-    # [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-sns.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-permissions.html
+    # [2]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-action-sns.html
     #
     # @!attribute [rw] topic_arn
-    #   The Amazon Resource Name (ARN) of the Amazon SNS topic to notify. An
-    #   example of an Amazon SNS topic ARN is
-    #   `arn:aws:sns:us-west-2:123456789012:MyTopic`. For more information
-    #   about Amazon SNS topics, see the [Amazon SNS Developer Guide][1].
+    #   The Amazon Resource Name (ARN) of the Amazon SNS topic to notify.
+    #   You can find the ARN of a topic by using the [ListTopics][1]
+    #   operation in Amazon SNS.
+    #
+    #   For more information about Amazon SNS topics, see the [Amazon SNS
+    #   Developer Guide][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/api/API_ListTopics.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
     #   @return [String]
     #
     # @!attribute [rw] encoding
@@ -3599,17 +3647,20 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
     #
     # @!attribute [rw] topic_arn
-    #   The ARN of the Amazon SNS topic that email sending events will be
-    #   published to. An example of an Amazon SNS topic ARN is
-    #   `arn:aws:sns:us-west-2:123456789012:MyTopic`. For more information
-    #   about Amazon SNS topics, see the [Amazon SNS Developer Guide][1].
+    #   The ARN of the Amazon SNS topic for email sending events. You can
+    #   find the ARN of a topic by using the [ListTopics][1] Amazon SNS
+    #   operation.
+    #
+    #   For more information about Amazon SNS topics, see the [Amazon SNS
+    #   Developer Guide][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/api/API_ListTopics.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SNSDestination AWS API Documentation
@@ -3634,13 +3685,13 @@ module Aws::SES
     #
     # @!attribute [rw] explanation
     #   Human-readable text for the bounce message to explain the failure.
-    #   If not specified, the text will be auto-generated based on the
-    #   bounced recipient information.
+    #   If not specified, the text is auto-generated based on the bounced
+    #   recipient information.
     #   @return [String]
     #
     # @!attribute [rw] message_dsn
-    #   Message-related DSN fields. If not specified, Amazon SES will choose
-    #   the values.
+    #   Message-related DSN fields. If not specified, Amazon SES chooses the
+    #   values.
     #   @return [Types::MessageDsn]
     #
     # @!attribute [rw] bounced_recipient_info_list
@@ -3659,7 +3710,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendBounceRequest AWS API Documentation
@@ -3695,7 +3746,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/send-personalized-email-api.html
     #
     # @!attribute [rw] source
     #   The email address that is sending the email. This email address must
@@ -3709,27 +3760,26 @@ module Aws::SES
     #   sending authorization, see the [Amazon SES Developer Guide][2].
     #
     #   <note markdown="1"> Amazon SES does not support the SMTPUTF8 extension, as described in
-    #   [RFC6531][3]. For this reason, the *local part* of a source email
-    #   address (the part of the email address that precedes the @ sign) may
-    #   only contain [7-bit ASCII characters][4]. If the *domain part* of an
-    #   address (the part after the @ sign) contains non-ASCII characters,
-    #   they must be encoded using Punycode, as described in [RFC3492][5].
-    #   The sender name (also known as the *friendly name*) may contain
-    #   non-ASCII characters. These characters must be encoded using MIME
-    #   encoded-word syntax, as described in [RFC 2047][6]. MIME
-    #   encoded-word syntax uses the following form:
-    #   `=?charset?encoding?encoded-text?=`.
+    #   [RFC6531][3]. For this reason, the email address string must be
+    #   7-bit ASCII. If you want to send to or from email addresses that
+    #   contain Unicode characters in the domain part of an address, you
+    #   must encode the domain using Punycode. Punycode is not permitted in
+    #   the local part of the email address (the part before the @ sign) nor
+    #   in the "friendly from" name. If you want to use Unicode characters
+    #   in the "friendly from" name, you must encode the "friendly from"
+    #   name using MIME encoded-word syntax, as described in [Sending raw
+    #   email using the Amazon SES API][4]. For more information about
+    #   Punycode, see [RFC 3492][5].
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
-    #   [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html
+    #   [2]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #   [3]: https://tools.ietf.org/html/rfc6531
-    #   [4]: https://en.wikipedia.org/wiki/Email_address#Local-part
-    #   [5]: https://tools.ietf.org/html/rfc3492.html
-    #   [6]: https://tools.ietf.org/html/rfc2047
+    #   [4]: https://docs.aws.amazon.com/ses/latest/dg/send-email-raw.html
+    #   [5]: http://tools.ietf.org/html/rfc3492
     #   @return [String]
     #
     # @!attribute [rw] source_arn
@@ -3750,24 +3800,23 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #   @return [String]
     #
     # @!attribute [rw] reply_to_addresses
     #   The reply-to email address(es) for the message. If the recipient
-    #   replies to the message, each reply-to address will receive the
-    #   reply.
+    #   replies to the message, each reply-to address receives the reply.
     #   @return [Array<String>]
     #
     # @!attribute [rw] return_path
-    #   The email address that bounces and complaints will be forwarded to
-    #   when feedback forwarding is enabled. If the message cannot be
-    #   delivered to the recipient, then an error message will be returned
-    #   from the recipient's ISP; this message will then be forwarded to
-    #   the email address specified by the `ReturnPath` parameter. The
-    #   `ReturnPath` parameter is never overwritten. This email address must
-    #   be either individually verified with Amazon SES, or from a domain
-    #   that has been verified with Amazon SES.
+    #   The email address that bounces and complaints are forwarded to when
+    #   feedback forwarding is enabled. If the message cannot be delivered
+    #   to the recipient, then an error message is returned from the
+    #   recipient's ISP; this message is forwarded to the email address
+    #   specified by the `ReturnPath` parameter. The `ReturnPath` parameter
+    #   is never overwritten. This email address must be either individually
+    #   verified with Amazon SES, or from a domain that has been verified
+    #   with Amazon SES.
     #   @return [String]
     #
     # @!attribute [rw] return_path_arn
@@ -3788,7 +3837,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #   @return [String]
     #
     # @!attribute [rw] configuration_set_name
@@ -3822,9 +3871,8 @@ module Aws::SES
     #
     # @!attribute [rw] destinations
     #   One or more `Destination` objects. All of the recipients in a
-    #   `Destination` will receive the same version of the email. You can
-    #   specify up to 50 `Destination` objects within a `Destinations`
-    #   array.
+    #   `Destination` receive the same version of the email. You can specify
+    #   up to 50 `Destination` objects within a `Destinations` array.
     #   @return [Array<Types::BulkEmailDestination>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendBulkTemplatedEmailRequest AWS API Documentation
@@ -3846,8 +3894,10 @@ module Aws::SES
     end
 
     # @!attribute [rw] status
-    #   The unique message identifier returned from the
-    #   `SendBulkTemplatedEmail` action.
+    #   One object per intended recipient. Check each response object and
+    #   retry any messages with a failure status. (Note that order of
+    #   responses will be respective to order of destinations in the
+    #   request.)Receipt rules enable you to specify which actions
     #   @return [Array<Types::BulkEmailDestinationStatus>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendBulkTemplatedEmailResponse AWS API Documentation
@@ -3941,7 +3991,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-formatted.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/send-email-formatted.html
     #
     # @!attribute [rw] source
     #   The email address that is sending the email. This email address must
@@ -3955,27 +4005,26 @@ module Aws::SES
     #   sending authorization, see the [Amazon SES Developer Guide][2].
     #
     #   <note markdown="1"> Amazon SES does not support the SMTPUTF8 extension, as described in
-    #   [RFC6531][3]. For this reason, the *local part* of a source email
-    #   address (the part of the email address that precedes the @ sign) may
-    #   only contain [7-bit ASCII characters][4]. If the *domain part* of an
-    #   address (the part after the @ sign) contains non-ASCII characters,
-    #   they must be encoded using Punycode, as described in [RFC3492][5].
-    #   The sender name (also known as the *friendly name*) may contain
-    #   non-ASCII characters. These characters must be encoded using MIME
-    #   encoded-word syntax, as described in [RFC 2047][6]. MIME
-    #   encoded-word syntax uses the following form:
-    #   `=?charset?encoding?encoded-text?=`.
+    #   [RFC6531][3]. For this reason, the email address string must be
+    #   7-bit ASCII. If you want to send to or from email addresses that
+    #   contain Unicode characters in the domain part of an address, you
+    #   must encode the domain using Punycode. Punycode is not permitted in
+    #   the local part of the email address (the part before the @ sign) nor
+    #   in the "friendly from" name. If you want to use Unicode characters
+    #   in the "friendly from" name, you must encode the "friendly from"
+    #   name using MIME encoded-word syntax, as described in [Sending raw
+    #   email using the Amazon SES API][4]. For more information about
+    #   Punycode, see [RFC 3492][5].
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
-    #   [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html
+    #   [2]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #   [3]: https://tools.ietf.org/html/rfc6531
-    #   [4]: https://en.wikipedia.org/wiki/Email_address#Local-part
-    #   [5]: https://tools.ietf.org/html/rfc3492.html
-    #   [6]: https://tools.ietf.org/html/rfc2047
+    #   [4]: https://docs.aws.amazon.com/ses/latest/dg/send-email-raw.html
+    #   [5]: http://tools.ietf.org/html/rfc3492
     #   @return [String]
     #
     # @!attribute [rw] destination
@@ -3989,19 +4038,18 @@ module Aws::SES
     #
     # @!attribute [rw] reply_to_addresses
     #   The reply-to email address(es) for the message. If the recipient
-    #   replies to the message, each reply-to address will receive the
-    #   reply.
+    #   replies to the message, each reply-to address receives the reply.
     #   @return [Array<String>]
     #
     # @!attribute [rw] return_path
-    #   The email address that bounces and complaints will be forwarded to
-    #   when feedback forwarding is enabled. If the message cannot be
-    #   delivered to the recipient, then an error message will be returned
-    #   from the recipient's ISP; this message will then be forwarded to
-    #   the email address specified by the `ReturnPath` parameter. The
-    #   `ReturnPath` parameter is never overwritten. This email address must
-    #   be either individually verified with Amazon SES, or from a domain
-    #   that has been verified with Amazon SES.
+    #   The email address that bounces and complaints are forwarded to when
+    #   feedback forwarding is enabled. If the message cannot be delivered
+    #   to the recipient, then an error message is returned from the
+    #   recipient's ISP; this message is forwarded to the email address
+    #   specified by the `ReturnPath` parameter. The `ReturnPath` parameter
+    #   is never overwritten. This email address must be either individually
+    #   verified with Amazon SES, or from a domain that has been verified
+    #   with Amazon SES.
     #   @return [String]
     #
     # @!attribute [rw] source_arn
@@ -4022,7 +4070,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #   @return [String]
     #
     # @!attribute [rw] return_path_arn
@@ -4043,7 +4091,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -4093,7 +4141,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/send-email-raw.html
     #
     # @!attribute [rw] source
     #   The identity's email address. If you do not provide a value for
@@ -4101,30 +4149,29 @@ module Aws::SES
     #   of the message. (You can also specify both.)
     #
     #   <note markdown="1"> Amazon SES does not support the SMTPUTF8 extension, as described
-    #   in[RFC6531][1]. For this reason, the *local part* of a source email
-    #   address (the part of the email address that precedes the @ sign) may
-    #   only contain [7-bit ASCII characters][2]. If the *domain part* of an
-    #   address (the part after the @ sign) contains non-ASCII characters,
-    #   they must be encoded using Punycode, as described in [RFC3492][3].
-    #   The sender name (also known as the *friendly name*) may contain
-    #   non-ASCII characters. These characters must be encoded using MIME
-    #   encoded-word syntax, as described in [RFC 2047][4]. MIME
-    #   encoded-word syntax uses the following form:
-    #   `=?charset?encoding?encoded-text?=`.
+    #   in[RFC6531][1]. For this reason, the email address string must be
+    #   7-bit ASCII. If you want to send to or from email addresses that
+    #   contain Unicode characters in the domain part of an address, you
+    #   must encode the domain using Punycode. Punycode is not permitted in
+    #   the local part of the email address (the part before the @ sign) nor
+    #   in the "friendly from" name. If you want to use Unicode characters
+    #   in the "friendly from" name, you must encode the "friendly from"
+    #   name using MIME encoded-word syntax, as described in [Sending raw
+    #   email using the Amazon SES API][2]. For more information about
+    #   Punycode, see [RFC 3492][3].
     #
     #    </note>
     #
     #   If you specify the `Source` parameter and have feedback forwarding
-    #   enabled, then bounces and complaints will be sent to this email
-    #   address. This takes precedence over any Return-Path header that you
-    #   might include in the raw text of the message.
+    #   enabled, then bounces and complaints are sent to this email address.
+    #   This takes precedence over any Return-Path header that you might
+    #   include in the raw text of the message.
     #
     #
     #
     #   [1]: https://tools.ietf.org/html/rfc6531
-    #   [2]: https://en.wikipedia.org/wiki/Email_address#Local-part
-    #   [3]: https://tools.ietf.org/html/rfc3492.html
-    #   [4]: https://tools.ietf.org/html/rfc2047
+    #   [2]: https://docs.aws.amazon.com/ses/latest/dg/send-email-raw.html
+    #   [3]: http://tools.ietf.org/html/rfc3492
     #   @return [String]
     #
     # @!attribute [rw] destinations
@@ -4159,8 +4206,8 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mime-types.html
-    #   [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/mime-types.html
+    #   [2]: https://docs.aws.amazon.com/ses/latest/dg/send-email-raw.html
     #   [3]: https://tools.ietf.org/html/rfc5321#section-4.5.3.1.6
     #   @return [Types::RawMessage]
     #
@@ -4183,7 +4230,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization-delegate-sender-tasks-email.html
     #   @return [String]
     #
     # @!attribute [rw] source_arn
@@ -4212,7 +4259,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization-delegate-sender-tasks-email.html
     #   @return [String]
     #
     # @!attribute [rw] return_path_arn
@@ -4241,7 +4288,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization-delegate-sender-tasks-email.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -4291,7 +4338,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/send-personalized-email-api.html
     #
     # @!attribute [rw] source
     #   The email address that is sending the email. This email address must
@@ -4305,26 +4352,26 @@ module Aws::SES
     #   sending authorization, see the [Amazon SES Developer Guide][2].
     #
     #   <note markdown="1"> Amazon SES does not support the SMTPUTF8 extension, as described in
-    #   [RFC6531][3]. For this reason, the *local part* of a source email
-    #   address (the part of the email address that precedes the @ sign) may
-    #   only contain [7-bit ASCII characters][4]. If the *domain part* of an
-    #   address (the part after the @ sign) contains non-ASCII characters,
-    #   they must be encoded using Punycode, as described in [RFC3492][5].
-    #   The sender name (also known as the *friendly name*) may contain
-    #   non-ASCII characters. These characters must be encoded using MIME
-    #   encoded-word syntax, as described in[RFC 2047][6]. MIME encoded-word
-    #   syntax uses the following form: `=?charset?encoding?encoded-text?=`.
+    #   [RFC6531][3]. for this reason, The email address string must be
+    #   7-bit ASCII. If you want to send to or from email addresses that
+    #   contain Unicode characters in the domain part of an address, you
+    #   must encode the domain using Punycode. Punycode is not permitted in
+    #   the local part of the email address (the part before the @ sign) nor
+    #   in the "friendly from" name. If you want to use Unicode characters
+    #   in the "friendly from" name, you must encode the "friendly from"
+    #   name using MIME encoded-word syntax, as described in [Sending raw
+    #   email using the Amazon SES API][4]. For more information about
+    #   Punycode, see [RFC 3492][5].
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
-    #   [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html
+    #   [2]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #   [3]: https://tools.ietf.org/html/rfc6531
-    #   [4]: https://en.wikipedia.org/wiki/Email_address#Local-part
-    #   [5]: https://tools.ietf.org/html/rfc3492.html
-    #   [6]: https://tools.ietf.org/html/rfc2047
+    #   [4]: https://docs.aws.amazon.com/ses/latest/dg/send-email-raw.html
+    #   [5]: http://tools.ietf.org/html/rfc3492
     #   @return [String]
     #
     # @!attribute [rw] destination
@@ -4335,19 +4382,18 @@ module Aws::SES
     #
     # @!attribute [rw] reply_to_addresses
     #   The reply-to email address(es) for the message. If the recipient
-    #   replies to the message, each reply-to address will receive the
-    #   reply.
+    #   replies to the message, each reply-to address receives the reply.
     #   @return [Array<String>]
     #
     # @!attribute [rw] return_path
-    #   The email address that bounces and complaints will be forwarded to
-    #   when feedback forwarding is enabled. If the message cannot be
-    #   delivered to the recipient, then an error message will be returned
-    #   from the recipient's ISP; this message will then be forwarded to
-    #   the email address specified by the `ReturnPath` parameter. The
-    #   `ReturnPath` parameter is never overwritten. This email address must
-    #   be either individually verified with Amazon SES, or from a domain
-    #   that has been verified with Amazon SES.
+    #   The email address that bounces and complaints are forwarded to when
+    #   feedback forwarding is enabled. If the message cannot be delivered
+    #   to the recipient, then an error message is returned from the
+    #   recipient's ISP; this message is forwarded to the email address
+    #   specified by the `ReturnPath` parameter. The `ReturnPath` parameter
+    #   is never overwritten. This email address must be either individually
+    #   verified with Amazon SES, or from a domain that has been verified
+    #   with Amazon SES.
     #   @return [String]
     #
     # @!attribute [rw] source_arn
@@ -4368,7 +4414,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #   @return [String]
     #
     # @!attribute [rw] return_path_arn
@@ -4389,7 +4435,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -4456,7 +4502,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html
     #
     # @!attribute [rw] rule_set_name
     #   The name of the receipt rule set to make active. Setting this value
@@ -4483,7 +4529,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy.html
     #
     # @!attribute [rw] identity
     #   The identity for which DKIM signing should be enabled or disabled.
@@ -4516,7 +4562,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-email.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications-email.html
     #
     # @!attribute [rw] identity
     #   The identity for which to set bounce and complaint notification
@@ -4524,14 +4570,13 @@ module Aws::SES
     #   @return [String]
     #
     # @!attribute [rw] forwarding_enabled
-    #   Sets whether Amazon SES will forward bounce and complaint
-    #   notifications as email. `true` specifies that Amazon SES will
-    #   forward bounce and complaint notifications as email, in addition to
-    #   any Amazon SNS topic publishing otherwise specified. `false`
-    #   specifies that Amazon SES will publish bounce and complaint
-    #   notifications only through Amazon SNS. This value can only be set to
-    #   `false` when Amazon SNS topics are set for both `Bounce` and
-    #   `Complaint` notification types.
+    #   Sets whether Amazon SES forwards bounce and complaint notifications
+    #   as email. `true` specifies that Amazon SES forwards bounce and
+    #   complaint notifications as email, in addition to any Amazon SNS
+    #   topic publishing otherwise specified. `false` specifies that Amazon
+    #   SES publishes bounce and complaint notifications only through Amazon
+    #   SNS. This value can only be set to `false` when Amazon SNS topics
+    #   are set for both `Bounce` and `Complaint` notification types.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityFeedbackForwardingEnabledRequest AWS API Documentation
@@ -4556,7 +4601,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-sns.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications-sns.html
     #
     # @!attribute [rw] identity
     #   The identity for which to enable or disable headers in
@@ -4571,8 +4616,8 @@ module Aws::SES
     # @!attribute [rw] enabled
     #   Sets whether Amazon SES includes the original email headers in
     #   Amazon SNS notifications of the specified notification type. A value
-    #   of `true` specifies that Amazon SES will include headers in
-    #   notifications, and a value of `false` specifies that Amazon SES will
+    #   of `true` specifies that Amazon SES includes headers in
+    #   notifications, and a value of `false` specifies that Amazon SES does
     #   not include headers in notifications.
     #
     #   This value can only be set when `NotificationType` is already set to
@@ -4601,34 +4646,33 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/mail-from.html
     #
     # @!attribute [rw] identity
-    #   The verified identity for which you want to enable or disable the
-    #   specified custom MAIL FROM domain.
+    #   The verified identity.
     #   @return [String]
     #
     # @!attribute [rw] mail_from_domain
-    #   The custom MAIL FROM domain that you want the verified identity to
-    #   use. The MAIL FROM domain must 1) be a subdomain of the verified
-    #   identity, 2) not be used in a "From" address if the MAIL FROM
-    #   domain is the destination of email feedback forwarding (for more
-    #   information, see the [Amazon SES Developer Guide][1]), and 3) not be
-    #   used to receive emails. A value of `null` disables the custom MAIL
-    #   FROM setting for the identity.
+    #   The custom MAIL FROM domain for the verified identity to use. The
+    #   MAIL FROM domain must 1) be a subdomain of the verified identity, 2)
+    #   not be used in a "From" address if the MAIL FROM domain is the
+    #   destination of email feedback forwarding (for more information, see
+    #   the [Amazon SES Developer Guide][1]), and 3) not be used to receive
+    #   emails. A value of `null` disables the custom MAIL FROM setting for
+    #   the identity.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/mail-from.html
     #   @return [String]
     #
     # @!attribute [rw] behavior_on_mx_failure
-    #   The action that you want Amazon SES to take if it cannot
-    #   successfully read the required MX record when you send an email. If
-    #   you choose `UseDefaultValue`, Amazon SES will use amazonses.com (or
-    #   a subdomain of that) as the MAIL FROM domain. If you choose
-    #   `RejectMessage`, Amazon SES will return a
-    #   `MailFromDomainNotVerified` error and not send the email.
+    #   The action for Amazon SES to take if it cannot successfully read the
+    #   required MX record when you send an email. If you choose
+    #   `UseDefaultValue`, Amazon SES uses amazonses.com (or a subdomain of
+    #   that) as the MAIL FROM domain. If you choose `RejectMessage`, Amazon
+    #   SES returns a `MailFromDomainNotVerified` error and not send the
+    #   email.
     #
     #   The action specified in `BehaviorOnMXFailure` is taken when the
     #   custom MAIL FROM domain setup is in the `Pending`, `Failed`, and
@@ -4652,17 +4696,16 @@ module Aws::SES
     class SetIdentityMailFromDomainResponse < Aws::EmptyStructure; end
 
     # Represents a request to specify the Amazon SNS topic to which Amazon
-    # SES will publish bounce, complaint, or delivery notifications for
-    # emails sent with that identity as the Source. For information about
-    # Amazon SES notifications, see the [Amazon SES Developer Guide][1].
+    # SES publishes bounce, complaint, or delivery notifications for emails
+    # sent with that identity as the source. For information about Amazon
+    # SES notifications, see the [Amazon SES Developer Guide][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-sns.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications-sns.html
     #
     # @!attribute [rw] identity
-    #   The identity (email address or domain) that you want to set the
-    #   Amazon SNS topic for.
+    #   The identity (email address or domain) for the Amazon SNS topic.
     #
     #   You can only specify a verified identity for this parameter.
     #
@@ -4673,8 +4716,8 @@ module Aws::SES
     #   @return [String]
     #
     # @!attribute [rw] notification_type
-    #   The type of notifications that will be published to the specified
-    #   Amazon SNS topic.
+    #   The type of notifications that are published to the specified Amazon
+    #   SNS topic.
     #   @return [String]
     #
     # @!attribute [rw] sns_topic
@@ -4706,7 +4749,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html
     #
     # @!attribute [rw] rule_set_name
     #   The name of the receipt rule set that contains the receipt rule to
@@ -4747,7 +4790,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-stop.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-action-stop.html
     #
     # @!attribute [rw] scope
     #   The scope of the StopAction. The only acceptable value is `RuleSet`.
@@ -4755,14 +4798,16 @@ module Aws::SES
     #
     # @!attribute [rw] topic_arn
     #   The Amazon Resource Name (ARN) of the Amazon SNS topic to notify
-    #   when the stop action is taken. An example of an Amazon SNS topic ARN
-    #   is `arn:aws:sns:us-west-2:123456789012:MyTopic`. For more
-    #   information about Amazon SNS topics, see the [Amazon SNS Developer
-    #   Guide][1].
+    #   when the stop action is taken. You can find the ARN of a topic by
+    #   using the [ListTopics][1] Amazon SNS operation.
+    #
+    #   For more information about Amazon SNS topics, see the [Amazon SNS
+    #   Developer Guide][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/api/API_ListTopics.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/StopAction AWS API Documentation
@@ -4774,12 +4819,12 @@ module Aws::SES
       include Aws::Structure
     end
 
-    # The content of the email, composed of a subject line, an HTML part,
-    # and a text-only part.
+    # The content of the email, composed of a subject line and either an
+    # HTML part or a text-only part.
     #
     # @!attribute [rw] template_name
-    #   The name of the template. You will refer to this name when you send
-    #   email using the `SendTemplatedEmail` or `SendBulkTemplatedEmail`
+    #   The name of the template. You use this name when you send email
+    #   using the `SendTemplatedEmail` or `SendBulkTemplatedEmail`
     #   operations.
     #   @return [String]
     #
@@ -4788,8 +4833,8 @@ module Aws::SES
     #   @return [String]
     #
     # @!attribute [rw] text_part
-    #   The email body that will be visible to recipients whose email
-    #   clients do not display HTML.
+    #   The email body that is visible to recipients whose email clients do
+    #   not display HTML content.
     #   @return [String]
     #
     # @!attribute [rw] html_part
@@ -4841,7 +4886,7 @@ module Aws::SES
     end
 
     # @!attribute [rw] template_name
-    #   The name of the template that you want to render.
+    #   The name of the template to render.
     #   @return [String]
     #
     # @!attribute [rw] template_data
@@ -4883,11 +4928,11 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/configure-custom-open-click-domains.html
     #
     # @!attribute [rw] custom_redirect_domain
-    #   The custom subdomain that will be used to redirect email recipients
-    #   to the Amazon SES event tracking domain.
+    #   The custom subdomain that is used to redirect email recipients to
+    #   the Amazon SES event tracking domain.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/TrackingOptions AWS API Documentation
@@ -4935,7 +4980,7 @@ module Aws::SES
     #
     # @!attribute [rw] enabled
     #   Describes whether email sending is enabled or disabled for your
-    #   Amazon SES account in the current AWS Region.
+    #   Amazon SES account in the current Amazon Web Services Region.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateAccountSendingEnabledRequest AWS API Documentation
@@ -4953,16 +4998,15 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
     #
     # @!attribute [rw] configuration_set_name
     #   The name of the configuration set that contains the event
-    #   destination that you want to update.
+    #   destination.
     #   @return [String]
     #
     # @!attribute [rw] event_destination
-    #   The event destination object that you want to apply to the specified
-    #   configuration set.
+    #   The event destination object.
     #   @return [Types::EventDestination]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetEventDestinationRequest AWS API Documentation
@@ -4984,13 +5028,13 @@ module Aws::SES
     # settings for a configuration set.
     #
     # @!attribute [rw] configuration_set_name
-    #   The name of the configuration set that you want to update.
+    #   The name of the configuration set to update.
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   Describes whether or not Amazon SES will publish reputation metrics
-    #   for the configuration set, such as bounce and complaint rates, to
-    #   Amazon CloudWatch.
+    #   Describes whether or not Amazon SES publishes reputation metrics for
+    #   the configuration set, such as bounce and complaint rates, to Amazon
+    #   CloudWatch.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetReputationMetricsEnabledRequest AWS API Documentation
@@ -5006,7 +5050,7 @@ module Aws::SES
     # capabilities for a specific configuration set.
     #
     # @!attribute [rw] configuration_set_name
-    #   The name of the configuration set that you want to update.
+    #   The name of the configuration set to update.
     #   @return [String]
     #
     # @!attribute [rw] enabled
@@ -5027,8 +5071,7 @@ module Aws::SES
     # configuration set.
     #
     # @!attribute [rw] configuration_set_name
-    #   The name of the configuration set for which you want to update the
-    #   custom tracking domain.
+    #   The name of the configuration set.
     #   @return [String]
     #
     # @!attribute [rw] tracking_options
@@ -5041,7 +5084,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/configure-custom-open-click-domains.html
     #   @return [Types::TrackingOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetTrackingOptionsRequest AWS API Documentation
@@ -5063,8 +5106,7 @@ module Aws::SES
     # template.
     #
     # @!attribute [rw] template_name
-    #   The name of the custom verification email template that you want to
-    #   update.
+    #   The name of the custom verification email template to update.
     #   @return [String]
     #
     # @!attribute [rw] from_email_address
@@ -5084,7 +5126,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html#custom-verification-emails-faq
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom
     #   @return [String]
     #
     # @!attribute [rw] success_redirection_url
@@ -5116,7 +5158,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html
     #
     # @!attribute [rw] rule_set_name
     #   The name of the receipt rule set that the receipt rule belongs to.
@@ -5142,8 +5184,8 @@ module Aws::SES
     class UpdateReceiptRuleResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] template
-    #   The content of the email, composed of a subject line, an HTML part,
-    #   and a text-only part.
+    #   The content of the email, composed of a subject line and either an
+    #   HTML part or a text-only part.
     #   @return [Types::Template]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateTemplateRequest AWS API Documentation
@@ -5164,7 +5206,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy.html
     #
     # @!attribute [rw] domain
     #   The name of the domain to be verified for Easy DKIM signing.
@@ -5199,7 +5241,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyDomainDkimResponse AWS API Documentation
@@ -5217,7 +5259,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-domains.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#verify-domain-procedure
     #
     # @!attribute [rw] domain
     #   The domain to be verified.
@@ -5243,8 +5285,9 @@ module Aws::SES
     #   record, the domain's verification status changes to "Success". If
     #   Amazon SES is unable to detect the record within 72 hours, the
     #   domain's verification status changes to "Failed." In that case,
-    #   if you still want to verify the domain, you must restart the
-    #   verification process from the beginning.
+    #   to verify the domain, you must restart the verification process from
+    #   the beginning. The domain's verification status also changes to
+    #   "Success" when it is DKIM verified.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyDomainIdentityResponse AWS API Documentation
@@ -5261,7 +5304,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#verify-email-addresses-procedure
     #
     # @!attribute [rw] email_address
     #   The email address to be verified.
@@ -5281,7 +5324,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#verify-email-addresses-procedure
     #
     # @!attribute [rw] email_address
     #   The email address to be verified.
@@ -5303,8 +5346,8 @@ module Aws::SES
 
     # When included in a receipt rule, this action calls Amazon WorkMail
     # and, optionally, publishes a notification to Amazon Simple
-    # Notification Service (Amazon SNS). You will typically not use this
-    # action directly because Amazon WorkMail adds the rule automatically
+    # Notification Service (Amazon SNS). It usually isn't necessary to set
+    # this up manually, because Amazon WorkMail adds the rule automatically
     # during its setup procedure.
     #
     # For information using a receipt rule to call Amazon WorkMail, see the
@@ -5312,30 +5355,40 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-workmail.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-action-workmail.html
     #
     # @!attribute [rw] topic_arn
     #   The Amazon Resource Name (ARN) of the Amazon SNS topic to notify
-    #   when the WorkMail action is called. An example of an Amazon SNS
-    #   topic ARN is `arn:aws:sns:us-west-2:123456789012:MyTopic`. For more
-    #   information about Amazon SNS topics, see the [Amazon SNS Developer
-    #   Guide][1].
+    #   when the WorkMail action is called. You can find the ARN of a topic
+    #   by using the [ListTopics][1] operation in Amazon SNS.
+    #
+    #   For more information about Amazon SNS topics, see the [Amazon SNS
+    #   Developer Guide][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/api/API_ListTopics.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
     #   @return [String]
     #
     # @!attribute [rw] organization_arn
-    #   The ARN of the Amazon WorkMail organization. An example of an Amazon
-    #   WorkMail organization ARN is
-    #   `arn:aws:workmail:us-west-2:123456789012:organization/m-68755160c4cb4e29a2b2f8fb58f359d7`.
+    #   The Amazon Resource Name (ARN) of the Amazon WorkMail organization.
+    #   Amazon WorkMail ARNs use the following format:
+    #
+    #   `arn:aws:workmail:<region>:<awsAccountId>:organization/<workmailOrganizationId>`
+    #
+    #   You can find the ID of your organization by using the
+    #   [ListOrganizations][1] operation in Amazon WorkMail. Amazon WorkMail
+    #   organization IDs begin with "`m-`", followed by a string of
+    #   alphanumeric characters.
+    #
     #   For information about Amazon WorkMail organizations, see the [Amazon
-    #   WorkMail Administrator Guide][1].
+    #   WorkMail Administrator Guide][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/workmail/latest/adminguide/organizations_overview.html
+    #   [1]: https://docs.aws.amazon.com/workmail/latest/APIReference/API_ListOrganizations.html
+    #   [2]: https://docs.aws.amazon.com/workmail/latest/adminguide/organizations_overview.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/WorkmailAction AWS API Documentation

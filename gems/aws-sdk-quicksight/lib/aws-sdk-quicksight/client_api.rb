@@ -16,6 +16,7 @@ module Aws::QuickSight
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountCustomization = Shapes::StructureShape.new(name: 'AccountCustomization')
     AccountInfo = Shapes::StructureShape.new(name: 'AccountInfo')
+    AccountName = Shapes::StringShape.new(name: 'AccountName')
     AccountSettings = Shapes::StructureShape.new(name: 'AccountSettings')
     ActionList = Shapes::ListShape.new(name: 'ActionList')
     ActiveIAMPolicyAssignment = Shapes::StructureShape.new(name: 'ActiveIAMPolicyAssignment')
@@ -1097,6 +1098,9 @@ module Aws::QuickSight
     PivotTableMetricPlacement = Shapes::StringShape.new(name: 'PivotTableMetricPlacement')
     PivotTableOptions = Shapes::StructureShape.new(name: 'PivotTableOptions')
     PivotTablePaginatedReportOptions = Shapes::StructureShape.new(name: 'PivotTablePaginatedReportOptions')
+    PivotTableRowsLabelOptions = Shapes::StructureShape.new(name: 'PivotTableRowsLabelOptions')
+    PivotTableRowsLabelText = Shapes::StringShape.new(name: 'PivotTableRowsLabelText')
+    PivotTableRowsLayout = Shapes::StringShape.new(name: 'PivotTableRowsLayout')
     PivotTableSortBy = Shapes::StructureShape.new(name: 'PivotTableSortBy')
     PivotTableSortConfiguration = Shapes::StructureShape.new(name: 'PivotTableSortConfiguration')
     PivotTableSubtotalLevel = Shapes::StringShape.new(name: 'PivotTableSubtotalLevel')
@@ -1388,6 +1392,7 @@ module Aws::QuickSight
     StringParameterDeclaration = Shapes::StructureShape.new(name: 'StringParameterDeclaration')
     StringParameterList = Shapes::ListShape.new(name: 'StringParameterList')
     StringValueWhenUnsetConfiguration = Shapes::StructureShape.new(name: 'StringValueWhenUnsetConfiguration')
+    StyledCellType = Shapes::StringShape.new(name: 'StyledCellType')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIdList = Shapes::ListShape.new(name: 'SubnetIdList')
     SubtotalOptions = Shapes::StructureShape.new(name: 'SubtotalOptions')
@@ -1425,6 +1430,8 @@ module Aws::QuickSight
     TableRowConditionalFormatting = Shapes::StructureShape.new(name: 'TableRowConditionalFormatting')
     TableSideBorderOptions = Shapes::StructureShape.new(name: 'TableSideBorderOptions')
     TableSortConfiguration = Shapes::StructureShape.new(name: 'TableSortConfiguration')
+    TableStyleTarget = Shapes::StructureShape.new(name: 'TableStyleTarget')
+    TableStyleTargetList = Shapes::ListShape.new(name: 'TableStyleTargetList')
     TableTotalsPlacement = Shapes::StringShape.new(name: 'TableTotalsPlacement')
     TableTotalsScrollStatus = Shapes::StringShape.new(name: 'TableTotalsScrollStatus')
     TableUnaggregatedFieldWells = Shapes::StructureShape.new(name: 'TableUnaggregatedFieldWells')
@@ -1692,6 +1699,7 @@ module Aws::QuickSight
     AccountInfo.add_member(:notification_email, Shapes::ShapeRef.new(shape: String, location_name: "NotificationEmail"))
     AccountInfo.add_member(:authentication_type, Shapes::ShapeRef.new(shape: String, location_name: "AuthenticationType"))
     AccountInfo.add_member(:account_subscription_status, Shapes::ShapeRef.new(shape: String, location_name: "AccountSubscriptionStatus"))
+    AccountInfo.add_member(:iam_identity_center_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "IAMIdentityCenterInstanceArn"))
     AccountInfo.struct_class = Types::AccountInfo
 
     AccountSettings.add_member(:account_name, Shapes::ShapeRef.new(shape: String, location_name: "AccountName"))
@@ -2509,7 +2517,7 @@ module Aws::QuickSight
     CreateAccountSubscriptionRequest.add_member(:edition, Shapes::ShapeRef.new(shape: Edition, required: true, location_name: "Edition"))
     CreateAccountSubscriptionRequest.add_member(:authentication_method, Shapes::ShapeRef.new(shape: AuthenticationMethodOption, required: true, location_name: "AuthenticationMethod"))
     CreateAccountSubscriptionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
-    CreateAccountSubscriptionRequest.add_member(:account_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AccountName"))
+    CreateAccountSubscriptionRequest.add_member(:account_name, Shapes::ShapeRef.new(shape: AccountName, required: true, location_name: "AccountName"))
     CreateAccountSubscriptionRequest.add_member(:notification_email, Shapes::ShapeRef.new(shape: String, required: true, location_name: "NotificationEmail"))
     CreateAccountSubscriptionRequest.add_member(:active_directory_name, Shapes::ShapeRef.new(shape: String, location_name: "ActiveDirectoryName"))
     CreateAccountSubscriptionRequest.add_member(:realm, Shapes::ShapeRef.new(shape: String, location_name: "Realm"))
@@ -5904,11 +5912,18 @@ module Aws::QuickSight
     PivotTableOptions.add_member(:row_field_names_style, Shapes::ShapeRef.new(shape: TableCellStyle, location_name: "RowFieldNamesStyle"))
     PivotTableOptions.add_member(:row_alternate_color_options, Shapes::ShapeRef.new(shape: RowAlternateColorOptions, location_name: "RowAlternateColorOptions"))
     PivotTableOptions.add_member(:collapsed_row_dimensions_visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "CollapsedRowDimensionsVisibility"))
+    PivotTableOptions.add_member(:rows_layout, Shapes::ShapeRef.new(shape: PivotTableRowsLayout, location_name: "RowsLayout"))
+    PivotTableOptions.add_member(:rows_label_options, Shapes::ShapeRef.new(shape: PivotTableRowsLabelOptions, location_name: "RowsLabelOptions"))
+    PivotTableOptions.add_member(:default_cell_width, Shapes::ShapeRef.new(shape: PixelLength, location_name: "DefaultCellWidth"))
     PivotTableOptions.struct_class = Types::PivotTableOptions
 
     PivotTablePaginatedReportOptions.add_member(:vertical_overflow_visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "VerticalOverflowVisibility"))
     PivotTablePaginatedReportOptions.add_member(:overflow_column_header_visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "OverflowColumnHeaderVisibility"))
     PivotTablePaginatedReportOptions.struct_class = Types::PivotTablePaginatedReportOptions
+
+    PivotTableRowsLabelOptions.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
+    PivotTableRowsLabelOptions.add_member(:custom_label, Shapes::ShapeRef.new(shape: PivotTableRowsLabelText, location_name: "CustomLabel"))
+    PivotTableRowsLabelOptions.struct_class = Types::PivotTableRowsLabelOptions
 
     PivotTableSortBy.add_member(:field, Shapes::ShapeRef.new(shape: FieldSort, location_name: "Field"))
     PivotTableSortBy.add_member(:column, Shapes::ShapeRef.new(shape: ColumnSort, location_name: "Column"))
@@ -6229,6 +6244,7 @@ module Aws::QuickSight
 
     RowAlternateColorOptions.add_member(:status, Shapes::ShapeRef.new(shape: WidgetStatus, location_name: "Status"))
     RowAlternateColorOptions.add_member(:row_alternate_colors, Shapes::ShapeRef.new(shape: RowAlternateColorList, location_name: "RowAlternateColors"))
+    RowAlternateColorOptions.add_member(:use_primary_background_color, Shapes::ShapeRef.new(shape: WidgetStatus, location_name: "UsePrimaryBackgroundColor"))
     RowAlternateColorOptions.struct_class = Types::RowAlternateColorOptions
 
     RowInfo.add_member(:rows_ingested, Shapes::ShapeRef.new(shape: Long, location_name: "RowsIngested", metadata: {"box"=>true}))
@@ -6797,6 +6813,7 @@ module Aws::QuickSight
     SubtotalOptions.add_member(:total_cell_style, Shapes::ShapeRef.new(shape: TableCellStyle, location_name: "TotalCellStyle"))
     SubtotalOptions.add_member(:value_cell_style, Shapes::ShapeRef.new(shape: TableCellStyle, location_name: "ValueCellStyle"))
     SubtotalOptions.add_member(:metric_header_cell_style, Shapes::ShapeRef.new(shape: TableCellStyle, location_name: "MetricHeaderCellStyle"))
+    SubtotalOptions.add_member(:style_targets, Shapes::ShapeRef.new(shape: TableStyleTargetList, location_name: "StyleTargets"))
     SubtotalOptions.struct_class = Types::SubtotalOptions
 
     Synonyms.member = Shapes::ShapeRef.new(shape: LimitedString)
@@ -6914,6 +6931,11 @@ module Aws::QuickSight
     TableSortConfiguration.add_member(:row_sort, Shapes::ShapeRef.new(shape: RowSortList, location_name: "RowSort"))
     TableSortConfiguration.add_member(:pagination_configuration, Shapes::ShapeRef.new(shape: PaginationConfiguration, location_name: "PaginationConfiguration"))
     TableSortConfiguration.struct_class = Types::TableSortConfiguration
+
+    TableStyleTarget.add_member(:cell_type, Shapes::ShapeRef.new(shape: StyledCellType, required: true, location_name: "CellType"))
+    TableStyleTarget.struct_class = Types::TableStyleTarget
+
+    TableStyleTargetList.member = Shapes::ShapeRef.new(shape: TableStyleTarget)
 
     TableUnaggregatedFieldWells.add_member(:values, Shapes::ShapeRef.new(shape: UnaggregatedFieldList, location_name: "Values"))
     TableUnaggregatedFieldWells.struct_class = Types::TableUnaggregatedFieldWells
@@ -7205,6 +7227,7 @@ module Aws::QuickSight
     TopicCalculatedField.add_member(:not_allowed_aggregations, Shapes::ShapeRef.new(shape: AuthorSpecifiedAggregations, location_name: "NotAllowedAggregations"))
     TopicCalculatedField.add_member(:never_aggregate_in_filter, Shapes::ShapeRef.new(shape: Boolean, location_name: "NeverAggregateInFilter"))
     TopicCalculatedField.add_member(:cell_value_synonyms, Shapes::ShapeRef.new(shape: CellValueSynonyms, location_name: "CellValueSynonyms"))
+    TopicCalculatedField.add_member(:non_additive, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "NonAdditive"))
     TopicCalculatedField.struct_class = Types::TopicCalculatedField
 
     TopicCalculatedFields.member = Shapes::ShapeRef.new(shape: TopicCalculatedField)
@@ -7236,6 +7259,7 @@ module Aws::QuickSight
     TopicColumn.add_member(:default_formatting, Shapes::ShapeRef.new(shape: DefaultFormatting, location_name: "DefaultFormatting"))
     TopicColumn.add_member(:never_aggregate_in_filter, Shapes::ShapeRef.new(shape: Boolean, location_name: "NeverAggregateInFilter"))
     TopicColumn.add_member(:cell_value_synonyms, Shapes::ShapeRef.new(shape: CellValueSynonyms, location_name: "CellValueSynonyms"))
+    TopicColumn.add_member(:non_additive, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "NonAdditive"))
     TopicColumn.struct_class = Types::TopicColumn
 
     TopicColumns.member = Shapes::ShapeRef.new(shape: TopicColumn)
