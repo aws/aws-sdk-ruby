@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2023-08-14)
+------------------
+
+* Feature - This release provides support for annotation store versioning and cross account sharing for Omics Analytics
+
 1.12.0 (2023-08-10)
 ------------------
 

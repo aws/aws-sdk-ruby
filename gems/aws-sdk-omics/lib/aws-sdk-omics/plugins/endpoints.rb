@@ -58,6 +58,8 @@ module Aws::Omics
           case context.operation_name
           when :abort_multipart_read_set_upload
             Aws::Omics::Endpoints::AbortMultipartReadSetUpload.build(context)
+          when :accept_share
+            Aws::Omics::Endpoints::AcceptShare.build(context)
           when :batch_delete_read_set
             Aws::Omics::Endpoints::BatchDeleteReadSet.build(context)
           when :cancel_annotation_import_job
@@ -70,6 +72,8 @@ module Aws::Omics
             Aws::Omics::Endpoints::CompleteMultipartReadSetUpload.build(context)
           when :create_annotation_store
             Aws::Omics::Endpoints::CreateAnnotationStore.build(context)
+          when :create_annotation_store_version
+            Aws::Omics::Endpoints::CreateAnnotationStoreVersion.build(context)
           when :create_multipart_read_set_upload
             Aws::Omics::Endpoints::CreateMultipartReadSetUpload.build(context)
           when :create_reference_store
@@ -78,12 +82,16 @@ module Aws::Omics
             Aws::Omics::Endpoints::CreateRunGroup.build(context)
           when :create_sequence_store
             Aws::Omics::Endpoints::CreateSequenceStore.build(context)
+          when :create_share
+            Aws::Omics::Endpoints::CreateShare.build(context)
           when :create_variant_store
             Aws::Omics::Endpoints::CreateVariantStore.build(context)
           when :create_workflow
             Aws::Omics::Endpoints::CreateWorkflow.build(context)
           when :delete_annotation_store
             Aws::Omics::Endpoints::DeleteAnnotationStore.build(context)
+          when :delete_annotation_store_versions
+            Aws::Omics::Endpoints::DeleteAnnotationStoreVersions.build(context)
           when :delete_reference
             Aws::Omics::Endpoints::DeleteReference.build(context)
           when :delete_reference_store
@@ -94,6 +102,8 @@ module Aws::Omics
             Aws::Omics::Endpoints::DeleteRunGroup.build(context)
           when :delete_sequence_store
             Aws::Omics::Endpoints::DeleteSequenceStore.build(context)
+          when :delete_share
+            Aws::Omics::Endpoints::DeleteShare.build(context)
           when :delete_variant_store
             Aws::Omics::Endpoints::DeleteVariantStore.build(context)
           when :delete_workflow
@@ -102,6 +112,8 @@ module Aws::Omics
             Aws::Omics::Endpoints::GetAnnotationImportJob.build(context)
           when :get_annotation_store
             Aws::Omics::Endpoints::GetAnnotationStore.build(context)
+          when :get_annotation_store_version
+            Aws::Omics::Endpoints::GetAnnotationStoreVersion.build(context)
           when :get_read_set
             Aws::Omics::Endpoints::GetReadSet.build(context)
           when :get_read_set_activation_job
@@ -128,6 +140,8 @@ module Aws::Omics
             Aws::Omics::Endpoints::GetRunTask.build(context)
           when :get_sequence_store
             Aws::Omics::Endpoints::GetSequenceStore.build(context)
+          when :get_share
+            Aws::Omics::Endpoints::GetShare.build(context)
           when :get_variant_import_job
             Aws::Omics::Endpoints::GetVariantImportJob.build(context)
           when :get_variant_store
@@ -136,6 +150,8 @@ module Aws::Omics
             Aws::Omics::Endpoints::GetWorkflow.build(context)
           when :list_annotation_import_jobs
             Aws::Omics::Endpoints::ListAnnotationImportJobs.build(context)
+          when :list_annotation_store_versions
+            Aws::Omics::Endpoints::ListAnnotationStoreVersions.build(context)
           when :list_annotation_stores
             Aws::Omics::Endpoints::ListAnnotationStores.build(context)
           when :list_multipart_read_set_uploads
@@ -164,6 +180,8 @@ module Aws::Omics
             Aws::Omics::Endpoints::ListRuns.build(context)
           when :list_sequence_stores
             Aws::Omics::Endpoints::ListSequenceStores.build(context)
+          when :list_shares
+            Aws::Omics::Endpoints::ListShares.build(context)
           when :list_tags_for_resource
             Aws::Omics::Endpoints::ListTagsForResource.build(context)
           when :list_variant_import_jobs
@@ -192,6 +210,8 @@ module Aws::Omics
             Aws::Omics::Endpoints::UntagResource.build(context)
           when :update_annotation_store
             Aws::Omics::Endpoints::UpdateAnnotationStore.build(context)
+          when :update_annotation_store_version
+            Aws::Omics::Endpoints::UpdateAnnotationStoreVersion.build(context)
           when :update_run_group
             Aws::Omics::Endpoints::UpdateRunGroup.build(context)
           when :update_variant_store

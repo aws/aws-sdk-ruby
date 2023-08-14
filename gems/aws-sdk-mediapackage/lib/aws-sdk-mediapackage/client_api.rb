@@ -89,6 +89,7 @@ module Aws::MediaPackage
     RotateIngestEndpointCredentialsResponse = Shapes::StructureShape.new(name: 'RotateIngestEndpointCredentialsResponse')
     S3Destination = Shapes::StructureShape.new(name: 'S3Destination')
     SegmentTemplateFormat = Shapes::StringShape.new(name: 'SegmentTemplateFormat')
+    SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SpekeKeyProvider = Shapes::StructureShape.new(name: 'SpekeKeyProvider')
     Status = Shapes::StringShape.new(name: 'Status')
@@ -416,9 +417,9 @@ module Aws::MediaPackage
     HlsPackage.struct_class = Types::HlsPackage
 
     IngestEndpoint.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
-    IngestEndpoint.add_member(:password, Shapes::ShapeRef.new(shape: __string, location_name: "password"))
+    IngestEndpoint.add_member(:password, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "password"))
     IngestEndpoint.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
-    IngestEndpoint.add_member(:username, Shapes::ShapeRef.new(shape: __string, location_name: "username"))
+    IngestEndpoint.add_member(:username, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "username"))
     IngestEndpoint.struct_class = Types::IngestEndpoint
 
     IngressAccessLogs.add_member(:log_group_name, Shapes::ShapeRef.new(shape: __string, location_name: "logGroupName"))

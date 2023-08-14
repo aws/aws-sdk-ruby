@@ -4778,8 +4778,10 @@ module Aws::Transfer
     # server.
     #
     # @!attribute [rw] user_secret_id
-    #   The identifiers for the secrets (in Amazon Web Services Secrets
-    #   Manager) that contain the SFTP user's private keys or passwords.
+    #   The identifier for the secret (in Amazon Web Services Secrets
+    #   Manager) that contains the SFTP user's private key, password, or
+    #   both. The identifier can be either the Amazon Resource Name (ARN) or
+    #   the name of the secret.
     #   @return [String]
     #
     # @!attribute [rw] trusted_host_keys
@@ -4850,11 +4852,11 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] send_file_paths
-    #   One or more source paths for the Transfer Family server. Each string
+    #   One or more source paths for the Amazon S3 storage. Each string
     #   represents a source file path for one outbound file transfer. For
     #   example, ` DOC-EXAMPLE-BUCKET/myfile.txt `.
     #
-    #   <note markdown="1"> Replace ` DOC-EXAMPLE-BUCKET `with one of your actual buckets.
+    #   <note markdown="1"> Replace ` DOC-EXAMPLE-BUCKET ` with one of your actual buckets.
     #
     #    </note>
     #   @return [Array<String>]

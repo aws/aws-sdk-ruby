@@ -3312,11 +3312,11 @@ module Aws::Transfer
     #   The unique identifier for the connector.
     #
     # @option params [Array<String>] :send_file_paths
-    #   One or more source paths for the Transfer Family server. Each string
+    #   One or more source paths for the Amazon S3 storage. Each string
     #   represents a source file path for one outbound file transfer. For
     #   example, ` DOC-EXAMPLE-BUCKET/myfile.txt `.
     #
-    #   <note markdown="1"> Replace ` DOC-EXAMPLE-BUCKET `with one of your actual buckets.
+    #   <note markdown="1"> Replace ` DOC-EXAMPLE-BUCKET ` with one of your actual buckets.
     #
     #    </note>
     #
@@ -4578,7 +4578,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

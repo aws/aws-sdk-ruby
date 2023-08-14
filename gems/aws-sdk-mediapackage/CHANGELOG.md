@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2023-08-14)
+------------------
+
+* Feature - Fix SDK logging of certain fields.
+
 1.64.0 (2023-07-11)
 ------------------
 

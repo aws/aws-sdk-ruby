@@ -32,6 +32,30 @@ module Aws::Omics
     #
     class AbortMultipartReadSetUploadResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] share_id
+    #   The ID for a share offer for analytics store data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/AcceptShareRequest AWS API Documentation
+    #
+    class AcceptShareRequest < Struct.new(
+      :share_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of an analytics store share.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/AcceptShareResponse AWS API Documentation
+    #
+    class AcceptShareResponse < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You do not have sufficient access to perform this action.
     #
     # @!attribute [rw] message
@@ -170,6 +194,10 @@ module Aws::Omics
     #   The job's destination annotation store.
     #   @return [String]
     #
+    # @!attribute [rw] version_name
+    #   The name of the annotation store version.
+    #   @return [String]
+    #
     # @!attribute [rw] role_arn
     #   The job's service role ARN.
     #   @return [String]
@@ -203,6 +231,7 @@ module Aws::Omics
     class AnnotationImportJobItem < Struct.new(
       :id,
       :destination_name,
+      :version_name,
       :role_arn,
       :status,
       :creation_time,
@@ -279,6 +308,71 @@ module Aws::Omics
       :update_time,
       :status_message,
       :store_size_bytes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Annotation store versions.
+    #
+    # @!attribute [rw] store_id
+    #   The store ID for an annotation store version.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The annotation store version ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of an annotation store version.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_arn
+    #   The Arn for an annotation store version.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A name given to an annotation store version to distinguish it from
+    #   others.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   The name of an annotation store version.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of an annotation store version.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time stamp for when an annotation store version was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The time stamp for when an annotation store version was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status_message
+    #   The status of an annotation store version.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_size_bytes
+    #   The size of an annotation store version in Bytes.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/AnnotationStoreVersionItem AWS API Documentation
+    #
+    class AnnotationStoreVersionItem < Struct.new(
+      :store_id,
+      :id,
+      :status,
+      :version_arn,
+      :name,
+      :version_name,
+      :description,
+      :creation_time,
+      :update_time,
+      :status_message,
+      :version_size_bytes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -447,6 +541,11 @@ module Aws::Omics
     #   Tags for the store.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] version_name
+    #   The name given to an annotation store version to distinguish it from
+    #   other versions.
+    #   @return [String]
+    #
     # @!attribute [rw] sse_config
     #   Server-side encryption (SSE) settings for the store.
     #   @return [Types::SseConfig]
@@ -466,6 +565,7 @@ module Aws::Omics
       :name,
       :description,
       :tags,
+      :version_name,
       :sse_config,
       :store_format,
       :store_options)
@@ -498,6 +598,11 @@ module Aws::Omics
     #   The store's name.
     #   @return [String]
     #
+    # @!attribute [rw] version_name
+    #   The name given to an annotation store version to distinguish it from
+    #   other versions.
+    #   @return [String]
+    #
     # @!attribute [rw] creation_time
     #   When the store was created.
     #   @return [Time]
@@ -511,6 +616,86 @@ module Aws::Omics
       :store_options,
       :status,
       :name,
+      :version_name,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of an annotation store version from which versions are
+    #   being created.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   The name given to an annotation store version to distinguish it from
+    #   other versions.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of an annotation store version.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_options
+    #   The options for an annotation store version.
+    #   @return [Types::VersionOptions]
+    #
+    # @!attribute [rw] tags
+    #   Any tags added to annotation store version.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/CreateAnnotationStoreVersionRequest AWS API Documentation
+    #
+    class CreateAnnotationStoreVersionRequest < Struct.new(
+      :name,
+      :version_name,
+      :description,
+      :version_options,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   A generated ID for the annotation store
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   The name given to an annotation store version to distinguish it from
+    #   other versions.
+    #   @return [String]
+    #
+    # @!attribute [rw] store_id
+    #   The ID for the annotation store from which new versions are being
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_options
+    #   The options for an annotation store version.
+    #   @return [Types::VersionOptions]
+    #
+    # @!attribute [rw] name
+    #   The name given to an annotation store version to distinguish it from
+    #   other versions.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of a annotation store version.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time stamp for the creation of an annotation store version.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/CreateAnnotationStoreVersionResponse AWS API Documentation
+    #
+    class CreateAnnotationStoreVersionResponse < Struct.new(
+      :id,
+      :version_name,
+      :store_id,
+      :version_options,
+      :name,
+      :status,
       :creation_time)
       SENSITIVE = []
       include Aws::Structure
@@ -858,6 +1043,51 @@ module Aws::Omics
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The resource ARN for the analytics store to be shared.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_subscriber
+    #   The principal subscriber is the account being given access to the
+    #   analytics store data through the share offer.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_name
+    #   A name given to the share.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/CreateShareRequest AWS API Documentation
+    #
+    class CreateShareRequest < Struct.new(
+      :resource_arn,
+      :principal_subscriber,
+      :share_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] share_id
+    #   An ID generated for the share.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of a share.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_name
+    #   A name given to the share.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/CreateShareResponse AWS API Documentation
+    #
+    class CreateShareResponse < Struct.new(
+      :share_id,
+      :status,
+      :share_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] reference
     #   The genome reference for the store's variants.
     #   @return [Types::ReferenceItem]
@@ -1044,6 +1274,43 @@ module Aws::Omics
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of the annotation store from which versions are being
+    #   deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] versions
+    #   The versions of an annotation store to be deleted.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] force
+    #   Forces the deletion of an annotation store version when imports are
+    #   in-progress..
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/DeleteAnnotationStoreVersionsRequest AWS API Documentation
+    #
+    class DeleteAnnotationStoreVersionsRequest < Struct.new(
+      :name,
+      :versions,
+      :force)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] errors
+    #   Any errors that occur when attempting to delete an annotation store
+    #   version.
+    #   @return [Array<Types::VersionDeleteError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/DeleteAnnotationStoreVersionsResponse AWS API Documentation
+    #
+    class DeleteAnnotationStoreVersionsResponse < Struct.new(
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] id
     #   The reference's ID.
     #   @return [String]
@@ -1120,6 +1387,30 @@ module Aws::Omics
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/DeleteSequenceStoreResponse AWS API Documentation
     #
     class DeleteSequenceStoreResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] share_id
+    #   The ID for the share request to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/DeleteShareRequest AWS API Documentation
+    #
+    class DeleteShareRequest < Struct.new(
+      :share_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the share being deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/DeleteShareResponse AWS API Documentation
+    #
+    class DeleteShareResponse < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] name
     #   The store's name.
@@ -1287,6 +1578,26 @@ module Aws::Omics
       include Aws::Structure
     end
 
+    # Use filters to focus the returned annotation store versions on a
+    # specific parameter, such as the status of the annotation store.
+    #
+    # @!attribute [rw] resource_arns
+    #   The Amazon Resource Number (Arn) for an analytics store.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   The status of an annotation store version.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/Filter AWS API Documentation
+    #
+    class Filter < Struct.new(
+      :resource_arns,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Formatting options for a file.
     #
     # @note FormatOptions is a union - when making an API calls you must set exactly one of the members.
@@ -1336,6 +1647,10 @@ module Aws::Omics
     #   The job's destination annotation store.
     #   @return [String]
     #
+    # @!attribute [rw] version_name
+    #   The name of the annotation store version.
+    #   @return [String]
+    #
     # @!attribute [rw] role_arn
     #   The job's service role ARN.
     #   @return [String]
@@ -1381,6 +1696,7 @@ module Aws::Omics
     class GetAnnotationImportResponse < Struct.new(
       :id,
       :destination_name,
+      :version_name,
       :role_arn,
       :status,
       :status_message,
@@ -1463,6 +1779,11 @@ module Aws::Omics
     #   The store's size in bytes.
     #   @return [Integer]
     #
+    # @!attribute [rw] num_versions
+    #   An integer indicating how many versions of an annotation store
+    #   exist.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetAnnotationStoreResponse AWS API Documentation
     #
     class GetAnnotationStoreResponse < Struct.new(
@@ -1479,7 +1800,100 @@ module Aws::Omics
       :store_options,
       :store_format,
       :status_message,
-      :store_size_bytes)
+      :store_size_bytes,
+      :num_versions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name given to an annotation store version to distinguish it from
+    #   others.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   The name given to an annotation store version to distinguish it from
+    #   others.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetAnnotationStoreVersionRequest AWS API Documentation
+    #
+    class GetAnnotationStoreVersionRequest < Struct.new(
+      :name,
+      :version_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] store_id
+    #   The store ID for annotation store version.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The annotation store version ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of an annotation store version.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_arn
+    #   The Arn for the annotation store.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the annotation store.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   The name given to an annotation store version to distinguish it from
+    #   others.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description for an annotation store version.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time stamp for when an annotation store version was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The time stamp for when an annotation store version was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   Any tags associated with an annotation store version.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] version_options
+    #   The options for an annotation store version.
+    #   @return [Types::VersionOptions]
+    #
+    # @!attribute [rw] status_message
+    #   The status of an annotation store version.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_size_bytes
+    #   The size of the annotation store version in Bytes.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetAnnotationStoreVersionResponse AWS API Documentation
+    #
+    class GetAnnotationStoreVersionResponse < Struct.new(
+      :store_id,
+      :id,
+      :status,
+      :version_arn,
+      :name,
+      :version_name,
+      :description,
+      :creation_time,
+      :update_time,
+      :tags,
+      :version_options,
+      :status_message,
+      :version_size_bytes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2388,6 +2802,31 @@ module Aws::Omics
       include Aws::Structure
     end
 
+    # @!attribute [rw] share_id
+    #   The generated ID for a share.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetShareRequest AWS API Documentation
+    #
+    class GetShareRequest < Struct.new(
+      :share_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] share
+    #   An analytic store share details object. contains status,
+    #   resourceArn, ownerId, etc.
+    #   @return [Types::ShareDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetShareResponse AWS API Documentation
+    #
+    class GetShareResponse < Struct.new(
+      :share)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] job_id
     #   The job's ID.
     #   @return [String]
@@ -2957,6 +3396,68 @@ module Aws::Omics
     #
     class ListAnnotationImportJobsResponse < Struct.new(
       :annotation_import_jobs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Use filters to focus the returned annotation store versions on a
+    # specific parameter, such as the status of the annotation store.
+    #
+    # @!attribute [rw] status
+    #   The status of an annotation store version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListAnnotationStoreVersionsFilter AWS API Documentation
+    #
+    class ListAnnotationStoreVersionsFilter < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of an annotation store.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of annotation store versions to return in one
+    #   page of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Specifies the pagination token from a previous request to retrieve
+    #   the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   A filter to apply to the list of annotation store versions.
+    #   @return [Types::ListAnnotationStoreVersionsFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListAnnotationStoreVersionsRequest AWS API Documentation
+    #
+    class ListAnnotationStoreVersionsRequest < Struct.new(
+      :name,
+      :max_results,
+      :next_token,
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] annotation_store_versions
+    #   Lists all versions of an annotation store.
+    #   @return [Array<Types::AnnotationStoreVersionItem>]
+    #
+    # @!attribute [rw] next_token
+    #   Specifies the pagination token from a previous request to retrieve
+    #   the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListAnnotationStoreVersionsResponse AWS API Documentation
+    #
+    class ListAnnotationStoreVersionsResponse < Struct.new(
+      :annotation_store_versions,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3604,6 +4105,53 @@ module Aws::Omics
     class ListSequenceStoresResponse < Struct.new(
       :next_token,
       :sequence_stores)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_owner
+    #   The account that owns the analytics store shared.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   Attributes used to filter for a specific subset of shares.
+    #   @return [Types::Filter]
+    #
+    # @!attribute [rw] next_token
+    #   Next token returned in the response of a previous
+    #   ListReadSetUploadPartsRequest call. Used to get the next page of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of shares to return in one page of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListSharesRequest AWS API Documentation
+    #
+    class ListSharesRequest < Struct.new(
+      :resource_owner,
+      :filter,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] shares
+    #   The shares available and their meta details.
+    #   @return [Array<Types::ShareDetails>]
+    #
+    # @!attribute [rw] next_token
+    #   Next token returned in the response of a previous ListSharesResponse
+    #   call. Used to get the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListSharesResponse AWS API Documentation
+    #
+    class ListSharesResponse < Struct.new(
+      :shares,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4623,6 +5171,63 @@ module Aws::Omics
       include Aws::Structure
     end
 
+    # The details of a share.
+    #
+    # @!attribute [rw] share_id
+    #   The ID for a share offer for an analytics store .
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The resource Arn of the analytics store being shared.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_subscriber
+    #   The principal subscriber is the account the analytics store data is
+    #   being shared with.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The account ID for the data owner. The owner creates the share
+    #   offer.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of a share.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message for a share. It provides more details on the
+    #   status of the share.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_name
+    #   The name of the share.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp for when the share was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The timestamp of the share update.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ShareDetails AWS API Documentation
+    #
+    class ShareDetails < Struct.new(
+      :share_id,
+      :resource_arn,
+      :principal_subscriber,
+      :owner_id,
+      :status,
+      :status_message,
+      :share_name,
+      :creation_time,
+      :update_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Source files for a sequence.
     #
     # @!attribute [rw] source1
@@ -4673,6 +5278,10 @@ module Aws::Omics
     #   Items to import.
     #   @return [Array<Types::AnnotationImportItemSource>]
     #
+    # @!attribute [rw] version_name
+    #   The name of the annotation store version.
+    #   @return [String]
+    #
     # @!attribute [rw] format_options
     #   Formatting options for the annotation file.
     #   @return [Types::FormatOptions]
@@ -4691,6 +5300,7 @@ module Aws::Omics
       :destination_name,
       :role_arn,
       :items,
+      :version_name,
       :format_options,
       :run_left_normalization,
       :annotation_fields)
@@ -5344,6 +5954,30 @@ module Aws::Omics
       include Aws::Structure
     end
 
+    # The options for a TSV file.
+    #
+    # @!attribute [rw] annotation_type
+    #   The store version's annotation type.
+    #   @return [String]
+    #
+    # @!attribute [rw] format_to_header
+    #   The annotation store version's header key to column name mapping.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] schema
+    #   The TSV schema for an annotation store version.
+    #   @return [Array<Hash<String,String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/TsvVersionOptions AWS API Documentation
+    #
+    class TsvVersionOptions < Struct.new(
+      :annotation_type,
+      :format_to_header,
+      :schema)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The resource's ARN.
     #   @return [String]
@@ -5430,6 +6064,75 @@ module Aws::Omics
       :update_time,
       :store_options,
       :store_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of an annotation store.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   The name of an annotation store version.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of an annotation store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/UpdateAnnotationStoreVersionRequest AWS API Documentation
+    #
+    class UpdateAnnotationStoreVersionRequest < Struct.new(
+      :name,
+      :version_name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] store_id
+    #   The annotation store ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The annotation store version ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of an annotation store version.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of an annotation store.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   The name of an annotation store version.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of an annotation store version.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time stamp for when an annotation store version was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The time stamp for when an annotation store version was updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/UpdateAnnotationStoreVersionResponse AWS API Documentation
+    #
+    class UpdateAnnotationStoreVersionResponse < Struct.new(
+      :store_id,
+      :id,
+      :status,
+      :name,
+      :version_name,
+      :description,
+      :creation_time,
+      :update_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5784,6 +6487,48 @@ module Aws::Omics
       :ignore_filter_field)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The error preventing deletion of the annotation store version.
+    #
+    # @!attribute [rw] version_name
+    #   The name given to an annotation store version.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message explaining the error in annotation store deletion.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/VersionDeleteError AWS API Documentation
+    #
+    class VersionDeleteError < Struct.new(
+      :version_name,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options for an annotation store version.
+    #
+    # @note VersionOptions is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note VersionOptions is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VersionOptions corresponding to the set member.
+    #
+    # @!attribute [rw] tsv_version_options
+    #   File settings for a version of a TSV store.
+    #   @return [Types::TsvVersionOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/VersionOptions AWS API Documentation
+    #
+    class VersionOptions < Struct.new(
+      :tsv_version_options,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class TsvVersionOptions < VersionOptions; end
+      class Unknown < VersionOptions; end
     end
 
     # A workflow.
