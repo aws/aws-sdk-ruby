@@ -32,7 +32,7 @@ require_relative 'aws-sdk-pi/customizations'
 # structure.
 #
 #     pi = Aws::PI::Client.new
-#     resp = pi.describe_dimension_keys(params)
+#     resp = pi.create_performance_analysis_report(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-pi/customizations'
 # @!group service
 module Aws::PI
 
-  GEM_VERSION = '1.48.0'
+  GEM_VERSION = '1.49.0'
 
 end

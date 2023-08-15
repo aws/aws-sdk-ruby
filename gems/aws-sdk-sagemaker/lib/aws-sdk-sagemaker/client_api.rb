@@ -1634,6 +1634,8 @@ module Aws::SageMaker
     RecommendationJobSupportedContentTypes = Shapes::ListShape.new(name: 'RecommendationJobSupportedContentTypes')
     RecommendationJobSupportedEndpointType = Shapes::StringShape.new(name: 'RecommendationJobSupportedEndpointType')
     RecommendationJobSupportedInstanceTypes = Shapes::ListShape.new(name: 'RecommendationJobSupportedInstanceTypes')
+    RecommendationJobSupportedResponseMIMEType = Shapes::StringShape.new(name: 'RecommendationJobSupportedResponseMIMEType')
+    RecommendationJobSupportedResponseMIMETypes = Shapes::ListShape.new(name: 'RecommendationJobSupportedResponseMIMETypes')
     RecommendationJobType = Shapes::StringShape.new(name: 'RecommendationJobType')
     RecommendationJobVpcConfig = Shapes::StructureShape.new(name: 'RecommendationJobVpcConfig')
     RecommendationJobVpcSecurityGroupId = Shapes::StringShape.new(name: 'RecommendationJobVpcSecurityGroupId')
@@ -7957,6 +7959,7 @@ module Aws::SageMaker
     RecommendationJobContainerConfig.add_member(:supported_instance_types, Shapes::ShapeRef.new(shape: RecommendationJobSupportedInstanceTypes, location_name: "SupportedInstanceTypes"))
     RecommendationJobContainerConfig.add_member(:data_input_config, Shapes::ShapeRef.new(shape: RecommendationJobDataInputConfig, location_name: "DataInputConfig"))
     RecommendationJobContainerConfig.add_member(:supported_endpoint_type, Shapes::ShapeRef.new(shape: RecommendationJobSupportedEndpointType, location_name: "SupportedEndpointType"))
+    RecommendationJobContainerConfig.add_member(:supported_response_mime_types, Shapes::ShapeRef.new(shape: RecommendationJobSupportedResponseMIMETypes, location_name: "SupportedResponseMIMETypes"))
     RecommendationJobContainerConfig.struct_class = Types::RecommendationJobContainerConfig
 
     RecommendationJobInferenceBenchmark.add_member(:metrics, Shapes::ShapeRef.new(shape: RecommendationMetrics, location_name: "Metrics"))
@@ -8000,6 +8003,8 @@ module Aws::SageMaker
     RecommendationJobSupportedContentTypes.member = Shapes::ShapeRef.new(shape: String)
 
     RecommendationJobSupportedInstanceTypes.member = Shapes::ShapeRef.new(shape: String)
+
+    RecommendationJobSupportedResponseMIMETypes.member = Shapes::ShapeRef.new(shape: RecommendationJobSupportedResponseMIMEType)
 
     RecommendationJobVpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: RecommendationJobVpcSecurityGroupIds, required: true, location_name: "SecurityGroupIds"))
     RecommendationJobVpcConfig.add_member(:subnets, Shapes::ShapeRef.new(shape: RecommendationJobVpcSubnets, required: true, location_name: "Subnets"))

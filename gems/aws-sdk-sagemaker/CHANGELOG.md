@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.206.0 (2023-08-15)
+------------------
+
+* Feature - SageMaker Inference Recommender now provides SupportedResponseMIMETypes from DescribeInferenceRecommendationsJob response
+
 1.205.0 (2023-08-09)
 ------------------
 

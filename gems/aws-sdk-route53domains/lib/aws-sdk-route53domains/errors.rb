@@ -81,6 +81,11 @@ module Aws::Route53Domains
       end
 
       # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+
+      # @return [String]
       def message
         @message || @data[:message]
       end

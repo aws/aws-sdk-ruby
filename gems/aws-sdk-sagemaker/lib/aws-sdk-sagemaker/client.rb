@@ -2606,10 +2606,6 @@ module Aws::SageMaker
     #
     # Use this API to deploy models using SageMaker hosting services.
     #
-    # For an example that calls this method when deploying a model to
-    # SageMaker hosting services, see the [Create Endpoint example
-    # notebook.][2]
-    #
     # <note markdown="1"> You must not delete an `EndpointConfig` that is in use by an endpoint
     # that is live or while the `UpdateEndpoint` or `CreateEndpoint`
     # operations are being performed on the endpoint. To update an endpoint,
@@ -2624,16 +2620,16 @@ module Aws::SageMaker
     # the resources (ML compute instances), and deploys the model(s) on
     # them.
     #
-    # <note markdown="1"> When you call [CreateEndpoint][3], a load call is made to DynamoDB to
+    # <note markdown="1"> When you call [CreateEndpoint][2], a load call is made to DynamoDB to
     # verify that your endpoint configuration exists. When you read data
-    # from a DynamoDB table supporting [ `Eventually Consistent Reads` ][4],
+    # from a DynamoDB table supporting [ `Eventually Consistent Reads` ][3],
     # the response might not reflect the results of a recently completed
     # write operation. The response might include some stale data. If the
     # dependent entities are not yet in DynamoDB, this causes a validation
     # error. If you repeat your read request after a short time, the
     # response should return the latest data. So retry logic is recommended
     # to handle these possible issues. We also recommend that customers call
-    # [DescribeEndpointConfig][5] before calling [CreateEndpoint][3] to
+    # [DescribeEndpointConfig][4] before calling [CreateEndpoint][2] to
     # minimize the potential impact of a DynamoDB eventually consistent
     # read.
     #
@@ -2643,7 +2639,7 @@ module Aws::SageMaker
     # `Creating`. After it creates the endpoint, it sets the status to
     # `InService`. SageMaker can then process incoming requests for
     # inferences. To check the status of an endpoint, use the
-    # [DescribeEndpoint][6] API.
+    # [DescribeEndpoint][5] API.
     #
     # If any of the models hosted at this endpoint get model data from an
     # Amazon S3 location, SageMaker uses Amazon Web Services Security Token
@@ -2652,13 +2648,13 @@ module Aws::SageMaker
     # account by default. If you previously deactivated Amazon Web Services
     # STS for a region, you need to reactivate Amazon Web Services STS for
     # that region. For more information, see [Activating and Deactivating
-    # Amazon Web Services STS in an Amazon Web Services Region][7] in the
+    # Amazon Web Services STS in an Amazon Web Services Region][6] in the
     # *Amazon Web Services Identity and Access Management User Guide*.
     #
     # <note markdown="1"> To add the IAM role policies for using this API operation, go to the
-    # [IAM console][8], and choose Roles in the left navigation pane. Search
+    # [IAM console][7], and choose Roles in the left navigation pane. Search
     # the IAM role that you want to grant access to use the
-    # [CreateEndpoint][3] and [CreateEndpointConfig][1] API operations, add
+    # [CreateEndpoint][2] and [CreateEndpointConfig][1] API operations, add
     # the following policies to the role.
     #
     #  * Option 1: For a full SageMaker access, search and attach the
@@ -2680,21 +2676,20 @@ module Aws::SageMaker
     #   `]`
     #
     #   For more information, see [SageMaker API Permissions: Actions,
-    #   Permissions, and Resources Reference][9].
+    #   Permissions, and Resources Reference][8].
     #
     #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html
-    # [2]: https://github.com/aws/amazon-sagemaker-examples/blob/master/sagemaker-fundamentals/create-endpoint/create_endpoint.ipynb
-    # [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html
-    # [4]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html
-    # [5]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpointConfig.html
-    # [6]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpoint.html
-    # [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
-    # [8]: https://console.aws.amazon.com/iam/
-    # [9]: https://docs.aws.amazon.com/sagemaker/latest/dg/api-permissions-reference.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html
+    # [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html
+    # [4]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpointConfig.html
+    # [5]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpoint.html
+    # [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
+    # [7]: https://console.aws.amazon.com/iam/
+    # [8]: https://docs.aws.amazon.com/sagemaker/latest/dg/api-permissions-reference.html
     #
     # @option params [required, String] :endpoint_name
     #   The name of the endpoint.The name must be unique within an Amazon Web
@@ -4514,6 +4509,7 @@ module Aws::SageMaker
     #         supported_instance_types: ["String"],
     #         data_input_config: "RecommendationJobDataInputConfig",
     #         supported_endpoint_type: "RealTime", # accepts RealTime, Serverless
+    #         supported_response_mime_types: ["RecommendationJobSupportedResponseMIMEType"],
     #       },
     #       endpoints: [
     #         {
@@ -5556,6 +5552,10 @@ module Aws::SageMaker
     #   A list of key value pairs associated with the model. For more
     #   information, see [Tagging Amazon Web Services resources][1] in the
     #   *Amazon Web Services General Reference Guide*.
+    #
+    #   If you supply `ModelPackageGroupName`, your model package belongs to
+    #   the model group you specify and uses the tags associated with the
+    #   model group. In this case, you cannot supply a `tag` argument.
     #
     #
     #
@@ -12354,6 +12354,8 @@ module Aws::SageMaker
     #   resp.input_config.container_config.supported_instance_types[0] #=> String
     #   resp.input_config.container_config.data_input_config #=> String
     #   resp.input_config.container_config.supported_endpoint_type #=> String, one of "RealTime", "Serverless"
+    #   resp.input_config.container_config.supported_response_mime_types #=> Array
+    #   resp.input_config.container_config.supported_response_mime_types[0] #=> String
     #   resp.input_config.endpoints #=> Array
     #   resp.input_config.endpoints[0].endpoint_name #=> String
     #   resp.input_config.vpc_config.security_group_ids #=> Array
@@ -24092,7 +24094,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.205.0'
+      context[:gem_version] = '1.206.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -270,6 +270,7 @@ module Aws::Glue
     CsvHeader = Shapes::ListShape.new(name: 'CsvHeader')
     CsvHeaderOption = Shapes::StringShape.new(name: 'CsvHeaderOption')
     CsvQuoteSymbol = Shapes::StringShape.new(name: 'CsvQuoteSymbol')
+    CsvSerdeOption = Shapes::StringShape.new(name: 'CsvSerdeOption')
     CustomCode = Shapes::StructureShape.new(name: 'CustomCode')
     CustomDatatypes = Shapes::ListShape.new(name: 'CustomDatatypes')
     CustomEntityType = Shapes::StructureShape.new(name: 'CustomEntityType')
@@ -1945,6 +1946,7 @@ module Aws::Glue
     CreateCsvClassifierRequest.add_member(:allow_single_column, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "AllowSingleColumn"))
     CreateCsvClassifierRequest.add_member(:custom_datatype_configured, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "CustomDatatypeConfigured"))
     CreateCsvClassifierRequest.add_member(:custom_datatypes, Shapes::ShapeRef.new(shape: CustomDatatypes, location_name: "CustomDatatypes"))
+    CreateCsvClassifierRequest.add_member(:serde, Shapes::ShapeRef.new(shape: CsvSerdeOption, location_name: "Serde"))
     CreateCsvClassifierRequest.struct_class = Types::CreateCsvClassifierRequest
 
     CreateCustomEntityTypeRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
@@ -2215,6 +2217,7 @@ module Aws::Glue
     CsvClassifier.add_member(:allow_single_column, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "AllowSingleColumn"))
     CsvClassifier.add_member(:custom_datatype_configured, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "CustomDatatypeConfigured"))
     CsvClassifier.add_member(:custom_datatypes, Shapes::ShapeRef.new(shape: CustomDatatypes, location_name: "CustomDatatypes"))
+    CsvClassifier.add_member(:serde, Shapes::ShapeRef.new(shape: CsvSerdeOption, location_name: "Serde"))
     CsvClassifier.struct_class = Types::CsvClassifier
 
     CsvHeader.member = Shapes::ShapeRef.new(shape: NameString)
@@ -5323,6 +5326,7 @@ module Aws::Glue
     UpdateCsvClassifierRequest.add_member(:allow_single_column, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "AllowSingleColumn"))
     UpdateCsvClassifierRequest.add_member(:custom_datatype_configured, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "CustomDatatypeConfigured"))
     UpdateCsvClassifierRequest.add_member(:custom_datatypes, Shapes::ShapeRef.new(shape: CustomDatatypes, location_name: "CustomDatatypes"))
+    UpdateCsvClassifierRequest.add_member(:serde, Shapes::ShapeRef.new(shape: CsvSerdeOption, location_name: "Serde"))
     UpdateCsvClassifierRequest.struct_class = Types::UpdateCsvClassifierRequest
 
     UpdateDataQualityRulesetRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))

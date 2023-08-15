@@ -10,6 +10,172 @@
 module Aws::PI
   module Types
 
+    # Retrieves the summary of the performance analysis report created for a
+    # time period.
+    #
+    # @!attribute [rw] analysis_report_id
+    #   The name of the analysis report.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The unique identifier of the analysis report.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_type
+    #   List the tags for the Amazon Web Services service for which
+    #   Performance Insights returns metrics. Valid values are as follows:
+    #
+    #   * `RDS`
+    #
+    #   * `DOCDB`
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time you created the analysis report.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_time
+    #   The analysis start time in the report.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The analysis end time in the report.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the created analysis report.
+    #   @return [String]
+    #
+    # @!attribute [rw] insights
+    #   The list of identified insights in the analysis report.
+    #   @return [Array<Types::Insight>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/AnalysisReport AWS API Documentation
+    #
+    class AnalysisReport < Struct.new(
+      :analysis_report_id,
+      :identifier,
+      :service_type,
+      :create_time,
+      :start_time,
+      :end_time,
+      :status,
+      :insights)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Retrieves the details of the performance analysis report.
+    #
+    # @!attribute [rw] analysis_report_id
+    #   The name of the analysis report.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time you created the analysis report.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the analysis in the report.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of the analysis in the report.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the analysis report.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   List of all the tags added to the analysis report.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/AnalysisReportSummary AWS API Documentation
+    #
+    class AnalysisReportSummary < Struct.new(
+      :analysis_report_id,
+      :create_time,
+      :start_time,
+      :end_time,
+      :status,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_type
+    #   The Amazon Web Services service for which Performance Insights will
+    #   return metrics. Valid value is `RDS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   An immutable, Amazon Web Services Region-unique identifier for a
+    #   data source. Performance Insights gathers metrics from this data
+    #   source.
+    #
+    #   To use an Amazon RDS instance as a data source, you specify its
+    #   `DbiResourceId` value. For example, specify
+    #   `db-ADECBTYHKTSAUMUZQYPDS2GW4A`.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time defined for the analysis report.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time defined for the analysis report.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The metadata assigned to the analysis report consisting of a
+    #   key-value pair.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/CreatePerformanceAnalysisReportRequest AWS API Documentation
+    #
+    class CreatePerformanceAnalysisReportRequest < Struct.new(
+      :service_type,
+      :identifier,
+      :start_time,
+      :end_time,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analysis_report_id
+    #   A unique identifier for the created analysis report.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/CreatePerformanceAnalysisReportResponse AWS API Documentation
+    #
+    class CreatePerformanceAnalysisReportResponse < Struct.new(
+      :analysis_report_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # List of data objects which provide details about source metrics. This
+    # field can be used to determine the PI metric to render for the
+    # insight. This data type also includes static values for the metrics
+    # for the Insight that were calculated and included in text and
+    # annotations on the DB load chart.
+    #
+    # @!attribute [rw] performance_insights_metric
+    #   This field determines the Performance Insights metric to render for
+    #   the insight. The `name` field refers to a Performance Insights
+    #   metric.
+    #   @return [Types::PerformanceInsightsMetric]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/Data AWS API Documentation
+    #
+    class Data < Struct.new(
+      :performance_insights_metric)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A timestamp, and a single numerical value, which together represent a
     # measurement at a particular point in time.
     #
@@ -29,6 +195,40 @@ module Aws::PI
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] service_type
+    #   The Amazon Web Services service for which Performance Insights will
+    #   return metrics. Valid value is `RDS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   An immutable identifier for a data source that is unique for an
+    #   Amazon Web Services Region. Performance Insights gathers metrics
+    #   from this data source. In the console, the identifier is shown as
+    #   *ResourceID*. When you call `DescribeDBInstances`, the identifier is
+    #   returned as `DbiResourceId`.
+    #
+    #   To use a DB instance as a data source, specify its `DbiResourceId`
+    #   value. For example, specify `db-ABCDEFGHIJKLMNOPQRSTU1VW2X`.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_report_id
+    #   The unique identifier of the analysis report for deletion.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/DeletePerformanceAnalysisReportRequest AWS API Documentation
+    #
+    class DeletePerformanceAnalysisReportRequest < Struct.new(
+      :service_type,
+      :identifier,
+      :analysis_report_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/DeletePerformanceAnalysisReportResponse AWS API Documentation
+    #
+    class DeletePerformanceAnalysisReportResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] service_type
     #   The Amazon Web Services service for which Performance Insights will
@@ -631,6 +831,62 @@ module Aws::PI
     end
 
     # @!attribute [rw] service_type
+    #   The Amazon Web Services service for which Performance Insights will
+    #   return metrics. Valid value is `RDS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   An immutable identifier for a data source that is unique for an
+    #   Amazon Web Services Region. Performance Insights gathers metrics
+    #   from this data source. In the console, the identifier is shown as
+    #   *ResourceID*. When you call `DescribeDBInstances`, the identifier is
+    #   returned as `DbiResourceId`.
+    #
+    #   To use a DB instance as a data source, specify its `DbiResourceId`
+    #   value. For example, specify `db-ABCDEFGHIJKLMNOPQRSTU1VW2X`.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_report_id
+    #   A unique identifier of the created analysis report. For example,
+    #   `report-12345678901234567`
+    #   @return [String]
+    #
+    # @!attribute [rw] text_format
+    #   Indicates the text format in the report. The options are
+    #   `PLAIN_TEXT` or `MARKDOWN`. The default value is `plain text`.
+    #   @return [String]
+    #
+    # @!attribute [rw] accept_language
+    #   The text language in the report. The default language is `EN_US`
+    #   (English).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/GetPerformanceAnalysisReportRequest AWS API Documentation
+    #
+    class GetPerformanceAnalysisReportRequest < Struct.new(
+      :service_type,
+      :identifier,
+      :analysis_report_id,
+      :text_format,
+      :accept_language)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analysis_report
+    #   The summary of the performance analysis report created for a time
+    #   period.
+    #   @return [Types::AnalysisReport]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/GetPerformanceAnalysisReportResponse AWS API Documentation
+    #
+    class GetPerformanceAnalysisReportResponse < Struct.new(
+      :analysis_report)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_type
     #   The Amazon Web Services service for which Performance Insights
     #   returns metrics.
     #   @return [String]
@@ -821,6 +1077,80 @@ module Aws::PI
       include Aws::Structure
     end
 
+    # Retrieves the list of performance issues which are identified.
+    #
+    # @!attribute [rw] insight_id
+    #   The unique identifier for the insight. For example,
+    #   `insight-12345678901234567`.
+    #   @return [String]
+    #
+    # @!attribute [rw] insight_type
+    #   The type of insight. For example, `HighDBLoad`, `HighCPU`, or
+    #   `DominatingSQLs`.
+    #   @return [String]
+    #
+    # @!attribute [rw] context
+    #   Indicates if the insight is causal or correlated insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the insight. For example, `2018-10-30T00:00:00Z`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of the insight. For example, `2018-10-30T00:00:00Z`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] severity
+    #   The severity of the insight. The values are: `Low`, `Medium`, or
+    #   `High`.
+    #   @return [String]
+    #
+    # @!attribute [rw] supporting_insights
+    #   List of supporting insights that provide additional factors for the
+    #   insight.
+    #   @return [Array<Types::Insight>]
+    #
+    # @!attribute [rw] description
+    #   Description of the insight. For example: `A high severity Insight
+    #   found between 02:00 to 02:30, where there was an unusually high DB
+    #   load 600x above baseline. Likely performance impact`.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommendations
+    #   List of recommendations for the insight. For example, `Investigate
+    #   the following SQLs that contributed to 100% of the total DBLoad
+    #   during that time period: sql-id`.
+    #   @return [Array<Types::Recommendation>]
+    #
+    # @!attribute [rw] insight_data
+    #   List of data objects containing metrics and references from the time
+    #   range while generating the insight.
+    #   @return [Array<Types::Data>]
+    #
+    # @!attribute [rw] baseline_data
+    #   Metric names and values from the timeframe used as baseline to
+    #   generate the insight.
+    #   @return [Array<Types::Data>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/Insight AWS API Documentation
+    #
+    class Insight < Struct.new(
+      :insight_id,
+      :insight_type,
+      :context,
+      :start_time,
+      :end_time,
+      :severity,
+      :supporting_insights,
+      :description,
+      :recommendations,
+      :insight_data,
+      :baseline_data)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
     # The request failed due to an unknown error.
     #
     # @!attribute [rw] message
@@ -982,6 +1312,110 @@ module Aws::PI
       include Aws::Structure
     end
 
+    # @!attribute [rw] service_type
+    #   The Amazon Web Services service for which Performance Insights
+    #   returns metrics. Valid value is `RDS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   An immutable identifier for a data source that is unique for an
+    #   Amazon Web Services Region. Performance Insights gathers metrics
+    #   from this data source. In the console, the identifier is shown as
+    #   *ResourceID*. When you call `DescribeDBInstances`, the identifier is
+    #   returned as `DbiResourceId`.
+    #
+    #   To use a DB instance as a data source, specify its `DbiResourceId`
+    #   value. For example, specify `db-ABCDEFGHIJKLMNOPQRSTU1VW2X`.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the token, up to the value specified by `MaxResults`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return in the response. If more items
+    #   exist than the specified `MaxResults` value, a pagination token is
+    #   included in the response so that the remaining results can be
+    #   retrieved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] list_tags
+    #   Specifies whether or not to include the list of tags in the
+    #   response.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/ListPerformanceAnalysisReportsRequest AWS API Documentation
+    #
+    class ListPerformanceAnalysisReportsRequest < Struct.new(
+      :service_type,
+      :identifier,
+      :next_token,
+      :max_results,
+      :list_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analysis_reports
+    #   List of reports including the report identifier, start and end time,
+    #   creation time, and status.
+    #   @return [Array<Types::AnalysisReportSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the token, up to the value specified by `MaxResults`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/ListPerformanceAnalysisReportsResponse AWS API Documentation
+    #
+    class ListPerformanceAnalysisReportsResponse < Struct.new(
+      :analysis_reports,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_type
+    #   List the tags for the Amazon Web Services service for which
+    #   Performance Insights returns metrics. Valid value is `RDS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   Lists all the tags for the Amazon RDS Performance Insights resource.
+    #   This value is an Amazon Resource Name (ARN). For information about
+    #   creating an ARN, see [ Constructing an RDS Amazon Resource Name
+    #   (ARN)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :service_type,
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The metadata assigned to an Amazon RDS resource consisting of a
+    #   key-value pair.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The available dimension information for a metric type.
     #
     # @!attribute [rw] metric
@@ -1097,6 +1531,57 @@ module Aws::PI
       include Aws::Structure
     end
 
+    # This data type helps to determine Performance Insights metric to
+    # render for the insight.
+    #
+    # @!attribute [rw] metric
+    #   The Performance Insights metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The Performance Insights metric name.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimensions
+    #   A dimension map that contains the dimensions for this partition.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] value
+    #   The value of the metric. For example, `9` for `db.load.avg`.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/PerformanceInsightsMetric AWS API Documentation
+    #
+    class PerformanceInsightsMetric < Struct.new(
+      :metric,
+      :display_name,
+      :dimensions,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The list of recommendations for the insight.
+    #
+    # @!attribute [rw] recommendation_id
+    #   The unique identifier for the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommendation_description
+    #   The recommendation details to help resolve the performance issue.
+    #   For example, `Investigate the following SQLs that contributed to
+    #   100% of the total DBLoad during that time period: sql-id`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/Recommendation AWS API Documentation
+    #
+    class Recommendation < Struct.new(
+      :recommendation_id,
+      :recommendation_description)
+      SENSITIVE = [:recommendation_description]
+      include Aws::Structure
+    end
+
     # If `PartitionBy` was specified in a `DescribeDimensionKeys` request,
     # the dimensions are returned in an array. Each element in the array
     # specifies one dimension.
@@ -1181,6 +1666,106 @@ module Aws::PI
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Metadata assigned to an Amazon RDS resource consisting of a key-value
+    # pair.
+    #
+    # @!attribute [rw] key
+    #   A key is the required name of the tag. The string value can be from
+    #   1 to 128 Unicode characters in length and can't be prefixed with
+    #   `aws:` or `rds:`. The string can only contain only the set of
+    #   Unicode letters, digits, white-space, '\_', '.', ':', '/',
+    #   '=', '+', '-', '@' (Java regex:
+    #   `"^([\\p\{L\}\\p\{Z\}\\p\{N\}_.:/=+\\-@]*)$"`).
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   A value is the optional value of the tag. The string value can be
+    #   from 1 to 256 Unicode characters in length and can't be prefixed
+    #   with `aws:` or `rds:`. The string can only contain only the set of
+    #   Unicode letters, digits, white-space, '\_', '.', ':', '/',
+    #   '=', '+', '-', '@' (Java regex:
+    #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-@\]*)$").
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_type
+    #   The Amazon Web Services service for which Performance Insights
+    #   returns metrics. Valid value is `RDS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon RDS Performance Insights resource that the tags are added
+    #   to. This value is an Amazon Resource Name (ARN). For information
+    #   about creating an ARN, see [ Constructing an RDS Amazon Resource
+    #   Name (ARN)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The metadata assigned to an Amazon RDS resource consisting of a
+    #   key-value pair.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :service_type,
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] service_type
+    #   List the tags for the Amazon Web Services service for which
+    #   Performance Insights returns metrics. Valid value is `RDS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon RDS Performance Insights resource that the tags are added
+    #   to. This value is an Amazon Resource Name (ARN). For information
+    #   about creating an ARN, see [ Constructing an RDS Amazon Resource
+    #   Name (ARN)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The metadata assigned to an Amazon RDS Performance Insights resource
+    #   consisting of a key-value pair.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :service_type,
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
   end
 end

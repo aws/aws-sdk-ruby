@@ -445,7 +445,7 @@ module Aws::Route53Domains
     #
     #   resp = client.accept_domain_transfer_from_another_aws_account({
     #     domain_name: "DomainName", # required
-    #     password: "String", # required
+    #     password: "Password", # required
     #   })
     #
     # @example Response structure
@@ -652,6 +652,7 @@ module Aws::Route53Domains
     # @return [Types::CheckDomainTransferabilityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CheckDomainTransferabilityResponse#transferability #transferability} => Types::DomainTransferability
+    #   * {Types::CheckDomainTransferabilityResponse#message #message} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -663,6 +664,7 @@ module Aws::Route53Domains
     # @example Response structure
     #
     #   resp.transferability.transferable #=> String, one of "TRANSFERABLE", "UNTRANSFERABLE", "DONT_KNOW", "DOMAIN_IN_OWN_ACCOUNT", "DOMAIN_IN_ANOTHER_ACCOUNT", "PREMIUM_DOMAIN"
+    #   resp.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/CheckDomainTransferability AWS API Documentation
     #
@@ -2631,7 +2633,7 @@ module Aws::Route53Domains
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53domains'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

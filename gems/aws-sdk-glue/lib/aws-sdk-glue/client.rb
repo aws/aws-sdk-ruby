@@ -2679,6 +2679,7 @@ module Aws::Glue
     #       allow_single_column: false,
     #       custom_datatype_configured: false,
     #       custom_datatypes: ["NameString"],
+    #       serde: "OpenCSVSerDe", # accepts OpenCSVSerDe, LazySimpleSerDe, None
     #     },
     #   })
     #
@@ -5741,6 +5742,7 @@ module Aws::Glue
     #   resp.classifier.csv_classifier.custom_datatype_configured #=> Boolean
     #   resp.classifier.csv_classifier.custom_datatypes #=> Array
     #   resp.classifier.csv_classifier.custom_datatypes[0] #=> String
+    #   resp.classifier.csv_classifier.serde #=> String, one of "OpenCSVSerDe", "LazySimpleSerDe", "None"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetClassifier AWS API Documentation
     #
@@ -5808,6 +5810,7 @@ module Aws::Glue
     #   resp.classifiers[0].csv_classifier.custom_datatype_configured #=> Boolean
     #   resp.classifiers[0].csv_classifier.custom_datatypes #=> Array
     #   resp.classifiers[0].csv_classifier.custom_datatypes[0] #=> String
+    #   resp.classifiers[0].csv_classifier.serde #=> String, one of "OpenCSVSerDe", "LazySimpleSerDe", "None"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetClassifiers AWS API Documentation
@@ -14761,6 +14764,7 @@ module Aws::Glue
     #       allow_single_column: false,
     #       custom_datatype_configured: false,
     #       custom_datatypes: ["NameString"],
+    #       serde: "OpenCSVSerDe", # accepts OpenCSVSerDe, LazySimpleSerDe, None
     #     },
     #   })
     #
@@ -16284,7 +16288,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.153.0'
+      context[:gem_version] = '1.154.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

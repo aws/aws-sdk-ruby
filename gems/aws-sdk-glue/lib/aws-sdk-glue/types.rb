@@ -3793,6 +3793,13 @@ module Aws::Glue
     #   Creates a list of supported custom datatypes.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] serde
+    #   Sets the SerDe for processing CSV in the classifier, which will be
+    #   applied in the Data Catalog. Valid values are `OpenCSVSerDe`,
+    #   `LazySimpleSerDe`, and `None`. You can specify the `None` value when
+    #   you want the crawler to do the detection.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCsvClassifierRequest AWS API Documentation
     #
     class CreateCsvClassifierRequest < Struct.new(
@@ -3804,7 +3811,8 @@ module Aws::Glue
       :disable_value_trimming,
       :allow_single_column,
       :custom_datatype_configured,
-      :custom_datatypes)
+      :custom_datatypes,
+      :serde)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5550,6 +5558,13 @@ module Aws::Glue
     #   "SHORT", "STRING", "TIMESTAMP".
     #   @return [Array<String>]
     #
+    # @!attribute [rw] serde
+    #   Sets the SerDe for processing CSV in the classifier, which will be
+    #   applied in the Data Catalog. Valid values are `OpenCSVSerDe`,
+    #   `LazySimpleSerDe`, and `None`. You can specify the `None` value when
+    #   you want the crawler to do the detection.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CsvClassifier AWS API Documentation
     #
     class CsvClassifier < Struct.new(
@@ -5564,7 +5579,8 @@ module Aws::Glue
       :disable_value_trimming,
       :allow_single_column,
       :custom_datatype_configured,
-      :custom_datatypes)
+      :custom_datatypes,
+      :serde)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20874,6 +20890,13 @@ module Aws::Glue
     #   Specifies a list of supported custom datatypes.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] serde
+    #   Sets the SerDe for processing CSV in the classifier, which will be
+    #   applied in the Data Catalog. Valid values are `OpenCSVSerDe`,
+    #   `LazySimpleSerDe`, and `None`. You can specify the `None` value when
+    #   you want the crawler to do the detection.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCsvClassifierRequest AWS API Documentation
     #
     class UpdateCsvClassifierRequest < Struct.new(
@@ -20885,7 +20908,8 @@ module Aws::Glue
       :disable_value_trimming,
       :allow_single_column,
       :custom_datatype_configured,
-      :custom_datatypes)
+      :custom_datatypes,
+      :serde)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2023-08-15)
+------------------
+
+* Feature - Updated API documentation to include additional exceptions.
+
 1.23.0 (2023-07-11)
 ------------------
 

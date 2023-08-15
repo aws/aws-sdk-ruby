@@ -7148,6 +7148,10 @@ module Aws::SageMaker
     #   information, see [Tagging Amazon Web Services resources][1] in the
     #   *Amazon Web Services General Reference Guide*.
     #
+    #   If you supply `ModelPackageGroupName`, your model package belongs to
+    #   the model group you specify and uses the tags associated with the
+    #   model group. In this case, you cannot supply a `tag` argument.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
@@ -34402,6 +34406,10 @@ module Aws::SageMaker
     #   benchmarks for the desired endpoint type.
     #   @return [String]
     #
+    # @!attribute [rw] supported_response_mime_types
+    #   The supported MIME types for the output data.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobContainerConfig AWS API Documentation
     #
     class RecommendationJobContainerConfig < Struct.new(
@@ -34413,7 +34421,8 @@ module Aws::SageMaker
       :nearest_model_name,
       :supported_instance_types,
       :data_input_config,
-      :supported_endpoint_type)
+      :supported_endpoint_type,
+      :supported_response_mime_types)
       SENSITIVE = []
       include Aws::Structure
     end
