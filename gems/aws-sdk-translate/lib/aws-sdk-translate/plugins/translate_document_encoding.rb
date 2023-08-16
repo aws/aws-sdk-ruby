@@ -2,6 +2,7 @@
 
 module Aws::Translate
   module Plugins
+    # @api private
     # The translated_documented returned by the translate_document api is modeled
     # as a blob, since it may contain binary data (eg: word doc).  However,
     # when the input document is text (eg: text/plain or text/html) the encoding
