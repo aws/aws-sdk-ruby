@@ -1126,7 +1126,10 @@
     "models": "transfer/2018-11-05"
   },
   "Translate": {
-    "models": "translate/2017-07-01"
+    "models": "translate/2017-07-01",
+    "addPlugins": [
+      "Aws::Translate::Plugins::TranslateDocumentEncoding"
+    ]
   },
   "VPCLattice": {
     "models": "vpc-lattice/2022-11-30"

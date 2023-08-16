@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Preserve Document encoding in `TranslateDocument` for text documents (#2897).
+
 1.57.0 (2023-07-18)
 ------------------
 
