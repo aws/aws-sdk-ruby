@@ -13,7 +13,6 @@ module Aws::Translate
             end
           resp = @handler.call(context)
           if encoding
-            puts "Updating document encoding to: #{encoding}"
             resp.translated_document.content = resp.translated_document.content.force_encoding(encoding)
           end
           resp
