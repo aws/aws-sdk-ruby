@@ -761,7 +761,15 @@ module Aws::CloudWatch
     # @option params [Array<String>] :alarm_types
     #   Use this parameter to specify whether you want the operation to return
     #   metric alarms or composite alarms. If you omit this parameter, only
-    #   metric alarms are returned.
+    #   metric alarms are returned, even if composite alarms exist in the
+    #   account.
+    #
+    #   For example, if you omit this parameter or specify `MetricAlarms`, the
+    #   operation returns only a list of metric alarms. It does not return any
+    #   composite alarms, even if composite alarms exist in the account.
+    #
+    #   If you specify `CompositeAlarms`, the operation returns only a list of
+    #   composite alarms, and does not return any metric alarms.
     #
     # @option params [String] :children_of_alarm_name
     #   If you use this parameter and specify the name of a composite alarm,
@@ -1453,7 +1461,7 @@ module Aws::CloudWatch
     #
     # @option params [String] :order_by
     #   Determines what statistic to use to rank the contributors. Valid
-    #   values are SUM and MAXIMUM.
+    #   values are `Sum` and `Maximum`.
     #
     # @return [Types::GetInsightRuleReportOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3164,10 +3172,40 @@ module Aws::CloudWatch
     #   either `Statistic` or `ExtendedStatistic,` but not both.
     #
     # @option params [String] :extended_statistic
-    #   The percentile statistic for the metric specified in `MetricName`.
-    #   Specify a value between p0.0 and p100. When you call `PutMetricAlarm`
-    #   and specify a `MetricName`, you must specify either `Statistic` or
-    #   `ExtendedStatistic,` but not both.
+    #   The extended statistic for the metric specified in `MetricName`. When
+    #   you call `PutMetricAlarm` and specify a `MetricName`, you must specify
+    #   either `Statistic` or `ExtendedStatistic` but not both.
+    #
+    #   If you specify `ExtendedStatistic`, the following are valid values:
+    #
+    #   * `p90`
+    #
+    #   * `tm90`
+    #
+    #   * `tc90`
+    #
+    #   * `ts90`
+    #
+    #   * `wm90`
+    #
+    #   * `IQM`
+    #
+    #   * `PR(n:m)` where n and m are values of the metric
+    #
+    #   * `TC(X%:X%)` where X is between 10 and 90 inclusive.
+    #
+    #   * `TM(X%:X%)` where X is between 10 and 90 inclusive.
+    #
+    #   * `TS(X%:X%)` where X is between 10 and 90 inclusive.
+    #
+    #   * `WM(X%:X%)` where X is between 10 and 90 inclusive.
+    #
+    #   For more information about these extended statistics, see [CloudWatch
+    #   statistics definitions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html
     #
     # @option params [Array<Types::Dimension>] :dimensions
     #   The dimensions for the metric specified in `MetricName`.
@@ -3317,7 +3355,9 @@ module Aws::CloudWatch
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of key-value pairs to associate with the alarm. You can
-    #   associate as many as 50 tags with an alarm.
+    #   associate as many as 50 tags with an alarm. To be able to associate
+    #   tags with the alarm when you create the alarm, you must have the
+    #   `cloudwatch:TagResource` permission.
     #
     #   Tags can help you organize and categorize your resources. You can also
     #   use them to scope user permissions by granting a user permission to
@@ -3943,7 +3983,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2023-08-16)
+------------------
+
+* Feature - Doc-only update to incorporate several doc bug fixes
+
 1.78.0 (2023-07-11)
 ------------------
 

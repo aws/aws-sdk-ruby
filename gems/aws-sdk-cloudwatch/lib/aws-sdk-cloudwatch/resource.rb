@@ -67,7 +67,15 @@ module Aws::CloudWatch
     # @option options [Array<String>] :alarm_types
     #   Use this parameter to specify whether you want the operation to return
     #   metric alarms or composite alarms. If you omit this parameter, only
-    #   metric alarms are returned.
+    #   metric alarms are returned, even if composite alarms exist in the
+    #   account.
+    #
+    #   For example, if you omit this parameter or specify `MetricAlarms`, the
+    #   operation returns only a list of metric alarms. It does not return any
+    #   composite alarms, even if composite alarms exist in the account.
+    #
+    #   If you specify `CompositeAlarms`, the operation returns only a list of
+    #   composite alarms, and does not return any metric alarms.
     # @option options [String] :children_of_alarm_name
     #   If you use this parameter and specify the name of a composite alarm,
     #   the operation returns information about the "children" alarms of the
@@ -167,7 +175,15 @@ module Aws::CloudWatch
     # @option options [Array<String>] :alarm_types
     #   Use this parameter to specify whether you want the operation to return
     #   metric alarms or composite alarms. If you omit this parameter, only
-    #   metric alarms are returned.
+    #   metric alarms are returned, even if composite alarms exist in the
+    #   account.
+    #
+    #   For example, if you omit this parameter or specify `MetricAlarms`, the
+    #   operation returns only a list of metric alarms. It does not return any
+    #   composite alarms, even if composite alarms exist in the account.
+    #
+    #   If you specify `CompositeAlarms`, the operation returns only a list of
+    #   composite alarms, and does not return any metric alarms.
     # @option options [String] :children_of_alarm_name
     #   If you use this parameter and specify the name of a composite alarm,
     #   the operation returns information about the "children" alarms of the

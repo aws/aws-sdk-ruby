@@ -514,10 +514,40 @@ module Aws::CloudWatch
     #   you call `PutMetricAlarm` and specify a `MetricName`, you must specify
     #   either `Statistic` or `ExtendedStatistic,` but not both.
     # @option options [String] :extended_statistic
-    #   The percentile statistic for the metric specified in `MetricName`.
-    #   Specify a value between p0.0 and p100. When you call `PutMetricAlarm`
-    #   and specify a `MetricName`, you must specify either `Statistic` or
-    #   `ExtendedStatistic,` but not both.
+    #   The extended statistic for the metric specified in `MetricName`. When
+    #   you call `PutMetricAlarm` and specify a `MetricName`, you must specify
+    #   either `Statistic` or `ExtendedStatistic` but not both.
+    #
+    #   If you specify `ExtendedStatistic`, the following are valid values:
+    #
+    #   * `p90`
+    #
+    #   * `tm90`
+    #
+    #   * `tc90`
+    #
+    #   * `ts90`
+    #
+    #   * `wm90`
+    #
+    #   * `IQM`
+    #
+    #   * `PR(n:m)` where n and m are values of the metric
+    #
+    #   * `TC(X%:X%)` where X is between 10 and 90 inclusive.
+    #
+    #   * `TM(X%:X%)` where X is between 10 and 90 inclusive.
+    #
+    #   * `TS(X%:X%)` where X is between 10 and 90 inclusive.
+    #
+    #   * `WM(X%:X%)` where X is between 10 and 90 inclusive.
+    #
+    #   For more information about these extended statistics, see [CloudWatch
+    #   statistics definitions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html
     # @option options [Array<Types::Dimension>] :dimensions
     #   The dimensions for the metric specified in `MetricName`.
     # @option options [Integer] :period
@@ -656,7 +686,9 @@ module Aws::CloudWatch
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDataQuery.html
     # @option options [Array<Types::Tag>] :tags
     #   A list of key-value pairs to associate with the alarm. You can
-    #   associate as many as 50 tags with an alarm.
+    #   associate as many as 50 tags with an alarm. To be able to associate
+    #   tags with the alarm when you create the alarm, you must have the
+    #   `cloudwatch:TagResource` permission.
     #
     #   Tags can help you organize and categorize your resources. You can also
     #   use them to scope user permissions by granting a user permission to

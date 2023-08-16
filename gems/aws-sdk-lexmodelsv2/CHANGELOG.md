@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2023-08-16)
+------------------
+
+* Feature - This release updates the Custom Vocabulary Weight field to support a value of 0.
+
 1.40.0 (2023-07-20)
 ------------------
 
