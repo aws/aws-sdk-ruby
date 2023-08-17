@@ -12124,13 +12124,13 @@ module Aws::EC2
     #
     # @!attribute [rw] subnet_ids
     #   (Interface and Gateway Load Balancer endpoints) The IDs of the
-    #   subnets in which to create an endpoint network interface. For a
+    #   subnets in which to create endpoint network interfaces. For a
     #   Gateway Load Balancer endpoint, you can specify only one subnet.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
     #   (Interface endpoint) The IDs of the security groups to associate
-    #   with the endpoint network interface. If this parameter is not
+    #   with the endpoint network interfaces. If this parameter is not
     #   specified, we use the default security group for the VPC.
     #   @return [Array<String>]
     #
@@ -12173,6 +12173,10 @@ module Aws::EC2
     #   The tags to associate with the endpoint.
     #   @return [Array<Types::TagSpecification>]
     #
+    # @!attribute [rw] subnet_configurations
+    #   The subnet configurations for the endpoint.
+    #   @return [Array<Types::SubnetConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointRequest AWS API Documentation
     #
     class CreateVpcEndpointRequest < Struct.new(
@@ -12188,7 +12192,8 @@ module Aws::EC2
       :dns_options,
       :client_token,
       :private_dns_enabled,
-      :tag_specifications)
+      :tag_specifications,
+      :subnet_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -47508,12 +47513,12 @@ module Aws::EC2
     #
     # @!attribute [rw] add_security_group_ids
     #   (Interface endpoint) The IDs of the security groups to associate
-    #   with the network interface.
+    #   with the endpoint network interfaces.
     #   @return [Array<String>]
     #
     # @!attribute [rw] remove_security_group_ids
     #   (Interface endpoint) The IDs of the security groups to disassociate
-    #   from the network interface.
+    #   from the endpoint network interfaces.
     #   @return [Array<String>]
     #
     # @!attribute [rw] ip_address_type
@@ -47528,6 +47533,10 @@ module Aws::EC2
     #   (Interface endpoint) Indicates whether a private hosted zone is
     #   associated with the VPC.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] subnet_configurations
+    #   The subnet configurations for the endpoint.
+    #   @return [Array<Types::SubnetConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointRequest AWS API Documentation
     #
@@ -47544,7 +47553,8 @@ module Aws::EC2
       :remove_security_group_ids,
       :ip_address_type,
       :dns_options,
-      :private_dns_enabled)
+      :private_dns_enabled,
+      :subnet_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -59982,6 +59992,44 @@ module Aws::EC2
       :owner_id,
       :description,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration of a subnet for a VPC endpoint.
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_4
+    #   The IPv4 address to assign to the endpoint network interface in the
+    #   subnet. You must provide an IPv4 address if the VPC endpoint
+    #   supports IPv4.
+    #
+    #   If you specify an IPv4 address when modifying a VPC endpoint, we
+    #   replace the existing endpoint network interface with a new endpoint
+    #   network interface with this IP address. This process temporarily
+    #   disconnects the subnet and the VPC endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_6
+    #   The IPv6 address to assign to the endpoint network interface in the
+    #   subnet. You must provide an IPv6 address if the VPC endpoint
+    #   supports IPv6.
+    #
+    #   If you specify an IPv6 address when modifying a VPC endpoint, we
+    #   replace the existing endpoint network interface with a new endpoint
+    #   network interface with this IP address. This process temporarily
+    #   disconnects the subnet and the VPC endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SubnetConfiguration AWS API Documentation
+    #
+    class SubnetConfiguration < Struct.new(
+      :subnet_id,
+      :ipv_4,
+      :ipv_6)
       SENSITIVE = []
       include Aws::Structure
     end

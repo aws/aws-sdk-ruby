@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.399.0 (2023-08-17)
+------------------
+
+* Feature - Adds support for SubnetConfigurations to allow users to select their own IPv4 and IPv6 addresses for Interface VPC endpoints
+
 1.398.0 (2023-08-15)
 ------------------
 

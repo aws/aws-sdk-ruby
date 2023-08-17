@@ -14272,13 +14272,13 @@ module Aws::EC2
     #
     # @option params [Array<String>] :subnet_ids
     #   (Interface and Gateway Load Balancer endpoints) The IDs of the subnets
-    #   in which to create an endpoint network interface. For a Gateway Load
+    #   in which to create endpoint network interfaces. For a Gateway Load
     #   Balancer endpoint, you can specify only one subnet.
     #
     # @option params [Array<String>] :security_group_ids
     #   (Interface endpoint) The IDs of the security groups to associate with
-    #   the endpoint network interface. If this parameter is not specified, we
-    #   use the default security group for the VPC.
+    #   the endpoint network interfaces. If this parameter is not specified,
+    #   we use the default security group for the VPC.
     #
     # @option params [String] :ip_address_type
     #   The IP address type for the endpoint.
@@ -14314,6 +14314,9 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to associate with the endpoint.
     #
+    # @option params [Array<Types::SubnetConfiguration>] :subnet_configurations
+    #   The subnet configurations for the endpoint.
+    #
     # @return [Types::CreateVpcEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateVpcEndpointResult#vpc_endpoint #vpc_endpoint} => Types::VpcEndpoint
@@ -14346,6 +14349,13 @@ module Aws::EC2
     #             value: "String",
     #           },
     #         ],
+    #       },
+    #     ],
+    #     subnet_configurations: [
+    #       {
+    #         subnet_id: "SubnetId",
+    #         ipv_4: "String",
+    #         ipv_6: "String",
     #       },
     #     ],
     #   })
@@ -48435,11 +48445,11 @@ module Aws::EC2
     #
     # @option params [Array<String>] :add_security_group_ids
     #   (Interface endpoint) The IDs of the security groups to associate with
-    #   the network interface.
+    #   the endpoint network interfaces.
     #
     # @option params [Array<String>] :remove_security_group_ids
     #   (Interface endpoint) The IDs of the security groups to disassociate
-    #   from the network interface.
+    #   from the endpoint network interfaces.
     #
     # @option params [String] :ip_address_type
     #   The IP address type for the endpoint.
@@ -48450,6 +48460,9 @@ module Aws::EC2
     # @option params [Boolean] :private_dns_enabled
     #   (Interface endpoint) Indicates whether a private hosted zone is
     #   associated with the VPC.
+    #
+    # @option params [Array<Types::SubnetConfiguration>] :subnet_configurations
+    #   The subnet configurations for the endpoint.
     #
     # @return [Types::ModifyVpcEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -48474,6 +48487,13 @@ module Aws::EC2
     #       private_dns_only_for_inbound_resolver_endpoint: false,
     #     },
     #     private_dns_enabled: false,
+    #     subnet_configurations: [
+    #       {
+    #         subnet_id: "SubnetId",
+    #         ipv_4: "String",
+    #         ipv_6: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -56711,7 +56731,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.398.0'
+      context[:gem_version] = '1.399.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

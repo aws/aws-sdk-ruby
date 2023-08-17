@@ -2660,6 +2660,8 @@ module Aws::EC2
     SubnetCidrReservationId = Shapes::StringShape.new(name: 'SubnetCidrReservationId')
     SubnetCidrReservationList = Shapes::ListShape.new(name: 'SubnetCidrReservationList')
     SubnetCidrReservationType = Shapes::StringShape.new(name: 'SubnetCidrReservationType')
+    SubnetConfiguration = Shapes::StructureShape.new(name: 'SubnetConfiguration')
+    SubnetConfigurationsList = Shapes::ListShape.new(name: 'SubnetConfigurationsList')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIdStringList = Shapes::ListShape.new(name: 'SubnetIdStringList')
     SubnetIpv6CidrBlockAssociation = Shapes::StructureShape.new(name: 'SubnetIpv6CidrBlockAssociation')
@@ -5243,6 +5245,7 @@ module Aws::EC2
     CreateVpcEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
     CreateVpcEndpointRequest.add_member(:private_dns_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrivateDnsEnabled"))
     CreateVpcEndpointRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateVpcEndpointRequest.add_member(:subnet_configurations, Shapes::ShapeRef.new(shape: SubnetConfigurationsList, location_name: "SubnetConfiguration"))
     CreateVpcEndpointRequest.struct_class = Types::CreateVpcEndpointRequest
 
     CreateVpcEndpointResult.add_member(:vpc_endpoint, Shapes::ShapeRef.new(shape: VpcEndpoint, location_name: "vpcEndpoint"))
@@ -11359,6 +11362,7 @@ module Aws::EC2
     ModifyVpcEndpointRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
     ModifyVpcEndpointRequest.add_member(:dns_options, Shapes::ShapeRef.new(shape: DnsOptionsSpecification, location_name: "DnsOptions"))
     ModifyVpcEndpointRequest.add_member(:private_dns_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrivateDnsEnabled"))
+    ModifyVpcEndpointRequest.add_member(:subnet_configurations, Shapes::ShapeRef.new(shape: SubnetConfigurationsList, location_name: "SubnetConfiguration"))
     ModifyVpcEndpointRequest.struct_class = Types::ModifyVpcEndpointRequest
 
     ModifyVpcEndpointResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
@@ -13733,6 +13737,13 @@ module Aws::EC2
     SubnetCidrReservation.struct_class = Types::SubnetCidrReservation
 
     SubnetCidrReservationList.member = Shapes::ShapeRef.new(shape: SubnetCidrReservation, location_name: "item")
+
+    SubnetConfiguration.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId"))
+    SubnetConfiguration.add_member(:ipv_4, Shapes::ShapeRef.new(shape: String, location_name: "Ipv4"))
+    SubnetConfiguration.add_member(:ipv_6, Shapes::ShapeRef.new(shape: String, location_name: "Ipv6"))
+    SubnetConfiguration.struct_class = Types::SubnetConfiguration
+
+    SubnetConfigurationsList.member = Shapes::ShapeRef.new(shape: SubnetConfiguration, location_name: "item")
 
     SubnetIdStringList.member = Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId")
 
