@@ -172,8 +172,10 @@ module Aws
         end
 
         it 'raises an error when checksum validation fails on multipart' do
+          thread = double(value: nil)
           client.stub_responses(:get_object, {body: 'body', checksum_sha1: 'invalid'})
-          expect(Thread).to receive(:new).and_yield
+          expect(Thread).to receive(:new).and_yield.and_return(thread)
+          allow(thread).to receive(:abort_on_exception=)
 
           expect do
             large_obj.download_file(path)

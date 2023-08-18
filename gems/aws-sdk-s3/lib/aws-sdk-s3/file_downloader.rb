@@ -187,7 +187,7 @@ module Aws
             rescue => error
               # keep other threads from downloading other parts
               pending.clear!
-              error
+              raise error
             end
           end
           thread.abort_on_exception = true
@@ -222,7 +222,7 @@ module Aws
         end
       end
 
-      Part = Structure.new(:part_number, :size, :params, keyword_init: true)
+      Part = Struct.new(:part_number, :size, :params, keyword_init: true)
 
       # @api private
       class PartList
