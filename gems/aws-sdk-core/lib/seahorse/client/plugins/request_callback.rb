@@ -60,6 +60,16 @@ the number of bytes read from the body, and the total number of
 bytes in the body.
           DOCS
 
+        option(:on_chunk_received,
+          default: nil,
+          doc_type: 'Proc',
+          docstring: <<-DOCS)
+When a Proc object is provided, it will be used as callback when each chunk 
+of the response body is received. It provides three arguments: the chunk,
+the number of bytes received, and the total number of 
+bytes in the response (or nil if the server did not send a `content-length`).
+        DOCS
+
         # @api private
         class OptionHandler < Client::Handler
           def call(context)
@@ -68,7 +78,28 @@ bytes in the body.
             end
             on_chunk_sent = context.config.on_chunk_sent if on_chunk_sent.nil?
             context[:on_chunk_sent] = on_chunk_sent if on_chunk_sent
+
+            if context.params.is_a?(Hash) && context.params[:on_chunk_received]
+              on_chunk_received = context.params.delete(:on_chunk_received)
+            end
+            on_chunk_received = context.config.on_chunk_received if on_chunk_received.nil?
+
+            add_response_events(on_chunk_received, context) if on_chunk_received
+
             @handler.call(context)
+          end
+
+          def add_response_events(on_chunk_received, context)
+            shared_data = {bytes_received: 0}
+
+            context.http_response.on_headers do |_status, headers|
+              shared_data[:content_length] = headers['content-length']&.to_i
+            end
+
+            context.http_response.on_data do |chunk|
+              shared_data[:bytes_received] += chunk.bytesize if chunk && chunk.respond_to?(:bytesize)
+              on_chunk_received.call(chunk, shared_data[:bytes_received], shared_data[:content_length])
+            end
           end
         end
 

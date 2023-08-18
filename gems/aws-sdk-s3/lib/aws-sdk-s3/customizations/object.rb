@@ -475,6 +475,15 @@ module Aws
       #     # and the parts are downloaded in parallel
       #     obj.download_file('/path/to/very_large_file')
       #
+      # You can provide a callback to monitor progress of the download:
+      #
+      #     # bytes and part_sizes are each an array with 1 entry per part
+      #     # part_sizes may not be known until the first bytes are retrieved
+      #     progress = Proc.new do |bytes, part_sizes, file_size|
+      #       puts bytes.map.with_index { |b, i| "Part #{i+1}: #{b} / #{part_sizes[i]}"}.join(' ') + "Total: #{100.0 * bytes.sum / file_size}%" }
+      #     end
+      #     obj.download_file('/path/to/file', progress_callback: progress)
+      #
       # @param [String] destination Where to download the file to.
       #
       # @option options [String] mode `auto`, `single_request`, `get_range`
@@ -504,6 +513,13 @@ module Aws
       #   request's checksum is validated with the checksum algorithm and the
       #   response.  For multipart downloads, this will be called for each
       #   part that is downloaded and validated.
+      #
+      # @option options [Proc] :progress_callback
+      #   A Proc that will be called when each chunk of the download is received.
+      #   It will be invoked with [bytes_read], [part_sizes], file_size.
+      #   When the object is downloaded as parts (rather than by ranges), the
+      #   part_sizes will not be known ahead of time and will be nil in the
+      #   callback until the first bytes in the part are received.
       #
       # @return [Boolean] Returns `true` when the file is downloaded without
       #   any errors.

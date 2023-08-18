@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add support for `on_chunk_received` callback.
+
 3.180.3 (2023-08-09)
 ------------------
 
