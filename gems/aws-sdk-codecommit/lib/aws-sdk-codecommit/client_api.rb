@@ -192,6 +192,7 @@ module Aws::CodeCommit
     FileSize = Shapes::IntegerShape.new(name: 'FileSize')
     FileSizes = Shapes::StructureShape.new(name: 'FileSizes')
     FileTooLargeException = Shapes::StructureShape.new(name: 'FileTooLargeException')
+    FileVersion = Shapes::StructureShape.new(name: 'FileVersion')
     FilesMetadata = Shapes::ListShape.new(name: 'FilesMetadata')
     Folder = Shapes::StructureShape.new(name: 'Folder')
     FolderContentSizeLimitExceededException = Shapes::StructureShape.new(name: 'FolderContentSizeLimitExceededException')
@@ -319,6 +320,8 @@ module Aws::CodeCommit
     ListAssociatedApprovalRuleTemplatesForRepositoryOutput = Shapes::StructureShape.new(name: 'ListAssociatedApprovalRuleTemplatesForRepositoryOutput')
     ListBranchesInput = Shapes::StructureShape.new(name: 'ListBranchesInput')
     ListBranchesOutput = Shapes::StructureShape.new(name: 'ListBranchesOutput')
+    ListFileCommitHistoryRequest = Shapes::StructureShape.new(name: 'ListFileCommitHistoryRequest')
+    ListFileCommitHistoryResponse = Shapes::StructureShape.new(name: 'ListFileCommitHistoryResponse')
     ListPullRequestsInput = Shapes::StructureShape.new(name: 'ListPullRequestsInput')
     ListPullRequestsOutput = Shapes::StructureShape.new(name: 'ListPullRequestsOutput')
     ListRepositoriesForApprovalRuleTemplateInput = Shapes::StructureShape.new(name: 'ListRepositoriesForApprovalRuleTemplateInput')
@@ -478,6 +481,8 @@ module Aws::CodeCommit
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceArnRequiredException = Shapes::StructureShape.new(name: 'ResourceArnRequiredException')
     RestrictedSourceFileException = Shapes::StructureShape.new(name: 'RestrictedSourceFileException')
+    RevisionChildren = Shapes::ListShape.new(name: 'RevisionChildren')
+    RevisionDag = Shapes::ListShape.new(name: 'RevisionDag')
     RevisionId = Shapes::StringShape.new(name: 'RevisionId')
     RevisionIdRequiredException = Shapes::StructureShape.new(name: 'RevisionIdRequiredException')
     RevisionNotCurrentException = Shapes::StructureShape.new(name: 'RevisionNotCurrentException')
@@ -1065,6 +1070,12 @@ module Aws::CodeCommit
 
     FileTooLargeException.struct_class = Types::FileTooLargeException
 
+    FileVersion.add_member(:commit, Shapes::ShapeRef.new(shape: Commit, location_name: "commit"))
+    FileVersion.add_member(:blob_id, Shapes::ShapeRef.new(shape: ObjectId, location_name: "blobId"))
+    FileVersion.add_member(:path, Shapes::ShapeRef.new(shape: Path, location_name: "path"))
+    FileVersion.add_member(:revision_children, Shapes::ShapeRef.new(shape: RevisionChildren, location_name: "revisionChildren"))
+    FileVersion.struct_class = Types::FileVersion
+
     FilesMetadata.member = Shapes::ShapeRef.new(shape: FileMetadata)
 
     Folder.add_member(:tree_id, Shapes::ShapeRef.new(shape: ObjectId, location_name: "treeId"))
@@ -1419,6 +1430,17 @@ module Aws::CodeCommit
     ListBranchesOutput.add_member(:branches, Shapes::ShapeRef.new(shape: BranchNameList, location_name: "branches"))
     ListBranchesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListBranchesOutput.struct_class = Types::ListBranchesOutput
+
+    ListFileCommitHistoryRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    ListFileCommitHistoryRequest.add_member(:commit_specifier, Shapes::ShapeRef.new(shape: CommitName, location_name: "commitSpecifier"))
+    ListFileCommitHistoryRequest.add_member(:file_path, Shapes::ShapeRef.new(shape: Path, required: true, location_name: "filePath"))
+    ListFileCommitHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Limit, location_name: "maxResults"))
+    ListFileCommitHistoryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListFileCommitHistoryRequest.struct_class = Types::ListFileCommitHistoryRequest
+
+    ListFileCommitHistoryResponse.add_member(:revision_dag, Shapes::ShapeRef.new(shape: RevisionDag, required: true, location_name: "revisionDag"))
+    ListFileCommitHistoryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListFileCommitHistoryResponse.struct_class = Types::ListFileCommitHistoryResponse
 
     ListPullRequestsInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     ListPullRequestsInput.add_member(:author_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "authorArn"))
@@ -1896,6 +1918,10 @@ module Aws::CodeCommit
     ResourceArnRequiredException.struct_class = Types::ResourceArnRequiredException
 
     RestrictedSourceFileException.struct_class = Types::RestrictedSourceFileException
+
+    RevisionChildren.member = Shapes::ShapeRef.new(shape: RevisionId)
+
+    RevisionDag.member = Shapes::ShapeRef.new(shape: FileVersion)
 
     RevisionIdRequiredException.struct_class = Types::RevisionIdRequiredException
 
@@ -3072,6 +3098,34 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidContinuationTokenException)
         o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_file_commit_history, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFileCommitHistory"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListFileCommitHistoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListFileCommitHistoryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidContinuationTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidMaxResultsException)
+        o.errors << Shapes::ShapeRef.new(shape: TipsDivergenceExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: CommitRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCommitException)
+        o.errors << Shapes::ShapeRef.new(shape: CommitDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
           tokens: {
             "next_token" => "next_token"
           }

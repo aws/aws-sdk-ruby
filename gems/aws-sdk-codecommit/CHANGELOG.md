@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2023-08-18)
+------------------
+
+* Feature - Add new ListFileCommitHistory operation to retrieve commits which introduced changes to a specific file.
+
 1.58.0 (2023-07-11)
 ------------------
 

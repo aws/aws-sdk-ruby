@@ -693,6 +693,7 @@ module Aws::SecurityHub
     City = Shapes::StructureShape.new(name: 'City')
     ClassificationResult = Shapes::StructureShape.new(name: 'ClassificationResult')
     ClassificationStatus = Shapes::StructureShape.new(name: 'ClassificationStatus')
+    CodeVulnerabilitiesFilePath = Shapes::StructureShape.new(name: 'CodeVulnerabilitiesFilePath')
     Compliance = Shapes::StructureShape.new(name: 'Compliance')
     ComplianceStatus = Shapes::StringShape.new(name: 'ComplianceStatus')
     ContainerDetails = Shapes::StructureShape.new(name: 'ContainerDetails')
@@ -784,6 +785,7 @@ module Aws::SecurityHub
     FirewallPolicyStatelessCustomActionsList = Shapes::ListShape.new(name: 'FirewallPolicyStatelessCustomActionsList')
     FirewallPolicyStatelessRuleGroupReferencesDetails = Shapes::StructureShape.new(name: 'FirewallPolicyStatelessRuleGroupReferencesDetails')
     FirewallPolicyStatelessRuleGroupReferencesList = Shapes::ListShape.new(name: 'FirewallPolicyStatelessRuleGroupReferencesList')
+    GeneratorDetails = Shapes::StructureShape.new(name: 'GeneratorDetails')
     GeoLocation = Shapes::StructureShape.new(name: 'GeoLocation')
     GetAdministratorAccountRequest = Shapes::StructureShape.new(name: 'GetAdministratorAccountRequest')
     GetAdministratorAccountResponse = Shapes::StructureShape.new(name: 'GetAdministratorAccountResponse')
@@ -1049,6 +1051,9 @@ module Aws::SecurityHub
     VpcInfoIpv6CidrBlockSetList = Shapes::ListShape.new(name: 'VpcInfoIpv6CidrBlockSetList')
     VpcInfoPeeringOptionsDetails = Shapes::StructureShape.new(name: 'VpcInfoPeeringOptionsDetails')
     Vulnerability = Shapes::StructureShape.new(name: 'Vulnerability')
+    VulnerabilityCodeVulnerabilities = Shapes::StructureShape.new(name: 'VulnerabilityCodeVulnerabilities')
+    VulnerabilityCodeVulnerabilitiesList = Shapes::ListShape.new(name: 'VulnerabilityCodeVulnerabilitiesList')
+    VulnerabilityExploitAvailable = Shapes::StringShape.new(name: 'VulnerabilityExploitAvailable')
     VulnerabilityFixAvailable = Shapes::StringShape.new(name: 'VulnerabilityFixAvailable')
     VulnerabilityList = Shapes::ListShape.new(name: 'VulnerabilityList')
     VulnerabilityVendor = Shapes::StructureShape.new(name: 'VulnerabilityVendor')
@@ -4314,6 +4319,7 @@ module Aws::SecurityHub
     AwsSecurityFinding.add_member(:action, Shapes::ShapeRef.new(shape: Action, location_name: "Action"))
     AwsSecurityFinding.add_member(:finding_provider_fields, Shapes::ShapeRef.new(shape: FindingProviderFields, location_name: "FindingProviderFields"))
     AwsSecurityFinding.add_member(:sample, Shapes::ShapeRef.new(shape: Boolean, location_name: "Sample"))
+    AwsSecurityFinding.add_member(:generator_details, Shapes::ShapeRef.new(shape: GeneratorDetails, location_name: "GeneratorDetails"))
     AwsSecurityFinding.struct_class = Types::AwsSecurityFinding
 
     AwsSecurityFindingFilters.add_member(:product_arn, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "ProductArn"))
@@ -4834,6 +4840,12 @@ module Aws::SecurityHub
     ClassificationStatus.add_member(:reason, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Reason"))
     ClassificationStatus.struct_class = Types::ClassificationStatus
 
+    CodeVulnerabilitiesFilePath.add_member(:end_line, Shapes::ShapeRef.new(shape: Integer, location_name: "EndLine"))
+    CodeVulnerabilitiesFilePath.add_member(:file_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FileName"))
+    CodeVulnerabilitiesFilePath.add_member(:file_path, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FilePath"))
+    CodeVulnerabilitiesFilePath.add_member(:start_line, Shapes::ShapeRef.new(shape: Integer, location_name: "StartLine"))
+    CodeVulnerabilitiesFilePath.struct_class = Types::CodeVulnerabilitiesFilePath
+
     Compliance.add_member(:status, Shapes::ShapeRef.new(shape: ComplianceStatus, location_name: "Status"))
     Compliance.add_member(:related_requirements, Shapes::ShapeRef.new(shape: RelatedRequirementsList, location_name: "RelatedRequirements"))
     Compliance.add_member(:status_reasons, Shapes::ShapeRef.new(shape: StatusReasonsList, location_name: "StatusReasons"))
@@ -5142,6 +5154,11 @@ module Aws::SecurityHub
     FirewallPolicyStatelessRuleGroupReferencesDetails.struct_class = Types::FirewallPolicyStatelessRuleGroupReferencesDetails
 
     FirewallPolicyStatelessRuleGroupReferencesList.member = Shapes::ShapeRef.new(shape: FirewallPolicyStatelessRuleGroupReferencesDetails)
+
+    GeneratorDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    GeneratorDetails.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
+    GeneratorDetails.add_member(:labels, Shapes::ShapeRef.new(shape: TypeList, location_name: "Labels"))
+    GeneratorDetails.struct_class = Types::GeneratorDetails
 
     GeoLocation.add_member(:lon, Shapes::ShapeRef.new(shape: Double, location_name: "Lon"))
     GeoLocation.add_member(:lat, Shapes::ShapeRef.new(shape: Double, location_name: "Lat"))
@@ -6162,7 +6179,17 @@ module Aws::SecurityHub
     Vulnerability.add_member(:vendor, Shapes::ShapeRef.new(shape: VulnerabilityVendor, location_name: "Vendor"))
     Vulnerability.add_member(:reference_urls, Shapes::ShapeRef.new(shape: StringList, location_name: "ReferenceUrls"))
     Vulnerability.add_member(:fix_available, Shapes::ShapeRef.new(shape: VulnerabilityFixAvailable, location_name: "FixAvailable"))
+    Vulnerability.add_member(:epss_score, Shapes::ShapeRef.new(shape: Double, location_name: "EpssScore"))
+    Vulnerability.add_member(:exploit_available, Shapes::ShapeRef.new(shape: VulnerabilityExploitAvailable, location_name: "ExploitAvailable"))
+    Vulnerability.add_member(:code_vulnerabilities, Shapes::ShapeRef.new(shape: VulnerabilityCodeVulnerabilitiesList, location_name: "CodeVulnerabilities"))
     Vulnerability.struct_class = Types::Vulnerability
+
+    VulnerabilityCodeVulnerabilities.add_member(:cwes, Shapes::ShapeRef.new(shape: TypeList, location_name: "Cwes"))
+    VulnerabilityCodeVulnerabilities.add_member(:file_path, Shapes::ShapeRef.new(shape: CodeVulnerabilitiesFilePath, location_name: "FilePath"))
+    VulnerabilityCodeVulnerabilities.add_member(:source_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SourceArn"))
+    VulnerabilityCodeVulnerabilities.struct_class = Types::VulnerabilityCodeVulnerabilities
+
+    VulnerabilityCodeVulnerabilitiesList.member = Shapes::ShapeRef.new(shape: VulnerabilityCodeVulnerabilities)
 
     VulnerabilityList.member = Shapes::ShapeRef.new(shape: Vulnerability)
 

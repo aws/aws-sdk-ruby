@@ -146,6 +146,8 @@ module Aws::CodeCommit
             Aws::CodeCommit::Endpoints::ListAssociatedApprovalRuleTemplatesForRepository.build(context)
           when :list_branches
             Aws::CodeCommit::Endpoints::ListBranches.build(context)
+          when :list_file_commit_history
+            Aws::CodeCommit::Endpoints::ListFileCommitHistory.build(context)
           when :list_pull_requests
             Aws::CodeCommit::Endpoints::ListPullRequests.build(context)
           when :list_repositories
