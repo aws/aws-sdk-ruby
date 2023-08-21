@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2023-08-21)
+------------------
+
+* Feature - Allow customers to manage outbound traffic from their Kx Environment when attaching a transit gateway by providing network acl entries. Allow the customer to choose how they want to update the databases on a cluster allowing updates to possibly be faster than usual.
+
 1.19.0 (2023-07-11)
 ------------------
 

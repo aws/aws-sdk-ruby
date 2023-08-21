@@ -631,6 +631,12 @@ module Aws::RDS
     #
     #   * Multi-AZ DB clusters - `io1`
     #
+    #   <note markdown="1"> When you create an Aurora DB cluster with the storage type set to
+    #   `aurora-iopt1`, the storage type is returned in the response. The
+    #   storage type isn't returned when you set it to `aurora`.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.StorageReliability.html#aurora-storage-type

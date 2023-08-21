@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2023-08-21)
+------------------
+
+* Feature - Fixed typos in description fields
+
 1.50.0 (2023-08-15)
 ------------------
 

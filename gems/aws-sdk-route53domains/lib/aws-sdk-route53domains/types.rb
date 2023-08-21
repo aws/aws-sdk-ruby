@@ -942,7 +942,7 @@ module Aws::Route53Domains
     #
     #   DOMAIN\_IN\_ANOTHER\_ACCOUNT
     #
-    #   : The domain exists in another Amazon Web Services account.
+    #   : the domain exists in another Amazon Web Services account.
     #
     #   PREMIUM\_DOMAIN
     #
@@ -1952,7 +1952,7 @@ module Aws::Route53Domains
     #   @return [String]
     #
     # @!attribute [rw] sort_order
-    #   The sort order ofr returned values, either ascending or descending.
+    #   The sort order for returned values, either ascending or descending.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListOperationsRequest AWS API Documentation

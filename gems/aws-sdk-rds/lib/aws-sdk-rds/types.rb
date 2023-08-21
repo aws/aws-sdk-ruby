@@ -2543,6 +2543,12 @@ module Aws::RDS
     #
     #   * Multi-AZ DB clusters - `io1`
     #
+    #   <note markdown="1"> When you create an Aurora DB cluster with the storage type set to
+    #   `aurora-iopt1`, the storage type is returned in the response. The
+    #   storage type isn't returned when you set it to `aurora`.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.StorageReliability.html#aurora-storage-type
@@ -13928,32 +13934,58 @@ module Aws::RDS
     end
 
     # @!attribute [rw] global_cluster_identifier
-    #   Identifier of the Aurora global database (GlobalCluster) that should
-    #   be failed over. The identifier is the unique key assigned by the
-    #   user when the Aurora global database was created. In other words,
-    #   it's the name of the Aurora global database that you want to fail
-    #   over.
+    #   The identifier of the global database cluster (Aurora global
+    #   database) this operation should apply to. The identifier is the
+    #   unique key assigned by the user when the Aurora global database is
+    #   created. In other words, it's the name of the Aurora global
+    #   database.
     #
     #   Constraints:
     #
-    #   * Must match the identifier of an existing GlobalCluster (Aurora
-    #     global database).
+    #   * Must match the identifier of an existing global database cluster.
     #
     #   ^
     #   @return [String]
     #
     # @!attribute [rw] target_db_cluster_identifier
-    #   Identifier of the secondary Aurora DB cluster that you want to
-    #   promote to primary for the Aurora global database (GlobalCluster.)
-    #   Use the Amazon Resource Name (ARN) for the identifier so that Aurora
-    #   can locate the cluster in its Amazon Web Services Region.
+    #   The identifier of the secondary Aurora DB cluster that you want to
+    #   promote to the primary for the global database cluster. Use the
+    #   Amazon Resource Name (ARN) for the identifier so that Aurora can
+    #   locate the cluster in its Amazon Web Services Region.
     #   @return [String]
+    #
+    # @!attribute [rw] allow_data_loss
+    #   Specifies whether to allow data loss for this global database
+    #   cluster operation. Allowing data loss triggers a global failover
+    #   operation.
+    #
+    #   If you don't specify `AllowDataLoss`, the global database cluster
+    #   operation defaults to a switchover.
+    #
+    #   Constraints:
+    #
+    #   * Can't be specified together with the `Switchover` parameter.
+    #
+    #   ^
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] switchover
+    #   Specifies whether to switch over this global database cluster.
+    #
+    #   Constraints:
+    #
+    #   * Can't be specified together with the `AllowDataLoss` parameter.
+    #
+    #   ^
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverGlobalClusterMessage AWS API Documentation
     #
     class FailoverGlobalClusterMessage < Struct.new(
       :global_cluster_identifier,
-      :target_db_cluster_identifier)
+      :target_db_cluster_identifier,
+      :allow_data_loss,
+      :switchover)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13970,30 +14002,29 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # Contains the state of scheduled or in-process failover operations on
-    # an Aurora global database (GlobalCluster). This Data type is empty
-    # unless a failover operation is scheduled or is currently underway on
-    # the Aurora global database.
+    # Contains the state of scheduled or in-process operations on a global
+    # cluster (Aurora global database). This data type is empty unless a
+    # switchover or failover operation is scheduled or is in progress on the
+    # Aurora global database.
     #
     # @!attribute [rw] status
-    #   The current status of the Aurora global database (GlobalCluster).
-    #   Possible values are as follows:
+    #   The current status of the global cluster. Possible values are as
+    #   follows:
     #
-    #   * pending – A request to fail over the Aurora global database
-    #     (GlobalCluster) has been received by the service. The
-    #     `GlobalCluster`'s primary DB cluster and the specified secondary
-    #     DB cluster are being verified before the failover process can
-    #     start.
+    #   * pending – The service received a request to switch over or fail
+    #     over the global cluster. The global cluster's primary DB cluster
+    #     and the specified secondary DB cluster are being verified before
+    #     the operation starts.
     #
     #   * failing-over – This status covers the range of Aurora internal
-    #     operations that take place during the failover process, such as
-    #     demoting the primary Aurora DB cluster, promoting the secondary
-    #     Aurora DB, and synchronizing replicas.
+    #     operations that take place during the switchover or failover
+    #     process, such as demoting the primary Aurora DB cluster, promoting
+    #     the secondary Aurora DB cluster, and synchronizing replicas.
     #
-    #   * cancelling – The request to fail over the Aurora global database
-    #     (GlobalCluster) was cancelled and the primary Aurora DB cluster
-    #     and the selected secondary Aurora DB cluster are returning to
-    #     their previous states.
+    #   * cancelling – The request to switch over or fail over the global
+    #     cluster was cancelled and the primary Aurora DB cluster and the
+    #     selected secondary Aurora DB cluster are returning to their
+    #     previous states.
     #   @return [String]
     #
     # @!attribute [rw] from_db_cluster_arn
@@ -14006,12 +14037,19 @@ module Aws::RDS
     #   currently being promoted, and which is associated with this state.
     #   @return [String]
     #
+    # @!attribute [rw] is_data_loss_allowed
+    #   Indicates whether the operation is a global switchover or a global
+    #   failover. If data loss is allowed, then the operation is a global
+    #   failover. Otherwise, it's a switchover.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverState AWS API Documentation
     #
     class FailoverState < Struct.new(
       :status,
       :from_db_cluster_arn,
-      :to_db_cluster_arn)
+      :to_db_cluster_arn,
+      :is_data_loss_allowed)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14105,10 +14143,10 @@ module Aws::RDS
     #
     # @!attribute [rw] failover_state
     #   A data object containing all properties for the current state of an
-    #   in-process or pending failover process for this Aurora global
-    #   database. This object is empty unless the FailoverGlobalCluster API
-    #   operation has been called on this Aurora global database
-    #   (GlobalCluster).
+    #   in-process or pending switchover or failover process for this global
+    #   cluster (Aurora global database). This object is empty unless the
+    #   `SwitchoverGlobalCluster` or `FailoverGlobalCluster` operation was
+    #   called on this global cluster.
     #   @return [Types::FailoverState]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/GlobalCluster AWS API Documentation
@@ -14138,27 +14176,33 @@ module Aws::RDS
     class GlobalClusterAlreadyExistsFault < Aws::EmptyStructure; end
 
     # A data structure with information about any primary and secondary
-    # clusters associated with an Aurora global database.
+    # clusters associated with a global cluster (Aurora global database).
     #
     # @!attribute [rw] db_cluster_arn
-    #   The Amazon Resource Name (ARN) for each Aurora cluster.
+    #   The Amazon Resource Name (ARN) for each Aurora DB cluster in the
+    #   global cluster.
     #   @return [String]
     #
     # @!attribute [rw] readers
     #   The Amazon Resource Name (ARN) for each read-only secondary cluster
-    #   associated with the Aurora global database.
+    #   associated with the global cluster.
     #   @return [Array<String>]
     #
     # @!attribute [rw] is_writer
-    #   Specifies whether the Aurora cluster is the primary cluster (that
-    #   is, has read-write capability) for the Aurora global database with
-    #   which it is associated.
+    #   Specifies whether the Aurora DB cluster is the primary cluster (that
+    #   is, has read-write capability) for the global cluster with which it
+    #   is associated.
     #   @return [Boolean]
     #
     # @!attribute [rw] global_write_forwarding_status
-    #   Specifies whether a secondary cluster in an Aurora global database
-    #   has write forwarding enabled, not enabled, or is in the process of
+    #   Specifies whether a secondary cluster in the global cluster has
+    #   write forwarding enabled, not enabled, or is in the process of
     #   enabling it.
+    #   @return [String]
+    #
+    # @!attribute [rw] synchronization_status
+    #   The status of synchronization of each Aurora DB cluster in the
+    #   global cluster.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/GlobalClusterMember AWS API Documentation
@@ -14167,7 +14211,8 @@ module Aws::RDS
       :db_cluster_arn,
       :readers,
       :is_writer,
-      :global_write_forwarding_status)
+      :global_write_forwarding_status,
+      :synchronization_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23959,6 +24004,46 @@ module Aws::RDS
       :source_member,
       :target_member,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_cluster_identifier
+    #   The identifier of the global database cluster to switch over. This
+    #   parameter isn't case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identifier of an existing global database cluster
+    #     (Aurora global database).
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] target_db_cluster_identifier
+    #   The identifier of the secondary Aurora DB cluster to promote to the
+    #   new primary for the global database cluster. Use the Amazon Resource
+    #   Name (ARN) for the identifier so that Aurora can locate the cluster
+    #   in its Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverGlobalClusterMessage AWS API Documentation
+    #
+    class SwitchoverGlobalClusterMessage < Struct.new(
+      :global_cluster_identifier,
+      :target_db_cluster_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_cluster
+    #   A data type representing an Aurora global database.
+    #   @return [Types::GlobalCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverGlobalClusterResult AWS API Documentation
+    #
+    class SwitchoverGlobalClusterResult < Struct.new(
+      :global_cluster)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.190.0 (2023-08-21)
+------------------
+
+* Feature - Adding support for RDS Aurora Global Database Unplanned Failover
+
 1.189.0 (2023-08-01)
 ------------------
 

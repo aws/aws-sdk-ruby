@@ -96,6 +96,8 @@ module Aws::Finspace
     GetKxUserRequest = Shapes::StructureShape.new(name: 'GetKxUserRequest')
     GetKxUserResponse = Shapes::StructureShape.new(name: 'GetKxUserResponse')
     IPAddressType = Shapes::StringShape.new(name: 'IPAddressType')
+    IcmpTypeCode = Shapes::StructureShape.new(name: 'IcmpTypeCode')
+    IcmpTypeOrCode = Shapes::IntegerShape.new(name: 'IcmpTypeOrCode')
     IdType = Shapes::StringShape.new(name: 'IdType')
     InitializationScriptFilePath = Shapes::StringShape.new(name: 'InitializationScriptFilePath')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -127,6 +129,8 @@ module Aws::Finspace
     KxDatabaseConfigurations = Shapes::ListShape.new(name: 'KxDatabaseConfigurations')
     KxDatabaseListEntry = Shapes::StructureShape.new(name: 'KxDatabaseListEntry')
     KxDatabases = Shapes::ListShape.new(name: 'KxDatabases')
+    KxDeploymentConfiguration = Shapes::StructureShape.new(name: 'KxDeploymentConfiguration')
+    KxDeploymentStrategy = Shapes::StringShape.new(name: 'KxDeploymentStrategy')
     KxEnvironment = Shapes::StructureShape.new(name: 'KxEnvironment')
     KxEnvironmentId = Shapes::StringShape.new(name: 'KxEnvironmentId')
     KxEnvironmentList = Shapes::ListShape.new(name: 'KxEnvironmentList')
@@ -159,14 +163,21 @@ module Aws::Finspace
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NameString = Shapes::StringShape.new(name: 'NameString')
+    NetworkACLConfiguration = Shapes::ListShape.new(name: 'NetworkACLConfiguration')
+    NetworkACLEntry = Shapes::StructureShape.new(name: 'NetworkACLEntry')
     NodeCount = Shapes::IntegerShape.new(name: 'NodeCount')
     NodeType = Shapes::StringShape.new(name: 'NodeType')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
+    Port = Shapes::IntegerShape.new(name: 'Port')
+    PortRange = Shapes::StructureShape.new(name: 'PortRange')
+    Protocol = Shapes::StringShape.new(name: 'Protocol')
     ReleaseLabel = Shapes::StringShape.new(name: 'ReleaseLabel')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResultLimit = Shapes::IntegerShape.new(name: 'ResultLimit')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    RuleAction = Shapes::StringShape.new(name: 'RuleAction')
+    RuleNumber = Shapes::IntegerShape.new(name: 'RuleNumber')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
     S3ObjectVersion = Shapes::StringShape.new(name: 'S3ObjectVersion')
@@ -204,6 +215,7 @@ module Aws::Finspace
     UpdateKxEnvironmentResponse = Shapes::StructureShape.new(name: 'UpdateKxEnvironmentResponse')
     UpdateKxUserRequest = Shapes::StructureShape.new(name: 'UpdateKxUserRequest')
     UpdateKxUserResponse = Shapes::StructureShape.new(name: 'UpdateKxUserResponse')
+    ValidCIDRBlock = Shapes::StringShape.new(name: 'ValidCIDRBlock')
     ValidCIDRSpace = Shapes::StringShape.new(name: 'ValidCIDRSpace')
     ValidHostname = Shapes::StringShape.new(name: 'ValidHostname')
     ValidIPAddress = Shapes::StringShape.new(name: 'ValidIPAddress')
@@ -220,6 +232,7 @@ module Aws::Finspace
     url = Shapes::StringShape.new(name: 'url')
     urn = Shapes::StringShape.new(name: 'urn')
 
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
     AttributeMap.key = Shapes::ShapeRef.new(shape: FederationAttributeKey)
@@ -546,6 +559,10 @@ module Aws::Finspace
     GetKxUserResponse.add_member(:iam_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "iamRole"))
     GetKxUserResponse.struct_class = Types::GetKxUserResponse
 
+    IcmpTypeCode.add_member(:type, Shapes::ShapeRef.new(shape: IcmpTypeOrCode, required: true, location_name: "type"))
+    IcmpTypeCode.add_member(:code, Shapes::ShapeRef.new(shape: IcmpTypeOrCode, required: true, location_name: "code"))
+    IcmpTypeCode.struct_class = Types::IcmpTypeCode
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
@@ -608,6 +625,9 @@ module Aws::Finspace
     KxDatabaseListEntry.struct_class = Types::KxDatabaseListEntry
 
     KxDatabases.member = Shapes::ShapeRef.new(shape: KxDatabaseListEntry)
+
+    KxDeploymentConfiguration.add_member(:deployment_strategy, Shapes::ShapeRef.new(shape: KxDeploymentStrategy, required: true, location_name: "deploymentStrategy"))
+    KxDeploymentConfiguration.struct_class = Types::KxDeploymentConfiguration
 
     KxEnvironment.add_member(:name, Shapes::ShapeRef.new(shape: KxEnvironmentName, location_name: "name"))
     KxEnvironment.add_member(:environment_id, Shapes::ShapeRef.new(shape: IdType, location_name: "environmentId"))
@@ -723,6 +743,20 @@ module Aws::Finspace
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    NetworkACLConfiguration.member = Shapes::ShapeRef.new(shape: NetworkACLEntry)
+
+    NetworkACLEntry.add_member(:rule_number, Shapes::ShapeRef.new(shape: RuleNumber, required: true, location_name: "ruleNumber"))
+    NetworkACLEntry.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, required: true, location_name: "protocol"))
+    NetworkACLEntry.add_member(:rule_action, Shapes::ShapeRef.new(shape: RuleAction, required: true, location_name: "ruleAction"))
+    NetworkACLEntry.add_member(:port_range, Shapes::ShapeRef.new(shape: PortRange, location_name: "portRange"))
+    NetworkACLEntry.add_member(:icmp_type_code, Shapes::ShapeRef.new(shape: IcmpTypeCode, location_name: "icmpTypeCode"))
+    NetworkACLEntry.add_member(:cidr_block, Shapes::ShapeRef.new(shape: ValidCIDRBlock, required: true, location_name: "cidrBlock"))
+    NetworkACLEntry.struct_class = Types::NetworkACLEntry
+
+    PortRange.add_member(:from, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "from"))
+    PortRange.add_member(:to, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "to"))
+    PortRange.struct_class = Types::PortRange
+
     ResourceAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
 
@@ -752,10 +786,12 @@ module Aws::Finspace
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
     TransitGatewayConfiguration.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: TransitGatewayID, required: true, location_name: "transitGatewayID"))
     TransitGatewayConfiguration.add_member(:routable_cidr_space, Shapes::ShapeRef.new(shape: ValidCIDRSpace, required: true, location_name: "routableCIDRSpace"))
+    TransitGatewayConfiguration.add_member(:attachment_network_acl_configuration, Shapes::ShapeRef.new(shape: NetworkACLConfiguration, location_name: "attachmentNetworkAclConfiguration"))
     TransitGatewayConfiguration.struct_class = Types::TransitGatewayConfiguration
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: FinSpaceTaggableArn, required: true, location: "uri", location_name: "resourceArn"))
@@ -776,8 +812,9 @@ module Aws::Finspace
 
     UpdateKxClusterDatabasesRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
     UpdateKxClusterDatabasesRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: KxClusterName, required: true, location: "uri", location_name: "clusterName"))
-    UpdateKxClusterDatabasesRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "clientToken"))
+    UpdateKxClusterDatabasesRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateKxClusterDatabasesRequest.add_member(:databases, Shapes::ShapeRef.new(shape: KxDatabaseConfigurations, required: true, location_name: "databases"))
+    UpdateKxClusterDatabasesRequest.add_member(:deployment_configuration, Shapes::ShapeRef.new(shape: KxDeploymentConfiguration, location_name: "deploymentConfiguration"))
     UpdateKxClusterDatabasesRequest.struct_class = Types::UpdateKxClusterDatabasesRequest
 
     UpdateKxClusterDatabasesResponse.struct_class = Types::UpdateKxClusterDatabasesResponse
@@ -1302,6 +1339,7 @@ module Aws::Finspace
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 

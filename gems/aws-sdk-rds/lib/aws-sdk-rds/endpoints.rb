@@ -2000,6 +2000,20 @@ module Aws::RDS
       end
     end
 
+    class SwitchoverGlobalCluster
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::RDS::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class SwitchoverReadReplica
       def self.build(context)
         unless context.config.regional_endpoint

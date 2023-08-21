@@ -340,6 +340,8 @@ module Aws::RDS
             Aws::RDS::Endpoints::StopDBInstanceAutomatedBackupsReplication.build(context)
           when :switchover_blue_green_deployment
             Aws::RDS::Endpoints::SwitchoverBlueGreenDeployment.build(context)
+          when :switchover_global_cluster
+            Aws::RDS::Endpoints::SwitchoverGlobalCluster.build(context)
           when :switchover_read_replica
             Aws::RDS::Endpoints::SwitchoverReadReplica.build(context)
           end

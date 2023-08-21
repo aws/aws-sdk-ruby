@@ -15975,7 +15975,10 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @return [Types::DeleteKeyPairResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteKeyPairResult#return #return} => Boolean
+    #   * {Types::DeleteKeyPairResult#key_pair_id #key_pair_id} => String
     #
     #
     # @example Example: To delete a key pair
@@ -15993,6 +15996,11 @@ module Aws::EC2
     #     key_pair_id: "KeyPairId",
     #     dry_run: false,
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #   resp.key_pair_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteKeyPair AWS API Documentation
     #
@@ -56731,7 +56739,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.399.0'
+      context[:gem_version] = '1.400.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

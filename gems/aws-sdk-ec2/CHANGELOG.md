@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.400.0 (2023-08-21)
+------------------
+
+* Feature - The DeleteKeyPair API has been updated to return the keyPairId when an existing key pair is deleted.
+
 1.399.0 (2023-08-17)
 ------------------
 

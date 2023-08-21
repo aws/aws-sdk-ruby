@@ -1306,7 +1306,7 @@ module Aws::Route53Domains
     #   The sort type for returned values.
     #
     # @option params [String] :sort_order
-    #   The sort order ofr returned values, either ascending or descending.
+    #   The sort order for returned values, either ascending or descending.
     #
     # @return [Types::ListOperationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2633,7 +2633,7 @@ module Aws::Route53Domains
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53domains'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

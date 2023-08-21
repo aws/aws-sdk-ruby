@@ -13508,6 +13508,23 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] return
+    #   Is `true` if the request succeeds, and an error otherwise.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] key_pair_id
+    #   The ID of the key pair.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteKeyPairResult AWS API Documentation
+    #
+    class DeleteKeyPairResult < Struct.new(
+      :return,
+      :key_pair_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

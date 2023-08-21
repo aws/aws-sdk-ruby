@@ -387,6 +387,7 @@ module Aws::RDS
     GlobalClusterList = Shapes::ListShape.new(name: 'GlobalClusterList')
     GlobalClusterMember = Shapes::StructureShape.new(name: 'GlobalClusterMember')
     GlobalClusterMemberList = Shapes::ListShape.new(name: 'GlobalClusterMemberList')
+    GlobalClusterMemberSynchronizationStatus = Shapes::StringShape.new(name: 'GlobalClusterMemberSynchronizationStatus')
     GlobalClusterNotFoundFault = Shapes::StructureShape.new(name: 'GlobalClusterNotFoundFault')
     GlobalClusterQuotaExceededFault = Shapes::StructureShape.new(name: 'GlobalClusterQuotaExceededFault')
     GlobalClustersMessage = Shapes::StructureShape.new(name: 'GlobalClustersMessage')
@@ -627,6 +628,8 @@ module Aws::RDS
     SwitchoverDetail = Shapes::StructureShape.new(name: 'SwitchoverDetail')
     SwitchoverDetailList = Shapes::ListShape.new(name: 'SwitchoverDetailList')
     SwitchoverDetailStatus = Shapes::StringShape.new(name: 'SwitchoverDetailStatus')
+    SwitchoverGlobalClusterMessage = Shapes::StructureShape.new(name: 'SwitchoverGlobalClusterMessage')
+    SwitchoverGlobalClusterResult = Shapes::StructureShape.new(name: 'SwitchoverGlobalClusterResult')
     SwitchoverReadReplicaMessage = Shapes::StructureShape.new(name: 'SwitchoverReadReplicaMessage')
     SwitchoverReadReplicaResult = Shapes::StructureShape.new(name: 'SwitchoverReadReplicaResult')
     SwitchoverTimeout = Shapes::IntegerShape.new(name: 'SwitchoverTimeout')
@@ -2454,6 +2457,8 @@ module Aws::RDS
 
     FailoverGlobalClusterMessage.add_member(:global_cluster_identifier, Shapes::ShapeRef.new(shape: GlobalClusterIdentifier, required: true, location_name: "GlobalClusterIdentifier"))
     FailoverGlobalClusterMessage.add_member(:target_db_cluster_identifier, Shapes::ShapeRef.new(shape: DBClusterIdentifier, required: true, location_name: "TargetDbClusterIdentifier"))
+    FailoverGlobalClusterMessage.add_member(:allow_data_loss, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AllowDataLoss"))
+    FailoverGlobalClusterMessage.add_member(:switchover, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "Switchover"))
     FailoverGlobalClusterMessage.struct_class = Types::FailoverGlobalClusterMessage
 
     FailoverGlobalClusterResult.add_member(:global_cluster, Shapes::ShapeRef.new(shape: GlobalCluster, location_name: "GlobalCluster"))
@@ -2462,6 +2467,7 @@ module Aws::RDS
     FailoverState.add_member(:status, Shapes::ShapeRef.new(shape: FailoverStatus, location_name: "Status"))
     FailoverState.add_member(:from_db_cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "FromDbClusterArn"))
     FailoverState.add_member(:to_db_cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "ToDbClusterArn"))
+    FailoverState.add_member(:is_data_loss_allowed, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsDataLossAllowed"))
     FailoverState.struct_class = Types::FailoverState
 
     FeatureNameList.member = Shapes::ShapeRef.new(shape: String)
@@ -2495,6 +2501,7 @@ module Aws::RDS
     GlobalClusterMember.add_member(:readers, Shapes::ShapeRef.new(shape: ReadersArnList, location_name: "Readers"))
     GlobalClusterMember.add_member(:is_writer, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsWriter"))
     GlobalClusterMember.add_member(:global_write_forwarding_status, Shapes::ShapeRef.new(shape: WriteForwardingStatus, location_name: "GlobalWriteForwardingStatus"))
+    GlobalClusterMember.add_member(:synchronization_status, Shapes::ShapeRef.new(shape: GlobalClusterMemberSynchronizationStatus, location_name: "SynchronizationStatus"))
     GlobalClusterMember.struct_class = Types::GlobalClusterMember
 
     GlobalClusterMemberList.member = Shapes::ShapeRef.new(shape: GlobalClusterMember, location_name: "GlobalClusterMember")
@@ -3680,6 +3687,13 @@ module Aws::RDS
     SwitchoverDetail.struct_class = Types::SwitchoverDetail
 
     SwitchoverDetailList.member = Shapes::ShapeRef.new(shape: SwitchoverDetail)
+
+    SwitchoverGlobalClusterMessage.add_member(:global_cluster_identifier, Shapes::ShapeRef.new(shape: GlobalClusterIdentifier, required: true, location_name: "GlobalClusterIdentifier"))
+    SwitchoverGlobalClusterMessage.add_member(:target_db_cluster_identifier, Shapes::ShapeRef.new(shape: DBClusterIdentifier, required: true, location_name: "TargetDbClusterIdentifier"))
+    SwitchoverGlobalClusterMessage.struct_class = Types::SwitchoverGlobalClusterMessage
+
+    SwitchoverGlobalClusterResult.add_member(:global_cluster, Shapes::ShapeRef.new(shape: GlobalCluster, location_name: "GlobalCluster"))
+    SwitchoverGlobalClusterResult.struct_class = Types::SwitchoverGlobalClusterResult
 
     SwitchoverReadReplicaMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
     SwitchoverReadReplicaMessage.struct_class = Types::SwitchoverReadReplicaMessage
@@ -5699,6 +5713,18 @@ module Aws::RDS
         o.output = Shapes::ShapeRef.new(shape: SwitchoverBlueGreenDeploymentResponse)
         o.errors << Shapes::ShapeRef.new(shape: BlueGreenDeploymentNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidBlueGreenDeploymentStateFault)
+      end)
+
+      api.add_operation(:switchover_global_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SwitchoverGlobalCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SwitchoverGlobalClusterMessage)
+        o.output = Shapes::ShapeRef.new(shape: SwitchoverGlobalClusterResult)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
       end)
 
       api.add_operation(:switchover_read_replica, Seahorse::Model::Operation.new.tap do |o|

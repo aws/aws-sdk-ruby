@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2023-08-21)
+------------------
+
+* Feature - Doc only update to add Ubuntu 22.04 as an Image ID option for Cloud9
+
 1.55.0 (2023-08-03)
 ------------------
 

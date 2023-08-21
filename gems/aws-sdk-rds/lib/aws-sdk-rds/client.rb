@@ -3006,6 +3006,12 @@ module Aws::RDS
     #
     #   * Multi-AZ DB clusters - `io1`
     #
+    #   <note markdown="1"> When you create an Aurora DB cluster with the storage type set to
+    #   `aurora-iopt1`, the storage type is returned in the response. The
+    #   storage type isn't returned when you set it to `aurora`.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.StorageReliability.html#aurora-storage-type
@@ -7517,9 +7523,11 @@ module Aws::RDS
     #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
     #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
     #   resp.global_cluster.global_cluster_members[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
+    #   resp.global_cluster.global_cluster_members[0].synchronization_status #=> String, one of "connected", "pending-resync"
     #   resp.global_cluster.failover_state.status #=> String, one of "pending", "failing-over", "cancelling"
     #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
+    #   resp.global_cluster.failover_state.is_data_loss_allowed #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateGlobalCluster AWS API Documentation
     #
@@ -9451,9 +9459,11 @@ module Aws::RDS
     #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
     #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
     #   resp.global_cluster.global_cluster_members[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
+    #   resp.global_cluster.global_cluster_members[0].synchronization_status #=> String, one of "connected", "pending-resync"
     #   resp.global_cluster.failover_state.status #=> String, one of "pending", "failing-over", "cancelling"
     #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
+    #   resp.global_cluster.failover_state.is_data_loss_allowed #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteGlobalCluster AWS API Documentation
     #
@@ -14381,9 +14391,11 @@ module Aws::RDS
     #   resp.global_clusters[0].global_cluster_members[0].readers[0] #=> String
     #   resp.global_clusters[0].global_cluster_members[0].is_writer #=> Boolean
     #   resp.global_clusters[0].global_cluster_members[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
+    #   resp.global_clusters[0].global_cluster_members[0].synchronization_status #=> String, one of "connected", "pending-resync"
     #   resp.global_clusters[0].failover_state.status #=> String, one of "pending", "failing-over", "cancelling"
     #   resp.global_clusters[0].failover_state.from_db_cluster_arn #=> String
     #   resp.global_clusters[0].failover_state.to_db_cluster_arn #=> String
+    #   resp.global_clusters[0].failover_state.is_data_loss_allowed #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeGlobalClusters AWS API Documentation
     #
@@ -15953,51 +15965,99 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Initiates the failover process for an Aurora global database
-    # (GlobalCluster).
+    # Promotes the specified secondary DB cluster to be the primary DB
+    # cluster in the global database cluster to fail over or switch over a
+    # global database. Switchover operations were previously called
+    # "managed planned failovers."
     #
-    # A failover for an Aurora global database promotes one of secondary
-    # read-only DB clusters to be the primary DB cluster and demotes the
-    # primary DB cluster to being a secondary (read-only) DB cluster. In
-    # other words, the role of the current primary DB cluster and the
-    # selected (target) DB cluster are switched. The selected secondary DB
-    # cluster assumes full read/write capabilities for the Aurora global
-    # database.
-    #
-    # For more information about failing over an Amazon Aurora global
-    # database, see [Managed planned failover for Amazon Aurora global
-    # databases][1] in the *Amazon Aurora User Guide*.
-    #
-    # <note markdown="1"> This action applies to GlobalCluster (Aurora global databases) only.
-    # Use this action only on healthy Aurora global databases with running
-    # Aurora DB clusters and no Region-wide outages, to test disaster
-    # recovery scenarios or to reconfigure your Aurora global database
-    # topology.
+    # <note markdown="1"> Although this operation can be used either to fail over or to switch
+    # over a global database cluster, its intended use is for global
+    # database failover. To switch over a global database cluster, we
+    # recommend that you use the SwitchoverGlobalCluster operation instead.
     #
     #  </note>
     #
+    # How you use this operation depends on whether you are failing over or
+    # switching over your global database cluster:
+    #
+    # * Failing over - Specify the `AllowDataLoss` parameter and don't
+    #   specify the `Switchover` parameter.
+    #
+    # * Switching over - Specify the `Switchover` parameter or omit it, but
+    #   don't specify the `AllowDataLoss` parameter.
+    #
+    # **About failing over and switching over**
+    #
+    # While failing over and switching over a global database cluster both
+    # change the primary DB cluster, you use these operations for different
+    # reasons:
+    #
+    # * *Failing over* - Use this operation to respond to an unplanned
+    #   event, such as a Regional disaster in the primary Region. Failing
+    #   over can result in a loss of write transaction data that wasn't
+    #   replicated to the chosen secondary before the failover event
+    #   occurred. However, the recovery process that promotes a DB instance
+    #   on the chosen seconday DB cluster to be the primary writer DB
+    #   instance guarantees that the data is in a transactionally consistent
+    #   state.
+    #
+    #   For more information about failing over an Amazon Aurora global
+    #   database, see [Performing managed failovers for Aurora global
+    #   databases][1] in the *Amazon Aurora User Guide*.
+    #
+    # * *Switching over* - Use this operation on a healthy global database
+    #   cluster for planned events, such as Regional rotation or to fail
+    #   back to the original primary DB cluster after a failover operation.
+    #   With this operation, there is no data loss.
+    #
+    #   For more information about switching over an Amazon Aurora global
+    #   database, see [Performing switchovers for Aurora global
+    #   databases][2] in the *Amazon Aurora User Guide*.
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html#aurora-global-database-disaster-recovery.managed-failover
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html#aurora-global-database-failover.managed-unplanned
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html#aurora-global-database-disaster-recovery.managed-failover
     #
     # @option params [required, String] :global_cluster_identifier
-    #   Identifier of the Aurora global database (GlobalCluster) that should
-    #   be failed over. The identifier is the unique key assigned by the user
-    #   when the Aurora global database was created. In other words, it's the
-    #   name of the Aurora global database that you want to fail over.
+    #   The identifier of the global database cluster (Aurora global database)
+    #   this operation should apply to. The identifier is the unique key
+    #   assigned by the user when the Aurora global database is created. In
+    #   other words, it's the name of the Aurora global database.
     #
     #   Constraints:
     #
-    #   * Must match the identifier of an existing GlobalCluster (Aurora
-    #     global database).
+    #   * Must match the identifier of an existing global database cluster.
     #
     #   ^
     #
     # @option params [required, String] :target_db_cluster_identifier
-    #   Identifier of the secondary Aurora DB cluster that you want to promote
-    #   to primary for the Aurora global database (GlobalCluster.) Use the
-    #   Amazon Resource Name (ARN) for the identifier so that Aurora can
-    #   locate the cluster in its Amazon Web Services Region.
+    #   The identifier of the secondary Aurora DB cluster that you want to
+    #   promote to the primary for the global database cluster. Use the Amazon
+    #   Resource Name (ARN) for the identifier so that Aurora can locate the
+    #   cluster in its Amazon Web Services Region.
+    #
+    # @option params [Boolean] :allow_data_loss
+    #   Specifies whether to allow data loss for this global database cluster
+    #   operation. Allowing data loss triggers a global failover operation.
+    #
+    #   If you don't specify `AllowDataLoss`, the global database cluster
+    #   operation defaults to a switchover.
+    #
+    #   Constraints:
+    #
+    #   * Can't be specified together with the `Switchover` parameter.
+    #
+    #   ^
+    #
+    # @option params [Boolean] :switchover
+    #   Specifies whether to switch over this global database cluster.
+    #
+    #   Constraints:
+    #
+    #   * Can't be specified together with the `AllowDataLoss` parameter.
+    #
+    #   ^
     #
     # @return [Types::FailoverGlobalClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -16008,6 +16068,8 @@ module Aws::RDS
     #   resp = client.failover_global_cluster({
     #     global_cluster_identifier: "GlobalClusterIdentifier", # required
     #     target_db_cluster_identifier: "DBClusterIdentifier", # required
+    #     allow_data_loss: false,
+    #     switchover: false,
     #   })
     #
     # @example Response structure
@@ -16027,9 +16089,11 @@ module Aws::RDS
     #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
     #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
     #   resp.global_cluster.global_cluster_members[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
+    #   resp.global_cluster.global_cluster_members[0].synchronization_status #=> String, one of "connected", "pending-resync"
     #   resp.global_cluster.failover_state.status #=> String, one of "pending", "failing-over", "cancelling"
     #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
+    #   resp.global_cluster.failover_state.is_data_loss_allowed #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverGlobalCluster AWS API Documentation
     #
@@ -20054,11 +20118,11 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Modifies a setting for an Amazon Aurora global cluster. You can change
-    # one or more database configuration parameters by specifying these
-    # parameters and the new values in the request. For more information on
-    # Amazon Aurora, see [ What is Amazon Aurora?][1] in the *Amazon Aurora
-    # User Guide*.
+    # Modifies a setting for an Amazon Aurora global database cluster. You
+    # can change one or more database configuration parameters by specifying
+    # these parameters and the new values in the request. For more
+    # information on Amazon Aurora, see [ What is Amazon Aurora?][1] in the
+    # *Amazon Aurora User Guide*.
     #
     # <note markdown="1"> This operation only applies to Aurora global database clusters.
     #
@@ -20183,9 +20247,11 @@ module Aws::RDS
     #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
     #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
     #   resp.global_cluster.global_cluster_members[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
+    #   resp.global_cluster.global_cluster_members[0].synchronization_status #=> String, one of "connected", "pending-resync"
     #   resp.global_cluster.failover_state.status #=> String, one of "pending", "failing-over", "cancelling"
     #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
+    #   resp.global_cluster.failover_state.is_data_loss_allowed #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyGlobalCluster AWS API Documentation
     #
@@ -21393,9 +21459,11 @@ module Aws::RDS
     #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
     #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
     #   resp.global_cluster.global_cluster_members[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
+    #   resp.global_cluster.global_cluster_members[0].synchronization_status #=> String, one of "connected", "pending-resync"
     #   resp.global_cluster.failover_state.status #=> String, one of "pending", "failing-over", "cancelling"
     #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
     #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
+    #   resp.global_cluster.failover_state.is_data_loss_allowed #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveFromGlobalCluster AWS API Documentation
     #
@@ -27896,6 +27964,92 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Switches over the specified secondary DB cluster to be the new primary
+    # DB cluster in the global database cluster. Switchover operations were
+    # previously called "managed planned failovers."
+    #
+    # Aurora promotes the specified secondary cluster to assume full
+    # read/write capabilities and demotes the current primary cluster to a
+    # secondary (read-only) cluster, maintaining the orginal replication
+    # topology. All secondary clusters are synchronized with the primary at
+    # the beginning of the process so the new primary continues operations
+    # for the Aurora global database without losing any data. Your database
+    # is unavailable for a short time while the primary and selected
+    # secondary clusters are assuming their new roles. For more information
+    # about switching over an Aurora global database, see [Performing
+    # switchovers for Amazon Aurora global databases][1] in the *Amazon
+    # Aurora User Guide*.
+    #
+    # <note markdown="1"> This operation is intended for controlled environments, for operations
+    # such as "regional rotation" or to fall back to the original primary
+    # after a global database failover.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html#aurora-global-database-disaster-recovery.managed-failover
+    #
+    # @option params [required, String] :global_cluster_identifier
+    #   The identifier of the global database cluster to switch over. This
+    #   parameter isn't case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identifier of an existing global database cluster
+    #     (Aurora global database).
+    #
+    #   ^
+    #
+    # @option params [required, String] :target_db_cluster_identifier
+    #   The identifier of the secondary Aurora DB cluster to promote to the
+    #   new primary for the global database cluster. Use the Amazon Resource
+    #   Name (ARN) for the identifier so that Aurora can locate the cluster in
+    #   its Amazon Web Services Region.
+    #
+    # @return [Types::SwitchoverGlobalClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SwitchoverGlobalClusterResult#global_cluster #global_cluster} => Types::GlobalCluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.switchover_global_cluster({
+    #     global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #     target_db_cluster_identifier: "DBClusterIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_cluster.global_cluster_identifier #=> String
+    #   resp.global_cluster.global_cluster_resource_id #=> String
+    #   resp.global_cluster.global_cluster_arn #=> String
+    #   resp.global_cluster.status #=> String
+    #   resp.global_cluster.engine #=> String
+    #   resp.global_cluster.engine_version #=> String
+    #   resp.global_cluster.database_name #=> String
+    #   resp.global_cluster.storage_encrypted #=> Boolean
+    #   resp.global_cluster.deletion_protection #=> Boolean
+    #   resp.global_cluster.global_cluster_members #=> Array
+    #   resp.global_cluster.global_cluster_members[0].db_cluster_arn #=> String
+    #   resp.global_cluster.global_cluster_members[0].readers #=> Array
+    #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
+    #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
+    #   resp.global_cluster.global_cluster_members[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
+    #   resp.global_cluster.global_cluster_members[0].synchronization_status #=> String, one of "connected", "pending-resync"
+    #   resp.global_cluster.failover_state.status #=> String, one of "pending", "failing-over", "cancelling"
+    #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
+    #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
+    #   resp.global_cluster.failover_state.is_data_loss_allowed #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverGlobalCluster AWS API Documentation
+    #
+    # @overload switchover_global_cluster(params = {})
+    # @param [Hash] params ({})
+    def switchover_global_cluster(params = {}, options = {})
+      req = build_request(:switchover_global_cluster, params)
+      req.send_request(options)
+    end
+
     # Switches over an Oracle standby database in an Oracle Data Guard
     # environment, making it the new primary database. Issue this command in
     # the Region that hosts the current standby database.
@@ -28101,7 +28255,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.189.0'
+      context[:gem_version] = '1.190.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
