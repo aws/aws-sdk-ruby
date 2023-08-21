@@ -222,7 +222,9 @@ module Aws
         end
       end
 
-      Part = Struct.new(:part_number, :size, :params, keyword_init: true)
+      class Part < Struct.new(:part_number, :size, :params)
+        include Aws::Structure
+      end
 
       # @api private
       class PartList
