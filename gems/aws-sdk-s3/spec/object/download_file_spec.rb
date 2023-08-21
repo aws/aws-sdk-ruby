@@ -121,6 +121,30 @@ module Aws
           small_obj.download_file(path)
         end
 
+        it 'reports progress for single part objects' do
+          small_file_size = 1024
+          expect(client).to receive(:get_object).with({
+            bucket: 'bucket',
+            key: 'small',
+            checksum_mode: 'ENABLED',
+            response_target: path,
+            on_chunk_received: instance_of(Proc)
+          }) do |args|
+            args[:on_chunk_received].call(small_file, small_file_size, small_file_size)
+          end
+
+          n_calls = 0
+          callback = proc do |bytes, part_sizes, total|
+            expect(bytes).to eq([small_file_size])
+            expect(part_sizes).to eq([small_file_size])
+            expect(total).to eq(small_file_size)
+            n_calls += 1
+          end
+
+          small_obj.download_file(path, progress_callback: callback)
+          expect(n_calls).to eq(1)
+        end
+
         it 'download larger files in parts' do
           expect(client).to receive(:head_object).with({
             bucket: 'bucket',
@@ -134,6 +158,28 @@ module Aws
           })
 
           large_obj.download_file(path)
+        end
+
+        it 'reports progress for files downloaded in parts' do
+          expect(client).to receive(:get_object).exactly(4).times do |args|
+            args[:on_chunk_received].call(large_file, 4, 4)
+            client.stub_data(
+              :get_object,
+              body: StringIO.new('chunk'), content_range: 'bytes 0-4/4'
+            )
+          end
+
+          n_calls = 0
+          callback = proc do |bytes, part_sizes, total|
+            expect(bytes.size).to eq(4)
+            expect(part_sizes.size).to eq(4)
+            expect(total).to eq(20*one_meg)
+            n_calls += 1
+          end
+
+          large_obj.download_file(path, progress_callback: callback)
+
+          expect(n_calls).to eq(4)
         end
 
         it 'download larger files in ranges' do
@@ -175,7 +221,7 @@ module Aws
           thread = double(value: nil)
           client.stub_responses(:get_object, {body: 'body', checksum_sha1: 'invalid'})
           expect(Thread).to receive(:new).and_yield.and_return(thread)
-          allow(thread).to receive(:abort_on_exception=)
+          allow(thread).to receive(:abort_on_exception)
 
           expect do
             large_obj.download_file(path)

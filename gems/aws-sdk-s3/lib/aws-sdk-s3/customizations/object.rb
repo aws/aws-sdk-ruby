@@ -353,6 +353,10 @@ module Aws
       #     obj.upload_stream do |write_stream|
       #       IO.copy_stream(STDIN, write_stream)
       #     end
+      # @param [Hash] options
+      #   Additional options for {Client#create_multipart_upload},
+      #   {Client#complete_multipart_upload},
+      #   and {Client#upload_part} can be provided.
       #
       # @option options [Integer] :thread_count (10) The number of parallel
       #   multipart uploads
@@ -375,6 +379,9 @@ module Aws
       # @return [Boolean] Returns `true` when the object is uploaded
       #   without any errors.
       #
+      # @see Client#create_multipart_upload
+      # @see Client#complete_multipart_upload
+      # @see Client#upload_part
       def upload_stream(options = {}, &block)
         uploading_options = options.dup
         uploader = MultipartStreamUploader.new(
@@ -427,6 +434,13 @@ module Aws
       #   using an open Tempfile, rewind it before uploading or else the object
       #   will be empty.
       #
+      # @param [Hash] options
+      #   Additional options for {Client#put_object}
+      #   when file sizes below the multipart threshold. For files larger than
+      #   the multipart threshold, options for {Client#create_multipart_upload},
+      #   {Client#complete_multipart_upload},
+      #   and {Client#upload_part} can be provided.
+      #
       # @option options [Integer] :multipart_threshold (104857600) Files larger
       #   than or equal to `:multipart_threshold` are uploaded using the S3
       #   multipart APIs.
@@ -448,6 +462,11 @@ module Aws
       #
       # @return [Boolean] Returns `true` when the object is uploaded
       #   without any errors.
+      #
+      # @see Client#put_object
+      # @see Client#create_multipart_upload
+      # @see Client#complete_multipart_upload
+      # @see Client#upload_part
       def upload_file(source, options = {})
         uploading_options = options.dup
         uploader = FileUploader.new(
@@ -486,6 +505,10 @@ module Aws
       #
       # @param [String] destination Where to download the file to.
       #
+      # @param [Hash] options
+      #   Additional options for {Client#get_object} and #{Client#head_object}
+      #   may be provided.
+      #
       # @option options [String] mode `auto`, `single_request`, `get_range`
       #  `single_request` mode forces only 1 GET request is made in download,
       #  `get_range` mode allows `chunk_size` parameter to configured in
@@ -523,6 +546,9 @@ module Aws
       #
       # @return [Boolean] Returns `true` when the file is downloaded without
       #   any errors.
+      #
+      # @see Client#get_object
+      # @see Client#head_object
       def download_file(destination, options = {})
         downloader = FileDownloader.new(client: client)
         Aws::Plugins::UserAgent.feature('resource') do
