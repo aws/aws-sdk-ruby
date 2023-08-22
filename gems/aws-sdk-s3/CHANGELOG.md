@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add support for `progress_callback` in `Object#download_file` and improve multi-threaded performance #(2901).
+
 1.132.1 (2023-08-09)
 ------------------
 
