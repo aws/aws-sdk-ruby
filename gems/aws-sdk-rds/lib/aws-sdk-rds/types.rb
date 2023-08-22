@@ -1888,6 +1888,14 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] source_custom_db_engine_version_identifier
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_aws_provided_latest_image
+    #   Reserved for future use.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateCustomDBEngineVersionMessage AWS API Documentation
     #
     class CreateCustomDBEngineVersionMessage < Struct.new(
@@ -1899,7 +1907,9 @@ module Aws::RDS
       :kms_key_id,
       :description,
       :manifest,
-      :tags)
+      :tags,
+      :source_custom_db_engine_version_identifier,
+      :use_aws_provided_latest_image)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -49,7 +49,7 @@ module Aws::VerifiedPermissions
     class ActionIdentifier < Struct.new(
       :action_type,
       :action_id)
-      SENSITIVE = []
+      SENSITIVE = [:action_type, :action_id]
       include Aws::Structure
     end
 
@@ -141,7 +141,7 @@ module Aws::VerifiedPermissions
       :set,
       :record,
       :unknown)
-      SENSITIVE = []
+      SENSITIVE = [:boolean, :long, :string]
       include Aws::Structure
       include Aws::Structure::Union
 
@@ -356,7 +356,7 @@ module Aws::VerifiedPermissions
       :policy_store_id,
       :configuration,
       :principal_entity_type)
-      SENSITIVE = []
+      SENSITIVE = [:principal_entity_type]
       include Aws::Structure
     end
 
@@ -597,7 +597,7 @@ module Aws::VerifiedPermissions
       :policy_store_id,
       :description,
       :statement)
-      SENSITIVE = []
+      SENSITIVE = [:description, :statement]
       include Aws::Structure
     end
 
@@ -804,7 +804,7 @@ module Aws::VerifiedPermissions
     class EntityIdentifier < Struct.new(
       :entity_type,
       :entity_id)
-      SENSITIVE = []
+      SENSITIVE = [:entity_type, :entity_id]
       include Aws::Structure
     end
 
@@ -958,7 +958,7 @@ module Aws::VerifiedPermissions
       :last_updated_date,
       :policy_store_id,
       :principal_entity_type)
-      SENSITIVE = []
+      SENSITIVE = [:principal_entity_type]
       include Aws::Structure
     end
 
@@ -1131,7 +1131,7 @@ module Aws::VerifiedPermissions
       :statement,
       :created_date,
       :last_updated_date)
-      SENSITIVE = []
+      SENSITIVE = [:description, :statement]
       include Aws::Structure
     end
 
@@ -1170,7 +1170,7 @@ module Aws::VerifiedPermissions
       :schema,
       :created_date,
       :last_updated_date)
-      SENSITIVE = []
+      SENSITIVE = [:schema]
       include Aws::Structure
     end
 
@@ -1245,7 +1245,7 @@ module Aws::VerifiedPermissions
     #
     class IdentitySourceFilter < Struct.new(
       :principal_entity_type)
-      SENSITIVE = []
+      SENSITIVE = [:principal_entity_type]
       include Aws::Structure
     end
 
@@ -1294,7 +1294,7 @@ module Aws::VerifiedPermissions
       :last_updated_date,
       :policy_store_id,
       :principal_entity_type)
-      SENSITIVE = []
+      SENSITIVE = [:principal_entity_type]
       include Aws::Structure
     end
 
@@ -1449,14 +1449,14 @@ module Aws::VerifiedPermissions
     #   Specifies an identity token for the principal to be authorized. This
     #   token is provided to you by the identity provider (IdP) associated
     #   with the specified identity source. You must specify either an
-    #   `AccessToken` or an `IdentityToken`, but not both.
+    #   `AccessToken` or an `IdentityToken`, or both.
     #   @return [String]
     #
     # @!attribute [rw] access_token
     #   Specifies an access token for the principal to be authorized. This
     #   token is provided to you by the identity provider (IdP) associated
     #   with the specified identity source. You must specify either an
-    #   `AccessToken` or an `IdentityToken`, but not both.
+    #   `AccessToken`, or an `IdentityToken`, or both.
     #   @return [String]
     #
     # @!attribute [rw] action
@@ -1477,13 +1477,18 @@ module Aws::VerifiedPermissions
     #   @return [Types::ContextDefinition]
     #
     # @!attribute [rw] entities
-    #   Specifies the list of resources and principals and their associated
-    #   attributes that Verified Permissions can examine when evaluating the
-    #   policies.
+    #   Specifies the list of resources and their associated attributes that
+    #   Verified Permissions can examine when evaluating the policies.
     #
-    #   <note markdown="1"> You can include only principal and resource entities in this
-    #   parameter; you can't include actions. You must specify actions in
-    #   the schema.
+    #   <note markdown="1"> You can include only resource and action entities in this parameter;
+    #   you can't include principals.
+    #
+    #    * The `IsAuthorizedWithToken` operation takes principal attributes
+    #     from <b> <i>only</i> </b> the `identityToken` or `accessToken`
+    #     passed to the operation.
+    #
+    #   * For action entities, you can include only their `Identifier` and
+    #     `EntityType`.
     #
     #    </note>
     #   @return [Types::EntitiesDefinition]
@@ -1498,7 +1503,7 @@ module Aws::VerifiedPermissions
       :resource,
       :context,
       :entities)
-      SENSITIVE = []
+      SENSITIVE = [:identity_token, :access_token]
       include Aws::Structure
     end
 
@@ -1547,16 +1552,19 @@ module Aws::VerifiedPermissions
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Specifies the total number of results that you want included on each
-    #   page of the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the number you specify, the `NextToken` response
-    #   element is returned with a value (not null). Include the specified
-    #   value as the `NextToken` request parameter in the next call to the
-    #   operation to get the next part of the results. Note that the service
-    #   might return fewer results than the maximum even when there are more
-    #   results available. You should check `NextToken` after every
-    #   operation to ensure that you receive all of the results.
+    #   Specifies the total number of results that you want included in each
+    #   response. If additional items exist beyond the number you specify,
+    #   the `NextToken` response element is returned with a value (not
+    #   null). Include the specified value as the `NextToken` request
+    #   parameter in the next call to the operation to get the next set of
+    #   results. Note that the service might return fewer results than the
+    #   maximum even when there are more results available. You should check
+    #   `NextToken` after every operation to ensure that you receive all of
+    #   the results.
+    #
+    #   If you do not specify this parameter, the operation defaults to 10
+    #   identity sources per response. You can specify a maximum of 200
+    #   identity sources per response.
     #   @return [Integer]
     #
     # @!attribute [rw] filters
@@ -1610,16 +1618,19 @@ module Aws::VerifiedPermissions
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Specifies the total number of results that you want included on each
-    #   page of the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the number you specify, the `NextToken` response
-    #   element is returned with a value (not null). Include the specified
-    #   value as the `NextToken` request parameter in the next call to the
-    #   operation to get the next part of the results. Note that the service
-    #   might return fewer results than the maximum even when there are more
-    #   results available. You should check `NextToken` after every
-    #   operation to ensure that you receive all of the results.
+    #   Specifies the total number of results that you want included in each
+    #   response. If additional items exist beyond the number you specify,
+    #   the `NextToken` response element is returned with a value (not
+    #   null). Include the specified value as the `NextToken` request
+    #   parameter in the next call to the operation to get the next set of
+    #   results. Note that the service might return fewer results than the
+    #   maximum even when there are more results available. You should check
+    #   `NextToken` after every operation to ensure that you receive all of
+    #   the results.
+    #
+    #   If you do not specify this parameter, the operation defaults to 10
+    #   policies per response. You can specify a maximum of 50 policies per
+    #   response.
     #   @return [Integer]
     #
     # @!attribute [rw] filter
@@ -1670,16 +1681,19 @@ module Aws::VerifiedPermissions
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Specifies the total number of results that you want included on each
-    #   page of the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the number you specify, the `NextToken` response
-    #   element is returned with a value (not null). Include the specified
-    #   value as the `NextToken` request parameter in the next call to the
-    #   operation to get the next part of the results. Note that the service
-    #   might return fewer results than the maximum even when there are more
-    #   results available. You should check `NextToken` after every
-    #   operation to ensure that you receive all of the results.
+    #   Specifies the total number of results that you want included in each
+    #   response. If additional items exist beyond the number you specify,
+    #   the `NextToken` response element is returned with a value (not
+    #   null). Include the specified value as the `NextToken` request
+    #   parameter in the next call to the operation to get the next set of
+    #   results. Note that the service might return fewer results than the
+    #   maximum even when there are more results available. You should check
+    #   `NextToken` after every operation to ensure that you receive all of
+    #   the results.
+    #
+    #   If you do not specify this parameter, the operation defaults to 10
+    #   policy stores per response. You can specify a maximum of 50 policy
+    #   stores per response.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/ListPolicyStoresInput AWS API Documentation
@@ -1727,16 +1741,19 @@ module Aws::VerifiedPermissions
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Specifies the total number of results that you want included on each
-    #   page of the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the number you specify, the `NextToken` response
-    #   element is returned with a value (not null). Include the specified
-    #   value as the `NextToken` request parameter in the next call to the
-    #   operation to get the next part of the results. Note that the service
-    #   might return fewer results than the maximum even when there are more
-    #   results available. You should check `NextToken` after every
-    #   operation to ensure that you receive all of the results.
+    #   Specifies the total number of results that you want included in each
+    #   response. If additional items exist beyond the number you specify,
+    #   the `NextToken` response element is returned with a value (not
+    #   null). Include the specified value as the `NextToken` request
+    #   parameter in the next call to the operation to get the next set of
+    #   results. Note that the service might return fewer results than the
+    #   maximum even when there are more results available. You should check
+    #   `NextToken` after every operation to ensure that you receive all of
+    #   the results.
+    #
+    #   If you do not specify this parameter, the operation defaults to 10
+    #   policy templates per response. You can specify a maximum of 50
+    #   policy templates per response.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/ListPolicyTemplatesInput AWS API Documentation
@@ -2064,7 +2081,7 @@ module Aws::VerifiedPermissions
       :description,
       :created_date,
       :last_updated_date)
-      SENSITIVE = []
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -2179,7 +2196,7 @@ module Aws::VerifiedPermissions
     class SchemaDefinition < Struct.new(
       :cedar_json,
       :unknown)
-      SENSITIVE = []
+      SENSITIVE = [:cedar_json]
       include Aws::Structure
       include Aws::Structure::Union
 
@@ -2245,7 +2262,7 @@ module Aws::VerifiedPermissions
     class StaticPolicyDefinition < Struct.new(
       :description,
       :statement)
-      SENSITIVE = []
+      SENSITIVE = [:description, :statement]
       include Aws::Structure
     end
 
@@ -2274,7 +2291,7 @@ module Aws::VerifiedPermissions
     class StaticPolicyDefinitionDetail < Struct.new(
       :description,
       :statement)
-      SENSITIVE = []
+      SENSITIVE = [:description, :statement]
       include Aws::Structure
     end
 
@@ -2297,7 +2314,7 @@ module Aws::VerifiedPermissions
     #
     class StaticPolicyDefinitionItem < Struct.new(
       :description)
-      SENSITIVE = []
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -2516,7 +2533,7 @@ module Aws::VerifiedPermissions
       :identity_source_id,
       :update_configuration,
       :principal_entity_type)
-      SENSITIVE = []
+      SENSITIVE = [:principal_entity_type]
       include Aws::Structure
     end
 
@@ -2760,7 +2777,7 @@ module Aws::VerifiedPermissions
       :policy_template_id,
       :description,
       :statement)
-      SENSITIVE = []
+      SENSITIVE = [:description, :statement]
       include Aws::Structure
     end
 
@@ -2827,7 +2844,7 @@ module Aws::VerifiedPermissions
     class UpdateStaticPolicyDefinition < Struct.new(
       :description,
       :statement)
-      SENSITIVE = []
+      SENSITIVE = [:description, :statement]
       include Aws::Structure
     end
 

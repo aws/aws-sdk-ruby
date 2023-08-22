@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.191.0 (2023-08-22)
+------------------
+
+* Feature - Adding parameters to CreateCustomDbEngineVersion reserved for future use.
+
 1.190.0 (2023-08-21)
 ------------------
 

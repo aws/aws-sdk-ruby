@@ -2298,6 +2298,12 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
+    # @option params [String] :source_custom_db_engine_version_identifier
+    #   Reserved for future use.
+    #
+    # @option params [Boolean] :use_aws_provided_latest_image
+    #   Reserved for future use.
+    #
     # @return [Types::DBEngineVersion] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DBEngineVersion#engine #engine} => String
@@ -2350,6 +2356,8 @@ module Aws::RDS
     #         value: "String",
     #       },
     #     ],
+    #     source_custom_db_engine_version_identifier: "String255",
+    #     use_aws_provided_latest_image: false,
     #   })
     #
     # @example Response structure
@@ -28255,7 +28263,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.190.0'
+      context[:gem_version] = '1.191.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

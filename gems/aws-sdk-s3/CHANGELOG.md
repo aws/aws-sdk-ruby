@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.133.0 (2023-08-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 * Feature - Add support for `progress_callback` in `Object#download_file` and improve multi-threaded performance #(2901).
 
 1.132.1 (2023-08-09)

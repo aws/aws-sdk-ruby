@@ -1226,16 +1226,35 @@ module Aws::VerifiedPermissions
 
     # Makes an authorization decision about a service request described in
     # the parameters. The principal in this request comes from an external
-    # identity source. The information in the parameters can also define
+    # identity source in the form of an identity token formatted as a [JSON
+    # web token (JWT)][1]. The information in the parameters can also define
     # additional context that Verified Permissions can include in the
     # evaluation. The request is evaluated against all matching policies in
     # the specified policy store. The result of the decision is either
     # `Allow` or `Deny`, along with a list of the policies that resulted in
     # the decision.
     #
+    # If you specify the `identityToken` parameter, then this operation
+    # derives the principal from that token. You must not also include that
+    # principal in the `entities` parameter or the operation fails and
+    # reports a conflict between the two entity sources.
+    #
+    #  If you provide only an `accessToken`, then you can include the entity
+    # as part of the `entities` parameter to provide additional attributes.
+    #
+    # At this time, Verified Permissions accepts tokens from only Amazon
+    # Cognito.
+    #
+    # Verified Permissions validates each token that is specified in a
+    # request by checking its expiration date and its signature.
+    #
     # If you delete a Amazon Cognito user pool or user, tokens from that
     # deleted pool or that deleted user continue to be usable until they
     # expire.
+    #
+    #
+    #
+    # [1]: https://wikipedia.org/wiki/JSON_Web_Token
     #
     # @option params [required, String] :policy_store_id
     #   Specifies the ID of the policy store. Policies in this policy store
@@ -1245,13 +1264,13 @@ module Aws::VerifiedPermissions
     #   Specifies an identity token for the principal to be authorized. This
     #   token is provided to you by the identity provider (IdP) associated
     #   with the specified identity source. You must specify either an
-    #   `AccessToken` or an `IdentityToken`, but not both.
+    #   `AccessToken` or an `IdentityToken`, or both.
     #
     # @option params [String] :access_token
     #   Specifies an access token for the principal to be authorized. This
     #   token is provided to you by the identity provider (IdP) associated
     #   with the specified identity source. You must specify either an
-    #   `AccessToken` or an `IdentityToken`, but not both.
+    #   `AccessToken`, or an `IdentityToken`, or both.
     #
     # @option params [Types::ActionIdentifier] :action
     #   Specifies the requested action to be authorized. Is the specified
@@ -1267,13 +1286,18 @@ module Aws::VerifiedPermissions
     #   authorization decisions.
     #
     # @option params [Types::EntitiesDefinition] :entities
-    #   Specifies the list of resources and principals and their associated
-    #   attributes that Verified Permissions can examine when evaluating the
-    #   policies.
+    #   Specifies the list of resources and their associated attributes that
+    #   Verified Permissions can examine when evaluating the policies.
     #
-    #   <note markdown="1"> You can include only principal and resource entities in this
-    #   parameter; you can't include actions. You must specify actions in the
-    #   schema.
+    #   <note markdown="1"> You can include only resource and action entities in this parameter;
+    #   you can't include principals.
+    #
+    #    * The `IsAuthorizedWithToken` operation takes principal attributes
+    #     from <b> <i>only</i> </b> the `identityToken` or `accessToken`
+    #     passed to the operation.
+    #
+    #   * For action entities, you can include only their `Identifier` and
+    #     `EntityType`.
     #
     #    </note>
     #
@@ -1355,16 +1379,18 @@ module Aws::VerifiedPermissions
     #   response to request the next page of results.
     #
     # @option params [Integer] :max_results
-    #   Specifies the total number of results that you want included on each
-    #   page of the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the number you specify, the `NextToken` response
-    #   element is returned with a value (not null). Include the specified
-    #   value as the `NextToken` request parameter in the next call to the
-    #   operation to get the next part of the results. Note that the service
-    #   might return fewer results than the maximum even when there are more
-    #   results available. You should check `NextToken` after every operation
-    #   to ensure that you receive all of the results.
+    #   Specifies the total number of results that you want included in each
+    #   response. If additional items exist beyond the number you specify, the
+    #   `NextToken` response element is returned with a value (not null).
+    #   Include the specified value as the `NextToken` request parameter in
+    #   the next call to the operation to get the next set of results. Note
+    #   that the service might return fewer results than the maximum even when
+    #   there are more results available. You should check `NextToken` after
+    #   every operation to ensure that you receive all of the results.
+    #
+    #   If you do not specify this parameter, the operation defaults to 10
+    #   identity sources per response. You can specify a maximum of 200
+    #   identity sources per response.
     #
     # @option params [Array<Types::IdentitySourceFilter>] :filters
     #   Specifies characteristics of an identity source that you can use to
@@ -1428,16 +1454,18 @@ module Aws::VerifiedPermissions
     #   response to request the next page of results.
     #
     # @option params [Integer] :max_results
-    #   Specifies the total number of results that you want included on each
-    #   page of the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the number you specify, the `NextToken` response
-    #   element is returned with a value (not null). Include the specified
-    #   value as the `NextToken` request parameter in the next call to the
-    #   operation to get the next part of the results. Note that the service
-    #   might return fewer results than the maximum even when there are more
-    #   results available. You should check `NextToken` after every operation
-    #   to ensure that you receive all of the results.
+    #   Specifies the total number of results that you want included in each
+    #   response. If additional items exist beyond the number you specify, the
+    #   `NextToken` response element is returned with a value (not null).
+    #   Include the specified value as the `NextToken` request parameter in
+    #   the next call to the operation to get the next set of results. Note
+    #   that the service might return fewer results than the maximum even when
+    #   there are more results available. You should check `NextToken` after
+    #   every operation to ensure that you receive all of the results.
+    #
+    #   If you do not specify this parameter, the operation defaults to 10
+    #   policies per response. You can specify a maximum of 50 policies per
+    #   response.
     #
     # @option params [Types::PolicyFilter] :filter
     #   Specifies a filter that limits the response to only policies that
@@ -1517,16 +1545,18 @@ module Aws::VerifiedPermissions
     #   response to request the next page of results.
     #
     # @option params [Integer] :max_results
-    #   Specifies the total number of results that you want included on each
-    #   page of the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the number you specify, the `NextToken` response
-    #   element is returned with a value (not null). Include the specified
-    #   value as the `NextToken` request parameter in the next call to the
-    #   operation to get the next part of the results. Note that the service
-    #   might return fewer results than the maximum even when there are more
-    #   results available. You should check `NextToken` after every operation
-    #   to ensure that you receive all of the results.
+    #   Specifies the total number of results that you want included in each
+    #   response. If additional items exist beyond the number you specify, the
+    #   `NextToken` response element is returned with a value (not null).
+    #   Include the specified value as the `NextToken` request parameter in
+    #   the next call to the operation to get the next set of results. Note
+    #   that the service might return fewer results than the maximum even when
+    #   there are more results available. You should check `NextToken` after
+    #   every operation to ensure that you receive all of the results.
+    #
+    #   If you do not specify this parameter, the operation defaults to 10
+    #   policy stores per response. You can specify a maximum of 50 policy
+    #   stores per response.
     #
     # @return [Types::ListPolicyStoresOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1574,16 +1604,18 @@ module Aws::VerifiedPermissions
     #   response to request the next page of results.
     #
     # @option params [Integer] :max_results
-    #   Specifies the total number of results that you want included on each
-    #   page of the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the number you specify, the `NextToken` response
-    #   element is returned with a value (not null). Include the specified
-    #   value as the `NextToken` request parameter in the next call to the
-    #   operation to get the next part of the results. Note that the service
-    #   might return fewer results than the maximum even when there are more
-    #   results available. You should check `NextToken` after every operation
-    #   to ensure that you receive all of the results.
+    #   Specifies the total number of results that you want included in each
+    #   response. If additional items exist beyond the number you specify, the
+    #   `NextToken` response element is returned with a value (not null).
+    #   Include the specified value as the `NextToken` request parameter in
+    #   the next call to the operation to get the next set of results. Note
+    #   that the service might return fewer results than the maximum even when
+    #   there are more results available. You should check `NextToken` after
+    #   every operation to ensure that you receive all of the results.
+    #
+    #   If you do not specify this parameter, the operation defaults to 10
+    #   policy templates per response. You can specify a maximum of 50 policy
+    #   templates per response.
     #
     # @return [Types::ListPolicyTemplatesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1736,11 +1768,32 @@ module Aws::VerifiedPermissions
     # template-linked policy, you must update the template instead, using
     # [UpdatePolicyTemplate][2].
     #
-    # <note markdown="1"> If policy validation is enabled in the policy store, then updating a
-    # static policy causes Verified Permissions to validate the policy
-    # against the schema in the policy store. If the updated static policy
-    # doesn't pass validation, the operation fails and the update isn't
-    # stored.
+    # <note markdown="1"> * If policy validation is enabled in the policy store, then updating a
+    #   static policy causes Verified Permissions to validate the policy
+    #   against the schema in the policy store. If the updated static policy
+    #   doesn't pass validation, the operation fails and the update isn't
+    #   stored.
+    #
+    # * When you edit a static policy, You can change only certain elements
+    #   of a static policy:
+    #
+    #   * The action referenced by the policy.
+    #
+    #   * A condition clause, such as when and unless.
+    #
+    #   You can't change these elements of a static policy:
+    #
+    #   * Changing a policy from a static policy to a template-linked
+    #     policy.
+    #
+    #   * Changing the effect of a static policy from permit or forbid.
+    #
+    #   * The principal referenced by a static policy.
+    #
+    #   * The resource referenced by a static policy.
+    #
+    # * To update a template-linked policy, you must update the template
+    #   instead.
     #
     #  </note>
     #
@@ -1951,7 +2004,7 @@ module Aws::VerifiedPermissions
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-verifiedpermissions'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

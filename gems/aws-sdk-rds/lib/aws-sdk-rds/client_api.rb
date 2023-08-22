@@ -904,6 +904,8 @@ module Aws::RDS
     CreateCustomDBEngineVersionMessage.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateCustomDBEngineVersionMessage.add_member(:manifest, Shapes::ShapeRef.new(shape: CustomDBEngineVersionManifest, location_name: "Manifest"))
     CreateCustomDBEngineVersionMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateCustomDBEngineVersionMessage.add_member(:source_custom_db_engine_version_identifier, Shapes::ShapeRef.new(shape: String255, location_name: "SourceCustomDbEngineVersionIdentifier"))
+    CreateCustomDBEngineVersionMessage.add_member(:use_aws_provided_latest_image, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "UseAwsProvidedLatestImage"))
     CreateCustomDBEngineVersionMessage.struct_class = Types::CreateCustomDBEngineVersionMessage
 
     CreateDBClusterEndpointMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
