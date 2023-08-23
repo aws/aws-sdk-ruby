@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.401.0 (2023-08-23)
+------------------
+
+* Feature - Marking fields as sensitive on BundleTask and GetPasswordData
+
 1.400.0 (2023-08-21)
 ------------------
 

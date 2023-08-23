@@ -2194,6 +2194,7 @@ module Aws::EC2
     PacketHeaderStatement = Shapes::StructureShape.new(name: 'PacketHeaderStatement')
     PacketHeaderStatementRequest = Shapes::StructureShape.new(name: 'PacketHeaderStatementRequest')
     PartitionLoadFrequency = Shapes::StringShape.new(name: 'PartitionLoadFrequency')
+    PasswordData = Shapes::StringShape.new(name: 'PasswordData')
     PathComponent = Shapes::StructureShape.new(name: 'PathComponent')
     PathComponentList = Shapes::ListShape.new(name: 'PathComponentList')
     PathFilter = Shapes::StructureShape.new(name: 'PathFilter')
@@ -2509,6 +2510,8 @@ module Aws::EC2
     S3ObjectTag = Shapes::StructureShape.new(name: 'S3ObjectTag')
     S3ObjectTagList = Shapes::ListShape.new(name: 'S3ObjectTagList')
     S3Storage = Shapes::StructureShape.new(name: 'S3Storage')
+    S3StorageUploadPolicy = Shapes::StringShape.new(name: 'S3StorageUploadPolicy')
+    S3StorageUploadPolicySignature = Shapes::StringShape.new(name: 'S3StorageUploadPolicySignature')
     SSEType = Shapes::StringShape.new(name: 'SSEType')
     ScheduledInstance = Shapes::StructureShape.new(name: 'ScheduledInstance')
     ScheduledInstanceAvailability = Shapes::StructureShape.new(name: 'ScheduledInstanceAvailability')
@@ -8851,7 +8854,7 @@ module Aws::EC2
     GetPasswordDataRequest.struct_class = Types::GetPasswordDataRequest
 
     GetPasswordDataResult.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
-    GetPasswordDataResult.add_member(:password_data, Shapes::ShapeRef.new(shape: String, location_name: "passwordData"))
+    GetPasswordDataResult.add_member(:password_data, Shapes::ShapeRef.new(shape: PasswordData, location_name: "passwordData"))
     GetPasswordDataResult.add_member(:timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "timestamp"))
     GetPasswordDataResult.struct_class = Types::GetPasswordDataResult
 
@@ -13063,7 +13066,7 @@ module Aws::EC2
     S3Storage.add_member(:bucket, Shapes::ShapeRef.new(shape: String, location_name: "bucket"))
     S3Storage.add_member(:prefix, Shapes::ShapeRef.new(shape: String, location_name: "prefix"))
     S3Storage.add_member(:upload_policy, Shapes::ShapeRef.new(shape: Blob, location_name: "uploadPolicy"))
-    S3Storage.add_member(:upload_policy_signature, Shapes::ShapeRef.new(shape: String, location_name: "uploadPolicySignature"))
+    S3Storage.add_member(:upload_policy_signature, Shapes::ShapeRef.new(shape: S3StorageUploadPolicySignature, location_name: "uploadPolicySignature"))
     S3Storage.struct_class = Types::S3Storage
 
     ScheduledInstance.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))

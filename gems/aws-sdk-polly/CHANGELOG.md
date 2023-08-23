@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2023-08-23)
+------------------
+
+* Feature - Amazon Polly adds 1 new voice - Zayd (ar-AE)
+
 1.74.0 (2023-08-01)
 ------------------
 

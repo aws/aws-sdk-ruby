@@ -33806,7 +33806,7 @@ module Aws::EC2
       :instance_id,
       :password_data,
       :timestamp)
-      SENSITIVE = []
+      SENSITIVE = [:password_data]
       include Aws::Structure
     end
 
@@ -56172,7 +56172,7 @@ module Aws::EC2
       :prefix,
       :upload_policy,
       :upload_policy_signature)
-      SENSITIVE = []
+      SENSITIVE = [:upload_policy_signature]
       include Aws::Structure
     end
 

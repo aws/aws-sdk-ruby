@@ -3671,7 +3671,7 @@ module Aws::EC2
     #         bucket: "String",
     #         prefix: "String",
     #         upload_policy: "data",
-    #         upload_policy_signature: "String",
+    #         upload_policy_signature: "S3StorageUploadPolicySignature",
     #       },
     #     },
     #     dry_run: false,
@@ -56739,7 +56739,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.400.0'
+      context[:gem_version] = '1.401.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

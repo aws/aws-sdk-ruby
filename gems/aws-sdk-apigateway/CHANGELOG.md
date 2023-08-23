@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2023-08-23)
+------------------
+
+* Feature - This release adds RootResourceId to GetRestApi response.
+
 1.86.0 (2023-07-11)
 ------------------
 
