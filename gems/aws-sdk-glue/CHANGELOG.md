@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.155.0 (2023-08-24)
+------------------
+
+* Feature - Added API attributes that help in the monitoring of sessions.
+
 1.154.0 (2023-08-15)
 ------------------
 

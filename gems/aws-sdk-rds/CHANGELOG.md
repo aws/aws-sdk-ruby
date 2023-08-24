@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.192.0 (2023-08-24)
+------------------
+
+* Feature - This release updates the supported versions for Percona XtraBackup in Aurora MySQL.
+
 1.191.0 (2023-08-22)
 ------------------
 

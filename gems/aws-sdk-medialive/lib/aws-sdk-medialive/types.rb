@@ -117,6 +117,11 @@ module Aws::MediaLive
     #   metadata settings will be used.
     #   @return [String]
     #
+    # @!attribute [rw] attenuation_control
+    #   Applies a 3 dB attenuation to the surround channels. Applies only
+    #   when the coding mode parameter is CODING\_MODE\_3\_2\_LFE.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Ac3Settings AWS API Documentation
     #
     class Ac3Settings < Struct.new(
@@ -126,7 +131,8 @@ module Aws::MediaLive
       :dialnorm,
       :drc_profile,
       :lfe_filter,
-      :metadata_control)
+      :metadata_control,
+      :attenuation_control)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8179,6 +8185,19 @@ module Aws::MediaLive
     #   transport stream. Can be entered as a decimal or hexadecimal value.
     #   @return [String]
     #
+    # @!attribute [rw] klv_behavior
+    #   If set to passthrough, passes any KLV data from the input source to
+    #   this output.
+    #   @return [String]
+    #
+    # @!attribute [rw] klv_data_pids
+    #   Packet Identifier (PID) for input source KLV data to this output.
+    #   Multiple values are accepted, and can be entered in ranges and/or by
+    #   comma separation. Can be entered as decimal or hexadecimal values.
+    #   Each PID specified must be in the range of 32 (or 0x20)..8182 (or
+    #   0x1ff6).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/M3u8Settings AWS API Documentation
     #
     class M3u8Settings < Struct.new(
@@ -8198,7 +8217,9 @@ module Aws::MediaLive
       :timed_metadata_behavior,
       :timed_metadata_pid,
       :transport_stream_id,
-      :video_pid)
+      :video_pid,
+      :klv_behavior,
+      :klv_data_pids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10213,6 +10234,15 @@ module Aws::MediaLive
     #   restart is initiated. A value of 0 means never restart.
     #   @return [Integer]
     #
+    # @!attribute [rw] include_filler_nal_units
+    #   Applies only when the rate control mode (in the codec settings) is
+    #   CBR (constant bit rate). Controls whether the RTMP output stream is
+    #   padded (with FILL NAL units) in order to achieve a constant bit rate
+    #   that is truly constant. When there is no padding, the bandwidth
+    #   varies (up to the bitrate value in the codec settings). We recommend
+    #   that you choose Auto.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RtmpGroupSettings AWS API Documentation
     #
     class RtmpGroupSettings < Struct.new(
@@ -10222,7 +10252,8 @@ module Aws::MediaLive
       :cache_length,
       :caption_data,
       :input_loss_action,
-      :restart_delay)
+      :restart_delay,
+      :include_filler_nal_units)
       SENSITIVE = []
       include Aws::Structure
     end

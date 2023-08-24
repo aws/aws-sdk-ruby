@@ -682,7 +682,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:bucket=>"blah", :operation=>"CreateBucket", :outpost_id=>"123", :region=>"us-east-2", :requires_account_id=>false, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:bucket=>"blah", :outpost_id=>"123", :region=>"us-east-2", :requires_account_id=>false, :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -712,7 +712,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:bucket=>"blah", :operation=>"CreateBucket", :outpost_id=>"123", :region=>"us-east-2", :requires_account_id=>false, :use_dual_stack=>false, :use_fips=>true})
+        params = EndpointParameters.new(**{:bucket=>"blah", :outpost_id=>"123", :region=>"us-east-2", :requires_account_id=>false, :use_dual_stack=>false, :use_fips=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -743,7 +743,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:bucket=>"blah", :operation=>"CreateBucket", :region=>"us-east-2", :requires_account_id=>false, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:bucket=>"blah", :region=>"us-east-2", :requires_account_id=>false, :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -772,7 +772,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:account_id=>"123", :operation=>"ListRegionalBuckets", :outpost_id=>"op-123", :region=>"us-east-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:account_id=>"123456789012", :outpost_id=>"op-123", :region=>"us-east-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -786,7 +786,7 @@ module Aws::S3Control
         )
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true})
         resp = client.list_regional_buckets(
-          account_id: '123',
+          account_id: '123456789012',
           outpost_id: 'op-123',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
@@ -798,11 +798,11 @@ module Aws::S3Control
 
     context 'ListRegionalBuckets without OutpostId = regular endpoint@us-east-2' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://123.s3-control.us-east-2.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://123456789012.s3-control.us-east-2.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:account_id=>"123", :operation=>"ListRegionalBuckets", :region=>"us-east-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:account_id=>"123456789012", :region=>"us-east-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -816,7 +816,7 @@ module Aws::S3Control
         )
         expect_auth({"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true})
         resp = client.list_regional_buckets(
-          account_id: '123',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -831,7 +831,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:account_id=>"123", :operation=>"CreateBucket", :outpost_id=>"op-123", :region=>"us-east-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>true})
+        params = EndpointParameters.new(**{:account_id=>"123456789012", :outpost_id=>"op-123", :region=>"us-east-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -846,7 +846,7 @@ module Aws::S3Control
         )
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true})
         resp = client.list_regional_buckets(
-          account_id: '123',
+          account_id: '123456789012',
           outpost_id: 'op-123',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
@@ -983,11 +983,11 @@ module Aws::S3Control
 
     context 'Account ID set inline and in ARN and they do not match@us-west-2' do
       let(:expected) do
-        {"error"=>"Invalid ARN: the accountId specified in the ARN (`123456789012`) does not match the parameter (`9999999`)"}
+        {"error"=>"Invalid ARN: the accountId specified in the ARN (`123456789012`) does not match the parameter (`999999999999`)"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:access_point_name=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :account_id=>"9999999", :region=>"us-west-2", :requires_account_id=>true, :use_arn_region=>false, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:access_point_name=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :account_id=>"999999999999", :region=>"us-west-2", :requires_account_id=>true, :use_arn_region=>false, :use_dual_stack=>false, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -1001,7 +1001,7 @@ module Aws::S3Control
         )
         expect do
           client.get_access_point(
-            account_id: '9999999',
+            account_id: '999999999999',
             name: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint',
           )
         end.to raise_error(ArgumentError, expected['error'])
@@ -1014,7 +1014,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:access_point_name=>"apname", :account_id=>"123456789012", :endpoint=>"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :operation=>"GetAccessPoint", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:access_point_name=>"apname", :account_id=>"123456789012", :endpoint=>"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -1045,7 +1045,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:access_point_name=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :account_id=>"123456789012", :endpoint=>"https://beta.example.com", :operation=>"GetAccessPoint", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:access_point_name=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :account_id=>"123456789012", :endpoint=>"https://beta.example.com", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -1078,7 +1078,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:access_point_name=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket", :endpoint=>"beta.example.com", :operation=>"GetAccessPoint", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:access_point_name=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket", :endpoint=>"beta.example.com", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -1091,7 +1091,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :endpoint=>"beta.example.com", :operation=>"GetBucket", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :endpoint=>"beta.example.com", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -1104,7 +1104,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:bucket=>"bucketname", :endpoint=>"https://beta.example.com", :operation=>"CreateBucket", :outpost_id=>"op-123", :region=>"us-west-2", :requires_account_id=>false, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:bucket=>"bucketname", :endpoint=>"https://beta.example.com", :outpost_id=>"op-123", :region=>"us-west-2", :requires_account_id=>false, :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -1118,7 +1118,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket", :endpoint=>"https://beta.example.com", :operation=>"GetBucket", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket", :endpoint=>"https://beta.example.com", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -1134,6 +1134,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true})
         resp = client.get_bucket(
           bucket: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -1150,7 +1151,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:account_id=>"123", :endpoint=>"https://beta.example.com", :operation=>"CreateBucket", :outpost_id=>"op-123", :region=>"us-east-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:account_id=>"123456789012", :endpoint=>"https://beta.example.com", :outpost_id=>"op-123", :region=>"us-east-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -1165,7 +1166,7 @@ module Aws::S3Control
         )
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true})
         resp = client.list_regional_buckets(
-          account_id: '123',
+          account_id: '123456789012',
           outpost_id: 'op-123',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
@@ -1181,7 +1182,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:account_id=>"123", :endpoint=>"https://beta.example.com", :operation=>"CreateBucket", :outpost_id=>"op-123", :region=>"us-east-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>true})
+        params = EndpointParameters.new(**{:account_id=>"123456789012", :endpoint=>"https://beta.example.com", :outpost_id=>"op-123", :region=>"us-east-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -1197,7 +1198,7 @@ module Aws::S3Control
         )
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true})
         resp = client.list_regional_buckets(
-          account_id: '123',
+          account_id: '123456789012',
           outpost_id: 'op-123',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
@@ -1213,7 +1214,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:bucket=>"blah", :endpoint=>"https://beta.example.com", :operation=>"CreateBucket", :outpost_id=>"123", :region=>"us-east-2", :requires_account_id=>false, :use_dual_stack=>false, :use_fips=>true})
+        params = EndpointParameters.new(**{:bucket=>"blah", :endpoint=>"https://beta.example.com", :outpost_id=>"123", :region=>"us-east-2", :requires_account_id=>false, :use_dual_stack=>false, :use_fips=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -1245,7 +1246,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:access_point_name=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :endpoint=>"https://beta.example.com", :operation=>"GetAccessPoint", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>true, :use_fips=>false})
+        params = EndpointParameters.new(**{:access_point_name=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :endpoint=>"https://beta.example.com", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>true, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -1258,7 +1259,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:bucket=>"bucketname", :endpoint=>"https://beta.example.com", :operation=>"CreateBucket", :outpost_id=>"op-123", :region=>"us-west-2", :requires_account_id=>false, :use_dual_stack=>true, :use_fips=>false})
+        params = EndpointParameters.new(**{:bucket=>"bucketname", :endpoint=>"https://beta.example.com", :outpost_id=>"op-123", :region=>"us-west-2", :requires_account_id=>false, :use_dual_stack=>true, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -1287,6 +1288,7 @@ module Aws::S3Control
         resp = client.create_access_point(
           bucket: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket',
           name: 'apname',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -1318,6 +1320,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true})
         resp = client.get_bucket(
           bucket: 'arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -1349,6 +1352,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-gov-east-1", "disableDoubleEncoding"=>true})
         resp = client.get_bucket(
           bucket: 'arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -1381,6 +1385,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-gov-west-1", "disableDoubleEncoding"=>true})
         resp = client.get_bucket(
           bucket: 'arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:bucket:mybucket',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -1413,6 +1418,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true})
         resp = client.get_bucket(
           bucket: 'arn:aws:s3-outposts:us-east-2:123456789012:outpost:op-01234567890123456:bucket:mybucket',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -1458,6 +1464,7 @@ module Aws::S3Control
         resp = client.create_access_point(
           bucket: 'arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:bucket:mybucket',
           name: 'apname',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -1489,6 +1496,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true})
         resp = client.get_bucket(
           bucket: 'arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -1520,6 +1528,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-gov-east-1", "disableDoubleEncoding"=>true})
         resp = client.get_bucket(
           bucket: 'arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -1552,6 +1561,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-gov-west-1", "disableDoubleEncoding"=>true})
         resp = client.get_bucket(
           bucket: 'arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:bucket:mybucket',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -1584,6 +1594,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true})
         resp = client.get_bucket(
           bucket: 'arn:aws:s3-outposts:us-east-2:123456789012:outpost:op-01234567890123456:bucket:mybucket',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -1629,6 +1640,7 @@ module Aws::S3Control
         resp = client.create_access_point(
           bucket: 'arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:bucket:mybucket',
           name: 'apname',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -1660,6 +1672,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true})
         resp = client.get_bucket(
           bucket: 'arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -1691,6 +1704,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-gov-east-1", "disableDoubleEncoding"=>true})
         resp = client.get_bucket(
           bucket: 'arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -1723,6 +1737,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-gov-west-1", "disableDoubleEncoding"=>true})
         resp = client.get_bucket(
           bucket: 'arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:bucket:mybucket',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -1755,6 +1770,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true})
         resp = client.get_bucket(
           bucket: 'arn:aws:s3-outposts:us-east-2:123456789012:outpost:op-01234567890123456:bucket:mybucket',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -1874,11 +1890,11 @@ module Aws::S3Control
 
     context 'custom account id prefix with fips@us-east-1' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://1234567890-aBC.s3-control-fips.us-east-1.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://123456789012.s3-control-fips.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:account_id=>"1234567890-aBC", :region=>"us-east-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>true})
+        params = EndpointParameters.new(**{:account_id=>"123456789012", :region=>"us-east-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -1971,11 +1987,11 @@ module Aws::S3Control
 
     context 'custom account id prefix @us-east-1' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://1234567890-aBC.s3-control.us-east-1.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://123456789012.s3-control.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:account_id=>"1234567890-aBC", :region=>"us-east-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:account_id=>"123456789012", :region=>"us-east-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -1989,7 +2005,7 @@ module Aws::S3Control
         )
         expect_auth({"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true})
         resp = client.list_regional_buckets(
-          account_id: '1234567890-aBC',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -2025,11 +2041,11 @@ module Aws::S3Control
 
     context 'custom account id prefix with fips@us-east-1' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://1234567890-aBC.s3-control-fips.us-east-1.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://123456789012.s3-control-fips.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:account_id=>"1234567890-aBC", :region=>"us-east-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>true})
+        params = EndpointParameters.new(**{:account_id=>"123456789012", :region=>"us-east-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -2044,7 +2060,7 @@ module Aws::S3Control
         )
         expect_auth({"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true})
         resp = client.list_regional_buckets(
-          account_id: '1234567890-aBC',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -2055,11 +2071,11 @@ module Aws::S3Control
 
     context 'custom account id prefix with dualstack,fips@us-east-1' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://1234567890-aBC.s3-control-fips.dualstack.us-east-1.amazonaws.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://123456789012.s3-control-fips.dualstack.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:account_id=>"1234567890-aBC", :region=>"us-east-1", :requires_account_id=>true, :use_dual_stack=>true, :use_fips=>true})
+        params = EndpointParameters.new(**{:account_id=>"123456789012", :region=>"us-east-1", :requires_account_id=>true, :use_dual_stack=>true, :use_fips=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -2075,7 +2091,7 @@ module Aws::S3Control
         )
         expect_auth({"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true})
         resp = client.list_regional_buckets(
-          account_id: '1234567890-aBC',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -2086,11 +2102,11 @@ module Aws::S3Control
 
     context 'custom account id with custom endpoint' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://1234567890-aBC.example.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://123456789012.example.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:account_id=>"1234567890-aBC", :region=>"us-east-1", :requires_account_id=>true, :endpoint=>"https://example.com"})
+        params = EndpointParameters.new(**{:account_id=>"123456789012", :region=>"us-east-1", :requires_account_id=>true, :endpoint=>"https://example.com"})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -2105,7 +2121,7 @@ module Aws::S3Control
         )
         expect_auth({"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true})
         resp = client.list_regional_buckets(
-          account_id: '1234567890-aBC',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -2166,13 +2182,13 @@ module Aws::S3Control
       end
     end
 
-    context 'account id with custom endpoint, fips and dualstack' do
+    context 'account id with custom endpoint, fips' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://1234567890-aBC.example.com"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://123456789012.example.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:account_id=>"1234567890-aBC", :region=>"us-east-1", :requires_account_id=>true, :endpoint=>"https://example.com", :use_fips=>true, :use_dualstack=>true})
+        params = EndpointParameters.new(**{:account_id=>"123456789012", :region=>"us-east-1", :requires_account_id=>true, :endpoint=>"https://example.com", :use_fips=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -2188,7 +2204,7 @@ module Aws::S3Control
         )
         expect_auth({"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true})
         resp = client.list_regional_buckets(
-          account_id: '1234567890-aBC',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -2197,13 +2213,13 @@ module Aws::S3Control
       end
     end
 
-    context 'custom endpoint, fips and dualstack' do
+    context 'custom endpoint, fips' do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://example.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-east-1", :endpoint=>"https://example.com", :use_fips=>true, :use_dualstack=>true})
+        params = EndpointParameters.new(**{:region=>"us-east-1", :endpoint=>"https://example.com", :use_fips=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -2217,7 +2233,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-east-1", :endpoint=>"https://example.com", :use_fips=>true, :use_dualstack=>false})
+        params = EndpointParameters.new(**{:region=>"us-east-1", :endpoint=>"https://example.com", :use_fips=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -2225,17 +2241,16 @@ module Aws::S3Control
       end
     end
 
-    context 'custom endpoint, dualstack' do
+    context 'custom endpoint, DualStack' do
       let(:expected) do
-        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://example.com"}}
+        {"error"=>"Invalid Configuration: DualStack and custom endpoint are not supported"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-east-1", :endpoint=>"https://example.com", :use_fips=>false, :use_dualstack=>true})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+        params = EndpointParameters.new(**{:region=>"us-east-1", :endpoint=>"https://example.com", :use_fips=>false, :use_dual_stack=>true})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
@@ -2271,7 +2286,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:operation=>"ListRegionalBuckets", :outpost_id=>"op-123", :region=>"us-east-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:outpost_id=>"op-123", :region=>"us-east-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -2284,7 +2299,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:account_id=>"/?invalid&not-host*label", :operation=>"ListRegionalBuckets", :outpost_id=>"op-123", :region=>"us-east-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:account_id=>"/?invalid&not-host*label", :outpost_id=>"op-123", :region=>"us-east-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -2349,7 +2364,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:access_point_name=>"apname", :endpoint=>"https://beta.example.com", :account_id=>"123456789012", :operation=>"GetAccessPoint", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:access_point_name=>"apname", :endpoint=>"https://beta.example.com", :account_id=>"123456789012", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -2380,7 +2395,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:access_point_name=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :endpoint=>"https://beta.example.com", :operation=>"GetAccessPoint", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:access_point_name=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :endpoint=>"https://beta.example.com", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -2388,13 +2403,13 @@ module Aws::S3Control
       end
     end
 
-    context 'Dualstack + Custom endpoint is not supported(non-arn)' do
+    context 'DualStack + Custom endpoint is not supported(non-arn)' do
       let(:expected) do
-        {"error"=>"Invalid Configuration: Dualstack and custom endpoint are not supported"}
+        {"error"=>"Invalid Configuration: DualStack and custom endpoint are not supported"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:access_point_name=>"apname", :endpoint=>"https://beta.example.com", :account_id=>"123456789012", :operation=>"GetAccessPoint", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>true, :use_fips=>false})
+        params = EndpointParameters.new(**{:access_point_name=>"apname", :endpoint=>"https://beta.example.com", :account_id=>"123456789012", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>true, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -2422,7 +2437,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket", :endpoint=>"https://beta.example.com", :operation=>"GetBucket", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>true, :use_fips=>false})
+        params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket", :endpoint=>"https://beta.example.com", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>true, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -2438,6 +2453,7 @@ module Aws::S3Control
         expect do
           client.get_bucket(
             bucket: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket',
+            account_id: '123456789012',
           )
         end.to raise_error(ArgumentError, expected['error'])
       end
@@ -2449,7 +2465,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:account_id=>"0123456789012", :operation=>"ListRegionalBuckets", :outpost_id=>"op-123", :region=>"cn-north-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>true})
+        params = EndpointParameters.new(**{:account_id=>"0123456789012", :outpost_id=>"op-123", :region=>"cn-north-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>true})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -2476,7 +2492,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:account_id=>"0123456789012", :operation=>"ListRegionalBuckets", :outpost_id=>"?outpost/invalid+", :region=>"us-west-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:account_id=>"0123456789012", :outpost_id=>"?outpost/invalid+", :region=>"us-west-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -2515,7 +2531,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:operation=>"ListRegionalBuckets", :outpost_id=>"op-123", :region=>"invalid-region 42", :account_id=>"0123456", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:outpost_id=>"op-123", :region=>"invalid-region 42", :account_id=>"0123456", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -2528,7 +2544,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:operation=>"ListRegionalBuckets", :outpost_id=>"op-123", :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:outpost_id=>"op-123", :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -2583,7 +2599,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket", :endpoint=>"https://beta.example.com", :operation=>"GetBucket", :region=>"us-west-2", :requires_account_id=>true, :use_arn_region=>false, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket", :endpoint=>"https://beta.example.com", :region=>"us-west-2", :requires_account_id=>true, :use_arn_region=>false, :use_dual_stack=>false, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -2599,6 +2615,7 @@ module Aws::S3Control
         expect do
           client.get_bucket(
             bucket: 'arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket',
+            account_id: '123456789012',
           )
         end.to raise_error(ArgumentError, expected['error'])
       end
@@ -2675,6 +2692,7 @@ module Aws::S3Control
         expect_auth({"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true})
         resp = client.get_bucket(
           bucket: 'arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket',
+          account_id: '123456789012',
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
@@ -2691,7 +2709,7 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:bucket:mybucket", :operation=>"GetBucket", :region=>"us-west-2", :requires_account_id=>true, :use_arn_region=>true, :use_dual_stack=>false, :use_fips=>false})
+        params = EndpointParameters.new(**{:bucket=>"arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:bucket:mybucket", :region=>"us-west-2", :requires_account_id=>true, :use_arn_region=>true, :use_dual_stack=>false, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -2706,6 +2724,7 @@ module Aws::S3Control
         expect do
           client.get_bucket(
             bucket: 'arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:bucket:mybucket',
+            account_id: '123456789012',
           )
         end.to raise_error(ArgumentError, expected['error'])
       end
@@ -2878,20 +2897,20 @@ module Aws::S3Control
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"snow", :bucket=>"bucketName", :endpoint=>"https://10.0.1.12:433", :use_fips=>true, :use_dual_stack=>false, :accelerate=>false})
+        params = EndpointParameters.new(**{:region=>"snow", :bucket=>"bucketName", :endpoint=>"https://10.0.1.12:433", :use_fips=>true, :use_dual_stack=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
-    context 'S3 Snow Control with Dual-stack enabled' do
+    context 'S3 Snow Control with Dualstack enabled' do
       let(:expected) do
-        {"error"=>"S3 Snow does not support Dual-stack"}
+        {"error"=>"S3 Snow does not support DualStack"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"snow", :bucket=>"bucketName", :endpoint=>"https://10.0.1.12:433", :use_fips=>false, :use_dual_stack=>true, :accelerate=>false})
+        params = EndpointParameters.new(**{:region=>"snow", :bucket=>"bucketName", :endpoint=>"https://10.0.1.12:433", :use_fips=>false, :use_dual_stack=>true})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])

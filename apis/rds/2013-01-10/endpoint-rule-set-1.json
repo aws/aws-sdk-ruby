@@ -173,7 +173,7 @@
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": "https://medialive-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                "url": "https://rds-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -223,9 +223,34 @@
                                     "type": "tree",
                                     "rules": [
                                         {
+                                            "conditions": [
+                                                {
+                                                    "fn": "stringEquals",
+                                                    "argv": [
+                                                        "aws-us-gov",
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "name"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "endpoint": {
+                                                "url": "https://rds.{Region}.amazonaws.com",
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        },
+                                        {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": "https://medialive-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                "url": "https://rds-fips.{Region}.{PartitionResult#dnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -277,7 +302,7 @@
                                         {
                                             "conditions": [],
                                             "endpoint": {
-                                                "url": "https://medialive.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                "url": "https://rds.{Region}.{PartitionResult#dualStackDnsSuffix}",
                                                 "properties": {},
                                                 "headers": {}
                                             },
@@ -295,7 +320,7 @@
                         {
                             "conditions": [],
                             "endpoint": {
-                                "url": "https://medialive.{Region}.{PartitionResult#dnsSuffix}",
+                                "url": "https://rds.{Region}.{PartitionResult#dnsSuffix}",
                                 "properties": {},
                                 "headers": {}
                             },

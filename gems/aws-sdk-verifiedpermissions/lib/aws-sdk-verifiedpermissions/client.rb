@@ -432,6 +432,14 @@ module Aws::VerifiedPermissions
     #
     #  </note>
     #
+    # <note markdown="1"> Verified Permissions is <i> <a
+    # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
+    # consistent</a> </i>. It can take a few seconds for a new or changed
+    # element to be propagate through the service and be visible in the
+    # results of other Verified Permissions operations.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html
@@ -536,6 +544,14 @@ module Aws::VerifiedPermissions
     #
     #  </note>
     #
+    # <note markdown="1"> Verified Permissions is <i> <a
+    # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
+    # consistent</a> </i>. It can take a few seconds for a new or changed
+    # element to be propagate through the service and be visible in the
+    # results of other Verified Permissions operations.
+    #
+    #  </note>
+    #
     # @option params [String] :client_token
     #   Specifies a unique, case-sensitive ID that you provide to ensure the
     #   idempotency of the request. This lets you safely retry the request
@@ -631,6 +647,14 @@ module Aws::VerifiedPermissions
     #
     #  </note>
     #
+    # <note markdown="1"> Verified Permissions is <i> <a
+    # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
+    # consistent</a> </i>. It can take a few seconds for a new or changed
+    # element to be propagate through the service and be visible in the
+    # results of other Verified Permissions operations.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.cedarpolicy.com/schema.html#namespace
@@ -713,6 +737,14 @@ module Aws::VerifiedPermissions
     # any other policy, except that it is dynamically linked to the
     # template. If the template changes, then any policies that are linked
     # to that template are immediately updated as well.
+    #
+    # <note markdown="1"> Verified Permissions is <i> <a
+    # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
+    # consistent</a> </i>. It can take a few seconds for a new or changed
+    # element to be propagate through the service and be visible in the
+    # results of other Verified Permissions operations.
+    #
+    #  </note>
     #
     # @option params [String] :client_token
     #   Specifies a unique, case-sensitive ID that you provide to ensure the
@@ -1659,6 +1691,14 @@ module Aws::VerifiedPermissions
     # schema. If you later update a policy, then it is evaluated against the
     # new schema at that time.
     #
+    # <note markdown="1"> Verified Permissions is <i> <a
+    # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
+    # consistent</a> </i>. It can take a few seconds for a new or changed
+    # element to be propagate through the service and be visible in the
+    # results of other Verified Permissions operations.
+    #
+    #  </note>
+    #
     # @option params [required, String] :policy_store_id
     #   Specifies the ID of the policy store in which to place the schema.
     #
@@ -1702,6 +1742,14 @@ module Aws::VerifiedPermissions
     # Updates the specified identity source to use a new identity provider
     # (IdP) source, or to change the mapping of identities from the IdP to a
     # different principal entity type.
+    #
+    # <note markdown="1"> Verified Permissions is <i> <a
+    # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
+    # consistent</a> </i>. It can take a few seconds for a new or changed
+    # element to be propagate through the service and be visible in the
+    # results of other Verified Permissions operations.
+    #
+    #  </note>
     #
     # @option params [required, String] :policy_store_id
     #   Specifies the ID of the policy store that contains the identity source
@@ -1797,6 +1845,14 @@ module Aws::VerifiedPermissions
     #
     #  </note>
     #
+    # <note markdown="1"> Verified Permissions is <i> <a
+    # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
+    # consistent</a> </i>. It can take a few seconds for a new or changed
+    # element to be propagate through the service and be visible in the
+    # results of other Verified Permissions operations.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyInput.html#amazonverifiedpermissions-UpdatePolicy-request-UpdatePolicyDefinition
@@ -1881,6 +1937,14 @@ module Aws::VerifiedPermissions
 
     # Modifies the validation setting for a policy store.
     #
+    # <note markdown="1"> Verified Permissions is <i> <a
+    # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
+    # consistent</a> </i>. It can take a few seconds for a new or changed
+    # element to be propagate through the service and be visible in the
+    # results of other Verified Permissions operations.
+    #
+    #  </note>
+    #
     # @option params [required, String] :policy_store_id
     #   Specifies the ID of the policy store that you want to update
     #
@@ -1926,6 +1990,14 @@ module Aws::VerifiedPermissions
     # Changes you make to the policy template content are immediately
     # reflected in authorization decisions that involve all template-linked
     # policies instantiated from this template.
+    #
+    # <note markdown="1"> Verified Permissions is <i> <a
+    # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
+    # consistent</a> </i>. It can take a few seconds for a new or changed
+    # element to be propagate through the service and be visible in the
+    # results of other Verified Permissions operations.
+    #
+    #  </note>
     #
     #
     #
@@ -2004,7 +2076,7 @@ module Aws::VerifiedPermissions
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-verifiedpermissions'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

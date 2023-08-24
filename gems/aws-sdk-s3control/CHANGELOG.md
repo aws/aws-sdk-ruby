@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2023-08-24)
+------------------
+
+* Feature - Updates to endpoint ruleset tests to address Smithy validation issues and standardize the capitalization of DualStack.
+
 1.68.0 (2023-07-11)
 ------------------
 

@@ -18161,6 +18161,34 @@ module Aws::Glue
     #   that Glue supports. The GlueVersion must be greater than 2.0.
     #   @return [String]
     #
+    # @!attribute [rw] number_of_workers
+    #   The number of workers of a defined `WorkerType` to use for the
+    #   session.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] worker_type
+    #   The type of predefined worker that is allocated when a session runs.
+    #   Accepts a value of `G.1X`, `G.2X`, `G.4X`, or `G.8X` for Spark
+    #   sessions. Accepts the value `Z.2X` for Ray sessions.
+    #   @return [String]
+    #
+    # @!attribute [rw] completed_on
+    #   The date and time that this session is completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] execution_time
+    #   The total time the session ran for.
+    #   @return [Float]
+    #
+    # @!attribute [rw] dpu_seconds
+    #   The DPUs consumed by the session (formula: ExecutionTime *
+    #   MaxCapacity).
+    #   @return [Float]
+    #
+    # @!attribute [rw] idle_timeout
+    #   The number of minutes when idle before the session times out.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Session AWS API Documentation
     #
     class Session < Struct.new(
@@ -18176,7 +18204,13 @@ module Aws::Glue
       :progress,
       :max_capacity,
       :security_configuration,
-      :glue_version)
+      :glue_version,
+      :number_of_workers,
+      :worker_type,
+      :completed_on,
+      :execution_time,
+      :dpu_seconds,
+      :idle_timeout)
       SENSITIVE = []
       include Aws::Structure
     end

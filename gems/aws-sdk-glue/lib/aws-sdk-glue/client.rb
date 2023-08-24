@@ -4332,6 +4332,12 @@ module Aws::Glue
     #   resp.session.max_capacity #=> Float
     #   resp.session.security_configuration #=> String
     #   resp.session.glue_version #=> String
+    #   resp.session.number_of_workers #=> Integer
+    #   resp.session.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
+    #   resp.session.completed_on #=> Time
+    #   resp.session.execution_time #=> Float
+    #   resp.session.dpu_seconds #=> Float
+    #   resp.session.idle_timeout #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateSession AWS API Documentation
     #
@@ -10324,6 +10330,12 @@ module Aws::Glue
     #   resp.session.max_capacity #=> Float
     #   resp.session.security_configuration #=> String
     #   resp.session.glue_version #=> String
+    #   resp.session.number_of_workers #=> Integer
+    #   resp.session.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
+    #   resp.session.completed_on #=> Time
+    #   resp.session.execution_time #=> Float
+    #   resp.session.dpu_seconds #=> Float
+    #   resp.session.idle_timeout #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSession AWS API Documentation
     #
@@ -12931,6 +12943,12 @@ module Aws::Glue
     #   resp.sessions[0].max_capacity #=> Float
     #   resp.sessions[0].security_configuration #=> String
     #   resp.sessions[0].glue_version #=> String
+    #   resp.sessions[0].number_of_workers #=> Integer
+    #   resp.sessions[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
+    #   resp.sessions[0].completed_on #=> Time
+    #   resp.sessions[0].execution_time #=> Float
+    #   resp.sessions[0].dpu_seconds #=> Float
+    #   resp.sessions[0].idle_timeout #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListSessions AWS API Documentation
@@ -16288,7 +16306,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.154.0'
+      context[:gem_version] = '1.155.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

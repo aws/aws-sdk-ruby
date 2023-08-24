@@ -10190,6 +10190,8 @@ module Aws::RDS
     #   * {Types::DBClusterAutomatedBackupMessage#marker #marker} => String
     #   * {Types::DBClusterAutomatedBackupMessage#db_cluster_automated_backups #db_cluster_automated_backups} => Array&lt;Types::DBClusterAutomatedBackup&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_cluster_automated_backups({
@@ -22005,7 +22007,7 @@ module Aws::RDS
     #
     #   **Aurora MySQL**
     #
-    #   Examples: `5.7.mysql_aurora.2.07.1`, `8.0.mysql_aurora.3.02.0`
+    #   Examples: `5.7.mysql_aurora.2.12.0`, `8.0.mysql_aurora.3.04.0`
     #
     # @option params [Integer] :port
     #   The port number on which the instances in the restored DB cluster
@@ -22133,9 +22135,9 @@ module Aws::RDS
     # @option params [required, String] :source_engine_version
     #   The version of the database that the backup files were created from.
     #
-    #   MySQL versions 5.5, 5.6, and 5.7 are supported.
+    #   MySQL versions 5.7 and 8.0 are supported.
     #
-    #   Example: `5.6.40`, `5.7.28`
+    #   Example: `5.7.40`, `8.0.28`
     #
     # @option params [required, String] :s3_bucket_name
     #   The name of the Amazon S3 bucket that contains the data used to create
@@ -28263,7 +28265,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.191.0'
+      context[:gem_version] = '1.192.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

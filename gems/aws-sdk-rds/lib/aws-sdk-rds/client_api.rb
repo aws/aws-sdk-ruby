@@ -4459,6 +4459,12 @@ module Aws::RDS
         o.input = Shapes::ShapeRef.new(shape: DescribeDBClusterAutomatedBackupsMessage)
         o.output = Shapes::ShapeRef.new(shape: DBClusterAutomatedBackupMessage)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterAutomatedBackupNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_db_cluster_backtracks, Seahorse::Model::Operation.new.tap do |o|

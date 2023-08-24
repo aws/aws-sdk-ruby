@@ -618,6 +618,7 @@ module Aws::Glue
     IcebergTargetList = Shapes::ListShape.new(name: 'IcebergTargetList')
     IdString = Shapes::StringShape.new(name: 'IdString')
     IdempotentParameterMismatchException = Shapes::StructureShape.new(name: 'IdempotentParameterMismatchException')
+    IdleTimeout = Shapes::IntegerShape.new(name: 'IdleTimeout')
     IllegalBlueprintStateException = Shapes::StructureShape.new(name: 'IllegalBlueprintStateException')
     IllegalSessionStateException = Shapes::StructureShape.new(name: 'IllegalSessionStateException')
     IllegalWorkflowStateException = Shapes::StructureShape.new(name: 'IllegalWorkflowStateException')
@@ -4769,6 +4770,12 @@ module Aws::Glue
     Session.add_member(:max_capacity, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "MaxCapacity"))
     Session.add_member(:security_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "SecurityConfiguration"))
     Session.add_member(:glue_version, Shapes::ShapeRef.new(shape: GlueVersionString, location_name: "GlueVersion"))
+    Session.add_member(:number_of_workers, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "NumberOfWorkers"))
+    Session.add_member(:worker_type, Shapes::ShapeRef.new(shape: WorkerType, location_name: "WorkerType"))
+    Session.add_member(:completed_on, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "CompletedOn"))
+    Session.add_member(:execution_time, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "ExecutionTime"))
+    Session.add_member(:dpu_seconds, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "DPUSeconds"))
+    Session.add_member(:idle_timeout, Shapes::ShapeRef.new(shape: IdleTimeout, location_name: "IdleTimeout"))
     Session.struct_class = Types::Session
 
     SessionCommand.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))

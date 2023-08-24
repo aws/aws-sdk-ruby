@@ -1568,6 +1568,10 @@ module Aws::QuickSight
     # @option params [Array<Types::Tag>] :tags
     #   Tags for the folder.
     #
+    # @option params [String] :sharing_model
+    #   An optional parameter that determines the sharing scope of the folder.
+    #   The default value for this parameter is `ACCOUNT`.
+    #
     # @return [Types::CreateFolderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFolderResponse#status #status} => Integer
@@ -1595,6 +1599,7 @@ module Aws::QuickSight
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     sharing_model: "ACCOUNT", # accepts ACCOUNT, NAMESPACE
     #   })
     #
     # @example Response structure
@@ -1623,11 +1628,10 @@ module Aws::QuickSight
     #   The ID of the folder.
     #
     # @option params [required, String] :member_id
-    #   The ID of the asset (the dashboard, analysis, or dataset).
+    #   The ID of the asset that you want to add to the folder.
     #
     # @option params [required, String] :member_type
-    #   The type of the member, including `DASHBOARD`, `ANALYSIS`, and
-    #   `DATASET`.
+    #   The member type of the asset that you want to add to a folder.
     #
     # @return [Types::CreateFolderMembershipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3130,12 +3134,10 @@ module Aws::QuickSight
     #   The Folder ID.
     #
     # @option params [required, String] :member_id
-    #   The ID of the asset (the dashboard, analysis, or dataset) that you
-    #   want to delete.
+    #   The ID of the asset that you want to delete.
     #
     # @option params [required, String] :member_type
-    #   The type of the member, including `DASHBOARD`, `ANALYSIS`, and
-    #   `DATASET`
+    #   The member type of the asset that you want to delete from a folder.
     #
     # @return [Types::DeleteFolderMembershipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4597,7 +4599,7 @@ module Aws::QuickSight
     #   resp.snapshot_configuration.file_groups[0].files[0].sheet_selections[0].selection_scope #=> String, one of "ALL_VISUALS", "SELECTED_VISUALS"
     #   resp.snapshot_configuration.file_groups[0].files[0].sheet_selections[0].visual_ids #=> Array
     #   resp.snapshot_configuration.file_groups[0].files[0].sheet_selections[0].visual_ids[0] #=> String
-    #   resp.snapshot_configuration.file_groups[0].files[0].format_type #=> String, one of "CSV", "PDF"
+    #   resp.snapshot_configuration.file_groups[0].files[0].format_type #=> String, one of "CSV", "PDF", "EXCEL"
     #   resp.snapshot_configuration.destination_configuration.s3_destinations #=> Array
     #   resp.snapshot_configuration.destination_configuration.s3_destinations[0].bucket_configuration.bucket_name #=> String
     #   resp.snapshot_configuration.destination_configuration.s3_destinations[0].bucket_configuration.bucket_prefix #=> String
@@ -4688,7 +4690,7 @@ module Aws::QuickSight
     #   resp.result.anonymous_users[0].file_groups[0].files[0].sheet_selections[0].selection_scope #=> String, one of "ALL_VISUALS", "SELECTED_VISUALS"
     #   resp.result.anonymous_users[0].file_groups[0].files[0].sheet_selections[0].visual_ids #=> Array
     #   resp.result.anonymous_users[0].file_groups[0].files[0].sheet_selections[0].visual_ids[0] #=> String
-    #   resp.result.anonymous_users[0].file_groups[0].files[0].format_type #=> String, one of "CSV", "PDF"
+    #   resp.result.anonymous_users[0].file_groups[0].files[0].format_type #=> String, one of "CSV", "PDF", "EXCEL"
     #   resp.result.anonymous_users[0].file_groups[0].s3_results #=> Array
     #   resp.result.anonymous_users[0].file_groups[0].s3_results[0].s3_destination_configuration.bucket_configuration.bucket_name #=> String
     #   resp.result.anonymous_users[0].file_groups[0].s3_results[0].s3_destination_configuration.bucket_configuration.bucket_prefix #=> String
@@ -5194,6 +5196,7 @@ module Aws::QuickSight
     #   resp.folder.folder_path[0] #=> String
     #   resp.folder.created_time #=> Time
     #   resp.folder.last_updated_time #=> Time
+    #   resp.folder.sharing_model #=> String, one of "ACCOUNT", "NAMESPACE"
     #   resp.request_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolder AWS API Documentation
@@ -5213,6 +5216,15 @@ module Aws::QuickSight
     # @option params [required, String] :folder_id
     #   The ID of the folder.
     #
+    # @option params [String] :namespace
+    #   The namespace of the folder whose permissions you want described.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per request.
+    #
+    # @option params [String] :next_token
+    #   A pagination token for the next set of results.
+    #
     # @return [Types::DescribeFolderPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeFolderPermissionsResponse#status #status} => Integer
@@ -5220,12 +5232,18 @@ module Aws::QuickSight
     #   * {Types::DescribeFolderPermissionsResponse#arn #arn} => String
     #   * {Types::DescribeFolderPermissionsResponse#permissions #permissions} => Array&lt;Types::ResourcePermission&gt;
     #   * {Types::DescribeFolderPermissionsResponse#request_id #request_id} => String
+    #   * {Types::DescribeFolderPermissionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_folder_permissions({
     #     aws_account_id: "AwsAccountId", # required
     #     folder_id: "RestrictiveResourceId", # required
+    #     namespace: "Namespace",
+    #     max_results: 1,
+    #     next_token: "String",
     #   })
     #
     # @example Response structure
@@ -5238,6 +5256,7 @@ module Aws::QuickSight
     #   resp.permissions[0].actions #=> Array
     #   resp.permissions[0].actions[0] #=> String
     #   resp.request_id #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderPermissions AWS API Documentation
     #
@@ -5258,6 +5277,15 @@ module Aws::QuickSight
     # @option params [required, String] :folder_id
     #   The ID of the folder.
     #
+    # @option params [String] :namespace
+    #   The namespace of the folder whose permissions you want described.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per request.
+    #
+    # @option params [String] :next_token
+    #   A pagination token for the next set of results.
+    #
     # @return [Types::DescribeFolderResolvedPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeFolderResolvedPermissionsResponse#status #status} => Integer
@@ -5265,12 +5293,18 @@ module Aws::QuickSight
     #   * {Types::DescribeFolderResolvedPermissionsResponse#arn #arn} => String
     #   * {Types::DescribeFolderResolvedPermissionsResponse#permissions #permissions} => Array&lt;Types::ResourcePermission&gt;
     #   * {Types::DescribeFolderResolvedPermissionsResponse#request_id #request_id} => String
+    #   * {Types::DescribeFolderResolvedPermissionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_folder_resolved_permissions({
     #     aws_account_id: "AwsAccountId", # required
     #     folder_id: "RestrictiveResourceId", # required
+    #     namespace: "Namespace",
+    #     max_results: 1,
+    #     next_token: "String",
     #   })
     #
     # @example Response structure
@@ -5283,6 +5317,7 @@ module Aws::QuickSight
     #   resp.permissions[0].actions #=> Array
     #   resp.permissions[0].actions[0] #=> String
     #   resp.request_id #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderResolvedPermissions AWS API Documentation
     #
@@ -7487,6 +7522,8 @@ module Aws::QuickSight
     #   * {Types::ListFolderMembersResponse#next_token #next_token} => String
     #   * {Types::ListFolderMembersResponse#request_id #request_id} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_folder_members({
@@ -7533,6 +7570,8 @@ module Aws::QuickSight
     #   * {Types::ListFoldersResponse#next_token #next_token} => String
     #   * {Types::ListFoldersResponse#request_id #request_id} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_folders({
@@ -7551,6 +7590,7 @@ module Aws::QuickSight
     #   resp.folder_summary_list[0].folder_type #=> String, one of "SHARED"
     #   resp.folder_summary_list[0].created_time #=> Time
     #   resp.folder_summary_list[0].last_updated_time #=> Time
+    #   resp.folder_summary_list[0].sharing_model #=> String, one of "ACCOUNT", "NAMESPACE"
     #   resp.next_token #=> String
     #   resp.request_id #=> String
     #
@@ -9171,6 +9211,8 @@ module Aws::QuickSight
     #   * {Types::SearchFoldersResponse#next_token #next_token} => String
     #   * {Types::SearchFoldersResponse#request_id #request_id} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_folders({
@@ -9196,6 +9238,7 @@ module Aws::QuickSight
     #   resp.folder_summary_list[0].folder_type #=> String, one of "SHARED"
     #   resp.folder_summary_list[0].created_time #=> Time
     #   resp.folder_summary_list[0].last_updated_time #=> Time
+    #   resp.folder_summary_list[0].sharing_model #=> String, one of "ACCOUNT", "NAMESPACE"
     #   resp.next_token #=> String
     #   resp.request_id #=> String
     #
@@ -9666,6 +9709,8 @@ module Aws::QuickSight
     #
     # * 1 paginated PDF
     #
+    # * 1 Excel workbook
+    #
     # * 5 CSVs
     #
     # Poll job descriptions with a `DescribeDashboardSnapshotJob` API call.
@@ -9732,7 +9777,7 @@ module Aws::QuickSight
     #                   visual_ids: ["ShortRestrictiveResourceId"],
     #                 },
     #               ],
-    #               format_type: "CSV", # required, accepts CSV, PDF
+    #               format_type: "CSV", # required, accepts CSV, PDF, EXCEL
     #             },
     #           ],
     #         },
@@ -12484,7 +12529,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

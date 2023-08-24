@@ -814,9 +814,9 @@ module Aws::VerifiedPermissions
     # This data type is used as one of the fields in the
     # [EntitiesDefinition][1] structure.
     #
-    # `\{ "id": \{ "entityType": "Photo", "entityId": "VacationPhoto94.jpg"
-    # \}, "Attributes": \{\}, "Parents": [ \{ "entityType": "Album",
-    # "entityId": "alice_folder" \} ] \}`
+    # `\{ "identifier": \{ "entityType": "Photo", "entityId":
+    # "VacationPhoto94.jpg" \}, "attributes": \{\}, "parents": [ \{
+    # "entityType": "Album", "entityId": "alice_folder" \} ] \}`
     #
     #
     #

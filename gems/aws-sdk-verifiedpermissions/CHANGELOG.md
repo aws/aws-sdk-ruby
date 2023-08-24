@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2023-08-24)
+------------------
+
+* Feature - Documentation updates for Amazon Verified Permissions.
+
 1.8.0 (2023-08-22)
 ------------------
 

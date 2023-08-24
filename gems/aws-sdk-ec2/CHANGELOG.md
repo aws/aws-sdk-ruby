@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.402.0 (2023-08-24)
+------------------
+
+* Feature - Amazon EC2 M7a instances, powered by 4th generation AMD EPYC processors, deliver up to 50% higher performance compared to M6a instances. Amazon EC2 Hpc7a instances, powered by 4th Gen AMD EPYC processors, deliver up to 2.5x better performance compared to Amazon EC2 Hpc6a instances.
+
 1.401.0 (2023-08-23)
 ------------------
 

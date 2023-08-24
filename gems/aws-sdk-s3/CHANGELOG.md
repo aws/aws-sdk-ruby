@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.134.0 (2023-08-24)
+------------------
+
+* Feature - Updates to endpoint ruleset tests to address Smithy validation issues.
+
 1.133.0 (2023-08-22)
 ------------------
 
