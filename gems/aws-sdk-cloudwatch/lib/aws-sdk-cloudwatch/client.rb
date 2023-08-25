@@ -2369,7 +2369,7 @@ module Aws::CloudWatch
     #   `arn:aws:cloudwatch:Region:account-id:alarm:alarm-name `
     #
     #   The ARN format of a Contributor Insights rule is
-    #   `arn:aws:cloudwatch:Region:account-id:insight-rule:insight-rule-name `
+    #   `arn:aws:cloudwatch:Region:account-id:insight-rule/insight-rule-name `
     #
     #   For more information about ARN format, see [ Resource Types Defined by
     #   Amazon CloudWatch][1] in the *Amazon Web Services General Reference*.
@@ -3896,7 +3896,7 @@ module Aws::CloudWatch
     #   `arn:aws:cloudwatch:Region:account-id:alarm:alarm-name `
     #
     #   The ARN format of a Contributor Insights rule is
-    #   `arn:aws:cloudwatch:Region:account-id:insight-rule:insight-rule-name `
+    #   `arn:aws:cloudwatch:Region:account-id:insight-rule/insight-rule-name `
     #
     #   For more information about ARN format, see [ Resource Types Defined by
     #   Amazon CloudWatch][1] in the *Amazon Web Services General Reference*.
@@ -3940,7 +3940,7 @@ module Aws::CloudWatch
     #   `arn:aws:cloudwatch:Region:account-id:alarm:alarm-name `
     #
     #   The ARN format of a Contributor Insights rule is
-    #   `arn:aws:cloudwatch:Region:account-id:insight-rule:insight-rule-name `
+    #   `arn:aws:cloudwatch:Region:account-id:insight-rule/insight-rule-name `
     #
     #   For more information about ARN format, see [ Resource Types Defined by
     #   Amazon CloudWatch][1] in the *Amazon Web Services General Reference*.
@@ -3983,7 +3983,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

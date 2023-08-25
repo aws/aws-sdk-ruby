@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2023-08-25)
+------------------
+
+* Feature - Added protections to interacting with fields containing customer information.
+
 1.39.0 (2023-08-07)
 ------------------
 

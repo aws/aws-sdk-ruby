@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2023-08-25)
+------------------
+
+* Feature - Doc-only update to get doc bug fixes into the SDK docs
+
 1.79.0 (2023-08-16)
 ------------------
 

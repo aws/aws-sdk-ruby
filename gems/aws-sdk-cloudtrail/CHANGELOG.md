@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2023-08-25)
+------------------
+
+* Feature - Add ThrottlingException with error code 429 to handle CloudTrail Delegated Admin request rate exceeded on organization resources.
+
 1.67.0 (2023-08-10)
 ------------------
 

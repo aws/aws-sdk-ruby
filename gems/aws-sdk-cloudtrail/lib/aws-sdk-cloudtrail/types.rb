@@ -4353,6 +4353,12 @@ module Aws::CloudTrail
     #
     class TagsLimitExceededException < Aws::EmptyStructure; end
 
+    # This exception is thrown when the request rate exceeds the limit.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Aws::EmptyStructure; end
+
     # The settings for a trail.
     #
     # @!attribute [rw] name

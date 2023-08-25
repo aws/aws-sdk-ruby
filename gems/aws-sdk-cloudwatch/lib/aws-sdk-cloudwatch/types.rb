@@ -2209,7 +2209,7 @@ module Aws::CloudWatch
     #   `arn:aws:cloudwatch:Region:account-id:alarm:alarm-name `
     #
     #   The ARN format of a Contributor Insights rule is
-    #   `arn:aws:cloudwatch:Region:account-id:insight-rule:insight-rule-name
+    #   `arn:aws:cloudwatch:Region:account-id:insight-rule/insight-rule-name
     #   `
     #
     #   For more information about ARN format, see [ Resource Types Defined
@@ -4313,7 +4313,7 @@ module Aws::CloudWatch
     #   `arn:aws:cloudwatch:Region:account-id:alarm:alarm-name `
     #
     #   The ARN format of a Contributor Insights rule is
-    #   `arn:aws:cloudwatch:Region:account-id:insight-rule:insight-rule-name
+    #   `arn:aws:cloudwatch:Region:account-id:insight-rule/insight-rule-name
     #   `
     #
     #   For more information about ARN format, see [ Resource Types Defined
@@ -4349,7 +4349,7 @@ module Aws::CloudWatch
     #   `arn:aws:cloudwatch:Region:account-id:alarm:alarm-name `
     #
     #   The ARN format of a Contributor Insights rule is
-    #   `arn:aws:cloudwatch:Region:account-id:insight-rule:insight-rule-name
+    #   `arn:aws:cloudwatch:Region:account-id:insight-rule/insight-rule-name
     #   `
     #
     #   For more information about ARN format, see [ Resource Types Defined

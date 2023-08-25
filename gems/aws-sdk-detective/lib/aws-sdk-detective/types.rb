@@ -77,7 +77,7 @@ module Aws::Detective
     class Account < Struct.new(
       :account_id,
       :email_address)
-      SENSITIVE = []
+      SENSITIVE = [:email_address]
       include Aws::Structure
     end
 
@@ -251,7 +251,7 @@ module Aws::Detective
       :message,
       :disable_email_notification,
       :accounts)
-      SENSITIVE = []
+      SENSITIVE = [:message]
       include Aws::Structure
     end
 
@@ -911,7 +911,7 @@ module Aws::Detective
       :invitation_type,
       :volume_usage_by_datasource_package,
       :datasource_package_ingest_states)
-      SENSITIVE = []
+      SENSITIVE = [:email_address]
       include Aws::Structure
     end
 
