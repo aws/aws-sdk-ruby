@@ -44,6 +44,12 @@ module Aws::WorkSpacesWeb
     CertificateThumbprintList = Shapes::ListShape.new(name: 'CertificateThumbprintList')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CookieDomain = Shapes::StringShape.new(name: 'CookieDomain')
+    CookieName = Shapes::StringShape.new(name: 'CookieName')
+    CookiePath = Shapes::StringShape.new(name: 'CookiePath')
+    CookieSpecification = Shapes::StructureShape.new(name: 'CookieSpecification')
+    CookieSpecifications = Shapes::ListShape.new(name: 'CookieSpecifications')
+    CookieSynchronizationConfiguration = Shapes::StructureShape.new(name: 'CookieSynchronizationConfiguration')
     CreateBrowserSettingsRequest = Shapes::StructureShape.new(name: 'CreateBrowserSettingsRequest')
     CreateBrowserSettingsResponse = Shapes::StructureShape.new(name: 'CreateBrowserSettingsResponse')
     CreateIdentityProviderRequest = Shapes::StructureShape.new(name: 'CreateIdentityProviderRequest')
@@ -175,6 +181,7 @@ module Aws::WorkSpacesWeb
     StringType = Shapes::StringShape.new(name: 'StringType')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIdList = Shapes::ListShape.new(name: 'SubnetIdList')
+    SubresourceARN = Shapes::StringShape.new(name: 'SubresourceARN')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagExceptionMessage = Shapes::StringShape.new(name: 'TagExceptionMessage')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -280,7 +287,7 @@ module Aws::WorkSpacesWeb
 
     BrowserSettingsList.member = Shapes::ShapeRef.new(shape: BrowserSettingsSummary)
 
-    BrowserSettingsSummary.add_member(:browser_settings_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "browserSettingsArn"))
+    BrowserSettingsSummary.add_member(:browser_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "browserSettingsArn"))
     BrowserSettingsSummary.struct_class = Types::BrowserSettingsSummary
 
     Certificate.add_member(:body, Shapes::ShapeRef.new(shape: CertificateAuthorityBody, location_name: "body"))
@@ -309,6 +316,17 @@ module Aws::WorkSpacesWeb
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
     ConflictException.struct_class = Types::ConflictException
 
+    CookieSpecification.add_member(:domain, Shapes::ShapeRef.new(shape: CookieDomain, required: true, location_name: "domain"))
+    CookieSpecification.add_member(:name, Shapes::ShapeRef.new(shape: CookieName, location_name: "name"))
+    CookieSpecification.add_member(:path, Shapes::ShapeRef.new(shape: CookiePath, location_name: "path"))
+    CookieSpecification.struct_class = Types::CookieSpecification
+
+    CookieSpecifications.member = Shapes::ShapeRef.new(shape: CookieSpecification)
+
+    CookieSynchronizationConfiguration.add_member(:allowlist, Shapes::ShapeRef.new(shape: CookieSpecifications, required: true, location_name: "allowlist"))
+    CookieSynchronizationConfiguration.add_member(:blocklist, Shapes::ShapeRef.new(shape: CookieSpecifications, location_name: "blocklist"))
+    CookieSynchronizationConfiguration.struct_class = Types::CookieSynchronizationConfiguration
+
     CreateBrowserSettingsRequest.add_member(:additional_encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextMap, location_name: "additionalEncryptionContext"))
     CreateBrowserSettingsRequest.add_member(:browser_policy, Shapes::ShapeRef.new(shape: BrowserPolicy, required: true, location_name: "browserPolicy"))
     CreateBrowserSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
@@ -326,7 +344,7 @@ module Aws::WorkSpacesWeb
     CreateIdentityProviderRequest.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "portalArn"))
     CreateIdentityProviderRequest.struct_class = Types::CreateIdentityProviderRequest
 
-    CreateIdentityProviderResponse.add_member(:identity_provider_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "identityProviderArn"))
+    CreateIdentityProviderResponse.add_member(:identity_provider_arn, Shapes::ShapeRef.new(shape: SubresourceARN, required: true, location_name: "identityProviderArn"))
     CreateIdentityProviderResponse.struct_class = Types::CreateIdentityProviderResponse
 
     CreateIpAccessSettingsRequest.add_member(:additional_encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextMap, location_name: "additionalEncryptionContext"))
@@ -379,8 +397,11 @@ module Aws::WorkSpacesWeb
     CreateUserAccessLoggingSettingsResponse.add_member(:user_access_logging_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "userAccessLoggingSettingsArn"))
     CreateUserAccessLoggingSettingsResponse.struct_class = Types::CreateUserAccessLoggingSettingsResponse
 
+    CreateUserSettingsRequest.add_member(:additional_encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextMap, location_name: "additionalEncryptionContext"))
     CreateUserSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateUserSettingsRequest.add_member(:cookie_synchronization_configuration, Shapes::ShapeRef.new(shape: CookieSynchronizationConfiguration, location_name: "cookieSynchronizationConfiguration"))
     CreateUserSettingsRequest.add_member(:copy_allowed, Shapes::ShapeRef.new(shape: EnabledType, required: true, location_name: "copyAllowed"))
+    CreateUserSettingsRequest.add_member(:customer_managed_key, Shapes::ShapeRef.new(shape: keyArn, location_name: "customerManagedKey"))
     CreateUserSettingsRequest.add_member(:disconnect_timeout_in_minutes, Shapes::ShapeRef.new(shape: DisconnectTimeoutInMinutes, location_name: "disconnectTimeoutInMinutes"))
     CreateUserSettingsRequest.add_member(:download_allowed, Shapes::ShapeRef.new(shape: EnabledType, required: true, location_name: "downloadAllowed"))
     CreateUserSettingsRequest.add_member(:idle_disconnect_timeout_in_minutes, Shapes::ShapeRef.new(shape: IdleDisconnectTimeoutInMinutes, location_name: "idleDisconnectTimeoutInMinutes"))
@@ -398,7 +419,7 @@ module Aws::WorkSpacesWeb
 
     DeleteBrowserSettingsResponse.struct_class = Types::DeleteBrowserSettingsResponse
 
-    DeleteIdentityProviderRequest.add_member(:identity_provider_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "identityProviderArn"))
+    DeleteIdentityProviderRequest.add_member(:identity_provider_arn, Shapes::ShapeRef.new(shape: SubresourceARN, required: true, location: "uri", location_name: "identityProviderArn"))
     DeleteIdentityProviderRequest.struct_class = Types::DeleteIdentityProviderRequest
 
     DeleteIdentityProviderResponse.struct_class = Types::DeleteIdentityProviderResponse
@@ -472,7 +493,7 @@ module Aws::WorkSpacesWeb
     GetBrowserSettingsResponse.add_member(:browser_settings, Shapes::ShapeRef.new(shape: BrowserSettings, location_name: "browserSettings"))
     GetBrowserSettingsResponse.struct_class = Types::GetBrowserSettingsResponse
 
-    GetIdentityProviderRequest.add_member(:identity_provider_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "identityProviderArn"))
+    GetIdentityProviderRequest.add_member(:identity_provider_arn, Shapes::ShapeRef.new(shape: SubresourceARN, required: true, location: "uri", location_name: "identityProviderArn"))
     GetIdentityProviderRequest.struct_class = Types::GetIdentityProviderRequest
 
     GetIdentityProviderResponse.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProvider, location_name: "identityProvider"))
@@ -508,7 +529,7 @@ module Aws::WorkSpacesWeb
     GetTrustStoreCertificateRequest.struct_class = Types::GetTrustStoreCertificateRequest
 
     GetTrustStoreCertificateResponse.add_member(:certificate, Shapes::ShapeRef.new(shape: Certificate, location_name: "certificate"))
-    GetTrustStoreCertificateResponse.add_member(:trust_store_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "trustStoreArn"))
+    GetTrustStoreCertificateResponse.add_member(:trust_store_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "trustStoreArn"))
     GetTrustStoreCertificateResponse.struct_class = Types::GetTrustStoreCertificateResponse
 
     GetTrustStoreRequest.add_member(:trust_store_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "trustStoreArn"))
@@ -529,7 +550,7 @@ module Aws::WorkSpacesWeb
     GetUserSettingsResponse.add_member(:user_settings, Shapes::ShapeRef.new(shape: UserSettings, location_name: "userSettings"))
     GetUserSettingsResponse.struct_class = Types::GetUserSettingsResponse
 
-    IdentityProvider.add_member(:identity_provider_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "identityProviderArn"))
+    IdentityProvider.add_member(:identity_provider_arn, Shapes::ShapeRef.new(shape: SubresourceARN, required: true, location_name: "identityProviderArn"))
     IdentityProvider.add_member(:identity_provider_details, Shapes::ShapeRef.new(shape: IdentityProviderDetails, location_name: "identityProviderDetails"))
     IdentityProvider.add_member(:identity_provider_name, Shapes::ShapeRef.new(shape: IdentityProviderName, location_name: "identityProviderName"))
     IdentityProvider.add_member(:identity_provider_type, Shapes::ShapeRef.new(shape: IdentityProviderType, location_name: "identityProviderType"))
@@ -540,7 +561,7 @@ module Aws::WorkSpacesWeb
 
     IdentityProviderList.member = Shapes::ShapeRef.new(shape: IdentityProviderSummary)
 
-    IdentityProviderSummary.add_member(:identity_provider_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "identityProviderArn"))
+    IdentityProviderSummary.add_member(:identity_provider_arn, Shapes::ShapeRef.new(shape: SubresourceARN, required: true, location_name: "identityProviderArn"))
     IdentityProviderSummary.add_member(:identity_provider_name, Shapes::ShapeRef.new(shape: IdentityProviderName, location_name: "identityProviderName"))
     IdentityProviderSummary.add_member(:identity_provider_type, Shapes::ShapeRef.new(shape: IdentityProviderType, location_name: "identityProviderType"))
     IdentityProviderSummary.struct_class = Types::IdentityProviderSummary
@@ -562,7 +583,7 @@ module Aws::WorkSpacesWeb
     IpAccessSettingsSummary.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDate"))
     IpAccessSettingsSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     IpAccessSettingsSummary.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
-    IpAccessSettingsSummary.add_member(:ip_access_settings_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ipAccessSettingsArn"))
+    IpAccessSettingsSummary.add_member(:ip_access_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "ipAccessSettingsArn"))
     IpAccessSettingsSummary.struct_class = Types::IpAccessSettingsSummary
 
     IpRule.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
@@ -625,7 +646,7 @@ module Aws::WorkSpacesWeb
 
     ListTrustStoreCertificatesResponse.add_member(:certificate_list, Shapes::ShapeRef.new(shape: CertificateSummaryList, location_name: "certificateList"))
     ListTrustStoreCertificatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
-    ListTrustStoreCertificatesResponse.add_member(:trust_store_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "trustStoreArn"))
+    ListTrustStoreCertificatesResponse.add_member(:trust_store_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "trustStoreArn"))
     ListTrustStoreCertificatesResponse.struct_class = Types::ListTrustStoreCertificatesResponse
 
     ListTrustStoresRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -661,7 +682,7 @@ module Aws::WorkSpacesWeb
 
     NetworkSettingsList.member = Shapes::ShapeRef.new(shape: NetworkSettingsSummary)
 
-    NetworkSettingsSummary.add_member(:network_settings_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "networkSettingsArn"))
+    NetworkSettingsSummary.add_member(:network_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "networkSettingsArn"))
     NetworkSettingsSummary.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "vpcId"))
     NetworkSettingsSummary.struct_class = Types::NetworkSettingsSummary
 
@@ -672,7 +693,7 @@ module Aws::WorkSpacesWeb
     Portal.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
     Portal.add_member(:ip_access_settings_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ipAccessSettingsArn"))
     Portal.add_member(:network_settings_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "networkSettingsArn"))
-    Portal.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "portalArn"))
+    Portal.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "portalArn"))
     Portal.add_member(:portal_endpoint, Shapes::ShapeRef.new(shape: PortalEndpoint, location_name: "portalEndpoint"))
     Portal.add_member(:portal_status, Shapes::ShapeRef.new(shape: PortalStatus, location_name: "portalStatus"))
     Portal.add_member(:renderer_type, Shapes::ShapeRef.new(shape: RendererType, location_name: "rendererType"))
@@ -691,7 +712,7 @@ module Aws::WorkSpacesWeb
     PortalSummary.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
     PortalSummary.add_member(:ip_access_settings_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ipAccessSettingsArn"))
     PortalSummary.add_member(:network_settings_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "networkSettingsArn"))
-    PortalSummary.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "portalArn"))
+    PortalSummary.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "portalArn"))
     PortalSummary.add_member(:portal_endpoint, Shapes::ShapeRef.new(shape: PortalEndpoint, location_name: "portalEndpoint"))
     PortalSummary.add_member(:portal_status, Shapes::ShapeRef.new(shape: PortalStatus, location_name: "portalStatus"))
     PortalSummary.add_member(:renderer_type, Shapes::ShapeRef.new(shape: RendererType, location_name: "rendererType"))
@@ -742,7 +763,7 @@ module Aws::WorkSpacesWeb
     TooManyTagsException.struct_class = Types::TooManyTagsException
 
     TrustStore.add_member(:associated_portal_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "associatedPortalArns"))
-    TrustStore.add_member(:trust_store_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "trustStoreArn"))
+    TrustStore.add_member(:trust_store_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "trustStoreArn"))
     TrustStore.struct_class = Types::TrustStore
 
     TrustStoreSummary.add_member(:trust_store_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "trustStoreArn"))
@@ -765,7 +786,7 @@ module Aws::WorkSpacesWeb
     UpdateBrowserSettingsResponse.struct_class = Types::UpdateBrowserSettingsResponse
 
     UpdateIdentityProviderRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
-    UpdateIdentityProviderRequest.add_member(:identity_provider_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "identityProviderArn"))
+    UpdateIdentityProviderRequest.add_member(:identity_provider_arn, Shapes::ShapeRef.new(shape: SubresourceARN, required: true, location: "uri", location_name: "identityProviderArn"))
     UpdateIdentityProviderRequest.add_member(:identity_provider_details, Shapes::ShapeRef.new(shape: IdentityProviderDetails, location_name: "identityProviderDetails"))
     UpdateIdentityProviderRequest.add_member(:identity_provider_name, Shapes::ShapeRef.new(shape: IdentityProviderName, location_name: "identityProviderName"))
     UpdateIdentityProviderRequest.add_member(:identity_provider_type, Shapes::ShapeRef.new(shape: IdentityProviderType, location_name: "identityProviderType"))
@@ -820,6 +841,7 @@ module Aws::WorkSpacesWeb
     UpdateUserAccessLoggingSettingsResponse.struct_class = Types::UpdateUserAccessLoggingSettingsResponse
 
     UpdateUserSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateUserSettingsRequest.add_member(:cookie_synchronization_configuration, Shapes::ShapeRef.new(shape: CookieSynchronizationConfiguration, location_name: "cookieSynchronizationConfiguration"))
     UpdateUserSettingsRequest.add_member(:copy_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "copyAllowed"))
     UpdateUserSettingsRequest.add_member(:disconnect_timeout_in_minutes, Shapes::ShapeRef.new(shape: DisconnectTimeoutInMinutes, location_name: "disconnectTimeoutInMinutes"))
     UpdateUserSettingsRequest.add_member(:download_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "downloadAllowed"))
@@ -841,10 +863,11 @@ module Aws::WorkSpacesWeb
     UserAccessLoggingSettingsList.member = Shapes::ShapeRef.new(shape: UserAccessLoggingSettingsSummary)
 
     UserAccessLoggingSettingsSummary.add_member(:kinesis_stream_arn, Shapes::ShapeRef.new(shape: KinesisStreamArn, location_name: "kinesisStreamArn"))
-    UserAccessLoggingSettingsSummary.add_member(:user_access_logging_settings_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "userAccessLoggingSettingsArn"))
+    UserAccessLoggingSettingsSummary.add_member(:user_access_logging_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "userAccessLoggingSettingsArn"))
     UserAccessLoggingSettingsSummary.struct_class = Types::UserAccessLoggingSettingsSummary
 
     UserSettings.add_member(:associated_portal_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "associatedPortalArns"))
+    UserSettings.add_member(:cookie_synchronization_configuration, Shapes::ShapeRef.new(shape: CookieSynchronizationConfiguration, location_name: "cookieSynchronizationConfiguration"))
     UserSettings.add_member(:copy_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "copyAllowed"))
     UserSettings.add_member(:disconnect_timeout_in_minutes, Shapes::ShapeRef.new(shape: DisconnectTimeoutInMinutes, location_name: "disconnectTimeoutInMinutes"))
     UserSettings.add_member(:download_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "downloadAllowed"))
@@ -857,6 +880,7 @@ module Aws::WorkSpacesWeb
 
     UserSettingsList.member = Shapes::ShapeRef.new(shape: UserSettingsSummary)
 
+    UserSettingsSummary.add_member(:cookie_synchronization_configuration, Shapes::ShapeRef.new(shape: CookieSynchronizationConfiguration, location_name: "cookieSynchronizationConfiguration"))
     UserSettingsSummary.add_member(:copy_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "copyAllowed"))
     UserSettingsSummary.add_member(:disconnect_timeout_in_minutes, Shapes::ShapeRef.new(shape: DisconnectTimeoutInMinutes, location_name: "disconnectTimeoutInMinutes"))
     UserSettingsSummary.add_member(:download_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "downloadAllowed"))
@@ -864,7 +888,7 @@ module Aws::WorkSpacesWeb
     UserSettingsSummary.add_member(:paste_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "pasteAllowed"))
     UserSettingsSummary.add_member(:print_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "printAllowed"))
     UserSettingsSummary.add_member(:upload_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "uploadAllowed"))
-    UserSettingsSummary.add_member(:user_settings_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "userSettingsArn"))
+    UserSettingsSummary.add_member(:user_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "userSettingsArn"))
     UserSettingsSummary.struct_class = Types::UserSettingsSummary
 
     ValidationException.add_member(:field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))

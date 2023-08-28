@@ -1114,6 +1114,9 @@ module Aws::WorkSpacesWeb
     # users can transfer data between a streaming session and the their
     # local devices.
     #
+    # @option params [Hash<String,String>] :additional_encryption_context
+    #   The additional encryption context of the user settings.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -1127,9 +1130,17 @@ module Aws::WorkSpacesWeb
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Types::CookieSynchronizationConfiguration] :cookie_synchronization_configuration
+    #   The configuration that specifies which cookies should be synchronized
+    #   from the end user's local browser to the remote browser.
+    #
     # @option params [required, String] :copy_allowed
     #   Specifies whether the user can copy text from the streaming session to
     #   the local device.
+    #
+    # @option params [String] :customer_managed_key
+    #   The customer managed key used to encrypt sensitive information in the
+    #   user settings.
     #
     # @option params [Integer] :disconnect_timeout_in_minutes
     #   The amount of time that a streaming session remains active after users
@@ -1166,8 +1177,28 @@ module Aws::WorkSpacesWeb
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_user_settings({
+    #     additional_encryption_context: {
+    #       "StringType" => "StringType",
+    #     },
     #     client_token: "ClientToken",
+    #     cookie_synchronization_configuration: {
+    #       allowlist: [ # required
+    #         {
+    #           domain: "CookieDomain", # required
+    #           name: "CookieName",
+    #           path: "CookiePath",
+    #         },
+    #       ],
+    #       blocklist: [
+    #         {
+    #           domain: "CookieDomain", # required
+    #           name: "CookieName",
+    #           path: "CookiePath",
+    #         },
+    #       ],
+    #     },
     #     copy_allowed: "Disabled", # required, accepts Disabled, Enabled
+    #     customer_managed_key: "keyArn",
     #     disconnect_timeout_in_minutes: 1,
     #     download_allowed: "Disabled", # required, accepts Disabled, Enabled
     #     idle_disconnect_timeout_in_minutes: 1,
@@ -1227,7 +1258,7 @@ module Aws::WorkSpacesWeb
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_identity_provider({
-    #     identity_provider_arn: "ARN", # required
+    #     identity_provider_arn: "SubresourceARN", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/DeleteIdentityProvider AWS API Documentation
@@ -1546,7 +1577,7 @@ module Aws::WorkSpacesWeb
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_identity_provider({
-    #     identity_provider_arn: "ARN", # required
+    #     identity_provider_arn: "SubresourceARN", # required
     #   })
     #
     # @example Response structure
@@ -1828,6 +1859,14 @@ module Aws::WorkSpacesWeb
     #
     #   resp.user_settings.associated_portal_arns #=> Array
     #   resp.user_settings.associated_portal_arns[0] #=> String
+    #   resp.user_settings.cookie_synchronization_configuration.allowlist #=> Array
+    #   resp.user_settings.cookie_synchronization_configuration.allowlist[0].domain #=> String
+    #   resp.user_settings.cookie_synchronization_configuration.allowlist[0].name #=> String
+    #   resp.user_settings.cookie_synchronization_configuration.allowlist[0].path #=> String
+    #   resp.user_settings.cookie_synchronization_configuration.blocklist #=> Array
+    #   resp.user_settings.cookie_synchronization_configuration.blocklist[0].domain #=> String
+    #   resp.user_settings.cookie_synchronization_configuration.blocklist[0].name #=> String
+    #   resp.user_settings.cookie_synchronization_configuration.blocklist[0].path #=> String
     #   resp.user_settings.copy_allowed #=> String, one of "Disabled", "Enabled"
     #   resp.user_settings.disconnect_timeout_in_minutes #=> Integer
     #   resp.user_settings.download_allowed #=> String, one of "Disabled", "Enabled"
@@ -2241,6 +2280,14 @@ module Aws::WorkSpacesWeb
     #
     #   resp.next_token #=> String
     #   resp.user_settings #=> Array
+    #   resp.user_settings[0].cookie_synchronization_configuration.allowlist #=> Array
+    #   resp.user_settings[0].cookie_synchronization_configuration.allowlist[0].domain #=> String
+    #   resp.user_settings[0].cookie_synchronization_configuration.allowlist[0].name #=> String
+    #   resp.user_settings[0].cookie_synchronization_configuration.allowlist[0].path #=> String
+    #   resp.user_settings[0].cookie_synchronization_configuration.blocklist #=> Array
+    #   resp.user_settings[0].cookie_synchronization_configuration.blocklist[0].domain #=> String
+    #   resp.user_settings[0].cookie_synchronization_configuration.blocklist[0].name #=> String
+    #   resp.user_settings[0].cookie_synchronization_configuration.blocklist[0].path #=> String
     #   resp.user_settings[0].copy_allowed #=> String, one of "Disabled", "Enabled"
     #   resp.user_settings[0].disconnect_timeout_in_minutes #=> Integer
     #   resp.user_settings[0].download_allowed #=> String, one of "Disabled", "Enabled"
@@ -2476,7 +2523,7 @@ module Aws::WorkSpacesWeb
     #
     #   resp = client.update_identity_provider({
     #     client_token: "ClientToken",
-    #     identity_provider_arn: "ARN", # required
+    #     identity_provider_arn: "SubresourceARN", # required
     #     identity_provider_details: {
     #       "StringType" => "StringType",
     #     },
@@ -2811,6 +2858,13 @@ module Aws::WorkSpacesWeb
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Types::CookieSynchronizationConfiguration] :cookie_synchronization_configuration
+    #   The configuration that specifies which cookies should be synchronized
+    #   from the end user's local browser to the remote browser.
+    #
+    #   If the allowlist and blocklist are empty, the configuration becomes
+    #   null.
+    #
     # @option params [String] :copy_allowed
     #   Specifies whether the user can copy text from the streaming session to
     #   the local device.
@@ -2850,6 +2904,22 @@ module Aws::WorkSpacesWeb
     #
     #   resp = client.update_user_settings({
     #     client_token: "ClientToken",
+    #     cookie_synchronization_configuration: {
+    #       allowlist: [ # required
+    #         {
+    #           domain: "CookieDomain", # required
+    #           name: "CookieName",
+    #           path: "CookiePath",
+    #         },
+    #       ],
+    #       blocklist: [
+    #         {
+    #           domain: "CookieDomain", # required
+    #           name: "CookieName",
+    #           path: "CookiePath",
+    #         },
+    #       ],
+    #     },
     #     copy_allowed: "Disabled", # accepts Disabled, Enabled
     #     disconnect_timeout_in_minutes: 1,
     #     download_allowed: "Disabled", # accepts Disabled, Enabled
@@ -2864,6 +2934,14 @@ module Aws::WorkSpacesWeb
     #
     #   resp.user_settings.associated_portal_arns #=> Array
     #   resp.user_settings.associated_portal_arns[0] #=> String
+    #   resp.user_settings.cookie_synchronization_configuration.allowlist #=> Array
+    #   resp.user_settings.cookie_synchronization_configuration.allowlist[0].domain #=> String
+    #   resp.user_settings.cookie_synchronization_configuration.allowlist[0].name #=> String
+    #   resp.user_settings.cookie_synchronization_configuration.allowlist[0].path #=> String
+    #   resp.user_settings.cookie_synchronization_configuration.blocklist #=> Array
+    #   resp.user_settings.cookie_synchronization_configuration.blocklist[0].domain #=> String
+    #   resp.user_settings.cookie_synchronization_configuration.blocklist[0].name #=> String
+    #   resp.user_settings.cookie_synchronization_configuration.blocklist[0].path #=> String
     #   resp.user_settings.copy_allowed #=> String, one of "Disabled", "Enabled"
     #   resp.user_settings.disconnect_timeout_in_minutes #=> Integer
     #   resp.user_settings.download_allowed #=> String, one of "Disabled", "Enabled"
@@ -2895,7 +2973,7 @@ module Aws::WorkSpacesWeb
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspacesweb'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

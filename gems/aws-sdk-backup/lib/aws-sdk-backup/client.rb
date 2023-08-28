@@ -483,6 +483,7 @@ module Aws::Backup
     #             },
     #           ],
     #           enable_continuous_backup: false,
+    #           schedule_expression_timezone: "Timezone",
     #         },
     #       ],
     #       advanced_backup_settings: [
@@ -835,10 +836,12 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # This request creates a logical container where backups are stored.
+    # This request creates a logical container to where backups may be
+    # copied.
     #
-    # This request includes a name, optionally one or more resource tags, an
-    # encryption key, and a request ID.
+    # This request includes a name, the Region, the maximum number of
+    # retention days, the minimum number of retention days, and optionally
+    # can include tags and a creator request ID.
     #
     # <note markdown="1"> Do not include sensitive data, such as passport numbers, in the name
     # of a backup vault.
@@ -1981,6 +1984,7 @@ module Aws::Backup
     #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.delete_after_days #=> Integer
     #   resp.backup_plan.rules[0].copy_actions[0].destination_backup_vault_arn #=> String
     #   resp.backup_plan.rules[0].enable_continuous_backup #=> Boolean
+    #   resp.backup_plan.rules[0].schedule_expression_timezone #=> String
     #   resp.backup_plan.advanced_backup_settings #=> Array
     #   resp.backup_plan.advanced_backup_settings[0].resource_type #=> String
     #   resp.backup_plan.advanced_backup_settings[0].backup_options #=> Hash
@@ -2040,6 +2044,7 @@ module Aws::Backup
     #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.delete_after_days #=> Integer
     #   resp.backup_plan.rules[0].copy_actions[0].destination_backup_vault_arn #=> String
     #   resp.backup_plan.rules[0].enable_continuous_backup #=> Boolean
+    #   resp.backup_plan.rules[0].schedule_expression_timezone #=> String
     #   resp.backup_plan.advanced_backup_settings #=> Array
     #   resp.backup_plan.advanced_backup_settings[0].resource_type #=> String
     #   resp.backup_plan.advanced_backup_settings[0].backup_options #=> Hash
@@ -2088,6 +2093,7 @@ module Aws::Backup
     #   resp.backup_plan_document.rules[0].copy_actions[0].lifecycle.delete_after_days #=> Integer
     #   resp.backup_plan_document.rules[0].copy_actions[0].destination_backup_vault_arn #=> String
     #   resp.backup_plan_document.rules[0].enable_continuous_backup #=> Boolean
+    #   resp.backup_plan_document.rules[0].schedule_expression_timezone #=> String
     #   resp.backup_plan_document.advanced_backup_settings #=> Array
     #   resp.backup_plan_document.advanced_backup_settings[0].resource_type #=> String
     #   resp.backup_plan_document.advanced_backup_settings[0].backup_options #=> Hash
@@ -4302,6 +4308,7 @@ module Aws::Backup
     #             },
     #           ],
     #           enable_continuous_backup: false,
+    #           schedule_expression_timezone: "Timezone",
     #         },
     #       ],
     #       advanced_backup_settings: [
@@ -4654,7 +4661,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

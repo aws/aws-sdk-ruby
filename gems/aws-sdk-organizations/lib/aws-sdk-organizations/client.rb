@@ -413,7 +413,7 @@ module Aws::Organizations
     #   `iam:CreateServiceLinkedRole` permission so that Organizations can
     #   create the required service-linked role named
     #   `AWSServiceRoleForOrganizations`. For more information, see
-    #   [Organizations and Service-Linked Roles][1] in the *Organizations
+    #   [Organizations and service-linked roles][1] in the *Organizations
     #   User Guide*.
     #
     # * **Enable all features final confirmation** handshake: only a
@@ -421,16 +421,16 @@ module Aws::Organizations
     #
     #   For more information about invitations, see [Inviting an Amazon Web
     #   Services account to join your organization][2] in the *Organizations
-    #   User Guide.* For more information about requests to enable all
+    #   User Guide*. For more information about requests to enable all
     #   features in the organization, see [Enabling all features in your
-    #   organization][3] in the *Organizations User Guide.*
+    #   organization][3] in the *Organizations User Guide*.
     #
     # After you accept a handshake, it continues to appear in the results of
     # relevant APIs for only 30 days. After that, it's deleted.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integration_services.html#orgs_integration_service-linked-roles
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integration_services.html#orgs_integrate_services-using_slrs
     # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_invites.html
     # [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
     #
@@ -549,7 +549,8 @@ module Aws::Organizations
     # * [TAG\_POLICY][4]
     #
     # This operation can be called only from the organization's management
-    # account.
+    # account or by a member account that is a delegated administrator for
+    # an Amazon Web Services service.
     #
     #
     #
@@ -767,15 +768,14 @@ module Aws::Organizations
     # * Check the CloudTrail log for the `CloseAccountResult` event that
     #   gets published after the account closes successfully. For
     #   information on using CloudTrail with Organizations, see [Logging and
-    #   monitoring in Organizations][2] in the *Organizations User Guide.*
+    #   monitoring in Organizations][2] in the *Organizations User Guide*.
     #
     # <note markdown="1"> * You can close only 10% of member accounts, between 10 and 200,
     #   within a rolling 30 day period. This quota is not bound by a
-    #   calendar month, but starts when you close an account.
-    #
-    #   After you reach this limit, you can close additional accounts in the
-    #   Billing console. For more information, see [Closing an account][3]
-    #   in the Amazon Web Services Billing and Cost Management User Guide.
+    #   calendar month, but starts when you close an account. After you
+    #   reach this limit, you can close additional accounts. For more
+    #   information, see [Closing a member account in your organization][3]
+    #   in the *Organizations User Guide*.
     #
     # * To reinstate a closed account, contact Amazon Web Services Support
     #   within the 90-day grace period while the account is in SUSPENDED
@@ -789,16 +789,12 @@ module Aws::Organizations
     #
     #  </note>
     #
-    # For more information about closing accounts, see [Closing an Amazon
-    # Web Services account][5] in the *Organizations User Guide.*
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
     # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html#orgs_cloudtrail-integration
-    # [3]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/close-account.html
+    # [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html
     # [4]: https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/Closing-govcloud-account.html
-    # [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html
     #
     # @option params [required, String] :account_id
     #   Retrieves the Amazon Web Services account Id for the current
@@ -836,13 +832,13 @@ module Aws::Organizations
     #
     # * Check the CloudTrail log for the `CreateAccountResult` event. For
     #   information on using CloudTrail with Organizations, see [Logging and
-    #   monitoring in Organizations][1] in the *Organizations User Guide.*
+    #   monitoring in Organizations][1] in the *Organizations User Guide*.
     #
     # The user who calls the API to create an account must have the
     # `organizations:CreateAccount` permission. If you enabled all features
     # in the organization, Organizations creates the required service-linked
     # role named `AWSServiceRoleForOrganizations`. For more information, see
-    # [Organizations and Service-Linked Roles][2] in the *Organizations User
+    # [Organizations and service-linked roles][2] in the *Organizations User
     # Guide*.
     #
     # If the request includes tags, then the requester must have the
@@ -858,9 +854,8 @@ module Aws::Organizations
     # This operation can be called only from the organization's management
     # account.
     #
-    # For more information about creating accounts, see [Creating an Amazon
-    # Web Services account in Your Organization][3] in the *Organizations
-    # User Guide.*
+    # For more information about creating accounts, see [Creating a member
+    # account in your organization][3] in the *Organizations User Guide*.
     #
     # * When you create an account in an organization using the
     #   Organizations console, API, or CLI commands, the information
@@ -868,8 +863,9 @@ module Aws::Organizations
     #   a payment method and signing the end user license agreement (EULA)
     #   is *not* automatically collected. If you must remove an account from
     #   your organization later, you can do so only after you provide the
-    #   missing information. Follow the steps at [ To leave an organization
-    #   as a member account][4] in the *Organizations User Guide*.
+    #   missing information. For more information, see [Considerations
+    #   before removing an account from an organization][4] in the
+    #   *Organizations User Guide*.
     #
     # * If you get an exception that indicates that you exceeded your
     #   account limits for the organization, contact [Amazon Web Services
@@ -884,7 +880,7 @@ module Aws::Organizations
     #   recommended. You can only close an account from the Billing and Cost
     #   Management console, and you must be signed in as the root user. For
     #   information on the requirements and process for closing an account,
-    #   see [Closing an Amazon Web Services account][6] in the
+    #   see [Closing a member account in your organization][6] in the
     #   *Organizations User Guide*.
     #
     # <note markdown="1"> When you create a member account with this operation, you can choose
@@ -893,8 +889,8 @@ module Aws::Organizations
     # roles that have appropriate permissions can view billing information
     # for the account. If you disable it, only the account root user can
     # access billing information. For information about how to disable this
-    # switch for an account, see [Granting Access to Your Billing
-    # Information and Tools][7].
+    # switch for an account, see [Granting access to your billing
+    # information and tools][7].
     #
     #  </note>
     #
@@ -903,10 +899,10 @@ module Aws::Organizations
     # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html#orgs_cloudtrail-integration
     # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs
     # [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html
-    # [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
+    # [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_account-before-remove.html
     # [5]: https://console.aws.amazon.com/support/home#/
     # [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html
-    # [7]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html
+    # [7]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/control-access-billing.html#grantaccess
     #
     # @option params [required, String] :email
     #   The email address of the owner to assign to the new member account.
@@ -956,11 +952,11 @@ module Aws::Organizations
     #   For more information about how to use this role to access the member
     #   account, see the following links:
     #
-    #   * [Accessing and Administering the Member Accounts in Your
-    #     Organization][1] in the *Organizations User Guide*
+    #   * [Creating the OrganizationAccountAccessRole in an invited member
+    #     account][1] in the *Organizations User Guide*
     #
-    #   * Steps 2 and 3 in [Tutorial: Delegate Access Across Amazon Web
-    #     Services accounts Using IAM Roles][2] in the *IAM User Guide*
+    #   * Steps 2 and 3 in [IAM Tutorial: Delegate access across Amazon Web
+    #     Services accounts using IAM roles][2] in the *IAM User Guide*
     #
     #   The [regex pattern][3] that is used to validate this parameter. The
     #   pattern can include uppercase letters, lowercase letters, digits with
@@ -976,8 +972,8 @@ module Aws::Organizations
     #   If set to `ALLOW`, the new account enables IAM users to access account
     #   billing information *if* they have the required permissions. If set to
     #   `DENY`, only the root user of the new account can access account
-    #   billing information. For more information, see [Activating Access to
-    #   the Billing and Cost Management Console][1] in the *Amazon Web
+    #   billing information. For more information, see [About IAM access to
+    #   the Billing and Cost Management console][1] in the *Amazon Web
     #   Services Billing and Cost Management User Guide*.
     #
     #   If you don't specify this parameter, the value defaults to `ALLOW`,
@@ -1083,8 +1079,8 @@ module Aws::Organizations
     #
     # Organizations automatically creates the required service-linked role
     # named `AWSServiceRoleForOrganizations`. For more information, see
-    # [Organizations and Service-Linked Roles][2] in the *Organizations User
-    # Guide.*
+    # [Organizations and service-linked roles][2] in the *Organizations User
+    # Guide*.
     #
     # Amazon Web Services automatically enables CloudTrail for Amazon Web
     # Services GovCloud (US) accounts, but you should also do the following:
@@ -1110,7 +1106,7 @@ module Aws::Organizations
     # Amazon Web Services GovCloud (US) Region can invite it to that
     # organization. For more information on inviting standalone accounts in
     # the Amazon Web Services GovCloud (US) to join an organization, see
-    # [Organizations][4] in the *Amazon Web Services GovCloud User Guide.*
+    # [Organizations][4] in the *Amazon Web Services GovCloud User Guide*.
     #
     # Calling `CreateGovCloudAccount` is an asynchronous request that Amazon
     # Web Services performs in the background. Because
@@ -1124,9 +1120,8 @@ module Aws::Organizations
     #   provide as a parameter to the DescribeCreateAccountStatus operation.
     #
     # * Check the CloudTrail log for the `CreateAccountResult` event. For
-    #   information on using CloudTrail with Organizations, see [Monitoring
-    #   the Activity in Your Organization][5] in the *Organizations User
-    #   Guide.*
+    #   information on using CloudTrail with Organizations, see [Logging and
+    #   monitoring in Organizations][5] in the *Organizations User Guide*.
     #
     #
     #
@@ -1146,11 +1141,10 @@ module Aws::Organizations
     # GovCloud (US) account that is associated with the management account
     # of the commercial organization. For more information and to view a
     # diagram that explains how account access works, see [Organizations][4]
-    # in the *Amazon Web Services GovCloud User Guide.*
+    # in the *Amazon Web Services GovCloud User Guide*.
     #
-    # For more information about creating accounts, see [Creating an Amazon
-    # Web Services account in Your Organization][6] in the *Organizations
-    # User Guide.*
+    # For more information about creating accounts, see [Creating a member
+    # account in your organization][6] in the *Organizations User Guide*.
     #
     # * When you create an account in an organization using the
     #   Organizations console, API, or CLI commands, the information
@@ -1158,9 +1152,9 @@ module Aws::Organizations
     #   automatically collected. This includes a payment method and signing
     #   the end user license agreement (EULA). If you must remove an account
     #   from your organization later, you can do so only after you provide
-    #   the missing information. Follow the steps at [ To leave an
-    #   organization as a member account][7] in the *Organizations User
-    #   Guide.*
+    #   the missing information. For more information, see [Considerations
+    #   before removing an account from an organization][7] in the
+    #   *Organizations User Guide*.
     #
     # * If you get an exception that indicates that you exceeded your
     #   account limits for the organization, contact [Amazon Web Services
@@ -1175,8 +1169,8 @@ module Aws::Organizations
     #   isn't recommended. You can only close an account from the Amazon
     #   Web Services Billing and Cost Management console, and you must be
     #   signed in as the root user. For information on the requirements and
-    #   process for closing an account, see [Closing an Amazon Web Services
-    #   account][9] in the *Organizations User Guide*.
+    #   process for closing an account, see [Closing a member account in
+    #   your organization][9] in the *Organizations User Guide*.
     #
     # <note markdown="1"> When you create a member account with this operation, you can choose
     # whether to create the account with the **IAM User and Role Access to
@@ -1184,8 +1178,8 @@ module Aws::Organizations
     # roles that have appropriate permissions can view billing information
     # for the account. If you disable it, only the account root user can
     # access billing information. For information about how to disable this
-    # switch for an account, see [Granting Access to Your Billing
-    # Information and Tools][10].
+    # switch for an account, see [Granting access to your billing
+    # information and tools][10].
     #
     #  </note>
     #
@@ -1195,9 +1189,9 @@ module Aws::Organizations
     # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs
     # [3]: https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/verifying-cloudtrail.html
     # [4]: https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html
-    # [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html
+    # [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html
     # [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html
-    # [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
+    # [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_account-before-remove.html
     # [8]: https://console.aws.amazon.com/support/home#/
     # [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html
     # [10]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html
@@ -1259,10 +1253,13 @@ module Aws::Organizations
     #   `OrganizationAccountAccessRole`.
     #
     #   For more information about how to use this role to access the member
-    #   account, see [Accessing and Administering the Member Accounts in Your
-    #   Organization][1] in the *Organizations User Guide* and steps 2 and 3
-    #   in [Tutorial: Delegate Access Across Amazon Web Services accounts
-    #   Using IAM Roles][2] in the *IAM User Guide.*
+    #   account, see the following links:
+    #
+    #   * [Creating the OrganizationAccountAccessRole in an invited member
+    #     account][1] in the *Organizations User Guide*
+    #
+    #   * Steps 2 and 3 in [IAM Tutorial: Delegate access across Amazon Web
+    #     Services accounts using IAM roles][2] in the *IAM User Guide*
     #
     #   The [regex pattern][3] that is used to validate this parameter. The
     #   pattern can include uppercase letters, lowercase letters, digits with
@@ -1279,9 +1276,9 @@ module Aws::Organizations
     #   enables IAM users to access account billing information *if* they have
     #   the required permissions. If set to `DENY`, only the root user of the
     #   new account can access account billing information. For more
-    #   information, see [Activating Access to the Billing and Cost Management
-    #   Console][1] in the *Amazon Web Services Billing and Cost Management
-    #   User Guide.*
+    #   information, see [About IAM access to the Billing and Cost Management
+    #   console][1] in the *Amazon Web Services Billing and Cost Management
+    #   User Guide*.
     #
     #   If you don't specify this parameter, the value defaults to `ALLOW`,
     #   and IAM users and roles with the required permissions can access
@@ -1365,8 +1362,8 @@ module Aws::Organizations
     # control policies automatically enabled in the root. If you instead
     # choose to create the organization supporting only the consolidated
     # billing features by setting the `FeatureSet` parameter to
-    # `CONSOLIDATED_BILLING"`, no policy types are enabled by default, and
-    # you can't use organization policies
+    # `CONSOLIDATED_BILLING`, no policy types are enabled by default and you
+    # can't use organization policies.
     #
     #
     #
@@ -1379,7 +1376,7 @@ module Aws::Organizations
     #   * `CONSOLIDATED_BILLING`: All member accounts have their bills
     #     consolidated to and paid by the management account. For more
     #     information, see [Consolidated billing][1] in the *Organizations
-    #     User Guide.*
+    #     User Guide*.
     #
     #     The consolidated billing feature subset isn't available for
     #     organizations in the Amazon Web Services GovCloud (US) Region.
@@ -1388,7 +1385,7 @@ module Aws::Organizations
     #     billing feature set, the management account can also apply any
     #     policy type to any member account in the organization. For more
     #     information, see [All features][2] in the *Organizations User
-    #     Guide.*
+    #     Guide*.
     #
     #
     #
@@ -1484,8 +1481,8 @@ module Aws::Organizations
     # types enabled for that root. For service control policies, the limit
     # is five.
     #
-    # For more information about OUs, see [Managing Organizational Units][1]
-    # in the *Organizations User Guide.*
+    # For more information about OUs, see [Managing organizational units
+    # (OUs)][1] in the *Organizations User Guide*.
     #
     # If the request includes tags, then the requester must have the
     # `organizations:TagResource` permission.
@@ -1592,13 +1589,14 @@ module Aws::Organizations
     # account.
     #
     # For more information about policies and their use, see [Managing
-    # Organization Policies][1].
+    # Organizations policies][1].
     #
     # If the request includes tags, then the requester must have the
     # `organizations:TagResource` permission.
     #
     # This operation can be called only from the organization's management
-    # account.
+    # account or by a member account that is a delegated administrator for
+    # an Amazon Web Services service.
     #
     #
     #
@@ -1905,7 +1903,8 @@ module Aws::Organizations
     # organizational units (OUs), roots, and accounts.
     #
     # This operation can be called only from the organization's management
-    # account.
+    # account or by a member account that is a delegated administrator for
+    # an Amazon Web Services service.
     #
     # @option params [required, String] :policy_id
     #   The unique identifier (ID) of the policy that you want to delete. You
@@ -2161,16 +2160,14 @@ module Aws::Organizations
     # This operation applies only to policy types *other* than service
     # control policies (SCPs).
     #
-    # For more information about policy inheritance, see [How Policy
-    # Inheritance Works][1] in the *Organizations User Guide*.
+    # For more information about policy inheritance, see [Understanding
+    # management policy inheritance][1] in the *Organizations User Guide*.
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # This operation can be called from any account in the organization.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies-inheritance.html
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inheritance_mgmt.html
     #
     # @option params [required, String] :policy_type
     #   The type of policy that you want information about. You can specify
@@ -2529,7 +2526,7 @@ module Aws::Organizations
 
     # Retrieves information about a resource policy.
     #
-    # You can only call this operation from the organization's management
+    # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
     # an Amazon Web Services service.
     #
@@ -2571,7 +2568,8 @@ module Aws::Organizations
     # list][2]".
     #
     # This operation can be called only from the organization's management
-    # account.
+    # account or by a member account that is a delegated administrator for
+    # an Amazon Web Services service.
     #
     #
     #
@@ -2697,8 +2695,8 @@ module Aws::Organizations
     #
     # For more information about integrating other services with
     # Organizations, including the list of services that work with
-    # Organizations, see [Integrating Organizations with Other Amazon Web
-    # Services Services][3] in the *Organizations User Guide.*
+    # Organizations, see [Using Organizations with other Amazon Web Services
+    # services][3] in the *Organizations User Guide*.
     #
     # This operation can be called only from the organization's management
     # account.
@@ -2747,7 +2745,8 @@ module Aws::Organizations
     # and then use this operation.
     #
     # This operation can be called only from the organization's management
-    # account.
+    # account or by a member account that is a delegated administrator for
+    # an Amazon Web Services service.
     #
     # To view the status of available policy types in the organization, use
     # DescribeOrganization.
@@ -2854,8 +2853,8 @@ module Aws::Organizations
     # service.
     #
     # For more information about enabling services to integrate with
-    # Organizations, see [Integrating Organizations with Other Amazon Web
-    # Services Services][2] in the *Organizations User Guide.*
+    # Organizations, see [Using Organizations with other Amazon Web Services
+    # services][2] in the *Organizations User Guide*.
     #
     # You can only call this operation from the organization's management
     # account and only if the organization has [enabled all features][3].
@@ -2894,8 +2893,8 @@ module Aws::Organizations
     # can be called in each account. Until you enable all features, you have
     # access only to consolidated billing, and you can't use any of the
     # advanced account administration features that Organizations supports.
-    # For more information, see [Enabling All Features in Your
-    # Organization][1] in the *Organizations User Guide.*
+    # For more information, see [Enabling all features in your
+    # organization][1] in the *Organizations User Guide*.
     #
     # This operation is required only for organizations that were created
     # explicitly with only the consolidated billing features enabled.
@@ -3003,7 +3002,8 @@ module Aws::Organizations
     # then use this operation.
     #
     # This operation can be called only from the organization's management
-    # account.
+    # account or by a member account that is a delegated administrator for
+    # an Amazon Web Services service.
     #
     # You can enable a policy type in a root only if that policy type is
     # available in the organization. To view the status of available policy
@@ -3107,7 +3107,7 @@ module Aws::Organizations
     #   you can invite only other AISPL accounts to your organization. You
     #   can't combine accounts from AISPL and Amazon Web Services or from
     #   any other Amazon Web Services seller. For more information, see
-    #   [Consolidated Billing in India][1].
+    #   [Consolidated billing in India][1].
     #
     # * If you receive an exception that indicates that you exceeded your
     #   account limits for the organization or that the operation failed
@@ -3123,7 +3123,7 @@ module Aws::Organizations
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/useconsolidatedbilliing-India.html
+    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/useconsolidatedbilling-India.html
     # [2]: https://console.aws.amazon.com/support/home#/
     #
     # @option params [required, Types::HandshakeParty] :target
@@ -3312,10 +3312,9 @@ module Aws::Organizations
     #
     #   Amazon Web Services uses the payment method to charge for any
     #   billable (not free tier) Amazon Web Services activity that occurs
-    #   while the account isn't attached to an organization. Follow the
-    #   steps at [ To leave an organization when all required account
-    #   information has not yet been provided][1] in the *Organizations User
-    #   Guide.*
+    #   while the account isn't attached to an organization. For more
+    #   information, see [Considerations before removing an account from an
+    #   organization][1] in the *Organizations User Guide*.
     #
     # * The account that you want to leave must not be a delegated
     #   administrator account for any Amazon Web Services service enabled
@@ -3324,9 +3323,9 @@ module Aws::Organizations
     #   account that is remaining in the organization.
     #
     # * You can leave an organization only after you enable IAM user access
-    #   to billing in your account. For more information, see [Activating
-    #   Access to the Billing and Cost Management Console][2] in the *Amazon
-    #   Web Services Billing and Cost Management User Guide.*
+    #   to billing in your account. For more information, see [About IAM
+    #   access to the Billing and Cost Management console][2] in the *Amazon
+    #   Web Services Billing and Cost Management User Guide*.
     #
     # * After the account leaves the organization, all tags that were
     #   attached to the account object in the organization are deleted.
@@ -3337,9 +3336,13 @@ module Aws::Organizations
     #   removed from its organization. If you get an error that indicates
     #   that a wait period is required, then try again in a few days.
     #
+    # * If you are using an organization principal to call
+    #   `LeaveOrganization` across multiple accounts, you can only do this
+    #   up to 5 accounts per second in a single organization.
     #
     #
-    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_account-before-remove.html
     # [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -3368,8 +3371,8 @@ module Aws::Organizations
     #
     # For more information about integrating other services with
     # Organizations, including the list of services that currently work with
-    # Organizations, see [Integrating Organizations with Other Amazon Web
-    # Services Services][1] in the *Organizations User Guide.*
+    # Organizations, see [Using Organizations with other Amazon Web Services
+    # services][1] in the *Organizations User Guide*.
     #
     # This operation can be called only from the organization's management
     # account or by a member account that is a delegated administrator for
@@ -5225,12 +5228,12 @@ module Aws::Organizations
     # @option params [required, String] :content
     #   If provided, the new content for the resource policy. The text must be
     #   correctly formatted JSON that complies with the syntax for the
-    #   resource policy's type. For more information, see [Service Control
-    #   Policy Syntax][1] in the *Organizations User Guide.*
+    #   resource policy's type. For more information, see [SCP syntax][1] in
+    #   the *Organizations User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_syntax.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags that you want to attach to the newly created resource
@@ -5343,16 +5346,9 @@ module Aws::Organizations
     #   standalone account. When you create an account in an organization
     #   using the Organizations console, API, or CLI commands, the
     #   information required of standalone accounts is *not* automatically
-    #   collected. For an account that you want to make standalone, you must
-    #   choose a support plan, provide and verify the required contact
-    #   information, and provide a current payment method. Amazon Web
-    #   Services uses the payment method to charge for any billable (not
-    #   free tier) Amazon Web Services activity that occurs while the
-    #   account isn't attached to an organization. To remove an account
-    #   that doesn't yet have this information, you must sign in as the
-    #   member account and follow the steps at [ To leave an organization
-    #   when all required account information has not yet been provided][1]
-    #   in the *Organizations User Guide.*
+    #   collected. For more information, see [Considerations before removing
+    #   an account from an organization][1] in the *Organizations User
+    #   Guide*.
     #
     # * The account that you want to leave must not be a delegated
     #   administrator account for any Amazon Web Services service enabled
@@ -5367,7 +5363,7 @@ module Aws::Organizations
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_account-before-remove.html
     #
     # @option params [required, String] :account_id
     #   The unique identifier (ID) of the member account that you want to
@@ -5420,7 +5416,8 @@ module Aws::Organizations
     # * Policy (any type)
     #
     # This operation can be called only from the organization's management
-    # account.
+    # account or by a member account that is a delegated administrator for
+    # an Amazon Web Services service.
     #
     # @option params [required, String] :resource_id
     #   The ID of the resource to add a tag to.
@@ -5485,7 +5482,8 @@ module Aws::Organizations
     # * Policy (any type)
     #
     # This operation can be called only from the organization's management
-    # account.
+    # account or by a member account that is a delegated administrator for
+    # an Amazon Web Services service.
     #
     # @option params [required, String] :resource_id
     #   The ID of the resource to remove a tag from.
@@ -5604,7 +5602,8 @@ module Aws::Organizations
     # can't change a policy's type.
     #
     # This operation can be called only from the organization's management
-    # account.
+    # account or by a member account that is a delegated administrator for
+    # an Amazon Web Services service.
     #
     # @option params [required, String] :policy_id
     #   The unique identifier (ID) of the policy that you want to update.
@@ -5633,12 +5632,12 @@ module Aws::Organizations
     # @option params [String] :content
     #   If provided, the new content for the policy. The text must be
     #   correctly formatted JSON that complies with the syntax for the
-    #   policy's type. For more information, see [Service Control Policy
-    #   Syntax][1] in the *Organizations User Guide.*
+    #   policy's type. For more information, see [SCP syntax][1] in the
+    #   *Organizations User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_syntax.html
     #
     # @return [Types::UpdatePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5737,7 +5736,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

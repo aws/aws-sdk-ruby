@@ -399,10 +399,10 @@ module Aws::ServiceQuotas
     # @!group API Operations
 
     # Associates your quota request template with your organization. When a
-    # new account is created in your organization, the quota increase
-    # requests in the template are automatically applied to the account. You
-    # can add a quota increase request for any adjustable quota to your
-    # template.
+    # new Amazon Web Services account is created in your organization, the
+    # quota increase requests in the template are automatically applied to
+    # the account. You can add a quota increase request for any adjustable
+    # quota to your template.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -419,13 +419,17 @@ module Aws::ServiceQuotas
     # quota request template.
     #
     # @option params [required, String] :service_code
-    #   The service identifier.
+    #   Specifies the service identifier. To find the service code value for
+    #   an Amazon Web Services service, use the ListServices operation.
     #
     # @option params [required, String] :quota_code
-    #   The quota identifier.
+    #   Specifies the quota identifier. To find the quota code for a specific
+    #   quota, use the ListServiceQuotas operation, and look for the
+    #   `QuotaCode` response in the output for the quota you want.
     #
     # @option params [required, String] :aws_region
-    #   The AWS Region.
+    #   Specifies the Amazon Web Services Region for which the request was
+    #   made.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -448,8 +452,8 @@ module Aws::ServiceQuotas
 
     # Disables your quota request template. After a template is disabled,
     # the quota increase requests in the template are not applied to new
-    # accounts in your organization. Disabling a quota request template does
-    # not apply its quota increase requests.
+    # Amazon Web Services accounts in your organization. Disabling a quota
+    # request template does not apply its quota increase requests.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -466,10 +470,13 @@ module Aws::ServiceQuotas
     # does not reflect any quota increases.
     #
     # @option params [required, String] :service_code
-    #   The service identifier.
+    #   Specifies the service identifier. To find the service code value for
+    #   an Amazon Web Services service, use the ListServices operation.
     #
     # @option params [required, String] :quota_code
-    #   The quota identifier.
+    #   Specifies the quota identifier. To find the quota code for a specific
+    #   quota, use the ListServiceQuotas operation, and look for the
+    #   `QuotaCode` response in the output for the quota you want.
     #
     # @return [Types::GetAWSDefaultServiceQuotaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -502,6 +509,10 @@ module Aws::ServiceQuotas
     #   resp.quota.period.period_unit #=> String, one of "MICROSECOND", "MILLISECOND", "SECOND", "MINUTE", "HOUR", "DAY", "WEEK"
     #   resp.quota.error_reason.error_code #=> String, one of "DEPENDENCY_ACCESS_DENIED_ERROR", "DEPENDENCY_THROTTLING_ERROR", "DEPENDENCY_SERVICE_ERROR", "SERVICE_QUOTA_NOT_AVAILABLE_ERROR"
     #   resp.quota.error_reason.error_message #=> String
+    #   resp.quota.quota_applied_at_level #=> String, one of "ACCOUNT", "RESOURCE", "ALL"
+    #   resp.quota.quota_context.context_scope #=> String, one of "RESOURCE", "ACCOUNT"
+    #   resp.quota.quota_context.context_scope_type #=> String
+    #   resp.quota.quota_context.context_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetAWSDefaultServiceQuota AWS API Documentation
     #
@@ -535,7 +546,7 @@ module Aws::ServiceQuotas
     # Retrieves information about the specified quota increase request.
     #
     # @option params [required, String] :request_id
-    #   The ID of the quota increase request.
+    #   Specifies the ID of the quota increase request.
     #
     # @return [Types::GetRequestedServiceQuotaChangeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -556,13 +567,17 @@ module Aws::ServiceQuotas
     #   resp.requested_quota.quota_code #=> String
     #   resp.requested_quota.quota_name #=> String
     #   resp.requested_quota.desired_value #=> Float
-    #   resp.requested_quota.status #=> String, one of "PENDING", "CASE_OPENED", "APPROVED", "DENIED", "CASE_CLOSED"
+    #   resp.requested_quota.status #=> String, one of "PENDING", "CASE_OPENED", "APPROVED", "DENIED", "CASE_CLOSED", "NOT_APPROVED", "INVALID_REQUEST"
     #   resp.requested_quota.created #=> Time
     #   resp.requested_quota.last_updated #=> Time
     #   resp.requested_quota.requester #=> String
     #   resp.requested_quota.quota_arn #=> String
     #   resp.requested_quota.global_quota #=> Boolean
     #   resp.requested_quota.unit #=> String
+    #   resp.requested_quota.quota_requested_at_level #=> String, one of "ACCOUNT", "RESOURCE", "ALL"
+    #   resp.requested_quota.quota_context.context_scope #=> String, one of "RESOURCE", "ACCOUNT"
+    #   resp.requested_quota.quota_context.context_scope_type #=> String
+    #   resp.requested_quota.quota_context.context_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetRequestedServiceQuotaChange AWS API Documentation
     #
@@ -578,10 +593,18 @@ module Aws::ServiceQuotas
     # value is not available for a quota, the quota is not retrieved.
     #
     # @option params [required, String] :service_code
-    #   The service identifier.
+    #   Specifies the service identifier. To find the service code value for
+    #   an Amazon Web Services service, use the ListServices operation.
     #
     # @option params [required, String] :quota_code
-    #   The quota identifier.
+    #   Specifies the quota identifier. To find the quota code for a specific
+    #   quota, use the ListServiceQuotas operation, and look for the
+    #   `QuotaCode` response in the output for the quota you want.
+    #
+    # @option params [String] :context_id
+    #   Specifies the Amazon Web Services account or resource to which the
+    #   quota applies. The value in this field depends on the context scope
+    #   associated with the specified service quota.
     #
     # @return [Types::GetServiceQuotaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -592,6 +615,7 @@ module Aws::ServiceQuotas
     #   resp = client.get_service_quota({
     #     service_code: "ServiceCode", # required
     #     quota_code: "QuotaCode", # required
+    #     context_id: "QuotaContextId",
     #   })
     #
     # @example Response structure
@@ -614,6 +638,10 @@ module Aws::ServiceQuotas
     #   resp.quota.period.period_unit #=> String, one of "MICROSECOND", "MILLISECOND", "SECOND", "MINUTE", "HOUR", "DAY", "WEEK"
     #   resp.quota.error_reason.error_code #=> String, one of "DEPENDENCY_ACCESS_DENIED_ERROR", "DEPENDENCY_THROTTLING_ERROR", "DEPENDENCY_SERVICE_ERROR", "SERVICE_QUOTA_NOT_AVAILABLE_ERROR"
     #   resp.quota.error_reason.error_message #=> String
+    #   resp.quota.quota_applied_at_level #=> String, one of "ACCOUNT", "RESOURCE", "ALL"
+    #   resp.quota.quota_context.context_scope #=> String, one of "RESOURCE", "ACCOUNT"
+    #   resp.quota.quota_context.context_scope_type #=> String
+    #   resp.quota.quota_context.context_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetServiceQuota AWS API Documentation
     #
@@ -628,13 +656,17 @@ module Aws::ServiceQuotas
     # your quota request template.
     #
     # @option params [required, String] :service_code
-    #   The service identifier.
+    #   Specifies the service identifier. To find the service code value for
+    #   an Amazon Web Services service, use the ListServices operation.
     #
     # @option params [required, String] :quota_code
-    #   The quota identifier.
+    #   Specifies the quota identifier. To find the quota code for a specific
+    #   quota, use the ListServiceQuotas operation, and look for the
+    #   `QuotaCode` response in the output for the quota you want.
     #
     # @option params [required, String] :aws_region
-    #   The AWS Region.
+    #   Specifies the Amazon Web Services Region for which you made the
+    #   request.
     #
     # @return [Types::GetServiceQuotaIncreaseRequestFromTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -668,19 +700,34 @@ module Aws::ServiceQuotas
       req.send_request(options)
     end
 
-    # Lists the default values for the quotas for the specified AWS service.
-    # A default value does not reflect any quota increases.
+    # Lists the default values for the quotas for the specified Amazon Web
+    # Service. A default value does not reflect any quota increases.
     #
     # @option params [required, String] :service_code
-    #   The service identifier.
+    #   Specifies the service identifier. To find the service code value for
+    #   an Amazon Web Services service, use the ListServices operation.
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   Specifies a value for receiving additional results after you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, if any, make another call with the
-    #   token returned from this call.
+    #   Specifies the maximum number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value appropriate to the operation. If additional items
+    #   exist beyond those included in the current response, the `NextToken`
+    #   response element is present and has a value (is not null). Include
+    #   that value as the `NextToken` request parameter in the next call to
+    #   the operation to get the next part of the results.
+    #
+    #   <note markdown="1"> An API operation can return fewer results than the maximum even when
+    #   there are more results available. You should check `NextToken` after
+    #   every operation to ensure that you receive all of the results.
+    #
+    #    </note>
     #
     # @return [Types::ListAWSDefaultServiceQuotasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -719,6 +766,10 @@ module Aws::ServiceQuotas
     #   resp.quotas[0].period.period_unit #=> String, one of "MICROSECOND", "MILLISECOND", "SECOND", "MINUTE", "HOUR", "DAY", "WEEK"
     #   resp.quotas[0].error_reason.error_code #=> String, one of "DEPENDENCY_ACCESS_DENIED_ERROR", "DEPENDENCY_THROTTLING_ERROR", "DEPENDENCY_SERVICE_ERROR", "SERVICE_QUOTA_NOT_AVAILABLE_ERROR"
     #   resp.quotas[0].error_reason.error_message #=> String
+    #   resp.quotas[0].quota_applied_at_level #=> String, one of "ACCOUNT", "RESOURCE", "ALL"
+    #   resp.quotas[0].quota_context.context_scope #=> String, one of "RESOURCE", "ACCOUNT"
+    #   resp.quotas[0].quota_context.context_scope_type #=> String
+    #   resp.quotas[0].quota_context.context_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListAWSDefaultServiceQuotas AWS API Documentation
     #
@@ -729,21 +780,42 @@ module Aws::ServiceQuotas
       req.send_request(options)
     end
 
-    # Retrieves the quota increase requests for the specified service.
+    # Retrieves the quota increase requests for the specified Amazon Web
+    # Service.
     #
     # @option params [String] :service_code
-    #   The service identifier.
+    #   Specifies the service identifier. To find the service code value for
+    #   an Amazon Web Services service, use the ListServices operation.
     #
     # @option params [String] :status
-    #   The status of the quota increase request.
+    #   Specifies that you want to filter the results to only the requests
+    #   with the matching status.
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   Specifies a value for receiving additional results after you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, if any, make another call with the
-    #   token returned from this call.
+    #   Specifies the maximum number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value appropriate to the operation. If additional items
+    #   exist beyond those included in the current response, the `NextToken`
+    #   response element is present and has a value (is not null). Include
+    #   that value as the `NextToken` request parameter in the next call to
+    #   the operation to get the next part of the results.
+    #
+    #   <note markdown="1"> An API operation can return fewer results than the maximum even when
+    #   there are more results available. You should check `NextToken` after
+    #   every operation to ensure that you receive all of the results.
+    #
+    #    </note>
+    #
+    # @option params [String] :quota_requested_at_level
+    #   Specifies at which level within the Amazon Web Services account the
+    #   quota request applies to.
     #
     # @return [Types::ListRequestedServiceQuotaChangeHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -756,9 +828,10 @@ module Aws::ServiceQuotas
     #
     #   resp = client.list_requested_service_quota_change_history({
     #     service_code: "ServiceCode",
-    #     status: "PENDING", # accepts PENDING, CASE_OPENED, APPROVED, DENIED, CASE_CLOSED
+    #     status: "PENDING", # accepts PENDING, CASE_OPENED, APPROVED, DENIED, CASE_CLOSED, NOT_APPROVED, INVALID_REQUEST
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     quota_requested_at_level: "ACCOUNT", # accepts ACCOUNT, RESOURCE, ALL
     #   })
     #
     # @example Response structure
@@ -772,13 +845,17 @@ module Aws::ServiceQuotas
     #   resp.requested_quotas[0].quota_code #=> String
     #   resp.requested_quotas[0].quota_name #=> String
     #   resp.requested_quotas[0].desired_value #=> Float
-    #   resp.requested_quotas[0].status #=> String, one of "PENDING", "CASE_OPENED", "APPROVED", "DENIED", "CASE_CLOSED"
+    #   resp.requested_quotas[0].status #=> String, one of "PENDING", "CASE_OPENED", "APPROVED", "DENIED", "CASE_CLOSED", "NOT_APPROVED", "INVALID_REQUEST"
     #   resp.requested_quotas[0].created #=> Time
     #   resp.requested_quotas[0].last_updated #=> Time
     #   resp.requested_quotas[0].requester #=> String
     #   resp.requested_quotas[0].quota_arn #=> String
     #   resp.requested_quotas[0].global_quota #=> Boolean
     #   resp.requested_quotas[0].unit #=> String
+    #   resp.requested_quotas[0].quota_requested_at_level #=> String, one of "ACCOUNT", "RESOURCE", "ALL"
+    #   resp.requested_quotas[0].quota_context.context_scope #=> String, one of "RESOURCE", "ACCOUNT"
+    #   resp.requested_quotas[0].quota_context.context_scope_type #=> String
+    #   resp.requested_quotas[0].quota_context.context_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListRequestedServiceQuotaChangeHistory AWS API Documentation
     #
@@ -792,21 +869,43 @@ module Aws::ServiceQuotas
     # Retrieves the quota increase requests for the specified quota.
     #
     # @option params [required, String] :service_code
-    #   The service identifier.
+    #   Specifies the service identifier. To find the service code value for
+    #   an Amazon Web Services service, use the ListServices operation.
     #
     # @option params [required, String] :quota_code
-    #   The quota identifier.
+    #   Specifies the quota identifier. To find the quota code for a specific
+    #   quota, use the ListServiceQuotas operation, and look for the
+    #   `QuotaCode` response in the output for the quota you want.
     #
     # @option params [String] :status
-    #   The status value of the quota increase request.
+    #   Specifies that you want to filter the results to only the requests
+    #   with the matching status.
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   Specifies a value for receiving additional results after you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, if any, make another call with the
-    #   token returned from this call.
+    #   Specifies the maximum number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value appropriate to the operation. If additional items
+    #   exist beyond those included in the current response, the `NextToken`
+    #   response element is present and has a value (is not null). Include
+    #   that value as the `NextToken` request parameter in the next call to
+    #   the operation to get the next part of the results.
+    #
+    #   <note markdown="1"> An API operation can return fewer results than the maximum even when
+    #   there are more results available. You should check `NextToken` after
+    #   every operation to ensure that you receive all of the results.
+    #
+    #    </note>
+    #
+    # @option params [String] :quota_requested_at_level
+    #   Specifies at which level within the Amazon Web Services account the
+    #   quota request applies to.
     #
     # @return [Types::ListRequestedServiceQuotaChangeHistoryByQuotaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -820,9 +919,10 @@ module Aws::ServiceQuotas
     #   resp = client.list_requested_service_quota_change_history_by_quota({
     #     service_code: "ServiceCode", # required
     #     quota_code: "QuotaCode", # required
-    #     status: "PENDING", # accepts PENDING, CASE_OPENED, APPROVED, DENIED, CASE_CLOSED
+    #     status: "PENDING", # accepts PENDING, CASE_OPENED, APPROVED, DENIED, CASE_CLOSED, NOT_APPROVED, INVALID_REQUEST
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     quota_requested_at_level: "ACCOUNT", # accepts ACCOUNT, RESOURCE, ALL
     #   })
     #
     # @example Response structure
@@ -836,13 +936,17 @@ module Aws::ServiceQuotas
     #   resp.requested_quotas[0].quota_code #=> String
     #   resp.requested_quotas[0].quota_name #=> String
     #   resp.requested_quotas[0].desired_value #=> Float
-    #   resp.requested_quotas[0].status #=> String, one of "PENDING", "CASE_OPENED", "APPROVED", "DENIED", "CASE_CLOSED"
+    #   resp.requested_quotas[0].status #=> String, one of "PENDING", "CASE_OPENED", "APPROVED", "DENIED", "CASE_CLOSED", "NOT_APPROVED", "INVALID_REQUEST"
     #   resp.requested_quotas[0].created #=> Time
     #   resp.requested_quotas[0].last_updated #=> Time
     #   resp.requested_quotas[0].requester #=> String
     #   resp.requested_quotas[0].quota_arn #=> String
     #   resp.requested_quotas[0].global_quota #=> Boolean
     #   resp.requested_quotas[0].unit #=> String
+    #   resp.requested_quotas[0].quota_requested_at_level #=> String, one of "ACCOUNT", "RESOURCE", "ALL"
+    #   resp.requested_quotas[0].quota_context.context_scope #=> String, one of "RESOURCE", "ACCOUNT"
+    #   resp.requested_quotas[0].quota_context.context_scope_type #=> String
+    #   resp.requested_quotas[0].quota_context.context_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListRequestedServiceQuotaChangeHistoryByQuota AWS API Documentation
     #
@@ -857,18 +961,34 @@ module Aws::ServiceQuotas
     # template.
     #
     # @option params [String] :service_code
-    #   The service identifier.
+    #   Specifies the service identifier. To find the service code value for
+    #   an Amazon Web Services service, use the ListServices operation.
     #
     # @option params [String] :aws_region
-    #   The AWS Region.
+    #   Specifies the Amazon Web Services Region for which you made the
+    #   request.
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   Specifies a value for receiving additional results after you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, if any, make another call with the
-    #   token returned from this call.
+    #   Specifies the maximum number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value appropriate to the operation. If additional items
+    #   exist beyond those included in the current response, the `NextToken`
+    #   response element is present and has a value (is not null). Include
+    #   that value as the `NextToken` request parameter in the next call to
+    #   the operation to get the next part of the results.
+    #
+    #   <note markdown="1"> An API operation can return fewer results than the maximum even when
+    #   there are more results available. You should check `NextToken` after
+    #   every operation to ensure that you receive all of the results.
+    #
+    #    </note>
     #
     # @return [Types::ListServiceQuotaIncreaseRequestsInTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -908,20 +1028,44 @@ module Aws::ServiceQuotas
       req.send_request(options)
     end
 
-    # Lists the applied quota values for the specified AWS service. For some
-    # quotas, only the default values are available. If the applied quota
-    # value is not available for a quota, the quota is not retrieved.
+    # Lists the applied quota values for the specified Amazon Web Service.
+    # For some quotas, only the default values are available. If the applied
+    # quota value is not available for a quota, the quota is not retrieved.
     #
     # @option params [required, String] :service_code
-    #   The service identifier.
+    #   Specifies the service identifier. To find the service code value for
+    #   an Amazon Web Services service, use the ListServices operation.
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   Specifies a value for receiving additional results after you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, if any, make another call with the
-    #   token returned from this call.
+    #   Specifies the maximum number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value appropriate to the operation. If additional items
+    #   exist beyond those included in the current response, the `NextToken`
+    #   response element is present and has a value (is not null). Include
+    #   that value as the `NextToken` request parameter in the next call to
+    #   the operation to get the next part of the results.
+    #
+    #   <note markdown="1"> An API operation can return fewer results than the maximum even when
+    #   there are more results available. You should check `NextToken` after
+    #   every operation to ensure that you receive all of the results.
+    #
+    #    </note>
+    #
+    # @option params [String] :quota_code
+    #   Specifies the quota identifier. To find the quota code for a specific
+    #   quota, use the ListServiceQuotas operation, and look for the
+    #   `QuotaCode` response in the output for the quota you want.
+    #
+    # @option params [String] :quota_applied_at_level
+    #   Specifies at which level of granularity that the quota value is
+    #   applied.
     #
     # @return [Types::ListServiceQuotasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -936,6 +1080,8 @@ module Aws::ServiceQuotas
     #     service_code: "ServiceCode", # required
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     quota_code: "QuotaCode",
+    #     quota_applied_at_level: "ACCOUNT", # accepts ACCOUNT, RESOURCE, ALL
     #   })
     #
     # @example Response structure
@@ -960,6 +1106,10 @@ module Aws::ServiceQuotas
     #   resp.quotas[0].period.period_unit #=> String, one of "MICROSECOND", "MILLISECOND", "SECOND", "MINUTE", "HOUR", "DAY", "WEEK"
     #   resp.quotas[0].error_reason.error_code #=> String, one of "DEPENDENCY_ACCESS_DENIED_ERROR", "DEPENDENCY_THROTTLING_ERROR", "DEPENDENCY_SERVICE_ERROR", "SERVICE_QUOTA_NOT_AVAILABLE_ERROR"
     #   resp.quotas[0].error_reason.error_message #=> String
+    #   resp.quotas[0].quota_applied_at_level #=> String, one of "ACCOUNT", "RESOURCE", "ALL"
+    #   resp.quotas[0].quota_context.context_scope #=> String, one of "RESOURCE", "ACCOUNT"
+    #   resp.quotas[0].quota_context.context_scope_type #=> String
+    #   resp.quotas[0].quota_context.context_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListServiceQuotas AWS API Documentation
     #
@@ -970,16 +1120,30 @@ module Aws::ServiceQuotas
       req.send_request(options)
     end
 
-    # Lists the names and codes for the services integrated with Service
-    # Quotas.
+    # Lists the names and codes for the Amazon Web Services integrated with
+    # Service Quotas.
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   Specifies a value for receiving additional results after you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, if any, make another call with the
-    #   token returned from this call.
+    #   Specifies the maximum number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value appropriate to the operation. If additional items
+    #   exist beyond those included in the current response, the `NextToken`
+    #   response element is present and has a value (is not null). Include
+    #   that value as the `NextToken` request parameter in the next call to
+    #   the operation to get the next part of the results.
+    #
+    #   <note markdown="1"> An API operation can return fewer results than the maximum even when
+    #   there are more results available. You should check `NextToken` after
+    #   every operation to ensure that you receive all of the results.
+    #
+    #    </note>
     #
     # @return [Types::ListServicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1017,8 +1181,8 @@ module Aws::ServiceQuotas
     #   The Amazon Resource Name (ARN) for the applied quota for which you
     #   want to list tags. You can get this information by using the Service
     #   Quotas console, or by listing the quotas using the
-    #   [list-service-quotas][1] AWS CLI command or the [ListServiceQuotas][2]
-    #   AWS API operation.
+    #   [list-service-quotas][1] CLI command or the [ListServiceQuotas][2]
+    #   Amazon Web Services API operation.
     #
     #
     #
@@ -1053,16 +1217,20 @@ module Aws::ServiceQuotas
     # Adds a quota increase request to your quota request template.
     #
     # @option params [required, String] :quota_code
-    #   The quota identifier.
+    #   Specifies the quota identifier. To find the quota code for a specific
+    #   quota, use the ListServiceQuotas operation, and look for the
+    #   `QuotaCode` response in the output for the quota you want.
     #
     # @option params [required, String] :service_code
-    #   The service identifier.
+    #   Specifies the service identifier. To find the service code value for
+    #   an Amazon Web Services service, use the ListServices operation.
     #
     # @option params [required, String] :aws_region
-    #   The AWS Region.
+    #   Specifies the Amazon Web Services Region to which the template
+    #   applies.
     #
     # @option params [required, Float] :desired_value
-    #   The new, increased value for the quota.
+    #   Specifies the new, increased value for the quota.
     #
     # @return [Types::PutServiceQuotaIncreaseRequestIntoTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1100,13 +1268,21 @@ module Aws::ServiceQuotas
     # Submits a quota increase request for the specified quota.
     #
     # @option params [required, String] :service_code
-    #   The service identifier.
+    #   Specifies the service identifier. To find the service code value for
+    #   an Amazon Web Services service, use the ListServices operation.
     #
     # @option params [required, String] :quota_code
-    #   The quota identifier.
+    #   Specifies the quota identifier. To find the quota code for a specific
+    #   quota, use the ListServiceQuotas operation, and look for the
+    #   `QuotaCode` response in the output for the quota you want.
     #
     # @option params [required, Float] :desired_value
-    #   The new, increased value for the quota.
+    #   Specifies the new, increased value for the quota.
+    #
+    # @option params [String] :context_id
+    #   Specifies the Amazon Web Services account or resource to which the
+    #   quota applies. The value in this field depends on the context scope
+    #   associated with the specified service quota.
     #
     # @return [Types::RequestServiceQuotaIncreaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1118,6 +1294,7 @@ module Aws::ServiceQuotas
     #     service_code: "ServiceCode", # required
     #     quota_code: "QuotaCode", # required
     #     desired_value: 1.0, # required
+    #     context_id: "QuotaContextId",
     #   })
     #
     # @example Response structure
@@ -1129,13 +1306,17 @@ module Aws::ServiceQuotas
     #   resp.requested_quota.quota_code #=> String
     #   resp.requested_quota.quota_name #=> String
     #   resp.requested_quota.desired_value #=> Float
-    #   resp.requested_quota.status #=> String, one of "PENDING", "CASE_OPENED", "APPROVED", "DENIED", "CASE_CLOSED"
+    #   resp.requested_quota.status #=> String, one of "PENDING", "CASE_OPENED", "APPROVED", "DENIED", "CASE_CLOSED", "NOT_APPROVED", "INVALID_REQUEST"
     #   resp.requested_quota.created #=> Time
     #   resp.requested_quota.last_updated #=> Time
     #   resp.requested_quota.requester #=> String
     #   resp.requested_quota.quota_arn #=> String
     #   resp.requested_quota.global_quota #=> Boolean
     #   resp.requested_quota.unit #=> String
+    #   resp.requested_quota.quota_requested_at_level #=> String, one of "ACCOUNT", "RESOURCE", "ALL"
+    #   resp.requested_quota.quota_context.context_scope #=> String, one of "RESOURCE", "ACCOUNT"
+    #   resp.requested_quota.quota_context.context_scope_type #=> String
+    #   resp.requested_quota.quota_context.context_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/RequestServiceQuotaIncrease AWS API Documentation
     #
@@ -1152,8 +1333,8 @@ module Aws::ServiceQuotas
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) for the applied quota. You can get this
     #   information by using the Service Quotas console, or by listing the
-    #   quotas using the [list-service-quotas][1] AWS CLI command or the
-    #   [ListServiceQuotas][2] AWS API operation.
+    #   quotas using the [list-service-quotas][1] CLI command or the
+    #   [ListServiceQuotas][2] Amazon Web Services API operation.
     #
     #
     #
@@ -1193,7 +1374,8 @@ module Aws::ServiceQuotas
     #   The Amazon Resource Name (ARN) for the applied quota that you want to
     #   untag. You can get this information by using the Service Quotas
     #   console, or by listing the quotas using the [list-service-quotas][1]
-    #   AWS CLI command or the [ListServiceQuotas][2] AWS API operation.
+    #   CLI command or the [ListServiceQuotas][2] Amazon Web Services API
+    #   operation.
     #
     #
     #
@@ -1234,7 +1416,7 @@ module Aws::ServiceQuotas
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicequotas'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -507,6 +507,12 @@ module Aws::Backup
     #   backups.
     #   @return [Boolean]
     #
+    # @!attribute [rw] schedule_expression_timezone
+    #   This is the timezone in which the schedule expression is set. By
+    #   default, ScheduleExpressions are in UTC. You can modify this to a
+    #   specified timezone.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupRule AWS API Documentation
     #
     class BackupRule < Struct.new(
@@ -519,7 +525,8 @@ module Aws::Backup
       :recovery_point_tags,
       :rule_id,
       :copy_actions,
-      :enable_continuous_backup)
+      :enable_continuous_backup,
+      :schedule_expression_timezone)
       SENSITIVE = [:recovery_point_tags]
       include Aws::Structure
     end
@@ -608,6 +615,12 @@ module Aws::Backup
     #   backups.
     #   @return [Boolean]
     #
+    # @!attribute [rw] schedule_expression_timezone
+    #   This is the timezone in which the schedule expression is set. By
+    #   default, ScheduleExpressions are in UTC. You can modify this to a
+    #   specified timezone.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupRuleInput AWS API Documentation
     #
     class BackupRuleInput < Struct.new(
@@ -619,7 +632,8 @@ module Aws::Backup
       :lifecycle,
       :recovery_point_tags,
       :copy_actions,
-      :enable_continuous_backup)
+      :enable_continuous_backup,
+      :schedule_expression_timezone)
       SENSITIVE = [:recovery_point_tags]
       include Aws::Structure
     end
@@ -3121,8 +3135,7 @@ module Aws::Backup
     #   The scope of a control. The control scope defines what the control
     #   will evaluate. Three examples of control scopes are: a specific
     #   backup plan, all backup plans with a specific tag, or all backup
-    #   plans. For more information, see [
-    #   `ControlScope`.](aws-backup/latest/devguide/API_ControlScope.html)
+    #   plans.
     #   @return [Types::ControlScope]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/FrameworkControl AWS API Documentation

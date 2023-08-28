@@ -259,6 +259,7 @@ module Aws::Backup
     TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::MapShape.new(name: 'Tags')
+    Timezone = Shapes::StringShape.new(name: 'Timezone')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UpdateBackupPlanInput = Shapes::StructureShape.new(name: 'UpdateBackupPlanInput')
     UpdateBackupPlanOutput = Shapes::StructureShape.new(name: 'UpdateBackupPlanOutput')
@@ -370,6 +371,7 @@ module Aws::Backup
     BackupRule.add_member(:rule_id, Shapes::ShapeRef.new(shape: string, location_name: "RuleId"))
     BackupRule.add_member(:copy_actions, Shapes::ShapeRef.new(shape: CopyActions, location_name: "CopyActions"))
     BackupRule.add_member(:enable_continuous_backup, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableContinuousBackup"))
+    BackupRule.add_member(:schedule_expression_timezone, Shapes::ShapeRef.new(shape: Timezone, location_name: "ScheduleExpressionTimezone"))
     BackupRule.struct_class = Types::BackupRule
 
     BackupRuleInput.add_member(:rule_name, Shapes::ShapeRef.new(shape: BackupRuleName, required: true, location_name: "RuleName"))
@@ -381,6 +383,7 @@ module Aws::Backup
     BackupRuleInput.add_member(:recovery_point_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "RecoveryPointTags"))
     BackupRuleInput.add_member(:copy_actions, Shapes::ShapeRef.new(shape: CopyActions, location_name: "CopyActions"))
     BackupRuleInput.add_member(:enable_continuous_backup, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableContinuousBackup"))
+    BackupRuleInput.add_member(:schedule_expression_timezone, Shapes::ShapeRef.new(shape: Timezone, location_name: "ScheduleExpressionTimezone"))
     BackupRuleInput.struct_class = Types::BackupRuleInput
 
     BackupRules.member = Shapes::ShapeRef.new(shape: BackupRule)

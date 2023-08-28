@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2023-08-28)
+------------------
+
+* Feature - Add support for customizing time zone for backup window in backup plan rules.
+
 1.57.0 (2023-08-08)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2023-08-28)
+------------------
+
+* Feature - This release enables AWS Compute Optimizer to analyze and generate licensing optimization recommendations for sql server running on EC2 instances.
+
 1.46.0 (2023-07-11)
 ------------------
 

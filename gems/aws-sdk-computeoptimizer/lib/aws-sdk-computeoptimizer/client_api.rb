@@ -95,6 +95,8 @@ module Aws::ComputeOptimizer
     ExportECSServiceRecommendationsResponse = Shapes::StructureShape.new(name: 'ExportECSServiceRecommendationsResponse')
     ExportLambdaFunctionRecommendationsRequest = Shapes::StructureShape.new(name: 'ExportLambdaFunctionRecommendationsRequest')
     ExportLambdaFunctionRecommendationsResponse = Shapes::StructureShape.new(name: 'ExportLambdaFunctionRecommendationsResponse')
+    ExportLicenseRecommendationsRequest = Shapes::StructureShape.new(name: 'ExportLicenseRecommendationsRequest')
+    ExportLicenseRecommendationsResponse = Shapes::StructureShape.new(name: 'ExportLicenseRecommendationsResponse')
     ExportableAutoScalingGroupField = Shapes::StringShape.new(name: 'ExportableAutoScalingGroupField')
     ExportableAutoScalingGroupFields = Shapes::ListShape.new(name: 'ExportableAutoScalingGroupFields')
     ExportableECSServiceField = Shapes::StringShape.new(name: 'ExportableECSServiceField')
@@ -103,6 +105,8 @@ module Aws::ComputeOptimizer
     ExportableInstanceFields = Shapes::ListShape.new(name: 'ExportableInstanceFields')
     ExportableLambdaFunctionField = Shapes::StringShape.new(name: 'ExportableLambdaFunctionField')
     ExportableLambdaFunctionFields = Shapes::ListShape.new(name: 'ExportableLambdaFunctionFields')
+    ExportableLicenseField = Shapes::StringShape.new(name: 'ExportableLicenseField')
+    ExportableLicenseFields = Shapes::ListShape.new(name: 'ExportableLicenseFields')
     ExportableVolumeField = Shapes::StringShape.new(name: 'ExportableVolumeField')
     ExportableVolumeFields = Shapes::ListShape.new(name: 'ExportableVolumeFields')
     ExternalMetricStatus = Shapes::StructureShape.new(name: 'ExternalMetricStatus')
@@ -142,6 +146,8 @@ module Aws::ComputeOptimizer
     GetEnrollmentStatusesForOrganizationResponse = Shapes::StructureShape.new(name: 'GetEnrollmentStatusesForOrganizationResponse')
     GetLambdaFunctionRecommendationsRequest = Shapes::StructureShape.new(name: 'GetLambdaFunctionRecommendationsRequest')
     GetLambdaFunctionRecommendationsResponse = Shapes::StructureShape.new(name: 'GetLambdaFunctionRecommendationsResponse')
+    GetLicenseRecommendationsRequest = Shapes::StructureShape.new(name: 'GetLicenseRecommendationsRequest')
+    GetLicenseRecommendationsResponse = Shapes::StructureShape.new(name: 'GetLicenseRecommendationsResponse')
     GetRecommendationError = Shapes::StructureShape.new(name: 'GetRecommendationError')
     GetRecommendationErrors = Shapes::ListShape.new(name: 'GetRecommendationErrors')
     GetRecommendationPreferencesRequest = Shapes::StructureShape.new(name: 'GetRecommendationPreferencesRequest')
@@ -194,6 +200,21 @@ module Aws::ComputeOptimizer
     LambdaFunctionUtilizationMetrics = Shapes::ListShape.new(name: 'LambdaFunctionUtilizationMetrics')
     LastRefreshTimestamp = Shapes::TimestampShape.new(name: 'LastRefreshTimestamp')
     LastUpdatedTimestamp = Shapes::TimestampShape.new(name: 'LastUpdatedTimestamp')
+    LicenseConfiguration = Shapes::StructureShape.new(name: 'LicenseConfiguration')
+    LicenseEdition = Shapes::StringShape.new(name: 'LicenseEdition')
+    LicenseFinding = Shapes::StringShape.new(name: 'LicenseFinding')
+    LicenseFindingReasonCode = Shapes::StringShape.new(name: 'LicenseFindingReasonCode')
+    LicenseFindingReasonCodes = Shapes::ListShape.new(name: 'LicenseFindingReasonCodes')
+    LicenseModel = Shapes::StringShape.new(name: 'LicenseModel')
+    LicenseName = Shapes::StringShape.new(name: 'LicenseName')
+    LicenseRecommendation = Shapes::StructureShape.new(name: 'LicenseRecommendation')
+    LicenseRecommendationFilter = Shapes::StructureShape.new(name: 'LicenseRecommendationFilter')
+    LicenseRecommendationFilterName = Shapes::StringShape.new(name: 'LicenseRecommendationFilterName')
+    LicenseRecommendationFilters = Shapes::ListShape.new(name: 'LicenseRecommendationFilters')
+    LicenseRecommendationOption = Shapes::StructureShape.new(name: 'LicenseRecommendationOption')
+    LicenseRecommendationOptions = Shapes::ListShape.new(name: 'LicenseRecommendationOptions')
+    LicenseRecommendations = Shapes::ListShape.new(name: 'LicenseRecommendations')
+    LicenseVersion = Shapes::StringShape.new(name: 'LicenseVersion')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     LookBackPeriodInDays = Shapes::FloatShape.new(name: 'LookBackPeriodInDays')
     Low = Shapes::IntegerShape.new(name: 'Low')
@@ -207,9 +228,13 @@ module Aws::ComputeOptimizer
     Message = Shapes::StringShape.new(name: 'Message')
     MetadataKey = Shapes::StringShape.new(name: 'MetadataKey')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
+    MetricProviderArn = Shapes::StringShape.new(name: 'MetricProviderArn')
+    MetricSource = Shapes::StructureShape.new(name: 'MetricSource')
+    MetricSourceProvider = Shapes::StringShape.new(name: 'MetricSourceProvider')
     MetricStatistic = Shapes::StringShape.new(name: 'MetricStatistic')
     MetricValue = Shapes::FloatShape.new(name: 'MetricValue')
     MetricValues = Shapes::ListShape.new(name: 'MetricValues')
+    MetricsSource = Shapes::ListShape.new(name: 'MetricsSource')
     MigrationEffort = Shapes::StringShape.new(name: 'MigrationEffort')
     MinSize = Shapes::IntegerShape.new(name: 'MinSize')
     MissingAuthenticationToken = Shapes::StructureShape.new(name: 'MissingAuthenticationToken')
@@ -217,8 +242,10 @@ module Aws::ComputeOptimizer
     NullableCpu = Shapes::IntegerShape.new(name: 'NullableCpu')
     NullableMemory = Shapes::IntegerShape.new(name: 'NullableMemory')
     NullableMemoryReservation = Shapes::IntegerShape.new(name: 'NullableMemoryReservation')
+    NumberOfCores = Shapes::IntegerShape.new(name: 'NumberOfCores')
     NumberOfInvocations = Shapes::IntegerShape.new(name: 'NumberOfInvocations')
     NumberOfMemberAccountsOptedIn = Shapes::IntegerShape.new(name: 'NumberOfMemberAccountsOptedIn')
+    OperatingSystem = Shapes::StringShape.new(name: 'OperatingSystem')
     OptInRequiredException = Shapes::StructureShape.new(name: 'OptInRequiredException')
     PerformanceRisk = Shapes::FloatShape.new(name: 'PerformanceRisk')
     Period = Shapes::IntegerShape.new(name: 'Period')
@@ -250,6 +277,7 @@ module Aws::ComputeOptimizer
     RecommendedOptionProjectedMetric = Shapes::StructureShape.new(name: 'RecommendedOptionProjectedMetric')
     RecommendedOptionProjectedMetrics = Shapes::ListShape.new(name: 'RecommendedOptionProjectedMetrics')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
+    ResourceArns = Shapes::ListShape.new(name: 'ResourceArns')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     RootVolume = Shapes::BooleanShape.new(name: 'RootVolume')
@@ -541,6 +569,18 @@ module Aws::ComputeOptimizer
     ExportLambdaFunctionRecommendationsResponse.add_member(:s3_destination, Shapes::ShapeRef.new(shape: S3Destination, location_name: "s3Destination"))
     ExportLambdaFunctionRecommendationsResponse.struct_class = Types::ExportLambdaFunctionRecommendationsResponse
 
+    ExportLicenseRecommendationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
+    ExportLicenseRecommendationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: LicenseRecommendationFilters, location_name: "filters"))
+    ExportLicenseRecommendationsRequest.add_member(:fields_to_export, Shapes::ShapeRef.new(shape: ExportableLicenseFields, location_name: "fieldsToExport"))
+    ExportLicenseRecommendationsRequest.add_member(:s3_destination_config, Shapes::ShapeRef.new(shape: S3DestinationConfig, required: true, location_name: "s3DestinationConfig"))
+    ExportLicenseRecommendationsRequest.add_member(:file_format, Shapes::ShapeRef.new(shape: FileFormat, location_name: "fileFormat"))
+    ExportLicenseRecommendationsRequest.add_member(:include_member_accounts, Shapes::ShapeRef.new(shape: IncludeMemberAccounts, location_name: "includeMemberAccounts"))
+    ExportLicenseRecommendationsRequest.struct_class = Types::ExportLicenseRecommendationsRequest
+
+    ExportLicenseRecommendationsResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
+    ExportLicenseRecommendationsResponse.add_member(:s3_destination, Shapes::ShapeRef.new(shape: S3Destination, location_name: "s3Destination"))
+    ExportLicenseRecommendationsResponse.struct_class = Types::ExportLicenseRecommendationsResponse
+
     ExportableAutoScalingGroupFields.member = Shapes::ShapeRef.new(shape: ExportableAutoScalingGroupField)
 
     ExportableECSServiceFields.member = Shapes::ShapeRef.new(shape: ExportableECSServiceField)
@@ -548,6 +588,8 @@ module Aws::ComputeOptimizer
     ExportableInstanceFields.member = Shapes::ShapeRef.new(shape: ExportableInstanceField)
 
     ExportableLambdaFunctionFields.member = Shapes::ShapeRef.new(shape: ExportableLambdaFunctionField)
+
+    ExportableLicenseFields.member = Shapes::ShapeRef.new(shape: ExportableLicenseField)
 
     ExportableVolumeFields.member = Shapes::ShapeRef.new(shape: ExportableVolumeField)
 
@@ -674,6 +716,18 @@ module Aws::ComputeOptimizer
     GetLambdaFunctionRecommendationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetLambdaFunctionRecommendationsResponse.add_member(:lambda_function_recommendations, Shapes::ShapeRef.new(shape: LambdaFunctionRecommendations, location_name: "lambdaFunctionRecommendations"))
     GetLambdaFunctionRecommendationsResponse.struct_class = Types::GetLambdaFunctionRecommendationsResponse
+
+    GetLicenseRecommendationsRequest.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ResourceArns, location_name: "resourceArns"))
+    GetLicenseRecommendationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetLicenseRecommendationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    GetLicenseRecommendationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: LicenseRecommendationFilters, location_name: "filters"))
+    GetLicenseRecommendationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
+    GetLicenseRecommendationsRequest.struct_class = Types::GetLicenseRecommendationsRequest
+
+    GetLicenseRecommendationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetLicenseRecommendationsResponse.add_member(:license_recommendations, Shapes::ShapeRef.new(shape: LicenseRecommendations, location_name: "licenseRecommendations"))
+    GetLicenseRecommendationsResponse.add_member(:errors, Shapes::ShapeRef.new(shape: GetRecommendationErrors, location_name: "errors"))
+    GetLicenseRecommendationsResponse.struct_class = Types::GetLicenseRecommendationsResponse
 
     GetRecommendationError.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, location_name: "identifier"))
     GetRecommendationError.add_member(:code, Shapes::ShapeRef.new(shape: Code, location_name: "code"))
@@ -804,6 +858,46 @@ module Aws::ComputeOptimizer
 
     LambdaFunctionUtilizationMetrics.member = Shapes::ShapeRef.new(shape: LambdaFunctionUtilizationMetric)
 
+    LicenseConfiguration.add_member(:number_of_cores, Shapes::ShapeRef.new(shape: NumberOfCores, location_name: "numberOfCores"))
+    LicenseConfiguration.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
+    LicenseConfiguration.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystem, location_name: "operatingSystem"))
+    LicenseConfiguration.add_member(:license_edition, Shapes::ShapeRef.new(shape: LicenseEdition, location_name: "licenseEdition"))
+    LicenseConfiguration.add_member(:license_name, Shapes::ShapeRef.new(shape: LicenseName, location_name: "licenseName"))
+    LicenseConfiguration.add_member(:license_model, Shapes::ShapeRef.new(shape: LicenseModel, location_name: "licenseModel"))
+    LicenseConfiguration.add_member(:license_version, Shapes::ShapeRef.new(shape: LicenseVersion, location_name: "licenseVersion"))
+    LicenseConfiguration.add_member(:metrics_source, Shapes::ShapeRef.new(shape: MetricsSource, location_name: "metricsSource"))
+    LicenseConfiguration.struct_class = Types::LicenseConfiguration
+
+    LicenseFindingReasonCodes.member = Shapes::ShapeRef.new(shape: LicenseFindingReasonCode)
+
+    LicenseRecommendation.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "resourceArn"))
+    LicenseRecommendation.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    LicenseRecommendation.add_member(:current_license_configuration, Shapes::ShapeRef.new(shape: LicenseConfiguration, location_name: "currentLicenseConfiguration"))
+    LicenseRecommendation.add_member(:lookback_period_in_days, Shapes::ShapeRef.new(shape: LookBackPeriodInDays, location_name: "lookbackPeriodInDays"))
+    LicenseRecommendation.add_member(:last_refresh_timestamp, Shapes::ShapeRef.new(shape: LastRefreshTimestamp, location_name: "lastRefreshTimestamp"))
+    LicenseRecommendation.add_member(:finding, Shapes::ShapeRef.new(shape: LicenseFinding, location_name: "finding"))
+    LicenseRecommendation.add_member(:finding_reason_codes, Shapes::ShapeRef.new(shape: LicenseFindingReasonCodes, location_name: "findingReasonCodes"))
+    LicenseRecommendation.add_member(:license_recommendation_options, Shapes::ShapeRef.new(shape: LicenseRecommendationOptions, location_name: "licenseRecommendationOptions"))
+    LicenseRecommendation.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    LicenseRecommendation.struct_class = Types::LicenseRecommendation
+
+    LicenseRecommendationFilter.add_member(:name, Shapes::ShapeRef.new(shape: LicenseRecommendationFilterName, location_name: "name"))
+    LicenseRecommendationFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, location_name: "values"))
+    LicenseRecommendationFilter.struct_class = Types::LicenseRecommendationFilter
+
+    LicenseRecommendationFilters.member = Shapes::ShapeRef.new(shape: LicenseRecommendationFilter)
+
+    LicenseRecommendationOption.add_member(:rank, Shapes::ShapeRef.new(shape: Rank, location_name: "rank"))
+    LicenseRecommendationOption.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystem, location_name: "operatingSystem"))
+    LicenseRecommendationOption.add_member(:license_edition, Shapes::ShapeRef.new(shape: LicenseEdition, location_name: "licenseEdition"))
+    LicenseRecommendationOption.add_member(:license_model, Shapes::ShapeRef.new(shape: LicenseModel, location_name: "licenseModel"))
+    LicenseRecommendationOption.add_member(:savings_opportunity, Shapes::ShapeRef.new(shape: SavingsOpportunity, location_name: "savingsOpportunity"))
+    LicenseRecommendationOption.struct_class = Types::LicenseRecommendationOption
+
+    LicenseRecommendationOptions.member = Shapes::ShapeRef.new(shape: LicenseRecommendationOption)
+
+    LicenseRecommendations.member = Shapes::ShapeRef.new(shape: LicenseRecommendation)
+
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
@@ -811,7 +905,13 @@ module Aws::ComputeOptimizer
     MemorySizeConfiguration.add_member(:memory_reservation, Shapes::ShapeRef.new(shape: NullableMemoryReservation, location_name: "memoryReservation"))
     MemorySizeConfiguration.struct_class = Types::MemorySizeConfiguration
 
+    MetricSource.add_member(:provider, Shapes::ShapeRef.new(shape: MetricSourceProvider, location_name: "provider"))
+    MetricSource.add_member(:provider_arn, Shapes::ShapeRef.new(shape: MetricProviderArn, location_name: "providerArn"))
+    MetricSource.struct_class = Types::MetricSource
+
     MetricValues.member = Shapes::ShapeRef.new(shape: MetricValue)
+
+    MetricsSource.member = Shapes::ShapeRef.new(shape: MetricSource)
 
     MissingAuthenticationToken.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     MissingAuthenticationToken.struct_class = Types::MissingAuthenticationToken
@@ -894,6 +994,8 @@ module Aws::ComputeOptimizer
     RecommendedOptionProjectedMetric.struct_class = Types::RecommendedOptionProjectedMetric
 
     RecommendedOptionProjectedMetrics.member = Shapes::ShapeRef.new(shape: RecommendedOptionProjectedMetric)
+
+    ResourceArns.member = Shapes::ShapeRef.new(shape: ResourceArn)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -1130,6 +1232,22 @@ module Aws::ComputeOptimizer
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
+      api.add_operation(:export_license_recommendations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ExportLicenseRecommendations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ExportLicenseRecommendationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ExportLicenseRecommendationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: OptInRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingAuthenticationToken)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
       api.add_operation(:get_auto_scaling_group_recommendations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetAutoScalingGroupRecommendations"
         o.http_method = "POST"
@@ -1296,6 +1414,22 @@ module Aws::ComputeOptimizer
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_license_recommendations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLicenseRecommendations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetLicenseRecommendationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetLicenseRecommendationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: OptInRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingAuthenticationToken)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_recommendation_preferences, Seahorse::Model::Operation.new.tap do |o|
