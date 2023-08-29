@@ -2632,6 +2632,10 @@ module Aws::Omics
     #   The computational accelerator used to run the workflow.
     #   @return [String]
     #
+    # @!attribute [rw] retention_mode
+    #   The run's retention mode.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetRunResponse AWS API Documentation
     #
     class GetRunResponse < Struct.new(
@@ -2658,7 +2662,8 @@ module Aws::Omics
       :stop_time,
       :status_message,
       :tags,
-      :accelerators)
+      :accelerators,
+      :retention_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5657,11 +5662,11 @@ module Aws::Omics
     #   @return [String]
     #
     # @!attribute [rw] workflow_type
-    #   The run's workflows type.
+    #   The run's workflow type.
     #   @return [String]
     #
     # @!attribute [rw] run_id
-    #   The run's ID.
+    #   The ID of a run to duplicate.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -5708,6 +5713,10 @@ module Aws::Omics
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] retention_mode
+    #   The retention mode for the run.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/StartRunRequest AWS API Documentation
     #
     class StartRunRequest < Struct.new(
@@ -5723,7 +5732,8 @@ module Aws::Omics
       :output_uri,
       :log_level,
       :tags,
-      :request_id)
+      :request_id,
+      :retention_mode)
       SENSITIVE = []
       include Aws::Structure
     end

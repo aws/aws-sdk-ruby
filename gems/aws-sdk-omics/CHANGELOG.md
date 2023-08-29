@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2023-08-29)
+------------------
+
+* Feature - Add RetentionMode support for Runs.
+
 1.13.0 (2023-08-14)
 ------------------
 

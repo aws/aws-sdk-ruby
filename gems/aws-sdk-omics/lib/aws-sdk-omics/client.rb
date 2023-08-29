@@ -2215,6 +2215,7 @@ module Aws::Omics
     #   * {Types::GetRunResponse#status_message #status_message} => String
     #   * {Types::GetRunResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetRunResponse#accelerators #accelerators} => String
+    #   * {Types::GetRunResponse#retention_mode #retention_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2250,6 +2251,7 @@ module Aws::Omics
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.accelerators #=> String, one of "GPU"
+    #   resp.retention_mode #=> String, one of "RETAIN", "REMOVE"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4119,16 +4121,22 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Starts a run.
+    # Starts a workflow run. To duplicate a run, specify the run's ID and a
+    # role ARN. The remaining parameters are copied from the previous run.
+    #
+    # The total number of runs in your account is subject to a quota per
+    # Region. To avoid needing to delete runs manually, you can set the
+    # retention mode to `REMOVE`. Runs with this setting are deleted
+    # automatically when the run quoata is exceeded.
     #
     # @option params [String] :workflow_id
     #   The run's workflow ID.
     #
     # @option params [String] :workflow_type
-    #   The run's workflows type.
+    #   The run's workflow type.
     #
     # @option params [String] :run_id
-    #   The run's ID.
+    #   The ID of a run to duplicate.
     #
     # @option params [required, String] :role_arn
     #   A service role for the run.
@@ -4169,6 +4177,9 @@ module Aws::Omics
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :retention_mode
+    #   The retention mode for the run.
+    #
     # @return [Types::StartRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartRunResponse#arn #arn} => String
@@ -4195,6 +4206,7 @@ module Aws::Omics
     #       "TagKey" => "TagValue",
     #     },
     #     request_id: "RunRequestId", # required
+    #     retention_mode: "RETAIN", # accepts RETAIN, REMOVE
     #   })
     #
     # @example Response structure
@@ -4596,7 +4608,7 @@ module Aws::Omics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

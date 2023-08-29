@@ -1591,7 +1591,7 @@ module Aws::FSx
     # data repository association is a link between a directory on the file
     # system and an Amazon S3 bucket or prefix. You can have a maximum of 8
     # data repository associations on a file system. Data repository
-    # associations are supported on all FSx for Lustre 2.12 and newer file
+    # associations are supported on all FSx for Lustre 2.12 and 2.15 file
     # systems, excluding `scratch_1` deployment type.
     #
     # Each data repository association must have a unique Amazon FSx file
@@ -1755,7 +1755,7 @@ module Aws::FSx
     # to a linked data repository.
     #
     # You use release data repository tasks to release data from your file
-    # system for files that are archived to S3. The metadata of released
+    # system for files that are exported to S3. The metadata of released
     # files remains on the file system so users or applications can still
     # access released files by reading the files again, which will restore
     # data from Amazon S3 to the FSx for Lustre file system.
@@ -1779,8 +1779,8 @@ module Aws::FSx
     #     a linked S3 bucket to your Amazon FSx for Lustre file system.
     #
     #   * `RELEASE_DATA_FROM_FILESYSTEM` tasks release files in your Amazon
-    #     FSx for Lustre file system that are archived and that meet your
-    #     specified release criteria.
+    #     FSx for Lustre file system that have been exported to a linked S3
+    #     bucket and that meet your specified release criteria.
     #
     #   * `AUTO_RELEASE_DATA` tasks automatically release files from an Amazon
     #     File Cache resource.
@@ -1790,7 +1790,7 @@ module Aws::FSx
     #   processed. If a path that you provide isn't valid, the task fails. If
     #   you don't provide paths, the default behavior is to export all files
     #   to S3 (for export tasks), import all files from S3 (for import tasks),
-    #   or release all archived files that meet the last accessed time
+    #   or release all exported files that meet the last accessed time
     #   criteria (for release tasks).
     #
     #   * For export tasks, the list contains paths on the FSx for Lustre file
@@ -1807,10 +1807,10 @@ module Aws::FSx
     #     `s3://myBucket/myPrefix` (where `myPrefix` is optional).
     #
     #   * For release tasks, the list contains directory or file paths on the
-    #     FSx for Lustre file system from which to release archived files. If
+    #     FSx for Lustre file system from which to release exported files. If
     #     a directory is specified, files within the directory are released.
     #     If a file path is specified, only that file is released. To release
-    #     all archived files in the file system, specify a forward slash (/)
+    #     all exported files in the file system, specify a forward slash (/)
     #     as the path.
     #
     #     <note markdown="1"> A file must also meet the last accessed time criteria specified in
@@ -2307,14 +2307,15 @@ module Aws::FSx
     #
     # @option params [String] :file_system_type_version
     #   (Optional) For FSx for Lustre file systems, sets the Lustre version
-    #   for the file system that you're creating. Valid values are `2.10` and
-    #   `2.12`:
+    #   for the file system that you're creating. Valid values are `2.10`,
+    #   `2.12`m and `2.15`:
     #
     #   * 2\.10 is supported by the Scratch and Persistent\_1 Lustre deployment
     #     types.
     #
-    #   * 2\.12 is supported by all Lustre deployment types. `2.12` is required
-    #     when setting FSx for Lustre `DeploymentType` to `PERSISTENT_2`.
+    #   * 2\.12 and 2.15 are supported by all Lustre deployment types. `2.12`
+    #     or `2.15` is required when setting FSx for Lustre `DeploymentType`
+    #     to `PERSISTENT_2`.
     #
     #   Default value = `2.10`, except when `DeploymentType` is set to
     #   `PERSISTENT_2`, then the default is `2.12`.
@@ -2861,7 +2862,8 @@ module Aws::FSx
     #
     # @option params [String] :file_system_type_version
     #   Sets the version for the Amazon FSx for Lustre file system that
-    #   you're creating from a backup. Valid values are `2.10` and `2.12`.
+    #   you're creating from a backup. Valid values are `2.10`, `2.12`, and
+    #   `2.15`.
     #
     #   You don't need to specify `FileSystemTypeVersion` because it will be
     #   applied using the backup's `FileSystemTypeVersion` setting. If you
@@ -4254,7 +4256,7 @@ module Aws::FSx
     # association, you have the option of deleting the data in the file
     # system that corresponds to the data repository association. Data
     # repository associations are supported on all FSx for Lustre 2.12 and
-    # newer file systems, excluding `scratch_1` deployment type.
+    # 2.15 file systems, excluding `scratch_1` deployment type.
     #
     # @option params [required, String] :association_id
     #   The ID of the data repository association that you want to delete.
@@ -4368,9 +4370,24 @@ module Aws::FSx
     # isn't subject to the file system's retention policy, and must be
     # manually deleted.
     #
+    # To delete an Amazon FSx for Lustre file system, first [unmount][1] it
+    # from every connected Amazon EC2 instance, then provide a
+    # `FileSystemId` value to the `DeleFileSystem` operation. By default,
+    # Amazon FSx will not take a final backup when the `DeleteFileSystem`
+    # operation is invoked. On file systems not linked to an Amazon S3
+    # bucket, set `SkipFinalBackup` to `false` to take a final backup of the
+    # file system you are deleting. Backups cannot be enabled on S3-linked
+    # file systems. To ensure all of your data is written back to S3 before
+    # deleting your file system, you can either monitor for the
+    # [AgeOfOldestQueuedMessage][2] metric to be zero (if using automatic
+    # export) or you can run an [export data repository task][3]. If you
+    # have automatic export enabled and want to use an export data
+    # repository task, you have to disable automatic export before executing
+    # the export data repository task.
+    #
     # The `DeleteFileSystem` operation returns while the file system has the
     # `DELETING` status. You can check the file system deletion status by
-    # calling the [DescribeFileSystems][1] operation, which returns a list
+    # calling the [DescribeFileSystems][4] operation, which returns a list
     # of file systems in your account. If you pass the file system ID for a
     # deleted file system, the `DescribeFileSystems` operation returns a
     # `FileSystemNotFound` error.
@@ -4386,7 +4403,10 @@ module Aws::FSx
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html
+    # [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/unmounting-fs.html
+    # [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/monitoring-cloudwatch.html#auto-import-export-metrics
+    # [3]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/export-data-repo-task-dra.html
+    # [4]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html
     #
     # @option params [required, String] :file_system_id
     #   The ID of the file system that you want to delete.
@@ -5146,7 +5166,7 @@ module Aws::FSx
     # File Cache data repository associations, if one or more
     # `AssociationIds` values are provided in the request, or if filters are
     # used in the request. Data repository associations are supported on
-    # Amazon File Cache resources and all FSx for Lustre 2.12 and newer file
+    # Amazon File Cache resources and all FSx for Lustre 2.12 and 2,15 file
     # systems, excluding `scratch_1` deployment type.
     #
     # You can use filters to narrow the response to include just data
@@ -7054,7 +7074,7 @@ module Aws::FSx
 
     # Updates the configuration of an existing data repository association
     # on an Amazon FSx for Lustre file system. Data repository associations
-    # are supported on all FSx for Lustre 2.12 and newer file systems,
+    # are supported on all FSx for Lustre 2.12 and 2.15 file systems,
     # excluding `scratch_1` deployment type.
     #
     # @option params [required, String] :association_id
@@ -7282,6 +7302,8 @@ module Aws::FSx
     # For FSx for OpenZFS file systems, you can update the following
     # properties:
     #
+    # * `AddRouteTableIds`
+    #
     # * `AutomaticBackupRetentionDays`
     #
     # * `CopyTagsToBackups`
@@ -7291,6 +7313,8 @@ module Aws::FSx
     # * `DailyAutomaticBackupStartTime`
     #
     # * `DiskIopsConfiguration`
+    #
+    # * `RemoveRouteTableIds`
     #
     # * `StorageCapacity`
     #
@@ -8298,7 +8322,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

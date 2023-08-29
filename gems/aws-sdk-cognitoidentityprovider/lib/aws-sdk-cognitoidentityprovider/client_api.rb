@@ -334,7 +334,7 @@ module Aws::CognitoIdentityProvider
     ProviderDescription = Shapes::StructureShape.new(name: 'ProviderDescription')
     ProviderDetailsType = Shapes::MapShape.new(name: 'ProviderDetailsType')
     ProviderNameType = Shapes::StringShape.new(name: 'ProviderNameType')
-    ProviderNameTypeV1 = Shapes::StringShape.new(name: 'ProviderNameTypeV1')
+    ProviderNameTypeV2 = Shapes::StringShape.new(name: 'ProviderNameTypeV2')
     ProviderUserIdentifierType = Shapes::StructureShape.new(name: 'ProviderUserIdentifierType')
     ProvidersListType = Shapes::ListShape.new(name: 'ProvidersListType')
     QueryLimit = Shapes::IntegerShape.new(name: 'QueryLimit')
@@ -897,7 +897,7 @@ module Aws::CognitoIdentityProvider
     CreateGroupResponse.struct_class = Types::CreateGroupResponse
 
     CreateIdentityProviderRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
-    CreateIdentityProviderRequest.add_member(:provider_name, Shapes::ShapeRef.new(shape: ProviderNameTypeV1, required: true, location_name: "ProviderName"))
+    CreateIdentityProviderRequest.add_member(:provider_name, Shapes::ShapeRef.new(shape: ProviderNameTypeV2, required: true, location_name: "ProviderName"))
     CreateIdentityProviderRequest.add_member(:provider_type, Shapes::ShapeRef.new(shape: IdentityProviderTypeType, required: true, location_name: "ProviderType"))
     CreateIdentityProviderRequest.add_member(:provider_details, Shapes::ShapeRef.new(shape: ProviderDetailsType, required: true, location_name: "ProviderDetails"))
     CreateIdentityProviderRequest.add_member(:attribute_mapping, Shapes::ShapeRef.new(shape: AttributeMappingType, location_name: "AttributeMapping"))
@@ -2518,6 +2518,7 @@ module Aws::CognitoIdentityProvider
         o.name = "AssociateSoftwareToken"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o['authtype'] = "none"
         o.input = Shapes::ShapeRef.new(shape: AssociateSoftwareTokenRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateSoftwareTokenResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
@@ -2553,6 +2554,7 @@ module Aws::CognitoIdentityProvider
         o.name = "ConfirmDevice"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o['authtype'] = "none"
         o.input = Shapes::ShapeRef.new(shape: ConfirmDeviceRequest)
         o.output = Shapes::ShapeRef.new(shape: ConfirmDeviceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -2937,6 +2939,7 @@ module Aws::CognitoIdentityProvider
         o.name = "ForgetDevice"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o['authtype'] = "none"
         o.input = Shapes::ShapeRef.new(shape: ForgetDeviceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -2992,6 +2995,7 @@ module Aws::CognitoIdentityProvider
         o.name = "GetDevice"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o['authtype'] = "none"
         o.input = Shapes::ShapeRef.new(shape: GetDeviceRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDeviceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -3130,6 +3134,7 @@ module Aws::CognitoIdentityProvider
         o.name = "GlobalSignOut"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o['authtype'] = "none"
         o.input = Shapes::ShapeRef.new(shape: GlobalSignOutRequest)
         o.output = Shapes::ShapeRef.new(shape: GlobalSignOutResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -3170,6 +3175,7 @@ module Aws::CognitoIdentityProvider
         o.name = "ListDevices"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o['authtype'] = "none"
         o.input = Shapes::ShapeRef.new(shape: ListDevicesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDevicesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
@@ -3400,6 +3406,7 @@ module Aws::CognitoIdentityProvider
         o.name = "RevokeToken"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o['authtype'] = "none"
         o.input = Shapes::ShapeRef.new(shape: RevokeTokenRequest)
         o.output = Shapes::ShapeRef.new(shape: RevokeTokenResponse)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
@@ -3457,6 +3464,7 @@ module Aws::CognitoIdentityProvider
         o.name = "SetUserMFAPreference"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o['authtype'] = "none"
         o.input = Shapes::ShapeRef.new(shape: SetUserMFAPreferenceRequest)
         o.output = Shapes::ShapeRef.new(shape: SetUserMFAPreferenceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -3583,6 +3591,7 @@ module Aws::CognitoIdentityProvider
         o.name = "UpdateAuthEventFeedback"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o['authtype'] = "none"
         o.input = Shapes::ShapeRef.new(shape: UpdateAuthEventFeedbackRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateAuthEventFeedbackResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
@@ -3598,6 +3607,7 @@ module Aws::CognitoIdentityProvider
         o.name = "UpdateDeviceStatus"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o['authtype'] = "none"
         o.input = Shapes::ShapeRef.new(shape: UpdateDeviceStatusRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDeviceStatusResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
@@ -3733,6 +3743,7 @@ module Aws::CognitoIdentityProvider
         o.name = "VerifySoftwareToken"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o['authtype'] = "none"
         o.input = Shapes::ShapeRef.new(shape: VerifySoftwareTokenRequest)
         o.output = Shapes::ShapeRef.new(shape: VerifySoftwareTokenResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)

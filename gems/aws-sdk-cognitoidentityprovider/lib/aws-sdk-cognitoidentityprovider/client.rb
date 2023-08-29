@@ -788,6 +788,64 @@ module Aws::CognitoIdentityProvider
     #
     #   * {Types::AdminCreateUserResponse#user #user} => Types::UserType
     #
+    #
+    # @example Example: An AdminCreateUser request for for a test user named John.
+    #
+    #   # This request submits a value for all possible parameters for AdminCreateUser.
+    #
+    #   resp = client.admin_create_user({
+    #     desired_delivery_mediums: [
+    #       "SMS", 
+    #     ], 
+    #     message_action: "SUPPRESS", 
+    #     temporary_password: "This-is-my-test-99!", 
+    #     user_attributes: [
+    #       {
+    #         name: "name", 
+    #         value: "John", 
+    #       }, 
+    #       {
+    #         name: "phone_number", 
+    #         value: "+12065551212", 
+    #       }, 
+    #       {
+    #         name: "email", 
+    #         value: "testuser@example.com", 
+    #       }, 
+    #     ], 
+    #     user_pool_id: "us-east-1_EXAMPLE", 
+    #     username: "testuser", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     user: {
+    #       attributes: [
+    #         {
+    #           name: "sub", 
+    #           value: "d16b4aa8-8633-4abd-93b3-5062a8e1b5f8", 
+    #         }, 
+    #         {
+    #           name: "name", 
+    #           value: "John", 
+    #         }, 
+    #         {
+    #           name: "phone_number", 
+    #           value: "+12065551212", 
+    #         }, 
+    #         {
+    #           name: "email", 
+    #           value: "testuser@example.com", 
+    #         }, 
+    #       ], 
+    #       enabled: true, 
+    #       user_create_date: Time.parse(1689980857.949), 
+    #       user_last_modified_date: Time.parse(1689980857.949), 
+    #       user_status: "FORCE_CHANGE_PASSWORD", 
+    #       username: "testuser", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.admin_create_user({
@@ -2621,7 +2679,9 @@ module Aws::CognitoIdentityProvider
     #  </note>
     #
     # Updates the specified user's attributes, including developer
-    # attributes, as an administrator. Works on any user.
+    # attributes, as an administrator. Works on any user. To delete an
+    # attribute from your user, submit the attribute in your API request
+    # with a blank value.
     #
     # For custom attributes, you must prepend the `custom:` prefix to the
     # attribute name.
@@ -3406,7 +3466,7 @@ module Aws::CognitoIdentityProvider
     #
     #   resp = client.create_identity_provider({
     #     user_pool_id: "UserPoolIdType", # required
-    #     provider_name: "ProviderNameTypeV1", # required
+    #     provider_name: "ProviderNameTypeV2", # required
     #     provider_type: "SAML", # required, accepts SAML, Facebook, Google, LoginWithAmazon, SignInWithApple, OIDC
     #     provider_details: { # required
     #       "StringType" => "StringType",
@@ -3804,6 +3864,462 @@ module Aws::CognitoIdentityProvider
     # @return [Types::CreateUserPoolResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateUserPoolResponse#user_pool #user_pool} => Types::UserPoolType
+    #
+    #
+    # @example Example: Example user pool with email and username sign-in
+    #
+    #   # The following example creates a user pool with all configurable properties set to an example value. The resulting user
+    #   # pool allows sign-in with username or email address, has optional MFA, and has a Lambda function assigned to each
+    #   # possible trigger.
+    #
+    #   resp = client.create_user_pool({
+    #     account_recovery_setting: {
+    #       recovery_mechanisms: [
+    #         {
+    #           name: "verified_email", 
+    #           priority: 1, 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     admin_create_user_config: {
+    #       allow_admin_create_user_only: false, 
+    #       invite_message_template: {
+    #         email_message: "Your username is {username} and temporary password is {####}.", 
+    #         email_subject: "Your sign-in information", 
+    #         sms_message: "Your username is {username} and temporary password is {####}.", 
+    #       }, 
+    #     }, 
+    #     alias_attributes: [
+    #       "email", 
+    #     ], 
+    #     auto_verified_attributes: [
+    #       "email", 
+    #     ], 
+    #     deletion_protection: "ACTIVE", 
+    #     device_configuration: {
+    #       challenge_required_on_new_device: true, 
+    #       device_only_remembered_on_user_prompt: true, 
+    #     }, 
+    #     email_configuration: {
+    #       configuration_set: "my-test-ses-configuration-set", 
+    #       email_sending_account: "DEVELOPER", 
+    #       from: "support@example.com", 
+    #       reply_to_email_address: "support@example.com", 
+    #       source_arn: "arn:aws:ses:us-east-1:123456789012:identity/support@example.com", 
+    #     }, 
+    #     email_verification_message: "Your verification code is {####}.", 
+    #     email_verification_subject: "Verify your email address", 
+    #     lambda_config: {
+    #       custom_email_sender: {
+    #         lambda_arn: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
+    #         lambda_version: "V1_0", 
+    #       }, 
+    #       custom_message: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
+    #       custom_sms_sender: {
+    #         lambda_arn: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
+    #         lambda_version: "V1_0", 
+    #       }, 
+    #       define_auth_challenge: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
+    #       kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/a6c4f8e2-0c45-47db-925f-87854bc9e357", 
+    #       post_authentication: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
+    #       post_confirmation: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
+    #       pre_authentication: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
+    #       pre_sign_up: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
+    #       pre_token_generation: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
+    #       user_migration: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
+    #       verify_auth_challenge_response: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
+    #     }, 
+    #     mfa_configuration: "OPTIONAL", 
+    #     policies: {
+    #       password_policy: {
+    #         minimum_length: 6, 
+    #         require_lowercase: true, 
+    #         require_numbers: true, 
+    #         require_symbols: true, 
+    #         require_uppercase: true, 
+    #         temporary_password_validity_days: 7, 
+    #       }, 
+    #     }, 
+    #     pool_name: "my-test-user-pool", 
+    #     schema: [
+    #       {
+    #         attribute_data_type: "Number", 
+    #         developer_only_attribute: true, 
+    #         mutable: true, 
+    #         name: "mydev", 
+    #         number_attribute_constraints: {
+    #           max_value: "99", 
+    #           min_value: "1", 
+    #         }, 
+    #         required: false, 
+    #         string_attribute_constraints: {
+    #           max_length: "99", 
+    #           min_length: "1", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     sms_authentication_message: "Your verification code is {####}.", 
+    #     sms_configuration: {
+    #       external_id: "my-role-external-id", 
+    #       sns_caller_arn: "arn:aws:iam::123456789012:role/service-role/test-cognito-SMS-Role", 
+    #     }, 
+    #     sms_verification_message: "Your verification code is {####}.", 
+    #     user_attribute_update_settings: {
+    #       attributes_require_verification_before_update: [
+    #         "email", 
+    #       ], 
+    #     }, 
+    #     user_pool_add_ons: {
+    #       advanced_security_mode: "OFF", 
+    #     }, 
+    #     user_pool_tags: {
+    #       "my-test-tag-key" => "my-test-tag-key", 
+    #     }, 
+    #     username_configuration: {
+    #       case_sensitive: true, 
+    #     }, 
+    #     verification_message_template: {
+    #       default_email_option: "CONFIRM_WITH_CODE", 
+    #       email_message: "Your confirmation code is {####}", 
+    #       email_message_by_link: "Choose this link to {##verify your email##}", 
+    #       email_subject: "Here is your confirmation code", 
+    #       email_subject_by_link: "Here is your confirmation link", 
+    #       sms_message: "Your confirmation code is {####}", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     user_pool: {
+    #       account_recovery_setting: {
+    #         recovery_mechanisms: [
+    #           {
+    #             name: "verified_email", 
+    #             priority: 1, 
+    #           }, 
+    #         ], 
+    #       }, 
+    #       admin_create_user_config: {
+    #         allow_admin_create_user_only: false, 
+    #         invite_message_template: {
+    #           email_message: "Your username is {username} and temporary password is {####}.", 
+    #           email_subject: "Your sign-in information", 
+    #           sms_message: "Your username is {username} and temporary password is {####}.", 
+    #         }, 
+    #         unused_account_validity_days: 7, 
+    #       }, 
+    #       alias_attributes: [
+    #         "email", 
+    #       ], 
+    #       arn: "arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_EXAMPLE", 
+    #       auto_verified_attributes: [
+    #         "email", 
+    #       ], 
+    #       creation_date: Time.parse(1689721665.239), 
+    #       deletion_protection: "ACTIVE", 
+    #       device_configuration: {
+    #         challenge_required_on_new_device: true, 
+    #         device_only_remembered_on_user_prompt: true, 
+    #       }, 
+    #       email_configuration: {
+    #         configuration_set: "my-test-ses-configuration-set", 
+    #         email_sending_account: "DEVELOPER", 
+    #         from: "support@example.com", 
+    #         reply_to_email_address: "support@example.com", 
+    #         source_arn: "arn:aws:ses:us-east-1:123456789012:identity/support@example.com", 
+    #       }, 
+    #       email_verification_message: "Your verification code is {####}.", 
+    #       email_verification_subject: "Verify your email address", 
+    #       estimated_number_of_users: 0, 
+    #       id: "us-east-1_EXAMPLE", 
+    #       lambda_config: {
+    #         custom_email_sender: {
+    #           lambda_arn: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
+    #           lambda_version: "V1_0", 
+    #         }, 
+    #         custom_message: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
+    #         custom_sms_sender: {
+    #           lambda_arn: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
+    #           lambda_version: "V1_0", 
+    #         }, 
+    #         define_auth_challenge: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
+    #         kms_key_id: "arn:aws:kms:us-east-1:767671399759:key/4d43904c-8edf-4bb4-9fca-fb1a80e41cbe", 
+    #         post_authentication: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
+    #         post_confirmation: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
+    #         pre_authentication: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
+    #         pre_sign_up: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
+    #         pre_token_generation: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
+    #         user_migration: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
+    #         verify_auth_challenge_response: "arn:aws:lambda:us-east-1:123456789012:function:MyFunction", 
+    #       }, 
+    #       last_modified_date: Time.parse(1689721665.239), 
+    #       mfa_configuration: "OPTIONAL", 
+    #       name: "my-test-user-pool", 
+    #       policies: {
+    #         password_policy: {
+    #           minimum_length: 6, 
+    #           require_lowercase: true, 
+    #           require_numbers: true, 
+    #           require_symbols: true, 
+    #           require_uppercase: true, 
+    #           temporary_password_validity_days: 7, 
+    #         }, 
+    #       }, 
+    #       schema_attributes: [
+    #         {
+    #           attribute_data_type: "String", 
+    #           developer_only_attribute: false, 
+    #           mutable: false, 
+    #           name: "sub", 
+    #           required: true, 
+    #           string_attribute_constraints: {
+    #             max_length: "2048", 
+    #             min_length: "1", 
+    #           }, 
+    #         }, 
+    #         {
+    #           attribute_data_type: "String", 
+    #           developer_only_attribute: false, 
+    #           mutable: true, 
+    #           name: "name", 
+    #           required: false, 
+    #           string_attribute_constraints: {
+    #             max_length: "2048", 
+    #             min_length: "0", 
+    #           }, 
+    #         }, 
+    #         {
+    #           attribute_data_type: "String", 
+    #           developer_only_attribute: false, 
+    #           mutable: true, 
+    #           name: "given_name", 
+    #           required: false, 
+    #           string_attribute_constraints: {
+    #             max_length: "2048", 
+    #             min_length: "0", 
+    #           }, 
+    #         }, 
+    #         {
+    #           attribute_data_type: "String", 
+    #           developer_only_attribute: false, 
+    #           mutable: true, 
+    #           name: "family_name", 
+    #           required: false, 
+    #           string_attribute_constraints: {
+    #             max_length: "2048", 
+    #             min_length: "0", 
+    #           }, 
+    #         }, 
+    #         {
+    #           attribute_data_type: "String", 
+    #           developer_only_attribute: false, 
+    #           mutable: true, 
+    #           name: "middle_name", 
+    #           required: false, 
+    #           string_attribute_constraints: {
+    #             max_length: "2048", 
+    #             min_length: "0", 
+    #           }, 
+    #         }, 
+    #         {
+    #           attribute_data_type: "String", 
+    #           developer_only_attribute: false, 
+    #           mutable: true, 
+    #           name: "nickname", 
+    #           required: false, 
+    #           string_attribute_constraints: {
+    #             max_length: "2048", 
+    #             min_length: "0", 
+    #           }, 
+    #         }, 
+    #         {
+    #           attribute_data_type: "String", 
+    #           developer_only_attribute: false, 
+    #           mutable: true, 
+    #           name: "preferred_username", 
+    #           required: false, 
+    #           string_attribute_constraints: {
+    #             max_length: "2048", 
+    #             min_length: "0", 
+    #           }, 
+    #         }, 
+    #         {
+    #           attribute_data_type: "String", 
+    #           developer_only_attribute: false, 
+    #           mutable: true, 
+    #           name: "profile", 
+    #           required: false, 
+    #           string_attribute_constraints: {
+    #             max_length: "2048", 
+    #             min_length: "0", 
+    #           }, 
+    #         }, 
+    #         {
+    #           attribute_data_type: "String", 
+    #           developer_only_attribute: false, 
+    #           mutable: true, 
+    #           name: "picture", 
+    #           required: false, 
+    #           string_attribute_constraints: {
+    #             max_length: "2048", 
+    #             min_length: "0", 
+    #           }, 
+    #         }, 
+    #         {
+    #           attribute_data_type: "String", 
+    #           developer_only_attribute: false, 
+    #           mutable: true, 
+    #           name: "website", 
+    #           required: false, 
+    #           string_attribute_constraints: {
+    #             max_length: "2048", 
+    #             min_length: "0", 
+    #           }, 
+    #         }, 
+    #         {
+    #           attribute_data_type: "String", 
+    #           developer_only_attribute: false, 
+    #           mutable: true, 
+    #           name: "email", 
+    #           required: false, 
+    #           string_attribute_constraints: {
+    #             max_length: "2048", 
+    #             min_length: "0", 
+    #           }, 
+    #         }, 
+    #         {
+    #           attribute_data_type: "Boolean", 
+    #           developer_only_attribute: false, 
+    #           mutable: true, 
+    #           name: "email_verified", 
+    #           required: false, 
+    #         }, 
+    #         {
+    #           attribute_data_type: "String", 
+    #           developer_only_attribute: false, 
+    #           mutable: true, 
+    #           name: "gender", 
+    #           required: false, 
+    #           string_attribute_constraints: {
+    #             max_length: "2048", 
+    #             min_length: "0", 
+    #           }, 
+    #         }, 
+    #         {
+    #           attribute_data_type: "String", 
+    #           developer_only_attribute: false, 
+    #           mutable: true, 
+    #           name: "birthdate", 
+    #           required: false, 
+    #           string_attribute_constraints: {
+    #             max_length: "10", 
+    #             min_length: "10", 
+    #           }, 
+    #         }, 
+    #         {
+    #           attribute_data_type: "String", 
+    #           developer_only_attribute: false, 
+    #           mutable: true, 
+    #           name: "zoneinfo", 
+    #           required: false, 
+    #           string_attribute_constraints: {
+    #             max_length: "2048", 
+    #             min_length: "0", 
+    #           }, 
+    #         }, 
+    #         {
+    #           attribute_data_type: "String", 
+    #           developer_only_attribute: false, 
+    #           mutable: true, 
+    #           name: "locale", 
+    #           required: false, 
+    #           string_attribute_constraints: {
+    #             max_length: "2048", 
+    #             min_length: "0", 
+    #           }, 
+    #         }, 
+    #         {
+    #           attribute_data_type: "String", 
+    #           developer_only_attribute: false, 
+    #           mutable: true, 
+    #           name: "phone_number", 
+    #           required: false, 
+    #           string_attribute_constraints: {
+    #             max_length: "2048", 
+    #             min_length: "0", 
+    #           }, 
+    #         }, 
+    #         {
+    #           attribute_data_type: "Boolean", 
+    #           developer_only_attribute: false, 
+    #           mutable: true, 
+    #           name: "phone_number_verifie", 
+    #           required: false, 
+    #         }, 
+    #         {
+    #           attribute_data_type: "String", 
+    #           developer_only_attribute: false, 
+    #           mutable: true, 
+    #           name: "address", 
+    #           required: false, 
+    #           string_attribute_constraints: {
+    #             max_length: "2048", 
+    #             min_length: "0", 
+    #           }, 
+    #         }, 
+    #         {
+    #           attribute_data_type: "Number", 
+    #           developer_only_attribute: false, 
+    #           mutable: true, 
+    #           name: "updated_at", 
+    #           number_attribute_constraints: {
+    #             min_value: "0", 
+    #           }, 
+    #           required: false, 
+    #         }, 
+    #         {
+    #           attribute_data_type: "Number", 
+    #           developer_only_attribute: true, 
+    #           mutable: true, 
+    #           name: "dev:custom:mydev", 
+    #           number_attribute_constraints: {
+    #             max_value: "99", 
+    #             min_value: "1", 
+    #           }, 
+    #           required: false, 
+    #         }, 
+    #       ], 
+    #       sms_authentication_message: "Your verification code is {####}.", 
+    #       sms_configuration: {
+    #         external_id: "my-role-external-id", 
+    #         sns_caller_arn: "arn:aws:iam::123456789012:role/service-role/test-cognito-SMS-Role", 
+    #         sns_region: "us-east-1", 
+    #       }, 
+    #       sms_verification_message: "Your verification code is {####}.", 
+    #       user_attribute_update_settings: {
+    #         attributes_require_verification_before_update: [
+    #           "email", 
+    #         ], 
+    #       }, 
+    #       user_pool_add_ons: {
+    #         advanced_security_mode: "OFF", 
+    #       }, 
+    #       user_pool_tags: {
+    #         "my-test-tag-key" => "my-test-tag-value", 
+    #       }, 
+    #       username_configuration: {
+    #         case_sensitive: true, 
+    #       }, 
+    #       verification_message_template: {
+    #         default_email_option: "CONFIRM_WITH_CODE", 
+    #         email_message: "Your confirmation code is {####}", 
+    #         email_message_by_link: "Choose this link to {##verify your email##}", 
+    #         email_subject: "Here is your confirmation code", 
+    #         email_subject_by_link: "Here is your confirmation link", 
+    #         sms_message: "Your confirmation code is {####}", 
+    #       }, 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4333,6 +4849,134 @@ module Aws::CognitoIdentityProvider
     # @return [Types::CreateUserPoolClientResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateUserPoolClientResponse#user_pool_client #user_pool_client} => Types::UserPoolClientType
+    #
+    #
+    # @example Example: Example user pool app client with email and username sign-in
+    #
+    #   # The following example creates an app client with all configurable properties set to an example value. The resulting user
+    #   # pool client connects to an analytics client, allows sign-in with username and password, and has two external identity
+    #   # providers associated with it.
+    #
+    #   resp = client.create_user_pool_client({
+    #     access_token_validity: 6, 
+    #     allowed_o_auth_flows: [
+    #       "code", 
+    #     ], 
+    #     allowed_o_auth_flows_user_pool_client: true, 
+    #     allowed_o_auth_scopes: [
+    #       "aws.cognito.signin.user.admin", 
+    #       "openid", 
+    #     ], 
+    #     analytics_configuration: {
+    #       application_id: "d70b2ba36a8c4dc5a04a0451a31a1e12", 
+    #       external_id: "my-external-id", 
+    #       role_arn: "arn:aws:iam::123456789012:role/test-cognitouserpool-role", 
+    #       user_data_shared: true, 
+    #     }, 
+    #     callback_urls: [
+    #       "https://example.com", 
+    #       "http://localhost", 
+    #       "myapp://example", 
+    #     ], 
+    #     client_name: "my-test-app-client", 
+    #     default_redirect_uri: "https://example.com", 
+    #     explicit_auth_flows: [
+    #       "ALLOW_ADMIN_USER_PASSWORD_AUTH", 
+    #       "ALLOW_USER_PASSWORD_AUTH", 
+    #       "ALLOW_REFRESH_TOKEN_AUTH", 
+    #     ], 
+    #     generate_secret: true, 
+    #     id_token_validity: 6, 
+    #     logout_urls: [
+    #       "https://example.com/logout", 
+    #     ], 
+    #     prevent_user_existence_errors: "ENABLED", 
+    #     read_attributes: [
+    #       "email", 
+    #       "address", 
+    #       "preferred_username", 
+    #     ], 
+    #     refresh_token_validity: 6, 
+    #     supported_identity_providers: [
+    #       "SignInWithApple", 
+    #       "MySSO", 
+    #     ], 
+    #     token_validity_units: {
+    #       access_token: "hours", 
+    #       id_token: "minutes", 
+    #       refresh_token: "days", 
+    #     }, 
+    #     user_pool_id: "us-east-1_EXAMPLE", 
+    #     write_attributes: [
+    #       "family_name", 
+    #       "email", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     user_pool_client: {
+    #       access_token_validity: 6, 
+    #       allowed_o_auth_flows: [
+    #         "code", 
+    #       ], 
+    #       allowed_o_auth_flows_user_pool_client: true, 
+    #       allowed_o_auth_scopes: [
+    #         "aws.cognito.signin.user.admin", 
+    #         "openid", 
+    #       ], 
+    #       analytics_configuration: {
+    #         application_id: "d70b2ba36a8c4dc5a04a0451a31a1e12", 
+    #         external_id: "my-external-id", 
+    #         role_arn: "arn:aws:iam::123456789012:role/test-cognitouserpool-role", 
+    #         user_data_shared: true, 
+    #       }, 
+    #       auth_session_validity: 3, 
+    #       callback_urls: [
+    #         "https://example.com", 
+    #         "http://localhost", 
+    #         "myapp://example", 
+    #       ], 
+    #       client_id: "26cb2c60kq7nbmas7rbme9b6pp", 
+    #       client_name: "my-test-app-client", 
+    #       client_secret: "13ka4h7u28d9oo44tqpq9djqsfvhvu8rk4d2ighvpu0k8fj1c2r9", 
+    #       creation_date: Time.parse(1689885426.107), 
+    #       default_redirect_uri: "https://example.com", 
+    #       enable_propagate_additional_user_context_data: false, 
+    #       enable_token_revocation: true, 
+    #       explicit_auth_flows: [
+    #         "ALLOW_USER_PASSWORD_AUTH", 
+    #         "ALLOW_ADMIN_USER_PASSWORD_AUTH", 
+    #         "ALLOW_REFRESH_TOKEN_AUTH", 
+    #       ], 
+    #       id_token_validity: 6, 
+    #       last_modified_date: Time.parse(1689885426.107), 
+    #       logout_urls: [
+    #         "https://example.com/logout", 
+    #       ], 
+    #       prevent_user_existence_errors: "ENABLED", 
+    #       read_attributes: [
+    #         "address", 
+    #         "preferred_username", 
+    #         "email", 
+    #       ], 
+    #       refresh_token_validity: 6, 
+    #       supported_identity_providers: [
+    #         "SignInWithApple", 
+    #         "MySSO", 
+    #       ], 
+    #       token_validity_units: {
+    #         access_token: "hours", 
+    #         id_token: "minutes", 
+    #         refresh_token: "days", 
+    #       }, 
+    #       user_pool_id: "us-east-1_EXAMPLE", 
+    #       write_attributes: [
+    #         "family_name", 
+    #         "email", 
+    #       ], 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -6069,6 +6713,42 @@ module Aws::CognitoIdentityProvider
     #   * {Types::InitiateAuthResponse#challenge_parameters #challenge_parameters} => Hash&lt;String,String&gt;
     #   * {Types::InitiateAuthResponse#authentication_result #authentication_result} => Types::AuthenticationResultType
     #
+    #
+    # @example Example: Example username and password sign-in for a user who has TOTP MFA
+    #
+    #   # The following example signs in the user mytestuser with analytics data, client metadata, and user context data for
+    #   # advanced security.
+    #
+    #   resp = client.initiate_auth({
+    #     analytics_metadata: {
+    #       analytics_endpoint_id: "d70b2ba36a8c4dc5a04a0451a31a1e12", 
+    #     }, 
+    #     auth_flow: "USER_PASSWORD_AUTH", 
+    #     auth_parameters: {
+    #       "PASSWORD" => "This-is-my-test-99!", 
+    #       "SECRET_HASH" => "oT5ZkS8ctnrhYeeGsGTvOzPhoc/Jd1cO5fueBWFVmp8=", 
+    #       "USERNAME" => "mytestuser", 
+    #     }, 
+    #     client_id: "1example23456789", 
+    #     client_metadata: {
+    #       "MyTestKey" => "MyTestValue", 
+    #     }, 
+    #     user_context_data: {
+    #       encoded_data: "AmazonCognitoAdvancedSecurityData_object", 
+    #       ip_address: "192.0.2.1", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     challenge_name: "SOFTWARE_TOKEN_MFA", 
+    #     challenge_parameters: {
+    #       "FRIENDLY_DEVICE_NAME" => "mytestauthenticator", 
+    #       "USER_ID_FOR_SRP" => "mytestuser", 
+    #     }, 
+    #     session: "AYABeC1-y8qooiuysEv0uM4wAqQAHQABAAdTZXJ2aWNlABBDb2duaXRvVXNlclBvb2xzAAEAB2F3cy1rbXMAS2Fybjphd3M6a21zOnVzLXdlc3QtMjowMTU3MzY3MjcxOTg6a2V5LzI5OTFhNGE5LTM5YTAtNDQ0Mi04MWU4LWRkYjY4NTllMTg2MQC4AQIBAHhjxv5lVLhE2_WNrC1zuomqn08qDUUp3z9v4EGAjazZ-wGP3HuBF5Izvxf-9WkCT5uyAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMeQoT5e6Dpfh52caqAgEQgDvuL8uLMhPt0WmQpZnkNED1gob6xbqt5LaQo_H4L5CuT4Kj499dGCoZ1q1trmlZSRgRm0wwGGG8lFU37QIAAAAADAAAEAAAAAAAAAAAAAAAAADuLe9_UJ4oZAMsQYr0ntiT_____wAAAAEAAAAAAAAAAAAAAAEAAADnLDGmKBQtsCafNokRmPLgl2itBKuKR2dfZBQb5ucCYkzThM5HOfQUSEL-A3dZzfYDC0IODsrcMkrbeeVyMJk-FCzsxS9Og8BEBVnvi9WjZkPJ4mF0YS6FUXnoPSBV5oUqGzRaT-tJ169SUFZAUfFM1fGeJ8T57-QdCxjyISRCWV1VG5_7TiCioyRGfWwzNVWh7exJortF3ccfOyiEyxeqJ2VJvJq3m_w8NP24_PMDpktpRMKftObIMlD5ewRTNCdrUXQ1BW5KIxhJLGjYfRzJDZuKzmEgS-VHsKz0z76w-AlAgdfvdAjflLnsgduU5kUX4YP6jqnetg", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.initiate_auth({
@@ -6728,6 +7408,155 @@ module Aws::CognitoIdentityProvider
     #   * {Types::ListUsersResponse#pagination_token #pagination_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: A ListUsers request for the next 3 users whose email address starts with "testuser."
+    #
+    #   # This request submits a value for all possible parameters for ListUsers. By iterating the PaginationToken, you can page
+    #   # through and collect all users in a user pool.
+    #
+    #   resp = client.list_users({
+    #     attributes_to_get: [
+    #       "email", 
+    #       "sub", 
+    #     ], 
+    #     filter: "\"email\"^=\"testuser\"", 
+    #     limit: 3, 
+    #     pagination_token: "abcd1234EXAMPLE", 
+    #     user_pool_id: "us-east-1_EXAMPLE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     pagination_token: "efgh5678EXAMPLE", 
+    #     users: [
+    #       {
+    #         attributes: [
+    #           {
+    #             name: "sub", 
+    #             value: "eaad0219-2117-439f-8d46-4db20e59268f", 
+    #           }, 
+    #           {
+    #             name: "email", 
+    #             value: "testuser@example.com", 
+    #           }, 
+    #         ], 
+    #         enabled: true, 
+    #         user_create_date: Time.parse(1682955829.578), 
+    #         user_last_modified_date: Time.parse(1689030181.63), 
+    #         user_status: "CONFIRMED", 
+    #         username: "testuser", 
+    #       }, 
+    #       {
+    #         attributes: [
+    #           {
+    #             name: "sub", 
+    #             value: "3b994cfd-0b07-4581-be46-3c82f9a70c90", 
+    #           }, 
+    #           {
+    #             name: "email", 
+    #             value: "testuser2@example.com", 
+    #           }, 
+    #         ], 
+    #         enabled: true, 
+    #         user_create_date: Time.parse(1684427979.201), 
+    #         user_last_modified_date: Time.parse(1684427979.201), 
+    #         user_status: "UNCONFIRMED", 
+    #         username: "testuser2", 
+    #       }, 
+    #       {
+    #         attributes: [
+    #           {
+    #             name: "sub", 
+    #             value: "5929e0d1-4c34-42d1-9b79-a5ecacfe66f7", 
+    #           }, 
+    #           {
+    #             name: "email", 
+    #             value: "testuser3@example.com", 
+    #           }, 
+    #         ], 
+    #         enabled: true, 
+    #         user_create_date: Time.parse(1684427823.641), 
+    #         user_last_modified_date: Time.parse(1684427823.641), 
+    #         user_status: "UNCONFIRMED", 
+    #         username: "testuser3@example.com", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: A ListUsers request for the next 3 users whose email address starts with "testuser."
+    #
+    #   # This request submits a value for all possible parameters for ListUsers. By iterating the PaginationToken, you can page
+    #   # through and collect all users in a user pool.
+    #
+    #   resp = client.list_users({
+    #     attributes_to_get: [
+    #       "email", 
+    #       "sub", 
+    #     ], 
+    #     filter: "\"email\"^=\"testuser\"", 
+    #     limit: 3, 
+    #     pagination_token: "abcd1234EXAMPLE", 
+    #     user_pool_id: "us-east-1_EXAMPLE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     pagination_token: "efgh5678EXAMPLE", 
+    #     users: [
+    #       {
+    #         attributes: [
+    #           {
+    #             name: "sub", 
+    #             value: "eaad0219-2117-439f-8d46-4db20e59268f", 
+    #           }, 
+    #           {
+    #             name: "email", 
+    #             value: "testuser@example.com", 
+    #           }, 
+    #         ], 
+    #         enabled: true, 
+    #         user_create_date: Time.parse(1682955829.578), 
+    #         user_last_modified_date: Time.parse(1689030181.63), 
+    #         user_status: "CONFIRMED", 
+    #         username: "testuser", 
+    #       }, 
+    #       {
+    #         attributes: [
+    #           {
+    #             name: "sub", 
+    #             value: "3b994cfd-0b07-4581-be46-3c82f9a70c90", 
+    #           }, 
+    #           {
+    #             name: "email", 
+    #             value: "testuser2@example.com", 
+    #           }, 
+    #         ], 
+    #         enabled: true, 
+    #         user_create_date: Time.parse(1684427979.201), 
+    #         user_last_modified_date: Time.parse(1684427979.201), 
+    #         user_status: "UNCONFIRMED", 
+    #         username: "testuser2", 
+    #       }, 
+    #       {
+    #         attributes: [
+    #           {
+    #             name: "sub", 
+    #             value: "5929e0d1-4c34-42d1-9b79-a5ecacfe66f7", 
+    #           }, 
+    #           {
+    #             name: "email", 
+    #             value: "testuser3@example.com", 
+    #           }, 
+    #         ], 
+    #         enabled: true, 
+    #         user_create_date: Time.parse(1684427823.641), 
+    #         user_last_modified_date: Time.parse(1684427823.641), 
+    #         user_status: "UNCONFIRMED", 
+    #         username: "testuser3@example.com", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -9364,7 +10193,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

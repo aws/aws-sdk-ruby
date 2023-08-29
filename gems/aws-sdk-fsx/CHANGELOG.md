@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2023-08-29)
+------------------
+
+* Feature - Documentation updates for project quotas.
+
 1.74.0 (2023-08-09)
 ------------------
 

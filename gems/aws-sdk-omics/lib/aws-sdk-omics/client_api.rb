@@ -366,6 +366,7 @@ module Aws::Omics
     RunResourceDigest = Shapes::StringShape.new(name: 'RunResourceDigest')
     RunResourceDigestKey = Shapes::StringShape.new(name: 'RunResourceDigestKey')
     RunResourceDigests = Shapes::MapShape.new(name: 'RunResourceDigests')
+    RunRetentionMode = Shapes::StringShape.new(name: 'RunRetentionMode')
     RunRoleArn = Shapes::StringShape.new(name: 'RunRoleArn')
     RunStartedBy = Shapes::StringShape.new(name: 'RunStartedBy')
     RunStatus = Shapes::StringShape.new(name: 'RunStatus')
@@ -1122,6 +1123,7 @@ module Aws::Omics
     GetRunResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: RunStatusMessage, location_name: "statusMessage"))
     GetRunResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetRunResponse.add_member(:accelerators, Shapes::ShapeRef.new(shape: Accelerators, location_name: "accelerators"))
+    GetRunResponse.add_member(:retention_mode, Shapes::ShapeRef.new(shape: RunRetentionMode, location_name: "retentionMode"))
     GetRunResponse.struct_class = Types::GetRunResponse
 
     GetRunTaskRequest.add_member(:id, Shapes::ShapeRef.new(shape: RunId, required: true, location: "uri", location_name: "id"))
@@ -1828,6 +1830,7 @@ module Aws::Omics
     StartRunRequest.add_member(:log_level, Shapes::ShapeRef.new(shape: RunLogLevel, location_name: "logLevel"))
     StartRunRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     StartRunRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: RunRequestId, required: true, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    StartRunRequest.add_member(:retention_mode, Shapes::ShapeRef.new(shape: RunRetentionMode, location_name: "retentionMode"))
     StartRunRequest.struct_class = Types::StartRunRequest
 
     StartRunResponse.add_member(:arn, Shapes::ShapeRef.new(shape: RunArn, location_name: "arn"))

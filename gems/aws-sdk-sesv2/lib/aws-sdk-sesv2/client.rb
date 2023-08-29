@@ -441,6 +441,37 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Cancels an export job.
+    #
+    # @option params [required, String] :job_id
+    #   The export job ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Cancel export job
+    #
+    #   # Cancels the export job with ID ef28cf62-9d8e-4b60-9283-b09816c99a99
+    #
+    #   resp = client.cancel_export_job({
+    #     job_id: "ef28cf62-9d8e-4b60-9283-b09816c99a99", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_export_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CancelExportJob AWS API Documentation
+    #
+    # @overload cancel_export_job(params = {})
+    # @param [Hash] params ({})
+    def cancel_export_job(params = {}, options = {})
+      req = build_request(:cancel_export_job, params)
+      req.send_request(options)
+    end
+
     # Create a configuration set. *Configuration sets* are groups of rules
     # that you can apply to the emails that you send. You apply a
     # configuration set to an email by specifying the name of the
@@ -1073,6 +1104,152 @@ module Aws::SESV2
     # @param [Hash] params ({})
     def create_email_template(params = {}, options = {})
       req = build_request(:create_email_template, params)
+      req.send_request(options)
+    end
+
+    # Creates an export job for a data source and destination.
+    #
+    # You can execute this operation no more than once per second.
+    #
+    # @option params [required, Types::ExportDataSource] :export_data_source
+    #   The data source for the export job.
+    #
+    # @option params [required, Types::ExportDestination] :export_destination
+    #   The destination for the export job.
+    #
+    # @return [Types::CreateExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateExportJobResponse#job_id #job_id} => String
+    #
+    #
+    # @example Example: Create Metrics export job
+    #
+    #   # Creates a new export job for Metrics data
+    #
+    #   resp = client.create_export_job({
+    #     export_data_source: {
+    #       metrics_data_source: {
+    #         dimensions: {
+    #           "ISP" => [
+    #             "*", 
+    #           ], 
+    #         }, 
+    #         end_date: Time.parse("2023-07-02T00:00:00"), 
+    #         metrics: [
+    #           {
+    #             aggregation: "VOLUME", 
+    #             name: "SEND", 
+    #           }, 
+    #           {
+    #             aggregation: "VOLUME", 
+    #             name: "COMPLAINT", 
+    #           }, 
+    #           {
+    #             aggregation: "RATE", 
+    #             name: "COMPLAINT", 
+    #           }, 
+    #         ], 
+    #         namespace: "VDM", 
+    #         start_date: Time.parse("2023-07-01T00:00:00"), 
+    #       }, 
+    #     }, 
+    #     export_destination: {
+    #       data_format: "CSV", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_id: "ef28cf62-9d8e-4b60-9283-b09816c99a99", 
+    #   }
+    #
+    # @example Example: Create Message Insights export job
+    #
+    #   # Creates a new export job for Message Insights data
+    #
+    #   resp = client.create_export_job({
+    #     export_data_source: {
+    #       message_insights_data_source: {
+    #         end_date: Time.parse("2023-07-02T00:00:00"), 
+    #         exclude: {
+    #           from_email_address: [
+    #             "hello@example.com", 
+    #           ], 
+    #         }, 
+    #         include: {
+    #           subject: [
+    #             "Hello", 
+    #           ], 
+    #         }, 
+    #         start_date: Time.parse("2023-07-01T00:00:00"), 
+    #       }, 
+    #     }, 
+    #     export_destination: {
+    #       data_format: "CSV", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_id: "ef28cf62-9d8e-4b60-9283-b09816c99a99", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_export_job({
+    #     export_data_source: { # required
+    #       metrics_data_source: {
+    #         dimensions: { # required
+    #           "EMAIL_IDENTITY" => ["MetricDimensionValue"],
+    #         },
+    #         namespace: "VDM", # required, accepts VDM
+    #         metrics: [ # required
+    #           {
+    #             name: "SEND", # accepts SEND, COMPLAINT, PERMANENT_BOUNCE, TRANSIENT_BOUNCE, OPEN, CLICK, DELIVERY, DELIVERY_OPEN, DELIVERY_CLICK, DELIVERY_COMPLAINT
+    #             aggregation: "RATE", # accepts RATE, VOLUME
+    #           },
+    #         ],
+    #         start_date: Time.now, # required
+    #         end_date: Time.now, # required
+    #       },
+    #       message_insights_data_source: {
+    #         start_date: Time.now, # required
+    #         end_date: Time.now, # required
+    #         include: {
+    #           from_email_address: ["InsightsEmailAddress"],
+    #           destination: ["InsightsEmailAddress"],
+    #           subject: ["EmailSubject"],
+    #           isp: ["Isp"],
+    #           last_delivery_event: ["SEND"], # accepts SEND, DELIVERY, TRANSIENT_BOUNCE, PERMANENT_BOUNCE, UNDETERMINED_BOUNCE, COMPLAINT
+    #           last_engagement_event: ["OPEN"], # accepts OPEN, CLICK
+    #         },
+    #         exclude: {
+    #           from_email_address: ["InsightsEmailAddress"],
+    #           destination: ["InsightsEmailAddress"],
+    #           subject: ["EmailSubject"],
+    #           isp: ["Isp"],
+    #           last_delivery_event: ["SEND"], # accepts SEND, DELIVERY, TRANSIENT_BOUNCE, PERMANENT_BOUNCE, UNDETERMINED_BOUNCE, COMPLAINT
+    #           last_engagement_event: ["OPEN"], # accepts OPEN, CLICK
+    #         },
+    #         max_results: 1,
+    #       },
+    #     },
+    #     export_destination: { # required
+    #       data_format: "CSV", # required, accepts CSV, JSON
+    #       s3_url: "S3Url",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateExportJob AWS API Documentation
+    #
+    # @overload create_export_job(params = {})
+    # @param [Hash] params ({})
+    def create_export_job(params = {}, options = {})
+      req = build_request(:create_export_job, params)
       req.send_request(options)
     end
 
@@ -2197,6 +2374,138 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Provides information about an export job.
+    #
+    # @option params [required, String] :job_id
+    #   The export job ID.
+    #
+    # @return [Types::GetExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetExportJobResponse#job_id #job_id} => String
+    #   * {Types::GetExportJobResponse#export_source_type #export_source_type} => String
+    #   * {Types::GetExportJobResponse#job_status #job_status} => String
+    #   * {Types::GetExportJobResponse#export_destination #export_destination} => Types::ExportDestination
+    #   * {Types::GetExportJobResponse#export_data_source #export_data_source} => Types::ExportDataSource
+    #   * {Types::GetExportJobResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::GetExportJobResponse#completed_timestamp #completed_timestamp} => Time
+    #   * {Types::GetExportJobResponse#failure_info #failure_info} => Types::FailureInfo
+    #   * {Types::GetExportJobResponse#statistics #statistics} => Types::ExportStatistics
+    #
+    #
+    # @example Example: Get export job
+    #
+    #   # Gets the export job with ID ef28cf62-9d8e-4b60-9283-b09816c99a99
+    #
+    #   resp = client.get_export_job({
+    #     job_id: "ef28cf62-9d8e-4b60-9283-b09816c99a99", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     created_timestamp: Time.parse("1685700961057"), 
+    #     export_data_source: {
+    #       metrics_data_source: {
+    #         dimensions: {
+    #           "ISP" => [
+    #             "*", 
+    #           ], 
+    #         }, 
+    #         end_date: Time.parse("1675209600000"), 
+    #         metrics: [
+    #           {
+    #             aggregation: "VOLUME", 
+    #             name: "SEND", 
+    #           }, 
+    #           {
+    #             aggregation: "VOLUME", 
+    #             name: "COMPLAINT", 
+    #           }, 
+    #           {
+    #             aggregation: "RATE", 
+    #             name: "COMPLAINT", 
+    #           }, 
+    #         ], 
+    #         namespace: "VDM", 
+    #         start_date: Time.parse("1672531200000"), 
+    #       }, 
+    #     }, 
+    #     export_destination: {
+    #       data_format: "CSV", 
+    #     }, 
+    #     export_source_type: "METRICS_DATA", 
+    #     job_id: "ef28cf62-9d8e-4b60-9283-b09816c99a99", 
+    #     job_status: "PROCESSING", 
+    #     statistics: {
+    #       exported_records_count: 5, 
+    #       processed_records_count: 5, 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_export_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.export_source_type #=> String, one of "METRICS_DATA", "MESSAGE_INSIGHTS"
+    #   resp.job_status #=> String, one of "CREATED", "PROCESSING", "COMPLETED", "FAILED", "CANCELLED"
+    #   resp.export_destination.data_format #=> String, one of "CSV", "JSON"
+    #   resp.export_destination.s3_url #=> String
+    #   resp.export_data_source.metrics_data_source.dimensions #=> Hash
+    #   resp.export_data_source.metrics_data_source.dimensions["MetricDimensionName"] #=> Array
+    #   resp.export_data_source.metrics_data_source.dimensions["MetricDimensionName"][0] #=> String
+    #   resp.export_data_source.metrics_data_source.namespace #=> String, one of "VDM"
+    #   resp.export_data_source.metrics_data_source.metrics #=> Array
+    #   resp.export_data_source.metrics_data_source.metrics[0].name #=> String, one of "SEND", "COMPLAINT", "PERMANENT_BOUNCE", "TRANSIENT_BOUNCE", "OPEN", "CLICK", "DELIVERY", "DELIVERY_OPEN", "DELIVERY_CLICK", "DELIVERY_COMPLAINT"
+    #   resp.export_data_source.metrics_data_source.metrics[0].aggregation #=> String, one of "RATE", "VOLUME"
+    #   resp.export_data_source.metrics_data_source.start_date #=> Time
+    #   resp.export_data_source.metrics_data_source.end_date #=> Time
+    #   resp.export_data_source.message_insights_data_source.start_date #=> Time
+    #   resp.export_data_source.message_insights_data_source.end_date #=> Time
+    #   resp.export_data_source.message_insights_data_source.include.from_email_address #=> Array
+    #   resp.export_data_source.message_insights_data_source.include.from_email_address[0] #=> String
+    #   resp.export_data_source.message_insights_data_source.include.destination #=> Array
+    #   resp.export_data_source.message_insights_data_source.include.destination[0] #=> String
+    #   resp.export_data_source.message_insights_data_source.include.subject #=> Array
+    #   resp.export_data_source.message_insights_data_source.include.subject[0] #=> String
+    #   resp.export_data_source.message_insights_data_source.include.isp #=> Array
+    #   resp.export_data_source.message_insights_data_source.include.isp[0] #=> String
+    #   resp.export_data_source.message_insights_data_source.include.last_delivery_event #=> Array
+    #   resp.export_data_source.message_insights_data_source.include.last_delivery_event[0] #=> String, one of "SEND", "DELIVERY", "TRANSIENT_BOUNCE", "PERMANENT_BOUNCE", "UNDETERMINED_BOUNCE", "COMPLAINT"
+    #   resp.export_data_source.message_insights_data_source.include.last_engagement_event #=> Array
+    #   resp.export_data_source.message_insights_data_source.include.last_engagement_event[0] #=> String, one of "OPEN", "CLICK"
+    #   resp.export_data_source.message_insights_data_source.exclude.from_email_address #=> Array
+    #   resp.export_data_source.message_insights_data_source.exclude.from_email_address[0] #=> String
+    #   resp.export_data_source.message_insights_data_source.exclude.destination #=> Array
+    #   resp.export_data_source.message_insights_data_source.exclude.destination[0] #=> String
+    #   resp.export_data_source.message_insights_data_source.exclude.subject #=> Array
+    #   resp.export_data_source.message_insights_data_source.exclude.subject[0] #=> String
+    #   resp.export_data_source.message_insights_data_source.exclude.isp #=> Array
+    #   resp.export_data_source.message_insights_data_source.exclude.isp[0] #=> String
+    #   resp.export_data_source.message_insights_data_source.exclude.last_delivery_event #=> Array
+    #   resp.export_data_source.message_insights_data_source.exclude.last_delivery_event[0] #=> String, one of "SEND", "DELIVERY", "TRANSIENT_BOUNCE", "PERMANENT_BOUNCE", "UNDETERMINED_BOUNCE", "COMPLAINT"
+    #   resp.export_data_source.message_insights_data_source.exclude.last_engagement_event #=> Array
+    #   resp.export_data_source.message_insights_data_source.exclude.last_engagement_event[0] #=> String, one of "OPEN", "CLICK"
+    #   resp.export_data_source.message_insights_data_source.max_results #=> Integer
+    #   resp.created_timestamp #=> Time
+    #   resp.completed_timestamp #=> Time
+    #   resp.failure_info.failed_records_s3_url #=> String
+    #   resp.failure_info.error_message #=> String
+    #   resp.statistics.processed_records_count #=> Integer
+    #   resp.statistics.exported_records_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetExportJob AWS API Documentation
+    #
+    # @overload get_export_job(params = {})
+    # @param [Hash] params ({})
+    def get_export_job(params = {}, options = {})
+      req = build_request(:get_export_job, params)
+      req.send_request(options)
+    end
+
     # Provides information about an import job.
     #
     # @option params [required, String] :job_id
@@ -2230,7 +2539,7 @@ module Aws::SESV2
     #   resp.import_data_source.data_format #=> String, one of "CSV", "JSON"
     #   resp.failure_info.failed_records_s3_url #=> String
     #   resp.failure_info.error_message #=> String
-    #   resp.job_status #=> String, one of "CREATED", "PROCESSING", "COMPLETED", "FAILED"
+    #   resp.job_status #=> String, one of "CREATED", "PROCESSING", "COMPLETED", "FAILED", "CANCELLED"
     #   resp.created_timestamp #=> Time
     #   resp.completed_timestamp #=> Time
     #   resp.processed_records_count #=> Integer
@@ -2242,6 +2551,117 @@ module Aws::SESV2
     # @param [Hash] params ({})
     def get_import_job(params = {}, options = {})
       req = build_request(:get_import_job, params)
+      req.send_request(options)
+    end
+
+    # Provides information about a specific message, including the from
+    # address, the subject, the recipient address, email tags, as well as
+    # events associated with the message.
+    #
+    # You can execute this operation no more than once per second.
+    #
+    # @option params [required, String] :message_id
+    #   A `MessageId` is a unique identifier for a message, and is returned
+    #   when sending emails through Amazon SES.
+    #
+    # @return [Types::GetMessageInsightsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMessageInsightsResponse#message_id #message_id} => String
+    #   * {Types::GetMessageInsightsResponse#from_email_address #from_email_address} => String
+    #   * {Types::GetMessageInsightsResponse#subject #subject} => String
+    #   * {Types::GetMessageInsightsResponse#email_tags #email_tags} => Array&lt;Types::MessageTag&gt;
+    #   * {Types::GetMessageInsightsResponse#insights #insights} => Array&lt;Types::EmailInsights&gt;
+    #
+    #
+    # @example Example: Get Message Insights
+    #
+    #   # Provides information about a specific message.
+    #
+    #   resp = client.get_message_insights({
+    #     message_id: "000000000000ab00-0a000aa0-1234-0a0a-1234-0a0aaa0aa00a-000000", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     email_tags: [
+    #       {
+    #         name: "ses:operation", 
+    #         value: "SendEmail", 
+    #       }, 
+    #       {
+    #         name: "ses:recipient-isp", 
+    #         value: "UNKNOWN_ISP", 
+    #       }, 
+    #       {
+    #         name: "ses:source-ip", 
+    #         value: "0.0.0.0", 
+    #       }, 
+    #       {
+    #         name: "ses:from-domain", 
+    #         value: "example.com", 
+    #       }, 
+    #       {
+    #         name: "ses:sender-identity", 
+    #         value: "hello@example.com", 
+    #       }, 
+    #       {
+    #         name: "ses:caller-identity", 
+    #         value: "Identity", 
+    #       }, 
+    #     ], 
+    #     from_email_address: "hello@example.com", 
+    #     insights: [
+    #       {
+    #         destination: "recipient@example.com", 
+    #         events: [
+    #           {
+    #             timestamp: Time.parse("2023-01-01T00:00:00.000000+01:00"), 
+    #             type: "SEND", 
+    #           }, 
+    #           {
+    #             timestamp: Time.parse("2023-01-01T00:00:01.000000+01:00"), 
+    #             type: "DELIVERY", 
+    #           }, 
+    #         ], 
+    #         isp: "UNKNOWN_ISP", 
+    #       }, 
+    #     ], 
+    #     message_id: "000000000000ab00-0a000aa0-1234-0a0a-1234-0a0aaa0aa00a-000000", 
+    #     subject: "hello", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_message_insights({
+    #     message_id: "OutboundMessageId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_id #=> String
+    #   resp.from_email_address #=> String
+    #   resp.subject #=> String
+    #   resp.email_tags #=> Array
+    #   resp.email_tags[0].name #=> String
+    #   resp.email_tags[0].value #=> String
+    #   resp.insights #=> Array
+    #   resp.insights[0].destination #=> String
+    #   resp.insights[0].isp #=> String
+    #   resp.insights[0].events #=> Array
+    #   resp.insights[0].events[0].timestamp #=> Time
+    #   resp.insights[0].events[0].type #=> String, one of "SEND", "REJECT", "BOUNCE", "COMPLAINT", "DELIVERY", "OPEN", "CLICK", "RENDERING_FAILURE", "DELIVERY_DELAY", "SUBSCRIPTION"
+    #   resp.insights[0].events[0].details.bounce.bounce_type #=> String, one of "UNDETERMINED", "TRANSIENT", "PERMANENT"
+    #   resp.insights[0].events[0].details.bounce.bounce_sub_type #=> String
+    #   resp.insights[0].events[0].details.bounce.diagnostic_code #=> String
+    #   resp.insights[0].events[0].details.complaint.complaint_sub_type #=> String
+    #   resp.insights[0].events[0].details.complaint.complaint_feedback_type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetMessageInsights AWS API Documentation
+    #
+    # @overload get_message_insights(params = {})
+    # @param [Hash] params ({})
+    def get_message_insights(params = {}, options = {})
+      req = build_request(:get_message_insights, params)
       req.send_request(options)
     end
 
@@ -2769,6 +3189,84 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Lists all of the export jobs.
+    #
+    # @option params [String] :next_token
+    #   The pagination token returned from a previous call to `ListExportJobs`
+    #   to indicate the position in the list of export jobs.
+    #
+    # @option params [Integer] :page_size
+    #   Maximum number of export jobs to return at once. Use this parameter to
+    #   paginate results. If additional export jobs exist beyond the specified
+    #   limit, the `NextToken` element is sent in the response. Use the
+    #   `NextToken` value in subsequent calls to `ListExportJobs` to retrieve
+    #   additional export jobs.
+    #
+    # @option params [String] :export_source_type
+    #   A value used to list export jobs that have a certain
+    #   `ExportSourceType`.
+    #
+    # @option params [String] :job_status
+    #   A value used to list export jobs that have a certain `JobStatus`.
+    #
+    # @return [Types::ListExportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListExportJobsResponse#export_jobs #export_jobs} => Array&lt;Types::ExportJobSummary&gt;
+    #   * {Types::ListExportJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List export jobs
+    #
+    #   # Lists export jobs of type METRICS_DATA and status PROCESSING
+    #
+    #   resp = client.list_export_jobs({
+    #     export_source_type: "METRICS_DATA", 
+    #     job_status: "PROCESSING", 
+    #     page_size: 25, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     export_jobs: [
+    #       {
+    #         created_timestamp: Time.parse("167697473543"), 
+    #         export_source_type: "METRICS_DATA", 
+    #         job_id: "72de83a0-6b49-47ca-9783-8b812576887a", 
+    #         job_status: "PROCESSING", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_export_jobs({
+    #     next_token: "NextToken",
+    #     page_size: 1,
+    #     export_source_type: "METRICS_DATA", # accepts METRICS_DATA, MESSAGE_INSIGHTS
+    #     job_status: "CREATED", # accepts CREATED, PROCESSING, COMPLETED, FAILED, CANCELLED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_jobs #=> Array
+    #   resp.export_jobs[0].job_id #=> String
+    #   resp.export_jobs[0].export_source_type #=> String, one of "METRICS_DATA", "MESSAGE_INSIGHTS"
+    #   resp.export_jobs[0].job_status #=> String, one of "CREATED", "PROCESSING", "COMPLETED", "FAILED", "CANCELLED"
+    #   resp.export_jobs[0].created_timestamp #=> Time
+    #   resp.export_jobs[0].completed_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListExportJobs AWS API Documentation
+    #
+    # @overload list_export_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_export_jobs(params = {}, options = {})
+      req = build_request(:list_export_jobs, params)
+      req.send_request(options)
+    end
+
     # Lists all of the import jobs.
     #
     # @option params [String] :import_destination_type
@@ -2810,7 +3308,7 @@ module Aws::SESV2
     #   resp.import_jobs[0].import_destination.suppression_list_destination.suppression_list_import_action #=> String, one of "DELETE", "PUT"
     #   resp.import_jobs[0].import_destination.contact_list_destination.contact_list_name #=> String
     #   resp.import_jobs[0].import_destination.contact_list_destination.contact_list_import_action #=> String, one of "DELETE", "PUT"
-    #   resp.import_jobs[0].job_status #=> String, one of "CREATED", "PROCESSING", "COMPLETED", "FAILED"
+    #   resp.import_jobs[0].job_status #=> String, one of "CREATED", "PROCESSING", "COMPLETED", "FAILED", "CANCELLED"
     #   resp.import_jobs[0].created_timestamp #=> Time
     #   resp.import_jobs[0].processed_records_count #=> Integer
     #   resp.import_jobs[0].failed_records_count #=> Integer
@@ -4556,7 +5054,7 @@ module Aws::SESV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

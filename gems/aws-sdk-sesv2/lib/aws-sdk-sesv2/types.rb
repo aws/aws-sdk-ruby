@@ -248,6 +248,34 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # Information about a `Bounce` event.
+    #
+    # @!attribute [rw] bounce_type
+    #   The type of the bounce, as determined by SES. Can be one of
+    #   `UNDETERMINED`, `TRANSIENT`, or `PERMANENT`
+    #   @return [String]
+    #
+    # @!attribute [rw] bounce_sub_type
+    #   The subtype of the bounce, as determined by SES.
+    #   @return [String]
+    #
+    # @!attribute [rw] diagnostic_code
+    #   The status code issued by the reporting Message Transfer Authority
+    #   (MTA). This field only appears if a delivery status notification
+    #   (DSN) was attached to the bounce and the `Diagnostic-Code` was
+    #   provided in the DSN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/Bounce AWS API Documentation
+    #
+    class Bounce < Struct.new(
+      :bounce_type,
+      :bounce_sub_type,
+      :diagnostic_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that contains the body of the message. You can specify a
     # template message.
     #
@@ -385,6 +413,27 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # Represents a request to cancel an export job using the export job ID.
+    #
+    # @!attribute [rw] job_id
+    #   The export job ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CancelExportJobRequest AWS API Documentation
+    #
+    class CancelExportJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An HTTP 200 response if the request succeeds, or an error message if
+    # the request fails.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CancelExportJobResponse AWS API Documentation
+    #
+    class CancelExportJobResponse < Aws::EmptyStructure; end
+
     # An object that defines an Amazon CloudWatch destination for email
     # events. You can use Amazon CloudWatch to monitor and gain insights on
     # your email sending metrics.
@@ -441,6 +490,29 @@ module Aws::SESV2
       :dimension_name,
       :dimension_value_source,
       :default_dimension_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a `Complaint` event.
+    #
+    # @!attribute [rw] complaint_sub_type
+    #   Can either be `null` or `OnAccountSuppressionList`. If the value is
+    #   `OnAccountSuppressionList`, SES accepted the message, but didn't
+    #   attempt to send it because it was on the account-level suppression
+    #   list.
+    #   @return [String]
+    #
+    # @!attribute [rw] complaint_feedback_type
+    #   The value of the `Feedback-Type` field from the feedback report
+    #   received from the ISP.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/Complaint AWS API Documentation
+    #
+    class Complaint < Struct.new(
+      :complaint_sub_type,
+      :complaint_feedback_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1043,6 +1115,41 @@ module Aws::SESV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateEmailTemplateResponse AWS API Documentation
     #
     class CreateEmailTemplateResponse < Aws::EmptyStructure; end
+
+    # Represents a request to create an export job from a data source to a
+    # data destination.
+    #
+    # @!attribute [rw] export_data_source
+    #   The data source for the export job.
+    #   @return [Types::ExportDataSource]
+    #
+    # @!attribute [rw] export_destination
+    #   The destination for the export job.
+    #   @return [Types::ExportDestination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateExportJobRequest AWS API Documentation
+    #
+    class CreateExportJobRequest < Struct.new(
+      :export_data_source,
+      :export_destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An HTTP 200 response if the request succeeds, or an error message if
+    # the request fails.
+    #
+    # @!attribute [rw] job_id
+    #   A string that represents the export job ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateExportJobResponse AWS API Documentation
+    #
+    class CreateExportJobResponse < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Represents a request to create an import job from a data source for a
     # data destination.
@@ -1985,6 +2092,31 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # An email's insights contain metadata and delivery information about a
+    # specific email.
+    #
+    # @!attribute [rw] destination
+    #   The recipient of the email.
+    #   @return [String]
+    #
+    # @!attribute [rw] isp
+    #   The recipient's ISP (e.g., `Gmail`, `Yahoo`, etc.).
+    #   @return [String]
+    #
+    # @!attribute [rw] events
+    #   A list of events associated with the sent email.
+    #   @return [Array<Types::InsightsEvent>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/EmailInsights AWS API Documentation
+    #
+    class EmailInsights < Struct.new(
+      :destination,
+      :isp,
+      :events)
+      SENSITIVE = [:destination]
+      include Aws::Structure
+    end
+
     # The content of the email, composed of a subject line, an HTML part,
     # and a text-only part.
     #
@@ -2214,15 +2346,211 @@ module Aws::SESV2
       include Aws::Structure
     end
 
-    # An object that contains the failure details about an import job.
+    # Contains a `Bounce` object if the event type is `BOUNCE`. Contains a
+    # `Complaint` object if the event type is `COMPLAINT`.
+    #
+    # @!attribute [rw] bounce
+    #   Information about a `Bounce` event.
+    #   @return [Types::Bounce]
+    #
+    # @!attribute [rw] complaint
+    #   Information about a `Complaint` event.
+    #   @return [Types::Complaint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/EventDetails AWS API Documentation
+    #
+    class EventDetails < Struct.new(
+      :bounce,
+      :complaint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains details about the data source of the export
+    # job. It can only contain one of `MetricsDataSource` or
+    # `MessageInsightsDataSource` object.
+    #
+    # @!attribute [rw] metrics_data_source
+    #   An object that contains details about the data source for the
+    #   metrics export.
+    #   @return [Types::MetricsDataSource]
+    #
+    # @!attribute [rw] message_insights_data_source
+    #   An object that contains filters applied when performing the Message
+    #   Insights export.
+    #   @return [Types::MessageInsightsDataSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ExportDataSource AWS API Documentation
+    #
+    class ExportDataSource < Struct.new(
+      :metrics_data_source,
+      :message_insights_data_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains details about the destination of the export
+    # job.
+    #
+    # @!attribute [rw] data_format
+    #   The data format of the final export job file, can be one of the
+    #   following:
+    #
+    #   * `CSV` - A comma-separated values file.
+    #
+    #   * `JSON` - A Json file.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_url
+    #   An Amazon S3 pre-signed URL that points to the generated export
+    #   file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ExportDestination AWS API Documentation
+    #
+    class ExportDestination < Struct.new(
+      :data_format,
+      :s3_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the export job.
+    #
+    # @!attribute [rw] job_id
+    #   The export job ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_source_type
+    #   The source type of the export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   The status of the export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp of when the export job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completed_timestamp
+    #   The timestamp of when the export job was completed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ExportJobSummary AWS API Documentation
+    #
+    class ExportJobSummary < Struct.new(
+      :job_id,
+      :export_source_type,
+      :job_status,
+      :created_timestamp,
+      :completed_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains a mapping between a `Metric` and
+    # `MetricAggregation`.
+    #
+    # @!attribute [rw] name
+    #   The metric to export, can be one of the following:
+    #
+    #   * `SEND` - Emails sent eligible for tracking in the VDM dashboard.
+    #     This excludes emails sent to the mailbox simulator and emails
+    #     addressed to more than one recipient.
+    #
+    #   * `COMPLAINT` - Complaints received for your account. This excludes
+    #     complaints from the mailbox simulator, those originating from your
+    #     account-level suppression list (if enabled), and those for emails
+    #     addressed to more than one recipient
+    #
+    #   * `PERMANENT_BOUNCE` - Permanent bounces - i.e., feedback received
+    #     for emails sent to non-existent mailboxes. Excludes bounces from
+    #     the mailbox simulator, those originating from your account-level
+    #     suppression list (if enabled), and those for emails addressed to
+    #     more than one recipient.
+    #
+    #   * `TRANSIENT_BOUNCE` - Transient bounces - i.e., feedback received
+    #     for delivery failures excluding issues with non-existent
+    #     mailboxes. Excludes bounces from the mailbox simulator, and those
+    #     for emails addressed to more than one recipient.
+    #
+    #   * `OPEN` - Unique open events for emails including open trackers.
+    #     Excludes opens for emails addressed to more than one recipient.
+    #
+    #   * `CLICK` - Unique click events for emails including wrapped links.
+    #     Excludes clicks for emails addressed to more than one recipient.
+    #
+    #   * `DELIVERY` - Successful deliveries for email sending attempts.
+    #     Excludes deliveries to the mailbox simulator and for emails
+    #     addressed to more than one recipient.
+    #
+    #   * `DELIVERY_OPEN` - Successful deliveries for email sending
+    #     attempts. Excludes deliveries to the mailbox simulator, for emails
+    #     addressed to more than one recipient, and emails without open
+    #     trackers.
+    #
+    #   * `DELIVERY_CLICK` - Successful deliveries for email sending
+    #     attempts. Excludes deliveries to the mailbox simulator, for emails
+    #     addressed to more than one recipient, and emails without click
+    #     trackers.
+    #
+    #   * `DELIVERY_COMPLAINT` - Successful deliveries for email sending
+    #     attempts. Excludes deliveries to the mailbox simulator, for emails
+    #     addressed to more than one recipient, and emails addressed to
+    #     recipients hosted by ISPs with which Amazon SES does not have a
+    #     feedback loop agreement.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation
+    #   The aggregation to apply to a metric, can be one of the following:
+    #
+    #   * `VOLUME` - The volume of events for this metric.
+    #
+    #   * `RATE` - The rate for this metric relative to the `SEND` metric
+    #     volume.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ExportMetric AWS API Documentation
+    #
+    class ExportMetric < Struct.new(
+      :name,
+      :aggregation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Statistics about the execution of an export job.
+    #
+    # @!attribute [rw] processed_records_count
+    #   The number of records that were processed to generate the final
+    #   export file.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] exported_records_count
+    #   The number of records that were exported to the final export file.
+    #
+    #   This value might not be available for all export source types
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ExportStatistics AWS API Documentation
+    #
+    class ExportStatistics < Struct.new(
+      :processed_records_count,
+      :exported_records_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains the failure details about a job.
     #
     # @!attribute [rw] failed_records_s3_url
-    #   An Amazon S3 presigned URL that contains all the failed records and
+    #   An Amazon S3 pre-signed URL that contains all the failed records and
     #   related information.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   A message about why the import job failed.
+    #   A message about why the job failed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/FailureInfo AWS API Documentation
@@ -3124,6 +3452,76 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # Represents a request to retrieve information about an export job using
+    # the export job ID.
+    #
+    # @!attribute [rw] job_id
+    #   The export job ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetExportJobRequest AWS API Documentation
+    #
+    class GetExportJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An HTTP 200 response if the request succeeds, or an error message if
+    # the request fails.
+    #
+    # @!attribute [rw] job_id
+    #   The export job ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_source_type
+    #   The type of source of the export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   The status of the export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_destination
+    #   The destination of the export job.
+    #   @return [Types::ExportDestination]
+    #
+    # @!attribute [rw] export_data_source
+    #   The data source of the export job.
+    #   @return [Types::ExportDataSource]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp of when the export job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completed_timestamp
+    #   The timestamp of when the export job was completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_info
+    #   The failure details about an export job.
+    #   @return [Types::FailureInfo]
+    #
+    # @!attribute [rw] statistics
+    #   The statistics about the export job.
+    #   @return [Types::ExportStatistics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetExportJobResponse AWS API Documentation
+    #
+    class GetExportJobResponse < Struct.new(
+      :job_id,
+      :export_source_type,
+      :job_status,
+      :export_destination,
+      :export_data_source,
+      :created_timestamp,
+      :completed_timestamp,
+      :failure_info,
+      :statistics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a request for information about an import job using the
     # import job ID.
     #
@@ -3192,6 +3590,60 @@ module Aws::SESV2
       :processed_records_count,
       :failed_records_count)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A request to return information about a message.
+    #
+    # @!attribute [rw] message_id
+    #   A `MessageId` is a unique identifier for a message, and is returned
+    #   when sending emails through Amazon SES.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetMessageInsightsRequest AWS API Documentation
+    #
+    class GetMessageInsightsRequest < Struct.new(
+      :message_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a message.
+    #
+    # @!attribute [rw] message_id
+    #   A unique identifier for the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_email_address
+    #   The from address used to send the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject
+    #   The subject line of the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] email_tags
+    #   A list of tags, in the form of name/value pairs, that were applied
+    #   to the email you sent, along with Amazon SES [Auto-Tags][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-using-event-publishing.html
+    #   @return [Array<Types::MessageTag>]
+    #
+    # @!attribute [rw] insights
+    #   A set of insights associated with the message.
+    #   @return [Array<Types::EmailInsights>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetMessageInsightsResponse AWS API Documentation
+    #
+    class GetMessageInsightsResponse < Struct.new(
+      :message_id,
+      :from_email_address,
+      :subject,
+      :email_tags,
+      :insights)
+      SENSITIVE = [:from_email_address, :subject]
       include Aws::Structure
     end
 
@@ -3363,7 +3815,7 @@ module Aws::SESV2
     # A summary of the import job.
     #
     # @!attribute [rw] job_id
-    #   A string that represents the import job ID.
+    #   A string that represents a job ID.
     #   @return [String]
     #
     # @!attribute [rw] import_destination
@@ -3372,7 +3824,15 @@ module Aws::SESV2
     #   @return [Types::ImportDestination]
     #
     # @!attribute [rw] job_status
-    #   The status of the import job.
+    #   The status of a job.
+    #
+    #   * `CREATED` – Job has just been created.
+    #
+    #   * `PROCESSING` – Job is processing.
+    #
+    #   * `ERROR` – An error occurred during processing.
+    #
+    #   * `COMPLETED` – Job has completed processing successfully.
     #   @return [String]
     #
     # @!attribute [rw] created_timestamp
@@ -3421,6 +3881,57 @@ module Aws::SESV2
     class InboxPlacementTrackingOption < Struct.new(
       :global,
       :tracked_isps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object containing details about a specific event.
+    #
+    # @!attribute [rw] timestamp
+    #   The timestamp of the event.
+    #   @return [Time]
+    #
+    # @!attribute [rw] type
+    #   The type of event:
+    #
+    #   * `SEND` - The send request was successful and SES will attempt to
+    #     deliver the message to the recipient’s mail server. (If
+    #     account-level or global suppression is being used, SES will still
+    #     count it as a send, but delivery is suppressed.)
+    #
+    #   * `DELIVERY` - SES successfully delivered the email to the
+    #     recipient's mail server. Excludes deliveries to the mailbox
+    #     simulator, and those from emails addressed to more than one
+    #     recipient.
+    #
+    #   * `BOUNCE` - Feedback received for delivery failures. Additional
+    #     details about the bounce are provided in the `Details` object.
+    #     Excludes bounces from the mailbox simulator, and those from emails
+    #     addressed to more than one recipient.
+    #
+    #   * `COMPLAINT` - Complaint received for the email. Additional details
+    #     about the complaint are provided in the `Details` object. This
+    #     excludes complaints from the mailbox simulator, those originating
+    #     from your account-level suppression list (if enabled), and those
+    #     from emails addressed to more than one recipient.
+    #
+    #   * `OPEN` - Open event for emails including open trackers. Excludes
+    #     opens for emails addressed to more than one recipient.
+    #
+    #   * `CLICK` - Click event for emails including wrapped links. Excludes
+    #     clicks for emails addressed to more than one recipient.
+    #   @return [String]
+    #
+    # @!attribute [rw] details
+    #   Details about bounce or complaint events.
+    #   @return [Types::EventDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/InsightsEvent AWS API Documentation
+    #
+    class InsightsEvent < Struct.new(
+      :timestamp,
+      :type,
+      :details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3987,6 +4498,65 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # Represents a request to list all export jobs with filters.
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token returned from a previous call to
+    #   `ListExportJobs` to indicate the position in the list of export
+    #   jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   Maximum number of export jobs to return at once. Use this parameter
+    #   to paginate results. If additional export jobs exist beyond the
+    #   specified limit, the `NextToken` element is sent in the response.
+    #   Use the `NextToken` value in subsequent calls to `ListExportJobs` to
+    #   retrieve additional export jobs.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] export_source_type
+    #   A value used to list export jobs that have a certain
+    #   `ExportSourceType`.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   A value used to list export jobs that have a certain `JobStatus`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListExportJobsRequest AWS API Documentation
+    #
+    class ListExportJobsRequest < Struct.new(
+      :next_token,
+      :page_size,
+      :export_source_type,
+      :job_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An HTTP 200 response if the request succeeds, or an error message if
+    # the request fails.
+    #
+    # @!attribute [rw] export_jobs
+    #   A list of the export job summaries.
+    #   @return [Array<Types::ExportJobSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A string token indicating that there might be additional export jobs
+    #   available to be listed. Use this token to a subsequent call to
+    #   `ListExportJobs` with the same parameters to retrieve the next page
+    #   of export jobs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListExportJobsResponse AWS API Documentation
+    #
+    class ListExportJobsResponse < Struct.new(
+      :export_jobs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a request to list all of the import jobs for a data
     # destination within the specified maximum number of import jobs.
     #
@@ -4297,6 +4867,104 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # An object that contains filters applied when performing the Message
+    # Insights export.
+    #
+    # @!attribute [rw] start_date
+    #   Represents the start date for the export interval as a timestamp.
+    #   The start date is inclusive.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   Represents the end date for the export interval as a timestamp. The
+    #   end date is inclusive.
+    #   @return [Time]
+    #
+    # @!attribute [rw] include
+    #   Filters for results to be included in the export file.
+    #   @return [Types::MessageInsightsFilters]
+    #
+    # @!attribute [rw] exclude
+    #   Filters for results to be excluded from the export file.
+    #   @return [Types::MessageInsightsFilters]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/MessageInsightsDataSource AWS API Documentation
+    #
+    class MessageInsightsDataSource < Struct.new(
+      :start_date,
+      :end_date,
+      :include,
+      :exclude,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object containing Message Insights filters.
+    #
+    # If you specify multiple filters, the filters are joined by AND.
+    #
+    # If you specify multiple values for a filter, the values are joined by
+    # OR. Filter values are case-sensitive.
+    #
+    # `FromEmailAddress`, `Destination`, and `Subject` filters support
+    # partial match. A partial match is performed by using the `*` wildcard
+    # character placed at the beginning (suffix match), the end (prefix
+    # match) or both ends of the string (contains match). In order to match
+    # the literal characters `*` or ``, they must be escaped using the ``
+    # character. If no wildcard character is present, an exact match is
+    # performed.
+    #
+    # @!attribute [rw] from_email_address
+    #   The from address used to send the message.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] destination
+    #   The recipient's email address.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subject
+    #   The subject line of the message.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] isp
+    #   The recipient's ISP (e.g., `Gmail`, `Yahoo`, etc.).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] last_delivery_event
+    #   The last delivery-related event for the email, where the ordering is
+    #   as follows: `SEND` &lt; `BOUNCE` &lt; `DELIVERY` &lt; `COMPLAINT`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] last_engagement_event
+    #   The last engagement-related event for the email, where the ordering
+    #   is as follows: `OPEN` &lt; `CLICK`.
+    #
+    #   Engagement events are only available if [Engagement tracking][1] is
+    #   enabled.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/vdm-settings.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/MessageInsightsFilters AWS API Documentation
+    #
+    class MessageInsightsFilters < Struct.new(
+      :from_email_address,
+      :destination,
+      :subject,
+      :isp,
+      :last_delivery_event,
+      :last_engagement_event)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The message can't be sent because it contains invalid content.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/MessageRejected AWS API Documentation
@@ -4386,6 +5054,43 @@ module Aws::SESV2
       :id,
       :timestamps,
       :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains details about the data source for the metrics
+    # export.
+    #
+    # @!attribute [rw] dimensions
+    #   An object that contains a mapping between a `MetricDimensionName`
+    #   and `MetricDimensionValue` to filter metrics by. Must contain a
+    #   least 1 dimension but no more than 3 unique ones.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] namespace
+    #   The metrics namespace - e.g., `VDM`.
+    #   @return [String]
+    #
+    # @!attribute [rw] metrics
+    #   A list of `ExportMetric` objects to export.
+    #   @return [Array<Types::ExportMetric>]
+    #
+    # @!attribute [rw] start_date
+    #   Represents the start date for the export interval as a timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   Represents the end date for the export interval as a timestamp.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/MetricsDataSource AWS API Documentation
+    #
+    class MetricsDataSource < Struct.new(
+      :dimensions,
+      :namespace,
+      :metrics,
+      :start_date,
+      :end_date)
       SENSITIVE = []
       include Aws::Structure
     end
