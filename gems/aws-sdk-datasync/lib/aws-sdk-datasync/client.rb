@@ -1665,11 +1665,11 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Configures a task, which defines where and how DataSync transfers your
-    # data.
+    # Configures a transfer task, which defines where and how DataSync moves
+    # your data.
     #
-    # A task includes a source location, a destination location, and the
-    # preferences for how and when you want to transfer your data (such as
+    # A task includes a source location, destination location, and the
+    # options for how and when you want to transfer your data (such as
     # bandwidth limits, scheduling, among other options).
     #
     # If you're planning to transfer data to or from an Amazon S3 location,
@@ -1742,6 +1742,10 @@ module Aws::DataSync
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
     #
+    # @option params [Types::TaskReportConfig] :task_report_config
+    #   Specifies how you want to configure a task report, which provides
+    #   detailed information about for your DataSync transfer.
+    #
     # @return [Types::CreateTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTaskResponse#task_arn #task_arn} => String
@@ -1791,6 +1795,32 @@ module Aws::DataSync
     #         value: "FilterValue",
     #       },
     #     ],
+    #     task_report_config: {
+    #       destination: {
+    #         s3: {
+    #           subdirectory: "S3Subdirectory",
+    #           s3_bucket_arn: "S3BucketArn", # required
+    #           bucket_access_role_arn: "IamRoleArn", # required
+    #         },
+    #       },
+    #       output_type: "SUMMARY_ONLY", # accepts SUMMARY_ONLY, STANDARD
+    #       report_level: "ERRORS_ONLY", # accepts ERRORS_ONLY, SUCCESSES_AND_ERRORS
+    #       object_version_ids: "INCLUDE", # accepts INCLUDE, NONE
+    #       overrides: {
+    #         transferred: {
+    #           report_level: "ERRORS_ONLY", # accepts ERRORS_ONLY, SUCCESSES_AND_ERRORS
+    #         },
+    #         verified: {
+    #           report_level: "ERRORS_ONLY", # accepts ERRORS_ONLY, SUCCESSES_AND_ERRORS
+    #         },
+    #         deleted: {
+    #           report_level: "ERRORS_ONLY", # accepts ERRORS_ONLY, SUCCESSES_AND_ERRORS
+    #         },
+    #         skipped: {
+    #           report_level: "ERRORS_ONLY", # accepts ERRORS_ONLY, SUCCESSES_AND_ERRORS
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1856,7 +1886,7 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Deletes an DataSync task.
+    # Deletes an DataSync transfer task.
     #
     # @option params [required, String] :task_arn
     #   Specifies the Amazon Resource Name (ARN) of the task that you want to
@@ -2759,6 +2789,7 @@ module Aws::DataSync
     #   * {Types::DescribeTaskResponse#error_detail #error_detail} => String
     #   * {Types::DescribeTaskResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeTaskResponse#includes #includes} => Array&lt;Types::FilterRule&gt;
+    #   * {Types::DescribeTaskResponse#task_report_config #task_report_config} => Types::TaskReportConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -2804,6 +2835,16 @@ module Aws::DataSync
     #   resp.includes #=> Array
     #   resp.includes[0].filter_type #=> String, one of "SIMPLE_PATTERN"
     #   resp.includes[0].value #=> String
+    #   resp.task_report_config.destination.s3.subdirectory #=> String
+    #   resp.task_report_config.destination.s3.s3_bucket_arn #=> String
+    #   resp.task_report_config.destination.s3.bucket_access_role_arn #=> String
+    #   resp.task_report_config.output_type #=> String, one of "SUMMARY_ONLY", "STANDARD"
+    #   resp.task_report_config.report_level #=> String, one of "ERRORS_ONLY", "SUCCESSES_AND_ERRORS"
+    #   resp.task_report_config.object_version_ids #=> String, one of "INCLUDE", "NONE"
+    #   resp.task_report_config.overrides.transferred.report_level #=> String, one of "ERRORS_ONLY", "SUCCESSES_AND_ERRORS"
+    #   resp.task_report_config.overrides.verified.report_level #=> String, one of "ERRORS_ONLY", "SUCCESSES_AND_ERRORS"
+    #   resp.task_report_config.overrides.deleted.report_level #=> String, one of "ERRORS_ONLY", "SUCCESSES_AND_ERRORS"
+    #   resp.task_report_config.overrides.skipped.report_level #=> String, one of "ERRORS_ONLY", "SUCCESSES_AND_ERRORS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeTask AWS API Documentation
     #
@@ -2814,11 +2855,13 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Provides information about an DataSync transfer task that's running.
+    # Provides information about an execution of your DataSync task. You can
+    # use this operation to help monitor the progress of an ongoing transfer
+    # or check the results of the transfer.
     #
     # @option params [required, String] :task_execution_arn
-    #   Specifies the Amazon Resource Name (ARN) of the transfer task that's
-    #   running.
+    #   Specifies the Amazon Resource Name (ARN) of the task execution that
+    #   you want information about.
     #
     # @return [Types::DescribeTaskExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2835,6 +2878,12 @@ module Aws::DataSync
     #   * {Types::DescribeTaskExecutionResponse#bytes_transferred #bytes_transferred} => Integer
     #   * {Types::DescribeTaskExecutionResponse#result #result} => Types::TaskExecutionResultDetail
     #   * {Types::DescribeTaskExecutionResponse#bytes_compressed #bytes_compressed} => Integer
+    #   * {Types::DescribeTaskExecutionResponse#task_report_config #task_report_config} => Types::TaskReportConfig
+    #   * {Types::DescribeTaskExecutionResponse#files_deleted #files_deleted} => Integer
+    #   * {Types::DescribeTaskExecutionResponse#files_skipped #files_skipped} => Integer
+    #   * {Types::DescribeTaskExecutionResponse#files_verified #files_verified} => Integer
+    #   * {Types::DescribeTaskExecutionResponse#report_result #report_result} => Types::ReportResult
+    #   * {Types::DescribeTaskExecutionResponse#estimated_files_to_delete #estimated_files_to_delete} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -2883,6 +2932,23 @@ module Aws::DataSync
     #   resp.result.error_code #=> String
     #   resp.result.error_detail #=> String
     #   resp.bytes_compressed #=> Integer
+    #   resp.task_report_config.destination.s3.subdirectory #=> String
+    #   resp.task_report_config.destination.s3.s3_bucket_arn #=> String
+    #   resp.task_report_config.destination.s3.bucket_access_role_arn #=> String
+    #   resp.task_report_config.output_type #=> String, one of "SUMMARY_ONLY", "STANDARD"
+    #   resp.task_report_config.report_level #=> String, one of "ERRORS_ONLY", "SUCCESSES_AND_ERRORS"
+    #   resp.task_report_config.object_version_ids #=> String, one of "INCLUDE", "NONE"
+    #   resp.task_report_config.overrides.transferred.report_level #=> String, one of "ERRORS_ONLY", "SUCCESSES_AND_ERRORS"
+    #   resp.task_report_config.overrides.verified.report_level #=> String, one of "ERRORS_ONLY", "SUCCESSES_AND_ERRORS"
+    #   resp.task_report_config.overrides.deleted.report_level #=> String, one of "ERRORS_ONLY", "SUCCESSES_AND_ERRORS"
+    #   resp.task_report_config.overrides.skipped.report_level #=> String, one of "ERRORS_ONLY", "SUCCESSES_AND_ERRORS"
+    #   resp.files_deleted #=> Integer
+    #   resp.files_skipped #=> Integer
+    #   resp.files_verified #=> Integer
+    #   resp.report_result.status #=> String, one of "PENDING", "SUCCESS", "ERROR"
+    #   resp.report_result.error_code #=> String
+    #   resp.report_result.error_detail #=> String
+    #   resp.estimated_files_to_delete #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeTaskExecution AWS API Documentation
     #
@@ -3381,8 +3447,8 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Starts an DataSync task. For each task, you can only run one task
-    # execution at a time.
+    # Starts an DataSync transfer task. For each task, you can only run one
+    # task execution at a time.
     #
     # There are several phases to a task execution. For more information,
     # see [Task execution statuses][1].
@@ -3402,13 +3468,13 @@ module Aws::DataSync
     #   start.
     #
     # @option params [Types::Options] :override_options
-    #   Configures your DataSync task settings. These options include how
-    #   DataSync handles files, objects, and their associated metadata. You
-    #   also can specify how DataSync verifies data integrity, set bandwidth
-    #   limits for your task, among other options.
+    #   Indicates how your transfer task is configured. These options include
+    #   how DataSync handles files, objects, and their associated metadata
+    #   during your transfer. You also can specify how to verify data
+    #   integrity, set bandwidth limits for your task, among other options.
     #
-    #   Each task setting has a default value. Unless you need to, you don't
-    #   have to configure any of these `Options` before starting your task.
+    #   Each option has a default value. Unless you need to, you don't have
+    #   to configure any of these options before starting your task.
     #
     # @option params [Array<Types::FilterRule>] :includes
     #   Specifies a list of filter rules that determines which files to
@@ -3429,6 +3495,10 @@ module Aws::DataSync
     #
     #   *Tags* are key-value pairs that help you manage, filter, and search
     #   for your DataSync resources.
+    #
+    # @option params [Types::TaskReportConfig] :task_report_config
+    #   Specifies how you want to configure a task report, which provides
+    #   detailed information about for your DataSync transfer.
     #
     # @return [Types::StartTaskExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3473,6 +3543,32 @@ module Aws::DataSync
     #         value: "TagValue",
     #       },
     #     ],
+    #     task_report_config: {
+    #       destination: {
+    #         s3: {
+    #           subdirectory: "S3Subdirectory",
+    #           s3_bucket_arn: "S3BucketArn", # required
+    #           bucket_access_role_arn: "IamRoleArn", # required
+    #         },
+    #       },
+    #       output_type: "SUMMARY_ONLY", # accepts SUMMARY_ONLY, STANDARD
+    #       report_level: "ERRORS_ONLY", # accepts ERRORS_ONLY, SUCCESSES_AND_ERRORS
+    #       object_version_ids: "INCLUDE", # accepts INCLUDE, NONE
+    #       overrides: {
+    #         transferred: {
+    #           report_level: "ERRORS_ONLY", # accepts ERRORS_ONLY, SUCCESSES_AND_ERRORS
+    #         },
+    #         verified: {
+    #           report_level: "ERRORS_ONLY", # accepts ERRORS_ONLY, SUCCESSES_AND_ERRORS
+    #         },
+    #         deleted: {
+    #           report_level: "ERRORS_ONLY", # accepts ERRORS_ONLY, SUCCESSES_AND_ERRORS
+    #         },
+    #         skipped: {
+    #           report_level: "ERRORS_ONLY", # accepts ERRORS_ONLY, SUCCESSES_AND_ERRORS
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -4079,20 +4175,20 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Updates the metadata associated with a task.
+    # Updates the configuration of a DataSync transfer task.
     #
     # @option params [required, String] :task_arn
     #   The Amazon Resource Name (ARN) of the resource name of the task to
     #   update.
     #
     # @option params [Types::Options] :options
-    #   Configures your DataSync task settings. These options include how
-    #   DataSync handles files, objects, and their associated metadata. You
-    #   also can specify how DataSync verifies data integrity, set bandwidth
-    #   limits for your task, among other options.
+    #   Indicates how your transfer task is configured. These options include
+    #   how DataSync handles files, objects, and their associated metadata
+    #   during your transfer. You also can specify how to verify data
+    #   integrity, set bandwidth limits for your task, among other options.
     #
-    #   Each task setting has a default value. Unless you need to, you don't
-    #   have to configure any of these `Options` before starting your task.
+    #   Each option has a default value. Unless you need to, you don't have
+    #   to configure any of these options before starting your task.
     #
     # @option params [Array<Types::FilterRule>] :excludes
     #   Specifies a list of filter rules that exclude specific data during
@@ -4130,6 +4226,10 @@ module Aws::DataSync
     #
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
+    #
+    # @option params [Types::TaskReportConfig] :task_report_config
+    #   Specifies how you want to configure a task report, which provides
+    #   detailed information about for your DataSync transfer.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4171,6 +4271,32 @@ module Aws::DataSync
     #         value: "FilterValue",
     #       },
     #     ],
+    #     task_report_config: {
+    #       destination: {
+    #         s3: {
+    #           subdirectory: "S3Subdirectory",
+    #           s3_bucket_arn: "S3BucketArn", # required
+    #           bucket_access_role_arn: "IamRoleArn", # required
+    #         },
+    #       },
+    #       output_type: "SUMMARY_ONLY", # accepts SUMMARY_ONLY, STANDARD
+    #       report_level: "ERRORS_ONLY", # accepts ERRORS_ONLY, SUCCESSES_AND_ERRORS
+    #       object_version_ids: "INCLUDE", # accepts INCLUDE, NONE
+    #       overrides: {
+    #         transferred: {
+    #           report_level: "ERRORS_ONLY", # accepts ERRORS_ONLY, SUCCESSES_AND_ERRORS
+    #         },
+    #         verified: {
+    #           report_level: "ERRORS_ONLY", # accepts ERRORS_ONLY, SUCCESSES_AND_ERRORS
+    #         },
+    #         deleted: {
+    #           report_level: "ERRORS_ONLY", # accepts ERRORS_ONLY, SUCCESSES_AND_ERRORS
+    #         },
+    #         skipped: {
+    #           report_level: "ERRORS_ONLY", # accepts ERRORS_ONLY, SUCCESSES_AND_ERRORS
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateTask AWS API Documentation
@@ -4182,11 +4308,11 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Modifies a running DataSync task.
+    # Updates the configuration of a running DataSync task execution.
     #
     # <note markdown="1"> Currently, the only `Option` that you can modify with
     # `UpdateTaskExecution` is ` BytesPerSecond `, which throttles bandwidth
-    # for a running or queued task.
+    # for a running or queued task execution.
     #
     #  </note>
     #
@@ -4195,13 +4321,13 @@ module Aws::DataSync
     #   you're updating.
     #
     # @option params [required, Types::Options] :options
-    #   Configures your DataSync task settings. These options include how
-    #   DataSync handles files, objects, and their associated metadata. You
-    #   also can specify how DataSync verifies data integrity, set bandwidth
-    #   limits for your task, among other options.
+    #   Indicates how your transfer task is configured. These options include
+    #   how DataSync handles files, objects, and their associated metadata
+    #   during your transfer. You also can specify how to verify data
+    #   integrity, set bandwidth limits for your task, among other options.
     #
-    #   Each task setting has a default value. Unless you need to, you don't
-    #   have to configure any of these `Options` before starting your task.
+    #   Each option has a default value. Unless you need to, you don't have
+    #   to configure any of these options before starting your task.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4250,7 +4376,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

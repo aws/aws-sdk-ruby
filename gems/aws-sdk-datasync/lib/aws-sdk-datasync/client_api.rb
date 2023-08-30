@@ -218,6 +218,7 @@ module Aws::DataSync
     ObjectStorageServerPort = Shapes::IntegerShape.new(name: 'ObjectStorageServerPort')
     ObjectStorageServerProtocol = Shapes::StringShape.new(name: 'ObjectStorageServerProtocol')
     ObjectTags = Shapes::StringShape.new(name: 'ObjectTags')
+    ObjectVersionIds = Shapes::StringShape.new(name: 'ObjectVersionIds')
     OnPremConfig = Shapes::StructureShape.new(name: 'OnPremConfig')
     Operator = Shapes::StringShape.new(name: 'Operator')
     Options = Shapes::StructureShape.new(name: 'Options')
@@ -243,6 +244,13 @@ module Aws::DataSync
     RecommendationsConfigMap = Shapes::MapShape.new(name: 'RecommendationsConfigMap')
     RemoveStorageSystemRequest = Shapes::StructureShape.new(name: 'RemoveStorageSystemRequest')
     RemoveStorageSystemResponse = Shapes::StructureShape.new(name: 'RemoveStorageSystemResponse')
+    ReportDestination = Shapes::StructureShape.new(name: 'ReportDestination')
+    ReportDestinationS3 = Shapes::StructureShape.new(name: 'ReportDestinationS3')
+    ReportLevel = Shapes::StringShape.new(name: 'ReportLevel')
+    ReportOutputType = Shapes::StringShape.new(name: 'ReportOutputType')
+    ReportOverride = Shapes::StructureShape.new(name: 'ReportOverride')
+    ReportOverrides = Shapes::StructureShape.new(name: 'ReportOverrides')
+    ReportResult = Shapes::StructureShape.new(name: 'ReportResult')
     ResourceDetails = Shapes::StructureShape.new(name: 'ResourceDetails')
     ResourceFilters = Shapes::MapShape.new(name: 'ResourceFilters')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
@@ -293,6 +301,7 @@ module Aws::DataSync
     TaskList = Shapes::ListShape.new(name: 'TaskList')
     TaskListEntry = Shapes::StructureShape.new(name: 'TaskListEntry')
     TaskQueueing = Shapes::StringShape.new(name: 'TaskQueueing')
+    TaskReportConfig = Shapes::StructureShape.new(name: 'TaskReportConfig')
     TaskSchedule = Shapes::StructureShape.new(name: 'TaskSchedule')
     TaskStatus = Shapes::StringShape.new(name: 'TaskStatus')
     Throughput = Shapes::StructureShape.new(name: 'Throughput')
@@ -516,6 +525,7 @@ module Aws::DataSync
     CreateTaskRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: TaskSchedule, location_name: "Schedule"))
     CreateTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
     CreateTaskRequest.add_member(:includes, Shapes::ShapeRef.new(shape: FilterList, location_name: "Includes"))
+    CreateTaskRequest.add_member(:task_report_config, Shapes::ShapeRef.new(shape: TaskReportConfig, location_name: "TaskReportConfig"))
     CreateTaskRequest.struct_class = Types::CreateTaskRequest
 
     CreateTaskResponse.add_member(:task_arn, Shapes::ShapeRef.new(shape: TaskArn, location_name: "TaskArn"))
@@ -748,6 +758,12 @@ module Aws::DataSync
     DescribeTaskExecutionResponse.add_member(:bytes_transferred, Shapes::ShapeRef.new(shape: long, location_name: "BytesTransferred"))
     DescribeTaskExecutionResponse.add_member(:result, Shapes::ShapeRef.new(shape: TaskExecutionResultDetail, location_name: "Result"))
     DescribeTaskExecutionResponse.add_member(:bytes_compressed, Shapes::ShapeRef.new(shape: long, location_name: "BytesCompressed"))
+    DescribeTaskExecutionResponse.add_member(:task_report_config, Shapes::ShapeRef.new(shape: TaskReportConfig, location_name: "TaskReportConfig"))
+    DescribeTaskExecutionResponse.add_member(:files_deleted, Shapes::ShapeRef.new(shape: long, location_name: "FilesDeleted"))
+    DescribeTaskExecutionResponse.add_member(:files_skipped, Shapes::ShapeRef.new(shape: long, location_name: "FilesSkipped"))
+    DescribeTaskExecutionResponse.add_member(:files_verified, Shapes::ShapeRef.new(shape: long, location_name: "FilesVerified"))
+    DescribeTaskExecutionResponse.add_member(:report_result, Shapes::ShapeRef.new(shape: ReportResult, location_name: "ReportResult"))
+    DescribeTaskExecutionResponse.add_member(:estimated_files_to_delete, Shapes::ShapeRef.new(shape: long, location_name: "EstimatedFilesToDelete"))
     DescribeTaskExecutionResponse.struct_class = Types::DescribeTaskExecutionResponse
 
     DescribeTaskRequest.add_member(:task_arn, Shapes::ShapeRef.new(shape: TaskArn, required: true, location_name: "TaskArn"))
@@ -769,6 +785,7 @@ module Aws::DataSync
     DescribeTaskResponse.add_member(:error_detail, Shapes::ShapeRef.new(shape: string, location_name: "ErrorDetail"))
     DescribeTaskResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
     DescribeTaskResponse.add_member(:includes, Shapes::ShapeRef.new(shape: FilterList, location_name: "Includes"))
+    DescribeTaskResponse.add_member(:task_report_config, Shapes::ShapeRef.new(shape: TaskReportConfig, location_name: "TaskReportConfig"))
     DescribeTaskResponse.struct_class = Types::DescribeTaskResponse
 
     DestinationNetworkInterfaceArns.member = Shapes::ShapeRef.new(shape: NetworkInterfaceArn)
@@ -1052,6 +1069,28 @@ module Aws::DataSync
 
     RemoveStorageSystemResponse.struct_class = Types::RemoveStorageSystemResponse
 
+    ReportDestination.add_member(:s3, Shapes::ShapeRef.new(shape: ReportDestinationS3, location_name: "S3"))
+    ReportDestination.struct_class = Types::ReportDestination
+
+    ReportDestinationS3.add_member(:subdirectory, Shapes::ShapeRef.new(shape: S3Subdirectory, location_name: "Subdirectory"))
+    ReportDestinationS3.add_member(:s3_bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, required: true, location_name: "S3BucketArn"))
+    ReportDestinationS3.add_member(:bucket_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "BucketAccessRoleArn"))
+    ReportDestinationS3.struct_class = Types::ReportDestinationS3
+
+    ReportOverride.add_member(:report_level, Shapes::ShapeRef.new(shape: ReportLevel, location_name: "ReportLevel"))
+    ReportOverride.struct_class = Types::ReportOverride
+
+    ReportOverrides.add_member(:transferred, Shapes::ShapeRef.new(shape: ReportOverride, location_name: "Transferred"))
+    ReportOverrides.add_member(:verified, Shapes::ShapeRef.new(shape: ReportOverride, location_name: "Verified"))
+    ReportOverrides.add_member(:deleted, Shapes::ShapeRef.new(shape: ReportOverride, location_name: "Deleted"))
+    ReportOverrides.add_member(:skipped, Shapes::ShapeRef.new(shape: ReportOverride, location_name: "Skipped"))
+    ReportOverrides.struct_class = Types::ReportOverrides
+
+    ReportResult.add_member(:status, Shapes::ShapeRef.new(shape: PhaseStatus, location_name: "Status"))
+    ReportResult.add_member(:error_code, Shapes::ShapeRef.new(shape: string, location_name: "ErrorCode"))
+    ReportResult.add_member(:error_detail, Shapes::ShapeRef.new(shape: string, location_name: "ErrorDetail"))
+    ReportResult.struct_class = Types::ReportResult
+
     ResourceDetails.add_member(:net_app_ontapsv_ms, Shapes::ShapeRef.new(shape: NetAppONTAPSVMs, location_name: "NetAppONTAPSVMs"))
     ResourceDetails.add_member(:net_app_ontap_volumes, Shapes::ShapeRef.new(shape: NetAppONTAPVolumes, location_name: "NetAppONTAPVolumes"))
     ResourceDetails.add_member(:net_app_ontap_clusters, Shapes::ShapeRef.new(shape: NetAppONTAPClusters, location_name: "NetAppONTAPClusters"))
@@ -1091,6 +1130,7 @@ module Aws::DataSync
     StartTaskExecutionRequest.add_member(:includes, Shapes::ShapeRef.new(shape: FilterList, location_name: "Includes"))
     StartTaskExecutionRequest.add_member(:excludes, Shapes::ShapeRef.new(shape: FilterList, location_name: "Excludes"))
     StartTaskExecutionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
+    StartTaskExecutionRequest.add_member(:task_report_config, Shapes::ShapeRef.new(shape: TaskReportConfig, location_name: "TaskReportConfig"))
     StartTaskExecutionRequest.struct_class = Types::StartTaskExecutionRequest
 
     StartTaskExecutionResponse.add_member(:task_execution_arn, Shapes::ShapeRef.new(shape: TaskExecutionArn, location_name: "TaskExecutionArn"))
@@ -1149,6 +1189,13 @@ module Aws::DataSync
     TaskListEntry.add_member(:status, Shapes::ShapeRef.new(shape: TaskStatus, location_name: "Status"))
     TaskListEntry.add_member(:name, Shapes::ShapeRef.new(shape: TagValue, location_name: "Name"))
     TaskListEntry.struct_class = Types::TaskListEntry
+
+    TaskReportConfig.add_member(:destination, Shapes::ShapeRef.new(shape: ReportDestination, location_name: "Destination"))
+    TaskReportConfig.add_member(:output_type, Shapes::ShapeRef.new(shape: ReportOutputType, location_name: "OutputType"))
+    TaskReportConfig.add_member(:report_level, Shapes::ShapeRef.new(shape: ReportLevel, location_name: "ReportLevel"))
+    TaskReportConfig.add_member(:object_version_ids, Shapes::ShapeRef.new(shape: ObjectVersionIds, location_name: "ObjectVersionIds"))
+    TaskReportConfig.add_member(:overrides, Shapes::ShapeRef.new(shape: ReportOverrides, location_name: "Overrides"))
+    TaskReportConfig.struct_class = Types::TaskReportConfig
 
     TaskSchedule.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpressionCron, required: true, location_name: "ScheduleExpression"))
     TaskSchedule.struct_class = Types::TaskSchedule
@@ -1259,6 +1306,7 @@ module Aws::DataSync
     UpdateTaskRequest.add_member(:name, Shapes::ShapeRef.new(shape: TagValue, location_name: "Name"))
     UpdateTaskRequest.add_member(:cloud_watch_log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, location_name: "CloudWatchLogGroupArn"))
     UpdateTaskRequest.add_member(:includes, Shapes::ShapeRef.new(shape: FilterList, location_name: "Includes"))
+    UpdateTaskRequest.add_member(:task_report_config, Shapes::ShapeRef.new(shape: TaskReportConfig, location_name: "TaskReportConfig"))
     UpdateTaskRequest.struct_class = Types::UpdateTaskRequest
 
     UpdateTaskResponse.struct_class = Types::UpdateTaskResponse

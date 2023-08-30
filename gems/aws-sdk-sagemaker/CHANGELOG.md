@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.207.0 (2023-08-30)
+------------------
+
+* Feature - Amazon SageMaker Canvas adds IdentityProviderOAuthSettings support for CanvasAppSettings
+
 1.206.0 (2023-08-15)
 ------------------
 

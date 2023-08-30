@@ -587,9 +587,9 @@ module Aws::AppRunner
     # private repositories from certain third-party providers. You can share
     # a connection across multiple services.
     #
-    # A connection resource is needed to access GitHub repositories. GitHub
-    # requires a user interface approval process through the App Runner
-    # console before you can use the connection.
+    # A connection resource is needed to access GitHub and Bitbucket
+    # repositories. Both require a user interface approval process through
+    # the App Runner console before you can use the connection.
     #
     # @option params [required, String] :connection_name
     #   A name for the new connection. It must be unique across all App Runner
@@ -611,7 +611,7 @@ module Aws::AppRunner
     #
     #   resp = client.create_connection({
     #     connection_name: "ConnectionName", # required
-    #     provider_type: "GITHUB", # required, accepts GITHUB
+    #     provider_type: "GITHUB", # required, accepts GITHUB, BITBUCKET
     #     tags: [
     #       {
     #         key: "TagKey",
@@ -624,7 +624,7 @@ module Aws::AppRunner
     #
     #   resp.connection.connection_name #=> String
     #   resp.connection.connection_arn #=> String
-    #   resp.connection.provider_type #=> String, one of "GITHUB"
+    #   resp.connection.provider_type #=> String, one of "GITHUB", "BITBUCKET"
     #   resp.connection.status #=> String, one of "PENDING_HANDSHAKE", "AVAILABLE", "ERROR", "DELETED"
     #   resp.connection.created_at #=> Time
     #
@@ -1129,7 +1129,7 @@ module Aws::AppRunner
     #
     #   resp.connection.connection_name #=> String
     #   resp.connection.connection_arn #=> String
-    #   resp.connection.provider_type #=> String, one of "GITHUB"
+    #   resp.connection.provider_type #=> String, one of "GITHUB", "BITBUCKET"
     #   resp.connection.status #=> String, one of "PENDING_HANDSHAKE", "AVAILABLE", "ERROR", "DELETED"
     #   resp.connection.created_at #=> Time
     #
@@ -1847,7 +1847,7 @@ module Aws::AppRunner
     #   resp.connection_summary_list #=> Array
     #   resp.connection_summary_list[0].connection_name #=> String
     #   resp.connection_summary_list[0].connection_arn #=> String
-    #   resp.connection_summary_list[0].provider_type #=> String, one of "GITHUB"
+    #   resp.connection_summary_list[0].provider_type #=> String, one of "GITHUB", "BITBUCKET"
     #   resp.connection_summary_list[0].status #=> String, one of "PENDING_HANDSHAKE", "AVAILABLE", "ERROR", "DELETED"
     #   resp.connection_summary_list[0].created_at #=> Time
     #   resp.next_token #=> String
@@ -2735,7 +2735,7 @@ module Aws::AppRunner
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apprunner'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

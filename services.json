@@ -761,6 +761,9 @@
       "Aws::Neptune::Plugins::CrossRegionCopying"
     ]
   },
+  "Neptunedata": {
+    "models": "neptunedata/2023-08-01"
+  },
   "NetworkFirewall": {
     "models": "network-firewall/2020-11-12"
   },
@@ -808,6 +811,9 @@
   },
   "PaymentCryptographyData": {
     "models": "payment-cryptography-data/2022-02-03"
+  },
+  "PcaConnectorAd": {
+    "models": "pca-connector-ad/2018-05-10"
   },
   "Personalize": {
     "models": "personalize/2018-05-22"

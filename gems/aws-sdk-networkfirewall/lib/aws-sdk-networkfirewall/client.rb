@@ -1128,7 +1128,7 @@ module Aws::NetworkFirewall
     # inbound traffic.
     #
     # After you create a TLS inspection configuration, you associate it with
-    # a firewall policy.
+    # a new firewall policy.
     #
     # To update the settings for a TLS inspection configuration, use
     # UpdateTLSInspectionConfiguration.
@@ -1163,7 +1163,7 @@ module Aws::NetworkFirewall
     #   traffic. Network Firewall re-encrypts the traffic before sending it to
     #   its destination.
     #
-    #   To use a TLS inspection configuration, you add it to a Network
+    #   To use a TLS inspection configuration, you add it to a new Network
     #   Firewall firewall policy, then you apply the firewall policy to a
     #   firewall. Network Firewall acts as a proxy service to decrypt and
     #   inspect inbound traffic. You can reference a TLS inspection
@@ -2781,7 +2781,10 @@ module Aws::NetworkFirewall
     #   You must specify the ARN or the name, and you can specify both.
     #
     # @option params [required, Types::FirewallPolicy] :firewall_policy
-    #   The updated firewall policy to use for the firewall.
+    #   The updated firewall policy to use for the firewall. You can't add or
+    #   remove a TLSInspectionConfiguration after you create a firewall
+    #   policy. However, you can replace an existing TLS inspection
+    #   configuration with another `TLSInspectionConfiguration`.
     #
     # @option params [String] :description
     #   A description of the firewall policy.
@@ -3405,7 +3408,7 @@ module Aws::NetworkFirewall
     #   traffic. Network Firewall re-encrypts the traffic before sending it to
     #   its destination.
     #
-    #   To use a TLS inspection configuration, you add it to a Network
+    #   To use a TLS inspection configuration, you add it to a new Network
     #   Firewall firewall policy, then you apply the firewall policy to a
     #   firewall. Network Firewall acts as a proxy service to decrypt and
     #   inspect inbound traffic. You can reference a TLS inspection
@@ -3540,7 +3543,7 @@ module Aws::NetworkFirewall
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

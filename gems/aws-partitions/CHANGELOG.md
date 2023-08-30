@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.814.0 (2023-08-30)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::PcaConnectorAd`.
+
+* Feature - Added support for enumerating regions for `Aws::Neptunedata`.
+
 1.813.0 (2023-08-28)
 ------------------
 

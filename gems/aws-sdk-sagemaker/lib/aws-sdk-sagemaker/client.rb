@@ -2345,6 +2345,13 @@ module Aws::SageMaker
     #           s3_artifact_path: "S3Uri",
     #           s3_kms_key_id: "KmsKeyId",
     #         },
+    #         identity_provider_o_auth_settings: [
+    #           {
+    #             data_source_name: "SalesforceGenie", # accepts SalesforceGenie, Snowflake
+    #             status: "ENABLED", # accepts ENABLED, DISABLED
+    #             secret_arn: "SecretArn",
+    #           },
+    #         ],
     #       },
     #     },
     #     subnet_ids: ["SubnetId"], # required
@@ -8162,6 +8169,13 @@ module Aws::SageMaker
     #           s3_artifact_path: "S3Uri",
     #           s3_kms_key_id: "KmsKeyId",
     #         },
+    #         identity_provider_o_auth_settings: [
+    #           {
+    #             data_source_name: "SalesforceGenie", # accepts SalesforceGenie, Snowflake
+    #             status: "ENABLED", # accepts ENABLED, DISABLED
+    #             secret_arn: "SecretArn",
+    #           },
+    #         ],
     #       },
     #     },
     #   })
@@ -10885,6 +10899,10 @@ module Aws::SageMaker
     #   resp.default_user_settings.canvas_app_settings.model_register_settings.cross_account_model_register_role_arn #=> String
     #   resp.default_user_settings.canvas_app_settings.workspace_settings.s3_artifact_path #=> String
     #   resp.default_user_settings.canvas_app_settings.workspace_settings.s3_kms_key_id #=> String
+    #   resp.default_user_settings.canvas_app_settings.identity_provider_o_auth_settings #=> Array
+    #   resp.default_user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].data_source_name #=> String, one of "SalesforceGenie", "Snowflake"
+    #   resp.default_user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.default_user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].secret_arn #=> String
     #   resp.app_network_access_type #=> String, one of "PublicInternetOnly", "VpcOnly"
     #   resp.home_efs_file_system_kms_key_id #=> String
     #   resp.subnet_ids #=> Array
@@ -14546,6 +14564,10 @@ module Aws::SageMaker
     #   resp.user_settings.canvas_app_settings.model_register_settings.cross_account_model_register_role_arn #=> String
     #   resp.user_settings.canvas_app_settings.workspace_settings.s3_artifact_path #=> String
     #   resp.user_settings.canvas_app_settings.workspace_settings.s3_kms_key_id #=> String
+    #   resp.user_settings.canvas_app_settings.identity_provider_o_auth_settings #=> Array
+    #   resp.user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].data_source_name #=> String, one of "SalesforceGenie", "Snowflake"
+    #   resp.user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].secret_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeUserProfile AWS API Documentation
     #
@@ -22090,6 +22112,13 @@ module Aws::SageMaker
     #           s3_artifact_path: "S3Uri",
     #           s3_kms_key_id: "KmsKeyId",
     #         },
+    #         identity_provider_o_auth_settings: [
+    #           {
+    #             data_source_name: "SalesforceGenie", # accepts SalesforceGenie, Snowflake
+    #             status: "ENABLED", # accepts ENABLED, DISABLED
+    #             secret_arn: "SecretArn",
+    #           },
+    #         ],
     #       },
     #     },
     #     domain_settings_for_update: {
@@ -23837,6 +23866,13 @@ module Aws::SageMaker
     #           s3_artifact_path: "S3Uri",
     #           s3_kms_key_id: "KmsKeyId",
     #         },
+    #         identity_provider_o_auth_settings: [
+    #           {
+    #             data_source_name: "SalesforceGenie", # accepts SalesforceGenie, Snowflake
+    #             status: "ENABLED", # accepts ENABLED, DISABLED
+    #             secret_arn: "SecretArn",
+    #           },
+    #         ],
     #       },
     #     },
     #   })
@@ -24094,7 +24130,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.206.0'
+      context[:gem_version] = '1.207.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

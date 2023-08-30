@@ -185,6 +185,8 @@ module Aws::CleanRooms
     Membership = Shapes::StructureShape.new(name: 'Membership')
     MembershipArn = Shapes::StringShape.new(name: 'MembershipArn')
     MembershipIdentifier = Shapes::StringShape.new(name: 'MembershipIdentifier')
+    MembershipProtectedQueryOutputConfiguration = Shapes::UnionShape.new(name: 'MembershipProtectedQueryOutputConfiguration')
+    MembershipProtectedQueryResultConfiguration = Shapes::StructureShape.new(name: 'MembershipProtectedQueryResultConfiguration')
     MembershipQueryLogStatus = Shapes::StringShape.new(name: 'MembershipQueryLogStatus')
     MembershipStatus = Shapes::StringShape.new(name: 'MembershipStatus')
     MembershipSummary = Shapes::StructureShape.new(name: 'MembershipSummary')
@@ -197,6 +199,7 @@ module Aws::CleanRooms
     ProtectedQuery = Shapes::StructureShape.new(name: 'ProtectedQuery')
     ProtectedQueryError = Shapes::StructureShape.new(name: 'ProtectedQueryError')
     ProtectedQueryIdentifier = Shapes::StringShape.new(name: 'ProtectedQueryIdentifier')
+    ProtectedQueryMemberOutputList = Shapes::ListShape.new(name: 'ProtectedQueryMemberOutputList')
     ProtectedQueryOutput = Shapes::UnionShape.new(name: 'ProtectedQueryOutput')
     ProtectedQueryOutputConfiguration = Shapes::UnionShape.new(name: 'ProtectedQueryOutputConfiguration')
     ProtectedQueryResult = Shapes::StructureShape.new(name: 'ProtectedQueryResult')
@@ -206,6 +209,7 @@ module Aws::CleanRooms
     ProtectedQueryS3OutputConfigurationBucketString = Shapes::StringShape.new(name: 'ProtectedQueryS3OutputConfigurationBucketString')
     ProtectedQuerySQLParameters = Shapes::StructureShape.new(name: 'ProtectedQuerySQLParameters')
     ProtectedQuerySQLParametersQueryStringString = Shapes::StringShape.new(name: 'ProtectedQuerySQLParametersQueryStringString')
+    ProtectedQuerySingleMemberOutput = Shapes::StructureShape.new(name: 'ProtectedQuerySingleMemberOutput')
     ProtectedQueryStatistics = Shapes::StructureShape.new(name: 'ProtectedQueryStatistics')
     ProtectedQueryStatus = Shapes::StringShape.new(name: 'ProtectedQueryStatus')
     ProtectedQuerySummary = Shapes::StructureShape.new(name: 'ProtectedQuerySummary')
@@ -618,6 +622,7 @@ module Aws::CleanRooms
     CreateMembershipInput.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: CollaborationIdentifier, required: true, location_name: "collaborationIdentifier"))
     CreateMembershipInput.add_member(:query_log_status, Shapes::ShapeRef.new(shape: MembershipQueryLogStatus, required: true, location_name: "queryLogStatus"))
     CreateMembershipInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateMembershipInput.add_member(:default_result_configuration, Shapes::ShapeRef.new(shape: MembershipProtectedQueryResultConfiguration, location_name: "defaultResultConfiguration"))
     CreateMembershipInput.struct_class = Types::CreateMembershipInput
 
     CreateMembershipOutput.add_member(:membership, Shapes::ShapeRef.new(shape: Membership, required: true, location_name: "membership"))
@@ -866,7 +871,18 @@ module Aws::CleanRooms
     Membership.add_member(:status, Shapes::ShapeRef.new(shape: MembershipStatus, required: true, location_name: "status"))
     Membership.add_member(:member_abilities, Shapes::ShapeRef.new(shape: MemberAbilities, required: true, location_name: "memberAbilities"))
     Membership.add_member(:query_log_status, Shapes::ShapeRef.new(shape: MembershipQueryLogStatus, required: true, location_name: "queryLogStatus"))
+    Membership.add_member(:default_result_configuration, Shapes::ShapeRef.new(shape: MembershipProtectedQueryResultConfiguration, location_name: "defaultResultConfiguration"))
     Membership.struct_class = Types::Membership
+
+    MembershipProtectedQueryOutputConfiguration.add_member(:s3, Shapes::ShapeRef.new(shape: ProtectedQueryS3OutputConfiguration, location_name: "s3"))
+    MembershipProtectedQueryOutputConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    MembershipProtectedQueryOutputConfiguration.add_member_subclass(:s3, Types::MembershipProtectedQueryOutputConfiguration::S3)
+    MembershipProtectedQueryOutputConfiguration.add_member_subclass(:unknown, Types::MembershipProtectedQueryOutputConfiguration::Unknown)
+    MembershipProtectedQueryOutputConfiguration.struct_class = Types::MembershipProtectedQueryOutputConfiguration
+
+    MembershipProtectedQueryResultConfiguration.add_member(:output_configuration, Shapes::ShapeRef.new(shape: MembershipProtectedQueryOutputConfiguration, required: true, location_name: "outputConfiguration"))
+    MembershipProtectedQueryResultConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    MembershipProtectedQueryResultConfiguration.struct_class = Types::MembershipProtectedQueryResultConfiguration
 
     MembershipSummary.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
     MembershipSummary.add_member(:arn, Shapes::ShapeRef.new(shape: MembershipArn, required: true, location_name: "arn"))
@@ -890,9 +906,9 @@ module Aws::CleanRooms
     ProtectedQuery.add_member(:membership_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "membershipId"))
     ProtectedQuery.add_member(:membership_arn, Shapes::ShapeRef.new(shape: MembershipArn, required: true, location_name: "membershipArn"))
     ProtectedQuery.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
-    ProtectedQuery.add_member(:sql_parameters, Shapes::ShapeRef.new(shape: ProtectedQuerySQLParameters, required: true, location_name: "sqlParameters"))
+    ProtectedQuery.add_member(:sql_parameters, Shapes::ShapeRef.new(shape: ProtectedQuerySQLParameters, location_name: "sqlParameters"))
     ProtectedQuery.add_member(:status, Shapes::ShapeRef.new(shape: ProtectedQueryStatus, required: true, location_name: "status"))
-    ProtectedQuery.add_member(:result_configuration, Shapes::ShapeRef.new(shape: ProtectedQueryResultConfiguration, required: true, location_name: "resultConfiguration"))
+    ProtectedQuery.add_member(:result_configuration, Shapes::ShapeRef.new(shape: ProtectedQueryResultConfiguration, location_name: "resultConfiguration"))
     ProtectedQuery.add_member(:statistics, Shapes::ShapeRef.new(shape: ProtectedQueryStatistics, location_name: "statistics"))
     ProtectedQuery.add_member(:result, Shapes::ShapeRef.new(shape: ProtectedQueryResult, location_name: "result"))
     ProtectedQuery.add_member(:error, Shapes::ShapeRef.new(shape: ProtectedQueryError, location_name: "error"))
@@ -902,9 +918,13 @@ module Aws::CleanRooms
     ProtectedQueryError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
     ProtectedQueryError.struct_class = Types::ProtectedQueryError
 
+    ProtectedQueryMemberOutputList.member = Shapes::ShapeRef.new(shape: ProtectedQuerySingleMemberOutput)
+
     ProtectedQueryOutput.add_member(:s3, Shapes::ShapeRef.new(shape: ProtectedQueryS3Output, location_name: "s3"))
+    ProtectedQueryOutput.add_member(:member_list, Shapes::ShapeRef.new(shape: ProtectedQueryMemberOutputList, location_name: "memberList"))
     ProtectedQueryOutput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ProtectedQueryOutput.add_member_subclass(:s3, Types::ProtectedQueryOutput::S3)
+    ProtectedQueryOutput.add_member_subclass(:member_list, Types::ProtectedQueryOutput::MemberList)
     ProtectedQueryOutput.add_member_subclass(:unknown, Types::ProtectedQueryOutput::Unknown)
     ProtectedQueryOutput.struct_class = Types::ProtectedQueryOutput
 
@@ -932,6 +952,9 @@ module Aws::CleanRooms
     ProtectedQuerySQLParameters.add_member(:analysis_template_arn, Shapes::ShapeRef.new(shape: AnalysisTemplateArn, location_name: "analysisTemplateArn"))
     ProtectedQuerySQLParameters.add_member(:parameters, Shapes::ShapeRef.new(shape: ParameterMap, location_name: "parameters"))
     ProtectedQuerySQLParameters.struct_class = Types::ProtectedQuerySQLParameters
+
+    ProtectedQuerySingleMemberOutput.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
+    ProtectedQuerySingleMemberOutput.struct_class = Types::ProtectedQuerySingleMemberOutput
 
     ProtectedQueryStatistics.add_member(:total_duration_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "totalDurationInMillis"))
     ProtectedQueryStatistics.struct_class = Types::ProtectedQueryStatistics
@@ -991,7 +1014,7 @@ module Aws::CleanRooms
     StartProtectedQueryInput.add_member(:type, Shapes::ShapeRef.new(shape: ProtectedQueryType, required: true, location_name: "type"))
     StartProtectedQueryInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
     StartProtectedQueryInput.add_member(:sql_parameters, Shapes::ShapeRef.new(shape: ProtectedQuerySQLParameters, required: true, location_name: "sqlParameters"))
-    StartProtectedQueryInput.add_member(:result_configuration, Shapes::ShapeRef.new(shape: ProtectedQueryResultConfiguration, required: true, location_name: "resultConfiguration"))
+    StartProtectedQueryInput.add_member(:result_configuration, Shapes::ShapeRef.new(shape: ProtectedQueryResultConfiguration, location_name: "resultConfiguration"))
     StartProtectedQueryInput.struct_class = Types::StartProtectedQueryInput
 
     StartProtectedQueryOutput.add_member(:protected_query, Shapes::ShapeRef.new(shape: ProtectedQuery, required: true, location_name: "protectedQuery"))
@@ -1068,6 +1091,7 @@ module Aws::CleanRooms
 
     UpdateMembershipInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
     UpdateMembershipInput.add_member(:query_log_status, Shapes::ShapeRef.new(shape: MembershipQueryLogStatus, location_name: "queryLogStatus"))
+    UpdateMembershipInput.add_member(:default_result_configuration, Shapes::ShapeRef.new(shape: MembershipProtectedQueryResultConfiguration, location_name: "defaultResultConfiguration"))
     UpdateMembershipInput.struct_class = Types::UpdateMembershipInput
 
     UpdateMembershipOutput.add_member(:membership, Shapes::ShapeRef.new(shape: Membership, required: true, location_name: "membership"))

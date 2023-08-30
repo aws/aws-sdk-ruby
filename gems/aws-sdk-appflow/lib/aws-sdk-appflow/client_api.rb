@@ -311,7 +311,11 @@ module Aws::Appflow
     SAPODataConnectorProfileCredentials = Shapes::StructureShape.new(name: 'SAPODataConnectorProfileCredentials')
     SAPODataConnectorProfileProperties = Shapes::StructureShape.new(name: 'SAPODataConnectorProfileProperties')
     SAPODataDestinationProperties = Shapes::StructureShape.new(name: 'SAPODataDestinationProperties')
+    SAPODataMaxPageSize = Shapes::IntegerShape.new(name: 'SAPODataMaxPageSize')
+    SAPODataMaxParallelism = Shapes::IntegerShape.new(name: 'SAPODataMaxParallelism')
     SAPODataMetadata = Shapes::StructureShape.new(name: 'SAPODataMetadata')
+    SAPODataPaginationConfig = Shapes::StructureShape.new(name: 'SAPODataPaginationConfig')
+    SAPODataParallelismConfig = Shapes::StructureShape.new(name: 'SAPODataParallelismConfig')
     SAPODataSourceProperties = Shapes::StructureShape.new(name: 'SAPODataSourceProperties')
     SalesforceConnectorOperator = Shapes::StringShape.new(name: 'SalesforceConnectorOperator')
     SalesforceConnectorProfileCredentials = Shapes::StructureShape.new(name: 'SalesforceConnectorProfileCredentials')
@@ -941,6 +945,8 @@ module Aws::Appflow
     ExecutionResult.add_member(:bytes_processed, Shapes::ShapeRef.new(shape: Long, location_name: "bytesProcessed"))
     ExecutionResult.add_member(:bytes_written, Shapes::ShapeRef.new(shape: Long, location_name: "bytesWritten"))
     ExecutionResult.add_member(:records_processed, Shapes::ShapeRef.new(shape: Long, location_name: "recordsProcessed"))
+    ExecutionResult.add_member(:num_parallel_processes, Shapes::ShapeRef.new(shape: Long, location_name: "numParallelProcesses"))
+    ExecutionResult.add_member(:max_page_size, Shapes::ShapeRef.new(shape: Long, location_name: "maxPageSize"))
     ExecutionResult.struct_class = Types::ExecutionResult
 
     FieldTypeDetails.add_member(:field_type, Shapes::ShapeRef.new(shape: FieldType, required: true, location_name: "fieldType"))
@@ -1276,7 +1282,15 @@ module Aws::Appflow
 
     SAPODataMetadata.struct_class = Types::SAPODataMetadata
 
+    SAPODataPaginationConfig.add_member(:max_page_size, Shapes::ShapeRef.new(shape: SAPODataMaxPageSize, required: true, location_name: "maxPageSize", metadata: {"box"=>true}))
+    SAPODataPaginationConfig.struct_class = Types::SAPODataPaginationConfig
+
+    SAPODataParallelismConfig.add_member(:max_parallelism, Shapes::ShapeRef.new(shape: SAPODataMaxParallelism, required: true, location_name: "maxParallelism", metadata: {"box"=>true}))
+    SAPODataParallelismConfig.struct_class = Types::SAPODataParallelismConfig
+
     SAPODataSourceProperties.add_member(:object_path, Shapes::ShapeRef.new(shape: Object, location_name: "objectPath"))
+    SAPODataSourceProperties.add_member(:parallelism_config, Shapes::ShapeRef.new(shape: SAPODataParallelismConfig, location_name: "parallelismConfig"))
+    SAPODataSourceProperties.add_member(:pagination_config, Shapes::ShapeRef.new(shape: SAPODataPaginationConfig, location_name: "paginationConfig"))
     SAPODataSourceProperties.struct_class = Types::SAPODataSourceProperties
 
     SalesforceConnectorProfileCredentials.add_member(:access_token, Shapes::ShapeRef.new(shape: AccessToken, location_name: "accessToken"))
@@ -1659,6 +1673,7 @@ module Aws::Appflow
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ConnectorAuthenticationException)
         o.errors << Shapes::ShapeRef.new(shape: ConnectorServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:delete_connector_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -1951,6 +1966,7 @@ module Aws::Appflow
         o.errors << Shapes::ShapeRef.new(shape: ConnectorAuthenticationException)
         o.errors << Shapes::ShapeRef.new(shape: ConnectorServerException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
     end
 

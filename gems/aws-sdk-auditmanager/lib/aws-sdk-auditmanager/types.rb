@@ -32,7 +32,7 @@ module Aws::AuditManager
       :id,
       :email_address,
       :name)
-      SENSITIVE = []
+      SENSITIVE = [:email_address]
       include Aws::Structure
     end
 
@@ -110,7 +110,7 @@ module Aws::AuditManager
       :metadata,
       :framework,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:framework]
       include Aws::Structure
     end
 
@@ -217,7 +217,7 @@ module Aws::AuditManager
       :delegations,
       :system_evidence_count,
       :manual_evidence_count)
-      SENSITIVE = []
+      SENSITIVE = [:roles]
       include Aws::Structure
     end
 
@@ -421,7 +421,7 @@ module Aws::AuditManager
       :control_sets_count,
       :created_at,
       :last_updated_at)
-      SENSITIVE = []
+      SENSITIVE = [:compliance_type]
       include Aws::Structure
     end
 
@@ -508,7 +508,7 @@ module Aws::AuditManager
       :standard_controls_count,
       :custom_controls_count,
       :compliance_type)
-      SENSITIVE = []
+      SENSITIVE = [:compliance_type]
       include Aws::Structure
     end
 
@@ -575,7 +575,7 @@ module Aws::AuditManager
       :delegations,
       :creation_time,
       :last_updated)
-      SENSITIVE = []
+      SENSITIVE = [:name, :description, :compliance_type, :assessment_reports_destination, :scope, :roles]
       include Aws::Structure
     end
 
@@ -626,7 +626,7 @@ module Aws::AuditManager
       :delegations,
       :creation_time,
       :last_updated)
-      SENSITIVE = []
+      SENSITIVE = [:name, :compliance_type, :roles]
       include Aws::Structure
     end
 
@@ -684,7 +684,7 @@ module Aws::AuditManager
       :author,
       :status,
       :creation_time)
-      SENSITIVE = []
+      SENSITIVE = [:description, :assessment_name, :author]
       include Aws::Structure
     end
 
@@ -759,7 +759,7 @@ module Aws::AuditManager
       :author,
       :status,
       :creation_time)
-      SENSITIVE = []
+      SENSITIVE = [:description, :assessment_name, :author]
       include Aws::Structure
     end
 
@@ -886,7 +886,7 @@ module Aws::AuditManager
     class BatchCreateDelegationByAssessmentRequest < Struct.new(
       :create_delegation_requests,
       :assessment_id)
-      SENSITIVE = []
+      SENSITIVE = [:create_delegation_requests]
       include Aws::Structure
     end
 
@@ -904,7 +904,7 @@ module Aws::AuditManager
     class BatchCreateDelegationByAssessmentResponse < Struct.new(
       :delegations,
       :errors)
-      SENSITIVE = []
+      SENSITIVE = [:errors]
       include Aws::Structure
     end
 
@@ -962,7 +962,7 @@ module Aws::AuditManager
     #
     class BatchDeleteDelegationByAssessmentResponse < Struct.new(
       :errors)
-      SENSITIVE = []
+      SENSITIVE = [:errors]
       include Aws::Structure
     end
 
@@ -1198,7 +1198,7 @@ module Aws::AuditManager
       :created_by,
       :last_updated_by,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:testing_information, :action_plan_title, :action_plan_instructions, :created_by, :last_updated_by]
       include Aws::Structure
     end
 
@@ -1223,7 +1223,7 @@ module Aws::AuditManager
       :author_name,
       :comment_body,
       :posted_date)
-      SENSITIVE = []
+      SENSITIVE = [:author_name, :comment_body]
       include Aws::Structure
     end
 
@@ -1419,7 +1419,7 @@ module Aws::AuditManager
       :source_keyword,
       :source_frequency,
       :troubleshooting_text)
-      SENSITIVE = []
+      SENSITIVE = [:troubleshooting_text]
       include Aws::Structure
     end
 
@@ -1554,7 +1554,7 @@ module Aws::AuditManager
       :compliance_type,
       :control_sets,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:compliance_type]
       include Aws::Structure
     end
 
@@ -1616,7 +1616,7 @@ module Aws::AuditManager
       :description,
       :assessment_id,
       :query_statement)
-      SENSITIVE = []
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -1674,7 +1674,7 @@ module Aws::AuditManager
       :roles,
       :framework_id,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:name, :description, :assessment_reports_destination, :scope, :roles]
       include Aws::Structure
     end
 
@@ -1764,7 +1764,7 @@ module Aws::AuditManager
       :source_keyword,
       :source_frequency,
       :troubleshooting_text)
-      SENSITIVE = []
+      SENSITIVE = [:troubleshooting_text]
       include Aws::Structure
     end
 
@@ -1807,7 +1807,7 @@ module Aws::AuditManager
       :action_plan_instructions,
       :control_mapping_sources,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:testing_information, :action_plan_title, :action_plan_instructions]
       include Aws::Structure
     end
 
@@ -1858,7 +1858,7 @@ module Aws::AuditManager
       :control_set_id,
       :role_arn,
       :role_type)
-      SENSITIVE = []
+      SENSITIVE = [:comment]
       include Aws::Structure
     end
 
@@ -1953,7 +1953,7 @@ module Aws::AuditManager
       :control_set_id,
       :comment,
       :created_by)
-      SENSITIVE = []
+      SENSITIVE = [:assessment_name, :comment, :created_by]
       include Aws::Structure
     end
 
@@ -1997,7 +1997,7 @@ module Aws::AuditManager
       :role_arn,
       :creation_time,
       :control_set_name)
-      SENSITIVE = []
+      SENSITIVE = [:assessment_name]
       include Aws::Structure
     end
 
@@ -2489,7 +2489,7 @@ module Aws::AuditManager
       :created_by,
       :last_updated_by,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:compliance_type, :control_sets, :created_by, :last_updated_by]
       include Aws::Structure
     end
 
@@ -2519,7 +2519,7 @@ module Aws::AuditManager
       :description,
       :logo,
       :compliance_type)
-      SENSITIVE = []
+      SENSITIVE = [:name, :compliance_type]
       include Aws::Structure
     end
 
@@ -2802,7 +2802,7 @@ module Aws::AuditManager
     #
     class GetEvidenceFileUploadUrlRequest < Struct.new(
       :file_name)
-      SENSITIVE = []
+      SENSITIVE = [:file_name]
       include Aws::Structure
     end
 
@@ -3772,7 +3772,7 @@ module Aws::AuditManager
       :s3_resource_path,
       :text_response,
       :evidence_file_name)
-      SENSITIVE = []
+      SENSITIVE = [:text_response, :evidence_file_name]
       include Aws::Structure
     end
 
@@ -3824,7 +3824,7 @@ module Aws::AuditManager
       :description,
       :event_time,
       :source)
-      SENSITIVE = []
+      SENSITIVE = [:assessment_name]
       include Aws::Structure
     end
 
@@ -3999,7 +3999,7 @@ module Aws::AuditManager
     class Scope < Struct.new(
       :aws_accounts,
       :aws_services)
-      SENSITIVE = []
+      SENSITIVE = [:aws_accounts]
       include Aws::Structure
     end
 
@@ -4104,7 +4104,7 @@ module Aws::AuditManager
       :evidence_finder_enablement,
       :deregistration_policy,
       :default_export_destination)
-      SENSITIVE = []
+      SENSITIVE = [:sns_topic, :default_assessment_reports_destination, :default_process_owners]
       include Aws::Structure
     end
 
@@ -4413,7 +4413,7 @@ module Aws::AuditManager
       :control_id,
       :control_status,
       :comment_body)
-      SENSITIVE = []
+      SENSITIVE = [:comment_body]
       include Aws::Structure
     end
 
@@ -4453,7 +4453,7 @@ module Aws::AuditManager
       :control_set_id,
       :status,
       :comment)
-      SENSITIVE = []
+      SENSITIVE = [:comment]
       include Aws::Structure
     end
 
@@ -4524,7 +4524,7 @@ module Aws::AuditManager
       :description,
       :compliance_type,
       :control_sets)
-      SENSITIVE = []
+      SENSITIVE = [:compliance_type]
       include Aws::Structure
     end
 
@@ -4610,7 +4610,7 @@ module Aws::AuditManager
       :scope,
       :assessment_reports_destination,
       :roles)
-      SENSITIVE = []
+      SENSITIVE = [:assessment_name, :assessment_description, :scope, :assessment_reports_destination, :roles]
       include Aws::Structure
     end
 
@@ -4696,7 +4696,7 @@ module Aws::AuditManager
       :action_plan_title,
       :action_plan_instructions,
       :control_mapping_sources)
-      SENSITIVE = []
+      SENSITIVE = [:testing_information, :action_plan_title, :action_plan_instructions]
       include Aws::Structure
     end
 
@@ -4767,7 +4767,7 @@ module Aws::AuditManager
       :evidence_finder_enabled,
       :deregistration_policy,
       :default_export_destination)
-      SENSITIVE = []
+      SENSITIVE = [:default_assessment_reports_destination, :default_process_owners]
       include Aws::Structure
     end
 

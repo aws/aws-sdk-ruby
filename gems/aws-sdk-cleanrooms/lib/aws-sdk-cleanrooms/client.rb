@@ -932,6 +932,10 @@ module Aws::CleanRooms
     #   you define. When you use tagging, you can also use tag-based access
     #   control in IAM policies to control access to this resource.
     #
+    # @option params [Types::MembershipProtectedQueryResultConfiguration] :default_result_configuration
+    #   The default protected query result configuration as specified by the
+    #   member who can receive results.
+    #
     # @return [Types::CreateMembershipOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMembershipOutput#membership #membership} => Types::Membership
@@ -943,6 +947,16 @@ module Aws::CleanRooms
     #     query_log_status: "ENABLED", # required, accepts ENABLED, DISABLED
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     default_result_configuration: {
+    #       output_configuration: { # required
+    #         s3: {
+    #           result_format: "CSV", # required, accepts CSV, PARQUET
+    #           bucket: "ProtectedQueryS3OutputConfigurationBucketString", # required
+    #           key_prefix: "KeyPrefix",
+    #         },
+    #       },
+    #       role_arn: "RoleArn",
     #     },
     #   })
     #
@@ -961,6 +975,10 @@ module Aws::CleanRooms
     #   resp.membership.member_abilities #=> Array
     #   resp.membership.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS"
     #   resp.membership.query_log_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.membership.default_result_configuration.output_configuration.s3.result_format #=> String, one of "CSV", "PARQUET"
+    #   resp.membership.default_result_configuration.output_configuration.s3.bucket #=> String
+    #   resp.membership.default_result_configuration.output_configuration.s3.key_prefix #=> String
+    #   resp.membership.default_result_configuration.role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateMembership AWS API Documentation
     #
@@ -1473,6 +1491,10 @@ module Aws::CleanRooms
     #   resp.membership.member_abilities #=> Array
     #   resp.membership.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS"
     #   resp.membership.query_log_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.membership.default_result_configuration.output_configuration.s3.result_format #=> String, one of "CSV", "PARQUET"
+    #   resp.membership.default_result_configuration.output_configuration.s3.bucket #=> String
+    #   resp.membership.default_result_configuration.output_configuration.s3.key_prefix #=> String
+    #   resp.membership.default_result_configuration.role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetMembership AWS API Documentation
     #
@@ -1518,6 +1540,8 @@ module Aws::CleanRooms
     #   resp.protected_query.result_configuration.output_configuration.s3.key_prefix #=> String
     #   resp.protected_query.statistics.total_duration_in_millis #=> Integer
     #   resp.protected_query.result.output.s3.location #=> String
+    #   resp.protected_query.result.output.member_list #=> Array
+    #   resp.protected_query.result.output.member_list[0].account_id #=> String
     #   resp.protected_query.error.message #=> String
     #   resp.protected_query.error.code #=> String
     #
@@ -2142,7 +2166,7 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
-    # Creates a protected query that is started by Clean Rooms .
+    # Creates a protected query that is started by Clean Rooms.
     #
     # @option params [required, String] :type
     #   The type of the protected query to be started.
@@ -2154,7 +2178,7 @@ module Aws::CleanRooms
     # @option params [required, Types::ProtectedQuerySQLParameters] :sql_parameters
     #   The protected SQL query parameters.
     #
-    # @option params [required, Types::ProtectedQueryResultConfiguration] :result_configuration
+    # @option params [Types::ProtectedQueryResultConfiguration] :result_configuration
     #   The details needed to write the query results.
     #
     # @return [Types::StartProtectedQueryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2173,7 +2197,7 @@ module Aws::CleanRooms
     #         "ParameterName" => "ParameterValue",
     #       },
     #     },
-    #     result_configuration: { # required
+    #     result_configuration: {
     #       output_configuration: { # required
     #         s3: {
     #           result_format: "CSV", # required, accepts CSV, PARQUET
@@ -2200,6 +2224,8 @@ module Aws::CleanRooms
     #   resp.protected_query.result_configuration.output_configuration.s3.key_prefix #=> String
     #   resp.protected_query.statistics.total_duration_in_millis #=> Integer
     #   resp.protected_query.result.output.s3.location #=> String
+    #   resp.protected_query.result.output.member_list #=> Array
+    #   resp.protected_query.result.output.member_list[0].account_id #=> String
     #   resp.protected_query.error.message #=> String
     #   resp.protected_query.error.code #=> String
     #
@@ -2587,6 +2613,10 @@ module Aws::CleanRooms
     #   An indicator as to whether query logging has been enabled or disabled
     #   for the collaboration.
     #
+    # @option params [Types::MembershipProtectedQueryResultConfiguration] :default_result_configuration
+    #   The default protected query result configuration as specified by the
+    #   member who can receive results.
+    #
     # @return [Types::UpdateMembershipOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateMembershipOutput#membership #membership} => Types::Membership
@@ -2596,6 +2626,16 @@ module Aws::CleanRooms
     #   resp = client.update_membership({
     #     membership_identifier: "MembershipIdentifier", # required
     #     query_log_status: "ENABLED", # accepts ENABLED, DISABLED
+    #     default_result_configuration: {
+    #       output_configuration: { # required
+    #         s3: {
+    #           result_format: "CSV", # required, accepts CSV, PARQUET
+    #           bucket: "ProtectedQueryS3OutputConfigurationBucketString", # required
+    #           key_prefix: "KeyPrefix",
+    #         },
+    #       },
+    #       role_arn: "RoleArn",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2613,6 +2653,10 @@ module Aws::CleanRooms
     #   resp.membership.member_abilities #=> Array
     #   resp.membership.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS"
     #   resp.membership.query_log_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.membership.default_result_configuration.output_configuration.s3.result_format #=> String, one of "CSV", "PARQUET"
+    #   resp.membership.default_result_configuration.output_configuration.s3.bucket #=> String
+    #   resp.membership.default_result_configuration.output_configuration.s3.key_prefix #=> String
+    #   resp.membership.default_result_configuration.role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateMembership AWS API Documentation
     #
@@ -2663,6 +2707,8 @@ module Aws::CleanRooms
     #   resp.protected_query.result_configuration.output_configuration.s3.key_prefix #=> String
     #   resp.protected_query.statistics.total_duration_in_millis #=> Integer
     #   resp.protected_query.result.output.s3.location #=> String
+    #   resp.protected_query.result.output.member_list #=> Array
+    #   resp.protected_query.result.output.member_list[0].account_id #=> String
     #   resp.protected_query.error.message #=> String
     #   resp.protected_query.error.code #=> String
     #
@@ -2688,7 +2734,7 @@ module Aws::CleanRooms
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

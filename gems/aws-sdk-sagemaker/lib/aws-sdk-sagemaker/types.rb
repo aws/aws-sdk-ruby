@@ -3107,12 +3107,17 @@ module Aws::SageMaker
     #   The workspace settings for the SageMaker Canvas application.
     #   @return [Types::WorkspaceSettings]
     #
+    # @!attribute [rw] identity_provider_o_auth_settings
+    #   The settings for connecting to an external data source with OAuth.
+    #   @return [Array<Types::IdentityProviderOAuthSetting>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CanvasAppSettings AWS API Documentation
     #
     class CanvasAppSettings < Struct.new(
       :time_series_forecasting_settings,
       :model_register_settings,
-      :workspace_settings)
+      :workspace_settings,
+      :identity_provider_o_auth_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21056,6 +21061,35 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The Amazon SageMaker Canvas app setting where you configure OAuth for
+    # connecting to an external data source, such as Snowflake.
+    #
+    # @!attribute [rw] data_source_name
+    #   The name of the data source that you're connecting to. Canvas
+    #   currently supports OAuth for Snowflake and Salesforce Data Cloud.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Describes whether OAuth for a data source is enabled or disabled in
+    #   the Canvas application.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The ARN of an Amazon Web Services Secrets Manager secret that stores
+    #   the credentials from your identity provider, such as the client ID
+    #   and secret, authorization URL, and token URL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/IdentityProviderOAuthSetting AWS API Documentation
+    #
+    class IdentityProviderOAuthSetting < Struct.new(
+      :data_source_name,
+      :status,
+      :secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A SageMaker image. A SageMaker image represents a set of container
     # images that are derived from a common base container image. Each of
     # these container images is represented by a SageMaker `ImageVersion`.
@@ -34483,7 +34517,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] job_duration_in_seconds
     #   Specifies the maximum duration of the job, in seconds. The maximum
-    #   value is 7200.
+    #   value is 18,000 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] traffic_pattern

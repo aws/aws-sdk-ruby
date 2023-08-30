@@ -2501,13 +2501,25 @@ module Aws::Appflow
     #   The number of records processed in the flow run.
     #   @return [Integer]
     #
+    # @!attribute [rw] num_parallel_processes
+    #   The number of processes that Amazon AppFlow ran at the same time
+    #   when it retrieved your data.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_page_size
+    #   The maximum number of records that Amazon AppFlow receives in each
+    #   page of the response from your SAP application.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ExecutionResult AWS API Documentation
     #
     class ExecutionResult < Struct.new(
       :error_info,
       :bytes_processed,
       :bytes_written,
-      :records_processed)
+      :records_processed,
+      :num_parallel_processes,
+      :max_page_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4244,16 +4256,66 @@ module Aws::Appflow
     #
     class SAPODataMetadata < Aws::EmptyStructure; end
 
+    # Sets the page size for each *concurrent process* that transfers OData
+    # records from your SAP instance. A concurrent process is query that
+    # retrieves a batch of records as part of a flow run. Amazon AppFlow can
+    # run multiple concurrent processes in parallel to transfer data faster.
+    #
+    # @!attribute [rw] max_page_size
+    #   The maximum number of records that Amazon AppFlow receives in each
+    #   page of the response from your SAP application. For transfers of
+    #   OData records, the maximum page size is 3,000. For transfers of data
+    #   that comes from an ODP provider, the maximum page size is 10,000.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/SAPODataPaginationConfig AWS API Documentation
+    #
+    class SAPODataPaginationConfig < Struct.new(
+      :max_page_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Sets the number of *concurrent processes* that transfer OData records
+    # from your SAP instance. A concurrent process is query that retrieves a
+    # batch of records as part of a flow run. Amazon AppFlow can run
+    # multiple concurrent processes in parallel to transfer data faster.
+    #
+    # @!attribute [rw] max_parallelism
+    #   The maximum number of processes that Amazon AppFlow runs at the same
+    #   time when it retrieves your data from your SAP application.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/SAPODataParallelismConfig AWS API Documentation
+    #
+    class SAPODataParallelismConfig < Struct.new(
+      :max_parallelism)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The properties that are applied when using SAPOData as a flow source.
     #
     # @!attribute [rw] object_path
     #   The object path specified in the SAPOData flow source.
     #   @return [String]
     #
+    # @!attribute [rw] parallelism_config
+    #   Sets the number of concurrent processes that transfers OData records
+    #   from your SAP instance.
+    #   @return [Types::SAPODataParallelismConfig]
+    #
+    # @!attribute [rw] pagination_config
+    #   Sets the page size for each concurrent process that transfers OData
+    #   records from your SAP instance.
+    #   @return [Types::SAPODataPaginationConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/SAPODataSourceProperties AWS API Documentation
     #
     class SAPODataSourceProperties < Struct.new(
-      :object_path)
+      :object_path,
+      :parallelism_config,
+      :pagination_config)
       SENSITIVE = []
       include Aws::Structure
     end

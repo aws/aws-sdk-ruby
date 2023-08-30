@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2023-08-30)
+------------------
+
+* Feature - Network Firewall increasing pagination token string length
+
 1.33.0 (2023-07-11)
 ------------------
 

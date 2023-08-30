@@ -422,6 +422,7 @@ module Aws::SageMaker
     DataQualityBaselineConfig = Shapes::StructureShape.new(name: 'DataQualityBaselineConfig')
     DataQualityJobInput = Shapes::StructureShape.new(name: 'DataQualityJobInput')
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
+    DataSourceName = Shapes::StringShape.new(name: 'DataSourceName')
     Database = Shapes::StringShape.new(name: 'Database')
     DatasetDefinition = Shapes::StructureShape.new(name: 'DatasetDefinition')
     DebugHookConfig = Shapes::StructureShape.new(name: 'DebugHookConfig')
@@ -921,6 +922,8 @@ module Aws::SageMaker
     HyperbandStrategyMinResource = Shapes::IntegerShape.new(name: 'HyperbandStrategyMinResource')
     IamIdentity = Shapes::StructureShape.new(name: 'IamIdentity')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
+    IdentityProviderOAuthSetting = Shapes::StructureShape.new(name: 'IdentityProviderOAuthSetting')
+    IdentityProviderOAuthSettings = Shapes::ListShape.new(name: 'IdentityProviderOAuthSettings')
     Image = Shapes::StructureShape.new(name: 'Image')
     ImageArn = Shapes::StringShape.new(name: 'ImageArn')
     ImageBaseImage = Shapes::StringShape.new(name: 'ImageBaseImage')
@@ -2524,6 +2527,7 @@ module Aws::SageMaker
     CanvasAppSettings.add_member(:time_series_forecasting_settings, Shapes::ShapeRef.new(shape: TimeSeriesForecastingSettings, location_name: "TimeSeriesForecastingSettings"))
     CanvasAppSettings.add_member(:model_register_settings, Shapes::ShapeRef.new(shape: ModelRegisterSettings, location_name: "ModelRegisterSettings"))
     CanvasAppSettings.add_member(:workspace_settings, Shapes::ShapeRef.new(shape: WorkspaceSettings, location_name: "WorkspaceSettings"))
+    CanvasAppSettings.add_member(:identity_provider_o_auth_settings, Shapes::ShapeRef.new(shape: IdentityProviderOAuthSettings, location_name: "IdentityProviderOAuthSettings"))
     CanvasAppSettings.struct_class = Types::CanvasAppSettings
 
     CapacitySize.add_member(:type, Shapes::ShapeRef.new(shape: CapacitySizeType, required: true, location_name: "Type"))
@@ -5520,6 +5524,13 @@ module Aws::SageMaker
     IamIdentity.add_member(:principal_id, Shapes::ShapeRef.new(shape: String, location_name: "PrincipalId"))
     IamIdentity.add_member(:source_identity, Shapes::ShapeRef.new(shape: String, location_name: "SourceIdentity"))
     IamIdentity.struct_class = Types::IamIdentity
+
+    IdentityProviderOAuthSetting.add_member(:data_source_name, Shapes::ShapeRef.new(shape: DataSourceName, location_name: "DataSourceName"))
+    IdentityProviderOAuthSetting.add_member(:status, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "Status"))
+    IdentityProviderOAuthSetting.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
+    IdentityProviderOAuthSetting.struct_class = Types::IdentityProviderOAuthSetting
+
+    IdentityProviderOAuthSettings.member = Shapes::ShapeRef.new(shape: IdentityProviderOAuthSetting)
 
     Image.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
     Image.add_member(:description, Shapes::ShapeRef.new(shape: ImageDescription, location_name: "Description"))

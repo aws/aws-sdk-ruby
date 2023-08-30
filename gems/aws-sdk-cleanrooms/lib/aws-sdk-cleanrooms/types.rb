@@ -1563,12 +1563,18 @@ module Aws::CleanRooms
     #   control in IAM policies to control access to this resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] default_result_configuration
+    #   The default protected query result configuration as specified by the
+    #   member who can receive results.
+    #   @return [Types::MembershipProtectedQueryResultConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateMembershipInput AWS API Documentation
     #
     class CreateMembershipInput < Struct.new(
       :collaboration_identifier,
       :query_log_status,
-      :tags)
+      :tags,
+      :default_result_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2620,6 +2626,11 @@ module Aws::CleanRooms
     #   disabled for the collaboration.
     #   @return [String]
     #
+    # @!attribute [rw] default_result_configuration
+    #   The default protected query result configuration as specified by the
+    #   member who can receive results.
+    #   @return [Types::MembershipProtectedQueryResultConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/Membership AWS API Documentation
     #
     class Membership < Struct.new(
@@ -2634,7 +2645,52 @@ module Aws::CleanRooms
       :update_time,
       :status,
       :member_abilities,
-      :query_log_status)
+      :query_log_status,
+      :default_result_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configurations for protected query results.
+    #
+    # @note MembershipProtectedQueryOutputConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note MembershipProtectedQueryOutputConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of MembershipProtectedQueryOutputConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] s3
+    #   Contains the configuration to write the query results to S3.
+    #   @return [Types::ProtectedQueryS3OutputConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MembershipProtectedQueryOutputConfiguration AWS API Documentation
+    #
+    class MembershipProtectedQueryOutputConfiguration < Struct.new(
+      :s3,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class S3 < MembershipProtectedQueryOutputConfiguration; end
+      class Unknown < MembershipProtectedQueryOutputConfiguration; end
+    end
+
+    # Contains configurations for protected query results.
+    #
+    # @!attribute [rw] output_configuration
+    #   Configuration for protected query results.
+    #   @return [Types::MembershipProtectedQueryOutputConfiguration]
+    #
+    # @!attribute [rw] role_arn
+    #   The unique ARN for an IAM role that is used by Clean Rooms to write
+    #   protected query results to the result location, given by the member
+    #   who can receive results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MembershipProtectedQueryResultConfiguration AWS API Documentation
+    #
+    class MembershipProtectedQueryResultConfiguration < Struct.new(
+      :output_configuration,
+      :role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2793,16 +2849,23 @@ module Aws::CleanRooms
     #   type.
     #   @return [Types::ProtectedQueryS3Output]
     #
+    # @!attribute [rw] member_list
+    #   The list of member Amazon Web Services account(s) that received the
+    #   results of the query.
+    #   @return [Array<Types::ProtectedQuerySingleMemberOutput>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedQueryOutput AWS API Documentation
     #
     class ProtectedQueryOutput < Struct.new(
       :s3,
+      :member_list,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class S3 < ProtectedQueryOutput; end
+      class MemberList < ProtectedQueryOutput; end
       class Unknown < ProtectedQueryOutput; end
     end
 
@@ -2918,6 +2981,21 @@ module Aws::CleanRooms
       :query_string,
       :analysis_template_arn,
       :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the member who received the query result.
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID of the member in the
+    #   collaboration who can receive results for the query.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedQuerySingleMemberOutput AWS API Documentation
+    #
+    class ProtectedQuerySingleMemberOutput < Struct.new(
+      :account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3465,11 +3543,17 @@ module Aws::CleanRooms
     #   disabled for the collaboration.
     #   @return [String]
     #
+    # @!attribute [rw] default_result_configuration
+    #   The default protected query result configuration as specified by the
+    #   member who can receive results.
+    #   @return [Types::MembershipProtectedQueryResultConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateMembershipInput AWS API Documentation
     #
     class UpdateMembershipInput < Struct.new(
       :membership_identifier,
-      :query_log_status)
+      :query_log_status,
+      :default_result_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
