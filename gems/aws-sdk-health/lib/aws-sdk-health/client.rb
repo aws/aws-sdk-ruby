@@ -536,7 +536,7 @@ module Aws::Health
     #           "tagKey" => "tagValue",
     #         },
     #       ],
-    #       status_codes: ["IMPAIRED"], # accepts IMPAIRED, UNIMPAIRED, UNKNOWN
+    #       status_codes: ["IMPAIRED"], # accepts IMPAIRED, UNIMPAIRED, UNKNOWN, PENDING, RESOLVED
     #     },
     #     locale: "locale",
     #     next_token: "nextToken",
@@ -552,7 +552,7 @@ module Aws::Health
     #   resp.entities[0].entity_url #=> String
     #   resp.entities[0].aws_account_id #=> String
     #   resp.entities[0].last_updated_time #=> Time
-    #   resp.entities[0].status_code #=> String, one of "IMPAIRED", "UNIMPAIRED", "UNKNOWN"
+    #   resp.entities[0].status_code #=> String, one of "IMPAIRED", "UNIMPAIRED", "UNKNOWN", "PENDING", "RESOLVED"
     #   resp.entities[0].tags #=> Hash
     #   resp.entities[0].tags["tagKey"] #=> String
     #   resp.next_token #=> String
@@ -595,7 +595,7 @@ module Aws::Health
     # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html
     # [2]: https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions
     #
-    # @option params [required, Array<Types::EventAccountFilter>] :organization_entity_filters
+    # @option params [Array<Types::EventAccountFilter>] :organization_entity_filters
     #   A JSON set of elements including the `awsAccountId` and the
     #   `eventArn`.
     #
@@ -614,6 +614,10 @@ module Aws::Health
     #   The maximum number of items to return in one batch, between 10 and
     #   100, inclusive.
     #
+    # @option params [Array<Types::EntityAccountFilter>] :organization_entity_account_filters
+    #   A JSON set of elements including the `awsAccountId`, `eventArn` and a
+    #   set of `statusCodes`.
+    #
     # @return [Types::DescribeAffectedEntitiesForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeAffectedEntitiesForOrganizationResponse#entities #entities} => Array&lt;Types::AffectedEntity&gt;
@@ -625,7 +629,7 @@ module Aws::Health
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_affected_entities_for_organization({
-    #     organization_entity_filters: [ # required
+    #     organization_entity_filters: [
     #       {
     #         event_arn: "eventArn", # required
     #         aws_account_id: "accountId",
@@ -634,6 +638,13 @@ module Aws::Health
     #     locale: "locale",
     #     next_token: "nextToken",
     #     max_results: 1,
+    #     organization_entity_account_filters: [
+    #       {
+    #         event_arn: "eventArn", # required
+    #         aws_account_id: "accountId",
+    #         status_codes: ["IMPAIRED"], # accepts IMPAIRED, UNIMPAIRED, UNKNOWN, PENDING, RESOLVED
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -645,7 +656,7 @@ module Aws::Health
     #   resp.entities[0].entity_url #=> String
     #   resp.entities[0].aws_account_id #=> String
     #   resp.entities[0].last_updated_time #=> Time
-    #   resp.entities[0].status_code #=> String, one of "IMPAIRED", "UNIMPAIRED", "UNKNOWN"
+    #   resp.entities[0].status_code #=> String, one of "IMPAIRED", "UNIMPAIRED", "UNKNOWN", "PENDING", "RESOLVED"
     #   resp.entities[0].tags #=> Hash
     #   resp.entities[0].tags["tagKey"] #=> String
     #   resp.failed_set #=> Array
@@ -687,6 +698,8 @@ module Aws::Health
     #   resp.entity_aggregates #=> Array
     #   resp.entity_aggregates[0].event_arn #=> String
     #   resp.entity_aggregates[0].count #=> Integer
+    #   resp.entity_aggregates[0].statuses #=> Hash
+    #   resp.entity_aggregates[0].statuses["entityStatusCode"] #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEntityAggregates AWS API Documentation
     #
@@ -694,6 +707,51 @@ module Aws::Health
     # @param [Hash] params ({})
     def describe_entity_aggregates(params = {}, options = {})
       req = build_request(:describe_entity_aggregates, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of entity aggregates for your Organizations that are
+    # affected by each of the specified events.
+    #
+    # @option params [required, Array<String>] :event_arns
+    #   A list of event ARNs (unique identifiers). For example:
+    #   `"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456",
+    #   "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"`
+    #
+    # @option params [Array<String>] :aws_account_ids
+    #   A list of 12-digit Amazon Web Services account numbers that contains
+    #   the affected entities.
+    #
+    # @return [Types::DescribeEntityAggregatesForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEntityAggregatesForOrganizationResponse#organization_entity_aggregates #organization_entity_aggregates} => Array&lt;Types::OrganizationEntityAggregate&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_entity_aggregates_for_organization({
+    #     event_arns: ["eventArn"], # required
+    #     aws_account_ids: ["accountId"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.organization_entity_aggregates #=> Array
+    #   resp.organization_entity_aggregates[0].event_arn #=> String
+    #   resp.organization_entity_aggregates[0].count #=> Integer
+    #   resp.organization_entity_aggregates[0].statuses #=> Hash
+    #   resp.organization_entity_aggregates[0].statuses["entityStatusCode"] #=> Integer
+    #   resp.organization_entity_aggregates[0].accounts #=> Array
+    #   resp.organization_entity_aggregates[0].accounts[0].account_id #=> String
+    #   resp.organization_entity_aggregates[0].accounts[0].count #=> Integer
+    #   resp.organization_entity_aggregates[0].accounts[0].statuses #=> Hash
+    #   resp.organization_entity_aggregates[0].accounts[0].statuses["entityStatusCode"] #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEntityAggregatesForOrganization AWS API Documentation
+    #
+    # @overload describe_entity_aggregates_for_organization(params = {})
+    # @param [Hash] params ({})
+    def describe_entity_aggregates_for_organization(params = {}, options = {})
+      req = build_request(:describe_entity_aggregates_for_organization, params)
       req.send_request(options)
     end
 
@@ -1400,7 +1458,7 @@ module Aws::Health
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-health'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

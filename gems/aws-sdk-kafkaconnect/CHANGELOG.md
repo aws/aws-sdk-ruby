@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2023-08-31)
+------------------
+
+* Feature - Minor model changes for Kafka Connect as well as endpoint updates.
+
 1.14.0 (2023-07-11)
 ------------------
 

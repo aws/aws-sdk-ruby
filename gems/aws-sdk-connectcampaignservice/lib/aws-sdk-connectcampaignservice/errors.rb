@@ -117,13 +117,13 @@ module Aws::ConnectCampaignService
       end
 
       # @return [String]
-      def message
-        @message || @data[:message]
+      def state
+        @data[:state]
       end
 
       # @return [String]
-      def state
-        @data[:state]
+      def message
+        @message || @data[:message]
       end
 
       # @return [String]

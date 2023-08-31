@@ -60,6 +60,8 @@ module Aws::SageMakerRuntime
             Aws::SageMakerRuntime::Endpoints::InvokeEndpoint.build(context)
           when :invoke_endpoint_async
             Aws::SageMakerRuntime::Endpoints::InvokeEndpointAsync.build(context)
+          when :invoke_endpoint_with_response_stream
+            Aws::SageMakerRuntime::Endpoints::InvokeEndpointWithResponseStream.build(context)
           end
         end
       end

@@ -33,6 +33,7 @@ require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
+require 'aws-sdk-core/plugins/event_stream_configuration.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:sagemakerruntime)
 
@@ -83,6 +84,7 @@ module Aws::SageMakerRuntime
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
+    add_plugin(Aws::Plugins::EventStreamConfiguration)
     add_plugin(Aws::SageMakerRuntime::Plugins::Endpoints)
 
     # @overload initialize(options)
@@ -216,9 +218,15 @@ module Aws::SageMakerRuntime
     #   @option options [Boolean] :endpoint_discovery (false)
     #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
+    #   @option options [Proc] :event_stream_handler
+    #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
+    #
     #   @option options [Boolean] :ignore_configured_endpoint_urls
     #     Setting to true disables use of endpoint URLs provided via environment
     #     variables and the shared configuration file.
+    #
+    #   @option options [Proc] :input_event_stream_handler
+    #     When an EventStream or Proc object is provided, it can be used for sending events for the event stream.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -235,6 +243,9 @@ module Aws::SageMakerRuntime
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
     #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
+    #   @option options [Proc] :output_event_stream_handler
+    #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
@@ -446,7 +457,8 @@ module Aws::SageMakerRuntime
     #   The MIME type of the input data in the request body.
     #
     # @option params [String] :accept
-    #   The desired MIME type of the inference in the response.
+    #   The desired MIME type of the inference response from the model
+    #   container.
     #
     # @option params [String] :custom_attributes
     #   Provides additional information about a request for an inference
@@ -469,7 +481,7 @@ module Aws::SageMakerRuntime
     #
     #
     #
-    #   [1]: https://tools.ietf.org/html/rfc7230#section-3.2.6
+    #   [1]: https://datatracker.ietf.org/doc/html/rfc7230#section-3.2.6
     #
     # @option params [String] :target_model
     #   The model to request for inference when invoking a multi-model
@@ -561,8 +573,8 @@ module Aws::SageMakerRuntime
     # from this API will not contain the result of the inference request but
     # contain information about where you can locate it.
     #
-    # Amazon SageMaker strips all `POST` headers except those supported by
-    # the API. Amazon SageMaker might add additional headers. You should not
+    # Amazon SageMaker strips all POST headers except those supported by the
+    # API. Amazon SageMaker might add additional headers. You should not
     # rely on the behavior of headers outside those enumerated in the
     # request syntax.
     #
@@ -577,17 +589,18 @@ module Aws::SageMakerRuntime
     #
     # @option params [required, String] :endpoint_name
     #   The name of the endpoint that you specified when you created the
-    #   endpoint using the [ `CreateEndpoint` ][1] API.
+    #   endpoint using the [CreateEndpoint][1] API.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html
     #
     # @option params [String] :content_type
     #   The MIME type of the input data in the request body.
     #
     # @option params [String] :accept
-    #   The desired MIME type of the inference in the response.
+    #   The desired MIME type of the inference response from the model
+    #   container.
     #
     # @option params [String] :custom_attributes
     #   Provides additional information about a request for an inference
@@ -603,7 +616,7 @@ module Aws::SageMakerRuntime
     #   custom attributes in the response. If your code does not set this
     #   value in the response, an empty value is returned. For example, if a
     #   custom attribute represents the trace ID, your model can prepend the
-    #   custom attribute with `Trace ID`: in your post-processing function.
+    #   custom attribute with `Trace ID:` in your post-processing function.
     #
     #   This feature is currently supported in the Amazon Web Services SDKs
     #   but not in the Amazon SageMaker Python SDK.
@@ -661,6 +674,278 @@ module Aws::SageMakerRuntime
       req.send_request(options)
     end
 
+    # Invokes a model at the specified endpoint to return the inference
+    # response as a stream. The inference stream provides the response
+    # payload incrementally as a series of parts. Before you can get an
+    # inference stream, you must have access to a model that's deployed
+    # using Amazon SageMaker hosting services, and the container for that
+    # model must support inference streaming.
+    #
+    # For more information that can help you use this API, see the following
+    # sections in the *Amazon SageMaker Developer Guide*:
+    #
+    # * For information about how to add streaming support to a model, see
+    #   [How Containers Serve Requests][1].
+    #
+    # * For information about how to process the streaming response, see
+    #   [Invoke real-time endpoints][2].
+    #
+    # Amazon SageMaker strips all POST headers except those supported by the
+    # API. Amazon SageMaker might add additional headers. You should not
+    # rely on the behavior of headers outside those enumerated in the
+    # request syntax.
+    #
+    # Calls to `InvokeEndpointWithResponseStream` are authenticated by using
+    # Amazon Web Services Signature Version 4. For information, see
+    # [Authenticating Requests (Amazon Web Services Signature Version 4)][3]
+    # in the *Amazon S3 API Reference*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-inference-code.html#your-algorithms-inference-code-how-containe-serves-requests
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints-test-endpoints.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+    #
+    # @option params [required, String] :endpoint_name
+    #   The name of the endpoint that you specified when you created the
+    #   endpoint using the [CreateEndpoint][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html
+    #
+    # @option params [required, String, StringIO, File] :body
+    #   Provides input data, in the format specified in the `ContentType`
+    #   request header. Amazon SageMaker passes all of the data in the body to
+    #   the model.
+    #
+    #   For information about the format of the request body, see [Common Data
+    #   Formats-Inference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html
+    #
+    # @option params [String] :content_type
+    #   The MIME type of the input data in the request body.
+    #
+    # @option params [String] :accept
+    #   The desired MIME type of the inference response from the model
+    #   container.
+    #
+    # @option params [String] :custom_attributes
+    #   Provides additional information about a request for an inference
+    #   submitted to a model hosted at an Amazon SageMaker endpoint. The
+    #   information is an opaque value that is forwarded verbatim. You could
+    #   use this value, for example, to provide an ID that you can use to
+    #   track a request or to provide other metadata that a service endpoint
+    #   was programmed to process. The value must consist of no more than 1024
+    #   visible US-ASCII characters as specified in [Section 3.3.6. Field
+    #   Value Components][1] of the Hypertext Transfer Protocol (HTTP/1.1).
+    #
+    #   The code in your model is responsible for setting or updating any
+    #   custom attributes in the response. If your code does not set this
+    #   value in the response, an empty value is returned. For example, if a
+    #   custom attribute represents the trace ID, your model can prepend the
+    #   custom attribute with `Trace ID:` in your post-processing function.
+    #
+    #   This feature is currently supported in the Amazon Web Services SDKs
+    #   but not in the Amazon SageMaker Python SDK.
+    #
+    #
+    #
+    #   [1]: https://datatracker.ietf.org/doc/html/rfc7230#section-3.2.6
+    #
+    # @option params [String] :target_variant
+    #   Specify the production variant to send the inference request to when
+    #   invoking an endpoint that is running two or more variants. Note that
+    #   this parameter overrides the default behavior for the endpoint, which
+    #   is to distribute the invocation traffic based on the variant weights.
+    #
+    #   For information about how to use variant targeting to perform a/b
+    #   testing, see [Test models in production][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-ab-testing.html
+    #
+    # @option params [String] :target_container_hostname
+    #   If the endpoint hosts multiple containers and is configured to use
+    #   direct invocation, this parameter specifies the host name of the
+    #   container to invoke.
+    #
+    # @option params [String] :inference_id
+    #   An identifier that you assign to your request.
+    #
+    # @return [Types::InvokeEndpointWithResponseStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::InvokeEndpointWithResponseStreamOutput#body #body} => Types::ResponseStream
+    #   * {Types::InvokeEndpointWithResponseStreamOutput#content_type #content_type} => String
+    #   * {Types::InvokeEndpointWithResponseStreamOutput#invoked_production_variant #invoked_production_variant} => String
+    #   * {Types::InvokeEndpointWithResponseStreamOutput#custom_attributes #custom_attributes} => String
+    #
+    # @example EventStream Operation Example
+    #
+    #   You can process event once it arrives immediately, or wait until
+    #   full response complete and iterate through eventstream enumerator.
+    #
+    #   To interact with event immediately, you need to register #invoke_endpoint_with_response_stream
+    #   with callbacks, callbacks can be register for specifc events or for all events,
+    #   callback for errors in the event stream is also available for register.
+    #
+    #   Callbacks can be passed in by `:event_stream_handler` option or within block
+    #   statement attached to #invoke_endpoint_with_response_stream call directly. Hybrid pattern of both
+    #   is also supported.
+    #
+    #   `:event_stream_handler` option takes in either Proc object or
+    #   Aws::SageMakerRuntime::EventStreams::ResponseStream object.
+    #
+    #   Usage pattern a): callbacks with a block attached to #invoke_endpoint_with_response_stream
+    #     Example for registering callbacks for all event types and error event
+    #
+    #     client.invoke_endpoint_with_response_stream( # params input# ) do |stream|
+    #       stream.on_error_event do |event|
+    #         # catch unmodeled error event in the stream
+    #         raise event
+    #         # => Aws::Errors::EventError
+    #         # event.event_type => :error
+    #         # event.error_code => String
+    #         # event.error_message => String
+    #       end
+    #
+    #       stream.on_event do |event|
+    #         # process all events arrive
+    #         puts event.event_type
+    #         ...
+    #       end
+    #
+    #     end
+    #
+    #   Usage pattern b): pass in `:event_stream_handler` for #invoke_endpoint_with_response_stream
+    #
+    #     1) create a Aws::SageMakerRuntime::EventStreams::ResponseStream object
+    #     Example for registering callbacks with specific events
+    #
+    #       handler = Aws::SageMakerRuntime::EventStreams::ResponseStream.new
+    #       handler.on_payload_part_event do |event|
+    #         event # => Aws::SageMakerRuntime::Types::PayloadPart
+    #       end
+    #       handler.on_model_stream_error_event do |event|
+    #         event # => Aws::SageMakerRuntime::Types::ModelStreamError
+    #       end
+    #       handler.on_internal_stream_failure_event do |event|
+    #         event # => Aws::SageMakerRuntime::Types::InternalStreamFailure
+    #       end
+    #
+    #     client.invoke_endpoint_with_response_stream( # params input #, event_stream_handler: handler)
+    #
+    #     2) use a Ruby Proc object
+    #     Example for registering callbacks with specific events
+    #
+    #     handler = Proc.new do |stream|
+    #       stream.on_payload_part_event do |event|
+    #         event # => Aws::SageMakerRuntime::Types::PayloadPart
+    #       end
+    #       stream.on_model_stream_error_event do |event|
+    #         event # => Aws::SageMakerRuntime::Types::ModelStreamError
+    #       end
+    #       stream.on_internal_stream_failure_event do |event|
+    #         event # => Aws::SageMakerRuntime::Types::InternalStreamFailure
+    #       end
+    #     end
+    #
+    #     client.invoke_endpoint_with_response_stream( # params input #, event_stream_handler: handler)
+    #
+    #   Usage pattern c): hybird pattern of a) and b)
+    #
+    #       handler = Aws::SageMakerRuntime::EventStreams::ResponseStream.new
+    #       handler.on_payload_part_event do |event|
+    #         event # => Aws::SageMakerRuntime::Types::PayloadPart
+    #       end
+    #       handler.on_model_stream_error_event do |event|
+    #         event # => Aws::SageMakerRuntime::Types::ModelStreamError
+    #       end
+    #       handler.on_internal_stream_failure_event do |event|
+    #         event # => Aws::SageMakerRuntime::Types::InternalStreamFailure
+    #       end
+    #
+    #     client.invoke_endpoint_with_response_stream( # params input #, event_stream_handler: handler) do |stream|
+    #       stream.on_error_event do |event|
+    #         # catch unmodeled error event in the stream
+    #         raise event
+    #         # => Aws::Errors::EventError
+    #         # event.event_type => :error
+    #         # event.error_code => String
+    #         # event.error_message => String
+    #       end
+    #     end
+    #
+    #   Besides above usage patterns for process events when they arrive immediately, you can also
+    #   iterate through events after response complete.
+    #
+    #   Events are available at resp.body # => Enumerator
+    #   For parameter input example, please refer to following request syntax
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.invoke_endpoint_with_response_stream({
+    #     endpoint_name: "EndpointName", # required
+    #     body: "data", # required
+    #     content_type: "Header",
+    #     accept: "Header",
+    #     custom_attributes: "CustomAttributesHeader",
+    #     target_variant: "TargetVariantHeader",
+    #     target_container_hostname: "TargetContainerHostnameHeader",
+    #     inference_id: "InferenceId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   All events are available at resp.body:
+    #   resp.body #=> Enumerator
+    #   resp.body.event_types #=> [:payload_part, :model_stream_error, :internal_stream_failure]
+    #
+    #   For :payload_part event available at #on_payload_part_event callback and response eventstream enumerator:
+    #   event.bytes #=> String
+    #
+    #   For :model_stream_error event available at #on_model_stream_error_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #   event.error_code #=> String
+    #
+    #   For :internal_stream_failure event available at #on_internal_stream_failure_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   resp.content_type #=> String
+    #   resp.invoked_production_variant #=> String
+    #   resp.custom_attributes #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointWithResponseStream AWS API Documentation
+    #
+    # @overload invoke_endpoint_with_response_stream(params = {})
+    # @param [Hash] params ({})
+    def invoke_endpoint_with_response_stream(params = {}, options = {}, &block)
+      params = params.dup
+      event_stream_handler = case handler = params.delete(:event_stream_handler)
+        when EventStreams::ResponseStream then handler
+        when Proc then EventStreams::ResponseStream.new.tap(&handler)
+        when nil then EventStreams::ResponseStream.new
+        else
+          msg = "expected :event_stream_handler to be a block or "\
+                "instance of Aws::SageMakerRuntime::EventStreams::ResponseStream"\
+                ", got `#{handler.inspect}` instead"
+          raise ArgumentError, msg
+        end
+
+      yield(event_stream_handler) if block_given?
+
+      req = build_request(:invoke_endpoint_with_response_stream, params)
+
+      req.context[:event_stream_handler] = event_stream_handler
+      req.handlers.add(Aws::Binary::DecodeHandler, priority: 95)
+
+      req.send_request(options, &block)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -674,7 +959,7 @@ module Aws::SageMakerRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemakerruntime'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

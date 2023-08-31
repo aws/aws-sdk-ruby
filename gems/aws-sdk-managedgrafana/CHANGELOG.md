@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2023-08-31)
+------------------
+
+* Feature - Marking SAML RoleValues attribute as sensitive and updating VpcConfiguration attributes to match documentation.
+
 1.20.0 (2023-07-19)
 ------------------
 

@@ -68,6 +68,20 @@ module Aws::Health
       end
     end
 
+    class DescribeEntityAggregatesForOrganization
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Health::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DescribeEventAggregates
       def self.build(context)
         unless context.config.regional_endpoint

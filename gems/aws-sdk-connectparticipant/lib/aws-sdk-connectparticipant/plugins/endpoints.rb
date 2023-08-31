@@ -60,6 +60,8 @@ module Aws::ConnectParticipant
             Aws::ConnectParticipant::Endpoints::CompleteAttachmentUpload.build(context)
           when :create_participant_connection
             Aws::ConnectParticipant::Endpoints::CreateParticipantConnection.build(context)
+          when :describe_view
+            Aws::ConnectParticipant::Endpoints::DescribeView.build(context)
           when :disconnect_participant
             Aws::ConnectParticipant::Endpoints::DisconnectParticipant.build(context)
           when :get_attachment

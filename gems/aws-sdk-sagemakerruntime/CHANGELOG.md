@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2023-08-31)
+------------------
+
+* Feature - This release adds a new InvokeEndpointWithResponseStream API to support streaming of model responses.
+
 1.54.0 (2023-07-11)
 ------------------
 

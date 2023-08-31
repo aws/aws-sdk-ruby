@@ -961,7 +961,7 @@ module Aws::ManagedGrafana
     class RoleValues < Struct.new(
       :admin,
       :editor)
-      SENSITIVE = []
+      SENSITIVE = [:admin, :editor]
       include Aws::Structure
     end
 

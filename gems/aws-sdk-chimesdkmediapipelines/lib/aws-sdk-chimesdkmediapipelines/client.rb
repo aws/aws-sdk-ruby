@@ -498,7 +498,7 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_capture_pipeline.media_pipeline_arn #=> String
     #   resp.media_capture_pipeline.source_type #=> String, one of "ChimeSdkMeeting"
     #   resp.media_capture_pipeline.source_arn #=> String
-    #   resp.media_capture_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused"
+    #   resp.media_capture_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused", "NotStarted"
     #   resp.media_capture_pipeline.sink_type #=> String, one of "S3Bucket"
     #   resp.media_capture_pipeline.sink_arn #=> String
     #   resp.media_capture_pipeline.created_timestamp #=> Time
@@ -635,7 +635,7 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_concatenation_pipeline.sinks #=> Array
     #   resp.media_concatenation_pipeline.sinks[0].type #=> String, one of "S3Bucket"
     #   resp.media_concatenation_pipeline.sinks[0].s3_bucket_sink_configuration.destination #=> String
-    #   resp.media_concatenation_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused"
+    #   resp.media_concatenation_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused", "NotStarted"
     #   resp.media_concatenation_pipeline.created_timestamp #=> Time
     #   resp.media_concatenation_pipeline.updated_timestamp #=> Time
     #
@@ -741,7 +741,7 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_insights_pipeline.media_pipeline_id #=> String
     #   resp.media_insights_pipeline.media_pipeline_arn #=> String
     #   resp.media_insights_pipeline.media_insights_pipeline_configuration_arn #=> String
-    #   resp.media_insights_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused"
+    #   resp.media_insights_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused", "NotStarted"
     #   resp.media_insights_pipeline.kinesis_video_stream_source_runtime_configuration.streams #=> Array
     #   resp.media_insights_pipeline.kinesis_video_stream_source_runtime_configuration.streams[0].stream_arn #=> String
     #   resp.media_insights_pipeline.kinesis_video_stream_source_runtime_configuration.streams[0].fragment_number #=> String
@@ -761,6 +761,9 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_insights_pipeline.s3_recording_sink_runtime_configuration.destination #=> String
     #   resp.media_insights_pipeline.s3_recording_sink_runtime_configuration.recording_file_format #=> String, one of "Wav", "Opus"
     #   resp.media_insights_pipeline.created_timestamp #=> Time
+    #   resp.media_insights_pipeline.element_statuses #=> Array
+    #   resp.media_insights_pipeline.element_statuses[0].type #=> String, one of "AmazonTranscribeCallAnalyticsProcessor", "VoiceAnalyticsProcessor", "AmazonTranscribeProcessor", "KinesisDataStreamSink", "LambdaFunctionSink", "SqsQueueSink", "SnsTopicSink", "S3RecordingSink", "VoiceEnhancementSink"
+    #   resp.media_insights_pipeline.element_statuses[0].status #=> String, one of "NotStarted", "NotSupported", "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/CreateMediaInsightsPipeline AWS API Documentation
     #
@@ -832,7 +835,7 @@ module Aws::ChimeSDKMediaPipelines
     #     },
     #     elements: [ # required
     #       {
-    #         type: "AmazonTranscribeCallAnalyticsProcessor", # required, accepts AmazonTranscribeCallAnalyticsProcessor, VoiceAnalyticsProcessor, AmazonTranscribeProcessor, KinesisDataStreamSink, LambdaFunctionSink, SqsQueueSink, SnsTopicSink, S3RecordingSink
+    #         type: "AmazonTranscribeCallAnalyticsProcessor", # required, accepts AmazonTranscribeCallAnalyticsProcessor, VoiceAnalyticsProcessor, AmazonTranscribeProcessor, KinesisDataStreamSink, LambdaFunctionSink, SqsQueueSink, SnsTopicSink, S3RecordingSink, VoiceEnhancementSink
     #         amazon_transcribe_call_analytics_processor_configuration: {
     #           language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR
     #           vocabulary_name: "VocabularyName",
@@ -892,6 +895,9 @@ module Aws::ChimeSDKMediaPipelines
     #         sns_topic_sink_configuration: {
     #           insights_target: "Arn",
     #         },
+    #         voice_enhancement_sink_configuration: {
+    #           disabled: false,
+    #         },
     #       },
     #     ],
     #     tags: [
@@ -920,7 +926,7 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].sentiment_configuration.time_period #=> Integer
     #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].issue_detection_configuration.rule_name #=> String
     #   resp.media_insights_pipeline_configuration.elements #=> Array
-    #   resp.media_insights_pipeline_configuration.elements[0].type #=> String, one of "AmazonTranscribeCallAnalyticsProcessor", "VoiceAnalyticsProcessor", "AmazonTranscribeProcessor", "KinesisDataStreamSink", "LambdaFunctionSink", "SqsQueueSink", "SnsTopicSink", "S3RecordingSink"
+    #   resp.media_insights_pipeline_configuration.elements[0].type #=> String, one of "AmazonTranscribeCallAnalyticsProcessor", "VoiceAnalyticsProcessor", "AmazonTranscribeProcessor", "KinesisDataStreamSink", "LambdaFunctionSink", "SqsQueueSink", "SnsTopicSink", "S3RecordingSink", "VoiceEnhancementSink"
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR"
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.vocabulary_name #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.vocabulary_filter_name #=> String
@@ -963,6 +969,7 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_insights_pipeline_configuration.elements[0].lambda_function_sink_configuration.insights_target #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].sqs_queue_sink_configuration.insights_target #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].sns_topic_sink_configuration.insights_target #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].voice_enhancement_sink_configuration.disabled #=> Boolean
     #   resp.media_insights_pipeline_configuration.media_insights_pipeline_configuration_id #=> String
     #   resp.media_insights_pipeline_configuration.created_timestamp #=> Time
     #   resp.media_insights_pipeline_configuration.updated_timestamp #=> Time
@@ -1102,7 +1109,7 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_live_connector_pipeline.sinks[0].rtmp_configuration.audio_sample_rate #=> String
     #   resp.media_live_connector_pipeline.media_pipeline_id #=> String
     #   resp.media_live_connector_pipeline.media_pipeline_arn #=> String
-    #   resp.media_live_connector_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused"
+    #   resp.media_live_connector_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused", "NotStarted"
     #   resp.media_live_connector_pipeline.created_timestamp #=> Time
     #   resp.media_live_connector_pipeline.updated_timestamp #=> Time
     #
@@ -1203,7 +1210,7 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_capture_pipeline.media_pipeline_arn #=> String
     #   resp.media_capture_pipeline.source_type #=> String, one of "ChimeSdkMeeting"
     #   resp.media_capture_pipeline.source_arn #=> String
-    #   resp.media_capture_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused"
+    #   resp.media_capture_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused", "NotStarted"
     #   resp.media_capture_pipeline.sink_type #=> String, one of "S3Bucket"
     #   resp.media_capture_pipeline.sink_arn #=> String
     #   resp.media_capture_pipeline.created_timestamp #=> Time
@@ -1278,7 +1285,7 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].sentiment_configuration.time_period #=> Integer
     #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].issue_detection_configuration.rule_name #=> String
     #   resp.media_insights_pipeline_configuration.elements #=> Array
-    #   resp.media_insights_pipeline_configuration.elements[0].type #=> String, one of "AmazonTranscribeCallAnalyticsProcessor", "VoiceAnalyticsProcessor", "AmazonTranscribeProcessor", "KinesisDataStreamSink", "LambdaFunctionSink", "SqsQueueSink", "SnsTopicSink", "S3RecordingSink"
+    #   resp.media_insights_pipeline_configuration.elements[0].type #=> String, one of "AmazonTranscribeCallAnalyticsProcessor", "VoiceAnalyticsProcessor", "AmazonTranscribeProcessor", "KinesisDataStreamSink", "LambdaFunctionSink", "SqsQueueSink", "SnsTopicSink", "S3RecordingSink", "VoiceEnhancementSink"
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR"
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.vocabulary_name #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.vocabulary_filter_name #=> String
@@ -1321,6 +1328,7 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_insights_pipeline_configuration.elements[0].lambda_function_sink_configuration.insights_target #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].sqs_queue_sink_configuration.insights_target #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].sns_topic_sink_configuration.insights_target #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].voice_enhancement_sink_configuration.disabled #=> Boolean
     #   resp.media_insights_pipeline_configuration.media_insights_pipeline_configuration_id #=> String
     #   resp.media_insights_pipeline_configuration.created_timestamp #=> Time
     #   resp.media_insights_pipeline_configuration.updated_timestamp #=> Time
@@ -1355,7 +1363,7 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_pipeline.media_capture_pipeline.media_pipeline_arn #=> String
     #   resp.media_pipeline.media_capture_pipeline.source_type #=> String, one of "ChimeSdkMeeting"
     #   resp.media_pipeline.media_capture_pipeline.source_arn #=> String
-    #   resp.media_pipeline.media_capture_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused"
+    #   resp.media_pipeline.media_capture_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused", "NotStarted"
     #   resp.media_pipeline.media_capture_pipeline.sink_type #=> String, one of "S3Bucket"
     #   resp.media_pipeline.media_capture_pipeline.sink_arn #=> String
     #   resp.media_pipeline.media_capture_pipeline.created_timestamp #=> Time
@@ -1420,7 +1428,7 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_pipeline.media_live_connector_pipeline.sinks[0].rtmp_configuration.audio_sample_rate #=> String
     #   resp.media_pipeline.media_live_connector_pipeline.media_pipeline_id #=> String
     #   resp.media_pipeline.media_live_connector_pipeline.media_pipeline_arn #=> String
-    #   resp.media_pipeline.media_live_connector_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused"
+    #   resp.media_pipeline.media_live_connector_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused", "NotStarted"
     #   resp.media_pipeline.media_live_connector_pipeline.created_timestamp #=> Time
     #   resp.media_pipeline.media_live_connector_pipeline.updated_timestamp #=> Time
     #   resp.media_pipeline.media_concatenation_pipeline.media_pipeline_id #=> String
@@ -1438,13 +1446,13 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_pipeline.media_concatenation_pipeline.sinks #=> Array
     #   resp.media_pipeline.media_concatenation_pipeline.sinks[0].type #=> String, one of "S3Bucket"
     #   resp.media_pipeline.media_concatenation_pipeline.sinks[0].s3_bucket_sink_configuration.destination #=> String
-    #   resp.media_pipeline.media_concatenation_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused"
+    #   resp.media_pipeline.media_concatenation_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused", "NotStarted"
     #   resp.media_pipeline.media_concatenation_pipeline.created_timestamp #=> Time
     #   resp.media_pipeline.media_concatenation_pipeline.updated_timestamp #=> Time
     #   resp.media_pipeline.media_insights_pipeline.media_pipeline_id #=> String
     #   resp.media_pipeline.media_insights_pipeline.media_pipeline_arn #=> String
     #   resp.media_pipeline.media_insights_pipeline.media_insights_pipeline_configuration_arn #=> String
-    #   resp.media_pipeline.media_insights_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused"
+    #   resp.media_pipeline.media_insights_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused", "NotStarted"
     #   resp.media_pipeline.media_insights_pipeline.kinesis_video_stream_source_runtime_configuration.streams #=> Array
     #   resp.media_pipeline.media_insights_pipeline.kinesis_video_stream_source_runtime_configuration.streams[0].stream_arn #=> String
     #   resp.media_pipeline.media_insights_pipeline.kinesis_video_stream_source_runtime_configuration.streams[0].fragment_number #=> String
@@ -1464,6 +1472,9 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_pipeline.media_insights_pipeline.s3_recording_sink_runtime_configuration.destination #=> String
     #   resp.media_pipeline.media_insights_pipeline.s3_recording_sink_runtime_configuration.recording_file_format #=> String, one of "Wav", "Opus"
     #   resp.media_pipeline.media_insights_pipeline.created_timestamp #=> Time
+    #   resp.media_pipeline.media_insights_pipeline.element_statuses #=> Array
+    #   resp.media_pipeline.media_insights_pipeline.element_statuses[0].type #=> String, one of "AmazonTranscribeCallAnalyticsProcessor", "VoiceAnalyticsProcessor", "AmazonTranscribeProcessor", "KinesisDataStreamSink", "LambdaFunctionSink", "SqsQueueSink", "SnsTopicSink", "S3RecordingSink", "VoiceEnhancementSink"
+    #   resp.media_pipeline.media_insights_pipeline.element_statuses[0].status #=> String, one of "NotStarted", "NotSupported", "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/GetMediaPipeline AWS API Documentation
     #
@@ -1732,7 +1743,7 @@ module Aws::ChimeSDKMediaPipelines
     #     },
     #     elements: [ # required
     #       {
-    #         type: "AmazonTranscribeCallAnalyticsProcessor", # required, accepts AmazonTranscribeCallAnalyticsProcessor, VoiceAnalyticsProcessor, AmazonTranscribeProcessor, KinesisDataStreamSink, LambdaFunctionSink, SqsQueueSink, SnsTopicSink, S3RecordingSink
+    #         type: "AmazonTranscribeCallAnalyticsProcessor", # required, accepts AmazonTranscribeCallAnalyticsProcessor, VoiceAnalyticsProcessor, AmazonTranscribeProcessor, KinesisDataStreamSink, LambdaFunctionSink, SqsQueueSink, SnsTopicSink, S3RecordingSink, VoiceEnhancementSink
     #         amazon_transcribe_call_analytics_processor_configuration: {
     #           language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR
     #           vocabulary_name: "VocabularyName",
@@ -1792,6 +1803,9 @@ module Aws::ChimeSDKMediaPipelines
     #         sns_topic_sink_configuration: {
     #           insights_target: "Arn",
     #         },
+    #         voice_enhancement_sink_configuration: {
+    #           disabled: false,
+    #         },
     #       },
     #     ],
     #   })
@@ -1813,7 +1827,7 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].sentiment_configuration.time_period #=> Integer
     #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].issue_detection_configuration.rule_name #=> String
     #   resp.media_insights_pipeline_configuration.elements #=> Array
-    #   resp.media_insights_pipeline_configuration.elements[0].type #=> String, one of "AmazonTranscribeCallAnalyticsProcessor", "VoiceAnalyticsProcessor", "AmazonTranscribeProcessor", "KinesisDataStreamSink", "LambdaFunctionSink", "SqsQueueSink", "SnsTopicSink", "S3RecordingSink"
+    #   resp.media_insights_pipeline_configuration.elements[0].type #=> String, one of "AmazonTranscribeCallAnalyticsProcessor", "VoiceAnalyticsProcessor", "AmazonTranscribeProcessor", "KinesisDataStreamSink", "LambdaFunctionSink", "SqsQueueSink", "SnsTopicSink", "S3RecordingSink", "VoiceEnhancementSink"
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR"
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.vocabulary_name #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.vocabulary_filter_name #=> String
@@ -1856,6 +1870,7 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_insights_pipeline_configuration.elements[0].lambda_function_sink_configuration.insights_target #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].sqs_queue_sink_configuration.insights_target #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].sns_topic_sink_configuration.insights_target #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].voice_enhancement_sink_configuration.disabled #=> Boolean
     #   resp.media_insights_pipeline_configuration.media_insights_pipeline_configuration_id #=> String
     #   resp.media_insights_pipeline_configuration.created_timestamp #=> Time
     #   resp.media_insights_pipeline_configuration.updated_timestamp #=> Time
@@ -1909,7 +1924,7 @@ module Aws::ChimeSDKMediaPipelines
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmediapipelines'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

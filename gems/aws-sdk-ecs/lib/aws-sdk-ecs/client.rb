@@ -1913,13 +1913,13 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_account_setting({
-    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod
     #     principal_arn: "String",
     #   })
     #
     # @example Response structure
     #
-    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization"
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod"
     #   resp.setting.value #=> String
     #   resp.setting.principal_arn #=> String
     #
@@ -4579,7 +4579,7 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_account_settings({
-    #     name: "serviceLongArnFormat", # accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization
+    #     name: "serviceLongArnFormat", # accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod
     #     value: "String",
     #     principal_arn: "String",
     #     effective_settings: false,
@@ -4590,7 +4590,7 @@ module Aws::ECS
     # @example Response structure
     #
     #   resp.settings #=> Array
-    #   resp.settings[0].name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization"
+    #   resp.settings[0].name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod"
     #   resp.settings[0].value #=> String
     #   resp.settings[0].principal_arn #=> String
     #   resp.next_token #=> String
@@ -5457,25 +5457,24 @@ module Aws::ECS
     # account settings. For more information, see [Account Settings][1] in
     # the *Amazon Elastic Container Service Developer Guide*.
     #
-    # When `serviceLongArnFormat`, `taskLongArnFormat`, or
-    # `containerInstanceLongArnFormat` are specified, the Amazon Resource
-    # Name (ARN) and resource ID format of the resource type for a specified
-    # user, role, or the root user for an account is affected. The opt-in
-    # and opt-out account setting must be set for each Amazon ECS resource
-    # separately. The ARN and resource ID format of a resource is defined by
-    # the opt-in status of the user or role that created the resource. You
-    # must turn on this setting to use Amazon ECS features such as resource
-    # tagging.
+    # When you specify `serviceLongArnFormat`, `taskLongArnFormat`, or
+    # `containerInstanceLongArnFormat`, the Amazon Resource Name (ARN) and
+    # resource ID format of the resource type for a specified user, role, or
+    # the root user for an account is affected. The opt-in and opt-out
+    # account setting must be set for each Amazon ECS resource separately.
+    # The ARN and resource ID format of a resource is defined by the opt-in
+    # status of the user or role that created the resource. You must turn on
+    # this setting to use Amazon ECS features such as resource tagging.
     #
-    # When `awsvpcTrunking` is specified, the elastic network interface
-    # (ENI) limit for any new container instances that support the feature
-    # is changed. If `awsvpcTrunking` is turned on, any new container
-    # instances that support the feature are launched have the increased ENI
-    # limits available to them. For more information, see [Elastic Network
+    # When you specify `awsvpcTrunking`, the elastic network interface (ENI)
+    # limit for any new container instances that support the feature is
+    # changed. If `awsvpcTrunking` is turned on, any new container instances
+    # that support the feature are launched have the increased ENI limits
+    # available to them. For more information, see [Elastic Network
     # Interface Trunking][2] in the *Amazon Elastic Container Service
     # Developer Guide*.
     #
-    # When `containerInsights` is specified, the default setting indicating
+    # When you specify `containerInsights`, the default setting indicating
     # whether Amazon Web Services CloudWatch Container Insights is turned on
     # for your clusters is changed. If `containerInsights` is turned on, any
     # new clusters that are created will have Container Insights turned on
@@ -5492,29 +5491,39 @@ module Aws::ECS
     # action. For more information, see [Grant permission to tag resources
     # on creation][4] in the *Amazon ECS Developer Guide*.
     #
+    # When Amazon Web Services determines that a security or infrastructure
+    # update is needed for an Amazon ECS task hosted on Fargate, the tasks
+    # need to be stopped and new tasks launched to replace them. Use
+    # `fargateTaskRetirementWaitPeriod` to configure the wait time to retire
+    # a Fargate task. For information about the Fargate tasks maintenance,
+    # see [Amazon Web Services Fargate task maintenance][5] in the *Amazon
+    # ECS Developer Guide*.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html
     # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-eni.html
     # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-container-insights.html
     # [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/supported-iam-actions-tagging.html
+    # [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-maintenance.html
     #
     # @option params [required, String] :name
     #   The Amazon ECS resource name for which to modify the account setting.
-    #   If `serviceLongArnFormat` is specified, the ARN for your Amazon ECS
-    #   services is affected. If `taskLongArnFormat` is specified, the ARN and
-    #   resource ID for your Amazon ECS tasks is affected. If
-    #   `containerInstanceLongArnFormat` is specified, the ARN and resource ID
-    #   for your Amazon ECS container instances is affected. If
-    #   `awsvpcTrunking` is specified, the elastic network interface (ENI)
-    #   limit for your Amazon ECS container instances is affected. If
-    #   `containerInsights` is specified, the default setting for Amazon Web
-    #   Services CloudWatch Container Insights for your clusters is affected.
-    #   If `fargateFIPSMode` is specified, Fargate FIPS 140 compliance is
-    #   affected. If `tagResourceAuthorization` is specified, the opt-in
-    #   option for tagging resources on creation is affected. For information
-    #   about the opt-in timeline, see [Tagging authorization timeline][1] in
-    #   the *Amazon ECS Developer Guide*.
+    #   If you specify `serviceLongArnFormat`, the ARN for your Amazon ECS
+    #   services is affected. If you specify `taskLongArnFormat`, the ARN and
+    #   resource ID for your Amazon ECS tasks is affected. If you specify
+    #   `containerInstanceLongArnFormat`, the ARN and resource ID for your
+    #   Amazon ECS container instances is affected. If you specify
+    #   `awsvpcTrunking`, the elastic network interface (ENI) limit for your
+    #   Amazon ECS container instances is affected. If you specify
+    #   `containerInsights`, the default setting for Amazon Web Services
+    #   CloudWatch Container Insights for your clusters is affected. If you
+    #   specify `fargateFIPSMode`, Fargate FIPS 140 compliance is affected. If
+    #   you specify `tagResourceAuthorization`, the opt-in option for tagging
+    #   resources on creation is affected. For information about the opt-in
+    #   timeline, see [Tagging authorization timeline][1] in the *Amazon ECS
+    #   Developer Guide*. If you specify `fargateTaskRetirementWaitPeriod`,
+    #   the wait time to retire a Fargate task is affected.
     #
     #
     #
@@ -5524,6 +5533,18 @@ module Aws::ECS
     #   The account setting value for the specified principal ARN. Accepted
     #   values are `enabled`, `disabled`, `on`, and `off`.
     #
+    #   When you specify `fargateTaskRetirementWaitPeriod` for the `name`, the
+    #   following are the valid values:
+    #
+    #   * `0` - immediately retire the tasks and patch Fargate
+    #
+    #     There is no advanced notification. Your tasks are retired
+    #     immediately, and Fargate is patched without any notification.
+    #
+    #   * `7` -wait 7 calendar days to retire the tasks and patch Fargate
+    #
+    #   * `14` - wait 14 calendar days to retire the tasks and patch Fargate
+    #
     # @option params [String] :principal_arn
     #   The ARN of the principal, which can be a user, role, or the root user.
     #   If you specify the root user, it modifies the account setting for all
@@ -5531,7 +5552,10 @@ module Aws::ECS
     #   explicitly overrides these settings. If this field is omitted, the
     #   setting is changed only for the authenticated user.
     #
-    #   <note markdown="1"> Federated users assume the account setting of the root user and can't
+    #   <note markdown="1"> You must use the root user when you set the Fargate wait time
+    #   (`fargateTaskRetirementWaitPeriod`).
+    #
+    #    Federated users assume the account setting of the root user and can't
     #   have explicit account settings set for them.
     #
     #    </note>
@@ -5585,14 +5609,14 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_account_setting({
-    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod
     #     value: "String", # required
     #     principal_arn: "String",
     #   })
     #
     # @example Response structure
     #
-    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization"
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod"
     #   resp.setting.value #=> String
     #   resp.setting.principal_arn #=> String
     #
@@ -5610,19 +5634,21 @@ module Aws::ECS
     # set on a per-Region basis.
     #
     # @option params [required, String] :name
-    #   The resource name for which to modify the account setting. If
-    #   `serviceLongArnFormat` is specified, the ARN for your Amazon ECS
-    #   services is affected. If `taskLongArnFormat` is specified, the ARN and
-    #   resource ID for your Amazon ECS tasks is affected. If
-    #   `containerInstanceLongArnFormat` is specified, the ARN and resource ID
-    #   for your Amazon ECS container instances is affected. If
-    #   `awsvpcTrunking` is specified, the ENI limit for your Amazon ECS
-    #   container instances is affected. If `containerInsights` is specified,
-    #   the default setting for Amazon Web Services CloudWatch Container
-    #   Insights for your clusters is affected. If `tagResourceAuthorization`
-    #   is specified, the opt-in option for tagging resources on creation is
-    #   affected. For information about the opt-in timeline, see [Tagging
-    #   authorization timeline][1] in the *Amazon ECS Developer Guide*.
+    #   The resource name for which to modify the account setting. If you
+    #   specify `serviceLongArnFormat`, the ARN for your Amazon ECS services
+    #   is affected. If you specify `taskLongArnFormat`, the ARN and resource
+    #   ID for your Amazon ECS tasks is affected. If you specify
+    #   `containerInstanceLongArnFormat`, the ARN and resource ID for your
+    #   Amazon ECS container instances is affected. If you specify
+    #   `awsvpcTrunking`, the ENI limit for your Amazon ECS container
+    #   instances is affected. If you specify `containerInsights`, the default
+    #   setting for Amazon Web Services CloudWatch Container Insights for your
+    #   clusters is affected. If you specify `tagResourceAuthorization`, the
+    #   opt-in option for tagging resources on creation is affected. For
+    #   information about the opt-in timeline, see [Tagging authorization
+    #   timeline][1] in the *Amazon ECS Developer Guide*. If you specify
+    #   `fargateTaskRetirementWaitPeriod`, the default wait time to retire a
+    #   Fargate task due to required maintenance is affected.
     #
     #   When you specify `fargateFIPSMode` for the `name` and `enabled` for
     #   the `value`, Fargate uses FIPS-140 compliant cryptographic algorithms
@@ -5631,14 +5657,35 @@ module Aws::ECS
     #   Processing Standard (FIPS) 140-2 compliance][2] in the *Amazon Elastic
     #   Container Service Developer Guide*.
     #
+    #   When Amazon Web Services determines that a security or infrastructure
+    #   update is needed for an Amazon ECS task hosted on Fargate, the tasks
+    #   need to be stopped and new tasks launched to replace them. Use
+    #   `fargateTaskRetirementWaitPeriod` to set the wait time to retire a
+    #   Fargate task to the default. For information about the Fargate tasks
+    #   maintenance, see [Amazon Web Services Fargate task maintenance][3] in
+    #   the *Amazon ECS Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#tag-resources
     #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-fips-compliance.html
+    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-maintenance.html
     #
     # @option params [required, String] :value
     #   The account setting value for the specified principal ARN. Accepted
     #   values are `enabled`, `disabled`, `on`, and `off`.
+    #
+    #   When you specify `fargateTaskRetirementWaitPeriod` for the `name`, the
+    #   following are the valid values:
+    #
+    #   * `0` - immediately retire the tasks and patch Fargate
+    #
+    #     There is no advanced notification. Your tasks are retired
+    #     immediately, and Fargate is patched without any notification.
+    #
+    #   * `7` -wait 7 calendar days to retire the tasks and patch Fargate
+    #
+    #   * `14` - wait 14 calendar days to retire the tasks and patch Fargate
     #
     # @return [Types::PutAccountSettingDefaultResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5668,13 +5715,13 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_account_setting_default({
-    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod
     #     value: "String", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization"
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod"
     #   resp.setting.value #=> String
     #   resp.setting.principal_arn #=> String
     #
@@ -6306,20 +6353,33 @@ module Aws::ECS
     #
     # @option params [String] :pid_mode
     #   The process namespace to use for the containers in the task. The valid
-    #   values are `host` or `task`. If `host` is specified, then all
-    #   containers within the tasks that specified the `host` PID mode on the
-    #   same container instance share the same process namespace with the host
-    #   Amazon EC2 instance. If `task` is specified, all containers within the
-    #   specified task share the same process namespace. If no value is
-    #   specified, the default is a private namespace. For more information,
-    #   see [PID settings][1] in the *Docker run reference*.
+    #   values are `host` or `task`. On Fargate for Linux containers, the only
+    #   valid value is `task`. For example, monitoring sidecars might need
+    #   `pidMode` to access information about other containers running in the
+    #   same task.
     #
-    #   If the `host` PID mode is used, be aware that there is a heightened
-    #   risk of undesired process namespace expose. For more information, see
+    #   If `host` is specified, all containers within the tasks that specified
+    #   the `host` PID mode on the same container instance share the same
+    #   process namespace with the host Amazon EC2 instance.
+    #
+    #   If `task` is specified, all containers within the specified task share
+    #   the same process namespace.
+    #
+    #   If no value is specified, the default is a private namespace for each
+    #   container. For more information, see [PID settings][1] in the *Docker
+    #   run reference*.
+    #
+    #   If the `host` PID mode is used, there's a heightened risk of
+    #   undesired process namespace exposure. For more information, see
     #   [Docker security][2].
     #
-    #   <note markdown="1"> This parameter is not supported for Windows containers or tasks run on
-    #   Fargate.
+    #   <note markdown="1"> This parameter is not supported for Windows containers.
+    #
+    #    </note>
+    #
+    #   <note markdown="1"> This parameter is only supported for tasks that are hosted on Fargate
+    #   if the tasks are using platform version `1.4.0` or later (Linux). This
+    #   isn't supported for Windows containers on Fargate.
     #
     #    </note>
     #
@@ -9748,7 +9808,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.127.0'
+      context[:gem_version] = '1.128.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

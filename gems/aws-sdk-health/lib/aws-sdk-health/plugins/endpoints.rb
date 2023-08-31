@@ -64,6 +64,8 @@ module Aws::Health
             Aws::Health::Endpoints::DescribeAffectedEntitiesForOrganization.build(context)
           when :describe_entity_aggregates
             Aws::Health::Endpoints::DescribeEntityAggregates.build(context)
+          when :describe_entity_aggregates_for_organization
+            Aws::Health::Endpoints::DescribeEntityAggregatesForOrganization.build(context)
           when :describe_event_aggregates
             Aws::Health::Endpoints::DescribeEventAggregates.build(context)
           when :describe_event_details

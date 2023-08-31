@@ -135,9 +135,12 @@ module Aws::ChimeSDKMediaPipelines
     MediaInsightsPipelineConfigurationNameString = Shapes::StringShape.new(name: 'MediaInsightsPipelineConfigurationNameString')
     MediaInsightsPipelineConfigurationSummary = Shapes::StructureShape.new(name: 'MediaInsightsPipelineConfigurationSummary')
     MediaInsightsPipelineConfigurationSummaryList = Shapes::ListShape.new(name: 'MediaInsightsPipelineConfigurationSummaryList')
+    MediaInsightsPipelineElementStatus = Shapes::StructureShape.new(name: 'MediaInsightsPipelineElementStatus')
+    MediaInsightsPipelineElementStatuses = Shapes::ListShape.new(name: 'MediaInsightsPipelineElementStatuses')
     MediaInsightsRuntimeMetadata = Shapes::MapShape.new(name: 'MediaInsightsRuntimeMetadata')
     MediaLiveConnectorPipeline = Shapes::StructureShape.new(name: 'MediaLiveConnectorPipeline')
     MediaPipeline = Shapes::StructureShape.new(name: 'MediaPipeline')
+    MediaPipelineElementStatus = Shapes::StringShape.new(name: 'MediaPipelineElementStatus')
     MediaPipelineList = Shapes::ListShape.new(name: 'MediaPipelineList')
     MediaPipelineSinkType = Shapes::StringShape.new(name: 'MediaPipelineSinkType')
     MediaPipelineSourceType = Shapes::StringShape.new(name: 'MediaPipelineSourceType')
@@ -217,6 +220,7 @@ module Aws::ChimeSDKMediaPipelines
     VocabularyNames = Shapes::StringShape.new(name: 'VocabularyNames')
     VoiceAnalyticsConfigurationStatus = Shapes::StringShape.new(name: 'VoiceAnalyticsConfigurationStatus')
     VoiceAnalyticsProcessorConfiguration = Shapes::StructureShape.new(name: 'VoiceAnalyticsProcessorConfiguration')
+    VoiceEnhancementSinkConfiguration = Shapes::StructureShape.new(name: 'VoiceEnhancementSinkConfiguration')
 
     ActiveSpeakerOnlyConfiguration.add_member(:active_speaker_position, Shapes::ShapeRef.new(shape: ActiveSpeakerPosition, location_name: "ActiveSpeakerPosition"))
     ActiveSpeakerOnlyConfiguration.struct_class = Types::ActiveSpeakerOnlyConfiguration
@@ -557,6 +561,7 @@ module Aws::ChimeSDKMediaPipelines
     MediaInsightsPipeline.add_member(:kinesis_video_stream_recording_source_runtime_configuration, Shapes::ShapeRef.new(shape: KinesisVideoStreamRecordingSourceRuntimeConfiguration, location_name: "KinesisVideoStreamRecordingSourceRuntimeConfiguration"))
     MediaInsightsPipeline.add_member(:s3_recording_sink_runtime_configuration, Shapes::ShapeRef.new(shape: S3RecordingSinkRuntimeConfiguration, location_name: "S3RecordingSinkRuntimeConfiguration"))
     MediaInsightsPipeline.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
+    MediaInsightsPipeline.add_member(:element_statuses, Shapes::ShapeRef.new(shape: MediaInsightsPipelineElementStatuses, location_name: "ElementStatuses"))
     MediaInsightsPipeline.struct_class = Types::MediaInsightsPipeline
 
     MediaInsightsPipelineConfiguration.add_member(:media_insights_pipeline_configuration_name, Shapes::ShapeRef.new(shape: MediaInsightsPipelineConfigurationNameString, location_name: "MediaInsightsPipelineConfigurationName"))
@@ -578,6 +583,7 @@ module Aws::ChimeSDKMediaPipelines
     MediaInsightsPipelineConfigurationElement.add_member(:lambda_function_sink_configuration, Shapes::ShapeRef.new(shape: LambdaFunctionSinkConfiguration, location_name: "LambdaFunctionSinkConfiguration"))
     MediaInsightsPipelineConfigurationElement.add_member(:sqs_queue_sink_configuration, Shapes::ShapeRef.new(shape: SqsQueueSinkConfiguration, location_name: "SqsQueueSinkConfiguration"))
     MediaInsightsPipelineConfigurationElement.add_member(:sns_topic_sink_configuration, Shapes::ShapeRef.new(shape: SnsTopicSinkConfiguration, location_name: "SnsTopicSinkConfiguration"))
+    MediaInsightsPipelineConfigurationElement.add_member(:voice_enhancement_sink_configuration, Shapes::ShapeRef.new(shape: VoiceEnhancementSinkConfiguration, location_name: "VoiceEnhancementSinkConfiguration"))
     MediaInsightsPipelineConfigurationElement.struct_class = Types::MediaInsightsPipelineConfigurationElement
 
     MediaInsightsPipelineConfigurationElements.member = Shapes::ShapeRef.new(shape: MediaInsightsPipelineConfigurationElement)
@@ -588,6 +594,12 @@ module Aws::ChimeSDKMediaPipelines
     MediaInsightsPipelineConfigurationSummary.struct_class = Types::MediaInsightsPipelineConfigurationSummary
 
     MediaInsightsPipelineConfigurationSummaryList.member = Shapes::ShapeRef.new(shape: MediaInsightsPipelineConfigurationSummary)
+
+    MediaInsightsPipelineElementStatus.add_member(:type, Shapes::ShapeRef.new(shape: MediaInsightsPipelineConfigurationElementType, location_name: "Type"))
+    MediaInsightsPipelineElementStatus.add_member(:status, Shapes::ShapeRef.new(shape: MediaPipelineElementStatus, location_name: "Status"))
+    MediaInsightsPipelineElementStatus.struct_class = Types::MediaInsightsPipelineElementStatus
+
+    MediaInsightsPipelineElementStatuses.member = Shapes::ShapeRef.new(shape: MediaInsightsPipelineElementStatus)
 
     MediaInsightsRuntimeMetadata.key = Shapes::ShapeRef.new(shape: NonEmptyString)
     MediaInsightsRuntimeMetadata.value = Shapes::ShapeRef.new(shape: String)
@@ -774,6 +786,9 @@ module Aws::ChimeSDKMediaPipelines
     VoiceAnalyticsProcessorConfiguration.add_member(:speaker_search_status, Shapes::ShapeRef.new(shape: VoiceAnalyticsConfigurationStatus, location_name: "SpeakerSearchStatus"))
     VoiceAnalyticsProcessorConfiguration.add_member(:voice_tone_analysis_status, Shapes::ShapeRef.new(shape: VoiceAnalyticsConfigurationStatus, location_name: "VoiceToneAnalysisStatus"))
     VoiceAnalyticsProcessorConfiguration.struct_class = Types::VoiceAnalyticsProcessorConfiguration
+
+    VoiceEnhancementSinkConfiguration.add_member(:disabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Disabled"))
+    VoiceEnhancementSinkConfiguration.struct_class = Types::VoiceEnhancementSinkConfiguration
 
 
     # @api private

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2023-08-31)
+------------------
+
+* Feature - Adds new API DescribeEntityAggregatesForOrganization that retrieves entity aggregates across your organization. Also adds support for resource status filtering in DescribeAffectedEntitiesForOrganization, resource status aggregates in the DescribeEntityAggregates response, and new resource statuses.
+
 1.55.0 (2023-07-11)
 ------------------
 

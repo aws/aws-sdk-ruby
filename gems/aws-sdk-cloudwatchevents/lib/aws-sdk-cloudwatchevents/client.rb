@@ -2602,10 +2602,10 @@ module Aws::CloudWatchEvents
     #
     # * Step Functions state machines
     #
-    # Creating rules with built-in targets is supported only in the
-    # Management Console. The built-in targets are `EC2 CreateSnapshot API
-    # call`, `EC2 RebootInstances API call`, `EC2 StopInstances API call`,
-    # and `EC2 TerminateInstances API call`.
+    # Creating rules with built-in targets is supported only in the Amazon
+    # Web Services Management Console. The built-in targets are `EC2
+    # CreateSnapshot API call`, `EC2 RebootInstances API call`, `EC2
+    # StopInstances API call`, and `EC2 TerminateInstances API call`.
     #
     # For some target types, `PutTargets` provides target-specific
     # parameters. If the target is a Kinesis data stream, you can optionally
@@ -3374,7 +3374,7 @@ module Aws::CloudWatchEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchevents'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -131,7 +131,7 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] managed_scaling
-    #   he managed scaling settings for the Auto Scaling group capacity
+    #   The managed scaling settings for the Auto Scaling group capacity
     #   provider.
     #   @return [Types::ManagedScaling]
     #
@@ -1805,7 +1805,9 @@ module Aws::ECS
     #   A list of namespaced kernel parameters to set in the container. This
     #   parameter maps to `Sysctls` in the [Create a container][1] section
     #   of the [Docker Remote API][2] and the `--sysctl` option to [docker
-    #   run][3].
+    #   run][3]. For example, you can configure
+    #   `net.ipv4.tcp_keepalive_time` setting to maintain longer lived
+    #   connections.
     #
     #   <note markdown="1"> We don't recommended that you specify network-related
     #   `systemControls` parameters for multiple containers in a single task
@@ -1815,6 +1817,16 @@ module Aws::ECS
     #   effect. For tasks that use the `host` network mode, it changes the
     #   container instance's namespaced kernel parameters as well as the
     #   containers.
+    #
+    #    </note>
+    #
+    #   <note markdown="1"> This parameter is not supported for Windows containers.
+    #
+    #    </note>
+    #
+    #   <note markdown="1"> This parameter is only supported for tasks that are hosted on
+    #   Fargate if the tasks are using platform version `1.4.0` or later
+    #   (Linux). This isn't supported for Windows containers on Fargate.
     #
     #    </note>
     #
@@ -2107,8 +2119,8 @@ module Aws::ECS
     #   @return [Boolean]
     #
     # @!attribute [rw] running_tasks_count
-    #   The number of tasks on the container instance that are in the
-    #   `RUNNING` status.
+    #   The number of tasks on the container instance that have a desired
+    #   status (`desiredStatus`) of `RUNNING`.
     #   @return [Integer]
     #
     # @!attribute [rw] pending_tasks_count
@@ -7234,20 +7246,22 @@ module Aws::ECS
     end
 
     # @!attribute [rw] name
-    #   The resource name for which to modify the account setting. If
-    #   `serviceLongArnFormat` is specified, the ARN for your Amazon ECS
-    #   services is affected. If `taskLongArnFormat` is specified, the ARN
-    #   and resource ID for your Amazon ECS tasks is affected. If
-    #   `containerInstanceLongArnFormat` is specified, the ARN and resource
-    #   ID for your Amazon ECS container instances is affected. If
-    #   `awsvpcTrunking` is specified, the ENI limit for your Amazon ECS
-    #   container instances is affected. If `containerInsights` is
-    #   specified, the default setting for Amazon Web Services CloudWatch
-    #   Container Insights for your clusters is affected. If
-    #   `tagResourceAuthorization` is specified, the opt-in option for
-    #   tagging resources on creation is affected. For information about the
-    #   opt-in timeline, see [Tagging authorization timeline][1] in the
-    #   *Amazon ECS Developer Guide*.
+    #   The resource name for which to modify the account setting. If you
+    #   specify `serviceLongArnFormat`, the ARN for your Amazon ECS services
+    #   is affected. If you specify `taskLongArnFormat`, the ARN and
+    #   resource ID for your Amazon ECS tasks is affected. If you specify
+    #   `containerInstanceLongArnFormat`, the ARN and resource ID for your
+    #   Amazon ECS container instances is affected. If you specify
+    #   `awsvpcTrunking`, the ENI limit for your Amazon ECS container
+    #   instances is affected. If you specify `containerInsights`, the
+    #   default setting for Amazon Web Services CloudWatch Container
+    #   Insights for your clusters is affected. If you specify
+    #   `tagResourceAuthorization`, the opt-in option for tagging resources
+    #   on creation is affected. For information about the opt-in timeline,
+    #   see [Tagging authorization timeline][1] in the *Amazon ECS Developer
+    #   Guide*. If you specify `fargateTaskRetirementWaitPeriod`, the
+    #   default wait time to retire a Fargate task due to required
+    #   maintenance is affected.
     #
     #   When you specify `fargateFIPSMode` for the `name` and `enabled` for
     #   the `value`, Fargate uses FIPS-140 compliant cryptographic
@@ -7256,15 +7270,36 @@ module Aws::ECS
     #   Information Processing Standard (FIPS) 140-2 compliance][2] in the
     #   *Amazon Elastic Container Service Developer Guide*.
     #
+    #   When Amazon Web Services determines that a security or
+    #   infrastructure update is needed for an Amazon ECS task hosted on
+    #   Fargate, the tasks need to be stopped and new tasks launched to
+    #   replace them. Use `fargateTaskRetirementWaitPeriod` to set the wait
+    #   time to retire a Fargate task to the default. For information about
+    #   the Fargate tasks maintenance, see [Amazon Web Services Fargate task
+    #   maintenance][3] in the *Amazon ECS Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#tag-resources
     #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-fips-compliance.html
+    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-maintenance.html
     #   @return [String]
     #
     # @!attribute [rw] value
     #   The account setting value for the specified principal ARN. Accepted
     #   values are `enabled`, `disabled`, `on`, and `off`.
+    #
+    #   When you specify `fargateTaskRetirementWaitPeriod` for the `name`,
+    #   the following are the valid values:
+    #
+    #   * `0` - immediately retire the tasks and patch Fargate
+    #
+    #     There is no advanced notification. Your tasks are retired
+    #     immediately, and Fargate is patched without any notification.
+    #
+    #   * `7` -wait 7 calendar days to retire the tasks and patch Fargate
+    #
+    #   * `14` - wait 14 calendar days to retire the tasks and patch Fargate
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAccountSettingDefaultRequest AWS API Documentation
@@ -7290,20 +7325,22 @@ module Aws::ECS
 
     # @!attribute [rw] name
     #   The Amazon ECS resource name for which to modify the account
-    #   setting. If `serviceLongArnFormat` is specified, the ARN for your
-    #   Amazon ECS services is affected. If `taskLongArnFormat` is
-    #   specified, the ARN and resource ID for your Amazon ECS tasks is
-    #   affected. If `containerInstanceLongArnFormat` is specified, the ARN
-    #   and resource ID for your Amazon ECS container instances is affected.
-    #   If `awsvpcTrunking` is specified, the elastic network interface
-    #   (ENI) limit for your Amazon ECS container instances is affected. If
-    #   `containerInsights` is specified, the default setting for Amazon Web
-    #   Services CloudWatch Container Insights for your clusters is
-    #   affected. If `fargateFIPSMode` is specified, Fargate FIPS 140
-    #   compliance is affected. If `tagResourceAuthorization` is specified,
-    #   the opt-in option for tagging resources on creation is affected. For
-    #   information about the opt-in timeline, see [Tagging authorization
-    #   timeline][1] in the *Amazon ECS Developer Guide*.
+    #   setting. If you specify `serviceLongArnFormat`, the ARN for your
+    #   Amazon ECS services is affected. If you specify `taskLongArnFormat`,
+    #   the ARN and resource ID for your Amazon ECS tasks is affected. If
+    #   you specify `containerInstanceLongArnFormat`, the ARN and resource
+    #   ID for your Amazon ECS container instances is affected. If you
+    #   specify `awsvpcTrunking`, the elastic network interface (ENI) limit
+    #   for your Amazon ECS container instances is affected. If you specify
+    #   `containerInsights`, the default setting for Amazon Web Services
+    #   CloudWatch Container Insights for your clusters is affected. If you
+    #   specify `fargateFIPSMode`, Fargate FIPS 140 compliance is affected.
+    #   If you specify `tagResourceAuthorization`, the opt-in option for
+    #   tagging resources on creation is affected. For information about the
+    #   opt-in timeline, see [Tagging authorization timeline][1] in the
+    #   *Amazon ECS Developer Guide*. If you specify
+    #   `fargateTaskRetirementWaitPeriod`, the wait time to retire a Fargate
+    #   task is affected.
     #
     #
     #
@@ -7313,6 +7350,18 @@ module Aws::ECS
     # @!attribute [rw] value
     #   The account setting value for the specified principal ARN. Accepted
     #   values are `enabled`, `disabled`, `on`, and `off`.
+    #
+    #   When you specify `fargateTaskRetirementWaitPeriod` for the `name`,
+    #   the following are the valid values:
+    #
+    #   * `0` - immediately retire the tasks and patch Fargate
+    #
+    #     There is no advanced notification. Your tasks are retired
+    #     immediately, and Fargate is patched without any notification.
+    #
+    #   * `7` -wait 7 calendar days to retire the tasks and patch Fargate
+    #
+    #   * `14` - wait 14 calendar days to retire the tasks and patch Fargate
     #   @return [String]
     #
     # @!attribute [rw] principal_arn
@@ -7322,7 +7371,10 @@ module Aws::ECS
     #   or role explicitly overrides these settings. If this field is
     #   omitted, the setting is changed only for the authenticated user.
     #
-    #   <note markdown="1"> Federated users assume the account setting of the root user and
+    #   <note markdown="1"> You must use the root user when you set the Fargate wait time
+    #   (`fargateTaskRetirementWaitPeriod`).
+    #
+    #    Federated users assume the account setting of the root user and
     #   can't have explicit account settings set for them.
     #
     #    </note>
@@ -7788,20 +7840,33 @@ module Aws::ECS
     #
     # @!attribute [rw] pid_mode
     #   The process namespace to use for the containers in the task. The
-    #   valid values are `host` or `task`. If `host` is specified, then all
-    #   containers within the tasks that specified the `host` PID mode on
-    #   the same container instance share the same process namespace with
-    #   the host Amazon EC2 instance. If `task` is specified, all containers
-    #   within the specified task share the same process namespace. If no
-    #   value is specified, the default is a private namespace. For more
-    #   information, see [PID settings][1] in the *Docker run reference*.
+    #   valid values are `host` or `task`. On Fargate for Linux containers,
+    #   the only valid value is `task`. For example, monitoring sidecars
+    #   might need `pidMode` to access information about other containers
+    #   running in the same task.
     #
-    #   If the `host` PID mode is used, be aware that there is a heightened
-    #   risk of undesired process namespace expose. For more information,
-    #   see [Docker security][2].
+    #   If `host` is specified, all containers within the tasks that
+    #   specified the `host` PID mode on the same container instance share
+    #   the same process namespace with the host Amazon EC2 instance.
     #
-    #   <note markdown="1"> This parameter is not supported for Windows containers or tasks run
-    #   on Fargate.
+    #   If `task` is specified, all containers within the specified task
+    #   share the same process namespace.
+    #
+    #   If no value is specified, the default is a private namespace for
+    #   each container. For more information, see [PID settings][1] in the
+    #   *Docker run reference*.
+    #
+    #   If the `host` PID mode is used, there's a heightened risk of
+    #   undesired process namespace exposure. For more information, see
+    #   [Docker security][2].
+    #
+    #   <note markdown="1"> This parameter is not supported for Windows containers.
+    #
+    #    </note>
+    #
+    #   <note markdown="1"> This parameter is only supported for tasks that are hosted on
+    #   Fargate if the tasks are using platform version `1.4.0` or later
+    #   (Linux). This isn't supported for Windows containers on Fargate.
     #
     #    </note>
     #
@@ -9562,8 +9627,16 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value for the namespaced kernel parameter that's specified in
-    #   `namespace`.
+    #   The namespaced kernel parameter to set a `value` for.
+    #
+    #   Valid IPC namespace values: `"kernel.msgmax" | "kernel.msgmnb" |
+    #   "kernel.msgmni" | "kernel.sem" | "kernel.shmall" | "kernel.shmmax" |
+    #   "kernel.shmmni" | "kernel.shm_rmid_forced"`, and `Sysctls` that
+    #   start with `"fs.mqueue.*"`
+    #
+    #   Valid network namespace values: `Sysctls` that start with `"net.*"`
+    #
+    #   All of these values are supported by Fargate.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SystemControl AWS API Documentation
@@ -10366,20 +10439,33 @@ module Aws::ECS
     #
     # @!attribute [rw] pid_mode
     #   The process namespace to use for the containers in the task. The
-    #   valid values are `host` or `task`. If `host` is specified, then all
-    #   containers within the tasks that specified the `host` PID mode on
-    #   the same container instance share the same process namespace with
-    #   the host Amazon EC2 instance. If `task` is specified, all containers
-    #   within the specified task share the same process namespace. If no
-    #   value is specified, the default is a private namespace. For more
-    #   information, see [PID settings][1] in the *Docker run reference*.
+    #   valid values are `host` or `task`. On Fargate for Linux containers,
+    #   the only valid value is `task`. For example, monitoring sidecars
+    #   might need `pidMode` to access information about other containers
+    #   running in the same task.
     #
-    #   If the `host` PID mode is used, be aware that there is a heightened
-    #   risk of undesired process namespace expose. For more information,
-    #   see [Docker security][2].
+    #   If `host` is specified, all containers within the tasks that
+    #   specified the `host` PID mode on the same container instance share
+    #   the same process namespace with the host Amazon EC2 instance.
     #
-    #   <note markdown="1"> This parameter is not supported for Windows containers or tasks run
-    #   on Fargate.
+    #   If `task` is specified, all containers within the specified task
+    #   share the same process namespace.
+    #
+    #   If no value is specified, the default is a private namespace for
+    #   each container. For more information, see [PID settings][1] in the
+    #   *Docker run reference*.
+    #
+    #   If the `host` PID mode is used, there's a heightened risk of
+    #   undesired process namespace exposure. For more information, see
+    #   [Docker security][2].
+    #
+    #   <note markdown="1"> This parameter is not supported for Windows containers.
+    #
+    #    </note>
+    #
+    #   <note markdown="1"> This parameter is only supported for tasks that are hosted on
+    #   Fargate if the tasks are using platform version `1.4.0` or later
+    #   (Linux). This isn't supported for Windows containers on Fargate.
     #
     #    </note>
     #

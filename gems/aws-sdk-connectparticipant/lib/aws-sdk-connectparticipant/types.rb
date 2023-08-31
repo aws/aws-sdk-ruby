@@ -132,8 +132,9 @@ module Aws::ConnectParticipant
     end
 
     # @!attribute [rw] type
-    #   Type of connection information required. This can be omitted if
-    #   `ConnectParticipant` is `true`.
+    #   Type of connection information required. If you need
+    #   `CONNECTION_CREDENTIALS` along with marking participant as
+    #   connected, pass `CONNECTION_CREDENTIALS` in `Type`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] participant_token
@@ -177,6 +178,37 @@ module Aws::ConnectParticipant
     class CreateParticipantConnectionResponse < Struct.new(
       :websocket,
       :connection_credentials)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] view_token
+    #   An encrypted token originating from the interactive message of a
+    #   ShowView block operation. Represents the desired view.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_token
+    #   The connection token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/DescribeViewRequest AWS API Documentation
+    #
+    class DescribeViewRequest < Struct.new(
+      :view_token,
+      :connection_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] view
+    #   A view resource object. Contains metadata and content necessary to
+    #   render the view.
+    #   @return [Types::View]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/DescribeViewResponse AWS API Documentation
+    #
+    class DescribeViewResponse < Struct.new(
+      :view)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -463,6 +495,29 @@ module Aws::ConnectParticipant
       :delivered_timestamp,
       :read_timestamp,
       :recipient_participant_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The resource was not found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The identifier of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of Amazon Connect resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message,
+      :resource_id,
+      :resource_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -770,6 +825,68 @@ module Aws::ConnectParticipant
     class ValidationException < Struct.new(
       :message)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A view resource object. Contains metadata and content necessary to
+    # render the view.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the view.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the view.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the view.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The current version of the view.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] content
+    #   View content containing all content necessary to render a view
+    #   except for runtime input data.
+    #   @return [Types::ViewContent]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/View AWS API Documentation
+    #
+    class View < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :version,
+      :content)
+      SENSITIVE = [:name]
+      include Aws::Structure
+    end
+
+    # View content containing all content necessary to render a view except
+    # for runtime input data.
+    #
+    # @!attribute [rw] input_schema
+    #   The schema representing the input data that the view template must
+    #   be supplied to render.
+    #   @return [String]
+    #
+    # @!attribute [rw] template
+    #   The view template representing the structure of the view.
+    #   @return [String]
+    #
+    # @!attribute [rw] actions
+    #   A list of actions possible from the view
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/ViewContent AWS API Documentation
+    #
+    class ViewContent < Struct.new(
+      :input_schema,
+      :template,
+      :actions)
+      SENSITIVE = [:input_schema, :template]
       include Aws::Structure
     end
 

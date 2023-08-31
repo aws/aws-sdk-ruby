@@ -91,10 +91,6 @@ module Aws::KafkaConnect
     ScaleOutPolicyUpdate = Shapes::StructureShape.new(name: 'ScaleOutPolicyUpdate')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     StateDescription = Shapes::StructureShape.new(name: 'StateDescription')
-    SyntheticCreateConnectorRequest__mapOf__string = Shapes::MapShape.new(name: 'SyntheticCreateConnectorRequest__mapOf__string')
-    SyntheticCreateWorkerConfigurationRequest__string = Shapes::StringShape.new(name: 'SyntheticCreateWorkerConfigurationRequest__string')
-    SyntheticDescribeConnectorResponse__mapOf__string = Shapes::MapShape.new(name: 'SyntheticDescribeConnectorResponse__mapOf__string')
-    SyntheticWorkerConfigurationRevisionDescription__string = Shapes::StringShape.new(name: 'SyntheticWorkerConfigurationRevisionDescription__string')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
     UpdateConnectorRequest = Shapes::StructureShape.new(name: 'UpdateConnectorRequest')
@@ -121,6 +117,8 @@ module Aws::KafkaConnect
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __long = Shapes::IntegerShape.new(name: '__long')
     __longMin1 = Shapes::IntegerShape.new(name: '__longMin1')
+    __sensitiveString = Shapes::StringShape.new(name: '__sensitiveString')
+    __sensitive__mapOf__string = Shapes::MapShape.new(name: '__sensitive__mapOf__string')
     __string = Shapes::StringShape.new(name: '__string')
     __stringMax1024 = Shapes::StringShape.new(name: '__stringMax1024')
     __stringMin1Max128 = Shapes::StringShape.new(name: '__stringMin1Max128')
@@ -199,7 +197,7 @@ module Aws::KafkaConnect
     ConnectorSummary.struct_class = Types::ConnectorSummary
 
     CreateConnectorRequest.add_member(:capacity, Shapes::ShapeRef.new(shape: Capacity, required: true, location_name: "capacity"))
-    CreateConnectorRequest.add_member(:connector_configuration, Shapes::ShapeRef.new(shape: SyntheticCreateConnectorRequest__mapOf__string, required: true, location_name: "connectorConfiguration"))
+    CreateConnectorRequest.add_member(:connector_configuration, Shapes::ShapeRef.new(shape: __sensitive__mapOf__string, required: true, location_name: "connectorConfiguration"))
     CreateConnectorRequest.add_member(:connector_description, Shapes::ShapeRef.new(shape: __stringMax1024, location_name: "connectorDescription"))
     CreateConnectorRequest.add_member(:connector_name, Shapes::ShapeRef.new(shape: __stringMin1Max128, required: true, location_name: "connectorName"))
     CreateConnectorRequest.add_member(:kafka_cluster, Shapes::ShapeRef.new(shape: KafkaCluster, required: true, location_name: "kafkaCluster"))
@@ -231,7 +229,7 @@ module Aws::KafkaConnect
 
     CreateWorkerConfigurationRequest.add_member(:description, Shapes::ShapeRef.new(shape: __stringMax1024, location_name: "description"))
     CreateWorkerConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max128, required: true, location_name: "name"))
-    CreateWorkerConfigurationRequest.add_member(:properties_file_content, Shapes::ShapeRef.new(shape: SyntheticCreateWorkerConfigurationRequest__string, required: true, location_name: "propertiesFileContent"))
+    CreateWorkerConfigurationRequest.add_member(:properties_file_content, Shapes::ShapeRef.new(shape: __sensitiveString, required: true, location_name: "propertiesFileContent"))
     CreateWorkerConfigurationRequest.struct_class = Types::CreateWorkerConfigurationRequest
 
     CreateWorkerConfigurationResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "creationTime"))
@@ -294,7 +292,7 @@ module Aws::KafkaConnect
 
     DescribeConnectorResponse.add_member(:capacity, Shapes::ShapeRef.new(shape: CapacityDescription, location_name: "capacity"))
     DescribeConnectorResponse.add_member(:connector_arn, Shapes::ShapeRef.new(shape: __string, location_name: "connectorArn"))
-    DescribeConnectorResponse.add_member(:connector_configuration, Shapes::ShapeRef.new(shape: SyntheticDescribeConnectorResponse__mapOf__string, location_name: "connectorConfiguration"))
+    DescribeConnectorResponse.add_member(:connector_configuration, Shapes::ShapeRef.new(shape: __sensitive__mapOf__string, location_name: "connectorConfiguration"))
     DescribeConnectorResponse.add_member(:connector_description, Shapes::ShapeRef.new(shape: __string, location_name: "connectorDescription"))
     DescribeConnectorResponse.add_member(:connector_name, Shapes::ShapeRef.new(shape: __string, location_name: "connectorName"))
     DescribeConnectorResponse.add_member(:connector_state, Shapes::ShapeRef.new(shape: ConnectorState, location_name: "connectorState"))
@@ -462,12 +460,6 @@ module Aws::KafkaConnect
     StateDescription.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     StateDescription.struct_class = Types::StateDescription
 
-    SyntheticCreateConnectorRequest__mapOf__string.key = Shapes::ShapeRef.new(shape: __string)
-    SyntheticCreateConnectorRequest__mapOf__string.value = Shapes::ShapeRef.new(shape: __string)
-
-    SyntheticDescribeConnectorResponse__mapOf__string.key = Shapes::ShapeRef.new(shape: __string)
-    SyntheticDescribeConnectorResponse__mapOf__string.value = Shapes::ShapeRef.new(shape: __string)
-
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
@@ -501,7 +493,7 @@ module Aws::KafkaConnect
 
     WorkerConfigurationRevisionDescription.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "creationTime"))
     WorkerConfigurationRevisionDescription.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
-    WorkerConfigurationRevisionDescription.add_member(:properties_file_content, Shapes::ShapeRef.new(shape: SyntheticWorkerConfigurationRevisionDescription__string, location_name: "propertiesFileContent"))
+    WorkerConfigurationRevisionDescription.add_member(:properties_file_content, Shapes::ShapeRef.new(shape: __sensitiveString, location_name: "propertiesFileContent"))
     WorkerConfigurationRevisionDescription.add_member(:revision, Shapes::ShapeRef.new(shape: __long, location_name: "revision"))
     WorkerConfigurationRevisionDescription.struct_class = Types::WorkerConfigurationRevisionDescription
 
@@ -538,6 +530,9 @@ module Aws::KafkaConnect
     __listOfWorkerConfigurationSummary.member = Shapes::ShapeRef.new(shape: WorkerConfigurationSummary)
 
     __listOf__string.member = Shapes::ShapeRef.new(shape: __string)
+
+    __sensitive__mapOf__string.key = Shapes::ShapeRef.new(shape: __string)
+    __sensitive__mapOf__string.value = Shapes::ShapeRef.new(shape: __string)
 
 
     # @api private

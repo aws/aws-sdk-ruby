@@ -177,7 +177,7 @@ module Aws::CustomerProfiles
     class AppflowIntegration < Struct.new(
       :flow_definition,
       :batches)
-      SENSITIVE = []
+      SENSITIVE = [:flow_definition]
       include Aws::Structure
     end
 
@@ -639,7 +639,7 @@ module Aws::CustomerProfiles
       :conditions,
       :statistic,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:attribute_details, :conditions, :statistic]
       include Aws::Structure
     end
 
@@ -696,7 +696,7 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:attribute_details, :conditions, :statistic]
       include Aws::Structure
     end
 
@@ -1078,7 +1078,7 @@ module Aws::CustomerProfiles
       :attributes,
       :party_type_string,
       :gender_string)
-      SENSITIVE = []
+      SENSITIVE = [:account_number, :additional_information, :party_type, :business_name, :first_name, :middle_name, :last_name, :birth_date, :gender, :phone_number, :mobile_phone_number, :home_phone_number, :business_phone_number, :email_address, :personal_email_address, :business_email_address, :address, :shipping_address, :mailing_address, :billing_address, :attributes, :party_type_string, :gender_string]
       include Aws::Structure
     end
 
@@ -1838,7 +1838,7 @@ module Aws::CustomerProfiles
       :conditions,
       :attribute_details,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:statistic, :conditions, :attribute_details]
       include Aws::Structure
     end
 
@@ -2370,7 +2370,7 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:description, :fields, :keys]
       include Aws::Structure
     end
 
@@ -2430,7 +2430,7 @@ module Aws::CustomerProfiles
       :source_last_updated_timestamp_format,
       :fields,
       :keys)
-      SENSITIVE = []
+      SENSITIVE = [:fields, :keys]
       include Aws::Structure
     end
 
@@ -3391,7 +3391,7 @@ module Aws::CustomerProfiles
     class ListProfileObjectTypesResponse < Struct.new(
       :items,
       :next_token)
-      SENSITIVE = []
+      SENSITIVE = [:items]
       include Aws::Structure
     end
 
@@ -3416,7 +3416,7 @@ module Aws::CustomerProfiles
       :object_type_name,
       :profile_object_unique_key,
       :object)
-      SENSITIVE = []
+      SENSITIVE = [:object]
       include Aws::Structure
     end
 
@@ -4085,7 +4085,7 @@ module Aws::CustomerProfiles
       :found_by_items,
       :party_type_string,
       :gender_string)
-      SENSITIVE = []
+      SENSITIVE = [:account_number, :additional_information, :party_type, :business_name, :first_name, :middle_name, :last_name, :birth_date, :gender, :phone_number, :mobile_phone_number, :home_phone_number, :business_phone_number, :email_address, :personal_email_address, :business_email_address, :address, :shipping_address, :mailing_address, :billing_address, :attributes, :party_type_string, :gender_string]
       include Aws::Structure
     end
 
@@ -4130,7 +4130,7 @@ module Aws::CustomerProfiles
       :tags,
       :flow_definition,
       :object_type_names)
-      SENSITIVE = []
+      SENSITIVE = [:flow_definition]
       include Aws::Structure
     end
 
@@ -4213,7 +4213,7 @@ module Aws::CustomerProfiles
       :object_type_name,
       :object,
       :domain_name)
-      SENSITIVE = []
+      SENSITIVE = [:object]
       include Aws::Structure
     end
 
@@ -4303,7 +4303,7 @@ module Aws::CustomerProfiles
       :fields,
       :keys,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:description, :fields, :keys]
       include Aws::Structure
     end
 
@@ -4384,7 +4384,7 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:description, :fields, :keys]
       include Aws::Structure
     end
 
@@ -5138,7 +5138,7 @@ module Aws::CustomerProfiles
       :display_name,
       :description,
       :conditions)
-      SENSITIVE = []
+      SENSITIVE = [:conditions]
       include Aws::Structure
     end
 
@@ -5195,7 +5195,7 @@ module Aws::CustomerProfiles
       :conditions,
       :attribute_details,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:statistic, :conditions, :attribute_details]
       include Aws::Structure
     end
 
@@ -5479,7 +5479,7 @@ module Aws::CustomerProfiles
       :attributes,
       :party_type_string,
       :gender_string)
-      SENSITIVE = []
+      SENSITIVE = [:additional_information, :account_number, :party_type, :business_name, :first_name, :middle_name, :last_name, :birth_date, :gender, :phone_number, :mobile_phone_number, :home_phone_number, :business_phone_number, :email_address, :personal_email_address, :business_email_address, :address, :shipping_address, :mailing_address, :billing_address, :attributes, :party_type_string, :gender_string]
       include Aws::Structure
     end
 

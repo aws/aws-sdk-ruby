@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2023-08-31)
+------------------
+
+* Feature - Deprecating CloudHSM Classic API Service.
+
 1.46.0 (2023-07-11)
 ------------------
 

@@ -13,6 +13,7 @@ module Aws::ConnectParticipant
 
     include Seahorse::Model
 
+    ARN = Shapes::StringShape.new(name: 'ARN')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     ArtifactId = Shapes::StringShape.new(name: 'ArtifactId')
     ArtifactStatus = Shapes::StringShape.new(name: 'ArtifactStatus')
@@ -37,6 +38,8 @@ module Aws::ConnectParticipant
     ContentType = Shapes::StringShape.new(name: 'ContentType')
     CreateParticipantConnectionRequest = Shapes::StructureShape.new(name: 'CreateParticipantConnectionRequest')
     CreateParticipantConnectionResponse = Shapes::StructureShape.new(name: 'CreateParticipantConnectionResponse')
+    DescribeViewRequest = Shapes::StructureShape.new(name: 'DescribeViewRequest')
+    DescribeViewResponse = Shapes::StructureShape.new(name: 'DescribeViewResponse')
     DisconnectParticipantRequest = Shapes::StructureShape.new(name: 'DisconnectParticipantRequest')
     DisconnectParticipantResponse = Shapes::StructureShape.new(name: 'DisconnectParticipantResponse')
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
@@ -62,6 +65,9 @@ module Aws::ConnectParticipant
     Reason = Shapes::StringShape.new(name: 'Reason')
     Receipt = Shapes::StructureShape.new(name: 'Receipt')
     Receipts = Shapes::ListShape.new(name: 'Receipts')
+    ResourceId = Shapes::StringShape.new(name: 'ResourceId')
+    ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ScanDirection = Shapes::StringShape.new(name: 'ScanDirection')
     SendEventRequest = Shapes::StructureShape.new(name: 'SendEventRequest')
     SendEventResponse = Shapes::StructureShape.new(name: 'SendEventResponse')
@@ -80,6 +86,16 @@ module Aws::ConnectParticipant
     UploadMetadataSignedHeadersValue = Shapes::StringShape.new(name: 'UploadMetadataSignedHeadersValue')
     UploadMetadataUrl = Shapes::StringShape.new(name: 'UploadMetadataUrl')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    View = Shapes::StructureShape.new(name: 'View')
+    ViewAction = Shapes::StringShape.new(name: 'ViewAction')
+    ViewActions = Shapes::ListShape.new(name: 'ViewActions')
+    ViewContent = Shapes::StructureShape.new(name: 'ViewContent')
+    ViewId = Shapes::StringShape.new(name: 'ViewId')
+    ViewInputSchema = Shapes::StringShape.new(name: 'ViewInputSchema')
+    ViewName = Shapes::StringShape.new(name: 'ViewName')
+    ViewTemplate = Shapes::StringShape.new(name: 'ViewTemplate')
+    ViewToken = Shapes::StringShape.new(name: 'ViewToken')
+    ViewVersion = Shapes::IntegerShape.new(name: 'ViewVersion')
     Websocket = Shapes::StructureShape.new(name: 'Websocket')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
@@ -119,6 +135,13 @@ module Aws::ConnectParticipant
     CreateParticipantConnectionResponse.add_member(:websocket, Shapes::ShapeRef.new(shape: Websocket, location_name: "Websocket"))
     CreateParticipantConnectionResponse.add_member(:connection_credentials, Shapes::ShapeRef.new(shape: ConnectionCredentials, location_name: "ConnectionCredentials"))
     CreateParticipantConnectionResponse.struct_class = Types::CreateParticipantConnectionResponse
+
+    DescribeViewRequest.add_member(:view_token, Shapes::ShapeRef.new(shape: ViewToken, required: true, location: "uri", location_name: "ViewToken"))
+    DescribeViewRequest.add_member(:connection_token, Shapes::ShapeRef.new(shape: ParticipantToken, required: true, location: "header", location_name: "X-Amz-Bearer"))
+    DescribeViewRequest.struct_class = Types::DescribeViewRequest
+
+    DescribeViewResponse.add_member(:view, Shapes::ShapeRef.new(shape: View, location_name: "View"))
+    DescribeViewResponse.struct_class = Types::DescribeViewResponse
 
     DisconnectParticipantRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     DisconnectParticipantRequest.add_member(:connection_token, Shapes::ShapeRef.new(shape: ParticipantToken, required: true, location: "header", location_name: "X-Amz-Bearer"))
@@ -176,6 +199,11 @@ module Aws::ConnectParticipant
 
     Receipts.member = Shapes::ShapeRef.new(shape: Receipt)
 
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResourceId"))
+    ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     SendEventRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: ChatContentType, required: true, location_name: "ContentType"))
     SendEventRequest.add_member(:content, Shapes::ShapeRef.new(shape: ChatContent, location_name: "Content"))
     SendEventRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
@@ -231,6 +259,20 @@ module Aws::ConnectParticipant
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: Reason, required: true, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException
 
+    View.add_member(:id, Shapes::ShapeRef.new(shape: ViewId, location_name: "Id"))
+    View.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    View.add_member(:name, Shapes::ShapeRef.new(shape: ViewName, location_name: "Name"))
+    View.add_member(:version, Shapes::ShapeRef.new(shape: ViewVersion, location_name: "Version"))
+    View.add_member(:content, Shapes::ShapeRef.new(shape: ViewContent, location_name: "Content"))
+    View.struct_class = Types::View
+
+    ViewActions.member = Shapes::ShapeRef.new(shape: ViewAction)
+
+    ViewContent.add_member(:input_schema, Shapes::ShapeRef.new(shape: ViewInputSchema, location_name: "InputSchema"))
+    ViewContent.add_member(:template, Shapes::ShapeRef.new(shape: ViewTemplate, location_name: "Template"))
+    ViewContent.add_member(:actions, Shapes::ShapeRef.new(shape: ViewActions, location_name: "Actions"))
+    ViewContent.struct_class = Types::ViewContent
+
     Websocket.add_member(:url, Shapes::ShapeRef.new(shape: PreSignedConnectionUrl, location_name: "Url"))
     Websocket.add_member(:connection_expiry, Shapes::ShapeRef.new(shape: ISO8601Datetime, location_name: "ConnectionExpiry"))
     Websocket.struct_class = Types::Websocket
@@ -277,6 +319,19 @@ module Aws::ConnectParticipant
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:describe_view, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeView"
+        o.http_method = "GET"
+        o.http_request_uri = "/participant/views/{ViewToken}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeViewRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeViewResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 

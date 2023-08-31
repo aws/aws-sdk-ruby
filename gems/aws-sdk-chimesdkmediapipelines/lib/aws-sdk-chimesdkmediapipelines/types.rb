@@ -1823,6 +1823,11 @@ module Aws::ChimeSDKMediaPipelines
     #   The time at which the media insights pipeline was created.
     #   @return [Time]
     #
+    # @!attribute [rw] element_statuses
+    #   The statuses that the elements in a media insights pipeline can have
+    #   during data processing.
+    #   @return [Array<Types::MediaInsightsPipelineElementStatus>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/MediaInsightsPipeline AWS API Documentation
     #
     class MediaInsightsPipeline < Struct.new(
@@ -1834,7 +1839,8 @@ module Aws::ChimeSDKMediaPipelines
       :media_insights_runtime_metadata,
       :kinesis_video_stream_recording_source_runtime_configuration,
       :s3_recording_sink_runtime_configuration,
-      :created_timestamp)
+      :created_timestamp,
+      :element_statuses)
       SENSITIVE = [:media_pipeline_arn, :media_insights_pipeline_configuration_arn, :media_insights_runtime_metadata]
       include Aws::Structure
     end
@@ -1936,6 +1942,11 @@ module Aws::ChimeSDKMediaPipelines
     #   pipeline configuration element.
     #   @return [Types::SnsTopicSinkConfiguration]
     #
+    # @!attribute [rw] voice_enhancement_sink_configuration
+    #   The configuration settings for the
+    #   `VoiceEnhancementSinkConfiguration` element.
+    #   @return [Types::VoiceEnhancementSinkConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/MediaInsightsPipelineConfigurationElement AWS API Documentation
     #
     class MediaInsightsPipelineConfigurationElement < Struct.new(
@@ -1947,7 +1958,8 @@ module Aws::ChimeSDKMediaPipelines
       :voice_analytics_processor_configuration,
       :lambda_function_sink_configuration,
       :sqs_queue_sink_configuration,
-      :sns_topic_sink_configuration)
+      :sns_topic_sink_configuration,
+      :voice_enhancement_sink_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1973,6 +1985,25 @@ module Aws::ChimeSDKMediaPipelines
       :media_insights_pipeline_configuration_id,
       :media_insights_pipeline_configuration_arn)
       SENSITIVE = [:media_insights_pipeline_configuration_arn]
+      include Aws::Structure
+    end
+
+    # The status of the pipeline element.
+    #
+    # @!attribute [rw] type
+    #   The type of status.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The element's status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/MediaInsightsPipelineElementStatus AWS API Documentation
+    #
+    class MediaInsightsPipelineElementStatus < Struct.new(
+      :type,
+      :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2699,7 +2730,7 @@ module Aws::ChimeSDKMediaPipelines
       include Aws::Structure
     end
 
-    # Defines the configuration settings for a vertial layout.
+    # Defines the configuration settings for a vertical layout.
     #
     # @!attribute [rw] tile_order
     #   Sets the automatic ordering of the video tiles.
@@ -2805,6 +2836,21 @@ module Aws::ChimeSDKMediaPipelines
     class VoiceAnalyticsProcessorConfiguration < Struct.new(
       :speaker_search_status,
       :voice_tone_analysis_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A static structure that contains the configuration data for a
+    # `VoiceEnhancementSinkConfiguration` element.
+    #
+    # @!attribute [rw] disabled
+    #   Disables the `VoiceEnhancementSinkConfiguration` element.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/VoiceEnhancementSinkConfiguration AWS API Documentation
+    #
+    class VoiceEnhancementSinkConfiguration < Struct.new(
+      :disabled)
       SENSITIVE = []
       include Aws::Structure
     end

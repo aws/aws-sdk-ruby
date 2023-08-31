@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2023-08-31)
+------------------
+
+* Feature - This release adds support for feature Voice Enhancement for Call Recording as part of Amazon Chime SDK call analytics.
+
 1.11.0 (2023-07-24)
 ------------------
 
