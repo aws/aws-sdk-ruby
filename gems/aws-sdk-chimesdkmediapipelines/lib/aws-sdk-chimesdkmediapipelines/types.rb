@@ -1144,9 +1144,12 @@ module Aws::ChimeSDKMediaPipelines
     #
     # @!attribute [rw] fragment_selector_type
     #   The origin of the timestamps to use, `Server` or `Producer`. For
-    #   more information, see
-    #   [StartSelectorType](kinesisvideostreams/latest/dg/API_dataplane_StartSelector.html#KinesisVideo-Type-dataplane_StartSelector-StartSelectorType)
-    #   in the *Amazon Kinesis Video Streams Developer Guide*.
+    #   more information, see [StartSelectorType][1] in the *Amazon Kinesis
+    #   Video Streams Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_dataplane_StartSelector.html
     #   @return [String]
     #
     # @!attribute [rw] timestamp_range
@@ -1232,6 +1235,66 @@ module Aws::ChimeSDKMediaPipelines
     #
     class GetMediaPipelineResponse < Struct.new(
       :media_pipeline)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The unique identifier of the resource to be updated. Valid values
+    #   include the ID and ARN of the media insights pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] speaker_search_task_id
+    #   The ID of the speaker search task.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/GetSpeakerSearchTaskRequest AWS API Documentation
+    #
+    class GetSpeakerSearchTaskRequest < Struct.new(
+      :identifier,
+      :speaker_search_task_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] speaker_search_task
+    #   The details of the speaker search task.
+    #   @return [Types::SpeakerSearchTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/GetSpeakerSearchTaskResponse AWS API Documentation
+    #
+    class GetSpeakerSearchTaskResponse < Struct.new(
+      :speaker_search_task)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The unique identifier of the resource to be updated. Valid values
+    #   include the ID and ARN of the media insights pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_tone_analysis_task_id
+    #   The ID of the voice tone anlysis task.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/GetVoiceToneAnalysisTaskRequest AWS API Documentation
+    #
+    class GetVoiceToneAnalysisTaskRequest < Struct.new(
+      :identifier,
+      :voice_tone_analysis_task_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_tone_analysis_task
+    #   The details of the voice tone analysis task.
+    #   @return [Types::VoiceToneAnalysisTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/GetVoiceToneAnalysisTaskResponse AWS API Documentation
+    #
+    class GetVoiceToneAnalysisTaskResponse < Struct.new(
+      :voice_tone_analysis_task)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1423,6 +1486,30 @@ module Aws::ChimeSDKMediaPipelines
       :streams,
       :media_encoding,
       :media_sample_rate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The task configuration settings for the Kinesis video stream source.
+    #
+    # @!attribute [rw] stream_arn
+    #   The ARN of the stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_id
+    #   The channel ID.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fragment_number
+    #   The unique identifier of the fragment to begin processing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/KinesisVideoStreamSourceTaskConfiguration AWS API Documentation
+    #
+    class KinesisVideoStreamSourceTaskConfiguration < Struct.new(
+      :stream_arn,
+      :channel_id,
+      :fragment_number)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1943,8 +2030,8 @@ module Aws::ChimeSDKMediaPipelines
     #   @return [Types::SnsTopicSinkConfiguration]
     #
     # @!attribute [rw] voice_enhancement_sink_configuration
-    #   The configuration settings for the
-    #   `VoiceEnhancementSinkConfiguration` element.
+    #   The configuration settings for voice enhancement sink in a media
+    #   insights pipeline configuration element.
     #   @return [Types::VoiceEnhancementSinkConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/MediaInsightsPipelineConfigurationElement AWS API Documentation
@@ -2469,6 +2556,36 @@ module Aws::ChimeSDKMediaPipelines
       include Aws::Structure
     end
 
+    # A representation of an asynchronous request to perform speaker search
+    # analysis on a media insights pipeline.
+    #
+    # @!attribute [rw] speaker_search_task_id
+    #   The speaker search task ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] speaker_search_task_status
+    #   The status of the speaker search task.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time at which a speaker search task was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   The time at which a speaker search task was updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/SpeakerSearchTask AWS API Documentation
+    #
+    class SpeakerSearchTask < Struct.new(
+      :speaker_search_task_id,
+      :speaker_search_task_status,
+      :created_timestamp,
+      :updated_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration settings for the SQS sink.
     #
     # @!attribute [rw] insights_target
@@ -2480,6 +2597,133 @@ module Aws::ChimeSDKMediaPipelines
     class SqsQueueSinkConfiguration < Struct.new(
       :insights_target)
       SENSITIVE = [:insights_target]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The unique identifier of the resource to be updated. Valid values
+    #   include the ID and ARN of the media insights pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_profile_domain_arn
+    #   The ARN of the voice profile domain that will store the voice
+    #   profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] kinesis_video_stream_source_task_configuration
+    #   The task configuration for the Kinesis video stream source of the
+    #   media insights pipeline.
+    #   @return [Types::KinesisVideoStreamSourceTaskConfiguration]
+    #
+    # @!attribute [rw] client_request_token
+    #   The unique identifier for the client request. Use a different token
+    #   for different speaker search tasks.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/StartSpeakerSearchTaskRequest AWS API Documentation
+    #
+    class StartSpeakerSearchTaskRequest < Struct.new(
+      :identifier,
+      :voice_profile_domain_arn,
+      :kinesis_video_stream_source_task_configuration,
+      :client_request_token)
+      SENSITIVE = [:voice_profile_domain_arn, :client_request_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] speaker_search_task
+    #   The details of the speaker search task.
+    #   @return [Types::SpeakerSearchTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/StartSpeakerSearchTaskResponse AWS API Documentation
+    #
+    class StartSpeakerSearchTaskResponse < Struct.new(
+      :speaker_search_task)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The unique identifier of the resource to be updated. Valid values
+    #   include the ID and ARN of the media insights pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code.
+    #   @return [String]
+    #
+    # @!attribute [rw] kinesis_video_stream_source_task_configuration
+    #   The task configuration for the Kinesis video stream source of the
+    #   media insights pipeline.
+    #   @return [Types::KinesisVideoStreamSourceTaskConfiguration]
+    #
+    # @!attribute [rw] client_request_token
+    #   The unique identifier for the client request. Use a different token
+    #   for different voice tone analysis tasks.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/StartVoiceToneAnalysisTaskRequest AWS API Documentation
+    #
+    class StartVoiceToneAnalysisTaskRequest < Struct.new(
+      :identifier,
+      :language_code,
+      :kinesis_video_stream_source_task_configuration,
+      :client_request_token)
+      SENSITIVE = [:client_request_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_tone_analysis_task
+    #   The details of the voice tone analysis task.
+    #   @return [Types::VoiceToneAnalysisTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/StartVoiceToneAnalysisTaskResponse AWS API Documentation
+    #
+    class StartVoiceToneAnalysisTaskResponse < Struct.new(
+      :voice_tone_analysis_task)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The unique identifier of the resource to be updated. Valid values
+    #   include the ID and ARN of the media insights pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] speaker_search_task_id
+    #   The speaker search task ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/StopSpeakerSearchTaskRequest AWS API Documentation
+    #
+    class StopSpeakerSearchTaskRequest < Struct.new(
+      :identifier,
+      :speaker_search_task_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The unique identifier of the resource to be updated. Valid values
+    #   include the ID and ARN of the media insights pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_tone_analysis_task_id
+    #   The ID of the voice tone analysis task.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/StopVoiceToneAnalysisTaskRequest AWS API Documentation
+    #
+    class StopVoiceToneAnalysisTaskRequest < Struct.new(
+      :identifier,
+      :voice_tone_analysis_task_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2851,6 +3095,36 @@ module Aws::ChimeSDKMediaPipelines
     #
     class VoiceEnhancementSinkConfiguration < Struct.new(
       :disabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A representation of an asynchronous request to perform voice tone
+    # analysis on a media insights pipeline.
+    #
+    # @!attribute [rw] voice_tone_analysis_task_id
+    #   The ID of the voice tone analysis task.
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_tone_analysis_task_status
+    #   The status of a voice tone analysis task.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time at which a voice tone analysis task was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   The time at which a voice tone analysis task was updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/VoiceToneAnalysisTask AWS API Documentation
+    #
+    class VoiceToneAnalysisTask < Struct.new(
+      :voice_tone_analysis_task_id,
+      :voice_tone_analysis_task_status,
+      :created_timestamp,
+      :updated_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end

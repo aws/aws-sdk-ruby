@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2023-09-01)
+------------------
+
+* Feature - New Identity Store content for China Region launch
+
 1.29.0 (2023-07-11)
 ------------------
 

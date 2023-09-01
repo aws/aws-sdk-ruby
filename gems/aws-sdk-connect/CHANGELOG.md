@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.125.0 (2023-09-01)
+------------------
+
+* Feature - Amazon Connect adds the ability to read, create, update, delete, and list view resources, and adds the ability to read, create, delete, and list view versions.
+
 1.124.0 (2023-08-10)
 ------------------
 

@@ -1702,28 +1702,32 @@ module Aws::Connect
     #
     # Creates a new queue for the specified Amazon Connect instance.
     #
-    # If the number being used in the input is claimed to a traffic
-    # distribution group, and you are calling this API using an instance in
-    # the Amazon Web Services Region where the traffic distribution group
-    # was created, you can use either a full phone number ARN or UUID value
-    # for the `OutboundCallerIdNumberId` value of the
-    # [OutboundCallerConfig][1] request body parameter. However, if the
-    # number is claimed to a traffic distribution group and you are calling
-    # this API using an instance in the alternate Amazon Web Services Region
-    # associated with the traffic distribution group, you must provide a
-    # full phone number ARN. If a UUID is provided in this scenario, you
-    # will receive a `ResourceNotFoundException`.
+    # * If the phone number is claimed to a traffic distribution group that
+    #   was created in the same Region as the Amazon Connect instance where
+    #   you are calling this API, then you can use a full phone number ARN
+    #   or a UUID for `OutboundCallerIdNumberId`. However, if the phone
+    #   number is claimed to a traffic distribution group that is in one
+    #   Region, and you are calling this API from an instance in another
+    #   Amazon Web Services Region that is associated with the traffic
+    #   distribution group, you must provide a full phone number ARN. If a
+    #   UUID is provided in this scenario, you will receive a
+    #   `ResourceNotFoundException`.
     #
-    #  Only use the phone number ARN format that doesn't contain `instance`
-    # in the path, for example,
-    # `arn:aws:connect:us-east-1:1234567890:phone-number/uuid`. This is the
-    # same ARN format that is returned when you call the
-    # [ListPhoneNumbersV2][2] API.
+    # * Only use the phone number ARN format that doesn't contain
+    #   `instance` in the path, for example,
+    #   `arn:aws:connect:us-east-1:1234567890:phone-number/uuid`. This is
+    #   the same ARN format that is returned when you call the
+    #   [ListPhoneNumbersV2][1] API.
+    #
+    # * If you plan to use IAM policies to allow/deny access to this API for
+    #   phone number resources claimed to a traffic distribution group, see
+    #   [Allow or Deny queue API actions for phone numbers in a replica
+    #   Region][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_OutboundCallerConfig
-    # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_resource-level-policy-examples.html#allow-deny-queue-actions-replica-region
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -2273,13 +2277,23 @@ module Aws::Connect
     # Creates a traffic distribution group given an Amazon Connect instance
     # that has been replicated.
     #
+    # <note markdown="1"> You can change the `SignInConfig` distribution only for a default
+    # `TrafficDistributionGroup` (see the `IsDefault` parameter in the
+    # [TrafficDistributionGroup][1] data type). If you call
+    # `UpdateTrafficDistribution` with a modified `SignInConfig` and a
+    # non-default `TrafficDistributionGroup`, an `InvalidRequestException`
+    # is returned.
+    #
+    #  </note>
+    #
     # For more information about creating traffic distribution groups, see
-    # [Set up traffic distribution groups][1] in the *Amazon Connect
+    # [Set up traffic distribution groups][2] in the *Amazon Connect
     # Administrator Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-traffic-distribution-groups.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_TrafficDistributionGroup.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-traffic-distribution-groups.html
     #
     # @option params [required, String] :name
     #   The name for the traffic distribution group.
@@ -2551,6 +2565,161 @@ module Aws::Connect
     # @param [Hash] params ({})
     def create_user_hierarchy_group(params = {}, options = {})
       req = build_request(:create_user_hierarchy_group, params)
+      req.send_request(options)
+    end
+
+    # Creates a new view with the possible status of `SAVED` or `PUBLISHED`.
+    #
+    # The views will have a unique name for each connect instance.
+    #
+    # It performs basic content validation if the status is `SAVED` or full
+    # content validation if the status is set to `PUBLISHED`. An error is
+    # returned if validation fails. It associates either the `$SAVED`
+    # qualifier or both of the `$SAVED` and `$LATEST` qualifiers with the
+    # provided view content based on the status. The view is idempotent if
+    # ClientToken is provided.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [String] :client_token
+    #   A unique Id for each create view request to avoid duplicate view
+    #   creation. For example, the view is idempotent ClientToken is provided.
+    #
+    # @option params [required, String] :status
+    #   Indicates the view status as either `SAVED` or `PUBLISHED`. The
+    #   `PUBLISHED` status will initiate validation on the content.
+    #
+    # @option params [required, Types::ViewInputContent] :content
+    #   View content containing all content necessary to render a view except
+    #   for runtime input data.
+    #
+    #   The total uncompressed content has a maximum file size of 400kB.
+    #
+    # @option params [String] :description
+    #   The description of the view.
+    #
+    # @option params [required, String] :name
+    #   The name of the view.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags associated with the view resource (not specific to view
+    #   version).These tags can be used to organize, track, or control access
+    #   for this resource. For example, \\\{ "tags":
+    #   \\\{"key1":"value1", "key2":"value2"\\} \\}.
+    #
+    # @return [Types::CreateViewResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateViewResponse#view #view} => Types::View
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_view({
+    #     instance_id: "ViewsInstanceId", # required
+    #     client_token: "ViewsClientToken",
+    #     status: "PUBLISHED", # required, accepts PUBLISHED, SAVED
+    #     content: { # required
+    #       template: "ViewTemplate",
+    #       actions: ["ViewAction"],
+    #     },
+    #     description: "ViewDescription",
+    #     name: "ViewName", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.view.id #=> String
+    #   resp.view.arn #=> String
+    #   resp.view.name #=> String
+    #   resp.view.status #=> String, one of "PUBLISHED", "SAVED"
+    #   resp.view.type #=> String, one of "CUSTOMER_MANAGED", "AWS_MANAGED"
+    #   resp.view.description #=> String
+    #   resp.view.version #=> Integer
+    #   resp.view.version_description #=> String
+    #   resp.view.content.input_schema #=> String
+    #   resp.view.content.template #=> String
+    #   resp.view.content.actions #=> Array
+    #   resp.view.content.actions[0] #=> String
+    #   resp.view.tags #=> Hash
+    #   resp.view.tags["TagKey"] #=> String
+    #   resp.view.created_time #=> Time
+    #   resp.view.last_modified_time #=> Time
+    #   resp.view.view_content_sha_256 #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateView AWS API Documentation
+    #
+    # @overload create_view(params = {})
+    # @param [Hash] params ({})
+    def create_view(params = {}, options = {})
+      req = build_request(:create_view, params)
+      req.send_request(options)
+    end
+
+    # Publishes a new version of the view identifier.
+    #
+    # Versions are immutable and monotonically increasing.
+    #
+    # It returns the highest version if there is no change in content
+    # compared to that version. An error is displayed if the supplied
+    # ViewContentSha256 is different from the ViewContentSha256 of the
+    # `$LATEST` alias.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :view_id
+    #   The identifier of the view. Both `ViewArn` and `ViewId` can be used.
+    #
+    # @option params [String] :version_description
+    #   The description for the version being published.
+    #
+    # @option params [String] :view_content_sha_256
+    #   Indicates the checksum value of the latest published view content.
+    #
+    # @return [Types::CreateViewVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateViewVersionResponse#view #view} => Types::View
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_view_version({
+    #     instance_id: "ViewsInstanceId", # required
+    #     view_id: "ViewId", # required
+    #     version_description: "ViewDescription",
+    #     view_content_sha_256: "ViewContentSha256",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.view.id #=> String
+    #   resp.view.arn #=> String
+    #   resp.view.name #=> String
+    #   resp.view.status #=> String, one of "PUBLISHED", "SAVED"
+    #   resp.view.type #=> String, one of "CUSTOMER_MANAGED", "AWS_MANAGED"
+    #   resp.view.description #=> String
+    #   resp.view.version #=> Integer
+    #   resp.view.version_description #=> String
+    #   resp.view.content.input_schema #=> String
+    #   resp.view.content.template #=> String
+    #   resp.view.content.actions #=> Array
+    #   resp.view.content.actions[0] #=> String
+    #   resp.view.tags #=> Hash
+    #   resp.view.tags["TagKey"] #=> String
+    #   resp.view.created_time #=> Time
+    #   resp.view.last_modified_time #=> Time
+    #   resp.view.view_content_sha_256 #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateViewVersion AWS API Documentation
+    #
+    # @overload create_view_version(params = {})
+    # @param [Hash] params ({})
+    def create_view_version(params = {}, options = {})
+      req = build_request(:create_view_version, params)
       req.send_request(options)
     end
 
@@ -3288,6 +3457,65 @@ module Aws::Connect
     # @param [Hash] params ({})
     def delete_user_hierarchy_group(params = {}, options = {})
       req = build_request(:delete_user_hierarchy_group, params)
+      req.send_request(options)
+    end
+
+    # Deletes the view entirely. It deletes the view and all associated
+    # qualifiers (versions and aliases).
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :view_id
+    #   The identifier of the view. Both `ViewArn` and `ViewId` can be used.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_view({
+    #     instance_id: "ViewsInstanceId", # required
+    #     view_id: "ViewId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteView AWS API Documentation
+    #
+    # @overload delete_view(params = {})
+    # @param [Hash] params ({})
+    def delete_view(params = {}, options = {})
+      req = build_request(:delete_view, params)
+      req.send_request(options)
+    end
+
+    # Deletes the particular version specified in `ViewVersion` identifier.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :view_id
+    #   The identifier of the view. Both `ViewArn` and `ViewId` can be used.
+    #
+    # @option params [required, Integer] :view_version
+    #   The version number of the view.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_view_version({
+    #     instance_id: "ViewsInstanceId", # required
+    #     view_id: "ViewId", # required
+    #     view_version: 1, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteViewVersion AWS API Documentation
+    #
+    # @overload delete_view_version(params = {})
+    # @param [Hash] params ({})
+    def delete_view_version(params = {}, options = {})
+      req = build_request(:delete_view_version, params)
       req.send_request(options)
     end
 
@@ -4486,6 +4714,68 @@ module Aws::Connect
     # @param [Hash] params ({})
     def describe_user_hierarchy_structure(params = {}, options = {})
       req = build_request(:describe_user_hierarchy_structure, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the view for the specified Amazon Connect instance and view
+    # identifier.
+    #
+    # The view identifier can be supplied as a ViewId or ARN.
+    #
+    # `$SAVED` needs to be supplied if a view is unpublished.
+    #
+    # The view identifier can contain an optional qualifier, for example,
+    # `<view-id>:$SAVED`, which is either an actual version number or an
+    # Amazon Connect managed qualifier `$SAVED | $LATEST`. If it is not
+    # supplied, then `$LATEST` is assumed for customer managed views and an
+    # error is returned if there is no published content available. Version
+    # 1 is assumed for Amazon Web Services managed views.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :view_id
+    #   The ViewId of the view. This must be an ARN for Amazon Web Services
+    #   managed views.
+    #
+    # @return [Types::DescribeViewResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeViewResponse#view #view} => Types::View
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_view({
+    #     instance_id: "ViewsInstanceId", # required
+    #     view_id: "ViewId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.view.id #=> String
+    #   resp.view.arn #=> String
+    #   resp.view.name #=> String
+    #   resp.view.status #=> String, one of "PUBLISHED", "SAVED"
+    #   resp.view.type #=> String, one of "CUSTOMER_MANAGED", "AWS_MANAGED"
+    #   resp.view.description #=> String
+    #   resp.view.version #=> Integer
+    #   resp.view.version_description #=> String
+    #   resp.view.content.input_schema #=> String
+    #   resp.view.content.template #=> String
+    #   resp.view.content.actions #=> Array
+    #   resp.view.content.actions[0] #=> String
+    #   resp.view.tags #=> Hash
+    #   resp.view.tags["TagKey"] #=> String
+    #   resp.view.created_time #=> Time
+    #   resp.view.last_modified_time #=> Time
+    #   resp.view.view_content_sha_256 #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeView AWS API Documentation
+    #
+    # @overload describe_view(params = {})
+    # @param [Hash] params ({})
+    def describe_view(params = {}, options = {})
+      req = build_request(:describe_view, params)
       req.send_request(options)
     end
 
@@ -7423,17 +7713,23 @@ module Aws::Connect
     # for Your Contact Center][1] in the *Amazon Connect Administrator
     # Guide*.
     #
-    # The phone number `Arn` value that is returned from each of the items
-    # in the [PhoneNumberSummaryList][2] cannot be used to tag phone number
-    # resources. It will fail with a `ResourceNotFoundException`. Instead,
-    # use the [ListPhoneNumbersV2][3] API. It returns the new phone number
-    # ARN that can be used to tag phone number resources.
+    # * We recommend using [ListPhoneNumbersV2][2] to return phone number
+    #   types. ListPhoneNumbers doesn't support number types `UIFN`,
+    #   `SHARED`, `THIRD_PARTY_TF`, and `THIRD_PARTY_DID`. While it returns
+    #   numbers of those types, it incorrectly lists them as `TOLL_FREE` or
+    #   `DID`.
+    #
+    # * The phone number `Arn` value that is returned from each of the items
+    #   in the [PhoneNumberSummaryList][3] cannot be used to tag phone
+    #   number resources. It will fail with a `ResourceNotFoundException`.
+    #   Instead, use the [ListPhoneNumbersV2][2] API. It returns the new
+    #   phone number ARN that can be used to tag phone number resources.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html
-    # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbers.html#connect-ListPhoneNumbers-response-PhoneNumberSummaryList
-    # [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbers.html#connect-ListPhoneNumbers-response-PhoneNumberSummaryList
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -8539,6 +8835,120 @@ module Aws::Connect
     # @param [Hash] params ({})
     def list_users(params = {}, options = {})
       req = build_request(:list_users, params)
+      req.send_request(options)
+    end
+
+    # Returns all the available versions for the specified Amazon Connect
+    # instance and view identifier.
+    #
+    # Results will be sorted from highest to lowest.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :view_id
+    #   The identifier of the view. Both `ViewArn` and `ViewId` can be used.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
+    #
+    # @return [Types::ListViewVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListViewVersionsResponse#view_version_summary_list #view_version_summary_list} => Array&lt;Types::ViewVersionSummary&gt;
+    #   * {Types::ListViewVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_view_versions({
+    #     instance_id: "ViewsInstanceId", # required
+    #     view_id: "ViewId", # required
+    #     next_token: "ViewsNextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.view_version_summary_list #=> Array
+    #   resp.view_version_summary_list[0].id #=> String
+    #   resp.view_version_summary_list[0].arn #=> String
+    #   resp.view_version_summary_list[0].description #=> String
+    #   resp.view_version_summary_list[0].name #=> String
+    #   resp.view_version_summary_list[0].type #=> String, one of "CUSTOMER_MANAGED", "AWS_MANAGED"
+    #   resp.view_version_summary_list[0].version #=> Integer
+    #   resp.view_version_summary_list[0].version_description #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListViewVersions AWS API Documentation
+    #
+    # @overload list_view_versions(params = {})
+    # @param [Hash] params ({})
+    def list_view_versions(params = {}, options = {})
+      req = build_request(:list_view_versions, params)
+      req.send_request(options)
+    end
+
+    # Returns views in the given instance.
+    #
+    # Results are sorted primarily by type, and secondarily by name.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [String] :type
+    #   The type of the view.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
+    #
+    # @return [Types::ListViewsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListViewsResponse#views_summary_list #views_summary_list} => Array&lt;Types::ViewSummary&gt;
+    #   * {Types::ListViewsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_views({
+    #     instance_id: "ViewsInstanceId", # required
+    #     type: "CUSTOMER_MANAGED", # accepts CUSTOMER_MANAGED, AWS_MANAGED
+    #     next_token: "ViewsNextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.views_summary_list #=> Array
+    #   resp.views_summary_list[0].id #=> String
+    #   resp.views_summary_list[0].arn #=> String
+    #   resp.views_summary_list[0].name #=> String
+    #   resp.views_summary_list[0].type #=> String, one of "CUSTOMER_MANAGED", "AWS_MANAGED"
+    #   resp.views_summary_list[0].status #=> String, one of "PUBLISHED", "SAVED"
+    #   resp.views_summary_list[0].description #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListViews AWS API Documentation
+    #
+    # @overload list_views(params = {})
+    # @param [Hash] params ({})
+    def list_views(params = {}, options = {})
+      req = build_request(:list_views, params)
       req.send_request(options)
     end
 
@@ -10426,14 +10836,17 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Ends the specified contact. This call does not work for the following
-    # initiation methods:
+    # Ends the specified contact. This call does not work for voice contacts
+    # that use the following initiation methods:
     #
     # * DISCONNECT
     #
     # * TRANSFER
     #
     # * QUEUE\_TRANSFER
+    #
+    # Chat and task contacts, however, can be terminated in any state,
+    # regardless of initiation method.
     #
     # @option params [required, String] :contact_id
     #   The ID of the contact.
@@ -11930,28 +12343,32 @@ module Aws::Connect
     # Updates the outbound caller ID name, number, and outbound whisper flow
     # for a specified queue.
     #
-    # If the number being used in the input is claimed to a traffic
-    # distribution group, and you are calling this API using an instance in
-    # the Amazon Web Services Region where the traffic distribution group
-    # was created, you can use either a full phone number ARN or UUID value
-    # for the `OutboundCallerIdNumberId` value of the
-    # [OutboundCallerConfig][1] request body parameter. However, if the
-    # number is claimed to a traffic distribution group and you are calling
-    # this API using an instance in the alternate Amazon Web Services Region
-    # associated with the traffic distribution group, you must provide a
-    # full phone number ARN. If a UUID is provided in this scenario, you
-    # will receive a `ResourceNotFoundException`.
+    # * If the phone number is claimed to a traffic distribution group that
+    #   was created in the same Region as the Amazon Connect instance where
+    #   you are calling this API, then you can use a full phone number ARN
+    #   or a UUID for `OutboundCallerIdNumberId`. However, if the phone
+    #   number is claimed to a traffic distribution group that is in one
+    #   Region, and you are calling this API from an instance in another
+    #   Amazon Web Services Region that is associated with the traffic
+    #   distribution group, you must provide a full phone number ARN. If a
+    #   UUID is provided in this scenario, you will receive a
+    #   `ResourceNotFoundException`.
     #
-    #  Only use the phone number ARN format that doesn't contain `instance`
-    # in the path, for example,
-    # `arn:aws:connect:us-east-1:1234567890:phone-number/uuid`. This is the
-    # same ARN format that is returned when you call the
-    # [ListPhoneNumbersV2][2] API.
+    # * Only use the phone number ARN format that doesn't contain
+    #   `instance` in the path, for example,
+    #   `arn:aws:connect:us-east-1:1234567890:phone-number/uuid`. This is
+    #   the same ARN format that is returned when you call the
+    #   [ListPhoneNumbersV2][1] API.
+    #
+    # * If you plan to use IAM policies to allow/deny access to this API for
+    #   phone number resources claimed to a traffic distribution group, see
+    #   [Allow or Deny queue API actions for phone numbers in a replica
+    #   Region][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_OutboundCallerConfig
-    # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_resource-level-policy-examples.html#allow-deny-queue-actions-replica-region
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -12621,20 +13038,23 @@ module Aws::Connect
     # Updates the traffic distribution for a given traffic distribution
     # group.
     #
-    # <note markdown="1"> You can change the `SignInConfig` only for a default
-    # `TrafficDistributionGroup`. If you call `UpdateTrafficDistribution`
-    # with a modified `SignInConfig` and a non-default
-    # `TrafficDistributionGroup`, an `InvalidRequestException` is returned.
+    # <note markdown="1"> You can change the `SignInConfig` distribution only for a default
+    # `TrafficDistributionGroup` (see the `IsDefault` parameter in the
+    # [TrafficDistributionGroup][1] data type). If you call
+    # `UpdateTrafficDistribution` with a modified `SignInConfig` and a
+    # non-default `TrafficDistributionGroup`, an `InvalidRequestException`
+    # is returned.
     #
     #  </note>
     #
     # For more information about updating a traffic distribution group, see
     # [Update telephony traffic distribution across Amazon Web Services
-    # Regions ][1] in the *Amazon Connect Administrator Guide*.
+    # Regions ][2] in the *Amazon Connect Administrator Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_TrafficDistributionGroup.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html
     #
     # @option params [required, String] :id
     #   The identifier of the traffic distribution group. This can be the ID
@@ -12974,6 +13394,113 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Updates the view content of the given view identifier in the specified
+    # Amazon Connect instance.
+    #
+    # It performs content validation if `Status` is set to `SAVED` and
+    # performs full content validation if `Status` is `PUBLISHED`. Note that
+    # the `$SAVED` alias' content will always be updated, but the `$LATEST`
+    # alias' content will only be updated if `Status` is `PUBLISHED`.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :view_id
+    #   The identifier of the view. Both `ViewArn` and `ViewId` can be used.
+    #
+    # @option params [required, String] :status
+    #   Indicates the view status as either `SAVED` or `PUBLISHED`. The
+    #   `PUBLISHED` status will initiate validation on the content.
+    #
+    # @option params [required, Types::ViewInputContent] :content
+    #   View content containing all content necessary to render a view except
+    #   for runtime input data and the runtime input schema, which is
+    #   auto-generated by this operation.
+    #
+    #   The total uncompressed content has a maximum file size of 400kB.
+    #
+    # @return [Types::UpdateViewContentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateViewContentResponse#view #view} => Types::View
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_view_content({
+    #     instance_id: "ViewsInstanceId", # required
+    #     view_id: "ViewId", # required
+    #     status: "PUBLISHED", # required, accepts PUBLISHED, SAVED
+    #     content: { # required
+    #       template: "ViewTemplate",
+    #       actions: ["ViewAction"],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.view.id #=> String
+    #   resp.view.arn #=> String
+    #   resp.view.name #=> String
+    #   resp.view.status #=> String, one of "PUBLISHED", "SAVED"
+    #   resp.view.type #=> String, one of "CUSTOMER_MANAGED", "AWS_MANAGED"
+    #   resp.view.description #=> String
+    #   resp.view.version #=> Integer
+    #   resp.view.version_description #=> String
+    #   resp.view.content.input_schema #=> String
+    #   resp.view.content.template #=> String
+    #   resp.view.content.actions #=> Array
+    #   resp.view.content.actions[0] #=> String
+    #   resp.view.tags #=> Hash
+    #   resp.view.tags["TagKey"] #=> String
+    #   resp.view.created_time #=> Time
+    #   resp.view.last_modified_time #=> Time
+    #   resp.view.view_content_sha_256 #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateViewContent AWS API Documentation
+    #
+    # @overload update_view_content(params = {})
+    # @param [Hash] params ({})
+    def update_view_content(params = {}, options = {})
+      req = build_request(:update_view_content, params)
+      req.send_request(options)
+    end
+
+    # Updates the view metadata. Note that either `Name` or `Description`
+    # must be provided.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :view_id
+    #   The identifier of the view. Both `ViewArn` and `ViewId` can be used.
+    #
+    # @option params [String] :name
+    #   The name of the view.
+    #
+    # @option params [String] :description
+    #   The description of the view.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_view_metadata({
+    #     instance_id: "ViewsInstanceId", # required
+    #     view_id: "ViewId", # required
+    #     name: "ViewName",
+    #     description: "ViewDescription",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateViewMetadata AWS API Documentation
+    #
+    # @overload update_view_metadata(params = {})
+    # @param [Hash] params ({})
+    def update_view_metadata(params = {}, options = {})
+      req = build_request(:update_view_metadata, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -12987,7 +13514,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.124.0'
+      context[:gem_version] = '1.125.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

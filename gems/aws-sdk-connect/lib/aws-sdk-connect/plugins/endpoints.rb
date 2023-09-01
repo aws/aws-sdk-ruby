@@ -120,6 +120,10 @@ module Aws::Connect
             Aws::Connect::Endpoints::CreateUser.build(context)
           when :create_user_hierarchy_group
             Aws::Connect::Endpoints::CreateUserHierarchyGroup.build(context)
+          when :create_view
+            Aws::Connect::Endpoints::CreateView.build(context)
+          when :create_view_version
+            Aws::Connect::Endpoints::CreateViewVersion.build(context)
           when :create_vocabulary
             Aws::Connect::Endpoints::CreateVocabulary.build(context)
           when :deactivate_evaluation_form
@@ -160,6 +164,10 @@ module Aws::Connect
             Aws::Connect::Endpoints::DeleteUser.build(context)
           when :delete_user_hierarchy_group
             Aws::Connect::Endpoints::DeleteUserHierarchyGroup.build(context)
+          when :delete_view
+            Aws::Connect::Endpoints::DeleteView.build(context)
+          when :delete_view_version
+            Aws::Connect::Endpoints::DeleteViewVersion.build(context)
           when :delete_vocabulary
             Aws::Connect::Endpoints::DeleteVocabulary.build(context)
           when :describe_agent_status
@@ -204,6 +212,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::DescribeUserHierarchyGroup.build(context)
           when :describe_user_hierarchy_structure
             Aws::Connect::Endpoints::DescribeUserHierarchyStructure.build(context)
+          when :describe_view
+            Aws::Connect::Endpoints::DescribeView.build(context)
           when :describe_vocabulary
             Aws::Connect::Endpoints::DescribeVocabulary.build(context)
           when :disassociate_approved_origin
@@ -318,6 +328,10 @@ module Aws::Connect
             Aws::Connect::Endpoints::ListUserHierarchyGroups.build(context)
           when :list_users
             Aws::Connect::Endpoints::ListUsers.build(context)
+          when :list_view_versions
+            Aws::Connect::Endpoints::ListViewVersions.build(context)
+          when :list_views
+            Aws::Connect::Endpoints::ListViews.build(context)
           when :monitor_contact
             Aws::Connect::Endpoints::MonitorContact.build(context)
           when :put_user_status
@@ -456,6 +470,10 @@ module Aws::Connect
             Aws::Connect::Endpoints::UpdateUserRoutingProfile.build(context)
           when :update_user_security_profiles
             Aws::Connect::Endpoints::UpdateUserSecurityProfiles.build(context)
+          when :update_view_content
+            Aws::Connect::Endpoints::UpdateViewContent.build(context)
+          when :update_view_metadata
+            Aws::Connect::Endpoints::UpdateViewMetadata.build(context)
           end
         end
       end

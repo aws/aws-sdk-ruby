@@ -1485,6 +1485,78 @@ module Aws::ChimeSDKMediaPipelines
       req.send_request(options)
     end
 
+    # Retrieves the details of the specified speaker search task.
+    #
+    # @option params [required, String] :identifier
+    #   The unique identifier of the resource to be updated. Valid values
+    #   include the ID and ARN of the media insights pipeline.
+    #
+    # @option params [required, String] :speaker_search_task_id
+    #   The ID of the speaker search task.
+    #
+    # @return [Types::GetSpeakerSearchTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSpeakerSearchTaskResponse#speaker_search_task #speaker_search_task} => Types::SpeakerSearchTask
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_speaker_search_task({
+    #     identifier: "NonEmptyString", # required
+    #     speaker_search_task_id: "GuidString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.speaker_search_task.speaker_search_task_id #=> String
+    #   resp.speaker_search_task.speaker_search_task_status #=> String, one of "NotStarted", "Initializing", "InProgress", "Failed", "Stopping", "Stopped"
+    #   resp.speaker_search_task.created_timestamp #=> Time
+    #   resp.speaker_search_task.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/GetSpeakerSearchTask AWS API Documentation
+    #
+    # @overload get_speaker_search_task(params = {})
+    # @param [Hash] params ({})
+    def get_speaker_search_task(params = {}, options = {})
+      req = build_request(:get_speaker_search_task, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details of a voice tone analysis task.
+    #
+    # @option params [required, String] :identifier
+    #   The unique identifier of the resource to be updated. Valid values
+    #   include the ID and ARN of the media insights pipeline.
+    #
+    # @option params [required, String] :voice_tone_analysis_task_id
+    #   The ID of the voice tone anlysis task.
+    #
+    # @return [Types::GetVoiceToneAnalysisTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetVoiceToneAnalysisTaskResponse#voice_tone_analysis_task #voice_tone_analysis_task} => Types::VoiceToneAnalysisTask
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_voice_tone_analysis_task({
+    #     identifier: "NonEmptyString", # required
+    #     voice_tone_analysis_task_id: "GuidString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.voice_tone_analysis_task.voice_tone_analysis_task_id #=> String
+    #   resp.voice_tone_analysis_task.voice_tone_analysis_task_status #=> String, one of "NotStarted", "Initializing", "InProgress", "Failed", "Stopping", "Stopped"
+    #   resp.voice_tone_analysis_task.created_timestamp #=> Time
+    #   resp.voice_tone_analysis_task.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/GetVoiceToneAnalysisTask AWS API Documentation
+    #
+    # @overload get_voice_tone_analysis_task(params = {})
+    # @param [Hash] params ({})
+    def get_voice_tone_analysis_task(params = {}, options = {})
+      req = build_request(:get_voice_tone_analysis_task, params)
+      req.send_request(options)
+    end
+
     # Returns a list of media pipelines.
     #
     # @option params [String] :next_token
@@ -1630,6 +1702,187 @@ module Aws::ChimeSDKMediaPipelines
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Starts a speaker search task.
+    #
+    # Before starting any speaker search tasks, you must provide all notices
+    # and obtain all consents from the speaker as required under applicable
+    # privacy and biometrics laws, and as required under the [AWS service
+    # terms][1] for the Amazon Chime SDK.
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/service-terms/
+    #
+    # @option params [required, String] :identifier
+    #   The unique identifier of the resource to be updated. Valid values
+    #   include the ID and ARN of the media insights pipeline.
+    #
+    # @option params [required, String] :voice_profile_domain_arn
+    #   The ARN of the voice profile domain that will store the voice profile.
+    #
+    # @option params [Types::KinesisVideoStreamSourceTaskConfiguration] :kinesis_video_stream_source_task_configuration
+    #   The task configuration for the Kinesis video stream source of the
+    #   media insights pipeline.
+    #
+    # @option params [String] :client_request_token
+    #   The unique identifier for the client request. Use a different token
+    #   for different speaker search tasks.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartSpeakerSearchTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartSpeakerSearchTaskResponse#speaker_search_task #speaker_search_task} => Types::SpeakerSearchTask
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_speaker_search_task({
+    #     identifier: "NonEmptyString", # required
+    #     voice_profile_domain_arn: "Arn", # required
+    #     kinesis_video_stream_source_task_configuration: {
+    #       stream_arn: "KinesisVideoStreamArn", # required
+    #       channel_id: 1, # required
+    #       fragment_number: "FragmentNumberString",
+    #     },
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.speaker_search_task.speaker_search_task_id #=> String
+    #   resp.speaker_search_task.speaker_search_task_status #=> String, one of "NotStarted", "Initializing", "InProgress", "Failed", "Stopping", "Stopped"
+    #   resp.speaker_search_task.created_timestamp #=> Time
+    #   resp.speaker_search_task.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/StartSpeakerSearchTask AWS API Documentation
+    #
+    # @overload start_speaker_search_task(params = {})
+    # @param [Hash] params ({})
+    def start_speaker_search_task(params = {}, options = {})
+      req = build_request(:start_speaker_search_task, params)
+      req.send_request(options)
+    end
+
+    # Starts a voice tone analysis task. For more information about voice
+    # tone analysis, see [Using Amazon Chime SDK voice analytics][1] in the
+    # *Amazon Chime SDK Developer Guide*.
+    #
+    # Before starting any voice tone analysis tasks, you must provide all
+    # notices and obtain all consents from the speaker as required under
+    # applicable privacy and biometrics laws, and as required under the [AWS
+    # service terms][2] for the Amazon Chime SDK.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/voice-analytics.html
+    # [2]: https://aws.amazon.com/service-terms/
+    #
+    # @option params [required, String] :identifier
+    #   The unique identifier of the resource to be updated. Valid values
+    #   include the ID and ARN of the media insights pipeline.
+    #
+    # @option params [required, String] :language_code
+    #   The language code.
+    #
+    # @option params [Types::KinesisVideoStreamSourceTaskConfiguration] :kinesis_video_stream_source_task_configuration
+    #   The task configuration for the Kinesis video stream source of the
+    #   media insights pipeline.
+    #
+    # @option params [String] :client_request_token
+    #   The unique identifier for the client request. Use a different token
+    #   for different voice tone analysis tasks.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartVoiceToneAnalysisTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartVoiceToneAnalysisTaskResponse#voice_tone_analysis_task #voice_tone_analysis_task} => Types::VoiceToneAnalysisTask
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_voice_tone_analysis_task({
+    #     identifier: "NonEmptyString", # required
+    #     language_code: "en-US", # required, accepts en-US
+    #     kinesis_video_stream_source_task_configuration: {
+    #       stream_arn: "KinesisVideoStreamArn", # required
+    #       channel_id: 1, # required
+    #       fragment_number: "FragmentNumberString",
+    #     },
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.voice_tone_analysis_task.voice_tone_analysis_task_id #=> String
+    #   resp.voice_tone_analysis_task.voice_tone_analysis_task_status #=> String, one of "NotStarted", "Initializing", "InProgress", "Failed", "Stopping", "Stopped"
+    #   resp.voice_tone_analysis_task.created_timestamp #=> Time
+    #   resp.voice_tone_analysis_task.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/StartVoiceToneAnalysisTask AWS API Documentation
+    #
+    # @overload start_voice_tone_analysis_task(params = {})
+    # @param [Hash] params ({})
+    def start_voice_tone_analysis_task(params = {}, options = {})
+      req = build_request(:start_voice_tone_analysis_task, params)
+      req.send_request(options)
+    end
+
+    # Stops a speaker search task.
+    #
+    # @option params [required, String] :identifier
+    #   The unique identifier of the resource to be updated. Valid values
+    #   include the ID and ARN of the media insights pipeline.
+    #
+    # @option params [required, String] :speaker_search_task_id
+    #   The speaker search task ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_speaker_search_task({
+    #     identifier: "NonEmptyString", # required
+    #     speaker_search_task_id: "GuidString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/StopSpeakerSearchTask AWS API Documentation
+    #
+    # @overload stop_speaker_search_task(params = {})
+    # @param [Hash] params ({})
+    def stop_speaker_search_task(params = {}, options = {})
+      req = build_request(:stop_speaker_search_task, params)
+      req.send_request(options)
+    end
+
+    # Stops a voice tone analysis task.
+    #
+    # @option params [required, String] :identifier
+    #   The unique identifier of the resource to be updated. Valid values
+    #   include the ID and ARN of the media insights pipeline.
+    #
+    # @option params [required, String] :voice_tone_analysis_task_id
+    #   The ID of the voice tone analysis task.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_voice_tone_analysis_task({
+    #     identifier: "NonEmptyString", # required
+    #     voice_tone_analysis_task_id: "GuidString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/StopVoiceToneAnalysisTask AWS API Documentation
+    #
+    # @overload stop_voice_tone_analysis_task(params = {})
+    # @param [Hash] params ({})
+    def stop_voice_tone_analysis_task(params = {}, options = {})
+      req = build_request(:stop_voice_tone_analysis_task, params)
       req.send_request(options)
     end
 
@@ -1924,7 +2177,7 @@ module Aws::ChimeSDKMediaPipelines
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmediapipelines'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

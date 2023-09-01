@@ -166,6 +166,10 @@ module Aws::Connect
     CreateUserHierarchyGroupResponse = Shapes::StructureShape.new(name: 'CreateUserHierarchyGroupResponse')
     CreateUserRequest = Shapes::StructureShape.new(name: 'CreateUserRequest')
     CreateUserResponse = Shapes::StructureShape.new(name: 'CreateUserResponse')
+    CreateViewRequest = Shapes::StructureShape.new(name: 'CreateViewRequest')
+    CreateViewResponse = Shapes::StructureShape.new(name: 'CreateViewResponse')
+    CreateViewVersionRequest = Shapes::StructureShape.new(name: 'CreateViewVersionRequest')
+    CreateViewVersionResponse = Shapes::StructureShape.new(name: 'CreateViewVersionResponse')
     CreateVocabularyRequest = Shapes::StructureShape.new(name: 'CreateVocabularyRequest')
     CreateVocabularyResponse = Shapes::StructureShape.new(name: 'CreateVocabularyResponse')
     Credentials = Shapes::StructureShape.new(name: 'Credentials')
@@ -207,6 +211,10 @@ module Aws::Connect
     DeleteUseCaseRequest = Shapes::StructureShape.new(name: 'DeleteUseCaseRequest')
     DeleteUserHierarchyGroupRequest = Shapes::StructureShape.new(name: 'DeleteUserHierarchyGroupRequest')
     DeleteUserRequest = Shapes::StructureShape.new(name: 'DeleteUserRequest')
+    DeleteViewRequest = Shapes::StructureShape.new(name: 'DeleteViewRequest')
+    DeleteViewResponse = Shapes::StructureShape.new(name: 'DeleteViewResponse')
+    DeleteViewVersionRequest = Shapes::StructureShape.new(name: 'DeleteViewVersionRequest')
+    DeleteViewVersionResponse = Shapes::StructureShape.new(name: 'DeleteViewVersionResponse')
     DeleteVocabularyRequest = Shapes::StructureShape.new(name: 'DeleteVocabularyRequest')
     DeleteVocabularyResponse = Shapes::StructureShape.new(name: 'DeleteVocabularyResponse')
     DescribeAgentStatusRequest = Shapes::StructureShape.new(name: 'DescribeAgentStatusRequest')
@@ -251,6 +259,8 @@ module Aws::Connect
     DescribeUserHierarchyStructureResponse = Shapes::StructureShape.new(name: 'DescribeUserHierarchyStructureResponse')
     DescribeUserRequest = Shapes::StructureShape.new(name: 'DescribeUserRequest')
     DescribeUserResponse = Shapes::StructureShape.new(name: 'DescribeUserResponse')
+    DescribeViewRequest = Shapes::StructureShape.new(name: 'DescribeViewRequest')
+    DescribeViewResponse = Shapes::StructureShape.new(name: 'DescribeViewResponse')
     DescribeVocabularyRequest = Shapes::StructureShape.new(name: 'DescribeVocabularyRequest')
     DescribeVocabularyResponse = Shapes::StructureShape.new(name: 'DescribeVocabularyResponse')
     Description = Shapes::StringShape.new(name: 'Description')
@@ -525,6 +535,10 @@ module Aws::Connect
     ListUserHierarchyGroupsResponse = Shapes::StructureShape.new(name: 'ListUserHierarchyGroupsResponse')
     ListUsersRequest = Shapes::StructureShape.new(name: 'ListUsersRequest')
     ListUsersResponse = Shapes::StructureShape.new(name: 'ListUsersResponse')
+    ListViewVersionsRequest = Shapes::StructureShape.new(name: 'ListViewVersionsRequest')
+    ListViewVersionsResponse = Shapes::StructureShape.new(name: 'ListViewVersionsResponse')
+    ListViewsRequest = Shapes::StructureShape.new(name: 'ListViewsRequest')
+    ListViewsResponse = Shapes::StructureShape.new(name: 'ListViewsResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MaxResult10 = Shapes::IntegerShape.new(name: 'MaxResult10')
     MaxResult100 = Shapes::IntegerShape.new(name: 'MaxResult100')
@@ -533,6 +547,7 @@ module Aws::Connect
     MaxResult200 = Shapes::IntegerShape.new(name: 'MaxResult200')
     MaxResult25 = Shapes::IntegerShape.new(name: 'MaxResult25')
     MaxResult7 = Shapes::IntegerShape.new(name: 'MaxResult7')
+    MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaximumResultReturnedException = Shapes::StructureShape.new(name: 'MaximumResultReturnedException')
     MediaConcurrencies = Shapes::ListShape.new(name: 'MediaConcurrencies')
     MediaConcurrency = Shapes::StructureShape.new(name: 'MediaConcurrency')
@@ -841,6 +856,7 @@ module Aws::Connect
     TimeZone = Shapes::StringShape.new(name: 'TimeZone')
     TimerEligibleParticipantRoles = Shapes::StringShape.new(name: 'TimerEligibleParticipantRoles')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     TrafficDistributionGroup = Shapes::StructureShape.new(name: 'TrafficDistributionGroup')
     TrafficDistributionGroupArn = Shapes::StringShape.new(name: 'TrafficDistributionGroupArn')
     TrafficDistributionGroupId = Shapes::StringShape.new(name: 'TrafficDistributionGroupId')
@@ -915,6 +931,10 @@ module Aws::Connect
     UpdateUserPhoneConfigRequest = Shapes::StructureShape.new(name: 'UpdateUserPhoneConfigRequest')
     UpdateUserRoutingProfileRequest = Shapes::StructureShape.new(name: 'UpdateUserRoutingProfileRequest')
     UpdateUserSecurityProfilesRequest = Shapes::StructureShape.new(name: 'UpdateUserSecurityProfilesRequest')
+    UpdateViewContentRequest = Shapes::StructureShape.new(name: 'UpdateViewContentRequest')
+    UpdateViewContentResponse = Shapes::StructureShape.new(name: 'UpdateViewContentResponse')
+    UpdateViewMetadataRequest = Shapes::StructureShape.new(name: 'UpdateViewMetadataRequest')
+    UpdateViewMetadataResponse = Shapes::StructureShape.new(name: 'UpdateViewMetadataResponse')
     Url = Shapes::StringShape.new(name: 'Url')
     UrlReference = Shapes::StructureShape.new(name: 'UrlReference')
     UseCase = Shapes::StructureShape.new(name: 'UseCase')
@@ -944,6 +964,27 @@ module Aws::Connect
     UserTagMap = Shapes::MapShape.new(name: 'UserTagMap')
     Value = Shapes::FloatShape.new(name: 'Value')
     VersionNumber = Shapes::IntegerShape.new(name: 'VersionNumber')
+    View = Shapes::StructureShape.new(name: 'View')
+    ViewAction = Shapes::StringShape.new(name: 'ViewAction')
+    ViewActions = Shapes::ListShape.new(name: 'ViewActions')
+    ViewContent = Shapes::StructureShape.new(name: 'ViewContent')
+    ViewContentSha256 = Shapes::StringShape.new(name: 'ViewContentSha256')
+    ViewDescription = Shapes::StringShape.new(name: 'ViewDescription')
+    ViewId = Shapes::StringShape.new(name: 'ViewId')
+    ViewInputContent = Shapes::StructureShape.new(name: 'ViewInputContent')
+    ViewInputSchema = Shapes::StringShape.new(name: 'ViewInputSchema')
+    ViewName = Shapes::StringShape.new(name: 'ViewName')
+    ViewStatus = Shapes::StringShape.new(name: 'ViewStatus')
+    ViewSummary = Shapes::StructureShape.new(name: 'ViewSummary')
+    ViewTemplate = Shapes::StringShape.new(name: 'ViewTemplate')
+    ViewType = Shapes::StringShape.new(name: 'ViewType')
+    ViewVersion = Shapes::IntegerShape.new(name: 'ViewVersion')
+    ViewVersionSummary = Shapes::StructureShape.new(name: 'ViewVersionSummary')
+    ViewVersionSummaryList = Shapes::ListShape.new(name: 'ViewVersionSummaryList')
+    ViewsClientToken = Shapes::StringShape.new(name: 'ViewsClientToken')
+    ViewsInstanceId = Shapes::StringShape.new(name: 'ViewsInstanceId')
+    ViewsNextToken = Shapes::StringShape.new(name: 'ViewsNextToken')
+    ViewsSummaryList = Shapes::ListShape.new(name: 'ViewsSummaryList')
     Vocabulary = Shapes::StructureShape.new(name: 'Vocabulary')
     VocabularyContent = Shapes::StringShape.new(name: 'VocabularyContent')
     VocabularyFailureReason = Shapes::StringShape.new(name: 'VocabularyFailureReason')
@@ -1462,6 +1503,27 @@ module Aws::Connect
     CreateUserResponse.add_member(:user_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "UserArn"))
     CreateUserResponse.struct_class = Types::CreateUserResponse
 
+    CreateViewRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: ViewsInstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    CreateViewRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ViewsClientToken, location_name: "ClientToken"))
+    CreateViewRequest.add_member(:status, Shapes::ShapeRef.new(shape: ViewStatus, required: true, location_name: "Status"))
+    CreateViewRequest.add_member(:content, Shapes::ShapeRef.new(shape: ViewInputContent, required: true, location_name: "Content"))
+    CreateViewRequest.add_member(:description, Shapes::ShapeRef.new(shape: ViewDescription, location_name: "Description"))
+    CreateViewRequest.add_member(:name, Shapes::ShapeRef.new(shape: ViewName, required: true, location_name: "Name"))
+    CreateViewRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateViewRequest.struct_class = Types::CreateViewRequest
+
+    CreateViewResponse.add_member(:view, Shapes::ShapeRef.new(shape: View, location_name: "View"))
+    CreateViewResponse.struct_class = Types::CreateViewResponse
+
+    CreateViewVersionRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: ViewsInstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    CreateViewVersionRequest.add_member(:view_id, Shapes::ShapeRef.new(shape: ViewId, required: true, location: "uri", location_name: "ViewId"))
+    CreateViewVersionRequest.add_member(:version_description, Shapes::ShapeRef.new(shape: ViewDescription, location_name: "VersionDescription"))
+    CreateViewVersionRequest.add_member(:view_content_sha_256, Shapes::ShapeRef.new(shape: ViewContentSha256, location_name: "ViewContentSha256"))
+    CreateViewVersionRequest.struct_class = Types::CreateViewVersionRequest
+
+    CreateViewVersionResponse.add_member(:view, Shapes::ShapeRef.new(shape: View, location_name: "View"))
+    CreateViewVersionResponse.struct_class = Types::CreateViewVersionResponse
+
     CreateVocabularyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateVocabularyRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     CreateVocabularyRequest.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, required: true, location_name: "VocabularyName"))
@@ -1609,6 +1671,19 @@ module Aws::Connect
     DeleteUserRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DeleteUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "UserId"))
     DeleteUserRequest.struct_class = Types::DeleteUserRequest
+
+    DeleteViewRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: ViewsInstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DeleteViewRequest.add_member(:view_id, Shapes::ShapeRef.new(shape: ViewId, required: true, location: "uri", location_name: "ViewId"))
+    DeleteViewRequest.struct_class = Types::DeleteViewRequest
+
+    DeleteViewResponse.struct_class = Types::DeleteViewResponse
+
+    DeleteViewVersionRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: ViewsInstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DeleteViewVersionRequest.add_member(:view_id, Shapes::ShapeRef.new(shape: ViewId, required: true, location: "uri", location_name: "ViewId"))
+    DeleteViewVersionRequest.add_member(:view_version, Shapes::ShapeRef.new(shape: ViewVersion, required: true, location: "uri", location_name: "ViewVersion"))
+    DeleteViewVersionRequest.struct_class = Types::DeleteViewVersionRequest
+
+    DeleteViewVersionResponse.struct_class = Types::DeleteViewVersionResponse
 
     DeleteVocabularyRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DeleteVocabularyRequest.add_member(:vocabulary_id, Shapes::ShapeRef.new(shape: VocabularyId, required: true, location: "uri", location_name: "VocabularyId"))
@@ -1764,6 +1839,13 @@ module Aws::Connect
 
     DescribeUserResponse.add_member(:user, Shapes::ShapeRef.new(shape: User, location_name: "User"))
     DescribeUserResponse.struct_class = Types::DescribeUserResponse
+
+    DescribeViewRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: ViewsInstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DescribeViewRequest.add_member(:view_id, Shapes::ShapeRef.new(shape: ViewId, required: true, location: "uri", location_name: "ViewId"))
+    DescribeViewRequest.struct_class = Types::DescribeViewRequest
+
+    DescribeViewResponse.add_member(:view, Shapes::ShapeRef.new(shape: View, location_name: "View"))
+    DescribeViewResponse.struct_class = Types::DescribeViewResponse
 
     DescribeVocabularyRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DescribeVocabularyRequest.add_member(:vocabulary_id, Shapes::ShapeRef.new(shape: VocabularyId, required: true, location: "uri", location_name: "VocabularyId"))
@@ -2764,6 +2846,26 @@ module Aws::Connect
     ListUsersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListUsersResponse.struct_class = Types::ListUsersResponse
 
+    ListViewVersionsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: ViewsInstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListViewVersionsRequest.add_member(:view_id, Shapes::ShapeRef.new(shape: ViewId, required: true, location: "uri", location_name: "ViewId"))
+    ListViewVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ViewsNextToken, location: "querystring", location_name: "nextToken"))
+    ListViewVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListViewVersionsRequest.struct_class = Types::ListViewVersionsRequest
+
+    ListViewVersionsResponse.add_member(:view_version_summary_list, Shapes::ShapeRef.new(shape: ViewVersionSummaryList, location_name: "ViewVersionSummaryList"))
+    ListViewVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: ViewsNextToken, location_name: "NextToken"))
+    ListViewVersionsResponse.struct_class = Types::ListViewVersionsResponse
+
+    ListViewsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: ViewsInstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListViewsRequest.add_member(:type, Shapes::ShapeRef.new(shape: ViewType, location: "querystring", location_name: "type"))
+    ListViewsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ViewsNextToken, location: "querystring", location_name: "nextToken"))
+    ListViewsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListViewsRequest.struct_class = Types::ListViewsRequest
+
+    ListViewsResponse.add_member(:views_summary_list, Shapes::ShapeRef.new(shape: ViewsSummaryList, location_name: "ViewsSummaryList"))
+    ListViewsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: ViewsNextToken, location_name: "NextToken"))
+    ListViewsResponse.struct_class = Types::ListViewsResponse
+
     MaximumResultReturnedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     MaximumResultReturnedException.struct_class = Types::MaximumResultReturnedException
 
@@ -3603,6 +3705,9 @@ module Aws::Connect
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
+    TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
     TrafficDistributionGroup.add_member(:id, Shapes::ShapeRef.new(shape: TrafficDistributionGroupId, location_name: "Id"))
     TrafficDistributionGroup.add_member(:arn, Shapes::ShapeRef.new(shape: TrafficDistributionGroupArn, location_name: "Arn"))
     TrafficDistributionGroup.add_member(:name, Shapes::ShapeRef.new(shape: Name128, location_name: "Name"))
@@ -3940,6 +4045,23 @@ module Aws::Connect
     UpdateUserSecurityProfilesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     UpdateUserSecurityProfilesRequest.struct_class = Types::UpdateUserSecurityProfilesRequest
 
+    UpdateViewContentRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: ViewsInstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    UpdateViewContentRequest.add_member(:view_id, Shapes::ShapeRef.new(shape: ViewId, required: true, location: "uri", location_name: "ViewId"))
+    UpdateViewContentRequest.add_member(:status, Shapes::ShapeRef.new(shape: ViewStatus, required: true, location_name: "Status"))
+    UpdateViewContentRequest.add_member(:content, Shapes::ShapeRef.new(shape: ViewInputContent, required: true, location_name: "Content"))
+    UpdateViewContentRequest.struct_class = Types::UpdateViewContentRequest
+
+    UpdateViewContentResponse.add_member(:view, Shapes::ShapeRef.new(shape: View, location_name: "View"))
+    UpdateViewContentResponse.struct_class = Types::UpdateViewContentResponse
+
+    UpdateViewMetadataRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: ViewsInstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    UpdateViewMetadataRequest.add_member(:view_id, Shapes::ShapeRef.new(shape: ViewId, required: true, location: "uri", location_name: "ViewId"))
+    UpdateViewMetadataRequest.add_member(:name, Shapes::ShapeRef.new(shape: ViewName, location_name: "Name"))
+    UpdateViewMetadataRequest.add_member(:description, Shapes::ShapeRef.new(shape: ViewDescription, location_name: "Description"))
+    UpdateViewMetadataRequest.struct_class = Types::UpdateViewMetadataRequest
+
+    UpdateViewMetadataResponse.struct_class = Types::UpdateViewMetadataResponse
+
     UrlReference.add_member(:name, Shapes::ShapeRef.new(shape: ReferenceKey, location_name: "Name"))
     UrlReference.add_member(:value, Shapes::ShapeRef.new(shape: ReferenceValue, location_name: "Value"))
     UrlReference.struct_class = Types::UrlReference
@@ -4049,6 +4171,53 @@ module Aws::Connect
 
     UserTagMap.key = Shapes::ShapeRef.new(shape: String)
     UserTagMap.value = Shapes::ShapeRef.new(shape: String)
+
+    View.add_member(:id, Shapes::ShapeRef.new(shape: ViewId, location_name: "Id"))
+    View.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    View.add_member(:name, Shapes::ShapeRef.new(shape: ViewName, location_name: "Name"))
+    View.add_member(:status, Shapes::ShapeRef.new(shape: ViewStatus, location_name: "Status"))
+    View.add_member(:type, Shapes::ShapeRef.new(shape: ViewType, location_name: "Type"))
+    View.add_member(:description, Shapes::ShapeRef.new(shape: ViewDescription, location_name: "Description"))
+    View.add_member(:version, Shapes::ShapeRef.new(shape: ViewVersion, location_name: "Version"))
+    View.add_member(:version_description, Shapes::ShapeRef.new(shape: ViewDescription, location_name: "VersionDescription"))
+    View.add_member(:content, Shapes::ShapeRef.new(shape: ViewContent, location_name: "Content"))
+    View.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    View.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    View.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    View.add_member(:view_content_sha_256, Shapes::ShapeRef.new(shape: ViewContentSha256, location_name: "ViewContentSha256"))
+    View.struct_class = Types::View
+
+    ViewActions.member = Shapes::ShapeRef.new(shape: ViewAction)
+
+    ViewContent.add_member(:input_schema, Shapes::ShapeRef.new(shape: ViewInputSchema, location_name: "InputSchema"))
+    ViewContent.add_member(:template, Shapes::ShapeRef.new(shape: ViewTemplate, location_name: "Template"))
+    ViewContent.add_member(:actions, Shapes::ShapeRef.new(shape: ViewActions, location_name: "Actions"))
+    ViewContent.struct_class = Types::ViewContent
+
+    ViewInputContent.add_member(:template, Shapes::ShapeRef.new(shape: ViewTemplate, location_name: "Template"))
+    ViewInputContent.add_member(:actions, Shapes::ShapeRef.new(shape: ViewActions, location_name: "Actions"))
+    ViewInputContent.struct_class = Types::ViewInputContent
+
+    ViewSummary.add_member(:id, Shapes::ShapeRef.new(shape: ViewId, location_name: "Id"))
+    ViewSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    ViewSummary.add_member(:name, Shapes::ShapeRef.new(shape: ViewName, location_name: "Name"))
+    ViewSummary.add_member(:type, Shapes::ShapeRef.new(shape: ViewType, location_name: "Type"))
+    ViewSummary.add_member(:status, Shapes::ShapeRef.new(shape: ViewStatus, location_name: "Status"))
+    ViewSummary.add_member(:description, Shapes::ShapeRef.new(shape: ViewDescription, location_name: "Description"))
+    ViewSummary.struct_class = Types::ViewSummary
+
+    ViewVersionSummary.add_member(:id, Shapes::ShapeRef.new(shape: ViewId, location_name: "Id"))
+    ViewVersionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    ViewVersionSummary.add_member(:description, Shapes::ShapeRef.new(shape: ViewDescription, location_name: "Description"))
+    ViewVersionSummary.add_member(:name, Shapes::ShapeRef.new(shape: ViewName, location_name: "Name"))
+    ViewVersionSummary.add_member(:type, Shapes::ShapeRef.new(shape: ViewType, location_name: "Type"))
+    ViewVersionSummary.add_member(:version, Shapes::ShapeRef.new(shape: ViewVersion, location_name: "Version"))
+    ViewVersionSummary.add_member(:version_description, Shapes::ShapeRef.new(shape: ViewDescription, location_name: "VersionDescription"))
+    ViewVersionSummary.struct_class = Types::ViewVersionSummary
+
+    ViewVersionSummaryList.member = Shapes::ShapeRef.new(shape: ViewVersionSummary)
+
+    ViewsSummaryList.member = Shapes::ShapeRef.new(shape: ViewSummary)
 
     Vocabulary.add_member(:name, Shapes::ShapeRef.new(shape: VocabularyName, required: true, location_name: "Name"))
     Vocabulary.add_member(:id, Shapes::ShapeRef.new(shape: VocabularyId, required: true, location_name: "Id"))
@@ -4559,6 +4728,39 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:create_view, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateView"
+        o.http_method = "PUT"
+        o.http_request_uri = "/views/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: CreateViewRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateViewResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:create_view_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateViewVersion"
+        o.http_method = "PUT"
+        o.http_request_uri = "/views/{InstanceId}/{ViewId}/versions"
+        o.input = Shapes::ShapeRef.new(shape: CreateViewVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateViewVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
       api.add_operation(:create_vocabulary, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateVocabulary"
         o.http_method = "POST"
@@ -4822,6 +5024,36 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:delete_view, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteView"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/views/{InstanceId}/{ViewId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteViewRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteViewResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:delete_view_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteViewVersion"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/views/{InstanceId}/{ViewId}/versions/{ViewVersion}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteViewVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteViewVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
       api.add_operation(:delete_vocabulary, Seahorse::Model::Operation.new.tap do |o|
@@ -5107,6 +5339,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:describe_view, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeView"
+        o.http_method = "GET"
+        o.http_request_uri = "/views/{InstanceId}/{ViewId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeViewRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeViewResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:describe_vocabulary, Seahorse::Model::Operation.new.tap do |o|
@@ -6064,6 +6310,46 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_view_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListViewVersions"
+        o.http_method = "GET"
+        o.http_request_uri = "/views/{InstanceId}/{ViewId}/versions"
+        o.input = Shapes::ShapeRef.new(shape: ListViewVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListViewVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_views, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListViews"
+        o.http_method = "GET"
+        o.http_request_uri = "/views/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: ListViewsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListViewsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -7052,6 +7338,37 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:update_view_content, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateViewContent"
+        o.http_method = "POST"
+        o.http_request_uri = "/views/{InstanceId}/{ViewId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateViewContentRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateViewContentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:update_view_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateViewMetadata"
+        o.http_method = "POST"
+        o.http_request_uri = "/views/{InstanceId}/{ViewId}/metadata"
+        o.input = Shapes::ShapeRef.new(shape: UpdateViewMetadataRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateViewMetadataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
     end
 

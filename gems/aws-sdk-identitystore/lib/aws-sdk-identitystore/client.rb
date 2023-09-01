@@ -405,9 +405,9 @@ module Aws::IdentityStore
     #
     # @option params [String] :display_name
     #   A string containing the name of the group. This value is commonly
-    #   displayed when the group is referenced. "Administrator" and
-    #   "AWSAdministrators" are reserved names and can't be used for users
-    #   or groups.
+    #   displayed when the group is referenced. `Administrator` and
+    #   `AWSAdministrators` are reserved names and can't be used for users or
+    #   groups.
     #
     # @option params [String] :description
     #   A string containing the description of the group.
@@ -493,7 +493,7 @@ module Aws::IdentityStore
     #   characters. This value can consist of letters, accented characters,
     #   symbols, numbers, and punctuation. This value is specified at the time
     #   the user is created and stored as an attribute of the user object in
-    #   the identity store. "Administrator" and "AWSAdministrators" are
+    #   the identity store. `Administrator` and `AWSAdministrators` are
     #   reserved names and can't be used for users or groups.
     #
     # @option params [Types::Name] :name
@@ -689,6 +689,16 @@ module Aws::IdentityStore
     # Retrieves the group metadata and attributes from `GroupId` in an
     # identity store.
     #
+    # <note markdown="1"> If you have administrator access to a member account, you can use this
+    # API from the member account. Read about [member accounts][1] in the
+    # *Organizations User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html
+    #
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store, such as
     #   `d-1234567890`. In this example, `d-` is a fixed prefix, and
@@ -736,6 +746,16 @@ module Aws::IdentityStore
     # Retrieves membership metadata and attributes from `MembershipId` in an
     # identity store.
     #
+    # <note markdown="1"> If you have administrator access to a member account, you can use this
+    # API from the member account. Read about [member accounts][1] in the
+    # *Organizations User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html
+    #
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store.
     #
@@ -774,6 +794,16 @@ module Aws::IdentityStore
 
     # Retrieves the user metadata and attributes from the `UserId` in an
     # identity store.
+    #
+    # <note markdown="1"> If you have administrator access to a member account, you can use this
+    # API from the member account. Read about [member accounts][1] in the
+    # *Organizations User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html
     #
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store, such as
@@ -862,6 +892,16 @@ module Aws::IdentityStore
 
     # Retrieves `GroupId` in an identity store.
     #
+    # <note markdown="1"> If you have administrator access to a member account, you can use this
+    # API from the member account. Read about [member accounts][1] in the
+    # *Organizations User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html
+    #
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store.
     #
@@ -909,6 +949,16 @@ module Aws::IdentityStore
 
     # Retrieves the `MembershipId` in an identity store.
     #
+    # <note markdown="1"> If you have administrator access to a member account, you can use this
+    # API from the member account. Read about [member accounts][1] in the
+    # *Organizations User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html
+    #
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store.
     #
@@ -950,6 +1000,16 @@ module Aws::IdentityStore
     end
 
     # Retrieves the `UserId` in an identity store.
+    #
+    # <note markdown="1"> If you have administrator access to a member account, you can use this
+    # API from the member account. Read about [member accounts][1] in the
+    # *Organizations User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html
     #
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store.
@@ -999,6 +1059,16 @@ module Aws::IdentityStore
     # Checks the user's membership in all requested groups and returns if
     # the member exists in all queried groups.
     #
+    # <note markdown="1"> If you have administrator access to a member account, you can use this
+    # API from the member account. Read about [member accounts][1] in the
+    # *Organizations User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html
+    #
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store.
     #
@@ -1041,6 +1111,16 @@ module Aws::IdentityStore
     # For the specified group in the specified identity store, returns the
     # list of all `GroupMembership` objects and returns results in paginated
     # form.
+    #
+    # <note markdown="1"> If you have administrator access to a member account, you can use this
+    # API from the member account. Read about [member accounts][1] in the
+    # *Organizations User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html
     #
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store.
@@ -1098,6 +1178,16 @@ module Aws::IdentityStore
     # For the specified member in the specified identity store, returns the
     # list of all `GroupMembership` objects and returns results in paginated
     # form.
+    #
+    # <note markdown="1"> If you have administrator access to a member account, you can use this
+    # API from the member account. Read about [member accounts][1] in the
+    # *Organizations User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html
     #
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store.
@@ -1160,6 +1250,16 @@ module Aws::IdentityStore
     # Lists all groups in the identity store. Returns a paginated list of
     # complete `Group` objects. Filtering for a `Group` by the `DisplayName`
     # attribute is deprecated. Instead, use the `GetGroupId` API action.
+    #
+    # <note markdown="1"> If you have administrator access to a member account, you can use this
+    # API from the member account. Read about [member accounts][1] in the
+    # *Organizations User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html
     #
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store, such as
@@ -1230,6 +1330,16 @@ module Aws::IdentityStore
     # Lists all users in the identity store. Returns a paginated list of
     # complete `User` objects. Filtering for a `User` by the `UserName`
     # attribute is deprecated. Instead, use the `GetUserId` API action.
+    #
+    # <note markdown="1"> If you have administrator access to a member account, you can use this
+    # API from the member account. Read about [member accounts][1] in the
+    # *Organizations User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html
     #
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store, such as
@@ -1414,7 +1524,7 @@ module Aws::IdentityStore
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-identitystore'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
