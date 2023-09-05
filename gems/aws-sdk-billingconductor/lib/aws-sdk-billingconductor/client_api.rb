@@ -107,6 +107,11 @@ module Aws::BillingConductor
     FreeTierConfig = Shapes::StructureShape.new(name: 'FreeTierConfig')
     Instant = Shapes::IntegerShape.new(name: 'Instant')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    LineItemFilter = Shapes::StructureShape.new(name: 'LineItemFilter')
+    LineItemFilterAttributeName = Shapes::StringShape.new(name: 'LineItemFilterAttributeName')
+    LineItemFilterValue = Shapes::StringShape.new(name: 'LineItemFilterValue')
+    LineItemFilterValuesList = Shapes::ListShape.new(name: 'LineItemFilterValuesList')
+    LineItemFiltersList = Shapes::ListShape.new(name: 'LineItemFiltersList')
     ListAccountAssociationsFilter = Shapes::StructureShape.new(name: 'ListAccountAssociationsFilter')
     ListAccountAssociationsInput = Shapes::StructureShape.new(name: 'ListAccountAssociationsInput')
     ListAccountAssociationsOutput = Shapes::StructureShape.new(name: 'ListAccountAssociationsOutput')
@@ -146,6 +151,7 @@ module Aws::BillingConductor
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Margin = Shapes::StringShape.new(name: 'Margin')
     MarginPercentage = Shapes::StringShape.new(name: 'MarginPercentage')
+    MatchOption = Shapes::StringShape.new(name: 'MatchOption')
     MaxBillingGroupResults = Shapes::IntegerShape.new(name: 'MaxBillingGroupResults')
     MaxCustomLineItemResults = Shapes::IntegerShape.new(name: 'MaxCustomLineItemResults')
     MaxPricingPlanResults = Shapes::IntegerShape.new(name: 'MaxPricingPlanResults')
@@ -382,6 +388,7 @@ module Aws::BillingConductor
     CustomLineItemChargeDetails.add_member(:flat, Shapes::ShapeRef.new(shape: CustomLineItemFlatChargeDetails, location_name: "Flat"))
     CustomLineItemChargeDetails.add_member(:percentage, Shapes::ShapeRef.new(shape: CustomLineItemPercentageChargeDetails, location_name: "Percentage"))
     CustomLineItemChargeDetails.add_member(:type, Shapes::ShapeRef.new(shape: CustomLineItemType, required: true, location_name: "Type"))
+    CustomLineItemChargeDetails.add_member(:line_item_filters, Shapes::ShapeRef.new(shape: LineItemFiltersList, location_name: "LineItemFilters"))
     CustomLineItemChargeDetails.struct_class = Types::CustomLineItemChargeDetails
 
     CustomLineItemFlatChargeDetails.add_member(:charge_value, Shapes::ShapeRef.new(shape: CustomLineItemChargeValue, required: true, location_name: "ChargeValue"))
@@ -476,6 +483,15 @@ module Aws::BillingConductor
     InternalServerException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: RetryAfterSeconds, location: "header", location_name: "Retry-After"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    LineItemFilter.add_member(:attribute, Shapes::ShapeRef.new(shape: LineItemFilterAttributeName, required: true, location_name: "Attribute"))
+    LineItemFilter.add_member(:match_option, Shapes::ShapeRef.new(shape: MatchOption, required: true, location_name: "MatchOption"))
+    LineItemFilter.add_member(:values, Shapes::ShapeRef.new(shape: LineItemFilterValuesList, required: true, location_name: "Values"))
+    LineItemFilter.struct_class = Types::LineItemFilter
+
+    LineItemFilterValuesList.member = Shapes::ShapeRef.new(shape: LineItemFilterValue)
+
+    LineItemFiltersList.member = Shapes::ShapeRef.new(shape: LineItemFilter)
+
     ListAccountAssociationsFilter.add_member(:association, Shapes::ShapeRef.new(shape: Association, location_name: "Association"))
     ListAccountAssociationsFilter.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     ListAccountAssociationsFilter.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdFilterList, location_name: "AccountIds"))
@@ -525,6 +541,7 @@ module Aws::BillingConductor
     ListCustomLineItemChargeDetails.add_member(:flat, Shapes::ShapeRef.new(shape: ListCustomLineItemFlatChargeDetails, location_name: "Flat"))
     ListCustomLineItemChargeDetails.add_member(:percentage, Shapes::ShapeRef.new(shape: ListCustomLineItemPercentageChargeDetails, location_name: "Percentage"))
     ListCustomLineItemChargeDetails.add_member(:type, Shapes::ShapeRef.new(shape: CustomLineItemType, required: true, location_name: "Type"))
+    ListCustomLineItemChargeDetails.add_member(:line_item_filters, Shapes::ShapeRef.new(shape: LineItemFiltersList, location_name: "LineItemFilters"))
     ListCustomLineItemChargeDetails.struct_class = Types::ListCustomLineItemChargeDetails
 
     ListCustomLineItemFlatChargeDetails.add_member(:charge_value, Shapes::ShapeRef.new(shape: CustomLineItemChargeValue, required: true, location_name: "ChargeValue"))
@@ -742,6 +759,7 @@ module Aws::BillingConductor
 
     UpdateCustomLineItemChargeDetails.add_member(:flat, Shapes::ShapeRef.new(shape: UpdateCustomLineItemFlatChargeDetails, location_name: "Flat"))
     UpdateCustomLineItemChargeDetails.add_member(:percentage, Shapes::ShapeRef.new(shape: UpdateCustomLineItemPercentageChargeDetails, location_name: "Percentage"))
+    UpdateCustomLineItemChargeDetails.add_member(:line_item_filters, Shapes::ShapeRef.new(shape: LineItemFiltersList, location_name: "LineItemFilters"))
     UpdateCustomLineItemChargeDetails.struct_class = Types::UpdateCustomLineItemChargeDetails
 
     UpdateCustomLineItemFlatChargeDetails.add_member(:charge_value, Shapes::ShapeRef.new(shape: CustomLineItemChargeValue, required: true, location_name: "ChargeValue"))

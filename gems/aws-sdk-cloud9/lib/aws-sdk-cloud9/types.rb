@@ -86,6 +86,8 @@ module Aws::Cloud9
     #
     #   * Ubuntu 18.04: `ubuntu-18.04-x86_64`
     #
+    #   * Ubuntu 22.04: `ubuntu-22.04-x86_64`
+    #
     #   **SSM paths**
     #
     #   * <b>Amazon Linux (default):
@@ -97,6 +99,9 @@ module Aws::Cloud9
     #
     #   * Ubuntu 18.04:
     #     `resolve:ssm:/aws/service/cloud9/amis/ubuntu-18.04-x86_64`
+    #
+    #   * Ubuntu 22.04:
+    #     `resolve:ssm:/aws/service/cloud9/amis/ubuntu-22.04-x86_64`
     #   @return [String]
     #
     # @!attribute [rw] automatic_stop_time_minutes

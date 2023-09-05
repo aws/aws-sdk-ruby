@@ -7292,14 +7292,14 @@ module Aws::ECS
     #   When you specify `fargateTaskRetirementWaitPeriod` for the `name`,
     #   the following are the valid values:
     #
-    #   * `0` - immediately retire the tasks and patch Fargate
+    #   * `0` - Amazon Web Services sends the notification, and immediately
+    #     retires the affected tasks.
     #
-    #     There is no advanced notification. Your tasks are retired
-    #     immediately, and Fargate is patched without any notification.
+    #   * `7` - Amazon Web Services sends the notification, and waits 7
+    #     calendar days to retire the tasks.
     #
-    #   * `7` -wait 7 calendar days to retire the tasks and patch Fargate
-    #
-    #   * `14` - wait 14 calendar days to retire the tasks and patch Fargate
+    #   * `14` - Amazon Web Services sends the notification, and waits 14
+    #     calendar days to retire the tasks.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAccountSettingDefaultRequest AWS API Documentation
@@ -7354,14 +7354,14 @@ module Aws::ECS
     #   When you specify `fargateTaskRetirementWaitPeriod` for the `name`,
     #   the following are the valid values:
     #
-    #   * `0` - immediately retire the tasks and patch Fargate
+    #   * `0` - Amazon Web Services sends the notification, and immediately
+    #     retires the affected tasks.
     #
-    #     There is no advanced notification. Your tasks are retired
-    #     immediately, and Fargate is patched without any notification.
+    #   * `7` - Amazon Web Services sends the notification, and waits 7
+    #     calendar days to retire the tasks.
     #
-    #   * `7` -wait 7 calendar days to retire the tasks and patch Fargate
-    #
-    #   * `14` - wait 14 calendar days to retire the tasks and patch Fargate
+    #   * `14` - Amazon Web Services sends the notification, and waits 14
+    #     calendar days to retire the tasks.
     #   @return [String]
     #
     # @!attribute [rw] principal_arn

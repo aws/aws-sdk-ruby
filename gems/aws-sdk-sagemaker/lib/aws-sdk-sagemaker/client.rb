@@ -1808,7 +1808,7 @@ module Aws::SageMaker
     #     model_package_version_arn: "ModelPackageArn",
     #     input_config: {
     #       s3_uri: "S3Uri", # required
-    #       data_input_config: "DataInputConfig", # required
+    #       data_input_config: "DataInputConfig",
     #       framework: "TENSORFLOW", # required, accepts TENSORFLOW, KERAS, MXNET, ONNX, PYTORCH, XGBOOST, TFLITE, DARKNET, SKLEARN
     #       framework_version: "FrameworkVersion",
     #     },
@@ -10502,6 +10502,7 @@ module Aws::SageMaker
     #   * {Types::DescribeCompilationJobResponse#input_config #input_config} => Types::InputConfig
     #   * {Types::DescribeCompilationJobResponse#output_config #output_config} => Types::OutputConfig
     #   * {Types::DescribeCompilationJobResponse#vpc_config #vpc_config} => Types::NeoVpcConfig
+    #   * {Types::DescribeCompilationJobResponse#derived_information #derived_information} => Types::DerivedInformation
     #
     # @example Request syntax with placeholder values
     #
@@ -10541,6 +10542,7 @@ module Aws::SageMaker
     #   resp.vpc_config.security_group_ids[0] #=> String
     #   resp.vpc_config.subnets #=> Array
     #   resp.vpc_config.subnets[0] #=> String
+    #   resp.derived_information.derived_data_input_config #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCompilationJob AWS API Documentation
     #
@@ -24130,7 +24132,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.207.0'
+      context[:gem_version] = '1.208.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1253,12 +1253,12 @@ module Aws::VPCLattice
     #
     # @!attribute [rw] state
     #   The state of the auth policy. The auth policy is only active when
-    #   the auth type is set to `AWS_IAM`. If you provide a policy, then
-    #   authentication and authorization decisions are made based on this
-    #   policy and the client's IAM policy. If the auth type is `NONE`,
-    #   then any auth policy you provide will remain inactive. For more
-    #   information, see [Create a service network][1] in the *Amazon VPC
-    #   Lattice User Guide*.
+    #   the auth type is set to `Amazon Web Services_IAM`. If you provide a
+    #   policy, then authentication and authorization decisions are made
+    #   based on this policy and the client's IAM policy. If the auth type
+    #   is `NONE`, then any auth policy you provide will remain inactive.
+    #   For more information, see [Create a service network][1] in the
+    #   *Amazon VPC Lattice User Guide*.
     #
     #
     #
@@ -1353,7 +1353,7 @@ module Aws::VPCLattice
     end
 
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the service network or service.
+    #   An IAM policy.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/GetResourcePolicyRequest AWS API Documentation
@@ -1365,7 +1365,7 @@ module Aws::VPCLattice
     end
 
     # @!attribute [rw] policy
-    #   An IAM policy.
+    #   The Amazon Resource Name (ARN) of the service network or service.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/GetResourcePolicyResponse AWS API Documentation
@@ -2550,8 +2550,7 @@ module Aws::VPCLattice
     end
 
     # @!attribute [rw] policy
-    #   The auth policy. The policy string in JSON must not contain newlines
-    #   or blank lines.
+    #   The auth policy.
     #   @return [String]
     #
     # @!attribute [rw] resource_identifier
@@ -2569,18 +2568,17 @@ module Aws::VPCLattice
     end
 
     # @!attribute [rw] policy
-    #   The auth policy. The policy string in JSON must not contain newlines
-    #   or blank lines.
+    #   The auth policy.
     #   @return [String]
     #
     # @!attribute [rw] state
     #   The state of the auth policy. The auth policy is only active when
-    #   the auth type is set to `AWS_IAM`. If you provide a policy, then
-    #   authentication and authorization decisions are made based on this
-    #   policy and the client's IAM policy. If the Auth type is `NONE`,
-    #   then, any auth policy you provide will remain inactive. For more
-    #   information, see [Create a service network][1] in the *Amazon VPC
-    #   Lattice User Guide*.
+    #   the auth type is set to `Amazon Web Services_IAM`. If you provide a
+    #   policy, then authentication and authorization decisions are made
+    #   based on this policy and the client's IAM policy. If the Auth type
+    #   is `NONE`, then, any auth policy you provide will remain inactive.
+    #   For more information, see [Create a service network][1] in the
+    #   *Amazon VPC Lattice User Guide*.
     #
     #
     #
@@ -2597,8 +2595,7 @@ module Aws::VPCLattice
     end
 
     # @!attribute [rw] policy
-    #   An IAM policy. The policy string in JSON must not contain newlines
-    #   or blank lines.
+    #   An IAM policy.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
@@ -3237,6 +3234,10 @@ module Aws::VPCLattice
     #   specified, the IP address type defaults to `ipv4`.
     #   @return [String]
     #
+    # @!attribute [rw] lambda_event_structure_version
+    #   Lambda event structure version
+    #   @return [String]
+    #
     # @!attribute [rw] port
     #   The port on which the targets are listening. For HTTP, the default
     #   is `80`. For HTTPS, the default is `443`
@@ -3260,6 +3261,7 @@ module Aws::VPCLattice
     class TargetGroupConfig < Struct.new(
       :health_check,
       :ip_address_type,
+      :lambda_event_structure_version,
       :port,
       :protocol,
       :protocol_version,
@@ -3287,6 +3289,10 @@ module Aws::VPCLattice
     #   The type of IP address used for the target group. The possible
     #   values are `ipv4` and `ipv6`. This is an optional parameter. If not
     #   specified, the IP address type defaults to `ipv4`.
+    #   @return [String]
+    #
+    # @!attribute [rw] lambda_event_structure_version
+    #   Lambda event structure version
     #   @return [String]
     #
     # @!attribute [rw] last_updated_at
@@ -3329,6 +3335,7 @@ module Aws::VPCLattice
       :created_at,
       :id,
       :ip_address_type,
+      :lambda_event_structure_version,
       :last_updated_at,
       :name,
       :port,
@@ -3687,7 +3694,8 @@ module Aws::VPCLattice
     end
 
     # @!attribute [rw] security_group_ids
-    #   The IDs of the security groups.
+    #   The IDs of the security groups. Once you add a security group, it
+    #   cannot be removed.
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_network_vpc_association_identifier

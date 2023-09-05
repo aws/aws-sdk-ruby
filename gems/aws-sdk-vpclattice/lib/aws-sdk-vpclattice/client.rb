@@ -1053,11 +1053,10 @@ module Aws::VPCLattice
     # As a result of this operation, the association gets created in the
     # service network account and the VPC owner account.
     #
-    # If you add a security group to the service network and VPC
-    # association, the association must continue to always have at least one
-    # security group. You can add or edit security groups at any time.
-    # However, to remove all security groups, you must first delete the
-    # association and recreate it without security groups.
+    # Once a security group is added to the VPC association it cannot be
+    # removed. You can add or update the security groups being used for the
+    # VPC association once a security group is attached. To remove all
+    # security groups you must reassociate the VPC.
     #
     #
     #
@@ -1199,10 +1198,11 @@ module Aws::VPCLattice
     #         unhealthy_threshold_count: 1,
     #       },
     #       ip_address_type: "IPV4", # accepts IPV4, IPV6
-    #       port: 1, # required
-    #       protocol: "HTTP", # required, accepts HTTP, HTTPS
+    #       lambda_event_structure_version: "V1", # accepts V1, V2
+    #       port: 1,
+    #       protocol: "HTTP", # accepts HTTP, HTTPS
     #       protocol_version: "HTTP1", # accepts HTTP1, HTTP2, GRPC
-    #       vpc_identifier: "VpcId", # required
+    #       vpc_identifier: "VpcId",
     #     },
     #     name: "TargetGroupName", # required
     #     tags: {
@@ -1225,6 +1225,7 @@ module Aws::VPCLattice
     #   resp.config.health_check.protocol_version #=> String, one of "HTTP1", "HTTP2"
     #   resp.config.health_check.unhealthy_threshold_count #=> Integer
     #   resp.config.ip_address_type #=> String, one of "IPV4", "IPV6"
+    #   resp.config.lambda_event_structure_version #=> String, one of "V1", "V2"
     #   resp.config.port #=> Integer
     #   resp.config.protocol #=> String, one of "HTTP", "HTTPS"
     #   resp.config.protocol_version #=> String, one of "HTTP1", "HTTP2", "GRPC"
@@ -1265,11 +1266,12 @@ module Aws::VPCLattice
       req.send_request(options)
     end
 
-    # Deletes the specified auth policy. If an auth is set to `AWS_IAM` and
-    # the auth policy is deleted, all requests will be denied by default. If
-    # you are trying to remove the auth policy completely, you must set the
-    # auth\_type to `NONE`. If auth is enabled on the resource, but no auth
-    # policy is set, all requests will be denied.
+    # Deletes the specified auth policy. If an auth is set to `Amazon Web
+    # Services_IAM` and the auth policy is deleted, all requests will be
+    # denied by default. If you are trying to remove the auth policy
+    # completely, you must set the auth\_type to `NONE`. If auth is enabled
+    # on the resource, but no auth policy is set, all requests will be
+    # denied.
     #
     # @option params [required, String] :resource_identifier
     #   The ID or Amazon Resource Name (ARN) of the resource.
@@ -1731,11 +1733,11 @@ module Aws::VPCLattice
     end
 
     # Retrieves information about the resource policy. The resource policy
-    # is an IAM policy created on behalf of the resource owner when they
-    # share a resource.
+    # is an IAM policy created by AWS RAM on behalf of the resource owner
+    # when they share a resource.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the service network or service.
+    #   An IAM policy.
     #
     # @return [Types::GetResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2074,6 +2076,7 @@ module Aws::VPCLattice
     #   resp.config.health_check.protocol_version #=> String, one of "HTTP1", "HTTP2"
     #   resp.config.health_check.unhealthy_threshold_count #=> Integer
     #   resp.config.ip_address_type #=> String, one of "IPV4", "IPV6"
+    #   resp.config.lambda_event_structure_version #=> String, one of "V1", "V2"
     #   resp.config.port #=> Integer
     #   resp.config.protocol #=> String, one of "HTTP", "HTTPS"
     #   resp.config.protocol_version #=> String, one of "HTTP1", "HTTP2", "GRPC"
@@ -2527,6 +2530,7 @@ module Aws::VPCLattice
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].id #=> String
     #   resp.items[0].ip_address_type #=> String, one of "IPV4", "IPV6"
+    #   resp.items[0].lambda_event_structure_version #=> String, one of "V1", "V2"
     #   resp.items[0].last_updated_at #=> Time
     #   resp.items[0].name #=> String
     #   resp.items[0].port #=> Integer
@@ -2602,12 +2606,10 @@ module Aws::VPCLattice
       req.send_request(options)
     end
 
-    # Creates or updates the auth policy. The policy string in JSON must not
-    # contain newlines or blank lines.
+    # Creates or updates the auth policy.
     #
     # @option params [required, String] :policy
-    #   The auth policy. The policy string in JSON must not contain newlines
-    #   or blank lines.
+    #   The auth policy.
     #
     # @option params [required, String] :resource_identifier
     #   The ID or Amazon Resource Name (ARN) of the service network or service
@@ -2645,8 +2647,7 @@ module Aws::VPCLattice
     # permission for sharing services and service networks.
     #
     # @option params [required, String] :policy
-    #   An IAM policy. The policy string in JSON must not contain newlines or
-    #   blank lines.
+    #   An IAM policy.
     #
     # @option params [required, String] :resource_arn
     #   The ID or Amazon Resource Name (ARN) of the service network or service
@@ -3079,15 +3080,12 @@ module Aws::VPCLattice
       req.send_request(options)
     end
 
-    # Updates the service network and VPC association. If you add a security
-    # group to the service network and VPC association, the association must
-    # continue to always have at least one security group. You can add or
-    # edit security groups at any time. However, to remove all security
-    # groups, you must first delete the association and recreate it without
-    # security groups.
+    # Updates the service network and VPC association. Once you add a
+    # security group, it cannot be removed.
     #
     # @option params [required, Array<String>] :security_group_ids
-    #   The IDs of the security groups.
+    #   The IDs of the security groups. Once you add a security group, it
+    #   cannot be removed.
     #
     # @option params [required, String] :service_network_vpc_association_identifier
     #   The ID or Amazon Resource Name (ARN) of the association.
@@ -3176,6 +3174,7 @@ module Aws::VPCLattice
     #   resp.config.health_check.protocol_version #=> String, one of "HTTP1", "HTTP2"
     #   resp.config.health_check.unhealthy_threshold_count #=> Integer
     #   resp.config.ip_address_type #=> String, one of "IPV4", "IPV6"
+    #   resp.config.lambda_event_structure_version #=> String, one of "V1", "V2"
     #   resp.config.port #=> Integer
     #   resp.config.protocol #=> String, one of "HTTP", "HTTPS"
     #   resp.config.protocol_version #=> String, one of "HTTP1", "HTTP2", "GRPC"
@@ -3207,7 +3206,7 @@ module Aws::VPCLattice
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-vpclattice'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

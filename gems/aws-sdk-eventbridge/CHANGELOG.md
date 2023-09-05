@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2023-09-05)
+------------------
+
+* Feature - Improve Endpoint Ruleset test coverage.
+
 1.48.0 (2023-07-11)
 ------------------
 

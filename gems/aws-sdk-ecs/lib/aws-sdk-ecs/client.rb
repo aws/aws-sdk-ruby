@@ -5536,14 +5536,14 @@ module Aws::ECS
     #   When you specify `fargateTaskRetirementWaitPeriod` for the `name`, the
     #   following are the valid values:
     #
-    #   * `0` - immediately retire the tasks and patch Fargate
+    #   * `0` - Amazon Web Services sends the notification, and immediately
+    #     retires the affected tasks.
     #
-    #     There is no advanced notification. Your tasks are retired
-    #     immediately, and Fargate is patched without any notification.
+    #   * `7` - Amazon Web Services sends the notification, and waits 7
+    #     calendar days to retire the tasks.
     #
-    #   * `7` -wait 7 calendar days to retire the tasks and patch Fargate
-    #
-    #   * `14` - wait 14 calendar days to retire the tasks and patch Fargate
+    #   * `14` - Amazon Web Services sends the notification, and waits 14
+    #     calendar days to retire the tasks.
     #
     # @option params [String] :principal_arn
     #   The ARN of the principal, which can be a user, role, or the root user.
@@ -5678,14 +5678,14 @@ module Aws::ECS
     #   When you specify `fargateTaskRetirementWaitPeriod` for the `name`, the
     #   following are the valid values:
     #
-    #   * `0` - immediately retire the tasks and patch Fargate
+    #   * `0` - Amazon Web Services sends the notification, and immediately
+    #     retires the affected tasks.
     #
-    #     There is no advanced notification. Your tasks are retired
-    #     immediately, and Fargate is patched without any notification.
+    #   * `7` - Amazon Web Services sends the notification, and waits 7
+    #     calendar days to retire the tasks.
     #
-    #   * `7` -wait 7 calendar days to retire the tasks and patch Fargate
-    #
-    #   * `14` - wait 14 calendar days to retire the tasks and patch Fargate
+    #   * `14` - Amazon Web Services sends the notification, and waits 14
+    #     calendar days to retire the tasks.
     #
     # @return [Types::PutAccountSettingDefaultResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9808,7 +9808,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.128.0'
+      context[:gem_version] = '1.129.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

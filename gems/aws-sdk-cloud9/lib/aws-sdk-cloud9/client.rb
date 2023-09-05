@@ -454,6 +454,8 @@ module Aws::Cloud9
     #
     #   * Ubuntu 18.04: `ubuntu-18.04-x86_64`
     #
+    #   * Ubuntu 22.04: `ubuntu-22.04-x86_64`
+    #
     #   **SSM paths**
     #
     #   * <b>Amazon Linux (default):
@@ -465,6 +467,9 @@ module Aws::Cloud9
     #
     #   * Ubuntu 18.04:
     #     `resolve:ssm:/aws/service/cloud9/amis/ubuntu-18.04-x86_64`
+    #
+    #   * Ubuntu 22.04:
+    #     `resolve:ssm:/aws/service/cloud9/amis/ubuntu-22.04-x86_64`
     #
     # @option params [Integer] :automatic_stop_time_minutes
     #   The number of minutes until the running instance is shut down after
@@ -1253,7 +1258,7 @@ module Aws::Cloud9
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloud9'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

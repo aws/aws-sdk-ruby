@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2023-09-05)
+------------------
+
+* Feature - Added support for Ubuntu 22.04 that was not picked up in a previous Trebuchet request. Doc-only update.
+
 1.56.0 (2023-08-21)
 ------------------
 

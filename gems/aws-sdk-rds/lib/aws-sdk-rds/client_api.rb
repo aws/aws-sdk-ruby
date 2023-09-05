@@ -1281,6 +1281,7 @@ module Aws::RDS
     DBCluster.add_member(:master_user_secret, Shapes::ShapeRef.new(shape: MasterUserSecret, location_name: "MasterUserSecret"))
     DBCluster.add_member(:io_optimized_next_allowed_modification_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "IOOptimizedNextAllowedModificationTime"))
     DBCluster.add_member(:local_write_forwarding_status, Shapes::ShapeRef.new(shape: LocalWriteForwardingStatus, location_name: "LocalWriteForwardingStatus"))
+    DBCluster.add_member(:aws_backup_recovery_point_arn, Shapes::ShapeRef.new(shape: String, location_name: "AwsBackupRecoveryPointArn"))
     DBCluster.struct_class = Types::DBCluster
 
     DBClusterAlreadyExistsFault.struct_class = Types::DBClusterAlreadyExistsFault
@@ -1308,6 +1309,7 @@ module Aws::RDS
     DBClusterAutomatedBackup.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     DBClusterAutomatedBackup.add_member(:storage_type, Shapes::ShapeRef.new(shape: String, location_name: "StorageType"))
     DBClusterAutomatedBackup.add_member(:iops, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Iops"))
+    DBClusterAutomatedBackup.add_member(:aws_backup_recovery_point_arn, Shapes::ShapeRef.new(shape: String, location_name: "AwsBackupRecoveryPointArn"))
     DBClusterAutomatedBackup.struct_class = Types::DBClusterAutomatedBackup
 
     DBClusterAutomatedBackupList.member = Shapes::ShapeRef.new(shape: DBClusterAutomatedBackup, location_name: "DBClusterAutomatedBackup")
@@ -1626,6 +1628,7 @@ module Aws::RDS
     DBInstanceAutomatedBackup.add_member(:db_instance_automated_backups_replications, Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackupsReplicationList, location_name: "DBInstanceAutomatedBackupsReplications"))
     DBInstanceAutomatedBackup.add_member(:backup_target, Shapes::ShapeRef.new(shape: String, location_name: "BackupTarget"))
     DBInstanceAutomatedBackup.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
+    DBInstanceAutomatedBackup.add_member(:aws_backup_recovery_point_arn, Shapes::ShapeRef.new(shape: String, location_name: "AwsBackupRecoveryPointArn"))
     DBInstanceAutomatedBackup.struct_class = Types::DBInstanceAutomatedBackup
 
     DBInstanceAutomatedBackupList.member = Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackup, location_name: "DBInstanceAutomatedBackup")
@@ -2690,6 +2693,7 @@ module Aws::RDS
     ModifyDBClusterMessage.add_member(:engine_mode, Shapes::ShapeRef.new(shape: String, location_name: "EngineMode"))
     ModifyDBClusterMessage.add_member(:allow_engine_mode_change, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowEngineModeChange"))
     ModifyDBClusterMessage.add_member(:enable_local_write_forwarding, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableLocalWriteForwarding"))
+    ModifyDBClusterMessage.add_member(:aws_backup_recovery_point_arn, Shapes::ShapeRef.new(shape: AwsBackupRecoveryPointArn, location_name: "AwsBackupRecoveryPointArn"))
     ModifyDBClusterMessage.struct_class = Types::ModifyDBClusterMessage
 
     ModifyDBClusterParameterGroupMessage.add_member(:db_cluster_parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterParameterGroupName"))
@@ -5456,6 +5460,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterSnapshotStateFault)
         o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupDoesNotCoverEnoughAZs)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRestoreFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)

@@ -6444,6 +6444,11 @@ module Aws::RDS
     #   enabling it.
     #   @return [String]
     #
+    # @!attribute [rw] aws_backup_recovery_point_arn
+    #   The Amazon Resource Name (ARN) of the recovery point in Amazon Web
+    #   Services Backup.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
     #
     class DBCluster < Struct.new(
@@ -6519,7 +6524,8 @@ module Aws::RDS
       :db_system_id,
       :master_user_secret,
       :io_optimized_next_allowed_modification_time,
-      :local_write_forwarding_status)
+      :local_write_forwarding_status,
+      :aws_backup_recovery_point_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6656,6 +6662,11 @@ module Aws::RDS
     #   This setting is only for non-Aurora Multi-AZ DB clusters.
     #   @return [Integer]
     #
+    # @!attribute [rw] aws_backup_recovery_point_arn
+    #   The Amazon Resource Name (ARN) of the recovery point in Amazon Web
+    #   Services Backup.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterAutomatedBackup AWS API Documentation
     #
     class DBClusterAutomatedBackup < Struct.new(
@@ -6681,7 +6692,8 @@ module Aws::RDS
       :port,
       :kms_key_id,
       :storage_type,
-      :iops)
+      :iops,
+      :aws_backup_recovery_point_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8569,6 +8581,11 @@ module Aws::RDS
     #   Specifies the storage throughput for the automated backup.
     #   @return [Integer]
     #
+    # @!attribute [rw] aws_backup_recovery_point_arn
+    #   The Amazon Resource Name (ARN) of the recovery point in Amazon Web
+    #   Services Backup.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceAutomatedBackup AWS API Documentation
     #
     class DBInstanceAutomatedBackup < Struct.new(
@@ -8599,7 +8616,8 @@ module Aws::RDS
       :db_instance_automated_backups_arn,
       :db_instance_automated_backups_replications,
       :backup_target,
-      :storage_throughput)
+      :storage_throughput,
+      :aws_backup_recovery_point_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15574,6 +15592,11 @@ module Aws::RDS
     #   Valid for: Aurora DB clusters only
     #   @return [Boolean]
     #
+    # @!attribute [rw] aws_backup_recovery_point_arn
+    #   The Amazon Resource Name (ARN) of the recovery point in Amazon Web
+    #   Services Backup.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterMessage AWS API Documentation
     #
     class ModifyDBClusterMessage < Struct.new(
@@ -15618,7 +15641,8 @@ module Aws::RDS
       :master_user_secret_kms_key_id,
       :engine_mode,
       :allow_engine_mode_change,
-      :enable_local_write_forwarding)
+      :enable_local_write_forwarding,
+      :aws_backup_recovery_point_arn)
       SENSITIVE = []
       include Aws::Structure
     end

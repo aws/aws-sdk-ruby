@@ -506,6 +506,7 @@ module Aws::SageMaker
     DeploymentStageStatusSummary = Shapes::StructureShape.new(name: 'DeploymentStageStatusSummary')
     DeploymentStages = Shapes::ListShape.new(name: 'DeploymentStages')
     DeregisterDevicesRequest = Shapes::StructureShape.new(name: 'DeregisterDevicesRequest')
+    DerivedInformation = Shapes::StructureShape.new(name: 'DerivedInformation')
     DescribeActionRequest = Shapes::StructureShape.new(name: 'DescribeActionRequest')
     DescribeActionResponse = Shapes::StructureShape.new(name: 'DescribeActionResponse')
     DescribeAlgorithmInput = Shapes::StructureShape.new(name: 'DescribeAlgorithmInput')
@@ -3741,6 +3742,9 @@ module Aws::SageMaker
     DeregisterDevicesRequest.add_member(:device_names, Shapes::ShapeRef.new(shape: DeviceNames, required: true, location_name: "DeviceNames"))
     DeregisterDevicesRequest.struct_class = Types::DeregisterDevicesRequest
 
+    DerivedInformation.add_member(:derived_data_input_config, Shapes::ShapeRef.new(shape: DataInputConfig, location_name: "DerivedDataInputConfig"))
+    DerivedInformation.struct_class = Types::DerivedInformation
+
     DescribeActionRequest.add_member(:action_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, required: true, location_name: "ActionName"))
     DescribeActionRequest.struct_class = Types::DescribeActionRequest
 
@@ -3905,6 +3909,7 @@ module Aws::SageMaker
     DescribeCompilationJobResponse.add_member(:input_config, Shapes::ShapeRef.new(shape: InputConfig, required: true, location_name: "InputConfig"))
     DescribeCompilationJobResponse.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, required: true, location_name: "OutputConfig"))
     DescribeCompilationJobResponse.add_member(:vpc_config, Shapes::ShapeRef.new(shape: NeoVpcConfig, location_name: "VpcConfig"))
+    DescribeCompilationJobResponse.add_member(:derived_information, Shapes::ShapeRef.new(shape: DerivedInformation, location_name: "DerivedInformation"))
     DescribeCompilationJobResponse.struct_class = Types::DescribeCompilationJobResponse
 
     DescribeContextRequest.add_member(:context_name, Shapes::ShapeRef.new(shape: ExperimentEntityNameOrArn, required: true, location_name: "ContextName"))
@@ -5654,7 +5659,7 @@ module Aws::SageMaker
     InferenceSpecification.struct_class = Types::InferenceSpecification
 
     InputConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
-    InputConfig.add_member(:data_input_config, Shapes::ShapeRef.new(shape: DataInputConfig, required: true, location_name: "DataInputConfig"))
+    InputConfig.add_member(:data_input_config, Shapes::ShapeRef.new(shape: DataInputConfig, location_name: "DataInputConfig"))
     InputConfig.add_member(:framework, Shapes::ShapeRef.new(shape: Framework, required: true, location_name: "Framework"))
     InputConfig.add_member(:framework_version, Shapes::ShapeRef.new(shape: FrameworkVersion, location_name: "FrameworkVersion"))
     InputConfig.struct_class = Types::InputConfig

@@ -685,6 +685,13 @@ module Aws::BillingConductor
     #         associated_values: ["CustomLineItemAssociationElement"],
     #       },
     #       type: "CREDIT", # required, accepts CREDIT, FEE
+    #       line_item_filters: [
+    #         {
+    #           attribute: "LINE_ITEM_TYPE", # required, accepts LINE_ITEM_TYPE
+    #           match_option: "NOT_EQUAL", # required, accepts NOT_EQUAL
+    #           values: ["SAVINGS_PLAN_NEGATION"], # required, accepts SAVINGS_PLAN_NEGATION
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -1274,6 +1281,11 @@ module Aws::BillingConductor
     #   resp.custom_line_item_versions[0].charge_details.flat.charge_value #=> Float
     #   resp.custom_line_item_versions[0].charge_details.percentage.percentage_value #=> Float
     #   resp.custom_line_item_versions[0].charge_details.type #=> String, one of "CREDIT", "FEE"
+    #   resp.custom_line_item_versions[0].charge_details.line_item_filters #=> Array
+    #   resp.custom_line_item_versions[0].charge_details.line_item_filters[0].attribute #=> String, one of "LINE_ITEM_TYPE"
+    #   resp.custom_line_item_versions[0].charge_details.line_item_filters[0].match_option #=> String, one of "NOT_EQUAL"
+    #   resp.custom_line_item_versions[0].charge_details.line_item_filters[0].values #=> Array
+    #   resp.custom_line_item_versions[0].charge_details.line_item_filters[0].values[0] #=> String, one of "SAVINGS_PLAN_NEGATION"
     #   resp.custom_line_item_versions[0].currency_code #=> String, one of "USD", "CNY"
     #   resp.custom_line_item_versions[0].description #=> String
     #   resp.custom_line_item_versions[0].product_code #=> String
@@ -1343,6 +1355,11 @@ module Aws::BillingConductor
     #   resp.custom_line_items[0].charge_details.flat.charge_value #=> Float
     #   resp.custom_line_items[0].charge_details.percentage.percentage_value #=> Float
     #   resp.custom_line_items[0].charge_details.type #=> String, one of "CREDIT", "FEE"
+    #   resp.custom_line_items[0].charge_details.line_item_filters #=> Array
+    #   resp.custom_line_items[0].charge_details.line_item_filters[0].attribute #=> String, one of "LINE_ITEM_TYPE"
+    #   resp.custom_line_items[0].charge_details.line_item_filters[0].match_option #=> String, one of "NOT_EQUAL"
+    #   resp.custom_line_items[0].charge_details.line_item_filters[0].values #=> Array
+    #   resp.custom_line_items[0].charge_details.line_item_filters[0].values[0] #=> String, one of "SAVINGS_PLAN_NEGATION"
     #   resp.custom_line_items[0].currency_code #=> String, one of "USD", "CNY"
     #   resp.custom_line_items[0].description #=> String
     #   resp.custom_line_items[0].product_code #=> String
@@ -1848,6 +1865,13 @@ module Aws::BillingConductor
     #       percentage: {
     #         percentage_value: 1.0, # required
     #       },
+    #       line_item_filters: [
+    #         {
+    #           attribute: "LINE_ITEM_TYPE", # required, accepts LINE_ITEM_TYPE
+    #           match_option: "NOT_EQUAL", # required, accepts NOT_EQUAL
+    #           values: ["SAVINGS_PLAN_NEGATION"], # required, accepts SAVINGS_PLAN_NEGATION
+    #         },
+    #       ],
     #     },
     #     billing_period_range: {
     #       inclusive_start_billing_period: "BillingPeriod", # required
@@ -1864,6 +1888,11 @@ module Aws::BillingConductor
     #   resp.charge_details.flat.charge_value #=> Float
     #   resp.charge_details.percentage.percentage_value #=> Float
     #   resp.charge_details.type #=> String, one of "CREDIT", "FEE"
+    #   resp.charge_details.line_item_filters #=> Array
+    #   resp.charge_details.line_item_filters[0].attribute #=> String, one of "LINE_ITEM_TYPE"
+    #   resp.charge_details.line_item_filters[0].match_option #=> String, one of "NOT_EQUAL"
+    #   resp.charge_details.line_item_filters[0].values #=> Array
+    #   resp.charge_details.line_item_filters[0].values[0] #=> String, one of "SAVINGS_PLAN_NEGATION"
     #   resp.last_modified_time #=> Integer
     #   resp.association_size #=> Integer
     #
@@ -2012,7 +2041,7 @@ module Aws::BillingConductor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-billingconductor'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

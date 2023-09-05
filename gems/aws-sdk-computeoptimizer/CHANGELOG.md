@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2023-09-05)
+------------------
+
+* Feature - This release adds support to provide recommendations for G4dn and P3 instances that use NVIDIA GPUs.
+
 1.47.0 (2023-08-28)
 ------------------
 

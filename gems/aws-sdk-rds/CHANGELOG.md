@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.193.0 (2023-09-05)
+------------------
+
+* Feature - Add support for feature integration with AWS Backup.
+
 1.192.0 (2023-08-24)
 ------------------
 

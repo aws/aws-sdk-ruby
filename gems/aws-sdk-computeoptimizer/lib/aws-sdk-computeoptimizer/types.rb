@@ -190,6 +190,11 @@ module Aws::ComputeOptimizer
     #     instance.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] current_instance_gpu_info
+    #   Describes the GPU accelerator settings for the current instance type
+    #   of the Auto Scaling group.
+    #   @return [Types::GpuInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/AutoScalingGroupRecommendation AWS API Documentation
     #
     class AutoScalingGroupRecommendation < Struct.new(
@@ -204,7 +209,8 @@ module Aws::ComputeOptimizer
       :last_refresh_timestamp,
       :current_performance_risk,
       :effective_recommendation_preferences,
-      :inferred_workload_types)
+      :inferred_workload_types,
+      :current_instance_gpu_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -278,6 +284,11 @@ module Aws::ComputeOptimizer
     #   architecture.
     #   @return [String]
     #
+    # @!attribute [rw] instance_gpu_info
+    #   Describes the GPU accelerator settings for the recommended instance
+    #   type of the Auto Scaling group.
+    #   @return [Types::GpuInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/AutoScalingGroupRecommendationOption AWS API Documentation
     #
     class AutoScalingGroupRecommendationOption < Struct.new(
@@ -286,7 +297,8 @@ module Aws::ComputeOptimizer
       :performance_risk,
       :rank,
       :savings_opportunity,
-      :migration_effort)
+      :migration_effort,
+      :instance_gpu_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2933,6 +2945,40 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # Describes the GPU accelerators for the instance type.
+    #
+    # @!attribute [rw] gpu_count
+    #   The number of GPUs for the instance type.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] gpu_memory_size_in_mi_b
+    #   The total size of the memory for the GPU accelerators for the
+    #   instance type, in MiB.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/Gpu AWS API Documentation
+    #
+    class Gpu < Struct.new(
+      :gpu_count,
+      :gpu_memory_size_in_mi_b)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the GPU accelerator settings for the instance type.
+    #
+    # @!attribute [rw] gpus
+    #   Describes the GPU accelerators for the instance type.
+    #   @return [Array<Types::Gpu>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GpuInfo AWS API Documentation
+    #
+    class GpuInfo < Struct.new(
+      :gpus)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The estimated monthly savings after you adjust the configurations of
     # your instances running on the inferred workload types to the
     # recommended configurations. If the `inferredWorkloadTypes` list
@@ -3257,6 +3303,15 @@ module Aws::ComputeOptimizer
     #   with your external metrics provider.
     #   @return [Types::ExternalMetricStatus]
     #
+    # @!attribute [rw] current_instance_gpu_info
+    #   Describes the GPU accelerator settings for the current instance
+    #   type.
+    #   @return [Types::GpuInfo]
+    #
+    # @!attribute [rw] idle
+    #   Describes if an Amazon EC2 instance is idle.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/InstanceRecommendation AWS API Documentation
     #
     class InstanceRecommendation < Struct.new(
@@ -3276,7 +3331,9 @@ module Aws::ComputeOptimizer
       :inferred_workload_types,
       :instance_state,
       :tags,
-      :external_metric_status)
+      :external_metric_status,
+      :current_instance_gpu_info,
+      :idle)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3447,6 +3504,11 @@ module Aws::ComputeOptimizer
     #   architecture.
     #   @return [String]
     #
+    # @!attribute [rw] instance_gpu_info
+    #   Describes the GPU accelerator settings for the recommended instance
+    #   type.
+    #   @return [Types::GpuInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/InstanceRecommendationOption AWS API Documentation
     #
     class InstanceRecommendationOption < Struct.new(
@@ -3456,7 +3518,8 @@ module Aws::ComputeOptimizer
       :performance_risk,
       :rank,
       :savings_opportunity,
-      :migration_effort)
+      :migration_effort,
+      :instance_gpu_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4189,18 +4252,20 @@ module Aws::ComputeOptimizer
     # projected utilization metric data to determine the performance
     # difference between your current resource and the recommended option.
     #
-    # <note markdown="1"> The `Cpu` and `Memory` metrics are the only projected utilization
-    # metrics returned when you run the GetEC2RecommendationProjectedMetrics
-    # action. Additionally, the `Memory` metric is returned only for
-    # resources that have the unified CloudWatch agent installed on them.
-    # For more information, see [Enabling Memory Utilization with the
-    # CloudWatch Agent][1].
+    # <note markdown="1"> The `Cpu`, `Memory`, `GPU`, and `GPU_MEMORY` metrics are the only
+    # projected utilization metrics returned when you run the
+    # GetEC2RecommendationProjectedMetrics action. Additionally, these
+    # metrics are only returned for resources with the unified CloudWatch
+    # agent installed on them. For more information, see [Enabling Memory
+    # Utilization with the CloudWatch Agent][1] and [Enabling NVIDIA GPU
+    # utilization with the CloudWatch Agent][2].
     #
     #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent
+    # [2]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#nvidia-cw-agent
     #
     # @!attribute [rw] name
     #   The name of the projected utilization metric.
@@ -4217,8 +4282,6 @@ module Aws::ComputeOptimizer
     #     show a lower percentage than CloudWatch when the instance is not
     #     allocated a full processor core.
     #
-    #     Units: Percent
-    #
     #   * `Memory` - The percentage of memory that would be in use on the
     #     recommendation option had you used that resource during the
     #     analyzed period. This metric identifies the amount of memory
@@ -4226,15 +4289,30 @@ module Aws::ComputeOptimizer
     #
     #     Units: Percent
     #
-    #     <note markdown="1"> The `Memory` metric is returned only for resources that have the
+    #     <note markdown="1"> The `Memory` metric is only returned for resources with the
     #     unified CloudWatch agent installed on them. For more information,
     #     see [Enabling Memory Utilization with the CloudWatch Agent][1].
+    #
+    #      </note>
+    #
+    #   * `GPU` - The projected percentage of allocated GPUs if you adjust
+    #     your configurations to Compute Optimizer's recommendation option.
+    #
+    #   * `GPU_MEMORY` - The projected percentage of total GPU memory if you
+    #     adjust your configurations to Compute Optimizer's recommendation
+    #     option.
+    #
+    #     <note markdown="1"> The `GPU` and `GPU_MEMORY` metrics are only returned for resources
+    #     with the unified CloudWatch Agent installed on them. For more
+    #     information, see [Enabling NVIDIA GPU utilization with the
+    #     CloudWatch Agent][2].
     #
     #      </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent
+    #   [2]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#nvidia-cw-agent
     #   @return [String]
     #
     # @!attribute [rw] timestamps
@@ -4588,8 +4666,8 @@ module Aws::ComputeOptimizer
     # @!attribute [rw] inferred_workload_savings
     #   An array of objects that describes the estimated monthly saving
     #   amounts for the instances running on the specified
-    #   `inferredWorkloadTypes`. The array contains the top three savings
-    #   opportunites for the instances running inferred workload types.
+    #   `inferredWorkloadTypes`. The array contains the top five savings
+    #   opportunites for the instances that run inferred workload types.
     #   @return [Array<Types::InferredWorkloadSaving>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RecommendationSummary AWS API Documentation
@@ -5064,6 +5142,19 @@ module Aws::ComputeOptimizer
     #
     #      </note>
     #
+    #   * `GPU` - The percentage of allocated GPUs that currently run on the
+    #     instance.
+    #
+    #   * `GPU_MEMORY` - The percentage of total GPU memory that currently
+    #     runs on the instance.
+    #
+    #     <note markdown="1"> The `GPU` and `GPU_MEMORY` metrics are only returned for resources
+    #     with the unified CloudWatch Agent installed on them. For more
+    #     information, see [Enabling NVIDIA GPU utilization with the
+    #     CloudWatch Agent][2].
+    #
+    #      </note>
+    #
     #   * `EBS_READ_OPS_PER_SECOND` - The completed read operations from all
     #     EBS volumes attached to the instance in a specified period of
     #     time.
@@ -5139,6 +5230,7 @@ module Aws::ComputeOptimizer
     #
     #
     #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent
+    #   [2]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#nvidia-cw-agent
     #   @return [String]
     #
     # @!attribute [rw] statistic

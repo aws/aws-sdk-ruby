@@ -10365,6 +10365,23 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Information that SageMaker Neo automatically derived about the model.
+    #
+    # @!attribute [rw] derived_data_input_config
+    #   The data input configuration that SageMaker Neo automatically
+    #   derived for the model. When SageMaker Neo derives this information,
+    #   you don't need to specify the data input configuration when you
+    #   create a compilation job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DerivedInformation AWS API Documentation
+    #
+    class DerivedInformation < Struct.new(
+      :derived_data_input_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] action_name
     #   The name of the action to describe.
     #   @return [String]
@@ -11188,6 +11205,11 @@ module Aws::SageMaker
     #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html
     #   @return [Types::NeoVpcConfig]
     #
+    # @!attribute [rw] derived_information
+    #   Information that SageMaker Neo automatically derived about the
+    #   model.
+    #   @return [Types::DerivedInformation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCompilationJobResponse AWS API Documentation
     #
     class DescribeCompilationJobResponse < Struct.new(
@@ -11207,7 +11229,8 @@ module Aws::SageMaker
       :role_arn,
       :input_config,
       :output_config,
-      :vpc_config)
+      :vpc_config,
+      :derived_information)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29056,8 +29079,8 @@ module Aws::SageMaker
     # The model latency threshold.
     #
     # @!attribute [rw] percentile
-    #   The model latency percentile threshold. For custom load tests,
-    #   specify the value as `P95`.
+    #   The model latency percentile threshold. Acceptable values are `P95`
+    #   and `P99`. For custom load tests, specify the value as `P95`.
     #   @return [String]
     #
     # @!attribute [rw] value_in_milliseconds

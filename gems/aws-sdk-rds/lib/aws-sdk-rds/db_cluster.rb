@@ -661,6 +661,13 @@ module Aws::RDS
       data[:local_write_forwarding_status]
     end
 
+    # The Amazon Resource Name (ARN) of the recovery point in Amazon Web
+    # Services Backup.
+    # @return [String]
+    def aws_backup_recovery_point_arn
+      data[:aws_backup_recovery_point_arn]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -1801,6 +1808,7 @@ module Aws::RDS
     #     engine_mode: "String",
     #     allow_engine_mode_change: false,
     #     enable_local_write_forwarding: false,
+    #     aws_backup_recovery_point_arn: "AwsBackupRecoveryPointArn",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :new_db_cluster_identifier
@@ -2415,6 +2423,9 @@ module Aws::RDS
     #   aren't allowed on reader DB instances.
     #
     #   Valid for: Aurora DB clusters only
+    # @option options [String] :aws_backup_recovery_point_arn
+    #   The Amazon Resource Name (ARN) of the recovery point in Amazon Web
+    #   Services Backup.
     # @return [DBCluster]
     def modify(options = {})
       options = options.merge(db_cluster_identifier: @id)

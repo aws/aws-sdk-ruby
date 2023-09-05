@@ -3581,6 +3581,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
+    #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -8275,6 +8276,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
+    #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -8330,6 +8332,7 @@ module Aws::RDS
     #   resp.db_cluster_automated_backup.kms_key_id #=> String
     #   resp.db_cluster_automated_backup.storage_type #=> String
     #   resp.db_cluster_automated_backup.iops #=> Integer
+    #   resp.db_cluster_automated_backup.aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterAutomatedBackup AWS API Documentation
     #
@@ -8970,6 +8973,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance_automated_backup.backup_target #=> String
     #   resp.db_instance_automated_backup.storage_throughput #=> Integer
+    #   resp.db_instance_automated_backup.aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstanceAutomatedBackup AWS API Documentation
     #
@@ -10236,6 +10240,7 @@ module Aws::RDS
     #   resp.db_cluster_automated_backups[0].kms_key_id #=> String
     #   resp.db_cluster_automated_backups[0].storage_type #=> String
     #   resp.db_cluster_automated_backups[0].iops #=> Integer
+    #   resp.db_cluster_automated_backups[0].aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterAutomatedBackups AWS API Documentation
     #
@@ -11463,6 +11468,7 @@ module Aws::RDS
     #   resp.db_clusters[0].master_user_secret.kms_key_id #=> String
     #   resp.db_clusters[0].io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_clusters[0].local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
+    #   resp.db_clusters[0].aws_backup_recovery_point_arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -11910,6 +11916,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backups[0].db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance_automated_backups[0].backup_target #=> String
     #   resp.db_instance_automated_backups[0].storage_throughput #=> Integer
+    #   resp.db_instance_automated_backups[0].aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstanceAutomatedBackups AWS API Documentation
     #
@@ -15965,6 +15972,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
+    #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -17323,6 +17331,10 @@ module Aws::RDS
     #
     #   Valid for: Aurora DB clusters only
     #
+    # @option params [String] :aws_backup_recovery_point_arn
+    #   The Amazon Resource Name (ARN) of the recovery point in Amazon Web
+    #   Services Backup.
+    #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -17460,6 +17472,7 @@ module Aws::RDS
     #     engine_mode: "String",
     #     allow_engine_mode_change: false,
     #     enable_local_write_forwarding: false,
+    #     aws_backup_recovery_point_arn: "AwsBackupRecoveryPointArn",
     #   })
     #
     # @example Response structure
@@ -17581,6 +17594,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
+    #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -20804,6 +20818,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
+    #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -21080,6 +21095,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
+    #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBCluster AWS API Documentation
     #
@@ -22540,6 +22556,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
+    #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
     #
@@ -23233,6 +23250,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
+    #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -23899,6 +23917,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
+    #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -26618,6 +26637,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
+    #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -26985,6 +27005,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance_automated_backup.backup_target #=> String
     #   resp.db_instance_automated_backup.storage_throughput #=> Integer
+    #   resp.db_instance_automated_backup.aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstanceAutomatedBackupsReplication AWS API Documentation
     #
@@ -27431,6 +27452,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
+    #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -27757,6 +27779,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance_automated_backup.backup_target #=> String
     #   resp.db_instance_automated_backup.storage_throughput #=> Integer
+    #   resp.db_instance_automated_backup.aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstanceAutomatedBackupsReplication AWS API Documentation
     #
@@ -28265,7 +28288,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.192.0'
+      context[:gem_version] = '1.193.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

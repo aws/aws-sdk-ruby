@@ -154,6 +154,11 @@ module Aws::ComputeOptimizer
     GetRecommendationPreferencesResponse = Shapes::StructureShape.new(name: 'GetRecommendationPreferencesResponse')
     GetRecommendationSummariesRequest = Shapes::StructureShape.new(name: 'GetRecommendationSummariesRequest')
     GetRecommendationSummariesResponse = Shapes::StructureShape.new(name: 'GetRecommendationSummariesResponse')
+    Gpu = Shapes::StructureShape.new(name: 'Gpu')
+    GpuCount = Shapes::IntegerShape.new(name: 'GpuCount')
+    GpuInfo = Shapes::StructureShape.new(name: 'GpuInfo')
+    GpuMemorySizeInMiB = Shapes::IntegerShape.new(name: 'GpuMemorySizeInMiB')
+    Gpus = Shapes::ListShape.new(name: 'Gpus')
     High = Shapes::IntegerShape.new(name: 'High')
     Identifier = Shapes::StringShape.new(name: 'Identifier')
     IncludeMemberAccounts = Shapes::BooleanShape.new(name: 'IncludeMemberAccounts')
@@ -164,6 +169,7 @@ module Aws::ComputeOptimizer
     InferredWorkloadTypesPreference = Shapes::StringShape.new(name: 'InferredWorkloadTypesPreference')
     InstanceArn = Shapes::StringShape.new(name: 'InstanceArn')
     InstanceArns = Shapes::ListShape.new(name: 'InstanceArns')
+    InstanceIdle = Shapes::StringShape.new(name: 'InstanceIdle')
     InstanceName = Shapes::StringShape.new(name: 'InstanceName')
     InstanceRecommendation = Shapes::StructureShape.new(name: 'InstanceRecommendation')
     InstanceRecommendationFindingReasonCode = Shapes::StringShape.new(name: 'InstanceRecommendationFindingReasonCode')
@@ -359,6 +365,7 @@ module Aws::ComputeOptimizer
     AutoScalingGroupRecommendation.add_member(:current_performance_risk, Shapes::ShapeRef.new(shape: CurrentPerformanceRisk, location_name: "currentPerformanceRisk"))
     AutoScalingGroupRecommendation.add_member(:effective_recommendation_preferences, Shapes::ShapeRef.new(shape: EffectiveRecommendationPreferences, location_name: "effectiveRecommendationPreferences"))
     AutoScalingGroupRecommendation.add_member(:inferred_workload_types, Shapes::ShapeRef.new(shape: InferredWorkloadTypes, location_name: "inferredWorkloadTypes"))
+    AutoScalingGroupRecommendation.add_member(:current_instance_gpu_info, Shapes::ShapeRef.new(shape: GpuInfo, location_name: "currentInstanceGpuInfo"))
     AutoScalingGroupRecommendation.struct_class = Types::AutoScalingGroupRecommendation
 
     AutoScalingGroupRecommendationOption.add_member(:configuration, Shapes::ShapeRef.new(shape: AutoScalingGroupConfiguration, location_name: "configuration"))
@@ -367,6 +374,7 @@ module Aws::ComputeOptimizer
     AutoScalingGroupRecommendationOption.add_member(:rank, Shapes::ShapeRef.new(shape: Rank, location_name: "rank"))
     AutoScalingGroupRecommendationOption.add_member(:savings_opportunity, Shapes::ShapeRef.new(shape: SavingsOpportunity, location_name: "savingsOpportunity"))
     AutoScalingGroupRecommendationOption.add_member(:migration_effort, Shapes::ShapeRef.new(shape: MigrationEffort, location_name: "migrationEffort"))
+    AutoScalingGroupRecommendationOption.add_member(:instance_gpu_info, Shapes::ShapeRef.new(shape: GpuInfo, location_name: "instanceGpuInfo"))
     AutoScalingGroupRecommendationOption.struct_class = Types::AutoScalingGroupRecommendationOption
 
     AutoScalingGroupRecommendationOptions.member = Shapes::ShapeRef.new(shape: AutoScalingGroupRecommendationOption)
@@ -755,6 +763,15 @@ module Aws::ComputeOptimizer
     GetRecommendationSummariesResponse.add_member(:recommendation_summaries, Shapes::ShapeRef.new(shape: RecommendationSummaries, location_name: "recommendationSummaries"))
     GetRecommendationSummariesResponse.struct_class = Types::GetRecommendationSummariesResponse
 
+    Gpu.add_member(:gpu_count, Shapes::ShapeRef.new(shape: GpuCount, location_name: "gpuCount"))
+    Gpu.add_member(:gpu_memory_size_in_mi_b, Shapes::ShapeRef.new(shape: GpuMemorySizeInMiB, location_name: "gpuMemorySizeInMiB"))
+    Gpu.struct_class = Types::Gpu
+
+    GpuInfo.add_member(:gpus, Shapes::ShapeRef.new(shape: Gpus, location_name: "gpus"))
+    GpuInfo.struct_class = Types::GpuInfo
+
+    Gpus.member = Shapes::ShapeRef.new(shape: Gpu)
+
     InferredWorkloadSaving.add_member(:inferred_workload_types, Shapes::ShapeRef.new(shape: InferredWorkloadTypes, location_name: "inferredWorkloadTypes"))
     InferredWorkloadSaving.add_member(:estimated_monthly_savings, Shapes::ShapeRef.new(shape: EstimatedMonthlySavings, location_name: "estimatedMonthlySavings"))
     InferredWorkloadSaving.struct_class = Types::InferredWorkloadSaving
@@ -782,6 +799,8 @@ module Aws::ComputeOptimizer
     InstanceRecommendation.add_member(:instance_state, Shapes::ShapeRef.new(shape: InstanceState, location_name: "instanceState"))
     InstanceRecommendation.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     InstanceRecommendation.add_member(:external_metric_status, Shapes::ShapeRef.new(shape: ExternalMetricStatus, location_name: "externalMetricStatus"))
+    InstanceRecommendation.add_member(:current_instance_gpu_info, Shapes::ShapeRef.new(shape: GpuInfo, location_name: "currentInstanceGpuInfo"))
+    InstanceRecommendation.add_member(:idle, Shapes::ShapeRef.new(shape: InstanceIdle, location_name: "idle"))
     InstanceRecommendation.struct_class = Types::InstanceRecommendation
 
     InstanceRecommendationFindingReasonCodes.member = Shapes::ShapeRef.new(shape: InstanceRecommendationFindingReasonCode)
@@ -793,6 +812,7 @@ module Aws::ComputeOptimizer
     InstanceRecommendationOption.add_member(:rank, Shapes::ShapeRef.new(shape: Rank, location_name: "rank"))
     InstanceRecommendationOption.add_member(:savings_opportunity, Shapes::ShapeRef.new(shape: SavingsOpportunity, location_name: "savingsOpportunity"))
     InstanceRecommendationOption.add_member(:migration_effort, Shapes::ShapeRef.new(shape: MigrationEffort, location_name: "migrationEffort"))
+    InstanceRecommendationOption.add_member(:instance_gpu_info, Shapes::ShapeRef.new(shape: GpuInfo, location_name: "instanceGpuInfo"))
     InstanceRecommendationOption.struct_class = Types::InstanceRecommendationOption
 
     InstanceRecommendations.member = Shapes::ShapeRef.new(shape: InstanceRecommendation)
