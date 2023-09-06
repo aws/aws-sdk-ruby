@@ -1089,6 +1089,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.channel.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.channel.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
+    #   resp.channel.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
     #   resp.channel.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.channel.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -2186,6 +2188,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
+    #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
     #   resp.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -3156,6 +3160,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
+    #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
     #   resp.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -5287,6 +5293,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
+    #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
     #   resp.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -6065,6 +6073,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
+    #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
     #   resp.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -6842,6 +6852,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.channel.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.channel.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
+    #   resp.channel.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
     #   resp.channel.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.channel.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -7551,6 +7563,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.channel.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.channel.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
+    #   resp.channel.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
     #   resp.channel.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.channel.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -8484,7 +8498,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.106.0'
+      context[:gem_version] = '1.107.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

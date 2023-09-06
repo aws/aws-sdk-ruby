@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.404.0 (2023-09-06)
+------------------
+
+* Feature - This release adds 'outpost' location type to the DescribeInstanceTypeOfferings API, allowing customers that have been allowlisted for outpost to query their offerings in the API.
+
 1.403.0 (2023-09-05)
 ------------------
 

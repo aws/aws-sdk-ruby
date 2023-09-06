@@ -439,6 +439,7 @@ module Aws::WAFV2
     AWSManagedRulesATPRuleSet.struct_class = Types::AWSManagedRulesATPRuleSet
 
     AWSManagedRulesBotControlRuleSet.add_member(:inspection_level, Shapes::ShapeRef.new(shape: InspectionLevel, required: true, location_name: "InspectionLevel"))
+    AWSManagedRulesBotControlRuleSet.add_member(:enable_machine_learning, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableMachineLearning"))
     AWSManagedRulesBotControlRuleSet.struct_class = Types::AWSManagedRulesBotControlRuleSet
 
     ActionCondition.add_member(:action, Shapes::ShapeRef.new(shape: ActionValue, required: true, location_name: "Action"))

@@ -238,6 +238,7 @@ module Aws::MediaLive
     EmbeddedSourceSettings = Shapes::StructureShape.new(name: 'EmbeddedSourceSettings')
     Empty = Shapes::StructureShape.new(name: 'Empty')
     EncoderSettings = Shapes::StructureShape.new(name: 'EncoderSettings')
+    EpochLockingSettings = Shapes::StructureShape.new(name: 'EpochLockingSettings')
     Esam = Shapes::StructureShape.new(name: 'Esam')
     FailoverCondition = Shapes::StructureShape.new(name: 'FailoverCondition')
     FailoverConditionSettings = Shapes::StructureShape.new(name: 'FailoverConditionSettings')
@@ -541,11 +542,13 @@ module Aws::MediaLive
     OutputGroup = Shapes::StructureShape.new(name: 'OutputGroup')
     OutputGroupSettings = Shapes::StructureShape.new(name: 'OutputGroupSettings')
     OutputLocationRef = Shapes::StructureShape.new(name: 'OutputLocationRef')
+    OutputLockingSettings = Shapes::StructureShape.new(name: 'OutputLockingSettings')
     OutputSettings = Shapes::StructureShape.new(name: 'OutputSettings')
     PassThroughSettings = Shapes::StructureShape.new(name: 'PassThroughSettings')
     PauseStateScheduleActionSettings = Shapes::StructureShape.new(name: 'PauseStateScheduleActionSettings')
     PipelineDetail = Shapes::StructureShape.new(name: 'PipelineDetail')
     PipelineId = Shapes::StringShape.new(name: 'PipelineId')
+    PipelineLockingSettings = Shapes::StructureShape.new(name: 'PipelineLockingSettings')
     PipelinePauseStateSettings = Shapes::StructureShape.new(name: 'PipelinePauseStateSettings')
     PreferredChannelPipeline = Shapes::StringShape.new(name: 'PreferredChannelPipeline')
     PurchaseOffering = Shapes::StructureShape.new(name: 'PurchaseOffering')
@@ -1757,6 +1760,10 @@ module Aws::MediaLive
     EncoderSettings.add_member(:thumbnail_configuration, Shapes::ShapeRef.new(shape: ThumbnailConfiguration, location_name: "thumbnailConfiguration"))
     EncoderSettings.struct_class = Types::EncoderSettings
 
+    EpochLockingSettings.add_member(:custom_epoch, Shapes::ShapeRef.new(shape: __string, location_name: "customEpoch"))
+    EpochLockingSettings.add_member(:jam_sync_time, Shapes::ShapeRef.new(shape: __string, location_name: "jamSyncTime"))
+    EpochLockingSettings.struct_class = Types::EpochLockingSettings
+
     Esam.add_member(:acquisition_point_id, Shapes::ShapeRef.new(shape: __stringMax256, required: true, location_name: "acquisitionPointId"))
     Esam.add_member(:ad_avail_offset, Shapes::ShapeRef.new(shape: __integerMinNegative1000Max1000, location_name: "adAvailOffset"))
     Esam.add_member(:password_param, Shapes::ShapeRef.new(shape: __string, location_name: "passwordParam"))
@@ -1825,6 +1832,7 @@ module Aws::MediaLive
     GlobalConfiguration.add_member(:output_locking_mode, Shapes::ShapeRef.new(shape: GlobalConfigurationOutputLockingMode, location_name: "outputLockingMode"))
     GlobalConfiguration.add_member(:output_timing_source, Shapes::ShapeRef.new(shape: GlobalConfigurationOutputTimingSource, location_name: "outputTimingSource"))
     GlobalConfiguration.add_member(:support_low_framerate_inputs, Shapes::ShapeRef.new(shape: GlobalConfigurationLowFramerateInputs, location_name: "supportLowFramerateInputs"))
+    GlobalConfiguration.add_member(:output_locking_settings, Shapes::ShapeRef.new(shape: OutputLockingSettings, location_name: "outputLockingSettings"))
     GlobalConfiguration.struct_class = Types::GlobalConfiguration
 
     H264ColorSpaceSettings.add_member(:color_space_passthrough_settings, Shapes::ShapeRef.new(shape: ColorSpacePassthroughSettings, location_name: "colorSpacePassthroughSettings"))
@@ -2728,6 +2736,10 @@ module Aws::MediaLive
     OutputLocationRef.add_member(:destination_ref_id, Shapes::ShapeRef.new(shape: __string, location_name: "destinationRefId"))
     OutputLocationRef.struct_class = Types::OutputLocationRef
 
+    OutputLockingSettings.add_member(:epoch_locking_settings, Shapes::ShapeRef.new(shape: EpochLockingSettings, location_name: "epochLockingSettings"))
+    OutputLockingSettings.add_member(:pipeline_locking_settings, Shapes::ShapeRef.new(shape: PipelineLockingSettings, location_name: "pipelineLockingSettings"))
+    OutputLockingSettings.struct_class = Types::OutputLockingSettings
+
     OutputSettings.add_member(:archive_output_settings, Shapes::ShapeRef.new(shape: ArchiveOutputSettings, location_name: "archiveOutputSettings"))
     OutputSettings.add_member(:frame_capture_output_settings, Shapes::ShapeRef.new(shape: FrameCaptureOutputSettings, location_name: "frameCaptureOutputSettings"))
     OutputSettings.add_member(:hls_output_settings, Shapes::ShapeRef.new(shape: HlsOutputSettings, location_name: "hlsOutputSettings"))
@@ -2749,6 +2761,8 @@ module Aws::MediaLive
     PipelineDetail.add_member(:active_motion_graphics_uri, Shapes::ShapeRef.new(shape: __string, location_name: "activeMotionGraphicsUri"))
     PipelineDetail.add_member(:pipeline_id, Shapes::ShapeRef.new(shape: __string, location_name: "pipelineId"))
     PipelineDetail.struct_class = Types::PipelineDetail
+
+    PipelineLockingSettings.struct_class = Types::PipelineLockingSettings
 
     PipelinePauseStateSettings.add_member(:pipeline_id, Shapes::ShapeRef.new(shape: PipelineId, required: true, location_name: "pipelineId"))
     PipelinePauseStateSettings.struct_class = Types::PipelinePauseStateSettings

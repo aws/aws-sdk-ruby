@@ -183,10 +183,31 @@ module Aws::WAFV2
     #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-bot.html
     #   @return [String]
     #
+    # @!attribute [rw] enable_machine_learning
+    #   Applies only to the targeted inspection level.
+    #
+    #   Determines whether to use machine learning (ML) to analyze your web
+    #   traffic for bot-related activity. Machine learning is required for
+    #   the Bot Control rules `TGT_ML_CoordinatedActivityLow` and
+    #   `TGT_ML_CoordinatedActivityMedium`, which inspect for anomalous
+    #   behavior that might indicate distributed, coordinated bot activity.
+    #
+    #   For more information about this choice, see the listing for these
+    #   rules in the table at [Bot Control rules listing][1] in the *WAF
+    #   Developer Guide*.
+    #
+    #   Default: `TRUE`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-bot.html#aws-managed-rule-groups-bot-rules
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/AWSManagedRulesBotControlRuleSet AWS API Documentation
     #
     class AWSManagedRulesBotControlRuleSet < Struct.new(
-      :inspection_level)
+      :inspection_level,
+      :enable_machine_learning)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -379,7 +400,7 @@ module Aws::WAFV2
     #
     # Use this to customize the maximum size of the request body that your
     # protected CloudFront distributions forward to WAF for inspection. The
-    # default is 16 KB (16,384 kilobytes).
+    # default is 16 KB (16,384 bytes).
     #
     # <note markdown="1"> You are charged additional fees when your protected resources forward
     # body sizes that are larger than the default. For more information, see
@@ -394,7 +415,7 @@ module Aws::WAFV2
     # @!attribute [rw] request_body
     #   Customizes the maximum size of the request body that your protected
     #   CloudFront distributions forward to WAF for inspection. The default
-    #   size is 16 KB (16,384 kilobytes).
+    #   size is 16 KB (16,384 bytes).
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources
     #   forward body sizes that are larger than the default. For more
@@ -455,9 +476,9 @@ module Aws::WAFV2
     #   forwards the contents that are below the limit to WAF for
     #   inspection.
     #
-    #   The default limit is 8 KB (8,192 kilobytes) for regional resources
-    #   and 16 KB (16,384 kilobytes) for CloudFront distributions. For
-    #   CloudFront distributions, you can increase the limit in the web ACL
+    #   The default limit is 8 KB (8,192 bytes) for regional resources and
+    #   16 KB (16,384 bytes) for CloudFront distributions. For CloudFront
+    #   distributions, you can increase the limit in the web ACL
     #   `AssociationConfig`, for additional processing fees.
     #
     #   The options for oversize handling are the following:
@@ -1417,7 +1438,7 @@ module Aws::WAFV2
     #
     #   Use this to customize the maximum size of the request body that your
     #   protected CloudFront distributions forward to WAF for inspection.
-    #   The default is 16 KB (16,384 kilobytes).
+    #   The default is 16 KB (16,384 bytes).
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources
     #   forward body sizes that are larger than the default. For more
@@ -2293,10 +2314,10 @@ module Aws::WAFV2
     #
     #   A limited amount of the request body is forwarded to WAF for
     #   inspection by the underlying host service. For regional resources,
-    #   the limit is 8 KB (8,192 kilobytes) and for CloudFront
-    #   distributions, the limit is 16 KB (16,384 kilobytes). For CloudFront
-    #   distributions, you can increase the limit in the web ACL's
-    #   `AssociationConfig`, for additional processing fees.
+    #   the limit is 8 KB (8,192 bytes) and for CloudFront distributions,
+    #   the limit is 16 KB (16,384 bytes). For CloudFront distributions, you
+    #   can increase the limit in the web ACL's `AssociationConfig`, for
+    #   additional processing fees.
     #
     #   For information about how to handle oversized request bodies, see
     #   the `Body` object configuration.
@@ -2315,10 +2336,10 @@ module Aws::WAFV2
     #
     #   A limited amount of the request body is forwarded to WAF for
     #   inspection by the underlying host service. For regional resources,
-    #   the limit is 8 KB (8,192 kilobytes) and for CloudFront
-    #   distributions, the limit is 16 KB (16,384 kilobytes). For CloudFront
-    #   distributions, you can increase the limit in the web ACL's
-    #   `AssociationConfig`, for additional processing fees.
+    #   the limit is 8 KB (8,192 bytes) and for CloudFront distributions,
+    #   the limit is 16 KB (16,384 bytes). For CloudFront distributions, you
+    #   can increase the limit in the web ACL's `AssociationConfig`, for
+    #   additional processing fees.
     #
     #   For information about how to handle oversized request bodies, see
     #   the `JsonBody` object configuration.
@@ -3849,9 +3870,9 @@ module Aws::WAFV2
     #   forwards the contents that are below the limit to WAF for
     #   inspection.
     #
-    #   The default limit is 8 KB (8,192 kilobytes) for regional resources
-    #   and 16 KB (16,384 kilobytes) for CloudFront distributions. For
-    #   CloudFront distributions, you can increase the limit in the web ACL
+    #   The default limit is 8 KB (8,192 bytes) for regional resources and
+    #   16 KB (16,384 bytes) for CloudFront distributions. For CloudFront
+    #   distributions, you can increase the limit in the web ACL
     #   `AssociationConfig`, for additional processing fees.
     #
     #   The options for oversize handling are the following:
@@ -6642,7 +6663,7 @@ module Aws::WAFV2
 
     # Customizes the maximum size of the request body that your protected
     # CloudFront distributions forward to WAF for inspection. The default
-    # size is 16 KB (16,384 kilobytes).
+    # size is 16 KB (16,384 bytes).
     #
     # <note markdown="1"> You are charged additional fees when your protected resources forward
     # body sizes that are larger than the default. For more information, see
@@ -6662,7 +6683,7 @@ module Aws::WAFV2
     #   inspection. This applies to statements in the web ACL that inspect
     #   the body or JSON body.
     #
-    #   Default: `16 KB (16,384 kilobytes)`
+    #   Default: `16 KB (16,384 bytes)`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RequestBodyAssociatedResourceTypeConfig AWS API Documentation
@@ -7155,8 +7176,12 @@ module Aws::WAFV2
     # web requests, and parameters that govern how WAF handles them.
     #
     # @!attribute [rw] name
-    #   The name of the rule. You can't change the name of a `Rule` after
-    #   you create it.
+    #   The name of the rule.
+    #
+    #   If you change the name of a `Rule` after you create it and you want
+    #   the rule's metric name to reflect the change, update the metric
+    #   name in the rule's `VisibilityConfig` settings. WAF doesn't
+    #   automatically update the metric name when you update the rule name.
     #   @return [String]
     #
     # @!attribute [rw] priority
@@ -7239,6 +7264,10 @@ module Aws::WAFV2
     # @!attribute [rw] visibility_config
     #   Defines and enables Amazon CloudWatch metrics and web request sample
     #   collection.
+    #
+    #   If you change the name of a `Rule` after you create it and you want
+    #   the rule's metric name to reflect the change, update the metric
+    #   name as well. WAF doesn't automatically update the metric name.
     #   @return [Types::VisibilityConfig]
     #
     # @!attribute [rw] captcha_config
@@ -7716,9 +7745,9 @@ module Aws::WAFV2
     #
     # If you configure WAF to inspect the request body, WAF inspects only
     # the number of bytes of the body up to the limit for the web ACL. By
-    # default, for regional web ACLs, this limit is 8 KB (8,192 kilobytes)
-    # and for CloudFront web ACLs, this limit is 16 KB (16,384 kilobytes).
-    # For CloudFront web ACLs, you can increase the limit in the web ACL
+    # default, for regional web ACLs, this limit is 8 KB (8,192 bytes) and
+    # for CloudFront web ACLs, this limit is 16 KB (16,384 bytes). For
+    # CloudFront web ACLs, you can increase the limit in the web ACL
     # `AssociationConfig`, for additional fees. If you know that the request
     # body for your web requests should never exceed the inspection limit,
     # you could use a size constraint statement to block requests that have
@@ -7851,9 +7880,9 @@ module Aws::WAFV2
     #
     #   If you configure WAF to inspect the request body, WAF inspects only
     #   the number of bytes of the body up to the limit for the web ACL. By
-    #   default, for regional web ACLs, this limit is 8 KB (8,192 kilobytes)
-    #   and for CloudFront web ACLs, this limit is 16 KB (16,384 kilobytes).
-    #   For CloudFront web ACLs, you can increase the limit in the web ACL
+    #   default, for regional web ACLs, this limit is 8 KB (8,192 bytes) and
+    #   for CloudFront web ACLs, this limit is 16 KB (16,384 bytes). For
+    #   CloudFront web ACLs, you can increase the limit in the web ACL
     #   `AssociationConfig`, for additional fees. If you know that the
     #   request body for your web requests should never exceed the
     #   inspection limit, you could use a size constraint statement to block
@@ -8927,7 +8956,7 @@ module Aws::WAFV2
     #
     #   Use this to customize the maximum size of the request body that your
     #   protected CloudFront distributions forward to WAF for inspection.
-    #   The default is 16 KB (16,384 kilobytes).
+    #   The default is 16 KB (16,384 bytes).
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources
     #   forward body sizes that are larger than the default. For more
@@ -9623,7 +9652,7 @@ module Aws::WAFV2
     #
     #   Use this to customize the maximum size of the request body that your
     #   protected CloudFront distributions forward to WAF for inspection.
-    #   The default is 16 KB (16,384 kilobytes).
+    #   The default is 16 KB (16,384 bytes).
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources
     #   forward body sizes that are larger than the default. For more

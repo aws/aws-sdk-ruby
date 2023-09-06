@@ -1025,6 +1025,7 @@ module Aws::WAFV2
     #                 },
     #                 aws_managed_rules_bot_control_rule_set: {
     #                   inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                   enable_machine_learning: false,
     #                 },
     #                 aws_managed_rules_atp_rule_set: {
     #                   login_path: "String", # required
@@ -2184,6 +2185,7 @@ module Aws::WAFV2
     #                 },
     #                 aws_managed_rules_bot_control_rule_set: {
     #                   inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                   enable_machine_learning: false,
     #                 },
     #                 aws_managed_rules_atp_rule_set: {
     #                   login_path: "String", # required
@@ -2623,7 +2625,7 @@ module Aws::WAFV2
     #
     #   Use this to customize the maximum size of the request body that your
     #   protected CloudFront distributions forward to WAF for inspection. The
-    #   default is 16 KB (16,384 kilobytes).
+    #   default is 16 KB (16,384 bytes).
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources forward
     #   body sizes that are larger than the default. For more information, see
@@ -3172,6 +3174,7 @@ module Aws::WAFV2
     #                 },
     #                 aws_managed_rules_bot_control_rule_set: {
     #                   inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                   enable_machine_learning: false,
     #                 },
     #                 aws_managed_rules_atp_rule_set: {
     #                   login_path: "String", # required
@@ -4909,6 +4912,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].username_field.identifier #=> String
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].password_field.identifier #=> String
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_bot_control_rule_set.inspection_level #=> String, one of "COMMON", "TARGETED"
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_bot_control_rule_set.enable_machine_learning #=> Boolean
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.login_path #=> String
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.request_inspection.payload_type #=> String, one of "JSON", "FORM_ENCODED"
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_atp_rule_set.request_inspection.username_field.identifier #=> String
@@ -7433,6 +7437,7 @@ module Aws::WAFV2
     #                 },
     #                 aws_managed_rules_bot_control_rule_set: {
     #                   inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                   enable_machine_learning: false,
     #                 },
     #                 aws_managed_rules_atp_rule_set: {
     #                   login_path: "String", # required
@@ -7905,7 +7910,7 @@ module Aws::WAFV2
     #
     #   Use this to customize the maximum size of the request body that your
     #   protected CloudFront distributions forward to WAF for inspection. The
-    #   default is 16 KB (16,384 kilobytes).
+    #   default is 16 KB (16,384 bytes).
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources forward
     #   body sizes that are larger than the default. For more information, see
@@ -8455,6 +8460,7 @@ module Aws::WAFV2
     #                 },
     #                 aws_managed_rules_bot_control_rule_set: {
     #                   inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                   enable_machine_learning: false,
     #                 },
     #                 aws_managed_rules_atp_rule_set: {
     #                   login_path: "String", # required
@@ -8812,7 +8818,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

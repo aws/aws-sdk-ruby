@@ -4751,11 +4751,16 @@ module Aws::Appflow
     #   The password that corresponds to the user name.
     #   @return [String]
     #
+    # @!attribute [rw] o_auth_2_credentials
+    #   The OAuth 2.0 credentials required to authenticate the user.
+    #   @return [Types::OAuth2Credentials]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ServiceNowConnectorProfileCredentials AWS API Documentation
     #
     class ServiceNowConnectorProfileCredentials < Struct.new(
       :username,
-      :password)
+      :password,
+      :o_auth_2_credentials)
       SENSITIVE = [:password]
       include Aws::Structure
     end

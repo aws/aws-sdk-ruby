@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2023-09-06)
+------------------
+
+* Feature - Adding OAuth2.0 support for servicenow connector.
+
 1.49.0 (2023-08-30)
 ------------------
 

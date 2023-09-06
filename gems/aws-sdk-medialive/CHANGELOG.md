@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.107.0 (2023-09-06)
+------------------
+
+* Feature - Adds advanced Output Locking options for Epoch Locking: Custom Epoch and Jam Sync Time
+
 1.106.0 (2023-08-24)
 ------------------
 

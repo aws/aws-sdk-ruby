@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2023-09-06)
+------------------
+
+* Feature - The targeted protection level of the Bot Control managed rule group now provides optional, machine-learning analysis of traffic statistics to detect some bot-related activity. You can enable or disable the machine learning functionality through the API.
+
 1.67.0 (2023-07-19)
 ------------------
 

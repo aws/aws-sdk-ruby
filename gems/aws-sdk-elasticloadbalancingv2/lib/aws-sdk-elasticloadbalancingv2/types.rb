@@ -3274,7 +3274,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * `deregistration_delay.connection_termination.enabled` - Indicates
     #     whether the load balancer terminates connections at the end of the
-    #     deregistration timeout. The value is `true` or `false`. The
+    #     deregistration timeout. The value is `true` or `false`. For new
+    #     UDP/TCP\_UDP target groups the default is `true`. Otherwise, the
     #     default is `false`.
     #
     #   * `preserve_client_ip.enabled` - Indicates whether client IP
@@ -3287,6 +3288,11 @@ module Aws::ElasticLoadBalancingV2
     #   * `proxy_protocol_v2.enabled` - Indicates whether Proxy Protocol
     #     version 2 is enabled. The value is `true` or `false`. The default
     #     is `false`.
+    #
+    #   * `target_health_state.unhealthy.connection_termination.enabled` -
+    #     Indicates whether the load balancer terminates connections to
+    #     unhealthy targets. The value is `true` or `false`. The default is
+    #     `true`.
     #
     #   The following attributes are supported only by Gateway Load
     #   Balancers:

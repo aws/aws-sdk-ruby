@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2023-09-06)
+------------------
+
+* Feature - This release enables default UDP connection termination and disabling unhealthy target connection termination for Network Load Balancers.
+
 1.90.0 (2023-08-10)
 ------------------
 

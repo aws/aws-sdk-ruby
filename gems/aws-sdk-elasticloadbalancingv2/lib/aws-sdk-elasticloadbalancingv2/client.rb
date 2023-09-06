@@ -1747,8 +1747,31 @@ module Aws::ElasticLoadBalancingV2
     # After the targets are deregistered, they no longer receive traffic
     # from the load balancer.
     #
+    # The load balancer stops sending requests to targets that are
+    # deregistering, but uses connection draining to ensure that in-flight
+    # traffic completes on the existing connections. This deregistration
+    # delay is configured by default but can be updated for each target
+    # group.
+    #
+    # For more information, see the following:
+    #
+    # * [ Deregistration delay][1] in the *Application Load Balancers User
+    #   Guide*
+    #
+    # * [ Deregistration delay][2] in the *Network Load Balancers User
+    #   Guide*
+    #
+    # * [ Deregistration delay][3] in the *Gateway Load Balancers User
+    #   Guide*
+    #
     # Note: If the specified target does not exist, the action returns
     # successfully.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#deregistration-delay
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html#deregistration-delay
+    # [3]: https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/target-groups.html#deregistration-delay
     #
     # @option params [required, String] :target_group_arn
     #   The Amazon Resource Name (ARN) of the target group.
@@ -4362,7 +4385,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -4242,6 +4242,34 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Epoch Locking Settings
+    #
+    # @!attribute [rw] custom_epoch
+    #   Optional. Enter a value here to use a custom epoch, instead of the
+    #   standard epoch (which started at 1970-01-01T00:00:00 UTC). Specify
+    #   the start time of the custom epoch, in YYYY-MM-DDTHH:MM:SS in UTC.
+    #   The time must be 2000-01-01T00:00:00 or later. Always set the MM:SS
+    #   portion to 00:00.
+    #   @return [String]
+    #
+    # @!attribute [rw] jam_sync_time
+    #   Optional. Enter a time for the jam sync. The default is midnight
+    #   UTC. When epoch locking is enabled, MediaLive performs a daily jam
+    #   sync on every output encode to ensure timecodes don’t diverge from
+    #   the wall clock. The jam sync applies only to encodes with frame rate
+    #   of 29.97 or 59.94 FPS. To override, enter a time in HH:MM:SS in UTC.
+    #   Always set the MM:SS portion to 00:00.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/EpochLockingSettings AWS API Documentation
+    #
+    class EpochLockingSettings < Struct.new(
+      :custom_epoch,
+      :jam_sync_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Esam
     #
     # @!attribute [rw] acquisition_point_id
@@ -4693,6 +4721,10 @@ module Aws::MediaLive
     #   less than one video frame per second.
     #   @return [String]
     #
+    # @!attribute [rw] output_locking_settings
+    #   Advanced output locking settings
+    #   @return [Types::OutputLockingSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/GlobalConfiguration AWS API Documentation
     #
     class GlobalConfiguration < Struct.new(
@@ -4701,7 +4733,8 @@ module Aws::MediaLive
       :input_loss_behavior,
       :output_locking_mode,
       :output_timing_source,
-      :support_low_framerate_inputs)
+      :support_low_framerate_inputs,
+      :output_locking_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9647,6 +9680,25 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Output Locking Settings
+    #
+    # @!attribute [rw] epoch_locking_settings
+    #   Epoch Locking Settings
+    #   @return [Types::EpochLockingSettings]
+    #
+    # @!attribute [rw] pipeline_locking_settings
+    #   Pipeline Locking Settings
+    #   @return [Types::PipelineLockingSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputLockingSettings AWS API Documentation
+    #
+    class OutputLockingSettings < Struct.new(
+      :epoch_locking_settings,
+      :pipeline_locking_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Output Settings
     #
     # @!attribute [rw] archive_output_settings
@@ -9756,6 +9808,14 @@ module Aws::MediaLive
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Pipeline Locking Settings
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PipelineLockingSettings AWS API Documentation
+    #
+    class PipelineLockingSettings < Aws::EmptyStructure; end
 
     # Settings for pausing a pipeline.
     #
