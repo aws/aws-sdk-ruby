@@ -789,7 +789,7 @@ module Aws::PaymentCryptographyData
     #     },
     #     key_identifier: "KeyArnOrKeyAliasType", # required
     #     mac_length: 1,
-    #     message_data: "HexLengthBetween2And4096", # required
+    #     message_data: "HexEvenLengthBetween2And4096", # required
     #   })
     #
     # @example Response structure
@@ -1147,7 +1147,7 @@ module Aws::PaymentCryptographyData
     # @example Request syntax with placeholder values
     #
     #   resp = client.translate_pin_data({
-    #     encrypted_pin_block: "HexLengthBetween16And32", # required
+    #     encrypted_pin_block: "HexEvenLengthBetween16And32", # required
     #     incoming_dukpt_attributes: {
     #       dukpt_key_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
     #       dukpt_key_variant: "BIDIRECTIONAL", # accepts BIDIRECTIONAL, REQUEST, RESPONSE
@@ -1513,9 +1513,9 @@ module Aws::PaymentCryptographyData
     #
     #   resp = client.verify_mac({
     #     key_identifier: "KeyArnOrKeyAliasType", # required
-    #     mac: "HexLengthBetween4And128", # required
+    #     mac: "HexEvenLengthBetween4And128", # required
     #     mac_length: 1,
-    #     message_data: "HexLengthBetween2And4096", # required
+    #     message_data: "HexEvenLengthBetween2And4096", # required
     #     verification_attributes: { # required
     #       algorithm: "ISO9797_ALGORITHM1", # accepts ISO9797_ALGORITHM1, ISO9797_ALGORITHM3, CMAC, HMAC_SHA224, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512
     #       dukpt_cmac: {
@@ -1691,7 +1691,7 @@ module Aws::PaymentCryptographyData
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-paymentcryptographydata'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

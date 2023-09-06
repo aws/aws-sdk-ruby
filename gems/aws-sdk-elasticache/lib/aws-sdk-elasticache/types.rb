@@ -4861,7 +4861,7 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] node_group_count
-    #   The number of node groups you wish to add
+    #   Total number of node groups you want
     #   @return [Integer]
     #
     # @!attribute [rw] regional_configurations
@@ -8497,6 +8497,37 @@ module Aws::ElastiCache
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TestFailoverResult AWS API Documentation
     #
     class TestFailoverResult < Struct.new(
+      :replication_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replication_group_id
+    #   The ID of the replication group to which data is to be migrated.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_node_endpoint_list
+    #   List of endpoints from which data should be migrated. List should
+    #   have only one element.
+    #   @return [Array<Types::CustomerNodeEndpoint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TestMigrationMessage AWS API Documentation
+    #
+    class TestMigrationMessage < Struct.new(
+      :replication_group_id,
+      :customer_node_endpoint_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replication_group
+    #   Contains all of the attributes of a specific Redis replication
+    #   group.
+    #   @return [Types::ReplicationGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TestMigrationResponse AWS API Documentation
+    #
+    class TestMigrationResponse < Struct.new(
       :replication_group)
       SENSITIVE = []
       include Aws::Structure

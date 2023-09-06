@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2023-08-22)
+------------------
+
+* Feature - This release adds the LastUpdatedDate and LastUsedDate timestamps to help you manage your cost allocation tags.
+
 1.89.0 (2023-07-24)
 ------------------
 

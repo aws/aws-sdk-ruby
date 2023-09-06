@@ -1761,8 +1761,10 @@ module Aws::GlobalAccelerator
     #   applications on the endpoint fronted by the accelerator.
     #
     #   Client IP address preservation is supported, in specific Amazon Web
-    #   Services Regions, for endpoints that are Application Load Balancers
-    #   and Amazon EC2 instances.
+    #   Services Regions, for endpoints that are Application Load Balancers,
+    #   Amazon EC2 instances, and Network Load Balancers with Security
+    #   Groups. IMPORTANT: You cannot use client IP address preservation
+    #   with Network Load Balancers with TLS listeners.
     #
     #   For more information, see [ Preserve client IP addresses in Global
     #   Accelerator][1] in the *Global Accelerator Developer Guide*.
@@ -1829,8 +1831,10 @@ module Aws::GlobalAccelerator
     #   applications on the endpoint fronted by the accelerator.
     #
     #   Client IP address preservation is supported, in specific Amazon Web
-    #   Services Regions, for endpoints that are Application Load Balancers
-    #   and Amazon EC2 instances.
+    #   Services Regions, for endpoints that are Application Load Balancers,
+    #   Amazon EC2 instances, and Network Load Balancers with Security
+    #   Groups. IMPORTANT: You cannot use client IP address preservation
+    #   with Network Load Balancers with TLS listeners.
     #
     #   For more information, see [ Preserve client IP addresses in Global
     #   Accelerator][1] in the *Global Accelerator Developer Guide*.

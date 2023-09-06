@@ -632,9 +632,31 @@ module Aws::GuardDuty
     #
     #   * accountId
     #
+    #   * id
+    #
     #   * region
     #
-    #   * id
+    #   * severity
+    #
+    #     To filter on the basis of severity, the API and CLI use the
+    #     following input list for the [FindingCriteria][1] condition:
+    #
+    #     * **Low**: `["1", "2", "3"]`
+    #
+    #     * **Medium**: `["4", "5", "6"]`
+    #
+    #     * **High**: `["7", "8", "9"]`
+    #
+    #     For more information, see [Severity levels for GuardDuty
+    #     findings][2].
+    #
+    #   * type
+    #
+    #   * updatedAt
+    #
+    #     Type: ISO 8601 string format: YYYY-MM-DDTHH:MM:SS.SSSZ or
+    #     YYYY-MM-DDTHH:MM:SSZ depending on whether the value contains
+    #     milliseconds.
     #
     #   * resource.accessKeyDetails.accessKeyId
     #
@@ -650,7 +672,9 @@ module Aws::GuardDuty
     #
     #   * resource.instanceDetails.instanceId
     #
-    #   * resource.instanceDetails.outpostArn
+    #   * resource.instanceDetails.tags.key
+    #
+    #   * resource.instanceDetails.tags.value
     #
     #   * resource.instanceDetails.networkInterfaces.ipv6Addresses
     #
@@ -668,11 +692,19 @@ module Aws::GuardDuty
     #
     #   * resource.instanceDetails.networkInterfaces.vpcId
     #
-    #   * resource.instanceDetails.tags.key
-    #
-    #   * resource.instanceDetails.tags.value
+    #   * resource.instanceDetails.outpostArn
     #
     #   * resource.resourceType
+    #
+    #   * resource.s3BucketDetails.publicAccess.effectivePermissions
+    #
+    #   * resource.s3BucketDetails.name
+    #
+    #   * resource.s3BucketDetails.tags.key
+    #
+    #   * resource.s3BucketDetails.tags.value
+    #
+    #   * resource.s3BucketDetails.type
     #
     #   * service.action.actionType
     #
@@ -681,8 +713,6 @@ module Aws::GuardDuty
     #   * service.action.awsApiCallAction.callerType
     #
     #   * service.action.awsApiCallAction.errorCode
-    #
-    #   * service.action.awsApiCallAction.userAgent
     #
     #   * service.action.awsApiCallAction.remoteIpDetails.city.cityName
     #
@@ -706,8 +736,6 @@ module Aws::GuardDuty
     #
     #   * service.action.networkConnectionAction.protocol
     #
-    #   * service.action.networkConnectionAction.localIpDetails.ipAddressV4
-    #
     #   * service.action.networkConnectionAction.remoteIpDetails.city.cityName
     #
     #   * service.action.networkConnectionAction.remoteIpDetails.country.countryName
@@ -720,29 +748,82 @@ module Aws::GuardDuty
     #
     #   * service.action.networkConnectionAction.remotePortDetails.port
     #
+    #   * service.action.awsApiCallAction.remoteAccountDetails.affiliated
+    #
+    #   * service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV4
+    #
+    #   * service.action.kubernetesApiCallAction.requestUri
+    #
+    #   * service.action.networkConnectionAction.localIpDetails.ipAddressV4
+    #
+    #   * service.action.networkConnectionAction.protocol
+    #
+    #   * service.action.awsApiCallAction.serviceName
+    #
+    #   * service.action.awsApiCallAction.remoteAccountDetails.accountId
+    #
     #   * service.additionalInfo.threatListName
-    #
-    #   * resource.s3BucketDetails.publicAccess.effectivePermissions
-    #
-    #   * resource.s3BucketDetails.name
-    #
-    #   * resource.s3BucketDetails.tags.key
-    #
-    #   * resource.s3BucketDetails.tags.value
-    #
-    #   * resource.s3BucketDetails.type
     #
     #   * service.resourceRole
     #
-    #   * severity
+    #   * resource.eksClusterDetails.name
     #
-    #   * type
+    #   * resource.kubernetesDetails.kubernetesWorkloadDetails.name
     #
-    #   * updatedAt
+    #   * resource.kubernetesDetails.kubernetesWorkloadDetails.namespace
     #
-    #     Type: ISO 8601 string format: YYYY-MM-DDTHH:MM:SS.SSSZ or
-    #     YYYY-MM-DDTHH:MM:SSZ depending on whether the value contains
-    #     milliseconds.
+    #   * resource.kubernetesDetails.kubernetesUserDetails.username
+    #
+    #   * resource.kubernetesDetails.kubernetesWorkloadDetails.containers.image
+    #
+    #   * resource.kubernetesDetails.kubernetesWorkloadDetails.containers.imagePrefix
+    #
+    #   * service.ebsVolumeScanDetails.scanId
+    #
+    #   * service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.name
+    #
+    #   * service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.severity
+    #
+    #   * service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.filePaths.hash
+    #
+    #   * resource.ecsClusterDetails.name
+    #
+    #   * resource.ecsClusterDetails.taskDetails.containers.image
+    #
+    #   * resource.ecsClusterDetails.taskDetails.definitionArn
+    #
+    #   * resource.containerDetails.image
+    #
+    #   * resource.rdsDbInstanceDetails.dbInstanceIdentifier
+    #
+    #   * resource.rdsDbInstanceDetails.dbClusterIdentifier
+    #
+    #   * resource.rdsDbInstanceDetails.engine
+    #
+    #   * resource.rdsDbUserDetails.user
+    #
+    #   * resource.rdsDbInstanceDetails.tags.key
+    #
+    #   * resource.rdsDbInstanceDetails.tags.value
+    #
+    #   * service.runtimeDetails.process.executableSha256
+    #
+    #   * service.runtimeDetails.process.name
+    #
+    #   * service.runtimeDetails.process.name
+    #
+    #   * resource.lambdaDetails.functionName
+    #
+    #   * resource.lambdaDetails.functionArn
+    #
+    #   * resource.lambdaDetails.tags.key
+    #
+    #   * resource.lambdaDetails.tags.value
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_FindingCriteria.html
+    #   [2]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings.html#guardduty_findings-severity
     #
     # @option params [String] :client_token
     #   The idempotency token for the create request.
@@ -1477,10 +1558,10 @@ module Aws::GuardDuty
     #   resp.data_sources.malware_protection.scan_ec2_instance_with_findings.ebs_volumes.auto_enable #=> Boolean
     #   resp.features #=> Array
     #   resp.features[0].name #=> String, one of "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "EKS_RUNTIME_MONITORING", "LAMBDA_NETWORK_LOGS"
-    #   resp.features[0].auto_enable #=> String, one of "NEW", "NONE"
+    #   resp.features[0].auto_enable #=> String, one of "NEW", "NONE", "ALL"
     #   resp.features[0].additional_configuration #=> Array
     #   resp.features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT"
-    #   resp.features[0].additional_configuration[0].auto_enable #=> String, one of "NEW", "NONE"
+    #   resp.features[0].additional_configuration[0].auto_enable #=> String, one of "NEW", "NONE", "ALL"
     #   resp.next_token #=> String
     #   resp.auto_enable_organization_members #=> String, one of "NEW", "ALL", "NONE"
     #
@@ -3555,9 +3636,9 @@ module Aws::GuardDuty
     end
 
     # Lists tags for a resource. Tagging is currently supported for
-    # detectors, finding filters, IP sets, threat intel sets, publishing
-    # destination, with a limit of 50 tags per resource. When invoked, this
-    # operation returns all assigned tags for a given resource.
+    # detectors, finding filters, IP sets, threat intel sets, and publishing
+    # destination, with a limit of 50 tags per each resource. When invoked,
+    # this operation returns all assigned tags for a given resource.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) for the given GuardDuty resource.
@@ -4277,11 +4358,11 @@ module Aws::GuardDuty
     #     features: [
     #       {
     #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, EKS_RUNTIME_MONITORING, LAMBDA_NETWORK_LOGS
-    #         auto_enable: "NEW", # accepts NEW, NONE
+    #         auto_enable: "NEW", # accepts NEW, NONE, ALL
     #         additional_configuration: [
     #           {
     #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT
-    #             auto_enable: "NEW", # accepts NEW, NONE
+    #             auto_enable: "NEW", # accepts NEW, NONE, ALL
     #           },
     #         ],
     #       },
@@ -4389,7 +4470,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

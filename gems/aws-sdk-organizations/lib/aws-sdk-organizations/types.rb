@@ -59,7 +59,7 @@ module Aws::Organizations
     # You don't have permissions to perform the requested operation. The
     # user or role that is making the request must have at least one IAM
     # permissions policy attached that grants the required permissions. For
-    # more information, see [Access Management][1] in the *IAM User Guide.*
+    # more information, see [Access Management][1] in the *IAM User Guide*.
     #
     #
     #
@@ -228,8 +228,8 @@ module Aws::Organizations
 
     # You can't invite an existing account to your organization until you
     # verify that you own the email address associated with the management
-    # account. For more information, see [Email Address Verification][1] in
-    # the *Organizations User Guide.*
+    # account. For more information, see [Email address verification][1] in
+    # the *Organizations User Guide*.
     #
     #
     #
@@ -452,7 +452,7 @@ module Aws::Organizations
     #   enough information to exist as a standalone account. This account
     #   requires you to first complete phone verification. Follow the steps
     #   at [Removing a member account from your organization][1] in the
-    #   *Organizations User Guide.*
+    #   *Organizations User Guide*.
     #
     # * ACCOUNT\_CREATION\_RATE\_LIMIT\_EXCEEDED: You attempted to exceed
     #   the number of accounts that you can create in one day.
@@ -479,6 +479,10 @@ module Aws::Organizations
     #   creating the organization, wait one hour and try again. After an
     #   hour, if the command continues to fail with this error, contact
     #   [Amazon Web Services Support][2].
+    #
+    # * CANNOT\_REGISTER\_SUSPENDED\_ACCOUNT\_AS\_DELEGATED\_ADMINISTRATOR:
+    #   You cannot register a suspended account as a delegated
+    #   administrator.
     #
     # * CANNOT\_REGISTER\_MASTER\_AS\_DELEGATED\_ADMINISTRATOR: You
     #   attempted to register the management account of the organization as
@@ -547,14 +551,13 @@ module Aws::Organizations
     # * MASTER\_ACCOUNT\_NOT\_GOVCLOUD\_ENABLED: To complete this operation,
     #   the management account must have an associated account in the Amazon
     #   Web Services GovCloud (US-West) Region. For more information, see
-    #   [Organizations][4] in the *Amazon Web Services GovCloud User Guide.*
+    #   [Organizations][4] in the *Amazon Web Services GovCloud User Guide*.
     #
     # * MASTER\_ACCOUNT\_PAYMENT\_INSTRUMENT\_REQUIRED: To create an
     #   organization with this management account, you first must associate
     #   a valid payment instrument, such as a credit card, with the account.
-    #   Follow the steps at [To leave an organization when all required
-    #   account information has not yet been provided][5] in the
-    #   *Organizations User Guide.*
+    #   For more information, see [Considerations before removing an account
+    #   from an organization][5] in the *Organizations User Guide*.
     #
     # * MAX\_DELEGATED\_ADMINISTRATORS\_FOR\_SERVICE\_LIMIT\_EXCEEDED: You
     #   attempted to register more delegated administrators than allowed for
@@ -569,10 +572,9 @@ module Aws::Organizations
     #
     # * MEMBER\_ACCOUNT\_PAYMENT\_INSTRUMENT\_REQUIRED: To complete this
     #   operation with this member account, you first must associate a valid
-    #   payment instrument, such as a credit card, with the account. Follow
-    #   the steps at [To leave an organization when all required account
-    #   information has not yet been provided][5] in the *Organizations User
-    #   Guide.*
+    #   payment instrument, such as a credit card, with the account. For
+    #   more information, see [Considerations before removing an account
+    #   from an organization][5] in the *Organizations User Guide*.
     #
     # * MIN\_POLICY\_TYPE\_ATTACHMENT\_LIMIT\_EXCEEDED: You attempted to
     #   detach a policy from an entity that would cause the entity to have
@@ -612,10 +614,10 @@ module Aws::Organizations
     #
     #
     # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#orgs_manage_accounts_remove-from-master
-    # [2]: https://docs.aws.amazon.com/support/home#/
+    # [2]: https://console.aws.amazon.com/support/home#/
     # [3]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-general.html
     # [4]: https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html
-    # [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
+    # [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_account-before-remove.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -683,11 +685,11 @@ module Aws::Organizations
     #   For more information about how to use this role to access the member
     #   account, see the following links:
     #
-    #   * [Accessing and Administering the Member Accounts in Your
-    #     Organization][1] in the *Organizations User Guide*
+    #   * [Creating the OrganizationAccountAccessRole in an invited member
+    #     account][1] in the *Organizations User Guide*
     #
-    #   * Steps 2 and 3 in [Tutorial: Delegate Access Across Amazon Web
-    #     Services accounts Using IAM Roles][2] in the *IAM User Guide*
+    #   * Steps 2 and 3 in [IAM Tutorial: Delegate access across Amazon Web
+    #     Services accounts using IAM roles][2] in the *IAM User Guide*
     #
     #   The [regex pattern][3] that is used to validate this parameter. The
     #   pattern can include uppercase letters, lowercase letters, digits
@@ -704,8 +706,8 @@ module Aws::Organizations
     #   If set to `ALLOW`, the new account enables IAM users to access
     #   account billing information *if* they have the required permissions.
     #   If set to `DENY`, only the root user of the new account can access
-    #   account billing information. For more information, see [Activating
-    #   Access to the Billing and Cost Management Console][1] in the *Amazon
+    #   account billing information. For more information, see [About IAM
+    #   access to the Billing and Cost Management console][1] in the *Amazon
     #   Web Services Billing and Cost Management User Guide*.
     #
     #   If you don't specify this parameter, the value defaults to `ALLOW`,
@@ -755,12 +757,12 @@ module Aws::Organizations
     #   parameter to DescribeCreateAccountStatus to get status about the
     #   progress of the request at later times. You can also check the
     #   CloudTrail log for the `CreateAccountResult` event. For more
-    #   information, see [Monitoring the Activity in Your Organization][1]
-    #   in the *Organizations User Guide*.
+    #   information, see [Logging and monitoring in Organizations][1] in the
+    #   *Organizations User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html
     #   @return [Types::CreateAccountStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccountResponse AWS API Documentation
@@ -976,10 +978,13 @@ module Aws::Organizations
     #   `OrganizationAccountAccessRole`.
     #
     #   For more information about how to use this role to access the member
-    #   account, see [Accessing and Administering the Member Accounts in
-    #   Your Organization][1] in the *Organizations User Guide* and steps 2
-    #   and 3 in [Tutorial: Delegate Access Across Amazon Web Services
-    #   accounts Using IAM Roles][2] in the *IAM User Guide.*
+    #   account, see the following links:
+    #
+    #   * [Creating the OrganizationAccountAccessRole in an invited member
+    #     account][1] in the *Organizations User Guide*
+    #
+    #   * Steps 2 and 3 in [IAM Tutorial: Delegate access across Amazon Web
+    #     Services accounts using IAM roles][2] in the *IAM User Guide*
     #
     #   The [regex pattern][3] that is used to validate this parameter. The
     #   pattern can include uppercase letters, lowercase letters, digits
@@ -997,9 +1002,9 @@ module Aws::Organizations
     #   enables IAM users to access account billing information *if* they
     #   have the required permissions. If set to `DENY`, only the root user
     #   of the new account can access account billing information. For more
-    #   information, see [Activating Access to the Billing and Cost
-    #   Management Console][1] in the *Amazon Web Services Billing and Cost
-    #   Management User Guide.*
+    #   information, see [About IAM access to the Billing and Cost
+    #   Management console][1] in the *Amazon Web Services Billing and Cost
+    #   Management User Guide*.
     #
     #   If you don't specify this parameter, the value defaults to `ALLOW`,
     #   and IAM users and roles with the required permissions can access
@@ -1066,7 +1071,7 @@ module Aws::Organizations
     #   * `CONSOLIDATED_BILLING`: All member accounts have their bills
     #     consolidated to and paid by the management account. For more
     #     information, see [Consolidated billing][1] in the *Organizations
-    #     User Guide.*
+    #     User Guide*.
     #
     #     The consolidated billing feature subset isn't available for
     #     organizations in the Amazon Web Services GovCloud (US) Region.
@@ -1075,7 +1080,7 @@ module Aws::Organizations
     #     consolidated billing feature set, the management account can also
     #     apply any policy type to any member account in the organization.
     #     For more information, see [All features][2] in the *Organizations
-    #     User Guide.*
+    #     User Guide*.
     #
     #
     #
@@ -2247,7 +2252,7 @@ module Aws::Organizations
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/support/home#/
+    # [1]: https://console.aws.amazon.com/support/home#/
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -3602,12 +3607,12 @@ module Aws::Organizations
 
     # The provided policy document doesn't meet the requirements of the
     # specified policy type. For example, the syntax might be incorrect. For
-    # details about service control policy syntax, see [Service Control
-    # Policy Syntax][1] in the *Organizations User Guide.*
+    # details about service control policy syntax, see [SCP syntax][1] in
+    # the *Organizations User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_syntax.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -3732,8 +3737,8 @@ module Aws::Organizations
     #   organization. If set to "ALL", then all features are enabled and
     #   policies can be applied to accounts in the organization. If set to
     #   "CONSOLIDATED\_BILLING", then only consolidated billing
-    #   functionality is available. For more information, see [Enabling All
-    #   Features in Your Organization][1] in the *Organizations User Guide*.
+    #   functionality is available. For more information, see [Enabling all
+    #   features in your organization][1] in the *Organizations User Guide*.
     #
     #
     #
@@ -3794,8 +3799,7 @@ module Aws::Organizations
     end
 
     # The organization isn't empty. To delete an organization, you must
-    # first remove all accounts except the management account, delete all
-    # OUs, and delete all policies.
+    # first remove all accounts except the management account.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -4157,8 +4161,8 @@ module Aws::Organizations
     # You can't use the specified policy type with the feature set
     # currently enabled for this organization. For example, you can enable
     # SCPs only after you enable all features in the organization. For more
-    # information, see [Managing Organizations Policies][1]in the
-    # *Organizations User Guide.*
+    # information, see [Managing Organizations policies][1]in the
+    # *Organizations User Guide*.
     #
     #
     #
@@ -4178,8 +4182,8 @@ module Aws::Organizations
     # The specified policy type isn't currently enabled in this root. You
     # can't attach policies of the specified type to entities in a root
     # until you enable that type in the root. For more information, see
-    # [Enabling All Features in Your Organization][1] in the *Organizations
-    # User Guide.*
+    # [Enabling all features in your organization][1] in the *Organizations
+    # User Guide*.
     #
     #
     #
@@ -4222,12 +4226,12 @@ module Aws::Organizations
     # @!attribute [rw] content
     #   If provided, the new content for the resource policy. The text must
     #   be correctly formatted JSON that complies with the syntax for the
-    #   resource policy's type. For more information, see [Service Control
-    #   Policy Syntax][1] in the *Organizations User Guide.*
+    #   resource policy's type. For more information, see [SCP syntax][1]
+    #   in the *Organizations User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_syntax.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -4559,7 +4563,7 @@ module Aws::Organizations
     # later.
     #
     # For information about quotas that affect Organizations, see [Quotas
-    # for Organizations][1]in the *Organizations User Guide.*
+    # for Organizations][1] in the *Organizations User Guide*.
     #
     #
     #
@@ -4702,12 +4706,12 @@ module Aws::Organizations
     # @!attribute [rw] content
     #   If provided, the new content for the policy. The text must be
     #   correctly formatted JSON that complies with the syntax for the
-    #   policy's type. For more information, see [Service Control Policy
-    #   Syntax][1] in the *Organizations User Guide.*
+    #   policy's type. For more information, see [SCP syntax][1] in the
+    #   *Organizations User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_syntax.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdatePolicyRequest AWS API Documentation

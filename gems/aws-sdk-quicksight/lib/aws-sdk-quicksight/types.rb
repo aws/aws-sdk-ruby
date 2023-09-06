@@ -91,6 +91,10 @@ module Aws::QuickSight
     #   The status of your account subscription.
     #   @return [String]
     #
+    # @!attribute [rw] iam_identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) for the IAM Identity Center instance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AccountInfo AWS API Documentation
     #
     class AccountInfo < Struct.new(
@@ -98,7 +102,8 @@ module Aws::QuickSight
       :edition,
       :notification_email,
       :authentication_type,
-      :account_subscription_status)
+      :account_subscription_status,
+      :iam_identity_center_instance_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -266,6 +271,18 @@ module Aws::QuickSight
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # The configuration for applying a filter to all sheets. You can apply
+    # this filter to all visuals on every sheet.
+    #
+    # This is a union type structure. For this structure to be valid, only
+    # one of the attributes can be defined.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AllSheetsFilterScopeConfiguration AWS API Documentation
+    #
+    class AllSheetsFilterScopeConfiguration < Aws::EmptyStructure; end
 
     # The parameters for OpenSearch.
     #
@@ -4524,12 +4541,11 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] member_id
-    #   The ID of the asset (the dashboard, analysis, or dataset).
+    #   The ID of the asset that you want to add to the folder.
     #   @return [String]
     #
     # @!attribute [rw] member_type
-    #   The type of the member, including `DASHBOARD`, `ANALYSIS`, and
-    #   `DATASET`.
+    #   The member type of the asset that you want to add to a folder.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateFolderMembershipRequest AWS API Documentation
@@ -4600,6 +4616,11 @@ module Aws::QuickSight
     #   Tags for the folder.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] sharing_model
+    #   An optional parameter that determines the sharing scope of the
+    #   folder. The default value for this parameter is `ACCOUNT`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateFolderRequest AWS API Documentation
     #
     class CreateFolderRequest < Struct.new(
@@ -4609,7 +4630,8 @@ module Aws::QuickSight
       :folder_type,
       :parent_folder_arn,
       :permissions,
-      :tags)
+      :tags,
+      :sharing_model)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8640,13 +8662,11 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] member_id
-    #   The ID of the asset (the dashboard, analysis, or dataset) that you
-    #   want to delete.
+    #   The ID of the asset that you want to delete.
     #   @return [String]
     #
     # @!attribute [rw] member_type
-    #   The type of the member, including `DASHBOARD`, `ANALYSIS`, and
-    #   `DATASET`
+    #   The member type of the asset that you want to delete from a folder.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteFolderMembershipRequest AWS API Documentation
@@ -10601,11 +10621,26 @@ module Aws::QuickSight
     #   The ID of the folder.
     #   @return [String]
     #
+    # @!attribute [rw] namespace
+    #   The namespace of the folder whose permissions you want described.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token for the next set of results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderPermissionsRequest AWS API Documentation
     #
     class DescribeFolderPermissionsRequest < Struct.new(
       :aws_account_id,
-      :folder_id)
+      :folder_id,
+      :namespace,
+      :max_results,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10630,6 +10665,11 @@ module Aws::QuickSight
     #   The Amazon Web Services request ID for this operation.
     #   @return [String]
     #
+    # @!attribute [rw] next_token
+    #   The pagination token for the next set of results, or null if there
+    #   are no more results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderPermissionsResponse AWS API Documentation
     #
     class DescribeFolderPermissionsResponse < Struct.new(
@@ -10637,7 +10677,8 @@ module Aws::QuickSight
       :folder_id,
       :arn,
       :permissions,
-      :request_id)
+      :request_id,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10667,11 +10708,26 @@ module Aws::QuickSight
     #   The ID of the folder.
     #   @return [String]
     #
+    # @!attribute [rw] namespace
+    #   The namespace of the folder whose permissions you want described.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token for the next set of results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderResolvedPermissionsRequest AWS API Documentation
     #
     class DescribeFolderResolvedPermissionsRequest < Struct.new(
       :aws_account_id,
-      :folder_id)
+      :folder_id,
+      :namespace,
+      :max_results,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10696,6 +10752,11 @@ module Aws::QuickSight
     #   The Amazon Web Services request ID for this operation.
     #   @return [String]
     #
+    # @!attribute [rw] next_token
+    #   A pagination token for the next set of results, or null if there are
+    #   no more results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderResolvedPermissionsResponse AWS API Documentation
     #
     class DescribeFolderResolvedPermissionsResponse < Struct.new(
@@ -10703,7 +10764,8 @@ module Aws::QuickSight
       :folder_id,
       :arn,
       :permissions,
-      :request_id)
+      :request_id,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13029,10 +13091,15 @@ module Aws::QuickSight
     #   The configuration for applying a filter to specific sheets.
     #   @return [Types::SelectedSheetsFilterScopeConfiguration]
     #
+    # @!attribute [rw] all_sheets
+    #   The configuration for applying a filter to all sheets.
+    #   @return [Types::AllSheetsFilterScopeConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilterScopeConfiguration AWS API Documentation
     #
     class FilterScopeConfiguration < Struct.new(
-      :selected_sheets)
+      :selected_sheets,
+      :all_sheets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13200,6 +13267,10 @@ module Aws::QuickSight
     #   The time that the folder was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] sharing_model
+    #   The sharing scope of the folder.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Folder AWS API Documentation
     #
     class Folder < Struct.new(
@@ -13209,7 +13280,8 @@ module Aws::QuickSight
       :folder_type,
       :folder_path,
       :created_time,
-      :last_updated_time)
+      :last_updated_time,
+      :sharing_model)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13337,6 +13409,10 @@ module Aws::QuickSight
     #   The time that the folder was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] sharing_model
+    #   The sharing scope of the folder.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FolderSummary AWS API Documentation
     #
     class FolderSummary < Struct.new(
@@ -13345,7 +13421,8 @@ module Aws::QuickSight
       :name,
       :folder_type,
       :created_time,
-      :last_updated_time)
+      :last_updated_time,
+      :sharing_model)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20667,6 +20744,28 @@ module Aws::QuickSight
     #   is `VISIBLE`.
     #   @return [String]
     #
+    # @!attribute [rw] rows_layout
+    #   The layout for the row dimension headers of a pivot table. Choose
+    #   one of the following options.
+    #
+    #   * `TABULAR`: (Default) Each row field is displayed in a separate
+    #     column.
+    #
+    #   * `HIERARCHY`: All row fields are displayed in a single column.
+    #     Indentation is used to differentiate row headers of different
+    #     fields.
+    #   @return [String]
+    #
+    # @!attribute [rw] rows_label_options
+    #   The options for the label that is located above the row headers.
+    #   This option is only applicable when `RowsLayout` is set to
+    #   `HIERARCHY`.
+    #   @return [Types::PivotTableRowsLabelOptions]
+    #
+    # @!attribute [rw] default_cell_width
+    #   The default cell width of the pivot table.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PivotTableOptions AWS API Documentation
     #
     class PivotTableOptions < Struct.new(
@@ -20679,7 +20778,10 @@ module Aws::QuickSight
       :cell_style,
       :row_field_names_style,
       :row_alternate_color_options,
-      :collapsed_row_dimensions_visibility)
+      :collapsed_row_dimensions_visibility,
+      :rows_layout,
+      :rows_label_options,
+      :default_cell_width)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20699,6 +20801,26 @@ module Aws::QuickSight
     class PivotTablePaginatedReportOptions < Struct.new(
       :vertical_overflow_visibility,
       :overflow_column_header_visibility)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options for the label thta is located above the row headers. This
+    # option is only applicable when `RowsLayout` is set to `HIERARCHY`.
+    #
+    # @!attribute [rw] visibility
+    #   The visibility of the rows label.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_label
+    #   The custom label string for the rows label.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PivotTableRowsLabelOptions AWS API Documentation
+    #
+    class PivotTableRowsLabelOptions < Struct.new(
+      :visibility,
+      :custom_label)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22434,11 +22556,16 @@ module Aws::QuickSight
     #   Determines the list of row alternate colors.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] use_primary_background_color
+    #   The primary background color options for alternate rows.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RowAlternateColorOptions AWS API Documentation
     #
     class RowAlternateColorOptions < Struct.new(
       :status,
-      :row_alternate_colors)
+      :row_alternate_colors,
+      :use_primary_background_color)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24342,12 +24469,12 @@ module Aws::QuickSight
     #   information on the dashboard sheet that is exported. These objects
     #   provide information about the snapshot artifacts that are generated
     #   during the job. This structure can hold a maximum of 5 CSV
-    #   configurations or 1 configuration for PDF.
+    #   configurations, 5 Excel configurations, or 1 configuration for PDF.
     #   @return [Array<Types::SnapshotFileSheetSelection>]
     #
     # @!attribute [rw] format_type
     #   The format of the snapshot file to be generated. You can choose
-    #   between `CSV` and `PDF`.
+    #   between `CSV`, `Excel`, or `PDF`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SnapshotFile AWS API Documentation
@@ -24380,7 +24507,7 @@ module Aws::QuickSight
     #
     # @!attribute [rw] sheet_id
     #   The sheet ID of the dashboard to generate the snapshot artifact
-    #   from. This value is required for CSV or PDF format types.
+    #   from. This value is required for CSV, Excel, and PDF format types.
     #   @return [String]
     #
     # @!attribute [rw] selection_scope
@@ -24392,14 +24519,18 @@ module Aws::QuickSight
     #     value is required if the snapshot is a PDF.
     #
     #   * `SELECTED_VISUALS` - Select the visual that you want to add to the
-    #     snapshot. This value is required if the snapshot is a CSV.
+    #     snapshot. This value is required if the snapshot is a CSV or Excel
+    #     workbook.
     #   @return [String]
     #
     # @!attribute [rw] visual_ids
     #   A structure that lists the IDs of the visuals in the selected sheet.
     #   Supported visual types are table, pivot table visuals. This value is
-    #   required if you are generating a CSV. This value supports a maximum
-    #   of 1 visual ID.
+    #   required if you are generating a CSV or Excel workbook. This value
+    #   supports a maximum of 1 visual ID for CSV and 5 visual IDs across up
+    #   to 5 sheet selections for Excel. If you are generating an Excel
+    #   workbook, the order of the visual IDs provided in this structure
+    #   determines the order of the worksheets in the Excel file.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SnapshotFileSheetSelection AWS API Documentation
@@ -25125,6 +25256,10 @@ module Aws::QuickSight
     #   The cell styling options for the subtotals of header cells.
     #   @return [Types::TableCellStyle]
     #
+    # @!attribute [rw] style_targets
+    #   The style targets options for subtotals.
+    #   @return [Array<Types::TableStyleTarget>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SubtotalOptions AWS API Documentation
     #
     class SubtotalOptions < Struct.new(
@@ -25134,7 +25269,8 @@ module Aws::QuickSight
       :field_level_options,
       :total_cell_style,
       :value_cell_style,
-      :metric_header_cell_style)
+      :metric_header_cell_style,
+      :style_targets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25471,21 +25607,27 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # The field options for a table visual.
+    # The field options of a table visual.
     #
     # @!attribute [rw] selected_field_options
-    #   The selected field options for the table field options.
+    #   The field options to be configured to a table.
     #   @return [Array<Types::TableFieldOption>]
     #
     # @!attribute [rw] order
-    #   The order of field IDs of the field options for a table visual.
+    #   The order of the field IDs that are configured as field options for
+    #   a table visual.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] pinned_field_options
+    #   The settings for the pinned columns of a table visual.
+    #   @return [Types::TablePinnedFieldOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TableFieldOptions AWS API Documentation
     #
     class TableFieldOptions < Struct.new(
       :selected_field_options,
-      :order)
+      :order,
+      :pinned_field_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25595,6 +25737,20 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The settings for the pinned columns of a table visual.
+    #
+    # @!attribute [rw] pinned_left_fields
+    #   A list of columns to be pinned to the left of a table visual.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TablePinnedFieldOptions AWS API Documentation
+    #
+    class TablePinnedFieldOptions < Struct.new(
+      :pinned_left_fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The conditional formatting of a table row.
     #
     # @!attribute [rw] background_color
@@ -25670,6 +25826,20 @@ module Aws::QuickSight
     class TableSortConfiguration < Struct.new(
       :row_sort,
       :pagination_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The table style target.
+    #
+    # @!attribute [rw] cell_type
+    #   The cell type of the table style target.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TableStyleTarget AWS API Documentation
+    #
+    class TableStyleTarget < Struct.new(
+      :cell_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27082,6 +27252,10 @@ module Aws::QuickSight
     #   The other names or aliases for the calculated field cell value.
     #   @return [Array<Types::CellValueSynonym>]
     #
+    # @!attribute [rw] non_additive
+    #   The non additive for the table style target.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicCalculatedField AWS API Documentation
     #
     class TopicCalculatedField < Struct.new(
@@ -27100,7 +27274,8 @@ module Aws::QuickSight
       :allowed_aggregations,
       :not_allowed_aggregations,
       :never_aggregate_in_filter,
-      :cell_value_synonyms)
+      :cell_value_synonyms,
+      :non_additive)
       SENSITIVE = [:expression]
       include Aws::Structure
     end
@@ -27189,8 +27364,7 @@ module Aws::QuickSight
     #
     # @!attribute [rw] aggregation
     #   The type of aggregation that is performed on the column data when
-    #   it's queried. Valid values for this structure are `SUM`, `MAX`,
-    #   `MIN`, `COUNT`, `DISTINCT_COUNT`, and `AVERAGE`.
+    #   it's queried.
     #   @return [String]
     #
     # @!attribute [rw] is_included_in_topic
@@ -27244,6 +27418,10 @@ module Aws::QuickSight
     #   The other names or aliases for the column cell value.
     #   @return [Array<Types::CellValueSynonym>]
     #
+    # @!attribute [rw] non_additive
+    #   The non additive value for the column.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicColumn AWS API Documentation
     #
     class TopicColumn < Struct.new(
@@ -27262,7 +27440,8 @@ module Aws::QuickSight
       :not_allowed_aggregations,
       :default_formatting,
       :never_aggregate_in_filter,
-      :cell_value_synonyms)
+      :cell_value_synonyms,
+      :non_additive)
       SENSITIVE = []
       include Aws::Structure
     end

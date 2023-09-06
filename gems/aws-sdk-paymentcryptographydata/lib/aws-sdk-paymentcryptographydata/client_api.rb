@@ -46,8 +46,11 @@ module Aws::PaymentCryptographyData
     GenerateMacOutput = Shapes::StructureShape.new(name: 'GenerateMacOutput')
     GeneratePinDataInput = Shapes::StructureShape.new(name: 'GeneratePinDataInput')
     GeneratePinDataOutput = Shapes::StructureShape.new(name: 'GeneratePinDataOutput')
+    HexEvenLengthBetween16And32 = Shapes::StringShape.new(name: 'HexEvenLengthBetween16And32')
     HexEvenLengthBetween16And4064 = Shapes::StringShape.new(name: 'HexEvenLengthBetween16And4064')
     HexEvenLengthBetween16And4096 = Shapes::StringShape.new(name: 'HexEvenLengthBetween16And4096')
+    HexEvenLengthBetween2And4096 = Shapes::StringShape.new(name: 'HexEvenLengthBetween2And4096')
+    HexEvenLengthBetween4And128 = Shapes::StringShape.new(name: 'HexEvenLengthBetween4And128')
     HexLength16Or32 = Shapes::StringShape.new(name: 'HexLength16Or32')
     HexLengthBetween10And24 = Shapes::StringShape.new(name: 'HexLengthBetween10And24')
     HexLengthBetween16And32 = Shapes::StringShape.new(name: 'HexLengthBetween16And32')
@@ -55,7 +58,6 @@ module Aws::PaymentCryptographyData
     HexLengthBetween2And1024 = Shapes::StringShape.new(name: 'HexLengthBetween2And1024')
     HexLengthBetween2And160 = Shapes::StringShape.new(name: 'HexLengthBetween2And160')
     HexLengthBetween2And4 = Shapes::StringShape.new(name: 'HexLengthBetween2And4')
-    HexLengthBetween2And4096 = Shapes::StringShape.new(name: 'HexLengthBetween2And4096')
     HexLengthBetween2And8 = Shapes::StringShape.new(name: 'HexLengthBetween2And8')
     HexLengthBetween4And128 = Shapes::StringShape.new(name: 'HexLengthBetween4And128')
     HexLengthEquals1 = Shapes::StringShape.new(name: 'HexLengthEquals1')
@@ -258,7 +260,7 @@ module Aws::PaymentCryptographyData
 
     EncryptDataOutput.add_member(:cipher_text, Shapes::ShapeRef.new(shape: HexEvenLengthBetween16And4096, required: true, location_name: "CipherText"))
     EncryptDataOutput.add_member(:key_arn, Shapes::ShapeRef.new(shape: KeyArn, required: true, location_name: "KeyArn"))
-    EncryptDataOutput.add_member(:key_check_value, Shapes::ShapeRef.new(shape: KeyCheckValue, required: true, location_name: "KeyCheckValue"))
+    EncryptDataOutput.add_member(:key_check_value, Shapes::ShapeRef.new(shape: KeyCheckValue, location_name: "KeyCheckValue"))
     EncryptDataOutput.struct_class = Types::EncryptDataOutput
 
     EncryptionDecryptionAttributes.add_member(:asymmetric, Shapes::ShapeRef.new(shape: AsymmetricEncryptionAttributes, location_name: "Asymmetric"))
@@ -285,7 +287,7 @@ module Aws::PaymentCryptographyData
     GenerateMacInput.add_member(:generation_attributes, Shapes::ShapeRef.new(shape: MacAttributes, required: true, location_name: "GenerationAttributes"))
     GenerateMacInput.add_member(:key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "KeyIdentifier"))
     GenerateMacInput.add_member(:mac_length, Shapes::ShapeRef.new(shape: IntegerRangeBetween4And16, location_name: "MacLength"))
-    GenerateMacInput.add_member(:message_data, Shapes::ShapeRef.new(shape: HexLengthBetween2And4096, required: true, location_name: "MessageData"))
+    GenerateMacInput.add_member(:message_data, Shapes::ShapeRef.new(shape: HexEvenLengthBetween2And4096, required: true, location_name: "MessageData"))
     GenerateMacInput.struct_class = Types::GenerateMacInput
 
     GenerateMacOutput.add_member(:key_arn, Shapes::ShapeRef.new(shape: KeyArn, required: true, location_name: "KeyArn"))
@@ -475,7 +477,7 @@ module Aws::PaymentCryptographyData
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
-    TranslatePinDataInput.add_member(:encrypted_pin_block, Shapes::ShapeRef.new(shape: HexLengthBetween16And32, required: true, location_name: "EncryptedPinBlock"))
+    TranslatePinDataInput.add_member(:encrypted_pin_block, Shapes::ShapeRef.new(shape: HexEvenLengthBetween16And32, required: true, location_name: "EncryptedPinBlock"))
     TranslatePinDataInput.add_member(:incoming_dukpt_attributes, Shapes::ShapeRef.new(shape: DukptDerivationAttributes, location_name: "IncomingDukptAttributes"))
     TranslatePinDataInput.add_member(:incoming_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "IncomingKeyIdentifier"))
     TranslatePinDataInput.add_member(:incoming_translation_attributes, Shapes::ShapeRef.new(shape: TranslationIsoFormats, required: true, location_name: "IncomingTranslationAttributes"))
@@ -544,9 +546,9 @@ module Aws::PaymentCryptographyData
     VerifyCardValidationDataOutput.struct_class = Types::VerifyCardValidationDataOutput
 
     VerifyMacInput.add_member(:key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "KeyIdentifier"))
-    VerifyMacInput.add_member(:mac, Shapes::ShapeRef.new(shape: HexLengthBetween4And128, required: true, location_name: "Mac"))
+    VerifyMacInput.add_member(:mac, Shapes::ShapeRef.new(shape: HexEvenLengthBetween4And128, required: true, location_name: "Mac"))
     VerifyMacInput.add_member(:mac_length, Shapes::ShapeRef.new(shape: IntegerRangeBetween4And16, location_name: "MacLength"))
-    VerifyMacInput.add_member(:message_data, Shapes::ShapeRef.new(shape: HexLengthBetween2And4096, required: true, location_name: "MessageData"))
+    VerifyMacInput.add_member(:message_data, Shapes::ShapeRef.new(shape: HexEvenLengthBetween2And4096, required: true, location_name: "MessageData"))
     VerifyMacInput.add_member(:verification_attributes, Shapes::ShapeRef.new(shape: MacAttributes, required: true, location_name: "VerificationAttributes"))
     VerifyMacInput.struct_class = Types::VerifyMacInput
 

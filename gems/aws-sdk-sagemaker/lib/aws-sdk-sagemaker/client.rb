@@ -1808,7 +1808,7 @@ module Aws::SageMaker
     #     model_package_version_arn: "ModelPackageArn",
     #     input_config: {
     #       s3_uri: "S3Uri", # required
-    #       data_input_config: "DataInputConfig", # required
+    #       data_input_config: "DataInputConfig",
     #       framework: "TENSORFLOW", # required, accepts TENSORFLOW, KERAS, MXNET, ONNX, PYTORCH, XGBOOST, TFLITE, DARKNET, SKLEARN
     #       framework_version: "FrameworkVersion",
     #     },
@@ -2345,6 +2345,13 @@ module Aws::SageMaker
     #           s3_artifact_path: "S3Uri",
     #           s3_kms_key_id: "KmsKeyId",
     #         },
+    #         identity_provider_o_auth_settings: [
+    #           {
+    #             data_source_name: "SalesforceGenie", # accepts SalesforceGenie, Snowflake
+    #             status: "ENABLED", # accepts ENABLED, DISABLED
+    #             secret_arn: "SecretArn",
+    #           },
+    #         ],
     #       },
     #     },
     #     subnet_ids: ["SubnetId"], # required
@@ -2606,10 +2613,6 @@ module Aws::SageMaker
     #
     # Use this API to deploy models using SageMaker hosting services.
     #
-    # For an example that calls this method when deploying a model to
-    # SageMaker hosting services, see the [Create Endpoint example
-    # notebook.][2]
-    #
     # <note markdown="1"> You must not delete an `EndpointConfig` that is in use by an endpoint
     # that is live or while the `UpdateEndpoint` or `CreateEndpoint`
     # operations are being performed on the endpoint. To update an endpoint,
@@ -2624,16 +2627,16 @@ module Aws::SageMaker
     # the resources (ML compute instances), and deploys the model(s) on
     # them.
     #
-    # <note markdown="1"> When you call [CreateEndpoint][3], a load call is made to DynamoDB to
+    # <note markdown="1"> When you call [CreateEndpoint][2], a load call is made to DynamoDB to
     # verify that your endpoint configuration exists. When you read data
-    # from a DynamoDB table supporting [ `Eventually Consistent Reads` ][4],
+    # from a DynamoDB table supporting [ `Eventually Consistent Reads` ][3],
     # the response might not reflect the results of a recently completed
     # write operation. The response might include some stale data. If the
     # dependent entities are not yet in DynamoDB, this causes a validation
     # error. If you repeat your read request after a short time, the
     # response should return the latest data. So retry logic is recommended
     # to handle these possible issues. We also recommend that customers call
-    # [DescribeEndpointConfig][5] before calling [CreateEndpoint][3] to
+    # [DescribeEndpointConfig][4] before calling [CreateEndpoint][2] to
     # minimize the potential impact of a DynamoDB eventually consistent
     # read.
     #
@@ -2643,7 +2646,7 @@ module Aws::SageMaker
     # `Creating`. After it creates the endpoint, it sets the status to
     # `InService`. SageMaker can then process incoming requests for
     # inferences. To check the status of an endpoint, use the
-    # [DescribeEndpoint][6] API.
+    # [DescribeEndpoint][5] API.
     #
     # If any of the models hosted at this endpoint get model data from an
     # Amazon S3 location, SageMaker uses Amazon Web Services Security Token
@@ -2652,13 +2655,13 @@ module Aws::SageMaker
     # account by default. If you previously deactivated Amazon Web Services
     # STS for a region, you need to reactivate Amazon Web Services STS for
     # that region. For more information, see [Activating and Deactivating
-    # Amazon Web Services STS in an Amazon Web Services Region][7] in the
+    # Amazon Web Services STS in an Amazon Web Services Region][6] in the
     # *Amazon Web Services Identity and Access Management User Guide*.
     #
     # <note markdown="1"> To add the IAM role policies for using this API operation, go to the
-    # [IAM console][8], and choose Roles in the left navigation pane. Search
+    # [IAM console][7], and choose Roles in the left navigation pane. Search
     # the IAM role that you want to grant access to use the
-    # [CreateEndpoint][3] and [CreateEndpointConfig][1] API operations, add
+    # [CreateEndpoint][2] and [CreateEndpointConfig][1] API operations, add
     # the following policies to the role.
     #
     #  * Option 1: For a full SageMaker access, search and attach the
@@ -2680,21 +2683,20 @@ module Aws::SageMaker
     #   `]`
     #
     #   For more information, see [SageMaker API Permissions: Actions,
-    #   Permissions, and Resources Reference][9].
+    #   Permissions, and Resources Reference][8].
     #
     #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html
-    # [2]: https://github.com/aws/amazon-sagemaker-examples/blob/master/sagemaker-fundamentals/create-endpoint/create_endpoint.ipynb
-    # [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html
-    # [4]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html
-    # [5]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpointConfig.html
-    # [6]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpoint.html
-    # [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
-    # [8]: https://console.aws.amazon.com/iam/
-    # [9]: https://docs.aws.amazon.com/sagemaker/latest/dg/api-permissions-reference.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html
+    # [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html
+    # [4]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpointConfig.html
+    # [5]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpoint.html
+    # [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
+    # [7]: https://console.aws.amazon.com/iam/
+    # [8]: https://docs.aws.amazon.com/sagemaker/latest/dg/api-permissions-reference.html
     #
     # @option params [required, String] :endpoint_name
     #   The name of the endpoint.The name must be unique within an Amazon Web
@@ -4514,6 +4516,7 @@ module Aws::SageMaker
     #         supported_instance_types: ["String"],
     #         data_input_config: "RecommendationJobDataInputConfig",
     #         supported_endpoint_type: "RealTime", # accepts RealTime, Serverless
+    #         supported_response_mime_types: ["RecommendationJobSupportedResponseMIMEType"],
     #       },
     #       endpoints: [
     #         {
@@ -5293,7 +5296,7 @@ module Aws::SageMaker
     # Creates an Amazon SageMaker Model Card export job.
     #
     # @option params [required, String] :model_card_name
-    #   The name of the model card to export.
+    #   The name or Amazon Resource Name (ARN) of the model card to export.
     #
     # @option params [Integer] :model_card_version
     #   The version of the model card to export. If a version is not provided,
@@ -5313,7 +5316,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_model_card_export_job({
-    #     model_card_name: "EntityName", # required
+    #     model_card_name: "ModelCardNameOrArn", # required
     #     model_card_version: 1,
     #     model_card_export_job_name: "EntityName", # required
     #     output_config: { # required
@@ -5556,6 +5559,10 @@ module Aws::SageMaker
     #   A list of key value pairs associated with the model. For more
     #   information, see [Tagging Amazon Web Services resources][1] in the
     #   *Amazon Web Services General Reference Guide*.
+    #
+    #   If you supply `ModelPackageGroupName`, your model package belongs to
+    #   the model group you specify and uses the tags associated with the
+    #   model group. In this case, you cannot supply a `tag` argument.
     #
     #
     #
@@ -8162,6 +8169,13 @@ module Aws::SageMaker
     #           s3_artifact_path: "S3Uri",
     #           s3_kms_key_id: "KmsKeyId",
     #         },
+    #         identity_provider_o_auth_settings: [
+    #           {
+    #             data_source_name: "SalesforceGenie", # accepts SalesforceGenie, Snowflake
+    #             status: "ENABLED", # accepts ENABLED, DISABLED
+    #             secret_arn: "SecretArn",
+    #           },
+    #         ],
     #       },
     #     },
     #   })
@@ -10488,6 +10502,7 @@ module Aws::SageMaker
     #   * {Types::DescribeCompilationJobResponse#input_config #input_config} => Types::InputConfig
     #   * {Types::DescribeCompilationJobResponse#output_config #output_config} => Types::OutputConfig
     #   * {Types::DescribeCompilationJobResponse#vpc_config #vpc_config} => Types::NeoVpcConfig
+    #   * {Types::DescribeCompilationJobResponse#derived_information #derived_information} => Types::DerivedInformation
     #
     # @example Request syntax with placeholder values
     #
@@ -10527,6 +10542,7 @@ module Aws::SageMaker
     #   resp.vpc_config.security_group_ids[0] #=> String
     #   resp.vpc_config.subnets #=> Array
     #   resp.vpc_config.subnets[0] #=> String
+    #   resp.derived_information.derived_data_input_config #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCompilationJob AWS API Documentation
     #
@@ -10885,6 +10901,10 @@ module Aws::SageMaker
     #   resp.default_user_settings.canvas_app_settings.model_register_settings.cross_account_model_register_role_arn #=> String
     #   resp.default_user_settings.canvas_app_settings.workspace_settings.s3_artifact_path #=> String
     #   resp.default_user_settings.canvas_app_settings.workspace_settings.s3_kms_key_id #=> String
+    #   resp.default_user_settings.canvas_app_settings.identity_provider_o_auth_settings #=> Array
+    #   resp.default_user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].data_source_name #=> String, one of "SalesforceGenie", "Snowflake"
+    #   resp.default_user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.default_user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].secret_arn #=> String
     #   resp.app_network_access_type #=> String, one of "PublicInternetOnly", "VpcOnly"
     #   resp.home_efs_file_system_kms_key_id #=> String
     #   resp.subnet_ids #=> Array
@@ -12354,6 +12374,8 @@ module Aws::SageMaker
     #   resp.input_config.container_config.supported_instance_types[0] #=> String
     #   resp.input_config.container_config.data_input_config #=> String
     #   resp.input_config.container_config.supported_endpoint_type #=> String, one of "RealTime", "Serverless"
+    #   resp.input_config.container_config.supported_response_mime_types #=> Array
+    #   resp.input_config.container_config.supported_response_mime_types[0] #=> String
     #   resp.input_config.endpoints #=> Array
     #   resp.input_config.endpoints[0].endpoint_name #=> String
     #   resp.input_config.vpc_config.security_group_ids #=> Array
@@ -12731,7 +12753,7 @@ module Aws::SageMaker
     # Amazon SageMaker Model Card.
     #
     # @option params [required, String] :model_card_name
-    #   The name of the model card to describe.
+    #   The name or Amazon Resource Name (ARN) of the model card to describe.
     #
     # @option params [Integer] :model_card_version
     #   The version of the model card to describe. If a version is not
@@ -12754,7 +12776,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_model_card({
-    #     model_card_name: "EntityName", # required
+    #     model_card_name: "ModelCardNameOrArn", # required
     #     model_card_version: 1,
     #   })
     #
@@ -14544,6 +14566,10 @@ module Aws::SageMaker
     #   resp.user_settings.canvas_app_settings.model_register_settings.cross_account_model_register_role_arn #=> String
     #   resp.user_settings.canvas_app_settings.workspace_settings.s3_artifact_path #=> String
     #   resp.user_settings.canvas_app_settings.workspace_settings.s3_kms_key_id #=> String
+    #   resp.user_settings.canvas_app_settings.identity_provider_o_auth_settings #=> Array
+    #   resp.user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].data_source_name #=> String, one of "SalesforceGenie", "Snowflake"
+    #   resp.user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].secret_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeUserProfile AWS API Documentation
     #
@@ -18030,7 +18056,8 @@ module Aws::SageMaker
     #   The maximum number of model card versions to list.
     #
     # @option params [required, String] :model_card_name
-    #   List model card versions for the model card with the specified name.
+    #   List model card versions for the model card with the specified name or
+    #   Amazon Resource Name (ARN).
     #
     # @option params [String] :model_card_status
     #   Only list model card versions with the specified approval status.
@@ -18060,7 +18087,7 @@ module Aws::SageMaker
     #     creation_time_after: Time.now,
     #     creation_time_before: Time.now,
     #     max_results: 1,
-    #     model_card_name: "EntityName", # required
+    #     model_card_name: "ModelCardNameOrArn", # required
     #     model_card_status: "Draft", # accepts Draft, PendingReview, Approved, Archived
     #     next_token: "NextToken",
     #     sort_by: "Version", # accepts Version
@@ -22087,6 +22114,13 @@ module Aws::SageMaker
     #           s3_artifact_path: "S3Uri",
     #           s3_kms_key_id: "KmsKeyId",
     #         },
+    #         identity_provider_o_auth_settings: [
+    #           {
+    #             data_source_name: "SalesforceGenie", # accepts SalesforceGenie, Snowflake
+    #             status: "ENABLED", # accepts ENABLED, DISABLED
+    #             secret_arn: "SecretArn",
+    #           },
+    #         ],
     #       },
     #     },
     #     domain_settings_for_update: {
@@ -22781,7 +22815,7 @@ module Aws::SageMaker
     # single call.
     #
     # @option params [required, String] :model_card_name
-    #   The name of the model card to update.
+    #   The name or Amazon Resource Name (ARN) of the model card to update.
     #
     # @option params [String] :content
     #   The updated model card content. Content must be in [model card JSON
@@ -22815,7 +22849,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_model_card({
-    #     model_card_name: "EntityName", # required
+    #     model_card_name: "ModelCardNameOrArn", # required
     #     content: "ModelCardContent",
     #     model_card_status: "Draft", # accepts Draft, PendingReview, Approved, Archived
     #   })
@@ -23834,6 +23868,13 @@ module Aws::SageMaker
     #           s3_artifact_path: "S3Uri",
     #           s3_kms_key_id: "KmsKeyId",
     #         },
+    #         identity_provider_o_auth_settings: [
+    #           {
+    #             data_source_name: "SalesforceGenie", # accepts SalesforceGenie, Snowflake
+    #             status: "ENABLED", # accepts ENABLED, DISABLED
+    #             secret_arn: "SecretArn",
+    #           },
+    #         ],
     #       },
     #     },
     #   })
@@ -24091,7 +24132,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.204.0'
+      context[:gem_version] = '1.208.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

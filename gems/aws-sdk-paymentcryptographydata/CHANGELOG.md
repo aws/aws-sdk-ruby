@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2023-08-31)
+------------------
+
+* Feature - Make KeyCheckValue field optional when using asymmetric keys as Key Check Values typically only apply to symmetric keys
+
 1.4.0 (2023-07-11)
 ------------------
 

@@ -14,6 +14,7 @@ module Aws::ConnectCampaignService
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AgentlessDialerConfig = Shapes::StructureShape.new(name: 'AgentlessDialerConfig')
     AnswerMachineDetectionConfig = Shapes::StructureShape.new(name: 'AnswerMachineDetectionConfig')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AttributeName = Shapes::StringShape.new(name: 'AttributeName')
@@ -44,6 +45,7 @@ module Aws::ConnectCampaignService
     DialRequestId = Shapes::StringShape.new(name: 'DialRequestId')
     DialRequestList = Shapes::ListShape.new(name: 'DialRequestList')
     DialerConfig = Shapes::UnionShape.new(name: 'DialerConfig')
+    DialingCapacity = Shapes::FloatShape.new(name: 'DialingCapacity')
     Enabled = Shapes::BooleanShape.new(name: 'Enabled')
     EncryptionConfig = Shapes::StructureShape.new(name: 'EncryptionConfig')
     EncryptionKey = Shapes::StringShape.new(name: 'EncryptionKey')
@@ -118,17 +120,20 @@ module Aws::ConnectCampaignService
     AccessDeniedException.add_member(:x_amz_error_type, Shapes::ShapeRef.new(shape: XAmazonErrorType, location: "header", location_name: "x-amzn-ErrorType"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
+    AgentlessDialerConfig.add_member(:dialing_capacity, Shapes::ShapeRef.new(shape: DialingCapacity, location_name: "dialingCapacity"))
+    AgentlessDialerConfig.struct_class = Types::AgentlessDialerConfig
+
     AnswerMachineDetectionConfig.add_member(:enable_answer_machine_detection, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enableAnswerMachineDetection"))
     AnswerMachineDetectionConfig.struct_class = Types::AnswerMachineDetectionConfig
 
     Attributes.key = Shapes::ShapeRef.new(shape: AttributeName)
     Attributes.value = Shapes::ShapeRef.new(shape: AttributeValue)
 
+    Campaign.add_member(:id, Shapes::ShapeRef.new(shape: CampaignId, required: true, location_name: "id"))
     Campaign.add_member(:arn, Shapes::ShapeRef.new(shape: CampaignArn, required: true, location_name: "arn"))
+    Campaign.add_member(:name, Shapes::ShapeRef.new(shape: CampaignName, required: true, location_name: "name"))
     Campaign.add_member(:connect_instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "connectInstanceId"))
     Campaign.add_member(:dialer_config, Shapes::ShapeRef.new(shape: DialerConfig, required: true, location_name: "dialerConfig"))
-    Campaign.add_member(:id, Shapes::ShapeRef.new(shape: CampaignId, required: true, location_name: "id"))
-    Campaign.add_member(:name, Shapes::ShapeRef.new(shape: CampaignName, required: true, location_name: "name"))
     Campaign.add_member(:outbound_call_config, Shapes::ShapeRef.new(shape: OutboundCallConfig, required: true, location_name: "outboundCallConfig"))
     Campaign.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     Campaign.struct_class = Types::Campaign
@@ -136,10 +141,10 @@ module Aws::ConnectCampaignService
     CampaignFilters.add_member(:instance_id_filter, Shapes::ShapeRef.new(shape: InstanceIdFilter, location_name: "instanceIdFilter"))
     CampaignFilters.struct_class = Types::CampaignFilters
 
-    CampaignSummary.add_member(:arn, Shapes::ShapeRef.new(shape: CampaignArn, required: true, location_name: "arn"))
-    CampaignSummary.add_member(:connect_instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "connectInstanceId"))
     CampaignSummary.add_member(:id, Shapes::ShapeRef.new(shape: CampaignId, required: true, location_name: "id"))
+    CampaignSummary.add_member(:arn, Shapes::ShapeRef.new(shape: CampaignArn, required: true, location_name: "arn"))
     CampaignSummary.add_member(:name, Shapes::ShapeRef.new(shape: CampaignName, required: true, location_name: "name"))
+    CampaignSummary.add_member(:connect_instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "connectInstanceId"))
     CampaignSummary.struct_class = Types::CampaignSummary
 
     CampaignSummaryList.member = Shapes::ShapeRef.new(shape: CampaignSummary)
@@ -148,15 +153,15 @@ module Aws::ConnectCampaignService
     ConflictException.add_member(:x_amz_error_type, Shapes::ShapeRef.new(shape: XAmazonErrorType, location: "header", location_name: "x-amzn-ErrorType"))
     ConflictException.struct_class = Types::ConflictException
 
+    CreateCampaignRequest.add_member(:name, Shapes::ShapeRef.new(shape: CampaignName, required: true, location_name: "name"))
     CreateCampaignRequest.add_member(:connect_instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "connectInstanceId"))
     CreateCampaignRequest.add_member(:dialer_config, Shapes::ShapeRef.new(shape: DialerConfig, required: true, location_name: "dialerConfig"))
-    CreateCampaignRequest.add_member(:name, Shapes::ShapeRef.new(shape: CampaignName, required: true, location_name: "name"))
     CreateCampaignRequest.add_member(:outbound_call_config, Shapes::ShapeRef.new(shape: OutboundCallConfig, required: true, location_name: "outboundCallConfig"))
     CreateCampaignRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateCampaignRequest.struct_class = Types::CreateCampaignRequest
 
-    CreateCampaignResponse.add_member(:arn, Shapes::ShapeRef.new(shape: CampaignArn, location_name: "arn"))
     CreateCampaignResponse.add_member(:id, Shapes::ShapeRef.new(shape: CampaignId, location_name: "id"))
+    CreateCampaignResponse.add_member(:arn, Shapes::ShapeRef.new(shape: CampaignArn, location_name: "arn"))
     CreateCampaignResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateCampaignResponse.struct_class = Types::CreateCampaignResponse
 
@@ -175,19 +180,21 @@ module Aws::ConnectCampaignService
     DescribeCampaignResponse.add_member(:campaign, Shapes::ShapeRef.new(shape: Campaign, location_name: "campaign"))
     DescribeCampaignResponse.struct_class = Types::DescribeCampaignResponse
 
-    DialRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, required: true, location_name: "attributes"))
     DialRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken"))
-    DialRequest.add_member(:expiration_time, Shapes::ShapeRef.new(shape: TimeStamp, required: true, location_name: "expirationTime"))
     DialRequest.add_member(:phone_number, Shapes::ShapeRef.new(shape: DestinationPhoneNumber, required: true, location_name: "phoneNumber"))
+    DialRequest.add_member(:expiration_time, Shapes::ShapeRef.new(shape: TimeStamp, required: true, location_name: "expirationTime"))
+    DialRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, required: true, location_name: "attributes"))
     DialRequest.struct_class = Types::DialRequest
 
     DialRequestList.member = Shapes::ShapeRef.new(shape: DialRequest)
 
-    DialerConfig.add_member(:predictive_dialer_config, Shapes::ShapeRef.new(shape: PredictiveDialerConfig, location_name: "predictiveDialerConfig"))
     DialerConfig.add_member(:progressive_dialer_config, Shapes::ShapeRef.new(shape: ProgressiveDialerConfig, location_name: "progressiveDialerConfig"))
+    DialerConfig.add_member(:predictive_dialer_config, Shapes::ShapeRef.new(shape: PredictiveDialerConfig, location_name: "predictiveDialerConfig"))
+    DialerConfig.add_member(:agentless_dialer_config, Shapes::ShapeRef.new(shape: AgentlessDialerConfig, location_name: "agentlessDialerConfig"))
     DialerConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    DialerConfig.add_member_subclass(:predictive_dialer_config, Types::DialerConfig::PredictiveDialerConfig)
     DialerConfig.add_member_subclass(:progressive_dialer_config, Types::DialerConfig::ProgressiveDialerConfig)
+    DialerConfig.add_member_subclass(:predictive_dialer_config, Types::DialerConfig::PredictiveDialerConfig)
+    DialerConfig.add_member_subclass(:agentless_dialer_config, Types::DialerConfig::AgentlessDialerConfig)
     DialerConfig.add_member_subclass(:unknown, Types::DialerConfig::Unknown)
     DialerConfig.struct_class = Types::DialerConfig
 
@@ -203,8 +210,8 @@ module Aws::ConnectCampaignService
     FailedCampaignStateResponseList.member = Shapes::ShapeRef.new(shape: FailedCampaignStateResponse)
 
     FailedRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
-    FailedRequest.add_member(:failure_code, Shapes::ShapeRef.new(shape: FailureCode, location_name: "failureCode"))
     FailedRequest.add_member(:id, Shapes::ShapeRef.new(shape: DialRequestId, location_name: "id"))
+    FailedRequest.add_member(:failure_code, Shapes::ShapeRef.new(shape: FailureCode, location_name: "failureCode"))
     FailedRequest.struct_class = Types::FailedRequest
 
     FailedRequestList.member = Shapes::ShapeRef.new(shape: FailedRequest)
@@ -214,8 +221,8 @@ module Aws::ConnectCampaignService
 
     GetCampaignStateBatchRequestCampaignIdsList.member = Shapes::ShapeRef.new(shape: CampaignId)
 
-    GetCampaignStateBatchResponse.add_member(:failed_requests, Shapes::ShapeRef.new(shape: FailedCampaignStateResponseList, location_name: "failedRequests"))
     GetCampaignStateBatchResponse.add_member(:successful_requests, Shapes::ShapeRef.new(shape: SuccessfulCampaignStateResponseList, location_name: "successfulRequests"))
+    GetCampaignStateBatchResponse.add_member(:failed_requests, Shapes::ShapeRef.new(shape: FailedCampaignStateResponseList, location_name: "failedRequests"))
     GetCampaignStateBatchResponse.struct_class = Types::GetCampaignStateBatchResponse
 
     GetCampaignStateRequest.add_member(:id, Shapes::ShapeRef.new(shape: CampaignId, required: true, location: "uri", location_name: "id"))
@@ -237,25 +244,25 @@ module Aws::ConnectCampaignService
     GetInstanceOnboardingJobStatusResponse.struct_class = Types::GetInstanceOnboardingJobStatusResponse
 
     InstanceConfig.add_member(:connect_instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "connectInstanceId"))
-    InstanceConfig.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfig, required: true, location_name: "encryptionConfig"))
     InstanceConfig.add_member(:service_linked_role_arn, Shapes::ShapeRef.new(shape: ServiceLinkedRoleArn, required: true, location_name: "serviceLinkedRoleArn"))
+    InstanceConfig.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfig, required: true, location_name: "encryptionConfig"))
     InstanceConfig.struct_class = Types::InstanceConfig
 
-    InstanceIdFilter.add_member(:operator, Shapes::ShapeRef.new(shape: InstanceIdFilterOperator, required: true, location_name: "operator"))
     InstanceIdFilter.add_member(:value, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "value"))
+    InstanceIdFilter.add_member(:operator, Shapes::ShapeRef.new(shape: InstanceIdFilterOperator, required: true, location_name: "operator"))
     InstanceIdFilter.struct_class = Types::InstanceIdFilter
 
     InstanceOnboardingJobStatus.add_member(:connect_instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "connectInstanceId"))
-    InstanceOnboardingJobStatus.add_member(:failure_code, Shapes::ShapeRef.new(shape: InstanceOnboardingJobFailureCode, location_name: "failureCode"))
     InstanceOnboardingJobStatus.add_member(:status, Shapes::ShapeRef.new(shape: InstanceOnboardingJobStatusCode, required: true, location_name: "status"))
+    InstanceOnboardingJobStatus.add_member(:failure_code, Shapes::ShapeRef.new(shape: InstanceOnboardingJobFailureCode, location_name: "failureCode"))
     InstanceOnboardingJobStatus.struct_class = Types::InstanceOnboardingJobStatus
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InternalServerException.add_member(:x_amz_error_type, Shapes::ShapeRef.new(shape: XAmazonErrorType, location: "header", location_name: "x-amzn-ErrorType"))
     InternalServerException.struct_class = Types::InternalServerException
 
-    InvalidCampaignStateException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InvalidCampaignStateException.add_member(:state, Shapes::ShapeRef.new(shape: CampaignState, required: true, location_name: "state"))
+    InvalidCampaignStateException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InvalidCampaignStateException.add_member(:x_amz_error_type, Shapes::ShapeRef.new(shape: XAmazonErrorType, location: "header", location_name: "x-amzn-ErrorType"))
     InvalidCampaignStateException.struct_class = Types::InvalidCampaignStateException
 
@@ -263,13 +270,13 @@ module Aws::ConnectCampaignService
     InvalidStateException.add_member(:x_amz_error_type, Shapes::ShapeRef.new(shape: XAmazonErrorType, location: "header", location_name: "x-amzn-ErrorType"))
     InvalidStateException.struct_class = Types::InvalidStateException
 
-    ListCampaignsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: CampaignFilters, location_name: "filters"))
     ListCampaignsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     ListCampaignsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListCampaignsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: CampaignFilters, location_name: "filters"))
     ListCampaignsRequest.struct_class = Types::ListCampaignsRequest
 
-    ListCampaignsResponse.add_member(:campaign_summary_list, Shapes::ShapeRef.new(shape: CampaignSummaryList, location_name: "campaignSummaryList"))
     ListCampaignsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListCampaignsResponse.add_member(:campaign_summary_list, Shapes::ShapeRef.new(shape: CampaignSummaryList, location_name: "campaignSummaryList"))
     ListCampaignsResponse.struct_class = Types::ListCampaignsResponse
 
     ListTagsForResourceRequest.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "arn"))
@@ -278,27 +285,29 @@ module Aws::ConnectCampaignService
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
-    OutboundCallConfig.add_member(:answer_machine_detection_config, Shapes::ShapeRef.new(shape: AnswerMachineDetectionConfig, location_name: "answerMachineDetectionConfig"))
     OutboundCallConfig.add_member(:connect_contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, required: true, location_name: "connectContactFlowId"))
-    OutboundCallConfig.add_member(:connect_queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location_name: "connectQueueId"))
     OutboundCallConfig.add_member(:connect_source_phone_number, Shapes::ShapeRef.new(shape: SourcePhoneNumber, location_name: "connectSourcePhoneNumber"))
+    OutboundCallConfig.add_member(:connect_queue_id, Shapes::ShapeRef.new(shape: QueueId, location_name: "connectQueueId"))
+    OutboundCallConfig.add_member(:answer_machine_detection_config, Shapes::ShapeRef.new(shape: AnswerMachineDetectionConfig, location_name: "answerMachineDetectionConfig"))
     OutboundCallConfig.struct_class = Types::OutboundCallConfig
 
     PauseCampaignRequest.add_member(:id, Shapes::ShapeRef.new(shape: CampaignId, required: true, location: "uri", location_name: "id"))
     PauseCampaignRequest.struct_class = Types::PauseCampaignRequest
 
     PredictiveDialerConfig.add_member(:bandwidth_allocation, Shapes::ShapeRef.new(shape: BandwidthAllocation, required: true, location_name: "bandwidthAllocation"))
+    PredictiveDialerConfig.add_member(:dialing_capacity, Shapes::ShapeRef.new(shape: DialingCapacity, location_name: "dialingCapacity"))
     PredictiveDialerConfig.struct_class = Types::PredictiveDialerConfig
 
     ProgressiveDialerConfig.add_member(:bandwidth_allocation, Shapes::ShapeRef.new(shape: BandwidthAllocation, required: true, location_name: "bandwidthAllocation"))
+    ProgressiveDialerConfig.add_member(:dialing_capacity, Shapes::ShapeRef.new(shape: DialingCapacity, location_name: "dialingCapacity"))
     ProgressiveDialerConfig.struct_class = Types::ProgressiveDialerConfig
 
-    PutDialRequestBatchRequest.add_member(:dial_requests, Shapes::ShapeRef.new(shape: DialRequestList, required: true, location_name: "dialRequests"))
     PutDialRequestBatchRequest.add_member(:id, Shapes::ShapeRef.new(shape: CampaignId, required: true, location: "uri", location_name: "id"))
+    PutDialRequestBatchRequest.add_member(:dial_requests, Shapes::ShapeRef.new(shape: DialRequestList, required: true, location_name: "dialRequests"))
     PutDialRequestBatchRequest.struct_class = Types::PutDialRequestBatchRequest
 
-    PutDialRequestBatchResponse.add_member(:failed_requests, Shapes::ShapeRef.new(shape: FailedRequestList, location_name: "failedRequests"))
     PutDialRequestBatchResponse.add_member(:successful_requests, Shapes::ShapeRef.new(shape: SuccessfulRequestList, location_name: "successfulRequests"))
+    PutDialRequestBatchResponse.add_member(:failed_requests, Shapes::ShapeRef.new(shape: FailedRequestList, location_name: "failedRequests"))
     PutDialRequestBatchResponse.struct_class = Types::PutDialRequestBatchResponse
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -354,18 +363,18 @@ module Aws::ConnectCampaignService
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
-    UpdateCampaignDialerConfigRequest.add_member(:dialer_config, Shapes::ShapeRef.new(shape: DialerConfig, required: true, location_name: "dialerConfig"))
     UpdateCampaignDialerConfigRequest.add_member(:id, Shapes::ShapeRef.new(shape: CampaignId, required: true, location: "uri", location_name: "id"))
+    UpdateCampaignDialerConfigRequest.add_member(:dialer_config, Shapes::ShapeRef.new(shape: DialerConfig, required: true, location_name: "dialerConfig"))
     UpdateCampaignDialerConfigRequest.struct_class = Types::UpdateCampaignDialerConfigRequest
 
     UpdateCampaignNameRequest.add_member(:id, Shapes::ShapeRef.new(shape: CampaignId, required: true, location: "uri", location_name: "id"))
     UpdateCampaignNameRequest.add_member(:name, Shapes::ShapeRef.new(shape: CampaignName, required: true, location_name: "name"))
     UpdateCampaignNameRequest.struct_class = Types::UpdateCampaignNameRequest
 
-    UpdateCampaignOutboundCallConfigRequest.add_member(:answer_machine_detection_config, Shapes::ShapeRef.new(shape: AnswerMachineDetectionConfig, location_name: "answerMachineDetectionConfig"))
+    UpdateCampaignOutboundCallConfigRequest.add_member(:id, Shapes::ShapeRef.new(shape: CampaignId, required: true, location: "uri", location_name: "id"))
     UpdateCampaignOutboundCallConfigRequest.add_member(:connect_contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "connectContactFlowId"))
     UpdateCampaignOutboundCallConfigRequest.add_member(:connect_source_phone_number, Shapes::ShapeRef.new(shape: SourcePhoneNumber, location_name: "connectSourcePhoneNumber"))
-    UpdateCampaignOutboundCallConfigRequest.add_member(:id, Shapes::ShapeRef.new(shape: CampaignId, required: true, location: "uri", location_name: "id"))
+    UpdateCampaignOutboundCallConfigRequest.add_member(:answer_machine_detection_config, Shapes::ShapeRef.new(shape: AnswerMachineDetectionConfig, location_name: "answerMachineDetectionConfig"))
     UpdateCampaignOutboundCallConfigRequest.struct_class = Types::UpdateCampaignOutboundCallConfigRequest
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))

@@ -70,6 +70,8 @@ module Aws::ComputeOptimizer
             Aws::ComputeOptimizer::Endpoints::ExportECSServiceRecommendations.build(context)
           when :export_lambda_function_recommendations
             Aws::ComputeOptimizer::Endpoints::ExportLambdaFunctionRecommendations.build(context)
+          when :export_license_recommendations
+            Aws::ComputeOptimizer::Endpoints::ExportLicenseRecommendations.build(context)
           when :get_auto_scaling_group_recommendations
             Aws::ComputeOptimizer::Endpoints::GetAutoScalingGroupRecommendations.build(context)
           when :get_ebs_volume_recommendations
@@ -90,6 +92,8 @@ module Aws::ComputeOptimizer
             Aws::ComputeOptimizer::Endpoints::GetEnrollmentStatusesForOrganization.build(context)
           when :get_lambda_function_recommendations
             Aws::ComputeOptimizer::Endpoints::GetLambdaFunctionRecommendations.build(context)
+          when :get_license_recommendations
+            Aws::ComputeOptimizer::Endpoints::GetLicenseRecommendations.build(context)
           when :get_recommendation_preferences
             Aws::ComputeOptimizer::Endpoints::GetRecommendationPreferences.build(context)
           when :get_recommendation_summaries

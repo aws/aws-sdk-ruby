@@ -109,6 +109,7 @@ module Aws::Route53Domains
     ListPricesResponse = Shapes::StructureShape.new(name: 'ListPricesResponse')
     ListTagsForDomainRequest = Shapes::StructureShape.new(name: 'ListTagsForDomainRequest')
     ListTagsForDomainResponse = Shapes::StructureShape.new(name: 'ListTagsForDomainResponse')
+    Message = Shapes::StringShape.new(name: 'Message')
     Nameserver = Shapes::StructureShape.new(name: 'Nameserver')
     NameserverList = Shapes::ListShape.new(name: 'NameserverList')
     NullableInteger = Shapes::IntegerShape.new(name: 'NullableInteger')
@@ -123,6 +124,7 @@ module Aws::Route53Domains
     Operator = Shapes::StringShape.new(name: 'Operator')
     PageMarker = Shapes::StringShape.new(name: 'PageMarker')
     PageMaxItems = Shapes::IntegerShape.new(name: 'PageMaxItems')
+    Password = Shapes::StringShape.new(name: 'Password')
     Price = Shapes::FloatShape.new(name: 'Price')
     PriceWithCurrency = Shapes::StructureShape.new(name: 'PriceWithCurrency')
     PushDomainRequest = Shapes::StructureShape.new(name: 'PushDomainRequest')
@@ -137,6 +139,7 @@ module Aws::Route53Domains
     RejectDomainTransferFromAnotherAwsAccountResponse = Shapes::StructureShape.new(name: 'RejectDomainTransferFromAnotherAwsAccountResponse')
     RenewDomainRequest = Shapes::StructureShape.new(name: 'RenewDomainRequest')
     RenewDomainResponse = Shapes::StructureShape.new(name: 'RenewDomainResponse')
+    RequestId = Shapes::StringShape.new(name: 'RequestId')
     Reseller = Shapes::StringShape.new(name: 'Reseller')
     ResendContactReachabilityEmailRequest = Shapes::StructureShape.new(name: 'ResendContactReachabilityEmailRequest')
     ResendContactReachabilityEmailResponse = Shapes::StructureShape.new(name: 'ResendContactReachabilityEmailResponse')
@@ -177,7 +180,7 @@ module Aws::Route53Domains
     ZipCode = Shapes::StringShape.new(name: 'ZipCode')
 
     AcceptDomainTransferFromAnotherAwsAccountRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
-    AcceptDomainTransferFromAnotherAwsAccountRequest.add_member(:password, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Password"))
+    AcceptDomainTransferFromAnotherAwsAccountRequest.add_member(:password, Shapes::ShapeRef.new(shape: Password, required: true, location_name: "Password"))
     AcceptDomainTransferFromAnotherAwsAccountRequest.struct_class = Types::AcceptDomainTransferFromAnotherAwsAccountRequest
 
     AcceptDomainTransferFromAnotherAwsAccountResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
@@ -217,6 +220,7 @@ module Aws::Route53Domains
     CheckDomainTransferabilityRequest.struct_class = Types::CheckDomainTransferabilityRequest
 
     CheckDomainTransferabilityResponse.add_member(:transferability, Shapes::ShapeRef.new(shape: DomainTransferability, location_name: "Transferability"))
+    CheckDomainTransferabilityResponse.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     CheckDomainTransferabilityResponse.struct_class = Types::CheckDomainTransferabilityResponse
 
     Consent.add_member(:max_price, Shapes::ShapeRef.new(shape: Price, required: true, location_name: "MaxPrice"))
@@ -320,6 +324,7 @@ module Aws::Route53Domains
     DomainTransferability.add_member(:transferable, Shapes::ShapeRef.new(shape: Transferable, location_name: "Transferable"))
     DomainTransferability.struct_class = Types::DomainTransferability
 
+    DuplicateRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "requestId"))
     DuplicateRequest.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     DuplicateRequest.struct_class = Types::DuplicateRequest
 
@@ -561,7 +566,7 @@ module Aws::Route53Domains
     TransferDomainToAnotherAwsAccountRequest.struct_class = Types::TransferDomainToAnotherAwsAccountRequest
 
     TransferDomainToAnotherAwsAccountResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
-    TransferDomainToAnotherAwsAccountResponse.add_member(:password, Shapes::ShapeRef.new(shape: String, location_name: "Password"))
+    TransferDomainToAnotherAwsAccountResponse.add_member(:password, Shapes::ShapeRef.new(shape: Password, location_name: "Password"))
     TransferDomainToAnotherAwsAccountResponse.struct_class = Types::TransferDomainToAnotherAwsAccountResponse
 
     UnsupportedTLD.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))

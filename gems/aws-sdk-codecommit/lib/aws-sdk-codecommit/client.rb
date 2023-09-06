@@ -755,10 +755,10 @@ module Aws::CodeCommit
     end
 
     # Creates a template for approval rules that can then be associated with
-    # one or more repositories in your AWS account. When you associate a
-    # template with a repository, AWS CodeCommit creates an approval rule
-    # that matches the conditions of the template for all pull requests that
-    # meet the conditions of the template. For more information, see
+    # one or more repositories in your Amazon Web Services account. When you
+    # associate a template with a repository, CodeCommit creates an approval
+    # rule that matches the conditions of the template for all pull requests
+    # that meet the conditions of the template. For more information, see
     # AssociateApprovalRuleTemplateWithRepository.
     #
     # @option params [required, String] :approval_rule_template_name
@@ -776,13 +776,13 @@ module Aws::CodeCommit
     #   <note markdown="1"> When you create the content of the approval rule template, you can
     #   specify approvers in an approval pool in one of two ways:
     #
-    #    * **CodeCommitApprovers**: This option only requires an AWS account
-    #     and a resource. It can be used for both IAM users and federated
-    #     access users whose name matches the provided resource name. This is
-    #     a very powerful option that offers a great deal of flexibility. For
-    #     example, if you specify the AWS account *123456789012* and
-    #     *Mary\_Major*, all of the following are counted as approvals coming
-    #     from that user:
+    #    * **CodeCommitApprovers**: This option only requires an Amazon Web
+    #     Services account and a resource. It can be used for both IAM users
+    #     and federated access users whose name matches the provided resource
+    #     name. This is a very powerful option that offers a great deal of
+    #     flexibility. For example, if you specify the Amazon Web Services
+    #     account *123456789012* and *Mary\_Major*, all of the following are
+    #     counted as approvals coming from that user:
     #
     #     * An IAM user in the account
     #       (arn:aws:iam::*123456789012*:user/*Mary\_Major*)
@@ -1009,8 +1009,9 @@ module Aws::CodeCommit
     #   token is included, the request returns information about the initial
     #   request that used that token.
     #
-    #   <note markdown="1"> The AWS SDKs prepopulate client request tokens. If you are using an
-    #   AWS SDK, an idempotency token is created for you.
+    #   <note markdown="1"> The Amazon Web ServicesSDKs prepopulate client request tokens. If you
+    #   are using an Amazon Web ServicesSDK, an idempotency token is created
+    #   for you.
     #
     #    </note>
     #
@@ -1090,19 +1091,19 @@ module Aws::CodeCommit
     # @option params [required, String] :approval_rule_content
     #   The content of the approval rule, including the number of approvals
     #   needed and the structure of an approval pool defined for approvals, if
-    #   any. For more information about approval pools, see the AWS CodeCommit
+    #   any. For more information about approval pools, see the CodeCommit
     #   User Guide.
     #
     #   <note markdown="1"> When you create the content of the approval rule, you can specify
     #   approvers in an approval pool in one of two ways:
     #
-    #    * **CodeCommitApprovers**: This option only requires an AWS account
-    #     and a resource. It can be used for both IAM users and federated
-    #     access users whose name matches the provided resource name. This is
-    #     a very powerful option that offers a great deal of flexibility. For
-    #     example, if you specify the AWS account *123456789012* and
-    #     *Mary\_Major*, all of the following would be counted as approvals
-    #     coming from that user:
+    #    * **CodeCommitApprovers**: This option only requires an Amazon Web
+    #     Services account and a resource. It can be used for both IAM users
+    #     and federated access users whose name matches the provided resource
+    #     name. This is a very powerful option that offers a great deal of
+    #     flexibility. For example, if you specify the Amazon Web Services
+    #     account *123456789012* and *Mary\_Major*, all of the following would
+    #     be counted as approvals coming from that user:
     #
     #     * An IAM user in the account
     #       (arn:aws:iam::*123456789012*:user/*Mary\_Major*)
@@ -1166,11 +1167,12 @@ module Aws::CodeCommit
     # @option params [required, String] :repository_name
     #   The name of the new repository to be created.
     #
-    #   <note markdown="1"> The repository name must be unique across the calling AWS account.
-    #   Repository names are limited to 100 alphanumeric, dash, and underscore
-    #   characters, and cannot include certain characters. For more
-    #   information about the limits on repository names, see [Limits][1] in
-    #   the *AWS CodeCommit User Guide*. The suffix .git is prohibited.
+    #   <note markdown="1"> The repository name must be unique across the calling Amazon Web
+    #   Services account. Repository names are limited to 100 alphanumeric,
+    #   dash, and underscore characters, and cannot include certain
+    #   characters. For more information about the limits on repository names,
+    #   see [Quotas][1] in the *CodeCommit User Guide*. The suffix .git is
+    #   prohibited.
     #
     #    </note>
     #
@@ -2164,15 +2166,21 @@ module Aws::CodeCommit
     #   ListPullRequests.
     #
     # @option params [String] :repository_name
-    #   The name of the repository that contains the pull request.
+    #   The name of the repository that contains the pull request. Requirement
+    #   is conditional: `repositoryName` must be specified when
+    #   `beforeCommitId` and `afterCommitId` are included.
     #
     # @option params [String] :before_commit_id
     #   The full commit ID of the commit in the destination branch that was
     #   the tip of the branch at the time the pull request was created.
+    #   Requirement is conditional: `beforeCommitId` must be specified when
+    #   `repositoryName` is included.
     #
     # @option params [String] :after_commit_id
     #   The full commit ID of the commit in the source branch that was the tip
-    #   of the branch at the time the comment was made.
+    #   of the branch at the time the comment was made. Requirement is
+    #   conditional: `afterCommitId` must be specified when `repositoryName`
+    #   is included.
     #
     # @option params [String] :next_token
     #   An enumeration token that, when provided in a request, returns the
@@ -2368,7 +2376,7 @@ module Aws::CodeCommit
     # @option params [String] :commit_specifier
     #   The fully quaified reference that identifies the commit that contains
     #   the file. For example, you can specify a full commit ID, a tag, a
-    #   branch name, or a reference such as refs/heads/master. If none is
+    #   branch name, or a reference such as refs/heads/main. If none is
     #   provided, the head commit is used.
     #
     # @option params [required, String] :file_path
@@ -2917,9 +2925,10 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
-    # Lists all approval rule templates in the specified AWS Region in your
-    # AWS account. If an AWS Region is not specified, the AWS Region where
-    # you are signed in is used.
+    # Lists all approval rule templates in the specified Amazon Web Services
+    # Region in your Amazon Web Services account. If an Amazon Web Services
+    # Region is not specified, the Amazon Web Services Region where you are
+    # signed in is used.
     #
     # @option params [String] :next_token
     #   An enumeration token that, when provided in a request, returns the
@@ -3040,6 +3049,75 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Retrieves a list of commits and changes to a specified file.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository that contains the file.
+    #
+    # @option params [String] :commit_specifier
+    #   The fully quaified reference that identifies the commit that contains
+    #   the file. For example, you can specify a full commit ID, a tag, a
+    #   branch name, or a reference such as `refs/heads/main`. If none is
+    #   provided, the head commit is used.
+    #
+    # @option params [required, String] :file_path
+    #   The full path of the file whose history you want to retrieve,
+    #   including the name of the file.
+    #
+    # @option params [Integer] :max_results
+    #   A non-zero, non-negative integer used to limit the number of returned
+    #   results.
+    #
+    # @option params [String] :next_token
+    #   An enumeration token that allows the operation to batch the results.
+    #
+    # @return [Types::ListFileCommitHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFileCommitHistoryResponse#revision_dag #revision_dag} => Array&lt;Types::FileVersion&gt;
+    #   * {Types::ListFileCommitHistoryResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_file_commit_history({
+    #     repository_name: "RepositoryName", # required
+    #     commit_specifier: "CommitName",
+    #     file_path: "Path", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.revision_dag #=> Array
+    #   resp.revision_dag[0].commit.commit_id #=> String
+    #   resp.revision_dag[0].commit.tree_id #=> String
+    #   resp.revision_dag[0].commit.parents #=> Array
+    #   resp.revision_dag[0].commit.parents[0] #=> String
+    #   resp.revision_dag[0].commit.message #=> String
+    #   resp.revision_dag[0].commit.author.name #=> String
+    #   resp.revision_dag[0].commit.author.email #=> String
+    #   resp.revision_dag[0].commit.author.date #=> String
+    #   resp.revision_dag[0].commit.committer.name #=> String
+    #   resp.revision_dag[0].commit.committer.email #=> String
+    #   resp.revision_dag[0].commit.committer.date #=> String
+    #   resp.revision_dag[0].commit.additional_data #=> String
+    #   resp.revision_dag[0].blob_id #=> String
+    #   resp.revision_dag[0].path #=> String
+    #   resp.revision_dag[0].revision_children #=> Array
+    #   resp.revision_dag[0].revision_children[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListFileCommitHistory AWS API Documentation
+    #
+    # @overload list_file_commit_history(params = {})
+    # @param [Hash] params ({})
+    def list_file_commit_history(params = {}, options = {})
+      req = build_request(:list_file_commit_history, params)
+      req.send_request(options)
+    end
+
     # Returns a list of pull requests for a specified repository. The return
     # list can be refined by pull request status or pull request author ARN.
     #
@@ -3100,8 +3178,8 @@ module Aws::CodeCommit
     # @option params [String] :next_token
     #   An enumeration token that allows the operation to batch the results of
     #   the operation. Batch sizes are 1,000 for list repository operations.
-    #   When the client sends the token back to AWS CodeCommit, another page
-    #   of 1,000 records is retrieved.
+    #   When the client sends the token back to CodeCommit, another page of
+    #   1,000 records is retrieved.
     #
     # @option params [String] :sort_by
     #   The criteria used to sort the results of a list repositories
@@ -3187,9 +3265,9 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
-    # Gets information about AWS tags for a specified Amazon Resource Name
-    # (ARN) in AWS CodeCommit. For a list of valid resources in AWS
-    # CodeCommit, see [CodeCommit Resources and Operations][1] in the<i> AWS
+    # Gets information about Amazon Web Servicestags for a specified Amazon
+    # Resource Name (ARN) in CodeCommit. For a list of valid resources in
+    # CodeCommit, see [CodeCommit Resources and Operations][1] in the<i>
     # CodeCommit User Guide</i>.
     #
     #
@@ -4112,8 +4190,8 @@ module Aws::CodeCommit
     # @option params [required, String] :reaction_value
     #   The emoji reaction you want to add or update. To remove a reaction,
     #   provide a value of blank or null. You can also provide the value of
-    #   none. For information about emoji reaction values supported in AWS
-    #   CodeCommit, see the [AWS CodeCommit User Guide][1].
+    #   none. For information about emoji reaction values supported in
+    #   CodeCommit, see the [CodeCommit User Guide][1].
     #
     #
     #
@@ -4137,8 +4215,8 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
-    # Adds or updates a file in a branch in an AWS CodeCommit repository,
-    # and generates a commit for the addition in the specified branch.
+    # Adds or updates a file in a branch in an CodeCommit repository, and
+    # generates a commit for the addition in the specified branch.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository where you want to add or update the file.
@@ -4263,9 +4341,9 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
-    # Adds or updates tags for a resource in AWS CodeCommit. For a list of
-    # valid resources in AWS CodeCommit, see [CodeCommit Resources and
-    # Operations][1] in the *AWS CodeCommit User Guide*.
+    # Adds or updates tags for a resource in CodeCommit. For a list of valid
+    # resources in CodeCommit, see [CodeCommit Resources and Operations][1]
+    # in the *CodeCommit User Guide*.
     #
     #
     #
@@ -4346,9 +4424,9 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
-    # Removes tags for a resource in AWS CodeCommit. For a list of valid
-    # resources in AWS CodeCommit, see [CodeCommit Resources and
-    # Operations][1] in the *AWS CodeCommit User Guide*.
+    # Removes tags for a resource in CodeCommit. For a list of valid
+    # resources in CodeCommit, see [CodeCommit Resources and Operations][1]
+    # in the *CodeCommit User Guide*.
     #
     #
     #
@@ -4558,10 +4636,11 @@ module Aws::CodeCommit
     #  </note>
     #
     # @option params [required, String] :repository_name
-    #   The name of the repository to set or change the default branch for.
+    #   The name of the repository for which you want to set or change the
+    #   default branch.
     #
     # @option params [required, String] :default_branch_name
-    #   The name of the branch to set as the default.
+    #   The name of the branch to set as the default branch.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4601,13 +4680,13 @@ module Aws::CodeCommit
     #   <note markdown="1"> When you update the content of the approval rule, you can specify
     #   approvers in an approval pool in one of two ways:
     #
-    #    * **CodeCommitApprovers**: This option only requires an AWS account
-    #     and a resource. It can be used for both IAM users and federated
-    #     access users whose name matches the provided resource name. This is
-    #     a very powerful option that offers a great deal of flexibility. For
-    #     example, if you specify the AWS account *123456789012* and
-    #     *Mary\_Major*, all of the following are counted as approvals coming
-    #     from that user:
+    #    * **CodeCommitApprovers**: This option only requires an Amazon Web
+    #     Services account and a resource. It can be used for both IAM users
+    #     and federated access users whose name matches the provided resource
+    #     name. This is a very powerful option that offers a great deal of
+    #     flexibility. For example, if you specify the Amazon Web Services
+    #     account *123456789012* and *Mary\_Major*, all of the following are
+    #     counted as approvals coming from that user:
     #
     #     * An IAM user in the account
     #       (arn:aws:iam::*123456789012*:user/*Mary\_Major*)
@@ -4926,11 +5005,11 @@ module Aws::CodeCommit
     end
 
     # Renames a repository. The repository name must be unique across the
-    # calling AWS account. Repository names are limited to 100 alphanumeric,
-    # dash, and underscore characters, and cannot include certain
-    # characters. The suffix .git is prohibited. For more information about
-    # the limits on repository names, see [Limits][1] in the AWS CodeCommit
-    # User Guide.
+    # calling Amazon Web Services account. Repository names are limited to
+    # 100 alphanumeric, dash, and underscore characters, and cannot include
+    # certain characters. The suffix .git is prohibited. For more
+    # information about the limits on repository names, see [Quotas][1] in
+    # the CodeCommit User Guide.
     #
     #
     #
@@ -4973,7 +5052,7 @@ module Aws::CodeCommit
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codecommit'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

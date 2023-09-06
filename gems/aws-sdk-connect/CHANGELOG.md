@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.125.0 (2023-09-01)
+------------------
+
+* Feature - Amazon Connect adds the ability to read, create, update, delete, and list view resources, and adds the ability to read, create, delete, and list view versions.
+
+1.124.0 (2023-08-10)
+------------------
+
+* Feature - This release adds APIs to provision agents that are global / available in multiple AWS regions and distribute them across these regions by percentage.
+
 1.123.0 (2023-08-04)
 ------------------
 

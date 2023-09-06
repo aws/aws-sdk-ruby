@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.193.0 (2023-09-05)
+------------------
+
+* Feature - Add support for feature integration with AWS Backup.
+
+1.192.0 (2023-08-24)
+------------------
+
+* Feature - This release updates the supported versions for Percona XtraBackup in Aurora MySQL.
+
+1.191.0 (2023-08-22)
+------------------
+
+* Feature - Adding parameters to CreateCustomDbEngineVersion reserved for future use.
+
+1.190.0 (2023-08-21)
+------------------
+
+* Feature - Adding support for RDS Aurora Global Database Unplanned Failover
+
 1.189.0 (2023-08-01)
 ------------------
 

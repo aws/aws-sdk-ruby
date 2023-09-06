@@ -3107,12 +3107,17 @@ module Aws::SageMaker
     #   The workspace settings for the SageMaker Canvas application.
     #   @return [Types::WorkspaceSettings]
     #
+    # @!attribute [rw] identity_provider_o_auth_settings
+    #   The settings for connecting to an external data source with OAuth.
+    #   @return [Array<Types::IdentityProviderOAuthSetting>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CanvasAppSettings AWS API Documentation
     #
     class CanvasAppSettings < Struct.new(
       :time_series_forecasting_settings,
       :model_register_settings,
-      :workspace_settings)
+      :workspace_settings,
+      :identity_provider_o_auth_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6774,7 +6779,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] model_card_name
-    #   The name of the model card to export.
+    #   The name or Amazon Resource Name (ARN) of the model card to export.
     #   @return [String]
     #
     # @!attribute [rw] model_card_version
@@ -7147,6 +7152,10 @@ module Aws::SageMaker
     #   A list of key value pairs associated with the model. For more
     #   information, see [Tagging Amazon Web Services resources][1] in the
     #   *Amazon Web Services General Reference Guide*.
+    #
+    #   If you supply `ModelPackageGroupName`, your model package belongs to
+    #   the model group you specify and uses the tags associated with the
+    #   model group. In this case, you cannot supply a `tag` argument.
     #
     #
     #
@@ -10356,6 +10365,23 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Information that SageMaker Neo automatically derived about the model.
+    #
+    # @!attribute [rw] derived_data_input_config
+    #   The data input configuration that SageMaker Neo automatically
+    #   derived for the model. When SageMaker Neo derives this information,
+    #   you don't need to specify the data input configuration when you
+    #   create a compilation job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DerivedInformation AWS API Documentation
+    #
+    class DerivedInformation < Struct.new(
+      :derived_data_input_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] action_name
     #   The name of the action to describe.
     #   @return [String]
@@ -11179,6 +11205,11 @@ module Aws::SageMaker
     #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html
     #   @return [Types::NeoVpcConfig]
     #
+    # @!attribute [rw] derived_information
+    #   Information that SageMaker Neo automatically derived about the
+    #   model.
+    #   @return [Types::DerivedInformation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCompilationJobResponse AWS API Documentation
     #
     class DescribeCompilationJobResponse < Struct.new(
@@ -11198,7 +11229,8 @@ module Aws::SageMaker
       :role_arn,
       :input_config,
       :output_config,
-      :vpc_config)
+      :vpc_config,
+      :derived_information)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13596,7 +13628,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] model_card_name
-    #   The name of the model card that the model export job exports.
+    #   The name or Amazon Resource Name (ARN) of the model card that the
+    #   model export job exports.
     #   @return [String]
     #
     # @!attribute [rw] model_card_version
@@ -13641,7 +13674,8 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] model_card_name
-    #   The name of the model card to describe.
+    #   The name or Amazon Resource Name (ARN) of the model card to
+    #   describe.
     #   @return [String]
     #
     # @!attribute [rw] model_card_version
@@ -21050,6 +21084,35 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The Amazon SageMaker Canvas app setting where you configure OAuth for
+    # connecting to an external data source, such as Snowflake.
+    #
+    # @!attribute [rw] data_source_name
+    #   The name of the data source that you're connecting to. Canvas
+    #   currently supports OAuth for Snowflake and Salesforce Data Cloud.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Describes whether OAuth for a data source is enabled or disabled in
+    #   the Canvas application.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The ARN of an Amazon Web Services Secrets Manager secret that stores
+    #   the credentials from your identity provider, such as the client ID
+    #   and secret, authorization URL, and token URL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/IdentityProviderOAuthSetting AWS API Documentation
+    #
+    class IdentityProviderOAuthSetting < Struct.new(
+      :data_source_name,
+      :status,
+      :secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A SageMaker image. A SageMaker image represents a set of container
     # images that are derived from a common base container image. Each of
     # these container images is represented by a SageMaker `ImageVersion`.
@@ -25480,7 +25543,8 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] model_card_name
-    #   List model card versions for the model card with the specified name.
+    #   List model card versions for the model card with the specified name
+    #   or Amazon Resource Name (ARN).
     #   @return [String]
     #
     # @!attribute [rw] model_card_status
@@ -29015,8 +29079,8 @@ module Aws::SageMaker
     # The model latency threshold.
     #
     # @!attribute [rw] percentile
-    #   The model latency percentile threshold. For custom load tests,
-    #   specify the value as `P95`.
+    #   The model latency percentile threshold. Acceptable values are `P95`
+    #   and `P99`. For custom load tests, specify the value as `P95`.
     #   @return [String]
     #
     # @!attribute [rw] value_in_milliseconds
@@ -31463,7 +31527,7 @@ module Aws::SageMaker
     #     `"CompilerOptions": ""--verbose 1 --num-neuroncores 2 -O2""`.
     #
     #     For information about supported compiler options, see [ Neuron
-    #     Compiler CLI][1].
+    #     Compiler CLI Reference Guide][1].
     #
     #   * `CoreML`: Compilation for the CoreML [OutputConfig][2]
     #     `TargetDevice` supports the following compiler options:
@@ -31494,7 +31558,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: https://github.com/aws/aws-neuron-sdk/blob/master/docs/neuron-cc/command-line-reference.md
+    #   [1]: https://awsdocs-neuron.readthedocs-hosted.com/en/latest/compiler/neuronx-cc/api-reference-guide/neuron-compiler-cli-reference-guide.html
     #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OutputConfig.html
     #   @return [String]
     #
@@ -34399,6 +34463,10 @@ module Aws::SageMaker
     #   benchmarks for the desired endpoint type.
     #   @return [String]
     #
+    # @!attribute [rw] supported_response_mime_types
+    #   The supported MIME types for the output data.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobContainerConfig AWS API Documentation
     #
     class RecommendationJobContainerConfig < Struct.new(
@@ -34410,7 +34478,8 @@ module Aws::SageMaker
       :nearest_model_name,
       :supported_instance_types,
       :data_input_config,
-      :supported_endpoint_type)
+      :supported_endpoint_type,
+      :supported_response_mime_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34471,7 +34540,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] job_duration_in_seconds
     #   Specifies the maximum duration of the job, in seconds. The maximum
-    #   value is 7200.
+    #   value is 18,000 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] traffic_pattern
@@ -40617,7 +40686,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] model_card_name
-    #   The name of the model card to update.
+    #   The name or Amazon Resource Name (ARN) of the model card to update.
     #   @return [String]
     #
     # @!attribute [rw] content

@@ -761,12 +761,17 @@ module Aws::BillingConductor
     #   is a fee or credit.
     #   @return [String]
     #
+    # @!attribute [rw] line_item_filters
+    #   A representation of the line item filter.
+    #   @return [Array<Types::LineItemFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/CustomLineItemChargeDetails AWS API Documentation
     #
     class CustomLineItemChargeDetails < Struct.new(
       :flat,
       :percentage,
-      :type)
+      :type,
+      :line_item_filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1169,6 +1174,38 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
+    # A representation of the line item filter for your custom line item.
+    # You can use line item filters to include or exclude specific resource
+    # values from the billing group's total cost. For example, if you
+    # create a custom line item and you want to filter out a value, such as
+    # Savings Plan discounts, you can update `LineItemFilter` to exclude it.
+    #
+    # @!attribute [rw] attribute
+    #   The attribute of the line item filter. This specifies what attribute
+    #   that you can filter on.
+    #   @return [String]
+    #
+    # @!attribute [rw] match_option
+    #   The match criteria of the line item filter. This parameter specifies
+    #   whether not to include the resource value from the billing group
+    #   total cost.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values of the line item filter. This specifies the values to
+    #   filter on. Currently, you can only exclude Savings Plan discounts.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/LineItemFilter AWS API Documentation
+    #
+    class LineItemFilter < Struct.new(
+      :attribute,
+      :match_option,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The filter on the account ID of the linked account, or any of the
     # following:
     #
@@ -1436,12 +1473,17 @@ module Aws::BillingConductor
     #   is a `fee` or `credit`.
     #   @return [String]
     #
+    # @!attribute [rw] line_item_filters
+    #   A representation of the line item filter.
+    #   @return [Array<Types::LineItemFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListCustomLineItemChargeDetails AWS API Documentation
     #
     class ListCustomLineItemChargeDetails < Struct.new(
       :flat,
       :percentage,
-      :type)
+      :type,
+      :line_item_filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2424,11 +2466,16 @@ module Aws::BillingConductor
     #   new charge details of a percentage custom line item.
     #   @return [Types::UpdateCustomLineItemPercentageChargeDetails]
     #
+    # @!attribute [rw] line_item_filters
+    #   A representation of the line item filter.
+    #   @return [Array<Types::LineItemFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/UpdateCustomLineItemChargeDetails AWS API Documentation
     #
     class UpdateCustomLineItemChargeDetails < Struct.new(
       :flat,
-      :percentage)
+      :percentage,
+      :line_item_filters)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -3561,8 +3561,9 @@ module Aws::SecurityHub
 
     # Deletes the specified member accounts from Security Hub.
     #
-    # Can be used to delete member accounts that belong to an organization
-    # as well as member accounts that were invited manually.
+    # You can invoke this API only to delete accounts that became members
+    # through invitation. You can't invoke this API to delete accounts that
+    # belong to an Organizations organization.
     #
     # @option params [required, Array<String>] :account_ids
     #   The list of account IDs for the member accounts to delete.
@@ -4143,12 +4144,12 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Disables Security Hub in your account only in the current Region. To
-    # disable Security Hub in all Regions, you must submit one request per
-    # Region where you have enabled Security Hub.
+    # Disables Security Hub in your account only in the current Amazon Web
+    # Services Region. To disable Security Hub in all Regions, you must
+    # submit one request per Region where you have enabled Security Hub.
     #
-    # When you disable Security Hub for an administrator account, it
-    # doesn't disable Security Hub for any associated member accounts.
+    # You can't disable Security Hub in an account that is currently the
+    # Security Hub administrator.
     #
     # When you disable Security Hub, your existing findings and insights and
     # any Security Hub configuration settings are deleted after 90 days and
@@ -8702,7 +8703,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

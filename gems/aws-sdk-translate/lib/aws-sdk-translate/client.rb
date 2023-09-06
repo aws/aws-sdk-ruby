@@ -33,6 +33,7 @@ require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
+require 'aws-sdk-translate/plugins/translate_document_encoding.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:translate)
 
@@ -83,6 +84,7 @@ module Aws::Translate
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
+    add_plugin(Aws::Translate::Plugins::TranslateDocumentEncoding)
     add_plugin(Aws::Translate::Plugins::Endpoints)
 
     # @overload initialize(options)
@@ -1622,7 +1624,7 @@ module Aws::Translate
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-translate'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

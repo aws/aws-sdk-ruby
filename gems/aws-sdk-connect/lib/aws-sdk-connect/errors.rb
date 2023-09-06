@@ -48,6 +48,7 @@ module Aws::Connect
   # * {ResourceNotReadyException}
   # * {ServiceQuotaExceededException}
   # * {ThrottlingException}
+  # * {TooManyRequestsException}
   # * {UserNotFoundException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -376,6 +377,21 @@ module Aws::Connect
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Connect::Types::ThrottlingException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TooManyRequestsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Connect::Types::TooManyRequestsException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

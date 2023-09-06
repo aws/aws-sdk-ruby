@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2023-09-05)
+------------------
+
+* Feature - This release adds support for line item filtering in for the custom line item resource.
+
 1.13.0 (2023-07-25)
 ------------------
 

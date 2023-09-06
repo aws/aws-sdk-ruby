@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2023-08-28)
+------------------
+
+* Feature - Add support for customizing time zone for backup window in backup plan rules.
+
+1.57.0 (2023-08-08)
+------------------
+
+* Feature - This release introduces a new logically air-gapped vault (Preview) in AWS Backup that stores immutable backup copies, which are locked by default and isolated with encryption using AWS owned keys. Logically air-gapped vault (Preview) allows secure recovery of application data across accounts.
+
 1.56.0 (2023-07-11)
 ------------------
 

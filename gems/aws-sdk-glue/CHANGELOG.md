@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.155.0 (2023-08-24)
+------------------
+
+* Feature - Added API attributes that help in the monitoring of sessions.
+
+1.154.0 (2023-08-15)
+------------------
+
+* Feature - AWS Glue Crawlers can now accept SerDe overrides from a custom csv classifier. The two SerDe options are LazySimpleSerDe and OpenCSVSerDe. In case, the user wants crawler to do the selection, "None" can be selected for this purpose.
+
 1.153.0 (2023-08-02)
 ------------------
 

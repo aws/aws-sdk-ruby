@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.170.0 (2023-08-30)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-pcaconnectorad` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-neptunedata` gem.
+
 3.169.0 (2023-07-26)
 ------------------
 

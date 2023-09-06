@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2023-08-11)
+------------------
+
+* Feature - This release adds new API parameters to override workflow task list for workflow executions.
+
 1.45.0 (2023-07-11)
 ------------------
 

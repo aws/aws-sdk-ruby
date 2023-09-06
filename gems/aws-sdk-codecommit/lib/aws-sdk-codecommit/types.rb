@@ -10,8 +10,8 @@
 module Aws::CodeCommit
   module Types
 
-    # The specified Amazon Resource Name (ARN) does not exist in the AWS
-    # account.
+    # The specified Amazon Resource Name (ARN) does not exist in the Amazon
+    # Web Services account.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ActorDoesNotExistException AWS API Documentation
     #
@@ -221,8 +221,8 @@ module Aws::CodeCommit
     class ApprovalRuleTemplateContentRequiredException < Aws::EmptyStructure; end
 
     # The specified approval rule template does not exist. Verify that the
-    # name is correct and that you are signed in to the AWS Region where the
-    # template was created, and then try again.
+    # name is correct and that you are signed in to the Amazon Web Services
+    # Region where the template was created, and then try again.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ApprovalRuleTemplateDoesNotExistException AWS API Documentation
     #
@@ -237,8 +237,9 @@ module Aws::CodeCommit
     class ApprovalRuleTemplateInUseException < Aws::EmptyStructure; end
 
     # You cannot create an approval rule template with that name because a
-    # template with that name already exists in this AWS Region for your AWS
-    # account. Approval rule template names must be unique.
+    # template with that name already exists in this Amazon Web Services
+    # Region for your Amazon Web Services account. Approval rule template
+    # names must be unique.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ApprovalRuleTemplateNameAlreadyExistsException AWS API Documentation
     #
@@ -294,8 +295,8 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
-    # The specified Amazon Resource Name (ARN) does not exist in the AWS
-    # account.
+    # The specified Amazon Resource Name (ARN) does not exist in the Amazon
+    # Web Services account.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/AuthorDoesNotExistException AWS API Documentation
     #
@@ -888,7 +889,7 @@ module Aws::CodeCommit
     #
     class CommentContentRequiredException < Aws::EmptyStructure; end
 
-    # The comment is too large. Comments are limited to 1,000 characters.
+    # The comment is too large. Comments are limited to 10,240 characters.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CommentContentSizeLimitExceededException AWS API Documentation
     #
@@ -1275,13 +1276,13 @@ module Aws::CodeCommit
     #   <note markdown="1"> When you create the content of the approval rule template, you can
     #   specify approvers in an approval pool in one of two ways:
     #
-    #    * **CodeCommitApprovers**: This option only requires an AWS account
-    #     and a resource. It can be used for both IAM users and federated
-    #     access users whose name matches the provided resource name. This
-    #     is a very powerful option that offers a great deal of flexibility.
-    #     For example, if you specify the AWS account *123456789012* and
-    #     *Mary\_Major*, all of the following are counted as approvals
-    #     coming from that user:
+    #    * **CodeCommitApprovers**: This option only requires an Amazon Web
+    #     Services account and a resource. It can be used for both IAM users
+    #     and federated access users whose name matches the provided
+    #     resource name. This is a very powerful option that offers a great
+    #     deal of flexibility. For example, if you specify the Amazon Web
+    #     Services account *123456789012* and *Mary\_Major*, all of the
+    #     following are counted as approvals coming from that user:
     #
     #     * An IAM user in the account
     #       (arn:aws:iam::*123456789012*:user/*Mary\_Major*)
@@ -1472,19 +1473,19 @@ module Aws::CodeCommit
     # @!attribute [rw] approval_rule_content
     #   The content of the approval rule, including the number of approvals
     #   needed and the structure of an approval pool defined for approvals,
-    #   if any. For more information about approval pools, see the AWS
+    #   if any. For more information about approval pools, see the
     #   CodeCommit User Guide.
     #
     #   <note markdown="1"> When you create the content of the approval rule, you can specify
     #   approvers in an approval pool in one of two ways:
     #
-    #    * **CodeCommitApprovers**: This option only requires an AWS account
-    #     and a resource. It can be used for both IAM users and federated
-    #     access users whose name matches the provided resource name. This
-    #     is a very powerful option that offers a great deal of flexibility.
-    #     For example, if you specify the AWS account *123456789012* and
-    #     *Mary\_Major*, all of the following would be counted as approvals
-    #     coming from that user:
+    #    * **CodeCommitApprovers**: This option only requires an Amazon Web
+    #     Services account and a resource. It can be used for both IAM users
+    #     and federated access users whose name matches the provided
+    #     resource name. This is a very powerful option that offers a great
+    #     deal of flexibility. For example, if you specify the Amazon Web
+    #     Services account *123456789012* and *Mary\_Major*, all of the
+    #     following would be counted as approvals coming from that user:
     #
     #     * An IAM user in the account
     #       (arn:aws:iam::*123456789012*:user/*Mary\_Major*)
@@ -1557,8 +1558,9 @@ module Aws::CodeCommit
     #   token is included, the request returns information about the initial
     #   request that used that token.
     #
-    #   <note markdown="1"> The AWS SDKs prepopulate client request tokens. If you are using an
-    #   AWS SDK, an idempotency token is created for you.
+    #   <note markdown="1"> The Amazon Web ServicesSDKs prepopulate client request tokens. If
+    #   you are using an Amazon Web ServicesSDK, an idempotency token is
+    #   created for you.
     #
     #    </note>
     #
@@ -1594,12 +1596,12 @@ module Aws::CodeCommit
     # @!attribute [rw] repository_name
     #   The name of the new repository to be created.
     #
-    #   <note markdown="1"> The repository name must be unique across the calling AWS account.
-    #   Repository names are limited to 100 alphanumeric, dash, and
-    #   underscore characters, and cannot include certain characters. For
-    #   more information about the limits on repository names, see
-    #   [Limits][1] in the *AWS CodeCommit User Guide*. The suffix .git is
-    #   prohibited.
+    #   <note markdown="1"> The repository name must be unique across the calling Amazon Web
+    #   Services account. Repository names are limited to 100 alphanumeric,
+    #   dash, and underscore characters, and cannot include certain
+    #   characters. For more information about the limits on repository
+    #   names, see [Quotas][1] in the *CodeCommit User Guide*. The suffix
+    #   .git is prohibited.
     #
     #    </note>
     #
@@ -2490,9 +2492,9 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
-    # The specified file exceeds the file size limit for AWS CodeCommit. For
-    # more information about limits in AWS CodeCommit, see [AWS CodeCommit
-    # User Guide][1].
+    # The specified file exceeds the file size limit for CodeCommit. For
+    # more information about limits in CodeCommit, see [Quotas][1] in the
+    # *CodeCommit User Guide*.
     #
     #
     #
@@ -2501,6 +2503,40 @@ module Aws::CodeCommit
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/FileTooLargeException AWS API Documentation
     #
     class FileTooLargeException < Aws::EmptyStructure; end
+
+    # Information about a version of a file.
+    #
+    # @!attribute [rw] commit
+    #   Returns information about a specific commit.
+    #   @return [Types::Commit]
+    #
+    # @!attribute [rw] blob_id
+    #   The blob ID of the object that represents the content of the file in
+    #   this version.
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   The name and path of the file at which this blob is indexed which
+    #   contains the data for this version of the file. This value will vary
+    #   between file versions if a file is renamed or if its path changes.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_children
+    #   An array of commit IDs that contain more recent versions of this
+    #   file. If there are no additional versions of the file, this array
+    #   will be empty.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/FileVersion AWS API Documentation
+    #
+    class FileVersion < Struct.new(
+      :commit,
+      :blob_id,
+      :path,
+      :revision_children)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Returns information about a folder in a repository.
     #
@@ -2773,16 +2809,22 @@ module Aws::CodeCommit
     #
     # @!attribute [rw] repository_name
     #   The name of the repository that contains the pull request.
+    #   Requirement is conditional: `repositoryName` must be specified when
+    #   `beforeCommitId` and `afterCommitId` are included.
     #   @return [String]
     #
     # @!attribute [rw] before_commit_id
     #   The full commit ID of the commit in the destination branch that was
     #   the tip of the branch at the time the pull request was created.
+    #   Requirement is conditional: `beforeCommitId` must be specified when
+    #   `repositoryName` is included.
     #   @return [String]
     #
     # @!attribute [rw] after_commit_id
     #   The full commit ID of the commit in the source branch that was the
-    #   tip of the branch at the time the comment was made.
+    #   tip of the branch at the time the comment was made. Requirement is
+    #   conditional: `afterCommitId` must be specified when `repositoryName`
+    #   is included.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2943,8 +2985,8 @@ module Aws::CodeCommit
     # @!attribute [rw] commit_specifier
     #   The fully quaified reference that identifies the commit that
     #   contains the file. For example, you can specify a full commit ID, a
-    #   tag, a branch name, or a reference such as refs/heads/master. If
-    #   none is provided, the head commit is used.
+    #   tag, a branch name, or a reference such as refs/heads/main. If none
+    #   is provided, the head commit is used.
     #   @return [String]
     #
     # @!attribute [rw] file_path
@@ -3517,8 +3559,8 @@ module Aws::CodeCommit
 
     # The description for the approval rule template is not valid because it
     # exceeds the maximum characters allowed for a description. For more
-    # information about limits in AWS CodeCommit, see [AWS CodeCommit User
-    # Guide][1].
+    # information about limits in CodeCommit, see [Quotas][1] in the
+    # *CodeCommit User Guide*.
     #
     #
     #
@@ -3530,8 +3572,8 @@ module Aws::CodeCommit
 
     # The name of the approval rule template is not valid. Template names
     # must be between 1 and 100 valid characters in length. For more
-    # information about limits in AWS CodeCommit, see [AWS CodeCommit User
-    # Guide][1].
+    # information about limits in CodeCommit, see [Quotas][1] in the
+    # *CodeCommit User Guide*.
     #
     #
     #
@@ -3755,7 +3797,7 @@ module Aws::CodeCommit
     class InvalidReactionUserArnException < Aws::EmptyStructure; end
 
     # The value of the reaction is not valid. For more information, see the
-    # [AWS CodeCommit User Guide][1].
+    # [CodeCommit User Guide][1].
     #
     #
     #
@@ -3766,7 +3808,7 @@ module Aws::CodeCommit
     class InvalidReactionValueException < Aws::EmptyStructure; end
 
     # The specified reference name format is not valid. Reference names must
-    # conform to the Git references format (for example, refs/heads/master).
+    # conform to the Git references format (for example, refs/heads/main).
     # For more information, see [Git Internals - Git References][1] or
     # consult your Git documentation.
     #
@@ -3851,17 +3893,18 @@ module Aws::CodeCommit
     #
     class InvalidRepositoryTriggerNameException < Aws::EmptyStructure; end
 
-    # The AWS Region for the trigger target does not match the AWS Region
-    # for the repository. Triggers must be created in the same Region as the
-    # target for the trigger.
+    # The Amazon Web Services Region for the trigger target does not match
+    # the Amazon Web Services Region for the repository. Triggers must be
+    # created in the same Amazon Web Services Region as the target for the
+    # trigger.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidRepositoryTriggerRegionException AWS API Documentation
     #
     class InvalidRepositoryTriggerRegionException < Aws::EmptyStructure; end
 
     # The value for the resource ARN is not valid. For more information
-    # about resources in AWS CodeCommit, see [CodeCommit Resources and
-    # Operations][1] in the AWS CodeCommit User Guide.
+    # about resources in CodeCommit, see [CodeCommit Resources and
+    # Operations][1] in the CodeCommit User Guide.
     #
     #
     #
@@ -3994,8 +4037,8 @@ module Aws::CodeCommit
     end
 
     # @!attribute [rw] approval_rule_template_names
-    #   The names of all the approval rule templates found in the AWS Region
-    #   for your AWS account.
+    #   The names of all the approval rule templates found in the Amazon Web
+    #   Services Region for your Amazon Web Services account.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -4089,6 +4132,63 @@ module Aws::CodeCommit
     #
     class ListBranchesOutput < Struct.new(
       :branches,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] repository_name
+    #   The name of the repository that contains the file.
+    #   @return [String]
+    #
+    # @!attribute [rw] commit_specifier
+    #   The fully quaified reference that identifies the commit that
+    #   contains the file. For example, you can specify a full commit ID, a
+    #   tag, a branch name, or a reference such as `refs/heads/main`. If
+    #   none is provided, the head commit is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_path
+    #   The full path of the file whose history you want to retrieve,
+    #   including the name of the file.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   A non-zero, non-negative integer used to limit the number of
+    #   returned results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that allows the operation to batch the results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListFileCommitHistoryRequest AWS API Documentation
+    #
+    class ListFileCommitHistoryRequest < Struct.new(
+      :repository_name,
+      :commit_specifier,
+      :file_path,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] revision_dag
+    #   An array of FileVersion objects that form a directed acyclic graph
+    #   (DAG) of the changes to the file made by the commits that changed
+    #   the file.
+    #   @return [Array<Types::FileVersion>]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that can be used to return the next batch of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListFileCommitHistoryResponse AWS API Documentation
+    #
+    class ListFileCommitHistoryResponse < Struct.new(
+      :revision_dag,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -4198,7 +4298,7 @@ module Aws::CodeCommit
     # @!attribute [rw] next_token
     #   An enumeration token that allows the operation to batch the results
     #   of the operation. Batch sizes are 1,000 for list repository
-    #   operations. When the client sends the token back to AWS CodeCommit,
+    #   operations. When the client sends the token back to CodeCommit,
     #   another page of 1,000 records is retrieved.
     #   @return [String]
     #
@@ -4231,7 +4331,7 @@ module Aws::CodeCommit
     # @!attribute [rw] next_token
     #   An enumeration token that allows the operation to batch the results
     #   of the operation. Batch sizes are 1,000 for list repository
-    #   operations. When the client sends the token back to AWS CodeCommit,
+    #   operations. When the client sends the token back to CodeCommit,
     #   another page of 1,000 records is retrieved.
     #   @return [String]
     #
@@ -4982,7 +5082,7 @@ module Aws::CodeCommit
     class NoChangeException < Aws::EmptyStructure; end
 
     # The maximum number of approval rule templates has been exceeded for
-    # this AWS Region.
+    # this Amazon Web Services Region.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/NumberOfRuleTemplatesExceededException AWS API Documentation
     #
@@ -5720,8 +5820,8 @@ module Aws::CodeCommit
     # @!attribute [rw] reaction_value
     #   The emoji reaction you want to add or update. To remove a reaction,
     #   provide a value of blank or null. You can also provide the value of
-    #   none. For information about emoji reaction values supported in AWS
-    #   CodeCommit, see the [AWS CodeCommit User Guide][1].
+    #   none. For information about emoji reaction values supported in
+    #   CodeCommit, see the [CodeCommit User Guide][1].
     #
     #
     #
@@ -5940,8 +6040,8 @@ module Aws::CodeCommit
     #
     class ReactionLimitExceededException < Aws::EmptyStructure; end
 
-    # Information about the values for reactions to a comment. AWS
-    # CodeCommit supports a limited set of reactions.
+    # Information about the values for reactions to a comment. CodeCommit
+    # supports a limited set of reactions.
     #
     # @!attribute [rw] emoji
     #   The Emoji Version 1.0 graphic of the reaction. These graphics are
@@ -6052,7 +6152,8 @@ module Aws::CodeCommit
     # Information about a repository.
     #
     # @!attribute [rw] account_id
-    #   The ID of the AWS account associated with the repository.
+    #   The ID of the Amazon Web Services account associated with the
+    #   repository.
     #   @return [String]
     #
     # @!attribute [rw] repository_id
@@ -6157,6 +6258,16 @@ module Aws::CodeCommit
 
     # Information about a trigger for a repository.
     #
+    # <note markdown="1"> If you want to receive notifications about repository events, consider
+    # using notifications instead of triggers. For more information, see
+    # [Configuring notifications for repository events][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/how-to-repository-email.html
+    #
     # @!attribute [rw] name
     #   The name of the trigger.
     #   @return [String]
@@ -6254,10 +6365,9 @@ module Aws::CodeCommit
     #
     class RepositoryTriggersListRequiredException < Aws::EmptyStructure; end
 
-    # A valid Amazon Resource Name (ARN) for an AWS CodeCommit resource is
-    # required. For a list of valid resources in AWS CodeCommit, see
-    # [CodeCommit Resources and Operations][1] in the AWS CodeCommit User
-    # Guide.
+    # A valid Amazon Resource Name (ARN) for an CodeCommit resource is
+    # required. For a list of valid resources in CodeCommit, see [CodeCommit
+    # Resources and Operations][1] in the CodeCommit User Guide.
     #
     #
     #
@@ -6558,7 +6668,7 @@ module Aws::CodeCommit
     #
     class TitleRequiredException < Aws::EmptyStructure; end
 
-    # The maximum number of tags for an AWS CodeCommit resource has been
+    # The maximum number of tags for an CodeCommit resource has been
     # exceeded.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/TooManyTagsException AWS API Documentation
@@ -6713,11 +6823,12 @@ module Aws::CodeCommit
     # Represents the input of an update default branch operation.
     #
     # @!attribute [rw] repository_name
-    #   The name of the repository to set or change the default branch for.
+    #   The name of the repository for which you want to set or change the
+    #   default branch.
     #   @return [String]
     #
     # @!attribute [rw] default_branch_name
-    #   The name of the branch to set as the default.
+    #   The name of the branch to set as the default branch.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateDefaultBranchInput AWS API Documentation
@@ -6748,13 +6859,13 @@ module Aws::CodeCommit
     #   <note markdown="1"> When you update the content of the approval rule, you can specify
     #   approvers in an approval pool in one of two ways:
     #
-    #    * **CodeCommitApprovers**: This option only requires an AWS account
-    #     and a resource. It can be used for both IAM users and federated
-    #     access users whose name matches the provided resource name. This
-    #     is a very powerful option that offers a great deal of flexibility.
-    #     For example, if you specify the AWS account *123456789012* and
-    #     *Mary\_Major*, all of the following are counted as approvals
-    #     coming from that user:
+    #    * **CodeCommitApprovers**: This option only requires an Amazon Web
+    #     Services account and a resource. It can be used for both IAM users
+    #     and federated access users whose name matches the provided
+    #     resource name. This is a very powerful option that offers a great
+    #     deal of flexibility. For example, if you specify the Amazon Web
+    #     Services account *123456789012* and *Mary\_Major*, all of the
+    #     following are counted as approvals coming from that user:
     #
     #     * An IAM user in the account
     #       (arn:aws:iam::*123456789012*:user/*Mary\_Major*)

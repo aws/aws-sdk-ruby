@@ -605,6 +605,19 @@ module Aws::CloudTrail
     # @option params [Integer] :retention_period
     #   The retention period of the event data store, in days. You can set a
     #   retention period of up to 2557 days, the equivalent of seven years.
+    #   CloudTrail Lake determines whether to retain an event by checking if
+    #   the `eventTime` of the event is within the specified retention period.
+    #   For example, if you set a retention period of 90 days, CloudTrail will
+    #   remove events when the `eventTime` is older than 90 days.
+    #
+    #   <note markdown="1"> If you plan to copy trail events to this event data store, we
+    #   recommend that you consider both the age of the events that you want
+    #   to copy as well as how long you want to keep the copied events in your
+    #   event data store. For example, if you copy trail events that are 5
+    #   years old and specify a retention period of 7 years, the event data
+    #   store will retain those events for two years.
+    #
+    #    </note>
     #
     # @option params [Boolean] :termination_protection_enabled
     #   Specifies whether termination protection is enabled for the event data
@@ -3093,7 +3106,20 @@ module Aws::CloudTrail
     #   organization in Organizations.
     #
     # @option params [Integer] :retention_period
-    #   The retention period, in days.
+    #   The retention period of the event data store, in days. You can set a
+    #   retention period of up to 2557 days, the equivalent of seven years.
+    #   CloudTrail Lake determines whether to retain an event by checking if
+    #   the `eventTime` of the event is within the specified retention period.
+    #   For example, if you set a retention period of 90 days, CloudTrail will
+    #   remove events when the `eventTime` is older than 90 days.
+    #
+    #   <note markdown="1"> If you decrease the retention period of an event data store,
+    #   CloudTrail will remove any events with an `eventTime` older than the
+    #   new retention period. For example, if the previous retention period
+    #   was 365 days and you decrease it to 100 days, CloudTrail will remove
+    #   events with an `eventTime` older than 100 days.
+    #
+    #    </note>
     #
     # @option params [Boolean] :termination_protection_enabled
     #   Indicates that termination protection is enabled and the event data
@@ -3411,7 +3437,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

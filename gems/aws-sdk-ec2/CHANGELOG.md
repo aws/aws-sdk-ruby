@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.403.0 (2023-09-05)
+------------------
+
+* Feature - Introducing Amazon EC2 C7gd, M7gd, and R7gd Instances with up to 3.8 TB of local NVMe-based SSD block-level storage. These instances are powered by AWS Graviton3 processors, delivering up to 25% better performance over Graviton2-based instances.
+
+1.402.0 (2023-08-24)
+------------------
+
+* Feature - Amazon EC2 M7a instances, powered by 4th generation AMD EPYC processors, deliver up to 50% higher performance compared to M6a instances. Amazon EC2 Hpc7a instances, powered by 4th Gen AMD EPYC processors, deliver up to 2.5x better performance compared to Amazon EC2 Hpc6a instances.
+
+1.401.0 (2023-08-23)
+------------------
+
+* Feature - Marking fields as sensitive on BundleTask and GetPasswordData
+
+1.400.0 (2023-08-21)
+------------------
+
+* Feature - The DeleteKeyPair API has been updated to return the keyPairId when an existing key pair is deleted.
+
+1.399.0 (2023-08-17)
+------------------
+
+* Feature - Adds support for SubnetConfigurations to allow users to select their own IPv4 and IPv6 addresses for Interface VPC endpoints
+
+1.398.0 (2023-08-15)
+------------------
+
+* Feature - Documentation updates for Elastic Compute Cloud (EC2).
+
+1.397.0 (2023-08-11)
+------------------
+
+* Feature - Amazon EC2 P5 instances, powered by the latest NVIDIA H100 Tensor Core GPUs, deliver the highest performance in EC2 for deep learning (DL) and HPC applications. M7i-flex and M7i instances are next-generation general purpose instances powered by custom 4th Generation Intel Xeon Scalable processors.
+
 1.396.0 (2023-08-03)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2023-08-31)
+------------------
+
+* Feature - Adds sensitive trait to various shapes in Customer Profiles API model.
+
 1.35.0 (2023-07-25)
 ------------------
 

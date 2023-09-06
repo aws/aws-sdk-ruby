@@ -10,6 +10,34 @@
 module Aws::Health
   module Types
 
+    # The number of entities in an account that are impacted by a specific
+    # event aggregated by the entity status codes.
+    #
+    # @!attribute [rw] account_id
+    #   The 12-digit Amazon Web Services account numbers that contains the
+    #   affected entities.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The number of entities that match the filter criteria for the
+    #   specified events.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] statuses
+    #   The number of affected entities aggregated by the entity status
+    #   codes.
+    #   @return [Hash<String,Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/AccountEntityAggregate AWS API Documentation
+    #
+    class AccountEntityAggregate < Struct.new(
+      :account_id,
+      :count,
+      :statuses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an entity that is affected by a Health event.
     #
     # @!attribute [rw] entity_arn
@@ -221,13 +249,19 @@ module Aws::Health
     #   100, inclusive.
     #   @return [Integer]
     #
+    # @!attribute [rw] organization_entity_account_filters
+    #   A JSON set of elements including the `awsAccountId`, `eventArn` and
+    #   a set of `statusCodes`.
+    #   @return [Array<Types::EntityAccountFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeAffectedEntitiesForOrganizationRequest AWS API Documentation
     #
     class DescribeAffectedEntitiesForOrganizationRequest < Struct.new(
       :organization_entity_filters,
       :locale,
       :next_token,
-      :max_results)
+      :max_results,
+      :organization_entity_account_filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -312,6 +346,39 @@ module Aws::Health
     class DescribeAffectedEntitiesResponse < Struct.new(
       :entities,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_arns
+    #   A list of event ARNs (unique identifiers). For example:
+    #   `"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456",
+    #   "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"`
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] aws_account_ids
+    #   A list of 12-digit Amazon Web Services account numbers that contains
+    #   the affected entities.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEntityAggregatesForOrganizationRequest AWS API Documentation
+    #
+    class DescribeEntityAggregatesForOrganizationRequest < Struct.new(
+      :event_arns,
+      :aws_account_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_entity_aggregates
+    #   The list of entity aggregates for each of the specified accounts
+    #   that are affected by each of the specified events.
+    #   @return [Array<Types::OrganizationEntityAggregate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEntityAggregatesForOrganizationResponse AWS API Documentation
+    #
+    class DescribeEntityAggregatesForOrganizationResponse < Struct.new(
+      :organization_entity_aggregates)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -657,6 +724,38 @@ module Aws::Health
       include Aws::Structure
     end
 
+    # A JSON set of elements including the `awsAccountId`, `eventArn` and a
+    # set of `statusCodes`.
+    #
+    # @!attribute [rw] event_arn
+    #   The unique identifier for the event. The event ARN has the
+    #   `arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+    #   ` format.
+    #
+    #   For example, an event ARN might look like the following:
+    #
+    #   `arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_account_id
+    #   The 12-digit Amazon Web Services account numbers that contains the
+    #   affected entities.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_codes
+    #   A list of entity status codes.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EntityAccountFilter AWS API Documentation
+    #
+    class EntityAccountFilter < Struct.new(
+      :event_arn,
+      :aws_account_id,
+      :status_codes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The number of entities that are affected by one or more events.
     # Returned by the [DescribeEntityAggregates][1] operation.
     #
@@ -679,11 +778,17 @@ module Aws::Health
     #   events.
     #   @return [Integer]
     #
+    # @!attribute [rw] statuses
+    #   The number of affected entities aggregated by the entity status
+    #   codes.
+    #   @return [Hash<String,Integer>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EntityAggregate AWS API Documentation
     #
     class EntityAggregate < Struct.new(
       :event_arn,
-      :count)
+      :count,
+      :statuses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1222,6 +1327,44 @@ module Aws::Health
       :event_arn,
       :error_name,
       :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The aggregate results of entities affected by the specified event in
+    # your organization. The results are aggregated by the entity status
+    # codes for the specified set of accountsIDs.
+    #
+    # @!attribute [rw] event_arn
+    #   A list of event ARNs (unique identifiers). For example:
+    #   `"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456",
+    #   "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"`
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The number of entities for the organization that match the filter
+    #   criteria for the specified events.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] statuses
+    #   The number of affected entities aggregated by the entitiy status
+    #   codes.
+    #   @return [Hash<String,Integer>]
+    #
+    # @!attribute [rw] accounts
+    #   A list of entity aggregates for each of the specified accounts in
+    #   your organization that are affected by a specific event. If there
+    #   are no `awsAccountIds` provided in the request, this field will be
+    #   empty in the response.
+    #   @return [Array<Types::AccountEntityAggregate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/OrganizationEntityAggregate AWS API Documentation
+    #
+    class OrganizationEntityAggregate < Struct.new(
+      :event_arn,
+      :count,
+      :statuses,
+      :accounts)
       SENSITIVE = []
       include Aws::Structure
     end

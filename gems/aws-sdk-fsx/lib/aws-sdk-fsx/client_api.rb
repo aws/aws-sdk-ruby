@@ -174,6 +174,7 @@ module Aws::FSx
     DiskIopsConfigurationMode = Shapes::StringShape.new(name: 'DiskIopsConfigurationMode')
     DnsIps = Shapes::ListShape.new(name: 'DnsIps')
     DriveCacheType = Shapes::StringShape.new(name: 'DriveCacheType')
+    DurationSinceLastAccess = Shapes::StructureShape.new(name: 'DurationSinceLastAccess')
     EndTime = Shapes::TimestampShape.new(name: 'EndTime')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     EventType = Shapes::StringShape.new(name: 'EventType')
@@ -294,6 +295,7 @@ module Aws::FSx
     ProgressPercent = Shapes::IntegerShape.new(name: 'ProgressPercent')
     ReadOnly = Shapes::BooleanShape.new(name: 'ReadOnly')
     Region = Shapes::StringShape.new(name: 'Region')
+    ReleaseConfiguration = Shapes::StructureShape.new(name: 'ReleaseConfiguration')
     ReleaseFileSystemNfsV3LocksRequest = Shapes::StructureShape.new(name: 'ReleaseFileSystemNfsV3LocksRequest')
     ReleaseFileSystemNfsV3LocksResponse = Shapes::StructureShape.new(name: 'ReleaseFileSystemNfsV3LocksResponse')
     ReleasedCapacity = Shapes::IntegerShape.new(name: 'ReleasedCapacity')
@@ -379,6 +381,7 @@ module Aws::FSx
     TieringPolicyName = Shapes::StringShape.new(name: 'TieringPolicyName')
     TotalCount = Shapes::IntegerShape.new(name: 'TotalCount')
     UUID = Shapes::StringShape.new(name: 'UUID')
+    Unit = Shapes::StringShape.new(name: 'Unit')
     UnsupportedOperation = Shapes::StructureShape.new(name: 'UnsupportedOperation')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -403,6 +406,7 @@ module Aws::FSx
     UpdateSvmActiveDirectoryConfiguration = Shapes::StructureShape.new(name: 'UpdateSvmActiveDirectoryConfiguration')
     UpdateVolumeRequest = Shapes::StructureShape.new(name: 'UpdateVolumeRequest')
     UpdateVolumeResponse = Shapes::StructureShape.new(name: 'UpdateVolumeResponse')
+    Value = Shapes::IntegerShape.new(name: 'Value')
     Volume = Shapes::StructureShape.new(name: 'Volume')
     VolumeCapacity = Shapes::IntegerShape.new(name: 'VolumeCapacity')
     VolumeFilter = Shapes::StructureShape.new(name: 'VolumeFilter')
@@ -572,6 +576,7 @@ module Aws::FSx
     CreateDataRepositoryTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateDataRepositoryTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateDataRepositoryTaskRequest.add_member(:capacity_to_release, Shapes::ShapeRef.new(shape: CapacityToRelease, location_name: "CapacityToRelease"))
+    CreateDataRepositoryTaskRequest.add_member(:release_configuration, Shapes::ShapeRef.new(shape: ReleaseConfiguration, location_name: "ReleaseConfiguration"))
     CreateDataRepositoryTaskRequest.struct_class = Types::CreateDataRepositoryTaskRequest
 
     CreateDataRepositoryTaskResponse.add_member(:data_repository_task, Shapes::ShapeRef.new(shape: DataRepositoryTask, location_name: "DataRepositoryTask"))
@@ -655,6 +660,9 @@ module Aws::FSx
     CreateFileSystemOpenZFSConfiguration.add_member(:weekly_maintenance_start_time, Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
     CreateFileSystemOpenZFSConfiguration.add_member(:disk_iops_configuration, Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
     CreateFileSystemOpenZFSConfiguration.add_member(:root_volume_configuration, Shapes::ShapeRef.new(shape: OpenZFSCreateRootVolumeConfiguration, location_name: "RootVolumeConfiguration"))
+    CreateFileSystemOpenZFSConfiguration.add_member(:preferred_subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "PreferredSubnetId"))
+    CreateFileSystemOpenZFSConfiguration.add_member(:endpoint_ip_address_range, Shapes::ShapeRef.new(shape: IpAddressRange, location_name: "EndpointIpAddressRange"))
+    CreateFileSystemOpenZFSConfiguration.add_member(:route_table_ids, Shapes::ShapeRef.new(shape: RouteTableIds, location_name: "RouteTableIds"))
     CreateFileSystemOpenZFSConfiguration.struct_class = Types::CreateFileSystemOpenZFSConfiguration
 
     CreateFileSystemRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
@@ -686,6 +694,7 @@ module Aws::FSx
     CreateFileSystemWindowsConfiguration.add_member(:copy_tags_to_backups, Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
     CreateFileSystemWindowsConfiguration.add_member(:aliases, Shapes::ShapeRef.new(shape: AlternateDNSNames, location_name: "Aliases"))
     CreateFileSystemWindowsConfiguration.add_member(:audit_log_configuration, Shapes::ShapeRef.new(shape: WindowsAuditLogCreateConfiguration, location_name: "AuditLogConfiguration"))
+    CreateFileSystemWindowsConfiguration.add_member(:disk_iops_configuration, Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
     CreateFileSystemWindowsConfiguration.struct_class = Types::CreateFileSystemWindowsConfiguration
 
     CreateOntapVolumeConfiguration.add_member(:junction_path, Shapes::ShapeRef.new(shape: JunctionPath, location_name: "JunctionPath"))
@@ -821,6 +830,7 @@ module Aws::FSx
     DataRepositoryTask.add_member(:report, Shapes::ShapeRef.new(shape: CompletionReport, location_name: "Report"))
     DataRepositoryTask.add_member(:capacity_to_release, Shapes::ShapeRef.new(shape: CapacityToRelease, location_name: "CapacityToRelease"))
     DataRepositoryTask.add_member(:file_cache_id, Shapes::ShapeRef.new(shape: FileCacheId, location_name: "FileCacheId"))
+    DataRepositoryTask.add_member(:release_configuration, Shapes::ShapeRef.new(shape: ReleaseConfiguration, location_name: "ReleaseConfiguration"))
     DataRepositoryTask.struct_class = Types::DataRepositoryTask
 
     DataRepositoryTaskEnded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -1063,6 +1073,10 @@ module Aws::FSx
     DiskIopsConfiguration.struct_class = Types::DiskIopsConfiguration
 
     DnsIps.member = Shapes::ShapeRef.new(shape: IpAddress)
+
+    DurationSinceLastAccess.add_member(:unit, Shapes::ShapeRef.new(shape: Unit, location_name: "Unit"))
+    DurationSinceLastAccess.add_member(:value, Shapes::ShapeRef.new(shape: Value, location_name: "Value"))
+    DurationSinceLastAccess.struct_class = Types::DurationSinceLastAccess
 
     EventTypes.member = Shapes::ShapeRef.new(shape: EventType)
 
@@ -1336,6 +1350,10 @@ module Aws::FSx
     OpenZFSFileSystemConfiguration.add_member(:weekly_maintenance_start_time, Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
     OpenZFSFileSystemConfiguration.add_member(:disk_iops_configuration, Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
     OpenZFSFileSystemConfiguration.add_member(:root_volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "RootVolumeId"))
+    OpenZFSFileSystemConfiguration.add_member(:preferred_subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "PreferredSubnetId"))
+    OpenZFSFileSystemConfiguration.add_member(:endpoint_ip_address_range, Shapes::ShapeRef.new(shape: IpAddressRange, location_name: "EndpointIpAddressRange"))
+    OpenZFSFileSystemConfiguration.add_member(:route_table_ids, Shapes::ShapeRef.new(shape: RouteTableIds, location_name: "RouteTableIds"))
+    OpenZFSFileSystemConfiguration.add_member(:endpoint_ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "EndpointIpAddress"))
     OpenZFSFileSystemConfiguration.struct_class = Types::OpenZFSFileSystemConfiguration
 
     OpenZFSNfsExport.add_member(:client_configurations, Shapes::ShapeRef.new(shape: OpenZFSClientConfigurations, required: true, location_name: "ClientConfigurations"))
@@ -1371,6 +1389,9 @@ module Aws::FSx
     OpenZFSVolumeConfiguration.add_member(:delete_intermediate_snaphots, Shapes::ShapeRef.new(shape: Flag, location_name: "DeleteIntermediateSnaphots"))
     OpenZFSVolumeConfiguration.add_member(:delete_cloned_volumes, Shapes::ShapeRef.new(shape: Flag, location_name: "DeleteClonedVolumes"))
     OpenZFSVolumeConfiguration.struct_class = Types::OpenZFSVolumeConfiguration
+
+    ReleaseConfiguration.add_member(:duration_since_last_access, Shapes::ShapeRef.new(shape: DurationSinceLastAccess, location_name: "DurationSinceLastAccess"))
+    ReleaseConfiguration.struct_class = Types::ReleaseConfiguration
 
     ReleaseFileSystemNfsV3LocksRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
     ReleaseFileSystemNfsV3LocksRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
@@ -1607,6 +1628,8 @@ module Aws::FSx
     UpdateFileSystemOpenZFSConfiguration.add_member(:throughput_capacity, Shapes::ShapeRef.new(shape: MegabytesPerSecond, location_name: "ThroughputCapacity"))
     UpdateFileSystemOpenZFSConfiguration.add_member(:weekly_maintenance_start_time, Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
     UpdateFileSystemOpenZFSConfiguration.add_member(:disk_iops_configuration, Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
+    UpdateFileSystemOpenZFSConfiguration.add_member(:add_route_table_ids, Shapes::ShapeRef.new(shape: RouteTableIds, location_name: "AddRouteTableIds"))
+    UpdateFileSystemOpenZFSConfiguration.add_member(:remove_route_table_ids, Shapes::ShapeRef.new(shape: RouteTableIds, location_name: "RemoveRouteTableIds"))
     UpdateFileSystemOpenZFSConfiguration.struct_class = Types::UpdateFileSystemOpenZFSConfiguration
 
     UpdateFileSystemRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
@@ -1616,6 +1639,7 @@ module Aws::FSx
     UpdateFileSystemRequest.add_member(:lustre_configuration, Shapes::ShapeRef.new(shape: UpdateFileSystemLustreConfiguration, location_name: "LustreConfiguration"))
     UpdateFileSystemRequest.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: UpdateFileSystemOntapConfiguration, location_name: "OntapConfiguration"))
     UpdateFileSystemRequest.add_member(:open_zfs_configuration, Shapes::ShapeRef.new(shape: UpdateFileSystemOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
+    UpdateFileSystemRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "StorageType"))
     UpdateFileSystemRequest.struct_class = Types::UpdateFileSystemRequest
 
     UpdateFileSystemResponse.add_member(:file_system, Shapes::ShapeRef.new(shape: FileSystem, location_name: "FileSystem"))
@@ -1627,6 +1651,7 @@ module Aws::FSx
     UpdateFileSystemWindowsConfiguration.add_member(:throughput_capacity, Shapes::ShapeRef.new(shape: MegabytesPerSecond, location_name: "ThroughputCapacity"))
     UpdateFileSystemWindowsConfiguration.add_member(:self_managed_active_directory_configuration, Shapes::ShapeRef.new(shape: SelfManagedActiveDirectoryConfigurationUpdates, location_name: "SelfManagedActiveDirectoryConfiguration"))
     UpdateFileSystemWindowsConfiguration.add_member(:audit_log_configuration, Shapes::ShapeRef.new(shape: WindowsAuditLogCreateConfiguration, location_name: "AuditLogConfiguration"))
+    UpdateFileSystemWindowsConfiguration.add_member(:disk_iops_configuration, Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
     UpdateFileSystemWindowsConfiguration.struct_class = Types::UpdateFileSystemWindowsConfiguration
 
     UpdateOntapVolumeConfiguration.add_member(:junction_path, Shapes::ShapeRef.new(shape: JunctionPath, location_name: "JunctionPath"))
@@ -1739,6 +1764,7 @@ module Aws::FSx
     WindowsFileSystemConfiguration.add_member(:copy_tags_to_backups, Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
     WindowsFileSystemConfiguration.add_member(:aliases, Shapes::ShapeRef.new(shape: Aliases, location_name: "Aliases"))
     WindowsFileSystemConfiguration.add_member(:audit_log_configuration, Shapes::ShapeRef.new(shape: WindowsAuditLogConfiguration, location_name: "AuditLogConfiguration"))
+    WindowsFileSystemConfiguration.add_member(:disk_iops_configuration, Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
     WindowsFileSystemConfiguration.struct_class = Types::WindowsFileSystemConfiguration
 
 

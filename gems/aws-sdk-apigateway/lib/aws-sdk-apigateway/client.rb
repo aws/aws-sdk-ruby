@@ -414,8 +414,8 @@ module Aws::APIGateway
     #   key.
     #
     # @option params [String] :customer_id
-    #   An AWS Marketplace customer identifier , when integrating with the AWS
-    #   SaaS Marketplace.
+    #   An Amazon Web Services Marketplace customer identifier, when
+    #   integrating with the Amazon Web Services SaaS Marketplace.
     #
     # @option params [Hash<String,String>] :tags
     #   The key-value map of strings. The valid character set is
@@ -861,18 +861,18 @@ module Aws::APIGateway
     #   include any intermediaries that are not in the chain of trust path.
     #
     # @option params [String] :certificate_arn
-    #   The reference to an AWS-managed certificate that will be used by
-    #   edge-optimized endpoint for this domain name. AWS Certificate Manager
-    #   is the only supported source.
+    #   The reference to an Amazon Web Services-managed certificate that will
+    #   be used by edge-optimized endpoint for this domain name. Certificate
+    #   Manager is the only supported source.
     #
     # @option params [String] :regional_certificate_name
     #   The user-friendly name of the certificate that will be used by
     #   regional endpoint for this domain name.
     #
     # @option params [String] :regional_certificate_arn
-    #   The reference to an AWS-managed certificate that will be used by
-    #   regional endpoint for this domain name. AWS Certificate Manager is the
-    #   only supported source.
+    #   The reference to an Amazon Web Services-managed certificate that will
+    #   be used by regional endpoint for this domain name. Certificate Manager
+    #   is the only supported source.
     #
     # @option params [Types::EndpointConfiguration] :endpoint_configuration
     #   The endpoint configuration of this DomainName showing the endpoint
@@ -1190,7 +1190,7 @@ module Aws::APIGateway
     #
     # @option params [String] :api_key_source
     #   The source of the API key for metering requests according to a usage
-    #   plan. Valid values are: &gt;`HEADER` to read the API key from the
+    #   plan. Valid values are: `HEADER` to read the API key from the
     #   `X-API-Key` header of a request. `AUTHORIZER` to read the API key from
     #   the `UsageIdentifierKey` from a custom authorizer.
     #
@@ -1229,6 +1229,7 @@ module Aws::APIGateway
     #   * {Types::RestApi#policy #policy} => String
     #   * {Types::RestApi#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::RestApi#disable_execute_api_endpoint #disable_execute_api_endpoint} => Boolean
+    #   * {Types::RestApi#root_resource_id #root_resource_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1272,6 +1273,7 @@ module Aws::APIGateway
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
     #   resp.disable_execute_api_endpoint #=> Boolean
+    #   resp.root_resource_id #=> String
     #
     # @overload create_rest_api(params = {})
     # @param [Hash] params ({})
@@ -1566,8 +1568,8 @@ module Aws::APIGateway
     #
     # @option params [required, Array<String>] :target_arns
     #   The ARN of the network load balancer of the VPC targeted by the VPC
-    #   link. The network load balancer must be owned by the same AWS account
-    #   of the API owner.
+    #   link. The network load balancer must be owned by the same Amazon Web
+    #   Services account of the API owner.
     #
     # @option params [Hash<String,String>] :tags
     #   The key-value map of strings. The valid character set is
@@ -2309,8 +2311,8 @@ module Aws::APIGateway
     #   The name of queried API keys.
     #
     # @option params [String] :customer_id
-    #   The identifier of a customer in AWS Marketplace or an external system,
-    #   such as a developer portal.
+    #   The identifier of a customer in Amazon Web Services Marketplace or an
+    #   external system, such as a developer portal.
     #
     # @option params [Boolean] :include_values
     #   A boolean flag to specify whether (`true`) or not (`false`) the result
@@ -3818,6 +3820,7 @@ module Aws::APIGateway
     #   * {Types::RestApi#policy #policy} => String
     #   * {Types::RestApi#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::RestApi#disable_execute_api_endpoint #disable_execute_api_endpoint} => Boolean
+    #   * {Types::RestApi#root_resource_id #root_resource_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3846,6 +3849,7 @@ module Aws::APIGateway
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
     #   resp.disable_execute_api_endpoint #=> Boolean
+    #   resp.root_resource_id #=> String
     #
     # @overload get_rest_api(params = {})
     # @param [Hash] params ({})
@@ -3900,6 +3904,7 @@ module Aws::APIGateway
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["String"] #=> String
     #   resp.items[0].disable_execute_api_endpoint #=> Boolean
+    #   resp.items[0].root_resource_id #=> String
     #
     # @overload get_rest_apis(params = {})
     # @param [Hash] params ({})
@@ -4607,9 +4612,9 @@ module Aws::APIGateway
     #   The string identifier of the associated RestApi.
     #
     # @option params [String] :mode
-    #   A query parameter to indicate whether to overwrite (`OVERWRITE`) any
-    #   existing DocumentationParts definition or to merge (`MERGE`) the new
-    #   definition into the existing one. The default value is `MERGE`.
+    #   A query parameter to indicate whether to overwrite (`overwrite`) any
+    #   existing DocumentationParts definition or to merge (`merge`) the new
+    #   definition into the existing one. The default value is `merge`.
     #
     # @option params [Boolean] :fail_on_warnings
     #   A query parameter to specify whether to rollback the documentation
@@ -4673,12 +4678,6 @@ module Aws::APIGateway
     #   To handle imported `basepath`, set `parameters` as `basepath=ignore`,
     #   `basepath=prepend` or `basepath=split`.
     #
-    #   For example, the AWS CLI command to exclude documentation from the
-    #   imported API is:
-    #
-    #   The AWS CLI command to set the regional endpoint on the imported API
-    #   is:
-    #
     # @option params [required, String, StringIO, File] :body
     #   The POST request body containing external API definitions. Currently,
     #   only OpenAPI definition JSON/YAML files are supported. The maximum
@@ -4699,6 +4698,7 @@ module Aws::APIGateway
     #   * {Types::RestApi#policy #policy} => String
     #   * {Types::RestApi#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::RestApi#disable_execute_api_endpoint #disable_execute_api_endpoint} => Boolean
+    #   * {Types::RestApi#root_resource_id #root_resource_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -4731,6 +4731,7 @@ module Aws::APIGateway
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
     #   resp.disable_execute_api_endpoint #=> Boolean
+    #   resp.root_resource_id #=> String
     #
     # @overload import_rest_api(params = {})
     # @param [Hash] params ({})
@@ -5337,6 +5338,7 @@ module Aws::APIGateway
     #   * {Types::RestApi#policy #policy} => String
     #   * {Types::RestApi#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::RestApi#disable_execute_api_endpoint #disable_execute_api_endpoint} => Boolean
+    #   * {Types::RestApi#root_resource_id #root_resource_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -5371,6 +5373,7 @@ module Aws::APIGateway
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
     #   resp.disable_execute_api_endpoint #=> Boolean
+    #   resp.root_resource_id #=> String
     #
     # @overload put_rest_api(params = {})
     # @param [Hash] params ({})
@@ -5991,7 +5994,7 @@ module Aws::APIGateway
     # Updates a documentation version.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi..
+    #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :documentation_version
     #   The version identifier of the to-be-updated documentation version.
@@ -6722,6 +6725,7 @@ module Aws::APIGateway
     #   * {Types::RestApi#policy #policy} => String
     #   * {Types::RestApi#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::RestApi#disable_execute_api_endpoint #disable_execute_api_endpoint} => Boolean
+    #   * {Types::RestApi#root_resource_id #root_resource_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -6758,6 +6762,7 @@ module Aws::APIGateway
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
     #   resp.disable_execute_api_endpoint #=> Boolean
+    #   resp.root_resource_id #=> String
     #
     # @overload update_rest_api(params = {})
     # @param [Hash] params ({})
@@ -7055,7 +7060,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

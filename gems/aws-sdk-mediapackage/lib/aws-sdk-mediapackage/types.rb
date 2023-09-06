@@ -1508,7 +1508,7 @@ module Aws::MediaPackage
       :password,
       :url,
       :username)
-      SENSITIVE = []
+      SENSITIVE = [:password, :username]
       include Aws::Structure
     end
 

@@ -602,7 +602,7 @@ module Aws::KafkaConnect
     #   resp = client.create_worker_configuration({
     #     description: "__stringMax1024",
     #     name: "__stringMin1Max128", # required
-    #     properties_file_content: "SyntheticCreateWorkerConfigurationRequest__string", # required
+    #     properties_file_content: "__sensitiveString", # required
     #   })
     #
     # @example Response structure
@@ -1108,7 +1108,7 @@ module Aws::KafkaConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafkaconnect'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -620,6 +620,7 @@ module Aws::EC2
     DeleteIpamScopeRequest = Shapes::StructureShape.new(name: 'DeleteIpamScopeRequest')
     DeleteIpamScopeResult = Shapes::StructureShape.new(name: 'DeleteIpamScopeResult')
     DeleteKeyPairRequest = Shapes::StructureShape.new(name: 'DeleteKeyPairRequest')
+    DeleteKeyPairResult = Shapes::StructureShape.new(name: 'DeleteKeyPairResult')
     DeleteLaunchTemplateRequest = Shapes::StructureShape.new(name: 'DeleteLaunchTemplateRequest')
     DeleteLaunchTemplateResult = Shapes::StructureShape.new(name: 'DeleteLaunchTemplateResult')
     DeleteLaunchTemplateVersionsRequest = Shapes::StructureShape.new(name: 'DeleteLaunchTemplateVersionsRequest')
@@ -2193,6 +2194,7 @@ module Aws::EC2
     PacketHeaderStatement = Shapes::StructureShape.new(name: 'PacketHeaderStatement')
     PacketHeaderStatementRequest = Shapes::StructureShape.new(name: 'PacketHeaderStatementRequest')
     PartitionLoadFrequency = Shapes::StringShape.new(name: 'PartitionLoadFrequency')
+    PasswordData = Shapes::StringShape.new(name: 'PasswordData')
     PathComponent = Shapes::StructureShape.new(name: 'PathComponent')
     PathComponentList = Shapes::ListShape.new(name: 'PathComponentList')
     PathFilter = Shapes::StructureShape.new(name: 'PathFilter')
@@ -2508,6 +2510,8 @@ module Aws::EC2
     S3ObjectTag = Shapes::StructureShape.new(name: 'S3ObjectTag')
     S3ObjectTagList = Shapes::ListShape.new(name: 'S3ObjectTagList')
     S3Storage = Shapes::StructureShape.new(name: 'S3Storage')
+    S3StorageUploadPolicy = Shapes::StringShape.new(name: 'S3StorageUploadPolicy')
+    S3StorageUploadPolicySignature = Shapes::StringShape.new(name: 'S3StorageUploadPolicySignature')
     SSEType = Shapes::StringShape.new(name: 'SSEType')
     ScheduledInstance = Shapes::StructureShape.new(name: 'ScheduledInstance')
     ScheduledInstanceAvailability = Shapes::StructureShape.new(name: 'ScheduledInstanceAvailability')
@@ -2660,6 +2664,8 @@ module Aws::EC2
     SubnetCidrReservationId = Shapes::StringShape.new(name: 'SubnetCidrReservationId')
     SubnetCidrReservationList = Shapes::ListShape.new(name: 'SubnetCidrReservationList')
     SubnetCidrReservationType = Shapes::StringShape.new(name: 'SubnetCidrReservationType')
+    SubnetConfiguration = Shapes::StructureShape.new(name: 'SubnetConfiguration')
+    SubnetConfigurationsList = Shapes::ListShape.new(name: 'SubnetConfigurationsList')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIdStringList = Shapes::ListShape.new(name: 'SubnetIdStringList')
     SubnetIpv6CidrBlockAssociation = Shapes::StructureShape.new(name: 'SubnetIpv6CidrBlockAssociation')
@@ -5243,6 +5249,7 @@ module Aws::EC2
     CreateVpcEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
     CreateVpcEndpointRequest.add_member(:private_dns_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrivateDnsEnabled"))
     CreateVpcEndpointRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateVpcEndpointRequest.add_member(:subnet_configurations, Shapes::ShapeRef.new(shape: SubnetConfigurationsList, location_name: "SubnetConfiguration"))
     CreateVpcEndpointRequest.struct_class = Types::CreateVpcEndpointRequest
 
     CreateVpcEndpointResult.add_member(:vpc_endpoint, Shapes::ShapeRef.new(shape: VpcEndpoint, location_name: "vpcEndpoint"))
@@ -5505,6 +5512,10 @@ module Aws::EC2
     DeleteKeyPairRequest.add_member(:key_pair_id, Shapes::ShapeRef.new(shape: KeyPairId, location_name: "KeyPairId"))
     DeleteKeyPairRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DeleteKeyPairRequest.struct_class = Types::DeleteKeyPairRequest
+
+    DeleteKeyPairResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    DeleteKeyPairResult.add_member(:key_pair_id, Shapes::ShapeRef.new(shape: String, location_name: "keyPairId"))
+    DeleteKeyPairResult.struct_class = Types::DeleteKeyPairResult
 
     DeleteLaunchTemplateRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DeleteLaunchTemplateRequest.add_member(:launch_template_id, Shapes::ShapeRef.new(shape: LaunchTemplateId, location_name: "LaunchTemplateId"))
@@ -8843,7 +8854,7 @@ module Aws::EC2
     GetPasswordDataRequest.struct_class = Types::GetPasswordDataRequest
 
     GetPasswordDataResult.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
-    GetPasswordDataResult.add_member(:password_data, Shapes::ShapeRef.new(shape: String, location_name: "passwordData"))
+    GetPasswordDataResult.add_member(:password_data, Shapes::ShapeRef.new(shape: PasswordData, location_name: "passwordData"))
     GetPasswordDataResult.add_member(:timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "timestamp"))
     GetPasswordDataResult.struct_class = Types::GetPasswordDataResult
 
@@ -11359,6 +11370,7 @@ module Aws::EC2
     ModifyVpcEndpointRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
     ModifyVpcEndpointRequest.add_member(:dns_options, Shapes::ShapeRef.new(shape: DnsOptionsSpecification, location_name: "DnsOptions"))
     ModifyVpcEndpointRequest.add_member(:private_dns_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrivateDnsEnabled"))
+    ModifyVpcEndpointRequest.add_member(:subnet_configurations, Shapes::ShapeRef.new(shape: SubnetConfigurationsList, location_name: "SubnetConfiguration"))
     ModifyVpcEndpointRequest.struct_class = Types::ModifyVpcEndpointRequest
 
     ModifyVpcEndpointResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
@@ -13054,7 +13066,7 @@ module Aws::EC2
     S3Storage.add_member(:bucket, Shapes::ShapeRef.new(shape: String, location_name: "bucket"))
     S3Storage.add_member(:prefix, Shapes::ShapeRef.new(shape: String, location_name: "prefix"))
     S3Storage.add_member(:upload_policy, Shapes::ShapeRef.new(shape: Blob, location_name: "uploadPolicy"))
-    S3Storage.add_member(:upload_policy_signature, Shapes::ShapeRef.new(shape: String, location_name: "uploadPolicySignature"))
+    S3Storage.add_member(:upload_policy_signature, Shapes::ShapeRef.new(shape: S3StorageUploadPolicySignature, location_name: "uploadPolicySignature"))
     S3Storage.struct_class = Types::S3Storage
 
     ScheduledInstance.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
@@ -13733,6 +13745,13 @@ module Aws::EC2
     SubnetCidrReservation.struct_class = Types::SubnetCidrReservation
 
     SubnetCidrReservationList.member = Shapes::ShapeRef.new(shape: SubnetCidrReservation, location_name: "item")
+
+    SubnetConfiguration.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId"))
+    SubnetConfiguration.add_member(:ipv_4, Shapes::ShapeRef.new(shape: String, location_name: "Ipv4"))
+    SubnetConfiguration.add_member(:ipv_6, Shapes::ShapeRef.new(shape: String, location_name: "Ipv6"))
+    SubnetConfiguration.struct_class = Types::SubnetConfiguration
+
+    SubnetConfigurationsList.member = Shapes::ShapeRef.new(shape: SubnetConfiguration, location_name: "item")
 
     SubnetIdStringList.member = Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId")
 
@@ -16244,7 +16263,7 @@ module Aws::EC2
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteKeyPairRequest)
-        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: DeleteKeyPairResult)
       end)
 
       api.add_operation(:delete_launch_template, Seahorse::Model::Operation.new.tap do |o|

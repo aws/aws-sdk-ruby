@@ -931,6 +931,12 @@ module Aws::Appflow
     #         },
     #         sapo_data: {
     #           object_path: "Object",
+    #           parallelism_config: {
+    #             max_parallelism: 1, # required
+    #           },
+    #           pagination_config: {
+    #             max_page_size: 1, # required
+    #           },
     #         },
     #         custom_connector: {
     #           entity_name: "EntityName", # required
@@ -1744,6 +1750,8 @@ module Aws::Appflow
     #   resp.source_flow_config.source_connector_properties.veeva.include_all_versions #=> Boolean
     #   resp.source_flow_config.source_connector_properties.zendesk.object #=> String
     #   resp.source_flow_config.source_connector_properties.sapo_data.object_path #=> String
+    #   resp.source_flow_config.source_connector_properties.sapo_data.parallelism_config.max_parallelism #=> Integer
+    #   resp.source_flow_config.source_connector_properties.sapo_data.pagination_config.max_page_size #=> Integer
     #   resp.source_flow_config.source_connector_properties.custom_connector.entity_name #=> String
     #   resp.source_flow_config.source_connector_properties.custom_connector.custom_properties #=> Hash
     #   resp.source_flow_config.source_connector_properties.custom_connector.custom_properties["CustomPropertyKey"] #=> String
@@ -1937,6 +1945,8 @@ module Aws::Appflow
     #   resp.flow_executions[0].execution_result.bytes_processed #=> Integer
     #   resp.flow_executions[0].execution_result.bytes_written #=> Integer
     #   resp.flow_executions[0].execution_result.records_processed #=> Integer
+    #   resp.flow_executions[0].execution_result.num_parallel_processes #=> Integer
+    #   resp.flow_executions[0].execution_result.max_page_size #=> Integer
     #   resp.flow_executions[0].started_at #=> Time
     #   resp.flow_executions[0].last_updated_at #=> Time
     #   resp.flow_executions[0].data_pull_start_time #=> Time
@@ -3008,6 +3018,12 @@ module Aws::Appflow
     #         },
     #         sapo_data: {
     #           object_path: "Object",
+    #           parallelism_config: {
+    #             max_parallelism: 1, # required
+    #           },
+    #           pagination_config: {
+    #             max_page_size: 1, # required
+    #           },
     #         },
     #         custom_connector: {
     #           entity_name: "EntityName", # required
@@ -3232,7 +3248,7 @@ module Aws::Appflow
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

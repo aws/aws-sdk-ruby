@@ -12,9 +12,16 @@ module Aws::Finspace
 
     # You do not have sufficient access to perform this action.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/AccessDeniedException AWS API Documentation
     #
-    class AccessDeniedException < Aws::EmptyStructure; end
+    class AccessDeniedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The configuration based on which FinSpace will scale in or scale out
     # nodes in your cluster.
@@ -68,8 +75,7 @@ module Aws::Finspace
     end
 
     # A structure for the metadata of a cluster. It includes information
-    # like the CPUs needed, memory of instances, number of instances, and
-    # the port used while establishing a connection.
+    # like the CPUs needed, memory of instances, and number of instances.
     #
     # @!attribute [rw] node_type
     #   The type that determines the hardware of the host computer used for
@@ -451,8 +457,7 @@ module Aws::Finspace
     #
     # @!attribute [rw] capacity_configuration
     #   A structure for the metadata of a cluster. It includes information
-    #   about like the CPUs needed, memory of instances, number of
-    #   instances, and the port used while establishing a connection.
+    #   like the CPUs needed, memory of instances, and number of instances.
     #   @return [Types::CapacityConfiguration]
     #
     # @!attribute [rw] release_label
@@ -615,8 +620,7 @@ module Aws::Finspace
     #
     # @!attribute [rw] capacity_configuration
     #   A structure for the metadata of a cluster. It includes information
-    #   like the CPUs needed, memory of instances, number of instances, and
-    #   the port used while establishing a connection.
+    #   like the CPUs needed, memory of instances, and number of instances.
     #   @return [Types::CapacityConfiguration]
     #
     # @!attribute [rw] release_label
@@ -909,8 +913,11 @@ module Aws::Finspace
     # @!attribute [rw] user_arn
     #   The Amazon Resource Name (ARN) that identifies the user. For more
     #   information about ARNs and how to use ARNs in policies, see [IAM
-    #   Identifiers](IAM/latest/UserGuide/reference_identifiers.html) in the
-    #   *IAM User Guide*.
+    #   Identifiers][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] environment_id
@@ -1408,8 +1415,7 @@ module Aws::Finspace
     #
     # @!attribute [rw] capacity_configuration
     #   A structure for the metadata of a cluster. It includes information
-    #   like the CPUs needed, memory of instances, number of instances, and
-    #   the port used while establishing a connection.
+    #   like the CPUs needed, memory of instances, and number of instances.
     #   @return [Types::CapacityConfiguration]
     #
     # @!attribute [rw] release_label
@@ -1508,8 +1514,11 @@ module Aws::Finspace
     # @!attribute [rw] user_arn
     #   The Amazon Resource Name (ARN) that identifies the user. For more
     #   information about ARNs and how to use ARNs in policies, see [IAM
-    #   Identifiers](IAM/latest/UserGuide/reference_identifiers.html) in the
-    #   *IAM User Guide*.
+    #   Identifiers][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] environment_id
@@ -1756,8 +1765,11 @@ module Aws::Finspace
     # @!attribute [rw] user_arn
     #   The Amazon Resource Name (ARN) that identifies the user. For more
     #   information about ARNs and how to use ARNs in policies, see [IAM
-    #   Identifiers](IAM/latest/UserGuide/reference_identifiers.html) in the
-    #   *IAM User Guide*.
+    #   Identifiers][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] environment_id
@@ -1775,6 +1787,26 @@ module Aws::Finspace
       :user_arn,
       :environment_id,
       :iam_role)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the ICMP protocol that consists of the ICMP type and code.
+    #
+    # @!attribute [rw] type
+    #   The ICMP type. A value of *-1* means all types.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] code
+    #   The ICMP code. A value of *-1* means all codes for the specified
+    #   ICMP type.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/IcmpTypeCode AWS API Documentation
+    #
+    class IcmpTypeCode < Struct.new(
+      :type,
+      :code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1957,7 +1989,7 @@ module Aws::Finspace
     #
     # @!attribute [rw] az_mode
     #   The number of availability zones assigned per cluster. This can be
-    #   one of the following
+    #   one of the following:
     #
     #   * `SINGLE` – Assigns one availability zone per cluster.
     #
@@ -2100,6 +2132,32 @@ module Aws::Finspace
       :database_name,
       :created_timestamp,
       :last_modified_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration that allows you to choose how you want to update the
+    # databases on a cluster. Depending on the option you choose, you can
+    # reduce the time it takes to update the database changesets on to a
+    # cluster.
+    #
+    # @!attribute [rw] deployment_strategy
+    #   The type of deployment that you want on a cluster.
+    #
+    #   * ROLLING – This options loads the updated database by stopping the
+    #     exiting q process and starting a new q process with updated
+    #     configuration.
+    #
+    #   * NO\_RESTART – This option loads the updated database on the
+    #     running q process without stopping it. This option is quicker as
+    #     it reduces the turn around time to update a kdb database changeset
+    #     configuration on a cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/KxDeploymentConfiguration AWS API Documentation
+    #
+    class KxDeploymentConfiguration < Struct.new(
+      :deployment_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2269,7 +2327,7 @@ module Aws::Finspace
     #   @return [String]
     #
     # @!attribute [rw] size
-    #   The size of temporary storage in bytes.
+    #   The size of temporary storage in gibibytes.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/KxSavedownStorageConfiguration AWS API Documentation
@@ -2286,8 +2344,11 @@ module Aws::Finspace
     # @!attribute [rw] user_arn
     #   The Amazon Resource Name (ARN) that identifies the user. For more
     #   information about ARNs and how to use ARNs in policies, see [IAM
-    #   Identifiers](IAM/latest/UserGuide/reference_identifiers.html) in the
-    #   *IAM User Guide*.
+    #   Identifiers][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] user_name
@@ -2655,6 +2716,74 @@ module Aws::Finspace
       include Aws::Structure
     end
 
+    # The network access control list (ACL) is an optional layer of security
+    # for your VPC that acts as a firewall for controlling traffic in and
+    # out of one or more subnets. The entry is a set of numbered ingress and
+    # egress rules that determine whether a packet should be allowed in or
+    # out of a subnet associated with the ACL. We process the entries in the
+    # ACL according to the rule numbers, in ascending order.
+    #
+    # @!attribute [rw] rule_number
+    #   The rule number for the entry. For example *100*. All the network
+    #   ACL entries are processed in ascending order by rule number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol number. A value of *-1* means all the protocols.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_action
+    #   Indicates whether to allow or deny the traffic that matches the
+    #   rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] port_range
+    #   The range of ports the rule applies to.
+    #   @return [Types::PortRange]
+    #
+    # @!attribute [rw] icmp_type_code
+    #   Defines the ICMP protocol that consists of the ICMP type and code.
+    #   @return [Types::IcmpTypeCode]
+    #
+    # @!attribute [rw] cidr_block
+    #   The IPv4 network range to allow or deny, in CIDR notation. For
+    #   example, `172.16.0.0/24`. We modify the specified CIDR block to its
+    #   canonical form. For example, if you specify `100.68.0.18/18`, we
+    #   modify it to `100.68.0.0/18`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/NetworkACLEntry AWS API Documentation
+    #
+    class NetworkACLEntry < Struct.new(
+      :rule_number,
+      :protocol,
+      :rule_action,
+      :port_range,
+      :icmp_type_code,
+      :cidr_block)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The range of ports the rule applies to.
+    #
+    # @!attribute [rw] from
+    #   The first port in the range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] to
+    #   The last port in the range.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/PortRange AWS API Documentation
+    #
+    class PortRange < Struct.new(
+      :from,
+      :to)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified resource group already exists.
     #
     # @!attribute [rw] message
@@ -2743,9 +2872,16 @@ module Aws::Finspace
 
     # The request was denied due to request throttling.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/ThrottlingException AWS API Documentation
     #
-    class ThrottlingException < Aws::EmptyStructure; end
+    class ThrottlingException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The structure of the transit gateway and network configuration that is
     # used to connect the kdb environment to an internal network.
@@ -2762,11 +2898,17 @@ module Aws::Finspace
     #   traffics could be routed to kdb network.
     #   @return [String]
     #
+    # @!attribute [rw] attachment_network_acl_configuration
+    #   The rules that define how you manage the outbound traffic from kdb
+    #   network to your internal network.
+    #   @return [Array<Types::NetworkACLEntry>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/TransitGatewayConfiguration AWS API Documentation
     #
     class TransitGatewayConfiguration < Struct.new(
       :transit_gateway_id,
-      :routable_cidr_space)
+      :routable_cidr_space,
+      :attachment_network_acl_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2853,11 +2995,19 @@ module Aws::Finspace
     #
     # @!attribute [rw] client_token
     #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] databases
     #   The structure of databases mounted on the cluster.
     #   @return [Array<Types::KxDatabaseConfiguration>]
+    #
+    # @!attribute [rw] deployment_configuration
+    #   The configuration that allows you to choose how you want to update
+    #   the databases on a cluster.
+    #   @return [Types::KxDeploymentConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/UpdateKxClusterDatabasesRequest AWS API Documentation
     #
@@ -2865,7 +3015,8 @@ module Aws::Finspace
       :environment_id,
       :cluster_name,
       :client_token,
-      :databases)
+      :databases,
+      :deployment_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3206,8 +3357,11 @@ module Aws::Finspace
     # @!attribute [rw] user_arn
     #   The Amazon Resource Name (ARN) that identifies the user. For more
     #   information about ARNs and how to use ARNs in policies, see [IAM
-    #   Identifiers](IAM/latest/UserGuide/reference_identifiers.html) in the
-    #   *IAM User Guide*.
+    #   Identifiers][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] environment_id

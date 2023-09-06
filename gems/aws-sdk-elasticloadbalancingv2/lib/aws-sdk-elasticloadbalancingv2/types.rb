@@ -546,8 +546,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::SubnetMapping>]
     #
     # @!attribute [rw] security_groups
-    #   \[Application Load Balancers\] The IDs of the security groups for
-    #   the load balancer.
+    #   \[Application Load Balancers and Network Load Balancers\] The IDs of
+    #   the security groups for the load balancer.
     #   @return [Array<String>]
     #
     # @!attribute [rw] scheme
@@ -1557,6 +1557,20 @@ module Aws::ElasticLoadBalancingV2
     # Information about an Elastic Load Balancing resource limit for your
     # Amazon Web Services account.
     #
+    # For more information, see the following:
+    #
+    # * [Quotas for your Application Load Balancers][1]
+    #
+    # * [Quotas for your Network Load Balancers][2]
+    #
+    # * [Quotas for your Gateway Load Balancers][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-limits.html
+    # [3]: https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/quotas-limits.html
+    #
     # @!attribute [rw] name
     #   The name of the limit. The possible values are:
     #
@@ -1735,6 +1749,12 @@ module Aws::ElasticLoadBalancingV2
     #   customer-owned address pool.
     #   @return [String]
     #
+    # @!attribute [rw] enforce_security_group_inbound_rules_on_private_link_traffic
+    #   Indicates whether to evaluate inbound security group rules for
+    #   traffic sent to a Network Load Balancer through Amazon Web Services
+    #   PrivateLink.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/LoadBalancer AWS API Documentation
     #
     class LoadBalancer < Struct.new(
@@ -1750,7 +1770,8 @@ module Aws::ElasticLoadBalancingV2
       :availability_zones,
       :security_groups,
       :ip_address_type,
-      :customer_owned_ipv_4_pool)
+      :customer_owned_ipv_4_pool,
+      :enforce_security_group_inbound_rules_on_private_link_traffic)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2515,6 +2536,13 @@ module Aws::ElasticLoadBalancingV2
     # of the following conditions: `http-header` and `query-string`. Note
     # that the value for a condition cannot be empty.
     #
+    # For more information, see [Quotas for your Application Load
+    # Balancers][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html
+    #
     # @!attribute [rw] field
     #   The field in the HTTP request. The following are the possible
     #   values:
@@ -2709,11 +2737,18 @@ module Aws::ElasticLoadBalancingV2
     #   The IDs of the security groups.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] enforce_security_group_inbound_rules_on_private_link_traffic
+    #   Indicates whether to evaluate inbound security group rules for
+    #   traffic sent to a Network Load Balancer through Amazon Web Services
+    #   PrivateLink. The default is `on`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSecurityGroupsInput AWS API Documentation
     #
     class SetSecurityGroupsInput < Struct.new(
       :load_balancer_arn,
-      :security_groups)
+      :security_groups,
+      :enforce_security_group_inbound_rules_on_private_link_traffic)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2722,10 +2757,17 @@ module Aws::ElasticLoadBalancingV2
     #   The IDs of the security groups associated with the load balancer.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] enforce_security_group_inbound_rules_on_private_link_traffic
+    #   Indicates whether to evaluate inbound security group rules for
+    #   traffic sent to a Network Load Balancer through Amazon Web Services
+    #   PrivateLink.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSecurityGroupsOutput AWS API Documentation
     #
     class SetSecurityGroupsOutput < Struct.new(
-      :security_group_ids)
+      :security_group_ids,
+      :enforce_security_group_inbound_rules_on_private_link_traffic)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2781,7 +2823,7 @@ module Aws::ElasticLoadBalancingV2
     #   subnets for your load balancer. The possible values are `ipv4` (for
     #   IPv4 addresses) and `dualstack` (for IPv4 and IPv6 addresses). You
     #   can’t specify `dualstack` for a load balancer with a UDP or TCP\_UDP
-    #   listener. .
+    #   listener.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSubnetsInput AWS API Documentation
@@ -2956,8 +2998,8 @@ module Aws::ElasticLoadBalancingV2
     #   The port on which the target is listening. If the target group
     #   protocol is GENEVE, the supported port is 6081. If the target type
     #   is `alb`, the targeted Application Load Balancer must have at least
-    #   one listener whose port matches the target group port. Not used if
-    #   the target is a Lambda function.
+    #   one listener whose port matches the target group port. This
+    #   parameter is not used if the target is a Lambda function.
     #   @return [Integer]
     #
     # @!attribute [rw] availability_zone
@@ -3013,8 +3055,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] port
-    #   The port on which the targets are listening. Not used if the target
-    #   is a Lambda function.
+    #   The port on which the targets are listening. This parameter is not
+    #   used if the target is a Lambda function.
     #   @return [Integer]
     #
     # @!attribute [rw] vpc_id
@@ -3064,8 +3106,9 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Types::Matcher]
     #
     # @!attribute [rw] load_balancer_arns
-    #   The Amazon Resource Names (ARN) of the load balancers that route
-    #   traffic to this target group.
+    #   The Amazon Resource Name (ARN) of the load balancer that routes
+    #   traffic to this target group. You can use each target group with
+    #   only one load balancer.
     #   @return [Array<String>]
     #
     # @!attribute [rw] target_type

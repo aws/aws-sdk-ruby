@@ -623,8 +623,7 @@ module Aws::Finspace
     #
     # @option params [required, Types::CapacityConfiguration] :capacity_configuration
     #   A structure for the metadata of a cluster. It includes information
-    #   about like the CPUs needed, memory of instances, number of instances,
-    #   and the port used while establishing a connection.
+    #   like the CPUs needed, memory of instances, and number of instances.
     #
     # @option params [required, String] :release_label
     #   The version of FinSpace managed kdb to run.
@@ -1341,8 +1340,11 @@ module Aws::Finspace
     # @option params [required, String] :user_arn
     #   The Amazon Resource Name (ARN) that identifies the user. For more
     #   information about ARNs and how to use ARNs in policies, see [IAM
-    #   Identifiers](IAM/latest/UserGuide/reference_identifiers.html) in the
-    #   *IAM User Guide*.
+    #   Identifiers][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #
     # @option params [required, String] :environment_id
     #   A unique identifier for the kdb environment.
@@ -1471,6 +1473,15 @@ module Aws::Finspace
     #   resp.dedicated_service_account_id #=> String
     #   resp.transit_gateway_configuration.transit_gateway_id #=> String
     #   resp.transit_gateway_configuration.routable_cidr_space #=> String
+    #   resp.transit_gateway_configuration.attachment_network_acl_configuration #=> Array
+    #   resp.transit_gateway_configuration.attachment_network_acl_configuration[0].rule_number #=> Integer
+    #   resp.transit_gateway_configuration.attachment_network_acl_configuration[0].protocol #=> String
+    #   resp.transit_gateway_configuration.attachment_network_acl_configuration[0].rule_action #=> String, one of "allow", "deny"
+    #   resp.transit_gateway_configuration.attachment_network_acl_configuration[0].port_range.from #=> Integer
+    #   resp.transit_gateway_configuration.attachment_network_acl_configuration[0].port_range.to #=> Integer
+    #   resp.transit_gateway_configuration.attachment_network_acl_configuration[0].icmp_type_code.type #=> Integer
+    #   resp.transit_gateway_configuration.attachment_network_acl_configuration[0].icmp_type_code.code #=> Integer
+    #   resp.transit_gateway_configuration.attachment_network_acl_configuration[0].cidr_block #=> String
     #   resp.custom_dns_configuration #=> Array
     #   resp.custom_dns_configuration[0].custom_dns_server_name #=> String
     #   resp.custom_dns_configuration[0].custom_dns_server_ip #=> String
@@ -1831,6 +1842,15 @@ module Aws::Finspace
     #   resp.environments[0].dedicated_service_account_id #=> String
     #   resp.environments[0].transit_gateway_configuration.transit_gateway_id #=> String
     #   resp.environments[0].transit_gateway_configuration.routable_cidr_space #=> String
+    #   resp.environments[0].transit_gateway_configuration.attachment_network_acl_configuration #=> Array
+    #   resp.environments[0].transit_gateway_configuration.attachment_network_acl_configuration[0].rule_number #=> Integer
+    #   resp.environments[0].transit_gateway_configuration.attachment_network_acl_configuration[0].protocol #=> String
+    #   resp.environments[0].transit_gateway_configuration.attachment_network_acl_configuration[0].rule_action #=> String, one of "allow", "deny"
+    #   resp.environments[0].transit_gateway_configuration.attachment_network_acl_configuration[0].port_range.from #=> Integer
+    #   resp.environments[0].transit_gateway_configuration.attachment_network_acl_configuration[0].port_range.to #=> Integer
+    #   resp.environments[0].transit_gateway_configuration.attachment_network_acl_configuration[0].icmp_type_code.type #=> Integer
+    #   resp.environments[0].transit_gateway_configuration.attachment_network_acl_configuration[0].icmp_type_code.code #=> Integer
+    #   resp.environments[0].transit_gateway_configuration.attachment_network_acl_configuration[0].cidr_block #=> String
     #   resp.environments[0].custom_dns_configuration #=> Array
     #   resp.environments[0].custom_dns_configuration[0].custom_dns_server_name #=> String
     #   resp.environments[0].custom_dns_configuration[0].custom_dns_server_ip #=> String
@@ -2070,8 +2090,15 @@ module Aws::Finspace
     # @option params [String] :client_token
     #   A token that ensures idempotency. This token expires in 10 minutes.
     #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @option params [required, Array<Types::KxDatabaseConfiguration>] :databases
     #   The structure of databases mounted on the cluster.
+    #
+    # @option params [Types::KxDeploymentConfiguration] :deployment_configuration
+    #   The configuration that allows you to choose how you want to update the
+    #   databases on a cluster.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2093,6 +2120,9 @@ module Aws::Finspace
     #         changeset_id: "ChangesetId",
     #       },
     #     ],
+    #     deployment_configuration: {
+    #       deployment_strategy: "NO_RESTART", # required, accepts NO_RESTART, ROLLING
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/UpdateKxClusterDatabases AWS API Documentation
@@ -2210,6 +2240,15 @@ module Aws::Finspace
     #   resp.dedicated_service_account_id #=> String
     #   resp.transit_gateway_configuration.transit_gateway_id #=> String
     #   resp.transit_gateway_configuration.routable_cidr_space #=> String
+    #   resp.transit_gateway_configuration.attachment_network_acl_configuration #=> Array
+    #   resp.transit_gateway_configuration.attachment_network_acl_configuration[0].rule_number #=> Integer
+    #   resp.transit_gateway_configuration.attachment_network_acl_configuration[0].protocol #=> String
+    #   resp.transit_gateway_configuration.attachment_network_acl_configuration[0].rule_action #=> String, one of "allow", "deny"
+    #   resp.transit_gateway_configuration.attachment_network_acl_configuration[0].port_range.from #=> Integer
+    #   resp.transit_gateway_configuration.attachment_network_acl_configuration[0].port_range.to #=> Integer
+    #   resp.transit_gateway_configuration.attachment_network_acl_configuration[0].icmp_type_code.type #=> Integer
+    #   resp.transit_gateway_configuration.attachment_network_acl_configuration[0].icmp_type_code.code #=> Integer
+    #   resp.transit_gateway_configuration.attachment_network_acl_configuration[0].cidr_block #=> String
     #   resp.custom_dns_configuration #=> Array
     #   resp.custom_dns_configuration[0].custom_dns_server_name #=> String
     #   resp.custom_dns_configuration[0].custom_dns_server_ip #=> String
@@ -2276,6 +2315,22 @@ module Aws::Finspace
     #     transit_gateway_configuration: {
     #       transit_gateway_id: "TransitGatewayID", # required
     #       routable_cidr_space: "ValidCIDRSpace", # required
+    #       attachment_network_acl_configuration: [
+    #         {
+    #           rule_number: 1, # required
+    #           protocol: "Protocol", # required
+    #           rule_action: "allow", # required, accepts allow, deny
+    #           port_range: {
+    #             from: 1, # required
+    #             to: 1, # required
+    #           },
+    #           icmp_type_code: {
+    #             type: 1, # required
+    #             code: 1, # required
+    #           },
+    #           cidr_block: "ValidCIDRBlock", # required
+    #         },
+    #       ],
     #     },
     #     custom_dns_configuration: [
     #       {
@@ -2301,6 +2356,15 @@ module Aws::Finspace
     #   resp.dedicated_service_account_id #=> String
     #   resp.transit_gateway_configuration.transit_gateway_id #=> String
     #   resp.transit_gateway_configuration.routable_cidr_space #=> String
+    #   resp.transit_gateway_configuration.attachment_network_acl_configuration #=> Array
+    #   resp.transit_gateway_configuration.attachment_network_acl_configuration[0].rule_number #=> Integer
+    #   resp.transit_gateway_configuration.attachment_network_acl_configuration[0].protocol #=> String
+    #   resp.transit_gateway_configuration.attachment_network_acl_configuration[0].rule_action #=> String, one of "allow", "deny"
+    #   resp.transit_gateway_configuration.attachment_network_acl_configuration[0].port_range.from #=> Integer
+    #   resp.transit_gateway_configuration.attachment_network_acl_configuration[0].port_range.to #=> Integer
+    #   resp.transit_gateway_configuration.attachment_network_acl_configuration[0].icmp_type_code.type #=> Integer
+    #   resp.transit_gateway_configuration.attachment_network_acl_configuration[0].icmp_type_code.code #=> Integer
+    #   resp.transit_gateway_configuration.attachment_network_acl_configuration[0].cidr_block #=> String
     #   resp.custom_dns_configuration #=> Array
     #   resp.custom_dns_configuration[0].custom_dns_server_name #=> String
     #   resp.custom_dns_configuration[0].custom_dns_server_ip #=> String
@@ -2378,7 +2442,7 @@ module Aws::Finspace
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-finspace'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

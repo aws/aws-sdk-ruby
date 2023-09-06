@@ -686,9 +686,9 @@ module Aws::QuickSight
     #
     #   resp = client.create_account_subscription({
     #     edition: "STANDARD", # required, accepts STANDARD, ENTERPRISE, ENTERPRISE_AND_Q
-    #     authentication_method: "IAM_AND_QUICKSIGHT", # required, accepts IAM_AND_QUICKSIGHT, IAM_ONLY, ACTIVE_DIRECTORY
+    #     authentication_method: "IAM_AND_QUICKSIGHT", # required, accepts IAM_AND_QUICKSIGHT, IAM_ONLY, ACTIVE_DIRECTORY, IAM_IDENTITY_CENTER
     #     aws_account_id: "AwsAccountId", # required
-    #     account_name: "String", # required
+    #     account_name: "AccountName", # required
     #     notification_email: "String", # required
     #     active_directory_name: "String",
     #     realm: "String",
@@ -1568,6 +1568,10 @@ module Aws::QuickSight
     # @option params [Array<Types::Tag>] :tags
     #   Tags for the folder.
     #
+    # @option params [String] :sharing_model
+    #   An optional parameter that determines the sharing scope of the folder.
+    #   The default value for this parameter is `ACCOUNT`.
+    #
     # @return [Types::CreateFolderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFolderResponse#status #status} => Integer
@@ -1595,6 +1599,7 @@ module Aws::QuickSight
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     sharing_model: "ACCOUNT", # accepts ACCOUNT, NAMESPACE
     #   })
     #
     # @example Response structure
@@ -1623,11 +1628,10 @@ module Aws::QuickSight
     #   The ID of the folder.
     #
     # @option params [required, String] :member_id
-    #   The ID of the asset (the dashboard, analysis, or dataset).
+    #   The ID of the asset that you want to add to the folder.
     #
     # @option params [required, String] :member_type
-    #   The type of the member, including `DASHBOARD`, `ANALYSIS`, and
-    #   `DATASET`.
+    #   The member type of the asset that you want to add to a folder.
     #
     # @return [Types::CreateFolderMembershipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2474,7 +2478,7 @@ module Aws::QuickSight
     #               column_description: "LimitedString",
     #               column_synonyms: ["LimitedString"],
     #               column_data_role: "DIMENSION", # accepts DIMENSION, MEASURE
-    #               aggregation: "SUM", # accepts SUM, MAX, MIN, COUNT, DISTINCT_COUNT, AVERAGE
+    #               aggregation: "SUM", # accepts SUM, MAX, MIN, COUNT, DISTINCT_COUNT, AVERAGE, MEDIAN, STDEV, STDEVP, VAR, VARP
     #               is_included_in_topic: false,
     #               disable_indexing: false,
     #               comparative_order: {
@@ -2523,6 +2527,7 @@ module Aws::QuickSight
     #                   synonyms: ["String"],
     #                 },
     #               ],
+    #               non_additive: false,
     #             },
     #           ],
     #           calculated_fields: [
@@ -2555,7 +2560,7 @@ module Aws::QuickSight
     #                   currency_symbol: "LimitedString",
     #                 },
     #               },
-    #               aggregation: "SUM", # accepts SUM, MAX, MIN, COUNT, DISTINCT_COUNT, AVERAGE
+    #               aggregation: "SUM", # accepts SUM, MAX, MIN, COUNT, DISTINCT_COUNT, AVERAGE, MEDIAN, STDEV, STDEVP, VAR, VARP
     #               comparative_order: {
     #                 use_ordering: "GREATER_IS_BETTER", # accepts GREATER_IS_BETTER, LESSER_IS_BETTER, SPECIFIED
     #                 specifed_order: ["String"],
@@ -2581,6 +2586,7 @@ module Aws::QuickSight
     #                   synonyms: ["String"],
     #                 },
     #               ],
+    #               non_additive: false,
     #             },
     #           ],
     #           named_entities: [
@@ -3128,12 +3134,10 @@ module Aws::QuickSight
     #   The Folder ID.
     #
     # @option params [required, String] :member_id
-    #   The ID of the asset (the dashboard, analysis, or dataset) that you
-    #   want to delete.
+    #   The ID of the asset that you want to delete.
     #
     # @option params [required, String] :member_type
-    #   The type of the member, including `DASHBOARD`, `ANALYSIS`, and
-    #   `DATASET`
+    #   The member type of the asset that you want to delete from a folder.
     #
     # @return [Types::DeleteFolderMembershipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3951,6 +3955,7 @@ module Aws::QuickSight
     #   resp.account_info.notification_email #=> String
     #   resp.account_info.authentication_type #=> String
     #   resp.account_info.account_subscription_status #=> String
+    #   resp.account_info.iam_identity_center_instance_arn #=> String
     #   resp.status #=> Integer
     #   resp.request_id #=> String
     #
@@ -4594,7 +4599,7 @@ module Aws::QuickSight
     #   resp.snapshot_configuration.file_groups[0].files[0].sheet_selections[0].selection_scope #=> String, one of "ALL_VISUALS", "SELECTED_VISUALS"
     #   resp.snapshot_configuration.file_groups[0].files[0].sheet_selections[0].visual_ids #=> Array
     #   resp.snapshot_configuration.file_groups[0].files[0].sheet_selections[0].visual_ids[0] #=> String
-    #   resp.snapshot_configuration.file_groups[0].files[0].format_type #=> String, one of "CSV", "PDF"
+    #   resp.snapshot_configuration.file_groups[0].files[0].format_type #=> String, one of "CSV", "PDF", "EXCEL"
     #   resp.snapshot_configuration.destination_configuration.s3_destinations #=> Array
     #   resp.snapshot_configuration.destination_configuration.s3_destinations[0].bucket_configuration.bucket_name #=> String
     #   resp.snapshot_configuration.destination_configuration.s3_destinations[0].bucket_configuration.bucket_prefix #=> String
@@ -4685,7 +4690,7 @@ module Aws::QuickSight
     #   resp.result.anonymous_users[0].file_groups[0].files[0].sheet_selections[0].selection_scope #=> String, one of "ALL_VISUALS", "SELECTED_VISUALS"
     #   resp.result.anonymous_users[0].file_groups[0].files[0].sheet_selections[0].visual_ids #=> Array
     #   resp.result.anonymous_users[0].file_groups[0].files[0].sheet_selections[0].visual_ids[0] #=> String
-    #   resp.result.anonymous_users[0].file_groups[0].files[0].format_type #=> String, one of "CSV", "PDF"
+    #   resp.result.anonymous_users[0].file_groups[0].files[0].format_type #=> String, one of "CSV", "PDF", "EXCEL"
     #   resp.result.anonymous_users[0].file_groups[0].s3_results #=> Array
     #   resp.result.anonymous_users[0].file_groups[0].s3_results[0].s3_destination_configuration.bucket_configuration.bucket_name #=> String
     #   resp.result.anonymous_users[0].file_groups[0].s3_results[0].s3_destination_configuration.bucket_configuration.bucket_prefix #=> String
@@ -5191,6 +5196,7 @@ module Aws::QuickSight
     #   resp.folder.folder_path[0] #=> String
     #   resp.folder.created_time #=> Time
     #   resp.folder.last_updated_time #=> Time
+    #   resp.folder.sharing_model #=> String, one of "ACCOUNT", "NAMESPACE"
     #   resp.request_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolder AWS API Documentation
@@ -5210,6 +5216,15 @@ module Aws::QuickSight
     # @option params [required, String] :folder_id
     #   The ID of the folder.
     #
+    # @option params [String] :namespace
+    #   The namespace of the folder whose permissions you want described.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per request.
+    #
+    # @option params [String] :next_token
+    #   A pagination token for the next set of results.
+    #
     # @return [Types::DescribeFolderPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeFolderPermissionsResponse#status #status} => Integer
@@ -5217,12 +5232,18 @@ module Aws::QuickSight
     #   * {Types::DescribeFolderPermissionsResponse#arn #arn} => String
     #   * {Types::DescribeFolderPermissionsResponse#permissions #permissions} => Array&lt;Types::ResourcePermission&gt;
     #   * {Types::DescribeFolderPermissionsResponse#request_id #request_id} => String
+    #   * {Types::DescribeFolderPermissionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_folder_permissions({
     #     aws_account_id: "AwsAccountId", # required
     #     folder_id: "RestrictiveResourceId", # required
+    #     namespace: "Namespace",
+    #     max_results: 1,
+    #     next_token: "String",
     #   })
     #
     # @example Response structure
@@ -5235,6 +5256,7 @@ module Aws::QuickSight
     #   resp.permissions[0].actions #=> Array
     #   resp.permissions[0].actions[0] #=> String
     #   resp.request_id #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderPermissions AWS API Documentation
     #
@@ -5255,6 +5277,15 @@ module Aws::QuickSight
     # @option params [required, String] :folder_id
     #   The ID of the folder.
     #
+    # @option params [String] :namespace
+    #   The namespace of the folder whose permissions you want described.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per request.
+    #
+    # @option params [String] :next_token
+    #   A pagination token for the next set of results.
+    #
     # @return [Types::DescribeFolderResolvedPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeFolderResolvedPermissionsResponse#status #status} => Integer
@@ -5262,12 +5293,18 @@ module Aws::QuickSight
     #   * {Types::DescribeFolderResolvedPermissionsResponse#arn #arn} => String
     #   * {Types::DescribeFolderResolvedPermissionsResponse#permissions #permissions} => Array&lt;Types::ResourcePermission&gt;
     #   * {Types::DescribeFolderResolvedPermissionsResponse#request_id #request_id} => String
+    #   * {Types::DescribeFolderResolvedPermissionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_folder_resolved_permissions({
     #     aws_account_id: "AwsAccountId", # required
     #     folder_id: "RestrictiveResourceId", # required
+    #     namespace: "Namespace",
+    #     max_results: 1,
+    #     next_token: "String",
     #   })
     #
     # @example Response structure
@@ -5280,6 +5317,7 @@ module Aws::QuickSight
     #   resp.permissions[0].actions #=> Array
     #   resp.permissions[0].actions[0] #=> String
     #   resp.request_id #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderResolvedPermissions AWS API Documentation
     #
@@ -6100,7 +6138,7 @@ module Aws::QuickSight
     #   resp.topic.data_sets[0].columns[0].column_synonyms #=> Array
     #   resp.topic.data_sets[0].columns[0].column_synonyms[0] #=> String
     #   resp.topic.data_sets[0].columns[0].column_data_role #=> String, one of "DIMENSION", "MEASURE"
-    #   resp.topic.data_sets[0].columns[0].aggregation #=> String, one of "SUM", "MAX", "MIN", "COUNT", "DISTINCT_COUNT", "AVERAGE"
+    #   resp.topic.data_sets[0].columns[0].aggregation #=> String, one of "SUM", "MAX", "MIN", "COUNT", "DISTINCT_COUNT", "AVERAGE", "MEDIAN", "STDEV", "STDEVP", "VAR", "VARP"
     #   resp.topic.data_sets[0].columns[0].is_included_in_topic #=> Boolean
     #   resp.topic.data_sets[0].columns[0].disable_indexing #=> Boolean
     #   resp.topic.data_sets[0].columns[0].comparative_order.use_ordering #=> String, one of "GREATER_IS_BETTER", "LESSER_IS_BETTER", "SPECIFIED"
@@ -6141,6 +6179,7 @@ module Aws::QuickSight
     #   resp.topic.data_sets[0].columns[0].cell_value_synonyms[0].cell_value #=> String
     #   resp.topic.data_sets[0].columns[0].cell_value_synonyms[0].synonyms #=> Array
     #   resp.topic.data_sets[0].columns[0].cell_value_synonyms[0].synonyms[0] #=> String
+    #   resp.topic.data_sets[0].columns[0].non_additive #=> Boolean
     #   resp.topic.data_sets[0].calculated_fields #=> Array
     #   resp.topic.data_sets[0].calculated_fields[0].calculated_field_name #=> String
     #   resp.topic.data_sets[0].calculated_fields[0].calculated_field_description #=> String
@@ -6165,7 +6204,7 @@ module Aws::QuickSight
     #   resp.topic.data_sets[0].calculated_fields[0].default_formatting.display_format_options.negative_format.prefix #=> String
     #   resp.topic.data_sets[0].calculated_fields[0].default_formatting.display_format_options.negative_format.suffix #=> String
     #   resp.topic.data_sets[0].calculated_fields[0].default_formatting.display_format_options.currency_symbol #=> String
-    #   resp.topic.data_sets[0].calculated_fields[0].aggregation #=> String, one of "SUM", "MAX", "MIN", "COUNT", "DISTINCT_COUNT", "AVERAGE"
+    #   resp.topic.data_sets[0].calculated_fields[0].aggregation #=> String, one of "SUM", "MAX", "MIN", "COUNT", "DISTINCT_COUNT", "AVERAGE", "MEDIAN", "STDEV", "STDEVP", "VAR", "VARP"
     #   resp.topic.data_sets[0].calculated_fields[0].comparative_order.use_ordering #=> String, one of "GREATER_IS_BETTER", "LESSER_IS_BETTER", "SPECIFIED"
     #   resp.topic.data_sets[0].calculated_fields[0].comparative_order.specifed_order #=> Array
     #   resp.topic.data_sets[0].calculated_fields[0].comparative_order.specifed_order[0] #=> String
@@ -6189,6 +6228,7 @@ module Aws::QuickSight
     #   resp.topic.data_sets[0].calculated_fields[0].cell_value_synonyms[0].cell_value #=> String
     #   resp.topic.data_sets[0].calculated_fields[0].cell_value_synonyms[0].synonyms #=> Array
     #   resp.topic.data_sets[0].calculated_fields[0].cell_value_synonyms[0].synonyms[0] #=> String
+    #   resp.topic.data_sets[0].calculated_fields[0].non_additive #=> Boolean
     #   resp.topic.data_sets[0].named_entities #=> Array
     #   resp.topic.data_sets[0].named_entities[0].entity_name #=> String
     #   resp.topic.data_sets[0].named_entities[0].entity_description #=> String
@@ -6394,7 +6434,7 @@ module Aws::QuickSight
     #   resp.user.user_name #=> String
     #   resp.user.email #=> String
     #   resp.user.role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER"
-    #   resp.user.identity_type #=> String, one of "IAM", "QUICKSIGHT"
+    #   resp.user.identity_type #=> String, one of "IAM", "QUICKSIGHT", "IAM_IDENTITY_CENTER"
     #   resp.user.active #=> Boolean
     #   resp.user.principal_id #=> String
     #   resp.user.custom_permissions_name #=> String
@@ -7482,6 +7522,8 @@ module Aws::QuickSight
     #   * {Types::ListFolderMembersResponse#next_token #next_token} => String
     #   * {Types::ListFolderMembersResponse#request_id #request_id} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_folder_members({
@@ -7528,6 +7570,8 @@ module Aws::QuickSight
     #   * {Types::ListFoldersResponse#next_token #next_token} => String
     #   * {Types::ListFoldersResponse#request_id #request_id} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_folders({
@@ -7546,6 +7590,7 @@ module Aws::QuickSight
     #   resp.folder_summary_list[0].folder_type #=> String, one of "SHARED"
     #   resp.folder_summary_list[0].created_time #=> Time
     #   resp.folder_summary_list[0].last_updated_time #=> Time
+    #   resp.folder_summary_list[0].sharing_model #=> String, one of "ACCOUNT", "NAMESPACE"
     #   resp.next_token #=> String
     #   resp.request_id #=> String
     #
@@ -8523,7 +8568,7 @@ module Aws::QuickSight
     #   resp.user_list[0].user_name #=> String
     #   resp.user_list[0].email #=> String
     #   resp.user_list[0].role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER"
-    #   resp.user_list[0].identity_type #=> String, one of "IAM", "QUICKSIGHT"
+    #   resp.user_list[0].identity_type #=> String, one of "IAM", "QUICKSIGHT", "IAM_IDENTITY_CENTER"
     #   resp.user_list[0].active #=> Boolean
     #   resp.user_list[0].principal_id #=> String
     #   resp.user_list[0].custom_permissions_name #=> String
@@ -8796,7 +8841,7 @@ module Aws::QuickSight
     # @example Request syntax with placeholder values
     #
     #   resp = client.register_user({
-    #     identity_type: "IAM", # required, accepts IAM, QUICKSIGHT
+    #     identity_type: "IAM", # required, accepts IAM, QUICKSIGHT, IAM_IDENTITY_CENTER
     #     email: "String", # required
     #     user_role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER, RESTRICTED_AUTHOR, RESTRICTED_READER
     #     iam_arn: "String",
@@ -8816,7 +8861,7 @@ module Aws::QuickSight
     #   resp.user.user_name #=> String
     #   resp.user.email #=> String
     #   resp.user.role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER"
-    #   resp.user.identity_type #=> String, one of "IAM", "QUICKSIGHT"
+    #   resp.user.identity_type #=> String, one of "IAM", "QUICKSIGHT", "IAM_IDENTITY_CENTER"
     #   resp.user.active #=> Boolean
     #   resp.user.principal_id #=> String
     #   resp.user.custom_permissions_name #=> String
@@ -9166,6 +9211,8 @@ module Aws::QuickSight
     #   * {Types::SearchFoldersResponse#next_token #next_token} => String
     #   * {Types::SearchFoldersResponse#request_id #request_id} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_folders({
@@ -9191,6 +9238,7 @@ module Aws::QuickSight
     #   resp.folder_summary_list[0].folder_type #=> String, one of "SHARED"
     #   resp.folder_summary_list[0].created_time #=> Time
     #   resp.folder_summary_list[0].last_updated_time #=> Time
+    #   resp.folder_summary_list[0].sharing_model #=> String, one of "ACCOUNT", "NAMESPACE"
     #   resp.next_token #=> String
     #   resp.request_id #=> String
     #
@@ -9657,7 +9705,13 @@ module Aws::QuickSight
     end
 
     # Starts an asynchronous job that generates a dashboard snapshot. You
-    # can request up to one paginated PDF and up to five CSVs per API call.
+    # can request one of the following format configurations per API call.
+    #
+    # * 1 paginated PDF
+    #
+    # * 1 Excel workbook
+    #
+    # * 5 CSVs
     #
     # Poll job descriptions with a `DescribeDashboardSnapshotJob` API call.
     # Once the job succeeds, use the `DescribeDashboardSnapshotJobResult`
@@ -9723,7 +9777,7 @@ module Aws::QuickSight
     #                   visual_ids: ["ShortRestrictiveResourceId"],
     #                 },
     #               ],
-    #               format_type: "CSV", # required, accepts CSV, PDF
+    #               format_type: "CSV", # required, accepts CSV, PDF, EXCEL
     #             },
     #           ],
     #         },
@@ -11974,7 +12028,7 @@ module Aws::QuickSight
     #               column_description: "LimitedString",
     #               column_synonyms: ["LimitedString"],
     #               column_data_role: "DIMENSION", # accepts DIMENSION, MEASURE
-    #               aggregation: "SUM", # accepts SUM, MAX, MIN, COUNT, DISTINCT_COUNT, AVERAGE
+    #               aggregation: "SUM", # accepts SUM, MAX, MIN, COUNT, DISTINCT_COUNT, AVERAGE, MEDIAN, STDEV, STDEVP, VAR, VARP
     #               is_included_in_topic: false,
     #               disable_indexing: false,
     #               comparative_order: {
@@ -12023,6 +12077,7 @@ module Aws::QuickSight
     #                   synonyms: ["String"],
     #                 },
     #               ],
+    #               non_additive: false,
     #             },
     #           ],
     #           calculated_fields: [
@@ -12055,7 +12110,7 @@ module Aws::QuickSight
     #                   currency_symbol: "LimitedString",
     #                 },
     #               },
-    #               aggregation: "SUM", # accepts SUM, MAX, MIN, COUNT, DISTINCT_COUNT, AVERAGE
+    #               aggregation: "SUM", # accepts SUM, MAX, MIN, COUNT, DISTINCT_COUNT, AVERAGE, MEDIAN, STDEV, STDEVP, VAR, VARP
     #               comparative_order: {
     #                 use_ordering: "GREATER_IS_BETTER", # accepts GREATER_IS_BETTER, LESSER_IS_BETTER, SPECIFIED
     #                 specifed_order: ["String"],
@@ -12081,6 +12136,7 @@ module Aws::QuickSight
     #                   synonyms: ["String"],
     #                 },
     #               ],
+    #               non_additive: false,
     #             },
     #           ],
     #           named_entities: [
@@ -12375,7 +12431,7 @@ module Aws::QuickSight
     #   resp.user.user_name #=> String
     #   resp.user.email #=> String
     #   resp.user.role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER"
-    #   resp.user.identity_type #=> String, one of "IAM", "QUICKSIGHT"
+    #   resp.user.identity_type #=> String, one of "IAM", "QUICKSIGHT", "IAM_IDENTITY_CENTER"
     #   resp.user.active #=> Boolean
     #   resp.user.principal_id #=> String
     #   resp.user.custom_permissions_name #=> String
@@ -12473,7 +12529,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

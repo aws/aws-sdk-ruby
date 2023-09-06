@@ -464,19 +464,26 @@ module Aws::GlobalAccelerator
     # the [CreateEndpointGroup][1] API) or when you update an endpoint group
     # (with the [UpdateEndpointGroup][2] API).
     #
-    # There are two advantages to using `AddEndpoints` to add endpoints:
+    # There are two advantages to using `AddEndpoints` to add endpoints in
+    # Global Accelerator:
     #
     # * It's faster, because Global Accelerator only has to resolve the new
-    #   endpoints that you're adding.
+    #   endpoints that you're adding, rather than resolving new and
+    #   existing endpoints.
     #
-    # * It's more convenient, because you don't need to specify all of the
-    #   current endpoints that are already in the endpoint group in addition
-    #   to the new endpoints that you want to add.
+    # * It's more convenient, because you don't need to specify the
+    #   current endpoints that are already in the endpoint group, in
+    #   addition to the new endpoints that you want to add.
+    #
+    # For information about endpoint types and requirements for endpoints
+    # that you can add to Global Accelerator, see [ Endpoints for standard
+    # accelerators][3] in the *Global Accelerator Developer Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/global-accelerator/latest/api/API_CreateEndpointGroup.html
     # [2]: https://docs.aws.amazon.com/global-accelerator/latest/api/API_UpdateEndpointGroup.html
+    # [3]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints.html
     #
     # @option params [required, Array<Types::EndpointConfiguration>] :endpoint_configurations
     #   The list of endpoint objects.
@@ -649,7 +656,7 @@ module Aws::GlobalAccelerator
     # multiple Amazon Web Services Regions but you must specify the US West
     # (Oregon) Region to create, update, or otherwise work with
     # accelerators. That is, for example, specify `--region us-west-2` on
-    # AWS CLI commands.
+    # Amazon Web Services CLI commands.
     #
     # @option params [required, String] :name
     #   The name of the accelerator. The name can have a maximum of 64
@@ -776,7 +783,7 @@ module Aws::GlobalAccelerator
     # multiple Amazon Web Services Regions but you must specify the US West
     # (Oregon) Region to create, update, or otherwise work with
     # accelerators. That is, for example, specify `--region us-west-2` on
-    # AWS CLI commands.
+    # Amazon Web Services CLI commands.
     #
     #
     #
@@ -1015,6 +1022,14 @@ module Aws::GlobalAccelerator
     # Create an endpoint group for the specified listener. An endpoint group
     # is a collection of endpoints in one Amazon Web Services Region. A
     # resource must be valid and active when you add it as an endpoint.
+    #
+    # For more information about endpoint types and requirements for
+    # endpoints that you can add to Global Accelerator, see [ Endpoints for
+    # standard accelerators][1] in the *Global Accelerator Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints.html
     #
     # @option params [required, String] :listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
@@ -2554,13 +2569,29 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
-    # Update an accelerator.
+    # Update an accelerator to make changes, such as the following:
+    #
+    # * Change the name of the accelerator.
+    #
+    # * Disable the accelerator so that it no longer accepts or routes
+    #   traffic, or so that you can delete it.
+    #
+    # * Enable the accelerator, if it is disabled.
+    #
+    # * Change the IP address type to dual-stack if it is IPv4, or change
+    #   the IP address type to IPv4 if it's dual-stack.
+    #
+    # Be aware that static IP addresses remain assigned to your accelerator
+    # for as long as it exists, even if you disable the accelerator and it
+    # no longer accepts or routes traffic. However, when you delete the
+    # accelerator, you lose the static IP addresses that are assigned to it,
+    # so you can no longer route traffic by using them.
     #
     # Global Accelerator is a global service that supports endpoints in
     # multiple Amazon Web Services Regions but you must specify the US West
     # (Oregon) Region to create, update, or otherwise work with
     # accelerators. That is, for example, specify `--region us-west-2` on
-    # AWS CLI commands.
+    # Amazon Web Services CLI commands.
     #
     # @option params [required, String] :accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator to update.
@@ -3104,7 +3135,7 @@ module Aws::GlobalAccelerator
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-globalaccelerator'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

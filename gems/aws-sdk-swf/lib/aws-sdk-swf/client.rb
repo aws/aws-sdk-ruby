@@ -1421,12 +1421,15 @@ module Aws::SWF
     #   resp.events[0].decision_task_scheduled_event_attributes.task_list.name #=> String
     #   resp.events[0].decision_task_scheduled_event_attributes.task_priority #=> String
     #   resp.events[0].decision_task_scheduled_event_attributes.start_to_close_timeout #=> String
+    #   resp.events[0].decision_task_scheduled_event_attributes.schedule_to_start_timeout #=> String
     #   resp.events[0].decision_task_started_event_attributes.identity #=> String
     #   resp.events[0].decision_task_started_event_attributes.scheduled_event_id #=> Integer
     #   resp.events[0].decision_task_completed_event_attributes.execution_context #=> String
     #   resp.events[0].decision_task_completed_event_attributes.scheduled_event_id #=> Integer
     #   resp.events[0].decision_task_completed_event_attributes.started_event_id #=> Integer
-    #   resp.events[0].decision_task_timed_out_event_attributes.timeout_type #=> String, one of "START_TO_CLOSE"
+    #   resp.events[0].decision_task_completed_event_attributes.task_list.name #=> String
+    #   resp.events[0].decision_task_completed_event_attributes.task_list_schedule_to_start_timeout #=> String
+    #   resp.events[0].decision_task_timed_out_event_attributes.timeout_type #=> String, one of "START_TO_CLOSE", "SCHEDULE_TO_START"
     #   resp.events[0].decision_task_timed_out_event_attributes.scheduled_event_id #=> Integer
     #   resp.events[0].decision_task_timed_out_event_attributes.started_event_id #=> Integer
     #   resp.events[0].activity_task_scheduled_event_attributes.activity_type.name #=> String
@@ -2567,12 +2570,15 @@ module Aws::SWF
     #   resp.events[0].decision_task_scheduled_event_attributes.task_list.name #=> String
     #   resp.events[0].decision_task_scheduled_event_attributes.task_priority #=> String
     #   resp.events[0].decision_task_scheduled_event_attributes.start_to_close_timeout #=> String
+    #   resp.events[0].decision_task_scheduled_event_attributes.schedule_to_start_timeout #=> String
     #   resp.events[0].decision_task_started_event_attributes.identity #=> String
     #   resp.events[0].decision_task_started_event_attributes.scheduled_event_id #=> Integer
     #   resp.events[0].decision_task_completed_event_attributes.execution_context #=> String
     #   resp.events[0].decision_task_completed_event_attributes.scheduled_event_id #=> Integer
     #   resp.events[0].decision_task_completed_event_attributes.started_event_id #=> Integer
-    #   resp.events[0].decision_task_timed_out_event_attributes.timeout_type #=> String, one of "START_TO_CLOSE"
+    #   resp.events[0].decision_task_completed_event_attributes.task_list.name #=> String
+    #   resp.events[0].decision_task_completed_event_attributes.task_list_schedule_to_start_timeout #=> String
+    #   resp.events[0].decision_task_timed_out_event_attributes.timeout_type #=> String, one of "START_TO_CLOSE", "SCHEDULE_TO_START"
     #   resp.events[0].decision_task_timed_out_event_attributes.scheduled_event_id #=> Integer
     #   resp.events[0].decision_task_timed_out_event_attributes.started_event_id #=> Integer
     #   resp.events[0].activity_task_scheduled_event_attributes.activity_type.name #=> String
@@ -3578,6 +3584,25 @@ module Aws::SWF
     # @option params [String] :execution_context
     #   User defined context to add to workflow execution.
     #
+    # @option params [Types::TaskList] :task_list
+    #   The task list to use for the future decision tasks of this workflow
+    #   execution. This list overrides the original task list you specified
+    #   while starting the workflow execution.
+    #
+    # @option params [String] :task_list_schedule_to_start_timeout
+    #   Specifies a timeout (in seconds) for the task list override. When this
+    #   parameter is missing, the task list override is permanent. This
+    #   parameter makes it possible to temporarily override the task list. If
+    #   a decision task scheduled on the override task list is not started
+    #   within the timeout, the decision task will time out. Amazon SWF will
+    #   revert the override and schedule a new decision task to the original
+    #   task list.
+    #
+    #   If a decision task scheduled on the override task list is started
+    #   within the timeout, but not completed within the start-to-close
+    #   timeout, Amazon SWF will also revert the override and schedule a new
+    #   decision task to the original task list.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3682,6 +3707,10 @@ module Aws::SWF
     #       },
     #     ],
     #     execution_context: "Data",
+    #     task_list: {
+    #       name: "Name", # required
+    #     },
+    #     task_list_schedule_to_start_timeout: "DurationInSecondsOptional",
     #   })
     #
     # @overload respond_decision_task_completed(params = {})
@@ -4353,7 +4382,7 @@ module Aws::SWF
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-swf'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

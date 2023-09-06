@@ -7827,7 +7827,7 @@ module Aws::ElastiCache
     #   The name of the Global datastore
     #
     # @option params [required, Integer] :node_group_count
-    #   The number of node groups you wish to add
+    #   Total number of node groups you want
     #
     # @option params [Array<Types::RegionalConfiguration>] :regional_configurations
     #   Describes the replication group IDs, the Amazon regions where they are
@@ -10487,6 +10487,118 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
+    # Async API to test connection between source and target replication
+    # group.
+    #
+    # @option params [required, String] :replication_group_id
+    #   The ID of the replication group to which data is to be migrated.
+    #
+    # @option params [required, Array<Types::CustomerNodeEndpoint>] :customer_node_endpoint_list
+    #   List of endpoints from which data should be migrated. List should have
+    #   only one element.
+    #
+    # @return [Types::TestMigrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TestMigrationResponse#replication_group #replication_group} => Types::ReplicationGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.test_migration({
+    #     replication_group_id: "String", # required
+    #     customer_node_endpoint_list: [ # required
+    #       {
+    #         address: "String",
+    #         port: 1,
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replication_group.replication_group_id #=> String
+    #   resp.replication_group.description #=> String
+    #   resp.replication_group.global_replication_group_info.global_replication_group_id #=> String
+    #   resp.replication_group.global_replication_group_info.global_replication_group_member_role #=> String
+    #   resp.replication_group.status #=> String
+    #   resp.replication_group.pending_modified_values.primary_cluster_id #=> String
+    #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
+    #   resp.replication_group.pending_modified_values.resharding.slot_migration.progress_percentage #=> Float
+    #   resp.replication_group.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add #=> Array
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add[0] #=> String
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations #=> Array
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.replication_group.pending_modified_values.transit_encryption_enabled #=> Boolean
+    #   resp.replication_group.pending_modified_values.transit_encryption_mode #=> String, one of "preferred", "required"
+    #   resp.replication_group.pending_modified_values.cluster_mode #=> String, one of "enabled", "disabled", "compatible"
+    #   resp.replication_group.member_clusters #=> Array
+    #   resp.replication_group.member_clusters[0] #=> String
+    #   resp.replication_group.node_groups #=> Array
+    #   resp.replication_group.node_groups[0].node_group_id #=> String
+    #   resp.replication_group.node_groups[0].status #=> String
+    #   resp.replication_group.node_groups[0].primary_endpoint.address #=> String
+    #   resp.replication_group.node_groups[0].primary_endpoint.port #=> Integer
+    #   resp.replication_group.node_groups[0].reader_endpoint.address #=> String
+    #   resp.replication_group.node_groups[0].reader_endpoint.port #=> Integer
+    #   resp.replication_group.node_groups[0].slots #=> String
+    #   resp.replication_group.node_groups[0].node_group_members #=> Array
+    #   resp.replication_group.node_groups[0].node_group_members[0].cache_cluster_id #=> String
+    #   resp.replication_group.node_groups[0].node_group_members[0].cache_node_id #=> String
+    #   resp.replication_group.node_groups[0].node_group_members[0].read_endpoint.address #=> String
+    #   resp.replication_group.node_groups[0].node_group_members[0].read_endpoint.port #=> Integer
+    #   resp.replication_group.node_groups[0].node_group_members[0].preferred_availability_zone #=> String
+    #   resp.replication_group.node_groups[0].node_group_members[0].preferred_outpost_arn #=> String
+    #   resp.replication_group.node_groups[0].node_group_members[0].current_role #=> String
+    #   resp.replication_group.snapshotting_cluster_id #=> String
+    #   resp.replication_group.automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
+    #   resp.replication_group.multi_az #=> String, one of "enabled", "disabled"
+    #   resp.replication_group.configuration_endpoint.address #=> String
+    #   resp.replication_group.configuration_endpoint.port #=> Integer
+    #   resp.replication_group.snapshot_retention_limit #=> Integer
+    #   resp.replication_group.snapshot_window #=> String
+    #   resp.replication_group.cluster_enabled #=> Boolean
+    #   resp.replication_group.cache_node_type #=> String
+    #   resp.replication_group.auth_token_enabled #=> Boolean
+    #   resp.replication_group.auth_token_last_modified_date #=> Time
+    #   resp.replication_group.transit_encryption_enabled #=> Boolean
+    #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
+    #   resp.replication_group.member_clusters_outpost_arns #=> Array
+    #   resp.replication_group.member_clusters_outpost_arns[0] #=> String
+    #   resp.replication_group.kms_key_id #=> String
+    #   resp.replication_group.arn #=> String
+    #   resp.replication_group.user_group_ids #=> Array
+    #   resp.replication_group.user_group_ids[0] #=> String
+    #   resp.replication_group.log_delivery_configurations #=> Array
+    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
+    #   resp.replication_group.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
+    #   resp.replication_group.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
+    #   resp.replication_group.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
+    #   resp.replication_group.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
+    #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
+    #   resp.replication_group.log_delivery_configurations[0].message #=> String
+    #   resp.replication_group.replication_group_create_time #=> Time
+    #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
+    #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
+    #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
+    #   resp.replication_group.transit_encryption_mode #=> String, one of "preferred", "required"
+    #   resp.replication_group.cluster_mode #=> String, one of "enabled", "disabled", "compatible"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TestMigration AWS API Documentation
+    #
+    # @overload test_migration(params = {})
+    # @param [Hash] params ({})
+    def test_migration(params = {}, options = {})
+      req = build_request(:test_migration, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -10500,7 +10612,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

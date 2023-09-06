@@ -366,6 +366,52 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
+    # Specifies a single cookie or set of cookies in an end user's browser.
+    #
+    # @!attribute [rw] domain
+    #   The domain of the cookie.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the cookie.
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   The path of the cookie.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/CookieSpecification AWS API Documentation
+    #
+    class CookieSpecification < Struct.new(
+      :domain,
+      :name,
+      :path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration that specifies which cookies should be synchronized
+    # from the end user's local browser to the remote browser.
+    #
+    # @!attribute [rw] allowlist
+    #   The list of cookie specifications that are allowed to be
+    #   synchronized to the remote browser.
+    #   @return [Array<Types::CookieSpecification>]
+    #
+    # @!attribute [rw] blocklist
+    #   The list of cookie specifications that are blocked from being
+    #   synchronized to the remote browser.
+    #   @return [Array<Types::CookieSpecification>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/CookieSynchronizationConfiguration AWS API Documentation
+    #
+    class CookieSynchronizationConfiguration < Struct.new(
+      :allowlist,
+      :blocklist)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] additional_encryption_context
     #   Additional encryption context of the browser settings.
     #   @return [Hash<String,String>]
@@ -836,6 +882,10 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
+    # @!attribute [rw] additional_encryption_context
+    #   The additional encryption context of the user settings.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -851,9 +901,20 @@ module Aws::WorkSpacesWeb
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] cookie_synchronization_configuration
+    #   The configuration that specifies which cookies should be
+    #   synchronized from the end user's local browser to the remote
+    #   browser.
+    #   @return [Types::CookieSynchronizationConfiguration]
+    #
     # @!attribute [rw] copy_allowed
     #   Specifies whether the user can copy text from the streaming session
     #   to the local device.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_managed_key
+    #   The customer managed key used to encrypt sensitive information in
+    #   the user settings.
     #   @return [String]
     #
     # @!attribute [rw] disconnect_timeout_in_minutes
@@ -894,8 +955,11 @@ module Aws::WorkSpacesWeb
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/CreateUserSettingsRequest AWS API Documentation
     #
     class CreateUserSettingsRequest < Struct.new(
+      :additional_encryption_context,
       :client_token,
+      :cookie_synchronization_configuration,
       :copy_allowed,
+      :customer_managed_key,
       :disconnect_timeout_in_minutes,
       :download_allowed,
       :idle_disconnect_timeout_in_minutes,
@@ -903,7 +967,7 @@ module Aws::WorkSpacesWeb
       :print_allowed,
       :tags,
       :upload_allowed)
-      SENSITIVE = []
+      SENSITIVE = [:cookie_synchronization_configuration]
       include Aws::Structure
     end
 
@@ -2885,6 +2949,15 @@ module Aws::WorkSpacesWeb
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] cookie_synchronization_configuration
+    #   The configuration that specifies which cookies should be
+    #   synchronized from the end user's local browser to the remote
+    #   browser.
+    #
+    #   If the allowlist and blocklist are empty, the configuration becomes
+    #   null.
+    #   @return [Types::CookieSynchronizationConfiguration]
+    #
     # @!attribute [rw] copy_allowed
     #   Specifies whether the user can copy text from the streaming session
     #   to the local device.
@@ -2928,6 +3001,7 @@ module Aws::WorkSpacesWeb
     #
     class UpdateUserSettingsRequest < Struct.new(
       :client_token,
+      :cookie_synchronization_configuration,
       :copy_allowed,
       :disconnect_timeout_in_minutes,
       :download_allowed,
@@ -2936,7 +3010,7 @@ module Aws::WorkSpacesWeb
       :print_allowed,
       :upload_allowed,
       :user_settings_arn)
-      SENSITIVE = []
+      SENSITIVE = [:cookie_synchronization_configuration]
       include Aws::Structure
     end
 
@@ -3006,6 +3080,12 @@ module Aws::WorkSpacesWeb
     #   with.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] cookie_synchronization_configuration
+    #   The configuration that specifies which cookies should be
+    #   synchronized from the end user's local browser to the remote
+    #   browser.
+    #   @return [Types::CookieSynchronizationConfiguration]
+    #
     # @!attribute [rw] copy_allowed
     #   Specifies whether the user can copy text from the streaming session
     #   to the local device.
@@ -3049,6 +3129,7 @@ module Aws::WorkSpacesWeb
     #
     class UserSettings < Struct.new(
       :associated_portal_arns,
+      :cookie_synchronization_configuration,
       :copy_allowed,
       :disconnect_timeout_in_minutes,
       :download_allowed,
@@ -3057,11 +3138,17 @@ module Aws::WorkSpacesWeb
       :print_allowed,
       :upload_allowed,
       :user_settings_arn)
-      SENSITIVE = []
+      SENSITIVE = [:cookie_synchronization_configuration]
       include Aws::Structure
     end
 
     # The summary of user settings.
+    #
+    # @!attribute [rw] cookie_synchronization_configuration
+    #   The configuration that specifies which cookies should be
+    #   synchronized from the end user's local browser to the remote
+    #   browser.
+    #   @return [Types::CookieSynchronizationConfiguration]
     #
     # @!attribute [rw] copy_allowed
     #   Specifies whether the user can copy text from the streaming session
@@ -3105,6 +3192,7 @@ module Aws::WorkSpacesWeb
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UserSettingsSummary AWS API Documentation
     #
     class UserSettingsSummary < Struct.new(
+      :cookie_synchronization_configuration,
       :copy_allowed,
       :disconnect_timeout_in_minutes,
       :download_allowed,
@@ -3113,7 +3201,7 @@ module Aws::WorkSpacesWeb
       :print_allowed,
       :upload_allowed,
       :user_settings_arn)
-      SENSITIVE = []
+      SENSITIVE = [:cookie_synchronization_configuration]
       include Aws::Structure
     end
 

@@ -190,6 +190,11 @@ module Aws::ComputeOptimizer
     #     instance.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] current_instance_gpu_info
+    #   Describes the GPU accelerator settings for the current instance type
+    #   of the Auto Scaling group.
+    #   @return [Types::GpuInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/AutoScalingGroupRecommendation AWS API Documentation
     #
     class AutoScalingGroupRecommendation < Struct.new(
@@ -204,7 +209,8 @@ module Aws::ComputeOptimizer
       :last_refresh_timestamp,
       :current_performance_risk,
       :effective_recommendation_preferences,
-      :inferred_workload_types)
+      :inferred_workload_types,
+      :current_instance_gpu_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -278,6 +284,11 @@ module Aws::ComputeOptimizer
     #   architecture.
     #   @return [String]
     #
+    # @!attribute [rw] instance_gpu_info
+    #   Describes the GPU accelerator settings for the recommended instance
+    #   type of the Auto Scaling group.
+    #   @return [Types::GpuInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/AutoScalingGroupRecommendationOption AWS API Documentation
     #
     class AutoScalingGroupRecommendationOption < Struct.new(
@@ -286,7 +297,8 @@ module Aws::ComputeOptimizer
       :performance_risk,
       :rank,
       :savings_opportunity,
-      :migration_effort)
+      :migration_effort,
+      :instance_gpu_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1751,6 +1763,120 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_ids
+    #   The IDs of the Amazon Web Services accounts for which to export
+    #   license recommendations.
+    #
+    #   If your account is the management account of an organization, use
+    #   this parameter to specify the member account for which you want to
+    #   export recommendations.
+    #
+    #   This parameter can't be specified together with the include member
+    #   accounts parameter. The parameters are mutually exclusive.
+    #
+    #   If this parameter is omitted, recommendations for member accounts
+    #   aren't included in the export.
+    #
+    #   You can specify multiple account IDs per request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   An array of objects to specify a filter that exports a more specific
+    #   set of license recommendations.
+    #   @return [Array<Types::LicenseRecommendationFilter>]
+    #
+    # @!attribute [rw] fields_to_export
+    #   The recommendations data to include in the export file. For more
+    #   information about the fields that can be exported, see [Exported
+    #   files][1] in the *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] s3_destination_config
+    #   Describes the destination Amazon Simple Storage Service (Amazon S3)
+    #   bucket name and key prefix for a recommendations export job.
+    #
+    #   You must create the destination Amazon S3 bucket for your
+    #   recommendations export before you create the export job. Compute
+    #   Optimizer does not create the S3 bucket for you. After you create
+    #   the S3 bucket, ensure that it has the required permission policy to
+    #   allow Compute Optimizer to write the export file to it. If you plan
+    #   to specify an object prefix when you create the export job, you must
+    #   include the object prefix in the policy that you add to the S3
+    #   bucket. For more information, see [Amazon S3 Bucket Policy for
+    #   Compute Optimizer][1] in the *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html
+    #   @return [Types::S3DestinationConfig]
+    #
+    # @!attribute [rw] file_format
+    #   The format of the export file.
+    #
+    #   A CSV file is the only export format currently supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_member_accounts
+    #   Indicates whether to include recommendations for resources in all
+    #   member accounts of the organization if your account is the
+    #   management account of an organization.
+    #
+    #   The member accounts must also be opted in to Compute Optimizer, and
+    #   trusted access for Compute Optimizer must be enabled in the
+    #   organization account. For more information, see [Compute Optimizer
+    #   and Amazon Web Services Organizations trusted access][1] in the
+    #   *Compute Optimizer User Guide*.
+    #
+    #   If this parameter is omitted, recommendations for member accounts of
+    #   the organization aren't included in the export file .
+    #
+    #   This parameter cannot be specified together with the account IDs
+    #   parameter. The parameters are mutually exclusive.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ExportLicenseRecommendationsRequest AWS API Documentation
+    #
+    class ExportLicenseRecommendationsRequest < Struct.new(
+      :account_ids,
+      :filters,
+      :fields_to_export,
+      :s3_destination_config,
+      :file_format,
+      :include_member_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identification number of the export job.
+    #
+    #   To view the status of an export job, use the
+    #   DescribeRecommendationExportJobs action and specify the job ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_destination
+    #   Describes the destination Amazon Simple Storage Service (Amazon S3)
+    #   bucket name and object keys of a recommendations export file, and
+    #   its associated metadata file.
+    #   @return [Types::S3Destination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ExportLicenseRecommendationsResponse AWS API Documentation
+    #
+    class ExportLicenseRecommendationsResponse < Struct.new(
+      :job_id,
+      :s3_destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes Compute Optimizer's integration status with your chosen
     # external metric provider. For example, Datadog.
     #
@@ -2592,6 +2718,77 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arns
+    #   The ARN that identifies the Amazon EC2 instance.
+    #
+    #   The following is the format of the ARN:
+    #
+    #   `arn:aws:ec2:region:aws_account_id:instance/instance-id`
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to advance to the next page of license recommendations.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of license recommendations to return with a
+    #   single request.
+    #
+    #   To retrieve the remaining results, make another request with the
+    #   returned `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   An array of objects to specify a filter that returns a more specific
+    #   list of license recommendations.
+    #   @return [Array<Types::LicenseRecommendationFilter>]
+    #
+    # @!attribute [rw] account_ids
+    #   The ID of the Amazon Web Services account for which to return
+    #   license recommendations.
+    #
+    #   If your account is the management account of an organization, use
+    #   this parameter to specify the member account for which you want to
+    #   return license recommendations.
+    #
+    #   Only one account ID can be specified per request.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetLicenseRecommendationsRequest AWS API Documentation
+    #
+    class GetLicenseRecommendationsRequest < Struct.new(
+      :resource_arns,
+      :next_token,
+      :max_results,
+      :filters,
+      :account_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to use to advance to the next page of license
+    #   recommendations.
+    #   @return [String]
+    #
+    # @!attribute [rw] license_recommendations
+    #   An array of objects that describe license recommendations.
+    #   @return [Array<Types::LicenseRecommendation>]
+    #
+    # @!attribute [rw] errors
+    #   An array of objects that describe errors of the request.
+    #   @return [Array<Types::GetRecommendationError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetLicenseRecommendationsResponse AWS API Documentation
+    #
+    class GetLicenseRecommendationsResponse < Struct.new(
+      :next_token,
+      :license_recommendations,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an error experienced when getting recommendations.
     #
     # For example, an error is returned if you request recommendations for
@@ -2744,6 +2941,40 @@ module Aws::ComputeOptimizer
     class GetRecommendationSummariesResponse < Struct.new(
       :next_token,
       :recommendation_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the GPU accelerators for the instance type.
+    #
+    # @!attribute [rw] gpu_count
+    #   The number of GPUs for the instance type.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] gpu_memory_size_in_mi_b
+    #   The total size of the memory for the GPU accelerators for the
+    #   instance type, in MiB.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/Gpu AWS API Documentation
+    #
+    class Gpu < Struct.new(
+      :gpu_count,
+      :gpu_memory_size_in_mi_b)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the GPU accelerator settings for the instance type.
+    #
+    # @!attribute [rw] gpus
+    #   Describes the GPU accelerators for the instance type.
+    #   @return [Array<Types::Gpu>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GpuInfo AWS API Documentation
+    #
+    class GpuInfo < Struct.new(
+      :gpus)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3072,6 +3303,15 @@ module Aws::ComputeOptimizer
     #   with your external metrics provider.
     #   @return [Types::ExternalMetricStatus]
     #
+    # @!attribute [rw] current_instance_gpu_info
+    #   Describes the GPU accelerator settings for the current instance
+    #   type.
+    #   @return [Types::GpuInfo]
+    #
+    # @!attribute [rw] idle
+    #   Describes if an Amazon EC2 instance is idle.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/InstanceRecommendation AWS API Documentation
     #
     class InstanceRecommendation < Struct.new(
@@ -3091,7 +3331,9 @@ module Aws::ComputeOptimizer
       :inferred_workload_types,
       :instance_state,
       :tags,
-      :external_metric_status)
+      :external_metric_status,
+      :current_instance_gpu_info,
+      :idle)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3262,6 +3504,11 @@ module Aws::ComputeOptimizer
     #   architecture.
     #   @return [String]
     #
+    # @!attribute [rw] instance_gpu_info
+    #   Describes the GPU accelerator settings for the recommended instance
+    #   type.
+    #   @return [Types::GpuInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/InstanceRecommendationOption AWS API Documentation
     #
     class InstanceRecommendationOption < Struct.new(
@@ -3271,7 +3518,8 @@ module Aws::ComputeOptimizer
       :performance_risk,
       :rank,
       :savings_opportunity,
-      :migration_effort)
+      :migration_effort,
+      :instance_gpu_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3662,6 +3910,260 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # Describes the configuration of a license for an Amazon EC2 instance.
+    #
+    # @!attribute [rw] number_of_cores
+    #   The current number of cores associated with the instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type used in the license.
+    #   @return [String]
+    #
+    # @!attribute [rw] operating_system
+    #   The operating system of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] license_edition
+    #   The edition of the license for the application that runs on the
+    #   instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] license_name
+    #   The name of the license for the application that runs on the
+    #   instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] license_model
+    #   The license type associated with the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] license_version
+    #   The version of the license for the application that runs on the
+    #   instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] metrics_source
+    #   The list of metric sources required to generate recommendations for
+    #   commercial software licenses.
+    #   @return [Array<Types::MetricSource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/LicenseConfiguration AWS API Documentation
+    #
+    class LicenseConfiguration < Struct.new(
+      :number_of_cores,
+      :instance_type,
+      :operating_system,
+      :license_edition,
+      :license_name,
+      :license_model,
+      :license_version,
+      :metrics_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a license recommendation for an EC2 instance.
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN that identifies the Amazon EC2 instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID of the license.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_license_configuration
+    #   An object that describes the current configuration of an instance
+    #   that runs on a license.
+    #   @return [Types::LicenseConfiguration]
+    #
+    # @!attribute [rw] lookback_period_in_days
+    #   The number of days for which utilization metrics were analyzed for
+    #   an instance that runs on a license.
+    #   @return [Float]
+    #
+    # @!attribute [rw] last_refresh_timestamp
+    #   The timestamp of when the license recommendation was last generated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] finding
+    #   The finding classification for an instance that runs on a license.
+    #
+    #   Findings include:
+    #
+    #   * `InsufficentMetrics` — When Compute Optimizer detects that your
+    #     CloudWatch Application Insights isn't enabled or is enabled with
+    #     insufficient permissions.
+    #
+    #   * `NotOptimized` — When Compute Optimizer detects that your EC2
+    #     infrastructure isn't using any of the SQL server license features
+    #     you're paying for, a license is considered not optimized.
+    #
+    #   * `Optimized` — When Compute Optimizer detects that all
+    #     specifications of your license meet the performance requirements
+    #     of your workload.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_reason_codes
+    #   The reason for the finding classification for an instance that runs
+    #   on a license.
+    #
+    #   Finding reason codes include:
+    #
+    #   * `Optimized` — All specifications of your license meet the
+    #     performance requirements of your workload.
+    #
+    #   * `LicenseOverprovisioned` — A license is considered
+    #     over-provisioned when your license can be downgraded while still
+    #     meeting the performance requirements of your workload.
+    #
+    #   * `InvalidCloudwatchApplicationInsights` — CloudWatch Application
+    #     Insights isn't configured properly.
+    #
+    #   * `CloudwatchApplicationInsightsError` — There is a CloudWatch
+    #     Application Insights error.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] license_recommendation_options
+    #   An array of objects that describe the license recommendation
+    #   options.
+    #   @return [Array<Types::LicenseRecommendationOption>]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags assigned to an EC2 instance.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/LicenseRecommendation AWS API Documentation
+    #
+    class LicenseRecommendation < Struct.new(
+      :resource_arn,
+      :account_id,
+      :current_license_configuration,
+      :lookback_period_in_days,
+      :last_refresh_timestamp,
+      :finding,
+      :finding_reason_codes,
+      :license_recommendation_options,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a filter that returns a more specific list of license
+    # recommendations. Use this filter with the `GetLicenseRecommendation`
+    # action.
+    #
+    # @!attribute [rw] name
+    #   The name of the filter.
+    #
+    #   Specify `Finding` to return recommendations with a specific finding
+    #   classification.
+    #
+    #   Specify `FindingReasonCode` to return recommendations with a
+    #   specific finding reason code.
+    #
+    #   You can filter your license recommendations by `tag:key` and
+    #   `tag-key` tags.
+    #
+    #   A `tag:key` is a key and value combination of a tag assigned to your
+    #   license recommendations. Use the tag key in the filter name and the
+    #   tag value as the filter value. For example, to find all license
+    #   recommendations that have a tag with the key of `Owner` and the
+    #   value of `TeamA`, specify `tag:Owner` for the filter name and
+    #   `TeamA` for the filter value.
+    #
+    #   A `tag-key` is the key of a tag assigned to your license
+    #   recommendations. Use this filter to find all of your license
+    #   recommendations that have a tag with a specific key. This doesn’t
+    #   consider the tag value. For example, you can find your license
+    #   recommendations with a tag key value of `Owner` or without any tag
+    #   keys assigned.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The value of the filter.
+    #
+    #   The valid values for this parameter are as follows, depending on
+    #   what you specify for the `name` parameter:
+    #
+    #   * If you specify the `name` parameter as `Finding`, then specify
+    #     `Optimized`, `NotOptimized`, or `InsufficentMetrics`.
+    #
+    #   * If you specify the `name` parameter as `FindingReasonCode`, then
+    #     specify `Optimized`, `LicenseOverprovisioned`,
+    #     `InvalidCloudwatchApplicationInsights`, or
+    #     `CloudwatchApplicationInsightsError`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/LicenseRecommendationFilter AWS API Documentation
+    #
+    class LicenseRecommendationFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the recommendation options for licenses.
+    #
+    # @!attribute [rw] rank
+    #   The rank of the license recommendation option.
+    #
+    #   The top recommendation option is ranked as `1`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] operating_system
+    #   The operating system of a license recommendation option.
+    #   @return [String]
+    #
+    # @!attribute [rw] license_edition
+    #   The recommended edition of the license for the application that runs
+    #   on the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] license_model
+    #   The recommended license type associated with the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] savings_opportunity
+    #   Describes the savings opportunity for recommendations of a given
+    #   resource type or for the recommendation option of an individual
+    #   resource.
+    #
+    #   Savings opportunity represents the estimated monthly savings you can
+    #   achieve by implementing a given Compute Optimizer recommendation.
+    #
+    #   Savings opportunity data requires that you opt in to Cost Explorer,
+    #   as well as activate **Receive Amazon EC2 resource recommendations**
+    #   in the Cost Explorer preferences page. That creates a connection
+    #   between Cost Explorer and Compute Optimizer. With this connection,
+    #   Cost Explorer generates savings estimates considering the price of
+    #   existing resources, the price of recommended resources, and
+    #   historical usage data. Estimated monthly savings reflects the
+    #   projected dollar savings associated with each of the recommendations
+    #   generated. For more information, see [Enabling Cost Explorer][1] and
+    #   [Optimizing your cost with Rightsizing Recommendations][2] in the
+    #   *Cost Management User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cost-management/latest/userguide/ce-enable.html
+    #   [2]: https://docs.aws.amazon.com/cost-management/latest/userguide/ce-rightsizing.html
+    #   @return [Types::SavingsOpportunity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/LicenseRecommendationOption AWS API Documentation
+    #
+    class LicenseRecommendationOption < Struct.new(
+      :rank,
+      :operating_system,
+      :license_edition,
+      :license_model,
+      :savings_opportunity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request exceeds a limit of the service.
     #
     # @!attribute [rw] message
@@ -3690,6 +4192,26 @@ module Aws::ComputeOptimizer
     class MemorySizeConfiguration < Struct.new(
       :memory,
       :memory_reservation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The list of metric sources required to generate recommendations for
+    # commercial software licenses.
+    #
+    # @!attribute [rw] provider
+    #   The name of the metric source provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_arn
+    #   The ARN of the metric source provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/MetricSource AWS API Documentation
+    #
+    class MetricSource < Struct.new(
+      :provider,
+      :provider_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3730,18 +4252,20 @@ module Aws::ComputeOptimizer
     # projected utilization metric data to determine the performance
     # difference between your current resource and the recommended option.
     #
-    # <note markdown="1"> The `Cpu` and `Memory` metrics are the only projected utilization
-    # metrics returned when you run the GetEC2RecommendationProjectedMetrics
-    # action. Additionally, the `Memory` metric is returned only for
-    # resources that have the unified CloudWatch agent installed on them.
-    # For more information, see [Enabling Memory Utilization with the
-    # CloudWatch Agent][1].
+    # <note markdown="1"> The `Cpu`, `Memory`, `GPU`, and `GPU_MEMORY` metrics are the only
+    # projected utilization metrics returned when you run the
+    # GetEC2RecommendationProjectedMetrics action. Additionally, these
+    # metrics are only returned for resources with the unified CloudWatch
+    # agent installed on them. For more information, see [Enabling Memory
+    # Utilization with the CloudWatch Agent][1] and [Enabling NVIDIA GPU
+    # utilization with the CloudWatch Agent][2].
     #
     #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent
+    # [2]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#nvidia-cw-agent
     #
     # @!attribute [rw] name
     #   The name of the projected utilization metric.
@@ -3758,8 +4282,6 @@ module Aws::ComputeOptimizer
     #     show a lower percentage than CloudWatch when the instance is not
     #     allocated a full processor core.
     #
-    #     Units: Percent
-    #
     #   * `Memory` - The percentage of memory that would be in use on the
     #     recommendation option had you used that resource during the
     #     analyzed period. This metric identifies the amount of memory
@@ -3767,15 +4289,30 @@ module Aws::ComputeOptimizer
     #
     #     Units: Percent
     #
-    #     <note markdown="1"> The `Memory` metric is returned only for resources that have the
+    #     <note markdown="1"> The `Memory` metric is only returned for resources with the
     #     unified CloudWatch agent installed on them. For more information,
     #     see [Enabling Memory Utilization with the CloudWatch Agent][1].
+    #
+    #      </note>
+    #
+    #   * `GPU` - The projected percentage of allocated GPUs if you adjust
+    #     your configurations to Compute Optimizer's recommendation option.
+    #
+    #   * `GPU_MEMORY` - The projected percentage of total GPU memory if you
+    #     adjust your configurations to Compute Optimizer's recommendation
+    #     option.
+    #
+    #     <note markdown="1"> The `GPU` and `GPU_MEMORY` metrics are only returned for resources
+    #     with the unified CloudWatch Agent installed on them. For more
+    #     information, see [Enabling NVIDIA GPU utilization with the
+    #     CloudWatch Agent][2].
     #
     #      </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent
+    #   [2]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#nvidia-cw-agent
     #   @return [String]
     #
     # @!attribute [rw] timestamps
@@ -4129,8 +4666,8 @@ module Aws::ComputeOptimizer
     # @!attribute [rw] inferred_workload_savings
     #   An array of objects that describes the estimated monthly saving
     #   amounts for the instances running on the specified
-    #   `inferredWorkloadTypes`. The array contains the top three savings
-    #   opportunites for the instances running inferred workload types.
+    #   `inferredWorkloadTypes`. The array contains the top five savings
+    #   opportunites for the instances that run inferred workload types.
     #   @return [Array<Types::InferredWorkloadSaving>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RecommendationSummary AWS API Documentation
@@ -4605,6 +5142,19 @@ module Aws::ComputeOptimizer
     #
     #      </note>
     #
+    #   * `GPU` - The percentage of allocated GPUs that currently run on the
+    #     instance.
+    #
+    #   * `GPU_MEMORY` - The percentage of total GPU memory that currently
+    #     runs on the instance.
+    #
+    #     <note markdown="1"> The `GPU` and `GPU_MEMORY` metrics are only returned for resources
+    #     with the unified CloudWatch Agent installed on them. For more
+    #     information, see [Enabling NVIDIA GPU utilization with the
+    #     CloudWatch Agent][2].
+    #
+    #      </note>
+    #
     #   * `EBS_READ_OPS_PER_SECOND` - The completed read operations from all
     #     EBS volumes attached to the instance in a specified period of
     #     time.
@@ -4680,6 +5230,7 @@ module Aws::ComputeOptimizer
     #
     #
     #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent
+    #   [2]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#nvidia-cw-agent
     #   @return [String]
     #
     # @!attribute [rw] statistic

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2023-08-21)
+------------------
+
+* Feature - Fixed typos in description fields
+
+1.50.0 (2023-08-15)
+------------------
+
+* Feature - Provide explanation if CheckDomainTransferability return false. Provide requestId if a request is already submitted.  Add sensitive protection for customer information
+
 1.49.0 (2023-07-11)
 ------------------
 

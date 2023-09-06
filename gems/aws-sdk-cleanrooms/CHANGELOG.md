@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2023-08-30)
+------------------
+
+* Feature - This release decouples member abilities in a collaboration. With this change, the member who can run queries no longer needs to be the same as the member who can receive results.
+
 1.9.0 (2023-07-31)
 ------------------
 

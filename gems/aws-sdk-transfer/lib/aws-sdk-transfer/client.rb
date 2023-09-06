@@ -584,6 +584,12 @@ module Aws::Transfer
     #   A `BaseDirectory` example is `/DOC-EXAMPLE-BUCKET/home/mydirectory`.
     #
     # @option params [required, String] :access_role
+    #   Connectors are used to send files using either the AS2 or SFTP
+    #   protocol. For the access role, provide the Amazon Resource Name (ARN)
+    #   of the Identity and Access Management role to use.
+    #
+    #   **For AS2 connectors**
+    #
     #   With AS2, you can send files by calling `StartFileTransfer` and
     #   specifying the file paths in the request parameter, `SendFilePaths`.
     #   We use the file’s parent directory (for example, for
@@ -602,6 +608,14 @@ module Aws::Transfer
     #   for the secret. If the secret is encrypted using a customer-managed
     #   key instead of the Amazon Web Services managed key in Secrets Manager,
     #   then the role also needs the `kms:Decrypt` permission for that key.
+    #
+    #   **For SFTP connectors**
+    #
+    #   Make sure that the access role provides read and write access to the
+    #   parent directory of the file location that's used in the
+    #   `StartFileTransfer` request. Additionally, make sure that the role
+    #   provides `secretsmanager:GetSecretValue` permission to Secrets
+    #   Manager.
     #
     # @option params [String] :status
     #   The status of the agreement. The agreement can be either `ACTIVE` or
@@ -645,10 +659,13 @@ module Aws::Transfer
       req.send_request(options)
     end
 
-    # Creates the connector, which captures the parameters for an outbound
-    # connection for the AS2 or SFTP protocol. The connector is required for
-    # sending files to an externally hosted AS2 or SFTP server. For more
-    # details about AS2 connectors, see [Create AS2 connectors][1].
+    # Creates the connector, which captures the parameters for a connection
+    # for the AS2 or SFTP protocol. For AS2, the connector is required for
+    # sending files to an externally hosted AS2 server. For SFTP, the
+    # connector is required when sending files to an SFTP server or
+    # receiving files from an SFTP server. For more details about
+    # connectors, see [Create AS2 connectors][1] and [Create SFTP
+    # connectors][2].
     #
     # <note markdown="1"> You must specify exactly one configuration object: either for AS2
     # (`As2Config`) or SFTP (`SftpConfig`).
@@ -658,6 +675,7 @@ module Aws::Transfer
     #
     #
     # [1]: https://docs.aws.amazon.com/transfer/latest/userguide/create-b2b-server.html#configure-as2-connector
+    # [2]: https://docs.aws.amazon.com/transfer/latest/userguide/configure-sftp-connector.html
     #
     # @option params [required, String] :url
     #   The URL of the partner's AS2 or SFTP endpoint.
@@ -666,6 +684,12 @@ module Aws::Transfer
     #   A structure that contains the parameters for an AS2 connector object.
     #
     # @option params [required, String] :access_role
+    #   Connectors are used to send files using either the AS2 or SFTP
+    #   protocol. For the access role, provide the Amazon Resource Name (ARN)
+    #   of the Identity and Access Management role to use.
+    #
+    #   **For AS2 connectors**
+    #
     #   With AS2, you can send files by calling `StartFileTransfer` and
     #   specifying the file paths in the request parameter, `SendFilePaths`.
     #   We use the file’s parent directory (for example, for
@@ -684,6 +708,14 @@ module Aws::Transfer
     #   for the secret. If the secret is encrypted using a customer-managed
     #   key instead of the Amazon Web Services managed key in Secrets Manager,
     #   then the role also needs the `kms:Decrypt` permission for that key.
+    #
+    #   **For SFTP connectors**
+    #
+    #   Make sure that the access role provides read and write access to the
+    #   parent directory of the file location that's used in the
+    #   `StartFileTransfer` request. Additionally, make sure that the role
+    #   provides `secretsmanager:GetSecretValue` permission to Secrets
+    #   Manager.
     #
     # @option params [String] :logging_role
     #   The Amazon Resource Name (ARN) of the Identity and Access Management
@@ -3266,8 +3298,8 @@ module Aws::Transfer
     #   inbound. In both cases, you specify the `ConnectorId`. Depending on
     #   the direction of the transfer, you also specify the following items:
     #
-    #   * If you are transferring file from a partner's SFTP server to a
-    #     Transfer Family server, you specify one or more
+    #   * If you are transferring file from a partner's SFTP server to
+    #     Amazon Web Services storage, you specify one or more
     #     `RetreiveFilePaths` to identify the files you want to transfer,
     #     and a `LocalDirectoryPath` to specify the destination folder.
     #
@@ -3280,9 +3312,13 @@ module Aws::Transfer
     #   The unique identifier for the connector.
     #
     # @option params [Array<String>] :send_file_paths
-    #   One or more source paths for the Transfer Family server. Each string
+    #   One or more source paths for the Amazon S3 storage. Each string
     #   represents a source file path for one outbound file transfer. For
     #   example, ` DOC-EXAMPLE-BUCKET/myfile.txt `.
+    #
+    #   <note markdown="1"> Replace ` DOC-EXAMPLE-BUCKET ` with one of your actual buckets.
+    #
+    #    </note>
     #
     # @option params [Array<String>] :retrieve_file_paths
     #   One or more source paths for the partner's SFTP server. Each string
@@ -3790,6 +3826,12 @@ module Aws::Transfer
     #   example, `/DOC-EXAMPLE-BUCKET/home/mydirectory `.
     #
     # @option params [String] :access_role
+    #   Connectors are used to send files using either the AS2 or SFTP
+    #   protocol. For the access role, provide the Amazon Resource Name (ARN)
+    #   of the Identity and Access Management role to use.
+    #
+    #   **For AS2 connectors**
+    #
     #   With AS2, you can send files by calling `StartFileTransfer` and
     #   specifying the file paths in the request parameter, `SendFilePaths`.
     #   We use the file’s parent directory (for example, for
@@ -3808,6 +3850,14 @@ module Aws::Transfer
     #   for the secret. If the secret is encrypted using a customer-managed
     #   key instead of the Amazon Web Services managed key in Secrets Manager,
     #   then the role also needs the `kms:Decrypt` permission for that key.
+    #
+    #   **For SFTP connectors**
+    #
+    #   Make sure that the access role provides read and write access to the
+    #   parent directory of the file location that's used in the
+    #   `StartFileTransfer` request. Additionally, make sure that the role
+    #   provides `secretsmanager:GetSecretValue` permission to Secrets
+    #   Manager.
     #
     # @return [Types::UpdateAgreementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3893,6 +3943,12 @@ module Aws::Transfer
     #   A structure that contains the parameters for an AS2 connector object.
     #
     # @option params [String] :access_role
+    #   Connectors are used to send files using either the AS2 or SFTP
+    #   protocol. For the access role, provide the Amazon Resource Name (ARN)
+    #   of the Identity and Access Management role to use.
+    #
+    #   **For AS2 connectors**
+    #
     #   With AS2, you can send files by calling `StartFileTransfer` and
     #   specifying the file paths in the request parameter, `SendFilePaths`.
     #   We use the file’s parent directory (for example, for
@@ -3911,6 +3967,14 @@ module Aws::Transfer
     #   for the secret. If the secret is encrypted using a customer-managed
     #   key instead of the Amazon Web Services managed key in Secrets Manager,
     #   then the role also needs the `kms:Decrypt` permission for that key.
+    #
+    #   **For SFTP connectors**
+    #
+    #   Make sure that the access role provides read and write access to the
+    #   parent directory of the file location that's used in the
+    #   `StartFileTransfer` request. Additionally, make sure that the role
+    #   provides `secretsmanager:GetSecretValue` permission to Secrets
+    #   Manager.
     #
     # @option params [String] :logging_role
     #   The Amazon Resource Name (ARN) of the Identity and Access Management
@@ -4514,7 +4578,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -58,6 +58,8 @@ module Aws::SESV2
           case context.operation_name
           when :batch_get_metric_data
             Aws::SESV2::Endpoints::BatchGetMetricData.build(context)
+          when :cancel_export_job
+            Aws::SESV2::Endpoints::CancelExportJob.build(context)
           when :create_configuration_set
             Aws::SESV2::Endpoints::CreateConfigurationSet.build(context)
           when :create_configuration_set_event_destination
@@ -78,6 +80,8 @@ module Aws::SESV2
             Aws::SESV2::Endpoints::CreateEmailIdentityPolicy.build(context)
           when :create_email_template
             Aws::SESV2::Endpoints::CreateEmailTemplate.build(context)
+          when :create_export_job
+            Aws::SESV2::Endpoints::CreateExportJob.build(context)
           when :create_import_job
             Aws::SESV2::Endpoints::CreateImportJob.build(context)
           when :delete_configuration_set
@@ -134,8 +138,12 @@ module Aws::SESV2
             Aws::SESV2::Endpoints::GetEmailIdentityPolicies.build(context)
           when :get_email_template
             Aws::SESV2::Endpoints::GetEmailTemplate.build(context)
+          when :get_export_job
+            Aws::SESV2::Endpoints::GetExportJob.build(context)
           when :get_import_job
             Aws::SESV2::Endpoints::GetImportJob.build(context)
+          when :get_message_insights
+            Aws::SESV2::Endpoints::GetMessageInsights.build(context)
           when :get_suppressed_destination
             Aws::SESV2::Endpoints::GetSuppressedDestination.build(context)
           when :list_configuration_sets
@@ -156,6 +164,8 @@ module Aws::SESV2
             Aws::SESV2::Endpoints::ListEmailIdentities.build(context)
           when :list_email_templates
             Aws::SESV2::Endpoints::ListEmailTemplates.build(context)
+          when :list_export_jobs
+            Aws::SESV2::Endpoints::ListExportJobs.build(context)
           when :list_import_jobs
             Aws::SESV2::Endpoints::ListImportJobs.build(context)
           when :list_recommendations

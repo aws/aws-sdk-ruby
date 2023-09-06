@@ -3355,8 +3355,8 @@ module Aws::CostExplorer
     end
 
     # Retrieves the details for a Savings Plan recommendation. These details
-    # include the hourly data-points that construct the new cost, coverage,
-    # and utilization charts.
+    # include the hourly data-points that construct the cost, coverage, and
+    # utilization charts.
     #
     # @option params [required, String] :recommendation_detail_id
     #   The ID that is associated with the Savings Plan recommendation.
@@ -4479,6 +4479,8 @@ module Aws::CostExplorer
     #   resp.cost_allocation_tags[0].tag_key #=> String
     #   resp.cost_allocation_tags[0].type #=> String, one of "AWSGenerated", "UserDefined"
     #   resp.cost_allocation_tags[0].status #=> String, one of "Active", "Inactive"
+    #   resp.cost_allocation_tags[0].last_updated_date #=> String
+    #   resp.cost_allocation_tags[0].last_used_date #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListCostAllocationTags AWS API Documentation
@@ -5150,7 +5152,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

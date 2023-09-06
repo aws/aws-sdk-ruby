@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2023-08-31)
+------------------
+
+* Feature - Documentation updates for CloudWatch Events.
+
 1.64.0 (2023-07-11)
 ------------------
 

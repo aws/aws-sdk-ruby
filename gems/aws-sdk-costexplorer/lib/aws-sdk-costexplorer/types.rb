@@ -420,12 +420,23 @@ module Aws::CostExplorer
     #   The status of a cost allocation tag.
     #   @return [String]
     #
+    # @!attribute [rw] last_updated_date
+    #   The last date that the tag was either activated or deactivated.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_used_date
+    #   The last month that the tag was used on an Amazon Web Services
+    #   resource.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CostAllocationTag AWS API Documentation
     #
     class CostAllocationTag < Struct.new(
       :tag_key,
       :type,
-      :status)
+      :status,
+      :last_updated_date,
+      :last_used_date)
       SENSITIVE = []
       include Aws::Structure
     end

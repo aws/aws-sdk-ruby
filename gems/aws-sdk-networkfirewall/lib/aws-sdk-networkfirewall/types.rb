@@ -717,7 +717,7 @@ module Aws::NetworkFirewall
     #   traffic. Network Firewall re-encrypts the traffic before sending it
     #   to its destination.
     #
-    #   To use a TLS inspection configuration, you add it to a Network
+    #   To use a TLS inspection configuration, you add it to a new Network
     #   Firewall firewall policy, then you apply the firewall policy to a
     #   firewall. Network Firewall acts as a proxy service to decrypt and
     #   inspect inbound traffic. You can reference a TLS inspection
@@ -1438,7 +1438,7 @@ module Aws::NetworkFirewall
     #   traffic. Network Firewall re-encrypts the traffic before sending it
     #   to its destination.
     #
-    #   To use a TLS inspection configuration, you add it to a Network
+    #   To use a TLS inspection configuration, you add it to a new Network
     #   Firewall firewall policy, then you apply the firewall policy to a
     #   firewall. Network Firewall acts as a proxy service to decrypt and
     #   inspect inbound traffic. You can reference a TLS inspection
@@ -3135,9 +3135,25 @@ module Aws::NetworkFirewall
     # StatefulRule configuration.
     #
     # @!attribute [rw] keyword
+    #   The keyword for the Suricata compatible rule option. You must
+    #   include a `sid` (signature ID), and can optionally include other
+    #   keywords. For information about Suricata compatible keywords, see
+    #   [Rule options][1] in the Suricata documentation.
+    #
+    #
+    #
+    #   [1]: https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html#rule-options
     #   @return [String]
     #
     # @!attribute [rw] settings
+    #   The settings of the Suricata compatible rule option. Rule options
+    #   have zero or more setting values, and the number of possible and
+    #   required settings depends on the `Keyword`. For more information
+    #   about the settings for specific options, see [Rule options][1].
+    #
+    #
+    #
+    #   [1]: https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html#rule-options
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/RuleOption AWS API Documentation
@@ -3197,7 +3213,7 @@ module Aws::NetworkFirewall
     #
     #
     #
-    #   [1]: https://suricata.readthedocs.iorules/intro.html#
+    #   [1]: https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html
     #   @return [Array<Types::StatefulRule>]
     #
     # @!attribute [rw] stateless_rules_and_custom_actions
@@ -3475,7 +3491,7 @@ module Aws::NetworkFirewall
     #
     #
     #
-    # [1]: https://suricata.readthedocs.iorules/intro.html#
+    # [1]: https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html
     #
     # @!attribute [rw] action
     #   Defines what Network Firewall should do with the packets in a
@@ -3499,16 +3515,6 @@ module Aws::NetworkFirewall
     #     drop traffic. You can enable the rule with `ALERT` action, verify
     #     in the logs that the rule is filtering as you want, then change
     #     the action to `DROP`.
-    #
-    #   * **REJECT** - Drops TCP traffic that matches the conditions of the
-    #     stateful rule, and sends a TCP reset packet back to sender of the
-    #     packet. A TCP reset packet is a packet with no payload and a `RST`
-    #     bit contained in the TCP header flags. Also sends an alert log
-    #     mesage if alert logging is configured in the Firewall
-    #     LoggingConfiguration.
-    #
-    #     `REJECT` isn't currently available for use with IMAP and FTP
-    #     protocols.
     #   @return [String]
     #
     # @!attribute [rw] header
@@ -3803,7 +3809,7 @@ module Aws::NetworkFirewall
     # traffic. Network Firewall re-encrypts the traffic before sending it to
     # its destination.
     #
-    # To use a TLS inspection configuration, you add it to a Network
+    # To use a TLS inspection configuration, you add it to a new Network
     # Firewall firewall policy, then you apply the firewall policy to a
     # firewall. Network Firewall acts as a proxy service to decrypt and
     # inspect inbound traffic. You can reference a TLS inspection
@@ -4483,7 +4489,10 @@ module Aws::NetworkFirewall
     #   @return [String]
     #
     # @!attribute [rw] firewall_policy
-    #   The updated firewall policy to use for the firewall.
+    #   The updated firewall policy to use for the firewall. You can't add
+    #   or remove a TLSInspectionConfiguration after you create a firewall
+    #   policy. However, you can replace an existing TLS inspection
+    #   configuration with another `TLSInspectionConfiguration`.
     #   @return [Types::FirewallPolicy]
     #
     # @!attribute [rw] description
@@ -4866,7 +4875,7 @@ module Aws::NetworkFirewall
     #   traffic. Network Firewall re-encrypts the traffic before sending it
     #   to its destination.
     #
-    #   To use a TLS inspection configuration, you add it to a Network
+    #   To use a TLS inspection configuration, you add it to a new Network
     #   Firewall firewall policy, then you apply the firewall policy to a
     #   firewall. Network Firewall acts as a proxy service to decrypt and
     #   inspect inbound traffic. You can reference a TLS inspection

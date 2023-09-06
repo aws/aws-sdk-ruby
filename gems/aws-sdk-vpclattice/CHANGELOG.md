@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2023-09-05)
+------------------
+
+* Feature - This release adds Lambda event structure version config support for LAMBDA target groups. It also adds newline support for auth policies.
+
 1.6.0 (2023-07-11)
 ------------------
 

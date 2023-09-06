@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2023-08-28)
+------------------
+
+* Feature - Documentation updates for permissions and links.
+
 1.79.0 (2023-07-11)
 ------------------
 

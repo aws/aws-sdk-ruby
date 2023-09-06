@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2023-08-30)
+------------------
+
+* Feature - Add SAP source connector parallel and pagination feature
+
 1.48.0 (2023-07-11)
 ------------------
 

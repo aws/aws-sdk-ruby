@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2023-08-17)
+------------------
+
+* Feature - Amazon GameLift updates its instance types support.
+
 1.69.0 (2023-07-11)
 ------------------
 

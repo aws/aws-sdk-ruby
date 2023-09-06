@@ -16,6 +16,8 @@ module Aws::Omics
     AbortMultipartReadSetUploadRequest = Shapes::StructureShape.new(name: 'AbortMultipartReadSetUploadRequest')
     AbortMultipartReadSetUploadResponse = Shapes::StructureShape.new(name: 'AbortMultipartReadSetUploadResponse')
     Accelerators = Shapes::StringShape.new(name: 'Accelerators')
+    AcceptShareRequest = Shapes::StructureShape.new(name: 'AcceptShareRequest')
+    AcceptShareResponse = Shapes::StructureShape.new(name: 'AcceptShareResponse')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     ActivateReadSetFilter = Shapes::StructureShape.new(name: 'ActivateReadSetFilter')
     ActivateReadSetJobItem = Shapes::StructureShape.new(name: 'ActivateReadSetJobItem')
@@ -34,8 +36,11 @@ module Aws::Omics
     AnnotationImportJobItems = Shapes::ListShape.new(name: 'AnnotationImportJobItems')
     AnnotationStoreItem = Shapes::StructureShape.new(name: 'AnnotationStoreItem')
     AnnotationStoreItems = Shapes::ListShape.new(name: 'AnnotationStoreItems')
+    AnnotationStoreVersionItem = Shapes::StructureShape.new(name: 'AnnotationStoreVersionItem')
+    AnnotationStoreVersionItems = Shapes::ListShape.new(name: 'AnnotationStoreVersionItems')
     AnnotationType = Shapes::StringShape.new(name: 'AnnotationType')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    ArnList = Shapes::ListShape.new(name: 'ArnList')
     BatchDeleteReadSetRequest = Shapes::StructureShape.new(name: 'BatchDeleteReadSetRequest')
     BatchDeleteReadSetResponse = Shapes::StructureShape.new(name: 'BatchDeleteReadSetResponse')
     Blob = Shapes::BlobShape.new(name: 'Blob')
@@ -55,8 +60,9 @@ module Aws::Omics
     CompletionTime = Shapes::TimestampShape.new(name: 'CompletionTime', timestampFormat: "iso8601")
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateAnnotationStoreRequest = Shapes::StructureShape.new(name: 'CreateAnnotationStoreRequest')
-    CreateAnnotationStoreRequestNameString = Shapes::StringShape.new(name: 'CreateAnnotationStoreRequestNameString')
     CreateAnnotationStoreResponse = Shapes::StructureShape.new(name: 'CreateAnnotationStoreResponse')
+    CreateAnnotationStoreVersionRequest = Shapes::StructureShape.new(name: 'CreateAnnotationStoreVersionRequest')
+    CreateAnnotationStoreVersionResponse = Shapes::StructureShape.new(name: 'CreateAnnotationStoreVersionResponse')
     CreateMultipartReadSetUploadRequest = Shapes::StructureShape.new(name: 'CreateMultipartReadSetUploadRequest')
     CreateMultipartReadSetUploadResponse = Shapes::StructureShape.new(name: 'CreateMultipartReadSetUploadResponse')
     CreateReferenceStoreRequest = Shapes::StructureShape.new(name: 'CreateReferenceStoreRequest')
@@ -69,8 +75,9 @@ module Aws::Omics
     CreateRunGroupResponse = Shapes::StructureShape.new(name: 'CreateRunGroupResponse')
     CreateSequenceStoreRequest = Shapes::StructureShape.new(name: 'CreateSequenceStoreRequest')
     CreateSequenceStoreResponse = Shapes::StructureShape.new(name: 'CreateSequenceStoreResponse')
+    CreateShareRequest = Shapes::StructureShape.new(name: 'CreateShareRequest')
+    CreateShareResponse = Shapes::StructureShape.new(name: 'CreateShareResponse')
     CreateVariantStoreRequest = Shapes::StructureShape.new(name: 'CreateVariantStoreRequest')
-    CreateVariantStoreRequestNameString = Shapes::StringShape.new(name: 'CreateVariantStoreRequestNameString')
     CreateVariantStoreResponse = Shapes::StructureShape.new(name: 'CreateVariantStoreResponse')
     CreateWorkflowRequest = Shapes::StructureShape.new(name: 'CreateWorkflowRequest')
     CreateWorkflowRequestStorageCapacityInteger = Shapes::IntegerShape.new(name: 'CreateWorkflowRequestStorageCapacityInteger')
@@ -79,6 +86,8 @@ module Aws::Omics
     CreationType = Shapes::StringShape.new(name: 'CreationType')
     DeleteAnnotationStoreRequest = Shapes::StructureShape.new(name: 'DeleteAnnotationStoreRequest')
     DeleteAnnotationStoreResponse = Shapes::StructureShape.new(name: 'DeleteAnnotationStoreResponse')
+    DeleteAnnotationStoreVersionsRequest = Shapes::StructureShape.new(name: 'DeleteAnnotationStoreVersionsRequest')
+    DeleteAnnotationStoreVersionsResponse = Shapes::StructureShape.new(name: 'DeleteAnnotationStoreVersionsResponse')
     DeleteReferenceRequest = Shapes::StructureShape.new(name: 'DeleteReferenceRequest')
     DeleteReferenceResponse = Shapes::StructureShape.new(name: 'DeleteReferenceResponse')
     DeleteReferenceStoreRequest = Shapes::StructureShape.new(name: 'DeleteReferenceStoreRequest')
@@ -87,9 +96,12 @@ module Aws::Omics
     DeleteRunRequest = Shapes::StructureShape.new(name: 'DeleteRunRequest')
     DeleteSequenceStoreRequest = Shapes::StructureShape.new(name: 'DeleteSequenceStoreRequest')
     DeleteSequenceStoreResponse = Shapes::StructureShape.new(name: 'DeleteSequenceStoreResponse')
+    DeleteShareRequest = Shapes::StructureShape.new(name: 'DeleteShareRequest')
+    DeleteShareResponse = Shapes::StructureShape.new(name: 'DeleteShareResponse')
     DeleteVariantStoreRequest = Shapes::StructureShape.new(name: 'DeleteVariantStoreRequest')
     DeleteVariantStoreResponse = Shapes::StructureShape.new(name: 'DeleteVariantStoreResponse')
     DeleteWorkflowRequest = Shapes::StructureShape.new(name: 'DeleteWorkflowRequest')
+    Description = Shapes::StringShape.new(name: 'Description')
     Encoding = Shapes::StringShape.new(name: 'Encoding')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     EscapeChar = Shapes::StringShape.new(name: 'EscapeChar')
@@ -106,6 +118,7 @@ module Aws::Omics
     FileInformationPartSizeLong = Shapes::IntegerShape.new(name: 'FileInformationPartSizeLong')
     FileInformationTotalPartsInteger = Shapes::IntegerShape.new(name: 'FileInformationTotalPartsInteger')
     FileType = Shapes::StringShape.new(name: 'FileType')
+    Filter = Shapes::StructureShape.new(name: 'Filter')
     FormatOptions = Shapes::UnionShape.new(name: 'FormatOptions')
     FormatToHeader = Shapes::MapShape.new(name: 'FormatToHeader')
     FormatToHeaderKey = Shapes::StringShape.new(name: 'FormatToHeaderKey')
@@ -115,6 +128,8 @@ module Aws::Omics
     GetAnnotationImportResponse = Shapes::StructureShape.new(name: 'GetAnnotationImportResponse')
     GetAnnotationStoreRequest = Shapes::StructureShape.new(name: 'GetAnnotationStoreRequest')
     GetAnnotationStoreResponse = Shapes::StructureShape.new(name: 'GetAnnotationStoreResponse')
+    GetAnnotationStoreVersionRequest = Shapes::StructureShape.new(name: 'GetAnnotationStoreVersionRequest')
+    GetAnnotationStoreVersionResponse = Shapes::StructureShape.new(name: 'GetAnnotationStoreVersionResponse')
     GetReadSetActivationJobRequest = Shapes::StructureShape.new(name: 'GetReadSetActivationJobRequest')
     GetReadSetActivationJobResponse = Shapes::StructureShape.new(name: 'GetReadSetActivationJobResponse')
     GetReadSetExportJobRequest = Shapes::StructureShape.new(name: 'GetReadSetExportJobRequest')
@@ -152,6 +167,8 @@ module Aws::Omics
     GetRunTaskResponseMemoryInteger = Shapes::IntegerShape.new(name: 'GetRunTaskResponseMemoryInteger')
     GetSequenceStoreRequest = Shapes::StructureShape.new(name: 'GetSequenceStoreRequest')
     GetSequenceStoreResponse = Shapes::StructureShape.new(name: 'GetSequenceStoreResponse')
+    GetShareRequest = Shapes::StructureShape.new(name: 'GetShareRequest')
+    GetShareResponse = Shapes::StructureShape.new(name: 'GetShareResponse')
     GetVariantImportRequest = Shapes::StructureShape.new(name: 'GetVariantImportRequest')
     GetVariantImportResponse = Shapes::StructureShape.new(name: 'GetVariantImportResponse')
     GetVariantStoreRequest = Shapes::StructureShape.new(name: 'GetVariantStoreRequest')
@@ -171,6 +188,7 @@ module Aws::Omics
     ImportReferenceJobList = Shapes::ListShape.new(name: 'ImportReferenceJobList')
     ImportReferenceSourceItem = Shapes::StructureShape.new(name: 'ImportReferenceSourceItem')
     ImportReferenceSourceList = Shapes::ListShape.new(name: 'ImportReferenceSourceList')
+    Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
     JobStatusMessage = Shapes::StringShape.new(name: 'JobStatusMessage')
@@ -182,6 +200,11 @@ module Aws::Omics
     ListAnnotationImportJobsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListAnnotationImportJobsRequestMaxResultsInteger')
     ListAnnotationImportJobsRequestNextTokenString = Shapes::StringShape.new(name: 'ListAnnotationImportJobsRequestNextTokenString')
     ListAnnotationImportJobsResponse = Shapes::StructureShape.new(name: 'ListAnnotationImportJobsResponse')
+    ListAnnotationStoreVersionsFilter = Shapes::StructureShape.new(name: 'ListAnnotationStoreVersionsFilter')
+    ListAnnotationStoreVersionsRequest = Shapes::StructureShape.new(name: 'ListAnnotationStoreVersionsRequest')
+    ListAnnotationStoreVersionsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListAnnotationStoreVersionsRequestMaxResultsInteger')
+    ListAnnotationStoreVersionsRequestNextTokenString = Shapes::StringShape.new(name: 'ListAnnotationStoreVersionsRequestNextTokenString')
+    ListAnnotationStoreVersionsResponse = Shapes::StructureShape.new(name: 'ListAnnotationStoreVersionsResponse')
     ListAnnotationStoresFilter = Shapes::StructureShape.new(name: 'ListAnnotationStoresFilter')
     ListAnnotationStoresRequest = Shapes::StructureShape.new(name: 'ListAnnotationStoresRequest')
     ListAnnotationStoresRequestIdsList = Shapes::ListShape.new(name: 'ListAnnotationStoresRequestIdsList')
@@ -227,6 +250,8 @@ module Aws::Omics
     ListSequenceStoresRequest = Shapes::StructureShape.new(name: 'ListSequenceStoresRequest')
     ListSequenceStoresRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListSequenceStoresRequestMaxResultsInteger')
     ListSequenceStoresResponse = Shapes::StructureShape.new(name: 'ListSequenceStoresResponse')
+    ListSharesRequest = Shapes::StructureShape.new(name: 'ListSharesRequest')
+    ListSharesResponse = Shapes::StructureShape.new(name: 'ListSharesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListVariantImportJobsFilter = Shapes::StructureShape.new(name: 'ListVariantImportJobsFilter')
@@ -309,6 +334,7 @@ module Aws::Omics
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceIdentifier = Shapes::StringShape.new(name: 'ResourceIdentifier')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceOwner = Shapes::StringShape.new(name: 'ResourceOwner')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RunArn = Shapes::StringShape.new(name: 'RunArn')
     RunExport = Shapes::StringShape.new(name: 'RunExport')
@@ -340,6 +366,7 @@ module Aws::Omics
     RunResourceDigest = Shapes::StringShape.new(name: 'RunResourceDigest')
     RunResourceDigestKey = Shapes::StringShape.new(name: 'RunResourceDigestKey')
     RunResourceDigests = Shapes::MapShape.new(name: 'RunResourceDigests')
+    RunRetentionMode = Shapes::StringShape.new(name: 'RunRetentionMode')
     RunRoleArn = Shapes::StringShape.new(name: 'RunRoleArn')
     RunStartedBy = Shapes::StringShape.new(name: 'RunStartedBy')
     RunStatus = Shapes::StringShape.new(name: 'RunStatus')
@@ -361,6 +388,10 @@ module Aws::Omics
     SequenceStoreId = Shapes::StringShape.new(name: 'SequenceStoreId')
     SequenceStoreName = Shapes::StringShape.new(name: 'SequenceStoreName')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    ShareDetails = Shapes::StructureShape.new(name: 'ShareDetails')
+    ShareDetailsList = Shapes::ListShape.new(name: 'ShareDetailsList')
+    ShareName = Shapes::StringShape.new(name: 'ShareName')
+    ShareStatus = Shapes::StringShape.new(name: 'ShareStatus')
     SourceFiles = Shapes::StructureShape.new(name: 'SourceFiles')
     SseConfig = Shapes::StructureShape.new(name: 'SseConfig')
     SseConfigKeyArnString = Shapes::StringShape.new(name: 'SseConfigKeyArnString')
@@ -387,8 +418,8 @@ module Aws::Omics
     StartRunResponse = Shapes::StructureShape.new(name: 'StartRunResponse')
     StartVariantImportRequest = Shapes::StructureShape.new(name: 'StartVariantImportRequest')
     StartVariantImportResponse = Shapes::StructureShape.new(name: 'StartVariantImportResponse')
+    StatusList = Shapes::ListShape.new(name: 'StatusList')
     StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
-    StoreDescription = Shapes::StringShape.new(name: 'StoreDescription')
     StoreFormat = Shapes::StringShape.new(name: 'StoreFormat')
     StoreName = Shapes::StringShape.new(name: 'StoreName')
     StoreOptions = Shapes::UnionShape.new(name: 'StoreOptions')
@@ -405,6 +436,7 @@ module Aws::Omics
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TaskId = Shapes::StringShape.new(name: 'TaskId')
+    TaskInstanceType = Shapes::StringShape.new(name: 'TaskInstanceType')
     TaskList = Shapes::ListShape.new(name: 'TaskList')
     TaskListItem = Shapes::StructureShape.new(name: 'TaskListItem')
     TaskListItemCpusInteger = Shapes::IntegerShape.new(name: 'TaskListItemCpusInteger')
@@ -420,10 +452,14 @@ module Aws::Omics
     TsvOptions = Shapes::StructureShape.new(name: 'TsvOptions')
     TsvStoreOptions = Shapes::StructureShape.new(name: 'TsvStoreOptions')
     TsvStoreOptionsSchemaList = Shapes::ListShape.new(name: 'TsvStoreOptionsSchemaList')
+    TsvVersionOptions = Shapes::StructureShape.new(name: 'TsvVersionOptions')
+    TsvVersionOptionsSchemaList = Shapes::ListShape.new(name: 'TsvVersionOptionsSchemaList')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAnnotationStoreRequest = Shapes::StructureShape.new(name: 'UpdateAnnotationStoreRequest')
     UpdateAnnotationStoreResponse = Shapes::StructureShape.new(name: 'UpdateAnnotationStoreResponse')
+    UpdateAnnotationStoreVersionRequest = Shapes::StructureShape.new(name: 'UpdateAnnotationStoreVersionRequest')
+    UpdateAnnotationStoreVersionResponse = Shapes::StructureShape.new(name: 'UpdateAnnotationStoreVersionResponse')
     UpdateRunGroupRequest = Shapes::StructureShape.new(name: 'UpdateRunGroupRequest')
     UpdateRunGroupRequestMaxCpusInteger = Shapes::IntegerShape.new(name: 'UpdateRunGroupRequestMaxCpusInteger')
     UpdateRunGroupRequestMaxDurationInteger = Shapes::IntegerShape.new(name: 'UpdateRunGroupRequestMaxDurationInteger')
@@ -447,6 +483,12 @@ module Aws::Omics
     VariantStoreItem = Shapes::StructureShape.new(name: 'VariantStoreItem')
     VariantStoreItems = Shapes::ListShape.new(name: 'VariantStoreItems')
     VcfOptions = Shapes::StructureShape.new(name: 'VcfOptions')
+    VersionDeleteError = Shapes::StructureShape.new(name: 'VersionDeleteError')
+    VersionDeleteErrorList = Shapes::ListShape.new(name: 'VersionDeleteErrorList')
+    VersionList = Shapes::ListShape.new(name: 'VersionList')
+    VersionName = Shapes::StringShape.new(name: 'VersionName')
+    VersionOptions = Shapes::UnionShape.new(name: 'VersionOptions')
+    VersionStatus = Shapes::StringShape.new(name: 'VersionStatus')
     WorkflowArn = Shapes::StringShape.new(name: 'WorkflowArn')
     WorkflowDefinition = Shapes::StringShape.new(name: 'WorkflowDefinition')
     WorkflowDescription = Shapes::StringShape.new(name: 'WorkflowDescription')
@@ -478,6 +520,12 @@ module Aws::Omics
     AbortMultipartReadSetUploadRequest.struct_class = Types::AbortMultipartReadSetUploadRequest
 
     AbortMultipartReadSetUploadResponse.struct_class = Types::AbortMultipartReadSetUploadResponse
+
+    AcceptShareRequest.add_member(:share_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "shareId"))
+    AcceptShareRequest.struct_class = Types::AcceptShareRequest
+
+    AcceptShareResponse.add_member(:status, Shapes::ShapeRef.new(shape: ShareStatus, location_name: "status"))
+    AcceptShareResponse.struct_class = Types::AcceptShareResponse
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -519,6 +567,7 @@ module Aws::Omics
 
     AnnotationImportJobItem.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
     AnnotationImportJobItem.add_member(:destination_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "destinationName"))
+    AnnotationImportJobItem.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, required: true, location_name: "versionName"))
     AnnotationImportJobItem.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "roleArn"))
     AnnotationImportJobItem.add_member(:status, Shapes::ShapeRef.new(shape: JobStatus, required: true, location_name: "status"))
     AnnotationImportJobItem.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "creationTime"))
@@ -536,7 +585,7 @@ module Aws::Omics
     AnnotationStoreItem.add_member(:store_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "storeArn"))
     AnnotationStoreItem.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     AnnotationStoreItem.add_member(:store_format, Shapes::ShapeRef.new(shape: StoreFormat, required: true, location_name: "storeFormat"))
-    AnnotationStoreItem.add_member(:description, Shapes::ShapeRef.new(shape: StoreDescription, required: true, location_name: "description"))
+    AnnotationStoreItem.add_member(:description, Shapes::ShapeRef.new(shape: Description, required: true, location_name: "description"))
     AnnotationStoreItem.add_member(:sse_config, Shapes::ShapeRef.new(shape: SseConfig, required: true, location_name: "sseConfig"))
     AnnotationStoreItem.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "creationTime"))
     AnnotationStoreItem.add_member(:update_time, Shapes::ShapeRef.new(shape: UpdateTime, required: true, location_name: "updateTime"))
@@ -545,6 +594,23 @@ module Aws::Omics
     AnnotationStoreItem.struct_class = Types::AnnotationStoreItem
 
     AnnotationStoreItems.member = Shapes::ShapeRef.new(shape: AnnotationStoreItem)
+
+    AnnotationStoreVersionItem.add_member(:store_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "storeId"))
+    AnnotationStoreVersionItem.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "id"))
+    AnnotationStoreVersionItem.add_member(:status, Shapes::ShapeRef.new(shape: VersionStatus, required: true, location_name: "status"))
+    AnnotationStoreVersionItem.add_member(:version_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "versionArn"))
+    AnnotationStoreVersionItem.add_member(:name, Shapes::ShapeRef.new(shape: StoreName, required: true, location_name: "name"))
+    AnnotationStoreVersionItem.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, required: true, location_name: "versionName"))
+    AnnotationStoreVersionItem.add_member(:description, Shapes::ShapeRef.new(shape: Description, required: true, location_name: "description"))
+    AnnotationStoreVersionItem.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "creationTime"))
+    AnnotationStoreVersionItem.add_member(:update_time, Shapes::ShapeRef.new(shape: UpdateTime, required: true, location_name: "updateTime"))
+    AnnotationStoreVersionItem.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, required: true, location_name: "statusMessage"))
+    AnnotationStoreVersionItem.add_member(:version_size_bytes, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "versionSizeBytes"))
+    AnnotationStoreVersionItem.struct_class = Types::AnnotationStoreVersionItem
+
+    AnnotationStoreVersionItems.member = Shapes::ShapeRef.new(shape: AnnotationStoreVersionItem)
+
+    ArnList.member = Shapes::ShapeRef.new(shape: String)
 
     BatchDeleteReadSetRequest.add_member(:ids, Shapes::ShapeRef.new(shape: ReadSetIdList, required: true, location_name: "ids"))
     BatchDeleteReadSetRequest.add_member(:sequence_store_id, Shapes::ShapeRef.new(shape: SequenceStoreId, required: true, location: "uri", location_name: "sequenceStoreId"))
@@ -585,9 +651,10 @@ module Aws::Omics
     ConflictException.struct_class = Types::ConflictException
 
     CreateAnnotationStoreRequest.add_member(:reference, Shapes::ShapeRef.new(shape: ReferenceItem, location_name: "reference"))
-    CreateAnnotationStoreRequest.add_member(:name, Shapes::ShapeRef.new(shape: CreateAnnotationStoreRequestNameString, location_name: "name"))
-    CreateAnnotationStoreRequest.add_member(:description, Shapes::ShapeRef.new(shape: StoreDescription, location_name: "description"))
+    CreateAnnotationStoreRequest.add_member(:name, Shapes::ShapeRef.new(shape: StoreName, location_name: "name"))
+    CreateAnnotationStoreRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateAnnotationStoreRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateAnnotationStoreRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, location_name: "versionName"))
     CreateAnnotationStoreRequest.add_member(:sse_config, Shapes::ShapeRef.new(shape: SseConfig, location_name: "sseConfig"))
     CreateAnnotationStoreRequest.add_member(:store_format, Shapes::ShapeRef.new(shape: StoreFormat, required: true, location_name: "storeFormat"))
     CreateAnnotationStoreRequest.add_member(:store_options, Shapes::ShapeRef.new(shape: StoreOptions, location_name: "storeOptions"))
@@ -599,8 +666,25 @@ module Aws::Omics
     CreateAnnotationStoreResponse.add_member(:store_options, Shapes::ShapeRef.new(shape: StoreOptions, location_name: "storeOptions"))
     CreateAnnotationStoreResponse.add_member(:status, Shapes::ShapeRef.new(shape: StoreStatus, required: true, location_name: "status"))
     CreateAnnotationStoreResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    CreateAnnotationStoreResponse.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, required: true, location_name: "versionName"))
     CreateAnnotationStoreResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "creationTime"))
     CreateAnnotationStoreResponse.struct_class = Types::CreateAnnotationStoreResponse
+
+    CreateAnnotationStoreVersionRequest.add_member(:name, Shapes::ShapeRef.new(shape: StoreName, required: true, location: "uri", location_name: "name"))
+    CreateAnnotationStoreVersionRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, required: true, location_name: "versionName"))
+    CreateAnnotationStoreVersionRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateAnnotationStoreVersionRequest.add_member(:version_options, Shapes::ShapeRef.new(shape: VersionOptions, location_name: "versionOptions"))
+    CreateAnnotationStoreVersionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateAnnotationStoreVersionRequest.struct_class = Types::CreateAnnotationStoreVersionRequest
+
+    CreateAnnotationStoreVersionResponse.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "id"))
+    CreateAnnotationStoreVersionResponse.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, required: true, location_name: "versionName"))
+    CreateAnnotationStoreVersionResponse.add_member(:store_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "storeId"))
+    CreateAnnotationStoreVersionResponse.add_member(:version_options, Shapes::ShapeRef.new(shape: VersionOptions, location_name: "versionOptions"))
+    CreateAnnotationStoreVersionResponse.add_member(:name, Shapes::ShapeRef.new(shape: StoreName, required: true, location_name: "name"))
+    CreateAnnotationStoreVersionResponse.add_member(:status, Shapes::ShapeRef.new(shape: VersionStatus, required: true, location_name: "status"))
+    CreateAnnotationStoreVersionResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "creationTime"))
+    CreateAnnotationStoreVersionResponse.struct_class = Types::CreateAnnotationStoreVersionResponse
 
     CreateMultipartReadSetUploadRequest.add_member(:sequence_store_id, Shapes::ShapeRef.new(shape: SequenceStoreId, required: true, location: "uri", location_name: "sequenceStoreId"))
     CreateMultipartReadSetUploadRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
@@ -673,9 +757,19 @@ module Aws::Omics
     CreateSequenceStoreResponse.add_member(:fallback_location, Shapes::ShapeRef.new(shape: S3Destination, location_name: "fallbackLocation"))
     CreateSequenceStoreResponse.struct_class = Types::CreateSequenceStoreResponse
 
+    CreateShareRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceArn"))
+    CreateShareRequest.add_member(:principal_subscriber, Shapes::ShapeRef.new(shape: String, required: true, location_name: "principalSubscriber"))
+    CreateShareRequest.add_member(:share_name, Shapes::ShapeRef.new(shape: ShareName, location_name: "shareName"))
+    CreateShareRequest.struct_class = Types::CreateShareRequest
+
+    CreateShareResponse.add_member(:share_id, Shapes::ShapeRef.new(shape: String, location_name: "shareId"))
+    CreateShareResponse.add_member(:status, Shapes::ShapeRef.new(shape: ShareStatus, location_name: "status"))
+    CreateShareResponse.add_member(:share_name, Shapes::ShapeRef.new(shape: ShareName, location_name: "shareName"))
+    CreateShareResponse.struct_class = Types::CreateShareResponse
+
     CreateVariantStoreRequest.add_member(:reference, Shapes::ShapeRef.new(shape: ReferenceItem, required: true, location_name: "reference"))
-    CreateVariantStoreRequest.add_member(:name, Shapes::ShapeRef.new(shape: CreateVariantStoreRequestNameString, location_name: "name"))
-    CreateVariantStoreRequest.add_member(:description, Shapes::ShapeRef.new(shape: StoreDescription, location_name: "description"))
+    CreateVariantStoreRequest.add_member(:name, Shapes::ShapeRef.new(shape: StoreName, location_name: "name"))
+    CreateVariantStoreRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateVariantStoreRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateVariantStoreRequest.add_member(:sse_config, Shapes::ShapeRef.new(shape: SseConfig, location_name: "sseConfig"))
     CreateVariantStoreRequest.struct_class = Types::CreateVariantStoreRequest
@@ -713,6 +807,14 @@ module Aws::Omics
     DeleteAnnotationStoreResponse.add_member(:status, Shapes::ShapeRef.new(shape: StoreStatus, required: true, location_name: "status"))
     DeleteAnnotationStoreResponse.struct_class = Types::DeleteAnnotationStoreResponse
 
+    DeleteAnnotationStoreVersionsRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    DeleteAnnotationStoreVersionsRequest.add_member(:versions, Shapes::ShapeRef.new(shape: VersionList, required: true, location_name: "versions"))
+    DeleteAnnotationStoreVersionsRequest.add_member(:force, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location: "querystring", location_name: "force"))
+    DeleteAnnotationStoreVersionsRequest.struct_class = Types::DeleteAnnotationStoreVersionsRequest
+
+    DeleteAnnotationStoreVersionsResponse.add_member(:errors, Shapes::ShapeRef.new(shape: VersionDeleteErrorList, location_name: "errors"))
+    DeleteAnnotationStoreVersionsResponse.struct_class = Types::DeleteAnnotationStoreVersionsResponse
+
     DeleteReferenceRequest.add_member(:id, Shapes::ShapeRef.new(shape: ReferenceId, required: true, location: "uri", location_name: "id"))
     DeleteReferenceRequest.add_member(:reference_store_id, Shapes::ShapeRef.new(shape: ReferenceStoreId, required: true, location: "uri", location_name: "referenceStoreId"))
     DeleteReferenceRequest.struct_class = Types::DeleteReferenceRequest
@@ -734,6 +836,12 @@ module Aws::Omics
     DeleteSequenceStoreRequest.struct_class = Types::DeleteSequenceStoreRequest
 
     DeleteSequenceStoreResponse.struct_class = Types::DeleteSequenceStoreResponse
+
+    DeleteShareRequest.add_member(:share_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "shareId"))
+    DeleteShareRequest.struct_class = Types::DeleteShareRequest
+
+    DeleteShareResponse.add_member(:status, Shapes::ShapeRef.new(shape: ShareStatus, location_name: "status"))
+    DeleteShareResponse.struct_class = Types::DeleteShareResponse
 
     DeleteVariantStoreRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     DeleteVariantStoreRequest.add_member(:force, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location: "querystring", location_name: "force"))
@@ -775,6 +883,10 @@ module Aws::Omics
     FileInformation.add_member(:content_length, Shapes::ShapeRef.new(shape: FileInformationContentLengthLong, location_name: "contentLength"))
     FileInformation.struct_class = Types::FileInformation
 
+    Filter.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "resourceArns"))
+    Filter.add_member(:status, Shapes::ShapeRef.new(shape: StatusList, location_name: "status"))
+    Filter.struct_class = Types::Filter
+
     FormatOptions.add_member(:tsv_options, Shapes::ShapeRef.new(shape: TsvOptions, location_name: "tsvOptions"))
     FormatOptions.add_member(:vcf_options, Shapes::ShapeRef.new(shape: VcfOptions, location_name: "vcfOptions"))
     FormatOptions.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -791,6 +903,7 @@ module Aws::Omics
 
     GetAnnotationImportResponse.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "id"))
     GetAnnotationImportResponse.add_member(:destination_name, Shapes::ShapeRef.new(shape: StoreName, required: true, location_name: "destinationName"))
+    GetAnnotationImportResponse.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, required: true, location_name: "versionName"))
     GetAnnotationImportResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "roleArn"))
     GetAnnotationImportResponse.add_member(:status, Shapes::ShapeRef.new(shape: JobStatus, required: true, location_name: "status"))
     GetAnnotationImportResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: JobStatusMsg, required: true, location_name: "statusMessage"))
@@ -811,7 +924,7 @@ module Aws::Omics
     GetAnnotationStoreResponse.add_member(:status, Shapes::ShapeRef.new(shape: StoreStatus, required: true, location_name: "status"))
     GetAnnotationStoreResponse.add_member(:store_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "storeArn"))
     GetAnnotationStoreResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
-    GetAnnotationStoreResponse.add_member(:description, Shapes::ShapeRef.new(shape: StoreDescription, required: true, location_name: "description"))
+    GetAnnotationStoreResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, required: true, location_name: "description"))
     GetAnnotationStoreResponse.add_member(:sse_config, Shapes::ShapeRef.new(shape: SseConfig, required: true, location_name: "sseConfig"))
     GetAnnotationStoreResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "creationTime"))
     GetAnnotationStoreResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: UpdateTime, required: true, location_name: "updateTime"))
@@ -820,7 +933,27 @@ module Aws::Omics
     GetAnnotationStoreResponse.add_member(:store_format, Shapes::ShapeRef.new(shape: StoreFormat, location_name: "storeFormat"))
     GetAnnotationStoreResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, required: true, location_name: "statusMessage"))
     GetAnnotationStoreResponse.add_member(:store_size_bytes, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "storeSizeBytes"))
+    GetAnnotationStoreResponse.add_member(:num_versions, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "numVersions"))
     GetAnnotationStoreResponse.struct_class = Types::GetAnnotationStoreResponse
+
+    GetAnnotationStoreVersionRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    GetAnnotationStoreVersionRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "versionName"))
+    GetAnnotationStoreVersionRequest.struct_class = Types::GetAnnotationStoreVersionRequest
+
+    GetAnnotationStoreVersionResponse.add_member(:store_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "storeId"))
+    GetAnnotationStoreVersionResponse.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "id"))
+    GetAnnotationStoreVersionResponse.add_member(:status, Shapes::ShapeRef.new(shape: VersionStatus, required: true, location_name: "status"))
+    GetAnnotationStoreVersionResponse.add_member(:version_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "versionArn"))
+    GetAnnotationStoreVersionResponse.add_member(:name, Shapes::ShapeRef.new(shape: StoreName, required: true, location_name: "name"))
+    GetAnnotationStoreVersionResponse.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, required: true, location_name: "versionName"))
+    GetAnnotationStoreVersionResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, required: true, location_name: "description"))
+    GetAnnotationStoreVersionResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "creationTime"))
+    GetAnnotationStoreVersionResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: UpdateTime, required: true, location_name: "updateTime"))
+    GetAnnotationStoreVersionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "tags"))
+    GetAnnotationStoreVersionResponse.add_member(:version_options, Shapes::ShapeRef.new(shape: VersionOptions, location_name: "versionOptions"))
+    GetAnnotationStoreVersionResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, required: true, location_name: "statusMessage"))
+    GetAnnotationStoreVersionResponse.add_member(:version_size_bytes, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "versionSizeBytes"))
+    GetAnnotationStoreVersionResponse.struct_class = Types::GetAnnotationStoreVersionResponse
 
     GetReadSetActivationJobRequest.add_member(:id, Shapes::ShapeRef.new(shape: ActivationJobId, required: true, location: "uri", location_name: "id"))
     GetReadSetActivationJobRequest.add_member(:sequence_store_id, Shapes::ShapeRef.new(shape: SequenceStoreId, required: true, location: "uri", location_name: "sequenceStoreId"))
@@ -990,6 +1123,7 @@ module Aws::Omics
     GetRunResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: RunStatusMessage, location_name: "statusMessage"))
     GetRunResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetRunResponse.add_member(:accelerators, Shapes::ShapeRef.new(shape: Accelerators, location_name: "accelerators"))
+    GetRunResponse.add_member(:retention_mode, Shapes::ShapeRef.new(shape: RunRetentionMode, location_name: "retentionMode"))
     GetRunResponse.struct_class = Types::GetRunResponse
 
     GetRunTaskRequest.add_member(:id, Shapes::ShapeRef.new(shape: RunId, required: true, location: "uri", location_name: "id"))
@@ -1007,6 +1141,7 @@ module Aws::Omics
     GetRunTaskResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: TaskStatusMessage, location_name: "statusMessage"))
     GetRunTaskResponse.add_member(:log_stream, Shapes::ShapeRef.new(shape: TaskLogStream, location_name: "logStream"))
     GetRunTaskResponse.add_member(:gpus, Shapes::ShapeRef.new(shape: GetRunTaskResponseGpusInteger, location_name: "gpus"))
+    GetRunTaskResponse.add_member(:instance_type, Shapes::ShapeRef.new(shape: TaskInstanceType, location_name: "instanceType"))
     GetRunTaskResponse.struct_class = Types::GetRunTaskResponse
 
     GetSequenceStoreRequest.add_member(:id, Shapes::ShapeRef.new(shape: SequenceStoreId, required: true, location: "uri", location_name: "id"))
@@ -1020,6 +1155,12 @@ module Aws::Omics
     GetSequenceStoreResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "creationTime"))
     GetSequenceStoreResponse.add_member(:fallback_location, Shapes::ShapeRef.new(shape: S3Destination, location_name: "fallbackLocation"))
     GetSequenceStoreResponse.struct_class = Types::GetSequenceStoreResponse
+
+    GetShareRequest.add_member(:share_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "shareId"))
+    GetShareRequest.struct_class = Types::GetShareRequest
+
+    GetShareResponse.add_member(:share, Shapes::ShapeRef.new(shape: ShareDetails, location_name: "share"))
+    GetShareResponse.struct_class = Types::GetShareResponse
 
     GetVariantImportRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "jobId"))
     GetVariantImportRequest.struct_class = Types::GetVariantImportRequest
@@ -1045,7 +1186,7 @@ module Aws::Omics
     GetVariantStoreResponse.add_member(:status, Shapes::ShapeRef.new(shape: StoreStatus, required: true, location_name: "status"))
     GetVariantStoreResponse.add_member(:store_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "storeArn"))
     GetVariantStoreResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
-    GetVariantStoreResponse.add_member(:description, Shapes::ShapeRef.new(shape: StoreDescription, required: true, location_name: "description"))
+    GetVariantStoreResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, required: true, location_name: "description"))
     GetVariantStoreResponse.add_member(:sse_config, Shapes::ShapeRef.new(shape: SseConfig, required: true, location_name: "sseConfig"))
     GetVariantStoreResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "creationTime"))
     GetVariantStoreResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: UpdateTime, required: true, location_name: "updateTime"))
@@ -1151,6 +1292,19 @@ module Aws::Omics
     ListAnnotationImportJobsResponse.add_member(:annotation_import_jobs, Shapes::ShapeRef.new(shape: AnnotationImportJobItems, location_name: "annotationImportJobs"))
     ListAnnotationImportJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListAnnotationImportJobsResponse.struct_class = Types::ListAnnotationImportJobsResponse
+
+    ListAnnotationStoreVersionsFilter.add_member(:status, Shapes::ShapeRef.new(shape: VersionStatus, location_name: "status"))
+    ListAnnotationStoreVersionsFilter.struct_class = Types::ListAnnotationStoreVersionsFilter
+
+    ListAnnotationStoreVersionsRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    ListAnnotationStoreVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAnnotationStoreVersionsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListAnnotationStoreVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListAnnotationStoreVersionsRequestNextTokenString, location: "querystring", location_name: "nextToken"))
+    ListAnnotationStoreVersionsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: ListAnnotationStoreVersionsFilter, location_name: "filter"))
+    ListAnnotationStoreVersionsRequest.struct_class = Types::ListAnnotationStoreVersionsRequest
+
+    ListAnnotationStoreVersionsResponse.add_member(:annotation_store_versions, Shapes::ShapeRef.new(shape: AnnotationStoreVersionItems, location_name: "annotationStoreVersions"))
+    ListAnnotationStoreVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListAnnotationStoreVersionsResponse.struct_class = Types::ListAnnotationStoreVersionsResponse
 
     ListAnnotationStoresFilter.add_member(:status, Shapes::ShapeRef.new(shape: StoreStatus, location_name: "status"))
     ListAnnotationStoresFilter.struct_class = Types::ListAnnotationStoresFilter
@@ -1295,6 +1449,16 @@ module Aws::Omics
     ListSequenceStoresResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListSequenceStoresResponse.add_member(:sequence_stores, Shapes::ShapeRef.new(shape: SequenceStoreDetailList, required: true, location_name: "sequenceStores"))
     ListSequenceStoresResponse.struct_class = Types::ListSequenceStoresResponse
+
+    ListSharesRequest.add_member(:resource_owner, Shapes::ShapeRef.new(shape: ResourceOwner, required: true, location_name: "resourceOwner"))
+    ListSharesRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Filter, location_name: "filter"))
+    ListSharesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListSharesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location: "querystring", location_name: "maxResults"))
+    ListSharesRequest.struct_class = Types::ListSharesRequest
+
+    ListSharesResponse.add_member(:shares, Shapes::ShapeRef.new(shape: ShareDetailsList, required: true, location_name: "shares"))
+    ListSharesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListSharesResponse.struct_class = Types::ListSharesResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TagArn, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
@@ -1541,6 +1705,19 @@ module Aws::Omics
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
+    ShareDetails.add_member(:share_id, Shapes::ShapeRef.new(shape: String, location_name: "shareId"))
+    ShareDetails.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "resourceArn"))
+    ShareDetails.add_member(:principal_subscriber, Shapes::ShapeRef.new(shape: String, location_name: "principalSubscriber"))
+    ShareDetails.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    ShareDetails.add_member(:status, Shapes::ShapeRef.new(shape: ShareStatus, location_name: "status"))
+    ShareDetails.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "statusMessage"))
+    ShareDetails.add_member(:share_name, Shapes::ShapeRef.new(shape: ShareName, location_name: "shareName"))
+    ShareDetails.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "creationTime"))
+    ShareDetails.add_member(:update_time, Shapes::ShapeRef.new(shape: UpdateTime, location_name: "updateTime"))
+    ShareDetails.struct_class = Types::ShareDetails
+
+    ShareDetailsList.member = Shapes::ShapeRef.new(shape: ShareDetails)
+
     SourceFiles.add_member(:source1, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "source1"))
     SourceFiles.add_member(:source2, Shapes::ShapeRef.new(shape: S3Uri, location_name: "source2"))
     SourceFiles.struct_class = Types::SourceFiles
@@ -1552,6 +1729,7 @@ module Aws::Omics
     StartAnnotationImportRequest.add_member(:destination_name, Shapes::ShapeRef.new(shape: StoreName, required: true, location_name: "destinationName"))
     StartAnnotationImportRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "roleArn"))
     StartAnnotationImportRequest.add_member(:items, Shapes::ShapeRef.new(shape: AnnotationImportItemSources, required: true, location_name: "items"))
+    StartAnnotationImportRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, location_name: "versionName"))
     StartAnnotationImportRequest.add_member(:format_options, Shapes::ShapeRef.new(shape: FormatOptions, location_name: "formatOptions"))
     StartAnnotationImportRequest.add_member(:run_left_normalization, Shapes::ShapeRef.new(shape: RunLeftNormalization, location_name: "runLeftNormalization"))
     StartAnnotationImportRequest.add_member(:annotation_fields, Shapes::ShapeRef.new(shape: AnnotationFieldMap, location_name: "annotationFields"))
@@ -1652,6 +1830,7 @@ module Aws::Omics
     StartRunRequest.add_member(:log_level, Shapes::ShapeRef.new(shape: RunLogLevel, location_name: "logLevel"))
     StartRunRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     StartRunRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: RunRequestId, required: true, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    StartRunRequest.add_member(:retention_mode, Shapes::ShapeRef.new(shape: RunRetentionMode, location_name: "retentionMode"))
     StartRunRequest.struct_class = Types::StartRunRequest
 
     StartRunResponse.add_member(:arn, Shapes::ShapeRef.new(shape: RunArn, location_name: "arn"))
@@ -1669,6 +1848,8 @@ module Aws::Omics
 
     StartVariantImportResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "jobId"))
     StartVariantImportResponse.struct_class = Types::StartVariantImportResponse
+
+    StatusList.member = Shapes::ShapeRef.new(shape: ShareStatus)
 
     StoreOptions.add_member(:tsv_store_options, Shapes::ShapeRef.new(shape: TsvStoreOptions, location_name: "tsvStoreOptions"))
     StoreOptions.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -1701,6 +1882,7 @@ module Aws::Omics
     TaskListItem.add_member(:start_time, Shapes::ShapeRef.new(shape: TaskTimestamp, location_name: "startTime"))
     TaskListItem.add_member(:stop_time, Shapes::ShapeRef.new(shape: TaskTimestamp, location_name: "stopTime"))
     TaskListItem.add_member(:gpus, Shapes::ShapeRef.new(shape: TaskListItemGpusInteger, location_name: "gpus"))
+    TaskListItem.add_member(:instance_type, Shapes::ShapeRef.new(shape: TaskInstanceType, location_name: "instanceType"))
     TaskListItem.struct_class = Types::TaskListItem
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -1716,6 +1898,13 @@ module Aws::Omics
 
     TsvStoreOptionsSchemaList.member = Shapes::ShapeRef.new(shape: SchemaItem)
 
+    TsvVersionOptions.add_member(:annotation_type, Shapes::ShapeRef.new(shape: AnnotationType, location_name: "annotationType"))
+    TsvVersionOptions.add_member(:format_to_header, Shapes::ShapeRef.new(shape: FormatToHeader, location_name: "formatToHeader"))
+    TsvVersionOptions.add_member(:schema, Shapes::ShapeRef.new(shape: TsvVersionOptionsSchemaList, location_name: "schema"))
+    TsvVersionOptions.struct_class = Types::TsvVersionOptions
+
+    TsvVersionOptionsSchemaList.member = Shapes::ShapeRef.new(shape: SchemaItem)
+
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TagArn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
@@ -1723,19 +1912,34 @@ module Aws::Omics
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateAnnotationStoreRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
-    UpdateAnnotationStoreRequest.add_member(:description, Shapes::ShapeRef.new(shape: StoreDescription, location_name: "description"))
+    UpdateAnnotationStoreRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateAnnotationStoreRequest.struct_class = Types::UpdateAnnotationStoreRequest
 
     UpdateAnnotationStoreResponse.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "id"))
     UpdateAnnotationStoreResponse.add_member(:reference, Shapes::ShapeRef.new(shape: ReferenceItem, required: true, location_name: "reference"))
     UpdateAnnotationStoreResponse.add_member(:status, Shapes::ShapeRef.new(shape: StoreStatus, required: true, location_name: "status"))
     UpdateAnnotationStoreResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
-    UpdateAnnotationStoreResponse.add_member(:description, Shapes::ShapeRef.new(shape: StoreDescription, required: true, location_name: "description"))
+    UpdateAnnotationStoreResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, required: true, location_name: "description"))
     UpdateAnnotationStoreResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "creationTime"))
     UpdateAnnotationStoreResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: UpdateTime, required: true, location_name: "updateTime"))
     UpdateAnnotationStoreResponse.add_member(:store_options, Shapes::ShapeRef.new(shape: StoreOptions, location_name: "storeOptions"))
     UpdateAnnotationStoreResponse.add_member(:store_format, Shapes::ShapeRef.new(shape: StoreFormat, location_name: "storeFormat"))
     UpdateAnnotationStoreResponse.struct_class = Types::UpdateAnnotationStoreResponse
+
+    UpdateAnnotationStoreVersionRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    UpdateAnnotationStoreVersionRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "versionName"))
+    UpdateAnnotationStoreVersionRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateAnnotationStoreVersionRequest.struct_class = Types::UpdateAnnotationStoreVersionRequest
+
+    UpdateAnnotationStoreVersionResponse.add_member(:store_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "storeId"))
+    UpdateAnnotationStoreVersionResponse.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "id"))
+    UpdateAnnotationStoreVersionResponse.add_member(:status, Shapes::ShapeRef.new(shape: VersionStatus, required: true, location_name: "status"))
+    UpdateAnnotationStoreVersionResponse.add_member(:name, Shapes::ShapeRef.new(shape: StoreName, required: true, location_name: "name"))
+    UpdateAnnotationStoreVersionResponse.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, required: true, location_name: "versionName"))
+    UpdateAnnotationStoreVersionResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, required: true, location_name: "description"))
+    UpdateAnnotationStoreVersionResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "creationTime"))
+    UpdateAnnotationStoreVersionResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: UpdateTime, required: true, location_name: "updateTime"))
+    UpdateAnnotationStoreVersionResponse.struct_class = Types::UpdateAnnotationStoreVersionResponse
 
     UpdateRunGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: RunGroupId, required: true, location: "uri", location_name: "id"))
     UpdateRunGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: RunGroupName, location_name: "name"))
@@ -1746,14 +1950,14 @@ module Aws::Omics
     UpdateRunGroupRequest.struct_class = Types::UpdateRunGroupRequest
 
     UpdateVariantStoreRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
-    UpdateVariantStoreRequest.add_member(:description, Shapes::ShapeRef.new(shape: StoreDescription, location_name: "description"))
+    UpdateVariantStoreRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateVariantStoreRequest.struct_class = Types::UpdateVariantStoreRequest
 
     UpdateVariantStoreResponse.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "id"))
     UpdateVariantStoreResponse.add_member(:reference, Shapes::ShapeRef.new(shape: ReferenceItem, required: true, location_name: "reference"))
     UpdateVariantStoreResponse.add_member(:status, Shapes::ShapeRef.new(shape: StoreStatus, required: true, location_name: "status"))
     UpdateVariantStoreResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
-    UpdateVariantStoreResponse.add_member(:description, Shapes::ShapeRef.new(shape: StoreDescription, required: true, location_name: "description"))
+    UpdateVariantStoreResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, required: true, location_name: "description"))
     UpdateVariantStoreResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "creationTime"))
     UpdateVariantStoreResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: UpdateTime, required: true, location_name: "updateTime"))
     UpdateVariantStoreResponse.struct_class = Types::UpdateVariantStoreResponse
@@ -1808,7 +2012,7 @@ module Aws::Omics
     VariantStoreItem.add_member(:status, Shapes::ShapeRef.new(shape: StoreStatus, required: true, location_name: "status"))
     VariantStoreItem.add_member(:store_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "storeArn"))
     VariantStoreItem.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
-    VariantStoreItem.add_member(:description, Shapes::ShapeRef.new(shape: StoreDescription, required: true, location_name: "description"))
+    VariantStoreItem.add_member(:description, Shapes::ShapeRef.new(shape: Description, required: true, location_name: "description"))
     VariantStoreItem.add_member(:sse_config, Shapes::ShapeRef.new(shape: SseConfig, required: true, location_name: "sseConfig"))
     VariantStoreItem.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "creationTime"))
     VariantStoreItem.add_member(:update_time, Shapes::ShapeRef.new(shape: UpdateTime, required: true, location_name: "updateTime"))
@@ -1821,6 +2025,20 @@ module Aws::Omics
     VcfOptions.add_member(:ignore_qual_field, Shapes::ShapeRef.new(shape: Boolean, location_name: "ignoreQualField"))
     VcfOptions.add_member(:ignore_filter_field, Shapes::ShapeRef.new(shape: Boolean, location_name: "ignoreFilterField"))
     VcfOptions.struct_class = Types::VcfOptions
+
+    VersionDeleteError.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, required: true, location_name: "versionName"))
+    VersionDeleteError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    VersionDeleteError.struct_class = Types::VersionDeleteError
+
+    VersionDeleteErrorList.member = Shapes::ShapeRef.new(shape: VersionDeleteError)
+
+    VersionList.member = Shapes::ShapeRef.new(shape: VersionName)
+
+    VersionOptions.add_member(:tsv_version_options, Shapes::ShapeRef.new(shape: TsvVersionOptions, location_name: "tsvVersionOptions"))
+    VersionOptions.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    VersionOptions.add_member_subclass(:tsv_version_options, Types::VersionOptions::TsvVersionOptions)
+    VersionOptions.add_member_subclass(:unknown, Types::VersionOptions::Unknown)
+    VersionOptions.struct_class = Types::VersionOptions
 
     WorkflowExportList.member = Shapes::ShapeRef.new(shape: WorkflowExport)
 
@@ -1882,6 +2100,25 @@ module Aws::Omics
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: RequestTimeoutException)
+      end)
+
+      api.add_operation(:accept_share, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AcceptShare"
+        o.http_method = "POST"
+        o.http_request_uri = "/share/{shareId}"
+        o['authtype'] = "v4"
+        o.endpoint_pattern = {
+          "hostPrefix" => "analytics-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: AcceptShareRequest)
+        o.output = Shapes::ShapeRef.new(shape: AcceptShareResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:batch_delete_read_set, Seahorse::Model::Operation.new.tap do |o|
@@ -1995,6 +2232,25 @@ module Aws::Omics
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:create_annotation_store_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAnnotationStoreVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/annotationStore/{name}/version"
+        o['authtype'] = "v4"
+        o.endpoint_pattern = {
+          "hostPrefix" => "analytics-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: CreateAnnotationStoreVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAnnotationStoreVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:create_multipart_read_set_upload, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateMultipartReadSetUpload"
         o.http_method = "POST"
@@ -2071,6 +2327,25 @@ module Aws::Omics
         o.errors << Shapes::ShapeRef.new(shape: RequestTimeoutException)
       end)
 
+      api.add_operation(:create_share, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateShare"
+        o.http_method = "POST"
+        o.http_request_uri = "/share"
+        o['authtype'] = "v4"
+        o.endpoint_pattern = {
+          "hostPrefix" => "analytics-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: CreateShareRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateShareResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:create_variant_store, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateVariantStore"
         o.http_method = "POST"
@@ -2120,6 +2395,24 @@ module Aws::Omics
         }
         o.input = Shapes::ShapeRef.new(shape: DeleteAnnotationStoreRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteAnnotationStoreResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_annotation_store_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAnnotationStoreVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/annotationStore/{name}/versions/delete"
+        o['authtype'] = "v4"
+        o.endpoint_pattern = {
+          "hostPrefix" => "analytics-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DeleteAnnotationStoreVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAnnotationStoreVersionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2225,6 +2518,25 @@ module Aws::Omics
         o.errors << Shapes::ShapeRef.new(shape: RequestTimeoutException)
       end)
 
+      api.add_operation(:delete_share, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteShare"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/share/{shareId}"
+        o['authtype'] = "v4"
+        o.endpoint_pattern = {
+          "hostPrefix" => "analytics-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DeleteShareRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteShareResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:delete_variant_store, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteVariantStore"
         o.http_method = "DELETE"
@@ -2290,6 +2602,23 @@ module Aws::Omics
         }
         o.input = Shapes::ShapeRef.new(shape: GetAnnotationStoreRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAnnotationStoreResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_annotation_store_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAnnotationStoreVersion"
+        o.http_method = "GET"
+        o.http_request_uri = "/annotationStore/{name}/version/{versionName}"
+        o['authtype'] = "v4"
+        o.endpoint_pattern = {
+          "hostPrefix" => "analytics-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetAnnotationStoreVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAnnotationStoreVersionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2540,6 +2869,25 @@ module Aws::Omics
         o.errors << Shapes::ShapeRef.new(shape: RequestTimeoutException)
       end)
 
+      api.add_operation(:get_share, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetShare"
+        o.http_method = "GET"
+        o.http_request_uri = "/share/{shareId}"
+        o['authtype'] = "v4"
+        o.endpoint_pattern = {
+          "hostPrefix" => "analytics-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetShareRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetShareResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:get_variant_import_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetVariantImportJob"
         o.http_method = "GET"
@@ -2604,6 +2952,29 @@ module Aws::Omics
         }
         o.input = Shapes::ShapeRef.new(shape: ListAnnotationImportJobsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAnnotationImportJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_annotation_store_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAnnotationStoreVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/annotationStore/{name}/versions"
+        o['authtype'] = "v4"
+        o.endpoint_pattern = {
+          "hostPrefix" => "analytics-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListAnnotationStoreVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAnnotationStoreVersionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2960,6 +3331,31 @@ module Aws::Omics
         )
       end)
 
+      api.add_operation(:list_shares, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListShares"
+        o.http_method = "POST"
+        o.http_request_uri = "/shares"
+        o['authtype'] = "v4"
+        o.endpoint_pattern = {
+          "hostPrefix" => "analytics-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListSharesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSharesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "GET"
@@ -3234,6 +3630,23 @@ module Aws::Omics
         }
         o.input = Shapes::ShapeRef.new(shape: UpdateAnnotationStoreRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateAnnotationStoreResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_annotation_store_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAnnotationStoreVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/annotationStore/{name}/version/{versionName}"
+        o['authtype'] = "v4"
+        o.endpoint_pattern = {
+          "hostPrefix" => "analytics-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: UpdateAnnotationStoreVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAnnotationStoreVersionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

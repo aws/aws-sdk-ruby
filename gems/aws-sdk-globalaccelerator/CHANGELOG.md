@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2023-08-22)
+------------------
+
+* Feature - Global Accelerator now supports Client Ip Preservation for Network Load Balancer endpoints.
+
+1.49.0 (2023-08-09)
+------------------
+
+* Feature - Documentation update for dualstack EC2 endpoint support
+
 1.48.0 (2023-07-11)
 ------------------
 

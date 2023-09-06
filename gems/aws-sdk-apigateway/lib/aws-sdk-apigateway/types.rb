@@ -79,8 +79,8 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] customer_id
-    #   An AWS Marketplace customer identifier , when integrating with the
-    #   AWS SaaS Marketplace.
+    #   An Amazon Web Services Marketplace customer identifier, when
+    #   integrating with the Amazon Web Services SaaS Marketplace.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -495,8 +495,8 @@ module Aws::APIGateway
     #   @return [Array<Types::StageKey>]
     #
     # @!attribute [rw] customer_id
-    #   An AWS Marketplace customer identifier , when integrating with the
-    #   AWS SaaS Marketplace.
+    #   An Amazon Web Services Marketplace customer identifier, when
+    #   integrating with the Amazon Web Services SaaS Marketplace.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -810,9 +810,9 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] certificate_arn
-    #   The reference to an AWS-managed certificate that will be used by
-    #   edge-optimized endpoint for this domain name. AWS Certificate
-    #   Manager is the only supported source.
+    #   The reference to an Amazon Web Services-managed certificate that
+    #   will be used by edge-optimized endpoint for this domain name.
+    #   Certificate Manager is the only supported source.
     #   @return [String]
     #
     # @!attribute [rw] regional_certificate_name
@@ -821,9 +821,9 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] regional_certificate_arn
-    #   The reference to an AWS-managed certificate that will be used by
-    #   regional endpoint for this domain name. AWS Certificate Manager is
-    #   the only supported source.
+    #   The reference to an Amazon Web Services-managed certificate that
+    #   will be used by regional endpoint for this domain name. Certificate
+    #   Manager is the only supported source.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_configuration
@@ -993,7 +993,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] api_key_source
     #   The source of the API key for metering requests according to a usage
-    #   plan. Valid values are: &gt;`HEADER` to read the API key from the
+    #   plan. Valid values are: `HEADER` to read the API key from the
     #   `X-API-Key` header of a request. `AUTHORIZER` to read the API key
     #   from the `UsageIdentifierKey` from a custom authorizer.
     #   @return [String]
@@ -1195,8 +1195,8 @@ module Aws::APIGateway
     #
     # @!attribute [rw] target_arns
     #   The ARN of the network load balancer of the VPC targeted by the VPC
-    #   link. The network load balancer must be owned by the same AWS
-    #   account of the API owner.
+    #   link. The network load balancer must be owned by the same Amazon Web
+    #   Services account of the API owner.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -1837,9 +1837,9 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] certificate_arn
-    #   The reference to an AWS-managed certificate that will be used by
-    #   edge-optimized endpoint for this domain name. AWS Certificate
-    #   Manager is the only supported source.
+    #   The reference to an Amazon Web Services-managed certificate that
+    #   will be used by edge-optimized endpoint for this domain name.
+    #   Certificate Manager is the only supported source.
     #   @return [String]
     #
     # @!attribute [rw] certificate_upload_date
@@ -1867,9 +1867,9 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] regional_certificate_arn
-    #   The reference to an AWS-managed certificate that will be used for
-    #   validating the regional domain name. AWS Certificate Manager is the
-    #   only supported source.
+    #   The reference to an Amazon Web Services-managed certificate that
+    #   will be used for validating the regional domain name. Certificate
+    #   Manager is the only supported source.
     #   @return [String]
     #
     # @!attribute [rw] distribution_domain_name
@@ -2163,8 +2163,8 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] customer_id
-    #   The identifier of a customer in AWS Marketplace or an external
-    #   system, such as a developer portal.
+    #   The identifier of a customer in Amazon Web Services Marketplace or
+    #   an external system, such as a developer portal.
     #   @return [String]
     #
     # @!attribute [rw] include_values
@@ -3193,9 +3193,9 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] mode
-    #   A query parameter to indicate whether to overwrite (`OVERWRITE`) any
-    #   existing DocumentationParts definition or to merge (`MERGE`) the new
-    #   definition into the existing one. The default value is `MERGE`.
+    #   A query parameter to indicate whether to overwrite (`overwrite`) any
+    #   existing DocumentationParts definition or to merge (`merge`) the new
+    #   definition into the existing one. The default value is `merge`.
     #   @return [String]
     #
     # @!attribute [rw] fail_on_warnings
@@ -3244,12 +3244,6 @@ module Aws::APIGateway
     #
     #   To handle imported `basepath`, set `parameters` as
     #   `basepath=ignore`, `basepath=prepend` or `basepath=split`.
-    #
-    #   For example, the AWS CLI command to exclude documentation from the
-    #   imported API is:
-    #
-    #   The AWS CLI command to set the regional endpoint on the imported API
-    #   is:
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] body
@@ -3266,7 +3260,8 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # Represents an HTTP, HTTP\_PROXY, AWS, AWS\_PROXY, or Mock integration.
+    # Represents an `HTTP`, `HTTP_PROXY`, `AWS`, `AWS_PROXY`, or Mock
+    # integration.
     #
     # @!attribute [rw] type
     #   Specifies an API method integration type. The valid value is one of
@@ -3281,7 +3276,10 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] http_method
-    #   Specifies the integration's HTTP method type.
+    #   Specifies the integration's HTTP method type. For the Type
+    #   property, if you specify `MOCK`, this property is optional. For
+    #   Lambda integrations, you must set the integration method to `POST`.
+    #   For all other types, you must specify this property.
     #   @return [String]
     #
     # @!attribute [rw] uri
@@ -3289,12 +3287,10 @@ module Aws::APIGateway
     #   endpoint.
     #
     #   For `HTTP` or `HTTP_PROXY` integrations, the URI must be a fully
-    #   formed, encoded HTTP(S) URL according to the RFC-3986 specification,
-    #   for either standard integration, where `connectionType` is not
-    #   `VPC_LINK`, or private integration, where `connectionType` is
-    #   `VPC_LINK`. For a private HTTP integration, the URI is not used for
-    #   routing. For `AWS` or `AWS_PROXY` integrations, the URI is of the
-    #   form
+    #   formed, encoded HTTP(S) URL according to the RFC-3986 specification
+    #   for standard integrations. If `connectionType` is `VPC_LINK` specify
+    #   the Network Load Balancer DNS name. For `AWS` or `AWS_PROXY`
+    #   integrations, the URI is of the form
     #   `arn:aws:apigateway:\{region\}:\{subdomain.service|service\}:path|action/\{service_api\}`.
     #   Here, \\\{Region\\} is the API Gateway region (e.g., us-east-1);
     #   \\\{service\\} is the name of the integrated Amazon Web Services
@@ -3305,11 +3301,11 @@ module Aws::APIGateway
     #   Action=\\\{name\\}&amp;\\\{p1\\}=\\\{v1\\}&amp;p2=\\\{v2\\}... query
     #   string. The ensuing \\\{service\_api\\} refers to a supported action
     #   \\\{name\\} plus any required input parameters. Alternatively, path
-    #   can be used for an AWS service path-based API. The ensuing
-    #   service\_api refers to the path to an Amazon Web Services service
-    #   resource, including the region of the integrated Amazon Web Services
-    #   service, if applicable. For example, for integration with the S3 API
-    #   of GetObject, the uri can be either
+    #   can be used for an Amazon Web Services service path-based API. The
+    #   ensuing service\_api refers to the path to an Amazon Web Services
+    #   service resource, including the region of the integrated Amazon Web
+    #   Services service, if applicable. For example, for integration with
+    #   the S3 API of GetObject, the uri can be either
     #   `arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket=\{bucket\}&Key=\{key\}`
     #   or `arn:aws:apigateway:us-west-2:s3:path/\{bucket\}/\{key\}`
     #   @return [String]
@@ -3333,7 +3329,8 @@ module Aws::APIGateway
     #   Role for API Gateway to assume, use the role's Amazon Resource Name
     #   (ARN). To require that the caller's identity be passed through from
     #   the request, specify the string `arn:aws:iam::*:user/*`. To use
-    #   resource-based permissions on supported AWS services, specify null.
+    #   resource-based permissions on supported Amazon Web Services
+    #   services, specify null.
     #   @return [String]
     #
     # @!attribute [rw] request_parameters
@@ -3452,9 +3449,9 @@ module Aws::APIGateway
     #   response returns some string, you could use the `.+` regex to match
     #   error response. However, make sure that the error response does not
     #   contain any newline (`\n`) character in such cases. If the back end
-    #   is an AWS Lambda function, the AWS Lambda function error header is
-    #   matched. For all other HTTP and AWS back ends, the HTTP status code
-    #   is matched.
+    #   is an Lambda function, the Lambda function error header is matched.
+    #   For all other HTTP and Amazon Web Services back ends, the HTTP
+    #   status code is matched.
     #   @return [String]
     #
     # @!attribute [rw] response_parameters
@@ -3660,75 +3657,53 @@ module Aws::APIGateway
     #
     # @!attribute [rw] metrics_enabled
     #   Specifies whether Amazon CloudWatch metrics are enabled for this
-    #   method. The PATCH path for this setting is
-    #   `/\{method_setting_key\}/metrics/enabled`, and the value is a
-    #   Boolean.
+    #   method.
     #   @return [Boolean]
     #
     # @!attribute [rw] logging_level
     #   Specifies the logging level for this method, which affects the log
-    #   entries pushed to Amazon CloudWatch Logs. The PATCH path for this
-    #   setting is `/\{method_setting_key\}/logging/loglevel`, and the
-    #   available levels are `OFF`, `ERROR`, and `INFO`. Choose `ERROR` to
-    #   write only error-level entries to CloudWatch Logs, or choose `INFO`
-    #   to include all `ERROR` events as well as extra informational events.
+    #   entries pushed to Amazon CloudWatch Logs. Valid values are `OFF`,
+    #   `ERROR`, and `INFO`. Choose `ERROR` to write only error-level
+    #   entries to CloudWatch Logs, or choose `INFO` to include all `ERROR`
+    #   events as well as extra informational events.
     #   @return [String]
     #
     # @!attribute [rw] data_trace_enabled
     #   Specifies whether data trace logging is enabled for this method,
-    #   which affects the log entries pushed to Amazon CloudWatch Logs. The
-    #   PATCH path for this setting is
-    #   `/\{method_setting_key\}/logging/dataTrace`, and the value is a
-    #   Boolean.
+    #   which affects the log entries pushed to Amazon CloudWatch Logs.
     #   @return [Boolean]
     #
     # @!attribute [rw] throttling_burst_limit
-    #   Specifies the throttling burst limit. The PATCH path for this
-    #   setting is `/\{method_setting_key\}/throttling/burstLimit`, and the
-    #   value is an integer.
+    #   Specifies the throttling burst limit.
     #   @return [Integer]
     #
     # @!attribute [rw] throttling_rate_limit
-    #   Specifies the throttling rate limit. The PATCH path for this setting
-    #   is `/\{method_setting_key\}/throttling/rateLimit`, and the value is
-    #   a double.
+    #   Specifies the throttling rate limit.
     #   @return [Float]
     #
     # @!attribute [rw] caching_enabled
     #   Specifies whether responses should be cached and returned for
     #   requests. A cache cluster must be enabled on the stage for responses
-    #   to be cached. The PATCH path for this setting is
-    #   `/\{method_setting_key\}/caching/enabled`, and the value is a
-    #   Boolean.
+    #   to be cached.
     #   @return [Boolean]
     #
     # @!attribute [rw] cache_ttl_in_seconds
     #   Specifies the time to live (TTL), in seconds, for cached responses.
-    #   The higher the TTL, the longer the response will be cached. The
-    #   PATCH path for this setting is
-    #   `/\{method_setting_key\}/caching/ttlInSeconds`, and the value is an
-    #   integer.
+    #   The higher the TTL, the longer the response will be cached.
     #   @return [Integer]
     #
     # @!attribute [rw] cache_data_encrypted
-    #   Specifies whether the cached responses are encrypted. The PATCH path
-    #   for this setting is `/\{method_setting_key\}/caching/dataEncrypted`,
-    #   and the value is a Boolean.
+    #   Specifies whether the cached responses are encrypted.
     #   @return [Boolean]
     #
     # @!attribute [rw] require_authorization_for_cache_control
     #   Specifies whether authorization is required for a cache invalidation
-    #   request. The PATCH path for this setting is
-    #   `/\{method_setting_key\}/caching/requireAuthorizationForCacheControl`,
-    #   and the value is a Boolean.
+    #   request.
     #   @return [Boolean]
     #
     # @!attribute [rw] unauthorized_cache_control_header_strategy
     #   Specifies how to handle unauthorized requests for cache
-    #   invalidation. The PATCH path for this setting is
-    #   `/\{method_setting_key\}/caching/unauthorizedCacheControlHeaderStrategy`,
-    #   and the available values are `FAIL_WITH_403`,
-    #   `SUCCEED_WITH_RESPONSE_HEADER`, `SUCCEED_WITHOUT_RESPONSE_HEADER`.
+    #   invalidation.
     #   @return [String]
     #
     class MethodSetting < Struct.new(
@@ -4580,6 +4555,10 @@ module Aws::APIGateway
     #   disable the default endpoint.
     #   @return [Boolean]
     #
+    # @!attribute [rw] root_resource_id
+    #   The API's root resource ID.
+    #   @return [String]
+    #
     class RestApi < Struct.new(
       :id,
       :name,
@@ -4593,7 +4572,8 @@ module Aws::APIGateway
       :endpoint_configuration,
       :policy,
       :tags,
-      :disable_execute_api_endpoint)
+      :disable_execute_api_endpoint,
+      :root_resource_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4986,7 +4966,7 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] latency
-    #   The execution latency of the test authorizer request.
+    #   The execution latency, in ms, of the test authorizer request.
     #   @return [Integer]
     #
     # @!attribute [rw] principal_id
@@ -5101,7 +5081,7 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] latency
-    #   The execution latency of the test invoke request.
+    #   The execution latency, in ms, of the test invoke request.
     #   @return [Integer]
     #
     class TestInvokeMethodResponse < Struct.new(
@@ -5379,7 +5359,7 @@ module Aws::APIGateway
     # Updates an existing documentation version of an API.
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi..
+    #   The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] documentation_version
@@ -5870,8 +5850,9 @@ module Aws::APIGateway
     #   @return [Types::QuotaSettings]
     #
     # @!attribute [rw] product_code
-    #   The AWS Markeplace product identifier to associate with the usage
-    #   plan as a SaaS product on AWS Marketplace.
+    #   The Amazon Web Services Marketplace product identifier to associate
+    #   with the usage plan as a SaaS product on the Amazon Web Services
+    #   Marketplace.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -5971,8 +5952,8 @@ module Aws::APIGateway
     #
     # @!attribute [rw] target_arns
     #   The ARN of the network load balancer of the VPC targeted by the VPC
-    #   link. The network load balancer must be owned by the same AWS
-    #   account of the API owner.
+    #   link. The network load balancer must be owned by the same Amazon Web
+    #   Services account of the API owner.
     #   @return [Array<String>]
     #
     # @!attribute [rw] status

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.81.0 (2023-08-29)
+------------------
+
+* Feature - Added API example requests and responses for several operations. Fixed the validation regex for user pools Identity Provider name.
+
 1.80.0 (2023-08-02)
 ------------------
 

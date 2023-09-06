@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2023-08-29)
+------------------
+
+* Feature - Documentation updates for project quotas.
+
+1.74.0 (2023-08-09)
+------------------
+
+* Feature - For FSx for Lustre, add new data repository task type, RELEASE_DATA_FROM_FILESYSTEM, to release files that have been archived to S3. For FSx for Windows, enable support for configuring and updating SSD IOPS, and for updating storage type. For FSx for OpenZFS, add new deployment type, MULTI_AZ_1.
+
 1.73.0 (2023-07-13)
 ------------------
 

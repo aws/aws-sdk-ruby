@@ -139,7 +139,7 @@ module Aws::Backup
     #   @return [Time]
     #
     # @!attribute [rw] state
-    #   The current state of a resource recovery point.
+    #   The current state of a backup job.
     #   @return [String]
     #
     # @!attribute [rw] status_message
@@ -507,6 +507,12 @@ module Aws::Backup
     #   backups.
     #   @return [Boolean]
     #
+    # @!attribute [rw] schedule_expression_timezone
+    #   This is the timezone in which the schedule expression is set. By
+    #   default, ScheduleExpressions are in UTC. You can modify this to a
+    #   specified timezone.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupRule AWS API Documentation
     #
     class BackupRule < Struct.new(
@@ -519,7 +525,8 @@ module Aws::Backup
       :recovery_point_tags,
       :rule_id,
       :copy_actions,
-      :enable_continuous_backup)
+      :enable_continuous_backup,
+      :schedule_expression_timezone)
       SENSITIVE = [:recovery_point_tags]
       include Aws::Structure
     end
@@ -548,6 +555,9 @@ module Aws::Backup
     #   canceled if it doesn't start successfully. This value is optional.
     #   If this value is included, it must be at least 60 minutes to avoid
     #   errors.
+    #
+    #   This parameter has a maximum value of 100 years (52,560,000
+    #   minutes).
     #
     #   During the start window, the backup job status remains in `CREATED`
     #   status until it has successfully begun or until the start window
@@ -581,6 +591,8 @@ module Aws::Backup
     #   availability by resource][1] table. Backup ignores this expression
     #   for other resource types.
     #
+    #   This parameter has a maximum value of 100 years (36,500 days).
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
@@ -603,6 +615,12 @@ module Aws::Backup
     #   backups.
     #   @return [Boolean]
     #
+    # @!attribute [rw] schedule_expression_timezone
+    #   This is the timezone in which the schedule expression is set. By
+    #   default, ScheduleExpressions are in UTC. You can modify this to a
+    #   specified timezone.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupRuleInput AWS API Documentation
     #
     class BackupRuleInput < Struct.new(
@@ -614,7 +632,8 @@ module Aws::Backup
       :lifecycle,
       :recovery_point_tags,
       :copy_actions,
-      :enable_continuous_backup)
+      :enable_continuous_backup,
+      :schedule_expression_timezone)
       SENSITIVE = [:recovery_point_tags]
       include Aws::Structure
     end
@@ -1652,6 +1671,91 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @!attribute [rw] backup_vault_name
+    #   This is the name of the vault that is being created.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_vault_tags
+    #   These are the tags that will be included in the newly-created vault.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] creator_request_id
+    #   This is the ID of the creation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] min_retention_days
+    #   This setting specifies the minimum retention period that the vault
+    #   retains its recovery points. If this parameter is not specified, no
+    #   minimum retention period is enforced.
+    #
+    #   If specified, any backup or copy job to the vault must have a
+    #   lifecycle policy with a retention period equal to or longer than the
+    #   minimum retention period. If a job retention period is shorter than
+    #   that minimum retention period, then the vault fails the backup or
+    #   copy job, and you should either modify your lifecycle settings or
+    #   use a different vault.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_retention_days
+    #   This is the setting that specifies the maximum retention period that
+    #   the vault retains its recovery points. If this parameter is not
+    #   specified, Backup does not enforce a maximum retention period on the
+    #   recovery points in the vault (allowing indefinite storage).
+    #
+    #   If specified, any backup or copy job to the vault must have a
+    #   lifecycle policy with a retention period equal to or shorter than
+    #   the maximum retention period. If the job retention period is longer
+    #   than that maximum retention period, then the vault fails the backup
+    #   or copy job, and you should either modify your lifecycle settings or
+    #   use a different vault.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateLogicallyAirGappedBackupVaultInput AWS API Documentation
+    #
+    class CreateLogicallyAirGappedBackupVaultInput < Struct.new(
+      :backup_vault_name,
+      :backup_vault_tags,
+      :creator_request_id,
+      :min_retention_days,
+      :max_retention_days)
+      SENSITIVE = [:backup_vault_tags]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] backup_vault_name
+    #   The name of a logical container where backups are stored. Logically
+    #   air-gapped backup vaults are identified by names that are unique to
+    #   the account used to create them and the Region where they are
+    #   created. They consist of lowercase letters, numbers, and hyphens.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_vault_arn
+    #   This is the ARN (Amazon Resource Name) of the vault being created.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date and time when the vault was created.
+    #
+    #   This value is in Unix format, Coordinated Universal Time (UTC), and
+    #   accurate to milliseconds. For example, the value 1516925490.087
+    #   represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   @return [Time]
+    #
+    # @!attribute [rw] vault_state
+    #   This is the current state of the vault.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateLogicallyAirGappedBackupVaultOutput AWS API Documentation
+    #
+    class CreateLogicallyAirGappedBackupVaultOutput < Struct.new(
+      :backup_vault_name,
+      :backup_vault_arn,
+      :creation_date,
+      :vault_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] report_plan_name
     #   The unique name of the report plan. The name must be between 1 and
     #   256 characters, starting with a letter, and consisting of letters
@@ -2019,7 +2123,7 @@ module Aws::Backup
     #   @return [Time]
     #
     # @!attribute [rw] state
-    #   The current state of a resource recovery point.
+    #   The current state of a backup job.
     #   @return [String]
     #
     # @!attribute [rw] status_message
@@ -2151,10 +2255,15 @@ module Aws::Backup
     #   created. They consist of lowercase letters, numbers, and hyphens.
     #   @return [String]
     #
+    # @!attribute [rw] backup_vault_account_id
+    #   This is the account ID of the specified backup vault.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeBackupVaultInput AWS API Documentation
     #
     class DescribeBackupVaultInput < Struct.new(
-      :backup_vault_name)
+      :backup_vault_name,
+      :backup_vault_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2170,6 +2279,10 @@ module Aws::Backup
     #   An Amazon Resource Name (ARN) that uniquely identifies a backup
     #   vault; for example,
     #   `arn:aws:backup:us-east-1:123456789012:vault:aBackupVault`.
+    #   @return [String]
+    #
+    # @!attribute [rw] vault_type
+    #   This is the type of vault described.
     #   @return [String]
     #
     # @!attribute [rw] encryption_key_arn
@@ -2251,6 +2364,7 @@ module Aws::Backup
     class DescribeBackupVaultOutput < Struct.new(
       :backup_vault_name,
       :backup_vault_arn,
+      :vault_type,
       :encryption_key_arn,
       :creation_date,
       :creator_request_id,
@@ -2458,11 +2572,16 @@ module Aws::Backup
     #   `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
     #   @return [String]
     #
+    # @!attribute [rw] backup_vault_account_id
+    #   This is the account ID of the specified backup vault.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeRecoveryPointInput AWS API Documentation
     #
     class DescribeRecoveryPointInput < Struct.new(
       :backup_vault_name,
-      :recovery_point_arn)
+      :recovery_point_arn,
+      :backup_vault_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3016,8 +3135,7 @@ module Aws::Backup
     #   The scope of a control. The control scope defines what the control
     #   will evaluate. Three examples of control scopes are: a specific
     #   backup plan, all backup plans with a specific tag, or all backup
-    #   plans. For more information, see [
-    #   `ControlScope`.](aws-backup/latest/devguide/API_ControlScope.html)
+    #   plans.
     #   @return [Types::ControlScope]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/FrameworkControl AWS API Documentation
@@ -3404,11 +3522,16 @@ module Aws::Backup
     #   `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
     #   @return [String]
     #
+    # @!attribute [rw] backup_vault_account_id
+    #   This is the account ID of the specified backup vault.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetRecoveryPointRestoreMetadataInput AWS API Documentation
     #
     class GetRecoveryPointRestoreMetadataInput < Struct.new(
       :backup_vault_name,
-      :recovery_point_arn)
+      :recovery_point_arn,
+      :backup_vault_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3976,6 +4099,14 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @!attribute [rw] by_vault_type
+    #   This parameter will sort the list of vaults by vault type.
+    #   @return [String]
+    #
+    # @!attribute [rw] by_shared
+    #   This parameter will sort the list of vaults by shared vaults.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] next_token
     #   The next item following a partial list of returned items. For
     #   example, if a request is made to return `maxResults` number of
@@ -3990,6 +4121,8 @@ module Aws::Backup
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupVaultsInput AWS API Documentation
     #
     class ListBackupVaultsInput < Struct.new(
+      :by_vault_type,
+      :by_shared,
       :next_token,
       :max_results)
       SENSITIVE = []
@@ -4221,6 +4354,59 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @!attribute [rw] backup_vault_name
+    #   This is the list of protected resources by backup vault within the
+    #   vault(s) you specify by name.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_vault_account_id
+    #   This is the list of protected resources by backup vault within the
+    #   vault(s) you specify by account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The next item following a partial list of returned items. For
+    #   example, if a request is made to return `maxResults` number of
+    #   items, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to be returned.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListProtectedResourcesByBackupVaultInput AWS API Documentation
+    #
+    class ListProtectedResourcesByBackupVaultInput < Struct.new(
+      :backup_vault_name,
+      :backup_vault_account_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] results
+    #   These are the results returned for the request
+    #   ListProtectedResourcesByBackupVault.
+    #   @return [Array<Types::ProtectedResource>]
+    #
+    # @!attribute [rw] next_token
+    #   The next item following a partial list of returned items. For
+    #   example, if a request is made to return `maxResults` number of
+    #   items, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListProtectedResourcesByBackupVaultOutput AWS API Documentation
+    #
+    class ListProtectedResourcesByBackupVaultOutput < Struct.new(
+      :results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   The next item following a partial list of returned items. For
     #   example, if a request is made to return `maxResults` number of
@@ -4275,6 +4461,10 @@ module Aws::Backup
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] backup_vault_account_id
+    #   This parameter will sort the list of recovery points by account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   The next item following a partial list of returned items. For
     #   example, if a request is made to return `maxResults` number of
@@ -4319,6 +4509,7 @@ module Aws::Backup
     #
     class ListRecoveryPointsByBackupVaultInput < Struct.new(
       :backup_vault_name,
+      :backup_vault_account_id,
       :next_token,
       :max_results,
       :by_resource_arn,
@@ -5678,6 +5869,9 @@ module Aws::Backup
     #   and the default is 8 hours. If this value is included, it must be at
     #   least 60 minutes to avoid errors.
     #
+    #   This parameter has a maximum value of 100 years (52,560,000
+    #   minutes).
+    #
     #   During the start window, the backup job status remains in `CREATED`
     #   status until it has successfully begun or until the start window
     #   time has run out. If within the start window time Backup receives an
@@ -5694,6 +5888,9 @@ module Aws::Backup
     #   optional. This value begins counting down from when the backup was
     #   scheduled. It does not add additional time for `StartWindowMinutes`,
     #   or if the backup started later than scheduled.
+    #
+    #   Like `StartWindowMinutes`, this parameter has a maximum value of 100
+    #   years (52,560,000 minutes).
     #   @return [Integer]
     #
     # @!attribute [rw] lifecycle
@@ -5711,6 +5908,8 @@ module Aws::Backup
     #   listed in the "Lifecycle to cold storage" section of the [ Feature
     #   availability by resource][1] table. Backup ignores this expression
     #   for other resource types.
+    #
+    #   This parameter has a maximum value of 100 years (36,500 days).
     #
     #
     #

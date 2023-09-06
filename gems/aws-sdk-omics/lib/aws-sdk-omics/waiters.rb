@@ -67,23 +67,25 @@ module Aws::Omics
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name                       | params                               | :delay   | :max_attempts |
-  # | --------------------------------- | ------------------------------------ | -------- | ------------- |
-  # | annotation_import_job_created     | {Client#get_annotation_import_job}   | 30       | 20            |
-  # | annotation_store_created          | {Client#get_annotation_store}        | 30       | 20            |
-  # | annotation_store_deleted          | {Client#get_annotation_store}        | 30       | 20            |
-  # | read_set_activation_job_completed | {Client#get_read_set_activation_job} | 30       | 20            |
-  # | read_set_export_job_completed     | {Client#get_read_set_export_job}     | 30       | 20            |
-  # | read_set_import_job_completed     | {Client#get_read_set_import_job}     | 30       | 20            |
-  # | reference_import_job_completed    | {Client#get_reference_import_job}    | 30       | 20            |
-  # | run_completed                     | {Client#get_run}                     | 30       | 20            |
-  # | run_running                       | {Client#get_run}                     | 30       | 20            |
-  # | task_completed                    | {Client#get_run_task}                | 30       | 20            |
-  # | task_running                      | {Client#get_run_task}                | 30       | 20            |
-  # | variant_import_job_created        | {Client#get_variant_import_job}      | 30       | 20            |
-  # | variant_store_created             | {Client#get_variant_store}           | 30       | 20            |
-  # | variant_store_deleted             | {Client#get_variant_store}           | 30       | 20            |
-  # | workflow_active                   | {Client#get_workflow}                | 3        | 10            |
+  # | waiter_name                       | params                                | :delay   | :max_attempts |
+  # | --------------------------------- | ------------------------------------- | -------- | ------------- |
+  # | annotation_import_job_created     | {Client#get_annotation_import_job}    | 30       | 20            |
+  # | annotation_store_created          | {Client#get_annotation_store}         | 30       | 20            |
+  # | annotation_store_deleted          | {Client#get_annotation_store}         | 30       | 20            |
+  # | annotation_store_version_created  | {Client#get_annotation_store_version} | 30       | 20            |
+  # | annotation_store_version_deleted  | {Client#get_annotation_store_version} | 30       | 20            |
+  # | read_set_activation_job_completed | {Client#get_read_set_activation_job}  | 30       | 20            |
+  # | read_set_export_job_completed     | {Client#get_read_set_export_job}      | 30       | 20            |
+  # | read_set_import_job_completed     | {Client#get_read_set_import_job}      | 30       | 20            |
+  # | reference_import_job_completed    | {Client#get_reference_import_job}     | 30       | 20            |
+  # | run_completed                     | {Client#get_run}                      | 30       | 20            |
+  # | run_running                       | {Client#get_run}                      | 30       | 20            |
+  # | task_completed                    | {Client#get_run_task}                 | 30       | 20            |
+  # | task_running                      | {Client#get_run_task}                 | 30       | 20            |
+  # | variant_import_job_created        | {Client#get_variant_import_job}       | 30       | 20            |
+  # | variant_store_created             | {Client#get_variant_store}            | 30       | 20            |
+  # | variant_store_deleted             | {Client#get_variant_store}            | 30       | 20            |
+  # | workflow_active                   | {Client#get_workflow}                 | 3        | 10            |
   #
   module Waiters
 
@@ -248,6 +250,113 @@ module Aws::Omics
 
       # @option (see Client#get_annotation_store)
       # @return (see Client#get_annotation_store)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until an annotation store version is created
+    class AnnotationStoreVersionCreated
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (20)
+      # @option options [Integer] :delay (30)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 20,
+          delay: 30,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_annotation_store_version,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "success",
+                "expected" => "ACTIVE"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "retry",
+                "expected" => "CREATING"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "retry",
+                "expected" => "UPDATING"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "FAILED"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_annotation_store_version)
+      # @return (see Client#get_annotation_store_version)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until an annotation store version is deleted.
+    class AnnotationStoreVersionDeleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (20)
+      # @option options [Integer] :delay (30)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 20,
+          delay: 30,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_annotation_store_version,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "success",
+                "expected" => "DELETED"
+              },
+              {
+                "matcher" => "error",
+                "state" => "success",
+                "expected" => "ResourceNotFoundException"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "retry",
+                "expected" => "DELETING"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_annotation_store_version)
+      # @return (see Client#get_annotation_store_version)
       def wait(params = {})
         @waiter.wait(client: @client, params: params)
       end

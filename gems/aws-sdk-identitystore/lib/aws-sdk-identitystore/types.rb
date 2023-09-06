@@ -122,7 +122,7 @@ module Aws::IdentityStore
     #
     # @!attribute [rw] attribute_value
     #   The value of the attribute. This is a `Document` type. This type is
-    #   not supported by Java V1, Go V1, and older versions of the AWS CLI.
+    #   not supported by Java V1, Go V1, and older versions of the CLI.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/AttributeOperation AWS API Documentation
@@ -222,9 +222,9 @@ module Aws::IdentityStore
     #
     # @!attribute [rw] display_name
     #   A string containing the name of the group. This value is commonly
-    #   displayed when the group is referenced. "Administrator" and
-    #   "AWSAdministrators" are reserved names and can't be used for
-    #   users or groups.
+    #   displayed when the group is referenced. `Administrator` and
+    #   `AWSAdministrators` are reserved names and can't be used for users
+    #   or groups.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -267,9 +267,9 @@ module Aws::IdentityStore
     #   characters. This value can consist of letters, accented characters,
     #   symbols, numbers, and punctuation. This value is specified at the
     #   time the user is created and stored as an attribute of the user
-    #   object in the identity store. "Administrator" and
-    #   "AWSAdministrators" are reserved names and can't be used for
-    #   users or groups.
+    #   object in the identity store. `Administrator` and
+    #   `AWSAdministrators` are reserved names and can't be used for users
+    #   or groups.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1418,7 +1418,7 @@ module Aws::IdentityStore
     #
     # @!attribute [rw] attribute_value
     #   The value of the attribute. This is a `Document` type. This type is
-    #   not supported by Java V1, Go V1, and older versions of the AWS CLI.
+    #   not supported by Java V1, Go V1, and older versions of the CLI.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/UniqueAttribute AWS API Documentation

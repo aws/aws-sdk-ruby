@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2023-08-24)
+------------------
+
+* Feature - Documentation updates for Amazon Verified Permissions.
+
+1.8.0 (2023-08-22)
+------------------
+
+* Feature - Documentation updates for Amazon Verified Permissions. Increases max results per page for ListPolicyStores, ListPolicies, and ListPolicyTemplates APIs from 20 to 50.
+
 1.7.0 (2023-07-11)
 ------------------
 

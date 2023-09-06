@@ -398,6 +398,101 @@ module Aws::PI
 
     # @!group API Operations
 
+    # Creates a new performance analysis report for a specific time period
+    # for the DB instance.
+    #
+    # @option params [required, String] :service_type
+    #   The Amazon Web Services service for which Performance Insights will
+    #   return metrics. Valid value is `RDS`.
+    #
+    # @option params [required, String] :identifier
+    #   An immutable, Amazon Web Services Region-unique identifier for a data
+    #   source. Performance Insights gathers metrics from this data source.
+    #
+    #   To use an Amazon RDS instance as a data source, you specify its
+    #   `DbiResourceId` value. For example, specify
+    #   `db-ADECBTYHKTSAUMUZQYPDS2GW4A`.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
+    #   The start time defined for the analysis report.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_time
+    #   The end time defined for the analysis report.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The metadata assigned to the analysis report consisting of a key-value
+    #   pair.
+    #
+    # @return [Types::CreatePerformanceAnalysisReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePerformanceAnalysisReportResponse#analysis_report_id #analysis_report_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_performance_analysis_report({
+    #     service_type: "RDS", # required, accepts RDS, DOCDB
+    #     identifier: "IdentifierString", # required
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.analysis_report_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/CreatePerformanceAnalysisReport AWS API Documentation
+    #
+    # @overload create_performance_analysis_report(params = {})
+    # @param [Hash] params ({})
+    def create_performance_analysis_report(params = {}, options = {})
+      req = build_request(:create_performance_analysis_report, params)
+      req.send_request(options)
+    end
+
+    # Deletes a performance analysis report.
+    #
+    # @option params [required, String] :service_type
+    #   The Amazon Web Services service for which Performance Insights will
+    #   return metrics. Valid value is `RDS`.
+    #
+    # @option params [required, String] :identifier
+    #   An immutable identifier for a data source that is unique for an Amazon
+    #   Web Services Region. Performance Insights gathers metrics from this
+    #   data source. In the console, the identifier is shown as *ResourceID*.
+    #   When you call `DescribeDBInstances`, the identifier is returned as
+    #   `DbiResourceId`.
+    #
+    #   To use a DB instance as a data source, specify its `DbiResourceId`
+    #   value. For example, specify `db-ABCDEFGHIJKLMNOPQRSTU1VW2X`.
+    #
+    # @option params [required, String] :analysis_report_id
+    #   The unique identifier of the analysis report for deletion.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_performance_analysis_report({
+    #     service_type: "RDS", # required, accepts RDS, DOCDB
+    #     identifier: "IdentifierString", # required
+    #     analysis_report_id: "AnalysisReportId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/DeletePerformanceAnalysisReport AWS API Documentation
+    #
+    # @overload delete_performance_analysis_report(params = {})
+    # @param [Hash] params ({})
+    def delete_performance_analysis_report(params = {}, options = {})
+      req = build_request(:delete_performance_analysis_report, params)
+      req.send_request(options)
+    end
+
     # For a specific time period, retrieve the top `N` dimension keys for a
     # metric.
     #
@@ -529,7 +624,7 @@ module Aws::PI
     #
     #   resp = client.describe_dimension_keys({
     #     service_type: "RDS", # required, accepts RDS, DOCDB
-    #     identifier: "RequestString", # required
+    #     identifier: "IdentifierString", # required
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
     #     metric: "RequestString", # required
@@ -656,6 +751,94 @@ module Aws::PI
       req.send_request(options)
     end
 
+    # Retrieves the report including the report ID, status, time details,
+    # and the insights with recommendations. The report status can be
+    # `RUNNING`, `SUCCEEDED`, or `FAILED`. The insights include the
+    # `description` and `recommendation` fields.
+    #
+    # @option params [required, String] :service_type
+    #   The Amazon Web Services service for which Performance Insights will
+    #   return metrics. Valid value is `RDS`.
+    #
+    # @option params [required, String] :identifier
+    #   An immutable identifier for a data source that is unique for an Amazon
+    #   Web Services Region. Performance Insights gathers metrics from this
+    #   data source. In the console, the identifier is shown as *ResourceID*.
+    #   When you call `DescribeDBInstances`, the identifier is returned as
+    #   `DbiResourceId`.
+    #
+    #   To use a DB instance as a data source, specify its `DbiResourceId`
+    #   value. For example, specify `db-ABCDEFGHIJKLMNOPQRSTU1VW2X`.
+    #
+    # @option params [required, String] :analysis_report_id
+    #   A unique identifier of the created analysis report. For example,
+    #   `report-12345678901234567`
+    #
+    # @option params [String] :text_format
+    #   Indicates the text format in the report. The options are `PLAIN_TEXT`
+    #   or `MARKDOWN`. The default value is `plain text`.
+    #
+    # @option params [String] :accept_language
+    #   The text language in the report. The default language is `EN_US`
+    #   (English).
+    #
+    # @return [Types::GetPerformanceAnalysisReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPerformanceAnalysisReportResponse#analysis_report #analysis_report} => Types::AnalysisReport
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_performance_analysis_report({
+    #     service_type: "RDS", # required, accepts RDS, DOCDB
+    #     identifier: "IdentifierString", # required
+    #     analysis_report_id: "AnalysisReportId", # required
+    #     text_format: "PLAIN_TEXT", # accepts PLAIN_TEXT, MARKDOWN
+    #     accept_language: "EN_US", # accepts EN_US
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.analysis_report.analysis_report_id #=> String
+    #   resp.analysis_report.identifier #=> String
+    #   resp.analysis_report.service_type #=> String, one of "RDS", "DOCDB"
+    #   resp.analysis_report.create_time #=> Time
+    #   resp.analysis_report.start_time #=> Time
+    #   resp.analysis_report.end_time #=> Time
+    #   resp.analysis_report.status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED"
+    #   resp.analysis_report.insights #=> Array
+    #   resp.analysis_report.insights[0].insight_id #=> String
+    #   resp.analysis_report.insights[0].insight_type #=> String
+    #   resp.analysis_report.insights[0].context #=> String, one of "CAUSAL", "CONTEXTUAL"
+    #   resp.analysis_report.insights[0].start_time #=> Time
+    #   resp.analysis_report.insights[0].end_time #=> Time
+    #   resp.analysis_report.insights[0].severity #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.analysis_report.insights[0].supporting_insights #=> Types::InsightList
+    #   resp.analysis_report.insights[0].description #=> String
+    #   resp.analysis_report.insights[0].recommendations #=> Array
+    #   resp.analysis_report.insights[0].recommendations[0].recommendation_id #=> String
+    #   resp.analysis_report.insights[0].recommendations[0].recommendation_description #=> String
+    #   resp.analysis_report.insights[0].insight_data #=> Array
+    #   resp.analysis_report.insights[0].insight_data[0].performance_insights_metric.metric #=> String
+    #   resp.analysis_report.insights[0].insight_data[0].performance_insights_metric.display_name #=> String
+    #   resp.analysis_report.insights[0].insight_data[0].performance_insights_metric.dimensions #=> Hash
+    #   resp.analysis_report.insights[0].insight_data[0].performance_insights_metric.dimensions["DescriptiveString"] #=> String
+    #   resp.analysis_report.insights[0].insight_data[0].performance_insights_metric.value #=> Float
+    #   resp.analysis_report.insights[0].baseline_data #=> Array
+    #   resp.analysis_report.insights[0].baseline_data[0].performance_insights_metric.metric #=> String
+    #   resp.analysis_report.insights[0].baseline_data[0].performance_insights_metric.display_name #=> String
+    #   resp.analysis_report.insights[0].baseline_data[0].performance_insights_metric.dimensions #=> Hash
+    #   resp.analysis_report.insights[0].baseline_data[0].performance_insights_metric.dimensions["DescriptiveString"] #=> String
+    #   resp.analysis_report.insights[0].baseline_data[0].performance_insights_metric.value #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/GetPerformanceAnalysisReport AWS API Documentation
+    #
+    # @overload get_performance_analysis_report(params = {})
+    # @param [Hash] params ({})
+    def get_performance_analysis_report(params = {}, options = {})
+      req = build_request(:get_performance_analysis_report, params)
+      req.send_request(options)
+    end
+
     # Retrieve the metadata for different features. For example, the
     # metadata might indicate that a feature is turned on or off on a
     # specific DB instance.
@@ -680,7 +863,7 @@ module Aws::PI
     #
     #   resp = client.get_resource_metadata({
     #     service_type: "RDS", # required, accepts RDS, DOCDB
-    #     identifier: "RequestString", # required
+    #     identifier: "IdentifierString", # required
     #   })
     #
     # @example Response structure
@@ -797,7 +980,7 @@ module Aws::PI
     #
     #   resp = client.get_resource_metrics({
     #     service_type: "RDS", # required, accepts RDS, DOCDB
-    #     identifier: "RequestString", # required
+    #     identifier: "IdentifierString", # required
     #     metric_queries: [ # required
     #       {
     #         metric: "RequestString", # required
@@ -882,7 +1065,7 @@ module Aws::PI
     #
     #   resp = client.list_available_resource_dimensions({
     #     service_type: "RDS", # required, accepts RDS, DOCDB
-    #     identifier: "RequestString", # required
+    #     identifier: "IdentifierString", # required
     #     metrics: ["RequestString"], # required
     #     max_results: 1,
     #     next_token: "NextToken",
@@ -956,7 +1139,7 @@ module Aws::PI
     #
     #   resp = client.list_available_resource_metrics({
     #     service_type: "RDS", # required, accepts RDS, DOCDB
-    #     identifier: "RequestString", # required
+    #     identifier: "IdentifierString", # required
     #     metric_types: ["RequestString"], # required
     #     next_token: "NextToken",
     #     max_results: 1,
@@ -979,6 +1162,203 @@ module Aws::PI
       req.send_request(options)
     end
 
+    # Lists all the analysis reports created for the DB instance. The
+    # reports are sorted based on the start time of each report.
+    #
+    # @option params [required, String] :service_type
+    #   The Amazon Web Services service for which Performance Insights returns
+    #   metrics. Valid value is `RDS`.
+    #
+    # @option params [required, String] :identifier
+    #   An immutable identifier for a data source that is unique for an Amazon
+    #   Web Services Region. Performance Insights gathers metrics from this
+    #   data source. In the console, the identifier is shown as *ResourceID*.
+    #   When you call `DescribeDBInstances`, the identifier is returned as
+    #   `DbiResourceId`.
+    #
+    #   To use a DB instance as a data source, specify its `DbiResourceId`
+    #   value. For example, specify `db-ABCDEFGHIJKLMNOPQRSTU1VW2X`.
+    #
+    # @option params [String] :next_token
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   token, up to the value specified by `MaxResults`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return in the response. If more items
+    #   exist than the specified `MaxResults` value, a pagination token is
+    #   included in the response so that the remaining results can be
+    #   retrieved.
+    #
+    # @option params [Boolean] :list_tags
+    #   Specifies whether or not to include the list of tags in the response.
+    #
+    # @return [Types::ListPerformanceAnalysisReportsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPerformanceAnalysisReportsResponse#analysis_reports #analysis_reports} => Array&lt;Types::AnalysisReportSummary&gt;
+    #   * {Types::ListPerformanceAnalysisReportsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_performance_analysis_reports({
+    #     service_type: "RDS", # required, accepts RDS, DOCDB
+    #     identifier: "IdentifierString", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     list_tags: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.analysis_reports #=> Array
+    #   resp.analysis_reports[0].analysis_report_id #=> String
+    #   resp.analysis_reports[0].create_time #=> Time
+    #   resp.analysis_reports[0].start_time #=> Time
+    #   resp.analysis_reports[0].end_time #=> Time
+    #   resp.analysis_reports[0].status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED"
+    #   resp.analysis_reports[0].tags #=> Array
+    #   resp.analysis_reports[0].tags[0].key #=> String
+    #   resp.analysis_reports[0].tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/ListPerformanceAnalysisReports AWS API Documentation
+    #
+    # @overload list_performance_analysis_reports(params = {})
+    # @param [Hash] params ({})
+    def list_performance_analysis_reports(params = {}, options = {})
+      req = build_request(:list_performance_analysis_reports, params)
+      req.send_request(options)
+    end
+
+    # Retrieves all the metadata tags associated with Amazon RDS Performance
+    # Insights resource.
+    #
+    # @option params [required, String] :service_type
+    #   List the tags for the Amazon Web Services service for which
+    #   Performance Insights returns metrics. Valid value is `RDS`.
+    #
+    # @option params [required, String] :resource_arn
+    #   Lists all the tags for the Amazon RDS Performance Insights resource.
+    #   This value is an Amazon Resource Name (ARN). For information about
+    #   creating an ARN, see [ Constructing an RDS Amazon Resource Name
+    #   (ARN)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     service_type: "RDS", # required, accepts RDS, DOCDB
+    #     resource_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Adds metadata tags to the Amazon RDS Performance Insights resource.
+    #
+    # @option params [required, String] :service_type
+    #   The Amazon Web Services service for which Performance Insights returns
+    #   metrics. Valid value is `RDS`.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon RDS Performance Insights resource that the tags are added
+    #   to. This value is an Amazon Resource Name (ARN). For information about
+    #   creating an ARN, see [ Constructing an RDS Amazon Resource Name
+    #   (ARN)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The metadata assigned to an Amazon RDS resource consisting of a
+    #   key-value pair.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     service_type: "RDS", # required, accepts RDS, DOCDB
+    #     resource_arn: "AmazonResourceName", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Deletes the metadata tags from the Amazon RDS Performance Insights
+    # resource.
+    #
+    # @option params [required, String] :service_type
+    #   List the tags for the Amazon Web Services service for which
+    #   Performance Insights returns metrics. Valid value is `RDS`.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon RDS Performance Insights resource that the tags are added
+    #   to. This value is an Amazon Resource Name (ARN). For information about
+    #   creating an ARN, see [ Constructing an RDS Amazon Resource Name
+    #   (ARN)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The metadata assigned to an Amazon RDS Performance Insights resource
+    #   consisting of a key-value pair.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     service_type: "RDS", # required, accepts RDS, DOCDB
+    #     resource_arn: "AmazonResourceName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -992,7 +1372,7 @@ module Aws::PI
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pi'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

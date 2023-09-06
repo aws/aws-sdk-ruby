@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2023-08-24)
+------------------
+
+* Feature - This release includes additional audio channel tags in Quicktime outputs, support for film grain synthesis for AV1 outputs, ability to create audio-only FLAC outputs, and ability to specify Amazon S3 destination storage class.
+
 1.115.0 (2023-07-26)
 ------------------
 

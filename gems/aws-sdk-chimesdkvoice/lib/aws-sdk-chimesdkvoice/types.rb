@@ -292,12 +292,17 @@ module Aws::ChimeSDKVoice
     #   List of phone numbers, in E.164 format.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] name
+    #   Specifies the name assigned to one or more phone numbers.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/CreatePhoneNumberOrderRequest AWS API Documentation
     #
     class CreatePhoneNumberOrderRequest < Struct.new(
       :product_type,
-      :e164_phone_numbers)
-      SENSITIVE = []
+      :e164_phone_numbers,
+      :name)
+      SENSITIVE = [:name]
       include Aws::Structure
     end
 
@@ -2173,6 +2178,10 @@ module Aws::ChimeSDKVoice
     #   The phone number's order ID.
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   The name of the phone number.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/PhoneNumber AWS API Documentation
     #
     class PhoneNumber < Struct.new(
@@ -2189,8 +2198,9 @@ module Aws::ChimeSDKVoice
       :created_timestamp,
       :updated_timestamp,
       :deletion_timestamp,
-      :order_id)
-      SENSITIVE = [:phone_number_id, :e164_phone_number, :calling_name]
+      :order_id,
+      :name)
+      SENSITIVE = [:phone_number_id, :e164_phone_number, :calling_name, :name]
       include Aws::Structure
     end
 
@@ -3459,13 +3469,18 @@ module Aws::ChimeSDKVoice
     #   The outbound calling name associated with the phone number.
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   Specifies the name assigned to one or more phone numbers.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/UpdatePhoneNumberRequest AWS API Documentation
     #
     class UpdatePhoneNumberRequest < Struct.new(
       :phone_number_id,
       :product_type,
-      :calling_name)
-      SENSITIVE = [:phone_number_id, :calling_name]
+      :calling_name,
+      :name)
+      SENSITIVE = [:phone_number_id, :calling_name, :name]
       include Aws::Structure
     end
 
@@ -3484,13 +3499,18 @@ module Aws::ChimeSDKVoice
     #   The outbound calling name to update.
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   The name of the phone number.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/UpdatePhoneNumberRequestItem AWS API Documentation
     #
     class UpdatePhoneNumberRequestItem < Struct.new(
       :phone_number_id,
       :product_type,
-      :calling_name)
-      SENSITIVE = [:phone_number_id, :calling_name]
+      :calling_name,
+      :name)
+      SENSITIVE = [:phone_number_id, :calling_name, :name]
       include Aws::Structure
     end
 

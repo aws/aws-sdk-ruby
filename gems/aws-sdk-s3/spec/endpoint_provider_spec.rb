@@ -307,7 +307,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint", :force_path_style=>false, :endpoint=>"https://beta.example.com", :region=>"cn-north-1", :requires_account_id=>true, :use_dual_stack=>true, :use_fips=>false})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint", :force_path_style=>false, :endpoint=>"https://beta.example.com", :region=>"cn-north-1", :use_dual_stack=>true, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -863,7 +863,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint", :force_path_style=>false, :use_arn_region=>false, :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint", :force_path_style=>false, :use_arn_region=>false, :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -891,7 +891,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint", :force_path_style=>false, :region=>"us-east-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint", :force_path_style=>false, :region=>"us-east-1", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -922,7 +922,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint", :force_path_style=>false, :use_arn_region=>true, :region=>"us-east-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint", :force_path_style=>false, :use_arn_region=>true, :region=>"us-east-1", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -3165,7 +3165,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -3196,7 +3196,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :region=>"us-west-2", :use_dual_stack=>true, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :region=>"us-west-2", :use_dual_stack=>true, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -3228,7 +3228,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"bucket-name", :force_path_style=>false, :region=>"us-west-2", :use_dual_stack=>true, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"bucket-name", :force_path_style=>false, :region=>"us-west-2", :use_dual_stack=>true, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -3261,7 +3261,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"bucket-name", :force_path_style=>false, :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"bucket-name", :force_path_style=>false, :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -3293,7 +3293,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>true, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -3325,7 +3325,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :region=>"us-west-2", :use_dual_stack=>true, :use_fips=>true, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :region=>"us-west-2", :use_dual_stack=>true, :use_fips=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -3358,7 +3358,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"bucket-name", :force_path_style=>false, :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>true, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"bucket-name", :force_path_style=>false, :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>true})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -3387,7 +3387,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -3418,7 +3418,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :region=>"cn-north-1", :use_dual_stack=>true, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :region=>"cn-north-1", :use_dual_stack=>true, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -3476,7 +3476,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -3507,7 +3507,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :region=>"af-south-1", :use_dual_stack=>true, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :region=>"af-south-1", :use_dual_stack=>true, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -3539,7 +3539,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"bucket-name", :force_path_style=>false, :region=>"af-south-1", :use_dual_stack=>true, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"bucket-name", :force_path_style=>false, :region=>"af-south-1", :use_dual_stack=>true, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -3572,7 +3572,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"bucket-name", :force_path_style=>false, :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"bucket-name", :force_path_style=>false, :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -3604,7 +3604,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>true, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -3636,7 +3636,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :region=>"af-south-1", :use_dual_stack=>true, :use_fips=>true, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :region=>"af-south-1", :use_dual_stack=>true, :use_fips=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -3669,7 +3669,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"bucket-name", :force_path_style=>false, :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>true, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"bucket-name", :force_path_style=>false, :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>true})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -3698,7 +3698,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>true, :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>true, :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -3763,7 +3763,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"bucket-name", :force_path_style=>true, :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"bucket-name", :force_path_style=>true, :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -3792,7 +3792,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>true, :region=>"us-west-2", :use_dual_stack=>true, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>true, :region=>"us-west-2", :use_dual_stack=>true, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -3825,7 +3825,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:PARTITION:s3-outposts:REGION:123456789012:outpost:op-01234567890123456:bucket:mybucket", :force_path_style=>true, :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:PARTITION:s3-outposts:REGION:123456789012:outpost:op-01234567890123456:bucket:mybucket", :force_path_style=>true, :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -3853,7 +3853,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"99a_b", :force_path_style=>true, :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"99a_b", :force_path_style=>true, :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -3885,7 +3885,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"99a_b", :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"99a_b", :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -3916,7 +3916,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>true, :region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>true, :region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -3977,7 +3977,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"bucket-name", :force_path_style=>true, :region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"bucket-name", :force_path_style=>true, :region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -4006,7 +4006,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>true, :region=>"cn-north-1", :use_dual_stack=>true, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>true, :region=>"cn-north-1", :use_dual_stack=>true, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -4039,7 +4039,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:PARTITION:s3-outposts:REGION:123456789012:outpost:op-01234567890123456:bucket:mybucket", :force_path_style=>true, :region=>"cn-north-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:PARTITION:s3-outposts:REGION:123456789012:outpost:op-01234567890123456:bucket:mybucket", :force_path_style=>true, :region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -4067,7 +4067,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"99a_b", :force_path_style=>true, :region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"99a_b", :force_path_style=>true, :region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -4099,7 +4099,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"99a_b", :region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"99a_b", :region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -4130,7 +4130,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>true, :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>true, :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -4195,7 +4195,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"bucket-name", :force_path_style=>true, :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"bucket-name", :force_path_style=>true, :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -4224,7 +4224,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>true, :region=>"af-south-1", :use_dual_stack=>true, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>true, :region=>"af-south-1", :use_dual_stack=>true, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -4257,7 +4257,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:PARTITION:s3-outposts:REGION:123456789012:outpost:op-01234567890123456:bucket:mybucket", :force_path_style=>true, :region=>"af-south-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:PARTITION:s3-outposts:REGION:123456789012:outpost:op-01234567890123456:bucket:mybucket", :force_path_style=>true, :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -4285,7 +4285,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"99a_b", :force_path_style=>true, :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"99a_b", :force_path_style=>true, :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -4317,7 +4317,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"99a_b", :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"99a_b", :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -4348,7 +4348,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :endpoint=>"http://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :endpoint=>"http://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -4380,7 +4380,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>true, :endpoint=>"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>true, :endpoint=>"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -4413,7 +4413,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :endpoint=>"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>true, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :endpoint=>"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>true})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -4442,7 +4442,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :endpoint=>"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"us-west-2", :use_dual_stack=>true, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :endpoint=>"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"us-west-2", :use_dual_stack=>true, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -4471,7 +4471,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"bucket-name", :force_path_style=>false, :endpoint=>"http://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"bucket-name", :force_path_style=>false, :endpoint=>"http://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -4500,7 +4500,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint", :force_path_style=>false, :endpoint=>"https://beta.example.com", :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint", :force_path_style=>false, :endpoint=>"https://beta.example.com", :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -4532,7 +4532,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :endpoint=>"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :endpoint=>"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -4564,7 +4564,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>true, :endpoint=>"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>true, :endpoint=>"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -4610,7 +4610,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :endpoint=>"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"cn-north-1", :use_dual_stack=>true, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :endpoint=>"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"cn-north-1", :use_dual_stack=>true, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -4652,7 +4652,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint", :force_path_style=>false, :endpoint=>"https://beta.example.com", :region=>"cn-north-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint", :force_path_style=>false, :endpoint=>"https://beta.example.com", :region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -4684,7 +4684,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :endpoint=>"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :endpoint=>"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -4716,7 +4716,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>true, :endpoint=>"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>true, :endpoint=>"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -4749,7 +4749,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :endpoint=>"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>true, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :endpoint=>"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>true})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -4778,7 +4778,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :endpoint=>"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"af-south-1", :use_dual_stack=>true, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"bucket-name", :force_path_style=>false, :endpoint=>"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"af-south-1", :use_dual_stack=>true, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -4807,7 +4807,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"bucket-name", :force_path_style=>false, :endpoint=>"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"bucket-name", :force_path_style=>false, :endpoint=>"https://control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com", :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -4836,7 +4836,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint", :force_path_style=>false, :endpoint=>"https://beta.example.com", :region=>"af-south-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint", :force_path_style=>false, :endpoint=>"https://beta.example.com", :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -4868,7 +4868,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint", :force_path_style=>false, :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint", :force_path_style=>false, :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -4899,7 +4899,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint", :force_path_style=>false, :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>true, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint", :force_path_style=>false, :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -4931,7 +4931,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint", :force_path_style=>false, :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint", :force_path_style=>false, :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -4959,7 +4959,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint", :force_path_style=>false, :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>true, :use_fips=>true, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint", :force_path_style=>false, :region=>"us-west-2", :use_dual_stack=>true, :use_fips=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -4992,7 +4992,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint", :force_path_style=>false, :region=>"cn-north-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint", :force_path_style=>false, :region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -5023,7 +5023,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint", :force_path_style=>false, :region=>"cn-north-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>true})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint", :force_path_style=>false, :region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>true})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -5036,7 +5036,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint", :force_path_style=>false, :region=>"cn-north-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint", :force_path_style=>false, :region=>"cn-north-1", :use_dual_stack=>false, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -5064,7 +5064,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint", :force_path_style=>false, :region=>"cn-north-1", :requires_account_id=>true, :use_dual_stack=>true, :use_fips=>true})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint", :force_path_style=>false, :region=>"cn-north-1", :use_dual_stack=>true, :use_fips=>true})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -5077,7 +5077,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint", :force_path_style=>false, :region=>"af-south-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint", :force_path_style=>false, :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -5108,7 +5108,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint", :force_path_style=>false, :region=>"af-south-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>true, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint", :force_path_style=>false, :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -5140,7 +5140,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint", :force_path_style=>false, :region=>"af-south-1", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>true, :bucket=>"arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint", :force_path_style=>false, :region=>"af-south-1", :use_dual_stack=>false, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -5168,7 +5168,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint", :force_path_style=>false, :region=>"af-south-1", :requires_account_id=>true, :use_dual_stack=>true, :use_fips=>true, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3:af-south-1:123456789012:accesspoint:myendpoint", :force_path_style=>false, :region=>"af-south-1", :use_dual_stack=>true, :use_fips=>true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -5264,7 +5264,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :force_path_style=>false, :use_arn_region=>false, :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :force_path_style=>false, :use_arn_region=>false, :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -5292,7 +5292,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :endpoint=>"https://example.com", :force_path_style=>false, :use_arn_region=>false, :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :endpoint=>"https://example.com", :force_path_style=>false, :use_arn_region=>false, :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -5321,7 +5321,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :force_path_style=>false, :use_arn_region=>true, :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :force_path_style=>false, :use_arn_region=>true, :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -5353,7 +5353,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :force_path_style=>false, :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :force_path_style=>false, :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -5384,7 +5384,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :force_path_style=>false, :use_arn_region=>true, :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint", :force_path_style=>false, :use_arn_region=>true, :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -6050,7 +6050,7 @@ module Aws::S3
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3-object-lambda:us-east-1:123456789012:accesspoint/mybanner", :force_path_style=>false, :use_arn_region=>false, :region=>"us-west-2", :requires_account_id=>true, :use_dual_stack=>false, :use_fips=>false, :key=>"key"})
+        params = EndpointParameters.new(**{:accelerate=>false, :bucket=>"arn:aws:s3-object-lambda:us-east-1:123456789012:accesspoint/mybanner", :force_path_style=>false, :use_arn_region=>false, :region=>"us-west-2", :use_dual_stack=>false, :use_fips=>false})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2023-08-28)
+------------------
+
+* Feature - Remove incorrect regex enforcement on pagination tokens.
+
 1.10.0 (2023-07-20)
 ------------------
 

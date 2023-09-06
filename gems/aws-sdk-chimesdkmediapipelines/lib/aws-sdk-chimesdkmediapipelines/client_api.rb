@@ -88,6 +88,10 @@ module Aws::ChimeSDKMediaPipelines
     GetMediaInsightsPipelineConfigurationResponse = Shapes::StructureShape.new(name: 'GetMediaInsightsPipelineConfigurationResponse')
     GetMediaPipelineRequest = Shapes::StructureShape.new(name: 'GetMediaPipelineRequest')
     GetMediaPipelineResponse = Shapes::StructureShape.new(name: 'GetMediaPipelineResponse')
+    GetSpeakerSearchTaskRequest = Shapes::StructureShape.new(name: 'GetSpeakerSearchTaskRequest')
+    GetSpeakerSearchTaskResponse = Shapes::StructureShape.new(name: 'GetSpeakerSearchTaskResponse')
+    GetVoiceToneAnalysisTaskRequest = Shapes::StructureShape.new(name: 'GetVoiceToneAnalysisTaskRequest')
+    GetVoiceToneAnalysisTaskResponse = Shapes::StructureShape.new(name: 'GetVoiceToneAnalysisTaskResponse')
     GridViewConfiguration = Shapes::StructureShape.new(name: 'GridViewConfiguration')
     GuidString = Shapes::StringShape.new(name: 'GuidString')
     HighlightColor = Shapes::StringShape.new(name: 'HighlightColor')
@@ -102,6 +106,7 @@ module Aws::ChimeSDKMediaPipelines
     KinesisVideoStreamArn = Shapes::StringShape.new(name: 'KinesisVideoStreamArn')
     KinesisVideoStreamRecordingSourceRuntimeConfiguration = Shapes::StructureShape.new(name: 'KinesisVideoStreamRecordingSourceRuntimeConfiguration')
     KinesisVideoStreamSourceRuntimeConfiguration = Shapes::StructureShape.new(name: 'KinesisVideoStreamSourceRuntimeConfiguration')
+    KinesisVideoStreamSourceTaskConfiguration = Shapes::StructureShape.new(name: 'KinesisVideoStreamSourceTaskConfiguration')
     LambdaFunctionSinkConfiguration = Shapes::StructureShape.new(name: 'LambdaFunctionSinkConfiguration')
     LanguageOptions = Shapes::StringShape.new(name: 'LanguageOptions')
     LayoutOption = Shapes::StringShape.new(name: 'LayoutOption')
@@ -135,15 +140,19 @@ module Aws::ChimeSDKMediaPipelines
     MediaInsightsPipelineConfigurationNameString = Shapes::StringShape.new(name: 'MediaInsightsPipelineConfigurationNameString')
     MediaInsightsPipelineConfigurationSummary = Shapes::StructureShape.new(name: 'MediaInsightsPipelineConfigurationSummary')
     MediaInsightsPipelineConfigurationSummaryList = Shapes::ListShape.new(name: 'MediaInsightsPipelineConfigurationSummaryList')
+    MediaInsightsPipelineElementStatus = Shapes::StructureShape.new(name: 'MediaInsightsPipelineElementStatus')
+    MediaInsightsPipelineElementStatuses = Shapes::ListShape.new(name: 'MediaInsightsPipelineElementStatuses')
     MediaInsightsRuntimeMetadata = Shapes::MapShape.new(name: 'MediaInsightsRuntimeMetadata')
     MediaLiveConnectorPipeline = Shapes::StructureShape.new(name: 'MediaLiveConnectorPipeline')
     MediaPipeline = Shapes::StructureShape.new(name: 'MediaPipeline')
+    MediaPipelineElementStatus = Shapes::StringShape.new(name: 'MediaPipelineElementStatus')
     MediaPipelineList = Shapes::ListShape.new(name: 'MediaPipelineList')
     MediaPipelineSinkType = Shapes::StringShape.new(name: 'MediaPipelineSinkType')
     MediaPipelineSourceType = Shapes::StringShape.new(name: 'MediaPipelineSourceType')
     MediaPipelineStatus = Shapes::StringShape.new(name: 'MediaPipelineStatus')
     MediaPipelineStatusUpdate = Shapes::StringShape.new(name: 'MediaPipelineStatusUpdate')
     MediaPipelineSummary = Shapes::StructureShape.new(name: 'MediaPipelineSummary')
+    MediaPipelineTaskStatus = Shapes::StringShape.new(name: 'MediaPipelineTaskStatus')
     MediaSampleRateHertz = Shapes::IntegerShape.new(name: 'MediaSampleRateHertz')
     MeetingEventsConcatenationConfiguration = Shapes::StructureShape.new(name: 'MeetingEventsConcatenationConfiguration')
     ModelName = Shapes::StringShape.new(name: 'ModelName')
@@ -179,7 +188,14 @@ module Aws::ChimeSDKMediaPipelines
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SnsTopicSinkConfiguration = Shapes::StructureShape.new(name: 'SnsTopicSinkConfiguration')
     SourceConfiguration = Shapes::StructureShape.new(name: 'SourceConfiguration')
+    SpeakerSearchTask = Shapes::StructureShape.new(name: 'SpeakerSearchTask')
     SqsQueueSinkConfiguration = Shapes::StructureShape.new(name: 'SqsQueueSinkConfiguration')
+    StartSpeakerSearchTaskRequest = Shapes::StructureShape.new(name: 'StartSpeakerSearchTaskRequest')
+    StartSpeakerSearchTaskResponse = Shapes::StructureShape.new(name: 'StartSpeakerSearchTaskResponse')
+    StartVoiceToneAnalysisTaskRequest = Shapes::StructureShape.new(name: 'StartVoiceToneAnalysisTaskRequest')
+    StartVoiceToneAnalysisTaskResponse = Shapes::StructureShape.new(name: 'StartVoiceToneAnalysisTaskResponse')
+    StopSpeakerSearchTaskRequest = Shapes::StructureShape.new(name: 'StopSpeakerSearchTaskRequest')
+    StopVoiceToneAnalysisTaskRequest = Shapes::StructureShape.new(name: 'StopVoiceToneAnalysisTaskRequest')
     StreamChannelDefinition = Shapes::StructureShape.new(name: 'StreamChannelDefinition')
     StreamConfiguration = Shapes::StructureShape.new(name: 'StreamConfiguration')
     Streams = Shapes::ListShape.new(name: 'Streams')
@@ -216,7 +232,10 @@ module Aws::ChimeSDKMediaPipelines
     VocabularyName = Shapes::StringShape.new(name: 'VocabularyName')
     VocabularyNames = Shapes::StringShape.new(name: 'VocabularyNames')
     VoiceAnalyticsConfigurationStatus = Shapes::StringShape.new(name: 'VoiceAnalyticsConfigurationStatus')
+    VoiceAnalyticsLanguageCode = Shapes::StringShape.new(name: 'VoiceAnalyticsLanguageCode')
     VoiceAnalyticsProcessorConfiguration = Shapes::StructureShape.new(name: 'VoiceAnalyticsProcessorConfiguration')
+    VoiceEnhancementSinkConfiguration = Shapes::StructureShape.new(name: 'VoiceEnhancementSinkConfiguration')
+    VoiceToneAnalysisTask = Shapes::StructureShape.new(name: 'VoiceToneAnalysisTask')
 
     ActiveSpeakerOnlyConfiguration.add_member(:active_speaker_position, Shapes::ShapeRef.new(shape: ActiveSpeakerPosition, location_name: "ActiveSpeakerPosition"))
     ActiveSpeakerOnlyConfiguration.struct_class = Types::ActiveSpeakerOnlyConfiguration
@@ -430,6 +449,20 @@ module Aws::ChimeSDKMediaPipelines
     GetMediaPipelineResponse.add_member(:media_pipeline, Shapes::ShapeRef.new(shape: MediaPipeline, location_name: "MediaPipeline"))
     GetMediaPipelineResponse.struct_class = Types::GetMediaPipelineResponse
 
+    GetSpeakerSearchTaskRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "identifier"))
+    GetSpeakerSearchTaskRequest.add_member(:speaker_search_task_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "speakerSearchTaskId"))
+    GetSpeakerSearchTaskRequest.struct_class = Types::GetSpeakerSearchTaskRequest
+
+    GetSpeakerSearchTaskResponse.add_member(:speaker_search_task, Shapes::ShapeRef.new(shape: SpeakerSearchTask, location_name: "SpeakerSearchTask"))
+    GetSpeakerSearchTaskResponse.struct_class = Types::GetSpeakerSearchTaskResponse
+
+    GetVoiceToneAnalysisTaskRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "identifier"))
+    GetVoiceToneAnalysisTaskRequest.add_member(:voice_tone_analysis_task_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "voiceToneAnalysisTaskId"))
+    GetVoiceToneAnalysisTaskRequest.struct_class = Types::GetVoiceToneAnalysisTaskRequest
+
+    GetVoiceToneAnalysisTaskResponse.add_member(:voice_tone_analysis_task, Shapes::ShapeRef.new(shape: VoiceToneAnalysisTask, location_name: "VoiceToneAnalysisTask"))
+    GetVoiceToneAnalysisTaskResponse.struct_class = Types::GetVoiceToneAnalysisTaskResponse
+
     GridViewConfiguration.add_member(:content_share_layout, Shapes::ShapeRef.new(shape: ContentShareLayoutOption, required: true, location_name: "ContentShareLayout"))
     GridViewConfiguration.add_member(:presenter_only_configuration, Shapes::ShapeRef.new(shape: PresenterOnlyConfiguration, location_name: "PresenterOnlyConfiguration"))
     GridViewConfiguration.add_member(:active_speaker_only_configuration, Shapes::ShapeRef.new(shape: ActiveSpeakerOnlyConfiguration, location_name: "ActiveSpeakerOnlyConfiguration"))
@@ -466,6 +499,11 @@ module Aws::ChimeSDKMediaPipelines
     KinesisVideoStreamSourceRuntimeConfiguration.add_member(:media_encoding, Shapes::ShapeRef.new(shape: MediaEncoding, required: true, location_name: "MediaEncoding"))
     KinesisVideoStreamSourceRuntimeConfiguration.add_member(:media_sample_rate, Shapes::ShapeRef.new(shape: MediaSampleRateHertz, required: true, location_name: "MediaSampleRate"))
     KinesisVideoStreamSourceRuntimeConfiguration.struct_class = Types::KinesisVideoStreamSourceRuntimeConfiguration
+
+    KinesisVideoStreamSourceTaskConfiguration.add_member(:stream_arn, Shapes::ShapeRef.new(shape: KinesisVideoStreamArn, required: true, location_name: "StreamArn"))
+    KinesisVideoStreamSourceTaskConfiguration.add_member(:channel_id, Shapes::ShapeRef.new(shape: ChannelId, required: true, location_name: "ChannelId"))
+    KinesisVideoStreamSourceTaskConfiguration.add_member(:fragment_number, Shapes::ShapeRef.new(shape: FragmentNumberString, location_name: "FragmentNumber"))
+    KinesisVideoStreamSourceTaskConfiguration.struct_class = Types::KinesisVideoStreamSourceTaskConfiguration
 
     LambdaFunctionSinkConfiguration.add_member(:insights_target, Shapes::ShapeRef.new(shape: Arn, location_name: "InsightsTarget"))
     LambdaFunctionSinkConfiguration.struct_class = Types::LambdaFunctionSinkConfiguration
@@ -557,6 +595,7 @@ module Aws::ChimeSDKMediaPipelines
     MediaInsightsPipeline.add_member(:kinesis_video_stream_recording_source_runtime_configuration, Shapes::ShapeRef.new(shape: KinesisVideoStreamRecordingSourceRuntimeConfiguration, location_name: "KinesisVideoStreamRecordingSourceRuntimeConfiguration"))
     MediaInsightsPipeline.add_member(:s3_recording_sink_runtime_configuration, Shapes::ShapeRef.new(shape: S3RecordingSinkRuntimeConfiguration, location_name: "S3RecordingSinkRuntimeConfiguration"))
     MediaInsightsPipeline.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
+    MediaInsightsPipeline.add_member(:element_statuses, Shapes::ShapeRef.new(shape: MediaInsightsPipelineElementStatuses, location_name: "ElementStatuses"))
     MediaInsightsPipeline.struct_class = Types::MediaInsightsPipeline
 
     MediaInsightsPipelineConfiguration.add_member(:media_insights_pipeline_configuration_name, Shapes::ShapeRef.new(shape: MediaInsightsPipelineConfigurationNameString, location_name: "MediaInsightsPipelineConfigurationName"))
@@ -578,6 +617,7 @@ module Aws::ChimeSDKMediaPipelines
     MediaInsightsPipelineConfigurationElement.add_member(:lambda_function_sink_configuration, Shapes::ShapeRef.new(shape: LambdaFunctionSinkConfiguration, location_name: "LambdaFunctionSinkConfiguration"))
     MediaInsightsPipelineConfigurationElement.add_member(:sqs_queue_sink_configuration, Shapes::ShapeRef.new(shape: SqsQueueSinkConfiguration, location_name: "SqsQueueSinkConfiguration"))
     MediaInsightsPipelineConfigurationElement.add_member(:sns_topic_sink_configuration, Shapes::ShapeRef.new(shape: SnsTopicSinkConfiguration, location_name: "SnsTopicSinkConfiguration"))
+    MediaInsightsPipelineConfigurationElement.add_member(:voice_enhancement_sink_configuration, Shapes::ShapeRef.new(shape: VoiceEnhancementSinkConfiguration, location_name: "VoiceEnhancementSinkConfiguration"))
     MediaInsightsPipelineConfigurationElement.struct_class = Types::MediaInsightsPipelineConfigurationElement
 
     MediaInsightsPipelineConfigurationElements.member = Shapes::ShapeRef.new(shape: MediaInsightsPipelineConfigurationElement)
@@ -588,6 +628,12 @@ module Aws::ChimeSDKMediaPipelines
     MediaInsightsPipelineConfigurationSummary.struct_class = Types::MediaInsightsPipelineConfigurationSummary
 
     MediaInsightsPipelineConfigurationSummaryList.member = Shapes::ShapeRef.new(shape: MediaInsightsPipelineConfigurationSummary)
+
+    MediaInsightsPipelineElementStatus.add_member(:type, Shapes::ShapeRef.new(shape: MediaInsightsPipelineConfigurationElementType, location_name: "Type"))
+    MediaInsightsPipelineElementStatus.add_member(:status, Shapes::ShapeRef.new(shape: MediaPipelineElementStatus, location_name: "Status"))
+    MediaInsightsPipelineElementStatus.struct_class = Types::MediaInsightsPipelineElementStatus
+
+    MediaInsightsPipelineElementStatuses.member = Shapes::ShapeRef.new(shape: MediaInsightsPipelineElementStatus)
 
     MediaInsightsRuntimeMetadata.key = Shapes::ShapeRef.new(shape: NonEmptyString)
     MediaInsightsRuntimeMetadata.value = Shapes::ShapeRef.new(shape: String)
@@ -688,8 +734,40 @@ module Aws::ChimeSDKMediaPipelines
     SourceConfiguration.add_member(:selected_video_streams, Shapes::ShapeRef.new(shape: SelectedVideoStreams, location_name: "SelectedVideoStreams"))
     SourceConfiguration.struct_class = Types::SourceConfiguration
 
+    SpeakerSearchTask.add_member(:speaker_search_task_id, Shapes::ShapeRef.new(shape: GuidString, location_name: "SpeakerSearchTaskId"))
+    SpeakerSearchTask.add_member(:speaker_search_task_status, Shapes::ShapeRef.new(shape: MediaPipelineTaskStatus, location_name: "SpeakerSearchTaskStatus"))
+    SpeakerSearchTask.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
+    SpeakerSearchTask.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
+    SpeakerSearchTask.struct_class = Types::SpeakerSearchTask
+
     SqsQueueSinkConfiguration.add_member(:insights_target, Shapes::ShapeRef.new(shape: Arn, location_name: "InsightsTarget"))
     SqsQueueSinkConfiguration.struct_class = Types::SqsQueueSinkConfiguration
+
+    StartSpeakerSearchTaskRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "identifier"))
+    StartSpeakerSearchTaskRequest.add_member(:voice_profile_domain_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "VoiceProfileDomainArn"))
+    StartSpeakerSearchTaskRequest.add_member(:kinesis_video_stream_source_task_configuration, Shapes::ShapeRef.new(shape: KinesisVideoStreamSourceTaskConfiguration, location_name: "KinesisVideoStreamSourceTaskConfiguration"))
+    StartSpeakerSearchTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartSpeakerSearchTaskRequest.struct_class = Types::StartSpeakerSearchTaskRequest
+
+    StartSpeakerSearchTaskResponse.add_member(:speaker_search_task, Shapes::ShapeRef.new(shape: SpeakerSearchTask, location_name: "SpeakerSearchTask"))
+    StartSpeakerSearchTaskResponse.struct_class = Types::StartSpeakerSearchTaskResponse
+
+    StartVoiceToneAnalysisTaskRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "identifier"))
+    StartVoiceToneAnalysisTaskRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: VoiceAnalyticsLanguageCode, required: true, location_name: "LanguageCode"))
+    StartVoiceToneAnalysisTaskRequest.add_member(:kinesis_video_stream_source_task_configuration, Shapes::ShapeRef.new(shape: KinesisVideoStreamSourceTaskConfiguration, location_name: "KinesisVideoStreamSourceTaskConfiguration"))
+    StartVoiceToneAnalysisTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartVoiceToneAnalysisTaskRequest.struct_class = Types::StartVoiceToneAnalysisTaskRequest
+
+    StartVoiceToneAnalysisTaskResponse.add_member(:voice_tone_analysis_task, Shapes::ShapeRef.new(shape: VoiceToneAnalysisTask, location_name: "VoiceToneAnalysisTask"))
+    StartVoiceToneAnalysisTaskResponse.struct_class = Types::StartVoiceToneAnalysisTaskResponse
+
+    StopSpeakerSearchTaskRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "identifier"))
+    StopSpeakerSearchTaskRequest.add_member(:speaker_search_task_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "speakerSearchTaskId"))
+    StopSpeakerSearchTaskRequest.struct_class = Types::StopSpeakerSearchTaskRequest
+
+    StopVoiceToneAnalysisTaskRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "identifier"))
+    StopVoiceToneAnalysisTaskRequest.add_member(:voice_tone_analysis_task_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "voiceToneAnalysisTaskId"))
+    StopVoiceToneAnalysisTaskRequest.struct_class = Types::StopVoiceToneAnalysisTaskRequest
 
     StreamChannelDefinition.add_member(:number_of_channels, Shapes::ShapeRef.new(shape: NumberOfChannels, required: true, location_name: "NumberOfChannels"))
     StreamChannelDefinition.add_member(:channel_definitions, Shapes::ShapeRef.new(shape: ChannelDefinitions, location_name: "ChannelDefinitions"))
@@ -774,6 +852,15 @@ module Aws::ChimeSDKMediaPipelines
     VoiceAnalyticsProcessorConfiguration.add_member(:speaker_search_status, Shapes::ShapeRef.new(shape: VoiceAnalyticsConfigurationStatus, location_name: "SpeakerSearchStatus"))
     VoiceAnalyticsProcessorConfiguration.add_member(:voice_tone_analysis_status, Shapes::ShapeRef.new(shape: VoiceAnalyticsConfigurationStatus, location_name: "VoiceToneAnalysisStatus"))
     VoiceAnalyticsProcessorConfiguration.struct_class = Types::VoiceAnalyticsProcessorConfiguration
+
+    VoiceEnhancementSinkConfiguration.add_member(:disabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Disabled"))
+    VoiceEnhancementSinkConfiguration.struct_class = Types::VoiceEnhancementSinkConfiguration
+
+    VoiceToneAnalysisTask.add_member(:voice_tone_analysis_task_id, Shapes::ShapeRef.new(shape: GuidString, location_name: "VoiceToneAnalysisTaskId"))
+    VoiceToneAnalysisTask.add_member(:voice_tone_analysis_task_status, Shapes::ShapeRef.new(shape: MediaPipelineTaskStatus, location_name: "VoiceToneAnalysisTaskStatus"))
+    VoiceToneAnalysisTask.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
+    VoiceToneAnalysisTask.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
+    VoiceToneAnalysisTask.struct_class = Types::VoiceToneAnalysisTask
 
 
     # @api private
@@ -911,6 +998,7 @@ module Aws::ChimeSDKMediaPipelines
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
@@ -951,6 +1039,36 @@ module Aws::ChimeSDKMediaPipelines
         o.http_request_uri = "/sdk-media-pipelines/{mediaPipelineId}"
         o.input = Shapes::ShapeRef.new(shape: GetMediaPipelineRequest)
         o.output = Shapes::ShapeRef.new(shape: GetMediaPipelineResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:get_speaker_search_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSpeakerSearchTask"
+        o.http_method = "GET"
+        o.http_request_uri = "/media-insights-pipelines/{identifier}/speaker-search-tasks/{speakerSearchTaskId}"
+        o.input = Shapes::ShapeRef.new(shape: GetSpeakerSearchTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSpeakerSearchTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:get_voice_tone_analysis_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetVoiceToneAnalysisTask"
+        o.http_method = "GET"
+        o.http_request_uri = "/media-insights-pipelines/{identifier}/voice-tone-analysis-tasks/{voiceToneAnalysisTaskId}"
+        o.input = Shapes::ShapeRef.new(shape: GetVoiceToneAnalysisTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetVoiceToneAnalysisTaskResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -1034,6 +1152,70 @@ module Aws::ChimeSDKMediaPipelines
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:start_speaker_search_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartSpeakerSearchTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/media-insights-pipelines/{identifier}/speaker-search-tasks?operation=start"
+        o.input = Shapes::ShapeRef.new(shape: StartSpeakerSearchTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartSpeakerSearchTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:start_voice_tone_analysis_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartVoiceToneAnalysisTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/media-insights-pipelines/{identifier}/voice-tone-analysis-tasks?operation=start"
+        o.input = Shapes::ShapeRef.new(shape: StartVoiceToneAnalysisTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartVoiceToneAnalysisTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:stop_speaker_search_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopSpeakerSearchTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/media-insights-pipelines/{identifier}/speaker-search-tasks/{speakerSearchTaskId}?operation=stop"
+        o.input = Shapes::ShapeRef.new(shape: StopSpeakerSearchTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:stop_voice_tone_analysis_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopVoiceToneAnalysisTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/media-insights-pipelines/{identifier}/voice-tone-analysis-tasks/{voiceToneAnalysisTaskId}?operation=stop"
+        o.input = Shapes::ShapeRef.new(shape: StopVoiceToneAnalysisTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)

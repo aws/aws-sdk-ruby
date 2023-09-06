@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2023-08-31)
+------------------
+
+* Feature - Updated "type" description for CreateChannel, UpdateChannel, Channel, and ChannelSummary.
+
 1.38.0 (2023-07-17)
 ------------------
 

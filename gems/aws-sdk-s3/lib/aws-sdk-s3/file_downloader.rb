@@ -31,8 +31,16 @@ module Aws
           key: options[:key],
         }
         @params[:version_id] = options[:version_id] if options[:version_id]
-        @params[:checksum_mode] = options[:checksum_mode] || 'ENABLED'
+
+        # checksum_mode only supports the value "ENABLED"
+        # falsey values (false/nil) or "DISABLED" should be considered
+        # disabled and the api parameter should be unset.
+        if (checksum_mode = options.fetch(:checksum_mode, 'ENABLED'))
+          @params[:checksum_mode] = checksum_mode unless checksum_mode.upcase == 'DISABLED'
+        end
         @on_checksum_validated = options[:on_checksum_validated]
+
+        @progress_callback = options[:progress_callback]
 
         validate!
 
@@ -43,7 +51,7 @@ module Aws
           when 'get_range'
             if @chunk_size
               resp = @client.head_object(@params)
-              multithreaded_get_by_ranges(construct_chunks(resp.content_length))
+              multithreaded_get_by_ranges(resp.content_length)
             else
               msg = 'In :get_range mode, :chunk_size must be provided'
               raise ArgumentError, msg
@@ -76,7 +84,7 @@ module Aws
           if resp.content_length <= MIN_CHUNK_SIZE
             single_request
           else
-            multithreaded_get_by_ranges(construct_chunks(resp.content_length))
+            multithreaded_get_by_ranges(resp.content_length)
           end
         else
           # partNumber is an option
@@ -93,9 +101,9 @@ module Aws
         chunk_size = compute_chunk(file_size)
         part_size = (file_size.to_f / count.to_f).ceil
         if chunk_size < part_size
-          multithreaded_get_by_ranges(construct_chunks(file_size))
+          multithreaded_get_by_ranges(file_size)
         else
-          multithreaded_get_by_parts(count)
+          multithreaded_get_by_parts(count, file_size)
         end
       end
 
@@ -127,30 +135,65 @@ module Aws
         chunks.each_slice(@thread_count).to_a
       end
 
-      def multithreaded_get_by_ranges(chunks)
-        thread_batches(chunks, 'range')
+      def multithreaded_get_by_ranges(file_size)
+        offset = 0
+        default_chunk_size = compute_chunk(file_size)
+        chunks = []
+        part_number = 1 # parts start at 1
+        while offset < file_size
+          progress = offset + default_chunk_size
+          progress = file_size if progress > file_size
+          range = "bytes=#{offset}-#{progress - 1}"
+          chunks << Part.new(
+            part_number: part_number,
+            size: (progress-offset),
+            params: @params.merge(range: range)
+          )
+          part_number += 1
+          offset = progress
+        end
+        download_in_threads(PartList.new(chunks), file_size)
       end
 
-      def multithreaded_get_by_parts(parts)
-        thread_batches(parts, 'part_number')
+      def multithreaded_get_by_parts(n_parts, total_size)
+        parts = (1..n_parts).map do |part|
+          Part.new(part_number: part, params: @params.merge(part_number: part))
+        end
+        download_in_threads(PartList.new(parts), total_size)
       end
 
-      def thread_batches(chunks, param)
-        batches(chunks, param).each do |batch|
-          threads = []
-          batch.each do |chunk|
-            threads << Thread.new do
-              resp = @client.get_object(
-                @params.merge(param.to_sym => chunk)
-              )
-              write(resp)
-              if @on_checksum_validated && resp.checksum_validated
-                @on_checksum_validated.call(resp.checksum_validated, resp)
+      def download_in_threads(pending, total_size)
+        threads = []
+        if @progress_callback
+          progress = MultipartProgress.new(pending, total_size, @progress_callback)
+        end
+        @thread_count.times do
+          thread = Thread.new do
+            begin
+              while part = pending.shift
+                if progress
+                  part.params[:on_chunk_received] =
+                    proc do |_chunk, bytes, total|
+                      progress.call(part.part_number, bytes, total)
+                    end
+                end
+                resp = @client.get_object(part.params)
+                write(resp)
+                if @on_checksum_validated && resp.checksum_validated
+                  @on_checksum_validated.call(resp.checksum_validated, resp)
+                end
               end
+              nil
+            rescue => error
+              # keep other threads from downloading other parts
+              pending.clear!
+              raise error
             end
           end
-          threads.each(&:join)
+          thread.abort_on_exception = true
+          threads << thread
         end
+        threads.map(&:value).compact
       end
 
       def write(resp)
@@ -160,9 +203,9 @@ module Aws
       end
 
       def single_request
-        resp = @client.get_object(
-          @params.merge(response_target: @path)
-        )
+        params = @params.merge(response_target: @path)
+        params[:on_chunk_received] = single_part_progress if @progress_callback
+        resp = @client.get_object(params)
 
         return resp unless @on_checksum_validated
 
@@ -171,6 +214,59 @@ module Aws
         end
 
         resp
+      end
+
+      def single_part_progress
+        proc do |_chunk, bytes_read, total_size|
+          @progress_callback.call([bytes_read], [total_size], total_size)
+        end
+      end
+
+      class Part < Struct.new(:part_number, :size, :params)
+        include Aws::Structure
+      end
+
+      # @api private
+      class PartList
+        include Enumerable
+        def initialize(parts = [])
+          @parts = parts
+          @mutex = Mutex.new
+        end
+
+        def shift
+          @mutex.synchronize { @parts.shift }
+        end
+
+        def size
+          @mutex.synchronize { @parts.size }
+        end
+
+        def clear!
+          @mutex.synchronize { @parts.clear }
+        end
+
+        def each(&block)
+          @mutex.synchronize { @parts.each(&block) }
+        end
+      end
+
+      # @api private
+      class  MultipartProgress
+        def initialize(parts, total_size, progress_callback)
+          @bytes_received = Array.new(parts.size, 0)
+          @part_sizes = parts.map(&:size)
+          @total_size = total_size
+          @progress_callback = progress_callback
+        end
+
+        def call(part_number, bytes_received, total)
+          # part numbers start at 1
+          @bytes_received[part_number - 1] = bytes_received
+          # part size may not be known until we get the first response
+          @part_sizes[part_number - 1] ||= total
+          @progress_callback.call(@bytes_received, @part_sizes, @total_size)
+        end
       end
     end
   end

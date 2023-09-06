@@ -527,6 +527,7 @@ module Aws::ChimeSDKVoice
     #         phone_number_id: "SensitiveNonEmptyString", # required
     #         product_type: "VoiceConnector", # accepts VoiceConnector, SipMediaApplicationDialIn
     #         calling_name: "CallingName",
+    #         name: "PhoneNumberName",
     #       },
     #     ],
     #   })
@@ -557,6 +558,9 @@ module Aws::ChimeSDKVoice
     # @option params [required, Array<String>] :e164_phone_numbers
     #   List of phone numbers, in E.164 format.
     #
+    # @option params [String] :name
+    #   Specifies the name assigned to one or more phone numbers.
+    #
     # @return [Types::CreatePhoneNumberOrderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePhoneNumberOrderResponse#phone_number_order #phone_number_order} => Types::PhoneNumberOrder
@@ -566,6 +570,7 @@ module Aws::ChimeSDKVoice
     #   resp = client.create_phone_number_order({
     #     product_type: "VoiceConnector", # required, accepts VoiceConnector, SipMediaApplicationDialIn
     #     e164_phone_numbers: ["E164PhoneNumber"], # required
+    #     name: "PhoneNumberName",
     #   })
     #
     # @example Response structure
@@ -1566,6 +1571,7 @@ module Aws::ChimeSDKVoice
     #   resp.phone_number.updated_timestamp #=> Time
     #   resp.phone_number.deletion_timestamp #=> Time
     #   resp.phone_number.order_id #=> String
+    #   resp.phone_number.name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/GetPhoneNumber AWS API Documentation
     #
@@ -2411,6 +2417,7 @@ module Aws::ChimeSDKVoice
     #   resp.phone_numbers[0].updated_timestamp #=> Time
     #   resp.phone_numbers[0].deletion_timestamp #=> Time
     #   resp.phone_numbers[0].order_id #=> String
+    #   resp.phone_numbers[0].name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/ListPhoneNumbers AWS API Documentation
@@ -3265,6 +3272,7 @@ module Aws::ChimeSDKVoice
     #   resp.phone_number.updated_timestamp #=> Time
     #   resp.phone_number.deletion_timestamp #=> Time
     #   resp.phone_number.order_id #=> String
+    #   resp.phone_number.name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/RestorePhoneNumber AWS API Documentation
     #
@@ -3624,6 +3632,9 @@ module Aws::ChimeSDKVoice
     # @option params [String] :calling_name
     #   The outbound calling name associated with the phone number.
     #
+    # @option params [String] :name
+    #   Specifies the name assigned to one or more phone numbers.
+    #
     # @return [Types::UpdatePhoneNumberResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePhoneNumberResponse#phone_number #phone_number} => Types::PhoneNumber
@@ -3634,6 +3645,7 @@ module Aws::ChimeSDKVoice
     #     phone_number_id: "SensitiveNonEmptyString", # required
     #     product_type: "VoiceConnector", # accepts VoiceConnector, SipMediaApplicationDialIn
     #     calling_name: "CallingName",
+    #     name: "PhoneNumberName",
     #   })
     #
     # @example Response structure
@@ -3660,6 +3672,7 @@ module Aws::ChimeSDKVoice
     #   resp.phone_number.updated_timestamp #=> Time
     #   resp.phone_number.deletion_timestamp #=> Time
     #   resp.phone_number.order_id #=> String
+    #   resp.phone_number.name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/UpdatePhoneNumber AWS API Documentation
     #
@@ -4173,7 +4186,7 @@ module Aws::ChimeSDKVoice
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkvoice'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -17721,6 +17721,15 @@ module Aws::SecurityHub
     #   Indicates whether the finding is a sample finding.
     #   @return [Boolean]
     #
+    # @!attribute [rw] generator_details
+    #   Provides metadata for the Amazon CodeGuru detector associated with a
+    #   finding. This field pertains to findings that relate to Lambda
+    #   functions. Amazon Inspector identifies policy violations and
+    #   vulnerabilities in Lambda function code based on internal detectors
+    #   developed in collaboration with Amazon CodeGuru. Security Hub
+    #   receives those findings.
+    #   @return [Types::GeneratorDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSecurityFinding AWS API Documentation
     #
     class AwsSecurityFinding < Struct.new(
@@ -17764,7 +17773,8 @@ module Aws::SecurityHub
       :patch_summary,
       :action,
       :finding_provider_fields,
-      :sample)
+      :sample,
+      :generator_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20662,6 +20672,38 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provides details about where a code vulnerability is located in your
+    # Lambda function.
+    #
+    # @!attribute [rw] end_line
+    #   The line number of the last line of code in which the vulnerability
+    #   is located.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] file_name
+    #   The name of the file in which the code vulnerability is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_path
+    #   The file path to the code in which the vulnerability is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_line
+    #   The line number of the first line of code in which the vulnerability
+    #   is located.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CodeVulnerabilitiesFilePath AWS API Documentation
+    #
+    class CodeVulnerabilitiesFilePath < Struct.new(
+      :end_line,
+      :file_name,
+      :file_path,
+      :start_line)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains finding details that are specific to control-based findings.
     # Only returned for findings generated from controls.
     #
@@ -22189,6 +22231,37 @@ module Aws::SecurityHub
     class FirewallPolicyStatelessRuleGroupReferencesDetails < Struct.new(
       :priority,
       :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides metadata for the Amazon CodeGuru detector associated with a
+    # finding. This field pertains to findings that relate to Lambda
+    # functions. Amazon Inspector identifies policy violations and
+    # vulnerabilities in Lambda function code based on internal detectors
+    # developed in collaboration with Amazon CodeGuru. Security Hub receives
+    # those findings.
+    #
+    # @!attribute [rw] name
+    #   The name of the detector used to identify the code vulnerability.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the detector used to identify the code
+    #   vulnerability.
+    #   @return [String]
+    #
+    # @!attribute [rw] labels
+    #   An array of tags used to identify the detector associated with the
+    #   finding.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GeneratorDetails AWS API Documentation
+    #
+    class GeneratorDetails < Struct.new(
+      :name,
+      :description,
+      :labels)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27193,6 +27266,20 @@ module Aws::SecurityHub
     #   * `PARTIAL` otherwise
     #   @return [String]
     #
+    # @!attribute [rw] epss_score
+    #   The Exploit Prediction Scoring System (EPSS) score for a finding.
+    #   @return [Float]
+    #
+    # @!attribute [rw] exploit_available
+    #   Whether an exploit is available for a finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_vulnerabilities
+    #   The vulnerabilities found in your Lambda function code. This field
+    #   pertains to findings that Security Hub receives from Amazon
+    #   Inspector.
+    #   @return [Array<Types::VulnerabilityCodeVulnerabilities>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Vulnerability AWS API Documentation
     #
     class Vulnerability < Struct.new(
@@ -27202,7 +27289,39 @@ module Aws::SecurityHub
       :related_vulnerabilities,
       :vendor,
       :reference_urls,
-      :fix_available)
+      :fix_available,
+      :epss_score,
+      :exploit_available,
+      :code_vulnerabilities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the vulnerabilities found in your Lambda
+    # function code. This field pertains to findings that Security Hub
+    # receives from Amazon Inspector.
+    #
+    # @!attribute [rw] cwes
+    #   The Common Weakness Enumeration (CWE) item associated with the
+    #   detected code vulnerability.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] file_path
+    #   Provides details about where a code vulnerability is located in your
+    #   Lambda function.
+    #   @return [Types::CodeVulnerabilitiesFilePath]
+    #
+    # @!attribute [rw] source_arn
+    #   The Amazon Resource Name (ARN) of the Lambda layer in which the code
+    #   vulnerability is located.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/VulnerabilityCodeVulnerabilities AWS API Documentation
+    #
+    class VulnerabilityCodeVulnerabilities < Struct.new(
+      :cwes,
+      :file_path,
+      :source_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27317,8 +27436,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Provides information about the status of the investigation into a
-    # finding.
+    # Provides details about the status of the investigation into a finding.
     #
     # @!attribute [rw] status
     #   The status of the investigation into the finding. The workflow

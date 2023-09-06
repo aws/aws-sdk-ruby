@@ -21,6 +21,7 @@ require_relative 'aws-sdk-sagemakerruntime/endpoint_parameters'
 require_relative 'aws-sdk-sagemakerruntime/endpoint_provider'
 require_relative 'aws-sdk-sagemakerruntime/endpoints'
 require_relative 'aws-sdk-sagemakerruntime/customizations'
+require_relative 'aws-sdk-sagemakerruntime/event_streams'
 
 # This module provides support for Amazon SageMaker Runtime. This module is available in the
 # `aws-sdk-sagemakerruntime` gem.
@@ -52,6 +53,6 @@ require_relative 'aws-sdk-sagemakerruntime/customizations'
 # @!group service
 module Aws::SageMakerRuntime
 
-  GEM_VERSION = '1.54.0'
+  GEM_VERSION = '1.55.0'
 
 end

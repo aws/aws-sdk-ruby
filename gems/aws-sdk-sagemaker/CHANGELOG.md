@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.208.0 (2023-09-05)
+------------------
+
+* Feature - SageMaker Neo now supports data input shape derivation for Pytorch 2.0  and XGBoost compilation job for cloud instance targets. You can skip DataInputConfig field during compilation job creation. You can also access derived information from model in DescribeCompilationJob response.
+
+1.207.0 (2023-08-30)
+------------------
+
+* Feature - Amazon SageMaker Canvas adds IdentityProviderOAuthSettings support for CanvasAppSettings
+
+1.206.0 (2023-08-15)
+------------------
+
+* Feature - SageMaker Inference Recommender now provides SupportedResponseMIMETypes from DescribeInferenceRecommendationsJob response
+
+1.205.0 (2023-08-09)
+------------------
+
+* Feature - This release adds support for cross account access for SageMaker Model Cards through AWS RAM.
+
 1.204.0 (2023-08-04)
 ------------------
 

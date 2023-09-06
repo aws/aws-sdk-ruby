@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2023-08-24)
+------------------
+
+* Feature - Excel support in Snapshot Export APIs. Removed Required trait for some insight Computations. Namespace-shared Folders support. Global Filters support. Table pin Column support.
+
+1.88.0 (2023-08-11)
+------------------
+
+* Feature - New Authentication method for Account subscription - IAM Identity Center. Hierarchy layout support, default column width support and related style properties for pivot table visuals. Non-additive topic field aggregations for Topic API
+
 1.87.0 (2023-07-24)
 ------------------
 

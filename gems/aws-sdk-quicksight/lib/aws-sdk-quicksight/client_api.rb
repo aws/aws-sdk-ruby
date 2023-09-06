@@ -16,6 +16,7 @@ module Aws::QuickSight
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountCustomization = Shapes::StructureShape.new(name: 'AccountCustomization')
     AccountInfo = Shapes::StructureShape.new(name: 'AccountInfo')
+    AccountName = Shapes::StringShape.new(name: 'AccountName')
     AccountSettings = Shapes::StructureShape.new(name: 'AccountSettings')
     ActionList = Shapes::ListShape.new(name: 'ActionList')
     ActiveIAMPolicyAssignment = Shapes::StructureShape.new(name: 'ActiveIAMPolicyAssignment')
@@ -27,6 +28,7 @@ module Aws::QuickSight
     AggregationSortConfiguration = Shapes::StructureShape.new(name: 'AggregationSortConfiguration')
     AggregationSortConfigurationList = Shapes::ListShape.new(name: 'AggregationSortConfigurationList')
     AliasName = Shapes::StringShape.new(name: 'AliasName')
+    AllSheetsFilterScopeConfiguration = Shapes::StructureShape.new(name: 'AllSheetsFilterScopeConfiguration')
     AmazonElasticsearchParameters = Shapes::StructureShape.new(name: 'AmazonElasticsearchParameters')
     AmazonOpenSearchParameters = Shapes::StructureShape.new(name: 'AmazonOpenSearchParameters')
     Analysis = Shapes::StructureShape.new(name: 'Analysis')
@@ -1097,6 +1099,9 @@ module Aws::QuickSight
     PivotTableMetricPlacement = Shapes::StringShape.new(name: 'PivotTableMetricPlacement')
     PivotTableOptions = Shapes::StructureShape.new(name: 'PivotTableOptions')
     PivotTablePaginatedReportOptions = Shapes::StructureShape.new(name: 'PivotTablePaginatedReportOptions')
+    PivotTableRowsLabelOptions = Shapes::StructureShape.new(name: 'PivotTableRowsLabelOptions')
+    PivotTableRowsLabelText = Shapes::StringShape.new(name: 'PivotTableRowsLabelText')
+    PivotTableRowsLayout = Shapes::StringShape.new(name: 'PivotTableRowsLayout')
     PivotTableSortBy = Shapes::StructureShape.new(name: 'PivotTableSortBy')
     PivotTableSortConfiguration = Shapes::StructureShape.new(name: 'PivotTableSortConfiguration')
     PivotTableSubtotalLevel = Shapes::StringShape.new(name: 'PivotTableSubtotalLevel')
@@ -1286,6 +1291,7 @@ module Aws::QuickSight
     SetParameterValueConfiguration = Shapes::StructureShape.new(name: 'SetParameterValueConfiguration')
     SetParameterValueConfigurationList = Shapes::ListShape.new(name: 'SetParameterValueConfigurationList')
     ShapeConditionalFormat = Shapes::StructureShape.new(name: 'ShapeConditionalFormat')
+    SharingModel = Shapes::StringShape.new(name: 'SharingModel')
     Sheet = Shapes::StructureShape.new(name: 'Sheet')
     SheetContentType = Shapes::StringShape.new(name: 'SheetContentType')
     SheetControlDateTimePickerType = Shapes::StringShape.new(name: 'SheetControlDateTimePickerType')
@@ -1388,6 +1394,7 @@ module Aws::QuickSight
     StringParameterDeclaration = Shapes::StructureShape.new(name: 'StringParameterDeclaration')
     StringParameterList = Shapes::ListShape.new(name: 'StringParameterList')
     StringValueWhenUnsetConfiguration = Shapes::StructureShape.new(name: 'StringValueWhenUnsetConfiguration')
+    StyledCellType = Shapes::StringShape.new(name: 'StyledCellType')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIdList = Shapes::ListShape.new(name: 'SubnetIdList')
     SubtotalOptions = Shapes::StructureShape.new(name: 'SubtotalOptions')
@@ -1415,6 +1422,7 @@ module Aws::QuickSight
     TableFieldOption = Shapes::StructureShape.new(name: 'TableFieldOption')
     TableFieldOptionList = Shapes::ListShape.new(name: 'TableFieldOptionList')
     TableFieldOptions = Shapes::StructureShape.new(name: 'TableFieldOptions')
+    TableFieldOrderList = Shapes::ListShape.new(name: 'TableFieldOrderList')
     TableFieldURLConfiguration = Shapes::StructureShape.new(name: 'TableFieldURLConfiguration')
     TableFieldWells = Shapes::StructureShape.new(name: 'TableFieldWells')
     TableInlineVisualization = Shapes::StructureShape.new(name: 'TableInlineVisualization')
@@ -1422,9 +1430,12 @@ module Aws::QuickSight
     TableOptions = Shapes::StructureShape.new(name: 'TableOptions')
     TableOrientation = Shapes::StringShape.new(name: 'TableOrientation')
     TablePaginatedReportOptions = Shapes::StructureShape.new(name: 'TablePaginatedReportOptions')
+    TablePinnedFieldOptions = Shapes::StructureShape.new(name: 'TablePinnedFieldOptions')
     TableRowConditionalFormatting = Shapes::StructureShape.new(name: 'TableRowConditionalFormatting')
     TableSideBorderOptions = Shapes::StructureShape.new(name: 'TableSideBorderOptions')
     TableSortConfiguration = Shapes::StructureShape.new(name: 'TableSortConfiguration')
+    TableStyleTarget = Shapes::StructureShape.new(name: 'TableStyleTarget')
+    TableStyleTargetList = Shapes::ListShape.new(name: 'TableStyleTargetList')
     TableTotalsPlacement = Shapes::StringShape.new(name: 'TableTotalsPlacement')
     TableTotalsScrollStatus = Shapes::StringShape.new(name: 'TableTotalsScrollStatus')
     TableUnaggregatedFieldWells = Shapes::StructureShape.new(name: 'TableUnaggregatedFieldWells')
@@ -1692,6 +1703,7 @@ module Aws::QuickSight
     AccountInfo.add_member(:notification_email, Shapes::ShapeRef.new(shape: String, location_name: "NotificationEmail"))
     AccountInfo.add_member(:authentication_type, Shapes::ShapeRef.new(shape: String, location_name: "AuthenticationType"))
     AccountInfo.add_member(:account_subscription_status, Shapes::ShapeRef.new(shape: String, location_name: "AccountSubscriptionStatus"))
+    AccountInfo.add_member(:iam_identity_center_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "IAMIdentityCenterInstanceArn"))
     AccountInfo.struct_class = Types::AccountInfo
 
     AccountSettings.add_member(:account_name, Shapes::ShapeRef.new(shape: String, location_name: "AccountName"))
@@ -1730,6 +1742,8 @@ module Aws::QuickSight
     AggregationSortConfiguration.struct_class = Types::AggregationSortConfiguration
 
     AggregationSortConfigurationList.member = Shapes::ShapeRef.new(shape: AggregationSortConfiguration)
+
+    AllSheetsFilterScopeConfiguration.struct_class = Types::AllSheetsFilterScopeConfiguration
 
     AmazonElasticsearchParameters.add_member(:domain, Shapes::ShapeRef.new(shape: Domain, required: true, location_name: "Domain"))
     AmazonElasticsearchParameters.struct_class = Types::AmazonElasticsearchParameters
@@ -2509,7 +2523,7 @@ module Aws::QuickSight
     CreateAccountSubscriptionRequest.add_member(:edition, Shapes::ShapeRef.new(shape: Edition, required: true, location_name: "Edition"))
     CreateAccountSubscriptionRequest.add_member(:authentication_method, Shapes::ShapeRef.new(shape: AuthenticationMethodOption, required: true, location_name: "AuthenticationMethod"))
     CreateAccountSubscriptionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
-    CreateAccountSubscriptionRequest.add_member(:account_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AccountName"))
+    CreateAccountSubscriptionRequest.add_member(:account_name, Shapes::ShapeRef.new(shape: AccountName, required: true, location_name: "AccountName"))
     CreateAccountSubscriptionRequest.add_member(:notification_email, Shapes::ShapeRef.new(shape: String, required: true, location_name: "NotificationEmail"))
     CreateAccountSubscriptionRequest.add_member(:active_directory_name, Shapes::ShapeRef.new(shape: String, location_name: "ActiveDirectoryName"))
     CreateAccountSubscriptionRequest.add_member(:realm, Shapes::ShapeRef.new(shape: String, location_name: "Realm"))
@@ -2632,6 +2646,7 @@ module Aws::QuickSight
     CreateFolderRequest.add_member(:parent_folder_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ParentFolderArn"))
     CreateFolderRequest.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
     CreateFolderRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateFolderRequest.add_member(:sharing_model, Shapes::ShapeRef.new(shape: SharingModel, location_name: "SharingModel"))
     CreateFolderRequest.struct_class = Types::CreateFolderRequest
 
     CreateFolderResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
@@ -3823,6 +3838,9 @@ module Aws::QuickSight
 
     DescribeFolderPermissionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DescribeFolderPermissionsRequest.add_member(:folder_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "FolderId"))
+    DescribeFolderPermissionsRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location: "querystring", location_name: "namespace"))
+    DescribeFolderPermissionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    DescribeFolderPermissionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
     DescribeFolderPermissionsRequest.struct_class = Types::DescribeFolderPermissionsRequest
 
     DescribeFolderPermissionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
@@ -3830,6 +3848,7 @@ module Aws::QuickSight
     DescribeFolderPermissionsResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     DescribeFolderPermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
     DescribeFolderPermissionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeFolderPermissionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeFolderPermissionsResponse.struct_class = Types::DescribeFolderPermissionsResponse
 
     DescribeFolderRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
@@ -3838,6 +3857,9 @@ module Aws::QuickSight
 
     DescribeFolderResolvedPermissionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DescribeFolderResolvedPermissionsRequest.add_member(:folder_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "FolderId"))
+    DescribeFolderResolvedPermissionsRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location: "querystring", location_name: "namespace"))
+    DescribeFolderResolvedPermissionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    DescribeFolderResolvedPermissionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
     DescribeFolderResolvedPermissionsRequest.struct_class = Types::DescribeFolderResolvedPermissionsRequest
 
     DescribeFolderResolvedPermissionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
@@ -3845,6 +3867,7 @@ module Aws::QuickSight
     DescribeFolderResolvedPermissionsResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     DescribeFolderResolvedPermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
     DescribeFolderResolvedPermissionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeFolderResolvedPermissionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeFolderResolvedPermissionsResponse.struct_class = Types::DescribeFolderResolvedPermissionsResponse
 
     DescribeFolderResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
@@ -4324,6 +4347,7 @@ module Aws::QuickSight
     FilterRelativeDateTimeControl.struct_class = Types::FilterRelativeDateTimeControl
 
     FilterScopeConfiguration.add_member(:selected_sheets, Shapes::ShapeRef.new(shape: SelectedSheetsFilterScopeConfiguration, location_name: "SelectedSheets"))
+    FilterScopeConfiguration.add_member(:all_sheets, Shapes::ShapeRef.new(shape: AllSheetsFilterScopeConfiguration, location_name: "AllSheets"))
     FilterScopeConfiguration.struct_class = Types::FilterScopeConfiguration
 
     FilterSelectableValues.add_member(:values, Shapes::ShapeRef.new(shape: ParameterSelectableValueList, location_name: "Values"))
@@ -4361,6 +4385,7 @@ module Aws::QuickSight
     Folder.add_member(:folder_path, Shapes::ShapeRef.new(shape: Path, location_name: "FolderPath"))
     Folder.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
     Folder.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
+    Folder.add_member(:sharing_model, Shapes::ShapeRef.new(shape: SharingModel, location_name: "SharingModel"))
     Folder.struct_class = Types::Folder
 
     FolderColumnList.member = Shapes::ShapeRef.new(shape: String)
@@ -4384,6 +4409,7 @@ module Aws::QuickSight
     FolderSummary.add_member(:folder_type, Shapes::ShapeRef.new(shape: FolderType, location_name: "FolderType"))
     FolderSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
     FolderSummary.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
+    FolderSummary.add_member(:sharing_model, Shapes::ShapeRef.new(shape: SharingModel, location_name: "SharingModel"))
     FolderSummary.struct_class = Types::FolderSummary
 
     FolderSummaryList.member = Shapes::ShapeRef.new(shape: FolderSummary)
@@ -4408,7 +4434,7 @@ module Aws::QuickSight
 
     ForecastComputation.add_member(:computation_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "ComputationId"))
     ForecastComputation.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    ForecastComputation.add_member(:time, Shapes::ShapeRef.new(shape: DimensionField, required: true, location_name: "Time"))
+    ForecastComputation.add_member(:time, Shapes::ShapeRef.new(shape: DimensionField, location_name: "Time"))
     ForecastComputation.add_member(:value, Shapes::ShapeRef.new(shape: MeasureField, location_name: "Value"))
     ForecastComputation.add_member(:periods_forward, Shapes::ShapeRef.new(shape: PeriodsForward, location_name: "PeriodsForward"))
     ForecastComputation.add_member(:periods_backward, Shapes::ShapeRef.new(shape: PeriodsBackward, location_name: "PeriodsBackward"))
@@ -4728,7 +4754,7 @@ module Aws::QuickSight
 
     GrowthRateComputation.add_member(:computation_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "ComputationId"))
     GrowthRateComputation.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    GrowthRateComputation.add_member(:time, Shapes::ShapeRef.new(shape: DimensionField, required: true, location_name: "Time"))
+    GrowthRateComputation.add_member(:time, Shapes::ShapeRef.new(shape: DimensionField, location_name: "Time"))
     GrowthRateComputation.add_member(:value, Shapes::ShapeRef.new(shape: MeasureField, location_name: "Value"))
     GrowthRateComputation.add_member(:period_size, Shapes::ShapeRef.new(shape: GrowthRatePeriodSize, location_name: "PeriodSize"))
     GrowthRateComputation.struct_class = Types::GrowthRateComputation
@@ -5471,7 +5497,7 @@ module Aws::QuickSight
 
     MaximumMinimumComputation.add_member(:computation_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "ComputationId"))
     MaximumMinimumComputation.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    MaximumMinimumComputation.add_member(:time, Shapes::ShapeRef.new(shape: DimensionField, required: true, location_name: "Time"))
+    MaximumMinimumComputation.add_member(:time, Shapes::ShapeRef.new(shape: DimensionField, location_name: "Time"))
     MaximumMinimumComputation.add_member(:value, Shapes::ShapeRef.new(shape: MeasureField, location_name: "Value"))
     MaximumMinimumComputation.add_member(:type, Shapes::ShapeRef.new(shape: MaximumMinimumComputationType, required: true, location_name: "Type"))
     MaximumMinimumComputation.struct_class = Types::MaximumMinimumComputation
@@ -5490,9 +5516,9 @@ module Aws::QuickSight
 
     MetricComparisonComputation.add_member(:computation_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "ComputationId"))
     MetricComparisonComputation.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    MetricComparisonComputation.add_member(:time, Shapes::ShapeRef.new(shape: DimensionField, required: true, location_name: "Time"))
-    MetricComparisonComputation.add_member(:from_value, Shapes::ShapeRef.new(shape: MeasureField, required: true, location_name: "FromValue"))
-    MetricComparisonComputation.add_member(:target_value, Shapes::ShapeRef.new(shape: MeasureField, required: true, location_name: "TargetValue"))
+    MetricComparisonComputation.add_member(:time, Shapes::ShapeRef.new(shape: DimensionField, location_name: "Time"))
+    MetricComparisonComputation.add_member(:from_value, Shapes::ShapeRef.new(shape: MeasureField, location_name: "FromValue"))
+    MetricComparisonComputation.add_member(:target_value, Shapes::ShapeRef.new(shape: MeasureField, location_name: "TargetValue"))
     MetricComparisonComputation.struct_class = Types::MetricComparisonComputation
 
     MinimumLabelType.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
@@ -5762,13 +5788,13 @@ module Aws::QuickSight
 
     PeriodOverPeriodComputation.add_member(:computation_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "ComputationId"))
     PeriodOverPeriodComputation.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    PeriodOverPeriodComputation.add_member(:time, Shapes::ShapeRef.new(shape: DimensionField, required: true, location_name: "Time"))
+    PeriodOverPeriodComputation.add_member(:time, Shapes::ShapeRef.new(shape: DimensionField, location_name: "Time"))
     PeriodOverPeriodComputation.add_member(:value, Shapes::ShapeRef.new(shape: MeasureField, location_name: "Value"))
     PeriodOverPeriodComputation.struct_class = Types::PeriodOverPeriodComputation
 
     PeriodToDateComputation.add_member(:computation_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "ComputationId"))
     PeriodToDateComputation.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    PeriodToDateComputation.add_member(:time, Shapes::ShapeRef.new(shape: DimensionField, required: true, location_name: "Time"))
+    PeriodToDateComputation.add_member(:time, Shapes::ShapeRef.new(shape: DimensionField, location_name: "Time"))
     PeriodToDateComputation.add_member(:value, Shapes::ShapeRef.new(shape: MeasureField, location_name: "Value"))
     PeriodToDateComputation.add_member(:period_time_granularity, Shapes::ShapeRef.new(shape: TimeGranularity, location_name: "PeriodTimeGranularity"))
     PeriodToDateComputation.struct_class = Types::PeriodToDateComputation
@@ -5904,11 +5930,18 @@ module Aws::QuickSight
     PivotTableOptions.add_member(:row_field_names_style, Shapes::ShapeRef.new(shape: TableCellStyle, location_name: "RowFieldNamesStyle"))
     PivotTableOptions.add_member(:row_alternate_color_options, Shapes::ShapeRef.new(shape: RowAlternateColorOptions, location_name: "RowAlternateColorOptions"))
     PivotTableOptions.add_member(:collapsed_row_dimensions_visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "CollapsedRowDimensionsVisibility"))
+    PivotTableOptions.add_member(:rows_layout, Shapes::ShapeRef.new(shape: PivotTableRowsLayout, location_name: "RowsLayout"))
+    PivotTableOptions.add_member(:rows_label_options, Shapes::ShapeRef.new(shape: PivotTableRowsLabelOptions, location_name: "RowsLabelOptions"))
+    PivotTableOptions.add_member(:default_cell_width, Shapes::ShapeRef.new(shape: PixelLength, location_name: "DefaultCellWidth"))
     PivotTableOptions.struct_class = Types::PivotTableOptions
 
     PivotTablePaginatedReportOptions.add_member(:vertical_overflow_visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "VerticalOverflowVisibility"))
     PivotTablePaginatedReportOptions.add_member(:overflow_column_header_visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "OverflowColumnHeaderVisibility"))
     PivotTablePaginatedReportOptions.struct_class = Types::PivotTablePaginatedReportOptions
+
+    PivotTableRowsLabelOptions.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
+    PivotTableRowsLabelOptions.add_member(:custom_label, Shapes::ShapeRef.new(shape: PivotTableRowsLabelText, location_name: "CustomLabel"))
+    PivotTableRowsLabelOptions.struct_class = Types::PivotTableRowsLabelOptions
 
     PivotTableSortBy.add_member(:field, Shapes::ShapeRef.new(shape: FieldSort, location_name: "Field"))
     PivotTableSortBy.add_member(:column, Shapes::ShapeRef.new(shape: ColumnSort, location_name: "Column"))
@@ -6229,6 +6262,7 @@ module Aws::QuickSight
 
     RowAlternateColorOptions.add_member(:status, Shapes::ShapeRef.new(shape: WidgetStatus, location_name: "Status"))
     RowAlternateColorOptions.add_member(:row_alternate_colors, Shapes::ShapeRef.new(shape: RowAlternateColorList, location_name: "RowAlternateColors"))
+    RowAlternateColorOptions.add_member(:use_primary_background_color, Shapes::ShapeRef.new(shape: WidgetStatus, location_name: "UsePrimaryBackgroundColor"))
     RowAlternateColorOptions.struct_class = Types::RowAlternateColorOptions
 
     RowInfo.add_member(:rows_ingested, Shapes::ShapeRef.new(shape: Long, location_name: "RowsIngested", metadata: {"box"=>true}))
@@ -6797,6 +6831,7 @@ module Aws::QuickSight
     SubtotalOptions.add_member(:total_cell_style, Shapes::ShapeRef.new(shape: TableCellStyle, location_name: "TotalCellStyle"))
     SubtotalOptions.add_member(:value_cell_style, Shapes::ShapeRef.new(shape: TableCellStyle, location_name: "ValueCellStyle"))
     SubtotalOptions.add_member(:metric_header_cell_style, Shapes::ShapeRef.new(shape: TableCellStyle, location_name: "MetricHeaderCellStyle"))
+    SubtotalOptions.add_member(:style_targets, Shapes::ShapeRef.new(shape: TableStyleTargetList, location_name: "StyleTargets"))
     SubtotalOptions.struct_class = Types::SubtotalOptions
 
     Synonyms.member = Shapes::ShapeRef.new(shape: LimitedString)
@@ -6874,7 +6909,10 @@ module Aws::QuickSight
 
     TableFieldOptions.add_member(:selected_field_options, Shapes::ShapeRef.new(shape: TableFieldOptionList, location_name: "SelectedFieldOptions"))
     TableFieldOptions.add_member(:order, Shapes::ShapeRef.new(shape: FieldOrderList, location_name: "Order"))
+    TableFieldOptions.add_member(:pinned_field_options, Shapes::ShapeRef.new(shape: TablePinnedFieldOptions, location_name: "PinnedFieldOptions"))
     TableFieldOptions.struct_class = Types::TableFieldOptions
+
+    TableFieldOrderList.member = Shapes::ShapeRef.new(shape: FieldId)
 
     TableFieldURLConfiguration.add_member(:link_configuration, Shapes::ShapeRef.new(shape: TableFieldLinkConfiguration, location_name: "LinkConfiguration"))
     TableFieldURLConfiguration.add_member(:image_configuration, Shapes::ShapeRef.new(shape: TableFieldImageConfiguration, location_name: "ImageConfiguration"))
@@ -6899,6 +6937,9 @@ module Aws::QuickSight
     TablePaginatedReportOptions.add_member(:overflow_column_header_visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "OverflowColumnHeaderVisibility"))
     TablePaginatedReportOptions.struct_class = Types::TablePaginatedReportOptions
 
+    TablePinnedFieldOptions.add_member(:pinned_left_fields, Shapes::ShapeRef.new(shape: TableFieldOrderList, location_name: "PinnedLeftFields"))
+    TablePinnedFieldOptions.struct_class = Types::TablePinnedFieldOptions
+
     TableRowConditionalFormatting.add_member(:background_color, Shapes::ShapeRef.new(shape: ConditionalFormattingColor, location_name: "BackgroundColor"))
     TableRowConditionalFormatting.add_member(:text_color, Shapes::ShapeRef.new(shape: ConditionalFormattingColor, location_name: "TextColor"))
     TableRowConditionalFormatting.struct_class = Types::TableRowConditionalFormatting
@@ -6914,6 +6955,11 @@ module Aws::QuickSight
     TableSortConfiguration.add_member(:row_sort, Shapes::ShapeRef.new(shape: RowSortList, location_name: "RowSort"))
     TableSortConfiguration.add_member(:pagination_configuration, Shapes::ShapeRef.new(shape: PaginationConfiguration, location_name: "PaginationConfiguration"))
     TableSortConfiguration.struct_class = Types::TableSortConfiguration
+
+    TableStyleTarget.add_member(:cell_type, Shapes::ShapeRef.new(shape: StyledCellType, required: true, location_name: "CellType"))
+    TableStyleTarget.struct_class = Types::TableStyleTarget
+
+    TableStyleTargetList.member = Shapes::ShapeRef.new(shape: TableStyleTarget)
 
     TableUnaggregatedFieldWells.add_member(:values, Shapes::ShapeRef.new(shape: UnaggregatedFieldList, location_name: "Values"))
     TableUnaggregatedFieldWells.struct_class = Types::TableUnaggregatedFieldWells
@@ -7173,8 +7219,8 @@ module Aws::QuickSight
 
     TopBottomMoversComputation.add_member(:computation_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "ComputationId"))
     TopBottomMoversComputation.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    TopBottomMoversComputation.add_member(:time, Shapes::ShapeRef.new(shape: DimensionField, required: true, location_name: "Time"))
-    TopBottomMoversComputation.add_member(:category, Shapes::ShapeRef.new(shape: DimensionField, required: true, location_name: "Category"))
+    TopBottomMoversComputation.add_member(:time, Shapes::ShapeRef.new(shape: DimensionField, location_name: "Time"))
+    TopBottomMoversComputation.add_member(:category, Shapes::ShapeRef.new(shape: DimensionField, location_name: "Category"))
     TopBottomMoversComputation.add_member(:value, Shapes::ShapeRef.new(shape: MeasureField, location_name: "Value"))
     TopBottomMoversComputation.add_member(:mover_size, Shapes::ShapeRef.new(shape: TopBottomMoversComputationMoverSize, location_name: "MoverSize"))
     TopBottomMoversComputation.add_member(:sort_order, Shapes::ShapeRef.new(shape: TopBottomSortOrder, location_name: "SortOrder"))
@@ -7183,7 +7229,7 @@ module Aws::QuickSight
 
     TopBottomRankedComputation.add_member(:computation_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "ComputationId"))
     TopBottomRankedComputation.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    TopBottomRankedComputation.add_member(:category, Shapes::ShapeRef.new(shape: DimensionField, required: true, location_name: "Category"))
+    TopBottomRankedComputation.add_member(:category, Shapes::ShapeRef.new(shape: DimensionField, location_name: "Category"))
     TopBottomRankedComputation.add_member(:value, Shapes::ShapeRef.new(shape: MeasureField, location_name: "Value"))
     TopBottomRankedComputation.add_member(:result_size, Shapes::ShapeRef.new(shape: TopBottomRankedComputationResultSize, location_name: "ResultSize"))
     TopBottomRankedComputation.add_member(:type, Shapes::ShapeRef.new(shape: TopBottomComputationType, required: true, location_name: "Type"))
@@ -7205,6 +7251,7 @@ module Aws::QuickSight
     TopicCalculatedField.add_member(:not_allowed_aggregations, Shapes::ShapeRef.new(shape: AuthorSpecifiedAggregations, location_name: "NotAllowedAggregations"))
     TopicCalculatedField.add_member(:never_aggregate_in_filter, Shapes::ShapeRef.new(shape: Boolean, location_name: "NeverAggregateInFilter"))
     TopicCalculatedField.add_member(:cell_value_synonyms, Shapes::ShapeRef.new(shape: CellValueSynonyms, location_name: "CellValueSynonyms"))
+    TopicCalculatedField.add_member(:non_additive, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "NonAdditive"))
     TopicCalculatedField.struct_class = Types::TopicCalculatedField
 
     TopicCalculatedFields.member = Shapes::ShapeRef.new(shape: TopicCalculatedField)
@@ -7236,6 +7283,7 @@ module Aws::QuickSight
     TopicColumn.add_member(:default_formatting, Shapes::ShapeRef.new(shape: DefaultFormatting, location_name: "DefaultFormatting"))
     TopicColumn.add_member(:never_aggregate_in_filter, Shapes::ShapeRef.new(shape: Boolean, location_name: "NeverAggregateInFilter"))
     TopicColumn.add_member(:cell_value_synonyms, Shapes::ShapeRef.new(shape: CellValueSynonyms, location_name: "CellValueSynonyms"))
+    TopicColumn.add_member(:non_additive, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "NonAdditive"))
     TopicColumn.struct_class = Types::TopicColumn
 
     TopicColumns.member = Shapes::ShapeRef.new(shape: TopicColumn)
@@ -7325,7 +7373,7 @@ module Aws::QuickSight
 
     TotalAggregationComputation.add_member(:computation_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "ComputationId"))
     TotalAggregationComputation.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    TotalAggregationComputation.add_member(:value, Shapes::ShapeRef.new(shape: MeasureField, required: true, location_name: "Value"))
+    TotalAggregationComputation.add_member(:value, Shapes::ShapeRef.new(shape: MeasureField, location_name: "Value"))
     TotalAggregationComputation.struct_class = Types::TotalAggregationComputation
 
     TotalOptions.add_member(:totals_visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "TotalsVisibility"))
@@ -7422,7 +7470,7 @@ module Aws::QuickSight
 
     UniqueValuesComputation.add_member(:computation_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "ComputationId"))
     UniqueValuesComputation.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    UniqueValuesComputation.add_member(:category, Shapes::ShapeRef.new(shape: DimensionField, required: true, location_name: "Category"))
+    UniqueValuesComputation.add_member(:category, Shapes::ShapeRef.new(shape: DimensionField, location_name: "Category"))
     UniqueValuesComputation.struct_class = Types::UniqueValuesComputation
 
     UnsupportedPricingPlanException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -9021,8 +9069,15 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_folder_resolved_permissions, Seahorse::Model::Operation.new.tap do |o|
@@ -9035,8 +9090,15 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_group, Seahorse::Model::Operation.new.tap do |o|
@@ -9538,6 +9600,12 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_folders, Seahorse::Model::Operation.new.tap do |o|
@@ -9553,6 +9621,12 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_group_memberships, Seahorse::Model::Operation.new.tap do |o|
@@ -10065,6 +10139,12 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:search_groups, Seahorse::Model::Operation.new.tap do |o|

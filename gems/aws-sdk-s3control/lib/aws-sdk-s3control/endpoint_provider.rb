@@ -24,14 +24,13 @@ module Aws::S3Control
         if Aws::Endpoints::Matchers.string_equals?(region, "snow") && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint))
           if (partition_result = Aws::Endpoints::Matchers.aws_partition(region))
             if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
-              raise ArgumentError, "S3 Snow does not support Dual-stack"
+              raise ArgumentError, "S3 Snow does not support DualStack"
             end
             if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
               raise ArgumentError, "S3 Snow does not support FIPS"
             end
             return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
           end
-          raise ArgumentError, "A valid partition could not be determined"
         end
         if Aws::Endpoints::Matchers.set?(outpost_id)
           if (partition_result = Aws::Endpoints::Matchers.aws_partition(region))
@@ -61,7 +60,6 @@ module Aws::S3Control
             end
             raise ArgumentError, "Invalid region: region was not a valid DNS name."
           end
-          raise ArgumentError, "A valid partition could not be determined"
         end
         if Aws::Endpoints::Matchers.set?(access_point_name) && (access_point_arn = Aws::Endpoints::Matchers.aws_parse_arn(access_point_name))
           if (arn_type = Aws::Endpoints::Matchers.attr(access_point_arn, "resourceId[0]")) && Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.string_equals?(arn_type, ""))
@@ -108,9 +106,7 @@ module Aws::S3Control
                       end
                       raise ArgumentError, "Client was configured for partition `#{partition_result['name']}` but ARN has `#{arn_partition['name']}`"
                     end
-                    raise ArgumentError, "Could not load partition for ARN region `#{access_point_arn['region']}`"
                   end
-                  raise ArgumentError, "A valid partition could not be determined"
                 end
                 raise ArgumentError, "Invalid ARN: The outpost Id must only contain a-z, A-Z, 0-9 and `-`., found: `#{outpost_id}`"
               end
@@ -164,9 +160,7 @@ module Aws::S3Control
                       end
                       raise ArgumentError, "Client was configured for partition `#{partition_result['name']}` but ARN has `#{arn_partition['name']}`"
                     end
-                    raise ArgumentError, "A valid partition could not be determined"
                   end
-                  raise ArgumentError, "Could not load partition for ARN region `#{bucket_arn['region']}`"
                 end
                 raise ArgumentError, "Invalid ARN: The outpost Id must only contain a-z, A-Z, 0-9 and `-`., found: `#{outpost_id}`"
               end
@@ -188,7 +182,7 @@ module Aws::S3Control
             end
             if Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint))
               if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
-                raise ArgumentError, "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                raise ArgumentError, "Invalid Configuration: DualStack and custom endpoint are not supported"
               end
               if Aws::Endpoints::Matchers.set?(requires_account_id) && Aws::Endpoints::Matchers.boolean_equals?(requires_account_id, true) && Aws::Endpoints::Matchers.set?(account_id)
                 return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{account_id}.#{url['authority']}#{url['path']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
@@ -222,7 +216,6 @@ module Aws::S3Control
           end
           raise ArgumentError, "Invalid region: region was not a valid DNS name."
         end
-        raise ArgumentError, "A valid partition could not be determined"
       end
       raise ArgumentError, "Region must be set"
       raise ArgumentError, 'No endpoint could be resolved'

@@ -88,6 +88,20 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The distribution of agents between the instance and its replica(s).
+    #
+    # @!attribute [rw] distributions
+    #   Information about traffic distributions.
+    #   @return [Array<Types::Distribution>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentConfig AWS API Documentation
+    #
+    class AgentConfig < Struct.new(
+      :distributions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the [contact][1] associated to the user.
     #
     #
@@ -585,6 +599,41 @@ module Aws::Connect
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] traffic_distribution_group_id
+    #   The identifier of the traffic distribution group. This can be the ID
+    #   or the ARN if the API is being called in the Region where the
+    #   traffic distribution group was created. The ARN must be provided if
+    #   the call is from the replicated Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier of the user account. This can be the ID or the ARN of
+    #   the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateTrafficDistributionGroupUserRequest AWS API Documentation
+    #
+    class AssociateTrafficDistributionGroupUserRequest < Struct.new(
+      :traffic_distribution_group_id,
+      :user_id,
+      :instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateTrafficDistributionGroupUserResponse AWS API Documentation
+    #
+    class AssociateTrafficDistributionGroupUserResponse < Aws::EmptyStructure; end
 
     # Information about a reference when the `referenceType` is
     # `ATTACHMENT`. Otherwise, null.
@@ -1192,7 +1241,7 @@ module Aws::Connect
     end
 
     # The contact with the specified ID is not active or does not exist.
-    # Applies to Voice calls only, not to Chat, Task, or Voice Callback.
+    # Applies to Voice calls only, not to Chat or Task contacts.
     #
     # @!attribute [rw] message
     #   The message.
@@ -1996,8 +2045,8 @@ module Aws::Connect
     #
     # @!attribute [rw] agent_availability_timer
     #   Whether agents with this routing profile will have their routing
-    #   order calculated based on *time since their last inbound contact* or
-    #   *longest idle time*.
+    #   order calculated based on *longest idle time* or *time since their
+    #   last inbound contact*.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateRoutingProfileRequest AWS API Documentation
@@ -2535,6 +2584,111 @@ module Aws::Connect
     class CreateUserResponse < Struct.new(
       :user_id,
       :user_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique Id for each create view request to avoid duplicate view
+    #   creation. For example, the view is idempotent ClientToken is
+    #   provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Indicates the view status as either `SAVED` or `PUBLISHED`. The
+    #   `PUBLISHED` status will initiate validation on the content.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   View content containing all content necessary to render a view
+    #   except for runtime input data.
+    #
+    #   The total uncompressed content has a maximum file size of 400kB.
+    #   @return [Types::ViewInputContent]
+    #
+    # @!attribute [rw] description
+    #   The description of the view.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the view.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the view resource (not specific to view
+    #   version).These tags can be used to organize, track, or control
+    #   access for this resource. For example, \\\{ "tags":
+    #   \\\{"key1":"value1", "key2":"value2"\\} \\}.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateViewRequest AWS API Documentation
+    #
+    class CreateViewRequest < Struct.new(
+      :instance_id,
+      :client_token,
+      :status,
+      :content,
+      :description,
+      :name,
+      :tags)
+      SENSITIVE = [:name]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] view
+    #   A view resource object. Contains metadata and content necessary to
+    #   render the view.
+    #   @return [Types::View]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateViewResponse AWS API Documentation
+    #
+    class CreateViewResponse < Struct.new(
+      :view)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] view_id
+    #   The identifier of the view. Both `ViewArn` and `ViewId` can be used.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_description
+    #   The description for the version being published.
+    #   @return [String]
+    #
+    # @!attribute [rw] view_content_sha_256
+    #   Indicates the checksum value of the latest published view content.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateViewVersionRequest AWS API Documentation
+    #
+    class CreateViewVersionRequest < Struct.new(
+      :instance_id,
+      :view_id,
+      :version_description,
+      :view_content_sha_256)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] view
+    #   All view data is contained within the View object.
+    #   @return [Types::View]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateViewVersionResponse AWS API Documentation
+    #
+    class CreateViewVersionResponse < Struct.new(
+      :view)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3287,6 +3441,55 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] view_id
+    #   The identifier of the view. Both `ViewArn` and `ViewId` can be used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteViewRequest AWS API Documentation
+    #
+    class DeleteViewRequest < Struct.new(
+      :instance_id,
+      :view_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteViewResponse AWS API Documentation
+    #
+    class DeleteViewResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] view_id
+    #   The identifier of the view. Both `ViewArn` and `ViewId` can be used.
+    #   @return [String]
+    #
+    # @!attribute [rw] view_version
+    #   The version number of the view.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteViewVersionRequest AWS API Documentation
+    #
+    class DeleteViewVersionRequest < Struct.new(
+      :instance_id,
+      :view_id,
+      :view_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteViewVersionResponse AWS API Documentation
+    #
+    class DeleteViewVersionResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
@@ -4031,6 +4234,37 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] view_id
+    #   The ViewId of the view. This must be an ARN for Amazon Web Services
+    #   managed views.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeViewRequest AWS API Documentation
+    #
+    class DescribeViewRequest < Struct.new(
+      :instance_id,
+      :view_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] view
+    #   All view data is contained within the View object.
+    #   @return [Types::View]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeViewResponse AWS API Documentation
+    #
+    class DescribeViewResponse < Struct.new(
+      :view)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
@@ -4331,6 +4565,41 @@ module Aws::Connect
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] traffic_distribution_group_id
+    #   The identifier of the traffic distribution group. This can be the ID
+    #   or the ARN if the API is being called in the Region where the
+    #   traffic distribution group was created. The ARN must be provided if
+    #   the call is from the replicated Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier for the user. This can be the ID or the ARN of the
+    #   user.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateTrafficDistributionGroupUserRequest AWS API Documentation
+    #
+    class DisassociateTrafficDistributionGroupUserRequest < Struct.new(
+      :traffic_distribution_group_id,
+      :user_id,
+      :instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateTrafficDistributionGroupUserResponse AWS API Documentation
+    #
+    class DisassociateTrafficDistributionGroupUserResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] user_id
     #   The identifier of the user account.
@@ -5741,7 +6010,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] user_id
-    #   The identifier for the user.
+    #   The identifier for the user. This can be the ID or the ARN of the
+    #   user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetFederationTokenResponse AWS API Documentation
@@ -6703,12 +6973,23 @@ module Aws::Connect
     #   The Amazon Resource Name (ARN) of the traffic distribution group.
     #   @return [String]
     #
+    # @!attribute [rw] sign_in_config
+    #   The distribution of allowing signing in to the instance and its
+    #   replica(s).
+    #   @return [Types::SignInConfig]
+    #
+    # @!attribute [rw] agent_config
+    #   The distribution of agents between the instance and its replica(s).
+    #   @return [Types::AgentConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetTrafficDistributionResponse AWS API Documentation
     #
     class GetTrafficDistributionResponse < Struct.new(
       :telephony_config,
       :id,
-      :arn)
+      :arn,
+      :sign_in_config,
+      :agent_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9326,6 +9607,51 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @!attribute [rw] traffic_distribution_group_id
+    #   The identifier of the traffic distribution group. This can be the ID
+    #   or the ARN if the API is being called in the Region where the
+    #   traffic distribution group was created. The ARN must be provided if
+    #   the call is from the replicated Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListTrafficDistributionGroupUsersRequest AWS API Documentation
+    #
+    class ListTrafficDistributionGroupUsersRequest < Struct.new(
+      :traffic_distribution_group_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_distribution_group_user_summary_list
+    #   A list of traffic distribution group users.
+    #   @return [Array<Types::TrafficDistributionGroupUserSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListTrafficDistributionGroupUsersResponse AWS API Documentation
+    #
+    class ListTrafficDistributionGroupUsersResponse < Struct.new(
+      :next_token,
+      :traffic_distribution_group_user_summary_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] max_results
     #   The maximum number of results to return per page.
     #   @return [Integer]
@@ -9519,6 +9845,106 @@ module Aws::Connect
     #
     class ListUsersResponse < Struct.new(
       :user_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] view_id
+    #   The identifier of the view. Both `ViewArn` and `ViewId` can be used.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListViewVersionsRequest AWS API Documentation
+    #
+    class ListViewVersionsRequest < Struct.new(
+      :instance_id,
+      :view_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] view_version_summary_list
+    #   A list of view version summaries.
+    #   @return [Array<Types::ViewVersionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListViewVersionsResponse AWS API Documentation
+    #
+    class ListViewVersionsResponse < Struct.new(
+      :view_version_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the view.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page. The default
+    #   MaxResult size is 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListViewsRequest AWS API Documentation
+    #
+    class ListViewsRequest < Struct.new(
+      :instance_id,
+      :type,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] views_summary_list
+    #   A list of view summaries.
+    #   @return [Array<Types::ViewSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListViewsResponse AWS API Documentation
+    #
+    class ListViewsResponse < Struct.new(
+      :views_summary_list,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -12392,6 +12818,41 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The distribution of allowing signing in to the instance and its
+    # replica(s).
+    #
+    # @!attribute [rw] distributions
+    #   Information about traffic distributions.
+    #   @return [Array<Types::SignInDistribution>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SignInConfig AWS API Documentation
+    #
+    class SignInConfig < Struct.new(
+      :distributions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The distribution of sign in traffic between the instance and its
+    # replica(s).
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region of the sign in distribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Whether sign in distribution is enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SignInDistribution AWS API Documentation
+    #
+    class SignInDistribution < Struct.new(
+      :region,
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the automation option based on a rule category for a
     # single select question.
     #
@@ -13513,6 +13974,19 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Displayed when rate-related API limits are exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a traffic distribution group.
     #
     # @!attribute [rw] id
@@ -13575,6 +14049,27 @@ module Aws::Connect
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] is_default
+    #   Whether this is the default traffic distribution group created
+    #   during instance replication. The default traffic distribution group
+    #   cannot be deleted by the `DeleteTrafficDistributionGroup` API. The
+    #   default traffic distribution group is deleted as part of the process
+    #   for deleting a replica.
+    #
+    #   <note markdown="1"> You can change the `SignInConfig` distribution only for a default
+    #   `TrafficDistributionGroup` (see the `IsDefault` parameter in the
+    #   [TrafficDistributionGroup][1] data type). If you call
+    #   `UpdateTrafficDistribution` with a modified `SignInConfig` and a
+    #   non-default `TrafficDistributionGroup`, an `InvalidRequestException`
+    #   is returned.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_TrafficDistributionGroup.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TrafficDistributionGroup AWS API Documentation
     #
     class TrafficDistributionGroup < Struct.new(
@@ -13584,7 +14079,8 @@ module Aws::Connect
       :description,
       :instance_arn,
       :status,
-      :tags)
+      :tags,
+      :is_default)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13641,6 +14137,14 @@ module Aws::Connect
     #   [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateTrafficDistributionGroup.html
     #   @return [String]
     #
+    # @!attribute [rw] is_default
+    #   Whether this is the default traffic distribution group created
+    #   during instance replication. The default traffic distribution group
+    #   cannot be deleted by the `DeleteTrafficDistributionGroup` API. The
+    #   default traffic distribution group is deleted as part of the process
+    #   for deleting a replica.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TrafficDistributionGroupSummary AWS API Documentation
     #
     class TrafficDistributionGroupSummary < Struct.new(
@@ -13648,7 +14152,23 @@ module Aws::Connect
       :arn,
       :name,
       :instance_arn,
-      :status)
+      :status,
+      :is_default)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a traffic distribution group user.
+    #
+    # @!attribute [rw] user_id
+    #   The identifier for the user. This can be the ID or the ARN of the
+    #   user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TrafficDistributionGroupUserSummary AWS API Documentation
+    #
+    class TrafficDistributionGroupUserSummary < Struct.new(
+      :user_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13671,7 +14191,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] user_id
-    #   The identifier for the user.
+    #   The identifier for the user. This can be the ID or the ARN of the
+    #   user.
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
@@ -15069,11 +15590,22 @@ module Aws::Connect
     #   The distribution of traffic between the instance and its replica(s).
     #   @return [Types::TelephonyConfig]
     #
+    # @!attribute [rw] sign_in_config
+    #   The distribution of allowing signing in to the instance and its
+    #   replica(s).
+    #   @return [Types::SignInConfig]
+    #
+    # @!attribute [rw] agent_config
+    #   The distribution of agents between the instance and its replica(s).
+    #   @return [Types::AgentConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateTrafficDistributionRequest AWS API Documentation
     #
     class UpdateTrafficDistributionRequest < Struct.new(
       :id,
-      :telephony_config)
+      :telephony_config,
+      :sign_in_config,
+      :agent_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15266,6 +15798,84 @@ module Aws::Connect
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] view_id
+    #   The identifier of the view. Both `ViewArn` and `ViewId` can be used.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Indicates the view status as either `SAVED` or `PUBLISHED`. The
+    #   `PUBLISHED` status will initiate validation on the content.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   View content containing all content necessary to render a view
+    #   except for runtime input data and the runtime input schema, which is
+    #   auto-generated by this operation.
+    #
+    #   The total uncompressed content has a maximum file size of 400kB.
+    #   @return [Types::ViewInputContent]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateViewContentRequest AWS API Documentation
+    #
+    class UpdateViewContentRequest < Struct.new(
+      :instance_id,
+      :view_id,
+      :status,
+      :content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] view
+    #   A view resource object. Contains metadata and content necessary to
+    #   render the view.
+    #   @return [Types::View]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateViewContentResponse AWS API Documentation
+    #
+    class UpdateViewContentResponse < Struct.new(
+      :view)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] view_id
+    #   The identifier of the view. Both `ViewArn` and `ViewId` can be used.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the view.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the view.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateViewMetadataRequest AWS API Documentation
+    #
+    class UpdateViewMetadataRequest < Struct.new(
+      :instance_id,
+      :view_id,
+      :name,
+      :description)
+      SENSITIVE = [:name]
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateViewMetadataResponse AWS API Documentation
+    #
+    class UpdateViewMetadataResponse < Aws::EmptyStructure; end
 
     # The URL reference.
     #
@@ -15775,6 +16385,216 @@ module Aws::Connect
       :arn,
       :username)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A view resource object. Contains metadata and content necessary to
+    # render the view.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the view.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the view.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the view.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Indicates the view status as either `SAVED` or `PUBLISHED`. The
+    #   `PUBLISHED` status will initiate validation on the content.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the view - `CUSTOMER_MANAGED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the view.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   Current version of the view.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] version_description
+    #   The description of the version.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   View content containing all content necessary to render a view
+    #   except for runtime input data.
+    #   @return [Types::ViewContent]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the view resource (not specific to view
+    #   version).
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] created_time
+    #   The timestamp of when the view was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   Latest timestamp of the `UpdateViewContent` or `CreateViewVersion`
+    #   operations.
+    #   @return [Time]
+    #
+    # @!attribute [rw] view_content_sha_256
+    #   Indicates the checksum value of the latest published view content.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/View AWS API Documentation
+    #
+    class View < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :status,
+      :type,
+      :description,
+      :version,
+      :version_description,
+      :content,
+      :tags,
+      :created_time,
+      :last_modified_time,
+      :view_content_sha_256)
+      SENSITIVE = [:name]
+      include Aws::Structure
+    end
+
+    # View content containing all content necessary to render a view except
+    # for runtime input data.
+    #
+    # @!attribute [rw] input_schema
+    #   The data schema matching data that the view template must be
+    #   provided to render.
+    #   @return [String]
+    #
+    # @!attribute [rw] template
+    #   The view template representing the structure of the view.
+    #   @return [String]
+    #
+    # @!attribute [rw] actions
+    #   A list of possible actions from the view.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ViewContent AWS API Documentation
+    #
+    class ViewContent < Struct.new(
+      :input_schema,
+      :template,
+      :actions)
+      SENSITIVE = [:input_schema]
+      include Aws::Structure
+    end
+
+    # View content containing all content necessary to render a view except
+    # for runtime input data and the runtime input schema, which is
+    # auto-generated by this operation.
+    #
+    # @!attribute [rw] template
+    #   The view template representing the structure of the view.
+    #   @return [String]
+    #
+    # @!attribute [rw] actions
+    #   A list of possible actions from the view.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ViewInputContent AWS API Documentation
+    #
+    class ViewInputContent < Struct.new(
+      :template,
+      :actions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of a view's metadata.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the view.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the view.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the view.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the view.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Indicates the view status as either `SAVED` or `PUBLISHED`. The
+    #   `PUBLISHED` status will initiate validation on the content.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the view.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ViewSummary AWS API Documentation
+    #
+    class ViewSummary < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :type,
+      :status,
+      :description)
+      SENSITIVE = [:name]
+      include Aws::Structure
+    end
+
+    # A summary of a view version's metadata.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the view version.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the view version.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the view version.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the view version.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the view version.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The sequentially incremented version of the view version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] version_description
+    #   The description of the view version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ViewVersionSummary AWS API Documentation
+    #
+    class ViewVersionSummary < Struct.new(
+      :id,
+      :arn,
+      :description,
+      :name,
+      :type,
+      :version,
+      :version_description)
+      SENSITIVE = [:name]
       include Aws::Structure
     end
 

@@ -443,7 +443,7 @@ module Aws::ComputeOptimizer
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_recommendation_preferences({
-    #     resource_type: "Ec2Instance", # required, accepts Ec2Instance, AutoScalingGroup, EbsVolume, LambdaFunction, NotApplicable, EcsService
+    #     resource_type: "Ec2Instance", # required, accepts Ec2Instance, AutoScalingGroup, EbsVolume, LambdaFunction, NotApplicable, EcsService, License
     #     scope: {
     #       name: "Organization", # accepts Organization, AccountId, ResourceArn
     #       value: "ScopeValue",
@@ -518,7 +518,7 @@ module Aws::ComputeOptimizer
     #   resp.recommendation_export_jobs[0].destination.s3.bucket #=> String
     #   resp.recommendation_export_jobs[0].destination.s3.key #=> String
     #   resp.recommendation_export_jobs[0].destination.s3.metadata_key #=> String
-    #   resp.recommendation_export_jobs[0].resource_type #=> String, one of "Ec2Instance", "AutoScalingGroup", "EbsVolume", "LambdaFunction", "NotApplicable", "EcsService"
+    #   resp.recommendation_export_jobs[0].resource_type #=> String, one of "Ec2Instance", "AutoScalingGroup", "EbsVolume", "LambdaFunction", "NotApplicable", "EcsService", "License"
     #   resp.recommendation_export_jobs[0].status #=> String, one of "Queued", "InProgress", "Complete", "Failed"
     #   resp.recommendation_export_jobs[0].creation_timestamp #=> Time
     #   resp.recommendation_export_jobs[0].last_updated_timestamp #=> Time
@@ -644,7 +644,7 @@ module Aws::ComputeOptimizer
     #         values: ["FilterValue"],
     #       },
     #     ],
-    #     fields_to_export: ["AccountId"], # accepts AccountId, AutoScalingGroupArn, AutoScalingGroupName, Finding, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, UtilizationMetricsDiskReadOpsPerSecondMaximum, UtilizationMetricsDiskWriteOpsPerSecondMaximum, UtilizationMetricsDiskReadBytesPerSecondMaximum, UtilizationMetricsDiskWriteBytesPerSecondMaximum, UtilizationMetricsNetworkInBytesPerSecondMaximum, UtilizationMetricsNetworkOutBytesPerSecondMaximum, UtilizationMetricsNetworkPacketsInPerSecondMaximum, UtilizationMetricsNetworkPacketsOutPerSecondMaximum, LookbackPeriodInDays, CurrentConfigurationInstanceType, CurrentConfigurationDesiredCapacity, CurrentConfigurationMinSize, CurrentConfigurationMaxSize, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsConfigurationInstanceType, RecommendationOptionsConfigurationDesiredCapacity, RecommendationOptionsConfigurationMinSize, RecommendationOptionsConfigurationMaxSize, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPerformanceRisk, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue, EffectiveRecommendationPreferencesCpuVendorArchitectures, EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics, EffectiveRecommendationPreferencesInferredWorkloadTypes, InferredWorkloadTypes, RecommendationOptionsMigrationEffort
+    #     fields_to_export: ["AccountId"], # accepts AccountId, AutoScalingGroupArn, AutoScalingGroupName, Finding, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, UtilizationMetricsDiskReadOpsPerSecondMaximum, UtilizationMetricsDiskWriteOpsPerSecondMaximum, UtilizationMetricsDiskReadBytesPerSecondMaximum, UtilizationMetricsDiskWriteBytesPerSecondMaximum, UtilizationMetricsNetworkInBytesPerSecondMaximum, UtilizationMetricsNetworkOutBytesPerSecondMaximum, UtilizationMetricsNetworkPacketsInPerSecondMaximum, UtilizationMetricsNetworkPacketsOutPerSecondMaximum, LookbackPeriodInDays, CurrentConfigurationInstanceType, CurrentConfigurationDesiredCapacity, CurrentConfigurationMinSize, CurrentConfigurationMaxSize, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsConfigurationInstanceType, RecommendationOptionsConfigurationDesiredCapacity, RecommendationOptionsConfigurationMinSize, RecommendationOptionsConfigurationMaxSize, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPerformanceRisk, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue, EffectiveRecommendationPreferencesCpuVendorArchitectures, EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics, EffectiveRecommendationPreferencesInferredWorkloadTypes, InferredWorkloadTypes, RecommendationOptionsMigrationEffort, CurrentInstanceGpuInfo, RecommendationOptionsInstanceGpuInfo, UtilizationMetricsGpuPercentageMaximum, UtilizationMetricsGpuMemoryPercentageMaximum, RecommendationOptionsProjectedUtilizationMetricsGpuPercentageMaximum, RecommendationOptionsProjectedUtilizationMetricsGpuMemoryPercentageMaximum
     #     s3_destination_config: { # required
     #       bucket: "DestinationBucket",
     #       key_prefix: "DestinationKeyPrefix",
@@ -778,7 +778,7 @@ module Aws::ComputeOptimizer
     #         values: ["FilterValue"],
     #       },
     #     ],
-    #     fields_to_export: ["AccountId"], # accepts AccountId, VolumeArn, Finding, UtilizationMetricsVolumeReadOpsPerSecondMaximum, UtilizationMetricsVolumeWriteOpsPerSecondMaximum, UtilizationMetricsVolumeReadBytesPerSecondMaximum, UtilizationMetricsVolumeWriteBytesPerSecondMaximum, LookbackPeriodInDays, CurrentConfigurationVolumeType, CurrentConfigurationVolumeBaselineIOPS, CurrentConfigurationVolumeBaselineThroughput, CurrentConfigurationVolumeBurstIOPS, CurrentConfigurationVolumeBurstThroughput, CurrentConfigurationVolumeSize, CurrentMonthlyPrice, RecommendationOptionsConfigurationVolumeType, RecommendationOptionsConfigurationVolumeBaselineIOPS, RecommendationOptionsConfigurationVolumeBaselineThroughput, RecommendationOptionsConfigurationVolumeBurstIOPS, RecommendationOptionsConfigurationVolumeBurstThroughput, RecommendationOptionsConfigurationVolumeSize, RecommendationOptionsMonthlyPrice, RecommendationOptionsPerformanceRisk, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue, RootVolume, Tags
+    #     fields_to_export: ["AccountId"], # accepts AccountId, VolumeArn, Finding, UtilizationMetricsVolumeReadOpsPerSecondMaximum, UtilizationMetricsVolumeWriteOpsPerSecondMaximum, UtilizationMetricsVolumeReadBytesPerSecondMaximum, UtilizationMetricsVolumeWriteBytesPerSecondMaximum, LookbackPeriodInDays, CurrentConfigurationVolumeType, CurrentConfigurationVolumeBaselineIOPS, CurrentConfigurationVolumeBaselineThroughput, CurrentConfigurationVolumeBurstIOPS, CurrentConfigurationVolumeBurstThroughput, CurrentConfigurationVolumeSize, CurrentMonthlyPrice, RecommendationOptionsConfigurationVolumeType, RecommendationOptionsConfigurationVolumeBaselineIOPS, RecommendationOptionsConfigurationVolumeBaselineThroughput, RecommendationOptionsConfigurationVolumeBurstIOPS, RecommendationOptionsConfigurationVolumeBurstThroughput, RecommendationOptionsConfigurationVolumeSize, RecommendationOptionsMonthlyPrice, RecommendationOptionsPerformanceRisk, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue, RootVolume, Tags, CurrentConfigurationRootVolume
     #     s3_destination_config: { # required
     #       bucket: "DestinationBucket",
     #       key_prefix: "DestinationKeyPrefix",
@@ -910,7 +910,7 @@ module Aws::ComputeOptimizer
     #         values: ["FilterValue"],
     #       },
     #     ],
-    #     fields_to_export: ["AccountId"], # accepts AccountId, InstanceArn, InstanceName, Finding, FindingReasonCodes, LookbackPeriodInDays, CurrentInstanceType, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, UtilizationMetricsDiskReadOpsPerSecondMaximum, UtilizationMetricsDiskWriteOpsPerSecondMaximum, UtilizationMetricsDiskReadBytesPerSecondMaximum, UtilizationMetricsDiskWriteBytesPerSecondMaximum, UtilizationMetricsNetworkInBytesPerSecondMaximum, UtilizationMetricsNetworkOutBytesPerSecondMaximum, UtilizationMetricsNetworkPacketsInPerSecondMaximum, UtilizationMetricsNetworkPacketsOutPerSecondMaximum, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsInstanceType, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPlatformDifferences, RecommendationOptionsPerformanceRisk, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationsSourcesRecommendationSourceArn, RecommendationsSourcesRecommendationSourceType, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue, EffectiveRecommendationPreferencesCpuVendorArchitectures, EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics, EffectiveRecommendationPreferencesInferredWorkloadTypes, InferredWorkloadTypes, RecommendationOptionsMigrationEffort, EffectiveRecommendationPreferencesExternalMetricsSource, InstanceState, Tags, ExternalMetricStatusCode, ExternalMetricStatusReason
+    #     fields_to_export: ["AccountId"], # accepts AccountId, InstanceArn, InstanceName, Finding, FindingReasonCodes, LookbackPeriodInDays, CurrentInstanceType, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, UtilizationMetricsDiskReadOpsPerSecondMaximum, UtilizationMetricsDiskWriteOpsPerSecondMaximum, UtilizationMetricsDiskReadBytesPerSecondMaximum, UtilizationMetricsDiskWriteBytesPerSecondMaximum, UtilizationMetricsNetworkInBytesPerSecondMaximum, UtilizationMetricsNetworkOutBytesPerSecondMaximum, UtilizationMetricsNetworkPacketsInPerSecondMaximum, UtilizationMetricsNetworkPacketsOutPerSecondMaximum, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsInstanceType, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPlatformDifferences, RecommendationOptionsPerformanceRisk, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationsSourcesRecommendationSourceArn, RecommendationsSourcesRecommendationSourceType, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue, EffectiveRecommendationPreferencesCpuVendorArchitectures, EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics, EffectiveRecommendationPreferencesInferredWorkloadTypes, InferredWorkloadTypes, RecommendationOptionsMigrationEffort, EffectiveRecommendationPreferencesExternalMetricsSource, InstanceState, Tags, ExternalMetricStatusCode, ExternalMetricStatusReason, CurrentInstanceGpuInfo, RecommendationOptionsInstanceGpuInfo, UtilizationMetricsGpuPercentageMaximum, UtilizationMetricsGpuMemoryPercentageMaximum, RecommendationOptionsProjectedUtilizationMetricsGpuPercentageMaximum, RecommendationOptionsProjectedUtilizationMetricsGpuMemoryPercentageMaximum, Idle
     #     s3_destination_config: { # required
     #       bucket: "DestinationBucket",
     #       key_prefix: "DestinationKeyPrefix",
@@ -1199,6 +1199,134 @@ module Aws::ComputeOptimizer
       req.send_request(options)
     end
 
+    # Export optimization recommendations for your licenses.
+    #
+    # Recommendations are exported in a comma-separated values (CSV) file,
+    # and its metadata in a JavaScript Object Notation (JSON) file, to an
+    # existing Amazon Simple Storage Service (Amazon S3) bucket that you
+    # specify. For more information, see [Exporting Recommendations][1] in
+    # the *Compute Optimizer User Guide*.
+    #
+    # You can have only one license export job in progress per Amazon Web
+    # Services Region.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html
+    #
+    # @option params [Array<String>] :account_ids
+    #   The IDs of the Amazon Web Services accounts for which to export
+    #   license recommendations.
+    #
+    #   If your account is the management account of an organization, use this
+    #   parameter to specify the member account for which you want to export
+    #   recommendations.
+    #
+    #   This parameter can't be specified together with the include member
+    #   accounts parameter. The parameters are mutually exclusive.
+    #
+    #   If this parameter is omitted, recommendations for member accounts
+    #   aren't included in the export.
+    #
+    #   You can specify multiple account IDs per request.
+    #
+    # @option params [Array<Types::LicenseRecommendationFilter>] :filters
+    #   An array of objects to specify a filter that exports a more specific
+    #   set of license recommendations.
+    #
+    # @option params [Array<String>] :fields_to_export
+    #   The recommendations data to include in the export file. For more
+    #   information about the fields that can be exported, see [Exported
+    #   files][1] in the *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files
+    #
+    # @option params [required, Types::S3DestinationConfig] :s3_destination_config
+    #   Describes the destination Amazon Simple Storage Service (Amazon S3)
+    #   bucket name and key prefix for a recommendations export job.
+    #
+    #   You must create the destination Amazon S3 bucket for your
+    #   recommendations export before you create the export job. Compute
+    #   Optimizer does not create the S3 bucket for you. After you create the
+    #   S3 bucket, ensure that it has the required permission policy to allow
+    #   Compute Optimizer to write the export file to it. If you plan to
+    #   specify an object prefix when you create the export job, you must
+    #   include the object prefix in the policy that you add to the S3 bucket.
+    #   For more information, see [Amazon S3 Bucket Policy for Compute
+    #   Optimizer][1] in the *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html
+    #
+    # @option params [String] :file_format
+    #   The format of the export file.
+    #
+    #   A CSV file is the only export format currently supported.
+    #
+    # @option params [Boolean] :include_member_accounts
+    #   Indicates whether to include recommendations for resources in all
+    #   member accounts of the organization if your account is the management
+    #   account of an organization.
+    #
+    #   The member accounts must also be opted in to Compute Optimizer, and
+    #   trusted access for Compute Optimizer must be enabled in the
+    #   organization account. For more information, see [Compute Optimizer and
+    #   Amazon Web Services Organizations trusted access][1] in the *Compute
+    #   Optimizer User Guide*.
+    #
+    #   If this parameter is omitted, recommendations for member accounts of
+    #   the organization aren't included in the export file .
+    #
+    #   This parameter cannot be specified together with the account IDs
+    #   parameter. The parameters are mutually exclusive.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access
+    #
+    # @return [Types::ExportLicenseRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportLicenseRecommendationsResponse#job_id #job_id} => String
+    #   * {Types::ExportLicenseRecommendationsResponse#s3_destination #s3_destination} => Types::S3Destination
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_license_recommendations({
+    #     account_ids: ["AccountId"],
+    #     filters: [
+    #       {
+    #         name: "Finding", # accepts Finding, FindingReasonCode, LicenseName
+    #         values: ["FilterValue"],
+    #       },
+    #     ],
+    #     fields_to_export: ["AccountId"], # accepts AccountId, ResourceArn, LookbackPeriodInDays, LastRefreshTimestamp, Finding, FindingReasonCodes, CurrentLicenseConfigurationNumberOfCores, CurrentLicenseConfigurationInstanceType, CurrentLicenseConfigurationOperatingSystem, CurrentLicenseConfigurationLicenseName, CurrentLicenseConfigurationLicenseEdition, CurrentLicenseConfigurationLicenseModel, CurrentLicenseConfigurationLicenseVersion, CurrentLicenseConfigurationMetricsSource, RecommendationOptionsOperatingSystem, RecommendationOptionsLicenseEdition, RecommendationOptionsLicenseModel, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue, Tags
+    #     s3_destination_config: { # required
+    #       bucket: "DestinationBucket",
+    #       key_prefix: "DestinationKeyPrefix",
+    #     },
+    #     file_format: "Csv", # accepts Csv
+    #     include_member_accounts: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.s3_destination.bucket #=> String
+    #   resp.s3_destination.key #=> String
+    #   resp.s3_destination.metadata_key #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ExportLicenseRecommendations AWS API Documentation
+    #
+    # @overload export_license_recommendations(params = {})
+    # @param [Hash] params ({})
+    def export_license_recommendations(params = {}, options = {})
+      req = build_request(:export_license_recommendations, params)
+      req.send_request(options)
+    end
+
     # Returns Auto Scaling group recommendations.
     #
     # Compute Optimizer generates recommendations for Amazon EC2 Auto
@@ -1276,7 +1404,7 @@ module Aws::ComputeOptimizer
     #   resp.auto_scaling_group_recommendations[0].auto_scaling_group_name #=> String
     #   resp.auto_scaling_group_recommendations[0].finding #=> String, one of "Underprovisioned", "Overprovisioned", "Optimized", "NotOptimized"
     #   resp.auto_scaling_group_recommendations[0].utilization_metrics #=> Array
-    #   resp.auto_scaling_group_recommendations[0].utilization_metrics[0].name #=> String, one of "Cpu", "Memory", "EBS_READ_OPS_PER_SECOND", "EBS_WRITE_OPS_PER_SECOND", "EBS_READ_BYTES_PER_SECOND", "EBS_WRITE_BYTES_PER_SECOND", "DISK_READ_OPS_PER_SECOND", "DISK_WRITE_OPS_PER_SECOND", "DISK_READ_BYTES_PER_SECOND", "DISK_WRITE_BYTES_PER_SECOND", "NETWORK_IN_BYTES_PER_SECOND", "NETWORK_OUT_BYTES_PER_SECOND", "NETWORK_PACKETS_IN_PER_SECOND", "NETWORK_PACKETS_OUT_PER_SECOND"
+    #   resp.auto_scaling_group_recommendations[0].utilization_metrics[0].name #=> String, one of "Cpu", "Memory", "EBS_READ_OPS_PER_SECOND", "EBS_WRITE_OPS_PER_SECOND", "EBS_READ_BYTES_PER_SECOND", "EBS_WRITE_BYTES_PER_SECOND", "DISK_READ_OPS_PER_SECOND", "DISK_WRITE_OPS_PER_SECOND", "DISK_READ_BYTES_PER_SECOND", "DISK_WRITE_BYTES_PER_SECOND", "NETWORK_IN_BYTES_PER_SECOND", "NETWORK_OUT_BYTES_PER_SECOND", "NETWORK_PACKETS_IN_PER_SECOND", "NETWORK_PACKETS_OUT_PER_SECOND", "GPU_PERCENTAGE", "GPU_MEMORY_PERCENTAGE"
     #   resp.auto_scaling_group_recommendations[0].utilization_metrics[0].statistic #=> String, one of "Maximum", "Average"
     #   resp.auto_scaling_group_recommendations[0].utilization_metrics[0].value #=> Float
     #   resp.auto_scaling_group_recommendations[0].look_back_period_in_days #=> Float
@@ -1290,7 +1418,7 @@ module Aws::ComputeOptimizer
     #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].configuration.max_size #=> Integer
     #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].configuration.instance_type #=> String
     #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].projected_utilization_metrics #=> Array
-    #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].projected_utilization_metrics[0].name #=> String, one of "Cpu", "Memory", "EBS_READ_OPS_PER_SECOND", "EBS_WRITE_OPS_PER_SECOND", "EBS_READ_BYTES_PER_SECOND", "EBS_WRITE_BYTES_PER_SECOND", "DISK_READ_OPS_PER_SECOND", "DISK_WRITE_OPS_PER_SECOND", "DISK_READ_BYTES_PER_SECOND", "DISK_WRITE_BYTES_PER_SECOND", "NETWORK_IN_BYTES_PER_SECOND", "NETWORK_OUT_BYTES_PER_SECOND", "NETWORK_PACKETS_IN_PER_SECOND", "NETWORK_PACKETS_OUT_PER_SECOND"
+    #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].projected_utilization_metrics[0].name #=> String, one of "Cpu", "Memory", "EBS_READ_OPS_PER_SECOND", "EBS_WRITE_OPS_PER_SECOND", "EBS_READ_BYTES_PER_SECOND", "EBS_WRITE_BYTES_PER_SECOND", "DISK_READ_OPS_PER_SECOND", "DISK_WRITE_OPS_PER_SECOND", "DISK_READ_BYTES_PER_SECOND", "DISK_WRITE_BYTES_PER_SECOND", "NETWORK_IN_BYTES_PER_SECOND", "NETWORK_OUT_BYTES_PER_SECOND", "NETWORK_PACKETS_IN_PER_SECOND", "NETWORK_PACKETS_OUT_PER_SECOND", "GPU_PERCENTAGE", "GPU_MEMORY_PERCENTAGE"
     #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].projected_utilization_metrics[0].statistic #=> String, one of "Maximum", "Average"
     #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].projected_utilization_metrics[0].value #=> Float
     #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].performance_risk #=> Float
@@ -1299,6 +1427,9 @@ module Aws::ComputeOptimizer
     #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].savings_opportunity.estimated_monthly_savings.currency #=> String, one of "USD", "CNY"
     #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].savings_opportunity.estimated_monthly_savings.value #=> Float
     #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].migration_effort #=> String, one of "VeryLow", "Low", "Medium", "High"
+    #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].instance_gpu_info.gpus #=> Array
+    #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].instance_gpu_info.gpus[0].gpu_count #=> Integer
+    #   resp.auto_scaling_group_recommendations[0].recommendation_options[0].instance_gpu_info.gpus[0].gpu_memory_size_in_mi_b #=> Integer
     #   resp.auto_scaling_group_recommendations[0].last_refresh_timestamp #=> Time
     #   resp.auto_scaling_group_recommendations[0].current_performance_risk #=> String, one of "VeryLow", "Low", "Medium", "High"
     #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.cpu_vendor_architectures #=> Array
@@ -1308,6 +1439,9 @@ module Aws::ComputeOptimizer
     #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.external_metrics_preference.source #=> String, one of "Datadog", "Dynatrace", "NewRelic", "Instana"
     #   resp.auto_scaling_group_recommendations[0].inferred_workload_types #=> Array
     #   resp.auto_scaling_group_recommendations[0].inferred_workload_types[0] #=> String, one of "AmazonEmr", "ApacheCassandra", "ApacheHadoop", "Memcached", "Nginx", "PostgreSql", "Redis", "Kafka", "SQLServer"
+    #   resp.auto_scaling_group_recommendations[0].current_instance_gpu_info.gpus #=> Array
+    #   resp.auto_scaling_group_recommendations[0].current_instance_gpu_info.gpus[0].gpu_count #=> Integer
+    #   resp.auto_scaling_group_recommendations[0].current_instance_gpu_info.gpus[0].gpu_memory_size_in_mi_b #=> Integer
     #   resp.errors #=> Array
     #   resp.errors[0].identifier #=> String
     #   resp.errors[0].code #=> String
@@ -1511,16 +1645,16 @@ module Aws::ComputeOptimizer
     #   resp.instance_recommendations[0].current_instance_type #=> String
     #   resp.instance_recommendations[0].finding #=> String, one of "Underprovisioned", "Overprovisioned", "Optimized", "NotOptimized"
     #   resp.instance_recommendations[0].finding_reason_codes #=> Array
-    #   resp.instance_recommendations[0].finding_reason_codes[0] #=> String, one of "CPUOverprovisioned", "CPUUnderprovisioned", "MemoryOverprovisioned", "MemoryUnderprovisioned", "EBSThroughputOverprovisioned", "EBSThroughputUnderprovisioned", "EBSIOPSOverprovisioned", "EBSIOPSUnderprovisioned", "NetworkBandwidthOverprovisioned", "NetworkBandwidthUnderprovisioned", "NetworkPPSOverprovisioned", "NetworkPPSUnderprovisioned", "DiskIOPSOverprovisioned", "DiskIOPSUnderprovisioned", "DiskThroughputOverprovisioned", "DiskThroughputUnderprovisioned"
+    #   resp.instance_recommendations[0].finding_reason_codes[0] #=> String, one of "CPUOverprovisioned", "CPUUnderprovisioned", "MemoryOverprovisioned", "MemoryUnderprovisioned", "EBSThroughputOverprovisioned", "EBSThroughputUnderprovisioned", "EBSIOPSOverprovisioned", "EBSIOPSUnderprovisioned", "NetworkBandwidthOverprovisioned", "NetworkBandwidthUnderprovisioned", "NetworkPPSOverprovisioned", "NetworkPPSUnderprovisioned", "DiskIOPSOverprovisioned", "DiskIOPSUnderprovisioned", "DiskThroughputOverprovisioned", "DiskThroughputUnderprovisioned", "GPUUnderprovisioned", "GPUOverprovisioned", "GPUMemoryUnderprovisioned", "GPUMemoryOverprovisioned"
     #   resp.instance_recommendations[0].utilization_metrics #=> Array
-    #   resp.instance_recommendations[0].utilization_metrics[0].name #=> String, one of "Cpu", "Memory", "EBS_READ_OPS_PER_SECOND", "EBS_WRITE_OPS_PER_SECOND", "EBS_READ_BYTES_PER_SECOND", "EBS_WRITE_BYTES_PER_SECOND", "DISK_READ_OPS_PER_SECOND", "DISK_WRITE_OPS_PER_SECOND", "DISK_READ_BYTES_PER_SECOND", "DISK_WRITE_BYTES_PER_SECOND", "NETWORK_IN_BYTES_PER_SECOND", "NETWORK_OUT_BYTES_PER_SECOND", "NETWORK_PACKETS_IN_PER_SECOND", "NETWORK_PACKETS_OUT_PER_SECOND"
+    #   resp.instance_recommendations[0].utilization_metrics[0].name #=> String, one of "Cpu", "Memory", "EBS_READ_OPS_PER_SECOND", "EBS_WRITE_OPS_PER_SECOND", "EBS_READ_BYTES_PER_SECOND", "EBS_WRITE_BYTES_PER_SECOND", "DISK_READ_OPS_PER_SECOND", "DISK_WRITE_OPS_PER_SECOND", "DISK_READ_BYTES_PER_SECOND", "DISK_WRITE_BYTES_PER_SECOND", "NETWORK_IN_BYTES_PER_SECOND", "NETWORK_OUT_BYTES_PER_SECOND", "NETWORK_PACKETS_IN_PER_SECOND", "NETWORK_PACKETS_OUT_PER_SECOND", "GPU_PERCENTAGE", "GPU_MEMORY_PERCENTAGE"
     #   resp.instance_recommendations[0].utilization_metrics[0].statistic #=> String, one of "Maximum", "Average"
     #   resp.instance_recommendations[0].utilization_metrics[0].value #=> Float
     #   resp.instance_recommendations[0].look_back_period_in_days #=> Float
     #   resp.instance_recommendations[0].recommendation_options #=> Array
     #   resp.instance_recommendations[0].recommendation_options[0].instance_type #=> String
     #   resp.instance_recommendations[0].recommendation_options[0].projected_utilization_metrics #=> Array
-    #   resp.instance_recommendations[0].recommendation_options[0].projected_utilization_metrics[0].name #=> String, one of "Cpu", "Memory", "EBS_READ_OPS_PER_SECOND", "EBS_WRITE_OPS_PER_SECOND", "EBS_READ_BYTES_PER_SECOND", "EBS_WRITE_BYTES_PER_SECOND", "DISK_READ_OPS_PER_SECOND", "DISK_WRITE_OPS_PER_SECOND", "DISK_READ_BYTES_PER_SECOND", "DISK_WRITE_BYTES_PER_SECOND", "NETWORK_IN_BYTES_PER_SECOND", "NETWORK_OUT_BYTES_PER_SECOND", "NETWORK_PACKETS_IN_PER_SECOND", "NETWORK_PACKETS_OUT_PER_SECOND"
+    #   resp.instance_recommendations[0].recommendation_options[0].projected_utilization_metrics[0].name #=> String, one of "Cpu", "Memory", "EBS_READ_OPS_PER_SECOND", "EBS_WRITE_OPS_PER_SECOND", "EBS_READ_BYTES_PER_SECOND", "EBS_WRITE_BYTES_PER_SECOND", "DISK_READ_OPS_PER_SECOND", "DISK_WRITE_OPS_PER_SECOND", "DISK_READ_BYTES_PER_SECOND", "DISK_WRITE_BYTES_PER_SECOND", "NETWORK_IN_BYTES_PER_SECOND", "NETWORK_OUT_BYTES_PER_SECOND", "NETWORK_PACKETS_IN_PER_SECOND", "NETWORK_PACKETS_OUT_PER_SECOND", "GPU_PERCENTAGE", "GPU_MEMORY_PERCENTAGE"
     #   resp.instance_recommendations[0].recommendation_options[0].projected_utilization_metrics[0].statistic #=> String, one of "Maximum", "Average"
     #   resp.instance_recommendations[0].recommendation_options[0].projected_utilization_metrics[0].value #=> Float
     #   resp.instance_recommendations[0].recommendation_options[0].platform_differences #=> Array
@@ -1531,9 +1665,12 @@ module Aws::ComputeOptimizer
     #   resp.instance_recommendations[0].recommendation_options[0].savings_opportunity.estimated_monthly_savings.currency #=> String, one of "USD", "CNY"
     #   resp.instance_recommendations[0].recommendation_options[0].savings_opportunity.estimated_monthly_savings.value #=> Float
     #   resp.instance_recommendations[0].recommendation_options[0].migration_effort #=> String, one of "VeryLow", "Low", "Medium", "High"
+    #   resp.instance_recommendations[0].recommendation_options[0].instance_gpu_info.gpus #=> Array
+    #   resp.instance_recommendations[0].recommendation_options[0].instance_gpu_info.gpus[0].gpu_count #=> Integer
+    #   resp.instance_recommendations[0].recommendation_options[0].instance_gpu_info.gpus[0].gpu_memory_size_in_mi_b #=> Integer
     #   resp.instance_recommendations[0].recommendation_sources #=> Array
     #   resp.instance_recommendations[0].recommendation_sources[0].recommendation_source_arn #=> String
-    #   resp.instance_recommendations[0].recommendation_sources[0].recommendation_source_type #=> String, one of "Ec2Instance", "AutoScalingGroup", "EbsVolume", "LambdaFunction", "EcsService"
+    #   resp.instance_recommendations[0].recommendation_sources[0].recommendation_source_type #=> String, one of "Ec2Instance", "AutoScalingGroup", "EbsVolume", "LambdaFunction", "EcsService", "License"
     #   resp.instance_recommendations[0].last_refresh_timestamp #=> Time
     #   resp.instance_recommendations[0].current_performance_risk #=> String, one of "VeryLow", "Low", "Medium", "High"
     #   resp.instance_recommendations[0].effective_recommendation_preferences.cpu_vendor_architectures #=> Array
@@ -1549,6 +1686,10 @@ module Aws::ComputeOptimizer
     #   resp.instance_recommendations[0].tags[0].value #=> String
     #   resp.instance_recommendations[0].external_metric_status.status_code #=> String, one of "NO_EXTERNAL_METRIC_SET", "INTEGRATION_SUCCESS", "DATADOG_INTEGRATION_ERROR", "DYNATRACE_INTEGRATION_ERROR", "NEWRELIC_INTEGRATION_ERROR", "INSTANA_INTEGRATION_ERROR", "INSUFFICIENT_DATADOG_METRICS", "INSUFFICIENT_DYNATRACE_METRICS", "INSUFFICIENT_NEWRELIC_METRICS", "INSUFFICIENT_INSTANA_METRICS"
     #   resp.instance_recommendations[0].external_metric_status.status_reason #=> String
+    #   resp.instance_recommendations[0].current_instance_gpu_info.gpus #=> Array
+    #   resp.instance_recommendations[0].current_instance_gpu_info.gpus[0].gpu_count #=> Integer
+    #   resp.instance_recommendations[0].current_instance_gpu_info.gpus[0].gpu_memory_size_in_mi_b #=> Integer
+    #   resp.instance_recommendations[0].idle #=> String, one of "True", "False"
     #   resp.errors #=> Array
     #   resp.errors[0].identifier #=> String
     #   resp.errors[0].code #=> String
@@ -1621,7 +1762,7 @@ module Aws::ComputeOptimizer
     #   resp.recommended_option_projected_metrics[0].recommended_instance_type #=> String
     #   resp.recommended_option_projected_metrics[0].rank #=> Integer
     #   resp.recommended_option_projected_metrics[0].projected_metrics #=> Array
-    #   resp.recommended_option_projected_metrics[0].projected_metrics[0].name #=> String, one of "Cpu", "Memory", "EBS_READ_OPS_PER_SECOND", "EBS_WRITE_OPS_PER_SECOND", "EBS_READ_BYTES_PER_SECOND", "EBS_WRITE_BYTES_PER_SECOND", "DISK_READ_OPS_PER_SECOND", "DISK_WRITE_OPS_PER_SECOND", "DISK_READ_BYTES_PER_SECOND", "DISK_WRITE_BYTES_PER_SECOND", "NETWORK_IN_BYTES_PER_SECOND", "NETWORK_OUT_BYTES_PER_SECOND", "NETWORK_PACKETS_IN_PER_SECOND", "NETWORK_PACKETS_OUT_PER_SECOND"
+    #   resp.recommended_option_projected_metrics[0].projected_metrics[0].name #=> String, one of "Cpu", "Memory", "EBS_READ_OPS_PER_SECOND", "EBS_WRITE_OPS_PER_SECOND", "EBS_READ_BYTES_PER_SECOND", "EBS_WRITE_BYTES_PER_SECOND", "DISK_READ_OPS_PER_SECOND", "DISK_WRITE_OPS_PER_SECOND", "DISK_READ_BYTES_PER_SECOND", "DISK_WRITE_BYTES_PER_SECOND", "NETWORK_IN_BYTES_PER_SECOND", "NETWORK_OUT_BYTES_PER_SECOND", "NETWORK_PACKETS_IN_PER_SECOND", "NETWORK_PACKETS_OUT_PER_SECOND", "GPU_PERCENTAGE", "GPU_MEMORY_PERCENTAGE"
     #   resp.recommended_option_projected_metrics[0].projected_metrics[0].timestamps #=> Array
     #   resp.recommended_option_projected_metrics[0].projected_metrics[0].timestamps[0] #=> Time
     #   resp.recommended_option_projected_metrics[0].projected_metrics[0].values #=> Array
@@ -2064,6 +2205,115 @@ module Aws::ComputeOptimizer
       req.send_request(options)
     end
 
+    # Returns license recommendations for Amazon EC2 instances that run on a
+    # specific license.
+    #
+    # Compute Optimizer generates recommendations for licenses that meet a
+    # specific set of requirements. For more information, see the [Supported
+    # resources and requirements][1] in the *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html
+    #
+    # @option params [Array<String>] :resource_arns
+    #   The ARN that identifies the Amazon EC2 instance.
+    #
+    #   The following is the format of the ARN:
+    #
+    #   `arn:aws:ec2:region:aws_account_id:instance/instance-id`
+    #
+    # @option params [String] :next_token
+    #   The token to advance to the next page of license recommendations.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of license recommendations to return with a single
+    #   request.
+    #
+    #   To retrieve the remaining results, make another request with the
+    #   returned `nextToken` value.
+    #
+    # @option params [Array<Types::LicenseRecommendationFilter>] :filters
+    #   An array of objects to specify a filter that returns a more specific
+    #   list of license recommendations.
+    #
+    # @option params [Array<String>] :account_ids
+    #   The ID of the Amazon Web Services account for which to return license
+    #   recommendations.
+    #
+    #   If your account is the management account of an organization, use this
+    #   parameter to specify the member account for which you want to return
+    #   license recommendations.
+    #
+    #   Only one account ID can be specified per request.
+    #
+    # @return [Types::GetLicenseRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLicenseRecommendationsResponse#next_token #next_token} => String
+    #   * {Types::GetLicenseRecommendationsResponse#license_recommendations #license_recommendations} => Array&lt;Types::LicenseRecommendation&gt;
+    #   * {Types::GetLicenseRecommendationsResponse#errors #errors} => Array&lt;Types::GetRecommendationError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_license_recommendations({
+    #     resource_arns: ["ResourceArn"],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     filters: [
+    #       {
+    #         name: "Finding", # accepts Finding, FindingReasonCode, LicenseName
+    #         values: ["FilterValue"],
+    #       },
+    #     ],
+    #     account_ids: ["AccountId"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.license_recommendations #=> Array
+    #   resp.license_recommendations[0].resource_arn #=> String
+    #   resp.license_recommendations[0].account_id #=> String
+    #   resp.license_recommendations[0].current_license_configuration.number_of_cores #=> Integer
+    #   resp.license_recommendations[0].current_license_configuration.instance_type #=> String
+    #   resp.license_recommendations[0].current_license_configuration.operating_system #=> String
+    #   resp.license_recommendations[0].current_license_configuration.license_edition #=> String, one of "Enterprise", "Standard", "Free", "NoLicenseEditionFound"
+    #   resp.license_recommendations[0].current_license_configuration.license_name #=> String, one of "SQLServer"
+    #   resp.license_recommendations[0].current_license_configuration.license_model #=> String, one of "LicenseIncluded", "BringYourOwnLicense"
+    #   resp.license_recommendations[0].current_license_configuration.license_version #=> String
+    #   resp.license_recommendations[0].current_license_configuration.metrics_source #=> Array
+    #   resp.license_recommendations[0].current_license_configuration.metrics_source[0].provider #=> String, one of "CloudWatchApplicationInsights"
+    #   resp.license_recommendations[0].current_license_configuration.metrics_source[0].provider_arn #=> String
+    #   resp.license_recommendations[0].lookback_period_in_days #=> Float
+    #   resp.license_recommendations[0].last_refresh_timestamp #=> Time
+    #   resp.license_recommendations[0].finding #=> String, one of "InsufficientMetrics", "Optimized", "NotOptimized"
+    #   resp.license_recommendations[0].finding_reason_codes #=> Array
+    #   resp.license_recommendations[0].finding_reason_codes[0] #=> String, one of "InvalidCloudWatchApplicationInsightsSetup", "CloudWatchApplicationInsightsError", "LicenseOverprovisioned", "Optimized"
+    #   resp.license_recommendations[0].license_recommendation_options #=> Array
+    #   resp.license_recommendations[0].license_recommendation_options[0].rank #=> Integer
+    #   resp.license_recommendations[0].license_recommendation_options[0].operating_system #=> String
+    #   resp.license_recommendations[0].license_recommendation_options[0].license_edition #=> String, one of "Enterprise", "Standard", "Free", "NoLicenseEditionFound"
+    #   resp.license_recommendations[0].license_recommendation_options[0].license_model #=> String, one of "LicenseIncluded", "BringYourOwnLicense"
+    #   resp.license_recommendations[0].license_recommendation_options[0].savings_opportunity.savings_opportunity_percentage #=> Float
+    #   resp.license_recommendations[0].license_recommendation_options[0].savings_opportunity.estimated_monthly_savings.currency #=> String, one of "USD", "CNY"
+    #   resp.license_recommendations[0].license_recommendation_options[0].savings_opportunity.estimated_monthly_savings.value #=> Float
+    #   resp.license_recommendations[0].tags #=> Array
+    #   resp.license_recommendations[0].tags[0].key #=> String
+    #   resp.license_recommendations[0].tags[0].value #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].identifier #=> String
+    #   resp.errors[0].code #=> String
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetLicenseRecommendations AWS API Documentation
+    #
+    # @overload get_license_recommendations(params = {})
+    # @param [Hash] params ({})
+    def get_license_recommendations(params = {}, options = {})
+      req = build_request(:get_license_recommendations, params)
+      req.send_request(options)
+    end
+
     # Returns existing recommendation preferences, such as enhanced
     # infrastructure metrics.
     #
@@ -2127,7 +2377,7 @@ module Aws::ComputeOptimizer
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_recommendation_preferences({
-    #     resource_type: "Ec2Instance", # required, accepts Ec2Instance, AutoScalingGroup, EbsVolume, LambdaFunction, NotApplicable, EcsService
+    #     resource_type: "Ec2Instance", # required, accepts Ec2Instance, AutoScalingGroup, EbsVolume, LambdaFunction, NotApplicable, EcsService, License
     #     scope: {
     #       name: "Organization", # accepts Organization, AccountId, ResourceArn
     #       value: "ScopeValue",
@@ -2142,7 +2392,7 @@ module Aws::ComputeOptimizer
     #   resp.recommendation_preferences_details #=> Array
     #   resp.recommendation_preferences_details[0].scope.name #=> String, one of "Organization", "AccountId", "ResourceArn"
     #   resp.recommendation_preferences_details[0].scope.value #=> String
-    #   resp.recommendation_preferences_details[0].resource_type #=> String, one of "Ec2Instance", "AutoScalingGroup", "EbsVolume", "LambdaFunction", "NotApplicable", "EcsService"
+    #   resp.recommendation_preferences_details[0].resource_type #=> String, one of "Ec2Instance", "AutoScalingGroup", "EbsVolume", "LambdaFunction", "NotApplicable", "EcsService", "License"
     #   resp.recommendation_preferences_details[0].enhanced_infrastructure_metrics #=> String, one of "Active", "Inactive"
     #   resp.recommendation_preferences_details[0].inferred_workload_types #=> String, one of "Active", "Inactive"
     #   resp.recommendation_preferences_details[0].external_metrics_preference.source #=> String, one of "Datadog", "Dynatrace", "NewRelic", "Instana"
@@ -2220,7 +2470,7 @@ module Aws::ComputeOptimizer
     #   resp.recommendation_summaries[0].summaries[0].reason_code_summaries #=> Array
     #   resp.recommendation_summaries[0].summaries[0].reason_code_summaries[0].name #=> String, one of "MemoryOverprovisioned", "MemoryUnderprovisioned"
     #   resp.recommendation_summaries[0].summaries[0].reason_code_summaries[0].value #=> Float
-    #   resp.recommendation_summaries[0].recommendation_resource_type #=> String, one of "Ec2Instance", "AutoScalingGroup", "EbsVolume", "LambdaFunction", "EcsService"
+    #   resp.recommendation_summaries[0].recommendation_resource_type #=> String, one of "Ec2Instance", "AutoScalingGroup", "EbsVolume", "LambdaFunction", "EcsService", "License"
     #   resp.recommendation_summaries[0].account_id #=> String
     #   resp.recommendation_summaries[0].savings_opportunity.savings_opportunity_percentage #=> Float
     #   resp.recommendation_summaries[0].savings_opportunity.estimated_monthly_savings.currency #=> String, one of "USD", "CNY"
@@ -2348,7 +2598,7 @@ module Aws::ComputeOptimizer
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_recommendation_preferences({
-    #     resource_type: "Ec2Instance", # required, accepts Ec2Instance, AutoScalingGroup, EbsVolume, LambdaFunction, NotApplicable, EcsService
+    #     resource_type: "Ec2Instance", # required, accepts Ec2Instance, AutoScalingGroup, EbsVolume, LambdaFunction, NotApplicable, EcsService, License
     #     scope: {
     #       name: "Organization", # accepts Organization, AccountId, ResourceArn
     #       value: "ScopeValue",
@@ -2458,7 +2708,7 @@ module Aws::ComputeOptimizer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-computeoptimizer'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

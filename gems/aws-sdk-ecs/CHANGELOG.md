@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.129.0 (2023-09-05)
+------------------
+
+* Feature - Documentation only update for Amazon ECS.
+
+1.128.0 (2023-08-31)
+------------------
+
+* Feature - This release adds support for an account-level setting that you can use to configure the number of days for AWS Fargate task retirement.
+
 1.127.0 (2023-08-04)
 ------------------
 

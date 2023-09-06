@@ -422,6 +422,7 @@ module Aws::SageMaker
     DataQualityBaselineConfig = Shapes::StructureShape.new(name: 'DataQualityBaselineConfig')
     DataQualityJobInput = Shapes::StructureShape.new(name: 'DataQualityJobInput')
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
+    DataSourceName = Shapes::StringShape.new(name: 'DataSourceName')
     Database = Shapes::StringShape.new(name: 'Database')
     DatasetDefinition = Shapes::StructureShape.new(name: 'DatasetDefinition')
     DebugHookConfig = Shapes::StructureShape.new(name: 'DebugHookConfig')
@@ -505,6 +506,7 @@ module Aws::SageMaker
     DeploymentStageStatusSummary = Shapes::StructureShape.new(name: 'DeploymentStageStatusSummary')
     DeploymentStages = Shapes::ListShape.new(name: 'DeploymentStages')
     DeregisterDevicesRequest = Shapes::StructureShape.new(name: 'DeregisterDevicesRequest')
+    DerivedInformation = Shapes::StructureShape.new(name: 'DerivedInformation')
     DescribeActionRequest = Shapes::StructureShape.new(name: 'DescribeActionRequest')
     DescribeActionResponse = Shapes::StructureShape.new(name: 'DescribeActionResponse')
     DescribeAlgorithmInput = Shapes::StructureShape.new(name: 'DescribeAlgorithmInput')
@@ -921,6 +923,8 @@ module Aws::SageMaker
     HyperbandStrategyMinResource = Shapes::IntegerShape.new(name: 'HyperbandStrategyMinResource')
     IamIdentity = Shapes::StructureShape.new(name: 'IamIdentity')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
+    IdentityProviderOAuthSetting = Shapes::StructureShape.new(name: 'IdentityProviderOAuthSetting')
+    IdentityProviderOAuthSettings = Shapes::ListShape.new(name: 'IdentityProviderOAuthSettings')
     Image = Shapes::StructureShape.new(name: 'Image')
     ImageArn = Shapes::StringShape.new(name: 'ImageArn')
     ImageBaseImage = Shapes::StringShape.new(name: 'ImageBaseImage')
@@ -1261,6 +1265,7 @@ module Aws::SageMaker
     ModelCardExportJobSummary = Shapes::StructureShape.new(name: 'ModelCardExportJobSummary')
     ModelCardExportJobSummaryList = Shapes::ListShape.new(name: 'ModelCardExportJobSummaryList')
     ModelCardExportOutputConfig = Shapes::StructureShape.new(name: 'ModelCardExportOutputConfig')
+    ModelCardNameOrArn = Shapes::StringShape.new(name: 'ModelCardNameOrArn')
     ModelCardProcessingStatus = Shapes::StringShape.new(name: 'ModelCardProcessingStatus')
     ModelCardSecurityConfig = Shapes::StructureShape.new(name: 'ModelCardSecurityConfig')
     ModelCardSortBy = Shapes::StringShape.new(name: 'ModelCardSortBy')
@@ -1633,6 +1638,8 @@ module Aws::SageMaker
     RecommendationJobSupportedContentTypes = Shapes::ListShape.new(name: 'RecommendationJobSupportedContentTypes')
     RecommendationJobSupportedEndpointType = Shapes::StringShape.new(name: 'RecommendationJobSupportedEndpointType')
     RecommendationJobSupportedInstanceTypes = Shapes::ListShape.new(name: 'RecommendationJobSupportedInstanceTypes')
+    RecommendationJobSupportedResponseMIMEType = Shapes::StringShape.new(name: 'RecommendationJobSupportedResponseMIMEType')
+    RecommendationJobSupportedResponseMIMETypes = Shapes::ListShape.new(name: 'RecommendationJobSupportedResponseMIMETypes')
     RecommendationJobType = Shapes::StringShape.new(name: 'RecommendationJobType')
     RecommendationJobVpcConfig = Shapes::StructureShape.new(name: 'RecommendationJobVpcConfig')
     RecommendationJobVpcSecurityGroupId = Shapes::StringShape.new(name: 'RecommendationJobVpcSecurityGroupId')
@@ -2521,6 +2528,7 @@ module Aws::SageMaker
     CanvasAppSettings.add_member(:time_series_forecasting_settings, Shapes::ShapeRef.new(shape: TimeSeriesForecastingSettings, location_name: "TimeSeriesForecastingSettings"))
     CanvasAppSettings.add_member(:model_register_settings, Shapes::ShapeRef.new(shape: ModelRegisterSettings, location_name: "ModelRegisterSettings"))
     CanvasAppSettings.add_member(:workspace_settings, Shapes::ShapeRef.new(shape: WorkspaceSettings, location_name: "WorkspaceSettings"))
+    CanvasAppSettings.add_member(:identity_provider_o_auth_settings, Shapes::ShapeRef.new(shape: IdentityProviderOAuthSettings, location_name: "IdentityProviderOAuthSettings"))
     CanvasAppSettings.struct_class = Types::CanvasAppSettings
 
     CapacitySize.add_member(:type, Shapes::ShapeRef.new(shape: CapacitySizeType, required: true, location_name: "Type"))
@@ -3091,7 +3099,7 @@ module Aws::SageMaker
     CreateModelBiasJobDefinitionResponse.add_member(:job_definition_arn, Shapes::ShapeRef.new(shape: MonitoringJobDefinitionArn, required: true, location_name: "JobDefinitionArn"))
     CreateModelBiasJobDefinitionResponse.struct_class = Types::CreateModelBiasJobDefinitionResponse
 
-    CreateModelCardExportJobRequest.add_member(:model_card_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "ModelCardName"))
+    CreateModelCardExportJobRequest.add_member(:model_card_name, Shapes::ShapeRef.new(shape: ModelCardNameOrArn, required: true, location_name: "ModelCardName"))
     CreateModelCardExportJobRequest.add_member(:model_card_version, Shapes::ShapeRef.new(shape: Integer, location_name: "ModelCardVersion"))
     CreateModelCardExportJobRequest.add_member(:model_card_export_job_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "ModelCardExportJobName"))
     CreateModelCardExportJobRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: ModelCardExportOutputConfig, required: true, location_name: "OutputConfig"))
@@ -3734,6 +3742,9 @@ module Aws::SageMaker
     DeregisterDevicesRequest.add_member(:device_names, Shapes::ShapeRef.new(shape: DeviceNames, required: true, location_name: "DeviceNames"))
     DeregisterDevicesRequest.struct_class = Types::DeregisterDevicesRequest
 
+    DerivedInformation.add_member(:derived_data_input_config, Shapes::ShapeRef.new(shape: DataInputConfig, location_name: "DerivedDataInputConfig"))
+    DerivedInformation.struct_class = Types::DerivedInformation
+
     DescribeActionRequest.add_member(:action_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, required: true, location_name: "ActionName"))
     DescribeActionRequest.struct_class = Types::DescribeActionRequest
 
@@ -3898,6 +3909,7 @@ module Aws::SageMaker
     DescribeCompilationJobResponse.add_member(:input_config, Shapes::ShapeRef.new(shape: InputConfig, required: true, location_name: "InputConfig"))
     DescribeCompilationJobResponse.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, required: true, location_name: "OutputConfig"))
     DescribeCompilationJobResponse.add_member(:vpc_config, Shapes::ShapeRef.new(shape: NeoVpcConfig, location_name: "VpcConfig"))
+    DescribeCompilationJobResponse.add_member(:derived_information, Shapes::ShapeRef.new(shape: DerivedInformation, location_name: "DerivedInformation"))
     DescribeCompilationJobResponse.struct_class = Types::DescribeCompilationJobResponse
 
     DescribeContextRequest.add_member(:context_name, Shapes::ShapeRef.new(shape: ExperimentEntityNameOrArn, required: true, location_name: "ContextName"))
@@ -4342,7 +4354,7 @@ module Aws::SageMaker
     DescribeModelCardExportJobResponse.add_member(:export_artifacts, Shapes::ShapeRef.new(shape: ModelCardExportArtifacts, location_name: "ExportArtifacts"))
     DescribeModelCardExportJobResponse.struct_class = Types::DescribeModelCardExportJobResponse
 
-    DescribeModelCardRequest.add_member(:model_card_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "ModelCardName"))
+    DescribeModelCardRequest.add_member(:model_card_name, Shapes::ShapeRef.new(shape: ModelCardNameOrArn, required: true, location_name: "ModelCardName"))
     DescribeModelCardRequest.add_member(:model_card_version, Shapes::ShapeRef.new(shape: Integer, location_name: "ModelCardVersion"))
     DescribeModelCardRequest.struct_class = Types::DescribeModelCardRequest
 
@@ -5518,6 +5530,13 @@ module Aws::SageMaker
     IamIdentity.add_member(:source_identity, Shapes::ShapeRef.new(shape: String, location_name: "SourceIdentity"))
     IamIdentity.struct_class = Types::IamIdentity
 
+    IdentityProviderOAuthSetting.add_member(:data_source_name, Shapes::ShapeRef.new(shape: DataSourceName, location_name: "DataSourceName"))
+    IdentityProviderOAuthSetting.add_member(:status, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "Status"))
+    IdentityProviderOAuthSetting.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
+    IdentityProviderOAuthSetting.struct_class = Types::IdentityProviderOAuthSetting
+
+    IdentityProviderOAuthSettings.member = Shapes::ShapeRef.new(shape: IdentityProviderOAuthSetting)
+
     Image.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
     Image.add_member(:description, Shapes::ShapeRef.new(shape: ImageDescription, location_name: "Description"))
     Image.add_member(:display_name, Shapes::ShapeRef.new(shape: ImageDisplayName, location_name: "DisplayName"))
@@ -5640,7 +5659,7 @@ module Aws::SageMaker
     InferenceSpecification.struct_class = Types::InferenceSpecification
 
     InputConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
-    InputConfig.add_member(:data_input_config, Shapes::ShapeRef.new(shape: DataInputConfig, required: true, location_name: "DataInputConfig"))
+    InputConfig.add_member(:data_input_config, Shapes::ShapeRef.new(shape: DataInputConfig, location_name: "DataInputConfig"))
     InputConfig.add_member(:framework, Shapes::ShapeRef.new(shape: Framework, required: true, location_name: "Framework"))
     InputConfig.add_member(:framework_version, Shapes::ShapeRef.new(shape: FrameworkVersion, location_name: "FrameworkVersion"))
     InputConfig.struct_class = Types::InputConfig
@@ -6341,7 +6360,7 @@ module Aws::SageMaker
     ListModelCardVersionsRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeAfter"))
     ListModelCardVersionsRequest.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeBefore"))
     ListModelCardVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListModelCardVersionsRequest.add_member(:model_card_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "ModelCardName"))
+    ListModelCardVersionsRequest.add_member(:model_card_name, Shapes::ShapeRef.new(shape: ModelCardNameOrArn, required: true, location_name: "ModelCardName"))
     ListModelCardVersionsRequest.add_member(:model_card_status, Shapes::ShapeRef.new(shape: ModelCardStatus, location_name: "ModelCardStatus"))
     ListModelCardVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListModelCardVersionsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: ModelCardVersionSortBy, location_name: "SortBy"))
@@ -7956,6 +7975,7 @@ module Aws::SageMaker
     RecommendationJobContainerConfig.add_member(:supported_instance_types, Shapes::ShapeRef.new(shape: RecommendationJobSupportedInstanceTypes, location_name: "SupportedInstanceTypes"))
     RecommendationJobContainerConfig.add_member(:data_input_config, Shapes::ShapeRef.new(shape: RecommendationJobDataInputConfig, location_name: "DataInputConfig"))
     RecommendationJobContainerConfig.add_member(:supported_endpoint_type, Shapes::ShapeRef.new(shape: RecommendationJobSupportedEndpointType, location_name: "SupportedEndpointType"))
+    RecommendationJobContainerConfig.add_member(:supported_response_mime_types, Shapes::ShapeRef.new(shape: RecommendationJobSupportedResponseMIMETypes, location_name: "SupportedResponseMIMETypes"))
     RecommendationJobContainerConfig.struct_class = Types::RecommendationJobContainerConfig
 
     RecommendationJobInferenceBenchmark.add_member(:metrics, Shapes::ShapeRef.new(shape: RecommendationMetrics, location_name: "Metrics"))
@@ -7999,6 +8019,8 @@ module Aws::SageMaker
     RecommendationJobSupportedContentTypes.member = Shapes::ShapeRef.new(shape: String)
 
     RecommendationJobSupportedInstanceTypes.member = Shapes::ShapeRef.new(shape: String)
+
+    RecommendationJobSupportedResponseMIMETypes.member = Shapes::ShapeRef.new(shape: RecommendationJobSupportedResponseMIMEType)
 
     RecommendationJobVpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: RecommendationJobVpcSecurityGroupIds, required: true, location_name: "SecurityGroupIds"))
     RecommendationJobVpcConfig.add_member(:subnets, Shapes::ShapeRef.new(shape: RecommendationJobVpcSubnets, required: true, location_name: "Subnets"))
@@ -8960,7 +8982,7 @@ module Aws::SageMaker
     UpdateInferenceExperimentResponse.add_member(:inference_experiment_arn, Shapes::ShapeRef.new(shape: InferenceExperimentArn, required: true, location_name: "InferenceExperimentArn"))
     UpdateInferenceExperimentResponse.struct_class = Types::UpdateInferenceExperimentResponse
 
-    UpdateModelCardRequest.add_member(:model_card_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "ModelCardName"))
+    UpdateModelCardRequest.add_member(:model_card_name, Shapes::ShapeRef.new(shape: ModelCardNameOrArn, required: true, location_name: "ModelCardName"))
     UpdateModelCardRequest.add_member(:content, Shapes::ShapeRef.new(shape: ModelCardContent, location_name: "Content"))
     UpdateModelCardRequest.add_member(:model_card_status, Shapes::ShapeRef.new(shape: ModelCardStatus, location_name: "ModelCardStatus"))
     UpdateModelCardRequest.struct_class = Types::UpdateModelCardRequest

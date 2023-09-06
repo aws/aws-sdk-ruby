@@ -489,8 +489,9 @@ module Aws::ConnectParticipant
     # [4]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #
     # @option params [Array<String>] :type
-    #   Type of connection information required. This can be omitted if
-    #   `ConnectParticipant` is `true`.
+    #   Type of connection information required. If you need
+    #   `CONNECTION_CREDENTIALS` along with marking participant as connected,
+    #   pass `CONNECTION_CREDENTIALS` in `Type`.
     #
     # @option params [required, String] :participant_token
     #   This is a header parameter.
@@ -533,6 +534,46 @@ module Aws::ConnectParticipant
     # @param [Hash] params ({})
     def create_participant_connection(params = {}, options = {})
       req = build_request(:create_participant_connection, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the view for the specified view token.
+    #
+    # @option params [required, String] :view_token
+    #   An encrypted token originating from the interactive message of a
+    #   ShowView block operation. Represents the desired view.
+    #
+    # @option params [required, String] :connection_token
+    #   The connection token.
+    #
+    # @return [Types::DescribeViewResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeViewResponse#view #view} => Types::View
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_view({
+    #     view_token: "ViewToken", # required
+    #     connection_token: "ParticipantToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.view.id #=> String
+    #   resp.view.arn #=> String
+    #   resp.view.name #=> String
+    #   resp.view.version #=> Integer
+    #   resp.view.content.input_schema #=> String
+    #   resp.view.content.template #=> String
+    #   resp.view.content.actions #=> Array
+    #   resp.view.content.actions[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/DescribeView AWS API Documentation
+    #
+    # @overload describe_view(params = {})
+    # @param [Hash] params ({})
+    def describe_view(params = {}, options = {})
+      req = build_request(:describe_view, params)
       req.send_request(options)
     end
 
@@ -711,7 +752,7 @@ module Aws::ConnectParticipant
     #   resp.transcript[0].type #=> String, one of "TYPING", "PARTICIPANT_JOINED", "PARTICIPANT_LEFT", "CHAT_ENDED", "TRANSFER_SUCCEEDED", "TRANSFER_FAILED", "MESSAGE", "EVENT", "ATTACHMENT", "CONNECTION_ACK", "MESSAGE_DELIVERED", "MESSAGE_READ"
     #   resp.transcript[0].participant_id #=> String
     #   resp.transcript[0].display_name #=> String
-    #   resp.transcript[0].participant_role #=> String, one of "AGENT", "CUSTOMER", "SYSTEM"
+    #   resp.transcript[0].participant_role #=> String, one of "AGENT", "CUSTOMER", "SYSTEM", "CUSTOM_BOT"
     #   resp.transcript[0].attachments #=> Array
     #   resp.transcript[0].attachments[0].content_type #=> String
     #   resp.transcript[0].attachments[0].attachment_id #=> String
@@ -981,7 +1022,7 @@ module Aws::ConnectParticipant
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connectparticipant'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

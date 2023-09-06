@@ -114,6 +114,8 @@ module Aws::ElasticLoadBalancingV2
     DuplicateLoadBalancerNameException = Shapes::StructureShape.new(name: 'DuplicateLoadBalancerNameException')
     DuplicateTagKeysException = Shapes::StructureShape.new(name: 'DuplicateTagKeysException')
     DuplicateTargetGroupNameException = Shapes::StructureShape.new(name: 'DuplicateTargetGroupNameException')
+    EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic = Shapes::StringShape.new(name: 'EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic')
+    EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum = Shapes::StringShape.new(name: 'EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum')
     FixedResponseActionConfig = Shapes::StructureShape.new(name: 'FixedResponseActionConfig')
     FixedResponseActionContentType = Shapes::StringShape.new(name: 'FixedResponseActionContentType')
     FixedResponseActionMessage = Shapes::StringShape.new(name: 'FixedResponseActionMessage')
@@ -638,6 +640,7 @@ module Aws::ElasticLoadBalancingV2
     LoadBalancer.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroups, location_name: "SecurityGroups"))
     LoadBalancer.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
     LoadBalancer.add_member(:customer_owned_ipv_4_pool, Shapes::ShapeRef.new(shape: CustomerOwnedIpv4Pool, location_name: "CustomerOwnedIpv4Pool"))
+    LoadBalancer.add_member(:enforce_security_group_inbound_rules_on_private_link_traffic, Shapes::ShapeRef.new(shape: EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic, location_name: "EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic"))
     LoadBalancer.struct_class = Types::LoadBalancer
 
     LoadBalancerAddress.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "IpAddress"))
@@ -815,9 +818,11 @@ module Aws::ElasticLoadBalancingV2
 
     SetSecurityGroupsInput.add_member(:load_balancer_arn, Shapes::ShapeRef.new(shape: LoadBalancerArn, required: true, location_name: "LoadBalancerArn"))
     SetSecurityGroupsInput.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroups, required: true, location_name: "SecurityGroups"))
+    SetSecurityGroupsInput.add_member(:enforce_security_group_inbound_rules_on_private_link_traffic, Shapes::ShapeRef.new(shape: EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum, location_name: "EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic"))
     SetSecurityGroupsInput.struct_class = Types::SetSecurityGroupsInput
 
     SetSecurityGroupsOutput.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroups, location_name: "SecurityGroupIds"))
+    SetSecurityGroupsOutput.add_member(:enforce_security_group_inbound_rules_on_private_link_traffic, Shapes::ShapeRef.new(shape: EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum, location_name: "EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic"))
     SetSecurityGroupsOutput.struct_class = Types::SetSecurityGroupsOutput
 
     SetSubnetsInput.add_member(:load_balancer_arn, Shapes::ShapeRef.new(shape: LoadBalancerArn, required: true, location_name: "LoadBalancerArn"))

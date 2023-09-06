@@ -770,7 +770,7 @@ module Aws::PaymentCryptographyData
       :key_identifier,
       :mac_length,
       :message_data)
-      SENSITIVE = []
+      SENSITIVE = [:message_data]
       include Aws::Structure
     end
 
@@ -1723,7 +1723,7 @@ module Aws::PaymentCryptographyData
       :outgoing_dukpt_attributes,
       :outgoing_key_identifier,
       :outgoing_translation_attributes)
-      SENSITIVE = []
+      SENSITIVE = [:encrypted_pin_block]
       include Aws::Structure
     end
 
@@ -2043,7 +2043,7 @@ module Aws::PaymentCryptographyData
       :mac_length,
       :message_data,
       :verification_attributes)
-      SENSITIVE = []
+      SENSITIVE = [:mac, :message_data]
       include Aws::Structure
     end
 

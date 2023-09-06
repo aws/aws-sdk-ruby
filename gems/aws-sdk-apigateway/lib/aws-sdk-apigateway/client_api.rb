@@ -1194,6 +1194,7 @@ module Aws::APIGateway
     RestApi.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "policy"))
     RestApi.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
     RestApi.add_member(:disable_execute_api_endpoint, Shapes::ShapeRef.new(shape: Boolean, location_name: "disableExecuteApiEndpoint"))
+    RestApi.add_member(:root_resource_id, Shapes::ShapeRef.new(shape: String, location_name: "rootResourceId"))
     RestApi.struct_class = Types::RestApi
 
     RestApis.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))

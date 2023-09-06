@@ -2158,6 +2158,7 @@
         {"shape":"InvalidDBClusterSnapshotStateFault"},
         {"shape":"StorageQuotaExceededFault"},
         {"shape":"InvalidVPCNetworkStateFault"},
+        {"shape":"DBSubnetGroupDoesNotCoverEnoughAZs"},
         {"shape":"InvalidRestoreFault"},
         {"shape":"DBSubnetGroupNotFoundFault"},
         {"shape":"InvalidSubnet"},
@@ -2513,6 +2514,24 @@
       "errors":[
         {"shape":"BlueGreenDeploymentNotFoundFault"},
         {"shape":"InvalidBlueGreenDeploymentStateFault"}
+      ]
+    },
+    "SwitchoverGlobalCluster":{
+      "name":"SwitchoverGlobalCluster",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"SwitchoverGlobalClusterMessage"},
+      "output":{
+        "shape":"SwitchoverGlobalClusterResult",
+        "resultWrapper":"SwitchoverGlobalClusterResult"
+      },
+      "errors":[
+        {"shape":"GlobalClusterNotFoundFault"},
+        {"shape":"InvalidGlobalClusterStateFault"},
+        {"shape":"InvalidDBClusterStateFault"},
+        {"shape":"DBClusterNotFoundFault"}
       ]
     },
     "SwitchoverReadReplica":{
@@ -3149,7 +3168,9 @@
         "KMSKeyId":{"shape":"KmsKeyIdOrArn"},
         "Description":{"shape":"Description"},
         "Manifest":{"shape":"CustomDBEngineVersionManifest"},
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"TagList"},
+        "SourceCustomDbEngineVersionIdentifier":{"shape":"String255"},
+        "UseAwsProvidedLatestImage":{"shape":"BooleanOptional"}
       }
     },
     "CreateDBClusterEndpointMessage":{
@@ -3741,7 +3762,8 @@
         "DBSystemId":{"shape":"String"},
         "MasterUserSecret":{"shape":"MasterUserSecret"},
         "IOOptimizedNextAllowedModificationTime":{"shape":"TStamp"},
-        "LocalWriteForwardingStatus":{"shape":"LocalWriteForwardingStatus"}
+        "LocalWriteForwardingStatus":{"shape":"LocalWriteForwardingStatus"},
+        "AwsBackupRecoveryPointArn":{"shape":"String"}
       },
       "wrapper":true
     },
@@ -3781,7 +3803,8 @@
         "Port":{"shape":"Integer"},
         "KmsKeyId":{"shape":"String"},
         "StorageType":{"shape":"String"},
-        "Iops":{"shape":"IntegerOptional"}
+        "Iops":{"shape":"IntegerOptional"},
+        "AwsBackupRecoveryPointArn":{"shape":"String"}
       },
       "wrapper":true
     },
@@ -4367,7 +4390,8 @@
         "DBInstanceAutomatedBackupsArn":{"shape":"String"},
         "DBInstanceAutomatedBackupsReplications":{"shape":"DBInstanceAutomatedBackupsReplicationList"},
         "BackupTarget":{"shape":"String"},
-        "StorageThroughput":{"shape":"IntegerOptional"}
+        "StorageThroughput":{"shape":"IntegerOptional"},
+        "AwsBackupRecoveryPointArn":{"shape":"String"}
       },
       "wrapper":true
     },
@@ -6147,7 +6171,9 @@
       ],
       "members":{
         "GlobalClusterIdentifier":{"shape":"GlobalClusterIdentifier"},
-        "TargetDbClusterIdentifier":{"shape":"DBClusterIdentifier"}
+        "TargetDbClusterIdentifier":{"shape":"DBClusterIdentifier"},
+        "AllowDataLoss":{"shape":"BooleanOptional"},
+        "Switchover":{"shape":"BooleanOptional"}
       }
     },
     "FailoverGlobalClusterResult":{
@@ -6161,7 +6187,8 @@
       "members":{
         "Status":{"shape":"FailoverStatus"},
         "FromDbClusterArn":{"shape":"String"},
-        "ToDbClusterArn":{"shape":"String"}
+        "ToDbClusterArn":{"shape":"String"},
+        "IsDataLossAllowed":{"shape":"Boolean"}
       },
       "wrapper":true
     },
@@ -6249,7 +6276,8 @@
         "DBClusterArn":{"shape":"String"},
         "Readers":{"shape":"ReadersArnList"},
         "IsWriter":{"shape":"Boolean"},
-        "GlobalWriteForwardingStatus":{"shape":"WriteForwardingStatus"}
+        "GlobalWriteForwardingStatus":{"shape":"WriteForwardingStatus"},
+        "SynchronizationStatus":{"shape":"GlobalClusterMemberSynchronizationStatus"}
       },
       "wrapper":true
     },
@@ -6259,6 +6287,13 @@
         "shape":"GlobalClusterMember",
         "locationName":"GlobalClusterMember"
       }
+    },
+    "GlobalClusterMemberSynchronizationStatus":{
+      "type":"string",
+      "enum":[
+        "connected",
+        "pending-resync"
+      ]
     },
     "GlobalClusterNotFoundFault":{
       "type":"structure",
@@ -6868,7 +6903,8 @@
         "MasterUserSecretKmsKeyId":{"shape":"String"},
         "EngineMode":{"shape":"String"},
         "AllowEngineModeChange":{"shape":"Boolean"},
-        "EnableLocalWriteForwarding":{"shape":"BooleanOptional"}
+        "EnableLocalWriteForwarding":{"shape":"BooleanOptional"},
+        "AwsBackupRecoveryPointArn":{"shape":"AwsBackupRecoveryPointArn"}
       }
     },
     "ModifyDBClusterParameterGroupMessage":{
@@ -8735,6 +8771,23 @@
       "member":{"shape":"SwitchoverDetail"}
     },
     "SwitchoverDetailStatus":{"type":"string"},
+    "SwitchoverGlobalClusterMessage":{
+      "type":"structure",
+      "required":[
+        "GlobalClusterIdentifier",
+        "TargetDbClusterIdentifier"
+      ],
+      "members":{
+        "GlobalClusterIdentifier":{"shape":"GlobalClusterIdentifier"},
+        "TargetDbClusterIdentifier":{"shape":"DBClusterIdentifier"}
+      }
+    },
+    "SwitchoverGlobalClusterResult":{
+      "type":"structure",
+      "members":{
+        "GlobalCluster":{"shape":"GlobalCluster"}
+      }
+    },
     "SwitchoverReadReplicaMessage":{
       "type":"structure",
       "required":["DBInstanceIdentifier"],

@@ -78,6 +78,10 @@ module Aws::ChimeSDKMediaPipelines
             Aws::ChimeSDKMediaPipelines::Endpoints::GetMediaInsightsPipelineConfiguration.build(context)
           when :get_media_pipeline
             Aws::ChimeSDKMediaPipelines::Endpoints::GetMediaPipeline.build(context)
+          when :get_speaker_search_task
+            Aws::ChimeSDKMediaPipelines::Endpoints::GetSpeakerSearchTask.build(context)
+          when :get_voice_tone_analysis_task
+            Aws::ChimeSDKMediaPipelines::Endpoints::GetVoiceToneAnalysisTask.build(context)
           when :list_media_capture_pipelines
             Aws::ChimeSDKMediaPipelines::Endpoints::ListMediaCapturePipelines.build(context)
           when :list_media_insights_pipeline_configurations
@@ -86,6 +90,14 @@ module Aws::ChimeSDKMediaPipelines
             Aws::ChimeSDKMediaPipelines::Endpoints::ListMediaPipelines.build(context)
           when :list_tags_for_resource
             Aws::ChimeSDKMediaPipelines::Endpoints::ListTagsForResource.build(context)
+          when :start_speaker_search_task
+            Aws::ChimeSDKMediaPipelines::Endpoints::StartSpeakerSearchTask.build(context)
+          when :start_voice_tone_analysis_task
+            Aws::ChimeSDKMediaPipelines::Endpoints::StartVoiceToneAnalysisTask.build(context)
+          when :stop_speaker_search_task
+            Aws::ChimeSDKMediaPipelines::Endpoints::StopSpeakerSearchTask.build(context)
+          when :stop_voice_tone_analysis_task
+            Aws::ChimeSDKMediaPipelines::Endpoints::StopVoiceToneAnalysisTask.build(context)
           when :tag_resource
             Aws::ChimeSDKMediaPipelines::Endpoints::TagResource.build(context)
           when :untag_resource

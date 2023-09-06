@@ -399,17 +399,18 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html#receiving-email-concepts-rules
     #
     # @option params [required, String] :rule_set_name
-    #   The name of the rule set to create. The name must:
+    #   The name of the rule set to create. The name must meet the following
+    #   requirements:
     #
-    #   * This value can only contain ASCII letters (a-z, A-Z), numbers (0-9),
-    #     underscores (\_), or dashes (-).
+    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores
+    #     (\_), or dashes (-).
     #
     #   * Start and end with a letter or number.
     #
-    #   * Contain less than 64 characters.
+    #   * Contain 64 characters or fewer.
     #
     # @option params [required, String] :original_rule_set_name
     #   The name of the rule set to clone.
@@ -452,7 +453,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
     #
     # @option params [required, Types::ConfigurationSet] :configuration_set
     #   A data structure that contains the name of the configuration set.
@@ -484,24 +485,24 @@ module Aws::SES
     #
     #  </note>
     #
-    # An event destination is the AWS service to which Amazon SES publishes
-    # the email sending events associated with a configuration set. For
-    # information about using configuration sets, see the [Amazon SES
-    # Developer Guide][1].
+    # An event destination is the Amazon Web Services service to which
+    # Amazon SES publishes the email sending events associated with a
+    # configuration set. For information about using configuration sets, see
+    # the [Amazon SES Developer Guide][1].
     #
     # You can execute this operation no more than once per second.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
     #
     # @option params [required, String] :configuration_set_name
     #   The name of the configuration set that the event destination should be
     #   associated with.
     #
     # @option params [required, Types::EventDestination] :event_destination
-    #   An object that describes the AWS service that email sending event
-    #   information will be published to.
+    #   An object that describes the Amazon Web Services service that email
+    #   sending event where information is published.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -551,7 +552,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/configure-custom-open-click-domains.html
     #
     # @option params [required, String] :configuration_set_name
     #   The name of the configuration set that the tracking options should be
@@ -567,7 +568,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/configure-custom-open-click-domains.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -599,7 +600,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom
     #
     # @option params [required, String] :template_name
     #   The name of the custom verification email template.
@@ -618,7 +619,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html#custom-verification-emails-faq
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom
     #
     # @option params [required, String] :success_redirection_url
     #   The URL that the recipient of the verification email is sent to if his
@@ -659,7 +660,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-ip-filtering-console-walkthrough.html
     #
     # @option params [required, Types::ReceiptFilter] :filter
     #   A data structure that describes the IP address filter to create, which
@@ -713,15 +714,15 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html
     #
     # @option params [required, String] :rule_set_name
-    #   The name of the rule set that the receipt rule will be added to.
+    #   The name of the rule set where the receipt rule is added.
     #
     # @option params [String] :after
-    #   The name of an existing rule after which the new rule will be placed.
-    #   If this parameter is null, the new rule will be inserted at the
-    #   beginning of the rule list.
+    #   The name of an existing rule after which the new rule is placed. If
+    #   this parameter is null, the new rule is inserted at the beginning of
+    #   the rule list.
     #
     # @option params [required, Types::ReceiptRule] :rule
     #   A data structure that contains the specified rule's name, actions,
@@ -823,17 +824,18 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html#receiving-email-concepts-rules
     #
     # @option params [required, String] :rule_set_name
-    #   The name of the rule set to create. The name must:
+    #   The name of the rule set to create. The name must meet the following
+    #   requirements:
     #
-    #   * This value can only contain ASCII letters (a-z, A-Z), numbers (0-9),
-    #     underscores (\_), or dashes (-).
+    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores
+    #     (\_), or dashes (-).
     #
     #   * Start and end with a letter or number.
     #
-    #   * Contain less than 64 characters.
+    #   * Contain 64 characters or fewer.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -862,19 +864,18 @@ module Aws::SES
     end
 
     # Creates an email template. Email templates enable you to send
-    # personalized email to one or more destinations in a single API
-    # operation. For more information, see the [Amazon SES Developer
-    # Guide][1].
+    # personalized email to one or more destinations in a single operation.
+    # For more information, see the [Amazon SES Developer Guide][1].
     #
     # You can execute this operation no more than once per second.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/send-personalized-email-api.html
     #
     # @option params [required, Types::Template] :template
-    #   The content of the email, composed of a subject line, an HTML part,
-    #   and a text-only part.
+    #   The content of the email, composed of a subject line and either an
+    #   HTML part or a text-only part.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -906,7 +907,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
     #
     # @option params [required, String] :configuration_set_name
     #   The name of the configuration set to delete.
@@ -937,7 +938,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
     #
     # @option params [required, String] :configuration_set_name
     #   The name of the configuration set from which to delete the event
@@ -972,7 +973,7 @@ module Aws::SES
     # subdomain of your own to handle these events. For information about
     # using custom domains, see the [Amazon SES Developer Guide][1].
     #
-    # <note markdown="1"> Deleting this kind of association will result in emails sent using the
+    # <note markdown="1"> Deleting this kind of association results in emails sent using the
     # specified configuration set to capture open and click events using the
     # standard, Amazon SES-operated domains.
     #
@@ -980,11 +981,10 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/configure-custom-open-click-domains.html
     #
     # @option params [required, String] :configuration_set_name
-    #   The name of the configuration set from which you want to delete the
-    #   tracking options.
+    #   The name of the configuration set.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1013,11 +1013,10 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom
     #
     # @option params [required, String] :template_name
-    #   The name of the custom verification email template that you want to
-    #   delete.
+    #   The name of the custom verification email template to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1042,8 +1041,8 @@ module Aws::SES
     # You can execute this operation no more than once per second.
     #
     # @option params [required, String] :identity
-    #   The identity to be removed from the list of identities for the AWS
-    #   Account.
+    #   The identity to be removed from the list of identities for the Amazon
+    #   Web Services account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1073,11 +1072,11 @@ module Aws::SES
     end
 
     # Deletes the specified sending authorization policy for the given
-    # identity (an email address or a domain). This API returns successfully
-    # even if a policy with the specified name does not exist.
+    # identity (an email address or a domain). This operation returns
+    # successfully even if a policy with the specified name does not exist.
     #
-    # <note markdown="1"> This API is for the identity owner only. If you have not verified the
-    # identity, this API will return an error.
+    # <note markdown="1"> This operation is for the identity owner only. If you have not
+    # verified the identity, it returns an error.
     #
     #  </note>
     #
@@ -1089,16 +1088,15 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #
     # @option params [required, String] :identity
-    #   The identity that is associated with the policy that you want to
-    #   delete. You can specify the identity by using its name or by using its
-    #   Amazon Resource Name (ARN). Examples: `user@example.com`,
-    #   `example.com`,
+    #   The identity that is associated with the policy to delete. You can
+    #   specify the identity by using its name or by using its Amazon Resource
+    #   Name (ARN). Examples: `user@example.com`, `example.com`,
     #   `arn:aws:ses:us-east-1:123456789012:identity/example.com`.
     #
-    #   To successfully call this API, you must own the identity.
+    #   To successfully call this operation, you must own the identity.
     #
     # @option params [required, String] :policy_name
     #   The name of the policy to be deleted.
@@ -1140,7 +1138,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-ip-filters.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-ip-filtering-console-walkthrough.html
     #
     # @option params [required, String] :filter_name
     #   The name of the IP address filter to delete.
@@ -1180,7 +1178,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rules.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html
     #
     # @option params [required, String] :rule_set_name
     #   The name of the receipt rule set that contains the receipt rule to
@@ -1231,7 +1229,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html
     #
     # @option params [required, String] :rule_set_name
     #   The name of the receipt rule set to delete.
@@ -1329,7 +1327,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html#receiving-email-concepts-rules
     #
     # @return [Types::DescribeActiveReceiptRuleSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1418,7 +1416,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
     #
     # @option params [required, String] :configuration_set_name
     #   The name of the configuration set to describe.
@@ -1480,7 +1478,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html
     #
     # @option params [required, String] :rule_set_name
     #   The name of the receipt rule set that the receipt rule belongs to.
@@ -1575,7 +1573,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html
     #
     # @option params [required, String] :rule_set_name
     #   The name of the receipt rule set to describe.
@@ -1667,7 +1665,7 @@ module Aws::SES
     end
 
     # Returns the email sending status of the Amazon SES account for the
-    # current region.
+    # current Region.
     #
     # You can execute this operation no more than once per second.
     #
@@ -1712,11 +1710,10 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom
     #
     # @option params [required, String] :template_name
-    #   The name of the custom verification email template that you want to
-    #   retrieve.
+    #   The name of the custom verification email template to retrieve.
     #
     # @return [Types::GetCustomVerificationEmailTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1776,7 +1773,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy-managing.html
     #
     # @option params [required, Array<String>] :identities
     #   A list of one or more verified identities - email addresses, domains,
@@ -1908,7 +1905,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications.html
     #
     # @option params [required, Array<String>] :identities
     #   A list of one or more identities. You can specify an identity by using
@@ -1977,8 +1974,8 @@ module Aws::SES
     # a map of policy names to policy contents. You can retrieve a maximum
     # of 20 policies at a time.
     #
-    # <note markdown="1"> This API is for the identity owner only. If you have not verified the
-    # identity, this API will return an error.
+    # <note markdown="1"> This operation is for the identity owner only. If you have not
+    # verified the identity, it returns an error.
     #
     #  </note>
     #
@@ -1990,15 +1987,15 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #
     # @option params [required, String] :identity
-    #   The identity for which the policies will be retrieved. You can specify
-    #   an identity by using its name or by using its Amazon Resource Name
-    #   (ARN). Examples: `user@example.com`, `example.com`,
+    #   The identity for which the policies are retrieved. You can specify an
+    #   identity by using its name or by using its Amazon Resource Name (ARN).
+    #   Examples: `user@example.com`, `example.com`,
     #   `arn:aws:ses:us-east-1:123456789012:identity/example.com`.
     #
-    #   To successfully call this API, you must own the identity.
+    #   To successfully call this operation, you must own the identity.
     #
     # @option params [required, Array<String>] :policy_names
     #   A list of the names of policies to be retrieved. You can retrieve a
@@ -2059,18 +2056,17 @@ module Aws::SES
     # Amazon SES sent to that address. If the email address owner clicks the
     # link within 24 hours, the verification status of the email address
     # changes to "Success". If the link is not clicked within 24 hours,
-    # the verification status changes to "Failed." In that case, if you
-    # still want to verify the email address, you must restart the
-    # verification process from the beginning.
+    # the verification status changes to "Failed." In that case, to verify
+    # the email address, you must restart the verification process from the
+    # beginning.
     #
     # For domain identities, the domain's verification status is
     # "Pending" as Amazon SES searches for the required TXT record in the
     # DNS settings of the domain. When Amazon SES detects the record, the
     # domain's verification status changes to "Success". If Amazon SES is
     # unable to detect the record within 72 hours, the domain's
-    # verification status changes to "Failed." In that case, if you still
-    # want to verify the domain, you must restart the verification process
-    # from the beginning.
+    # verification status changes to "Failed." In that case, to verify the
+    # domain, you must restart the verification process from the beginning.
     #
     # This operation is throttled at one request per second and can only get
     # verification attributes for up to 100 identities at a time.
@@ -2169,10 +2165,10 @@ module Aws::SES
       req.send_request(options)
     end
 
-    # Provides sending statistics for the current AWS Region. The result is
-    # a list of data points, representing the last two weeks of sending
-    # activity. Each data point in the list contains statistics for a
-    # 15-minute period of time.
+    # Provides sending statistics for the current Amazon Web Services
+    # Region. The result is a list of data points, representing the last two
+    # weeks of sending activity. Each data point in the list contains
+    # statistics for a 15-minute period of time.
     #
     # You can execute this operation no more than once per second.
     #
@@ -2239,7 +2235,7 @@ module Aws::SES
     # You can execute this operation no more than once per second.
     #
     # @option params [required, String] :template_name
-    #   The name of the template you want to retrieve.
+    #   The name of the template to retrieve.
     #
     # @return [Types::GetTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2268,21 +2264,21 @@ module Aws::SES
     end
 
     # Provides a list of the configuration sets associated with your Amazon
-    # SES account in the current AWS Region. For information about using
-    # configuration sets, see [Monitoring Your Amazon SES Sending
-    # Activity][1] in the *Amazon SES Developer Guide.*
+    # SES account in the current Amazon Web Services Region. For information
+    # about using configuration sets, see [Monitoring Your Amazon SES
+    # Sending Activity][1] in the *Amazon SES Developer Guide.*
     #
     # You can execute this operation no more than once per second. This
-    # operation will return up to 1,000 configuration sets each time it is
-    # run. If your Amazon SES account has more than 1,000 configuration
-    # sets, this operation will also return a NextToken element. You can
-    # then execute the `ListConfigurationSets` operation again, passing the
-    # `NextToken` parameter and the value of the NextToken element to
-    # retrieve additional results.
+    # operation returns up to 1,000 configuration sets each time it is run.
+    # If your Amazon SES account has more than 1,000 configuration sets,
+    # this operation also returns `NextToken`. You can then execute the
+    # `ListConfigurationSets` operation again, passing the `NextToken`
+    # parameter and the value of the NextToken element to retrieve
+    # additional results.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
     #
     # @option params [String] :next_token
     #   A token returned from a previous call to `ListConfigurationSets` to
@@ -2320,7 +2316,7 @@ module Aws::SES
     end
 
     # Lists the existing custom verification email templates for your
-    # account in the current AWS Region.
+    # account in the current Amazon Web Services Region.
     #
     # For more information about custom verification email templates, see
     # [Using Custom Verification Email Templates][1] in the *Amazon SES
@@ -2330,7 +2326,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom
     #
     # @option params [String] :next_token
     #   An array the contains the name and creation time stamp for each
@@ -2340,7 +2336,7 @@ module Aws::SES
     #   The maximum number of custom verification email templates to return.
     #   This value must be at least 1 and less than or equal to 50. If you do
     #   not specify a value, or if you specify a value less than 1 or greater
-    #   than 50, the operation will return up to 50 results.
+    #   than 50, the operation returns up to 50 results.
     #
     # @return [Types::ListCustomVerificationEmailTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2376,15 +2372,27 @@ module Aws::SES
     end
 
     # Returns a list containing all of the identities (email addresses and
-    # domains) for your AWS account in the current AWS Region, regardless of
-    # verification status.
+    # domains) for your Amazon Web Services account in the current Amazon
+    # Web Services Region, regardless of verification status.
     #
     # You can execute this operation no more than once per second.
+    #
+    # <note markdown="1"> It's recommended that for successive pagination calls of this API,
+    # you continue to the use the same parameter/value pairs as used in the
+    # original call, e.g., if you used `IdentityType=Domain` in the the
+    # original call and received a `NextToken` in the response, you should
+    # continue providing the `IdentityType=Domain` parameter for further
+    # `NextToken` calls; however, if you didn't provide the `IdentityType`
+    # parameter in the original call, then continue to not provide it for
+    # successive pagination calls. Using this protocol will ensure
+    # consistent results.
+    #
+    #  </note>
     #
     # @option params [String] :identity_type
     #   The type of the identities to list. Possible values are
     #   "EmailAddress" and "Domain". If this parameter is omitted, then
-    #   all identities will be listed.
+    #   all identities are listed.
     #
     # @option params [String] :next_token
     #   The token to use for pagination.
@@ -2443,12 +2451,12 @@ module Aws::SES
     end
 
     # Returns a list of sending authorization policies that are attached to
-    # the given identity (an email address or a domain). This API returns
-    # only a list. If you want the actual policy content, you can use
+    # the given identity (an email address or a domain). This operation
+    # returns only a list. To get the actual policy content, use
     # `GetIdentityPolicies`.
     #
-    # <note markdown="1"> This API is for the identity owner only. If you have not verified the
-    # identity, this API will return an error.
+    # <note markdown="1"> This operation is for the identity owner only. If you have not
+    # verified the identity, it returns an error.
     #
     #  </note>
     #
@@ -2460,16 +2468,16 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #
     # @option params [required, String] :identity
     #   The identity that is associated with the policy for which the policies
-    #   will be listed. You can specify an identity by using its name or by
-    #   using its Amazon Resource Name (ARN). Examples: `user@example.com`,
+    #   are listed. You can specify an identity by using its name or by using
+    #   its Amazon Resource Name (ARN). Examples: `user@example.com`,
     #   `example.com`,
     #   `arn:aws:ses:us-east-1:123456789012:identity/example.com`.
     #
-    #   To successfully call this API, you must own the identity.
+    #   To successfully call this operation, you must own the identity.
     #
     # @return [Types::ListIdentityPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2511,8 +2519,8 @@ module Aws::SES
       req.send_request(options)
     end
 
-    # Lists the IP address filters associated with your AWS account in the
-    # current AWS Region.
+    # Lists the IP address filters associated with your Amazon Web Services
+    # account in the current Amazon Web Services Region.
     #
     # For information about managing IP address filters, see the [Amazon SES
     # Developer Guide][1].
@@ -2521,7 +2529,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-ip-filters.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-ip-filtering-console-walkthrough.html
     #
     # @return [Types::ListReceiptFiltersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2564,10 +2572,11 @@ module Aws::SES
       req.send_request(options)
     end
 
-    # Lists the receipt rule sets that exist under your AWS account in the
-    # current AWS Region. If there are additional receipt rule sets to be
-    # retrieved, you will receive a `NextToken` that you can provide to the
-    # next call to `ListReceiptRuleSets` to retrieve the additional entries.
+    # Lists the receipt rule sets that exist under your Amazon Web Services
+    # account in the current Amazon Web Services Region. If there are
+    # additional receipt rule sets to be retrieved, you receive a
+    # `NextToken` that you can provide to the next call to
+    # `ListReceiptRuleSets` to retrieve the additional entries.
     #
     # For information about managing receipt rule sets, see the [Amazon SES
     # Developer Guide][1].
@@ -2576,7 +2585,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html
     #
     # @option params [String] :next_token
     #   A token returned from a previous call to `ListReceiptRuleSets` to
@@ -2630,7 +2639,7 @@ module Aws::SES
     end
 
     # Lists the email templates present in your Amazon SES account in the
-    # current AWS Region.
+    # current Amazon Web Services Region.
     #
     # You can execute this operation no more than once per second.
     #
@@ -2640,9 +2649,9 @@ module Aws::SES
     #
     # @option params [Integer] :max_items
     #   The maximum number of templates to return. This value must be at least
-    #   1 and less than or equal to 10. If you do not specify a value, or if
-    #   you specify a value less than 1 or greater than 10, the operation will
-    #   return up to 10 results.
+    #   1 and less than or equal to 100. If more than 100 items are requested,
+    #   the page size will automatically set to 100. If you do not specify a
+    #   value, 10 is the default page size.
     #
     # @return [Types::ListTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2712,8 +2721,7 @@ module Aws::SES
     # Adds or updates the delivery options for a configuration set.
     #
     # @option params [required, String] :configuration_set_name
-    #   The name of the configuration set that you want to specify the
-    #   delivery options for.
+    #   The name of the configuration set.
     #
     # @option params [Types::DeliveryOptions] :delivery_options
     #   Specifies whether messages that use the configuration set are required
@@ -2742,8 +2750,8 @@ module Aws::SES
     # Adds or updates a sending authorization policy for the specified
     # identity (an email address or a domain).
     #
-    # <note markdown="1"> This API is for the identity owner only. If you have not verified the
-    # identity, this API will return an error.
+    # <note markdown="1"> This operation is for the identity owner only. If you have not
+    # verified the identity, it returns an error.
     #
     #  </note>
     #
@@ -2755,15 +2763,15 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #
     # @option params [required, String] :identity
-    #   The identity that the policy will apply to. You can specify an
+    #   The identity to which that the policy applies. You can specify an
     #   identity by using its name or by using its Amazon Resource Name (ARN).
     #   Examples: `user@example.com`, `example.com`,
     #   `arn:aws:ses:us-east-1:123456789012:identity/example.com`.
     #
-    #   To successfully call this API, you must own the identity.
+    #   To successfully call this operation, you must own the identity.
     #
     # @option params [required, String] :policy_name
     #   The name of the policy.
@@ -2779,7 +2787,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-policies.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization-policies.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2814,8 +2822,8 @@ module Aws::SES
     # Reorders the receipt rules within a receipt rule set.
     #
     # <note markdown="1"> All of the rules in the rule set must be represented in this request.
-    # That is, this API will return an error if the reorder request doesn't
-    # explicitly position all of the rules.
+    # That is, it is error if the reorder request doesn't explicitly
+    # position all of the rules.
     #
     #  </note>
     #
@@ -2826,14 +2834,13 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html
     #
     # @option params [required, String] :rule_set_name
     #   The name of the receipt rule set to reorder.
     #
     # @option params [required, Array<String>] :rule_names
-    #   A list of the specified receipt rule set's receipt rules in the order
-    #   that you want to put them.
+    #   The specified receipt rule set's receipt rules, in order.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2867,11 +2874,11 @@ module Aws::SES
     end
 
     # Generates and sends a bounce message to the sender of an email you
-    # received through Amazon SES. You can only use this API on an email up
-    # to 24 hours after you receive it.
+    # received through Amazon SES. You can only use this operation on an
+    # email up to 24 hours after you receive it.
     #
-    # <note markdown="1"> You cannot use this API to send generic bounces for mail that was not
-    # received by Amazon SES.
+    # <note markdown="1"> You cannot use this operation to send generic bounces for mail that
+    # was not received by Amazon SES.
     #
     #  </note>
     #
@@ -2882,7 +2889,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email.html
     #
     # @option params [required, String] :original_message_id
     #   The message ID of the message to be bounced.
@@ -2893,12 +2900,12 @@ module Aws::SES
     #
     # @option params [String] :explanation
     #   Human-readable text for the bounce message to explain the failure. If
-    #   not specified, the text will be auto-generated based on the bounced
+    #   not specified, the text is auto-generated based on the bounced
     #   recipient information.
     #
     # @option params [Types::MessageDsn] :message_dsn
-    #   Message-related DSN fields. If not specified, Amazon SES will choose
-    #   the values.
+    #   Message-related DSN fields. If not specified, Amazon SES chooses the
+    #   values.
     #
     # @option params [required, Array<Types::BouncedRecipientInfo>] :bounced_recipient_info_list
     #   A list of recipients of the bounced message, including the information
@@ -2915,7 +2922,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #
     # @return [Types::SendBounceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2977,16 +2984,16 @@ module Aws::SES
     # Composes an email message to multiple destinations. The message body
     # is created using an email template.
     #
-    # In order to send email using the `SendBulkTemplatedEmail` operation,
-    # your call to the API must meet the following requirements:
+    # To send email using this operation, your call must meet the following
+    # requirements:
     #
     # * The call must refer to an existing email template. You can create
-    #   email templates using the CreateTemplate operation.
+    #   email templates using CreateTemplate.
     #
     # * The message must be sent from a verified email address or domain.
     #
-    # * If your account is still in the Amazon SES sandbox, you may only
-    #   send to verified addresses or domains, or to email addresses
+    # * If your account is still in the Amazon SES sandbox, you may send
+    #   only to verified addresses or domains, or to email addresses
     #   associated with the Amazon SES Mailbox Simulator. For more
     #   information, see [Verifying Email Addresses and Domains][1] in the
     #   *Amazon SES Developer Guide.*
@@ -2998,8 +3005,8 @@ module Aws::SES
     #   address, or a BCC: address. If a recipient email address is invalid
     #   (that is, it is not in the format
     #   *UserName@\[SubDomain.\]Domain.TopLevelDomain*), the entire message
-    #   will be rejected, even if the message contains other recipients that
-    #   are valid.
+    #   is rejected, even if the message contains other recipients that are
+    #   valid.
     #
     # * The message may not include more than 50 recipients, across the To:,
     #   CC: and BCC: fields. If you need to send an email message to a
@@ -3007,12 +3014,12 @@ module Aws::SES
     #   50 or fewer, and then call the `SendBulkTemplatedEmail` operation
     #   several times to send the message to each group.
     #
-    # * The number of destinations you can contact in a single call to the
-    #   API may be limited by your account's maximum sending rate.
+    # * The number of destinations you can contact in a single call can be
+    #   limited by your account's maximum sending rate.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/verify-addresses-and-domains.html
     #
     # @option params [required, String] :source
     #   The email address that is sending the email. This email address must
@@ -3026,26 +3033,26 @@ module Aws::SES
     #   authorization, see the [Amazon SES Developer Guide][2].
     #
     #   <note markdown="1"> Amazon SES does not support the SMTPUTF8 extension, as described in
-    #   [RFC6531][3]. For this reason, the *local part* of a source email
-    #   address (the part of the email address that precedes the @ sign) may
-    #   only contain [7-bit ASCII characters][4]. If the *domain part* of an
-    #   address (the part after the @ sign) contains non-ASCII characters,
-    #   they must be encoded using Punycode, as described in [RFC3492][5]. The
-    #   sender name (also known as the *friendly name*) may contain non-ASCII
-    #   characters. These characters must be encoded using MIME encoded-word
-    #   syntax, as described in [RFC 2047][6]. MIME encoded-word syntax uses
-    #   the following form: `=?charset?encoding?encoded-text?=`.
+    #   [RFC6531][3]. For this reason, the email address string must be 7-bit
+    #   ASCII. If you want to send to or from email addresses that contain
+    #   Unicode characters in the domain part of an address, you must encode
+    #   the domain using Punycode. Punycode is not permitted in the local part
+    #   of the email address (the part before the @ sign) nor in the
+    #   "friendly from" name. If you want to use Unicode characters in the
+    #   "friendly from" name, you must encode the "friendly from" name
+    #   using MIME encoded-word syntax, as described in [Sending raw email
+    #   using the Amazon SES API][4]. For more information about Punycode, see
+    #   [RFC 3492][5].
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
-    #   [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html
+    #   [2]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #   [3]: https://tools.ietf.org/html/rfc6531
-    #   [4]: https://en.wikipedia.org/wiki/Email_address#Local-part
-    #   [5]: https://tools.ietf.org/html/rfc3492.html
-    #   [6]: https://tools.ietf.org/html/rfc2047
+    #   [4]: https://docs.aws.amazon.com/ses/latest/dg/send-email-raw.html
+    #   [5]: http://tools.ietf.org/html/rfc3492
     #
     # @option params [String] :source_arn
     #   This parameter is used only for sending authorization. It is the ARN
@@ -3065,21 +3072,21 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #
     # @option params [Array<String>] :reply_to_addresses
     #   The reply-to email address(es) for the message. If the recipient
-    #   replies to the message, each reply-to address will receive the reply.
+    #   replies to the message, each reply-to address receives the reply.
     #
     # @option params [String] :return_path
-    #   The email address that bounces and complaints will be forwarded to
-    #   when feedback forwarding is enabled. If the message cannot be
-    #   delivered to the recipient, then an error message will be returned
-    #   from the recipient's ISP; this message will then be forwarded to the
-    #   email address specified by the `ReturnPath` parameter. The
-    #   `ReturnPath` parameter is never overwritten. This email address must
-    #   be either individually verified with Amazon SES, or from a domain that
-    #   has been verified with Amazon SES.
+    #   The email address that bounces and complaints are forwarded to when
+    #   feedback forwarding is enabled. If the message cannot be delivered to
+    #   the recipient, then an error message is returned from the recipient's
+    #   ISP; this message is forwarded to the email address specified by the
+    #   `ReturnPath` parameter. The `ReturnPath` parameter is never
+    #   overwritten. This email address must be either individually verified
+    #   with Amazon SES, or from a domain that has been verified with Amazon
+    #   SES.
     #
     # @option params [String] :return_path_arn
     #   This parameter is used only for sending authorization. It is the ARN
@@ -3099,7 +3106,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #
     # @option params [String] :configuration_set_name
     #   The name of the configuration set to use when you send an email using
@@ -3126,8 +3133,8 @@ module Aws::SES
     #
     # @option params [required, Array<Types::BulkEmailDestination>] :destinations
     #   One or more `Destination` objects. All of the recipients in a
-    #   `Destination` will receive the same version of the email. You can
-    #   specify up to 50 `Destination` objects within a `Destinations` array.
+    #   `Destination` receive the same version of the email. You can specify
+    #   up to 50 `Destination` objects within a `Destinations` array.
     #
     # @return [Types::SendBulkTemplatedEmailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3186,9 +3193,9 @@ module Aws::SES
     end
 
     # Adds an email address to the list of identities for your Amazon SES
-    # account in the current AWS Region and attempts to verify it. As a
-    # result of executing this operation, a customized verification email is
-    # sent to the specified address.
+    # account in the current Amazon Web Services Region and attempts to
+    # verify it. As a result of executing this operation, a customized
+    # verification email is sent to the specified address.
     #
     # To use this operation, you must first create a custom verification
     # email template. For more information about creating and using custom
@@ -3199,7 +3206,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom
     #
     # @option params [required, String] :email_address
     #   The email address to verify.
@@ -3237,14 +3244,13 @@ module Aws::SES
       req.send_request(options)
     end
 
-    # Composes an email message and immediately queues it for sending. In
-    # order to send email using the `SendEmail` operation, your message must
-    # meet the following requirements:
+    # Composes an email message and immediately queues it for sending. To
+    # send email using this operation, your message must meet the following
+    # requirements:
     #
     # * The message must be sent from a verified email address or domain. If
     #   you attempt to send email using a non-verified address or domain,
-    #   the operation will result in an "Email address not verified"
-    #   error.
+    #   the operation results in an "Email address not verified" error.
     #
     # * If your account is still in the Amazon SES sandbox, you may only
     #   send to verified addresses or domains, or to email addresses
@@ -3258,7 +3264,7 @@ module Aws::SES
     #   recipient address can be a To: address, a CC: address, or a BCC:
     #   address. If a recipient email address is invalid (that is, it is not
     #   in the format *UserName@\[SubDomain.\]Domain.TopLevelDomain*), the
-    #   entire message will be rejected, even if the message contains other
+    #   entire message is rejected, even if the message contains other
     #   recipients that are valid.
     #
     # * The message may not include more than 50 recipients, across the To:,
@@ -3276,8 +3282,8 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
-    # [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/verify-addresses-and-domains.html
+    # [2]: https://docs.aws.amazon.com/ses/latest/dg/manage-sending-quotas.html
     #
     # @option params [required, String] :source
     #   The email address that is sending the email. This email address must
@@ -3291,26 +3297,26 @@ module Aws::SES
     #   authorization, see the [Amazon SES Developer Guide][2].
     #
     #   <note markdown="1"> Amazon SES does not support the SMTPUTF8 extension, as described in
-    #   [RFC6531][3]. For this reason, the *local part* of a source email
-    #   address (the part of the email address that precedes the @ sign) may
-    #   only contain [7-bit ASCII characters][4]. If the *domain part* of an
-    #   address (the part after the @ sign) contains non-ASCII characters,
-    #   they must be encoded using Punycode, as described in [RFC3492][5]. The
-    #   sender name (also known as the *friendly name*) may contain non-ASCII
-    #   characters. These characters must be encoded using MIME encoded-word
-    #   syntax, as described in [RFC 2047][6]. MIME encoded-word syntax uses
-    #   the following form: `=?charset?encoding?encoded-text?=`.
+    #   [RFC6531][3]. For this reason, the email address string must be 7-bit
+    #   ASCII. If you want to send to or from email addresses that contain
+    #   Unicode characters in the domain part of an address, you must encode
+    #   the domain using Punycode. Punycode is not permitted in the local part
+    #   of the email address (the part before the @ sign) nor in the
+    #   "friendly from" name. If you want to use Unicode characters in the
+    #   "friendly from" name, you must encode the "friendly from" name
+    #   using MIME encoded-word syntax, as described in [Sending raw email
+    #   using the Amazon SES API][4]. For more information about Punycode, see
+    #   [RFC 3492][5].
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
-    #   [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html
+    #   [2]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #   [3]: https://tools.ietf.org/html/rfc6531
-    #   [4]: https://en.wikipedia.org/wiki/Email_address#Local-part
-    #   [5]: https://tools.ietf.org/html/rfc3492.html
-    #   [6]: https://tools.ietf.org/html/rfc2047
+    #   [4]: https://docs.aws.amazon.com/ses/latest/dg/send-email-raw.html
+    #   [5]: http://tools.ietf.org/html/rfc3492
     #
     # @option params [required, Types::Destination] :destination
     #   The destination for this email, composed of To:, CC:, and BCC: fields.
@@ -3320,17 +3326,17 @@ module Aws::SES
     #
     # @option params [Array<String>] :reply_to_addresses
     #   The reply-to email address(es) for the message. If the recipient
-    #   replies to the message, each reply-to address will receive the reply.
+    #   replies to the message, each reply-to address receives the reply.
     #
     # @option params [String] :return_path
-    #   The email address that bounces and complaints will be forwarded to
-    #   when feedback forwarding is enabled. If the message cannot be
-    #   delivered to the recipient, then an error message will be returned
-    #   from the recipient's ISP; this message will then be forwarded to the
-    #   email address specified by the `ReturnPath` parameter. The
-    #   `ReturnPath` parameter is never overwritten. This email address must
-    #   be either individually verified with Amazon SES, or from a domain that
-    #   has been verified with Amazon SES.
+    #   The email address that bounces and complaints are forwarded to when
+    #   feedback forwarding is enabled. If the message cannot be delivered to
+    #   the recipient, then an error message is returned from the recipient's
+    #   ISP; this message is forwarded to the email address specified by the
+    #   `ReturnPath` parameter. The `ReturnPath` parameter is never
+    #   overwritten. This email address must be either individually verified
+    #   with Amazon SES, or from a domain that has been verified with Amazon
+    #   SES.
     #
     # @option params [String] :source_arn
     #   This parameter is used only for sending authorization. It is the ARN
@@ -3350,7 +3356,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #
     # @option params [String] :return_path_arn
     #   This parameter is used only for sending authorization. It is the ARN
@@ -3370,7 +3376,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #
     # @option params [Array<Types::MessageTag>] :tags
     #   A list of tags, in the form of name/value pairs, to apply to an email
@@ -3485,10 +3491,10 @@ module Aws::SES
 
     # Composes an email message and immediately queues it for sending.
     #
-    # This operation is more flexible than the `SendEmail` API operation.
-    # When you use the `SendRawEmail` operation, you can specify the headers
-    # of the message as well as its content. This flexibility is useful, for
-    # example, when you want to send a multipart MIME email (such a message
+    # This operation is more flexible than the `SendEmail` operation. When
+    # you use the `SendRawEmail` operation, you can specify the headers of
+    # the message as well as its content. This flexibility is useful, for
+    # example, when you need to send a multipart MIME email (such a message
     # that contains both a text and an HTML version). You can also use this
     # operation to send messages that include attachments.
     #
@@ -3534,17 +3540,17 @@ module Aws::SES
     # `SendRawEmail` operation:
     #
     # * Although you can customize the message headers when using the
-    #   `SendRawEmail` operation, Amazon SES will automatically apply its
-    #   own `Message-ID` and `Date` headers; if you passed these headers
-    #   when creating the message, they will be overwritten by the values
-    #   that Amazon SES provides.
+    #   `SendRawEmail` operation, Amazon SES automatically applies its own
+    #   `Message-ID` and `Date` headers; if you passed these headers when
+    #   creating the message, they are overwritten by the values that Amazon
+    #   SES provides.
     #
     # * If you are using sending authorization to send on behalf of another
     #   user, `SendRawEmail` enables you to specify the cross-account
     #   identity for the email's Source, From, and Return-Path parameters
     #   in one of two ways: you can pass optional parameters `SourceArn`,
-    #   `FromArn`, and/or `ReturnPathArn` to the API, or you can include the
-    #   following X-headers in the header of your raw email:
+    #   `FromArn`, and/or `ReturnPathArn`, or you can include the following
+    #   X-headers in the header of your raw email:
     #
     #   * `X-SES-SOURCE-ARN`
     #
@@ -3572,12 +3578,12 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
-    # [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/request-production-access.html
-    # [3]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mailbox-simulator.html
-    # [4]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html#send-email-mime-encoding
-    # [5]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
-    # [6]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/verify-addresses-and-domains.html
+    # [2]: https://docs.aws.amazon.com/ses/latest/dg/request-production-access.html
+    # [3]: https://docs.aws.amazon.com/ses/latest/dg/send-an-email-from-console.html
+    # [4]: https://docs.aws.amazon.com/ses/latest/dg/send-email-raw.html#send-email-mime-encoding
+    # [5]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
+    # [6]: https://docs.aws.amazon.com/ses/latest/dg/manage-sending-quotas.html
     #
     # @option params [String] :source
     #   The identity's email address. If you do not provide a value for this
@@ -3585,29 +3591,29 @@ module Aws::SES
     #   message. (You can also specify both.)
     #
     #   <note markdown="1"> Amazon SES does not support the SMTPUTF8 extension, as described
-    #   in[RFC6531][1]. For this reason, the *local part* of a source email
-    #   address (the part of the email address that precedes the @ sign) may
-    #   only contain [7-bit ASCII characters][2]. If the *domain part* of an
-    #   address (the part after the @ sign) contains non-ASCII characters,
-    #   they must be encoded using Punycode, as described in [RFC3492][3]. The
-    #   sender name (also known as the *friendly name*) may contain non-ASCII
-    #   characters. These characters must be encoded using MIME encoded-word
-    #   syntax, as described in [RFC 2047][4]. MIME encoded-word syntax uses
-    #   the following form: `=?charset?encoding?encoded-text?=`.
+    #   in[RFC6531][1]. For this reason, the email address string must be
+    #   7-bit ASCII. If you want to send to or from email addresses that
+    #   contain Unicode characters in the domain part of an address, you must
+    #   encode the domain using Punycode. Punycode is not permitted in the
+    #   local part of the email address (the part before the @ sign) nor in
+    #   the "friendly from" name. If you want to use Unicode characters in
+    #   the "friendly from" name, you must encode the "friendly from" name
+    #   using MIME encoded-word syntax, as described in [Sending raw email
+    #   using the Amazon SES API][2]. For more information about Punycode, see
+    #   [RFC 3492][3].
     #
     #    </note>
     #
     #   If you specify the `Source` parameter and have feedback forwarding
-    #   enabled, then bounces and complaints will be sent to this email
-    #   address. This takes precedence over any Return-Path header that you
-    #   might include in the raw text of the message.
+    #   enabled, then bounces and complaints are sent to this email address.
+    #   This takes precedence over any Return-Path header that you might
+    #   include in the raw text of the message.
     #
     #
     #
     #   [1]: https://tools.ietf.org/html/rfc6531
-    #   [2]: https://en.wikipedia.org/wiki/Email_address#Local-part
-    #   [3]: https://tools.ietf.org/html/rfc3492.html
-    #   [4]: https://tools.ietf.org/html/rfc2047
+    #   [2]: https://docs.aws.amazon.com/ses/latest/dg/send-email-raw.html
+    #   [3]: http://tools.ietf.org/html/rfc3492
     #
     # @option params [Array<String>] :destinations
     #   A list of destinations for the message, consisting of To:, CC:, and
@@ -3640,8 +3646,8 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mime-types.html
-    #   [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/mime-types.html
+    #   [2]: https://docs.aws.amazon.com/ses/latest/dg/send-email-raw.html
     #   [3]: https://tools.ietf.org/html/rfc5321#section-4.5.3.1.6
     #
     # @option params [String] :from_arn
@@ -3663,7 +3669,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization-delegate-sender-tasks-email.html
     #
     # @option params [String] :source_arn
     #   This parameter is used only for sending authorization. It is the ARN
@@ -3691,7 +3697,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization-delegate-sender-tasks-email.html
     #
     # @option params [String] :return_path_arn
     #   This parameter is used only for sending authorization. It is the ARN
@@ -3719,7 +3725,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization-delegate-sender-tasks-email.html
     #
     # @option params [Array<Types::MessageTag>] :tags
     #   A list of tags, in the form of name/value pairs, to apply to an email
@@ -3793,8 +3799,8 @@ module Aws::SES
     # Composes an email message using an email template and immediately
     # queues it for sending.
     #
-    # In order to send email using the `SendTemplatedEmail` operation, your
-    # call to the API must meet the following requirements:
+    # To send email using this operation, your call must meet the following
+    # requirements:
     #
     # * The call must refer to an existing email template. You can create
     #   email templates using the CreateTemplate operation.
@@ -3810,18 +3816,18 @@ module Aws::SES
     # * The maximum message size is 10 MB.
     #
     # * Calls to the `SendTemplatedEmail` operation may only include one
-    #   `Destination` parameter. A destination is a set of recipients who
-    #   will receive the same version of the email. The `Destination`
-    #   parameter can include up to 50 recipients, across the To:, CC: and
-    #   BCC: fields.
+    #   `Destination` parameter. A destination is a set of recipients that
+    #   receives the same version of the email. The `Destination` parameter
+    #   can include up to 50 recipients, across the To:, CC: and BCC:
+    #   fields.
     #
     # * The `Destination` parameter must include at least one recipient
     #   email address. The recipient address can be a To: address, a CC:
     #   address, or a BCC: address. If a recipient email address is invalid
     #   (that is, it is not in the format
     #   *UserName@\[SubDomain.\]Domain.TopLevelDomain*), the entire message
-    #   will be rejected, even if the message contains other recipients that
-    #   are valid.
+    #   is rejected, even if the message contains other recipients that are
+    #   valid.
     #
     # If your call to the `SendTemplatedEmail` operation includes all of the
     # required parameters, Amazon SES accepts it and returns a Message ID.
@@ -3837,8 +3843,8 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
-    # [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/verify-addresses-and-domains.html
+    # [2]: https://docs.aws.amazon.com/ses/latest/dg/send-personalized-email-api.html
     #
     # @option params [required, String] :source
     #   The email address that is sending the email. This email address must
@@ -3852,26 +3858,26 @@ module Aws::SES
     #   authorization, see the [Amazon SES Developer Guide][2].
     #
     #   <note markdown="1"> Amazon SES does not support the SMTPUTF8 extension, as described in
-    #   [RFC6531][3]. For this reason, the *local part* of a source email
-    #   address (the part of the email address that precedes the @ sign) may
-    #   only contain [7-bit ASCII characters][4]. If the *domain part* of an
-    #   address (the part after the @ sign) contains non-ASCII characters,
-    #   they must be encoded using Punycode, as described in [RFC3492][5]. The
-    #   sender name (also known as the *friendly name*) may contain non-ASCII
-    #   characters. These characters must be encoded using MIME encoded-word
-    #   syntax, as described in[RFC 2047][6]. MIME encoded-word syntax uses
-    #   the following form: `=?charset?encoding?encoded-text?=`.
+    #   [RFC6531][3]. for this reason, The email address string must be 7-bit
+    #   ASCII. If you want to send to or from email addresses that contain
+    #   Unicode characters in the domain part of an address, you must encode
+    #   the domain using Punycode. Punycode is not permitted in the local part
+    #   of the email address (the part before the @ sign) nor in the
+    #   "friendly from" name. If you want to use Unicode characters in the
+    #   "friendly from" name, you must encode the "friendly from" name
+    #   using MIME encoded-word syntax, as described in [Sending raw email
+    #   using the Amazon SES API][4]. For more information about Punycode, see
+    #   [RFC 3492][5].
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
-    #   [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html
+    #   [2]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #   [3]: https://tools.ietf.org/html/rfc6531
-    #   [4]: https://en.wikipedia.org/wiki/Email_address#Local-part
-    #   [5]: https://tools.ietf.org/html/rfc3492.html
-    #   [6]: https://tools.ietf.org/html/rfc2047
+    #   [4]: https://docs.aws.amazon.com/ses/latest/dg/send-email-raw.html
+    #   [5]: http://tools.ietf.org/html/rfc3492
     #
     # @option params [required, Types::Destination] :destination
     #   The destination for this email, composed of To:, CC:, and BCC: fields.
@@ -3880,17 +3886,17 @@ module Aws::SES
     #
     # @option params [Array<String>] :reply_to_addresses
     #   The reply-to email address(es) for the message. If the recipient
-    #   replies to the message, each reply-to address will receive the reply.
+    #   replies to the message, each reply-to address receives the reply.
     #
     # @option params [String] :return_path
-    #   The email address that bounces and complaints will be forwarded to
-    #   when feedback forwarding is enabled. If the message cannot be
-    #   delivered to the recipient, then an error message will be returned
-    #   from the recipient's ISP; this message will then be forwarded to the
-    #   email address specified by the `ReturnPath` parameter. The
-    #   `ReturnPath` parameter is never overwritten. This email address must
-    #   be either individually verified with Amazon SES, or from a domain that
-    #   has been verified with Amazon SES.
+    #   The email address that bounces and complaints are forwarded to when
+    #   feedback forwarding is enabled. If the message cannot be delivered to
+    #   the recipient, then an error message is returned from the recipient's
+    #   ISP; this message is forwarded to the email address specified by the
+    #   `ReturnPath` parameter. The `ReturnPath` parameter is never
+    #   overwritten. This email address must be either individually verified
+    #   with Amazon SES, or from a domain that has been verified with Amazon
+    #   SES.
     #
     # @option params [String] :source_arn
     #   This parameter is used only for sending authorization. It is the ARN
@@ -3910,7 +3916,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #
     # @option params [String] :return_path_arn
     #   This parameter is used only for sending authorization. It is the ARN
@@ -3930,7 +3936,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
     #
     # @option params [Array<Types::MessageTag>] :tags
     #   A list of tags, in the form of name/value pairs, to apply to an email
@@ -3998,7 +4004,7 @@ module Aws::SES
     # Sets the specified receipt rule set as the active receipt rule set.
     #
     # <note markdown="1"> To disable your email-receiving through Amazon SES completely, you can
-    # call this API with RuleSetName set to null.
+    # call this operation with `RuleSetName` set to null.
     #
     #  </note>
     #
@@ -4009,7 +4015,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html
     #
     # @option params [String] :rule_set_name
     #   The name of the receipt rule set to make active. Setting this value to
@@ -4064,7 +4070,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy.html
     #
     # @option params [required, String] :identity
     #   The identity for which DKIM signing should be enabled or disabled.
@@ -4119,21 +4125,20 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications.html
     #
     # @option params [required, String] :identity
     #   The identity for which to set bounce and complaint notification
     #   forwarding. Examples: `user@example.com`, `example.com`.
     #
     # @option params [required, Boolean] :forwarding_enabled
-    #   Sets whether Amazon SES will forward bounce and complaint
-    #   notifications as email. `true` specifies that Amazon SES will forward
-    #   bounce and complaint notifications as email, in addition to any Amazon
-    #   SNS topic publishing otherwise specified. `false` specifies that
-    #   Amazon SES will publish bounce and complaint notifications only
-    #   through Amazon SNS. This value can only be set to `false` when Amazon
-    #   SNS topics are set for both `Bounce` and `Complaint` notification
-    #   types.
+    #   Sets whether Amazon SES forwards bounce and complaint notifications as
+    #   email. `true` specifies that Amazon SES forwards bounce and complaint
+    #   notifications as email, in addition to any Amazon SNS topic publishing
+    #   otherwise specified. `false` specifies that Amazon SES publishes
+    #   bounce and complaint notifications only through Amazon SNS. This value
+    #   can only be set to `false` when Amazon SNS topics are set for both
+    #   `Bounce` and `Complaint` notification types.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4174,7 +4179,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications.html
     #
     # @option params [required, String] :identity
     #   The identity for which to enable or disable headers in notifications.
@@ -4187,9 +4192,9 @@ module Aws::SES
     # @option params [required, Boolean] :enabled
     #   Sets whether Amazon SES includes the original email headers in Amazon
     #   SNS notifications of the specified notification type. A value of
-    #   `true` specifies that Amazon SES will include headers in
-    #   notifications, and a value of `false` specifies that Amazon SES will
-    #   not include headers in notifications.
+    #   `true` specifies that Amazon SES includes headers in notifications,
+    #   and a value of `false` specifies that Amazon SES does not include
+    #   headers in notifications.
     #
     #   This value can only be set when `NotificationType` is already set to
     #   use a particular Amazon SNS topic.
@@ -4229,41 +4234,40 @@ module Aws::SES
     # identity (an email address or a domain).
     #
     # To send emails using the specified MAIL FROM domain, you must add an
-    # MX record to your MAIL FROM domain's DNS settings. If you want your
-    # emails to pass Sender Policy Framework (SPF) checks, you must also add
-    # or update an SPF record. For more information, see the [Amazon SES
+    # MX record to your MAIL FROM domain's DNS settings. To ensure that
+    # your emails pass Sender Policy Framework (SPF) checks, you must also
+    # add or update an SPF record. For more information, see the [Amazon SES
     # Developer Guide][1].
     #
     # You can execute this operation no more than once per second.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from-set.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/mail-from.html
     #
     # @option params [required, String] :identity
-    #   The verified identity for which you want to enable or disable the
-    #   specified custom MAIL FROM domain.
+    #   The verified identity.
     #
     # @option params [String] :mail_from_domain
-    #   The custom MAIL FROM domain that you want the verified identity to
-    #   use. The MAIL FROM domain must 1) be a subdomain of the verified
-    #   identity, 2) not be used in a "From" address if the MAIL FROM domain
-    #   is the destination of email feedback forwarding (for more information,
-    #   see the [Amazon SES Developer Guide][1]), and 3) not be used to
-    #   receive emails. A value of `null` disables the custom MAIL FROM
-    #   setting for the identity.
+    #   The custom MAIL FROM domain for the verified identity to use. The MAIL
+    #   FROM domain must 1) be a subdomain of the verified identity, 2) not be
+    #   used in a "From" address if the MAIL FROM domain is the destination
+    #   of email feedback forwarding (for more information, see the [Amazon
+    #   SES Developer Guide][1]), and 3) not be used to receive emails. A
+    #   value of `null` disables the custom MAIL FROM setting for the
+    #   identity.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/mail-from.html
     #
     # @option params [String] :behavior_on_mx_failure
-    #   The action that you want Amazon SES to take if it cannot successfully
-    #   read the required MX record when you send an email. If you choose
-    #   `UseDefaultValue`, Amazon SES will use amazonses.com (or a subdomain
-    #   of that) as the MAIL FROM domain. If you choose `RejectMessage`,
-    #   Amazon SES will return a `MailFromDomainNotVerified` error and not
-    #   send the email.
+    #   The action for Amazon SES to take if it cannot successfully read the
+    #   required MX record when you send an email. If you choose
+    #   `UseDefaultValue`, Amazon SES uses amazonses.com (or a subdomain of
+    #   that) as the MAIL FROM domain. If you choose `RejectMessage`, Amazon
+    #   SES returns a `MailFromDomainNotVerified` error and not send the
+    #   email.
     #
     #   The action specified in `BehaviorOnMXFailure` is taken when the custom
     #   MAIL FROM domain setup is in the `Pending`, `Failed`, and
@@ -4314,11 +4318,10 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications.html
     #
     # @option params [required, String] :identity
-    #   The identity (email address or domain) that you want to set the Amazon
-    #   SNS topic for.
+    #   The identity (email address or domain) for the Amazon SNS topic.
     #
     #   You can only specify a verified identity for this parameter.
     #
@@ -4328,8 +4331,8 @@ module Aws::SES
     #   `arn:aws:ses:us-east-1:123456789012:identity/example.com`.
     #
     # @option params [required, String] :notification_type
-    #   The type of notifications that will be published to the specified
-    #   Amazon SNS topic.
+    #   The type of notifications that are published to the specified Amazon
+    #   SNS topic.
     #
     # @option params [String] :sns_topic
     #   The Amazon Resource Name (ARN) of the Amazon SNS topic. If the
@@ -4377,7 +4380,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rules.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html
     #
     # @option params [required, String] :rule_set_name
     #   The name of the receipt rule set that contains the receipt rule to
@@ -4426,7 +4429,7 @@ module Aws::SES
     # You can execute this operation no more than once per second.
     #
     # @option params [required, String] :template_name
-    #   The name of the template that you want to render.
+    #   The name of the template to render.
     #
     # @option params [required, String] :template_data
     #   A list of replacement values to apply to the template. This parameter
@@ -4458,17 +4461,17 @@ module Aws::SES
     end
 
     # Enables or disables email sending across your entire Amazon SES
-    # account in the current AWS Region. You can use this operation in
-    # conjunction with Amazon CloudWatch alarms to temporarily pause email
-    # sending across your Amazon SES account in a given AWS Region when
-    # reputation metrics (such as your bounce or complaint rates) reach
-    # certain thresholds.
+    # account in the current Amazon Web Services Region. You can use this
+    # operation in conjunction with Amazon CloudWatch alarms to temporarily
+    # pause email sending across your Amazon SES account in a given Amazon
+    # Web Services Region when reputation metrics (such as your bounce or
+    # complaint rates) reach certain thresholds.
     #
     # You can execute this operation no more than once per second.
     #
     # @option params [Boolean] :enabled
     #   Describes whether email sending is enabled or disabled for your Amazon
-    #   SES account in the current AWS Region.
+    #   SES account in the current Amazon Web Services Region.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4514,15 +4517,13 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
     #
     # @option params [required, String] :configuration_set_name
-    #   The name of the configuration set that contains the event destination
-    #   that you want to update.
+    #   The name of the configuration set that contains the event destination.
     #
     # @option params [required, Types::EventDestination] :event_destination
-    #   The event destination object that you want to apply to the specified
-    #   configuration set.
+    #   The event destination object.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4563,21 +4564,21 @@ module Aws::SES
     end
 
     # Enables or disables the publishing of reputation metrics for emails
-    # sent using a specific configuration set in a given AWS Region.
-    # Reputation metrics include bounce and complaint rates. These metrics
-    # are published to Amazon CloudWatch. By using CloudWatch, you can
-    # create alarms when bounce or complaint rates exceed certain
+    # sent using a specific configuration set in a given Amazon Web Services
+    # Region. Reputation metrics include bounce and complaint rates. These
+    # metrics are published to Amazon CloudWatch. By using CloudWatch, you
+    # can create alarms when bounce or complaint rates exceed certain
     # thresholds.
     #
     # You can execute this operation no more than once per second.
     #
     # @option params [required, String] :configuration_set_name
-    #   The name of the configuration set that you want to update.
+    #   The name of the configuration set to update.
     #
     # @option params [required, Boolean] :enabled
-    #   Describes whether or not Amazon SES will publish reputation metrics
-    #   for the configuration set, such as bounce and complaint rates, to
-    #   Amazon CloudWatch.
+    #   Describes whether or not Amazon SES publishes reputation metrics for
+    #   the configuration set, such as bounce and complaint rates, to Amazon
+    #   CloudWatch.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4608,16 +4609,16 @@ module Aws::SES
     end
 
     # Enables or disables email sending for messages sent using a specific
-    # configuration set in a given AWS Region. You can use this operation in
-    # conjunction with Amazon CloudWatch alarms to temporarily pause email
-    # sending for a configuration set when the reputation metrics for that
-    # configuration set (such as your bounce on complaint rate) exceed
-    # certain thresholds.
+    # configuration set in a given Amazon Web Services Region. You can use
+    # this operation in conjunction with Amazon CloudWatch alarms to
+    # temporarily pause email sending for a configuration set when the
+    # reputation metrics for that configuration set (such as your bounce on
+    # complaint rate) exceed certain thresholds.
     #
     # You can execute this operation no more than once per second.
     #
     # @option params [required, String] :configuration_set_name
-    #   The name of the configuration set that you want to update.
+    #   The name of the configuration set to update.
     #
     # @option params [required, Boolean] :enabled
     #   Describes whether email sending is enabled or disabled for the
@@ -4661,11 +4662,10 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/configure-custom-open-click-domains.html
     #
     # @option params [required, String] :configuration_set_name
-    #   The name of the configuration set for which you want to update the
-    #   custom tracking domain.
+    #   The name of the configuration set.
     #
     # @option params [required, Types::TrackingOptions] :tracking_options
     #   A domain that is used to redirect email recipients to an Amazon
@@ -4677,7 +4677,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/configure-custom-open-click-domains.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4709,11 +4709,10 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom
     #
     # @option params [required, String] :template_name
-    #   The name of the custom verification email template that you want to
-    #   update.
+    #   The name of the custom verification email template to update.
     #
     # @option params [String] :from_email_address
     #   The email address that the custom verification email is sent from.
@@ -4729,7 +4728,7 @@ module Aws::SES
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html#custom-verification-emails-faq
+    #   [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom
     #
     # @option params [String] :success_redirection_url
     #   The URL that the recipient of the verification email is sent to if his
@@ -4770,7 +4769,7 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rules.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html
     #
     # @option params [required, String] :rule_set_name
     #   The name of the receipt rule set that the receipt rule belongs to.
@@ -4864,19 +4863,18 @@ module Aws::SES
     end
 
     # Updates an email template. Email templates enable you to send
-    # personalized email to one or more destinations in a single API
-    # operation. For more information, see the [Amazon SES Developer
-    # Guide][1].
+    # personalized email to one or more destinations in a single operation.
+    # For more information, see the [Amazon SES Developer Guide][1].
     #
     # You can execute this operation no more than once per second.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/send-personalized-email-api.html
     #
     # @option params [required, Types::Template] :template
-    #   The content of the email, composed of a subject line, an HTML part,
-    #   and a text-only part.
+    #   The content of the email, composed of a subject line and either an
+    #   HTML part or a text-only part.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4936,8 +4934,8 @@ module Aws::SES
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-domains.html
-    # [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#verify-domain-procedure
+    # [2]: https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy.html
     #
     # @option params [required, String] :domain
     #   The name of the domain to be verified for Easy DKIM signing.
@@ -4985,15 +4983,15 @@ module Aws::SES
     end
 
     # Adds a domain to the list of identities for your Amazon SES account in
-    # the current AWS Region and attempts to verify it. For more information
-    # about verifying domains, see [Verifying Email Addresses and
-    # Domains][1] in the *Amazon SES Developer Guide.*
+    # the current Amazon Web Services Region and attempts to verify it. For
+    # more information about verifying domains, see [Verifying Email
+    # Addresses and Domains][1] in the *Amazon SES Developer Guide.*
     #
     # You can execute this operation no more than once per second.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/dg/verify-addresses-and-domains.html
     #
     # @option params [required, String] :domain
     #   The domain to be verified.
@@ -5068,9 +5066,9 @@ module Aws::SES
     end
 
     # Adds an email address to the list of identities for your Amazon SES
-    # account in the current AWS region and attempts to verify it. As a
-    # result of executing this operation, a verification email is sent to
-    # the specified address.
+    # account in the current Amazon Web Services Region and attempts to
+    # verify it. As a result of executing this operation, a verification
+    # email is sent to the specified address.
     #
     # You can execute this operation no more than once per second.
     #
@@ -5116,7 +5114,7 @@ module Aws::SES
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ses'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

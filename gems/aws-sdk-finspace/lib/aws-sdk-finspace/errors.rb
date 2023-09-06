@@ -52,6 +52,11 @@ module Aws::Finspace
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class ConflictException < ServiceError
@@ -171,6 +176,11 @@ module Aws::Finspace
       # @param [Aws::Finspace::Types::ThrottlingException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

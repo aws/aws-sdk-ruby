@@ -102,6 +102,7 @@ module Aws::CloudTrail
   # * {ResourceTypeNotSupportedException}
   # * {S3BucketDoesNotExistException}
   # * {TagsLimitExceededException}
+  # * {ThrottlingException}
   # * {TrailAlreadyExistsException}
   # * {TrailNotFoundException}
   # * {TrailNotProvidedException}
@@ -858,6 +859,16 @@ module Aws::CloudTrail
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudTrail::Types::TagsLimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ThrottlingException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::ThrottlingException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

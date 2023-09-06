@@ -186,6 +186,8 @@ module Aws::ElastiCache
             Aws::ElastiCache::Endpoints::StartMigration.build(context)
           when :test_failover
             Aws::ElastiCache::Endpoints::TestFailover.build(context)
+          when :test_migration
+            Aws::ElastiCache::Endpoints::TestMigration.build(context)
           end
         end
       end

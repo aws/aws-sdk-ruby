@@ -459,11 +459,14 @@ module Aws::SWF
     DecisionTaskCompletedEventAttributes.add_member(:execution_context, Shapes::ShapeRef.new(shape: Data, location_name: "executionContext"))
     DecisionTaskCompletedEventAttributes.add_member(:scheduled_event_id, Shapes::ShapeRef.new(shape: EventId, required: true, location_name: "scheduledEventId"))
     DecisionTaskCompletedEventAttributes.add_member(:started_event_id, Shapes::ShapeRef.new(shape: EventId, required: true, location_name: "startedEventId"))
+    DecisionTaskCompletedEventAttributes.add_member(:task_list, Shapes::ShapeRef.new(shape: TaskList, location_name: "taskList"))
+    DecisionTaskCompletedEventAttributes.add_member(:task_list_schedule_to_start_timeout, Shapes::ShapeRef.new(shape: DurationInSecondsOptional, location_name: "taskListScheduleToStartTimeout"))
     DecisionTaskCompletedEventAttributes.struct_class = Types::DecisionTaskCompletedEventAttributes
 
     DecisionTaskScheduledEventAttributes.add_member(:task_list, Shapes::ShapeRef.new(shape: TaskList, required: true, location_name: "taskList"))
     DecisionTaskScheduledEventAttributes.add_member(:task_priority, Shapes::ShapeRef.new(shape: TaskPriority, location_name: "taskPriority"))
     DecisionTaskScheduledEventAttributes.add_member(:start_to_close_timeout, Shapes::ShapeRef.new(shape: DurationInSecondsOptional, location_name: "startToCloseTimeout"))
+    DecisionTaskScheduledEventAttributes.add_member(:schedule_to_start_timeout, Shapes::ShapeRef.new(shape: DurationInSecondsOptional, location_name: "scheduleToStartTimeout"))
     DecisionTaskScheduledEventAttributes.struct_class = Types::DecisionTaskScheduledEventAttributes
 
     DecisionTaskStartedEventAttributes.add_member(:identity, Shapes::ShapeRef.new(shape: Identity, location_name: "identity"))
@@ -826,6 +829,8 @@ module Aws::SWF
     RespondDecisionTaskCompletedInput.add_member(:task_token, Shapes::ShapeRef.new(shape: TaskToken, required: true, location_name: "taskToken"))
     RespondDecisionTaskCompletedInput.add_member(:decisions, Shapes::ShapeRef.new(shape: DecisionList, location_name: "decisions"))
     RespondDecisionTaskCompletedInput.add_member(:execution_context, Shapes::ShapeRef.new(shape: Data, location_name: "executionContext"))
+    RespondDecisionTaskCompletedInput.add_member(:task_list, Shapes::ShapeRef.new(shape: TaskList, location_name: "taskList"))
+    RespondDecisionTaskCompletedInput.add_member(:task_list_schedule_to_start_timeout, Shapes::ShapeRef.new(shape: DurationInSecondsOptional, location_name: "taskListScheduleToStartTimeout"))
     RespondDecisionTaskCompletedInput.struct_class = Types::RespondDecisionTaskCompletedInput
 
     Run.add_member(:run_id, Shapes::ShapeRef.new(shape: WorkflowRunId, location_name: "runId"))

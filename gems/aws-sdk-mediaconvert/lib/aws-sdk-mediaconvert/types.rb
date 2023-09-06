@@ -429,6 +429,11 @@ module Aws::MediaConvert
     #   Required when you set Codec to the value EAC3.
     #   @return [Types::Eac3Settings]
     #
+    # @!attribute [rw] flac_settings
+    #   Required when you set Codec, under AudioDescriptions>CodecSettings,
+    #   to the value FLAC.
+    #   @return [Types::FlacSettings]
+    #
     # @!attribute [rw] mp_2_settings
     #   Required when you set Codec to the value MP2.
     #   @return [Types::Mp2Settings]
@@ -461,6 +466,7 @@ module Aws::MediaConvert
       :codec,
       :eac_3_atmos_settings,
       :eac_3_settings,
+      :flac_settings,
       :mp_2_settings,
       :mp_3_settings,
       :opus_settings,
@@ -891,12 +897,13 @@ module Aws::MediaConvert
     # overall size of your ABR package.
     #
     # @!attribute [rw] max_abr_bitrate
-    #   Optional. The maximum target bit rate used in your automated ABR
-    #   stack. Use this value to set an upper limit on the bandwidth
-    #   consumed by the highest-quality rendition. This is the rendition
-    #   that is delivered to viewers with the fastest internet connections.
-    #   If you don't specify a value, MediaConvert uses 8,000,000 (8 mb/s)
-    #   by default.
+    #   Specify the maximum average bitrate for MediaConvert to use in your
+    #   automated ABR stack. If you don't specify a value, MediaConvert
+    #   uses 8,000,000 (8 mb/s) by default. The average bitrate of your
+    #   highest-quality rendition will be equal to or below this value,
+    #   depending on the quality, complexity, and resolution of your
+    #   content. Note that the instantaneous maximum bitrate may vary above
+    #   the value that you specify.
     #   @return [Integer]
     #
     # @!attribute [rw] max_renditions
@@ -909,10 +916,12 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] min_abr_bitrate
-    #   Optional. The minimum target bitrate used in your automated ABR
-    #   stack. Use this value to set a lower limit on the bitrate of video
-    #   delivered to viewers with slow internet connections. If you don't
-    #   specify a value, MediaConvert uses 600,000 (600 kb/s) by default.
+    #   Specify the minimum average bitrate for MediaConvert to use in your
+    #   automated ABR stack. If you don't specify a value, MediaConvert
+    #   uses 600,000 (600 kb/s) by default. The average bitrate of your
+    #   lowest-quality rendition will be near this value. Note that the
+    #   instantaneous minimum bitrate may vary below the value that you
+    #   specify.
     #   @return [Integer]
     #
     # @!attribute [rw] rules
@@ -1004,6 +1013,16 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] bit_depth
     #   Specify the Bit depth. You can choose 8-bit or 10-bit.
+    #   @return [String]
+    #
+    # @!attribute [rw] film_grain_synthesis
+    #   Film grain synthesis replaces film grain present in your content
+    #   with similar quality synthesized AV1 film grain. We recommend that
+    #   you choose Enabled to reduce the bandwidth of your QVBR quality
+    #   level 5, 6, 7, or 8 outputs. For QVBR quality level 9 or 10 outputs
+    #   we recommend that you keep the default value, Disabled. When you
+    #   include Film grain synthesis, you cannot include the Noise reducer
+    #   preprocessor.
     #   @return [String]
     #
     # @!attribute [rw] framerate_control
@@ -1115,6 +1134,7 @@ module Aws::MediaConvert
     class Av1Settings < Struct.new(
       :adaptive_quantization,
       :bit_depth,
+      :film_grain_synthesis,
       :framerate_control,
       :framerate_conversion_algorithm,
       :framerate_denominator,
@@ -4779,6 +4799,34 @@ module Aws::MediaConvert
       :source_file,
       :time_delta,
       :time_delta_units)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Required when you set Codec, under AudioDescriptions>CodecSettings, to
+    # the value FLAC.
+    #
+    # @!attribute [rw] bit_depth
+    #   Specify Bit depth (BitDepth), in bits per sample, to choose the
+    #   encoding quality for this audio track.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] channels
+    #   Specify the number of channels in this output audio track. Choosing
+    #   Mono on the console gives you 1 output channel; choosing Stereo
+    #   gives you 2. In the API, valid values are between 1 and 8.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sample_rate
+    #   Sample rate in hz.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/FlacSettings AWS API Documentation
+    #
+    class FlacSettings < Struct.new(
+      :bit_depth,
+      :channels,
+      :sample_rate)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8685,6 +8733,23 @@ module Aws::MediaConvert
     #   used for organizing data.
     #   @return [Integer]
     #
+    # @!attribute [rw] pts_offset
+    #   Manually specify the initial PTS offset, in seconds, when you set
+    #   PTS offset to Seconds. Enter an integer from 0 to 3600. Leave blank
+    #   to keep the default value 2.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pts_offset_mode
+    #   Specify the initial presentation timestamp (PTS) offset for your
+    #   transport stream output. To let MediaConvert automatically determine
+    #   the initial PTS offset: Keep the default value, Auto. We recommend
+    #   that you choose Auto for the widest player compatibility. The
+    #   initial PTS will be at least two seconds and vary depending on your
+    #   output's bitrate, HRD buffer size and HRD buffer initial fill
+    #   percentage. To manually specify an initial PTS offset: Choose
+    #   Seconds. Then specify the number of seconds with PTS offset.
+    #   @return [String]
+    #
     # @!attribute [rw] rate_mode
     #   When set to CBR, inserts null packets into transport stream to fill
     #   specified bitrate. When set to VBR, the bitrate setting acts as the
@@ -8796,6 +8861,8 @@ module Aws::MediaConvert
       :pmt_pid,
       :private_metadata_pid,
       :program_number,
+      :pts_offset,
+      :pts_offset_mode,
       :rate_mode,
       :scte_35_esam,
       :scte_35_pid,
@@ -8897,6 +8964,23 @@ module Aws::MediaConvert
     #   The value of the program number field in the Program Map Table.
     #   @return [Integer]
     #
+    # @!attribute [rw] pts_offset
+    #   Manually specify the initial PTS offset, in seconds, when you set
+    #   PTS offset to Seconds. Enter an integer from 0 to 3600. Leave blank
+    #   to keep the default value 2.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pts_offset_mode
+    #   Specify the initial presentation timestamp (PTS) offset for your
+    #   transport stream output. To let MediaConvert automatically determine
+    #   the initial PTS offset: Keep the default value, Auto. We recommend
+    #   that you choose Auto for the widest player compatibility. The
+    #   initial PTS will be at least two seconds and vary depending on your
+    #   output's bitrate, HRD buffer size and HRD buffer initial fill
+    #   percentage. To manually specify an initial PTS offset: Choose
+    #   Seconds. Then specify the number of seconds with PTS offset.
+    #   @return [String]
+    #
     # @!attribute [rw] scte_35_pid
     #   Packet Identifier (PID) of the SCTE-35 stream in the transport
     #   stream.
@@ -8951,6 +9035,8 @@ module Aws::MediaConvert
       :pmt_pid,
       :private_metadata_pid,
       :program_number,
+      :pts_offset,
+      :pts_offset_mode,
       :scte_35_pid,
       :scte_35_source,
       :timed_metadata,
@@ -11234,11 +11320,16 @@ module Aws::MediaConvert
     #   to Amazon S3.
     #   @return [Types::S3EncryptionSettings]
     #
+    # @!attribute [rw] storage_class
+    #   Specify the S3 storage class to use for this destination.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/S3DestinationSettings AWS API Documentation
     #
     class S3DestinationSettings < Struct.new(
       :access_control,
-      :encryption)
+      :encryption,
+      :storage_class)
       SENSITIVE = []
       include Aws::Structure
     end

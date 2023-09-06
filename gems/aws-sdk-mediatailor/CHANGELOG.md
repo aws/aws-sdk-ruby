@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2023-08-24)
+------------------
+
+* Feature - Adds new source location AUTODETECT_SIGV4 access type.
+
 1.68.0 (2023-07-13)
 ------------------
 

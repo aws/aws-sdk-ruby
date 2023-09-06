@@ -1015,22 +1015,22 @@ module Aws::CustomerProfiles
     #
     #   resp = client.create_profile({
     #     domain_name: "name", # required
-    #     account_number: "string1To255",
-    #     additional_information: "string1To1000",
+    #     account_number: "sensitiveString1To255",
+    #     additional_information: "sensitiveString1To1000",
     #     party_type: "INDIVIDUAL", # accepts INDIVIDUAL, BUSINESS, OTHER
-    #     business_name: "string1To255",
-    #     first_name: "string1To255",
-    #     middle_name: "string1To255",
-    #     last_name: "string1To255",
-    #     birth_date: "string1To255",
+    #     business_name: "sensitiveString1To255",
+    #     first_name: "sensitiveString1To255",
+    #     middle_name: "sensitiveString1To255",
+    #     last_name: "sensitiveString1To255",
+    #     birth_date: "sensitiveString1To255",
     #     gender: "MALE", # accepts MALE, FEMALE, UNSPECIFIED
-    #     phone_number: "string1To255",
-    #     mobile_phone_number: "string1To255",
-    #     home_phone_number: "string1To255",
-    #     business_phone_number: "string1To255",
-    #     email_address: "string1To255",
-    #     personal_email_address: "string1To255",
-    #     business_email_address: "string1To255",
+    #     phone_number: "sensitiveString1To255",
+    #     mobile_phone_number: "sensitiveString1To255",
+    #     home_phone_number: "sensitiveString1To255",
+    #     business_phone_number: "sensitiveString1To255",
+    #     email_address: "sensitiveString1To255",
+    #     personal_email_address: "sensitiveString1To255",
+    #     business_email_address: "sensitiveString1To255",
     #     address: {
     #       address_1: "string1To255",
     #       address_2: "string1To255",
@@ -1082,8 +1082,8 @@ module Aws::CustomerProfiles
     #     attributes: {
     #       "string1To255" => "string1To255",
     #     },
-    #     party_type_string: "string1To255",
-    #     gender_string: "string1To255",
+    #     party_type_string: "sensitiveString1To255",
+    #     gender_string: "sensitiveString1To255",
     #   })
     #
     # @example Response structure
@@ -3184,7 +3184,7 @@ module Aws::CustomerProfiles
     #   resp = client.put_profile_object_type({
     #     domain_name: "name", # required
     #     object_type_name: "typeName", # required
-    #     description: "text", # required
+    #     description: "sensitiveText", # required
     #     template_id: "name",
     #     expiration_days: 1,
     #     encryption_key: "encryptionKey",
@@ -3847,22 +3847,22 @@ module Aws::CustomerProfiles
     #   resp = client.update_profile({
     #     domain_name: "name", # required
     #     profile_id: "uuid", # required
-    #     additional_information: "string0To1000",
-    #     account_number: "string0To255",
+    #     additional_information: "sensitiveString0To1000",
+    #     account_number: "sensitiveString0To255",
     #     party_type: "INDIVIDUAL", # accepts INDIVIDUAL, BUSINESS, OTHER
-    #     business_name: "string0To255",
-    #     first_name: "string0To255",
-    #     middle_name: "string0To255",
-    #     last_name: "string0To255",
-    #     birth_date: "string0To255",
+    #     business_name: "sensitiveString0To255",
+    #     first_name: "sensitiveString0To255",
+    #     middle_name: "sensitiveString0To255",
+    #     last_name: "sensitiveString0To255",
+    #     birth_date: "sensitiveString0To255",
     #     gender: "MALE", # accepts MALE, FEMALE, UNSPECIFIED
-    #     phone_number: "string0To255",
-    #     mobile_phone_number: "string0To255",
-    #     home_phone_number: "string0To255",
-    #     business_phone_number: "string0To255",
-    #     email_address: "string0To255",
-    #     personal_email_address: "string0To255",
-    #     business_email_address: "string0To255",
+    #     phone_number: "sensitiveString0To255",
+    #     mobile_phone_number: "sensitiveString0To255",
+    #     home_phone_number: "sensitiveString0To255",
+    #     business_phone_number: "sensitiveString0To255",
+    #     email_address: "sensitiveString0To255",
+    #     personal_email_address: "sensitiveString0To255",
+    #     business_email_address: "sensitiveString0To255",
     #     address: {
     #       address_1: "string0To255",
     #       address_2: "string0To255",
@@ -3914,8 +3914,8 @@ module Aws::CustomerProfiles
     #     attributes: {
     #       "string1To255" => "string0To255",
     #     },
-    #     party_type_string: "string0To255",
-    #     gender_string: "string0To255",
+    #     party_type_string: "sensitiveString0To255",
+    #     gender_string: "sensitiveString0To255",
     #   })
     #
     # @example Response structure
@@ -3944,7 +3944,7 @@ module Aws::CustomerProfiles
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

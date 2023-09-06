@@ -29,8 +29,10 @@ module Aws::SageMakerRuntime
   # ## Error Classes
   # * {InternalDependencyException}
   # * {InternalFailure}
+  # * {InternalStreamFailure}
   # * {ModelError}
   # * {ModelNotReadyException}
+  # * {ModelStreamError}
   # * {ServiceUnavailable}
   # * {ValidationError}
   #
@@ -60,6 +62,21 @@ module Aws::SageMakerRuntime
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::SageMakerRuntime::Types::InternalFailure] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class InternalStreamFailure < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SageMakerRuntime::Types::InternalStreamFailure] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -112,6 +129,26 @@ module Aws::SageMakerRuntime
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class ModelStreamError < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SageMakerRuntime::Types::ModelStreamError] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def error_code
+        @data[:error_code]
       end
     end
 

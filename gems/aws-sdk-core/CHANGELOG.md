@@ -3,6 +3,16 @@ Unreleased Changes
 
 * Feature - Support `AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE` in `ECSCredentials` and allow for ECS and EKS link-local http addresses.
 
+3.181.0 (2023-08-22)
+------------------
+
+* Feature - Add support for `on_chunk_received` callback.
+
+3.180.3 (2023-08-09)
+------------------
+
+* Issue - Add support for sso-session names with whitespace configured by the CLI `aws sso configure` command (#2895).
+
 3.180.2 (2023-08-07)
 ------------------
 

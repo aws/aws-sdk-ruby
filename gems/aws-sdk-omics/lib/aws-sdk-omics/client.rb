@@ -414,6 +414,34 @@ module Aws::Omics
       req.send_request(options)
     end
 
+    # Accepts a share for an analytics store.
+    #
+    # @option params [required, String] :share_id
+    #   The ID for a share offer for analytics store data.
+    #
+    # @return [Types::AcceptShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AcceptShareResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_share({
+    #     share_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "PENDING", "ACTIVATING", "ACTIVE", "DELETING", "DELETED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/AcceptShare AWS API Documentation
+    #
+    # @overload accept_share(params = {})
+    # @param [Hash] params ({})
+    def accept_share(params = {}, options = {})
+      req = build_request(:accept_share, params)
+      req.send_request(options)
+    end
+
     # Deletes one or more read sets.
     #
     # @option params [required, Array<String>] :ids
@@ -572,6 +600,10 @@ module Aws::Omics
     # @option params [Hash<String,String>] :tags
     #   Tags for the store.
     #
+    # @option params [String] :version_name
+    #   The name given to an annotation store version to distinguish it from
+    #   other versions.
+    #
     # @option params [Types::SseConfig] :sse_config
     #   Server-side encryption (SSE) settings for the store.
     #
@@ -589,6 +621,7 @@ module Aws::Omics
     #   * {Types::CreateAnnotationStoreResponse#store_options #store_options} => Types::StoreOptions
     #   * {Types::CreateAnnotationStoreResponse#status #status} => String
     #   * {Types::CreateAnnotationStoreResponse#name #name} => String
+    #   * {Types::CreateAnnotationStoreResponse#version_name #version_name} => String
     #   * {Types::CreateAnnotationStoreResponse#creation_time #creation_time} => Time
     #
     # @example Request syntax with placeholder values
@@ -597,11 +630,12 @@ module Aws::Omics
     #     reference: {
     #       reference_arn: "ReferenceArn",
     #     },
-    #     name: "CreateAnnotationStoreRequestNameString",
-    #     description: "StoreDescription",
+    #     name: "StoreName",
+    #     description: "Description",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     version_name: "VersionName",
     #     sse_config: {
     #       type: "KMS", # required, accepts KMS
     #       key_arn: "SseConfigKeyArnString",
@@ -635,6 +669,7 @@ module Aws::Omics
     #   resp.store_options.tsv_store_options.schema[0]["SchemaItemKeyString"] #=> String, one of "LONG", "INT", "STRING", "FLOAT", "DOUBLE", "BOOLEAN"
     #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
     #   resp.name #=> String
+    #   resp.version_name #=> String
     #   resp.creation_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/CreateAnnotationStore AWS API Documentation
@@ -643,6 +678,83 @@ module Aws::Omics
     # @param [Hash] params ({})
     def create_annotation_store(params = {}, options = {})
       req = build_request(:create_annotation_store, params)
+      req.send_request(options)
+    end
+
+    # Creates a new version of an annotation store.
+    #
+    # @option params [required, String] :name
+    #   The name of an annotation store version from which versions are being
+    #   created.
+    #
+    # @option params [required, String] :version_name
+    #   The name given to an annotation store version to distinguish it from
+    #   other versions.
+    #
+    # @option params [String] :description
+    #   The description of an annotation store version.
+    #
+    # @option params [Types::VersionOptions] :version_options
+    #   The options for an annotation store version.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Any tags added to annotation store version.
+    #
+    # @return [Types::CreateAnnotationStoreVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAnnotationStoreVersionResponse#id #id} => String
+    #   * {Types::CreateAnnotationStoreVersionResponse#version_name #version_name} => String
+    #   * {Types::CreateAnnotationStoreVersionResponse#store_id #store_id} => String
+    #   * {Types::CreateAnnotationStoreVersionResponse#version_options #version_options} => Types::VersionOptions
+    #   * {Types::CreateAnnotationStoreVersionResponse#name #name} => String
+    #   * {Types::CreateAnnotationStoreVersionResponse#status #status} => String
+    #   * {Types::CreateAnnotationStoreVersionResponse#creation_time #creation_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_annotation_store_version({
+    #     name: "StoreName", # required
+    #     version_name: "VersionName", # required
+    #     description: "Description",
+    #     version_options: {
+    #       tsv_version_options: {
+    #         annotation_type: "GENERIC", # accepts GENERIC, CHR_POS, CHR_POS_REF_ALT, CHR_START_END_ONE_BASE, CHR_START_END_REF_ALT_ONE_BASE, CHR_START_END_ZERO_BASE, CHR_START_END_REF_ALT_ZERO_BASE
+    #         format_to_header: {
+    #           "CHR" => "FormatToHeaderValueString",
+    #         },
+    #         schema: [
+    #           {
+    #             "SchemaItemKeyString" => "LONG", # accepts LONG, INT, STRING, FLOAT, DOUBLE, BOOLEAN
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.version_name #=> String
+    #   resp.store_id #=> String
+    #   resp.version_options.tsv_version_options.annotation_type #=> String, one of "GENERIC", "CHR_POS", "CHR_POS_REF_ALT", "CHR_START_END_ONE_BASE", "CHR_START_END_REF_ALT_ONE_BASE", "CHR_START_END_ZERO_BASE", "CHR_START_END_REF_ALT_ZERO_BASE"
+    #   resp.version_options.tsv_version_options.format_to_header #=> Hash
+    #   resp.version_options.tsv_version_options.format_to_header["FormatToHeaderKey"] #=> String
+    #   resp.version_options.tsv_version_options.schema #=> Array
+    #   resp.version_options.tsv_version_options.schema[0] #=> Hash
+    #   resp.version_options.tsv_version_options.schema[0]["SchemaItemKeyString"] #=> String, one of "LONG", "INT", "STRING", "FLOAT", "DOUBLE", "BOOLEAN"
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
+    #   resp.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/CreateAnnotationStoreVersion AWS API Documentation
+    #
+    # @overload create_annotation_store_version(params = {})
+    # @param [Hash] params ({})
+    def create_annotation_store_version(params = {}, options = {})
+      req = build_request(:create_annotation_store_version, params)
       req.send_request(options)
     end
 
@@ -927,6 +1039,49 @@ module Aws::Omics
       req.send_request(options)
     end
 
+    # Creates a share offer that can be accepted outside the account by a
+    # subscriber. The share is created by the owner and accepted by the
+    # principal subscriber.
+    #
+    # @option params [required, String] :resource_arn
+    #   The resource ARN for the analytics store to be shared.
+    #
+    # @option params [required, String] :principal_subscriber
+    #   The principal subscriber is the account being given access to the
+    #   analytics store data through the share offer.
+    #
+    # @option params [String] :share_name
+    #   A name given to the share.
+    #
+    # @return [Types::CreateShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateShareResponse#share_id #share_id} => String
+    #   * {Types::CreateShareResponse#status #status} => String
+    #   * {Types::CreateShareResponse#share_name #share_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_share({
+    #     resource_arn: "String", # required
+    #     principal_subscriber: "String", # required
+    #     share_name: "ShareName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.share_id #=> String
+    #   resp.status #=> String, one of "PENDING", "ACTIVATING", "ACTIVE", "DELETING", "DELETED", "FAILED"
+    #   resp.share_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/CreateShare AWS API Documentation
+    #
+    # @overload create_share(params = {})
+    # @param [Hash] params ({})
+    def create_share(params = {}, options = {})
+      req = build_request(:create_share, params)
+      req.send_request(options)
+    end
+
     # Creates a variant store.
     #
     # @option params [required, Types::ReferenceItem] :reference
@@ -958,8 +1113,8 @@ module Aws::Omics
     #     reference: { # required
     #       reference_arn: "ReferenceArn",
     #     },
-    #     name: "CreateVariantStoreRequestNameString",
-    #     description: "StoreDescription",
+    #     name: "StoreName",
+    #     description: "Description",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1104,6 +1259,46 @@ module Aws::Omics
       req.send_request(options)
     end
 
+    # Deletes one or multiple versions of an annotation store.
+    #
+    # @option params [required, String] :name
+    #   The name of the annotation store from which versions are being
+    #   deleted.
+    #
+    # @option params [required, Array<String>] :versions
+    #   The versions of an annotation store to be deleted.
+    #
+    # @option params [Boolean] :force
+    #   Forces the deletion of an annotation store version when imports are
+    #   in-progress..
+    #
+    # @return [Types::DeleteAnnotationStoreVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteAnnotationStoreVersionsResponse#errors #errors} => Array&lt;Types::VersionDeleteError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_annotation_store_versions({
+    #     name: "String", # required
+    #     versions: ["VersionName"], # required
+    #     force: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].version_name #=> String
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/DeleteAnnotationStoreVersions AWS API Documentation
+    #
+    # @overload delete_annotation_store_versions(params = {})
+    # @param [Hash] params ({})
+    def delete_annotation_store_versions(params = {}, options = {})
+      req = build_request(:delete_annotation_store_versions, params)
+      req.send_request(options)
+    end
+
     # Deletes a genome reference.
     #
     # @option params [required, String] :id
@@ -1218,6 +1413,34 @@ module Aws::Omics
       req.send_request(options)
     end
 
+    # Deletes a share of an analytics store.
+    #
+    # @option params [required, String] :share_id
+    #   The ID for the share request to be deleted.
+    #
+    # @return [Types::DeleteShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteShareResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_share({
+    #     share_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "PENDING", "ACTIVATING", "ACTIVE", "DELETING", "DELETED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/DeleteShare AWS API Documentation
+    #
+    # @overload delete_share(params = {})
+    # @param [Hash] params ({})
+    def delete_share(params = {}, options = {})
+      req = build_request(:delete_share, params)
+      req.send_request(options)
+    end
+
     # Deletes a variant store.
     #
     # @option params [required, String] :name
@@ -1281,6 +1504,7 @@ module Aws::Omics
     #
     #   * {Types::GetAnnotationImportResponse#id #id} => String
     #   * {Types::GetAnnotationImportResponse#destination_name #destination_name} => String
+    #   * {Types::GetAnnotationImportResponse#version_name #version_name} => String
     #   * {Types::GetAnnotationImportResponse#role_arn #role_arn} => String
     #   * {Types::GetAnnotationImportResponse#status #status} => String
     #   * {Types::GetAnnotationImportResponse#status_message #status_message} => String
@@ -1302,6 +1526,7 @@ module Aws::Omics
     #
     #   resp.id #=> String
     #   resp.destination_name #=> String
+    #   resp.version_name #=> String
     #   resp.role_arn #=> String
     #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED", "COMPLETED_WITH_FAILURES"
     #   resp.status_message #=> String
@@ -1361,6 +1586,7 @@ module Aws::Omics
     #   * {Types::GetAnnotationStoreResponse#store_format #store_format} => String
     #   * {Types::GetAnnotationStoreResponse#status_message #status_message} => String
     #   * {Types::GetAnnotationStoreResponse#store_size_bytes #store_size_bytes} => Integer
+    #   * {Types::GetAnnotationStoreResponse#num_versions #num_versions} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -1391,6 +1617,7 @@ module Aws::Omics
     #   resp.store_format #=> String, one of "GFF", "TSV", "VCF"
     #   resp.status_message #=> String
     #   resp.store_size_bytes #=> Integer
+    #   resp.num_versions #=> Integer
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1404,6 +1631,76 @@ module Aws::Omics
     # @param [Hash] params ({})
     def get_annotation_store(params = {}, options = {})
       req = build_request(:get_annotation_store, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the metadata for an annotation store version.
+    #
+    # @option params [required, String] :name
+    #   The name given to an annotation store version to distinguish it from
+    #   others.
+    #
+    # @option params [required, String] :version_name
+    #   The name given to an annotation store version to distinguish it from
+    #   others.
+    #
+    # @return [Types::GetAnnotationStoreVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAnnotationStoreVersionResponse#store_id #store_id} => String
+    #   * {Types::GetAnnotationStoreVersionResponse#id #id} => String
+    #   * {Types::GetAnnotationStoreVersionResponse#status #status} => String
+    #   * {Types::GetAnnotationStoreVersionResponse#version_arn #version_arn} => String
+    #   * {Types::GetAnnotationStoreVersionResponse#name #name} => String
+    #   * {Types::GetAnnotationStoreVersionResponse#version_name #version_name} => String
+    #   * {Types::GetAnnotationStoreVersionResponse#description #description} => String
+    #   * {Types::GetAnnotationStoreVersionResponse#creation_time #creation_time} => Time
+    #   * {Types::GetAnnotationStoreVersionResponse#update_time #update_time} => Time
+    #   * {Types::GetAnnotationStoreVersionResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetAnnotationStoreVersionResponse#version_options #version_options} => Types::VersionOptions
+    #   * {Types::GetAnnotationStoreVersionResponse#status_message #status_message} => String
+    #   * {Types::GetAnnotationStoreVersionResponse#version_size_bytes #version_size_bytes} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_annotation_store_version({
+    #     name: "String", # required
+    #     version_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.store_id #=> String
+    #   resp.id #=> String
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
+    #   resp.version_arn #=> String
+    #   resp.name #=> String
+    #   resp.version_name #=> String
+    #   resp.description #=> String
+    #   resp.creation_time #=> Time
+    #   resp.update_time #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.version_options.tsv_version_options.annotation_type #=> String, one of "GENERIC", "CHR_POS", "CHR_POS_REF_ALT", "CHR_START_END_ONE_BASE", "CHR_START_END_REF_ALT_ONE_BASE", "CHR_START_END_ZERO_BASE", "CHR_START_END_REF_ALT_ZERO_BASE"
+    #   resp.version_options.tsv_version_options.format_to_header #=> Hash
+    #   resp.version_options.tsv_version_options.format_to_header["FormatToHeaderKey"] #=> String
+    #   resp.version_options.tsv_version_options.schema #=> Array
+    #   resp.version_options.tsv_version_options.schema[0] #=> Hash
+    #   resp.version_options.tsv_version_options.schema[0]["SchemaItemKeyString"] #=> String, one of "LONG", "INT", "STRING", "FLOAT", "DOUBLE", "BOOLEAN"
+    #   resp.status_message #=> String
+    #   resp.version_size_bytes #=> Integer
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * annotation_store_version_created
+    #   * annotation_store_version_deleted
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetAnnotationStoreVersion AWS API Documentation
+    #
+    # @overload get_annotation_store_version(params = {})
+    # @param [Hash] params ({})
+    def get_annotation_store_version(params = {}, options = {})
+      req = build_request(:get_annotation_store_version, params)
       req.send_request(options)
     end
 
@@ -1918,6 +2215,7 @@ module Aws::Omics
     #   * {Types::GetRunResponse#status_message #status_message} => String
     #   * {Types::GetRunResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetRunResponse#accelerators #accelerators} => String
+    #   * {Types::GetRunResponse#retention_mode #retention_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1953,6 +2251,7 @@ module Aws::Omics
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.accelerators #=> String, one of "GPU"
+    #   resp.retention_mode #=> String, one of "RETAIN", "REMOVE"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2035,6 +2334,7 @@ module Aws::Omics
     #   * {Types::GetRunTaskResponse#status_message #status_message} => String
     #   * {Types::GetRunTaskResponse#log_stream #log_stream} => String
     #   * {Types::GetRunTaskResponse#gpus #gpus} => Integer
+    #   * {Types::GetRunTaskResponse#instance_type #instance_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2056,6 +2356,7 @@ module Aws::Omics
     #   resp.status_message #=> String
     #   resp.log_stream #=> String
     #   resp.gpus #=> Integer
+    #   resp.instance_type #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2110,6 +2411,42 @@ module Aws::Omics
     # @param [Hash] params ({})
     def get_sequence_store(params = {}, options = {})
       req = build_request(:get_sequence_store, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the metadata for a share.
+    #
+    # @option params [required, String] :share_id
+    #   The generated ID for a share.
+    #
+    # @return [Types::GetShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetShareResponse#share #share} => Types::ShareDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_share({
+    #     share_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.share.share_id #=> String
+    #   resp.share.resource_arn #=> String
+    #   resp.share.principal_subscriber #=> String
+    #   resp.share.owner_id #=> String
+    #   resp.share.status #=> String, one of "PENDING", "ACTIVATING", "ACTIVE", "DELETING", "DELETED", "FAILED"
+    #   resp.share.status_message #=> String
+    #   resp.share.share_name #=> String
+    #   resp.share.creation_time #=> Time
+    #   resp.share.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetShare AWS API Documentation
+    #
+    # @overload get_share(params = {})
+    # @param [Hash] params ({})
+    def get_share(params = {}, options = {})
+      req = build_request(:get_share, params)
       req.send_request(options)
     end
 
@@ -2314,7 +2651,7 @@ module Aws::Omics
     #   IDs of annotation import jobs to retrieve.
     #
     # @option params [String] :next_token
-    #   Specify the pagination token from a previous request to retrieve the
+    #   Specifies the pagination token from a previous request to retrieve the
     #   next page of results.
     #
     # @option params [Types::ListAnnotationImportJobsFilter] :filter
@@ -2344,6 +2681,7 @@ module Aws::Omics
     #   resp.annotation_import_jobs #=> Array
     #   resp.annotation_import_jobs[0].id #=> String
     #   resp.annotation_import_jobs[0].destination_name #=> String
+    #   resp.annotation_import_jobs[0].version_name #=> String
     #   resp.annotation_import_jobs[0].role_arn #=> String
     #   resp.annotation_import_jobs[0].status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED", "COMPLETED_WITH_FAILURES"
     #   resp.annotation_import_jobs[0].creation_time #=> Time
@@ -2360,6 +2698,65 @@ module Aws::Omics
     # @param [Hash] params ({})
     def list_annotation_import_jobs(params = {}, options = {})
       req = build_request(:list_annotation_import_jobs, params)
+      req.send_request(options)
+    end
+
+    # Lists the versions of an annotation store.
+    #
+    # @option params [required, String] :name
+    #   The name of an annotation store.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of annotation store versions to return in one page
+    #   of results.
+    #
+    # @option params [String] :next_token
+    #   Specifies the pagination token from a previous request to retrieve the
+    #   next page of results.
+    #
+    # @option params [Types::ListAnnotationStoreVersionsFilter] :filter
+    #   A filter to apply to the list of annotation store versions.
+    #
+    # @return [Types::ListAnnotationStoreVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAnnotationStoreVersionsResponse#annotation_store_versions #annotation_store_versions} => Array&lt;Types::AnnotationStoreVersionItem&gt;
+    #   * {Types::ListAnnotationStoreVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_annotation_store_versions({
+    #     name: "String", # required
+    #     max_results: 1,
+    #     next_token: "ListAnnotationStoreVersionsRequestNextTokenString",
+    #     filter: {
+    #       status: "CREATING", # accepts CREATING, UPDATING, DELETING, ACTIVE, FAILED
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.annotation_store_versions #=> Array
+    #   resp.annotation_store_versions[0].store_id #=> String
+    #   resp.annotation_store_versions[0].id #=> String
+    #   resp.annotation_store_versions[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
+    #   resp.annotation_store_versions[0].version_arn #=> String
+    #   resp.annotation_store_versions[0].name #=> String
+    #   resp.annotation_store_versions[0].version_name #=> String
+    #   resp.annotation_store_versions[0].description #=> String
+    #   resp.annotation_store_versions[0].creation_time #=> Time
+    #   resp.annotation_store_versions[0].update_time #=> Time
+    #   resp.annotation_store_versions[0].status_message #=> String
+    #   resp.annotation_store_versions[0].version_size_bytes #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListAnnotationStoreVersions AWS API Documentation
+    #
+    # @overload list_annotation_store_versions(params = {})
+    # @param [Hash] params ({})
+    def list_annotation_store_versions(params = {}, options = {})
+      req = build_request(:list_annotation_store_versions, params)
       req.send_request(options)
     end
 
@@ -3037,6 +3434,7 @@ module Aws::Omics
     #   resp.items[0].start_time #=> Time
     #   resp.items[0].stop_time #=> Time
     #   resp.items[0].gpus #=> Integer
+    #   resp.items[0].instance_type #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListRunTasks AWS API Documentation
@@ -3157,6 +3555,64 @@ module Aws::Omics
     # @param [Hash] params ({})
     def list_sequence_stores(params = {}, options = {})
       req = build_request(:list_sequence_stores, params)
+      req.send_request(options)
+    end
+
+    # Lists all shares associated with an account.
+    #
+    # @option params [required, String] :resource_owner
+    #   The account that owns the analytics store shared.
+    #
+    # @option params [Types::Filter] :filter
+    #   Attributes used to filter for a specific subset of shares.
+    #
+    # @option params [String] :next_token
+    #   Next token returned in the response of a previous
+    #   ListReadSetUploadPartsRequest call. Used to get the next page of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of shares to return in one page of results.
+    #
+    # @return [Types::ListSharesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSharesResponse#shares #shares} => Array&lt;Types::ShareDetails&gt;
+    #   * {Types::ListSharesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_shares({
+    #     resource_owner: "SELF", # required, accepts SELF, OTHER
+    #     filter: {
+    #       resource_arns: ["String"],
+    #       status: ["PENDING"], # accepts PENDING, ACTIVATING, ACTIVE, DELETING, DELETED, FAILED
+    #     },
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.shares #=> Array
+    #   resp.shares[0].share_id #=> String
+    #   resp.shares[0].resource_arn #=> String
+    #   resp.shares[0].principal_subscriber #=> String
+    #   resp.shares[0].owner_id #=> String
+    #   resp.shares[0].status #=> String, one of "PENDING", "ACTIVATING", "ACTIVE", "DELETING", "DELETED", "FAILED"
+    #   resp.shares[0].status_message #=> String
+    #   resp.shares[0].share_name #=> String
+    #   resp.shares[0].creation_time #=> Time
+    #   resp.shares[0].update_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListShares AWS API Documentation
+    #
+    # @overload list_shares(params = {})
+    # @param [Hash] params ({})
+    def list_shares(params = {}, options = {})
+      req = build_request(:list_shares, params)
       req.send_request(options)
     end
 
@@ -3371,6 +3827,9 @@ module Aws::Omics
     # @option params [required, Array<Types::AnnotationImportItemSource>] :items
     #   Items to import.
     #
+    # @option params [String] :version_name
+    #   The name of the annotation store version.
+    #
     # @option params [Types::FormatOptions] :format_options
     #   Formatting options for the annotation file.
     #
@@ -3394,6 +3853,7 @@ module Aws::Omics
     #         source: "S3Uri", # required
     #       },
     #     ],
+    #     version_name: "VersionName",
     #     format_options: {
     #       tsv_options: {
     #         read_options: {
@@ -3661,16 +4121,22 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Starts a run.
+    # Starts a workflow run. To duplicate a run, specify the run's ID and a
+    # role ARN. The remaining parameters are copied from the previous run.
+    #
+    # The total number of runs in your account is subject to a quota per
+    # Region. To avoid needing to delete runs manually, you can set the
+    # retention mode to `REMOVE`. Runs with this setting are deleted
+    # automatically when the run quoata is exceeded.
     #
     # @option params [String] :workflow_id
     #   The run's workflow ID.
     #
     # @option params [String] :workflow_type
-    #   The run's workflows type.
+    #   The run's workflow type.
     #
     # @option params [String] :run_id
-    #   The run's ID.
+    #   The ID of a run to duplicate.
     #
     # @option params [required, String] :role_arn
     #   A service role for the run.
@@ -3711,6 +4177,9 @@ module Aws::Omics
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :retention_mode
+    #   The retention mode for the run.
+    #
     # @return [Types::StartRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartRunResponse#arn #arn} => String
@@ -3737,6 +4206,7 @@ module Aws::Omics
     #       "TagKey" => "TagValue",
     #     },
     #     request_id: "RunRequestId", # required
+    #     retention_mode: "RETAIN", # accepts RETAIN, REMOVE
     #   })
     #
     # @example Response structure
@@ -3884,7 +4354,7 @@ module Aws::Omics
     #
     #   resp = client.update_annotation_store({
     #     name: "String", # required
-    #     description: "StoreDescription",
+    #     description: "Description",
     #   })
     #
     # @example Response structure
@@ -3910,6 +4380,56 @@ module Aws::Omics
     # @param [Hash] params ({})
     def update_annotation_store(params = {}, options = {})
       req = build_request(:update_annotation_store, params)
+      req.send_request(options)
+    end
+
+    # Updates the description of an annotation store version.
+    #
+    # @option params [required, String] :name
+    #   The name of an annotation store.
+    #
+    # @option params [required, String] :version_name
+    #   The name of an annotation store version.
+    #
+    # @option params [String] :description
+    #   The description of an annotation store.
+    #
+    # @return [Types::UpdateAnnotationStoreVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAnnotationStoreVersionResponse#store_id #store_id} => String
+    #   * {Types::UpdateAnnotationStoreVersionResponse#id #id} => String
+    #   * {Types::UpdateAnnotationStoreVersionResponse#status #status} => String
+    #   * {Types::UpdateAnnotationStoreVersionResponse#name #name} => String
+    #   * {Types::UpdateAnnotationStoreVersionResponse#version_name #version_name} => String
+    #   * {Types::UpdateAnnotationStoreVersionResponse#description #description} => String
+    #   * {Types::UpdateAnnotationStoreVersionResponse#creation_time #creation_time} => Time
+    #   * {Types::UpdateAnnotationStoreVersionResponse#update_time #update_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_annotation_store_version({
+    #     name: "String", # required
+    #     version_name: "String", # required
+    #     description: "Description",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.store_id #=> String
+    #   resp.id #=> String
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
+    #   resp.name #=> String
+    #   resp.version_name #=> String
+    #   resp.description #=> String
+    #   resp.creation_time #=> Time
+    #   resp.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/UpdateAnnotationStoreVersion AWS API Documentation
+    #
+    # @overload update_annotation_store_version(params = {})
+    # @param [Hash] params ({})
+    def update_annotation_store_version(params = {}, options = {})
+      req = build_request(:update_annotation_store_version, params)
       req.send_request(options)
     end
 
@@ -3977,7 +4497,7 @@ module Aws::Omics
     #
     #   resp = client.update_variant_store({
     #     name: "String", # required
-    #     description: "StoreDescription",
+    #     description: "Description",
     #   })
     #
     # @example Response structure
@@ -4088,7 +4608,7 @@ module Aws::Omics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -4154,23 +4674,25 @@ module Aws::Omics
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name                       | params                               | :delay   | :max_attempts |
-    # | --------------------------------- | ------------------------------------ | -------- | ------------- |
-    # | annotation_import_job_created     | {Client#get_annotation_import_job}   | 30       | 20            |
-    # | annotation_store_created          | {Client#get_annotation_store}        | 30       | 20            |
-    # | annotation_store_deleted          | {Client#get_annotation_store}        | 30       | 20            |
-    # | read_set_activation_job_completed | {Client#get_read_set_activation_job} | 30       | 20            |
-    # | read_set_export_job_completed     | {Client#get_read_set_export_job}     | 30       | 20            |
-    # | read_set_import_job_completed     | {Client#get_read_set_import_job}     | 30       | 20            |
-    # | reference_import_job_completed    | {Client#get_reference_import_job}    | 30       | 20            |
-    # | run_completed                     | {Client#get_run}                     | 30       | 20            |
-    # | run_running                       | {Client#get_run}                     | 30       | 20            |
-    # | task_completed                    | {Client#get_run_task}                | 30       | 20            |
-    # | task_running                      | {Client#get_run_task}                | 30       | 20            |
-    # | variant_import_job_created        | {Client#get_variant_import_job}      | 30       | 20            |
-    # | variant_store_created             | {Client#get_variant_store}           | 30       | 20            |
-    # | variant_store_deleted             | {Client#get_variant_store}           | 30       | 20            |
-    # | workflow_active                   | {Client#get_workflow}                | 3        | 10            |
+    # | waiter_name                       | params                                | :delay   | :max_attempts |
+    # | --------------------------------- | ------------------------------------- | -------- | ------------- |
+    # | annotation_import_job_created     | {Client#get_annotation_import_job}    | 30       | 20            |
+    # | annotation_store_created          | {Client#get_annotation_store}         | 30       | 20            |
+    # | annotation_store_deleted          | {Client#get_annotation_store}         | 30       | 20            |
+    # | annotation_store_version_created  | {Client#get_annotation_store_version} | 30       | 20            |
+    # | annotation_store_version_deleted  | {Client#get_annotation_store_version} | 30       | 20            |
+    # | read_set_activation_job_completed | {Client#get_read_set_activation_job}  | 30       | 20            |
+    # | read_set_export_job_completed     | {Client#get_read_set_export_job}      | 30       | 20            |
+    # | read_set_import_job_completed     | {Client#get_read_set_import_job}      | 30       | 20            |
+    # | reference_import_job_completed    | {Client#get_reference_import_job}     | 30       | 20            |
+    # | run_completed                     | {Client#get_run}                      | 30       | 20            |
+    # | run_running                       | {Client#get_run}                      | 30       | 20            |
+    # | task_completed                    | {Client#get_run_task}                 | 30       | 20            |
+    # | task_running                      | {Client#get_run_task}                 | 30       | 20            |
+    # | variant_import_job_created        | {Client#get_variant_import_job}       | 30       | 20            |
+    # | variant_store_created             | {Client#get_variant_store}            | 30       | 20            |
+    # | variant_store_deleted             | {Client#get_variant_store}            | 30       | 20            |
+    # | workflow_active                   | {Client#get_workflow}                 | 3        | 10            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -4224,6 +4746,8 @@ module Aws::Omics
         annotation_import_job_created: Waiters::AnnotationImportJobCreated,
         annotation_store_created: Waiters::AnnotationStoreCreated,
         annotation_store_deleted: Waiters::AnnotationStoreDeleted,
+        annotation_store_version_created: Waiters::AnnotationStoreVersionCreated,
+        annotation_store_version_deleted: Waiters::AnnotationStoreVersionDeleted,
         read_set_activation_job_completed: Waiters::ReadSetActivationJobCompleted,
         read_set_export_job_completed: Waiters::ReadSetExportJobCompleted,
         read_set_import_job_completed: Waiters::ReadSetImportJobCompleted,

@@ -21,6 +21,7 @@ module Aws::MediaLive
     AacSettings = Shapes::StructureShape.new(name: 'AacSettings')
     AacSpec = Shapes::StringShape.new(name: 'AacSpec')
     AacVbrQuality = Shapes::StringShape.new(name: 'AacVbrQuality')
+    Ac3AttenuationControl = Shapes::StringShape.new(name: 'Ac3AttenuationControl')
     Ac3BitstreamMode = Shapes::StringShape.new(name: 'Ac3BitstreamMode')
     Ac3CodingMode = Shapes::StringShape.new(name: 'Ac3CodingMode')
     Ac3DrcProfile = Shapes::StringShape.new(name: 'Ac3DrcProfile')
@@ -350,6 +351,7 @@ module Aws::MediaLive
     HtmlMotionGraphicsSettings = Shapes::StructureShape.new(name: 'HtmlMotionGraphicsSettings')
     IFrameOnlyPlaylistType = Shapes::StringShape.new(name: 'IFrameOnlyPlaylistType')
     ImmediateModeScheduleActionStartSettings = Shapes::StructureShape.new(name: 'ImmediateModeScheduleActionStartSettings')
+    IncludeFillerNalUnits = Shapes::StringShape.new(name: 'IncludeFillerNalUnits')
     Input = Shapes::StructureShape.new(name: 'Input')
     InputAttachment = Shapes::StructureShape.new(name: 'InputAttachment')
     InputChannelLevel = Shapes::StructureShape.new(name: 'InputChannelLevel')
@@ -464,6 +466,7 @@ module Aws::MediaLive
     M2tsSegmentationStyle = Shapes::StringShape.new(name: 'M2tsSegmentationStyle')
     M2tsSettings = Shapes::StructureShape.new(name: 'M2tsSettings')
     M2tsTimedMetadataBehavior = Shapes::StringShape.new(name: 'M2tsTimedMetadataBehavior')
+    M3u8KlvBehavior = Shapes::StringShape.new(name: 'M3u8KlvBehavior')
     M3u8NielsenId3Behavior = Shapes::StringShape.new(name: 'M3u8NielsenId3Behavior')
     M3u8PcrControl = Shapes::StringShape.new(name: 'M3u8PcrControl')
     M3u8Scte35Behavior = Shapes::StringShape.new(name: 'M3u8Scte35Behavior')
@@ -877,6 +880,7 @@ module Aws::MediaLive
     Ac3Settings.add_member(:drc_profile, Shapes::ShapeRef.new(shape: Ac3DrcProfile, location_name: "drcProfile"))
     Ac3Settings.add_member(:lfe_filter, Shapes::ShapeRef.new(shape: Ac3LfeFilter, location_name: "lfeFilter"))
     Ac3Settings.add_member(:metadata_control, Shapes::ShapeRef.new(shape: Ac3MetadataControl, location_name: "metadataControl"))
+    Ac3Settings.add_member(:attenuation_control, Shapes::ShapeRef.new(shape: Ac3AttenuationControl, location_name: "attenuationControl"))
     Ac3Settings.struct_class = Types::Ac3Settings
 
     AcceptInputDeviceTransferRequest.add_member(:input_device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputDeviceId"))
@@ -2448,6 +2452,8 @@ module Aws::MediaLive
     M3u8Settings.add_member(:timed_metadata_pid, Shapes::ShapeRef.new(shape: __string, location_name: "timedMetadataPid"))
     M3u8Settings.add_member(:transport_stream_id, Shapes::ShapeRef.new(shape: __integerMin0Max65535, location_name: "transportStreamId"))
     M3u8Settings.add_member(:video_pid, Shapes::ShapeRef.new(shape: __string, location_name: "videoPid"))
+    M3u8Settings.add_member(:klv_behavior, Shapes::ShapeRef.new(shape: M3u8KlvBehavior, location_name: "klvBehavior"))
+    M3u8Settings.add_member(:klv_data_pids, Shapes::ShapeRef.new(shape: __string, location_name: "klvDataPids"))
     M3u8Settings.struct_class = Types::M3u8Settings
 
     MaintenanceCreateSettings.add_member(:maintenance_day, Shapes::ShapeRef.new(shape: MaintenanceDay, location_name: "maintenanceDay"))
@@ -2845,6 +2851,7 @@ module Aws::MediaLive
     RtmpGroupSettings.add_member(:caption_data, Shapes::ShapeRef.new(shape: RtmpCaptionData, location_name: "captionData"))
     RtmpGroupSettings.add_member(:input_loss_action, Shapes::ShapeRef.new(shape: InputLossActionForRtmpOut, location_name: "inputLossAction"))
     RtmpGroupSettings.add_member(:restart_delay, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "restartDelay"))
+    RtmpGroupSettings.add_member(:include_filler_nal_units, Shapes::ShapeRef.new(shape: IncludeFillerNalUnits, location_name: "includeFillerNalUnits"))
     RtmpGroupSettings.struct_class = Types::RtmpGroupSettings
 
     RtmpOutputSettings.add_member(:certificate_mode, Shapes::ShapeRef.new(shape: RtmpOutputCertificateMode, location_name: "certificateMode"))

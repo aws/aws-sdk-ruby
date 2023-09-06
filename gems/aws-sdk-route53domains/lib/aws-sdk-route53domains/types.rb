@@ -37,7 +37,7 @@ module Aws::Route53Domains
     class AcceptDomainTransferFromAnotherAwsAccountRequest < Struct.new(
       :domain_name,
       :password)
-      SENSITIVE = []
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -332,10 +332,15 @@ module Aws::Route53Domains
     #   domain can be transferred to Route 53.
     #   @return [Types::DomainTransferability]
     #
+    # @!attribute [rw] message
+    #   Provides an explanation for when a domain can't be transferred.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/CheckDomainTransferabilityResponse AWS API Documentation
     #
     class CheckDomainTransferabilityResponse < Struct.new(
-      :transferability)
+      :transferability,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -461,7 +466,7 @@ module Aws::Route53Domains
       :email,
       :fax,
       :extra_params)
-      SENSITIVE = []
+      SENSITIVE = [:first_name, :last_name, :organization_name, :address_line_1, :address_line_2, :city, :state, :country_code, :zip_code, :phone_number, :email, :fax]
       include Aws::Structure
     end
 
@@ -954,6 +959,10 @@ module Aws::Route53Domains
 
     # The request is already in progress for the domain.
     #
+    # @!attribute [rw] request_id
+    #   ID of the request operation.
+    #   @return [String]
+    #
     # @!attribute [rw] message
     #   The request is already in progress for the domain.
     #   @return [String]
@@ -961,6 +970,7 @@ module Aws::Route53Domains
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DuplicateRequest AWS API Documentation
     #
     class DuplicateRequest < Struct.new(
+      :request_id,
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -1659,7 +1669,7 @@ module Aws::Route53Domains
       :dns_sec,
       :status_list,
       :dnssec_keys)
-      SENSITIVE = [:admin_contact, :registrant_contact, :tech_contact]
+      SENSITIVE = [:admin_contact, :registrant_contact, :tech_contact, :abuse_contact_email, :abuse_contact_phone]
       include Aws::Structure
     end
 
@@ -1942,7 +1952,7 @@ module Aws::Route53Domains
     #   @return [String]
     #
     # @!attribute [rw] sort_order
-    #   The sort order ofr returned values, either ascending or descending.
+    #   The sort order for returned values, either ascending or descending.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListOperationsRequest AWS API Documentation
@@ -2516,7 +2526,7 @@ module Aws::Route53Domains
       :domain_name,
       :email_address,
       :is_already_verified)
-      SENSITIVE = []
+      SENSITIVE = [:email_address]
       include Aws::Structure
     end
 
@@ -2834,7 +2844,7 @@ module Aws::Route53Domains
     class TransferDomainToAnotherAwsAccountResponse < Struct.new(
       :operation_id,
       :password)
-      SENSITIVE = []
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
