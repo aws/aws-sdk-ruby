@@ -110,7 +110,7 @@ module Aws
       uri = URI.parse(endpoint)
       validate_full_uri_scheme!(uri)
       validate_full_uri!(uri)
-      @host = uri.host
+      @host = uri.hostname
       @port = uri.port
       @scheme = uri.scheme
       @credential_path = uri.request_uri
