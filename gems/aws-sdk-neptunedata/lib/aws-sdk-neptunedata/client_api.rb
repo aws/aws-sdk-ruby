@@ -996,7 +996,6 @@ module Aws::Neptunedata
         o.name = "CancelGremlinQuery"
         o.http_method = "DELETE"
         o.http_request_uri = "/gremlin/status/{queryId}"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: CancelGremlinQueryInput)
         o.output = Shapes::ShapeRef.new(shape: CancelGremlinQueryOutput)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -1019,7 +1018,6 @@ module Aws::Neptunedata
         o.name = "CancelLoaderJob"
         o.http_method = "DELETE"
         o.http_request_uri = "/loader/{loadId}"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: CancelLoaderJobInput)
         o.output = Shapes::ShapeRef.new(shape: CancelLoaderJobOutput)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -1041,7 +1039,6 @@ module Aws::Neptunedata
         o.name = "CancelMLDataProcessingJob"
         o.http_method = "DELETE"
         o.http_request_uri = "/ml/dataprocessing/{id}"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: CancelMLDataProcessingJobInput)
         o.output = Shapes::ShapeRef.new(shape: CancelMLDataProcessingJobOutput)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
@@ -1061,7 +1058,6 @@ module Aws::Neptunedata
         o.name = "CancelMLModelTrainingJob"
         o.http_method = "DELETE"
         o.http_request_uri = "/ml/modeltraining/{id}"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: CancelMLModelTrainingJobInput)
         o.output = Shapes::ShapeRef.new(shape: CancelMLModelTrainingJobOutput)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
@@ -1081,7 +1077,6 @@ module Aws::Neptunedata
         o.name = "CancelMLModelTransformJob"
         o.http_method = "DELETE"
         o.http_request_uri = "/ml/modeltransform/{id}"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: CancelMLModelTransformJobInput)
         o.output = Shapes::ShapeRef.new(shape: CancelMLModelTransformJobOutput)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
@@ -1101,7 +1096,6 @@ module Aws::Neptunedata
         o.name = "CancelOpenCypherQuery"
         o.http_method = "DELETE"
         o.http_request_uri = "/opencypher/status/{queryId}"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: CancelOpenCypherQueryInput)
         o.output = Shapes::ShapeRef.new(shape: CancelOpenCypherQueryOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNumericDataException)
@@ -1125,7 +1119,6 @@ module Aws::Neptunedata
         o.name = "CreateMLEndpoint"
         o.http_method = "POST"
         o.http_request_uri = "/ml/endpoints"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: CreateMLEndpointInput)
         o.output = Shapes::ShapeRef.new(shape: CreateMLEndpointOutput)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
@@ -1145,7 +1138,6 @@ module Aws::Neptunedata
         o.name = "DeleteMLEndpoint"
         o.http_method = "DELETE"
         o.http_request_uri = "/ml/endpoints/{id}"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: DeleteMLEndpointInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteMLEndpointOutput)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
@@ -1165,7 +1157,6 @@ module Aws::Neptunedata
         o.name = "DeletePropertygraphStatistics"
         o.http_method = "DELETE"
         o.http_request_uri = "/propertygraph/statistics"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.output = Shapes::ShapeRef.new(shape: DeletePropertygraphStatisticsOutput)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -1187,7 +1178,6 @@ module Aws::Neptunedata
         o.name = "DeleteSparqlStatistics"
         o.http_method = "DELETE"
         o.http_request_uri = "/sparql/statistics"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.output = Shapes::ShapeRef.new(shape: DeleteSparqlStatisticsOutput)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -1209,7 +1199,6 @@ module Aws::Neptunedata
         o.name = "ExecuteFastReset"
         o.http_method = "POST"
         o.http_request_uri = "/system"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: ExecuteFastResetInput)
         o.output = Shapes::ShapeRef.new(shape: ExecuteFastResetOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
@@ -1231,7 +1220,6 @@ module Aws::Neptunedata
         o.name = "ExecuteGremlinExplainQuery"
         o.http_method = "POST"
         o.http_request_uri = "/gremlin/explain"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: ExecuteGremlinExplainQueryInput)
         o.output = Shapes::ShapeRef.new(shape: ExecuteGremlinExplainQueryOutput)
         o.errors << Shapes::ShapeRef.new(shape: QueryTooLargeException)
@@ -1260,7 +1248,6 @@ module Aws::Neptunedata
         o.name = "ExecuteGremlinProfileQuery"
         o.http_method = "POST"
         o.http_request_uri = "/gremlin/profile"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: ExecuteGremlinProfileQueryInput)
         o.output = Shapes::ShapeRef.new(shape: ExecuteGremlinProfileQueryOutput)
         o.errors << Shapes::ShapeRef.new(shape: QueryTooLargeException)
@@ -1289,7 +1276,6 @@ module Aws::Neptunedata
         o.name = "ExecuteGremlinQuery"
         o.http_method = "POST"
         o.http_request_uri = "/gremlin"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: ExecuteGremlinQueryInput)
         o.output = Shapes::ShapeRef.new(shape: ExecuteGremlinQueryOutput)
         o.errors << Shapes::ShapeRef.new(shape: QueryTooLargeException)
@@ -1318,7 +1304,6 @@ module Aws::Neptunedata
         o.name = "ExecuteOpenCypherExplainQuery"
         o.http_method = "POST"
         o.http_request_uri = "/opencypher/explain"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: ExecuteOpenCypherExplainQueryInput)
         o.output = Shapes::ShapeRef.new(shape: ExecuteOpenCypherExplainQueryOutput)
         o.errors << Shapes::ShapeRef.new(shape: QueryTooLargeException)
@@ -1348,7 +1333,6 @@ module Aws::Neptunedata
         o.name = "ExecuteOpenCypherQuery"
         o.http_method = "POST"
         o.http_request_uri = "/opencypher"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: ExecuteOpenCypherQueryInput)
         o.output = Shapes::ShapeRef.new(shape: ExecuteOpenCypherQueryOutput)
         o.errors << Shapes::ShapeRef.new(shape: QueryTooLargeException)
@@ -1378,7 +1362,6 @@ module Aws::Neptunedata
         o.name = "GetEngineStatus"
         o.http_method = "GET"
         o.http_request_uri = "/status"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.output = Shapes::ShapeRef.new(shape: GetEngineStatusOutput)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
@@ -1395,7 +1378,6 @@ module Aws::Neptunedata
         o.name = "GetGremlinQueryStatus"
         o.http_method = "GET"
         o.http_request_uri = "/gremlin/status/{queryId}"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: GetGremlinQueryStatusInput)
         o.output = Shapes::ShapeRef.new(shape: GetGremlinQueryStatusOutput)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -1420,7 +1402,6 @@ module Aws::Neptunedata
         o.name = "GetLoaderJobStatus"
         o.http_method = "GET"
         o.http_request_uri = "/loader/{loadId}"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: GetLoaderJobStatusInput)
         o.output = Shapes::ShapeRef.new(shape: GetLoaderJobStatusOutput)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -1442,7 +1423,6 @@ module Aws::Neptunedata
         o.name = "GetMLDataProcessingJob"
         o.http_method = "GET"
         o.http_request_uri = "/ml/dataprocessing/{id}"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: GetMLDataProcessingJobInput)
         o.output = Shapes::ShapeRef.new(shape: GetMLDataProcessingJobOutput)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
@@ -1462,7 +1442,6 @@ module Aws::Neptunedata
         o.name = "GetMLEndpoint"
         o.http_method = "GET"
         o.http_request_uri = "/ml/endpoints/{id}"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: GetMLEndpointInput)
         o.output = Shapes::ShapeRef.new(shape: GetMLEndpointOutput)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
@@ -1482,7 +1461,6 @@ module Aws::Neptunedata
         o.name = "GetMLModelTrainingJob"
         o.http_method = "GET"
         o.http_request_uri = "/ml/modeltraining/{id}"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: GetMLModelTrainingJobInput)
         o.output = Shapes::ShapeRef.new(shape: GetMLModelTrainingJobOutput)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
@@ -1502,7 +1480,6 @@ module Aws::Neptunedata
         o.name = "GetMLModelTransformJob"
         o.http_method = "GET"
         o.http_request_uri = "/ml/modeltransform/{id}"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: GetMLModelTransformJobInput)
         o.output = Shapes::ShapeRef.new(shape: GetMLModelTransformJobOutput)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
@@ -1522,7 +1499,6 @@ module Aws::Neptunedata
         o.name = "GetOpenCypherQueryStatus"
         o.http_method = "GET"
         o.http_request_uri = "/opencypher/status/{queryId}"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: GetOpenCypherQueryStatusInput)
         o.output = Shapes::ShapeRef.new(shape: GetOpenCypherQueryStatusOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNumericDataException)
@@ -1548,7 +1524,6 @@ module Aws::Neptunedata
         o.name = "GetPropertygraphStatistics"
         o.http_method = "GET"
         o.http_request_uri = "/propertygraph/statistics"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.output = Shapes::ShapeRef.new(shape: GetPropertygraphStatisticsOutput)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -1570,7 +1545,6 @@ module Aws::Neptunedata
         o.name = "GetPropertygraphStream"
         o.http_method = "GET"
         o.http_request_uri = "/propertygraph/stream"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: GetPropertygraphStreamInput)
         o.output = Shapes::ShapeRef.new(shape: GetPropertygraphStreamOutput)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
@@ -1591,7 +1565,6 @@ module Aws::Neptunedata
         o.name = "GetPropertygraphSummary"
         o.http_method = "GET"
         o.http_request_uri = "/propertygraph/statistics/summary"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: GetPropertygraphSummaryInput)
         o.output = Shapes::ShapeRef.new(shape: GetPropertygraphSummaryOutput)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -1613,7 +1586,6 @@ module Aws::Neptunedata
         o.name = "GetRDFGraphSummary"
         o.http_method = "GET"
         o.http_request_uri = "/rdf/statistics/summary"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: GetRDFGraphSummaryInput)
         o.output = Shapes::ShapeRef.new(shape: GetRDFGraphSummaryOutput)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -1635,7 +1607,6 @@ module Aws::Neptunedata
         o.name = "GetSparqlStatistics"
         o.http_method = "GET"
         o.http_request_uri = "/sparql/statistics"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.output = Shapes::ShapeRef.new(shape: GetSparqlStatisticsOutput)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -1657,7 +1628,6 @@ module Aws::Neptunedata
         o.name = "GetSparqlStream"
         o.http_method = "GET"
         o.http_request_uri = "/sparql/stream"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: GetSparqlStreamInput)
         o.output = Shapes::ShapeRef.new(shape: GetSparqlStreamOutput)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
@@ -1678,7 +1648,6 @@ module Aws::Neptunedata
         o.name = "ListGremlinQueries"
         o.http_method = "GET"
         o.http_request_uri = "/gremlin/status"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: ListGremlinQueriesInput)
         o.output = Shapes::ShapeRef.new(shape: ListGremlinQueriesOutput)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -1703,7 +1672,6 @@ module Aws::Neptunedata
         o.name = "ListLoaderJobs"
         o.http_method = "GET"
         o.http_request_uri = "/loader"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: ListLoaderJobsInput)
         o.output = Shapes::ShapeRef.new(shape: ListLoaderJobsOutput)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
@@ -1724,7 +1692,6 @@ module Aws::Neptunedata
         o.name = "ListMLDataProcessingJobs"
         o.http_method = "GET"
         o.http_request_uri = "/ml/dataprocessing"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: ListMLDataProcessingJobsInput)
         o.output = Shapes::ShapeRef.new(shape: ListMLDataProcessingJobsOutput)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
@@ -1744,7 +1711,6 @@ module Aws::Neptunedata
         o.name = "ListMLEndpoints"
         o.http_method = "GET"
         o.http_request_uri = "/ml/endpoints"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: ListMLEndpointsInput)
         o.output = Shapes::ShapeRef.new(shape: ListMLEndpointsOutput)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
@@ -1764,7 +1730,6 @@ module Aws::Neptunedata
         o.name = "ListMLModelTrainingJobs"
         o.http_method = "GET"
         o.http_request_uri = "/ml/modeltraining"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: ListMLModelTrainingJobsInput)
         o.output = Shapes::ShapeRef.new(shape: ListMLModelTrainingJobsOutput)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
@@ -1784,7 +1749,6 @@ module Aws::Neptunedata
         o.name = "ListMLModelTransformJobs"
         o.http_method = "GET"
         o.http_request_uri = "/ml/modeltransform"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: ListMLModelTransformJobsInput)
         o.output = Shapes::ShapeRef.new(shape: ListMLModelTransformJobsOutput)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
@@ -1804,7 +1768,6 @@ module Aws::Neptunedata
         o.name = "ListOpenCypherQueries"
         o.http_method = "GET"
         o.http_request_uri = "/opencypher/status"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: ListOpenCypherQueriesInput)
         o.output = Shapes::ShapeRef.new(shape: ListOpenCypherQueriesOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNumericDataException)
@@ -1830,7 +1793,6 @@ module Aws::Neptunedata
         o.name = "ManagePropertygraphStatistics"
         o.http_method = "POST"
         o.http_request_uri = "/propertygraph/statistics"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: ManagePropertygraphStatisticsInput)
         o.output = Shapes::ShapeRef.new(shape: ManagePropertygraphStatisticsOutput)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -1852,7 +1814,6 @@ module Aws::Neptunedata
         o.name = "ManageSparqlStatistics"
         o.http_method = "POST"
         o.http_request_uri = "/sparql/statistics"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: ManageSparqlStatisticsInput)
         o.output = Shapes::ShapeRef.new(shape: ManageSparqlStatisticsOutput)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -1874,7 +1835,6 @@ module Aws::Neptunedata
         o.name = "StartLoaderJob"
         o.http_method = "POST"
         o.http_request_uri = "/loader"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: StartLoaderJobInput)
         o.output = Shapes::ShapeRef.new(shape: StartLoaderJobOutput)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -1897,7 +1857,6 @@ module Aws::Neptunedata
         o.name = "StartMLDataProcessingJob"
         o.http_method = "POST"
         o.http_request_uri = "/ml/dataprocessing"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: StartMLDataProcessingJobInput)
         o.output = Shapes::ShapeRef.new(shape: StartMLDataProcessingJobOutput)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
@@ -1917,7 +1876,6 @@ module Aws::Neptunedata
         o.name = "StartMLModelTrainingJob"
         o.http_method = "POST"
         o.http_request_uri = "/ml/modeltraining"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: StartMLModelTrainingJobInput)
         o.output = Shapes::ShapeRef.new(shape: StartMLModelTrainingJobOutput)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
@@ -1937,7 +1895,6 @@ module Aws::Neptunedata
         o.name = "StartMLModelTransformJob"
         o.http_method = "POST"
         o.http_request_uri = "/ml/modeltransform"
-        o['authtype'] = "v4"
         o.input = Shapes::ShapeRef.new(shape: StartMLModelTransformJobInput)
         o.output = Shapes::ShapeRef.new(shape: StartMLModelTransformJobOutput)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)

@@ -218,12 +218,12 @@ module Aws::SimSpaceWeaver
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
-    S3Destination.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, location_name: "BucketName"))
+    S3Destination.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "BucketName"))
     S3Destination.add_member(:object_key_prefix, Shapes::ShapeRef.new(shape: ObjectKeyPrefix, location_name: "ObjectKeyPrefix"))
     S3Destination.struct_class = Types::S3Destination
 
-    S3Location.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, location_name: "BucketName"))
-    S3Location.add_member(:object_key, Shapes::ShapeRef.new(shape: ObjectKey, location_name: "ObjectKey"))
+    S3Location.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "BucketName"))
+    S3Location.add_member(:object_key, Shapes::ShapeRef.new(shape: ObjectKey, required: true, location_name: "ObjectKey"))
     S3Location.struct_class = Types::S3Location
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))

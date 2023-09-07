@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2023-09-07)
+------------------
+
+* Feature - Minor changes to send unsigned requests to Neptune clusters
+
 1.1.0 (2023-09-01)
 ------------------
 

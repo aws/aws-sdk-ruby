@@ -578,19 +578,29 @@ module Aws::SecurityHub
     # @!attribute [rw] product_arn
     #   The Amazon Resource Name (ARN) for a third-party product that
     #   generated a finding in Security Hub.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] aws_account_id
     #   The Amazon Web Services account ID in which a finding was generated.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 100
+    #   items.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] id
     #   The product-specific identifier for a finding.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] generator_id
     #   The identifier for the solution-specific component that generated a
     #   finding.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 100
+    #   items.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] type
@@ -598,6 +608,8 @@ module Aws::SecurityHub
     #   namespace/category/classifier that classify a finding. For a list of
     #   namespaces, classifiers, and categories, see [Types taxonomy for
     #   ASFF][1] in the *Security Hub User Guide*.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #
     #
     #
@@ -613,6 +625,8 @@ module Aws::SecurityHub
     #   Internet Date/Time Format][1]. The value cannot contain spaces. For
     #   example, `2020-03-22T13:22:13.933Z`.
     #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
+    #
     #
     #
     #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
@@ -627,6 +641,8 @@ module Aws::SecurityHub
     #   Internet Date/Time Format][1]. The value cannot contain spaces. For
     #   example, `2020-03-22T13:22:13.933Z`.
     #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
+    #
     #
     #
     #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
@@ -638,6 +654,8 @@ module Aws::SecurityHub
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
     #   Internet Date/Time Format][1]. The value cannot contain spaces. For
     #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #
     #
     #
@@ -651,6 +669,8 @@ module Aws::SecurityHub
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
     #   Internet Date/Time Format][1]. The value cannot contain spaces. For
     #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #
     #
     #
@@ -667,6 +687,8 @@ module Aws::SecurityHub
     #   exfiltration hasn't been verified. For more information, see
     #   [Confidence][1] in the *Security Hub User Guide*.
     #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/asff-top-level-attributes.html#asff-confidence
@@ -680,6 +702,8 @@ module Aws::SecurityHub
     #   of `100` is reserved for the most critical resources. For more
     #   information, see [Criticality][1] in the *Security Hub User Guide*.
     #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/asff-top-level-attributes.html#asff-criticality
@@ -687,33 +711,48 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] title
     #   A finding's title.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 100
+    #   items.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] description
     #   A finding's description.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] source_url
     #   Provides a URL that links to a page about the current finding in the
     #   finding product.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] product_name
     #   Provides the name of the product that generated the finding. For
     #   control-based findings, the product name is Security Hub.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] company_name
     #   The name of the company for the product that generated the finding.
     #   For control-based findings, the company is Amazon Web Services.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] severity_label
     #   The severity value of the finding.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] resource_type
     #   The type of resource that the finding pertains to.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] resource_id
@@ -723,37 +762,52 @@ module Aws::SecurityHub
     #   is the identifier as defined by the Amazon Web Service that created
     #   the resource. For non-Amazon Web Services resources, this is a
     #   unique identifier that is associated with the resource.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 100
+    #   items.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] resource_partition
     #   The partition in which the resource that the finding pertains to is
     #   located. A partition is a group of Amazon Web Services Regions. Each
     #   Amazon Web Services account is scoped to one partition.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] resource_region
     #   The Amazon Web Services Region where the resource that a finding
     #   pertains to is located.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] resource_tags
     #   A list of Amazon Web Services tags associated with a resource at the
     #   time the finding was processed.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #   @return [Array<Types::MapFilter>]
     #
     # @!attribute [rw] resource_details_other
     #   Custom fields and values about the resource that a finding pertains
     #   to.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #   @return [Array<Types::MapFilter>]
     #
     # @!attribute [rw] compliance_status
     #   The result of a security check. This field is only used for findings
     #   generated from controls.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] compliance_security_control_id
     #   The security control ID for which a finding was generated. Security
     #   control IDs are the same across standards.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] compliance_associated_standards_id
@@ -762,6 +816,8 @@ module Aws::SecurityHub
     #   Name (ARN) returned for a standard in the [DescribeStandards][1] API
     #   response.
     #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html
@@ -769,27 +825,39 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] verification_state
     #   Provides the veracity of a finding.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] workflow_status
     #   Provides information about the status of the investigation into a
     #   finding.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] record_state
     #   Provides the current state of a finding.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] related_findings_product_arn
     #   The ARN for the product that generated a related finding.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] related_findings_id
     #   The product-generated identifier for a related finding.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] note_text
     #   The text of a user-defined note that's added to a finding.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] note_updated_at
@@ -798,6 +866,8 @@ module Aws::SecurityHub
     #   Format][1]. The value cannot contain spaces. For example,
     #   `2020-03-22T13:22:13.933Z`.
     #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
+    #
     #
     #
     #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
@@ -805,11 +875,15 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] note_updated_by
     #   The principal that created a note.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] user_defined_fields
     #   A list of user-defined name and value string pairs added to a
     #   finding.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #   @return [Array<Types::MapFilter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AutomationRulesFindingFilters AWS API Documentation

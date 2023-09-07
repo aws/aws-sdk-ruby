@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2023-09-07)
+------------------
+
+* Feature - BucketName and ObjectKey are now required for the S3Location data type. BucketName is now required for the S3Destination data type.
+
 1.8.0 (2023-07-11)
 ------------------
 
