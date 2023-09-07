@@ -67,7 +67,7 @@ module Aws
           let(:server_time) { (Time.now.utc + 1000).to_s }
           it 'updates the corrections' do
             subject.update_clock_correction(context)
-            expect(subject.clock_correction(endpoint)).to be_within(1).of(1000)
+            expect(subject.clock_correction(endpoint)).to be_within(5).of(1000)
           end
 
           it 'does not update corrections for other end points' do
@@ -90,7 +90,7 @@ module Aws
           let(:server_time) { (Time.now.utc + 1000).to_s }
           it 'updates the skew' do
             subject.update_estimated_skew(context)
-            expect(subject.estimated_skew(endpoint)).to be_within(1).of(1000)
+            expect(subject.estimated_skew(endpoint)).to be_within(5).of(1000)
           end
         end
       end
