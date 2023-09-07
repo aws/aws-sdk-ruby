@@ -267,6 +267,7 @@ module Aws
 
           it 'polls until :idle_timeout seconds have past without messages' do
             now = Time.now
+            allow(Time).to receive(:now).and_return(now)
             one_minute_later = now + 61
             expect(client).to receive(:receive_message).exactly(10).times.
               and_return(client.stub_data(:receive_message))
