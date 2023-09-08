@@ -1208,7 +1208,8 @@ module Aws::SageMaker
     #
     #  `CreateAutoMLJobV2` can manage tabular problem types identical to
     # those of its previous version `CreateAutoMLJob`, as well as
-    # non-tabular problem types such as image or text classification.
+    # time-series forecasting, and non-tabular problem types such as image
+    # or text classification.
     #
     #  Find guidelines about how to migrate a `CreateAutoMLJob` to
     # `CreateAutoMLJobV2` in [Migrate a CreateAutoMLJob to
@@ -1387,7 +1388,8 @@ module Aws::SageMaker
     #
     #  `CreateAutoMLJobV2` can manage tabular problem types identical to
     # those of its previous version `CreateAutoMLJob`, as well as
-    # non-tabular problem types such as image or text classification.
+    # time-series forecasting, and non-tabular problem types such as image
+    # or text classification.
     #
     #  Find guidelines about how to migrate a `CreateAutoMLJob` to
     # `CreateAutoMLJobV2` in [Migrate a CreateAutoMLJob to
@@ -1581,6 +1583,11 @@ module Aws::SageMaker
     #           item_identifier_attribute_name: "ItemIdentifierAttributeName", # required
     #           grouping_attribute_names: ["GroupingAttributeName"],
     #         },
+    #         holiday_config: [
+    #           {
+    #             country_code: "CountryCode",
+    #           },
+    #         ],
     #       },
     #     },
     #     role_arn: "RoleArn", # required
@@ -10361,6 +10368,8 @@ module Aws::SageMaker
     #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.time_series_config.item_identifier_attribute_name #=> String
     #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.time_series_config.grouping_attribute_names #=> Array
     #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.time_series_config.grouping_attribute_names[0] #=> String
+    #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.holiday_config #=> Array
+    #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.holiday_config[0].country_code #=> String
     #   resp.creation_time #=> Time
     #   resp.end_time #=> Time
     #   resp.last_modified_time #=> Time
@@ -24132,7 +24141,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.208.0'
+      context[:gem_version] = '1.209.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

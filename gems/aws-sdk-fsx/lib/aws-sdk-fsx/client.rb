@@ -2308,7 +2308,7 @@ module Aws::FSx
     # @option params [String] :file_system_type_version
     #   (Optional) For FSx for Lustre file systems, sets the Lustre version
     #   for the file system that you're creating. Valid values are `2.10`,
-    #   `2.12`m and `2.15`:
+    #   `2.12`, and `2.15`:
     #
     #   * 2\.10 is supported by the Scratch and Persistent\_1 Lustre deployment
     #     types.
@@ -8322,7 +8322,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

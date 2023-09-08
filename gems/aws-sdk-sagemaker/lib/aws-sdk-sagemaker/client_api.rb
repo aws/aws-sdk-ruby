@@ -295,6 +295,7 @@ module Aws::SageMaker
     ContinuousParameterRangeSpecification = Shapes::StructureShape.new(name: 'ContinuousParameterRangeSpecification')
     ContinuousParameterRanges = Shapes::ListShape.new(name: 'ContinuousParameterRanges')
     ConvergenceDetected = Shapes::StructureShape.new(name: 'ConvergenceDetected')
+    CountryCode = Shapes::StringShape.new(name: 'CountryCode')
     CreateActionRequest = Shapes::StructureShape.new(name: 'CreateActionRequest')
     CreateActionResponse = Shapes::StructureShape.new(name: 'CreateActionResponse')
     CreateAlgorithmInput = Shapes::StructureShape.new(name: 'CreateAlgorithmInput')
@@ -842,6 +843,8 @@ module Aws::SageMaker
     GroupingAttributeName = Shapes::StringShape.new(name: 'GroupingAttributeName')
     GroupingAttributeNames = Shapes::ListShape.new(name: 'GroupingAttributeNames')
     Groups = Shapes::ListShape.new(name: 'Groups')
+    HolidayConfig = Shapes::ListShape.new(name: 'HolidayConfig')
+    HolidayConfigAttributes = Shapes::StructureShape.new(name: 'HolidayConfigAttributes')
     HookParameters = Shapes::MapShape.new(name: 'HookParameters')
     Horovod = Shapes::BooleanShape.new(name: 'Horovod')
     HubArn = Shapes::StringShape.new(name: 'HubArn')
@@ -5298,6 +5301,11 @@ module Aws::SageMaker
 
     Groups.member = Shapes::ShapeRef.new(shape: Group)
 
+    HolidayConfig.member = Shapes::ShapeRef.new(shape: HolidayConfigAttributes)
+
+    HolidayConfigAttributes.add_member(:country_code, Shapes::ShapeRef.new(shape: CountryCode, location_name: "CountryCode"))
+    HolidayConfigAttributes.struct_class = Types::HolidayConfigAttributes
+
     HookParameters.key = Shapes::ShapeRef.new(shape: ConfigKey)
     HookParameters.value = Shapes::ShapeRef.new(shape: ConfigValue)
 
@@ -8493,6 +8501,7 @@ module Aws::SageMaker
     TimeSeriesForecastingJobConfig.add_member(:forecast_quantiles, Shapes::ShapeRef.new(shape: ForecastQuantiles, location_name: "ForecastQuantiles"))
     TimeSeriesForecastingJobConfig.add_member(:transformations, Shapes::ShapeRef.new(shape: TimeSeriesTransformations, location_name: "Transformations"))
     TimeSeriesForecastingJobConfig.add_member(:time_series_config, Shapes::ShapeRef.new(shape: TimeSeriesConfig, required: true, location_name: "TimeSeriesConfig"))
+    TimeSeriesForecastingJobConfig.add_member(:holiday_config, Shapes::ShapeRef.new(shape: HolidayConfig, location_name: "HolidayConfig"))
     TimeSeriesForecastingJobConfig.struct_class = Types::TimeSeriesForecastingJobConfig
 
     TimeSeriesForecastingSettings.add_member(:status, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "Status"))

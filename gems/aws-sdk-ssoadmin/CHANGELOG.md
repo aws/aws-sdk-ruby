@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2023-09-08)
+------------------
+
+* Feature - Content updates to IAM Identity Center API for China Regions.
+
 1.28.0 (2023-07-11)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.209.0 (2023-09-08)
+------------------
+
+* Feature - Autopilot APIs will now support holiday featurization for Timeseries models. The models will now hold holiday metadata and should be able to accommodate holiday effect during inference.
+
 1.208.0 (2023-09-05)
 ------------------
 

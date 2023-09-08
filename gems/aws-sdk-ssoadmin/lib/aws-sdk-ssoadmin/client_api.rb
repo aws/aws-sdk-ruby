@@ -177,48 +177,48 @@ module Aws::SSOAdmin
 
     AccountAssignment.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     AccountAssignment.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, location_name: "PermissionSetArn"))
-    AccountAssignment.add_member(:principal_type, Shapes::ShapeRef.new(shape: PrincipalType, location_name: "PrincipalType"))
     AccountAssignment.add_member(:principal_id, Shapes::ShapeRef.new(shape: PrincipalId, location_name: "PrincipalId"))
+    AccountAssignment.add_member(:principal_type, Shapes::ShapeRef.new(shape: PrincipalType, location_name: "PrincipalType"))
     AccountAssignment.struct_class = Types::AccountAssignment
 
     AccountAssignmentList.member = Shapes::ShapeRef.new(shape: AccountAssignment)
 
-    AccountAssignmentOperationStatus.add_member(:status, Shapes::ShapeRef.new(shape: StatusValues, location_name: "Status"))
-    AccountAssignmentOperationStatus.add_member(:request_id, Shapes::ShapeRef.new(shape: UUId, location_name: "RequestId"))
+    AccountAssignmentOperationStatus.add_member(:created_date, Shapes::ShapeRef.new(shape: Date, location_name: "CreatedDate"))
     AccountAssignmentOperationStatus.add_member(:failure_reason, Shapes::ShapeRef.new(shape: Reason, location_name: "FailureReason"))
+    AccountAssignmentOperationStatus.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, location_name: "PermissionSetArn"))
+    AccountAssignmentOperationStatus.add_member(:principal_id, Shapes::ShapeRef.new(shape: PrincipalId, location_name: "PrincipalId"))
+    AccountAssignmentOperationStatus.add_member(:principal_type, Shapes::ShapeRef.new(shape: PrincipalType, location_name: "PrincipalType"))
+    AccountAssignmentOperationStatus.add_member(:request_id, Shapes::ShapeRef.new(shape: UUId, location_name: "RequestId"))
+    AccountAssignmentOperationStatus.add_member(:status, Shapes::ShapeRef.new(shape: StatusValues, location_name: "Status"))
     AccountAssignmentOperationStatus.add_member(:target_id, Shapes::ShapeRef.new(shape: TargetId, location_name: "TargetId"))
     AccountAssignmentOperationStatus.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetType, location_name: "TargetType"))
-    AccountAssignmentOperationStatus.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, location_name: "PermissionSetArn"))
-    AccountAssignmentOperationStatus.add_member(:principal_type, Shapes::ShapeRef.new(shape: PrincipalType, location_name: "PrincipalType"))
-    AccountAssignmentOperationStatus.add_member(:principal_id, Shapes::ShapeRef.new(shape: PrincipalId, location_name: "PrincipalId"))
-    AccountAssignmentOperationStatus.add_member(:created_date, Shapes::ShapeRef.new(shape: Date, location_name: "CreatedDate"))
     AccountAssignmentOperationStatus.struct_class = Types::AccountAssignmentOperationStatus
 
     AccountAssignmentOperationStatusList.member = Shapes::ShapeRef.new(shape: AccountAssignmentOperationStatusMetadata)
 
-    AccountAssignmentOperationStatusMetadata.add_member(:status, Shapes::ShapeRef.new(shape: StatusValues, location_name: "Status"))
-    AccountAssignmentOperationStatusMetadata.add_member(:request_id, Shapes::ShapeRef.new(shape: UUId, location_name: "RequestId"))
     AccountAssignmentOperationStatusMetadata.add_member(:created_date, Shapes::ShapeRef.new(shape: Date, location_name: "CreatedDate"))
+    AccountAssignmentOperationStatusMetadata.add_member(:request_id, Shapes::ShapeRef.new(shape: UUId, location_name: "RequestId"))
+    AccountAssignmentOperationStatusMetadata.add_member(:status, Shapes::ShapeRef.new(shape: StatusValues, location_name: "Status"))
     AccountAssignmentOperationStatusMetadata.struct_class = Types::AccountAssignmentOperationStatusMetadata
 
     AccountList.member = Shapes::ShapeRef.new(shape: AccountId)
 
+    AttachCustomerManagedPolicyReferenceToPermissionSetRequest.add_member(:customer_managed_policy_reference, Shapes::ShapeRef.new(shape: CustomerManagedPolicyReference, required: true, location_name: "CustomerManagedPolicyReference"))
     AttachCustomerManagedPolicyReferenceToPermissionSetRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     AttachCustomerManagedPolicyReferenceToPermissionSetRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
-    AttachCustomerManagedPolicyReferenceToPermissionSetRequest.add_member(:customer_managed_policy_reference, Shapes::ShapeRef.new(shape: CustomerManagedPolicyReference, required: true, location_name: "CustomerManagedPolicyReference"))
     AttachCustomerManagedPolicyReferenceToPermissionSetRequest.struct_class = Types::AttachCustomerManagedPolicyReferenceToPermissionSetRequest
 
     AttachCustomerManagedPolicyReferenceToPermissionSetResponse.struct_class = Types::AttachCustomerManagedPolicyReferenceToPermissionSetResponse
 
     AttachManagedPolicyToPermissionSetRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
-    AttachManagedPolicyToPermissionSetRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
     AttachManagedPolicyToPermissionSetRequest.add_member(:managed_policy_arn, Shapes::ShapeRef.new(shape: ManagedPolicyArn, required: true, location_name: "ManagedPolicyArn"))
+    AttachManagedPolicyToPermissionSetRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
     AttachManagedPolicyToPermissionSetRequest.struct_class = Types::AttachManagedPolicyToPermissionSetRequest
 
     AttachManagedPolicyToPermissionSetResponse.struct_class = Types::AttachManagedPolicyToPermissionSetResponse
 
-    AttachedManagedPolicy.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     AttachedManagedPolicy.add_member(:arn, Shapes::ShapeRef.new(shape: ManagedPolicyArn, location_name: "Arn"))
+    AttachedManagedPolicy.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     AttachedManagedPolicy.struct_class = Types::AttachedManagedPolicy
 
     AttachedManagedPolicyList.member = Shapes::ShapeRef.new(shape: AttachedManagedPolicy)
@@ -227,27 +227,27 @@ module Aws::SSOAdmin
     ConflictException.struct_class = Types::ConflictException
 
     CreateAccountAssignmentRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
+    CreateAccountAssignmentRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
+    CreateAccountAssignmentRequest.add_member(:principal_id, Shapes::ShapeRef.new(shape: PrincipalId, required: true, location_name: "PrincipalId"))
+    CreateAccountAssignmentRequest.add_member(:principal_type, Shapes::ShapeRef.new(shape: PrincipalType, required: true, location_name: "PrincipalType"))
     CreateAccountAssignmentRequest.add_member(:target_id, Shapes::ShapeRef.new(shape: TargetId, required: true, location_name: "TargetId"))
     CreateAccountAssignmentRequest.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetType, required: true, location_name: "TargetType"))
-    CreateAccountAssignmentRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
-    CreateAccountAssignmentRequest.add_member(:principal_type, Shapes::ShapeRef.new(shape: PrincipalType, required: true, location_name: "PrincipalType"))
-    CreateAccountAssignmentRequest.add_member(:principal_id, Shapes::ShapeRef.new(shape: PrincipalId, required: true, location_name: "PrincipalId"))
     CreateAccountAssignmentRequest.struct_class = Types::CreateAccountAssignmentRequest
 
     CreateAccountAssignmentResponse.add_member(:account_assignment_creation_status, Shapes::ShapeRef.new(shape: AccountAssignmentOperationStatus, location_name: "AccountAssignmentCreationStatus"))
     CreateAccountAssignmentResponse.struct_class = Types::CreateAccountAssignmentResponse
 
-    CreateInstanceAccessControlAttributeConfigurationRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     CreateInstanceAccessControlAttributeConfigurationRequest.add_member(:instance_access_control_attribute_configuration, Shapes::ShapeRef.new(shape: InstanceAccessControlAttributeConfiguration, required: true, location_name: "InstanceAccessControlAttributeConfiguration"))
+    CreateInstanceAccessControlAttributeConfigurationRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     CreateInstanceAccessControlAttributeConfigurationRequest.struct_class = Types::CreateInstanceAccessControlAttributeConfigurationRequest
 
     CreateInstanceAccessControlAttributeConfigurationResponse.struct_class = Types::CreateInstanceAccessControlAttributeConfigurationResponse
 
-    CreatePermissionSetRequest.add_member(:name, Shapes::ShapeRef.new(shape: PermissionSetName, required: true, location_name: "Name"))
     CreatePermissionSetRequest.add_member(:description, Shapes::ShapeRef.new(shape: PermissionSetDescription, location_name: "Description"))
     CreatePermissionSetRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
-    CreatePermissionSetRequest.add_member(:session_duration, Shapes::ShapeRef.new(shape: Duration, location_name: "SessionDuration"))
+    CreatePermissionSetRequest.add_member(:name, Shapes::ShapeRef.new(shape: PermissionSetName, required: true, location_name: "Name"))
     CreatePermissionSetRequest.add_member(:relay_state, Shapes::ShapeRef.new(shape: RelayState, location_name: "RelayState"))
+    CreatePermissionSetRequest.add_member(:session_duration, Shapes::ShapeRef.new(shape: Duration, location_name: "SessionDuration"))
     CreatePermissionSetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreatePermissionSetRequest.struct_class = Types::CreatePermissionSetRequest
 
@@ -261,11 +261,11 @@ module Aws::SSOAdmin
     CustomerManagedPolicyReferenceList.member = Shapes::ShapeRef.new(shape: CustomerManagedPolicyReference)
 
     DeleteAccountAssignmentRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
+    DeleteAccountAssignmentRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
+    DeleteAccountAssignmentRequest.add_member(:principal_id, Shapes::ShapeRef.new(shape: PrincipalId, required: true, location_name: "PrincipalId"))
+    DeleteAccountAssignmentRequest.add_member(:principal_type, Shapes::ShapeRef.new(shape: PrincipalType, required: true, location_name: "PrincipalType"))
     DeleteAccountAssignmentRequest.add_member(:target_id, Shapes::ShapeRef.new(shape: TargetId, required: true, location_name: "TargetId"))
     DeleteAccountAssignmentRequest.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetType, required: true, location_name: "TargetType"))
-    DeleteAccountAssignmentRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
-    DeleteAccountAssignmentRequest.add_member(:principal_type, Shapes::ShapeRef.new(shape: PrincipalType, required: true, location_name: "PrincipalType"))
-    DeleteAccountAssignmentRequest.add_member(:principal_id, Shapes::ShapeRef.new(shape: PrincipalId, required: true, location_name: "PrincipalId"))
     DeleteAccountAssignmentRequest.struct_class = Types::DeleteAccountAssignmentRequest
 
     DeleteAccountAssignmentResponse.add_member(:account_assignment_deletion_status, Shapes::ShapeRef.new(shape: AccountAssignmentOperationStatus, location_name: "AccountAssignmentDeletionStatus"))
@@ -294,15 +294,15 @@ module Aws::SSOAdmin
 
     DeletePermissionsBoundaryFromPermissionSetResponse.struct_class = Types::DeletePermissionsBoundaryFromPermissionSetResponse
 
-    DescribeAccountAssignmentCreationStatusRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     DescribeAccountAssignmentCreationStatusRequest.add_member(:account_assignment_creation_request_id, Shapes::ShapeRef.new(shape: UUId, required: true, location_name: "AccountAssignmentCreationRequestId"))
+    DescribeAccountAssignmentCreationStatusRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     DescribeAccountAssignmentCreationStatusRequest.struct_class = Types::DescribeAccountAssignmentCreationStatusRequest
 
     DescribeAccountAssignmentCreationStatusResponse.add_member(:account_assignment_creation_status, Shapes::ShapeRef.new(shape: AccountAssignmentOperationStatus, location_name: "AccountAssignmentCreationStatus"))
     DescribeAccountAssignmentCreationStatusResponse.struct_class = Types::DescribeAccountAssignmentCreationStatusResponse
 
-    DescribeAccountAssignmentDeletionStatusRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     DescribeAccountAssignmentDeletionStatusRequest.add_member(:account_assignment_deletion_request_id, Shapes::ShapeRef.new(shape: UUId, required: true, location_name: "AccountAssignmentDeletionRequestId"))
+    DescribeAccountAssignmentDeletionStatusRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     DescribeAccountAssignmentDeletionStatusRequest.struct_class = Types::DescribeAccountAssignmentDeletionStatusRequest
 
     DescribeAccountAssignmentDeletionStatusResponse.add_member(:account_assignment_deletion_status, Shapes::ShapeRef.new(shape: AccountAssignmentOperationStatus, location_name: "AccountAssignmentDeletionStatus"))
@@ -311,9 +311,9 @@ module Aws::SSOAdmin
     DescribeInstanceAccessControlAttributeConfigurationRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     DescribeInstanceAccessControlAttributeConfigurationRequest.struct_class = Types::DescribeInstanceAccessControlAttributeConfigurationRequest
 
+    DescribeInstanceAccessControlAttributeConfigurationResponse.add_member(:instance_access_control_attribute_configuration, Shapes::ShapeRef.new(shape: InstanceAccessControlAttributeConfiguration, location_name: "InstanceAccessControlAttributeConfiguration"))
     DescribeInstanceAccessControlAttributeConfigurationResponse.add_member(:status, Shapes::ShapeRef.new(shape: InstanceAccessControlAttributeConfigurationStatus, location_name: "Status"))
     DescribeInstanceAccessControlAttributeConfigurationResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: InstanceAccessControlAttributeConfigurationStatusReason, location_name: "StatusReason"))
-    DescribeInstanceAccessControlAttributeConfigurationResponse.add_member(:instance_access_control_attribute_configuration, Shapes::ShapeRef.new(shape: InstanceAccessControlAttributeConfiguration, location_name: "InstanceAccessControlAttributeConfiguration"))
     DescribeInstanceAccessControlAttributeConfigurationResponse.struct_class = Types::DescribeInstanceAccessControlAttributeConfigurationResponse
 
     DescribePermissionSetProvisioningStatusRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
@@ -330,16 +330,16 @@ module Aws::SSOAdmin
     DescribePermissionSetResponse.add_member(:permission_set, Shapes::ShapeRef.new(shape: PermissionSet, location_name: "PermissionSet"))
     DescribePermissionSetResponse.struct_class = Types::DescribePermissionSetResponse
 
+    DetachCustomerManagedPolicyReferenceFromPermissionSetRequest.add_member(:customer_managed_policy_reference, Shapes::ShapeRef.new(shape: CustomerManagedPolicyReference, required: true, location_name: "CustomerManagedPolicyReference"))
     DetachCustomerManagedPolicyReferenceFromPermissionSetRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     DetachCustomerManagedPolicyReferenceFromPermissionSetRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
-    DetachCustomerManagedPolicyReferenceFromPermissionSetRequest.add_member(:customer_managed_policy_reference, Shapes::ShapeRef.new(shape: CustomerManagedPolicyReference, required: true, location_name: "CustomerManagedPolicyReference"))
     DetachCustomerManagedPolicyReferenceFromPermissionSetRequest.struct_class = Types::DetachCustomerManagedPolicyReferenceFromPermissionSetRequest
 
     DetachCustomerManagedPolicyReferenceFromPermissionSetResponse.struct_class = Types::DetachCustomerManagedPolicyReferenceFromPermissionSetResponse
 
     DetachManagedPolicyFromPermissionSetRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
-    DetachManagedPolicyFromPermissionSetRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
     DetachManagedPolicyFromPermissionSetRequest.add_member(:managed_policy_arn, Shapes::ShapeRef.new(shape: ManagedPolicyArn, required: true, location_name: "ManagedPolicyArn"))
+    DetachManagedPolicyFromPermissionSetRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
     DetachManagedPolicyFromPermissionSetRequest.struct_class = Types::DetachManagedPolicyFromPermissionSetRequest
 
     DetachManagedPolicyFromPermissionSetResponse.struct_class = Types::DetachManagedPolicyFromPermissionSetResponse
@@ -363,38 +363,38 @@ module Aws::SSOAdmin
 
     InstanceList.member = Shapes::ShapeRef.new(shape: InstanceMetadata)
 
-    InstanceMetadata.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, location_name: "InstanceArn"))
     InstanceMetadata.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: Id, location_name: "IdentityStoreId"))
+    InstanceMetadata.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, location_name: "InstanceArn"))
     InstanceMetadata.struct_class = Types::InstanceMetadata
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: InternalFailureMessage, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    ListAccountAssignmentCreationStatusRequest.add_member(:filter, Shapes::ShapeRef.new(shape: OperationStatusFilter, location_name: "Filter"))
     ListAccountAssignmentCreationStatusRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     ListAccountAssignmentCreationStatusRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListAccountAssignmentCreationStatusRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    ListAccountAssignmentCreationStatusRequest.add_member(:filter, Shapes::ShapeRef.new(shape: OperationStatusFilter, location_name: "Filter"))
     ListAccountAssignmentCreationStatusRequest.struct_class = Types::ListAccountAssignmentCreationStatusRequest
 
     ListAccountAssignmentCreationStatusResponse.add_member(:account_assignments_creation_status, Shapes::ShapeRef.new(shape: AccountAssignmentOperationStatusList, location_name: "AccountAssignmentsCreationStatus"))
     ListAccountAssignmentCreationStatusResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListAccountAssignmentCreationStatusResponse.struct_class = Types::ListAccountAssignmentCreationStatusResponse
 
+    ListAccountAssignmentDeletionStatusRequest.add_member(:filter, Shapes::ShapeRef.new(shape: OperationStatusFilter, location_name: "Filter"))
     ListAccountAssignmentDeletionStatusRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     ListAccountAssignmentDeletionStatusRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListAccountAssignmentDeletionStatusRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    ListAccountAssignmentDeletionStatusRequest.add_member(:filter, Shapes::ShapeRef.new(shape: OperationStatusFilter, location_name: "Filter"))
     ListAccountAssignmentDeletionStatusRequest.struct_class = Types::ListAccountAssignmentDeletionStatusRequest
 
     ListAccountAssignmentDeletionStatusResponse.add_member(:account_assignments_deletion_status, Shapes::ShapeRef.new(shape: AccountAssignmentOperationStatusList, location_name: "AccountAssignmentsDeletionStatus"))
     ListAccountAssignmentDeletionStatusResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListAccountAssignmentDeletionStatusResponse.struct_class = Types::ListAccountAssignmentDeletionStatusResponse
 
-    ListAccountAssignmentsRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     ListAccountAssignmentsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: TargetId, required: true, location_name: "AccountId"))
-    ListAccountAssignmentsRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
+    ListAccountAssignmentsRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     ListAccountAssignmentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListAccountAssignmentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListAccountAssignmentsRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
     ListAccountAssignmentsRequest.struct_class = Types::ListAccountAssignmentsRequest
 
     ListAccountAssignmentsResponse.add_member(:account_assignments, Shapes::ShapeRef.new(shape: AccountAssignmentList, location_name: "AccountAssignments"))
@@ -402,10 +402,10 @@ module Aws::SSOAdmin
     ListAccountAssignmentsResponse.struct_class = Types::ListAccountAssignmentsResponse
 
     ListAccountsForProvisionedPermissionSetRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
-    ListAccountsForProvisionedPermissionSetRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
-    ListAccountsForProvisionedPermissionSetRequest.add_member(:provisioning_status, Shapes::ShapeRef.new(shape: ProvisioningStatus, location_name: "ProvisioningStatus"))
     ListAccountsForProvisionedPermissionSetRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListAccountsForProvisionedPermissionSetRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListAccountsForProvisionedPermissionSetRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
+    ListAccountsForProvisionedPermissionSetRequest.add_member(:provisioning_status, Shapes::ShapeRef.new(shape: ProvisioningStatus, location_name: "ProvisioningStatus"))
     ListAccountsForProvisionedPermissionSetRequest.struct_class = Types::ListAccountsForProvisionedPermissionSetRequest
 
     ListAccountsForProvisionedPermissionSetResponse.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountList, location_name: "AccountIds"))
@@ -413,9 +413,9 @@ module Aws::SSOAdmin
     ListAccountsForProvisionedPermissionSetResponse.struct_class = Types::ListAccountsForProvisionedPermissionSetResponse
 
     ListCustomerManagedPolicyReferencesInPermissionSetRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
-    ListCustomerManagedPolicyReferencesInPermissionSetRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
     ListCustomerManagedPolicyReferencesInPermissionSetRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListCustomerManagedPolicyReferencesInPermissionSetRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListCustomerManagedPolicyReferencesInPermissionSetRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
     ListCustomerManagedPolicyReferencesInPermissionSetRequest.struct_class = Types::ListCustomerManagedPolicyReferencesInPermissionSetRequest
 
     ListCustomerManagedPolicyReferencesInPermissionSetResponse.add_member(:customer_managed_policy_references, Shapes::ShapeRef.new(shape: CustomerManagedPolicyReferenceList, location_name: "CustomerManagedPolicyReferences"))
@@ -431,30 +431,30 @@ module Aws::SSOAdmin
     ListInstancesResponse.struct_class = Types::ListInstancesResponse
 
     ListManagedPoliciesInPermissionSetRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
-    ListManagedPoliciesInPermissionSetRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
     ListManagedPoliciesInPermissionSetRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListManagedPoliciesInPermissionSetRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListManagedPoliciesInPermissionSetRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
     ListManagedPoliciesInPermissionSetRequest.struct_class = Types::ListManagedPoliciesInPermissionSetRequest
 
     ListManagedPoliciesInPermissionSetResponse.add_member(:attached_managed_policies, Shapes::ShapeRef.new(shape: AttachedManagedPolicyList, location_name: "AttachedManagedPolicies"))
     ListManagedPoliciesInPermissionSetResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListManagedPoliciesInPermissionSetResponse.struct_class = Types::ListManagedPoliciesInPermissionSetResponse
 
+    ListPermissionSetProvisioningStatusRequest.add_member(:filter, Shapes::ShapeRef.new(shape: OperationStatusFilter, location_name: "Filter"))
     ListPermissionSetProvisioningStatusRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     ListPermissionSetProvisioningStatusRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListPermissionSetProvisioningStatusRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    ListPermissionSetProvisioningStatusRequest.add_member(:filter, Shapes::ShapeRef.new(shape: OperationStatusFilter, location_name: "Filter"))
     ListPermissionSetProvisioningStatusRequest.struct_class = Types::ListPermissionSetProvisioningStatusRequest
 
-    ListPermissionSetProvisioningStatusResponse.add_member(:permission_sets_provisioning_status, Shapes::ShapeRef.new(shape: PermissionSetProvisioningStatusList, location_name: "PermissionSetsProvisioningStatus"))
     ListPermissionSetProvisioningStatusResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListPermissionSetProvisioningStatusResponse.add_member(:permission_sets_provisioning_status, Shapes::ShapeRef.new(shape: PermissionSetProvisioningStatusList, location_name: "PermissionSetsProvisioningStatus"))
     ListPermissionSetProvisioningStatusResponse.struct_class = Types::ListPermissionSetProvisioningStatusResponse
 
-    ListPermissionSetsProvisionedToAccountRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     ListPermissionSetsProvisionedToAccountRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
-    ListPermissionSetsProvisionedToAccountRequest.add_member(:provisioning_status, Shapes::ShapeRef.new(shape: ProvisioningStatus, location_name: "ProvisioningStatus"))
+    ListPermissionSetsProvisionedToAccountRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     ListPermissionSetsProvisionedToAccountRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListPermissionSetsProvisionedToAccountRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListPermissionSetsProvisionedToAccountRequest.add_member(:provisioning_status, Shapes::ShapeRef.new(shape: ProvisioningStatus, location_name: "ProvisioningStatus"))
     ListPermissionSetsProvisionedToAccountRequest.struct_class = Types::ListPermissionSetsProvisionedToAccountRequest
 
     ListPermissionSetsProvisionedToAccountResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
@@ -462,49 +462,49 @@ module Aws::SSOAdmin
     ListPermissionSetsProvisionedToAccountResponse.struct_class = Types::ListPermissionSetsProvisionedToAccountResponse
 
     ListPermissionSetsRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
-    ListPermissionSetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListPermissionSetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListPermissionSetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListPermissionSetsRequest.struct_class = Types::ListPermissionSetsRequest
 
-    ListPermissionSetsResponse.add_member(:permission_sets, Shapes::ShapeRef.new(shape: PermissionSetList, location_name: "PermissionSets"))
     ListPermissionSetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListPermissionSetsResponse.add_member(:permission_sets, Shapes::ShapeRef.new(shape: PermissionSetList, location_name: "PermissionSets"))
     ListPermissionSetsResponse.struct_class = Types::ListPermissionSetsResponse
 
     ListTagsForResourceRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
-    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TaggableResourceArn, required: true, location_name: "ResourceArn"))
     ListTagsForResourceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TaggableResourceArn, required: true, location_name: "ResourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
-    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     OperationStatusFilter.add_member(:status, Shapes::ShapeRef.new(shape: StatusValues, location_name: "Status"))
     OperationStatusFilter.struct_class = Types::OperationStatusFilter
 
+    PermissionSet.add_member(:created_date, Shapes::ShapeRef.new(shape: Date, location_name: "CreatedDate"))
+    PermissionSet.add_member(:description, Shapes::ShapeRef.new(shape: PermissionSetDescription, location_name: "Description"))
     PermissionSet.add_member(:name, Shapes::ShapeRef.new(shape: PermissionSetName, location_name: "Name"))
     PermissionSet.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, location_name: "PermissionSetArn"))
-    PermissionSet.add_member(:description, Shapes::ShapeRef.new(shape: PermissionSetDescription, location_name: "Description"))
-    PermissionSet.add_member(:created_date, Shapes::ShapeRef.new(shape: Date, location_name: "CreatedDate"))
-    PermissionSet.add_member(:session_duration, Shapes::ShapeRef.new(shape: Duration, location_name: "SessionDuration"))
     PermissionSet.add_member(:relay_state, Shapes::ShapeRef.new(shape: RelayState, location_name: "RelayState"))
+    PermissionSet.add_member(:session_duration, Shapes::ShapeRef.new(shape: Duration, location_name: "SessionDuration"))
     PermissionSet.struct_class = Types::PermissionSet
 
     PermissionSetList.member = Shapes::ShapeRef.new(shape: PermissionSetArn)
 
-    PermissionSetProvisioningStatus.add_member(:status, Shapes::ShapeRef.new(shape: StatusValues, location_name: "Status"))
-    PermissionSetProvisioningStatus.add_member(:request_id, Shapes::ShapeRef.new(shape: UUId, location_name: "RequestId"))
     PermissionSetProvisioningStatus.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
-    PermissionSetProvisioningStatus.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, location_name: "PermissionSetArn"))
-    PermissionSetProvisioningStatus.add_member(:failure_reason, Shapes::ShapeRef.new(shape: Reason, location_name: "FailureReason"))
     PermissionSetProvisioningStatus.add_member(:created_date, Shapes::ShapeRef.new(shape: Date, location_name: "CreatedDate"))
+    PermissionSetProvisioningStatus.add_member(:failure_reason, Shapes::ShapeRef.new(shape: Reason, location_name: "FailureReason"))
+    PermissionSetProvisioningStatus.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, location_name: "PermissionSetArn"))
+    PermissionSetProvisioningStatus.add_member(:request_id, Shapes::ShapeRef.new(shape: UUId, location_name: "RequestId"))
+    PermissionSetProvisioningStatus.add_member(:status, Shapes::ShapeRef.new(shape: StatusValues, location_name: "Status"))
     PermissionSetProvisioningStatus.struct_class = Types::PermissionSetProvisioningStatus
 
     PermissionSetProvisioningStatusList.member = Shapes::ShapeRef.new(shape: PermissionSetProvisioningStatusMetadata)
 
-    PermissionSetProvisioningStatusMetadata.add_member(:status, Shapes::ShapeRef.new(shape: StatusValues, location_name: "Status"))
-    PermissionSetProvisioningStatusMetadata.add_member(:request_id, Shapes::ShapeRef.new(shape: UUId, location_name: "RequestId"))
     PermissionSetProvisioningStatusMetadata.add_member(:created_date, Shapes::ShapeRef.new(shape: Date, location_name: "CreatedDate"))
+    PermissionSetProvisioningStatusMetadata.add_member(:request_id, Shapes::ShapeRef.new(shape: UUId, location_name: "RequestId"))
+    PermissionSetProvisioningStatusMetadata.add_member(:status, Shapes::ShapeRef.new(shape: StatusValues, location_name: "Status"))
     PermissionSetProvisioningStatusMetadata.struct_class = Types::PermissionSetProvisioningStatusMetadata
 
     PermissionsBoundary.add_member(:customer_managed_policy_reference, Shapes::ShapeRef.new(shape: CustomerManagedPolicyReference, location_name: "CustomerManagedPolicyReference"))
@@ -520,9 +520,9 @@ module Aws::SSOAdmin
     ProvisionPermissionSetResponse.add_member(:permission_set_provisioning_status, Shapes::ShapeRef.new(shape: PermissionSetProvisioningStatus, location_name: "PermissionSetProvisioningStatus"))
     ProvisionPermissionSetResponse.struct_class = Types::ProvisionPermissionSetResponse
 
+    PutInlinePolicyToPermissionSetRequest.add_member(:inline_policy, Shapes::ShapeRef.new(shape: PermissionSetPolicyDocument, required: true, location_name: "InlinePolicy"))
     PutInlinePolicyToPermissionSetRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     PutInlinePolicyToPermissionSetRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
-    PutInlinePolicyToPermissionSetRequest.add_member(:inline_policy, Shapes::ShapeRef.new(shape: PermissionSetPolicyDocument, required: true, location_name: "InlinePolicy"))
     PutInlinePolicyToPermissionSetRequest.struct_class = Types::PutInlinePolicyToPermissionSetRequest
 
     PutInlinePolicyToPermissionSetResponse.struct_class = Types::PutInlinePolicyToPermissionSetResponse
@@ -565,17 +565,17 @@ module Aws::SSOAdmin
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
-    UpdateInstanceAccessControlAttributeConfigurationRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     UpdateInstanceAccessControlAttributeConfigurationRequest.add_member(:instance_access_control_attribute_configuration, Shapes::ShapeRef.new(shape: InstanceAccessControlAttributeConfiguration, required: true, location_name: "InstanceAccessControlAttributeConfiguration"))
+    UpdateInstanceAccessControlAttributeConfigurationRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     UpdateInstanceAccessControlAttributeConfigurationRequest.struct_class = Types::UpdateInstanceAccessControlAttributeConfigurationRequest
 
     UpdateInstanceAccessControlAttributeConfigurationResponse.struct_class = Types::UpdateInstanceAccessControlAttributeConfigurationResponse
 
+    UpdatePermissionSetRequest.add_member(:description, Shapes::ShapeRef.new(shape: PermissionSetDescription, location_name: "Description"))
     UpdatePermissionSetRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     UpdatePermissionSetRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
-    UpdatePermissionSetRequest.add_member(:description, Shapes::ShapeRef.new(shape: PermissionSetDescription, location_name: "Description"))
-    UpdatePermissionSetRequest.add_member(:session_duration, Shapes::ShapeRef.new(shape: Duration, location_name: "SessionDuration"))
     UpdatePermissionSetRequest.add_member(:relay_state, Shapes::ShapeRef.new(shape: RelayState, location_name: "RelayState"))
+    UpdatePermissionSetRequest.add_member(:session_duration, Shapes::ShapeRef.new(shape: Duration, location_name: "SessionDuration"))
     UpdatePermissionSetRequest.struct_class = Types::UpdatePermissionSetRequest
 
     UpdatePermissionSetResponse.struct_class = Types::UpdatePermissionSetResponse
@@ -609,12 +609,12 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AttachCustomerManagedPolicyReferenceToPermissionSetRequest)
         o.output = Shapes::ShapeRef.new(shape: AttachCustomerManagedPolicyReferenceToPermissionSetResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
@@ -624,12 +624,12 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AttachManagedPolicyToPermissionSetRequest)
         o.output = Shapes::ShapeRef.new(shape: AttachManagedPolicyToPermissionSetResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
@@ -639,12 +639,12 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateAccountAssignmentRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateAccountAssignmentResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
@@ -654,11 +654,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateInstanceAccessControlAttributeConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateInstanceAccessControlAttributeConfigurationResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
@@ -668,12 +668,12 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreatePermissionSetRequest)
         o.output = Shapes::ShapeRef.new(shape: CreatePermissionSetResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
@@ -683,11 +683,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteAccountAssignmentRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteAccountAssignmentResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
@@ -697,11 +697,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteInlinePolicyFromPermissionSetRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteInlinePolicyFromPermissionSetResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
@@ -711,11 +711,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteInstanceAccessControlAttributeConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteInstanceAccessControlAttributeConfigurationResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
@@ -725,11 +725,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeletePermissionSetRequest)
         o.output = Shapes::ShapeRef.new(shape: DeletePermissionSetResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
@@ -739,11 +739,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeletePermissionsBoundaryFromPermissionSetRequest)
         o.output = Shapes::ShapeRef.new(shape: DeletePermissionsBoundaryFromPermissionSetResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:describe_account_assignment_creation_status, Seahorse::Model::Operation.new.tap do |o|
@@ -752,11 +752,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeAccountAssignmentCreationStatusRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeAccountAssignmentCreationStatusResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:describe_account_assignment_deletion_status, Seahorse::Model::Operation.new.tap do |o|
@@ -765,11 +765,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeAccountAssignmentDeletionStatusRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeAccountAssignmentDeletionStatusResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:describe_instance_access_control_attribute_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -778,10 +778,10 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeInstanceAccessControlAttributeConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeInstanceAccessControlAttributeConfigurationResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
@@ -791,11 +791,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribePermissionSetRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribePermissionSetResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:describe_permission_set_provisioning_status, Seahorse::Model::Operation.new.tap do |o|
@@ -804,11 +804,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribePermissionSetProvisioningStatusRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribePermissionSetProvisioningStatusResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:detach_customer_managed_policy_reference_from_permission_set, Seahorse::Model::Operation.new.tap do |o|
@@ -817,11 +817,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DetachCustomerManagedPolicyReferenceFromPermissionSetRequest)
         o.output = Shapes::ShapeRef.new(shape: DetachCustomerManagedPolicyReferenceFromPermissionSetResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
@@ -831,11 +831,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DetachManagedPolicyFromPermissionSetRequest)
         o.output = Shapes::ShapeRef.new(shape: DetachManagedPolicyFromPermissionSetResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
@@ -845,11 +845,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetInlinePolicyForPermissionSetRequest)
         o.output = Shapes::ShapeRef.new(shape: GetInlinePolicyForPermissionSetResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:get_permissions_boundary_for_permission_set, Seahorse::Model::Operation.new.tap do |o|
@@ -858,11 +858,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetPermissionsBoundaryForPermissionSetRequest)
         o.output = Shapes::ShapeRef.new(shape: GetPermissionsBoundaryForPermissionSetResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:list_account_assignment_creation_status, Seahorse::Model::Operation.new.tap do |o|
@@ -871,11 +871,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListAccountAssignmentCreationStatusRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAccountAssignmentCreationStatusResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -890,11 +890,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListAccountAssignmentDeletionStatusRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAccountAssignmentDeletionStatusResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -909,11 +909,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListAccountAssignmentsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAccountAssignmentsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -928,11 +928,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListAccountsForProvisionedPermissionSetRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAccountsForProvisionedPermissionSetResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -947,11 +947,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListCustomerManagedPolicyReferencesInPermissionSetRequest)
         o.output = Shapes::ShapeRef.new(shape: ListCustomerManagedPolicyReferencesInPermissionSetResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -966,8 +966,8 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListInstancesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListInstancesResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
@@ -984,11 +984,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListManagedPoliciesInPermissionSetRequest)
         o.output = Shapes::ShapeRef.new(shape: ListManagedPoliciesInPermissionSetResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1003,11 +1003,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListPermissionSetProvisioningStatusRequest)
         o.output = Shapes::ShapeRef.new(shape: ListPermissionSetProvisioningStatusResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1022,11 +1022,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListPermissionSetsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListPermissionSetsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1041,11 +1041,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListPermissionSetsProvisionedToAccountRequest)
         o.output = Shapes::ShapeRef.new(shape: ListPermissionSetsProvisionedToAccountResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1060,11 +1060,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           tokens: {
             "next_token" => "next_token"
@@ -1078,11 +1078,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ProvisionPermissionSetRequest)
         o.output = Shapes::ShapeRef.new(shape: ProvisionPermissionSetResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
@@ -1092,12 +1092,12 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: PutInlinePolicyToPermissionSetRequest)
         o.output = Shapes::ShapeRef.new(shape: PutInlinePolicyToPermissionSetResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
@@ -1107,11 +1107,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: PutPermissionsBoundaryToPermissionSetRequest)
         o.output = Shapes::ShapeRef.new(shape: PutPermissionsBoundaryToPermissionSetResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
@@ -1121,12 +1121,12 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
@@ -1136,11 +1136,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
@@ -1150,11 +1150,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateInstanceAccessControlAttributeConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateInstanceAccessControlAttributeConfigurationResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
@@ -1164,11 +1164,11 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdatePermissionSetRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdatePermissionSetResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
     end

@@ -2205,7 +2205,7 @@ module Aws::FSx
     # @!attribute [rw] file_system_type_version
     #   (Optional) For FSx for Lustre file systems, sets the Lustre version
     #   for the file system that you're creating. Valid values are `2.10`,
-    #   `2.12`m and `2.15`:
+    #   `2.12`, and `2.15`:
     #
     #   * 2\.10 is supported by the Scratch and Persistent\_1 Lustre
     #     deployment types.
@@ -3465,9 +3465,9 @@ module Aws::FSx
     #   transfer operations between an Amazon FSx for Lustre file system and
     #   a linked data repository.
     #
-    # * You use release data repository tasks to release have been exported
-    #   to a linked S3 bucketed files from your Amazon FSx for Lustre file
-    #   system.
+    # * You use release data repository tasks to release files that have
+    #   been exported to a linked S3 bucket from your Amazon FSx for Lustre
+    #   file system.
     #
     # * An Amazon File Cache resource uses a task to automatically release
     #   files from the cache.
@@ -5589,7 +5589,7 @@ module Aws::FSx
     #
     # @!attribute [rw] file_system_type_version
     #   The Lustre version of the Amazon FSx for Lustre file system, which
-    #   is `2.10`, `2.12`, or `2.15`.
+    #   can be `2.10`, `2.12`, or `2.15`.
     #   @return [String]
     #
     # @!attribute [rw] open_zfs_configuration

@@ -160,6 +160,8 @@ module Aws::WorkSpaces
     DisassociateIpGroupsResult = Shapes::StructureShape.new(name: 'DisassociateIpGroupsResult')
     DnsIpAddresses = Shapes::ListShape.new(name: 'DnsIpAddresses')
     Ec2ImageId = Shapes::StringShape.new(name: 'Ec2ImageId')
+    ErrorDetails = Shapes::StructureShape.new(name: 'ErrorDetails')
+    ErrorDetailsList = Shapes::ListShape.new(name: 'ErrorDetailsList')
     ErrorType = Shapes::StringShape.new(name: 'ErrorType')
     ExceptionErrorCode = Shapes::StringShape.new(name: 'ExceptionErrorCode')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
@@ -336,6 +338,7 @@ module Aws::WorkSpaces
     WorkspaceImage = Shapes::StructureShape.new(name: 'WorkspaceImage')
     WorkspaceImageDescription = Shapes::StringShape.new(name: 'WorkspaceImageDescription')
     WorkspaceImageErrorCode = Shapes::StringShape.new(name: 'WorkspaceImageErrorCode')
+    WorkspaceImageErrorDetailCode = Shapes::StringShape.new(name: 'WorkspaceImageErrorDetailCode')
     WorkspaceImageId = Shapes::StringShape.new(name: 'WorkspaceImageId')
     WorkspaceImageIdList = Shapes::ListShape.new(name: 'WorkspaceImageIdList')
     WorkspaceImageIngestionProcess = Shapes::StringShape.new(name: 'WorkspaceImageIngestionProcess')
@@ -760,6 +763,12 @@ module Aws::WorkSpaces
     DisassociateIpGroupsResult.struct_class = Types::DisassociateIpGroupsResult
 
     DnsIpAddresses.member = Shapes::ShapeRef.new(shape: IpAddress)
+
+    ErrorDetails.add_member(:error_code, Shapes::ShapeRef.new(shape: WorkspaceImageErrorDetailCode, location_name: "ErrorCode"))
+    ErrorDetails.add_member(:error_message, Shapes::ShapeRef.new(shape: Description, location_name: "ErrorMessage"))
+    ErrorDetails.struct_class = Types::ErrorDetails
+
+    ErrorDetailsList.member = Shapes::ShapeRef.new(shape: ErrorDetails)
 
     FailedCreateStandbyWorkspacesRequest.add_member(:standby_workspace_request, Shapes::ShapeRef.new(shape: StandbyWorkspace, location_name: "StandbyWorkspaceRequest"))
     FailedCreateStandbyWorkspacesRequest.add_member(:error_code, Shapes::ShapeRef.new(shape: WorkspaceErrorCode, location_name: "ErrorCode"))
@@ -1240,6 +1249,7 @@ module Aws::WorkSpaces
     WorkspaceImage.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Created"))
     WorkspaceImage.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "OwnerAccountId"))
     WorkspaceImage.add_member(:updates, Shapes::ShapeRef.new(shape: UpdateResult, location_name: "Updates"))
+    WorkspaceImage.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetailsList, location_name: "ErrorDetails"))
     WorkspaceImage.struct_class = Types::WorkspaceImage
 
     WorkspaceImageIdList.member = Shapes::ShapeRef.new(shape: WorkspaceImageId)

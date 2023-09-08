@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2023-09-08)
+------------------
+
+* Feature - Amazon FSx documentation fixes
+
 1.75.0 (2023-08-29)
 ------------------
 

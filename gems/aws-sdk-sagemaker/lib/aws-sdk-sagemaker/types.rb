@@ -2415,12 +2415,6 @@ module Aws::SageMaker
     # @!attribute [rw] time_series_forecasting_job_config
     #   Settings used to configure an AutoML job V2 for a time-series
     #   forecasting problem type.
-    #
-    #   <note markdown="1"> The `TimeSeriesForecastingJobConfig` problem type is only available
-    #   in private beta. Contact Amazon Web Services Support or your account
-    #   manager to learn more about access privileges.
-    #
-    #    </note>
     #   @return [Types::TimeSeriesForecastingJobConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLProblemTypeConfig AWS API Documentation
@@ -18651,6 +18645,31 @@ module Aws::SageMaker
     #
     class GitConfigForUpdate < Struct.new(
       :secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Stores the holiday featurization attributes applicable to each item of
+    # time-series datasets during the training of a forecasting model. This
+    # allows the model to identify patterns associated with specific
+    # holidays.
+    #
+    # @!attribute [rw] country_code
+    #   The country code for the holiday calendar.
+    #
+    #   For the list of public holiday calendars supported by AutoML job V2,
+    #   see [Country Codes][1]. Use the country code corresponding to the
+    #   country of your choice.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/holidays.html#holidays-country-codes
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HolidayConfigAttributes AWS API Documentation
+    #
+    class HolidayConfigAttributes < Struct.new(
+      :country_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37624,12 +37643,6 @@ module Aws::SageMaker
     # The collection of settings used by an AutoML job V2 for the
     # time-series forecasting problem type.
     #
-    # <note markdown="1"> The `TimeSeriesForecastingJobConfig` problem type is only available in
-    # private beta. Contact Amazon Web Services Support or your account
-    # manager to learn more about access privileges.
-    #
-    #  </note>
-    #
     # @!attribute [rw] feature_specification_s3_uri
     #   A URL to the Amazon S3 data source containing additional selected
     #   features that complement the target, itemID, timestamp, and grouped
@@ -37714,6 +37727,12 @@ module Aws::SageMaker
     #   The collection of components that defines the time-series.
     #   @return [Types::TimeSeriesConfig]
     #
+    # @!attribute [rw] holiday_config
+    #   The collection of holiday featurization attributes used to
+    #   incorporate national holiday information into your forecasting
+    #   model.
+    #   @return [Array<Types::HolidayConfigAttributes>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TimeSeriesForecastingJobConfig AWS API Documentation
     #
     class TimeSeriesForecastingJobConfig < Struct.new(
@@ -37723,7 +37742,8 @@ module Aws::SageMaker
       :forecast_horizon,
       :forecast_quantiles,
       :transformations,
-      :time_series_config)
+      :time_series_config,
+      :holiday_config)
       SENSITIVE = []
       include Aws::Structure
     end

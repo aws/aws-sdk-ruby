@@ -1830,6 +1830,26 @@ module Aws::WorkSpaces
     #
     class DisassociateIpGroupsResult < Aws::EmptyStructure; end
 
+    # Provides in-depth details about the error. These details include the
+    # possible causes of the errors and troubleshooting information.
+    #
+    # @!attribute [rw] error_code
+    #   Indicates the error code returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The text of the error message related the error code.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ErrorDetails AWS API Documentation
+    #
+    class ErrorDetails < Struct.new(
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the standby WorkSpace that could not be created.
     #
     # @!attribute [rw] standby_workspace_request
@@ -4077,6 +4097,10 @@ module Aws::WorkSpaces
     #   The updates (if any) that are available for the specified image.
     #   @return [Types::UpdateResult]
     #
+    # @!attribute [rw] error_details
+    #   The details of the error returned for the image.
+    #   @return [Array<Types::ErrorDetails>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceImage AWS API Documentation
     #
     class WorkspaceImage < Struct.new(
@@ -4090,7 +4114,8 @@ module Aws::WorkSpaces
       :error_message,
       :created,
       :owner_account_id,
-      :updates)
+      :updates,
+      :error_details)
       SENSITIVE = []
       include Aws::Structure
     end
