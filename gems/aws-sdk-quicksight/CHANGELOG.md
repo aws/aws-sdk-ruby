@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2023-09-11)
+------------------
+
+* Feature - This release launches new updates to QuickSight KPI visuals - support for sparklines, new templated layout and new targets for conditional formatting rules.
+
 1.89.0 (2023-08-24)
 ------------------
 

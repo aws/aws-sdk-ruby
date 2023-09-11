@@ -853,6 +853,8 @@ module Aws::QuickSight
     JoinInstruction = Shapes::StructureShape.new(name: 'JoinInstruction')
     JoinKeyProperties = Shapes::StructureShape.new(name: 'JoinKeyProperties')
     JoinType = Shapes::StringShape.new(name: 'JoinType')
+    KPIActualValueConditionalFormatting = Shapes::StructureShape.new(name: 'KPIActualValueConditionalFormatting')
+    KPIComparisonValueConditionalFormatting = Shapes::StructureShape.new(name: 'KPIComparisonValueConditionalFormatting')
     KPIConditionalFormatting = Shapes::StructureShape.new(name: 'KPIConditionalFormatting')
     KPIConditionalFormattingOption = Shapes::StructureShape.new(name: 'KPIConditionalFormattingOption')
     KPIConditionalFormattingOptionList = Shapes::ListShape.new(name: 'KPIConditionalFormattingOptionList')
@@ -862,7 +864,12 @@ module Aws::QuickSight
     KPIPrimaryValueConditionalFormatting = Shapes::StructureShape.new(name: 'KPIPrimaryValueConditionalFormatting')
     KPIProgressBarConditionalFormatting = Shapes::StructureShape.new(name: 'KPIProgressBarConditionalFormatting')
     KPISortConfiguration = Shapes::StructureShape.new(name: 'KPISortConfiguration')
+    KPISparklineOptions = Shapes::StructureShape.new(name: 'KPISparklineOptions')
+    KPISparklineType = Shapes::StringShape.new(name: 'KPISparklineType')
     KPIVisual = Shapes::StructureShape.new(name: 'KPIVisual')
+    KPIVisualLayoutOptions = Shapes::StructureShape.new(name: 'KPIVisualLayoutOptions')
+    KPIVisualStandardLayout = Shapes::StructureShape.new(name: 'KPIVisualStandardLayout')
+    KPIVisualStandardLayoutType = Shapes::StringShape.new(name: 'KPIVisualStandardLayoutType')
     LabelOptions = Shapes::StructureShape.new(name: 'LabelOptions')
     Latitude = Shapes::FloatShape.new(name: 'Latitude')
     Layout = Shapes::StructureShape.new(name: 'Layout')
@@ -4966,11 +4973,21 @@ module Aws::QuickSight
     JoinKeyProperties.add_member(:unique_key, Shapes::ShapeRef.new(shape: Boolean, location_name: "UniqueKey", metadata: {"box"=>true}))
     JoinKeyProperties.struct_class = Types::JoinKeyProperties
 
+    KPIActualValueConditionalFormatting.add_member(:text_color, Shapes::ShapeRef.new(shape: ConditionalFormattingColor, location_name: "TextColor"))
+    KPIActualValueConditionalFormatting.add_member(:icon, Shapes::ShapeRef.new(shape: ConditionalFormattingIcon, location_name: "Icon"))
+    KPIActualValueConditionalFormatting.struct_class = Types::KPIActualValueConditionalFormatting
+
+    KPIComparisonValueConditionalFormatting.add_member(:text_color, Shapes::ShapeRef.new(shape: ConditionalFormattingColor, location_name: "TextColor"))
+    KPIComparisonValueConditionalFormatting.add_member(:icon, Shapes::ShapeRef.new(shape: ConditionalFormattingIcon, location_name: "Icon"))
+    KPIComparisonValueConditionalFormatting.struct_class = Types::KPIComparisonValueConditionalFormatting
+
     KPIConditionalFormatting.add_member(:conditional_formatting_options, Shapes::ShapeRef.new(shape: KPIConditionalFormattingOptionList, location_name: "ConditionalFormattingOptions"))
     KPIConditionalFormatting.struct_class = Types::KPIConditionalFormatting
 
     KPIConditionalFormattingOption.add_member(:primary_value, Shapes::ShapeRef.new(shape: KPIPrimaryValueConditionalFormatting, location_name: "PrimaryValue"))
     KPIConditionalFormattingOption.add_member(:progress_bar, Shapes::ShapeRef.new(shape: KPIProgressBarConditionalFormatting, location_name: "ProgressBar"))
+    KPIConditionalFormattingOption.add_member(:actual_value, Shapes::ShapeRef.new(shape: KPIActualValueConditionalFormatting, location_name: "ActualValue"))
+    KPIConditionalFormattingOption.add_member(:comparison_value, Shapes::ShapeRef.new(shape: KPIComparisonValueConditionalFormatting, location_name: "ComparisonValue"))
     KPIConditionalFormattingOption.struct_class = Types::KPIConditionalFormattingOption
 
     KPIConditionalFormattingOptionList.member = Shapes::ShapeRef.new(shape: KPIConditionalFormattingOption)
@@ -4992,6 +5009,8 @@ module Aws::QuickSight
     KPIOptions.add_member(:primary_value_display_type, Shapes::ShapeRef.new(shape: PrimaryValueDisplayType, location_name: "PrimaryValueDisplayType"))
     KPIOptions.add_member(:primary_value_font_configuration, Shapes::ShapeRef.new(shape: FontConfiguration, location_name: "PrimaryValueFontConfiguration"))
     KPIOptions.add_member(:secondary_value_font_configuration, Shapes::ShapeRef.new(shape: FontConfiguration, location_name: "SecondaryValueFontConfiguration"))
+    KPIOptions.add_member(:sparkline, Shapes::ShapeRef.new(shape: KPISparklineOptions, location_name: "Sparkline"))
+    KPIOptions.add_member(:visual_layout_options, Shapes::ShapeRef.new(shape: KPIVisualLayoutOptions, location_name: "VisualLayoutOptions"))
     KPIOptions.struct_class = Types::KPIOptions
 
     KPIPrimaryValueConditionalFormatting.add_member(:text_color, Shapes::ShapeRef.new(shape: ConditionalFormattingColor, location_name: "TextColor"))
@@ -5004,6 +5023,12 @@ module Aws::QuickSight
     KPISortConfiguration.add_member(:trend_group_sort, Shapes::ShapeRef.new(shape: FieldSortOptionsList, location_name: "TrendGroupSort"))
     KPISortConfiguration.struct_class = Types::KPISortConfiguration
 
+    KPISparklineOptions.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
+    KPISparklineOptions.add_member(:type, Shapes::ShapeRef.new(shape: KPISparklineType, required: true, location_name: "Type"))
+    KPISparklineOptions.add_member(:color, Shapes::ShapeRef.new(shape: HexColor, location_name: "Color"))
+    KPISparklineOptions.add_member(:tooltip_visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "TooltipVisibility"))
+    KPISparklineOptions.struct_class = Types::KPISparklineOptions
+
     KPIVisual.add_member(:visual_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "VisualId"))
     KPIVisual.add_member(:title, Shapes::ShapeRef.new(shape: VisualTitleLabelOptions, location_name: "Title"))
     KPIVisual.add_member(:subtitle, Shapes::ShapeRef.new(shape: VisualSubtitleLabelOptions, location_name: "Subtitle"))
@@ -5012,6 +5037,12 @@ module Aws::QuickSight
     KPIVisual.add_member(:actions, Shapes::ShapeRef.new(shape: VisualCustomActionList, location_name: "Actions"))
     KPIVisual.add_member(:column_hierarchies, Shapes::ShapeRef.new(shape: ColumnHierarchyList, location_name: "ColumnHierarchies"))
     KPIVisual.struct_class = Types::KPIVisual
+
+    KPIVisualLayoutOptions.add_member(:standard_layout, Shapes::ShapeRef.new(shape: KPIVisualStandardLayout, location_name: "StandardLayout"))
+    KPIVisualLayoutOptions.struct_class = Types::KPIVisualLayoutOptions
+
+    KPIVisualStandardLayout.add_member(:type, Shapes::ShapeRef.new(shape: KPIVisualStandardLayoutType, required: true, location_name: "Type"))
+    KPIVisualStandardLayout.struct_class = Types::KPIVisualStandardLayout
 
     LabelOptions.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
     LabelOptions.add_member(:font_configuration, Shapes::ShapeRef.new(shape: FontConfiguration, location_name: "FontConfiguration"))

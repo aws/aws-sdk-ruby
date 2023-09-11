@@ -16074,6 +16074,44 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The conditional formatting for the actual value of a KPI visual.
+    #
+    # @!attribute [rw] text_color
+    #   The conditional formatting of the actual value's text color.
+    #   @return [Types::ConditionalFormattingColor]
+    #
+    # @!attribute [rw] icon
+    #   The conditional formatting of the actual value's icon.
+    #   @return [Types::ConditionalFormattingIcon]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/KPIActualValueConditionalFormatting AWS API Documentation
+    #
+    class KPIActualValueConditionalFormatting < Struct.new(
+      :text_color,
+      :icon)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The conditional formatting for the comparison value of a KPI visual.
+    #
+    # @!attribute [rw] text_color
+    #   The conditional formatting of the comparison value's text color.
+    #   @return [Types::ConditionalFormattingColor]
+    #
+    # @!attribute [rw] icon
+    #   The conditional formatting of the comparison value's icon.
+    #   @return [Types::ConditionalFormattingIcon]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/KPIComparisonValueConditionalFormatting AWS API Documentation
+    #
+    class KPIComparisonValueConditionalFormatting < Struct.new(
+      :text_color,
+      :icon)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The conditional formatting of a KPI visual.
     #
     # @!attribute [rw] conditional_formatting_options
@@ -16098,11 +16136,21 @@ module Aws::QuickSight
     #   The conditional formatting for the progress bar of a KPI visual.
     #   @return [Types::KPIProgressBarConditionalFormatting]
     #
+    # @!attribute [rw] actual_value
+    #   The conditional formatting for the actual value of a KPI visual.
+    #   @return [Types::KPIActualValueConditionalFormatting]
+    #
+    # @!attribute [rw] comparison_value
+    #   The conditional formatting for the comparison value of a KPI visual.
+    #   @return [Types::KPIComparisonValueConditionalFormatting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/KPIConditionalFormattingOption AWS API Documentation
     #
     class KPIConditionalFormattingOption < Struct.new(
       :primary_value,
-      :progress_bar)
+      :progress_bar,
+      :actual_value,
+      :comparison_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16188,6 +16236,15 @@ module Aws::QuickSight
     #   The options that determine the secondary value font configuration.
     #   @return [Types::FontConfiguration]
     #
+    # @!attribute [rw] sparkline
+    #   The options that determine the visibility, color, type, and tooltip
+    #   visibility of the sparkline of a KPI visual.
+    #   @return [Types::KPISparklineOptions]
+    #
+    # @!attribute [rw] visual_layout_options
+    #   The options that determine the layout a KPI visual.
+    #   @return [Types::KPIVisualLayoutOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/KPIOptions AWS API Documentation
     #
     class KPIOptions < Struct.new(
@@ -16197,7 +16254,9 @@ module Aws::QuickSight
       :comparison,
       :primary_value_display_type,
       :primary_value_font_configuration,
-      :secondary_value_font_configuration)
+      :secondary_value_font_configuration,
+      :sparkline,
+      :visual_layout_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16245,6 +16304,36 @@ module Aws::QuickSight
     #
     class KPISortConfiguration < Struct.new(
       :trend_group_sort)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options that determine the visibility, color, type, and tooltip
+    # visibility of the sparkline of a KPI visual.
+    #
+    # @!attribute [rw] visibility
+    #   The visibility of the sparkline.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the sparkline.
+    #   @return [String]
+    #
+    # @!attribute [rw] color
+    #   The color of the sparkline.
+    #   @return [String]
+    #
+    # @!attribute [rw] tooltip_visibility
+    #   The tooltip visibility of the sparkline.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/KPISparklineOptions AWS API Documentation
+    #
+    class KPISparklineOptions < Struct.new(
+      :visibility,
+      :type,
+      :color,
+      :tooltip_visibility)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16299,6 +16388,34 @@ module Aws::QuickSight
       :conditional_formatting,
       :actions,
       :column_hierarchies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options that determine the layout a KPI visual.
+    #
+    # @!attribute [rw] standard_layout
+    #   The standard layout of the KPI visual.
+    #   @return [Types::KPIVisualStandardLayout]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/KPIVisualLayoutOptions AWS API Documentation
+    #
+    class KPIVisualLayoutOptions < Struct.new(
+      :standard_layout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The standard layout of the KPI visual.
+    #
+    # @!attribute [rw] type
+    #   The standard layout type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/KPIVisualStandardLayout AWS API Documentation
+    #
+    class KPIVisualStandardLayout < Struct.new(
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end

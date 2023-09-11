@@ -1065,8 +1065,8 @@ module Aws::ECR
     StartLifecyclePolicyPreviewResponse.add_member(:status, Shapes::ShapeRef.new(shape: LifecyclePolicyPreviewStatus, location_name: "status"))
     StartLifecyclePolicyPreviewResponse.struct_class = Types::StartLifecyclePolicyPreviewResponse
 
-    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
-    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
     Tag.struct_class = Types::Tag
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
@@ -1250,6 +1250,7 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LifecyclePolicyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:delete_pull_through_cache_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -1431,6 +1432,7 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LifecyclePolicyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:get_lifecycle_policy_preview, Seahorse::Model::Operation.new.tap do |o|
@@ -1443,6 +1445,7 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LifecyclePolicyPreviewNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1576,6 +1579,7 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:put_registry_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -1648,6 +1652,7 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LifecyclePolicyNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LifecyclePolicyPreviewInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

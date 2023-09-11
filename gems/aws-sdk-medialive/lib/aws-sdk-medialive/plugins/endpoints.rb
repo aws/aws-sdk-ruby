@@ -154,12 +154,16 @@ module Aws::MediaLive
             Aws::MediaLive::Endpoints::UpdateAccountConfiguration.build(context)
           when :start_channel
             Aws::MediaLive::Endpoints::StartChannel.build(context)
+          when :start_input_device
+            Aws::MediaLive::Endpoints::StartInputDevice.build(context)
           when :start_input_device_maintenance_window
             Aws::MediaLive::Endpoints::StartInputDeviceMaintenanceWindow.build(context)
           when :start_multiplex
             Aws::MediaLive::Endpoints::StartMultiplex.build(context)
           when :stop_channel
             Aws::MediaLive::Endpoints::StopChannel.build(context)
+          when :stop_input_device
+            Aws::MediaLive::Endpoints::StopInputDevice.build(context)
           when :stop_multiplex
             Aws::MediaLive::Endpoints::StopMultiplex.build(context)
           when :transfer_input_device

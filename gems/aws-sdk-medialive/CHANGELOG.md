@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.108.0 (2023-09-11)
+------------------
+
+* Feature - AWS Elemental Link now supports attaching a Link UHD device to a MediaConnect flow.
+
 1.107.0 (2023-09-06)
 ------------------
 
