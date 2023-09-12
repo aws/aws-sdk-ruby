@@ -1124,6 +1124,8 @@ module Aws::EC2
     DisableFastSnapshotRestoreSuccessSet = Shapes::ListShape.new(name: 'DisableFastSnapshotRestoreSuccessSet')
     DisableFastSnapshotRestoresRequest = Shapes::StructureShape.new(name: 'DisableFastSnapshotRestoresRequest')
     DisableFastSnapshotRestoresResult = Shapes::StructureShape.new(name: 'DisableFastSnapshotRestoresResult')
+    DisableImageBlockPublicAccessRequest = Shapes::StructureShape.new(name: 'DisableImageBlockPublicAccessRequest')
+    DisableImageBlockPublicAccessResult = Shapes::StructureShape.new(name: 'DisableImageBlockPublicAccessResult')
     DisableImageDeprecationRequest = Shapes::StructureShape.new(name: 'DisableImageDeprecationRequest')
     DisableImageDeprecationResult = Shapes::StructureShape.new(name: 'DisableImageDeprecationResult')
     DisableIpamOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'DisableIpamOrganizationAdminAccountRequest')
@@ -1246,6 +1248,8 @@ module Aws::EC2
     EnableFastSnapshotRestoreSuccessSet = Shapes::ListShape.new(name: 'EnableFastSnapshotRestoreSuccessSet')
     EnableFastSnapshotRestoresRequest = Shapes::StructureShape.new(name: 'EnableFastSnapshotRestoresRequest')
     EnableFastSnapshotRestoresResult = Shapes::StructureShape.new(name: 'EnableFastSnapshotRestoresResult')
+    EnableImageBlockPublicAccessRequest = Shapes::StructureShape.new(name: 'EnableImageBlockPublicAccessRequest')
+    EnableImageBlockPublicAccessResult = Shapes::StructureShape.new(name: 'EnableImageBlockPublicAccessResult')
     EnableImageDeprecationRequest = Shapes::StructureShape.new(name: 'EnableImageDeprecationRequest')
     EnableImageDeprecationResult = Shapes::StructureShape.new(name: 'EnableImageDeprecationResult')
     EnableIpamOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'EnableIpamOrganizationAdminAccountRequest')
@@ -1406,6 +1410,8 @@ module Aws::EC2
     GetGroupsForCapacityReservationResult = Shapes::StructureShape.new(name: 'GetGroupsForCapacityReservationResult')
     GetHostReservationPurchasePreviewRequest = Shapes::StructureShape.new(name: 'GetHostReservationPurchasePreviewRequest')
     GetHostReservationPurchasePreviewResult = Shapes::StructureShape.new(name: 'GetHostReservationPurchasePreviewResult')
+    GetImageBlockPublicAccessStateRequest = Shapes::StructureShape.new(name: 'GetImageBlockPublicAccessStateRequest')
+    GetImageBlockPublicAccessStateResult = Shapes::StructureShape.new(name: 'GetImageBlockPublicAccessStateResult')
     GetInstanceTypesFromInstanceRequirementsRequest = Shapes::StructureShape.new(name: 'GetInstanceTypesFromInstanceRequirementsRequest')
     GetInstanceTypesFromInstanceRequirementsResult = Shapes::StructureShape.new(name: 'GetInstanceTypesFromInstanceRequirementsResult')
     GetInstanceUefiDataRequest = Shapes::StructureShape.new(name: 'GetInstanceUefiDataRequest')
@@ -1525,6 +1531,8 @@ module Aws::EC2
     Image = Shapes::StructureShape.new(name: 'Image')
     ImageAttribute = Shapes::StructureShape.new(name: 'ImageAttribute')
     ImageAttributeName = Shapes::StringShape.new(name: 'ImageAttributeName')
+    ImageBlockPublicAccessDisabledState = Shapes::StringShape.new(name: 'ImageBlockPublicAccessDisabledState')
+    ImageBlockPublicAccessEnabledState = Shapes::StringShape.new(name: 'ImageBlockPublicAccessEnabledState')
     ImageDiskContainer = Shapes::StructureShape.new(name: 'ImageDiskContainer')
     ImageDiskContainerList = Shapes::ListShape.new(name: 'ImageDiskContainerList')
     ImageId = Shapes::StringShape.new(name: 'ImageId')
@@ -7704,6 +7712,12 @@ module Aws::EC2
     DisableFastSnapshotRestoresResult.add_member(:unsuccessful, Shapes::ShapeRef.new(shape: DisableFastSnapshotRestoreErrorSet, location_name: "unsuccessful"))
     DisableFastSnapshotRestoresResult.struct_class = Types::DisableFastSnapshotRestoresResult
 
+    DisableImageBlockPublicAccessRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DisableImageBlockPublicAccessRequest.struct_class = Types::DisableImageBlockPublicAccessRequest
+
+    DisableImageBlockPublicAccessResult.add_member(:image_block_public_access_state, Shapes::ShapeRef.new(shape: ImageBlockPublicAccessDisabledState, location_name: "imageBlockPublicAccessState"))
+    DisableImageBlockPublicAccessResult.struct_class = Types::DisableImageBlockPublicAccessResult
+
     DisableImageDeprecationRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, required: true, location_name: "ImageId"))
     DisableImageDeprecationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DisableImageDeprecationRequest.struct_class = Types::DisableImageDeprecationRequest
@@ -8109,6 +8123,13 @@ module Aws::EC2
     EnableFastSnapshotRestoresResult.add_member(:successful, Shapes::ShapeRef.new(shape: EnableFastSnapshotRestoreSuccessSet, location_name: "successful"))
     EnableFastSnapshotRestoresResult.add_member(:unsuccessful, Shapes::ShapeRef.new(shape: EnableFastSnapshotRestoreErrorSet, location_name: "unsuccessful"))
     EnableFastSnapshotRestoresResult.struct_class = Types::EnableFastSnapshotRestoresResult
+
+    EnableImageBlockPublicAccessRequest.add_member(:image_block_public_access_state, Shapes::ShapeRef.new(shape: ImageBlockPublicAccessEnabledState, required: true, location_name: "ImageBlockPublicAccessState"))
+    EnableImageBlockPublicAccessRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    EnableImageBlockPublicAccessRequest.struct_class = Types::EnableImageBlockPublicAccessRequest
+
+    EnableImageBlockPublicAccessResult.add_member(:image_block_public_access_state, Shapes::ShapeRef.new(shape: ImageBlockPublicAccessEnabledState, location_name: "imageBlockPublicAccessState"))
+    EnableImageBlockPublicAccessResult.struct_class = Types::EnableImageBlockPublicAccessResult
 
     EnableImageDeprecationRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, required: true, location_name: "ImageId"))
     EnableImageDeprecationRequest.add_member(:deprecate_at, Shapes::ShapeRef.new(shape: MillisecondDateTime, required: true, location_name: "DeprecateAt"))
@@ -8704,6 +8725,12 @@ module Aws::EC2
     GetHostReservationPurchasePreviewResult.add_member(:total_hourly_price, Shapes::ShapeRef.new(shape: String, location_name: "totalHourlyPrice"))
     GetHostReservationPurchasePreviewResult.add_member(:total_upfront_price, Shapes::ShapeRef.new(shape: String, location_name: "totalUpfrontPrice"))
     GetHostReservationPurchasePreviewResult.struct_class = Types::GetHostReservationPurchasePreviewResult
+
+    GetImageBlockPublicAccessStateRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetImageBlockPublicAccessStateRequest.struct_class = Types::GetImageBlockPublicAccessStateRequest
+
+    GetImageBlockPublicAccessStateResult.add_member(:image_block_public_access_state, Shapes::ShapeRef.new(shape: String, location_name: "imageBlockPublicAccessState"))
+    GetImageBlockPublicAccessStateResult.struct_class = Types::GetImageBlockPublicAccessStateResult
 
     GetInstanceTypesFromInstanceRequirementsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     GetInstanceTypesFromInstanceRequirementsRequest.add_member(:architecture_types, Shapes::ShapeRef.new(shape: ArchitectureTypeSet, required: true, location_name: "ArchitectureType"))
@@ -18675,6 +18702,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DisableFastSnapshotRestoresResult)
       end)
 
+      api.add_operation(:disable_image_block_public_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableImageBlockPublicAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisableImageBlockPublicAccessRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisableImageBlockPublicAccessResult)
+      end)
+
       api.add_operation(:disable_image_deprecation, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisableImageDeprecation"
         o.http_method = "POST"
@@ -18881,6 +18916,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: EnableFastSnapshotRestoresRequest)
         o.output = Shapes::ShapeRef.new(shape: EnableFastSnapshotRestoresResult)
+      end)
+
+      api.add_operation(:enable_image_block_public_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableImageBlockPublicAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: EnableImageBlockPublicAccessRequest)
+        o.output = Shapes::ShapeRef.new(shape: EnableImageBlockPublicAccessResult)
       end)
 
       api.add_operation(:enable_image_deprecation, Seahorse::Model::Operation.new.tap do |o|
@@ -19107,6 +19150,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetHostReservationPurchasePreviewRequest)
         o.output = Shapes::ShapeRef.new(shape: GetHostReservationPurchasePreviewResult)
+      end)
+
+      api.add_operation(:get_image_block_public_access_state, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetImageBlockPublicAccessState"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetImageBlockPublicAccessStateRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetImageBlockPublicAccessStateResult)
       end)
 
       api.add_operation(:get_instance_types_from_instance_requirements, Seahorse::Model::Operation.new.tap do |o|

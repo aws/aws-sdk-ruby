@@ -37298,6 +37298,54 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Disables *block public access for AMIs* at the account level in the
+    # specified Amazon Web Services Region. This removes the *block public
+    # access* restriction from your account. With the restriction removed,
+    # you can publicly share your AMIs in the specified Amazon Web Services
+    # Region.
+    #
+    # The API can take up to 10 minutes to configure this setting. During
+    # this time, if you run [GetImageBlockPublicAccessState][1], the
+    # response will be `block-new-sharing`. When the API has completed the
+    # configuration, the response will be `unblocked`.
+    #
+    # For more information, see [Block public access to your AMIs][2] in the
+    # *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetImageBlockPublicAccessState.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sharingamis-intro.html#block-public-access-to-amis
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DisableImageBlockPublicAccessResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisableImageBlockPublicAccessResult#image_block_public_access_state #image_block_public_access_state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_image_block_public_access({
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_block_public_access_state #=> String, one of "unblocked"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableImageBlockPublicAccess AWS API Documentation
+    #
+    # @overload disable_image_block_public_access(params = {})
+    # @param [Hash] params ({})
+    def disable_image_block_public_access(params = {}, options = {})
+      req = build_request(:disable_image_block_public_access, params)
+      req.send_request(options)
+    end
+
     # Cancels the deprecation of the specified AMI.
     #
     # For more information, see [Deprecate an AMI][1] in the *Amazon EC2
@@ -38629,6 +38677,59 @@ module Aws::EC2
     # @param [Hash] params ({})
     def enable_fast_snapshot_restores(params = {}, options = {})
       req = build_request(:enable_fast_snapshot_restores, params)
+      req.send_request(options)
+    end
+
+    # Enables *block public access for AMIs* at the account level in the
+    # specified Amazon Web Services Region. This prevents the public sharing
+    # of your AMIs. However, if you already have public AMIs, they will
+    # remain publicly available.
+    #
+    # The API can take up to 10 minutes to configure this setting. During
+    # this time, if you run [GetImageBlockPublicAccessState][1], the
+    # response will be `unblocked`. When the API has completed the
+    # configuration, the response will be `block-new-sharing`.
+    #
+    # For more information, see [Block public access to your AMIs][2] in the
+    # *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetImageBlockPublicAccessState.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sharingamis-intro.html#block-public-access-to-amis
+    #
+    # @option params [required, String] :image_block_public_access_state
+    #   Specify `block-new-sharing` to enable block public access for AMIs at
+    #   the account level in the specified Region. This will block any attempt
+    #   to publicly share your AMIs in the specified Region.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::EnableImageBlockPublicAccessResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EnableImageBlockPublicAccessResult#image_block_public_access_state #image_block_public_access_state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_image_block_public_access({
+    #     image_block_public_access_state: "block-new-sharing", # required, accepts block-new-sharing
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_block_public_access_state #=> String, one of "block-new-sharing"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableImageBlockPublicAccess AWS API Documentation
+    #
+    # @overload enable_image_block_public_access(params = {})
+    # @param [Hash] params ({})
+    def enable_image_block_public_access(params = {}, options = {})
+      req = build_request(:enable_image_block_public_access, params)
       req.send_request(options)
     end
 
@@ -40039,6 +40140,45 @@ module Aws::EC2
     # @param [Hash] params ({})
     def get_host_reservation_purchase_preview(params = {}, options = {})
       req = build_request(:get_host_reservation_purchase_preview, params)
+      req.send_request(options)
+    end
+
+    # Gets the current state of *block public access for AMIs* at the
+    # account level in the specified Amazon Web Services Region.
+    #
+    # For more information, see [Block public access to your AMIs][1] in the
+    # *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sharingamis-intro.html#block-public-access-to-amis
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::GetImageBlockPublicAccessStateResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetImageBlockPublicAccessStateResult#image_block_public_access_state #image_block_public_access_state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_image_block_public_access_state({
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_block_public_access_state #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetImageBlockPublicAccessState AWS API Documentation
+    #
+    # @overload get_image_block_public_access_state(params = {})
+    # @param [Hash] params ({})
+    def get_image_block_public_access_state(params = {}, options = {})
+      req = build_request(:get_image_block_public_access_state, params)
       req.send_request(options)
     end
 
@@ -56739,7 +56879,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.404.0'
+      context[:gem_version] = '1.405.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.405.0 (2023-09-12)
+------------------
+
+* Feature - This release adds support for restricting public sharing of AMIs through AMI Block Public Access
+
 1.404.0 (2023-09-06)
 ------------------
 

@@ -341,79 +341,122 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides filtering the query results based on document attributes or
-    # metadata fields.
+    # Filters the search results based on document attributes or fields.
     #
-    # When you use the `AndAllFilters` or `OrAllFilters`, filters you can
-    # use 2 layers under the first attribute filter. For example, you can
-    # use:
+    # You can filter results using attributes for your particular documents.
+    # The attributes must exist in your index. For example, if your
+    # documents include the custom attribute "Department", you can filter
+    # documents that belong to the "HR" department. You would use the
+    # `EqualsTo` operation to filter results or documents with
+    # "Department" equals to "HR".
     #
-    # `<AndAllFilters>`
+    # You can use `AndAllFilters` and `AndOrFilters` in combination with
+    # each other or with other operations such as `EqualsTo`. For example:
     #
-    # 1.  ` <OrAllFilters>`
+    # `AndAllFilters`
     #
-    # 2.  ` <EqualsTo>`
+    # * `EqualsTo`: "Department", "HR"
     #
-    # If you use more than 2 layers, you receive a `ValidationException`
-    # exception with the message "`AttributeFilter` cannot have a depth of
-    # more than 2."
+    # * `AndOrFilters`
     #
-    # If you use more than 10 attribute filters in a given list for
-    # `AndAllFilters` or `OrAllFilters`, you receive a `ValidationException`
-    # with the message "`AttributeFilter` cannot have a length of more than
-    # 10".
+    #   * `ContainsAny`: "Project Name", \["new hires", "new hiring"\]
+    #
+    #   ^
+    #
+    # This example filters results or documents that belong to the HR
+    # department *and* belong to projects that contain "new hires" *or*
+    # "new hiring" in the project name (must use `ContainAny` with
+    # `StringListValue`). This example is filtering with a depth of 2.
+    #
+    # You cannot filter more than a depth of 2, otherwise you receive a
+    # `ValidationException` exception with the message "AttributeFilter
+    # cannot have a depth of more than 2." Also, if you use more than 10
+    # attribute filters in a given list for `AndAllFilters` or
+    # `OrAllFilters`, you receive a `ValidationException` with the message
+    # "AttributeFilter cannot have a length of more than 10".
+    #
+    # For examples of using `AttributeFilter`, see [Using document
+    # attributes to filter search results][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/filtering.html#search-filtering
     #
     # @!attribute [rw] and_all_filters
-    #   Performs a logical `AND` operation on all supplied filters.
+    #   Performs a logical `AND` operation on all filters that you specify.
     #   @return [Array<Types::AttributeFilter>]
     #
     # @!attribute [rw] or_all_filters
-    #   Performs a logical `OR` operation on all supplied filters.
+    #   Performs a logical `OR` operation on all filters that you specify.
     #   @return [Array<Types::AttributeFilter>]
     #
     # @!attribute [rw] not_filter
-    #   Performs a logical `NOT` operation on all supplied filters.
+    #   Performs a logical `NOT` operation on all filters that you specify.
     #   @return [Types::AttributeFilter]
     #
     # @!attribute [rw] equals_to
-    #   Performs an equals operation on two document attributes or metadata
-    #   fields.
+    #   Performs an equals operation on document attributes/fields and their
+    #   values.
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] contains_all
     #   Returns true when a document contains all of the specified document
-    #   attributes or metadata fields. This filter is only applicable to
-    #   `StringListValue` metadata.
+    #   attributes/fields. This filter is only applicable to
+    #   [StringListValue][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] contains_any
     #   Returns true when a document contains any of the specified document
-    #   attributes or metadata fields. This filter is only applicable to
-    #   `StringListValue` metadata.
+    #   attributes/fields. This filter is only applicable to
+    #   [StringListValue][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] greater_than
-    #   Performs a greater than operation on two document attributes or
-    #   metadata fields. Use with a document attribute of type `Date` or
+    #   Performs a greater than operation on document attributes/fields and
+    #   their values. Use with the [document attribute type][1] `Date` or
     #   `Long`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] greater_than_or_equals
-    #   Performs a greater or equals than operation on two document
-    #   attributes or metadata fields. Use with a document attribute of type
-    #   `Date` or `Long`.
+    #   Performs a greater or equals than operation on document
+    #   attributes/fields and their values. Use with the [document attribute
+    #   type][1] `Date` or `Long`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] less_than
-    #   Performs a less than operation on two document attributes or
-    #   metadata fields. Use with a document attribute of type `Date` or
+    #   Performs a less than operation on document attributes/fields and
+    #   their values. Use with the [document attribute type][1] `Date` or
     #   `Long`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] less_than_or_equals
-    #   Performs a less than or equals operation on two document attributes
-    #   or metadata fields. Use with a document attribute of type `Date` or
-    #   `Long`.
+    #   Performs a less than or equals operation on document
+    #   attributes/fields and their values. Use with the [document attribute
+    #   type][1] `Date` or `Long`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html
     #   @return [Types::DocumentAttribute]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/AttributeFilter AWS API Documentation
@@ -877,7 +920,7 @@ module Aws::Kendra
     #   If there was an error adding a document to an index the error is
     #   reported in your Amazon Web Services CloudWatch log. For more
     #   information, see [Monitoring Amazon Kendra with Amazon CloudWatch
-    #   Logs][1]
+    #   logs][1].
     #
     #
     #
@@ -2879,19 +2922,35 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Maps a column or attribute in the data source to an index field. You
-    # must first create the fields in the index using the `UpdateIndex` API.
+    # Maps attributes or field names of the documents synced from the data
+    # source to Amazon Kendra index field names. You can set up field
+    # mappings for each data source when calling [CreateDataSource][1] or
+    # [UpdateDataSource][2] API. To create custom fields, use the
+    # `UpdateIndex` API to first create an index field and then map to the
+    # data source field. For more information, see [Mapping data source
+    # fields][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_CreateDataSource.html
+    # [2]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_UpdateDataSource.html
+    # [3]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #
     # @!attribute [rw] data_source_field_name
-    #   The name of the column or attribute in the data source.
+    #   The name of the field in the data source. You must first create the
+    #   index field using the `UpdateIndex` API.
     #   @return [String]
     #
     # @!attribute [rw] date_field_format
-    #   The type of data stored in the column or attribute.
+    #   The format for date fields in the data source. If the field
+    #   specified in `DataSourceFieldName` is a date field, you must specify
+    #   the date format. If the field is not a date field, an exception is
+    #   thrown.
     #   @return [String]
     #
     # @!attribute [rw] index_field_name
-    #   The name of the field in the index.
+    #   The name of the index field to map to the data source field. The
+    #   index field type must match the data source field type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DataSourceToIndexFieldMapping AWS API Documentation
@@ -2927,7 +2986,12 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides the configuration information to connect to a index.
+    # Provides the configuration information to an [Amazon Kendra supported
+    # database][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-database.html
     #
     # @!attribute [rw] database_engine_type
     #   The type of database engine that runs the database.
@@ -4453,22 +4517,22 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides the count of documents that match a particular attribute when
-    # doing a faceted search.
+    # Provides the count of documents that match a particular document
+    # attribute or field when doing a faceted search.
     #
     # @!attribute [rw] document_attribute_value
-    #   The value of the attribute. For example, "HR".
+    #   The value of the attribute/field. For example, "HR".
     #   @return [Types::DocumentAttributeValue]
     #
     # @!attribute [rw] count
-    #   The number of documents in the response that have the attribute
-    #   value for the key.
+    #   The number of documents in the response that have the
+    #   attribute/field value for the key.
     #   @return [Integer]
     #
     # @!attribute [rw] facet_results
-    #   Contains the results of a document attribute that is a nested facet.
-    #   A `FacetResult` contains the counts for each facet nested within a
-    #   facet.
+    #   Contains the results of a document attribute/field that is a nested
+    #   facet. A `FacetResult` contains the counts for each facet nested
+    #   within a facet.
     #
     #   For example, the document attribute or facet "Department" includes
     #   a value called "Engineering". In addition, the document attribute
@@ -4809,7 +4873,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Information about a document attribute. You can use document
+    # Information about a document attribute or field. You can use document
     # attributes as facets.
     #
     # For example, the document attribute or facet "Department" includes
@@ -8228,6 +8292,13 @@ module Aws::Kendra
     #   source URI (`_source_uri`) of the document.
     #   @return [Array<Types::DocumentAttribute>]
     #
+    # @!attribute [rw] score_attributes
+    #   The confidence score bucket for a retrieved passage result. The
+    #   confidence bucket provides a relative ranking that indicates how
+    #   confident Amazon Kendra is that the response is relevant to the
+    #   query.
+    #   @return [Types::ScoreAttributes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/RetrieveResultItem AWS API Documentation
     #
     class RetrieveResultItem < Struct.new(
@@ -8236,7 +8307,8 @@ module Aws::Kendra
       :document_title,
       :content,
       :document_uri,
-      :document_attributes)
+      :document_attributes,
+      :score_attributes)
       SENSITIVE = []
       include Aws::Structure
     end

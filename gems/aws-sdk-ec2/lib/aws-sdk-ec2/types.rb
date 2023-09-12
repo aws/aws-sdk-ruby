@@ -27817,6 +27817,34 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableImageBlockPublicAccessRequest AWS API Documentation
+    #
+    class DisableImageBlockPublicAccessRequest < Struct.new(
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_block_public_access_state
+    #   Returns `unblocked` if the request succeeds; otherwise, it returns
+    #   an error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableImageBlockPublicAccessResult AWS API Documentation
+    #
+    class DisableImageBlockPublicAccessResult < Struct.new(
+      :image_block_public_access_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] image_id
     #   The ID of the AMI.
     #   @return [String]
@@ -29855,6 +29883,41 @@ module Aws::EC2
     class EnableFastSnapshotRestoresResult < Struct.new(
       :successful,
       :unsuccessful)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_block_public_access_state
+    #   Specify `block-new-sharing` to enable block public access for AMIs
+    #   at the account level in the specified Region. This will block any
+    #   attempt to publicly share your AMIs in the specified Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableImageBlockPublicAccessRequest AWS API Documentation
+    #
+    class EnableImageBlockPublicAccessRequest < Struct.new(
+      :image_block_public_access_state,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_block_public_access_state
+    #   Returns `block-new-sharing` if the request succeeds; otherwise, it
+    #   returns an error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableImageBlockPublicAccessResult AWS API Documentation
+    #
+    class EnableImageBlockPublicAccessResult < Struct.new(
+      :image_block_public_access_state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33029,6 +33092,42 @@ module Aws::EC2
       :purchase,
       :total_hourly_price,
       :total_upfront_price)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetImageBlockPublicAccessStateRequest AWS API Documentation
+    #
+    class GetImageBlockPublicAccessStateRequest < Struct.new(
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_block_public_access_state
+    #   The current state of block public access for AMIs at the account
+    #   level in the specified Amazon Web Services Region.
+    #
+    #   Possible values:
+    #
+    #   * `block-new-sharing` - Any attempt to publicly share your AMIs in
+    #     the specified Region is blocked.
+    #
+    #   * `unblocked` - Your AMIs in the specified Region can be publicly
+    #     shared.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetImageBlockPublicAccessStateResult AWS API Documentation
+    #
+    class GetImageBlockPublicAccessStateResult < Struct.new(
+      :image_block_public_access_state)
       SENSITIVE = []
       include Aws::Structure
     end

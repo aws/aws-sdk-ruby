@@ -1993,6 +1993,7 @@ module Aws::Kendra
     RetrieveResultItem.add_member(:content, Shapes::ShapeRef.new(shape: Content, location_name: "Content"))
     RetrieveResultItem.add_member(:document_uri, Shapes::ShapeRef.new(shape: Url, location_name: "DocumentURI"))
     RetrieveResultItem.add_member(:document_attributes, Shapes::ShapeRef.new(shape: DocumentAttributeList, location_name: "DocumentAttributes"))
+    RetrieveResultItem.add_member(:score_attributes, Shapes::ShapeRef.new(shape: ScoreAttributes, location_name: "ScoreAttributes"))
     RetrieveResultItem.struct_class = Types::RetrieveResultItem
 
     RetrieveResultItemList.member = Shapes::ShapeRef.new(shape: RetrieveResultItem)

@@ -802,6 +802,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DisableFastLaunch.build(context)
           when :disable_fast_snapshot_restores
             Aws::EC2::Endpoints::DisableFastSnapshotRestores.build(context)
+          when :disable_image_block_public_access
+            Aws::EC2::Endpoints::DisableImageBlockPublicAccess.build(context)
           when :disable_image_deprecation
             Aws::EC2::Endpoints::DisableImageDeprecation.build(context)
           when :disable_ipam_organization_admin_account
@@ -854,6 +856,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::EnableFastLaunch.build(context)
           when :enable_fast_snapshot_restores
             Aws::EC2::Endpoints::EnableFastSnapshotRestores.build(context)
+          when :enable_image_block_public_access
+            Aws::EC2::Endpoints::EnableImageBlockPublicAccess.build(context)
           when :enable_image_deprecation
             Aws::EC2::Endpoints::EnableImageDeprecation.build(context)
           when :enable_ipam_organization_admin_account
@@ -906,6 +910,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::GetGroupsForCapacityReservation.build(context)
           when :get_host_reservation_purchase_preview
             Aws::EC2::Endpoints::GetHostReservationPurchasePreview.build(context)
+          when :get_image_block_public_access_state
+            Aws::EC2::Endpoints::GetImageBlockPublicAccessState.build(context)
           when :get_instance_types_from_instance_requirements
             Aws::EC2::Endpoints::GetInstanceTypesFromInstanceRequirements.build(context)
           when :get_instance_uefi_data

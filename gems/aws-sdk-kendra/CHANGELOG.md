@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2023-09-12)
+------------------
+
+* Feature - Amazon Kendra now supports confidence score buckets for retrieved passage results using the Retrieve API.
+
 1.71.0 (2023-07-11)
 ------------------
 
