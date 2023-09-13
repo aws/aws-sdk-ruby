@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2023-09-13)
+------------------
+
+* Feature - Update to include information on Ubuntu 18 deprecation.
+
 1.57.0 (2023-09-05)
 ------------------
 

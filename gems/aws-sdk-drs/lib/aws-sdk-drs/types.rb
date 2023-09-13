@@ -202,6 +202,10 @@ module Aws::Drs
     #   Licensing.
     #   @return [Types::Licensing]
     #
+    # @!attribute [rw] post_launch_enabled
+    #   Whether we want to activate post-launch actions.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   Request to associate tags during creation of a Launch Configuration
     #   Template.
@@ -219,6 +223,7 @@ module Aws::Drs
       :export_bucket_arn,
       :launch_disposition,
       :licensing,
+      :post_launch_enabled,
       :tags,
       :target_instance_type_right_sizing_method)
       SENSITIVE = [:tags]
@@ -522,6 +527,27 @@ module Aws::Drs
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DeleteJobResponse AWS API Documentation
     #
     class DeleteJobResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] action_id
+    #   Launch action Id.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   Launch configuration template Id or Source Server Id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DeleteLaunchActionRequest AWS API Documentation
+    #
+    class DeleteLaunchActionRequest < Struct.new(
+      :action_id,
+      :resource_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DeleteLaunchActionResponse AWS API Documentation
+    #
+    class DeleteLaunchActionResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] launch_configuration_template_id
     #   The ID of the Launch Configuration Template to be deleted.
@@ -1381,6 +1407,153 @@ module Aws::Drs
       include Aws::Structure
     end
 
+    # Launch action.
+    #
+    # @!attribute [rw] action_code
+    #   Launch action code.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_id
+    #   Launch action Id.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_version
+    #   Launch action version.
+    #   @return [String]
+    #
+    # @!attribute [rw] active
+    #   Whether the launch action is active.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] category
+    #   Launch action category.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Launch action description.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Launch action name.
+    #   @return [String]
+    #
+    # @!attribute [rw] optional
+    #   Whether the launch will not be marked as failed if this action
+    #   fails.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] order
+    #   Launch action order.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] parameters
+    #   Launch action parameters.
+    #   @return [Hash<String,Types::LaunchActionParameter>]
+    #
+    # @!attribute [rw] type
+    #   Launch action type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/LaunchAction AWS API Documentation
+    #
+    class LaunchAction < Struct.new(
+      :action_code,
+      :action_id,
+      :action_version,
+      :active,
+      :category,
+      :description,
+      :name,
+      :optional,
+      :order,
+      :parameters,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Launch action parameter.
+    #
+    # @!attribute [rw] type
+    #   Type.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/LaunchActionParameter AWS API Documentation
+    #
+    class LaunchActionParameter < Struct.new(
+      :type,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Launch action run.
+    #
+    # @!attribute [rw] action
+    #   Action.
+    #   @return [Types::LaunchAction]
+    #
+    # @!attribute [rw] failure_reason
+    #   Failure reason.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_id
+    #   Run Id.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Run status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/LaunchActionRun AWS API Documentation
+    #
+    class LaunchActionRun < Struct.new(
+      :action,
+      :failure_reason,
+      :run_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Resource launch actions filter.
+    #
+    # @!attribute [rw] action_ids
+    #   Launch actions Ids.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/LaunchActionsRequestFilters AWS API Documentation
+    #
+    class LaunchActionsRequestFilters < Struct.new(
+      :action_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Launch actions status.
+    #
+    # @!attribute [rw] runs
+    #   List of post launch action status.
+    #   @return [Array<Types::LaunchActionRun>]
+    #
+    # @!attribute [rw] ssm_agent_discovery_datetime
+    #   Time where the AWS Systems Manager was detected as running on the
+    #   launched instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/LaunchActionsStatus AWS API Documentation
+    #
+    class LaunchActionsStatus < Struct.new(
+      :runs,
+      :ssm_agent_discovery_datetime)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] copy_private_ip
     #   Whether we should copy the Private IP of the Source Server to the
     #   Recovery Instance.
@@ -1409,6 +1582,11 @@ module Aws::Drs
     #   The name of the launch configuration.
     #   @return [String]
     #
+    # @!attribute [rw] post_launch_enabled
+    #   Whether we want to activate post-launch actions for the Source
+    #   Server.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] source_server_id
     #   The ID of the Source Server for this launch configuration.
     #   @return [String]
@@ -1428,6 +1606,7 @@ module Aws::Drs
       :launch_disposition,
       :licensing,
       :name,
+      :post_launch_enabled,
       :source_server_id,
       :target_instance_type_right_sizing_method)
       SENSITIVE = []
@@ -1464,6 +1643,10 @@ module Aws::Drs
     #   Licensing.
     #   @return [Types::Licensing]
     #
+    # @!attribute [rw] post_launch_enabled
+    #   Post-launch actions activated.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   Tags of the Launch Configuration Template.
     #   @return [Hash<String,String>]
@@ -1482,6 +1665,7 @@ module Aws::Drs
       :launch_configuration_template_id,
       :launch_disposition,
       :licensing,
+      :post_launch_enabled,
       :tags,
       :target_instance_type_right_sizing_method)
       SENSITIVE = [:tags]
@@ -1619,6 +1803,51 @@ module Aws::Drs
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ListExtensibleSourceServersResponse AWS API Documentation
     #
     class ListExtensibleSourceServersResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filters
+    #   Filters to apply when listing resource launch actions.
+    #   @return [Types::LaunchActionsRequestFilters]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum amount of items to return when listing resource launch
+    #   actions.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Next token to use when listing resource launch actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   Launch configuration template Id or Source Server Id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ListLaunchActionsRequest AWS API Documentation
+    #
+    class ListLaunchActionsRequest < Struct.new(
+      :filters,
+      :max_results,
+      :next_token,
+      :resource_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   List of resource launch actions.
+    #   @return [Array<Types::LaunchAction>]
+    #
+    # @!attribute [rw] next_token
+    #   Next token returned when listing resource launch actions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ListLaunchActionsResponse AWS API Documentation
+    #
+    class ListLaunchActionsResponse < Struct.new(
       :items,
       :next_token)
       SENSITIVE = []
@@ -1798,6 +2027,10 @@ module Aws::Drs
 
     # Represents a server participating in an asynchronous Job.
     #
+    # @!attribute [rw] launch_actions_status
+    #   The post-launch action runs of a participating server.
+    #   @return [Types::LaunchActionsStatus]
+    #
     # @!attribute [rw] launch_status
     #   The launch status of a participating server.
     #   @return [String]
@@ -1813,9 +2046,141 @@ module Aws::Drs
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ParticipatingServer AWS API Documentation
     #
     class ParticipatingServer < Struct.new(
+      :launch_actions_status,
       :launch_status,
       :recovery_instance_id,
       :source_server_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] action_code
+    #   Launch action code.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_id
+    #   Launch action Id.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_version
+    #   Launch action version.
+    #   @return [String]
+    #
+    # @!attribute [rw] active
+    #   Whether the launch action is active.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] category
+    #   Launch action category.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Launch action description.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Launch action name.
+    #   @return [String]
+    #
+    # @!attribute [rw] optional
+    #   Whether the launch will not be marked as failed if this action
+    #   fails.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] order
+    #   Launch action order.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] parameters
+    #   Launch action parameters.
+    #   @return [Hash<String,Types::LaunchActionParameter>]
+    #
+    # @!attribute [rw] resource_id
+    #   Launch configuration template Id or Source Server Id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/PutLaunchActionRequest AWS API Documentation
+    #
+    class PutLaunchActionRequest < Struct.new(
+      :action_code,
+      :action_id,
+      :action_version,
+      :active,
+      :category,
+      :description,
+      :name,
+      :optional,
+      :order,
+      :parameters,
+      :resource_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] action_code
+    #   Launch action code.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_id
+    #   Launch action Id.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_version
+    #   Launch action version.
+    #   @return [String]
+    #
+    # @!attribute [rw] active
+    #   Whether the launch action is active.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] category
+    #   Launch action category.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Launch action description.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Launch action name.
+    #   @return [String]
+    #
+    # @!attribute [rw] optional
+    #   Whether the launch will not be marked as failed if this action
+    #   fails.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] order
+    #   Launch action order.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] parameters
+    #   Launch action parameters.
+    #   @return [Hash<String,Types::LaunchActionParameter>]
+    #
+    # @!attribute [rw] resource_id
+    #   Launch configuration template Id or Source Server Id
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Launch action type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/PutLaunchActionResponse AWS API Documentation
+    #
+    class PutLaunchActionResponse < Struct.new(
+      :action_code,
+      :action_id,
+      :action_version,
+      :active,
+      :category,
+      :description,
+      :name,
+      :optional,
+      :order,
+      :parameters,
+      :resource_id,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3304,6 +3669,10 @@ module Aws::Drs
     #   The name of the launch configuration.
     #   @return [String]
     #
+    # @!attribute [rw] post_launch_enabled
+    #   Whether we want to enable post-launch actions for the Source Server.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] source_server_id
     #   The ID of the Source Server that we want to retrieve a Launch
     #   Configuration for.
@@ -3323,6 +3692,7 @@ module Aws::Drs
       :launch_disposition,
       :licensing,
       :name,
+      :post_launch_enabled,
       :source_server_id,
       :target_instance_type_right_sizing_method)
       SENSITIVE = []
@@ -3353,6 +3723,10 @@ module Aws::Drs
     #   Licensing.
     #   @return [Types::Licensing]
     #
+    # @!attribute [rw] post_launch_enabled
+    #   Whether we want to activate post-launch actions.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] target_instance_type_right_sizing_method
     #   Target instance type right-sizing method.
     #   @return [String]
@@ -3366,6 +3740,7 @@ module Aws::Drs
       :launch_configuration_template_id,
       :launch_disposition,
       :licensing,
+      :post_launch_enabled,
       :target_instance_type_right_sizing_method)
       SENSITIVE = []
       include Aws::Structure

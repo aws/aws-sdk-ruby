@@ -19,6 +19,7 @@ module Aws::InternetMonitor
         end
         Aws::InternetMonitor::EndpointParameters.new(
           region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
         )
@@ -32,6 +33,7 @@ module Aws::InternetMonitor
         end
         Aws::InternetMonitor::EndpointParameters.new(
           region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
         )
@@ -45,6 +47,7 @@ module Aws::InternetMonitor
         end
         Aws::InternetMonitor::EndpointParameters.new(
           region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
         )
@@ -58,6 +61,7 @@ module Aws::InternetMonitor
         end
         Aws::InternetMonitor::EndpointParameters.new(
           region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
         )
@@ -71,6 +75,7 @@ module Aws::InternetMonitor
         end
         Aws::InternetMonitor::EndpointParameters.new(
           region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
         )
@@ -84,6 +89,7 @@ module Aws::InternetMonitor
         end
         Aws::InternetMonitor::EndpointParameters.new(
           region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
         )
@@ -97,6 +103,7 @@ module Aws::InternetMonitor
         end
         Aws::InternetMonitor::EndpointParameters.new(
           region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
         )
@@ -110,6 +117,7 @@ module Aws::InternetMonitor
         end
         Aws::InternetMonitor::EndpointParameters.new(
           region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
         )
@@ -123,6 +131,7 @@ module Aws::InternetMonitor
         end
         Aws::InternetMonitor::EndpointParameters.new(
           region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
         )
@@ -136,6 +145,7 @@ module Aws::InternetMonitor
         end
         Aws::InternetMonitor::EndpointParameters.new(
           region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
         )

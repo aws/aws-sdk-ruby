@@ -646,6 +646,10 @@ module Aws::IVSRealTime
 
     # Object specifying a participant token in a stage.
     #
+    # **Important**: Treat tokens as opaque; i.e., do not build
+    # functionality based on token contents. The format of tokens could
+    # change in the future.
+    #
     # @!attribute [rw] attributes
     #   Application-provided attributes to encode into the token and attach
     #   to a stage. *This field is exposed to all stage participants and

@@ -446,6 +446,9 @@ module Aws::Cloud9
     #   will then become the default AMI, which is used to launch your
     #   instance if no parameter is explicitly defined.
     #
+    #   Since Ubuntu 18.04 has ended standard support as of May 31, 2023, we
+    #   recommend you choose Ubuntu 22.04.
+    #
     #   <b>AMI aliases </b>
     #
     #   * <b>Amazon Linux (default): <code>amazonlinux-1-x86_64</code> </b>
@@ -1258,7 +1261,7 @@ module Aws::Cloud9
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloud9'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

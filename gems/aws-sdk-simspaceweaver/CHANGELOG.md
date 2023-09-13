@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2023-09-13)
+------------------
+
+* Feature - Edited the introductory text for the API reference.
+
 1.9.0 (2023-09-07)
 ------------------
 

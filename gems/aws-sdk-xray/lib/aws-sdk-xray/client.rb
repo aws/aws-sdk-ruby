@@ -1589,6 +1589,7 @@ module Aws::XRay
     #
     #   resp.trace_summaries #=> Array
     #   resp.trace_summaries[0].id #=> String
+    #   resp.trace_summaries[0].start_time #=> Time
     #   resp.trace_summaries[0].duration #=> Float
     #   resp.trace_summaries[0].response_time #=> Float
     #   resp.trace_summaries[0].has_fault #=> Boolean
@@ -2227,7 +2228,7 @@ module Aws::XRay
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-xray'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2023-09-13)
+------------------
+
+* Feature - Add StartTime field in GetTraceSummaries API response for each TraceSummary.
+
 1.57.0 (2023-07-11)
 ------------------
 

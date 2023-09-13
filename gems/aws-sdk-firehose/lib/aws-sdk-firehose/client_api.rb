@@ -57,6 +57,7 @@ module Aws::Firehose
     DataFormatConversionConfiguration = Shapes::StructureShape.new(name: 'DataFormatConversionConfiguration')
     DataTableColumns = Shapes::StringShape.new(name: 'DataTableColumns')
     DataTableName = Shapes::StringShape.new(name: 'DataTableName')
+    DefaultDocumentIdFormat = Shapes::StringShape.new(name: 'DefaultDocumentIdFormat')
     DeleteDeliveryStreamInput = Shapes::StructureShape.new(name: 'DeleteDeliveryStreamInput')
     DeleteDeliveryStreamOutput = Shapes::StructureShape.new(name: 'DeleteDeliveryStreamOutput')
     DeliveryStartTimestamp = Shapes::TimestampShape.new(name: 'DeliveryStartTimestamp')
@@ -78,6 +79,7 @@ module Aws::Firehose
     DestinationDescription = Shapes::StructureShape.new(name: 'DestinationDescription')
     DestinationDescriptionList = Shapes::ListShape.new(name: 'DestinationDescriptionList')
     DestinationId = Shapes::StringShape.new(name: 'DestinationId')
+    DocumentIdOptions = Shapes::StructureShape.new(name: 'DocumentIdOptions')
     DynamicPartitioningConfiguration = Shapes::StructureShape.new(name: 'DynamicPartitioningConfiguration')
     ElasticsearchBufferingHints = Shapes::StructureShape.new(name: 'ElasticsearchBufferingHints')
     ElasticsearchBufferingIntervalInSeconds = Shapes::IntegerShape.new(name: 'ElasticsearchBufferingIntervalInSeconds')
@@ -287,6 +289,7 @@ module Aws::Firehose
     AmazonopensearchserviceDestinationConfiguration.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
     AmazonopensearchserviceDestinationConfiguration.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
     AmazonopensearchserviceDestinationConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "VpcConfiguration"))
+    AmazonopensearchserviceDestinationConfiguration.add_member(:document_id_options, Shapes::ShapeRef.new(shape: DocumentIdOptions, location_name: "DocumentIdOptions"))
     AmazonopensearchserviceDestinationConfiguration.struct_class = Types::AmazonopensearchserviceDestinationConfiguration
 
     AmazonopensearchserviceDestinationDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
@@ -302,6 +305,7 @@ module Aws::Firehose
     AmazonopensearchserviceDestinationDescription.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
     AmazonopensearchserviceDestinationDescription.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
     AmazonopensearchserviceDestinationDescription.add_member(:vpc_configuration_description, Shapes::ShapeRef.new(shape: VpcConfigurationDescription, location_name: "VpcConfigurationDescription"))
+    AmazonopensearchserviceDestinationDescription.add_member(:document_id_options, Shapes::ShapeRef.new(shape: DocumentIdOptions, location_name: "DocumentIdOptions"))
     AmazonopensearchserviceDestinationDescription.struct_class = Types::AmazonopensearchserviceDestinationDescription
 
     AmazonopensearchserviceDestinationUpdate.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
@@ -315,6 +319,7 @@ module Aws::Firehose
     AmazonopensearchserviceDestinationUpdate.add_member(:s3_update, Shapes::ShapeRef.new(shape: S3DestinationUpdate, location_name: "S3Update"))
     AmazonopensearchserviceDestinationUpdate.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
     AmazonopensearchserviceDestinationUpdate.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    AmazonopensearchserviceDestinationUpdate.add_member(:document_id_options, Shapes::ShapeRef.new(shape: DocumentIdOptions, location_name: "DocumentIdOptions"))
     AmazonopensearchserviceDestinationUpdate.struct_class = Types::AmazonopensearchserviceDestinationUpdate
 
     AmazonopensearchserviceRetryOptions.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: AmazonopensearchserviceRetryDurationInSeconds, location_name: "DurationInSeconds"))
@@ -421,6 +426,9 @@ module Aws::Firehose
 
     DestinationDescriptionList.member = Shapes::ShapeRef.new(shape: DestinationDescription)
 
+    DocumentIdOptions.add_member(:default_document_id_format, Shapes::ShapeRef.new(shape: DefaultDocumentIdFormat, required: true, location_name: "DefaultDocumentIdFormat"))
+    DocumentIdOptions.struct_class = Types::DocumentIdOptions
+
     DynamicPartitioningConfiguration.add_member(:retry_options, Shapes::ShapeRef.new(shape: RetryOptions, location_name: "RetryOptions"))
     DynamicPartitioningConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "Enabled"))
     DynamicPartitioningConfiguration.struct_class = Types::DynamicPartitioningConfiguration
@@ -442,6 +450,7 @@ module Aws::Firehose
     ElasticsearchDestinationConfiguration.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
     ElasticsearchDestinationConfiguration.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
     ElasticsearchDestinationConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "VpcConfiguration"))
+    ElasticsearchDestinationConfiguration.add_member(:document_id_options, Shapes::ShapeRef.new(shape: DocumentIdOptions, location_name: "DocumentIdOptions"))
     ElasticsearchDestinationConfiguration.struct_class = Types::ElasticsearchDestinationConfiguration
 
     ElasticsearchDestinationDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
@@ -457,6 +466,7 @@ module Aws::Firehose
     ElasticsearchDestinationDescription.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
     ElasticsearchDestinationDescription.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
     ElasticsearchDestinationDescription.add_member(:vpc_configuration_description, Shapes::ShapeRef.new(shape: VpcConfigurationDescription, location_name: "VpcConfigurationDescription"))
+    ElasticsearchDestinationDescription.add_member(:document_id_options, Shapes::ShapeRef.new(shape: DocumentIdOptions, location_name: "DocumentIdOptions"))
     ElasticsearchDestinationDescription.struct_class = Types::ElasticsearchDestinationDescription
 
     ElasticsearchDestinationUpdate.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
@@ -470,6 +480,7 @@ module Aws::Firehose
     ElasticsearchDestinationUpdate.add_member(:s3_update, Shapes::ShapeRef.new(shape: S3DestinationUpdate, location_name: "S3Update"))
     ElasticsearchDestinationUpdate.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
     ElasticsearchDestinationUpdate.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    ElasticsearchDestinationUpdate.add_member(:document_id_options, Shapes::ShapeRef.new(shape: DocumentIdOptions, location_name: "DocumentIdOptions"))
     ElasticsearchDestinationUpdate.struct_class = Types::ElasticsearchDestinationUpdate
 
     ElasticsearchRetryOptions.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: ElasticsearchRetryDurationInSeconds, location_name: "DurationInSeconds"))

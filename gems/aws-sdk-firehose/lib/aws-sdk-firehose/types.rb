@@ -91,7 +91,8 @@ module Aws::Firehose
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @!attribute [rw] vpc_configuration
-    #   The details of the VPC of the Amazon ES destination.
+    #   The details of the VPC of the Amazon OpenSearch or Amazon OpenSearch
+    #   Serverless destination.
     #   @return [Types::VpcConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/AmazonOpenSearchServerlessDestinationConfiguration AWS API Documentation
@@ -115,7 +116,8 @@ module Aws::Firehose
     # OpenSearch Service.
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS credentials.
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] collection_endpoint
@@ -352,8 +354,15 @@ module Aws::Firehose
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @!attribute [rw] vpc_configuration
-    #   The details of the VPC of the Amazon ES destination.
+    #   The details of the VPC of the Amazon OpenSearch or Amazon OpenSearch
+    #   Serverless destination.
     #   @return [Types::VpcConfiguration]
+    #
+    # @!attribute [rw] document_id_options
+    #   Indicates the method for setting up document ID. The supported
+    #   methods are Kinesis Data Firehose generated document ID and
+    #   OpenSearch Service generated document ID.
+    #   @return [Types::DocumentIdOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/AmazonopensearchserviceDestinationConfiguration AWS API Documentation
     #
@@ -370,7 +379,8 @@ module Aws::Firehose
       :s3_configuration,
       :processing_configuration,
       :cloud_watch_logging_options,
-      :vpc_configuration)
+      :vpc_configuration,
+      :document_id_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -435,6 +445,12 @@ module Aws::Firehose
     #   The details of the VPC of the Amazon ES destination.
     #   @return [Types::VpcConfigurationDescription]
     #
+    # @!attribute [rw] document_id_options
+    #   Indicates the method for setting up document ID. The supported
+    #   methods are Kinesis Data Firehose generated document ID and
+    #   OpenSearch Service generated document ID.
+    #   @return [Types::DocumentIdOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/AmazonopensearchserviceDestinationDescription AWS API Documentation
     #
     class AmazonopensearchserviceDestinationDescription < Struct.new(
@@ -450,7 +466,8 @@ module Aws::Firehose
       :s3_destination_description,
       :processing_configuration,
       :cloud_watch_logging_options,
-      :vpc_configuration_description)
+      :vpc_configuration_description,
+      :document_id_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -522,6 +539,12 @@ module Aws::Firehose
     #   stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
+    # @!attribute [rw] document_id_options
+    #   Indicates the method for setting up document ID. The supported
+    #   methods are Kinesis Data Firehose generated document ID and
+    #   OpenSearch Service generated document ID.
+    #   @return [Types::DocumentIdOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/AmazonopensearchserviceDestinationUpdate AWS API Documentation
     #
     class AmazonopensearchserviceDestinationUpdate < Struct.new(
@@ -535,7 +558,8 @@ module Aws::Firehose
       :retry_options,
       :s3_update,
       :processing_configuration,
-      :cloud_watch_logging_options)
+      :cloud_watch_logging_options,
+      :document_id_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1209,6 +1233,36 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # Indicates the method for setting up document ID. The supported methods
+    # are Kinesis Data Firehose generated document ID and OpenSearch Service
+    # generated document ID.
+    #
+    # @!attribute [rw] default_document_id_format
+    #   When the `FIREHOSE_DEFAULT` option is chosen, Kinesis Data Firehose
+    #   generates a unique document ID for each record based on a unique
+    #   internal identifier. The generated document ID is stable across
+    #   multiple delivery attempts, which helps prevent the same record from
+    #   being indexed multiple times with different document IDs.
+    #
+    #   When the `NO_DOCUMENT_ID` option is chosen, Kinesis Data Firehose
+    #   does not include any document IDs in the requests it sends to the
+    #   Amazon OpenSearch Service. This causes the Amazon OpenSearch Service
+    #   domain to generate document IDs. In case of multiple delivery
+    #   attempts, this may cause the same record to be indexed more than
+    #   once with different document IDs. This option enables write-heavy
+    #   operations, such as the ingestion of logs and observability data, to
+    #   consume less resources in the Amazon OpenSearch Service domain,
+    #   resulting in improved performance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DocumentIdOptions AWS API Documentation
+    #
+    class DocumentIdOptions < Struct.new(
+      :default_document_id_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration of the dynamic partitioning mechanism that creates
     # smaller data sets from the streaming data by partitioning it based on
     # partition keys. Currently, dynamic partitioning is only supported for
@@ -1363,8 +1417,14 @@ module Aws::Firehose
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @!attribute [rw] vpc_configuration
-    #   The details of the VPC of the Amazon ES destination.
+    #   The details of the VPC of the Amazon destination.
     #   @return [Types::VpcConfiguration]
+    #
+    # @!attribute [rw] document_id_options
+    #   Indicates the method for setting up document ID. The supported
+    #   methods are Kinesis Data Firehose generated document ID and
+    #   OpenSearch Service generated document ID.
+    #   @return [Types::DocumentIdOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ElasticsearchDestinationConfiguration AWS API Documentation
     #
@@ -1381,7 +1441,8 @@ module Aws::Firehose
       :s3_configuration,
       :processing_configuration,
       :cloud_watch_logging_options,
-      :vpc_configuration)
+      :vpc_configuration,
+      :document_id_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1456,8 +1517,15 @@ module Aws::Firehose
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @!attribute [rw] vpc_configuration_description
-    #   The details of the VPC of the Amazon ES destination.
+    #   The details of the VPC of the Amazon OpenSearch or the Amazon
+    #   OpenSearch Serverless destination.
     #   @return [Types::VpcConfigurationDescription]
+    #
+    # @!attribute [rw] document_id_options
+    #   Indicates the method for setting up document ID. The supported
+    #   methods are Kinesis Data Firehose generated document ID and
+    #   OpenSearch Service generated document ID.
+    #   @return [Types::DocumentIdOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ElasticsearchDestinationDescription AWS API Documentation
     #
@@ -1474,7 +1542,8 @@ module Aws::Firehose
       :s3_destination_description,
       :processing_configuration,
       :cloud_watch_logging_options,
-      :vpc_configuration_description)
+      :vpc_configuration_description,
+      :document_id_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1565,6 +1634,12 @@ module Aws::Firehose
     #   The CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
+    # @!attribute [rw] document_id_options
+    #   Indicates the method for setting up document ID. The supported
+    #   methods are Kinesis Data Firehose generated document ID and
+    #   OpenSearch Service generated document ID.
+    #   @return [Types::DocumentIdOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ElasticsearchDestinationUpdate AWS API Documentation
     #
     class ElasticsearchDestinationUpdate < Struct.new(
@@ -1578,7 +1653,8 @@ module Aws::Firehose
       :retry_options,
       :s3_update,
       :processing_configuration,
-      :cloud_watch_logging_options)
+      :cloud_watch_logging_options,
+      :document_id_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4073,7 +4149,8 @@ module Aws::Firehose
     #
     class UpdateDestinationOutput < Aws::EmptyStructure; end
 
-    # The details of the VPC of the Amazon ES destination.
+    # The details of the VPC of the Amazon OpenSearch or Amazon OpenSearch
+    # Serverless destination.
     #
     # @!attribute [rw] subnet_ids
     #   The IDs of the subnets that you want Kinesis Data Firehose to use to

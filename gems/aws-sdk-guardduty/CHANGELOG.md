@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2023-09-13)
+------------------
+
+* Feature - Add `managementType` field to ListCoverage API response.
+
 1.77.0 (2023-08-09)
 ------------------
 

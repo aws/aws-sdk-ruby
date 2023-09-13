@@ -430,9 +430,13 @@ module Aws::Firehose
     # turn on SSE for an existing delivery stream that doesn't have SSE
     # enabled.
     #
-    # A delivery stream is configured with a single destination: Amazon S3,
-    # Amazon ES, Amazon Redshift, or Splunk. You must specify only one of
-    # the following destination configuration parameters:
+    # A delivery stream is configured with a single destination, such as
+    # Amazon Simple Storage Service (Amazon S3), Amazon Redshift, Amazon
+    # OpenSearch Service, Amazon OpenSearch Serverless, Splunk, and any
+    # custom HTTP endpoint or HTTP endpoints owned by or supported by
+    # third-party service providers, including Datadog, Dynatrace,
+    # LogicMonitor, MongoDB, New Relic, and Sumo Logic. You must specify
+    # only one of the following destination configuration parameters:
     # `ExtendedS3DestinationConfiguration`, `S3DestinationConfiguration`,
     # `ElasticsearchDestinationConfiguration`,
     # `RedshiftDestinationConfiguration`, or
@@ -841,6 +845,9 @@ module Aws::Firehose
     #         role_arn: "RoleARN", # required
     #         security_group_ids: ["NonEmptyStringWithoutWhitespace"], # required
     #       },
+    #       document_id_options: {
+    #         default_document_id_format: "FIREHOSE_DEFAULT", # required, accepts FIREHOSE_DEFAULT, NO_DOCUMENT_ID
+    #       },
     #     },
     #     amazonopensearchservice_destination_configuration: {
     #       role_arn: "RoleARN", # required
@@ -902,6 +909,9 @@ module Aws::Firehose
     #         subnet_ids: ["NonEmptyStringWithoutWhitespace"], # required
     #         role_arn: "RoleARN", # required
     #         security_group_ids: ["NonEmptyStringWithoutWhitespace"], # required
+    #       },
+    #       document_id_options: {
+    #         default_document_id_format: "FIREHOSE_DEFAULT", # required, accepts FIREHOSE_DEFAULT, NO_DOCUMENT_ID
     #       },
     #     },
     #     splunk_destination_configuration: {
@@ -1363,6 +1373,7 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.vpc_configuration_description.security_group_ids #=> Array
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.vpc_configuration_description.security_group_ids[0] #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.vpc_configuration_description.vpc_id #=> String
+    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.document_id_options.default_document_id_format #=> String, one of "FIREHOSE_DEFAULT", "NO_DOCUMENT_ID"
     #   resp.delivery_stream_description.destinations[0].amazonopensearchservice_destination_description.role_arn #=> String
     #   resp.delivery_stream_description.destinations[0].amazonopensearchservice_destination_description.domain_arn #=> String
     #   resp.delivery_stream_description.destinations[0].amazonopensearchservice_destination_description.cluster_endpoint #=> String
@@ -1400,6 +1411,7 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].amazonopensearchservice_destination_description.vpc_configuration_description.security_group_ids #=> Array
     #   resp.delivery_stream_description.destinations[0].amazonopensearchservice_destination_description.vpc_configuration_description.security_group_ids[0] #=> String
     #   resp.delivery_stream_description.destinations[0].amazonopensearchservice_destination_description.vpc_configuration_description.vpc_id #=> String
+    #   resp.delivery_stream_description.destinations[0].amazonopensearchservice_destination_description.document_id_options.default_document_id_format #=> String, one of "FIREHOSE_DEFAULT", "NO_DOCUMENT_ID"
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.hec_endpoint #=> String
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.hec_endpoint_type #=> String, one of "Raw", "Event"
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.hec_token #=> String
@@ -2024,9 +2036,9 @@ module Aws::Firehose
     # continue during this process. The updated configurations are usually
     # effective within a few minutes.
     #
-    # Switching between Amazon ES and other services is not supported. For
-    # an Amazon ES destination, you can only update to another Amazon ES
-    # destination.
+    # Switching between Amazon OpenSearch Service and other services is not
+    # supported. For an Amazon OpenSearch Service destination, you can only
+    # update to another Amazon OpenSearch Service destination.
     #
     # If the destination type is the same, Kinesis Data Firehose merges the
     # configuration parameters specified with the destination configuration
@@ -2366,6 +2378,9 @@ module Aws::Firehose
     #         log_group_name: "LogGroupName",
     #         log_stream_name: "LogStreamName",
     #       },
+    #       document_id_options: {
+    #         default_document_id_format: "FIREHOSE_DEFAULT", # required, accepts FIREHOSE_DEFAULT, NO_DOCUMENT_ID
+    #       },
     #     },
     #     amazonopensearchservice_destination_update: {
     #       role_arn: "RoleARN",
@@ -2421,6 +2436,9 @@ module Aws::Firehose
     #         enabled: false,
     #         log_group_name: "LogGroupName",
     #         log_stream_name: "LogStreamName",
+    #       },
+    #       document_id_options: {
+    #         default_document_id_format: "FIREHOSE_DEFAULT", # required, accepts FIREHOSE_DEFAULT, NO_DOCUMENT_ID
     #       },
     #     },
     #     splunk_destination_update: {
@@ -2617,7 +2635,7 @@ module Aws::Firehose
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-firehose'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

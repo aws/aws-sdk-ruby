@@ -716,13 +716,25 @@ module Aws::GuardDuty
     #   Information about the installed EKS add-on.
     #   @return [Types::AddonDetails]
     #
+    # @!attribute [rw] management_type
+    #   Indicates how the Amazon EKS add-on GuardDuty agent is managed for
+    #   this EKS cluster.
+    #
+    #   `AUTO_MANAGED` indicates GuardDuty deploys and manages updates for
+    #   this resource.
+    #
+    #   `MANUAL` indicates that you are responsible to deploy, update, and
+    #   manage the Amazon EKS add-on GuardDuty agent for this resource.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CoverageEksClusterDetails AWS API Documentation
     #
     class CoverageEksClusterDetails < Struct.new(
       :cluster_name,
       :covered_nodes,
       :compatible_nodes,
-      :addon_details)
+      :addon_details,
+      :management_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1928,14 +1940,14 @@ module Aws::GuardDuty
     #   * `NEW`: Indicates that when a new account joins the organization,
     #     they will have GuardDuty enabled automatically.
     #
-    #   * `ALL`: Indicates that all accounts in the Amazon Web Services
-    #     Organization have GuardDuty enabled automatically. This includes
-    #     `NEW` accounts that join the organization and accounts that may
-    #     have been suspended or removed from the organization in GuardDuty.
+    #   * `ALL`: Indicates that all accounts in the organization have
+    #     GuardDuty enabled automatically. This includes `NEW` accounts that
+    #     join the organization and accounts that may have been suspended or
+    #     removed from the organization in GuardDuty.
     #
     #   * `NONE`: Indicates that GuardDuty will not be automatically enabled
-    #     for any accounts in the organization. GuardDuty must be managed
-    #     for each account individually by the administrator.
+    #     for any account in the organization. The administrator must manage
+    #     GuardDuty for each account in the organization individually.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribeOrganizationConfigurationResponse AWS API Documentation
@@ -5005,7 +5017,24 @@ module Aws::GuardDuty
     #
     # @!attribute [rw] auto_enable
     #   The status of the additional configuration that will be configured
-    #   for the organization.
+    #   for the organization. Use one of the following values to configure
+    #   the feature status for the entire organization:
+    #
+    #   * `NEW`: Indicates that when a new account joins the organization,
+    #     they will have the additional configuration enabled automatically.
+    #
+    #   * `ALL`: Indicates that all accounts in the organization have the
+    #     additional configuration enabled automatically. This includes
+    #     `NEW` accounts that join the organization and accounts that may
+    #     have been suspended or removed from the organization in GuardDuty.
+    #
+    #     It may take up to 24 hours to update the configuration for all the
+    #     member accounts.
+    #
+    #   * `NONE`: Indicates that the additional configuration will not be
+    #     automatically enabled for any account in the organization. The
+    #     administrator must manage the additional configuration for each
+    #     account individually.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationAdditionalConfiguration AWS API Documentation
@@ -5026,14 +5055,25 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] auto_enable
-    #   Describes how The status of the additional configuration that are
-    #   configured for the member accounts within the organization.
+    #   Describes the status of the additional configuration that is
+    #   configured for the member accounts within the organization. One of
+    #   the following values is the status for the entire organization:
     #
-    #   If you set `AutoEnable` to `NEW`, a feature will be configured for
-    #   only the new accounts when they join the organization.
+    #   * `NEW`: Indicates that when a new account joins the organization,
+    #     they will have the additional configuration enabled automatically.
     #
-    #   If you set `AutoEnable` to `NONE`, no feature will be configured for
-    #   the accounts when they join the organization.
+    #   * `ALL`: Indicates that all accounts in the organization have the
+    #     additional configuration enabled automatically. This includes
+    #     `NEW` accounts that join the organization and accounts that may
+    #     have been suspended or removed from the organization in GuardDuty.
+    #
+    #     It may take up to 24 hours to update the configuration for all the
+    #     member accounts.
+    #
+    #   * `NONE`: Indicates that the additional configuration will not be
+    #     automatically enabled for any account in the organization. The
+    #     administrator must manage the additional configuration for each
+    #     account individually.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationAdditionalConfigurationResult AWS API Documentation
@@ -5140,7 +5180,23 @@ module Aws::GuardDuty
     #
     # @!attribute [rw] auto_enable
     #   The status of the feature that will be configured for the
-    #   organization.
+    #   organization. Use one of the following values to configure the
+    #   feature status for the entire organization:
+    #
+    #   * `NEW`: Indicates that when a new account joins the organization,
+    #     they will have the feature enabled automatically.
+    #
+    #   * `ALL`: Indicates that all accounts in the organization have the
+    #     feature enabled automatically. This includes `NEW` accounts that
+    #     join the organization and accounts that may have been suspended or
+    #     removed from the organization in GuardDuty.
+    #
+    #     It may take up to 24 hours to update the configuration for all the
+    #     member accounts.
+    #
+    #   * `NONE`: Indicates that the feature will not be automatically
+    #     enabled for any account in the organization. The administrator
+    #     must manage the feature for each account individually.
     #   @return [String]
     #
     # @!attribute [rw] additional_configuration
@@ -5166,14 +5222,20 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] auto_enable
-    #   Describes how The status of the feature that are configured for the
+    #   Describes the status of the feature that is configured for the
     #   member accounts within the organization.
     #
-    #   If you set `AutoEnable` to `NEW`, a feature will be configured for
-    #   only the new accounts when they join the organization.
+    #   * `NEW`: Indicates that when a new account joins the organization,
+    #     they will have the feature enabled automatically.
     #
-    #   If you set `AutoEnable` to `NONE`, no feature will be configured for
-    #   the accounts when they join the organization.
+    #   * `ALL`: Indicates that all accounts in the organization have the
+    #     feature enabled automatically. This includes `NEW` accounts that
+    #     join the organization and accounts that may have been suspended or
+    #     removed from the organization in GuardDuty.
+    #
+    #   * `NONE`: Indicates that the feature will not be automatically
+    #     enabled for any account in the organization. In this case, each
+    #     account will be managed individually by the administrator.
     #   @return [String]
     #
     # @!attribute [rw] additional_configuration
@@ -7079,7 +7141,9 @@ module Aws::GuardDuty
     #   organization.
     #
     #   Even though this is still supported, we recommend using
-    #   `AutoEnableOrganizationMembers` to achieve the similar results.
+    #   `AutoEnableOrganizationMembers` to achieve the similar results. You
+    #   must provide the value for either `autoEnableOrganizationMembers` or
+    #   `autoEnable`.
     #   @return [Boolean]
     #
     # @!attribute [rw] data_sources
@@ -7092,19 +7156,26 @@ module Aws::GuardDuty
     #
     # @!attribute [rw] auto_enable_organization_members
     #   Indicates the auto-enablement configuration of GuardDuty for the
-    #   member accounts in the organization.
+    #   member accounts in the organization. You must provide a value for
+    #   either `autoEnableOrganizationMembers` or `autoEnable`.
+    #
+    #   Use one of the following configuration values for
+    #   `autoEnableOrganizationMembers`:
     #
     #   * `NEW`: Indicates that when a new account joins the organization,
     #     they will have GuardDuty enabled automatically.
     #
-    #   * `ALL`: Indicates that all accounts in the Amazon Web Services
-    #     Organization have GuardDuty enabled automatically. This includes
-    #     `NEW` accounts that join the organization and accounts that may
-    #     have been suspended or removed from the organization in GuardDuty.
+    #   * `ALL`: Indicates that all accounts in the organization have
+    #     GuardDuty enabled automatically. This includes `NEW` accounts that
+    #     join the organization and accounts that may have been suspended or
+    #     removed from the organization in GuardDuty.
+    #
+    #     It may take up to 24 hours to update the configuration for all the
+    #     member accounts.
     #
     #   * `NONE`: Indicates that GuardDuty will not be automatically enabled
-    #     for any accounts in the organization. GuardDuty must be managed
-    #     for each account individually by the administrator.
+    #     for any account in the organization. The administrator must manage
+    #     GuardDuty for each account in the organization individually.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateOrganizationConfigurationRequest AWS API Documentation

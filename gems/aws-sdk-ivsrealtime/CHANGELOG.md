@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2023-09-13)
+------------------
+
+* Feature - Doc only update that changes description for ParticipantToken.
+
 1.8.0 (2023-08-07)
 ------------------
 
