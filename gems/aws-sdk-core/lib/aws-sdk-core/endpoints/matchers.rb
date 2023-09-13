@@ -83,7 +83,7 @@ module Aws
           return labels.all? { |l| valid_host_label?(l) }
         end
 
-        value.match?(/\A(?!-)[a-zA-Z0-9-]{1,63}(?<!-)\z/)
+        !!(value =~ /\A(?!-)[a-zA-Z0-9-]{1,63}(?<!-)\z/)
       end
 
       # AWS
@@ -122,7 +122,7 @@ module Aws
         end
 
         # must be between 3 and 63 characters long, no uppercase
-        value.match?(/\A(?!-)[a-z0-9-]{3,63}(?<!-)\z/) &&
+        value =~ /\A(?!-)[a-z0-9-]{3,63}(?<!-)\z/ &&
           # not an IP address
           value !~ /(\d+\.){3}\d+/
       end
