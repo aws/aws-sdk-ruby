@@ -24,6 +24,17 @@
       }
     },
     {
+      "documentation": "bucket--with-multiple-dash: isVirtualHostable",
+      "params": {
+        "BucketName": "bucket--with-multiple-dash"
+      },
+      "expect": {
+        "endpoint": {
+          "url": "https://bucket--with-multiple-dash.s3.amazonaws.com"
+        }
+      }
+    },
+    {
       "documentation": "BucketName: not isVirtualHostable (uppercase characters)",
       "params": {
         "BucketName": "BucketName"
@@ -139,6 +150,15 @@
       "documentation": "bucket.-name: not isVirtualHostable (invalid label, starts with a -)",
       "params": {
         "BucketName": "bucket.-name"
+      },
+      "expect": {
+        "error": "not isVirtualHostableS3Bucket"
+      }
+    },
+    {
+      "documentation": "bucket..name: not isVirtualHostable (consequetive dots)",
+      "params": {
+        "BucketName": "bucket..name"
       },
       "expect": {
         "error": "not isVirtualHostableS3Bucket"
