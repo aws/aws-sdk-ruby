@@ -138,8 +138,8 @@ module Aws::LookoutEquipment
     end
 
     # @!attribute [rw] model_name
-    #   The name of the previously trained ML model being used to create the
-    #   inference scheduler.
+    #   The name of the previously trained machine learning model being used
+    #   to create the inference scheduler.
     #   @return [String]
     #
     # @!attribute [rw] inference_scheduler_name
@@ -391,20 +391,21 @@ module Aws::LookoutEquipment
     end
 
     # @!attribute [rw] model_name
-    #   The name for the ML model to be created.
+    #   The name for the machine learning model to be created.
     #   @return [String]
     #
     # @!attribute [rw] dataset_name
-    #   The name of the dataset for the ML model being created.
+    #   The name of the dataset for the machine learning model being
+    #   created.
     #   @return [String]
     #
     # @!attribute [rw] dataset_schema
-    #   The data schema for the ML model being created.
+    #   The data schema for the machine learning model being created.
     #   @return [Types::DatasetSchema]
     #
     # @!attribute [rw] labels_input_configuration
-    #   The input configuration for the labels being used for the ML model
-    #   that's being created.
+    #   The input configuration for the labels being used for the machine
+    #   learning model that's being created.
     #   @return [Types::LabelsInputConfiguration]
     #
     # @!attribute [rw] client_token
@@ -417,27 +418,27 @@ module Aws::LookoutEquipment
     #
     # @!attribute [rw] training_data_start_time
     #   Indicates the time reference in the dataset that should be used to
-    #   begin the subset of training data for the ML model.
+    #   begin the subset of training data for the machine learning model.
     #   @return [Time]
     #
     # @!attribute [rw] training_data_end_time
     #   Indicates the time reference in the dataset that should be used to
-    #   end the subset of training data for the ML model.
+    #   end the subset of training data for the machine learning model.
     #   @return [Time]
     #
     # @!attribute [rw] evaluation_data_start_time
     #   Indicates the time reference in the dataset that should be used to
-    #   begin the subset of evaluation data for the ML model.
+    #   begin the subset of evaluation data for the machine learning model.
     #   @return [Time]
     #
     # @!attribute [rw] evaluation_data_end_time
     #   Indicates the time reference in the dataset that should be used to
-    #   end the subset of evaluation data for the ML model.
+    #   end the subset of evaluation data for the machine learning model.
     #   @return [Time]
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access
-    #   the data source being used to create the ML model.
+    #   the data source being used to create the machine learning model.
     #   @return [String]
     #
     # @!attribute [rw] data_pre_processing_configuration
@@ -460,7 +461,7 @@ module Aws::LookoutEquipment
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Any tags associated with the ML model being created.
+    #   Any tags associated with the machine learning model being created.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] off_condition
@@ -501,6 +502,91 @@ module Aws::LookoutEquipment
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/CreateModelResponse AWS API Documentation
     #
     class CreateModelResponse < Struct.new(
+      :model_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_name
+    #   The name of the model to add the retraining scheduler to.
+    #   @return [String]
+    #
+    # @!attribute [rw] retraining_start_date
+    #   The start date for the retraining scheduler. Lookout for Equipment
+    #   truncates the time you provide to the nearest UTC day.
+    #   @return [Time]
+    #
+    # @!attribute [rw] retraining_frequency
+    #   This parameter uses the [ISO 8601][1] standard to set the frequency
+    #   at which you want retraining to occur in terms of Years, Months,
+    #   and/or Days (note: other parameters like Time are not currently
+    #   supported). The minimum value is 30 days (P30D) and the maximum
+    #   value is 1 year (P1Y). For example, the following values are valid:
+    #
+    #   * P3M15D – Every 3 months and 15 days
+    #
+    #   * P2M – Every 2 months
+    #
+    #   * P150D – Every 150 days
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/ISO_8601#Durations
+    #   @return [String]
+    #
+    # @!attribute [rw] lookback_window
+    #   The number of past days of data that will be used for retraining.
+    #   @return [String]
+    #
+    # @!attribute [rw] promote_mode
+    #   Indicates how the service will use new models. In `MANAGED` mode,
+    #   new models will automatically be used for inference if they have
+    #   better performance than the current model. In `MANUAL` mode, the new
+    #   models will not be used [until they are manually activated][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/versioning-model.html#model-activation
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique identifier for the request. If you do not set the client
+    #   request token, Amazon Lookout for Equipment generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/CreateRetrainingSchedulerRequest AWS API Documentation
+    #
+    class CreateRetrainingSchedulerRequest < Struct.new(
+      :model_name,
+      :retraining_start_date,
+      :retraining_frequency,
+      :lookback_window,
+      :promote_mode,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_name
+    #   The name of the model that you added the retraining scheduler to.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_arn
+    #   The ARN of the model that you added the retraining scheduler to.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the retraining scheduler.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/CreateRetrainingSchedulerResponse AWS API Documentation
+    #
+    class CreateRetrainingSchedulerResponse < Struct.new(
+      :model_name,
       :model_arn,
       :status)
       SENSITIVE = []
@@ -624,6 +710,7 @@ module Aws::LookoutEquipment
     # dataset.
     #
     # @!attribute [rw] inline_data_schema
+    #   The data schema used within the given dataset.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DatasetSchema AWS API Documentation
@@ -723,7 +810,7 @@ module Aws::LookoutEquipment
     end
 
     # @!attribute [rw] model_name
-    #   The name of the ML model to be deleted.
+    #   The name of the machine learning model to be deleted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DeleteModelRequest AWS API Documentation
@@ -743,6 +830,18 @@ module Aws::LookoutEquipment
     #
     class DeleteResourcePolicyRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_name
+    #   The name of the model whose retraining scheduler you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DeleteRetrainingSchedulerRequest AWS API Documentation
+    #
+    class DeleteRetrainingSchedulerRequest < Struct.new(
+      :model_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -966,12 +1065,13 @@ module Aws::LookoutEquipment
     end
 
     # @!attribute [rw] model_arn
-    #   The Amazon Resource Name (ARN) of the ML model of the inference
-    #   scheduler being described.
+    #   The Amazon Resource Name (ARN) of the machine learning model of the
+    #   inference scheduler being described.
     #   @return [String]
     #
     # @!attribute [rw] model_name
-    #   The name of the ML model of the inference scheduler being described.
+    #   The name of the machine learning model of the inference scheduler
+    #   being described.
     #   @return [String]
     #
     # @!attribute [rw] inference_scheduler_name
@@ -1192,7 +1292,7 @@ module Aws::LookoutEquipment
     end
 
     # @!attribute [rw] model_name
-    #   The name of the ML model to be described.
+    #   The name of the machine learning model to be described.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeModelRequest AWS API Documentation
@@ -1204,20 +1304,22 @@ module Aws::LookoutEquipment
     end
 
     # @!attribute [rw] model_name
-    #   The name of the ML model being described.
+    #   The name of the machine learning model being described.
     #   @return [String]
     #
     # @!attribute [rw] model_arn
-    #   The Amazon Resource Name (ARN) of the ML model being described.
+    #   The Amazon Resource Name (ARN) of the machine learning model being
+    #   described.
     #   @return [String]
     #
     # @!attribute [rw] dataset_name
-    #   The name of the dataset being used by the ML being described.
+    #   The name of the dataset being used by the machine learning being
+    #   described.
     #   @return [String]
     #
     # @!attribute [rw] dataset_arn
-    #   The Amazon Resouce Name (ARN) of the dataset used to create the ML
-    #   model being described.
+    #   The Amazon Resouce Name (ARN) of the dataset used to create the
+    #   machine learning model being described.
     #   @return [String]
     #
     # @!attribute [rw] schema
@@ -1232,27 +1334,27 @@ module Aws::LookoutEquipment
     #
     # @!attribute [rw] training_data_start_time
     #   Indicates the time reference in the dataset that was used to begin
-    #   the subset of training data for the ML model.
+    #   the subset of training data for the machine learning model.
     #   @return [Time]
     #
     # @!attribute [rw] training_data_end_time
     #   Indicates the time reference in the dataset that was used to end the
-    #   subset of training data for the ML model.
+    #   subset of training data for the machine learning model.
     #   @return [Time]
     #
     # @!attribute [rw] evaluation_data_start_time
     #   Indicates the time reference in the dataset that was used to begin
-    #   the subset of evaluation data for the ML model.
+    #   the subset of evaluation data for the machine learning model.
     #   @return [Time]
     #
     # @!attribute [rw] evaluation_data_end_time
     #   Indicates the time reference in the dataset that was used to end the
-    #   subset of evaluation data for the ML model.
+    #   subset of evaluation data for the machine learning model.
     #   @return [Time]
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access
-    #   the data source for the ML model being described.
+    #   the data source for the machine learning model being described.
     #   @return [String]
     #
     # @!attribute [rw] data_pre_processing_configuration
@@ -1275,17 +1377,18 @@ module Aws::LookoutEquipment
     #   @return [String]
     #
     # @!attribute [rw] training_execution_start_time
-    #   Indicates the time at which the training of the ML model began.
+    #   Indicates the time at which the training of the machine learning
+    #   model began.
     #   @return [Time]
     #
     # @!attribute [rw] training_execution_end_time
-    #   Indicates the time at which the training of the ML model was
-    #   completed.
+    #   Indicates the time at which the training of the machine learning
+    #   model was completed.
     #   @return [Time]
     #
     # @!attribute [rw] failed_reason
-    #   If the training of the ML model failed, this indicates the reason
-    #   for that failure.
+    #   If the training of the machine learning model failed, this indicates
+    #   the reason for that failure.
     #   @return [String]
     #
     # @!attribute [rw] model_metrics
@@ -1295,12 +1398,13 @@ module Aws::LookoutEquipment
     #   @return [String]
     #
     # @!attribute [rw] last_updated_time
-    #   Indicates the last time the ML model was updated. The type of update
-    #   is not specified.
+    #   Indicates the last time the machine learning model was updated. The
+    #   type of update is not specified.
     #   @return [Time]
     #
     # @!attribute [rw] created_at
-    #   Indicates the time and date at which the ML model was created.
+    #   Indicates the time and date at which the machine learning model was
+    #   created.
     #   @return [Time]
     #
     # @!attribute [rw] server_side_kms_key_id
@@ -1358,6 +1462,57 @@ module Aws::LookoutEquipment
     #   activated.
     #   @return [Time]
     #
+    # @!attribute [rw] prior_model_metrics
+    #   If the model version was retrained, this field shows a summary of
+    #   the performance of the prior model on the new training range. You
+    #   can use the information in this JSON-formatted object to compare the
+    #   new model version and the prior model version.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_scheduled_retraining_failed_reason
+    #   If the model version was generated by retraining and the training
+    #   failed, this indicates the reason for that failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_scheduled_retraining_status
+    #   Indicates the status of the most recent scheduled retraining run.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_scheduled_retraining_model_version
+    #   Indicates the most recent model version that was generated by
+    #   retraining.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] latest_scheduled_retraining_start_time
+    #   Indicates the start time of the most recent scheduled retraining
+    #   run.
+    #   @return [Time]
+    #
+    # @!attribute [rw] latest_scheduled_retraining_available_data_in_days
+    #   Indicates the number of days of data used in the most recent
+    #   scheduled retraining run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_scheduled_retraining_start_date
+    #   Indicates the date and time that the next scheduled retraining run
+    #   will start on. Lookout for Equipment truncates the time you provide
+    #   to the nearest UTC day.
+    #   @return [Time]
+    #
+    # @!attribute [rw] accumulated_inference_data_start_time
+    #   Indicates the start time of the inference data that has been
+    #   accumulated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] accumulated_inference_data_end_time
+    #   Indicates the end time of the inference data that has been
+    #   accumulated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] retraining_scheduler_status
+    #   Indicates the status of the retraining scheduler.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeModelResponse AWS API Documentation
     #
     class DescribeModelResponse < Struct.new(
@@ -1390,7 +1545,17 @@ module Aws::LookoutEquipment
       :model_version_activated_at,
       :previous_active_model_version,
       :previous_active_model_version_arn,
-      :previous_model_version_activated_at)
+      :previous_model_version_activated_at,
+      :prior_model_metrics,
+      :latest_scheduled_retraining_failed_reason,
+      :latest_scheduled_retraining_status,
+      :latest_scheduled_retraining_model_version,
+      :latest_scheduled_retraining_start_time,
+      :latest_scheduled_retraining_available_data_in_days,
+      :next_scheduled_retraining_start_date,
+      :accumulated_inference_data_start_time,
+      :accumulated_inference_data_end_time,
+      :retraining_scheduler_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1558,6 +1723,33 @@ module Aws::LookoutEquipment
     #   model version was imported.
     #   @return [Integer]
     #
+    # @!attribute [rw] prior_model_metrics
+    #   If the model version was retrained, this field shows a summary of
+    #   the performance of the prior model on the new training range. You
+    #   can use the information in this JSON-formatted object to compare the
+    #   new model version and the prior model version.
+    #   @return [String]
+    #
+    # @!attribute [rw] retraining_available_data_in_days
+    #   Indicates the number of days of data used in the most recent
+    #   scheduled retraining run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] auto_promotion_result
+    #   Indicates whether the model version was promoted to be the active
+    #   version after retraining or if there was an error with or
+    #   cancellation of the retraining.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_promotion_result_reason
+    #   Indicates the reason for the `AutoPromotionResult`. For example, a
+    #   model might not be promoted if its performance was worse than the
+    #   active version, if there was an error during training, or if the
+    #   retraining scheduler was using `MANUAL` promote mode. The model will
+    #   be promoted in `MANAGED` promote mode if the performance is better
+    #   than the previous model.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeModelVersionResponse AWS API Documentation
     #
     class DescribeModelVersionResponse < Struct.new(
@@ -1588,7 +1780,11 @@ module Aws::LookoutEquipment
       :source_model_version_arn,
       :import_job_start_time,
       :import_job_end_time,
-      :imported_data_size_in_bytes)
+      :imported_data_size_in_bytes,
+      :prior_model_metrics,
+      :retraining_available_data_in_days,
+      :auto_promotion_result,
+      :auto_promotion_result_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1629,6 +1825,85 @@ module Aws::LookoutEquipment
       :resource_policy,
       :creation_time,
       :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_name
+    #   The name of the model that the retraining scheduler is attached to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeRetrainingSchedulerRequest AWS API Documentation
+    #
+    class DescribeRetrainingSchedulerRequest < Struct.new(
+      :model_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_name
+    #   The name of the model that the retraining scheduler is attached to.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_arn
+    #   The ARN of the model that the retraining scheduler is attached to.
+    #   @return [String]
+    #
+    # @!attribute [rw] retraining_start_date
+    #   The start date for the retraining scheduler. Lookout for Equipment
+    #   truncates the time you provide to the nearest UTC day.
+    #   @return [Time]
+    #
+    # @!attribute [rw] retraining_frequency
+    #   The frequency at which the model retraining is set. This follows the
+    #   [ISO 8601][1] guidelines.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/ISO_8601#Durations
+    #   @return [String]
+    #
+    # @!attribute [rw] lookback_window
+    #   The number of past days of data used for retraining.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the retraining scheduler.
+    #   @return [String]
+    #
+    # @!attribute [rw] promote_mode
+    #   Indicates how the service uses new models. In `MANAGED` mode, new
+    #   models are used for inference if they have better performance than
+    #   the current model. In `MANUAL` mode, the new models are not used
+    #   until they are [manually activated][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/versioning-model.html#model-activation
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   Indicates the time and date at which the retraining scheduler was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   Indicates the time and date at which the retraining scheduler was
+    #   updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeRetrainingSchedulerResponse AWS API Documentation
+    #
+    class DescribeRetrainingSchedulerResponse < Struct.new(
+      :model_name,
+      :model_arn,
+      :retraining_start_date,
+      :retraining_frequency,
+      :lookback_window,
+      :status,
+      :promote_mode,
+      :created_at,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1758,6 +2033,19 @@ module Aws::LookoutEquipment
     #   The tags associated with the machine learning model to be created.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] inference_data_import_strategy
+    #   Indicates how to import the accumulated inference data when a model
+    #   version is imported. The possible values are as follows:
+    #
+    #   * NO\_IMPORT – Don't import the data.
+    #
+    #   * ADD\_WHEN\_EMPTY – Only import the data from the source model if
+    #     there is no existing data in the target model.
+    #
+    #   * OVERWRITE – Import the data from the source model and overwrite
+    #     the existing data in the target model.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ImportModelVersionRequest AWS API Documentation
     #
     class ImportModelVersionRequest < Struct.new(
@@ -1768,7 +2056,8 @@ module Aws::LookoutEquipment
       :client_token,
       :role_arn,
       :server_side_kms_key_id,
-      :tags)
+      :tags,
+      :inference_data_import_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1853,12 +2142,13 @@ module Aws::LookoutEquipment
     # status, and so on.
     #
     # @!attribute [rw] model_name
-    #   The name of the ML model being used for the inference execution.
+    #   The name of the machine learning model being used for the inference
+    #   execution.
     #   @return [String]
     #
     # @!attribute [rw] model_arn
-    #   The Amazon Resource Name (ARN) of the ML model used for the
-    #   inference execution.
+    #   The Amazon Resource Name (ARN) of the machine learning model used
+    #   for the inference execution.
     #   @return [String]
     #
     # @!attribute [rw] inference_scheduler_name
@@ -1898,6 +2188,7 @@ module Aws::LookoutEquipment
     #   @return [Types::InferenceOutputConfiguration]
     #
     # @!attribute [rw] customer_result_object
+    #   The S3 object that the inference execution results were uploaded to.
     #   @return [Types::S3Object]
     #
     # @!attribute [rw] status
@@ -1907,6 +2198,15 @@ module Aws::LookoutEquipment
     # @!attribute [rw] failed_reason
     #   Specifies the reason for failure when an inference execution has
     #   failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_version
+    #   The model version used for the inference execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] model_version_arn
+    #   The Amazon Resource Number (ARN) of the model version used for the
+    #   inference execution.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/InferenceExecutionSummary AWS API Documentation
@@ -1923,7 +2223,9 @@ module Aws::LookoutEquipment
       :data_output_configuration,
       :customer_result_object,
       :status,
-      :failed_reason)
+      :failed_reason,
+      :model_version,
+      :model_version_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2045,12 +2347,13 @@ module Aws::LookoutEquipment
     # data delay offset, model name and ARN, status, and so on.
     #
     # @!attribute [rw] model_name
-    #   The name of the ML model used for the inference scheduler.
+    #   The name of the machine learning model used for the inference
+    #   scheduler.
     #   @return [String]
     #
     # @!attribute [rw] model_arn
-    #   The Amazon Resource Name (ARN) of the ML model used by the inference
-    #   scheduler.
+    #   The Amazon Resource Name (ARN) of the machine learning model used by
+    #   the inference scheduler.
     #   @return [String]
     #
     # @!attribute [rw] inference_scheduler_name
@@ -2620,8 +2923,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     #
     # @!attribute [rw] model_name
-    #   The name of the ML model used by the inference scheduler to be
-    #   listed.
+    #   The name of the machine learning model used by the inference
+    #   scheduler to be listed.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2847,24 +3150,25 @@ module Aws::LookoutEquipment
 
     # @!attribute [rw] next_token
     #   An opaque pagination token indicating where to continue the listing
-    #   of ML models.
+    #   of machine learning models.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Specifies the maximum number of ML models to list.
+    #   Specifies the maximum number of machine learning models to list.
     #   @return [Integer]
     #
     # @!attribute [rw] status
-    #   The status of the ML model.
+    #   The status of the machine learning model.
     #   @return [String]
     #
     # @!attribute [rw] model_name_begins_with
-    #   The beginning of the name of the ML models being listed.
+    #   The beginning of the name of the machine learning models being
+    #   listed.
     #   @return [String]
     #
     # @!attribute [rw] dataset_name_begins_with
-    #   The beginning of the name of the dataset of the ML models to be
-    #   listed.
+    #   The beginning of the name of the dataset of the machine learning
+    #   models to be listed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ListModelsRequest AWS API Documentation
@@ -2881,7 +3185,7 @@ module Aws::LookoutEquipment
 
     # @!attribute [rw] next_token
     #   An opaque pagination token indicating where to continue the listing
-    #   of ML models.
+    #   of machine learning models.
     #   @return [String]
     #
     # @!attribute [rw] model_summaries
@@ -2894,6 +3198,57 @@ module Aws::LookoutEquipment
     class ListModelsResponse < Struct.new(
       :next_token,
       :model_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_name_begins_with
+    #   Specify this field to only list retraining schedulers whose machine
+    #   learning models begin with the value you specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Specify this field to only list retraining schedulers whose status
+    #   matches the value you specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the number of results exceeds the maximum, a pagination token is
+    #   returned. Use the token in the request to show the next page of
+    #   retraining schedulers.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Specifies the maximum number of retraining schedulers to list.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ListRetrainingSchedulersRequest AWS API Documentation
+    #
+    class ListRetrainingSchedulersRequest < Struct.new(
+      :model_name_begins_with,
+      :status,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] retraining_scheduler_summaries
+    #   Provides information on the specified retraining scheduler,
+    #   including the model name, model ARN, status, and start date.
+    #   @return [Array<Types::RetrainingSchedulerSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the number of results exceeds the maximum, this pagination token
+    #   is returned. Use this token in the request to show the next page of
+    #   retraining schedulers.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ListRetrainingSchedulersResponse AWS API Documentation
+    #
+    class ListRetrainingSchedulersResponse < Struct.new(
+      :retraining_scheduler_summaries,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3011,19 +3366,19 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # Provides information about the specified ML model, including dataset
-    # and model names and ARNs, as well as status.
+    # Provides information about the specified machine learning model,
+    # including dataset and model names and ARNs, as well as status.
     #
     # @!attribute [rw] model_name
-    #   The name of the ML model.
+    #   The name of the machine learning model.
     #   @return [String]
     #
     # @!attribute [rw] model_arn
-    #   The Amazon Resource Name (ARN) of the ML model.
+    #   The Amazon Resource Name (ARN) of the machine learning model.
     #   @return [String]
     #
     # @!attribute [rw] dataset_name
-    #   The name of the dataset being used for the ML model.
+    #   The name of the dataset being used for the machine learning model.
     #   @return [String]
     #
     # @!attribute [rw] dataset_arn
@@ -3032,7 +3387,7 @@ module Aws::LookoutEquipment
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Indicates the status of the ML model.
+    #   Indicates the status of the machine learning model.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -3050,6 +3405,34 @@ module Aws::LookoutEquipment
     #   inference scheduler uses to run an inference execution.
     #   @return [String]
     #
+    # @!attribute [rw] latest_scheduled_retraining_status
+    #   Indicates the status of the most recent scheduled retraining run.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_scheduled_retraining_model_version
+    #   Indicates the most recent model version that was generated by
+    #   retraining.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] latest_scheduled_retraining_start_time
+    #   Indicates the start time of the most recent scheduled retraining
+    #   run.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_scheduled_retraining_start_date
+    #   Indicates the date that the next scheduled retraining run will start
+    #   on. Lookout for Equipment truncates the time you provide to [the
+    #   nearest UTC day][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] retraining_scheduler_status
+    #   Indicates the status of the retraining scheduler.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ModelSummary AWS API Documentation
     #
     class ModelSummary < Struct.new(
@@ -3060,7 +3443,12 @@ module Aws::LookoutEquipment
       :status,
       :created_at,
       :active_model_version,
-      :active_model_version_arn)
+      :active_model_version_arn,
+      :latest_scheduled_retraining_status,
+      :latest_scheduled_retraining_model_version,
+      :latest_scheduled_retraining_start_time,
+      :next_scheduled_retraining_start_date,
+      :retraining_scheduler_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3206,6 +3594,53 @@ module Aws::LookoutEquipment
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the specified retraining scheduler,
+    # including model name, status, start date, frequency, and lookback
+    # window.
+    #
+    # @!attribute [rw] model_name
+    #   The name of the model that the retraining scheduler is attached to.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_arn
+    #   The ARN of the model that the retraining scheduler is attached to.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the retraining scheduler.
+    #   @return [String]
+    #
+    # @!attribute [rw] retraining_start_date
+    #   The start date for the retraining scheduler. Lookout for Equipment
+    #   truncates the time you provide to the nearest UTC day.
+    #   @return [Time]
+    #
+    # @!attribute [rw] retraining_frequency
+    #   The frequency at which the model retraining is set. This follows the
+    #   [ISO 8601][1] guidelines.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/ISO_8601#Durations
+    #   @return [String]
+    #
+    # @!attribute [rw] lookback_window
+    #   The number of past days of data used for retraining.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/RetrainingSchedulerSummary AWS API Documentation
+    #
+    class RetrainingSchedulerSummary < Struct.new(
+      :model_name,
+      :model_arn,
+      :status,
+      :retraining_start_date,
+      :retraining_frequency,
+      :lookback_window)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3413,12 +3848,13 @@ module Aws::LookoutEquipment
     end
 
     # @!attribute [rw] model_arn
-    #   The Amazon Resource Name (ARN) of the ML model being used by the
-    #   inference scheduler.
+    #   The Amazon Resource Name (ARN) of the machine learning model being
+    #   used by the inference scheduler.
     #   @return [String]
     #
     # @!attribute [rw] model_name
-    #   The name of the ML model being used by the inference scheduler.
+    #   The name of the machine learning model being used by the inference
+    #   scheduler.
     #   @return [String]
     #
     # @!attribute [rw] inference_scheduler_name
@@ -3446,6 +3882,40 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
+    # @!attribute [rw] model_name
+    #   The name of the model whose retraining scheduler you want to start.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/StartRetrainingSchedulerRequest AWS API Documentation
+    #
+    class StartRetrainingSchedulerRequest < Struct.new(
+      :model_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_name
+    #   The name of the model whose retraining scheduler is being started.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_arn
+    #   The ARN of the model whose retraining scheduler is being started.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the retraining scheduler.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/StartRetrainingSchedulerResponse AWS API Documentation
+    #
+    class StartRetrainingSchedulerResponse < Struct.new(
+      :model_name,
+      :model_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] inference_scheduler_name
     #   The name of the inference scheduler to be stopped.
     #   @return [String]
@@ -3459,13 +3929,13 @@ module Aws::LookoutEquipment
     end
 
     # @!attribute [rw] model_arn
-    #   The Amazon Resource Name (ARN) of the ML model used by the inference
-    #   scheduler being stopped.
+    #   The Amazon Resource Name (ARN) of the machine learning model used by
+    #   the inference scheduler being stopped.
     #   @return [String]
     #
     # @!attribute [rw] model_name
-    #   The name of the ML model used by the inference scheduler being
-    #   stopped.
+    #   The name of the machine learning model used by the inference
+    #   scheduler being stopped.
     #   @return [String]
     #
     # @!attribute [rw] inference_scheduler_name
@@ -3488,6 +3958,40 @@ module Aws::LookoutEquipment
       :model_name,
       :inference_scheduler_name,
       :inference_scheduler_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_name
+    #   The name of the model whose retraining scheduler you want to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/StopRetrainingSchedulerRequest AWS API Documentation
+    #
+    class StopRetrainingSchedulerRequest < Struct.new(
+      :model_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_name
+    #   The name of the model whose retraining scheduler is being stopped.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_arn
+    #   The ARN of the model whose retraining scheduler is being stopped.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the retraining scheduler.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/StopRetrainingSchedulerResponse AWS API Documentation
+    #
+    class StopRetrainingSchedulerResponse < Struct.new(
+      :model_name,
+      :model_arn,
       :status)
       SENSITIVE = []
       include Aws::Structure
@@ -3720,6 +4224,83 @@ module Aws::LookoutEquipment
     class UpdateLabelGroupRequest < Struct.new(
       :label_group_name,
       :fault_codes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_name
+    #   The name of the model to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] labels_input_configuration
+    #   Contains the configuration information for the S3 location being
+    #   used to hold label data.
+    #   @return [Types::LabelsInputConfiguration]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the model to update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/UpdateModelRequest AWS API Documentation
+    #
+    class UpdateModelRequest < Struct.new(
+      :model_name,
+      :labels_input_configuration,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_name
+    #   The name of the model whose retraining scheduler you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] retraining_start_date
+    #   The start date for the retraining scheduler. Lookout for Equipment
+    #   truncates the time you provide to the nearest UTC day.
+    #   @return [Time]
+    #
+    # @!attribute [rw] retraining_frequency
+    #   This parameter uses the [ISO 8601][1] standard to set the frequency
+    #   at which you want retraining to occur in terms of Years, Months,
+    #   and/or Days (note: other parameters like Time are not currently
+    #   supported). The minimum value is 30 days (P30D) and the maximum
+    #   value is 1 year (P1Y). For example, the following values are valid:
+    #
+    #   * P3M15D – Every 3 months and 15 days
+    #
+    #   * P2M – Every 2 months
+    #
+    #   * P150D – Every 150 days
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/ISO_8601#Durations
+    #   @return [String]
+    #
+    # @!attribute [rw] lookback_window
+    #   The number of past days of data that will be used for retraining.
+    #   @return [String]
+    #
+    # @!attribute [rw] promote_mode
+    #   Indicates how the service will use new models. In `MANAGED` mode,
+    #   new models will automatically be used for inference if they have
+    #   better performance than the current model. In `MANUAL` mode, the new
+    #   models will not be used [until they are manually activated][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/versioning-model.html#model-activation
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/UpdateRetrainingSchedulerRequest AWS API Documentation
+    #
+    class UpdateRetrainingSchedulerRequest < Struct.new(
+      :model_name,
+      :retraining_start_date,
+      :retraining_frequency,
+      :lookback_window,
+      :promote_mode)
       SENSITIVE = []
       include Aws::Structure
     end

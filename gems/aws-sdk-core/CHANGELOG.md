@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.181.1 (2023-09-14)
+------------------
+
 * Issue - Fix host label validation in endpoint matchers.
 
 3.181.0 (2023-08-22)

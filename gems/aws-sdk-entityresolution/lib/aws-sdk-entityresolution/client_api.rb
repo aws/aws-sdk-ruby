@@ -71,7 +71,6 @@ module Aws::EntityResolution
     OutputSource = Shapes::StructureShape.new(name: 'OutputSource')
     OutputSourceConfig = Shapes::ListShape.new(name: 'OutputSourceConfig')
     OutputSourceOutputList = Shapes::ListShape.new(name: 'OutputSourceOutputList')
-    OutputSourceOutputS3PathString = Shapes::StringShape.new(name: 'OutputSourceOutputS3PathString')
     RecordAttributeMap = Shapes::MapShape.new(name: 'RecordAttributeMap')
     RecordAttributeMapKeyString = Shapes::StringShape.new(name: 'RecordAttributeMapKeyString')
     RecordAttributeMapValueString = Shapes::StringShape.new(name: 'RecordAttributeMapValueString')
@@ -83,6 +82,7 @@ module Aws::EntityResolution
     RuleBasedPropertiesRulesList = Shapes::ListShape.new(name: 'RuleBasedPropertiesRulesList')
     RuleMatchingKeysList = Shapes::ListShape.new(name: 'RuleMatchingKeysList')
     RuleRuleNameString = Shapes::StringShape.new(name: 'RuleRuleNameString')
+    S3Path = Shapes::StringShape.new(name: 'S3Path')
     SchemaAttributeType = Shapes::StringShape.new(name: 'SchemaAttributeType')
     SchemaInputAttribute = Shapes::StructureShape.new(name: 'SchemaInputAttribute')
     SchemaInputAttributes = Shapes::ListShape.new(name: 'SchemaInputAttributes')
@@ -134,7 +134,7 @@ module Aws::EntityResolution
     CreateMatchingWorkflowOutput.struct_class = Types::CreateMatchingWorkflowOutput
 
     CreateSchemaMappingInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    CreateSchemaMappingInput.add_member(:mapped_input_fields, Shapes::ShapeRef.new(shape: SchemaInputAttributes, location_name: "mappedInputFields"))
+    CreateSchemaMappingInput.add_member(:mapped_input_fields, Shapes::ShapeRef.new(shape: SchemaInputAttributes, required: true, location_name: "mappedInputFields"))
     CreateSchemaMappingInput.add_member(:schema_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "schemaName"))
     CreateSchemaMappingInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateSchemaMappingInput.struct_class = Types::CreateSchemaMappingInput
@@ -161,6 +161,8 @@ module Aws::EntityResolution
     ErrorDetails.struct_class = Types::ErrorDetails
 
     ExceedsLimitException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ExceedsLimitException.add_member(:quota_name, Shapes::ShapeRef.new(shape: String, location_name: "quotaName"))
+    ExceedsLimitException.add_member(:quota_value, Shapes::ShapeRef.new(shape: Integer, location_name: "quotaValue"))
     ExceedsLimitException.struct_class = Types::ExceedsLimitException
 
     GetMatchIdInput.add_member(:record, Shapes::ShapeRef.new(shape: RecordAttributeMap, required: true, location_name: "record"))
@@ -283,7 +285,7 @@ module Aws::EntityResolution
     OutputSource.add_member(:kms_arn, Shapes::ShapeRef.new(shape: KMSArn, location_name: "KMSArn"))
     OutputSource.add_member(:apply_normalization, Shapes::ShapeRef.new(shape: Boolean, location_name: "applyNormalization"))
     OutputSource.add_member(:output, Shapes::ShapeRef.new(shape: OutputSourceOutputList, required: true, location_name: "output"))
-    OutputSource.add_member(:output_s3_path, Shapes::ShapeRef.new(shape: OutputSourceOutputS3PathString, required: true, location_name: "outputS3Path"))
+    OutputSource.add_member(:output_s3_path, Shapes::ShapeRef.new(shape: S3Path, required: true, location_name: "outputS3Path"))
     OutputSource.struct_class = Types::OutputSource
 
     OutputSourceConfig.member = Shapes::ShapeRef.new(shape: OutputSource)
@@ -293,7 +295,7 @@ module Aws::EntityResolution
     RecordAttributeMap.key = Shapes::ShapeRef.new(shape: RecordAttributeMapKeyString)
     RecordAttributeMap.value = Shapes::ShapeRef.new(shape: RecordAttributeMapValueString)
 
-    ResolutionTechniques.add_member(:resolution_type, Shapes::ShapeRef.new(shape: ResolutionType, location_name: "resolutionType"))
+    ResolutionTechniques.add_member(:resolution_type, Shapes::ShapeRef.new(shape: ResolutionType, required: true, location_name: "resolutionType"))
     ResolutionTechniques.add_member(:rule_based_properties, Shapes::ShapeRef.new(shape: RuleBasedProperties, location_name: "ruleBasedProperties"))
     ResolutionTechniques.struct_class = Types::ResolutionTechniques
 

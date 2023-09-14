@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2023-09-14)
+------------------
+
+* Feature - Documentation updates for AWS CloudFormation
+
 1.88.0 (2023-07-28)
 ------------------
 

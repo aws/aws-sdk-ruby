@@ -410,10 +410,10 @@ module Aws::EntityResolution
     #
     # @option params [required, Types::ResolutionTechniques] :resolution_techniques
     #   An object which defines the `resolutionType` and the
-    #   `ruleBasedProperties`
+    #   `ruleBasedProperties`.
     #
     # @option params [required, String] :role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role. AWS Entity Resolution
+    #   The Amazon Resource Name (ARN) of the IAM role. Entity Resolution
     #   assumes this role to create resources on your behalf as part of
     #   workflow execution.
     #
@@ -459,11 +459,11 @@ module Aws::EntityResolution
     #             name: "AttributeName", # required
     #           },
     #         ],
-    #         output_s3_path: "OutputSourceOutputS3PathString", # required
+    #         output_s3_path: "S3Path", # required
     #       },
     #     ],
     #     resolution_techniques: { # required
-    #       resolution_type: "RULE_MATCHING", # accepts RULE_MATCHING, ML_MATCHING
+    #       resolution_type: "RULE_MATCHING", # required, accepts RULE_MATCHING, ML_MATCHING
     #       rule_based_properties: {
     #         attribute_matching_model: "ONE_TO_ONE", # required, accepts ONE_TO_ONE, MANY_TO_MANY
     #         rules: [ # required
@@ -523,7 +523,7 @@ module Aws::EntityResolution
     # @option params [String] :description
     #   A description of the schema.
     #
-    # @option params [Array<Types::SchemaInputAttribute>] :mapped_input_fields
+    # @option params [required, Array<Types::SchemaInputAttribute>] :mapped_input_fields
     #   A list of `MappedInputFields`. Each `MappedInputField` corresponds to
     #   a column the source data table, and contains column name plus
     #   additional information that Entity Resolution uses for matching.
@@ -546,7 +546,7 @@ module Aws::EntityResolution
     #
     #   resp = client.create_schema_mapping({
     #     description: "Description",
-    #     mapped_input_fields: [
+    #     mapped_input_fields: [ # required
     #       {
     #         field_name: "AttributeName", # required
     #         group_name: "AttributeName",
@@ -875,7 +875,7 @@ module Aws::EntityResolution
     end
 
     # Returns a list of all the `MatchingWorkflows` that have been created
-    # for an AWS account.
+    # for an Amazon Web Services account.
     #
     # @option params [Integer] :max_results
     #   The maximum number of objects returned per page.
@@ -916,7 +916,7 @@ module Aws::EntityResolution
     end
 
     # Returns a list of all the `SchemaMappings` that have been created for
-    # an AWS account.
+    # an Amazon Web Services account.
     #
     # @option params [Integer] :max_results
     #   The maximum number of objects returned per page.
@@ -956,8 +956,8 @@ module Aws::EntityResolution
       req.send_request(options)
     end
 
-    # Displays the tags associated with an AWS Entity Resolution resource.
-    # In Entity Resolution, `SchemaMapping`, and `MatchingWorkflow` can be
+    # Displays the tags associated with an Entity Resolution resource. In
+    # Entity Resolution, `SchemaMapping`, and `MatchingWorkflow` can be
     # tagged.
     #
     # @option params [required, String] :resource_arn
@@ -1016,18 +1016,18 @@ module Aws::EntityResolution
       req.send_request(options)
     end
 
-    # Assigns one or more tags (key-value pairs) to the specified AWS Entity
+    # Assigns one or more tags (key-value pairs) to the specified Entity
     # Resolution resource. Tags can help you organize and categorize your
     # resources. You can also use them to scope user permissions by granting
     # a user permission to access or change only resources with certain tag
-    # values. In Entity Resolution, `SchemaMapping`, and `MatchingWorkflow`
-    # can be tagged. Tags don't have any semantic meaning to AWS and are
-    # interpreted strictly as strings of characters. You can use the
-    # `TagResource` action with a resource that already has tags. If you
-    # specify a new tag key, this tag is appended to the list of tags
-    # associated with the resource. If you specify a tag key that is already
-    # associated with the resource, the new tag value that you specify
-    # replaces the previous value for that tag.
+    # values. In Entity Resolution, `SchemaMapping` and `MatchingWorkflow`
+    # can be tagged. Tags don't have any semantic meaning to Amazon Web
+    # Services and are interpreted strictly as strings of characters. You
+    # can use the `TagResource` action with a resource that already has
+    # tags. If you specify a new tag key, this tag is appended to the list
+    # of tags associated with the resource. If you specify a tag key that is
+    # already associated with the resource, the new tag value that you
+    # specify replaces the previous value for that tag.
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the resource for which you want to view tags.
@@ -1055,7 +1055,7 @@ module Aws::EntityResolution
       req.send_request(options)
     end
 
-    # Removes one or more tags from the specified AWS Entity Resolution
+    # Removes one or more tags from the specified Entity Resolution
     # resource. In Entity Resolution, `SchemaMapping`, and
     # `MatchingWorkflow` can be tagged.
     #
@@ -1105,10 +1105,10 @@ module Aws::EntityResolution
     #
     # @option params [required, Types::ResolutionTechniques] :resolution_techniques
     #   An object which defines the `resolutionType` and the
-    #   `ruleBasedProperties`
+    #   `ruleBasedProperties`.
     #
     # @option params [required, String] :role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role. AWS Entity Resolution
+    #   The Amazon Resource Name (ARN) of the IAM role. Entity Resolution
     #   assumes this role to create resources on your behalf as part of
     #   workflow execution.
     #
@@ -1149,11 +1149,11 @@ module Aws::EntityResolution
     #             name: "AttributeName", # required
     #           },
     #         ],
-    #         output_s3_path: "OutputSourceOutputS3PathString", # required
+    #         output_s3_path: "S3Path", # required
     #       },
     #     ],
     #     resolution_techniques: { # required
-    #       resolution_type: "RULE_MATCHING", # accepts RULE_MATCHING, ML_MATCHING
+    #       resolution_type: "RULE_MATCHING", # required, accepts RULE_MATCHING, ML_MATCHING
     #       rule_based_properties: {
     #         attribute_matching_model: "ONE_TO_ONE", # required, accepts ONE_TO_ONE, MANY_TO_MANY
     #         rules: [ # required
@@ -1214,7 +1214,7 @@ module Aws::EntityResolution
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-entityresolution'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

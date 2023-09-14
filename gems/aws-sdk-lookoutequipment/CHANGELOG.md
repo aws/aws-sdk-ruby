@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2023-09-14)
+------------------
+
+* Feature - This release adds APIs for the new scheduled retraining feature.
+
 1.22.0 (2023-07-31)
 ------------------
 

@@ -61,13 +61,13 @@ module Aws::EntityResolution
     #
     # @!attribute [rw] resolution_techniques
     #   An object which defines the `resolutionType` and the
-    #   `ruleBasedProperties`
+    #   `ruleBasedProperties`.
     #   @return [Types::ResolutionTechniques]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role. AWS Entity
-    #   Resolution assumes this role to create resources on your behalf as
-    #   part of workflow execution.
+    #   The Amazon Resource Name (ARN) of the IAM role. Entity Resolution
+    #   assumes this role to create resources on your behalf as part of
+    #   workflow execution.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -116,13 +116,13 @@ module Aws::EntityResolution
     #
     # @!attribute [rw] resolution_techniques
     #   An object which defines the `resolutionType` and the
-    #   `ruleBasedProperties`
+    #   `ruleBasedProperties`.
     #   @return [Types::ResolutionTechniques]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role. AWS Entity
-    #   Resolution assumes this role to create resources on your behalf as
-    #   part of workflow execution.
+    #   The Amazon Resource Name (ARN) of the IAM role. Entity Resolution
+    #   assumes this role to create resources on your behalf as part of
+    #   workflow execution.
     #   @return [String]
     #
     # @!attribute [rw] workflow_arn
@@ -273,16 +273,26 @@ module Aws::EntityResolution
     end
 
     # The request was rejected because it attempted to create resources
-    # beyond the current AWS Entity Resolution account limits. The error
-    # message describes the limit exceeded. `HTTP Status Code: 402`
+    # beyond the current Entity Resolution account limits. The error message
+    # describes the limit exceeded. `HTTP Status Code: 402`
     #
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] quota_name
+    #   The name of the quota that has been breached.
+    #   @return [String]
+    #
+    # @!attribute [rw] quota_value
+    #   The current quota value for the customers.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/ExceedsLimitException AWS API Documentation
     #
     class ExceedsLimitException < Struct.new(
-      :message)
+      :message,
+      :quota_name,
+      :quota_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -355,8 +365,7 @@ module Aws::EntityResolution
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   The current status of the job. Either `running`, `succeeded`,
-    #   `queued`, or `failed`.
+    #   The current status of the job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/GetMatchingJobOutput AWS API Documentation
@@ -409,12 +418,12 @@ module Aws::EntityResolution
     #
     # @!attribute [rw] resolution_techniques
     #   An object which defines the `resolutionType` and the
-    #   `ruleBasedProperties`
+    #   `ruleBasedProperties`.
     #   @return [Types::ResolutionTechniques]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role. AWS Entity
-    #   Resolution assumes this role to access resources on your behalf.
+    #   The Amazon Resource Name (ARN) of the IAM role. Entity Resolution
+    #   assumes this role to access resources on your behalf.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -555,8 +564,8 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
-    # This exception occurs when there is an internal failure in the AWS
-    # Entity Resolution service. `HTTP Status Code: 500`
+    # This exception occurs when there is an internal failure in the Entity
+    # Resolution service. `HTTP Status Code: 500`
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -581,7 +590,7 @@ module Aws::EntityResolution
     #   @return [Integer]
     #
     # @!attribute [rw] records_not_processed
-    #   The total number of records that did not get processed,
+    #   The total number of records that did not get processed.
     #   @return [Integer]
     #
     # @!attribute [rw] total_records_processed
@@ -615,8 +624,7 @@ module Aws::EntityResolution
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   The current status of the job. Either `running`, `succeeded`,
-    #   `queued`, or `failed`.
+    #   The current status of the job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/JobSummary AWS API Documentation
@@ -654,8 +662,8 @@ module Aws::EntityResolution
     end
 
     # @!attribute [rw] jobs
-    #   A list of JobSummary objects, each of which contain the ID, status,
-    #   start time, and end time of a job.
+    #   A list of `JobSummary` objects, each of which contain the ID,
+    #   status, start time, and end time of a job.
     #   @return [Array<Types::JobSummary>]
     #
     # @!attribute [rw] next_token
@@ -803,9 +811,9 @@ module Aws::EntityResolution
     end
 
     # A list of `OutputAttribute` objects, each of which have the fields
-    # Name and Hashed. Each of these objects selects a column to be included
-    # in the output table, and whether the values of the column should be
-    # hashed.
+    # `Name` and `Hashed`. Each of these objects selects a column to be
+    # included in the output table, and whether the values of the column
+    # should be hashed.
     #
     # @!attribute [rw] hashed
     #   Enables the ability to hash the column values in the output.
@@ -826,9 +834,9 @@ module Aws::EntityResolution
     end
 
     # A list of `OutputAttribute` objects, each of which have the fields
-    # Name and Hashed. Each of these objects selects a column to be included
-    # in the output table, and whether the values of the column should be
-    # hashed.
+    # `Name` and `Hashed`. Each of these objects selects a column to be
+    # included in the output table, and whether the values of the column
+    # should be hashed.
     #
     # @!attribute [rw] kms_arn
     #   Customer KMS ARN for encryption at rest. If not provided, system
@@ -845,7 +853,7 @@ module Aws::EntityResolution
     #
     # @!attribute [rw] output
     #   A list of `OutputAttribute` objects, each of which have the fields
-    #   Name and Hashed. Each of these objects selects a column to be
+    #   `Name` and `Hashed`. Each of these objects selects a column to be
     #   included in the output table, and whether the values of the column
     #   should be hashed.
     #   @return [Array<Types::OutputAttribute>]
@@ -866,10 +874,11 @@ module Aws::EntityResolution
     end
 
     # An object which defines the `resolutionType` and the
-    # `ruleBasedProperties`
+    # `ruleBasedProperties`.
     #
     # @!attribute [rw] resolution_type
-    #   There are two types of matching, `RULE_MATCHING` and `ML_MATCHING`
+    #   The type of matching. There are two types of matching:
+    #   `RULE_MATCHING` and `ML_MATCHING`.
     #   @return [String]
     #
     # @!attribute [rw] rule_based_properties
@@ -924,20 +933,20 @@ module Aws::EntityResolution
     # field `Rules`, which is a list of rule objects.
     #
     # @!attribute [rw] attribute_matching_model
-    #   You can either choose `ONE_TO_ONE` or `MANY_TO_MANY` as the
-    #   AttributeMatchingModel. When choosing `MANY_TO_MANY`, the system can
-    #   match attribute across the sub-types of an attribute type. For
-    #   example, if the value of the Email field of Profile A and the value
-    #   of BusinessEmail field of Profile B matches, the two profiles are
-    #   matched on the Email type. When choosing `ONE_TO_ONE` the system can
-    #   only match if the sub-types are exact matches. For example, only
-    #   when the value of the Email field of Profile A and the value of the
-    #   Email field of Profile B matches, the two profiles are matched on
-    #   the Email type.
+    #   The comparison type. You can either choose `ONE_TO_ONE` or
+    #   `MANY_TO_MANY` as the AttributeMatchingModel. When choosing
+    #   `MANY_TO_MANY`, the system can match attributes across the sub-types
+    #   of an attribute type. For example, if the value of the `Email` field
+    #   of Profile A and the value of `BusinessEmail` field of Profile B
+    #   matches, the two profiles are matched on the `Email` type. When
+    #   choosing `ONE_TO_ONE` ,the system can only match if the sub-types
+    #   are exact matches. For example, only when the value of the `Email`
+    #   field of Profile A and the value of the `Email` field of Profile B
+    #   matches, the two profiles are matched on the `Email` type.
     #   @return [String]
     #
     # @!attribute [rw] rules
-    #   A list of Rule objects, each of which have fields `RuleName` and
+    #   A list of `Rule` objects, each of which have fields `RuleName` and
     #   `MatchingKeys`.
     #   @return [Array<Types::Rule>]
     #
@@ -970,7 +979,7 @@ module Aws::EntityResolution
     #   unified matching group. For example, let's consider a scenario
     #   where the source table contains various addresses, such as
     #   business\_address and shipping\_address. By assigning the `MatchKey`
-    #   *Address*' to both attributes, Entity Resolution will match records
+    #   *Address* to both attributes, Entity Resolution will match records
     #   across these fields to create a consolidated matching group. If no
     #   `MatchKey` is specified for a column, it won't be utilized for
     #   matching purposes but will still be included in the output table.
@@ -1124,13 +1133,13 @@ module Aws::EntityResolution
     #
     # @!attribute [rw] resolution_techniques
     #   An object which defines the `resolutionType` and the
-    #   `ruleBasedProperties`
+    #   `ruleBasedProperties`.
     #   @return [Types::ResolutionTechniques]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role. AWS Entity
-    #   Resolution assumes this role to create resources on your behalf as
-    #   part of workflow execution.
+    #   The Amazon Resource Name (ARN) of the IAM role. Entity Resolution
+    #   assumes this role to create resources on your behalf as part of
+    #   workflow execution.
     #   @return [String]
     #
     # @!attribute [rw] workflow_name
@@ -1176,9 +1185,9 @@ module Aws::EntityResolution
     #   @return [Types::ResolutionTechniques]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role. AWS Entity
-    #   Resolution assumes this role to create resources on your behalf as
-    #   part of workflow execution.
+    #   The Amazon Resource Name (ARN) of the IAM role. Entity Resolution
+    #   assumes this role to create resources on your behalf as part of
+    #   workflow execution.
     #   @return [String]
     #
     # @!attribute [rw] workflow_name
@@ -1199,7 +1208,7 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
-    # The input fails to satisfy the constraints specified by AWS Entity
+    # The input fails to satisfy the constraints specified by Entity
     # Resolution. `HTTP Status Code: 400`
     #
     # @!attribute [rw] message

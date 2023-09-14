@@ -1280,16 +1280,11 @@ module Aws::CloudFormation
     #   @return [Boolean]
     #
     # @!attribute [rw] retain_except_on_create
-    #   This deletion policy deletes newly created resources, but retains
-    #   existing resources, when a stack operation is rolled back. This
-    #   ensures new, empty, and unused resources are deleted, while critical
-    #   resources and their data are retained. `RetainExceptOnCreate` can be
-    #   specified for any resource that supports the [ DeletionPolicy][1]
-    #   attribute.
+    #   When set to `true`, newly created resources are deleted when the
+    #   operation rolls back. This includes newly created resources marked
+    #   with a deletion policy of `Retain`.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html
+    #   Default: `false`
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackInput AWS API Documentation
@@ -1594,10 +1589,10 @@ module Aws::CloudFormation
     #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
     #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
     #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
-    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/using-iam-template.html#capabilities
-    #   [9]: https://docs.aws.amazon.com/AWSCloudFormation/template-macros.html
-    #   [10]: https://docs.aws.amazon.com/AWSCloudFormation/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
-    #   [11]: https://docs.aws.amazon.com/AWSCloudFormation/transform-aws-serverless.html
+    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
+    #   [9]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
+    #   [10]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
+    #   [11]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -1625,7 +1620,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/stacksets-prereqs.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
     #   @return [String]
     #
     # @!attribute [rw] execution_role_name
@@ -3019,8 +3014,12 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] stack_name
     #   <note markdown="1"> If you don't pass a parameter to `StackName`, the API returns a
-    #   response that describes all resources in the account. This requires
-    #   `ListStacks` and `DescribeStacks` permissions.
+    #   response that describes all resources in the account, which can
+    #   impact performance. This requires `ListStacks` and `DescribeStacks`
+    #   permissions.
+    #
+    #    Consider using the ListStacks API if you're not passing a parameter
+    #   to `StackName`.
     #
     #    The IAM policy below can be added to IAM policies when you want to
     #   limit resource-level permissions and avoid returning a response when
@@ -3762,16 +3761,11 @@ module Aws::CloudFormation
     #   @return [Boolean]
     #
     # @!attribute [rw] retain_except_on_create
-    #   This deletion policy deletes newly created resources, but retains
-    #   existing resources, when a stack operation is rolled back. This
-    #   ensures new, empty, and unused resources are deleted, while critical
-    #   resources and their data are retained. `RetainExceptOnCreate` can be
-    #   specified for any resource that supports the [ DeletionPolicy][1]
-    #   attribute.
+    #   When set to `true`, newly created resources are deleted when the
+    #   operation rolls back. This includes newly created resources marked
+    #   with a deletion policy of `Retain`.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html
+    #   Default: `false`
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ExecuteChangeSetInput AWS API Documentation
@@ -6243,16 +6237,11 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] retain_except_on_create
-    #   This deletion policy deletes newly created resources, but retains
-    #   existing resources, when a stack operation is rolled back. This
-    #   ensures new, empty, and unused resources are deleted, while critical
-    #   resources and their data are retained. `RetainExceptOnCreate` can be
-    #   specified for any resource that supports the [ DeletionPolicy][1]
-    #   attribute.
+    #   When set to `true`, newly created resources are deleted when the
+    #   operation rolls back. This includes newly created resources marked
+    #   with a deletion policy of `Retain`.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html
+    #   Default: `false`
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackStackInput AWS API Documentation
@@ -6650,16 +6639,11 @@ module Aws::CloudFormation
     #   @return [Types::StackDriftInformation]
     #
     # @!attribute [rw] retain_except_on_create
-    #   This deletion policy deletes newly created resources, but retains
-    #   existing resources, when a stack operation is rolled back. This
-    #   ensures new, empty, and unused resources are deleted, while critical
-    #   resources and their data are retained. `RetainExceptOnCreate` can be
-    #   specified for any resource that supports the [ DeletionPolicy][1]
-    #   attribute.
+    #   When set to `true`, newly created resources are deleted when the
+    #   operation rolls back. This includes newly created resources marked
+    #   with a deletion policy of `Retain`.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html
+    #   Default: `false`
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Stack AWS API Documentation
@@ -7776,7 +7760,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/stacksets-prereqs.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
     #   @return [String]
     #
     # @!attribute [rw] execution_role_name
@@ -8067,7 +8051,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/stacksets-prereqs.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
     #   @return [String]
     #
     # @!attribute [rw] execution_role_name
@@ -9502,16 +9486,11 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] retain_except_on_create
-    #   This deletion policy deletes newly created resources, but retains
-    #   existing resources, when a stack operation is rolled back. This
-    #   ensures new, empty, and unused resources are deleted, while critical
-    #   resources and their data are retained. `RetainExceptOnCreate` can be
-    #   specified for any resource that supports the [ DeletionPolicy][1]
-    #   attribute.
+    #   When set to `true`, newly created resources are deleted when the
+    #   operation rolls back. This includes newly created resources marked
+    #   with a deletion policy of `Retain`.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html
+    #   Default: `false`
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackInput AWS API Documentation
@@ -9823,10 +9802,10 @@ module Aws::CloudFormation
     #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
     #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
     #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
-    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/using-iam-template.html#capabilities
-    #   [9]: https://docs.aws.amazon.com/AWSCloudFormation/template-macros.html
-    #   [10]: https://docs.aws.amazon.com/AWSCloudFormation/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
-    #   [11]: https://docs.aws.amazon.com/AWSCloudFormation/transform-aws-serverless.html
+    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
+    #   [9]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
+    #   [10]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
+    #   [11]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -9886,7 +9865,7 @@ module Aws::CloudFormation
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/stacksets-prereqs.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
     #   @return [String]
     #
     # @!attribute [rw] execution_role_name

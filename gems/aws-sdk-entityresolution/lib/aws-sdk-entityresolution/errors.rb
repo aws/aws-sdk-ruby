@@ -84,6 +84,16 @@ module Aws::EntityResolution
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def quota_name
+        @data[:quota_name]
+      end
+
+      # @return [String]
+      def quota_value
+        @data[:quota_value]
+      end
     end
 
     class InternalServerException < ServiceError
