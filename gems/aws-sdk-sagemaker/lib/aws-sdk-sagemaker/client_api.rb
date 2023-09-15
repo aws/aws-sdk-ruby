@@ -1763,6 +1763,7 @@ module Aws::SageMaker
     SharingSettings = Shapes::StructureShape.new(name: 'SharingSettings')
     ShuffleConfig = Shapes::StructureShape.new(name: 'ShuffleConfig')
     SingleSignOnUserIdentifier = Shapes::StringShape.new(name: 'SingleSignOnUserIdentifier')
+    SkipModelValidation = Shapes::StringShape.new(name: 'SkipModelValidation')
     SnsTopicArn = Shapes::StringShape.new(name: 'SnsTopicArn')
     SortActionsBy = Shapes::StringShape.new(name: 'SortActionsBy')
     SortArtifactsBy = Shapes::StringShape.new(name: 'SortArtifactsBy')
@@ -3175,6 +3176,7 @@ module Aws::SageMaker
     CreateModelPackageInput.add_member(:task, Shapes::ShapeRef.new(shape: String, location_name: "Task"))
     CreateModelPackageInput.add_member(:sample_payload_url, Shapes::ShapeRef.new(shape: S3Uri, location_name: "SamplePayloadUrl"))
     CreateModelPackageInput.add_member(:additional_inference_specifications, Shapes::ShapeRef.new(shape: AdditionalInferenceSpecifications, location_name: "AdditionalInferenceSpecifications"))
+    CreateModelPackageInput.add_member(:skip_model_validation, Shapes::ShapeRef.new(shape: SkipModelValidation, location_name: "SkipModelValidation"))
     CreateModelPackageInput.struct_class = Types::CreateModelPackageInput
 
     CreateModelPackageOutput.add_member(:model_package_arn, Shapes::ShapeRef.new(shape: ModelPackageArn, required: true, location_name: "ModelPackageArn"))
@@ -4444,6 +4446,7 @@ module Aws::SageMaker
     DescribeModelPackageOutput.add_member(:task, Shapes::ShapeRef.new(shape: String, location_name: "Task"))
     DescribeModelPackageOutput.add_member(:sample_payload_url, Shapes::ShapeRef.new(shape: String, location_name: "SamplePayloadUrl"))
     DescribeModelPackageOutput.add_member(:additional_inference_specifications, Shapes::ShapeRef.new(shape: AdditionalInferenceSpecifications, location_name: "AdditionalInferenceSpecifications"))
+    DescribeModelPackageOutput.add_member(:skip_model_validation, Shapes::ShapeRef.new(shape: SkipModelValidation, location_name: "SkipModelValidation"))
     DescribeModelPackageOutput.struct_class = Types::DescribeModelPackageOutput
 
     DescribeModelQualityJobDefinitionRequest.add_member(:job_definition_name, Shapes::ShapeRef.new(shape: MonitoringJobDefinitionName, required: true, location_name: "JobDefinitionName"))
@@ -7103,6 +7106,7 @@ module Aws::SageMaker
     ModelPackage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ModelPackage.add_member(:customer_metadata_properties, Shapes::ShapeRef.new(shape: CustomerMetadataMap, location_name: "CustomerMetadataProperties"))
     ModelPackage.add_member(:drift_check_baselines, Shapes::ShapeRef.new(shape: DriftCheckBaselines, location_name: "DriftCheckBaselines"))
+    ModelPackage.add_member(:skip_model_validation, Shapes::ShapeRef.new(shape: SkipModelValidation, location_name: "SkipModelValidation"))
     ModelPackage.struct_class = Types::ModelPackage
 
     ModelPackageArnList.member = Shapes::ShapeRef.new(shape: ModelPackageArn)

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.126.0 (2023-09-15)
+------------------
+
+* Feature - New rule type (OnMetricDataUpdate) has been added
+
 1.125.0 (2023-09-01)
 ------------------
 

@@ -4542,13 +4542,7 @@ module Aws::DataSync
     # @!attribute [rw] verified
     #   Specifies the level of reporting for the files, objects, and
     #   directories that DataSync attempted to verify at the end of your
-    #   transfer. This only applies if you [configure your task][1] to
-    #   verify data during and after the transfer (which DataSync does by
-    #   default).
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-data-verification-options.html
+    #   transfer.
     #   @return [Types::ReportOverride]
     #
     # @!attribute [rw] deleted

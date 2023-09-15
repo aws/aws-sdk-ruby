@@ -1965,9 +1965,9 @@ module Aws::SageMaker
     #   stopping.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   (Optional) An array of key-value pairs. For more information, see
-    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
-    #   and Cost Management User Guide*.
+    #   (Optional) An array of key-value pairs. For more information, see [
+    #   Using Cost Allocation Tags][1] in the *Amazon Web Services Billing and
+    #   Cost Management User Guide*.
     #
     #
     #
@@ -5103,9 +5103,9 @@ module Aws::SageMaker
     #   stopping.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   (Optional) An array of key-value pairs. For more information, see
-    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
-    #   and Cost Management User Guide*.
+    #   (Optional) An array of key-value pairs. For more information, see [
+    #   Using Cost Allocation Tags][1] in the *Amazon Web Services Billing and
+    #   Cost Management User Guide*.
     #
     #
     #
@@ -5379,9 +5379,9 @@ module Aws::SageMaker
     #   stopping.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   (Optional) An array of key-value pairs. For more information, see
-    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
-    #   and Cost Management User Guide*.
+    #   (Optional) An array of key-value pairs. For more information, see [
+    #   Using Cost Allocation Tags][1] in the *Amazon Web Services Billing and
+    #   Cost Management User Guide*.
     #
     #
     #
@@ -5642,6 +5642,9 @@ module Aws::SageMaker
     #   model package that can be used on inference endpoints. Generally used
     #   with SageMaker Neo to store the compiled artifacts.
     #
+    # @option params [String] :skip_model_validation
+    #   Indicates if you want to skip model validation.
+    #
     # @return [Types::CreateModelPackageOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateModelPackageOutput#model_package_arn #model_package_arn} => String
@@ -5876,6 +5879,7 @@ module Aws::SageMaker
     #         supported_response_mime_types: ["ResponseMIMEType"],
     #       },
     #     ],
+    #     skip_model_validation: "All", # accepts All, None
     #   })
     #
     # @example Response structure
@@ -5978,9 +5982,9 @@ module Aws::SageMaker
     #   stopping.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   (Optional) An array of key-value pairs. For more information, see
-    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
-    #   and Cost Management User Guide*.
+    #   (Optional) An array of key-value pairs. For more information, see [
+    #   Using Cost Allocation Tags][1] in the *Amazon Web Services Billing and
+    #   Cost Management User Guide*.
     #
     #
     #
@@ -12997,6 +13001,7 @@ module Aws::SageMaker
     #   * {Types::DescribeModelPackageOutput#task #task} => String
     #   * {Types::DescribeModelPackageOutput#sample_payload_url #sample_payload_url} => String
     #   * {Types::DescribeModelPackageOutput#additional_inference_specifications #additional_inference_specifications} => Array&lt;Types::AdditionalInferenceSpecificationDefinition&gt;
+    #   * {Types::DescribeModelPackageOutput#skip_model_validation #skip_model_validation} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -13163,6 +13168,7 @@ module Aws::SageMaker
     #   resp.additional_inference_specifications[0].supported_content_types[0] #=> String
     #   resp.additional_inference_specifications[0].supported_response_mime_types #=> Array
     #   resp.additional_inference_specifications[0].supported_response_mime_types[0] #=> String
+    #   resp.skip_model_validation #=> String, one of "All", "None"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelPackage AWS API Documentation
     #
@@ -16068,7 +16074,8 @@ module Aws::SageMaker
     #   The field to sort results by. The default is `CreationTime`.
     #
     # @option params [String] :sort_order
-    #   The sort order for results. The default is `Descending`.
+    #   Whether to sort the results in `Ascending` or `Descending` order. The
+    #   default is `Descending`.
     #
     # @option params [String] :next_token
     #   If the result of the previous `ListDataQualityJobDefinitions` request
@@ -18491,7 +18498,8 @@ module Aws::SageMaker
     #   The field to sort results by. The default is `CreationTime`.
     #
     # @option params [String] :sort_order
-    #   The sort order for results. The default is `Descending`.
+    #   Whether to sort the results in `Ascending` or `Descending` order. The
+    #   default is `Descending`.
     #
     # @option params [String] :next_token
     #   If the result of the previous `ListModelQualityJobDefinitions` request
@@ -18749,8 +18757,8 @@ module Aws::SageMaker
     #   Name of a specific endpoint to fetch jobs for.
     #
     # @option params [String] :sort_by
-    #   Whether to sort results by `Status`, `CreationTime`, `ScheduledTime`
-    #   field. The default is `CreationTime`.
+    #   Whether to sort the results by the `Status`, `CreationTime`, or
+    #   `ScheduledTime` field. The default is `CreationTime`.
     #
     # @option params [String] :sort_order
     #   Whether to sort the results in `Ascending` or `Descending` order. The
@@ -18850,8 +18858,8 @@ module Aws::SageMaker
     #   Name of a specific endpoint to fetch schedules for.
     #
     # @option params [String] :sort_by
-    #   Whether to sort results by `Status`, `CreationTime`, `ScheduledTime`
-    #   field. The default is `CreationTime`.
+    #   Whether to sort the results by the `Status`, `CreationTime`, or
+    #   `ScheduledTime` field. The default is `CreationTime`.
     #
     # @option params [String] :sort_order
     #   Whether to sort the results in `Ascending` or `Descending` order. The
@@ -24141,7 +24149,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.209.0'
+      context[:gem_version] = '1.210.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

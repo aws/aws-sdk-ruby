@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2023-09-15)
+------------------
+
+* Feature - Documentation-only updates for AWS DataSync.
+
 1.65.0 (2023-08-30)
 ------------------
 

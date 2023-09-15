@@ -2021,7 +2021,7 @@ module Aws::Connect
     #     instance_id: "InstanceId", # required
     #     name: "RuleName", # required
     #     trigger_event_source: { # required
-    #       event_source_name: "OnPostCallAnalysisAvailable", # required, accepts OnPostCallAnalysisAvailable, OnRealTimeCallAnalysisAvailable, OnPostChatAnalysisAvailable, OnZendeskTicketCreate, OnZendeskTicketStatusUpdate, OnSalesforceCaseCreate, OnContactEvaluationSubmit
+    #       event_source_name: "OnPostCallAnalysisAvailable", # required, accepts OnPostCallAnalysisAvailable, OnRealTimeCallAnalysisAvailable, OnPostChatAnalysisAvailable, OnZendeskTicketCreate, OnZendeskTicketStatusUpdate, OnSalesforceCaseCreate, OnContactEvaluationSubmit, OnMetricDataUpdate
     #       integration_association_id: "IntegrationAssociationId",
     #     },
     #     function: "RuleFunction", # required
@@ -4425,7 +4425,7 @@ module Aws::Connect
     #   resp.rule.name #=> String
     #   resp.rule.rule_id #=> String
     #   resp.rule.rule_arn #=> String
-    #   resp.rule.trigger_event_source.event_source_name #=> String, one of "OnPostCallAnalysisAvailable", "OnRealTimeCallAnalysisAvailable", "OnPostChatAnalysisAvailable", "OnZendeskTicketCreate", "OnZendeskTicketStatusUpdate", "OnSalesforceCaseCreate", "OnContactEvaluationSubmit"
+    #   resp.rule.trigger_event_source.event_source_name #=> String, one of "OnPostCallAnalysisAvailable", "OnRealTimeCallAnalysisAvailable", "OnPostChatAnalysisAvailable", "OnZendeskTicketCreate", "OnZendeskTicketStatusUpdate", "OnSalesforceCaseCreate", "OnContactEvaluationSubmit", "OnMetricDataUpdate"
     #   resp.rule.trigger_event_source.integration_association_id #=> String
     #   resp.rule.function #=> String
     #   resp.rule.actions #=> Array
@@ -8265,7 +8265,7 @@ module Aws::Connect
     #   resp = client.list_rules({
     #     instance_id: "InstanceId", # required
     #     publish_status: "DRAFT", # accepts DRAFT, PUBLISHED
-    #     event_source_name: "OnPostCallAnalysisAvailable", # accepts OnPostCallAnalysisAvailable, OnRealTimeCallAnalysisAvailable, OnPostChatAnalysisAvailable, OnZendeskTicketCreate, OnZendeskTicketStatusUpdate, OnSalesforceCaseCreate, OnContactEvaluationSubmit
+    #     event_source_name: "OnPostCallAnalysisAvailable", # accepts OnPostCallAnalysisAvailable, OnRealTimeCallAnalysisAvailable, OnPostChatAnalysisAvailable, OnZendeskTicketCreate, OnZendeskTicketStatusUpdate, OnSalesforceCaseCreate, OnContactEvaluationSubmit, OnMetricDataUpdate
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -8276,7 +8276,7 @@ module Aws::Connect
     #   resp.rule_summary_list[0].name #=> String
     #   resp.rule_summary_list[0].rule_id #=> String
     #   resp.rule_summary_list[0].rule_arn #=> String
-    #   resp.rule_summary_list[0].event_source_name #=> String, one of "OnPostCallAnalysisAvailable", "OnRealTimeCallAnalysisAvailable", "OnPostChatAnalysisAvailable", "OnZendeskTicketCreate", "OnZendeskTicketStatusUpdate", "OnSalesforceCaseCreate", "OnContactEvaluationSubmit"
+    #   resp.rule_summary_list[0].event_source_name #=> String, one of "OnPostCallAnalysisAvailable", "OnRealTimeCallAnalysisAvailable", "OnPostChatAnalysisAvailable", "OnZendeskTicketCreate", "OnZendeskTicketStatusUpdate", "OnSalesforceCaseCreate", "OnContactEvaluationSubmit", "OnMetricDataUpdate"
     #   resp.rule_summary_list[0].publish_status #=> String, one of "DRAFT", "PUBLISHED"
     #   resp.rule_summary_list[0].action_summaries #=> Array
     #   resp.rule_summary_list[0].action_summaries[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION"
@@ -13514,7 +13514,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.125.0'
+      context[:gem_version] = '1.126.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

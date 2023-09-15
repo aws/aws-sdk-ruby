@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2023-09-15)
+------------------
+
+* Feature - This release introduces app block builder, allowing customers to provision a resource to package applications into an app block
+
 1.77.0 (2023-09-14)
 ------------------
 
