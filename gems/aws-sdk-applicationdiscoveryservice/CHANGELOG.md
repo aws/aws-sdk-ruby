@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2023-09-18)
+------------------
+
+* Feature - Add sensitive protection for customer information
+
 1.55.0 (2023-07-11)
 ------------------
 

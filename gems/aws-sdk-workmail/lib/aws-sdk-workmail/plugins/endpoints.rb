@@ -112,6 +112,8 @@ module Aws::WorkMail
             Aws::WorkMail::Endpoints::DeregisterMailDomain.build(context)
           when :describe_email_monitoring_configuration
             Aws::WorkMail::Endpoints::DescribeEmailMonitoringConfiguration.build(context)
+          when :describe_entity
+            Aws::WorkMail::Endpoints::DescribeEntity.build(context)
           when :describe_group
             Aws::WorkMail::Endpoints::DescribeGroup.build(context)
           when :describe_inbound_dmarc_settings
@@ -154,6 +156,8 @@ module Aws::WorkMail
             Aws::WorkMail::Endpoints::ListGroupMembers.build(context)
           when :list_groups
             Aws::WorkMail::Endpoints::ListGroups.build(context)
+          when :list_groups_for_entity
+            Aws::WorkMail::Endpoints::ListGroupsForEntity.build(context)
           when :list_impersonation_roles
             Aws::WorkMail::Endpoints::ListImpersonationRoles.build(context)
           when :list_mail_domains
@@ -206,6 +210,8 @@ module Aws::WorkMail
             Aws::WorkMail::Endpoints::UpdateAvailabilityConfiguration.build(context)
           when :update_default_mail_domain
             Aws::WorkMail::Endpoints::UpdateDefaultMailDomain.build(context)
+          when :update_group
+            Aws::WorkMail::Endpoints::UpdateGroup.build(context)
           when :update_impersonation_role
             Aws::WorkMail::Endpoints::UpdateImpersonationRole.build(context)
           when :update_mailbox_quota
@@ -216,6 +222,8 @@ module Aws::WorkMail
             Aws::WorkMail::Endpoints::UpdatePrimaryEmailAddress.build(context)
           when :update_resource
             Aws::WorkMail::Endpoints::UpdateResource.build(context)
+          when :update_user
+            Aws::WorkMail::Endpoints::UpdateUser.build(context)
           end
         end
       end

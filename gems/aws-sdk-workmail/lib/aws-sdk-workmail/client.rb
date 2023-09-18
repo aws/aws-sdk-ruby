@@ -406,8 +406,27 @@ module Aws::WorkMail
     # @option params [required, String] :resource_id
     #   The resource for which members (users or groups) are associated.
     #
+    #   The identifier can accept *ResourceId*, *Resourcename*, or *email*.
+    #   The following identity formats are available:
+    #
+    #   * Resource ID: r-0123456789a0123456789b0123456789
+    #
+    #   * Email address: resource@domain.tld
+    #
+    #   * Resource name: resource
+    #
     # @option params [required, String] :entity_id
     #   The member (user or group) to associate to the resource.
+    #
+    #   The entity ID can accept *UserId or GroupID*, *Username or Groupname*,
+    #   or *email*.
+    #
+    #   * Entity: 12345678-1234-1234-1234-123456789012 or
+    #     S-1-1-12-1234567890-123456789-123456789-1234
+    #
+    #   * Email address: entity@domain.tld
+    #
+    #   * Entity: entity
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -415,8 +434,8 @@ module Aws::WorkMail
     #
     #   resp = client.associate_delegate_to_resource({
     #     organization_id: "OrganizationId", # required
-    #     resource_id: "ResourceId", # required
-    #     entity_id: "WorkMailIdentifier", # required
+    #     resource_id: "EntityIdentifier", # required
+    #     entity_id: "EntityIdentifier", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/AssociateDelegateToResource AWS API Documentation
@@ -436,8 +455,28 @@ module Aws::WorkMail
     # @option params [required, String] :group_id
     #   The group to which the member (user or group) is associated.
     #
+    #   The identifier can accept *GroupId*, *Groupname*, or *email*. The
+    #   following identity formats are available:
+    #
+    #   * Group ID: 12345678-1234-1234-1234-123456789012 or
+    #     S-1-1-12-1234567890-123456789-123456789-1234
+    #
+    #   * Email address: group@domain.tld
+    #
+    #   * Group name: group
+    #
     # @option params [required, String] :member_id
     #   The member (user or group) to associate to the group.
+    #
+    #   The member ID can accept *UserID or GroupId*, *Username or Groupname*,
+    #   or *email*.
+    #
+    #   * Member: 12345678-1234-1234-1234-123456789012 or
+    #     S-1-1-12-1234567890-123456789-123456789-1234
+    #
+    #   * Email address: member@domain.tld
+    #
+    #   * Member name: member
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -445,8 +484,8 @@ module Aws::WorkMail
     #
     #   resp = client.associate_member_to_group({
     #     organization_id: "OrganizationId", # required
-    #     group_id: "WorkMailIdentifier", # required
-    #     member_id: "WorkMailIdentifier", # required
+    #     group_id: "EntityIdentifier", # required
+    #     member_id: "EntityIdentifier", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/AssociateMemberToGroup AWS API Documentation
@@ -627,6 +666,10 @@ module Aws::WorkMail
     # @option params [required, String] :name
     #   The name of the group.
     #
+    # @option params [Boolean] :hidden_from_global_address_list
+    #   If this parameter is enabled, the group will be hidden from the
+    #   address book.
+    #
     # @return [Types::CreateGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGroupResponse#group_id #group_id} => String
@@ -636,6 +679,7 @@ module Aws::WorkMail
     #   resp = client.create_group({
     #     organization_id: "OrganizationId", # required
     #     name: "GroupName", # required
+    #     hidden_from_global_address_list: false,
     #   })
     #
     # @example Response structure
@@ -863,7 +907,7 @@ module Aws::WorkMail
     #     client_token: "IdempotencyClientToken",
     #     domains: [
     #       {
-    #         domain_name: "DomainName",
+    #         domain_name: "DomainName", # required
     #         hosted_zone_id: "HostedZoneId",
     #       },
     #     ],
@@ -897,6 +941,13 @@ module Aws::WorkMail
     #   The type of the new resource. The available types are `equipment` and
     #   `room`.
     #
+    # @option params [String] :description
+    #   Resource description.
+    #
+    # @option params [Boolean] :hidden_from_global_address_list
+    #   If this parameter is enabled, the resource will be hidden from the
+    #   address book.
+    #
     # @return [Types::CreateResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateResourceResponse#resource_id #resource_id} => String
@@ -907,6 +958,8 @@ module Aws::WorkMail
     #     organization_id: "OrganizationId", # required
     #     name: "ResourceName", # required
     #     type: "ROOM", # required, accepts ROOM, EQUIPMENT
+    #     description: "ResourceDescription",
+    #     hidden_from_global_address_list: false,
     #   })
     #
     # @example Response structure
@@ -935,8 +988,25 @@ module Aws::WorkMail
     # @option params [required, String] :display_name
     #   The display name for the new user.
     #
-    # @option params [required, String] :password
+    # @option params [String] :password
     #   The password for the new user.
+    #
+    # @option params [String] :role
+    #   The role of the new user.
+    #
+    #   You cannot pass *SYSTEM\_USER* or *RESOURCE* role in a single request.
+    #   When a user role is not selected, the default role of *USER* is
+    #   selected.
+    #
+    # @option params [String] :first_name
+    #   The first name of the new user.
+    #
+    # @option params [String] :last_name
+    #   The last name of the new user.
+    #
+    # @option params [Boolean] :hidden_from_global_address_list
+    #   If this parameter is enabled, the user will be hidden from the address
+    #   book.
     #
     # @return [Types::CreateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -947,8 +1017,12 @@ module Aws::WorkMail
     #   resp = client.create_user({
     #     organization_id: "OrganizationId", # required
     #     name: "UserName", # required
-    #     display_name: "String", # required
-    #     password: "Password", # required
+    #     display_name: "UserAttribute", # required
+    #     password: "Password",
+    #     role: "USER", # accepts USER, RESOURCE, SYSTEM_USER, REMOTE_USER
+    #     first_name: "UserAttribute",
+    #     last_name: "UserAttribute",
+    #     hidden_from_global_address_list: false,
     #   })
     #
     # @example Response structure
@@ -1091,13 +1165,21 @@ module Aws::WorkMail
     # @option params [required, String] :group_id
     #   The identifier of the group to be deleted.
     #
+    #   The identifier can be the *GroupId*, or *Groupname*. The following
+    #   identity formats are available:
+    #
+    #   * Group ID: 12345678-1234-1234-1234-123456789012 or
+    #     S-1-1-12-1234567890-123456789-123456789-1234
+    #
+    #   * Group name: group
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_group({
     #     organization_id: "OrganizationId", # required
-    #     group_id: "WorkMailIdentifier", # required
+    #     group_id: "EntityIdentifier", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteGroup AWS API Documentation
@@ -1142,11 +1224,32 @@ module Aws::WorkMail
     #   group) exists.
     #
     # @option params [required, String] :entity_id
-    #   The identifier of the member (user or group) that owns the mailbox.
+    #   The identifier of the entity that owns the mailbox.
+    #
+    #   The identifier can be *UserId or Group Id*, *Username or Groupname*,
+    #   or *email*.
+    #
+    #   * Entity ID: 12345678-1234-1234-1234-123456789012,
+    #     r-0123456789a0123456789b0123456789, or
+    #     S-1-1-12-1234567890-123456789-123456789-1234
+    #
+    #   * Email address: entity@domain.tld
+    #
+    #   * Entity name: entity
     #
     # @option params [required, String] :grantee_id
-    #   The identifier of the member (user or group) for which to delete
-    #   granted permissions.
+    #   The identifier of the entity for which to delete granted permissions.
+    #
+    #   The identifier can be *UserId, ResourceID, or Group Id*, *Username or
+    #   Groupname*, or *email*.
+    #
+    #   * Grantee ID:
+    #     12345678-1234-1234-1234-123456789012,r-0123456789a0123456789b0123456789,
+    #     or S-1-1-12-1234567890-123456789-123456789-1234
+    #
+    #   * Email address: grantee@domain.tld
+    #
+    #   * Grantee name: grantee
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1154,8 +1257,8 @@ module Aws::WorkMail
     #
     #   resp = client.delete_mailbox_permissions({
     #     organization_id: "OrganizationId", # required
-    #     entity_id: "WorkMailIdentifier", # required
-    #     grantee_id: "WorkMailIdentifier", # required
+    #     entity_id: "EntityIdentifier", # required
+    #     grantee_id: "EntityIdentifier", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteMailboxPermissions AWS API Documentation
@@ -1269,6 +1372,10 @@ module Aws::WorkMail
     #   If true, deletes the AWS Directory Service directory associated with
     #   the organization.
     #
+    # @option params [Boolean] :force_delete
+    #   Deletes a WorkMail organization even if the organization has enabled
+    #   users.
+    #
     # @return [Types::DeleteOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteOrganizationResponse#organization_id #organization_id} => String
@@ -1280,6 +1387,7 @@ module Aws::WorkMail
     #     client_token: "IdempotencyClientToken",
     #     organization_id: "OrganizationId", # required
     #     delete_directory: false, # required
+    #     force_delete: false,
     #   })
     #
     # @example Response structure
@@ -1305,13 +1413,20 @@ module Aws::WorkMail
     # @option params [required, String] :resource_id
     #   The identifier of the resource to be deleted.
     #
+    #   The identifier can accept *ResourceId*, or *Resourcename*. The
+    #   following identity formats are available:
+    #
+    #   * Resource ID: r-0123456789a0123456789b0123456789
+    #
+    #   * Resource name: resource
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_resource({
     #     organization_id: "OrganizationId", # required
-    #     resource_id: "ResourceId", # required
+    #     resource_id: "EntityIdentifier", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteResource AWS API Documentation
@@ -1363,13 +1478,21 @@ module Aws::WorkMail
     # @option params [required, String] :user_id
     #   The identifier of the user to be deleted.
     #
+    #   The identifier can be the *UserId* or *Username*. The following
+    #   identity formats are available:
+    #
+    #   * User ID: 12345678-1234-1234-1234-123456789012 or
+    #     S-1-1-12-1234567890-123456789-123456789-1234
+    #
+    #   * User name: user
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_user({
     #     organization_id: "OrganizationId", # required
-    #     user_id: "WorkMailIdentifier", # required
+    #     user_id: "EntityIdentifier", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteUser AWS API Documentation
@@ -1391,7 +1514,18 @@ module Aws::WorkMail
     #   exists.
     #
     # @option params [required, String] :entity_id
-    #   The identifier for the member (user or group) to be updated.
+    #   The identifier for the member to be updated.
+    #
+    #   The identifier can be *UserId, ResourceId, or Group Id*, *Username,
+    #   Resourcename, or Groupname*, or *email*.
+    #
+    #   * Entity ID: 12345678-1234-1234-1234-123456789012,
+    #     r-0123456789a0123456789b0123456789, or
+    #     S-1-1-12-1234567890-123456789-123456789-1234
+    #
+    #   * Email address: entity@domain.tld
+    #
+    #   * Entity name: entity
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1399,7 +1533,7 @@ module Aws::WorkMail
     #
     #   resp = client.deregister_from_work_mail({
     #     organization_id: "OrganizationId", # required
-    #     entity_id: "WorkMailIdentifier", # required
+    #     entity_id: "EntityIdentifier", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeregisterFromWorkMail AWS API Documentation
@@ -1472,6 +1606,42 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Returns basic details about an entity in WorkMail.
+    #
+    # @option params [required, String] :organization_id
+    #   The identifier for the organization under which the entity exists.
+    #
+    # @option params [required, String] :email
+    #   The email under which the entity exists.
+    #
+    # @return [Types::DescribeEntityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEntityResponse#entity_id #entity_id} => String
+    #   * {Types::DescribeEntityResponse#name #name} => String
+    #   * {Types::DescribeEntityResponse#type #type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_entity({
+    #     organization_id: "OrganizationId", # required
+    #     email: "EmailAddress", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entity_id #=> String
+    #   resp.name #=> String
+    #   resp.type #=> String, one of "GROUP", "USER", "RESOURCE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeEntity AWS API Documentation
+    #
+    # @overload describe_entity(params = {})
+    # @param [Hash] params ({})
+    def describe_entity(params = {}, options = {})
+      req = build_request(:describe_entity, params)
+      req.send_request(options)
+    end
+
     # Returns the data available for the group.
     #
     # @option params [required, String] :organization_id
@@ -1479,6 +1649,16 @@ module Aws::WorkMail
     #
     # @option params [required, String] :group_id
     #   The identifier for the group to be described.
+    #
+    #   The identifier can accept *GroupId*, *Groupname*, or *email*. The
+    #   following identity formats are available:
+    #
+    #   * Group ID: 12345678-1234-1234-1234-123456789012 or
+    #     S-1-1-12-1234567890-123456789-123456789-1234
+    #
+    #   * Email address: group@domain.tld
+    #
+    #   * Group name: group
     #
     # @return [Types::DescribeGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1488,12 +1668,13 @@ module Aws::WorkMail
     #   * {Types::DescribeGroupResponse#state #state} => String
     #   * {Types::DescribeGroupResponse#enabled_date #enabled_date} => Time
     #   * {Types::DescribeGroupResponse#disabled_date #disabled_date} => Time
+    #   * {Types::DescribeGroupResponse#hidden_from_global_address_list #hidden_from_global_address_list} => Boolean
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_group({
     #     organization_id: "OrganizationId", # required
-    #     group_id: "WorkMailIdentifier", # required
+    #     group_id: "EntityIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -1504,6 +1685,7 @@ module Aws::WorkMail
     #   resp.state #=> String, one of "ENABLED", "DISABLED", "DELETED"
     #   resp.enabled_date #=> Time
     #   resp.disabled_date #=> Time
+    #   resp.hidden_from_global_address_list #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeGroup AWS API Documentation
     #
@@ -1613,6 +1795,8 @@ module Aws::WorkMail
     #   * {Types::DescribeOrganizationResponse#completed_date #completed_date} => Time
     #   * {Types::DescribeOrganizationResponse#error_message #error_message} => String
     #   * {Types::DescribeOrganizationResponse#arn #arn} => String
+    #   * {Types::DescribeOrganizationResponse#migration_admin #migration_admin} => String
+    #   * {Types::DescribeOrganizationResponse#interoperability_enabled #interoperability_enabled} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -1631,6 +1815,8 @@ module Aws::WorkMail
     #   resp.completed_date #=> Time
     #   resp.error_message #=> String
     #   resp.arn #=> String
+    #   resp.migration_admin #=> String
+    #   resp.interoperability_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeOrganization AWS API Documentation
     #
@@ -1650,6 +1836,15 @@ module Aws::WorkMail
     # @option params [required, String] :resource_id
     #   The identifier of the resource to be described.
     #
+    #   The identifier can accept *ResourceId*, *Resourcename*, or *email*.
+    #   The following identity formats are available:
+    #
+    #   * Resource ID: r-0123456789a0123456789b0123456789
+    #
+    #   * Email address: resource@domain.tld
+    #
+    #   * Resource name: resource
+    #
     # @return [Types::DescribeResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeResourceResponse#resource_id #resource_id} => String
@@ -1660,12 +1855,14 @@ module Aws::WorkMail
     #   * {Types::DescribeResourceResponse#state #state} => String
     #   * {Types::DescribeResourceResponse#enabled_date #enabled_date} => Time
     #   * {Types::DescribeResourceResponse#disabled_date #disabled_date} => Time
+    #   * {Types::DescribeResourceResponse#description #description} => String
+    #   * {Types::DescribeResourceResponse#hidden_from_global_address_list #hidden_from_global_address_list} => Boolean
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_resource({
     #     organization_id: "OrganizationId", # required
-    #     resource_id: "ResourceId", # required
+    #     resource_id: "EntityIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -1680,6 +1877,8 @@ module Aws::WorkMail
     #   resp.state #=> String, one of "ENABLED", "DISABLED", "DELETED"
     #   resp.enabled_date #=> Time
     #   resp.disabled_date #=> Time
+    #   resp.description #=> String
+    #   resp.hidden_from_global_address_list #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeResource AWS API Documentation
     #
@@ -1698,6 +1897,16 @@ module Aws::WorkMail
     # @option params [required, String] :user_id
     #   The identifier for the user to be described.
     #
+    #   The identifier can be the *UserId*, *Username*, or *email*. The
+    #   following identity formats are available:
+    #
+    #   * User ID: 12345678-1234-1234-1234-123456789012 or
+    #     S-1-1-12-1234567890-123456789-123456789-1234
+    #
+    #   * Email address: user@domain.tld
+    #
+    #   * User name: user
+    #
     # @return [Types::DescribeUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeUserResponse#user_id #user_id} => String
@@ -1708,12 +1917,27 @@ module Aws::WorkMail
     #   * {Types::DescribeUserResponse#user_role #user_role} => String
     #   * {Types::DescribeUserResponse#enabled_date #enabled_date} => Time
     #   * {Types::DescribeUserResponse#disabled_date #disabled_date} => Time
+    #   * {Types::DescribeUserResponse#mailbox_provisioned_date #mailbox_provisioned_date} => Time
+    #   * {Types::DescribeUserResponse#mailbox_deprovisioned_date #mailbox_deprovisioned_date} => Time
+    #   * {Types::DescribeUserResponse#first_name #first_name} => String
+    #   * {Types::DescribeUserResponse#last_name #last_name} => String
+    #   * {Types::DescribeUserResponse#hidden_from_global_address_list #hidden_from_global_address_list} => Boolean
+    #   * {Types::DescribeUserResponse#initials #initials} => String
+    #   * {Types::DescribeUserResponse#telephone #telephone} => String
+    #   * {Types::DescribeUserResponse#street #street} => String
+    #   * {Types::DescribeUserResponse#job_title #job_title} => String
+    #   * {Types::DescribeUserResponse#city #city} => String
+    #   * {Types::DescribeUserResponse#company #company} => String
+    #   * {Types::DescribeUserResponse#zip_code #zip_code} => String
+    #   * {Types::DescribeUserResponse#department #department} => String
+    #   * {Types::DescribeUserResponse#country #country} => String
+    #   * {Types::DescribeUserResponse#office #office} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_user({
     #     organization_id: "OrganizationId", # required
-    #     user_id: "WorkMailIdentifier", # required
+    #     user_id: "EntityIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -1723,9 +1947,24 @@ module Aws::WorkMail
     #   resp.email #=> String
     #   resp.display_name #=> String
     #   resp.state #=> String, one of "ENABLED", "DISABLED", "DELETED"
-    #   resp.user_role #=> String, one of "USER", "RESOURCE", "SYSTEM_USER"
+    #   resp.user_role #=> String, one of "USER", "RESOURCE", "SYSTEM_USER", "REMOTE_USER"
     #   resp.enabled_date #=> Time
     #   resp.disabled_date #=> Time
+    #   resp.mailbox_provisioned_date #=> Time
+    #   resp.mailbox_deprovisioned_date #=> Time
+    #   resp.first_name #=> String
+    #   resp.last_name #=> String
+    #   resp.hidden_from_global_address_list #=> Boolean
+    #   resp.initials #=> String
+    #   resp.telephone #=> String
+    #   resp.street #=> String
+    #   resp.job_title #=> String
+    #   resp.city #=> String
+    #   resp.company #=> String
+    #   resp.zip_code #=> String
+    #   resp.department #=> String
+    #   resp.country #=> String
+    #   resp.office #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeUser AWS API Documentation
     #
@@ -1745,9 +1984,28 @@ module Aws::WorkMail
     #   The identifier of the resource from which delegates' set members are
     #   removed.
     #
+    #   The identifier can accept *ResourceId*, *Resourcename*, or *email*.
+    #   The following identity formats are available:
+    #
+    #   * Resource ID: r-0123456789a0123456789b0123456789
+    #
+    #   * Email address: resource@domain.tld
+    #
+    #   * Resource name: resource
+    #
     # @option params [required, String] :entity_id
     #   The identifier for the member (user, group) to be removed from the
     #   resource's delegates.
+    #
+    #   The entity ID can accept *UserId or GroupID*, *Username or Groupname*,
+    #   or *email*.
+    #
+    #   * Entity: 12345678-1234-1234-1234-123456789012 or
+    #     S-1-1-12-1234567890-123456789-123456789-1234
+    #
+    #   * Email address: entity@domain.tld
+    #
+    #   * Entity: entity
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1755,8 +2013,8 @@ module Aws::WorkMail
     #
     #   resp = client.disassociate_delegate_from_resource({
     #     organization_id: "OrganizationId", # required
-    #     resource_id: "ResourceId", # required
-    #     entity_id: "WorkMailIdentifier", # required
+    #     resource_id: "EntityIdentifier", # required
+    #     entity_id: "EntityIdentifier", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DisassociateDelegateFromResource AWS API Documentation
@@ -1776,8 +2034,28 @@ module Aws::WorkMail
     # @option params [required, String] :group_id
     #   The identifier for the group from which members are removed.
     #
+    #   The identifier can accept *GroupId*, *Groupname*, or *email*. The
+    #   following identity formats are available:
+    #
+    #   * Group ID: 12345678-1234-1234-1234-123456789012 or
+    #     S-1-1-12-1234567890-123456789-123456789-1234
+    #
+    #   * Email address: group@domain.tld
+    #
+    #   * Group name: group
+    #
     # @option params [required, String] :member_id
-    #   The identifier for the member to be removed to the group.
+    #   The identifier for the member to be removed from the group.
+    #
+    #   The member ID can accept *UserID or GroupId*, *Username or Groupname*,
+    #   or *email*.
+    #
+    #   * Member ID: 12345678-1234-1234-1234-123456789012 or
+    #     S-1-1-12-1234567890-123456789-123456789-1234
+    #
+    #   * Email address: member@domain.tld
+    #
+    #   * Member name: member
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1785,8 +2063,8 @@ module Aws::WorkMail
     #
     #   resp = client.disassociate_member_from_group({
     #     organization_id: "OrganizationId", # required
-    #     group_id: "WorkMailIdentifier", # required
-    #     member_id: "WorkMailIdentifier", # required
+    #     group_id: "EntityIdentifier", # required
+    #     member_id: "EntityIdentifier", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DisassociateMemberFromGroup AWS API Documentation
@@ -2048,6 +2326,16 @@ module Aws::WorkMail
     # @option params [required, String] :user_id
     #   The identifier for the user whose mailbox details are being requested.
     #
+    #   The identifier can be the *UserId*, *Username*, or *email*. The
+    #   following identity formats are available:
+    #
+    #   * User ID: 12345678-1234-1234-1234-123456789012 or
+    #     S-1-1-12-1234567890-123456789-123456789-1234
+    #
+    #   * Email address: user@domain.tld
+    #
+    #   * User name: user
+    #
     # @return [Types::GetMailboxDetailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetMailboxDetailsResponse#mailbox_quota #mailbox_quota} => Integer
@@ -2057,7 +2345,7 @@ module Aws::WorkMail
     #
     #   resp = client.get_mailbox_details({
     #     organization_id: "OrganizationId", # required
-    #     user_id: "WorkMailIdentifier", # required
+    #     user_id: "EntityIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -2337,6 +2625,16 @@ module Aws::WorkMail
     #   The identifier for the group to which the members (users or groups)
     #   are associated.
     #
+    #   The identifier can accept *GroupId*, *Groupname*, or *email*. The
+    #   following identity formats are available:
+    #
+    #   * Group ID: 12345678-1234-1234-1234-123456789012 or
+    #     S-1-1-12-1234567890-123456789-123456789-1234
+    #
+    #   * Email address: group@domain.tld
+    #
+    #   * Group name: group
+    #
     # @option params [String] :next_token
     #   The token to use to retrieve the next page of results. The first call
     #   does not contain any tokens.
@@ -2355,7 +2653,7 @@ module Aws::WorkMail
     #
     #   resp = client.list_group_members({
     #     organization_id: "OrganizationId", # required
-    #     group_id: "WorkMailIdentifier", # required
+    #     group_id: "EntityIdentifier", # required
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -2392,6 +2690,10 @@ module Aws::WorkMail
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call.
     #
+    # @option params [Types::ListGroupsFilters] :filters
+    #   Limit the search results based on the filter criteria. Only one filter
+    #   per request is supported.
+    #
     # @return [Types::ListGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListGroupsResponse#groups #groups} => Array&lt;Types::Group&gt;
@@ -2405,6 +2707,11 @@ module Aws::WorkMail
     #     organization_id: "OrganizationId", # required
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     filters: {
+    #       name_prefix: "String",
+    #       primary_email_prefix: "String",
+    #       state: "ENABLED", # accepts ENABLED, DISABLED, DELETED
+    #     },
     #   })
     #
     # @example Response structure
@@ -2424,6 +2731,69 @@ module Aws::WorkMail
     # @param [Hash] params ({})
     def list_groups(params = {}, options = {})
       req = build_request(:list_groups, params)
+      req.send_request(options)
+    end
+
+    # Returns all the groups to which an entity belongs.
+    #
+    # @option params [required, String] :organization_id
+    #   The identifier for the organization under which the entity exists.
+    #
+    # @option params [required, String] :entity_id
+    #   The identifier for the entity.
+    #
+    #   The entity ID can accept *UserId or GroupID*, *Username or Groupname*,
+    #   or *email*.
+    #
+    #   * Entity ID: 12345678-1234-1234-1234-123456789012 or
+    #     S-1-1-12-1234567890-123456789-123456789-1234
+    #
+    #   * Email address: entity@domain.tld
+    #
+    #   * Entity name: entity
+    #
+    # @option params [Types::ListGroupsForEntityFilters] :filters
+    #   Limit the search results based on the filter criteria.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results. The first call
+    #   does not contain any tokens.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @return [Types::ListGroupsForEntityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListGroupsForEntityResponse#groups #groups} => Array&lt;Types::GroupIdentifier&gt;
+    #   * {Types::ListGroupsForEntityResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_groups_for_entity({
+    #     organization_id: "OrganizationId", # required
+    #     entity_id: "EntityIdentifier", # required
+    #     filters: {
+    #       group_name_prefix: "String",
+    #     },
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.groups #=> Array
+    #   resp.groups[0].group_id #=> String
+    #   resp.groups[0].group_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListGroupsForEntity AWS API Documentation
+    #
+    # @overload list_groups_for_entity(params = {})
+    # @param [Hash] params ({})
+    def list_groups_for_entity(params = {}, options = {})
+      req = build_request(:list_groups_for_entity, params)
       req.send_request(options)
     end
 
@@ -2575,8 +2945,18 @@ module Aws::WorkMail
     #   resource exists.
     #
     # @option params [required, String] :entity_id
-    #   The identifier of the user, group, or resource for which to list
-    #   mailbox permissions.
+    #   The identifier of the user, or resource for which to list mailbox
+    #   permissions.
+    #
+    #   The entity ID can accept *UserId or ResourceId*, *Username or
+    #   Resourcename*, or *email*.
+    #
+    #   * Entity ID: 12345678-1234-1234-1234-123456789012, or
+    #     r-0123456789a0123456789b0123456789
+    #
+    #   * Email address: entity@domain.tld
+    #
+    #   * Entity name: entity
     #
     # @option params [String] :next_token
     #   The token to use to retrieve the next page of results. The first call
@@ -2596,7 +2976,7 @@ module Aws::WorkMail
     #
     #   resp = client.list_mailbox_permissions({
     #     organization_id: "OrganizationId", # required
-    #     entity_id: "WorkMailIdentifier", # required
+    #     entity_id: "EntityIdentifier", # required
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -2787,6 +3167,15 @@ module Aws::WorkMail
     # @option params [required, String] :resource_id
     #   The identifier for the resource whose delegates are listed.
     #
+    #   The identifier can accept *ResourceId*, *Resourcename*, or *email*.
+    #   The following identity formats are available:
+    #
+    #   * Resource ID: r-0123456789a0123456789b0123456789
+    #
+    #   * Email address: resource@domain.tld
+    #
+    #   * Resource name: resource
+    #
     # @option params [String] :next_token
     #   The token used to paginate through the delegates associated with a
     #   resource.
@@ -2805,7 +3194,7 @@ module Aws::WorkMail
     #
     #   resp = client.list_resource_delegates({
     #     organization_id: "OrganizationId", # required
-    #     resource_id: "WorkMailIdentifier", # required
+    #     resource_id: "EntityIdentifier", # required
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -2838,6 +3227,10 @@ module Aws::WorkMail
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call.
     #
+    # @option params [Types::ListResourcesFilters] :filters
+    #   Limit the resource search results based on the filter criteria. You
+    #   can only use one filter per request.
+    #
     # @return [Types::ListResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListResourcesResponse#resources #resources} => Array&lt;Types::Resource&gt;
@@ -2851,6 +3244,11 @@ module Aws::WorkMail
     #     organization_id: "OrganizationId", # required
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     filters: {
+    #       name_prefix: "String",
+    #       primary_email_prefix: "String",
+    #       state: "ENABLED", # accepts ENABLED, DISABLED, DELETED
+    #     },
     #   })
     #
     # @example Response structure
@@ -2863,6 +3261,7 @@ module Aws::WorkMail
     #   resp.resources[0].state #=> String, one of "ENABLED", "DISABLED", "DELETED"
     #   resp.resources[0].enabled_date #=> Time
     #   resp.resources[0].disabled_date #=> Time
+    #   resp.resources[0].description #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListResources AWS API Documentation
@@ -2916,6 +3315,10 @@ module Aws::WorkMail
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call.
     #
+    # @option params [Types::ListUsersFilters] :filters
+    #   Limit the user search results based on the filter criteria. You can
+    #   only use one filter per request.
+    #
     # @return [Types::ListUsersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListUsersResponse#users #users} => Array&lt;Types::User&gt;
@@ -2929,6 +3332,12 @@ module Aws::WorkMail
     #     organization_id: "OrganizationId", # required
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     filters: {
+    #       username_prefix: "String",
+    #       display_name_prefix: "UserAttribute",
+    #       primary_email_prefix: "String",
+    #       state: "ENABLED", # accepts ENABLED, DISABLED, DELETED
+    #     },
     #   })
     #
     # @example Response structure
@@ -2939,7 +3348,7 @@ module Aws::WorkMail
     #   resp.users[0].name #=> String
     #   resp.users[0].display_name #=> String
     #   resp.users[0].state #=> String, one of "ENABLED", "DISABLED", "DELETED"
-    #   resp.users[0].user_role #=> String, one of "USER", "RESOURCE", "SYSTEM_USER"
+    #   resp.users[0].user_role #=> String, one of "USER", "RESOURCE", "SYSTEM_USER", "REMOTE_USER"
     #   resp.users[0].enabled_date #=> Time
     #   resp.users[0].disabled_date #=> Time
     #   resp.next_token #=> String
@@ -3095,12 +3504,34 @@ module Aws::WorkMail
     #   resource exists.
     #
     # @option params [required, String] :entity_id
-    #   The identifier of the user, group, or resource for which to update
-    #   mailbox permissions.
+    #   The identifier of the user or resource for which to update mailbox
+    #   permissions.
+    #
+    #   The identifier can be *UserId, ResourceID, or Group Id*, *Username,
+    #   Resourcename, or Groupname*, or *email*.
+    #
+    #   * Entity ID: 12345678-1234-1234-1234-123456789012,
+    #     r-0123456789a0123456789b0123456789, or
+    #     S-1-1-12-1234567890-123456789-123456789-1234
+    #
+    #   * Email address: entity@domain.tld
+    #
+    #   * Entity name: entity
     #
     # @option params [required, String] :grantee_id
     #   The identifier of the user, group, or resource to which to grant the
     #   permissions.
+    #
+    #   The identifier can be *UserId, ResourceID, or Group Id*, *Username,
+    #   Resourcename, or Groupname*, or *email*.
+    #
+    #   * Grantee ID: 12345678-1234-1234-1234-123456789012,
+    #     r-0123456789a0123456789b0123456789, or
+    #     S-1-1-12-1234567890-123456789-123456789-1234
+    #
+    #   * Email address: grantee@domain.tld
+    #
+    #   * Grantee name: grantee
     #
     # @option params [required, Array<String>] :permission_values
     #   The permissions granted to the grantee. SEND\_AS allows the grantee to
@@ -3117,8 +3548,8 @@ module Aws::WorkMail
     #
     #   resp = client.put_mailbox_permissions({
     #     organization_id: "OrganizationId", # required
-    #     entity_id: "WorkMailIdentifier", # required
-    #     grantee_id: "WorkMailIdentifier", # required
+    #     entity_id: "EntityIdentifier", # required
+    #     grantee_id: "EntityIdentifier", # required
     #     permission_values: ["FULL_ACCESS"], # required, accepts FULL_ACCESS, SEND_AS, SEND_ON_BEHALF
     #   })
     #
@@ -3283,6 +3714,16 @@ module Aws::WorkMail
     # @option params [required, String] :entity_id
     #   The identifier for the user, group, or resource to be updated.
     #
+    #   The identifier can accept *UserId, ResourceId, or GroupId*, or
+    #   *Username, Resourcename, or Groupname*. The following identity formats
+    #   are available:
+    #
+    #   * Entity ID: 12345678-1234-1234-1234-123456789012,
+    #     r-0123456789a0123456789b0123456789, or
+    #     S-1-1-12-1234567890-123456789-123456789-1234
+    #
+    #   * Entity name: entity
+    #
     # @option params [required, String] :email
     #   The email for the user, group, or resource to be updated.
     #
@@ -3292,7 +3733,7 @@ module Aws::WorkMail
     #
     #   resp = client.register_to_work_mail({
     #     organization_id: "OrganizationId", # required
-    #     entity_id: "WorkMailIdentifier", # required
+    #     entity_id: "EntityIdentifier", # required
     #     email: "EmailAddress", # required
     #   })
     #
@@ -3357,6 +3798,18 @@ module Aws::WorkMail
     # @option params [required, String] :entity_id
     #   The identifier of the user or resource associated with the mailbox.
     #
+    #   The identifier can accept *UserId or ResourceId*, *Username or
+    #   Resourcename*, or *email*. The following identity formats are
+    #   available:
+    #
+    #   * Entity ID: 12345678-1234-1234-1234-123456789012,
+    #     r-0123456789a0123456789b0123456789 , or
+    #     S-1-1-12-1234567890-123456789-123456789-1234
+    #
+    #   * Email address: entity@domain.tld
+    #
+    #   * Entity name: entity
+    #
     # @option params [String] :description
     #   The mailbox export job description.
     #
@@ -3383,7 +3836,7 @@ module Aws::WorkMail
     #   resp = client.start_mailbox_export_job({
     #     client_token: "IdempotencyClientToken", # required
     #     organization_id: "OrganizationId", # required
-    #     entity_id: "WorkMailIdentifier", # required
+    #     entity_id: "EntityIdentifier", # required
     #     description: "Description",
     #     role_arn: "RoleArn", # required
     #     kms_key_arn: "KmsKeyArn", # required
@@ -3604,6 +4057,46 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Updates attibutes in a group.
+    #
+    # @option params [required, String] :organization_id
+    #   The identifier for the organization under which the group exists.
+    #
+    # @option params [required, String] :group_id
+    #   The identifier for the group to be updated.
+    #
+    #   The identifier can accept *GroupId*, *Groupname*, or *email*. The
+    #   following identity formats are available:
+    #
+    #   * Group ID: 12345678-1234-1234-1234-123456789012 or
+    #     S-1-1-12-1234567890-123456789-123456789-1234
+    #
+    #   * Email address: group@domain.tld
+    #
+    #   * Group name: group
+    #
+    # @option params [Boolean] :hidden_from_global_address_list
+    #   If enabled, the group is hidden from the global address list.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_group({
+    #     organization_id: "OrganizationId", # required
+    #     group_id: "EntityIdentifier", # required
+    #     hidden_from_global_address_list: false,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdateGroup AWS API Documentation
+    #
+    # @overload update_group(params = {})
+    # @param [Hash] params ({})
+    def update_group(params = {}, options = {})
+      req = build_request(:update_group, params)
+      req.send_request(options)
+    end
+
     # Updates an impersonation role for the given WorkMail organization.
     #
     # @option params [required, String] :organization_id
@@ -3666,6 +4159,16 @@ module Aws::WorkMail
     # @option params [required, String] :user_id
     #   The identifer for the user for whom to update the mailbox quota.
     #
+    #   The identifier can be the *UserId*, *Username*, or *email*. The
+    #   following identity formats are available:
+    #
+    #   * User ID: 12345678-1234-1234-1234-123456789012 or
+    #     S-1-1-12-1234567890-123456789-123456789-1234
+    #
+    #   * Email address: user@domain.tld
+    #
+    #   * User name: user
+    #
     # @option params [required, Integer] :mailbox_quota
     #   The updated mailbox quota, in MB, for the specified user.
     #
@@ -3675,7 +4178,7 @@ module Aws::WorkMail
     #
     #   resp = client.update_mailbox_quota({
     #     organization_id: "OrganizationId", # required
-    #     user_id: "WorkMailIdentifier", # required
+    #     user_id: "EntityIdentifier", # required
     #     mailbox_quota: 1, # required
     #   })
     #
@@ -3775,6 +4278,18 @@ module Aws::WorkMail
     # @option params [required, String] :entity_id
     #   The user, group, or resource to update.
     #
+    #   The identifier can accept *UseriD, ResourceId, or GroupId*, *Username,
+    #   Resourcename, or Groupname*, or *email*. The following identity
+    #   formats are available:
+    #
+    #   * Entity ID: 12345678-1234-1234-1234-123456789012,
+    #     r-0123456789a0123456789b0123456789, or
+    #     S-1-1-12-1234567890-123456789-123456789-1234
+    #
+    #   * Email address: entity@domain.tld
+    #
+    #   * Entity name: entity
+    #
     # @option params [required, String] :email
     #   The value of the email to be updated as primary.
     #
@@ -3784,7 +4299,7 @@ module Aws::WorkMail
     #
     #   resp = client.update_primary_email_address({
     #     organization_id: "OrganizationId", # required
-    #     entity_id: "WorkMailIdentifier", # required
+    #     entity_id: "EntityIdentifier", # required
     #     email: "EmailAddress", # required
     #   })
     #
@@ -3809,11 +4324,29 @@ module Aws::WorkMail
     # @option params [required, String] :resource_id
     #   The identifier of the resource to be updated.
     #
+    #   The identifier can accept *ResourceId*, *Resourcename*, or *email*.
+    #   The following identity formats are available:
+    #
+    #   * Resource ID: r-0123456789a0123456789b0123456789
+    #
+    #   * Email address: resource@domain.tld
+    #
+    #   * Resource name: resource
+    #
     # @option params [String] :name
     #   The name of the resource to be updated.
     #
     # @option params [Types::BookingOptions] :booking_options
     #   The resource's booking options to be updated.
+    #
+    # @option params [String] :description
+    #   Updates the resource description.
+    #
+    # @option params [String] :type
+    #   Updates the resource type.
+    #
+    # @option params [Boolean] :hidden_from_global_address_list
+    #   If enabled, the resource is hidden from the global address list.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3821,13 +4354,16 @@ module Aws::WorkMail
     #
     #   resp = client.update_resource({
     #     organization_id: "OrganizationId", # required
-    #     resource_id: "ResourceId", # required
+    #     resource_id: "EntityIdentifier", # required
     #     name: "ResourceName",
     #     booking_options: {
     #       auto_accept_requests: false,
     #       auto_decline_recurring_requests: false,
     #       auto_decline_conflicting_requests: false,
     #     },
+    #     description: "NewResourceDescription",
+    #     type: "ROOM", # accepts ROOM, EQUIPMENT
+    #     hidden_from_global_address_list: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdateResource AWS API Documentation
@@ -3836,6 +4372,106 @@ module Aws::WorkMail
     # @param [Hash] params ({})
     def update_resource(params = {}, options = {})
       req = build_request(:update_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates data for the user. To have the latest information, it must be
+    # preceded by a DescribeUser call. The dataset in the request should be
+    # the one expected when performing another `DescribeUser` call.
+    #
+    # @option params [required, String] :organization_id
+    #   The identifier for the organization under which the user exists.
+    #
+    # @option params [required, String] :user_id
+    #   The identifier for the user to be updated.
+    #
+    #   The identifier can be the *UserId*, *Username*, or *email*. The
+    #   following identity formats are available:
+    #
+    #   * User ID: 12345678-1234-1234-1234-123456789012 or
+    #     S-1-1-12-1234567890-123456789-123456789-1234
+    #
+    #   * Email address: user@domain.tld
+    #
+    #   * User name: user
+    #
+    # @option params [String] :role
+    #   Updates the user role.
+    #
+    #   You cannot pass *SYSTEM\_USER* or *RESOURCE*.
+    #
+    # @option params [String] :display_name
+    #   Updates the display name of the user.
+    #
+    # @option params [String] :first_name
+    #   Updates the user's first name.
+    #
+    # @option params [String] :last_name
+    #   Updates the user's last name.
+    #
+    # @option params [Boolean] :hidden_from_global_address_list
+    #   If enabled, the user is hidden from the global address list.
+    #
+    # @option params [String] :initials
+    #   Updates the user's initials.
+    #
+    # @option params [String] :telephone
+    #   Updates the user's contact details.
+    #
+    # @option params [String] :street
+    #   Updates the user's street address.
+    #
+    # @option params [String] :job_title
+    #   Updates the user's job title.
+    #
+    # @option params [String] :city
+    #   Updates the user's city.
+    #
+    # @option params [String] :company
+    #   Updates the user's company.
+    #
+    # @option params [String] :zip_code
+    #   Updates the user's zipcode.
+    #
+    # @option params [String] :department
+    #   Updates the user's department.
+    #
+    # @option params [String] :country
+    #   Updates the user's country.
+    #
+    # @option params [String] :office
+    #   Updates the user's office.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_user({
+    #     organization_id: "OrganizationId", # required
+    #     user_id: "EntityIdentifier", # required
+    #     role: "USER", # accepts USER, RESOURCE, SYSTEM_USER, REMOTE_USER
+    #     display_name: "UserAttribute",
+    #     first_name: "UserAttribute",
+    #     last_name: "UserAttribute",
+    #     hidden_from_global_address_list: false,
+    #     initials: "UserAttribute",
+    #     telephone: "UserAttribute",
+    #     street: "UserAttribute",
+    #     job_title: "UserAttribute",
+    #     city: "UserAttribute",
+    #     company: "UserAttribute",
+    #     zip_code: "UserAttribute",
+    #     department: "UserAttribute",
+    #     country: "UserAttribute",
+    #     office: "UserAttribute",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdateUser AWS API Documentation
+    #
+    # @overload update_user(params = {})
+    # @param [Hash] params ({})
+    def update_user(params = {}, options = {})
+      req = build_request(:update_user, params)
       req.send_request(options)
     end
 
@@ -3852,7 +4488,7 @@ module Aws::WorkMail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workmail'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
