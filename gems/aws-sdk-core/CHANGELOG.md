@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.182.0 (2023-09-19)
+------------------
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
 3.181.1 (2023-09-14)
 ------------------
 

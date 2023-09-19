@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.406.0 (2023-09-19)
+------------------
+
+* Feature - This release adds support for C7i, and R7a instance types.
+
 1.405.0 (2023-09-12)
 ------------------
 

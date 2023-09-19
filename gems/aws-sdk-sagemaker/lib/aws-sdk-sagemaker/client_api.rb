@@ -741,6 +741,7 @@ module Aws::SageMaker
     EnvironmentParameterRanges = Shapes::StructureShape.new(name: 'EnvironmentParameterRanges')
     EnvironmentParameters = Shapes::ListShape.new(name: 'EnvironmentParameters')
     EnvironmentValue = Shapes::StringShape.new(name: 'EnvironmentValue')
+    ExcludeFeaturesAttribute = Shapes::StringShape.new(name: 'ExcludeFeaturesAttribute')
     ExecutionRoleIdentityConfig = Shapes::StringShape.new(name: 'ExecutionRoleIdentityConfig')
     ExecutionStatus = Shapes::StringShape.new(name: 'ExecutionStatus')
     ExitMessage = Shapes::StringShape.new(name: 'ExitMessage')
@@ -2492,6 +2493,7 @@ module Aws::SageMaker
     BatchTransformInput.add_member(:probability_threshold_attribute, Shapes::ShapeRef.new(shape: ProbabilityThresholdAttribute, location_name: "ProbabilityThresholdAttribute"))
     BatchTransformInput.add_member(:start_time_offset, Shapes::ShapeRef.new(shape: MonitoringTimeOffsetString, location_name: "StartTimeOffset"))
     BatchTransformInput.add_member(:end_time_offset, Shapes::ShapeRef.new(shape: MonitoringTimeOffsetString, location_name: "EndTimeOffset"))
+    BatchTransformInput.add_member(:exclude_features_attribute, Shapes::ShapeRef.new(shape: ExcludeFeaturesAttribute, location_name: "ExcludeFeaturesAttribute"))
     BatchTransformInput.struct_class = Types::BatchTransformInput
 
     BestObjectiveNotImproving.add_member(:max_number_of_training_jobs_not_improving, Shapes::ShapeRef.new(shape: MaxNumberOfTrainingJobsNotImproving, location_name: "MaxNumberOfTrainingJobsNotImproving"))
@@ -5030,6 +5032,7 @@ module Aws::SageMaker
     EndpointInput.add_member(:probability_threshold_attribute, Shapes::ShapeRef.new(shape: ProbabilityThresholdAttribute, location_name: "ProbabilityThresholdAttribute"))
     EndpointInput.add_member(:start_time_offset, Shapes::ShapeRef.new(shape: MonitoringTimeOffsetString, location_name: "StartTimeOffset"))
     EndpointInput.add_member(:end_time_offset, Shapes::ShapeRef.new(shape: MonitoringTimeOffsetString, location_name: "EndTimeOffset"))
+    EndpointInput.add_member(:exclude_features_attribute, Shapes::ShapeRef.new(shape: ExcludeFeaturesAttribute, location_name: "ExcludeFeaturesAttribute"))
     EndpointInput.struct_class = Types::EndpointInput
 
     EndpointInputConfiguration.add_member(:instance_type, Shapes::ShapeRef.new(shape: ProductionVariantInstanceType, location_name: "InstanceType"))
@@ -8197,6 +8200,8 @@ module Aws::SageMaker
     ScalingPolicyObjective.struct_class = Types::ScalingPolicyObjective
 
     ScheduleConfig.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpression, required: true, location_name: "ScheduleExpression"))
+    ScheduleConfig.add_member(:data_analysis_start_time, Shapes::ShapeRef.new(shape: String, location_name: "DataAnalysisStartTime"))
+    ScheduleConfig.add_member(:data_analysis_end_time, Shapes::ShapeRef.new(shape: String, location_name: "DataAnalysisEndTime"))
     ScheduleConfig.struct_class = Types::ScheduleConfig
 
     SearchExpression.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))

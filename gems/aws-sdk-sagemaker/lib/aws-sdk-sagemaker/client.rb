@@ -1208,8 +1208,7 @@ module Aws::SageMaker
     #
     #  `CreateAutoMLJobV2` can manage tabular problem types identical to
     # those of its previous version `CreateAutoMLJob`, as well as
-    # time-series forecasting, and non-tabular problem types such as image
-    # or text classification.
+    # non-tabular problem types such as image or text classification.
     #
     #  Find guidelines about how to migrate a `CreateAutoMLJob` to
     # `CreateAutoMLJobV2` in [Migrate a CreateAutoMLJob to
@@ -1388,8 +1387,7 @@ module Aws::SageMaker
     #
     #  `CreateAutoMLJobV2` can manage tabular problem types identical to
     # those of its previous version `CreateAutoMLJob`, as well as
-    # time-series forecasting, and non-tabular problem types such as image
-    # or text classification.
+    # non-tabular problem types such as image or text classification.
     #
     #  Find guidelines about how to migrate a `CreateAutoMLJob` to
     # `CreateAutoMLJobV2` in [Migrate a CreateAutoMLJob to
@@ -1965,9 +1963,9 @@ module Aws::SageMaker
     #   stopping.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   (Optional) An array of key-value pairs. For more information, see [
-    #   Using Cost Allocation Tags][1] in the *Amazon Web Services Billing and
-    #   Cost Management User Guide*.
+    #   (Optional) An array of key-value pairs. For more information, see
+    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
+    #   and Cost Management User Guide*.
     #
     #
     #
@@ -2012,6 +2010,7 @@ module Aws::SageMaker
     #         probability_threshold_attribute: 1.0,
     #         start_time_offset: "MonitoringTimeOffsetString",
     #         end_time_offset: "MonitoringTimeOffsetString",
+    #         exclude_features_attribute: "ExcludeFeaturesAttribute",
     #       },
     #       batch_transform_input: {
     #         data_captured_destination_s3_uri: "DestinationS3Uri", # required
@@ -2034,6 +2033,7 @@ module Aws::SageMaker
     #         probability_threshold_attribute: 1.0,
     #         start_time_offset: "MonitoringTimeOffsetString",
     #         end_time_offset: "MonitoringTimeOffsetString",
+    #         exclude_features_attribute: "ExcludeFeaturesAttribute",
     #       },
     #     },
     #     data_quality_job_output_config: { # required
@@ -5103,9 +5103,9 @@ module Aws::SageMaker
     #   stopping.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   (Optional) An array of key-value pairs. For more information, see [
-    #   Using Cost Allocation Tags][1] in the *Amazon Web Services Billing and
-    #   Cost Management User Guide*.
+    #   (Optional) An array of key-value pairs. For more information, see
+    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
+    #   and Cost Management User Guide*.
     #
     #
     #
@@ -5144,6 +5144,7 @@ module Aws::SageMaker
     #         probability_threshold_attribute: 1.0,
     #         start_time_offset: "MonitoringTimeOffsetString",
     #         end_time_offset: "MonitoringTimeOffsetString",
+    #         exclude_features_attribute: "ExcludeFeaturesAttribute",
     #       },
     #       batch_transform_input: {
     #         data_captured_destination_s3_uri: "DestinationS3Uri", # required
@@ -5166,6 +5167,7 @@ module Aws::SageMaker
     #         probability_threshold_attribute: 1.0,
     #         start_time_offset: "MonitoringTimeOffsetString",
     #         end_time_offset: "MonitoringTimeOffsetString",
+    #         exclude_features_attribute: "ExcludeFeaturesAttribute",
     #       },
     #       ground_truth_s3_input: { # required
     #         s3_uri: "MonitoringS3Uri",
@@ -5379,9 +5381,9 @@ module Aws::SageMaker
     #   stopping.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   (Optional) An array of key-value pairs. For more information, see [
-    #   Using Cost Allocation Tags][1] in the *Amazon Web Services Billing and
-    #   Cost Management User Guide*.
+    #   (Optional) An array of key-value pairs. For more information, see
+    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
+    #   and Cost Management User Guide*.
     #
     #
     #
@@ -5420,6 +5422,7 @@ module Aws::SageMaker
     #         probability_threshold_attribute: 1.0,
     #         start_time_offset: "MonitoringTimeOffsetString",
     #         end_time_offset: "MonitoringTimeOffsetString",
+    #         exclude_features_attribute: "ExcludeFeaturesAttribute",
     #       },
     #       batch_transform_input: {
     #         data_captured_destination_s3_uri: "DestinationS3Uri", # required
@@ -5442,6 +5445,7 @@ module Aws::SageMaker
     #         probability_threshold_attribute: 1.0,
     #         start_time_offset: "MonitoringTimeOffsetString",
     #         end_time_offset: "MonitoringTimeOffsetString",
+    #         exclude_features_attribute: "ExcludeFeaturesAttribute",
     #       },
     #     },
     #     model_explainability_job_output_config: { # required
@@ -5982,9 +5986,9 @@ module Aws::SageMaker
     #   stopping.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   (Optional) An array of key-value pairs. For more information, see [
-    #   Using Cost Allocation Tags][1] in the *Amazon Web Services Billing and
-    #   Cost Management User Guide*.
+    #   (Optional) An array of key-value pairs. For more information, see
+    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
+    #   and Cost Management User Guide*.
     #
     #
     #
@@ -6027,6 +6031,7 @@ module Aws::SageMaker
     #         probability_threshold_attribute: 1.0,
     #         start_time_offset: "MonitoringTimeOffsetString",
     #         end_time_offset: "MonitoringTimeOffsetString",
+    #         exclude_features_attribute: "ExcludeFeaturesAttribute",
     #       },
     #       batch_transform_input: {
     #         data_captured_destination_s3_uri: "DestinationS3Uri", # required
@@ -6049,6 +6054,7 @@ module Aws::SageMaker
     #         probability_threshold_attribute: 1.0,
     #         start_time_offset: "MonitoringTimeOffsetString",
     #         end_time_offset: "MonitoringTimeOffsetString",
+    #         exclude_features_attribute: "ExcludeFeaturesAttribute",
     #       },
     #       ground_truth_s3_input: { # required
     #         s3_uri: "MonitoringS3Uri",
@@ -6135,6 +6141,8 @@ module Aws::SageMaker
     #     monitoring_schedule_config: { # required
     #       schedule_config: {
     #         schedule_expression: "ScheduleExpression", # required
+    #         data_analysis_start_time: "String",
+    #         data_analysis_end_time: "String",
     #       },
     #       monitoring_job_definition: {
     #         baseline_config: {
@@ -6159,6 +6167,7 @@ module Aws::SageMaker
     #               probability_threshold_attribute: 1.0,
     #               start_time_offset: "MonitoringTimeOffsetString",
     #               end_time_offset: "MonitoringTimeOffsetString",
+    #               exclude_features_attribute: "ExcludeFeaturesAttribute",
     #             },
     #             batch_transform_input: {
     #               data_captured_destination_s3_uri: "DestinationS3Uri", # required
@@ -6181,6 +6190,7 @@ module Aws::SageMaker
     #               probability_threshold_attribute: 1.0,
     #               start_time_offset: "MonitoringTimeOffsetString",
     #               end_time_offset: "MonitoringTimeOffsetString",
+    #               exclude_features_attribute: "ExcludeFeaturesAttribute",
     #             },
     #           },
     #         ],
@@ -10679,6 +10689,7 @@ module Aws::SageMaker
     #   resp.data_quality_job_input.endpoint_input.probability_threshold_attribute #=> Float
     #   resp.data_quality_job_input.endpoint_input.start_time_offset #=> String
     #   resp.data_quality_job_input.endpoint_input.end_time_offset #=> String
+    #   resp.data_quality_job_input.endpoint_input.exclude_features_attribute #=> String
     #   resp.data_quality_job_input.batch_transform_input.data_captured_destination_s3_uri #=> String
     #   resp.data_quality_job_input.batch_transform_input.dataset_format.csv.header #=> Boolean
     #   resp.data_quality_job_input.batch_transform_input.dataset_format.json.line #=> Boolean
@@ -10691,6 +10702,7 @@ module Aws::SageMaker
     #   resp.data_quality_job_input.batch_transform_input.probability_threshold_attribute #=> Float
     #   resp.data_quality_job_input.batch_transform_input.start_time_offset #=> String
     #   resp.data_quality_job_input.batch_transform_input.end_time_offset #=> String
+    #   resp.data_quality_job_input.batch_transform_input.exclude_features_attribute #=> String
     #   resp.data_quality_job_output_config.monitoring_outputs #=> Array
     #   resp.data_quality_job_output_config.monitoring_outputs[0].s3_output.s3_uri #=> String
     #   resp.data_quality_job_output_config.monitoring_outputs[0].s3_output.local_path #=> String
@@ -12722,6 +12734,7 @@ module Aws::SageMaker
     #   resp.model_bias_job_input.endpoint_input.probability_threshold_attribute #=> Float
     #   resp.model_bias_job_input.endpoint_input.start_time_offset #=> String
     #   resp.model_bias_job_input.endpoint_input.end_time_offset #=> String
+    #   resp.model_bias_job_input.endpoint_input.exclude_features_attribute #=> String
     #   resp.model_bias_job_input.batch_transform_input.data_captured_destination_s3_uri #=> String
     #   resp.model_bias_job_input.batch_transform_input.dataset_format.csv.header #=> Boolean
     #   resp.model_bias_job_input.batch_transform_input.dataset_format.json.line #=> Boolean
@@ -12734,6 +12747,7 @@ module Aws::SageMaker
     #   resp.model_bias_job_input.batch_transform_input.probability_threshold_attribute #=> Float
     #   resp.model_bias_job_input.batch_transform_input.start_time_offset #=> String
     #   resp.model_bias_job_input.batch_transform_input.end_time_offset #=> String
+    #   resp.model_bias_job_input.batch_transform_input.exclude_features_attribute #=> String
     #   resp.model_bias_job_input.ground_truth_s3_input.s3_uri #=> String
     #   resp.model_bias_job_output_config.monitoring_outputs #=> Array
     #   resp.model_bias_job_output_config.monitoring_outputs[0].s3_output.s3_uri #=> String
@@ -12921,6 +12935,7 @@ module Aws::SageMaker
     #   resp.model_explainability_job_input.endpoint_input.probability_threshold_attribute #=> Float
     #   resp.model_explainability_job_input.endpoint_input.start_time_offset #=> String
     #   resp.model_explainability_job_input.endpoint_input.end_time_offset #=> String
+    #   resp.model_explainability_job_input.endpoint_input.exclude_features_attribute #=> String
     #   resp.model_explainability_job_input.batch_transform_input.data_captured_destination_s3_uri #=> String
     #   resp.model_explainability_job_input.batch_transform_input.dataset_format.csv.header #=> Boolean
     #   resp.model_explainability_job_input.batch_transform_input.dataset_format.json.line #=> Boolean
@@ -12933,6 +12948,7 @@ module Aws::SageMaker
     #   resp.model_explainability_job_input.batch_transform_input.probability_threshold_attribute #=> Float
     #   resp.model_explainability_job_input.batch_transform_input.start_time_offset #=> String
     #   resp.model_explainability_job_input.batch_transform_input.end_time_offset #=> String
+    #   resp.model_explainability_job_input.batch_transform_input.exclude_features_attribute #=> String
     #   resp.model_explainability_job_output_config.monitoring_outputs #=> Array
     #   resp.model_explainability_job_output_config.monitoring_outputs[0].s3_output.s3_uri #=> String
     #   resp.model_explainability_job_output_config.monitoring_outputs[0].s3_output.local_path #=> String
@@ -13275,6 +13291,7 @@ module Aws::SageMaker
     #   resp.model_quality_job_input.endpoint_input.probability_threshold_attribute #=> Float
     #   resp.model_quality_job_input.endpoint_input.start_time_offset #=> String
     #   resp.model_quality_job_input.endpoint_input.end_time_offset #=> String
+    #   resp.model_quality_job_input.endpoint_input.exclude_features_attribute #=> String
     #   resp.model_quality_job_input.batch_transform_input.data_captured_destination_s3_uri #=> String
     #   resp.model_quality_job_input.batch_transform_input.dataset_format.csv.header #=> Boolean
     #   resp.model_quality_job_input.batch_transform_input.dataset_format.json.line #=> Boolean
@@ -13287,6 +13304,7 @@ module Aws::SageMaker
     #   resp.model_quality_job_input.batch_transform_input.probability_threshold_attribute #=> Float
     #   resp.model_quality_job_input.batch_transform_input.start_time_offset #=> String
     #   resp.model_quality_job_input.batch_transform_input.end_time_offset #=> String
+    #   resp.model_quality_job_input.batch_transform_input.exclude_features_attribute #=> String
     #   resp.model_quality_job_input.ground_truth_s3_input.s3_uri #=> String
     #   resp.model_quality_job_output_config.monitoring_outputs #=> Array
     #   resp.model_quality_job_output_config.monitoring_outputs[0].s3_output.s3_uri #=> String
@@ -13349,6 +13367,8 @@ module Aws::SageMaker
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
     #   resp.monitoring_schedule_config.schedule_config.schedule_expression #=> String
+    #   resp.monitoring_schedule_config.schedule_config.data_analysis_start_time #=> String
+    #   resp.monitoring_schedule_config.schedule_config.data_analysis_end_time #=> String
     #   resp.monitoring_schedule_config.monitoring_job_definition.baseline_config.baselining_job_name #=> String
     #   resp.monitoring_schedule_config.monitoring_job_definition.baseline_config.constraints_resource.s3_uri #=> String
     #   resp.monitoring_schedule_config.monitoring_job_definition.baseline_config.statistics_resource.s3_uri #=> String
@@ -13363,6 +13383,7 @@ module Aws::SageMaker
     #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.probability_threshold_attribute #=> Float
     #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.start_time_offset #=> String
     #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.end_time_offset #=> String
+    #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.exclude_features_attribute #=> String
     #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.data_captured_destination_s3_uri #=> String
     #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.dataset_format.csv.header #=> Boolean
     #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.dataset_format.json.line #=> Boolean
@@ -13375,6 +13396,7 @@ module Aws::SageMaker
     #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.probability_threshold_attribute #=> Float
     #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.start_time_offset #=> String
     #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.end_time_offset #=> String
+    #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].batch_transform_input.exclude_features_attribute #=> String
     #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_output_config.monitoring_outputs #=> Array
     #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_output_config.monitoring_outputs[0].s3_output.s3_uri #=> String
     #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_output_config.monitoring_outputs[0].s3_output.local_path #=> String
@@ -16074,8 +16096,7 @@ module Aws::SageMaker
     #   The field to sort results by. The default is `CreationTime`.
     #
     # @option params [String] :sort_order
-    #   Whether to sort the results in `Ascending` or `Descending` order. The
-    #   default is `Descending`.
+    #   The sort order for results. The default is `Descending`.
     #
     # @option params [String] :next_token
     #   If the result of the previous `ListDataQualityJobDefinitions` request
@@ -18498,8 +18519,7 @@ module Aws::SageMaker
     #   The field to sort results by. The default is `CreationTime`.
     #
     # @option params [String] :sort_order
-    #   Whether to sort the results in `Ascending` or `Descending` order. The
-    #   default is `Descending`.
+    #   The sort order for results. The default is `Descending`.
     #
     # @option params [String] :next_token
     #   If the result of the previous `ListModelQualityJobDefinitions` request
@@ -18757,8 +18777,8 @@ module Aws::SageMaker
     #   Name of a specific endpoint to fetch jobs for.
     #
     # @option params [String] :sort_by
-    #   Whether to sort the results by the `Status`, `CreationTime`, or
-    #   `ScheduledTime` field. The default is `CreationTime`.
+    #   Whether to sort results by `Status`, `CreationTime`, `ScheduledTime`
+    #   field. The default is `CreationTime`.
     #
     # @option params [String] :sort_order
     #   Whether to sort the results in `Ascending` or `Descending` order. The
@@ -18858,8 +18878,8 @@ module Aws::SageMaker
     #   Name of a specific endpoint to fetch schedules for.
     #
     # @option params [String] :sort_by
-    #   Whether to sort the results by the `Status`, `CreationTime`, or
-    #   `ScheduledTime` field. The default is `CreationTime`.
+    #   Whether to sort results by `Status`, `CreationTime`, `ScheduledTime`
+    #   field. The default is `CreationTime`.
     #
     # @option params [String] :sort_order
     #   Whether to sort the results in `Ascending` or `Descending` order. The
@@ -23032,6 +23052,8 @@ module Aws::SageMaker
     #     monitoring_schedule_config: { # required
     #       schedule_config: {
     #         schedule_expression: "ScheduleExpression", # required
+    #         data_analysis_start_time: "String",
+    #         data_analysis_end_time: "String",
     #       },
     #       monitoring_job_definition: {
     #         baseline_config: {
@@ -23056,6 +23078,7 @@ module Aws::SageMaker
     #               probability_threshold_attribute: 1.0,
     #               start_time_offset: "MonitoringTimeOffsetString",
     #               end_time_offset: "MonitoringTimeOffsetString",
+    #               exclude_features_attribute: "ExcludeFeaturesAttribute",
     #             },
     #             batch_transform_input: {
     #               data_captured_destination_s3_uri: "DestinationS3Uri", # required
@@ -23078,6 +23101,7 @@ module Aws::SageMaker
     #               probability_threshold_attribute: 1.0,
     #               start_time_offset: "MonitoringTimeOffsetString",
     #               end_time_offset: "MonitoringTimeOffsetString",
+    #               exclude_features_attribute: "ExcludeFeaturesAttribute",
     #             },
     #           },
     #         ],
@@ -24149,7 +24173,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.210.0'
+      context[:gem_version] = '1.211.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

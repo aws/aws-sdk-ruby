@@ -25,46 +25,10 @@ module Aws::NetworkManager
       end
       if Aws::Endpoints::Matchers.set?(region)
         if (partition_result = Aws::Endpoints::Matchers.aws_partition(region))
-          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws")
-            if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS")) && Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
-                return Aws::Endpoints::Endpoint.new(url: "https://networkmanager-fips.#{region}.api.aws", headers: {}, properties: {})
-              end
-              raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
-            end
-            if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
-                return Aws::Endpoints::Endpoint.new(url: "https://networkmanager-fips.#{region}.amazonaws.com", headers: {}, properties: {})
-              end
-              raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
-            end
-            if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
-                return Aws::Endpoints::Endpoint.new(url: "https://networkmanager.#{region}.api.aws", headers: {}, properties: {})
-              end
-              raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
-            end
+          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws") && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false)
             return Aws::Endpoints::Endpoint.new(url: "https://networkmanager.us-west-2.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"networkmanager", "signingRegion"=>"us-west-2"}]})
           end
-          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-us-gov")
-            if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS")) && Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
-                return Aws::Endpoints::Endpoint.new(url: "https://networkmanager-fips.#{region}.api.aws", headers: {}, properties: {})
-              end
-              raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
-            end
-            if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
-                return Aws::Endpoints::Endpoint.new(url: "https://networkmanager-fips.#{region}.amazonaws.com", headers: {}, properties: {})
-              end
-              raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
-            end
-            if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
-              if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
-                return Aws::Endpoints::Endpoint.new(url: "https://networkmanager.#{region}.api.aws", headers: {}, properties: {})
-              end
-              raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
-            end
+          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-us-gov") && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false)
             return Aws::Endpoints::Endpoint.new(url: "https://networkmanager.us-gov-west-1.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"networkmanager", "signingRegion"=>"us-gov-west-1"}]})
           end
           if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
@@ -84,12 +48,6 @@ module Aws::NetworkManager
               return Aws::Endpoints::Endpoint.new(url: "https://networkmanager.#{region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
-          end
-          if Aws::Endpoints::Matchers.string_equals?(region, "aws-global")
-            return Aws::Endpoints::Endpoint.new(url: "https://networkmanager.us-west-2.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"networkmanager", "signingRegion"=>"us-west-2"}]})
-          end
-          if Aws::Endpoints::Matchers.string_equals?(region, "aws-us-gov-global")
-            return Aws::Endpoints::Endpoint.new(url: "https://networkmanager.us-gov-west-1.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"networkmanager", "signingRegion"=>"us-gov-west-1"}]})
           end
           return Aws::Endpoints::Endpoint.new(url: "https://networkmanager.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
         end

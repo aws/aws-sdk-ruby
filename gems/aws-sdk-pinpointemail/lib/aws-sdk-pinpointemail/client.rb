@@ -2316,7 +2316,7 @@ module Aws::PinpointEmail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpointemail'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
