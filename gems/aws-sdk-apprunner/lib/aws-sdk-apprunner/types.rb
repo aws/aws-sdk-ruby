@@ -169,6 +169,22 @@ module Aws::AppRunner
     #   Unix time stamp format.
     #   @return [Time]
     #
+    # @!attribute [rw] has_associated_service
+    #   Indicates if this auto scaling configuration has an App Runner
+    #   service associated with it. A value of `true` indicates one or more
+    #   services are associated. A value of `false` indicates no services
+    #   are associated.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] is_default
+    #   Indicates if this auto scaling configuration should be used as the
+    #   default for a new App Runner service that does not have an auto
+    #   scaling configuration ARN specified during creation. Each account
+    #   can have only one default `AutoScalingConfiguration` per region. The
+    #   default `AutoScalingConfiguration` can be any revision under the
+    #   same `AutoScalingConfigurationName`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/AutoScalingConfiguration AWS API Documentation
     #
     class AutoScalingConfiguration < Struct.new(
@@ -181,7 +197,9 @@ module Aws::AppRunner
       :min_size,
       :max_size,
       :created_at,
-      :deleted_at)
+      :deleted_at,
+      :has_associated_service,
+      :is_default)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -212,12 +230,44 @@ module Aws::AppRunner
     #   `AutoScalingConfigurationName`.
     #   @return [Integer]
     #
+    # @!attribute [rw] status
+    #   The current state of the auto scaling configuration. If the status
+    #   of a configuration revision is `INACTIVE`, it was deleted and can't
+    #   be used. Inactive configuration revisions are permanently removed
+    #   some time after they are deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time when the auto scaling configuration was created. It's in
+    #   Unix time stamp format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] has_associated_service
+    #   Indicates if this auto scaling configuration has an App Runner
+    #   service associated with it. A value of `true` indicates one or more
+    #   services are associated. A value of `false` indicates no services
+    #   are associated.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] is_default
+    #   Indicates if this auto scaling configuration should be used as the
+    #   default for a new App Runner service that does not have an auto
+    #   scaling configuration ARN specified during creation. Each account
+    #   can have only one default `AutoScalingConfiguration` per region. The
+    #   default `AutoScalingConfiguration` can be any revision under the
+    #   same `AutoScalingConfigurationName`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/AutoScalingConfigurationSummary AWS API Documentation
     #
     class AutoScalingConfigurationSummary < Struct.new(
       :auto_scaling_configuration_arn,
       :auto_scaling_configuration_name,
-      :auto_scaling_configuration_revision)
+      :auto_scaling_configuration_revision,
+      :status,
+      :created_at,
+      :has_associated_service,
+      :is_default)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -461,16 +511,32 @@ module Aws::AppRunner
     #   subsequent calls, App Runner creates incremental revisions of the
     #   configuration.
     #
-    #   <note markdown="1"> The name `DefaultConfiguration` is reserved (it's the configuration
-    #   that App Runner uses if you don't provide a custome one). You
-    #   can't use it to create a new auto scaling configuration, and you
-    #   can't create a revision of it.
+    #   <note markdown="1"> Prior to the release of [Managing auto scaling][1], the name
+    #   `DefaultConfiguration` was reserved.
     #
-    #    When you want to use your own auto scaling configuration for your
-    #   App Runner service, *create a configuration with a different name*,
-    #   and then provide it when you create or update your service.
+    #    This restriction is no longer in place. You can now manage
+    #   `DefaultConfiguration` the same way you manage your custom auto
+    #   scaling configurations. This means you can do the following with the
+    #   `DefaultConfiguration` that App Runner provides:
+    #
+    #    * Create new revisions of the `DefaultConfiguration`.
+    #
+    #   * Delete the revisions of the `DefaultConfiguration`.
+    #
+    #   * Delete the auto scaling configuration for which the App Runner
+    #     `DefaultConfiguration` was created.
+    #
+    #   * If you delete the auto scaling configuration you can create
+    #     another custom auto scaling configuration with the same
+    #     `DefaultConfiguration` name. The original `DefaultConfiguration`
+    #     resource provided by App Runner remains in your account unless you
+    #     make changes to it.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apprunner/latest/relnotes/release-yyyy-mm-dd-asc-improvements.html
     #   @return [String]
     #
     # @!attribute [rw] max_concurrency
@@ -861,10 +927,20 @@ module Aws::AppRunner
     #   revision isn't specified, the latest active revision is deleted.
     #   @return [String]
     #
+    # @!attribute [rw] delete_all_revisions
+    #   Set to `true` to delete all of the revisions associated with the
+    #   `AutoScalingConfigurationArn` parameter value.
+    #
+    #   When `DeleteAllRevisions` is set to `true`, the only valid value for
+    #   the Amazon Resource Name (ARN) is a partial ARN ending with:
+    #   `.../name`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/DeleteAutoScalingConfigurationRequest AWS API Documentation
     #
     class DeleteAutoScalingConfigurationRequest < Struct.new(
-      :auto_scaling_configuration_arn)
+      :auto_scaling_configuration_arn,
+      :delete_all_revisions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1819,6 +1895,62 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
+    # @!attribute [rw] auto_scaling_configuration_arn
+    #   The Amazon Resource Name (ARN) of the App Runner auto scaling
+    #   configuration that you want to list the services for.
+    #
+    #   The ARN can be a full auto scaling configuration ARN, or a partial
+    #   ARN ending with either `.../name ` or `.../name/revision `. If a
+    #   revision isn't specified, the latest active revision is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to include in each response (result
+    #   page). It's used for a paginated request.
+    #
+    #   If you don't specify `MaxResults`, the request retrieves all
+    #   available results in a single response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token from a previous result page. It's used for a paginated
+    #   request. The request retrieves the next result page. All other
+    #   parameter values must be identical to the ones specified in the
+    #   initial request.
+    #
+    #   If you don't specify `NextToken`, the request retrieves the first
+    #   result page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/ListServicesForAutoScalingConfigurationRequest AWS API Documentation
+    #
+    class ListServicesForAutoScalingConfigurationRequest < Struct.new(
+      :auto_scaling_configuration_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_arn_list
+    #   A list of service ARN records. In a paginated request, the request
+    #   returns up to `MaxResults` records for each call.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token that you can pass in a subsequent request to get the next
+    #   result page. It's returned in a paginated request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/ListServicesForAutoScalingConfigurationResponse AWS API Documentation
+    #
+    class ListServicesForAutoScalingConfigurationResponse < Struct.new(
+      :service_arn_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   A token from a previous result page. Used for a paginated request.
     #   The request retrieves the next result page. All other parameter
@@ -2706,6 +2838,37 @@ module Aws::AppRunner
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] auto_scaling_configuration_arn
+    #   The Amazon Resource Name (ARN) of the App Runner auto scaling
+    #   configuration that you want to set as the default.
+    #
+    #   The ARN can be a full auto scaling configuration ARN, or a partial
+    #   ARN ending with either `.../name ` or `.../name/revision `. If a
+    #   revision isn't specified, the latest active revision is set as the
+    #   default.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/UpdateDefaultAutoScalingConfigurationRequest AWS API Documentation
+    #
+    class UpdateDefaultAutoScalingConfigurationRequest < Struct.new(
+      :auto_scaling_configuration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] auto_scaling_configuration
+    #   A description of the App Runner auto scaling configuration that was
+    #   set as default.
+    #   @return [Types::AutoScalingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/UpdateDefaultAutoScalingConfigurationResponse AWS API Documentation
+    #
+    class UpdateDefaultAutoScalingConfigurationResponse < Struct.new(
+      :auto_scaling_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] service_arn
     #   The Amazon Resource Name (ARN) of the App Runner service that you

@@ -644,7 +644,7 @@ module Aws::CloudWatchLogs
     end
 
     # Creates a log group with the specified name. You can create up to
-    # 20,000 log groups per account.
+    # 1,000,000 log groups per Region per account.
     #
     # You must use the following guidelines when naming a log group:
     #
@@ -2847,9 +2847,9 @@ module Aws::CloudWatchLogs
     # different value found for a dimension is treated as a separate metric
     # and accrues charges as a separate custom metric.
     #
-    #  CloudWatch Logs disables a metric filter if it generates 1,000
-    # different name/value pairs for your specified dimensions within a
-    # certain amount of time. This helps to prevent accidental high charges.
+    #  CloudWatch Logs might disable a metric filter if it generates 1,000
+    # different name/value pairs for your specified dimensions within one
+    # hour.
     #
     #  You can also set up a billing alarm to alert you if your charges are
     # higher than expected. For more information, see [ Creating a Billing
@@ -2964,6 +2964,13 @@ module Aws::CloudWatchLogs
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
     #
+    # @option params [String] :client_token
+    #   Used as an idempotency token, to avoid returning an exception if the
+    #   service receives the same request twice because of a network error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::PutQueryDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutQueryDefinitionResponse#query_definition_id #query_definition_id} => String
@@ -2975,6 +2982,7 @@ module Aws::CloudWatchLogs
     #     query_definition_id: "QueryId",
     #     log_group_names: ["LogGroupName"],
     #     query_string: "QueryDefinitionString", # required
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
@@ -3073,6 +3081,13 @@ module Aws::CloudWatchLogs
     # its lower retention setting until 72 hours after the previous
     # retention period ends. Alternatively, wait to change the retention
     # setting until you confirm that the earlier log events are deleted.
+    #
+    #  When log events reach their retention setting they are marked for
+    # deletion. After they are marked for deletion, they do not add to your
+    # archival storage costs anymore, even if they are not actually deleted
+    # until later. These log events marked for deletion are also not
+    # included when you use an API to retrieve the `storedBytes` value to
+    # see how many bytes a log group is storing.
     #
     #  </note>
     #
@@ -3614,7 +3629,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

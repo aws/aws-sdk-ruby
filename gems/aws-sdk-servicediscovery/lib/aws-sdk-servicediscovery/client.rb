@@ -1044,8 +1044,10 @@ module Aws::ServiceDiscovery
 
     # Discovers registered instances for a specified namespace and service.
     # You can use `DiscoverInstances` to discover instances for any type of
-    # namespace. For public and private DNS namespaces, you can also use DNS
-    # queries to discover instances.
+    # namespace. `DiscoverInstances` returns a randomized list of instances
+    # allowing customers to distribute traffic evenly across instances. For
+    # public and private DNS namespaces, you can also use DNS queries to
+    # discover instances.
     #
     # @option params [required, String] :namespace_name
     #   The `HttpName` name of the namespace. It's found in the
@@ -1099,6 +1101,7 @@ module Aws::ServiceDiscovery
     # @return [Types::DiscoverInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DiscoverInstancesResponse#instances #instances} => Array&lt;Types::HttpInstanceSummary&gt;
+    #   * {Types::DiscoverInstancesResponse#instances_revision #instances_revision} => Integer
     #
     #
     # @example Example: Example: Discover registered instances
@@ -1152,6 +1155,7 @@ module Aws::ServiceDiscovery
     #   resp.instances[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
     #   resp.instances[0].attributes #=> Hash
     #   resp.instances[0].attributes["AttrKey"] #=> String
+    #   resp.instances_revision #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DiscoverInstances AWS API Documentation
     #
@@ -1159,6 +1163,40 @@ module Aws::ServiceDiscovery
     # @param [Hash] params ({})
     def discover_instances(params = {}, options = {})
       req = build_request(:discover_instances, params)
+      req.send_request(options)
+    end
+
+    # Discovers the increasing revision associated with an instance.
+    #
+    # @option params [required, String] :namespace_name
+    #   The `HttpName` name of the namespace. It's found in the
+    #   `HttpProperties` member of the `Properties` member of the namespace.
+    #
+    # @option params [required, String] :service_name
+    #   The name of the service that you specified when you registered the
+    #   instance.
+    #
+    # @return [Types::DiscoverInstancesRevisionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DiscoverInstancesRevisionResponse#instances_revision #instances_revision} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.discover_instances_revision({
+    #     namespace_name: "NamespaceName", # required
+    #     service_name: "ServiceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instances_revision #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DiscoverInstancesRevision AWS API Documentation
+    #
+    # @overload discover_instances_revision(params = {})
+    # @param [Hash] params ({})
+    def discover_instances_revision(params = {}, options = {})
+      req = build_request(:discover_instances_revision, params)
       req.send_request(options)
     end
 
@@ -1378,7 +1416,7 @@ module Aws::ServiceDiscovery
     end
 
     # Gets information about any operation that returns an operation ID in
-    # the response, such as a `CreateService` request.
+    # the response, such as a `CreateHttpNamespace` request.
     #
     # <note markdown="1"> To get a list of operations that match specified criteria, see
     # [ListOperations][1].
@@ -2120,7 +2158,7 @@ module Aws::ServiceDiscovery
     #       health check, but it doesn't associate the health check with the
     #       alias record.
     #
-    #     * Auto naming currently doesn't support creating alias records that
+    #     * Cloud Map currently doesn't support creating alias records that
     #       route traffic to Amazon Web Services resources other than Elastic
     #       Load Balancing load balancers.
     #
@@ -2661,7 +2699,7 @@ module Aws::ServiceDiscovery
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicediscovery'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

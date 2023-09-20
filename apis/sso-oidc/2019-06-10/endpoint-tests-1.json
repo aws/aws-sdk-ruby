@@ -381,7 +381,7 @@
             "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
             "expect": {
                 "endpoint": {
-                    "url": "https://oidc-fips.us-gov-east-1.amazonaws.com"
+                    "url": "https://oidc.us-gov-east-1.amazonaws.com"
                 }
             },
             "params": {

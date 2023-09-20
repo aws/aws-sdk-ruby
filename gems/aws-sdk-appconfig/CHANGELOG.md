@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2023-09-20)
+------------------
+
+* Feature - Enabling boto3 paginators for list APIs and adding documentation around ServiceQuotaExceededException errors
+
 1.36.0 (2023-09-19)
 ------------------
 

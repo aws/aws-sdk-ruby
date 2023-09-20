@@ -509,8 +509,11 @@ module Aws::AppConfig
     #     parameter, specify either the parameter name in the format
     #     `ssm-parameter://<parameter name>` or the ARN.
     #
+    #   * For an Amazon Web Services CodePipeline pipeline, specify the URI in
+    #     the following format: `codepipeline`://&lt;pipeline name&gt;.
+    #
     #   * For an Secrets Manager secret, specify the URI in the following
-    #     format: `secrets-manager`://&lt;secret name&gt;.
+    #     format: `secretsmanager`://&lt;secret name&gt;.
     #
     #   * For an Amazon S3 object, specify the URI in the following format:
     #     `s3://<bucket>/<objectKey> `. Here is an example:
@@ -859,10 +862,23 @@ module Aws::AppConfig
     # workflow of creating or deploying a configuration.
     #
     # You can create your own extensions or use the Amazon Web Services
-    # authored extensions provided by AppConfig. For most use cases, to
-    # create your own extension, you must create an Lambda function to
-    # perform any computation and processing defined in the extension. For
-    # more information about extensions, see [Working with AppConfig
+    # authored extensions provided by AppConfig. For an AppConfig extension
+    # that uses Lambda, you must create a Lambda function to perform any
+    # computation and processing defined in the extension. If you plan to
+    # create custom versions of the Amazon Web Services authored
+    # notification extensions, you only need to specify an Amazon Resource
+    # Name (ARN) in the `Uri` field for the new extension version.
+    #
+    # * For a custom EventBridge notification extension, enter the ARN of
+    #   the EventBridge default events in the `Uri` field.
+    #
+    # * For a custom Amazon SNS notification extension, enter the ARN of an
+    #   Amazon SNS topic in the `Uri` field.
+    #
+    # * For a custom Amazon SQS notification extension, enter the ARN of an
+    #   Amazon SQS message queue in the `Uri` field.
+    #
+    # For more information about extensions, see [Working with AppConfig
     # extensions][1] in the *AppConfig User Guide*.
     #
     #
@@ -1638,6 +1654,7 @@ module Aws::AppConfig
     #   * {Types::Deployment#applied_extensions #applied_extensions} => Array&lt;Types::AppliedExtension&gt;
     #   * {Types::Deployment#kms_key_arn #kms_key_arn} => String
     #   * {Types::Deployment#kms_key_identifier #kms_key_identifier} => String
+    #   * {Types::Deployment#version_label #version_label} => String
     #
     #
     # @example Example: To retrieve deployment details
@@ -1763,6 +1780,7 @@ module Aws::AppConfig
     #   resp.applied_extensions[0].parameters["Name"] #=> String
     #   resp.kms_key_arn #=> String
     #   resp.kms_key_identifier #=> String
+    #   resp.version_label #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetDeployment AWS API Documentation
     #
@@ -2370,6 +2388,7 @@ module Aws::AppConfig
     #   resp.items[0].percentage_complete #=> Float
     #   resp.items[0].started_at #=> Time
     #   resp.items[0].completed_at #=> Time
+    #   resp.items[0].version_label #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListDeployments AWS API Documentation
@@ -2715,7 +2734,8 @@ module Aws::AppConfig
     # @option params [required, String] :configuration_version
     #   The configuration version to deploy. If deploying an AppConfig hosted
     #   configuration version, you can specify either the version number or
-    #   version label.
+    #   version label. For all other configurations, you must specify the
+    #   version number.
     #
     # @option params [String] :description
     #   A description of the deployment.
@@ -2753,6 +2773,7 @@ module Aws::AppConfig
     #   * {Types::Deployment#applied_extensions #applied_extensions} => Array&lt;Types::AppliedExtension&gt;
     #   * {Types::Deployment#kms_key_arn #kms_key_arn} => String
     #   * {Types::Deployment#kms_key_identifier #kms_key_identifier} => String
+    #   * {Types::Deployment#version_label #version_label} => String
     #
     #
     # @example Example: To start a configuration deployment
@@ -2853,6 +2874,7 @@ module Aws::AppConfig
     #   resp.applied_extensions[0].parameters["Name"] #=> String
     #   resp.kms_key_arn #=> String
     #   resp.kms_key_identifier #=> String
+    #   resp.version_label #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/StartDeployment AWS API Documentation
     #
@@ -2899,6 +2921,7 @@ module Aws::AppConfig
     #   * {Types::Deployment#applied_extensions #applied_extensions} => Array&lt;Types::AppliedExtension&gt;
     #   * {Types::Deployment#kms_key_arn #kms_key_arn} => String
     #   * {Types::Deployment#kms_key_identifier #kms_key_identifier} => String
+    #   * {Types::Deployment#version_label #version_label} => String
     #
     #
     # @example Example: To stop configuration deployment
@@ -2968,6 +2991,7 @@ module Aws::AppConfig
     #   resp.applied_extensions[0].parameters["Name"] #=> String
     #   resp.kms_key_arn #=> String
     #   resp.kms_key_identifier #=> String
+    #   resp.version_label #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/StopDeployment AWS API Documentation
     #
@@ -3593,7 +3617,7 @@ module Aws::AppConfig
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appconfig'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

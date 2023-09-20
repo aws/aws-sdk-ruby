@@ -445,8 +445,11 @@ module Aws::AppConfig
     #     parameter, specify either the parameter name in the format
     #     `ssm-parameter://<parameter name>` or the ARN.
     #
+    #   * For an Amazon Web Services CodePipeline pipeline, specify the URI
+    #     in the following format: `codepipeline`://&lt;pipeline name&gt;.
+    #
     #   * For an Secrets Manager secret, specify the URI in the following
-    #     format: `secrets-manager`://&lt;secret name&gt;.
+    #     format: `secretsmanager`://&lt;secret name&gt;.
     #
     #   * For an Amazon S3 object, specify the URI in the following format:
     #     `s3://<bucket>/<objectKey> `. Here is an example:
@@ -973,6 +976,10 @@ module Aws::AppConfig
     #   managed key.
     #   @return [String]
     #
+    # @!attribute [rw] version_label
+    #   A user-defined label for an AppConfig hosted configuration version.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/Deployment AWS API Documentation
     #
     class Deployment < Struct.new(
@@ -996,7 +1003,8 @@ module Aws::AppConfig
       :completed_at,
       :applied_extensions,
       :kms_key_arn,
-      :kms_key_identifier)
+      :kms_key_identifier,
+      :version_label)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1018,10 +1026,15 @@ module Aws::AppConfig
     #
     # @!attribute [rw] description
     #   A description of the deployment event. Descriptions include, but are
-    #   not limited to, the user account or the Amazon CloudWatch alarm ARN
-    #   that initiated a rollback, the percentage of hosts that received the
-    #   deployment, or in the case of an internal error, a recommendation to
-    #   attempt a new deployment.
+    #   not limited to, the following:
+    #
+    #   * The Amazon Web Services account or the Amazon CloudWatch alarm ARN
+    #     that initiated a rollback.
+    #
+    #   * The percentage of hosts that received the deployment.
+    #
+    #   * A recommendation to attempt a new deployment (in the case of an
+    #     internal error).
     #   @return [String]
     #
     # @!attribute [rw] action_invocations
@@ -1161,6 +1174,10 @@ module Aws::AppConfig
     #   Time the deployment completed.
     #   @return [Time]
     #
+    # @!attribute [rw] version_label
+    #   A user-defined label for an AppConfig hosted configuration version.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/DeploymentSummary AWS API Documentation
     #
     class DeploymentSummary < Struct.new(
@@ -1174,7 +1191,8 @@ module Aws::AppConfig
       :state,
       :percentage_complete,
       :started_at,
-      :completed_at)
+      :completed_at,
+      :version_label)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2152,9 +2170,26 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # The number of hosted configuration versions exceeds the limit for the
-    # AppConfig hosted configuration store. Delete one or more versions and
-    # try again.
+    # The number of one more AppConfig resources exceeds the maximum
+    # allowed. Verify that your environment doesn't exceed the following
+    # service quotas:
+    #
+    # Applications: 100 max
+    #
+    # Deployment strategies: 20 max
+    #
+    # Configuration profiles: 100 max per application
+    #
+    # Environments: 20 max per application
+    #
+    # To resolve this issue, you can delete one or more resources and try
+    # again. Or, you can request a quota increase. For more information
+    # about quotas and to request an increase, see [Service quotas for
+    # AppConfig][1] in the Amazon Web Services General Reference.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/appconfig.html#limits_appconfig
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2186,7 +2221,8 @@ module Aws::AppConfig
     # @!attribute [rw] configuration_version
     #   The configuration version to deploy. If deploying an AppConfig
     #   hosted configuration version, you can specify either the version
-    #   number or version label.
+    #   number or version label. For all other configurations, you must
+    #   specify the version number.
     #   @return [String]
     #
     # @!attribute [rw] description

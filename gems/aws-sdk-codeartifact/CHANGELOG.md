@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2023-09-20)
+------------------
+
+* Feature - Add support for the Swift package format.
+
 1.33.0 (2023-07-17)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.135.0 (2023-09-20)
+------------------
+
+* Feature - Fix an issue where the SDK can fail to unmarshall response due to NumberFormatException
+
 1.134.0 (2023-08-24)
 ------------------
 

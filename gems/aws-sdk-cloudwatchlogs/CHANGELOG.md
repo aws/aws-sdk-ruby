@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2023-09-20)
+------------------
+
+* Feature - Add ClientToken to QueryDefinition CFN Handler in CWL
+
 1.69.0 (2023-07-11)
 ------------------
 
