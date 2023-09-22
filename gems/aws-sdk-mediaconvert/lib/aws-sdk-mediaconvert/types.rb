@@ -2472,11 +2472,15 @@ module Aws::MediaConvert
     # @!attribute [rw] audio_track_type
     #   Use this setting to control the values that MediaConvert puts in
     #   your HLS parent playlist to control how the client player selects
-    #   which audio track to play. The other options for this setting
-    #   determine the values that MediaConvert writes for the DEFAULT and
-    #   AUTOSELECT attributes of the EXT-X-MEDIA entry for the audio
-    #   variant. For more information about these attributes, see the Apple
-    #   documentation article
+    #   which audio track to play. Choose Audio-only variant stream
+    #   (AUDIO\_ONLY\_VARIANT\_STREAM) for any variant that you want to
+    #   prohibit the client from playing with video. This causes
+    #   MediaConvert to represent the variant as an EXT-X-STREAM-INF in the
+    #   HLS manifest. The other options for this setting determine the
+    #   values that MediaConvert writes for the DEFAULT and AUTOSELECT
+    #   attributes of the EXT-X-MEDIA entry for the audio variant. For more
+    #   information about these attributes, see the Apple documentation
+    #   article
     #   https://developer.apple.com/documentation/http\_live\_streaming/example\_playlists\_for\_http\_live\_streaming/adding\_alternate\_media\_to\_a\_playlist.
     #   Choose Alternate audio, auto select, default to set DEFAULT=YES and
     #   AUTOSELECT=YES. Choose this value for only one variant in your
@@ -7841,6 +7845,16 @@ module Aws::MediaConvert
     #   Advisory.
     #   @return [Types::ExtendedDataServices]
     #
+    # @!attribute [rw] follow_input_index
+    #   Specifies which input metadata to use for the default "Follow
+    #   input" option for the following settings: resolution, frame rate,
+    #   and pixel aspect ratio. In the simplest case, specify which input is
+    #   used based on its index in the job. For example if you specify 3,
+    #   then the fourth input will be used from each input. If the job does
+    #   not have a fourth input, then the first input will be used. If no
+    #   followInputIndex is specified, then 0 will be chosen automatically.
+    #   @return [Integer]
+    #
     # @!attribute [rw] inputs
     #   Use Inputs to define source file used in the transcode job. There
     #   can be multiple inputs add in a job. These inputs will be
@@ -7914,6 +7928,7 @@ module Aws::MediaConvert
       :avail_blanking,
       :esam,
       :extended_data_services,
+      :follow_input_index,
       :inputs,
       :kantar_watermark,
       :motion_image_inserter,
@@ -8039,6 +8054,16 @@ module Aws::MediaConvert
     #   Advisory.
     #   @return [Types::ExtendedDataServices]
     #
+    # @!attribute [rw] follow_input_index
+    #   Specifies which input metadata to use for the default "Follow
+    #   input" option for the following settings: resolution, frame rate,
+    #   and pixel aspect ratio. In the simplest case, specify which input is
+    #   used based on its index in the job. For example if you specify 3,
+    #   then the fourth input will be used from each input. If the job does
+    #   not have a fourth input, then the first input will be used. If no
+    #   followInputIndex is specified, then 0 will be chosen automatically.
+    #   @return [Integer]
+    #
     # @!attribute [rw] inputs
     #   Use Inputs to define the source file used in the transcode job.
     #   There can only be one input in a job template. Using the API, you
@@ -8112,6 +8137,7 @@ module Aws::MediaConvert
       :avail_blanking,
       :esam,
       :extended_data_services,
+      :follow_input_index,
       :inputs,
       :kantar_watermark,
       :motion_image_inserter,
@@ -11321,7 +11347,10 @@ module Aws::MediaConvert
     #   @return [Types::S3EncryptionSettings]
     #
     # @!attribute [rw] storage_class
-    #   Specify the S3 storage class to use for this destination.
+    #   Specify the S3 storage class to use for this output. To use your
+    #   destination's default storage class: Keep the default value, Not
+    #   set. For more information about S3 storage classes, see
+    #   https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/S3DestinationSettings AWS API Documentation

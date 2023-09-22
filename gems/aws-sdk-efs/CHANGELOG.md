@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2023-09-22)
+------------------
+
+* Feature - Documentation updates for Elastic File System
+
 1.65.0 (2023-07-11)
 ------------------
 

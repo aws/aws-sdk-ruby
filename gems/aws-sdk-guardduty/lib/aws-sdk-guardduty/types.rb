@@ -781,6 +781,11 @@ module Aws::GuardDuty
     #
     # @!attribute [rw] criterion_key
     #   An enum value representing possible filter fields.
+    #
+    #   <note markdown="1"> Replace the enum value `CLUSTER_NAME` with `EKS_CLUSTER_NAME`.
+    #   `CLUSTER_NAME` has been deprecated.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] filter_condition
@@ -868,6 +873,11 @@ module Aws::GuardDuty
     #
     # @!attribute [rw] attribute_name
     #   Represents the field name used to sort the coverage details.
+    #
+    #   <note markdown="1"> Replace the enum value `CLUSTER_NAME` with `EKS_CLUSTER_NAME`.
+    #   `CLUSTER_NAME` has been deprecated.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] order_by
@@ -2519,7 +2529,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] admin_account_id
-    #   The Amazon Web Services Account ID for the organization account to
+    #   The Amazon Web Services account ID for the organization account to
     #   be enabled as a GuardDuty delegated administrator.
     #   @return [String]
     #
@@ -2601,6 +2611,11 @@ module Aws::GuardDuty
     # @!attribute [rw] criterion_key
     #   An enum value representing possible scan properties to match with
     #   given scan entries.
+    #
+    #   <note markdown="1"> Replace the enum value `CLUSTER_NAME` with `EKS_CLUSTER_NAME`.
+    #   `CLUSTER_NAME` has been deprecated.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] filter_condition
@@ -2616,8 +2631,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about the finding, which is generated when
-    # abnormal or suspicious activity is detected.
+    # Contains information about the finding that is generated when abnormal
+    # or suspicious activity is detected.
     #
     # @!attribute [rw] account_id
     #   The ID of the account in which the finding was generated.
@@ -5179,9 +5194,9 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] auto_enable
-    #   The status of the feature that will be configured for the
-    #   organization. Use one of the following values to configure the
-    #   feature status for the entire organization:
+    #   Describes the status of the feature that is configured for the
+    #   member accounts within the organization. One of the following values
+    #   is the status for the entire organization:
     #
     #   * `NEW`: Indicates that when a new account joins the organization,
     #     they will have the feature enabled automatically.
@@ -6217,16 +6232,16 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Represents key, value pair to be matched against given resource
+    # Represents the `key:value` pair to be matched against given resource
     # property.
     #
     # @!attribute [rw] key
-    #   Represents *key* **** in the map condition.
+    #   Represents the **key** in the map condition.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   Represents optional *value* **** in the map condition. If not
-    #   specified, only *key* **** will be matched.
+    #   Represents optional **value** in the map condition. If not
+    #   specified, only the **key** will be matched.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ScanConditionPair AWS API Documentation
@@ -7137,12 +7152,12 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] auto_enable
-    #   Indicates whether to automatically enable member accounts in the
-    #   organization.
+    #   Represents whether or not to automatically enable member accounts in
+    #   the organization.
     #
     #   Even though this is still supported, we recommend using
     #   `AutoEnableOrganizationMembers` to achieve the similar results. You
-    #   must provide the value for either `autoEnableOrganizationMembers` or
+    #   must provide a value for either `autoEnableOrganizationMembers` or
     #   `autoEnable`.
     #   @return [Boolean]
     #

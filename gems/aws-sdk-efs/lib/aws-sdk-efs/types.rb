@@ -357,6 +357,8 @@ module Aws::EFS
     #   storage classes.
     #
     #    </note>
+    #
+    #   Default is `generalPurpose`.
     #   @return [String]
     #
     # @!attribute [rw] encrypted
@@ -412,12 +414,13 @@ module Aws::EFS
     #   @return [String]
     #
     # @!attribute [rw] provisioned_throughput_in_mibps
-    #   The throughput, measured in MiB/s, that you want to provision for a
-    #   file system that you're creating. Valid values are 1-1024. Required
-    #   if `ThroughputMode` is set to `provisioned`. The upper limit for
-    #   throughput is 1024 MiB/s. To increase this limit, contact Amazon Web
-    #   Services Support. For more information, see [Amazon EFS quotas that
-    #   you can increase][1] in the *Amazon EFS User Guide*.
+    #   The throughput, measured in mebibytes per second (MiBps), that you
+    #   want to provision for a file system that you're creating. Required
+    #   if `ThroughputMode` is set to `provisioned`. Valid values are 1-3414
+    #   MiBps, with the upper limit depending on Region. To increase this
+    #   limit, contact Amazon Web Services Support. For more information,
+    #   see [Amazon EFS quotas that you can increase][1] in the *Amazon EFS
+    #   User Guide*.
     #
     #
     #
@@ -1306,7 +1309,7 @@ module Aws::EFS
     #   @return [String]
     #
     # @!attribute [rw] provisioned_throughput_in_mibps
-    #   The amount of provisioned throughput, measured in MiB/s, for the
+    #   The amount of provisioned throughput, measured in MiBps, for the
     #   file system. Valid for file systems using `ThroughputMode` set to
     #   `provisioned`.
     #   @return [Float]
@@ -2166,6 +2169,8 @@ module Aws::EFS
       include Aws::Structure
     end
 
+    # Describes the replication configuration for a specific file system.
+    #
     # @!attribute [rw] source_file_system_id
     #   The ID of the source Amazon EFS file system that is being
     #   replicated.
@@ -2567,11 +2572,17 @@ module Aws::EFS
     #   @return [String]
     #
     # @!attribute [rw] provisioned_throughput_in_mibps
-    #   (Optional) Sets the amount of provisioned throughput, in MiB/s, for
-    #   the file system. Valid values are 1-1024. If you are changing the
-    #   throughput mode to provisioned, you must also provide the amount of
-    #   provisioned throughput. Required if `ThroughputMode` is changed to
-    #   `provisioned` on update.
+    #   (Optional) The throughput, measured in mebibytes per second (MiBps),
+    #   that you want to provision for a file system that you're creating.
+    #   Required if `ThroughputMode` is set to `provisioned`. Valid values
+    #   are 1-3414 MiBps, with the upper limit depending on Region. To
+    #   increase this limit, contact Amazon Web Services Support. For more
+    #   information, see [Amazon EFS quotas that you can increase][1] in the
+    #   *Amazon EFS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/UpdateFileSystemRequest AWS API Documentation

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2023-09-22)
+------------------
+
+* Feature - Adds sensitive trait to various shapes in Jetstream Connections API model.
+
 1.65.0 (2023-08-31)
 ------------------
 

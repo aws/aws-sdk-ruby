@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.407.0 (2023-09-22)
+------------------
+
+* Feature - EC2 M2 Pro Mac instances are powered by Apple M2 Pro Mac Mini computers featuring 12 core CPU, 19 core GPU, 32 GiB of memory, and 16 core Apple Neural Engine and uniquely enabled by the AWS Nitro System through high-speed Thunderbolt connections.
+
 1.406.0 (2023-09-19)
 ------------------
 

@@ -203,6 +203,7 @@ module Aws::DatabaseMigrationService
     DescribeTableStatisticsResponse = Shapes::StructureShape.new(name: 'DescribeTableStatisticsResponse')
     DmsSslModeValue = Shapes::StringShape.new(name: 'DmsSslModeValue')
     DmsTransferSettings = Shapes::StructureShape.new(name: 'DmsTransferSettings')
+    DocDbDataProviderSettings = Shapes::StructureShape.new(name: 'DocDbDataProviderSettings')
     DocDbSettings = Shapes::StructureShape.new(name: 'DocDbSettings')
     DoubleOptional = Shapes::FloatShape.new(name: 'DoubleOptional')
     DynamoDbSettings = Shapes::StructureShape.new(name: 'DynamoDbSettings')
@@ -277,6 +278,7 @@ module Aws::DatabaseMigrationService
     Long = Shapes::IntegerShape.new(name: 'Long')
     LongOptional = Shapes::IntegerShape.new(name: 'LongOptional')
     LongVarcharMappingType = Shapes::StringShape.new(name: 'LongVarcharMappingType')
+    MariaDbDataProviderSettings = Shapes::StructureShape.new(name: 'MariaDbDataProviderSettings')
     MessageFormatValue = Shapes::StringShape.new(name: 'MessageFormatValue')
     MicrosoftSQLServerSettings = Shapes::StructureShape.new(name: 'MicrosoftSQLServerSettings')
     MicrosoftSqlServerDataProviderSettings = Shapes::StructureShape.new(name: 'MicrosoftSqlServerDataProviderSettings')
@@ -303,6 +305,7 @@ module Aws::DatabaseMigrationService
     ModifyReplicationSubnetGroupResponse = Shapes::StructureShape.new(name: 'ModifyReplicationSubnetGroupResponse')
     ModifyReplicationTaskMessage = Shapes::StructureShape.new(name: 'ModifyReplicationTaskMessage')
     ModifyReplicationTaskResponse = Shapes::StructureShape.new(name: 'ModifyReplicationTaskResponse')
+    MongoDbDataProviderSettings = Shapes::StructureShape.new(name: 'MongoDbDataProviderSettings')
     MongoDbSettings = Shapes::StructureShape.new(name: 'MongoDbSettings')
     MoveReplicationTaskMessage = Shapes::StructureShape.new(name: 'MoveReplicationTaskMessage')
     MoveReplicationTaskResponse = Shapes::StructureShape.new(name: 'MoveReplicationTaskResponse')
@@ -334,6 +337,7 @@ module Aws::DatabaseMigrationService
     RecommendationSettings = Shapes::StructureShape.new(name: 'RecommendationSettings')
     RedisAuthTypeValue = Shapes::StringShape.new(name: 'RedisAuthTypeValue')
     RedisSettings = Shapes::StructureShape.new(name: 'RedisSettings')
+    RedshiftDataProviderSettings = Shapes::StructureShape.new(name: 'RedshiftDataProviderSettings')
     RedshiftSettings = Shapes::StructureShape.new(name: 'RedshiftSettings')
     RefreshSchemasMessage = Shapes::StructureShape.new(name: 'RefreshSchemasMessage')
     RefreshSchemasResponse = Shapes::StructureShape.new(name: 'RefreshSchemasResponse')
@@ -767,15 +771,23 @@ module Aws::DatabaseMigrationService
 
     DataProviderList.member = Shapes::ShapeRef.new(shape: DataProvider)
 
+    DataProviderSettings.add_member(:redshift_settings, Shapes::ShapeRef.new(shape: RedshiftDataProviderSettings, location_name: "RedshiftSettings"))
     DataProviderSettings.add_member(:postgre_sql_settings, Shapes::ShapeRef.new(shape: PostgreSqlDataProviderSettings, location_name: "PostgreSqlSettings"))
     DataProviderSettings.add_member(:my_sql_settings, Shapes::ShapeRef.new(shape: MySqlDataProviderSettings, location_name: "MySqlSettings"))
     DataProviderSettings.add_member(:oracle_settings, Shapes::ShapeRef.new(shape: OracleDataProviderSettings, location_name: "OracleSettings"))
     DataProviderSettings.add_member(:microsoft_sql_server_settings, Shapes::ShapeRef.new(shape: MicrosoftSqlServerDataProviderSettings, location_name: "MicrosoftSqlServerSettings"))
+    DataProviderSettings.add_member(:doc_db_settings, Shapes::ShapeRef.new(shape: DocDbDataProviderSettings, location_name: "DocDbSettings"))
+    DataProviderSettings.add_member(:maria_db_settings, Shapes::ShapeRef.new(shape: MariaDbDataProviderSettings, location_name: "MariaDbSettings"))
+    DataProviderSettings.add_member(:mongo_db_settings, Shapes::ShapeRef.new(shape: MongoDbDataProviderSettings, location_name: "MongoDbSettings"))
     DataProviderSettings.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    DataProviderSettings.add_member_subclass(:redshift_settings, Types::DataProviderSettings::RedshiftSettings)
     DataProviderSettings.add_member_subclass(:postgre_sql_settings, Types::DataProviderSettings::PostgreSqlSettings)
     DataProviderSettings.add_member_subclass(:my_sql_settings, Types::DataProviderSettings::MySqlSettings)
     DataProviderSettings.add_member_subclass(:oracle_settings, Types::DataProviderSettings::OracleSettings)
     DataProviderSettings.add_member_subclass(:microsoft_sql_server_settings, Types::DataProviderSettings::MicrosoftSqlServerSettings)
+    DataProviderSettings.add_member_subclass(:doc_db_settings, Types::DataProviderSettings::DocDbSettings)
+    DataProviderSettings.add_member_subclass(:maria_db_settings, Types::DataProviderSettings::MariaDbSettings)
+    DataProviderSettings.add_member_subclass(:mongo_db_settings, Types::DataProviderSettings::MongoDbSettings)
     DataProviderSettings.add_member_subclass(:unknown, Types::DataProviderSettings::Unknown)
     DataProviderSettings.struct_class = Types::DataProviderSettings
 
@@ -1292,6 +1304,13 @@ module Aws::DatabaseMigrationService
     DmsTransferSettings.add_member(:bucket_name, Shapes::ShapeRef.new(shape: String, location_name: "BucketName"))
     DmsTransferSettings.struct_class = Types::DmsTransferSettings
 
+    DocDbDataProviderSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
+    DocDbDataProviderSettings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
+    DocDbDataProviderSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
+    DocDbDataProviderSettings.add_member(:ssl_mode, Shapes::ShapeRef.new(shape: DmsSslModeValue, location_name: "SslMode"))
+    DocDbDataProviderSettings.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CertificateArn"))
+    DocDbDataProviderSettings.struct_class = Types::DocDbDataProviderSettings
+
     DocDbSettings.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
     DocDbSettings.add_member(:password, Shapes::ShapeRef.new(shape: SecretString, location_name: "Password"))
     DocDbSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
@@ -1615,6 +1634,12 @@ module Aws::DatabaseMigrationService
     ListTagsForResourceResponse.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    MariaDbDataProviderSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
+    MariaDbDataProviderSettings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
+    MariaDbDataProviderSettings.add_member(:ssl_mode, Shapes::ShapeRef.new(shape: DmsSslModeValue, location_name: "SslMode"))
+    MariaDbDataProviderSettings.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CertificateArn"))
+    MariaDbDataProviderSettings.struct_class = Types::MariaDbDataProviderSettings
+
     MicrosoftSQLServerSettings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
     MicrosoftSQLServerSettings.add_member(:bcp_packet_size, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "BcpPacketSize"))
     MicrosoftSQLServerSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
@@ -1801,6 +1826,16 @@ module Aws::DatabaseMigrationService
 
     ModifyReplicationTaskResponse.add_member(:replication_task, Shapes::ShapeRef.new(shape: ReplicationTask, location_name: "ReplicationTask"))
     ModifyReplicationTaskResponse.struct_class = Types::ModifyReplicationTaskResponse
+
+    MongoDbDataProviderSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
+    MongoDbDataProviderSettings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
+    MongoDbDataProviderSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
+    MongoDbDataProviderSettings.add_member(:ssl_mode, Shapes::ShapeRef.new(shape: DmsSslModeValue, location_name: "SslMode"))
+    MongoDbDataProviderSettings.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CertificateArn"))
+    MongoDbDataProviderSettings.add_member(:auth_type, Shapes::ShapeRef.new(shape: AuthTypeValue, location_name: "AuthType"))
+    MongoDbDataProviderSettings.add_member(:auth_source, Shapes::ShapeRef.new(shape: String, location_name: "AuthSource"))
+    MongoDbDataProviderSettings.add_member(:auth_mechanism, Shapes::ShapeRef.new(shape: AuthMechanismValue, location_name: "AuthMechanism"))
+    MongoDbDataProviderSettings.struct_class = Types::MongoDbDataProviderSettings
 
     MongoDbSettings.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
     MongoDbSettings.add_member(:password, Shapes::ShapeRef.new(shape: SecretString, location_name: "Password"))
@@ -2039,6 +2074,11 @@ module Aws::DatabaseMigrationService
     RedisSettings.add_member(:auth_password, Shapes::ShapeRef.new(shape: SecretString, location_name: "AuthPassword"))
     RedisSettings.add_member(:ssl_ca_certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "SslCaCertificateArn"))
     RedisSettings.struct_class = Types::RedisSettings
+
+    RedshiftDataProviderSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
+    RedshiftDataProviderSettings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
+    RedshiftDataProviderSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
+    RedshiftDataProviderSettings.struct_class = Types::RedshiftDataProviderSettings
 
     RedshiftSettings.add_member(:accept_any_date, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AcceptAnyDate"))
     RedshiftSettings.add_member(:after_connect_script, Shapes::ShapeRef.new(shape: String, location_name: "AfterConnectScript"))

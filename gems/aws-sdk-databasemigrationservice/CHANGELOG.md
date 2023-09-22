@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2023-09-22)
+------------------
+
+* Feature - new vendors for DMS CSF: MongoDB, MariaDB, DocumentDb and Redshift
+
 1.86.0 (2023-08-03)
 ------------------
 

@@ -606,6 +606,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.esam.signal_processing_notification.scc_xml #=> String
     #   resp.job_template.settings.extended_data_services.copy_protection_action #=> String, one of "PASSTHROUGH", "STRIP"
     #   resp.job_template.settings.extended_data_services.vchip_action #=> String, one of "PASSTHROUGH", "STRIP"
+    #   resp.job_template.settings.follow_input_index #=> Integer
     #   resp.job_template.settings.inputs #=> Array
     #   resp.job_template.settings.inputs[0].advanced_input_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.inputs[0].advanced_input_filter_settings.add_texture #=> String, one of "ENABLED", "DISABLED"
@@ -1122,7 +1123,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_group_id #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_rendition_sets #=> String
-    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -1839,7 +1840,7 @@ module Aws::MediaConvert
     #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           audio_group_id: "__string",
     #           audio_rendition_sets: "__string",
-    #           audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
+    #           audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
     #           descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #           i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -2560,7 +2561,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.preset.settings.container_settings.cmfc_settings.audio_group_id #=> String
     #   resp.preset.settings.container_settings.cmfc_settings.audio_rendition_sets #=> String
-    #   resp.preset.settings.container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
+    #   resp.preset.settings.container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
     #   resp.preset.settings.container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.preset.settings.container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -3287,6 +3288,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.esam.signal_processing_notification.scc_xml #=> String
     #   resp.job_template.settings.extended_data_services.copy_protection_action #=> String, one of "PASSTHROUGH", "STRIP"
     #   resp.job_template.settings.extended_data_services.vchip_action #=> String, one of "PASSTHROUGH", "STRIP"
+    #   resp.job_template.settings.follow_input_index #=> Integer
     #   resp.job_template.settings.inputs #=> Array
     #   resp.job_template.settings.inputs[0].advanced_input_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.inputs[0].advanced_input_filter_settings.add_texture #=> String, one of "ENABLED", "DISABLED"
@@ -3803,7 +3805,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_group_id #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_rendition_sets #=> String
-    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -4473,7 +4475,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.preset.settings.container_settings.cmfc_settings.audio_group_id #=> String
     #   resp.preset.settings.container_settings.cmfc_settings.audio_rendition_sets #=> String
-    #   resp.preset.settings.container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
+    #   resp.preset.settings.container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
     #   resp.preset.settings.container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.preset.settings.container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -5018,6 +5020,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.esam.signal_processing_notification.scc_xml #=> String
     #   resp.job_templates[0].settings.extended_data_services.copy_protection_action #=> String, one of "PASSTHROUGH", "STRIP"
     #   resp.job_templates[0].settings.extended_data_services.vchip_action #=> String, one of "PASSTHROUGH", "STRIP"
+    #   resp.job_templates[0].settings.follow_input_index #=> Integer
     #   resp.job_templates[0].settings.inputs #=> Array
     #   resp.job_templates[0].settings.inputs[0].advanced_input_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.inputs[0].advanced_input_filter_settings.add_texture #=> String, one of "ENABLED", "DISABLED"
@@ -5534,7 +5537,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_group_id #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_rendition_sets #=> String
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -6267,7 +6270,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.presets[0].settings.container_settings.cmfc_settings.audio_group_id #=> String
     #   resp.presets[0].settings.container_settings.cmfc_settings.audio_rendition_sets #=> String
-    #   resp.presets[0].settings.container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
+    #   resp.presets[0].settings.container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
     #   resp.presets[0].settings.container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.presets[0].settings.container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.presets[0].settings.container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -6968,6 +6971,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.esam.signal_processing_notification.scc_xml #=> String
     #   resp.job_template.settings.extended_data_services.copy_protection_action #=> String, one of "PASSTHROUGH", "STRIP"
     #   resp.job_template.settings.extended_data_services.vchip_action #=> String, one of "PASSTHROUGH", "STRIP"
+    #   resp.job_template.settings.follow_input_index #=> Integer
     #   resp.job_template.settings.inputs #=> Array
     #   resp.job_template.settings.inputs[0].advanced_input_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.inputs[0].advanced_input_filter_settings.add_texture #=> String, one of "ENABLED", "DISABLED"
@@ -7484,7 +7488,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_group_id #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_rendition_sets #=> String
-    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -8195,7 +8199,7 @@ module Aws::MediaConvert
     #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           audio_group_id: "__string",
     #           audio_rendition_sets: "__string",
-    #           audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
+    #           audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
     #           descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #           i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -8913,7 +8917,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.preset.settings.container_settings.cmfc_settings.audio_group_id #=> String
     #   resp.preset.settings.container_settings.cmfc_settings.audio_rendition_sets #=> String
-    #   resp.preset.settings.container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
+    #   resp.preset.settings.container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
     #   resp.preset.settings.container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.preset.settings.container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -9428,7 +9432,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.116.0'
+      context[:gem_version] = '1.117.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
