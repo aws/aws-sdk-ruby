@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2023-09-25)
+------------------
+
+* Feature - Support for generating code that is compatible with future versions of amplify project dependencies.
+
 1.18.0 (2023-07-31)
 ------------------
 

@@ -1669,7 +1669,13 @@ module Aws::SSM
     # [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html
     #
     # @option params [required, String] :description
-    #   Information about the OpsItem.
+    #   User-defined text that contains information about the OpsItem, in
+    #   Markdown format.
+    #
+    #   <note markdown="1"> Provide enough information so that users viewing this OpsItem for the
+    #   first time understand the issue.
+    #
+    #    </note>
     #
     # @option params [String] :ops_item_type
     #   The type of OpsItem to create. Systems Manager supports the following
@@ -1685,7 +1691,7 @@ module Aws::SSM
     #     This type of OpsItem is used by Change Manager for reviewing and
     #     approving or rejecting change requests.
     #
-    #   * `/aws/insights`
+    #   * `/aws/insight`
     #
     #     This type of OpsItem is used by OpsCenter for aggregating and
     #     reporting on duplicate OpsItems.
@@ -3808,7 +3814,7 @@ module Aws::SSM
     #   resp.instance_information_list[0].activation_id #=> String
     #   resp.instance_information_list[0].iam_role #=> String
     #   resp.instance_information_list[0].registration_date #=> Time
-    #   resp.instance_information_list[0].resource_type #=> String, one of "ManagedInstance", "Document", "EC2Instance"
+    #   resp.instance_information_list[0].resource_type #=> String, one of "ManagedInstance", "EC2Instance"
     #   resp.instance_information_list[0].name #=> String
     #   resp.instance_information_list[0].ip_address #=> String
     #   resp.instance_information_list[0].computer_name #=> String
@@ -5622,7 +5628,7 @@ module Aws::SSM
     # @example Response structure
     #
     #   resp.target #=> String
-    #   resp.status #=> String, one of "Connected", "NotConnected"
+    #   resp.status #=> String, one of "connected", "notconnected"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetConnectionStatus AWS API Documentation
     #
@@ -11650,9 +11656,8 @@ module Aws::SSM
     # [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html
     #
     # @option params [String] :description
-    #   Update the information about the OpsItem. Provide enough information
-    #   so that users reading this OpsItem for the first time understand the
-    #   issue.
+    #   User-defined text that contains information about the OpsItem, in
+    #   Markdown format.
     #
     # @option params [Hash<String,Types::OpsItemDataValue>] :operational_data
     #   Add new keys or edit existing key-value pairs of the OperationalData
@@ -12179,7 +12184,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.156.0'
+      context[:gem_version] = '1.157.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

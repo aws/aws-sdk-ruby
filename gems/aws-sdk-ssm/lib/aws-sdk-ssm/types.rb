@@ -3512,7 +3512,13 @@ module Aws::SSM
     end
 
     # @!attribute [rw] description
-    #   Information about the OpsItem.
+    #   User-defined text that contains information about the OpsItem, in
+    #   Markdown format.
+    #
+    #   <note markdown="1"> Provide enough information so that users viewing this OpsItem for
+    #   the first time understand the issue.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] ops_item_type
@@ -3529,7 +3535,7 @@ module Aws::SSM
     #     This type of OpsItem is used by Change Manager for reviewing and
     #     approving or rejecting change requests.
     #
-    #   * `/aws/insights`
+    #   * `/aws/insight`
     #
     #     This type of OpsItem is used by OpsCenter for aggregating and
     #     reporting on duplicate OpsItems.
@@ -12702,7 +12708,7 @@ module Aws::SSM
     #     This type of OpsItem is used by Change Manager for reviewing and
     #     approving or rejecting change requests.
     #
-    #   * `/aws/insights`
+    #   * `/aws/insight`
     #
     #     This type of OpsItem is used by OpsCenter for aggregating and
     #     reporting on duplicate OpsItems.
@@ -13293,7 +13299,7 @@ module Aws::SSM
     #     This type of OpsItem is used by Change Manager for reviewing and
     #     approving or rejecting change requests.
     #
-    #   * `/aws/insights`
+    #   * `/aws/insight`
     #
     #     This type of OpsItem is used by OpsCenter for aggregating and
     #     reporting on duplicate OpsItems.
@@ -18809,9 +18815,8 @@ module Aws::SSM
     class UpdateManagedInstanceRoleResult < Aws::EmptyStructure; end
 
     # @!attribute [rw] description
-    #   Update the information about the OpsItem. Provide enough information
-    #   so that users reading this OpsItem for the first time understand the
-    #   issue.
+    #   User-defined text that contains information about the OpsItem, in
+    #   Markdown format.
     #   @return [String]
     #
     # @!attribute [rw] operational_data

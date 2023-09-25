@@ -82,6 +82,34 @@ module Aws::ChimeSDKMediaPipelines
       end
     end
 
+    class CreateMediaPipelineKinesisVideoStreamPool
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ChimeSDKMediaPipelines::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class CreateMediaStreamPipeline
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ChimeSDKMediaPipelines::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DeleteMediaCapturePipeline
       def self.build(context)
         unless context.config.regional_endpoint
@@ -124,6 +152,20 @@ module Aws::ChimeSDKMediaPipelines
       end
     end
 
+    class DeleteMediaPipelineKinesisVideoStreamPool
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ChimeSDKMediaPipelines::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class GetMediaCapturePipeline
       def self.build(context)
         unless context.config.regional_endpoint
@@ -153,6 +195,20 @@ module Aws::ChimeSDKMediaPipelines
     end
 
     class GetMediaPipeline
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ChimeSDKMediaPipelines::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class GetMediaPipelineKinesisVideoStreamPool
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -209,6 +265,20 @@ module Aws::ChimeSDKMediaPipelines
     end
 
     class ListMediaInsightsPipelineConfigurations
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ChimeSDKMediaPipelines::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListMediaPipelineKinesisVideoStreamPools
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -349,6 +419,20 @@ module Aws::ChimeSDKMediaPipelines
     end
 
     class UpdateMediaInsightsPipelineStatus
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ChimeSDKMediaPipelines::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UpdateMediaPipelineKinesisVideoStreamPool
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

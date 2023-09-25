@@ -52,6 +52,6 @@ require_relative 'aws-sdk-finspacedata/customizations'
 # @!group service
 module Aws::FinSpaceData
 
-  GEM_VERSION = '1.25.0'
+  GEM_VERSION = '1.26.0'
 
 end

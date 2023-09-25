@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2023-09-25)
+------------------
+
+* Feature - This release adds support for application-wide default job configurations.
+
 1.14.0 (2023-07-25)
 ------------------
 

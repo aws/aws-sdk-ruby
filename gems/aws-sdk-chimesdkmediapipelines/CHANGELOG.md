@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2023-09-25)
+------------------
+
+* Feature - Adds support for sending WebRTC audio to Amazon Kineses Video Streams.
+
 1.13.0 (2023-09-01)
 ------------------
 

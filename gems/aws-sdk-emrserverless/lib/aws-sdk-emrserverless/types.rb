@@ -91,6 +91,23 @@ module Aws::EMRServerless
     #   The specification applied to each worker type.
     #   @return [Hash<String,Types::WorkerTypeSpecification>]
     #
+    # @!attribute [rw] runtime_configuration
+    #   The [Configuration][1] specifications of an application. Each
+    #   configuration consists of a classification and properties. You use
+    #   this parameter when creating or updating an application. To see the
+    #   runtimeConfiguration object of an application, run the
+    #   [GetApplication][2] API operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_Configuration.html
+    #   [2]: https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_GetApplication.html
+    #   @return [Array<Types::Configuration>]
+    #
+    # @!attribute [rw] monitoring_configuration
+    #   The configuration setting for monitoring.
+    #   @return [Types::MonitoringConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/Application AWS API Documentation
     #
     class Application < Struct.new(
@@ -111,7 +128,9 @@ module Aws::EMRServerless
       :network_configuration,
       :architecture,
       :image_configuration,
-      :worker_type_specifications)
+      :worker_type_specifications,
+      :runtime_configuration,
+      :monitoring_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -431,6 +450,21 @@ module Aws::EMRServerless
     #   `imageConfiguration` for all worker types.
     #   @return [Hash<String,Types::WorkerTypeSpecificationInput>]
     #
+    # @!attribute [rw] runtime_configuration
+    #   The [Configuration][1] specifications to use when creating an
+    #   application. Each configuration consists of a classification and
+    #   properties. This configuration is applied to all the job runs
+    #   submitted under the application.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_Configuration.html
+    #   @return [Array<Types::Configuration>]
+    #
+    # @!attribute [rw] monitoring_configuration
+    #   The configuration setting for monitoring.
+    #   @return [Types::MonitoringConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/CreateApplicationRequest AWS API Documentation
     #
     class CreateApplicationRequest < Struct.new(
@@ -446,7 +480,9 @@ module Aws::EMRServerless
       :network_configuration,
       :architecture,
       :image_configuration,
-      :worker_type_specifications)
+      :worker_type_specifications,
+      :runtime_configuration,
+      :monitoring_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1442,6 +1478,21 @@ module Aws::EMRServerless
     #   release label to use a different release of Amazon EMR.
     #   @return [String]
     #
+    # @!attribute [rw] runtime_configuration
+    #   The [Configuration][1] specifications to use when updating an
+    #   application. Each configuration consists of a classification and
+    #   properties. This configuration is applied across all the job runs
+    #   submitted under the application.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_Configuration.html
+    #   @return [Array<Types::Configuration>]
+    #
+    # @!attribute [rw] monitoring_configuration
+    #   The configuration setting for monitoring.
+    #   @return [Types::MonitoringConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/UpdateApplicationRequest AWS API Documentation
     #
     class UpdateApplicationRequest < Struct.new(
@@ -1455,7 +1506,9 @@ module Aws::EMRServerless
       :architecture,
       :image_configuration,
       :worker_type_specifications,
-      :release_label)
+      :release_label,
+      :runtime_configuration,
+      :monitoring_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2023-09-25)
+------------------
+
+* Feature - You can now perform an exact match against the web request's JA3 fingerprint.
+
 1.68.0 (2023-09-06)
 ------------------
 

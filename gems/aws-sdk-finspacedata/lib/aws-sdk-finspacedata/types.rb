@@ -1051,7 +1051,7 @@ module Aws::FinSpaceData
     end
 
     # @!attribute [rw] user_id
-    #   The unique identifier for the user account that you want to disable.
+    #   The unique identifier for the user that you want to deactivate.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -1071,7 +1071,7 @@ module Aws::FinSpaceData
     end
 
     # @!attribute [rw] user_id
-    #   The unique identifier for the disabled user account.
+    #   The unique identifier for the deactivated user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/DisableUserResponse AWS API Documentation
@@ -1120,7 +1120,7 @@ module Aws::FinSpaceData
     end
 
     # @!attribute [rw] user_id
-    #   The unique identifier for the user account that you want to enable.
+    #   The unique identifier for the user that you want to activate.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -1140,7 +1140,7 @@ module Aws::FinSpaceData
     end
 
     # @!attribute [rw] user_id
-    #   The unique identifier for the enabled user account.
+    #   The unique identifier for the active user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/EnableUserResponse AWS API Documentation
@@ -1498,7 +1498,7 @@ module Aws::FinSpaceData
     class GetExternalDataViewAccessDetailsResponse < Struct.new(
       :credentials,
       :s3_location)
-      SENSITIVE = []
+      SENSITIVE = [:credentials]
       include Aws::Structure
     end
 
@@ -1560,7 +1560,7 @@ module Aws::FinSpaceData
     class GetProgrammaticAccessCredentialsResponse < Struct.new(
       :credentials,
       :duration_in_minutes)
-      SENSITIVE = []
+      SENSITIVE = [:credentials]
       include Aws::Structure
     end
 
@@ -1577,17 +1577,17 @@ module Aws::FinSpaceData
     end
 
     # @!attribute [rw] user_id
-    #   The unique identifier for the user account that is retrieved.
+    #   The unique identifier for the user that is retrieved.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The current status of the user account.
+    #   The current status of the user.
     #
-    #   * `CREATING` – The user account creation is in progress.
+    #   * `CREATING` – The creation is in progress.
     #
-    #   * `ENABLED` – The user account is created and is currently active.
+    #   * `ENABLED` – The user is created and is currently active.
     #
-    #   * `DISABLED` – The user account is currently inactive.
+    #   * `DISABLED` – The user is currently inactive.
     #   @return [String]
     #
     # @!attribute [rw] first_name
@@ -1636,22 +1636,22 @@ module Aws::FinSpaceData
     #   @return [String]
     #
     # @!attribute [rw] create_time
-    #   The timestamp at which the user account was created in FinSpace. The
-    #   value is determined as epoch time in milliseconds.
+    #   The timestamp at which the user was created in FinSpace. The value
+    #   is determined as epoch time in milliseconds.
     #   @return [Integer]
     #
     # @!attribute [rw] last_enabled_time
-    #   Describes the last time the user account was enabled. The value is
+    #   Describes the last time the user was activated. The value is
     #   determined as epoch time in milliseconds.
     #   @return [Integer]
     #
     # @!attribute [rw] last_disabled_time
-    #   Describes the last time the user account was disabled. The value is
+    #   Describes the last time the user was deactivated. The value is
     #   determined as epoch time in milliseconds.
     #   @return [Integer]
     #
     # @!attribute [rw] last_modified_time
-    #   Describes the last time the user account was updated. The value is
+    #   Describes the last time the user details were updated. The value is
     #   determined as epoch time in milliseconds.
     #   @return [Integer]
     #
@@ -2004,7 +2004,7 @@ module Aws::FinSpaceData
     end
 
     # @!attribute [rw] users
-    #   A list of all the user accounts.
+    #   A list of all the users.
     #   @return [Array<Types::User>]
     #
     # @!attribute [rw] next_token
@@ -2075,12 +2075,12 @@ module Aws::FinSpaceData
     #   @return [Integer]
     #
     # @!attribute [rw] membership_status
-    #   Indicates the status of the user account within a permission group.
+    #   Indicates the status of the user within a permission group.
     #
-    #   * `ADDITION_IN_PROGRESS` – The user account is currently being added
-    #     to the permission group.
+    #   * `ADDITION_IN_PROGRESS` – The user is currently being added to the
+    #     permission group.
     #
-    #   * `ADDITION_SUCCESS` – The user account is successfully added to the
+    #   * `ADDITION_SUCCESS` – The user is successfully added to the
     #     permission group.
     #
     #   * `REMOVAL_IN_PROGRESS` – The user is currently being removed from
@@ -2101,7 +2101,7 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
-    # The structure of a permission group associated with a user account.
+    # The structure of a permission group associated with a user.
     #
     # @!attribute [rw] permission_group_id
     #   The unique identifier for the permission group.
@@ -2112,12 +2112,12 @@ module Aws::FinSpaceData
     #   @return [String]
     #
     # @!attribute [rw] membership_status
-    #   Indicates the status of the user account within a permission group.
+    #   Indicates the status of the user within a permission group.
     #
-    #   * `ADDITION_IN_PROGRESS` – The user account is currently being added
-    #     to the permission group.
+    #   * `ADDITION_IN_PROGRESS` – The user is currently being added to the
+    #     permission group.
     #
-    #   * `ADDITION_SUCCESS` – The user account is successfully added to the
+    #   * `ADDITION_SUCCESS` – The user is successfully added to the
     #     permission group.
     #
     #   * `REMOVAL_IN_PROGRESS` – The user is currently being removed from
@@ -2188,8 +2188,8 @@ module Aws::FinSpaceData
     #   @return [String]
     #
     # @!attribute [rw] temporary_password
-    #   A randomly generated temporary password for the requested user
-    #   account. This password expires in 7 days.
+    #   A randomly generated temporary password for the requested user. This
+    #   password expires in 7 days.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/ResetUserPasswordResponse AWS API Documentation
@@ -2562,7 +2562,7 @@ module Aws::FinSpaceData
     end
 
     # @!attribute [rw] user_id
-    #   The unique identifier for the user account to update.
+    #   The unique identifier for the user that you want to update.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -2623,7 +2623,7 @@ module Aws::FinSpaceData
     end
 
     # @!attribute [rw] user_id
-    #   The unique identifier of the updated user account.
+    #   The unique identifier of the updated user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/UpdateUserResponse AWS API Documentation
@@ -2634,20 +2634,20 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
-    # The details of the user account.
+    # The details of the user.
     #
     # @!attribute [rw] user_id
     #   The unique identifier for the user.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The current status of the user account.
+    #   The current status of the user.
     #
-    #   * `CREATING` – The user account creation is in progress.
+    #   * `CREATING` – The user creation is in progress.
     #
-    #   * `ENABLED` – The user account is created and is currently active.
+    #   * `ENABLED` – The user is created and is currently active.
     #
-    #   * `DISABLED` – The user account is currently inactive.
+    #   * `DISABLED` – The user is currently inactive.
     #   @return [String]
     #
     # @!attribute [rw] first_name
@@ -2692,22 +2692,22 @@ module Aws::FinSpaceData
     #   @return [String]
     #
     # @!attribute [rw] create_time
-    #   The timestamp at which the user account was created in FinSpace. The
-    #   value is determined as epoch time in milliseconds.
+    #   The timestamp at which the user was created in FinSpace. The value
+    #   is determined as epoch time in milliseconds.
     #   @return [Integer]
     #
     # @!attribute [rw] last_enabled_time
-    #   Describes the last time the user account was enabled. The value is
+    #   Describes the last time the user was activated. The value is
     #   determined as epoch time in milliseconds.
     #   @return [Integer]
     #
     # @!attribute [rw] last_disabled_time
-    #   Describes the last time the user account was disabled. The value is
+    #   Describes the last time the user was deactivated. The value is
     #   determined as epoch time in milliseconds.
     #   @return [Integer]
     #
     # @!attribute [rw] last_modified_time
-    #   Describes the last time the user account was updated. The value is
+    #   Describes the last time the user was updated. The value is
     #   determined as epoch time in milliseconds.
     #   @return [Integer]
     #
@@ -2736,20 +2736,20 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
-    # The structure of a user account associated with a permission group.
+    # The structure of a user associated with a permission group.
     #
     # @!attribute [rw] user_id
     #   The unique identifier for the user.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The current status of the user account.
+    #   The current status of the user.
     #
-    #   * `CREATING` – The user account creation is in progress.
+    #   * `CREATING` – The user creation is in progress.
     #
-    #   * `ENABLED` – The user account is created and is currently active.
+    #   * `ENABLED` – The user is created and is currently active.
     #
-    #   * `DISABLED` – The user account is currently inactive.
+    #   * `DISABLED` – The user is currently inactive.
     #   @return [String]
     #
     # @!attribute [rw] first_name
@@ -2790,12 +2790,12 @@ module Aws::FinSpaceData
     #   @return [String]
     #
     # @!attribute [rw] membership_status
-    #   Indicates the status of the user account within a permission group.
+    #   Indicates the status of the user within a permission group.
     #
-    #   * `ADDITION_IN_PROGRESS` – The user account is currently being added
-    #     to the permission group.
+    #   * `ADDITION_IN_PROGRESS` – The user is currently being added to the
+    #     permission group.
     #
-    #   * `ADDITION_SUCCESS` – The user account is successfully added to the
+    #   * `ADDITION_SUCCESS` – The user is successfully added to the
     #     permission group.
     #
     #   * `REMOVAL_IN_PROGRESS` – The user is currently being removed from

@@ -580,6 +580,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -640,6 +643,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -702,6 +708,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -761,6 +770,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -906,6 +918,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -1225,6 +1240,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -1436,25 +1454,25 @@ module Aws::WAFV2
     #
     # @option params [required, Array<String>] :addresses
     #   Contains an array of strings that specifies zero or more IP addresses
-    #   or blocks of IP addresses. All addresses must be specified using
-    #   Classless Inter-Domain Routing (CIDR) notation. WAF supports all IPv4
-    #   and IPv6 CIDR ranges except for `/0`.
+    #   or blocks of IP addresses that you want WAF to inspect for in incoming
+    #   requests. All addresses must be specified using Classless Inter-Domain
+    #   Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges
+    #   except for `/0`.
     #
     #   Example address strings:
     #
-    #   * To configure WAF to allow, block, or count requests that originated
-    #     from the IP address 192.0.2.44, specify `192.0.2.44/32`.
+    #   * For requests that originated from the IP address 192.0.2.44, specify
+    #     `192.0.2.44/32`.
     #
-    #   * To configure WAF to allow, block, or count requests that originated
-    #     from IP addresses from 192.0.2.0 to 192.0.2.255, specify
-    #     `192.0.2.0/24`.
+    #   * For requests that originated from IP addresses from 192.0.2.0 to
+    #     192.0.2.255, specify `192.0.2.0/24`.
     #
-    #   * To configure WAF to allow, block, or count requests that originated
-    #     from the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify
+    #   * For requests that originated from the IP address
+    #     1111:0000:0000:0000:0000:0000:0000:0111, specify
     #     `1111:0000:0000:0000:0000:0000:0000:0111/128`.
     #
-    #   * To configure WAF to allow, block, or count requests that originated
-    #     from IP addresses 1111:0000:0000:0000:0000:0000:0000:0000 to
+    #   * For requests that originated from IP addresses
+    #     1111:0000:0000:0000:0000:0000:0000:0000 to
     #     1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
     #     `1111:0000:0000:0000:0000:0000:0000:0000/64`.
     #
@@ -1641,9 +1659,9 @@ module Aws::WAFV2
     #
     # @option params [Array<Types::Rule>] :rules
     #   The Rule statements used to identify the web requests that you want to
-    #   allow, block, or count. Each rule includes one top-level statement
-    #   that WAF uses to identify matching web requests, and parameters that
-    #   govern how WAF handles them.
+    #   manage. Each rule includes one top-level statement that WAF uses to
+    #   identify matching web requests, and parameters that govern how WAF
+    #   handles them.
     #
     # @option params [required, Types::VisibilityConfig] :visibility_config
     #   Defines and enables Amazon CloudWatch metrics and web request sample
@@ -1740,6 +1758,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -1800,6 +1821,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -1862,6 +1886,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -1921,6 +1948,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -2066,6 +2096,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -2386,6 +2419,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -2524,16 +2560,17 @@ module Aws::WAFV2
     # Creates a WebACL per the specifications provided.
     #
     # A web ACL defines a collection of rules to use to inspect and control
-    # web requests. Each rule has an action defined (allow, block, or count)
-    # for requests that match the statement of the rule. In the web ACL, you
-    # assign a default action to take (allow, block) for any request that
-    # does not match any of the rules. The rules in a web ACL can be a
-    # combination of the types Rule, RuleGroup, and managed rule group. You
-    # can associate a web ACL with one or more Amazon Web Services resources
-    # to protect. The resources can be an Amazon CloudFront distribution, an
-    # Amazon API Gateway REST API, an Application Load Balancer, an AppSync
-    # GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
-    # Amazon Web Services Verified Access instance.
+    # web requests. Each rule has a statement that defines what to look for
+    # in web requests and an action that WAF applies to requests that match
+    # the statement. In the web ACL, you assign a default action to take
+    # (allow, block) for any request that does not match any of the rules.
+    # The rules in a web ACL can be a combination of the types Rule,
+    # RuleGroup, and managed rule group. You can associate a web ACL with
+    # one or more Amazon Web Services resources to protect. The resources
+    # can be an Amazon CloudFront distribution, an Amazon API Gateway REST
+    # API, an Application Load Balancer, an AppSync GraphQL API, an Amazon
+    # Cognito user pool, an App Runner service, or an Amazon Web Services
+    # Verified Access instance.
     #
     # @option params [required, String] :name
     #   The name of the web ACL. You cannot change the name of a web ACL after
@@ -2563,9 +2600,9 @@ module Aws::WAFV2
     #
     # @option params [Array<Types::Rule>] :rules
     #   The Rule statements used to identify the web requests that you want to
-    #   allow, block, or count. Each rule includes one top-level statement
-    #   that WAF uses to identify matching web requests, and parameters that
-    #   govern how WAF handles them.
+    #   manage. Each rule includes one top-level statement that WAF uses to
+    #   identify matching web requests, and parameters that govern how WAF
+    #   handles them.
     #
     # @option params [required, Types::VisibilityConfig] :visibility_config
     #   Defines and enables Amazon CloudWatch metrics and web request sample
@@ -2729,6 +2766,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -2789,6 +2829,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -2851,6 +2894,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -2910,6 +2956,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -3055,6 +3104,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -3374,6 +3426,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -4337,6 +4392,7 @@ module Aws::WAFV2
     #   resp.logging_configuration.redacted_fields[0].cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.logging_configuration.redacted_fields[0].cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.logging_configuration.redacted_fields[0].header_order.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.logging_configuration.redacted_fields[0].ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.logging_configuration.managed_by_firewall_manager #=> Boolean
     #   resp.logging_configuration.logging_filter.filters #=> Array
     #   resp.logging_configuration.logging_filter.filters[0].behavior #=> String, one of "KEEP", "DROP"
@@ -4736,6 +4792,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.header_order.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.byte_match_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.byte_match_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.byte_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -4761,6 +4818,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.header_order.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.sqli_match_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.sqli_match_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -4786,6 +4844,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.header_order.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.xss_match_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.xss_match_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.xss_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -4810,6 +4869,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.header_order.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.size_constraint_statement.comparison_operator #=> String, one of "EQ", "NE", "LE", "LT", "GE", "GT"
     #   resp.rule_group.rules[0].statement.size_constraint_statement.size #=> Integer
     #   resp.rule_group.rules[0].statement.size_constraint_statement.text_transformations #=> Array
@@ -4867,6 +4927,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.header_order.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -5008,6 +5069,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.header_order.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.regex_match_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.regex_match_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.regex_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -5616,6 +5678,7 @@ module Aws::WAFV2
     #   resp.logging_configurations[0].redacted_fields[0].cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.logging_configurations[0].redacted_fields[0].cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.logging_configurations[0].redacted_fields[0].header_order.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.logging_configurations[0].redacted_fields[0].ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.logging_configurations[0].managed_by_firewall_manager #=> Boolean
     #   resp.logging_configurations[0].logging_filter.filters #=> Array
     #   resp.logging_configurations[0].logging_filter.filters[0].behavior #=> String, one of "KEEP", "DROP"
@@ -6178,6 +6241,9 @@ module Aws::WAFV2
     #           header_order: {
     #             oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #           },
+    #           ja3_fingerprint: {
+    #             fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #           },
     #         },
     #       ],
     #       managed_by_firewall_manager: false,
@@ -6230,6 +6296,7 @@ module Aws::WAFV2
     #   resp.logging_configuration.redacted_fields[0].cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.logging_configuration.redacted_fields[0].cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.logging_configuration.redacted_fields[0].header_order.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.logging_configuration.redacted_fields[0].ja3_fingerprint.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.logging_configuration.managed_by_firewall_manager #=> Boolean
     #   resp.logging_configuration.logging_filter.filters #=> Array
     #   resp.logging_configuration.logging_filter.filters[0].behavior #=> String, one of "KEEP", "DROP"
@@ -6546,25 +6613,25 @@ module Aws::WAFV2
     #
     # @option params [required, Array<String>] :addresses
     #   Contains an array of strings that specifies zero or more IP addresses
-    #   or blocks of IP addresses. All addresses must be specified using
-    #   Classless Inter-Domain Routing (CIDR) notation. WAF supports all IPv4
-    #   and IPv6 CIDR ranges except for `/0`.
+    #   or blocks of IP addresses that you want WAF to inspect for in incoming
+    #   requests. All addresses must be specified using Classless Inter-Domain
+    #   Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges
+    #   except for `/0`.
     #
     #   Example address strings:
     #
-    #   * To configure WAF to allow, block, or count requests that originated
-    #     from the IP address 192.0.2.44, specify `192.0.2.44/32`.
+    #   * For requests that originated from the IP address 192.0.2.44, specify
+    #     `192.0.2.44/32`.
     #
-    #   * To configure WAF to allow, block, or count requests that originated
-    #     from IP addresses from 192.0.2.0 to 192.0.2.255, specify
-    #     `192.0.2.0/24`.
+    #   * For requests that originated from IP addresses from 192.0.2.0 to
+    #     192.0.2.255, specify `192.0.2.0/24`.
     #
-    #   * To configure WAF to allow, block, or count requests that originated
-    #     from the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify
+    #   * For requests that originated from the IP address
+    #     1111:0000:0000:0000:0000:0000:0000:0111, specify
     #     `1111:0000:0000:0000:0000:0000:0000:0111/128`.
     #
-    #   * To configure WAF to allow, block, or count requests that originated
-    #     from IP addresses 1111:0000:0000:0000:0000:0000:0000:0000 to
+    #   * For requests that originated from IP addresses
+    #     1111:0000:0000:0000:0000:0000:0000:0000 to
     #     1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
     #     `1111:0000:0000:0000:0000:0000:0000:0000/64`.
     #
@@ -6886,9 +6953,9 @@ module Aws::WAFV2
     #
     # @option params [Array<Types::Rule>] :rules
     #   The Rule statements used to identify the web requests that you want to
-    #   allow, block, or count. Each rule includes one top-level statement
-    #   that WAF uses to identify matching web requests, and parameters that
-    #   govern how WAF handles them.
+    #   manage. Each rule includes one top-level statement that WAF uses to
+    #   identify matching web requests, and parameters that govern how WAF
+    #   handles them.
     #
     # @option params [required, Types::VisibilityConfig] :visibility_config
     #   Defines and enables Amazon CloudWatch metrics and web request sample
@@ -6992,6 +7059,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -7052,6 +7122,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -7114,6 +7187,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -7173,6 +7249,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -7318,6 +7397,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -7638,6 +7720,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -7797,16 +7882,17 @@ module Aws::WAFV2
     # Generally, any inconsistencies of this type last only a few seconds.
     #
     # A web ACL defines a collection of rules to use to inspect and control
-    # web requests. Each rule has an action defined (allow, block, or count)
-    # for requests that match the statement of the rule. In the web ACL, you
-    # assign a default action to take (allow, block) for any request that
-    # does not match any of the rules. The rules in a web ACL can be a
-    # combination of the types Rule, RuleGroup, and managed rule group. You
-    # can associate a web ACL with one or more Amazon Web Services resources
-    # to protect. The resources can be an Amazon CloudFront distribution, an
-    # Amazon API Gateway REST API, an Application Load Balancer, an AppSync
-    # GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
-    # Amazon Web Services Verified Access instance.
+    # web requests. Each rule has a statement that defines what to look for
+    # in web requests and an action that WAF applies to requests that match
+    # the statement. In the web ACL, you assign a default action to take
+    # (allow, block) for any request that does not match any of the rules.
+    # The rules in a web ACL can be a combination of the types Rule,
+    # RuleGroup, and managed rule group. You can associate a web ACL with
+    # one or more Amazon Web Services resources to protect. The resources
+    # can be an Amazon CloudFront distribution, an Amazon API Gateway REST
+    # API, an Application Load Balancer, an AppSync GraphQL API, an Amazon
+    # Cognito user pool, an App Runner service, or an Amazon Web Services
+    # Verified Access instance.
     #
     # @option params [required, String] :name
     #   The name of the web ACL. You cannot change the name of a web ACL after
@@ -7841,9 +7927,9 @@ module Aws::WAFV2
     #
     # @option params [Array<Types::Rule>] :rules
     #   The Rule statements used to identify the web requests that you want to
-    #   allow, block, or count. Each rule includes one top-level statement
-    #   that WAF uses to identify matching web requests, and parameters that
-    #   govern how WAF handles them.
+    #   manage. Each rule includes one top-level statement that WAF uses to
+    #   identify matching web requests, and parameters that govern how WAF
+    #   handles them.
     #
     # @option params [required, Types::VisibilityConfig] :visibility_config
     #   Defines and enables Amazon CloudWatch metrics and web request sample
@@ -8015,6 +8101,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -8075,6 +8164,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -8137,6 +8229,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -8196,6 +8291,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -8341,6 +8439,9 @@ module Aws::WAFV2
     #               },
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -8661,6 +8762,9 @@ module Aws::WAFV2
     #               header_order: {
     #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
+    #               ja3_fingerprint: {
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -8818,7 +8922,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

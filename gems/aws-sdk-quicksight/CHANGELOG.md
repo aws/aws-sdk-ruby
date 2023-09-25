@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2023-09-25)
+------------------
+
+* Feature - Added ability to tag users upon creation.
+
 1.90.0 (2023-09-11)
 ------------------
 

@@ -1122,6 +1122,137 @@ module Aws::ChimeSDKMediaPipelines
       req.send_request(options)
     end
 
+    # Creates an Kinesis video stream pool for the media pipeline.
+    #
+    # @option params [required, Types::KinesisVideoStreamConfiguration] :stream_configuration
+    #   The configuration settings for the video stream.
+    #
+    # @option params [required, String] :pool_name
+    #   The name of the video stream pool.
+    #
+    # @option params [String] :client_request_token
+    #   The token assigned to the client making the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags assigned to the video stream pool.
+    #
+    # @return [Types::CreateMediaPipelineKinesisVideoStreamPoolResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMediaPipelineKinesisVideoStreamPoolResponse#kinesis_video_stream_pool_configuration #kinesis_video_stream_pool_configuration} => Types::KinesisVideoStreamPoolConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_media_pipeline_kinesis_video_stream_pool({
+    #     stream_configuration: { # required
+    #       region: "AwsRegion", # required
+    #       data_retention_in_hours: 1,
+    #     },
+    #     pool_name: "KinesisVideoStreamPoolName", # required
+    #     client_request_token: "ClientRequestToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.kinesis_video_stream_pool_configuration.pool_arn #=> String
+    #   resp.kinesis_video_stream_pool_configuration.pool_name #=> String
+    #   resp.kinesis_video_stream_pool_configuration.pool_id #=> String
+    #   resp.kinesis_video_stream_pool_configuration.pool_status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.kinesis_video_stream_pool_configuration.pool_size #=> Integer
+    #   resp.kinesis_video_stream_pool_configuration.stream_configuration.region #=> String
+    #   resp.kinesis_video_stream_pool_configuration.stream_configuration.data_retention_in_hours #=> Integer
+    #   resp.kinesis_video_stream_pool_configuration.created_timestamp #=> Time
+    #   resp.kinesis_video_stream_pool_configuration.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/CreateMediaPipelineKinesisVideoStreamPool AWS API Documentation
+    #
+    # @overload create_media_pipeline_kinesis_video_stream_pool(params = {})
+    # @param [Hash] params ({})
+    def create_media_pipeline_kinesis_video_stream_pool(params = {}, options = {})
+      req = build_request(:create_media_pipeline_kinesis_video_stream_pool, params)
+      req.send_request(options)
+    end
+
+    # Creates a streaming media pipeline.
+    #
+    # @option params [required, Array<Types::MediaStreamSource>] :sources
+    #   The data sources for the media pipeline.
+    #
+    # @option params [required, Array<Types::MediaStreamSink>] :sinks
+    #   The data sink for the media pipeline.
+    #
+    # @option params [String] :client_request_token
+    #   The token assigned to the client making the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags assigned to the media pipeline.
+    #
+    # @return [Types::CreateMediaStreamPipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMediaStreamPipelineResponse#media_stream_pipeline #media_stream_pipeline} => Types::MediaStreamPipeline
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_media_stream_pipeline({
+    #     sources: [ # required
+    #       {
+    #         source_type: "ChimeSdkMeeting", # required, accepts ChimeSdkMeeting
+    #         source_arn: "Arn", # required
+    #       },
+    #     ],
+    #     sinks: [ # required
+    #       {
+    #         sink_arn: "Arn", # required
+    #         sink_type: "KinesisVideoStreamPool", # required, accepts KinesisVideoStreamPool
+    #         reserved_stream_capacity: 1, # required
+    #         media_stream_type: "MixedAudio", # required, accepts MixedAudio, IndividualAudio
+    #       },
+    #     ],
+    #     client_request_token: "ClientRequestToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.media_stream_pipeline.media_pipeline_id #=> String
+    #   resp.media_stream_pipeline.media_pipeline_arn #=> String
+    #   resp.media_stream_pipeline.created_timestamp #=> Time
+    #   resp.media_stream_pipeline.updated_timestamp #=> Time
+    #   resp.media_stream_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused", "NotStarted"
+    #   resp.media_stream_pipeline.sources #=> Array
+    #   resp.media_stream_pipeline.sources[0].source_type #=> String, one of "ChimeSdkMeeting"
+    #   resp.media_stream_pipeline.sources[0].source_arn #=> String
+    #   resp.media_stream_pipeline.sinks #=> Array
+    #   resp.media_stream_pipeline.sinks[0].sink_arn #=> String
+    #   resp.media_stream_pipeline.sinks[0].sink_type #=> String, one of "KinesisVideoStreamPool"
+    #   resp.media_stream_pipeline.sinks[0].reserved_stream_capacity #=> Integer
+    #   resp.media_stream_pipeline.sinks[0].media_stream_type #=> String, one of "MixedAudio", "IndividualAudio"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/CreateMediaStreamPipeline AWS API Documentation
+    #
+    # @overload create_media_stream_pipeline(params = {})
+    # @param [Hash] params ({})
+    def create_media_stream_pipeline(params = {}, options = {})
+      req = build_request(:create_media_stream_pipeline, params)
+      req.send_request(options)
+    end
+
     # Deletes the media pipeline.
     #
     # @option params [required, String] :media_pipeline_id
@@ -1186,6 +1317,28 @@ module Aws::ChimeSDKMediaPipelines
     # @param [Hash] params ({})
     def delete_media_pipeline(params = {}, options = {})
       req = build_request(:delete_media_pipeline, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Kinesis video stream pool.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the pool being deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_media_pipeline_kinesis_video_stream_pool({
+    #     identifier: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/DeleteMediaPipelineKinesisVideoStreamPool AWS API Documentation
+    #
+    # @overload delete_media_pipeline_kinesis_video_stream_pool(params = {})
+    # @param [Hash] params ({})
+    def delete_media_pipeline_kinesis_video_stream_pool(params = {}, options = {})
+      req = build_request(:delete_media_pipeline_kinesis_video_stream_pool, params)
       req.send_request(options)
     end
 
@@ -1475,6 +1628,19 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_pipeline.media_insights_pipeline.element_statuses #=> Array
     #   resp.media_pipeline.media_insights_pipeline.element_statuses[0].type #=> String, one of "AmazonTranscribeCallAnalyticsProcessor", "VoiceAnalyticsProcessor", "AmazonTranscribeProcessor", "KinesisDataStreamSink", "LambdaFunctionSink", "SqsQueueSink", "SnsTopicSink", "S3RecordingSink", "VoiceEnhancementSink"
     #   resp.media_pipeline.media_insights_pipeline.element_statuses[0].status #=> String, one of "NotStarted", "NotSupported", "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused"
+    #   resp.media_pipeline.media_stream_pipeline.media_pipeline_id #=> String
+    #   resp.media_pipeline.media_stream_pipeline.media_pipeline_arn #=> String
+    #   resp.media_pipeline.media_stream_pipeline.created_timestamp #=> Time
+    #   resp.media_pipeline.media_stream_pipeline.updated_timestamp #=> Time
+    #   resp.media_pipeline.media_stream_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused", "NotStarted"
+    #   resp.media_pipeline.media_stream_pipeline.sources #=> Array
+    #   resp.media_pipeline.media_stream_pipeline.sources[0].source_type #=> String, one of "ChimeSdkMeeting"
+    #   resp.media_pipeline.media_stream_pipeline.sources[0].source_arn #=> String
+    #   resp.media_pipeline.media_stream_pipeline.sinks #=> Array
+    #   resp.media_pipeline.media_stream_pipeline.sinks[0].sink_arn #=> String
+    #   resp.media_pipeline.media_stream_pipeline.sinks[0].sink_type #=> String, one of "KinesisVideoStreamPool"
+    #   resp.media_pipeline.media_stream_pipeline.sinks[0].reserved_stream_capacity #=> Integer
+    #   resp.media_pipeline.media_stream_pipeline.sinks[0].media_stream_type #=> String, one of "MixedAudio", "IndividualAudio"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/GetMediaPipeline AWS API Documentation
     #
@@ -1482,6 +1648,42 @@ module Aws::ChimeSDKMediaPipelines
     # @param [Hash] params ({})
     def get_media_pipeline(params = {}, options = {})
       req = build_request(:get_media_pipeline, params)
+      req.send_request(options)
+    end
+
+    # Gets an Kinesis video stream pool.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the video stream pool.
+    #
+    # @return [Types::GetMediaPipelineKinesisVideoStreamPoolResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMediaPipelineKinesisVideoStreamPoolResponse#kinesis_video_stream_pool_configuration #kinesis_video_stream_pool_configuration} => Types::KinesisVideoStreamPoolConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_media_pipeline_kinesis_video_stream_pool({
+    #     identifier: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.kinesis_video_stream_pool_configuration.pool_arn #=> String
+    #   resp.kinesis_video_stream_pool_configuration.pool_name #=> String
+    #   resp.kinesis_video_stream_pool_configuration.pool_id #=> String
+    #   resp.kinesis_video_stream_pool_configuration.pool_status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.kinesis_video_stream_pool_configuration.pool_size #=> Integer
+    #   resp.kinesis_video_stream_pool_configuration.stream_configuration.region #=> String
+    #   resp.kinesis_video_stream_pool_configuration.stream_configuration.data_retention_in_hours #=> Integer
+    #   resp.kinesis_video_stream_pool_configuration.created_timestamp #=> Time
+    #   resp.kinesis_video_stream_pool_configuration.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/GetMediaPipelineKinesisVideoStreamPool AWS API Documentation
+    #
+    # @overload get_media_pipeline_kinesis_video_stream_pool(params = {})
+    # @param [Hash] params ({})
+    def get_media_pipeline_kinesis_video_stream_pool(params = {}, options = {})
+      req = build_request(:get_media_pipeline_kinesis_video_stream_pool, params)
       req.send_request(options)
     end
 
@@ -1528,7 +1730,7 @@ module Aws::ChimeSDKMediaPipelines
     #   include the ID and ARN of the media insights pipeline.
     #
     # @option params [required, String] :voice_tone_analysis_task_id
-    #   The ID of the voice tone anlysis task.
+    #   The ID of the voice tone analysis task.
     #
     # @return [Types::GetVoiceToneAnalysisTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1632,6 +1834,45 @@ module Aws::ChimeSDKMediaPipelines
     # @param [Hash] params ({})
     def list_media_insights_pipeline_configurations(params = {}, options = {})
       req = build_request(:list_media_insights_pipeline_configurations, params)
+      req.send_request(options)
+    end
+
+    # Lists the video stream pools in the media pipeline.
+    #
+    # @option params [String] :next_token
+    #   The token used to return the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @return [Types::ListMediaPipelineKinesisVideoStreamPoolsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMediaPipelineKinesisVideoStreamPoolsResponse#kinesis_video_stream_pools #kinesis_video_stream_pools} => Array&lt;Types::KinesisVideoStreamPoolSummary&gt;
+    #   * {Types::ListMediaPipelineKinesisVideoStreamPoolsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_media_pipeline_kinesis_video_stream_pools({
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.kinesis_video_stream_pools #=> Array
+    #   resp.kinesis_video_stream_pools[0].pool_name #=> String
+    #   resp.kinesis_video_stream_pools[0].pool_id #=> String
+    #   resp.kinesis_video_stream_pools[0].pool_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/ListMediaPipelineKinesisVideoStreamPools AWS API Documentation
+    #
+    # @overload list_media_pipeline_kinesis_video_stream_pools(params = {})
+    # @param [Hash] params ({})
+    def list_media_pipeline_kinesis_video_stream_pools(params = {}, options = {})
+      req = build_request(:list_media_pipeline_kinesis_video_stream_pools, params)
       req.send_request(options)
     end
 
@@ -2164,6 +2405,48 @@ module Aws::ChimeSDKMediaPipelines
       req.send_request(options)
     end
 
+    # Updates an Kinesis video stream pool in a media pipeline.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the video stream pool.
+    #
+    # @option params [Types::KinesisVideoStreamConfigurationUpdate] :stream_configuration
+    #   The configuration settings for the video stream.
+    #
+    # @return [Types::UpdateMediaPipelineKinesisVideoStreamPoolResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateMediaPipelineKinesisVideoStreamPoolResponse#kinesis_video_stream_pool_configuration #kinesis_video_stream_pool_configuration} => Types::KinesisVideoStreamPoolConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_media_pipeline_kinesis_video_stream_pool({
+    #     identifier: "NonEmptyString", # required
+    #     stream_configuration: {
+    #       data_retention_in_hours: 1,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.kinesis_video_stream_pool_configuration.pool_arn #=> String
+    #   resp.kinesis_video_stream_pool_configuration.pool_name #=> String
+    #   resp.kinesis_video_stream_pool_configuration.pool_id #=> String
+    #   resp.kinesis_video_stream_pool_configuration.pool_status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.kinesis_video_stream_pool_configuration.pool_size #=> Integer
+    #   resp.kinesis_video_stream_pool_configuration.stream_configuration.region #=> String
+    #   resp.kinesis_video_stream_pool_configuration.stream_configuration.data_retention_in_hours #=> Integer
+    #   resp.kinesis_video_stream_pool_configuration.created_timestamp #=> Time
+    #   resp.kinesis_video_stream_pool_configuration.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/UpdateMediaPipelineKinesisVideoStreamPool AWS API Documentation
+    #
+    # @overload update_media_pipeline_kinesis_video_stream_pool(params = {})
+    # @param [Hash] params ({})
+    def update_media_pipeline_kinesis_video_stream_pool(params = {}, options = {})
+      req = build_request(:update_media_pipeline_kinesis_video_stream_pool, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2177,7 +2460,7 @@ module Aws::ChimeSDKMediaPipelines
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmediapipelines'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2023-09-25)
+------------------
+
+* Feature - Adding sensitive trait to attributes. Change max SessionDuration from 720 to 60. Correct "ApiAccess" attribute to "apiAccess" to maintain consistency between APIs.
+
 1.25.0 (2023-09-19)
 ------------------
 
