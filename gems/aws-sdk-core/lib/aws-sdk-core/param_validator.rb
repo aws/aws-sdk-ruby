@@ -6,7 +6,7 @@ module Aws
 
     include Seahorse::Model::Shapes
 
-    EXPECTED_GOT = "expected %s to be %s, got value %s (class: %s) instead."
+    EXPECTED_GOT = "expected %s to be %s (class: %s) instead."
 
     # @param [Seahorse::Model::Shapes::ShapeRef] rules
     # @param [Hash] params
@@ -230,7 +230,7 @@ module Aws
     end
 
     def expected_got(context, expected, got)
-      EXPECTED_GOT % [context, expected, got.inspect, got.class.name]
+      EXPECTED_GOT % [context, expected, got.class.name]
     end
 
   end
