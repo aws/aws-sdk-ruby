@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - (Breaking change) Simple attributes support for item data returned in `ConditionalCheckFailedException`.
+
 1.93.1 (2023-08-07)
 ------------------
 

@@ -116,9 +116,16 @@ their types specified, e.g. `{ s: 'abc' }` instead of simply
 
           def call(context)
             context.params = translate_input(context)
-            @handler.call(context).on(200) do |response|
+            resp = @handler.call(context)
+            resp.on(200) do |response|
               response.data = translate_output(response)
             end
+            resp.on(400) do |response|
+              if response.error.is_a?(Errors::ConditionalCheckFailedException)
+                response.error.data.item = translate_error(response).item
+              end
+            end
+            resp
           end
 
           private
@@ -137,6 +144,13 @@ their types specified, e.g. `{ s: 'abc' }` instead of simply
             else
               response.data
             end
+          end
+
+          def translate_error(response)
+            shape = response.context.operation.errors.find do |e|
+              response.error.data.is_a?(e.shape.struct_class)
+            end
+            ValueTranslator.new(shape, :unmarshal).apply(response.error.data)
           end
 
         end

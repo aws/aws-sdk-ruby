@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Move raising of response errors to be later in the call stack.
+
 3.183.1 (2023-09-25)
 ------------------
 
