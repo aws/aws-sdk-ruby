@@ -72,10 +72,14 @@ module Aws::LakeFormation
             Aws::LakeFormation::Endpoints::CreateDataCellsFilter.build(context)
           when :create_lf_tag
             Aws::LakeFormation::Endpoints::CreateLFTag.build(context)
+          when :create_lake_formation_opt_in
+            Aws::LakeFormation::Endpoints::CreateLakeFormationOptIn.build(context)
           when :delete_data_cells_filter
             Aws::LakeFormation::Endpoints::DeleteDataCellsFilter.build(context)
           when :delete_lf_tag
             Aws::LakeFormation::Endpoints::DeleteLFTag.build(context)
+          when :delete_lake_formation_opt_in
+            Aws::LakeFormation::Endpoints::DeleteLakeFormationOptIn.build(context)
           when :delete_objects_on_cancel
             Aws::LakeFormation::Endpoints::DeleteObjectsOnCancel.build(context)
           when :deregister_resource
@@ -116,6 +120,8 @@ module Aws::LakeFormation
             Aws::LakeFormation::Endpoints::ListDataCellsFilter.build(context)
           when :list_lf_tags
             Aws::LakeFormation::Endpoints::ListLFTags.build(context)
+          when :list_lake_formation_opt_ins
+            Aws::LakeFormation::Endpoints::ListLakeFormationOptIns.build(context)
           when :list_permissions
             Aws::LakeFormation::Endpoints::ListPermissions.build(context)
           when :list_resources

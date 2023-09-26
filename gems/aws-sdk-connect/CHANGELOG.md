@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.127.0 (2023-09-26)
+------------------
+
+* Feature - This release updates a set of Amazon Connect APIs that provides the ability to integrate third party applications in the Amazon Connect agent workspace.
+
 1.126.0 (2023-09-15)
 ------------------
 

@@ -299,6 +299,29 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # A third party application's metadata.
+    #
+    # @!attribute [rw] namespace
+    #   Namespace of the application that you want to give access to.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_permissions
+    #   The permissions that the agent is granted on the application. Only
+    #   the `ACCESS` permission is supported.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Application AWS API Documentation
+    #
+    class Application < Struct.new(
+      :namespace,
+      :application_permissions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This action must be set if `TriggerEventSource` is one of the
     # following values: `OnPostCallAnalysisAvailable` \|
     # `OnRealTimeCallAnalysisAvailable` \| `OnPostChatAnalysisAvailable`.
@@ -1948,7 +1971,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the quick connect.
+    #   A unique name of the quick connect.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2199,6 +2222,14 @@ module Aws::Connect
     #   `RoutingProfile`
     #   @return [Array<String>]
     #
+    # @!attribute [rw] applications
+    #   This API is in preview release for Amazon Connect and is subject to
+    #   change.
+    #
+    #   A list of third party applications that the security profile will
+    #   give access to.
+    #   @return [Array<Types::Application>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateSecurityProfileRequest AWS API Documentation
     #
     class CreateSecurityProfileRequest < Struct.new(
@@ -2208,7 +2239,8 @@ module Aws::Connect
       :instance_id,
       :tags,
       :allowed_access_control_tags,
-      :tag_restricted_resources)
+      :tag_restricted_resources,
+      :applications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8841,6 +8873,17 @@ module Aws::Connect
     #
     # @!attribute [rw] phone_number_types
     #   The type of phone number.
+    #
+    #   <note markdown="1"> We recommend using [ListPhoneNumbersV2][1] to return phone number
+    #   types. While ListPhoneNumbers returns number types `UIFN`, `SHARED`,
+    #   `THIRD_PARTY_TF`, and `THIRD_PARTY_DID`, it incorrectly lists them
+    #   as `TOLL_FREE` or `DID`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] phone_number_country_codes
@@ -9398,6 +9441,54 @@ module Aws::Connect
     #
     class ListSecurityKeysResponse < Struct.new(
       :security_keys,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_profile_id
+    #   The security profile identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The instance identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. The next set of results can
+    #   be retrieved by using the token value returned in the previous
+    #   response when making the next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfileApplicationsRequest AWS API Documentation
+    #
+    class ListSecurityProfileApplicationsRequest < Struct.new(
+      :security_profile_id,
+      :instance_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] applications
+    #   A list of the third party application's metadata.
+    #   @return [Array<Types::Application>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. The next set of results can
+    #   be retrieved by using the token value returned in the previous
+    #   response when making the next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfileApplicationsResponse AWS API Documentation
+    #
+    class ListSecurityProfileApplicationsResponse < Struct.new(
+      :applications,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -11792,14 +11883,29 @@ module Aws::Connect
     #
     # @!attribute [rw] event_bridge_action
     #   Information about the EventBridge action.
+    #
+    #   Supported only for `TriggerEventSource` values:
+    #   `OnPostCallAnalysisAvailable` \| `OnRealTimeCallAnalysisAvailable`
+    #   \| `OnPostChatAnalysisAvailable` \| `OnContactEvaluationSubmit` \|
+    #   `OnMetricDataUpdate`
     #   @return [Types::EventBridgeActionDefinition]
     #
     # @!attribute [rw] assign_contact_category_action
     #   Information about the contact category action.
+    #
+    #   Supported only for `TriggerEventSource` values:
+    #   `OnPostCallAnalysisAvailable` \| `OnRealTimeCallAnalysisAvailable`
+    #   \| `OnPostChatAnalysisAvailable` \| `OnZendeskTicketCreate` \|
+    #   `OnZendeskTicketStatusUpdate` \| `OnSalesforceCaseCreate`
     #   @return [Types::AssignContactCategoryActionDefinition]
     #
     # @!attribute [rw] send_notification_action
     #   Information about the send notification action.
+    #
+    #   Supported only for `TriggerEventSource` values:
+    #   `OnPostCallAnalysisAvailable` \| `OnRealTimeCallAnalysisAvailable`
+    #   \| `OnPostChatAnalysisAvailable` \| `OnContactEvaluationSubmit` \|
+    #   `OnMetricDataUpdate`
     #   @return [Types::SendNotificationActionDefinition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RuleAction AWS API Documentation
@@ -11866,7 +11972,8 @@ module Aws::Connect
     # The name of the event source. This field is required if
     # `TriggerEventSource` is one of the following values:
     # `OnZendeskTicketCreate` \| `OnZendeskTicketStatusUpdate` \|
-    # `OnSalesforceCaseCreate`
+    # `OnSalesforceCaseCreate` \| `OnContactEvaluationSubmit` \|
+    # `OnMetricDataUpdate`.
     #
     # @!attribute [rw] event_source_name
     #   The name of the event source.
@@ -15427,6 +15534,13 @@ module Aws::Connect
     #   restrictions to in Amazon Connect.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] applications
+    #   This API is in preview release for Amazon Connect and is subject to
+    #   change.
+    #
+    #   A list of the third party application's metadata.
+    #   @return [Array<Types::Application>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateSecurityProfileRequest AWS API Documentation
     #
     class UpdateSecurityProfileRequest < Struct.new(
@@ -15435,7 +15549,8 @@ module Aws::Connect
       :security_profile_id,
       :instance_id,
       :allowed_access_control_tags,
-      :tag_restricted_resources)
+      :tag_restricted_resources,
+      :applications)
       SENSITIVE = []
       include Aws::Structure
     end

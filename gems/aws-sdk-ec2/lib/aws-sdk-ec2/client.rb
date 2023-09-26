@@ -2895,6 +2895,7 @@ module Aws::EC2
     #   resp.verified_access_instance.tags #=> Array
     #   resp.verified_access_instance.tags[0].key #=> String
     #   resp.verified_access_instance.tags[0].value #=> String
+    #   resp.verified_access_instance.fips_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachVerifiedAccessTrustProvider AWS API Documentation
     #
@@ -5755,7 +5756,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_default_subnet({
-    #     availability_zone: "String", # required
+    #     availability_zone: "AvailabilityZoneName", # required
     #     dry_run: false,
     #     ipv_6_native: false,
     #   })
@@ -13537,6 +13538,10 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [Boolean] :fips_enabled
+    #   Choose to enable or disable support for Federal Information Processing
+    #   Standards (FIPS) on the instance.
+    #
     # @return [Types::CreateVerifiedAccessInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateVerifiedAccessInstanceResult#verified_access_instance #verified_access_instance} => Types::VerifiedAccessInstance
@@ -13558,6 +13563,7 @@ module Aws::EC2
     #     ],
     #     client_token: "String",
     #     dry_run: false,
+    #     fips_enabled: false,
     #   })
     #
     # @example Response structure
@@ -13575,6 +13581,7 @@ module Aws::EC2
     #   resp.verified_access_instance.tags #=> Array
     #   resp.verified_access_instance.tags[0].key #=> String
     #   resp.verified_access_instance.tags[0].value #=> String
+    #   resp.verified_access_instance.fips_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessInstance AWS API Documentation
     #
@@ -18173,6 +18180,7 @@ module Aws::EC2
     #   resp.verified_access_instance.tags #=> Array
     #   resp.verified_access_instance.tags[0].key #=> String
     #   resp.verified_access_instance.tags[0].value #=> String
+    #   resp.verified_access_instance.fips_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVerifiedAccessInstance AWS API Documentation
     #
@@ -34545,6 +34553,7 @@ module Aws::EC2
     #   resp.verified_access_instances[0].tags #=> Array
     #   resp.verified_access_instances[0].tags[0].key #=> String
     #   resp.verified_access_instances[0].tags[0].value #=> String
+    #   resp.verified_access_instances[0].fips_enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVerifiedAccessInstances AWS API Documentation
@@ -36879,6 +36888,7 @@ module Aws::EC2
     #   resp.verified_access_instance.tags #=> Array
     #   resp.verified_access_instance.tags[0].key #=> String
     #   resp.verified_access_instance.tags[0].value #=> String
+    #   resp.verified_access_instance.fips_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachVerifiedAccessTrustProvider AWS API Documentation
     #
@@ -48066,6 +48076,7 @@ module Aws::EC2
     #   resp.verified_access_instance.tags #=> Array
     #   resp.verified_access_instance.tags[0].key #=> String
     #   resp.verified_access_instance.tags[0].value #=> String
+    #   resp.verified_access_instance.fips_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessInstance AWS API Documentation
     #
@@ -53441,6 +53452,10 @@ module Aws::EC2
     # rule's values, no error is returned, and the output describes the
     # security group rules that were not revoked.
     #
+    # For a non-default VPC, if the values you specify do not match the
+    # existing rule's values, an `InvalidPermission.NotFound` client error
+    # is returned, and no rules are revoked.
+    #
     # Amazon Web Services recommends that you describe the security group to
     # verify that the rules were removed.
     #
@@ -56879,7 +56894,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.407.0'
+      context[:gem_version] = '1.408.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

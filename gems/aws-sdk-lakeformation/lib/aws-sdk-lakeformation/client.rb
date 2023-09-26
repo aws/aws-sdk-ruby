@@ -939,6 +939,84 @@ module Aws::LakeFormation
       req.send_request(options)
     end
 
+    # Enforce Lake Formation permissions for the given databases, tables,
+    # and principals.
+    #
+    # @option params [required, Types::DataLakePrincipal] :principal
+    #   The Lake Formation principal. Supported principals are IAM users or
+    #   IAM roles.
+    #
+    # @option params [required, Types::Resource] :resource
+    #   A structure for the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_lake_formation_opt_in({
+    #     principal: { # required
+    #       data_lake_principal_identifier: "DataLakePrincipalString",
+    #     },
+    #     resource: { # required
+    #       catalog: {
+    #       },
+    #       database: {
+    #         catalog_id: "CatalogIdString",
+    #         name: "NameString", # required
+    #       },
+    #       table: {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         name: "NameString",
+    #         table_wildcard: {
+    #         },
+    #       },
+    #       table_with_columns: {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         name: "NameString", # required
+    #         column_names: ["NameString"],
+    #         column_wildcard: {
+    #           excluded_column_names: ["NameString"],
+    #         },
+    #       },
+    #       data_location: {
+    #         catalog_id: "CatalogIdString",
+    #         resource_arn: "ResourceArnString", # required
+    #       },
+    #       data_cells_filter: {
+    #         table_catalog_id: "CatalogIdString",
+    #         database_name: "NameString",
+    #         table_name: "NameString",
+    #         name: "NameString",
+    #       },
+    #       lf_tag: {
+    #         catalog_id: "CatalogIdString",
+    #         tag_key: "NameString", # required
+    #         tag_values: ["LFTagValue"], # required
+    #       },
+    #       lf_tag_policy: {
+    #         catalog_id: "CatalogIdString",
+    #         resource_type: "DATABASE", # required, accepts DATABASE, TABLE
+    #         expression: [ # required
+    #           {
+    #             tag_key: "LFTagKey", # required
+    #             tag_values: ["LFTagValue"], # required
+    #           },
+    #         ],
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/CreateLakeFormationOptIn AWS API Documentation
+    #
+    # @overload create_lake_formation_opt_in(params = {})
+    # @param [Hash] params ({})
+    def create_lake_formation_opt_in(params = {}, options = {})
+      req = build_request(:create_lake_formation_opt_in, params)
+      req.send_request(options)
+    end
+
     # Deletes a data cell filter.
     #
     # @option params [String] :table_catalog_id
@@ -1004,6 +1082,84 @@ module Aws::LakeFormation
     # @param [Hash] params ({})
     def delete_lf_tag(params = {}, options = {})
       req = build_request(:delete_lf_tag, params)
+      req.send_request(options)
+    end
+
+    # Remove the Lake Formation permissions enforcement of the given
+    # databases, tables, and principals.
+    #
+    # @option params [required, Types::DataLakePrincipal] :principal
+    #   The Lake Formation principal. Supported principals are IAM users or
+    #   IAM roles.
+    #
+    # @option params [required, Types::Resource] :resource
+    #   A structure for the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_lake_formation_opt_in({
+    #     principal: { # required
+    #       data_lake_principal_identifier: "DataLakePrincipalString",
+    #     },
+    #     resource: { # required
+    #       catalog: {
+    #       },
+    #       database: {
+    #         catalog_id: "CatalogIdString",
+    #         name: "NameString", # required
+    #       },
+    #       table: {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         name: "NameString",
+    #         table_wildcard: {
+    #         },
+    #       },
+    #       table_with_columns: {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         name: "NameString", # required
+    #         column_names: ["NameString"],
+    #         column_wildcard: {
+    #           excluded_column_names: ["NameString"],
+    #         },
+    #       },
+    #       data_location: {
+    #         catalog_id: "CatalogIdString",
+    #         resource_arn: "ResourceArnString", # required
+    #       },
+    #       data_cells_filter: {
+    #         table_catalog_id: "CatalogIdString",
+    #         database_name: "NameString",
+    #         table_name: "NameString",
+    #         name: "NameString",
+    #       },
+    #       lf_tag: {
+    #         catalog_id: "CatalogIdString",
+    #         tag_key: "NameString", # required
+    #         tag_values: ["LFTagValue"], # required
+    #       },
+    #       lf_tag_policy: {
+    #         catalog_id: "CatalogIdString",
+    #         resource_type: "DATABASE", # required, accepts DATABASE, TABLE
+    #         expression: [ # required
+    #           {
+    #             tag_key: "LFTagKey", # required
+    #             tag_values: ["LFTagValue"], # required
+    #           },
+    #         ],
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DeleteLakeFormationOptIn AWS API Documentation
+    #
+    # @overload delete_lake_formation_opt_in(params = {})
+    # @param [Hash] params ({})
+    def delete_lake_formation_opt_in(params = {}, options = {})
+      req = build_request(:delete_lake_formation_opt_in, params)
       req.send_request(options)
     end
 
@@ -1113,6 +1269,7 @@ module Aws::LakeFormation
     #   resp.resource_info.role_arn #=> String
     #   resp.resource_info.last_modified #=> Time
     #   resp.resource_info.with_federation #=> Boolean
+    #   resp.resource_info.hybrid_access_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DescribeResource AWS API Documentation
     #
@@ -1358,6 +1515,8 @@ module Aws::LakeFormation
     #   resp.permissions[0].permissions_with_grant_option[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS", "CREATE_LF_TAG", "ASSOCIATE", "GRANT_WITH_LF_TAG_EXPRESSION"
     #   resp.permissions[0].additional_details.resource_share #=> Array
     #   resp.permissions[0].additional_details.resource_share[0] #=> String
+    #   resp.permissions[0].last_updated #=> Time
+    #   resp.permissions[0].last_updated_by #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetEffectivePermissionsForPath AWS API Documentation
@@ -2113,6 +2272,134 @@ module Aws::LakeFormation
       req.send_request(options)
     end
 
+    # Retrieve the current list of resources and principals that are opt in
+    # to enforce Lake Formation permissions.
+    #
+    # @option params [Types::DataLakePrincipal] :principal
+    #   The Lake Formation principal. Supported principals are IAM users or
+    #   IAM roles.
+    #
+    # @option params [Types::Resource] :resource
+    #   A structure for the resource.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is not the first call to retrieve this
+    #   list.
+    #
+    # @return [Types::ListLakeFormationOptInsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLakeFormationOptInsResponse#lake_formation_opt_ins_info_list #lake_formation_opt_ins_info_list} => Array&lt;Types::LakeFormationOptInsInfo&gt;
+    #   * {Types::ListLakeFormationOptInsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_lake_formation_opt_ins({
+    #     principal: {
+    #       data_lake_principal_identifier: "DataLakePrincipalString",
+    #     },
+    #     resource: {
+    #       catalog: {
+    #       },
+    #       database: {
+    #         catalog_id: "CatalogIdString",
+    #         name: "NameString", # required
+    #       },
+    #       table: {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         name: "NameString",
+    #         table_wildcard: {
+    #         },
+    #       },
+    #       table_with_columns: {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         name: "NameString", # required
+    #         column_names: ["NameString"],
+    #         column_wildcard: {
+    #           excluded_column_names: ["NameString"],
+    #         },
+    #       },
+    #       data_location: {
+    #         catalog_id: "CatalogIdString",
+    #         resource_arn: "ResourceArnString", # required
+    #       },
+    #       data_cells_filter: {
+    #         table_catalog_id: "CatalogIdString",
+    #         database_name: "NameString",
+    #         table_name: "NameString",
+    #         name: "NameString",
+    #       },
+    #       lf_tag: {
+    #         catalog_id: "CatalogIdString",
+    #         tag_key: "NameString", # required
+    #         tag_values: ["LFTagValue"], # required
+    #       },
+    #       lf_tag_policy: {
+    #         catalog_id: "CatalogIdString",
+    #         resource_type: "DATABASE", # required, accepts DATABASE, TABLE
+    #         expression: [ # required
+    #           {
+    #             tag_key: "LFTagKey", # required
+    #             tag_values: ["LFTagValue"], # required
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     max_results: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lake_formation_opt_ins_info_list #=> Array
+    #   resp.lake_formation_opt_ins_info_list[0].resource.database.catalog_id #=> String
+    #   resp.lake_formation_opt_ins_info_list[0].resource.database.name #=> String
+    #   resp.lake_formation_opt_ins_info_list[0].resource.table.catalog_id #=> String
+    #   resp.lake_formation_opt_ins_info_list[0].resource.table.database_name #=> String
+    #   resp.lake_formation_opt_ins_info_list[0].resource.table.name #=> String
+    #   resp.lake_formation_opt_ins_info_list[0].resource.table_with_columns.catalog_id #=> String
+    #   resp.lake_formation_opt_ins_info_list[0].resource.table_with_columns.database_name #=> String
+    #   resp.lake_formation_opt_ins_info_list[0].resource.table_with_columns.name #=> String
+    #   resp.lake_formation_opt_ins_info_list[0].resource.table_with_columns.column_names #=> Array
+    #   resp.lake_formation_opt_ins_info_list[0].resource.table_with_columns.column_names[0] #=> String
+    #   resp.lake_formation_opt_ins_info_list[0].resource.table_with_columns.column_wildcard.excluded_column_names #=> Array
+    #   resp.lake_formation_opt_ins_info_list[0].resource.table_with_columns.column_wildcard.excluded_column_names[0] #=> String
+    #   resp.lake_formation_opt_ins_info_list[0].resource.data_location.catalog_id #=> String
+    #   resp.lake_formation_opt_ins_info_list[0].resource.data_location.resource_arn #=> String
+    #   resp.lake_formation_opt_ins_info_list[0].resource.data_cells_filter.table_catalog_id #=> String
+    #   resp.lake_formation_opt_ins_info_list[0].resource.data_cells_filter.database_name #=> String
+    #   resp.lake_formation_opt_ins_info_list[0].resource.data_cells_filter.table_name #=> String
+    #   resp.lake_formation_opt_ins_info_list[0].resource.data_cells_filter.name #=> String
+    #   resp.lake_formation_opt_ins_info_list[0].resource.lf_tag.catalog_id #=> String
+    #   resp.lake_formation_opt_ins_info_list[0].resource.lf_tag.tag_key #=> String
+    #   resp.lake_formation_opt_ins_info_list[0].resource.lf_tag.tag_values #=> Array
+    #   resp.lake_formation_opt_ins_info_list[0].resource.lf_tag.tag_values[0] #=> String
+    #   resp.lake_formation_opt_ins_info_list[0].resource.lf_tag_policy.catalog_id #=> String
+    #   resp.lake_formation_opt_ins_info_list[0].resource.lf_tag_policy.resource_type #=> String, one of "DATABASE", "TABLE"
+    #   resp.lake_formation_opt_ins_info_list[0].resource.lf_tag_policy.expression #=> Array
+    #   resp.lake_formation_opt_ins_info_list[0].resource.lf_tag_policy.expression[0].tag_key #=> String
+    #   resp.lake_formation_opt_ins_info_list[0].resource.lf_tag_policy.expression[0].tag_values #=> Array
+    #   resp.lake_formation_opt_ins_info_list[0].resource.lf_tag_policy.expression[0].tag_values[0] #=> String
+    #   resp.lake_formation_opt_ins_info_list[0].principal.data_lake_principal_identifier #=> String
+    #   resp.lake_formation_opt_ins_info_list[0].last_modified #=> Time
+    #   resp.lake_formation_opt_ins_info_list[0].last_updated_by #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListLakeFormationOptIns AWS API Documentation
+    #
+    # @overload list_lake_formation_opt_ins(params = {})
+    # @param [Hash] params ({})
+    def list_lake_formation_opt_ins(params = {}, options = {})
+      req = build_request(:list_lake_formation_opt_ins, params)
+      req.send_request(options)
+    end
+
     # Returns a list of the principal permissions on the resource, filtered
     # by the permissions of the caller. For example, if you are granted an
     # ALTER permission, you are able to see only the principal permissions
@@ -2264,6 +2551,8 @@ module Aws::LakeFormation
     #   resp.principal_resource_permissions[0].permissions_with_grant_option[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS", "CREATE_LF_TAG", "ASSOCIATE", "GRANT_WITH_LF_TAG_EXPRESSION"
     #   resp.principal_resource_permissions[0].additional_details.resource_share #=> Array
     #   resp.principal_resource_permissions[0].additional_details.resource_share[0] #=> String
+    #   resp.principal_resource_permissions[0].last_updated #=> Time
+    #   resp.principal_resource_permissions[0].last_updated_by #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListPermissions AWS API Documentation
@@ -2316,6 +2605,7 @@ module Aws::LakeFormation
     #   resp.resource_info_list[0].role_arn #=> String
     #   resp.resource_info_list[0].last_modified #=> Time
     #   resp.resource_info_list[0].with_federation #=> Boolean
+    #   resp.resource_info_list[0].hybrid_access_enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListResources AWS API Documentation
@@ -2568,6 +2858,11 @@ module Aws::LakeFormation
     # @option params [Boolean] :with_federation
     #   Whether or not the resource is a federated resource.
     #
+    # @option params [Boolean] :hybrid_access_enabled
+    #   Specifies whether the data access of tables pointing to the location
+    #   can be managed by both Lake Formation permissions as well as Amazon S3
+    #   bucket policies.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2577,6 +2872,7 @@ module Aws::LakeFormation
     #     use_service_linked_role: false,
     #     role_arn: "IAMRoleArn",
     #     with_federation: false,
+    #     hybrid_access_enabled: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/RegisterResource AWS API Documentation
@@ -3103,6 +3399,11 @@ module Aws::LakeFormation
     # @option params [Boolean] :with_federation
     #   Whether or not the resource is a federated resource.
     #
+    # @option params [Boolean] :hybrid_access_enabled
+    #   Specifies whether the data access of tables pointing to the location
+    #   can be managed by both Lake Formation permissions as well as Amazon S3
+    #   bucket policies.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3111,6 +3412,7 @@ module Aws::LakeFormation
     #     role_arn: "IAMRoleArn", # required
     #     resource_arn: "ResourceArnString", # required
     #     with_federation: false,
+    #     hybrid_access_enabled: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateResource AWS API Documentation
@@ -3234,7 +3536,7 @@ module Aws::LakeFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lakeformation'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

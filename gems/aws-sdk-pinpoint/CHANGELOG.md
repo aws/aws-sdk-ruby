@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2023-09-26)
+------------------
+
+* Feature - Update documentation for RemoveAttributes to more accurately reflect its behavior when attributes are deleted.
+
 1.79.0 (2023-07-28)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2023-09-26)
+------------------
+
+* Feature - CodeDeploy now supports In-place and Blue/Green EC2 deployments with multiple Classic Load Balancers and multiple Target Groups.
+
 1.58.0 (2023-09-19)
 ------------------
 

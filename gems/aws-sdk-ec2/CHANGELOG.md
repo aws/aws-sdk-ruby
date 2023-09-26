@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.408.0 (2023-09-26)
+------------------
+
+* Feature - The release includes AWS verified access to support FIPs compliance in North America regions
+
 1.407.0 (2023-09-22)
 ------------------
 

@@ -50,6 +50,8 @@ module Aws::LakeFormation
     CreateDataCellsFilterResponse = Shapes::StructureShape.new(name: 'CreateDataCellsFilterResponse')
     CreateLFTagRequest = Shapes::StructureShape.new(name: 'CreateLFTagRequest')
     CreateLFTagResponse = Shapes::StructureShape.new(name: 'CreateLFTagResponse')
+    CreateLakeFormationOptInRequest = Shapes::StructureShape.new(name: 'CreateLakeFormationOptInRequest')
+    CreateLakeFormationOptInResponse = Shapes::StructureShape.new(name: 'CreateLakeFormationOptInResponse')
     CredentialTimeoutDurationSecondInteger = Shapes::IntegerShape.new(name: 'CredentialTimeoutDurationSecondInteger')
     DataCellsFilter = Shapes::StructureShape.new(name: 'DataCellsFilter')
     DataCellsFilterList = Shapes::ListShape.new(name: 'DataCellsFilterList')
@@ -67,6 +69,8 @@ module Aws::LakeFormation
     DeleteDataCellsFilterResponse = Shapes::StructureShape.new(name: 'DeleteDataCellsFilterResponse')
     DeleteLFTagRequest = Shapes::StructureShape.new(name: 'DeleteLFTagRequest')
     DeleteLFTagResponse = Shapes::StructureShape.new(name: 'DeleteLFTagResponse')
+    DeleteLakeFormationOptInRequest = Shapes::StructureShape.new(name: 'DeleteLakeFormationOptInRequest')
+    DeleteLakeFormationOptInResponse = Shapes::StructureShape.new(name: 'DeleteLakeFormationOptInResponse')
     DeleteObjectInput = Shapes::StructureShape.new(name: 'DeleteObjectInput')
     DeleteObjectsOnCancelRequest = Shapes::StructureShape.new(name: 'DeleteObjectsOnCancelRequest')
     DeleteObjectsOnCancelResponse = Shapes::StructureShape.new(name: 'DeleteObjectsOnCancelResponse')
@@ -139,11 +143,15 @@ module Aws::LakeFormation
     LFTagPolicyResource = Shapes::StructureShape.new(name: 'LFTagPolicyResource')
     LFTagValue = Shapes::StringShape.new(name: 'LFTagValue')
     LFTagsList = Shapes::ListShape.new(name: 'LFTagsList')
+    LakeFormationOptInsInfo = Shapes::StructureShape.new(name: 'LakeFormationOptInsInfo')
+    LakeFormationOptInsInfoList = Shapes::ListShape.new(name: 'LakeFormationOptInsInfoList')
     LastModifiedTimestamp = Shapes::TimestampShape.new(name: 'LastModifiedTimestamp')
     ListDataCellsFilterRequest = Shapes::StructureShape.new(name: 'ListDataCellsFilterRequest')
     ListDataCellsFilterResponse = Shapes::StructureShape.new(name: 'ListDataCellsFilterResponse')
     ListLFTagsRequest = Shapes::StructureShape.new(name: 'ListLFTagsRequest')
     ListLFTagsResponse = Shapes::StructureShape.new(name: 'ListLFTagsResponse')
+    ListLakeFormationOptInsRequest = Shapes::StructureShape.new(name: 'ListLakeFormationOptInsRequest')
+    ListLakeFormationOptInsResponse = Shapes::StructureShape.new(name: 'ListLakeFormationOptInsResponse')
     ListPermissionsRequest = Shapes::StructureShape.new(name: 'ListPermissionsRequest')
     ListPermissionsResponse = Shapes::StructureShape.new(name: 'ListPermissionsResponse')
     ListResourcesRequest = Shapes::StructureShape.new(name: 'ListResourcesRequest')
@@ -385,6 +393,12 @@ module Aws::LakeFormation
 
     CreateLFTagResponse.struct_class = Types::CreateLFTagResponse
 
+    CreateLakeFormationOptInRequest.add_member(:principal, Shapes::ShapeRef.new(shape: DataLakePrincipal, required: true, location_name: "Principal"))
+    CreateLakeFormationOptInRequest.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, required: true, location_name: "Resource"))
+    CreateLakeFormationOptInRequest.struct_class = Types::CreateLakeFormationOptInRequest
+
+    CreateLakeFormationOptInResponse.struct_class = Types::CreateLakeFormationOptInResponse
+
     DataCellsFilter.add_member(:table_catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, required: true, location_name: "TableCatalogId"))
     DataCellsFilter.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     DataCellsFilter.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
@@ -443,6 +457,12 @@ module Aws::LakeFormation
     DeleteLFTagRequest.struct_class = Types::DeleteLFTagRequest
 
     DeleteLFTagResponse.struct_class = Types::DeleteLFTagResponse
+
+    DeleteLakeFormationOptInRequest.add_member(:principal, Shapes::ShapeRef.new(shape: DataLakePrincipal, required: true, location_name: "Principal"))
+    DeleteLakeFormationOptInRequest.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, required: true, location_name: "Resource"))
+    DeleteLakeFormationOptInRequest.struct_class = Types::DeleteLakeFormationOptInRequest
+
+    DeleteLakeFormationOptInResponse.struct_class = Types::DeleteLakeFormationOptInResponse
 
     DeleteObjectInput.add_member(:uri, Shapes::ShapeRef.new(shape: URI, required: true, location_name: "Uri"))
     DeleteObjectInput.add_member(:etag, Shapes::ShapeRef.new(shape: ETagString, location_name: "ETag"))
@@ -672,6 +692,14 @@ module Aws::LakeFormation
 
     LFTagsList.member = Shapes::ShapeRef.new(shape: LFTagPair)
 
+    LakeFormationOptInsInfo.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, location_name: "Resource"))
+    LakeFormationOptInsInfo.add_member(:principal, Shapes::ShapeRef.new(shape: DataLakePrincipal, location_name: "Principal"))
+    LakeFormationOptInsInfo.add_member(:last_modified, Shapes::ShapeRef.new(shape: LastModifiedTimestamp, location_name: "LastModified"))
+    LakeFormationOptInsInfo.add_member(:last_updated_by, Shapes::ShapeRef.new(shape: NameString, location_name: "LastUpdatedBy"))
+    LakeFormationOptInsInfo.struct_class = Types::LakeFormationOptInsInfo
+
+    LakeFormationOptInsInfoList.member = Shapes::ShapeRef.new(shape: LakeFormationOptInsInfo)
+
     ListDataCellsFilterRequest.add_member(:table, Shapes::ShapeRef.new(shape: TableResource, location_name: "Table"))
     ListDataCellsFilterRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListDataCellsFilterRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
@@ -690,6 +718,16 @@ module Aws::LakeFormation
     ListLFTagsResponse.add_member(:lf_tags, Shapes::ShapeRef.new(shape: LFTagsList, location_name: "LFTags"))
     ListLFTagsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListLFTagsResponse.struct_class = Types::ListLFTagsResponse
+
+    ListLakeFormationOptInsRequest.add_member(:principal, Shapes::ShapeRef.new(shape: DataLakePrincipal, location_name: "Principal"))
+    ListLakeFormationOptInsRequest.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, location_name: "Resource"))
+    ListLakeFormationOptInsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    ListLakeFormationOptInsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListLakeFormationOptInsRequest.struct_class = Types::ListLakeFormationOptInsRequest
+
+    ListLakeFormationOptInsResponse.add_member(:lake_formation_opt_ins_info_list, Shapes::ShapeRef.new(shape: LakeFormationOptInsInfoList, location_name: "LakeFormationOptInsInfoList"))
+    ListLakeFormationOptInsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListLakeFormationOptInsResponse.struct_class = Types::ListLakeFormationOptInsResponse
 
     ListPermissionsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     ListPermissionsRequest.add_member(:principal, Shapes::ShapeRef.new(shape: DataLakePrincipal, location_name: "Principal"))
@@ -776,6 +814,8 @@ module Aws::LakeFormation
     PrincipalResourcePermissions.add_member(:permissions, Shapes::ShapeRef.new(shape: PermissionList, location_name: "Permissions"))
     PrincipalResourcePermissions.add_member(:permissions_with_grant_option, Shapes::ShapeRef.new(shape: PermissionList, location_name: "PermissionsWithGrantOption"))
     PrincipalResourcePermissions.add_member(:additional_details, Shapes::ShapeRef.new(shape: DetailsMap, location_name: "AdditionalDetails"))
+    PrincipalResourcePermissions.add_member(:last_updated, Shapes::ShapeRef.new(shape: LastModifiedTimestamp, location_name: "LastUpdated"))
+    PrincipalResourcePermissions.add_member(:last_updated_by, Shapes::ShapeRef.new(shape: NameString, location_name: "LastUpdatedBy"))
     PrincipalResourcePermissions.struct_class = Types::PrincipalResourcePermissions
 
     PrincipalResourcePermissionsList.member = Shapes::ShapeRef.new(shape: PrincipalResourcePermissions)
@@ -800,6 +840,7 @@ module Aws::LakeFormation
     RegisterResourceRequest.add_member(:use_service_linked_role, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "UseServiceLinkedRole"))
     RegisterResourceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "RoleArn"))
     RegisterResourceRequest.add_member(:with_federation, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "WithFederation"))
+    RegisterResourceRequest.add_member(:hybrid_access_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "HybridAccessEnabled"))
     RegisterResourceRequest.struct_class = Types::RegisterResourceRequest
 
     RegisterResourceResponse.struct_class = Types::RegisterResourceResponse
@@ -826,6 +867,7 @@ module Aws::LakeFormation
     ResourceInfo.add_member(:role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "RoleArn"))
     ResourceInfo.add_member(:last_modified, Shapes::ShapeRef.new(shape: LastModifiedTimestamp, location_name: "LastModified"))
     ResourceInfo.add_member(:with_federation, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "WithFederation"))
+    ResourceInfo.add_member(:hybrid_access_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "HybridAccessEnabled"))
     ResourceInfo.struct_class = Types::ResourceInfo
 
     ResourceInfoList.member = Shapes::ShapeRef.new(shape: ResourceInfo)
@@ -978,6 +1020,7 @@ module Aws::LakeFormation
     UpdateResourceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "RoleArn"))
     UpdateResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn"))
     UpdateResourceRequest.add_member(:with_federation, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "WithFederation"))
+    UpdateResourceRequest.add_member(:hybrid_access_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "HybridAccessEnabled"))
     UpdateResourceRequest.struct_class = Types::UpdateResourceRequest
 
     UpdateResourceResponse.struct_class = Types::UpdateResourceResponse
@@ -1147,6 +1190,20 @@ module Aws::LakeFormation
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:create_lake_formation_opt_in, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLakeFormationOptIn"
+        o.http_method = "POST"
+        o.http_request_uri = "/CreateLakeFormationOptIn"
+        o.input = Shapes::ShapeRef.new(shape: CreateLakeFormationOptInRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateLakeFormationOptInResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
       api.add_operation(:delete_data_cells_filter, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDataCellsFilter"
         o.http_method = "POST"
@@ -1171,6 +1228,20 @@ module Aws::LakeFormation
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_lake_formation_opt_in, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteLakeFormationOptIn"
+        o.http_method = "POST"
+        o.http_request_uri = "/DeleteLakeFormationOptIn"
+        o.input = Shapes::ShapeRef.new(shape: DeleteLakeFormationOptInRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteLakeFormationOptInResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:delete_objects_on_cancel, Seahorse::Model::Operation.new.tap do |o|
@@ -1463,6 +1534,24 @@ module Aws::LakeFormation
         o.input = Shapes::ShapeRef.new(shape: ListLFTagsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListLFTagsResponse)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_lake_formation_opt_ins, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListLakeFormationOptIns"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListLakeFormationOptIns"
+        o.input = Shapes::ShapeRef.new(shape: ListLakeFormationOptInsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListLakeFormationOptInsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)

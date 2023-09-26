@@ -8941,8 +8941,10 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Removes one or more attributes, of the same attribute type, from all
-    # the endpoints that are associated with an application.
+    # Removes one or more custom attributes, of the same attribute type,
+    # from the application. Existing endpoints still have the attributes but
+    # Amazon Pinpoint will stop capturing new or changed values for these
+    # attributes.
     #
     # @option params [required, String] :application_id
     #
@@ -12852,7 +12854,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

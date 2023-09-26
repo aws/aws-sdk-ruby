@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2023-09-26)
+------------------
+
+* Feature - This release adds three new API support "CreateLakeFormationOptIn", "DeleteLakeFormationOptIn" and "ListLakeFormationOptIns", and also updates the corresponding documentation.
+
 1.40.0 (2023-07-17)
 ------------------
 

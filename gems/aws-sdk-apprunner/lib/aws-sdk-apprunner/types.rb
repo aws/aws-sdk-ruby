@@ -420,12 +420,20 @@ module Aws::AppRunner
     #    </note>
     #   @return [Types::CodeConfiguration]
     #
+    # @!attribute [rw] source_directory
+    #   The path of the directory that stores source code and configuration
+    #   files. The build and start commands also execute from here. The path
+    #   is absolute from root and, if not specified, defaults to the
+    #   repository root.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/CodeRepository AWS API Documentation
     #
     class CodeRepository < Struct.new(
       :repository_url,
       :source_code_version,
-      :code_configuration)
+      :code_configuration,
+      :source_directory)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -511,8 +519,8 @@ module Aws::AppRunner
     #   subsequent calls, App Runner creates incremental revisions of the
     #   configuration.
     #
-    #   <note markdown="1"> Prior to the release of [Managing auto scaling][1], the name
-    #   `DefaultConfiguration` was reserved.
+    #   <note markdown="1"> Prior to the release of [Auto scale configuration enhancements][1],
+    #   the name `DefaultConfiguration` was reserved.
     #
     #    This restriction is no longer in place. You can now manage
     #   `DefaultConfiguration` the same way you manage your custom auto
@@ -536,7 +544,7 @@ module Aws::AppRunner
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apprunner/latest/relnotes/release-yyyy-mm-dd-asc-improvements.html
+    #   [1]: https://docs.aws.amazon.com/apprunner/latest/relnotes/release-2023-09-22-auto-scale-config.html
     #   @return [String]
     #
     # @!attribute [rw] max_concurrency
