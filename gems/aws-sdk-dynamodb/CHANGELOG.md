@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2023-09-26)
+------------------
+
+* Feature - Amazon DynamoDB now supports Incremental Export as an enhancement to the existing Export Table
+
 1.93.1 (2023-08-07)
 ------------------
 

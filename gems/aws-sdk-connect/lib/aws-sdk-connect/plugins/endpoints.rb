@@ -310,6 +310,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::ListRules.build(context)
           when :list_security_keys
             Aws::Connect::Endpoints::ListSecurityKeys.build(context)
+          when :list_security_profile_applications
+            Aws::Connect::Endpoints::ListSecurityProfileApplications.build(context)
           when :list_security_profile_permissions
             Aws::Connect::Endpoints::ListSecurityProfilePermissions.build(context)
           when :list_security_profiles

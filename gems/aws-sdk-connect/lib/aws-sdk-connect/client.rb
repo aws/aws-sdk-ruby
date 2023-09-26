@@ -1540,7 +1540,7 @@ module Aws::Connect
     #
     #   resp = client.create_integration_association({
     #     instance_id: "InstanceId", # required
-    #     integration_type: "EVENT", # required, accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, CASES_DOMAIN
+    #     integration_type: "EVENT", # required, accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, CASES_DOMAIN, APPLICATION
     #     integration_arn: "ARN", # required
     #     source_application_url: "URI",
     #     source_application_name: "SourceApplicationName",
@@ -1810,7 +1810,7 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :name
-    #   The name of the quick connect.
+    #   A unique name of the quick connect.
     #
     # @option params [String] :description
     #   The description of the quick connect.
@@ -2117,6 +2117,13 @@ module Aws::Connect
     #   to in Amazon Connect. Following are acceptable ResourceNames: `User`
     #   \| `SecurityProfile` \| `Queue` \| `RoutingProfile`
     #
+    # @option params [Array<Types::Application>] :applications
+    #   This API is in preview release for Amazon Connect and is subject to
+    #   change.
+    #
+    #   A list of third party applications that the security profile will give
+    #   access to.
+    #
     # @return [Types::CreateSecurityProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSecurityProfileResponse#security_profile_id #security_profile_id} => String
@@ -2136,6 +2143,12 @@ module Aws::Connect
     #       "SecurityProfilePolicyKey" => "SecurityProfilePolicyValue",
     #     },
     #     tag_restricted_resources: ["TagRestrictedResourceName"],
+    #     applications: [
+    #       {
+    #         namespace: "Namespace",
+    #         application_permissions: ["Permission"],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -7568,7 +7581,7 @@ module Aws::Connect
     #
     #   resp = client.list_integration_associations({
     #     instance_id: "InstanceId", # required
-    #     integration_type: "EVENT", # accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, CASES_DOMAIN
+    #     integration_type: "EVENT", # accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, CASES_DOMAIN, APPLICATION
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -7579,7 +7592,7 @@ module Aws::Connect
     #   resp.integration_association_summary_list[0].integration_association_id #=> String
     #   resp.integration_association_summary_list[0].integration_association_arn #=> String
     #   resp.integration_association_summary_list[0].instance_id #=> String
-    #   resp.integration_association_summary_list[0].integration_type #=> String, one of "EVENT", "VOICE_ID", "PINPOINT_APP", "WISDOM_ASSISTANT", "WISDOM_KNOWLEDGE_BASE", "CASES_DOMAIN"
+    #   resp.integration_association_summary_list[0].integration_type #=> String, one of "EVENT", "VOICE_ID", "PINPOINT_APP", "WISDOM_ASSISTANT", "WISDOM_KNOWLEDGE_BASE", "CASES_DOMAIN", "APPLICATION"
     #   resp.integration_association_summary_list[0].integration_arn #=> String
     #   resp.integration_association_summary_list[0].source_application_url #=> String
     #   resp.integration_association_summary_list[0].source_application_name #=> String
@@ -7741,6 +7754,17 @@ module Aws::Connect
     #
     # @option params [Array<String>] :phone_number_types
     #   The type of phone number.
+    #
+    #   <note markdown="1"> We recommend using [ListPhoneNumbersV2][1] to return phone number
+    #   types. While ListPhoneNumbers returns number types `UIFN`, `SHARED`,
+    #   `THIRD_PARTY_TF`, and `THIRD_PARTY_DID`, it incorrectly lists them as
+    #   `TOLL_FREE` or `DID`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html
     #
     # @option params [Array<String>] :phone_number_country_codes
     #   The ISO country code.
@@ -8344,6 +8368,56 @@ module Aws::Connect
     # @param [Hash] params ({})
     def list_security_keys(params = {}, options = {})
       req = build_request(:list_security_keys, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of third party applications in a specific security
+    # profile.
+    #
+    # @option params [required, String] :security_profile_id
+    #   The security profile identifier.
+    #
+    # @option params [required, String] :instance_id
+    #   The instance identifier.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. The next set of results can be
+    #   retrieved by using the token value returned in the previous response
+    #   when making the next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListSecurityProfileApplicationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSecurityProfileApplicationsResponse#applications #applications} => Array&lt;Types::Application&gt;
+    #   * {Types::ListSecurityProfileApplicationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_security_profile_applications({
+    #     security_profile_id: "SecurityProfileId", # required
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.applications #=> Array
+    #   resp.applications[0].namespace #=> String
+    #   resp.applications[0].application_permissions #=> Array
+    #   resp.applications[0].application_permissions[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfileApplications AWS API Documentation
+    #
+    # @overload list_security_profile_applications(params = {})
+    # @param [Hash] params ({})
+    def list_security_profile_applications(params = {}, options = {})
+      req = build_request(:list_security_profile_applications, params)
       req.send_request(options)
     end
 
@@ -12865,6 +12939,12 @@ module Aws::Connect
     #   The list of resources that a security profile applies tag restrictions
     #   to in Amazon Connect.
     #
+    # @option params [Array<Types::Application>] :applications
+    #   This API is in preview release for Amazon Connect and is subject to
+    #   change.
+    #
+    #   A list of the third party application's metadata.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -12878,6 +12958,12 @@ module Aws::Connect
     #       "SecurityProfilePolicyKey" => "SecurityProfilePolicyValue",
     #     },
     #     tag_restricted_resources: ["TagRestrictedResourceName"],
+    #     applications: [
+    #       {
+    #         namespace: "Namespace",
+    #         application_permissions: ["Permission"],
+    #       },
+    #     ],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateSecurityProfile AWS API Documentation
@@ -13514,7 +13600,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.126.0'
+      context[:gem_version] = '1.127.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

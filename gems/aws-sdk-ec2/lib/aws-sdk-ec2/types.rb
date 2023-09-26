@@ -11619,13 +11619,19 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] fips_enabled
+    #   Choose to enable or disable support for Federal Information
+    #   Processing Standards (FIPS) on the instance.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessInstanceRequest AWS API Documentation
     #
     class CreateVerifiedAccessInstanceRequest < Struct.new(
       :description,
       :tag_specifications,
       :client_token,
-      :dry_run)
+      :dry_run,
+      :fips_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -63548,6 +63554,11 @@ module Aws::EC2
     #   The tags.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] fips_enabled
+    #   Describes if support for Federal Information Processing Standards
+    #   (FIPS) is enabled on the instance.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VerifiedAccessInstance AWS API Documentation
     #
     class VerifiedAccessInstance < Struct.new(
@@ -63556,7 +63567,8 @@ module Aws::EC2
       :verified_access_trust_providers,
       :creation_time,
       :last_updated_time,
-      :tags)
+      :tags,
+      :fips_enabled)
       SENSITIVE = []
       include Aws::Structure
     end

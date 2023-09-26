@@ -498,8 +498,8 @@ module Aws::AppRunner
     #   subsequent calls, App Runner creates incremental revisions of the
     #   configuration.
     #
-    #   <note markdown="1"> Prior to the release of [Managing auto scaling][1], the name
-    #   `DefaultConfiguration` was reserved.
+    #   <note markdown="1"> Prior to the release of [Auto scale configuration enhancements][1],
+    #   the name `DefaultConfiguration` was reserved.
     #
     #    This restriction is no longer in place. You can now manage
     #   `DefaultConfiguration` the same way you manage your custom auto
@@ -523,7 +523,7 @@ module Aws::AppRunner
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/apprunner/latest/relnotes/release-yyyy-mm-dd-asc-improvements.html
+    #   [1]: https://docs.aws.amazon.com/apprunner/latest/relnotes/release-2023-09-22-auto-scale-config.html
     #
     # @option params [Integer] :max_concurrency
     #   The maximum number of concurrent requests that you want an instance to
@@ -827,6 +827,7 @@ module Aws::AppRunner
     #             },
     #           },
     #         },
+    #         source_directory: "SourceDirectory",
     #       },
     #       image_repository: {
     #         image_identifier: "ImageIdentifier", # required
@@ -908,6 +909,7 @@ module Aws::AppRunner
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets #=> Hash
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets["RuntimeEnvironmentSecretsName"] #=> String
+    #   resp.service.source_configuration.code_repository.source_directory #=> String
     #   resp.service.source_configuration.image_repository.image_identifier #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables #=> Hash
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
@@ -1267,6 +1269,7 @@ module Aws::AppRunner
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets #=> Hash
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets["RuntimeEnvironmentSecretsName"] #=> String
+    #   resp.service.source_configuration.code_repository.source_directory #=> String
     #   resp.service.source_configuration.image_repository.image_identifier #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables #=> Hash
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
@@ -1593,6 +1596,7 @@ module Aws::AppRunner
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets #=> Hash
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets["RuntimeEnvironmentSecretsName"] #=> String
+    #   resp.service.source_configuration.code_repository.source_directory #=> String
     #   resp.service.source_configuration.image_repository.image_identifier #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables #=> Hash
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
@@ -2348,6 +2352,7 @@ module Aws::AppRunner
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets #=> Hash
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets["RuntimeEnvironmentSecretsName"] #=> String
+    #   resp.service.source_configuration.code_repository.source_directory #=> String
     #   resp.service.source_configuration.image_repository.image_identifier #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables #=> Hash
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
@@ -2436,6 +2441,7 @@ module Aws::AppRunner
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets #=> Hash
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets["RuntimeEnvironmentSecretsName"] #=> String
+    #   resp.service.source_configuration.code_repository.source_directory #=> String
     #   resp.service.source_configuration.image_repository.image_identifier #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables #=> Hash
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
@@ -2714,6 +2720,7 @@ module Aws::AppRunner
     #             },
     #           },
     #         },
+    #         source_directory: "SourceDirectory",
     #       },
     #       image_repository: {
     #         image_identifier: "ImageIdentifier", # required
@@ -2786,6 +2793,7 @@ module Aws::AppRunner
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets #=> Hash
     #   resp.service.source_configuration.code_repository.code_configuration.code_configuration_values.runtime_environment_secrets["RuntimeEnvironmentSecretsName"] #=> String
+    #   resp.service.source_configuration.code_repository.source_directory #=> String
     #   resp.service.source_configuration.image_repository.image_identifier #=> String
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables #=> Hash
     #   resp.service.source_configuration.image_repository.image_configuration.runtime_environment_variables["RuntimeEnvironmentVariablesKey"] #=> String
@@ -2898,7 +2906,7 @@ module Aws::AppRunner
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apprunner'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

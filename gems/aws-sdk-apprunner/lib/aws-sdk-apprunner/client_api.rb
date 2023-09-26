@@ -175,6 +175,7 @@ module Aws::AppRunner
     SourceCodeVersion = Shapes::StructureShape.new(name: 'SourceCodeVersion')
     SourceCodeVersionType = Shapes::StringShape.new(name: 'SourceCodeVersionType')
     SourceConfiguration = Shapes::StructureShape.new(name: 'SourceConfiguration')
+    SourceDirectory = Shapes::StringShape.new(name: 'SourceDirectory')
     StartCommand = Shapes::StringShape.new(name: 'StartCommand')
     StartDeploymentRequest = Shapes::StructureShape.new(name: 'StartDeploymentRequest')
     StartDeploymentResponse = Shapes::StructureShape.new(name: 'StartDeploymentResponse')
@@ -274,6 +275,7 @@ module Aws::AppRunner
     CodeRepository.add_member(:repository_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RepositoryUrl"))
     CodeRepository.add_member(:source_code_version, Shapes::ShapeRef.new(shape: SourceCodeVersion, required: true, location_name: "SourceCodeVersion"))
     CodeRepository.add_member(:code_configuration, Shapes::ShapeRef.new(shape: CodeConfiguration, location_name: "CodeConfiguration"))
+    CodeRepository.add_member(:source_directory, Shapes::ShapeRef.new(shape: SourceDirectory, location_name: "SourceDirectory"))
     CodeRepository.struct_class = Types::CodeRepository
 
     Connection.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, location_name: "ConnectionName"))

@@ -463,6 +463,28 @@ module Aws::LakeFormation
     #
     class CreateLFTagResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] principal
+    #   The Lake Formation principal. Supported principals are IAM users or
+    #   IAM roles.
+    #   @return [Types::DataLakePrincipal]
+    #
+    # @!attribute [rw] resource
+    #   A structure for the resource.
+    #   @return [Types::Resource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/CreateLakeFormationOptInRequest AWS API Documentation
+    #
+    class CreateLakeFormationOptInRequest < Struct.new(
+      :principal,
+      :resource)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/CreateLakeFormationOptInResponse AWS API Documentation
+    #
+    class CreateLakeFormationOptInResponse < Aws::EmptyStructure; end
+
     # A structure that describes certain columns on certain rows.
     #
     # @!attribute [rw] table_catalog_id
@@ -793,6 +815,28 @@ module Aws::LakeFormation
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DeleteLFTagResponse AWS API Documentation
     #
     class DeleteLFTagResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] principal
+    #   The Lake Formation principal. Supported principals are IAM users or
+    #   IAM roles.
+    #   @return [Types::DataLakePrincipal]
+    #
+    # @!attribute [rw] resource
+    #   A structure for the resource.
+    #   @return [Types::Resource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DeleteLakeFormationOptInRequest AWS API Documentation
+    #
+    class DeleteLakeFormationOptInRequest < Struct.new(
+      :principal,
+      :resource)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DeleteLakeFormationOptInResponse AWS API Documentation
+    #
+    class DeleteLakeFormationOptInResponse < Aws::EmptyStructure; end
 
     # An object to delete from the governed table.
     #
@@ -1753,6 +1797,10 @@ module Aws::LakeFormation
     #
     # @!attribute [rw] tag_values
     #   A list of possible values an attribute can take.
+    #
+    #   The maximum number of values that can be defined for a LF-Tag is
+    #   1000. A single API call supports 50 values. You can use multiple API
+    #   calls to add more values.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/LFTag AWS API Documentation
@@ -1868,6 +1916,37 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
+    # A single principal-resource pair that has Lake Formation permissins
+    # enforced.
+    #
+    # @!attribute [rw] resource
+    #   A structure for the resource.
+    #   @return [Types::Resource]
+    #
+    # @!attribute [rw] principal
+    #   The Lake Formation principal. Supported principals are IAM users or
+    #   IAM roles.
+    #   @return [Types::DataLakePrincipal]
+    #
+    # @!attribute [rw] last_modified
+    #   The last modified date and time of the record.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_by
+    #   The user who updated the record.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/LakeFormationOptInsInfo AWS API Documentation
+    #
+    class LakeFormationOptInsInfo < Struct.new(
+      :resource,
+      :principal,
+      :last_modified,
+      :last_updated_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] table
     #   A table in the Glue Data Catalog.
     #   @return [Types::TableResource]
@@ -1957,6 +2036,54 @@ module Aws::LakeFormation
     #
     class ListLFTagsResponse < Struct.new(
       :lf_tags,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] principal
+    #   The Lake Formation principal. Supported principals are IAM users or
+    #   IAM roles.
+    #   @return [Types::DataLakePrincipal]
+    #
+    # @!attribute [rw] resource
+    #   A structure for the resource.
+    #   @return [Types::Resource]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is not the first call to retrieve this
+    #   list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListLakeFormationOptInsRequest AWS API Documentation
+    #
+    class ListLakeFormationOptInsRequest < Struct.new(
+      :principal,
+      :resource,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lake_formation_opt_ins_info_list
+    #   A list of principal-resource pairs that have Lake Formation
+    #   permissins enforced.
+    #   @return [Array<Types::LakeFormationOptInsInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is not the first call to retrieve this
+    #   list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListLakeFormationOptInsResponse AWS API Documentation
+    #
+    class ListLakeFormationOptInsResponse < Struct.new(
+      :lake_formation_opt_ins_info_list,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2318,6 +2445,14 @@ module Aws::LakeFormation
     #   resource share ARN.
     #   @return [Types::DetailsMap]
     #
+    # @!attribute [rw] last_updated
+    #   The date and time when the resource was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_by
+    #   The user who updated the record.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/PrincipalResourcePermissions AWS API Documentation
     #
     class PrincipalResourcePermissions < Struct.new(
@@ -2325,7 +2460,9 @@ module Aws::LakeFormation
       :resource,
       :permissions,
       :permissions_with_grant_option,
-      :additional_details)
+      :additional_details,
+      :last_updated,
+      :last_updated_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2425,13 +2562,20 @@ module Aws::LakeFormation
     #   Whether or not the resource is a federated resource.
     #   @return [Boolean]
     #
+    # @!attribute [rw] hybrid_access_enabled
+    #   Specifies whether the data access of tables pointing to the location
+    #   can be managed by both Lake Formation permissions as well as Amazon
+    #   S3 bucket policies.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/RegisterResourceRequest AWS API Documentation
     #
     class RegisterResourceRequest < Struct.new(
       :resource_arn,
       :use_service_linked_role,
       :role_arn,
-      :with_federation)
+      :with_federation,
+      :hybrid_access_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2556,13 +2700,20 @@ module Aws::LakeFormation
     #   Whether or not the resource is a federated resource.
     #   @return [Boolean]
     #
+    # @!attribute [rw] hybrid_access_enabled
+    #   Indicates whether the data access of tables pointing to the location
+    #   can be managed by both Lake Formation permissions as well as Amazon
+    #   S3 bucket policies.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ResourceInfo AWS API Documentation
     #
     class ResourceInfo < Struct.new(
       :resource_arn,
       :role_arn,
       :last_modified,
-      :with_federation)
+      :with_federation,
+      :hybrid_access_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3198,12 +3349,19 @@ module Aws::LakeFormation
     #   Whether or not the resource is a federated resource.
     #   @return [Boolean]
     #
+    # @!attribute [rw] hybrid_access_enabled
+    #   Specifies whether the data access of tables pointing to the location
+    #   can be managed by both Lake Formation permissions as well as Amazon
+    #   S3 bucket policies.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateResourceRequest AWS API Documentation
     #
     class UpdateResourceRequest < Struct.new(
       :role_arn,
       :resource_arn,
-      :with_federation)
+      :with_federation,
+      :hybrid_access_enabled)
       SENSITIVE = []
       include Aws::Structure
     end

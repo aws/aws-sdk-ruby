@@ -388,6 +388,118 @@ module Aws::AppIntegrationsService
 
     # @!group API Operations
 
+    # This API is in preview release and subject to change.
+    #
+    # Creates and persists an Application resource.
+    #
+    # @option params [required, String] :name
+    #   The name of the application.
+    #
+    # @option params [required, String] :namespace
+    #   The namespace of the application.
+    #
+    # @option params [String] :description
+    #   The description of the application.
+    #
+    # @option params [required, Types::ApplicationSourceConfig] :application_source_config
+    #   The configuration for where the application should be loaded from.
+    #
+    # @option params [Array<Types::Subscription>] :subscriptions
+    #   The events that the application subscribes.
+    #
+    # @option params [Array<Types::Publication>] :publications
+    #   The events that the application publishes.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
+    #
+    # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateApplicationResponse#arn #arn} => String
+    #   * {Types::CreateApplicationResponse#id #id} => String
+    #
+    #
+    # @example Example: To create an application
+    #
+    #   # The following creates an application named My Application with access url https://example.com.
+    #
+    #   resp = client.create_application({
+    #     application_source_config: {
+    #       external_url_config: {
+    #         access_url: "https://example.com", 
+    #       }, 
+    #     }, 
+    #     description: "My first application.", 
+    #     name: "My Application", 
+    #     namespace: "myapplication", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:app-integrations:us-west-2:0123456789012:application/98542c53-e8ac-4570-9c85-c6552c8d9c5e", 
+    #     id: "98542c53-e8ac-4570-9c85-c6552c8d9c5e", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_application({
+    #     name: "ApplicationName", # required
+    #     namespace: "ApplicationNamespace", # required
+    #     description: "Description",
+    #     application_source_config: { # required
+    #       external_url_config: {
+    #         access_url: "URL", # required
+    #         approved_origins: ["ApplicationTrustedSource"],
+    #       },
+    #     },
+    #     subscriptions: [
+    #       {
+    #         event: "EventName", # required
+    #         description: "Description",
+    #       },
+    #     ],
+    #     publications: [
+    #       {
+    #         event: "EventName", # required
+    #         schema: "EventDefinitionSchema", # required
+    #         description: "Description",
+    #       },
+    #     ],
+    #     client_token: "IdempotencyToken",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/CreateApplication AWS API Documentation
+    #
+    # @overload create_application(params = {})
+    # @param [Hash] params ({})
+    def create_application(params = {}, options = {})
+      req = build_request(:create_application, params)
+      req.send_request(options)
+    end
+
     # Creates and persists a DataIntegration resource.
     #
     # <note markdown="1"> You cannot create a DataIntegration association for a DataIntegration
@@ -639,6 +751,85 @@ module Aws::AppIntegrationsService
       req.send_request(options)
     end
 
+    # This API is in preview release and subject to change.
+    #
+    # Get an Application resource.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the Application.
+    #
+    # @return [Types::GetApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetApplicationResponse#arn #arn} => String
+    #   * {Types::GetApplicationResponse#id #id} => String
+    #   * {Types::GetApplicationResponse#name #name} => String
+    #   * {Types::GetApplicationResponse#namespace #namespace} => String
+    #   * {Types::GetApplicationResponse#description #description} => String
+    #   * {Types::GetApplicationResponse#application_source_config #application_source_config} => Types::ApplicationSourceConfig
+    #   * {Types::GetApplicationResponse#subscriptions #subscriptions} => Array&lt;Types::Subscription&gt;
+    #   * {Types::GetApplicationResponse#publications #publications} => Array&lt;Types::Publication&gt;
+    #   * {Types::GetApplicationResponse#created_time #created_time} => Time
+    #   * {Types::GetApplicationResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::GetApplicationResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: To get an application
+    #
+    #   # The following retrives an application.
+    #
+    #   resp = client.get_application({
+    #     arn: "arn:aws:app-integrations:us-west-2:0123456789012:application/98542c53-e8ac-4570-9c85-c6552c8d9c5e", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_source_config: {
+    #       external_url_config: {
+    #         access_url: "https://example.com", 
+    #       }, 
+    #     }, 
+    #     description: "My first application.", 
+    #     name: "My Application", 
+    #     namespace: "myapplication", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_application({
+    #     arn: "ArnOrUUID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.namespace #=> String
+    #   resp.description #=> String
+    #   resp.application_source_config.external_url_config.access_url #=> String
+    #   resp.application_source_config.external_url_config.approved_origins #=> Array
+    #   resp.application_source_config.external_url_config.approved_origins[0] #=> String
+    #   resp.subscriptions #=> Array
+    #   resp.subscriptions[0].event #=> String
+    #   resp.subscriptions[0].description #=> String
+    #   resp.publications #=> Array
+    #   resp.publications[0].event #=> String
+    #   resp.publications[0].schema #=> String
+    #   resp.publications[0].description #=> String
+    #   resp.created_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/GetApplication AWS API Documentation
+    #
+    # @overload get_application(params = {})
+    # @param [Hash] params ({})
+    def get_application(params = {}, options = {})
+      req = build_request(:get_application, params)
+      req.send_request(options)
+    end
+
     # Returns information about the DataIntegration.
     #
     # <note markdown="1"> You cannot create a DataIntegration association for a DataIntegration
@@ -745,6 +936,74 @@ module Aws::AppIntegrationsService
       req.send_request(options)
     end
 
+    # This API is in preview release and subject to change.
+    #
+    # Lists applications in the account.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListApplicationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListApplicationsResponse#applications #applications} => Array&lt;Types::ApplicationSummary&gt;
+    #   * {Types::ListApplicationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list applications in the account
+    #
+    #   # The following lists application summary in the account.
+    #
+    #   resp = client.list_applications({
+    #     max_results: 1, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     applications: [
+    #       {
+    #         arn: "arn:aws:app-integrations:us-west-2:0123456789012:application/98542c53-e8ac-4570-9c85-c6552c8d9c5e", 
+    #         id: "98542c53-e8ac-4570-9c85-c6552c8d9c5e", 
+    #         name: "My Application", 
+    #         namespace: "myapplication", 
+    #       }, 
+    #     ], 
+    #     next_token: "abc", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_applications({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.applications #=> Array
+    #   resp.applications[0].arn #=> String
+    #   resp.applications[0].id #=> String
+    #   resp.applications[0].name #=> String
+    #   resp.applications[0].namespace #=> String
+    #   resp.applications[0].created_time #=> Time
+    #   resp.applications[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/ListApplications AWS API Documentation
+    #
+    # @overload list_applications(params = {})
+    # @param [Hash] params ({})
+    def list_applications(params = {}, options = {})
+      req = build_request(:list_applications, params)
+      req.send_request(options)
+    end
+
     # Returns a paginated list of DataIntegration associations in the
     # account.
     #
@@ -774,6 +1033,8 @@ module Aws::AppIntegrationsService
     #
     #   * {Types::ListDataIntegrationAssociationsResponse#data_integration_associations #data_integration_associations} => Array&lt;Types::DataIntegrationAssociationSummary&gt;
     #   * {Types::ListDataIntegrationAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -826,6 +1087,8 @@ module Aws::AppIntegrationsService
     #   * {Types::ListDataIntegrationsResponse#data_integrations #data_integrations} => Array&lt;Types::DataIntegrationSummary&gt;
     #   * {Types::ListDataIntegrationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_data_integrations({
@@ -868,6 +1131,8 @@ module Aws::AppIntegrationsService
     #
     #   * {Types::ListEventIntegrationAssociationsResponse#event_integration_associations #event_integration_associations} => Array&lt;Types::EventIntegrationAssociation&gt;
     #   * {Types::ListEventIntegrationAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -912,6 +1177,8 @@ module Aws::AppIntegrationsService
     #
     #   * {Types::ListEventIntegrationsResponse#event_integrations #event_integrations} => Array&lt;Types::EventIntegration&gt;
     #   * {Types::ListEventIntegrationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1026,6 +1293,80 @@ module Aws::AppIntegrationsService
       req.send_request(options)
     end
 
+    # This API is in preview release and subject to change.
+    #
+    # Updates and persists an Application resource.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the Application.
+    #
+    # @option params [String] :name
+    #   The name of the application.
+    #
+    # @option params [String] :description
+    #   The description of the application.
+    #
+    # @option params [Types::ApplicationSourceConfig] :application_source_config
+    #   The configuration for where the application should be loaded from.
+    #
+    # @option params [Array<Types::Subscription>] :subscriptions
+    #   The events that the application subscribes.
+    #
+    # @option params [Array<Types::Publication>] :publications
+    #   The events that the application publishes.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To update an application
+    #
+    #   # The following updates an existing application named with a new name.
+    #
+    #   resp = client.update_application({
+    #     arn: "arn:aws:app-integrations:us-west-2:0123456789012:application/98542c53-e8ac-4570-9c85-c6552c8d9c5e", 
+    #     name: "My New Application Name", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_application({
+    #     arn: "ArnOrUUID", # required
+    #     name: "ApplicationName",
+    #     description: "Description",
+    #     application_source_config: {
+    #       external_url_config: {
+    #         access_url: "URL", # required
+    #         approved_origins: ["ApplicationTrustedSource"],
+    #       },
+    #     },
+    #     subscriptions: [
+    #       {
+    #         event: "EventName", # required
+    #         description: "Description",
+    #       },
+    #     ],
+    #     publications: [
+    #       {
+    #         event: "EventName", # required
+    #         schema: "EventDefinitionSchema", # required
+    #         description: "Description",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/UpdateApplication AWS API Documentation
+    #
+    # @overload update_application(params = {})
+    # @param [Hash] params ({})
+    def update_application(params = {}, options = {})
+      req = build_request(:update_application, params)
+      req.send_request(options)
+    end
+
     # Updates the description of a DataIntegration.
     #
     # <note markdown="1"> You cannot create a DataIntegration association for a DataIntegration
@@ -1073,7 +1414,7 @@ module Aws::AppIntegrationsService
     #   The name of the event integration.
     #
     # @option params [String] :description
-    #   The description of the event inegration.
+    #   The description of the event integration.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1106,7 +1447,7 @@ module Aws::AppIntegrationsService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appintegrationsservice'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

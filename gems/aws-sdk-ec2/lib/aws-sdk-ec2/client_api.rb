@@ -4409,7 +4409,7 @@ module Aws::EC2
     CreateCustomerGatewayResult.add_member(:customer_gateway, Shapes::ShapeRef.new(shape: CustomerGateway, location_name: "customerGateway"))
     CreateCustomerGatewayResult.struct_class = Types::CreateCustomerGatewayResult
 
-    CreateDefaultSubnetRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AvailabilityZone"))
+    CreateDefaultSubnetRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneName, required: true, location_name: "AvailabilityZone"))
     CreateDefaultSubnetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateDefaultSubnetRequest.add_member(:ipv_6_native, Shapes::ShapeRef.new(shape: Boolean, location_name: "Ipv6Native"))
     CreateDefaultSubnetRequest.struct_class = Types::CreateDefaultSubnetRequest
@@ -5175,6 +5175,7 @@ module Aws::EC2
     CreateVerifiedAccessInstanceRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateVerifiedAccessInstanceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateVerifiedAccessInstanceRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateVerifiedAccessInstanceRequest.add_member(:fips_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "FIPSEnabled"))
     CreateVerifiedAccessInstanceRequest.struct_class = Types::CreateVerifiedAccessInstanceRequest
 
     CreateVerifiedAccessInstanceResult.add_member(:verified_access_instance, Shapes::ShapeRef.new(shape: VerifiedAccessInstance, location_name: "verifiedAccessInstance"))
@@ -14586,6 +14587,7 @@ module Aws::EC2
     VerifiedAccessInstance.add_member(:creation_time, Shapes::ShapeRef.new(shape: String, location_name: "creationTime"))
     VerifiedAccessInstance.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: String, location_name: "lastUpdatedTime"))
     VerifiedAccessInstance.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    VerifiedAccessInstance.add_member(:fips_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "fipsEnabled"))
     VerifiedAccessInstance.struct_class = Types::VerifiedAccessInstance
 
     VerifiedAccessInstanceIdList.member = Shapes::ShapeRef.new(shape: VerifiedAccessInstanceId, location_name: "item")

@@ -167,6 +167,7 @@ module Aws::DynamoDB
     ExportDescription = Shapes::StructureShape.new(name: 'ExportDescription')
     ExportEndTime = Shapes::TimestampShape.new(name: 'ExportEndTime')
     ExportFormat = Shapes::StringShape.new(name: 'ExportFormat')
+    ExportFromTime = Shapes::TimestampShape.new(name: 'ExportFromTime')
     ExportManifest = Shapes::StringShape.new(name: 'ExportManifest')
     ExportNextToken = Shapes::StringShape.new(name: 'ExportNextToken')
     ExportNotFoundException = Shapes::StructureShape.new(name: 'ExportNotFoundException')
@@ -177,6 +178,9 @@ module Aws::DynamoDB
     ExportTableToPointInTimeInput = Shapes::StructureShape.new(name: 'ExportTableToPointInTimeInput')
     ExportTableToPointInTimeOutput = Shapes::StructureShape.new(name: 'ExportTableToPointInTimeOutput')
     ExportTime = Shapes::TimestampShape.new(name: 'ExportTime')
+    ExportToTime = Shapes::TimestampShape.new(name: 'ExportToTime')
+    ExportType = Shapes::StringShape.new(name: 'ExportType')
+    ExportViewType = Shapes::StringShape.new(name: 'ExportViewType')
     ExpressionAttributeNameMap = Shapes::MapShape.new(name: 'ExpressionAttributeNameMap')
     ExpressionAttributeNameVariable = Shapes::StringShape.new(name: 'ExpressionAttributeNameVariable')
     ExpressionAttributeValueMap = Shapes::MapShape.new(name: 'ExpressionAttributeValueMap')
@@ -221,6 +225,7 @@ module Aws::DynamoDB
     ImportTableInput = Shapes::StructureShape.new(name: 'ImportTableInput')
     ImportTableOutput = Shapes::StructureShape.new(name: 'ImportTableOutput')
     ImportedItemCount = Shapes::IntegerShape.new(name: 'ImportedItemCount')
+    IncrementalExportSpecification = Shapes::StructureShape.new(name: 'IncrementalExportSpecification')
     IndexName = Shapes::StringShape.new(name: 'IndexName')
     IndexNotFoundException = Shapes::StructureShape.new(name: 'IndexNotFoundException')
     IndexStatus = Shapes::StringShape.new(name: 'IndexStatus')
@@ -934,6 +939,8 @@ module Aws::DynamoDB
     ExportDescription.add_member(:export_format, Shapes::ShapeRef.new(shape: ExportFormat, location_name: "ExportFormat"))
     ExportDescription.add_member(:billed_size_bytes, Shapes::ShapeRef.new(shape: BilledSizeBytes, location_name: "BilledSizeBytes"))
     ExportDescription.add_member(:item_count, Shapes::ShapeRef.new(shape: ItemCount, location_name: "ItemCount"))
+    ExportDescription.add_member(:export_type, Shapes::ShapeRef.new(shape: ExportType, location_name: "ExportType"))
+    ExportDescription.add_member(:incremental_export_specification, Shapes::ShapeRef.new(shape: IncrementalExportSpecification, location_name: "IncrementalExportSpecification"))
     ExportDescription.struct_class = Types::ExportDescription
 
     ExportNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
@@ -943,6 +950,7 @@ module Aws::DynamoDB
 
     ExportSummary.add_member(:export_arn, Shapes::ShapeRef.new(shape: ExportArn, location_name: "ExportArn"))
     ExportSummary.add_member(:export_status, Shapes::ShapeRef.new(shape: ExportStatus, location_name: "ExportStatus"))
+    ExportSummary.add_member(:export_type, Shapes::ShapeRef.new(shape: ExportType, location_name: "ExportType"))
     ExportSummary.struct_class = Types::ExportSummary
 
     ExportTableToPointInTimeInput.add_member(:table_arn, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableArn"))
@@ -954,6 +962,8 @@ module Aws::DynamoDB
     ExportTableToPointInTimeInput.add_member(:s3_sse_algorithm, Shapes::ShapeRef.new(shape: S3SseAlgorithm, location_name: "S3SseAlgorithm"))
     ExportTableToPointInTimeInput.add_member(:s3_sse_kms_key_id, Shapes::ShapeRef.new(shape: S3SseKmsKeyId, location_name: "S3SseKmsKeyId"))
     ExportTableToPointInTimeInput.add_member(:export_format, Shapes::ShapeRef.new(shape: ExportFormat, location_name: "ExportFormat"))
+    ExportTableToPointInTimeInput.add_member(:export_type, Shapes::ShapeRef.new(shape: ExportType, location_name: "ExportType"))
+    ExportTableToPointInTimeInput.add_member(:incremental_export_specification, Shapes::ShapeRef.new(shape: IncrementalExportSpecification, location_name: "IncrementalExportSpecification"))
     ExportTableToPointInTimeInput.struct_class = Types::ExportTableToPointInTimeInput
 
     ExportTableToPointInTimeOutput.add_member(:export_description, Shapes::ShapeRef.new(shape: ExportDescription, location_name: "ExportDescription"))
@@ -1111,6 +1121,11 @@ module Aws::DynamoDB
 
     ImportTableOutput.add_member(:import_table_description, Shapes::ShapeRef.new(shape: ImportTableDescription, required: true, location_name: "ImportTableDescription"))
     ImportTableOutput.struct_class = Types::ImportTableOutput
+
+    IncrementalExportSpecification.add_member(:export_from_time, Shapes::ShapeRef.new(shape: ExportFromTime, location_name: "ExportFromTime"))
+    IncrementalExportSpecification.add_member(:export_to_time, Shapes::ShapeRef.new(shape: ExportToTime, location_name: "ExportToTime"))
+    IncrementalExportSpecification.add_member(:export_view_type, Shapes::ShapeRef.new(shape: ExportViewType, location_name: "ExportViewType"))
+    IncrementalExportSpecification.struct_class = Types::IncrementalExportSpecification
 
     IndexNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     IndexNotFoundException.struct_class = Types::IndexNotFoundException

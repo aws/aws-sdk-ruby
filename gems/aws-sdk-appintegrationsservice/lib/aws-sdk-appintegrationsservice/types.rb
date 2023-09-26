@@ -23,6 +23,135 @@ module Aws::AppIntegrationsService
       include Aws::Structure
     end
 
+    # The configuration for where the application should be loaded from.
+    #
+    # @!attribute [rw] external_url_config
+    #   The external URL source for the application.
+    #   @return [Types::ExternalUrlConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/ApplicationSourceConfig AWS API Documentation
+    #
+    class ApplicationSourceConfig < Struct.new(
+      :external_url_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about the Application.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the Application.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   A unique identifier for the Application.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time when the application was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The time when the application was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/ApplicationSummary AWS API Documentation
+    #
+    class ApplicationSummary < Struct.new(
+      :arn,
+      :id,
+      :name,
+      :namespace,
+      :created_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_source_config
+    #   The configuration for where the application should be loaded from.
+    #   @return [Types::ApplicationSourceConfig]
+    #
+    # @!attribute [rw] subscriptions
+    #   The events that the application subscribes.
+    #   @return [Array<Types::Subscription>]
+    #
+    # @!attribute [rw] publications
+    #   The events that the application publishes.
+    #   @return [Array<Types::Publication>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/CreateApplicationRequest AWS API Documentation
+    #
+    class CreateApplicationRequest < Struct.new(
+      :name,
+      :namespace,
+      :description,
+      :application_source_config,
+      :subscriptions,
+      :publications,
+      :client_token,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the Application.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   A unique identifier for the Application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/CreateApplicationResponse AWS API Documentation
+    #
+    class CreateApplicationResponse < Struct.new(
+      :arn,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the DataIntegration.
     #   @return [String]
@@ -411,6 +540,25 @@ module Aws::AppIntegrationsService
       include Aws::Structure
     end
 
+    # The external URL source for the application.
+    #
+    # @!attribute [rw] access_url
+    #   The URL to access the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] approved_origins
+    #   Additional URLs to allow list if different than the access URL.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/ExternalUrlConfig AWS API Documentation
+    #
+    class ExternalUrlConfig < Struct.new(
+      :access_url,
+      :approved_origins)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for what files should be pulled from the source.
     #
     # @!attribute [rw] folders
@@ -427,6 +575,82 @@ module Aws::AppIntegrationsService
     class FileConfiguration < Struct.new(
       :folders,
       :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the Application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/GetApplicationRequest AWS API Documentation
+    #
+    class GetApplicationRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the Application.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   A unique identifier for the Application.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_source_config
+    #   The configuration for where the application should be loaded from.
+    #   @return [Types::ApplicationSourceConfig]
+    #
+    # @!attribute [rw] subscriptions
+    #   The events that the application subscribes.
+    #   @return [Array<Types::Subscription>]
+    #
+    # @!attribute [rw] publications
+    #   The events that the application publishes.
+    #   @return [Array<Types::Publication>]
+    #
+    # @!attribute [rw] created_time
+    #   The created time of the Application.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The last modified time of the Application.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/GetApplicationResponse AWS API Documentation
+    #
+    class GetApplicationResponse < Struct.new(
+      :arn,
+      :id,
+      :name,
+      :namespace,
+      :description,
+      :application_source_config,
+      :subscriptions,
+      :publications,
+      :created_time,
+      :last_modified_time,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -576,6 +800,43 @@ module Aws::AppIntegrationsService
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/ListApplicationsRequest AWS API Documentation
+    #
+    class ListApplicationsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] applications
+    #   The Applications associated with this account.
+    #   @return [Array<Types::ApplicationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/ListApplicationsResponse AWS API Documentation
+    #
+    class ListApplicationsResponse < Struct.new(
+      :applications,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -763,6 +1024,30 @@ module Aws::AppIntegrationsService
       include Aws::Structure
     end
 
+    # The configuration of an event that the application publishes.
+    #
+    # @!attribute [rw] event
+    #   The name of the publication.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema
+    #   The JSON schema of the publication event.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the publication.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/Publication AWS API Documentation
+    #
+    class Publication < Struct.new(
+      :event,
+      :schema,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified resource was not found.
     #
     # @!attribute [rw] message
@@ -811,6 +1096,25 @@ module Aws::AppIntegrationsService
       :first_execution_from,
       :object,
       :schedule_expression)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of an event that the application subscribes.
+    #
+    # @!attribute [rw] event
+    #   The name of the subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the subscription.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/Subscription AWS API Documentation
+    #
+    class Subscription < Struct.new(
+      :event,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -872,6 +1176,47 @@ module Aws::AppIntegrationsService
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the Application.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_source_config
+    #   The configuration for where the application should be loaded from.
+    #   @return [Types::ApplicationSourceConfig]
+    #
+    # @!attribute [rw] subscriptions
+    #   The events that the application subscribes.
+    #   @return [Array<Types::Subscription>]
+    #
+    # @!attribute [rw] publications
+    #   The events that the application publishes.
+    #   @return [Array<Types::Publication>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/UpdateApplicationRequest AWS API Documentation
+    #
+    class UpdateApplicationRequest < Struct.new(
+      :arn,
+      :name,
+      :description,
+      :application_source_config,
+      :subscriptions,
+      :publications)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/UpdateApplicationResponse AWS API Documentation
+    #
+    class UpdateApplicationResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] identifier
     #   A unique identifier for the DataIntegration.
     #   @return [String]
@@ -903,7 +1248,7 @@ module Aws::AppIntegrationsService
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the event inegration.
+    #   The description of the event integration.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/UpdateEventIntegrationRequest AWS API Documentation
