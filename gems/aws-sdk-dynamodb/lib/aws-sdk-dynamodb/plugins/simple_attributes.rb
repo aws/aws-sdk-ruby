@@ -109,7 +109,6 @@ their types specified, e.g. `{ s: 'abc' }` instead of simply
         def add_handlers(handlers, config)
           if config.simple_attributes
             handlers.add(Handler, step: :initialize)
-            # handlers.add(ErrorHandler)
           end
         end
 
