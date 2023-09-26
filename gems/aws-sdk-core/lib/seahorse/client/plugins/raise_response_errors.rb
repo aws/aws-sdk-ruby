@@ -21,7 +21,7 @@ module Seahorse
 
         def add_handlers(handlers, config)
           if config.raise_response_errors
-            handlers.add(Handler, step: :initialize, priority: 95)
+            handlers.add(Handler, step: :validate, priority: 95)
           end
         end
 

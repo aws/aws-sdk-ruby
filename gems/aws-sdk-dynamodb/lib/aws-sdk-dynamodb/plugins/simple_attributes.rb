@@ -83,11 +83,11 @@ module Aws
       #     # note that the request `:key` had to be type prefixed
       #     resp = dynamodb.get(table_name: 'aws-sdk', key: { 'id' => { s: 'uuid' }})
       #     resp.item
-      #     # {
-      #     #   "id"=> <struct s='uuid', n=nil, b=nil, ss=nil, ns=nil, bs=nil, m=nil, l=nil, null=nil, bool=nil>
-      #     #   "age"=> <struct s=nil, n="35", b=nil, ss=nil, ns=nil, bs=nil, m=nil, l=nil, null=nil, bool=nil>
-      #     #   ...
-      #     # }
+      #     {
+      #       "id"=> <struct s='uuid', n=nil, b=nil, ss=nil, ns=nil, bs=nil, m=nil, l=nil, null=nil, bool=nil>
+      #       "age"=> <struct s=nil, n="35", b=nil, ss=nil, ns=nil, bs=nil, m=nil, l=nil, null=nil, bool=nil>
+      #       ...
+      #     }
       #
       class SimpleAttributes < Seahorse::Client::Plugin
 
@@ -109,6 +109,7 @@ their types specified, e.g. `{ s: 'abc' }` instead of simply
         def add_handlers(handlers, config)
           if config.simple_attributes
             handlers.add(Handler, step: :initialize)
+            # handlers.add(ErrorHandler)
           end
         end
 
@@ -116,22 +117,18 @@ their types specified, e.g. `{ s: 'abc' }` instead of simply
 
           def call(context)
             context.params = translate_input(context)
-            resp = @handler.call(context)
-            resp.on(200) do |response|
+            @handler.call(context).on(200) do |response|
               response.data = translate_output(response)
             end
-            resp.on(400) do |response|
-              if response.error.is_a?(Errors::ConditionalCheckFailedException)
-                response.error.data.item = translate_error(response).item
-              end
-            end
-            resp
+          rescue Aws::Errors::ServiceError => e
+            e.data = translate_error_data(context, e.data)
+            raise e
           end
 
           private
 
           def translate_input(context)
-            if shape = context.operation.input
+            if (shape = context.operation.input)
               ValueTranslator.new(shape, :marshal).apply(context.params)
             else
               context.params
@@ -139,18 +136,22 @@ their types specified, e.g. `{ s: 'abc' }` instead of simply
           end
 
           def translate_output(response)
-            if shape = response.context.operation.output
+            if (shape = response.context.operation.output)
               ValueTranslator.new(shape, :unmarshal).apply(response.data)
             else
               response.data
             end
           end
 
-          def translate_error(response)
-            shape = response.context.operation.errors.find do |e|
-              response.error.data.is_a?(e.shape.struct_class)
+          def translate_error_data(context, error_data)
+            shape = context.operation.errors.find do |e|
+              error_data.is_a?(e.shape.struct_class)
             end
-            ValueTranslator.new(shape, :unmarshal).apply(response.error.data)
+            if shape
+              ValueTranslator.new(shape, :unmarshal).apply(error_data)
+            else
+              error_data
+            end
           end
 
         end
