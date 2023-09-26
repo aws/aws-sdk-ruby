@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Change the `ServiceError` data member from read only to read/write.
+
 3.183.1 (2023-09-25)
 ------------------
 

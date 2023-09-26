@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Simple attributes conversion for item data returned in `ConditionalCheckFailedException` and other exceptions. (Breaking change / bug fix)
+
 1.94.0 (2023-09-26)
 ------------------
 

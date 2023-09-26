@@ -30,7 +30,7 @@ module Aws
       attr_reader :context
 
       # @return [Aws::Structure]
-      attr_reader :data
+      attr_accessor :data
 
       class << self
 
