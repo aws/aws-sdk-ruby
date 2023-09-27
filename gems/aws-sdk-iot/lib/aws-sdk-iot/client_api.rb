@@ -670,6 +670,10 @@ module Aws::IoT
     JobTemplateSummaryList = Shapes::ListShape.new(name: 'JobTemplateSummaryList')
     JsonDocument = Shapes::StringShape.new(name: 'JsonDocument')
     KafkaAction = Shapes::StructureShape.new(name: 'KafkaAction')
+    KafkaActionHeader = Shapes::StructureShape.new(name: 'KafkaActionHeader')
+    KafkaHeaderKey = Shapes::StringShape.new(name: 'KafkaHeaderKey')
+    KafkaHeaderValue = Shapes::StringShape.new(name: 'KafkaHeaderValue')
+    KafkaHeaders = Shapes::ListShape.new(name: 'KafkaHeaders')
     Key = Shapes::StringShape.new(name: 'Key')
     KeyName = Shapes::StringShape.new(name: 'KeyName')
     KeyPair = Shapes::StructureShape.new(name: 'KeyPair')
@@ -3288,7 +3292,14 @@ module Aws::IoT
     KafkaAction.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "key"))
     KafkaAction.add_member(:partition, Shapes::ShapeRef.new(shape: String, location_name: "partition"))
     KafkaAction.add_member(:client_properties, Shapes::ShapeRef.new(shape: ClientProperties, required: true, location_name: "clientProperties"))
+    KafkaAction.add_member(:headers, Shapes::ShapeRef.new(shape: KafkaHeaders, location_name: "headers"))
     KafkaAction.struct_class = Types::KafkaAction
+
+    KafkaActionHeader.add_member(:key, Shapes::ShapeRef.new(shape: KafkaHeaderKey, required: true, location_name: "key"))
+    KafkaActionHeader.add_member(:value, Shapes::ShapeRef.new(shape: KafkaHeaderValue, required: true, location_name: "value"))
+    KafkaActionHeader.struct_class = Types::KafkaActionHeader
+
+    KafkaHeaders.member = Shapes::ShapeRef.new(shape: KafkaActionHeader)
 
     KeyPair.add_member(:public_key, Shapes::ShapeRef.new(shape: PublicKey, location_name: "PublicKey"))
     KeyPair.add_member(:private_key, Shapes::ShapeRef.new(shape: PrivateKey, location_name: "PrivateKey"))

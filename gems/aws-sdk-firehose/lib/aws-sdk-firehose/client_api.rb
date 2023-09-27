@@ -39,6 +39,7 @@ module Aws::Firehose
     AmazonopensearchserviceRetryOptions = Shapes::StructureShape.new(name: 'AmazonopensearchserviceRetryOptions')
     AmazonopensearchserviceS3BackupMode = Shapes::StringShape.new(name: 'AmazonopensearchserviceS3BackupMode')
     AmazonopensearchserviceTypeName = Shapes::StringShape.new(name: 'AmazonopensearchserviceTypeName')
+    AuthenticationConfiguration = Shapes::StructureShape.new(name: 'AuthenticationConfiguration')
     BlockSizeBytes = Shapes::IntegerShape.new(name: 'BlockSizeBytes')
     BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
     BucketARN = Shapes::StringShape.new(name: 'BucketARN')
@@ -48,6 +49,7 @@ module Aws::Firehose
     ColumnToJsonKeyMappings = Shapes::MapShape.new(name: 'ColumnToJsonKeyMappings')
     CompressionFormat = Shapes::StringShape.new(name: 'CompressionFormat')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
+    Connectivity = Shapes::StringShape.new(name: 'Connectivity')
     ContentEncoding = Shapes::StringShape.new(name: 'ContentEncoding')
     CopyCommand = Shapes::StructureShape.new(name: 'CopyCommand')
     CopyOptions = Shapes::StringShape.new(name: 'CopyOptions')
@@ -148,6 +150,9 @@ module Aws::Firehose
     ListTagsForDeliveryStreamOutputTagList = Shapes::ListShape.new(name: 'ListTagsForDeliveryStreamOutputTagList')
     LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
     LogStreamName = Shapes::StringShape.new(name: 'LogStreamName')
+    MSKClusterARN = Shapes::StringShape.new(name: 'MSKClusterARN')
+    MSKSourceConfiguration = Shapes::StructureShape.new(name: 'MSKSourceConfiguration')
+    MSKSourceDescription = Shapes::StructureShape.new(name: 'MSKSourceDescription')
     NoEncryptionConfig = Shapes::StringShape.new(name: 'NoEncryptionConfig')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NonEmptyStringWithoutWhitespace = Shapes::StringShape.new(name: 'NonEmptyStringWithoutWhitespace')
@@ -223,6 +228,7 @@ module Aws::Firehose
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TopicName = Shapes::StringShape.new(name: 'TopicName')
     UntagDeliveryStreamInput = Shapes::StructureShape.new(name: 'UntagDeliveryStreamInput')
     UntagDeliveryStreamOutput = Shapes::StructureShape.new(name: 'UntagDeliveryStreamOutput')
     UpdateDestinationInput = Shapes::StructureShape.new(name: 'UpdateDestinationInput')
@@ -325,6 +331,10 @@ module Aws::Firehose
     AmazonopensearchserviceRetryOptions.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: AmazonopensearchserviceRetryDurationInSeconds, location_name: "DurationInSeconds"))
     AmazonopensearchserviceRetryOptions.struct_class = Types::AmazonopensearchserviceRetryOptions
 
+    AuthenticationConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
+    AuthenticationConfiguration.add_member(:connectivity, Shapes::ShapeRef.new(shape: Connectivity, required: true, location_name: "Connectivity"))
+    AuthenticationConfiguration.struct_class = Types::AuthenticationConfiguration
+
     BufferingHints.add_member(:size_in_m_bs, Shapes::ShapeRef.new(shape: SizeInMBs, location_name: "SizeInMBs"))
     BufferingHints.add_member(:interval_in_seconds, Shapes::ShapeRef.new(shape: IntervalInSeconds, location_name: "IntervalInSeconds"))
     BufferingHints.struct_class = Types::BufferingHints
@@ -358,6 +368,7 @@ module Aws::Firehose
     CreateDeliveryStreamInput.add_member(:http_endpoint_destination_configuration, Shapes::ShapeRef.new(shape: HttpEndpointDestinationConfiguration, location_name: "HttpEndpointDestinationConfiguration"))
     CreateDeliveryStreamInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagDeliveryStreamInputTagList, location_name: "Tags"))
     CreateDeliveryStreamInput.add_member(:amazon_open_search_serverless_destination_configuration, Shapes::ShapeRef.new(shape: AmazonOpenSearchServerlessDestinationConfiguration, location_name: "AmazonOpenSearchServerlessDestinationConfiguration"))
+    CreateDeliveryStreamInput.add_member(:msk_source_configuration, Shapes::ShapeRef.new(shape: MSKSourceConfiguration, location_name: "MSKSourceConfiguration"))
     CreateDeliveryStreamInput.struct_class = Types::CreateDeliveryStreamInput
 
     CreateDeliveryStreamOutput.add_member(:delivery_stream_arn, Shapes::ShapeRef.new(shape: DeliveryStreamARN, location_name: "DeliveryStreamARN"))
@@ -650,6 +661,17 @@ module Aws::Firehose
 
     ListTagsForDeliveryStreamOutputTagList.member = Shapes::ShapeRef.new(shape: Tag)
 
+    MSKSourceConfiguration.add_member(:msk_cluster_arn, Shapes::ShapeRef.new(shape: MSKClusterARN, required: true, location_name: "MSKClusterARN"))
+    MSKSourceConfiguration.add_member(:topic_name, Shapes::ShapeRef.new(shape: TopicName, required: true, location_name: "TopicName"))
+    MSKSourceConfiguration.add_member(:authentication_configuration, Shapes::ShapeRef.new(shape: AuthenticationConfiguration, required: true, location_name: "AuthenticationConfiguration"))
+    MSKSourceConfiguration.struct_class = Types::MSKSourceConfiguration
+
+    MSKSourceDescription.add_member(:msk_cluster_arn, Shapes::ShapeRef.new(shape: MSKClusterARN, location_name: "MSKClusterARN"))
+    MSKSourceDescription.add_member(:topic_name, Shapes::ShapeRef.new(shape: TopicName, location_name: "TopicName"))
+    MSKSourceDescription.add_member(:authentication_configuration, Shapes::ShapeRef.new(shape: AuthenticationConfiguration, location_name: "AuthenticationConfiguration"))
+    MSKSourceDescription.add_member(:delivery_start_timestamp, Shapes::ShapeRef.new(shape: DeliveryStartTimestamp, location_name: "DeliveryStartTimestamp"))
+    MSKSourceDescription.struct_class = Types::MSKSourceDescription
+
     OpenXJsonSerDe.add_member(:convert_dots_in_json_keys_to_underscores, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "ConvertDotsInJsonKeysToUnderscores"))
     OpenXJsonSerDe.add_member(:case_insensitive, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "CaseInsensitive"))
     OpenXJsonSerDe.add_member(:column_to_json_key_mappings, Shapes::ShapeRef.new(shape: ColumnToJsonKeyMappings, location_name: "ColumnToJsonKeyMappings"))
@@ -821,6 +843,7 @@ module Aws::Firehose
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
     SourceDescription.add_member(:kinesis_stream_source_description, Shapes::ShapeRef.new(shape: KinesisStreamSourceDescription, location_name: "KinesisStreamSourceDescription"))
+    SourceDescription.add_member(:msk_source_description, Shapes::ShapeRef.new(shape: MSKSourceDescription, location_name: "MSKSourceDescription"))
     SourceDescription.struct_class = Types::SourceDescription
 
     SplunkDestinationConfiguration.add_member(:hec_endpoint, Shapes::ShapeRef.new(shape: HECEndpoint, required: true, location_name: "HECEndpoint"))

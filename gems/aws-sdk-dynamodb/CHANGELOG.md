@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 * Feature - Simple attributes conversion for item data returned in `ConditionalCheckFailedException` and other exceptions. (Breaking change / bug fix)
 
 1.94.0 (2023-09-26)

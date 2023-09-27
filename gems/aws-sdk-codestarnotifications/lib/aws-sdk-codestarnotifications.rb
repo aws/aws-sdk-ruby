@@ -52,6 +52,6 @@ require_relative 'aws-sdk-codestarnotifications/customizations'
 # @!group service
 module Aws::CodeStarNotifications
 
-  GEM_VERSION = '1.28.0'
+  GEM_VERSION = '1.29.0'
 
 end

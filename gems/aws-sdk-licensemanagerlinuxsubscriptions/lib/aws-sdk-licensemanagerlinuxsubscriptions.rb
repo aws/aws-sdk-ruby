@@ -52,6 +52,6 @@ require_relative 'aws-sdk-licensemanagerlinuxsubscriptions/customizations'
 # @!group service
 module Aws::LicenseManagerLinuxSubscriptions
 
-  GEM_VERSION = '1.7.0'
+  GEM_VERSION = '1.8.0'
 
 end
