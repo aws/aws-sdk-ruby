@@ -424,6 +424,7 @@ module Aws
         # when deleting the message
         messages.each_with_object({}) do |msg, unique|
           unique[msg.message_id] = msg
+          unique
         end.values
       end
 
