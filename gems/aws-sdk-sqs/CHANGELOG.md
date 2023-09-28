@@ -1,7 +1,8 @@
 Unreleased Changes
 ------------------
 
-* Issue - Update QueuePoller to handle duplicate messages so that these can be deleted successfully.
+* Feature - Update QueuePoller to handle duplicate messages before yielding. 
+* Issue - Fix message batch deletion issue in (#2913) by deduping the messages.
 
 
 1.63.0 (2023-09-27)

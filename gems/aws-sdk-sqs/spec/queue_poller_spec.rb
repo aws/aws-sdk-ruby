@@ -43,48 +43,53 @@ module Aws
           expect(poller.default_config.skip_delete).to be(false)
           expect(poller.default_config.before_request).to be(nil)
           expect(poller.default_config.request_params)
-            .to eq({
-                     wait_time_seconds: 20,
-                     max_number_of_messages: 1,
-                     visibility_timeout: nil,
-                     attribute_names: ['All'],
-                     message_attribute_names: ['All']
-                   })
+            .to eq(
+              wait_time_seconds: 20,
+              max_number_of_messages: 1,
+              visibility_timeout: nil,
+              attribute_names: ['All'],
+              message_attribute_names: ['All']
+            )
         end
 
         it 'accepts configuration options to the constructor' do
           client = double('client')
           callback = double('callback')
-          poller = QueuePoller.new(queue_url, {
-                                     client: client,
-                                     idle_timeout: 60,
-                                     skip_delete: true,
-                                     before_request: callback,
-                                     wait_time_seconds: 10,
-                                     max_number_of_messages: 10,
-                                     visibility_timeout: 10,
-                                     attribute_names: ['attr-name'],
-                                     message_attribute_names: ['msg-attr-name']
-                                   })
+          poller = QueuePoller.new(
+            queue_url,
+            {
+              client: client,
+              idle_timeout: 60,
+              skip_delete: true,
+              before_request: callback,
+              wait_time_seconds: 10,
+              max_number_of_messages: 10,
+              visibility_timeout: 10,
+              attribute_names: ['attr-name'],
+              message_attribute_names: ['msg-attr-name']
+            }
+          )
           expect(poller.client).to be(client)
           expect(poller.default_config.idle_timeout).to eq(60)
           expect(poller.default_config.skip_delete).to be(true)
           expect(poller.default_config.before_request).to be(callback)
           expect(poller.default_config.request_params)
-            .to eq({
-                     wait_time_seconds: 10,
-                     max_number_of_messages: 10,
-                     visibility_timeout: 10,
-                     attribute_names: ['attr-name'],
-                     message_attribute_names: ['msg-attr-name']
-                   })
+            .to eq(
+              wait_time_seconds: 10,
+              max_number_of_messages: 10,
+              visibility_timeout: 10,
+              attribute_names: ['attr-name'],
+              message_attribute_names: ['msg-attr-name']
+            )
         end
 
         context 'max_number_of_messages validation' do
           subject do
-            QueuePoller.new(queue_url,
-                            client: client,
-                            max_number_of_messages: max_number_of_messages)
+            QueuePoller.new(
+              queue_url,
+              client: client,
+              max_number_of_messages: max_number_of_messages
+            )
           end
 
           let(:max_number_of_messages) { 1 }
@@ -109,14 +114,14 @@ module Aws
         it 'receives messages in a loop' do
           expect(client).to receive(:receive_message)
             .exactly(2).times
-            .with({
-                    queue_url: queue_url,
-                    wait_time_seconds: 20,
-                    max_number_of_messages: 1,
-                    visibility_timeout: nil,
-                    attribute_names: ['All'],
-                    message_attribute_names: ['All']
-                  })
+            .with(
+              queue_url: queue_url,
+              wait_time_seconds: 20,
+              max_number_of_messages: 1,
+              visibility_timeout: nil,
+              attribute_names: ['All'],
+              message_attribute_names: ['All']
+            )
             .and_return(client.stub_data(:receive_message))
           poller.before_request do |stats|
             throw :stop_polling if stats.request_count >= 2
@@ -154,7 +159,7 @@ module Aws
         it 'does not have duplicated messages and given the '\
            'most recently received duplicated message' do
           message_one = sample_message(1)
-          message_dup = message_one.dup.merge(receipt_handle: 'foo')
+          message_dup = message_one.dup
           client.stub_responses(:receive_message, [
                                   { messages: [
                                     message_one,
@@ -166,6 +171,7 @@ module Aws
           poller.poll(idle_timeout: 0) do |msg|
             yielded_arr << msg
           end
+          puts yielded_arr
           expect(yielded_arr.count).to eq(1)
           expect(yielded_arr[0].receipt_handle).to eq(message_dup[:receipt_handle])
         end
@@ -173,12 +179,10 @@ module Aws
         describe 'message deletion' do
           it 'deletes the message at the end of the block' do
             expect(client).to receive(:delete_message_batch)
-              .with({
-                      queue_url: queue_url,
-                      entries: [
-                        { id: 'id', receipt_handle: 'rh' }
-                      ]
-                    })
+              .with(
+                queue_url: queue_url,
+                entries: [{ id: 'id', receipt_handle: 'rh' }]
+              )
             client.stub_responses(:receive_message, [
                                     { messages: [sample_message] },
                                     { messages: [] }
@@ -224,10 +228,10 @@ module Aws
           end
 
           it 'provides the ability to manually delete messages' do
-            expect(client).to receive(:delete_message).with({
-                                                              queue_url: queue_url,
-                                                              receipt_handle: 'rh'
-                                                            })
+            expect(client).to receive(:delete_message).with(
+              queue_url: queue_url,
+              receipt_handle: 'rh'
+            )
             client.stub_responses(:receive_message, [
                                     { messages: [sample_message] },
                                     { messages: [] }
@@ -239,13 +243,13 @@ module Aws
 
           it 'provides the ability to manually delete message batches' do
             expect(client).to receive(:delete_message_batch)
-              .with({
-                      queue_url: queue_url,
-                      entries: [
-                        { id: 'id-1', receipt_handle: 'rh-1' },
-                        { id: 'id-2', receipt_handle: 'rh-2' }
-                      ]
-                    })
+              .with(
+                queue_url: queue_url,
+                entries: [
+                  { id: 'id-1', receipt_handle: 'rh-1' },
+                  { id: 'id-2', receipt_handle: 'rh-2' }
+                ]
+              )
             client.stub_responses(:receive_message, [
                                     { messages: [
                                       sample_message(1),
@@ -271,11 +275,11 @@ module Aws
             end
             expect(resp.context.operation_name.to_s).to eq('change_message_visibility')
             expect(resp.context.params)
-              .to eq({
-                       queue_url: queue_url,
-                       receipt_handle: 'rh',
-                       visibility_timeout: 60
-                     })
+              .to eq(
+                queue_url: queue_url,
+                receipt_handle: 'rh',
+                visibility_timeout: 60
+              )
           end
         end
 
