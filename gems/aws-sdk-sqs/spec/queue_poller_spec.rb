@@ -130,10 +130,13 @@ module Aws
         end
 
         it 'yields received messages to the block' do
-          client.stub_responses(:receive_message, [
-                                  { messages: [sample_message] },
-                                  { messages: [] }
-                                ])
+          client.stub_responses(
+            :receive_message,
+            [
+              { messages: [sample_message] },
+              { messages: [] }
+            ]
+          )
           yielded = nil
           poller.poll(idle_timeout: 0) do |msg|
             yielded = msg
@@ -142,13 +145,16 @@ module Aws
         end
 
         it 'yields an array when max messages is greater than 1' do
-          client.stub_responses(:receive_message, [
-                                  { messages: [
-                                    sample_message(1),
-                                    sample_message(2)
-                                  ] },
-                                  { messages: [] }
-                                ])
+          client.stub_responses(
+            :receive_message,
+            [
+              { messages: [
+                sample_message(1),
+                sample_message(2)
+              ] },
+              { messages: [] }
+            ]
+          )
           yielded = nil
           poller.poll(idle_timeout: 0, max_number_of_messages: 2) do |messages|
             yielded = messages
@@ -160,18 +166,18 @@ module Aws
            'most recently received duplicated message' do
           message_one = sample_message(1)
           message_dup = message_one.dup
-          client.stub_responses(:receive_message, [
-                                  { messages: [
-                                    message_one,
-                                    message_dup
-                                  ] },
-                                  { messages: [] }
-                                ])
+          client.stub_responses(
+            :receive_message,
+            [{ messages: [
+              message_one,
+              message_dup
+            ] },
+             { messages: [] }]
+          )
           yielded_arr = []
           poller.poll(idle_timeout: 0) do |msg|
             yielded_arr << msg
           end
-          puts yielded_arr
           expect(yielded_arr.count).to eq(1)
           expect(yielded_arr[0].receipt_handle).to eq(message_dup[:receipt_handle])
         end
@@ -183,47 +189,57 @@ module Aws
                 queue_url: queue_url,
                 entries: [{ id: 'id', receipt_handle: 'rh' }]
               )
-            client.stub_responses(:receive_message, [
-                                    { messages: [sample_message] },
-                                    { messages: [] }
-                                  ])
+            client.stub_responses(
+              :receive_message,
+              [
+                { messages: [sample_message] },
+                { messages: [] }
+              ]
+            )
             poller.poll(idle_timeout: 0) { |msg| }
           end
 
           it 'supports batch deletion' do
             expect(client).to receive(:delete_message_batch)
-              .with({
-                      queue_url: queue_url,
-                      entries: [
-                        { id: 'id-1', receipt_handle: 'rh-1' },
-                        { id: 'id-2', receipt_handle: 'rh-2' }
-                      ]
-                    })
-            client.stub_responses(:receive_message, [
-                                    { messages: [
-                                      sample_message(1),
-                                      sample_message(2)
-                                    ] },
-                                    { messages: [] }
-                                  ])
+              .with(
+                queue_url: queue_url,
+                entries: [
+                  { id: 'id-1', receipt_handle: 'rh-1' },
+                  { id: 'id-2', receipt_handle: 'rh-2' }
+                ]
+              )
+            client.stub_responses(
+              :receive_message,
+              [
+                { messages: [
+                  sample_message(1),
+                  sample_message(2)
+                ] },
+                { messages: [] }
+              ]
+            )
             poller.poll(idle_timeout: 0) { |msg| }
           end
 
           it 'can skip default delete behavior' do
             expect(client).not_to receive(:delete_message_batch)
-            client.stub_responses(:receive_message, [
-                                    { messages: [sample_message] },
-                                    { messages: [] }
-                                  ])
+            client.stub_responses(
+              :receive_message, [
+                { messages: [sample_message] },
+                { messages: [] }
+              ]
+            )
             poller.poll(idle_timeout: 0, skip_delete: true) { |msg| }
           end
 
           it 'skips delete when :skip_delete is thrown' do
             expect(client).not_to receive(:delete_message_batch)
-            client.stub_responses(:receive_message, [
-                                    { messages: [sample_message] },
-                                    { messages: [] }
-                                  ])
+            client.stub_responses(
+              :receive_message, [
+                { messages: [sample_message] },
+                { messages: [] }
+              ]
+            )
             poller.poll(idle_timeout: 0) { |_msg| throw :skip_delete }
           end
 
@@ -232,10 +248,12 @@ module Aws
               queue_url: queue_url,
               receipt_handle: 'rh'
             )
-            client.stub_responses(:receive_message, [
-                                    { messages: [sample_message] },
-                                    { messages: [] }
-                                  ])
+            client.stub_responses(
+              :receive_message, [
+                { messages: [sample_message] },
+                { messages: [] }
+              ]
+            )
             poller.poll(idle_timeout: 0, skip_delete: true) do |msg|
               poller.delete_message(msg)
             end
@@ -250,13 +268,15 @@ module Aws
                   { id: 'id-2', receipt_handle: 'rh-2' }
                 ]
               )
-            client.stub_responses(:receive_message, [
-                                    { messages: [
-                                      sample_message(1),
-                                      sample_message(2)
-                                    ] },
-                                    { messages: [] }
-                                  ])
+            client.stub_responses(
+              :receive_message, [
+                { messages: [
+                  sample_message(1),
+                  sample_message(2)
+                ] },
+                { messages: [] }
+              ]
+            )
             poller.poll(idle_timeout: 0, max_number_of_messages: 10, skip_delete: true) do |messages|
               poller.delete_messages(messages)
             end
@@ -265,10 +285,12 @@ module Aws
 
         describe 'visibility timeouts' do
           it 'provides a method to update the visibility timeout of a message' do
-            client.stub_responses(:receive_message, [
-                                    { messages: [sample_message] },
-                                    { messages: [] }
-                                  ])
+            client.stub_responses(
+              :receive_message, [
+                { messages: [sample_message] },
+                { messages: [] }
+              ]
+            )
             resp = nil
             poller.poll(idle_timeout: 0) do |msg|
               resp = poller.change_message_visibility_timeout(msg, 60)
@@ -313,13 +335,15 @@ module Aws
 
         describe 'tracking stats' do
           it 'counts the number of requests made' do
-            client.stub_responses(:receive_message, [
-                                    { messages: [sample_message] },
-                                    { messages: [] },
-                                    { messages: [sample_message] },
-                                    { messages: [] },
-                                    { messages: [sample_message] }
-                                  ])
+            client.stub_responses(
+              :receive_message, [
+                { messages: [sample_message] },
+                { messages: [] },
+                { messages: [sample_message] },
+                { messages: [] },
+                { messages: [sample_message] }
+              ]
+            )
             poller.before_request do |stats|
               throw :stop_polling if stats.received_message_count == 3
             end
@@ -328,42 +352,48 @@ module Aws
           end
 
           it 'counts the number of messages yielded in single mode' do
-            client.stub_responses(:receive_message, [
-                                    { messages: [sample_message] },
-                                    { messages: [sample_message] },
-                                    { messages: [sample_message] },
-                                    { messages: [sample_message] },
-                                    { messages: [sample_message] },
-                                    { messages: [] }
-                                  ])
+            client.stub_responses(
+              :receive_message, [
+                { messages: [sample_message] },
+                { messages: [sample_message] },
+                { messages: [sample_message] },
+                { messages: [sample_message] },
+                { messages: [sample_message] },
+                { messages: [] }
+              ]
+            )
             stats = poller.poll(idle_timeout: 0) { |msg| }
             expect(stats.received_message_count).to eq(5)
           end
 
           it 'counts the number of messages yielded in batch mode' do
-            client.stub_responses(:receive_message, [
-                                    { messages: [
-                                      sample_message,
-                                      sample_message,
-                                      sample_message
-                                    ] },
-                                    { messages: [
-                                      sample_message,
-                                      sample_message,
-                                      sample_message
-                                    ] },
-                                    { messages: [] }
-                                  ])
+            client.stub_responses(
+              :receive_message, [
+                { messages: [
+                  sample_message,
+                  sample_message,
+                  sample_message
+                ] },
+                { messages: [
+                  sample_message,
+                  sample_message,
+                  sample_message
+                ] },
+                { messages: [] }
+              ]
+            )
             stats = poller.poll(idle_timeout: 0, max_number_of_messages: 3) { |msgs| }
             expect(stats.received_message_count).to eq(6)
           end
 
           it 'tracks when a message was most recently received' do
-            client.stub_responses(:receive_message,
-                                  [
-                                    { messages: [sample_message] },
-                                    { messages: [] }
-                                  ])
+            client.stub_responses(
+              :receive_message,
+              [
+                { messages: [sample_message] },
+                { messages: [] }
+              ]
+            )
             stats = poller.poll(idle_timeout: 0) { |msg| }
             expect(stats.last_message_received_at).to be_kind_of(Time)
           end
@@ -388,12 +418,14 @@ module Aws
           end
 
           it 'yields a stats object to #poll' do
-            client.stub_responses(:receive_message, [
-                                    { messages: [sample_message] },
-                                    { messages: [sample_message] },
-                                    { messages: [sample_message] },
-                                    { messages: [] }
-                                  ])
+            client.stub_responses(
+              :receive_message, [
+                { messages: [sample_message] },
+                { messages: [sample_message] },
+                { messages: [sample_message] },
+                { messages: [] }
+              ]
+            )
             yielded = nil
             poller.poll(idle_timeout: 0) do |_msg, stats|
               yielded = stats
@@ -405,12 +437,14 @@ module Aws
           end
 
           it 'returns a stats object' do
-            client.stub_responses(:receive_message, [
-                                    { messages: [sample_message] },
-                                    { messages: [sample_message] },
-                                    { messages: [sample_message] },
-                                    { messages: [] }
-                                  ])
+            client.stub_responses(
+              :receive_message, [
+                { messages: [sample_message] },
+                { messages: [sample_message] },
+                { messages: [sample_message] },
+                { messages: [] }
+              ]
+            )
             stats = poller.poll(idle_timeout: 0) { |msg| }
             expect(stats).to be_kind_of(QueuePoller::PollerStats)
             expect(stats.request_count).to eq(4)
