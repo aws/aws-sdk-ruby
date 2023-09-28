@@ -154,7 +154,7 @@ module Aws
         it 'does not have duplicated messages and given the '\
            'most recently received duplicated message' do
           message_one = sample_message(1)
-          message_dup = message_one.dup.merge(body: 'foo')
+          message_dup = message_one.dup.merge(receipt_handle: 'foo')
           client.stub_responses(:receive_message, [
                                   { messages: [
                                     message_one,
@@ -167,7 +167,7 @@ module Aws
             yielded_arr << msg
           end
           expect(yielded_arr.count).to eq(1)
-          expect(yielded_arr[0].body).to eq(message_dup[:body])
+          expect(yielded_arr[0].receipt_handle).to eq(message_dup[:receipt_handle])
         end
 
         describe 'message deletion' do
