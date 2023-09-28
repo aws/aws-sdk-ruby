@@ -401,7 +401,11 @@ module Aws
       def process_messages(config, stats, messages, &block)
         stats.received_message_count += messages.count
         stats.last_message_received_at = Time.now
-        messages = dedupe_messages(messages)
+
+        # duplicated messages will have a different receipt handle
+        # so we need to provide the most recent receipt to
+        # delete a batch - thus, filtering below by message_id
+        messages = messages.reverse.uniq(&:message_id).reverse!
         catch(:skip_delete) do
           yield_messages(config, messages, stats, &block)
           delete_messages(messages) unless config.skip_delete
@@ -416,16 +420,6 @@ module Aws
         else
           yield(messages, stats)
         end
-      end
-
-      def dedupe_messages(messages)
-        # duplicate messages will have a different receipt handle
-        # so must provide the most recently receipt handle
-        # when deleting the message
-        messages.each_with_object({}) do |msg, unique|
-          unique[msg.message_id] = msg
-          unique
-        end.values
       end
 
       # Statistics tracked client-side by the {QueuePoller}.
