@@ -115,12 +115,14 @@ module Aws
           expect(client).to receive(:receive_message)
             .exactly(2).times
             .with(
-              queue_url: queue_url,
-              wait_time_seconds: 20,
-              max_number_of_messages: 1,
-              visibility_timeout: nil,
-              attribute_names: ['All'],
-              message_attribute_names: ['All']
+              {
+                queue_url: queue_url,
+                wait_time_seconds: 20,
+                max_number_of_messages: 1,
+                visibility_timeout: nil,
+                attribute_names: ['All'],
+                message_attribute_names: ['All']
+              }
             )
             .and_return(client.stub_data(:receive_message))
           poller.before_request do |stats|
@@ -165,7 +167,7 @@ module Aws
         it 'does not have duplicated messages and given the '\
            'most recently received duplicated message' do
           message_one = sample_message(1)
-          message_dup = message_one.dup
+          message_dup = message_one.dup.merge(receipt_handle: 'foo')
           client.stub_responses(
             :receive_message,
             [{ messages: [
