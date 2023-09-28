@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Issue - Update QueuePoller to handle deduplicate messages so that those messages can be deleted successfully.
+
+
 1.63.0 (2023-09-27)
 ------------------
 
