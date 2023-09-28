@@ -1208,7 +1208,8 @@ module Aws::SageMaker
     #
     #  `CreateAutoMLJobV2` can manage tabular problem types identical to
     # those of its previous version `CreateAutoMLJob`, as well as
-    # non-tabular problem types such as image or text classification.
+    # time-series forecasting, and non-tabular problem types such as image
+    # or text classification.
     #
     #  Find guidelines about how to migrate a `CreateAutoMLJob` to
     # `CreateAutoMLJobV2` in [Migrate a CreateAutoMLJob to
@@ -1387,7 +1388,8 @@ module Aws::SageMaker
     #
     #  `CreateAutoMLJobV2` can manage tabular problem types identical to
     # those of its previous version `CreateAutoMLJob`, as well as
-    # non-tabular problem types such as image or text classification.
+    # time-series forecasting, and non-tabular problem types such as image
+    # or text classification.
     #
     #  Find guidelines about how to migrate a `CreateAutoMLJob` to
     # `CreateAutoMLJobV2` in [Migrate a CreateAutoMLJob to
@@ -1963,9 +1965,9 @@ module Aws::SageMaker
     #   stopping.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   (Optional) An array of key-value pairs. For more information, see
-    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
-    #   and Cost Management User Guide*.
+    #   (Optional) An array of key-value pairs. For more information, see [
+    #   Using Cost Allocation Tags][1] in the *Amazon Web Services Billing and
+    #   Cost Management User Guide*.
     #
     #
     #
@@ -3308,6 +3310,12 @@ module Aws::SageMaker
     #       {
     #         feature_name: "FeatureName",
     #         feature_type: "Integral", # accepts Integral, Fractional, String
+    #         collection_type: "List", # accepts List, Set, Vector
+    #         collection_config: {
+    #           vector_config: {
+    #             dimension: 1, # required
+    #           },
+    #         },
     #       },
     #     ],
     #     online_store_config: {
@@ -3319,6 +3327,7 @@ module Aws::SageMaker
     #         unit: "Seconds", # accepts Seconds, Minutes, Hours, Days, Weeks
     #         value: 1,
     #       },
+    #       storage_type: "Standard", # accepts Standard, InMemory
     #     },
     #     offline_store_config: {
     #       s3_storage_config: { # required
@@ -5103,9 +5112,9 @@ module Aws::SageMaker
     #   stopping.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   (Optional) An array of key-value pairs. For more information, see
-    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
-    #   and Cost Management User Guide*.
+    #   (Optional) An array of key-value pairs. For more information, see [
+    #   Using Cost Allocation Tags][1] in the *Amazon Web Services Billing and
+    #   Cost Management User Guide*.
     #
     #
     #
@@ -5381,9 +5390,9 @@ module Aws::SageMaker
     #   stopping.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   (Optional) An array of key-value pairs. For more information, see
-    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
-    #   and Cost Management User Guide*.
+    #   (Optional) An array of key-value pairs. For more information, see [
+    #   Using Cost Allocation Tags][1] in the *Amazon Web Services Billing and
+    #   Cost Management User Guide*.
     #
     #
     #
@@ -5986,9 +5995,9 @@ module Aws::SageMaker
     #   stopping.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   (Optional) An array of key-value pairs. For more information, see
-    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
-    #   and Cost Management User Guide*.
+    #   (Optional) An array of key-value pairs. For more information, see [
+    #   Using Cost Allocation Tags][1] in the *Amazon Web Services Billing and
+    #   Cost Management User Guide*.
     #
     #
     #
@@ -11521,12 +11530,15 @@ module Aws::SageMaker
     #   resp.feature_definitions #=> Array
     #   resp.feature_definitions[0].feature_name #=> String
     #   resp.feature_definitions[0].feature_type #=> String, one of "Integral", "Fractional", "String"
+    #   resp.feature_definitions[0].collection_type #=> String, one of "List", "Set", "Vector"
+    #   resp.feature_definitions[0].collection_config.vector_config.dimension #=> Integer
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
     #   resp.online_store_config.security_config.kms_key_id #=> String
     #   resp.online_store_config.enable_online_store #=> Boolean
     #   resp.online_store_config.ttl_duration.unit #=> String, one of "Seconds", "Minutes", "Hours", "Days", "Weeks"
     #   resp.online_store_config.ttl_duration.value #=> Integer
+    #   resp.online_store_config.storage_type #=> String, one of "Standard", "InMemory"
     #   resp.offline_store_config.s3_storage_config.s3_uri #=> String
     #   resp.offline_store_config.s3_storage_config.kms_key_id #=> String
     #   resp.offline_store_config.s3_storage_config.resolved_output_s3_uri #=> String
@@ -16096,7 +16108,8 @@ module Aws::SageMaker
     #   The field to sort results by. The default is `CreationTime`.
     #
     # @option params [String] :sort_order
-    #   The sort order for results. The default is `Descending`.
+    #   Whether to sort the results in `Ascending` or `Descending` order. The
+    #   default is `Descending`.
     #
     # @option params [String] :next_token
     #   If the result of the previous `ListDataQualityJobDefinitions` request
@@ -18519,7 +18532,8 @@ module Aws::SageMaker
     #   The field to sort results by. The default is `CreationTime`.
     #
     # @option params [String] :sort_order
-    #   The sort order for results. The default is `Descending`.
+    #   Whether to sort the results in `Ascending` or `Descending` order. The
+    #   default is `Descending`.
     #
     # @option params [String] :next_token
     #   If the result of the previous `ListModelQualityJobDefinitions` request
@@ -18777,8 +18791,8 @@ module Aws::SageMaker
     #   Name of a specific endpoint to fetch jobs for.
     #
     # @option params [String] :sort_by
-    #   Whether to sort results by `Status`, `CreationTime`, `ScheduledTime`
-    #   field. The default is `CreationTime`.
+    #   Whether to sort the results by the `Status`, `CreationTime`, or
+    #   `ScheduledTime` field. The default is `CreationTime`.
     #
     # @option params [String] :sort_order
     #   Whether to sort the results in `Ascending` or `Descending` order. The
@@ -18878,8 +18892,8 @@ module Aws::SageMaker
     #   Name of a specific endpoint to fetch schedules for.
     #
     # @option params [String] :sort_by
-    #   Whether to sort results by `Status`, `CreationTime`, `ScheduledTime`
-    #   field. The default is `CreationTime`.
+    #   Whether to sort the results by the `Status`, `CreationTime`, or
+    #   `ScheduledTime` field. The default is `CreationTime`.
     #
     # @option params [String] :sort_order
     #   Whether to sort the results in `Ascending` or `Descending` order. The
@@ -22490,6 +22504,12 @@ module Aws::SageMaker
     #       {
     #         feature_name: "FeatureName",
     #         feature_type: "Integral", # accepts Integral, Fractional, String
+    #         collection_type: "List", # accepts List, Set, Vector
+    #         collection_config: {
+    #           vector_config: {
+    #             dimension: 1, # required
+    #           },
+    #         },
     #       },
     #     ],
     #     online_store_config: {
@@ -24173,7 +24193,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.212.0'
+      context[:gem_version] = '1.213.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

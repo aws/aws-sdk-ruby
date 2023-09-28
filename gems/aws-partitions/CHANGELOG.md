@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.830.0 (2023-09-28)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::BedrockRuntime`.
+
+* Feature - Added support for enumerating regions for `Aws::Bedrock`.
+
 1.829.0 (2023-09-27)
 ------------------
 

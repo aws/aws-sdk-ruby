@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.171.0 (2023-09-28)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-bedrockruntime` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-bedrock` gem.
+
 3.170.0 (2023-08-30)
 ------------------
 

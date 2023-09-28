@@ -108,6 +108,12 @@
   "Batch": {
     "models": "batch/2016-08-10"
   },
+  "Bedrock": {
+    "models": "bedrock/2023-04-20"
+  },
+  "BedrockRuntime": {
+    "models": "bedrock-runtime/2023-09-30"
+  },
   "BillingConductor": {
     "models": "billingconductor/2021-07-30"
   },

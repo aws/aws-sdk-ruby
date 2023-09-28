@@ -40,6 +40,8 @@ module Aws
   autoload :BackupGateway, 'aws-sdk-backupgateway'
   autoload :BackupStorage, 'aws-sdk-backupstorage'
   autoload :Batch, 'aws-sdk-batch'
+  autoload :Bedrock, 'aws-sdk-bedrock'
+  autoload :BedrockRuntime, 'aws-sdk-bedrockruntime'
   autoload :BillingConductor, 'aws-sdk-billingconductor'
   autoload :Braket, 'aws-sdk-braket'
   autoload :Budgets, 'aws-sdk-budgets'

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2023-09-28)
+------------------
+
+* Feature - Correct and improve the documentation for the FieldToMatch option JA3 fingerprint.
+
 1.70.0 (2023-09-27)
 ------------------
 

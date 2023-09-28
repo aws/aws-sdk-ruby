@@ -489,6 +489,8 @@ RubyGems.org page under "LINKS" section.
 | Amazon Appflow                                        | Aws::Appflow                             | aws-sdk-appflow                             | 2020-08-23  |
 | Amazon Athena                                         | Aws::Athena                              | aws-sdk-athena                              | 2017-05-18  |
 | Amazon Augmented AI Runtime                           | Aws::AugmentedAIRuntime                  | aws-sdk-augmentedairuntime                  | 2019-11-07  |
+| Amazon Bedrock                                        | Aws::Bedrock                             | aws-sdk-bedrock                             | 2023-04-20  |
+| Amazon Bedrock Runtime                                | Aws::BedrockRuntime                      | aws-sdk-bedrockruntime                      | 2023-09-30  |
 | Amazon Chime                                          | Aws::Chime                               | aws-sdk-chime                               | 2018-05-01  |
 | Amazon Chime SDK Identity                             | Aws::ChimeSDKIdentity                    | aws-sdk-chimesdkidentity                    | 2021-04-20  |
 | Amazon Chime SDK Media Pipelines                      | Aws::ChimeSDKMediaPipelines              | aws-sdk-chimesdkmediapipelines              | 2021-07-15  |

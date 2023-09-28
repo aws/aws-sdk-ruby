@@ -279,6 +279,8 @@ module Aws
             'BackupGateway' => 'backup-gateway',
             'BackupStorage' => 'backupstorage',
             'Batch' => 'batch',
+            'Bedrock' => 'bedrock',
+            'BedrockRuntime' => 'bedrock-runtime',
             'BillingConductor' => 'billingconductor',
             'Braket' => 'braket',
             'Budgets' => 'budgets',

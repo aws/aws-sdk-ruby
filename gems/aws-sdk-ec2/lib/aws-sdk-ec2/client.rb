@@ -2882,6 +2882,8 @@ module Aws::EC2
     #   resp.verified_access_trust_provider.tags #=> Array
     #   resp.verified_access_trust_provider.tags[0].key #=> String
     #   resp.verified_access_trust_provider.tags[0].value #=> String
+    #   resp.verified_access_trust_provider.sse_specification.customer_managed_key_enabled #=> Boolean
+    #   resp.verified_access_trust_provider.sse_specification.kms_key_arn #=> String
     #   resp.verified_access_instance.verified_access_instance_id #=> String
     #   resp.verified_access_instance.description #=> String
     #   resp.verified_access_instance.verified_access_trust_providers #=> Array
@@ -13343,6 +13345,9 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [Types::VerifiedAccessSseSpecificationRequest] :sse_specification
+    #   Options for server side encryption.
+    #
     # @return [Types::CreateVerifiedAccessEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateVerifiedAccessEndpointResult#verified_access_endpoint #verified_access_endpoint} => Types::VerifiedAccessEndpoint
@@ -13383,6 +13388,10 @@ module Aws::EC2
     #     ],
     #     client_token: "String",
     #     dry_run: false,
+    #     sse_specification: {
+    #       customer_managed_key_enabled: false,
+    #       kms_key_arn: "KmsKeyArn",
+    #     },
     #   })
     #
     # @example Response structure
@@ -13415,6 +13424,8 @@ module Aws::EC2
     #   resp.verified_access_endpoint.tags #=> Array
     #   resp.verified_access_endpoint.tags[0].key #=> String
     #   resp.verified_access_endpoint.tags[0].value #=> String
+    #   resp.verified_access_endpoint.sse_specification.customer_managed_key_enabled #=> Boolean
+    #   resp.verified_access_endpoint.sse_specification.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessEndpoint AWS API Documentation
     #
@@ -13462,6 +13473,9 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [Types::VerifiedAccessSseSpecificationRequest] :sse_specification
+    #   Options for server side encryption.
+    #
     # @return [Types::CreateVerifiedAccessGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateVerifiedAccessGroupResult#verified_access_group #verified_access_group} => Types::VerifiedAccessGroup
@@ -13485,6 +13499,10 @@ module Aws::EC2
     #     ],
     #     client_token: "String",
     #     dry_run: false,
+    #     sse_specification: {
+    #       customer_managed_key_enabled: false,
+    #       kms_key_arn: "KmsKeyArn",
+    #     },
     #   })
     #
     # @example Response structure
@@ -13500,6 +13518,8 @@ module Aws::EC2
     #   resp.verified_access_group.tags #=> Array
     #   resp.verified_access_group.tags[0].key #=> String
     #   resp.verified_access_group.tags[0].value #=> String
+    #   resp.verified_access_group.sse_specification.customer_managed_key_enabled #=> Boolean
+    #   resp.verified_access_group.sse_specification.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessGroup AWS API Documentation
     #
@@ -13539,8 +13559,8 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Boolean] :fips_enabled
-    #   Choose to enable or disable support for Federal Information Processing
-    #   Standards (FIPS) on the instance.
+    #   Enable or disable support for Federal Information Processing Standards
+    #   (FIPS) on the instance.
     #
     # @return [Types::CreateVerifiedAccessInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -13644,6 +13664,9 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [Types::VerifiedAccessSseSpecificationRequest] :sse_specification
+    #   Options for server side encryption.
+    #
     # @return [Types::CreateVerifiedAccessTrustProviderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateVerifiedAccessTrustProviderResult#verified_access_trust_provider #verified_access_trust_provider} => Types::VerifiedAccessTrustProvider
@@ -13681,6 +13704,10 @@ module Aws::EC2
     #     ],
     #     client_token: "String",
     #     dry_run: false,
+    #     sse_specification: {
+    #       customer_managed_key_enabled: false,
+    #       kms_key_arn: "KmsKeyArn",
+    #     },
     #   })
     #
     # @example Response structure
@@ -13704,6 +13731,8 @@ module Aws::EC2
     #   resp.verified_access_trust_provider.tags #=> Array
     #   resp.verified_access_trust_provider.tags[0].key #=> String
     #   resp.verified_access_trust_provider.tags[0].value #=> String
+    #   resp.verified_access_trust_provider.sse_specification.customer_managed_key_enabled #=> Boolean
+    #   resp.verified_access_trust_provider.sse_specification.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessTrustProvider AWS API Documentation
     #
@@ -18062,6 +18091,8 @@ module Aws::EC2
     #   resp.verified_access_endpoint.tags #=> Array
     #   resp.verified_access_endpoint.tags[0].key #=> String
     #   resp.verified_access_endpoint.tags[0].value #=> String
+    #   resp.verified_access_endpoint.sse_specification.customer_managed_key_enabled #=> Boolean
+    #   resp.verified_access_endpoint.sse_specification.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVerifiedAccessEndpoint AWS API Documentation
     #
@@ -18120,6 +18151,8 @@ module Aws::EC2
     #   resp.verified_access_group.tags #=> Array
     #   resp.verified_access_group.tags[0].key #=> String
     #   resp.verified_access_group.tags[0].value #=> String
+    #   resp.verified_access_group.sse_specification.customer_managed_key_enabled #=> Boolean
+    #   resp.verified_access_group.sse_specification.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVerifiedAccessGroup AWS API Documentation
     #
@@ -18247,6 +18280,8 @@ module Aws::EC2
     #   resp.verified_access_trust_provider.tags #=> Array
     #   resp.verified_access_trust_provider.tags[0].key #=> String
     #   resp.verified_access_trust_provider.tags[0].value #=> String
+    #   resp.verified_access_trust_provider.sse_specification.customer_managed_key_enabled #=> Boolean
+    #   resp.verified_access_trust_provider.sse_specification.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVerifiedAccessTrustProvider AWS API Documentation
     #
@@ -34334,6 +34369,8 @@ module Aws::EC2
     #   resp.verified_access_endpoints[0].tags #=> Array
     #   resp.verified_access_endpoints[0].tags[0].key #=> String
     #   resp.verified_access_endpoints[0].tags[0].value #=> String
+    #   resp.verified_access_endpoints[0].sse_specification.customer_managed_key_enabled #=> Boolean
+    #   resp.verified_access_endpoints[0].sse_specification.kms_key_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVerifiedAccessEndpoints AWS API Documentation
@@ -34407,6 +34444,8 @@ module Aws::EC2
     #   resp.verified_access_groups[0].tags #=> Array
     #   resp.verified_access_groups[0].tags[0].key #=> String
     #   resp.verified_access_groups[0].tags[0].value #=> String
+    #   resp.verified_access_groups[0].sse_specification.customer_managed_key_enabled #=> Boolean
+    #   resp.verified_access_groups[0].sse_specification.kms_key_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVerifiedAccessGroups AWS API Documentation
@@ -34632,6 +34671,8 @@ module Aws::EC2
     #   resp.verified_access_trust_providers[0].tags #=> Array
     #   resp.verified_access_trust_providers[0].tags[0].key #=> String
     #   resp.verified_access_trust_providers[0].tags[0].value #=> String
+    #   resp.verified_access_trust_providers[0].sse_specification.customer_managed_key_enabled #=> Boolean
+    #   resp.verified_access_trust_providers[0].sse_specification.kms_key_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVerifiedAccessTrustProviders AWS API Documentation
@@ -36875,6 +36916,8 @@ module Aws::EC2
     #   resp.verified_access_trust_provider.tags #=> Array
     #   resp.verified_access_trust_provider.tags[0].key #=> String
     #   resp.verified_access_trust_provider.tags[0].value #=> String
+    #   resp.verified_access_trust_provider.sse_specification.customer_managed_key_enabled #=> Boolean
+    #   resp.verified_access_trust_provider.sse_specification.kms_key_arn #=> String
     #   resp.verified_access_instance.verified_access_instance_id #=> String
     #   resp.verified_access_instance.description #=> String
     #   resp.verified_access_instance.verified_access_trust_providers #=> Array
@@ -47826,6 +47869,8 @@ module Aws::EC2
     #   resp.verified_access_endpoint.tags #=> Array
     #   resp.verified_access_endpoint.tags[0].key #=> String
     #   resp.verified_access_endpoint.tags[0].value #=> String
+    #   resp.verified_access_endpoint.sse_specification.customer_managed_key_enabled #=> Boolean
+    #   resp.verified_access_endpoint.sse_specification.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessEndpoint AWS API Documentation
     #
@@ -47842,7 +47887,7 @@ module Aws::EC2
     # @option params [required, String] :verified_access_endpoint_id
     #   The ID of the Verified Access endpoint.
     #
-    # @option params [required, Boolean] :policy_enabled
+    # @option params [Boolean] :policy_enabled
     #   The status of the Verified Access policy.
     #
     # @option params [String] :policy_document
@@ -47866,25 +47911,35 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [Types::VerifiedAccessSseSpecificationRequest] :sse_specification
+    #   Options for server side encryption.
+    #
     # @return [Types::ModifyVerifiedAccessEndpointPolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyVerifiedAccessEndpointPolicyResult#policy_enabled #policy_enabled} => Boolean
     #   * {Types::ModifyVerifiedAccessEndpointPolicyResult#policy_document #policy_document} => String
+    #   * {Types::ModifyVerifiedAccessEndpointPolicyResult#sse_specification #sse_specification} => Types::VerifiedAccessSseSpecificationResponse
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_verified_access_endpoint_policy({
     #     verified_access_endpoint_id: "VerifiedAccessEndpointId", # required
-    #     policy_enabled: false, # required
+    #     policy_enabled: false,
     #     policy_document: "String",
     #     client_token: "String",
     #     dry_run: false,
+    #     sse_specification: {
+    #       customer_managed_key_enabled: false,
+    #       kms_key_arn: "KmsKeyArn",
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.policy_enabled #=> Boolean
     #   resp.policy_document #=> String
+    #   resp.sse_specification.customer_managed_key_enabled #=> Boolean
+    #   resp.sse_specification.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessEndpointPolicy AWS API Documentation
     #
@@ -47952,6 +48007,8 @@ module Aws::EC2
     #   resp.verified_access_group.tags #=> Array
     #   resp.verified_access_group.tags[0].key #=> String
     #   resp.verified_access_group.tags[0].value #=> String
+    #   resp.verified_access_group.sse_specification.customer_managed_key_enabled #=> Boolean
+    #   resp.verified_access_group.sse_specification.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessGroup AWS API Documentation
     #
@@ -47968,7 +48025,7 @@ module Aws::EC2
     # @option params [required, String] :verified_access_group_id
     #   The ID of the Verified Access group.
     #
-    # @option params [required, Boolean] :policy_enabled
+    # @option params [Boolean] :policy_enabled
     #   The status of the Verified Access policy.
     #
     # @option params [String] :policy_document
@@ -47992,25 +48049,35 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [Types::VerifiedAccessSseSpecificationRequest] :sse_specification
+    #   Options for server side encryption.
+    #
     # @return [Types::ModifyVerifiedAccessGroupPolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyVerifiedAccessGroupPolicyResult#policy_enabled #policy_enabled} => Boolean
     #   * {Types::ModifyVerifiedAccessGroupPolicyResult#policy_document #policy_document} => String
+    #   * {Types::ModifyVerifiedAccessGroupPolicyResult#sse_specification #sse_specification} => Types::VerifiedAccessSseSpecificationResponse
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_verified_access_group_policy({
     #     verified_access_group_id: "VerifiedAccessGroupId", # required
-    #     policy_enabled: false, # required
+    #     policy_enabled: false,
     #     policy_document: "String",
     #     client_token: "String",
     #     dry_run: false,
+    #     sse_specification: {
+    #       customer_managed_key_enabled: false,
+    #       kms_key_arn: "KmsKeyArn",
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.policy_enabled #=> Boolean
     #   resp.policy_document #=> String
+    #   resp.sse_specification.customer_managed_key_enabled #=> Boolean
+    #   resp.sse_specification.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessGroupPolicy AWS API Documentation
     #
@@ -48204,6 +48271,9 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
+    # @option params [Types::VerifiedAccessSseSpecificationRequest] :sse_specification
+    #   Options for server side encryption.
+    #
     # @return [Types::ModifyVerifiedAccessTrustProviderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyVerifiedAccessTrustProviderResult#verified_access_trust_provider #verified_access_trust_provider} => Types::VerifiedAccessTrustProvider
@@ -48224,6 +48294,10 @@ module Aws::EC2
     #     description: "String",
     #     dry_run: false,
     #     client_token: "String",
+    #     sse_specification: {
+    #       customer_managed_key_enabled: false,
+    #       kms_key_arn: "KmsKeyArn",
+    #     },
     #   })
     #
     # @example Response structure
@@ -48247,6 +48321,8 @@ module Aws::EC2
     #   resp.verified_access_trust_provider.tags #=> Array
     #   resp.verified_access_trust_provider.tags[0].key #=> String
     #   resp.verified_access_trust_provider.tags[0].value #=> String
+    #   resp.verified_access_trust_provider.sse_specification.customer_managed_key_enabled #=> Boolean
+    #   resp.verified_access_trust_provider.sse_specification.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessTrustProvider AWS API Documentation
     #
@@ -56894,7 +56970,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.409.0'
+      context[:gem_version] = '1.410.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

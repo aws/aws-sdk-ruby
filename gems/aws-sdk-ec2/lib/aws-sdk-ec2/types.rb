@@ -11497,6 +11497,10 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] sse_specification
+    #   Options for server side encryption.
+    #   @return [Types::VerifiedAccessSseSpecificationRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessEndpointRequest AWS API Documentation
     #
     class CreateVerifiedAccessEndpointRequest < Struct.new(
@@ -11513,7 +11517,8 @@ module Aws::EC2
       :policy_document,
       :tag_specifications,
       :client_token,
-      :dry_run)
+      :dry_run,
+      :sse_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11566,6 +11571,10 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] sse_specification
+    #   Options for server side encryption.
+    #   @return [Types::VerifiedAccessSseSpecificationRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessGroupRequest AWS API Documentation
     #
     class CreateVerifiedAccessGroupRequest < Struct.new(
@@ -11574,7 +11583,8 @@ module Aws::EC2
       :policy_document,
       :tag_specifications,
       :client_token,
-      :dry_run)
+      :dry_run,
+      :sse_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11620,8 +11630,8 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] fips_enabled
-    #   Choose to enable or disable support for Federal Information
-    #   Processing Standards (FIPS) on the instance.
+    #   Enable or disable support for Federal Information Processing
+    #   Standards (FIPS) on the instance.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessInstanceRequest AWS API Documentation
@@ -11767,6 +11777,10 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] sse_specification
+    #   Options for server side encryption.
+    #   @return [Types::VerifiedAccessSseSpecificationRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessTrustProviderRequest AWS API Documentation
     #
     class CreateVerifiedAccessTrustProviderRequest < Struct.new(
@@ -11779,7 +11793,8 @@ module Aws::EC2
       :description,
       :tag_specifications,
       :client_token,
-      :dry_run)
+      :dry_run,
+      :sse_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46952,6 +46967,10 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] sse_specification
+    #   Options for server side encryption.
+    #   @return [Types::VerifiedAccessSseSpecificationRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessEndpointPolicyRequest AWS API Documentation
     #
     class ModifyVerifiedAccessEndpointPolicyRequest < Struct.new(
@@ -46959,7 +46978,8 @@ module Aws::EC2
       :policy_enabled,
       :policy_document,
       :client_token,
-      :dry_run)
+      :dry_run,
+      :sse_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46972,11 +46992,16 @@ module Aws::EC2
     #   The Verified Access policy document.
     #   @return [String]
     #
+    # @!attribute [rw] sse_specification
+    #   Describes the options in use for server side encryption.
+    #   @return [Types::VerifiedAccessSseSpecificationResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessEndpointPolicyResult AWS API Documentation
     #
     class ModifyVerifiedAccessEndpointPolicyResult < Struct.new(
       :policy_enabled,
-      :policy_document)
+      :policy_document,
+      :sse_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -47080,6 +47105,10 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] sse_specification
+    #   Options for server side encryption.
+    #   @return [Types::VerifiedAccessSseSpecificationRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessGroupPolicyRequest AWS API Documentation
     #
     class ModifyVerifiedAccessGroupPolicyRequest < Struct.new(
@@ -47087,7 +47116,8 @@ module Aws::EC2
       :policy_enabled,
       :policy_document,
       :client_token,
-      :dry_run)
+      :dry_run,
+      :sse_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -47100,11 +47130,16 @@ module Aws::EC2
     #   The Verified Access policy document.
     #   @return [String]
     #
+    # @!attribute [rw] sse_specification
+    #   Describes the options in use for server side encryption.
+    #   @return [Types::VerifiedAccessSseSpecificationResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessGroupPolicyResult AWS API Documentation
     #
     class ModifyVerifiedAccessGroupPolicyResult < Struct.new(
       :policy_enabled,
-      :policy_document)
+      :policy_document,
+      :sse_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -47346,6 +47381,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
+    # @!attribute [rw] sse_specification
+    #   Options for server side encryption.
+    #   @return [Types::VerifiedAccessSseSpecificationRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessTrustProviderRequest AWS API Documentation
     #
     class ModifyVerifiedAccessTrustProviderRequest < Struct.new(
@@ -47353,7 +47392,8 @@ module Aws::EC2
       :oidc_options,
       :description,
       :dry_run,
-      :client_token)
+      :client_token,
+      :sse_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -63376,6 +63416,10 @@ module Aws::EC2
     #   The tags.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] sse_specification
+    #   Describes the options in use for server side encryption.
+    #   @return [Types::VerifiedAccessSseSpecificationResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VerifiedAccessEndpoint AWS API Documentation
     #
     class VerifiedAccessEndpoint < Struct.new(
@@ -63396,7 +63440,8 @@ module Aws::EC2
       :creation_time,
       :last_updated_time,
       :deletion_time,
-      :tags)
+      :tags,
+      :sse_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -63512,6 +63557,10 @@ module Aws::EC2
     #   The tags.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] sse_specification
+    #   Describes the options in use for server side encryption.
+    #   @return [Types::VerifiedAccessSseSpecificationResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VerifiedAccessGroup AWS API Documentation
     #
     class VerifiedAccessGroup < Struct.new(
@@ -63523,7 +63572,8 @@ module Aws::EC2
       :creation_time,
       :last_updated_time,
       :deletion_time,
-      :tags)
+      :tags,
+      :sse_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -63555,8 +63605,8 @@ module Aws::EC2
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] fips_enabled
-    #   Describes if support for Federal Information Processing Standards
-    #   (FIPS) is enabled on the instance.
+    #   Describes whether support for Federal Information Processing
+    #   Standards (FIPS) is enabled on the instance.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VerifiedAccessInstance AWS API Documentation
@@ -63832,6 +63882,53 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Verified Access provides server side encryption by default to data at
+    # rest using Amazon Web Services-owned KMS keys. You also have the
+    # option of using customer managed KMS keys, which can be specified
+    # using the options below.
+    #
+    # @!attribute [rw] customer_managed_key_enabled
+    #   Enable or disable the use of customer managed KMS keys for server
+    #   side encryption.
+    #
+    #   Valid values: `True` \| `False`
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The ARN of the KMS key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VerifiedAccessSseSpecificationRequest AWS API Documentation
+    #
+    class VerifiedAccessSseSpecificationRequest < Struct.new(
+      :customer_managed_key_enabled,
+      :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the options in use for server side encryption.
+    #
+    # @!attribute [rw] customer_managed_key_enabled
+    #   Describes the use of customer managed KMS keys for server side
+    #   encryption.
+    #
+    #   Valid values: `True` \| `False`
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   Describes the ARN of the KMS key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VerifiedAccessSseSpecificationResponse AWS API Documentation
+    #
+    class VerifiedAccessSseSpecificationResponse < Struct.new(
+      :customer_managed_key_enabled,
+      :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a Verified Access trust provider.
     #
     # @!attribute [rw] verified_access_trust_provider_id
@@ -63880,6 +63977,10 @@ module Aws::EC2
     #   The tags.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] sse_specification
+    #   Describes the options in use for server side encryption.
+    #   @return [Types::VerifiedAccessSseSpecificationResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VerifiedAccessTrustProvider AWS API Documentation
     #
     class VerifiedAccessTrustProvider < Struct.new(
@@ -63893,7 +63994,8 @@ module Aws::EC2
       :policy_reference_name,
       :creation_time,
       :last_updated_time,
-      :tags)
+      :tags,
+      :sse_specification)
       SENSITIVE = []
       include Aws::Structure
     end

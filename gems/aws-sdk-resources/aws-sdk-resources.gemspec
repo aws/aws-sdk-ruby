@@ -50,6 +50,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-backupgateway', '~> 1')
   spec.add_dependency('aws-sdk-backupstorage', '~> 1')
   spec.add_dependency('aws-sdk-batch', '~> 1')
+  spec.add_dependency('aws-sdk-bedrock', '~> 1')
+  spec.add_dependency('aws-sdk-bedrockruntime', '~> 1')
   spec.add_dependency('aws-sdk-billingconductor', '~> 1')
   spec.add_dependency('aws-sdk-braket', '~> 1')
   spec.add_dependency('aws-sdk-budgets', '~> 1')

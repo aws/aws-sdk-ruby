@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2023-09-28)
+------------------
+
+* Feature - Feature Store supports read/write of records with collection type features.
+
 1.24.0 (2023-09-27)
 ------------------
 

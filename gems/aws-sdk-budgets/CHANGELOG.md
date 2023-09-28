@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2023-09-28)
+------------------
+
+* Feature - Update DescribeBudgets and DescribeBudgetNotificationsForAccount MaxResults limit to 1000.
+
 1.59.0 (2023-09-27)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.410.0 (2023-09-28)
+------------------
+
+* Feature - Adds support for Customer Managed Key encryption for Amazon Verified Access resources
+
 1.409.0 (2023-09-27)
 ------------------
 

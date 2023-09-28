@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.213.0 (2023-09-28)
+------------------
+
+* Feature - Online store feature groups supports Standard and InMemory tier storage types for low latency storage for real-time data retrieval. The InMemory tier supports collection types List, Set, and Vector.
+
 1.212.0 (2023-09-27)
 ------------------
 

@@ -255,10 +255,12 @@ module Aws::SageMaker
     CognitoMemberDefinition = Shapes::StructureShape.new(name: 'CognitoMemberDefinition')
     CognitoUserGroup = Shapes::StringShape.new(name: 'CognitoUserGroup')
     CognitoUserPool = Shapes::StringShape.new(name: 'CognitoUserPool')
+    CollectionConfig = Shapes::UnionShape.new(name: 'CollectionConfig')
     CollectionConfiguration = Shapes::StructureShape.new(name: 'CollectionConfiguration')
     CollectionConfigurations = Shapes::ListShape.new(name: 'CollectionConfigurations')
     CollectionName = Shapes::StringShape.new(name: 'CollectionName')
     CollectionParameters = Shapes::MapShape.new(name: 'CollectionParameters')
+    CollectionType = Shapes::StringShape.new(name: 'CollectionType')
     CompilationJobArn = Shapes::StringShape.new(name: 'CompilationJobArn')
     CompilationJobStatus = Shapes::StringShape.new(name: 'CompilationJobStatus')
     CompilationJobSummaries = Shapes::ListShape.new(name: 'CompilationJobSummaries')
@@ -648,6 +650,7 @@ module Aws::SageMaker
     DeviceSummaries = Shapes::ListShape.new(name: 'DeviceSummaries')
     DeviceSummary = Shapes::StructureShape.new(name: 'DeviceSummary')
     Devices = Shapes::ListShape.new(name: 'Devices')
+    Dimension = Shapes::IntegerShape.new(name: 'Dimension')
     DirectInternetAccess = Shapes::StringShape.new(name: 'DirectInternetAccess')
     Direction = Shapes::StringShape.new(name: 'Direction')
     DirectoryPath = Shapes::StringShape.new(name: 'DirectoryPath')
@@ -1827,6 +1830,7 @@ module Aws::SageMaker
     StopTrainingJobRequest = Shapes::StructureShape.new(name: 'StopTrainingJobRequest')
     StopTransformJobRequest = Shapes::StructureShape.new(name: 'StopTransformJobRequest')
     StoppingCondition = Shapes::StructureShape.new(name: 'StoppingCondition')
+    StorageType = Shapes::StringShape.new(name: 'StorageType')
     String = Shapes::StringShape.new(name: 'String')
     String1024 = Shapes::StringShape.new(name: 'String1024')
     String128 = Shapes::StringShape.new(name: 'String128')
@@ -2066,6 +2070,7 @@ module Aws::SageMaker
     VariantStatus = Shapes::StringShape.new(name: 'VariantStatus')
     VariantStatusMessage = Shapes::StringShape.new(name: 'VariantStatusMessage')
     VariantWeight = Shapes::FloatShape.new(name: 'VariantWeight')
+    VectorConfig = Shapes::StructureShape.new(name: 'VectorConfig')
     VendorGuidance = Shapes::StringShape.new(name: 'VendorGuidance')
     VersionId = Shapes::StringShape.new(name: 'VersionId')
     VersionedArnOrName = Shapes::StringShape.new(name: 'VersionedArnOrName')
@@ -2664,6 +2669,12 @@ module Aws::SageMaker
     CognitoMemberDefinition.add_member(:user_group, Shapes::ShapeRef.new(shape: CognitoUserGroup, required: true, location_name: "UserGroup"))
     CognitoMemberDefinition.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, required: true, location_name: "ClientId"))
     CognitoMemberDefinition.struct_class = Types::CognitoMemberDefinition
+
+    CollectionConfig.add_member(:vector_config, Shapes::ShapeRef.new(shape: VectorConfig, location_name: "VectorConfig"))
+    CollectionConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CollectionConfig.add_member_subclass(:vector_config, Types::CollectionConfig::VectorConfig)
+    CollectionConfig.add_member_subclass(:unknown, Types::CollectionConfig::Unknown)
+    CollectionConfig.struct_class = Types::CollectionConfig
 
     CollectionConfiguration.add_member(:collection_name, Shapes::ShapeRef.new(shape: CollectionName, location_name: "CollectionName"))
     CollectionConfiguration.add_member(:collection_parameters, Shapes::ShapeRef.new(shape: CollectionParameters, location_name: "CollectionParameters"))
@@ -5131,6 +5142,8 @@ module Aws::SageMaker
 
     FeatureDefinition.add_member(:feature_name, Shapes::ShapeRef.new(shape: FeatureName, location_name: "FeatureName"))
     FeatureDefinition.add_member(:feature_type, Shapes::ShapeRef.new(shape: FeatureType, location_name: "FeatureType"))
+    FeatureDefinition.add_member(:collection_type, Shapes::ShapeRef.new(shape: CollectionType, location_name: "CollectionType"))
+    FeatureDefinition.add_member(:collection_config, Shapes::ShapeRef.new(shape: CollectionConfig, location_name: "CollectionConfig"))
     FeatureDefinition.struct_class = Types::FeatureDefinition
 
     FeatureDefinitions.member = Shapes::ShapeRef.new(shape: FeatureDefinition)
@@ -7494,6 +7507,7 @@ module Aws::SageMaker
     OnlineStoreConfig.add_member(:security_config, Shapes::ShapeRef.new(shape: OnlineStoreSecurityConfig, location_name: "SecurityConfig"))
     OnlineStoreConfig.add_member(:enable_online_store, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableOnlineStore"))
     OnlineStoreConfig.add_member(:ttl_duration, Shapes::ShapeRef.new(shape: TtlDuration, location_name: "TtlDuration"))
+    OnlineStoreConfig.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "StorageType"))
     OnlineStoreConfig.struct_class = Types::OnlineStoreConfig
 
     OnlineStoreConfigUpdate.add_member(:ttl_duration, Shapes::ShapeRef.new(shape: TtlDuration, location_name: "TtlDuration"))
@@ -9187,6 +9201,9 @@ module Aws::SageMaker
     VariantProperty.struct_class = Types::VariantProperty
 
     VariantPropertyList.member = Shapes::ShapeRef.new(shape: VariantProperty)
+
+    VectorConfig.add_member(:dimension, Shapes::ShapeRef.new(shape: Dimension, required: true, location_name: "Dimension"))
+    VectorConfig.struct_class = Types::VectorConfig
 
     Vertex.add_member(:arn, Shapes::ShapeRef.new(shape: AssociationEntityArn, location_name: "Arn"))
     Vertex.add_member(:type, Shapes::ShapeRef.new(shape: String40, location_name: "Type"))

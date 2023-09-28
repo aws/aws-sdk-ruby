@@ -1231,8 +1231,8 @@ module Aws::Budgets
     #   The account ID of the user. It's a 12-digit number.
     #
     # @option params [Integer] :max_results
-    #   An integer that shows how many budget name entries a paginated
-    #   response contains.
+    #   An integer that represents how many budgets a paginated response
+    #   contains. The default is 50.
     #
     # @option params [String] :next_token
     #   A generic string.
@@ -1357,12 +1357,12 @@ module Aws::Budgets
     # [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_DescribeBudgets.html#API_DescribeBudgets_Examples
     #
     # @option params [required, String] :account_id
-    #   The `accountId` that is associated with the budgets that you want
-    #   descriptions of.
+    #   The `accountId` that is associated with the budgets that you want to
+    #   describe.
     #
     # @option params [Integer] :max_results
-    #   An optional integer that represents how many entries a paginated
-    #   response contains. The maximum is 100.
+    #   An integer that represents how many budgets a paginated response
+    #   contains. The default is 100.
     #
     # @option params [String] :next_token
     #   The pagination token that you include in your request to indicate the
@@ -1439,7 +1439,7 @@ module Aws::Budgets
     #
     # @option params [Integer] :max_results
     #   An optional integer that represents how many entries a paginated
-    #   response contains. The maximum is 100.
+    #   response contains.
     #
     # @option params [String] :next_token
     #   The pagination token that you include in your request to indicate the
@@ -1492,7 +1492,7 @@ module Aws::Budgets
     #
     # @option params [Integer] :max_results
     #   An optional integer that represents how many entries a paginated
-    #   response contains. The maximum is 100.
+    #   response contains.
     #
     # @option params [String] :next_token
     #   The pagination token that you include in your request to indicate the
@@ -1919,7 +1919,7 @@ module Aws::Budgets
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-budgets'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
