@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.1 (2023-09-30)
+------------------
+
+* Documentation - Added product offering link in the client.
+
 1.48.0 (2023-09-27)
 ------------------
 
