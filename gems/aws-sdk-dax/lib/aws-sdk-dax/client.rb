@@ -37,7 +37,7 @@ require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 Aws::Plugins::GlobalConfiguration.add_identifier(:dax)
 
 module Aws::DAX
-  # An API client for DAX.  To construct a client, you need to configure a `:region` and `:credentials`.
+  # An API client for [DAX](https://aws.amazon.com/dynamodb/dax/).  To construct a client, you need to configure a `:region` and `:credentials`.
   #
   #     client = Aws::DAX::Client.new(
   #       region: region_name,
