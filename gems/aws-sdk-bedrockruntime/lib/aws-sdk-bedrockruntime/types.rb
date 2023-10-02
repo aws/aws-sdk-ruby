@@ -310,6 +310,7 @@ module Aws::BedrockRuntime
           :chunk,
           :internal_server_exception,
           :model_stream_error_exception,
+          :model_timeout_exception,
           :throttling_exception,
           :validation_exception
         ]

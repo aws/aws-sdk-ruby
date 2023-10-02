@@ -403,14 +403,14 @@ module Aws::BedrockRuntime
     # provided in the request body. You use InvokeModel to run inference for
     # text models, image models, and embedding models.
     #
-    # For more information about invoking models, see Using the API in the
-    # [Bedrock User Guide][1].
+    # For more information, see [Run inference][1] in the Bedrock User
+    # Guide.
     #
     # For example requests, see Examples (after the Errors section).
     #
     #
     #
-    # [1]: https://d2eo22ngex1n9g.cloudfront.net/Documentation/BedrockUserGuide.pdf
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html
     #
     # @option params [String] :accept
     #   The desired MIME type of the inference body in the response. The
@@ -463,15 +463,15 @@ module Aws::BedrockRuntime
     # Invoke the specified Bedrock model to run inference using the input
     # provided. Return the response in a stream.
     #
-    # For more information about invoking models, see Using the API in the
-    # [Bedrock User Guide][1].
+    # For more information, see [Run inference][1] in the Bedrock User
+    # Guide.
     #
     # For an example request and response, see Examples (after the Errors
     # section).
     #
     #
     #
-    # [1]: https://d2eo22ngex1n9g.cloudfront.net/Documentation/BedrockUserGuide.pdf
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html
     #
     # @option params [String] :accept
     #   The desired MIME type of the inference body in the response. The
@@ -550,6 +550,9 @@ module Aws::BedrockRuntime
     #       handler.on_model_stream_error_exception_event do |event|
     #         event # => Aws::BedrockRuntime::Types::modelStreamErrorException
     #       end
+    #       handler.on_model_timeout_exception_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::modelTimeoutException
+    #       end
     #       handler.on_throttling_exception_event do |event|
     #         event # => Aws::BedrockRuntime::Types::throttlingException
     #       end
@@ -572,6 +575,9 @@ module Aws::BedrockRuntime
     #       stream.on_model_stream_error_exception_event do |event|
     #         event # => Aws::BedrockRuntime::Types::modelStreamErrorException
     #       end
+    #       stream.on_model_timeout_exception_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::modelTimeoutException
+    #       end
     #       stream.on_throttling_exception_event do |event|
     #         event # => Aws::BedrockRuntime::Types::throttlingException
     #       end
@@ -593,6 +599,9 @@ module Aws::BedrockRuntime
     #       end
     #       handler.on_model_stream_error_exception_event do |event|
     #         event # => Aws::BedrockRuntime::Types::modelStreamErrorException
+    #       end
+    #       handler.on_model_timeout_exception_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::modelTimeoutException
     #       end
     #       handler.on_throttling_exception_event do |event|
     #         event # => Aws::BedrockRuntime::Types::throttlingException
@@ -631,7 +640,7 @@ module Aws::BedrockRuntime
     #
     #   All events are available at resp.body:
     #   resp.body #=> Enumerator
-    #   resp.body.event_types #=> [:chunk, :internal_server_exception, :model_stream_error_exception, :throttling_exception, :validation_exception]
+    #   resp.body.event_types #=> [:chunk, :internal_server_exception, :model_stream_error_exception, :model_timeout_exception, :throttling_exception, :validation_exception]
     #
     #   For :chunk event available at #on_chunk_event callback and response eventstream enumerator:
     #   event.bytes #=> String
@@ -643,6 +652,9 @@ module Aws::BedrockRuntime
     #   event.message #=> String
     #   event.original_message #=> String
     #   event.original_status_code #=> Integer
+    #
+    #   For :model_timeout_exception event available at #on_model_timeout_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
     #
     #   For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
@@ -692,7 +704,7 @@ module Aws::BedrockRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockruntime'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

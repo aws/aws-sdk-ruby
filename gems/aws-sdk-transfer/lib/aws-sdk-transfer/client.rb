@@ -412,14 +412,27 @@ module Aws::Transfer
     #
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
+    #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
+    #   set to `LOGICAL`.
+    #
+    #    </note>
+    #
     # @option params [String] :home_directory_type
     #   The type of landing directory (folder) that you want your users' home
     #   directory to be when they log in to the server. If you set it to
-    #   `PATH`, the user will see the absolute Amazon S3 bucket or EFS paths
-    #   as is in their file transfer protocol clients. If you set it
+    #   `PATH`, the user will see the absolute Amazon S3 bucket or Amazon EFS
+    #   path as is in their file transfer protocol clients. If you set it to
     #   `LOGICAL`, you need to provide mappings in the `HomeDirectoryMappings`
     #   for how you want to make Amazon S3 or Amazon EFS paths visible to your
     #   users.
+    #
+    #   <note markdown="1"> If `HomeDirectoryType` is `LOGICAL`, you must provide mappings, using
+    #   the `HomeDirectoryMappings` parameter. If, on the other hand,
+    #   `HomeDirectoryType` is `PATH`, you provide an absolute path using the
+    #   `HomeDirectory` parameter. You cannot have both `HomeDirectory` and
+    #   `HomeDirectoryMappings` in your template.
+    #
+    #    </note>
     #
     # @option params [Array<Types::HomeDirectoryMapEntry>] :home_directory_mappings
     #   Logical directory mappings that specify what Amazon S3 or Amazon EFS
@@ -1205,14 +1218,27 @@ module Aws::Transfer
     #
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
+    #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
+    #   set to `LOGICAL`.
+    #
+    #    </note>
+    #
     # @option params [String] :home_directory_type
     #   The type of landing directory (folder) that you want your users' home
     #   directory to be when they log in to the server. If you set it to
-    #   `PATH`, the user will see the absolute Amazon S3 bucket or EFS paths
-    #   as is in their file transfer protocol clients. If you set it
+    #   `PATH`, the user will see the absolute Amazon S3 bucket or Amazon EFS
+    #   path as is in their file transfer protocol clients. If you set it to
     #   `LOGICAL`, you need to provide mappings in the `HomeDirectoryMappings`
     #   for how you want to make Amazon S3 or Amazon EFS paths visible to your
     #   users.
+    #
+    #   <note markdown="1"> If `HomeDirectoryType` is `LOGICAL`, you must provide mappings, using
+    #   the `HomeDirectoryMappings` parameter. If, on the other hand,
+    #   `HomeDirectoryType` is `PATH`, you provide an absolute path using the
+    #   `HomeDirectory` parameter. You cannot have both `HomeDirectory` and
+    #   `HomeDirectoryMappings` in your template.
+    #
+    #    </note>
     #
     # @option params [Array<Types::HomeDirectoryMapEntry>] :home_directory_mappings
     #   Logical directory mappings that specify what Amazon S3 or Amazon EFS
@@ -3161,9 +3187,9 @@ module Aws::Transfer
     #   `ListUsers` request.
     #
     # @option params [String] :next_token
-    #   When you can get additional results from the `ListUsers` call, a
-    #   `NextToken` parameter is returned in the output. You can then pass in
-    #   a subsequent command to the `NextToken` parameter to continue listing
+    #   If there are additional results from the `ListUsers` call, a
+    #   `NextToken` parameter is returned in the output. You can then pass the
+    #   `NextToken` to a subsequent `ListUsers` command, to continue listing
     #   additional users.
     #
     # @option params [required, String] :server_id
@@ -3471,7 +3497,7 @@ module Aws::Transfer
 
     # Tests whether your SFTP connector is set up successfully. We highly
     # recommend that you call this operation to test your ability to
-    # transfer files between a Transfer Family server and a trading
+    # transfer files between local Amazon Web Services storage and a trading
     # partner's SFTP server.
     #
     # @option params [required, String] :connector_id
@@ -3649,14 +3675,27 @@ module Aws::Transfer
     #
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
+    #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
+    #   set to `LOGICAL`.
+    #
+    #    </note>
+    #
     # @option params [String] :home_directory_type
     #   The type of landing directory (folder) that you want your users' home
     #   directory to be when they log in to the server. If you set it to
-    #   `PATH`, the user will see the absolute Amazon S3 bucket or EFS paths
-    #   as is in their file transfer protocol clients. If you set it
+    #   `PATH`, the user will see the absolute Amazon S3 bucket or Amazon EFS
+    #   path as is in their file transfer protocol clients. If you set it to
     #   `LOGICAL`, you need to provide mappings in the `HomeDirectoryMappings`
     #   for how you want to make Amazon S3 or Amazon EFS paths visible to your
     #   users.
+    #
+    #   <note markdown="1"> If `HomeDirectoryType` is `LOGICAL`, you must provide mappings, using
+    #   the `HomeDirectoryMappings` parameter. If, on the other hand,
+    #   `HomeDirectoryType` is `PATH`, you provide an absolute path using the
+    #   `HomeDirectory` parameter. You cannot have both `HomeDirectory` and
+    #   `HomeDirectoryMappings` in your template.
+    #
+    #    </note>
     #
     # @option params [Array<Types::HomeDirectoryMapEntry>] :home_directory_mappings
     #   Logical directory mappings that specify what Amazon S3 or Amazon EFS
@@ -4433,14 +4472,27 @@ module Aws::Transfer
     #
     #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #
+    #   <note markdown="1"> The `HomeDirectory` parameter is only used if `HomeDirectoryType` is
+    #   set to `LOGICAL`.
+    #
+    #    </note>
+    #
     # @option params [String] :home_directory_type
     #   The type of landing directory (folder) that you want your users' home
     #   directory to be when they log in to the server. If you set it to
-    #   `PATH`, the user will see the absolute Amazon S3 bucket or EFS paths
-    #   as is in their file transfer protocol clients. If you set it
+    #   `PATH`, the user will see the absolute Amazon S3 bucket or Amazon EFS
+    #   path as is in their file transfer protocol clients. If you set it to
     #   `LOGICAL`, you need to provide mappings in the `HomeDirectoryMappings`
     #   for how you want to make Amazon S3 or Amazon EFS paths visible to your
     #   users.
+    #
+    #   <note markdown="1"> If `HomeDirectoryType` is `LOGICAL`, you must provide mappings, using
+    #   the `HomeDirectoryMappings` parameter. If, on the other hand,
+    #   `HomeDirectoryType` is `PATH`, you provide an absolute path using the
+    #   `HomeDirectory` parameter. You cannot have both `HomeDirectory` and
+    #   `HomeDirectoryMappings` in your template.
+    #
+    #    </note>
     #
     # @option params [Array<Types::HomeDirectoryMapEntry>] :home_directory_mappings
     #   Logical directory mappings that specify what Amazon S3 or Amazon EFS
@@ -4578,7 +4630,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

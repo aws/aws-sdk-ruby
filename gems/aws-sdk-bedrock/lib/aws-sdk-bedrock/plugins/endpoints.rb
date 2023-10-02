@@ -58,10 +58,14 @@ module Aws::Bedrock
           case context.operation_name
           when :create_model_customization_job
             Aws::Bedrock::Endpoints::CreateModelCustomizationJob.build(context)
+          when :create_provisioned_model_throughput
+            Aws::Bedrock::Endpoints::CreateProvisionedModelThroughput.build(context)
           when :delete_custom_model
             Aws::Bedrock::Endpoints::DeleteCustomModel.build(context)
           when :delete_model_invocation_logging_configuration
             Aws::Bedrock::Endpoints::DeleteModelInvocationLoggingConfiguration.build(context)
+          when :delete_provisioned_model_throughput
+            Aws::Bedrock::Endpoints::DeleteProvisionedModelThroughput.build(context)
           when :get_custom_model
             Aws::Bedrock::Endpoints::GetCustomModel.build(context)
           when :get_foundation_model
@@ -70,12 +74,16 @@ module Aws::Bedrock
             Aws::Bedrock::Endpoints::GetModelCustomizationJob.build(context)
           when :get_model_invocation_logging_configuration
             Aws::Bedrock::Endpoints::GetModelInvocationLoggingConfiguration.build(context)
+          when :get_provisioned_model_throughput
+            Aws::Bedrock::Endpoints::GetProvisionedModelThroughput.build(context)
           when :list_custom_models
             Aws::Bedrock::Endpoints::ListCustomModels.build(context)
           when :list_foundation_models
             Aws::Bedrock::Endpoints::ListFoundationModels.build(context)
           when :list_model_customization_jobs
             Aws::Bedrock::Endpoints::ListModelCustomizationJobs.build(context)
+          when :list_provisioned_model_throughputs
+            Aws::Bedrock::Endpoints::ListProvisionedModelThroughputs.build(context)
           when :list_tags_for_resource
             Aws::Bedrock::Endpoints::ListTagsForResource.build(context)
           when :put_model_invocation_logging_configuration
@@ -86,6 +94,8 @@ module Aws::Bedrock
             Aws::Bedrock::Endpoints::TagResource.build(context)
           when :untag_resource
             Aws::Bedrock::Endpoints::UntagResource.build(context)
+          when :update_provisioned_model_throughput
+            Aws::Bedrock::Endpoints::UpdateProvisionedModelThroughput.build(context)
           end
         end
       end

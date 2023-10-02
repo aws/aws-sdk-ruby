@@ -789,6 +789,7 @@ module Aws::RDS
 
     CertificateList.member = Shapes::ShapeRef.new(shape: Certificate, location_name: "Certificate")
 
+    CertificateMessage.add_member(:default_certificate_for_new_launches, Shapes::ShapeRef.new(shape: String, location_name: "DefaultCertificateForNewLaunches"))
     CertificateMessage.add_member(:certificates, Shapes::ShapeRef.new(shape: CertificateList, location_name: "Certificates"))
     CertificateMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     CertificateMessage.struct_class = Types::CertificateMessage

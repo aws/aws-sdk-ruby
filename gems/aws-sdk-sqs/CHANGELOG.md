@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2023-10-02)
+------------------
+
 * Feature - Update QueuePoller to handle duplicate messages before yielding. Fixes bug in (#2913).
 
 1.63.0 (2023-09-27)

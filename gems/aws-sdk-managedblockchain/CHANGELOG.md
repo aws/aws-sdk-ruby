@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2023-10-02)
+------------------
+
+* Feature - Remove Rinkeby as option from Ethereum APIs
+
 1.44.0 (2023-09-27)
 ------------------
 

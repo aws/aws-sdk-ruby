@@ -422,7 +422,7 @@ module Aws::SSO
 
     context 'For region us-gov-east-1 with FIPS enabled and DualStack disabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://portal.sso-fips.us-gov-east-1.amazonaws.com"}}
+        {"endpoint"=>{"url"=>"https://portal.sso.us-gov-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do

@@ -25,10 +25,6 @@ module Aws::Bedrock
 
     # CloudWatch logging configuration.
     #
-    # @!attribute [rw] large_data_delivery_s3_config
-    #   S3 configuration for delivering a large amount of data.
-    #   @return [Types::S3Config]
-    #
     # @!attribute [rw] log_group_name
     #   The log group name.
     #   @return [String]
@@ -37,12 +33,16 @@ module Aws::Bedrock
     #   The role ARN.
     #   @return [String]
     #
+    # @!attribute [rw] large_data_delivery_s3_config
+    #   S3 configuration for delivering a large amount of data.
+    #   @return [Types::S3Config]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CloudWatchConfig AWS API Documentation
     #
     class CloudWatchConfig < Struct.new(
-      :large_data_delivery_s3_config,
       :log_group_name,
-      :role_arn)
+      :role_arn,
+      :large_data_delivery_s3_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -60,45 +60,13 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
-    # @!attribute [rw] base_model_identifier
-    #   Name of the base model.
-    #   @return [String]
-    #
-    # @!attribute [rw] client_request_token
-    #   Unique token value that you can provide. The
-    #   GetModelCustomizationJob response includes the same token value.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
-    #   @return [String]
-    #
-    # @!attribute [rw] custom_model_kms_key_id
-    #   The custom model is encrypted at rest using this key.
+    # @!attribute [rw] job_name
+    #   Enter a unique name for the fine-tuning job.
     #   @return [String]
     #
     # @!attribute [rw] custom_model_name
     #   Enter a name for the custom model.
     #   @return [String]
-    #
-    # @!attribute [rw] custom_model_tags
-    #   Assign tags to the custom model.
-    #   @return [Array<Types::Tag>]
-    #
-    # @!attribute [rw] hyper_parameters
-    #   Parameters related to tuning the model.
-    #   @return [Hash<String,String>]
-    #
-    # @!attribute [rw] job_name
-    #   Enter a unique name for the fine-tuning job.
-    #   @return [String]
-    #
-    # @!attribute [rw] job_tags
-    #   Assign tags to the job.
-    #   @return [Array<Types::Tag>]
-    #
-    # @!attribute [rw] output_data_config
-    #   S3 location for the output data.
-    #   @return [Types::OutputDataConfig]
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of an IAM role that Bedrock can
@@ -109,6 +77,30 @@ module Aws::Bedrock
     #   permission.
     #   @return [String]
     #
+    # @!attribute [rw] client_request_token
+    #   Unique token value that you can provide. The
+    #   GetModelCustomizationJob response includes the same token value.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_model_identifier
+    #   Name of the base model.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_model_kms_key_id
+    #   The custom model is encrypted at rest using this key.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_tags
+    #   Assign tags to the job.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] custom_model_tags
+    #   Assign tags to the custom model.
+    #   @return [Array<Types::Tag>]
+    #
     # @!attribute [rw] training_data_config
     #   Information about the training dataset.
     #   @return [Types::TrainingDataConfig]
@@ -116,6 +108,14 @@ module Aws::Bedrock
     # @!attribute [rw] validation_data_config
     #   Information about the validation dataset.
     #   @return [Types::ValidationDataConfig]
+    #
+    # @!attribute [rw] output_data_config
+    #   S3 location for the output data.
+    #   @return [Types::OutputDataConfig]
+    #
+    # @!attribute [rw] hyper_parameters
+    #   Parameters related to tuning the model.
+    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] vpc_config
     #   VPC configuration (optional). Configuration parameters for the
@@ -126,18 +126,18 @@ module Aws::Bedrock
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateModelCustomizationJobRequest AWS API Documentation
     #
     class CreateModelCustomizationJobRequest < Struct.new(
-      :base_model_identifier,
-      :client_request_token,
-      :custom_model_kms_key_id,
-      :custom_model_name,
-      :custom_model_tags,
-      :hyper_parameters,
       :job_name,
-      :job_tags,
-      :output_data_config,
+      :custom_model_name,
       :role_arn,
+      :client_request_token,
+      :base_model_identifier,
+      :custom_model_kms_key_id,
+      :job_tags,
+      :custom_model_tags,
       :training_data_config,
       :validation_data_config,
+      :output_data_config,
+      :hyper_parameters,
       :vpc_config)
       SENSITIVE = []
       include Aws::Structure
@@ -155,19 +155,62 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_request_token
+    #   Unique token value that you can provide. If this token matches a
+    #   previous request, Bedrock ignores the request, but does not return
+    #   an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_units
+    #   Number of model units to allocate.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] provisioned_model_name
+    #   Unique name for this provisioned throughput.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_id
+    #   Name or ARN of the model to associate with this provisioned
+    #   throughput.
+    #   @return [String]
+    #
+    # @!attribute [rw] commitment_duration
+    #   Commitment duration requested for the provisioned throughput.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags to associate with this provisioned throughput.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateProvisionedModelThroughputRequest AWS API Documentation
+    #
+    class CreateProvisionedModelThroughputRequest < Struct.new(
+      :client_request_token,
+      :model_units,
+      :provisioned_model_name,
+      :model_id,
+      :commitment_duration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] provisioned_model_arn
+    #   The ARN for this provisioned throughput.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateProvisionedModelThroughputResponse AWS API Documentation
+    #
+    class CreateProvisionedModelThroughputResponse < Struct.new(
+      :provisioned_model_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Summary information for a custom model.
-    #
-    # @!attribute [rw] base_model_arn
-    #   The base model ARN.
-    #   @return [String]
-    #
-    # @!attribute [rw] base_model_name
-    #   The base model name.
-    #   @return [String]
-    #
-    # @!attribute [rw] creation_time
-    #   Creation time of the model.
-    #   @return [Time]
     #
     # @!attribute [rw] model_arn
     #   The ARN of the custom model.
@@ -177,14 +220,26 @@ module Aws::Bedrock
     #   The name of the custom model.
     #   @return [String]
     #
+    # @!attribute [rw] creation_time
+    #   Creation time of the model.
+    #   @return [Time]
+    #
+    # @!attribute [rw] base_model_arn
+    #   The base model ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_model_name
+    #   The base model name.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CustomModelSummary AWS API Documentation
     #
     class CustomModelSummary < Struct.new(
-      :base_model_arn,
-      :base_model_name,
-      :creation_time,
       :model_arn,
-      :model_name)
+      :model_name,
+      :creation_time,
+      :base_model_arn,
+      :base_model_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -215,19 +270,23 @@ module Aws::Bedrock
     #
     class DeleteModelInvocationLoggingConfigurationResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] provisioned_model_id
+    #   The ARN or name of the provisioned throughput.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteProvisionedModelThroughputRequest AWS API Documentation
+    #
+    class DeleteProvisionedModelThroughputRequest < Struct.new(
+      :provisioned_model_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteProvisionedModelThroughputResponse AWS API Documentation
+    #
+    class DeleteProvisionedModelThroughputResponse < Aws::EmptyStructure; end
+
     # Information about a foundation model.
-    #
-    # @!attribute [rw] customizations_supported
-    #   The customization that the model supports.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] inference_types_supported
-    #   The inference types that the model supports.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] input_modalities
-    #   The input modalities that the model supports.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] model_arn
     #   The model ARN.
@@ -241,47 +300,47 @@ module Aws::Bedrock
     #   The model name.
     #   @return [String]
     #
-    # @!attribute [rw] output_modalities
-    #   The output modalities that the model supports.
-    #   @return [Array<String>]
-    #
     # @!attribute [rw] provider_name
     #   he model's provider name.
     #   @return [String]
+    #
+    # @!attribute [rw] input_modalities
+    #   The input modalities that the model supports.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] output_modalities
+    #   The output modalities that the model supports.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] response_streaming_supported
     #   Indicates whether the model supports streaming.
     #   @return [Boolean]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/FoundationModelDetails AWS API Documentation
-    #
-    class FoundationModelDetails < Struct.new(
-      :customizations_supported,
-      :inference_types_supported,
-      :input_modalities,
-      :model_arn,
-      :model_id,
-      :model_name,
-      :output_modalities,
-      :provider_name,
-      :response_streaming_supported)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Summary information for a foundation model.
-    #
     # @!attribute [rw] customizations_supported
-    #   Whether the model supports fine-tuning or continual pre-training.
+    #   The customization that the model supports.
     #   @return [Array<String>]
     #
     # @!attribute [rw] inference_types_supported
     #   The inference types that the model supports.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] input_modalities
-    #   The input modalities that the model supports.
-    #   @return [Array<String>]
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/FoundationModelDetails AWS API Documentation
+    #
+    class FoundationModelDetails < Struct.new(
+      :model_arn,
+      :model_id,
+      :model_name,
+      :provider_name,
+      :input_modalities,
+      :output_modalities,
+      :response_streaming_supported,
+      :customizations_supported,
+      :inference_types_supported)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information for a foundation model.
     #
     # @!attribute [rw] model_arn
     #   The ARN of the foundation model.
@@ -295,30 +354,42 @@ module Aws::Bedrock
     #   The name of the model.
     #   @return [String]
     #
-    # @!attribute [rw] output_modalities
-    #   The output modalities that the model supports.
-    #   @return [Array<String>]
-    #
     # @!attribute [rw] provider_name
     #   The model's provider name.
     #   @return [String]
+    #
+    # @!attribute [rw] input_modalities
+    #   The input modalities that the model supports.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] output_modalities
+    #   The output modalities that the model supports.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] response_streaming_supported
     #   Indicates whether the model supports streaming.
     #   @return [Boolean]
     #
+    # @!attribute [rw] customizations_supported
+    #   Whether the model supports fine-tuning or continual pre-training.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] inference_types_supported
+    #   The inference types that the model supports.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/FoundationModelSummary AWS API Documentation
     #
     class FoundationModelSummary < Struct.new(
-      :customizations_supported,
-      :inference_types_supported,
-      :input_modalities,
       :model_arn,
       :model_id,
       :model_name,
-      :output_modalities,
       :provider_name,
-      :response_streaming_supported)
+      :input_modalities,
+      :output_modalities,
+      :response_streaming_supported,
+      :customizations_supported,
+      :inference_types_supported)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -335,74 +406,74 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
-    # @!attribute [rw] base_model_arn
-    #   ARN of the base model.
-    #   @return [String]
-    #
-    # @!attribute [rw] creation_time
-    #   Creation time of the model.
-    #   @return [Time]
-    #
-    # @!attribute [rw] hyper_parameters
-    #   Hyperparameter values associated with this model.
-    #   @return [Hash<String,String>]
-    #
-    # @!attribute [rw] job_arn
-    #   Job ARN associated with this model.
-    #   @return [String]
-    #
-    # @!attribute [rw] job_name
-    #   Job name associated with this model.
-    #   @return [String]
-    #
     # @!attribute [rw] model_arn
     #   ARN associated with this model.
-    #   @return [String]
-    #
-    # @!attribute [rw] model_kms_key_arn
-    #   The custom model is encrypted at rest using this key.
     #   @return [String]
     #
     # @!attribute [rw] model_name
     #   Model name associated with this model.
     #   @return [String]
     #
-    # @!attribute [rw] output_data_config
-    #   Output data configuration associated with this custom model.
-    #   @return [Types::OutputDataConfig]
+    # @!attribute [rw] job_name
+    #   Job name associated with this model.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_arn
+    #   Job ARN associated with this model.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_model_arn
+    #   ARN of the base model.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_kms_key_arn
+    #   The custom model is encrypted at rest using this key.
+    #   @return [String]
+    #
+    # @!attribute [rw] hyper_parameters
+    #   Hyperparameter values associated with this model.
+    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] training_data_config
     #   Information about the training dataset.
     #   @return [Types::TrainingDataConfig]
     #
-    # @!attribute [rw] training_metrics
-    #   The training metrics from the job creation.
-    #   @return [Types::TrainingMetrics]
-    #
     # @!attribute [rw] validation_data_config
     #   Array of up to 10 validators.
     #   @return [Types::ValidationDataConfig]
+    #
+    # @!attribute [rw] output_data_config
+    #   Output data configuration associated with this custom model.
+    #   @return [Types::OutputDataConfig]
+    #
+    # @!attribute [rw] training_metrics
+    #   The training metrics from the job creation.
+    #   @return [Types::TrainingMetrics]
     #
     # @!attribute [rw] validation_metrics
     #   The validation metrics from the job creation.
     #   @return [Array<Types::ValidatorMetric>]
     #
+    # @!attribute [rw] creation_time
+    #   Creation time of the model.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetCustomModelResponse AWS API Documentation
     #
     class GetCustomModelResponse < Struct.new(
-      :base_model_arn,
-      :creation_time,
-      :hyper_parameters,
-      :job_arn,
-      :job_name,
       :model_arn,
-      :model_kms_key_arn,
       :model_name,
-      :output_data_config,
+      :job_name,
+      :job_arn,
+      :base_model_arn,
+      :model_kms_key_arn,
+      :hyper_parameters,
       :training_data_config,
-      :training_metrics,
       :validation_data_config,
-      :validation_metrics)
+      :output_data_config,
+      :training_metrics,
+      :validation_metrics,
+      :creation_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -443,30 +514,6 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
-    # @!attribute [rw] base_model_arn
-    #   ARN of the base model.
-    #   @return [String]
-    #
-    # @!attribute [rw] client_request_token
-    #   The token that you specified in the CreateCustomizationJob request.
-    #   @return [String]
-    #
-    # @!attribute [rw] creation_time
-    #   Time that the resource was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] end_time
-    #   Time that the resource transitioned to terminal state.
-    #   @return [Time]
-    #
-    # @!attribute [rw] failure_message
-    #   Information about why the job failed.
-    #   @return [String]
-    #
-    # @!attribute [rw] hyper_parameters
-    #   The hyperparameter values for the job.
-    #   @return [Hash<String,String>]
-    #
     # @!attribute [rw] job_arn
     #   The ARN of the customization job.
     #   @return [String]
@@ -475,24 +522,16 @@ module Aws::Bedrock
     #   The name of the customization job.
     #   @return [String]
     #
-    # @!attribute [rw] last_modified_time
-    #   Time that the resource was last modified.
-    #   @return [Time]
-    #
-    # @!attribute [rw] output_data_config
-    #   Output data configuration
-    #   @return [Types::OutputDataConfig]
+    # @!attribute [rw] output_model_name
+    #   The name of the output model.
+    #   @return [String]
     #
     # @!attribute [rw] output_model_arn
     #   The ARN of the output model.
     #   @return [String]
     #
-    # @!attribute [rw] output_model_kms_key_arn
-    #   The custom model is encrypted at rest using this key.
-    #   @return [String]
-    #
-    # @!attribute [rw] output_model_name
-    #   The name of the output model.
+    # @!attribute [rw] client_request_token
+    #   The token that you specified in the CreateCustomizationJob request.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -506,17 +545,49 @@ module Aws::Bedrock
     #   failed.
     #   @return [String]
     #
+    # @!attribute [rw] failure_message
+    #   Information about why the job failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   Time that the resource was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   Time that the resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   Time that the resource transitioned to terminal state.
+    #   @return [Time]
+    #
+    # @!attribute [rw] base_model_arn
+    #   ARN of the base model.
+    #   @return [String]
+    #
+    # @!attribute [rw] hyper_parameters
+    #   The hyperparameter values for the job.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] training_data_config
     #   S3 Location of the training data.
     #   @return [Types::TrainingDataConfig]
     #
-    # @!attribute [rw] training_metrics
-    #   Metrics associated with the custom job.
-    #   @return [Types::TrainingMetrics]
-    #
     # @!attribute [rw] validation_data_config
     #   Array of up to 10 validators.
     #   @return [Types::ValidationDataConfig]
+    #
+    # @!attribute [rw] output_data_config
+    #   Output data configuration
+    #   @return [Types::OutputDataConfig]
+    #
+    # @!attribute [rw] output_model_kms_key_arn
+    #   The custom model is encrypted at rest using this key.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_metrics
+    #   Metrics associated with the custom job.
+    #   @return [Types::TrainingMetrics]
     #
     # @!attribute [rw] validation_metrics
     #   The loss metric for each validator that you provided in the
@@ -530,24 +601,24 @@ module Aws::Bedrock
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetModelCustomizationJobResponse AWS API Documentation
     #
     class GetModelCustomizationJobResponse < Struct.new(
-      :base_model_arn,
-      :client_request_token,
-      :creation_time,
-      :end_time,
-      :failure_message,
-      :hyper_parameters,
       :job_arn,
       :job_name,
-      :last_modified_time,
-      :output_data_config,
-      :output_model_arn,
-      :output_model_kms_key_arn,
       :output_model_name,
+      :output_model_arn,
+      :client_request_token,
       :role_arn,
       :status,
+      :failure_message,
+      :creation_time,
+      :last_modified_time,
+      :end_time,
+      :base_model_arn,
+      :hyper_parameters,
       :training_data_config,
-      :training_metrics,
       :validation_data_config,
+      :output_data_config,
+      :output_model_kms_key_arn,
+      :training_metrics,
       :validation_metrics,
       :vpc_config)
       SENSITIVE = []
@@ -572,6 +643,95 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # @!attribute [rw] provisioned_model_id
+    #   The ARN or name of the provisioned throughput.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetProvisionedModelThroughputRequest AWS API Documentation
+    #
+    class GetProvisionedModelThroughputRequest < Struct.new(
+      :provisioned_model_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_units
+    #   The current number of model units requested to be available for this
+    #   provisioned throughput.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] desired_model_units
+    #   The desired number of model units that was requested to be available
+    #   for this provisioned throughput.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] provisioned_model_name
+    #   The name of the provisioned throughput.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_model_arn
+    #   The ARN of the provisioned throughput.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_arn
+    #   The ARN or name of the model associated with this provisioned
+    #   throughput.
+    #   @return [String]
+    #
+    # @!attribute [rw] desired_model_arn
+    #   The ARN of the new model to asssociate with this provisioned
+    #   throughput.
+    #   @return [String]
+    #
+    # @!attribute [rw] foundation_model_arn
+    #   ARN of the foundation model.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of the provisioned throughput.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp of the creation time for this provisioned throughput.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp of the last modified time of this provisioned
+    #   throughput.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_message
+    #   Failure message for any issues that the create operation encounters.
+    #   @return [String]
+    #
+    # @!attribute [rw] commitment_duration
+    #   Commitment duration of the provisioned throughput.
+    #   @return [String]
+    #
+    # @!attribute [rw] commitment_expiration_time
+    #   Commitment expiration time for the provisioned throughput.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetProvisionedModelThroughputResponse AWS API Documentation
+    #
+    class GetProvisionedModelThroughputResponse < Struct.new(
+      :model_units,
+      :desired_model_units,
+      :provisioned_model_name,
+      :provisioned_model_arn,
+      :model_arn,
+      :desired_model_arn,
+      :foundation_model_arn,
+      :status,
+      :creation_time,
+      :last_modified_time,
+      :failure_message,
+      :commitment_duration,
+      :commitment_expiration_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An internal server error occurred. Retry your request.
     #
     # @!attribute [rw] message
@@ -585,18 +745,22 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
-    # @!attribute [rw] base_model_arn_equals
-    #   Return custom models only if the base model ARN matches this
-    #   parameter.
-    #   @return [String]
+    # @!attribute [rw] creation_time_before
+    #   Return custom models created before the specified time.
+    #   @return [Time]
     #
     # @!attribute [rw] creation_time_after
     #   Return custom models created after the specified time.
     #   @return [Time]
     #
-    # @!attribute [rw] creation_time_before
-    #   Return custom models created before the specified time.
-    #   @return [Time]
+    # @!attribute [rw] name_contains
+    #   Return custom models only if the job name contains these characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_model_arn_equals
+    #   Return custom models only if the base model ARN matches this
+    #   parameter.
+    #   @return [String]
     #
     # @!attribute [rw] foundation_model_arn_equals
     #   Return custom models only if the foundation model ARN matches this
@@ -606,10 +770,6 @@ module Aws::Bedrock
     # @!attribute [rw] max_results
     #   Maximum number of results to return in the response.
     #   @return [Integer]
-    #
-    # @!attribute [rw] name_contains
-    #   Return custom models only if the job name contains these characters.
-    #   @return [String]
     #
     # @!attribute [rw] next_token
     #   Continuation token from the previous response, for Bedrock to list
@@ -627,12 +787,12 @@ module Aws::Bedrock
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListCustomModelsRequest AWS API Documentation
     #
     class ListCustomModelsRequest < Struct.new(
-      :base_model_arn_equals,
-      :creation_time_after,
       :creation_time_before,
+      :creation_time_after,
+      :name_contains,
+      :base_model_arn_equals,
       :foundation_model_arn_equals,
       :max_results,
-      :name_contains,
       :next_token,
       :sort_by,
       :sort_order)
@@ -640,47 +800,47 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
-    # @!attribute [rw] model_summaries
-    #   Model summaries.
-    #   @return [Array<Types::CustomModelSummary>]
-    #
     # @!attribute [rw] next_token
     #   Continuation token for the next request to list the next set of
     #   results.
     #   @return [String]
     #
+    # @!attribute [rw] model_summaries
+    #   Model summaries.
+    #   @return [Array<Types::CustomModelSummary>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListCustomModelsResponse AWS API Documentation
     #
     class ListCustomModelsResponse < Struct.new(
-      :model_summaries,
-      :next_token)
+      :next_token,
+      :model_summaries)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] by_customization_type
-    #   List by customization type.
+    # @!attribute [rw] by_provider
+    #   A Bedrock model provider.
     #   @return [String]
     #
-    # @!attribute [rw] by_inference_type
-    #   List by inference type.
+    # @!attribute [rw] by_customization_type
+    #   List by customization type.
     #   @return [String]
     #
     # @!attribute [rw] by_output_modality
     #   List by output modality type.
     #   @return [String]
     #
-    # @!attribute [rw] by_provider
-    #   A Bedrock model provider.
+    # @!attribute [rw] by_inference_type
+    #   List by inference type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListFoundationModelsRequest AWS API Documentation
     #
     class ListFoundationModelsRequest < Struct.new(
+      :by_provider,
       :by_customization_type,
-      :by_inference_type,
       :by_output_modality,
-      :by_provider)
+      :by_inference_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -705,14 +865,18 @@ module Aws::Bedrock
     #   Return customization jobs created before the specified time.
     #   @return [Time]
     #
-    # @!attribute [rw] max_results
-    #   Maximum number of results to return in the response.
-    #   @return [Integer]
+    # @!attribute [rw] status_equals
+    #   Return customization jobs with the specified status.
+    #   @return [String]
     #
     # @!attribute [rw] name_contains
     #   Return customization jobs only if the job name contains these
     #   characters.
     #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return in the response.
+    #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   Continuation token from the previous response, for Bedrock to list
@@ -727,38 +891,109 @@ module Aws::Bedrock
     #   The sort order of the results.
     #   @return [String]
     #
-    # @!attribute [rw] status_equals
-    #   Return customization jobs with the specified status.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListModelCustomizationJobsRequest AWS API Documentation
     #
     class ListModelCustomizationJobsRequest < Struct.new(
       :creation_time_after,
       :creation_time_before,
-      :max_results,
+      :status_equals,
       :name_contains,
+      :max_results,
       :next_token,
       :sort_by,
-      :sort_order,
-      :status_equals)
+      :sort_order)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] model_customization_job_summaries
-    #   Job summaries.
-    #   @return [Array<Types::ModelCustomizationJobSummary>]
-    #
     # @!attribute [rw] next_token
     #   Page continuation token to use in the next request.
     #   @return [String]
     #
+    # @!attribute [rw] model_customization_job_summaries
+    #   Job summaries.
+    #   @return [Array<Types::ModelCustomizationJobSummary>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListModelCustomizationJobsResponse AWS API Documentation
     #
     class ListModelCustomizationJobsResponse < Struct.new(
-      :model_customization_job_summaries,
-      :next_token)
+      :next_token,
+      :model_customization_job_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] creation_time_after
+    #   Return provisioned capacities created after the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   Return provisioned capacities created before the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status_equals
+    #   Return the list of provisioned capacities that match the specified
+    #   status.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_arn_equals
+    #   Return the list of provisioned capacities where their model ARN is
+    #   equal to this parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] name_contains
+    #   Return the list of provisioned capacities if their name contains
+    #   these characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   THe maximum number of results to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Continuation token from the previous response, for Bedrock to list
+    #   the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The field to sort by in the returned list of provisioned capacities.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order of the results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListProvisionedModelThroughputsRequest AWS API Documentation
+    #
+    class ListProvisionedModelThroughputsRequest < Struct.new(
+      :creation_time_after,
+      :creation_time_before,
+      :status_equals,
+      :model_arn_equals,
+      :name_contains,
+      :max_results,
+      :next_token,
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   Continuation token for the next request to list the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_model_summaries
+    #   List of summaries, one for each provisioned throughput in the
+    #   response.
+    #   @return [Array<Types::ProvisionedModelSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListProvisionedModelThroughputsResponse AWS API Documentation
+    #
+    class ListProvisionedModelThroughputsResponse < Struct.new(
+      :next_token,
+      :provisioned_model_summaries)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -793,14 +1028,6 @@ module Aws::Bedrock
     #   CloudWatch logging configuration.
     #   @return [Types::CloudWatchConfig]
     #
-    # @!attribute [rw] embedding_data_delivery_enabled
-    #   Set to include embeddings data in the log delivery.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] image_data_delivery_enabled
-    #   Set to include image data in the log delivery.
-    #   @return [Boolean]
-    #
     # @!attribute [rw] s3_config
     #   S3 configuration for storing log data.
     #   @return [Types::S3Config]
@@ -809,26 +1036,54 @@ module Aws::Bedrock
     #   Set to include text data in the log delivery.
     #   @return [Boolean]
     #
+    # @!attribute [rw] image_data_delivery_enabled
+    #   Set to include image data in the log delivery.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] embedding_data_delivery_enabled
+    #   Set to include embeddings data in the log delivery.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/LoggingConfig AWS API Documentation
     #
     class LoggingConfig < Struct.new(
       :cloud_watch_config,
-      :embedding_data_delivery_enabled,
-      :image_data_delivery_enabled,
       :s3_config,
-      :text_data_delivery_enabled)
+      :text_data_delivery_enabled,
+      :image_data_delivery_enabled,
+      :embedding_data_delivery_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Information about one customization job
     #
+    # @!attribute [rw] job_arn
+    #   ARN of the customization job.
+    #   @return [String]
+    #
     # @!attribute [rw] base_model_arn
     #   ARN of the base model.
     #   @return [String]
     #
+    # @!attribute [rw] job_name
+    #   Name of the customization job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of the customization job.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   Time that the customization job was last modified.
+    #   @return [Time]
+    #
     # @!attribute [rw] creation_time
     #   Creation time of the custom model.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   Time that the customization job ended.
     #   @return [Time]
     #
     # @!attribute [rw] custom_model_arn
@@ -839,38 +1094,18 @@ module Aws::Bedrock
     #   Name of the custom model.
     #   @return [String]
     #
-    # @!attribute [rw] end_time
-    #   Time that the customization job ended.
-    #   @return [Time]
-    #
-    # @!attribute [rw] job_arn
-    #   ARN of the customization job.
-    #   @return [String]
-    #
-    # @!attribute [rw] job_name
-    #   Name of the customization job.
-    #   @return [String]
-    #
-    # @!attribute [rw] last_modified_time
-    #   Time that the customization job was last modified.
-    #   @return [Time]
-    #
-    # @!attribute [rw] status
-    #   Status of the customization job.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ModelCustomizationJobSummary AWS API Documentation
     #
     class ModelCustomizationJobSummary < Struct.new(
-      :base_model_arn,
-      :creation_time,
-      :custom_model_arn,
-      :custom_model_name,
-      :end_time,
       :job_arn,
+      :base_model_arn,
       :job_name,
+      :status,
       :last_modified_time,
-      :status)
+      :creation_time,
+      :end_time,
+      :custom_model_arn,
+      :custom_model_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -885,6 +1120,75 @@ module Aws::Bedrock
     #
     class OutputDataConfig < Struct.new(
       :s3_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Set of fields associated with a provisioned throughput.
+    #
+    # @!attribute [rw] provisioned_model_name
+    #   The name of the provisioned throughput.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_model_arn
+    #   The ARN of the provisioned throughput.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_arn
+    #   The ARN of the model associated with this provisioned throughput.
+    #   @return [String]
+    #
+    # @!attribute [rw] desired_model_arn
+    #   Desired model ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] foundation_model_arn
+    #   Foundation model ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_units
+    #   The number of model units allocated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] desired_model_units
+    #   Desired model units.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   Status of the provisioned throughput.
+    #   @return [String]
+    #
+    # @!attribute [rw] commitment_duration
+    #   Commitment duration for the provisioned throughput.
+    #   @return [String]
+    #
+    # @!attribute [rw] commitment_expiration_time
+    #   Commitment expiration time for the provisioned throughput.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time
+    #   The time that this provisioned throughput was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The time that this provisioned throughput was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ProvisionedModelSummary AWS API Documentation
+    #
+    class ProvisionedModelSummary < Struct.new(
+      :provisioned_model_name,
+      :provisioned_model_arn,
+      :model_arn,
+      :desired_model_arn,
+      :foundation_model_arn,
+      :model_units,
+      :desired_model_units,
+      :status,
+      :commitment_duration,
+      :commitment_expiration_time,
+      :creation_time,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1090,6 +1394,33 @@ module Aws::Bedrock
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] provisioned_model_id
+    #   The ARN or name of the provisioned throughput to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] desired_provisioned_model_name
+    #   The new name for this provisioned throughput.
+    #   @return [String]
+    #
+    # @!attribute [rw] desired_model_id
+    #   The ARN of the new model to associate with this provisioned
+    #   throughput.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/UpdateProvisionedModelThroughputRequest AWS API Documentation
+    #
+    class UpdateProvisionedModelThroughputRequest < Struct.new(
+      :provisioned_model_id,
+      :desired_provisioned_model_name,
+      :desired_model_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/UpdateProvisionedModelThroughputResponse AWS API Documentation
+    #
+    class UpdateProvisionedModelThroughputResponse < Aws::EmptyStructure; end
+
     # Array of up to 10 validators.
     #
     # @!attribute [rw] validators
@@ -1148,19 +1479,19 @@ module Aws::Bedrock
 
     # VPC configuration.
     #
-    # @!attribute [rw] security_group_ids
-    #   VPC configuration security group Ids.
-    #   @return [Array<String>]
-    #
     # @!attribute [rw] subnet_ids
     #   VPC configuration subnets.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_group_ids
+    #   VPC configuration security group Ids.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/VpcConfig AWS API Documentation
     #
     class VpcConfig < Struct.new(
-      :security_group_ids,
-      :subnet_ids)
+      :subnet_ids,
+      :security_group_ids)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2023-10-02)
+------------------
+
+* Feature - Documentation updates for AWS Transfer Family
+
 1.79.0 (2023-09-27)
 ------------------
 

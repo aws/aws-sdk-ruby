@@ -2031,7 +2031,7 @@ module Aws::RDS
     # @option options [Boolean] :allow_major_version_upgrade
     #   Specifies whether major version upgrades are allowed.
     #
-    #   Valid for Cluster Type: Aurora DB clusters only
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
     #   Constraints:
     #
@@ -2667,9 +2667,11 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     # @option options [String] :db_cluster_parameter_group_name
-    #   The name of the DB cluster parameter group to associate with this DB
-    #   cluster. If this argument is omitted, the default DB cluster parameter
-    #   group for the specified engine is used.
+    #   The name of the custom DB cluster parameter group to associate with
+    #   this DB cluster.
+    #
+    #   If the `DBClusterParameterGroupName` parameter is omitted, the default
+    #   DB cluster parameter group for the specified engine is used.
     #
     #   Constraints:
     #
@@ -2736,7 +2738,7 @@ module Aws::RDS
     #   database engines.
     #
     #   For the full list of DB instance classes, and availability for your
-    #   engine, see [DB instance class][1] in the *Amazon RDS User Guide.*
+    #   engine, see [DB instance class][1] in the *Amazon RDS User Guide*.
     #
     #   Valid for: Multi-AZ DB clusters only
     #

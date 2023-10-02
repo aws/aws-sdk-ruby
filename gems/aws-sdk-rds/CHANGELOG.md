@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.195.0 (2023-10-02)
+------------------
+
+* Feature - Adds DefaultCertificateForNewLaunches field in the DescribeCertificates API response.
+
 1.194.0 (2023-09-27)
 ------------------
 

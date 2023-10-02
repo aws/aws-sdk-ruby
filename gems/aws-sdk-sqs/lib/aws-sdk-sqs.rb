@@ -54,6 +54,6 @@ require_relative 'aws-sdk-sqs/customizations'
 # @!group service
 module Aws::SQS
 
-  GEM_VERSION = '1.63.0'
+  GEM_VERSION = '1.64.0'
 
 end

@@ -410,36 +410,11 @@ module Aws::Bedrock
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
     #
-    # @option params [required, String] :base_model_identifier
-    #   Name of the base model.
-    #
-    # @option params [String] :client_request_token
-    #   Unique token value that you can provide. The GetModelCustomizationJob
-    #   response includes the same token value.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
-    #
-    # @option params [String] :custom_model_kms_key_id
-    #   The custom model is encrypted at rest using this key.
-    #
-    # @option params [required, String] :custom_model_name
-    #   Enter a name for the custom model.
-    #
-    # @option params [Array<Types::Tag>] :custom_model_tags
-    #   Assign tags to the custom model.
-    #
-    # @option params [required, Hash<String,String>] :hyper_parameters
-    #   Parameters related to tuning the model.
-    #
     # @option params [required, String] :job_name
     #   Enter a unique name for the fine-tuning job.
     #
-    # @option params [Array<Types::Tag>] :job_tags
-    #   Assign tags to the job.
-    #
-    # @option params [required, Types::OutputDataConfig] :output_data_config
-    #   S3 location for the output data.
+    # @option params [required, String] :custom_model_name
+    #   Enter a name for the custom model.
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of an IAM role that Bedrock can assume
@@ -448,11 +423,36 @@ module Aws::Bedrock
     #   write model artifacts to an S3 bucket. To pass this role to Bedrock,
     #   the caller of this API must have the `iam:PassRole` permission.
     #
+    # @option params [String] :client_request_token
+    #   Unique token value that you can provide. The GetModelCustomizationJob
+    #   response includes the same token value.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :base_model_identifier
+    #   Name of the base model.
+    #
+    # @option params [String] :custom_model_kms_key_id
+    #   The custom model is encrypted at rest using this key.
+    #
+    # @option params [Array<Types::Tag>] :job_tags
+    #   Assign tags to the job.
+    #
+    # @option params [Array<Types::Tag>] :custom_model_tags
+    #   Assign tags to the custom model.
+    #
     # @option params [required, Types::TrainingDataConfig] :training_data_config
     #   Information about the training dataset.
     #
     # @option params [Types::ValidationDataConfig] :validation_data_config
     #   Information about the validation dataset.
+    #
+    # @option params [required, Types::OutputDataConfig] :output_data_config
+    #   S3 location for the output data.
+    #
+    # @option params [required, Hash<String,String>] :hyper_parameters
+    #   Parameters related to tuning the model.
     #
     # @option params [Types::VpcConfig] :vpc_config
     #   VPC configuration (optional). Configuration parameters for the private
@@ -466,30 +466,24 @@ module Aws::Bedrock
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_model_customization_job({
-    #     base_model_identifier: "BaseModelIdentifier", # required
-    #     client_request_token: "IdempotencyToken",
-    #     custom_model_kms_key_id: "KmsKeyId",
-    #     custom_model_name: "CustomModelName", # required
-    #     custom_model_tags: [
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       },
-    #     ],
-    #     hyper_parameters: { # required
-    #       "String" => "String",
-    #     },
     #     job_name: "JobName", # required
+    #     custom_model_name: "CustomModelName", # required
+    #     role_arn: "RoleArn", # required
+    #     client_request_token: "IdempotencyToken",
+    #     base_model_identifier: "BaseModelIdentifier", # required
+    #     custom_model_kms_key_id: "KmsKeyId",
     #     job_tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       },
     #     ],
-    #     output_data_config: { # required
-    #       s3_uri: "S3Uri", # required
-    #     },
-    #     role_arn: "RoleArn", # required
+    #     custom_model_tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #     training_data_config: { # required
     #       s3_uri: "S3Uri", # required
     #     },
@@ -500,9 +494,15 @@ module Aws::Bedrock
     #         },
     #       ],
     #     },
+    #     output_data_config: { # required
+    #       s3_uri: "S3Uri", # required
+    #     },
+    #     hyper_parameters: { # required
+    #       "String" => "String",
+    #     },
     #     vpc_config: {
-    #       security_group_ids: ["SecurityGroupId"], # required
     #       subnet_ids: ["SubnetId"], # required
+    #       security_group_ids: ["SecurityGroupId"], # required
     #     },
     #   })
     #
@@ -516,6 +516,73 @@ module Aws::Bedrock
     # @param [Hash] params ({})
     def create_model_customization_job(params = {}, options = {})
       req = build_request(:create_model_customization_job, params)
+      req.send_request(options)
+    end
+
+    # Creates a provisioned throughput with dedicated capacity for a
+    # foundation model or a fine-tuned model.
+    #
+    # For more information, see [Provisioned throughput][1] in the Bedrock
+    # User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    #
+    # @option params [String] :client_request_token
+    #   Unique token value that you can provide. If this token matches a
+    #   previous request, Bedrock ignores the request, but does not return an
+    #   error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Integer] :model_units
+    #   Number of model units to allocate.
+    #
+    # @option params [required, String] :provisioned_model_name
+    #   Unique name for this provisioned throughput.
+    #
+    # @option params [required, String] :model_id
+    #   Name or ARN of the model to associate with this provisioned
+    #   throughput.
+    #
+    # @option params [String] :commitment_duration
+    #   Commitment duration requested for the provisioned throughput.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to associate with this provisioned throughput.
+    #
+    # @return [Types::CreateProvisionedModelThroughputResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateProvisionedModelThroughputResponse#provisioned_model_arn #provisioned_model_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_provisioned_model_throughput({
+    #     client_request_token: "IdempotencyToken",
+    #     model_units: 1, # required
+    #     provisioned_model_name: "ProvisionedModelName", # required
+    #     model_id: "ModelIdentifier", # required
+    #     commitment_duration: "OneMonth", # accepts OneMonth, SixMonths
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.provisioned_model_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateProvisionedModelThroughput AWS API Documentation
+    #
+    # @overload create_provisioned_model_throughput(params = {})
+    # @param [Hash] params ({})
+    def create_provisioned_model_throughput(params = {}, options = {})
+      req = build_request(:create_provisioned_model_throughput, params)
       req.send_request(options)
     end
 
@@ -559,6 +626,33 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Deletes a provisioned throughput. For more information, see
+    # [Provisioned throughput][1] in the Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    #
+    # @option params [required, String] :provisioned_model_id
+    #   The ARN or name of the provisioned throughput.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_provisioned_model_throughput({
+    #     provisioned_model_id: "ProvisionedModelId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteProvisionedModelThroughput AWS API Documentation
+    #
+    # @overload delete_provisioned_model_throughput(params = {})
+    # @param [Hash] params ({})
+    def delete_provisioned_model_throughput(params = {}, options = {})
+      req = build_request(:delete_provisioned_model_throughput, params)
+      req.send_request(options)
+    end
+
     # Get the properties associated with a Bedrock custom model that you
     # have created.For more information, see [Custom models][1] in the
     # Bedrock User Guide.
@@ -572,19 +666,19 @@ module Aws::Bedrock
     #
     # @return [Types::GetCustomModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetCustomModelResponse#base_model_arn #base_model_arn} => String
-    #   * {Types::GetCustomModelResponse#creation_time #creation_time} => Time
-    #   * {Types::GetCustomModelResponse#hyper_parameters #hyper_parameters} => Hash&lt;String,String&gt;
-    #   * {Types::GetCustomModelResponse#job_arn #job_arn} => String
-    #   * {Types::GetCustomModelResponse#job_name #job_name} => String
     #   * {Types::GetCustomModelResponse#model_arn #model_arn} => String
-    #   * {Types::GetCustomModelResponse#model_kms_key_arn #model_kms_key_arn} => String
     #   * {Types::GetCustomModelResponse#model_name #model_name} => String
-    #   * {Types::GetCustomModelResponse#output_data_config #output_data_config} => Types::OutputDataConfig
+    #   * {Types::GetCustomModelResponse#job_name #job_name} => String
+    #   * {Types::GetCustomModelResponse#job_arn #job_arn} => String
+    #   * {Types::GetCustomModelResponse#base_model_arn #base_model_arn} => String
+    #   * {Types::GetCustomModelResponse#model_kms_key_arn #model_kms_key_arn} => String
+    #   * {Types::GetCustomModelResponse#hyper_parameters #hyper_parameters} => Hash&lt;String,String&gt;
     #   * {Types::GetCustomModelResponse#training_data_config #training_data_config} => Types::TrainingDataConfig
-    #   * {Types::GetCustomModelResponse#training_metrics #training_metrics} => Types::TrainingMetrics
     #   * {Types::GetCustomModelResponse#validation_data_config #validation_data_config} => Types::ValidationDataConfig
+    #   * {Types::GetCustomModelResponse#output_data_config #output_data_config} => Types::OutputDataConfig
+    #   * {Types::GetCustomModelResponse#training_metrics #training_metrics} => Types::TrainingMetrics
     #   * {Types::GetCustomModelResponse#validation_metrics #validation_metrics} => Array&lt;Types::ValidatorMetric&gt;
+    #   * {Types::GetCustomModelResponse#creation_time #creation_time} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -594,22 +688,22 @@ module Aws::Bedrock
     #
     # @example Response structure
     #
+    #   resp.model_arn #=> String
+    #   resp.model_name #=> String
+    #   resp.job_name #=> String
+    #   resp.job_arn #=> String
     #   resp.base_model_arn #=> String
-    #   resp.creation_time #=> Time
+    #   resp.model_kms_key_arn #=> String
     #   resp.hyper_parameters #=> Hash
     #   resp.hyper_parameters["String"] #=> String
-    #   resp.job_arn #=> String
-    #   resp.job_name #=> String
-    #   resp.model_arn #=> String
-    #   resp.model_kms_key_arn #=> String
-    #   resp.model_name #=> String
-    #   resp.output_data_config.s3_uri #=> String
     #   resp.training_data_config.s3_uri #=> String
-    #   resp.training_metrics.training_loss #=> Float
     #   resp.validation_data_config.validators #=> Array
     #   resp.validation_data_config.validators[0].s3_uri #=> String
+    #   resp.output_data_config.s3_uri #=> String
+    #   resp.training_metrics.training_loss #=> Float
     #   resp.validation_metrics #=> Array
     #   resp.validation_metrics[0].validation_loss #=> Float
+    #   resp.creation_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetCustomModel AWS API Documentation
     #
@@ -637,19 +731,19 @@ module Aws::Bedrock
     #
     # @example Response structure
     #
+    #   resp.model_details.model_arn #=> String
+    #   resp.model_details.model_id #=> String
+    #   resp.model_details.model_name #=> String
+    #   resp.model_details.provider_name #=> String
+    #   resp.model_details.input_modalities #=> Array
+    #   resp.model_details.input_modalities[0] #=> String, one of "TEXT", "IMAGE", "EMBEDDING"
+    #   resp.model_details.output_modalities #=> Array
+    #   resp.model_details.output_modalities[0] #=> String, one of "TEXT", "IMAGE", "EMBEDDING"
+    #   resp.model_details.response_streaming_supported #=> Boolean
     #   resp.model_details.customizations_supported #=> Array
     #   resp.model_details.customizations_supported[0] #=> String, one of "FINE_TUNING"
     #   resp.model_details.inference_types_supported #=> Array
     #   resp.model_details.inference_types_supported[0] #=> String, one of "ON_DEMAND", "PROVISIONED"
-    #   resp.model_details.input_modalities #=> Array
-    #   resp.model_details.input_modalities[0] #=> String, one of "TEXT", "IMAGE", "EMBEDDING"
-    #   resp.model_details.model_arn #=> String
-    #   resp.model_details.model_id #=> String
-    #   resp.model_details.model_name #=> String
-    #   resp.model_details.output_modalities #=> Array
-    #   resp.model_details.output_modalities[0] #=> String, one of "TEXT", "IMAGE", "EMBEDDING"
-    #   resp.model_details.provider_name #=> String
-    #   resp.model_details.response_streaming_supported #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetFoundationModel AWS API Documentation
     #
@@ -673,24 +767,24 @@ module Aws::Bedrock
     #
     # @return [Types::GetModelCustomizationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetModelCustomizationJobResponse#base_model_arn #base_model_arn} => String
-    #   * {Types::GetModelCustomizationJobResponse#client_request_token #client_request_token} => String
-    #   * {Types::GetModelCustomizationJobResponse#creation_time #creation_time} => Time
-    #   * {Types::GetModelCustomizationJobResponse#end_time #end_time} => Time
-    #   * {Types::GetModelCustomizationJobResponse#failure_message #failure_message} => String
-    #   * {Types::GetModelCustomizationJobResponse#hyper_parameters #hyper_parameters} => Hash&lt;String,String&gt;
     #   * {Types::GetModelCustomizationJobResponse#job_arn #job_arn} => String
     #   * {Types::GetModelCustomizationJobResponse#job_name #job_name} => String
-    #   * {Types::GetModelCustomizationJobResponse#last_modified_time #last_modified_time} => Time
-    #   * {Types::GetModelCustomizationJobResponse#output_data_config #output_data_config} => Types::OutputDataConfig
-    #   * {Types::GetModelCustomizationJobResponse#output_model_arn #output_model_arn} => String
-    #   * {Types::GetModelCustomizationJobResponse#output_model_kms_key_arn #output_model_kms_key_arn} => String
     #   * {Types::GetModelCustomizationJobResponse#output_model_name #output_model_name} => String
+    #   * {Types::GetModelCustomizationJobResponse#output_model_arn #output_model_arn} => String
+    #   * {Types::GetModelCustomizationJobResponse#client_request_token #client_request_token} => String
     #   * {Types::GetModelCustomizationJobResponse#role_arn #role_arn} => String
     #   * {Types::GetModelCustomizationJobResponse#status #status} => String
+    #   * {Types::GetModelCustomizationJobResponse#failure_message #failure_message} => String
+    #   * {Types::GetModelCustomizationJobResponse#creation_time #creation_time} => Time
+    #   * {Types::GetModelCustomizationJobResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::GetModelCustomizationJobResponse#end_time #end_time} => Time
+    #   * {Types::GetModelCustomizationJobResponse#base_model_arn #base_model_arn} => String
+    #   * {Types::GetModelCustomizationJobResponse#hyper_parameters #hyper_parameters} => Hash&lt;String,String&gt;
     #   * {Types::GetModelCustomizationJobResponse#training_data_config #training_data_config} => Types::TrainingDataConfig
-    #   * {Types::GetModelCustomizationJobResponse#training_metrics #training_metrics} => Types::TrainingMetrics
     #   * {Types::GetModelCustomizationJobResponse#validation_data_config #validation_data_config} => Types::ValidationDataConfig
+    #   * {Types::GetModelCustomizationJobResponse#output_data_config #output_data_config} => Types::OutputDataConfig
+    #   * {Types::GetModelCustomizationJobResponse#output_model_kms_key_arn #output_model_kms_key_arn} => String
+    #   * {Types::GetModelCustomizationJobResponse#training_metrics #training_metrics} => Types::TrainingMetrics
     #   * {Types::GetModelCustomizationJobResponse#validation_metrics #validation_metrics} => Array&lt;Types::ValidatorMetric&gt;
     #   * {Types::GetModelCustomizationJobResponse#vpc_config #vpc_config} => Types::VpcConfig
     #
@@ -702,32 +796,32 @@ module Aws::Bedrock
     #
     # @example Response structure
     #
-    #   resp.base_model_arn #=> String
-    #   resp.client_request_token #=> String
-    #   resp.creation_time #=> Time
-    #   resp.end_time #=> Time
-    #   resp.failure_message #=> String
-    #   resp.hyper_parameters #=> Hash
-    #   resp.hyper_parameters["String"] #=> String
     #   resp.job_arn #=> String
     #   resp.job_name #=> String
-    #   resp.last_modified_time #=> Time
-    #   resp.output_data_config.s3_uri #=> String
-    #   resp.output_model_arn #=> String
-    #   resp.output_model_kms_key_arn #=> String
     #   resp.output_model_name #=> String
+    #   resp.output_model_arn #=> String
+    #   resp.client_request_token #=> String
     #   resp.role_arn #=> String
     #   resp.status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
+    #   resp.failure_message #=> String
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.end_time #=> Time
+    #   resp.base_model_arn #=> String
+    #   resp.hyper_parameters #=> Hash
+    #   resp.hyper_parameters["String"] #=> String
     #   resp.training_data_config.s3_uri #=> String
-    #   resp.training_metrics.training_loss #=> Float
     #   resp.validation_data_config.validators #=> Array
     #   resp.validation_data_config.validators[0].s3_uri #=> String
+    #   resp.output_data_config.s3_uri #=> String
+    #   resp.output_model_kms_key_arn #=> String
+    #   resp.training_metrics.training_loss #=> Float
     #   resp.validation_metrics #=> Array
     #   resp.validation_metrics[0].validation_loss #=> Float
-    #   resp.vpc_config.security_group_ids #=> Array
-    #   resp.vpc_config.security_group_ids[0] #=> String
     #   resp.vpc_config.subnet_ids #=> Array
     #   resp.vpc_config.subnet_ids[0] #=> String
+    #   resp.vpc_config.security_group_ids #=> Array
+    #   resp.vpc_config.security_group_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetModelCustomizationJob AWS API Documentation
     #
@@ -746,15 +840,15 @@ module Aws::Bedrock
     #
     # @example Response structure
     #
-    #   resp.logging_config.cloud_watch_config.large_data_delivery_s3_config.bucket_name #=> String
-    #   resp.logging_config.cloud_watch_config.large_data_delivery_s3_config.key_prefix #=> String
     #   resp.logging_config.cloud_watch_config.log_group_name #=> String
     #   resp.logging_config.cloud_watch_config.role_arn #=> String
-    #   resp.logging_config.embedding_data_delivery_enabled #=> Boolean
-    #   resp.logging_config.image_data_delivery_enabled #=> Boolean
+    #   resp.logging_config.cloud_watch_config.large_data_delivery_s3_config.bucket_name #=> String
+    #   resp.logging_config.cloud_watch_config.large_data_delivery_s3_config.key_prefix #=> String
     #   resp.logging_config.s3_config.bucket_name #=> String
     #   resp.logging_config.s3_config.key_prefix #=> String
     #   resp.logging_config.text_data_delivery_enabled #=> Boolean
+    #   resp.logging_config.image_data_delivery_enabled #=> Boolean
+    #   resp.logging_config.embedding_data_delivery_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetModelInvocationLoggingConfiguration AWS API Documentation
     #
@@ -762,6 +856,63 @@ module Aws::Bedrock
     # @param [Hash] params ({})
     def get_model_invocation_logging_configuration(params = {}, options = {})
       req = build_request(:get_model_invocation_logging_configuration, params)
+      req.send_request(options)
+    end
+
+    # Get details for a provisioned throughput. For more information, see
+    # [Provisioned throughput][1] in the Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    #
+    # @option params [required, String] :provisioned_model_id
+    #   The ARN or name of the provisioned throughput.
+    #
+    # @return [Types::GetProvisionedModelThroughputResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetProvisionedModelThroughputResponse#model_units #model_units} => Integer
+    #   * {Types::GetProvisionedModelThroughputResponse#desired_model_units #desired_model_units} => Integer
+    #   * {Types::GetProvisionedModelThroughputResponse#provisioned_model_name #provisioned_model_name} => String
+    #   * {Types::GetProvisionedModelThroughputResponse#provisioned_model_arn #provisioned_model_arn} => String
+    #   * {Types::GetProvisionedModelThroughputResponse#model_arn #model_arn} => String
+    #   * {Types::GetProvisionedModelThroughputResponse#desired_model_arn #desired_model_arn} => String
+    #   * {Types::GetProvisionedModelThroughputResponse#foundation_model_arn #foundation_model_arn} => String
+    #   * {Types::GetProvisionedModelThroughputResponse#status #status} => String
+    #   * {Types::GetProvisionedModelThroughputResponse#creation_time #creation_time} => Time
+    #   * {Types::GetProvisionedModelThroughputResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::GetProvisionedModelThroughputResponse#failure_message #failure_message} => String
+    #   * {Types::GetProvisionedModelThroughputResponse#commitment_duration #commitment_duration} => String
+    #   * {Types::GetProvisionedModelThroughputResponse#commitment_expiration_time #commitment_expiration_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_provisioned_model_throughput({
+    #     provisioned_model_id: "ProvisionedModelId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_units #=> Integer
+    #   resp.desired_model_units #=> Integer
+    #   resp.provisioned_model_name #=> String
+    #   resp.provisioned_model_arn #=> String
+    #   resp.model_arn #=> String
+    #   resp.desired_model_arn #=> String
+    #   resp.foundation_model_arn #=> String
+    #   resp.status #=> String, one of "Creating", "InService", "Updating", "Failed"
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.failure_message #=> String
+    #   resp.commitment_duration #=> String, one of "OneMonth", "SixMonths"
+    #   resp.commitment_expiration_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetProvisionedModelThroughput AWS API Documentation
+    #
+    # @overload get_provisioned_model_throughput(params = {})
+    # @param [Hash] params ({})
+    def get_provisioned_model_throughput(params = {}, options = {})
+      req = build_request(:get_provisioned_model_throughput, params)
       req.send_request(options)
     end
 
@@ -775,15 +926,18 @@ module Aws::Bedrock
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
     #
-    # @option params [String] :base_model_arn_equals
-    #   Return custom models only if the base model ARN matches this
-    #   parameter.
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   Return custom models created before the specified time.
     #
     # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
     #   Return custom models created after the specified time.
     #
-    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
-    #   Return custom models created before the specified time.
+    # @option params [String] :name_contains
+    #   Return custom models only if the job name contains these characters.
+    #
+    # @option params [String] :base_model_arn_equals
+    #   Return custom models only if the base model ARN matches this
+    #   parameter.
     #
     # @option params [String] :foundation_model_arn_equals
     #   Return custom models only if the foundation model ARN matches this
@@ -791,9 +945,6 @@ module Aws::Bedrock
     #
     # @option params [Integer] :max_results
     #   Maximum number of results to return in the response.
-    #
-    # @option params [String] :name_contains
-    #   Return custom models only if the job name contains these characters.
     #
     # @option params [String] :next_token
     #   Continuation token from the previous response, for Bedrock to list the
@@ -807,20 +958,20 @@ module Aws::Bedrock
     #
     # @return [Types::ListCustomModelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListCustomModelsResponse#model_summaries #model_summaries} => Array&lt;Types::CustomModelSummary&gt;
     #   * {Types::ListCustomModelsResponse#next_token #next_token} => String
+    #   * {Types::ListCustomModelsResponse#model_summaries #model_summaries} => Array&lt;Types::CustomModelSummary&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_custom_models({
-    #     base_model_arn_equals: "ModelArn",
-    #     creation_time_after: Time.now,
     #     creation_time_before: Time.now,
+    #     creation_time_after: Time.now,
+    #     name_contains: "CustomModelName",
+    #     base_model_arn_equals: "ModelArn",
     #     foundation_model_arn_equals: "FoundationModelArn",
     #     max_results: 1,
-    #     name_contains: "CustomModelName",
     #     next_token: "PaginationToken",
     #     sort_by: "CreationTime", # accepts CreationTime
     #     sort_order: "Ascending", # accepts Ascending, Descending
@@ -828,13 +979,13 @@ module Aws::Bedrock
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.model_summaries #=> Array
-    #   resp.model_summaries[0].base_model_arn #=> String
-    #   resp.model_summaries[0].base_model_name #=> String
-    #   resp.model_summaries[0].creation_time #=> Time
     #   resp.model_summaries[0].model_arn #=> String
     #   resp.model_summaries[0].model_name #=> String
-    #   resp.next_token #=> String
+    #   resp.model_summaries[0].creation_time #=> Time
+    #   resp.model_summaries[0].base_model_arn #=> String
+    #   resp.model_summaries[0].base_model_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListCustomModels AWS API Documentation
     #
@@ -852,17 +1003,17 @@ module Aws::Bedrock
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/foundation-models.html
     #
+    # @option params [String] :by_provider
+    #   A Bedrock model provider.
+    #
     # @option params [String] :by_customization_type
     #   List by customization type.
-    #
-    # @option params [String] :by_inference_type
-    #   List by inference type.
     #
     # @option params [String] :by_output_modality
     #   List by output modality type.
     #
-    # @option params [String] :by_provider
-    #   A Bedrock model provider.
+    # @option params [String] :by_inference_type
+    #   List by inference type.
     #
     # @return [Types::ListFoundationModelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -871,28 +1022,28 @@ module Aws::Bedrock
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_foundation_models({
-    #     by_customization_type: "FINE_TUNING", # accepts FINE_TUNING
-    #     by_inference_type: "ON_DEMAND", # accepts ON_DEMAND, PROVISIONED
-    #     by_output_modality: "TEXT", # accepts TEXT, IMAGE, EMBEDDING
     #     by_provider: "Provider",
+    #     by_customization_type: "FINE_TUNING", # accepts FINE_TUNING
+    #     by_output_modality: "TEXT", # accepts TEXT, IMAGE, EMBEDDING
+    #     by_inference_type: "ON_DEMAND", # accepts ON_DEMAND, PROVISIONED
     #   })
     #
     # @example Response structure
     #
     #   resp.model_summaries #=> Array
+    #   resp.model_summaries[0].model_arn #=> String
+    #   resp.model_summaries[0].model_id #=> String
+    #   resp.model_summaries[0].model_name #=> String
+    #   resp.model_summaries[0].provider_name #=> String
+    #   resp.model_summaries[0].input_modalities #=> Array
+    #   resp.model_summaries[0].input_modalities[0] #=> String, one of "TEXT", "IMAGE", "EMBEDDING"
+    #   resp.model_summaries[0].output_modalities #=> Array
+    #   resp.model_summaries[0].output_modalities[0] #=> String, one of "TEXT", "IMAGE", "EMBEDDING"
+    #   resp.model_summaries[0].response_streaming_supported #=> Boolean
     #   resp.model_summaries[0].customizations_supported #=> Array
     #   resp.model_summaries[0].customizations_supported[0] #=> String, one of "FINE_TUNING"
     #   resp.model_summaries[0].inference_types_supported #=> Array
     #   resp.model_summaries[0].inference_types_supported[0] #=> String, one of "ON_DEMAND", "PROVISIONED"
-    #   resp.model_summaries[0].input_modalities #=> Array
-    #   resp.model_summaries[0].input_modalities[0] #=> String, one of "TEXT", "IMAGE", "EMBEDDING"
-    #   resp.model_summaries[0].model_arn #=> String
-    #   resp.model_summaries[0].model_id #=> String
-    #   resp.model_summaries[0].model_name #=> String
-    #   resp.model_summaries[0].output_modalities #=> Array
-    #   resp.model_summaries[0].output_modalities[0] #=> String, one of "TEXT", "IMAGE", "EMBEDDING"
-    #   resp.model_summaries[0].provider_name #=> String
-    #   resp.model_summaries[0].response_streaming_supported #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListFoundationModels AWS API Documentation
     #
@@ -919,12 +1070,15 @@ module Aws::Bedrock
     # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
     #   Return customization jobs created before the specified time.
     #
-    # @option params [Integer] :max_results
-    #   Maximum number of results to return in the response.
+    # @option params [String] :status_equals
+    #   Return customization jobs with the specified status.
     #
     # @option params [String] :name_contains
     #   Return customization jobs only if the job name contains these
     #   characters.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return in the response.
     #
     # @option params [String] :next_token
     #   Continuation token from the previous response, for Bedrock to list the
@@ -936,13 +1090,10 @@ module Aws::Bedrock
     # @option params [String] :sort_order
     #   The sort order of the results.
     #
-    # @option params [String] :status_equals
-    #   Return customization jobs with the specified status.
-    #
     # @return [Types::ListModelCustomizationJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListModelCustomizationJobsResponse#model_customization_job_summaries #model_customization_job_summaries} => Array&lt;Types::ModelCustomizationJobSummary&gt;
     #   * {Types::ListModelCustomizationJobsResponse#next_token #next_token} => String
+    #   * {Types::ListModelCustomizationJobsResponse#model_customization_job_summaries #model_customization_job_summaries} => Array&lt;Types::ModelCustomizationJobSummary&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -951,27 +1102,27 @@ module Aws::Bedrock
     #   resp = client.list_model_customization_jobs({
     #     creation_time_after: Time.now,
     #     creation_time_before: Time.now,
-    #     max_results: 1,
+    #     status_equals: "InProgress", # accepts InProgress, Completed, Failed, Stopping, Stopped
     #     name_contains: "JobName",
+    #     max_results: 1,
     #     next_token: "PaginationToken",
     #     sort_by: "CreationTime", # accepts CreationTime
     #     sort_order: "Ascending", # accepts Ascending, Descending
-    #     status_equals: "InProgress", # accepts InProgress, Completed, Failed, Stopping, Stopped
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.model_customization_job_summaries #=> Array
+    #   resp.model_customization_job_summaries[0].job_arn #=> String
     #   resp.model_customization_job_summaries[0].base_model_arn #=> String
+    #   resp.model_customization_job_summaries[0].job_name #=> String
+    #   resp.model_customization_job_summaries[0].status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
+    #   resp.model_customization_job_summaries[0].last_modified_time #=> Time
     #   resp.model_customization_job_summaries[0].creation_time #=> Time
+    #   resp.model_customization_job_summaries[0].end_time #=> Time
     #   resp.model_customization_job_summaries[0].custom_model_arn #=> String
     #   resp.model_customization_job_summaries[0].custom_model_name #=> String
-    #   resp.model_customization_job_summaries[0].end_time #=> Time
-    #   resp.model_customization_job_summaries[0].job_arn #=> String
-    #   resp.model_customization_job_summaries[0].job_name #=> String
-    #   resp.model_customization_job_summaries[0].last_modified_time #=> Time
-    #   resp.model_customization_job_summaries[0].status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
-    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListModelCustomizationJobs AWS API Documentation
     #
@@ -979,6 +1130,91 @@ module Aws::Bedrock
     # @param [Hash] params ({})
     def list_model_customization_jobs(params = {}, options = {})
       req = build_request(:list_model_customization_jobs, params)
+      req.send_request(options)
+    end
+
+    # List the provisioned capacities. For more information, see
+    # [Provisioned throughput][1] in the Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   Return provisioned capacities created after the specified time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   Return provisioned capacities created before the specified time.
+    #
+    # @option params [String] :status_equals
+    #   Return the list of provisioned capacities that match the specified
+    #   status.
+    #
+    # @option params [String] :model_arn_equals
+    #   Return the list of provisioned capacities where their model ARN is
+    #   equal to this parameter.
+    #
+    # @option params [String] :name_contains
+    #   Return the list of provisioned capacities if their name contains these
+    #   characters.
+    #
+    # @option params [Integer] :max_results
+    #   THe maximum number of results to return in the response.
+    #
+    # @option params [String] :next_token
+    #   Continuation token from the previous response, for Bedrock to list the
+    #   next set of results.
+    #
+    # @option params [String] :sort_by
+    #   The field to sort by in the returned list of provisioned capacities.
+    #
+    # @option params [String] :sort_order
+    #   The sort order of the results.
+    #
+    # @return [Types::ListProvisionedModelThroughputsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProvisionedModelThroughputsResponse#next_token #next_token} => String
+    #   * {Types::ListProvisionedModelThroughputsResponse#provisioned_model_summaries #provisioned_model_summaries} => Array&lt;Types::ProvisionedModelSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_provisioned_model_throughputs({
+    #     creation_time_after: Time.now,
+    #     creation_time_before: Time.now,
+    #     status_equals: "Creating", # accepts Creating, InService, Updating, Failed
+    #     model_arn_equals: "ModelArn",
+    #     name_contains: "ProvisionedModelName",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     sort_by: "CreationTime", # accepts CreationTime
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.provisioned_model_summaries #=> Array
+    #   resp.provisioned_model_summaries[0].provisioned_model_name #=> String
+    #   resp.provisioned_model_summaries[0].provisioned_model_arn #=> String
+    #   resp.provisioned_model_summaries[0].model_arn #=> String
+    #   resp.provisioned_model_summaries[0].desired_model_arn #=> String
+    #   resp.provisioned_model_summaries[0].foundation_model_arn #=> String
+    #   resp.provisioned_model_summaries[0].model_units #=> Integer
+    #   resp.provisioned_model_summaries[0].desired_model_units #=> Integer
+    #   resp.provisioned_model_summaries[0].status #=> String, one of "Creating", "InService", "Updating", "Failed"
+    #   resp.provisioned_model_summaries[0].commitment_duration #=> String, one of "OneMonth", "SixMonths"
+    #   resp.provisioned_model_summaries[0].commitment_expiration_time #=> Time
+    #   resp.provisioned_model_summaries[0].creation_time #=> Time
+    #   resp.provisioned_model_summaries[0].last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListProvisionedModelThroughputs AWS API Documentation
+    #
+    # @overload list_provisioned_model_throughputs(params = {})
+    # @param [Hash] params ({})
+    def list_provisioned_model_throughputs(params = {}, options = {})
+      req = build_request(:list_provisioned_model_throughputs, params)
       req.send_request(options)
     end
 
@@ -1031,20 +1267,20 @@ module Aws::Bedrock
     #   resp = client.put_model_invocation_logging_configuration({
     #     logging_config: { # required
     #       cloud_watch_config: {
+    #         log_group_name: "LogGroupName", # required
+    #         role_arn: "RoleArn", # required
     #         large_data_delivery_s3_config: {
     #           bucket_name: "BucketName", # required
     #           key_prefix: "KeyPrefix",
     #         },
-    #         log_group_name: "LogGroupName", # required
-    #         role_arn: "RoleArn", # required
     #       },
-    #       embedding_data_delivery_enabled: false,
-    #       image_data_delivery_enabled: false,
     #       s3_config: {
     #         bucket_name: "BucketName", # required
     #         key_prefix: "KeyPrefix",
     #       },
     #       text_data_delivery_enabled: false,
+    #       image_data_delivery_enabled: false,
+    #       embedding_data_delivery_enabled: false,
     #     },
     #   })
     #
@@ -1151,6 +1387,42 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Update a provisioned throughput. For more information, see
+    # [Provisioned throughput][1] in the Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    #
+    # @option params [required, String] :provisioned_model_id
+    #   The ARN or name of the provisioned throughput to update.
+    #
+    # @option params [String] :desired_provisioned_model_name
+    #   The new name for this provisioned throughput.
+    #
+    # @option params [String] :desired_model_id
+    #   The ARN of the new model to associate with this provisioned
+    #   throughput.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_provisioned_model_throughput({
+    #     provisioned_model_id: "ProvisionedModelId", # required
+    #     desired_provisioned_model_name: "ProvisionedModelName",
+    #     desired_model_id: "ModelIdentifier",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/UpdateProvisionedModelThroughput AWS API Documentation
+    #
+    # @overload update_provisioned_model_throughput(params = {})
+    # @param [Hash] params ({})
+    def update_provisioned_model_throughput(params = {}, options = {})
+      req = build_request(:update_provisioned_model_throughput, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1164,7 +1436,7 @@ module Aws::Bedrock
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
