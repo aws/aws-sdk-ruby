@@ -100,7 +100,7 @@ module BuildTools
     end
 
     def load_smoke(svc_name, models_dir)
-      path = model_path('smoke.json', models_dir)
+      path = model_path('smoke-2.json', models_dir)
       if path
         smoke = JSON.load(File.read(path))
         BuildTools::Customizations.apply_smoke_customizations(svc_name, smoke)

@@ -25,7 +25,6 @@ module AwsSdkCodeGenerator
         y.yield('features/step_definitions.rb', features_step_definitions_file)
         if @service.smoke_tests
           y.yield('features/smoke.feature', smoke_file)
-          y.yield('features/smoke_step_definitions.rb', smoke_step_definitions_file)
         end
         y.yield('VERSION', version_file)
         y.yield('LICENSE.txt', license_file)
@@ -52,10 +51,6 @@ module AwsSdkCodeGenerator
 
     def smoke_file
       Views::Features::Smoke.new(options).render
-    end
-
-    def smoke_step_definitions_file
-      Views::Features::SmokeStepDefinitions.new(options).render
     end
 
     def features_step_definitions_file

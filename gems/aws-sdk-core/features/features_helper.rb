@@ -105,6 +105,37 @@ IntegrationTestConfig.load!
 ## Shared step definitions
 ##
 
+# Smoke Test Definitions
+Given(/I create a '(.*?)' client with config:/) do |module_name, config|
+  namespace = Object.const_get(module_name)
+  opts = JSON.parse(config, symbolize_names: true)
+  opts[:region] = ENV['AWS_SMOKE_TEST_REGION'] || opts[:region]
+  @client = namespace::Client.new(opts)
+end
+
+When(/I call the operation '(.*?)' with params:/) do |operation, params|
+  opts = JSON.parse(params, symbolize_names: true)
+  begin
+    @client.send(operation.to_sym, opts)
+  rescue Aws::Errors::ServiceError => e
+    @last_error = e
+  end
+end
+
+Then(/I expect a '(.*?)' was raised/) do |error|
+  error_class = Object.const_get(error)
+  expect(@error).to be_a(error_class)
+end
+
+Then(/I expect an error was raised/) do
+  expect(@last_error).to_not be_nil
+end
+
+Then(/I expect an error was not raised/) do
+  expect(@last_error).to be_nil
+end
+
+# Integration Test Definitions
 def eventually(options = {}, &block)
   seconds = options[:upto] || 15
   delays = [1]

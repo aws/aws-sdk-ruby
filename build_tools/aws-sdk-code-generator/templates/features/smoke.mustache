@@ -1,22 +1,18 @@
 {{#generated_src_warning}}
 {{generated_src_warning}}
 {{/generated_src_warning}}
-Feature: Smoke tests for {{service}}
-
-Background:
-{{#client_endpoint}}
-  Given I create a client with endpoint '{{client_endpoint}}'
-{{/client_endpoint}}
-{{^client_endpoint}}
-  Given I create a client in region '{{client_region}}'
-{{/client_endpoint}}
+Feature: Smoke tests for {{service_name}}
 {{#smoke_tests}}
 
-  {{smoke_test_tags}}
-  Scenario: {{scenario_string}}
-  When I call the operation '{{operation}}' with params:
-    """
+  {{tags}}
+  Scenario: {{id}}
+    Given I create a '{{service_module}}' client with config:
+      """
+{{&config_hash}}
+      """
+    When I call the operation '{{operation_name}}' with params:
+      """
 {{&param_hash}}
-    """
-  Then {{error_expectation}}
+      """
+    Then {{&expectation}}
 {{/smoke_tests}}

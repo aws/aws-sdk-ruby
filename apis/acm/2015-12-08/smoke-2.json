@@ -1,0 +1,39 @@
+{
+    "version": 2,
+    "testCases": [
+        {
+            "id": "FailureExample",
+            "operationName": "TestOperation",
+            "input": {
+                "message": "foo"
+            },
+            "expectation": {"failure": {}},
+            "config": {
+                "region": "moon-dark-1"
+            },
+            "tags": ["connection"]
+        },
+        {
+            "id": "ErrorExample",
+            "operationName": "TestOperation",
+            "input": {
+                "message": "föö"
+            },
+            "expectation": {"failure": {"errorId": "InvalidMessageError"}},
+            "config": {
+                "region": "eu-central-1"
+            }
+        },
+        {
+            "id": "SuccessExample",
+            "operationName": "TestOperation",
+            "input": {
+                "message": "bar"
+            },
+            "expectation": {"success": {}},
+            "config": {
+                "region": "eu-central-1"
+            }
+        }
+    ]
+}
