@@ -1105,7 +1105,13 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The content of the flow.
+    #   The JSON string that represents the content of the flow. For an
+    #   example, see [Example contact flow in Amazon Connect Flow
+    #   language][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1144,7 +1150,15 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The content of the flow module.
+    #   The JSON string that represents the content of the flow. For an
+    #   example, see [Example contact flow in Amazon Connect Flow
+    #   language][1].
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 256000.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1466,7 +1480,15 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The content of the flow.
+    #   The JSON string that represents the content of the flow. For an
+    #   example, see [Example contact flow in Amazon Connect Flow
+    #   language][1].
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 256000.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -6339,10 +6361,10 @@ module Aws::Connect
     # @!attribute [rw] start_time
     #   The timestamp, in UNIX Epoch time format, at which to start the
     #   reporting interval for the retrieval of historical metrics data. The
-    #   time must be before the end time timestamp. The time range between
-    #   the start and end time must be less than 24 hours. The start time
-    #   cannot be earlier than 35 days before the time of the request.
-    #   Historical metrics are available for 35 days.
+    #   time must be before the end time timestamp. The start and end time
+    #   depends on the `IntervalPeriod` selected. By default the time range
+    #   between start and end time is 35 days. Historical metrics are
+    #   available for 3 months.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
@@ -6350,10 +6372,44 @@ module Aws::Connect
     #   reporting interval for the retrieval of historical metrics data. The
     #   time must be later than the start time timestamp. It cannot be later
     #   than the current timestamp.
-    #
-    #   The time range between the start and end time must be less than 24
-    #   hours.
     #   @return [Time]
+    #
+    # @!attribute [rw] interval
+    #   The interval period and timezone to apply to returned metrics.
+    #
+    #   * `IntervalPeriod`: An aggregated grouping applied to request
+    #     metrics. Valid `IntervalPeriod` values are: `FIFTEEN_MIN` \|
+    #     `THIRTY_MIN` \| `HOUR` \| `DAY` \| `WEEK` \| `TOTAL`.
+    #
+    #     For example, if `IntervalPeriod` is selected `THIRTY_MIN`,
+    #     `StartTime` and `EndTime` differs by 1 day, then Amazon Connect
+    #     returns 48 results in the response. Each result is aggregated by
+    #     the THIRTY\_MIN period. By default Amazon Connect aggregates
+    #     results based on the `TOTAL` interval period.
+    #
+    #     The following list describes restrictions on `StartTime` and
+    #     `EndTime` based on which `IntervalPeriod` is requested.
+    #
+    #     * `FIFTEEN_MIN`: The difference between `StartTime` and `EndTime`
+    #       must be less than 3 days.
+    #
+    #     * `THIRTY_MIN`: The difference between `StartTime` and `EndTime`
+    #       must be less than 3 days.
+    #
+    #     * `HOUR`: The difference between `StartTime` and `EndTime` must be
+    #       less than 3 days.
+    #
+    #     * `DAY`: The difference between `StartTime` and `EndTime` must be
+    #       less than 35 days.
+    #
+    #     * `WEEK`: The difference between `StartTime` and `EndTime` must be
+    #       less than 35 days.
+    #
+    #     * `TOTAL`: The difference between `StartTime` and `EndTime` must
+    #       be less than 35 days.
+    #
+    #   * `TimeZone`: The timezone applied to requested metrics.
+    #   @return [Types::IntervalDetails]
     #
     # @!attribute [rw] filters
     #   The filters to apply to returned metrics. You can filter on the
@@ -6422,6 +6478,13 @@ module Aws::Connect
     #   a description of each metric, see [Historical metrics
     #   definitions][1] in the *Amazon Connect Administrator's Guide*.
     #
+    #   ABANDONMENT\_RATE
+    #
+    #   : Unit: Percent
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
+    #
     #   AGENT\_ADHERENT\_TIME
     #
     #   : This metric is available only in Amazon Web Services Regions where
@@ -6438,6 +6501,16 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy
+    #
+    #   AGENT\_NON\_RESPONSE\_WITHOUT\_CUSTOMER\_ABANDONS
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
+    #
+    #     Data for this metric is available starting from October 1, 2023
+    #     0:00:00 GMT.
     #
     #   AGENT\_OCCUPANCY
     #
@@ -6495,16 +6568,10 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy
     #
-    #   AVG\_AGENT\_CONNECTING\_TIME
+    #     <note markdown="1"> The `Negate` key in Metric Level Filters is not applicable for
+    #     this metric.
     #
-    #   : Unit: Seconds
-    #
-    #     Valid metric filter key: `INITIATION_METHOD`. For now, this metric
-    #     only supports the following as `INITIATION_METHOD`: `INBOUND` \|
-    #     `OUTBOUND` \| `CALLBACK` \| `API`
-    #
-    #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Agent, Agent Hierarchy
+    #      </note>
     #
     #   AVG\_CONTACT\_DURATION
     #
@@ -6555,6 +6622,13 @@ module Aws::Connect
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
     #      </note>
+    #
+    #   AVG\_HOLD\_TIME\_ALL\_CONTACTS
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     Agent, Agent Hierarchy
     #
     #   AVG\_HOLDS
     #
@@ -6625,6 +6699,12 @@ module Aws::Connect
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
     #      </note>
+    #
+    #   AVG\_RESOLUTION\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile
     #
     #   AVG\_TALK\_TIME
     #
@@ -6702,6 +6782,16 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy
+    #
+    #   CONTACTS\_RESOLVED\_IN\_X
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #
+    #     Threshold: For `ThresholdValue` enter any whole number from 1 to
+    #     604800 (inclusive), in seconds. For `Comparison`, you must enter
+    #     `LT` (for "Less than").
     #
     #   CONTACTS\_TRANSFERRED\_OUT
     #
@@ -6803,6 +6893,7 @@ module Aws::Connect
       :resource_arn,
       :start_time,
       :end_time,
+      :interval,
       :filters,
       :groupings,
       :metrics,
@@ -7808,6 +7899,54 @@ module Aws::Connect
     #
     class InternalServiceException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the interval period to use for returning results.
+    #
+    # @!attribute [rw] time_zone
+    #   The timezone applied to requested metrics.
+    #   @return [String]
+    #
+    # @!attribute [rw] interval_period
+    #   `IntervalPeriod`: An aggregated grouping applied to request metrics.
+    #   Valid `IntervalPeriod` values are: `FIFTEEN_MIN` \| `THIRTY_MIN` \|
+    #   `HOUR` \| `DAY` \| `WEEK` \| `TOTAL`.
+    #
+    #   For example, if `IntervalPeriod` is selected `THIRTY_MIN`,
+    #   `StartTime` and `EndTime` differs by 1 day, then Amazon Connect
+    #   returns 48 results in the response. Each result is aggregated by the
+    #   THIRTY\_MIN period. By default Amazon Connect aggregates results
+    #   based on the `TOTAL` interval period.
+    #
+    #   The following list describes restrictions on `StartTime` and
+    #   `EndTime` based on what `IntervalPeriod` is requested.
+    #
+    #   * `FIFTEEN_MIN`: The difference between `StartTime` and `EndTime`
+    #     must be less than 3 days.
+    #
+    #   * `THIRTY_MIN`: The difference between `StartTime` and `EndTime`
+    #     must be less than 3 days.
+    #
+    #   * `HOUR`: The difference between `StartTime` and `EndTime` must be
+    #     less than 3 days.
+    #
+    #   * `DAY`: The difference between `StartTime` and `EndTime` must be
+    #     less than 35 days.
+    #
+    #   * `WEEK`: The difference between `StartTime` and `EndTime` must be
+    #     less than 35 days.
+    #
+    #   * `TOTAL`: The difference between `StartTime` and `EndTime` must be
+    #     less than 35 days.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/IntervalDetails AWS API Documentation
+    #
+    class IntervalDetails < Struct.new(
+      :time_zone,
+      :interval_period)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9476,6 +9615,9 @@ module Aws::Connect
     end
 
     # @!attribute [rw] applications
+    #   This API is in preview release for Amazon Connect and is subject to
+    #   change.
+    #
     #   A list of the third party application's metadata.
     #   @return [Array<Types::Application>]
     #
@@ -10142,11 +10284,49 @@ module Aws::Connect
     #   `CONTACT_FLOW_DISCONNECT` \| `OTHER` \| `EXPIRED` \| `API`
     #   @return [Array<String>]
     #
+    # @!attribute [rw] negate
+    #   The flag to use to filter on requested metric filter values or to
+    #   not filter on requested metric filter values. By default the negate
+    #   is `false`, which indicates to filter on the requested metric
+    #   filter.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/MetricFilterV2 AWS API Documentation
     #
     class MetricFilterV2 < Struct.new(
       :metric_filter_key,
-      :metric_filter_values)
+      :metric_filter_values,
+      :negate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The interval period with the start and end time for the metrics.
+    #
+    # @!attribute [rw] interval
+    #   The interval period provided in the API request.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp, in UNIX Epoch time format. Start time is based on the
+    #   interval period selected.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp, in UNIX Epoch time format. End time is based on the
+    #   interval period selected. For example, If `IntervalPeriod` is
+    #   selected `THIRTY_MIN`, `StartTime` and `EndTime` in the API request
+    #   differs by 1 day, then 48 results are returned in the response. Each
+    #   result is aggregated by the 30 minutes period, with each `StartTime`
+    #   and `EndTime` differing by 30 minutes.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/MetricInterval AWS API Documentation
+    #
+    class MetricInterval < Struct.new(
+      :interval,
+      :start_time,
+      :end_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10157,6 +10337,10 @@ module Aws::Connect
     #   The dimension for the metrics.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] metric_interval
+    #   The interval period with the start and end time for the metrics.
+    #   @return [Types::MetricInterval]
+    #
     # @!attribute [rw] collections
     #   The set of metrics.
     #   @return [Array<Types::MetricDataV2>]
@@ -10165,6 +10349,7 @@ module Aws::Connect
     #
     class MetricResultV2 < Struct.new(
       :dimensions,
+      :metric_interval,
       :collections)
       SENSITIVE = []
       include Aws::Structure
@@ -14509,8 +14694,11 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The JSON string that represents flow's content. For an example, see
-    #   [Example contact flow in Amazon Connect Flow language][1].
+    #   The JSON string that represents the content of the flow. For an
+    #   example, see [Example contact flow in Amazon Connect Flow
+    #   language][1].
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 256000.
     #
     #
     #
@@ -14586,7 +14774,13 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The content of the flow module.
+    #   The JSON string that represents the content of the flow. For an
+    #   example, see [Example contact flow in Amazon Connect Flow
+    #   language][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowModuleContentRequest AWS API Documentation

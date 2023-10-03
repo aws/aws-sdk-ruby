@@ -445,6 +445,8 @@ module Aws::Connect
     IntegrationAssociationSummaryList = Shapes::ListShape.new(name: 'IntegrationAssociationSummaryList')
     IntegrationType = Shapes::StringShape.new(name: 'IntegrationType')
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
+    IntervalDetails = Shapes::StructureShape.new(name: 'IntervalDetails')
+    IntervalPeriod = Shapes::StringShape.new(name: 'IntervalPeriod')
     InvalidContactFlowException = Shapes::StructureShape.new(name: 'InvalidContactFlowException')
     InvalidContactFlowModuleException = Shapes::StructureShape.new(name: 'InvalidContactFlowModuleException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
@@ -562,6 +564,7 @@ module Aws::Connect
     MetricFilterV2 = Shapes::StructureShape.new(name: 'MetricFilterV2')
     MetricFilterValueList = Shapes::ListShape.new(name: 'MetricFilterValueList')
     MetricFiltersV2List = Shapes::ListShape.new(name: 'MetricFiltersV2List')
+    MetricInterval = Shapes::StructureShape.new(name: 'MetricInterval')
     MetricNameV2 = Shapes::StringShape.new(name: 'MetricNameV2')
     MetricResultV2 = Shapes::StructureShape.new(name: 'MetricResultV2')
     MetricResultsV2 = Shapes::ListShape.new(name: 'MetricResultsV2')
@@ -2234,6 +2237,7 @@ module Aws::Connect
     GetMetricDataV2Request.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "ResourceArn"))
     GetMetricDataV2Request.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
     GetMetricDataV2Request.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTime"))
+    GetMetricDataV2Request.add_member(:interval, Shapes::ShapeRef.new(shape: IntervalDetails, location_name: "Interval"))
     GetMetricDataV2Request.add_member(:filters, Shapes::ShapeRef.new(shape: FiltersV2List, required: true, location_name: "Filters"))
     GetMetricDataV2Request.add_member(:groupings, Shapes::ShapeRef.new(shape: GroupingsV2, location_name: "Groupings"))
     GetMetricDataV2Request.add_member(:metrics, Shapes::ShapeRef.new(shape: MetricsV2, required: true, location_name: "Metrics"))
@@ -2461,6 +2465,10 @@ module Aws::Connect
 
     InternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     InternalServiceException.struct_class = Types::InternalServiceException
+
+    IntervalDetails.add_member(:time_zone, Shapes::ShapeRef.new(shape: String, location_name: "TimeZone"))
+    IntervalDetails.add_member(:interval_period, Shapes::ShapeRef.new(shape: IntervalPeriod, location_name: "IntervalPeriod"))
+    IntervalDetails.struct_class = Types::IntervalDetails
 
     InvalidContactFlowException.add_member(:problems, Shapes::ShapeRef.new(shape: Problems, location_name: "problems"))
     InvalidContactFlowException.struct_class = Types::InvalidContactFlowException
@@ -2910,13 +2918,20 @@ module Aws::Connect
 
     MetricFilterV2.add_member(:metric_filter_key, Shapes::ShapeRef.new(shape: String, location_name: "MetricFilterKey"))
     MetricFilterV2.add_member(:metric_filter_values, Shapes::ShapeRef.new(shape: MetricFilterValueList, location_name: "MetricFilterValues"))
+    MetricFilterV2.add_member(:negate, Shapes::ShapeRef.new(shape: Boolean, location_name: "Negate"))
     MetricFilterV2.struct_class = Types::MetricFilterV2
 
     MetricFilterValueList.member = Shapes::ShapeRef.new(shape: String)
 
     MetricFiltersV2List.member = Shapes::ShapeRef.new(shape: MetricFilterV2)
 
+    MetricInterval.add_member(:interval, Shapes::ShapeRef.new(shape: IntervalPeriod, location_name: "Interval"))
+    MetricInterval.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    MetricInterval.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    MetricInterval.struct_class = Types::MetricInterval
+
     MetricResultV2.add_member(:dimensions, Shapes::ShapeRef.new(shape: DimensionsV2Map, location_name: "Dimensions"))
+    MetricResultV2.add_member(:metric_interval, Shapes::ShapeRef.new(shape: MetricInterval, location_name: "MetricInterval"))
     MetricResultV2.add_member(:collections, Shapes::ShapeRef.new(shape: MetricDataCollectionsV2, location_name: "Collections"))
     MetricResultV2.struct_class = Types::MetricResultV2
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2023-10-03)
+------------------
+
+* Feature - This release adds support for sharing AWS::ApplicationInsights::Application resources.
+
 1.8.0 (2023-09-27)
 ------------------
 

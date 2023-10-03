@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.214.0 (2023-10-03)
+------------------
+
+* Feature - This release allows users to run Selective Execution in SageMaker Pipelines without SourcePipelineExecutionArn if selected steps do not have any dependent steps.
+
 1.213.0 (2023-09-28)
 ------------------
 

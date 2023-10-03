@@ -114,6 +114,7 @@ module Aws::LocationService
     DeleteTrackerResponse = Shapes::StructureShape.new(name: 'DeleteTrackerResponse')
     DescribeGeofenceCollectionRequest = Shapes::StructureShape.new(name: 'DescribeGeofenceCollectionRequest')
     DescribeGeofenceCollectionResponse = Shapes::StructureShape.new(name: 'DescribeGeofenceCollectionResponse')
+    DescribeGeofenceCollectionResponseGeofenceCountInteger = Shapes::IntegerShape.new(name: 'DescribeGeofenceCollectionResponseGeofenceCountInteger')
     DescribeKeyRequest = Shapes::StructureShape.new(name: 'DescribeKeyRequest')
     DescribeKeyResponse = Shapes::StructureShape.new(name: 'DescribeKeyResponse')
     DescribeMapRequest = Shapes::StructureShape.new(name: 'DescribeMapRequest')
@@ -288,6 +289,7 @@ module Aws::LocationService
     TimeZone = Shapes::StructureShape.new(name: 'TimeZone')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp', timestampFormat: "iso8601")
     Token = Shapes::StringShape.new(name: 'Token')
+    TrackingFilterGeometry = Shapes::StructureShape.new(name: 'TrackingFilterGeometry')
     TravelMode = Shapes::StringShape.new(name: 'TravelMode')
     TruckDimensions = Shapes::StructureShape.new(name: 'TruckDimensions')
     TruckDimensionsHeightDouble = Shapes::FloatShape.new(name: 'TruckDimensionsHeightDouble')
@@ -596,6 +598,7 @@ module Aws::LocationService
 
     CreateTrackerRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreateTrackerRequest.add_member(:event_bridge_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "EventBridgeEnabled"))
+    CreateTrackerRequest.add_member(:kms_key_enable_geospatial_queries, Shapes::ShapeRef.new(shape: Boolean, location_name: "KmsKeyEnableGeospatialQueries"))
     CreateTrackerRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     CreateTrackerRequest.add_member(:position_filtering, Shapes::ShapeRef.new(shape: PositionFiltering, location_name: "PositionFiltering"))
     CreateTrackerRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. If included, the only allowed value is RequestBasedUsage."}))
@@ -649,6 +652,7 @@ module Aws::LocationService
     DescribeGeofenceCollectionResponse.add_member(:collection_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "CollectionName"))
     DescribeGeofenceCollectionResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreateTime"))
     DescribeGeofenceCollectionResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, required: true, location_name: "Description"))
+    DescribeGeofenceCollectionResponse.add_member(:geofence_count, Shapes::ShapeRef.new(shape: DescribeGeofenceCollectionResponseGeofenceCountInteger, location_name: "GeofenceCount"))
     DescribeGeofenceCollectionResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     DescribeGeofenceCollectionResponse.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. Always returns RequestBasedUsage."}))
     DescribeGeofenceCollectionResponse.add_member(:pricing_plan_data_source, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "PricingPlanDataSource", metadata: {"deprecatedMessage"=>"Deprecated. Unused."}))
@@ -717,6 +721,7 @@ module Aws::LocationService
     DescribeTrackerResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreateTime"))
     DescribeTrackerResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, required: true, location_name: "Description"))
     DescribeTrackerResponse.add_member(:event_bridge_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "EventBridgeEnabled"))
+    DescribeTrackerResponse.add_member(:kms_key_enable_geospatial_queries, Shapes::ShapeRef.new(shape: Boolean, location_name: "KmsKeyEnableGeospatialQueries"))
     DescribeTrackerResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     DescribeTrackerResponse.add_member(:position_filtering, Shapes::ShapeRef.new(shape: PositionFiltering, location_name: "PositionFiltering"))
     DescribeTrackerResponse.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. Always returns RequestBasedUsage."}))
@@ -873,6 +878,7 @@ module Aws::LocationService
 
     LinearRings.member = Shapes::ShapeRef.new(shape: LinearRing)
 
+    ListDevicePositionsRequest.add_member(:filter_geometry, Shapes::ShapeRef.new(shape: TrackingFilterGeometry, location_name: "FilterGeometry"))
     ListDevicePositionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListDevicePositionsRequestMaxResultsInteger, location_name: "MaxResults"))
     ListDevicePositionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListDevicePositionsRequest.add_member(:tracker_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "TrackerName"))
@@ -1222,6 +1228,9 @@ module Aws::LocationService
     TimeZone.add_member(:offset, Shapes::ShapeRef.new(shape: Integer, location_name: "Offset"))
     TimeZone.struct_class = Types::TimeZone
 
+    TrackingFilterGeometry.add_member(:polygon, Shapes::ShapeRef.new(shape: LinearRings, location_name: "Polygon"))
+    TrackingFilterGeometry.struct_class = Types::TrackingFilterGeometry
+
     TruckDimensions.add_member(:height, Shapes::ShapeRef.new(shape: TruckDimensionsHeightDouble, location_name: "Height"))
     TruckDimensions.add_member(:length, Shapes::ShapeRef.new(shape: TruckDimensionsLengthDouble, location_name: "Length"))
     TruckDimensions.add_member(:unit, Shapes::ShapeRef.new(shape: DimensionUnit, location_name: "Unit"))
@@ -1296,6 +1305,7 @@ module Aws::LocationService
 
     UpdateTrackerRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     UpdateTrackerRequest.add_member(:event_bridge_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "EventBridgeEnabled"))
+    UpdateTrackerRequest.add_member(:kms_key_enable_geospatial_queries, Shapes::ShapeRef.new(shape: Boolean, location_name: "KmsKeyEnableGeospatialQueries"))
     UpdateTrackerRequest.add_member(:position_filtering, Shapes::ShapeRef.new(shape: PositionFiltering, location_name: "PositionFiltering"))
     UpdateTrackerRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, deprecated: true, location_name: "PricingPlan", metadata: {"deprecatedMessage"=>"Deprecated. If included, the only allowed value is RequestBasedUsage."}))
     UpdateTrackerRequest.add_member(:pricing_plan_data_source, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "PricingPlanDataSource", metadata: {"deprecatedMessage"=>"Deprecated. No longer allowed."}))

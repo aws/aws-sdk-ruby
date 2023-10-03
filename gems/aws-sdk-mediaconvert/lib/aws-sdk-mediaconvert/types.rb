@@ -5177,6 +5177,14 @@ module Aws::MediaConvert
     #   Static.
     #   @return [String]
     #
+    # @!attribute [rw] end_of_stream_markers
+    #   Optionally include or suppress markers at the end of your output
+    #   that signal the end of the video stream. To include end of stream
+    #   markers: Leave blank or keep the default value, Include. To not
+    #   include end of stream markers: Choose Suppress. This is useful when
+    #   your output will be inserted into another stream.
+    #   @return [String]
+    #
     # @!attribute [rw] entropy_encoding
     #   Entropy encoding mode. Use CABAC (must be in Main or High profile)
     #   or CAVLC.
@@ -5567,6 +5575,7 @@ module Aws::MediaConvert
       :codec_level,
       :codec_profile,
       :dynamic_sub_gop,
+      :end_of_stream_markers,
       :entropy_encoding,
       :field_encoding,
       :flicker_adaptive_quantization,
@@ -5717,6 +5726,14 @@ module Aws::MediaConvert
     #   by the value that you choose for B-frames between reference frames.
     #   To use the same number B-frames for all types of content: Choose
     #   Static.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_of_stream_markers
+    #   Optionally include or suppress markers at the end of your output
+    #   that signal the end of the video stream. To include end of stream
+    #   markers: Leave blank or keep the default value, Include. To not
+    #   include end of stream markers: Choose Suppress. This is useful when
+    #   your output will be inserted into another stream.
     #   @return [String]
     #
     # @!attribute [rw] flicker_adaptive_quantization
@@ -6078,6 +6095,7 @@ module Aws::MediaConvert
       :codec_level,
       :codec_profile,
       :dynamic_sub_gop,
+      :end_of_stream_markers,
       :flicker_adaptive_quantization,
       :framerate_control,
       :framerate_conversion_algorithm,
@@ -7153,6 +7171,10 @@ module Aws::MediaConvert
     #   https://docs.aws.amazon.com/mediaconvert/latest/ug/video-generator.html
     #   @return [Types::InputVideoGenerator]
     #
+    # @!attribute [rw] video_overlays
+    #   Contains an array of video overlays.
+    #   @return [Array<Types::VideoOverlay>]
+    #
     # @!attribute [rw] video_selector
     #   Input video selectors contain the video settings for the input. Each
     #   of your inputs can have up to one video selector.
@@ -7184,6 +7206,7 @@ module Aws::MediaConvert
       :timecode_source,
       :timecode_start,
       :video_generator,
+      :video_overlays,
       :video_selector)
       SENSITIVE = []
       include Aws::Structure
@@ -7441,6 +7464,10 @@ module Aws::MediaConvert
     #   https://docs.aws.amazon.com/console/mediaconvert/timecode.
     #   @return [String]
     #
+    # @!attribute [rw] video_overlays
+    #   Contains an array of video overlays.
+    #   @return [Array<Types::VideoOverlay>]
+    #
     # @!attribute [rw] video_selector
     #   Input video selectors contain the video settings for the input. Each
     #   of your inputs can have up to one video selector.
@@ -7468,6 +7495,7 @@ module Aws::MediaConvert
       :psi_control,
       :timecode_source,
       :timecode_start,
+      :video_overlays,
       :video_selector)
       SENSITIVE = []
       include Aws::Structure
@@ -7845,16 +7873,6 @@ module Aws::MediaConvert
     #   Advisory.
     #   @return [Types::ExtendedDataServices]
     #
-    # @!attribute [rw] follow_input_index
-    #   Specifies which input metadata to use for the default "Follow
-    #   input" option for the following settings: resolution, frame rate,
-    #   and pixel aspect ratio. In the simplest case, specify which input is
-    #   used based on its index in the job. For example if you specify 3,
-    #   then the fourth input will be used from each input. If the job does
-    #   not have a fourth input, then the first input will be used. If no
-    #   followInputIndex is specified, then 0 will be chosen automatically.
-    #   @return [Integer]
-    #
     # @!attribute [rw] inputs
     #   Use Inputs to define source file used in the transcode job. There
     #   can be multiple inputs add in a job. These inputs will be
@@ -7928,7 +7946,6 @@ module Aws::MediaConvert
       :avail_blanking,
       :esam,
       :extended_data_services,
-      :follow_input_index,
       :inputs,
       :kantar_watermark,
       :motion_image_inserter,
@@ -8054,16 +8071,6 @@ module Aws::MediaConvert
     #   Advisory.
     #   @return [Types::ExtendedDataServices]
     #
-    # @!attribute [rw] follow_input_index
-    #   Specifies which input metadata to use for the default "Follow
-    #   input" option for the following settings: resolution, frame rate,
-    #   and pixel aspect ratio. In the simplest case, specify which input is
-    #   used based on its index in the job. For example if you specify 3,
-    #   then the fourth input will be used from each input. If the job does
-    #   not have a fourth input, then the first input will be used. If no
-    #   followInputIndex is specified, then 0 will be chosen automatically.
-    #   @return [Integer]
-    #
     # @!attribute [rw] inputs
     #   Use Inputs to define the source file used in the transcode job.
     #   There can only be one input in a job template. Using the API, you
@@ -8137,7 +8144,6 @@ module Aws::MediaConvert
       :avail_blanking,
       :esam,
       :extended_data_services,
-      :follow_input_index,
       :inputs,
       :kantar_watermark,
       :motion_image_inserter,
@@ -12430,6 +12436,117 @@ module Aws::MediaConvert
     class VideoDetail < Struct.new(
       :height_in_px,
       :width_in_px)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Overlay one or more videos on top of your input video.
+    #
+    # @!attribute [rw] end_timecode
+    #   Enter the end timecode in the underlying input video for this
+    #   overlay. Your overlay will be active through this frame. To display
+    #   your video overlay for the duration of the underlying video: Leave
+    #   blank. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH is the
+    #   hour, MM is the minute, SS is the second, and FF is the frame
+    #   number. When entering this value, take into account your choice for
+    #   the underlying Input timecode source. For example, if you have
+    #   embedded timecodes that start at 01:00:00:00 and you want your
+    #   overlay to end ten minutes into the video, enter 01:10:00:00.
+    #   @return [String]
+    #
+    # @!attribute [rw] input
+    #   Input settings for Video overlay. You can include one or more video
+    #   overlays in sequence at different times that you specify.
+    #   @return [Types::VideoOverlayInput]
+    #
+    # @!attribute [rw] start_timecode
+    #   Enter the start timecode in the underlying input video for this
+    #   overlay. Your overlay will be active starting with this frame. To
+    #   display your video overlay starting at the beginning of the
+    #   underlying video: Leave blank. Use the format HH:MM:SS:FF or
+    #   HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the
+    #   second, and FF is the frame number. When entering this value, take
+    #   into account your choice for the underlying Input timecode source.
+    #   For example, if you have embedded timecodes that start at
+    #   01:00:00:00 and you want your overlay to begin five minutes into the
+    #   video, enter 01:05:00:00.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoOverlay AWS API Documentation
+    #
+    class VideoOverlay < Struct.new(
+      :end_timecode,
+      :input,
+      :start_timecode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Input settings for Video overlay. You can include one or more video
+    # overlays in sequence at different times that you specify.
+    #
+    # @!attribute [rw] file_input
+    #   Specify the input file S3, HTTP, or HTTPS URI for your video
+    #   overlay. For consistency in color and formatting in your output
+    #   video image, we recommend that you specify a video with similar
+    #   characteristics as the underlying input video.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_clippings
+    #   Specify one or more clips to use from your video overlay. When you
+    #   include an input clip, you must also specify its start timecode, end
+    #   timecode, or both start and end timecode.
+    #   @return [Array<Types::VideoOverlayInputClipping>]
+    #
+    # @!attribute [rw] timecode_source
+    #   Specify the starting timecode for your video overlay. To use the
+    #   timecode present in your video overlay: Choose Embedded. To use a
+    #   zerobased timecode: Choose Start at 0. To choose a timecode: Choose
+    #   Specified start. When you do, enter the starting timecode in Start
+    #   timecode. If you don't specify a value for Timecode source,
+    #   MediaConvert uses Embedded by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] timecode_start
+    #   Specify the starting timecode for this video overlay. To use this
+    #   setting, you must set Timecode source to Specified start.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoOverlayInput AWS API Documentation
+    #
+    class VideoOverlayInput < Struct.new(
+      :file_input,
+      :input_clippings,
+      :timecode_source,
+      :timecode_start)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # To transcode only portions of your video overlay, include one input
+    # clip for each part of your video overlay that you want in your output.
+    #
+    # @!attribute [rw] end_timecode
+    #   Specify the timecode of the last frame to include in your video
+    #   overlay's clip. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH
+    #   is the hour, MM is the minute, SS is the second, and FF is the frame
+    #   number. When entering this value, take into account your choice for
+    #   Timecode source.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_timecode
+    #   Specify the timecode of the first frame to include in your video
+    #   overlay's clip. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH
+    #   is the hour, MM is the minute, SS is the second, and FF is the frame
+    #   number. When entering this value, take into account your choice for
+    #   Timecode source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoOverlayInputClipping AWS API Documentation
+    #
+    class VideoOverlayInputClipping < Struct.new(
+      :end_timecode,
+      :start_timecode)
       SENSITIVE = []
       include Aws::Structure
     end

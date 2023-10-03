@@ -1111,7 +1111,15 @@ module Aws::Connect
     #   The description of the flow.
     #
     # @option params [required, String] :content
-    #   The content of the flow.
+    #   The JSON string that represents the content of the flow. For an
+    #   example, see [Example contact flow in Amazon Connect Flow
+    #   language][1].
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 256000.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
@@ -2076,9 +2084,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Creates a security profile.
     #
     # @option params [required, String] :security_profile_name
@@ -3268,9 +3273,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Deletes a security profile.
     #
     # @option params [required, String] :instance_id
@@ -4474,9 +4476,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Gets basic information about the security profle.
     #
     # @option params [required, String] :security_profile_id
@@ -6012,8 +6011,8 @@ module Aws::Connect
     # previous version of this API. It has new metrics, offers filtering at
     # a metric level, and offers the ability to filter and group data by
     # channels, queues, routing profiles, agents, and agent hierarchy
-    # levels. It can retrieve historical data for the last 35 days, in
-    # 24-hour intervals.
+    # levels. It can retrieve historical data for the last 3 months, at
+    # varying intervals.
     #
     # For a description of the historical metrics that are supported by
     # `GetMetricDataV2` and `GetMetricData`, see [Historical metrics
@@ -6031,10 +6030,10 @@ module Aws::Connect
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
     #   The timestamp, in UNIX Epoch time format, at which to start the
     #   reporting interval for the retrieval of historical metrics data. The
-    #   time must be before the end time timestamp. The time range between the
-    #   start and end time must be less than 24 hours. The start time cannot
-    #   be earlier than 35 days before the time of the request. Historical
-    #   metrics are available for 35 days.
+    #   time must be before the end time timestamp. The start and end time
+    #   depends on the `IntervalPeriod` selected. By default the time range
+    #   between start and end time is 35 days. Historical metrics are
+    #   available for 3 months.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   The timestamp, in UNIX Epoch time format, at which to end the
@@ -6042,8 +6041,41 @@ module Aws::Connect
     #   time must be later than the start time timestamp. It cannot be later
     #   than the current timestamp.
     #
-    #   The time range between the start and end time must be less than 24
-    #   hours.
+    # @option params [Types::IntervalDetails] :interval
+    #   The interval period and timezone to apply to returned metrics.
+    #
+    #   * `IntervalPeriod`: An aggregated grouping applied to request metrics.
+    #     Valid `IntervalPeriod` values are: `FIFTEEN_MIN` \| `THIRTY_MIN` \|
+    #     `HOUR` \| `DAY` \| `WEEK` \| `TOTAL`.
+    #
+    #     For example, if `IntervalPeriod` is selected `THIRTY_MIN`,
+    #     `StartTime` and `EndTime` differs by 1 day, then Amazon Connect
+    #     returns 48 results in the response. Each result is aggregated by the
+    #     THIRTY\_MIN period. By default Amazon Connect aggregates results
+    #     based on the `TOTAL` interval period.
+    #
+    #     The following list describes restrictions on `StartTime` and
+    #     `EndTime` based on which `IntervalPeriod` is requested.
+    #
+    #     * `FIFTEEN_MIN`: The difference between `StartTime` and `EndTime`
+    #       must be less than 3 days.
+    #
+    #     * `THIRTY_MIN`: The difference between `StartTime` and `EndTime`
+    #       must be less than 3 days.
+    #
+    #     * `HOUR`: The difference between `StartTime` and `EndTime` must be
+    #       less than 3 days.
+    #
+    #     * `DAY`: The difference between `StartTime` and `EndTime` must be
+    #       less than 35 days.
+    #
+    #     * `WEEK`: The difference between `StartTime` and `EndTime` must be
+    #       less than 35 days.
+    #
+    #     * `TOTAL`: The difference between `StartTime` and `EndTime` must be
+    #       less than 35 days.
+    #
+    #   * `TimeZone`: The timezone applied to requested metrics.
     #
     # @option params [required, Array<Types::FilterV2>] :filters
     #   The filters to apply to returned metrics. You can filter on the
@@ -6110,6 +6142,13 @@ module Aws::Connect
     #   description of each metric, see [Historical metrics definitions][1] in
     #   the *Amazon Connect Administrator's Guide*.
     #
+    #   ABANDONMENT\_RATE
+    #
+    #   : Unit: Percent
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
     #   AGENT\_ADHERENT\_TIME
     #
     #   : This metric is available only in Amazon Web Services Regions where
@@ -6126,6 +6165,16 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
+    #
+    #   AGENT\_NON\_RESPONSE\_WITHOUT\_CUSTOMER\_ABANDONS
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #     Data for this metric is available starting from October 1, 2023
+    #     0:00:00 GMT.
     #
     #   AGENT\_OCCUPANCY
     #
@@ -6182,16 +6231,10 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
     #
-    #   AVG\_AGENT\_CONNECTING\_TIME
+    #     <note markdown="1"> The `Negate` key in Metric Level Filters is not applicable for this
+    #     metric.
     #
-    #   : Unit: Seconds
-    #
-    #     Valid metric filter key: `INITIATION_METHOD`. For now, this metric
-    #     only supports the following as `INITIATION_METHOD`: `INBOUND` \|
-    #     `OUTBOUND` \| `CALLBACK` \| `API`
-    #
-    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy
+    #      </note>
     #
     #   AVG\_CONTACT\_DURATION
     #
@@ -6242,6 +6285,13 @@ module Aws::Connect
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
     #      </note>
+    #
+    #   AVG\_HOLD\_TIME\_ALL\_CONTACTS
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
     #
     #   AVG\_HOLDS
     #
@@ -6312,6 +6362,12 @@ module Aws::Connect
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
     #      </note>
+    #
+    #   AVG\_RESOLUTION\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile
     #
     #   AVG\_TALK\_TIME
     #
@@ -6389,6 +6445,16 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
+    #
+    #   CONTACTS\_RESOLVED\_IN\_X
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #
+    #     Threshold: For `ThresholdValue` enter any whole number from 1 to
+    #     604800 (inclusive), in seconds. For `Comparison`, you must enter
+    #     `LT` (for "Less than").
     #
     #   CONTACTS\_TRANSFERRED\_OUT
     #
@@ -6494,6 +6560,10 @@ module Aws::Connect
     #     resource_arn: "ARN", # required
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
+    #     interval: {
+    #       time_zone: "String",
+    #       interval_period: "FIFTEEN_MIN", # accepts FIFTEEN_MIN, THIRTY_MIN, HOUR, DAY, WEEK, TOTAL
+    #     },
     #     filters: [ # required
     #       {
     #         filter_key: "ResourceArnOrId",
@@ -6514,6 +6584,7 @@ module Aws::Connect
     #           {
     #             metric_filter_key: "String",
     #             metric_filter_values: ["String"],
+    #             negate: false,
     #           },
     #         ],
     #       },
@@ -6528,6 +6599,9 @@ module Aws::Connect
     #   resp.metric_results #=> Array
     #   resp.metric_results[0].dimensions #=> Hash
     #   resp.metric_results[0].dimensions["DimensionsV2Key"] #=> String
+    #   resp.metric_results[0].metric_interval.interval #=> String, one of "FIFTEEN_MIN", "THIRTY_MIN", "HOUR", "DAY", "WEEK", "TOTAL"
+    #   resp.metric_results[0].metric_interval.start_time #=> Time
+    #   resp.metric_results[0].metric_interval.end_time #=> Time
     #   resp.metric_results[0].collections #=> Array
     #   resp.metric_results[0].collections[0].metric.name #=> String
     #   resp.metric_results[0].collections[0].metric.threshold #=> Array
@@ -6537,6 +6611,7 @@ module Aws::Connect
     #   resp.metric_results[0].collections[0].metric.metric_filters[0].metric_filter_key #=> String
     #   resp.metric_results[0].collections[0].metric.metric_filters[0].metric_filter_values #=> Array
     #   resp.metric_results[0].collections[0].metric.metric_filters[0].metric_filter_values[0] #=> String
+    #   resp.metric_results[0].collections[0].metric.metric_filters[0].negate #=> Boolean
     #   resp.metric_results[0].collections[0].value #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetMetricDataV2 AWS API Documentation
@@ -8421,9 +8496,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Lists the permissions granted to a security profile.
     #
     # @option params [required, String] :security_profile_id
@@ -11555,8 +11627,11 @@ module Aws::Connect
     #   The identifier of the flow.
     #
     # @option params [required, String] :content
-    #   The JSON string that represents flow's content. For an example, see
-    #   [Example contact flow in Amazon Connect Flow language][1].
+    #   The JSON string that represents the content of the flow. For an
+    #   example, see [Example contact flow in Amazon Connect Flow
+    #   language][1].
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 256000.
     #
     #
     #
@@ -11639,7 +11714,13 @@ module Aws::Connect
     #   The identifier of the flow module.
     #
     # @option params [required, String] :content
-    #   The content of the flow module.
+    #   The JSON string that represents the content of the flow. For an
+    #   example, see [Example contact flow in Amazon Connect Flow
+    #   language][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -12904,9 +12985,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Updates a security profile.
     #
     # @option params [String] :description
@@ -13600,7 +13678,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.128.0'
+      context[:gem_version] = '1.129.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -36377,6 +36377,15 @@ module Aws::SageMaker
     #   copy input collaterals needed for the selected steps to run. The
     #   execution status of the pipeline can be either `Failed` or
     #   `Success`.
+    #
+    #   This field is required if the steps you specify for `SelectedSteps`
+    #   depend on output collaterals from any non-specified pipeline steps.
+    #   For more information, see [Selective Execution for Pipeline
+    #   Steps][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-selective-ex.html
     #   @return [String]
     #
     # @!attribute [rw] selected_steps

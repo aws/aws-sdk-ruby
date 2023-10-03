@@ -8273,7 +8273,7 @@ module Aws::SageMaker
 
     SelectedStepList.member = Shapes::ShapeRef.new(shape: SelectedStep)
 
-    SelectiveExecutionConfig.add_member(:source_pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, required: true, location_name: "SourcePipelineExecutionArn"))
+    SelectiveExecutionConfig.add_member(:source_pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "SourcePipelineExecutionArn"))
     SelectiveExecutionConfig.add_member(:selected_steps, Shapes::ShapeRef.new(shape: SelectedStepList, required: true, location_name: "SelectedSteps"))
     SelectiveExecutionConfig.struct_class = Types::SelectiveExecutionConfig
 
