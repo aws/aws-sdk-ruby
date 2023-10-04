@@ -648,7 +648,10 @@ module Aws::IoTFleetWise
     #
     #   Amazon S3 optimizes the cost of data storage and provides additional
     #   mechanisms to use vehicle data, such as data lakes, centralized data
-    #   storage, data processing pipelines, and analytics.
+    #   storage, data processing pipelines, and analytics. Amazon Web Services
+    #   IoT FleetWise supports at-least-once file delivery to S3. Your vehicle
+    #   data is stored on multiple Amazon Web Services IoT FleetWise servers
+    #   for redundancy and high availability.
     #
     #   You can use Amazon Timestream to access and analyze time series data,
     #   and Timestream to query vehicle data so that you can identify trends
@@ -1464,6 +1467,34 @@ module Aws::IoTFleetWise
     # @param [Hash] params ({})
     def get_decoder_manifest(params = {}, options = {})
       req = build_request(:get_decoder_manifest, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the encryption configuration for resources and data in
+    # Amazon Web Services IoT FleetWise.
+    #
+    # @return [Types::GetEncryptionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEncryptionConfigurationResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::GetEncryptionConfigurationResponse#encryption_status #encryption_status} => String
+    #   * {Types::GetEncryptionConfigurationResponse#encryption_type #encryption_type} => String
+    #   * {Types::GetEncryptionConfigurationResponse#error_message #error_message} => String
+    #   * {Types::GetEncryptionConfigurationResponse#creation_time #creation_time} => Time
+    #   * {Types::GetEncryptionConfigurationResponse#last_modification_time #last_modification_time} => Time
+    #
+    # @example Response structure
+    #
+    #   resp.kms_key_id #=> String
+    #   resp.encryption_status #=> String, one of "PENDING", "SUCCESS", "FAILURE"
+    #   resp.encryption_type #=> String, one of "KMS_BASED_ENCRYPTION", "FLEETWISE_DEFAULT_ENCRYPTION"
+    #   resp.error_message #=> String
+    #   resp.creation_time #=> Time
+    #   resp.last_modification_time #=> Time
+    #
+    # @overload get_encryption_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_encryption_configuration(params = {}, options = {})
+      req = build_request(:get_encryption_configuration, params)
       req.send_request(options)
     end
 
@@ -2596,6 +2627,50 @@ module Aws::IoTFleetWise
       req.send_request(options)
     end
 
+    # Creates or updates the encryption configuration. Amazon Web Services
+    # IoT FleetWise can encrypt your data and resources using an Amazon Web
+    # Services managed key. Or, you can use a KMS key that you own and
+    # manage. For more information, see [Data encryption][1] in the *Amazon
+    # Web Services IoT FleetWise Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/data-encryption.html
+    #
+    # @option params [String] :kms_key_id
+    #   The ID of the KMS key that is used for encryption.
+    #
+    # @option params [required, String] :encryption_type
+    #   The type of encryption. Choose `KMS_BASED_ENCRYPTION` to use a KMS key
+    #   or `FLEETWISE_DEFAULT_ENCRYPTION` to use an Amazon Web Services
+    #   managed key.
+    #
+    # @return [Types::PutEncryptionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutEncryptionConfigurationResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::PutEncryptionConfigurationResponse#encryption_status #encryption_status} => String
+    #   * {Types::PutEncryptionConfigurationResponse#encryption_type #encryption_type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_encryption_configuration({
+    #     kms_key_id: "String",
+    #     encryption_type: "KMS_BASED_ENCRYPTION", # required, accepts KMS_BASED_ENCRYPTION, FLEETWISE_DEFAULT_ENCRYPTION
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.kms_key_id #=> String
+    #   resp.encryption_status #=> String, one of "PENDING", "SUCCESS", "FAILURE"
+    #   resp.encryption_type #=> String, one of "KMS_BASED_ENCRYPTION", "FLEETWISE_DEFAULT_ENCRYPTION"
+    #
+    # @overload put_encryption_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_encryption_configuration(params = {}, options = {})
+      req = build_request(:put_encryption_configuration, params)
+      req.send_request(options)
+    end
+
     # Creates or updates the logging option.
     #
     # @option params [required, Types::CloudWatchLogDeliveryOptions] :cloud_watch_log_delivery
@@ -3250,7 +3325,7 @@ module Aws::IoTFleetWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotfleetwise'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

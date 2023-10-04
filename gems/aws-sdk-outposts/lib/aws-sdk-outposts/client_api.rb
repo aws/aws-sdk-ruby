@@ -88,6 +88,8 @@ module Aws::Outposts
     HostId = Shapes::StringShape.new(name: 'HostId')
     HostIdList = Shapes::ListShape.new(name: 'HostIdList')
     ISO8601Timestamp = Shapes::TimestampShape.new(name: 'ISO8601Timestamp')
+    InstanceFamilies = Shapes::ListShape.new(name: 'InstanceFamilies')
+    InstanceFamilyName = Shapes::StringShape.new(name: 'InstanceFamilyName')
     InstanceType = Shapes::StringShape.new(name: 'InstanceType')
     InstanceTypeItem = Shapes::StructureShape.new(name: 'InstanceTypeItem')
     InstanceTypeListDefinition = Shapes::ListShape.new(name: 'InstanceTypeListDefinition')
@@ -255,6 +257,7 @@ module Aws::Outposts
 
     ComputeAttributes.add_member(:host_id, Shapes::ShapeRef.new(shape: HostId, location_name: "HostId"))
     ComputeAttributes.add_member(:state, Shapes::ShapeRef.new(shape: ComputeAssetState, location_name: "State"))
+    ComputeAttributes.add_member(:instance_families, Shapes::ShapeRef.new(shape: InstanceFamilies, location_name: "InstanceFamilies"))
     ComputeAttributes.struct_class = Types::ComputeAttributes
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -376,6 +379,8 @@ module Aws::Outposts
     GetSiteOutput.struct_class = Types::GetSiteOutput
 
     HostIdList.member = Shapes::ShapeRef.new(shape: HostId)
+
+    InstanceFamilies.member = Shapes::ShapeRef.new(shape: InstanceFamilyName)
 
     InstanceTypeItem.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "InstanceType"))
     InstanceTypeItem.struct_class = Types::InstanceTypeItem

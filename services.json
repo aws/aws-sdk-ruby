@@ -108,6 +108,12 @@
   "Batch": {
     "models": "batch/2016-08-10"
   },
+  "Bedrock": {
+    "models": "bedrock/2023-04-20"
+  },
+  "BedrockRuntime": {
+    "models": "bedrock-runtime/2023-09-30"
+  },
   "BillingConductor": {
     "models": "billingconductor/2021-07-30"
   },
@@ -298,6 +304,9 @@
   },
   "DataSync": {
     "models": "datasync/2018-11-09"
+  },
+  "DataZone": {
+    "models": "datazone/2018-05-10"
   },
   "DatabaseMigrationService": {
     "models": "dms/2016-01-01"

@@ -829,7 +829,7 @@ module Aws::STS
     #         arn: "arnType",
     #       },
     #     ],
-    #     policy: "sessionPolicyDocumentType",
+    #     policy: "unrestrictedSessionPolicyDocumentType",
     #     duration_seconds: 1,
     #     tags: [
     #       {
@@ -2344,7 +2344,7 @@ module Aws::STS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.181.1'
+      context[:gem_version] = '3.185.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

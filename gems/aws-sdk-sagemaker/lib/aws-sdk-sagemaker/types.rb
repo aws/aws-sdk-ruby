@@ -223,6 +223,35 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A data source used for training or inference that is in addition to
+    # the input dataset or model data.
+    #
+    # @!attribute [rw] s3_data_type
+    #   The data type of the additional data source that you specify for use
+    #   in inference or training.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_uri
+    #   The uniform resource identifier (URI) used to identify an additional
+    #   data source used in inference or training.
+    #   @return [String]
+    #
+    # @!attribute [rw] compression_type
+    #   The type of compression used for an additional data source used in
+    #   inference or training. Specify `None` if your additional data source
+    #   is not compressed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AdditionalS3DataSource AWS API Documentation
+    #
+    class AdditionalS3DataSource < Struct.new(
+      :s3_data_type,
+      :s3_uri,
+      :compression_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Edge Manager agent version.
     #
     # @!attribute [rw] version
@@ -2861,6 +2890,10 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-schedule.html
     #   @return [String]
     #
+    # @!attribute [rw] exclude_features_attribute
+    #   The attributes of the input data to exclude from the analysis.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BatchTransformInput AWS API Documentation
     #
     class BatchTransformInput < Struct.new(
@@ -2874,7 +2907,8 @@ module Aws::SageMaker
       :probability_attribute,
       :probability_threshold_attribute,
       :start_time_offset,
-      :end_time_offset)
+      :end_time_offset,
+      :exclude_features_attribute)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3151,12 +3185,12 @@ module Aws::SageMaker
     end
 
     # Configuration specifying how to treat different headers. If no headers
-    # are specified SageMaker will by default base64 encode when capturing
-    # the data.
+    # are specified Amazon SageMaker will by default base64 encode when
+    # capturing the data.
     #
     # @!attribute [rw] csv_content_types
-    #   The list of all content type headers that SageMaker will treat as
-    #   CSV and capture accordingly.
+    #   The list of all content type headers that Amazon SageMaker will
+    #   treat as CSV and capture accordingly.
     #   @return [Array<String>]
     #
     # @!attribute [rw] json_content_types
@@ -3904,6 +3938,33 @@ module Aws::SageMaker
       :client_id)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Configuration for your collection.
+    #
+    # @note CollectionConfig is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note CollectionConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CollectionConfig corresponding to the set member.
+    #
+    # @!attribute [rw] vector_config
+    #   Configuration for your vector collection type.
+    #
+    #   * `Dimension`: The number of elements in your vector.
+    #
+    #   ^
+    #   @return [Types::VectorConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CollectionConfig AWS API Documentation
+    #
+    class CollectionConfig < Struct.new(
+      :vector_config,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class VectorConfig < CollectionConfig; end
+      class Unknown < CollectionConfig; end
     end
 
     # Configuration information for the Amazon SageMaker Debugger output
@@ -5118,8 +5179,8 @@ module Aws::SageMaker
     #   @return [Types::MonitoringStoppingCondition]
     #
     # @!attribute [rw] tags
-    #   (Optional) An array of key-value pairs. For more information, see
-    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
+    #   (Optional) An array of key-value pairs. For more information, see [
+    #   Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
     #   and Cost Management User Guide*.
     #
     #
@@ -6734,8 +6795,8 @@ module Aws::SageMaker
     #   @return [Types::MonitoringStoppingCondition]
     #
     # @!attribute [rw] tags
-    #   (Optional) An array of key-value pairs. For more information, see
-    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
+    #   (Optional) An array of key-value pairs. For more information, see [
+    #   Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
     #   and Cost Management User Guide*.
     #
     #
@@ -6918,8 +6979,8 @@ module Aws::SageMaker
     #   @return [Types::MonitoringStoppingCondition]
     #
     # @!attribute [rw] tags
-    #   (Optional) An array of key-value pairs. For more information, see
-    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
+    #   (Optional) An array of key-value pairs. For more information, see [
+    #   Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
     #   and Cost Management User Guide*.
     #
     #
@@ -7234,6 +7295,10 @@ module Aws::SageMaker
     #   used with SageMaker Neo to store the compiled artifacts.
     #   @return [Array<Types::AdditionalInferenceSpecificationDefinition>]
     #
+    # @!attribute [rw] skip_model_validation
+    #   Indicates if you want to skip model validation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelPackageInput AWS API Documentation
     #
     class CreateModelPackageInput < Struct.new(
@@ -7254,7 +7319,8 @@ module Aws::SageMaker
       :domain,
       :task,
       :sample_payload_url,
-      :additional_inference_specifications)
+      :additional_inference_specifications,
+      :skip_model_validation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7311,8 +7377,8 @@ module Aws::SageMaker
     #   @return [Types::MonitoringStoppingCondition]
     #
     # @!attribute [rw] tags
-    #   (Optional) An array of key-value pairs. For more information, see
-    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
+    #   (Optional) An array of key-value pairs. For more information, see [
+    #   Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
     #   and Cost Management User Guide*.
     #
     #
@@ -8881,9 +8947,9 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Resource Name (ARN) of a Amazon Web Services Key
-    #   Management Service key that SageMaker uses to encrypt the captured
-    #   data at rest using Amazon S3 server-side encryption.
+    #   The Amazon Resource Name (ARN) of an Key Management Service key that
+    #   SageMaker uses to encrypt the captured data at rest using Amazon S3
+    #   server-side encryption.
     #
     #   The KmsKeyId can be any of the following formats:
     #
@@ -9080,7 +9146,7 @@ module Aws::SageMaker
     # @!attribute [rw] record_preprocessor_source_uri
     #   An Amazon S3 URI to a script that is called per row prior to running
     #   analysis. It can base64 decode the payload and convert it into a
-    #   flatted json so that the built-in container can use the converted
+    #   flattened JSON so that the built-in container can use the converted
     #   data. Applicable only for the built-in (first party) containers.
     #   @return [String]
     #
@@ -13559,10 +13625,9 @@ module Aws::SageMaker
     #   @return [Types::MonitoringNetworkConfig]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Web Services Identity
-    #   and Access Management (IAM) role that has read permission to the
-    #   input data location and write permission to the output data location
-    #   in Amazon S3.
+    #   The Amazon Resource Name (ARN) of the IAM role that has read
+    #   permission to the input data location and write permission to the
+    #   output data location in Amazon S3.
     #   @return [String]
     #
     # @!attribute [rw] stopping_condition
@@ -13830,10 +13895,9 @@ module Aws::SageMaker
     #   @return [Types::MonitoringNetworkConfig]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Web Services Identity
-    #   and Access Management (IAM) role that has read permission to the
-    #   input data location and write permission to the output data location
-    #   in Amazon S3.
+    #   The Amazon Resource Name (ARN) of the IAM role that has read
+    #   permission to the input data location and write permission to the
+    #   output data location in Amazon S3.
     #   @return [String]
     #
     # @!attribute [rw] stopping_condition
@@ -14130,6 +14194,10 @@ module Aws::SageMaker
     #   used with SageMaker Neo to store the compiled artifacts.
     #   @return [Array<Types::AdditionalInferenceSpecificationDefinition>]
     #
+    # @!attribute [rw] skip_model_validation
+    #   Indicates if you want to skip model validation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelPackageOutput AWS API Documentation
     #
     class DescribeModelPackageOutput < Struct.new(
@@ -14157,7 +14225,8 @@ module Aws::SageMaker
       :domain,
       :task,
       :sample_payload_url,
-      :additional_inference_specifications)
+      :additional_inference_specifications,
+      :skip_model_validation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17165,7 +17234,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] s3_data_distribution_type
     #   Whether input data distributed in Amazon S3 is fully replicated or
-    #   sharded by an S3 key. Defaults to `FullyReplicated`
+    #   sharded by an Amazon S3 key. Defaults to `FullyReplicated`
     #   @return [String]
     #
     # @!attribute [rw] features_attribute
@@ -17207,6 +17276,10 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-schedule.html
     #   @return [String]
     #
+    # @!attribute [rw] exclude_features_attribute
+    #   The attributes of the input data to exclude from the analysis.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EndpointInput AWS API Documentation
     #
     class EndpointInput < Struct.new(
@@ -17219,7 +17292,8 @@ module Aws::SageMaker
       :probability_attribute,
       :probability_threshold_attribute,
       :start_time_offset,
-      :end_time_offset)
+      :end_time_offset,
+      :exclude_features_attribute)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17706,11 +17780,30 @@ module Aws::SageMaker
     #   or String.
     #   @return [String]
     #
+    # @!attribute [rw] collection_type
+    #   A grouping of elements where each element within the collection must
+    #   have the same feature type (`String`, `Integral`, or `Fractional`).
+    #
+    #   * `List`: An ordered collection of elements.
+    #
+    #   * `Set`: An unordered collection of unique elements.
+    #
+    #   * `Vector`: A specialized list that represents a fixed-size array of
+    #     elements. The vector dimension is determined by you. Must have
+    #     elements with fractional feature types.
+    #   @return [String]
+    #
+    # @!attribute [rw] collection_config
+    #   Configuration for your collection.
+    #   @return [Types::CollectionConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/FeatureDefinition AWS API Documentation
     #
     class FeatureDefinition < Struct.new(
       :feature_name,
-      :feature_type)
+      :feature_type,
+      :collection_type,
+      :collection_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18663,7 +18756,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/holidays.html#holidays-country-codes
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-timeseries-forecasting-holiday-calendars.html#holiday-country-codes
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HolidayConfigAttributes AWS API Documentation
@@ -21392,8 +21485,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] content_type
     #   Configuration specifying how to treat different headers. If no
-    #   headers are specified SageMaker will by default base64 encode when
-    #   capturing the data.
+    #   headers are specified Amazon SageMaker will by default base64 encode
+    #   when capturing the data.
     #   @return [Types::CaptureContentTypeHeader]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceExperimentDataStorageConfig AWS API Documentation
@@ -23665,7 +23758,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] sort_order
-    #   The sort order for results. The default is `Descending`.
+    #   Whether to sort the results in `Ascending` or `Descending` order.
+    #   The default is `Descending`.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -25452,8 +25546,8 @@ module Aws::SageMaker
     #   @return [Array<Types::MonitoringJobDefinitionSummary>]
     #
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon SageMaker returns this token.
-    #   To retrieve the next set of jobs, use it in the subsequent request.
+    #   The token returned if the response is truncated. To retrieve the
+    #   next set of job executions, use it in the next request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelBiasJobDefinitionsResponse AWS API Documentation
@@ -25748,8 +25842,8 @@ module Aws::SageMaker
     #   @return [Array<Types::MonitoringJobDefinitionSummary>]
     #
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon SageMaker returns this token.
-    #   To retrieve the next set of jobs, use it in the subsequent request.
+    #   The token returned if the response is truncated. To retrieve the
+    #   next set of job executions, use it in the next request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelExplainabilityJobDefinitionsResponse AWS API Documentation
@@ -25977,7 +26071,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] sort_order
-    #   The sort order for results. The default is `Descending`.
+    #   Whether to sort the results in `Ascending` or `Descending` order.
+    #   The default is `Descending`.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -26234,8 +26329,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] sort_by
-    #   Whether to sort results by `Status`, `CreationTime`, `ScheduledTime`
-    #   field. The default is `CreationTime`.
+    #   Whether to sort the results by the `Status`, `CreationTime`, or
+    #   `ScheduledTime` field. The default is `CreationTime`.
     #   @return [String]
     #
     # @!attribute [rw] sort_order
@@ -26319,8 +26414,8 @@ module Aws::SageMaker
     #   @return [Array<Types::MonitoringExecutionSummary>]
     #
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon SageMaker returns this token.
-    #   To retrieve the next set of jobs, use it in the subsequent reques
+    #   The token returned if the response is truncated. To retrieve the
+    #   next set of job executions, use it in the next request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListMonitoringExecutionsResponse AWS API Documentation
@@ -26337,8 +26432,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] sort_by
-    #   Whether to sort results by `Status`, `CreationTime`, `ScheduledTime`
-    #   field. The default is `CreationTime`.
+    #   Whether to sort the results by the `Status`, `CreationTime`, or
+    #   `ScheduledTime` field. The default is `CreationTime`.
     #   @return [String]
     #
     # @!attribute [rw] sort_order
@@ -26422,8 +26517,8 @@ module Aws::SageMaker
     #   @return [Array<Types::MonitoringScheduleSummary>]
     #
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon SageMaker returns this token.
-    #   To retrieve the next set of jobs, use it in the subsequent request.
+    #   The token returned if the response is truncated. To retrieve the
+    #   next set of job executions, use it in the next request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListMonitoringSchedulesResponse AWS API Documentation
@@ -28994,9 +29089,9 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] config_uri
-    #   JSON formatted S3 file that defines explainability parameters. For
-    #   more information on this JSON configuration file, see [Configure
-    #   model explainability parameters][1].
+    #   JSON formatted Amazon S3 file that defines explainability
+    #   parameters. For more information on this JSON configuration file,
+    #   see [Configure model explainability parameters][1].
     #
     #
     #
@@ -29366,6 +29461,10 @@ module Aws::SageMaker
     #   monitor is set using the model package.
     #   @return [Types::DriftCheckBaselines]
     #
+    # @!attribute [rw] skip_model_validation
+    #   Indicates if you want to skip model validation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackage AWS API Documentation
     #
     class ModelPackage < Struct.new(
@@ -29394,7 +29493,8 @@ module Aws::SageMaker
       :additional_inference_specifications,
       :tags,
       :customer_metadata_properties,
-      :drift_check_baselines)
+      :drift_check_baselines,
+      :skip_model_validation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29466,6 +29566,11 @@ module Aws::SageMaker
     #   `ListModelMetadata`.
     #   @return [String]
     #
+    # @!attribute [rw] additional_s3_data_source
+    #   The additional data source that is used during inference in the
+    #   Docker container for your model package.
+    #   @return [Types::AdditionalS3DataSource]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageContainerDefinition AWS API Documentation
     #
     class ModelPackageContainerDefinition < Struct.new(
@@ -29478,7 +29583,8 @@ module Aws::SageMaker
       :model_input,
       :framework,
       :framework_version,
-      :nearest_model_name)
+      :nearest_model_name,
+      :additional_s3_data_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29769,7 +29875,7 @@ module Aws::SageMaker
     # @!attribute [rw] record_preprocessor_source_uri
     #   An Amazon S3 URI to a script that is called per row prior to running
     #   analysis. It can base64 decode the payload and convert it into a
-    #   flatted json so that the built-in container can use the converted
+    #   flattened JSON so that the built-in container can use the converted
     #   data. Applicable only for the built-in (first party) containers.
     #   @return [String]
     #
@@ -29825,8 +29931,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The input for the model quality monitoring job. Currently endponts are
-    # supported for input for model quality monitoring jobs.
+    # The input for the model quality monitoring job. Currently endpoints
+    # are supported for input for model quality monitoring jobs.
     #
     # @!attribute [rw] endpoint_input
     #   Input object for the endpoint
@@ -30097,7 +30203,7 @@ module Aws::SageMaker
     # @!attribute [rw] record_preprocessor_source_uri
     #   An Amazon S3 URI to a script that is called per row prior to running
     #   analysis. It can base64 decode the payload and convert it into a
-    #   flatted json so that the built-in container can use the converted
+    #   flattened JSON so that the built-in container can use the converted
     #   data. Applicable only for the built-in (first party) containers.
     #   @return [String]
     #
@@ -30166,10 +30272,9 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   The Amazon Web Services Key Management Service (Amazon Web Services
-    #   KMS) key that Amazon SageMaker uses to encrypt data on the storage
-    #   volume attached to the ML compute instance(s) that run the model
-    #   monitoring job.
+    #   The Key Management Service (KMS) key that Amazon SageMaker uses to
+    #   encrypt data on the storage volume attached to the ML compute
+    #   instance(s) that run the model monitoring job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MonitoringClusterConfig AWS API Documentation
@@ -30342,7 +30447,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] monitoring_output_config
     #   The array of outputs from the monitoring job to be uploaded to
-    #   Amazon Simple Storage Service (Amazon S3).
+    #   Amazon S3.
     #   @return [Types::MonitoringOutputConfig]
     #
     # @!attribute [rw] monitoring_resources
@@ -30422,7 +30527,7 @@ module Aws::SageMaker
     # Represents the JSON dataset format used when running a monitoring job.
     #
     # @!attribute [rw] line
-    #   Indicates if the file should be read as a json object per line.
+    #   Indicates if the file should be read as a JSON object per line.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MonitoringJsonDatasetFormat AWS API Documentation
@@ -30493,9 +30598,9 @@ module Aws::SageMaker
     #   @return [Array<Types::MonitoringOutput>]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Web Services Key Management Service (Amazon Web Services
-    #   KMS) key that Amazon SageMaker uses to encrypt the model artifacts
-    #   at rest using Amazon S3 server-side encryption.
+    #   The Key Management Service (KMS) key that Amazon SageMaker uses to
+    #   encrypt the model artifacts at rest using Amazon S3 server-side
+    #   encryption.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MonitoringOutputConfig AWS API Documentation
@@ -31324,12 +31429,23 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html
     #   @return [Types::TtlDuration]
     #
+    # @!attribute [rw] storage_type
+    #   Option for different tiers of low latency storage for real-time data
+    #   retrieval.
+    #
+    #   * `Standard`: A managed low latency data store for feature groups.
+    #
+    #   * `InMemory`: A managed data store for feature groups that supports
+    #     very low latency retrieval.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OnlineStoreConfig AWS API Documentation
     #
     class OnlineStoreConfig < Struct.new(
       :security_config,
       :enable_online_store,
-      :ttl_duration)
+      :ttl_duration,
+      :storage_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35829,16 +35945,20 @@ module Aws::SageMaker
     #   A cron expression that describes details about the monitoring
     #   schedule.
     #
-    #   Currently the only supported cron expressions are:
+    #   The supported cron expressions are:
     #
-    #   * If you want to set the job to start every hour, please use the
-    #     following:
+    #   * If you want to set the job to start every hour, use the following:
     #
     #     `Hourly: cron(0 * ? * * *)`
     #
     #   * If you want to start the job daily:
     #
     #     `cron(0 [00-23] ? * * *)`
+    #
+    #   * If you want to run the job one time, immediately, use the
+    #     following keyword:
+    #
+    #     `NOW`
     #
     #   For example, the following are valid cron expressions:
     #
@@ -35866,12 +35986,50 @@ module Aws::SageMaker
     #     running every day.
     #
     #    </note>
+    #
+    #   You can also specify the keyword `NOW` to run the monitoring job
+    #   immediately, one time, without recurring.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_analysis_start_time
+    #   Sets the start time for a monitoring job window. Express this time
+    #   as an offset to the times that you schedule your monitoring jobs to
+    #   run. You schedule monitoring jobs with the `ScheduleExpression`
+    #   parameter. Specify this offset in ISO 8601 duration format. For
+    #   example, if you want to monitor the five hours of data in your
+    #   dataset that precede the start of each monitoring job, you would
+    #   specify: `"-PT5H"`.
+    #
+    #   The start time that you specify must not precede the end time that
+    #   you specify by more than 24 hours. You specify the end time with the
+    #   `DataAnalysisEndTime` parameter.
+    #
+    #   If you set `ScheduleExpression` to `NOW`, this parameter is
+    #   required.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_analysis_end_time
+    #   Sets the end time for a monitoring job window. Express this time as
+    #   an offset to the times that you schedule your monitoring jobs to
+    #   run. You schedule monitoring jobs with the `ScheduleExpression`
+    #   parameter. Specify this offset in ISO 8601 duration format. For
+    #   example, if you want to end the window one hour before the start of
+    #   each monitoring job, you would specify: `"-PT1H"`.
+    #
+    #   The end time that you specify must not follow the start time that
+    #   you specify by more than 24 hours. You specify the start time with
+    #   the `DataAnalysisStartTime` parameter.
+    #
+    #   If you set `ScheduleExpression` to `NOW`, this parameter is
+    #   required.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ScheduleConfig AWS API Documentation
     #
     class ScheduleConfig < Struct.new(
-      :schedule_expression)
+      :schedule_expression,
+      :data_analysis_start_time,
+      :data_analysis_end_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38532,6 +38690,10 @@ module Aws::SageMaker
     #   the objective metric in a hyperparameter tuning job.
     #   @return [Array<Types::HyperParameterTuningJobObjective>]
     #
+    # @!attribute [rw] additional_s3_data_source
+    #   The additional data source used during the training job.
+    #   @return [Types::AdditionalS3DataSource]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingSpecification AWS API Documentation
     #
     class TrainingSpecification < Struct.new(
@@ -38542,7 +38704,8 @@ module Aws::SageMaker
       :supports_distributed_training,
       :metric_definitions,
       :training_channels,
-      :supported_tuning_job_objective_metrics)
+      :supported_tuning_job_objective_metrics,
+      :additional_s3_data_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41759,6 +41922,20 @@ module Aws::SageMaker
     #
     class VariantProperty < Struct.new(
       :variant_property_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for your vector collection type.
+    #
+    # @!attribute [rw] dimension
+    #   The number of elements in your vector.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/VectorConfig AWS API Documentation
+    #
+    class VectorConfig < Struct.new(
+      :dimension)
       SENSITIVE = []
       include Aws::Structure
     end

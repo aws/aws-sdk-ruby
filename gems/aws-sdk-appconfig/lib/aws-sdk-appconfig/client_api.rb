@@ -74,6 +74,7 @@ module Aws::AppConfig
     ExtensionAssociationSummaries = Shapes::ListShape.new(name: 'ExtensionAssociationSummaries')
     ExtensionAssociationSummary = Shapes::StructureShape.new(name: 'ExtensionAssociationSummary')
     ExtensionAssociations = Shapes::StructureShape.new(name: 'ExtensionAssociations')
+    ExtensionOrParameterName = Shapes::StringShape.new(name: 'ExtensionOrParameterName')
     ExtensionSummaries = Shapes::ListShape.new(name: 'ExtensionSummaries')
     ExtensionSummary = Shapes::StructureShape.new(name: 'ExtensionSummary')
     Extensions = Shapes::StructureShape.new(name: 'Extensions')
@@ -100,6 +101,8 @@ module Aws::AppConfig
     InvalidConfigurationDetail = Shapes::StructureShape.new(name: 'InvalidConfigurationDetail')
     InvalidConfigurationDetailList = Shapes::ListShape.new(name: 'InvalidConfigurationDetailList')
     Iso8601DateTime = Shapes::TimestampShape.new(name: 'Iso8601DateTime', timestampFormat: "iso8601")
+    KmsKeyIdentifier = Shapes::StringShape.new(name: 'KmsKeyIdentifier')
+    KmsKeyIdentifierOrEmpty = Shapes::StringShape.new(name: 'KmsKeyIdentifierOrEmpty')
     ListApplicationsRequest = Shapes::StructureShape.new(name: 'ListApplicationsRequest')
     ListConfigurationProfilesRequest = Shapes::StructureShape.new(name: 'ListConfigurationProfilesRequest')
     ListDeploymentStrategiesRequest = Shapes::StructureShape.new(name: 'ListDeploymentStrategiesRequest')
@@ -223,6 +226,8 @@ module Aws::AppConfig
     ConfigurationProfile.add_member(:retrieval_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RetrievalRoleArn"))
     ConfigurationProfile.add_member(:validators, Shapes::ShapeRef.new(shape: ValidatorList, location_name: "Validators"))
     ConfigurationProfile.add_member(:type, Shapes::ShapeRef.new(shape: ConfigurationProfileType, location_name: "Type"))
+    ConfigurationProfile.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "KmsKeyArn"))
+    ConfigurationProfile.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: KmsKeyIdentifier, location_name: "KmsKeyIdentifier"))
     ConfigurationProfile.struct_class = Types::ConfigurationProfile
 
     ConfigurationProfileSummary.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, location_name: "ApplicationId"))
@@ -255,6 +260,7 @@ module Aws::AppConfig
     CreateConfigurationProfileRequest.add_member(:validators, Shapes::ShapeRef.new(shape: ValidatorList, location_name: "Validators"))
     CreateConfigurationProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateConfigurationProfileRequest.add_member(:type, Shapes::ShapeRef.new(shape: ConfigurationProfileType, location_name: "Type"))
+    CreateConfigurationProfileRequest.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: KmsKeyIdentifier, location_name: "KmsKeyIdentifier"))
     CreateConfigurationProfileRequest.struct_class = Types::CreateConfigurationProfileRequest
 
     CreateDeploymentStrategyRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
@@ -281,7 +287,7 @@ module Aws::AppConfig
     CreateExtensionAssociationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateExtensionAssociationRequest.struct_class = Types::CreateExtensionAssociationRequest
 
-    CreateExtensionRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
+    CreateExtensionRequest.add_member(:name, Shapes::ShapeRef.new(shape: ExtensionOrParameterName, required: true, location_name: "Name"))
     CreateExtensionRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateExtensionRequest.add_member(:actions, Shapes::ShapeRef.new(shape: ActionsMap, required: true, location_name: "Actions"))
     CreateExtensionRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: ParameterMap, location_name: "Parameters"))
@@ -346,7 +352,8 @@ module Aws::AppConfig
     Deployment.add_member(:completed_at, Shapes::ShapeRef.new(shape: Iso8601DateTime, location_name: "CompletedAt"))
     Deployment.add_member(:applied_extensions, Shapes::ShapeRef.new(shape: AppliedExtensions, location_name: "AppliedExtensions"))
     Deployment.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "KmsKeyArn"))
-    Deployment.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: Identifier, location_name: "KmsKeyIdentifier"))
+    Deployment.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: KmsKeyIdentifier, location_name: "KmsKeyIdentifier"))
+    Deployment.add_member(:version_label, Shapes::ShapeRef.new(shape: VersionLabel, location_name: "VersionLabel"))
     Deployment.struct_class = Types::Deployment
 
     DeploymentEvent.add_member(:event_type, Shapes::ShapeRef.new(shape: DeploymentEventType, location_name: "EventType"))
@@ -387,6 +394,7 @@ module Aws::AppConfig
     DeploymentSummary.add_member(:percentage_complete, Shapes::ShapeRef.new(shape: Percentage, location_name: "PercentageComplete"))
     DeploymentSummary.add_member(:started_at, Shapes::ShapeRef.new(shape: Iso8601DateTime, location_name: "StartedAt"))
     DeploymentSummary.add_member(:completed_at, Shapes::ShapeRef.new(shape: Iso8601DateTime, location_name: "CompletedAt"))
+    DeploymentSummary.add_member(:version_label, Shapes::ShapeRef.new(shape: VersionLabel, location_name: "VersionLabel"))
     DeploymentSummary.struct_class = Types::DeploymentSummary
 
     Deployments.add_member(:items, Shapes::ShapeRef.new(shape: DeploymentList, location_name: "Items"))
@@ -493,6 +501,7 @@ module Aws::AppConfig
     HostedConfigurationVersion.add_member(:content, Shapes::ShapeRef.new(shape: Blob, location_name: "Content"))
     HostedConfigurationVersion.add_member(:content_type, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And255, location: "header", location_name: "Content-Type"))
     HostedConfigurationVersion.add_member(:version_label, Shapes::ShapeRef.new(shape: VersionLabel, location: "header", location_name: "VersionLabel"))
+    HostedConfigurationVersion.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: Arn, location: "header", location_name: "KmsKeyArn"))
     HostedConfigurationVersion.struct_class = Types::HostedConfigurationVersion
     HostedConfigurationVersion[:payload] = :content
     HostedConfigurationVersion[:payload_member] = HostedConfigurationVersion.member(:content)
@@ -503,6 +512,7 @@ module Aws::AppConfig
     HostedConfigurationVersionSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     HostedConfigurationVersionSummary.add_member(:content_type, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And255, location_name: "ContentType"))
     HostedConfigurationVersionSummary.add_member(:version_label, Shapes::ShapeRef.new(shape: VersionLabel, location_name: "VersionLabel"))
+    HostedConfigurationVersionSummary.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "KmsKeyArn"))
     HostedConfigurationVersionSummary.struct_class = Types::HostedConfigurationVersionSummary
 
     HostedConfigurationVersionSummaryList.member = Shapes::ShapeRef.new(shape: HostedConfigurationVersionSummary)
@@ -580,10 +590,10 @@ module Aws::AppConfig
     Parameter.add_member(:required, Shapes::ShapeRef.new(shape: Boolean, location_name: "Required"))
     Parameter.struct_class = Types::Parameter
 
-    ParameterMap.key = Shapes::ShapeRef.new(shape: Name)
+    ParameterMap.key = Shapes::ShapeRef.new(shape: ExtensionOrParameterName)
     ParameterMap.value = Shapes::ShapeRef.new(shape: Parameter)
 
-    ParameterValueMap.key = Shapes::ShapeRef.new(shape: Name)
+    ParameterValueMap.key = Shapes::ShapeRef.new(shape: ExtensionOrParameterName)
     ParameterValueMap.value = Shapes::ShapeRef.new(shape: StringWithLengthBetween1And2048)
 
     PayloadTooLargeException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -609,7 +619,7 @@ module Aws::AppConfig
     StartDeploymentRequest.add_member(:configuration_version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "ConfigurationVersion"))
     StartDeploymentRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     StartDeploymentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
-    StartDeploymentRequest.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: Identifier, location_name: "KmsKeyIdentifier"))
+    StartDeploymentRequest.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: KmsKeyIdentifier, location_name: "KmsKeyIdentifier"))
     StartDeploymentRequest.struct_class = Types::StartDeploymentRequest
 
     StopDeploymentRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ApplicationId"))
@@ -641,6 +651,7 @@ module Aws::AppConfig
     UpdateConfigurationProfileRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     UpdateConfigurationProfileRequest.add_member(:retrieval_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RetrievalRoleArn"))
     UpdateConfigurationProfileRequest.add_member(:validators, Shapes::ShapeRef.new(shape: ValidatorList, location_name: "Validators"))
+    UpdateConfigurationProfileRequest.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: KmsKeyIdentifierOrEmpty, location_name: "KmsKeyIdentifier"))
     UpdateConfigurationProfileRequest.struct_class = Types::UpdateConfigurationProfileRequest
 
     UpdateDeploymentStrategyRequest.add_member(:deployment_strategy_id, Shapes::ShapeRef.new(shape: DeploymentStrategyId, required: true, location: "uri", location_name: "DeploymentStrategyId"))
@@ -708,6 +719,7 @@ module Aws::AppConfig
         o.input = Shapes::ShapeRef.new(shape: CreateApplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: Application)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -720,6 +732,7 @@ module Aws::AppConfig
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_deployment_strategy, Seahorse::Model::Operation.new.tap do |o|
@@ -729,6 +742,7 @@ module Aws::AppConfig
         o.input = Shapes::ShapeRef.new(shape: CreateDeploymentStrategyRequest)
         o.output = Shapes::ShapeRef.new(shape: DeploymentStrategy)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
@@ -741,6 +755,7 @@ module Aws::AppConfig
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_extension, Seahorse::Model::Operation.new.tap do |o|

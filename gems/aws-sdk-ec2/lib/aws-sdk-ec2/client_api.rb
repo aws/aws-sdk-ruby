@@ -1813,6 +1813,7 @@ module Aws::EC2
     KeyPairList = Shapes::ListShape.new(name: 'KeyPairList')
     KeyPairName = Shapes::StringShape.new(name: 'KeyPairName')
     KeyType = Shapes::StringShape.new(name: 'KeyType')
+    KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LastError = Shapes::StructureShape.new(name: 'LastError')
     LaunchPermission = Shapes::StructureShape.new(name: 'LaunchPermission')
@@ -2933,6 +2934,8 @@ module Aws::EC2
     VerifiedAccessLogS3Destination = Shapes::StructureShape.new(name: 'VerifiedAccessLogS3Destination')
     VerifiedAccessLogS3DestinationOptions = Shapes::StructureShape.new(name: 'VerifiedAccessLogS3DestinationOptions')
     VerifiedAccessLogs = Shapes::StructureShape.new(name: 'VerifiedAccessLogs')
+    VerifiedAccessSseSpecificationRequest = Shapes::StructureShape.new(name: 'VerifiedAccessSseSpecificationRequest')
+    VerifiedAccessSseSpecificationResponse = Shapes::StructureShape.new(name: 'VerifiedAccessSseSpecificationResponse')
     VerifiedAccessTrustProvider = Shapes::StructureShape.new(name: 'VerifiedAccessTrustProvider')
     VerifiedAccessTrustProviderCondensed = Shapes::StructureShape.new(name: 'VerifiedAccessTrustProviderCondensed')
     VerifiedAccessTrustProviderCondensedList = Shapes::ListShape.new(name: 'VerifiedAccessTrustProviderCondensedList')
@@ -4409,7 +4412,7 @@ module Aws::EC2
     CreateCustomerGatewayResult.add_member(:customer_gateway, Shapes::ShapeRef.new(shape: CustomerGateway, location_name: "customerGateway"))
     CreateCustomerGatewayResult.struct_class = Types::CreateCustomerGatewayResult
 
-    CreateDefaultSubnetRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AvailabilityZone"))
+    CreateDefaultSubnetRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneName, required: true, location_name: "AvailabilityZone"))
     CreateDefaultSubnetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateDefaultSubnetRequest.add_member(:ipv_6_native, Shapes::ShapeRef.new(shape: Boolean, location_name: "Ipv6Native"))
     CreateDefaultSubnetRequest.struct_class = Types::CreateDefaultSubnetRequest
@@ -5153,6 +5156,7 @@ module Aws::EC2
     CreateVerifiedAccessEndpointRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateVerifiedAccessEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateVerifiedAccessEndpointRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateVerifiedAccessEndpointRequest.add_member(:sse_specification, Shapes::ShapeRef.new(shape: VerifiedAccessSseSpecificationRequest, location_name: "SseSpecification"))
     CreateVerifiedAccessEndpointRequest.struct_class = Types::CreateVerifiedAccessEndpointRequest
 
     CreateVerifiedAccessEndpointResult.add_member(:verified_access_endpoint, Shapes::ShapeRef.new(shape: VerifiedAccessEndpoint, location_name: "verifiedAccessEndpoint"))
@@ -5166,6 +5170,7 @@ module Aws::EC2
     CreateVerifiedAccessGroupRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateVerifiedAccessGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateVerifiedAccessGroupRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateVerifiedAccessGroupRequest.add_member(:sse_specification, Shapes::ShapeRef.new(shape: VerifiedAccessSseSpecificationRequest, location_name: "SseSpecification"))
     CreateVerifiedAccessGroupRequest.struct_class = Types::CreateVerifiedAccessGroupRequest
 
     CreateVerifiedAccessGroupResult.add_member(:verified_access_group, Shapes::ShapeRef.new(shape: VerifiedAccessGroup, location_name: "verifiedAccessGroup"))
@@ -5175,6 +5180,7 @@ module Aws::EC2
     CreateVerifiedAccessInstanceRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateVerifiedAccessInstanceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateVerifiedAccessInstanceRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateVerifiedAccessInstanceRequest.add_member(:fips_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "FIPSEnabled"))
     CreateVerifiedAccessInstanceRequest.struct_class = Types::CreateVerifiedAccessInstanceRequest
 
     CreateVerifiedAccessInstanceResult.add_member(:verified_access_instance, Shapes::ShapeRef.new(shape: VerifiedAccessInstance, location_name: "verifiedAccessInstance"))
@@ -5202,6 +5208,7 @@ module Aws::EC2
     CreateVerifiedAccessTrustProviderRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateVerifiedAccessTrustProviderRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateVerifiedAccessTrustProviderRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateVerifiedAccessTrustProviderRequest.add_member(:sse_specification, Shapes::ShapeRef.new(shape: VerifiedAccessSseSpecificationRequest, location_name: "SseSpecification"))
     CreateVerifiedAccessTrustProviderRequest.struct_class = Types::CreateVerifiedAccessTrustProviderRequest
 
     CreateVerifiedAccessTrustProviderResult.add_member(:verified_access_trust_provider, Shapes::ShapeRef.new(shape: VerifiedAccessTrustProvider, location_name: "verifiedAccessTrustProvider"))
@@ -11270,14 +11277,16 @@ module Aws::EC2
     ModifyVerifiedAccessEndpointLoadBalancerOptions.struct_class = Types::ModifyVerifiedAccessEndpointLoadBalancerOptions
 
     ModifyVerifiedAccessEndpointPolicyRequest.add_member(:verified_access_endpoint_id, Shapes::ShapeRef.new(shape: VerifiedAccessEndpointId, required: true, location_name: "VerifiedAccessEndpointId"))
-    ModifyVerifiedAccessEndpointPolicyRequest.add_member(:policy_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "PolicyEnabled"))
+    ModifyVerifiedAccessEndpointPolicyRequest.add_member(:policy_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PolicyEnabled"))
     ModifyVerifiedAccessEndpointPolicyRequest.add_member(:policy_document, Shapes::ShapeRef.new(shape: String, location_name: "PolicyDocument"))
     ModifyVerifiedAccessEndpointPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     ModifyVerifiedAccessEndpointPolicyRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyVerifiedAccessEndpointPolicyRequest.add_member(:sse_specification, Shapes::ShapeRef.new(shape: VerifiedAccessSseSpecificationRequest, location_name: "SseSpecification"))
     ModifyVerifiedAccessEndpointPolicyRequest.struct_class = Types::ModifyVerifiedAccessEndpointPolicyRequest
 
     ModifyVerifiedAccessEndpointPolicyResult.add_member(:policy_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "policyEnabled"))
     ModifyVerifiedAccessEndpointPolicyResult.add_member(:policy_document, Shapes::ShapeRef.new(shape: String, location_name: "policyDocument"))
+    ModifyVerifiedAccessEndpointPolicyResult.add_member(:sse_specification, Shapes::ShapeRef.new(shape: VerifiedAccessSseSpecificationResponse, location_name: "sseSpecification"))
     ModifyVerifiedAccessEndpointPolicyResult.struct_class = Types::ModifyVerifiedAccessEndpointPolicyResult
 
     ModifyVerifiedAccessEndpointRequest.add_member(:verified_access_endpoint_id, Shapes::ShapeRef.new(shape: VerifiedAccessEndpointId, required: true, location_name: "VerifiedAccessEndpointId"))
@@ -11295,14 +11304,16 @@ module Aws::EC2
     ModifyVerifiedAccessEndpointSubnetIdList.member = Shapes::ShapeRef.new(shape: SubnetId, location_name: "item")
 
     ModifyVerifiedAccessGroupPolicyRequest.add_member(:verified_access_group_id, Shapes::ShapeRef.new(shape: VerifiedAccessGroupId, required: true, location_name: "VerifiedAccessGroupId"))
-    ModifyVerifiedAccessGroupPolicyRequest.add_member(:policy_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "PolicyEnabled"))
+    ModifyVerifiedAccessGroupPolicyRequest.add_member(:policy_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PolicyEnabled"))
     ModifyVerifiedAccessGroupPolicyRequest.add_member(:policy_document, Shapes::ShapeRef.new(shape: String, location_name: "PolicyDocument"))
     ModifyVerifiedAccessGroupPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     ModifyVerifiedAccessGroupPolicyRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyVerifiedAccessGroupPolicyRequest.add_member(:sse_specification, Shapes::ShapeRef.new(shape: VerifiedAccessSseSpecificationRequest, location_name: "SseSpecification"))
     ModifyVerifiedAccessGroupPolicyRequest.struct_class = Types::ModifyVerifiedAccessGroupPolicyRequest
 
     ModifyVerifiedAccessGroupPolicyResult.add_member(:policy_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "policyEnabled"))
     ModifyVerifiedAccessGroupPolicyResult.add_member(:policy_document, Shapes::ShapeRef.new(shape: String, location_name: "policyDocument"))
+    ModifyVerifiedAccessGroupPolicyResult.add_member(:sse_specification, Shapes::ShapeRef.new(shape: VerifiedAccessSseSpecificationResponse, location_name: "sseSpecification"))
     ModifyVerifiedAccessGroupPolicyResult.struct_class = Types::ModifyVerifiedAccessGroupPolicyResult
 
     ModifyVerifiedAccessGroupRequest.add_member(:verified_access_group_id, Shapes::ShapeRef.new(shape: VerifiedAccessGroupId, required: true, location_name: "VerifiedAccessGroupId"))
@@ -11347,6 +11358,7 @@ module Aws::EC2
     ModifyVerifiedAccessTrustProviderRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     ModifyVerifiedAccessTrustProviderRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ModifyVerifiedAccessTrustProviderRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    ModifyVerifiedAccessTrustProviderRequest.add_member(:sse_specification, Shapes::ShapeRef.new(shape: VerifiedAccessSseSpecificationRequest, location_name: "SseSpecification"))
     ModifyVerifiedAccessTrustProviderRequest.struct_class = Types::ModifyVerifiedAccessTrustProviderRequest
 
     ModifyVerifiedAccessTrustProviderResult.add_member(:verified_access_trust_provider, Shapes::ShapeRef.new(shape: VerifiedAccessTrustProvider, location_name: "verifiedAccessTrustProvider"))
@@ -14542,6 +14554,7 @@ module Aws::EC2
     VerifiedAccessEndpoint.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: String, location_name: "lastUpdatedTime"))
     VerifiedAccessEndpoint.add_member(:deletion_time, Shapes::ShapeRef.new(shape: String, location_name: "deletionTime"))
     VerifiedAccessEndpoint.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    VerifiedAccessEndpoint.add_member(:sse_specification, Shapes::ShapeRef.new(shape: VerifiedAccessSseSpecificationResponse, location_name: "sseSpecification"))
     VerifiedAccessEndpoint.struct_class = Types::VerifiedAccessEndpoint
 
     VerifiedAccessEndpointEniOptions.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "networkInterfaceId"))
@@ -14574,6 +14587,7 @@ module Aws::EC2
     VerifiedAccessGroup.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: String, location_name: "lastUpdatedTime"))
     VerifiedAccessGroup.add_member(:deletion_time, Shapes::ShapeRef.new(shape: String, location_name: "deletionTime"))
     VerifiedAccessGroup.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    VerifiedAccessGroup.add_member(:sse_specification, Shapes::ShapeRef.new(shape: VerifiedAccessSseSpecificationResponse, location_name: "sseSpecification"))
     VerifiedAccessGroup.struct_class = Types::VerifiedAccessGroup
 
     VerifiedAccessGroupIdList.member = Shapes::ShapeRef.new(shape: VerifiedAccessGroupId, location_name: "item")
@@ -14586,6 +14600,7 @@ module Aws::EC2
     VerifiedAccessInstance.add_member(:creation_time, Shapes::ShapeRef.new(shape: String, location_name: "creationTime"))
     VerifiedAccessInstance.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: String, location_name: "lastUpdatedTime"))
     VerifiedAccessInstance.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    VerifiedAccessInstance.add_member(:fips_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "fipsEnabled"))
     VerifiedAccessInstance.struct_class = Types::VerifiedAccessInstance
 
     VerifiedAccessInstanceIdList.member = Shapes::ShapeRef.new(shape: VerifiedAccessInstanceId, location_name: "item")
@@ -14647,6 +14662,14 @@ module Aws::EC2
     VerifiedAccessLogs.add_member(:include_trust_context, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeTrustContext"))
     VerifiedAccessLogs.struct_class = Types::VerifiedAccessLogs
 
+    VerifiedAccessSseSpecificationRequest.add_member(:customer_managed_key_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "CustomerManagedKeyEnabled"))
+    VerifiedAccessSseSpecificationRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
+    VerifiedAccessSseSpecificationRequest.struct_class = Types::VerifiedAccessSseSpecificationRequest
+
+    VerifiedAccessSseSpecificationResponse.add_member(:customer_managed_key_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "customerManagedKeyEnabled"))
+    VerifiedAccessSseSpecificationResponse.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    VerifiedAccessSseSpecificationResponse.struct_class = Types::VerifiedAccessSseSpecificationResponse
+
     VerifiedAccessTrustProvider.add_member(:verified_access_trust_provider_id, Shapes::ShapeRef.new(shape: String, location_name: "verifiedAccessTrustProviderId"))
     VerifiedAccessTrustProvider.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     VerifiedAccessTrustProvider.add_member(:trust_provider_type, Shapes::ShapeRef.new(shape: TrustProviderType, location_name: "trustProviderType"))
@@ -14658,6 +14681,7 @@ module Aws::EC2
     VerifiedAccessTrustProvider.add_member(:creation_time, Shapes::ShapeRef.new(shape: String, location_name: "creationTime"))
     VerifiedAccessTrustProvider.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: String, location_name: "lastUpdatedTime"))
     VerifiedAccessTrustProvider.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    VerifiedAccessTrustProvider.add_member(:sse_specification, Shapes::ShapeRef.new(shape: VerifiedAccessSseSpecificationResponse, location_name: "sseSpecification"))
     VerifiedAccessTrustProvider.struct_class = Types::VerifiedAccessTrustProvider
 
     VerifiedAccessTrustProviderCondensed.add_member(:verified_access_trust_provider_id, Shapes::ShapeRef.new(shape: String, location_name: "verifiedAccessTrustProviderId"))

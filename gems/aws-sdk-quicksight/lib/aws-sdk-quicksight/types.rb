@@ -22073,6 +22073,10 @@ module Aws::QuickSight
     #   The identity ID for a user in the external login provider.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to associate with the user.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisterUserRequest AWS API Documentation
     #
     class RegisterUserRequest < Struct.new(
@@ -22087,7 +22091,8 @@ module Aws::QuickSight
       :custom_permissions_name,
       :external_login_federation_provider_type,
       :custom_federation_provider_url,
-      :external_login_id)
+      :external_login_id,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end

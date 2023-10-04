@@ -281,7 +281,7 @@ module Aws::FinSpaceData
     CreateUserRequest.add_member(:type, Shapes::ShapeRef.new(shape: UserType, required: true, location_name: "type"))
     CreateUserRequest.add_member(:first_name, Shapes::ShapeRef.new(shape: FirstName, location_name: "firstName"))
     CreateUserRequest.add_member(:last_name, Shapes::ShapeRef.new(shape: LastName, location_name: "lastName"))
-    CreateUserRequest.add_member(:api_access, Shapes::ShapeRef.new(shape: ApiAccess, location_name: "ApiAccess"))
+    CreateUserRequest.add_member(:api_access, Shapes::ShapeRef.new(shape: ApiAccess, location_name: "apiAccess"))
     CreateUserRequest.add_member(:api_access_principal_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "apiAccessPrincipalArn"))
     CreateUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateUserRequest.struct_class = Types::CreateUserRequest

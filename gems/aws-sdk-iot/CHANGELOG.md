@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2023-09-27)
+------------------
+
+* Feature - Added support for IoT Rules Engine Kafka Action Headers
+
 1.110.0 (2023-07-11)
 ------------------
 

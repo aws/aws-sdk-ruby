@@ -68,6 +68,8 @@ module Aws::Mgn
             Aws::Mgn::Endpoints::ChangeServerLifeCycleState.build(context)
           when :create_application
             Aws::Mgn::Endpoints::CreateApplication.build(context)
+          when :create_connector
+            Aws::Mgn::Endpoints::CreateConnector.build(context)
           when :create_launch_configuration_template
             Aws::Mgn::Endpoints::CreateLaunchConfigurationTemplate.build(context)
           when :create_replication_configuration_template
@@ -76,6 +78,8 @@ module Aws::Mgn
             Aws::Mgn::Endpoints::CreateWave.build(context)
           when :delete_application
             Aws::Mgn::Endpoints::DeleteApplication.build(context)
+          when :delete_connector
+            Aws::Mgn::Endpoints::DeleteConnector.build(context)
           when :delete_job
             Aws::Mgn::Endpoints::DeleteJob.build(context)
           when :delete_launch_configuration_template
@@ -116,6 +120,8 @@ module Aws::Mgn
             Aws::Mgn::Endpoints::InitializeService.build(context)
           when :list_applications
             Aws::Mgn::Endpoints::ListApplications.build(context)
+          when :list_connectors
+            Aws::Mgn::Endpoints::ListConnectors.build(context)
           when :list_export_errors
             Aws::Mgn::Endpoints::ListExportErrors.build(context)
           when :list_exports
@@ -174,6 +180,8 @@ module Aws::Mgn
             Aws::Mgn::Endpoints::UntagResource.build(context)
           when :update_application
             Aws::Mgn::Endpoints::UpdateApplication.build(context)
+          when :update_connector
+            Aws::Mgn::Endpoints::UpdateConnector.build(context)
           when :update_launch_configuration
             Aws::Mgn::Endpoints::UpdateLaunchConfiguration.build(context)
           when :update_launch_configuration_template
@@ -182,6 +190,8 @@ module Aws::Mgn
             Aws::Mgn::Endpoints::UpdateReplicationConfiguration.build(context)
           when :update_replication_configuration_template
             Aws::Mgn::Endpoints::UpdateReplicationConfigurationTemplate.build(context)
+          when :update_source_server
+            Aws::Mgn::Endpoints::UpdateSourceServer.build(context)
           when :update_source_server_replication_type
             Aws::Mgn::Endpoints::UpdateSourceServerReplicationType.build(context)
           when :update_wave

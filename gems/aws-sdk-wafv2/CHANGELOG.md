@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2023-09-28)
+------------------
+
+* Feature - Correct and improve the documentation for the FieldToMatch option JA3 fingerprint.
+
+1.70.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.69.0 (2023-09-25)
+------------------
+
+* Feature - You can now perform an exact match against the web request's JA3 fingerprint.
+
 1.68.0 (2023-09-06)
 ------------------
 

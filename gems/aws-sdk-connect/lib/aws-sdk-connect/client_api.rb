@@ -46,6 +46,9 @@ module Aws::Connect
     AllowedAccessControlTags = Shapes::MapShape.new(name: 'AllowedAccessControlTags')
     AllowedMonitorCapabilities = Shapes::ListShape.new(name: 'AllowedMonitorCapabilities')
     AnswerMachineDetectionConfig = Shapes::StructureShape.new(name: 'AnswerMachineDetectionConfig')
+    Application = Shapes::StructureShape.new(name: 'Application')
+    ApplicationPermissions = Shapes::ListShape.new(name: 'ApplicationPermissions')
+    Applications = Shapes::ListShape.new(name: 'Applications')
     ApproximateTotalCount = Shapes::IntegerShape.new(name: 'ApproximateTotalCount')
     AssignContactCategoryActionDefinition = Shapes::StructureShape.new(name: 'AssignContactCategoryActionDefinition')
     AssociateApprovedOriginRequest = Shapes::StructureShape.new(name: 'AssociateApprovedOriginRequest')
@@ -442,6 +445,8 @@ module Aws::Connect
     IntegrationAssociationSummaryList = Shapes::ListShape.new(name: 'IntegrationAssociationSummaryList')
     IntegrationType = Shapes::StringShape.new(name: 'IntegrationType')
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
+    IntervalDetails = Shapes::StructureShape.new(name: 'IntervalDetails')
+    IntervalPeriod = Shapes::StringShape.new(name: 'IntervalPeriod')
     InvalidContactFlowException = Shapes::StructureShape.new(name: 'InvalidContactFlowException')
     InvalidContactFlowModuleException = Shapes::StructureShape.new(name: 'InvalidContactFlowModuleException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
@@ -517,6 +522,8 @@ module Aws::Connect
     ListRulesResponse = Shapes::StructureShape.new(name: 'ListRulesResponse')
     ListSecurityKeysRequest = Shapes::StructureShape.new(name: 'ListSecurityKeysRequest')
     ListSecurityKeysResponse = Shapes::StructureShape.new(name: 'ListSecurityKeysResponse')
+    ListSecurityProfileApplicationsRequest = Shapes::StructureShape.new(name: 'ListSecurityProfileApplicationsRequest')
+    ListSecurityProfileApplicationsResponse = Shapes::StructureShape.new(name: 'ListSecurityProfileApplicationsResponse')
     ListSecurityProfilePermissionsRequest = Shapes::StructureShape.new(name: 'ListSecurityProfilePermissionsRequest')
     ListSecurityProfilePermissionsResponse = Shapes::StructureShape.new(name: 'ListSecurityProfilePermissionsResponse')
     ListSecurityProfilesRequest = Shapes::StructureShape.new(name: 'ListSecurityProfilesRequest')
@@ -557,6 +564,7 @@ module Aws::Connect
     MetricFilterV2 = Shapes::StructureShape.new(name: 'MetricFilterV2')
     MetricFilterValueList = Shapes::ListShape.new(name: 'MetricFilterValueList')
     MetricFiltersV2List = Shapes::ListShape.new(name: 'MetricFiltersV2List')
+    MetricInterval = Shapes::StructureShape.new(name: 'MetricInterval')
     MetricNameV2 = Shapes::StringShape.new(name: 'MetricNameV2')
     MetricResultV2 = Shapes::StructureShape.new(name: 'MetricResultV2')
     MetricResultsV2 = Shapes::ListShape.new(name: 'MetricResultsV2')
@@ -568,6 +576,7 @@ module Aws::Connect
     MonitorContactResponse = Shapes::StructureShape.new(name: 'MonitorContactResponse')
     Name = Shapes::StringShape.new(name: 'Name')
     Name128 = Shapes::StringShape.new(name: 'Name128')
+    Namespace = Shapes::StringShape.new(name: 'Namespace')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NextToken2500 = Shapes::StringShape.new(name: 'NextToken2500')
     NotificationContentType = Shapes::StringShape.new(name: 'NotificationContentType')
@@ -597,6 +606,7 @@ module Aws::Connect
     ParticipantTokenCredentials = Shapes::StructureShape.new(name: 'ParticipantTokenCredentials')
     Password = Shapes::StringShape.new(name: 'Password')
     Percentage = Shapes::IntegerShape.new(name: 'Percentage')
+    Permission = Shapes::StringShape.new(name: 'Permission')
     PermissionsList = Shapes::ListShape.new(name: 'PermissionsList')
     PersistentChat = Shapes::StructureShape.new(name: 'PersistentChat')
     PhoneNumber = Shapes::StringShape.new(name: 'PhoneNumber')
@@ -1073,6 +1083,14 @@ module Aws::Connect
     AnswerMachineDetectionConfig.add_member(:await_answer_machine_prompt, Shapes::ShapeRef.new(shape: Boolean, location_name: "AwaitAnswerMachinePrompt"))
     AnswerMachineDetectionConfig.struct_class = Types::AnswerMachineDetectionConfig
 
+    Application.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
+    Application.add_member(:application_permissions, Shapes::ShapeRef.new(shape: ApplicationPermissions, location_name: "ApplicationPermissions"))
+    Application.struct_class = Types::Application
+
+    ApplicationPermissions.member = Shapes::ShapeRef.new(shape: Permission)
+
+    Applications.member = Shapes::ShapeRef.new(shape: Application)
+
     AssignContactCategoryActionDefinition.struct_class = Types::AssignContactCategoryActionDefinition
 
     AssociateApprovedOriginRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
@@ -1435,6 +1453,7 @@ module Aws::Connect
     CreateSecurityProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateSecurityProfileRequest.add_member(:allowed_access_control_tags, Shapes::ShapeRef.new(shape: AllowedAccessControlTags, location_name: "AllowedAccessControlTags"))
     CreateSecurityProfileRequest.add_member(:tag_restricted_resources, Shapes::ShapeRef.new(shape: TagRestrictedResourceList, location_name: "TagRestrictedResources"))
+    CreateSecurityProfileRequest.add_member(:applications, Shapes::ShapeRef.new(shape: Applications, location_name: "Applications"))
     CreateSecurityProfileRequest.struct_class = Types::CreateSecurityProfileRequest
 
     CreateSecurityProfileResponse.add_member(:security_profile_id, Shapes::ShapeRef.new(shape: SecurityProfileId, location_name: "SecurityProfileId"))
@@ -2218,6 +2237,7 @@ module Aws::Connect
     GetMetricDataV2Request.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "ResourceArn"))
     GetMetricDataV2Request.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
     GetMetricDataV2Request.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTime"))
+    GetMetricDataV2Request.add_member(:interval, Shapes::ShapeRef.new(shape: IntervalDetails, location_name: "Interval"))
     GetMetricDataV2Request.add_member(:filters, Shapes::ShapeRef.new(shape: FiltersV2List, required: true, location_name: "Filters"))
     GetMetricDataV2Request.add_member(:groupings, Shapes::ShapeRef.new(shape: GroupingsV2, location_name: "Groupings"))
     GetMetricDataV2Request.add_member(:metrics, Shapes::ShapeRef.new(shape: MetricsV2, required: true, location_name: "Metrics"))
@@ -2445,6 +2465,10 @@ module Aws::Connect
 
     InternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     InternalServiceException.struct_class = Types::InternalServiceException
+
+    IntervalDetails.add_member(:time_zone, Shapes::ShapeRef.new(shape: String, location_name: "TimeZone"))
+    IntervalDetails.add_member(:interval_period, Shapes::ShapeRef.new(shape: IntervalPeriod, location_name: "IntervalPeriod"))
+    IntervalDetails.struct_class = Types::IntervalDetails
 
     InvalidContactFlowException.add_member(:problems, Shapes::ShapeRef.new(shape: Problems, location_name: "problems"))
     InvalidContactFlowException.struct_class = Types::InvalidContactFlowException
@@ -2764,6 +2788,16 @@ module Aws::Connect
     ListSecurityKeysResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListSecurityKeysResponse.struct_class = Types::ListSecurityKeysResponse
 
+    ListSecurityProfileApplicationsRequest.add_member(:security_profile_id, Shapes::ShapeRef.new(shape: SecurityProfileId, required: true, location: "uri", location_name: "SecurityProfileId"))
+    ListSecurityProfileApplicationsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListSecurityProfileApplicationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListSecurityProfileApplicationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult1000, location: "querystring", location_name: "maxResults"))
+    ListSecurityProfileApplicationsRequest.struct_class = Types::ListSecurityProfileApplicationsRequest
+
+    ListSecurityProfileApplicationsResponse.add_member(:applications, Shapes::ShapeRef.new(shape: Applications, location_name: "Applications"))
+    ListSecurityProfileApplicationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSecurityProfileApplicationsResponse.struct_class = Types::ListSecurityProfileApplicationsResponse
+
     ListSecurityProfilePermissionsRequest.add_member(:security_profile_id, Shapes::ShapeRef.new(shape: SecurityProfileId, required: true, location: "uri", location_name: "SecurityProfileId"))
     ListSecurityProfilePermissionsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     ListSecurityProfilePermissionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -2884,13 +2918,20 @@ module Aws::Connect
 
     MetricFilterV2.add_member(:metric_filter_key, Shapes::ShapeRef.new(shape: String, location_name: "MetricFilterKey"))
     MetricFilterV2.add_member(:metric_filter_values, Shapes::ShapeRef.new(shape: MetricFilterValueList, location_name: "MetricFilterValues"))
+    MetricFilterV2.add_member(:negate, Shapes::ShapeRef.new(shape: Boolean, location_name: "Negate"))
     MetricFilterV2.struct_class = Types::MetricFilterV2
 
     MetricFilterValueList.member = Shapes::ShapeRef.new(shape: String)
 
     MetricFiltersV2List.member = Shapes::ShapeRef.new(shape: MetricFilterV2)
 
+    MetricInterval.add_member(:interval, Shapes::ShapeRef.new(shape: IntervalPeriod, location_name: "Interval"))
+    MetricInterval.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    MetricInterval.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    MetricInterval.struct_class = Types::MetricInterval
+
     MetricResultV2.add_member(:dimensions, Shapes::ShapeRef.new(shape: DimensionsV2Map, location_name: "Dimensions"))
+    MetricResultV2.add_member(:metric_interval, Shapes::ShapeRef.new(shape: MetricInterval, location_name: "MetricInterval"))
     MetricResultV2.add_member(:collections, Shapes::ShapeRef.new(shape: MetricDataCollectionsV2, location_name: "Collections"))
     MetricResultV2.struct_class = Types::MetricResultV2
 
@@ -3976,6 +4017,7 @@ module Aws::Connect
     UpdateSecurityProfileRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     UpdateSecurityProfileRequest.add_member(:allowed_access_control_tags, Shapes::ShapeRef.new(shape: AllowedAccessControlTags, location_name: "AllowedAccessControlTags"))
     UpdateSecurityProfileRequest.add_member(:tag_restricted_resources, Shapes::ShapeRef.new(shape: TagRestrictedResourceList, location_name: "TagRestrictedResources"))
+    UpdateSecurityProfileRequest.add_member(:applications, Shapes::ShapeRef.new(shape: Applications, location_name: "Applications"))
     UpdateSecurityProfileRequest.struct_class = Types::UpdateSecurityProfileRequest
 
     UpdateTaskTemplateRequest.add_member(:task_template_id, Shapes::ShapeRef.new(shape: TaskTemplateId, required: true, location: "uri", location_name: "TaskTemplateId"))
@@ -6147,6 +6189,25 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_security_profile_applications, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSecurityProfileApplications"
+        o.http_method = "GET"
+        o.http_request_uri = "/security-profiles-applications/{InstanceId}/{SecurityProfileId}"
+        o.input = Shapes::ShapeRef.new(shape: ListSecurityProfileApplicationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSecurityProfileApplicationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

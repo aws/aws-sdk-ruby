@@ -1,6 +1,58 @@
 Unreleased Changes
 ------------------
 
+1.833.0 (2023-10-04)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::DataZone`.
+
+1.832.0 (2023-10-03)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.831.0 (2023-10-02)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.830.0 (2023-09-28)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::BedrockRuntime`.
+
+* Feature - Added support for enumerating regions for `Aws::Bedrock`.
+
+1.829.0 (2023-09-27)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.828.0 (2023-09-25)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.827.0 (2023-09-22)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.826.0 (2023-09-20)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.825.0 (2023-09-19)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.824.0 (2023-09-15)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.823.0 (2023-09-14)
 ------------------
 

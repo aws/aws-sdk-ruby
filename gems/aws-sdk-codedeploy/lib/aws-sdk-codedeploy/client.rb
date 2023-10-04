@@ -553,7 +553,7 @@ module Aws::CodeDeploy
     #
     # @option params [required, String] :application_name
     #   The name of an CodeDeploy application associated with the applicable
-    #   IAM or Amazon Web Services account.
+    #   user or Amazon Web Services account.
     #
     # @option params [required, Array<String>] :deployment_group_names
     #   The names of the deployment groups.
@@ -1063,7 +1063,7 @@ module Aws::CodeDeploy
     #
     # @option params [required, String] :application_name
     #   The name of the application. This name must be unique with the
-    #   applicable IAM or Amazon Web Services account.
+    #   applicable user or Amazon Web Services account.
     #
     # @option params [String] :compute_platform
     #   The destination platform type for the deployment (`Lambda`, `Server`,
@@ -1108,7 +1108,7 @@ module Aws::CodeDeploy
     # group.
     #
     # @option params [required, String] :application_name
-    #   The name of an CodeDeploy application associated with the IAM user or
+    #   The name of an CodeDeploy application associated with the user or
     #   Amazon Web Services account.
     #
     # @option params [String] :deployment_group_name
@@ -1118,7 +1118,7 @@ module Aws::CodeDeploy
     #   The type and location of the revision to deploy.
     #
     # @option params [String] :deployment_config_name
-    #   The name of a deployment configuration associated with the IAM user or
+    #   The name of a deployment configuration associated with the user or
     #   Amazon Web Services account.
     #
     #   If not specified, the value configured in the deployment group is used
@@ -1366,7 +1366,7 @@ module Aws::CodeDeploy
     # deployed.
     #
     # @option params [required, String] :application_name
-    #   The name of an CodeDeploy application associated with the IAM user or
+    #   The name of an CodeDeploy application associated with the user or
     #   Amazon Web Services account.
     #
     # @option params [required, String] :deployment_group_name
@@ -1615,7 +1615,7 @@ module Aws::CodeDeploy
     # Deletes an application.
     #
     # @option params [required, String] :application_name
-    #   The name of an CodeDeploy application associated with the IAM user or
+    #   The name of an CodeDeploy application associated with the user or
     #   Amazon Web Services account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1643,7 +1643,7 @@ module Aws::CodeDeploy
     #  </note>
     #
     # @option params [required, String] :deployment_config_name
-    #   The name of a deployment configuration associated with the IAM user or
+    #   The name of a deployment configuration associated with the user or
     #   Amazon Web Services account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1666,7 +1666,7 @@ module Aws::CodeDeploy
     # Deletes a deployment group.
     #
     # @option params [required, String] :application_name
-    #   The name of an CodeDeploy application associated with the IAM user or
+    #   The name of an CodeDeploy application associated with the user or
     #   Amazon Web Services account.
     #
     # @option params [required, String] :deployment_group_name
@@ -1726,7 +1726,15 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
-    # Deletes resources linked to an external ID.
+    # Deletes resources linked to an external ID. This action only applies
+    # if you have configured blue/green deployments through CloudFormation.
+    #
+    # <note markdown="1"> It is not necessary to call this action directly. CloudFormation calls
+    # it on your behalf when it needs to delete stack resources. This action
+    # is offered publicly in case you need to delete resources to comply
+    # with General Data Protection Regulation (GDPR) requirements.
+    #
+    #  </note>
     #
     # @option params [String] :external_id
     #   The unique ID of an external resource (for example, a CloudFormation
@@ -1774,7 +1782,7 @@ module Aws::CodeDeploy
     # Gets information about an application.
     #
     # @option params [required, String] :application_name
-    #   The name of an CodeDeploy application associated with the IAM user or
+    #   The name of an CodeDeploy application associated with the user or
     #   Amazon Web Services account.
     #
     # @return [Types::GetApplicationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1889,8 +1897,8 @@ module Aws::CodeDeploy
     #  </note>
     #
     # @option params [required, String] :deployment_id
-    #   The unique ID of a deployment associated with the IAM user or Amazon
-    #   Web Services account.
+    #   The unique ID of a deployment associated with the user or Amazon Web
+    #   Services account.
     #
     # @return [Types::GetDeploymentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2015,7 +2023,7 @@ module Aws::CodeDeploy
     # Gets information about a deployment configuration.
     #
     # @option params [required, String] :deployment_config_name
-    #   The name of a deployment configuration associated with the IAM user or
+    #   The name of a deployment configuration associated with the user or
     #   Amazon Web Services account.
     #
     # @return [Types::GetDeploymentConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2054,7 +2062,7 @@ module Aws::CodeDeploy
     # Gets information about a deployment group.
     #
     # @option params [required, String] :application_name
-    #   The name of an CodeDeploy application associated with the IAM user or
+    #   The name of an CodeDeploy application associated with the user or
     #   Amazon Web Services account.
     #
     # @option params [required, String] :deployment_group_name
@@ -2352,7 +2360,7 @@ module Aws::CodeDeploy
     # Lists information about revisions for an application.
     #
     # @option params [required, String] :application_name
-    #   The name of an CodeDeploy application associated with the IAM user or
+    #   The name of an CodeDeploy application associated with the user or
     #   Amazon Web Services account.
     #
     # @option params [String] :sort_by
@@ -2452,8 +2460,8 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
-    # Lists the applications registered with the IAM user or Amazon Web
-    # Services account.
+    # Lists the applications registered with the user or Amazon Web Services
+    # account.
     #
     # @option params [String] :next_token
     #   An identifier returned from the previous list applications call. It
@@ -2487,7 +2495,7 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
-    # Lists the deployment configurations with the IAM user or Amazon Web
+    # Lists the deployment configurations with the user or Amazon Web
     # Services account.
     #
     # @option params [String] :next_token
@@ -2523,11 +2531,11 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
-    # Lists the deployment groups for an application registered with the IAM
-    # user or Amazon Web Services account.
+    # Lists the deployment groups for an application registered with the
+    # Amazon Web Services user or Amazon Web Services account.
     #
     # @option params [required, String] :application_name
-    #   The name of an CodeDeploy application associated with the IAM user or
+    #   The name of an CodeDeploy application associated with the user or
     #   Amazon Web Services account.
     #
     # @option params [String] :next_token
@@ -2573,8 +2581,8 @@ module Aws::CodeDeploy
     #
     #  </note>
     #
-    # Lists the instance for a deployment associated with the IAM user or
-    # Amazon Web Services account.
+    # Lists the instance for a deployment associated with the user or Amazon
+    # Web Services account.
     #
     # @option params [required, String] :deployment_id
     #   The unique ID of a deployment.
@@ -2689,10 +2697,10 @@ module Aws::CodeDeploy
     end
 
     # Lists the deployments in a deployment group for an application
-    # registered with the IAM user or Amazon Web Services account.
+    # registered with the user or Amazon Web Services account.
     #
     # @option params [String] :application_name
-    #   The name of an CodeDeploy application associated with the IAM user or
+    #   The name of an CodeDeploy application associated with the user or
     #   Amazon Web Services account.
     #
     #   <note markdown="1"> If `applicationName` is specified, then `deploymentGroupName` must be
@@ -2965,7 +2973,7 @@ module Aws::CodeDeploy
     # Registers with CodeDeploy a revision for the specified application.
     #
     # @option params [required, String] :application_name
-    #   The name of an CodeDeploy application associated with the IAM user or
+    #   The name of an CodeDeploy application associated with the user or
     #   Amazon Web Services account.
     #
     # @option params [String] :description
@@ -3029,7 +3037,7 @@ module Aws::CodeDeploy
     #   The ARN of the IAM session to associate with the on-premises instance.
     #
     # @option params [String] :iam_user_arn
-    #   The ARN of the IAM user to associate with the on-premises instance.
+    #   The ARN of the user to associate with the on-premises instance.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3274,7 +3282,7 @@ module Aws::CodeDeploy
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/codedeploy/latest/userguide/troubleshooting-auto-scaling.html#troubleshooting-auto-scaling-heartbeat
+    #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/troubleshooting-auto-scaling.html#troubleshooting-auto-scaling-heartbeat
     #
     # @option params [String] :service_role_arn
     #   A replacement ARN for the service role, if you want to change it.
@@ -3487,7 +3495,7 @@ module Aws::CodeDeploy
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codedeploy'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

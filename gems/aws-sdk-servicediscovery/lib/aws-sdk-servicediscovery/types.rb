@@ -501,10 +501,52 @@ module Aws::ServiceDiscovery
     #   registered instance.
     #   @return [Array<Types::HttpInstanceSummary>]
     #
+    # @!attribute [rw] instances_revision
+    #   The increasing revision associated to the response Instances list.
+    #   If a new instance is registered or deregistered, the
+    #   `InstancesRevision` updates. The health status updates don't update
+    #   `InstancesRevision`.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DiscoverInstancesResponse AWS API Documentation
     #
     class DiscoverInstancesResponse < Struct.new(
-      :instances)
+      :instances,
+      :instances_revision)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] namespace_name
+    #   The `HttpName` name of the namespace. It's found in the
+    #   `HttpProperties` member of the `Properties` member of the namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the service that you specified when you registered the
+    #   instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DiscoverInstancesRevisionRequest AWS API Documentation
+    #
+    class DiscoverInstancesRevisionRequest < Struct.new(
+      :namespace_name,
+      :service_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instances_revision
+    #   The increasing revision associated to the response Instances list.
+    #   If a new instance is registered or deregistered, the
+    #   `InstancesRevision` updates. The health status updates don't update
+    #   `InstancesRevision`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DiscoverInstancesRevisionResponse AWS API Documentation
+    #
+    class DiscoverInstancesRevisionResponse < Struct.new(
+      :instances_revision)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2494,8 +2536,8 @@ module Aws::ServiceDiscovery
     #       health check, but it doesn't associate the health check with
     #       the alias record.
     #
-    #     * Auto naming currently doesn't support creating alias records
-    #       that route traffic to Amazon Web Services resources other than
+    #     * Cloud Map currently doesn't support creating alias records that
+    #       route traffic to Amazon Web Services resources other than
     #       Elastic Load Balancing load balancers.
     #
     #     * If you specify a value for `AWS_ALIAS_DNS_NAME`, don't specify

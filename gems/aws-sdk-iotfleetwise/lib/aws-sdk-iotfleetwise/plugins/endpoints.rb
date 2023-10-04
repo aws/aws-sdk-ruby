@@ -92,6 +92,8 @@ module Aws::IoTFleetWise
             Aws::IoTFleetWise::Endpoints::GetCampaign.build(context)
           when :get_decoder_manifest
             Aws::IoTFleetWise::Endpoints::GetDecoderManifest.build(context)
+          when :get_encryption_configuration
+            Aws::IoTFleetWise::Endpoints::GetEncryptionConfiguration.build(context)
           when :get_fleet
             Aws::IoTFleetWise::Endpoints::GetFleet.build(context)
           when :get_logging_options
@@ -136,6 +138,8 @@ module Aws::IoTFleetWise
             Aws::IoTFleetWise::Endpoints::ListVehicles.build(context)
           when :list_vehicles_in_fleet
             Aws::IoTFleetWise::Endpoints::ListVehiclesInFleet.build(context)
+          when :put_encryption_configuration
+            Aws::IoTFleetWise::Endpoints::PutEncryptionConfiguration.build(context)
           when :put_logging_options
             Aws::IoTFleetWise::Endpoints::PutLoggingOptions.build(context)
           when :register_account

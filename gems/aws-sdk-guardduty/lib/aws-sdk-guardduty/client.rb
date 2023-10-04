@@ -1784,7 +1784,7 @@ module Aws::GuardDuty
     # management account can run this API operation.
     #
     # @option params [required, String] :admin_account_id
-    #   The Amazon Web Services Account ID for the organization account to be
+    #   The Amazon Web Services account ID for the organization account to be
     #   enabled as a GuardDuty delegated administrator.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1868,7 +1868,7 @@ module Aws::GuardDuty
     #     filter_criteria: {
     #       filter_criterion: [
     #         {
-    #           criterion_key: "ACCOUNT_ID", # accepts ACCOUNT_ID, CLUSTER_NAME, RESOURCE_TYPE, COVERAGE_STATUS, ADDON_VERSION, MANAGEMENT_TYPE
+    #           criterion_key: "ACCOUNT_ID", # accepts ACCOUNT_ID, CLUSTER_NAME, RESOURCE_TYPE, COVERAGE_STATUS, ADDON_VERSION, MANAGEMENT_TYPE, EKS_CLUSTER_NAME
     #           filter_condition: {
     #             equals: ["String"],
     #             not_equals: ["String"],
@@ -2959,9 +2959,9 @@ module Aws::GuardDuty
 
     # Invites Amazon Web Services accounts to become members of an
     # organization administered by the Amazon Web Services account that
-    # invokes this API. If you are using organizations to manager your
-    # GuardDuty environment, this step is not needed. For more information,
-    # see [Managing accounts with organizations][1].
+    # invokes this API. If you are using Amazon Web Services Organizations
+    # to manage your GuardDuty environment, this step is not needed. For
+    # more information, see [Managing accounts with organizations][1].
     #
     # To invite Amazon Web Services accounts, the first step is to ensure
     # that GuardDuty has been enabled in the potential member accounts. You
@@ -3077,7 +3077,7 @@ module Aws::GuardDuty
     #     filter_criteria: {
     #       filter_criterion: [
     #         {
-    #           criterion_key: "ACCOUNT_ID", # accepts ACCOUNT_ID, CLUSTER_NAME, RESOURCE_TYPE, COVERAGE_STATUS, ADDON_VERSION, MANAGEMENT_TYPE
+    #           criterion_key: "ACCOUNT_ID", # accepts ACCOUNT_ID, CLUSTER_NAME, RESOURCE_TYPE, COVERAGE_STATUS, ADDON_VERSION, MANAGEMENT_TYPE, EKS_CLUSTER_NAME
     #           filter_condition: {
     #             equals: ["String"],
     #             not_equals: ["String"],
@@ -3086,7 +3086,7 @@ module Aws::GuardDuty
     #       ],
     #     },
     #     sort_criteria: {
-    #       attribute_name: "ACCOUNT_ID", # accepts ACCOUNT_ID, CLUSTER_NAME, COVERAGE_STATUS, ISSUE, ADDON_VERSION, UPDATED_AT
+    #       attribute_name: "ACCOUNT_ID", # accepts ACCOUNT_ID, CLUSTER_NAME, COVERAGE_STATUS, ISSUE, ADDON_VERSION, UPDATED_AT, EKS_CLUSTER_NAME
     #       order_by: "ASC", # accepts ASC, DESC
     #     },
     #   })
@@ -3552,7 +3552,7 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Lists the accounts configured as GuardDuty delegated administrators.
+    # Lists the accounts designated as GuardDuty delegated administrators.
     # Only the organization's management account can run this API
     # operation.
     #
@@ -4312,12 +4312,12 @@ module Aws::GuardDuty
     #   The ID of the detector that configures the delegated administrator.
     #
     # @option params [Boolean] :auto_enable
-    #   Indicates whether to automatically enable member accounts in the
-    #   organization.
+    #   Represents whether or not to automatically enable member accounts in
+    #   the organization.
     #
     #   Even though this is still supported, we recommend using
     #   `AutoEnableOrganizationMembers` to achieve the similar results. You
-    #   must provide the value for either `autoEnableOrganizationMembers` or
+    #   must provide a value for either `autoEnableOrganizationMembers` or
     #   `autoEnable`.
     #
     # @option params [Types::OrganizationDataSourceConfigurations] :data_sources
@@ -4488,7 +4488,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

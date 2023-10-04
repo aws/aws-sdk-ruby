@@ -123,15 +123,15 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # An application with the specified name with the IAM user or Amazon Web
+    # An application with the specified name with the user or Amazon Web
     # Services account already exists.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ApplicationAlreadyExistsException AWS API Documentation
     #
     class ApplicationAlreadyExistsException < Aws::EmptyStructure; end
 
-    # The application does not exist with the IAM user or Amazon Web
-    # Services account.
+    # The application does not exist with the user or Amazon Web Services
+    # account.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ApplicationDoesNotExistException AWS API Documentation
     #
@@ -320,7 +320,7 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] application_name
     #   The name of an CodeDeploy application associated with the applicable
-    #   IAM or Amazon Web Services account.
+    #   user or Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] deployment_group_names
@@ -671,7 +671,7 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] application_name
     #   The name of the application. This name must be unique with the
-    #   applicable IAM or Amazon Web Services account.
+    #   applicable user or Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] compute_platform
@@ -775,8 +775,8 @@ module Aws::CodeDeploy
     # Represents the input of a `CreateDeploymentGroup` operation.
     #
     # @!attribute [rw] application_name
-    #   The name of an CodeDeploy application associated with the IAM user
-    #   or Amazon Web Services account.
+    #   The name of an CodeDeploy application associated with the user or
+    #   Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] deployment_group_name
@@ -943,8 +943,8 @@ module Aws::CodeDeploy
     # Represents the input of a `CreateDeployment` operation.
     #
     # @!attribute [rw] application_name
-    #   The name of an CodeDeploy application associated with the IAM user
-    #   or Amazon Web Services account.
+    #   The name of an CodeDeploy application associated with the user or
+    #   Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] deployment_group_name
@@ -956,8 +956,8 @@ module Aws::CodeDeploy
     #   @return [Types::RevisionLocation]
     #
     # @!attribute [rw] deployment_config_name
-    #   The name of a deployment configuration associated with the IAM user
-    #   or Amazon Web Services account.
+    #   The name of a deployment configuration associated with the user or
+    #   Amazon Web Services account.
     #
     #   If not specified, the value configured in the deployment group is
     #   used as the default. If the deployment group does not have a
@@ -1087,8 +1087,8 @@ module Aws::CodeDeploy
     # Represents the input of a `DeleteApplication` operation.
     #
     # @!attribute [rw] application_name
-    #   The name of an CodeDeploy application associated with the IAM user
-    #   or Amazon Web Services account.
+    #   The name of an CodeDeploy application associated with the user or
+    #   Amazon Web Services account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteApplicationInput AWS API Documentation
@@ -1102,8 +1102,8 @@ module Aws::CodeDeploy
     # Represents the input of a `DeleteDeploymentConfig` operation.
     #
     # @!attribute [rw] deployment_config_name
-    #   The name of a deployment configuration associated with the IAM user
-    #   or Amazon Web Services account.
+    #   The name of a deployment configuration associated with the user or
+    #   Amazon Web Services account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteDeploymentConfigInput AWS API Documentation
@@ -1117,8 +1117,8 @@ module Aws::CodeDeploy
     # Represents the input of a `DeleteDeploymentGroup` operation.
     #
     # @!attribute [rw] application_name
-    #   The name of an CodeDeploy application associated with the IAM user
-    #   or Amazon Web Services account.
+    #   The name of an CodeDeploy application associated with the user or
+    #   Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] deployment_group_name
@@ -1212,15 +1212,15 @@ module Aws::CodeDeploy
     #
     class DeploymentAlreadyStartedException < Aws::EmptyStructure; end
 
-    # A deployment configuration with the specified name with the IAM user
-    # or Amazon Web Services account already exists.
+    # A deployment configuration with the specified name with the user or
+    # Amazon Web Services account already exists.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentConfigAlreadyExistsException AWS API Documentation
     #
     class DeploymentConfigAlreadyExistsException < Aws::EmptyStructure; end
 
-    # The deployment configuration does not exist with the IAM user or
-    # Amazon Web Services account.
+    # The deployment configuration does not exist with the user or Amazon
+    # Web Services account.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentConfigDoesNotExistException AWS API Documentation
     #
@@ -1287,21 +1287,21 @@ module Aws::CodeDeploy
     #
     class DeploymentConfigNameRequiredException < Aws::EmptyStructure; end
 
-    # The deployment with the IAM user or Amazon Web Services account does
-    # not exist.
+    # The deployment with the user or Amazon Web Services account does not
+    # exist.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentDoesNotExistException AWS API Documentation
     #
     class DeploymentDoesNotExistException < Aws::EmptyStructure; end
 
-    # A deployment group with the specified name with the IAM user or Amazon
-    # Web Services account already exists.
+    # A deployment group with the specified name with the user or Amazon Web
+    # Services account already exists.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentGroupAlreadyExistsException AWS API Documentation
     #
     class DeploymentGroupAlreadyExistsException < Aws::EmptyStructure; end
 
-    # The named deployment group with the IAM user or Amazon Web Services
+    # The named deployment group with the user or Amazon Web Services
     # account does not exist.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentGroupDoesNotExistException AWS API Documentation
@@ -2153,16 +2153,16 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Information about a load balancer in Elastic Load Balancing to use in
-    # a deployment. Instances are registered directly with a load balancer,
-    # and traffic is routed to the load balancer.
+    # Information about a Classic Load Balancer in Elastic Load Balancing to
+    # use in a deployment. Instances are registered directly with a load
+    # balancer, and traffic is routed to the load balancer.
     #
     # @!attribute [rw] name
-    #   For blue/green deployments, the name of the load balancer that is
-    #   used to route traffic from original instances to replacement
+    #   For blue/green deployments, the name of the Classic Load Balancer
+    #   that is used to route traffic from original instances to replacement
     #   instances in a blue/green deployment. For in-place deployments, the
-    #   name of the load balancer that instances are deregistered from so
-    #   they are not serving traffic during a deployment, and then
+    #   name of the Classic Load Balancer that instances are deregistered
+    #   from so they are not serving traffic during a deployment, and then
     #   re-registered with after the deployment is complete.
     #   @return [String]
     #
@@ -2279,8 +2279,8 @@ module Aws::CodeDeploy
     # Represents the input of a `GetApplication` operation.
     #
     # @!attribute [rw] application_name
-    #   The name of an CodeDeploy application associated with the IAM user
-    #   or Amazon Web Services account.
+    #   The name of an CodeDeploy application associated with the user or
+    #   Amazon Web Services account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetApplicationInput AWS API Documentation
@@ -2353,8 +2353,8 @@ module Aws::CodeDeploy
     # Represents the input of a `GetDeploymentConfig` operation.
     #
     # @!attribute [rw] deployment_config_name
-    #   The name of a deployment configuration associated with the IAM user
-    #   or Amazon Web Services account.
+    #   The name of a deployment configuration associated with the user or
+    #   Amazon Web Services account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentConfigInput AWS API Documentation
@@ -2382,8 +2382,8 @@ module Aws::CodeDeploy
     # Represents the input of a `GetDeploymentGroup` operation.
     #
     # @!attribute [rw] application_name
-    #   The name of an CodeDeploy application associated with the IAM user
-    #   or Amazon Web Services account.
+    #   The name of an CodeDeploy application associated with the user or
+    #   Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] deployment_group_name
@@ -2416,8 +2416,8 @@ module Aws::CodeDeploy
     # Represents the input of a `GetDeployment` operation.
     #
     # @!attribute [rw] deployment_id
-    #   The unique ID of a deployment associated with the IAM user or Amazon
-    #   Web Services account.
+    #   The unique ID of a deployment associated with the user or Amazon Web
+    #   Services account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentInput AWS API Documentation
@@ -2597,7 +2597,7 @@ module Aws::CodeDeploy
     end
 
     # No IAM ARN was included in the request. You must use an IAM session
-    # ARN or IAM user ARN in the request.
+    # ARN or user ARN in the request.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/IamArnRequiredException AWS API Documentation
     #
@@ -2610,14 +2610,14 @@ module Aws::CodeDeploy
     #
     class IamSessionArnAlreadyRegisteredException < Aws::EmptyStructure; end
 
-    # The specified IAM user ARN is already registered with an on-premises
+    # The specified user ARN is already registered with an on-premises
     # instance.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/IamUserArnAlreadyRegisteredException AWS API Documentation
     #
     class IamUserArnAlreadyRegisteredException < Aws::EmptyStructure; end
 
-    # An IAM user ARN was not specified.
+    # An user ARN was not specified.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/IamUserArnRequiredException AWS API Documentation
     #
@@ -2646,7 +2646,7 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] iam_user_arn
-    #   The IAM user ARN associated with the on-premises instance.
+    #   The user ARN associated with the on-premises instance.
     #   @return [String]
     #
     # @!attribute [rw] instance_arn
@@ -2988,7 +2988,7 @@ module Aws::CodeDeploy
     #
     class InvalidIamSessionArnException < Aws::EmptyStructure; end
 
-    # The IAM user ARN was specified in an invalid format.
+    # The user ARN was specified in an invalid format.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidIamUserArnException AWS API Documentation
     #
@@ -3385,8 +3385,8 @@ module Aws::CodeDeploy
     # Represents the input of a `ListApplicationRevisions` operation.
     #
     # @!attribute [rw] application_name
-    #   The name of an CodeDeploy application associated with the IAM user
-    #   or Amazon Web Services account.
+    #   The name of an CodeDeploy application associated with the user or
+    #   Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] sort_by
@@ -3560,8 +3560,8 @@ module Aws::CodeDeploy
     # Represents the input of a `ListDeploymentGroups` operation.
     #
     # @!attribute [rw] application_name
-    #   The name of an CodeDeploy application associated with the IAM user
-    #   or Amazon Web Services account.
+    #   The name of an CodeDeploy application associated with the user or
+    #   Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3728,8 +3728,8 @@ module Aws::CodeDeploy
     # Represents the input of a `ListDeployments` operation.
     #
     # @!attribute [rw] application_name
-    #   The name of an CodeDeploy application associated with the IAM user
-    #   or Amazon Web Services account.
+    #   The name of an CodeDeploy application associated with the user or
+    #   Amazon Web Services account.
     #
     #   <note markdown="1"> If `applicationName` is specified, then `deploymentGroupName` must
     #   be specified. If it is not specified, then `deploymentGroupName`
@@ -3950,22 +3950,39 @@ module Aws::CodeDeploy
     # Information about the Elastic Load Balancing load balancer or target
     # group used in a deployment.
     #
-    # @!attribute [rw] elb_info_list
-    #   An array that contains information about the load balancer to use
-    #   for load balancing in a deployment. In Elastic Load Balancing, load
-    #   balancers are used with Classic Load Balancers.
+    # You can use load balancers and target groups in combination. For
+    # example, if you have two Classic Load Balancers, and five target
+    # groups tied to an Application Load Balancer, you can specify the two
+    # Classic Load Balancers in `elbInfoList`, and the five target groups in
+    # `targetGroupInfoList`.
     #
-    #   <note markdown="1"> Adding more than one load balancer to the array is not supported.
+    # @!attribute [rw] elb_info_list
+    #   An array that contains information about the load balancers to use
+    #   for load balancing in a deployment. If you're using Classic Load
+    #   Balancers, specify those load balancers in this array.
+    #
+    #   <note markdown="1"> You can add up to 10 load balancers to the array.
+    #
+    #    </note>
+    #
+    #   <note markdown="1"> If you're using Application Load Balancers or Network Load
+    #   Balancers, use the `targetGroupInfoList` array instead of this one.
     #
     #    </note>
     #   @return [Array<Types::ELBInfo>]
     #
     # @!attribute [rw] target_group_info_list
-    #   An array that contains information about the target group to use for
-    #   load balancing in a deployment. In Elastic Load Balancing, target
-    #   groups are used with Application Load Balancers.
+    #   An array that contains information about the target groups to use
+    #   for load balancing in a deployment. If you're using Application
+    #   Load Balancers and Network Load Balancers, specify their associated
+    #   target groups in this array.
     #
-    #   <note markdown="1"> Adding more than one target group to the array is not supported.
+    #   <note markdown="1"> You can add up to 10 target groups to the array.
+    #
+    #    </note>
+    #
+    #   <note markdown="1"> If you're using Classic Load Balancers, use the `elbInfoList` array
+    #   instead of this one.
     #
     #    </note>
     #   @return [Array<Types::TargetGroupInfo>]
@@ -4038,8 +4055,8 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Both an IAM user ARN and an IAM session ARN were included in the
-    # request. Use only one ARN type.
+    # Both an user ARN and an IAM session ARN were included in the request.
+    # Use only one ARN type.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/MultipleIamArnsProvidedException AWS API Documentation
     #
@@ -4134,8 +4151,8 @@ module Aws::CodeDeploy
     # Represents the input of a RegisterApplicationRevision operation.
     #
     # @!attribute [rw] application_name
-    #   The name of an CodeDeploy application associated with the IAM user
-    #   or Amazon Web Services account.
+    #   The name of an CodeDeploy application associated with the user or
+    #   Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -4169,7 +4186,7 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] iam_user_arn
-    #   The ARN of the IAM user to associate with the on-premises instance.
+    #   The ARN of the user to associate with the on-premises instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RegisterOnPremisesInstanceInput AWS API Documentation
@@ -4235,8 +4252,8 @@ module Aws::CodeDeploy
     #
     class ResourceValidationException < Aws::EmptyStructure; end
 
-    # The named revision does not exist with the IAM user or Amazon Web
-    # Services account.
+    # The named revision does not exist with the user or Amazon Web Services
+    # account.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RevisionDoesNotExistException AWS API Documentation
     #
@@ -4374,6 +4391,10 @@ module Aws::CodeDeploy
     #   * `tgz`: A compressed tar archive file.
     #
     #   * `zip`: A zip archive file.
+    #
+    #   * `YAML`: A YAML-formatted file.
+    #
+    #   * `JSON`: A JSON-formatted file.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -4901,7 +4922,7 @@ module Aws::CodeDeploy
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/codedeploy/latest/userguide/troubleshooting-auto-scaling.html#troubleshooting-auto-scaling-heartbeat
+    #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/troubleshooting-auto-scaling.html#troubleshooting-auto-scaling-heartbeat
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_role_arn

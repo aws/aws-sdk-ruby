@@ -3500,6 +3500,18 @@ module Aws::DynamoDB
     #   The number of items exported.
     #   @return [Integer]
     #
+    # @!attribute [rw] export_type
+    #   Choice of whether to execute as a full export or incremental export.
+    #   Valid values are `FULL_EXPORT` or `INCREMENTAL_EXPORT`. If
+    #   `INCREMENTAL_EXPORT` is provided, the
+    #   `IncrementalExportSpecification` must also be used.
+    #   @return [String]
+    #
+    # @!attribute [rw] incremental_export_specification
+    #   Optional object containing the parameters specific to an incremental
+    #   export.
+    #   @return [Types::IncrementalExportSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExportDescription AWS API Documentation
     #
     class ExportDescription < Struct.new(
@@ -3521,7 +3533,9 @@ module Aws::DynamoDB
       :failure_message,
       :export_format,
       :billed_size_bytes,
-      :item_count)
+      :item_count,
+      :export_type,
+      :incremental_export_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3550,11 +3564,19 @@ module Aws::DynamoDB
     #   COMPLETED, or FAILED.
     #   @return [String]
     #
+    # @!attribute [rw] export_type
+    #   Choice of whether to execute as a full export or incremental export.
+    #   Valid values are `FULL_EXPORT` or `INCREMENTAL_EXPORT`. If
+    #   `INCREMENTAL_EXPORT` is provided, the
+    #   `IncrementalExportSpecification` must also be used.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExportSummary AWS API Documentation
     #
     class ExportSummary < Struct.new(
       :export_arn,
-      :export_status)
+      :export_status,
+      :export_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3621,6 +3643,18 @@ module Aws::DynamoDB
     #   are `DYNAMODB_JSON` or `ION`.
     #   @return [String]
     #
+    # @!attribute [rw] export_type
+    #   Choice of whether to execute as a full export or incremental export.
+    #   Valid values are `FULL_EXPORT` or `INCREMENTAL_EXPORT`. If
+    #   `INCREMENTAL_EXPORT` is provided, the
+    #   `IncrementalExportSpecification` must also be used.
+    #   @return [String]
+    #
+    # @!attribute [rw] incremental_export_specification
+    #   Optional object containing the parameters specific to an incremental
+    #   export.
+    #   @return [Types::IncrementalExportSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExportTableToPointInTimeInput AWS API Documentation
     #
     class ExportTableToPointInTimeInput < Struct.new(
@@ -3632,7 +3666,9 @@ module Aws::DynamoDB
       :s3_prefix,
       :s3_sse_algorithm,
       :s3_sse_kms_key_id,
-      :export_format)
+      :export_format,
+      :export_type,
+      :incremental_export_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4553,6 +4589,40 @@ module Aws::DynamoDB
     #
     class ImportTableOutput < Struct.new(
       :import_table_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Optional object containing the parameters specific to an incremental
+    # export.
+    #
+    # @!attribute [rw] export_from_time
+    #   Time in the past which provides the inclusive start range for the
+    #   export table's data, counted in seconds from the start of the Unix
+    #   epoch. The incremental export will reflect the table's state
+    #   including and after this point in time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] export_to_time
+    #   Time in the past which provides the exclusive end range for the
+    #   export table's data, counted in seconds from the start of the Unix
+    #   epoch. The incremental export will reflect the table's state just
+    #   prior to this point in time. If this is not provided, the latest
+    #   time with data available will be used.
+    #   @return [Time]
+    #
+    # @!attribute [rw] export_view_type
+    #   Choice of whether to output the previous item image prior to the
+    #   start time of the incremental export. Valid values are
+    #   `NEW_AND_OLD_IMAGES` and `NEW_IMAGES`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/IncrementalExportSpecification AWS API Documentation
+    #
+    class IncrementalExportSpecification < Struct.new(
+      :export_from_time,
+      :export_to_time,
+      :export_view_type)
       SENSITIVE = []
       include Aws::Structure
     end

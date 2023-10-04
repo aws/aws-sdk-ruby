@@ -427,6 +427,8 @@ module Aws::SageMakerFeatureStoreRuntime
     #   resp.records[0].record #=> Array
     #   resp.records[0].record[0].feature_name #=> String
     #   resp.records[0].record[0].value_as_string #=> String
+    #   resp.records[0].record[0].value_as_string_list #=> Array
+    #   resp.records[0].record[0].value_as_string_list[0] #=> String
     #   resp.records[0].expires_at #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].feature_group_name #=> String
@@ -553,6 +555,8 @@ module Aws::SageMakerFeatureStoreRuntime
     #   resp.record #=> Array
     #   resp.record[0].feature_name #=> String
     #   resp.record[0].value_as_string #=> String
+    #   resp.record[0].value_as_string_list #=> Array
+    #   resp.record[0].value_as_string_list[0] #=> String
     #   resp.expires_at #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/GetRecord AWS API Documentation
@@ -622,7 +626,8 @@ module Aws::SageMakerFeatureStoreRuntime
     #     record: [ # required
     #       {
     #         feature_name: "FeatureName", # required
-    #         value_as_string: "ValueAsString", # required
+    #         value_as_string: "ValueAsString",
+    #         value_as_string_list: ["ValueAsString"],
     #       },
     #     ],
     #     target_stores: ["OnlineStore"], # accepts OnlineStore, OfflineStore
@@ -654,7 +659,7 @@ module Aws::SageMakerFeatureStoreRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemakerfeaturestoreruntime'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

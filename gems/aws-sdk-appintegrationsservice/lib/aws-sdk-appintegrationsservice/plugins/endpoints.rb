@@ -56,6 +56,8 @@ module Aws::AppIntegrationsService
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :create_application
+            Aws::AppIntegrationsService::Endpoints::CreateApplication.build(context)
           when :create_data_integration
             Aws::AppIntegrationsService::Endpoints::CreateDataIntegration.build(context)
           when :create_event_integration
@@ -64,10 +66,14 @@ module Aws::AppIntegrationsService
             Aws::AppIntegrationsService::Endpoints::DeleteDataIntegration.build(context)
           when :delete_event_integration
             Aws::AppIntegrationsService::Endpoints::DeleteEventIntegration.build(context)
+          when :get_application
+            Aws::AppIntegrationsService::Endpoints::GetApplication.build(context)
           when :get_data_integration
             Aws::AppIntegrationsService::Endpoints::GetDataIntegration.build(context)
           when :get_event_integration
             Aws::AppIntegrationsService::Endpoints::GetEventIntegration.build(context)
+          when :list_applications
+            Aws::AppIntegrationsService::Endpoints::ListApplications.build(context)
           when :list_data_integration_associations
             Aws::AppIntegrationsService::Endpoints::ListDataIntegrationAssociations.build(context)
           when :list_data_integrations
@@ -82,6 +88,8 @@ module Aws::AppIntegrationsService
             Aws::AppIntegrationsService::Endpoints::TagResource.build(context)
           when :untag_resource
             Aws::AppIntegrationsService::Endpoints::UntagResource.build(context)
+          when :update_application
+            Aws::AppIntegrationsService::Endpoints::UpdateApplication.build(context)
           when :update_data_integration
             Aws::AppIntegrationsService::Endpoints::UpdateDataIntegration.build(context)
           when :update_event_integration

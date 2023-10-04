@@ -2076,6 +2076,22 @@
         {"shape":"ThrottlingException"}
       ]
     },
+    "ListSecurityProfileApplications":{
+      "name":"ListSecurityProfileApplications",
+      "http":{
+        "method":"GET",
+        "requestUri":"/security-profiles-applications/{InstanceId}/{SecurityProfileId}"
+      },
+      "input":{"shape":"ListSecurityProfileApplicationsRequest"},
+      "output":{"shape":"ListSecurityProfileApplicationsResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
     "ListSecurityProfilePermissions":{
       "name":"ListSecurityProfilePermissions",
       "http":{
@@ -3617,6 +3633,24 @@
         "AwaitAnswerMachinePrompt":{"shape":"Boolean"}
       }
     },
+    "Application":{
+      "type":"structure",
+      "members":{
+        "Namespace":{"shape":"Namespace"},
+        "ApplicationPermissions":{"shape":"ApplicationPermissions"}
+      }
+    },
+    "ApplicationPermissions":{
+      "type":"list",
+      "member":{"shape":"Permission"},
+      "max":10,
+      "min":1
+    },
+    "Applications":{
+      "type":"list",
+      "member":{"shape":"Application"},
+      "max":10
+    },
     "ApproximateTotalCount":{"type":"long"},
     "AssignContactCategoryActionDefinition":{
       "type":"structure",
@@ -4659,7 +4693,8 @@
         },
         "Tags":{"shape":"TagMap"},
         "AllowedAccessControlTags":{"shape":"AllowedAccessControlTags"},
-        "TagRestrictedResources":{"shape":"TagRestrictedResourceList"}
+        "TagRestrictedResources":{"shape":"TagRestrictedResourceList"},
+        "Applications":{"shape":"Applications"}
       }
     },
     "CreateSecurityProfileResponse":{
@@ -6915,7 +6950,8 @@
         "OnZendeskTicketCreate",
         "OnZendeskTicketStatusUpdate",
         "OnSalesforceCaseCreate",
-        "OnContactEvaluationSubmit"
+        "OnContactEvaluationSubmit",
+        "OnMetricDataUpdate"
       ]
     },
     "FilterV2":{
@@ -7107,6 +7143,7 @@
         "ResourceArn":{"shape":"ARN"},
         "StartTime":{"shape":"Timestamp"},
         "EndTime":{"shape":"Timestamp"},
+        "Interval":{"shape":"IntervalDetails"},
         "Filters":{"shape":"FiltersV2List"},
         "Groupings":{"shape":"GroupingsV2"},
         "Metrics":{"shape":"MetricsV2"},
@@ -7681,7 +7718,8 @@
         "PINPOINT_APP",
         "WISDOM_ASSISTANT",
         "WISDOM_KNOWLEDGE_BASE",
-        "CASES_DOMAIN"
+        "CASES_DOMAIN",
+        "APPLICATION"
       ]
     },
     "InternalServiceException":{
@@ -7691,6 +7729,24 @@
       },
       "error":{"httpStatusCode":500},
       "exception":true
+    },
+    "IntervalDetails":{
+      "type":"structure",
+      "members":{
+        "TimeZone":{"shape":"String"},
+        "IntervalPeriod":{"shape":"IntervalPeriod"}
+      }
+    },
+    "IntervalPeriod":{
+      "type":"string",
+      "enum":[
+        "FIFTEEN_MIN",
+        "THIRTY_MIN",
+        "HOUR",
+        "DAY",
+        "WEEK",
+        "TOTAL"
+      ]
     },
     "InvalidContactFlowException":{
       "type":"structure",
@@ -8699,6 +8755,42 @@
         "NextToken":{"shape":"NextToken"}
       }
     },
+    "ListSecurityProfileApplicationsRequest":{
+      "type":"structure",
+      "required":[
+        "SecurityProfileId",
+        "InstanceId"
+      ],
+      "members":{
+        "SecurityProfileId":{
+          "shape":"SecurityProfileId",
+          "location":"uri",
+          "locationName":"SecurityProfileId"
+        },
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "MaxResults":{
+          "shape":"MaxResult1000",
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListSecurityProfileApplicationsResponse":{
+      "type":"structure",
+      "members":{
+        "Applications":{"shape":"Applications"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
     "ListSecurityProfilePermissionsRequest":{
       "type":"structure",
       "required":[
@@ -9127,7 +9219,8 @@
       "type":"structure",
       "members":{
         "MetricFilterKey":{"shape":"String"},
-        "MetricFilterValues":{"shape":"MetricFilterValueList"}
+        "MetricFilterValues":{"shape":"MetricFilterValueList"},
+        "Negate":{"shape":"Boolean"}
       }
     },
     "MetricFilterValueList":{
@@ -9141,11 +9234,20 @@
       "member":{"shape":"MetricFilterV2"},
       "max":2
     },
+    "MetricInterval":{
+      "type":"structure",
+      "members":{
+        "Interval":{"shape":"IntervalPeriod"},
+        "StartTime":{"shape":"Timestamp"},
+        "EndTime":{"shape":"Timestamp"}
+      }
+    },
     "MetricNameV2":{"type":"string"},
     "MetricResultV2":{
       "type":"structure",
       "members":{
         "Dimensions":{"shape":"DimensionsV2Map"},
+        "MetricInterval":{"shape":"MetricInterval"},
         "Collections":{"shape":"MetricDataCollectionsV2"}
       }
     },
@@ -9212,6 +9314,11 @@
       "max":128,
       "min":1,
       "pattern":"(^[\\S].*[\\S]$)|(^[\\S]$)"
+    },
+    "Namespace":{
+      "type":"string",
+      "max":128,
+      "min":1
     },
     "NextToken":{"type":"string"},
     "NextToken2500":{
@@ -9387,6 +9494,11 @@
       "type":"integer",
       "max":100,
       "min":0
+    },
+    "Permission":{
+      "type":"string",
+      "max":128,
+      "min":1
     },
     "PermissionsList":{
       "type":"list",
@@ -12513,7 +12625,8 @@
           "locationName":"InstanceId"
         },
         "AllowedAccessControlTags":{"shape":"AllowedAccessControlTags"},
-        "TagRestrictedResources":{"shape":"TagRestrictedResourceList"}
+        "TagRestrictedResources":{"shape":"TagRestrictedResourceList"},
+        "Applications":{"shape":"Applications"}
       }
     },
     "UpdateTaskTemplateRequest":{

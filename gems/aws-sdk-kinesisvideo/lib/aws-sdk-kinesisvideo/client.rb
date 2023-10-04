@@ -830,8 +830,15 @@ module Aws::KinesisVideo
       req.send_request(options)
     end
 
+    # This API is related to [WebRTC Ingestion][1] and is only available in
+    # the `us-west-2` region.
+    #
     # Returns the most current information about the channel. Specify the
     # `ChannelName` or `ChannelARN` in the input.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kinesisvideostreams-webrtc-dg/latest/devguide/webrtc-ingestion.html
     #
     # @option params [String] :channel_name
     #   The name of the channel.
@@ -1367,6 +1374,11 @@ module Aws::KinesisVideo
     # minutes. After 15 minutes, the status will transition into the
     # `SYNC_FAILED` state.
     #
+    # To move an edge configuration from one device to another, use
+    # DeleteEdgeConfiguration to delete the current edge configuration. You
+    # can then invoke StartEdgeConfigurationUpdate with an updated Hub
+    # Device ARN.
+    #
     # @option params [String] :stream_name
     #   The name of the stream whose edge configuration you want to update.
     #   Specify either the `StreamName` or the `StreamARN`.
@@ -1726,6 +1738,9 @@ module Aws::KinesisVideo
       req.send_request(options)
     end
 
+    # This API is related to [WebRTC Ingestion][1] and is only available in
+    # the `us-west-2` region.
+    #
     # Associates a `SignalingChannel` to a stream to store the media. There
     # are two signaling modes that can specified :
     #
@@ -1740,6 +1755,10 @@ module Aws::KinesisVideo
     # session. You must call the `JoinStorageSession` API to trigger an SDP
     # offer send and establish a connection between a peer and the storage
     # session.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kinesisvideostreams-webrtc-dg/latest/devguide/webrtc-ingestion.html
     #
     # @option params [required, String] :channel_arn
     #   The Amazon Resource Name (ARN) of the channel.
@@ -1933,7 +1952,7 @@ module Aws::KinesisVideo
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisvideo'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

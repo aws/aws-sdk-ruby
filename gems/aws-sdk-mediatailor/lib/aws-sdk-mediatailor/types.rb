@@ -146,6 +146,22 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # A location at which a zero-duration ad marker was detected in a VOD
+    # source manifest.
+    #
+    # @!attribute [rw] offset_millis
+    #   The offset in milliseconds from the start of the VOD source at which
+    #   an ad marker was detected.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/AdBreakOpportunity AWS API Documentation
+    #
+    class AdBreakOpportunity < Struct.new(
+      :offset_millis)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # For HLS, when set to `true`, MediaTailor passes through
     # `EXT-X-CUE-IN`, `EXT-X-CUE-OUT`, and `EXT-X-SPLICEPOINT-SCTE35` ad
     # markers from the origin manifest to the MediaTailor personalized
@@ -1748,6 +1764,10 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # @!attribute [rw] ad_break_opportunities
+    #   The ad break opportunities within the VOD source.
+    #   @return [Array<Types::AdBreakOpportunity>]
+    #
     # @!attribute [rw] arn
     #   The ARN of the VOD source.
     #   @return [String]
@@ -1786,6 +1806,7 @@ module Aws::MediaTailor
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DescribeVodSourceResponse AWS API Documentation
     #
     class DescribeVodSourceResponse < Struct.new(
+      :ad_break_opportunities,
       :arn,
       :creation_time,
       :http_package_configurations,

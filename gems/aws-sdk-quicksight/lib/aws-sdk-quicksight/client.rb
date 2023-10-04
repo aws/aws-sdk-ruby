@@ -1645,14 +1645,14 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     folder_id: "RestrictiveResourceId", # required
     #     member_id: "RestrictiveResourceId", # required
-    #     member_type: "DASHBOARD", # required, accepts DASHBOARD, ANALYSIS, DATASET
+    #     member_type: "DASHBOARD", # required, accepts DASHBOARD, ANALYSIS, DATASET, TOPIC
     #   })
     #
     # @example Response structure
     #
     #   resp.status #=> Integer
     #   resp.folder_member.member_id #=> String
-    #   resp.folder_member.member_type #=> String, one of "DASHBOARD", "ANALYSIS", "DATASET"
+    #   resp.folder_member.member_type #=> String, one of "DASHBOARD", "ANALYSIS", "DATASET", "TOPIC"
     #   resp.request_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateFolderMembership AWS API Documentation
@@ -3150,7 +3150,7 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     folder_id: "RestrictiveResourceId", # required
     #     member_id: "RestrictiveResourceId", # required
-    #     member_type: "DASHBOARD", # required, accepts DASHBOARD, ANALYSIS, DATASET
+    #     member_type: "DASHBOARD", # required, accepts DASHBOARD, ANALYSIS, DATASET, TOPIC
     #   })
     #
     # @example Response structure
@@ -8831,6 +8831,9 @@ module Aws::QuickSight
     # @option params [String] :external_login_id
     #   The identity ID for a user in the external login provider.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to associate with the user.
+    #
     # @return [Types::RegisterUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterUserResponse#user #user} => Types::User
@@ -8853,6 +8856,12 @@ module Aws::QuickSight
     #     external_login_federation_provider_type: "String",
     #     custom_federation_provider_url: "String",
     #     external_login_id: "String",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -9852,15 +9861,15 @@ module Aws::QuickSight
     #
     # You can associate as many as 50 tags with a resource. Amazon
     # QuickSight supports tagging on data set, data source, dashboard,
-    # template, and topic.
+    # template, topic, and user.
     #
     # Tagging for Amazon QuickSight works in a similar way to tagging for
     # other Amazon Web Services services, except for the following:
     #
-    # * You can't use tags to track costs for Amazon QuickSight. This
-    #   isn't possible because you can't tag the resources that Amazon
-    #   QuickSight costs are based on, for example Amazon QuickSight storage
-    #   capacity (SPICE), number of users, type of users, and usage metrics.
+    # * Tags are used to track costs for users in Amazon QuickSight. You
+    #   can't tag other resources that Amazon QuickSight costs are based
+    #   on, such as storage capacoty (SPICE), session usage, alert
+    #   consumption, or reporting units.
     #
     # * Amazon QuickSight doesn't currently support the tag editor for
     #   Resource Groups.
@@ -12529,7 +12538,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

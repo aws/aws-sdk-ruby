@@ -1071,6 +1071,8 @@ module Aws::Outposts
     #   resp.assets[0].asset_type #=> String, one of "COMPUTE"
     #   resp.assets[0].compute_attributes.host_id #=> String
     #   resp.assets[0].compute_attributes.state #=> String, one of "ACTIVE", "ISOLATED", "RETIRING"
+    #   resp.assets[0].compute_attributes.instance_families #=> Array
+    #   resp.assets[0].compute_attributes.instance_families[0] #=> String
     #   resp.assets[0].asset_location.rack_elevation #=> Float
     #   resp.next_token #=> String
     #
@@ -1831,7 +1833,7 @@ module Aws::Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

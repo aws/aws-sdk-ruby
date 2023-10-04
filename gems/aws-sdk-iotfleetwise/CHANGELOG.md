@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2023-09-28)
+------------------
+
+* Feature - AWS IoT FleetWise now supports encryption through a customer managed AWS KMS key. The PutEncryptionConfiguration and GetEncryptionConfiguration APIs were added.
+
+1.14.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.13.0 (2023-07-11)
 ------------------
 

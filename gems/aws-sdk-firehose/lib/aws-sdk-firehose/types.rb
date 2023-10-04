@@ -583,6 +583,25 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # The authentication configuration of the Amazon MSK cluster.
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role used to access the Amazon MSK cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] connectivity
+    #   The type of connectivity used to access the Amazon MSK cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/AuthenticationConfiguration AWS API Documentation
+    #
+    class AuthenticationConfiguration < Struct.new(
+      :role_arn,
+      :connectivity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes hints for the buffering to perform before delivering data to
     # the destination. These options are treated as hints, and therefore
     # Kinesis Data Firehose might choose to use different values when it is
@@ -794,6 +813,11 @@ module Aws::Firehose
     #   Service. You can specify only one destination.
     #   @return [Types::AmazonOpenSearchServerlessDestinationConfiguration]
     #
+    # @!attribute [rw] msk_source_configuration
+    #   The configuration for the Amazon MSK cluster to be used as the
+    #   source for a delivery stream.
+    #   @return [Types::MSKSourceConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CreateDeliveryStreamInput AWS API Documentation
     #
     class CreateDeliveryStreamInput < Struct.new(
@@ -809,7 +833,8 @@ module Aws::Firehose
       :splunk_destination_configuration,
       :http_endpoint_destination_configuration,
       :tags,
-      :amazon_open_search_serverless_destination_configuration)
+      :amazon_open_search_serverless_destination_configuration,
+      :msk_source_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2685,6 +2710,62 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # The configuration for the Amazon MSK cluster to be used as the source
+    # for a delivery stream.
+    #
+    # @!attribute [rw] msk_cluster_arn
+    #   The ARN of the Amazon MSK cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_name
+    #   The topic name within the Amazon MSK cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_configuration
+    #   The authentication configuration of the Amazon MSK cluster.
+    #   @return [Types::AuthenticationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/MSKSourceConfiguration AWS API Documentation
+    #
+    class MSKSourceConfiguration < Struct.new(
+      :msk_cluster_arn,
+      :topic_name,
+      :authentication_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the Amazon MSK cluster used as the source for a Kinesis
+    # Data Firehose delivery stream.
+    #
+    # @!attribute [rw] msk_cluster_arn
+    #   The ARN of the Amazon MSK cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_name
+    #   The topic name within the Amazon MSK cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_configuration
+    #   The authentication configuration of the Amazon MSK cluster.
+    #   @return [Types::AuthenticationConfiguration]
+    #
+    # @!attribute [rw] delivery_start_timestamp
+    #   Kinesis Data Firehose starts retrieving records from the topic
+    #   within the Amazon MSK cluster starting with this timestamp.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/MSKSourceDescription AWS API Documentation
+    #
+    class MSKSourceDescription < Struct.new(
+      :msk_cluster_arn,
+      :topic_name,
+      :authentication_configuration,
+      :delivery_start_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The OpenX SerDe. Used by Kinesis Data Firehose for deserializing data,
     # which means converting it from the JSON format in preparation for
     # serializing it to the Parquet or ORC format. This is one of two
@@ -3735,10 +3816,16 @@ module Aws::Firehose
     #   stream.
     #   @return [Types::KinesisStreamSourceDescription]
     #
+    # @!attribute [rw] msk_source_description
+    #   The configuration description for the Amazon MSK cluster to be used
+    #   as the source for a delivery stream.
+    #   @return [Types::MSKSourceDescription]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SourceDescription AWS API Documentation
     #
     class SourceDescription < Struct.new(
-      :kinesis_stream_source_description)
+      :kinesis_stream_source_description,
+      :msk_source_description)
       SENSITIVE = []
       include Aws::Structure
     end

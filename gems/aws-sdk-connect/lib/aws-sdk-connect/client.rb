@@ -1111,7 +1111,15 @@ module Aws::Connect
     #   The description of the flow.
     #
     # @option params [required, String] :content
-    #   The content of the flow.
+    #   The JSON string that represents the content of the flow. For an
+    #   example, see [Example contact flow in Amazon Connect Flow
+    #   language][1].
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 256000.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
@@ -1540,7 +1548,7 @@ module Aws::Connect
     #
     #   resp = client.create_integration_association({
     #     instance_id: "InstanceId", # required
-    #     integration_type: "EVENT", # required, accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, CASES_DOMAIN
+    #     integration_type: "EVENT", # required, accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, CASES_DOMAIN, APPLICATION
     #     integration_arn: "ARN", # required
     #     source_application_url: "URI",
     #     source_application_name: "SourceApplicationName",
@@ -1810,7 +1818,7 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :name
-    #   The name of the quick connect.
+    #   A unique name of the quick connect.
     #
     # @option params [String] :description
     #   The description of the quick connect.
@@ -2021,7 +2029,7 @@ module Aws::Connect
     #     instance_id: "InstanceId", # required
     #     name: "RuleName", # required
     #     trigger_event_source: { # required
-    #       event_source_name: "OnPostCallAnalysisAvailable", # required, accepts OnPostCallAnalysisAvailable, OnRealTimeCallAnalysisAvailable, OnPostChatAnalysisAvailable, OnZendeskTicketCreate, OnZendeskTicketStatusUpdate, OnSalesforceCaseCreate, OnContactEvaluationSubmit
+    #       event_source_name: "OnPostCallAnalysisAvailable", # required, accepts OnPostCallAnalysisAvailable, OnRealTimeCallAnalysisAvailable, OnPostChatAnalysisAvailable, OnZendeskTicketCreate, OnZendeskTicketStatusUpdate, OnSalesforceCaseCreate, OnContactEvaluationSubmit, OnMetricDataUpdate
     #       integration_association_id: "IntegrationAssociationId",
     #     },
     #     function: "RuleFunction", # required
@@ -2076,9 +2084,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Creates a security profile.
     #
     # @option params [required, String] :security_profile_name
@@ -2117,6 +2122,13 @@ module Aws::Connect
     #   to in Amazon Connect. Following are acceptable ResourceNames: `User`
     #   \| `SecurityProfile` \| `Queue` \| `RoutingProfile`
     #
+    # @option params [Array<Types::Application>] :applications
+    #   This API is in preview release for Amazon Connect and is subject to
+    #   change.
+    #
+    #   A list of third party applications that the security profile will give
+    #   access to.
+    #
     # @return [Types::CreateSecurityProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSecurityProfileResponse#security_profile_id #security_profile_id} => String
@@ -2136,6 +2148,12 @@ module Aws::Connect
     #       "SecurityProfilePolicyKey" => "SecurityProfilePolicyValue",
     #     },
     #     tag_restricted_resources: ["TagRestrictedResourceName"],
+    #     applications: [
+    #       {
+    #         namespace: "Namespace",
+    #         application_permissions: ["Permission"],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -3255,9 +3273,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Deletes a security profile.
     #
     # @option params [required, String] :instance_id
@@ -4425,7 +4440,7 @@ module Aws::Connect
     #   resp.rule.name #=> String
     #   resp.rule.rule_id #=> String
     #   resp.rule.rule_arn #=> String
-    #   resp.rule.trigger_event_source.event_source_name #=> String, one of "OnPostCallAnalysisAvailable", "OnRealTimeCallAnalysisAvailable", "OnPostChatAnalysisAvailable", "OnZendeskTicketCreate", "OnZendeskTicketStatusUpdate", "OnSalesforceCaseCreate", "OnContactEvaluationSubmit"
+    #   resp.rule.trigger_event_source.event_source_name #=> String, one of "OnPostCallAnalysisAvailable", "OnRealTimeCallAnalysisAvailable", "OnPostChatAnalysisAvailable", "OnZendeskTicketCreate", "OnZendeskTicketStatusUpdate", "OnSalesforceCaseCreate", "OnContactEvaluationSubmit", "OnMetricDataUpdate"
     #   resp.rule.trigger_event_source.integration_association_id #=> String
     #   resp.rule.function #=> String
     #   resp.rule.actions #=> Array
@@ -4461,9 +4476,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Gets basic information about the security profle.
     #
     # @option params [required, String] :security_profile_id
@@ -5999,8 +6011,8 @@ module Aws::Connect
     # previous version of this API. It has new metrics, offers filtering at
     # a metric level, and offers the ability to filter and group data by
     # channels, queues, routing profiles, agents, and agent hierarchy
-    # levels. It can retrieve historical data for the last 35 days, in
-    # 24-hour intervals.
+    # levels. It can retrieve historical data for the last 3 months, at
+    # varying intervals.
     #
     # For a description of the historical metrics that are supported by
     # `GetMetricDataV2` and `GetMetricData`, see [Historical metrics
@@ -6018,10 +6030,10 @@ module Aws::Connect
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
     #   The timestamp, in UNIX Epoch time format, at which to start the
     #   reporting interval for the retrieval of historical metrics data. The
-    #   time must be before the end time timestamp. The time range between the
-    #   start and end time must be less than 24 hours. The start time cannot
-    #   be earlier than 35 days before the time of the request. Historical
-    #   metrics are available for 35 days.
+    #   time must be before the end time timestamp. The start and end time
+    #   depends on the `IntervalPeriod` selected. By default the time range
+    #   between start and end time is 35 days. Historical metrics are
+    #   available for 3 months.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   The timestamp, in UNIX Epoch time format, at which to end the
@@ -6029,8 +6041,41 @@ module Aws::Connect
     #   time must be later than the start time timestamp. It cannot be later
     #   than the current timestamp.
     #
-    #   The time range between the start and end time must be less than 24
-    #   hours.
+    # @option params [Types::IntervalDetails] :interval
+    #   The interval period and timezone to apply to returned metrics.
+    #
+    #   * `IntervalPeriod`: An aggregated grouping applied to request metrics.
+    #     Valid `IntervalPeriod` values are: `FIFTEEN_MIN` \| `THIRTY_MIN` \|
+    #     `HOUR` \| `DAY` \| `WEEK` \| `TOTAL`.
+    #
+    #     For example, if `IntervalPeriod` is selected `THIRTY_MIN`,
+    #     `StartTime` and `EndTime` differs by 1 day, then Amazon Connect
+    #     returns 48 results in the response. Each result is aggregated by the
+    #     THIRTY\_MIN period. By default Amazon Connect aggregates results
+    #     based on the `TOTAL` interval period.
+    #
+    #     The following list describes restrictions on `StartTime` and
+    #     `EndTime` based on which `IntervalPeriod` is requested.
+    #
+    #     * `FIFTEEN_MIN`: The difference between `StartTime` and `EndTime`
+    #       must be less than 3 days.
+    #
+    #     * `THIRTY_MIN`: The difference between `StartTime` and `EndTime`
+    #       must be less than 3 days.
+    #
+    #     * `HOUR`: The difference between `StartTime` and `EndTime` must be
+    #       less than 3 days.
+    #
+    #     * `DAY`: The difference between `StartTime` and `EndTime` must be
+    #       less than 35 days.
+    #
+    #     * `WEEK`: The difference between `StartTime` and `EndTime` must be
+    #       less than 35 days.
+    #
+    #     * `TOTAL`: The difference between `StartTime` and `EndTime` must be
+    #       less than 35 days.
+    #
+    #   * `TimeZone`: The timezone applied to requested metrics.
     #
     # @option params [required, Array<Types::FilterV2>] :filters
     #   The filters to apply to returned metrics. You can filter on the
@@ -6097,6 +6142,13 @@ module Aws::Connect
     #   description of each metric, see [Historical metrics definitions][1] in
     #   the *Amazon Connect Administrator's Guide*.
     #
+    #   ABANDONMENT\_RATE
+    #
+    #   : Unit: Percent
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
     #   AGENT\_ADHERENT\_TIME
     #
     #   : This metric is available only in Amazon Web Services Regions where
@@ -6113,6 +6165,16 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
+    #
+    #   AGENT\_NON\_RESPONSE\_WITHOUT\_CUSTOMER\_ABANDONS
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #     Data for this metric is available starting from October 1, 2023
+    #     0:00:00 GMT.
     #
     #   AGENT\_OCCUPANCY
     #
@@ -6169,16 +6231,10 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
     #
-    #   AVG\_AGENT\_CONNECTING\_TIME
+    #     <note markdown="1"> The `Negate` key in Metric Level Filters is not applicable for this
+    #     metric.
     #
-    #   : Unit: Seconds
-    #
-    #     Valid metric filter key: `INITIATION_METHOD`. For now, this metric
-    #     only supports the following as `INITIATION_METHOD`: `INBOUND` \|
-    #     `OUTBOUND` \| `CALLBACK` \| `API`
-    #
-    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy
+    #      </note>
     #
     #   AVG\_CONTACT\_DURATION
     #
@@ -6229,6 +6285,13 @@ module Aws::Connect
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
     #      </note>
+    #
+    #   AVG\_HOLD\_TIME\_ALL\_CONTACTS
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
     #
     #   AVG\_HOLDS
     #
@@ -6299,6 +6362,12 @@ module Aws::Connect
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
     #      </note>
+    #
+    #   AVG\_RESOLUTION\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile
     #
     #   AVG\_TALK\_TIME
     #
@@ -6376,6 +6445,16 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
+    #
+    #   CONTACTS\_RESOLVED\_IN\_X
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #
+    #     Threshold: For `ThresholdValue` enter any whole number from 1 to
+    #     604800 (inclusive), in seconds. For `Comparison`, you must enter
+    #     `LT` (for "Less than").
     #
     #   CONTACTS\_TRANSFERRED\_OUT
     #
@@ -6481,6 +6560,10 @@ module Aws::Connect
     #     resource_arn: "ARN", # required
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
+    #     interval: {
+    #       time_zone: "String",
+    #       interval_period: "FIFTEEN_MIN", # accepts FIFTEEN_MIN, THIRTY_MIN, HOUR, DAY, WEEK, TOTAL
+    #     },
     #     filters: [ # required
     #       {
     #         filter_key: "ResourceArnOrId",
@@ -6501,6 +6584,7 @@ module Aws::Connect
     #           {
     #             metric_filter_key: "String",
     #             metric_filter_values: ["String"],
+    #             negate: false,
     #           },
     #         ],
     #       },
@@ -6515,6 +6599,9 @@ module Aws::Connect
     #   resp.metric_results #=> Array
     #   resp.metric_results[0].dimensions #=> Hash
     #   resp.metric_results[0].dimensions["DimensionsV2Key"] #=> String
+    #   resp.metric_results[0].metric_interval.interval #=> String, one of "FIFTEEN_MIN", "THIRTY_MIN", "HOUR", "DAY", "WEEK", "TOTAL"
+    #   resp.metric_results[0].metric_interval.start_time #=> Time
+    #   resp.metric_results[0].metric_interval.end_time #=> Time
     #   resp.metric_results[0].collections #=> Array
     #   resp.metric_results[0].collections[0].metric.name #=> String
     #   resp.metric_results[0].collections[0].metric.threshold #=> Array
@@ -6524,6 +6611,7 @@ module Aws::Connect
     #   resp.metric_results[0].collections[0].metric.metric_filters[0].metric_filter_key #=> String
     #   resp.metric_results[0].collections[0].metric.metric_filters[0].metric_filter_values #=> Array
     #   resp.metric_results[0].collections[0].metric.metric_filters[0].metric_filter_values[0] #=> String
+    #   resp.metric_results[0].collections[0].metric.metric_filters[0].negate #=> Boolean
     #   resp.metric_results[0].collections[0].value #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetMetricDataV2 AWS API Documentation
@@ -7568,7 +7656,7 @@ module Aws::Connect
     #
     #   resp = client.list_integration_associations({
     #     instance_id: "InstanceId", # required
-    #     integration_type: "EVENT", # accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, CASES_DOMAIN
+    #     integration_type: "EVENT", # accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, CASES_DOMAIN, APPLICATION
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -7579,7 +7667,7 @@ module Aws::Connect
     #   resp.integration_association_summary_list[0].integration_association_id #=> String
     #   resp.integration_association_summary_list[0].integration_association_arn #=> String
     #   resp.integration_association_summary_list[0].instance_id #=> String
-    #   resp.integration_association_summary_list[0].integration_type #=> String, one of "EVENT", "VOICE_ID", "PINPOINT_APP", "WISDOM_ASSISTANT", "WISDOM_KNOWLEDGE_BASE", "CASES_DOMAIN"
+    #   resp.integration_association_summary_list[0].integration_type #=> String, one of "EVENT", "VOICE_ID", "PINPOINT_APP", "WISDOM_ASSISTANT", "WISDOM_KNOWLEDGE_BASE", "CASES_DOMAIN", "APPLICATION"
     #   resp.integration_association_summary_list[0].integration_arn #=> String
     #   resp.integration_association_summary_list[0].source_application_url #=> String
     #   resp.integration_association_summary_list[0].source_application_name #=> String
@@ -7741,6 +7829,17 @@ module Aws::Connect
     #
     # @option params [Array<String>] :phone_number_types
     #   The type of phone number.
+    #
+    #   <note markdown="1"> We recommend using [ListPhoneNumbersV2][1] to return phone number
+    #   types. While ListPhoneNumbers returns number types `UIFN`, `SHARED`,
+    #   `THIRD_PARTY_TF`, and `THIRD_PARTY_DID`, it incorrectly lists them as
+    #   `TOLL_FREE` or `DID`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html
     #
     # @option params [Array<String>] :phone_number_country_codes
     #   The ISO country code.
@@ -8265,7 +8364,7 @@ module Aws::Connect
     #   resp = client.list_rules({
     #     instance_id: "InstanceId", # required
     #     publish_status: "DRAFT", # accepts DRAFT, PUBLISHED
-    #     event_source_name: "OnPostCallAnalysisAvailable", # accepts OnPostCallAnalysisAvailable, OnRealTimeCallAnalysisAvailable, OnPostChatAnalysisAvailable, OnZendeskTicketCreate, OnZendeskTicketStatusUpdate, OnSalesforceCaseCreate, OnContactEvaluationSubmit
+    #     event_source_name: "OnPostCallAnalysisAvailable", # accepts OnPostCallAnalysisAvailable, OnRealTimeCallAnalysisAvailable, OnPostChatAnalysisAvailable, OnZendeskTicketCreate, OnZendeskTicketStatusUpdate, OnSalesforceCaseCreate, OnContactEvaluationSubmit, OnMetricDataUpdate
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -8276,7 +8375,7 @@ module Aws::Connect
     #   resp.rule_summary_list[0].name #=> String
     #   resp.rule_summary_list[0].rule_id #=> String
     #   resp.rule_summary_list[0].rule_arn #=> String
-    #   resp.rule_summary_list[0].event_source_name #=> String, one of "OnPostCallAnalysisAvailable", "OnRealTimeCallAnalysisAvailable", "OnPostChatAnalysisAvailable", "OnZendeskTicketCreate", "OnZendeskTicketStatusUpdate", "OnSalesforceCaseCreate", "OnContactEvaluationSubmit"
+    #   resp.rule_summary_list[0].event_source_name #=> String, one of "OnPostCallAnalysisAvailable", "OnRealTimeCallAnalysisAvailable", "OnPostChatAnalysisAvailable", "OnZendeskTicketCreate", "OnZendeskTicketStatusUpdate", "OnSalesforceCaseCreate", "OnContactEvaluationSubmit", "OnMetricDataUpdate"
     #   resp.rule_summary_list[0].publish_status #=> String, one of "DRAFT", "PUBLISHED"
     #   resp.rule_summary_list[0].action_summaries #=> Array
     #   resp.rule_summary_list[0].action_summaries[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION"
@@ -8347,9 +8446,56 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
+    # Returns a list of third party applications in a specific security
+    # profile.
     #
+    # @option params [required, String] :security_profile_id
+    #   The security profile identifier.
+    #
+    # @option params [required, String] :instance_id
+    #   The instance identifier.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. The next set of results can be
+    #   retrieved by using the token value returned in the previous response
+    #   when making the next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListSecurityProfileApplicationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSecurityProfileApplicationsResponse#applications #applications} => Array&lt;Types::Application&gt;
+    #   * {Types::ListSecurityProfileApplicationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_security_profile_applications({
+    #     security_profile_id: "SecurityProfileId", # required
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.applications #=> Array
+    #   resp.applications[0].namespace #=> String
+    #   resp.applications[0].application_permissions #=> Array
+    #   resp.applications[0].application_permissions[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfileApplications AWS API Documentation
+    #
+    # @overload list_security_profile_applications(params = {})
+    # @param [Hash] params ({})
+    def list_security_profile_applications(params = {}, options = {})
+      req = build_request(:list_security_profile_applications, params)
+      req.send_request(options)
+    end
+
     # Lists the permissions granted to a security profile.
     #
     # @option params [required, String] :security_profile_id
@@ -11481,8 +11627,11 @@ module Aws::Connect
     #   The identifier of the flow.
     #
     # @option params [required, String] :content
-    #   The JSON string that represents flow's content. For an example, see
-    #   [Example contact flow in Amazon Connect Flow language][1].
+    #   The JSON string that represents the content of the flow. For an
+    #   example, see [Example contact flow in Amazon Connect Flow
+    #   language][1].
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 256000.
     #
     #
     #
@@ -11565,7 +11714,13 @@ module Aws::Connect
     #   The identifier of the flow module.
     #
     # @option params [required, String] :content
-    #   The content of the flow module.
+    #   The JSON string that represents the content of the flow. For an
+    #   example, see [Example contact flow in Amazon Connect Flow
+    #   language][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -12830,9 +12985,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Updates a security profile.
     #
     # @option params [String] :description
@@ -12865,6 +13017,12 @@ module Aws::Connect
     #   The list of resources that a security profile applies tag restrictions
     #   to in Amazon Connect.
     #
+    # @option params [Array<Types::Application>] :applications
+    #   This API is in preview release for Amazon Connect and is subject to
+    #   change.
+    #
+    #   A list of the third party application's metadata.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -12878,6 +13036,12 @@ module Aws::Connect
     #       "SecurityProfilePolicyKey" => "SecurityProfilePolicyValue",
     #     },
     #     tag_restricted_resources: ["TagRestrictedResourceName"],
+    #     applications: [
+    #       {
+    #         namespace: "Namespace",
+    #         application_permissions: ["Permission"],
+    #       },
+    #     ],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateSecurityProfile AWS API Documentation
@@ -13514,7 +13678,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.125.0'
+      context[:gem_version] = '1.129.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

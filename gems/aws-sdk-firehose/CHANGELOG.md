@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2023-09-27)
+------------------
+
+* Feature - Features : Adding support for new data ingestion source to Kinesis Firehose - AWS Managed Services Kafka.
+
 1.57.0 (2023-09-13)
 ------------------
 

@@ -106,6 +106,8 @@ module Aws::AppRunner
             Aws::AppRunner::Endpoints::ListOperations.build(context)
           when :list_services
             Aws::AppRunner::Endpoints::ListServices.build(context)
+          when :list_services_for_auto_scaling_configuration
+            Aws::AppRunner::Endpoints::ListServicesForAutoScalingConfiguration.build(context)
           when :list_tags_for_resource
             Aws::AppRunner::Endpoints::ListTagsForResource.build(context)
           when :list_vpc_connectors
@@ -122,6 +124,8 @@ module Aws::AppRunner
             Aws::AppRunner::Endpoints::TagResource.build(context)
           when :untag_resource
             Aws::AppRunner::Endpoints::UntagResource.build(context)
+          when :update_default_auto_scaling_configuration
+            Aws::AppRunner::Endpoints::UpdateDefaultAutoScalingConfiguration.build(context)
           when :update_service
             Aws::AppRunner::Endpoints::UpdateService.build(context)
           when :update_vpc_ingress_connection

@@ -7476,7 +7476,8 @@
         "COMPLETE",
         "PENDING",
         "FAILED",
-        "REPLICA"
+        "REPLICA",
+        "COMPLETED"
       ]
     },
     "ReplicationTime":{
@@ -7843,7 +7844,7 @@
       "flattened":true
     },
     "Setting":{"type":"boolean"},
-    "Size":{"type":"integer"},
+    "Size":{"type":"long"},
     "SkipValidation":{"type":"boolean"},
     "SourceSelectionCriteria":{
       "type":"structure",

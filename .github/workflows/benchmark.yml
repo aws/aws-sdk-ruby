@@ -42,7 +42,7 @@ jobs:
         run: EXECUTION_ENV=github-action bundle exec rake benchmark
 
       - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v3
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::469596866844:role/aws-sdk-ruby-performance-reporter
           role-session-name: benchmark-report

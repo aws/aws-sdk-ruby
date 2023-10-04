@@ -37,6 +37,8 @@ module Aws::ServiceDiscovery
     DeregisterInstanceResponse = Shapes::StructureShape.new(name: 'DeregisterInstanceResponse')
     DiscoverInstancesRequest = Shapes::StructureShape.new(name: 'DiscoverInstancesRequest')
     DiscoverInstancesResponse = Shapes::StructureShape.new(name: 'DiscoverInstancesResponse')
+    DiscoverInstancesRevisionRequest = Shapes::StructureShape.new(name: 'DiscoverInstancesRevisionRequest')
+    DiscoverInstancesRevisionResponse = Shapes::StructureShape.new(name: 'DiscoverInstancesRevisionResponse')
     DiscoverMaxResults = Shapes::IntegerShape.new(name: 'DiscoverMaxResults')
     DnsConfig = Shapes::StructureShape.new(name: 'DnsConfig')
     DnsConfigChange = Shapes::StructureShape.new(name: 'DnsConfigChange')
@@ -137,6 +139,7 @@ module Aws::ServiceDiscovery
     ResourceLimitExceeded = Shapes::StructureShape.new(name: 'ResourceLimitExceeded')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourcePath = Shapes::StringShape.new(name: 'ResourcePath')
+    Revision = Shapes::IntegerShape.new(name: 'Revision')
     RoutingPolicy = Shapes::StringShape.new(name: 'RoutingPolicy')
     SOA = Shapes::StructureShape.new(name: 'SOA')
     SOAChange = Shapes::StructureShape.new(name: 'SOAChange')
@@ -250,7 +253,15 @@ module Aws::ServiceDiscovery
     DiscoverInstancesRequest.struct_class = Types::DiscoverInstancesRequest
 
     DiscoverInstancesResponse.add_member(:instances, Shapes::ShapeRef.new(shape: HttpInstanceSummaryList, location_name: "Instances"))
+    DiscoverInstancesResponse.add_member(:instances_revision, Shapes::ShapeRef.new(shape: Revision, location_name: "InstancesRevision"))
     DiscoverInstancesResponse.struct_class = Types::DiscoverInstancesResponse
+
+    DiscoverInstancesRevisionRequest.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location_name: "NamespaceName"))
+    DiscoverInstancesRevisionRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "ServiceName"))
+    DiscoverInstancesRevisionRequest.struct_class = Types::DiscoverInstancesRevisionRequest
+
+    DiscoverInstancesRevisionResponse.add_member(:instances_revision, Shapes::ShapeRef.new(shape: Revision, location_name: "InstancesRevision"))
+    DiscoverInstancesRevisionResponse.struct_class = Types::DiscoverInstancesRevisionResponse
 
     DnsConfig.add_member(:namespace_id, Shapes::ShapeRef.new(shape: ResourceId, deprecated: true, location_name: "NamespaceId", metadata: {"deprecatedMessage"=>"Top level attribute in request should be used to reference namespace-id"}))
     DnsConfig.add_member(:routing_policy, Shapes::ShapeRef.new(shape: RoutingPolicy, location_name: "RoutingPolicy"))
@@ -752,6 +763,21 @@ module Aws::ServiceDiscovery
         }
         o.input = Shapes::ShapeRef.new(shape: DiscoverInstancesRequest)
         o.output = Shapes::ShapeRef.new(shape: DiscoverInstancesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: NamespaceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
+      end)
+
+      api.add_operation(:discover_instances_revision, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DiscoverInstancesRevision"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.endpoint_pattern = {
+          "hostPrefix" => "data-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DiscoverInstancesRevisionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DiscoverInstancesRevisionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: NamespaceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)

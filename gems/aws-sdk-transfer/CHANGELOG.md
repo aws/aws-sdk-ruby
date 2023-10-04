@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2023-10-02)
+------------------
+
+* Feature - Documentation updates for AWS Transfer Family
+
+1.79.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.78.0 (2023-08-14)
 ------------------
 

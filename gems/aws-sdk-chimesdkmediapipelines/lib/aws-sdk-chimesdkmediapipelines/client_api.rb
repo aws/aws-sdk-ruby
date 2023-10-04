@@ -30,6 +30,7 @@ module Aws::ChimeSDKMediaPipelines
     AudioConcatenationConfiguration = Shapes::StructureShape.new(name: 'AudioConcatenationConfiguration')
     AudioMuxType = Shapes::StringShape.new(name: 'AudioMuxType')
     AudioSampleRateOption = Shapes::StringShape.new(name: 'AudioSampleRateOption')
+    AwsRegion = Shapes::StringShape.new(name: 'AwsRegion')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BorderColor = Shapes::StringShape.new(name: 'BorderColor')
@@ -71,9 +72,16 @@ module Aws::ChimeSDKMediaPipelines
     CreateMediaInsightsPipelineResponse = Shapes::StructureShape.new(name: 'CreateMediaInsightsPipelineResponse')
     CreateMediaLiveConnectorPipelineRequest = Shapes::StructureShape.new(name: 'CreateMediaLiveConnectorPipelineRequest')
     CreateMediaLiveConnectorPipelineResponse = Shapes::StructureShape.new(name: 'CreateMediaLiveConnectorPipelineResponse')
+    CreateMediaPipelineKinesisVideoStreamPoolRequest = Shapes::StructureShape.new(name: 'CreateMediaPipelineKinesisVideoStreamPoolRequest')
+    CreateMediaPipelineKinesisVideoStreamPoolResponse = Shapes::StructureShape.new(name: 'CreateMediaPipelineKinesisVideoStreamPoolResponse')
+    CreateMediaStreamPipelineRequest = Shapes::StructureShape.new(name: 'CreateMediaStreamPipelineRequest')
+    CreateMediaStreamPipelineResponse = Shapes::StructureShape.new(name: 'CreateMediaStreamPipelineResponse')
     DataChannelConcatenationConfiguration = Shapes::StructureShape.new(name: 'DataChannelConcatenationConfiguration')
+    DataRetentionChangeInHours = Shapes::IntegerShape.new(name: 'DataRetentionChangeInHours')
+    DataRetentionInHours = Shapes::IntegerShape.new(name: 'DataRetentionInHours')
     DeleteMediaCapturePipelineRequest = Shapes::StructureShape.new(name: 'DeleteMediaCapturePipelineRequest')
     DeleteMediaInsightsPipelineConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteMediaInsightsPipelineConfigurationRequest')
+    DeleteMediaPipelineKinesisVideoStreamPoolRequest = Shapes::StructureShape.new(name: 'DeleteMediaPipelineKinesisVideoStreamPoolRequest')
     DeleteMediaPipelineRequest = Shapes::StructureShape.new(name: 'DeleteMediaPipelineRequest')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ExternalUserIdList = Shapes::ListShape.new(name: 'ExternalUserIdList')
@@ -86,6 +94,8 @@ module Aws::ChimeSDKMediaPipelines
     GetMediaCapturePipelineResponse = Shapes::StructureShape.new(name: 'GetMediaCapturePipelineResponse')
     GetMediaInsightsPipelineConfigurationRequest = Shapes::StructureShape.new(name: 'GetMediaInsightsPipelineConfigurationRequest')
     GetMediaInsightsPipelineConfigurationResponse = Shapes::StructureShape.new(name: 'GetMediaInsightsPipelineConfigurationResponse')
+    GetMediaPipelineKinesisVideoStreamPoolRequest = Shapes::StructureShape.new(name: 'GetMediaPipelineKinesisVideoStreamPoolRequest')
+    GetMediaPipelineKinesisVideoStreamPoolResponse = Shapes::StructureShape.new(name: 'GetMediaPipelineKinesisVideoStreamPoolResponse')
     GetMediaPipelineRequest = Shapes::StructureShape.new(name: 'GetMediaPipelineRequest')
     GetMediaPipelineResponse = Shapes::StructureShape.new(name: 'GetMediaPipelineResponse')
     GetSpeakerSearchTaskRequest = Shapes::StructureShape.new(name: 'GetSpeakerSearchTaskRequest')
@@ -104,6 +114,15 @@ module Aws::ChimeSDKMediaPipelines
     KeywordMatchWordList = Shapes::ListShape.new(name: 'KeywordMatchWordList')
     KinesisDataStreamSinkConfiguration = Shapes::StructureShape.new(name: 'KinesisDataStreamSinkConfiguration')
     KinesisVideoStreamArn = Shapes::StringShape.new(name: 'KinesisVideoStreamArn')
+    KinesisVideoStreamConfiguration = Shapes::StructureShape.new(name: 'KinesisVideoStreamConfiguration')
+    KinesisVideoStreamConfigurationUpdate = Shapes::StructureShape.new(name: 'KinesisVideoStreamConfigurationUpdate')
+    KinesisVideoStreamPoolConfiguration = Shapes::StructureShape.new(name: 'KinesisVideoStreamPoolConfiguration')
+    KinesisVideoStreamPoolId = Shapes::StringShape.new(name: 'KinesisVideoStreamPoolId')
+    KinesisVideoStreamPoolName = Shapes::StringShape.new(name: 'KinesisVideoStreamPoolName')
+    KinesisVideoStreamPoolSize = Shapes::IntegerShape.new(name: 'KinesisVideoStreamPoolSize')
+    KinesisVideoStreamPoolStatus = Shapes::StringShape.new(name: 'KinesisVideoStreamPoolStatus')
+    KinesisVideoStreamPoolSummary = Shapes::StructureShape.new(name: 'KinesisVideoStreamPoolSummary')
+    KinesisVideoStreamPoolSummaryList = Shapes::ListShape.new(name: 'KinesisVideoStreamPoolSummaryList')
     KinesisVideoStreamRecordingSourceRuntimeConfiguration = Shapes::StructureShape.new(name: 'KinesisVideoStreamRecordingSourceRuntimeConfiguration')
     KinesisVideoStreamSourceRuntimeConfiguration = Shapes::StructureShape.new(name: 'KinesisVideoStreamSourceRuntimeConfiguration')
     KinesisVideoStreamSourceTaskConfiguration = Shapes::StructureShape.new(name: 'KinesisVideoStreamSourceTaskConfiguration')
@@ -114,6 +133,8 @@ module Aws::ChimeSDKMediaPipelines
     ListMediaCapturePipelinesResponse = Shapes::StructureShape.new(name: 'ListMediaCapturePipelinesResponse')
     ListMediaInsightsPipelineConfigurationsRequest = Shapes::StructureShape.new(name: 'ListMediaInsightsPipelineConfigurationsRequest')
     ListMediaInsightsPipelineConfigurationsResponse = Shapes::StructureShape.new(name: 'ListMediaInsightsPipelineConfigurationsResponse')
+    ListMediaPipelineKinesisVideoStreamPoolsRequest = Shapes::StructureShape.new(name: 'ListMediaPipelineKinesisVideoStreamPoolsRequest')
+    ListMediaPipelineKinesisVideoStreamPoolsResponse = Shapes::StructureShape.new(name: 'ListMediaPipelineKinesisVideoStreamPoolsResponse')
     ListMediaPipelinesRequest = Shapes::StructureShape.new(name: 'ListMediaPipelinesRequest')
     ListMediaPipelinesResponse = Shapes::StructureShape.new(name: 'ListMediaPipelinesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -154,6 +175,13 @@ module Aws::ChimeSDKMediaPipelines
     MediaPipelineSummary = Shapes::StructureShape.new(name: 'MediaPipelineSummary')
     MediaPipelineTaskStatus = Shapes::StringShape.new(name: 'MediaPipelineTaskStatus')
     MediaSampleRateHertz = Shapes::IntegerShape.new(name: 'MediaSampleRateHertz')
+    MediaStreamPipeline = Shapes::StructureShape.new(name: 'MediaStreamPipeline')
+    MediaStreamPipelineSinkType = Shapes::StringShape.new(name: 'MediaStreamPipelineSinkType')
+    MediaStreamSink = Shapes::StructureShape.new(name: 'MediaStreamSink')
+    MediaStreamSinkList = Shapes::ListShape.new(name: 'MediaStreamSinkList')
+    MediaStreamSource = Shapes::StructureShape.new(name: 'MediaStreamSource')
+    MediaStreamSourceList = Shapes::ListShape.new(name: 'MediaStreamSourceList')
+    MediaStreamType = Shapes::StringShape.new(name: 'MediaStreamType')
     MeetingEventsConcatenationConfiguration = Shapes::StructureShape.new(name: 'MeetingEventsConcatenationConfiguration')
     ModelName = Shapes::StringShape.new(name: 'ModelName')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
@@ -172,6 +200,7 @@ module Aws::ChimeSDKMediaPipelines
     RecordingFileFormat = Shapes::StringShape.new(name: 'RecordingFileFormat')
     RecordingStreamConfiguration = Shapes::StructureShape.new(name: 'RecordingStreamConfiguration')
     RecordingStreamList = Shapes::ListShape.new(name: 'RecordingStreamList')
+    ReservedStreamCapacity = Shapes::IntegerShape.new(name: 'ReservedStreamCapacity')
     ResolutionOption = Shapes::StringShape.new(name: 'ResolutionOption')
     ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
     ResultMax = Shapes::IntegerShape.new(name: 'ResultMax')
@@ -220,6 +249,8 @@ module Aws::ChimeSDKMediaPipelines
     UpdateMediaInsightsPipelineConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateMediaInsightsPipelineConfigurationRequest')
     UpdateMediaInsightsPipelineConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateMediaInsightsPipelineConfigurationResponse')
     UpdateMediaInsightsPipelineStatusRequest = Shapes::StructureShape.new(name: 'UpdateMediaInsightsPipelineStatusRequest')
+    UpdateMediaPipelineKinesisVideoStreamPoolRequest = Shapes::StructureShape.new(name: 'UpdateMediaPipelineKinesisVideoStreamPoolRequest')
+    UpdateMediaPipelineKinesisVideoStreamPoolResponse = Shapes::StructureShape.new(name: 'UpdateMediaPipelineKinesisVideoStreamPoolResponse')
     VerticalLayoutConfiguration = Shapes::StructureShape.new(name: 'VerticalLayoutConfiguration')
     VerticalTilePosition = Shapes::StringShape.new(name: 'VerticalTilePosition')
     VideoArtifactsConfiguration = Shapes::StructureShape.new(name: 'VideoArtifactsConfiguration')
@@ -408,6 +439,24 @@ module Aws::ChimeSDKMediaPipelines
     CreateMediaLiveConnectorPipelineResponse.add_member(:media_live_connector_pipeline, Shapes::ShapeRef.new(shape: MediaLiveConnectorPipeline, location_name: "MediaLiveConnectorPipeline"))
     CreateMediaLiveConnectorPipelineResponse.struct_class = Types::CreateMediaLiveConnectorPipelineResponse
 
+    CreateMediaPipelineKinesisVideoStreamPoolRequest.add_member(:stream_configuration, Shapes::ShapeRef.new(shape: KinesisVideoStreamConfiguration, required: true, location_name: "StreamConfiguration"))
+    CreateMediaPipelineKinesisVideoStreamPoolRequest.add_member(:pool_name, Shapes::ShapeRef.new(shape: KinesisVideoStreamPoolName, required: true, location_name: "PoolName"))
+    CreateMediaPipelineKinesisVideoStreamPoolRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateMediaPipelineKinesisVideoStreamPoolRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateMediaPipelineKinesisVideoStreamPoolRequest.struct_class = Types::CreateMediaPipelineKinesisVideoStreamPoolRequest
+
+    CreateMediaPipelineKinesisVideoStreamPoolResponse.add_member(:kinesis_video_stream_pool_configuration, Shapes::ShapeRef.new(shape: KinesisVideoStreamPoolConfiguration, location_name: "KinesisVideoStreamPoolConfiguration"))
+    CreateMediaPipelineKinesisVideoStreamPoolResponse.struct_class = Types::CreateMediaPipelineKinesisVideoStreamPoolResponse
+
+    CreateMediaStreamPipelineRequest.add_member(:sources, Shapes::ShapeRef.new(shape: MediaStreamSourceList, required: true, location_name: "Sources"))
+    CreateMediaStreamPipelineRequest.add_member(:sinks, Shapes::ShapeRef.new(shape: MediaStreamSinkList, required: true, location_name: "Sinks"))
+    CreateMediaStreamPipelineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateMediaStreamPipelineRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateMediaStreamPipelineRequest.struct_class = Types::CreateMediaStreamPipelineRequest
+
+    CreateMediaStreamPipelineResponse.add_member(:media_stream_pipeline, Shapes::ShapeRef.new(shape: MediaStreamPipeline, location_name: "MediaStreamPipeline"))
+    CreateMediaStreamPipelineResponse.struct_class = Types::CreateMediaStreamPipelineResponse
+
     DataChannelConcatenationConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: ArtifactsConcatenationState, required: true, location_name: "State"))
     DataChannelConcatenationConfiguration.struct_class = Types::DataChannelConcatenationConfiguration
 
@@ -416,6 +465,9 @@ module Aws::ChimeSDKMediaPipelines
 
     DeleteMediaInsightsPipelineConfigurationRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "identifier"))
     DeleteMediaInsightsPipelineConfigurationRequest.struct_class = Types::DeleteMediaInsightsPipelineConfigurationRequest
+
+    DeleteMediaPipelineKinesisVideoStreamPoolRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "identifier"))
+    DeleteMediaPipelineKinesisVideoStreamPoolRequest.struct_class = Types::DeleteMediaPipelineKinesisVideoStreamPoolRequest
 
     DeleteMediaPipelineRequest.add_member(:media_pipeline_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "mediaPipelineId"))
     DeleteMediaPipelineRequest.struct_class = Types::DeleteMediaPipelineRequest
@@ -442,6 +494,12 @@ module Aws::ChimeSDKMediaPipelines
 
     GetMediaInsightsPipelineConfigurationResponse.add_member(:media_insights_pipeline_configuration, Shapes::ShapeRef.new(shape: MediaInsightsPipelineConfiguration, location_name: "MediaInsightsPipelineConfiguration"))
     GetMediaInsightsPipelineConfigurationResponse.struct_class = Types::GetMediaInsightsPipelineConfigurationResponse
+
+    GetMediaPipelineKinesisVideoStreamPoolRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "identifier"))
+    GetMediaPipelineKinesisVideoStreamPoolRequest.struct_class = Types::GetMediaPipelineKinesisVideoStreamPoolRequest
+
+    GetMediaPipelineKinesisVideoStreamPoolResponse.add_member(:kinesis_video_stream_pool_configuration, Shapes::ShapeRef.new(shape: KinesisVideoStreamPoolConfiguration, location_name: "KinesisVideoStreamPoolConfiguration"))
+    GetMediaPipelineKinesisVideoStreamPoolResponse.struct_class = Types::GetMediaPipelineKinesisVideoStreamPoolResponse
 
     GetMediaPipelineRequest.add_member(:media_pipeline_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "mediaPipelineId"))
     GetMediaPipelineRequest.struct_class = Types::GetMediaPipelineRequest
@@ -491,6 +549,30 @@ module Aws::ChimeSDKMediaPipelines
     KinesisDataStreamSinkConfiguration.add_member(:insights_target, Shapes::ShapeRef.new(shape: Arn, location_name: "InsightsTarget"))
     KinesisDataStreamSinkConfiguration.struct_class = Types::KinesisDataStreamSinkConfiguration
 
+    KinesisVideoStreamConfiguration.add_member(:region, Shapes::ShapeRef.new(shape: AwsRegion, required: true, location_name: "Region"))
+    KinesisVideoStreamConfiguration.add_member(:data_retention_in_hours, Shapes::ShapeRef.new(shape: DataRetentionInHours, location_name: "DataRetentionInHours"))
+    KinesisVideoStreamConfiguration.struct_class = Types::KinesisVideoStreamConfiguration
+
+    KinesisVideoStreamConfigurationUpdate.add_member(:data_retention_in_hours, Shapes::ShapeRef.new(shape: DataRetentionChangeInHours, location_name: "DataRetentionInHours"))
+    KinesisVideoStreamConfigurationUpdate.struct_class = Types::KinesisVideoStreamConfigurationUpdate
+
+    KinesisVideoStreamPoolConfiguration.add_member(:pool_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "PoolArn"))
+    KinesisVideoStreamPoolConfiguration.add_member(:pool_name, Shapes::ShapeRef.new(shape: KinesisVideoStreamPoolName, location_name: "PoolName"))
+    KinesisVideoStreamPoolConfiguration.add_member(:pool_id, Shapes::ShapeRef.new(shape: KinesisVideoStreamPoolId, location_name: "PoolId"))
+    KinesisVideoStreamPoolConfiguration.add_member(:pool_status, Shapes::ShapeRef.new(shape: KinesisVideoStreamPoolStatus, location_name: "PoolStatus"))
+    KinesisVideoStreamPoolConfiguration.add_member(:pool_size, Shapes::ShapeRef.new(shape: KinesisVideoStreamPoolSize, location_name: "PoolSize"))
+    KinesisVideoStreamPoolConfiguration.add_member(:stream_configuration, Shapes::ShapeRef.new(shape: KinesisVideoStreamConfiguration, location_name: "StreamConfiguration"))
+    KinesisVideoStreamPoolConfiguration.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
+    KinesisVideoStreamPoolConfiguration.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
+    KinesisVideoStreamPoolConfiguration.struct_class = Types::KinesisVideoStreamPoolConfiguration
+
+    KinesisVideoStreamPoolSummary.add_member(:pool_name, Shapes::ShapeRef.new(shape: KinesisVideoStreamPoolName, location_name: "PoolName"))
+    KinesisVideoStreamPoolSummary.add_member(:pool_id, Shapes::ShapeRef.new(shape: KinesisVideoStreamPoolId, location_name: "PoolId"))
+    KinesisVideoStreamPoolSummary.add_member(:pool_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "PoolArn"))
+    KinesisVideoStreamPoolSummary.struct_class = Types::KinesisVideoStreamPoolSummary
+
+    KinesisVideoStreamPoolSummaryList.member = Shapes::ShapeRef.new(shape: KinesisVideoStreamPoolSummary)
+
     KinesisVideoStreamRecordingSourceRuntimeConfiguration.add_member(:streams, Shapes::ShapeRef.new(shape: RecordingStreamList, required: true, location_name: "Streams"))
     KinesisVideoStreamRecordingSourceRuntimeConfiguration.add_member(:fragment_selector, Shapes::ShapeRef.new(shape: FragmentSelector, required: true, location_name: "FragmentSelector"))
     KinesisVideoStreamRecordingSourceRuntimeConfiguration.struct_class = Types::KinesisVideoStreamRecordingSourceRuntimeConfiguration
@@ -523,6 +605,14 @@ module Aws::ChimeSDKMediaPipelines
     ListMediaInsightsPipelineConfigurationsResponse.add_member(:media_insights_pipeline_configurations, Shapes::ShapeRef.new(shape: MediaInsightsPipelineConfigurationSummaryList, location_name: "MediaInsightsPipelineConfigurations"))
     ListMediaInsightsPipelineConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListMediaInsightsPipelineConfigurationsResponse.struct_class = Types::ListMediaInsightsPipelineConfigurationsResponse
+
+    ListMediaPipelineKinesisVideoStreamPoolsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
+    ListMediaPipelineKinesisVideoStreamPoolsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultMax, location: "querystring", location_name: "max-results"))
+    ListMediaPipelineKinesisVideoStreamPoolsRequest.struct_class = Types::ListMediaPipelineKinesisVideoStreamPoolsRequest
+
+    ListMediaPipelineKinesisVideoStreamPoolsResponse.add_member(:kinesis_video_stream_pools, Shapes::ShapeRef.new(shape: KinesisVideoStreamPoolSummaryList, location_name: "KinesisVideoStreamPools"))
+    ListMediaPipelineKinesisVideoStreamPoolsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListMediaPipelineKinesisVideoStreamPoolsResponse.struct_class = Types::ListMediaPipelineKinesisVideoStreamPoolsResponse
 
     ListMediaPipelinesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
     ListMediaPipelinesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultMax, location: "querystring", location_name: "max-results"))
@@ -651,6 +741,7 @@ module Aws::ChimeSDKMediaPipelines
     MediaPipeline.add_member(:media_live_connector_pipeline, Shapes::ShapeRef.new(shape: MediaLiveConnectorPipeline, location_name: "MediaLiveConnectorPipeline"))
     MediaPipeline.add_member(:media_concatenation_pipeline, Shapes::ShapeRef.new(shape: MediaConcatenationPipeline, location_name: "MediaConcatenationPipeline"))
     MediaPipeline.add_member(:media_insights_pipeline, Shapes::ShapeRef.new(shape: MediaInsightsPipeline, location_name: "MediaInsightsPipeline"))
+    MediaPipeline.add_member(:media_stream_pipeline, Shapes::ShapeRef.new(shape: MediaStreamPipeline, location_name: "MediaStreamPipeline"))
     MediaPipeline.struct_class = Types::MediaPipeline
 
     MediaPipelineList.member = Shapes::ShapeRef.new(shape: MediaPipelineSummary)
@@ -658,6 +749,29 @@ module Aws::ChimeSDKMediaPipelines
     MediaPipelineSummary.add_member(:media_pipeline_id, Shapes::ShapeRef.new(shape: GuidString, location_name: "MediaPipelineId"))
     MediaPipelineSummary.add_member(:media_pipeline_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "MediaPipelineArn"))
     MediaPipelineSummary.struct_class = Types::MediaPipelineSummary
+
+    MediaStreamPipeline.add_member(:media_pipeline_id, Shapes::ShapeRef.new(shape: GuidString, location_name: "MediaPipelineId"))
+    MediaStreamPipeline.add_member(:media_pipeline_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "MediaPipelineArn"))
+    MediaStreamPipeline.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
+    MediaStreamPipeline.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
+    MediaStreamPipeline.add_member(:status, Shapes::ShapeRef.new(shape: MediaPipelineStatus, location_name: "Status"))
+    MediaStreamPipeline.add_member(:sources, Shapes::ShapeRef.new(shape: MediaStreamSourceList, location_name: "Sources"))
+    MediaStreamPipeline.add_member(:sinks, Shapes::ShapeRef.new(shape: MediaStreamSinkList, location_name: "Sinks"))
+    MediaStreamPipeline.struct_class = Types::MediaStreamPipeline
+
+    MediaStreamSink.add_member(:sink_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "SinkArn"))
+    MediaStreamSink.add_member(:sink_type, Shapes::ShapeRef.new(shape: MediaStreamPipelineSinkType, required: true, location_name: "SinkType"))
+    MediaStreamSink.add_member(:reserved_stream_capacity, Shapes::ShapeRef.new(shape: ReservedStreamCapacity, required: true, location_name: "ReservedStreamCapacity"))
+    MediaStreamSink.add_member(:media_stream_type, Shapes::ShapeRef.new(shape: MediaStreamType, required: true, location_name: "MediaStreamType"))
+    MediaStreamSink.struct_class = Types::MediaStreamSink
+
+    MediaStreamSinkList.member = Shapes::ShapeRef.new(shape: MediaStreamSink)
+
+    MediaStreamSource.add_member(:source_type, Shapes::ShapeRef.new(shape: MediaPipelineSourceType, required: true, location_name: "SourceType"))
+    MediaStreamSource.add_member(:source_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "SourceArn"))
+    MediaStreamSource.struct_class = Types::MediaStreamSource
+
+    MediaStreamSourceList.member = Shapes::ShapeRef.new(shape: MediaStreamSource)
 
     MeetingEventsConcatenationConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: ArtifactsConcatenationState, required: true, location_name: "State"))
     MeetingEventsConcatenationConfiguration.struct_class = Types::MeetingEventsConcatenationConfiguration
@@ -830,6 +944,13 @@ module Aws::ChimeSDKMediaPipelines
     UpdateMediaInsightsPipelineStatusRequest.add_member(:update_status, Shapes::ShapeRef.new(shape: MediaPipelineStatusUpdate, required: true, location_name: "UpdateStatus"))
     UpdateMediaInsightsPipelineStatusRequest.struct_class = Types::UpdateMediaInsightsPipelineStatusRequest
 
+    UpdateMediaPipelineKinesisVideoStreamPoolRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "identifier"))
+    UpdateMediaPipelineKinesisVideoStreamPoolRequest.add_member(:stream_configuration, Shapes::ShapeRef.new(shape: KinesisVideoStreamConfigurationUpdate, location_name: "StreamConfiguration"))
+    UpdateMediaPipelineKinesisVideoStreamPoolRequest.struct_class = Types::UpdateMediaPipelineKinesisVideoStreamPoolRequest
+
+    UpdateMediaPipelineKinesisVideoStreamPoolResponse.add_member(:kinesis_video_stream_pool_configuration, Shapes::ShapeRef.new(shape: KinesisVideoStreamPoolConfiguration, location_name: "KinesisVideoStreamPoolConfiguration"))
+    UpdateMediaPipelineKinesisVideoStreamPoolResponse.struct_class = Types::UpdateMediaPipelineKinesisVideoStreamPoolResponse
+
     VerticalLayoutConfiguration.add_member(:tile_order, Shapes::ShapeRef.new(shape: TileOrder, location_name: "TileOrder"))
     VerticalLayoutConfiguration.add_member(:tile_position, Shapes::ShapeRef.new(shape: VerticalTilePosition, location_name: "TilePosition"))
     VerticalLayoutConfiguration.add_member(:tile_count, Shapes::ShapeRef.new(shape: TileCount, location_name: "TileCount"))
@@ -956,6 +1077,38 @@ module Aws::ChimeSDKMediaPipelines
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:create_media_pipeline_kinesis_video_stream_pool, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateMediaPipelineKinesisVideoStreamPool"
+        o.http_method = "POST"
+        o.http_request_uri = "/media-pipeline-kinesis-video-stream-pools"
+        o.input = Shapes::ShapeRef.new(shape: CreateMediaPipelineKinesisVideoStreamPoolRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateMediaPipelineKinesisVideoStreamPoolResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:create_media_stream_pipeline, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateMediaStreamPipeline"
+        o.http_method = "POST"
+        o.http_request_uri = "/sdk-media-stream-pipelines"
+        o.input = Shapes::ShapeRef.new(shape: CreateMediaStreamPipelineRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateMediaStreamPipelineResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:delete_media_capture_pipeline, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteMediaCapturePipeline"
         o.http_method = "DELETE"
@@ -992,6 +1145,22 @@ module Aws::ChimeSDKMediaPipelines
         o.http_method = "DELETE"
         o.http_request_uri = "/sdk-media-pipelines/{mediaPipelineId}"
         o.input = Shapes::ShapeRef.new(shape: DeleteMediaPipelineRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:delete_media_pipeline_kinesis_video_stream_pool, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteMediaPipelineKinesisVideoStreamPool"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/media-pipeline-kinesis-video-stream-pools/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteMediaPipelineKinesisVideoStreamPoolRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
@@ -1044,6 +1213,21 @@ module Aws::ChimeSDKMediaPipelines
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:get_media_pipeline_kinesis_video_stream_pool, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMediaPipelineKinesisVideoStreamPool"
+        o.http_method = "GET"
+        o.http_request_uri = "/media-pipeline-kinesis-video-stream-pools/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetMediaPipelineKinesisVideoStreamPoolRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMediaPipelineKinesisVideoStreamPoolResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
@@ -1105,6 +1289,27 @@ module Aws::ChimeSDKMediaPipelines
         o.http_request_uri = "/media-insights-pipeline-configurations"
         o.input = Shapes::ShapeRef.new(shape: ListMediaInsightsPipelineConfigurationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListMediaInsightsPipelineConfigurationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_media_pipeline_kinesis_video_stream_pools, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMediaPipelineKinesisVideoStreamPools"
+        o.http_method = "GET"
+        o.http_request_uri = "/media-pipeline-kinesis-video-stream-pools"
+        o.input = Shapes::ShapeRef.new(shape: ListMediaPipelineKinesisVideoStreamPoolsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMediaPipelineKinesisVideoStreamPoolsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -1278,6 +1483,22 @@ module Aws::ChimeSDKMediaPipelines
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:update_media_pipeline_kinesis_video_stream_pool, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateMediaPipelineKinesisVideoStreamPool"
+        o.http_method = "PUT"
+        o.http_request_uri = "/media-pipeline-kinesis-video-stream-pools/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateMediaPipelineKinesisVideoStreamPoolRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateMediaPipelineKinesisVideoStreamPoolResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)

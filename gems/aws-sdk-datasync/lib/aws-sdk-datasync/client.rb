@@ -2968,17 +2968,10 @@ module Aws::DataSync
     # Once generated, you can view your recommendations by using the
     # [DescribeStorageSystemResources][2] operation.
     #
-    # <note markdown="1"> If your [discovery job completes successfully][3], you don't need to
-    # use this operation. DataSync Discovery generates the recommendations
-    # for you automatically.
-    #
-    #  </note>
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-recommendations.html
     # [2]: https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeStorageSystemResources.html
-    # [3]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-job-statuses.html#discovery-job-statuses-table
     #
     # @option params [required, String] :discovery_job_arn
     #   Specifies the Amazon Resource Name (ARN) of the discovery job that
@@ -4376,7 +4369,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

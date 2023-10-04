@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.215.0 (2023-10-04)
+------------------
+
+* Feature - Adding support for AdditionalS3DataSource, a data source used for training or inference that is in addition to the input dataset or model data.
+
+1.214.0 (2023-10-03)
+------------------
+
+* Feature - This release allows users to run Selective Execution in SageMaker Pipelines without SourcePipelineExecutionArn if selected steps do not have any dependent steps.
+
+1.213.0 (2023-09-28)
+------------------
+
+* Feature - Online store feature groups supports Standard and InMemory tier storage types for low latency storage for real-time data retrieval. The InMemory tier supports collection types List, Set, and Vector.
+
+1.212.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.211.0 (2023-09-19)
+------------------
+
+* Feature - This release adds support for one-time model monitoring schedules that are executed immediately without delay, explicit data analysis windows for model monitoring schedules and exclude features attributes to remove features from model monitor analysis.
+
+1.210.0 (2023-09-15)
+------------------
+
+* Feature - This release introduces Skip Model Validation for Model Packages
+
 1.209.0 (2023-09-08)
 ------------------
 

@@ -10000,8 +10000,8 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Lists the set of CA certificates provided by Amazon RDS for this
-    # Amazon Web Services account.
+    # Lists the set of certificate authority (CA) certificates provided by
+    # Amazon RDS for this Amazon Web Services account.
     #
     # For more information, see [Using SSL/TLS to encrypt a connection to a
     # DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS to
@@ -10045,6 +10045,7 @@ module Aws::RDS
     #
     # @return [Types::CertificateMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::CertificateMessage#default_certificate_for_new_launches #default_certificate_for_new_launches} => String
     #   * {Types::CertificateMessage#certificates #certificates} => Array&lt;Types::Certificate&gt;
     #   * {Types::CertificateMessage#marker #marker} => String
     #
@@ -10117,6 +10118,7 @@ module Aws::RDS
     #
     # @example Response structure
     #
+    #   resp.default_certificate_for_new_launches #=> String
     #   resp.certificates #=> Array
     #   resp.certificates[0].certificate_identifier #=> String
     #   resp.certificates[0].certificate_type #=> String
@@ -16912,7 +16914,7 @@ module Aws::RDS
     # @option params [Boolean] :allow_major_version_upgrade
     #   Specifies whether major version upgrades are allowed.
     #
-    #   Valid for Cluster Type: Aurora DB clusters only
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
     #   Constraints:
     #
@@ -17997,6 +17999,17 @@ module Aws::RDS
     #
     #   Default: Uses existing setting
     #
+    #   Constraints:
+    #
+    #   * If you are modifying the DB instance class and upgrading the engine
+    #     version at the same time, the currently running engine version must
+    #     be supported on the specified DB instance class. Otherwise, the
+    #     operation returns an error. In this case, first run the operation to
+    #     modify the DB instance class, and then run it again to upgrade the
+    #     engine version.
+    #
+    #   ^
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
@@ -18264,6 +18277,17 @@ module Aws::RDS
     #
     #   In RDS Custom for Oracle, this parameter is supported for read
     #   replicas only if they are in the `PATCH_DB_FAILURE` lifecycle.
+    #
+    #   Constraints:
+    #
+    #   * If you are upgrading the engine version and modifying the DB
+    #     instance class at the same time, the currently running engine
+    #     version must be supported on the specified DB instance class.
+    #     Otherwise, the operation returns an error. In this case, first run
+    #     the operation to modify the DB instance class, and then run it again
+    #     to upgrade the engine version.
+    #
+    #   ^
     #
     # @option params [Boolean] :allow_major_version_upgrade
     #   Specifies whether major version upgrades are allowed. Changing this
@@ -23494,9 +23518,11 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #
     # @option params [String] :db_cluster_parameter_group_name
-    #   The name of the DB cluster parameter group to associate with this DB
-    #   cluster. If this argument is omitted, the default DB cluster parameter
-    #   group for the specified engine is used.
+    #   The name of the custom DB cluster parameter group to associate with
+    #   this DB cluster.
+    #
+    #   If the `DBClusterParameterGroupName` parameter is omitted, the default
+    #   DB cluster parameter group for the specified engine is used.
     #
     #   Constraints:
     #
@@ -23570,7 +23596,7 @@ module Aws::RDS
     #   database engines.
     #
     #   For the full list of DB instance classes, and availability for your
-    #   engine, see [DB instance class][1] in the *Amazon RDS User Guide.*
+    #   engine, see [DB instance class][1] in the *Amazon RDS User Guide*.
     #
     #   Valid for: Multi-AZ DB clusters only
     #
@@ -25442,8 +25468,8 @@ module Aws::RDS
 
     # Restores a DB instance to an arbitrary point in time. You can restore
     # to any point in time before the time identified by the
-    # LatestRestorableTime property. You can restore to a point up to the
-    # number of days specified by the BackupRetentionPeriod property.
+    # `LatestRestorableTime` property. You can restore to a point up to the
+    # number of days specified by the `BackupRetentionPeriod` property.
     #
     # The target database is created with most of the original
     # configuration, but in a system-selected Availability Zone, with the
@@ -25469,38 +25495,40 @@ module Aws::RDS
     #   ^
     #
     # @option params [required, String] :target_db_instance_identifier
-    #   The name of the new DB instance to be created.
+    #   The name of the new DB instance to create.
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 letters, numbers, or hyphens
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens.
     #
-    #   * First character must be a letter
+    #   * First character must be a letter.
     #
-    #   * Can't end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     # @option params [Time,DateTime,Date,Integer,String] :restore_time
     #   The date and time to restore from.
     #
-    #   Valid Values: Value must be a time in Universal Coordinated Time (UTC)
-    #   format
-    #
     #   Constraints:
     #
-    #   * Must be before the latest restorable time for the DB instance
+    #   * Must be a time in Universal Coordinated Time (UTC) format.
+    #
+    #   * Must be before the latest restorable time for the DB instance.
     #
     #   * Can't be specified if the `UseLatestRestorableTime` parameter is
-    #     enabled
+    #     enabled.
     #
     #   Example: `2009-09-07T23:45:00Z`
     #
     # @option params [Boolean] :use_latest_restorable_time
-    #   A value that indicates whether the DB instance is restored from the
-    #   latest backup time. By default, the DB instance isn't restored from
-    #   the latest backup time.
+    #   Specifies whether the DB instance is restored from the latest backup
+    #   time. By default, the DB instance isn't restored from the latest
+    #   backup time.
     #
-    #   Constraints: Can't be specified if the `RestoreTime` parameter is
-    #   provided.
+    #   Constraints:
+    #
+    #   * Can't be specified if the `RestoreTime` parameter is provided.
+    #
+    #   ^
     #
     # @option params [String] :db_instance_class
     #   The compute and memory capacity of the Amazon RDS DB instance, for
@@ -25509,7 +25537,7 @@ module Aws::RDS
     #   list of DB instance classes, and availability for your engine, see [DB
     #   Instance Class][1] in the *Amazon RDS User Guide*.
     #
-    #   Default: The same DBInstanceClass as the original DB instance.
+    #   Default: The same DB instance class as the original DB instance.
     #
     #
     #
@@ -25518,39 +25546,53 @@ module Aws::RDS
     # @option params [Integer] :port
     #   The port number on which the database accepts connections.
     #
-    #   Constraints: Value must be `1150-65535`
-    #
     #   Default: The same port as the original DB instance.
+    #
+    #   Constraints:
+    #
+    #   * The value must be `1150-65535`.
+    #
+    #   ^
     #
     # @option params [String] :availability_zone
     #   The Availability Zone (AZ) where the DB instance will be created.
     #
     #   Default: A random, system-chosen Availability Zone.
     #
-    #   Constraint: You can't specify the `AvailabilityZone` parameter if the
-    #   DB instance is a Multi-AZ deployment.
+    #   Constraints:
+    #
+    #   * You can't specify the `AvailabilityZone` parameter if the DB
+    #     instance is a Multi-AZ deployment.
+    #
+    #   ^
     #
     #   Example: `us-east-1a`
     #
     # @option params [String] :db_subnet_group_name
     #   The DB subnet group name to use for the new instance.
     #
-    #   Constraints: If supplied, must match the name of an existing
-    #   DBSubnetGroup.
+    #   Constraints:
+    #
+    #   * If supplied, must match the name of an existing DB subnet group.
+    #
+    #   ^
     #
     #   Example: `mydbsubnetgroup`
     #
     # @option params [Boolean] :multi_az
-    #   A value that indicates whether the DB instance is a Multi-AZ
-    #   deployment.
+    #   Secifies whether the DB instance is a Multi-AZ deployment.
     #
     #   This setting doesn't apply to RDS Custom.
     #
-    #   Constraint: You can't specify the `AvailabilityZone` parameter if the
-    #   DB instance is a Multi-AZ deployment.
+    #   Constraints:
+    #
+    #   * You can't specify the `AvailabilityZone` parameter if the DB
+    #     instance is a Multi-AZ deployment.
+    #
+    #   ^
     #
     # @option params [Boolean] :publicly_accessible
-    #   A value that indicates whether the DB instance is publicly accessible.
+    #   Specifies whether the DB instance is publicly accessible.
     #
     #   When the DB cluster is publicly accessible, its Domain Name System
     #   (DNS) endpoint resolves to the private IP address from within the DB
@@ -25566,20 +25608,20 @@ module Aws::RDS
     #   For more information, see CreateDBInstance.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
-    #   A value that indicates whether minor version upgrades are applied
-    #   automatically to the DB instance during the maintenance window.
+    #   Specifies whether minor version upgrades are applied automatically to
+    #   the DB instance during the maintenance window.
     #
     #   This setting doesn't apply to RDS Custom.
     #
     # @option params [String] :license_model
-    #   License model information for the restored DB instance.
+    #   The license model information for the restored DB instance.
     #
     #   This setting doesn't apply to RDS Custom.
     #
-    #   Default: Same as source.
-    #
-    #   Valid values: `license-included` \| `bring-your-own-license` \|
+    #   Valid Values: `license-included` \| `bring-your-own-license` \|
     #   `general-public-license`
+    #
+    #   Default: Same as the source.
     #
     # @option params [String] :db_name
     #   The database name for the restored DB instance.
@@ -25593,10 +25635,6 @@ module Aws::RDS
     #   The database engine to use for the new instance.
     #
     #   This setting doesn't apply to RDS Custom.
-    #
-    #   Default: The same as source
-    #
-    #   Constraint: Must be compatible with the engine of the source
     #
     #   Valid Values:
     #
@@ -25622,19 +25660,28 @@ module Aws::RDS
     #
     #   * `sqlserver-web`
     #
+    #   Default: The same as source
+    #
+    #   Constraints:
+    #
+    #   * Must be compatible with the engine of the source.
+    #
+    #   ^
+    #
     # @option params [Integer] :iops
     #   The amount of Provisioned IOPS (input/output operations per second) to
-    #   be initially allocated for the DB instance.
+    #   initially allocate for the DB instance.
     #
-    #   Constraints: Must be an integer greater than 1000.
+    #   This setting doesn't apply to SQL Server.
     #
-    #   **SQL Server**
+    #   Constraints:
     #
-    #   Setting the IOPS value for the SQL Server database engine isn't
-    #   supported.
+    #   * Must be an integer greater than 1000.
+    #
+    #   ^
     #
     # @option params [String] :option_group_name
-    #   The name of the option group to be used for the restored DB instance.
+    #   The name of the option group to use for the restored DB instance.
     #
     #   Permanent options, such as the TDE option for Oracle Advanced Security
     #   TDE, can't be removed from an option group, and that option group
@@ -25644,9 +25691,8 @@ module Aws::RDS
     #   This setting doesn't apply to RDS Custom.
     #
     # @option params [Boolean] :copy_tags_to_snapshot
-    #   A value that indicates whether to copy all tags from the restored DB
-    #   instance to snapshots of the DB instance. By default, tags are not
-    #   copied.
+    #   Specifies whether to copy all tags from the restored DB instance to
+    #   snapshots of the DB instance. By default, tags are not copied.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
@@ -25657,14 +25703,19 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
     # @option params [String] :storage_type
-    #   Specifies the storage type to be associated with the DB instance.
+    #   The storage type to associate with the DB instance.
     #
-    #   Valid values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | standard`
     #
-    #   If you specify `io1` or `gp3`, you must also include a value for the
-    #   `Iops` parameter.
+    #   Default: `io1`, if the `Iops` parameter is specified. Otherwise,
+    #   `gp2`.
     #
-    #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
+    #   Constraints:
+    #
+    #   * If you specify `io1` or `gp3`, you must also include a value for the
+    #     `Iops` parameter.
+    #
+    #   ^
     #
     # @option params [String] :tde_credential_arn
     #   The ARN from the key store with which to associate the instance for
@@ -25685,8 +25736,8 @@ module Aws::RDS
     #   VPC.
     #
     # @option params [String] :domain
-    #   Specify the Active Directory directory ID to restore the DB instance
-    #   in. Create the domain before running this command. Currently, you can
+    #   The Active Directory directory ID to restore the DB instance in.
+    #   Create the domain before running this command. Currently, you can
     #   create only the MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB
     #   instances in an Active Directory Domain.
     #
@@ -25756,9 +25807,9 @@ module Aws::RDS
     #   Example: `123.124.125.126,234.235.236.237`
     #
     # @option params [Boolean] :enable_iam_database_authentication
-    #   A value that indicates whether to enable mapping of Amazon Web
-    #   Services Identity and Access Management (IAM) accounts to database
-    #   accounts. By default, mapping isn't enabled.
+    #   Specifies whether to enable mapping of Amazon Web Services Identity
+    #   and Access Management (IAM) accounts to database accounts. By default,
+    #   mapping isn't enabled.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -25804,7 +25855,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * If supplied, must match the name of an existing DBParameterGroup.
+    #   * If supplied, must match the name of an existing DB parameter group.
     #
     #   * Must be 1 to 255 letters, numbers, or hyphens.
     #
@@ -25813,10 +25864,10 @@ module Aws::RDS
     #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     # @option params [Boolean] :deletion_protection
-    #   A value that indicates whether the DB instance has deletion protection
-    #   enabled. The database can't be deleted when deletion protection is
-    #   enabled. By default, deletion protection isn't enabled. For more
-    #   information, see [ Deleting a DB Instance][1].
+    #   Specifies whether the DB instance has deletion protection enabled. The
+    #   database can't be deleted when deletion protection is enabled. By
+    #   default, deletion protection isn't enabled. For more information, see
+    #   [ Deleting a DB Instance][1].
     #
     #
     #
@@ -25842,13 +25893,13 @@ module Aws::RDS
     # @option params [String] :source_db_instance_automated_backups_arn
     #   The Amazon Resource Name (ARN) of the replicated automated backups
     #   from which to restore, for example,
-    #   `arn:aws:rds:useast-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE`.
+    #   `arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE`.
     #
     #   This setting doesn't apply to RDS Custom.
     #
     # @option params [Boolean] :enable_customer_owned_ip
-    #   A value that indicates whether to enable a customer-owned IP address
-    #   (CoIP) for an RDS on Outposts DB instance.
+    #   Specifies whether to enable a customer-owned IP address (CoIP) for an
+    #   RDS on Outposts DB instance.
     #
     #   A *CoIP* provides local or external connectivity to resources in your
     #   Outpost subnets through your on-premises network. For some use cases,
@@ -25908,12 +25959,6 @@ module Aws::RDS
     # @option params [String] :network_type
     #   The network type of the DB instance.
     #
-    #   Valid values:
-    #
-    #   * `IPV4`
-    #
-    #   * `DUAL`
-    #
     #   The network type is determined by the `DBSubnetGroup` specified for
     #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
     #   or the IPv4 and the IPv6 protocols (`DUAL`).
@@ -25921,12 +25966,18 @@ module Aws::RDS
     #   For more information, see [ Working with a DB instance in a VPC][1] in
     #   the *Amazon RDS User Guide.*
     #
+    #   Valid Values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #
     # @option params [Integer] :storage_throughput
-    #   Specifies the storage throughput value for the DB instance.
+    #   The storage throughput value for the DB instance.
     #
     #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     #
@@ -28288,7 +28339,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.193.0'
+      context[:gem_version] = '1.195.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

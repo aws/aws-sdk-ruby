@@ -73,6 +73,8 @@ module Aws::IoTFleetWise
     DiagnosticsMode = Shapes::StringShape.new(name: 'DiagnosticsMode')
     DisassociateVehicleFleetRequest = Shapes::StructureShape.new(name: 'DisassociateVehicleFleetRequest')
     DisassociateVehicleFleetResponse = Shapes::StructureShape.new(name: 'DisassociateVehicleFleetResponse')
+    EncryptionStatus = Shapes::StringShape.new(name: 'EncryptionStatus')
+    EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     FleetSummary = Shapes::StructureShape.new(name: 'FleetSummary')
     FormattedVss = Shapes::UnionShape.new(name: 'FormattedVss')
     Fqns = Shapes::ListShape.new(name: 'Fqns')
@@ -81,6 +83,8 @@ module Aws::IoTFleetWise
     GetCampaignResponse = Shapes::StructureShape.new(name: 'GetCampaignResponse')
     GetDecoderManifestRequest = Shapes::StructureShape.new(name: 'GetDecoderManifestRequest')
     GetDecoderManifestResponse = Shapes::StructureShape.new(name: 'GetDecoderManifestResponse')
+    GetEncryptionConfigurationRequest = Shapes::StructureShape.new(name: 'GetEncryptionConfigurationRequest')
+    GetEncryptionConfigurationResponse = Shapes::StructureShape.new(name: 'GetEncryptionConfigurationResponse')
     GetFleetRequest = Shapes::StructureShape.new(name: 'GetFleetRequest')
     GetFleetResponse = Shapes::StructureShape.new(name: 'GetFleetResponse')
     GetLoggingOptionsRequest = Shapes::StructureShape.new(name: 'GetLoggingOptionsRequest')
@@ -167,6 +171,8 @@ module Aws::IoTFleetWise
     Prefix = Shapes::StringShape.new(name: 'Prefix')
     ProtocolName = Shapes::StringShape.new(name: 'ProtocolName')
     ProtocolVersion = Shapes::StringShape.new(name: 'ProtocolVersion')
+    PutEncryptionConfigurationRequest = Shapes::StructureShape.new(name: 'PutEncryptionConfigurationRequest')
+    PutEncryptionConfigurationResponse = Shapes::StructureShape.new(name: 'PutEncryptionConfigurationResponse')
     PutLoggingOptionsRequest = Shapes::StructureShape.new(name: 'PutLoggingOptionsRequest')
     PutLoggingOptionsResponse = Shapes::StructureShape.new(name: 'PutLoggingOptionsResponse')
     RegisterAccountRequest = Shapes::StructureShape.new(name: 'RegisterAccountRequest')
@@ -606,6 +612,16 @@ module Aws::IoTFleetWise
     GetDecoderManifestResponse.add_member(:last_modification_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "lastModificationTime"))
     GetDecoderManifestResponse.struct_class = Types::GetDecoderManifestResponse
 
+    GetEncryptionConfigurationRequest.struct_class = Types::GetEncryptionConfigurationRequest
+
+    GetEncryptionConfigurationResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
+    GetEncryptionConfigurationResponse.add_member(:encryption_status, Shapes::ShapeRef.new(shape: EncryptionStatus, required: true, location_name: "encryptionStatus"))
+    GetEncryptionConfigurationResponse.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "encryptionType"))
+    GetEncryptionConfigurationResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "errorMessage"))
+    GetEncryptionConfigurationResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "creationTime"))
+    GetEncryptionConfigurationResponse.add_member(:last_modification_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "lastModificationTime"))
+    GetEncryptionConfigurationResponse.struct_class = Types::GetEncryptionConfigurationResponse
+
     GetFleetRequest.add_member(:fleet_id, Shapes::ShapeRef.new(shape: fleetId, required: true, location_name: "fleetId"))
     GetFleetRequest.struct_class = Types::GetFleetRequest
 
@@ -924,6 +940,15 @@ module Aws::IoTFleetWise
     ObdSignal.add_member(:bit_right_shift, Shapes::ShapeRef.new(shape: nonNegativeInteger, location_name: "bitRightShift"))
     ObdSignal.add_member(:bit_mask_length, Shapes::ShapeRef.new(shape: ObdBitmaskLength, location_name: "bitMaskLength"))
     ObdSignal.struct_class = Types::ObdSignal
+
+    PutEncryptionConfigurationRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
+    PutEncryptionConfigurationRequest.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "encryptionType"))
+    PutEncryptionConfigurationRequest.struct_class = Types::PutEncryptionConfigurationRequest
+
+    PutEncryptionConfigurationResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
+    PutEncryptionConfigurationResponse.add_member(:encryption_status, Shapes::ShapeRef.new(shape: EncryptionStatus, required: true, location_name: "encryptionStatus"))
+    PutEncryptionConfigurationResponse.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "encryptionType"))
+    PutEncryptionConfigurationResponse.struct_class = Types::PutEncryptionConfigurationResponse
 
     PutLoggingOptionsRequest.add_member(:cloud_watch_log_delivery, Shapes::ShapeRef.new(shape: CloudWatchLogDeliveryOptions, required: true, location_name: "cloudWatchLogDelivery"))
     PutLoggingOptionsRequest.struct_class = Types::PutLoggingOptionsRequest
@@ -1437,6 +1462,19 @@ module Aws::IoTFleetWise
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:get_encryption_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEncryptionConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetEncryptionConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetEncryptionConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:get_fleet, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetFleet"
         o.http_method = "POST"
@@ -1800,6 +1838,20 @@ module Aws::IoTFleetWise
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:put_encryption_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutEncryptionConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutEncryptionConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutEncryptionConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:put_logging_options, Seahorse::Model::Operation.new.tap do |o|

@@ -94,19 +94,19 @@ module Aws::AppStream
                 "state" => "success",
                 "matcher" => "pathAll",
                 "argument" => "fleets[].state",
-                "expected" => "ACTIVE"
+                "expected" => "RUNNING"
               },
               {
                 "state" => "failure",
                 "matcher" => "pathAny",
                 "argument" => "fleets[].state",
-                "expected" => "PENDING_DEACTIVATE"
+                "expected" => "STOPPING"
               },
               {
                 "state" => "failure",
                 "matcher" => "pathAny",
                 "argument" => "fleets[].state",
-                "expected" => "INACTIVE"
+                "expected" => "STOPPED"
               }
             ]
           )
@@ -144,19 +144,19 @@ module Aws::AppStream
                 "state" => "success",
                 "matcher" => "pathAll",
                 "argument" => "fleets[].state",
-                "expected" => "INACTIVE"
+                "expected" => "STOPPED"
               },
               {
                 "state" => "failure",
                 "matcher" => "pathAny",
                 "argument" => "fleets[].state",
-                "expected" => "PENDING_ACTIVATE"
+                "expected" => "STARTING"
               },
               {
                 "state" => "failure",
                 "matcher" => "pathAny",
                 "argument" => "fleets[].state",
-                "expected" => "ACTIVE"
+                "expected" => "RUNNING"
               }
             ]
           )

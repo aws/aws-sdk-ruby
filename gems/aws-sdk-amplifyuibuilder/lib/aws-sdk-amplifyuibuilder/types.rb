@@ -112,6 +112,38 @@ module Aws::AmplifyUIBuilder
       class Unknown < ApiConfiguration; end
     end
 
+    # Dependency package that may be required for the project code to run.
+    #
+    # @!attribute [rw] name
+    #   Name of the dependency package.
+    #   @return [String]
+    #
+    # @!attribute [rw] supported_version
+    #   Indicates the version of the supported dependency package.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_sem_ver
+    #   Determines if the dependency package is using Semantic versioning.
+    #   If set to true, it indicates that the dependency package uses
+    #   Semantic versioning.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] reason
+    #   Indicates the reason to include the dependency package in your
+    #   project code.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/CodegenDependency AWS API Documentation
+    #
+    class CodegenDependency < Struct.new(
+      :name,
+      :supported_version,
+      :is_sem_ver,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the feature flags that you can specify for a code generation
     # job.
     #
@@ -337,6 +369,11 @@ module Aws::AmplifyUIBuilder
     #   The time that the code generation job was modified.
     #   @return [Time]
     #
+    # @!attribute [rw] dependencies
+    #   Lists the dependency packages that may be required for the project
+    #   code to run.
+    #   @return [Array<Types::CodegenDependency>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/CodegenJob AWS API Documentation
     #
     class CodegenJob < Struct.new(
@@ -352,7 +389,8 @@ module Aws::AmplifyUIBuilder
       :asset,
       :tags,
       :created_at,
-      :modified_at)
+      :modified_at,
+      :dependencies)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2699,6 +2737,11 @@ module Aws::AmplifyUIBuilder
     #   The API configuration for the code generation job.
     #   @return [Types::ApiConfiguration]
     #
+    # @!attribute [rw] dependencies
+    #   Lists the dependency packages that may be required for the project
+    #   code to run.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ReactStartCodegenJobData AWS API Documentation
     #
     class ReactStartCodegenJobData < Struct.new(
@@ -2707,7 +2750,8 @@ module Aws::AmplifyUIBuilder
       :script,
       :render_type_declarations,
       :inline_source_map,
-      :api_configuration)
+      :api_configuration,
+      :dependencies)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -6191,6 +6191,7 @@ module Aws::QuickSight
     RegisterUserRequest.add_member(:external_login_federation_provider_type, Shapes::ShapeRef.new(shape: String, location_name: "ExternalLoginFederationProviderType"))
     RegisterUserRequest.add_member(:custom_federation_provider_url, Shapes::ShapeRef.new(shape: String, location_name: "CustomFederationProviderUrl"))
     RegisterUserRequest.add_member(:external_login_id, Shapes::ShapeRef.new(shape: String, location_name: "ExternalLoginId"))
+    RegisterUserRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     RegisterUserRequest.struct_class = Types::RegisterUserRequest
 
     RegisterUserResponse.add_member(:user, Shapes::ShapeRef.new(shape: User, location_name: "User"))

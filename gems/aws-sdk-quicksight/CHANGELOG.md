@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.91.0 (2023-09-25)
+------------------
+
+* Feature - Added ability to tag users upon creation.
+
 1.90.0 (2023-09-11)
 ------------------
 

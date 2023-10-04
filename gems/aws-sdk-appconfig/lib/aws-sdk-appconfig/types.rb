@@ -304,6 +304,20 @@ module Aws::AppConfig
     #   `AWS.Freeform`
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name of the Key Management Service key to
+    #   encrypt new configuration data versions in the AppConfig hosted
+    #   configuration store. This attribute is only used for `hosted`
+    #   configuration types. To encrypt data managed in other configuration
+    #   stores, see the documentation for how to specify an KMS key for that
+    #   particular service.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_identifier
+    #   The Key Management Service key identifier (key ID, key alias, or key
+    #   ARN) provided when the resource was created or updated.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ConfigurationProfile AWS API Documentation
     #
     class ConfigurationProfile < Struct.new(
@@ -314,7 +328,9 @@ module Aws::AppConfig
       :location_uri,
       :retrieval_role_arn,
       :validators,
-      :type)
+      :type,
+      :kms_key_arn,
+      :kms_key_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -445,8 +461,11 @@ module Aws::AppConfig
     #     parameter, specify either the parameter name in the format
     #     `ssm-parameter://<parameter name>` or the ARN.
     #
+    #   * For an Amazon Web Services CodePipeline pipeline, specify the URI
+    #     in the following format: `codepipeline`://&lt;pipeline name&gt;.
+    #
     #   * For an Secrets Manager secret, specify the URI in the following
-    #     format: `secrets-manager`://&lt;secret name&gt;.
+    #     format: `secretsmanager`://&lt;secret name&gt;.
     #
     #   * For an Amazon S3 object, specify the URI in the following format:
     #     `s3://<bucket>/<objectKey> `. Here is an example:
@@ -489,6 +508,16 @@ module Aws::AppConfig
     #   `AWS.Freeform`
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_identifier
+    #   The identifier for an Key Management Service key to encrypt new
+    #   configuration data versions in the AppConfig hosted configuration
+    #   store. This attribute is only used for `hosted` configuration types.
+    #   The identifier can be an KMS key ID, alias, or the Amazon Resource
+    #   Name (ARN) of the key ID or alias. To encrypt data managed in other
+    #   configuration stores, see the documentation for how to specify an
+    #   KMS key for that particular service.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/CreateConfigurationProfileRequest AWS API Documentation
     #
     class CreateConfigurationProfileRequest < Struct.new(
@@ -499,7 +528,8 @@ module Aws::AppConfig
       :retrieval_role_arn,
       :validators,
       :tags,
-      :type)
+      :type,
+      :kms_key_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -968,9 +998,12 @@ module Aws::AppConfig
     #   @return [String]
     #
     # @!attribute [rw] kms_key_identifier
-    #   The KMS key identifier (key ID, key alias, or key ARN). AppConfig
-    #   uses this ID to encrypt the configuration data using a customer
-    #   managed key.
+    #   The Key Management Service key identifier (key ID, key alias, or key
+    #   ARN) provided when the resource was created or updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_label
+    #   A user-defined label for an AppConfig hosted configuration version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/Deployment AWS API Documentation
@@ -996,7 +1029,8 @@ module Aws::AppConfig
       :completed_at,
       :applied_extensions,
       :kms_key_arn,
-      :kms_key_identifier)
+      :kms_key_identifier,
+      :version_label)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1018,10 +1052,15 @@ module Aws::AppConfig
     #
     # @!attribute [rw] description
     #   A description of the deployment event. Descriptions include, but are
-    #   not limited to, the user account or the Amazon CloudWatch alarm ARN
-    #   that initiated a rollback, the percentage of hosts that received the
-    #   deployment, or in the case of an internal error, a recommendation to
-    #   attempt a new deployment.
+    #   not limited to, the following:
+    #
+    #   * The Amazon Web Services account or the Amazon CloudWatch alarm ARN
+    #     that initiated a rollback.
+    #
+    #   * The percentage of hosts that received the deployment.
+    #
+    #   * A recommendation to attempt a new deployment (in the case of an
+    #     internal error).
     #   @return [String]
     #
     # @!attribute [rw] action_invocations
@@ -1161,6 +1200,10 @@ module Aws::AppConfig
     #   Time the deployment completed.
     #   @return [Time]
     #
+    # @!attribute [rw] version_label
+    #   A user-defined label for an AppConfig hosted configuration version.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/DeploymentSummary AWS API Documentation
     #
     class DeploymentSummary < Struct.new(
@@ -1174,7 +1217,8 @@ module Aws::AppConfig
       :state,
       :percentage_complete,
       :started_at,
-      :completed_at)
+      :completed_at,
+      :version_label)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1677,6 +1721,12 @@ module Aws::AppConfig
     #   A user-defined label for an AppConfig hosted configuration version.
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name of the Key Management Service key that was
+    #   used to encrypt this specific version of the configuration data in
+    #   the AppConfig hosted configuration store.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/HostedConfigurationVersion AWS API Documentation
     #
     class HostedConfigurationVersion < Struct.new(
@@ -1686,7 +1736,8 @@ module Aws::AppConfig
       :description,
       :content,
       :content_type,
-      :version_label)
+      :version_label,
+      :kms_key_arn)
       SENSITIVE = [:content]
       include Aws::Structure
     end
@@ -1722,6 +1773,12 @@ module Aws::AppConfig
     #   A user-defined label for an AppConfig hosted configuration version.
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name of the Key Management Service key that was
+    #   used to encrypt this specific version of the configuration data in
+    #   the AppConfig hosted configuration store.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/HostedConfigurationVersionSummary AWS API Documentation
     #
     class HostedConfigurationVersionSummary < Struct.new(
@@ -1730,7 +1787,8 @@ module Aws::AppConfig
       :version_number,
       :description,
       :content_type,
-      :version_label)
+      :version_label,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2152,9 +2210,26 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # The number of hosted configuration versions exceeds the limit for the
-    # AppConfig hosted configuration store. Delete one or more versions and
-    # try again.
+    # The number of one more AppConfig resources exceeds the maximum
+    # allowed. Verify that your environment doesn't exceed the following
+    # service quotas:
+    #
+    # Applications: 100 max
+    #
+    # Deployment strategies: 20 max
+    #
+    # Configuration profiles: 100 max per application
+    #
+    # Environments: 20 max per application
+    #
+    # To resolve this issue, you can delete one or more resources and try
+    # again. Or, you can request a quota increase. For more information
+    # about quotas and to request an increase, see [Service quotas for
+    # AppConfig][1] in the Amazon Web Services General Reference.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/appconfig.html#limits_appconfig
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2186,7 +2261,8 @@ module Aws::AppConfig
     # @!attribute [rw] configuration_version
     #   The configuration version to deploy. If deploying an AppConfig
     #   hosted configuration version, you can specify either the version
-    #   number or version label.
+    #   number or version label. For all other configurations, you must
+    #   specify the version number.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2325,6 +2401,16 @@ module Aws::AppConfig
     #   A list of methods for validating the configuration.
     #   @return [Array<Types::Validator>]
     #
+    # @!attribute [rw] kms_key_identifier
+    #   The identifier for a Key Management Service key to encrypt new
+    #   configuration data versions in the AppConfig hosted configuration
+    #   store. This attribute is only used for `hosted` configuration types.
+    #   The identifier can be an KMS key ID, alias, or the Amazon Resource
+    #   Name (ARN) of the key ID or alias. To encrypt data managed in other
+    #   configuration stores, see the documentation for how to specify an
+    #   KMS key for that particular service.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/UpdateConfigurationProfileRequest AWS API Documentation
     #
     class UpdateConfigurationProfileRequest < Struct.new(
@@ -2333,7 +2419,8 @@ module Aws::AppConfig
       :name,
       :description,
       :retrieval_role_arn,
-      :validators)
+      :validators,
+      :kms_key_identifier)
       SENSITIVE = []
       include Aws::Structure
     end

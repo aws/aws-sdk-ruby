@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.411.0 (2023-10-02)
+------------------
+
+* Feature - Introducing Amazon EC2 R7iz instances with 3.9 GHz sustained all-core turbo frequency and deliver up to 20% better performance than previous generation z1d instances.
+
+1.410.0 (2023-09-28)
+------------------
+
+* Feature - Adds support for Customer Managed Key encryption for Amazon Verified Access resources
+
+1.409.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.408.0 (2023-09-26)
+------------------
+
+* Feature - The release includes AWS verified access to support FIPs compliance in North America regions
+
+1.407.0 (2023-09-22)
+------------------
+
+* Feature - EC2 M2 Pro Mac instances are powered by Apple M2 Pro Mac Mini computers featuring 12 core CPU, 19 core GPU, 32 GiB of memory, and 16 core Apple Neural Engine and uniquely enabled by the AWS Nitro System through high-speed Thunderbolt connections.
+
+1.406.0 (2023-09-19)
+------------------
+
+* Feature - This release adds support for C7i, and R7a instance types.
+
 1.405.0 (2023-09-12)
 ------------------
 

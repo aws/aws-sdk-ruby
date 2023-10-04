@@ -288,6 +288,72 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] arn
+    #   Connector arn.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_id
+    #   Connector ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Connector name.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssm_command_config
+    #   Connector SSM command config.
+    #   @return [Types::ConnectorSsmCommandConfig]
+    #
+    # @!attribute [rw] ssm_instance_id
+    #   Connector SSM instance ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Connector tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/Connector AWS API Documentation
+    #
+    class Connector < Struct.new(
+      :arn,
+      :connector_id,
+      :name,
+      :ssm_command_config,
+      :ssm_instance_id,
+      :tags)
+      SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
+    # Connector SSM command config.
+    #
+    # @!attribute [rw] cloud_watch_log_group_name
+    #   Connector SSM command config CloudWatch log group name.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_output_enabled
+    #   Connector SSM command config CloudWatch output enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] output_s3_bucket_name
+    #   Connector SSM command config output S3 bucket name.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_output_enabled
+    #   Connector SSM command config S3 output enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ConnectorSsmCommandConfig AWS API Documentation
+    #
+    class ConnectorSsmCommandConfig < Struct.new(
+      :cloud_watch_log_group_name,
+      :cloud_watch_output_enabled,
+      :output_s3_bucket_name,
+      :s3_output_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] account_id
     #   Account ID.
     #   @return [String]
@@ -310,6 +376,33 @@ module Aws::Mgn
       :account_id,
       :description,
       :name,
+      :tags)
+      SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   Create Connector request name.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssm_command_config
+    #   Create Connector request SSM command config.
+    #   @return [Types::ConnectorSsmCommandConfig]
+    #
+    # @!attribute [rw] ssm_instance_id
+    #   Create Connector request SSM instance ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Create Connector request tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CreateConnectorRequest AWS API Documentation
+    #
+    class CreateConnectorRequest < Struct.new(
+      :name,
+      :ssm_command_config,
+      :ssm_instance_id,
       :tags)
       SENSITIVE = [:tags]
       include Aws::Structure
@@ -671,6 +764,18 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteApplicationResponse AWS API Documentation
     #
     class DeleteApplicationResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] connector_id
+    #   Delete Connector request connector ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteConnectorRequest AWS API Documentation
+    #
+    class DeleteConnectorRequest < Struct.new(
+      :connector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] account_id
     #   Request to delete Job from service by Account ID.
@@ -2244,6 +2349,59 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] filters
+    #   List Connectors Request filters.
+    #   @return [Types::ListConnectorsRequestFilters]
+    #
+    # @!attribute [rw] max_results
+    #   List Connectors Request max results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   List Connectors Request next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListConnectorsRequest AWS API Documentation
+    #
+    class ListConnectorsRequest < Struct.new(
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # List Connectors Request Filters.
+    #
+    # @!attribute [rw] connector_i_ds
+    #   List Connectors Request Filters connector IDs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListConnectorsRequestFilters AWS API Documentation
+    #
+    class ListConnectorsRequestFilters < Struct.new(
+      :connector_i_ds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   List connectors response items.
+    #   @return [Array<Types::Connector>]
+    #
+    # @!attribute [rw] next_token
+    #   List connectors response next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListConnectorsResponse AWS API Documentation
+    #
+    class ListConnectorsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # List export errors request.
     #
     # @!attribute [rw] export_id
@@ -3441,6 +3599,10 @@ module Aws::Mgn
     #   Source server ARN.
     #   @return [String]
     #
+    # @!attribute [rw] connector_action
+    #   Source Server connector action.
+    #   @return [Types::SourceServerConnectorAction]
+    #
     # @!attribute [rw] data_replication_info
     #   Source server data replication info.
     #   @return [Types::DataReplicationInfo]
@@ -3490,6 +3652,7 @@ module Aws::Mgn
     class SourceServer < Struct.new(
       :application_id,
       :arn,
+      :connector_action,
       :data_replication_info,
       :fqdn_for_action_framework,
       :is_archived,
@@ -3582,6 +3745,25 @@ module Aws::Mgn
     #
     class SourceServerActionsRequestFilters < Struct.new(
       :action_i_ds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Source Server connector action.
+    #
+    # @!attribute [rw] connector_arn
+    #   Source Server connector action connector arn.
+    #   @return [String]
+    #
+    # @!attribute [rw] credentials_secret_arn
+    #   Source Server connector action credentials secret arn.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/SourceServerConnectorAction AWS API Documentation
+    #
+    class SourceServerConnectorAction < Struct.new(
+      :connector_arn,
+      :credentials_secret_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4104,6 +4286,28 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] connector_id
+    #   Update Connector request connector ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Update Connector request name.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssm_command_config
+    #   Update Connector request SSM command config.
+    #   @return [Types::ConnectorSsmCommandConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateConnectorRequest AWS API Documentation
+    #
+    class UpdateConnectorRequest < Struct.new(
+      :connector_id,
+      :name,
+      :ssm_command_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] account_id
     #   Update Launch configuration Account ID.
     #   @return [String]
@@ -4453,6 +4657,28 @@ module Aws::Mgn
     class UpdateSourceServerReplicationTypeRequest < Struct.new(
       :account_id,
       :replication_type,
+      :source_server_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   Update Source Server request account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_action
+    #   Update Source Server request connector action.
+    #   @return [Types::SourceServerConnectorAction]
+    #
+    # @!attribute [rw] source_server_id
+    #   Update Source Server request source server ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateSourceServerRequest AWS API Documentation
+    #
+    class UpdateSourceServerRequest < Struct.new(
+      :account_id,
+      :connector_action,
       :source_server_id)
       SENSITIVE = []
       include Aws::Structure

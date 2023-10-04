@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.54.0 (2023-09-20)
+------------------
+
+* Feature - Updated DescribeMediaStorageConfiguration, StartEdgeConfigurationUpdate, ImageGenerationConfiguration$SamplingInterval, and UpdateMediaStorageConfiguration to match AWS Docs.
+
 1.53.0 (2023-08-07)
 ------------------
 

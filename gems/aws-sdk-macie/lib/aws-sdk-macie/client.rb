@@ -711,7 +711,7 @@ module Aws::Macie
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

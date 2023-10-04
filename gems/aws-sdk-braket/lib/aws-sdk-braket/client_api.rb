@@ -37,6 +37,8 @@ module Aws::Braket
     DeviceArn = Shapes::StringShape.new(name: 'DeviceArn')
     DeviceConfig = Shapes::StructureShape.new(name: 'DeviceConfig')
     DeviceOfflineException = Shapes::StructureShape.new(name: 'DeviceOfflineException')
+    DeviceQueueInfo = Shapes::StructureShape.new(name: 'DeviceQueueInfo')
+    DeviceQueueInfoList = Shapes::ListShape.new(name: 'DeviceQueueInfoList')
     DeviceRetiredException = Shapes::StructureShape.new(name: 'DeviceRetiredException')
     DeviceStatus = Shapes::StringShape.new(name: 'DeviceStatus')
     DeviceSummary = Shapes::StructureShape.new(name: 'DeviceSummary')
@@ -49,6 +51,9 @@ module Aws::Braket
     GetJobResponseJobNameString = Shapes::StringShape.new(name: 'GetJobResponseJobNameString')
     GetQuantumTaskRequest = Shapes::StructureShape.new(name: 'GetQuantumTaskRequest')
     GetQuantumTaskResponse = Shapes::StructureShape.new(name: 'GetQuantumTaskResponse')
+    HybridJobAdditionalAttributeName = Shapes::StringShape.new(name: 'HybridJobAdditionalAttributeName')
+    HybridJobAdditionalAttributeNamesList = Shapes::ListShape.new(name: 'HybridJobAdditionalAttributeNamesList')
+    HybridJobQueueInfo = Shapes::StructureShape.new(name: 'HybridJobQueueInfo')
     HyperParameters = Shapes::MapShape.new(name: 'HyperParameters')
     HyperParametersValueString = Shapes::StringShape.new(name: 'HyperParametersValueString')
     InputConfigList = Shapes::ListShape.new(name: 'InputConfigList')
@@ -77,10 +82,15 @@ module Aws::Braket
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    QuantumTaskAdditionalAttributeName = Shapes::StringShape.new(name: 'QuantumTaskAdditionalAttributeName')
+    QuantumTaskAdditionalAttributeNamesList = Shapes::ListShape.new(name: 'QuantumTaskAdditionalAttributeNamesList')
     QuantumTaskArn = Shapes::StringShape.new(name: 'QuantumTaskArn')
+    QuantumTaskQueueInfo = Shapes::StructureShape.new(name: 'QuantumTaskQueueInfo')
     QuantumTaskStatus = Shapes::StringShape.new(name: 'QuantumTaskStatus')
     QuantumTaskSummary = Shapes::StructureShape.new(name: 'QuantumTaskSummary')
     QuantumTaskSummaryList = Shapes::ListShape.new(name: 'QuantumTaskSummaryList')
+    QueueName = Shapes::StringShape.new(name: 'QueueName')
+    QueuePriority = Shapes::StringShape.new(name: 'QueuePriority')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     S3DataSource = Shapes::StructureShape.new(name: 'S3DataSource')
@@ -195,6 +205,13 @@ module Aws::Braket
     DeviceOfflineException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     DeviceOfflineException.struct_class = Types::DeviceOfflineException
 
+    DeviceQueueInfo.add_member(:queue, Shapes::ShapeRef.new(shape: QueueName, required: true, location_name: "queue"))
+    DeviceQueueInfo.add_member(:queue_priority, Shapes::ShapeRef.new(shape: QueuePriority, location_name: "queuePriority"))
+    DeviceQueueInfo.add_member(:queue_size, Shapes::ShapeRef.new(shape: String, required: true, location_name: "queueSize"))
+    DeviceQueueInfo.struct_class = Types::DeviceQueueInfo
+
+    DeviceQueueInfoList.member = Shapes::ShapeRef.new(shape: DeviceQueueInfo)
+
     DeviceRetiredException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     DeviceRetiredException.struct_class = Types::DeviceRetiredException
 
@@ -213,11 +230,13 @@ module Aws::Braket
     GetDeviceResponse.add_member(:device_arn, Shapes::ShapeRef.new(shape: DeviceArn, required: true, location_name: "deviceArn"))
     GetDeviceResponse.add_member(:device_capabilities, Shapes::ShapeRef.new(shape: JsonValue, required: true, location_name: "deviceCapabilities", metadata: {"jsonvalue"=>true}))
     GetDeviceResponse.add_member(:device_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "deviceName"))
+    GetDeviceResponse.add_member(:device_queue_info, Shapes::ShapeRef.new(shape: DeviceQueueInfoList, location_name: "deviceQueueInfo"))
     GetDeviceResponse.add_member(:device_status, Shapes::ShapeRef.new(shape: DeviceStatus, required: true, location_name: "deviceStatus"))
     GetDeviceResponse.add_member(:device_type, Shapes::ShapeRef.new(shape: DeviceType, required: true, location_name: "deviceType"))
     GetDeviceResponse.add_member(:provider_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "providerName"))
     GetDeviceResponse.struct_class = Types::GetDeviceResponse
 
+    GetJobRequest.add_member(:additional_attribute_names, Shapes::ShapeRef.new(shape: HybridJobAdditionalAttributeNamesList, location: "querystring", location_name: "additionalAttributeNames"))
     GetJobRequest.add_member(:job_arn, Shapes::ShapeRef.new(shape: JobArn, required: true, location: "uri", location_name: "jobArn"))
     GetJobRequest.struct_class = Types::GetJobRequest
 
@@ -235,6 +254,7 @@ module Aws::Braket
     GetJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: JobArn, required: true, location_name: "jobArn"))
     GetJobResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: GetJobResponseJobNameString, required: true, location_name: "jobName"))
     GetJobResponse.add_member(:output_data_config, Shapes::ShapeRef.new(shape: JobOutputDataConfig, required: true, location_name: "outputDataConfig"))
+    GetJobResponse.add_member(:queue_info, Shapes::ShapeRef.new(shape: HybridJobQueueInfo, location_name: "queueInfo"))
     GetJobResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     GetJobResponse.add_member(:started_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "startedAt"))
     GetJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: JobPrimaryStatus, required: true, location_name: "status"))
@@ -242,6 +262,7 @@ module Aws::Braket
     GetJobResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     GetJobResponse.struct_class = Types::GetJobResponse
 
+    GetQuantumTaskRequest.add_member(:additional_attribute_names, Shapes::ShapeRef.new(shape: QuantumTaskAdditionalAttributeNamesList, location: "querystring", location_name: "additionalAttributeNames"))
     GetQuantumTaskRequest.add_member(:quantum_task_arn, Shapes::ShapeRef.new(shape: QuantumTaskArn, required: true, location: "uri", location_name: "quantumTaskArn"))
     GetQuantumTaskRequest.struct_class = Types::GetQuantumTaskRequest
 
@@ -254,10 +275,18 @@ module Aws::Braket
     GetQuantumTaskResponse.add_member(:output_s3_bucket, Shapes::ShapeRef.new(shape: String, required: true, location_name: "outputS3Bucket"))
     GetQuantumTaskResponse.add_member(:output_s3_directory, Shapes::ShapeRef.new(shape: String, required: true, location_name: "outputS3Directory"))
     GetQuantumTaskResponse.add_member(:quantum_task_arn, Shapes::ShapeRef.new(shape: QuantumTaskArn, required: true, location_name: "quantumTaskArn"))
+    GetQuantumTaskResponse.add_member(:queue_info, Shapes::ShapeRef.new(shape: QuantumTaskQueueInfo, location_name: "queueInfo"))
     GetQuantumTaskResponse.add_member(:shots, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "shots"))
     GetQuantumTaskResponse.add_member(:status, Shapes::ShapeRef.new(shape: QuantumTaskStatus, required: true, location_name: "status"))
     GetQuantumTaskResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     GetQuantumTaskResponse.struct_class = Types::GetQuantumTaskResponse
+
+    HybridJobAdditionalAttributeNamesList.member = Shapes::ShapeRef.new(shape: HybridJobAdditionalAttributeName)
+
+    HybridJobQueueInfo.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    HybridJobQueueInfo.add_member(:position, Shapes::ShapeRef.new(shape: String, required: true, location_name: "position"))
+    HybridJobQueueInfo.add_member(:queue, Shapes::ShapeRef.new(shape: QueueName, required: true, location_name: "queue"))
+    HybridJobQueueInfo.struct_class = Types::HybridJobQueueInfo
 
     HyperParameters.key = Shapes::ShapeRef.new(shape: String256)
     HyperParameters.value = Shapes::ShapeRef.new(shape: HyperParametersValueString)
@@ -312,6 +341,14 @@ module Aws::Braket
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    QuantumTaskAdditionalAttributeNamesList.member = Shapes::ShapeRef.new(shape: QuantumTaskAdditionalAttributeName)
+
+    QuantumTaskQueueInfo.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    QuantumTaskQueueInfo.add_member(:position, Shapes::ShapeRef.new(shape: String, required: true, location_name: "position"))
+    QuantumTaskQueueInfo.add_member(:queue, Shapes::ShapeRef.new(shape: QueueName, required: true, location_name: "queue"))
+    QuantumTaskQueueInfo.add_member(:queue_priority, Shapes::ShapeRef.new(shape: QueuePriority, location_name: "queuePriority"))
+    QuantumTaskQueueInfo.struct_class = Types::QuantumTaskQueueInfo
 
     QuantumTaskSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
     QuantumTaskSummary.add_member(:device_arn, Shapes::ShapeRef.new(shape: DeviceArn, required: true, location_name: "deviceArn"))

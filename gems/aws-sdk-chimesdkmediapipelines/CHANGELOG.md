@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.14.0 (2023-09-25)
+------------------
+
+* Feature - Adds support for sending WebRTC audio to Amazon Kineses Video Streams.
+
 1.13.0 (2023-09-01)
 ------------------
 

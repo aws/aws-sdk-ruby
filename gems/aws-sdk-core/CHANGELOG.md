@@ -3,6 +3,35 @@ Unreleased Changes
 
 * Issue - Ignore `__type` when deserializing Unions.
 
+3.185.0 (2023-10-02)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+3.184.0 (2023-09-27)
+------------------
+
+* Feature - Change the `ServiceError` data member from read only to read/write.
+
+3.183.1 (2023-09-25)
+------------------
+
+* Issue - Remove value inspection from param validation errors.
+
+3.183.0 (2023-09-20)
+------------------
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+3.182.0 (2023-09-19)
+------------------
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
 3.181.1 (2023-09-14)
 ------------------
 

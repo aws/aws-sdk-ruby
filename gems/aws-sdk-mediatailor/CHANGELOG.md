@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2023-10-04)
+------------------
+
+* Feature - Updates DescribeVodSource to include a list of ad break opportunities in the response
+
+1.70.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.69.0 (2023-08-24)
 ------------------
 

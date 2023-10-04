@@ -1288,6 +1288,12 @@ module Aws::IoT
     # @!attribute [rw] criteria
     #   The criteria that determine if a device is behaving normally in
     #   regard to the `metric`.
+    #
+    #   <note markdown="1"> In the IoT console, you can choose to be sent an alert through
+    #   Amazon SNS when IoT Device Defender detects that a device is
+    #   behaving anomalously.
+    #
+    #    </note>
     #   @return [Types::BehaviorCriteria]
     #
     # @!attribute [rw] suppress_alerts
@@ -2879,20 +2885,18 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] document_source
-    #   An S3 link to the job document to use in the template. Required if
-    #   you don't specify a value for `document`.
+    #   An S3 link, or S3 object URL, to the job document. The link is an
+    #   Amazon S3 object URL and is required if you don't specify a value
+    #   for `document`.
     #
-    #   <note markdown="1"> If the job document resides in an S3 bucket, you must use a
-    #   placeholder link when specifying the document.
+    #   For example, `--document-source
+    #   https://s3.region-code.amazonaws.com/example-firmware/device-firmware.1.0`
     #
-    #    The placeholder link is of the following form:
+    #   For more information, see [Methods for accessing a bucket][1].
     #
-    #    `$\{aws:iot:s3-presigned-url:https://s3.amazonaws.com/bucket/key\}`
     #
-    #    where *bucket* is your bucket name and *key* is the object in the
-    #   bucket to which you are linking.
     #
-    #    </note>
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html
     #   @return [String]
     #
     # @!attribute [rw] document
@@ -3127,8 +3131,8 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] additional_parameters
-    #   A list of additional OTA update parameters which are name-value
-    #   pairs.
+    #   A list of additional OTA update parameters, which are name-value
+    #   pairs. They won't be sent to devices as a part of the Job document.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tags
@@ -3184,7 +3188,7 @@ module Aws::IoT
     end
 
     # @!attribute [rw] package_name
-    #   The name of the new package.
+    #   The name of the new software package.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -3215,7 +3219,7 @@ module Aws::IoT
     end
 
     # @!attribute [rw] package_name
-    #   The name of the package.
+    #   The name of the software package.
     #   @return [String]
     #
     # @!attribute [rw] package_arn
@@ -3235,7 +3239,7 @@ module Aws::IoT
     end
 
     # @!attribute [rw] package_name
-    #   The name of the associated package.
+    #   The name of the associated software package.
     #   @return [String]
     #
     # @!attribute [rw] version_name
@@ -3285,7 +3289,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] package_name
-    #   The name of the associated package.
+    #   The name of the associated software package.
     #   @return [String]
     #
     # @!attribute [rw] version_name
@@ -4423,7 +4427,7 @@ module Aws::IoT
     class DeleteOTAUpdateResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] package_name
-    #   The name of the target package.
+    #   The name of the target software package.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -4445,7 +4449,7 @@ module Aws::IoT
     class DeletePackageResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] package_name
-    #   The name of the associated package.
+    #   The name of the associated software package.
     #   @return [String]
     #
     # @!attribute [rw] version_name
@@ -5287,7 +5291,8 @@ module Aws::IoT
     #
     #   We strongly recommend that customers use the newer `iot:Data-ATS`
     #   endpoint type to avoid issues related to the widespread distrust of
-    #   Symantec certificate authorities.
+    #   Symantec certificate authorities. ATS Signed Certificates are more
+    #   secure and are trusted by most popular browsers.
     #   @return [String]
     #
     class DescribeEndpointRequest < Struct.new(
@@ -7232,7 +7237,7 @@ module Aws::IoT
     end
 
     # @!attribute [rw] package_name
-    #   The name of the target package.
+    #   The name of the target software package.
     #   @return [String]
     #
     class GetPackageRequest < Struct.new(
@@ -7242,7 +7247,7 @@ module Aws::IoT
     end
 
     # @!attribute [rw] package_name
-    #   The name of the package.
+    #   The name of the software package.
     #   @return [String]
     #
     # @!attribute [rw] package_arn
@@ -7296,7 +7301,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] package_name
-    #   The name of the package.
+    #   The name of the software package.
     #   @return [String]
     #
     # @!attribute [rw] version_name
@@ -8612,12 +8617,44 @@ module Aws::IoT
     #   Properties of the Apache Kafka producer client.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] headers
+    #   The list of Kafka headers that you specify.
+    #   @return [Array<Types::KafkaActionHeader>]
+    #
     class KafkaAction < Struct.new(
       :destination_arn,
       :topic,
       :key,
       :partition,
-      :client_properties)
+      :client_properties,
+      :headers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a Kafka header using key-value pairs when you create a
+    # Rule’s Kafka Action. You can use these headers to route data from IoT
+    # clients to downstream Kafka clusters without modifying your message
+    # payload.
+    #
+    # For more information about Rule's Kafka action, see [Apache
+    # Kafka][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/apache-kafka-rule-action.html
+    #
+    # @!attribute [rw] key
+    #   The key of the Kafka header.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the Kafka header.
+    #   @return [String]
+    #
+    class KafkaActionHeader < Struct.new(
+      :key,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9996,7 +10033,7 @@ module Aws::IoT
     end
 
     # @!attribute [rw] package_name
-    #   The name of the target package.
+    #   The name of the target software package.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -11836,7 +11873,8 @@ module Aws::IoT
     #   @return [Types::CodeSigning]
     #
     # @!attribute [rw] attributes
-    #   A list of name/attribute pairs.
+    #   A list of name-attribute pairs. They won't be sent to devices as a
+    #   part of the Job document.
     #   @return [Hash<String,String>]
     #
     class OTAUpdateFile < Struct.new(
@@ -12041,7 +12079,7 @@ module Aws::IoT
     # A summary of information about a software package.
     #
     # @!attribute [rw] package_name
-    #   The name for the target package.
+    #   The name for the target software package.
     #   @return [String]
     #
     # @!attribute [rw] default_version_name
@@ -13133,6 +13171,13 @@ module Aws::IoT
     #   to a year in advance and must be scheduled a minimum of thirty
     #   minutes from the current time. The date and time format for the
     #   `startTime` is YYYY-MM-DD for the date and HH:MM for the time.
+    #
+    #   For more information on the syntax for `startTime` when using an API
+    #   command or the Command Line Interface, see [Timestamp][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp
     #   @return [String]
     #
     # @!attribute [rw] end_time
@@ -13144,6 +13189,13 @@ module Aws::IoT
     #   maximum duration between `startTime` and `endTime` is two years. The
     #   date and time format for the `endTime` is YYYY-MM-DD for the date
     #   and HH:MM for the time.
+    #
+    #   For more information on the syntax for `endTime` when using an API
+    #   command or the Command Line Interface, see [Timestamp][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp
     #   @return [String]
     #
     # @!attribute [rw] end_behavior
@@ -15824,7 +15876,7 @@ module Aws::IoT
     class UpdatePackageConfigurationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] package_name
-    #   The name of the target package.
+    #   The name of the target software package.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -15882,8 +15934,8 @@ module Aws::IoT
     #
     # @!attribute [rw] attributes
     #   Metadata that can be used to define a package version’s
-    #   configuration. For example, the S3 file location, configuration
-    #   options that are being sent to the device or fleet.
+    #   configuration. For example, the Amazon S3 file location,
+    #   configuration options that are being sent to the device or fleet.
     #
     #   **Note:** Attributes can be updated only when the package version is
     #   in a draft state.

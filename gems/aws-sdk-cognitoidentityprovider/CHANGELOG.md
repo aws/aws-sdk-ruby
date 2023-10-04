@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2023-09-27)
+------------------
+
+* Feature - The UserPoolType Status field is no longer used.
+
 1.81.0 (2023-08-29)
 ------------------
 

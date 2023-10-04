@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2023-10-03)
+------------------
+
+* Feature - AWS Well-Architected now supports Review Templates that allows you to create templates with pre-filled answers for Well-Architected and Custom Lens best practices.
+
+1.29.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.28.0 (2023-07-11)
 ------------------
 

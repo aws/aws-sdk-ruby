@@ -644,7 +644,10 @@ module Aws::IoTFleetWise
     #
     #   Amazon S3 optimizes the cost of data storage and provides additional
     #   mechanisms to use vehicle data, such as data lakes, centralized data
-    #   storage, data processing pipelines, and analytics.
+    #   storage, data processing pipelines, and analytics. Amazon Web
+    #   Services IoT FleetWise supports at-least-once file delivery to S3.
+    #   Your vehicle data is stored on multiple Amazon Web Services IoT
+    #   FleetWise servers for redundancy and high availability.
     #
     #   You can use Amazon Timestream to access and analyze time series
     #   data, and Timestream to query vehicle data so that you can identify
@@ -1535,6 +1538,51 @@ module Aws::IoTFleetWise
       :description,
       :model_manifest_arn,
       :status,
+      :creation_time,
+      :last_modification_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    class GetEncryptionConfigurationRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] kms_key_id
+    #   The ID of the KMS key that is used for encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_status
+    #   The encryption status.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_type
+    #   The type of encryption. Set to `KMS_BASED_ENCRYPTION` to use an KMS
+    #   key that you own and manage. Set to `FLEETWISE_DEFAULT_ENCRYPTION`
+    #   to use an Amazon Web Services managed key that is owned by the
+    #   Amazon Web Services IoT FleetWise service account.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message that describes why encryption settings couldn't
+    #   be configured, if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when encryption was configured in seconds since epoch
+    #   (January 1, 1970 at midnight UTC time).
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modification_time
+    #   The time when encryption was last updated in seconds since epoch
+    #   (January 1, 1970 at midnight UTC time).
+    #   @return [Time]
+    #
+    class GetEncryptionConfigurationResponse < Struct.new(
+      :kms_key_id,
+      :encryption_status,
+      :encryption_type,
+      :error_message,
       :creation_time,
       :last_modification_time)
       SENSITIVE = []
@@ -2919,6 +2967,46 @@ module Aws::IoTFleetWise
       :byte_length,
       :bit_right_shift,
       :bit_mask_length)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] kms_key_id
+    #   The ID of the KMS key that is used for encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_type
+    #   The type of encryption. Choose `KMS_BASED_ENCRYPTION` to use a KMS
+    #   key or `FLEETWISE_DEFAULT_ENCRYPTION` to use an Amazon Web Services
+    #   managed key.
+    #   @return [String]
+    #
+    class PutEncryptionConfigurationRequest < Struct.new(
+      :kms_key_id,
+      :encryption_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] kms_key_id
+    #   The ID of the KMS key that is used for encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_status
+    #   The encryption status.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_type
+    #   The type of encryption. Set to `KMS_BASED_ENCRYPTION` to use an KMS
+    #   key that you own and manage. Set to `FLEETWISE_DEFAULT_ENCRYPTION`
+    #   to use an Amazon Web Services managed key that is owned by the
+    #   Amazon Web Services IoT FleetWise service account.
+    #   @return [String]
+    #
+    class PutEncryptionConfigurationResponse < Struct.new(
+      :kms_key_id,
+      :encryption_status,
+      :encryption_type)
       SENSITIVE = []
       include Aws::Structure
     end

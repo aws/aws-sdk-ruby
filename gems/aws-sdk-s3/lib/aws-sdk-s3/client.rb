@@ -544,9 +544,11 @@ module Aws::S3
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading objects
+    #   from Requester Pays buckets, see [Downloading Objects in Requester
+    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -780,9 +782,11 @@ module Aws::S3
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading objects
+    #   from Requester Pays buckets, see [Downloading Objects in Requester
+    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1117,10 +1121,13 @@ module Aws::S3
     #   `StorageClass` parameter. For more information, see [Storage
     #   Classes][13] in the *Amazon S3 User Guide*.
     #
-    #   If the source object's storage class is GLACIER, you must restore a
-    #   copy of this object before you can use it as a source object for the
-    #   copy operation. For more information, see [RestoreObject][14]. For
-    #   more information, see [Copying Objects][15].
+    #   If the source object's storage class is GLACIER or DEEP\_ARCHIVE,
+    #   or the object's storage class is INTELLIGENT\_TIERING and it's [
+    #   S3 Intelligent-Tiering access tier][14] is Archive Access or Deep
+    #   Archive Access, you must restore a copy of this object before you
+    #   can use it as a source object for the copy operation. For more
+    #   information, see [RestoreObject][15]. For more information, see
+    #   [Copying Objects][16].
     #
     # Versioning
     #
@@ -1140,9 +1147,9 @@ module Aws::S3
     #
     # The following operations are related to `CopyObject`:
     #
-    # * [PutObject][16]
+    # * [PutObject][17]
     #
-    # * [GetObject][17]
+    # * [GetObject][18]
     #
     #
     #
@@ -1159,10 +1166,11 @@ module Aws::S3
     # [11]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html
     # [12]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
     # [13]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
-    # [14]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html
-    # [15]: https://docs.aws.amazon.com/AmazonS3/latest/dev/CopyingObjectsExamples.html
-    # [16]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
-    # [17]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
+    # [14]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/intelligent-tiering-overview.html#intel-tiering-tier-definition
+    # [15]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html
+    # [16]: https://docs.aws.amazon.com/AmazonS3/latest/dev/CopyingObjectsExamples.html
+    # [17]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
+    # [18]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
     #
     # @option params [String] :acl
     #   The canned ACL to apply to the object.
@@ -1324,12 +1332,13 @@ module Aws::S3
     #   Amazon S3 (for example, `AES256`, `aws:kms`, `aws:kms:dsse`).
     #
     # @option params [String] :storage_class
-    #   By default, Amazon S3 uses the STANDARD Storage Class to store newly
-    #   created objects. The STANDARD storage class provides high durability
-    #   and high availability. Depending on performance needs, you can specify
-    #   a different Storage Class. Amazon S3 on Outposts only uses the
-    #   OUTPOSTS Storage Class. For more information, see [Storage Classes][1]
-    #   in the *Amazon S3 User Guide*.
+    #   If the `x-amz-storage-class` header is not used, the copied object
+    #   will be stored in the STANDARD Storage Class by default. The STANDARD
+    #   storage class provides high durability and high availability.
+    #   Depending on performance needs, you can specify a different Storage
+    #   Class. Amazon S3 on Outposts only uses the OUTPOSTS Storage Class. For
+    #   more information, see [Storage Classes][1] in the *Amazon S3 User
+    #   Guide*.
     #
     #
     #
@@ -1360,12 +1369,12 @@ module Aws::S3
     #   ensure that the encryption key was transmitted without error.
     #
     # @option params [String] :ssekms_key_id
-    #   Specifies the KMS key ID to use for object encryption. All GET and PUT
-    #   requests for an object protected by KMS will fail if they're not made
-    #   via SSL or using SigV4. For information about configuring any of the
-    #   officially supported Amazon Web Services SDKs and Amazon Web Services
-    #   CLI, see [Specifying the Signature Version in Request
-    #   Authentication][1] in the *Amazon S3 User Guide*.
+    #   Specifies the KMS ID (Key ID, Key ARN, or Key Alias) to use for object
+    #   encryption. All GET and PUT requests for an object protected by KMS
+    #   will fail if they're not made via SSL or using SigV4. For information
+    #   about configuring any of the officially supported Amazon Web Services
+    #   SDKs and Amazon Web Services CLI, see [Specifying the Signature
+    #   Version in Request Authentication][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1402,9 +1411,11 @@ module Aws::S3
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading objects
+    #   from Requester Pays buckets, see [Downloading Objects in Requester
+    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1556,11 +1567,13 @@ module Aws::S3
     # Bucket][2].
     #
     # By default, the bucket is created in the US East (N. Virginia) Region.
-    # You can optionally specify a Region in the request body. You might
-    # choose a Region to optimize latency, minimize costs, or address
-    # regulatory requirements. For example, if you reside in Europe, you
-    # will probably find it advantageous to create buckets in the Europe
-    # (Ireland) Region. For more information, see [Accessing a bucket][3].
+    # You can optionally specify a Region in the request body. To constrain
+    # the bucket creation to a specific Region, you can use [
+    # `LocationConstraint` ][3] condition key. You might choose a Region to
+    # optimize latency, minimize costs, or address regulatory requirements.
+    # For example, if you reside in Europe, you will probably find it
+    # advantageous to create buckets in the Europe (Ireland) Region. For
+    # more information, see [Accessing a bucket][4].
     #
     # <note markdown="1"> If you send your create bucket request to the `s3.amazonaws.com`
     # endpoint, the request goes to the `us-east-1` Region. Accordingly, the
@@ -1569,7 +1582,7 @@ module Aws::S3
     # another Region where the bucket is to be created. If you create a
     # bucket in a Region other than US East (N. Virginia), your application
     # must be able to handle 307 redirect. For more information, see
-    # [Virtual hosting of buckets][4].
+    # [Virtual hosting of buckets][5].
     #
     #  </note>
     #
@@ -1602,19 +1615,19 @@ module Aws::S3
     #     you can use the `x-amz-object-ownership` header in your
     #     `CreateBucket` request to set the `ObjectOwnership` setting of
     #     your choice. For more information about S3 Object Ownership, see
-    #     [Controlling object ownership ][5] in the *Amazon S3 User Guide*.
+    #     [Controlling object ownership ][6] in the *Amazon S3 User Guide*.
     #
     #   * **S3 Block Public Access** - If your specific use case requires
     #     granting public access to your S3 resources, you can disable Block
     #     Public Access. You can create a new bucket with Block Public
     #     Access enabled, then separately call the [
-    #     `DeletePublicAccessBlock` ][6] API. To use this operation, you
+    #     `DeletePublicAccessBlock` ][7] API. To use this operation, you
     #     must have the `s3:PutBucketPublicAccessBlock` permission. By
     #     default, all Block Public Access settings are enabled for new
     #     buckets. To avoid inadvertent exposure of your resources, we
     #     recommend keeping the S3 Block Public Access settings enabled. For
     #     more information about S3 Block Public Access, see [Blocking
-    #     public access to your Amazon S3 storage ][5] in the *Amazon S3
+    #     public access to your Amazon S3 storage ][6] in the *Amazon S3
     #     User Guide*.
     #
     # If your `CreateBucket` request sets `BucketOwnerEnforced` for Amazon
@@ -1622,25 +1635,26 @@ module Aws::S3
     # an external Amazon Web Services account, your request fails with a
     # `400` error and returns the `InvalidBucketAcLWithObjectOwnership`
     # error code. For more information, see [Setting Object Ownership on an
-    # existing bucket ][7] in the *Amazon S3 User Guide*.
+    # existing bucket ][8] in the *Amazon S3 User Guide*.
     #
     # The following operations are related to `CreateBucket`:
     #
-    # * [PutObject][8]
+    # * [PutObject][9]
     #
-    # * [DeleteBucket][9]
+    # * [DeleteBucket][10]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeletePublicAccessBlock.html
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-ownership-existing-bucket.html
-    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
-    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketConfiguration.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeletePublicAccessBlock.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-ownership-existing-bucket.html
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
+    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html
     #
     # @option params [String] :acl
     #   The canned ACL to apply to the bucket.
@@ -2135,13 +2149,13 @@ module Aws::S3
     #   ensure that the encryption key was transmitted without error.
     #
     # @option params [String] :ssekms_key_id
-    #   Specifies the ID of the symmetric encryption customer managed key to
-    #   use for object encryption. All GET and PUT requests for an object
-    #   protected by KMS will fail if they're not made via SSL or using
-    #   SigV4. For information about configuring any of the officially
-    #   supported Amazon Web Services SDKs and Amazon Web Services CLI, see
-    #   [Specifying the Signature Version in Request Authentication][1] in the
-    #   *Amazon S3 User Guide*.
+    #   Specifies the ID (Key ID, Key ARN, or Key Alias) of the symmetric
+    #   encryption customer managed key to use for object encryption. All GET
+    #   and PUT requests for an object protected by KMS will fail if they're
+    #   not made via SSL or using SigV4. For information about configuring any
+    #   of the officially supported Amazon Web Services SDKs and Amazon Web
+    #   Services CLI, see [Specifying the Signature Version in Request
+    #   Authentication][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2164,9 +2178,11 @@ module Aws::S3
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading objects
+    #   from Requester Pays buckets, see [Downloading Objects in Requester
+    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -3150,9 +3166,11 @@ module Aws::S3
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading objects
+    #   from Requester Pays buckets, see [Downloading Objects in Requester
+    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -3175,6 +3193,15 @@ module Aws::S3
     #   * {Types::DeleteObjectOutput#request_charged #request_charged} => String
     #
     #
+    # @example Example: To delete an object (from a non-versioned bucket)
+    #
+    #   # The following example deletes an object from a non-versioned bucket.
+    #
+    #   resp = client.delete_object({
+    #     bucket: "ExampleBucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
     # @example Example: To delete an object
     #
     #   # The following example deletes an object from an S3 bucket.
@@ -3187,15 +3214,6 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #   }
-    #
-    # @example Example: To delete an object (from a non-versioned bucket)
-    #
-    #   # The following example deletes an object from a non-versioned bucket.
-    #
-    #   resp = client.delete_object({
-    #     bucket: "ExampleBucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -3431,9 +3449,11 @@ module Aws::S3
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading objects
+    #   from Requester Pays buckets, see [Downloading Objects in Requester
+    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -3475,42 +3495,6 @@ module Aws::S3
     #   * {Types::DeleteObjectsOutput#errors #errors} => Array&lt;Types::Error&gt;
     #
     #
-    # @example Example: To delete multiple objects from a versioned bucket
-    #
-    #   # The following example deletes objects from a bucket. The bucket is versioned, and the request does not specify the
-    #   # object version to delete. In this case, all versions remain in the bucket and S3 adds a delete marker.
-    #
-    #   resp = client.delete_objects({
-    #     bucket: "examplebucket", 
-    #     delete: {
-    #       objects: [
-    #         {
-    #           key: "objectkey1", 
-    #         }, 
-    #         {
-    #           key: "objectkey2", 
-    #         }, 
-    #       ], 
-    #       quiet: false, 
-    #     }, 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     deleted: [
-    #       {
-    #         delete_marker: true, 
-    #         delete_marker_version_id: "A._w1z6EFiCF5uhtQMDal9JDkID9tQ7F", 
-    #         key: "objectkey1", 
-    #       }, 
-    #       {
-    #         delete_marker: true, 
-    #         delete_marker_version_id: "iOd_ORxhkKe_e8G8_oSGxt2PjsCZKlkt", 
-    #         key: "objectkey2", 
-    #       }, 
-    #     ], 
-    #   }
-    #
     # @example Example: To delete multiple object versions from a versioned bucket
     #
     #   # The following example deletes objects from a bucket. The request specifies object versions. S3 deletes specific object
@@ -3543,6 +3527,42 @@ module Aws::S3
     #       {
     #         key: "HappyFace.jpg", 
     #         version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To delete multiple objects from a versioned bucket
+    #
+    #   # The following example deletes objects from a bucket. The bucket is versioned, and the request does not specify the
+    #   # object version to delete. In this case, all versions remain in the bucket and S3 adds a delete marker.
+    #
+    #   resp = client.delete_objects({
+    #     bucket: "examplebucket", 
+    #     delete: {
+    #       objects: [
+    #         {
+    #           key: "objectkey1", 
+    #         }, 
+    #         {
+    #           key: "objectkey2", 
+    #         }, 
+    #       ], 
+    #       quiet: false, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deleted: [
+    #       {
+    #         delete_marker: true, 
+    #         delete_marker_version_id: "A._w1z6EFiCF5uhtQMDal9JDkID9tQ7F", 
+    #         key: "objectkey1", 
+    #       }, 
+    #       {
+    #         delete_marker: true, 
+    #         delete_marker_version_id: "iOd_ORxhkKe_e8G8_oSGxt2PjsCZKlkt", 
+    #         key: "objectkey2", 
     #       }, 
     #     ], 
     #   }
@@ -3694,9 +3714,11 @@ module Aws::S3
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading objects
+    #   from Requester Pays buckets, see [Downloading Objects in Requester
+    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5867,9 +5889,11 @@ module Aws::S3
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading objects
+    #   from Requester Pays buckets, see [Downloading Objects in Requester
+    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5930,28 +5954,6 @@ module Aws::S3
     #   * {Types::GetObjectOutput#object_lock_legal_hold_status #object_lock_legal_hold_status} => String
     #
     #
-    # @example Example: To retrieve an object
-    #
-    #   # The following example retrieves an object for an S3 bucket.
-    #
-    #   resp = client.get_object({
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     accept_ranges: "bytes", 
-    #     content_length: 3191, 
-    #     content_type: "image/jpeg", 
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     last_modified: Time.parse("Thu, 15 Dec 2016 01:19:41 GMT"), 
-    #     metadata: {
-    #     }, 
-    #     tag_count: 2, 
-    #     version_id: "null", 
-    #   }
-    #
     # @example Example: To retrieve a byte range of an object 
     #
     #   # The following example retrieves an object for an S3 bucket. The request specifies the range header to retrieve a
@@ -5973,6 +5975,28 @@ module Aws::S3
     #     last_modified: Time.parse("Thu, 09 Oct 2014 22:57:28 GMT"), 
     #     metadata: {
     #     }, 
+    #     version_id: "null", 
+    #   }
+    #
+    # @example Example: To retrieve an object
+    #
+    #   # The following example retrieves an object for an S3 bucket.
+    #
+    #   resp = client.get_object({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     accept_ranges: "bytes", 
+    #     content_length: 3191, 
+    #     content_type: "image/jpeg", 
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     last_modified: Time.parse("Thu, 15 Dec 2016 01:19:41 GMT"), 
+    #     metadata: {
+    #     }, 
+    #     tag_count: 2, 
     #     version_id: "null", 
     #   }
     #
@@ -6065,7 +6089,7 @@ module Aws::S3
     #   resp.bucket_key_enabled #=> Boolean
     #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW"
     #   resp.request_charged #=> String, one of "requester"
-    #   resp.replication_status #=> String, one of "COMPLETE", "PENDING", "FAILED", "REPLICA"
+    #   resp.replication_status #=> String, one of "COMPLETE", "PENDING", "FAILED", "REPLICA", "COMPLETED"
     #   resp.parts_count #=> Integer
     #   resp.tag_count #=> Integer
     #   resp.object_lock_mode #=> String, one of "GOVERNANCE", "COMPLIANCE"
@@ -6145,9 +6169,11 @@ module Aws::S3
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading objects
+    #   from Requester Pays buckets, see [Downloading Objects in Requester
+    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -6413,9 +6439,11 @@ module Aws::S3
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading objects
+    #   from Requester Pays buckets, see [Downloading Objects in Requester
+    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -6536,9 +6564,11 @@ module Aws::S3
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading objects
+    #   from Requester Pays buckets, see [Downloading Objects in Requester
+    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -6682,9 +6712,11 @@ module Aws::S3
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading objects
+    #   from Requester Pays buckets, see [Downloading Objects in Requester
+    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -6794,9 +6826,11 @@ module Aws::S3
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading objects
+    #   from Requester Pays buckets, see [Downloading Objects in Requester
+    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -6807,27 +6841,6 @@ module Aws::S3
     #   * {Types::GetObjectTaggingOutput#version_id #version_id} => String
     #   * {Types::GetObjectTaggingOutput#tag_set #tag_set} => Array&lt;Types::Tag&gt;
     #
-    #
-    # @example Example: To retrieve tag set of a specific object version
-    #
-    #   # The following example retrieves tag set of an object. The request specifies object version.
-    #
-    #   resp = client.get_object_tagging({
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     tag_set: [
-    #       {
-    #         key: "Key1", 
-    #         value: "Value1", 
-    #       }, 
-    #     ], 
-    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
-    #   }
     #
     # @example Example: To retrieve tag set of an object
     #
@@ -6851,6 +6864,27 @@ module Aws::S3
     #       }, 
     #     ], 
     #     version_id: "null", 
+    #   }
+    #
+    # @example Example: To retrieve tag set of a specific object version
+    #
+    #   # The following example retrieves tag set of an object. The request specifies object version.
+    #
+    #   resp = client.get_object_tagging({
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tag_set: [
+    #       {
+    #         key: "Key1", 
+    #         value: "Value1", 
+    #       }, 
+    #     ], 
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -6915,9 +6949,11 @@ module Aws::S3
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading objects
+    #   from Requester Pays buckets, see [Downloading Objects in Requester
+    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -7317,9 +7353,11 @@ module Aws::S3
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading objects
+    #   from Requester Pays buckets, see [Downloading Objects in Requester
+    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -7457,7 +7495,7 @@ module Aws::S3
     #   resp.bucket_key_enabled #=> Boolean
     #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW"
     #   resp.request_charged #=> String, one of "requester"
-    #   resp.replication_status #=> String, one of "COMPLETE", "PENDING", "FAILED", "REPLICA"
+    #   resp.replication_status #=> String, one of "COMPLETE", "PENDING", "FAILED", "REPLICA", "COMPLETED"
     #   resp.parts_count #=> Integer
     #   resp.object_lock_mode #=> String, one of "GOVERNANCE", "COMPLIANCE"
     #   resp.object_lock_retain_until_date #=> Time
@@ -8053,9 +8091,11 @@ module Aws::S3
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading objects
+    #   from Requester Pays buckets, see [Downloading Objects in Requester
+    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -8079,6 +8119,48 @@ module Aws::S3
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: To list in-progress multipart uploads on a bucket
+    #
+    #   # The following example lists in-progress multipart uploads on a specific bucket.
+    #
+    #   resp = client.list_multipart_uploads({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     uploads: [
+    #       {
+    #         initiated: Time.parse("2014-05-01T05:40:58.000Z"), 
+    #         initiator: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         key: "JavaFile", 
+    #         owner: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         storage_class: "STANDARD", 
+    #         upload_id: "examplelUa.CInXklLQtSMJITdUnoZ1Y5GACB5UckOtspm5zbDMCkPF_qkfZzMiFZ6dksmcnqxJyIBvQMG9X9Q--", 
+    #       }, 
+    #       {
+    #         initiated: Time.parse("2014-05-01T05:41:27.000Z"), 
+    #         initiator: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         key: "JavaFile", 
+    #         owner: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         storage_class: "STANDARD", 
+    #         upload_id: "examplelo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Example: List next set of multipart uploads when previous result is truncated
     #
@@ -8129,48 +8211,6 @@ module Aws::S3
     #         }, 
     #         storage_class: "STANDARD", 
     #         upload_id: "b7tZSqIlo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--", 
-    #       }, 
-    #     ], 
-    #   }
-    #
-    # @example Example: To list in-progress multipart uploads on a bucket
-    #
-    #   # The following example lists in-progress multipart uploads on a specific bucket.
-    #
-    #   resp = client.list_multipart_uploads({
-    #     bucket: "examplebucket", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     uploads: [
-    #       {
-    #         initiated: Time.parse("2014-05-01T05:40:58.000Z"), 
-    #         initiator: {
-    #           display_name: "display-name", 
-    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
-    #         }, 
-    #         key: "JavaFile", 
-    #         owner: {
-    #           display_name: "display-name", 
-    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
-    #         }, 
-    #         storage_class: "STANDARD", 
-    #         upload_id: "examplelUa.CInXklLQtSMJITdUnoZ1Y5GACB5UckOtspm5zbDMCkPF_qkfZzMiFZ6dksmcnqxJyIBvQMG9X9Q--", 
-    #       }, 
-    #       {
-    #         initiated: Time.parse("2014-05-01T05:41:27.000Z"), 
-    #         initiator: {
-    #           display_name: "display-name", 
-    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
-    #         }, 
-    #         key: "JavaFile", 
-    #         owner: {
-    #           display_name: "display-name", 
-    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
-    #         }, 
-    #         storage_class: "STANDARD", 
-    #         upload_id: "examplelo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--", 
     #       }, 
     #     ], 
     #   }
@@ -8307,9 +8347,11 @@ module Aws::S3
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading objects
+    #   from Requester Pays buckets, see [Downloading Objects in Requester
+    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -8952,9 +8994,11 @@ module Aws::S3
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading objects
+    #   from Requester Pays buckets, see [Downloading Objects in Requester
+    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -9806,13 +9850,13 @@ module Aws::S3
     # uses server-side encryption with Amazon S3 managed keys (SSE-S3). You
     # can optionally configure default encryption for a bucket by using
     # server-side encryption with Key Management Service (KMS) keys
-    # (SSE-KMS), dual-layer server-side encryption with Amazon Web Services
-    # KMS keys (DSSE-KMS), or server-side encryption with customer-provided
-    # keys (SSE-C). If you specify default encryption by using SSE-KMS, you
-    # can also configure Amazon S3 Bucket Keys. For information about bucket
-    # default encryption, see [Amazon S3 bucket default encryption][1] in
-    # the *Amazon S3 User Guide*. For more information about S3 Bucket Keys,
-    # see [Amazon S3 Bucket Keys][2] in the *Amazon S3 User Guide*.
+    # (SSE-KMS) or dual-layer server-side encryption with Amazon Web
+    # Services KMS keys (DSSE-KMS). If you specify default encryption by
+    # using SSE-KMS, you can also configure [Amazon S3 Bucket Keys][1]. If
+    # you use PutBucketEncryption to set your [default bucket encryption][2]
+    # to SSE-KMS, you should verify that your KMS key ID is correct. Amazon
+    # S3 does not validate the KMS key ID provided in PutBucketEncryption
+    # requests.
     #
     # This action requires Amazon Web Services Signature Version 4. For more
     # information, see [ Authenticating Requests (Amazon Web Services
@@ -9834,8 +9878,8 @@ module Aws::S3
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html
@@ -11262,7 +11306,9 @@ module Aws::S3
     # replication configuration, you provide the name of the destination
     # bucket or buckets where you want Amazon S3 to replicate objects, the
     # IAM role that Amazon S3 can assume to replicate objects on your
-    # behalf, and other relevant information.
+    # behalf, and other relevant information. You can invoke this request
+    # for a specific Amazon Web Services Region by using the [
+    # `aws:RequestedRegion` ][2] condition key.
     #
     # A replication configuration must include at least one rule, and can
     # contain a maximum of 1,000. Each rule identifies a subset of objects
@@ -11279,12 +11325,12 @@ module Aws::S3
     #
     # <note markdown="1"> If you are using an earlier version of the replication configuration,
     # Amazon S3 handles replication of delete markers differently. For more
-    # information, see [Backward Compatibility][2].
+    # information, see [Backward Compatibility][3].
     #
     #  </note>
     #
     # For information about enabling versioning on a bucket, see [Using
-    # Versioning][3].
+    # Versioning][4].
     #
     # Handling Replication of Encrypted Objects
     #
@@ -11294,10 +11340,10 @@ module Aws::S3
     #   `SourceSelectionCriteria`, `SseKmsEncryptedObjects`, `Status`,
     #   `EncryptionConfiguration`, and `ReplicaKmsKeyID`. For information
     #   about replication configuration, see [Replicating Objects Created
-    #   with SSE Using KMS keys][4].
+    #   with SSE Using KMS keys][5].
     #
     #   For information on `PutBucketReplication` errors, see [List of
-    #   replication-related error codes][5]
+    #   replication-related error codes][6]
     #
     # Permissions
     #
@@ -11308,32 +11354,33 @@ module Aws::S3
     #   account that created the bucket, can perform this operation. The
     #   resource owner can also grant others permissions to perform the
     #   operation. For more information about permissions, see [Specifying
-    #   Permissions in a Policy][6] and [Managing Access Permissions to Your
-    #   Amazon S3 Resources][7].
+    #   Permissions in a Policy][7] and [Managing Access Permissions to Your
+    #   Amazon S3 Resources][8].
     #
     #   <note markdown="1"> To perform this operation, the user or role performing the action
-    #   must have the [iam:PassRole][8] permission.
+    #   must have the [iam:PassRole][9] permission.
     #
     #    </note>
     #
     # The following operations are related to `PutBucketReplication`:
     #
-    # * [GetBucketReplication][9]
+    # * [GetBucketReplication][10]
     #
-    # * [DeleteBucketReplication][10]
+    # * [DeleteBucketReplication][11]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-config-for-kms-objects.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ReplicationErrorCodeList
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html
-    # [8]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html
-    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketReplication.html
-    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketReplication.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requestedregion
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-config-for-kms-objects.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ReplicationErrorCodeList
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html
+    # [9]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html
+    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketReplication.html
+    # [11]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketReplication.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket
@@ -11605,54 +11652,37 @@ module Aws::S3
     # Operations][3] and [Managing Access Permissions to Your Amazon S3
     # Resources][4].
     #
-    # `PutBucketTagging` has the following special errors:
+    # `PutBucketTagging` has the following special errors. For more Amazon
+    # S3 errors see, [Error Responses][5].
     #
-    # * Error code: `InvalidTagError`
+    # * `InvalidTag` - The tag provided was not a valid tag. This error can
+    #   occur if the tag did not pass input validation. For more
+    #   information, see [Using Cost Allocation in Amazon S3 Bucket
+    #   Tags][2].
     #
-    #   * Description: The tag provided was not a valid tag. This error can
-    #     occur if the tag did not pass input validation. For information
-    #     about tag restrictions, see [User-Defined Tag Restrictions][5] and
-    #     [Amazon Web Services-Generated Cost Allocation Tag
-    #     Restrictions][6].
+    # * `MalformedXML` - The XML provided does not match the schema.
     #
-    #   ^
+    # * `OperationAborted` - A conflicting conditional action is currently
+    #   in progress against this resource. Please try again.
     #
-    # * Error code: `MalformedXMLError`
-    #
-    #   * Description: The XML provided does not match the schema.
-    #
-    #   ^
-    #
-    # * Error code: `OperationAbortedError `
-    #
-    #   * Description: A conflicting conditional action is currently in
-    #     progress against this resource. Please try again.
-    #
-    #   ^
-    #
-    # * Error code: `InternalError`
-    #
-    #   * Description: The service was unable to apply the provided tag to
-    #     the bucket.
-    #
-    #   ^
+    # * `InternalError` - The service was unable to apply the provided tag
+    #   to the bucket.
     #
     # The following operations are related to `PutBucketTagging`:
     #
-    # * [GetBucketTagging][7]
+    # * [GetBucketTagging][6]
     #
-    # * [DeleteBucketTagging][8]
+    # * [DeleteBucketTagging][7]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/CostAllocTagging.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/CostAllocTagging.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html
-    # [5]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html
-    # [6]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/aws-tag-restrictions.html
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketTagging.html
-    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketTagging.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html
     #
     # @option params [required, String] :bucket
     #   The bucket name.
@@ -11937,6 +11967,8 @@ module Aws::S3
     # configuration. If you require more than 50 routing rules, you can use
     # object redirect. For more information, see [Configuring an Object
     # Redirect][2] in the *Amazon S3 User Guide*.
+    #
+    # The maximum request length is limited to 128 KB.
     #
     #
     #
@@ -12416,10 +12448,11 @@ module Aws::S3
     #
     # @option params [String] :ssekms_key_id
     #   If `x-amz-server-side-encryption` has a valid value of `aws:kms` or
-    #   `aws:kms:dsse`, this header specifies the ID of the Key Management
-    #   Service (KMS) symmetric encryption customer managed key that was used
-    #   for the object. If you specify `x-amz-server-side-encryption:aws:kms`
-    #   or `x-amz-server-side-encryption:aws:kms:dsse`, but do not provide`
+    #   `aws:kms:dsse`, this header specifies the ID (Key ID, Key ARN, or Key
+    #   Alias) of the Key Management Service (KMS) symmetric encryption
+    #   customer managed key that was used for the object. If you specify
+    #   `x-amz-server-side-encryption:aws:kms` or
+    #   `x-amz-server-side-encryption:aws:kms:dsse`, but do not provide`
     #   x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3 uses the
     #   Amazon Web Services managed key (`aws/s3`) to protect the data. If the
     #   KMS key does not exist in the same account that's issuing the
@@ -12445,9 +12478,11 @@ module Aws::S3
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading objects
+    #   from Requester Pays buckets, see [Downloading Objects in Requester
+    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -12495,6 +12530,42 @@ module Aws::S3
     #   * {Types::PutObjectOutput#request_charged #request_charged} => String
     #
     #
+    # @example Example: To upload an object and specify server-side encryption and object tags
+    #
+    #   # The following example uploads an object. The request specifies the optional server-side encryption option. The request
+    #   # also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     server_side_encryption: "AES256", 
+    #     tagging: "key1=value1&key2=value2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     server_side_encryption: "AES256", 
+    #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
+    #   }
+    #
+    # @example Example: To create an object.
+    #
+    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "objectkey", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
+    #   }
+    #
     # @example Example: To upload an object (specify optional headers)
     #
     #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
@@ -12533,57 +12604,25 @@ module Aws::S3
     #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
     #   }
     #
-    # @example Example: To upload an object and specify server-side encryption and object tags
+    # @example Example: To upload object and specify user-defined metadata
     #
-    #   # The following example uploads an object. The request specifies the optional server-side encryption option. The request
-    #   # also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.
+    #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning
+    #   # enabled, S3 returns version ID in response.
     #
     #   resp = client.put_object({
     #     body: "filetoupload", 
     #     bucket: "examplebucket", 
     #     key: "exampleobject", 
-    #     server_side_encryption: "AES256", 
-    #     tagging: "key1=value1&key2=value2", 
+    #     metadata: {
+    #       "metadata1" => "value1", 
+    #       "metadata2" => "value2", 
+    #     }, 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     server_side_encryption: "AES256", 
-    #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
-    #   }
-    #
-    # @example Example: To create an object.
-    #
-    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "objectkey", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
-    #   }
-    #
-    # @example Example: To upload an object
-    #
-    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
-    #   # syntax. S3 returns VersionId of the newly created object.
-    #
-    #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
+    #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
     #   }
     #
     # @example Example: To upload an object and specify canned ACL.
@@ -12604,25 +12643,21 @@ module Aws::S3
     #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
     #   }
     #
-    # @example Example: To upload object and specify user-defined metadata
+    # @example Example: To upload an object
     #
-    #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning
-    #   # enabled, S3 returns version ID in response.
+    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
+    #   # syntax. S3 returns VersionId of the newly created object.
     #
     #   resp = client.put_object({
-    #     body: "filetoupload", 
+    #     body: "HappyFace.jpg", 
     #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #     metadata: {
-    #       "metadata1" => "value1", 
-    #       "metadata2" => "value2", 
-    #     }, 
+    #     key: "HappyFace.jpg", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
+    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
     #   }
     #
     # @example Streaming a file from disk
@@ -12978,9 +13013,11 @@ module Aws::S3
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading objects
+    #   from Requester Pays buckets, see [Downloading Objects in Requester
+    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -13101,9 +13138,11 @@ module Aws::S3
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading objects
+    #   from Requester Pays buckets, see [Downloading Objects in Requester
+    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -13204,9 +13243,11 @@ module Aws::S3
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading objects
+    #   from Requester Pays buckets, see [Downloading Objects in Requester
+    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -13319,9 +13360,11 @@ module Aws::S3
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading objects
+    #   from Requester Pays buckets, see [Downloading Objects in Requester
+    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -13398,15 +13441,16 @@ module Aws::S3
     end
 
     # Sets the supplied tag-set to an object that already exists in a
-    # bucket.
+    # bucket. A tag is a key-value pair. For more information, see [Object
+    # Tagging][1].
     #
-    # A tag is a key-value pair. You can associate tags with an object by
-    # sending a PUT request against the tagging subresource that is
-    # associated with the object. You can retrieve tags by sending a GET
-    # request. For more information, see [GetObjectTagging][1].
+    # You can associate tags with an object by sending a PUT request against
+    # the tagging subresource that is associated with the object. You can
+    # retrieve tags by sending a GET request. For more information, see
+    # [GetObjectTagging][2].
     #
     # For tagging-related restrictions related to characters and encodings,
-    # see [Tag Restrictions][2]. Note that Amazon S3 limits the maximum
+    # see [Tag Restrictions][3]. Note that Amazon S3 limits the maximum
     # number of tags to 10 tags per object.
     #
     # To use this operation, you must have permission to perform the
@@ -13416,43 +13460,34 @@ module Aws::S3
     # To put tags of any other version, use the `versionId` query parameter.
     # You also need permission for the `s3:PutObjectVersionTagging` action.
     #
-    # For information about the Amazon S3 object tagging feature, see
-    # [Object Tagging][3].
+    # `PutObjectTagging` has the following special errors. For more Amazon
+    # S3 errors see, [Error Responses][4].
     #
-    # `PutObjectTagging` has the following special errors:
+    # * `InvalidTag` - The tag provided was not a valid tag. This error can
+    #   occur if the tag did not pass input validation. For more
+    #   information, see [Object Tagging][1].
     #
-    # * * <i>Code: InvalidTagError </i>
+    # * `MalformedXML` - The XML provided does not match the schema.
     #
-    #   * *Cause: The tag provided was not a valid tag. This error can occur
-    #     if the tag did not pass input validation. For more information,
-    #     see [Object Tagging][3].*
+    # * `OperationAborted` - A conflicting conditional action is currently
+    #   in progress against this resource. Please try again.
     #
-    # * * <i>Code: MalformedXMLError </i>
-    #
-    #   * *Cause: The XML provided does not match the schema.*
-    #
-    # * * <i>Code: OperationAbortedError </i>
-    #
-    #   * *Cause: A conflicting conditional action is currently in progress
-    #     against this resource. Please try again.*
-    #
-    # * * *Code: InternalError*
-    #
-    #   * *Cause: The service was unable to apply the provided tag to the
-    #     object.*
+    # * `InternalError` - The service was unable to apply the provided tag
+    #   to the object.
     #
     # The following operations are related to `PutObjectTagging`:
     #
-    # * [GetObjectTagging][1]
+    # * [GetObjectTagging][2]
     #
-    # * [DeleteObjectTagging][4]
+    # * [DeleteObjectTagging][5]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html
-    # [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectTagging.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-tagging.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html
+    # [3]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectTagging.html
     #
     # @option params [required, String] :bucket
     #   The bucket name containing the object.
@@ -13519,9 +13554,11 @@ module Aws::S3
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading objects
+    #   from Requester Pays buckets, see [Downloading Objects in Requester
+    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -13600,7 +13637,7 @@ module Aws::S3
     # bucket or an object, it checks the `PublicAccessBlock` configuration
     # for both the bucket (or the bucket that contains the object) and the
     # bucket owner's account. If the `PublicAccessBlock` configurations are
-    # different between the bucket and the account, Amazon S3 uses the most
+    # different between the bucket and the account, S3 uses the most
     # restrictive combination of the bucket-level and account-level
     # settings.
     #
@@ -13953,9 +13990,11 @@ module Aws::S3
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading objects
+    #   from Requester Pays buckets, see [Downloading Objects in Requester
+    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -14779,9 +14818,11 @@ module Aws::S3
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading objects
+    #   from Requester Pays buckets, see [Downloading Objects in Requester
+    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -15137,9 +15178,11 @@ module Aws::S3
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination Amazon S3 bucket has
+    #   Requester Pays enabled, the requester will pay for corresponding
+    #   charges to copy the object. For information about downloading objects
+    #   from Requester Pays buckets, see [Downloading Objects in Requester
+    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -15167,6 +15210,26 @@ module Aws::S3
     #   * {Types::UploadPartCopyOutput#request_charged #request_charged} => String
     #
     #
+    # @example Example: To upload a part by copying data from an existing object as data source
+    #
+    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
+    #
+    #   resp = client.upload_part_copy({
+    #     bucket: "examplebucket", 
+    #     copy_source: "/bucketname/sourceobjectkey", 
+    #     key: "examplelargeobject", 
+    #     part_number: 1, 
+    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     copy_part_result: {
+    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
+    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
+    #     }, 
+    #   }
+    #
     # @example Example: To upload a part by copying byte range from an existing object as data source
     #
     #   # The following example uploads a part of a multipart upload by copying a specified byte range from an existing object as
@@ -15186,26 +15249,6 @@ module Aws::S3
     #     copy_part_result: {
     #       etag: "\"65d16d19e65a7508a51f043180edcc36\"", 
     #       last_modified: Time.parse("2016-12-29T21:44:28.000Z"), 
-    #     }, 
-    #   }
-    #
-    # @example Example: To upload a part by copying data from an existing object as data source
-    #
-    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
-    #
-    #   resp = client.upload_part_copy({
-    #     bucket: "examplebucket", 
-    #     copy_source: "/bucketname/sourceobjectkey", 
-    #     key: "examplelargeobject", 
-    #     part_number: 1, 
-    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     copy_part_result: {
-    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
-    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
     #     }, 
     #   }
     #
@@ -15547,9 +15590,10 @@ module Aws::S3
     #   Amazon S3.
     #
     # @option params [String] :ssekms_key_id
-    #   If present, specifies the ID of the Amazon Web Services Key Management
-    #   Service (Amazon Web Services KMS) symmetric encryption customer
-    #   managed key that was used for stored in Amazon S3 object.
+    #   If present, specifies the ID (Key ID, Key ARN, or Key Alias) of the
+    #   Amazon Web Services Key Management Service (Amazon Web Services KMS)
+    #   symmetric encryption customer managed key that was used for stored in
+    #   Amazon S3 object.
     #
     # @option params [String] :sse_customer_key_md5
     #   128-bit MD5 digest of customer-provided encryption key used in Amazon
@@ -15618,7 +15662,7 @@ module Aws::S3
     #     object_lock_legal_hold_status: "ON", # accepts ON, OFF
     #     object_lock_retain_until_date: Time.now,
     #     parts_count: 1,
-    #     replication_status: "COMPLETE", # accepts COMPLETE, PENDING, FAILED, REPLICA
+    #     replication_status: "COMPLETE", # accepts COMPLETE, PENDING, FAILED, REPLICA, COMPLETED
     #     request_charged: "requester", # accepts requester
     #     restore: "Restore",
     #     server_side_encryption: "AES256", # accepts AES256, aws:kms, aws:kms:dsse
@@ -15653,7 +15697,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.134.0'
+      context[:gem_version] = '1.136.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

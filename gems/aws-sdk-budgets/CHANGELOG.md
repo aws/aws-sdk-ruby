@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2023-09-28)
+------------------
+
+* Feature - Update DescribeBudgets and DescribeBudgetNotificationsForAccount MaxResults limit to 1000.
+
+1.59.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.58.0 (2023-08-02)
 ------------------
 

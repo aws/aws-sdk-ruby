@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.129.0 (2023-10-03)
+------------------
+
+* Feature - GetMetricDataV2 API: Update to include new metrics CONTACTS_RESOLVED_IN_X , AVG_HOLD_TIME_ALL_CONTACTS , AVG_RESOLUTION_TIME , ABANDONMENT_RATE , AGENT_NON_RESPONSE_WITHOUT_CUSTOMER_ABANDONS with added features: Interval Period, TimeZone, Negate MetricFilters, Extended date time range.
+
+1.128.0 (2023-09-27)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.127.0 (2023-09-26)
+------------------
+
+* Feature - This release updates a set of Amazon Connect APIs that provides the ability to integrate third party applications in the Amazon Connect agent workspace.
+
+1.126.0 (2023-09-15)
+------------------
+
+* Feature - New rule type (OnMetricDataUpdate) has been added
+
 1.125.0 (2023-09-01)
 ------------------
 
