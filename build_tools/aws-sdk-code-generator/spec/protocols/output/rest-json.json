@@ -1032,6 +1032,44 @@
           "headers": {},
           "body": "{\"UnionMember\": {\"SomeUnknownMember\": \"un-modeled member\"}}"
         }
+      },
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "UnionMember": {"S":  "string value"}
+        },
+        "resultClass": {
+          "UnionMember": "UnionType::S"
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"UnionMember\": {\"__type\": \"UnionType\", \"S\": \"string value\"}}"
+        }
+      },
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "UnionMember": {"Unknown":  {"name": "SomeUnknownMember", "value": "un-modeled member"}}
+        },
+        "resultClass": {
+          "UnionMember": "UnionType::Unknown"
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"UnionMember\": {\"SomeUnknownMember\": \"un-modeled member\", \"__type\": \"UnionType\"}}"
+        }
       }
     ]
   }
