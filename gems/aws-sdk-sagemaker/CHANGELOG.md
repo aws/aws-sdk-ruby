@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.215.0 (2023-10-04)
+------------------
+
+* Feature - Adding support for AdditionalS3DataSource, a data source used for training or inference that is in addition to the input dataset or model data.
+
 1.214.0 (2023-10-03)
 ------------------
 

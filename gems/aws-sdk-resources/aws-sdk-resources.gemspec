@@ -112,6 +112,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-dataexchange', '~> 1')
   spec.add_dependency('aws-sdk-datapipeline', '~> 1')
   spec.add_dependency('aws-sdk-datasync', '~> 1')
+  spec.add_dependency('aws-sdk-datazone', '~> 1')
   spec.add_dependency('aws-sdk-databasemigrationservice', '~> 1')
   spec.add_dependency('aws-sdk-detective', '~> 1')
   spec.add_dependency('aws-sdk-devopsguru', '~> 1')

@@ -50,8 +50,16 @@ module Aws::Mgn
     CloudWatchLogGroupName = Shapes::StringShape.new(name: 'CloudWatchLogGroupName')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConflictExceptionErrors = Shapes::ListShape.new(name: 'ConflictExceptionErrors')
+    Connector = Shapes::StructureShape.new(name: 'Connector')
+    ConnectorArn = Shapes::StringShape.new(name: 'ConnectorArn')
+    ConnectorID = Shapes::StringShape.new(name: 'ConnectorID')
+    ConnectorIDsFilter = Shapes::ListShape.new(name: 'ConnectorIDsFilter')
+    ConnectorName = Shapes::StringShape.new(name: 'ConnectorName')
+    ConnectorSsmCommandConfig = Shapes::StructureShape.new(name: 'ConnectorSsmCommandConfig')
+    ConnectorsList = Shapes::ListShape.new(name: 'ConnectorsList')
     Cpus = Shapes::ListShape.new(name: 'Cpus')
     CreateApplicationRequest = Shapes::StructureShape.new(name: 'CreateApplicationRequest')
+    CreateConnectorRequest = Shapes::StructureShape.new(name: 'CreateConnectorRequest')
     CreateLaunchConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'CreateLaunchConfigurationTemplateRequest')
     CreateReplicationConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'CreateReplicationConfigurationTemplateRequest')
     CreateWaveRequest = Shapes::StructureShape.new(name: 'CreateWaveRequest')
@@ -68,6 +76,7 @@ module Aws::Mgn
     DataReplicationState = Shapes::StringShape.new(name: 'DataReplicationState')
     DeleteApplicationRequest = Shapes::StructureShape.new(name: 'DeleteApplicationRequest')
     DeleteApplicationResponse = Shapes::StructureShape.new(name: 'DeleteApplicationResponse')
+    DeleteConnectorRequest = Shapes::StructureShape.new(name: 'DeleteConnectorRequest')
     DeleteJobRequest = Shapes::StructureShape.new(name: 'DeleteJobRequest')
     DeleteJobResponse = Shapes::StructureShape.new(name: 'DeleteJobResponse')
     DeleteLaunchConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'DeleteLaunchConfigurationTemplateRequest')
@@ -180,6 +189,9 @@ module Aws::Mgn
     ListApplicationsRequest = Shapes::StructureShape.new(name: 'ListApplicationsRequest')
     ListApplicationsRequestFilters = Shapes::StructureShape.new(name: 'ListApplicationsRequestFilters')
     ListApplicationsResponse = Shapes::StructureShape.new(name: 'ListApplicationsResponse')
+    ListConnectorsRequest = Shapes::StructureShape.new(name: 'ListConnectorsRequest')
+    ListConnectorsRequestFilters = Shapes::StructureShape.new(name: 'ListConnectorsRequestFilters')
+    ListConnectorsResponse = Shapes::StructureShape.new(name: 'ListConnectorsResponse')
     ListExportErrorsRequest = Shapes::StructureShape.new(name: 'ListExportErrorsRequest')
     ListExportErrorsResponse = Shapes::StructureShape.new(name: 'ListExportErrorsResponse')
     ListExportsRequest = Shapes::StructureShape.new(name: 'ListExportsRequest')
@@ -248,6 +260,7 @@ module Aws::Mgn
     S3BucketSource = Shapes::StructureShape.new(name: 'S3BucketSource')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
     S3LogBucketName = Shapes::StringShape.new(name: 'S3LogBucketName')
+    SecretArn = Shapes::StringShape.new(name: 'SecretArn')
     SecurityGroupID = Shapes::StringShape.new(name: 'SecurityGroupID')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SmallBoundedString = Shapes::StringShape.new(name: 'SmallBoundedString')
@@ -256,6 +269,7 @@ module Aws::Mgn
     SourceServerActionDocument = Shapes::StructureShape.new(name: 'SourceServerActionDocument')
     SourceServerActionDocuments = Shapes::ListShape.new(name: 'SourceServerActionDocuments')
     SourceServerActionsRequestFilters = Shapes::StructureShape.new(name: 'SourceServerActionsRequestFilters')
+    SourceServerConnectorAction = Shapes::StructureShape.new(name: 'SourceServerConnectorAction')
     SourceServerID = Shapes::StringShape.new(name: 'SourceServerID')
     SourceServersList = Shapes::ListShape.new(name: 'SourceServersList')
     SsmDocument = Shapes::StructureShape.new(name: 'SsmDocument')
@@ -266,6 +280,7 @@ module Aws::Mgn
     SsmDocumentType = Shapes::StringShape.new(name: 'SsmDocumentType')
     SsmDocuments = Shapes::ListShape.new(name: 'SsmDocuments')
     SsmExternalParameter = Shapes::UnionShape.new(name: 'SsmExternalParameter')
+    SsmInstanceID = Shapes::StringShape.new(name: 'SsmInstanceID')
     SsmParameterStoreParameter = Shapes::StructureShape.new(name: 'SsmParameterStoreParameter')
     SsmParameterStoreParameterName = Shapes::StringShape.new(name: 'SsmParameterStoreParameterName')
     SsmParameterStoreParameterType = Shapes::StringShape.new(name: 'SsmParameterStoreParameterType')
@@ -303,11 +318,13 @@ module Aws::Mgn
     UninitializedAccountException = Shapes::StructureShape.new(name: 'UninitializedAccountException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateApplicationRequest = Shapes::StructureShape.new(name: 'UpdateApplicationRequest')
+    UpdateConnectorRequest = Shapes::StructureShape.new(name: 'UpdateConnectorRequest')
     UpdateLaunchConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateLaunchConfigurationRequest')
     UpdateLaunchConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'UpdateLaunchConfigurationTemplateRequest')
     UpdateReplicationConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateReplicationConfigurationRequest')
     UpdateReplicationConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'UpdateReplicationConfigurationTemplateRequest')
     UpdateSourceServerReplicationTypeRequest = Shapes::StructureShape.new(name: 'UpdateSourceServerReplicationTypeRequest')
+    UpdateSourceServerRequest = Shapes::StructureShape.new(name: 'UpdateSourceServerRequest')
     UpdateWaveRequest = Shapes::StructureShape.new(name: 'UpdateWaveRequest')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
@@ -402,6 +419,24 @@ module Aws::Mgn
 
     ConflictExceptionErrors.member = Shapes::ShapeRef.new(shape: ErrorDetails)
 
+    Connector.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
+    Connector.add_member(:connector_id, Shapes::ShapeRef.new(shape: ConnectorID, location_name: "connectorID"))
+    Connector.add_member(:name, Shapes::ShapeRef.new(shape: ConnectorName, location_name: "name"))
+    Connector.add_member(:ssm_command_config, Shapes::ShapeRef.new(shape: ConnectorSsmCommandConfig, location_name: "ssmCommandConfig"))
+    Connector.add_member(:ssm_instance_id, Shapes::ShapeRef.new(shape: SsmInstanceID, location_name: "ssmInstanceID"))
+    Connector.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    Connector.struct_class = Types::Connector
+
+    ConnectorIDsFilter.member = Shapes::ShapeRef.new(shape: ConnectorID)
+
+    ConnectorSsmCommandConfig.add_member(:cloud_watch_log_group_name, Shapes::ShapeRef.new(shape: CloudWatchLogGroupName, location_name: "cloudWatchLogGroupName"))
+    ConnectorSsmCommandConfig.add_member(:cloud_watch_output_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "cloudWatchOutputEnabled"))
+    ConnectorSsmCommandConfig.add_member(:output_s3_bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, location_name: "outputS3BucketName"))
+    ConnectorSsmCommandConfig.add_member(:s3_output_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "s3OutputEnabled"))
+    ConnectorSsmCommandConfig.struct_class = Types::ConnectorSsmCommandConfig
+
+    ConnectorsList.member = Shapes::ShapeRef.new(shape: Connector)
+
     Cpus.member = Shapes::ShapeRef.new(shape: CPU)
 
     CreateApplicationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountID, location_name: "accountID"))
@@ -409,6 +444,12 @@ module Aws::Mgn
     CreateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "name"))
     CreateApplicationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
+
+    CreateConnectorRequest.add_member(:name, Shapes::ShapeRef.new(shape: ConnectorName, required: true, location_name: "name"))
+    CreateConnectorRequest.add_member(:ssm_command_config, Shapes::ShapeRef.new(shape: ConnectorSsmCommandConfig, location_name: "ssmCommandConfig"))
+    CreateConnectorRequest.add_member(:ssm_instance_id, Shapes::ShapeRef.new(shape: SsmInstanceID, required: true, location_name: "ssmInstanceID"))
+    CreateConnectorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    CreateConnectorRequest.struct_class = Types::CreateConnectorRequest
 
     CreateLaunchConfigurationTemplateRequest.add_member(:associate_public_ip_address, Shapes::ShapeRef.new(shape: Boolean, location_name: "associatePublicIpAddress"))
     CreateLaunchConfigurationTemplateRequest.add_member(:boot_mode, Shapes::ShapeRef.new(shape: BootMode, location_name: "bootMode"))
@@ -486,6 +527,9 @@ module Aws::Mgn
     DeleteApplicationRequest.struct_class = Types::DeleteApplicationRequest
 
     DeleteApplicationResponse.struct_class = Types::DeleteApplicationResponse
+
+    DeleteConnectorRequest.add_member(:connector_id, Shapes::ShapeRef.new(shape: ConnectorID, required: true, location_name: "connectorID"))
+    DeleteConnectorRequest.struct_class = Types::DeleteConnectorRequest
 
     DeleteJobRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountID, location_name: "accountID"))
     DeleteJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobID, required: true, location_name: "jobID"))
@@ -865,6 +909,18 @@ module Aws::Mgn
     ListApplicationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListApplicationsResponse.struct_class = Types::ListApplicationsResponse
 
+    ListConnectorsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ListConnectorsRequestFilters, location_name: "filters"))
+    ListConnectorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "maxResults"))
+    ListConnectorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListConnectorsRequest.struct_class = Types::ListConnectorsRequest
+
+    ListConnectorsRequestFilters.add_member(:connector_i_ds, Shapes::ShapeRef.new(shape: ConnectorIDsFilter, location_name: "connectorIDs"))
+    ListConnectorsRequestFilters.struct_class = Types::ListConnectorsRequestFilters
+
+    ListConnectorsResponse.add_member(:items, Shapes::ShapeRef.new(shape: ConnectorsList, location_name: "items"))
+    ListConnectorsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListConnectorsResponse.struct_class = Types::ListConnectorsResponse
+
     ListExportErrorsRequest.add_member(:export_id, Shapes::ShapeRef.new(shape: ExportID, required: true, location_name: "exportID"))
     ListExportErrorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "maxResults"))
     ListExportErrorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
@@ -1140,6 +1196,7 @@ module Aws::Mgn
 
     SourceServer.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationID, location_name: "applicationID"))
     SourceServer.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
+    SourceServer.add_member(:connector_action, Shapes::ShapeRef.new(shape: SourceServerConnectorAction, location_name: "connectorAction"))
     SourceServer.add_member(:data_replication_info, Shapes::ShapeRef.new(shape: DataReplicationInfo, location_name: "dataReplicationInfo"))
     SourceServer.add_member(:fqdn_for_action_framework, Shapes::ShapeRef.new(shape: BoundedString, location_name: "fqdnForActionFramework"))
     SourceServer.add_member(:is_archived, Shapes::ShapeRef.new(shape: Boolean, location_name: "isArchived"))
@@ -1171,6 +1228,10 @@ module Aws::Mgn
 
     SourceServerActionsRequestFilters.add_member(:action_i_ds, Shapes::ShapeRef.new(shape: ActionIDs, location_name: "actionIDs"))
     SourceServerActionsRequestFilters.struct_class = Types::SourceServerActionsRequestFilters
+
+    SourceServerConnectorAction.add_member(:connector_arn, Shapes::ShapeRef.new(shape: ConnectorArn, location_name: "connectorArn"))
+    SourceServerConnectorAction.add_member(:credentials_secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "credentialsSecretArn"))
+    SourceServerConnectorAction.struct_class = Types::SourceServerConnectorAction
 
     SourceServersList.member = Shapes::ShapeRef.new(shape: SourceServer)
 
@@ -1312,6 +1373,11 @@ module Aws::Mgn
     UpdateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "name"))
     UpdateApplicationRequest.struct_class = Types::UpdateApplicationRequest
 
+    UpdateConnectorRequest.add_member(:connector_id, Shapes::ShapeRef.new(shape: ConnectorID, required: true, location_name: "connectorID"))
+    UpdateConnectorRequest.add_member(:name, Shapes::ShapeRef.new(shape: ConnectorName, location_name: "name"))
+    UpdateConnectorRequest.add_member(:ssm_command_config, Shapes::ShapeRef.new(shape: ConnectorSsmCommandConfig, location_name: "ssmCommandConfig"))
+    UpdateConnectorRequest.struct_class = Types::UpdateConnectorRequest
+
     UpdateLaunchConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountID, location_name: "accountID"))
     UpdateLaunchConfigurationRequest.add_member(:boot_mode, Shapes::ShapeRef.new(shape: BootMode, location_name: "bootMode"))
     UpdateLaunchConfigurationRequest.add_member(:copy_private_ip, Shapes::ShapeRef.new(shape: Boolean, location_name: "copyPrivateIp"))
@@ -1382,6 +1448,11 @@ module Aws::Mgn
     UpdateSourceServerReplicationTypeRequest.add_member(:replication_type, Shapes::ShapeRef.new(shape: ReplicationType, required: true, location_name: "replicationType"))
     UpdateSourceServerReplicationTypeRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
     UpdateSourceServerReplicationTypeRequest.struct_class = Types::UpdateSourceServerReplicationTypeRequest
+
+    UpdateSourceServerRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountID, location_name: "accountID"))
+    UpdateSourceServerRequest.add_member(:connector_action, Shapes::ShapeRef.new(shape: SourceServerConnectorAction, location_name: "connectorAction"))
+    UpdateSourceServerRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
+    UpdateSourceServerRequest.struct_class = Types::UpdateSourceServerRequest
 
     UpdateWaveRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountID, location_name: "accountID"))
     UpdateWaveRequest.add_member(:description, Shapes::ShapeRef.new(shape: WaveDescription, location_name: "description"))
@@ -1525,6 +1596,16 @@ module Aws::Mgn
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:create_connector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateConnector"
+        o.http_method = "POST"
+        o.http_request_uri = "/CreateConnector"
+        o.input = Shapes::ShapeRef.new(shape: CreateConnectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: Connector)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:create_launch_configuration_template, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateLaunchConfigurationTemplate"
         o.http_method = "POST"
@@ -1567,6 +1648,17 @@ module Aws::Mgn
         o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_connector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteConnector"
+        o.http_method = "POST"
+        o.http_request_uri = "/DeleteConnector"
+        o.input = Shapes::ShapeRef.new(shape: DeleteConnectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:delete_job, Seahorse::Model::Operation.new.tap do |o|
@@ -1816,6 +1908,22 @@ module Aws::Mgn
         o.input = Shapes::ShapeRef.new(shape: ListApplicationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListApplicationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_connectors, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListConnectors"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListConnectors"
+        o.input = Shapes::ShapeRef.new(shape: ListConnectorsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListConnectorsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -2199,6 +2307,17 @@ module Aws::Mgn
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:update_connector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateConnector"
+        o.http_method = "POST"
+        o.http_request_uri = "/UpdateConnector"
+        o.input = Shapes::ShapeRef.new(shape: UpdateConnectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: Connector)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:update_launch_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateLaunchConfiguration"
         o.http_method = "POST"
@@ -2246,6 +2365,17 @@ module Aws::Mgn
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_source_server, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSourceServer"
+        o.http_method = "POST"
+        o.http_request_uri = "/UpdateSourceServer"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSourceServerRequest)
+        o.output = Shapes::ShapeRef.new(shape: SourceServer)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_source_server_replication_type, Seahorse::Model::Operation.new.tap do |o|

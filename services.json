@@ -305,6 +305,9 @@
   "DataSync": {
     "models": "datasync/2018-11-09"
   },
+  "DataZone": {
+    "models": "datazone/2018-05-10"
+  },
   "DatabaseMigrationService": {
     "models": "dms/2016-01-01"
   },

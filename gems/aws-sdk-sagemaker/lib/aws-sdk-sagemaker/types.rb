@@ -223,6 +223,35 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A data source used for training or inference that is in addition to
+    # the input dataset or model data.
+    #
+    # @!attribute [rw] s3_data_type
+    #   The data type of the additional data source that you specify for use
+    #   in inference or training.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_uri
+    #   The uniform resource identifier (URI) used to identify an additional
+    #   data source used in inference or training.
+    #   @return [String]
+    #
+    # @!attribute [rw] compression_type
+    #   The type of compression used for an additional data source used in
+    #   inference or training. Specify `None` if your additional data source
+    #   is not compressed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AdditionalS3DataSource AWS API Documentation
+    #
+    class AdditionalS3DataSource < Struct.new(
+      :s3_data_type,
+      :s3_uri,
+      :compression_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Edge Manager agent version.
     #
     # @!attribute [rw] version
@@ -29537,6 +29566,11 @@ module Aws::SageMaker
     #   `ListModelMetadata`.
     #   @return [String]
     #
+    # @!attribute [rw] additional_s3_data_source
+    #   The additional data source that is used during inference in the
+    #   Docker container for your model package.
+    #   @return [Types::AdditionalS3DataSource]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageContainerDefinition AWS API Documentation
     #
     class ModelPackageContainerDefinition < Struct.new(
@@ -29549,7 +29583,8 @@ module Aws::SageMaker
       :model_input,
       :framework,
       :framework_version,
-      :nearest_model_name)
+      :nearest_model_name,
+      :additional_s3_data_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -36377,15 +36412,6 @@ module Aws::SageMaker
     #   copy input collaterals needed for the selected steps to run. The
     #   execution status of the pipeline can be either `Failed` or
     #   `Success`.
-    #
-    #   This field is required if the steps you specify for `SelectedSteps`
-    #   depend on output collaterals from any non-specified pipeline steps.
-    #   For more information, see [Selective Execution for Pipeline
-    #   Steps][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-selective-ex.html
     #   @return [String]
     #
     # @!attribute [rw] selected_steps
@@ -38664,6 +38690,10 @@ module Aws::SageMaker
     #   the objective metric in a hyperparameter tuning job.
     #   @return [Array<Types::HyperParameterTuningJobObjective>]
     #
+    # @!attribute [rw] additional_s3_data_source
+    #   The additional data source used during the training job.
+    #   @return [Types::AdditionalS3DataSource]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingSpecification AWS API Documentation
     #
     class TrainingSpecification < Struct.new(
@@ -38674,7 +38704,8 @@ module Aws::SageMaker
       :supports_distributed_training,
       :metric_definitions,
       :training_channels,
-      :supported_tuning_job_objective_metrics)
+      :supported_tuning_job_objective_metrics,
+      :additional_s3_data_source)
       SENSITIVE = []
       include Aws::Structure
     end

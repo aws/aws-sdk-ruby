@@ -1553,6 +1553,7 @@ module Aws::MediaTailor
     #
     # @return [Types::DescribeVodSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::DescribeVodSourceResponse#ad_break_opportunities #ad_break_opportunities} => Array&lt;Types::AdBreakOpportunity&gt;
     #   * {Types::DescribeVodSourceResponse#arn #arn} => String
     #   * {Types::DescribeVodSourceResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeVodSourceResponse#http_package_configurations #http_package_configurations} => Array&lt;Types::HttpPackageConfiguration&gt;
@@ -1570,6 +1571,8 @@ module Aws::MediaTailor
     #
     # @example Response structure
     #
+    #   resp.ad_break_opportunities #=> Array
+    #   resp.ad_break_opportunities[0].offset_millis #=> Integer
     #   resp.arn #=> String
     #   resp.creation_time #=> Time
     #   resp.http_package_configurations #=> Array
@@ -3100,7 +3103,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

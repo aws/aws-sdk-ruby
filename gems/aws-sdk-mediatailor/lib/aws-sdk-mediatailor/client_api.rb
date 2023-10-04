@@ -17,6 +17,8 @@ module Aws::MediaTailor
     AccessType = Shapes::StringShape.new(name: 'AccessType')
     AdBreak = Shapes::StructureShape.new(name: 'AdBreak')
     AdBreakMetadataList = Shapes::ListShape.new(name: 'AdBreakMetadataList')
+    AdBreakOpportunities = Shapes::ListShape.new(name: 'AdBreakOpportunities')
+    AdBreakOpportunity = Shapes::StructureShape.new(name: 'AdBreakOpportunity')
     AdMarkerPassthrough = Shapes::StructureShape.new(name: 'AdMarkerPassthrough')
     AdMarkupType = Shapes::StringShape.new(name: 'AdMarkupType')
     Alert = Shapes::StructureShape.new(name: 'Alert')
@@ -207,6 +209,11 @@ module Aws::MediaTailor
     AdBreak.struct_class = Types::AdBreak
 
     AdBreakMetadataList.member = Shapes::ShapeRef.new(shape: KeyValuePair)
+
+    AdBreakOpportunities.member = Shapes::ShapeRef.new(shape: AdBreakOpportunity)
+
+    AdBreakOpportunity.add_member(:offset_millis, Shapes::ShapeRef.new(shape: __long, required: true, location_name: "OffsetMillis"))
+    AdBreakOpportunity.struct_class = Types::AdBreakOpportunity
 
     AdMarkerPassthrough.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
     AdMarkerPassthrough.struct_class = Types::AdMarkerPassthrough
@@ -509,6 +516,7 @@ module Aws::MediaTailor
     DescribeVodSourceRequest.add_member(:vod_source_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "VodSourceName"))
     DescribeVodSourceRequest.struct_class = Types::DescribeVodSourceRequest
 
+    DescribeVodSourceResponse.add_member(:ad_break_opportunities, Shapes::ShapeRef.new(shape: AdBreakOpportunities, location_name: "AdBreakOpportunities"))
     DescribeVodSourceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
     DescribeVodSourceResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "CreationTime"))
     DescribeVodSourceResponse.add_member(:http_package_configurations, Shapes::ShapeRef.new(shape: HttpPackageConfigurations, location_name: "HttpPackageConfigurations"))
