@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Ignore `__type` when deserializing Unions.
+
 3.181.1 (2023-09-14)
 ------------------
 
