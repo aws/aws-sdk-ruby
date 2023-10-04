@@ -33,8 +33,50 @@ module Aws
 
       private
 
+      def merge_signing_defaults(auth_scheme, config)
+        if %w[sigv4 sigv4a].include?(auth_scheme['name'])
+          auth_scheme['signingName'] ||= sigv4_name(config)
+          if auth_scheme['name'] == 'sigv4a'
+            auth_scheme['signingRegionSet'] ||= [config.region]
+          else
+            auth_scheme['signingRegion'] ||= config.region
+          end
+        end
+        auth_scheme
+      end
+
+      def sigv4_name(config)
+        config.api.metadata['signingName'] ||
+          config.api.metadata['endpointPrefix']
+      end
+
       def default_auth_scheme(context)
-        case default_api_authtype(context)
+        if (auth_list = default_api_auth(context))
+          auth = auth_list.first
+          case auth
+          when 'aws.auth#sigv4', 'aws.auth#sigv4a'
+            auth_scheme = { 'name' => auth.split('#').last }
+            merge_signing_defaults(auth_scheme, context.config)
+          when 'smithy.api#httpBearerAuth'
+            { 'name' => 'bearer' }
+          when 'smithy.auth#noAuth'
+            { 'name' => 'none' }
+          end
+        else
+          legacy_default_auth_scheme(context)
+        end
+      end
+
+      def default_api_auth(context)
+        context.config.api.operation(context.operation_name)['auth'] ||
+          context.config.api.metadata['auth']
+      end
+
+      # Legacy auth resolution - looks for deprecated signatureVersion
+      # and authType traits.
+
+      def legacy_default_auth_scheme(context)
+        case legacy_default_api_authtype(context)
         when 'v4', 'v4-unsigned-body'
           auth_scheme = { 'name' => 'sigv4' }
           merge_signing_defaults(auth_scheme, context.config)
@@ -52,27 +94,11 @@ module Aws
         end
       end
 
-      def merge_signing_defaults(auth_scheme, config)
-        if %w[sigv4 sigv4a].include?(auth_scheme['name'])
-          auth_scheme['signingName'] ||= sigv4_name(config)
-          if auth_scheme['name'] == 'sigv4a'
-            auth_scheme['signingRegionSet'] ||= ['*']
-          else
-            auth_scheme['signingRegion'] ||= config.region
-          end
-        end
-        auth_scheme
-      end
-
-      def default_api_authtype(context)
+      def legacy_default_api_authtype(context)
         context.config.api.operation(context.operation_name)['authtype'] ||
           context.config.api.metadata['signatureVersion']
       end
 
-      def sigv4_name(config)
-        config.api.metadata['signingName'] ||
-          config.api.metadata['endpointPrefix']
-      end
     end
   end
 end

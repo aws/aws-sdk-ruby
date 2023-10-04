@@ -12,6 +12,7 @@ module Aws
       }.tap do |h|
         h['signingName'] = signing_name if signing_name
         h['signatureVersion'] = signature_version if signature_version
+        h['auth'] = auth if auth
       end
     end
 
@@ -27,12 +28,15 @@ module Aws
         'shapes' => {}
       }.tap do |h|
         h['operations']['Operation']['authtype'] = operation_authtype if operation_authtype
+        h['operations']['Operation']['auth'] = operation_auth if operation_auth
       end
     end
 
     let(:signing_name) { nil }
     let(:signature_version) { nil }
+    let(:auth) { nil }
     let(:operation_authtype) { nil }
+    let(:operation_auth) { nil }
 
     let(:endpoints_service) do
       ApiHelper.sample_service(
@@ -45,15 +49,6 @@ module Aws
 
     let(:client) do
       endpoints_service.const_get(:Client).new(stub_responses: true)
-    end
-
-    def expect_auth_scheme(auth_scheme)
-      method = Aws::Endpoints.method(:resolve_auth_scheme)
-      expect(Aws::Endpoints).to receive(:resolve_auth_scheme) do |*args|
-        resolved = method.call(*args)
-        expect(resolved).to include(auth_scheme)
-        resolved
-      end
     end
 
     let(:endpoint) do
@@ -75,68 +70,118 @@ module Aws
     end
 
     describe '#resolve_auth_scheme' do
-      context 'auth defaults' do
+      context 'auth scheme defaults' do
         let(:auth_schemes) { nil }
 
-        context 'sigv4 defaults' do
-          %w[v4 v4-unsigned-body].each do |auth_type|
-            let(:signature_version) { auth_type }
+        context 'auth' do
+          context 'sigv4 defaults' do
+            let(:auth) { ['aws.auth#sigv4'] }
 
             it 'signs with sigv4' do
-              expect_auth_scheme({ 'name' => 'sigv4' })
+              expect_auth({ 'name' => 'sigv4' })
+              client.operation
+            end
+          end
+
+          context 'sigv4a defaults' do
+            let(:auth) { ['aws.auth#sigv4a'] }
+
+            it 'signs with sigv4' do
+              expect_auth({ 'name' => 'sigv4a' })
+              client.operation
+            end
+          end
+
+          context 'bearer defaults' do
+            let(:auth) { ['smithy.api#httpBearerAuth'] }
+
+            it 'signs with bearer' do
+              expect_auth({ 'name' => 'bearer' })
+              client.operation
+            end
+          end
+
+          context 'none defaults' do
+            let(:auth) { ['smithy.auth#noAuth'] }
+
+            it 'does not sign' do
+              expect_auth({ 'name' => 'none' })
+              client.operation
+            end
+          end
+
+          context 'precedence' do
+            let(:operation_auth) { ['smithy.auth#noAuth'] }
+            let(:auth) { ['aws.auth#sigv4'] }
+
+            it 'prefers operation auth over service auth' do
+              expect_auth({ 'name' => 'none' })
               client.operation
             end
           end
         end
 
-        context 's3 sigv4 defaults' do
-          %w[s3 s3v4].each do |auth_type|
-            let(:signature_version) { auth_type }
+        context 'legacy signatureVersion and authtype' do
+          context 'sigv4 defaults' do
+            %w[v4 v4-unsigned-body].each do |auth_type|
+              let(:signature_version) { auth_type }
 
-            it 'signs with sigv4 with double encoding' do
-              expect_auth_scheme(
-                {
-                  'name' => 'sigv4',
-                  'disableDoubleEncoding' => true,
-                  'disableNormalizePath' => true
-                }
-              )
+              it 'signs with sigv4' do
+                expect_auth({ 'name' => 'sigv4' })
+                client.operation
+              end
+            end
+          end
+
+          context 's3 sigv4 defaults' do
+            %w[s3 s3v4].each do |auth_type|
+              let(:signature_version) { auth_type }
+
+              it 'signs with sigv4 with double encoding' do
+                expect_auth(
+                  {
+                    'name' => 'sigv4',
+                    'disableDoubleEncoding' => true,
+                    'disableNormalizePath' => true
+                  }
+                )
+                client.operation
+              end
+            end
+          end
+
+          context 'bearer defaults' do
+            let(:signature_version) { 'bearer' }
+
+            it 'signs with bearer' do
+              expect_auth({ 'name' => 'bearer' })
               client.operation
             end
           end
-        end
 
-        context 'bearer defaults' do
-          let(:signature_version) { 'bearer' }
+          context 'none defaults' do
+            let(:signature_version) { 'none' }
 
-          it 'signs with bearer' do
-            expect_auth_scheme({ 'name' => 'bearer' })
-            client.operation
+            it 'does not sign' do
+              expect_auth({ 'name' => 'none' })
+              client.operation
+            end
           end
-        end
 
-        context 'none defaults' do
-          let(:signature_version) { 'none' }
+          context 'precedence' do
+            let(:operation_authtype) { 'none' }
+            let(:signature_version) { 'v4' }
 
-          it 'does not sign' do
-            expect_auth_scheme({ 'name' => 'none' })
-            client.operation
+            it 'prefers operation authtype over signatureVersion' do
+              expect_auth({ 'name' => 'none' })
+              client.operation
+            end
           end
         end
 
         context 'no authtype' do
           it 'does not sign' do
-            expect_auth_scheme({ 'name' => 'none' })
-            client.operation
-          end
-        end
-
-        context 'precedence' do
-          let(:operation_authtype) { 'v4' }
-          let(:signature_version) { 'none' }
-
-          it 'prefers operation authtype over signatureVersion' do
-            expect_auth_scheme({ 'name' => 'sigv4' })
+            expect_auth({ 'name' => 'none' })
             client.operation
           end
         end
@@ -153,24 +198,10 @@ module Aws
         end
 
         context 'sigv4a region default' do
-          before do
-            stub_const(
-              'Aws::Plugins::Sign::SUPPORTED_AUTH_TYPES',
-              Aws::Plugins::Sign::SUPPORTED_AUTH_TYPES + ['sigv4a']
-            )
-
-            mock_signature = Aws::Sigv4::Signature.new(headers: {})
-            signer = double('sigv4a_signer', sign_request: mock_signature)
-
-            expect(Aws::Sigv4::Signer).to receive(:new)
-              .with(hash_including(signing_algorithm: :sigv4a))
-              .and_return(signer)
-          end
-
           let(:auth_schemes) { [{ 'name' => 'sigv4a' }] }
 
           it 'defaults the signing region set' do
-            expect_auth_scheme({ 'signingRegionSet' => ['*'] })
+            expect_auth({ 'name' => 'sigv4a', 'signingRegionSet' => [client.config.region] })
             client.operation
           end
         end
@@ -179,7 +210,7 @@ module Aws
           let(:auth_schemes) { [{ 'name' => 'sigv4' }] }
 
           it 'defaults the signing region from config' do
-            expect_auth_scheme({ 'signingRegion' => 'us-stubbed-1' })
+            expect_auth({ 'signingRegion' => 'us-stubbed-1' })
             client.operation
           end
         end
@@ -189,7 +220,7 @@ module Aws
           let(:signing_name) { 'service-override' }
 
           it 'prefers signingName over endpointPrefix' do
-            expect_auth_scheme({ 'signingName' => 'service-override' })
+            expect_auth({ 'signingName' => 'service-override' })
             client.operation
           end
         end
@@ -200,7 +231,7 @@ module Aws
           end
 
           it 'explicit usage of auth scheme values' do
-            expect_auth_scheme({ 'signingName' => 'override', 'signingRegion' => 'override' })
+            expect_auth({ 'signingName' => 'override', 'signingRegion' => 'override' })
             client.operation
           end
         end
