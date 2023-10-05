@@ -1939,6 +1939,7 @@ module Aws::Omics
     #   * {Types::GetReadSetMetadataResponse#files #files} => Types::ReadSetFiles
     #   * {Types::GetReadSetMetadataResponse#status_message #status_message} => String
     #   * {Types::GetReadSetMetadataResponse#creation_type #creation_type} => String
+    #   * {Types::GetReadSetMetadataResponse#etag #etag} => Types::ETag
     #
     # @example Request syntax with placeholder values
     #
@@ -1975,6 +1976,9 @@ module Aws::Omics
     #   resp.files.index.content_length #=> Integer
     #   resp.status_message #=> String
     #   resp.creation_type #=> String, one of "IMPORT", "UPLOAD"
+    #   resp.etag.algorithm #=> String, one of "FASTQ_MD5up", "BAM_MD5up", "CRAM_MD5up"
+    #   resp.etag.source1 #=> String
+    #   resp.etag.source2 #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetReadSetMetadata AWS API Documentation
     #
@@ -3166,6 +3170,9 @@ module Aws::Omics
     #   resp.read_sets[0].creation_time #=> Time
     #   resp.read_sets[0].status_message #=> String
     #   resp.read_sets[0].creation_type #=> String, one of "IMPORT", "UPLOAD"
+    #   resp.read_sets[0].etag.algorithm #=> String, one of "FASTQ_MD5up", "BAM_MD5up", "CRAM_MD5up"
+    #   resp.read_sets[0].etag.source1 #=> String
+    #   resp.read_sets[0].etag.source2 #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListReadSets AWS API Documentation
     #
@@ -4608,7 +4615,7 @@ module Aws::Omics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -213,6 +213,7 @@ module Aws::Route53
     HostedZoneRRSetCount = Shapes::IntegerShape.new(name: 'HostedZoneRRSetCount')
     HostedZoneSummaries = Shapes::ListShape.new(name: 'HostedZoneSummaries')
     HostedZoneSummary = Shapes::StructureShape.new(name: 'HostedZoneSummary')
+    HostedZoneType = Shapes::StringShape.new(name: 'HostedZoneType')
     HostedZones = Shapes::ListShape.new(name: 'HostedZones')
     IPAddress = Shapes::StringShape.new(name: 'IPAddress')
     IPAddressCidr = Shapes::StringShape.new(name: 'IPAddressCidr')
@@ -1139,6 +1140,7 @@ module Aws::Route53
     ListHostedZonesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: PageMarker, location: "querystring", location_name: "marker"))
     ListHostedZonesRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: PageMaxItems, location: "querystring", location_name: "maxitems"))
     ListHostedZonesRequest.add_member(:delegation_set_id, Shapes::ShapeRef.new(shape: ResourceId, location: "querystring", location_name: "delegationsetid"))
+    ListHostedZonesRequest.add_member(:hosted_zone_type, Shapes::ShapeRef.new(shape: HostedZoneType, location: "querystring", location_name: "hostedzonetype"))
     ListHostedZonesRequest.struct_class = Types::ListHostedZonesRequest
 
     ListHostedZonesResponse.add_member(:hosted_zones, Shapes::ShapeRef.new(shape: HostedZones, required: true, location_name: "HostedZones"))

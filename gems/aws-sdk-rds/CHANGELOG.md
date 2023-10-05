@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.196.0 (2023-10-05)
+------------------
+
+* Feature - Updates Amazon RDS documentation for corrections and minor improvements.
+
 1.195.0 (2023-10-02)
 ------------------
 

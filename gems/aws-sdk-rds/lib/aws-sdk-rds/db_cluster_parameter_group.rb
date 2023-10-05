@@ -357,10 +357,9 @@ module Aws::RDS
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :reset_all_parameters
-    #   A value that indicates whether to reset all parameters in the DB
-    #   cluster parameter group to their default values. You can't use this
-    #   parameter if there is a list of parameter names specified for the
-    #   `Parameters` parameter.
+    #   Specifies whether to reset all parameters in the DB cluster parameter
+    #   group to their default values. You can't use this parameter if there
+    #   is a list of parameter names specified for the `Parameters` parameter.
     # @option options [Array<Types::Parameter>] :parameters
     #   A list of parameter names in the DB cluster parameter group to reset
     #   to the default values. You can't use this parameter if the

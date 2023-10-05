@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2023-10-05)
+------------------
+
+* Feature - This release introduces Manage applications. This feature allows users to manage their WorkSpaces applications by associating or disassociating their WorkSpaces with applications. The DescribeWorkspaces API will now additionally return OperatingSystemName in its responses.
+
 1.88.0 (2023-09-27)
 ------------------
 

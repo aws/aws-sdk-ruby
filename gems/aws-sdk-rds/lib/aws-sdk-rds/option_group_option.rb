@@ -58,7 +58,7 @@ module Aws::RDS
       data[:minimum_required_minor_engine_version]
     end
 
-    # Specifies whether the option requires a port.
+    # Indicates whether the option requires a port.
     # @return [Boolean]
     def port_required
       data[:port_required]
@@ -137,7 +137,7 @@ module Aws::RDS
       data[:option_group_option_versions]
     end
 
-    # Specifies whether the option can be copied across Amazon Web Services
+    # Indicates whether the option can be copied across Amazon Web Services
     # accounts.
     # @return [Boolean]
     def copyable_cross_account

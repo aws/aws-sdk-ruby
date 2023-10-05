@@ -461,7 +461,7 @@ module Aws::RDS
       data[:global_write_forwarding_status]
     end
 
-    # Specifies whether write forwarding is enabled for a secondary cluster
+    # Indicates whether write forwarding is enabled for a secondary cluster
     # in an Aurora global database. Because write forwarding takes time to
     # enable, check the value of `GlobalWriteForwardingStatus` to confirm
     # that the request has completed before using the write forwarding
@@ -654,7 +654,7 @@ module Aws::RDS
       data[:io_optimized_next_allowed_modification_time]
     end
 
-    # Specifies whether an Aurora DB cluster has in-cluster write forwarding
+    # Indicates whether an Aurora DB cluster has in-cluster write forwarding
     # enabled, not enabled, requested, or is in the process of enabling it.
     # @return [String]
     def local_write_forwarding_status
@@ -1678,12 +1678,12 @@ module Aws::RDS
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :skip_final_snapshot
-    #   A value that indicates whether to skip the creation of a final DB
-    #   cluster snapshot before the DB cluster is deleted. If skip is
-    #   specified, no DB cluster snapshot is created. If skip isn't
-    #   specified, a DB cluster snapshot is created before the DB cluster is
-    #   deleted. By default, skip isn't specified, and the DB cluster
-    #   snapshot is created. By default, this parameter is disabled.
+    #   Specifies whether to skip the creation of a final DB cluster snapshot
+    #   before the DB cluster is deleted. If skip is specified, no DB cluster
+    #   snapshot is created. If skip isn't specified, a DB cluster snapshot
+    #   is created before the DB cluster is deleted. By default, skip isn't
+    #   specified, and the DB cluster snapshot is created. By default, this
+    #   parameter is disabled.
     #
     #   <note markdown="1"> You must specify a `FinalDBSnapshotIdentifier` parameter if
     #   `SkipFinalSnapshot` is disabled.
@@ -1707,10 +1707,10 @@ module Aws::RDS
     #
     #   * Can't end with a hyphen or contain two consecutive hyphens
     # @option options [Boolean] :delete_automated_backups
-    #   A value that indicates whether to remove automated backups immediately
-    #   after the DB cluster is deleted. This parameter isn't case-sensitive.
-    #   The default is to remove automated backups immediately after the DB
-    #   cluster is deleted.
+    #   Specifies whether to remove automated backups immediately after the DB
+    #   cluster is deleted. This parameter isn't case-sensitive. The default
+    #   is to remove automated backups immediately after the DB cluster is
+    #   deleted.
     # @return [DBCluster]
     def delete(options = {})
       options = options.merge(db_cluster_identifier: @id)
@@ -2535,9 +2535,9 @@ module Aws::RDS
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [Boolean] :use_latest_restorable_time
-    #   A value that indicates whether to restore the DB cluster to the latest
-    #   restorable backup time. By default, the DB cluster isn't restored to
-    #   the latest restorable backup time.
+    #   Specifies whether to restore the DB cluster to the latest restorable
+    #   backup time. By default, the DB cluster isn't restored to the latest
+    #   restorable backup time.
     #
     #   Constraints: Can't be specified if `RestoreToTime` parameter is
     #   provided.
@@ -2605,9 +2605,9 @@ module Aws::RDS
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [Boolean] :enable_iam_database_authentication
-    #   A value that indicates whether to enable mapping of Amazon Web
-    #   Services Identity and Access Management (IAM) accounts to database
-    #   accounts. By default, mapping isn't enabled.
+    #   Specifies whether to enable mapping of Amazon Web Services Identity
+    #   and Access Management (IAM) accounts to database accounts. By default,
+    #   mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
     #   *Amazon Aurora User Guide*.
@@ -2686,20 +2686,19 @@ module Aws::RDS
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [Boolean] :deletion_protection
-    #   A value that indicates whether the DB cluster has deletion protection
-    #   enabled. The database can't be deleted when deletion protection is
-    #   enabled. By default, deletion protection isn't enabled.
+    #   Specifies whether to enable deletion protection for the DB cluster.
+    #   The database can't be deleted when deletion protection is enabled. By
+    #   default, deletion protection isn't enabled.
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [Boolean] :copy_tags_to_snapshot
-    #   A value that indicates whether to copy all tags from the restored DB
-    #   cluster to snapshots of the restored DB cluster. The default is not to
-    #   copy them.
+    #   Specifies whether to copy all tags from the restored DB cluster to
+    #   snapshots of the restored DB cluster. The default is not to copy them.
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [String] :domain
-    #   Specify the Active Directory directory ID to restore the DB cluster
-    #   in. The domain must be created prior to this operation.
+    #   The Active Directory directory ID to restore the DB cluster in. The
+    #   domain must be created prior to this operation.
     #
     #   For Amazon Aurora DB clusters, Amazon RDS can use Kerberos
     #   Authentication to authenticate users that connect to the DB cluster.
@@ -2712,8 +2711,8 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html
     # @option options [String] :domain_iam_role_name
-    #   Specify the name of the IAM role to be used when making API calls to
-    #   the Directory Service.
+    #   The name of the IAM role to be used when making API calls to the
+    #   Directory Service.
     #
     #   Valid for: Aurora DB clusters only
     # @option options [Types::ScalingConfiguration] :scaling_configuration
@@ -2751,14 +2750,14 @@ module Aws::RDS
     #   When specified for a Multi-AZ DB cluster, a value for the `Iops`
     #   parameter is required.
     #
-    #   Valid values: `aurora`, `aurora-iopt1` (Aurora DB clusters); `io1`
+    #   Valid Values: `aurora`, `aurora-iopt1` (Aurora DB clusters); `io1`
     #   (Multi-AZ DB clusters)
     #
     #   Default: `aurora` (Aurora DB clusters); `io1` (Multi-AZ DB clusters)
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [Boolean] :publicly_accessible
-    #   A value that indicates whether the DB cluster is publicly accessible.
+    #   Specifies whether the DB cluster is publicly accessible.
     #
     #   When the DB cluster is publicly accessible, its Domain Name System
     #   (DNS) endpoint resolves to the private IP address from within the DB
@@ -2822,7 +2821,7 @@ module Aws::RDS
     # @option options [String] :network_type
     #   The network type of the DB cluster.
     #
-    #   Valid values:
+    #   Valid Values:
     #
     #   * `IPV4`
     #
@@ -3035,18 +3034,18 @@ module Aws::RDS
     #
     #   * `engine` - Accepts names of database engines.
     # @option options [Boolean] :include_shared
-    #   A value that indicates whether to include shared manual DB cluster
-    #   snapshots from other Amazon Web Services accounts that this Amazon Web
-    #   Services account has been given permission to copy or restore. By
-    #   default, these snapshots are not included.
+    #   Specifies whether to include shared manual DB cluster snapshots from
+    #   other Amazon Web Services accounts that this Amazon Web Services
+    #   account has been given permission to copy or restore. By default,
+    #   these snapshots are not included.
     #
     #   You can give an Amazon Web Services account permission to restore a
     #   manual DB cluster snapshot from another Amazon Web Services account by
     #   the `ModifyDBClusterSnapshotAttribute` API action.
     # @option options [Boolean] :include_public
-    #   A value that indicates whether to include manual DB cluster snapshots
-    #   that are public and can be copied or restored by any Amazon Web
-    #   Services account. By default, the public snapshots are not included.
+    #   Specifies whether to include manual DB cluster snapshots that are
+    #   public and can be copied or restored by any Amazon Web Services
+    #   account. By default, the public snapshots are not included.
     #
     #   You can share a manual DB cluster snapshot as public by using the
     #   ModifyDBClusterSnapshotAttribute API action.

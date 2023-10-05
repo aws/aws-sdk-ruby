@@ -3449,9 +3449,9 @@ module Aws::StorageGateway
     end
 
     # Returns metadata about a gateway such as its name, network interfaces,
-    # configured time zone, and the state (whether the gateway is running or
-    # not). To specify which gateway to describe, use the Amazon Resource
-    # Name (ARN) of the gateway in your request.
+    # time zone, status, and software version. To specify which gateway to
+    # describe, use the Amazon Resource Name (ARN) of the gateway in your
+    # request.
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -3481,6 +3481,7 @@ module Aws::StorageGateway
     #   * {Types::DescribeGatewayInformationOutput#gateway_capacity #gateway_capacity} => String
     #   * {Types::DescribeGatewayInformationOutput#supported_gateway_capacities #supported_gateway_capacities} => Array&lt;String&gt;
     #   * {Types::DescribeGatewayInformationOutput#host_environment_id #host_environment_id} => String
+    #   * {Types::DescribeGatewayInformationOutput#software_version #software_version} => String
     #
     #
     # @example Example: To describe metadata about the gateway
@@ -3544,6 +3545,7 @@ module Aws::StorageGateway
     #   resp.supported_gateway_capacities #=> Array
     #   resp.supported_gateway_capacities[0] #=> String, one of "Small", "Medium", "Large"
     #   resp.host_environment_id #=> String
+    #   resp.software_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformation AWS API Documentation
     #
@@ -4642,6 +4644,19 @@ module Aws::StorageGateway
     # Adds a file gateway to an Active Directory domain. This operation is
     # only supported for file gateways that support the SMB file protocol.
     #
+    # <note markdown="1"> Joining a domain creates an Active Directory computer account in the
+    # default organizational unit, using the gateway's **Gateway ID** as
+    # the account name (for example, SGW-1234ADE). If your Active Directory
+    # environment requires that you pre-stage accounts to facilitate the
+    # join domain process, you will need to create this account ahead of
+    # time.
+    #
+    #  To create the gateway's computer account in an organizational unit
+    # other than the default, you must specify the organizational unit when
+    # joining the domain.
+    #
+    #  </note>
+    #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the `ListGateways`
     #   operation to return a list of gateways for your account and Amazon Web
@@ -4749,8 +4764,8 @@ module Aws::StorageGateway
     end
 
     # Gets a list of the file shares for a specific S3 File Gateway, or the
-    # list of file shares that belong to the calling user account. This
-    # operation is only supported for S3 File Gateways.
+    # list of file shares that belong to the calling Amazon Web Services
+    # account. This operation is only supported for S3 File Gateways.
     #
     # @option params [String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway whose file shares you
@@ -5431,11 +5446,11 @@ module Aws::StorageGateway
     # S3 File Gateways.
     #
     # For more information, see [Getting file upload notification][1] in the
-    # *Storage Gateway User Guide*.
+    # *Amazon S3 File Gateway User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-upload-notification
+    # [1]: https://docs.aws.amazon.com/filegateway/latest/files3/monitoring-file-gateway.html#get-notification
     #
     # @option params [required, String] :file_share_arn
     #   The Amazon Resource Name (ARN) of the file share.
@@ -5496,9 +5511,6 @@ module Aws::StorageGateway
     #
     # * Wait at least 60 seconds between consecutive RefreshCache API
     #   requests.
-    #
-    # * RefreshCache does not evict cache entries if invoked consecutively
-    #   within 60 seconds of a previous RefreshCache request.
     #
     # * If you invoke the RefreshCache API when two requests are already
     #   being processed, any new request will cause an
@@ -6182,8 +6194,9 @@ module Aws::StorageGateway
     # default, gateways do not have bandwidth rate limit schedules, which
     # means no bandwidth rate limiting is in effect. Use this to initiate or
     # update a gateway's bandwidth rate limit schedule. This operation is
-    # supported only for volume, tape and S3 file gateways. FSx file
-    # gateways do not support bandwidth rate limits.
+    # supported for volume, tape, and S3 file gateways. S3 file gateways
+    # support bandwidth rate limits for upload only. FSx file gateways do
+    # not support bandwidth rate limits.
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -7258,7 +7271,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
