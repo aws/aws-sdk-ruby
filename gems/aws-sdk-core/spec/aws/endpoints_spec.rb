@@ -81,6 +81,36 @@ module Aws
               expect_auth({ 'name' => 'sigv4' })
               client.operation
             end
+
+            context 's3 signature version' do
+              let(:signature_version) { 's3' }
+
+              it 'disables double encoding and normalize path' do
+                expect_auth(
+                  {
+                    'name' => 'sigv4',
+                    'disableDoubleEncoding' => true,
+                    'disableNormalizePath' => true
+                  }
+                )
+                client.operation
+              end
+            end
+
+            context 's3v4 signature version' do
+              let(:signature_version) { 's3v4' }
+
+              it 'disables double encoding and normalize path' do
+                expect_auth(
+                  {
+                    'name' => 'sigv4',
+                    'disableDoubleEncoding' => true,
+                    'disableNormalizePath' => true
+                  }
+                )
+                client.operation
+              end
+            end
           end
 
           context 'sigv4a defaults' do
@@ -89,6 +119,36 @@ module Aws
             it 'signs with sigv4' do
               expect_auth({ 'name' => 'sigv4a' })
               client.operation
+            end
+
+            context 's3 signature version' do
+              let(:signature_version) { 's3' }
+
+              it 'disables double encoding and normalize path' do
+                expect_auth(
+                  {
+                    'name' => 'sigv4a',
+                    'disableDoubleEncoding' => true,
+                    'disableNormalizePath' => true
+                  }
+                )
+                client.operation
+              end
+            end
+
+            context 's3v4 signature version' do
+              let(:signature_version) { 's3v4' }
+
+              it 'disables double encoding and normalize path' do
+                expect_auth(
+                  {
+                    'name' => 'sigv4a',
+                    'disableDoubleEncoding' => true,
+                    'disableNormalizePath' => true
+                  }
+                )
+                client.operation
+              end
             end
           end
 

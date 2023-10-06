@@ -56,6 +56,12 @@ module Aws
           case auth
           when 'aws.auth#sigv4', 'aws.auth#sigv4a'
             auth_scheme = { 'name' => auth.split('#').last }
+            if s3_or_s3v4_signature_version?(context)
+              auth_scheme = auth_scheme.merge(
+                'disableDoubleEncoding' => true,
+                'disableNormalizePath' => true
+              )
+            end
             merge_signing_defaults(auth_scheme, context.config)
           when 'smithy.api#httpBearerAuth'
             { 'name' => 'bearer' }
@@ -70,6 +76,10 @@ module Aws
       def default_api_auth(context)
         context.config.api.operation(context.operation_name)['auth'] ||
           context.config.api.metadata['auth']
+      end
+
+      def s3_or_s3v4_signature_version?(context)
+        %w[s3 s3v4].include?(context.config.api.metadata['signatureVersion'])
       end
 
       # Legacy auth resolution - looks for deprecated signatureVersion
