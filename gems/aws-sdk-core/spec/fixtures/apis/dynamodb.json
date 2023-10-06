@@ -2898,7 +2898,8 @@
     "ProvisionedThroughputExceededException":{
       "type":"structure",
       "members":{
-        "message":{"shape":"ErrorMessage"}
+        "message":{"shape":"ErrorMessage"},
+        "foo": {"shape":"ErrorMessage"}
       },
       "exception":true
     },
