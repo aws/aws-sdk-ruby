@@ -417,6 +417,9 @@ module Aws::QuickSight
     DataSourceSummaryList = Shapes::ListShape.new(name: 'DataSourceSummaryList')
     DataSourceType = Shapes::StringShape.new(name: 'DataSourceType')
     Database = Shapes::StringShape.new(name: 'Database')
+    DatabaseGroup = Shapes::StringShape.new(name: 'DatabaseGroup')
+    DatabaseGroupList = Shapes::ListShape.new(name: 'DatabaseGroupList')
+    DatabaseUser = Shapes::StringShape.new(name: 'DatabaseUser')
     DatabricksParameters = Shapes::StructureShape.new(name: 'DatabricksParameters')
     DatasetMetadata = Shapes::StructureShape.new(name: 'DatasetMetadata')
     DatasetParameter = Shapes::StructureShape.new(name: 'DatasetParameter')
@@ -1156,6 +1159,7 @@ module Aws::QuickSight
     RangeEndsLabelType = Shapes::StructureShape.new(name: 'RangeEndsLabelType')
     RdsParameters = Shapes::StructureShape.new(name: 'RdsParameters')
     RecoveryWindowInDays = Shapes::IntegerShape.new(name: 'RecoveryWindowInDays')
+    RedshiftIAMParameters = Shapes::StructureShape.new(name: 'RedshiftIAMParameters')
     RedshiftParameters = Shapes::StructureShape.new(name: 'RedshiftParameters')
     ReferenceLine = Shapes::StructureShape.new(name: 'ReferenceLine')
     ReferenceLineCustomLabelConfiguration = Shapes::StructureShape.new(name: 'ReferenceLineCustomLabelConfiguration')
@@ -1648,6 +1652,8 @@ module Aws::QuickSight
     VPCConnectionResourceStatus = Shapes::StringShape.new(name: 'VPCConnectionResourceStatus')
     VPCConnectionSummary = Shapes::StructureShape.new(name: 'VPCConnectionSummary')
     VPCConnectionSummaryList = Shapes::ListShape.new(name: 'VPCConnectionSummaryList')
+    ValidationStrategy = Shapes::StructureShape.new(name: 'ValidationStrategy')
+    ValidationStrategyMode = Shapes::StringShape.new(name: 'ValidationStrategyMode')
     ValueWhenUnsetOption = Shapes::StringShape.new(name: 'ValueWhenUnsetOption')
     VersionDescription = Shapes::StringShape.new(name: 'VersionDescription')
     VersionNumber = Shapes::IntegerShape.new(name: 'VersionNumber')
@@ -2558,6 +2564,7 @@ module Aws::QuickSight
     CreateAnalysisRequest.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
     CreateAnalysisRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateAnalysisRequest.add_member(:definition, Shapes::ShapeRef.new(shape: AnalysisDefinition, location_name: "Definition"))
+    CreateAnalysisRequest.add_member(:validation_strategy, Shapes::ShapeRef.new(shape: ValidationStrategy, location_name: "ValidationStrategy"))
     CreateAnalysisRequest.struct_class = Types::CreateAnalysisRequest
 
     CreateAnalysisResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -2581,6 +2588,7 @@ module Aws::QuickSight
     CreateDashboardRequest.add_member(:dashboard_publish_options, Shapes::ShapeRef.new(shape: DashboardPublishOptions, location_name: "DashboardPublishOptions"))
     CreateDashboardRequest.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
     CreateDashboardRequest.add_member(:definition, Shapes::ShapeRef.new(shape: DashboardVersionDefinition, location_name: "Definition"))
+    CreateDashboardRequest.add_member(:validation_strategy, Shapes::ShapeRef.new(shape: ValidationStrategy, location_name: "ValidationStrategy"))
     CreateDashboardRequest.struct_class = Types::CreateDashboardRequest
 
     CreateDashboardResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -2759,6 +2767,7 @@ module Aws::QuickSight
     CreateTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateTemplateRequest.add_member(:version_description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "VersionDescription"))
     CreateTemplateRequest.add_member(:definition, Shapes::ShapeRef.new(shape: TemplateVersionDefinition, location_name: "Definition"))
+    CreateTemplateRequest.add_member(:validation_strategy, Shapes::ShapeRef.new(shape: ValidationStrategy, location_name: "ValidationStrategy"))
     CreateTemplateRequest.struct_class = Types::CreateTemplateRequest
 
     CreateTemplateResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -3234,6 +3243,8 @@ module Aws::QuickSight
     DataSourceSummary.struct_class = Types::DataSourceSummary
 
     DataSourceSummaryList.member = Shapes::ShapeRef.new(shape: DataSourceSummary)
+
+    DatabaseGroupList.member = Shapes::ShapeRef.new(shape: DatabaseGroup)
 
     DatabricksParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
     DatabricksParameters.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))
@@ -4325,6 +4336,7 @@ module Aws::QuickSight
     FilterListConfiguration.add_member(:match_operator, Shapes::ShapeRef.new(shape: CategoryFilterMatchOperator, required: true, location_name: "MatchOperator"))
     FilterListConfiguration.add_member(:category_values, Shapes::ShapeRef.new(shape: CategoryValueList, location_name: "CategoryValues"))
     FilterListConfiguration.add_member(:select_all_options, Shapes::ShapeRef.new(shape: CategoryFilterSelectAllOptions, location_name: "SelectAllOptions"))
+    FilterListConfiguration.add_member(:null_option, Shapes::ShapeRef.new(shape: FilterNullOption, location_name: "NullOption"))
     FilterListConfiguration.struct_class = Types::FilterListConfiguration
 
     FilterListControl.add_member(:filter_control_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "FilterControlId"))
@@ -6115,10 +6127,17 @@ module Aws::QuickSight
     RdsParameters.add_member(:database, Shapes::ShapeRef.new(shape: Database, required: true, location_name: "Database"))
     RdsParameters.struct_class = Types::RdsParameters
 
+    RedshiftIAMParameters.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
+    RedshiftIAMParameters.add_member(:database_user, Shapes::ShapeRef.new(shape: DatabaseUser, required: true, location_name: "DatabaseUser"))
+    RedshiftIAMParameters.add_member(:database_groups, Shapes::ShapeRef.new(shape: DatabaseGroupList, location_name: "DatabaseGroups"))
+    RedshiftIAMParameters.add_member(:auto_create_database_user, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoCreateDatabaseUser"))
+    RedshiftIAMParameters.struct_class = Types::RedshiftIAMParameters
+
     RedshiftParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, location_name: "Host"))
     RedshiftParameters.add_member(:port, Shapes::ShapeRef.new(shape: OptionalPort, location_name: "Port"))
     RedshiftParameters.add_member(:database, Shapes::ShapeRef.new(shape: Database, required: true, location_name: "Database"))
     RedshiftParameters.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, location_name: "ClusterId"))
+    RedshiftParameters.add_member(:iam_parameters, Shapes::ShapeRef.new(shape: RedshiftIAMParameters, location_name: "IAMParameters"))
     RedshiftParameters.struct_class = Types::RedshiftParameters
 
     ReferenceLine.add_member(:status, Shapes::ShapeRef.new(shape: WidgetStatus, location_name: "Status"))
@@ -7568,6 +7587,7 @@ module Aws::QuickSight
     UpdateAnalysisRequest.add_member(:source_entity, Shapes::ShapeRef.new(shape: AnalysisSourceEntity, location_name: "SourceEntity"))
     UpdateAnalysisRequest.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
     UpdateAnalysisRequest.add_member(:definition, Shapes::ShapeRef.new(shape: AnalysisDefinition, location_name: "Definition"))
+    UpdateAnalysisRequest.add_member(:validation_strategy, Shapes::ShapeRef.new(shape: ValidationStrategy, location_name: "ValidationStrategy"))
     UpdateAnalysisRequest.struct_class = Types::UpdateAnalysisRequest
 
     UpdateAnalysisResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -7613,6 +7633,7 @@ module Aws::QuickSight
     UpdateDashboardRequest.add_member(:dashboard_publish_options, Shapes::ShapeRef.new(shape: DashboardPublishOptions, location_name: "DashboardPublishOptions"))
     UpdateDashboardRequest.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
     UpdateDashboardRequest.add_member(:definition, Shapes::ShapeRef.new(shape: DashboardVersionDefinition, location_name: "Definition"))
+    UpdateDashboardRequest.add_member(:validation_strategy, Shapes::ShapeRef.new(shape: ValidationStrategy, location_name: "ValidationStrategy"))
     UpdateDashboardRequest.struct_class = Types::UpdateDashboardRequest
 
     UpdateDashboardResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -7801,6 +7822,7 @@ module Aws::QuickSight
     UpdateTemplateRequest.add_member(:version_description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "VersionDescription"))
     UpdateTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "Name"))
     UpdateTemplateRequest.add_member(:definition, Shapes::ShapeRef.new(shape: TemplateVersionDefinition, location_name: "Definition"))
+    UpdateTemplateRequest.add_member(:validation_strategy, Shapes::ShapeRef.new(shape: ValidationStrategy, location_name: "ValidationStrategy"))
     UpdateTemplateRequest.struct_class = Types::UpdateTemplateRequest
 
     UpdateTemplateResponse.add_member(:template_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, location_name: "TemplateId"))
@@ -7974,6 +7996,9 @@ module Aws::QuickSight
     VPCConnectionSummary.struct_class = Types::VPCConnectionSummary
 
     VPCConnectionSummaryList.member = Shapes::ShapeRef.new(shape: VPCConnectionSummary)
+
+    ValidationStrategy.add_member(:mode, Shapes::ShapeRef.new(shape: ValidationStrategyMode, required: true, location_name: "Mode"))
+    ValidationStrategy.struct_class = Types::ValidationStrategy
 
     VisibleRangeOptions.add_member(:percent_range, Shapes::ShapeRef.new(shape: PercentVisibleRange, location_name: "PercentRange"))
     VisibleRangeOptions.struct_class = Types::VisibleRangeOptions

@@ -54,6 +54,7 @@ module Aws::MarketplaceCatalog
     Identifier = Shapes::StringShape.new(name: 'Identifier')
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
     Json = Shapes::StringShape.new(name: 'Json')
+    JsonDocumentType = Shapes::DocumentShape.new(name: 'JsonDocumentType', document: true)
     ListChangeSetsMaxResultInteger = Shapes::IntegerShape.new(name: 'ListChangeSetsMaxResultInteger')
     ListChangeSetsRequest = Shapes::StructureShape.new(name: 'ListChangeSetsRequest')
     ListChangeSetsResponse = Shapes::StructureShape.new(name: 'ListChangeSetsResponse')
@@ -108,7 +109,8 @@ module Aws::MarketplaceCatalog
     Change.add_member(:change_type, Shapes::ShapeRef.new(shape: ChangeType, required: true, location_name: "ChangeType"))
     Change.add_member(:entity, Shapes::ShapeRef.new(shape: Entity, required: true, location_name: "Entity"))
     Change.add_member(:entity_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "EntityTags"))
-    Change.add_member(:details, Shapes::ShapeRef.new(shape: Json, required: true, location_name: "Details"))
+    Change.add_member(:details, Shapes::ShapeRef.new(shape: Json, location_name: "Details"))
+    Change.add_member(:details_document, Shapes::ShapeRef.new(shape: JsonDocumentType, location_name: "DetailsDocument"))
     Change.add_member(:change_name, Shapes::ShapeRef.new(shape: ChangeName, location_name: "ChangeName"))
     Change.struct_class = Types::Change
 
@@ -129,6 +131,7 @@ module Aws::MarketplaceCatalog
     ChangeSummary.add_member(:change_type, Shapes::ShapeRef.new(shape: ChangeType, location_name: "ChangeType"))
     ChangeSummary.add_member(:entity, Shapes::ShapeRef.new(shape: Entity, location_name: "Entity"))
     ChangeSummary.add_member(:details, Shapes::ShapeRef.new(shape: Json, location_name: "Details"))
+    ChangeSummary.add_member(:details_document, Shapes::ShapeRef.new(shape: JsonDocumentType, location_name: "DetailsDocument"))
     ChangeSummary.add_member(:error_detail_list, Shapes::ShapeRef.new(shape: ErrorDetailList, location_name: "ErrorDetailList"))
     ChangeSummary.add_member(:change_name, Shapes::ShapeRef.new(shape: ChangeName, location_name: "ChangeName"))
     ChangeSummary.struct_class = Types::ChangeSummary
@@ -162,6 +165,7 @@ module Aws::MarketplaceCatalog
     DescribeEntityResponse.add_member(:entity_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "EntityArn"))
     DescribeEntityResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "LastModifiedDate"))
     DescribeEntityResponse.add_member(:details, Shapes::ShapeRef.new(shape: Json, location_name: "Details"))
+    DescribeEntityResponse.add_member(:details_document, Shapes::ShapeRef.new(shape: JsonDocumentType, location_name: "DetailsDocument"))
     DescribeEntityResponse.struct_class = Types::DescribeEntityResponse
 
     Entity.add_member(:type, Shapes::ShapeRef.new(shape: EntityType, required: true, location_name: "Type"))

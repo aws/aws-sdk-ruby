@@ -339,10 +339,6 @@ module Aws::EC2
     #
     #   If you provide an incorrect network border group, you receive an
     #   `InvalidAddress.NotFound` error.
-    #
-    #   You cannot use a network border group with EC2 Classic. If you attempt
-    #   this operation on EC2 classic, you receive an
-    #   `InvalidParameterCombination` error.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

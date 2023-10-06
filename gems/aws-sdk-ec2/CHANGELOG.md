@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.412.0 (2023-10-06)
+------------------
+
+* Feature - Documentation updates for Elastic Compute Cloud (EC2).
+
 1.411.0 (2023-10-02)
 ------------------
 

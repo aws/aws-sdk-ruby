@@ -4090,6 +4090,12 @@ module Aws::QuickSight
     #   for the request to be valid.
     #   @return [Types::AnalysisDefinition]
     #
+    # @!attribute [rw] validation_strategy
+    #   The option to relax the validation needed to create an analysis with
+    #   definition objects. This skips the validation step for specific
+    #   errors.
+    #   @return [Types::ValidationStrategy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateAnalysisRequest AWS API Documentation
     #
     class CreateAnalysisRequest < Struct.new(
@@ -4101,7 +4107,8 @@ module Aws::QuickSight
       :source_entity,
       :theme_arn,
       :tags,
-      :definition)
+      :definition,
+      :validation_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4244,6 +4251,12 @@ module Aws::QuickSight
     #   for the request to be valid.
     #   @return [Types::DashboardVersionDefinition]
     #
+    # @!attribute [rw] validation_strategy
+    #   The option to relax the validation needed to create a dashboard with
+    #   definition objects. This option skips the validation step for
+    #   specific errors.
+    #   @return [Types::ValidationStrategy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateDashboardRequest AWS API Documentation
     #
     class CreateDashboardRequest < Struct.new(
@@ -4257,7 +4270,8 @@ module Aws::QuickSight
       :version_description,
       :dashboard_publish_options,
       :theme_arn,
-      :definition)
+      :definition,
+      :validation_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5174,6 +5188,12 @@ module Aws::QuickSight
     #   for the request to be valid.
     #   @return [Types::TemplateVersionDefinition]
     #
+    # @!attribute [rw] validation_strategy
+    #   TThe option to relax the validation needed to create a template with
+    #   definition objects. This skips the validation step for specific
+    #   errors.
+    #   @return [Types::ValidationStrategy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateTemplateRequest AWS API Documentation
     #
     class CreateTemplateRequest < Struct.new(
@@ -5184,7 +5204,8 @@ module Aws::QuickSight
       :source_entity,
       :tags,
       :version_description,
-      :definition)
+      :definition,
+      :validation_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12920,12 +12941,24 @@ module Aws::QuickSight
     #   ^
     #   @return [String]
     #
+    # @!attribute [rw] null_option
+    #   This option determines how null values should be treated when
+    #   filtering data.
+    #
+    #   * `ALL_VALUES`: Include null values in filtered results.
+    #
+    #   * `NULLS_ONLY`: Only include null values in filtered results.
+    #
+    #   * `NON_NULLS_ONLY`: Exclude null values from filtered results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilterListConfiguration AWS API Documentation
     #
     class FilterListConfiguration < Struct.new(
       :match_operator,
       :category_values,
-      :select_all_options)
+      :select_all_options,
+      :null_option)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21583,6 +21616,59 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A structure that grants Amazon QuickSight access to your cluster and
+    # make a call to the `redshift:GetClusterCredentials` API. For more
+    # information on the `redshift:GetClusterCredentials` API, see [
+    # `GetClusterCredentials` ][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html
+    #
+    # @!attribute [rw] role_arn
+    #   Use the `RoleArn` structure to allow Amazon QuickSight to call
+    #   `redshift:GetClusterCredentials` on your cluster. The calling
+    #   principal must have `iam:PassRole` access to pass the role to Amazon
+    #   QuickSight. The role's trust policy must allow the Amazon
+    #   QuickSight service principal to assume the role.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_user
+    #   The user whose permissions and group memberships will be used by
+    #   Amazon QuickSight to access the cluster. If this user already exists
+    #   in your database, Amazon QuickSight is granted the same permissions
+    #   that the user has. If the user doesn't exist, set the value of
+    #   `AutoCreateDatabaseUser` to `True` to create a new user with PUBLIC
+    #   permissions.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_groups
+    #   A list of groups whose permissions will be granted to Amazon
+    #   QuickSight to access the cluster. These permissions are combined
+    #   with the permissions granted to Amazon QuickSight by the
+    #   `DatabaseUser`. If you choose to include this parameter, the
+    #   `RoleArn` must grant access to `redshift:JoinGroup`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] auto_create_database_user
+    #   Automatically creates a database user. If your database doesn't
+    #   have a `DatabaseUser`, set this parameter to `True`. If there is no
+    #   `DatabaseUser`, Amazon QuickSight can't connect to your cluster.
+    #   The `RoleArn` that you use for this operation must grant access to
+    #   `redshift:CreateClusterUser` to successfully create the user.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RedshiftIAMParameters AWS API Documentation
+    #
+    class RedshiftIAMParameters < Struct.new(
+      :role_arn,
+      :database_user,
+      :database_groups,
+      :auto_create_database_user)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The parameters for Amazon Redshift. The `ClusterId` field can be blank
     # if `Host` and `Port` are both set. The `Host` and `Port` fields can be
     # blank if the `ClusterId` field is set.
@@ -21604,13 +21690,24 @@ module Aws::QuickSight
     #   provided.
     #   @return [String]
     #
+    # @!attribute [rw] iam_parameters
+    #   An optional parameter that uses IAM authentication to grant Amazon
+    #   QuickSight access to your cluster. This parameter can be used
+    #   instead of [DataSourceCredentials][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DataSourceCredentials.html
+    #   @return [Types::RedshiftIAMParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RedshiftParameters AWS API Documentation
     #
     class RedshiftParameters < Struct.new(
       :host,
       :port,
       :database,
-      :cluster_id)
+      :cluster_id,
+      :iam_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28783,6 +28880,12 @@ module Aws::QuickSight
     #   Template, or Analysis.
     #   @return [Types::AnalysisDefinition]
     #
+    # @!attribute [rw] validation_strategy
+    #   The option to relax the validation needed to update an analysis with
+    #   definition objects. This skips the validation step for specific
+    #   errors.
+    #   @return [Types::ValidationStrategy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAnalysisRequest AWS API Documentation
     #
     class UpdateAnalysisRequest < Struct.new(
@@ -28792,7 +28895,8 @@ module Aws::QuickSight
       :parameters,
       :source_entity,
       :theme_arn,
-      :definition)
+      :definition,
+      :validation_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29028,6 +29132,12 @@ module Aws::QuickSight
     #   Template, or Analysis.
     #   @return [Types::DashboardVersionDefinition]
     #
+    # @!attribute [rw] validation_strategy
+    #   The option to relax the validation needed to update a dashboard with
+    #   definition objects. This skips the validation step for specific
+    #   errors.
+    #   @return [Types::ValidationStrategy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateDashboardRequest AWS API Documentation
     #
     class UpdateDashboardRequest < Struct.new(
@@ -29039,7 +29149,8 @@ module Aws::QuickSight
       :version_description,
       :dashboard_publish_options,
       :theme_arn,
-      :definition)
+      :definition,
+      :validation_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29952,6 +30063,12 @@ module Aws::QuickSight
     #   Template, or Analysis.
     #   @return [Types::TemplateVersionDefinition]
     #
+    # @!attribute [rw] validation_strategy
+    #   The option to relax the validation needed to update a template with
+    #   definition objects. This skips the validation step for specific
+    #   errors.
+    #   @return [Types::ValidationStrategy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateTemplateRequest AWS API Documentation
     #
     class UpdateTemplateRequest < Struct.new(
@@ -29960,7 +30077,8 @@ module Aws::QuickSight
       :source_entity,
       :version_description,
       :name,
-      :definition)
+      :definition,
+      :validation_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30868,6 +30986,26 @@ module Aws::QuickSight
       :role_arn,
       :created_time,
       :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The option to relax the validation that is required to create and
+    # update analyses, dashboards, and templates with definition objects.
+    # When you set this value to `LENIENT`, validation is skipped for
+    # specific errors.
+    #
+    # @!attribute [rw] mode
+    #   The mode of validation for the asset to be creaed or updated. When
+    #   you set this value to `STRICT`, strict validation for every error is
+    #   enforced. When you set this value to `LENIENT`, validation is
+    #   skipped for specific UI errors.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ValidationStrategy AWS API Documentation
+    #
+    class ValidationStrategy < Struct.new(
+      :mode)
       SENSITIVE = []
       include Aws::Structure
     end
