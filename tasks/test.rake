@@ -42,7 +42,7 @@ task 'test:spec' do
 end
 
 ##
-## feature / integration tests
+## integration / smoke tests
 ##
 
 desc 'Executes smoke tests for a single gem'
@@ -67,14 +67,33 @@ rule 'test:smoke' do
   abort('one or more test suites failed: %s' % [failures.join(', ')]) unless failures.empty?
 end
 
-desc 'Executes integration tests (except smoke tests) for a single gem'
-rule /^test:features:.+$/ do |task|
+desc 'Executes integration tests for a single gem'
+rule /^test:integration:.+$/ do |task|
   dir = "gems/#{task.name.split(':').last}/features"
   tags = "-t 'not @smoke' -t 'not @veryslow'"
   sh("bundle exec cucumber --retry 3 #{tags} -r #{dir} #{dir} --publish-quiet")
 end
 
-desc 'Executes all integration tests (except smoke tests)'
+desc 'Executes all integration tests'
+task 'test:integration' do
+  failures = []
+  Dir.glob('gems/*/features').each do |dir|
+    gem_name = dir.match(%r{gems/(.*)/features})[1]
+    sh("bundle exec rake test:integration:#{gem_name}") do |ok, _|
+      failures << File.basename(File.dirname(dir)) unless ok
+    end
+  end
+  abort('one or more test suites failed: %s' % [failures.join(', ')]) unless failures.empty?
+end
+
+desc 'Executes feature tests for a single gem'
+rule /^test:features:.+$/ do |task|
+  dir = "gems/#{task.name.split(':').last}/features"
+  tags = "-t 'not @veryslow'"
+  sh("bundle exec cucumber --retry 3 #{tags} -r #{dir} #{dir} --publish-quiet")
+end
+
+desc 'Executes all feature tests'
 task 'test:features' do
   failures = []
   Dir.glob('gems/*/features').each do |dir|

@@ -7,38 +7,26 @@
 
 Feature: Smoke tests for ACM
 
-  @smoke @acm @connection
-  Scenario: FailureExample
-    Given I create a 'Aws::ACM' client with config:
-      """
-{"region":"moon-dark-1"}
-      """
-    When I call the operation 'test_operation' with params:
-      """
-{"message":"foo"}
-      """
-    Then I expect an error was raised
-
   @smoke @acm 
-  Scenario: ErrorExample
+  Scenario: ListCertificatesSuccess
     Given I create a 'Aws::ACM' client with config:
       """
-{"region":"eu-central-1"}
+{"region":"us-west-2"}
       """
-    When I call the operation 'test_operation' with params:
+    When I call the operation 'list_certificates' with params:
       """
-{"message":"föö"}
-      """
-    Then I expect a 'Aws::ACM::Errors::InvalidMessageError' was raised
-
-  @smoke @acm 
-  Scenario: SuccessExample
-    Given I create a 'Aws::ACM' client with config:
-      """
-{"region":"eu-central-1"}
-      """
-    When I call the operation 'test_operation' with params:
-      """
-{"message":"bar"}
+{}
       """
     Then I expect an error was not raised
+
+  @smoke @acm 
+  Scenario: GetCertificateFailure
+    Given I create a 'Aws::ACM' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'get_certificate' with params:
+      """
+{"certificate_arn":"arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012"}
+      """
+    Then I expect an error was raised
