@@ -154,10 +154,15 @@ module Aws
         private
 
         def apply_authtype(context, req)
-          if context.operation['authtype'].eql?('v4-unsigned-body') &&
-             req.endpoint.scheme.eql?('https')
+          if unsigned_payload?(context)
             req.headers['X-Amz-Content-Sha256'] ||= 'UNSIGNED-PAYLOAD'
           end
+        end
+
+        def unsigned_payload?(context)
+          (context.operation['unsignedPayload'] ||
+            context.operation['authtype'] == 'v4-unsigned-body') &&
+            context.http_request.endpoint.scheme == 'https'
         end
 
         def reset_signature(req)

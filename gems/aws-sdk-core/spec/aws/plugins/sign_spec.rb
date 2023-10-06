@@ -12,10 +12,16 @@ module Aws
             'name' => 'Operation',
             'http' => { 'method' => 'POST', 'requestUri' => '/' },
           },
+          'LegacyAuthStreamingOperation' => {
+            'name' => 'Operation',
+            'http' => { 'method' => 'POST', 'requestUri' => '/legacy_streaming' },
+            'authtype' => 'v4-unsigned-body'
+          },
           'StreamingOperation' => {
             'name' => 'Operation',
             'http' => { 'method' => 'POST', 'requestUri' => '/streaming' },
-            'authtype' => 'v4-unsigned-body'
+            'auth' => ['smithy.api#sigv4'],
+            'unsignedPayload' => true
           },
         },
         endpoint_rules: {
@@ -24,7 +30,7 @@ module Aws
       ).const_get(:Client)
 
       let(:region) { 'us-west-2' }
-      let(:auth_scheme) { {'name' => 'none'} }
+      let(:auth_scheme) { { 'name' => 'none' } }
       let(:endpoint) { 'https://svc.amazonaws.com' }
       let(:client_options) do
         {
@@ -97,23 +103,40 @@ module Aws
           }.to raise_error(Errors::MissingCredentialsError)
         end
 
-        describe 'authtype trait' do
-          it "uses unsigned payload for operations with 'v4-unsigned-payload' for 'authtype'" do
+        it 'signs payload for operations' do
+          resp = client.operation
+          req = resp.context.http_request
+          expect(req.headers['x-amz-content-sha256']).not_to eq('UNSIGNED-PAYLOAD')
+        end
+
+        describe 'unsigned payload trait' do
+          it "uses unsigned payload for operations with 'unsignedPayload'" do
             resp = client.streaming_operation
             req = resp.context.http_request
             expect(req.headers['x-amz-content-sha256']).to eq('UNSIGNED-PAYLOAD')
           end
 
-          it "signs payload for operations without 'v4-unsigned-payload' for 'authtype'" do
-            resp = client.operation
+          context 'http endpoint' do
+            let(:endpoint) { 'http://insecure.com' }
+            it "signs payload for HTTP request even when 'unsignedPayload' is set" do
+              resp = client.streaming_operation
+              req = resp.context.http_request
+              expect(req.headers['x-amz-content-sha256']).not_to eq('UNSIGNED-PAYLOAD')
+            end
+          end
+        end
+
+        describe 'authtype trait' do
+          it "uses unsigned payload for operations with 'v4-unsigned-payload' for 'authtype'" do
+            resp = client.legacy_auth_streaming_operation
             req = resp.context.http_request
-            expect(req.headers['x-amz-content-sha256']).not_to eq('UNSIGNED-PAYLOAD')
+            expect(req.headers['x-amz-content-sha256']).to eq('UNSIGNED-PAYLOAD')
           end
 
           context 'http endpoint' do
             let(:endpoint) { 'http://insecure.com' }
             it "signs payload for HTTP request even when 'v4-unsigned-payload' is set" do
-              resp = client.streaming_operation
+              resp = client.legacy_auth_streaming_operation
               req = resp.context.http_request
               expect(req.headers['x-amz-content-sha256']).not_to eq('UNSIGNED-PAYLOAD')
             end
@@ -192,7 +215,7 @@ module Aws
 
         it "uses unsigned payload for operations with 'v4-unsigned-payload' for 'authtype'" do
           expect_auth(auth_scheme)
-          resp = client.streaming_operation
+          resp = client.legacy_auth_streaming_operation
           req = resp.context.http_request
           expect(req.headers['x-amz-content-sha256']).to eq('UNSIGNED-PAYLOAD')
         end
