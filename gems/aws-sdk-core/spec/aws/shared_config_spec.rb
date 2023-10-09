@@ -328,6 +328,18 @@ module Aws
       end
     end
 
+    context 'ec2_metadata_v1_disabled selection' do
+      it 'can resolve ec2_metadata_v1_disabled from config file' do
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 'ec2_metadata_v1_disabled'
+        )
+        expect(config.ec2_metadata_v1_disabled).to eq('true')
+      end
+    end
+
+
     context 'defaults_mode' do
       it 'can resolve defaults_mode from config file' do
         config = SharedConfig.new(
