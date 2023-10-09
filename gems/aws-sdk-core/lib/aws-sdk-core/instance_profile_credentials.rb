@@ -135,6 +135,7 @@ module Aws
       value ||= Aws.shared_config.ec2_metadata_v1_disabled(
         profile: options[:profile]
       )
+      value = value.to_s.downcase if value
       Aws::Util.str_2_bool(value) || false
     end
 
@@ -156,7 +157,7 @@ module Aws
       # service is responding but is returning invalid JSON documents
       # in response to the GET profile credentials call.
       begin
-        retry_errors([Aws::Json::ParseError, StandardError], max_retries: 3) do
+        retry_errors([Aws::Json::ParseError], max_retries: 3) do
           c = Aws::Json.load(get_credentials.to_s)
           if empty_credentials?(@credentials)
             @credentials = Credentials.new(
@@ -188,7 +189,6 @@ module Aws
               end
             end
           end
-
         end
       rescue Aws::Json::ParseError
         raise Aws::Errors::MetadataParserError
@@ -204,48 +204,51 @@ module Aws
         begin
           retry_errors(NETWORK_ERRORS, max_retries: @retries) do
             open_connection do |conn|
-              unless @imds_v1_fallback
-                # attempt to fetch token to start secure flow first
-                # and rescue to failover
-                begin
-                  retry_errors(NETWORK_ERRORS, max_retries: @retries) do
-                    unless token_set?
-                      created_time = Time.now
-                      token_value, ttl = http_put(
-                        conn, METADATA_TOKEN_PATH, @token_ttl
-                      )
-                      @token = Token.new(token_value, ttl, created_time) if token_value && ttl
-                    end
-                  end
-                rescue *NETWORK_ERRORS
-                  # token attempt failed, reset token
-                  # fallback to non-token mode
-                  @token = nil
-                  @imds_v1_fallback = true
-                end
-              end
-
+              # attempt to fetch token to start secure flow first
+              # and rescue to failover
+              fetch_token(conn) unless @imds_v1_fallback
               token = @token.value if token_set?
 
-              if token || !@disable_imds_v1
-                begin
-                  metadata = http_get(conn, METADATA_PATH_BASE, token)
-                  profile_name = metadata.lines.first.strip
-                  http_get(conn, METADATA_PATH_BASE + profile_name, token)
-                rescue TokenExpiredError
-                  # Token has expired, reset it
-                  # The next retry should fetch it
-                  @token = nil
-                  @imds_v1_fallback = false
-                  raise Non200Response
-                end
-              end
+              # disable insecure flow if we couldn't get token
+              # and imds v1 is disabled
+              raise TokenRetrivalError if token.nil? && @disable_imds_v1
+
+              _get_credentials(conn, token)
             end
           end
         rescue
           '{}'
         end
       end
+    end
+
+    def fetch_token(conn)
+      retry_errors(NETWORK_ERRORS, max_retries: @retries) do
+        unless token_set?
+          created_time = Time.now
+          token_value, ttl = http_put(
+            conn, METADATA_TOKEN_PATH, @token_ttl
+          )
+          @token = Token.new(token_value, ttl, created_time) if token_value && ttl
+        end
+      end
+    rescue *NETWORK_ERRORS
+      # token attempt failed, reset token
+      # fallback to non-token mode
+      @token = nil
+      @imds_v1_fallback = true
+    end
+
+    def _get_credentials(conn, token)
+      metadata = http_get(conn, METADATA_PATH_BASE, token)
+      profile_name = metadata.lines.first.strip
+      http_get(conn, METADATA_PATH_BASE + profile_name, token)
+    rescue TokenExpiredError
+      # Token has expired, reset it
+      # The next retry should fetch it
+      @token = nil
+      @imds_v1_fallback = false
+      raise Non200Response
     end
 
     def token_set?

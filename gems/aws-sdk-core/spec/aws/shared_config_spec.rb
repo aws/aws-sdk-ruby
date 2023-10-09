@@ -339,7 +339,6 @@ module Aws
       end
     end
 
-
     context 'defaults_mode' do
       it 'can resolve defaults_mode from config file' do
         config = SharedConfig.new(
