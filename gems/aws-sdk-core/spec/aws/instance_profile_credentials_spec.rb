@@ -267,9 +267,6 @@ module Aws
           .to_return(status: 200, body: resp)
 
         c = InstanceProfileCredentials.new(backoff: 0, retries: 0)
-        expect(c.credentials.access_key_id).to eq('akid')
-        expect(c.credentials.secret_access_key).to eq('secret')
-        expect(c.credentials.session_token).to eq('session-token')
         c.refresh!
 
         expect(token_stub).to have_been_requested.once

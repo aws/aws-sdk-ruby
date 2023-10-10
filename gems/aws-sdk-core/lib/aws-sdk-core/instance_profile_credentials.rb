@@ -300,8 +300,6 @@ module Aws
         ]
       when 400
         raise TokenRetrivalError
-      when 401
-        raise TokenExpiredError
       else
         raise Non200Response
       end
