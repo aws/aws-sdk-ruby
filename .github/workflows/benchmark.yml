@@ -16,6 +16,10 @@ permissions:
 jobs:
   benchmark:
     runs-on: ubuntu-latest
+    env:
+      GH_REF: ${{github.head_ref}}
+      GH_REPO: ${{github.repository}}
+      GH_EVENT: ${{github.event_name}}
     strategy:
       fail-fast: false
       matrix:
@@ -49,9 +53,7 @@ jobs:
           aws-region: us-west-2
 
       - name: Archive benchmark report
-        run: |
-          GH_REPO=${{github.repository}} GH_REF=${{github.head_ref}} GH_EVENT=${{github.event_name}} bundle exec rake benchmark:archive
+        run: bundle exec rake benchmark:archive
 
       - name: Upload benchmark metrics
-        run: |
-          GH_REPO=${{github.repository}} GH_REF=${{github.head_ref}} GH_EVENT=${{github.event_name}} bundle exec rake benchmark:put-metrics
+        run: bundle exec rake benchmark:put-metrics
