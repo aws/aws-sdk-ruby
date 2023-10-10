@@ -50,12 +50,12 @@ jobs:
 
       - name: Archive benchmark report
         env:
-          HEAD_REF: ${{github.head_ref}}
+          GH_REF: ${{github.head_ref}}
         run: |
-          GH_REPO="${{github.repository}}" GH_REF="$HEAD_REF" GH_EVENT="${{github.event_name}}" bundle exec rake benchmark:archive
+          GH_REPO="${{github.repository}}" GH_EVENT="${{github.event_name}}" bundle exec rake benchmark:archive
 
       - name: Upload benchmark metrics
         env:
-          HEAD_REF: ${{github.head_ref}}
+          GH_REF: ${{github.head_ref}}
         run: |
-          GH_REPO="${{github.repository}}" GH_REF="$HEAD_REF" GH_EVENT="${{github.event_name}}" bundle exec rake benchmark:put-metrics
+          GH_REPO="${{github.repository}}" GH_EVENT="${{github.event_name}}" bundle exec rake benchmark:put-metrics
