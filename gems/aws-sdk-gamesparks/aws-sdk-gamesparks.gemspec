@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'aws-sdk-gamesparks'
   spec.version       = File.read(File.expand_path('../VERSION', __FILE__)).strip
   spec.summary       = 'AWS SDK for Ruby - GameSparks'
-  spec.description   = 'Official AWS Ruby gem for GameSparks. This gem is part of the AWS SDK for Ruby.'
+  spec.description   = '[DEPRECATED] Official AWS Ruby gem for GameSparks. This gem is part of the AWS SDK for Ruby.'
   spec.author        = 'Amazon Web Services'
   spec.homepage      = 'https://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'
